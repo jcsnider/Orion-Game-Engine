@@ -525,11 +525,11 @@ Partial Class frmMenu
         Me.Controls.Add(Me.lblCredits)
         Me.Controls.Add(Me.lblRegister)
         Me.Controls.Add(Me.lblLogin)
-        Me.Controls.Add(Me.pnlMainMenu)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
+        Me.Controls.Add(Me.pnlMainMenu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmMenu"
