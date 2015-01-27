@@ -255,8 +255,8 @@ Module modGameEditors
             ElseIf frmEditor_Map.optBlocks.Checked = True Then
                 If movedMouse Then Exit Sub
                 ' find what tile it is
-                X = X - (CurX * 32) + (Camera.Left)
-                Y = Y - (CurY * 32) + (Camera.Top)
+                X = X - ((X \ PIC_X) * PIC_X)
+                Y = Y - ((Y \ PIC_Y) * PIC_Y)
                 ' see if it hits an arrow
                 For i = 1 To 4
                     If X >= DirArrowX(i) And X <= DirArrowX(i) + 8 Then
