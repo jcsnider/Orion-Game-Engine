@@ -2241,7 +2241,12 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CRequestLevelUp Then Exit Sub
-
+        
+        ' Prevent hacking
+        If GetPlayerAccess(Index) < ADMIN_CREATOR Then
+            Exit Sub
+        End If
+        
         SetPlayerExp(index, GetPlayerNextLevel(index))
         CheckPlayerLevelUp(index)
 
