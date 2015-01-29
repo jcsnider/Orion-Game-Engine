@@ -28,6 +28,6 @@ Support & Updates:
 
 The home for this engine is http://ascensionforums.com if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them with the issue tracker.
 
-We do have some updates planned for this engine. At this point in time my friend and collegue Joe (aka Kibbelz/Irokaiser) and I will be periodocially releasing basic features and bug fixes for this engine. 
+We do have some updates planned for this engine. At this point in time my friend and colleague Joe (aka Kibbelz/Irokaiser) and I will be periodically releasing basic features and bug fixes for this engine. 
 
-Right now Orion is lacking features but it is a great base for programmers to scupt into their own vision, we want to keep it that way so I wouldn't expect a fully featured game creation kit to form from this anytime soon.
+Right now Orion is lacking features but it is a great base for programmers to sculpt into their own vision, we want to keep it that way so I wouldn't expect a fully featured game creation kit to form from this anytime soon.
