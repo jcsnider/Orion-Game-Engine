@@ -152,9 +152,14 @@ Public Class frmEditor_MapProperties
             If x2 > .MaxX Then x2 = .MaxX
             If y2 > .MaxY Then y2 = .MaxY
 
-            For X = 0 To x2
-                For Y = 0 To y2
-                    .Tile(X, Y) = tempArr(X, Y)
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
+                    ReDim .Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
+                    If X <= x2 Then
+                        If Y <= y2 Then
+                            .Tile(X, Y) = tempArr(X, Y)
+                        End If
+                    End If
                 Next
             Next
 

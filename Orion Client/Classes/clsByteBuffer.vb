@@ -3,11 +3,16 @@ Imports System.Text
 Public Class ByteBuffer
     Implements IDisposable
     Dim Buff As List(Of Byte)
+    Dim readBuff As Byte()
     Dim readpos As Integer
+    Dim buffUpdated = False
     Public Sub New()
         Buff = New List(Of Byte)
         readpos = 0
     End Sub
+    Public Function GetReadPos() As Long
+        GetReadPos = readpos
+    End Function
     Public Function ToArray() As Byte()
         Return Buff.ToArray
     End Function
@@ -23,23 +28,33 @@ Public Class ByteBuffer
     End Sub
     Public Sub WriteBytes(ByVal Input() As Byte)
         Buff.AddRange(Input)
+        buffUpdated = True
     End Sub
+
     Public Sub WriteShort(ByVal Input As Short)
         Buff.AddRange(BitConverter.GetBytes(Input))
+        buffUpdated = True
     End Sub
     Public Sub WriteInteger(ByVal Input As Integer)
         Buff.AddRange(BitConverter.GetBytes(Input))
+        buffUpdated = True
     End Sub
     Public Sub WriteLong(ByVal Input As Long)
         Buff.AddRange(BitConverter.GetBytes(Input))
+        buffUpdated = True
     End Sub
     Public Sub WriteString(ByVal Input As String)
         Buff.AddRange(BitConverter.GetBytes(Input.Length))
         Buff.AddRange(Encoding.ASCII.GetBytes(Input))
+        buffUpdated = True
     End Sub
     Public Function ReadString(Optional ByVal Peek As Boolean = True) As String
         Dim Len As Integer = ReadInteger(True)
-        Dim ret As String = Encoding.ASCII.GetString(Buff.ToArray, readpos, Len)
+        If buffUpdated Then
+            readBuff = Buff.ToArray
+            buffUpdated = False
+        End If
+        Dim ret As String = Encoding.ASCII.GetString(readBuff, readpos, Len)
         If Peek And Buff.Count > readpos Then
             If ret.Length > 0 Then
                 readpos += Len
@@ -48,13 +63,21 @@ Public Class ByteBuffer
         Return ret
     End Function
     Public Function ReadBytes(ByVal Length As Integer, Optional ByRef Peek As Boolean = True) As Byte()
+        If buffUpdated Then
+            readBuff = Buff.ToArray
+            buffUpdated = False
+        End If
         Dim ret() As Byte = Buff.GetRange(readpos, Length).ToArray
         If Peek Then readpos += Length
         Return ret
     End Function
     Public Function ReadShort(Optional ByVal peek As Boolean = True) As Short
         If Buff.Count > readpos Then 'check to see if this passes the byte count
-            Dim ret As Short = BitConverter.ToInt16(Buff.ToArray, readpos)
+            If buffUpdated Then
+                readBuff = Buff.ToArray
+                buffUpdated = False
+            End If
+            Dim ret As Short = BitConverter.ToInt16(readBuff, readpos)
             If peek And Buff.Count > readpos Then
                 readpos += 2
             End If
@@ -65,7 +88,11 @@ Public Class ByteBuffer
     End Function
     Public Function ReadInteger(Optional ByVal peek As Boolean = True) As Integer
         If Buff.Count > readpos Then 'check to see if this passes the byte count
-            Dim ret As Integer = BitConverter.ToInt32(Buff.ToArray, readpos)
+            If buffUpdated Then
+                readBuff = Buff.ToArray
+                buffUpdated = False
+            End If
+            Dim ret As Integer = BitConverter.ToInt32(readBuff, readpos)
             If peek And Buff.Count > readpos Then
                 readpos += 4
             End If
@@ -75,8 +102,12 @@ Public Class ByteBuffer
         End If
     End Function
     Public Function ReadLong(Optional ByVal peek As Boolean = True) As Long
-        If Buff.Count > readpos Then 'check to see if this passes the byte count
-            Dim ret As Long = BitConverter.ToInt64(Buff.ToArray, readpos)
+        If Buff.Count >= readpos Then 'check to see if this passes the byte count
+            If buffUpdated Then
+                readBuff = Buff.ToArray
+                buffUpdated = False
+            End If
+            Dim ret As Long = BitConverter.ToInt64(readBuff, readpos)
             If peek And Buff.Count > readpos Then
                 readpos += 8
             End If
@@ -84,10 +115,6 @@ Public Class ByteBuffer
         Else
             Throw New Exception("Byte Buffer Past Limit!") 'past byte count throw a new exception
         End If
-    End Function
-
-    Public Function GetReadPos() As Long
-        Return readpos
     End Function
 
     Private disposedValue As Boolean = False        ' To detect redundant calls
@@ -112,6 +139,5 @@ Public Class ByteBuffer
 
 End Class
 '+-------------------------End Class-------------------+
-
 
 

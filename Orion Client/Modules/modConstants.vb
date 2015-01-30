@@ -1,4 +1,8 @@
 ﻿Module modConstants
+
+    'Graphics
+    Public Const FPS_LIMIT As Long = 64
+
     ' Inventory constants
     Public Const InvTop As Byte = 8
     Public Const InvLeft As Byte = 8

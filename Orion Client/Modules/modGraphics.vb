@@ -105,6 +105,8 @@ Module modGraphics
     Sub InitGraphics()
 
         GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
+        GameWindow.SetFramerateLimit(FPS_LIMIT)
+
         EditorMap_Item = New RenderWindow(frmEditor_Map.picMapItem.Handle)
         EditorMap_Key = New RenderWindow(frmEditor_Map.picMapKey.Handle)
 
