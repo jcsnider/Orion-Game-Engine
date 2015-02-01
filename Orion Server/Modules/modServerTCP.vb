@@ -1532,7 +1532,7 @@ Module modServerTCP
             response.Close()
             Return myIP
         Catch e As Exception
-            Return "0.0.0.0"
+            Return "127.0.0.1"
         End Try
     End Function
 End Module
