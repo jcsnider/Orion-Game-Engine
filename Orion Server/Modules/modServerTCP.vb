@@ -449,7 +449,7 @@ Module modServerTCP
     Sub SendLeftGame(ByVal Index As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ServerPackets.SLeft)
+        Buffer.WriteLong(ServerPackets.SLeftMap)
         Buffer.WriteLong(Index)
         Buffer.WriteString("")
         Buffer.WriteLong(0)
@@ -1525,12 +1525,14 @@ Module modServerTCP
 
         request.Method = WebRequestMethods.Http.Get
 
-        Dim response As HttpWebResponse = request.GetResponse()
-        Dim reader As New StreamReader(response.GetResponseStream())
-        Dim myIP As String = reader.ReadToEnd()
-
-        response.Close()
-
-        Return myIP
+        Try
+            Dim response As HttpWebResponse = request.GetResponse()
+            Dim reader As New StreamReader(response.GetResponseStream())
+            Dim myIP As String = reader.ReadToEnd()
+            response.Close()
+            Return myIP
+        Catch e As Exception
+            Return "0.0.0.0"
+        End Try
     End Function
 End Module
