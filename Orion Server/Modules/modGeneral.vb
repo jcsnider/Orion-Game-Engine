@@ -185,6 +185,7 @@ Module modGeneral
         End If
 
         ' Get the listening socket ready to go
+        InitMessages()
         InitNetwork()
 
         ' Init all the player sockets

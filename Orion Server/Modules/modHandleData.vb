@@ -1,173 +1,98 @@
 ﻿Module modHandleData
-    Public Sub HandleData(ByVal index As Long, ByVal data() As Byte)
-        Dim Buffer() As Byte
-        Buffer = data.Clone
-        Dim pLength As Long
 
-        If TempPlayer(index).Buffer Is Nothing Then TempPlayer(index).Buffer = New ByteBuffer
-        TempPlayer(index).Buffer.WriteBytes(Buffer)
+    Private Delegate Sub Packet_(ByVal Index As Long, ByVal Data() As Byte)
+    Private Packets As Dictionary(Of Integer, Packet_)
 
-        If TempPlayer(index).Buffer.Count = 0 Then
-            TempPlayer(index).Buffer.Clear()
-            Exit Sub
-        End If
+    Public Sub InitMessages()
+        Packets = New Dictionary(Of Integer, Packet_)
 
-        If TempPlayer(index).Buffer.Length >= 4 Then
-            pLength = TempPlayer(index).Buffer.ReadLong(False)
-
-            If pLength <= 0 Then
-                TempPlayer(index).Buffer.Clear()
-                Exit Sub
-            End If
-        End If
-
-        Do While pLength > 0 And pLength <= TempPlayer(index).Buffer.Length - 8
-
-            If pLength <= TempPlayer(index).Buffer.Length - 8 Then
-                TempPlayer(index).Buffer.ReadLong()
-                data = TempPlayer(index).Buffer.ReadBytes(pLength)
-                HandleDataPackets(index, data)
-            End If
-
-            pLength = 0
-
-            If TempPlayer(index).Buffer.Length >= 4 Then
-                pLength = TempPlayer(index).Buffer.ReadLong(False)
-
-                If pLength < 0 Then
-                    TempPlayer(index).Buffer.Clear()
-                    Exit Sub
-                End If
-            End If
-
-        Loop
-
-        If GetPlayerAccess(index) <= 0 Then
-
-            ' Check for data flooding
-            If TempPlayer(index).DataBytes > 1000 Then
-                HackingAttempt(index, "Data Flooding")
-                Exit Sub
-            End If
-
-            ' Check for packet flooding
-            If TempPlayer(index).DataPackets > 25 Then
-                HackingAttempt(index, "Packet Flooding")
-                Exit Sub
-            End If
-        End If
-
-        ' Check if elapsed time has passed
-        'Player(Index).DataBytes = Player(Index).DataBytes + DataLength
-        If GetTickCount >= TempPlayer(index).DataTimer Then
-            TempPlayer(index).DataTimer = GetTickCount + 1000
-            TempPlayer(index).DataBytes = 0
-            TempPlayer(index).DataPackets = 0
-        End If
-
-        If pLength <= 1 Then TempPlayer(index).Buffer.Clear()
-
-        'seperates the data just in case 2 packets or more came in at one time, handles the data and makes sure
-        'no one is packet flooding and stuff
-    End Sub
-    Sub HackingAttempt(ByVal Index As Long, ByVal Reason As String)
-
-        If Index > 0 Then
-            If IsPlaying(Index) Then
-                Call GlobalMsg(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has been booted for (" & Reason & ")")
-            End If
-
-            Call AlertMsg(Index, "You have lost your connection with " & Options.Game_Name & ".")
-        End If
+        Packets.Add(ClientPackets.CNewAccount, AddressOf Packet_NewAccount)
+        Packets.Add(ClientPackets.CLogin, AddressOf Packet_Login)
+        Packets.Add(ClientPackets.CAddChar, AddressOf Packet_AddChar)
+        Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
+        Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
+        Packets.Add(ClientPackets.CPlayerMove, AddressOf Packet_PlayerMove)
+        Packets.Add(ClientPackets.CPlayerDir, AddressOf Packet_PlayerDirection)
+        Packets.Add(ClientPackets.CUseItem, AddressOf Packet_UseItem)
+        Packets.Add(ClientPackets.CAttack, AddressOf Packet_Attack)
+        Packets.Add(ClientPackets.CPlayerInfoRequest, AddressOf Packet_PlayerInfo)
+        Packets.Add(ClientPackets.CWarpMeTo, AddressOf Packet_WarpMeTo)
+        Packets.Add(ClientPackets.CWarpToMe, AddressOf Packet_WarpToMe)
+        Packets.Add(ClientPackets.CWarpTo, AddressOf Packet_WarpTo)
+        Packets.Add(ClientPackets.CSetSprite, AddressOf Packet_SetSprite)
+        Packets.Add(ClientPackets.CGetStats, AddressOf Packet_GetStats)
+        Packets.Add(ClientPackets.CRequestNewMap, AddressOf Packet_RequestNewMap)
+        Packets.Add(ClientPackets.CMapData, AddressOf Packet_MapData)
+        Packets.Add(ClientPackets.CNeedMap, AddressOf Packet_NeedMap)
+        Packets.Add(ClientPackets.CMapGetItem, AddressOf Packet_GetItem)
+        Packets.Add(ClientPackets.CMapDropItem, AddressOf Packet_DropItem)
+        Packets.Add(ClientPackets.CMapRespawn, AddressOf Packet_RespawnMap)
+        Packets.Add(ClientPackets.CKickPlayer, AddressOf Packet_KickPlayer)
+        Packets.Add(ClientPackets.CBanList, AddressOf Packet_Banlist)
+        Packets.Add(ClientPackets.CBanDestroy, AddressOf Packet_DestroyBans)
+        Packets.Add(ClientPackets.CBanPlayer, AddressOf Packet_BanPlayer)
+        Packets.Add(ClientPackets.CRequestEditMap, AddressOf Packet_EditMapRequest)
+        Packets.Add(ClientPackets.CRequestEditItem, AddressOf Packet_EditItem)
+        Packets.Add(ClientPackets.CSaveNpc, AddressOf Packet_SaveNPC)
+        Packets.Add(ClientPackets.CRequestEditNpc, AddressOf Packet_EditNpc)
+        Packets.Add(ClientPackets.CRequestEditShop, AddressOf Packet_EditShop)
+        Packets.Add(ClientPackets.CSaveShop, AddressOf Packet_SaveShop)
+        Packets.Add(ClientPackets.CRequestEditSpell, AddressOf Packet_EditSpell)
+        Packets.Add(ClientPackets.CSetAccess, AddressOf Packet_SetAccess)
+        Packets.Add(ClientPackets.CWhosOnline, AddressOf Packet_WhosOnline)
+        Packets.Add(ClientPackets.CSetMotd, AddressOf Packet_SetMotd)
+        Packets.Add(ClientPackets.CSearch, AddressOf Packet_PlayerSearch)
+        Packets.Add(ClientPackets.CParty, AddressOf Packet_Party)
+        Packets.Add(ClientPackets.CJoinParty, AddressOf Packet_JoinParty)
+        Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
+        Packets.Add(ClientPackets.CSpells, AddressOf Packet_Spells)
+        Packets.Add(ClientPackets.CCast, AddressOf Packet_Cast)
+        Packets.Add(ClientPackets.CQuit, AddressOf Packet_QuitGame)
+        Packets.Add(ClientPackets.CSwapInvSlots, AddressOf Packet_SwapInvSlots)
+        Packets.Add(ClientPackets.CRequestEditResource, AddressOf Packet_EditResource)
+        Packets.Add(ClientPackets.CSaveResource, AddressOf Packet_SaveResource)
+        Packets.Add(ClientPackets.CCheckPing, AddressOf Packet_CheckPing)
+        Packets.Add(ClientPackets.CUnequip, AddressOf Packet_Unequip)
+        Packets.Add(ClientPackets.CRequestPlayerData, AddressOf Packet_RequestPlayerData)
+        Packets.Add(ClientPackets.CRequestItems, AddressOf Packet_RequestItems)
+        Packets.Add(ClientPackets.CRequestNPCS, AddressOf Packet_RequestAnimations)
+        Packets.Add(ClientPackets.CRequestResources, AddressOf Packet_RequestResources)
+        Packets.Add(ClientPackets.CSpawnItem, AddressOf Packet_SpawnItem)
+        Packets.Add(ClientPackets.CTrainStat, AddressOf Packet_TrainStat)
+        Packets.Add(ClientPackets.CRequestEditAnimation, AddressOf Packet_EditAnimation)
+        Packets.Add(ClientPackets.CSaveAnimation, AddressOf Packet_SaveAnimation)
+        Packets.Add(ClientPackets.CRequestAnimations, AddressOf Packet_SaveAnimation)
+        Packets.Add(ClientPackets.CRequestSpells, AddressOf Packet_RequestSpells)
+        Packets.Add(ClientPackets.CRequestLevelUp, AddressOf Packet_RequestLevelUp)
+        Packets.Add(ClientPackets.CForgetSpell, AddressOf Packet_ForgetSpell)
+        Packets.Add(ClientPackets.CCloseShop, AddressOf Packet_CloseShop)
+        Packets.Add(ClientPackets.CBuyItem, AddressOf Packet_BuyItem)
+        Packets.Add(ClientPackets.CSellItem, AddressOf Packet_SellItem)
+        Packets.Add(ClientPackets.CChangeBankSlots, AddressOf Packet_ChangeBankSlots)
+        Packets.Add(ClientPackets.CDepositItem, AddressOf Packet_DepositItem)
+        Packets.Add(ClientPackets.CWithdrawItem, AddressOf Packet_WithdrawItem)
+        Packets.Add(ClientPackets.CAdminWarp, AddressOf Packet_AdminWarp)
+        Packets.Add(ClientPackets.CTradeRequest, AddressOf Packet_AcceptTrade)
+        Packets.Add(ClientPackets.CAcceptTrade, AddressOf Packet_DeclineTrade)
+        Packets.Add(ClientPackets.CTradeItem, AddressOf Packet_TradeItem)
+        Packets.Add(ClientPackets.CUntradeItem, AddressOf Packet_UntradeItem)
 
     End Sub
+
     Public Sub HandleDataPackets(ByVal index As Long, ByVal data() As Byte)
-        Dim packetnum As Long
-        Dim buffer As ByteBuffer
+        Dim packetnum As Long, buffer As ByteBuffer, Packet As Packet_
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         packetnum = buffer.ReadLong
         buffer = Nothing
-        If packetnum <> ClientPackets.CCheckPing Then TempPlayer(index).DataPackets = TempPlayer(index).DataPackets + 1
         If packetnum = 0 Then Exit Sub
-        If PacketNum = ClientPackets.CNewAccount Then Call Packet_NewAccount(index, data)
-        If packetnum = ClientPackets.CLogin Then Call Packet_Login(index, data)
-        If packetnum = ClientPackets.CAddChar Then Call Packet_AddChar(index, data)
-        If packetnum = ClientPackets.CSayMsg Then Call Packet_SayMessage(index, data)
-        If packetnum = ClientPackets.CEmoteMsg Then Call Packet_EmoteMsg(index, data)
-        If packetnum = ClientPackets.CBroadcastMsg Then Call Packet_BroadCastMsg(index, data)
-        If packetnum = ClientPackets.CPlayerMove Then Call Packet_PlayerMove(index, data)
-        If packetnum = ClientPackets.CPlayerDir Then Call Packet_PlayerDirection(index, data)
-        If packetnum = ClientPackets.CUseItem Then Call Packet_UseItem(index, data)
-        If packetnum = ClientPackets.CAttack Then Call Packet_Attack(index, data)
-        If packetnum = ClientPackets.CPlayerInfoRequest Then Call Packet_PlayerInfo(index, data)
-        If packetnum = ClientPackets.CWarpMeTo Then Call Packet_WarpMeTo(index, data)
-        If packetnum = ClientPackets.CWarpToMe Then Call Packet_WarpToMe(index, data)
-        If packetnum = ClientPackets.CWarpTo Then Call Packet_WarpTo(index, data)
-        If packetnum = ClientPackets.CSetSprite Then Call Packet_SetSprite(index, data)
-        If packetnum = ClientPackets.CGetStats Then Call Packet_GetStats(index, data)
-        If packetnum = ClientPackets.CRequestNewMap Then Call Packet_RequestNewMap(index, data)
-        If packetnum = ClientPackets.CMapData Then Call Packet_MapData(index, data)
-        If packetnum = ClientPackets.CNeedMap Then Call Packet_NeedMap(index, data)
-        If packetnum = ClientPackets.CMapGetItem Then Call Packet_GetItem(index, data)
-        If packetnum = ClientPackets.CMapDropItem Then Call Packet_DropItem(index, data)
-        If packetnum = ClientPackets.CMapRespawn Then Call Packet_RespawnMap(index, data)
-        If packetnum = ClientPackets.CKickPlayer Then Call Packet_KickPlayer(index, data)
-        If packetnum = ClientPackets.CBanList Then Call Packet_Banlist(index, data)
-        If packetnum = ClientPackets.CBanDestroy Then Call Packet_DestroyBans(index, data)
-        If packetnum = ClientPackets.CBanPlayer Then Call Packet_BanPlayer(index, data)
-        If packetnum = ClientPackets.CRequestEditMap Then Call Packet_EditMapRequest(index, data)
-        If packetnum = ClientPackets.CRequestEditItem Then Call Packet_EditItem(index, data)
-        If packetnum = ClientPackets.CSaveItem Then Call Packet_SaveItem(index, data)
-        If packetnum = ClientPackets.CRequestEditNpc Then Call Packet_EditNpc(index, data)
-        If packetnum = ClientPackets.CSaveNpc Then Call Packet_SaveNPC(index, data)
-        If packetnum = ClientPackets.CRequestEditShop Then Call Packet_EditShop(index, data)
-        If packetnum = ClientPackets.CSaveShop Then Call Packet_SaveShop(index, data)
-        If packetnum = ClientPackets.CRequestEditSpell Then Call Packet_EditSpell(index, data)
-        If packetnum = ClientPackets.CSaveSpell Then Call Packet_SaveSpell(index, data)
-        If packetnum = ClientPackets.CSetAccess Then Call Packet_SetAccess(index, data)
-        If packetnum = ClientPackets.CWhosOnline Then Call Packet_WhosOnline(index, data)
-        If packetnum = ClientPackets.CSetMotd Then Call Packet_SetMotd(index, data)
-        If packetnum = ClientPackets.CSearch Then Call Packet_PlayerSearch(index, data)
-        If packetnum = ClientPackets.CParty Then Call Packet_Party(index, data)
-        If packetnum = ClientPackets.CJoinParty Then Call Packet_JoinParty(index, data)
-        If packetnum = ClientPackets.CLeaveParty Then Call Packet_LeaveParty(index, data)
-        If packetnum = ClientPackets.CSpells Then Call Packet_Spells(index, data)
-        If packetnum = ClientPackets.CCast Then Call Packet_Cast(index, data)
-        If packetnum = ClientPackets.CQuit Then Call Packet_QuitGame(index, data)
-        If packetnum = ClientPackets.CSwapInvSlots Then Call Packet_SwapInvSlots(index, data)
-        If packetnum = ClientPackets.CRequestEditResource Then Call Packet_EditResource(index, data)
-        If packetnum = ClientPackets.CSaveResource Then Call Packet_SaveResource(index, data)
-        If packetnum = ClientPackets.CCheckPing Then Call Packet_CheckPing(index, data)
-        If packetnum = ClientPackets.CUnequip Then Call Packet_Unequip(index, data)
-        If packetnum = ClientPackets.CRequestPlayerData Then Call Packet_RequestPlayerData(index, data)
-        If packetnum = ClientPackets.CRequestItems Then Call Packet_RequestItems(index, data)
-        If packetnum = ClientPackets.CRequestNPCS Then Call Packet_RequestNpcs(index, data)
-        If packetnum = ClientPackets.CRequestResources Then Call Packet_RequestResources(index, data)
-        If packetnum = ClientPackets.CSpawnItem Then Call Packet_SpawnItem(index, data)
-        If packetnum = ClientPackets.CTrainStat Then Call Packet_TrainStat(index, data)
-        If packetnum = ClientPackets.CRequestEditAnimation Then Call Packet_EditAnimation(index, data)
-        If packetnum = ClientPackets.CSaveAnimation Then Call Packet_SaveAnimation(index, data)
-        If packetnum = ClientPackets.CRequestAnimations Then Call Packet_RequestAnimations(index, data)
-        If packetnum = ClientPackets.CRequestSpells Then Call Packet_RequestSpells(index, data)
-        If packetnum = ClientPackets.CRequestShops Then Call Packet_RequestShops(index, data)
-        If packetnum = ClientPackets.CRequestLevelUp Then Call Packet_RequestLevelUp(index, data)
-        If packetnum = ClientPackets.CForgetSpell Then Call Packet_ForgetSpell(index, data)
-        If packetnum = ClientPackets.CCloseShop Then Call Packet_CloseShop(index, data)
-        If packetnum = ClientPackets.CBuyItem Then Call Packet_BuyItem(index, data)
-        If packetnum = ClientPackets.CSellItem Then Call Packet_SellItem(index, data)
-        If packetnum = ClientPackets.CChangeBankSlots Then Call Packet_ChangeBankSlots(index, data)
-        If packetnum = ClientPackets.CDepositItem Then Call Packet_DepositItem(index, data)
-        If packetnum = ClientPackets.CWithdrawItem Then Call Packet_WithdrawItem(index, data)
-        If packetnum = ClientPackets.CCloseBank Then Call Packet_CloseBank(index, data)
-        If packetnum = ClientPackets.CAdminWarp Then Call Packet_AdminWarp(index, data)
-        If packetnum = ClientPackets.CTradeRequest Then Call Packet_TradeRequest(index, data)
-        If packetnum = ClientPackets.CAcceptTrade Then Call Packet_AcceptTrade(index, data)
-        If packetnum = ClientPackets.CDeclineTrade Then Call Packet_DeclineTrade(index, data)
-        If packetnum = ClientPackets.CTradeItem Then Call Packet_TradeItem(index, data)
-        If packetnum = ClientPackets.CUntradeItem Then Call Packet_UntradeItem(index, data)
+        If packetnum <> ClientPackets.CCheckPing Then TempPlayer(index).DataPackets = TempPlayer(index).DataPackets + 1
 
+        If Packets.TryGetValue(packetnum, Packet) Then
+            Packet.Invoke(index, data)
+        End If
     End Sub
+
     Private Sub Packet_NewAccount(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim username As String
@@ -232,6 +157,7 @@
             End If
         End If
     End Sub
+
     Private Sub Packet_Login(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Name As String
@@ -304,6 +230,7 @@
         End If
         NeedToUpDatePlayerList = True
     End Sub
+
     Private Sub Packet_SayMessage(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim msg As String
@@ -319,6 +246,7 @@
 
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_EmoteMsg(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim msg As String
@@ -333,6 +261,7 @@
 
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_BroadCastMsg(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim msg As String
@@ -349,6 +278,7 @@
         Call TextAdd(s)
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_PlayerMove(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Dir As Long
@@ -418,7 +348,8 @@
 
         Buffer = Nothing
     End Sub
-    Sub Packet_PlayerDirection(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_PlayerDirection(ByVal Index As Long, ByVal Data() As Byte)
         Dim dir As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -446,7 +377,8 @@
         Buffer = Nothing
 
     End Sub
-    Sub Packet_UseItem(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_UseItem(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim invnum As Long, i As Long, n As Long, x As Long, y As Long, tempitem As Long
         Buffer = New ByteBuffer
@@ -484,9 +416,9 @@
                     PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
                     TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
 
-                    If TempItem > 0 Then
-                        GiveInvItem(Index, TempItem, 0) ' give back the stored item
-                        TempItem = 0
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
                     End If
 
                     Call SendWornEquipment(Index)
@@ -508,9 +440,9 @@
                     PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
                     TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
 
-                    If TempItem > 0 Then
-                        GiveInvItem(Index, TempItem, 0) ' give back the stored item
-                        TempItem = 0
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
                     End If
 
                     Call SendWornEquipment(Index)
@@ -532,9 +464,9 @@
                     PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
                     TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
 
-                    If TempItem > 0 Then
-                        GiveInvItem(Index, TempItem, 0) ' give back the stored item
-                        TempItem = 0
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
                     End If
 
                     Call SendWornEquipment(Index)
@@ -556,9 +488,9 @@
                     PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
                     TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
 
-                    If TempItem > 0 Then
-                        GiveInvItem(Index, TempItem, 0) ' give back the stored item
-                        TempItem = 0
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
                     End If
 
                     Call SendWornEquipment(Index)
@@ -686,7 +618,7 @@
                         ' Check if the key they are using matches the map key
                         If GetPlayerInvItemNum(Index, invnum) = Map(GetPlayerMap(Index)).Tile(x, y).Data1 Then
                             TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
-                            TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount
+                            TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                             SendMapKey(Index, x, y, 1)
                             Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
 
@@ -756,7 +688,8 @@
 
         End If
     End Sub
-    Sub Packet_Attack(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_Attack(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Dim n As Long
@@ -863,7 +796,8 @@
 
         Buffer = Nothing
     End Sub
-    Sub Packet_PlayerInfo(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_PlayerInfo(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long, n As Long
         Dim name As String
@@ -872,7 +806,7 @@
 
         If Buffer.ReadLong <> ClientPackets.CPlayerInfoRequest Then Exit Sub
         name = Buffer.ReadString
-        i = FindPlayer(Name)
+        i = FindPlayer(name)
 
         If i > 0 Then
             Call PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i))
@@ -896,10 +830,8 @@
 
         Buffer = Nothing
     End Sub
-    ' :::::::::::::::::::::::
-    ' :: Warp me to packet ::
-    ' :::::::::::::::::::::::
-    Sub Packet_WarpMeTo(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_WarpMeTo(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -935,7 +867,7 @@
     ' :::::::::::::::::::::::
     ' :: Warp to me packet ::
     ' :::::::::::::::::::::::
-    Sub Packet_WarpToMe(ByVal Index As Long, ByRef Data() As Byte)
+    Sub Packet_WarpToMe(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -970,7 +902,7 @@
     ' :::::::::::::::::::::::
     ' ::   Warp to Packet  ::
     ' :::::::::::::::::::::::
-    Sub Packet_WarpTo(ByVal Index As Long, ByRef Data() As Byte)
+    Sub Packet_WarpTo(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -997,7 +929,8 @@
         Call Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
 
     End Sub
-    Sub Packet_SetSprite(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_SetSprite(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1017,7 +950,8 @@
         Call SendPlayerData(Index)
         Exit Sub
     End Sub
-    Sub Packet_GetStats(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_GetStats(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Dim n As Long
@@ -1038,14 +972,15 @@
         Call PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
         Buffer = Nothing
     End Sub
-    Sub Packet_RequestNewMap(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_RequestNewMap(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim dir As Long
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ClientPackets.CRequestNewMap Then Exit Sub
-        Dir = Buffer.ReadLong 'CLng(Parse(1))
+        dir = Buffer.ReadLong 'CLng(Parse(1))
         Buffer = Nothing
 
         ' Prevent hacking
@@ -1053,13 +988,14 @@
             Exit Sub
         End If
 
-        Call PlayerMove(Index, Dir, 1)
+        Call PlayerMove(Index, dir, 1)
         Buffer = Nothing
     End Sub
+
     ' :::::::::::::::::::::
     ' :: Map data packet ::
     ' :::::::::::::::::::::
-    Sub Packet_MapData(ByVal Index As Long, ByRef Data() As Byte)
+    Sub Packet_MapData(ByVal Index As Long, ByVal Data() As Byte)
         Dim i As Long
         Dim MapNum As Long
         Dim x As Long
@@ -1152,6 +1088,7 @@
 
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_AddChar(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Name As String
@@ -1221,6 +1158,7 @@
         End If
         NeedToUpDatePlayerList = True
     End Sub
+
     Private Sub Packet_NeedMap(ByVal index As Long, ByVal data() As Byte)
         Dim s As String
         Dim Buffer As ByteBuffer
@@ -1243,6 +1181,7 @@
         Call SendJoinMap(index)
         TempPlayer(index).GettingMap = NO
     End Sub
+
     Private Sub Packet_GetItem(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1252,6 +1191,7 @@
         Call PlayerMapGetItem(index)
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_DropItem(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim InvNum As Long, Amount As Long
@@ -1259,7 +1199,7 @@
         Buffer.WriteBytes(data)
         If Buffer.ReadLong <> ClientPackets.CMapDropItem Then Exit Sub
         InvNum = Buffer.ReadLong 'CLng(Parse(1))
-        amount = Buffer.ReadLong 'CLng(Parse(2))
+        Amount = Buffer.ReadLong 'CLng(Parse(2))
         Buffer = Nothing
 
         If TempPlayer(index).InBank Or TempPlayer(index).InShop Then Exit Sub
@@ -1268,13 +1208,14 @@
         If InvNum < 1 Or InvNum > MAX_INV Then Exit Sub
         If GetPlayerInvItemNum(index, InvNum) < 1 Or GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
         If Item(GetPlayerInvItemNum(index, InvNum)).Type = ITEM_TYPE_CURRENCY Then
-            If amount < 1 Or amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
+            If Amount < 1 Or Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
         End If
 
         ' everything worked out fine
-        Call PlayerMapDropItem(index, InvNum, amount)
+        Call PlayerMapDropItem(index, InvNum, Amount)
     End Sub
-    Sub Packet_RespawnMap(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_RespawnMap(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Buffer = New ByteBuffer
@@ -1307,10 +1248,11 @@
 
         Buffer = Nothing
     End Sub
+
     ' ::::::::::::::::::::::::
     ' :: Kick player packet ::
     ' ::::::::::::::::::::::::
-    Sub Packet_KickPlayer(ByVal Index As Long, ByRef Data() As Byte)
+    Sub Packet_KickPlayer(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1345,7 +1287,8 @@
             Call PlayerMsg(Index, "You cannot kick yourself!")
         End If
     End Sub
-    Sub Packet_Banlist(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_Banlist(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -1361,7 +1304,8 @@
 
         Buffer = Nothing
     End Sub
-    Sub Packet_DestroyBans(ByVal Index As Long, ByRef Data() As Byte)
+
+    Sub Packet_DestroyBans(ByVal Index As Long, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim filename As String
         Buffer = New ByteBuffer
@@ -1380,10 +1324,11 @@
         Call PlayerMsg(Index, "Ban list destroyed.")
         Buffer = Nothing
     End Sub
+
     ' :::::::::::::::::::::::
     ' :: Ban player packet ::
     ' :::::::::::::::::::::::
-    Sub Packet_BanPlayer(ByVal Index As Long, ByRef Data() As Byte)
+    Sub Packet_BanPlayer(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1418,6 +1363,7 @@
         End If
 
     End Sub
+
     Private Sub Packet_EditMapRequest(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1435,6 +1381,7 @@
         SendDataTo(index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_EditItem(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1454,6 +1401,7 @@
         SendDataTo(index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_SaveItem(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim n As Long
@@ -1507,6 +1455,7 @@
         Call Addlog(GetPlayerName(index) & " saved item #" & n & ".", ADMIN_LOG)
         Buffer = Nothing
     End Sub
+
     Sub Packet_EditNpc(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1523,6 +1472,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_SaveNPC(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim NpcNum As Long
@@ -1563,6 +1513,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_EditShop(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1580,6 +1531,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_SaveShop(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim ShopNum As Long
@@ -1618,6 +1570,7 @@
         Call SaveShop(ShopNum)
         Call Addlog(GetPlayerName(index) & " saving shop #" & ShopNum & ".", ADMIN_LOG)
     End Sub
+
     Sub Packet_EditSpell(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1635,6 +1588,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_SaveSpell(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim spellnum As Long
@@ -1679,6 +1633,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_SetAccess(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1693,9 +1648,9 @@
         End If
 
         ' The index
-        n = FindPlayer(Buffer.ReadString) 'Parse(1))
+        n = FindPlayer(buffer.ReadString) 'Parse(1))
         ' The access
-        i = Buffer.ReadLong 'CLng(Parse(2))
+        i = buffer.ReadLong 'CLng(Parse(2))
 
         ' Check for invalid access level
         If i >= 0 Or i <= 3 Then
@@ -1726,6 +1681,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_WhosOnline(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1734,6 +1690,7 @@
         Call SendWhosOnline(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_SetMotd(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1750,6 +1707,7 @@
         Call Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.MOTD, ADMIN_LOG)
         buffer = Nothing
     End Sub
+
     Sub Packet_PlayerSearch(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim x As Long, y As Long, i As Long
@@ -1845,6 +1803,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_Party(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long
@@ -1900,6 +1859,7 @@
             Call PlayerMsg(index, "Player is not online.")
         End If
     End Sub
+
     Sub Packet_JoinParty(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long
@@ -1933,6 +1893,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_LeaveParty(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long
@@ -1969,6 +1930,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_Spells(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -1979,6 +1941,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_Cast(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long
@@ -1994,6 +1957,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_QuitGame(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2002,6 +1966,7 @@
         CloseSocket(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_SwapInvSlots(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim oldSlot As Integer, newSlot As Integer
@@ -2018,6 +1983,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_EditResource(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2033,6 +1999,7 @@
         SendDataTo(index, buffer.ToArray())
         buffer = Nothing
     End Sub
+
     Sub Packet_SaveResource(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim resourcenum As Long
@@ -2044,10 +2011,10 @@
             Exit Sub
         End If
 
-        ResourceNum = buffer.ReadLong
+        resourcenum = buffer.ReadLong
 
         ' Prevent hacking
-        If ResourceNum < 0 Or ResourceNum > MAX_RESOURCES Then
+        If resourcenum < 0 Or resourcenum > MAX_RESOURCES Then
             Exit Sub
         End If
 
@@ -2065,11 +2032,12 @@
         Resource(resourcenum).Walkthrough = buffer.ReadLong()
 
         ' Save it
-        Call SendUpdateResourceToAll(ResourceNum)
-        Call SaveResource(ResourceNum)
-        Call Addlog(GetPlayerName(index) & " saved Resource #" & ResourceNum & ".", ADMIN_LOG)
+        Call SendUpdateResourceToAll(resourcenum)
+        Call SaveResource(resourcenum)
+        Call Addlog(GetPlayerName(index) & " saved Resource #" & resourcenum & ".", ADMIN_LOG)
         buffer = Nothing
     End Sub
+
     Sub Packet_CheckPing(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2077,6 +2045,7 @@
         SendDataTo(index, buffer.ToArray)
         buffer = Nothing
     End Sub
+
     Sub Packet_Unequip(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2087,6 +2056,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestPlayerData(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2097,6 +2067,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestItems(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2105,6 +2076,7 @@
         SendItems(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestNpcs(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2113,6 +2085,7 @@
         SendNpcs(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestResources(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2121,6 +2094,7 @@
         SendResources(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_SpawnItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2138,6 +2112,7 @@
         SpawnItem(tmpItem, tmpAmount, GetPlayerMap(index), GetPlayerX(index), GetPlayerY(index))
         buffer = Nothing
     End Sub
+
     Sub Packet_TrainStat(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim tmpstat As Long
@@ -2160,6 +2135,7 @@
         SendPlayerData(index)
         buffer = Nothing
     End Sub
+
     Sub Packet_EditAnimation(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2175,6 +2151,7 @@
         SendDataTo(index, buffer.ToArray())
         buffer = Nothing
     End Sub
+
     Sub Packet_SaveAnimation(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long
@@ -2206,6 +2183,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestAnimations(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2216,6 +2194,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestSpells(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2226,6 +2205,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestShops(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2236,22 +2216,24 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_RequestLevelUp(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CRequestLevelUp Then Exit Sub
-        
+
         ' Prevent hacking
-        If GetPlayerAccess(Index) < ADMIN_CREATOR Then
+        If GetPlayerAccess(index) < ADMIN_CREATOR Then
             Exit Sub
         End If
-        
+
         SetPlayerExp(index, GetPlayerNextLevel(index))
         CheckPlayerLevelUp(index)
 
         buffer = Nothing
     End Sub
+
     Sub Packet_ForgetSpell(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer, spellslot As Long
         buffer = New ByteBuffer
@@ -2282,6 +2264,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_CloseShop(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2292,6 +2275,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_BuyItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim shopslot As Long, shopnum As Long, itemamount As Long
@@ -2328,6 +2312,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_SellItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim invSlot As Long
@@ -2370,6 +2355,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_ChangeBankSlots(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim oldslot As Long, newslot As Long
@@ -2384,6 +2370,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_DepositItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim invslot As Long, amount As Long
@@ -2391,13 +2378,14 @@
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CDepositItem Then Exit Sub
 
-        invSlot = buffer.ReadLong
+        invslot = buffer.ReadLong
         amount = buffer.ReadLong
 
-        GiveBankItem(index, invSlot, amount)
+        GiveBankItem(index, invslot, amount)
 
         buffer = Nothing
     End Sub
+
     Sub Packet_WithdrawItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim bankslot As Long, amount As Long
@@ -2405,13 +2393,14 @@
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CWithdrawItem Then Exit Sub
 
-        BankSlot = buffer.ReadLong
+        bankslot = buffer.ReadLong
         amount = buffer.ReadLong
 
-        TakeBankItem(index, BankSlot, amount)
+        TakeBankItem(index, bankslot, amount)
 
         buffer = Nothing
     End Sub
+
     Sub Packet_CloseBank(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -2425,6 +2414,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_AdminWarp(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim x As Long, y As Long
@@ -2441,6 +2431,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_TradeRequest(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim x As Long, y As Long, i As Long, tradetarget As Long
@@ -2464,7 +2455,7 @@
                 If GetPlayerMap(index) = GetPlayerMap(i) Then
                     If GetPlayerX(i) = x Then
                         If GetPlayerY(i) = y Then
-                            tradeTarget = i
+                            tradetarget = i
                         End If
                     End If
                 End If
@@ -2472,16 +2463,16 @@
         Next
 
         ' make sure we don't error
-        If tradeTarget <= 0 Or tradeTarget > MAX_PLAYERS Then Exit Sub
+        If tradetarget <= 0 Or tradetarget > MAX_PLAYERS Then Exit Sub
 
         ' can't trade with yourself..
-        If tradeTarget = index Then
+        If tradetarget = index Then
             PlayerMsg(index, "You can't trade with yourself.")
             Exit Sub
         End If
 
         ' if the request accepts an open request, let them trade!
-        If TempPlayer(tradeTarget).TradeRequest = index Then
+        If TempPlayer(tradetarget).TradeRequest = index Then
             ' let them know they're trading
             PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.")
             PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.")
@@ -2489,34 +2480,35 @@
             SendClearTradeTimer(index)
             ' clear the tradeRequest server-side
             TempPlayer(index).TradeRequest = 0
-            TempPlayer(tradeTarget).TradeRequest = 0
+            TempPlayer(tradetarget).TradeRequest = 0
             ' set that they're trading with each other
-            TempPlayer(index).InTrade = tradeTarget
-            TempPlayer(tradeTarget).InTrade = index
+            TempPlayer(index).InTrade = tradetarget
+            TempPlayer(tradetarget).InTrade = index
             ' clear out their trade offers
             For i = 1 To MAX_INV
                 TempPlayer(index).TradeOffer(i).Num = 0
                 TempPlayer(index).TradeOffer(i).Value = 0
-                TempPlayer(tradeTarget).TradeOffer(i).Num = 0
-                TempPlayer(tradeTarget).TradeOffer(i).Value = 0
+                TempPlayer(tradetarget).TradeOffer(i).Num = 0
+                TempPlayer(tradetarget).TradeOffer(i).Value = 0
             Next
             ' Used to init the trade window clientside
-            SendTrade(index, tradeTarget)
-            SendTrade(tradeTarget, index)
+            SendTrade(index, tradetarget)
+            SendTrade(tradetarget, index)
             ' Send the offer data - Used to clear their client
             SendTradeUpdate(index, 0)
             SendTradeUpdate(index, 1)
-            SendTradeUpdate(tradeTarget, 0)
-            SendTradeUpdate(tradeTarget, 1)
+            SendTradeUpdate(tradetarget, 0)
+            SendTradeUpdate(tradetarget, 1)
             Exit Sub
         End If
 
         ' send the trade request
-        TempPlayer(index).TradeRequest = tradeTarget
+        TempPlayer(index).TradeRequest = tradetarget
         PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.")
         PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.")
         SendClearTradeTimer(index)
     End Sub
+
     Sub Packet_AcceptTrade(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim tradeTarget As Long
@@ -2601,6 +2593,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_DeclineTrade(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim tradeTarget As Long
@@ -2628,6 +2621,7 @@
 
         buffer = Nothing
     End Sub
+
     Sub Packet_TradeItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim invslot As Long, amount As Long, emptyslot As Long, i As Long
@@ -2635,17 +2629,17 @@
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CTradeItem Then Exit Sub
 
-        invSlot = buffer.ReadLong
+        invslot = buffer.ReadLong
         amount = buffer.ReadLong
 
         buffer = Nothing
 
-        If invSlot <= 0 Or invSlot > MAX_INV Then Exit Sub
-        If GetPlayerInvItemNum(index, invSlot) <= 0 Then Exit Sub
+        If invslot <= 0 Or invslot > MAX_INV Then Exit Sub
+        If GetPlayerInvItemNum(index, invslot) <= 0 Then Exit Sub
 
         ' make sure they're not already offering it
         For i = 1 To MAX_INV
-            If TempPlayer(index).TradeOffer(i).Num = invSlot Then
+            If TempPlayer(index).TradeOffer(i).Num = invslot Then
                 PlayerMsg(index, "You've already offered this item.")
                 Exit Sub
             End If
@@ -2654,15 +2648,15 @@
         ' find open slot
         For i = 1 To MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = 0 Then
-                EmptySlot = i
+                emptyslot = i
                 Exit For
             End If
         Next
 
-        If EmptySlot <= 0 Or EmptySlot > MAX_INV Then Exit Sub
+        If emptyslot <= 0 Or emptyslot > MAX_INV Then Exit Sub
 
-        TempPlayer(index).TradeOffer(EmptySlot).Num = invSlot
-        TempPlayer(index).TradeOffer(EmptySlot).Value = amount
+        TempPlayer(index).TradeOffer(emptyslot).Num = invslot
+        TempPlayer(index).TradeOffer(emptyslot).Value = amount
 
         If TempPlayer(index).AcceptTrade Then TempPlayer(index).AcceptTrade = False
         If TempPlayer(TempPlayer(index).InTrade).AcceptTrade Then TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
@@ -2673,6 +2667,7 @@
         SendTradeUpdate(index, 0)
         SendTradeUpdate(TempPlayer(index).InTrade, 1)
     End Sub
+
     Sub Packet_UntradeItem(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim tradeslot As Long
@@ -2699,4 +2694,89 @@
         SendTradeUpdate(index, 0)
         SendTradeUpdate(TempPlayer(index).InTrade, 1)
     End Sub
+
+    Public Sub HandleData(ByVal index As Long, ByVal data() As Byte)
+        Dim Buffer() As Byte
+        Buffer = data.Clone
+        Dim pLength As Long
+
+        If TempPlayer(index).Buffer Is Nothing Then TempPlayer(index).Buffer = New ByteBuffer
+        TempPlayer(index).Buffer.WriteBytes(Buffer)
+
+        If TempPlayer(index).Buffer.Count = 0 Then
+            TempPlayer(index).Buffer.Clear()
+            Exit Sub
+        End If
+
+        If TempPlayer(index).Buffer.Length >= 4 Then
+            pLength = TempPlayer(index).Buffer.ReadLong(False)
+
+            If pLength <= 0 Then
+                TempPlayer(index).Buffer.Clear()
+                Exit Sub
+            End If
+        End If
+
+        Do While pLength > 0 And pLength <= TempPlayer(index).Buffer.Length - 8
+
+            If pLength <= TempPlayer(index).Buffer.Length - 8 Then
+                TempPlayer(index).Buffer.ReadLong()
+                data = TempPlayer(index).Buffer.ReadBytes(pLength)
+                HandleDataPackets(index, data)
+            End If
+
+            pLength = 0
+
+            If TempPlayer(index).Buffer.Length >= 4 Then
+                pLength = TempPlayer(index).Buffer.ReadLong(False)
+
+                If pLength < 0 Then
+                    TempPlayer(index).Buffer.Clear()
+                    Exit Sub
+                End If
+            End If
+
+        Loop
+
+        If GetPlayerAccess(index) <= 0 Then
+
+            ' Check for data flooding
+            If TempPlayer(index).DataBytes > 1000 Then
+                HackingAttempt(index, "Data Flooding")
+                Exit Sub
+            End If
+
+            ' Check for packet flooding
+            If TempPlayer(index).DataPackets > 25 Then
+                HackingAttempt(index, "Packet Flooding")
+                Exit Sub
+            End If
+        End If
+
+        ' Check if elapsed time has passed
+        'Player(Index).DataBytes = Player(Index).DataBytes + DataLength
+        If GetTickCount() >= TempPlayer(index).DataTimer Then
+            TempPlayer(index).DataTimer = GetTickCount() + 1000
+            TempPlayer(index).DataBytes = 0
+            TempPlayer(index).DataPackets = 0
+        End If
+
+        If pLength <= 1 Then TempPlayer(index).Buffer.Clear()
+
+        'seperates the data just in case 2 packets or more came in at one time, handles the data and makes sure
+        'no one is packet flooding and stuff
+    End Sub
+
+    Sub HackingAttempt(ByVal Index As Long, ByVal Reason As String)
+
+        If Index > 0 Then
+            If IsPlaying(Index) Then
+                Call GlobalMsg(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has been booted for (" & Reason & ")")
+            End If
+
+            Call AlertMsg(Index, "You have lost your connection with " & Options.Game_Name & ".")
+        End If
+
+    End Sub
+
 End Module

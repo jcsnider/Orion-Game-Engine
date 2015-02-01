@@ -48,7 +48,7 @@
         SSpellEditor
         SUpdateSpell
         SSpells
-        SLeft
+        SLeftMap
         SResourceCache
         SResourceEditor
         SUpdateResource

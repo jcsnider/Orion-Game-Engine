@@ -1,5 +1,8 @@
 ﻿Module modHandleData
     Public PlayerBuffer As ByteBuffer
+    Private Delegate Sub Packet_(ByVal Data() As Byte)
+    Private Packets As Dictionary(Of Integer, Packet_)
+
     Public Sub HandleData(ByVal data() As Byte)
         Dim Buffer() As Byte
         Buffer = data.Clone
@@ -60,82 +63,85 @@
 
         If pLength <= 1 Then PlayerBuffer.Clear()
     End Sub
+
+    Public Sub InitMessages()
+        Packets = New Dictionary(Of Integer, Packet_)
+
+        Packets.Add(ServerPackets.SAlertMsg, AddressOf Packet_AlertMSG)
+        Packets.Add(ServerPackets.SLoginOk, AddressOf Packet_LoginOk)
+        Packets.Add(ServerPackets.SNewCharClasses, AddressOf Packet_NewCharClasses)
+        Packets.Add(ServerPackets.SClassesData, AddressOf Packet_ClassesData)
+        Packets.Add(ServerPackets.SInGame, AddressOf Packet_InGame)
+        Packets.Add(ServerPackets.SPlayerInv, AddressOf Packet_PlayerInv)
+        Packets.Add(ServerPackets.SPlayerInvUpdate, AddressOf Packet_PlayerInvUpdate)
+        Packets.Add(ServerPackets.SPlayerWornEq, AddressOf Packet_PlayerWornEquipment)
+        Packets.Add(ServerPackets.SPlayerHp, AddressOf Packet_PlayerHP)
+        Packets.Add(ServerPackets.SPlayerMp, AddressOf Packet_PlayerMP)
+        Packets.Add(ServerPackets.SPlayerSp, AddressOf Packet_PlayerSP)
+        Packets.Add(ServerPackets.SPlayerData, AddressOf Packet_PlayerData)
+        Packets.Add(ServerPackets.SPlayerMove, AddressOf Packet_PlayerMove)
+        Packets.Add(ServerPackets.SNpcMove, AddressOf Packet_NpcMove)
+        Packets.Add(ServerPackets.SPlayerDir, AddressOf Packet_PlayerDir)
+        Packets.Add(ServerPackets.SPlayerXY, AddressOf Packet_PlayerXY)
+        Packets.Add(ServerPackets.SAttack, AddressOf Packet_Attack)
+        Packets.Add(ServerPackets.SNpcAttack, AddressOf Packet_NpcAttack)
+        Packets.Add(ServerPackets.SCheckforMap, AddressOf Packet_CheckMap)
+        Packets.Add(ServerPackets.SMapData, AddressOf Packet_MapData)
+        Packets.Add(ServerPackets.SMapNpcData, AddressOf Packet_MapNPCData)
+        Packets.Add(ServerPackets.SMapDone, AddressOf Packet_MapDone)
+        Packets.Add(ServerPackets.SGlobalMsg, AddressOf Packet_GlobalMessage)
+        Packets.Add(ServerPackets.SMapMsg, AddressOf Packet_MapMessage)
+        Packets.Add(ServerPackets.SSpawnItem, AddressOf Packet_SpawnItem)
+        Packets.Add(ServerPackets.SItemEditor, AddressOf Packet_EditItem)
+        Packets.Add(ServerPackets.SUpdateItem, AddressOf Packet_UpdateItem)
+        Packets.Add(ServerPackets.SREditor, AddressOf Packet_ResourceEditor)
+        Packets.Add(ServerPackets.SSpawnNpc, AddressOf Packet_SpawnNPC)
+        Packets.Add(ServerPackets.SNpcDead, AddressOf Packet_NpcDead)
+        Packets.Add(ServerPackets.SNpcEditor, AddressOf Packet_NPCEditor)
+        Packets.Add(ServerPackets.SUpdateNpc, AddressOf Packet_UpdateNPC)
+        Packets.Add(ServerPackets.SMapKey, AddressOf Packet_MapKey)
+        Packets.Add(ServerPackets.SEditMap, AddressOf Packet_EditMap)
+        Packets.Add(ServerPackets.SShopEditor, AddressOf Packet_EditShop)
+        Packets.Add(ServerPackets.SUpdateShop, AddressOf Packet_UpdateShop)
+        Packets.Add(ServerPackets.SSpellEditor, AddressOf Packet_EditSpell)
+        Packets.Add(ServerPackets.SUpdateSpell, AddressOf Packet_UpdateSpell)
+        Packets.Add(ServerPackets.SSpells, AddressOf Packet_Spells)
+        Packets.Add(ServerPackets.SLeftMap, AddressOf Packet_LeftMap)
+        Packets.Add(ServerPackets.SResourceCache, AddressOf Packet_ResourceCache)
+        Packets.Add(ServerPackets.SSendPing, AddressOf Packet_Ping)
+        Packets.Add(ServerPackets.SDoorAnimation, AddressOf Packet_DoorAnimation)
+        Packets.Add(ServerPackets.SActionMsg, AddressOf Packet_ActionMessage)
+        Packets.Add(ServerPackets.SPlayerEXP, AddressOf Packet_PlayerExp)
+        Packets.Add(ServerPackets.SBlood, AddressOf Packet_Blood)
+        Packets.Add(ServerPackets.SAnimationEditor, AddressOf Packet_EditAnimation)
+        Packets.Add(ServerPackets.SAnimation, AddressOf Packet_Animation)
+        Packets.Add(ServerPackets.SMapNpcVitals, AddressOf Packet_NPCVitals)
+        Packets.Add(ServerPackets.SCooldown, AddressOf Packet_Cooldown)
+        Packets.Add(ServerPackets.SClearSpellBuffer, AddressOf Packet_ClearSpellBuffer)
+        Packets.Add(ServerPackets.SSayMsg, AddressOf Packet_SayMessage)
+        Packets.Add(ServerPackets.SOpenShop, AddressOf Packet_OpenShop)
+        Packets.Add(ServerPackets.SResetShopAction, AddressOf Packet_ResetShopAction)
+        Packets.Add(ServerPackets.SStunned, AddressOf Packet_Stunned)
+        Packets.Add(ServerPackets.SMapWornEq, AddressOf Packet_MapWornEquipment)
+        Packets.Add(ServerPackets.SBank, AddressOf Packet_OpenBank)
+        Packets.Add(ServerPackets.SClearTradeTimer, AddressOf Packet_ClearTradeTimer)
+        Packets.Add(ServerPackets.STrade, AddressOf Packet_Trade)
+        Packets.Add(ServerPackets.SCloseTrade, AddressOf Packet_CloseTrade)
+        Packets.Add(ServerPackets.STradeUpdate, AddressOf Packet_TradeUpdate)
+        Packets.Add(ServerPackets.SGameData, AddressOf Packet_GameData)
+    End Sub
+
     Sub HandleDataPackets(ByVal data() As Byte)
-        Dim packetnum As Long
-        Dim buffer As ByteBuffer
+        Dim packetnum As Long, buffer As ByteBuffer, Packet As Packet_
+
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         packetnum = buffer.ReadLong
         buffer = Nothing
-        If packetnum = 0 Then Exit Sub
-        If packetnum = ServerPackets.SAlertMsg Then Call Packet_AlertMSG(data)
-        If packetnum = ServerPackets.SLoginOk Then Call Packet_LoginOk(data)
-        If packetnum = ServerPackets.SNewCharClasses Then Call Packet_NewCharClasses(data)
-        If packetnum = ServerPackets.SClassesData Then Call Packet_ClassesData(data)
-        If packetnum = ServerPackets.SInGame Then Call Packet_InGame(data)
-        If packetnum = ServerPackets.SPlayerInv Then Call Packet_PlayerInv(data)
-        If packetnum = ServerPackets.SPlayerInvUpdate Then Call Packet_PlayerInvUpdate(data)
-        If packetnum = ServerPackets.SPlayerWornEq Then Packet_PlayerWornEquipment(data)
-        If packetnum = ServerPackets.SPlayerHp Then Call Packet_PlayerHP(data)
-        If packetnum = ServerPackets.SPlayerMp Then Call Packet_PlayerMP(data)
-        If packetnum = ServerPackets.SPlayerSp Then Call Packet_PlayerSP(data)
-        If packetnum = ServerPackets.SPlayerStats Then Call Packet_PlayerStats(data)
-        If packetnum = ServerPackets.SPlayerData Then Call Packet_PlayerData(data)
-        If packetnum = ServerPackets.SPlayerMove Then Call Packet_PlayerMove(data)
-        If packetnum = ServerPackets.SNpcMove Then Call Packet_NpcMove(data)
-        If packetnum = ServerPackets.SPlayerDir Then Call Packet_PlayerDir(data)
-        If packetnum = ServerPackets.SNpcDir Then Call Packet_NpcDir(data)
-        If packetnum = ServerPackets.SPlayerXY Then Call Packet_PlayerXY(data)
-        If packetnum = ServerPackets.SAttack Then Call Packet_Attack(data)
-        If packetnum = ServerPackets.SNpcAttack Then Call Packet_NpcAttack(data)
-        If packetnum = ServerPackets.SCheckforMap Then Call Packet_CheckMap(data)
-        If packetnum = ServerPackets.SMapData Then Call Packet_MapData(data)
-        If packetnum = ServerPackets.SMapNpcData Then Call Packet_MapNPCData(data)
-        If packetnum = ServerPackets.SMapDone Then Call Packet_MapDone(data)
-        If packetnum = ServerPackets.SGlobalMsg Then Call Packet_GlobalMessage(data)
-        If packetnum = ServerPackets.SPlayerMsg Then Call Packet_PlayerMessage(data)
-        If packetnum = ServerPackets.SMapMsg Then Call Packet_MapMessage(data)
-        If packetnum = ServerPackets.SSpawnItem Then Call Packet_SpawnItem(data)
-        If packetnum = ServerPackets.SItemEditor Then Call Packet_EditItem(data)
-        If packetnum = ServerPackets.SUpdateItem Then Call Packet_UpdateItem(data)
-        If packetnum = ServerPackets.SSpawnNpc Then Call Packet_SpawnNPC(data)
-        If packetnum = ServerPackets.SNpcDead Then Call Packet_NpcDead(data)
-        If packetnum = ServerPackets.SNpcEditor Then Call Packet_NPCEditor(data)
-        If packetnum = ServerPackets.SUpdateNpc Then Call Packet_UpdateNPC(data)
-        If packetnum = ServerPackets.SMapKey Then Call Packet_MapKey(data)
-        If packetnum = ServerPackets.SEditMap Then Call Packet_EditMap(data)
-        If packetnum = ServerPackets.SShopEditor Then Call Packet_EditShop(data)
-        If packetnum = ServerPackets.SUpdateShop Then Call Packet_UpdateShop(data)
-        If packetnum = ServerPackets.SSpellEditor Then Call Packet_EditSpell(data)
-        If packetnum = ServerPackets.SUpdateSpell Then Call Packet_UpdateSpell(data)
-        If packetnum = ServerPackets.SSpells Then Call Packet_Spells(data)
-        If packetnum = ServerPackets.SLeft Then Call Packet_LeftMap(data)
-        If packetnum = ServerPackets.SResourceCache Then Call Packet_ResourceCache(data)
-        If packetnum = ServerPackets.SResourceEditor Then Call Packet_ResourceEditor(data)
-        If packetnum = ServerPackets.SUpdateResource Then Call Packet_UpdateResource(data)
-        If packetnum = ServerPackets.SSendPing Then Call Packet_Ping(data)
-        If packetnum = ServerPackets.SDoorAnimation Then Call Packet_DoorAnimation(data)
-        If packetnum = ServerPackets.SActionMsg Then Call Packet_ActionMessage(data)
-        If packetnum = ServerPackets.SPlayerEXP Then Call Packet_PlayerExp(data)
-        If packetnum = ServerPackets.SBlood Then Call Packet_Blood(data)
-        If packetnum = ServerPackets.SAnimationEditor Then Call Packet_EditAnimation(data)
-        If packetnum = ServerPackets.SUpdateAnimation Then Call Packet_UpdateAnimation(data)
-        If packetnum = ServerPackets.SAnimation Then Call Packet_Animation(data)
-        If packetnum = ServerPackets.SMapNpcVitals Then Call Packet_NPCVitals(data)
-        If packetnum = ServerPackets.SCooldown Then Call Packet_Cooldown(data)
-        If packetnum = ServerPackets.SClearSpellBuffer Then Call Packet_ClearSpellBuffer(data)
-        If packetnum = ServerPackets.SSayMsg Then Call Packet_SayMessage(data)
-        If packetnum = ServerPackets.SOpenShop Then Call Packet_OpenShop(data)
-        If packetnum = ServerPackets.SResetShopAction Then Call Packet_ResetShopAction(data)
-        If packetnum = ServerPackets.SStunned Then Call Packet_Stunned(data)
-        If packetnum = ServerPackets.SMapWornEq Then Call Packet_MapWornEquipment(data)
-        If packetnum = ServerPackets.SBank Then Call Packet_OpenBank(data)
-        If packetnum = ServerPackets.SClearTradeTimer Then Call Packet_ClearTradeTimer(data)
-        If packetnum = ServerPackets.STrade Then Call Packet_Trade(data)
-        If packetnum = ServerPackets.SCloseTrade Then Call Packet_CloseTrade(data)
-        If packetnum = ServerPackets.STradeUpdate Then Call Packet_TradeUpdate(data)
-        If packetnum = ServerPackets.STradeStatus Then Call Packet_TradeStatus(data)
-        If packetnum = ServerPackets.SGameData Then Call Packet_GameData(data)
+
+        If Packets.TryGetValue(packetnum, Packet) Then
+            Packet.Invoke(data)
+        End If
     End Sub
     Sub Packet_AlertMSG(ByVal data() As Byte)
         Dim Msg As String
@@ -159,7 +165,7 @@
         Call MsgBox(Msg, vbOKOnly, GAME_NAME)
         DestroyGame()
     End Sub
-    Sub Packet_LoginOk(ByRef Data() As Byte)
+    Sub Packet_LoginOk(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -185,6 +191,7 @@
         frmloadvisible = True
         Call SetStatus("Receiving game data...")
     End Sub
+
     Sub Packet_NewCharClasses(ByVal data() As Byte)
         Dim n As Long, i As Long, z As Long, X As Long
         Dim Buffer As ByteBuffer
@@ -243,7 +250,7 @@
 
         ' Used for if the player is creating a new character
         frmmenuvisible = True
-        frmLoadvisible = False
+        frmloadvisible = False
         pnlCreditsVisible = False
         pnlRegisterVisible = False
         pnlCharCreateVisible = True
@@ -257,7 +264,8 @@
 
         newCharSprite = 1
     End Sub
-    Private Sub Packet_ClassesData(ByRef data() As Byte)
+
+    Private Sub Packet_ClassesData(ByVal data() As Byte)
         Dim n As Long
         Dim i As Long
         Dim z As Long, X As Long
@@ -321,12 +329,14 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_InGame(ByRef data() As Byte)
+
+    Private Sub Packet_InGame(ByVal data() As Byte)
         InGame = True
         CanMoveNow = True
         Call GameInit()
     End Sub
-    Private Sub Packet_PlayerInv(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerInv(ByVal data() As Byte)
         Dim n As Long
         Dim i As Long
         Dim Buffer As ByteBuffer
@@ -351,7 +361,8 @@
         Buffer = Nothing
         'DrawInventory()
     End Sub
-    Private Sub Packet_PlayerInvUpdate(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerInvUpdate(ByVal data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -373,7 +384,8 @@
         Buffer = Nothing
         'DrawInventory()
     End Sub
-    Private Sub Packet_PlayerWornEquipment(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerWornEquipment(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -397,7 +409,8 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerHP(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerHP(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -414,7 +427,8 @@
         End If
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerMP(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerMP(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -428,7 +442,8 @@
             picManaWidth = Int(((GetPlayerVital(MyIndex, Vitals.MP) / 169) / (GetPlayerMaxVital(MyIndex, Vitals.MP) / 169)) * 169)
         End If
     End Sub
-    Private Sub Packet_PlayerSP(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerSP(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -436,7 +451,8 @@
         Player(MyIndex).MaxSP = Buffer.ReadLong
         Call SetPlayerVital(MyIndex, Vitals.SP, Buffer.ReadLong)
     End Sub
-    Private Sub Packet_PlayerStats(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerStats(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Dim index As Long
@@ -451,11 +467,12 @@
         Next
         UpdateCharacterPanel = True
     End Sub
-    Private Sub Packet_PlayerData(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerData(ByVal Data() As Byte)
         Dim i As Long, X As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SPlayerData Then Exit Sub
 
@@ -493,7 +510,8 @@
 
         If i = MyIndex Then PlayerData = True
     End Sub
-    Private Sub Packet_PlayerMove(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerMove(ByVal Data() As Byte)
         Dim i As Long
         Dim X As Long
         Dim Y As Long
@@ -501,7 +519,7 @@
         Dim n As Byte
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SPlayerMove Then Exit Sub
         i = Buffer.ReadLong
         X = Buffer.ReadLong
@@ -527,7 +545,8 @@
         End Select
         Buffer = Nothing
     End Sub
-    Private Sub Packet_NpcMove(ByRef data() As Byte)
+
+    Private Sub Packet_NpcMove(ByVal Data() As Byte)
         Dim MapNpcNum As Long
         Dim Movement As Long
         Dim X As Long
@@ -535,7 +554,7 @@
         Dim Dir As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SNpcMove Then Exit Sub
 
         MapNpcNum = Buffer.ReadLong
@@ -566,12 +585,13 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerDir(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerDir(ByVal Data() As Byte)
         Dim Dir As Long
         Dim i As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SPlayerDir Then Exit Sub
         i = Buffer.ReadLong
         Dir = Buffer.ReadLong
@@ -584,12 +604,13 @@
         End With
         Buffer = Nothing
     End Sub
-    Private Sub Packet_NpcDir(ByRef data() As Byte)
+
+    Private Sub Packet_NpcDir(ByVal Data() As Byte)
         Dim Dir As Long
         Dim i As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SNpcDir Then Exit Sub
 
         i = Buffer.ReadLong
@@ -604,13 +625,14 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerXY(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerXY(ByVal Data() As Byte)
         Dim X As Long
         Dim Y As Long
         Dim Dir As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SPlayerXY Then Exit Sub
         X = Buffer.ReadLong
         Y = Buffer.ReadLong
@@ -624,42 +646,45 @@
         Player(MyIndex).YOffset = 0
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Attack(ByRef data() As Byte)
+
+    Private Sub Packet_Attack(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SAttack Then Exit Sub
 
         i = Buffer.ReadLong
         ' Set player to attacking
         Player(i).Attacking = 1
-        Player(i).AttackTimer = GetTickCount
+        Player(i).AttackTimer = GetTickCount()
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_NpcAttack(ByRef data() As Byte)
+
+    Private Sub Packet_NpcAttack(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SNpcAttack Then Exit Sub
 
         i = Buffer.ReadLong
         ' Set player to attacking
         MapNpc(i).Attacking = 1
-        MapNpc(i).AttackTimer = GetTickCount
+        MapNpc(i).AttackTimer = GetTickCount()
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_CheckMap(ByRef data() As Byte)
+
+    Private Sub Packet_CheckMap(ByVal Data() As Byte)
         Dim X As Long
         Dim Y As Long
         Dim i As Long
         Dim NeedMap As Byte
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SCheckforMap Then Exit Sub
 
@@ -704,7 +729,8 @@
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
-    Private Sub Packet_MapData(ByRef data() As Byte)
+
+    Private Sub Packet_MapData(ByVal Data() As Byte)
         Dim X As Long
         Dim Y As Long
         Dim i As Long
@@ -713,13 +739,13 @@
 
         Buffer = New ByteBuffer
 
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SMapData Then Exit Sub
 
-        data = Buffer.ReadBytes(Buffer.Count - 8)
+        Data = Buffer.ReadBytes(Buffer.Count - 8)
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(Decompress(data))
+        Buffer.WriteBytes(Decompress(Data))
 
         MapData = False
 
@@ -836,11 +862,12 @@
         GettingMap = False
         CanMoveNow = True
     End Sub
-    Private Sub Packet_MapNPCData(ByRef data() As Byte)
+
+    Private Sub Packet_MapNPCData(ByVal Data() As Byte)
         Dim i As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SMapNpcData Then Exit Sub
 
@@ -856,6 +883,7 @@
 
         Next
     End Sub
+
     Private Sub Packet_MapDone(ByVal data() As Byte)
         Dim i As Long
         Dim MusicFile As String
@@ -873,7 +901,8 @@
         GettingMap = False
         CanMoveNow = True
     End Sub
-    Private Sub Packet_GlobalMessage(ByRef Data() As Byte)
+
+    Private Sub Packet_GlobalMessage(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Msg As String
         Buffer = New ByteBuffer
@@ -882,7 +911,8 @@
         Msg = Buffer.ReadString
         Call AddText(Msg)
     End Sub
-    Private Sub Packet_MapMessage(ByRef Data() As Byte)
+
+    Private Sub Packet_MapMessage(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Msg As String
         Buffer = New ByteBuffer
@@ -892,7 +922,8 @@
         Call AddText(Msg)
         Buffer = Nothing
     End Sub
-    Private Sub Packet_SpawnItem(ByRef Data() As Byte)
+
+    Private Sub Packet_SpawnItem(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim n As Long
         Buffer = New ByteBuffer
@@ -910,7 +941,8 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_EditItem(ByRef Data() As Byte)
+
+    Private Sub Packet_EditItem(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -920,7 +952,8 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerMessage(ByRef Data() As Byte)
+
+    Private Sub Packet_PlayerMessage(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Msg As String
         Buffer = New ByteBuffer
@@ -929,6 +962,7 @@
         Msg = Buffer.ReadString
         Call AddText(Msg)
     End Sub
+
     Sub Packet_UpdateItem(ByVal data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
@@ -978,11 +1012,12 @@
 
         'y()
     End Sub
+
     Sub Packet_SpawnNPC(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim n As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
+        Buffer.WriteBytes(data)
 
         If Buffer.ReadLong <> ServerPackets.SSpawnNpc Then Exit Sub
 
@@ -1002,6 +1037,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_NpcDead(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim n As Long
@@ -1015,6 +1051,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_NPCEditor(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1026,6 +1063,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_UpdateNPC(ByVal data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
@@ -1058,6 +1096,7 @@
         If Npc(n).Name Is Nothing Then Npc(n).Name = ""
         Buffer = Nothing
     End Sub
+
     Sub Packet_MapKey(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim n As Long
@@ -1075,6 +1114,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_EditMap(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1086,6 +1126,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_EditShop(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
 
@@ -1098,6 +1139,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_UpdateShop(ByVal data() As Byte)
         Dim shopnum As Long
         Dim Buffer As ByteBuffer
@@ -1123,6 +1165,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_EditSpell(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
 
@@ -1135,6 +1178,7 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_UpdateSpell(ByVal data() As Byte)
         Dim spellnum As Long
         Dim Buffer As ByteBuffer
@@ -1174,6 +1218,7 @@
         Buffer = Nothing
 
     End Sub
+
     Sub Packet_Spells(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
@@ -1190,23 +1235,25 @@
 
         Buffer = Nothing
     End Sub
+
     Sub Packet_LeftMap(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
         ' Confirm it is the right packet
-        If Buffer.ReadLong <> ServerPackets.SLeft Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SLeftMap Then Exit Sub
         Call ClearPlayer(Buffer.ReadLong)
         Buffer = Nothing
     End Sub
-    Private Sub Packet_ResourceCache(ByRef data() As Byte)
+
+    Private Sub Packet_ResourceCache(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Long
 
         ' if in map editor, we cache shit ourselves
         If InMapEditor Then Exit Sub
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SResourceCache Then Exit Sub
 
@@ -1229,10 +1276,12 @@
 
         Buffer = Nothing
     End Sub
+
     Private Sub Packet_Ping(ByVal data() As Byte)
-        PingEnd = GetTickCount
+        PingEnd = GetTickCount()
         Ping = PingEnd - PingStart
     End Sub
+
     Private Sub Packet_DoorAnimation(ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim X As Long, Y As Long
@@ -1246,11 +1295,12 @@
         With TempTile(X, Y)
             .DoorFrame = 1
             .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
-            .DoorTimer = GetTickCount
+            .DoorTimer = GetTickCount()
         End With
 
         buffer = Nothing
     End Sub
+
     Private Sub Packet_ActionMessage(ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim X As Long, Y As Long, message As String, color As Long, tmpType As Long
@@ -1269,11 +1319,12 @@
 
         CreateActionMsg(message, color, tmpType, X, Y)
     End Sub
-    Private Sub Packet_ResourceEditor(ByRef data() As Byte)
+
+    Private Sub Packet_ResourceEditor(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SResourceEditor Then Exit Sub
 
@@ -1281,12 +1332,13 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_UpdateResource(ByRef data() As Byte)
+
+    Private Sub Packet_UpdateResource(ByVal Data() As Byte)
         Dim ResourceNum As Long
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SUpdateResource Then Exit Sub
 
@@ -1312,12 +1364,13 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_PlayerExp(ByRef data() As Byte)
+
+    Private Sub Packet_PlayerExp(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim TNL As Long
         Dim index As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SPlayerEXP Then Exit Sub
         index = Buffer.ReadLong
@@ -1329,11 +1382,12 @@
         picEXPWidth = Int(((GetPlayerExp(MyIndex) / 169) / (TNL / 169)) * 169)
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Blood(ByRef data() As Byte)
+
+    Private Sub Packet_Blood(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim X As Long, Y As Long, Sprite As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SBlood Then Exit Sub
 
@@ -1352,26 +1406,28 @@
             .X = X
             .Y = Y
             .Sprite = Sprite
-            .Timer = GetTickCount
+            .Timer = GetTickCount()
         End With
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_EditAnimation(ByRef data() As Byte)
+
+    Private Sub Packet_EditAnimation(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SAnimationEditor Then Exit Sub
 
         InitAnimationEditor = True
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_UpdateAnimation(ByRef data() As Byte)
+
+    Private Sub Packet_UpdateAnimation(ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SUpdateAnimation Then Exit Sub
         n = Buffer.ReadLong
         ' Update the Animation
@@ -1396,10 +1452,11 @@
         Next
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Animation(ByRef data() As Byte)
+
+    Private Sub Packet_Animation(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SAnimation Then Exit Sub
 
         AnimationIndex = AnimationIndex + 1
@@ -1417,11 +1474,12 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_NPCVitals(ByRef data() As Byte)
+
+    Private Sub Packet_NPCVitals(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim MapNpcNum As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SMapNpcVitals Then Exit Sub
 
         MapNpcNum = Buffer.ReadLong
@@ -1431,24 +1489,26 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Cooldown(ByRef data() As Byte)
+
+    Private Sub Packet_Cooldown(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim slot As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SCooldown Then Exit Sub
 
         slot = Buffer.ReadLong
-        SpellCD(slot) = GetTickCount
+        SpellCD(slot) = GetTickCount()
 
         DrawPlayerSpells()
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_ClearSpellBuffer(ByRef data() As Byte)
+
+    Private Sub Packet_ClearSpellBuffer(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SClearSpellBuffer Then Exit Sub
 
         SpellBuffer = 0
@@ -1456,7 +1516,8 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_SayMessage(ByRef data() As Byte)
+
+    Private Sub Packet_SayMessage(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Access As Long
         Dim Name As String
@@ -1466,7 +1527,7 @@
         Dim PK As Long
         'Dim saycolour As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SSayMsg Then Exit Sub
 
         Name = Buffer.ReadString
@@ -1478,11 +1539,12 @@
         AddText(Header & Name & ": " & message)
         Buffer = Nothing
     End Sub
-    Private Sub Packet_OpenShop(ByRef data() As Byte)
+
+    Private Sub Packet_OpenShop(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim shopnum As Long
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SOpenShop Then Exit Sub
         shopnum = Buffer.ReadLong
 
@@ -1491,30 +1553,33 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_ResetShopAction(ByRef data() As Byte)
+
+    Private Sub Packet_ResetShopAction(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SResetShopAction Then Exit Sub
         ShopAction = 0
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Stunned(ByRef data() As Byte)
+
+    Private Sub Packet_Stunned(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SStunned Then Exit Sub
 
         StunDuration = Buffer.ReadLong
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_MapWornEquipment(ByRef data() As Byte)
+
+    Private Sub Packet_MapWornEquipment(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Dim playernum As Long
         Buffer = New ByteBuffer
 
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SMapWornEq Then Exit Sub
 
@@ -1526,10 +1591,11 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_OpenBank(ByRef data() As Byte)
+
+    Private Sub Packet_OpenBank(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SBank Then Exit Sub
 
         For i = 1 To MAX_BANK
@@ -1541,10 +1607,11 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_ClearTradeTimer(ByRef data() As Byte)
+
+    Private Sub Packet_ClearTradeTimer(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.SClearTradeTimer Then Exit Sub
 
         TradeRequest = False
@@ -1552,10 +1619,11 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_Trade(ByRef data() As Byte)
+
+    Private Sub Packet_Trade(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
+        Buffer.WriteBytes(Data)
         If Buffer.ReadLong <> ServerPackets.STrade Then Exit Sub
 
         NeedToOpenTrade = True
@@ -1565,21 +1633,23 @@
 
         Buffer = Nothing
     End Sub
-    Private Sub Packet_CloseTrade(ByRef data() As Byte)
+
+    Private Sub Packet_CloseTrade(ByVal Data() As Byte)
         NeedtoCloseTrade = True
         ' re-blt any items we were offering
         'DrawInventory()
     End Sub
-    Private Sub Packet_TradeUpdate(ByRef data() As Byte)
+
+    Private Sub Packet_TradeUpdate(ByVal Data() As Byte)
         Dim buffer As ByteBuffer
         Dim datatype As Long
         buffer = New ByteBuffer
-        buffer.WriteBytes(data)
+        buffer.WriteBytes(Data)
         If buffer.ReadLong <> ServerPackets.STradeUpdate Then Exit Sub
 
-        dataType = buffer.ReadLong
+        datatype = buffer.ReadLong
 
-        If dataType = 0 Then ' ours!
+        If datatype = 0 Then ' ours!
             For i = 1 To MAX_INV
                 TradeYourOffer(i).Num = buffer.ReadLong
                 TradeYourOffer(i).Value = buffer.ReadLong
@@ -1587,7 +1657,7 @@
             frmMainGame.lblYourWorth.Text = "Total Worth: " & buffer.ReadLong & "g"
             ' remove any items we're offering
             'DrawInventory()
-        ElseIf dataType = 1 Then 'theirs
+        ElseIf datatype = 1 Then 'theirs
             For i = 1 To MAX_INV
                 TradeTheirOffer(i).Num = buffer.ReadLong
                 TradeYourOffer(i).Value = buffer.ReadLong
@@ -1599,11 +1669,12 @@
 
         buffer = Nothing
     End Sub
-    Private Sub Packet_TradeStatus(ByRef data() As Byte)
+
+    Private Sub Packet_TradeStatus(ByVal Data() As Byte)
         Dim buffer As ByteBuffer
         Dim tradestatus As Long
         buffer = New ByteBuffer
-        buffer.WriteBytes(data)
+        buffer.WriteBytes(Data)
         If buffer.ReadLong <> ServerPackets.STradeStatus Then Exit Sub
 
         tradestatus = buffer.ReadLong
@@ -1619,16 +1690,17 @@
 
         buffer = Nothing
     End Sub
-    Private Sub Packet_GameData(ByRef data() As Byte)
+
+    Private Sub Packet_GameData(ByVal Data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Long, i As Long, z As Long, x As Long
         buffer = New ByteBuffer
-        buffer.WriteBytes(data)
+        buffer.WriteBytes(Data)
         If buffer.ReadLong <> ServerPackets.SGameData Then Exit Sub
-        data = buffer.ReadBytes(buffer.Count - 8)
-        data = Decompress(data)
+        Data = buffer.ReadBytes(buffer.Count - 8)
+        Data = Decompress(Data)
         buffer = New ByteBuffer
-        buffer.WriteBytes(data)
+        buffer.WriteBytes(Data)
 
         '\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Class Data\\\
@@ -1937,4 +2009,5 @@
 
         buffer = Nothing
     End Sub
+
 End Module

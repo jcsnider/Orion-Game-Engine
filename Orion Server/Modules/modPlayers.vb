@@ -87,7 +87,7 @@
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteLong(ServerPackets.SLeft)
+        Buffer.WriteLong(ServerPackets.SLeftMap)
         Buffer.WriteLong(Index)
         SendDataToMapBut(Index, MapNum, Buffer.ToArray())
 

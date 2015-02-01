@@ -48,7 +48,7 @@
         SSpellEditor
         SUpdateSpell
         SSpells
-        SLeft
+        SLeftMap
         SResourceCache
         SResourceEditor
         SUpdateResource
@@ -74,7 +74,7 @@
         SCloseTrade
         STradeUpdate
         STradeStatus
-        SGameData
+        SGameData        
         ' Make sure SMSG_COUNT is below everything else
         SMSG_COUNT
     End Enum
