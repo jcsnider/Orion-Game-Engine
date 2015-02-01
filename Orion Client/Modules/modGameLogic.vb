@@ -950,7 +950,6 @@ Module modGameLogic
 
         ' Player message
         If Left$(ChatText, 1) = "!" Then
-            Exit Sub
             ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
             Name = vbNullString
 
@@ -965,13 +964,12 @@ Module modGameLogic
 
             Next
 
-            ChatText = Mid$(ChatText, i, Len(ChatText) - 1)
+            MyText = Trim$(Mid$(ChatText, i, Len(ChatText) - 1))
 
             ' Make sure they are actually sending something
-            If Len(ChatText) - i > 0 Then
-                MyText = Mid$(ChatText, i + 1, Len(ChatText) - i)
+            If Len(MyText) > 0 Then
                 ' Send the message to the player
-                Call PlayerMsg(ChatText, Name)
+                Call PlayerMsg(MyText, Name)
             Else
                 Call AddText("Usage: !playername (message)")
             End If

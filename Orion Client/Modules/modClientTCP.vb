@@ -618,7 +618,7 @@ Module modClientTCP
     Public Sub PlayerMsg(ByVal text As String, ByVal MsgTo As String)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CSayMsg)
+        Buffer.WriteLong(ClientPackets.CPlayerMsg)
         Buffer.WriteString(MsgTo)
         Buffer.WriteString(text)
         SendData(Buffer.ToArray())

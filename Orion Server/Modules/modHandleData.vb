@@ -76,7 +76,7 @@
         Packets.Add(ClientPackets.CAcceptTrade, AddressOf Packet_DeclineTrade)
         Packets.Add(ClientPackets.CTradeItem, AddressOf Packet_TradeItem)
         Packets.Add(ClientPackets.CUntradeItem, AddressOf Packet_UntradeItem)
-
+        Packets.Add(ClientPackets.CPlayerMsg, AddressOf Packet_PlayerMsg)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Long, ByVal data() As Byte)
@@ -2693,6 +2693,30 @@
 
         SendTradeUpdate(index, 0)
         SendTradeUpdate(TempPlayer(index).InTrade, 1)
+    End Sub
+
+    Public Sub Packet_PlayerMsg(ByVal index As Long, ByVal Data() As Byte)
+        Dim buffer As ByteBuffer, OtherPlayer As String, Msg As String, OtherPlayerIndex As Long
+
+        buffer = New ByteBuffer()
+        buffer.WriteBytes(Data)
+        If buffer.ReadLong <> ClientPackets.CPlayerMsg Then Exit Sub
+        OtherPlayer = buffer.ReadString
+        Msg = buffer.ReadString
+        buffer = Nothing
+
+        OtherPlayerIndex = FindPlayer(OtherPlayer)
+        If OtherPlayerIndex <> index Then
+            If OtherPlayerIndex > 0 Then
+                Call Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
+                Call PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'")
+                Call PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
+            Else
+                Call PlayerMsg(index, "Player is not online.")
+            End If
+        Else
+            Call PlayerMsg(index, "Cannot message your self!")
+        End If
     End Sub
 
     Public Sub HandleData(ByVal index As Long, ByVal data() As Byte)

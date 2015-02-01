@@ -129,6 +129,7 @@
         Packets.Add(ServerPackets.SCloseTrade, AddressOf Packet_CloseTrade)
         Packets.Add(ServerPackets.STradeUpdate, AddressOf Packet_TradeUpdate)
         Packets.Add(ServerPackets.SGameData, AddressOf Packet_GameData)
+        Packets.Add(ServerPackets.SPlayerMsg, AddressOf Packet_PlayerMessage)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
