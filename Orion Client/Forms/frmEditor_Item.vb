@@ -240,6 +240,7 @@ Public Class frmEditor_Item
 
     Private Sub frmEditor_Item_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         scrlPic.Maximum = NumItems
+        scrlPic.LargeChange = 1
         scrlAnim.Maximum = MAX_ANIMATIONS
         scrlPaperdoll.Maximum = NumPaperdolls
     End Sub
