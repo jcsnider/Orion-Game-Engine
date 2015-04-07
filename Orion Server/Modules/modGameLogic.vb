@@ -135,19 +135,32 @@ Module modGameLogic
             frmServer.txtText.ScrollToCaret()
         End If
         If NeedToUpDatePlayerList = True Then
-            For i = 1 To MAX_PLAYERS
-                If Not Clients(i) Is Nothing Then
-                    If Not Clients(i).Socket Is Nothing Then
-                        If Clients(i).Socket.Connected Then
-                            frmServer.lstView.Items(i - 1).SubItems(1).Text = Clients(i).IP
-                            If Player(i).Login <> "" Then
-                                frmServer.lstView.Items(i - 1).SubItems(2).Text = Player(i).Login
-                                If Player(i).Name <> "" Then
-                                    frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Name
+            frmServer.lstView.Items.Clear()
+            For x = 1 To MAX_PLAYERS
+                frmServer.lstView.Items.Add(x)
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+            Next
+            Try
+                For i = 1 To MAX_PLAYERS
+                    If Not Clients(i) Is Nothing Then
+                        If Not Clients(i).Socket Is Nothing Then
+                            If Clients(i).Socket.Connected Then
+                                frmServer.lstView.Items(i - 1).SubItems(1).Text = Clients(i).IP
+                                If Player(i).Login <> "" Then
+                                    frmServer.lstView.Items(i - 1).SubItems(2).Text = Player(i).Login
+                                    If Player(i).Name <> "" Then
+                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Name
+                                    Else
+                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                                    End If
                                 Else
+                                    frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
                                     frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
                                 End If
                             Else
+                                frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
                                 frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
                                 frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
                             End If
@@ -161,12 +174,10 @@ Module modGameLogic
                         frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
                         frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
                     End If
-                Else
-                    frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
-                    frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
-                    frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-                End If
-            Next
+                Next
+            Catch ex As Exception
+                NeedToUpDatePlayerList = False
+            End Try
             NeedToUpDatePlayerList = False
         End If
     End Sub

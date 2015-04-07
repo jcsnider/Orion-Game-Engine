@@ -7,6 +7,7 @@ Public Class Client
     Public IP As String
     Public Socket As TcpClient
     Public myStream As NetworkStream
+    Public Closing As Boolean
     Private readBuff As Byte()
     Public Sub Start()
         Socket.SendBufferSize = 4096
@@ -14,6 +15,7 @@ Public Class Client
         myStream = Socket.GetStream()
         ReDim readBuff(Socket.ReceiveBufferSize - 1)
         myStream.BeginRead(readBuff, 0, Socket.ReceiveBufferSize, AddressOf OnReceiveData, Nothing)
+        Closing = False
     End Sub
     Private Sub OnReceiveData(ar As IAsyncResult)
         Try
@@ -31,7 +33,7 @@ Public Class Client
             CloseSocket(index) 'Disconnect
             Exit Sub
         End Try
-        
+
     End Sub
 End Class
 Module modServerTCP
@@ -242,6 +244,8 @@ Module modServerTCP
     Sub CloseSocket(ByVal Index As Long)
         Try
             If Index > 0 Then
+                If (Clients(Index).Closing = True) Then Exit Sub
+                Clients(Index).Closing = True
                 Call LeftGame(Index)
                 Call TextAdd("Connection from " & GetPlayerIP(Index) & " has been terminated.")
                 Clients(Index).Socket.Close()
