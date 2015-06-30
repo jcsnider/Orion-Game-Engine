@@ -108,47 +108,48 @@ Module modGameLogic
                     End If
                 End If
 
+                SyncLock MapLock
+                    If CanMoveNow Then
+                        Call CheckMovement() ' Check if player is trying to move
+                        Call CheckAttack()   ' Check to see if player is trying to attack
+                    End If
 
-                If CanMoveNow Then
-                    Call CheckMovement() ' Check if player is trying to move
-                    Call CheckAttack()   ' Check to see if player is trying to attack
-                End If
+                    ' Process input before rendering, otherwise input will be behind by 1 frame
+                    If WalkTimer < Tick Then
 
-                ' Process input before rendering, otherwise input will be behind by 1 frame
-                If WalkTimer < Tick Then
+                        For i = 1 To MAX_PLAYERS
+                            If IsPlaying(i) Then
+                                Call ProcessMovement(i)
+                            End If
+                        Next i
 
-                    For i = 1 To MAX_PLAYERS
-                        If IsPlaying(i) Then
-                            Call ProcessMovement(i)
-                        End If
-                    Next i
+                        ' Process npc movements (actually move them)
+                        For i = 1 To MAX_MAP_NPCS
+                            If Map.Npc(i) > 0 Then
+                                Call ProcessNpcMovement(i)
+                            End If
+                        Next i
 
-                    ' Process npc movements (actually move them)
-                    For i = 1 To MAX_MAP_NPCS
-                        If Map.Npc(i) > 0 Then
-                            Call ProcessNpcMovement(i)
-                        End If
-                    Next i
+                        WalkTimer = Tick + 30 ' edit this value to change WalkTimer
+                    End If
 
-                    WalkTimer = Tick + 30 ' edit this value to change WalkTimer
-                End If
+                    'Auctual Game Loop Stuff :/
+                    Render_Graphics()
+                    DrawStatBars()
 
-                'Auctual Game Loop Stuff :/
-                Render_Graphics()
-                DrawStatBars()
-
-                destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                Application.DoEvents()
+                    destrect = New Rectangle(0, 0, ScreenX, ScreenY)
+                    Application.DoEvents()
 
 
 
-                If GettingMap Then
-                    g.DrawString("Receiving Map", New System.Drawing.Font(FONT_NAME, FONT_SIZE), Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
-                End If
+                    If GettingMap Then
+                        g.DrawString("Receiving Map", New System.Drawing.Font(FONT_NAME, FONT_SIZE), Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
+                    End If
 
-                If InMapEditor Then
-                    EditorMap_DrawTileset()
-                End If
+                    If InMapEditor Then
+                        EditorMap_DrawTileset()
+                    End If
+                End SyncLock
             End If
 
             Application.DoEvents()

@@ -293,22 +293,10 @@ Public Class frmEditor_Map
         fraTrap.Visible = False
     End Sub
 
-    Private Sub btnSlide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSlide.Click
-        MapEditorSlideDir = cmbSlide.SelectedIndex
-        pnlAttributes.Visible = False
-        fraSlide.Visible = False
-    End Sub
-
     Private Sub optTrap_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optTrap.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraTrap.Visible = True
-    End Sub
-
-    Private Sub optSlide_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optSlide.CheckedChanged
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraSlide.Visible = True
     End Sub
 
     Private Sub btnProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProperties.Click
@@ -321,5 +309,22 @@ Public Class frmEditor_Map
 
     Private Sub btnFill_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFill.Click
         MapEditorFillLayer()
+    End Sub
+
+    Private Sub scrlNpcDir_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles scrlNpcDir.Scroll
+        Select Case scrlNpcDir.Value
+            Case 0
+                lblNpcDir.Text = "Direction: Up"
+            Case 1
+                lblNpcDir.Text = "Direction: Down"
+            Case 2
+                lblNpcDir.Text = "Direction: Left"
+            Case 3
+                lblNpcDir.Text = "Direction: Right"
+        End Select
+    End Sub
+
+    Private Sub optBlocked_CheckedChanged(sender As Object, e As EventArgs) Handles optBlocked.CheckedChanged
+        If optBlocked.Checked Then pnlAttributes.Visible = False
     End Sub
 End Class

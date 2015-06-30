@@ -244,13 +244,6 @@ Module modGameEditors
                         .Data2 = 0
                         .Data3 = 0
                     End If
-                    ' slide
-                    If frmEditor_Map.optSlide.Checked = True Then
-                        .Type = TILE_TYPE_SLIDE
-                        .Data1 = MapEditorSlideDir
-                        .Data2 = 0
-                        .Data3 = 0
-                    End If
                 End With
             ElseIf frmEditor_Map.optBlocks.Checked = True Then
                 If movedMouse Then Exit Sub
@@ -394,7 +387,6 @@ Module modGameEditors
         frmEditor_Map.fraShop.Visible = False
         frmEditor_Map.fraHeal.Visible = False
         frmEditor_Map.fraTrap.Visible = False
-        frmEditor_Map.fraSlide.Visible = False
 
     End Sub
     Public Sub MapEditorClearAttribs()

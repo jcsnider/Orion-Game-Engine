@@ -135,6 +135,7 @@ Module modGameLogic
             frmServer.txtText.ScrollToCaret()
         End If
         If NeedToUpDatePlayerList = True Then
+            UpdateCaption()
             frmServer.lstView.Items.Clear()
             For x = 1 To MAX_PLAYERS
                 frmServer.lstView.Items.Add(x)

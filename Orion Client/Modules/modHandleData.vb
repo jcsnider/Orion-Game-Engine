@@ -756,86 +756,88 @@
 
         MapData = False
 
-        If Buffer.ReadLong = 1 Then
+        SyncLock MapLock
+            If Buffer.ReadLong = 1 Then
 
-            MapNum = Buffer.ReadLong
-            Map.Name = Buffer.ReadString
-            Map.Music = Buffer.ReadString
-            Map.Revision = Buffer.ReadLong
-            Map.Moral = Buffer.ReadLong
-            Map.tileset = Buffer.ReadLong
-            Map.Up = Buffer.ReadLong
-            Map.Down = Buffer.ReadLong
-            Map.Left = Buffer.ReadLong
-            Map.Right = Buffer.ReadLong
-            Map.BootMap = Buffer.ReadLong
-            Map.BootX = Buffer.ReadLong
-            Map.BootY = Buffer.ReadLong
-            Map.MaxX = Buffer.ReadLong
-            Map.MaxY = Buffer.ReadLong
+                MapNum = Buffer.ReadLong
+                Map.Name = Buffer.ReadString
+                Map.Music = Buffer.ReadString
+                Map.Revision = Buffer.ReadLong
+                Map.Moral = Buffer.ReadLong
+                Map.tileset = Buffer.ReadLong
+                Map.Up = Buffer.ReadLong
+                Map.Down = Buffer.ReadLong
+                Map.Left = Buffer.ReadLong
+                Map.Right = Buffer.ReadLong
+                Map.BootMap = Buffer.ReadLong
+                Map.BootX = Buffer.ReadLong
+                Map.BootY = Buffer.ReadLong
+                Map.MaxX = Buffer.ReadLong
+                Map.MaxY = Buffer.ReadLong
 
-            ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
+                ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 
-            For X = 1 To MAX_MAP_NPCS
-                Map.Npc(X) = Buffer.ReadLong
-            Next
+                For X = 1 To MAX_MAP_NPCS
+                    Map.Npc(X) = Buffer.ReadLong
+                Next
 
-            For X = 0 To Map.MaxX
-                For Y = 0 To Map.MaxY
-                    Map.Tile(X, Y).Data1 = Buffer.ReadLong
-                    Map.Tile(X, Y).Data2 = Buffer.ReadLong
-                    Map.Tile(X, Y).Data3 = Buffer.ReadLong
-                    Map.Tile(X, Y).DirBlock = Buffer.ReadLong
-                    ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
-                    For i = 0 To MapLayer.Layer_Count - 1
-                        Map.Tile(X, Y).Layer(i).tileset = Buffer.ReadLong
-                        Map.Tile(X, Y).Layer(i).X = Buffer.ReadLong
-                        Map.Tile(X, Y).Layer(i).Y = Buffer.ReadLong
+                For X = 0 To Map.MaxX
+                    For Y = 0 To Map.MaxY
+                        Map.Tile(X, Y).Data1 = Buffer.ReadLong
+                        Map.Tile(X, Y).Data2 = Buffer.ReadLong
+                        Map.Tile(X, Y).Data3 = Buffer.ReadLong
+                        Map.Tile(X, Y).DirBlock = Buffer.ReadLong
+                        ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
+                        For i = 0 To MapLayer.Layer_Count - 1
+                            Map.Tile(X, Y).Layer(i).tileset = Buffer.ReadLong
+                            Map.Tile(X, Y).Layer(i).X = Buffer.ReadLong
+                            Map.Tile(X, Y).Layer(i).Y = Buffer.ReadLong
+                        Next
+                        Map.Tile(X, Y).Type = Buffer.ReadLong
                     Next
-                    Map.Tile(X, Y).Type = Buffer.ReadLong
                 Next
-            Next
-        End If
-
-        For i = 1 To MAX_MAP_ITEMS
-            MapItem(i).Num = Buffer.ReadLong
-            MapItem(i).Value = Buffer.ReadLong()
-            MapItem(i).X = Buffer.ReadLong()
-            MapItem(i).Y = Buffer.ReadLong()
-        Next
-
-        For i = 1 To MAX_MAP_NPCS
-            MapNpc(i).Num = Buffer.ReadLong()
-            MapNpc(i).X = Buffer.ReadLong()
-            MapNpc(i).Y = Buffer.ReadLong()
-            MapNpc(i).Dir = Buffer.ReadLong()
-            MapNpc(i).Vital(Vitals.HP) = Buffer.ReadLong()
-        Next
-
-        If Buffer.ReadLong = 1 Then
-            Resource_Index = Buffer.ReadLong
-            Resources_Init = False
-
-            If Resource_Index > 0 Then
-                ReDim MapResource(0 To Resource_Index)
-
-                For i = 0 To Resource_Index
-                    MapResource(i).ResourceState = Buffer.ReadLong
-                    MapResource(i).X = Buffer.ReadLong
-                    MapResource(i).Y = Buffer.ReadLong
-                Next
-
-                Resources_Init = True
-            Else
-                ReDim MapResource(0 To 1)
             End If
-        End If
+
+            For i = 1 To MAX_MAP_ITEMS
+                MapItem(i).Num = Buffer.ReadLong
+                MapItem(i).Value = Buffer.ReadLong()
+                MapItem(i).X = Buffer.ReadLong()
+                MapItem(i).Y = Buffer.ReadLong()
+            Next
+
+            For i = 1 To MAX_MAP_NPCS
+                MapNpc(i).Num = Buffer.ReadLong()
+                MapNpc(i).X = Buffer.ReadLong()
+                MapNpc(i).Y = Buffer.ReadLong()
+                MapNpc(i).Dir = Buffer.ReadLong()
+                MapNpc(i).Vital(Vitals.HP) = Buffer.ReadLong()
+            Next
+
+            If Buffer.ReadLong = 1 Then
+                Resource_Index = Buffer.ReadLong
+                Resources_Init = False
+
+                If Resource_Index > 0 Then
+                    ReDim MapResource(0 To Resource_Index)
+
+                    For i = 0 To Resource_Index
+                        MapResource(i).ResourceState = Buffer.ReadLong
+                        MapResource(i).X = Buffer.ReadLong
+                        MapResource(i).Y = Buffer.ReadLong
+                    Next
+
+                    Resources_Init = True
+                Else
+                    ReDim MapResource(0 To 1)
+                End If
+            End If
 
 
-        ClearTempTile()
+            ClearTempTile()
 
-        Buffer = Nothing
+            Buffer = Nothing
 
+        End SyncLock
         ' Save the map
         Call SaveMap(MapNum)
 

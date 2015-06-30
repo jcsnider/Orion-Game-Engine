@@ -1,6 +1,7 @@
 ﻿Module modTypes
     ' Public data structures
     Public Map As MapRec
+    Public MapLock As New Object()
     Public Bank As BankRec
     Public TempTile(,) As TempTileRec
     Public Player(0 To MAX_PLAYERS) As PlayerRec

@@ -22,95 +22,91 @@ Partial Class frmEditor_Map
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.scrlPictureX = New System.Windows.Forms.HScrollBar
-        Me.scrlPictureY = New System.Windows.Forms.VScrollBar
-        Me.fraTileSet = New System.Windows.Forms.GroupBox
-        Me.scrlTileSet = New System.Windows.Forms.HScrollBar
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.optBlocks = New System.Windows.Forms.RadioButton
-        Me.optAttributes = New System.Windows.Forms.RadioButton
-        Me.optLayers = New System.Windows.Forms.RadioButton
-        Me.btnProperties = New System.Windows.Forms.Button
-        Me.btnSend = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.fraLayers = New System.Windows.Forms.GroupBox
-        Me.btnFill = New System.Windows.Forms.Button
-        Me.btnClearLayer = New System.Windows.Forms.Button
-        Me.optFringe2 = New System.Windows.Forms.RadioButton
-        Me.optFringe = New System.Windows.Forms.RadioButton
-        Me.optMask2 = New System.Windows.Forms.RadioButton
-        Me.optMask = New System.Windows.Forms.RadioButton
-        Me.optGround = New System.Windows.Forms.RadioButton
-        Me.fraAttributes = New System.Windows.Forms.GroupBox
-        Me.btnClearAttribute = New System.Windows.Forms.Button
-        Me.optSlide = New System.Windows.Forms.RadioButton
-        Me.optTrap = New System.Windows.Forms.RadioButton
-        Me.optHeal = New System.Windows.Forms.RadioButton
-        Me.optBank = New System.Windows.Forms.RadioButton
-        Me.optShop = New System.Windows.Forms.RadioButton
-        Me.optNPCSpawn = New System.Windows.Forms.RadioButton
-        Me.optDoor = New System.Windows.Forms.RadioButton
-        Me.optResource = New System.Windows.Forms.RadioButton
-        Me.optKeyOpen = New System.Windows.Forms.RadioButton
-        Me.optKey = New System.Windows.Forms.RadioButton
-        Me.optNPCAvoid = New System.Windows.Forms.RadioButton
-        Me.optItem = New System.Windows.Forms.RadioButton
-        Me.optWarp = New System.Windows.Forms.RadioButton
-        Me.optBlocked = New System.Windows.Forms.RadioButton
-        Me.pnlBack = New System.Windows.Forms.Panel
-        Me.picBackSelect = New System.Windows.Forms.PictureBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.pnlAttributes = New System.Windows.Forms.Panel
-        Me.fraTrap = New System.Windows.Forms.GroupBox
-        Me.btnTrap = New System.Windows.Forms.Button
-        Me.scrlTrap = New System.Windows.Forms.HScrollBar
-        Me.lblTrap = New System.Windows.Forms.Label
-        Me.fraHeal = New System.Windows.Forms.GroupBox
-        Me.scrlHeal = New System.Windows.Forms.HScrollBar
-        Me.lblHeal = New System.Windows.Forms.Label
-        Me.cmbHeal = New System.Windows.Forms.ComboBox
-        Me.btnHeal = New System.Windows.Forms.Button
-        Me.fraSlide = New System.Windows.Forms.GroupBox
-        Me.cmbSlide = New System.Windows.Forms.ComboBox
-        Me.btnSlide = New System.Windows.Forms.Button
-        Me.fraShop = New System.Windows.Forms.GroupBox
-        Me.cmbShop = New System.Windows.Forms.ComboBox
-        Me.btnShop = New System.Windows.Forms.Button
-        Me.fraNpcSpawn = New System.Windows.Forms.GroupBox
-        Me.lstNpc = New System.Windows.Forms.ComboBox
-        Me.btnNpcSpawn = New System.Windows.Forms.Button
-        Me.scrlNpcDir = New System.Windows.Forms.HScrollBar
-        Me.lblNpcDir = New System.Windows.Forms.Label
-        Me.fraResource = New System.Windows.Forms.GroupBox
-        Me.btnResourceOk = New System.Windows.Forms.Button
-        Me.scrlResource = New System.Windows.Forms.HScrollBar
-        Me.lblResource = New System.Windows.Forms.Label
-        Me.fraKeyOpen = New System.Windows.Forms.GroupBox
-        Me.scrlKeyY = New System.Windows.Forms.HScrollBar
-        Me.lblKeyY = New System.Windows.Forms.Label
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.scrlKeyX = New System.Windows.Forms.HScrollBar
-        Me.lblKeyX = New System.Windows.Forms.Label
-        Me.fraMapKey = New System.Windows.Forms.GroupBox
-        Me.chkMapKey = New System.Windows.Forms.CheckBox
-        Me.picMapKey = New System.Windows.Forms.PictureBox
-        Me.btnMapKey = New System.Windows.Forms.Button
-        Me.scrlMapKey = New System.Windows.Forms.HScrollBar
-        Me.lblMapKey = New System.Windows.Forms.Label
-        Me.fraMapItem = New System.Windows.Forms.GroupBox
-        Me.picMapItem = New System.Windows.Forms.PictureBox
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.scrlMapItemValue = New System.Windows.Forms.HScrollBar
-        Me.scrlMapItem = New System.Windows.Forms.HScrollBar
-        Me.lblMapItem = New System.Windows.Forms.Label
-        Me.fraMapWarp = New System.Windows.Forms.GroupBox
-        Me.btnMapWarp = New System.Windows.Forms.Button
-        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar
-        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar
-        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar
-        Me.lblMapWarpY = New System.Windows.Forms.Label
-        Me.lblMapWarpX = New System.Windows.Forms.Label
-        Me.lblMapWarpMap = New System.Windows.Forms.Label
+        Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
+        Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
+        Me.fraTileSet = New System.Windows.Forms.GroupBox()
+        Me.scrlTileSet = New System.Windows.Forms.HScrollBar()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.optBlocks = New System.Windows.Forms.RadioButton()
+        Me.optAttributes = New System.Windows.Forms.RadioButton()
+        Me.optLayers = New System.Windows.Forms.RadioButton()
+        Me.btnProperties = New System.Windows.Forms.Button()
+        Me.btnSend = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.fraLayers = New System.Windows.Forms.GroupBox()
+        Me.btnFill = New System.Windows.Forms.Button()
+        Me.btnClearLayer = New System.Windows.Forms.Button()
+        Me.optFringe2 = New System.Windows.Forms.RadioButton()
+        Me.optFringe = New System.Windows.Forms.RadioButton()
+        Me.optMask2 = New System.Windows.Forms.RadioButton()
+        Me.optMask = New System.Windows.Forms.RadioButton()
+        Me.optGround = New System.Windows.Forms.RadioButton()
+        Me.fraAttributes = New System.Windows.Forms.GroupBox()
+        Me.btnClearAttribute = New System.Windows.Forms.Button()
+        Me.optTrap = New System.Windows.Forms.RadioButton()
+        Me.optHeal = New System.Windows.Forms.RadioButton()
+        Me.optBank = New System.Windows.Forms.RadioButton()
+        Me.optShop = New System.Windows.Forms.RadioButton()
+        Me.optNPCSpawn = New System.Windows.Forms.RadioButton()
+        Me.optDoor = New System.Windows.Forms.RadioButton()
+        Me.optResource = New System.Windows.Forms.RadioButton()
+        Me.optKeyOpen = New System.Windows.Forms.RadioButton()
+        Me.optKey = New System.Windows.Forms.RadioButton()
+        Me.optNPCAvoid = New System.Windows.Forms.RadioButton()
+        Me.optItem = New System.Windows.Forms.RadioButton()
+        Me.optWarp = New System.Windows.Forms.RadioButton()
+        Me.optBlocked = New System.Windows.Forms.RadioButton()
+        Me.pnlBack = New System.Windows.Forms.Panel()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlAttributes = New System.Windows.Forms.Panel()
+        Me.fraNpcSpawn = New System.Windows.Forms.GroupBox()
+        Me.lstNpc = New System.Windows.Forms.ComboBox()
+        Me.btnNpcSpawn = New System.Windows.Forms.Button()
+        Me.scrlNpcDir = New System.Windows.Forms.HScrollBar()
+        Me.lblNpcDir = New System.Windows.Forms.Label()
+        Me.fraHeal = New System.Windows.Forms.GroupBox()
+        Me.scrlHeal = New System.Windows.Forms.HScrollBar()
+        Me.lblHeal = New System.Windows.Forms.Label()
+        Me.cmbHeal = New System.Windows.Forms.ComboBox()
+        Me.btnHeal = New System.Windows.Forms.Button()
+        Me.fraShop = New System.Windows.Forms.GroupBox()
+        Me.cmbShop = New System.Windows.Forms.ComboBox()
+        Me.btnShop = New System.Windows.Forms.Button()
+        Me.fraResource = New System.Windows.Forms.GroupBox()
+        Me.btnResourceOk = New System.Windows.Forms.Button()
+        Me.scrlResource = New System.Windows.Forms.HScrollBar()
+        Me.lblResource = New System.Windows.Forms.Label()
+        Me.fraKeyOpen = New System.Windows.Forms.GroupBox()
+        Me.scrlKeyY = New System.Windows.Forms.HScrollBar()
+        Me.lblKeyY = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.scrlKeyX = New System.Windows.Forms.HScrollBar()
+        Me.lblKeyX = New System.Windows.Forms.Label()
+        Me.fraMapKey = New System.Windows.Forms.GroupBox()
+        Me.chkMapKey = New System.Windows.Forms.CheckBox()
+        Me.picMapKey = New System.Windows.Forms.PictureBox()
+        Me.btnMapKey = New System.Windows.Forms.Button()
+        Me.scrlMapKey = New System.Windows.Forms.HScrollBar()
+        Me.lblMapKey = New System.Windows.Forms.Label()
+        Me.fraMapItem = New System.Windows.Forms.GroupBox()
+        Me.picMapItem = New System.Windows.Forms.PictureBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.scrlMapItemValue = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapItem = New System.Windows.Forms.HScrollBar()
+        Me.lblMapItem = New System.Windows.Forms.Label()
+        Me.fraMapWarp = New System.Windows.Forms.GroupBox()
+        Me.btnMapWarp = New System.Windows.Forms.Button()
+        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar()
+        Me.lblMapWarpY = New System.Windows.Forms.Label()
+        Me.lblMapWarpX = New System.Windows.Forms.Label()
+        Me.lblMapWarpMap = New System.Windows.Forms.Label()
+        Me.fraTrap = New System.Windows.Forms.GroupBox()
+        Me.btnTrap = New System.Windows.Forms.Button()
+        Me.scrlTrap = New System.Windows.Forms.HScrollBar()
+        Me.lblTrap = New System.Windows.Forms.Label()
         Me.fraTileSet.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.fraLayers.SuspendLayout()
@@ -118,11 +114,9 @@ Partial Class frmEditor_Map
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
-        Me.fraTrap.SuspendLayout()
-        Me.fraHeal.SuspendLayout()
-        Me.fraSlide.SuspendLayout()
-        Me.fraShop.SuspendLayout()
         Me.fraNpcSpawn.SuspendLayout()
+        Me.fraHeal.SuspendLayout()
+        Me.fraShop.SuspendLayout()
         Me.fraResource.SuspendLayout()
         Me.fraKeyOpen.SuspendLayout()
         Me.fraMapKey.SuspendLayout()
@@ -130,6 +124,7 @@ Partial Class frmEditor_Map
         Me.fraMapItem.SuspendLayout()
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraMapWarp.SuspendLayout()
+        Me.fraTrap.SuspendLayout()
         Me.SuspendLayout()
         '
         'scrlPictureX
@@ -327,7 +322,6 @@ Partial Class frmEditor_Map
         'fraAttributes
         '
         Me.fraAttributes.Controls.Add(Me.btnClearAttribute)
-        Me.fraAttributes.Controls.Add(Me.optSlide)
         Me.fraAttributes.Controls.Add(Me.optTrap)
         Me.fraAttributes.Controls.Add(Me.optHeal)
         Me.fraAttributes.Controls.Add(Me.optBank)
@@ -357,17 +351,6 @@ Partial Class frmEditor_Map
         Me.btnClearAttribute.TabIndex = 14
         Me.btnClearAttribute.Text = "Clear"
         Me.btnClearAttribute.UseVisualStyleBackColor = True
-        '
-        'optSlide
-        '
-        Me.optSlide.AutoSize = True
-        Me.optSlide.Location = New System.Drawing.Point(5, 243)
-        Me.optSlide.Name = "optSlide"
-        Me.optSlide.Size = New System.Drawing.Size(48, 17)
-        Me.optSlide.TabIndex = 13
-        Me.optSlide.TabStop = True
-        Me.optSlide.Text = "Slide"
-        Me.optSlide.UseVisualStyleBackColor = True
         '
         'optTrap
         '
@@ -540,58 +523,69 @@ Partial Class frmEditor_Map
         '
         'pnlAttributes
         '
-        Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.Controls.Add(Me.fraHeal)
-        Me.pnlAttributes.Controls.Add(Me.fraSlide)
-        Me.pnlAttributes.Controls.Add(Me.fraShop)
         Me.pnlAttributes.Controls.Add(Me.fraNpcSpawn)
+        Me.pnlAttributes.Controls.Add(Me.fraHeal)
+        Me.pnlAttributes.Controls.Add(Me.fraShop)
         Me.pnlAttributes.Controls.Add(Me.fraResource)
         Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
         Me.pnlAttributes.Controls.Add(Me.fraMapKey)
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
+        Me.pnlAttributes.Controls.Add(Me.fraTrap)
         Me.pnlAttributes.Location = New System.Drawing.Point(487, 6)
         Me.pnlAttributes.Name = "pnlAttributes"
         Me.pnlAttributes.Size = New System.Drawing.Size(482, 470)
         Me.pnlAttributes.TabIndex = 12
         Me.pnlAttributes.Visible = False
         '
-        'fraTrap
+        'fraNpcSpawn
         '
-        Me.fraTrap.Controls.Add(Me.btnTrap)
-        Me.fraTrap.Controls.Add(Me.scrlTrap)
-        Me.fraTrap.Controls.Add(Me.lblTrap)
-        Me.fraTrap.Location = New System.Drawing.Point(131, 137)
-        Me.fraTrap.Name = "fraTrap"
-        Me.fraTrap.Size = New System.Drawing.Size(252, 113)
-        Me.fraTrap.TabIndex = 16
-        Me.fraTrap.TabStop = False
-        Me.fraTrap.Text = "Trap"
+        Me.fraNpcSpawn.Controls.Add(Me.lstNpc)
+        Me.fraNpcSpawn.Controls.Add(Me.btnNpcSpawn)
+        Me.fraNpcSpawn.Controls.Add(Me.scrlNpcDir)
+        Me.fraNpcSpawn.Controls.Add(Me.lblNpcDir)
+        Me.fraNpcSpawn.Location = New System.Drawing.Point(131, 132)
+        Me.fraNpcSpawn.Name = "fraNpcSpawn"
+        Me.fraNpcSpawn.Size = New System.Drawing.Size(252, 158)
+        Me.fraNpcSpawn.TabIndex = 11
+        Me.fraNpcSpawn.TabStop = False
+        Me.fraNpcSpawn.Text = "Npc Spawn"
         '
-        'btnTrap
+        'lstNpc
         '
-        Me.btnTrap.Location = New System.Drawing.Point(80, 67)
-        Me.btnTrap.Name = "btnTrap"
-        Me.btnTrap.Size = New System.Drawing.Size(90, 28)
-        Me.btnTrap.TabIndex = 42
-        Me.btnTrap.Text = "Accept"
-        Me.btnTrap.UseVisualStyleBackColor = True
+        Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.lstNpc.FormattingEnabled = True
+        Me.lstNpc.Location = New System.Drawing.Point(30, 39)
+        Me.lstNpc.Name = "lstNpc"
+        Me.lstNpc.Size = New System.Drawing.Size(192, 21)
+        Me.lstNpc.TabIndex = 37
         '
-        'scrlTrap
+        'btnNpcSpawn
         '
-        Me.scrlTrap.Location = New System.Drawing.Point(32, 38)
-        Me.scrlTrap.Name = "scrlTrap"
-        Me.scrlTrap.Size = New System.Drawing.Size(191, 17)
-        Me.scrlTrap.TabIndex = 41
+        Me.btnNpcSpawn.Location = New System.Drawing.Point(87, 118)
+        Me.btnNpcSpawn.Name = "btnNpcSpawn"
+        Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
+        Me.btnNpcSpawn.TabIndex = 6
+        Me.btnNpcSpawn.Text = "Accept"
+        Me.btnNpcSpawn.UseVisualStyleBackColor = True
         '
-        'lblTrap
+        'scrlNpcDir
         '
-        Me.lblTrap.AutoSize = True
-        Me.lblTrap.Location = New System.Drawing.Point(27, 21)
-        Me.lblTrap.Name = "lblTrap"
-        Me.lblTrap.Size = New System.Drawing.Size(55, 13)
-        Me.lblTrap.TabIndex = 40
-        Me.lblTrap.Text = "Amount: 0"
+        Me.scrlNpcDir.LargeChange = 1
+        Me.scrlNpcDir.Location = New System.Drawing.Point(29, 93)
+        Me.scrlNpcDir.Maximum = 3
+        Me.scrlNpcDir.Name = "scrlNpcDir"
+        Me.scrlNpcDir.Size = New System.Drawing.Size(193, 18)
+        Me.scrlNpcDir.TabIndex = 3
+        '
+        'lblNpcDir
+        '
+        Me.lblNpcDir.AutoSize = True
+        Me.lblNpcDir.Location = New System.Drawing.Point(26, 78)
+        Me.lblNpcDir.Name = "lblNpcDir"
+        Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
+        Me.lblNpcDir.TabIndex = 0
+        Me.lblNpcDir.Text = "Direction: Up"
         '
         'fraHeal
         '
@@ -640,35 +634,6 @@ Partial Class frmEditor_Map
         Me.btnHeal.Text = "Accept"
         Me.btnHeal.UseVisualStyleBackColor = True
         '
-        'fraSlide
-        '
-        Me.fraSlide.Controls.Add(Me.cmbSlide)
-        Me.fraSlide.Controls.Add(Me.btnSlide)
-        Me.fraSlide.Location = New System.Drawing.Point(131, 138)
-        Me.fraSlide.Name = "fraSlide"
-        Me.fraSlide.Size = New System.Drawing.Size(252, 113)
-        Me.fraSlide.TabIndex = 14
-        Me.fraSlide.TabStop = False
-        Me.fraSlide.Text = "Slide"
-        '
-        'cmbSlide
-        '
-        Me.cmbSlide.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSlide.FormattingEnabled = True
-        Me.cmbSlide.Location = New System.Drawing.Point(30, 39)
-        Me.cmbSlide.Name = "cmbSlide"
-        Me.cmbSlide.Size = New System.Drawing.Size(192, 21)
-        Me.cmbSlide.TabIndex = 37
-        '
-        'btnSlide
-        '
-        Me.btnSlide.Location = New System.Drawing.Point(87, 74)
-        Me.btnSlide.Name = "btnSlide"
-        Me.btnSlide.Size = New System.Drawing.Size(90, 28)
-        Me.btnSlide.TabIndex = 6
-        Me.btnSlide.Text = "Accept"
-        Me.btnSlide.UseVisualStyleBackColor = True
-        '
         'fraShop
         '
         Me.fraShop.Controls.Add(Me.cmbShop)
@@ -697,57 +662,6 @@ Partial Class frmEditor_Map
         Me.btnShop.TabIndex = 6
         Me.btnShop.Text = "Accept"
         Me.btnShop.UseVisualStyleBackColor = True
-        '
-        'fraNpcSpawn
-        '
-        Me.fraNpcSpawn.Controls.Add(Me.lstNpc)
-        Me.fraNpcSpawn.Controls.Add(Me.btnNpcSpawn)
-        Me.fraNpcSpawn.Controls.Add(Me.scrlNpcDir)
-        Me.fraNpcSpawn.Controls.Add(Me.lblNpcDir)
-        Me.fraNpcSpawn.Location = New System.Drawing.Point(131, 132)
-        Me.fraNpcSpawn.Name = "fraNpcSpawn"
-        Me.fraNpcSpawn.Size = New System.Drawing.Size(252, 158)
-        Me.fraNpcSpawn.TabIndex = 11
-        Me.fraNpcSpawn.TabStop = False
-        Me.fraNpcSpawn.Text = "Npc Spawn"
-        '
-        'lstNpc
-        '
-        Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.lstNpc.FormattingEnabled = True
-        Me.lstNpc.Location = New System.Drawing.Point(30, 39)
-        Me.lstNpc.Name = "lstNpc"
-        Me.lstNpc.Size = New System.Drawing.Size(192, 21)
-        Me.lstNpc.TabIndex = 37
-        '
-        'btnNpcSpawn
-        '
-        Me.btnNpcSpawn.Location = New System.Drawing.Point(87, 118)
-        Me.btnNpcSpawn.Name = "btnNpcSpawn"
-        Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
-        Me.btnNpcSpawn.TabIndex = 6
-        Me.btnNpcSpawn.Text = "Accept"
-        Me.btnNpcSpawn.UseVisualStyleBackColor = True
-        '
-        'scrlNpcDir
-        '
-        Me.scrlNpcDir.LargeChange = 4
-        Me.scrlNpcDir.Location = New System.Drawing.Point(29, 93)
-        Me.scrlNpcDir.Maximum = 4
-        Me.scrlNpcDir.Minimum = 1
-        Me.scrlNpcDir.Name = "scrlNpcDir"
-        Me.scrlNpcDir.Size = New System.Drawing.Size(193, 18)
-        Me.scrlNpcDir.TabIndex = 3
-        Me.scrlNpcDir.Value = 1
-        '
-        'lblNpcDir
-        '
-        Me.lblNpcDir.AutoSize = True
-        Me.lblNpcDir.Location = New System.Drawing.Point(26, 78)
-        Me.lblNpcDir.Name = "lblNpcDir"
-        Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
-        Me.lblNpcDir.TabIndex = 0
-        Me.lblNpcDir.Text = "Direction: Up"
         '
         'fraResource
         '
@@ -1029,6 +943,43 @@ Partial Class frmEditor_Map
         Me.lblMapWarpMap.TabIndex = 0
         Me.lblMapWarpMap.Text = "Map: 1"
         '
+        'fraTrap
+        '
+        Me.fraTrap.Controls.Add(Me.btnTrap)
+        Me.fraTrap.Controls.Add(Me.scrlTrap)
+        Me.fraTrap.Controls.Add(Me.lblTrap)
+        Me.fraTrap.Location = New System.Drawing.Point(131, 137)
+        Me.fraTrap.Name = "fraTrap"
+        Me.fraTrap.Size = New System.Drawing.Size(252, 113)
+        Me.fraTrap.TabIndex = 16
+        Me.fraTrap.TabStop = False
+        Me.fraTrap.Text = "Trap"
+        '
+        'btnTrap
+        '
+        Me.btnTrap.Location = New System.Drawing.Point(80, 67)
+        Me.btnTrap.Name = "btnTrap"
+        Me.btnTrap.Size = New System.Drawing.Size(90, 28)
+        Me.btnTrap.TabIndex = 42
+        Me.btnTrap.Text = "Accept"
+        Me.btnTrap.UseVisualStyleBackColor = True
+        '
+        'scrlTrap
+        '
+        Me.scrlTrap.Location = New System.Drawing.Point(32, 38)
+        Me.scrlTrap.Name = "scrlTrap"
+        Me.scrlTrap.Size = New System.Drawing.Size(191, 17)
+        Me.scrlTrap.TabIndex = 41
+        '
+        'lblTrap
+        '
+        Me.lblTrap.AutoSize = True
+        Me.lblTrap.Location = New System.Drawing.Point(27, 21)
+        Me.lblTrap.Name = "lblTrap"
+        Me.lblTrap.Size = New System.Drawing.Size(55, 13)
+        Me.lblTrap.TabIndex = 40
+        Me.lblTrap.Text = "Amount: 0"
+        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1061,14 +1012,11 @@ Partial Class frmEditor_Map
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAttributes.ResumeLayout(False)
-        Me.fraTrap.ResumeLayout(False)
-        Me.fraTrap.PerformLayout()
-        Me.fraHeal.ResumeLayout(False)
-        Me.fraHeal.PerformLayout()
-        Me.fraSlide.ResumeLayout(False)
-        Me.fraShop.ResumeLayout(False)
         Me.fraNpcSpawn.ResumeLayout(False)
         Me.fraNpcSpawn.PerformLayout()
+        Me.fraHeal.ResumeLayout(False)
+        Me.fraHeal.PerformLayout()
+        Me.fraShop.ResumeLayout(False)
         Me.fraResource.ResumeLayout(False)
         Me.fraResource.PerformLayout()
         Me.fraKeyOpen.ResumeLayout(False)
@@ -1081,6 +1029,8 @@ Partial Class frmEditor_Map
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraMapWarp.ResumeLayout(False)
         Me.fraMapWarp.PerformLayout()
+        Me.fraTrap.ResumeLayout(False)
+        Me.fraTrap.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1104,7 +1054,6 @@ Partial Class frmEditor_Map
     Friend WithEvents optGround As System.Windows.Forms.RadioButton
     Friend WithEvents pnlBack As System.Windows.Forms.Panel
     Friend WithEvents fraAttributes As System.Windows.Forms.GroupBox
-    Friend WithEvents optSlide As System.Windows.Forms.RadioButton
     Friend WithEvents optTrap As System.Windows.Forms.RadioButton
     Friend WithEvents optHeal As System.Windows.Forms.RadioButton
     Friend WithEvents optBank As System.Windows.Forms.RadioButton
@@ -1166,9 +1115,6 @@ Partial Class frmEditor_Map
     Friend WithEvents lblHeal As System.Windows.Forms.Label
     Friend WithEvents cmbHeal As System.Windows.Forms.ComboBox
     Friend WithEvents btnHeal As System.Windows.Forms.Button
-    Friend WithEvents fraSlide As System.Windows.Forms.GroupBox
-    Friend WithEvents cmbSlide As System.Windows.Forms.ComboBox
-    Friend WithEvents btnSlide As System.Windows.Forms.Button
     Friend WithEvents scrlHeal As System.Windows.Forms.HScrollBar
     Friend WithEvents fraTrap As System.Windows.Forms.GroupBox
     Friend WithEvents btnTrap As System.Windows.Forms.Button

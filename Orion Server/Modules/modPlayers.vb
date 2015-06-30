@@ -14,7 +14,6 @@
             Call JoinGame(Index)
             Call AddLog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".", PLAYER_LOG)
             Call TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
-            Call UpdateCaption()
         End If
     End Sub
     Function GetPlayerName(ByVal Index As Long) As String
@@ -994,12 +993,14 @@
         If Not IsPlaying(Index) Then Exit Function
         If itemNum <= 0 Or itemNum > MAX_ITEMS Then Exit Function
 
-        For i = 1 To MAX_BANK
-            If GetPlayerBankItemNum(Index, i) = itemNum Then
-                FindOpenBankSlot = i
-                Exit Function
-            End If
-        Next i
+        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+            For i = 1 To MAX_BANK
+                If GetPlayerBankItemNum(Index, i) = itemNum Then
+                    FindOpenBankSlot = i
+                    Exit Function
+                End If
+            Next i
+        End If
 
         For i = 1 To MAX_BANK
             If GetPlayerBankItemNum(Index, i) = 0 Then

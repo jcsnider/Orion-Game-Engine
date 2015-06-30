@@ -118,8 +118,6 @@ Module modText
                                     DrawText(tX, tY, "H", (Color.Green), GameWindow)
                                 Case TILE_TYPE_TRAP
                                     DrawText(tX, tY, "T", (Color.Red), GameWindow)
-                                Case TILE_TYPE_SLIDE
-                                    DrawText(tX, tY, "S", (Color.Cyan), GameWindow)
                             End Select
                         End With
                     End If

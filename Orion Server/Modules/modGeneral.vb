@@ -222,7 +222,6 @@ Module modGeneral
     End Sub
     Sub UpdateCaption()
         frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & CStr(Options.Port) & "> (" & GetPlayersOnline() & " Players Online" & ")"
-        Exit Sub
     End Sub
 
     Sub DestroyServer()

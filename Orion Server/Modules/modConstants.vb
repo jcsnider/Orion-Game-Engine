@@ -95,7 +95,6 @@
     Public Const TILE_TYPE_BANK As Byte = 11
     Public Const TILE_TYPE_HEAL As Byte = 12
     Public Const TILE_TYPE_TRAP As Byte = 13
-    Public Const TILE_TYPE_SLIDE As Byte = 14
 
     ' Item constants
     Public Const ITEM_TYPE_NONE As Byte = 0

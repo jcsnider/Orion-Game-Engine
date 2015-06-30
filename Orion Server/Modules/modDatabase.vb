@@ -759,6 +759,7 @@ Module modDataBase
         Dim i As Long
         Shop(Index) = Nothing
         Shop(Index).Name = vbNullString
+        ReDim Shop(Index).TradeItem(MAX_TRADES)
         For i = 0 To MAX_SHOPS
             ReDim Shop(i).TradeItem(0 To MAX_TRADES)
         Next
@@ -1362,6 +1363,11 @@ Module modDataBase
         Dim strContents As String
         Dim objReader As StreamReader
         strContents = ""
+        If Not File.Exists(FullPath) Then
+            Dim fs As FileStream = File.Create(FullPath)
+            fs.Close()
+            fs.Dispose()
+        End If
         Try
             objReader = New StreamReader(FullPath)
             strContents = objReader.ReadToEnd()

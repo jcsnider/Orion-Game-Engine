@@ -201,29 +201,31 @@ Module modDataBase
         Player(Index).YOffset = 0
     End Sub
     Sub ClearMap()
-        Map.Name = vbNullString
-        Map.tileset = 1
-        Map.MaxX = MAX_MAPX
-        Map.MaxY = MAX_MAPY
-        Map.BootMap = 0
-        Map.BootX = 0
-        Map.BootY = 0
-        Map.Down = 0
-        Map.Left = 0
-        Map.Moral = 0
-        Map.Music = ""
-        ReDim Map.Npc(0 To MAX_MAP_NPCS)
-        Map.Revision = 0
-        Map.Right = 0
-        Map.Up = 0
-        ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
-                For i = 0 To MapLayer.Layer_Count - 1
-                    ReDim Map.Tile(x, y).Layer(i)
+        SyncLock MapLock
+            Map.Name = vbNullString
+            Map.tileset = 1
+            Map.MaxX = MAX_MAPX
+            Map.MaxY = MAX_MAPY
+            Map.BootMap = 0
+            Map.BootX = 0
+            Map.BootY = 0
+            Map.Down = 0
+            Map.Left = 0
+            Map.Moral = 0
+            Map.Music = ""
+            ReDim Map.Npc(0 To MAX_MAP_NPCS)
+            Map.Revision = 0
+            Map.Right = 0
+            Map.Up = 0
+            ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
+            For x = 0 To Map.MaxX
+                For y = 0 To Map.MaxY
+                    For i = 0 To MapLayer.Layer_Count - 1
+                        ReDim Map.Tile(x, y).Layer(i)
+                    Next
                 Next
             Next
-        Next
+        End SyncLock
     End Sub
     Sub ClearMapItems()
         Dim i As Long
@@ -641,6 +643,7 @@ Module modDataBase
         Shop(Index) = Nothing
         Shop(Index) = New ShopRec
         Shop(Index).Name = ""
+        ReDim Shop(Index).TradeItem(MAX_TRADES)
     End Sub
 
     Sub ClearShops()

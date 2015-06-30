@@ -1325,7 +1325,7 @@
 
         filename = Application.StartupPath & "\data\banlist.txt"
 
-        Kill(filename)
+        If System.IO.File.Exists(filename) Then Kill(filename)
         Call PlayerMsg(Index, "Ban list destroyed.")
         Buffer = Nothing
     End Sub

@@ -67,7 +67,7 @@ Module modServerTCP
             buffer = New ByteBuffer
             buffer.WriteLong((UBound(Data) - LBound(Data)) + 1)
             buffer.WriteBytes(Data)
-            Clients(Index).myStream.Write(buffer.ToArray, 0, buffer.ToArray.Length)
+            Clients(Index).myStream.BeginWrite(buffer.ToArray, 0, buffer.ToArray.Length, Nothing, Nothing)
             buffer = Nothing
         Catch ex As Exception
 
@@ -250,7 +250,6 @@ Module modServerTCP
                 Call TextAdd("Connection from " & GetPlayerIP(Index) & " has been terminated.")
                 Clients(Index).Socket.Close()
                 Clients(Index).Socket = Nothing
-                Call UpdateCaption()
                 Call ClearPlayer(Index)
                 NeedToUpDatePlayerList = True
             End If
