@@ -22,51 +22,50 @@ Partial Class frmServer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServer))
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.lstView = New System.Windows.Forms.ListView
-        Me.colIndex = New System.Windows.Forms.ColumnHeader
-        Me.colIPAddress = New System.Windows.Forms.ColumnHeader
-        Me.colAccount = New System.Windows.Forms.ColumnHeader
-        Me.colCharacter = New System.Windows.Forms.ColumnHeader
-        Me.MakeAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoveAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.KickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.BanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.txtChat = New System.Windows.Forms.TextBox
-        Me.txtText = New System.Windows.Forms.TextBox
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.chkServerLog = New System.Windows.Forms.CheckBox
-        Me.btnExit = New System.Windows.Forms.Button
-        Me.btnShutDown = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.btnReloadAnimations = New System.Windows.Forms.Button
-        Me.btnReloadResources = New System.Windows.Forms.Button
-        Me.btnReloadItems = New System.Windows.Forms.Button
-        Me.btnReloadNPCs = New System.Windows.Forms.Button
-        Me.btnReloadShops = New System.Windows.Forms.Button
-        Me.btnReloadSpells = New System.Windows.Forms.Button
-        Me.btnReloadMaps = New System.Windows.Forms.Button
-        Me.btnReloadClasses = New System.Windows.Forms.Button
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.TimedShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CustomMessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.components = New System.ComponentModel.Container()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.lstView = New System.Windows.Forms.ListView()
+        Me.colIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colIPAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colAccount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colCharacter = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.MakeAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtChat = New System.Windows.Forms.TextBox()
+        Me.txtText = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkServerLog = New System.Windows.Forms.CheckBox()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.btnShutDown = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnReloadAnimations = New System.Windows.Forms.Button()
+        Me.btnReloadResources = New System.Windows.Forms.Button()
+        Me.btnReloadItems = New System.Windows.Forms.Button()
+        Me.btnReloadNPCs = New System.Windows.Forms.Button()
+        Me.btnReloadShops = New System.Windows.Forms.Button()
+        Me.btnReloadSpells = New System.Windows.Forms.Button()
+        Me.btnReloadMaps = New System.Windows.Forms.Button()
+        Me.btnReloadClasses = New System.Windows.Forms.Button()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimedShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomMessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.lstviewmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.KickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.DisconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.BanToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.MakeAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoveAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.KickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BanToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MakeAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.notifyMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ShowServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ShowServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrUpdatePlayerList = New System.Windows.Forms.Timer(Me.components)
         Me.TabPage2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -86,7 +85,7 @@ Partial Class frmServer
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(517, 231)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Players"
+        Me.TabPage2.Text = "Joueurs"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'lstView
@@ -110,42 +109,42 @@ Partial Class frmServer
         '
         'colIPAddress
         '
-        Me.colIPAddress.Text = "IP Address"
+        Me.colIPAddress.Text = "Adresse IP"
         Me.colIPAddress.Width = 150
         '
         'colAccount
         '
-        Me.colAccount.Text = "Account"
+        Me.colAccount.Text = "Compte"
         Me.colAccount.Width = 140
         '
         'colCharacter
         '
-        Me.colCharacter.Text = "Character"
+        Me.colCharacter.Text = "Personnage"
         Me.colCharacter.Width = 140
         '
         'MakeAdminToolStripMenuItem
         '
         Me.MakeAdminToolStripMenuItem.Name = "MakeAdminToolStripMenuItem"
         Me.MakeAdminToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.MakeAdminToolStripMenuItem.Text = "Make Admin"
+        Me.MakeAdminToolStripMenuItem.Text = "Mettre les droit administrateur"
         '
         'RemoveAdminToolStripMenuItem
         '
         Me.RemoveAdminToolStripMenuItem.Name = "RemoveAdminToolStripMenuItem"
         Me.RemoveAdminToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.RemoveAdminToolStripMenuItem.Text = "Remove Admin"
+        Me.RemoveAdminToolStripMenuItem.Text = "Supprimer les droits administrateur"
         '
         'KickToolStripMenuItem
         '
         Me.KickToolStripMenuItem.Name = "KickToolStripMenuItem"
         Me.KickToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.KickToolStripMenuItem.Text = "Kick"
+        Me.KickToolStripMenuItem.Text = "Kicker"
         '
         'BanToolStripMenuItem
         '
         Me.BanToolStripMenuItem.Name = "BanToolStripMenuItem"
         Me.BanToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.BanToolStripMenuItem.Text = "Ban"
+        Me.BanToolStripMenuItem.Text = "Bannir"
         '
         'TabControl1
         '
@@ -196,7 +195,7 @@ Partial Class frmServer
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(517, 231)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Control"
+        Me.TabPage3.Text = "Controle"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -209,16 +208,16 @@ Partial Class frmServer
         Me.GroupBox2.Size = New System.Drawing.Size(121, 122)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Server"
+        Me.GroupBox2.Text = "Serveur"
         '
         'chkServerLog
         '
         Me.chkServerLog.AutoSize = True
         Me.chkServerLog.Location = New System.Drawing.Point(6, 92)
         Me.chkServerLog.Name = "chkServerLog"
-        Me.chkServerLog.Size = New System.Drawing.Size(78, 17)
+        Me.chkServerLog.Size = New System.Drawing.Size(97, 17)
         Me.chkServerLog.TabIndex = 11
-        Me.chkServerLog.Text = "Server Log"
+        Me.chkServerLog.Text = "Log du serveur"
         Me.chkServerLog.UseVisualStyleBackColor = True
         '
         'btnExit
@@ -227,7 +226,7 @@ Partial Class frmServer
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(109, 31)
         Me.btnExit.TabIndex = 10
-        Me.btnExit.Text = "Exit"
+        Me.btnExit.Text = "Quitter"
         Me.btnExit.UseVisualStyleBackColor = True
         '
         'btnShutDown
@@ -236,7 +235,7 @@ Partial Class frmServer
         Me.btnShutDown.Name = "btnShutDown"
         Me.btnShutDown.Size = New System.Drawing.Size(109, 31)
         Me.btnShutDown.TabIndex = 9
-        Me.btnShutDown.Text = "ShutDown"
+        Me.btnShutDown.Text = "Eteindre"
         Me.btnShutDown.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -254,7 +253,7 @@ Partial Class frmServer
         Me.GroupBox1.Size = New System.Drawing.Size(186, 207)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Reload"
+        Me.GroupBox1.Text = "Recharger"
         '
         'btnReloadAnimations
         '
@@ -271,7 +270,7 @@ Partial Class frmServer
         Me.btnReloadResources.Name = "btnReloadResources"
         Me.btnReloadResources.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadResources.TabIndex = 6
-        Me.btnReloadResources.Text = "Resources"
+        Me.btnReloadResources.Text = "Ressources"
         Me.btnReloadResources.UseVisualStyleBackColor = True
         '
         'btnReloadItems
@@ -280,7 +279,7 @@ Partial Class frmServer
         Me.btnReloadItems.Name = "btnReloadItems"
         Me.btnReloadItems.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadItems.TabIndex = 5
-        Me.btnReloadItems.Text = "Items"
+        Me.btnReloadItems.Text = "Objets"
         Me.btnReloadItems.UseVisualStyleBackColor = True
         '
         'btnReloadNPCs
@@ -289,7 +288,7 @@ Partial Class frmServer
         Me.btnReloadNPCs.Name = "btnReloadNPCs"
         Me.btnReloadNPCs.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadNPCs.TabIndex = 4
-        Me.btnReloadNPCs.Text = "NPCs"
+        Me.btnReloadNPCs.Text = "PNJ"
         Me.btnReloadNPCs.UseVisualStyleBackColor = True
         '
         'btnReloadShops
@@ -298,7 +297,7 @@ Partial Class frmServer
         Me.btnReloadShops.Name = "btnReloadShops"
         Me.btnReloadShops.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadShops.TabIndex = 3
-        Me.btnReloadShops.Text = "Shops"
+        Me.btnReloadShops.Text = "Magasins"
         Me.btnReloadShops.UseVisualStyleBackColor = True
         '
         'btnReloadSpells
@@ -307,7 +306,7 @@ Partial Class frmServer
         Me.btnReloadSpells.Name = "btnReloadSpells"
         Me.btnReloadSpells.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadSpells.TabIndex = 2
-        Me.btnReloadSpells.Text = "Spells"
+        Me.btnReloadSpells.Text = "Magies"
         Me.btnReloadSpells.UseVisualStyleBackColor = True
         '
         'btnReloadMaps
@@ -316,7 +315,7 @@ Partial Class frmServer
         Me.btnReloadMaps.Name = "btnReloadMaps"
         Me.btnReloadMaps.Size = New System.Drawing.Size(83, 31)
         Me.btnReloadMaps.TabIndex = 1
-        Me.btnReloadMaps.Text = "Maps"
+        Me.btnReloadMaps.Text = "Cartes"
         Me.btnReloadMaps.UseVisualStyleBackColor = True
         '
         'btnReloadClasses
@@ -332,26 +331,26 @@ Partial Class frmServer
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
-        Me.ToolStripMenuItem1.Text = "Show Server"
+        Me.ToolStripMenuItem1.Text = "Afficher le serveur"
         '
         'TimedShutdownToolStripMenuItem
         '
         Me.TimedShutdownToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomMessageToolStripMenuItem})
         Me.TimedShutdownToolStripMenuItem.Name = "TimedShutdownToolStripMenuItem"
         Me.TimedShutdownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.TimedShutdownToolStripMenuItem.Text = "Timed Shutdown"
+        Me.TimedShutdownToolStripMenuItem.Text = "Arret programmé"
         '
         'CustomMessageToolStripMenuItem
         '
         Me.CustomMessageToolStripMenuItem.Name = "CustomMessageToolStripMenuItem"
         Me.CustomMessageToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.CustomMessageToolStripMenuItem.Text = "Custom Message?"
+        Me.CustomMessageToolStripMenuItem.Text = "Message personnalisé ?"
         '
         'ShutdownToolStripMenuItem
         '
         Me.ShutdownToolStripMenuItem.Name = "ShutdownToolStripMenuItem"
         Me.ShutdownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ShutdownToolStripMenuItem.Text = "Shutdown"
+        Me.ShutdownToolStripMenuItem.Text = "Arret"
         '
         'NotifyIcon1
         '
@@ -362,37 +361,37 @@ Partial Class frmServer
         '
         Me.lstviewmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KickToolStripMenuItem1, Me.DisconnectToolStripMenuItem, Me.BanToolStripMenuItem1, Me.MakeAdminToolStripMenuItem1, Me.RemoveAdminToolStripMenuItem1})
         Me.lstviewmenu.Name = "ContextMenuStrip1"
-        Me.lstviewmenu.Size = New System.Drawing.Size(157, 114)
+        Me.lstviewmenu.Size = New System.Drawing.Size(265, 114)
         '
         'KickToolStripMenuItem1
         '
         Me.KickToolStripMenuItem1.Name = "KickToolStripMenuItem1"
         Me.KickToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
-        Me.KickToolStripMenuItem1.Text = "Kick"
+        Me.KickToolStripMenuItem1.Text = "Kicker"
         '
         'DisconnectToolStripMenuItem
         '
         Me.DisconnectToolStripMenuItem.Name = "DisconnectToolStripMenuItem"
         Me.DisconnectToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.DisconnectToolStripMenuItem.Text = "Disconnect"
+        Me.DisconnectToolStripMenuItem.Text = "Déconnecter"
         '
         'BanToolStripMenuItem1
         '
         Me.BanToolStripMenuItem1.Name = "BanToolStripMenuItem1"
-        Me.BanToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
-        Me.BanToolStripMenuItem1.Text = "Ban"
+        Me.BanToolStripMenuItem1.Size = New System.Drawing.Size(240, 22)
+        Me.BanToolStripMenuItem1.Text = "Bannir"
         '
         'MakeAdminToolStripMenuItem1
         '
         Me.MakeAdminToolStripMenuItem1.Name = "MakeAdminToolStripMenuItem1"
-        Me.MakeAdminToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
-        Me.MakeAdminToolStripMenuItem1.Text = "Make Admin"
+        Me.MakeAdminToolStripMenuItem1.Size = New System.Drawing.Size(264, 22)
+        Me.MakeAdminToolStripMenuItem1.Text = "Donner les droits Administrateur"
         '
         'RemoveAdminToolStripMenuItem1
         '
         Me.RemoveAdminToolStripMenuItem1.Name = "RemoveAdminToolStripMenuItem1"
-        Me.RemoveAdminToolStripMenuItem1.Size = New System.Drawing.Size(156, 22)
-        Me.RemoveAdminToolStripMenuItem1.Text = "Remove Admin"
+        Me.RemoveAdminToolStripMenuItem1.Size = New System.Drawing.Size(264, 22)
+        Me.RemoveAdminToolStripMenuItem1.Text = "Supprimer les droits administrateurs"
         '
         'notifyMenu
         '
@@ -404,20 +403,19 @@ Partial Class frmServer
         '
         Me.ShowServerToolStripMenuItem.Name = "ShowServerToolStripMenuItem"
         Me.ShowServerToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ShowServerToolStripMenuItem.Text = "Show Server"
+        Me.ShowServerToolStripMenuItem.Text = "Afficher le serveur"
         '
         'TimedShutdownToolStripMenuItem1
         '
         Me.TimedShutdownToolStripMenuItem1.Name = "TimedShutdownToolStripMenuItem1"
         Me.TimedShutdownToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
-        Me.TimedShutdownToolStripMenuItem1.Text = "Timed Shutdown"
+        Me.TimedShutdownToolStripMenuItem1.Text = "Arret programmé"
         '
         'ShutdownToolStripMenuItem1
         '
         Me.ShutdownToolStripMenuItem1.Name = "ShutdownToolStripMenuItem1"
         Me.ShutdownToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
-        Me.ShutdownToolStripMenuItem1.Text = "Shutdown"
-
+        Me.ShutdownToolStripMenuItem1.Text = "Arret"
         '
         'tmrUpdatePlayerList
         '
@@ -433,7 +431,7 @@ Partial Class frmServer
         Me.MaximizeBox = False
         Me.Name = "frmServer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Server"
+        Me.Text = "Serveur"
         Me.TabPage2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
