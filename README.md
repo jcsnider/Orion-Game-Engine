@@ -1,37 +1,39 @@
 Orion Game Engine
 =================
 
-Simple 2D ORPG Game Engine written in VB.Net
+Simple Editeur de ORPG en 2D écrit en VB.Net
 
-Home: http://www.ascensionforums.com
+Site officiel: http://www.ascensionforums.com
 
-What is it?
+Qu'est-ce que c'est?
 ===========
-This is a simple, tilebased 2D ORPG game engine. It features a client and server application setup with a basic GUI on both ends.
+Ceci est un moteur simple, tilebased 2D jeu ORPG. Il dispose d'une configuration client et serveur d'applications avec une interface graphique de base.
 
-Game Features:
+Caractéristiques du jeu:
 ==============
-Basic Character Creation/Class Selection
-Movement/Attacking
-NPC/Computer Characters for attacking
-Items & Spells
+Création de personnage et de classe
+Mouvement / Attaquer
+PNJ / informatiques pour attaquer
+Objets & Sorts
 
-Creation Features:
+Caractéristiques de création:
 ==================
-The client has editors for the world (maps), items, spells, animations, npcs, and more from the in game admin panel.
+Le client dispose d'éditeurs pour le monde (cartes), objets, sorts, des animations, des PNJ, et plus encore depuis le panneau d'administration dans le jeu.
 
-How do I use this software?
+Comment puis-je utiliser ce logiciel?
 ===========================
-If you are a programmer then you will probably prefer to compile the most recent version from source. Download the engine here, open up the solution in Visual Studio compile both projects and start the client and server application. They should connect automatically. IP and Port options are stored in the root/data (files)/config.ini files.
+Si vous êtes un programmeur alors vous aurez probablement préférez compiler la version la plus récente de la source. Télécharger ici le moteur, ouvrir la solution dans Visual Studio compiler les deux projets et de lancer l'application client et le serveur. Ils doivent se connecter automatiquement. Des options IP et le port sont stockés dans la racine / données (fichiers) de fichiers /config.ini.
 
-How do I access the editors?
+Comment puis-je accéder à des éditeurs?
 ============================
-Log into the game with the client. On the server, open the player list, right click on your character and promote yourself to an admin. Go back to the client and tap F1 for each of the editor options.
+Connectez-vous au jeu avec le client. Sur le serveur, ouvrez la liste des joueurs, un clic droit sur votre personnage et vous encourager à un admin. Aller vers le client et appuyez sur F1 pour chacune des options de l'éditeur.
 
-Support & Updates:
+Support & Mises à jour:
 ==================
-The home for this engine is http://ascensionforums.com if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them with the issue tracker.
+La maison de ce moteur est http://ascensionforums.com si vous avez besoin de soutien ou des conseils dans la création de jeux se sentent libres de nous rendre visite. Si vous trouvez des bugs se sentent libres de les signaler à l'issue tracker.
 
-We do have some updates planned for this engine. At this point in time my friend and colleague Joe (aka Kibbelz/Irokaiser) and I will be periodically releasing basic features and bug fixes for this engine. 
+Nous avons quelques mises à jour prévues pour ce moteur. A ce moment mon ami et collègue Joe (aka Kibbelz / Irokaiser) et moi-même publierons régulièrement les fonctions de base et des corrections de bugs pour ce moteur.
 
-Right now Orion is lacking features but it is a great base for programmers to sculpt into their own vision, we want to keep it that way so I wouldn't expect a fully featured game creation kit to form from this anytime soon.
+À l'heure actuelle Orion manque de fonctionnalités, mais il est une base idéale pour les programmeurs de sculpter dans leur propre vision, nous voulons que cela continue je ne voudrais pas s'attendre à un kit de création de jeu entièrement en vedette pour former de ce sitôt.
+
+Ceci est une traduction Française du logiciel Orion. Cette traduction a été fait par Jérémy Colombier. Le jeu reste la propriété de ascenciongamedev
