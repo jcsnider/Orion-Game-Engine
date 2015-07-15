@@ -30,7 +30,7 @@ Connectez-vous au jeu avec le client. Sur le serveur, ouvrez la liste des joueur
 
 Support & Mises à jour:
 ==================
-La maison de ce moteur est http://ascensionforums.com si vous avez besoin de soutien ou des conseils dans la création de jeux se sentent libres de nous rendre visite. Si vous trouvez des bugs se sentent libres de les signaler à l'issue tracker.
+Le site officiel de ce moteur est http://ascensionforums.com. Si vous avez besoin de soutien ou des conseils dans la création de jeux n'hésitez pas. Si vous trouvez des bugs vous êtes libre de les signaler.
 
 Nous avons quelques mises à jour prévues pour ce moteur. A ce moment mon ami et collègue Joe (aka Kibbelz / Irokaiser) et moi-même publierons régulièrement les fonctions de base et des corrections de bugs pour ce moteur.
 
