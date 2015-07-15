@@ -24,9 +24,9 @@ Comment puis-je utiliser ce logiciel?
 ===========================
 Si vous êtes un programmeur alors vous aurez probablement préférez compiler la version la plus récente de la source. Télécharger ici le moteur, ouvrir la solution dans Visual Studio compiler les deux projets et de lancer l'application client et le serveur. Ils doivent se connecter automatiquement. Des options IP et le port sont stockés dans la racine / données (fichiers) de fichiers /config.ini.
 
-Comment puis-je accéder à des éditeurs?
+Comment puis-je accéder à l'éditeur ?
 ============================
-Connectez-vous au jeu avec le client. Sur le serveur, ouvrez la liste des joueurs, un clic droit sur votre personnage et vous encourager à un admin. Aller vers le client et appuyez sur F1 pour chacune des options de l'éditeur.
+Connectez-vous au jeu avec le client. Sur le serveur, ouvrez la liste des joueurs, un clic droit sur votre personnage et vous donner les droit admin. Allez sur le client et appuyez sur F1.
 
 Support & Mises à jour:
 ==================
