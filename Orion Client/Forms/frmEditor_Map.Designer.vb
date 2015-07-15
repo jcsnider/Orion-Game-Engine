@@ -178,10 +178,10 @@ Partial Class frmEditor_Map
         Me.optBlocks.AutoSize = True
         Me.optBlocks.Location = New System.Drawing.Point(6, 65)
         Me.optBlocks.Name = "optBlocks"
-        Me.optBlocks.Size = New System.Drawing.Size(73, 17)
+        Me.optBlocks.Size = New System.Drawing.Size(83, 17)
         Me.optBlocks.TabIndex = 2
         Me.optBlocks.TabStop = True
-        Me.optBlocks.Text = "Dir Blocks"
+        Me.optBlocks.Text = "Dir. Bloquée"
         Me.optBlocks.UseVisualStyleBackColor = True
         '
         'optAttributes
@@ -189,10 +189,10 @@ Partial Class frmEditor_Map
         Me.optAttributes.AutoSize = True
         Me.optAttributes.Location = New System.Drawing.Point(6, 42)
         Me.optAttributes.Name = "optAttributes"
-        Me.optAttributes.Size = New System.Drawing.Size(69, 17)
+        Me.optAttributes.Size = New System.Drawing.Size(63, 17)
         Me.optAttributes.TabIndex = 1
         Me.optAttributes.TabStop = True
-        Me.optAttributes.Text = "Attributes"
+        Me.optAttributes.Text = "Attributs"
         Me.optAttributes.UseVisualStyleBackColor = True
         '
         'optLayers
@@ -200,10 +200,10 @@ Partial Class frmEditor_Map
         Me.optLayers.AutoSize = True
         Me.optLayers.Location = New System.Drawing.Point(6, 19)
         Me.optLayers.Name = "optLayers"
-        Me.optLayers.Size = New System.Drawing.Size(56, 17)
+        Me.optLayers.Size = New System.Drawing.Size(62, 17)
         Me.optLayers.TabIndex = 0
         Me.optLayers.TabStop = True
-        Me.optLayers.Text = "Layers"
+        Me.optLayers.Text = "Couche"
         Me.optLayers.UseVisualStyleBackColor = True
         '
         'btnProperties
@@ -212,7 +212,7 @@ Partial Class frmEditor_Map
         Me.btnProperties.Name = "btnProperties"
         Me.btnProperties.Size = New System.Drawing.Size(180, 26)
         Me.btnProperties.TabIndex = 5
-        Me.btnProperties.Text = "Properties"
+        Me.btnProperties.Text = "Propriété"
         Me.btnProperties.UseVisualStyleBackColor = True
         '
         'btnSend
@@ -221,7 +221,7 @@ Partial Class frmEditor_Map
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(109, 24)
         Me.btnSend.TabIndex = 6
-        Me.btnSend.Text = "Send"
+        Me.btnSend.Text = "Envoyer"
         Me.btnSend.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -230,7 +230,7 @@ Partial Class frmEditor_Map
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(103, 24)
         Me.btnCancel.TabIndex = 7
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'fraLayers
@@ -340,7 +340,7 @@ Partial Class frmEditor_Map
         Me.fraAttributes.Size = New System.Drawing.Size(103, 338)
         Me.fraAttributes.TabIndex = 10
         Me.fraAttributes.TabStop = False
-        Me.fraAttributes.Text = "Attributes"
+        Me.fraAttributes.Text = "Attributs"
         Me.fraAttributes.Visible = False
         '
         'btnClearAttribute
@@ -349,7 +349,7 @@ Partial Class frmEditor_Map
         Me.btnClearAttribute.Name = "btnClearAttribute"
         Me.btnClearAttribute.Size = New System.Drawing.Size(91, 25)
         Me.btnClearAttribute.TabIndex = 14
-        Me.btnClearAttribute.Text = "Clear"
+        Me.btnClearAttribute.Text = "Nettoyer"
         Me.btnClearAttribute.UseVisualStyleBackColor = True
         '
         'optTrap
@@ -357,10 +357,10 @@ Partial Class frmEditor_Map
         Me.optTrap.AutoSize = True
         Me.optTrap.Location = New System.Drawing.Point(5, 227)
         Me.optTrap.Name = "optTrap"
-        Me.optTrap.Size = New System.Drawing.Size(47, 17)
+        Me.optTrap.Size = New System.Drawing.Size(52, 17)
         Me.optTrap.TabIndex = 12
         Me.optTrap.TabStop = True
-        Me.optTrap.Text = "Trap"
+        Me.optTrap.Text = "Piège"
         Me.optTrap.UseVisualStyleBackColor = True
         '
         'optHeal
@@ -368,10 +368,10 @@ Partial Class frmEditor_Map
         Me.optHeal.AutoSize = True
         Me.optHeal.Location = New System.Drawing.Point(5, 211)
         Me.optHeal.Name = "optHeal"
-        Me.optHeal.Size = New System.Drawing.Size(47, 17)
+        Me.optHeal.Size = New System.Drawing.Size(46, 17)
         Me.optHeal.TabIndex = 11
         Me.optHeal.TabStop = True
-        Me.optHeal.Text = "Heal"
+        Me.optHeal.Text = "Soin"
         Me.optHeal.UseVisualStyleBackColor = True
         '
         'optBank
@@ -379,10 +379,10 @@ Partial Class frmEditor_Map
         Me.optBank.AutoSize = True
         Me.optBank.Location = New System.Drawing.Point(5, 195)
         Me.optBank.Name = "optBank"
-        Me.optBank.Size = New System.Drawing.Size(50, 17)
+        Me.optBank.Size = New System.Drawing.Size(62, 17)
         Me.optBank.TabIndex = 10
         Me.optBank.TabStop = True
-        Me.optBank.Text = "Bank"
+        Me.optBank.Text = "Banque"
         Me.optBank.UseVisualStyleBackColor = True
         '
         'optShop
@@ -390,10 +390,10 @@ Partial Class frmEditor_Map
         Me.optShop.AutoSize = True
         Me.optShop.Location = New System.Drawing.Point(5, 177)
         Me.optShop.Name = "optShop"
-        Me.optShop.Size = New System.Drawing.Size(50, 17)
+        Me.optShop.Size = New System.Drawing.Size(65, 17)
         Me.optShop.TabIndex = 9
         Me.optShop.TabStop = True
-        Me.optShop.Text = "Shop"
+        Me.optShop.Text = "Magasin"
         Me.optShop.UseVisualStyleBackColor = True
         '
         'optNPCSpawn
@@ -401,10 +401,10 @@ Partial Class frmEditor_Map
         Me.optNPCSpawn.AutoSize = True
         Me.optNPCSpawn.Location = New System.Drawing.Point(5, 160)
         Me.optNPCSpawn.Name = "optNPCSpawn"
-        Me.optNPCSpawn.Size = New System.Drawing.Size(83, 17)
+        Me.optNPCSpawn.Size = New System.Drawing.Size(81, 17)
         Me.optNPCSpawn.TabIndex = 8
         Me.optNPCSpawn.TabStop = True
-        Me.optNPCSpawn.Text = "NPC Spawn"
+        Me.optNPCSpawn.Text = "PNJ Spawn"
         Me.optNPCSpawn.UseVisualStyleBackColor = True
         '
         'optDoor
@@ -412,10 +412,10 @@ Partial Class frmEditor_Map
         Me.optDoor.AutoSize = True
         Me.optDoor.Location = New System.Drawing.Point(5, 143)
         Me.optDoor.Name = "optDoor"
-        Me.optDoor.Size = New System.Drawing.Size(48, 17)
+        Me.optDoor.Size = New System.Drawing.Size(50, 17)
         Me.optDoor.TabIndex = 7
         Me.optDoor.TabStop = True
-        Me.optDoor.Text = "Door"
+        Me.optDoor.Text = "Porte"
         Me.optDoor.UseVisualStyleBackColor = True
         '
         'optResource
@@ -434,10 +434,10 @@ Partial Class frmEditor_Map
         Me.optKeyOpen.AutoSize = True
         Me.optKeyOpen.Location = New System.Drawing.Point(5, 110)
         Me.optKeyOpen.Name = "optKeyOpen"
-        Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
+        Me.optKeyOpen.Size = New System.Drawing.Size(79, 17)
         Me.optKeyOpen.TabIndex = 5
         Me.optKeyOpen.TabStop = True
-        Me.optKeyOpen.Text = "Key Open"
+        Me.optKeyOpen.Text = "Clé ouverte"
         Me.optKeyOpen.UseVisualStyleBackColor = True
         '
         'optKey
@@ -445,10 +445,10 @@ Partial Class frmEditor_Map
         Me.optKey.AutoSize = True
         Me.optKey.Location = New System.Drawing.Point(5, 92)
         Me.optKey.Name = "optKey"
-        Me.optKey.Size = New System.Drawing.Size(43, 17)
+        Me.optKey.Size = New System.Drawing.Size(40, 17)
         Me.optKey.TabIndex = 4
         Me.optKey.TabStop = True
-        Me.optKey.Text = "Key"
+        Me.optKey.Text = "Clé"
         Me.optKey.UseVisualStyleBackColor = True
         '
         'optNPCAvoid
@@ -456,10 +456,10 @@ Partial Class frmEditor_Map
         Me.optNPCAvoid.AutoSize = True
         Me.optNPCAvoid.Location = New System.Drawing.Point(5, 74)
         Me.optNPCAvoid.Name = "optNPCAvoid"
-        Me.optNPCAvoid.Size = New System.Drawing.Size(77, 17)
+        Me.optNPCAvoid.Size = New System.Drawing.Size(45, 17)
         Me.optNPCAvoid.TabIndex = 3
         Me.optNPCAvoid.TabStop = True
-        Me.optNPCAvoid.Text = "NPC Avoid"
+        Me.optNPCAvoid.Text = "PNJ"
         Me.optNPCAvoid.UseVisualStyleBackColor = True
         '
         'optItem
@@ -467,10 +467,10 @@ Partial Class frmEditor_Map
         Me.optItem.AutoSize = True
         Me.optItem.Location = New System.Drawing.Point(5, 55)
         Me.optItem.Name = "optItem"
-        Me.optItem.Size = New System.Drawing.Size(45, 17)
+        Me.optItem.Size = New System.Drawing.Size(50, 17)
         Me.optItem.TabIndex = 2
         Me.optItem.TabStop = True
-        Me.optItem.Text = "Item"
+        Me.optItem.Text = "Objet"
         Me.optItem.UseVisualStyleBackColor = True
         '
         'optWarp
@@ -478,10 +478,10 @@ Partial Class frmEditor_Map
         Me.optWarp.AutoSize = True
         Me.optWarp.Location = New System.Drawing.Point(5, 36)
         Me.optWarp.Name = "optWarp"
-        Me.optWarp.Size = New System.Drawing.Size(51, 17)
+        Me.optWarp.Size = New System.Drawing.Size(87, 17)
         Me.optWarp.TabIndex = 1
         Me.optWarp.TabStop = True
-        Me.optWarp.Text = "Warp"
+        Me.optWarp.Text = "Téléportation"
         Me.optWarp.UseVisualStyleBackColor = True
         '
         'optBlocked
@@ -489,10 +489,10 @@ Partial Class frmEditor_Map
         Me.optBlocked.AutoSize = True
         Me.optBlocked.Location = New System.Drawing.Point(5, 19)
         Me.optBlocked.Name = "optBlocked"
-        Me.optBlocked.Size = New System.Drawing.Size(64, 17)
+        Me.optBlocked.Size = New System.Drawing.Size(58, 17)
         Me.optBlocked.TabIndex = 0
         Me.optBlocked.TabStop = True
-        Me.optBlocked.Text = "Blocked"
+        Me.optBlocked.Text = "Bloqué"
         Me.optBlocked.UseVisualStyleBackColor = True
         '
         'pnlBack
@@ -517,9 +517,9 @@ Partial Class frmEditor_Map
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(80, 378)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(174, 13)
+        Me.Label1.Size = New System.Drawing.Size(230, 13)
         Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Drag Mouse to Select Multiple Tiles"
+        Me.Label1.Text = "Glissez la souris pour selectionner plusieurs tiles"
         '
         'pnlAttributes
         '
@@ -549,7 +549,7 @@ Partial Class frmEditor_Map
         Me.fraNpcSpawn.Size = New System.Drawing.Size(252, 158)
         Me.fraNpcSpawn.TabIndex = 11
         Me.fraNpcSpawn.TabStop = False
-        Me.fraNpcSpawn.Text = "Npc Spawn"
+        Me.fraNpcSpawn.Text = "PNJ Spawn"
         '
         'lstNpc
         '
@@ -566,7 +566,7 @@ Partial Class frmEditor_Map
         Me.btnNpcSpawn.Name = "btnNpcSpawn"
         Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
         Me.btnNpcSpawn.TabIndex = 6
-        Me.btnNpcSpawn.Text = "Accept"
+        Me.btnNpcSpawn.Text = "Accepter"
         Me.btnNpcSpawn.UseVisualStyleBackColor = True
         '
         'scrlNpcDir
@@ -1001,7 +1001,7 @@ Partial Class frmEditor_Map
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmEditor_Map"
-        Me.Text = "Map Editor"
+        Me.Text = "Editeur de carte"
         Me.fraTileSet.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

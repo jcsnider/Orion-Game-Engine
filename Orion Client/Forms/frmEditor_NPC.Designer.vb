@@ -22,54 +22,54 @@ Partial Class frmEditor_NPC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.scrlValue = New System.Windows.Forms.HScrollBar
-        Me.scrlNum = New System.Windows.Forms.HScrollBar
-        Me.lblValue = New System.Windows.Forms.Label
-        Me.lblNum = New System.Windows.Forms.Label
-        Me.lblItemName = New System.Windows.Forms.Label
-        Me.txtSpawnSecs = New System.Windows.Forms.TextBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.txtChance = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.lblSpr = New System.Windows.Forms.Label
-        Me.scrlSpr = New System.Windows.Forms.HScrollBar
-        Me.lblVit = New System.Windows.Forms.Label
-        Me.scrlVit = New System.Windows.Forms.HScrollBar
-        Me.lblInt = New System.Windows.Forms.Label
-        Me.scrlInt = New System.Windows.Forms.HScrollBar
-        Me.lblEnd = New System.Windows.Forms.Label
-        Me.scrlEnd = New System.Windows.Forms.HScrollBar
-        Me.lblWill = New System.Windows.Forms.Label
-        Me.scrlWill = New System.Windows.Forms.HScrollBar
-        Me.lblStr = New System.Windows.Forms.Label
-        Me.scrlStr = New System.Windows.Forms.HScrollBar
-        Me.scrlAnimation = New System.Windows.Forms.HScrollBar
-        Me.lblAnimation = New System.Windows.Forms.Label
-        Me.txtEXP = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.txtHP = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.cmbFaction = New System.Windows.Forms.ComboBox
-        Me.cmbBehaviour = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.picSprite = New System.Windows.Forms.PictureBox
-        Me.scrlRange = New System.Windows.Forms.HScrollBar
-        Me.scrlSprite = New System.Windows.Forms.HScrollBar
-        Me.lblRange = New System.Windows.Forms.Label
-        Me.lblSprite = New System.Windows.Forms.Label
-        Me.txtAttackSay = New System.Windows.Forms.TextBox
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.scrlValue = New System.Windows.Forms.HScrollBar()
+        Me.scrlNum = New System.Windows.Forms.HScrollBar()
+        Me.lblValue = New System.Windows.Forms.Label()
+        Me.lblNum = New System.Windows.Forms.Label()
+        Me.lblItemName = New System.Windows.Forms.Label()
+        Me.txtSpawnSecs = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtChance = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.lblSpr = New System.Windows.Forms.Label()
+        Me.scrlSpr = New System.Windows.Forms.HScrollBar()
+        Me.lblVit = New System.Windows.Forms.Label()
+        Me.scrlVit = New System.Windows.Forms.HScrollBar()
+        Me.lblInt = New System.Windows.Forms.Label()
+        Me.scrlInt = New System.Windows.Forms.HScrollBar()
+        Me.lblEnd = New System.Windows.Forms.Label()
+        Me.scrlEnd = New System.Windows.Forms.HScrollBar()
+        Me.lblWill = New System.Windows.Forms.Label()
+        Me.scrlWill = New System.Windows.Forms.HScrollBar()
+        Me.lblStr = New System.Windows.Forms.Label()
+        Me.scrlStr = New System.Windows.Forms.HScrollBar()
+        Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
+        Me.lblAnimation = New System.Windows.Forms.Label()
+        Me.txtEXP = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtHP = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbFaction = New System.Windows.Forms.ComboBox()
+        Me.cmbBehaviour = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.picSprite = New System.Windows.Forms.PictureBox()
+        Me.scrlRange = New System.Windows.Forms.HScrollBar()
+        Me.scrlSprite = New System.Windows.Forms.HScrollBar()
+        Me.lblRange = New System.Windows.Forms.Label()
+        Me.lblSprite = New System.Windows.Forms.Label()
+        Me.txtAttackSay = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -85,7 +85,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox1.Size = New System.Drawing.Size(231, 488)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "NPC List"
+        Me.GroupBox1.Text = "Liste des PNJ"
         '
         'lstIndex
         '
@@ -123,7 +123,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox2.Size = New System.Drawing.Size(357, 488)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "NPC Properties"
+        Me.GroupBox2.Text = "Propriété des PNJ"
         '
         'GroupBox4
         '
@@ -492,18 +492,18 @@ Partial Class frmEditor_NPC
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(9, 46)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(28, 13)
+        Me.Label2.Size = New System.Drawing.Size(29, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Say:"
+        Me.Label2.Text = "Dire:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(9, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'btnCancel
         '
@@ -511,7 +511,7 @@ Partial Class frmEditor_NPC
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 40
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -520,7 +520,7 @@ Partial Class frmEditor_NPC
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 39
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Supprimer"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -529,7 +529,7 @@ Partial Class frmEditor_NPC
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 38
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "Sauvegarder"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'frmEditor_NPC

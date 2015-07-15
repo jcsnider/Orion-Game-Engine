@@ -22,58 +22,58 @@ Partial Class frmEditor_Spell
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.scrlAOE = New System.Windows.Forms.HScrollBar
-        Me.lblAOE = New System.Windows.Forms.Label
-        Me.scrlStun = New System.Windows.Forms.HScrollBar
-        Me.lblStun = New System.Windows.Forms.Label
-        Me.scrlAnim = New System.Windows.Forms.HScrollBar
-        Me.lblAnim = New System.Windows.Forms.Label
-        Me.scrlAnimCast = New System.Windows.Forms.HScrollBar
-        Me.lblAnimCast = New System.Windows.Forms.Label
-        Me.chkAOE = New System.Windows.Forms.CheckBox
-        Me.scrlRange = New System.Windows.Forms.HScrollBar
-        Me.lblRange = New System.Windows.Forms.Label
-        Me.scrlInterval = New System.Windows.Forms.HScrollBar
-        Me.scrlDuration = New System.Windows.Forms.HScrollBar
-        Me.lblInterval = New System.Windows.Forms.Label
-        Me.lblDuration = New System.Windows.Forms.Label
-        Me.scrlVital = New System.Windows.Forms.HScrollBar
-        Me.lblVital = New System.Windows.Forms.Label
-        Me.scrlY = New System.Windows.Forms.HScrollBar
-        Me.scrlX = New System.Windows.Forms.HScrollBar
-        Me.scrlDir = New System.Windows.Forms.HScrollBar
-        Me.scrlMap = New System.Windows.Forms.HScrollBar
-        Me.lblY = New System.Windows.Forms.Label
-        Me.lblX = New System.Windows.Forms.Label
-        Me.lblDir = New System.Windows.Forms.Label
-        Me.lblMap = New System.Windows.Forms.Label
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.picSprite = New System.Windows.Forms.PictureBox
-        Me.scrlIcon = New System.Windows.Forms.HScrollBar
-        Me.lblIcon = New System.Windows.Forms.Label
-        Me.scrlCool = New System.Windows.Forms.HScrollBar
-        Me.lblCool = New System.Windows.Forms.Label
-        Me.scrlCast = New System.Windows.Forms.HScrollBar
-        Me.lblCast = New System.Windows.Forms.Label
-        Me.cmbClass = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.scrlAccess = New System.Windows.Forms.HScrollBar
-        Me.lblAccess = New System.Windows.Forms.Label
-        Me.scrlLevel = New System.Windows.Forms.HScrollBar
-        Me.lblLevel = New System.Windows.Forms.Label
-        Me.scrlMP = New System.Windows.Forms.HScrollBar
-        Me.lblMP = New System.Windows.Forms.Label
-        Me.cmbType = New System.Windows.Forms.ComboBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.scrlAOE = New System.Windows.Forms.HScrollBar()
+        Me.lblAOE = New System.Windows.Forms.Label()
+        Me.scrlStun = New System.Windows.Forms.HScrollBar()
+        Me.lblStun = New System.Windows.Forms.Label()
+        Me.scrlAnim = New System.Windows.Forms.HScrollBar()
+        Me.lblAnim = New System.Windows.Forms.Label()
+        Me.scrlAnimCast = New System.Windows.Forms.HScrollBar()
+        Me.lblAnimCast = New System.Windows.Forms.Label()
+        Me.chkAOE = New System.Windows.Forms.CheckBox()
+        Me.scrlRange = New System.Windows.Forms.HScrollBar()
+        Me.lblRange = New System.Windows.Forms.Label()
+        Me.scrlInterval = New System.Windows.Forms.HScrollBar()
+        Me.scrlDuration = New System.Windows.Forms.HScrollBar()
+        Me.lblInterval = New System.Windows.Forms.Label()
+        Me.lblDuration = New System.Windows.Forms.Label()
+        Me.scrlVital = New System.Windows.Forms.HScrollBar()
+        Me.lblVital = New System.Windows.Forms.Label()
+        Me.scrlY = New System.Windows.Forms.HScrollBar()
+        Me.scrlX = New System.Windows.Forms.HScrollBar()
+        Me.scrlDir = New System.Windows.Forms.HScrollBar()
+        Me.scrlMap = New System.Windows.Forms.HScrollBar()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblX = New System.Windows.Forms.Label()
+        Me.lblDir = New System.Windows.Forms.Label()
+        Me.lblMap = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.picSprite = New System.Windows.Forms.PictureBox()
+        Me.scrlIcon = New System.Windows.Forms.HScrollBar()
+        Me.lblIcon = New System.Windows.Forms.Label()
+        Me.scrlCool = New System.Windows.Forms.HScrollBar()
+        Me.lblCool = New System.Windows.Forms.Label()
+        Me.scrlCast = New System.Windows.Forms.HScrollBar()
+        Me.lblCast = New System.Windows.Forms.Label()
+        Me.cmbClass = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.scrlAccess = New System.Windows.Forms.HScrollBar()
+        Me.lblAccess = New System.Windows.Forms.Label()
+        Me.scrlLevel = New System.Windows.Forms.HScrollBar()
+        Me.lblLevel = New System.Windows.Forms.Label()
+        Me.scrlMP = New System.Windows.Forms.HScrollBar()
+        Me.lblMP = New System.Windows.Forms.Label()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -89,7 +89,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox1.Size = New System.Drawing.Size(210, 442)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Spell List"
+        Me.GroupBox1.Text = "Liste des magies"
         '
         'lstIndex
         '
@@ -108,7 +108,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox2.Size = New System.Drawing.Size(482, 442)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Spell Properties"
+        Me.GroupBox2.Text = "Propriétés de la magie"
         '
         'GroupBox4
         '
@@ -395,7 +395,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox3.Size = New System.Drawing.Size(250, 419)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Basic Information"
+        Me.GroupBox3.Text = "Informatique basique"
         '
         'picSprite
         '
@@ -472,9 +472,9 @@ Partial Class frmEditor_Spell
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(11, 215)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(81, 13)
+        Me.Label4.Size = New System.Drawing.Size(78, 13)
         Me.Label4.TabIndex = 46
-        Me.Label4.Text = "Class Required:"
+        Me.Label4.Text = "Classe requise:"
         '
         'scrlAccess
         '
@@ -490,9 +490,9 @@ Partial Class frmEditor_Spell
         Me.lblAccess.AutoSize = True
         Me.lblAccess.Location = New System.Drawing.Point(11, 179)
         Me.lblAccess.Name = "lblAccess"
-        Me.lblAccess.Size = New System.Drawing.Size(120, 13)
+        Me.lblAccess.Size = New System.Drawing.Size(100, 13)
         Me.lblAccess.TabIndex = 44
-        Me.lblAccess.Text = "Access Required: None"
+        Me.lblAccess.Text = "Accès requis: None"
         '
         'scrlLevel
         '
@@ -507,9 +507,9 @@ Partial Class frmEditor_Spell
         Me.lblLevel.AutoSize = True
         Me.lblLevel.Location = New System.Drawing.Point(11, 145)
         Me.lblLevel.Name = "lblLevel"
-        Me.lblLevel.Size = New System.Drawing.Size(111, 13)
+        Me.lblLevel.Size = New System.Drawing.Size(104, 13)
         Me.lblLevel.TabIndex = 42
-        Me.lblLevel.Text = "Level Required: None"
+        Me.lblLevel.Text = "Niveau requis: None"
         '
         'scrlMP
         '
@@ -525,9 +525,9 @@ Partial Class frmEditor_Spell
         Me.lblMP.AutoSize = True
         Me.lblMP.Location = New System.Drawing.Point(11, 112)
         Me.lblMP.Name = "lblMP"
-        Me.lblMP.Size = New System.Drawing.Size(50, 13)
+        Me.lblMP.Size = New System.Drawing.Size(66, 13)
         Me.lblMP.TabIndex = 40
-        Me.lblMP.Text = "MP Cost:"
+        Me.lblMP.Text = "Cout en MP:"
         '
         'cmbType
         '
@@ -560,9 +560,9 @@ Partial Class frmEditor_Spell
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(9, 20)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'btnCancel
         '
@@ -570,7 +570,7 @@ Partial Class frmEditor_Spell
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 8
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -579,7 +579,7 @@ Partial Class frmEditor_Spell
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 7
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Supprimer"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -588,7 +588,7 @@ Partial Class frmEditor_Spell
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 6
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "Sauvegarder"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'frmEditor_Spell
