@@ -159,7 +159,7 @@ Module modGeneral
         If Not FileExist(Application.StartupPath & "\data\options.ini") Then
             Options.Game_Name = "Orion"
             Options.Port = 7001
-            Options.MOTD = "Welcome to the Orion Engine"
+            Options.MOTD = "Bienvenue sur l'engine ORION"
             Options.Website = "http://INSERT_WEB_ADDRESS_HERE.com"
             Call SaveOptions()
         Else
@@ -170,11 +170,11 @@ Module modGeneral
         ' Serves as a constructor
         Call ClearGameData()
         Call LoadGameData()
-        Call SetStatus("Spawning map items...")
+        Call SetStatus("Apparition des objets de la carte...")
         Call SpawnAllMapsItems()
-        Call SetStatus("Spawning map npcs...")
+        Call SetStatus("Apparition des PNJ sur la carte...")
         Call SpawnAllMapNpcs()
-        Call SetStatus("Creating map cache...")
+        Call SetStatus("Création d'un fichier cache pour la carte...")
         'Call CreateFullMapCache()
 
         ' Check if the master charlist file exists for checking duplicate names, and if it doesnt make it
@@ -189,7 +189,7 @@ Module modGeneral
         InitNetwork()
 
         ' Init all the player sockets
-        Call SetStatus("Initializing player array...")
+        Call SetStatus("Initialisation du tableau des joueurs...")
 
         ReDim Clients(0 To MAX_PLAYERS)
 
@@ -204,8 +204,8 @@ Module modGeneral
         Next
 
         Call UpdateCaption()
-        time2 = GetTickCount
-        Call SetStatus("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
+        time2 = GetTickCount()
+        Call SetStatus("Initialisation terminée. Serveur chargé en " & time2 - time1 & "ms.")
 
         MyIPAddress = GetIP()
         If MyIPAddress = "" Then
@@ -226,10 +226,10 @@ Module modGeneral
 
     Sub DestroyServer()
         ServerOnline = False
-        Call SetStatus("Saving players online...")
+        Call SetStatus("Sauvegarde des joueurs en ligne...")
         Call SaveAllPlayersOnline()
         Call ClearGameData()
-        Call SetStatus("Unloading sockets...")
+        Call SetStatus("Déchargement des sockets...")
         ServerDestroyed = True
         Application.Exit()
     End Sub
@@ -239,44 +239,44 @@ Module modGeneral
     End Sub
 
     Public Sub ClearGameData()
-        Call SetStatus("Clearing temp tile fields...")
+        Call SetStatus("Nettoyage des fichiers temporaires...")
         Call ClearTempTiles()
-        Call SetStatus("Clearing maps...")
+        Call SetStatus("Nettoyages des cartes...")
         Call ClearMaps()
-        Call SetStatus("Clearing map items...")
+        Call SetStatus("Nettoyage des objets de la carte...")
         Call ClearMapItems()
-        Call SetStatus("Clearing map npcs...")
+        Call SetStatus("Nettoyage des PNJ de la carte...")
         Call ClearMapNpcs()
-        Call SetStatus("Clearing npcs...")
+        Call SetStatus("Nettoyage des PNJ...")
         Call ClearNpcs()
-        Call SetStatus("Clearing Resources...")
+        Call SetStatus("Nettoyage des ressources...")
         Call ClearResources()
-        Call SetStatus("Clearing items...")
+        Call SetStatus("Nettoyage des objets...")
         Call ClearItems()
-        Call SetStatus("Clearing shops...")
+        Call SetStatus("Nettoyage des magasins...")
         Call ClearShops()
-        Call SetStatus("Clearing spells...")
+        Call SetStatus("Nettoyage des magies...")
         Call ClearSpells()
-        Call SetStatus("Clearing animations...")
+        Call SetStatus("Nettoyage des animations...")
         Call ClearAnimations()
     End Sub
 
     Private Sub LoadGameData()
-        Call SetStatus("Loading classes...")
+        Call SetStatus("Chargement des classes...")
         Call LoadClasses()
-        Call SetStatus("Loading maps...")
+        Call SetStatus("Chargement des cartes...")
         Call LoadMaps()
-        Call SetStatus("Loading items...")
+        Call SetStatus("Chargement des objets...")
         Call LoadItems()
-        Call SetStatus("Loading npcs...")
+        Call SetStatus("Chargement des PNJ...")
         Call LoadNpcs()
-        Call SetStatus("Loading Resources...")
+        Call SetStatus("Chargement des ressources...")
         Call LoadResources()
-        Call SetStatus("Loading shops...")
+        Call SetStatus("Chargement des magasins...")
         Call LoadShops()
-        Call SetStatus("Loading spells...")
+        Call SetStatus("Chargement des magies...")
         Call LoadSpells()
-        Call SetStatus("Loading animations...")
+        Call SetStatus("Chargement des animations...")
         Call LoadAnimations()
     End Sub
     Sub TextAdd(ByVal Msg As String)
@@ -318,14 +318,14 @@ Module modGeneral
 
         If Secs <= 0 Then Secs = 30
         If Secs Mod 5 = 0 Or Secs <= 5 Then
-            Call GlobalMsg("Server Shutdown in " & Secs & " seconds.")
-            Call TextAdd("Automated Server Shutdown in " & Secs & " seconds.")
+            Call GlobalMsg("Serveur éteint en " & Secs & " secondes.")
+            Call TextAdd("Serveur automatiquement éteint en " & Secs & " secondes.")
         End If
 
         Secs = Secs - 1
 
         If Secs <= 0 Then
-            Call GlobalMsg("Server Shutdown.")
+            Call GlobalMsg("Serveur éteint.")
             Call DestroyServer()
         End If
 

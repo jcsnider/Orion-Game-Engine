@@ -116,7 +116,7 @@
                 password = buffer.ReadString
                 ' Prevent hacking
                 If Len(Trim$(username)) < 3 Or Len(Trim$(password)) < 3 Then
-                    Call AlertMsg(index, "Your username and password must be at least three characters in length")
+                    Call AlertMsg(index, "Votre nom d'utilisateur ou mot de passe doit avoir trois caractères au minmimum")
                     Exit Sub
                 End If
 
@@ -125,7 +125,7 @@
                     n = AscW(Mid$(username, i, 1))
 
                     If Not isNameLegal(n) Then
-                        Call AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
+                        Call AlertMsg(index, "Nom d'utilisateur invalide, utilisez seulement des lettres, nombre, espace et _ dans votre nom d'utilisateur.")
                         Exit Sub
                     End If
 
@@ -134,8 +134,8 @@
                 ' Check to see if account already exists
                 If Not AccountExist(username) Then
                     Call AddAccount(index, username, password)
-                    TextAdd("Account " & username & " has been created.")
-                    Call Addlog("Account " & username & " has been created.", PLAYER_LOG)
+                    TextAdd("Compte " & username & " a bien été crée.")
+                    Call Addlog("Compte " & username & " a bien été crée.", PLAYER_LOG)
 
                     ' Load the player
                     Call LoadPlayer(index, username)
@@ -152,10 +152,10 @@
                     End If
 
                     ' Show the player up on the socket status
-                    Call Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
-                    TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
+                    Call Addlog(GetPlayerLogin(index) & " s'est connecté depuis " & GetPlayerIP(index) & ".", PLAYER_LOG)
+                    TextAdd(GetPlayerLogin(index) & " s'est connecté depuis " & GetPlayerIP(index) & ".")
                 Else
-                    Call AlertMsg(index, "Sorry, that account username is already taken!")
+                    Call AlertMsg(index, "Désolé, votre nom d'utilisateur est déjà utilisé!")
                 End If
 
                 buffer = Nothing
@@ -181,32 +181,32 @@
 
                 ' Check versions
                 If Buffer.ReadString <> Application.ProductVersion Then
-                    Call AlertMsg(index, "Version outdated, please visit " & Options.Website)
+                    Call AlertMsg(index, "Cette version n'est pas à jour, veuillez visiter " & Options.Website)
                     Exit Sub
                 End If
 
                 If isShuttingDown Then
-                    Call AlertMsg(index, "Server is either rebooting or being shutdown.")
+                    Call AlertMsg(index, "Le serveur est en cours de redémarrage ou et sur le point de s'éteindre.")
                     Exit Sub
                 End If
 
                 If Len(Trim$(Name)) < 3 Or Len(Trim$(Password)) < 3 Then
-                    Call AlertMsg(index, "Your name and password must be at least three characters in length")
+                    Call AlertMsg(index, "Votre nom d'utilisateur doit avoir au minimum trois characteres")
                     Exit Sub
                 End If
 
                 If Not AccountExist(Name) Then
-                    Call AlertMsg(index, "That account name does not exist.")
+                    Call AlertMsg(index, "Le compte n'existe pas.")
                     Exit Sub
                 End If
 
                 If Not PasswordOK(Name, Password) Then
-                    Call AlertMsg(index, "Incorrect password.")
+                    Call AlertMsg(index, "Mot de passe incorrect.")
                     Exit Sub
                 End If
 
                 If IsMultiAccounts(Name) Then
-                    Call AlertMsg(index, "Multiple account logins is not authorized.")
+                    Call AlertMsg(index, "Le multi compte n'est pas autorisé.")
                     Exit Sub
                 End If
 
@@ -227,8 +227,8 @@
                 End If
 
                 ' Show the player up on the socket status
-                Call Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
-                TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
+                Call Addlog(GetPlayerLogin(index) & " s'est connecté depuis " & GetPlayerIP(index) & ".", PLAYER_LOG)
+                TextAdd(GetPlayerLogin(index) & " s'est connecté depuis " & GetPlayerIP(index) & ".")
 
                 Buffer = Nothing
             End If
@@ -245,7 +245,7 @@
         If Buffer.ReadLong <> ClientPackets.CSayMsg Then Exit Sub
         msg = Buffer.ReadString
 
-        Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
+        Call Addlog("Carte #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " dit, '" & msg & "'", PLAYER_LOG)
 
         Call SayMsg_Map(GetPlayerMap(index), index, msg, QBColor(White))
 
@@ -261,7 +261,7 @@
         If Buffer.ReadLong <> ClientPackets.CEmoteMsg Then Exit Sub
         msg = Buffer.ReadString
 
-        Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
+        Call Addlog("Carte #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
         Call MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), EmoteColor)
 
         Buffer = Nothing
@@ -408,7 +408,7 @@
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -432,7 +432,7 @@
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -442,7 +442,7 @@
                     End If
 
                     SetPlayerEquipment(Index, GetPlayerInvItemNum(Index, invnum), Equipment.Weapon)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
+                    PlayerMsg(Index, "Vous équipez " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
                     TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
 
                     If tempitem > 0 Then
@@ -456,7 +456,7 @@
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -480,7 +480,7 @@
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -503,7 +503,7 @@
                 Case ITEM_TYPE_POTIONADDHP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -515,7 +515,7 @@
                 Case ITEM_TYPE_POTIONADDMP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -527,7 +527,7 @@
                 Case ITEM_TYPE_POTIONADDSP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -538,7 +538,7 @@
                 Case ITEM_TYPE_POTIONSUBHP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -550,7 +550,7 @@
                 Case ITEM_TYPE_POTIONSUBMP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -562,7 +562,7 @@
                 Case ITEM_TYPE_POTIONSUBSP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -573,7 +573,7 @@
                 Case ITEM_TYPE_KEY
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -625,14 +625,14 @@
                             TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                             TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                             SendMapKey(Index, x, y, 1)
-                            Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                            Call MapMsg(GetPlayerMap(Index), "Une porté à été débloquée.", White)
 
                             Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, x, y)
 
                             ' Check if we are supposed to take away the item
                             If Map(GetPlayerMap(Index)).Tile(x, y).Data2 = 1 Then
                                 Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
-                                Call PlayerMsg(Index, "The key is destroyed in the lock.")
+                                Call PlayerMsg(Index, "La clée à été détruite dans la serrure.")
                             End If
                         End If
                     End If
@@ -641,7 +641,7 @@
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
+                            PlayerMsg(Index, "Vous n'avez pas les statistiques pré-requis pour vous équiper de cet objet.")
                             Exit Sub
                         End If
                     Next
@@ -667,22 +667,22 @@
                                         Call SetPlayerSpell(Index, i, n)
                                         Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                                         Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
-                                        Call PlayerMsg(Index, "You study the spell carefully.")
-                                        Call PlayerMsg(Index, "You have learned a new spell!")
+                                        Call PlayerMsg(Index, "Vous étudiez attentivement le sort.")
+                                        Call PlayerMsg(Index, "Vous avez appris un nouveau sort!")
                                     Else
-                                        Call PlayerMsg(Index, "You have already learned this spell!")
+                                        Call PlayerMsg(Index, "Vous avez déjà apprit ce sort!")
                                     End If
 
                                 Else
-                                    Call PlayerMsg(Index, "You have learned all that you can learn!")
+                                    Call PlayerMsg(Index, "Vous avez apprit tout ce que vous pouviez apprendre!")
                                 End If
 
                             Else
-                                Call PlayerMsg(Index, "You must be level " & i & " to learn this spell.")
+                                Call PlayerMsg(Index, "Vous avez besoins de monter de niveau " & i & " pour apprendre ce sort.")
                             End If
 
                         Else
-                            Call PlayerMsg(Index, "This spell can only be learned by " & CheckGrammar(GetClassName(Spell(n).ClassReq)) & ".")
+                            Call PlayerMsg(Index, "Ce sort peut être uniquement apprit par " & CheckGrammar(GetClassName(Spell(n).ClassReq)) & ".")
                         End If
 
                     Else
@@ -731,14 +731,14 @@
                             Damage = n + Int(Rnd() * (n \ 2)) + 1 - GetPlayerProtection(TempIndex)
                             'Call PlayerMsg(Index, "You feel a surge of energy upon swinging!", BrightCyan)
                             'Call PlayerMsg(TempIndex, GetPlayerName(Index) & " swings with enormous might!", BrightCyan)
-                            SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                            SendActionMsg(GetPlayerMap(Index), "ATTAQUE CRITIQUE!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                         End If
 
                         Call AttackPlayer(Index, TempIndex, Damage)
                     Else
                         'Call PlayerMsg(Index, GetPlayerName(TempIndex) & "'s " & Trim$(Item(GetPlayerEquipment(TempIndex, Shield)).Name) & " has blocked your hit!", BrightCyan)
                         'Call PlayerMsg(TempIndex, "Your " & Trim$(Item(GetPlayerEquipment(TempIndex, Shield)).Name) & " has blocked " & GetPlayerName(Index) & "'s hit!", BrightCyan)
-                        SendActionMsg(GetPlayerMap(TempIndex), "BLOCK!", Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
+                        SendActionMsg(GetPlayerMap(TempIndex), "BLOQUE!", Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
                     End If
 
                     Exit Sub
@@ -759,13 +759,13 @@
                     n = GetPlayerDamage(Index)
                     Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.endurance) \ 2)
                     'Call PlayerMsg(Index, "You feel a surge of energy upon swinging!", BrightCyan)
-                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                    SendActionMsg(GetPlayerMap(Index), "ATTAQUE CRITIQUE!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                 End If
 
                 If Damage > 0 Then
                     Call AttackNpc(Index, i, Damage)
                 Else
-                    Call PlayerMsg(Index, "Your attack does nothing.")
+                    Call PlayerMsg(Index, "Votre attaque n'a rien fait.")
                 End If
 
                 Exit Sub
@@ -814,23 +814,23 @@
         i = FindPlayer(name)
 
         If i > 0 Then
-            Call PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i))
+            Call PlayerMsg(Index, "Compte: " & Trim$(Player(i).Login) & ", Nom: " & GetPlayerName(i))
 
             If GetPlayerAccess(Index) > ADMIN_MONITOR Then
-                Call PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-")
-                Call PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
+                Call PlayerMsg(Index, "-=- Statistique pour " & GetPlayerName(i) & " -=-")
+                Call PlayerMsg(Index, "Niveau: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
                 Call PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP))
-                Call PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.spirit))
+                Call PlayerMsg(Index, "Force: " & GetPlayerStat(i, Stats.strength) & "  Défense: " & GetPlayerStat(i, Stats.endurance) & "  Magie: " & GetPlayerStat(i, Stats.intelligence) & "  Vitesse: " & GetPlayerStat(i, Stats.spirit))
                 n = (GetPlayerStat(i, Stats.strength) \ 2) + (GetPlayerLevel(i) \ 2)
                 i = (GetPlayerStat(i, Stats.endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
                 If n > 100 Then n = 100
                 If i > 100 Then i = 100
-                Call PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+                Call PlayerMsg(Index, "Chance de coup critique: " & n & "%, Chance de bloquer: " & i & "%")
             End If
 
         Else
-            Call PlayerMsg(Index, "Player is not online.")
+            Call PlayerMsg(Index, "Le joueur n'est pas en ligne.")
         End If
 
         Buffer = Nothing
@@ -856,15 +856,15 @@
         If n <> Index Then
             If n > 0 Then
                 Call PlayerWarp(Index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
-                Call PlayerMsg(n, GetPlayerName(Index) & " has warped to you.")
-                Call PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".")
-                Call Addlog(GetPlayerName(Index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
+                Call PlayerMsg(n, GetPlayerName(Index) & " A été téléporter à vous.")
+                Call PlayerMsg(Index, "Vous avez été téléporté à " & GetPlayerName(n) & ".")
+                Call Addlog(GetPlayerName(Index) & "  A été téléporter à " & GetPlayerName(n) & ", carte #" & GetPlayerMap(n) & ".", ADMIN_LOG)
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                Call PlayerMsg(Index, "Le joueur n'est pas en ligne.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot warp to yourself!")
+            Call PlayerMsg(Index, "Vous ne pouvez pas vous téléporter à vous même!")
         End If
 
     End Sub
@@ -892,15 +892,15 @@
         If n <> Index Then
             If n > 0 Then
                 Call PlayerWarp(n, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
-                Call PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".")
-                Call PlayerMsg(Index, GetPlayerName(n) & " has been summoned.")
-                Call Addlog(GetPlayerName(Index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
+                Call PlayerMsg(n, "Vous avez été convoqué par " & GetPlayerName(Index) & ".")
+                Call PlayerMsg(Index, GetPlayerName(n) & " a été convoqué.")
+                Call Addlog(GetPlayerName(Index) & " a été téléporté " & GetPlayerName(n) & " pour servir, carte #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                Call PlayerMsg(Index, "Le joueur n'est pas en ligne.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot warp yourself to yourself!")
+            Call PlayerMsg(Index, "Vous ne pouvez pas vous téléporter à vous même!")
         End If
 
     End Sub
@@ -930,8 +930,8 @@
         End If
 
         Call PlayerWarp(Index, n, GetPlayerX(Index), GetPlayerY(Index))
-        Call PlayerMsg(Index, "You have been warped to map #" & n)
-        Call Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
+        Call PlayerMsg(Index, "Vous avez été téléporter à la carte #" & n)
+        Call Addlog(GetPlayerName(Index) & " téléporté à la carte #" & n & ".", ADMIN_LOG)
 
     End Sub
 
@@ -965,16 +965,16 @@
 
         If Buffer.ReadLong <> ClientPackets.CGetStats Then Exit Sub
 
-        Call PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-")
-        Call PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
+        Call PlayerMsg(Index, "-=- Statistique pour " & GetPlayerName(Index) & " -=-")
+        Call PlayerMsg(Index, "Niveau: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
         Call PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP))
-        Call PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.spirit))
+        Call PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Vitesse: " & GetPlayerStat(Index, Stats.spirit))
         n = (GetPlayerStat(Index, Stats.strength) \ 2) + (GetPlayerLevel(Index) \ 2)
         i = (GetPlayerStat(Index, Stats.endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
 
         If n > 100 Then n = 100
         If i > 100 Then i = 100
-        Call PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+        Call PlayerMsg(Index, "Chance de coup critique: " & n & "%, Chance de bloquer: " & i & "%")
         Buffer = Nothing
     End Sub
 
