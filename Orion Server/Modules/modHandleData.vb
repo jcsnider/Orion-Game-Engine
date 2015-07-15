@@ -125,7 +125,7 @@
                     n = AscW(Mid$(username, i, 1))
 
                     If Not isNameLegal(n) Then
-                        Call AlertMsg(index, "Nom d'utilisateur invalide, utilisez seulement des lettres, nombre, espace et _ dans votre nom d'utilisateur.")
+                        Call AlertMsg(index, "Nom invalide, seul les lettre, nombre, espace et _ sont autorisé dans le nom.")
                         Exit Sub
                     End If
 
@@ -1116,7 +1116,7 @@
 
             ' Prevent hacking
             If Len(Trim$(Name)) < 3 Then
-                Call AlertMsg(index, "Character name must be at least three characters in length.")
+                Call AlertMsg(index, "Votre personnage doit avoir au moins trois charactères.")
                 Exit Sub
             End If
 
@@ -1125,7 +1125,7 @@
                 n = AscW(Mid$(Name, i, 1))
 
                 If Not isNameLegal(n) Then
-                    Call AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
+                    Call AlertMsg(index, "Nom invalide, seul les lettre, nombre, espace et _ sont autorisé dans le nom.")
                     Exit Sub
                 End If
 
@@ -1143,19 +1143,19 @@
 
             ' Check if char already exists in slot
             If CharExist(index) Then
-                Call AlertMsg(index, "Character already exists!")
+                Call AlertMsg(index, "Le personnage existe déjà!")
                 Exit Sub
             End If
 
             ' Check if name is already in use
             If FindChar(Name) Then
-                Call AlertMsg(index, "Sorry, but that name is in use!")
+                Call AlertMsg(index, "Désolé, ce nom est déjà utilisé!")
                 Exit Sub
             End If
 
             ' Everything went ok, add the character
             Call AddChar(index, Name, Sex, Classes, Sprite)
-            Call Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
+            Call Addlog("Le personnage " & Name & " ajouté " & GetPlayerLogin(index) & " au compte.", PLAYER_LOG)
             ' log them in!!
             HandleUseChar(index)
 
@@ -1248,8 +1248,8 @@
         Next
 
         CacheResources(GetPlayerMap(Index))
-        Call PlayerMsg(Index, "Map respawned.")
-        Call Addlog(GetPlayerName(Index) & " has respawned map #" & GetPlayerMap(Index), ADMIN_LOG)
+        Call PlayerMsg(Index, "Réaparition de la carte.")
+        Call Addlog(GetPlayerName(Index) & " est réapparu sur la carte #" & GetPlayerMap(Index), ADMIN_LOG)
 
         Buffer = Nothing
     End Sub
@@ -1277,19 +1277,19 @@
         If n <> Index Then
             If n > 0 Then
                 If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    Call GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.Game_Name & " by " & GetPlayerName(Index) & "!")
-                    Call Addlog(GetPlayerName(Index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
-                    Call AlertMsg(n, "You have been kicked by " & GetPlayerName(Index) & "!")
+                    Call GlobalMsg(GetPlayerName(n) & " a été kicker depuis " & Options.Game_Name & " par " & GetPlayerName(Index) & "!")
+                    Call Addlog(GetPlayerName(Index) & " a été kické " & GetPlayerName(n) & ".", ADMIN_LOG)
+                    Call AlertMsg(n, "Vous avez été kické par " & GetPlayerName(Index) & "!")
                 Else
                     Call PlayerMsg(Index, "That is a higher or same access admin then you!")
                 End If
 
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                Call PlayerMsg(Index, "Le joueur n'est pas en ligne.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot kick yourself!")
+            Call PlayerMsg(Index, "Vous ne pouvez vous kicker!")
         End If
     End Sub
 
@@ -1305,7 +1305,7 @@
             Exit Sub
         End If
 
-        PlayerMsg(Index, "Command /banlist is not available in EO.Net... yet ;).")
+        PlayerMsg(Index, "La commande /banlist n'est pas disponible dans EO.Net... actuellement ;).")
 
         Buffer = Nothing
     End Sub
@@ -1326,7 +1326,7 @@
         filename = Application.StartupPath & "\data\banlist.txt"
 
         If System.IO.File.Exists(filename) Then Kill(filename)
-        Call PlayerMsg(Index, "Ban list destroyed.")
+        Call PlayerMsg(Index, "Liste des banni supprimée.")
         Buffer = Nothing
     End Sub
 
@@ -1360,11 +1360,11 @@
                 End If
 
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                Call PlayerMsg(Index, "Le joueur n'est pas en ligne.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot ban yourself!")
+            Call PlayerMsg(Index, "Vous ne pouvez vous bannir vous même!")
         End If
 
     End Sub
@@ -1457,7 +1457,7 @@
         ' Save it
         Call SendUpdateItemToAll(n)
         Call SaveItem(n)
-        Call Addlog(GetPlayerName(index) & " saved item #" & n & ".", ADMIN_LOG)
+        Call Addlog(GetPlayerName(index) & " a sauvegardé l'objet #" & n & ".", ADMIN_LOG)
         Buffer = Nothing
     End Sub
 
@@ -1514,7 +1514,7 @@
         ' Save it
         Call SendUpdateNpcToAll(NpcNum)
         Call SaveNpc(NpcNum)
-        Call Addlog(GetPlayerName(index) & " saved Npc #" & NpcNum & ".", ADMIN_LOG)
+        Call Addlog(GetPlayerName(index) & " à sauvegardé le PNJ #" & NpcNum & ".", ADMIN_LOG)
 
         buffer = Nothing
     End Sub
@@ -1573,7 +1573,7 @@
         ' Save it
         Call SendUpdateShopToAll(ShopNum)
         Call SaveShop(ShopNum)
-        Call Addlog(GetPlayerName(index) & " saving shop #" & ShopNum & ".", ADMIN_LOG)
+        Call Addlog(GetPlayerName(index) & " a sauvegardé le magasin #" & ShopNum & ".", ADMIN_LOG)
     End Sub
 
     Sub Packet_EditSpell(ByVal index As Long, ByVal data() As Byte)
@@ -1634,7 +1634,7 @@
         ' Save it
         Call SendUpdateSpellToAll(spellnum)
         Call SaveSpell(spellnum)
-        Call Addlog(GetPlayerName(index) & " saved Spell #" & spellnum & ".", ADMIN_LOG)
+        Call Addlog(GetPlayerName(index) & " a sauvegardé les magies #" & spellnum & ".", ADMIN_LOG)
 
         buffer = Nothing
     End Sub
@@ -1665,23 +1665,23 @@
 
                 'check to see if same level access is trying to change another access of the very same level and boot them if they are.
                 If GetPlayerAccess(n) = GetPlayerAccess(index) Then
-                    Call PlayerMsg(index, "Invalid access level.")
+                    Call PlayerMsg(index, "Niveau d'accès inccorect.")
                     Exit Sub
                 End If
 
                 If GetPlayerAccess(n) <= 0 Then
-                    Call GlobalMsg(GetPlayerName(n) & " has been blessed with administrative access.")
+                    Call GlobalMsg(GetPlayerName(n) & " a été bénie avec les droits adminisrateur.")
                 End If
 
                 Call SetPlayerAccess(n, i)
                 Call SendPlayerData(n)
-                Call Addlog(GetPlayerName(index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
+                Call Addlog(GetPlayerName(index) & " a modifié les acces de " & GetPlayerName(n) & " !", ADMIN_LOG)
             Else
-                Call PlayerMsg(index, "Player is not online.")
+                Call PlayerMsg(index, "Le joueur n'est pas en ligne.")
             End If
 
         Else
-            Call PlayerMsg(index, "Invalid access level.")
+            Call PlayerMsg(index, "Niveau d'accès inccorect.")
         End If
 
         buffer = Nothing
@@ -1708,8 +1708,8 @@
 
         Options.MOTD = Trim$(buffer.ReadString) 'Parse(1))
         SaveOptions()
-        Call GlobalMsg("MOTD changed to: " & Options.MOTD)
-        Call Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.MOTD, ADMIN_LOG)
+        Call GlobalMsg("Le message d'accueil à été changé en: " & Options.MOTD)
+        Call Addlog(GetPlayerName(index) & " a été changé en: " & Options.MOTD, ADMIN_LOG)
         buffer = Nothing
     End Sub
 
@@ -1739,23 +1739,23 @@
                             ' Consider the player
                             If i <> index Then
                                 If GetPlayerLevel(i) >= GetPlayerLevel(index) + 5 Then
-                                    Call PlayerMsg(index, "You wouldn't stand a chance.")
+                                    Call PlayerMsg(index, "Vous ne voudriez pas une chance.")
                                 Else
 
                                     If GetPlayerLevel(i) > GetPlayerLevel(index) Then
-                                        Call PlayerMsg(index, "This one seems to have an advantage over you.")
+                                        Call PlayerMsg(index, "Celui-ci semble avoir un avantage sur vous.")
                                     Else
 
                                         If GetPlayerLevel(i) = GetPlayerLevel(index) Then
-                                            Call PlayerMsg(index, "This would be an even fight.")
+                                            Call PlayerMsg(index, "Ce serait un combat même.")
                                         Else
 
                                             If GetPlayerLevel(index) >= GetPlayerLevel(i) + 5 Then
-                                                Call PlayerMsg(index, "You could slaughter that player.")
+                                                Call PlayerMsg(index, "Vous pouvez abattre que le jeu.")
                                             Else
 
                                                 If GetPlayerLevel(index) > GetPlayerLevel(i) Then
-                                                    Call PlayerMsg(index, "You would have an advantage over that player.")
+                                                    Call PlayerMsg(index, "Vous souhaitez avoir un avantage sur ce joueur.")
                                                 End If
                                             End If
                                         End If
@@ -1766,7 +1766,7 @@
                             ' Change target
                             TempPlayer(index).Target = i
                             TempPlayer(index).TargetType = TARGET_TYPE_PLAYER
-                            Call PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".")
+                            Call PlayerMsg(index, "Votre cible est maintenant " & GetPlayerName(i) & ".")
                             Exit Sub
                         End If
                     End If
@@ -1781,7 +1781,7 @@
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
                 If MapItem(GetPlayerMap(index), i).x = x Then
                     If MapItem(GetPlayerMap(index), i).y = y Then
-                        Call PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".")
+                        Call PlayerMsg(index, "Vous voyez " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".")
                         Exit Sub
                     End If
                 End If
@@ -1798,7 +1798,7 @@
                         ' Change target
                         TempPlayer(index).Target = i
                         TempPlayer(index).TargetType = TARGET_TYPE_NPC
-                        Call PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".")
+                        Call PlayerMsg(index, "Votre cible est maintenant " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".")
                         Exit Sub
                     End If
                 End If
@@ -1826,7 +1826,7 @@
 
         ' Check for a previous party and if so drop it
         If TempPlayer(index).InParty = YES Then
-            Call PlayerMsg(index, "You are already in a party!")
+            Call PlayerMsg(index, "Vous êtes déjà dans un groupe!")
             Exit Sub
         End If
 
@@ -1834,34 +1834,34 @@
 
             ' Check if its an admin
             If GetPlayerAccess(index) > ADMIN_MONITOR Then
-                Call PlayerMsg(index, "You can't join a party, you are an admin!")
+                Call PlayerMsg(index, "Vous ne pouvez joindre un groupe, vous êtes un admin!")
                 Exit Sub
             End If
 
             If GetPlayerAccess(n) > ADMIN_MONITOR Then
-                Call PlayerMsg(index, "Admins cannot join parties!")
+                Call PlayerMsg(index, "LEs admins ne peuvent joindre de groupe!")
                 Exit Sub
             End If
 
             ' Make sure they are in right level range
             If GetPlayerLevel(index) + 5 < GetPlayerLevel(n) Or GetPlayerLevel(index) - 5 > GetPlayerLevel(n) Then
-                Call PlayerMsg(index, "There is more then a 5 level gap between you two, party failed.")
+                Call PlayerMsg(index, "Il ya plus d'un écart de niveau 5 entre vous deux, création du groupe impossible.")
                 Exit Sub
             End If
 
             ' Check to see if player is already in a party
             If TempPlayer(n).InParty = NO Then
-                Call PlayerMsg(index, "Party request has been sent to " & GetPlayerName(n) & ".")
-                Call PlayerMsg(n, GetPlayerName(index) & " wants you to join their party.  Type /join to join, or /leave to decline.")
+                Call PlayerMsg(index, "Requète de groupe envoyé à " & GetPlayerName(n) & ".")
+                Call PlayerMsg(n, GetPlayerName(index) & " souhaite rejoindre votre groupe. Tapez /join pour joindre ou /leave pour refuser.")
                 TempPlayer(index).PartyStarter = YES
                 TempPlayer(index).PartyPlayer = n
                 TempPlayer(n).PartyPlayer = index
             Else
-                Call PlayerMsg(index, "Player is already in a party!")
+                Call PlayerMsg(index, "Ce joueur est déjà dans un groupe!")
             End If
 
         Else
-            Call PlayerMsg(index, "Player is not online.")
+            Call PlayerMsg(index, "Le joueur n'est pas en ligne.")
         End If
     End Sub
 
@@ -1880,20 +1880,20 @@
 
                 ' Check to make sure that each of there party players match
                 If TempPlayer(n).PartyPlayer = index Then
-                    Call PlayerMsg(index, "You have joined " & GetPlayerName(n) & "'s party!")
-                    Call PlayerMsg(n, GetPlayerName(index) & " has joined your party!")
+                    Call PlayerMsg(index, "Vous avez rejoinnt le groupe de " & GetPlayerName(n) & "!")
+                    Call PlayerMsg(n, GetPlayerName(index) & " a rejoint votre groupe!")
                     TempPlayer(index).InParty = YES
                     TempPlayer(n).InParty = YES
                 Else
-                    Call PlayerMsg(index, "Party failed.")
+                    Call PlayerMsg(index, "Création du groupé échoué.")
                 End If
 
             Else
-                Call PlayerMsg(index, "You have not been invited to join a party!")
+                Call PlayerMsg(index, "Vous n'avez pas été invité pour rejoindre un groupe!")
             End If
 
         Else
-            Call PlayerMsg(index, "You have not been invited into a party!")
+            Call PlayerMsg(index, "Vous n'avez pas été invité pour rejoindre un groupe!")
         End If
 
         buffer = Nothing
@@ -1910,8 +1910,8 @@
 
         If n > 0 Then
             If TempPlayer(index).InParty = YES Then
-                Call PlayerMsg(index, "You have left the party.")
-                Call PlayerMsg(n, GetPlayerName(index) & " has left the party.")
+                Call PlayerMsg(index, "Vous avez quitté le groupe.")
+                Call PlayerMsg(n, GetPlayerName(index) & " a quitté le groupe.")
                 TempPlayer(index).PartyPlayer = 0
                 TempPlayer(index).PartyStarter = NO
                 TempPlayer(index).InParty = NO
@@ -1919,8 +1919,8 @@
                 TempPlayer(n).PartyStarter = NO
                 TempPlayer(n).InParty = NO
             Else
-                Call PlayerMsg(index, "Declined party request.")
-                Call PlayerMsg(n, GetPlayerName(index) & " declined your request.")
+                Call PlayerMsg(index, "Votre requète de groupé à été décliné.")
+                Call PlayerMsg(n, GetPlayerName(index) & " décliner votre demande.")
                 TempPlayer(index).PartyPlayer = 0
                 TempPlayer(index).PartyStarter = NO
                 TempPlayer(index).InParty = NO
@@ -1930,7 +1930,7 @@
             End If
 
         Else
-            Call PlayerMsg(index, "You are not in a party!")
+            Call PlayerMsg(index, "Vous n'êtes pas dans un groupe!")
         End If
 
         buffer = Nothing
@@ -2039,7 +2039,7 @@
         ' Save it
         Call SendUpdateResourceToAll(resourcenum)
         Call SaveResource(resourcenum)
-        Call Addlog(GetPlayerName(index) & " saved Resource #" & resourcenum & ".", ADMIN_LOG)
+        Call Addlog(GetPlayerName(index) & " a sauvegarder les ressources #" & resourcenum & ".", ADMIN_LOG)
         buffer = Nothing
     End Sub
 
@@ -2301,7 +2301,7 @@
             ' check has the cost item
             itemamount = HasItem(index, .costitem)
             If itemamount = 0 Or itemamount < .costvalue Then
-                PlayerMsg(index, "You do not have enough to buy this item.")
+                PlayerMsg(index, "Vous n'avez pas assez pour acheter cet objet.")
                 ResetShopAction(index)
                 Exit Sub
             End If
@@ -2312,7 +2312,7 @@
         End With
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(index, "Trade successful.")
+        PlayerMsg(index, "Echange effectué.")
         ResetShopAction(index)
 
         buffer = Nothing
@@ -2345,7 +2345,7 @@
 
         ' item has cost?
         If price <= 0 Then
-            PlayerMsg(index, "The shop doesn't want that item.")
+            PlayerMsg(index, "Le magasin ne veut pas cet objet.")
             ResetShopAction(index)
             Exit Sub
         End If
@@ -2355,7 +2355,7 @@
         GiveInvItem(index, 1, price)
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(index, "Trade successful.")
+        PlayerMsg(index, "Echange effectué.")
         ResetShopAction(index)
 
         buffer = Nothing
@@ -2472,15 +2472,15 @@
 
         ' can't trade with yourself..
         If tradetarget = index Then
-            PlayerMsg(index, "You can't trade with yourself.")
+            PlayerMsg(index, "Vous ne pouvez effectuer un échange avec vous même.")
             Exit Sub
         End If
 
         ' if the request accepts an open request, let them trade!
         If TempPlayer(tradetarget).TradeRequest = index Then
             ' let them know they're trading
-            PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.")
-            PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.")
+            PlayerMsg(index, "Vous avez accepté l'échange de " & Trim$(GetPlayerName(tradetarget)) & ".")
+            PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " a accepté votre demande d'échange.")
             ' clear the trade timeout clientside
             SendClearTradeTimer(index)
             ' clear the tradeRequest server-side
@@ -2509,8 +2509,8 @@
 
         ' send the trade request
         TempPlayer(index).TradeRequest = tradetarget
-        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.")
-        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.")
+        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " vous a invité à l'échange.")
+        PlayerMsg(index, "Vous avez invité " & Trim$(GetPlayerName(tradetarget)) & " à l'échange.")
         SendClearTradeTimer(index)
     End Sub
 
@@ -2590,8 +2590,8 @@
         TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(index, "Trade completed.")
-        PlayerMsg(tradeTarget, "Trade completed.")
+        PlayerMsg(index, "Echange effectué.")
+        PlayerMsg(tradeTarget, "Echange terminé.")
 
         SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
@@ -2618,8 +2618,8 @@
         TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(index, "You declined the trade.")
-        PlayerMsg(tradeTarget, GetPlayerName(index) & " has declined the trade.")
+        PlayerMsg(index, "Vous avez refusé l'échange.")
+        PlayerMsg(tradeTarget, GetPlayerName(index) & " a refusé votre échange.")
 
         SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
@@ -2645,7 +2645,7 @@
         ' make sure they're not already offering it
         For i = 1 To MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = invslot Then
-                PlayerMsg(index, "You've already offered this item.")
+                PlayerMsg(index, "Vous avez déjà échangé cette offre.")
                 Exit Sub
             End If
         Next
@@ -2713,14 +2713,14 @@
         OtherPlayerIndex = FindPlayer(OtherPlayer)
         If OtherPlayerIndex <> index Then
             If OtherPlayerIndex > 0 Then
-                Call Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
-                Call PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'")
-                Call PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
+                Call Addlog(GetPlayerName(index) & " appel " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
+                Call PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " vous appel, '" & Msg & "'")
+                Call PlayerMsg(index, "Vous appelez " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
             Else
-                Call PlayerMsg(index, "Player is not online.")
+                Call PlayerMsg(index, "Le joueur n'est pas en ligne.")
             End If
         Else
-            Call PlayerMsg(index, "Cannot message your self!")
+            Call PlayerMsg(index, "Impossible de s'envoyer un message à soit-même!")
         End If
     End Sub
 
@@ -2803,7 +2803,7 @@
                 Call GlobalMsg(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has been booted for (" & Reason & ")")
             End If
 
-            Call AlertMsg(Index, "You have lost your connection with " & Options.Game_Name & ".")
+            Call AlertMsg(Index, "Vous avez perdu la connection avec " & Options.Game_Name & ".")
         End If
 
     End Sub
