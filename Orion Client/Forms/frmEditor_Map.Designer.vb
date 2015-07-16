@@ -247,7 +247,7 @@ Partial Class frmEditor_Map
         Me.fraLayers.Size = New System.Drawing.Size(103, 338)
         Me.fraLayers.TabIndex = 8
         Me.fraLayers.TabStop = False
-        Me.fraLayers.Text = "Layers"
+        Me.fraLayers.Text = "Couches"
         '
         'btnFill
         '
@@ -255,7 +255,7 @@ Partial Class frmEditor_Map
         Me.btnFill.Name = "btnFill"
         Me.btnFill.Size = New System.Drawing.Size(91, 25)
         Me.btnFill.TabIndex = 8
-        Me.btnFill.Text = "Fill"
+        Me.btnFill.Text = "Remplir"
         Me.btnFill.UseVisualStyleBackColor = True
         '
         'btnClearLayer
@@ -264,7 +264,7 @@ Partial Class frmEditor_Map
         Me.btnClearLayer.Name = "btnClearLayer"
         Me.btnClearLayer.Size = New System.Drawing.Size(91, 25)
         Me.btnClearLayer.TabIndex = 5
-        Me.btnClearLayer.Text = "Clear"
+        Me.btnClearLayer.Text = "Nettoyer"
         Me.btnClearLayer.UseVisualStyleBackColor = True
         '
         'optFringe2
@@ -274,7 +274,7 @@ Partial Class frmEditor_Map
         Me.optFringe2.Name = "optFringe2"
         Me.optFringe2.Size = New System.Drawing.Size(63, 17)
         Me.optFringe2.TabIndex = 4
-        Me.optFringe2.Text = "Fringe 2"
+        Me.optFringe2.Text = "Frange 2"
         Me.optFringe2.UseVisualStyleBackColor = True
         '
         'optFringe
@@ -284,7 +284,7 @@ Partial Class frmEditor_Map
         Me.optFringe.Name = "optFringe"
         Me.optFringe.Size = New System.Drawing.Size(54, 17)
         Me.optFringe.TabIndex = 3
-        Me.optFringe.Text = "Fringe"
+        Me.optFringe.Text = "Frange"
         Me.optFringe.UseVisualStyleBackColor = True
         '
         'optMask2
@@ -294,7 +294,7 @@ Partial Class frmEditor_Map
         Me.optMask2.Name = "optMask2"
         Me.optMask2.Size = New System.Drawing.Size(60, 17)
         Me.optMask2.TabIndex = 2
-        Me.optMask2.Text = "Mask 2"
+        Me.optMask2.Text = "Masque 2"
         Me.optMask2.UseVisualStyleBackColor = True
         '
         'optMask
@@ -304,7 +304,7 @@ Partial Class frmEditor_Map
         Me.optMask.Name = "optMask"
         Me.optMask.Size = New System.Drawing.Size(51, 17)
         Me.optMask.TabIndex = 1
-        Me.optMask.Text = "Mask"
+        Me.optMask.Text = "Masque"
         Me.optMask.UseVisualStyleBackColor = True
         '
         'optGround
@@ -316,7 +316,7 @@ Partial Class frmEditor_Map
         Me.optGround.Size = New System.Drawing.Size(60, 17)
         Me.optGround.TabIndex = 0
         Me.optGround.TabStop = True
-        Me.optGround.Text = "Ground"
+        Me.optGround.Text = "Terre"
         Me.optGround.UseVisualStyleBackColor = True
         '
         'fraAttributes
@@ -404,7 +404,7 @@ Partial Class frmEditor_Map
         Me.optNPCSpawn.Size = New System.Drawing.Size(81, 17)
         Me.optNPCSpawn.TabIndex = 8
         Me.optNPCSpawn.TabStop = True
-        Me.optNPCSpawn.Text = "PNJ Spawn"
+        Me.optNPCSpawn.Text = "Appartion des PNJs"
         Me.optNPCSpawn.UseVisualStyleBackColor = True
         '
         'optDoor
@@ -426,7 +426,7 @@ Partial Class frmEditor_Map
         Me.optResource.Size = New System.Drawing.Size(71, 17)
         Me.optResource.TabIndex = 6
         Me.optResource.TabStop = True
-        Me.optResource.Text = "Resource"
+        Me.optResource.Text = "Ressource"
         Me.optResource.UseVisualStyleBackColor = True
         '
         'optKeyOpen
@@ -549,7 +549,7 @@ Partial Class frmEditor_Map
         Me.fraNpcSpawn.Size = New System.Drawing.Size(252, 158)
         Me.fraNpcSpawn.TabIndex = 11
         Me.fraNpcSpawn.TabStop = False
-        Me.fraNpcSpawn.Text = "PNJ Spawn"
+        Me.fraNpcSpawn.Text = "Apparition des PNJs"
         '
         'lstNpc
         '
@@ -598,7 +598,7 @@ Partial Class frmEditor_Map
         Me.fraHeal.Size = New System.Drawing.Size(252, 130)
         Me.fraHeal.TabIndex = 15
         Me.fraHeal.TabStop = False
-        Me.fraHeal.Text = "Heal"
+        Me.fraHeal.Text = "Soin"
         '
         'scrlHeal
         '
@@ -614,7 +614,7 @@ Partial Class frmEditor_Map
         Me.lblHeal.Name = "lblHeal"
         Me.lblHeal.Size = New System.Drawing.Size(55, 13)
         Me.lblHeal.TabIndex = 38
-        Me.lblHeal.Text = "Amount: 0"
+        Me.lblHeal.Text = "Quantité: 0"
         '
         'cmbHeal
         '
@@ -631,7 +631,7 @@ Partial Class frmEditor_Map
         Me.btnHeal.Name = "btnHeal"
         Me.btnHeal.Size = New System.Drawing.Size(90, 28)
         Me.btnHeal.TabIndex = 6
-        Me.btnHeal.Text = "Accept"
+        Me.btnHeal.Text = "Accepter"
         Me.btnHeal.UseVisualStyleBackColor = True
         '
         'fraShop
@@ -643,7 +643,7 @@ Partial Class frmEditor_Map
         Me.fraShop.Size = New System.Drawing.Size(252, 113)
         Me.fraShop.TabIndex = 12
         Me.fraShop.TabStop = False
-        Me.fraShop.Text = "Shop"
+        Me.fraShop.Text = "Magasin"
         '
         'cmbShop
         '
@@ -673,7 +673,7 @@ Partial Class frmEditor_Map
         Me.fraResource.Size = New System.Drawing.Size(252, 138)
         Me.fraResource.TabIndex = 10
         Me.fraResource.TabStop = False
-        Me.fraResource.Text = "Resource"
+        Me.fraResource.Text = "Ressource"
         '
         'btnResourceOk
         '
@@ -681,7 +681,7 @@ Partial Class frmEditor_Map
         Me.btnResourceOk.Name = "btnResourceOk"
         Me.btnResourceOk.Size = New System.Drawing.Size(90, 28)
         Me.btnResourceOk.TabIndex = 6
-        Me.btnResourceOk.Text = "Accept"
+        Me.btnResourceOk.Text = "Accepter"
         Me.btnResourceOk.UseVisualStyleBackColor = True
         '
         'scrlResource
@@ -712,7 +712,7 @@ Partial Class frmEditor_Map
         Me.fraKeyOpen.Size = New System.Drawing.Size(252, 138)
         Me.fraKeyOpen.TabIndex = 9
         Me.fraKeyOpen.TabStop = False
-        Me.fraKeyOpen.Text = "Map Key Open"
+        Me.fraKeyOpen.Text = "Clée de la carte ouverte"
         '
         'scrlKeyY
         '
@@ -736,7 +736,7 @@ Partial Class frmEditor_Map
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(90, 28)
         Me.Button3.TabIndex = 6
-        Me.Button3.Text = "Accept"
+        Me.Button3.Text = "Accepter"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'scrlKeyX
@@ -767,7 +767,7 @@ Partial Class frmEditor_Map
         Me.fraMapKey.Size = New System.Drawing.Size(252, 138)
         Me.fraMapKey.TabIndex = 8
         Me.fraMapKey.TabStop = False
-        Me.fraMapKey.Text = "Map Key"
+        Me.fraMapKey.Text = "Clée de la carte"
         '
         'chkMapKey
         '
@@ -813,7 +813,7 @@ Partial Class frmEditor_Map
         Me.lblMapKey.Name = "lblMapKey"
         Me.lblMapKey.Size = New System.Drawing.Size(59, 13)
         Me.lblMapKey.TabIndex = 0
-        Me.lblMapKey.Text = "Item: None"
+        Me.lblMapKey.Text = "Objet: None"
         '
         'fraMapItem
         '
@@ -827,7 +827,7 @@ Partial Class frmEditor_Map
         Me.fraMapItem.Size = New System.Drawing.Size(252, 138)
         Me.fraMapItem.TabIndex = 7
         Me.fraMapItem.TabStop = False
-        Me.fraMapItem.Text = "Map Item"
+        Me.fraMapItem.Text = "Objet de la carte"
         '
         'picMapItem
         '
@@ -844,7 +844,7 @@ Partial Class frmEditor_Map
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(90, 28)
         Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Accept"
+        Me.Button2.Text = "Accepter"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'scrlMapItemValue
@@ -868,7 +868,7 @@ Partial Class frmEditor_Map
         Me.lblMapItem.Name = "lblMapItem"
         Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
         Me.lblMapItem.TabIndex = 0
-        Me.lblMapItem.Text = "Item: None x0"
+        Me.lblMapItem.Text = "Objet: None x0"
         '
         'fraMapWarp
         '
@@ -884,7 +884,7 @@ Partial Class frmEditor_Map
         Me.fraMapWarp.Size = New System.Drawing.Size(252, 172)
         Me.fraMapWarp.TabIndex = 0
         Me.fraMapWarp.TabStop = False
-        Me.fraMapWarp.Text = "Map Warp"
+        Me.fraMapWarp.Text = "Téléportation de la carte"
         '
         'btnMapWarp
         '
@@ -892,7 +892,7 @@ Partial Class frmEditor_Map
         Me.btnMapWarp.Name = "btnMapWarp"
         Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
         Me.btnMapWarp.TabIndex = 6
-        Me.btnMapWarp.Text = "Accept"
+        Me.btnMapWarp.Text = "Accepter"
         Me.btnMapWarp.UseVisualStyleBackColor = True
         '
         'scrlMapWarpY
@@ -941,7 +941,7 @@ Partial Class frmEditor_Map
         Me.lblMapWarpMap.Name = "lblMapWarpMap"
         Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
         Me.lblMapWarpMap.TabIndex = 0
-        Me.lblMapWarpMap.Text = "Map: 1"
+        Me.lblMapWarpMap.Text = "Carte: 1"
         '
         'fraTrap
         '
@@ -953,7 +953,7 @@ Partial Class frmEditor_Map
         Me.fraTrap.Size = New System.Drawing.Size(252, 113)
         Me.fraTrap.TabIndex = 16
         Me.fraTrap.TabStop = False
-        Me.fraTrap.Text = "Trap"
+        Me.fraTrap.Text = "Piège"
         '
         'btnTrap
         '
@@ -961,7 +961,7 @@ Partial Class frmEditor_Map
         Me.btnTrap.Name = "btnTrap"
         Me.btnTrap.Size = New System.Drawing.Size(90, 28)
         Me.btnTrap.TabIndex = 42
-        Me.btnTrap.Text = "Accept"
+        Me.btnTrap.Text = "Accepter"
         Me.btnTrap.UseVisualStyleBackColor = True
         '
         'scrlTrap
@@ -978,7 +978,7 @@ Partial Class frmEditor_Map
         Me.lblTrap.Name = "lblTrap"
         Me.lblTrap.Size = New System.Drawing.Size(55, 13)
         Me.lblTrap.TabIndex = 40
-        Me.lblTrap.Text = "Amount: 0"
+        Me.lblTrap.Text = "Quantité: 0"
         '
         'frmEditor_Map
         '
