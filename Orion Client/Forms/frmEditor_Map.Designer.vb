@@ -272,7 +272,7 @@ Partial Class frmEditor_Map
         Me.optFringe2.AutoSize = True
         Me.optFringe2.Location = New System.Drawing.Point(6, 111)
         Me.optFringe2.Name = "optFringe2"
-        Me.optFringe2.Size = New System.Drawing.Size(63, 17)
+        Me.optFringe2.Size = New System.Drawing.Size(67, 17)
         Me.optFringe2.TabIndex = 4
         Me.optFringe2.Text = "Frange 2"
         Me.optFringe2.UseVisualStyleBackColor = True
@@ -282,7 +282,7 @@ Partial Class frmEditor_Map
         Me.optFringe.AutoSize = True
         Me.optFringe.Location = New System.Drawing.Point(6, 88)
         Me.optFringe.Name = "optFringe"
-        Me.optFringe.Size = New System.Drawing.Size(54, 17)
+        Me.optFringe.Size = New System.Drawing.Size(58, 17)
         Me.optFringe.TabIndex = 3
         Me.optFringe.Text = "Frange"
         Me.optFringe.UseVisualStyleBackColor = True
@@ -292,7 +292,7 @@ Partial Class frmEditor_Map
         Me.optMask2.AutoSize = True
         Me.optMask2.Location = New System.Drawing.Point(6, 65)
         Me.optMask2.Name = "optMask2"
-        Me.optMask2.Size = New System.Drawing.Size(60, 17)
+        Me.optMask2.Size = New System.Drawing.Size(72, 17)
         Me.optMask2.TabIndex = 2
         Me.optMask2.Text = "Masque 2"
         Me.optMask2.UseVisualStyleBackColor = True
@@ -302,7 +302,7 @@ Partial Class frmEditor_Map
         Me.optMask.AutoSize = True
         Me.optMask.Location = New System.Drawing.Point(6, 42)
         Me.optMask.Name = "optMask"
-        Me.optMask.Size = New System.Drawing.Size(51, 17)
+        Me.optMask.Size = New System.Drawing.Size(63, 17)
         Me.optMask.TabIndex = 1
         Me.optMask.Text = "Masque"
         Me.optMask.UseVisualStyleBackColor = True
@@ -313,7 +313,7 @@ Partial Class frmEditor_Map
         Me.optGround.Checked = True
         Me.optGround.Location = New System.Drawing.Point(6, 19)
         Me.optGround.Name = "optGround"
-        Me.optGround.Size = New System.Drawing.Size(60, 17)
+        Me.optGround.Size = New System.Drawing.Size(50, 17)
         Me.optGround.TabIndex = 0
         Me.optGround.TabStop = True
         Me.optGround.Text = "Terre"
@@ -401,10 +401,10 @@ Partial Class frmEditor_Map
         Me.optNPCSpawn.AutoSize = True
         Me.optNPCSpawn.Location = New System.Drawing.Point(5, 160)
         Me.optNPCSpawn.Name = "optNPCSpawn"
-        Me.optNPCSpawn.Size = New System.Drawing.Size(81, 17)
+        Me.optNPCSpawn.Size = New System.Drawing.Size(98, 17)
         Me.optNPCSpawn.TabIndex = 8
         Me.optNPCSpawn.TabStop = True
-        Me.optNPCSpawn.Text = "Appartion des PNJs"
+        Me.optNPCSpawn.Text = "Appartion PNJs"
         Me.optNPCSpawn.UseVisualStyleBackColor = True
         '
         'optDoor
@@ -423,7 +423,7 @@ Partial Class frmEditor_Map
         Me.optResource.AutoSize = True
         Me.optResource.Location = New System.Drawing.Point(5, 125)
         Me.optResource.Name = "optResource"
-        Me.optResource.Size = New System.Drawing.Size(71, 17)
+        Me.optResource.Size = New System.Drawing.Size(76, 17)
         Me.optResource.TabIndex = 6
         Me.optResource.TabStop = True
         Me.optResource.Text = "Ressource"
@@ -612,7 +612,7 @@ Partial Class frmEditor_Map
         Me.lblHeal.AutoSize = True
         Me.lblHeal.Location = New System.Drawing.Point(23, 57)
         Me.lblHeal.Name = "lblHeal"
-        Me.lblHeal.Size = New System.Drawing.Size(55, 13)
+        Me.lblHeal.Size = New System.Drawing.Size(59, 13)
         Me.lblHeal.TabIndex = 38
         Me.lblHeal.Text = "Quantité: 0"
         '
@@ -811,7 +811,7 @@ Partial Class frmEditor_Map
         Me.lblMapKey.AutoSize = True
         Me.lblMapKey.Location = New System.Drawing.Point(6, 22)
         Me.lblMapKey.Name = "lblMapKey"
-        Me.lblMapKey.Size = New System.Drawing.Size(59, 13)
+        Me.lblMapKey.Size = New System.Drawing.Size(64, 13)
         Me.lblMapKey.TabIndex = 0
         Me.lblMapKey.Text = "Objet: None"
         '
@@ -866,7 +866,7 @@ Partial Class frmEditor_Map
         Me.lblMapItem.AutoSize = True
         Me.lblMapItem.Location = New System.Drawing.Point(6, 22)
         Me.lblMapItem.Name = "lblMapItem"
-        Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
+        Me.lblMapItem.Size = New System.Drawing.Size(78, 13)
         Me.lblMapItem.TabIndex = 0
         Me.lblMapItem.Text = "Objet: None x0"
         '
@@ -939,7 +939,7 @@ Partial Class frmEditor_Map
         Me.lblMapWarpMap.AutoSize = True
         Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 25)
         Me.lblMapWarpMap.Name = "lblMapWarpMap"
-        Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
+        Me.lblMapWarpMap.Size = New System.Drawing.Size(44, 13)
         Me.lblMapWarpMap.TabIndex = 0
         Me.lblMapWarpMap.Text = "Carte: 1"
         '
@@ -976,7 +976,7 @@ Partial Class frmEditor_Map
         Me.lblTrap.AutoSize = True
         Me.lblTrap.Location = New System.Drawing.Point(27, 21)
         Me.lblTrap.Name = "lblTrap"
-        Me.lblTrap.Size = New System.Drawing.Size(55, 13)
+        Me.lblTrap.Size = New System.Drawing.Size(59, 13)
         Me.lblTrap.TabIndex = 40
         Me.lblTrap.Text = "Quantité: 0"
         '
