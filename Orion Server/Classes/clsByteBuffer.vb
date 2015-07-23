@@ -83,7 +83,7 @@ Public Class ByteBuffer
             End If
             Return ret
         Else
-            Throw New Exception("Le tampon à dépasser sa limite!") 'past byte count throw a new exception
+            Throw New Exception("Le tampon a dépasser sa limite!") 'past byte count throw a new exception
         End If
     End Function
     Public Function ReadInteger(Optional ByVal peek As Boolean = True) As Integer
@@ -98,7 +98,7 @@ Public Class ByteBuffer
             End If
             Return ret
         Else
-            Throw New Exception("Le tampon à dépassé sa limite !") 'past byte count throw a new exception
+            Throw New Exception("Le tampon a dépassé sa limite !") 'past byte count throw a new exception
         End If
     End Function
     Public Function ReadLong(Optional ByVal peek As Boolean = True) As Long
@@ -113,7 +113,7 @@ Public Class ByteBuffer
             End If
             Return ret
         Else
-            Throw New Exception("Le tampon à atteint sa limite !") 'past byte count throw a new exception
+            Throw New Exception("Le tampon a atteint sa limite !") 'past byte count throw a new exception
         End If
     End Function
 
