@@ -767,7 +767,7 @@
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
-            Call PlayerMsg(Index, "Not enough mana!")
+            Call PlayerMsg(Index, "Vous n'avez pas assez de Mana!")
             Exit Sub
         End If
 
