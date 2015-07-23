@@ -853,7 +853,7 @@
                     End If
 
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                        PlayerMsg(Index, "Target not in range.")
+                        PlayerMsg(Index, "La cible n'est pas à votre portée.")
                         SendClearSpellBuffer(Index)
                     End If
                 End If
@@ -935,7 +935,7 @@
                 End If
 
                 If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                    PlayerMsg(Index, "Target not in range.")
+                    PlayerMsg(Index, "La cible n'est pas à votre portée.")
                     SendClearSpellBuffer(Index)
                     Exit Sub
                 End If
