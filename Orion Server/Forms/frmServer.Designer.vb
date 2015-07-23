@@ -391,7 +391,7 @@ Partial Class frmServer
         '
         Me.RemoveAdminToolStripMenuItem1.Name = "RemoveAdminToolStripMenuItem1"
         Me.RemoveAdminToolStripMenuItem1.Size = New System.Drawing.Size(264, 22)
-        Me.RemoveAdminToolStripMenuItem1.Text = "Supprimer les droits administrateurs"
+        Me.RemoveAdminToolStripMenuItem1.Text = "Supprimer les droits administrateur"
         '
         'notifyMenu
         '
