@@ -5,7 +5,7 @@ Module modText
         Dim mystring As SFML.Graphics.Text = New SFML.Graphics.Text(text, SFMLGameFont)
         mystring.CharacterSize = FONT_SIZE
         mystring.Color = color
-        mystring.Position = New SFML.Window.Vector2f(X, y)
+        mystring.Position = New SFML.System.Vector2f(X, y)
         target.Draw(mystring)
     End Sub
 
