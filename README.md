@@ -1,39 +1,37 @@
 Orion Game Engine
 =================
 
-Simple Editeur de ORPG en 2D écrit en VB.Net
+Orion Game Engine est un simple Editeur de ORPG en 2D. Le programme est écrit en VB.Net
 
-Site officiel: http://www.ascensionforums.com
+Site officiel du projet: http://www.ascensionforums.com
 
-Qu'est-ce que c'est?
+Présentation
 ===========
-Ceci est un moteur simple, tilebased 2D jeu ORPG. Il dispose d'une configuration client et serveur d'applications avec une interface graphique de base.
+Le logiciel est un moteur simple basé sur l'utilisation de titleset en 2D. Il dispose de deux programme un client et un serveur tout deux avec une interface graphique.
 
-Caractéristiques du jeu:
+Caractéristiques du client:
 ==============
 Création de personnage et de classe
-Mouvement / Attaquer
-PNJ / informatiques pour attaquer
+Déplacement du personnage / Attaquer
+PNJ / Programmation d'attaque
 Objets & Sorts
 
 Caractéristiques de création:
 ==================
-Le client dispose d'éditeurs pour le monde (cartes), objets, sorts, des animations, des PNJ, et plus encore depuis le panneau d'administration dans le jeu.
+Le client dispose d'un éiteurs de carte, objets, sorts, animations, PNJ et plus encore...
 
-Comment puis-je utiliser ce logiciel?
+Comment utiliser le programme
 ===========================
-Si vous êtes un programmeur alors vous aurez probablement préférez compiler la version la plus récente de la source. Télécharger ici le moteur, ouvrir la solution dans Visual Studio compiler les deux projets et de lancer l'application client et le serveur. Ils doivent se connecter automatiquement. Des options IP et le port sont stockés dans la racine / données (fichiers) de fichiers /config.ini.
+Si vous êtes un programmeur alors vous allez probablement préférez compiler la version la plus récente de le code source. Pour ce faire il vous suffit de télécharger le contenu de ce GIT et d'ouvrir la solution dans Visual Studio pour modifier le code source ou juste le compiler. L'adresse IP et le port sont stockés dans à la racine du client et du serveur sous le nom suivant config.ini.
 
 Comment puis-je accéder à l'éditeur ?
 ============================
-Connectez-vous au jeu avec le client. Sur le serveur, ouvrez la liste des joueurs, un clic droit sur votre personnage et vous donner les droit admin. Allez sur le client et appuyez sur F1.
+Connectez-vous au jeu avec le client, ensuite allez sur le serveur, ouvrez la liste des joueurs faite clic droit sur votre personnage et faite "Donner les droits administrateurs". Retournez sur le client et appuyez sur F1.
 
 Support & Mises à jour:
 ==================
-Le site officiel de ce moteur est http://ascensionforums.com. Si vous avez besoin de soutien ou des conseils dans la création de jeux n'hésitez pas. Si vous trouvez des bugs vous êtes libre de les signaler.
+Le site officiel de ce moteur est http://ascensionforums.com. Si vous avez besoin d'aide ou des conseils dans la création de votre ORPG n'hésitez pas. Si vous trouvez des bugs vous êtes libre de les signaler depuis le forum.
 
-Nous avons quelques mises à jour prévues pour ce moteur. A ce moment mon ami et collègue Joe (aka Kibbelz / Irokaiser) et moi-même publierons régulièrement les fonctions de base et des corrections de bugs pour ce moteur.
-
-À l'heure actuelle Orion manque de fonctionnalités, mais il est une base idéale pour les programmeurs de sculpter dans leur propre vision, nous voulons que cela continue je ne voudrais pas s'attendre à un kit de création de jeu entièrement en vedette pour former de ce sitôt.
+À l'heure actuelle Orion Engine Game manque de fonctionnalités, mais il est une base idéale pour les programmeurs qui souhaite débuter dans le développement en y créant leur propre ORPG voir même leur propre moteur de jeux. Il ne faut poas s'attendre à ce que le logiciel soit un moteur de ORPG complet.
 
 Ceci est une traduction Française du logiciel Orion. Cette traduction a été fait par Jérémy Colombier. Le jeu reste la propriété de ascenciongamedev
