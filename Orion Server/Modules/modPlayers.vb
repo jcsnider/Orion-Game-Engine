@@ -12,8 +12,8 @@
     Public Sub HandleUseChar(ByVal Index As Long)
         If Not IsPlaying(Index) Then
             Call JoinGame(Index)
-            Call AddLog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".", PLAYER_LOG)
-            Call TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
+            Call AddLog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " a commencé à jouer " & Options.Game_Name & ".", PLAYER_LOG)
+            Call TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " a commencé à jouer " & Options.Game_Name & ".")
         End If
     End Sub
     Function GetPlayerName(ByVal Index As Long) As String
@@ -219,9 +219,9 @@
 
         ' Send a global message that he/she joined
         If GetPlayerAccess(Index) <= ADMIN_MONITOR Then
-            Call GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
+            Call GlobalMsg(GetPlayerName(Index) & " a rejoint " & Options.Game_Name & "!")
         Else
-            Call GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
+            Call GlobalMsg(GetPlayerName(Index) & " a rejoint " & Options.Game_Name & "!")
         End If
 
         'Update the log
@@ -276,7 +276,7 @@
             ' Check if the player was in a party, and if so cancel it out so the other player doesn't continue to get half exp
             If TempPlayer(Index).InParty = YES Then
                 n = TempPlayer(Index).PartyPlayer
-                Call PlayerMsg(n, GetPlayerName(Index) & " has left " & Options.Game_Name & ", disbanning party.")
+                Call PlayerMsg(n, GetPlayerName(Index) & " a quitté " & Options.Game_Name & ", ce qui a supprimé le groupe.")
                 TempPlayer(n).InParty = NO
                 TempPlayer(n).PartyPlayer = 0
             End If
@@ -284,7 +284,7 @@
             ' cancel any trade they're in
             If TempPlayer(Index).InTrade > 0 Then
                 tradeTarget = TempPlayer(Index).InTrade
-                PlayerMsg(tradeTarget, Trim$(GetPlayerName(Index)) & " has declined the trade.")
+                PlayerMsg(tradeTarget, Trim$(GetPlayerName(Index)) & " a refusé l'échange.")
                 ' clear out trade
                 For i = 1 To MAX_INV
                     TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -300,12 +300,12 @@
 
             ' Send a global message that he/she left
             If GetPlayerAccess(Index) <= ADMIN_MONITOR Then
-                Call GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
+                Call GlobalMsg(GetPlayerName(Index) & " a quitté " & Options.Game_Name & "!")
             Else
-                Call GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
+                Call GlobalMsg(GetPlayerName(Index) & " a quitté " & Options.Game_Name & "!")
             End If
 
-            TextAdd(GetPlayerName(Index) & " has disconnected from " & Options.Game_Name & ".")
+            TextAdd(GetPlayerName(Index) & " a été déconnecté de " & Options.Game_Name & ".")
             Call SendLeftGame(Index)
             TotalPlayersOnline = TotalPlayersOnline - 1
             TempPlayer(Index) = Nothing
@@ -484,7 +484,7 @@
                     TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                     TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount
                     SendMapKey(Index, x, y, 1)
-                    Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                    Call MapMsg(GetPlayerMap(Index), "Une porte a été débloquée.", White)
                 End If
             End If
 
@@ -518,7 +518,7 @@
                     End If
                     SendActionMsg(GetPlayerMap(Index), "+" & amount, Colour, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                     SetPlayerVital(Index, VitalType, GetPlayerVital(Index, VitalType) + amount)
-                    PlayerMsg(Index, "You feel rejuvinating forces flowing through your boy.")
+                    PlayerMsg(Index, "Vous sentez vos force revenir.")
                     Call SendVital(Index, VitalType)
                 End If
                 Moved = YES
@@ -530,10 +530,10 @@
                 SendActionMsg(GetPlayerMap(Index), "-" & amount, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                 If GetPlayerVital(Index, Vitals.HP) - amount <= 0 Then
                     KillPlayer(Index)
-                    PlayerMsg(Index, "You're killed by a trap.")
+                    PlayerMsg(Index, "Vous avez été tué par un piège.")
                 Else
                     SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - amount)
-                    PlayerMsg(Index, "You're injured by a trap.")
+                    PlayerMsg(Index, "Vous avez été blessé par un piège.")
                     Call SendVital(Index, Vitals.HP)
                 End If
                 Moved = YES
@@ -674,10 +674,10 @@
         If level_count > 0 Then
             If level_count = 1 Then
                 'singular
-                GlobalMsg(GetPlayerName(Index) & " has gained " & level_count & " level!")
+                GlobalMsg(GetPlayerName(Index) & " a gagné " & level_count & " niveau!")
             Else
                 'plural
-                GlobalMsg(GetPlayerName(Index) & " has gained " & level_count & " levels!")
+                GlobalMsg(GetPlayerName(Index) & " a gagné " & level_count & " niveaux!")
             End If
             SendEXP(Index)
             SendPlayerData(Index)
@@ -728,7 +728,7 @@
                                 SendActionMsg(GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                                 Exit For
                             Else
-                                Call PlayerMsg(Index, "Your inventory is full.")
+                                Call PlayerMsg(Index, "Votre inventaire est plein.")
                                 Exit For
                             End If
                         End If
@@ -835,7 +835,7 @@
             If sendUpdate Then Call SendInventoryUpdate(Index, i)
             GiveInvItem = True
         Else
-            Call PlayerMsg(Index, "Your inventory is full.")
+            Call PlayerMsg(Index, "Votre inventaire est plein.")
             GiveInvItem = False
         End If
 
@@ -925,7 +925,7 @@
                     ' Spawn the item before we set the num or we'll get a different free map item slot
                     Call SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, amount, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
                 Else
-                    Call PlayerMsg(Index, "Too many items already on the ground.")
+                    Call PlayerMsg(Index, "Il y a trop d'éléments sur le terrain.")
                 End If
             End If
         End If
@@ -1063,11 +1063,11 @@
         ' Make sure we dont get less then 0
         If exp < 0 Then exp = 0
         If exp = 0 Then
-            Call PlayerMsg(Index, "You lost no exp.")
+            Call PlayerMsg(Index, "Vous n'avez perdu aucun point d'experience.")
         Else
             Call SetPlayerExp(Index, GetPlayerExp(Index) - exp)
             SendEXP(Index)
-            Call PlayerMsg(Index, "You lost " & exp & " exp.")
+            Call PlayerMsg(Index, "vous avez perdu " & exp & " point d'experience.")
         End If
 
         Call OnDeath(Index)
@@ -1198,7 +1198,7 @@
                         ' inv space?
                         If Resource(Resource_index).ItemReward > 0 Then
                             If FindOpenInvSlot(Index, Resource(Resource_index).ItemReward) = 0 Then
-                                PlayerMsg(Index, "You have no inventory space.")
+                                PlayerMsg(Index, "Vous n'avez aucun emplacement disponible dans votre inventaire.")
                                 Exit Sub
                             End If
                         End If
@@ -1236,11 +1236,11 @@
                         End If
 
                     Else
-                        PlayerMsg(Index, "You have the wrong type of tool equiped.")
+                        PlayerMsg(Index, "Vous avez le mauvais type d'outil équipé.")
                     End If
 
                 Else
-                    PlayerMsg(Index, "You need a tool to interact with this resource.")
+                    PlayerMsg(Index, "Vous avez besoins d'un outil pour interargir avec cette ressource.")
                 End If
             End If
         End If
@@ -1272,7 +1272,7 @@
 
         ' see if cooldown has finished
         If TempPlayer(Index).SpellCD(spellslot) > GetTickCount Then
-            PlayerMsg(Index, "Spell hasn't cooled down yet!")
+            PlayerMsg(Index, "Le sort n'est pas encore prêt!")
             Exit Sub
         End If
 
@@ -1280,7 +1280,7 @@
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
-            Call PlayerMsg(Index, "Not enough mana!")
+            Call PlayerMsg(Index, "Vous n'avez pas assez de mana!")
             Exit Sub
         End If
 
@@ -1288,7 +1288,7 @@
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            Call PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            Call PlayerMsg(Index, "Vous devez être niveau " & LevelReq & " pour lancer ce sort.")
             Exit Sub
         End If
 
@@ -1296,7 +1296,7 @@
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            Call PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            Call PlayerMsg(Index, "Vous devez être un administrateur pour lancer ce sort.")
             Exit Sub
         End If
 
@@ -1305,7 +1305,7 @@
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                Call PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                Call PlayerMsg(Index, "Seul " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " peut lancer ce sort.")
                 Exit Sub
             End If
         End If
@@ -1337,12 +1337,12 @@
             Case 2, 3 ' targeted & targeted AOE
                 ' check if have target
                 If Not Target > 0 Then
-                    PlayerMsg(Index, "You do not have a target.")
+                    PlayerMsg(Index, "Vous n'avez aucune cible.")
                 End If
                 If TargetType = TARGET_TYPE_PLAYER Then
                     ' if have target, check in range
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), GetPlayerX(Target), GetPlayerY(Target)) Then
-                        PlayerMsg(Index, "Target not in range.")
+                        PlayerMsg(Index, "La cible n'est pas à portée.")
                     Else
                         ' go through spell types
                         If Spell(spellnum).Type <> SPELL_TYPE_DAMAGEHP And Spell(spellnum).Type <> SPELL_TYPE_DAMAGEMP Then
@@ -1356,7 +1356,7 @@
                 ElseIf TargetType = TARGET_TYPE_NPC Then
                     ' if have target, check in range
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
-                        PlayerMsg(Index, "Target not in range.")
+                        PlayerMsg(Index, "La cible n'est pas à portée.")
                         HasBuffered = False
                     Else
                         ' go through spell types
