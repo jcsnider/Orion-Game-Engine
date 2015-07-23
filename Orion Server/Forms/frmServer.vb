@@ -80,7 +80,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Ne joue pas" Then
+        If Not Name = "N'est pas en ligne" Then
             Call AlertMsg(FindPlayer(Name), "Vous avez été kické par le serveur!")
         End If
     End Sub
@@ -89,7 +89,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Ne joue pas" Then
+        If Not Name = "N'est pas en ligne" Then
             CloseSocket(FindPlayer(Name))
         End If
     End Sub
@@ -98,7 +98,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Ne joue pas" Then
+        If Not Name = "N'est pas en ligne" Then
             Call ServerBanIndex(FindPlayer(Name))
         End If
     End Sub
@@ -107,7 +107,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Ne joue pas" Then
+        If Not Name = "N'est pas en ligne" Then
             Call SetPlayerAccess(FindPlayer(Name), 4)
             Call SendPlayerData(FindPlayer(Name))
             Call PlayerMsg(FindPlayer(Name), "Vous avez reçu les droits administrateur.")
@@ -118,7 +118,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Ne joue pas" Then
+        If Not Name = "N'est pas en ligne" Then
             Call SetPlayerAccess(FindPlayer(Name), 0)
             Call SendPlayerData(FindPlayer(Name))
             Call PlayerMsg(FindPlayer(Name), "Votre accès administrateur a été supprimé.")
