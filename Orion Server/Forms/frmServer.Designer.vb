@@ -126,7 +126,7 @@ Partial Class frmServer
         '
         Me.MakeAdminToolStripMenuItem.Name = "MakeAdminToolStripMenuItem"
         Me.MakeAdminToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.MakeAdminToolStripMenuItem.Text = "Mettre les droit administrateur"
+        Me.MakeAdminToolStripMenuItem.Text = "Mettre les droits administrateur"
         '
         'RemoveAdminToolStripMenuItem
         '
