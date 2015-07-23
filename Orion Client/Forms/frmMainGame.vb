@@ -103,7 +103,7 @@ Public Class frmMainGame
     Private Sub btnMapEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMapEditor.Click
 
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -164,7 +164,7 @@ Public Class frmMainGame
         Dim n As Long
 
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -182,13 +182,13 @@ Public Class frmMainGame
         If n > 0 And n <= MAX_MAPS Then
             Call WarpTo(n)
         Else
-            Call AddText("Invalid map number.")
+            Call AddText("Numéro de carte invalide.")
         End If
     End Sub
 
     Private Sub btnAdminBan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminBan.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -201,7 +201,7 @@ Public Class frmMainGame
 
     Private Sub btnAdminKick_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminKick.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -214,7 +214,7 @@ Public Class frmMainGame
 
     Private Sub btnAdminWarp2Me_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminWarp2Me.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -231,7 +231,7 @@ Public Class frmMainGame
 
     Private Sub btnAdminWarpMe2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminWarpMe2.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -248,7 +248,7 @@ Public Class frmMainGame
 
     Private Sub btnAdminSetAccess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminSetAccess.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -265,7 +265,7 @@ Public Class frmMainGame
 
     Private Sub btnAdminSetSprite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminSetSprite.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -281,7 +281,7 @@ Public Class frmMainGame
     End Sub
 
     Private Sub scrlSpawnItem_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles scrlSpawnItem.Scroll
-        lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
+        lblItemSpawn.Text = "Objet: " & Trim$(Item(scrlSpawnItem.Value).Name)
         If Item(scrlSpawnItem.Value).Type = ITEM_TYPE_CURRENCY Then
             scrlSpawnItemAmount.Enabled = True
             Exit Sub
@@ -290,12 +290,12 @@ Public Class frmMainGame
     End Sub
 
     Private Sub scrlSpawnItemAmount_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
-        lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
+        lblSpawnItemAmount.Text = "Montant: " & scrlSpawnItemAmount.Value
     End Sub
 
     Private Sub btnSpawnItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSpawnItem.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -304,7 +304,7 @@ Public Class frmMainGame
 
     Private Sub btnLevelUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLevelUp.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -313,7 +313,7 @@ Public Class frmMainGame
 
     Private Sub btnItemEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnItemEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -322,7 +322,7 @@ Public Class frmMainGame
 
     Private Sub btnResourceEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnResourceEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -331,7 +331,7 @@ Public Class frmMainGame
 
     Private Sub btnNPCEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNPCEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -340,7 +340,7 @@ Public Class frmMainGame
 
     Private Sub btnSpellEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSpellEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -349,7 +349,7 @@ Public Class frmMainGame
 
     Private Sub btnShopEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShopEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -358,7 +358,7 @@ Public Class frmMainGame
 
     Private Sub btnAnimationEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnimationEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -367,7 +367,7 @@ Public Class frmMainGame
 
     Private Sub btnALoc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnALoc.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -376,7 +376,7 @@ Public Class frmMainGame
 
     Private Sub btnDelBans_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelBans.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -385,7 +385,7 @@ Public Class frmMainGame
 
     Private Sub btnRespawn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRespawn.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("Vous devez être un membre du staff pour faire ceci!")
             Exit Sub
         End If
 
@@ -529,9 +529,9 @@ Public Class frmMainGame
                         multiplier = Shop(InShop).BuyRate / 100
                         Value = Item(GetPlayerInvItemNum(MyIndex, InvNum)).Price * multiplier
                         If Value > 0 Then
-                            AddText("You can sell this item for " & Value & " gold.")
+                            AddText("Vous pouvez vendre cet objet pour " & Value & " or.")
                         Else
-                            AddText("The shop does not want this item.")
+                            AddText("Le magasin ne veut pas de cet objet.")
                         End If
                     Case 2 ' 2 = sell
                         SellItem(InvNum)
@@ -544,7 +544,7 @@ Public Class frmMainGame
             If InBank Then
                 If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
                     CurrencyMenu = 2 ' deposit
-                    lblCurrency.Text = "How many do you want to deposit?"
+                    lblCurrency.Text = "Combien souhaitez-vous en déposer ?"
                     tmpCurrencyItem = InvNum
                     txtCurrency.Text = vbNullString
                     pnlCurrency.Visible = True
@@ -594,7 +594,7 @@ Public Class frmMainGame
                     If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
                         If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
                             CurrencyMenu = 1 ' drop
-                            lblCurrency.Text = "How many do you want to drop?"
+                            lblCurrency.Text = "Combien souhaitez vous en dropper ?"
                             tmpCurrencyItem = InvNum
                             txtCurrency.Text = vbNullString
                             pnlCurrency.Visible = True
@@ -736,13 +736,13 @@ Public Class frmMainGame
     Private Sub lblShopBuy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblShopBuy.Click
         If ShopAction = 1 Then Exit Sub
         ShopAction = 1 ' buying an item
-        AddText("Click on the item in the shop you wish to buy.")
+        AddText("Cliquez sur l'objet que vous souhaitez acheter dans le magasin.")
     End Sub
 
     Private Sub lblShopSell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblShopSell.Click
         If ShopAction = 2 Then Exit Sub
         ShopAction = 2 ' selling an item
-        AddText("Double-click on the item in your inventory you wish to sell.")
+        AddText("Double cliquez sur l'objet que vous souhaitez vendre dans votre inventaire.")
     End Sub
 
     Private Sub pnlShopItems_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlShopItems.MouseDown
@@ -756,7 +756,7 @@ Public Class frmMainGame
             Select Case ShopAction
                 Case 0 ' no action, give cost
                     With Shop(InShop).TradeItem(shopItem)
-                        AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".")
+                        AddText("Vous pouvez acheter cet objet pour " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".")
                     End With
                 Case 1 ' buy item
                     ' buy item code
@@ -837,7 +837,7 @@ Public Class frmMainGame
 
             If Item(GetBankItemNum(bankNum)).Type = ITEM_TYPE_CURRENCY Then
                 CurrencyMenu = 3 ' withdraw
-                lblCurrency.Text = "How many do you want to withdraw?"
+                lblCurrency.Text = "Combien souhaitez-vous en retirer ?"
                 tmpCurrencyItem = bankNum
                 txtCurrency.Text = vbNullString
                 pnlCurrency.Visible = True
@@ -961,7 +961,7 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picTrade_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picTrade.Click
-        AddText("Click on the player you wish to trade with.")
+        AddText("Cliquez sur le joueur avec qui vous souhaitez faire un échange.")
         TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
         TradeRequest = True
     End Sub
