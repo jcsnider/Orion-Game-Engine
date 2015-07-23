@@ -711,7 +711,7 @@
             KillPlayer(Victim)
 
             ' Player is dead
-            Call GlobalMsg(GetPlayerName(Victim) & " has been killed by " & CheckGrammar(Name))
+            Call GlobalMsg(GetPlayerName(Victim) & " a été tué " & CheckGrammar(Name))
 
             ' Set NPC target to 0
             For i = 1 To MAX_MAP_NPCS
