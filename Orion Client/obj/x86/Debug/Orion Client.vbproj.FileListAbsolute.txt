@@ -1,0 +1,60 @@
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.exe.config
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Character.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Exit.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Inventory.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Options.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Skills.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\actionbar\Trade.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\blood.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\characters\1.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\characters\2.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\direction.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\EXPBar.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\EXPBarEmpty.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\HPBar.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\HPBarEmpty.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\ManaBar.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\GUI\ManaBarEmpty.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\MapEditorSelect.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\misc.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\tilesets\1.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\tilesets\2.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\data files\graphics\tilesets\3.png
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Arvo-Regular.ttf
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\csfml-audio-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\csfml-graphics-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\csfml-window-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\libsndfile-1.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\licenses\Eclipse Public License v1.1.txt
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\licenses\Graphics (Macks) License.txt
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\licenses\SFML License.txt
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\licenses\SIL Open Font License.txt
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\openal32.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.exe.manifest
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.application
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.exe
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.pdb
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\Orion Client.xml
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\sfmlnet-audio-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\sfmlnet-graphics-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\bin\x86\Debug\sfmlnet-window-2.dll
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.vbprojResolveAssemblyReference.cache
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Animation.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Item.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Map.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_MapProperties.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_NPC.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Resource.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Shop.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmEditor_Spell.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmLoad.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmMainGame.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.frmMenu.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\OrionClient.Resources.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.vbproj.GenerateResource.Cache
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.TrustInfo.xml
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.exe.manifest
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.application
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.exe
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.xml
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Client\obj\x86\Debug\Orion Client.pdb
