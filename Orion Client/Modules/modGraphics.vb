@@ -996,10 +996,10 @@ Module modGraphics
             Call DrawMapAttributes()
         End If
 
-        GameWindow.Display()
-
         ' Draw map name
         DrawMapName()
+
+        GameWindow.Display()
         DrawBars() 'Uses graphicscard.clear method which isnt called DURING a scene :D
 
 

@@ -65,7 +65,7 @@
 
         tmpIndex = lstIndex.SelectedIndex
         lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Spell(EditorIndex).Name)
+        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Shop(EditorIndex).Name)
         lstIndex.SelectedIndex = tmpIndex
 
         ShopEditorInit()

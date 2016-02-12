@@ -81,14 +81,14 @@
     Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         Dim tmpIndex As Long
 
-        ClearResource(EditorIndex)
+        ClearNpc(EditorIndex)
 
         tmpIndex = lstIndex.SelectedIndex
         lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Resource(EditorIndex).Name)
+        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Npc(EditorIndex).Name)
         lstIndex.SelectedIndex = tmpIndex
 
-        ResourceEditorInit()
+        NpcEditorInit()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

@@ -7,8 +7,6 @@
         Dim Buffer() As Byte
         Buffer = data.Clone
         Dim pLength As Long
-        Dim i As Long
-        Dim tmpdata() As Byte
 
         If PlayerBuffer Is Nothing Then PlayerBuffer = New ByteBuffer
         PlayerBuffer.WriteBytes(Buffer)
@@ -18,7 +16,16 @@
             Exit Sub
         End If
 
-        If PlayerBuffer.Length >= 4 Then
+        If PlayerBuffer.Length >= 8 Then
+            pLength = PlayerBuffer.ReadLong(False)
+
+            If pLength <= 0 Then
+                PlayerBuffer.Clear()
+                Exit Sub
+            End If
+        End If
+
+        If PlayerBuffer.Length >= 8 Then
             pLength = PlayerBuffer.ReadLong(False)
 
             If pLength <= 0 Then
@@ -41,27 +48,12 @@
                 pLength = PlayerBuffer.ReadLong(False)
 
                 If pLength < 0 Then
-                    Exit Sub
-                End If
-            Else
-                If PlayerBuffer.GetReadPos >= PlayerBuffer.Length Then
                     PlayerBuffer.Clear()
                     Exit Sub
-                Else
-                    If Buffer(PlayerBuffer.GetReadPos) > 0 Then
-                        i = PlayerBuffer.GetReadPos
-                        ReDim tmpdata(PlayerBuffer.Length - 1)
-                        Array.Copy(Buffer, PlayerBuffer.GetReadPos, tmpdata, 0, PlayerBuffer.Length - 1)
-                        PlayerBuffer.Clear()
-                        PlayerBuffer.WriteBytes(tmpdata)
-                        Exit Sub
-                    End If
                 End If
             End If
 
         Loop
-
-        If pLength <= 1 Then PlayerBuffer.Clear()
     End Sub
 
     Public Sub InitMessages()

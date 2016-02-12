@@ -4,7 +4,7 @@ Imports System.Net
 
 Public Class frmServer
 
-    Private Sub frmServer_Disposed(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub frmServer_Closing(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.FormClosing
         DestroyServer()
     End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
