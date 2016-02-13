@@ -1,30 +1,42 @@
-﻿Imports System.Net
-Imports System.Net.Sockets
-Imports System.Text
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class frmMenu
-    Inherits System.Windows.Forms.Form
+    Inherits Form
 
-    Private Sub frmMenu_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
+    Private Sub frmMenu_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Disposed
         DestroyGame()
     End Sub
-    Private Sub Frmmenu_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    Private Sub Frmmenu_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Me.Width = 730
+        pnlLogin.Top = pnlMainMenu.Top
+        pnlLogin.Left = pnlMainMenu.Left
+
+        pnlNewChar.Top = pnlMainMenu.Top
+        pnlNewChar.Left = pnlMainMenu.Left
+
+        pnlRegister.Top = pnlMainMenu.Top
+        pnlRegister.Left = pnlMainMenu.Left
+
+        pnlCredits.Top = pnlMainMenu.Top
+        pnlCredits.Left = pnlMainMenu.Left
+
+        pnlIPConfig.Top = pnlMainMenu.Top
+        pnlIPConfig.Left = pnlMainMenu.Left
+
+        LoadGuiGraphics()
         CheckDirectories()
         Connect()
     End Sub
+
     Private Function StringToArray(ByVal s As String, Optional ByVal style As System.Globalization.NumberStyles = Nothing) As Byte()
         Dim oEncoder As New System.Text.ASCIIEncoding()
         Dim bytes As Byte() = oEncoder.GetBytes(s)
         Return bytes
     End Function
 
-    Private Sub lblExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblExit.Click
-        DestroyGame()
-    End Sub
-
-    Private Sub lblCreateAcc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblCreateAcc.Click
+    Private Sub lblCreateAcc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCreateAcc.Click
         Dim Name As String
         Dim Password As String
         Dim PasswordAgain As String
@@ -46,12 +58,6 @@ Public Class frmMenu
         End If
     End Sub
 
-    Private Sub lblRegister_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblRegister.Click
-        pnlRegisterVisible = True
-        pnlLoginVisible = False
-        pnlCharCreateVisible = False
-        pnlCreditsVisible = False
-    End Sub
     Sub DrawCharacter()
         If pnlNewChar.Visible = True Then
             Dim g As Graphics = Me.pnlNewChar.CreateGraphics
@@ -65,9 +71,9 @@ Public Class frmMenu
             If newCharSprite = 0 Then newCharSprite = 1
 
             If rdoMale.Checked = True Then
-                filename = Application.StartupPath & GFX_PATH & "characters\" & CStr(Classes(newCharClass).MaleSprite(newCharSprite)) & GFX_EXT
+                filename = Application.StartupPath & GFX_PATH & "characters\" & Classes(newCharClass).MaleSprite(newCharSprite) & GFX_EXT
             Else
-                filename = Application.StartupPath & GFX_PATH & "characters\" & CStr(Classes(newCharClass).FemaleSprite(newCharSprite)) & GFX_EXT
+                filename = Application.StartupPath & GFX_PATH & "characters\" & Classes(newCharClass).FemaleSprite(newCharSprite) & GFX_EXT
             End If
 
             Dim charsprite As Bitmap = New Bitmap(filename)
@@ -91,68 +97,21 @@ Public Class frmMenu
         End If
     End Sub
 
-    Private Sub rdoFemale_CheckedChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        newCharSprite = 1
-        pnlNewChar.Refresh()
-        DrawCharacter()
-    End Sub
-
-    Private Sub rdoMale_CheckedChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        newCharSprite = 1
-        pnlNewChar.Refresh()
-        DrawCharacter()
-    End Sub
-    Private Sub lblPrevChar_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If newCharSprite = 1 Then
-            If rdoMale.Checked = True Then
-                newCharSprite = UBound(Classes(newCharClass).MaleSprite)
-            Else
-                newCharSprite = UBound(Classes(newCharClass).FemaleSprite)
-            End If
-        Else
-            newCharSprite = newCharSprite - 1
-        End If
-        pnlNewChar.Refresh()
-        DrawCharacter()
-    End Sub
-
-    Private Sub cmbClass_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        newCharSprite = 1
-        newCharClass = cmbClass.SelectedIndex + 1
-        pnlNewChar.Refresh()
-        DrawCharacter()
-    End Sub
-
-    Private Sub lblLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblLogin.Click
-        pnlRegisterVisible = False
-        pnlLoginVisible = True
-        pnlCharCreateVisible = False
-        pnlCreditsVisible = False
-        txtLogin.Focus()
-        If Options.SavePass = True Then
-            Me.txtLogin.Text = Options.Username
-            Me.txtPassword.Text = Options.Password
-            Me.chkSavePass.Checked = True
-        End If
-    End Sub
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        pnlNewChar.Visible = True
-    End Sub
-
-    Private Sub lblSendLogin_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblSendLogin.Click
+    Private Sub lblSendLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblSendLogin.Click
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
             Call MenuState(MENU_STATE_LOGIN)
         End If
     End Sub
 
-    Private Sub lblCreateChar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblCreateChar.Click
+    Private Sub lblCreateChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCreateChar.Click
         Call MenuState(MENU_STATE_ADDCHAR)
     End Sub
 
-    Private Sub pnlNewChar_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlNewChar.Paint
+    Private Sub pnlNewChar_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlNewChar.Paint
         'nada here
     End Sub
-    Private Sub tmrCredits_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCredits.Tick
+
+    Private Sub tmrCredits_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrCredits.Tick
         Dim credits As String
         Dim filepath As String
         filepath = Application.StartupPath & "\Data Files\credits.txt"
@@ -163,45 +122,34 @@ Public Class frmMenu
             lblScrollingCredits.Text = "" & vbNewLine & credits
             Do Until pnlCreditsVisible = False
                 lblScrollingCredits.Top = lblScrollingCredits.Top - 1
-                If lblScrollingCredits.Bottom <= lblCreditsTop.Top Then
+                If lblScrollingCredits.Bottom <= lblCreditsTop.Bottom Then
                     lblScrollingCredits.Top = 177
                 End If
                 DoEvents()
-                System.Threading.Thread.Sleep(100)
+                Threading.Thread.Sleep(100)
             Loop
         End If
     End Sub
 
-    Private Sub lblCredits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblCredits.Click
-        If pnlCreditsVisible = False Then
-            tmrCredits.Enabled = True
-        End If
-        pnlCreditsVisible = True
-        pnlLoginVisible = False
-        pnlRegisterVisible = False
-        pnlCharCreateVisible = False
-    End Sub
-
-    Private Sub chkSavePass_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkSavePass.CheckedChanged
+    Private Sub chkSavePass_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkSavePass.CheckedChanged
         chkSavePassChecked = chkSavePass.Checked
     End Sub
 
-    Private Sub cmbClass_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbClass.SelectedIndexChanged
+    Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
         newCharClass = cmbClass.SelectedIndex + 1
         DrawCharacter()
 
     End Sub
 
-    Private Sub rdoMale_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdoMale.CheckedChanged
-        DrawCharacter()
-
-    End Sub
-
-    Private Sub rdoFemale_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdoFemale.CheckedChanged
+    Private Sub rdoMale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rdoMale.CheckedChanged
         DrawCharacter()
     End Sub
 
-    Private Sub lblNextChar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblNextChar.Click
+    Private Sub rdoFemale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rdoFemale.CheckedChanged
+        DrawCharacter()
+    End Sub
+
+    Private Sub lblNextChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblNextChar.Click
         newCharSprite = newCharSprite + 1
         If rdoMale.Checked = True Then
             If newCharSprite > UBound(Classes(newCharClass).MaleSprite) Then newCharSprite = 1
@@ -211,7 +159,7 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
-    Private Sub lblPrevChar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblPrevChar.Click
+    Private Sub lblPrevChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblPrevChar.Click
         newCharSprite = newCharSprite - 1
         If rdoMale.Checked = True Then
             If newCharSprite = 0 Then newCharSprite = UBound(Classes(newCharClass).MaleSprite)
@@ -221,7 +169,7 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
-    Private Sub tmrConnect_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrConnect.Tick
+    Private Sub tmrConnect_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrConnect.Tick
         Static i As Long
         If IsConnected() = True Then
             lblServerStatus.ForeColor = Color.Green
@@ -239,23 +187,83 @@ Public Class frmMenu
         End If
     End Sub
 
-    Private Sub txtLogin_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLogin.KeyDown
+    Private Sub txtLogin_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLogin.KeyDown
         If e.KeyCode = Keys.Enter Then
-            lblSendLogin_Click_1(Me, Nothing)
+            lblSendLogin_Click(Me, Nothing)
         End If
     End Sub
 
-    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPassword.KeyDown
+    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown
         If e.KeyCode = Keys.Enter Then
-            lblSendLogin_Click_1(Me, Nothing)
+            lblSendLogin_Click(Me, Nothing)
         End If
     End Sub
 
-    Private Sub pnlNewChar_VisibleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlNewChar.VisibleChanged
+    Private Sub pnlNewChar_VisibleChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlNewChar.VisibleChanged
         DrawCharacter()
     End Sub
 
-    Private Sub tmrDrawCharacter_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrDrawCharacter.Tick
+    Private Sub tmrDrawCharacter_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrDrawCharacter.Tick
         DrawCharacter()
+    End Sub
+
+    Private Sub btnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLogin.Click
+        PlaySound("Click.ogg")
+        pnlRegisterVisible = False
+        pnlLoginVisible = True
+        pnlCharCreateVisible = False
+        pnlCreditsVisible = False
+        pnlIPConfig.Visible = False
+        txtLogin.Focus()
+        If Options.SavePass = True Then
+            Me.txtLogin.Text = Options.Username
+            Me.txtPassword.Text = Options.Password
+            Me.chkSavePass.Checked = True
+        End If
+    End Sub
+
+    Private Sub btnRegister_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegister.Click
+        PlaySound("Click.ogg")
+        pnlRegisterVisible = True
+        pnlLoginVisible = False
+        pnlCharCreateVisible = False
+        pnlCreditsVisible = False
+        pnlIPConfig.Visible = False
+    End Sub
+
+    Private Sub btnCredits_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCredits.Click
+        PlaySound("Click.ogg")
+        If pnlCreditsVisible = False Then
+            tmrCredits.Enabled = True
+        End If
+        pnlCreditsVisible = True
+        pnlLoginVisible = False
+        pnlRegisterVisible = False
+        pnlCharCreateVisible = False
+        pnlIPConfig.Visible = False
+    End Sub
+
+    Private Sub btnExit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnExit.Click
+        PlaySound("Click.ogg")
+        DestroyGame()
+    End Sub
+
+    Private Sub lblServerStatus_Click(sender As Object, e As EventArgs) Handles lblServerStatus.Click
+        pnlCreditsVisible = False
+        pnlLoginVisible = False
+        pnlRegisterVisible = False
+        pnlCharCreateVisible = False
+
+        txtIP.Text = Options.IP
+        txtPort.Text = Options.Port
+
+        pnlIPConfig.Visible = True
+    End Sub
+
+    Private Sub lblSaveIP_Click(sender As Object, e As EventArgs) Handles lblSaveIP.Click
+        Options.IP = txtIP.Text
+        Options.Port = txtPort.Text
+
+        pnlIPConfig.Visible = False
     End Sub
 End Class

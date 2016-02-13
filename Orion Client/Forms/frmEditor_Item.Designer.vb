@@ -91,6 +91,16 @@ Partial Class frmEditor_Item
         Me.lblVitalMod = New System.Windows.Forms.Label()
         Me.scrlVitalMod = New System.Windows.Forms.HScrollBar()
         Me.fraVitals = New System.Windows.Forms.GroupBox()
+        Me.fraFurniture = New System.Windows.Forms.GroupBox()
+        Me.scrlFurniture = New System.Windows.Forms.HScrollBar()
+        Me.lblFurniture = New System.Windows.Forms.Label()
+        Me.picFurniture = New System.Windows.Forms.PictureBox()
+        Me.lblSetOption = New System.Windows.Forms.Label()
+        Me.optSetFringe = New System.Windows.Forms.RadioButton()
+        Me.optSetBlocks = New System.Windows.Forms.RadioButton()
+        Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
+        Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,6 +109,8 @@ Partial Class frmEditor_Item
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraSpell.SuspendLayout()
         Me.fraVitals.SuspendLayout()
+        Me.fraFurniture.SuspendLayout()
+        CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -156,7 +168,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture"})
         Me.cmbType.Location = New System.Drawing.Point(13, 78)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
@@ -242,8 +254,8 @@ Partial Class frmEditor_Item
         '
         'scrlPrice
         '
-        Me.scrlPrice.LargeChange = 1
         Me.scrlPrice.Location = New System.Drawing.Point(251, 16)
+        Me.scrlPrice.Maximum = 100000
         Me.scrlPrice.Name = "scrlPrice"
         Me.scrlPrice.Size = New System.Drawing.Size(157, 18)
         Me.scrlPrice.TabIndex = 3
@@ -761,12 +773,117 @@ Partial Class frmEditor_Item
         Me.fraVitals.Text = "Vitals"
         Me.fraVitals.Visible = False
         '
+        'fraFurniture
+        '
+        Me.fraFurniture.Controls.Add(Me.scrlFurniture)
+        Me.fraFurniture.Controls.Add(Me.lblFurniture)
+        Me.fraFurniture.Controls.Add(Me.picFurniture)
+        Me.fraFurniture.Controls.Add(Me.lblSetOption)
+        Me.fraFurniture.Controls.Add(Me.optSetFringe)
+        Me.fraFurniture.Controls.Add(Me.optSetBlocks)
+        Me.fraFurniture.Controls.Add(Me.optNoFurnitureEditing)
+        Me.fraFurniture.Controls.Add(Me.cmbFurnitureType)
+        Me.fraFurniture.Controls.Add(Me.Label4)
+        Me.fraFurniture.Location = New System.Drawing.Point(237, 297)
+        Me.fraFurniture.Name = "fraFurniture"
+        Me.fraFurniture.Size = New System.Drawing.Size(416, 213)
+        Me.fraFurniture.TabIndex = 10
+        Me.fraFurniture.TabStop = False
+        Me.fraFurniture.Text = "Furniture"
+        Me.fraFurniture.Visible = False
+        '
+        'scrlFurniture
+        '
+        Me.scrlFurniture.LargeChange = 1
+        Me.scrlFurniture.Location = New System.Drawing.Point(249, 191)
+        Me.scrlFurniture.Name = "scrlFurniture"
+        Me.scrlFurniture.Size = New System.Drawing.Size(150, 18)
+        Me.scrlFurniture.TabIndex = 8
+        '
+        'lblFurniture
+        '
+        Me.lblFurniture.AutoSize = True
+        Me.lblFurniture.Location = New System.Drawing.Point(246, 170)
+        Me.lblFurniture.Name = "lblFurniture"
+        Me.lblFurniture.Size = New System.Drawing.Size(60, 13)
+        Me.lblFurniture.TabIndex = 7
+        Me.lblFurniture.Text = "Furniture: 1"
+        '
+        'picFurniture
+        '
+        Me.picFurniture.BackColor = System.Drawing.Color.Black
+        Me.picFurniture.Location = New System.Drawing.Point(249, 13)
+        Me.picFurniture.Name = "picFurniture"
+        Me.picFurniture.Size = New System.Drawing.Size(150, 150)
+        Me.picFurniture.TabIndex = 6
+        Me.picFurniture.TabStop = False
+        '
+        'lblSetOption
+        '
+        Me.lblSetOption.Location = New System.Drawing.Point(12, 145)
+        Me.lblSetOption.Name = "lblSetOption"
+        Me.lblSetOption.Size = New System.Drawing.Size(189, 62)
+        Me.lblSetOption.TabIndex = 5
+        Me.lblSetOption.Text = "Set Blocks: Os are passable and Xs are not. Simply place Xs where you do not want" &
+    " the player to walk."
+        '
+        'optSetFringe
+        '
+        Me.optSetFringe.AutoSize = True
+        Me.optSetFringe.Location = New System.Drawing.Point(13, 119)
+        Me.optSetFringe.Name = "optSetFringe"
+        Me.optSetFringe.Size = New System.Drawing.Size(73, 17)
+        Me.optSetFringe.TabIndex = 4
+        Me.optSetFringe.Text = "Set Fringe"
+        Me.optSetFringe.UseVisualStyleBackColor = True
+        '
+        'optSetBlocks
+        '
+        Me.optSetBlocks.AutoSize = True
+        Me.optSetBlocks.Checked = True
+        Me.optSetBlocks.Location = New System.Drawing.Point(13, 96)
+        Me.optSetBlocks.Name = "optSetBlocks"
+        Me.optSetBlocks.Size = New System.Drawing.Size(76, 17)
+        Me.optSetBlocks.TabIndex = 3
+        Me.optSetBlocks.TabStop = True
+        Me.optSetBlocks.Text = "Set Blocks"
+        Me.optSetBlocks.UseVisualStyleBackColor = True
+        '
+        'optNoFurnitureEditing
+        '
+        Me.optNoFurnitureEditing.AutoSize = True
+        Me.optNoFurnitureEditing.Location = New System.Drawing.Point(13, 73)
+        Me.optNoFurnitureEditing.Name = "optNoFurnitureEditing"
+        Me.optNoFurnitureEditing.Size = New System.Drawing.Size(74, 17)
+        Me.optNoFurnitureEditing.TabIndex = 2
+        Me.optNoFurnitureEditing.Text = "No Editing"
+        Me.optNoFurnitureEditing.UseVisualStyleBackColor = True
+        '
+        'cmbFurnitureType
+        '
+        Me.cmbFurnitureType.FormattingEnabled = True
+        Me.cmbFurnitureType.Items.AddRange(New Object() {"Standard"})
+        Me.cmbFurnitureType.Location = New System.Drawing.Point(13, 46)
+        Me.cmbFurnitureType.Name = "cmbFurnitureType"
+        Me.cmbFurnitureType.Size = New System.Drawing.Size(188, 21)
+        Me.cmbFurnitureType.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(10, 29)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(78, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Furniture Type:"
+        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(665, 551)
+        Me.ClientSize = New System.Drawing.Size(659, 551)
         Me.ControlBox = False
+        Me.Controls.Add(Me.fraFurniture)
         Me.Controls.Add(Me.fraVitals)
         Me.Controls.Add(Me.fraSpell)
         Me.Controls.Add(Me.btnCancel)
@@ -793,6 +910,9 @@ Partial Class frmEditor_Item
         Me.fraSpell.PerformLayout()
         Me.fraVitals.ResumeLayout(False)
         Me.fraVitals.PerformLayout()
+        Me.fraFurniture.ResumeLayout(False)
+        Me.fraFurniture.PerformLayout()
+        CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -865,4 +985,14 @@ Partial Class frmEditor_Item
     Friend WithEvents lblVitalMod As System.Windows.Forms.Label
     Friend WithEvents scrlVitalMod As System.Windows.Forms.HScrollBar
     Friend WithEvents fraVitals As System.Windows.Forms.GroupBox
+    Friend WithEvents fraFurniture As Windows.Forms.GroupBox
+    Friend WithEvents scrlFurniture As Windows.Forms.HScrollBar
+    Friend WithEvents lblFurniture As Windows.Forms.Label
+    Friend WithEvents picFurniture As Windows.Forms.PictureBox
+    Friend WithEvents lblSetOption As Windows.Forms.Label
+    Friend WithEvents optSetFringe As Windows.Forms.RadioButton
+    Friend WithEvents optSetBlocks As Windows.Forms.RadioButton
+    Friend WithEvents optNoFurnitureEditing As Windows.Forms.RadioButton
+    Friend WithEvents cmbFurnitureType As Windows.Forms.ComboBox
+    Friend WithEvents Label4 As Windows.Forms.Label
 End Class

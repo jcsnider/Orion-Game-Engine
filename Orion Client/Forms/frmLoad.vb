@@ -1,6 +1,6 @@
 ﻿Public Class frmLoad
 
-    Private Sub frmLoad_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmLoad_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Me.Show()
         If started = False Then Call startup()
     End Sub

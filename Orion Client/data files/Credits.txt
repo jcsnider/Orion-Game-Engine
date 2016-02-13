@@ -21,4 +21,6 @@ Testing:
 Ambard
 Timmah
 
+* fixed up by Damian666
+
 *License copies can be found in the license directory.

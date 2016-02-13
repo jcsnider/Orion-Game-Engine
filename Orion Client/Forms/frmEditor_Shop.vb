@@ -1,6 +1,6 @@
 ﻿Public Class frmEditor_Shop
 
-    Private Sub txtName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.TextChanged
+    Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Long
 
         If EditorIndex = 0 Then Exit Sub
@@ -11,12 +11,12 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub scrlBuy_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles scrlBuy.Scroll
+    Private Sub scrlBuy_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlBuy.Scroll
         lblBuy.Text = "Buy Rate: " & scrlBuy.Value & "%"
         Shop(EditorIndex).BuyRate = scrlBuy.Value
     End Sub
 
-    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+    Private Sub btnUpdate_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdate.Click
         Dim Index As Long
         Index = lstTradeItem.SelectedIndex + 1
         If Index = 0 Then Exit Sub
@@ -29,7 +29,7 @@
         Call UpdateShopTrade()
     End Sub
 
-    Private Sub btnDeleteTrade_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteTrade.Click
+    Private Sub btnDeleteTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDeleteTrade.Click
         Dim Index As Long
         Index = lstTradeItem.SelectedIndex + 1
         If Index = 0 Then Exit Sub
@@ -42,11 +42,11 @@
         Call UpdateShopTrade()
     End Sub
 
-    Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstIndex.Click
+    Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
         ShopEditorInit()
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         If Len(Trim$(txtName.Text)) = 0 Then
             Call MsgBox("Name required.")
         Else
@@ -54,11 +54,11 @@
         End If
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         ShopEditorCancel()
     End Sub
 
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
         Dim tmpIndex As Long
 
         ClearShop(EditorIndex)

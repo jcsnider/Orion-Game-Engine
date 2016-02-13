@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmServer
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,53 +20,69 @@ Partial Class frmServer
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServer))
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.lstView = New System.Windows.Forms.ListView
-        Me.colIndex = New System.Windows.Forms.ColumnHeader
-        Me.colIPAddress = New System.Windows.Forms.ColumnHeader
-        Me.colAccount = New System.Windows.Forms.ColumnHeader
-        Me.colCharacter = New System.Windows.Forms.ColumnHeader
-        Me.MakeAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoveAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.KickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.BanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.txtChat = New System.Windows.Forms.TextBox
-        Me.txtText = New System.Windows.Forms.TextBox
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.chkServerLog = New System.Windows.Forms.CheckBox
-        Me.btnExit = New System.Windows.Forms.Button
-        Me.btnShutDown = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.btnReloadAnimations = New System.Windows.Forms.Button
-        Me.btnReloadResources = New System.Windows.Forms.Button
-        Me.btnReloadItems = New System.Windows.Forms.Button
-        Me.btnReloadNPCs = New System.Windows.Forms.Button
-        Me.btnReloadShops = New System.Windows.Forms.Button
-        Me.btnReloadSpells = New System.Windows.Forms.Button
-        Me.btnReloadMaps = New System.Windows.Forms.Button
-        Me.btnReloadClasses = New System.Windows.Forms.Button
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.TimedShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.CustomMessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.components = New System.ComponentModel.Container()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.lstView = New System.Windows.Forms.ListView()
+        Me.colIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colIPAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colAccount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colCharacter = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.MakeAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.KickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtChat = New System.Windows.Forms.TextBox()
+        Me.txtText = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkServerLog = New System.Windows.Forms.CheckBox()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.btnShutDown = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnReloadAnimations = New System.Windows.Forms.Button()
+        Me.btnReloadResources = New System.Windows.Forms.Button()
+        Me.btnReloadItems = New System.Windows.Forms.Button()
+        Me.btnReloadNPCs = New System.Windows.Forms.Button()
+        Me.btnReloadShops = New System.Windows.Forms.Button()
+        Me.btnReloadSpells = New System.Windows.Forms.Button()
+        Me.btnReloadMaps = New System.Windows.Forms.Button()
+        Me.btnReloadClasses = New System.Windows.Forms.Button()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.lblNotifications = New System.Windows.Forms.Label()
+        Me.btnSaveHouse = New System.Windows.Forms.Button()
+        Me.txtHouseFurniture = New System.Windows.Forms.TextBox()
+        Me.txtHousePrice = New System.Windows.Forms.TextBox()
+        Me.txtYEntrance = New System.Windows.Forms.TextBox()
+        Me.txtXEntrance = New System.Windows.Forms.TextBox()
+        Me.txtBaseMap = New System.Windows.Forms.TextBox()
+        Me.txtHouseName = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lstHouses = New System.Windows.Forms.ListBox()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimedShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CustomMessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShutdownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.lstviewmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.KickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.DisconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.BanToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.MakeAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoveAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.KickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisconnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BanToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MakeAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveAdminToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.notifyMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ShowServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ShowServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrUpdatePlayerList = New System.Windows.Forms.Timer(Me.components)
         Me.TabPage2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -74,6 +90,8 @@ Partial Class frmServer
         Me.TabPage3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.lstviewmenu.SuspendLayout()
         Me.notifyMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -152,6 +170,7 @@ Partial Class frmServer
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -328,6 +347,163 @@ Partial Class frmServer
         Me.btnReloadClasses.Text = "Classes"
         Me.btnReloadClasses.UseVisualStyleBackColor = True
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox3)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(517, 231)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Housing"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.lblNotifications)
+        Me.GroupBox3.Controls.Add(Me.btnSaveHouse)
+        Me.GroupBox3.Controls.Add(Me.txtHouseFurniture)
+        Me.GroupBox3.Controls.Add(Me.txtHousePrice)
+        Me.GroupBox3.Controls.Add(Me.txtYEntrance)
+        Me.GroupBox3.Controls.Add(Me.txtXEntrance)
+        Me.GroupBox3.Controls.Add(Me.txtBaseMap)
+        Me.GroupBox3.Controls.Add(Me.txtHouseName)
+        Me.GroupBox3.Controls.Add(Me.Label6)
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Controls.Add(Me.Label3)
+        Me.GroupBox3.Controls.Add(Me.Label2)
+        Me.GroupBox3.Controls.Add(Me.Label1)
+        Me.GroupBox3.Controls.Add(Me.lstHouses)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(505, 219)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "House Setup"
+        '
+        'lblNotifications
+        '
+        Me.lblNotifications.AutoSize = True
+        Me.lblNotifications.Location = New System.Drawing.Point(6, 195)
+        Me.lblNotifications.Name = "lblNotifications"
+        Me.lblNotifications.Size = New System.Drawing.Size(65, 13)
+        Me.lblNotifications.TabIndex = 14
+        Me.lblNotifications.Text = "Notifications"
+        '
+        'btnSaveHouse
+        '
+        Me.btnSaveHouse.Location = New System.Drawing.Point(424, 182)
+        Me.btnSaveHouse.Name = "btnSaveHouse"
+        Me.btnSaveHouse.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveHouse.TabIndex = 13
+        Me.btnSaveHouse.Text = "Save"
+        Me.btnSaveHouse.UseVisualStyleBackColor = True
+        '
+        'txtHouseFurniture
+        '
+        Me.txtHouseFurniture.Location = New System.Drawing.Point(321, 155)
+        Me.txtHouseFurniture.Name = "txtHouseFurniture"
+        Me.txtHouseFurniture.Size = New System.Drawing.Size(178, 20)
+        Me.txtHouseFurniture.TabIndex = 12
+        '
+        'txtHousePrice
+        '
+        Me.txtHousePrice.Location = New System.Drawing.Point(321, 129)
+        Me.txtHousePrice.Name = "txtHousePrice"
+        Me.txtHousePrice.Size = New System.Drawing.Size(178, 20)
+        Me.txtHousePrice.TabIndex = 11
+        '
+        'txtYEntrance
+        '
+        Me.txtYEntrance.Location = New System.Drawing.Point(321, 103)
+        Me.txtYEntrance.Name = "txtYEntrance"
+        Me.txtYEntrance.Size = New System.Drawing.Size(178, 20)
+        Me.txtYEntrance.TabIndex = 10
+        '
+        'txtXEntrance
+        '
+        Me.txtXEntrance.Location = New System.Drawing.Point(321, 77)
+        Me.txtXEntrance.Name = "txtXEntrance"
+        Me.txtXEntrance.Size = New System.Drawing.Size(178, 20)
+        Me.txtXEntrance.TabIndex = 9
+        '
+        'txtBaseMap
+        '
+        Me.txtBaseMap.Location = New System.Drawing.Point(321, 51)
+        Me.txtBaseMap.Name = "txtBaseMap"
+        Me.txtBaseMap.Size = New System.Drawing.Size(178, 20)
+        Me.txtBaseMap.TabIndex = 8
+        '
+        'txtHouseName
+        '
+        Me.txtHouseName.Location = New System.Drawing.Point(321, 25)
+        Me.txtHouseName.Name = "txtHouseName"
+        Me.txtHouseName.Size = New System.Drawing.Size(178, 20)
+        Me.txtHouseName.TabIndex = 7
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(173, 158)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(138, 13)
+        Me.Label6.TabIndex = 6
+        Me.Label6.Text = "Max Furniture, 0 for no max:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(173, 132)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(34, 13)
+        Me.Label5.TabIndex = 5
+        Me.Label5.Text = "Price:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(173, 106)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(63, 13)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Entrance Y:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(173, 80)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(63, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Entrance X:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(173, 54)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Base Map:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(173, 28)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "House Name:"
+        '
+        'lstHouses
+        '
+        Me.lstHouses.FormattingEnabled = True
+        Me.lstHouses.Location = New System.Drawing.Point(6, 19)
+        Me.lstHouses.Name = "lstHouses"
+        Me.lstHouses.Size = New System.Drawing.Size(161, 173)
+        Me.lstHouses.TabIndex = 0
+        '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -417,7 +593,6 @@ Partial Class frmServer
         Me.ShutdownToolStripMenuItem1.Name = "ShutdownToolStripMenuItem1"
         Me.ShutdownToolStripMenuItem1.Size = New System.Drawing.Size(165, 22)
         Me.ShutdownToolStripMenuItem1.Text = "Shutdown"
-
         '
         'tmrUpdatePlayerList
         '
@@ -442,6 +617,9 @@ Partial Class frmServer
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.lstviewmenu.ResumeLayout(False)
         Me.notifyMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -491,5 +669,21 @@ Partial Class frmServer
     Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents btnShutDown As System.Windows.Forms.Button
     Friend WithEvents tmrUpdatePlayerList As System.Windows.Forms.Timer
-
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents lstHouses As ListBox
+    Friend WithEvents btnSaveHouse As Button
+    Friend WithEvents txtHouseFurniture As TextBox
+    Friend WithEvents txtHousePrice As TextBox
+    Friend WithEvents txtYEntrance As TextBox
+    Friend WithEvents txtXEntrance As TextBox
+    Friend WithEvents txtBaseMap As TextBox
+    Friend WithEvents txtHouseName As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lblNotifications As Label
 End Class

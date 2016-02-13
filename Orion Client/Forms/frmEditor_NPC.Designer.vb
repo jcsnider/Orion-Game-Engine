@@ -22,54 +22,56 @@ Partial Class frmEditor_NPC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.scrlValue = New System.Windows.Forms.HScrollBar
-        Me.scrlNum = New System.Windows.Forms.HScrollBar
-        Me.lblValue = New System.Windows.Forms.Label
-        Me.lblNum = New System.Windows.Forms.Label
-        Me.lblItemName = New System.Windows.Forms.Label
-        Me.txtSpawnSecs = New System.Windows.Forms.TextBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.txtChance = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.lblSpr = New System.Windows.Forms.Label
-        Me.scrlSpr = New System.Windows.Forms.HScrollBar
-        Me.lblVit = New System.Windows.Forms.Label
-        Me.scrlVit = New System.Windows.Forms.HScrollBar
-        Me.lblInt = New System.Windows.Forms.Label
-        Me.scrlInt = New System.Windows.Forms.HScrollBar
-        Me.lblEnd = New System.Windows.Forms.Label
-        Me.scrlEnd = New System.Windows.Forms.HScrollBar
-        Me.lblWill = New System.Windows.Forms.Label
-        Me.scrlWill = New System.Windows.Forms.HScrollBar
-        Me.lblStr = New System.Windows.Forms.Label
-        Me.scrlStr = New System.Windows.Forms.HScrollBar
-        Me.scrlAnimation = New System.Windows.Forms.HScrollBar
-        Me.lblAnimation = New System.Windows.Forms.Label
-        Me.txtEXP = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.txtHP = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.cmbFaction = New System.Windows.Forms.ComboBox
-        Me.cmbBehaviour = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.picSprite = New System.Windows.Forms.PictureBox
-        Me.scrlRange = New System.Windows.Forms.HScrollBar
-        Me.scrlSprite = New System.Windows.Forms.HScrollBar
-        Me.lblRange = New System.Windows.Forms.Label
-        Me.lblSprite = New System.Windows.Forms.Label
-        Me.txtAttackSay = New System.Windows.Forms.TextBox
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.scrlQuest = New System.Windows.Forms.HScrollBar()
+        Me.lblQuest = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.scrlValue = New System.Windows.Forms.HScrollBar()
+        Me.scrlNum = New System.Windows.Forms.HScrollBar()
+        Me.lblValue = New System.Windows.Forms.Label()
+        Me.lblNum = New System.Windows.Forms.Label()
+        Me.lblItemName = New System.Windows.Forms.Label()
+        Me.txtSpawnSecs = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtChance = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.lblSpr = New System.Windows.Forms.Label()
+        Me.scrlSpr = New System.Windows.Forms.HScrollBar()
+        Me.lblVit = New System.Windows.Forms.Label()
+        Me.scrlVit = New System.Windows.Forms.HScrollBar()
+        Me.lblInt = New System.Windows.Forms.Label()
+        Me.scrlInt = New System.Windows.Forms.HScrollBar()
+        Me.lblEnd = New System.Windows.Forms.Label()
+        Me.scrlEnd = New System.Windows.Forms.HScrollBar()
+        Me.lblWill = New System.Windows.Forms.Label()
+        Me.scrlWill = New System.Windows.Forms.HScrollBar()
+        Me.lblStr = New System.Windows.Forms.Label()
+        Me.scrlStr = New System.Windows.Forms.HScrollBar()
+        Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
+        Me.lblAnimation = New System.Windows.Forms.Label()
+        Me.txtEXP = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtHP = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbFaction = New System.Windows.Forms.ComboBox()
+        Me.cmbBehaviour = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.picSprite = New System.Windows.Forms.PictureBox()
+        Me.scrlRange = New System.Windows.Forms.HScrollBar()
+        Me.scrlSprite = New System.Windows.Forms.HScrollBar()
+        Me.lblRange = New System.Windows.Forms.Label()
+        Me.lblSprite = New System.Windows.Forms.Label()
+        Me.txtAttackSay = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -82,7 +84,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(231, 488)
+        Me.GroupBox1.Size = New System.Drawing.Size(231, 501)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "NPC List"
@@ -97,6 +99,8 @@ Partial Class frmEditor_NPC
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.scrlQuest)
+        Me.GroupBox2.Controls.Add(Me.lblQuest)
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Controls.Add(Me.scrlAnimation)
@@ -120,10 +124,27 @@ Partial Class frmEditor_NPC
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(243, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(357, 488)
+        Me.GroupBox2.Size = New System.Drawing.Size(357, 501)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "NPC Properties"
+        '
+        'scrlQuest
+        '
+        Me.scrlQuest.LargeChange = 1
+        Me.scrlQuest.Location = New System.Drawing.Point(84, 126)
+        Me.scrlQuest.Name = "scrlQuest"
+        Me.scrlQuest.Size = New System.Drawing.Size(211, 15)
+        Me.scrlQuest.TabIndex = 53
+        '
+        'lblQuest
+        '
+        Me.lblQuest.AutoSize = True
+        Me.lblQuest.Location = New System.Drawing.Point(10, 126)
+        Me.lblQuest.Name = "lblQuest"
+        Me.lblQuest.Size = New System.Drawing.Size(47, 13)
+        Me.lblQuest.TabIndex = 52
+        Me.lblQuest.Text = "Quest: 0"
         '
         'GroupBox4
         '
@@ -136,7 +157,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox4.Controls.Add(Me.Label8)
         Me.GroupBox4.Controls.Add(Me.txtChance)
         Me.GroupBox4.Controls.Add(Me.Label7)
-        Me.GroupBox4.Location = New System.Drawing.Point(15, 342)
+        Me.GroupBox4.Location = New System.Drawing.Point(12, 355)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(327, 140)
         Me.GroupBox4.TabIndex = 47
@@ -234,7 +255,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox3.Controls.Add(Me.scrlWill)
         Me.GroupBox3.Controls.Add(Me.lblStr)
         Me.GroupBox3.Controls.Add(Me.scrlStr)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 241)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 258)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(329, 91)
         Me.GroupBox3.TabIndex = 46
@@ -346,7 +367,7 @@ Partial Class frmEditor_NPC
         'scrlAnimation
         '
         Me.scrlAnimation.LargeChange = 1
-        Me.scrlAnimation.Location = New System.Drawing.Point(153, 212)
+        Me.scrlAnimation.Location = New System.Drawing.Point(153, 237)
         Me.scrlAnimation.Name = "scrlAnimation"
         Me.scrlAnimation.Size = New System.Drawing.Size(189, 18)
         Me.scrlAnimation.TabIndex = 45
@@ -354,7 +375,7 @@ Partial Class frmEditor_NPC
         'lblAnimation
         '
         Me.lblAnimation.AutoSize = True
-        Me.lblAnimation.Location = New System.Drawing.Point(10, 217)
+        Me.lblAnimation.Location = New System.Drawing.Point(10, 242)
         Me.lblAnimation.Name = "lblAnimation"
         Me.lblAnimation.Size = New System.Drawing.Size(85, 13)
         Me.lblAnimation.TabIndex = 44
@@ -362,7 +383,7 @@ Partial Class frmEditor_NPC
         '
         'txtEXP
         '
-        Me.txtEXP.Location = New System.Drawing.Point(243, 179)
+        Me.txtEXP.Location = New System.Drawing.Point(243, 204)
         Me.txtEXP.Name = "txtEXP"
         Me.txtEXP.Size = New System.Drawing.Size(100, 20)
         Me.txtEXP.TabIndex = 43
@@ -370,7 +391,7 @@ Partial Class frmEditor_NPC
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(196, 184)
+        Me.Label6.Location = New System.Drawing.Point(196, 209)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(31, 13)
         Me.Label6.TabIndex = 42
@@ -378,7 +399,7 @@ Partial Class frmEditor_NPC
         '
         'txtHP
         '
-        Me.txtHP.Location = New System.Drawing.Point(57, 181)
+        Me.txtHP.Location = New System.Drawing.Point(57, 206)
         Me.txtHP.Name = "txtHP"
         Me.txtHP.Size = New System.Drawing.Size(100, 20)
         Me.txtHP.TabIndex = 41
@@ -386,7 +407,7 @@ Partial Class frmEditor_NPC
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(10, 186)
+        Me.Label5.Location = New System.Drawing.Point(10, 211)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 13)
         Me.Label5.TabIndex = 40
@@ -397,7 +418,7 @@ Partial Class frmEditor_NPC
         Me.cmbFaction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFaction.FormattingEnabled = True
         Me.cmbFaction.Items.AddRange(New Object() {"None", "Baddies", "Goodies"})
-        Me.cmbFaction.Location = New System.Drawing.Point(81, 154)
+        Me.cmbFaction.Location = New System.Drawing.Point(81, 179)
         Me.cmbFaction.Name = "cmbFaction"
         Me.cmbFaction.Size = New System.Drawing.Size(262, 21)
         Me.cmbFaction.TabIndex = 39
@@ -406,8 +427,8 @@ Partial Class frmEditor_NPC
         '
         Me.cmbBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBehaviour.FormattingEnabled = True
-        Me.cmbBehaviour.Items.AddRange(New Object() {"Attack on sight", "Attack when attacked", "Friendly", "Shop keeper", "Guard"})
-        Me.cmbBehaviour.Location = New System.Drawing.Point(81, 127)
+        Me.cmbBehaviour.Items.AddRange(New Object() {"Attack on sight", "Attack when attacked", "Friendly", "Shop keeper", "Guard", "Quest"})
+        Me.cmbBehaviour.Location = New System.Drawing.Point(81, 152)
         Me.cmbBehaviour.Name = "cmbBehaviour"
         Me.cmbBehaviour.Size = New System.Drawing.Size(262, 21)
         Me.cmbBehaviour.TabIndex = 38
@@ -415,7 +436,7 @@ Partial Class frmEditor_NPC
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 157)
+        Me.Label4.Location = New System.Drawing.Point(10, 182)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 13)
         Me.Label4.TabIndex = 10
@@ -424,7 +445,7 @@ Partial Class frmEditor_NPC
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 130)
+        Me.Label3.Location = New System.Drawing.Point(10, 155)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 13)
         Me.Label3.TabIndex = 9
@@ -433,9 +454,9 @@ Partial Class frmEditor_NPC
         'picSprite
         '
         Me.picSprite.BackColor = System.Drawing.Color.Black
-        Me.picSprite.Location = New System.Drawing.Point(311, 77)
+        Me.picSprite.Location = New System.Drawing.Point(310, 66)
         Me.picSprite.Name = "picSprite"
-        Me.picSprite.Size = New System.Drawing.Size(32, 32)
+        Me.picSprite.Size = New System.Drawing.Size(32, 49)
         Me.picSprite.TabIndex = 8
         Me.picSprite.TabStop = False
         '
@@ -507,7 +528,7 @@ Partial Class frmEditor_NPC
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(488, 500)
+        Me.btnCancel.Location = New System.Drawing.Point(495, 513)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 40
@@ -516,7 +537,7 @@ Partial Class frmEditor_NPC
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(377, 500)
+        Me.btnDelete.Location = New System.Drawing.Point(384, 513)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 39
@@ -525,7 +546,7 @@ Partial Class frmEditor_NPC
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(266, 500)
+        Me.btnSave.Location = New System.Drawing.Point(273, 513)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 38
@@ -536,7 +557,7 @@ Partial Class frmEditor_NPC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(612, 536)
+        Me.ClientSize = New System.Drawing.Size(612, 550)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -605,4 +626,6 @@ Partial Class frmEditor_NPC
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents scrlQuest As Windows.Forms.HScrollBar
+    Friend WithEvents lblQuest As Windows.Forms.Label
 End Class

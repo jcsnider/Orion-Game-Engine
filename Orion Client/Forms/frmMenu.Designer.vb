@@ -24,10 +24,6 @@ Partial Class frmMenu
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
-        Me.lblExit = New System.Windows.Forms.Label()
-        Me.lblCredits = New System.Windows.Forms.Label()
-        Me.lblRegister = New System.Windows.Forms.Label()
-        Me.lblLogin = New System.Windows.Forms.Label()
         Me.pnlLogin = New System.Windows.Forms.Panel()
         Me.chkSavePass = New System.Windows.Forms.CheckBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
@@ -62,61 +58,39 @@ Partial Class frmMenu
         Me.txtCharName = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lbl = New System.Windows.Forms.Label()
         Me.lblServerStatus = New System.Windows.Forms.Label()
         Me.tmrConnect = New System.Windows.Forms.Timer(Me.components)
         Me.tmrDrawCharacter = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnLogin = New System.Windows.Forms.Panel()
+        Me.btnRegister = New System.Windows.Forms.Panel()
+        Me.btnCredits = New System.Windows.Forms.Panel()
+        Me.btnExit = New System.Windows.Forms.Panel()
+        Me.pnlIPConfig = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtPort = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtIP = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblSaveIP = New System.Windows.Forms.Label()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
         Me.pnlNewChar.SuspendLayout()
         CType(Me.placeholderforsprite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMainMenu.SuspendLayout()
+        Me.pnlIPConfig.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'lblExit
-        '
-        Me.lblExit.AutoSize = True
-        Me.lblExit.Location = New System.Drawing.Point(432, 275)
-        Me.lblExit.Name = "lblExit"
-        Me.lblExit.Size = New System.Drawing.Size(24, 13)
-        Me.lblExit.TabIndex = 23
-        Me.lblExit.Text = "Exit"
-        '
-        'lblCredits
-        '
-        Me.lblCredits.AutoSize = True
-        Me.lblCredits.Location = New System.Drawing.Point(307, 275)
-        Me.lblCredits.Name = "lblCredits"
-        Me.lblCredits.Size = New System.Drawing.Size(39, 13)
-        Me.lblCredits.TabIndex = 22
-        Me.lblCredits.Text = "Credits"
-        '
-        'lblRegister
-        '
-        Me.lblRegister.AutoSize = True
-        Me.lblRegister.Location = New System.Drawing.Point(164, 275)
-        Me.lblRegister.Name = "lblRegister"
-        Me.lblRegister.Size = New System.Drawing.Size(46, 13)
-        Me.lblRegister.TabIndex = 21
-        Me.lblRegister.Text = "Register"
-        '
-        'lblLogin
-        '
-        Me.lblLogin.AutoSize = True
-        Me.lblLogin.Location = New System.Drawing.Point(45, 275)
-        Me.lblLogin.Name = "lblLogin"
-        Me.lblLogin.Size = New System.Drawing.Size(33, 13)
-        Me.lblLogin.TabIndex = 20
-        Me.lblLogin.Text = "Login"
         '
         'pnlLogin
         '
-        Me.pnlLogin.BackColor = System.Drawing.Color.Gray
-        Me.pnlLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlLogin.BackColor = System.Drawing.Color.Transparent
+        Me.pnlLogin.BackgroundImage = CType(resources.GetObject("pnlLogin.BackgroundImage"), System.Drawing.Image)
+        Me.pnlLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlLogin.Controls.Add(Me.chkSavePass)
         Me.pnlLogin.Controls.Add(Me.txtPassword)
         Me.pnlLogin.Controls.Add(Me.Label7)
@@ -124,7 +98,8 @@ Partial Class frmMenu
         Me.pnlLogin.Controls.Add(Me.txtLogin)
         Me.pnlLogin.Controls.Add(Me.Label17)
         Me.pnlLogin.Controls.Add(Me.Label18)
-        Me.pnlLogin.Location = New System.Drawing.Point(63, 37)
+        Me.pnlLogin.ForeColor = System.Drawing.Color.White
+        Me.pnlLogin.Location = New System.Drawing.Point(737, 6)
         Me.pnlLogin.Name = "pnlLogin"
         Me.pnlLogin.Size = New System.Drawing.Size(400, 192)
         Me.pnlLogin.TabIndex = 37
@@ -195,8 +170,9 @@ Partial Class frmMenu
         '
         'pnlRegister
         '
-        Me.pnlRegister.BackColor = System.Drawing.Color.Gray
-        Me.pnlRegister.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlRegister.BackColor = System.Drawing.Color.Transparent
+        Me.pnlRegister.BackgroundImage = CType(resources.GetObject("pnlRegister.BackgroundImage"), System.Drawing.Image)
+        Me.pnlRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlRegister.Controls.Add(Me.lblCreateAcc)
         Me.pnlRegister.Controls.Add(Me.txtRPass2)
         Me.pnlRegister.Controls.Add(Me.Label4)
@@ -205,7 +181,8 @@ Partial Class frmMenu
         Me.pnlRegister.Controls.Add(Me.txtRuser)
         Me.pnlRegister.Controls.Add(Me.Label2)
         Me.pnlRegister.Controls.Add(Me.Label1)
-        Me.pnlRegister.Location = New System.Drawing.Point(63, 37)
+        Me.pnlRegister.ForeColor = System.Drawing.Color.White
+        Me.pnlRegister.Location = New System.Drawing.Point(1143, 6)
         Me.pnlRegister.Name = "pnlRegister"
         Me.pnlRegister.Size = New System.Drawing.Size(400, 192)
         Me.pnlRegister.TabIndex = 38
@@ -282,11 +259,13 @@ Partial Class frmMenu
         '
         'pnlCredits
         '
-        Me.pnlCredits.BackColor = System.Drawing.Color.Gray
-        Me.pnlCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlCredits.BackColor = System.Drawing.Color.Transparent
+        Me.pnlCredits.BackgroundImage = CType(resources.GetObject("pnlCredits.BackgroundImage"), System.Drawing.Image)
+        Me.pnlCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlCredits.Controls.Add(Me.lblCreditsTop)
         Me.pnlCredits.Controls.Add(Me.lblScrollingCredits)
-        Me.pnlCredits.Location = New System.Drawing.Point(63, 37)
+        Me.pnlCredits.ForeColor = System.Drawing.Color.White
+        Me.pnlCredits.Location = New System.Drawing.Point(1143, 204)
         Me.pnlCredits.Name = "pnlCredits"
         Me.pnlCredits.Size = New System.Drawing.Size(400, 192)
         Me.pnlCredits.TabIndex = 39
@@ -294,25 +273,24 @@ Partial Class frmMenu
         '
         'lblCreditsTop
         '
-        Me.lblCreditsTop.AutoSize = True
         Me.lblCreditsTop.BackColor = System.Drawing.Color.Transparent
         Me.lblCreditsTop.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreditsTop.Location = New System.Drawing.Point(154, 0)
+        Me.lblCreditsTop.Location = New System.Drawing.Point(86, 0)
         Me.lblCreditsTop.Name = "lblCreditsTop"
-        Me.lblCreditsTop.Size = New System.Drawing.Size(108, 33)
+        Me.lblCreditsTop.Size = New System.Drawing.Size(247, 33)
         Me.lblCreditsTop.TabIndex = 15
         Me.lblCreditsTop.Text = "Credits"
+        Me.lblCreditsTop.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblScrollingCredits
         '
         Me.lblScrollingCredits.AutoSize = True
         Me.lblScrollingCredits.BackColor = System.Drawing.Color.Transparent
-        Me.lblScrollingCredits.Location = New System.Drawing.Point(166, 194)
+        Me.lblScrollingCredits.Location = New System.Drawing.Point(70, 179)
         Me.lblScrollingCredits.Name = "lblScrollingCredits"
-        Me.lblScrollingCredits.Size = New System.Drawing.Size(50, 13)
+        Me.lblScrollingCredits.Size = New System.Drawing.Size(0, 13)
         Me.lblScrollingCredits.TabIndex = 17
-        Me.lblScrollingCredits.Text = "txtCredits"
-        Me.lblScrollingCredits.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblScrollingCredits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tmrCredits
         '
@@ -321,8 +299,9 @@ Partial Class frmMenu
         '
         'pnlNewChar
         '
-        Me.pnlNewChar.BackColor = System.Drawing.Color.Gray
-        Me.pnlNewChar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlNewChar.BackColor = System.Drawing.Color.Transparent
+        Me.pnlNewChar.BackgroundImage = CType(resources.GetObject("pnlNewChar.BackgroundImage"), System.Drawing.Image)
+        Me.pnlNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlNewChar.Controls.Add(Me.placeholderforsprite)
         Me.pnlNewChar.Controls.Add(Me.lblNextChar)
         Me.pnlNewChar.Controls.Add(Me.lblPrevChar)
@@ -335,7 +314,8 @@ Partial Class frmMenu
         Me.pnlNewChar.Controls.Add(Me.txtCharName)
         Me.pnlNewChar.Controls.Add(Me.Label11)
         Me.pnlNewChar.Controls.Add(Me.Label12)
-        Me.pnlNewChar.Location = New System.Drawing.Point(63, 37)
+        Me.pnlNewChar.ForeColor = System.Drawing.Color.White
+        Me.pnlNewChar.Location = New System.Drawing.Point(737, 204)
         Me.pnlNewChar.Name = "pnlNewChar"
         Me.pnlNewChar.Size = New System.Drawing.Size(400, 192)
         Me.pnlNewChar.TabIndex = 43
@@ -436,6 +416,7 @@ Partial Class frmMenu
         'Label11
         '
         Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.Color.White
         Me.Label11.Location = New System.Drawing.Point(106, 56)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(38, 13)
@@ -446,28 +427,34 @@ Partial Class frmMenu
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.White
         Me.Label12.Location = New System.Drawing.Point(90, 5)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(238, 33)
         Me.Label12.TabIndex = 30
         Me.Label12.Text = "Create Character"
         '
-        'Label8
+        'lbl
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(391, 303)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(74, 13)
-        Me.Label8.TabIndex = 44
-        Me.Label8.Text = "Server Status:"
+        Me.lbl.AutoSize = True
+        Me.lbl.BackColor = System.Drawing.Color.Transparent
+        Me.lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl.ForeColor = System.Drawing.Color.White
+        Me.lbl.Location = New System.Drawing.Point(482, 9)
+        Me.lbl.Name = "lbl"
+        Me.lbl.Size = New System.Drawing.Size(105, 16)
+        Me.lbl.TabIndex = 44
+        Me.lbl.Text = "Server Status:"
         '
         'lblServerStatus
         '
         Me.lblServerStatus.AutoSize = True
+        Me.lblServerStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblServerStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblServerStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblServerStatus.Location = New System.Drawing.Point(460, 303)
+        Me.lblServerStatus.Location = New System.Drawing.Point(593, 9)
         Me.lblServerStatus.Name = "lblServerStatus"
-        Me.lblServerStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblServerStatus.Size = New System.Drawing.Size(52, 16)
         Me.lblServerStatus.TabIndex = 45
         Me.lblServerStatus.Text = "Offline"
         '
@@ -483,11 +470,13 @@ Partial Class frmMenu
         '
         'pnlMainMenu
         '
-        Me.pnlMainMenu.BackColor = System.Drawing.Color.Gray
-        Me.pnlMainMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlMainMenu.BackColor = System.Drawing.Color.Transparent
+        Me.pnlMainMenu.BackgroundImage = CType(resources.GetObject("pnlMainMenu.BackgroundImage"), System.Drawing.Image)
+        Me.pnlMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlMainMenu.Controls.Add(Me.Label5)
         Me.pnlMainMenu.Controls.Add(Me.Label6)
-        Me.pnlMainMenu.Location = New System.Drawing.Point(63, 37)
+        Me.pnlMainMenu.ForeColor = System.Drawing.Color.White
+        Me.pnlMainMenu.Location = New System.Drawing.Point(160, 149)
         Me.pnlMainMenu.Name = "pnlMainMenu"
         Me.pnlMainMenu.Size = New System.Drawing.Size(400, 192)
         Me.pnlMainMenu.TabIndex = 46
@@ -495,9 +484,9 @@ Partial Class frmMenu
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Gray
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(119, 33)
+        Me.Label5.Location = New System.Drawing.Point(120, 16)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(158, 33)
         Me.Label5.TabIndex = 36
@@ -505,31 +494,163 @@ Partial Class frmMenu
         '
         'Label6
         '
-        Me.Label6.BackColor = System.Drawing.Color.Gray
-        Me.Label6.Location = New System.Drawing.Point(41, 79)
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Location = New System.Drawing.Point(43, 61)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(308, 104)
         Me.Label6.TabIndex = 37
         Me.Label6.Text = resources.GetString("Label6.Text")
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'btnLogin
+        '
+        Me.btnLogin.BackColor = System.Drawing.Color.Transparent
+        Me.btnLogin.BackgroundImage = CType(resources.GetObject("btnLogin.BackgroundImage"), System.Drawing.Image)
+        Me.btnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnLogin.ForeColor = System.Drawing.Color.White
+        Me.btnLogin.Location = New System.Drawing.Point(133, 490)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(109, 39)
+        Me.btnLogin.TabIndex = 47
+        '
+        'btnRegister
+        '
+        Me.btnRegister.BackColor = System.Drawing.Color.Transparent
+        Me.btnRegister.BackgroundImage = CType(resources.GetObject("btnRegister.BackgroundImage"), System.Drawing.Image)
+        Me.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnRegister.ForeColor = System.Drawing.Color.White
+        Me.btnRegister.Location = New System.Drawing.Point(248, 490)
+        Me.btnRegister.Name = "btnRegister"
+        Me.btnRegister.Size = New System.Drawing.Size(109, 39)
+        Me.btnRegister.TabIndex = 48
+        '
+        'btnCredits
+        '
+        Me.btnCredits.BackColor = System.Drawing.Color.Transparent
+        Me.btnCredits.BackgroundImage = CType(resources.GetObject("btnCredits.BackgroundImage"), System.Drawing.Image)
+        Me.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnCredits.ForeColor = System.Drawing.Color.White
+        Me.btnCredits.Location = New System.Drawing.Point(363, 490)
+        Me.btnCredits.Name = "btnCredits"
+        Me.btnCredits.Size = New System.Drawing.Size(109, 39)
+        Me.btnCredits.TabIndex = 49
+        '
+        'btnExit
+        '
+        Me.btnExit.BackColor = System.Drawing.Color.Transparent
+        Me.btnExit.BackgroundImage = CType(resources.GetObject("btnExit.BackgroundImage"), System.Drawing.Image)
+        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnExit.ForeColor = System.Drawing.Color.White
+        Me.btnExit.Location = New System.Drawing.Point(478, 490)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(109, 39)
+        Me.btnExit.TabIndex = 50
+        '
+        'pnlIPConfig
+        '
+        Me.pnlIPConfig.BackColor = System.Drawing.Color.Transparent
+        Me.pnlIPConfig.BackgroundImage = CType(resources.GetObject("pnlIPConfig.BackgroundImage"), System.Drawing.Image)
+        Me.pnlIPConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlIPConfig.Controls.Add(Me.lblSaveIP)
+        Me.pnlIPConfig.Controls.Add(Me.txtPort)
+        Me.pnlIPConfig.Controls.Add(Me.Label14)
+        Me.pnlIPConfig.Controls.Add(Me.txtIP)
+        Me.pnlIPConfig.Controls.Add(Me.Label15)
+        Me.pnlIPConfig.Controls.Add(Me.Label8)
+        Me.pnlIPConfig.Controls.Add(Me.Label13)
+        Me.pnlIPConfig.ForeColor = System.Drawing.Color.White
+        Me.pnlIPConfig.Location = New System.Drawing.Point(737, 402)
+        Me.pnlIPConfig.Name = "pnlIPConfig"
+        Me.pnlIPConfig.Size = New System.Drawing.Size(400, 133)
+        Me.pnlIPConfig.TabIndex = 51
+        Me.pnlIPConfig.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(86, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(247, 33)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "IPConfig"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.Label13.Location = New System.Drawing.Point(70, 179)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(0, 13)
+        Me.Label13.TabIndex = 17
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtPort
+        '
+        Me.txtPort.Location = New System.Drawing.Point(157, 71)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPort.Size = New System.Drawing.Size(110, 20)
+        Me.txtPort.TabIndex = 28
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(84, 74)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(29, 13)
+        Me.Label14.TabIndex = 27
+        Me.Label14.Text = "Port:"
+        '
+        'txtIP
+        '
+        Me.txtIP.Location = New System.Drawing.Point(157, 36)
+        Me.txtIP.Name = "txtIP"
+        Me.txtIP.Size = New System.Drawing.Size(192, 20)
+        Me.txtIP.TabIndex = 26
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(84, 39)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(50, 13)
+        Me.Label15.TabIndex = 25
+        Me.Label15.Text = "IP Adres:"
+        '
+        'lblSaveIP
+        '
+        Me.lblSaveIP.AutoSize = True
+        Me.lblSaveIP.Location = New System.Drawing.Point(154, 107)
+        Me.lblSaveIP.Name = "lblSaveIP"
+        Me.lblSaveIP.Size = New System.Drawing.Size(45, 13)
+        Me.lblSaveIP.TabIndex = 29
+        Me.lblSaveIP.Text = "Save IP"
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(531, 316)
-        Me.Controls.Add(Me.lblServerStatus)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.lblExit)
-        Me.Controls.Add(Me.lblCredits)
-        Me.Controls.Add(Me.lblRegister)
-        Me.Controls.Add(Me.lblLogin)
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(717, 541)
+        Me.Controls.Add(Me.pnlIPConfig)
+        Me.Controls.Add(Me.btnExit)
+        Me.Controls.Add(Me.btnCredits)
         Me.Controls.Add(Me.pnlNewChar)
+        Me.Controls.Add(Me.btnRegister)
+        Me.Controls.Add(Me.btnLogin)
+        Me.Controls.Add(Me.lblServerStatus)
+        Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
         Me.Controls.Add(Me.pnlMainMenu)
+        Me.DoubleBuffered = True
+        Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmMenu"
@@ -546,14 +667,12 @@ Partial Class frmMenu
         CType(Me.placeholderforsprite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlMainMenu.ResumeLayout(False)
         Me.pnlMainMenu.PerformLayout()
+        Me.pnlIPConfig.ResumeLayout(False)
+        Me.pnlIPConfig.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblExit As System.Windows.Forms.Label
-    Friend WithEvents lblCredits As System.Windows.Forms.Label
-    Friend WithEvents lblRegister As System.Windows.Forms.Label
-    Friend WithEvents lblLogin As System.Windows.Forms.Label
     Public WithEvents pnlLogin As System.Windows.Forms.Panel
     Friend WithEvents chkSavePass As System.Windows.Forms.CheckBox
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
@@ -588,11 +707,23 @@ Partial Class frmMenu
     Friend WithEvents txtCharName As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents lbl As System.Windows.Forms.Label
     Friend WithEvents lblServerStatus As System.Windows.Forms.Label
     Friend WithEvents tmrConnect As System.Windows.Forms.Timer
     Friend WithEvents tmrDrawCharacter As System.Windows.Forms.Timer
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents btnLogin As Windows.Forms.Panel
+    Friend WithEvents btnRegister As Windows.Forms.Panel
+    Friend WithEvents btnCredits As Windows.Forms.Panel
+    Friend WithEvents btnExit As Windows.Forms.Panel
+    Public WithEvents pnlIPConfig As Windows.Forms.Panel
+    Friend WithEvents lblSaveIP As Windows.Forms.Label
+    Friend WithEvents txtPort As Windows.Forms.TextBox
+    Friend WithEvents Label14 As Windows.Forms.Label
+    Friend WithEvents txtIP As Windows.Forms.TextBox
+    Friend WithEvents Label15 As Windows.Forms.Label
+    Friend WithEvents Label8 As Windows.Forms.Label
+    Friend WithEvents Label13 As Windows.Forms.Label
 End Class

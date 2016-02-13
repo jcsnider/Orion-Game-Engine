@@ -2,13 +2,200 @@
 Imports System.Drawing
 
 Public Class frmMainGame
+#Region "Frm Code"
+    Dim ShakeCount As Byte, LastDir As Byte
 
-    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picscreen.MouseDown
+    Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Disposed
+        frmAdmin.Dispose()
+        DestroyGame()
+    End Sub
+
+    Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Down Then VbKeyDown = True
+        If e.KeyCode = Keys.Up Then VbKeyUp = True
+        If e.KeyCode = Keys.Left Then VbKeyLeft = True
+        If e.KeyCode = Keys.Right Then VbKeyRight = True
+        If e.KeyCode = Keys.Enter Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
+        Dim spellnum As Long
+        If e.KeyCode = Keys.Down Then VbKeyDown = False
+        If e.KeyCode = Keys.Up Then VbKeyUp = False
+        If e.KeyCode = Keys.Left Then VbKeyLeft = False
+        If e.KeyCode = Keys.Right Then VbKeyRight = False
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+
+        'hotbar
+        If e.KeyCode = Keys.F1 Then
+            spellnum = Player(MyIndex).Hotbar(1).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F2 Then
+            spellnum = Player(MyIndex).Hotbar(2).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F3 Then
+            spellnum = Player(MyIndex).Hotbar(3).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F4 Then
+            spellnum = Player(MyIndex).Hotbar(4).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F5 Then
+            spellnum = Player(MyIndex).Hotbar(5).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F6 Then
+            spellnum = Player(MyIndex).Hotbar(6).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F7 Then
+            spellnum = Player(MyIndex).Hotbar(7).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+
+        'admin
+        If e.KeyCode = Keys.F10 Then
+            If Player(MyIndex).Access > 0 Then
+                SendRequestAdmin()
+            End If
+        End If
+        'hide gui
+        If e.KeyCode = Keys.F11 Then
+            HideGui = True
+        End If
+
+        If e.KeyCode = Keys.Enter Then
+            HandlePressEnter()
+            CheckMapGetItem()
+            Me.txtMeChat.Text = ""
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        'Set the Chat Position
+        txtChat.Left = picGeneral.Left
+        txtChat.Top = Me.Height - txtChat.Height - 82
+        txtMeChat.Left = txtChat.Left
+        txtMeChat.Top = txtChat.Top + txtChat.Height + 10
+
+        pnlActionMenu.Left = Me.Width - pnlActionMenu.Width - 25
+        pnlActionMenu.Top = Me.Height - pnlActionMenu.Height - 50
+
+        pnlHotBar.Left = txtMeChat.Left + txtMeChat.Width + 10
+        pnlHotBar.Top = pnlActionMenu.Top + pnlActionMenu.Height - pnlHotBar.Height
+
+        frmAdmin.Visible = False
+        pnlCurrency.Left = txtChat.Left
+        pnlCurrency.Top = txtChat.Top
+
+        pnlDialog.Left = txtChat.Left
+        pnlDialog.Top = txtChat.Top
+
+        pnlQuestSpeech.Left = txtChat.Left
+        pnlQuestSpeech.Top = txtChat.Top
+
+        pnlCharacter.Left = picGeneral.Left
+        pnlInventory.Left = picGeneral.Left
+        pnlSpells.Left = picGeneral.Left
+        pnlOptions.Left = picGeneral.Left
+
+        DrawFace(Player(MyIndex).Sprite)
+    End Sub
+
+    Private Sub lblDialogOk_Click(sender As Object, e As EventArgs) Handles lblDialogOk.Click
+
+        VbKeyDown = False
+        VbKeyUp = False
+        VbKeyLeft = False
+        VbKeyRight = False
+
+        If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer
+            SendBuyHouse(1)
+        ElseIf DIALOGUE_TYPE_VISIT Then
+            SendVisit(1)
+        End If
+
+        pnlDialog.Visible = False
+
+    End Sub
+
+    Private Sub lblDialogCancel_Click(sender As Object, e As EventArgs) Handles lblDialogCancel.Click
+
+        VbKeyDown = False
+        VbKeyUp = False
+        VbKeyLeft = False
+        VbKeyRight = False
+
+        If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer declined
+            SendBuyHouse(0)
+        ElseIf DIALOGUE_TYPE_VISIT Then
+            SendVisit(0)
+        End If
+
+        pnlDialog.Visible = False
+
+    End Sub
+
+    Private Sub pnlGeneral_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picGeneral.Paint
+        'PlaceHolder
+    End Sub
+
+    Private Sub lblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
+        If IsNumeric(txtCurrency.Text) Then
+            Select Case CurrencyMenu
+                Case 1 ' drop item
+                    SendDropItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                Case 2 ' deposit item
+                    DepositItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                Case 3 ' withdraw item
+                    WithdrawItem(tmpCurrencyItem, Val(txtCurrency.Text))
+            End Select
+        End If
+
+        pnlCurrency.Visible = False
+        tmpCurrencyItem = 0
+        txtCurrency.Text = vbNullString
+        CurrencyMenu = 0 ' clear
+    End Sub
+#End Region
+
+#Region "PicScreen Code"
+    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
         If InMapEditor Then
             Call MapEditorMouseDown(e.Button, e.X, e.Y, False)
         Else
             ' left click
-            If e.Button = Windows.Forms.MouseButtons.Left Then
+            If e.Button = MouseButtons.Left Then
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
                     ' targetting
@@ -18,103 +205,25 @@ Public Class frmMainGame
                     Call SendTradeRequest(CurX, CurY)
                 End If
                 ' right click
-            ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+            ElseIf e.Button = MouseButtons.Right Then
                 If ShiftDown Then
                     ' admin warp if we're pressing shift and right clicking
                     If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
                 End If
+                FurnitureSelected = 0
             End If
         End If
 
         Me.txtMeChat.Focus()
+
     End Sub
-    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picscreen.Paint
+
+    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picscreen.Paint
         'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
         Exit Sub
     End Sub
 
-    Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
-        Call DestroyGame()
-    End Sub
-
-    Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
-    End Sub
-
-    Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.Down Then VbKeyDown = False
-        If e.KeyCode = Keys.Up Then VbKeyUp = False
-        If e.KeyCode = Keys.Left Then VbKeyLeft = False
-        If e.KeyCode = Keys.Right Then VbKeyRight = False
-    End Sub
-
-    Private Sub frmMainGame_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        picAdmin.Left = 10
-        pnlCurrency.Left = txtChat.Left
-        pnlCurrency.Top = txtChat.Top
-        Me.Width = 745
-        Me.Height = 565
-        picInventory.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Inventory" & GFX_EXT
-        picSkills.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Skills" & GFX_EXT
-        picCharacter.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Character" & GFX_EXT
-        picTrade.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Trade" & GFX_EXT
-        picOptions.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Options" & GFX_EXT
-        picExit.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Exit" & GFX_EXT
-
-
-    End Sub
-
-    Private Sub txtChat_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtChat.KeyDown
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
-    End Sub
-
-    Private Sub txtChat_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtChat.KeyUp
-        If e.KeyCode = Keys.Down Then VbKeyDown = False
-        If e.KeyCode = Keys.Up Then VbKeyUp = False
-        If e.KeyCode = Keys.Left Then VbKeyLeft = False
-        If e.KeyCode = Keys.Right Then VbKeyRight = False
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
-        If e.KeyCode = Keys.F1 Then
-            If Player(MyIndex).Access > 0 Then
-                picAdmin.Visible = Not picAdmin.Visible
-                picAdmin.BringToFront()
-            End If
-        End If
-
-    End Sub
-
-    Private Sub pnlGeneral_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picGeneral.Paint
-        'PlaceHolder
-    End Sub
-
-    Private Sub txtChat_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtChat.TextChanged
-
-    End Sub
-
-    Private Sub btnMapEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMapEditor.Click
-
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditMap()
-    End Sub
-
-    Private Sub picscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picscreen.Click
-
-    End Sub
-
-    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picscreen.MouseMove
+    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseMove
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
 
@@ -124,275 +233,321 @@ Public Class frmMainGame
                 Call MapEditorMouseDown(e.Button, e.X, e.Y)
             End If
         End If
+
+        pnlItemDesc.Visible = False
+        LastItemDesc = 0 ' no item was last loaded
     End Sub
 
-    Private Sub TextBox2_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMeChat.KeyDown
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+    Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
+        Dim buffer As ByteBuffer, I As Long
+
+        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
+        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+
+        If FurnitureSelected > 0 Then
+            If Player(MyIndex).InHouse = MyIndex Then
+                If Item(PlayerInv(FurnitureSelected).Num).Type = ITEM_TYPE_FURNITURE Then
+                    buffer = New ByteBuffer
+                    buffer.WriteLong(ClientPackets.CPlaceFurniture)
+                    I = CurX
+                    buffer.WriteLong(I)
+                    I = CurY
+                    buffer.WriteLong(I)
+                    buffer.WriteLong(FurnitureSelected)
+                    SendData(buffer.ToArray)
+                    buffer = Nothing
+
+                    FurnitureSelected = 0
+                End If
+            End If
+        End If
+
     End Sub
 
-    Private Sub TextBox2_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtMeChat.KeyUp
+    Private Sub picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
+        Dim spellnum As Long
+
         If e.KeyCode = Keys.Down Then VbKeyDown = False
         If e.KeyCode = Keys.Up Then VbKeyUp = False
         If e.KeyCode = Keys.Left Then VbKeyLeft = False
         If e.KeyCode = Keys.Right Then VbKeyRight = False
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+
+        'hotbar
         If e.KeyCode = Keys.F1 Then
-            If Player(MyIndex).Access > 0 Then
-                picAdmin.Visible = Not picAdmin.Visible
+            spellnum = Player(MyIndex).Hotbar(1).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
             End If
         End If
+        If e.KeyCode = Keys.F2 Then
+            spellnum = Player(MyIndex).Hotbar(2).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F3 Then
+            spellnum = Player(MyIndex).Hotbar(3).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F4 Then
+            spellnum = Player(MyIndex).Hotbar(4).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F5 Then
+            spellnum = Player(MyIndex).Hotbar(5).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F6 Then
+            spellnum = Player(MyIndex).Hotbar(6).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F7 Then
+            spellnum = Player(MyIndex).Hotbar(7).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+
+        'admin
+        If e.KeyCode = Keys.F10 Then
+            If Player(MyIndex).Access > 0 Then
+                SendRequestAdmin()
+            End If
+        End If
+        'hide gui
+        If e.KeyCode = Keys.F11 Then
+            HideGui = True
+        End If
+
         If e.KeyCode = Keys.Enter Then
             HandlePressEnter()
             CheckMapGetItem()
             Me.txtMeChat.Text = ""
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+#End Region
+
+#Region "Chat Code"
+    Private Sub txtMeChat_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMeChat.KeyDown
+        If e.KeyCode = Keys.Down Then VbKeyDown = True
+        If e.KeyCode = Keys.Up Then VbKeyUp = True
+        If e.KeyCode = Keys.Left Then VbKeyLeft = True
+        If e.KeyCode = Keys.Right Then VbKeyRight = True
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+
+        If e.KeyCode = Keys.Enter Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Sub txtMeChat_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMeChat.KeyUp
+        Dim spellnum As Long
+
+        If e.KeyCode = Keys.Down Then VbKeyDown = False
+        If e.KeyCode = Keys.Up Then VbKeyUp = False
+        If e.KeyCode = Keys.Left Then VbKeyLeft = False
+        If e.KeyCode = Keys.Right Then VbKeyRight = False
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+
+        'hotbar
+        If e.KeyCode = Keys.F1 Then
+            spellnum = Player(MyIndex).Hotbar(1).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F2 Then
+            spellnum = Player(MyIndex).Hotbar(2).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F3 Then
+            spellnum = Player(MyIndex).Hotbar(3).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F4 Then
+            spellnum = Player(MyIndex).Hotbar(4).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F5 Then
+            spellnum = Player(MyIndex).Hotbar(5).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F6 Then
+            spellnum = Player(MyIndex).Hotbar(6).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+        If e.KeyCode = Keys.F7 Then
+            spellnum = Player(MyIndex).Hotbar(7).Slot
+
+            If spellnum <> 0 Then
+                Call CastSpell(spellnum)
+            End If
+        End If
+
+        'admin
+        If e.KeyCode = Keys.F10 Then
+            If Player(MyIndex).Access > 0 Then
+                SendRequestAdmin()
+            End If
+        End If
+        'hide gui
+        If e.KeyCode = Keys.F11 Then
+            HideGui = True
+        End If
+
+        If e.KeyCode = Keys.Enter Then
+            HandlePressEnter()
+            CheckMapGetItem()
+            Me.txtMeChat.Text = ""
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
 
     End Sub
 
-    Private Sub txtMeChat_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMeChat.TextChanged
+    Private Sub txtMeChat_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMeChat.TextChanged
         MyText = txtMeChat.Text
     End Sub
+#End Region
 
-    Private Sub btnAdminWarpTo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminWarpTo.Click
-        Dim n As Long
+#Region "Char Panel"
+    Private Sub lblTrainStr_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainStr.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(1)
+    End Sub
 
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
+    Private Sub lblTrainVit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainVit.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(3)
+    End Sub
 
-        If Len(Trim$(txtAdminMap.Text)) < 1 Then
-            Exit Sub
-        End If
+    Private Sub lblTrainInt_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainInt.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(5)
+    End Sub
 
-        If Not IsNumeric(Trim$(txtAdminMap.Text)) Then
-            Exit Sub
-        End If
+    Private Sub lblTrainEnd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainEnd.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(2)
+    End Sub
 
-        n = CLng(Trim$(txtAdminMap.Text))
+    Private Sub lblTrainWill_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainWill.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(4)
+    End Sub
 
-        ' Check to make sure its a valid map #
-        If n > 0 And n <= MAX_MAPS Then
-            Call WarpTo(n)
-        Else
-            Call AddText("Invalid map number.")
+    Private Sub lblTrainSpr_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainSpr.Click
+        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
+        SendTrainStat(6)
+    End Sub
+
+    Private Sub pnlCharacter_Click(ByVal sender As Object, ByVal e As EventArgs) Handles pnlCharacter.Click
+        Dim EqNum As Long
+        EqNum = IsEqItem(EqX, EqY)
+
+        If EqNum <> 0 Then
+            SendUnequip(EqNum)
         End If
     End Sub
 
-    Private Sub btnAdminBan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminBan.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+    Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+        IsEqItem = 0
+
+        For i = 1 To Equipment.Equipment_Count - 1
+
+            If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
+
+                With tempRec
+                    .top = EqTop
+                    .bottom = .top + PIC_Y
+                    .left = EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
+                    .right = .left + PIC_X
+                End With
+
+                If X >= tempRec.left And X <= tempRec.right Then
+                    If Y >= tempRec.top And Y <= tempRec.bottom Then
+                        IsEqItem = i
+                        Exit Function
+                    End If
+                End If
+            End If
+
+        Next
+
+    End Function
+
+    Private Sub pnlCharacter_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlCharacter.MouseMove
+        Dim EqNum As Long
+        Dim x As Long, y As Long
+        Dim x2 As Long, y2 As Long
+
+
+        x = e.Location.X
+        y = e.Location.Y
+
+        EqX = x
+        EqY = y
+        EqNum = IsEqItem(x, y)
+
+        If EqNum <> 0 Then
+            y2 = y + pnlCharacter.Top - Me.pnlItemDesc.Height - 2
+            x2 = x + pnlCharacter.Left + 2
+            UpdateDescWindow(GetPlayerEquipment(MyIndex, EqNum), 0, x2, y2)
+            LastItemDesc = GetPlayerEquipment(MyIndex, EqNum) ' set it so you don't re-set values
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        SendBan(Trim$(txtAdminName.Text))
+        pnlItemDesc.Visible = False
+        LastItemDesc = 0 ' no item was last loaded
     End Sub
 
-    Private Sub btnAdminKick_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminKick.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        SendKick(Trim$(txtAdminName.Text))
+    Private Overloads Sub pnlCharacter_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlCharacter.Paint
+        Exit Sub
     End Sub
+#End Region
 
-    Private Sub btnAdminWarp2Me_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminWarp2Me.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        If IsNumeric(Trim$(txtAdminName.Text)) Then
-            Exit Sub
-        End If
-
-        WarpToMe(Trim$(txtAdminName.Text))
-    End Sub
-
-    Private Sub btnAdminWarpMe2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminWarpMe2.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        If IsNumeric(Trim$(txtAdminName.Text)) Then
-            Exit Sub
-        End If
-
-        WarpMeTo(Trim$(txtAdminName.Text))
-    End Sub
-
-    Private Sub btnAdminSetAccess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminSetAccess.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminName.Text)) < 2 Then
-            Exit Sub
-        End If
-
-        If IsNumeric(Trim$(txtAdminName.Text)) Or Not IsNumeric(Trim$(txtAdminAccess.Text)) Then
-            Exit Sub
-        End If
-
-        SendSetAccess(Trim$(txtAdminName.Text), CLng(Trim$(txtAdminAccess.Text)))
-    End Sub
-
-    Private Sub btnAdminSetSprite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdminSetSprite.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminSprite.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        If Not IsNumeric(Trim$(txtAdminSprite.Text)) Then
-            Exit Sub
-        End If
-
-        SendSetSprite(CLng(Trim$(txtAdminSprite.Text)))
-    End Sub
-
-    Private Sub scrlSpawnItem_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles scrlSpawnItem.Scroll
-        lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
-        If Item(scrlSpawnItem.Value).Type = ITEM_TYPE_CURRENCY Then
-            scrlSpawnItemAmount.Enabled = True
-            Exit Sub
-        End If
-        scrlSpawnItemAmount.Enabled = False
-    End Sub
-
-    Private Sub scrlSpawnItemAmount_Scroll(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
-        lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
-    End Sub
-
-    Private Sub btnSpawnItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSpawnItem.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendSpawnItem(scrlSpawnItem.Value, scrlSpawnItemAmount.Value)
-    End Sub
-
-    Private Sub btnLevelUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLevelUp.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestLevelUp()
-    End Sub
-
-    Private Sub btnItemEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnItemEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditItem()
-    End Sub
-
-    Private Sub btnResourceEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnResourceEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditResource()
-    End Sub
-
-    Private Sub btnNPCEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNPCEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditNpc()
-    End Sub
-
-    Private Sub btnSpellEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSpellEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditSpell()
-    End Sub
-
-    Private Sub btnShopEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShopEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditShop()
-    End Sub
-
-    Private Sub btnAnimationEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAnimationEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendRequestEditAnimation()
-    End Sub
-
-    Private Sub btnALoc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnALoc.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        BLoc = Not BLoc
-    End Sub
-
-    Private Sub btnDelBans_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelBans.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendBanDestroy()
-    End Sub
-
-    Private Sub btnRespawn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRespawn.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
-            Exit Sub
-        End If
-
-        SendMapRespawn()
-    End Sub
-
-    Private Sub optMOn_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optMOn.CheckedChanged
+#Region "Options"
+    Private Sub optMOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOn.CheckedChanged
         Options.Music = 1
         ' start music playing
         PlayMusic(Trim$(Map.Music))
@@ -400,118 +555,92 @@ Public Class frmMainGame
         SaveOptions()
     End Sub
 
-    Private Sub optMOff_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optMOff.CheckedChanged
+    Private Sub optMOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOff.CheckedChanged
         Options.Music = 0
+        FadeInSwitch = False
         ' stop music playing
         StopMusic()
         ' save to config.ini
         SaveOptions()
     End Sub
 
-    Private Sub optSOn_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optSOn.CheckedChanged
+    Private Sub optSOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOn.CheckedChanged
         Options.Sound = 1
         ' save to config.ini
         SaveOptions()
     End Sub
 
-    Private Sub optSOff_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles optSOff.CheckedChanged
+    Private Sub optSOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOff.CheckedChanged
         Options.Sound = 0
         ' save to config.ini
         SaveOptions()
     End Sub
+#End Region
 
-    Private Sub lblTrainStr_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainStr.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(1)
-    End Sub
-
-    Private Sub lblTrainVit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainVit.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(3)
-    End Sub
-
-    Private Sub lblTrainInt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainInt.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(5)
-    End Sub
-
-    Private Sub lblTrainEnd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainEnd.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(2)
-    End Sub
-
-    Private Sub lblTrainWill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainWill.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(4)
-    End Sub
-
-    Private Sub lblTrainSpr_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblTrainSpr.Click
-        If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
-        SendTrainStat(6)
-    End Sub
-
-    Private Sub picCharacter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picCharacter.Click
+#Region "Action Panel"
+    Private Sub picCharacter_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picCharacter.Click
+        PlaySound("Click.ogg")
         SendRequestPlayerData()
-        pnlCharacter.Visible = True
+        pnlCharacter.Visible = Not pnlCharacter.Visible
         pnlInventory.Visible = False
         pnlSpells.Visible = False
         pnlOptions.Visible = False
+        pnlCharacter.BringToFront()
         DrawEquipment()
     End Sub
 
-    Private Sub picOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picOptions.Click
+    Private Sub picOptions_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picOptions.Click
+        PlaySound("Click.ogg")
         pnlCharacter.Visible = False
         pnlInventory.Visible = False
         pnlSpells.Visible = False
-        pnlOptions.Visible = True
+        pnlOptions.BringToFront()
+        pnlOptions.Visible = Not pnlOptions.Visible
     End Sub
 
-    Private Sub picInventory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picInventory.Click
-        pnlInventory.Visible = True
+    Private Sub picInventory_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picInventory.Click
+        PlaySound("Click.ogg")
+        pnlInventory.Visible = Not pnlInventory.Visible
         pnlCharacter.Visible = False
         pnlSpells.Visible = False
         pnlOptions.Visible = False
+        pnlInventory.BringToFront()
         'DrawInventory()
     End Sub
 
-    Private Sub picExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picExit.Click
-        Dim Buffer As ByteBuffer
-        Dim i As Long
-
-        isLogging = True
-        InGame = False
-
-        Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CQuit)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-
-
-        ' destroy the animations loaded
-        For i = 1 To MAX_BYTE
-            ClearAnimInstance(i)
-        Next
-
-        ' destroy temp values
-        DragInvSlotNum = 0
-        InvX = 0
-        InvY = 0
-        EqX = 0
-        EqY = 0
-        SpellX = 0
-        SpellY = 0
-        LastItemDesc = 0
-        MyIndex = 0
-        InventoryItemSelected = 0
-        SpellBuffer = 0
-        SpellBufferTimer = 0
-        tmpCurrencyItem = 0
-
-        txtChat.Text = vbNullString
+    Private Sub picExit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picExit.Click
+        PlaySound("Click.ogg")
+        frmAdmin.Dispose()
         DestroyGame()
     End Sub
 
-    Private Sub pnlInventory_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlInventory.DoubleClick
+    Private Sub picQuest_Click(sender As Object, e As EventArgs) Handles picQuest.Click
+        UpdateQuestLog()
+        ' show the window
+        pnlInventory.Visible = False
+        pnlCharacter.Visible = False
+        pnlOptions.Visible = False
+        RefreshQuestLog()
+        pnlQuestLog.Visible = Not pnlQuestLog.Visible
+    End Sub
+
+    Private Sub picSkills_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picSkills.Click
+        Dim Buffer As ByteBuffer
+        PlaySound("Click.ogg")
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ClientPackets.CSpells)
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+        pnlSpells.Visible = Not pnlSpells.Visible
+        pnlSpells.BringToFront()
+        pnlInventory.Visible = False
+        pnlCharacter.Visible = False
+        pnlOptions.Visible = False
+    End Sub
+#End Region
+
+#Region "Inventory Code"
+    Private Sub pnlInventory_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlInventory.DoubleClick
         Dim InvNum As Long
         Dim Value As Long
         Dim multiplier As Double
@@ -578,17 +707,35 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub pnlInventory_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlInventory.MouseDown
+    Private Sub pnlInventory_Click(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlInventory.Click
         Dim InvNum As Long
         InvNum = IsInvItem(e.Location.X, e.Location.Y)
 
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+        If e.Button = MouseButtons.Left Then
+            If InvNum <> 0 Then
+                If InTrade Then Exit Sub
+                If InBank Or InShop Then Exit Sub
+
+                If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_FURNITURE Then
+                    FurnitureSelected = InvNum
+                End If
+
+            End If
+        End If
+        txtMeChat.Focus()
+    End Sub
+
+    Private Sub pnlInventory_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlInventory.MouseDown
+        Dim InvNum As Long
+        InvNum = IsInvItem(e.Location.X, e.Location.Y)
+
+        If e.Button = MouseButtons.Left Then
             If InvNum <> 0 Then
                 If InTrade Then Exit Sub
                 If InBank Or InShop Then Exit Sub
                 DragInvSlotNum = InvNum
             End If
-        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+        ElseIf e.Button = MouseButtons.Right Then
             If Not InBank And Not InShop And Not InTrade Then
                 If InvNum <> 0 Then
                     If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
@@ -610,7 +757,7 @@ Public Class frmMainGame
         txtMeChat.Focus()
     End Sub
 
-    Private Sub pnlInventory_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlInventory.MouseMove
+    Private Sub pnlInventory_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlInventory.MouseMove
         Dim InvNum As Long
         Dim i As Long
         Dim x As Long
@@ -625,7 +772,7 @@ Public Class frmMainGame
         If DragInvSlotNum > 0 Then
             If InTrade Then Exit Sub
             If InBank Or InShop Then Exit Sub
-            Call DrawInventoryItem(CLng(x) + pnlInventory.Left, CLng(y) + pnlInventory.Top)
+            Call DrawInventoryItem(x + pnlInventory.Left, y + pnlInventory.Top)
         Else
             InvNum = IsInvItem(x, y)
 
@@ -648,6 +795,7 @@ Public Class frmMainGame
         LastItemDesc = 0 ' no item was last loaded
         'DrawInventory()
     End Sub
+
     Private Function IsInvItem(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As RECT
         Dim i As Long
@@ -676,7 +824,7 @@ Public Class frmMainGame
 
     End Function
 
-    Private Sub pnlInventory_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlInventory.MouseUp
+    Private Sub pnlInventory_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlInventory.MouseUp
         Dim i As Long
         Dim rec_pos As Rectangle
 
@@ -711,41 +859,25 @@ Public Class frmMainGame
         pnlTmpInv.Visible = False
     End Sub
 
-    Private Overloads Sub pnlInventory_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlInventory.Paint
+    Private Overloads Sub pnlInventory_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlInventory.Paint
         Exit Sub
     End Sub
+#End Region
 
-    Private Sub lblCurrencyOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblCurrencyOk.Click
-        If IsNumeric(txtCurrency.Text) Then
-            Select Case CurrencyMenu
-                Case 1 ' drop item
-                    SendDropItem(tmpCurrencyItem, Val(txtCurrency.Text))
-                Case 2 ' deposit item
-                    DepositItem(tmpCurrencyItem, Val(txtCurrency.Text))
-                Case 3 ' withdraw item
-                    WithdrawItem(tmpCurrencyItem, Val(txtCurrency.Text))
-            End Select
-        End If
-
-        pnlCurrency.Visible = False
-        tmpCurrencyItem = 0
-        txtCurrency.Text = vbNullString
-        CurrencyMenu = 0 ' clear
-    End Sub
-
-    Private Sub lblShopBuy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblShopBuy.Click
+#Region "Shop Code"
+    Private Sub lblShopBuy_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblShopBuy.Click
         If ShopAction = 1 Then Exit Sub
         ShopAction = 1 ' buying an item
         AddText("Click on the item in the shop you wish to buy.")
     End Sub
 
-    Private Sub lblShopSell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblShopSell.Click
+    Private Sub lblShopSell_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblShopSell.Click
         If ShopAction = 2 Then Exit Sub
         ShopAction = 2 ' selling an item
         AddText("Double-click on the item in your inventory you wish to sell.")
     End Sub
 
-    Private Sub pnlShopItems_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlShopItems.MouseDown
+    Private Sub pnlShopItems_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlShopItems.MouseDown
         Dim shopItem As Long
         Dim x As Long, y As Long
         x = e.Location.X
@@ -765,7 +897,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub pnlShopItems_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlShopItems.MouseMove
+    Private Sub pnlShopItems_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlShopItems.MouseMove
         Dim shopslot As Long
         Dim x2 As Long, y2 As Long
         Dim x As Long, y As Long
@@ -786,6 +918,7 @@ Public Class frmMainGame
         pnlItemDesc.Visible = False
         LastItemDesc = 0
     End Sub
+
     Private Function IsShopItem(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As Rectangle
         Dim i As Long
@@ -811,11 +944,11 @@ Public Class frmMainGame
         Next
     End Function
 
-    Private Sub pnlShopItems_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlShopItems.Paint
+    Private Sub pnlShopItems_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlShopItems.Paint
         'do nothing
     End Sub
 
-    Private Sub lblLeaveShop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblLeaveShop.Click
+    Private Sub lblLeaveShop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblLeaveShop.Click
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteLong(ClientPackets.CCloseShop)
@@ -825,8 +958,10 @@ Public Class frmMainGame
         InShop = 0
         ShopAction = 0
     End Sub
+#End Region
 
-    Private Sub pnlBank_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlBank.DoubleClick
+#Region "Bank Code"
+    Private Sub pnlBank_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlBank.DoubleClick
         Dim bankNum As Long
 
         DragBankSlotNum = 0
@@ -849,6 +984,7 @@ Public Class frmMainGame
             Exit Sub
         End If
     End Sub
+
     Private Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As RECT
         Dim i As Long
@@ -876,7 +1012,7 @@ Public Class frmMainGame
         Next
     End Function
 
-    Private Sub pnlBank_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlBank.MouseDown
+    Private Sub pnlBank_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseDown
         Dim bankNum As Long
         Dim x As Long, y As Long
         x = e.Location.X
@@ -885,13 +1021,13 @@ Public Class frmMainGame
 
         If bankNum <> 0 Then
 
-            If e.Button = Windows.Forms.MouseButtons.Left Then
+            If e.Button = MouseButtons.Left Then
                 DragBankSlotNum = bankNum
             End If
         End If
     End Sub
 
-    Private Sub pnlBank_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlBank.MouseMove
+    Private Sub pnlBank_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseMove
         Dim bankNum As Long
         Dim x2 As Long, y2 As Long, x As Long, y As Long
 
@@ -919,7 +1055,7 @@ Public Class frmMainGame
         LastBankDesc = 0
     End Sub
 
-    Private Sub pnlBank_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlBank.MouseUp
+    Private Sub pnlBank_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseUp
         Dim i As Long
         Dim x As Long, y As Long
         Dim rec_pos As Rectangle
@@ -952,21 +1088,24 @@ Public Class frmMainGame
         pnlTempBank.Visible = False
     End Sub
 
-    Private Sub pnlBank_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlBank.Paint
+    Private Sub pnlBank_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBank.Paint
         'do nothing
     End Sub
 
-    Private Sub lblLeaveBank_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblLeaveBank.Click
+    Private Sub lblLeaveBank_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblLeaveBank.Click
         CloseBank()
     End Sub
+#End Region
 
-    Private Sub picTrade_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picTrade.Click
+#Region "Trade Code"
+    Private Sub picTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picTrade.Click
+        PlaySound("Click.ogg")
         AddText("Click on the player you wish to trade with.")
         TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
         TradeRequest = True
     End Sub
 
-    Private Sub pnlYourTrade_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlYourTrade.DoubleClick
+    Private Sub pnlYourTrade_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlYourTrade.DoubleClick
         Dim TradeNum As Long
 
         TradeNum = IsTradeItem(TradeX, TradeY, True)
@@ -976,7 +1115,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub pnlYourTrade_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlYourTrade.MouseMove
+    Private Sub pnlYourTrade_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlYourTrade.MouseMove
         Dim TradeNum As Long
         Dim x As Long, y As Long
 
@@ -1000,9 +1139,10 @@ Public Class frmMainGame
         LastItemDesc = 0 ' no item was last loaded
     End Sub
 
-    Private Sub pnlYourTrade_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlYourTrade.Paint
+    Private Sub pnlYourTrade_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlYourTrade.Paint
         'do nothing
     End Sub
+
     Private Function IsTradeItem(ByVal X As Single, ByVal Y As Single, ByVal Yours As Boolean) As Long
         Dim tempRec As RECT
         Dim i As Long
@@ -1039,7 +1179,7 @@ Public Class frmMainGame
 
     End Function
 
-    Private Sub pnlTheirTrade_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTheirTrade.MouseMove
+    Private Sub pnlTheirTrade_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlTheirTrade.MouseMove
         Dim TradeNum As Long
         Dim x As Long, y As Long
         x = e.Location.X
@@ -1059,76 +1199,21 @@ Public Class frmMainGame
         LastItemDesc = 0 ' no item was last loaded
     End Sub
 
-    Private Sub pnlTheirTrade_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlTheirTrade.Paint
+    Private Sub pnlTheirTrade_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlTheirTrade.Paint
         'do nothing
     End Sub
 
-    Private Sub lblAcceptTrade_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblAcceptTrade.Click
+    Private Sub lblAcceptTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblAcceptTrade.Click
         AcceptTrade()
     End Sub
 
-    Private Sub pnlCharacter_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlCharacter.Click
-        Dim EqNum As Long
-        EqNum = IsEqItem(EqX, EqY)
-
-        If EqNum <> 0 Then
-            SendUnequip(EqNum)
-        End If
+    Private Sub lblDeclineTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblDeclineTrade.Click
+        DeclineTrade()
     End Sub
-    Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
-        Dim tempRec As RECT
-        Dim i As Long
-        IsEqItem = 0
+#End Region
 
-        For i = 1 To Equipment.Equipment_Count - 1
-
-            If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
-
-                With tempRec
-                    .top = EqTop
-                    .bottom = .top + PIC_Y
-                    .left = EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
-                    .right = .left + PIC_X
-                End With
-
-                If X >= tempRec.left And X <= tempRec.right Then
-                    If Y >= tempRec.top And Y <= tempRec.bottom Then
-                        IsEqItem = i
-                        Exit Function
-                    End If
-                End If
-            End If
-
-        Next
-
-    End Function
-
-    Private Sub pnlCharacter_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlCharacter.MouseMove
-        Dim EqNum As Long
-        Dim x As Long, y As Long
-        Dim x2 As Long, y2 As Long
-
-
-        x = e.Location.X
-        y = e.Location.Y
-
-        EqX = x
-        EqY = y
-        EqNum = IsEqItem(x, y)
-
-        If EqNum <> 0 Then
-            y2 = y + pnlCharacter.Top - Me.pnlItemDesc.Height - 2
-            x2 = x + pnlCharacter.Left + 2
-            UpdateDescWindow(GetPlayerEquipment(MyIndex, EqNum), 0, x2, y2)
-            LastItemDesc = GetPlayerEquipment(MyIndex, EqNum) ' set it so you don't re-set values
-            Exit Sub
-        End If
-
-        pnlItemDesc.Visible = False
-        LastItemDesc = 0 ' no item was last loaded
-    End Sub
-
-    Private Sub pnlSpells_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlSpells.DoubleClick
+#Region "Spell Code"
+    Private Sub pnlSpells_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlSpells.DoubleClick
         Dim spellnum As Long
 
         spellnum = IsPlayerSpell(SpellX, SpellY)
@@ -1139,11 +1224,22 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub pnlSpells_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlSpells.MouseDown
+    Private Sub pnlSpells_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlSpells.MouseDown
         Dim spellnum As Long
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then ' right click
-            spellnum = IsPlayerSpell(SpellX, SpellY)
+        spellnum = IsPlayerSpell(e.Location.X, e.Location.Y)
+
+        If e.Button = MouseButtons.Left Then
+            If spellnum <> 0 Then
+                If InTrade Then Exit Sub
+
+                DragSpellSlotNum = spellnum
+
+                If SelSpellSlot = True Then
+                    SendSetHotbarSkill(SelHotbarSlot, spellnum)
+                End If
+            End If
+        ElseIf e.Button = MouseButtons.Right Then ' right click
 
             If spellnum <> 0 Then
                 Call ForgetSpell(spellnum)
@@ -1152,7 +1248,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub pnlSpells_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlSpells.MouseMove
+    Private Sub pnlSpells_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlSpells.MouseMove
         Dim spellslot As Long
         Dim x2 As Long, y2 As Long
         Dim x As Long, y As Long
@@ -1176,6 +1272,7 @@ Public Class frmMainGame
         pnlSpellDesc.Visible = False
         LastSpellDesc = 0
     End Sub
+
     Private Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As RECT
         Dim i As Long
@@ -1205,24 +1302,144 @@ Public Class frmMainGame
 
     End Function
 
-    Private Sub pnlSpells_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlSpells.Paint
+    Private Sub pnlSpells_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlSpells.Paint
         'do nothing ;)
     End Sub
 
-    Private Sub picSkills_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles picSkills.Click
+#End Region
+
+#Region "Quest Code"
+
+    Private Sub lblQuestClose_Click(sender As Object, e As EventArgs) Handles lblQuestClose.Click
+        pnlQuestSpeech.Visible = False
+        lblQuestExtra.Visible = False
+        lblQuestAccept.Visible = False
+        lblQuestAccept.Tag = vbNullString
+        lblQuestSay.Text = "-"
+    End Sub
+
+    Private Sub lblQuestAccept_Click(sender As Object, e As EventArgs) Handles lblQuestAccept.Click
+        PlayerHandleQuest(lblQuestAccept.Tag, 1)
+        pnlQuestSpeech.Visible = False
+        lblQuestAccept.Visible = False
+        lblQuestAccept.Tag = vbNullString
+        lblQuestSay.Text = "-"
+        RefreshQuestLog()
+    End Sub
+
+    Private Sub lblQuestExtra_Click(sender As Object, e As EventArgs) Handles lblQuestExtra.Click
+        RunQuestDialogueExtraLabel()
+    End Sub
+
+    Private Sub lstQuestLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstQuestLog.SelectedIndexChanged
+        UpdateQuestWindow = True
+    End Sub
+
+    Private Sub lblQuestLogClose_Click(sender As Object, e As EventArgs) Handles lblQuestLogClose.Click
+        ResetQuestLog()
+        pnlQuestLog.Visible = False
+    End Sub
+
+    Private Sub lblAbandonQuest_Click(sender As Object, e As EventArgs) Handles lblAbandonQuest.Click
+        Dim QuestNum As Long = GetQuestNum(Trim$(lstQuestLog.Text))
+        If Trim$(lstQuestLog.Text) = vbNullString Then Exit Sub
+
+        PlayerHandleQuest(QuestNum, 2)
+        ResetQuestLog()
+        pnlQuestLog.Visible = False
+    End Sub
+
+#End Region
+
+#Region "HotBar"
+
+    Private Function IsHotBarSlot(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+
+        IsHotBarSlot = 0
+
+        For i = 1 To MAX_HOTBAR
+
+            With tempRec
+                .top = HotbarTop
+                .bottom = .top + PIC_Y
+                .left = HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MAX_HOTBAR)))
+                .right = .left + PIC_X
+            End With
+
+            If X >= tempRec.left And X <= tempRec.right Then
+                If Y >= tempRec.top And Y <= tempRec.bottom Then
+                    IsHotBarSlot = i
+                    Exit Function
+                End If
+            End If
+        Next
+
+    End Function
+
+    Private Sub pnlHotBar_Paint(sender As Object, e As PaintEventArgs) Handles pnlHotBar.Paint
+        'do nothing ;)
+    End Sub
+
+    Private Sub pnlHotBar_Click(sender As Object, e As MouseEventArgs) Handles pnlHotBar.Click
+        Dim spellnum As Long, hotbarslot As Long
         Dim Buffer As ByteBuffer
 
-        Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CSpells)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-        pnlSpells.Visible = True
-        pnlInventory.Visible = False
-        pnlCharacter.Visible = False
-        pnlOptions.Visible = False
+        hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
+
+        If e.Button = MouseButtons.Left Then
+            If hotbarslot > 0 Then
+                spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
+
+                If spellnum <> 0 Then
+                    Call CastSpell(spellnum)
+                End If
+            End If
+        ElseIf e.Button = MouseButtons.Right Then ' right click
+            If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
+                'forget hotbar skill
+                SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
+            Else
+                Buffer = New ByteBuffer
+                Buffer.WriteLong(ClientPackets.CSpells)
+                SendData(Buffer.ToArray())
+                Buffer = Nothing
+                pnlSpells.Visible = True
+                pnlSpells.BringToFront()
+                AddText("Click on the skill you want to place here")
+                SelSpellSlot = True
+                SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
+            End If
+
+
+        End If
     End Sub
 
-    Private Sub lblDeclineTrade_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblDeclineTrade.Click
-        DeclineTrade()
+    Private Sub pnlHotBar_MouseEnter(sender As Object, e As EventArgs) Handles pnlHotBar.MouseEnter
+
     End Sub
+
+    Private Sub tmrShake_Tick(sender As Object, e As EventArgs) Handles tmrShake.Tick
+        If ShakeCount < 10 Then
+
+            If LastDir = 0 Then
+                picscreen.Location = New Point(picscreen.Location.X + 20, picscreen.Location.Y)
+                LastDir = 1
+            Else
+                picscreen.Location = New Point(picscreen.Location.X - 20, picscreen.Location.Y)
+                LastDir = 0
+            End If
+
+        Else
+            picscreen.Location = New Point(0, 0)
+            ShakeCount = 0
+            tmrShake.Enabled = False
+        End If
+
+        ShakeCount += 1
+    End Sub
+
+#End Region
+
 End Class
