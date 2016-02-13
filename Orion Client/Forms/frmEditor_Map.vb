@@ -247,7 +247,7 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub btnShop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShop.Click
-        EditorShop = cmbShop.SelectedIndex
+        EditorShop = cmbShop.SelectedIndex + 1
         pnlAttributes.Visible = False
         fraShop.Visible = False
     End Sub
