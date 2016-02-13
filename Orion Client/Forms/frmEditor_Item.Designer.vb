@@ -109,7 +109,7 @@ Partial Class frmEditor_Item
         Me.GroupBox1.Size = New System.Drawing.Size(210, 505)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Item List"
+        Me.GroupBox1.Text = "Liste d'objet"
         '
         'lstIndex
         '
@@ -150,7 +150,7 @@ Partial Class frmEditor_Item
         Me.GroupBox2.Size = New System.Drawing.Size(418, 106)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Info"
+        Me.GroupBox2.Text = "Information"
         '
         'cmbType
         '
@@ -193,27 +193,27 @@ Partial Class frmEditor_Item
         Me.lblAnim.AutoSize = True
         Me.lblAnim.Location = New System.Drawing.Point(200, 86)
         Me.lblAnim.Name = "lblAnim"
-        Me.lblAnim.Size = New System.Drawing.Size(62, 13)
+        Me.lblAnim.Size = New System.Drawing.Size(85, 13)
         Me.lblAnim.TabIndex = 9
-        Me.lblAnim.Text = "Anim: None"
+        Me.lblAnim.Text = "Animation: None"
         '
         'lblRarity
         '
         Me.lblRarity.AutoSize = True
         Me.lblRarity.Location = New System.Drawing.Point(200, 62)
         Me.lblRarity.Name = "lblRarity"
-        Me.lblRarity.Size = New System.Drawing.Size(46, 13)
+        Me.lblRarity.Size = New System.Drawing.Size(51, 13)
         Me.lblRarity.TabIndex = 8
-        Me.lblRarity.Text = "Rarity: 0"
+        Me.lblRarity.Text = "Rareté: 0"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(200, 43)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.Size = New System.Drawing.Size(34, 13)
         Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Bind Type:"
+        Me.Label2.Text = "Type:"
         '
         'picItem
         '
@@ -253,9 +253,9 @@ Partial Class frmEditor_Item
         Me.lblPrice.AutoSize = True
         Me.lblPrice.Location = New System.Drawing.Point(196, 16)
         Me.lblPrice.Name = "lblPrice"
-        Me.lblPrice.Size = New System.Drawing.Size(43, 13)
+        Me.lblPrice.Size = New System.Drawing.Size(36, 13)
         Me.lblPrice.TabIndex = 2
-        Me.lblPrice.Text = "Price: 0"
+        Me.lblPrice.Text = "Prix: 0"
         '
         'txtName
         '
@@ -270,9 +270,9 @@ Partial Class frmEditor_Item
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(8, 17)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'GroupBox3
         '
@@ -299,7 +299,7 @@ Partial Class frmEditor_Item
         Me.GroupBox3.Size = New System.Drawing.Size(416, 160)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Requirements"
+        Me.GroupBox3.Text = "Pré-requis"
         '
         'scrlSprReq
         '
@@ -399,9 +399,9 @@ Partial Class frmEditor_Item
         Me.lblStrReq.AutoSize = True
         Me.lblStrReq.Location = New System.Drawing.Point(7, 104)
         Me.lblStrReq.Name = "lblStrReq"
-        Me.lblStrReq.Size = New System.Drawing.Size(32, 13)
+        Me.lblStrReq.Size = New System.Drawing.Size(46, 13)
         Me.lblStrReq.TabIndex = 44
-        Me.lblStrReq.Text = "Str: 0"
+        Me.lblStrReq.Text = "Force: 0"
         '
         'scrlLevelReq
         '
@@ -433,27 +433,27 @@ Partial Class frmEditor_Item
         Me.lblLevelReq.AutoSize = True
         Me.lblLevelReq.Location = New System.Drawing.Point(7, 68)
         Me.lblLevelReq.Name = "lblLevelReq"
-        Me.lblLevelReq.Size = New System.Drawing.Size(68, 13)
+        Me.lblLevelReq.Size = New System.Drawing.Size(84, 13)
         Me.lblLevelReq.TabIndex = 2
-        Me.lblLevelReq.Text = "Level Req: 0"
+        Me.lblLevelReq.Text = "Niveau requis: 0"
         '
         'lblAccessReq
         '
         Me.lblAccessReq.AutoSize = True
         Me.lblAccessReq.Location = New System.Drawing.Point(7, 42)
         Me.lblAccessReq.Name = "lblAccessReq"
-        Me.lblAccessReq.Size = New System.Drawing.Size(77, 13)
+        Me.lblAccessReq.Size = New System.Drawing.Size(80, 13)
         Me.lblAccessReq.TabIndex = 1
-        Me.lblAccessReq.Text = "Access Req: 0"
+        Me.lblAccessReq.Text = "Accès requis: 0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(7, 16)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 13)
+        Me.Label3.Size = New System.Drawing.Size(64, 13)
         Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Class Req:"
+        Me.Label3.Text = "Classe Req:"
         '
         'fraEquipment
         '
@@ -610,9 +610,9 @@ Partial Class frmEditor_Item
         Me.lblAddStr.AutoSize = True
         Me.lblAddStr.Location = New System.Drawing.Point(7, 104)
         Me.lblAddStr.Name = "lblAddStr"
-        Me.lblAddStr.Size = New System.Drawing.Size(38, 13)
+        Me.lblAddStr.Size = New System.Drawing.Size(52, 13)
         Me.lblAddStr.TabIndex = 44
-        Me.lblAddStr.Text = "+Str: 0"
+        Me.lblAddStr.Text = "+Force: 0"
         '
         'scrlSpeed
         '

@@ -91,8 +91,8 @@
         Dim i As Long
 
         If TotalPlayersOnline > 0 Then
-            Call TextAdd("Saving all online players...")
-            Call GlobalMsg("Saving all online players...")
+            Call TextAdd("Sauvegarde de tous les joueurs en ligne...")
+            Call GlobalMsg("Sauvegarde de tous les joueurs en ligne...")
 
             For i = 1 To MAX_PLAYERS
 
@@ -246,7 +246,7 @@
                                             If DistanceX <= n And DistanceY <= n Then
                                                 If Npc(NpcNum).Behaviour = NPC_BEHAVIOUR_ATTACKONSIGHT Or GetPlayerPK(i) = YES Then
                                                     If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                                                        Call PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says, '" & Trim$(Npc(NpcNum).AttackSay) & "' to you.")
+                                                        Call PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " dit, '" & Trim$(Npc(NpcNum).AttackSay) & "' à vous.")
                                                     End If
                                                     MapNpc(MapNum).Npc(x).TargetType = 1 ' player
                                                     MapNpc(MapNum).Npc(x).Target = i
@@ -711,7 +711,7 @@
             KillPlayer(Victim)
 
             ' Player is dead
-            Call GlobalMsg(GetPlayerName(Victim) & " has been killed by " & CheckGrammar(Name))
+            Call GlobalMsg(GetPlayerName(Victim) & " a été tué " & CheckGrammar(Name))
 
             ' Set NPC target to 0
             For i = 1 To MAX_MAP_NPCS
@@ -767,7 +767,7 @@
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
-            Call PlayerMsg(Index, "Not enough mana!")
+            Call PlayerMsg(Index, "Vous n'avez pas assez de Mana!")
             Exit Sub
         End If
 
@@ -775,7 +775,7 @@
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            Call PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            Call PlayerMsg(Index, "Vous devez être niveau " & LevelReq & " pour utiliser ce sort.")
             Exit Sub
         End If
 
@@ -783,7 +783,7 @@
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            Call PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            Call PlayerMsg(Index, "Vous devez être administrateur pour utiliser ce sort.")
             Exit Sub
         End If
 
@@ -792,7 +792,7 @@
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                Call PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                Call PlayerMsg(Index, "Seul " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " peut utiliser ce sort.")
                 Exit Sub
             End If
         End If
@@ -853,7 +853,7 @@
                     End If
 
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                        PlayerMsg(Index, "Target not in range.")
+                        PlayerMsg(Index, "La cible n'est pas à votre portée.")
                         SendClearSpellBuffer(Index)
                     End If
                 End If
@@ -935,7 +935,7 @@
                 End If
 
                 If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                    PlayerMsg(Index, "Target not in range.")
+                    PlayerMsg(Index, "La cible n'est pas à votre portée.")
                     SendClearSpellBuffer(Index)
                     Exit Sub
                 End If

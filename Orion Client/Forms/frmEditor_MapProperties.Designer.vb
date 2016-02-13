@@ -74,7 +74,7 @@ Partial Class frmEditor_MapProperties
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(70, 23)
         Me.btnCancel.TabIndex = 1
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -85,7 +85,7 @@ Partial Class frmEditor_MapProperties
         Me.GroupBox1.Size = New System.Drawing.Size(155, 136)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Music"
+        Me.GroupBox1.Text = "Musique"
         '
         'lstMusic
         '
@@ -221,7 +221,7 @@ Partial Class frmEditor_MapProperties
         Me.fraMapLinks.Size = New System.Drawing.Size(149, 84)
         Me.fraMapLinks.TabIndex = 6
         Me.fraMapLinks.TabStop = False
-        Me.fraMapLinks.Text = "Map Links"
+        Me.fraMapLinks.Text = "Liens de la carte"
         '
         'txtDown
         '
@@ -244,9 +244,9 @@ Partial Class frmEditor_MapProperties
         Me.lblMap.AutoSize = True
         Me.lblMap.Location = New System.Drawing.Point(6, 16)
         Me.lblMap.Name = "lblMap"
-        Me.lblMap.Size = New System.Drawing.Size(77, 13)
+        Me.lblMap.Size = New System.Drawing.Size(84, 13)
         Me.lblMap.TabIndex = 4
-        Me.lblMap.Text = "Current Map: 0"
+        Me.lblMap.Text = "Carte actuelle: 0"
         '
         'txtRight
         '
@@ -269,9 +269,9 @@ Partial Class frmEditor_MapProperties
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(18, 9)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(38, 13)
+        Me.Label6.Size = New System.Drawing.Size(32, 13)
         Me.Label6.TabIndex = 7
-        Me.Label6.Text = "Name:"
+        Me.Label6.Text = "Nom:"
         '
         'txtName
         '
@@ -289,7 +289,7 @@ Partial Class frmEditor_MapProperties
         Me.fraMapSettings.Size = New System.Drawing.Size(304, 39)
         Me.fraMapSettings.TabIndex = 9
         Me.fraMapSettings.TabStop = False
-        Me.fraMapSettings.Text = "Map Settings"
+        Me.fraMapSettings.Text = "Paramètres de la carte"
         '
         'Label7
         '
@@ -318,7 +318,7 @@ Partial Class frmEditor_MapProperties
         Me.fraNpcs.Size = New System.Drawing.Size(304, 426)
         Me.fraNpcs.TabIndex = 10
         Me.fraNpcs.TabStop = False
-        Me.fraNpcs.Text = "NPCs"
+        Me.fraNpcs.Text = "PNJs"
         '
         'ComboBox23
         '
@@ -347,7 +347,7 @@ Partial Class frmEditor_MapProperties
         Me.Controls.Add(Me.btnOk)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmEditor_MapProperties"
-        Me.Text = "Map Editor - Properties"
+        Me.Text = "Editeur de carte - Propriété"
         Me.GroupBox1.ResumeLayout(False)
         Me.fraMaxSizes.ResumeLayout(False)
         Me.fraMaxSizes.PerformLayout()

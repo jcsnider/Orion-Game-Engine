@@ -1,37 +1,37 @@
 Orion Game Engine
 =================
 
-Simple 2D ORPG Game Engine written in VB.Net
+Orion Game Engine est un simple Editeur de ORPG en 2D. Le programme est écrit en VB.Net
 
-Home: http://www.ascensionforums.com
+Site officiel du projet: http://www.ascensionforums.com
 
-What is it?
+Présentation
 ===========
-This is a simple, tilebased 2D ORPG game engine. It features a client and server application setup with a basic GUI on both ends.
+Le logiciel est un moteur simple basé sur l'utilisation de titleset en 2D. Il dispose de deux programme un client et un serveur tout deux avec une interface graphique.
 
-Game Features:
+Caractéristiques du client:
 ==============
-Basic Character Creation/Class Selection
-Movement/Attacking
-NPC/Computer Characters for attacking
-Items & Spells
+Création de personnage et de classe
+Déplacement du personnage / Attaquer
+PNJ / Programmation d'attaque
+Objets & Sorts
 
-Creation Features:
+Caractéristiques de création:
 ==================
-The client has editors for the world (maps), items, spells, animations, npcs, and more from the in game admin panel.
+Le client dispose d'un éiteurs de carte, objets, sorts, animations, PNJ et plus encore...
 
-How do I use this software?
+Comment utiliser le programme
 ===========================
-If you are a programmer then you will probably prefer to compile the most recent version from source. Download the engine here, open up the solution in Visual Studio compile both projects and start the client and server application. They should connect automatically. IP and Port options are stored in the root/data (files)/config.ini files.
+Si vous êtes un programmeur alors vous allez probablement préférez compiler la version la plus récente de le code source. Pour ce faire il vous suffit de télécharger le contenu de ce GIT et d'ouvrir la solution dans Visual Studio pour modifier le code source ou juste le compiler. L'adresse IP et le port sont stockés dans à la racine du client et du serveur sous le nom suivant config.ini.
 
-How do I access the editors?
+Comment puis-je accéder à l'éditeur ?
 ============================
-Log into the game with the client. On the server, open the player list, right click on your character and promote yourself to an admin. Go back to the client and tap F1 for each of the editor options.
+Connectez-vous au jeu avec le client, ensuite allez sur le serveur, ouvrez la liste des joueurs faite clic droit sur votre personnage et faite "Donner les droits administrateurs". Retournez sur le client et appuyez sur F1.
 
-Support & Updates:
+Support & Mises à jour:
 ==================
-The home for this engine is http://ascensionforums.com if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them with the issue tracker.
+Le site officiel de ce moteur est http://ascensionforums.com. Si vous avez besoin d'aide ou des conseils dans la création de votre ORPG n'hésitez pas. Si vous trouvez des bugs vous êtes libre de les signaler depuis le forum.
 
-We do have some updates planned for this engine. At this point in time my friend and colleague Joe (aka Kibbelz/Irokaiser) and I will be periodically releasing basic features and bug fixes for this engine. 
+À l'heure actuelle Orion Engine Game manque de fonctionnalités, mais il est une base idéale pour les programmeurs qui souhaite débuter dans le développement en y créant leur propre ORPG voir même leur propre moteur de jeux. Il ne faut poas s'attendre à ce que le logiciel soit un moteur de ORPG complet.
 
-Right now Orion is lacking features but it is a great base for programmers to sculpt into their own vision, we want to keep it that way so I wouldn't expect a fully featured game creation kit to form from this anytime soon.
+Ceci est une traduction Française du logiciel Orion. Cette traduction a été fait par Jérémy Colombier. Le jeu reste la propriété de ascenciongamedev

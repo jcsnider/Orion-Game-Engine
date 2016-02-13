@@ -247,7 +247,7 @@ Module modServerTCP
                 If (Clients(Index).Closing = True) Then Exit Sub
                 Clients(Index).Closing = True
                 Call LeftGame(Index)
-                Call TextAdd("Connection from " & GetPlayerIP(Index) & " has been terminated.")
+                Call TextAdd("La connexion depuis " & GetPlayerIP(Index) & " a été terminée.")
                 Clients(Index).Socket.Close()
                 Clients(Index).Socket = Nothing
                 Call ClearPlayer(Index)
@@ -840,10 +840,10 @@ Module modServerTCP
         Next
 
         If n = 0 Then
-            s = "There are no other players online."
+            s = "Il n'y a aucun autre joueurs en ligne."
         Else
             s = Mid$(s, 1, Len(s) - 2)
-            s = "There are " & n & " other players online: " & s & "."
+            s = "Il y a " & n & " autre joueurs en ligne: " & s & "."
         End If
 
         Call PlayerMsg(Index, s)
