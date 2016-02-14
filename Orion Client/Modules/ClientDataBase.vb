@@ -156,6 +156,7 @@ Module ClientDataBase
             Options.MenuMusic = vbNullString
             Options.Music = 1
             Options.Sound = 1
+            Options.Volume = 100
             SaveOptions()
         Else
             Options.Username = Getvar(FileName, "Options", "Username")
@@ -166,6 +167,7 @@ Module ClientDataBase
             Options.MenuMusic = Getvar(FileName, "Options", "MenuMusic")
             Options.Music = Getvar(FileName, "Options", "Music")
             Options.Sound = Getvar(FileName, "Options", "Sound")
+            Options.Volume = Getvar(FileName, "Options", "Volume")
         End If
 
         ' show in GUI
@@ -180,6 +182,8 @@ Module ClientDataBase
         Else
             frmMainGame.optSOn.Checked = True
         End If
+        frmMainGame.lblVolume.Text = "Volume: " & Options.Volume
+        frmMainGame.scrlVolume.Value = Options.Volume
     End Sub
 
     Public Function GetFileContents(ByVal FullPath As String, Optional ByRef ErrInfo As String = "") As String

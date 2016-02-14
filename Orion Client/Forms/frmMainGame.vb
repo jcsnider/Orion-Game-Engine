@@ -5,12 +5,12 @@ Public Class frmMainGame
 #Region "Frm Code"
     Dim ShakeCount As Byte, LastDir As Byte
 
-    Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Disposed
+    Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
         frmAdmin.Dispose()
         DestroyGame()
     End Sub
 
-    Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+    Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.Down Then VbKeyDown = True
         If e.KeyCode = Keys.Up Then VbKeyUp = True
         If e.KeyCode = Keys.Left Then VbKeyLeft = True
@@ -21,7 +21,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
+    Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
         Dim spellnum As Long
         If e.KeyCode = Keys.Down Then VbKeyDown = False
         If e.KeyCode = Keys.Up Then VbKeyUp = False
@@ -548,32 +548,50 @@ Public Class frmMainGame
 
 #Region "Options"
     Private Sub optMOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOn.CheckedChanged
-        Options.Music = 1
-        ' start music playing
-        PlayMusic(Trim$(Map.Music))
-        ' save to config.ini
-        SaveOptions()
+        If optMOn.Checked = True Then
+            Options.Music = 1
+            ' start music playing
+            PlayMusic(Trim$(Map.Music))
+            ' save to config.ini
+            SaveOptions()
+        End If
+
     End Sub
 
     Private Sub optMOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOff.CheckedChanged
-        Options.Music = 0
-        FadeInSwitch = False
-        ' stop music playing
-        StopMusic()
-        ' save to config.ini
-        SaveOptions()
+        If optMOff.Checked = True Then
+            Options.Music = 0
+            ' stop music playing
+            StopMusic()
+            CurMusic = ""
+            ' save to config.ini
+            SaveOptions()
+        End If
+
     End Sub
 
     Private Sub optSOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOn.CheckedChanged
-        Options.Sound = 1
-        ' save to config.ini
-        SaveOptions()
+        If optSOn.Checked = True Then
+            Options.Sound = 1
+
+            ' save to config.ini
+            SaveOptions()
+        End If
+
     End Sub
 
     Private Sub optSOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOff.CheckedChanged
-        Options.Sound = 0
-        ' save to config.ini
-        SaveOptions()
+        If optSOff.Checked = True Then
+            Options.Sound = 0
+            StopSound()
+            ' save to config.ini
+            SaveOptions()
+        End If
+
+    End Sub
+
+    Private Sub scrlVolume_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVolume.ValueChanged
+
     End Sub
 #End Region
 

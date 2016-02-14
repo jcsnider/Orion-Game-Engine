@@ -36,6 +36,7 @@
         Dim MenuMusic As String
         Dim Music As Byte
         Dim Sound As Byte
+        Dim Volume As Single
     End Structure
 
     Public Structure RECT

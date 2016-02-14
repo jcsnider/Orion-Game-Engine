@@ -37,6 +37,7 @@ Partial Class frmMainGame
         Me.picCharacter = New System.Windows.Forms.PictureBox()
         Me.picSkills = New System.Windows.Forms.PictureBox()
         Me.picGeneral = New System.Windows.Forms.Panel()
+        Me.picFace = New System.Windows.Forms.PictureBox()
         Me.lblPing = New System.Windows.Forms.Label()
         Me.lblFPS = New System.Windows.Forms.Label()
         Me.lblGold = New System.Windows.Forms.Label()
@@ -188,7 +189,8 @@ Partial Class frmMainGame
         Me.lblDialogText = New System.Windows.Forms.Label()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
-        Me.picFace = New System.Windows.Forms.PictureBox()
+        Me.lblVolume = New System.Windows.Forms.Label()
+        Me.scrlVolume = New System.Windows.Forms.HScrollBar()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlActionMenu.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -200,6 +202,7 @@ Partial Class frmMainGame
         CType(Me.picCharacter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picSkills, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.picGeneral.SuspendLayout()
+        CType(Me.picFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -214,7 +217,6 @@ Partial Class frmMainGame
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlQuestSpeech.SuspendLayout()
         Me.pnlDialog.SuspendLayout()
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtMeChat
@@ -346,6 +348,16 @@ Partial Class frmMainGame
         Me.picGeneral.Size = New System.Drawing.Size(355, 85)
         Me.picGeneral.TabIndex = 8
         '
+        'picFace
+        '
+        Me.picFace.BackgroundImage = CType(resources.GetObject("picFace.BackgroundImage"), System.Drawing.Image)
+        Me.picFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.picFace.Location = New System.Drawing.Point(9, 9)
+        Me.picFace.Name = "picFace"
+        Me.picFace.Size = New System.Drawing.Size(67, 67)
+        Me.picFace.TabIndex = 12
+        Me.picFace.TabStop = False
+        '
         'lblPing
         '
         Me.lblPing.AutoSize = True
@@ -409,6 +421,8 @@ Partial Class frmMainGame
         Me.pnlOptions.BackgroundImage = CType(resources.GetObject("pnlOptions.BackgroundImage"), System.Drawing.Image)
         Me.pnlOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlOptions.Controls.Add(Me.lblVolume)
+        Me.pnlOptions.Controls.Add(Me.scrlVolume)
         Me.pnlOptions.Controls.Add(Me.GroupBox2)
         Me.pnlOptions.Controls.Add(Me.GroupBox1)
         Me.pnlOptions.ForeColor = System.Drawing.Color.White
@@ -1956,15 +1970,25 @@ Partial Class frmMainGame
         '
         Me.tmrShake.Interval = 50
         '
-        'picFace
+        'lblVolume
         '
-        Me.picFace.BackgroundImage = CType(resources.GetObject("picFace.BackgroundImage"), System.Drawing.Image)
-        Me.picFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picFace.Location = New System.Drawing.Point(9, 9)
-        Me.picFace.Name = "picFace"
-        Me.picFace.Size = New System.Drawing.Size(67, 67)
-        Me.picFace.TabIndex = 12
-        Me.picFace.TabStop = False
+        Me.lblVolume.AutoSize = True
+        Me.lblVolume.BackColor = System.Drawing.Color.Transparent
+        Me.lblVolume.ForeColor = System.Drawing.Color.White
+        Me.lblVolume.Location = New System.Drawing.Point(15, 120)
+        Me.lblVolume.Name = "lblVolume"
+        Me.lblVolume.Size = New System.Drawing.Size(48, 13)
+        Me.lblVolume.TabIndex = 11
+        Me.lblVolume.Text = "Volume: "
+        '
+        'scrlVolume
+        '
+        Me.scrlVolume.LargeChange = 1
+        Me.scrlVolume.Location = New System.Drawing.Point(15, 135)
+        Me.scrlVolume.Name = "scrlVolume"
+        Me.scrlVolume.Size = New System.Drawing.Size(172, 17)
+        Me.scrlVolume.TabIndex = 10
+        Me.scrlVolume.Value = 100
         '
         'frmMainGame
         '
@@ -1988,15 +2012,15 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlActionMenu)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.txtChat)
+        Me.Controls.Add(Me.pnlOptions)
+        Me.Controls.Add(Me.pnlTempBank)
+        Me.Controls.Add(Me.pnlTmpInv)
+        Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlSpells)
         Me.Controls.Add(Me.pnlCharacter)
-        Me.Controls.Add(Me.pnlOptions)
-        Me.Controls.Add(Me.pnlTempBank)
-        Me.Controls.Add(Me.pnlTmpInv)
-        Me.Controls.Add(Me.pnlTmpSkill)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -2015,7 +2039,9 @@ Partial Class frmMainGame
         CType(Me.picSkills, System.ComponentModel.ISupportInitialize).EndInit()
         Me.picGeneral.ResumeLayout(False)
         Me.picGeneral.PerformLayout()
+        CType(Me.picFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlOptions.ResumeLayout(False)
+        Me.pnlOptions.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -2038,7 +2064,6 @@ Partial Class frmMainGame
         Me.pnlQuestSpeech.ResumeLayout(False)
         Me.pnlQuestSpeech.PerformLayout()
         Me.pnlDialog.ResumeLayout(False)
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2208,4 +2233,6 @@ Partial Class frmMainGame
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents picFace As Windows.Forms.PictureBox
+    Friend WithEvents lblVolume As Windows.Forms.Label
+    Friend WithEvents scrlVolume As Windows.Forms.HScrollBar
 End Class
