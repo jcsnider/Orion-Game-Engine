@@ -929,7 +929,6 @@ Module ServerTCP
         Dim data() As Byte
 
         If SendMap Then
-            Debug.Print("mapdata send...")
             Buffer.WriteLong(1)
             Buffer.WriteLong(MapNum)
             Buffer.WriteString(Map(MapNum).Name)

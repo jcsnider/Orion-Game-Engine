@@ -45,6 +45,8 @@ Partial Class frmMainGame
         Me.lblGoldLabel = New System.Windows.Forms.Label()
         Me.lblFPSLabel = New System.Windows.Forms.Label()
         Me.pnlOptions = New System.Windows.Forms.Panel()
+        Me.lblVolume = New System.Windows.Forms.Label()
+        Me.scrlVolume = New System.Windows.Forms.HScrollBar()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.optSOff = New System.Windows.Forms.RadioButton()
         Me.optSOn = New System.Windows.Forms.RadioButton()
@@ -189,8 +191,6 @@ Partial Class frmMainGame
         Me.lblDialogText = New System.Windows.Forms.Label()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
-        Me.lblVolume = New System.Windows.Forms.Label()
-        Me.scrlVolume = New System.Windows.Forms.HScrollBar()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlActionMenu.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -431,6 +431,26 @@ Partial Class frmMainGame
         Me.pnlOptions.Size = New System.Drawing.Size(204, 275)
         Me.pnlOptions.TabIndex = 10
         Me.pnlOptions.Visible = False
+        '
+        'lblVolume
+        '
+        Me.lblVolume.AutoSize = True
+        Me.lblVolume.BackColor = System.Drawing.Color.Transparent
+        Me.lblVolume.ForeColor = System.Drawing.Color.White
+        Me.lblVolume.Location = New System.Drawing.Point(15, 120)
+        Me.lblVolume.Name = "lblVolume"
+        Me.lblVolume.Size = New System.Drawing.Size(48, 13)
+        Me.lblVolume.TabIndex = 11
+        Me.lblVolume.Text = "Volume: "
+        '
+        'scrlVolume
+        '
+        Me.scrlVolume.LargeChange = 1
+        Me.scrlVolume.Location = New System.Drawing.Point(15, 135)
+        Me.scrlVolume.Name = "scrlVolume"
+        Me.scrlVolume.Size = New System.Drawing.Size(172, 17)
+        Me.scrlVolume.TabIndex = 10
+        Me.scrlVolume.Value = 100
         '
         'GroupBox2
         '
@@ -1096,7 +1116,7 @@ Partial Class frmMainGame
         '
         Me.pnlTmpInv.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTmpInv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpInv.Location = New System.Drawing.Point(454, 542)
+        Me.pnlTmpInv.Location = New System.Drawing.Point(979, 491)
         Me.pnlTmpInv.Name = "pnlTmpInv"
         Me.pnlTmpInv.Size = New System.Drawing.Size(32, 32)
         Me.pnlTmpInv.TabIndex = 15
@@ -1109,7 +1129,7 @@ Partial Class frmMainGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(417, 580)
+        Me.pnlCurrency.Location = New System.Drawing.Point(480, 651)
         Me.pnlCurrency.Name = "pnlCurrency"
         Me.pnlCurrency.Size = New System.Drawing.Size(480, 121)
         Me.pnlCurrency.TabIndex = 16
@@ -1163,7 +1183,7 @@ Partial Class frmMainGame
         Me.pnlHotBar.BackColor = System.Drawing.Color.Transparent
         Me.pnlHotBar.BackgroundImage = CType(resources.GetObject("pnlHotBar.BackgroundImage"), System.Drawing.Image)
         Me.pnlHotBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlHotBar.Location = New System.Drawing.Point(709, 541)
+        Me.pnlHotBar.Location = New System.Drawing.Point(444, 575)
         Me.pnlHotBar.Name = "pnlHotBar"
         Me.pnlHotBar.Size = New System.Drawing.Size(239, 36)
         Me.pnlHotBar.TabIndex = 41
@@ -1506,7 +1526,7 @@ Partial Class frmMainGame
         '
         Me.pnlTempBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTempBank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTempBank.Location = New System.Drawing.Point(416, 542)
+        Me.pnlTempBank.Location = New System.Drawing.Point(976, 601)
         Me.pnlTempBank.Name = "pnlTempBank"
         Me.pnlTempBank.Size = New System.Drawing.Size(32, 32)
         Me.pnlTempBank.TabIndex = 20
@@ -1960,7 +1980,7 @@ Partial Class frmMainGame
         '
         Me.pnlTmpSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTmpSkill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpSkill.Location = New System.Drawing.Point(774, 541)
+        Me.pnlTmpSkill.Location = New System.Drawing.Point(995, 541)
         Me.pnlTmpSkill.Name = "pnlTmpSkill"
         Me.pnlTmpSkill.Size = New System.Drawing.Size(32, 32)
         Me.pnlTmpSkill.TabIndex = 42
@@ -1969,26 +1989,6 @@ Partial Class frmMainGame
         'tmrShake
         '
         Me.tmrShake.Interval = 50
-        '
-        'lblVolume
-        '
-        Me.lblVolume.AutoSize = True
-        Me.lblVolume.BackColor = System.Drawing.Color.Transparent
-        Me.lblVolume.ForeColor = System.Drawing.Color.White
-        Me.lblVolume.Location = New System.Drawing.Point(15, 120)
-        Me.lblVolume.Name = "lblVolume"
-        Me.lblVolume.Size = New System.Drawing.Size(48, 13)
-        Me.lblVolume.TabIndex = 11
-        Me.lblVolume.Text = "Volume: "
-        '
-        'scrlVolume
-        '
-        Me.scrlVolume.LargeChange = 1
-        Me.scrlVolume.Location = New System.Drawing.Point(15, 135)
-        Me.scrlVolume.Name = "scrlVolume"
-        Me.scrlVolume.Size = New System.Drawing.Size(172, 17)
-        Me.scrlVolume.TabIndex = 10
-        Me.scrlVolume.Value = 100
         '
         'frmMainGame
         '

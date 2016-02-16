@@ -22,6 +22,41 @@ Partial Class frmEditor_Events
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Messages", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Events Progressing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Flow Control", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Player Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show ChatBubble")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Variable")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Switch")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Self Switch")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Conditional Branch")
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Exit Event Process")
+        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Label")
+        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("GoTo Label")
+        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Items")
+        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore HP")
+        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore MP")
+        Dim ListViewItem15 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Level Up")
+        Dim ListViewItem16 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Level")
+        Dim ListViewItem17 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Skills")
+        Dim ListViewItem18 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Class")
+        Dim ListViewItem19 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Sprite")
+        Dim ListViewItem20 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Gender")
+        Dim ListViewItem21 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change PK")
+        Dim ListViewItem22 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Give Experience")
+        Dim ListViewItem23 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Warp Player")
+        Dim ListViewItem24 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Move Route")
+        Dim ListViewItem25 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait for Route Completion")
+        Dim ListViewItem26 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
+        Dim ListViewItem27 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
+        Dim ListViewItem28 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -414,6 +449,10 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel11 = New System.Windows.Forms.Label()
         Me.lblRandomLabel14 = New System.Windows.Forms.Label()
         Me.fraCommands = New System.Windows.Forms.Panel()
+        Me.lstvCommands = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnCancelCommand = New System.Windows.Forms.Button()
         Me.tabCommands = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.fraRandom2 = New System.Windows.Forms.GroupBox()
@@ -480,7 +519,6 @@ Partial Class frmEditor_Events
         Me.btnCommands44 = New System.Windows.Forms.Button()
         Me.btnCommands43 = New System.Windows.Forms.Button()
         Me.btnCommands42 = New System.Windows.Forms.Button()
-        Me.btnCancelCommand = New System.Windows.Forms.Button()
         Me.fraRandom17 = New System.Windows.Forms.GroupBox()
         Me.chkGlobal = New System.Windows.Forms.CheckBox()
         Me.fraRandom16 = New System.Windows.Forms.GroupBox()
@@ -4503,7 +4541,8 @@ Partial Class frmEditor_Events
         '
         'fraCommands
         '
-        Me.fraCommands.Controls.Add(Me.tabCommands)
+        Me.fraCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.fraCommands.Controls.Add(Me.lstvCommands)
         Me.fraCommands.Controls.Add(Me.btnCancelCommand)
         Me.fraCommands.Location = New System.Drawing.Point(413, 7)
         Me.fraCommands.Name = "fraCommands"
@@ -4511,12 +4550,94 @@ Partial Class frmEditor_Events
         Me.fraCommands.TabIndex = 10
         Me.fraCommands.Visible = False
         '
+        'lstvCommands
+        '
+        Me.lstvCommands.AutoArrange = False
+        Me.lstvCommands.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lstvCommands.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lstvCommands.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lstvCommands.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ListViewGroup1.Header = "Messages"
+        ListViewGroup1.Name = "lstVgMessages"
+        ListViewGroup2.Header = "Events Progressing"
+        ListViewGroup2.Name = "lstVgEvents"
+        ListViewGroup3.Header = "Flow Control"
+        ListViewGroup3.Name = "lstVgFlow"
+        ListViewGroup4.Header = "Player Options"
+        ListViewGroup4.Name = "lstVgPlayerOptions"
+        ListViewGroup5.Header = "Movement"
+        ListViewGroup5.Name = "lstVgMovement"
+        ListViewGroup6.Header = "Animation"
+        ListViewGroup6.Name = "lstVgAnimation"
+        ListViewGroup7.Header = "Questing"
+        ListViewGroup7.Name = "lstVgQuesting"
+        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4, ListViewGroup5, ListViewGroup6, ListViewGroup7})
+        Me.lstvCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        ListViewItem1.Group = ListViewGroup1
+        ListViewItem2.Group = ListViewGroup1
+        ListViewItem2.IndentCount = 1
+        ListViewItem3.Group = ListViewGroup1
+        ListViewItem4.Group = ListViewGroup1
+        ListViewItem4.IndentCount = 1
+        ListViewItem5.Group = ListViewGroup2
+        ListViewItem6.Group = ListViewGroup2
+        ListViewItem7.Group = ListViewGroup2
+        ListViewItem8.Group = ListViewGroup3
+        ListViewItem9.Group = ListViewGroup3
+        ListViewItem10.Group = ListViewGroup3
+        ListViewItem11.Group = ListViewGroup3
+        ListViewItem12.Group = ListViewGroup4
+        ListViewItem13.Group = ListViewGroup4
+        ListViewItem14.Group = ListViewGroup4
+        ListViewItem15.Group = ListViewGroup4
+        ListViewItem16.Group = ListViewGroup4
+        ListViewItem17.Group = ListViewGroup4
+        ListViewItem18.Group = ListViewGroup4
+        ListViewItem19.Group = ListViewGroup4
+        ListViewItem20.Group = ListViewGroup4
+        ListViewItem21.Group = ListViewGroup4
+        ListViewItem22.Group = ListViewGroup4
+        ListViewItem23.Group = ListViewGroup5
+        ListViewItem24.Group = ListViewGroup5
+        ListViewItem25.Group = ListViewGroup5
+        ListViewItem26.Group = ListViewGroup5
+        ListViewItem27.Group = ListViewGroup5
+        ListViewItem28.Group = ListViewGroup5
+        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28})
+        Me.lstvCommands.LabelWrap = False
+        Me.lstvCommands.Location = New System.Drawing.Point(0, 0)
+        Me.lstvCommands.MultiSelect = False
+        Me.lstvCommands.Name = "lstvCommands"
+        Me.lstvCommands.Size = New System.Drawing.Size(395, 471)
+        Me.lstvCommands.TabIndex = 3
+        Me.lstvCommands.UseCompatibleStateImageBehavior = False
+        Me.lstvCommands.View = System.Windows.Forms.View.Tile
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = ""
+        Me.ColumnHeader1.Width = 150
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = ""
+        Me.ColumnHeader2.Width = 150
+        '
+        'btnCancelCommand
+        '
+        Me.btnCancelCommand.Location = New System.Drawing.Point(318, 477)
+        Me.btnCancelCommand.Name = "btnCancelCommand"
+        Me.btnCancelCommand.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancelCommand.TabIndex = 1
+        Me.btnCancelCommand.Text = "Cancel"
+        Me.btnCancelCommand.UseVisualStyleBackColor = True
+        '
         'tabCommands
         '
         Me.tabCommands.Controls.Add(Me.TabPage1)
         Me.tabCommands.Controls.Add(Me.TabPage2)
         Me.tabCommands.Controls.Add(Me.TabPage3)
-        Me.tabCommands.Location = New System.Drawing.Point(3, 6)
+        Me.tabCommands.Location = New System.Drawing.Point(838, 10)
         Me.tabCommands.Name = "tabCommands"
         Me.tabCommands.SelectedIndex = 0
         Me.tabCommands.Size = New System.Drawing.Size(393, 468)
@@ -5175,15 +5296,6 @@ Partial Class frmEditor_Events
         Me.btnCommands42.Text = "Fade In"
         Me.btnCommands42.UseVisualStyleBackColor = True
         '
-        'btnCancelCommand
-        '
-        Me.btnCancelCommand.Location = New System.Drawing.Point(318, 477)
-        Me.btnCancelCommand.Name = "btnCancelCommand"
-        Me.btnCancelCommand.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancelCommand.TabIndex = 1
-        Me.btnCancelCommand.Text = "Cancel"
-        Me.btnCancelCommand.UseVisualStyleBackColor = True
-        '
         'fraRandom17
         '
         Me.fraRandom17.Controls.Add(Me.chkGlobal)
@@ -5555,7 +5667,6 @@ Partial Class frmEditor_Events
         Me.Panel2.Controls.Add(Me.fraCommands)
         Me.Panel2.Controls.Add(Me.fraRandom9)
         Me.Panel2.Controls.Add(Me.GroupBox2)
-        Me.Panel2.Controls.Add(Me.lstCommands)
         Me.Panel2.Controls.Add(Me.fraRandom17)
         Me.Panel2.Controls.Add(Me.fraRandom0)
         Me.Panel2.Controls.Add(Me.fraRandom16)
@@ -5563,6 +5674,7 @@ Partial Class frmEditor_Events
         Me.Panel2.Controls.Add(Me.fraRandom18)
         Me.Panel2.Controls.Add(Me.fraRandom15)
         Me.Panel2.Controls.Add(Me.fraRandom19)
+        Me.Panel2.Controls.Add(Me.lstCommands)
         Me.Panel2.Location = New System.Drawing.Point(12, 86)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(818, 516)
@@ -5658,7 +5770,8 @@ Partial Class frmEditor_Events
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2281, 644)
+        Me.ClientSize = New System.Drawing.Size(2033, 644)
+        Me.Controls.Add(Me.tabCommands)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lblRandomLabel14)
         Me.Controls.Add(Me.lblRandomLabel11)
@@ -6305,4 +6418,7 @@ Partial Class frmEditor_Events
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents cmbEventQuest As Windows.Forms.ComboBox
     Friend WithEvents lstCommands As Windows.Forms.ListBox
+    Friend WithEvents lstvCommands As Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
 End Class

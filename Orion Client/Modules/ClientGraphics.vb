@@ -43,6 +43,7 @@ Module ClientGraphics
     Public SFMLGameFont As SFML.Graphics.Font
 
     Public TileSetImgsGFX() As Bitmap
+    Public TileSetImgsLoaded() As Boolean
     Public TileSetTexture() As Texture
     Public TileSetTextureInfo() As GraphicInfo
     Public SpritesGFX() As Texture
@@ -1558,9 +1559,9 @@ Module ClientGraphics
         If tileset < 0 Or tileset > NumTileSets Then Exit Sub
 
         'check if its loaded
-        'If TileSetImgsGFX(tileset) Is Nothing Then
-        TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
-        'End If
+        If TileSetImgsLoaded(tileset) = False Then
+            TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
+        End If
 
         'Draw the tileset into memory.)
         height = TileSetImgsGFX(tileset).Height

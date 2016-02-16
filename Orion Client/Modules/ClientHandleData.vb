@@ -774,7 +774,6 @@
 
         If Buffer.ReadLong <> ServerPackets.SMapData Then Exit Sub
 
-        Debug.Print("mapdata recieved...")
         Data = Buffer.ReadBytes(Buffer.Count - 8)
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Decompress(Data))

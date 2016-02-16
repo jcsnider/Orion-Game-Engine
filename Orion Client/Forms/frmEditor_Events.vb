@@ -182,6 +182,41 @@ Public Class frmEditor_Events
         'End If
 
     End Sub
+
+    Private Sub frmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Width = 858
+    End Sub
+
+    Private Sub lstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
+        If lstvCommands.SelectedItems.Count = 0 Then Exit Sub
+
+        MsgBox(lstvCommands.SelectedItems(0).Index + 1)
+
+        Select Case lstvCommands.SelectedItems(0).Index + 1
+        'Messages
+
+            'show text
+            Case 1
+                txtShowText.Text = vbNullString
+                fraDialogue.Visible = True
+                fraCommand0.Visible = True
+                scrlShowTextFace.Value = 0
+                fraCommands.Visible = False
+            'show choices
+            Case 2
+                txtChoicePrompt.Text = vbNullString
+                txtChoices1.Text = vbNullString
+                txtChoices2.Text = vbNullString
+                txtChoices3.Text = vbNullString
+                txtChoices4.Text = vbNullString
+                scrlShowChoicesFace.Value = 0
+                fraDialogue.Visible = True
+                fraCommand1.Visible = True
+                fraCommands.Visible = False
+        End Select
+
+    End Sub
+
 #End Region
 
 #Region "Page Buttons"
@@ -633,29 +668,6 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "ButtonCommands"
-    'Messages
-
-    'show text
-    Private Sub btnCommands0_Click(sender As Object, e As EventArgs) Handles btnCommands0.Click
-        txtShowText.Text = vbNullString
-        fraDialogue.Visible = True
-        fraCommand0.Visible = True
-        scrlShowTextFace.Value = 0
-        fraCommands.Visible = False
-    End Sub
-
-    'show choices
-    Private Sub btnCommands1_Click(sender As Object, e As EventArgs) Handles btnCommands1.Click
-        txtChoicePrompt.Text = vbNullString
-        txtChoices1.Text = vbNullString
-        txtChoices2.Text = vbNullString
-        txtChoices3.Text = vbNullString
-        txtChoices4.Text = vbNullString
-        scrlShowChoicesFace.Value = 0
-        fraDialogue.Visible = True
-        fraCommand1.Visible = True
-        fraCommands.Visible = False
-    End Sub
 
     'chatbox text
     Private Sub btnCommands2_Click(sender As Object, e As EventArgs) Handles btnCommands2.Click
@@ -1708,4 +1720,6 @@ Public Class frmEditor_Events
     End Sub
 
 #End Region
+
+
 End Class

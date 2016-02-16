@@ -155,6 +155,7 @@ Module ClientGameEditors
         InMapEditor = True
         ' show the form
         frmEditor_Map.Visible = True
+
         ' set the scrolly bars
         If Map.tileset = 0 Then Map.tileset = 1
         If Map.tileset > NumTileSets Then Map.tileset = 1
@@ -162,8 +163,16 @@ Module ClientGameEditors
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
+
+        'clear memory
+        ReDim TileSetImgsLoaded(NumTileSets)
+        For i = 0 To NumTileSets
+            TileSetImgsLoaded(i) = False
+        Next
+
         ' render the tiles
-        Call EditorMap_DrawTileset()
+        EditorMap_DrawTileset()
+
         ' set the scrollbars
         frmEditor_Map.scrlPictureY.Maximum = (frmEditor_Map.picBackSelect.Height \ PIC_Y)
         frmEditor_Map.scrlPictureX.Maximum = (frmEditor_Map.picBackSelect.Width \ PIC_X)
@@ -455,6 +464,7 @@ Module ClientGameEditors
         'clear memory
         For i = 0 To NumTileSets
             If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
+            TileSetImgsLoaded(i) = False
         Next i
     End Sub
 

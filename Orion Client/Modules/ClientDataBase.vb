@@ -140,6 +140,7 @@ Module ClientDataBase
         Call PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
         Call PutVar(FileName, "Options", "Music", Str(Options.Music))
         Call PutVar(FileName, "Options", "Sound", Str(Options.Sound))
+        Call PutVar(FileName, "Options", "Volume", Str(Options.Volume))
     End Sub
 
     Public Sub LoadOptions()
@@ -167,6 +168,10 @@ Module ClientDataBase
             Options.MenuMusic = Getvar(FileName, "Options", "MenuMusic")
             Options.Music = Getvar(FileName, "Options", "Music")
             Options.Sound = Getvar(FileName, "Options", "Sound")
+            If Getvar(FileName, "Options", "Volume") = "" Then
+                Options.Volume = 100
+                SaveOptions()
+            End If
             Options.Volume = Getvar(FileName, "Options", "Volume")
         End If
 
