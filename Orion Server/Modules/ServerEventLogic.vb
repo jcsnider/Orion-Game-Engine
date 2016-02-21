@@ -30,7 +30,7 @@
                                 Else
                                     compare = 0
                                 End If
-                                If Map(MapNum).Events(id).Globall = 1 Then
+                                If Map(MapNum).Events(id).Globals = 1 Then
                                     If Map(MapNum).Events(id).SelfSwitches(Map(MapNum).Events(id).Pages(page).SelfSwitchIndex) <> compare Then
                                         TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                     End If
@@ -82,7 +82,7 @@
                                 End If
                             End If
 
-                            If Map(MapNum).Events(id).Globall = 1 And TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then TempEventMap(MapNum).Events(id).Active = 0
+                            If Map(MapNum).Events(id).Globals = 1 And TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then TempEventMap(MapNum).Events(id).Active = 0
 
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then
                                 Buffer = New ByteBuffer
@@ -150,7 +150,7 @@
                             Else
                                 compare = 0
                             End If
-                            If Map(MapNum).Events(id).Globall = 1 Then
+                            If Map(MapNum).Events(id).Globals = 1 Then
                                 If Map(MapNum).Events(id).SelfSwitches(Map(MapNum).Events(id).Pages(z).SelfSwitchIndex) <> compare Then
                                     spawnevent = False
                                 End If
@@ -295,7 +295,7 @@
 
                             End With
 
-                            If Map(MapNum).Events(id).Globall = 1 Then
+                            If Map(MapNum).Events(id).Globals = 1 Then
                                 If spawnevent Then TempEventMap(MapNum).Events(id).Active = z : TempEventMap(MapNum).Events(id).Position = Map(MapNum).Events(id).Pages(z).Position
                             End If
 
@@ -723,7 +723,7 @@
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
-                        If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globall = 0 Then
+                        If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then
                                     'Real event! Lets process it!
@@ -1309,7 +1309,7 @@
                                                                 Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 0
                                                             End If
                                                         Case EventType.evSelfSwitch
-                                                            If Map(GetPlayerMap(i)).Events(.EventID).Globall = 1 Then
+                                                            If Map(GetPlayerMap(i)).Events(.EventID).Globals = 1 Then
                                                                 If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                     Map(GetPlayerMap(i)).Events(.EventID).SelfSwitches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 + 1) = 1
                                                                 ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
@@ -1504,7 +1504,7 @@
                                                                             End If
                                                                     End Select
                                                                 Case 6
-                                                                    If Map(GetPlayerMap(i)).Events(.EventID).Globall = 1 Then
+                                                                    If Map(GetPlayerMap(i)).Events(.EventID).Globals = 1 Then
                                                                         Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2
                                                                             Case 0 'Self Switch is true
                                                                                 If Map(GetPlayerMap(i)).Events(.EventID).SelfSwitches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 + 1) = 1 Then
@@ -1712,7 +1712,7 @@
 
                                                         Case EventType.evSetMoveRoute
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 <= Map(GetPlayerMap(i)).EventCount Then
-                                                                If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Globall = 1 Then
+                                                                If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Globals = 1 Then
                                                                     TempEventMap(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).MoveType = 2
                                                                     TempEventMap(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).IgnoreIfCannotMove = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2
                                                                     TempEventMap(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).RepeatMoveRoute = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
@@ -1734,7 +1734,7 @@
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerX(i), GetPlayerY(i), TARGET_TYPE_PLAYER, i)
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
-                                                                If Map(GetPlayerMap(i)).Events(.EventID).Globall = 1 Then
+                                                                If Map(GetPlayerMap(i)).Events(.EventID).Globals = 1 Then
                                                                     SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).X, Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).Y)
                                                                 Else
                                                                     SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, TempPlayer(i).EventMap.EventPages(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).X, TempPlayer(i).EventMap.EventPages(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).Y, 0, 0)
@@ -1854,7 +1854,7 @@
                                                             Buffer = Nothing
                                                         Case EventType.evWaitMovement
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 <= Map(GetPlayerMap(i)).EventCount Then
-                                                                If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Globall = 1 Then
+                                                                If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Globals = 1 Then
                                                                     .WaitingForResponse = 4
                                                                     .EventMovingID = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1
                                                                     .EventMovingType = 1

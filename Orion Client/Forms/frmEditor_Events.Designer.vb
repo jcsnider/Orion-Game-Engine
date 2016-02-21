@@ -29,6 +29,11 @@ Partial Class frmEditor_Events
         Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup9 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup10 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup11 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup12 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
@@ -57,6 +62,20 @@ Partial Class frmEditor_Events
         Dim ListViewItem26 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
         Dim ListViewItem27 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
         Dim ListViewItem28 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
+        Dim ListViewItem29 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Animation")
+        Dim ListViewItem30 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Begin Quest")
+        Dim ListViewItem31 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Complete Task")
+        Dim ListViewItem32 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("End Quest")
+        Dim ListViewItem33 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Fog")
+        Dim ListViewItem34 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Weather")
+        Dim ListViewItem35 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Map Tinting")
+        Dim ListViewItem36 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play BGM")
+        Dim ListViewItem37 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop BGM")
+        Dim ListViewItem38 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play Sound")
+        Dim ListViewItem39 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop Sounds")
+        Dim ListViewItem40 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
+        Dim ListViewItem41 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
+        Dim ListViewItem42 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -74,11 +93,10 @@ Partial Class frmEditor_Events
         Me.txtRename = New System.Windows.Forms.TextBox()
         Me.lblEditing = New System.Windows.Forms.Label()
         Me.fraGraphic = New System.Windows.Forms.GroupBox()
+        Me.pnlGraphicSelect = New System.Windows.Forms.Panel()
+        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.btnGraphicCancel = New System.Windows.Forms.Button()
         Me.btnGraphicOk = New System.Windows.Forms.Button()
-        Me.hScrlGraphicSel = New System.Windows.Forms.HScrollBar()
-        Me.vScrlGraphicSel = New System.Windows.Forms.VScrollBar()
-        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.lblGraphic = New System.Windows.Forms.Label()
         Me.scrlGraphic = New System.Windows.Forms.HScrollBar()
         Me.cmbGraphic = New System.Windows.Forms.ComboBox()
@@ -566,11 +584,14 @@ Partial Class frmEditor_Events
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbEventQuest = New System.Windows.Forms.ComboBox()
         Me.lstCommands = New System.Windows.Forms.ListBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.pnlVariableSwitches.SuspendLayout()
         Me.fraLabeling.SuspendLayout()
         Me.FraRenaming.SuspendLayout()
         Me.fraRandom10.SuspendLayout()
         Me.fraGraphic.SuspendLayout()
+        Me.pnlGraphicSelect.SuspendLayout()
         CType(Me.picGraphicSel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMoveRoute.SuspendLayout()
         Me.fraMoveRoute.SuspendLayout()
@@ -654,7 +675,7 @@ Partial Class frmEditor_Events
         Me.pnlVariableSwitches.Controls.Add(Me.FraRenaming)
         Me.pnlVariableSwitches.Location = New System.Drawing.Point(5, 4)
         Me.pnlVariableSwitches.Name = "pnlVariableSwitches"
-        Me.pnlVariableSwitches.Size = New System.Drawing.Size(827, 636)
+        Me.pnlVariableSwitches.Size = New System.Drawing.Size(365, 293)
         Me.pnlVariableSwitches.TabIndex = 1
         '
         'fraLabeling
@@ -805,20 +826,34 @@ Partial Class frmEditor_Events
         '
         Me.fraGraphic.Controls.Add(Me.btnGraphicCancel)
         Me.fraGraphic.Controls.Add(Me.btnGraphicOk)
-        Me.fraGraphic.Controls.Add(Me.hScrlGraphicSel)
-        Me.fraGraphic.Controls.Add(Me.vScrlGraphicSel)
-        Me.fraGraphic.Controls.Add(Me.picGraphicSel)
         Me.fraGraphic.Controls.Add(Me.lblGraphic)
         Me.fraGraphic.Controls.Add(Me.scrlGraphic)
         Me.fraGraphic.Controls.Add(Me.cmbGraphic)
         Me.fraGraphic.Controls.Add(Me.lblRandomLabel33)
+        Me.fraGraphic.Controls.Add(Me.pnlGraphicSelect)
         Me.fraGraphic.Location = New System.Drawing.Point(2, 3)
         Me.fraGraphic.Name = "fraGraphic"
-        Me.fraGraphic.Size = New System.Drawing.Size(54, 44)
+        Me.fraGraphic.Size = New System.Drawing.Size(433, 517)
         Me.fraGraphic.TabIndex = 3
         Me.fraGraphic.TabStop = False
         Me.fraGraphic.Text = "Graphic Selection"
         Me.fraGraphic.Visible = False
+        '
+        'pnlGraphicSelect
+        '
+        Me.pnlGraphicSelect.Controls.Add(Me.picGraphicSel)
+        Me.pnlGraphicSelect.Location = New System.Drawing.Point(6, 39)
+        Me.pnlGraphicSelect.Name = "pnlGraphicSelect"
+        Me.pnlGraphicSelect.Size = New System.Drawing.Size(421, 436)
+        Me.pnlGraphicSelect.TabIndex = 9
+        '
+        'picGraphicSel
+        '
+        Me.picGraphicSel.Location = New System.Drawing.Point(4, 4)
+        Me.picGraphicSel.Name = "picGraphicSel"
+        Me.picGraphicSel.Size = New System.Drawing.Size(149, 132)
+        Me.picGraphicSel.TabIndex = 4
+        Me.picGraphicSel.TabStop = False
         '
         'btnGraphicCancel
         '
@@ -837,28 +872,6 @@ Partial Class frmEditor_Events
         Me.btnGraphicOk.TabIndex = 7
         Me.btnGraphicOk.Text = "Ok"
         Me.btnGraphicOk.UseVisualStyleBackColor = True
-        '
-        'hScrlGraphicSel
-        '
-        Me.hScrlGraphicSel.Location = New System.Drawing.Point(9, 463)
-        Me.hScrlGraphicSel.Name = "hScrlGraphicSel"
-        Me.hScrlGraphicSel.Size = New System.Drawing.Size(395, 17)
-        Me.hScrlGraphicSel.TabIndex = 6
-        '
-        'vScrlGraphicSel
-        '
-        Me.vScrlGraphicSel.Location = New System.Drawing.Point(407, 40)
-        Me.vScrlGraphicSel.Name = "vScrlGraphicSel"
-        Me.vScrlGraphicSel.Size = New System.Drawing.Size(17, 420)
-        Me.vScrlGraphicSel.TabIndex = 5
-        '
-        'picGraphicSel
-        '
-        Me.picGraphicSel.Location = New System.Drawing.Point(9, 40)
-        Me.picGraphicSel.Name = "picGraphicSel"
-        Me.picGraphicSel.Size = New System.Drawing.Size(395, 420)
-        Me.picGraphicSel.TabIndex = 4
-        Me.picGraphicSel.TabStop = False
         '
         'lblGraphic
         '
@@ -899,7 +912,7 @@ Partial Class frmEditor_Events
         Me.pnlMoveRoute.Controls.Add(Me.fraMoveRoute)
         Me.pnlMoveRoute.Location = New System.Drawing.Point(5, 4)
         Me.pnlMoveRoute.Name = "pnlMoveRoute"
-        Me.pnlMoveRoute.Size = New System.Drawing.Size(827, 635)
+        Me.pnlMoveRoute.Size = New System.Drawing.Size(157, 174)
         Me.pnlMoveRoute.TabIndex = 2
         '
         'fraMoveRoute
@@ -4571,7 +4584,17 @@ Partial Class frmEditor_Events
         ListViewGroup6.Name = "lstVgAnimation"
         ListViewGroup7.Header = "Questing"
         ListViewGroup7.Name = "lstVgQuesting"
-        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4, ListViewGroup5, ListViewGroup6, ListViewGroup7})
+        ListViewGroup8.Header = "Map Functions"
+        ListViewGroup8.Name = "lstVgMapFunctions"
+        ListViewGroup9.Header = "Music and Sound"
+        ListViewGroup9.Name = "lstVgSound"
+        ListViewGroup10.Header = "Etc..."
+        ListViewGroup10.Name = "lstVgEtc"
+        ListViewGroup11.Header = "Cut-scene Options"
+        ListViewGroup11.Name = "lstVgCutScene"
+        ListViewGroup12.Header = "Shop and Bank"
+        ListViewGroup12.Name = "lstVgShopBank"
+        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4, ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8, ListViewGroup9, ListViewGroup10, ListViewGroup11, ListViewGroup12})
         Me.lstvCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         ListViewItem1.Group = ListViewGroup1
         ListViewItem2.Group = ListViewGroup1
@@ -4603,7 +4626,21 @@ Partial Class frmEditor_Events
         ListViewItem26.Group = ListViewGroup5
         ListViewItem27.Group = ListViewGroup5
         ListViewItem28.Group = ListViewGroup5
-        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28})
+        ListViewItem29.Group = ListViewGroup6
+        ListViewItem30.Group = ListViewGroup7
+        ListViewItem31.Group = ListViewGroup7
+        ListViewItem32.Group = ListViewGroup7
+        ListViewItem33.Group = ListViewGroup8
+        ListViewItem34.Group = ListViewGroup8
+        ListViewItem35.Group = ListViewGroup8
+        ListViewItem36.Group = ListViewGroup9
+        ListViewItem37.Group = ListViewGroup9
+        ListViewItem38.Group = ListViewGroup9
+        ListViewItem39.Group = ListViewGroup9
+        ListViewItem40.Group = ListViewGroup10
+        ListViewItem41.Group = ListViewGroup10
+        ListViewItem42.Group = ListViewGroup10
+        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28, ListViewItem29, ListViewItem30, ListViewItem31, ListViewItem32, ListViewItem33, ListViewItem34, ListViewItem35, ListViewItem36, ListViewItem37, ListViewItem38, ListViewItem39, ListViewItem40, ListViewItem41, ListViewItem42})
         Me.lstvCommands.LabelWrap = False
         Me.lstvCommands.Location = New System.Drawing.Point(0, 0)
         Me.lstvCommands.MultiSelect = False
@@ -5766,22 +5803,43 @@ Partial Class frmEditor_Events
         Me.lstCommands.Size = New System.Drawing.Size(394, 433)
         Me.lstCommands.TabIndex = 13
         '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(756, 609)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnOK
+        '
+        Me.btnOK.Location = New System.Drawing.Point(675, 609)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnOK.TabIndex = 11
+        Me.btnOK.Text = "Ok"
+        Me.btnOK.UseVisualStyleBackColor = True
+        '
         'frmEditor_Events
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(2033, 644)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.btnOK)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.tabCommands)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lblRandomLabel14)
         Me.Controls.Add(Me.lblRandomLabel11)
-        Me.Controls.Add(Me.fraGraphic)
         Me.Controls.Add(Me.fraDialogue)
         Me.Controls.Add(Me.btnLabeling)
         Me.Controls.Add(Me.frarandom20)
         Me.Controls.Add(Me.tabPages)
         Me.Controls.Add(Me.pnlMoveRoute)
         Me.Controls.Add(Me.pnlVariableSwitches)
+        Me.Controls.Add(Me.fraGraphic)
         Me.Name = "frmEditor_Events"
         Me.Text = "Event Editor"
         Me.pnlVariableSwitches.ResumeLayout(False)
@@ -5792,6 +5850,7 @@ Partial Class frmEditor_Events
         Me.fraRandom10.PerformLayout()
         Me.fraGraphic.ResumeLayout(False)
         Me.fraGraphic.PerformLayout()
+        Me.pnlGraphicSelect.ResumeLayout(False)
         CType(Me.picGraphicSel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlMoveRoute.ResumeLayout(False)
         Me.fraMoveRoute.ResumeLayout(False)
@@ -5916,8 +5975,6 @@ Partial Class frmEditor_Events
     Friend WithEvents fraGraphic As Windows.Forms.GroupBox
     Friend WithEvents btnGraphicCancel As Windows.Forms.Button
     Friend WithEvents btnGraphicOk As Windows.Forms.Button
-    Friend WithEvents hScrlGraphicSel As Windows.Forms.HScrollBar
-    Friend WithEvents vScrlGraphicSel As Windows.Forms.VScrollBar
     Friend WithEvents picGraphicSel As Windows.Forms.PictureBox
     Friend WithEvents lblGraphic As Windows.Forms.Label
     Friend WithEvents scrlGraphic As Windows.Forms.HScrollBar
@@ -6421,4 +6478,7 @@ Partial Class frmEditor_Events
     Friend WithEvents lstvCommands As Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
+    Friend WithEvents pnlGraphicSelect As Windows.Forms.Panel
+    Friend WithEvents btnCancel As Windows.Forms.Button
+    Friend WithEvents btnOK As Windows.Forms.Button
 End Class

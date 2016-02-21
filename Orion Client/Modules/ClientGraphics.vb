@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 
 Module ClientGraphics
     Public GameWindow As RenderWindow
+
     Public EditorMap_Item As RenderWindow
     Public EditorMap_Key As RenderWindow
 
@@ -1119,7 +1120,7 @@ Module ClientGraphics
             For X = TileView.left To TileView.right + 1
                 For Y = TileView.top To TileView.bottom + 1
                     If IsValidMapPoint(X, Y) Then
-                        Call DrawMapTile(X, Y)
+                        DrawMapTile(X, Y)
                     End If
                 Next
             Next
@@ -1131,7 +1132,7 @@ Module ClientGraphics
                 If FurnitureCount > 0 Then
                     For I = 1 To FurnitureCount
                         If Furniture(I).ItemNum > 0 Then
-                            Call DrawFurniture(I, 0)
+                            DrawFurniture(I, 0)
                         End If
                     Next
                 End If
@@ -1139,7 +1140,7 @@ Module ClientGraphics
         End If
 
         For I = 1 To MAX_BYTE
-            Call DrawBlood(I)
+            DrawBlood(I)
         Next
 
         ' Draw out the items
@@ -1147,7 +1148,7 @@ Module ClientGraphics
             For I = 1 To MAX_MAP_ITEMS
 
                 If MapItem(I).Num > 0 Then
-                    Call DrawItem(I)
+                    DrawItem(I)
                 End If
 
             Next
@@ -1192,7 +1193,7 @@ Module ClientGraphics
                 ' Npcs
                 For I = 1 To MAX_MAP_NPCS
                     If MapNpc(I).Y = Y Then
-                        Call DrawNpc(I)
+                        DrawNpc(I)
                     End If
                 Next
 
@@ -1227,7 +1228,7 @@ Module ClientGraphics
                     If Resource_Index > 0 Then
                         For I = 1 To Resource_Index
                             If MapResource(I).Y = Y Then
-                                Call DrawMapResource(I)
+                                DrawMapResource(I)
                             End If
                         Next
                     End If
@@ -1249,7 +1250,7 @@ Module ClientGraphics
             For X = TileView.left To TileView.right + 1
                 For Y = TileView.top To TileView.bottom + 1
                     If IsValidMapPoint(X, Y) Then
-                        Call DrawMapFringeTile(X, Y)
+                        DrawMapFringeTile(X, Y)
                     End If
                 Next
             Next
@@ -1261,7 +1262,7 @@ Module ClientGraphics
                 If FurnitureCount > 0 Then
                     For I = 1 To FurnitureCount
                         If Furniture(I).ItemNum > 0 Then
-                            Call DrawFurniture(I, 1)
+                            DrawFurniture(I, 1)
                         End If
                     Next
                 End If
@@ -1274,30 +1275,30 @@ Module ClientGraphics
                 For X = TileView.left To TileView.right
                     For Y = TileView.top To TileView.bottom
                         If IsValidMapPoint(X, Y) Then
-                            Call DrawDirections(X, Y)
+                            DrawDirections(X, Y)
                         End If
                     Next
                 Next
             End If
-            Call DrawTileOutline()
+            DrawTileOutline()
         End If
 
         If FurnitureSelected > 0 Then
             If Player(MyIndex).InHouse = MyIndex Then
-                Call DrawFurnitureOutline()
+                DrawFurnitureOutline()
             End If
         End If
 
         ' draw cursor, player X and Y locations
         If BLoc Then
             If frmMainGame.picGeneral.Visible = True Then
-                Call DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                Call DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                Call DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, frmMainGame.picGeneral.Top + frmMainGame.picGeneral.Height + 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
             Else
-                Call DrawText(1, 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                Call DrawText(1, 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                Call DrawText(1, 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(1, 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
             End If
 
         End If
@@ -1305,19 +1306,19 @@ Module ClientGraphics
         ' draw player names
         For I = 1 To MAX_PLAYERS
             If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(MyIndex) Then
-                Call DrawPlayerName(I)
+                DrawPlayerName(I)
             End If
         Next
 
         ' draw npc names
         For I = 1 To MAX_MAP_NPCS
             If MapNpc(I).Num > 0 Then
-                Call DrawNPCName(I)
+                DrawNPCName(I)
             End If
         Next
 
         For I = 1 To MAX_BYTE
-            Call DrawActionMsg(I)
+            DrawActionMsg(I)
         Next I
 
         ' Blit out map attributes
@@ -1603,8 +1604,6 @@ Module ClientGraphics
     End Sub
 
     Sub DestroyGraphics()
-        ' Just in Case (For instance, map editor wasn't used. A new object instance error will occur.) We dont want it to error
-        'On Error Resume Next
 
         ' Number of graphic files
         If Not StatBarBackbuffer Is Nothing Then StatBarBackbuffer.Dispose()
@@ -1956,7 +1955,6 @@ Module ClientGraphics
         Dim looptime As Long
         Dim FrameCount As Long
         Dim ShouldRender As Boolean
-
 
         Animationnum = frmEditor_Animation.scrlSprite0.Value
 
@@ -2759,7 +2757,7 @@ NextLoop:
 
     Public Sub DrawHover(ByVal X2 As Long, ByVal Y2 As Long)
         Dim rec As Rectangle
-        Dim X As Long, y As Long
+        Dim X As Long, Y As Long
         Dim width As Long, height As Long
 
         With rec
@@ -2770,13 +2768,13 @@ NextLoop:
         End With
 
         X = ConvertMapX(X2)
-        y = ConvertMapY(Y2)
+        Y = ConvertMapY(Y2)
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
 
         Dim tmpSprite As Sprite = New Sprite(TargetGFX)
         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(X2, Y2)
+        tmpSprite.Position = New SFML.System.Vector2f(X, Y)
         GameWindow.Draw(tmpSprite)
 
     End Sub

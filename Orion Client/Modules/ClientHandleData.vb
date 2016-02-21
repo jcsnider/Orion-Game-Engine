@@ -800,7 +800,6 @@
                 Map.MaxY = Buffer.ReadLong
 
                 ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
-                ' ReDim Map.exTile(0 To Map.MaxX, 0 To Map.MaxY)
 
                 For X = 1 To MAX_MAP_NPCS
                     Map.Npc(X) = Buffer.ReadLong
@@ -823,18 +822,133 @@
                             Map.Tile(X, Y).Autotile(i) = Buffer.ReadLong
                         Next
                         Map.Tile(X, Y).Type = Buffer.ReadLong
-
-                        'ReDim Map.exTile(X, Y).Layer(0 To ExMapLayer.Layer_Count - 1)
-                        'ReDim Map.exTile(X, Y).Autotile(0 To ExMapLayer.Layer_Count - 1)
-
-                        'For i = 0 To ExMapLayer.Layer_Count - 1
-                        '    Map.exTile(X, Y).Layer(i).tileset = Buffer.ReadLong
-                        '    Map.exTile(X, Y).Layer(i).X = Buffer.ReadLong
-                        '    Map.exTile(X, Y).Layer(i).Y = Buffer.ReadLong
-                        '    Map.exTile(X, Y).Autotile(i) = Buffer.ReadLong
-                        'Next
                     Next
                 Next
+
+                'Event Data!
+                Map.EventCount = Buffer.ReadLong
+
+                If Map.EventCount > 0 Then
+                    ReDim Map.Events(0 To Map.EventCount)
+                    For i = 1 To Map.EventCount
+                        With Map.Events(i)
+                            .Name = Buffer.ReadString
+                            .Globals = Buffer.ReadLong
+                            .X = Buffer.ReadLong
+                            .Y = Buffer.ReadLong
+                            .PageCount = Buffer.ReadLong
+                        End With
+                        If Map.Events(i).PageCount > 0 Then
+                            ReDim Map.Events(i).Pages(0 To Map.Events(i).PageCount)
+                            For X = 1 To Map.Events(i).PageCount
+                                With Map.Events(i).Pages(X)
+                                    .chkVariable = Buffer.ReadLong
+                                    .VariableIndex = Buffer.ReadLong
+                                    .VariableCondition = Buffer.ReadLong
+                                    .VariableCompare = Buffer.ReadLong
+
+                                    .chkSwitch = Buffer.ReadLong
+                                    .SwitchIndex = Buffer.ReadLong
+                                    .SwitchCompare = Buffer.ReadLong
+
+                                    .chkHasItem = Buffer.ReadLong
+                                    .HasItemIndex = Buffer.ReadLong
+                                    .HasItemAmount = Buffer.ReadLong
+
+                                    .chkSelfSwitch = Buffer.ReadLong
+                                    .SelfSwitchIndex = Buffer.ReadLong
+                                    .SelfSwitchCompare = Buffer.ReadLong
+
+                                    .GraphicType = Buffer.ReadLong
+                                    .Graphic = Buffer.ReadLong
+                                    .GraphicX = Buffer.ReadLong
+                                    .GraphicY = Buffer.ReadLong
+                                    .GraphicX2 = Buffer.ReadLong
+                                    .GraphicY2 = Buffer.ReadLong
+
+                                    .MoveType = Buffer.ReadLong
+                                    .MoveSpeed = Buffer.ReadLong
+                                    .MoveFreq = Buffer.ReadLong
+
+                                    .MoveRouteCount = Buffer.ReadLong
+
+                                    .IgnoreMoveRoute = Buffer.ReadLong
+                                    .RepeatMoveRoute = Buffer.ReadLong
+
+                                    If .MoveRouteCount > 0 Then
+                                        ReDim Map.Events(i).Pages(X).MoveRoute(0 To .MoveRouteCount)
+                                        For Y = 1 To .MoveRouteCount
+                                            .MoveRoute(Y).Index = Buffer.ReadLong
+                                            .MoveRoute(Y).Data1 = Buffer.ReadLong
+                                            .MoveRoute(Y).Data2 = Buffer.ReadLong
+                                            .MoveRoute(Y).Data3 = Buffer.ReadLong
+                                            .MoveRoute(Y).Data4 = Buffer.ReadLong
+                                            .MoveRoute(Y).Data5 = Buffer.ReadLong
+                                            .MoveRoute(Y).Data6 = Buffer.ReadLong
+                                        Next
+                                    End If
+
+                                    .WalkAnim = Buffer.ReadLong
+                                    .DirFix = Buffer.ReadLong
+                                    .WalkThrough = Buffer.ReadLong
+                                    .ShowName = Buffer.ReadLong
+                                    .Trigger = Buffer.ReadLong
+                                    .CommandListCount = Buffer.ReadLong
+
+                                    .Position = Buffer.ReadLong
+                                    .Questnum = Buffer.ReadLong
+                                End With
+
+                                If Map.Events(i).Pages(X).CommandListCount > 0 Then
+                                    ReDim Map.Events(i).Pages(X).CommandList(0 To Map.Events(i).Pages(X).CommandListCount)
+                                    For Y = 1 To Map.Events(i).Pages(X).CommandListCount
+                                        Map.Events(i).Pages(X).CommandList(Y).CommandCount = Buffer.ReadLong
+                                        Map.Events(i).Pages(X).CommandList(Y).ParentList = Buffer.ReadLong
+                                        If Map.Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
+                                            ReDim Map.Events(i).Pages(X).CommandList(Y).Commands(0 To Map.Events(i).Pages(X).CommandList(Y).CommandCount)
+                                            For z = 1 To Map.Events(i).Pages(X).CommandList(Y).CommandCount
+                                                With Map.Events(i).Pages(X).CommandList(Y).Commands(z)
+                                                    .Index = Buffer.ReadLong
+                                                    .Text1 = Buffer.ReadString
+                                                    .Text2 = Buffer.ReadString
+                                                    .Text3 = Buffer.ReadString
+                                                    .Text4 = Buffer.ReadString
+                                                    .Text5 = Buffer.ReadString
+                                                    .Data1 = Buffer.ReadLong
+                                                    .Data2 = Buffer.ReadLong
+                                                    .Data3 = Buffer.ReadLong
+                                                    .Data4 = Buffer.ReadLong
+                                                    .Data5 = Buffer.ReadLong
+                                                    .Data6 = Buffer.ReadLong
+                                                    .ConditionalBranch.CommandList = Buffer.ReadLong
+                                                    .ConditionalBranch.Condition = Buffer.ReadLong
+                                                    .ConditionalBranch.Data1 = Buffer.ReadLong
+                                                    .ConditionalBranch.Data2 = Buffer.ReadLong
+                                                    .ConditionalBranch.Data3 = Buffer.ReadLong
+                                                    .ConditionalBranch.ElseCommandList = Buffer.ReadLong
+                                                    .MoveRouteCount = Buffer.ReadLong
+                                                    If .MoveRouteCount > 0 Then
+                                                        ReDim Preserve .MoveRoute(.MoveRouteCount)
+                                                        For w = 1 To .MoveRouteCount
+                                                            .MoveRoute(w).Index = Buffer.ReadLong
+                                                            .MoveRoute(w).Data1 = Buffer.ReadLong
+                                                            .MoveRoute(w).Data2 = Buffer.ReadLong
+                                                            .MoveRoute(w).Data3 = Buffer.ReadLong
+                                                            .MoveRoute(w).Data4 = Buffer.ReadLong
+                                                            .MoveRoute(w).Data5 = Buffer.ReadLong
+                                                            .MoveRoute(w).Data6 = Buffer.ReadLong
+                                                        Next
+                                                    End If
+                                                End With
+                                            Next
+                                        End If
+                                    Next
+                                End If
+                            Next
+                        End If
+                    Next
+                End If
+                'End Event Data
             End If
 
             For i = 1 To MAX_MAP_ITEMS

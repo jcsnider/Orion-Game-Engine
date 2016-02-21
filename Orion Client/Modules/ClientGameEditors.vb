@@ -445,7 +445,7 @@ Module ClientGameEditors
                 .Data3 = 0
             End With
         ElseIf frmEditor_Map.optEvent.Checked Then
-            Call DeleteEvent(CurX, CurY)
+            DeleteEvent(CurX, CurY)
         End If
         ' End If
 
@@ -503,11 +503,11 @@ Module ClientGameEditors
                 .Autotile(CurLayer) = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
-        End If
-        ' do a re-init so we can see our changes
-        initAutotiles()
+            'End If
+            ' do a re-init so we can see our changes
+            initAutotiles()
         Exit Sub
-        ' End If
+        End If
 
         If Not multitile Then ' single
             'If CurLayer > (MapLayer.Layer_Count - 1) Then
@@ -646,9 +646,9 @@ Module ClientGameEditors
 
         If InMapEditor Then
             If MsgBox("Save changes to current map?", vbYesNo) = vbYes Then
-                Call MapEditorSend()
+                MapEditorSend()
             Else
-                Call MapEditorCancel()
+                MapEditorCancel()
             End If
         End If
 

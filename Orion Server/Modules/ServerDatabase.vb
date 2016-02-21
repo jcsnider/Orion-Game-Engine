@@ -187,21 +187,11 @@ Module ServerDatabase
         Map(MapNum).MaxY = MAX_MAPY
         ReDim Map(MapNum).Npc(0 To MAX_MAP_NPCS)
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
-        ' ReDim Map(MapNum).ExTile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
+
         For x = 0 To MAX_MAPX
             For y = 0 To MAX_MAPY
                 ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
                 ReDim Map(MapNum).Tile(x, y).Autotile(0 To MapLayer.Layer_Count - 1)
-
-                'ReDim Map(MapNum).ExTile(x, y).Layer(0 To ExMapLayer.Layer_Count - 1)
-                'ReDim Map(MapNum).ExTile(x, y).Autotile(0 To ExMapLayer.Layer_Count - 1)
-                'For l = 0 To ExMapLayer.Layer_Count - 1
-                '    Map(MapNum).ExTile(x, y).Layer(l).Tileset = 0
-                '    Map(MapNum).ExTile(x, y).Layer(l).x = 0
-                '    Map(MapNum).ExTile(x, y).Layer(l).y = 0
-                '    Map(MapNum).ExTile(x, y).Autotile(l) = 0
-                'Next
-
             Next
         Next
 
@@ -220,7 +210,7 @@ Module ServerDatabase
         Dim i As Long
 
         For i = 1 To MAX_MAPS
-            Call SaveMap(i)
+            SaveMap(i)
             DoEvents()
         Next
 
@@ -270,17 +260,6 @@ Module ServerDatabase
             FilePutObject(F, Map(MapNum).Npc(x))
         Next
 
-        'For x = 0 To Map(MapNum).MaxX
-        '    For y = 0 To Map(MapNum).MaxY
-        '        For l = 0 To ExMapLayer.Layer_Count - 1
-        '            FilePutObject(F, Map(MapNum).ExTile(x, y).Layer(l).Tileset)
-        '            FilePutObject(F, Map(MapNum).ExTile(x, y).Layer(l).x)
-        '            FilePutObject(F, Map(MapNum).ExTile(x, y).Layer(l).y)
-        '            FilePutObject(F, Map(MapNum).ExTile(x, y).Autotile)
-        '        Next
-        '    Next
-        'Next
-
         FileClose(F)
 
         'This is for event saving, it is in .ini files because there are non-limited values (strings) that cannot easily be loaded/saved in the normal manner.
@@ -291,7 +270,7 @@ Module ServerDatabase
             For i = 1 To Map(MapNum).EventCount
                 With Map(MapNum).Events(i)
                     PutVar(filename, "Event" & i, "Name", .Name)
-                    PutVar(filename, "Event" & i, "Global", Val(.Globall))
+                    PutVar(filename, "Event" & i, "Global", Val(.Globals))
                     PutVar(filename, "Event" & i, "x", Val(.X))
                     PutVar(filename, "Event" & i, "y", Val(.Y))
                     PutVar(filename, "Event" & i, "PageCount", Val(.PageCount))
@@ -407,7 +386,7 @@ Module ServerDatabase
     Sub LoadMaps()
         Dim i As Long
 
-        Call CheckMaps()
+        CheckMaps()
 
         For i = 1 To MAX_MAPS
             LoadMap(i)
@@ -444,7 +423,6 @@ Module ServerDatabase
 
         ' have to set the tile()
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
-        'ReDim Map(MapNum).ExTile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
@@ -469,19 +447,6 @@ Module ServerDatabase
             MapNpc(MapNum).Npc(x).Num = Map(MapNum).Npc(x)
         Next
 
-        'For x = 0 To Map(MapNum).MaxX
-        '    For y = 0 To Map(MapNum).MaxY
-        '        ReDim Map(MapNum).ExTile(x, y).Layer(0 To ExMapLayer.Layer_Count - 1)
-        '        For l = 0 To ExMapLayer.Layer_Count - 1
-        '            FileGetObject(F, Map(MapNum).ExTile(x, y).Layer(l).Tileset)
-        '            FileGetObject(F, Map(MapNum).ExTile(x, y).Layer(l).x)
-        '            FileGetObject(F, Map(MapNum).ExTile(x, y).Layer(l).y)
-        '            FileGetObject(F, Map(MapNum).ExTile(x, y).Autotile)
-        '        Next
-
-        '    Next
-        'Next
-
         FileClose(F)
 
         ClearTempTile(MapNum)
@@ -500,7 +465,7 @@ Module ServerDatabase
                 If Val(Getvar(filename, "Event" & i, "PageCount")) > 0 Then
                     With Map(MapNum).Events(i)
                         .Name = Getvar(filename, "Event" & i, "Name")
-                        .Globall = Val(Getvar(filename, "Event" & i, "Global"))
+                        .Globals = Val(Getvar(filename, "Event" & i, "Global"))
                         .X = Val(Getvar(filename, "Event" & i, "x"))
                         .Y = Val(Getvar(filename, "Event" & i, "y"))
                         .PageCount = Val(Getvar(filename, "Event" & i, "PageCount"))

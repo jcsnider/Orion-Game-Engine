@@ -2272,6 +2272,140 @@ newlist:
         Buffer = Nothing
     End Sub
 
+    Public Sub EditorEvent_DrawGraphic()
+        Dim sRect As RECT
+        Dim dRect As RECT
+
+        'Dim targetBitmap As Bitmap 'Bitmap we draw to
+        'Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
+        'Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap
+
+        'sourceBitmap = New Bitmap("data files/graphics/tilesets/1.png") 'Load tileset 1 from data files into our sourceBitmap
+        'targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
+
+
+        'g = Graphics.FromImage(targetBitmap)
+        'g.FillRectangle(Brushes.Red, New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height))
+
+        ''Draw Image  (Source Image to draw, Rectangle on target to draw to, Source Rectangle of source graphic to grab from, GraphicUnit.Pixel)
+        ''Dim row as Int32 = 2
+        ''Dim col as Int32 = 2
+        'Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
+        'Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
+
+
+        'Dim selectionRect As New Rectangle(2 * 32, 3 * 32, 64, 64)
+
+        'g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
+        'g.DrawRectangle(New Pen(Color.White, 2), selectionRect)
+
+        'g.Dispose()
+
+        'pnlGraphic.Width = targetBitmap.Width
+        'pnlGraphic.Height = targetBitmap.Height
+        'pnlGraphic.BackgroundImage = targetBitmap
+
+        If frmEditor_Events.picGraphicSel.Visible Then
+            Select Case frmEditor_Events.cmbGraphic.SelectedIndex
+                Case 0
+                    'None
+                    frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
+                Case 1
+                    If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
+                        'SpritesGFXInfo(frmEditor_Events.scrlGraphic.Value).width > 793 Then
+                        Dim targetBitmap As Bitmap 'Bitmap we draw to
+                        Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
+                        Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap
+
+                        'Load tileset 1 from data files into our sourceBitmap
+
+                        sourceBitmap = New Bitmap(Application.StartupPath & "/data files/graphics/characters/" & frmEditor_Events.scrlGraphic.Value & ".png")
+                        targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
+
+                        g = Graphics.FromImage(targetBitmap)
+
+                        'Dim row As Int32 = 2
+                        'Dim col As Int32 = 2
+
+                        Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
+                        Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
+
+                        g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
+
+                        g.Dispose()
+
+                        frmEditor_Events.picGraphicSel.Width = targetBitmap.Width
+                        frmEditor_Events.picGraphicSel.Height = targetBitmap.Height
+                        frmEditor_Events.picGraphicSel.Visible = True
+                        frmEditor_Events.picGraphicSel.BackgroundImage = targetBitmap
+                        frmEditor_Events.picGraphic.Width = targetBitmap.Width
+                        frmEditor_Events.picGraphic.Height = targetBitmap.Height
+                        frmEditor_Events.picGraphic.BackgroundImage = targetBitmap
+                    Else
+                        frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
+                        Exit Sub
+
+                    End If
+                Case 2
+                    If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumTileSets Then
+
+                    Else
+                        frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
+                        Exit Sub
+                    End If
+            End Select
+        Else
+            If tmpEvent.PageCount > 0 Then
+                Select Case tmpEvent.Pages(curPageNum).GraphicType
+                    Case 0
+                        frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
+                    Case 1
+                        If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumCharacters Then
+                            sRect.top = tmpEvent.Pages(curPageNum).GraphicY * (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).height / 4)
+                            sRect.left = tmpEvent.Pages(curPageNum).GraphicX * (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).width / 4)
+                            sRect.bottom = sRect.top + (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).height / 4)
+                            sRect.right = sRect.left + (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).width / 4)
+                            With dRect
+                                dRect.top = (193 / 2) - ((sRect.bottom - sRect.top) / 2)
+                                dRect.bottom = dRect.top + (sRect.bottom - sRect.top)
+                                dRect.left = (121 / 2) - ((sRect.right - sRect.left) / 2)
+                                dRect.right = dRect.left + (sRect.right - sRect.left)
+                            End With
+
+                        End If
+                    Case 2
+                        If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumTileSets Then
+                            If tmpEvent.Pages(curPageNum).GraphicX2 = 0 Or tmpEvent.Pages(curPageNum).GraphicY2 = 0 Then
+                                sRect.top = tmpEvent.Pages(curPageNum).GraphicY * 32
+                                sRect.left = tmpEvent.Pages(curPageNum).GraphicX * 32
+                                sRect.bottom = sRect.top + 32
+                                sRect.right = sRect.left + 32
+                                With dRect
+                                    dRect.top = (193 / 2) - ((sRect.bottom - sRect.top) / 2)
+                                    dRect.bottom = dRect.top + (sRect.bottom - sRect.top)
+                                    dRect.left = (120 / 2) - ((sRect.right - sRect.left) / 2)
+                                    dRect.right = dRect.left + (sRect.right - sRect.left)
+                                End With
+
+                            Else
+                                sRect.top = tmpEvent.Pages(curPageNum).GraphicY * 32
+                                sRect.left = tmpEvent.Pages(curPageNum).GraphicX * 32
+                                sRect.bottom = sRect.top + ((tmpEvent.Pages(curPageNum).GraphicY2 - tmpEvent.Pages(curPageNum).GraphicY) * 32)
+                                sRect.right = sRect.left + ((tmpEvent.Pages(curPageNum).GraphicX2 - tmpEvent.Pages(curPageNum).GraphicX) * 32)
+                                With dRect
+                                    dRect.top = (193 / 2) - ((sRect.bottom - sRect.top) / 2)
+                                    dRect.bottom = dRect.top + (sRect.bottom - sRect.top)
+                                    dRect.left = (120 / 2) - ((sRect.right - sRect.left) / 2)
+                                    dRect.right = dRect.left + (sRect.right - sRect.left)
+                                End With
+
+                            End If
+                        End If
+                End Select
+            End If
+        End If
+
+    End Sub
 #End Region
 
     Public Sub DrawEvents()
@@ -2315,6 +2449,14 @@ newlist:
                     GameWindow.Draw(tmpSprite)
                 Case 1
                     If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic <= NumCharacters Then
+                        If SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
+                            LoadTexture(Map.Events(i).Pages(1).Graphic, 2)
+                        End If
+
+                        'seeying we still use it, lets update timer
+                        With SpritesGFXInfo(Map.Events(i).Pages(1).Graphic)
+                            .TextureTimer = GetTickCount() + 100000
+                        End With
                         With rec
                             .Y = (Map.Events(i).Pages(1).GraphicY * (SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).height / 4))
                             .Height = .Y + PIC_Y
@@ -2323,12 +2465,8 @@ newlist:
                         End With
                         Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
                         GameWindow.Draw(tmpSprite)
-                        Dim tmpSprite2 As Sprite = New Sprite(MiscGFX)
-                        tmpSprite2.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite2.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                        GameWindow.Draw(tmpSprite2)
                     Else
                         With rec
                             .Y = 0
@@ -2354,11 +2492,6 @@ newlist:
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                         tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(tmpSprite)
-
-                        Dim tmpSprite2 As Sprite = New Sprite(MiscGFX)
-                        tmpSprite2.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite2.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                        GameWindow.Draw(tmpSprite2)
                     Else
                         With rec
                             .Y = 0

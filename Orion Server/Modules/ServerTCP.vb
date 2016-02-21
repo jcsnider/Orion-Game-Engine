@@ -964,15 +964,115 @@ Module ServerTCP
                     Next
                     Buffer.WriteLong(Map(MapNum).Tile(x, y).Type)
 
-                    'For i = 0 To ExMapLayer.Layer_Count - 1
-                    '    Buffer.WriteLong(Map(MapNum).ExTile(x, y).Layer(i).Tileset)
-                    '    Buffer.WriteLong(Map(MapNum).ExTile(x, y).Layer(i).x)
-                    '    Buffer.WriteLong(Map(MapNum).ExTile(x, y).Layer(i).y)
-                    '    Buffer.WriteLong(Map(MapNum).ExTile(x, y).Autotile(i))
-                    'Next
-
                 Next
             Next
+
+            'Event Data
+            Buffer.WriteLong(Map(MapNum).EventCount)
+            If Map(MapNum).EventCount > 0 Then
+                For i = 1 To Map(MapNum).EventCount
+                    With Map(MapNum).Events(i)
+                        Buffer.WriteString(Trim$(.Name))
+                        Buffer.WriteLong(.Globals)
+                        Buffer.WriteLong(.X)
+                        Buffer.WriteLong(.Y)
+                        Buffer.WriteLong(.PageCount)
+                    End With
+                    If Map(MapNum).Events(i).PageCount > 0 Then
+                        For X = 1 To Map(MapNum).Events(i).PageCount
+                            With Map(MapNum).Events(i).Pages(X)
+                                Buffer.WriteLong(.chkVariable)
+                                Buffer.WriteLong(.VariableIndex)
+                                Buffer.WriteLong(.VariableCondition)
+                                Buffer.WriteLong(.VariableCompare)
+                                Buffer.WriteLong(.chkSwitch)
+                                Buffer.WriteLong(.SwitchIndex)
+                                Buffer.WriteLong(.SwitchCompare)
+                                Buffer.WriteLong(.chkHasItem)
+                                Buffer.WriteLong(.HasItemIndex)
+                                Buffer.WriteLong(.HasItemAmount)
+                                Buffer.WriteLong(.chkSelfSwitch)
+                                Buffer.WriteLong(.SelfSwitchIndex)
+                                Buffer.WriteLong(.SelfSwitchCompare)
+                                Buffer.WriteLong(.GraphicType)
+                                Buffer.WriteLong(.Graphic)
+                                Buffer.WriteLong(.GraphicX)
+                                Buffer.WriteLong(.GraphicY)
+                                Buffer.WriteLong(.GraphicX2)
+                                Buffer.WriteLong(.GraphicY2)
+                                Buffer.WriteLong(.MoveType)
+                                Buffer.WriteLong(.MoveSpeed)
+                                Buffer.WriteLong(.MoveFreq)
+                                Buffer.WriteLong(.MoveRouteCount)
+                                Buffer.WriteLong(.IgnoreMoveRoute)
+                                Buffer.WriteLong(.RepeatMoveRoute)
+                                If .MoveRouteCount > 0 Then
+                                    For Y = 1 To .MoveRouteCount
+                                        Buffer.WriteLong(.MoveRoute(Y).Index)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data1)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data2)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data3)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data4)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data5)
+                                        Buffer.WriteLong(.MoveRoute(Y).Data6)
+                                    Next
+                                End If
+                                Buffer.WriteLong(.WalkAnim)
+                                Buffer.WriteLong(.DirFix)
+                                Buffer.WriteLong(.WalkThrough)
+                                Buffer.WriteLong(.ShowName)
+                                Buffer.WriteLong(.Trigger)
+                                Buffer.WriteLong(.CommandListCount)
+                                Buffer.WriteLong(.Position)
+                                Buffer.WriteLong(.QuestNum)
+                            End With
+                            If Map(MapNum).Events(i).Pages(X).CommandListCount > 0 Then
+                                For Y = 1 To Map(MapNum).Events(i).Pages(X).CommandListCount
+                                    Buffer.WriteLong(Map(MapNum).Events(i).Pages(X).CommandList(Y).CommandCount)
+                                    Buffer.WriteLong(Map(MapNum).Events(i).Pages(X).CommandList(Y).ParentList)
+                                    If Map(MapNum).Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
+                                        For z = 1 To Map(MapNum).Events(i).Pages(X).CommandList(Y).CommandCount
+                                            With Map(MapNum).Events(i).Pages(X).CommandList(Y).Commands(z)
+                                                Buffer.WriteLong(.Index)
+                                                Buffer.WriteString(Trim$(.Text1))
+                                                Buffer.WriteString(Trim$(.Text2))
+                                                Buffer.WriteString(Trim$(.Text3))
+                                                Buffer.WriteString(Trim$(.Text4))
+                                                Buffer.WriteString(Trim$(.Text5))
+                                                Buffer.WriteLong(.Data1)
+                                                Buffer.WriteLong(.Data2)
+                                                Buffer.WriteLong(.Data3)
+                                                Buffer.WriteLong(.Data4)
+                                                Buffer.WriteLong(.Data5)
+                                                Buffer.WriteLong(.Data6)
+                                                Buffer.WriteLong(.ConditionalBranch.CommandList)
+                                                Buffer.WriteLong(.ConditionalBranch.Condition)
+                                                Buffer.WriteLong(.ConditionalBranch.Data1)
+                                                Buffer.WriteLong(.ConditionalBranch.Data2)
+                                                Buffer.WriteLong(.ConditionalBranch.Data3)
+                                                Buffer.WriteLong(.ConditionalBranch.ElseCommandList)
+                                                Buffer.WriteLong(.MoveRouteCount)
+                                                If .MoveRouteCount > 0 Then
+                                                    For w = 1 To .MoveRouteCount
+                                                        Buffer.WriteLong(.MoveRoute(w).Index)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data1)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data2)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data3)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data4)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data5)
+                                                        Buffer.WriteLong(.MoveRoute(w).Data6)
+                                                    Next
+                                                End If
+                                            End With
+                                        Next
+                                    End If
+                                Next
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+            'End Event Data
         Else
             Buffer.WriteLong(0)
         End If

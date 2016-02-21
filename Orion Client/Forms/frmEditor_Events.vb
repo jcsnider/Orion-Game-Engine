@@ -213,8 +213,488 @@ Public Class frmEditor_Events
                 fraDialogue.Visible = True
                 fraCommand1.Visible = True
                 fraCommands.Visible = False
+            'chatbox text
+            Case 3
+                txtAddText_Text.Text = vbNullString
+                scrlAddText_Colour.Value = 0
+                optAddText_Player.Checked = True
+                fraDialogue.Visible = True
+                fraCommand2.Visible = True
+                fraCommands.Visible = False
+            'chat bubble
+            Case 4
+                txtChatbubbleText.Text = ""
+                optChatBubbleTarget0.Checked = True
+                cmbChatBubbleTarget.Visible = False
+                fraDialogue.Visible = True
+                fraCommand3.Visible = True
+                fraCommands.Visible = False
+        'event progression
+            'player variable
+            Case 5
+                txtVariableData0.Text = 0
+                txtVariableData1.Text = 0
+                txtVariableData2.Text = 0
+                txtVariableData3.Text = 0
+                txtVariableData4.Text = 0
+
+                cmbVariable.SelectedIndex = 0
+                optVariableAction0.Checked = True
+                fraDialogue.Visible = True
+                fraCommand4.Visible = True
+                fraCommands.Visible = False
+            'player switch
+            Case 6
+                cmbPlayerSwitchSet.SelectedIndex = 0
+                cmbSwitch.SelectedIndex = 0
+                fraDialogue.Visible = True
+                fraCommand5.Visible = True
+                fraCommands.Visible = False
+            'self switch
+            Case 7
+                cmbSetSelfSwitchTo.SelectedIndex = 0
+                fraDialogue.Visible = True
+                fraCommand6.Visible = True
+                fraCommands.Visible = False
+        'flow control
+
+            'conditional branch
+            Case 8
+                fraDialogue.Visible = True
+                fraCommand7.Visible = True
+                optCondition_Index0.Checked = True
+                ClearConditionFrame()
+                cmbCondition_PlayerVarIndex.Enabled = True
+                cmbCondition_PlayerVarCompare.Enabled = True
+                txtCondition_PlayerVarCondition.Enabled = True
+                fraCommands.Visible = False
+            'Exit Event Process
+            Case 9
+                AddCommand(EventType.evExitProcess)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
+            'Label
+            Case 10
+                txtLabelName.Text = ""
+                fraCommand8.Visible = True
+                fraCommands.Visible = False
+                fraDialogue.Visible = True
+            'GoTo Label
+            Case 11
+                txtGotoLabel.Text = ""
+                fraCommand9.Visible = True
+                fraCommands.Visible = False
+                fraDialogue.Visible = True
+        'Player Control
+
+            'Change Items
+            Case 12
+                cmbChangeItemIndex.SelectedIndex = 0
+                optChangeItemSet.Checked = True
+                txtChangeItemsAmount.Text = "0"
+                fraDialogue.Visible = True
+                fraCommand10.Visible = True
+                fraCommands.Visible = False
+            'Restore Hp
+            Case 13
+                AddCommand(EventType.evRestoreHP)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
+            'Restore Mp
+            Case 14
+                AddCommand(EventType.evRestoreMP)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
+            'Level Up
+            Case 15
+                AddCommand(EventType.evLevelUp)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
+            'Change Level
+            Case 16
+                scrlChangeLevel.Value = 1
+                lblChangeLevel.Text = "Level: 1"
+                fraDialogue.Visible = True
+                fraCommand11.Visible = True
+                fraCommands.Visible = False
         End Select
 
+    End Sub
+
+#End Region
+
+#Region "ButtonCommands"
+
+
+    Private Sub btnCommands14_Click(sender As Object, e As EventArgs) Handles btnCommands14.Click
+
+    End Sub
+
+
+    Private Sub btnCommands15_Click(sender As Object, e As EventArgs) Handles btnCommands15.Click
+
+    End Sub
+
+    'Change Skills
+    Private Sub btnCommands16_Click(sender As Object, e As EventArgs) Handles btnCommands16.Click
+        cmbChangeSkills.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand12.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Change Class
+    Private Sub btnCommands17_Click(sender As Object, e As EventArgs) Handles btnCommands17.Click
+        If Max_Classes > 0 Then
+            If cmbChangeClass.Items.Count = 0 Then
+                cmbChangeClass.Items.Clear()
+
+                For i = 1 To Max_Classes
+                    cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
+                Next
+                cmbChangeClass.SelectedIndex = 0
+            End If
+        End If
+        fraDialogue.Visible = True
+        fraCommand13.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Change Sprite
+    Private Sub btnCommands18_Click(sender As Object, e As EventArgs) Handles btnCommands18.Click
+        scrlChangeSprite.Value = 1
+        lblChangeSprite.Text = "Sprite: 1"
+        fraDialogue.Visible = True
+        fraCommand14.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Change Gender
+    Private Sub btnCommands19_Click(sender As Object, e As EventArgs) Handles btnCommands19.Click
+        optChangeSexMale.Checked = True
+        fraDialogue.Visible = True
+        fraCommand15.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Change PK
+    Private Sub btnCommands20_Click(sender As Object, e As EventArgs) Handles btnCommands20.Click
+        optChangePKYes.Checked = True
+        fraDialogue.Visible = True
+        fraCommand16.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Give Exp
+    Private Sub btnCommands21_Click(sender As Object, e As EventArgs) Handles btnCommands21.Click
+        scrlGiveExp.Value = 0
+        lblGiveExp.Text = "Give Exp: 0"
+        fraDialogue.Visible = True
+        fraCommand17.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Movement
+
+    'Warp Player
+    Private Sub btnCommands22_Click(sender As Object, e As EventArgs) Handles btnCommands22.Click
+        scrlWPMap.Value = 0
+        scrlWPX.Value = 0
+        scrlWPY.Value = 0
+        cmbWarpPlayerDir.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand18.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Set Move Route
+    Private Sub btnCommands23_Click(sender As Object, e As EventArgs) Handles btnCommands23.Click
+        Dim x As Long
+
+        fraMoveRoute.Visible = True
+        lstMoveRoute.Items.Clear()
+        cmbEvent.Items.Clear()
+        ReDim ListOfEvents(0 To Map.EventCount)
+        ListOfEvents(0) = EditorEvent
+        cmbEvent.Items.Add("This Event")
+        cmbEvent.SelectedIndex = 0
+        cmbEvent.Enabled = True
+        For i = 1 To Map.EventCount
+            If i <> EditorEvent Then
+                cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
+                x = x + 1
+                ListOfEvents(x) = i
+            End If
+        Next
+        IsMoveRouteCommand = True
+        chkIgnoreMove.Checked = 0
+        chkRepeatRoute.Checked = 0
+        TempMoveRouteCount = 0
+        ReDim TempMoveRoute(0)
+        fraMoveRoute.Width = 841
+        fraMoveRoute.Height = 585
+        fraMoveRoute.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Wait for Route Completion
+    Private Sub btnCommands24_Click(sender As Object, e As EventArgs) Handles btnCommands24.Click
+        Dim x As Long
+
+        cmbMoveWait.Items.Clear()
+        ReDim ListOfEvents(0 To Map.EventCount)
+        ListOfEvents(0) = EditorEvent
+        cmbMoveWait.Items.Add("This Event")
+        cmbMoveWait.SelectedIndex = 0
+        cmbMoveWait.Enabled = True
+        For i = 1 To Map.EventCount
+            If i <> EditorEvent Then
+                cmbMoveWait.Items.Add(Trim$(Map.Events(i).Name))
+                x = x + 1
+                ListOfEvents(x) = i
+            End If
+        Next
+        fraDialogue.Visible = True
+        fraCommand35.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Spawn Npc
+    Private Sub btnCommands25_Click(sender As Object, e As EventArgs) Handles btnCommands25.Click
+        cmbSpawnNPC.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand19.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Hold Player
+    Private Sub btnCommands26_Click(sender As Object, e As EventArgs) Handles btnCommands26.Click
+        AddCommand(EventType.evHoldPlayer)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Release Player
+    Private Sub btnCommands27_Click(sender As Object, e As EventArgs) Handles btnCommands27.Click
+        AddCommand(EventType.evReleasePlayer)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Animation
+
+    'Play Animation
+    Private Sub btnCommands28_Click(sender As Object, e As EventArgs) Handles btnCommands28.Click
+        cmbPlayAnimEvent.Items.Clear()
+
+        For i = 1 To Map.EventCount
+            cmbPlayAnimEvent.Items.Add(i & ". " & Trim$(Map.Events(i).Name))
+        Next
+        cmbPlayAnimEvent.SelectedIndex = 0
+        optPlayAnimPlayer.Checked = True
+        cmbPlayAnim.SelectedIndex = 0
+        lblPlayAnimX.Text = "Map Tile X: 0"
+        lblPlayAnimY.Text = "Map Tile Y: 0"
+        scrlPlayAnimTileX.Value = 0
+        scrlPlayAnimTileY.Value = 0
+        scrlPlayAnimTileX.Maximum = Map.MaxX
+        scrlPlayAnimTileY.Maximum = Map.MaxY
+        fraDialogue.Visible = True
+        fraCommand20.Visible = True
+        fraCommands.Visible = False
+        lblPlayAnimX.Visible = False
+        lblPlayAnimY.Visible = False
+        scrlPlayAnimTileX.Visible = False
+        scrlPlayAnimTileY.Visible = False
+        cmbPlayAnimEvent.Visible = False
+    End Sub
+
+    'Quests
+
+    'Begin Quest
+    Private Sub btnCommands29_Click(sender As Object, e As EventArgs) Handles btnCommands29.Click
+        cmbBeginQuest.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand30.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Complete Give/Talk Task
+    Private Sub btnCommands30_Click(sender As Object, e As EventArgs) Handles btnCommands30.Click
+        scrlCompleteQuestTaskQuest.Value = 1
+        scrlCompleteQuestTask.Value = 1
+        fraDialogue.Visible = True
+        fraCommand32.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'End Quest
+    Private Sub btnCommands31_Click(sender As Object, e As EventArgs) Handles btnCommands31.Click
+        cmbEndQuest.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand31.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Map Functions
+
+    'Set Fog
+    Private Sub btnCommands32_Click(sender As Object, e As EventArgs) Handles btnCommands32.Click
+        ScrlFogData0.Value = 0
+        ScrlFogData1.Value = 0
+        ScrlFogData2.Value = 0
+        fraDialogue.Visible = True
+        fraCommand22.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Set Weather
+    Private Sub btnCommands33_Click(sender As Object, e As EventArgs) Handles btnCommands33.Click
+        CmbWeather.SelectedIndex = 0
+        scrlWeatherIntensity.Value = 0
+        fraDialogue.Visible = True
+        fraCommand23.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Set Map Tinting
+    Private Sub btnCommands34_Click(sender As Object, e As EventArgs) Handles btnCommands34.Click
+        scrlMapTintData0.Value = 0
+        scrlMapTintData1.Value = 0
+        scrlMapTintData2.Value = 0
+        scrlMapTintData3.Value = 0
+        fraDialogue.Visible = True
+        fraCommand24.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Music and Sound
+
+    'PlayBGM
+    Private Sub btnCommands35_Click(sender As Object, e As EventArgs) Handles btnCommands35.Click
+        cmbPlayBGM.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand25.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Fadeout BGM
+    Private Sub btnCommands36_Click(sender As Object, e As EventArgs) Handles btnCommands36.Click
+        AddCommand(EventType.evFadeoutBGM)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Play Sound
+    Private Sub btnCommands37_Click(sender As Object, e As EventArgs) Handles btnCommands37.Click
+        cmbPlaySound.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand26.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Stop Sounds
+    Private Sub btnCommands38_Click(sender As Object, e As EventArgs) Handles btnCommands38.Click
+        AddCommand(EventType.evStopSound)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Etc...
+
+    'Wait
+    Private Sub btnCommands39_Click(sender As Object, e As EventArgs) Handles btnCommands39.Click
+        scrlWaitAmount.Value = 1
+        fraDialogue.Visible = True
+        fraCommand27.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Set Access
+    Private Sub btnCommands40_Click(sender As Object, e As EventArgs) Handles btnCommands40.Click
+        cmbSetAccess.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand28.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Custom Script
+    Private Sub btnCommands41_Click(sender As Object, e As EventArgs) Handles btnCommands41.Click
+        scrlCustomScript.Value = 1
+        fraDialogue.Visible = True
+        fraCommand29.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'cutscene options
+
+    'Fade in
+    Private Sub btnCommands42_Click(sender As Object, e As EventArgs) Handles btnCommands42.Click
+        AddCommand(EventType.evFadeIn)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Fade out
+    Private Sub btnCommands43_Click(sender As Object, e As EventArgs) Handles btnCommands43.Click
+        AddCommand(EventType.evFadeOut)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Flash white
+    Private Sub btnCommands44_Click(sender As Object, e As EventArgs) Handles btnCommands44.Click
+        AddCommand(EventType.evFlashWhite)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Show pic
+    Private Sub btnCommands45_Click(sender As Object, e As EventArgs) Handles btnCommands45.Click
+        cmbPicIndex.SelectedIndex = 0
+        scrlShowPicture.Value = 1
+        optPic1.Checked = 1
+        txtPicOffset1.Text = 0
+        txtPicOffset2.Text = 0
+        fraDialogue.Visible = True
+        fraCommand33.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Hide pic
+    Private Sub btnCommands46_Click(sender As Object, e As EventArgs) Handles btnCommands46.Click
+        cmbHidePic.SelectedIndex = 0
+        fraDialogue.Visible = True
+        fraCommand34.Visible = True
+        fraCommands.Visible = False
+    End Sub
+
+    'Shop, bank etc
+
+    'Open bank
+    Private Sub btnCommands47_Click(sender As Object, e As EventArgs) Handles btnCommands47.Click
+        AddCommand(EventType.evOpenBank)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    'Open shop
+    Private Sub btnCommands48_Click(sender As Object, e As EventArgs) Handles btnCommands48.Click
+        fraDialogue.Visible = True
+        fraCommand21.Visible = True
+        cmbOpenShop.SelectedIndex = 0
+        fraCommands.Visible = False
+    End Sub
+
+    'Open Mail
+    Private Sub btnCommands49_Click(sender As Object, e As EventArgs) Handles btnCommands49.Click
+        AddCommand(EventType.evOpenMail)
+        fraCommands.Visible = False
+        fraDialogue.Visible = False
+    End Sub
+
+    Private Sub btnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
+        fraCommands.Visible = False
     End Sub
 
 #End Region
@@ -598,7 +1078,12 @@ Public Class frmEditor_Events
                 Exit Sub
             End If
         End If
-        tmpEvent.Globals = chkGlobal.Checked
+        If chkGlobal.Checked = True Then
+            tmpEvent.Globals = 1
+        Else
+            tmpEvent.Globals = 0
+        End If
+
         tmpEvent.PageCount = 1
         curPageNum = 1
         Me.tabPages.TabPages.Clear()
@@ -667,503 +1152,7 @@ Public Class frmEditor_Events
     End Sub
 #End Region
 
-#Region "ButtonCommands"
 
-    'chatbox text
-    Private Sub btnCommands2_Click(sender As Object, e As EventArgs) Handles btnCommands2.Click
-        txtAddText_Text.Text = vbNullString
-        scrlAddText_Colour.Value = 0
-        optAddText_Player.Checked = True
-        fraDialogue.Visible = True
-        fraCommand2.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'chat bubble
-    Private Sub btnCommands3_Click(sender As Object, e As EventArgs) Handles btnCommands3.Click
-        txtChatbubbleText.Text = ""
-        optChatBubbleTarget0.Checked = True
-        cmbChatBubbleTarget.Visible = False
-        fraDialogue.Visible = True
-        fraCommand3.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'event progression
-
-    'player variable
-    Private Sub btnCommands4_Click(sender As Object, e As EventArgs) Handles btnCommands4.Click
-        txtVariableData0.Text = 0
-        txtVariableData1.Text = 0
-        txtVariableData2.Text = 0
-        txtVariableData3.Text = 0
-        txtVariableData4.Text = 0
-
-        cmbVariable.SelectedIndex = 0
-        optVariableAction0.Checked = True
-        fraDialogue.Visible = True
-        fraCommand4.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'player switch
-    Private Sub btnCommands5_Click(sender As Object, e As EventArgs) Handles btnCommands5.Click
-        cmbPlayerSwitchSet.SelectedIndex = 0
-        cmbSwitch.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand5.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'self switch
-    Private Sub btnCommands6_Click(sender As Object, e As EventArgs) Handles btnCommands6.Click
-        cmbSetSelfSwitchTo.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand6.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'flow control
-
-    'conditional branch
-    Private Sub btnCommands7_Click(sender As Object, e As EventArgs) Handles btnCommands7.Click
-        fraDialogue.Visible = True
-        fraCommand7.Visible = True
-        optCondition_Index0.Checked = True
-        ClearConditionFrame()
-        cmbCondition_PlayerVarIndex.Enabled = True
-        cmbCondition_PlayerVarCompare.Enabled = True
-        txtCondition_PlayerVarCondition.Enabled = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Exit Event Process
-    Private Sub btnCommands8_Click(sender As Object, e As EventArgs) Handles btnCommands8.Click
-        AddCommand(EventType.evExitProcess)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Label
-    Private Sub btnCommands9_Click(sender As Object, e As EventArgs) Handles btnCommands9.Click
-        txtLabelName.Text = ""
-        fraCommand8.Visible = True
-        fraCommands.Visible = False
-        fraDialogue.Visible = True
-    End Sub
-
-    'GoTo Label
-    Private Sub btnCommands10_Click(sender As Object, e As EventArgs) Handles btnCommands10.Click
-        txtGotoLabel.Text = ""
-        fraCommand9.Visible = True
-        fraCommands.Visible = False
-        fraDialogue.Visible = True
-    End Sub
-
-    'Player Control
-
-    'Change Items
-    Private Sub btnCommands11_Click(sender As Object, e As EventArgs) Handles btnCommands11.Click
-        cmbChangeItemIndex.SelectedIndex = 0
-        optChangeItemSet.Checked = True
-        txtChangeItemsAmount.Text = "0"
-        fraDialogue.Visible = True
-        fraCommand10.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Restore Hp
-    Private Sub btnCommands12_Click(sender As Object, e As EventArgs) Handles btnCommands12.Click
-        AddCommand(EventType.evRestoreHP)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Restore Mp
-    Private Sub btnCommands13_Click(sender As Object, e As EventArgs) Handles btnCommands13.Click
-        AddCommand(EventType.evRestoreMP)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Level Up
-    Private Sub btnCommands14_Click(sender As Object, e As EventArgs) Handles btnCommands14.Click
-        AddCommand(EventType.evLevelUp)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Change Level
-    Private Sub btnCommands15_Click(sender As Object, e As EventArgs) Handles btnCommands15.Click
-        scrlChangeLevel.Value = 1
-        lblChangeLevel.Text = "Level: 1"
-        fraDialogue.Visible = True
-        fraCommand11.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Change Skills
-    Private Sub btnCommands16_Click(sender As Object, e As EventArgs) Handles btnCommands16.Click
-        cmbChangeSkills.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand12.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Change Class
-    Private Sub btnCommands17_Click(sender As Object, e As EventArgs) Handles btnCommands17.Click
-        If Max_Classes > 0 Then
-            If cmbChangeClass.Items.Count = 0 Then
-                cmbChangeClass.Items.Clear()
-
-                For i = 1 To Max_Classes
-                    cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
-                Next
-                cmbChangeClass.SelectedIndex = 0
-            End If
-        End If
-        fraDialogue.Visible = True
-        fraCommand13.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Change Sprite
-    Private Sub btnCommands18_Click(sender As Object, e As EventArgs) Handles btnCommands18.Click
-        scrlChangeSprite.Value = 1
-        lblChangeSprite.Text = "Sprite: 1"
-        fraDialogue.Visible = True
-        fraCommand14.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Change Gender
-    Private Sub btnCommands19_Click(sender As Object, e As EventArgs) Handles btnCommands19.Click
-        optChangeSexMale.Checked = True
-        fraDialogue.Visible = True
-        fraCommand15.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Change PK
-    Private Sub btnCommands20_Click(sender As Object, e As EventArgs) Handles btnCommands20.Click
-        optChangePKYes.Checked = True
-        fraDialogue.Visible = True
-        fraCommand16.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Give Exp
-    Private Sub btnCommands21_Click(sender As Object, e As EventArgs) Handles btnCommands21.Click
-        scrlGiveExp.Value = 0
-        lblGiveExp.Text = "Give Exp: 0"
-        fraDialogue.Visible = True
-        fraCommand17.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Movement
-
-    'Warp Player
-    Private Sub btnCommands22_Click(sender As Object, e As EventArgs) Handles btnCommands22.Click
-        scrlWPMap.Value = 0
-        scrlWPX.Value = 0
-        scrlWPY.Value = 0
-        cmbWarpPlayerDir.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand18.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Set Move Route
-    Private Sub btnCommands23_Click(sender As Object, e As EventArgs) Handles btnCommands23.Click
-        Dim x As Long
-
-        fraMoveRoute.Visible = True
-        lstMoveRoute.Items.Clear()
-        cmbEvent.Items.Clear()
-        ReDim ListOfEvents(0 To Map.EventCount)
-        ListOfEvents(0) = EditorEvent
-        cmbEvent.Items.Add("This Event")
-        cmbEvent.SelectedIndex = 0
-        cmbEvent.Enabled = True
-        For i = 1 To Map.EventCount
-            If i <> EditorEvent Then
-                cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
-                x = x + 1
-                ListOfEvents(x) = i
-            End If
-        Next
-        IsMoveRouteCommand = True
-        chkIgnoreMove.Checked = 0
-        chkRepeatRoute.Checked = 0
-        TempMoveRouteCount = 0
-        ReDim TempMoveRoute(0)
-        fraMoveRoute.Width = 841
-        fraMoveRoute.Height = 585
-        fraMoveRoute.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Wait for Route Completion
-    Private Sub btnCommands24_Click(sender As Object, e As EventArgs) Handles btnCommands24.Click
-        Dim x As Long
-
-        cmbMoveWait.Items.Clear()
-        ReDim ListOfEvents(0 To Map.EventCount)
-        ListOfEvents(0) = EditorEvent
-        cmbMoveWait.Items.Add("This Event")
-        cmbMoveWait.SelectedIndex = 0
-        cmbMoveWait.Enabled = True
-        For i = 1 To Map.EventCount
-            If i <> EditorEvent Then
-                cmbMoveWait.Items.Add(Trim$(Map.Events(i).Name))
-                x = x + 1
-                ListOfEvents(x) = i
-            End If
-        Next
-        fraDialogue.Visible = True
-        fraCommand35.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Spawn Npc
-    Private Sub btnCommands25_Click(sender As Object, e As EventArgs) Handles btnCommands25.Click
-        cmbSpawnNPC.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand19.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Hold Player
-    Private Sub btnCommands26_Click(sender As Object, e As EventArgs) Handles btnCommands26.Click
-        AddCommand(EventType.evHoldPlayer)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Release Player
-    Private Sub btnCommands27_Click(sender As Object, e As EventArgs) Handles btnCommands27.Click
-        AddCommand(EventType.evReleasePlayer)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Animation
-
-    'Play Animation
-    Private Sub btnCommands28_Click(sender As Object, e As EventArgs) Handles btnCommands28.Click
-        cmbPlayAnimEvent.Items.Clear()
-
-        For i = 1 To Map.EventCount
-            cmbPlayAnimEvent.Items.Add(i & ". " & Trim$(Map.Events(i).Name))
-        Next
-        cmbPlayAnimEvent.SelectedIndex = 0
-        optPlayAnimPlayer.Checked = True
-        cmbPlayAnim.SelectedIndex = 0
-        lblPlayAnimX.Text = "Map Tile X: 0"
-        lblPlayAnimY.Text = "Map Tile Y: 0"
-        scrlPlayAnimTileX.Value = 0
-        scrlPlayAnimTileY.Value = 0
-        scrlPlayAnimTileX.Maximum = Map.MaxX
-        scrlPlayAnimTileY.Maximum = Map.MaxY
-        fraDialogue.Visible = True
-        fraCommand20.Visible = True
-        fraCommands.Visible = False
-        lblPlayAnimX.Visible = False
-        lblPlayAnimY.Visible = False
-        scrlPlayAnimTileX.Visible = False
-        scrlPlayAnimTileY.Visible = False
-        cmbPlayAnimEvent.Visible = False
-    End Sub
-
-    'Quests
-
-    'Begin Quest
-    Private Sub btnCommands29_Click(sender As Object, e As EventArgs) Handles btnCommands29.Click
-        cmbBeginQuest.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand30.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Complete Give/Talk Task
-    Private Sub btnCommands30_Click(sender As Object, e As EventArgs) Handles btnCommands30.Click
-        scrlCompleteQuestTaskQuest.Value = 1
-        scrlCompleteQuestTask.Value = 1
-        fraDialogue.Visible = True
-        fraCommand32.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'End Quest
-    Private Sub btnCommands31_Click(sender As Object, e As EventArgs) Handles btnCommands31.Click
-        cmbEndQuest.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand31.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Map Functions
-
-    'Set Fog
-    Private Sub btnCommands32_Click(sender As Object, e As EventArgs) Handles btnCommands32.Click
-        ScrlFogData0.Value = 0
-        ScrlFogData1.Value = 0
-        ScrlFogData2.Value = 0
-        fraDialogue.Visible = True
-        fraCommand22.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Set Weather
-    Private Sub btnCommands33_Click(sender As Object, e As EventArgs) Handles btnCommands33.Click
-        CmbWeather.SelectedIndex = 0
-        scrlWeatherIntensity.Value = 0
-        fraDialogue.Visible = True
-        fraCommand23.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Set Map Tinting
-    Private Sub btnCommands34_Click(sender As Object, e As EventArgs) Handles btnCommands34.Click
-        scrlMapTintData0.Value = 0
-        scrlMapTintData1.Value = 0
-        scrlMapTintData2.Value = 0
-        scrlMapTintData3.Value = 0
-        fraDialogue.Visible = True
-        fraCommand24.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Music and Sound
-
-    'PlayBGM
-    Private Sub btnCommands35_Click(sender As Object, e As EventArgs) Handles btnCommands35.Click
-        cmbPlayBGM.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand25.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Fadeout BGM
-    Private Sub btnCommands36_Click(sender As Object, e As EventArgs) Handles btnCommands36.Click
-        AddCommand(EventType.evFadeoutBGM)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Play Sound
-    Private Sub btnCommands37_Click(sender As Object, e As EventArgs) Handles btnCommands37.Click
-        cmbPlaySound.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand26.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Stop Sounds
-    Private Sub btnCommands38_Click(sender As Object, e As EventArgs) Handles btnCommands38.Click
-        AddCommand(EventType.evStopSound)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Etc...
-
-    'Wait
-    Private Sub btnCommands39_Click(sender As Object, e As EventArgs) Handles btnCommands39.Click
-        scrlWaitAmount.Value = 1
-        fraDialogue.Visible = True
-        fraCommand27.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Set Access
-    Private Sub btnCommands40_Click(sender As Object, e As EventArgs) Handles btnCommands40.Click
-        cmbSetAccess.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand28.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Custom Script
-    Private Sub btnCommands41_Click(sender As Object, e As EventArgs) Handles btnCommands41.Click
-        scrlCustomScript.Value = 1
-        fraDialogue.Visible = True
-        fraCommand29.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'cutscene options
-
-    'Fade in
-    Private Sub btnCommands42_Click(sender As Object, e As EventArgs) Handles btnCommands42.Click
-        AddCommand(EventType.evFadeIn)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Fade out
-    Private Sub btnCommands43_Click(sender As Object, e As EventArgs) Handles btnCommands43.Click
-        AddCommand(EventType.evFadeOut)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Flash white
-    Private Sub btnCommands44_Click(sender As Object, e As EventArgs) Handles btnCommands44.Click
-        AddCommand(EventType.evFlashWhite)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Show pic
-    Private Sub btnCommands45_Click(sender As Object, e As EventArgs) Handles btnCommands45.Click
-        cmbPicIndex.SelectedIndex = 0
-        scrlShowPicture.Value = 1
-        optPic1.Checked = 1
-        txtPicOffset1.Text = 0
-        txtPicOffset2.Text = 0
-        fraDialogue.Visible = True
-        fraCommand33.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Hide pic
-    Private Sub btnCommands46_Click(sender As Object, e As EventArgs) Handles btnCommands46.Click
-        cmbHidePic.SelectedIndex = 0
-        fraDialogue.Visible = True
-        fraCommand34.Visible = True
-        fraCommands.Visible = False
-    End Sub
-
-    'Shop, bank etc
-
-    'Open bank
-    Private Sub btnCommands47_Click(sender As Object, e As EventArgs) Handles btnCommands47.Click
-        AddCommand(EventType.evOpenBank)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    'Open shop
-    Private Sub btnCommands48_Click(sender As Object, e As EventArgs) Handles btnCommands48.Click
-        fraDialogue.Visible = True
-        fraCommand21.Visible = True
-        cmbOpenShop.SelectedIndex = 0
-        fraCommands.Visible = False
-    End Sub
-
-    Private Sub btnCommands49_Click(sender As Object, e As EventArgs) Handles btnCommands49.Click
-        AddCommand(EventType.evOpenMail)
-        fraCommands.Visible = False
-        fraDialogue.Visible = False
-    End Sub
-
-    Private Sub btnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
-        fraCommands.Visible = False
-    End Sub
-
-#End Region
 
 #Region "Variables/Switches"
     'Renaming Variables/Switches
@@ -1717,6 +1706,118 @@ Public Class frmEditor_Events
         fraGraphic.Height = 585
         fraGraphic.Visible = True
         GraphicSelType = 1
+    End Sub
+
+    Private Sub cmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
+        If cmbGraphic.SelectedIndex = -1 Then Exit Sub
+        tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
+        ' set the max on the scrollbar
+        Select Case cmbGraphic.SelectedIndex
+            Case 0 ' None
+                scrlGraphic.Value = 1
+                scrlGraphic.Enabled = False
+            Case 1 ' character
+                scrlGraphic.Maximum = NumCharacters
+                scrlGraphic.Enabled = True
+            Case 2 ' Tileset
+                scrlGraphic.Maximum = NumTileSets
+                scrlGraphic.Enabled = True
+        End Select
+        If scrlGraphic.Value = 0 Then
+            lblGraphic.Text = "Number: None"
+        Else
+            lblGraphic.Text = "Number: " & scrlGraphic.Value
+        End If
+        If tmpEvent.Pages(curPageNum).GraphicType = 1 Then
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
+
+        ElseIf tmpEvent.Pages(curPageNum).GraphicType = 2 Then
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumTileSets Then Exit Sub
+
+        End If
+        EditorEvent_DrawGraphic()
+    End Sub
+
+    Private Sub scrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
+        If scrlGraphic.Value = 0 Then
+            lblGraphic.Text = "Number: None"
+        Else
+            lblGraphic.Text = "Number: " & scrlGraphic.Value
+        End If
+        cmbGraphic_SelectedIndexChanged(sender, e)
+    End Sub
+
+    Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
+        Dim X As Long
+        Dim Y As Long
+
+        X = e.Location.X
+        y = e.Location.Y
+
+        If Me.cmbGraphic.SelectedIndex = 2 Then
+            'Tileset... hard one....
+            If ShiftDown Then
+                If GraphicSelX > -1 And GraphicSelY > -1 Then
+                    'If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
+                    '    GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
+                    '    GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
+                    'End If
+                End If
+            Else
+                'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value) \ 32
+                'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value) \ 32
+                GraphicSelX2 = 0
+                GraphicSelY2 = 0
+            End If
+        ElseIf Me.cmbGraphic.SelectedIndex = 1 Then
+            'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value)
+            'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value)
+            GraphicSelX2 = 0
+            GraphicSelY2 = 0
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
+            For i = 0 To 3
+                If GraphicSelX >= ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * i) And GraphicSelX < ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * (i + 1)) Then
+                    GraphicSelX = i
+                End If
+            Next
+            For i = 0 To 3
+                If GraphicSelY >= ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * i) And GraphicSelY < ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * (i + 1)) Then
+                    GraphicSelY = i
+                End If
+            Next
+        End If
+        EditorEvent_DrawGraphic()
+    End Sub
+
+    Private Sub picGraphicSel_Click(sender As Object, e As EventArgs) Handles picGraphicSel.Click
+
+    End Sub
+
+    Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
+        If GraphicSelType = 0 Then
+            tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
+            tmpEvent.Pages(curPageNum).Graphic = scrlGraphic.Value
+            tmpEvent.Pages(curPageNum).GraphicX = GraphicSelX
+            tmpEvent.Pages(curPageNum).GraphicY = GraphicSelY
+            tmpEvent.Pages(curPageNum).GraphicX2 = GraphicSelX2
+            tmpEvent.Pages(curPageNum).GraphicY2 = GraphicSelY2
+        Else
+            AddMoveRouteCommand(42)
+            GraphicSelType = 0
+        End If
+        fraGraphic.Visible = False
+    End Sub
+
+    Private Sub btnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
+        fraGraphic.Visible = False
+    End Sub
+
+    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        EventEditorOK()
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Dispose()
     End Sub
 
 #End Region

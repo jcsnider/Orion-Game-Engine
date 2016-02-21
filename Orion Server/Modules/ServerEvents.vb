@@ -165,7 +165,7 @@ Public Module ServerEvents
 
     Structure EventRec
         Dim Name As String
-        Dim Globall As Byte
+        Dim Globals As Byte
         Dim PageCount As Long
         Dim Pages() As EventPageRec
         Dim X As Long
@@ -1919,7 +1919,7 @@ Public Module ServerEvents
             For i = 1 To Map(MapNum).EventCount
                 With Map(MapNum).Events(i)
                     Buffer.WriteString(Trim(.Name))
-                    Buffer.WriteLong(.Globall)
+                    Buffer.WriteLong(.Globals)
                     Buffer.WriteLong(.X)
                     Buffer.WriteLong(.Y)
                     Buffer.WriteLong(.PageCount)
