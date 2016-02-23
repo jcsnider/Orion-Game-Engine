@@ -94,6 +94,7 @@ Module ClientGraphics
     Public NumResources As Long
     Public NumAnimations As Long
     Public NumSpellIcons As Long
+    Public NumFaces As Long
 
     Public TempBitmap As Bitmap
     Public TempBitmap1 As Bitmap
@@ -1139,6 +1140,14 @@ Module ClientGraphics
             End If
         End If
 
+        If Map.CurrentEvents > 0 Then
+            For I = 1 To Map.CurrentEvents
+                If Map.MapEvents(I).Position = 0 Then
+                    DrawEvent(I)
+                End If
+            Next
+        End If
+
         For I = 1 To MAX_BYTE
             DrawBlood(I)
         Next
@@ -1197,6 +1206,16 @@ Module ClientGraphics
                     End If
                 Next
 
+                If Map.CurrentEvents > 0 Then
+                    For I = 1 To Map.CurrentEvents
+                        If Map.MapEvents(I).Position = 1 Then
+                            If Y = Map.MapEvents(I).Y Then
+                                DrawEvent(I)
+                            End If
+                        End If
+                    Next
+                End If
+
                 ' Draw the target icon
                 If myTarget > 0 Then
                     If myTargetType = TARGET_TYPE_PLAYER Then
@@ -1245,6 +1264,14 @@ Module ClientGraphics
             Next
         End If
 
+        If Map.CurrentEvents > 0 Then
+            For I = 1 To Map.CurrentEvents
+                If Map.MapEvents(I).Position = 2 Then
+                    DrawEvent(I)
+                End If
+            Next
+        End If
+
         ' blit out upper tiles
         If NumTileSets > 0 Then
             For X = TileView.left To TileView.right + 1
@@ -1268,6 +1295,8 @@ Module ClientGraphics
                 End If
             End If
         End If
+
+
 
         ' Draw out a square at mouse cursor
         If InMapEditor Then
@@ -1307,6 +1336,15 @@ Module ClientGraphics
         For I = 1 To MAX_PLAYERS
             If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(MyIndex) Then
                 DrawPlayerName(I)
+            End If
+        Next
+
+        'draw event names
+        For I = 1 To Map.CurrentEvents
+            If Map.MapEvents(I).Visible = 1 Then
+                If Map.MapEvents(I).ShowName = 1 Then
+                    DrawEventName(I)
+                End If
             End If
         Next
 
@@ -1559,17 +1597,26 @@ Module ClientGraphics
         ' exit out if doesn't exist
         If tileset < 0 Or tileset > NumTileSets Then Exit Sub
 
+        If tileset <> LastTileset Then
+            If Not TileSetImgsGFX(LastTileset) Is Nothing Then TileSetImgsGFX(LastTileset).Dispose()
+            TileSetImgsGFX(LastTileset) = Nothing
+            TileSetImgsLoaded(LastTileset) = False
+        End If
+
         'check if its loaded
         If TileSetImgsLoaded(tileset) = False Then
             TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
+            TileSetImgsLoaded(tileset) = True
         End If
 
         'Draw the tileset into memory.)
         height = TileSetImgsGFX(tileset).Height
         width = TileSetImgsGFX(tileset).Width
         MapEditorBackBuffer = New Bitmap(width, height)
+
         Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
         g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
+
         frmEditor_Map.picBackSelect.Height = height
         frmEditor_Map.picBackSelect.Width = width
 
@@ -1601,6 +1648,8 @@ Module ClientGraphics
         g = frmEditor_Map.picBackSelect.CreateGraphics
         g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
         g.Dispose()
+
+        LastTileset = tileset
     End Sub
 
     Sub DestroyGraphics()
@@ -1659,7 +1708,6 @@ Module ClientGraphics
         If Not EmptyHPBar Is Nothing Then EmptyHPBar.Dispose()
         If Not EmptyManaBar Is Nothing Then EmptyManaBar.Dispose()
         If Not EmptyEXPBar Is Nothing Then EmptyEXPBar.Dispose()
-
 
     End Sub
 

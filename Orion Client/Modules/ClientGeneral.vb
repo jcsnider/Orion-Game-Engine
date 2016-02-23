@@ -47,14 +47,6 @@ Module ClientGeneral
                     ReDim Autotile(X, Y).Layer(i).srcY(0 To 4)
                     ReDim Autotile(X, Y).Layer(i).QuarterTile(0 To 4)
                 Next
-
-                'ReDim Autotile(X, Y).ExLayer(0 To ExMapLayer.Layer_Count - 1)
-                'For i = 0 To ExMapLayer.Layer_Count - 1
-                '    ReDim Autotile(X, Y).ExLayer(i).srcX(0 To 4)
-                '    ReDim Autotile(X, Y).ExLayer(i).srcY(0 To 4)
-                '    ReDim Autotile(X, Y).ExLayer(i).QuarterTile(0 To 4)
-                'Next
-
             Next
         Next
 
@@ -142,14 +134,14 @@ Module ClientGeneral
         'ReDim Bank.Item(0 To MAX_BANK)
         ClearItems()
 
-        Call SetStatus("Loading...")
+        SetStatus("Loading...")
         GettingMap = True
         vbQuote = Chr(34) ' "
 
         ' Update the form with the game's name before it's loaded
         frmMainGame.Text = GAME_NAME
 
-        Call SetStatus("Loading Options...")
+        SetStatus("Loading Options...")
 
         ' load options
         LoadOptions()
@@ -157,23 +149,24 @@ Module ClientGeneral
         ' randomize rnd's seed
         Randomize()
 
-        Call SetStatus("Initializing Network...")
+        SetStatus("Initializing Network...")
 
         frmMenu.Text = GAME_NAME
 
         ' DX7 Master Object is already created, early binding
-        Call SetStatus("Initializing Graphics...")
-        Call CheckTilesets()
-        Call CheckCharacters()
-        Call CheckPaperdolls()
-        Call CheckAnimations()
-        Call CheckItems()
-        Call CheckResources()
-        Call CheckSpellIcons()
-        Call CacheMusic()
-        Call CacheSound()
+        SetStatus("Initializing Graphics...")
+        CheckTilesets()
+        CheckCharacters()
+        CheckPaperdolls()
+        CheckAnimations()
+        CheckItems()
+        CheckResources()
+        CheckSpellIcons()
+        CheckFaces()
+        CacheMusic()
+        CacheSound()
 
-        Call CheckFurniture()
+        CheckFurniture()
 
         InitGraphics()
         InitMessages()

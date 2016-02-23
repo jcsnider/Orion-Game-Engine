@@ -409,20 +409,7 @@ Module ClientGameEditors
 
         If Button = MouseButtons.Right Then
             If frmEditor_Map.optLayers.Checked = True Then
-                'If CurLayer > MapLayer.Layer_Count - 1 Then
-                '    With Map.exTile(CurX, CurY)
-                '        ' clear layer
-                '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).X = 0
-                '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).Y = 0
-                '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).tileset = 0
-                '        If .Autotile(CurLayer - (MapLayer.Layer_Count - 1)) > 0 Then
-                '            .Autotile(CurLayer - (MapLayer.Layer_Count - 1)) = 0
-                '            ' do a re-init so we can see our changes
-                '            initAutotiles()
-                '        End If
-                '        CacheRenderState(X, Y, CurLayer)
-                '    End With
-                'Else
+
                 With Map.Tile(CurX, CurY)
                     ' clear layer
                     .Layer(CurLayer).X = 0
@@ -435,19 +422,19 @@ Module ClientGameEditors
                     End If
                     CacheRenderState(X, Y, CurLayer)
                 End With
+
+            ElseIf frmEditor_Map.optAttributes.Checked = True Then
+                With Map.Tile(CurX, CurY)
+                    ' clear attribute
+                    .Type = 0
+                    .Data1 = 0
+                    .Data2 = 0
+                    .Data3 = 0
+                End With
+            ElseIf frmEditor_Map.optEvent.Checked Then
+                DeleteEvent(CurX, CurY)
             End If
-        ElseIf frmEditor_Map.optAttributes.Checked = True Then
-            With Map.Tile(CurX, CurY)
-                ' clear attribute
-                .Type = 0
-                .Data1 = 0
-                .Data2 = 0
-                .Data3 = 0
-            End With
-        ElseIf frmEditor_Map.optEvent.Checked Then
-            DeleteEvent(CurX, CurY)
         End If
-        ' End If
 
     End Sub
 
@@ -464,8 +451,9 @@ Module ClientGameEditors
         'clear memory
         For i = 0 To NumTileSets
             If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
+            TileSetImgsGFX(i) = Nothing
             TileSetImgsLoaded(i) = False
-        Next i
+        Next
     End Sub
 
     Public Sub MapEditorSend()
@@ -477,24 +465,15 @@ Module ClientGameEditors
         'clear memory
         For i = 0 To NumTileSets
             If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-        Next i
+            TileSetImgsGFX(i) = Nothing
+            TileSetImgsLoaded(i) = False
+        Next
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Long, ByVal Y As Long, ByVal CurLayer As Long, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)
         Dim x2 As Long, y2 As Long
 
         If theAutotile > 0 Then
-            'If CurLayer > MapLayer.Layer_Count - 1 Then
-            '    With Map.exTile(X, Y)
-            '        ' set layer
-            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).X = EditorTileX
-            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).Y = EditorTileY
-            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).tileset = frmEditor_Map.scrlTileSet.Value
-            '        .Autotile(CurLayer - (ExMapLayer.Layer_Count - 1)) = theAutotile
-            '        CacheRenderState(X, Y, CurLayer)
-            '    End With
-
-            'Else
             With Map.Tile(X, Y)
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
@@ -503,23 +482,12 @@ Module ClientGameEditors
                 .Autotile(CurLayer) = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
-            'End If
             ' do a re-init so we can see our changes
             initAutotiles()
-        Exit Sub
+            Exit Sub
         End If
 
         If Not multitile Then ' single
-            'If CurLayer > (MapLayer.Layer_Count - 1) Then
-            '    With Map.exTile(X, Y)
-            '        ' set layer
-            '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).X = EditorTileX
-            '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).Y = EditorTileY
-            '        .Layer(CurLayer - (MapLayer.Layer_Count - 1)).tileset = frmEditor_Map.scrlTileSet.Value
-            '        .Autotile(CurLayer - (MapLayer.Layer_Count - 1)) = 0
-            '        CacheRenderState(X, Y, CurLayer)
-            '    End With
-            'Else
             With Map.Tile(X, Y)
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
@@ -528,7 +496,6 @@ Module ClientGameEditors
                 .Autotile(CurLayer) = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
-            ' End If
         Else ' multitile
             y2 = 0 ' starting tile for y axis
             For Y = CurY To CurY + EditorTileHeight - 1
@@ -536,16 +503,6 @@ Module ClientGameEditors
                 For X = CurX To CurX + EditorTileWidth - 1
                     If X >= 0 And X <= Map.MaxX Then
                         If Y >= 0 And Y <= Map.MaxY Then
-                            'If CurLayer > (MapLayer.Layer_Count - 1) Then
-                            '    With Map.exTile(X, Y)
-                            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).X = EditorTileX + x2
-                            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).Y = EditorTileY + y2
-                            '        .Layer(CurLayer - (ExMapLayer.Layer_Count - 1)).tileset = frmEditor_Map.scrlTileSet.Value
-                            '        .Autotile(CurLayer - (ExMapLayer.Layer_Count - 1)) = 0
-                            '        CacheRenderState(X, Y, CurLayer)
-                            '    End With
-
-                            'Else
                             With Map.Tile(X, Y)
                                 .Layer(CurLayer).X = EditorTileX + x2
                                 .Layer(CurLayer).Y = EditorTileY + y2
@@ -553,7 +510,6 @@ Module ClientGameEditors
                                 .Autotile(CurLayer) = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
-                            ' End If
                         End If
                     End If
                     x2 = x2 + 1

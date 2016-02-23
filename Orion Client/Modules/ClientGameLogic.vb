@@ -29,7 +29,8 @@ Module ClientGameLogic
 
             If GameStarted() = True Then
                 Tick = GetTickCount()
-                ElapsedTime = Tick - FrameTime                 ' Set the time difference for time-based movement
+                ElapsedTime = Tick - FrameTime ' Set the time difference for time-based movement
+
                 FrameTime = Tick
                 frmmaingamevisible = True
 
@@ -135,6 +136,12 @@ Module ClientGameLogic
                             End If
                         Next i
 
+                        If Map.CurrentEvents > 0 Then
+                            For i = 1 To Map.CurrentEvents
+                                Call ProcessEventMovement(i)
+                            Next i
+                        End If
+
                         WalkTimer = Tick + 30 ' edit this value to change WalkTimer
                     End If
 
@@ -169,7 +176,8 @@ Module ClientGameLogic
     End Sub
 
     Public Sub CheckAttack()
-        Dim attackspeed As Long
+        Dim attackspeed As Long, X As Long, Y As Long
+        Dim Buffer As ByteBuffer
 
         If VbKeyControl Then
 
@@ -193,6 +201,36 @@ Module ClientGameLogic
 
                     SendAttack()
                 End If
+            End If
+
+            Select Case Player(MyIndex).Dir
+                Case DIR_UP
+                    X = GetPlayerX(MyIndex)
+                    Y = GetPlayerY(MyIndex) - 1
+                Case DIR_DOWN
+                    X = GetPlayerX(MyIndex)
+                    Y = GetPlayerY(MyIndex) + 1
+                Case DIR_LEFT
+                    X = GetPlayerX(MyIndex) - 1
+                    Y = GetPlayerY(MyIndex)
+                Case DIR_RIGHT
+                    X = GetPlayerX(MyIndex) + 1
+                    Y = GetPlayerY(MyIndex)
+            End Select
+
+            If GetTickCount() > Player(MyIndex).EventTimer Then
+                For i = 1 To Map.CurrentEvents
+                    If Map.MapEvents(i).Visible = 1 Then
+                        If Map.MapEvents(i).X = X And Map.MapEvents(i).Y = Y Then
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEvent)
+                            Buffer.WriteLong(i)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            Player(MyIndex).EventTimer = GetTickCount() + 200
+                        End If
+                    End If
+                Next
             End If
         End If
 
@@ -429,9 +467,10 @@ Module ClientGameLogic
     End Function
 
     Function CheckDirection(ByVal Direction As Byte) As Boolean
-        Dim X As Long
-        Dim Y As Long
+        Dim X As Long, Y As Long
         Dim i As Long, z As Long
+        Dim Buffer As ByteBuffer
+
         CheckDirection = False
 
         ' check directional blocking
@@ -518,6 +557,25 @@ Module ClientGameLogic
                 End If
             End If
 
+        Next
+
+        For i = 1 To Map.CurrentEvents
+            If Map.MapEvents(i).Visible = 1 Then
+                If Map.MapEvents(i).X = X Then
+                    If Map.MapEvents(i).Y = Y Then
+                        'We are walking on top of OR tried to touch an event. Time to Handle the commands
+                        Buffer = New ByteBuffer
+                        Buffer.WriteLong(ClientPackets.CEventTouch)
+                        Buffer.WriteLong(i)
+                        SendData(Buffer.ToArray)
+                        Buffer = Nothing
+                        If Map.MapEvents(i).WalkThrough = 0 Then
+                            CheckDirection = True
+                            Exit Function
+                        End If
+                    End If
+                End If
+            End If
         Next
 
     End Function

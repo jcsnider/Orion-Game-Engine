@@ -107,6 +107,9 @@
         If x > Map(MapNum).MaxX Then x = Map(MapNum).MaxX
         If y > Map(MapNum).MaxY Then y = Map(MapNum).MaxY
 
+        TempPlayer(Index).EventProcessingCount = 0
+        TempPlayer(Index).EventMap.CurrentEvents = 0
+
         If HouseTeleport = False Then
             Player(Index).InHouse = 0
         End If
@@ -358,7 +361,7 @@
     End Sub
     Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long)
         Dim MapNum As Long, Buffer As ByteBuffer
-        Dim x As Long, y As Long
+        Dim x As Long, y As Long, begineventprocessing As Boolean
         Dim Moved As Byte
         Dim NewMapX As Byte, NewMapY As Byte
         Dim VitalType As Long, Colour As Long, amount As Long
@@ -617,6 +620,36 @@
         ' They tried to hack
         If Moved = NO Then
             Call PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+        End If
+
+        x = GetPlayerX(Index)
+        y = GetPlayerY(Index)
+
+        If Moved = YES Then
+            If TempPlayer(Index).EventMap.CurrentEvents > 0 Then
+                For i = 1 To TempPlayer(Index).EventMap.CurrentEvents
+                    If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Globals = 1 Then
+                        If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).X = x And Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Y = y And Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).Trigger = 1 And TempPlayer(Index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
+                    Else
+                        If TempPlayer(Index).EventMap.EventPages(i).X = x And TempPlayer(Index).EventMap.EventPages(i).Y = y And Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).Trigger = 1 And TempPlayer(Index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
+                    End If
+                    begineventprocessing = False
+                    If begineventprocessing = True Then
+                        'Process this event, it is on-touch and everything checks out.
+                        If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).CommandListCount > 0 Then
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).Active = 1
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).ActionTimer = GetTickCount()
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).CurList = 1
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).CurSlot = 1
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).EventID = TempPlayer(Index).EventMap.EventPages(i).EventID
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).PageID = TempPlayer(Index).EventMap.EventPages(i).PageID
+                            TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).WaitingForResponse = 0
+                            ReDim TempPlayer(Index).EventProcessing(TempPlayer(Index).EventMap.EventPages(i).EventID).ListLeftOff(0 To Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).CommandListCount)
+                        End If
+                        begineventprocessing = False
+                    End If
+                Next
+            End If
         End If
 
     End Sub

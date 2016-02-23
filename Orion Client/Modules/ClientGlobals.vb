@@ -12,6 +12,7 @@ Module ClientGlobals
     Public DirArrowY(0 To 4) As Byte
 
     Public TilesetsClr() As Color
+    Public LastTileset As Byte
 
     ' targetting
     Public myTarget As Long
@@ -124,6 +125,7 @@ Module ClientGlobals
 
     ' FPS and Time-based movement vars
     Public ElapsedTime As Long
+    'Public ElapsedMTime As Long
     Public GameFPS As Long
 
     ' Text vars

@@ -1438,7 +1438,7 @@ newlist:
                         frmEditor_Events.optAddText_Global.Checked = True
                 End Select
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand2.Visible = True
+                frmEditor_Events.fraAddText.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evCondition
                 isEdit = True
@@ -1521,7 +1521,7 @@ newlist:
                 frmEditor_Events.txtShowText.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1
                 frmEditor_Events.scrlShowTextFace.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand0.Visible = True
+                frmEditor_Events.fraShowText.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evShowChoices
                 isEdit = True
@@ -2272,9 +2272,259 @@ newlist:
         Buffer = Nothing
     End Sub
 
+
+#End Region
+
+#Region "Incoming Packets"
+    Sub Packet_SpawnEvent(ByVal data() As Byte)
+        Dim id As Long
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadLong <> ServerPackets.SSpawnEvent Then Exit Sub
+
+        id = buffer.ReadLong
+        If id > Map.CurrentEvents Then
+            Map.CurrentEvents = id
+            ReDim Preserve Map.MapEvents(Map.CurrentEvents)
+        End If
+
+        With Map.MapEvents(id)
+            .Name = buffer.ReadString
+            .dir = buffer.ReadLong
+            .ShowDir = .dir
+            .GraphicNum = buffer.ReadLong
+            .GraphicType = buffer.ReadLong
+            .GraphicX = buffer.ReadLong
+            .GraphicX2 = buffer.ReadLong
+            .GraphicY = buffer.ReadLong
+            .GraphicY2 = buffer.ReadLong
+            .MovementSpeed = buffer.ReadLong
+            .Moving = 0
+            .X = buffer.ReadLong
+            .Y = buffer.ReadLong
+            .XOffset = 0
+            .YOffset = 0
+            .Position = buffer.ReadLong
+            .Visible = buffer.ReadLong
+            .WalkAnim = buffer.ReadLong
+            .DirFix = buffer.ReadLong
+            .WalkThrough = buffer.ReadLong
+            .ShowName = buffer.ReadLong
+            .questnum = buffer.ReadLong
+        End With
+        buffer = Nothing
+
+    End Sub
+
+    Sub Packet_EventMove(ByVal data() As Byte)
+        Dim id As Long
+        Dim X As Long
+        Dim Y As Long
+        Dim dir As Long, ShowDir As Long
+        Dim MovementSpeed As Long
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadLong <> ServerPackets.SEventMove Then Exit Sub
+
+        id = buffer.ReadLong
+        X = buffer.ReadLong
+        Y = buffer.ReadLong
+        dir = buffer.ReadLong
+        ShowDir = buffer.ReadLong
+        MovementSpeed = buffer.ReadLong
+        If id > Map.CurrentEvents Then Exit Sub
+
+        With Map.MapEvents(id)
+            .X = X
+            .Y = Y
+            .dir = dir
+            .XOffset = 0
+            .YOffset = 0
+            .Moving = 1
+            .ShowDir = ShowDir
+            .MovementSpeed = MovementSpeed
+
+            Select Case dir
+                Case DIR_UP
+                    .YOffset = PIC_Y
+                Case DIR_DOWN
+                    .YOffset = PIC_Y * -1
+                Case DIR_LEFT
+                    .XOffset = PIC_X
+                Case DIR_RIGHT
+                    .XOffset = PIC_X * -1
+            End Select
+
+        End With
+
+    End Sub
+
+    Sub Packet_EventDir(ByVal data() As Byte)
+        Dim i As Long
+        Dim dir As Byte
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadLong <> ServerPackets.SEventDir Then Exit Sub
+
+        i = buffer.ReadLong
+        dir = buffer.ReadLong
+        If i > Map.CurrentEvents Then Exit Sub
+
+        With Map.MapEvents(i)
+            .dir = dir
+            .ShowDir = dir
+            .XOffset = 0
+            .YOffset = 0
+            .Moving = 0
+        End With
+
+    End Sub
+
+    Sub Packet_MapEventData(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+        Dim i As Long, X As Long, Y As Long, z As Long, w As Long
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SMapEventData Then Exit Sub
+
+        'Event Data!
+        Map.EventCount = buffer.ReadLong
+        If Map.EventCount > 0 Then
+            ReDim Map.Events(0 To Map.EventCount)
+            For i = 1 To Map.EventCount
+                With Map.Events(i)
+                    .Name = buffer.ReadString
+                    .Globals = buffer.ReadLong
+                    .X = buffer.ReadLong
+                    .Y = buffer.ReadLong
+                    .PageCount = buffer.ReadLong
+                End With
+                If Map.Events(i).PageCount > 0 Then
+                    ReDim Map.Events(i).Pages(0 To Map.Events(i).PageCount)
+                    For X = 1 To Map.Events(i).PageCount
+                        With Map.Events(i).Pages(X)
+                            .chkVariable = buffer.ReadLong
+                            .VariableIndex = buffer.ReadLong
+                            .VariableCondition = buffer.ReadLong
+                            .VariableCompare = buffer.ReadLong
+                            .chkSwitch = buffer.ReadLong
+                            .SwitchIndex = buffer.ReadLong
+                            .SwitchCompare = buffer.ReadLong
+                            .chkHasItem = buffer.ReadLong
+                            .HasItemIndex = buffer.ReadLong
+                            .HasItemAmount = buffer.ReadLong
+                            .chkSelfSwitch = buffer.ReadLong
+                            .SelfSwitchIndex = buffer.ReadLong
+                            .SelfSwitchCompare = buffer.ReadLong
+                            .GraphicType = buffer.ReadLong
+                            .Graphic = buffer.ReadLong
+                            .GraphicX = buffer.ReadLong
+                            .GraphicY = buffer.ReadLong
+                            .GraphicX2 = buffer.ReadLong
+                            .GraphicY2 = buffer.ReadLong
+                            .MoveType = buffer.ReadLong
+                            .MoveSpeed = buffer.ReadLong
+                            .MoveFreq = buffer.ReadLong
+                            .MoveRouteCount = buffer.ReadLong
+                            .IgnoreMoveRoute = buffer.ReadLong
+                            .RepeatMoveRoute = buffer.ReadLong
+                            If .MoveRouteCount > 0 Then
+                                ReDim Map.Events(i).Pages(X).MoveRoute(0 To .MoveRouteCount)
+                                For Y = 1 To .MoveRouteCount
+                                    .MoveRoute(Y).Index = buffer.ReadLong
+                                    .MoveRoute(Y).Data1 = buffer.ReadLong
+                                    .MoveRoute(Y).Data2 = buffer.ReadLong
+                                    .MoveRoute(Y).Data3 = buffer.ReadLong
+                                    .MoveRoute(Y).Data4 = buffer.ReadLong
+                                    .MoveRoute(Y).Data5 = buffer.ReadLong
+                                    .MoveRoute(Y).Data6 = buffer.ReadLong
+                                Next
+                            End If
+                            .WalkAnim = buffer.ReadLong
+                            .DirFix = buffer.ReadLong
+                            .WalkThrough = buffer.ReadLong
+                            .ShowName = buffer.ReadLong
+                            .Trigger = buffer.ReadLong
+                            .CommandListCount = buffer.ReadLong
+                            .Position = buffer.ReadLong
+                            .Questnum = buffer.ReadLong
+                        End With
+                        If Map.Events(i).Pages(X).CommandListCount > 0 Then
+                            ReDim Map.Events(i).Pages(X).CommandList(0 To Map.Events(i).Pages(X).CommandListCount)
+                            For Y = 1 To Map.Events(i).Pages(X).CommandListCount
+                                Map.Events(i).Pages(X).CommandList(Y).CommandCount = buffer.ReadLong
+                                Map.Events(i).Pages(X).CommandList(Y).ParentList = buffer.ReadLong
+                                If Map.Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
+                                    ReDim Map.Events(i).Pages(X).CommandList(Y).Commands(0 To Map.Events(i).Pages(X).CommandList(Y).CommandCount)
+                                    For z = 1 To Map.Events(i).Pages(X).CommandList(Y).CommandCount
+                                        With Map.Events(i).Pages(X).CommandList(Y).Commands(z)
+                                            .Index = buffer.ReadLong
+                                            .Text1 = buffer.ReadString
+                                            .Text2 = buffer.ReadString
+                                            .Text3 = buffer.ReadString
+                                            .Text4 = buffer.ReadString
+                                            .Text5 = buffer.ReadString
+                                            .Data1 = buffer.ReadLong
+                                            .Data2 = buffer.ReadLong
+                                            .Data3 = buffer.ReadLong
+                                            .Data4 = buffer.ReadLong
+                                            .Data5 = buffer.ReadLong
+                                            .Data6 = buffer.ReadLong
+                                            .ConditionalBranch.CommandList = buffer.ReadLong
+                                            .ConditionalBranch.Condition = buffer.ReadLong
+                                            .ConditionalBranch.Data1 = buffer.ReadLong
+                                            .ConditionalBranch.Data2 = buffer.ReadLong
+                                            .ConditionalBranch.Data3 = buffer.ReadLong
+                                            .ConditionalBranch.ElseCommandList = buffer.ReadLong
+                                            .MoveRouteCount = buffer.ReadLong
+                                            If .MoveRouteCount > 0 Then
+                                                ReDim Preserve .MoveRoute(.MoveRouteCount)
+                                                For w = 1 To .MoveRouteCount
+                                                    .MoveRoute(w).Index = buffer.ReadLong
+                                                    .MoveRoute(w).Data1 = buffer.ReadLong
+                                                    .MoveRoute(w).Data2 = buffer.ReadLong
+                                                    .MoveRoute(w).Data3 = buffer.ReadLong
+                                                    .MoveRoute(w).Data4 = buffer.ReadLong
+                                                    .MoveRoute(w).Data5 = buffer.ReadLong
+                                                    .MoveRoute(w).Data6 = buffer.ReadLong
+                                                Next
+                                            End If
+                                        End With
+                                    Next
+                                End If
+                            Next
+                        End If
+                    Next
+                End If
+            Next
+        End If
+        'End Event Data
+        buffer = Nothing
+
+    End Sub
+#End Region
+
     Public Sub EditorEvent_DrawGraphic()
         Dim sRect As RECT
         Dim dRect As RECT
+        Dim targetBitmap As Bitmap 'Bitmap we draw to
+        Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
+        Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap
+
 
         'Dim targetBitmap As Bitmap 'Bitmap we draw to
         'Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
@@ -2312,20 +2562,11 @@ newlist:
                     frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                 Case 1
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
-                        'SpritesGFXInfo(frmEditor_Events.scrlGraphic.Value).width > 793 Then
-                        Dim targetBitmap As Bitmap 'Bitmap we draw to
-                        Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
-                        Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap
-
-                        'Load tileset 1 from data files into our sourceBitmap
-
+                        'Load character from data files into our sourceBitmap
                         sourceBitmap = New Bitmap(Application.StartupPath & "/data files/graphics/characters/" & frmEditor_Events.scrlGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         g = Graphics.FromImage(targetBitmap)
-
-                        'Dim row As Int32 = 2
-                        'Dim col As Int32 = 2
 
                         Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
                         Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
@@ -2344,7 +2585,6 @@ newlist:
                     Else
                         frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                         Exit Sub
-
                     End If
                 Case 2
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumTileSets Then
@@ -2361,17 +2601,25 @@ newlist:
                         frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                     Case 1
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumCharacters Then
-                            sRect.top = tmpEvent.Pages(curPageNum).GraphicY * (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).height / 4)
-                            sRect.left = tmpEvent.Pages(curPageNum).GraphicX * (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).width / 4)
-                            sRect.bottom = sRect.top + (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).height / 4)
-                            sRect.right = sRect.left + (SpritesGFXInfo(tmpEvent.Pages(curPageNum).Graphic).width / 4)
-                            With dRect
-                                dRect.top = (193 / 2) - ((sRect.bottom - sRect.top) / 2)
-                                dRect.bottom = dRect.top + (sRect.bottom - sRect.top)
-                                dRect.left = (121 / 2) - ((sRect.right - sRect.left) / 2)
-                                dRect.right = dRect.left + (sRect.right - sRect.left)
-                            End With
+                            'Load character from data files into our sourceBitmap
+                            sourceBitmap = New Bitmap(Application.StartupPath & "/data files/graphics/characters/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
+                            targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
+                            g = Graphics.FromImage(targetBitmap)
+
+                            Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
+                            Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
+
+                            g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
+
+                            g.Dispose()
+
+                            frmEditor_Events.picGraphic.Width = targetBitmap.Width
+                            frmEditor_Events.picGraphic.Height = targetBitmap.Height
+                            frmEditor_Events.picGraphic.BackgroundImage = targetBitmap
+                        Else
+                            frmEditor_Events.picGraphic.BackgroundImage = Nothing
+                            Exit Sub
                         End If
                     Case 2
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumTileSets Then
@@ -2406,7 +2654,6 @@ newlist:
         End If
 
     End Sub
-#End Region
 
     Public Sub DrawEvents()
         Dim rec As Rectangle
@@ -2507,6 +2754,143 @@ newlist:
             End Select
 nextevent:
         Next
+
+    End Sub
+
+    Public Sub DrawEvent(id As Long)
+        Dim X As Long, Y As Long, Width As Long, Height As Long, sRect As Rectangle, Anim As Long, spritetop As Long
+
+        If Map.MapEvents(id).Visible = 0 Then Exit Sub
+        If InMapEditor Then Exit Sub
+        Select Case Map.MapEvents(id).GraphicType
+            Case 0
+                Exit Sub
+            Case 1
+                If Map.MapEvents(id).GraphicNum <= 0 Or Map.MapEvents(id).GraphicNum > NumCharacters Then Exit Sub
+
+                ' Reset frame
+                If Map.MapEvents(id).Steps = 3 Then
+                    Anim = 0
+                ElseIf Map.MapEvents(id).Steps = 1 Then
+                    Anim = 2
+                End If
+
+                Select Case Map.MapEvents(id).dir
+                    Case DIR_UP
+                        If (Map.MapEvents(id).YOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                    Case DIR_DOWN
+                        If (Map.MapEvents(id).YOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                    Case DIR_LEFT
+                        If (Map.MapEvents(id).XOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                    Case DIR_RIGHT
+                        If (Map.MapEvents(id).XOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                End Select
+
+                ' Set the left
+                Select Case Map.MapEvents(id).ShowDir
+                    Case DIR_UP
+                        spritetop = 3
+                    Case DIR_RIGHT
+                        spritetop = 2
+                    Case DIR_DOWN
+                        spritetop = 0
+                    Case DIR_LEFT
+                        spritetop = 1
+                End Select
+
+                If Map.MapEvents(id).WalkAnim = 1 Then Anim = 0
+                If Map.MapEvents(id).Moving = 0 Then Anim = Map.MapEvents(id).GraphicX
+
+                Width = SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4
+                Height = SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4
+
+                sRect = New Rectangle((Anim) * (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), spritetop * (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4), (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4))
+                ' Calculate the X
+                X = Map.MapEvents(id).X * PIC_X + Map.MapEvents(id).XOffset - ((SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4 - 32) / 2)
+
+                ' Is the player's height more than 32..?
+                If (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height * 4) > 32 Then
+                    ' Create a 32 pixel offset for larger sprites
+                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset - ((SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4) - 32)
+                Else
+                    ' Proceed as normal
+                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset
+                End If
+                ' render the actual sprite
+                DrawSprite(Map.MapEvents(id).GraphicNum, X, Y, sRect)
+            Case 2
+                If Map.MapEvents(id).GraphicNum < 1 Or Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
+                If Map.MapEvents(id).GraphicY2 > 0 Or Map.MapEvents(id).GraphicX2 > 0 Then
+                    With sRect
+                        .X = Map.MapEvents(id).GraphicY * 32
+                        .Y = .Top + ((Map.MapEvents(id).GraphicY2 - Map.MapEvents(id).GraphicY) * 32)
+                        .Width = Map.MapEvents(id).GraphicX * 32
+                        .Height = .Left + ((Map.MapEvents(id).GraphicX2 - Map.MapEvents(id).GraphicX) * 32)
+                    End With
+                Else
+                    With sRect
+                        .X = Map.MapEvents(id).GraphicY * 32
+                        .Height = .Top + 32
+                        .Y = Map.MapEvents(id).GraphicX * 32
+                        .Width = .Left + 32
+                    End With
+                End If
+                X = Map.MapEvents(id).X * 32
+                Y = Map.MapEvents(id).Y * 32
+                X = X - ((sRect.right - sRect.left) / 2)
+                Y = Y - (sRect.bottom - sRect.top) + 32
+                If Map.MapEvents(id).GraphicY2 > 0 Then
+                    'RenderTexture Tex_Tileset(Map.MapEvents(id).GraphicNum), ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY((Map.MapEvents(id).Y - ((Map.MapEvents(id).GraphicY2 - Map.MapEvents(id).GraphicY) - 1)) * 32), sRect.left, sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, D3DColorRGBA(255, 255, 255, 255), True
+                Else
+                    'RenderTexture Tex_Tileset(Map.MapEvents(id).GraphicNum), ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32), sRect.left, sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, D3DColorRGBA(255, 255, 255, 255), True
+                End If
+        End Select
+
+    End Sub
+
+    Sub ProcessEventMovement(ByVal id As Long)
+
+
+        ' Check if NPC is walking, and if so process moving them over
+
+        If Map.MapEvents(id).Moving = 1 Then
+            Select Case Map.MapEvents(id).dir
+                Case DIR_UP
+                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(id).YOffset < 0 Then Map.MapEvents(id).YOffset = 0
+                Case DIR_DOWN
+                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(id).YOffset > 0 Then Map.MapEvents(id).YOffset = 0
+                Case DIR_LEFT
+                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(id).XOffset < 0 Then Map.MapEvents(id).XOffset = 0
+                Case DIR_RIGHT
+                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(id).XOffset > 0 Then Map.MapEvents(id).XOffset = 0
+            End Select
+            ' Check if completed walking over to the next tile
+            If Map.MapEvents(id).Moving > 0 Then
+                If Map.MapEvents(id).dir = DIR_RIGHT Or Map.MapEvents(id).dir = DIR_DOWN Then
+                    If (Map.MapEvents(id).XOffset >= 0) And (Map.MapEvents(id).YOffset >= 0) Then
+                        Map.MapEvents(id).Moving = 0
+                        If Map.MapEvents(id).Steps = 1 Then
+                            Map.MapEvents(id).Steps = 3
+                        Else
+                            Map.MapEvents(id).Steps = 1
+                        End If
+                    End If
+                Else
+                    If (Map.MapEvents(id).XOffset <= 0) And (Map.MapEvents(id).YOffset <= 0) Then
+                        Map.MapEvents(id).Moving = 0
+                        If Map.MapEvents(id).Steps = 1 Then
+                            Map.MapEvents(id).Steps = 3
+                        Else
+                            Map.MapEvents(id).Steps = 1
+                        End If
+                    End If
+                End If
+            End If
+        End If
 
     End Sub
 

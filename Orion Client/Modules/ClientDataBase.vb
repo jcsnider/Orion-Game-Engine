@@ -97,6 +97,18 @@ Module ClientDataBase
         If NumSpellIcons = 0 Then Exit Sub
     End Sub
 
+    Public Sub CheckFaces()
+        Dim i As Long
+        i = 1
+
+        While FileExist(Application.StartupPath & GFX_PATH & "Faces\" & i & GFX_EXT)
+            NumFaces = NumFaces + 1
+            i = i + 1
+        End While
+
+        If NumFaces = 0 Then Exit Sub
+    End Sub
+
     Public Sub CacheMusic()
         Dim Files As String() = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg")
         Dim MaxNum As String = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg").Count
@@ -915,7 +927,9 @@ Module ClientDataBase
             Call MkDir(Application.StartupPath & "\data files\graphics\tilesets")
         End If
 
-
+        If LCase$(Dir(Application.StartupPath & "\data files\graphics\faces", vbDirectory)) <> "faces" Then
+            Call MkDir(Application.StartupPath & "\data files\graphics\faces")
+        End If
     End Sub
 
 End Module

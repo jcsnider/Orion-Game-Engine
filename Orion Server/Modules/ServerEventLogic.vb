@@ -2227,4 +2227,283 @@
         End If
 
     End Function
+
+    Sub SpawnAllMapGlobalEvents()
+        Dim i As Long
+
+        For i = 0 To MAX_MAPS
+            DoEvents()
+            SpawnGlobalEvents(i)
+        Next
+
+    End Sub
+
+    Sub SpawnGlobalEvents(ByVal MapNum As Long)
+        Dim i As Long, z As Long
+
+        If Map(MapNum).EventCount > 0 Then
+            TempEventMap(MapNum).EventCount = 0
+            ReDim TempEventMap(MapNum).Events(0)
+            For i = 1 To Map(MapNum).EventCount
+                TempEventMap(MapNum).EventCount = TempEventMap(MapNum).EventCount + 1
+                ReDim Preserve TempEventMap(MapNum).Events(0 To TempEventMap(MapNum).EventCount)
+                If Map(MapNum).Events(i).PageCount > 0 Then
+                    If Map(MapNum).Events(i).Globals = 1 Then
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).X = Map(MapNum).Events(i).X
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Y = Map(MapNum).Events(i).Y
+                        If Map(MapNum).Events(i).Pages(1).GraphicType = 1 Then
+                            Select Case Map(MapNum).Events(i).Pages(1).GraphicY
+                                Case 0
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = DIR_DOWN
+                                Case 1
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = DIR_LEFT
+                                Case 2
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = DIR_RIGHT
+                                Case 3
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = DIR_UP
+                            End Select
+                        Else
+                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = DIR_DOWN
+                        End If
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Active = 1
+
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveType = Map(MapNum).Events(i).Pages(1).MoveType
+
+                        If TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveType = 2 Then
+                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveRouteCount = Map(MapNum).Events(i).Pages(1).MoveRouteCount
+                            ReDim TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveRoute(0 To Map(MapNum).Events(i).Pages(1).MoveRouteCount)
+                            For z = 0 To Map(MapNum).Events(i).Pages(1).MoveRouteCount
+                                TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveRoute(z) = Map(MapNum).Events(i).Pages(1).MoveRoute(z)
+                            Next
+                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveRouteComplete = 0
+                        Else
+                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveRouteComplete = 1
+                        End If
+
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).RepeatMoveRoute = Map(MapNum).Events(i).Pages(1).RepeatMoveRoute
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).IgnoreIfCannotMove = Map(MapNum).Events(i).Pages(1).IgnoreMoveRoute
+
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveFreq = Map(MapNum).Events(i).Pages(1).MoveFreq
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).MoveSpeed = Map(MapNum).Events(i).Pages(1).MoveSpeed
+
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).WalkThrough = Map(MapNum).Events(i).Pages(1).WalkThrough
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).FixedDir = Map(MapNum).Events(i).Pages(1).DirFix
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).WalkingAnim = Map(MapNum).Events(i).Pages(1).WalkAnim
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).ShowName = Map(MapNum).Events(i).Pages(1).ShowName
+                        TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).QuestNum = Map(MapNum).Events(i).Pages(1).QuestNum
+                    End If
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Public Sub SpawnMapEventsFor(Index As Long, MapNum As Long)
+        Dim i As Long, z As Long, spawncurrentevent As Boolean, p As Long, compare As Long
+        Dim Buffer As ByteBuffer
+
+        TempPlayer(Index).EventMap.CurrentEvents = 0
+        ReDim TempPlayer(Index).EventMap.EventPages(0)
+        If Map(MapNum).EventCount > 0 Then
+            ReDim TempPlayer(Index).EventProcessing(0 To Map(MapNum).EventCount)
+            TempPlayer(Index).EventProcessingCount = Map(MapNum).EventCount
+        Else
+            ReDim TempPlayer(Index).EventProcessing(0)
+            TempPlayer(Index).EventProcessingCount = 0
+        End If
+
+        If Map(MapNum).EventCount <= 0 Then Exit Sub
+        For i = 1 To Map(MapNum).EventCount
+            If Map(MapNum).Events(i).PageCount > 0 Then
+                For z = Map(MapNum).Events(i).PageCount To 1 Step -1
+                    With Map(MapNum).Events(i).Pages(z)
+                        spawncurrentevent = True
+
+                        If .chkVariable = 1 Then
+                            Select Case .VariableCompare
+                                Case 0
+                                    If Player(Index).Variables(.VariableIndex) <> .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                                Case 1
+                                    If Player(Index).Variables(.VariableIndex) < .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                                Case 2
+                                    If Player(Index).Variables(.VariableIndex) > .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                                Case 3
+                                    If Player(Index).Variables(.VariableIndex) <= .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                                Case 4
+                                    If Player(Index).Variables(.VariableIndex) >= .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                                Case 5
+                                    If Player(Index).Variables(.VariableIndex) = .VariableCondition Then
+                                        spawncurrentevent = False
+                                    End If
+                            End Select
+                        End If
+
+                        If .chkSwitch = 1 Then
+                            If .SwitchCompare = 1 Then
+                                If Player(Index).Switches(.SwitchIndex) = 1 Then
+                                    spawncurrentevent = False
+                                End If
+                            Else
+                                If Player(Index).Switches(.SwitchIndex) = 0 Then
+                                    spawncurrentevent = False
+                                End If
+                            End If
+                        End If
+
+                        If .chkHasItem = 1 Then
+                            If HasItem(Index, .HasItemIndex) = 0 Then
+                                spawncurrentevent = False
+                            End If
+                        End If
+
+                        If .chkSelfSwitch = 1 Then
+                            If .SelfSwitchCompare = 0 Then
+                                compare = 1
+                            Else
+                                compare = 0
+                            End If
+                            If Map(MapNum).Events(i).Globals = 1 Then
+                                If Map(MapNum).Events(i).SelfSwitches(.SelfSwitchIndex) <> compare Then
+                                    spawncurrentevent = False
+                                End If
+                            Else
+                                If compare = 1 Then
+                                    spawncurrentevent = False
+                                End If
+                            End If
+                        End If
+
+                        If spawncurrentevent = True Or (spawncurrentevent = False And z = 1) Then
+                            'spawn the event... send data to player
+                            TempPlayer(Index).EventMap.CurrentEvents = TempPlayer(Index).EventMap.CurrentEvents + 1
+                            ReDim Preserve TempPlayer(Index).EventMap.EventPages(TempPlayer(Index).EventMap.CurrentEvents)
+                            With TempPlayer(Index).EventMap.EventPages(TempPlayer(Index).EventMap.CurrentEvents)
+                                If Map(MapNum).Events(i).Pages(z).GraphicType = 1 Then
+                                    Select Case Map(MapNum).Events(i).Pages(z).GraphicY
+                                        Case 0
+                                            .Dir = DIR_DOWN
+                                        Case 1
+                                            .Dir = DIR_LEFT
+                                        Case 2
+                                            .Dir = DIR_RIGHT
+                                        Case 3
+                                            .Dir = DIR_UP
+                                    End Select
+                                Else
+                                    .Dir = 0
+                                End If
+                                .GraphicNum = Map(MapNum).Events(i).Pages(z).Graphic
+                                .GraphicType = Map(MapNum).Events(i).Pages(z).GraphicType
+                                .GraphicX = Map(MapNum).Events(i).Pages(z).GraphicX
+                                .GraphicY = Map(MapNum).Events(i).Pages(z).GraphicY
+                                .GraphicX2 = Map(MapNum).Events(i).Pages(z).GraphicX2
+                                .GraphicY2 = Map(MapNum).Events(i).Pages(z).GraphicY2
+                                Select Case Map(MapNum).Events(i).Pages(z).MoveSpeed
+                                    Case 0
+                                        .MovementSpeed = 2
+                                    Case 1
+                                        .MovementSpeed = 3
+                                    Case 2
+                                        .MovementSpeed = 4
+                                    Case 3
+                                        .MovementSpeed = 6
+                                    Case 4
+                                        .MovementSpeed = 12
+                                    Case 5
+                                        .MovementSpeed = 24
+                                End Select
+                                If Map(MapNum).Events(i).Globals Then
+                                    .X = TempEventMap(MapNum).Events(i).X
+                                    .Y = TempEventMap(MapNum).Events(i).Y
+                                    .Dir = TempEventMap(MapNum).Events(i).Dir
+                                    .MoveRouteStep = TempEventMap(MapNum).Events(i).MoveRouteStep
+                                Else
+                                    .X = Map(MapNum).Events(i).X
+                                    .Y = Map(MapNum).Events(i).Y
+                                    .MoveRouteStep = 0
+                                End If
+                                .Position = Map(MapNum).Events(i).Pages(z).Position
+                                .EventID = i
+                                .PageID = z
+                                If spawncurrentevent = True Then
+                                    .Visible = 1
+                                Else
+                                    .Visible = 0
+                                End If
+
+                                .MoveType = Map(MapNum).Events(i).Pages(z).MoveType
+                                If .MoveType = 2 Then
+                                    .MoveRouteCount = Map(MapNum).Events(i).Pages(z).MoveRouteCount
+                                    ReDim .MoveRoute(0 To Map(MapNum).Events(i).Pages(z).MoveRouteCount)
+                                    If Map(MapNum).Events(i).Pages(z).MoveRouteCount > 0 Then
+                                        For p = 0 To Map(MapNum).Events(i).Pages(z).MoveRouteCount
+                                            .MoveRoute(p) = Map(MapNum).Events(i).Pages(z).MoveRoute(p)
+                                        Next
+                                    End If
+                                    .MoveRouteComplete = 0
+                                Else
+                                    .MoveRouteComplete = 1
+                                End If
+
+                                .RepeatMoveRoute = Map(MapNum).Events(i).Pages(z).RepeatMoveRoute
+                                .IgnoreIfCannotMove = Map(MapNum).Events(i).Pages(z).IgnoreMoveRoute
+
+                                .MoveFreq = Map(MapNum).Events(i).Pages(z).MoveFreq
+                                .MoveSpeed = Map(MapNum).Events(i).Pages(z).MoveSpeed
+
+                                .WalkingAnim = Map(MapNum).Events(i).Pages(z).WalkAnim
+                                .WalkThrough = Map(MapNum).Events(i).Pages(z).WalkThrough
+                                .ShowName = Map(MapNum).Events(i).Pages(z).ShowName
+                                .FixedDir = Map(MapNum).Events(i).Pages(z).DirFix
+                                .QuestNum = Map(MapNum).Events(i).Pages(z).QuestNum
+                            End With
+                            GoTo nextevent
+                        End If
+                    End With
+                Next
+            End If
+nextevent:
+        Next
+
+        If TempPlayer(Index).EventMap.CurrentEvents > 0 Then
+            For i = 1 To TempPlayer(Index).EventMap.CurrentEvents
+                Buffer = New ByteBuffer
+                Buffer.WriteLong(ServerPackets.SSpawnEvent)
+                Buffer.WriteLong(TempPlayer(Index).EventMap.EventPages(i).EventID)
+                With TempPlayer(Index).EventMap.EventPages(i)
+                    Buffer.WriteString(Trim$(Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Name))
+                    Buffer.WriteLong(.Dir)
+                    Buffer.WriteLong(.GraphicNum)
+                    Buffer.WriteLong(.GraphicType)
+                    Buffer.WriteLong(.GraphicX)
+                    Buffer.WriteLong(.GraphicX2)
+                    Buffer.WriteLong(.GraphicY)
+                    Buffer.WriteLong(.GraphicY2)
+                    Buffer.WriteLong(.MovementSpeed)
+                    Buffer.WriteLong(.X)
+                    Buffer.WriteLong(.Y)
+                    Buffer.WriteLong(.Position)
+                    Buffer.WriteLong(.Visible)
+                    Buffer.WriteLong(Map(MapNum).Events(.EventID).Pages(.PageID).WalkAnim)
+                    Buffer.WriteLong(Map(MapNum).Events(.EventID).Pages(.PageID).DirFix)
+                    Buffer.WriteLong(Map(MapNum).Events(.EventID).Pages(.PageID).WalkThrough)
+                    Buffer.WriteLong(Map(MapNum).Events(.EventID).Pages(.PageID).ShowName)
+                    Buffer.WriteLong(Map(MapNum).Events(.EventID).Pages(.PageID).QuestNum)
+                End With
+                SendDataTo(Index, Buffer.ToArray)
+                Buffer = Nothing
+            Next
+        End If
+
+    End Sub
 End Module

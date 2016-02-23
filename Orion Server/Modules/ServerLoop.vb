@@ -37,11 +37,8 @@
                         End If
                     End If
                 Next
-                tmr25 = GetTickCount() + 25
-            End If
-
-            If GetTickCount() > tmr25 Then
                 UpdateEventLogic()
+
                 tmr25 = GetTickCount() + 25
             End If
 
@@ -79,6 +76,11 @@
 
                 UpdateNpcAI()
                 tmr500 = GetTickCount() + 500
+
+                If GetTickCount() > tmr25 Then
+                    UpdateEventLogic()
+                    tmr25 = GetTickCount() + 25
+                End If
             End If
 
             ' Checks to update player vitals every 5 seconds - Can be tweaked

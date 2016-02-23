@@ -280,16 +280,4 @@
         Layer_Count
     End Enum
 
-    ' Layers in a map
-    'Public Enum ExMapLayer
-    '    Mask3 = 1
-    '    Mask4
-    '    Mask5
-    '    Fringe3
-    '    Fringe4
-    '    Fringe5
-    '    ' Make sure Layer_Count is below everything else
-    '    Layer_Count
-    'End Enum
-
 End Module

@@ -104,7 +104,9 @@
         Dim LastX As Long
         Dim LastY As Long
 
-        Dim Hotbar() As HotBarRec
+        Dim Hotbar() As HotbarRec
+
+        Dim EventTimer As Long
     End Structure
 
     Public Structure TileDataRec

@@ -322,6 +322,9 @@
         'variables
         Call SetStatus("Loading Variables...")
         Call LoadVariables()
+        'Events
+        Call SetStatus("Spawning global events...")
+        Call SpawnAllMapGlobalEvents()
     End Sub
 
     Sub TextAdd(ByVal Msg As String)

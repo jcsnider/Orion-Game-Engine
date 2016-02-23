@@ -102,6 +102,69 @@ Module ClientText
         Call DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
+    Public Sub DrawEventName(ByVal Index As Long)
+        Dim TextX As Long
+        Dim TextY As Long
+        Dim color As Color, backcolor As Color
+        Dim Name As String, i As Long
+
+        If InMapEditor Then Exit Sub
+
+        color = color.Yellow
+        backcolor = color.Black
+
+        Name = Trim$(Map.MapEvents(Index).Name)
+        ' calc pos
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth(Trim$(Name)) / 2
+        If Map.MapEvents(Index).GraphicType = 0 Then
+            TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
+        ElseIf Map.MapEvents(Index).GraphicType = 1 Then
+            If Map.MapEvents(Index).GraphicNum < 1 Or Map.MapEvents(Index).GraphicNum > NumCharacters Then
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
+            Else
+                ' Determine location for text
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (SpritesGFXInfo(Map.MapEvents(Index).GraphicNum).height / 4) + 16
+            End If
+        ElseIf Map.MapEvents(Index).GraphicType = 2 Then
+            If Map.MapEvents(Index).GraphicY2 > 0 Then
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - ((Map.MapEvents(Index).GraphicY2 - Map.MapEvents(Index).GraphicY) * 32) + 16
+            Else
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
+            End If
+        End If
+
+        ' Draw name
+        Call DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+
+        For i = 1 To MAX_QUESTS
+            'check if the npc is the starter to any quest: [!] symbol
+            'can accept the quest as a new one?
+            If Player(MyIndex).PlayerQuest(i).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(i).Status = QUEST_COMPLETED_BUT Or (Player(MyIndex).PlayerQuest(i).Status = QUEST_COMPLETED And Quest(i).Repeat = 1) Then
+                'the npc gives this quest?
+                If Map.MapEvents(Index).questnum = i Then
+                    Name = "[!]"
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth((Trim$("[!]"))) + 8
+                    TextY = TextY - 16
+                    If Quest(i).Repeat = 1 Then
+                        DrawText(TextX, TextY, Trim$(Name), Color.White, backcolor, GameWindow)
+                    Else
+                        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+                    End If
+                    Exit For
+                End If
+            ElseIf Player(MyIndex).PlayerQuest(i).status = QUEST_STARTED Then
+                If Map.MapEvents(Index).questnum = i Then
+                    Name = "[*]"
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth((Trim$("[*]"))) + 8
+                    TextY = TextY - 16
+                    DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+                    Exit For
+                End If
+            End If
+        Next
+
+    End Sub
+
     Public Sub DrawMapAttributes()
         Dim X As Long
         Dim y As Long

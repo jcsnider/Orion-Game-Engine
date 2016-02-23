@@ -428,6 +428,11 @@ Public Module ServerEvents
 
 
                     ' Check to make sure that the tile is walkable
+                    If n = TILE_TYPE_BLOCKED Then
+                        CanEventMove = False
+                        Exit Function
+                    End If
+
                     If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
                         CanEventMove = False
                         Exit Function
@@ -510,6 +515,11 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
+                    If n = TILE_TYPE_BLOCKED Then
+                        CanEventMove = False
+                        Exit Function
+                    End If
+
                     If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
                         CanEventMove = False
                         Exit Function
@@ -593,6 +603,11 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
+                    If n = TILE_TYPE_BLOCKED Then
+                        CanEventMove = False
+                        Exit Function
+                    End If
+
                     If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
                         CanEventMove = False
                         Exit Function
@@ -676,6 +691,11 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
+                    If n = TILE_TYPE_BLOCKED Then
+                        CanEventMove = False
+                        Exit Function
+                    End If
+
                     If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
                         CanEventMove = False
                         Exit Function
@@ -1747,6 +1767,9 @@ Public Module ServerEvents
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CEvent Then Exit Sub
+
         i = Buffer.ReadLong
         Buffer = Nothing
 
@@ -1813,6 +1836,9 @@ Public Module ServerEvents
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CEventTouch Then Exit Sub
+
         i = Buffer.ReadLong
         If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).Trigger = 1 Then
             'Process this event, it is on-touch and everything checks out.

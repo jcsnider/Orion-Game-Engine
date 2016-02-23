@@ -153,6 +153,24 @@
         'hotbar
         Packets.Add(ServerPackets.SHotbar, AddressOf Packet_Hotbar)
 
+        'Events
+        Packets.Add(ServerPackets.SSpawnEvent, AddressOf Packet_SpawnEvent)
+        Packets.Add(ServerPackets.SEventMove, AddressOf Packet_EventMove)
+        Packets.Add(ServerPackets.SEventDir, AddressOf Packet_EventDir)
+        'SEventChat
+        'SEventStart
+        'SEventEnd
+        'SPlayBGM
+        'SPlaySound
+        'SFadeoutBGM
+        'SStopSound
+        'SSwitchesAndVariables
+        Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
+        'SChatBubble
+        'SSpecialEffect
+        'SPic
+        'SHoldPlayer
+
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)

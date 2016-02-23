@@ -1230,6 +1230,15 @@
 
         SendMapNpcsToMap(MapNum)
         SpawnMapNpcs(MapNum)
+        SpawnGlobalEvents(MapNum)
+
+        For i = 1 To MAX_PLAYERS
+            If IsPlaying(i) Then
+                If Player(i).Map = MapNum Then
+                    SpawnMapEventsFor(i, MapNum)
+                End If
+            End If
+        Next
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
@@ -1346,7 +1355,8 @@
             Call SendMapData(index, GetPlayerMap(index), False)
         End If
 
-        Call SendJoinMap(index)
+        SpawnMapEventsFor(index, GetPlayerMap(index))
+        SendJoinMap(index)
         TempPlayer(index).GettingMap = NO
     End Sub
 
