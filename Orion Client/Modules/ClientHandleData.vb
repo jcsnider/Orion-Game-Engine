@@ -157,19 +157,19 @@
         Packets.Add(ServerPackets.SSpawnEvent, AddressOf Packet_SpawnEvent)
         Packets.Add(ServerPackets.SEventMove, AddressOf Packet_EventMove)
         Packets.Add(ServerPackets.SEventDir, AddressOf Packet_EventDir)
-        'SEventChat
-        'SEventStart
-        'SEventEnd
-        'SPlayBGM
-        'SPlaySound
-        'SFadeoutBGM
-        'SStopSound
-        'SSwitchesAndVariables
+        Packets.Add(ServerPackets.SEventChat, AddressOf Packet_EventChat)
+        Packets.Add(ServerPackets.SEventStart, AddressOf Packet_EventStart)
+        Packets.Add(ServerPackets.SEventEnd, AddressOf Packet_EventEnd)
+        'Packets.Add(ServerPackets.SPlayBGM, AddressOf Packet_PlayBGM)
+        'Packets.Add(ServerPackets.SPlaySound, AddressOf Packet_PlaySound)
+        'Packets.Add(ServerPackets.SFadeoutBGM, AddressOf Packet_FadeoutBGM)
+        'Packets.Add(ServerPackets.SStopSound, AddressOf Packet_StopSound)
+        Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
         'SChatBubble
         'SSpecialEffect
         'SPic
-        'SHoldPlayer
+        Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
 
     End Sub
 
@@ -1012,6 +1012,7 @@
         ' Save the map
         Call SaveMap(MapNum)
 
+        ResetEventdata()
         initAutotiles()
 
         ' Check if we get a map from someone else and if we were editing a map cancel it out
@@ -1039,7 +1040,7 @@
         MusicFile = Trim$(Map.Music)
         PlayMusic(MusicFile)
 
-        Call UpdateDrawMapName()
+        UpdateDrawMapName()
 
         GettingMap = False
         CanMoveNow = True

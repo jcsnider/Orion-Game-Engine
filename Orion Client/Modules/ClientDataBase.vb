@@ -280,7 +280,7 @@ Module ClientDataBase
 
             ReDim Map.Npc(0 To MAX_MAP_NPCS)
             ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
-            'ReDim Map.exTile(0 To Map.MaxX, 0 To Map.MaxY)
+
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
                     ReDim Map.Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
@@ -292,19 +292,11 @@ Module ClientDataBase
                         Map.Tile(x, y).Autotile(l) = 0
                     Next
 
-                    'ReDim Map.exTile(x, y).Layer(0 To ExMapLayer.Layer_Count - 1)
-                    'ReDim Map.exTile(x, y).Autotile(0 To ExMapLayer.Layer_Count - 1)
-                    'For l = 0 To ExMapLayer.Layer_Count - 1
-                    '    Map.exTile(x, y).Layer(l).tileset = 0
-                    '    Map.exTile(x, y).Layer(l).X = 0
-                    '    Map.exTile(x, y).Layer(l).Y = 0
-                    '    Map.exTile(x, y).Autotile(l) = 0
-                    'Next
-
                 Next
             Next
 
         End SyncLock
+
     End Sub
 
     Sub ClearMapItems()
@@ -403,17 +395,6 @@ Module ClientDataBase
             FilePutObject(f, Map.Npc(X))
         Next
 
-        'For X = 0 To Map.MaxX
-        '    For Y = 0 To Map.MaxY
-        '        For l = 0 To MapLayer.Layer_Count - 1
-        '            FilePutObject(f, Map.exTile(X, Y).Layer(l).tileset)
-        '            FilePutObject(f, Map.exTile(X, Y).Layer(l).X)
-        '            FilePutObject(f, Map.exTile(X, Y).Layer(l).Y)
-        '            FilePutObject(f, Map.exTile(X, Y).Autotile)
-        '        Next
-
-        '    Next
-        'Next
 
         FileClose(f)
     End Sub
@@ -446,7 +427,6 @@ Module ClientDataBase
 
         ' have to set the tile()
         ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
-        'ReDim Map.exTile(0 To Map.MaxX, 0 To Map.MaxY)
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
@@ -469,18 +449,6 @@ Module ClientDataBase
             FileGetObject(f, Map.Npc(X))
         Next
 
-        'For X = 0 To Map.MaxX
-        '    For Y = 0 To Map.MaxY
-        '        ReDim Map.exTile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
-        '        For l = 0 To MapLayer.Layer_Count - 1
-        '            FileGetObject(f, Map.exTile(X, Y).Layer(l).tileset)
-        '            FileGetObject(f, Map.exTile(X, Y).Layer(l).X)
-        '            FileGetObject(f, Map.exTile(X, Y).Layer(l).Y)
-        '            FileGetObject(f, Map.exTile(X, Y).Autotile)
-        '        Next
-
-        '    Next
-        'Next
 
         FileClose(f)
 

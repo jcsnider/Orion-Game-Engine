@@ -73,6 +73,15 @@ Module ClientGameLogic
                     CheckAnimInstance(i)
                 Next
 
+                If Tick > EventChatTimer Then
+                    If EventText = "" Then
+                        If EventChat = True Then
+                            EventChat = False
+                            frmMainGame.pnlEventChat.Visible = False
+                        End If
+                    End If
+                End If
+
                 If tmr1000 < Tick Then
                     tmr1000 = Tick + 1000
                 End If
@@ -180,7 +189,7 @@ Module ClientGameLogic
         Dim Buffer As ByteBuffer
 
         If VbKeyControl Then
-
+            If InEvent = True Then Exit Sub
             If SpellBuffer > 0 Then Exit Sub ' currently casting a spell, can't attack
             If StunDuration > 0 Then Exit Sub ' stunned, can't attack
 
@@ -317,6 +326,11 @@ Module ClientGameLogic
 
         ' make sure they're not stunned
         If StunDuration > 0 Then
+            CanMove = False
+            Exit Function
+        End If
+
+        If InEvent Then
             CanMove = False
             Exit Function
         End If
@@ -1111,6 +1125,11 @@ Module ClientGameLogic
             frmMainGame.tmrShake.Enabled = True
             ShakeTimer = False
         End If
+
+        If EventChat = True Then
+            DrawEventChat()
+            EventChat = False
+        End If
     End Sub
 
     Public Function ConvertCurrency(ByVal Amount As Long) As String
@@ -1139,6 +1158,22 @@ Module ClientGameLogic
 
         If Len(ChatText) = 0 Then Exit Sub
         MyText = LCase$(ChatText)
+
+        If EventChat = True Then
+            If EventChatType = 0 Then
+                Buffer = New ByteBuffer
+                Buffer.WriteLong(ClientPackets.CEventChatReply)
+                Buffer.WriteLong(EventReplyID)
+                Buffer.WriteLong(EventReplyPage)
+                Buffer.WriteLong(0)
+                SendData(Buffer.ToArray)
+                Buffer = Nothing
+                ClearEventChat
+                InEvent = False
+                Exit Sub
+            End If
+        End If
+
         ' Broadcast message
         If Left$(ChatText, 1) = "'" Then
             ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)

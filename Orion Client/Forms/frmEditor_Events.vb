@@ -72,9 +72,11 @@ Public Class frmEditor_Events
     Public Sub InitEventEditorForm()
         Dim i As Long
 
-        'scrlShowTextFace.Maximum = NumFaces
-        'scrlShowChoicesFace.Maximum = NumFaces
+        scrlShowTextFace.Maximum = NumFaces
+        scrlShowChoicesFace.Maximum = NumFaces
+
         scrlWPMap.Maximum = MAX_MAPS
+
         cmbSwitch.Items.Clear()
 
         For i = 1 To MAX_SWITCHES
@@ -217,7 +219,7 @@ Public Class frmEditor_Events
                 txtChoices4.Text = vbNullString
                 scrlShowChoicesFace.Value = 0
                 fraDialogue.Visible = True
-                fraCommand1.Visible = True
+                fraShowChoices.Visible = True
                 fraCommands.Visible = False
             'chatbox text
             Case 3
@@ -254,7 +256,7 @@ Public Class frmEditor_Events
                 cmbPlayerSwitchSet.SelectedIndex = 0
                 cmbSwitch.SelectedIndex = 0
                 fraDialogue.Visible = True
-                fraCommand5.Visible = True
+                fraPlayerSwitch.Visible = True
                 fraCommands.Visible = False
             'self switch
             Case 7
@@ -1099,8 +1101,8 @@ Public Class frmEditor_Events
         pnlVariableSwitches.Visible = True
         pnlVariableSwitches.BringToFront()
         fraLabeling.Visible = True
-        fraLabeling.Width = 849
-        fraLabeling.Height = 593
+        pnlVariableSwitches.Width = 849
+        pnlVariableSwitches.Height = 593
         lstSwitches.Items.Clear()
 
         For i = 1 To MAX_SWITCHES
@@ -1113,6 +1115,8 @@ Public Class frmEditor_Events
             lstVariables.Items.Add(CStr(i) & ". " & Trim$(Variables(i)))
         Next
         lstVariables.SelectedIndex = 0
+
+
     End Sub
 
     Private Sub btnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
@@ -1765,7 +1769,7 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "CommandFrames"
-    'Show Text Frame
+#Region "Show Text Frame"
     Private Sub scrlShowTextFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowTextFace.Scroll
         If scrlShowTextFace.Value > 0 Then
             lblShowTextFace.Text = "Face: " & scrlShowTextFace.Value
@@ -1774,6 +1778,7 @@ Public Class frmEditor_Events
             End If
         Else
             lblShowTextFace.Text = "Face: None"
+            picShowTextFace.BackgroundImage = Nothing
         End If
     End Sub
 
@@ -1795,8 +1800,9 @@ Public Class frmEditor_Events
         fraDialogue.Visible = False
         fraShowText.Visible = False
     End Sub
+#End Region
 
-    'Add Text Frame
+#Region "Add Text Frame"
     Private Sub txtAddText_Text_TextChanged(sender As Object, e As EventArgs) Handles txtAddText_Text.TextChanged
 
     End Sub
@@ -1820,6 +1826,65 @@ Public Class frmEditor_Events
     Private Sub btnAddTextCancel_Click(sender As Object, e As EventArgs) Handles btnAddTextCancel.Click
 
     End Sub
+#End Region
+
+#Region "show choices Frame"
+    Private Sub scrlShowChoicesFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowChoicesFace.Scroll
+        If scrlShowChoicesFace.Value > 0 Then
+            lblShowChoicesFace.Text = "Face: " & scrlShowChoicesFace.Value
+            If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT) Then
+                picShowChoicesFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT)
+            End If
+        Else
+            picShowChoicesFace.Text = "Face: None"
+            picShowChoicesFace.BackgroundImage = Nothing
+        End If
+    End Sub
+
+    Private Sub btnShowChoicesOk_Click(sender As Object, e As EventArgs) Handles btnShowChoicesOk.Click
+        If Not isEdit Then
+            AddCommand(EventType.evShowChoices)
+        Else
+            EditCommand()
+        End If
+    End Sub
+
+    Private Sub btnShowChoicesCancel_Click(sender As Object, e As EventArgs) Handles btnShowChoicesCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraShowChoices.Visible = False
+    End Sub
+#End Region
+
+#Region "set player switch"
+    Private Sub cmbSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSwitch.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbPlayerSwitchSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchSet.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub btnSetPlayerSwitchOk_Click(sender As Object, e As EventArgs) Handles btnSetPlayerSwitchOk.Click
+        If Not isEdit Then
+            AddCommand(EventType.evPlayerSwitch)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraPlayerSwitch.Visible = False
+        fraCommands.Visible = False
+    End Sub
+
+    Private Sub btnSetPlayerswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSetPlayerswitchCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraPlayerSwitch.Visible = False
+    End Sub
+
+
+#End Region
 
 
 

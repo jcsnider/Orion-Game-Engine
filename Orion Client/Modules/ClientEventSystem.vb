@@ -51,6 +51,9 @@ Public Module ClientEventSystem
     Public cpEvent As EventRec
     Public EventList() As EventListRec
 
+    Public InEvent As Boolean
+    Public HoldPlayer As Boolean
+
 #End Region
 
 #Region "Types"
@@ -1532,7 +1535,7 @@ newlist:
                 frmEditor_Events.txtChoices4.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text5
                 frmEditor_Events.scrlShowChoicesFace.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data5
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand1.Visible = True
+                frmEditor_Events.fraShowChoices.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evPlayerVar
                 isEdit = True
@@ -1560,7 +1563,7 @@ newlist:
                 frmEditor_Events.cmbSwitch.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 - 1
                 frmEditor_Events.cmbPlayerSwitchSet.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand5.Visible = True
+                frmEditor_Events.fraPlayerSwitch.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evSelfSwitch
                 isEdit = True
@@ -2262,10 +2265,10 @@ newlist:
 
         Buffer.WriteLong(ClientPackets.CSwitchesAndVariables)
         For i = 1 To MAX_SWITCHES
-            Buffer.WriteString(Switches(i))
+            Buffer.WriteString(Trim$(Switches(i)))
         Next
         For i = 1 To MAX_VARIABLES
-            Buffer.WriteString(Variables(i))
+            Buffer.WriteString(Trim$(Variables(i)))
         Next
         SendData(Buffer.ToArray)
 
@@ -2389,6 +2392,26 @@ newlist:
             .YOffset = 0
             .Moving = 0
         End With
+
+    End Sub
+
+    Sub Packet_SwitchesAndVariables(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+        Dim i As Long
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SSwitchesAndVariables Then Exit Sub
+
+        For i = 1 To MAX_SWITCHES
+            Switches(i) = buffer.ReadString
+        Next
+        For i = 1 To MAX_VARIABLES
+            Variables(i) = buffer.ReadString
+        Next
+
+        buffer = Nothing
 
     End Sub
 
@@ -2516,6 +2539,88 @@ newlist:
         buffer = Nothing
 
     End Sub
+
+    Sub Packet_EventChat(ByVal data() As Byte)
+        Dim i As Long
+        Dim buffer As ByteBuffer
+        Dim choices As Long
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SEventChat Then Exit Sub
+
+        EventReplyID = buffer.ReadLong
+        EventReplyPage = buffer.ReadLong
+        EventChatFace = buffer.ReadLong
+        EventText = buffer.ReadString
+        If EventText = "" Then EventText = " "
+        EventChat = True
+        ShowEventLbl = True
+        choices = buffer.ReadLong
+        InEvent = True
+        For i = 1 To 4
+            EventChoices(i) = ""
+            EventChoiceVisible(i) = False
+        Next
+        EventChatType = 0
+        If choices = 0 Then
+        Else
+            EventChatType = 1
+            For i = 1 To choices
+                EventChoices(i) = buffer.ReadString
+                EventChoiceVisible(i) = True
+            Next
+        End If
+        AnotherChat = buffer.ReadLong
+
+        buffer = Nothing
+
+    End Sub
+
+    Sub Packet_EventStart(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SEventStart Then Exit Sub
+
+        InEvent = True
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_EventEnd(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SEventEnd Then Exit Sub
+
+        InEvent = False
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_HoldPlayer(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SHoldPlayer Then Exit Sub
+
+        If buffer.ReadLong = 0 Then
+            HoldPlayer = True
+        Else
+            HoldPlayer = False
+        End If
+
+        buffer = Nothing
+
+    End Sub
+
 #End Region
 
     Public Sub EditorEvent_DrawGraphic()
@@ -2658,6 +2763,8 @@ newlist:
     Public Sub DrawEvents()
         Dim rec As Rectangle
         Dim Width As Long, Height As Long, i As Long, X As Long, Y As Long
+        Dim tX As Long
+        Dim tY As Long
 
         If Map.EventCount <= 0 Then Exit Sub
         For i = 1 To Map.EventCount
@@ -2684,16 +2791,9 @@ newlist:
             If 1 > Map.Events(i).PageCount Then Exit Sub
             Select Case Map.Events(i).Pages(1).GraphicType
                 Case 0
-                    With rec
-                        .Y = 0
-                        .Height = PIC_Y
-                        .X = 0
-                        .Width = PIC_X
-                    End With
-                    Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-                    tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                    GameWindow.Draw(tmpSprite)
+                    tX = ((X) - 4) + (PIC_X * 0.5)
+                    tY = ((Y) - 7) + (PIC_Y * 0.5)
+                    DrawText(tX, tY, "EV", (SFML.Graphics.Color.Green), (SFML.Graphics.Color.Black), GameWindow)
                 Case 1
                     If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic <= NumCharacters Then
                         If SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
@@ -2850,8 +2950,7 @@ nextevent:
 
     Sub ProcessEventMovement(ByVal id As Long)
 
-
-        ' Check if NPC is walking, and if so process moving them over
+        If id > Map.EventCount Then Exit Sub
 
         If Map.MapEvents(id).Moving = 1 Then
             Select Case Map.MapEvents(id).dir
@@ -2934,4 +3033,129 @@ nextevent:
         End Select
 
     End Function
+
+    Sub ClearEventChat()
+        Dim i As Long
+
+        If AnotherChat = 1 Then
+            For i = 1 To 4
+                EventChoiceVisible(i) = False
+            Next
+            EventText = ""
+            EventChatType = 1
+            EventChatTimer = GetTickCount() + 100
+        ElseIf AnotherChat = 2 Then
+            For i = 1 To 4
+                EventChoiceVisible(i) = False
+            Next
+            EventText = ""
+            EventChatType = 1
+            EventChatTimer = GetTickCount() + 100
+        Else
+            EventChat = False
+        End If
+        frmMainGame.pnlEventChat.Visible = False
+    End Sub
+
+    Public Sub DrawEventChat()
+        Dim temptext As String
+
+        With frmMainGame
+            'face
+            If EventChatFace > 0 And EventChatFace < NumFaces Then
+                .picEventFace.Visible = True
+                .picEventFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & EventChatFace & GFX_EXT)
+            Else
+                .picEventFace.Visible = False
+            End If
+
+            'EventPrompt
+            temptext = EventText
+            .lblEventChat.Text = temptext
+
+            If EventChatType = 1 Then
+                .lblEventContinue.Visible = False
+
+                If EventChoiceVisible(1) Then
+                    'Response1
+                    temptext = EventChoices(1)
+                    .lblResponse1.Text = temptext
+                    .lblResponse1.Visible = True
+                Else
+                    .lblResponse1.Visible = False
+                End If
+
+                If EventChoiceVisible(2) Then
+                    'Response2
+                    temptext = EventChoices(2)
+                    .lblResponse2.Text = temptext
+                    .lblResponse2.Visible = True
+                Else
+                    .lblResponse2.Visible = False
+                End If
+
+                If EventChoiceVisible(3) Then
+                    'Response3
+                    temptext = EventChoices(3)
+                    .lblResponse3.Text = temptext
+                    .lblResponse3.Visible = True
+                Else
+                    .lblResponse3.Visible = False
+                End If
+
+                If EventChoiceVisible(4) Then
+                    'Response4
+                    temptext = EventChoices(4)
+                    .lblResponse4.Text = temptext
+                    .lblResponse4.Visible = True
+                Else
+                    .lblResponse4.Visible = False
+                End If
+
+            Else
+                .lblResponse1.Visible = False
+                .lblResponse2.Visible = False
+                .lblResponse3.Visible = False
+                .lblResponse4.Visible = False
+
+                temptext = "Continue."
+                .lblEventContinue.Text = temptext
+                .lblEventContinue.Visible = True
+            End If
+
+            frmMainGame.pnlEventChat.Visible = True
+            frmMainGame.pnlEventChat.BringToFront()
+        End With
+
+    End Sub
+
+    Public Sub ResetEventdata()
+        For i = 1 To Map.EventCount
+            ReDim Map.MapEvents(Map.EventCount)
+            With Map.MapEvents(i)
+                .Name = ""
+                .dir = 0
+                .ShowDir = 0
+                .GraphicNum = 0
+                .GraphicType = 0
+                .GraphicX = 0
+                .GraphicX2 = 0
+                .GraphicY = 0
+                .GraphicY2 = 0
+                .MovementSpeed = 0
+                .Moving = 0
+                .X = 0
+                .Y = 0
+                .XOffset = 0
+                .YOffset = 0
+                .Position = 0
+                .Visible = 0
+                .WalkAnim = 0
+                .DirFix = 0
+                .WalkThrough = 0
+                .ShowName = 0
+                .questnum = 0
+            End With
+        Next
+    End Sub
 End Module

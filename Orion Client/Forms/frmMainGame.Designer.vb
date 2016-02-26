@@ -191,6 +191,14 @@ Partial Class frmMainGame
         Me.lblDialogText = New System.Windows.Forms.Label()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
+        Me.pnlEventChat = New System.Windows.Forms.Panel()
+        Me.picEventFace = New System.Windows.Forms.PictureBox()
+        Me.lblResponse1 = New System.Windows.Forms.Label()
+        Me.lblResponse2 = New System.Windows.Forms.Label()
+        Me.lblResponse4 = New System.Windows.Forms.Label()
+        Me.lblResponse3 = New System.Windows.Forms.Label()
+        Me.lblEventContinue = New System.Windows.Forms.Label()
+        Me.lblEventChat = New System.Windows.Forms.Label()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlActionMenu.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -217,6 +225,8 @@ Partial Class frmMainGame
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlQuestSpeech.SuspendLayout()
         Me.pnlDialog.SuspendLayout()
+        Me.pnlEventChat.SuspendLayout()
+        CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtMeChat
@@ -1686,7 +1696,8 @@ Partial Class frmMainGame
         '
         'pnlQuestLog
         '
-        Me.pnlQuestLog.BackColor = System.Drawing.Color.Black
+        Me.pnlQuestLog.BackColor = System.Drawing.Color.Transparent
+        Me.pnlQuestLog.BackgroundImage = CType(resources.GetObject("pnlQuestLog.BackgroundImage"), System.Drawing.Image)
         Me.pnlQuestLog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlQuestLog.Controls.Add(Me.lblQuestLogClose)
         Me.pnlQuestLog.Controls.Add(Me.lblAbandonQuest)
@@ -1710,7 +1721,7 @@ Partial Class frmMainGame
         'lblQuestLogClose
         '
         Me.lblQuestLogClose.AutoSize = True
-        Me.lblQuestLogClose.BackColor = System.Drawing.Color.Black
+        Me.lblQuestLogClose.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestLogClose.ForeColor = System.Drawing.Color.White
         Me.lblQuestLogClose.Location = New System.Drawing.Point(197, 360)
         Me.lblQuestLogClose.Name = "lblQuestLogClose"
@@ -1721,7 +1732,7 @@ Partial Class frmMainGame
         'lblAbandonQuest
         '
         Me.lblAbandonQuest.AutoSize = True
-        Me.lblAbandonQuest.BackColor = System.Drawing.Color.Black
+        Me.lblAbandonQuest.BackColor = System.Drawing.Color.Transparent
         Me.lblAbandonQuest.ForeColor = System.Drawing.Color.Red
         Me.lblAbandonQuest.Location = New System.Drawing.Point(390, 360)
         Me.lblAbandonQuest.Name = "lblAbandonQuest"
@@ -1733,7 +1744,7 @@ Partial Class frmMainGame
         'lblQuestRewards
         '
         Me.lblQuestRewards.AutoSize = True
-        Me.lblQuestRewards.BackColor = System.Drawing.Color.Black
+        Me.lblQuestRewards.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestRewards.ForeColor = System.Drawing.Color.White
         Me.lblQuestRewards.Location = New System.Drawing.Point(197, 317)
         Me.lblQuestRewards.Name = "lblQuestRewards"
@@ -1744,7 +1755,7 @@ Partial Class frmMainGame
         'lblQuestRequirements
         '
         Me.lblQuestRequirements.AutoSize = True
-        Me.lblQuestRequirements.BackColor = System.Drawing.Color.Black
+        Me.lblQuestRequirements.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestRequirements.ForeColor = System.Drawing.Color.White
         Me.lblQuestRequirements.Location = New System.Drawing.Point(197, 290)
         Me.lblQuestRequirements.Name = "lblQuestRequirements"
@@ -1755,7 +1766,7 @@ Partial Class frmMainGame
         'lblQuestStatus2
         '
         Me.lblQuestStatus2.AutoSize = True
-        Me.lblQuestStatus2.BackColor = System.Drawing.Color.Black
+        Me.lblQuestStatus2.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestStatus2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblQuestStatus2.Location = New System.Drawing.Point(274, 265)
         Me.lblQuestStatus2.Name = "lblQuestStatus2"
@@ -1766,7 +1777,7 @@ Partial Class frmMainGame
         'lblQuestStatus
         '
         Me.lblQuestStatus.AutoSize = True
-        Me.lblQuestStatus.BackColor = System.Drawing.Color.Black
+        Me.lblQuestStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestStatus.ForeColor = System.Drawing.Color.White
         Me.lblQuestStatus.Location = New System.Drawing.Point(197, 265)
         Me.lblQuestStatus.Name = "lblQuestStatus"
@@ -1789,7 +1800,7 @@ Partial Class frmMainGame
         'lblQuestDialog
         '
         Me.lblQuestDialog.AutoSize = True
-        Me.lblQuestDialog.BackColor = System.Drawing.Color.Black
+        Me.lblQuestDialog.BackColor = System.Drawing.Color.Transparent
         Me.lblQuestDialog.ForeColor = System.Drawing.Color.White
         Me.lblQuestDialog.Location = New System.Drawing.Point(200, 195)
         Me.lblQuestDialog.Name = "lblQuestDialog"
@@ -1812,7 +1823,7 @@ Partial Class frmMainGame
         'lblTaskLog
         '
         Me.lblTaskLog.AutoSize = True
-        Me.lblTaskLog.BackColor = System.Drawing.Color.Black
+        Me.lblTaskLog.BackColor = System.Drawing.Color.Transparent
         Me.lblTaskLog.ForeColor = System.Drawing.Color.White
         Me.lblTaskLog.Location = New System.Drawing.Point(200, 5)
         Me.lblTaskLog.Name = "lblTaskLog"
@@ -1823,7 +1834,7 @@ Partial Class frmMainGame
         'lblActualTask
         '
         Me.lblActualTask.AutoSize = True
-        Me.lblActualTask.BackColor = System.Drawing.Color.Black
+        Me.lblActualTask.BackColor = System.Drawing.Color.Transparent
         Me.lblActualTask.ForeColor = System.Drawing.Color.White
         Me.lblActualTask.Location = New System.Drawing.Point(197, 123)
         Me.lblActualTask.Name = "lblActualTask"
@@ -1931,6 +1942,8 @@ Partial Class frmMainGame
         'pnlDialog
         '
         Me.pnlDialog.BackColor = System.Drawing.Color.Black
+        Me.pnlDialog.BackgroundImage = CType(resources.GetObject("pnlDialog.BackgroundImage"), System.Drawing.Image)
+        Me.pnlDialog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlDialog.Controls.Add(Me.lblDialogCancel)
         Me.pnlDialog.Controls.Add(Me.lblDialogOk)
         Me.pnlDialog.Controls.Add(Me.lblDialogText)
@@ -1990,6 +2003,98 @@ Partial Class frmMainGame
         '
         Me.tmrShake.Interval = 50
         '
+        'pnlEventChat
+        '
+        Me.pnlEventChat.BackColor = System.Drawing.Color.Black
+        Me.pnlEventChat.BackgroundImage = CType(resources.GetObject("pnlEventChat.BackgroundImage"), System.Drawing.Image)
+        Me.pnlEventChat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlEventChat.Controls.Add(Me.lblEventChat)
+        Me.pnlEventChat.Controls.Add(Me.lblEventContinue)
+        Me.pnlEventChat.Controls.Add(Me.lblResponse3)
+        Me.pnlEventChat.Controls.Add(Me.lblResponse4)
+        Me.pnlEventChat.Controls.Add(Me.lblResponse2)
+        Me.pnlEventChat.Controls.Add(Me.lblResponse1)
+        Me.pnlEventChat.Controls.Add(Me.picEventFace)
+        Me.pnlEventChat.Location = New System.Drawing.Point(251, 253)
+        Me.pnlEventChat.Name = "pnlEventChat"
+        Me.pnlEventChat.Size = New System.Drawing.Size(480, 175)
+        Me.pnlEventChat.TabIndex = 43
+        Me.pnlEventChat.Visible = False
+        '
+        'picEventFace
+        '
+        Me.picEventFace.BackColor = System.Drawing.Color.Transparent
+        Me.picEventFace.Location = New System.Drawing.Point(13, 12)
+        Me.picEventFace.Name = "picEventFace"
+        Me.picEventFace.Size = New System.Drawing.Size(94, 94)
+        Me.picEventFace.TabIndex = 0
+        Me.picEventFace.TabStop = False
+        '
+        'lblResponse1
+        '
+        Me.lblResponse1.AutoSize = True
+        Me.lblResponse1.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse1.ForeColor = System.Drawing.Color.White
+        Me.lblResponse1.Location = New System.Drawing.Point(10, 124)
+        Me.lblResponse1.Name = "lblResponse1"
+        Me.lblResponse1.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse1.TabIndex = 1
+        Me.lblResponse1.Text = "reponse1"
+        '
+        'lblResponse2
+        '
+        Me.lblResponse2.AutoSize = True
+        Me.lblResponse2.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse2.ForeColor = System.Drawing.Color.White
+        Me.lblResponse2.Location = New System.Drawing.Point(10, 146)
+        Me.lblResponse2.Name = "lblResponse2"
+        Me.lblResponse2.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse2.TabIndex = 2
+        Me.lblResponse2.Text = "reponse2"
+        '
+        'lblResponse4
+        '
+        Me.lblResponse4.AutoSize = True
+        Me.lblResponse4.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse4.ForeColor = System.Drawing.Color.White
+        Me.lblResponse4.Location = New System.Drawing.Point(226, 146)
+        Me.lblResponse4.Name = "lblResponse4"
+        Me.lblResponse4.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse4.TabIndex = 3
+        Me.lblResponse4.Text = "reponse4"
+        '
+        'lblResponse3
+        '
+        Me.lblResponse3.AutoSize = True
+        Me.lblResponse3.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse3.ForeColor = System.Drawing.Color.White
+        Me.lblResponse3.Location = New System.Drawing.Point(226, 124)
+        Me.lblResponse3.Name = "lblResponse3"
+        Me.lblResponse3.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse3.TabIndex = 4
+        Me.lblResponse3.Text = "reponse3"
+        '
+        'lblEventContinue
+        '
+        Me.lblEventContinue.AutoSize = True
+        Me.lblEventContinue.BackColor = System.Drawing.Color.Transparent
+        Me.lblEventContinue.ForeColor = System.Drawing.Color.White
+        Me.lblEventContinue.Location = New System.Drawing.Point(423, 156)
+        Me.lblEventContinue.Name = "lblEventContinue"
+        Me.lblEventContinue.Size = New System.Drawing.Size(49, 13)
+        Me.lblEventContinue.TabIndex = 5
+        Me.lblEventContinue.Text = "Continue"
+        '
+        'lblEventChat
+        '
+        Me.lblEventChat.BackColor = System.Drawing.Color.Transparent
+        Me.lblEventChat.ForeColor = System.Drawing.Color.White
+        Me.lblEventChat.Location = New System.Drawing.Point(113, 14)
+        Me.lblEventChat.Name = "lblEventChat"
+        Me.lblEventChat.Size = New System.Drawing.Size(356, 92)
+        Me.lblEventChat.TabIndex = 6
+        Me.lblEventChat.Text = "Continue"
+        '
         'frmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1998,10 +2103,11 @@ Partial Class frmMainGame
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(960, 673)
+        Me.Controls.Add(Me.pnlQuestLog)
+        Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlHotBar)
         Me.Controls.Add(Me.pnlDialog)
-        Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlBank)
@@ -2064,6 +2170,9 @@ Partial Class frmMainGame
         Me.pnlQuestSpeech.ResumeLayout(False)
         Me.pnlQuestSpeech.PerformLayout()
         Me.pnlDialog.ResumeLayout(False)
+        Me.pnlEventChat.ResumeLayout(False)
+        Me.pnlEventChat.PerformLayout()
+        CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2235,4 +2344,12 @@ Partial Class frmMainGame
     Friend WithEvents picFace As Windows.Forms.PictureBox
     Friend WithEvents lblVolume As Windows.Forms.Label
     Friend WithEvents scrlVolume As Windows.Forms.HScrollBar
+    Friend WithEvents pnlEventChat As Windows.Forms.Panel
+    Friend WithEvents picEventFace As Windows.Forms.PictureBox
+    Friend WithEvents lblResponse3 As Windows.Forms.Label
+    Friend WithEvents lblResponse4 As Windows.Forms.Label
+    Friend WithEvents lblResponse2 As Windows.Forms.Label
+    Friend WithEvents lblResponse1 As Windows.Forms.Label
+    Friend WithEvents lblEventContinue As Windows.Forms.Label
+    Friend WithEvents lblEventChat As Windows.Forms.Label
 End Class

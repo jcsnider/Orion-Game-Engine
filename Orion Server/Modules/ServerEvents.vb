@@ -1740,7 +1740,13 @@ Public Module ServerEvents
 
         Dim x As Long, y As Long, begineventprocessing As Boolean, z As Long, Buffer As ByteBuffer
 
-        ' Check tradeskills
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CEvent Then Exit Sub
+
+        i = Buffer.ReadLong
+        Buffer = Nothing
 
         Select Case GetPlayerDir(index)
             Case DIR_UP
@@ -1765,13 +1771,7 @@ Public Module ServerEvents
                 y = GetPlayerY(index)
         End Select
 
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
 
-        If Buffer.ReadLong <> ClientPackets.CEvent Then Exit Sub
-
-        i = Buffer.ReadLong
-        Buffer = Nothing
 
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
             For z = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1813,6 +1813,8 @@ Public Module ServerEvents
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CSwitchesAndVariables Then Exit Sub
 
         For i = 1 To MAX_SWITCHES
             Switches(i) = Buffer.ReadString

@@ -1140,7 +1140,8 @@ Module ClientGraphics
             End If
         End If
 
-        If Map.CurrentEvents > 0 Then
+        If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
+
             For I = 1 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 0 Then
                     DrawEvent(I)
@@ -1185,7 +1186,6 @@ Module ClientGraphics
             Next
         End If
 
-
         ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
         For Y = 0 To Map.MaxY
 
@@ -1206,7 +1206,8 @@ Module ClientGraphics
                     End If
                 Next
 
-                If Map.CurrentEvents > 0 Then
+                If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
+
                     For I = 1 To Map.CurrentEvents
                         If Map.MapEvents(I).Position = 1 Then
                             If Y = Map.MapEvents(I).Y Then
@@ -1264,7 +1265,8 @@ Module ClientGraphics
             Next
         End If
 
-        If Map.CurrentEvents > 0 Then
+        If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
+
             For I = 1 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)

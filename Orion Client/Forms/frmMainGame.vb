@@ -1458,6 +1458,101 @@ Public Class frmMainGame
         ShakeCount += 1
     End Sub
 
+
+
+#End Region
+
+#Region "Event Code"
+    Private Sub lblResponse1_Click(sender As Object, e As EventArgs) Handles lblResponse1.Click
+        Dim buffer As ByteBuffer
+
+        If EventChoiceVisible(1) Then
+            'Response1
+            buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CEventChatReply)
+            buffer.WriteLong(EventReplyID)
+            buffer.WriteLong(EventReplyPage)
+            buffer.WriteLong(1)
+            SendData(buffer.ToArray)
+            buffer = Nothing
+            ClearEventChat()
+            InEvent = False
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub lblResponse2_Click(sender As Object, e As EventArgs) Handles lblResponse2.Click
+        Dim buffer As ByteBuffer
+
+        If EventChoiceVisible(2) Then
+            'Response2
+            buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CEventChatReply)
+            buffer.WriteLong(EventReplyID)
+            buffer.WriteLong(EventReplyPage)
+            buffer.WriteLong(2)
+            SendData(buffer.ToArray)
+            buffer = Nothing
+            ClearEventChat()
+            InEvent = False
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub lblResponse3_Click(sender As Object, e As EventArgs) Handles lblResponse3.Click
+        Dim buffer As ByteBuffer
+
+        If EventChoiceVisible(3) Then
+            'Response3
+            buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CEventChatReply)
+            buffer.WriteLong(EventReplyID)
+            buffer.WriteLong(EventReplyPage)
+            buffer.WriteLong(3)
+            SendData(buffer.ToArray)
+            buffer = Nothing
+            ClearEventChat()
+            InEvent = False
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub lblResponse4_Click(sender As Object, e As EventArgs) Handles lblResponse4.Click
+        Dim buffer As ByteBuffer
+
+        If EventChoiceVisible(4) Then
+            'Response4
+            buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CEventChatReply)
+            buffer.WriteLong(EventReplyID)
+            buffer.WriteLong(EventReplyPage)
+            buffer.WriteLong(4)
+            SendData(buffer.ToArray)
+            buffer = Nothing
+            ClearEventChat()
+            InEvent = False
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub lblEventContinue_Click(sender As Object, e As EventArgs) Handles lblEventContinue.Click
+        Dim buffer As ByteBuffer
+
+        'continue
+        buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CEventChatReply)
+            buffer.WriteLong(EventReplyID)
+            buffer.WriteLong(EventReplyPage)
+            buffer.WriteLong(0)
+            SendData(buffer.ToArray)
+            buffer = Nothing
+            ClearEventChat()
+            InEvent = False
+            Exit Sub
+
+    End Sub
 #End Region
 
 End Class
