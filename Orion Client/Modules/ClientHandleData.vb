@@ -844,6 +844,8 @@
                 Next
 
                 'Event Data!
+                ResetEventdata()
+
                 Map.EventCount = Buffer.ReadLong
 
                 If Map.EventCount > 0 Then
@@ -1012,7 +1014,6 @@
         ' Save the map
         Call SaveMap(MapNum)
 
-        ResetEventdata()
         initAutotiles()
 
         ' Check if we get a map from someone else and if we were editing a map cancel it out

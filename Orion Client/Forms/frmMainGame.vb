@@ -31,49 +31,49 @@ Public Class frmMainGame
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
 
         'hotbar
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.NumPad1 Then
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F2 Then
+        If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F3 Then
+        If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F4 Then
+        If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F5 Then
+        If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F6 Then
+        If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F7 Then
+        If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
@@ -82,13 +82,13 @@ Public Class frmMainGame
         End If
 
         'admin
-        If e.KeyCode = Keys.F10 Then
+        If e.KeyCode = Keys.F1 Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
         'hide gui
-        If e.KeyCode = Keys.F11 Then
+        If e.KeyCode = Keys.F10 Then
             HideGui = True
         End If
 
@@ -275,49 +275,49 @@ Public Class frmMainGame
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
 
         'hotbar
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.NumPad1 Then
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F2 Then
+        If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F3 Then
+        If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F4 Then
+        If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F5 Then
+        If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F6 Then
+        If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
                 Call CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F7 Then
+        If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
@@ -326,13 +326,13 @@ Public Class frmMainGame
         End If
 
         'admin
-        If e.KeyCode = Keys.F10 Then
+        If e.KeyCode = Keys.F1 Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
         'hide gui
-        If e.KeyCode = Keys.F11 Then
+        If e.KeyCode = Keys.F10 Then
             HideGui = True
         End If
 
@@ -347,6 +347,13 @@ Public Class frmMainGame
 #End Region
 
 #Region "Chat Code"
+    Private ReadOnly NonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
+
+    Public Function IsAcceptable(ByVal keyData As Keys) As Boolean
+        Dim index As Integer = Array.IndexOf(NonAcceptableKeys, keyData)
+        Return index >= 0
+    End Function
+
     Private Sub txtMeChat_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMeChat.KeyDown
         If e.KeyCode = Keys.Down Then VbKeyDown = True
         If e.KeyCode = Keys.Up Then VbKeyUp = True
@@ -354,6 +361,13 @@ Public Class frmMainGame
         If e.KeyCode = Keys.Right Then VbKeyRight = True
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+
+        Dim keyData As Keys = e.KeyData
+        If IsAcceptable(keyData) Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
+
 
         If e.KeyCode = Keys.Enter Then
             e.Handled = True
@@ -372,64 +386,65 @@ Public Class frmMainGame
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
 
         'hotbar
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.NumPad1 Then
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
+                Exit Sub
             End If
         End If
-        If e.KeyCode = Keys.F2 Then
+        If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F3 Then
+        If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F4 Then
+        If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F5 Then
+        If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F6 Then
+        If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
-        If e.KeyCode = Keys.F7 Then
+        If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
 
         'admin
-        If e.KeyCode = Keys.F10 Then
+        If e.KeyCode = Keys.F1 Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If
         End If
         'hide gui
-        If e.KeyCode = Keys.F11 Then
+        If e.KeyCode = Keys.F10 Then
             HideGui = True
         End If
 

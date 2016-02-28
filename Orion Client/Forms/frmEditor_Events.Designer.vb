@@ -22,60 +22,112 @@ Partial Class frmEditor_Events
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewGroup13 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Messages", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup14 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Events Progressing", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup15 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Flow Control", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup16 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Player Options", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup17 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup18 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup19 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup20 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup21 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup22 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup23 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup24 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem43 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
-        Dim ListViewItem44 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
-        Dim ListViewItem45 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
-        Dim ListViewItem46 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show ChatBubble")
-        Dim ListViewItem47 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Variable")
-        Dim ListViewItem48 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Switch")
-        Dim ListViewItem49 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Self Switch")
-        Dim ListViewItem50 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Conditional Branch")
-        Dim ListViewItem51 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Exit Event Process")
-        Dim ListViewItem52 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Label")
-        Dim ListViewItem53 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("GoTo Label")
-        Dim ListViewItem54 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Items")
-        Dim ListViewItem55 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore HP")
-        Dim ListViewItem56 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore MP")
-        Dim ListViewItem57 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Level Up")
-        Dim ListViewItem58 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Level")
-        Dim ListViewItem59 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Skills")
-        Dim ListViewItem60 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Class")
-        Dim ListViewItem61 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Sprite")
-        Dim ListViewItem62 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Gender")
-        Dim ListViewItem63 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change PK")
-        Dim ListViewItem64 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Give Experience")
-        Dim ListViewItem65 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Warp Player")
-        Dim ListViewItem66 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Move Route")
-        Dim ListViewItem67 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait for Route Completion")
-        Dim ListViewItem68 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
-        Dim ListViewItem69 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
-        Dim ListViewItem70 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
-        Dim ListViewItem71 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Animation")
-        Dim ListViewItem72 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Begin Quest")
-        Dim ListViewItem73 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Complete Task")
-        Dim ListViewItem74 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("End Quest")
-        Dim ListViewItem75 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Fog")
-        Dim ListViewItem76 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Weather")
-        Dim ListViewItem77 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Map Tinting")
-        Dim ListViewItem78 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play BGM")
-        Dim ListViewItem79 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop BGM")
-        Dim ListViewItem80 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play Sound")
-        Dim ListViewItem81 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop Sounds")
-        Dim ListViewItem82 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
-        Dim ListViewItem83 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
-        Dim ListViewItem84 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
+        Dim ListViewGroup43 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup44 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup45 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup46 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Speed", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup47 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Walk Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup48 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Fixed Direction", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup49 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("WalkThrough", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup50 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Position", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup51 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Graphic", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem171 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Up")
+        Dim ListViewItem172 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Down")
+        Dim ListViewItem173 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move left")
+        Dim ListViewItem174 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Right")
+        Dim ListViewItem175 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Randomly")
+        Dim ListViewItem176 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move To Player***")
+        Dim ListViewItem177 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move from Player***")
+        Dim ListViewItem178 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Forwards")
+        Dim ListViewItem179 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Backwards")
+        Dim ListViewItem180 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 100Ms")
+        Dim ListViewItem181 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 500Ms")
+        Dim ListViewItem182 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 1000Ms")
+        Dim ListViewItem183 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Up")
+        Dim ListViewItem184 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Down")
+        Dim ListViewItem185 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Left")
+        Dim ListViewItem186 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Right")
+        Dim ListViewItem187 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Right")
+        Dim ListViewItem188 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Left")
+        Dim ListViewItem189 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 180DG")
+        Dim ListViewItem190 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Randomly")
+        Dim ListViewItem191 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn To Player***")
+        Dim ListViewItem192 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn From Player***")
+        Dim ListViewItem193 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 8x Slower")
+        Dim ListViewItem194 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Slower")
+        Dim ListViewItem195 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Slower")
+        Dim ListViewItem196 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed To Normal")
+        Dim ListViewItem197 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Faster")
+        Dim ListViewItem198 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Faster")
+        Dim ListViewItem199 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lowest")
+        Dim ListViewItem200 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lower")
+        Dim ListViewItem201 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Normal")
+        Dim ListViewItem202 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Higher")
+        Dim ListViewItem203 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Highest")
+        Dim ListViewItem204 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation ON")
+        Dim ListViewItem205 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation OFF")
+        Dim ListViewItem206 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction ON")
+        Dim ListViewItem207 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction OFF")
+        Dim ListViewItem208 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem209 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem210 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Below Player")
+        Dim ListViewItem211 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set PositionWith Player")
+        Dim ListViewItem212 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
+        Dim ListViewItem213 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
+        Dim ListViewGroup52 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Messages", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup53 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Events Progressing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup54 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Flow Control", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup55 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Player Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup56 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup57 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup58 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup59 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup60 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup61 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup62 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup63 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem214 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
+        Dim ListViewItem215 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
+        Dim ListViewItem216 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
+        Dim ListViewItem217 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show ChatBubble")
+        Dim ListViewItem218 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Variable")
+        Dim ListViewItem219 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Switch")
+        Dim ListViewItem220 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Self Switch")
+        Dim ListViewItem221 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Conditional Branch")
+        Dim ListViewItem222 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Exit Event Process")
+        Dim ListViewItem223 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Label")
+        Dim ListViewItem224 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("GoTo Label")
+        Dim ListViewItem225 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Items")
+        Dim ListViewItem226 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore HP")
+        Dim ListViewItem227 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore MP")
+        Dim ListViewItem228 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Level Up")
+        Dim ListViewItem229 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Level")
+        Dim ListViewItem230 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Skills")
+        Dim ListViewItem231 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Class")
+        Dim ListViewItem232 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Sprite")
+        Dim ListViewItem233 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Gender")
+        Dim ListViewItem234 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change PK")
+        Dim ListViewItem235 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Give Experience")
+        Dim ListViewItem236 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Warp Player")
+        Dim ListViewItem237 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Move Route")
+        Dim ListViewItem238 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait for Route Completion")
+        Dim ListViewItem239 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
+        Dim ListViewItem240 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
+        Dim ListViewItem241 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
+        Dim ListViewItem242 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Animation")
+        Dim ListViewItem243 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Begin Quest")
+        Dim ListViewItem244 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Complete Task")
+        Dim ListViewItem245 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("End Quest")
+        Dim ListViewItem246 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Fog")
+        Dim ListViewItem247 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Weather")
+        Dim ListViewItem248 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Map Tinting")
+        Dim ListViewItem249 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play BGM")
+        Dim ListViewItem250 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop BGM")
+        Dim ListViewItem251 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play Sound")
+        Dim ListViewItem252 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop Sounds")
+        Dim ListViewItem253 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
+        Dim ListViewItem254 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
+        Dim ListViewItem255 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -109,49 +161,9 @@ Partial Class frmEditor_Events
         Me.btnMoveRouteCancel = New System.Windows.Forms.Button()
         Me.btnMoveRouteOk = New System.Windows.Forms.Button()
         Me.fraRandom14 = New System.Windows.Forms.GroupBox()
-        Me.btnAddMoveRoute43 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute42 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute41 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute40 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute39 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute38 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute37 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute36 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute35 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute34 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute33 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute32 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute31 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute30 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute29 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute28 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute27 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute26 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute25 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute24 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute23 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute22 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute21 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute20 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute19 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute18 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute17 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute16 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute15 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute14 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute13 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute12 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute11 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute10 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute9 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute8 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute7 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute6 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute5 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute4 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute3 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute2 = New System.Windows.Forms.Button()
-        Me.btnAddMoveRoute1 = New System.Windows.Forms.Button()
+        Me.lstvwMoveRoute = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lstMoveRoute = New System.Windows.Forms.ListBox()
         Me.cmbEvent = New System.Windows.Forms.ComboBox()
         Me.tabPages = New System.Windows.Forms.TabControl()
@@ -166,13 +178,78 @@ Partial Class frmEditor_Events
         Me.lblRandomlabel32 = New System.Windows.Forms.Label()
         Me.btnLabeling = New System.Windows.Forms.Button()
         Me.fraDialogue = New System.Windows.Forms.GroupBox()
-        Me.fraPlayerSwitch = New System.Windows.Forms.GroupBox()
-        Me.btnSetPlayerSwitchOk = New System.Windows.Forms.Button()
-        Me.btnSetPlayerswitchCancel = New System.Windows.Forms.Button()
-        Me.lblRandomLabel22 = New System.Windows.Forms.Label()
-        Me.lblRandomLabel23 = New System.Windows.Forms.Label()
-        Me.cmbPlayerSwitchSet = New System.Windows.Forms.ComboBox()
-        Me.cmbSwitch = New System.Windows.Forms.ComboBox()
+        Me.fraConditionalBranch = New System.Windows.Forms.GroupBox()
+        Me.btnConditionalBranchOk = New System.Windows.Forms.Button()
+        Me.btnConditionalBranchCancel = New System.Windows.Forms.Button()
+        Me.fraConditions_Quest = New System.Windows.Forms.GroupBox()
+        Me.lblCondition_QuestTask = New System.Windows.Forms.Label()
+        Me.optCondition_Quest1 = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblRandomLabel50 = New System.Windows.Forms.Label()
+        Me.optCondition_Quest0 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_General = New System.Windows.Forms.ComboBox()
+        Me.scrlCondition_QuestTask = New System.Windows.Forms.HScrollBar()
+        Me.lblConditionQuest = New System.Windows.Forms.Label()
+        Me.optCondition7 = New System.Windows.Forms.RadioButton()
+        Me.optCondition6 = New System.Windows.Forms.RadioButton()
+        Me.lblRandomLabel2 = New System.Windows.Forms.Label()
+        Me.optCondition5 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_LearntSkill = New System.Windows.Forms.ComboBox()
+        Me.optCondition4 = New System.Windows.Forms.RadioButton()
+        Me.cmbCondition_ClassIs = New System.Windows.Forms.ComboBox()
+        Me.optCondition3 = New System.Windows.Forms.RadioButton()
+        Me.scrlCondition_Quest = New System.Windows.Forms.HScrollBar()
+        Me.scrlCondition_HasItem = New System.Windows.Forms.HScrollBar()
+        Me.lblHasItemAmt = New System.Windows.Forms.Label()
+        Me.optCondition2 = New System.Windows.Forms.RadioButton()
+        Me.lblRandomLabel35 = New System.Windows.Forms.Label()
+        Me.lblRandomLabel1 = New System.Windows.Forms.Label()
+        Me.cmbCondition_SelfSwitchCondition = New System.Windows.Forms.ComboBox()
+        Me.cmbCondtion_PlayerSwitchCondition = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_LevelCompare = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_HasItem = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_SelfSwitch = New System.Windows.Forms.ComboBox()
+        Me.cmbCondition_PlayerSwitch = New System.Windows.Forms.ComboBox()
+        Me.optCondition1 = New System.Windows.Forms.RadioButton()
+        Me.txtCondition_LevelAmount = New System.Windows.Forms.TextBox()
+        Me.txtCondition_PlayerVarCondition = New System.Windows.Forms.TextBox()
+        Me.cmbCondition_PlayerVarCompare = New System.Windows.Forms.ComboBox()
+        Me.lblRandomLabel0 = New System.Windows.Forms.Label()
+        Me.cmbCondition_PlayerVarIndex = New System.Windows.Forms.ComboBox()
+        Me.optCondition0 = New System.Windows.Forms.RadioButton()
+        Me.fraSetSelfSwitch = New System.Windows.Forms.GroupBox()
+        Me.btnSelfswitchOk = New System.Windows.Forms.Button()
+        Me.btnSelfswitchCancel = New System.Windows.Forms.Button()
+        Me.lblRandomLabel26 = New System.Windows.Forms.Label()
+        Me.lblRandomLabel24 = New System.Windows.Forms.Label()
+        Me.cmbSetSelfSwitchTo = New System.Windows.Forms.ComboBox()
+        Me.cmbSetSelfSwitch = New System.Windows.Forms.ComboBox()
+        Me.fraPlayerVariable = New System.Windows.Forms.GroupBox()
+        Me.btnPlayerVarOk = New System.Windows.Forms.Button()
+        Me.btnPlayerVarCancel = New System.Windows.Forms.Button()
+        Me.lblRandomLabel37 = New System.Windows.Forms.Label()
+        Me.lblRandomLabel13 = New System.Windows.Forms.Label()
+        Me.txtVariableData4 = New System.Windows.Forms.TextBox()
+        Me.txtVariableData3 = New System.Windows.Forms.TextBox()
+        Me.optVariableAction3 = New System.Windows.Forms.RadioButton()
+        Me.txtVariableData2 = New System.Windows.Forms.TextBox()
+        Me.optVariableAction2 = New System.Windows.Forms.RadioButton()
+        Me.txtVariableData1 = New System.Windows.Forms.TextBox()
+        Me.optVariableAction1 = New System.Windows.Forms.RadioButton()
+        Me.txtVariableData0 = New System.Windows.Forms.TextBox()
+        Me.optVariableAction0 = New System.Windows.Forms.RadioButton()
+        Me.cmbVariable = New System.Windows.Forms.ComboBox()
+        Me.lblRandomLabel = New System.Windows.Forms.Label()
+        Me.fraShowChatBubble = New System.Windows.Forms.GroupBox()
+        Me.btnShowChatBubbleOK = New System.Windows.Forms.Button()
+        Me.btnShowChatBubbleCancel = New System.Windows.Forms.Button()
+        Me.cmbChatBubbleTarget = New System.Windows.Forms.ComboBox()
+        Me.optChatBubbleTarget2 = New System.Windows.Forms.RadioButton()
+        Me.optChatBubbleTarget1 = New System.Windows.Forms.RadioButton()
+        Me.optChatBubbleTarget0 = New System.Windows.Forms.RadioButton()
+        Me.lblRandomLabel39 = New System.Windows.Forms.Label()
+        Me.txtChatbubbleText = New System.Windows.Forms.TextBox()
+        Me.lblRandomLabel38 = New System.Windows.Forms.Label()
         Me.fraCommand33 = New System.Windows.Forms.GroupBox()
         Me.txtPicOffset2 = New System.Windows.Forms.TextBox()
         Me.txtPicOffset1 = New System.Windows.Forms.TextBox()
@@ -245,45 +322,6 @@ Partial Class frmEditor_Events
         Me.lblWeatherIntensity = New System.Windows.Forms.Label()
         Me.CmbWeather = New System.Windows.Forms.ComboBox()
         Me.lblRandomLabel43 = New System.Windows.Forms.Label()
-        Me.fraCommand7 = New System.Windows.Forms.GroupBox()
-        Me.btnCommand_Ok29 = New System.Windows.Forms.Button()
-        Me.btnCommand_Cancel29 = New System.Windows.Forms.Button()
-        Me.fraConditions_Quest = New System.Windows.Forms.GroupBox()
-        Me.lblCondition_QuestTask = New System.Windows.Forms.Label()
-        Me.optCondition_Quest1 = New System.Windows.Forms.RadioButton()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblRandomLabel50 = New System.Windows.Forms.Label()
-        Me.optCondition_Quest0 = New System.Windows.Forms.RadioButton()
-        Me.cmbCondition_General = New System.Windows.Forms.ComboBox()
-        Me.scrlCondition_QuestTask = New System.Windows.Forms.HScrollBar()
-        Me.lblConditionQuest = New System.Windows.Forms.Label()
-        Me.optCondition_Index7 = New System.Windows.Forms.RadioButton()
-        Me.optCondition_Index6 = New System.Windows.Forms.RadioButton()
-        Me.lblRandomLabel2 = New System.Windows.Forms.Label()
-        Me.optCondition_Index5 = New System.Windows.Forms.RadioButton()
-        Me.cmbCondition_LearntSkill = New System.Windows.Forms.ComboBox()
-        Me.optCondition_Index4 = New System.Windows.Forms.RadioButton()
-        Me.cmbCondition_ClassIs = New System.Windows.Forms.ComboBox()
-        Me.optCondition_Index3 = New System.Windows.Forms.RadioButton()
-        Me.scrlCondition_Quest = New System.Windows.Forms.HScrollBar()
-        Me.scrlCondition_HasItem = New System.Windows.Forms.HScrollBar()
-        Me.lblHasItemAmt = New System.Windows.Forms.Label()
-        Me.optCondition_Index2 = New System.Windows.Forms.RadioButton()
-        Me.lblRandomLabel35 = New System.Windows.Forms.Label()
-        Me.lblRandomLabel1 = New System.Windows.Forms.Label()
-        Me.cmbCondition_SelfSwitchCondition = New System.Windows.Forms.ComboBox()
-        Me.cmbCondtion_PlayerSwitchCondition = New System.Windows.Forms.ComboBox()
-        Me.cmbCondition_LevelCompare = New System.Windows.Forms.ComboBox()
-        Me.cmbCondition_HasItem = New System.Windows.Forms.ComboBox()
-        Me.cmbCondition_SelfSwitch = New System.Windows.Forms.ComboBox()
-        Me.cmbCondition_PlayerSwitch = New System.Windows.Forms.ComboBox()
-        Me.optCondition_Index1 = New System.Windows.Forms.RadioButton()
-        Me.txtCondition_LevelAmount = New System.Windows.Forms.TextBox()
-        Me.txtCondition_PlayerVarCondition = New System.Windows.Forms.TextBox()
-        Me.cmbCondition_PlayerVarCompare = New System.Windows.Forms.ComboBox()
-        Me.lblRandomLabel0 = New System.Windows.Forms.Label()
-        Me.cmbCondition_PlayerVarIndex = New System.Windows.Forms.ComboBox()
-        Me.optCondition_Index0 = New System.Windows.Forms.RadioButton()
         Me.fraCommand27 = New System.Windows.Forms.GroupBox()
         Me.btnCommand_Ok26 = New System.Windows.Forms.Button()
         Me.btnCommand_Cancel26 = New System.Windows.Forms.Button()
@@ -380,16 +418,6 @@ Partial Class frmEditor_Events
         Me.btnCommand_Cancel18 = New System.Windows.Forms.Button()
         Me.cmbSpawnNPC = New System.Windows.Forms.ComboBox()
         Me.lblRandomLabel42 = New System.Windows.Forms.Label()
-        Me.fraCommand3 = New System.Windows.Forms.GroupBox()
-        Me.btnCommand_Ok3 = New System.Windows.Forms.Button()
-        Me.btnCommand_Cancel3 = New System.Windows.Forms.Button()
-        Me.cmbChatBubbleTarget = New System.Windows.Forms.ComboBox()
-        Me.optChatBubbleTarget2 = New System.Windows.Forms.RadioButton()
-        Me.optChatBubbleTarget1 = New System.Windows.Forms.RadioButton()
-        Me.optChatBubbleTarget0 = New System.Windows.Forms.RadioButton()
-        Me.lblRandomLabel39 = New System.Windows.Forms.Label()
-        Me.txtChatbubbleText = New System.Windows.Forms.TextBox()
-        Me.lblRandomLabel38 = New System.Windows.Forms.Label()
         Me.fraCommand13 = New System.Windows.Forms.GroupBox()
         Me.btnCommand_Ok12 = New System.Windows.Forms.Button()
         Me.btnCommand_Cancel12 = New System.Windows.Forms.Button()
@@ -409,13 +437,6 @@ Partial Class frmEditor_Events
         Me.optChangeItemSet = New System.Windows.Forms.RadioButton()
         Me.cmbChangeItemIndex = New System.Windows.Forms.ComboBox()
         Me.lblRandomLabel27 = New System.Windows.Forms.Label()
-        Me.fraCommand6 = New System.Windows.Forms.GroupBox()
-        Me.btnCommand_Ok6 = New System.Windows.Forms.Button()
-        Me.btnCommand_Cancel6 = New System.Windows.Forms.Button()
-        Me.lblRandomLabel26 = New System.Windows.Forms.Label()
-        Me.lblRandomLabel24 = New System.Windows.Forms.Label()
-        Me.cmbSetSelfSwitchTo = New System.Windows.Forms.ComboBox()
-        Me.cmbSetSelfSwitch = New System.Windows.Forms.ComboBox()
         Me.fraCommand9 = New System.Windows.Forms.GroupBox()
         Me.btnCommand_Ok8 = New System.Windows.Forms.Button()
         Me.txtGotoLabel = New System.Windows.Forms.TextBox()
@@ -433,22 +454,6 @@ Partial Class frmEditor_Events
         Me.scrlCompleteQuestTaskQuest = New System.Windows.Forms.HScrollBar()
         Me.lblRandomLabel48 = New System.Windows.Forms.Label()
         Me.lblRandomLabel47 = New System.Windows.Forms.Label()
-        Me.fraCommand4 = New System.Windows.Forms.GroupBox()
-        Me.btnCommand_Ok4 = New System.Windows.Forms.Button()
-        Me.btnCommand_Cancel4 = New System.Windows.Forms.Button()
-        Me.lblRandomLabel37 = New System.Windows.Forms.Label()
-        Me.lblRandomLabel13 = New System.Windows.Forms.Label()
-        Me.txtVariableData4 = New System.Windows.Forms.TextBox()
-        Me.txtVariableData3 = New System.Windows.Forms.TextBox()
-        Me.optVariableAction3 = New System.Windows.Forms.RadioButton()
-        Me.txtVariableData2 = New System.Windows.Forms.TextBox()
-        Me.optVariableAction2 = New System.Windows.Forms.RadioButton()
-        Me.txtVariableData1 = New System.Windows.Forms.TextBox()
-        Me.optVariableAction1 = New System.Windows.Forms.RadioButton()
-        Me.txtVariableData0 = New System.Windows.Forms.TextBox()
-        Me.optVariableAction0 = New System.Windows.Forms.RadioButton()
-        Me.cmbVariable = New System.Windows.Forms.ComboBox()
-        Me.lblRandomLabel = New System.Windows.Forms.Label()
         Me.fraCommand16 = New System.Windows.Forms.GroupBox()
         Me.btnCommand_Ok15 = New System.Windows.Forms.Button()
         Me.btnCommand_Cancel15 = New System.Windows.Forms.Button()
@@ -464,6 +469,13 @@ Partial Class frmEditor_Events
         Me.btnCommand_Cancel13 = New System.Windows.Forms.Button()
         Me.scrlChangeSprite = New System.Windows.Forms.HScrollBar()
         Me.lblChangeSprite = New System.Windows.Forms.Label()
+        Me.fraPlayerSwitch = New System.Windows.Forms.GroupBox()
+        Me.btnSetPlayerSwitchOk = New System.Windows.Forms.Button()
+        Me.btnSetPlayerswitchCancel = New System.Windows.Forms.Button()
+        Me.lblRandomLabel22 = New System.Windows.Forms.Label()
+        Me.lblRandomLabel23 = New System.Windows.Forms.Label()
+        Me.cmbPlayerSwitchSet = New System.Windows.Forms.ComboBox()
+        Me.cmbSwitch = New System.Windows.Forms.ComboBox()
         Me.lblRandomLabel11 = New System.Windows.Forms.Label()
         Me.lblRandomLabel14 = New System.Windows.Forms.Label()
         Me.fraCommands = New System.Windows.Forms.Panel()
@@ -533,7 +545,11 @@ Partial Class frmEditor_Events
         Me.tabPages.SuspendLayout()
         Me.frarandom20.SuspendLayout()
         Me.fraDialogue.SuspendLayout()
-        Me.fraPlayerSwitch.SuspendLayout()
+        Me.fraConditionalBranch.SuspendLayout()
+        Me.fraConditions_Quest.SuspendLayout()
+        Me.fraSetSelfSwitch.SuspendLayout()
+        Me.fraPlayerVariable.SuspendLayout()
+        Me.fraShowChatBubble.SuspendLayout()
         Me.fraCommand33.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraCommand17.SuspendLayout()
@@ -544,8 +560,6 @@ Partial Class frmEditor_Events
         CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraAddText.SuspendLayout()
         Me.fraCommand23.SuspendLayout()
-        Me.fraCommand7.SuspendLayout()
-        Me.fraConditions_Quest.SuspendLayout()
         Me.fraCommand27.SuspendLayout()
         Me.fraCommand18.SuspendLayout()
         Me.fraCommand34.SuspendLayout()
@@ -561,18 +575,16 @@ Partial Class frmEditor_Events
         Me.fraCommand26.SuspendLayout()
         Me.fraCommand21.SuspendLayout()
         Me.fraCommand19.SuspendLayout()
-        Me.fraCommand3.SuspendLayout()
         Me.fraCommand13.SuspendLayout()
         Me.fraCommand11.SuspendLayout()
         Me.fraCommand10.SuspendLayout()
-        Me.fraCommand6.SuspendLayout()
         Me.fraCommand9.SuspendLayout()
         Me.fraCommand8.SuspendLayout()
         Me.fraCommand32.SuspendLayout()
-        Me.fraCommand4.SuspendLayout()
         Me.fraCommand16.SuspendLayout()
         Me.fraCommand15.SuspendLayout()
         Me.fraCommand14.SuspendLayout()
+        Me.fraPlayerSwitch.SuspendLayout()
         Me.fraCommands.SuspendLayout()
         Me.fraRandom17.SuspendLayout()
         Me.fraRandom16.SuspendLayout()
@@ -832,7 +844,7 @@ Partial Class frmEditor_Events
         Me.pnlMoveRoute.Controls.Add(Me.fraMoveRoute)
         Me.pnlMoveRoute.Location = New System.Drawing.Point(5, 4)
         Me.pnlMoveRoute.Name = "pnlMoveRoute"
-        Me.pnlMoveRoute.Size = New System.Drawing.Size(157, 174)
+        Me.pnlMoveRoute.Size = New System.Drawing.Size(826, 636)
         Me.pnlMoveRoute.TabIndex = 2
         '
         'fraMoveRoute
@@ -845,9 +857,9 @@ Partial Class frmEditor_Events
         Me.fraMoveRoute.Controls.Add(Me.fraRandom14)
         Me.fraMoveRoute.Controls.Add(Me.lstMoveRoute)
         Me.fraMoveRoute.Controls.Add(Me.cmbEvent)
-        Me.fraMoveRoute.Location = New System.Drawing.Point(6, 3)
+        Me.fraMoveRoute.Location = New System.Drawing.Point(3, 3)
         Me.fraMoveRoute.Name = "fraMoveRoute"
-        Me.fraMoveRoute.Size = New System.Drawing.Size(815, 530)
+        Me.fraMoveRoute.Size = New System.Drawing.Size(811, 530)
         Me.fraMoveRoute.TabIndex = 0
         Me.fraMoveRoute.TabStop = False
         Me.fraMoveRoute.Text = "Move Route"
@@ -903,49 +915,7 @@ Partial Class frmEditor_Events
         '
         'fraRandom14
         '
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute43)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute42)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute41)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute40)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute39)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute38)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute37)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute36)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute35)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute34)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute33)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute32)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute31)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute30)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute29)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute28)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute27)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute26)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute25)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute24)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute23)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute22)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute21)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute20)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute19)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute18)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute17)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute16)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute15)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute14)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute13)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute12)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute11)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute10)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute9)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute8)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute7)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute6)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute5)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute4)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute3)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute2)
-        Me.fraRandom14.Controls.Add(Me.btnAddMoveRoute1)
+        Me.fraRandom14.Controls.Add(Me.lstvwMoveRoute)
         Me.fraRandom14.Location = New System.Drawing.Point(203, 19)
         Me.fraRandom14.Name = "fraRandom14"
         Me.fraRandom14.Size = New System.Drawing.Size(596, 421)
@@ -953,392 +923,97 @@ Partial Class frmEditor_Events
         Me.fraRandom14.TabStop = False
         Me.fraRandom14.Text = "Commands"
         '
-        'btnAddMoveRoute43
-        '
-        Me.btnAddMoveRoute43.Location = New System.Drawing.Point(408, 384)
-        Me.btnAddMoveRoute43.Name = "btnAddMoveRoute43"
-        Me.btnAddMoveRoute43.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute43.TabIndex = 42
-        Me.btnAddMoveRoute43.Text = "Set Graphic..."
-        Me.btnAddMoveRoute43.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute42
-        '
-        Me.btnAddMoveRoute42.Location = New System.Drawing.Point(408, 339)
-        Me.btnAddMoveRoute42.Name = "btnAddMoveRoute42"
-        Me.btnAddMoveRoute42.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute42.TabIndex = 41
-        Me.btnAddMoveRoute42.Text = "Set Pos. Above Player"
-        Me.btnAddMoveRoute42.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute41
-        '
-        Me.btnAddMoveRoute41.Location = New System.Drawing.Point(408, 310)
-        Me.btnAddMoveRoute41.Name = "btnAddMoveRoute41"
-        Me.btnAddMoveRoute41.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute41.TabIndex = 40
-        Me.btnAddMoveRoute41.Text = "Set Pos. With Player"
-        Me.btnAddMoveRoute41.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute40
-        '
-        Me.btnAddMoveRoute40.Location = New System.Drawing.Point(408, 281)
-        Me.btnAddMoveRoute40.Name = "btnAddMoveRoute40"
-        Me.btnAddMoveRoute40.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute40.TabIndex = 39
-        Me.btnAddMoveRoute40.Text = "Set Pos. Below Player"
-        Me.btnAddMoveRoute40.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute39
-        '
-        Me.btnAddMoveRoute39.Location = New System.Drawing.Point(408, 223)
-        Me.btnAddMoveRoute39.Name = "btnAddMoveRoute39"
-        Me.btnAddMoveRoute39.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute39.TabIndex = 38
-        Me.btnAddMoveRoute39.Text = "Walkthrough OFF"
-        Me.btnAddMoveRoute39.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute38
-        '
-        Me.btnAddMoveRoute38.Location = New System.Drawing.Point(408, 194)
-        Me.btnAddMoveRoute38.Name = "btnAddMoveRoute38"
-        Me.btnAddMoveRoute38.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute38.TabIndex = 37
-        Me.btnAddMoveRoute38.Text = "Walkthrough ON"
-        Me.btnAddMoveRoute38.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute37
-        '
-        Me.btnAddMoveRoute37.Location = New System.Drawing.Point(408, 136)
-        Me.btnAddMoveRoute37.Name = "btnAddMoveRoute37"
-        Me.btnAddMoveRoute37.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute37.TabIndex = 36
-        Me.btnAddMoveRoute37.Text = "Fixed Direction OFF"
-        Me.btnAddMoveRoute37.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute36
-        '
-        Me.btnAddMoveRoute36.Location = New System.Drawing.Point(408, 107)
-        Me.btnAddMoveRoute36.Name = "btnAddMoveRoute36"
-        Me.btnAddMoveRoute36.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute36.TabIndex = 35
-        Me.btnAddMoveRoute36.Text = "Fixed Direction ON"
-        Me.btnAddMoveRoute36.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute35
-        '
-        Me.btnAddMoveRoute35.Location = New System.Drawing.Point(408, 48)
-        Me.btnAddMoveRoute35.Name = "btnAddMoveRoute35"
-        Me.btnAddMoveRoute35.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute35.TabIndex = 34
-        Me.btnAddMoveRoute35.Text = "Walk. Anim. OFF"
-        Me.btnAddMoveRoute35.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute34
-        '
-        Me.btnAddMoveRoute34.Location = New System.Drawing.Point(408, 19)
-        Me.btnAddMoveRoute34.Name = "btnAddMoveRoute34"
-        Me.btnAddMoveRoute34.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute34.TabIndex = 33
-        Me.btnAddMoveRoute34.Text = "Walking Anim. ON"
-        Me.btnAddMoveRoute34.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute33
-        '
-        Me.btnAddMoveRoute33.Location = New System.Drawing.Point(274, 310)
-        Me.btnAddMoveRoute33.Name = "btnAddMoveRoute33"
-        Me.btnAddMoveRoute33.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute33.TabIndex = 32
-        Me.btnAddMoveRoute33.Text = "Set Freq. to Highest"
-        Me.btnAddMoveRoute33.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute32
-        '
-        Me.btnAddMoveRoute32.Location = New System.Drawing.Point(274, 281)
-        Me.btnAddMoveRoute32.Name = "btnAddMoveRoute32"
-        Me.btnAddMoveRoute32.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute32.TabIndex = 31
-        Me.btnAddMoveRoute32.Text = "Set Freq. to Higher"
-        Me.btnAddMoveRoute32.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute31
-        '
-        Me.btnAddMoveRoute31.Location = New System.Drawing.Point(274, 252)
-        Me.btnAddMoveRoute31.Name = "btnAddMoveRoute31"
-        Me.btnAddMoveRoute31.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute31.TabIndex = 30
-        Me.btnAddMoveRoute31.Text = "Set Freq. to Normal"
-        Me.btnAddMoveRoute31.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute30
-        '
-        Me.btnAddMoveRoute30.Location = New System.Drawing.Point(274, 223)
-        Me.btnAddMoveRoute30.Name = "btnAddMoveRoute30"
-        Me.btnAddMoveRoute30.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute30.TabIndex = 29
-        Me.btnAddMoveRoute30.Text = "Set Freq. to Lower"
-        Me.btnAddMoveRoute30.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute29
-        '
-        Me.btnAddMoveRoute29.Location = New System.Drawing.Point(274, 194)
-        Me.btnAddMoveRoute29.Name = "btnAddMoveRoute29"
-        Me.btnAddMoveRoute29.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute29.TabIndex = 28
-        Me.btnAddMoveRoute29.Text = "Set Freq. to Lowest"
-        Me.btnAddMoveRoute29.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute28
-        '
-        Me.btnAddMoveRoute28.Location = New System.Drawing.Point(274, 165)
-        Me.btnAddMoveRoute28.Name = "btnAddMoveRoute28"
-        Me.btnAddMoveRoute28.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute28.TabIndex = 27
-        Me.btnAddMoveRoute28.Text = "Set Speed 4x Faster"
-        Me.btnAddMoveRoute28.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute27
-        '
-        Me.btnAddMoveRoute27.Location = New System.Drawing.Point(274, 136)
-        Me.btnAddMoveRoute27.Name = "btnAddMoveRoute27"
-        Me.btnAddMoveRoute27.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute27.TabIndex = 26
-        Me.btnAddMoveRoute27.Text = "Set Speed 2x Faster"
-        Me.btnAddMoveRoute27.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute26
-        '
-        Me.btnAddMoveRoute26.Location = New System.Drawing.Point(274, 107)
-        Me.btnAddMoveRoute26.Name = "btnAddMoveRoute26"
-        Me.btnAddMoveRoute26.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute26.TabIndex = 25
-        Me.btnAddMoveRoute26.Text = "Set Speed to Normal"
-        Me.btnAddMoveRoute26.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute25
-        '
-        Me.btnAddMoveRoute25.Location = New System.Drawing.Point(274, 77)
-        Me.btnAddMoveRoute25.Name = "btnAddMoveRoute25"
-        Me.btnAddMoveRoute25.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute25.TabIndex = 24
-        Me.btnAddMoveRoute25.Text = "Set Speed 2x Slower"
-        Me.btnAddMoveRoute25.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute24
-        '
-        Me.btnAddMoveRoute24.Location = New System.Drawing.Point(274, 48)
-        Me.btnAddMoveRoute24.Name = "btnAddMoveRoute24"
-        Me.btnAddMoveRoute24.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute24.TabIndex = 23
-        Me.btnAddMoveRoute24.Text = "Set Speed 4x Slower"
-        Me.btnAddMoveRoute24.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute23
-        '
-        Me.btnAddMoveRoute23.Location = New System.Drawing.Point(274, 19)
-        Me.btnAddMoveRoute23.Name = "btnAddMoveRoute23"
-        Me.btnAddMoveRoute23.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute23.TabIndex = 22
-        Me.btnAddMoveRoute23.Text = "Set Speed 8x Slower"
-        Me.btnAddMoveRoute23.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute22
-        '
-        Me.btnAddMoveRoute22.Location = New System.Drawing.Point(140, 281)
-        Me.btnAddMoveRoute22.Name = "btnAddMoveRoute22"
-        Me.btnAddMoveRoute22.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute22.TabIndex = 21
-        Me.btnAddMoveRoute22.Text = "Turn From Player***"
-        Me.btnAddMoveRoute22.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute21
-        '
-        Me.btnAddMoveRoute21.Location = New System.Drawing.Point(140, 252)
-        Me.btnAddMoveRoute21.Name = "btnAddMoveRoute21"
-        Me.btnAddMoveRoute21.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute21.TabIndex = 20
-        Me.btnAddMoveRoute21.Text = "Turn To Player***"
-        Me.btnAddMoveRoute21.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute20
-        '
-        Me.btnAddMoveRoute20.Location = New System.Drawing.Point(140, 223)
-        Me.btnAddMoveRoute20.Name = "btnAddMoveRoute20"
-        Me.btnAddMoveRoute20.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute20.TabIndex = 19
-        Me.btnAddMoveRoute20.Text = "Turn Randomly"
-        Me.btnAddMoveRoute20.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute19
-        '
-        Me.btnAddMoveRoute19.Location = New System.Drawing.Point(140, 194)
-        Me.btnAddMoveRoute19.Name = "btnAddMoveRoute19"
-        Me.btnAddMoveRoute19.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute19.TabIndex = 18
-        Me.btnAddMoveRoute19.Text = "Turn 180 °"
-        Me.btnAddMoveRoute19.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute18
-        '
-        Me.btnAddMoveRoute18.Location = New System.Drawing.Point(140, 165)
-        Me.btnAddMoveRoute18.Name = "btnAddMoveRoute18"
-        Me.btnAddMoveRoute18.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute18.TabIndex = 17
-        Me.btnAddMoveRoute18.Text = "Turn 90 ° Left"
-        Me.btnAddMoveRoute18.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute17
-        '
-        Me.btnAddMoveRoute17.Location = New System.Drawing.Point(140, 136)
-        Me.btnAddMoveRoute17.Name = "btnAddMoveRoute17"
-        Me.btnAddMoveRoute17.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute17.TabIndex = 16
-        Me.btnAddMoveRoute17.Text = "Turn 90 ° Right"
-        Me.btnAddMoveRoute17.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute16
-        '
-        Me.btnAddMoveRoute16.Location = New System.Drawing.Point(140, 107)
-        Me.btnAddMoveRoute16.Name = "btnAddMoveRoute16"
-        Me.btnAddMoveRoute16.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute16.TabIndex = 15
-        Me.btnAddMoveRoute16.Text = "Turn Right"
-        Me.btnAddMoveRoute16.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute15
-        '
-        Me.btnAddMoveRoute15.Location = New System.Drawing.Point(140, 77)
-        Me.btnAddMoveRoute15.Name = "btnAddMoveRoute15"
-        Me.btnAddMoveRoute15.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute15.TabIndex = 14
-        Me.btnAddMoveRoute15.Text = "Turn Left"
-        Me.btnAddMoveRoute15.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute14
-        '
-        Me.btnAddMoveRoute14.Location = New System.Drawing.Point(140, 48)
-        Me.btnAddMoveRoute14.Name = "btnAddMoveRoute14"
-        Me.btnAddMoveRoute14.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute14.TabIndex = 13
-        Me.btnAddMoveRoute14.Text = "Turn Down"
-        Me.btnAddMoveRoute14.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute13
-        '
-        Me.btnAddMoveRoute13.Location = New System.Drawing.Point(140, 19)
-        Me.btnAddMoveRoute13.Name = "btnAddMoveRoute13"
-        Me.btnAddMoveRoute13.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute13.TabIndex = 12
-        Me.btnAddMoveRoute13.Text = "Turn Up"
-        Me.btnAddMoveRoute13.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute12
-        '
-        Me.btnAddMoveRoute12.Location = New System.Drawing.Point(6, 368)
-        Me.btnAddMoveRoute12.Name = "btnAddMoveRoute12"
-        Me.btnAddMoveRoute12.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute12.TabIndex = 11
-        Me.btnAddMoveRoute12.Text = "Wait 1000Ms"
-        Me.btnAddMoveRoute12.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute11
-        '
-        Me.btnAddMoveRoute11.Location = New System.Drawing.Point(6, 339)
-        Me.btnAddMoveRoute11.Name = "btnAddMoveRoute11"
-        Me.btnAddMoveRoute11.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute11.TabIndex = 10
-        Me.btnAddMoveRoute11.Text = "Wait 500Ms"
-        Me.btnAddMoveRoute11.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute10
-        '
-        Me.btnAddMoveRoute10.Location = New System.Drawing.Point(6, 310)
-        Me.btnAddMoveRoute10.Name = "btnAddMoveRoute10"
-        Me.btnAddMoveRoute10.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute10.TabIndex = 9
-        Me.btnAddMoveRoute10.Text = "Wait 100Ms"
-        Me.btnAddMoveRoute10.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute9
-        '
-        Me.btnAddMoveRoute9.Location = New System.Drawing.Point(6, 252)
-        Me.btnAddMoveRoute9.Name = "btnAddMoveRoute9"
-        Me.btnAddMoveRoute9.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute9.TabIndex = 8
-        Me.btnAddMoveRoute9.Text = "Step Back"
-        Me.btnAddMoveRoute9.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute8
-        '
-        Me.btnAddMoveRoute8.Location = New System.Drawing.Point(6, 223)
-        Me.btnAddMoveRoute8.Name = "btnAddMoveRoute8"
-        Me.btnAddMoveRoute8.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute8.TabIndex = 7
-        Me.btnAddMoveRoute8.Text = "Step Forward"
-        Me.btnAddMoveRoute8.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute7
-        '
-        Me.btnAddMoveRoute7.Location = New System.Drawing.Point(6, 194)
-        Me.btnAddMoveRoute7.Name = "btnAddMoveRoute7"
-        Me.btnAddMoveRoute7.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute7.TabIndex = 6
-        Me.btnAddMoveRoute7.Text = "Move From Player***"
-        Me.btnAddMoveRoute7.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute6
-        '
-        Me.btnAddMoveRoute6.Location = New System.Drawing.Point(6, 165)
-        Me.btnAddMoveRoute6.Name = "btnAddMoveRoute6"
-        Me.btnAddMoveRoute6.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute6.TabIndex = 5
-        Me.btnAddMoveRoute6.Text = "Move To Player***"
-        Me.btnAddMoveRoute6.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute5
-        '
-        Me.btnAddMoveRoute5.Location = New System.Drawing.Point(6, 136)
-        Me.btnAddMoveRoute5.Name = "btnAddMoveRoute5"
-        Me.btnAddMoveRoute5.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute5.TabIndex = 4
-        Me.btnAddMoveRoute5.Text = "Move Randomly"
-        Me.btnAddMoveRoute5.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute4
-        '
-        Me.btnAddMoveRoute4.Location = New System.Drawing.Point(6, 107)
-        Me.btnAddMoveRoute4.Name = "btnAddMoveRoute4"
-        Me.btnAddMoveRoute4.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute4.TabIndex = 3
-        Me.btnAddMoveRoute4.Text = "Move Right"
-        Me.btnAddMoveRoute4.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute3
-        '
-        Me.btnAddMoveRoute3.Location = New System.Drawing.Point(6, 77)
-        Me.btnAddMoveRoute3.Name = "btnAddMoveRoute3"
-        Me.btnAddMoveRoute3.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute3.TabIndex = 2
-        Me.btnAddMoveRoute3.Text = "Move Left"
-        Me.btnAddMoveRoute3.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute2
-        '
-        Me.btnAddMoveRoute2.Location = New System.Drawing.Point(6, 48)
-        Me.btnAddMoveRoute2.Name = "btnAddMoveRoute2"
-        Me.btnAddMoveRoute2.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute2.TabIndex = 1
-        Me.btnAddMoveRoute2.Text = "Move Down"
-        Me.btnAddMoveRoute2.UseVisualStyleBackColor = True
-        '
-        'btnAddMoveRoute1
-        '
-        Me.btnAddMoveRoute1.Location = New System.Drawing.Point(6, 19)
-        Me.btnAddMoveRoute1.Name = "btnAddMoveRoute1"
-        Me.btnAddMoveRoute1.Size = New System.Drawing.Size(128, 23)
-        Me.btnAddMoveRoute1.TabIndex = 0
-        Me.btnAddMoveRoute1.Text = "Move Up"
-        Me.btnAddMoveRoute1.UseVisualStyleBackColor = True
+        'lstvwMoveRoute
+        '
+        Me.lstvwMoveRoute.AutoArrange = False
+        Me.lstvwMoveRoute.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lstvwMoveRoute.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lstvwMoveRoute.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lstvwMoveRoute.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ListViewGroup43.Header = "Movement"
+        ListViewGroup43.Name = "lstVgMovement"
+        ListViewGroup44.Header = "Wait"
+        ListViewGroup44.Name = "lstVgWait"
+        ListViewGroup45.Header = "Turning"
+        ListViewGroup45.Name = "lstVgTurn"
+        ListViewGroup46.Header = "Speed"
+        ListViewGroup46.Name = "lstVgSpeed"
+        ListViewGroup47.Header = "Walk Animation"
+        ListViewGroup47.Name = "lstVgWalk"
+        ListViewGroup48.Header = "Fixed Direction"
+        ListViewGroup48.Name = "lstVgDirection"
+        ListViewGroup49.Header = "WalkThrough"
+        ListViewGroup49.Name = "lstVgWalkThrough"
+        ListViewGroup50.Header = "Set Position"
+        ListViewGroup50.Name = "lstVgSetposition"
+        ListViewGroup51.Header = "Set Graphic"
+        ListViewGroup51.Name = "lstVgSetGraphic"
+        Me.lstvwMoveRoute.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup43, ListViewGroup44, ListViewGroup45, ListViewGroup46, ListViewGroup47, ListViewGroup48, ListViewGroup49, ListViewGroup50, ListViewGroup51})
+        Me.lstvwMoveRoute.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        ListViewItem171.Group = ListViewGroup43
+        ListViewItem172.Group = ListViewGroup43
+        ListViewItem172.IndentCount = 1
+        ListViewItem173.Group = ListViewGroup43
+        ListViewItem174.Group = ListViewGroup43
+        ListViewItem174.IndentCount = 1
+        ListViewItem175.Group = ListViewGroup43
+        ListViewItem176.Group = ListViewGroup43
+        ListViewItem177.Group = ListViewGroup43
+        ListViewItem178.Group = ListViewGroup43
+        ListViewItem179.Group = ListViewGroup43
+        ListViewItem180.Group = ListViewGroup44
+        ListViewItem181.Group = ListViewGroup44
+        ListViewItem182.Group = ListViewGroup44
+        ListViewItem183.Group = ListViewGroup45
+        ListViewItem184.Group = ListViewGroup45
+        ListViewItem185.Group = ListViewGroup45
+        ListViewItem186.Group = ListViewGroup45
+        ListViewItem187.Group = ListViewGroup45
+        ListViewItem188.Group = ListViewGroup45
+        ListViewItem189.Group = ListViewGroup45
+        ListViewItem190.Group = ListViewGroup45
+        ListViewItem191.Group = ListViewGroup45
+        ListViewItem192.Group = ListViewGroup45
+        ListViewItem193.Group = ListViewGroup46
+        ListViewItem194.Group = ListViewGroup46
+        ListViewItem195.Group = ListViewGroup46
+        ListViewItem196.Group = ListViewGroup46
+        ListViewItem197.Group = ListViewGroup46
+        ListViewItem198.Group = ListViewGroup46
+        ListViewItem199.Group = ListViewGroup46
+        ListViewItem200.Group = ListViewGroup46
+        ListViewItem201.Group = ListViewGroup46
+        ListViewItem202.Group = ListViewGroup46
+        ListViewItem203.Group = ListViewGroup46
+        ListViewItem204.Group = ListViewGroup47
+        ListViewItem205.Group = ListViewGroup47
+        ListViewItem206.Group = ListViewGroup48
+        ListViewItem207.Group = ListViewGroup48
+        ListViewItem208.Group = ListViewGroup49
+        ListViewItem209.Group = ListViewGroup49
+        ListViewItem210.Group = ListViewGroup50
+        ListViewItem211.Group = ListViewGroup50
+        ListViewItem212.Group = ListViewGroup50
+        ListViewItem213.Group = ListViewGroup51
+        Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem171, ListViewItem172, ListViewItem173, ListViewItem174, ListViewItem175, ListViewItem176, ListViewItem177, ListViewItem178, ListViewItem179, ListViewItem180, ListViewItem181, ListViewItem182, ListViewItem183, ListViewItem184, ListViewItem185, ListViewItem186, ListViewItem187, ListViewItem188, ListViewItem189, ListViewItem190, ListViewItem191, ListViewItem192, ListViewItem193, ListViewItem194, ListViewItem195, ListViewItem196, ListViewItem197, ListViewItem198, ListViewItem199, ListViewItem200, ListViewItem201, ListViewItem202, ListViewItem203, ListViewItem204, ListViewItem205, ListViewItem206, ListViewItem207, ListViewItem208, ListViewItem209, ListViewItem210, ListViewItem211, ListViewItem212, ListViewItem213})
+        Me.lstvwMoveRoute.LabelWrap = False
+        Me.lstvwMoveRoute.Location = New System.Drawing.Point(3, 16)
+        Me.lstvwMoveRoute.MultiSelect = False
+        Me.lstvwMoveRoute.Name = "lstvwMoveRoute"
+        Me.lstvwMoveRoute.Size = New System.Drawing.Size(590, 397)
+        Me.lstvwMoveRoute.TabIndex = 4
+        Me.lstvwMoveRoute.UseCompatibleStateImageBehavior = False
+        Me.lstvwMoveRoute.View = System.Windows.Forms.View.Tile
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = ""
+        Me.ColumnHeader3.Width = 150
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = ""
+        Me.ColumnHeader4.Width = 150
         '
         'lstMoveRoute
         '
@@ -1463,6 +1138,10 @@ Partial Class frmEditor_Events
         '
         'fraDialogue
         '
+        Me.fraDialogue.Controls.Add(Me.fraConditionalBranch)
+        Me.fraDialogue.Controls.Add(Me.fraSetSelfSwitch)
+        Me.fraDialogue.Controls.Add(Me.fraPlayerVariable)
+        Me.fraDialogue.Controls.Add(Me.fraShowChatBubble)
         Me.fraDialogue.Controls.Add(Me.fraCommand33)
         Me.fraDialogue.Controls.Add(Me.fraCommand17)
         Me.fraDialogue.Controls.Add(Me.fraShowChoices)
@@ -1470,7 +1149,6 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraShowText)
         Me.fraDialogue.Controls.Add(Me.fraAddText)
         Me.fraDialogue.Controls.Add(Me.fraCommand23)
-        Me.fraDialogue.Controls.Add(Me.fraCommand7)
         Me.fraDialogue.Controls.Add(Me.fraCommand27)
         Me.fraDialogue.Controls.Add(Me.fraCommand18)
         Me.fraDialogue.Controls.Add(Me.fraCommand34)
@@ -1485,15 +1163,12 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraCommand26)
         Me.fraDialogue.Controls.Add(Me.fraCommand21)
         Me.fraDialogue.Controls.Add(Me.fraCommand19)
-        Me.fraDialogue.Controls.Add(Me.fraCommand3)
         Me.fraDialogue.Controls.Add(Me.fraCommand13)
         Me.fraDialogue.Controls.Add(Me.fraCommand11)
         Me.fraDialogue.Controls.Add(Me.fraCommand10)
-        Me.fraDialogue.Controls.Add(Me.fraCommand6)
         Me.fraDialogue.Controls.Add(Me.fraCommand9)
         Me.fraDialogue.Controls.Add(Me.fraCommand8)
         Me.fraDialogue.Controls.Add(Me.fraCommand32)
-        Me.fraDialogue.Controls.Add(Me.fraCommand4)
         Me.fraDialogue.Controls.Add(Me.fraCommand16)
         Me.fraDialogue.Controls.Add(Me.fraCommand15)
         Me.fraDialogue.Controls.Add(Me.fraCommand14)
@@ -1504,74 +1179,733 @@ Partial Class frmEditor_Events
         Me.fraDialogue.TabIndex = 6
         Me.fraDialogue.TabStop = False
         '
-        'fraPlayerSwitch
+        'fraConditionalBranch
         '
-        Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerSwitchOk)
-        Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerswitchCancel)
-        Me.fraPlayerSwitch.Controls.Add(Me.lblRandomLabel22)
-        Me.fraPlayerSwitch.Controls.Add(Me.lblRandomLabel23)
-        Me.fraPlayerSwitch.Controls.Add(Me.cmbPlayerSwitchSet)
-        Me.fraPlayerSwitch.Controls.Add(Me.cmbSwitch)
-        Me.fraPlayerSwitch.Location = New System.Drawing.Point(5, 13)
-        Me.fraPlayerSwitch.Name = "fraPlayerSwitch"
-        Me.fraPlayerSwitch.Size = New System.Drawing.Size(245, 98)
-        Me.fraPlayerSwitch.TabIndex = 5
-        Me.fraPlayerSwitch.TabStop = False
-        Me.fraPlayerSwitch.Text = "Player Switch"
-        Me.fraPlayerSwitch.Visible = False
+        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
+        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchCancel)
+        Me.fraConditionalBranch.Controls.Add(Me.fraConditions_Quest)
+        Me.fraConditionalBranch.Controls.Add(Me.lblConditionQuest)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition7)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition6)
+        Me.fraConditionalBranch.Controls.Add(Me.lblRandomLabel2)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition5)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LearntSkill)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition4)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_ClassIs)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition3)
+        Me.fraConditionalBranch.Controls.Add(Me.scrlCondition_Quest)
+        Me.fraConditionalBranch.Controls.Add(Me.scrlCondition_HasItem)
+        Me.fraConditionalBranch.Controls.Add(Me.lblHasItemAmt)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition2)
+        Me.fraConditionalBranch.Controls.Add(Me.lblRandomLabel35)
+        Me.fraConditionalBranch.Controls.Add(Me.lblRandomLabel1)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitchCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondtion_PlayerSwitchCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LevelCompare)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_HasItem)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitch)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerSwitch)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition1)
+        Me.fraConditionalBranch.Controls.Add(Me.txtCondition_LevelAmount)
+        Me.fraConditionalBranch.Controls.Add(Me.txtCondition_PlayerVarCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarCompare)
+        Me.fraConditionalBranch.Controls.Add(Me.lblRandomLabel0)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarIndex)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition0)
+        Me.fraConditionalBranch.Location = New System.Drawing.Point(7, 11)
+        Me.fraConditionalBranch.Name = "fraConditionalBranch"
+        Me.fraConditionalBranch.Size = New System.Drawing.Size(400, 484)
+        Me.fraConditionalBranch.TabIndex = 35
+        Me.fraConditionalBranch.TabStop = False
+        Me.fraConditionalBranch.Text = "Conditional Branch"
         '
-        'btnSetPlayerSwitchOk
+        'btnConditionalBranchOk
         '
-        Me.btnSetPlayerSwitchOk.Location = New System.Drawing.Point(83, 70)
-        Me.btnSetPlayerSwitchOk.Name = "btnSetPlayerSwitchOk"
-        Me.btnSetPlayerSwitchOk.Size = New System.Drawing.Size(75, 23)
-        Me.btnSetPlayerSwitchOk.TabIndex = 12
-        Me.btnSetPlayerSwitchOk.Text = "Ok"
-        Me.btnSetPlayerSwitchOk.UseVisualStyleBackColor = True
+        Me.btnConditionalBranchOk.Location = New System.Drawing.Point(234, 452)
+        Me.btnConditionalBranchOk.Name = "btnConditionalBranchOk"
+        Me.btnConditionalBranchOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnConditionalBranchOk.TabIndex = 21
+        Me.btnConditionalBranchOk.Text = "Ok"
+        Me.btnConditionalBranchOk.UseVisualStyleBackColor = True
         '
-        'btnSetPlayerswitchCancel
+        'btnConditionalBranchCancel
         '
-        Me.btnSetPlayerswitchCancel.Location = New System.Drawing.Point(164, 70)
-        Me.btnSetPlayerswitchCancel.Name = "btnSetPlayerswitchCancel"
-        Me.btnSetPlayerswitchCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnSetPlayerswitchCancel.TabIndex = 11
-        Me.btnSetPlayerswitchCancel.Text = "Cancel"
-        Me.btnSetPlayerswitchCancel.UseVisualStyleBackColor = True
+        Me.btnConditionalBranchCancel.Location = New System.Drawing.Point(315, 452)
+        Me.btnConditionalBranchCancel.Name = "btnConditionalBranchCancel"
+        Me.btnConditionalBranchCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnConditionalBranchCancel.TabIndex = 21
+        Me.btnConditionalBranchCancel.Text = "Cancel"
+        Me.btnConditionalBranchCancel.UseVisualStyleBackColor = True
         '
-        'lblRandomLabel22
+        'fraConditions_Quest
         '
-        Me.lblRandomLabel22.AutoSize = True
-        Me.lblRandomLabel22.Location = New System.Drawing.Point(10, 50)
-        Me.lblRandomLabel22.Name = "lblRandomLabel22"
-        Me.lblRandomLabel22.Size = New System.Drawing.Size(38, 13)
-        Me.lblRandomLabel22.TabIndex = 0
-        Me.lblRandomLabel22.Text = "Set to:"
+        Me.fraConditions_Quest.Controls.Add(Me.lblCondition_QuestTask)
+        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest1)
+        Me.fraConditions_Quest.Controls.Add(Me.Label2)
+        Me.fraConditions_Quest.Controls.Add(Me.lblRandomLabel50)
+        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest0)
+        Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
+        Me.fraConditions_Quest.Controls.Add(Me.scrlCondition_QuestTask)
+        Me.fraConditions_Quest.Location = New System.Drawing.Point(6, 345)
+        Me.fraConditions_Quest.Name = "fraConditions_Quest"
+        Me.fraConditions_Quest.Size = New System.Drawing.Size(384, 93)
+        Me.fraConditions_Quest.TabIndex = 20
+        Me.fraConditions_Quest.TabStop = False
+        Me.fraConditions_Quest.Text = "Quest Conditions"
+        Me.fraConditions_Quest.Visible = False
         '
-        'lblRandomLabel23
+        'lblCondition_QuestTask
         '
-        Me.lblRandomLabel23.AutoSize = True
-        Me.lblRandomLabel23.Location = New System.Drawing.Point(10, 17)
-        Me.lblRandomLabel23.Name = "lblRandomLabel23"
-        Me.lblRandomLabel23.Size = New System.Drawing.Size(39, 13)
-        Me.lblRandomLabel23.TabIndex = 0
-        Me.lblRandomLabel23.Text = "Switch"
+        Me.lblCondition_QuestTask.AutoSize = True
+        Me.lblCondition_QuestTask.Location = New System.Drawing.Point(214, 61)
+        Me.lblCondition_QuestTask.Name = "lblCondition_QuestTask"
+        Me.lblCondition_QuestTask.Size = New System.Drawing.Size(20, 13)
+        Me.lblCondition_QuestTask.TabIndex = 20
+        Me.lblCondition_QuestTask.Text = "#1"
         '
-        'cmbPlayerSwitchSet
+        'optCondition_Quest1
         '
-        Me.cmbPlayerSwitchSet.FormattingEnabled = True
-        Me.cmbPlayerSwitchSet.Items.AddRange(New Object() {"True", "False"})
-        Me.cmbPlayerSwitchSet.Location = New System.Drawing.Point(60, 43)
-        Me.cmbPlayerSwitchSet.Name = "cmbPlayerSwitchSet"
-        Me.cmbPlayerSwitchSet.Size = New System.Drawing.Size(179, 21)
-        Me.cmbPlayerSwitchSet.TabIndex = 1
+        Me.optCondition_Quest1.AutoSize = True
+        Me.optCondition_Quest1.Location = New System.Drawing.Point(5, 59)
+        Me.optCondition_Quest1.Name = "optCondition_Quest1"
+        Me.optCondition_Quest1.Size = New System.Drawing.Size(49, 17)
+        Me.optCondition_Quest1.TabIndex = 1
+        Me.optCondition_Quest1.TabStop = True
+        Me.optCondition_Quest1.Text = "Task"
+        Me.optCondition_Quest1.UseVisualStyleBackColor = True
         '
-        'cmbSwitch
+        'Label2
         '
-        Me.cmbSwitch.FormattingEnabled = True
-        Me.cmbSwitch.Location = New System.Drawing.Point(60, 14)
-        Me.cmbSwitch.Name = "cmbSwitch"
-        Me.cmbSwitch.Size = New System.Drawing.Size(179, 21)
-        Me.cmbSwitch.TabIndex = 1
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(105, 61)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(93, 13)
+        Me.Label2.TabIndex = 19
+        Me.Label2.Text = "Player is on task..."
+        '
+        'lblRandomLabel50
+        '
+        Me.lblRandomLabel50.AutoSize = True
+        Me.lblRandomLabel50.Location = New System.Drawing.Point(104, 27)
+        Me.lblRandomLabel50.Name = "lblRandomLabel50"
+        Me.lblRandomLabel50.Size = New System.Drawing.Size(104, 13)
+        Me.lblRandomLabel50.TabIndex = 19
+        Me.lblRandomLabel50.Text = "If selected quest is..."
+        '
+        'optCondition_Quest0
+        '
+        Me.optCondition_Quest0.AutoSize = True
+        Me.optCondition_Quest0.Location = New System.Drawing.Point(5, 25)
+        Me.optCondition_Quest0.Name = "optCondition_Quest0"
+        Me.optCondition_Quest0.Size = New System.Drawing.Size(62, 17)
+        Me.optCondition_Quest0.TabIndex = 0
+        Me.optCondition_Quest0.TabStop = True
+        Me.optCondition_Quest0.Text = "General"
+        Me.optCondition_Quest0.UseVisualStyleBackColor = True
+        '
+        'cmbCondition_General
+        '
+        Me.cmbCondition_General.FormattingEnabled = True
+        Me.cmbCondition_General.Items.AddRange(New Object() {"Not Started", "Started", "Completed", "Can Start", "Can End"})
+        Me.cmbCondition_General.Location = New System.Drawing.Point(257, 24)
+        Me.cmbCondition_General.Name = "cmbCondition_General"
+        Me.cmbCondition_General.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_General.TabIndex = 6
+        '
+        'scrlCondition_QuestTask
+        '
+        Me.scrlCondition_QuestTask.Location = New System.Drawing.Point(257, 59)
+        Me.scrlCondition_QuestTask.Name = "scrlCondition_QuestTask"
+        Me.scrlCondition_QuestTask.Size = New System.Drawing.Size(121, 17)
+        Me.scrlCondition_QuestTask.TabIndex = 11
+        '
+        'lblConditionQuest
+        '
+        Me.lblConditionQuest.AutoSize = True
+        Me.lblConditionQuest.Location = New System.Drawing.Point(120, 310)
+        Me.lblConditionQuest.Name = "lblConditionQuest"
+        Me.lblConditionQuest.Size = New System.Drawing.Size(47, 13)
+        Me.lblConditionQuest.TabIndex = 19
+        Me.lblConditionQuest.Text = "Quest: 1"
+        '
+        'optCondition7
+        '
+        Me.optCondition7.AutoSize = True
+        Me.optCondition7.Location = New System.Drawing.Point(7, 325)
+        Me.optCondition7.Name = "optCondition7"
+        Me.optCondition7.Size = New System.Drawing.Size(86, 17)
+        Me.optCondition7.TabIndex = 18
+        Me.optCondition7.TabStop = True
+        Me.optCondition7.Text = "Quest Status"
+        Me.optCondition7.UseVisualStyleBackColor = True
+        '
+        'optCondition6
+        '
+        Me.optCondition6.AutoSize = True
+        Me.optCondition6.Location = New System.Drawing.Point(7, 288)
+        Me.optCondition6.Name = "optCondition6"
+        Me.optCondition6.Size = New System.Drawing.Size(78, 17)
+        Me.optCondition6.TabIndex = 18
+        Me.optCondition6.TabStop = True
+        Me.optCondition6.Text = "Self Switch"
+        Me.optCondition6.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel2
+        '
+        Me.lblRandomLabel2.AutoSize = True
+        Me.lblRandomLabel2.Location = New System.Drawing.Point(63, 252)
+        Me.lblRandomLabel2.Name = "lblRandomLabel2"
+        Me.lblRandomLabel2.Size = New System.Drawing.Size(14, 13)
+        Me.lblRandomLabel2.TabIndex = 17
+        Me.lblRandomLabel2.Text = "is"
+        '
+        'optCondition5
+        '
+        Me.optCondition5.AutoSize = True
+        Me.optCondition5.Location = New System.Drawing.Point(6, 250)
+        Me.optCondition5.Name = "optCondition5"
+        Me.optCondition5.Size = New System.Drawing.Size(51, 17)
+        Me.optCondition5.TabIndex = 16
+        Me.optCondition5.TabStop = True
+        Me.optCondition5.Text = "Level"
+        Me.optCondition5.UseVisualStyleBackColor = True
+        '
+        'cmbCondition_LearntSkill
+        '
+        Me.cmbCondition_LearntSkill.FormattingEnabled = True
+        Me.cmbCondition_LearntSkill.Location = New System.Drawing.Point(123, 214)
+        Me.cmbCondition_LearntSkill.Name = "cmbCondition_LearntSkill"
+        Me.cmbCondition_LearntSkill.Size = New System.Drawing.Size(267, 21)
+        Me.cmbCondition_LearntSkill.TabIndex = 15
+        '
+        'optCondition4
+        '
+        Me.optCondition4.AutoSize = True
+        Me.optCondition4.Location = New System.Drawing.Point(6, 215)
+        Me.optCondition4.Name = "optCondition4"
+        Me.optCondition4.Size = New System.Drawing.Size(79, 17)
+        Me.optCondition4.TabIndex = 14
+        Me.optCondition4.TabStop = True
+        Me.optCondition4.Text = "Knows Skill"
+        Me.optCondition4.UseVisualStyleBackColor = True
+        '
+        'cmbCondition_ClassIs
+        '
+        Me.cmbCondition_ClassIs.FormattingEnabled = True
+        Me.cmbCondition_ClassIs.Location = New System.Drawing.Point(123, 184)
+        Me.cmbCondition_ClassIs.Name = "cmbCondition_ClassIs"
+        Me.cmbCondition_ClassIs.Size = New System.Drawing.Size(267, 21)
+        Me.cmbCondition_ClassIs.TabIndex = 13
+        '
+        'optCondition3
+        '
+        Me.optCondition3.AutoSize = True
+        Me.optCondition3.Location = New System.Drawing.Point(6, 185)
+        Me.optCondition3.Name = "optCondition3"
+        Me.optCondition3.Size = New System.Drawing.Size(61, 17)
+        Me.optCondition3.TabIndex = 12
+        Me.optCondition3.TabStop = True
+        Me.optCondition3.Text = "Class Is"
+        Me.optCondition3.UseVisualStyleBackColor = True
+        '
+        'scrlCondition_Quest
+        '
+        Me.scrlCondition_Quest.Location = New System.Drawing.Point(123, 325)
+        Me.scrlCondition_Quest.Name = "scrlCondition_Quest"
+        Me.scrlCondition_Quest.Size = New System.Drawing.Size(267, 17)
+        Me.scrlCondition_Quest.TabIndex = 11
+        '
+        'scrlCondition_HasItem
+        '
+        Me.scrlCondition_HasItem.Location = New System.Drawing.Point(123, 152)
+        Me.scrlCondition_HasItem.Name = "scrlCondition_HasItem"
+        Me.scrlCondition_HasItem.Size = New System.Drawing.Size(267, 17)
+        Me.scrlCondition_HasItem.TabIndex = 11
+        '
+        'lblHasItemAmt
+        '
+        Me.lblHasItemAmt.AutoSize = True
+        Me.lblHasItemAmt.Location = New System.Drawing.Point(79, 156)
+        Me.lblHasItemAmt.Name = "lblHasItemAmt"
+        Me.lblHasItemAmt.Size = New System.Drawing.Size(24, 13)
+        Me.lblHasItemAmt.TabIndex = 10
+        Me.lblHasItemAmt.Text = "x: 1"
+        '
+        'optCondition2
+        '
+        Me.optCondition2.AutoSize = True
+        Me.optCondition2.Location = New System.Drawing.Point(6, 154)
+        Me.optCondition2.Name = "optCondition2"
+        Me.optCondition2.Size = New System.Drawing.Size(67, 17)
+        Me.optCondition2.TabIndex = 9
+        Me.optCondition2.TabStop = True
+        Me.optCondition2.Text = "Has Item"
+        Me.optCondition2.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel35
+        '
+        Me.lblRandomLabel35.AutoSize = True
+        Me.lblRandomLabel35.Location = New System.Drawing.Point(249, 287)
+        Me.lblRandomLabel35.Name = "lblRandomLabel35"
+        Me.lblRandomLabel35.Size = New System.Drawing.Size(14, 13)
+        Me.lblRandomLabel35.TabIndex = 8
+        Me.lblRandomLabel35.Text = "is"
+        '
+        'lblRandomLabel1
+        '
+        Me.lblRandomLabel1.AutoSize = True
+        Me.lblRandomLabel1.Location = New System.Drawing.Point(249, 94)
+        Me.lblRandomLabel1.Name = "lblRandomLabel1"
+        Me.lblRandomLabel1.Size = New System.Drawing.Size(14, 13)
+        Me.lblRandomLabel1.TabIndex = 8
+        Me.lblRandomLabel1.Text = "is"
+        '
+        'cmbCondition_SelfSwitchCondition
+        '
+        Me.cmbCondition_SelfSwitchCondition.FormattingEnabled = True
+        Me.cmbCondition_SelfSwitchCondition.Items.AddRange(New Object() {"True", "False"})
+        Me.cmbCondition_SelfSwitchCondition.Location = New System.Drawing.Point(269, 284)
+        Me.cmbCondition_SelfSwitchCondition.Name = "cmbCondition_SelfSwitchCondition"
+        Me.cmbCondition_SelfSwitchCondition.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_SelfSwitchCondition.TabIndex = 7
+        '
+        'cmbCondtion_PlayerSwitchCondition
+        '
+        Me.cmbCondtion_PlayerSwitchCondition.FormattingEnabled = True
+        Me.cmbCondtion_PlayerSwitchCondition.Items.AddRange(New Object() {"True", "False"})
+        Me.cmbCondtion_PlayerSwitchCondition.Location = New System.Drawing.Point(269, 91)
+        Me.cmbCondtion_PlayerSwitchCondition.Name = "cmbCondtion_PlayerSwitchCondition"
+        Me.cmbCondtion_PlayerSwitchCondition.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondtion_PlayerSwitchCondition.TabIndex = 7
+        '
+        'cmbCondition_LevelCompare
+        '
+        Me.cmbCondition_LevelCompare.FormattingEnabled = True
+        Me.cmbCondition_LevelCompare.Items.AddRange(New Object() {"Equal To", "Great Than Or Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
+        Me.cmbCondition_LevelCompare.Location = New System.Drawing.Point(123, 249)
+        Me.cmbCondition_LevelCompare.Name = "cmbCondition_LevelCompare"
+        Me.cmbCondition_LevelCompare.Size = New System.Drawing.Size(203, 21)
+        Me.cmbCondition_LevelCompare.TabIndex = 6
+        '
+        'cmbCondition_HasItem
+        '
+        Me.cmbCondition_HasItem.FormattingEnabled = True
+        Me.cmbCondition_HasItem.Location = New System.Drawing.Point(123, 118)
+        Me.cmbCondition_HasItem.Name = "cmbCondition_HasItem"
+        Me.cmbCondition_HasItem.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_HasItem.TabIndex = 6
+        '
+        'cmbCondition_SelfSwitch
+        '
+        Me.cmbCondition_SelfSwitch.FormattingEnabled = True
+        Me.cmbCondition_SelfSwitch.Location = New System.Drawing.Point(123, 284)
+        Me.cmbCondition_SelfSwitch.Name = "cmbCondition_SelfSwitch"
+        Me.cmbCondition_SelfSwitch.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_SelfSwitch.TabIndex = 6
+        '
+        'cmbCondition_PlayerSwitch
+        '
+        Me.cmbCondition_PlayerSwitch.FormattingEnabled = True
+        Me.cmbCondition_PlayerSwitch.Location = New System.Drawing.Point(123, 91)
+        Me.cmbCondition_PlayerSwitch.Name = "cmbCondition_PlayerSwitch"
+        Me.cmbCondition_PlayerSwitch.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_PlayerSwitch.TabIndex = 6
+        '
+        'optCondition1
+        '
+        Me.optCondition1.AutoSize = True
+        Me.optCondition1.Location = New System.Drawing.Point(6, 92)
+        Me.optCondition1.Name = "optCondition1"
+        Me.optCondition1.Size = New System.Drawing.Size(89, 17)
+        Me.optCondition1.TabIndex = 5
+        Me.optCondition1.TabStop = True
+        Me.optCondition1.Text = "Player Switch"
+        Me.optCondition1.UseVisualStyleBackColor = True
+        '
+        'txtCondition_LevelAmount
+        '
+        Me.txtCondition_LevelAmount.Location = New System.Drawing.Point(332, 249)
+        Me.txtCondition_LevelAmount.Name = "txtCondition_LevelAmount"
+        Me.txtCondition_LevelAmount.Size = New System.Drawing.Size(58, 20)
+        Me.txtCondition_LevelAmount.TabIndex = 4
+        Me.txtCondition_LevelAmount.Text = "0"
+        '
+        'txtCondition_PlayerVarCondition
+        '
+        Me.txtCondition_PlayerVarCondition.Location = New System.Drawing.Point(269, 51)
+        Me.txtCondition_PlayerVarCondition.Name = "txtCondition_PlayerVarCondition"
+        Me.txtCondition_PlayerVarCondition.Size = New System.Drawing.Size(100, 20)
+        Me.txtCondition_PlayerVarCondition.TabIndex = 4
+        Me.txtCondition_PlayerVarCondition.Text = "0"
+        '
+        'cmbCondition_PlayerVarCompare
+        '
+        Me.cmbCondition_PlayerVarCompare.FormattingEnabled = True
+        Me.cmbCondition_PlayerVarCompare.Items.AddRange(New Object() {"Equal To", "Great Than Or Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
+        Me.cmbCondition_PlayerVarCompare.Location = New System.Drawing.Point(123, 51)
+        Me.cmbCondition_PlayerVarCompare.Name = "cmbCondition_PlayerVarCompare"
+        Me.cmbCondition_PlayerVarCompare.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_PlayerVarCompare.TabIndex = 3
+        '
+        'lblRandomLabel0
+        '
+        Me.lblRandomLabel0.Location = New System.Drawing.Point(250, 25)
+        Me.lblRandomLabel0.Name = "lblRandomLabel0"
+        Me.lblRandomLabel0.Size = New System.Drawing.Size(115, 20)
+        Me.lblRandomLabel0.TabIndex = 2
+        Me.lblRandomLabel0.Text = "is"
+        '
+        'cmbCondition_PlayerVarIndex
+        '
+        Me.cmbCondition_PlayerVarIndex.FormattingEnabled = True
+        Me.cmbCondition_PlayerVarIndex.Location = New System.Drawing.Point(123, 24)
+        Me.cmbCondition_PlayerVarIndex.Name = "cmbCondition_PlayerVarIndex"
+        Me.cmbCondition_PlayerVarIndex.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_PlayerVarIndex.TabIndex = 1
+        '
+        'optCondition0
+        '
+        Me.optCondition0.AutoSize = True
+        Me.optCondition0.Location = New System.Drawing.Point(6, 25)
+        Me.optCondition0.Name = "optCondition0"
+        Me.optCondition0.Size = New System.Drawing.Size(95, 17)
+        Me.optCondition0.TabIndex = 0
+        Me.optCondition0.TabStop = True
+        Me.optCondition0.Text = "Player Variable"
+        Me.optCondition0.UseVisualStyleBackColor = True
+        '
+        'fraSetSelfSwitch
+        '
+        Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchOk)
+        Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchCancel)
+        Me.fraSetSelfSwitch.Controls.Add(Me.lblRandomLabel26)
+        Me.fraSetSelfSwitch.Controls.Add(Me.lblRandomLabel24)
+        Me.fraSetSelfSwitch.Controls.Add(Me.cmbSetSelfSwitchTo)
+        Me.fraSetSelfSwitch.Controls.Add(Me.cmbSetSelfSwitch)
+        Me.fraSetSelfSwitch.Location = New System.Drawing.Point(6, 368)
+        Me.fraSetSelfSwitch.Name = "fraSetSelfSwitch"
+        Me.fraSetSelfSwitch.Size = New System.Drawing.Size(245, 100)
+        Me.fraSetSelfSwitch.TabIndex = 6
+        Me.fraSetSelfSwitch.TabStop = False
+        Me.fraSetSelfSwitch.Text = "Self Switch"
+        Me.fraSetSelfSwitch.Visible = False
+        '
+        'btnSelfswitchOk
+        '
+        Me.btnSelfswitchOk.Location = New System.Drawing.Point(81, 71)
+        Me.btnSelfswitchOk.Name = "btnSelfswitchOk"
+        Me.btnSelfswitchOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelfswitchOk.TabIndex = 18
+        Me.btnSelfswitchOk.Text = "Ok"
+        Me.btnSelfswitchOk.UseVisualStyleBackColor = True
+        '
+        'btnSelfswitchCancel
+        '
+        Me.btnSelfswitchCancel.Location = New System.Drawing.Point(162, 71)
+        Me.btnSelfswitchCancel.Name = "btnSelfswitchCancel"
+        Me.btnSelfswitchCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelfswitchCancel.TabIndex = 17
+        Me.btnSelfswitchCancel.Text = "Cancel"
+        Me.btnSelfswitchCancel.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel26
+        '
+        Me.lblRandomLabel26.AutoSize = True
+        Me.lblRandomLabel26.Location = New System.Drawing.Point(8, 51)
+        Me.lblRandomLabel26.Name = "lblRandomLabel26"
+        Me.lblRandomLabel26.Size = New System.Drawing.Size(38, 13)
+        Me.lblRandomLabel26.TabIndex = 13
+        Me.lblRandomLabel26.Text = "Set to:"
+        '
+        'lblRandomLabel24
+        '
+        Me.lblRandomLabel24.AutoSize = True
+        Me.lblRandomLabel24.Location = New System.Drawing.Point(8, 18)
+        Me.lblRandomLabel24.Name = "lblRandomLabel24"
+        Me.lblRandomLabel24.Size = New System.Drawing.Size(60, 13)
+        Me.lblRandomLabel24.TabIndex = 14
+        Me.lblRandomLabel24.Text = "Self Switch"
+        '
+        'cmbSetSelfSwitchTo
+        '
+        Me.cmbSetSelfSwitchTo.FormattingEnabled = True
+        Me.cmbSetSelfSwitchTo.Items.AddRange(New Object() {"On", "Off"})
+        Me.cmbSetSelfSwitchTo.Location = New System.Drawing.Point(58, 44)
+        Me.cmbSetSelfSwitchTo.Name = "cmbSetSelfSwitchTo"
+        Me.cmbSetSelfSwitchTo.Size = New System.Drawing.Size(179, 21)
+        Me.cmbSetSelfSwitchTo.TabIndex = 15
+        '
+        'cmbSetSelfSwitch
+        '
+        Me.cmbSetSelfSwitch.FormattingEnabled = True
+        Me.cmbSetSelfSwitch.Items.AddRange(New Object() {"A", "B", "C", "D"})
+        Me.cmbSetSelfSwitch.Location = New System.Drawing.Point(80, 15)
+        Me.cmbSetSelfSwitch.Name = "cmbSetSelfSwitch"
+        Me.cmbSetSelfSwitch.Size = New System.Drawing.Size(157, 21)
+        Me.cmbSetSelfSwitch.TabIndex = 16
+        '
+        'fraPlayerVariable
+        '
+        Me.fraPlayerVariable.Controls.Add(Me.btnPlayerVarOk)
+        Me.fraPlayerVariable.Controls.Add(Me.btnPlayerVarCancel)
+        Me.fraPlayerVariable.Controls.Add(Me.lblRandomLabel37)
+        Me.fraPlayerVariable.Controls.Add(Me.lblRandomLabel13)
+        Me.fraPlayerVariable.Controls.Add(Me.txtVariableData4)
+        Me.fraPlayerVariable.Controls.Add(Me.txtVariableData3)
+        Me.fraPlayerVariable.Controls.Add(Me.optVariableAction3)
+        Me.fraPlayerVariable.Controls.Add(Me.txtVariableData2)
+        Me.fraPlayerVariable.Controls.Add(Me.optVariableAction2)
+        Me.fraPlayerVariable.Controls.Add(Me.txtVariableData1)
+        Me.fraPlayerVariable.Controls.Add(Me.optVariableAction1)
+        Me.fraPlayerVariable.Controls.Add(Me.txtVariableData0)
+        Me.fraPlayerVariable.Controls.Add(Me.optVariableAction0)
+        Me.fraPlayerVariable.Controls.Add(Me.cmbVariable)
+        Me.fraPlayerVariable.Controls.Add(Me.lblRandomLabel)
+        Me.fraPlayerVariable.Location = New System.Drawing.Point(5, 166)
+        Me.fraPlayerVariable.Name = "fraPlayerVariable"
+        Me.fraPlayerVariable.Size = New System.Drawing.Size(245, 171)
+        Me.fraPlayerVariable.TabIndex = 1
+        Me.fraPlayerVariable.TabStop = False
+        Me.fraPlayerVariable.Text = "Player Variable"
+        Me.fraPlayerVariable.Visible = False
+        '
+        'btnPlayerVarOk
+        '
+        Me.btnPlayerVarOk.Location = New System.Drawing.Point(83, 142)
+        Me.btnPlayerVarOk.Name = "btnPlayerVarOk"
+        Me.btnPlayerVarOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnPlayerVarOk.TabIndex = 6
+        Me.btnPlayerVarOk.Text = "Ok"
+        Me.btnPlayerVarOk.UseVisualStyleBackColor = True
+        '
+        'btnPlayerVarCancel
+        '
+        Me.btnPlayerVarCancel.Location = New System.Drawing.Point(164, 142)
+        Me.btnPlayerVarCancel.Name = "btnPlayerVarCancel"
+        Me.btnPlayerVarCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnPlayerVarCancel.TabIndex = 5
+        Me.btnPlayerVarCancel.Text = "Cancel"
+        Me.btnPlayerVarCancel.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel37
+        '
+        Me.lblRandomLabel37.AutoSize = True
+        Me.lblRandomLabel37.Location = New System.Drawing.Point(157, 119)
+        Me.lblRandomLabel37.Name = "lblRandomLabel37"
+        Me.lblRandomLabel37.Size = New System.Drawing.Size(29, 13)
+        Me.lblRandomLabel37.TabIndex = 4
+        Me.lblRandomLabel37.Text = "High"
+        '
+        'lblRandomLabel13
+        '
+        Me.lblRandomLabel13.AutoSize = True
+        Me.lblRandomLabel13.Location = New System.Drawing.Point(77, 119)
+        Me.lblRandomLabel13.Name = "lblRandomLabel13"
+        Me.lblRandomLabel13.Size = New System.Drawing.Size(27, 13)
+        Me.lblRandomLabel13.TabIndex = 4
+        Me.lblRandomLabel13.Text = "Low"
+        '
+        'txtVariableData4
+        '
+        Me.txtVariableData4.Location = New System.Drawing.Point(194, 116)
+        Me.txtVariableData4.Name = "txtVariableData4"
+        Me.txtVariableData4.Size = New System.Drawing.Size(45, 20)
+        Me.txtVariableData4.TabIndex = 3
+        Me.txtVariableData4.Text = "0"
+        '
+        'txtVariableData3
+        '
+        Me.txtVariableData3.Location = New System.Drawing.Point(106, 116)
+        Me.txtVariableData3.Name = "txtVariableData3"
+        Me.txtVariableData3.Size = New System.Drawing.Size(45, 20)
+        Me.txtVariableData3.TabIndex = 3
+        Me.txtVariableData3.Text = "0"
+        '
+        'optVariableAction3
+        '
+        Me.optVariableAction3.AutoSize = True
+        Me.optVariableAction3.Location = New System.Drawing.Point(6, 117)
+        Me.optVariableAction3.Name = "optVariableAction3"
+        Me.optVariableAction3.Size = New System.Drawing.Size(65, 17)
+        Me.optVariableAction3.TabIndex = 2
+        Me.optVariableAction3.Text = "Random"
+        Me.optVariableAction3.UseVisualStyleBackColor = True
+        '
+        'txtVariableData2
+        '
+        Me.txtVariableData2.Location = New System.Drawing.Point(106, 87)
+        Me.txtVariableData2.Name = "txtVariableData2"
+        Me.txtVariableData2.Size = New System.Drawing.Size(133, 20)
+        Me.txtVariableData2.TabIndex = 3
+        Me.txtVariableData2.Text = "0"
+        '
+        'optVariableAction2
+        '
+        Me.optVariableAction2.AutoSize = True
+        Me.optVariableAction2.Location = New System.Drawing.Point(6, 91)
+        Me.optVariableAction2.Name = "optVariableAction2"
+        Me.optVariableAction2.Size = New System.Drawing.Size(65, 17)
+        Me.optVariableAction2.TabIndex = 2
+        Me.optVariableAction2.Text = "Subtract"
+        Me.optVariableAction2.UseVisualStyleBackColor = True
+        '
+        'txtVariableData1
+        '
+        Me.txtVariableData1.Location = New System.Drawing.Point(106, 62)
+        Me.txtVariableData1.Name = "txtVariableData1"
+        Me.txtVariableData1.Size = New System.Drawing.Size(133, 20)
+        Me.txtVariableData1.TabIndex = 3
+        Me.txtVariableData1.Text = "0"
+        '
+        'optVariableAction1
+        '
+        Me.optVariableAction1.AutoSize = True
+        Me.optVariableAction1.Location = New System.Drawing.Point(6, 66)
+        Me.optVariableAction1.Name = "optVariableAction1"
+        Me.optVariableAction1.Size = New System.Drawing.Size(44, 17)
+        Me.optVariableAction1.TabIndex = 2
+        Me.optVariableAction1.Text = "Add"
+        Me.optVariableAction1.UseVisualStyleBackColor = True
+        '
+        'txtVariableData0
+        '
+        Me.txtVariableData0.Location = New System.Drawing.Point(106, 36)
+        Me.txtVariableData0.Name = "txtVariableData0"
+        Me.txtVariableData0.Size = New System.Drawing.Size(133, 20)
+        Me.txtVariableData0.TabIndex = 3
+        Me.txtVariableData0.Text = "0"
+        '
+        'optVariableAction0
+        '
+        Me.optVariableAction0.AutoSize = True
+        Me.optVariableAction0.Checked = True
+        Me.optVariableAction0.Location = New System.Drawing.Point(6, 40)
+        Me.optVariableAction0.Name = "optVariableAction0"
+        Me.optVariableAction0.Size = New System.Drawing.Size(41, 17)
+        Me.optVariableAction0.TabIndex = 2
+        Me.optVariableAction0.TabStop = True
+        Me.optVariableAction0.Text = "Set"
+        Me.optVariableAction0.UseVisualStyleBackColor = True
+        '
+        'cmbVariable
+        '
+        Me.cmbVariable.FormattingEnabled = True
+        Me.cmbVariable.Location = New System.Drawing.Point(60, 13)
+        Me.cmbVariable.Name = "cmbVariable"
+        Me.cmbVariable.Size = New System.Drawing.Size(179, 21)
+        Me.cmbVariable.TabIndex = 1
+        '
+        'lblRandomLabel
+        '
+        Me.lblRandomLabel.AutoSize = True
+        Me.lblRandomLabel.Location = New System.Drawing.Point(6, 16)
+        Me.lblRandomLabel.Name = "lblRandomLabel"
+        Me.lblRandomLabel.Size = New System.Drawing.Size(48, 13)
+        Me.lblRandomLabel.TabIndex = 0
+        Me.lblRandomLabel.Text = "Variable:"
+        '
+        'fraShowChatBubble
+        '
+        Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleOK)
+        Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleCancel)
+        Me.fraShowChatBubble.Controls.Add(Me.cmbChatBubbleTarget)
+        Me.fraShowChatBubble.Controls.Add(Me.optChatBubbleTarget2)
+        Me.fraShowChatBubble.Controls.Add(Me.optChatBubbleTarget1)
+        Me.fraShowChatBubble.Controls.Add(Me.optChatBubbleTarget0)
+        Me.fraShowChatBubble.Controls.Add(Me.lblRandomLabel39)
+        Me.fraShowChatBubble.Controls.Add(Me.txtChatbubbleText)
+        Me.fraShowChatBubble.Controls.Add(Me.lblRandomLabel38)
+        Me.fraShowChatBubble.Location = New System.Drawing.Point(6, 12)
+        Me.fraShowChatBubble.Name = "fraShowChatBubble"
+        Me.fraShowChatBubble.Size = New System.Drawing.Size(245, 153)
+        Me.fraShowChatBubble.TabIndex = 19
+        Me.fraShowChatBubble.TabStop = False
+        Me.fraShowChatBubble.Text = "Show Chatbubble"
+        Me.fraShowChatBubble.Visible = False
+        '
+        'btnShowChatBubbleOK
+        '
+        Me.btnShowChatBubbleOK.Location = New System.Drawing.Point(57, 122)
+        Me.btnShowChatBubbleOK.Name = "btnShowChatBubbleOK"
+        Me.btnShowChatBubbleOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowChatBubbleOK.TabIndex = 24
+        Me.btnShowChatBubbleOK.Text = "Ok"
+        Me.btnShowChatBubbleOK.UseVisualStyleBackColor = True
+        '
+        'btnShowChatBubbleCancel
+        '
+        Me.btnShowChatBubbleCancel.Location = New System.Drawing.Point(138, 122)
+        Me.btnShowChatBubbleCancel.Name = "btnShowChatBubbleCancel"
+        Me.btnShowChatBubbleCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowChatBubbleCancel.TabIndex = 23
+        Me.btnShowChatBubbleCancel.Text = "Cancel"
+        Me.btnShowChatBubbleCancel.UseVisualStyleBackColor = True
+        '
+        'cmbChatBubbleTarget
+        '
+        Me.cmbChatBubbleTarget.FormattingEnabled = True
+        Me.cmbChatBubbleTarget.Location = New System.Drawing.Point(37, 95)
+        Me.cmbChatBubbleTarget.Name = "cmbChatBubbleTarget"
+        Me.cmbChatBubbleTarget.Size = New System.Drawing.Size(176, 21)
+        Me.cmbChatBubbleTarget.TabIndex = 22
+        '
+        'optChatBubbleTarget2
+        '
+        Me.optChatBubbleTarget2.AutoSize = True
+        Me.optChatBubbleTarget2.Location = New System.Drawing.Point(125, 71)
+        Me.optChatBubbleTarget2.Name = "optChatBubbleTarget2"
+        Me.optChatBubbleTarget2.Size = New System.Drawing.Size(53, 17)
+        Me.optChatBubbleTarget2.TabIndex = 21
+        Me.optChatBubbleTarget2.TabStop = True
+        Me.optChatBubbleTarget2.Text = "Event"
+        Me.optChatBubbleTarget2.UseVisualStyleBackColor = True
+        '
+        'optChatBubbleTarget1
+        '
+        Me.optChatBubbleTarget1.AutoSize = True
+        Me.optChatBubbleTarget1.Location = New System.Drawing.Point(68, 71)
+        Me.optChatBubbleTarget1.Name = "optChatBubbleTarget1"
+        Me.optChatBubbleTarget1.Size = New System.Drawing.Size(45, 17)
+        Me.optChatBubbleTarget1.TabIndex = 20
+        Me.optChatBubbleTarget1.TabStop = True
+        Me.optChatBubbleTarget1.Text = "Npc"
+        Me.optChatBubbleTarget1.UseVisualStyleBackColor = True
+        '
+        'optChatBubbleTarget0
+        '
+        Me.optChatBubbleTarget0.AutoSize = True
+        Me.optChatBubbleTarget0.Location = New System.Drawing.Point(6, 71)
+        Me.optChatBubbleTarget0.Name = "optChatBubbleTarget0"
+        Me.optChatBubbleTarget0.Size = New System.Drawing.Size(54, 17)
+        Me.optChatBubbleTarget0.TabIndex = 19
+        Me.optChatBubbleTarget0.TabStop = True
+        Me.optChatBubbleTarget0.Text = "Player"
+        Me.optChatBubbleTarget0.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel39
+        '
+        Me.lblRandomLabel39.AutoSize = True
+        Me.lblRandomLabel39.Location = New System.Drawing.Point(3, 55)
+        Me.lblRandomLabel39.Name = "lblRandomLabel39"
+        Me.lblRandomLabel39.Size = New System.Drawing.Size(68, 13)
+        Me.lblRandomLabel39.TabIndex = 18
+        Me.lblRandomLabel39.Text = "Target Type:"
+        '
+        'txtChatbubbleText
+        '
+        Me.txtChatbubbleText.Location = New System.Drawing.Point(6, 32)
+        Me.txtChatbubbleText.Name = "txtChatbubbleText"
+        Me.txtChatbubbleText.Size = New System.Drawing.Size(230, 20)
+        Me.txtChatbubbleText.TabIndex = 1
+        '
+        'lblRandomLabel38
+        '
+        Me.lblRandomLabel38.AutoSize = True
+        Me.lblRandomLabel38.Location = New System.Drawing.Point(6, 16)
+        Me.lblRandomLabel38.Name = "lblRandomLabel38"
+        Me.lblRandomLabel38.Size = New System.Drawing.Size(88, 13)
+        Me.lblRandomLabel38.TabIndex = 0
+        Me.lblRandomLabel38.Text = "Chatbubble Text:"
         '
         'fraCommand33
         '
@@ -2280,401 +2614,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel43.Size = New System.Drawing.Size(78, 13)
         Me.lblRandomLabel43.TabIndex = 14
         Me.lblRandomLabel43.Text = "Weather Type:"
-        '
-        'fraCommand7
-        '
-        Me.fraCommand7.Controls.Add(Me.btnCommand_Ok29)
-        Me.fraCommand7.Controls.Add(Me.btnCommand_Cancel29)
-        Me.fraCommand7.Controls.Add(Me.fraConditions_Quest)
-        Me.fraCommand7.Controls.Add(Me.lblConditionQuest)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index7)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index6)
-        Me.fraCommand7.Controls.Add(Me.lblRandomLabel2)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index5)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_LearntSkill)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index4)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_ClassIs)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index3)
-        Me.fraCommand7.Controls.Add(Me.scrlCondition_Quest)
-        Me.fraCommand7.Controls.Add(Me.scrlCondition_HasItem)
-        Me.fraCommand7.Controls.Add(Me.lblHasItemAmt)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index2)
-        Me.fraCommand7.Controls.Add(Me.lblRandomLabel35)
-        Me.fraCommand7.Controls.Add(Me.lblRandomLabel1)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_SelfSwitchCondition)
-        Me.fraCommand7.Controls.Add(Me.cmbCondtion_PlayerSwitchCondition)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_LevelCompare)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_HasItem)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_SelfSwitch)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_PlayerSwitch)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index1)
-        Me.fraCommand7.Controls.Add(Me.txtCondition_LevelAmount)
-        Me.fraCommand7.Controls.Add(Me.txtCondition_PlayerVarCondition)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_PlayerVarCompare)
-        Me.fraCommand7.Controls.Add(Me.lblRandomLabel0)
-        Me.fraCommand7.Controls.Add(Me.cmbCondition_PlayerVarIndex)
-        Me.fraCommand7.Controls.Add(Me.optCondition_Index0)
-        Me.fraCommand7.Location = New System.Drawing.Point(10, 563)
-        Me.fraCommand7.Name = "fraCommand7"
-        Me.fraCommand7.Size = New System.Drawing.Size(400, 484)
-        Me.fraCommand7.TabIndex = 35
-        Me.fraCommand7.TabStop = False
-        Me.fraCommand7.Text = "Conditional Branch"
-        '
-        'btnCommand_Ok29
-        '
-        Me.btnCommand_Ok29.Location = New System.Drawing.Point(234, 452)
-        Me.btnCommand_Ok29.Name = "btnCommand_Ok29"
-        Me.btnCommand_Ok29.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Ok29.TabIndex = 21
-        Me.btnCommand_Ok29.Text = "Ok"
-        Me.btnCommand_Ok29.UseVisualStyleBackColor = True
-        '
-        'btnCommand_Cancel29
-        '
-        Me.btnCommand_Cancel29.Location = New System.Drawing.Point(315, 452)
-        Me.btnCommand_Cancel29.Name = "btnCommand_Cancel29"
-        Me.btnCommand_Cancel29.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Cancel29.TabIndex = 21
-        Me.btnCommand_Cancel29.Text = "Cancel"
-        Me.btnCommand_Cancel29.UseVisualStyleBackColor = True
-        '
-        'fraConditions_Quest
-        '
-        Me.fraConditions_Quest.Controls.Add(Me.lblCondition_QuestTask)
-        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest1)
-        Me.fraConditions_Quest.Controls.Add(Me.Label2)
-        Me.fraConditions_Quest.Controls.Add(Me.lblRandomLabel50)
-        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest0)
-        Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
-        Me.fraConditions_Quest.Controls.Add(Me.scrlCondition_QuestTask)
-        Me.fraConditions_Quest.Location = New System.Drawing.Point(6, 345)
-        Me.fraConditions_Quest.Name = "fraConditions_Quest"
-        Me.fraConditions_Quest.Size = New System.Drawing.Size(384, 93)
-        Me.fraConditions_Quest.TabIndex = 20
-        Me.fraConditions_Quest.TabStop = False
-        Me.fraConditions_Quest.Text = "Quest Conditions"
-        Me.fraConditions_Quest.Visible = False
-        '
-        'lblCondition_QuestTask
-        '
-        Me.lblCondition_QuestTask.AutoSize = True
-        Me.lblCondition_QuestTask.Location = New System.Drawing.Point(214, 61)
-        Me.lblCondition_QuestTask.Name = "lblCondition_QuestTask"
-        Me.lblCondition_QuestTask.Size = New System.Drawing.Size(20, 13)
-        Me.lblCondition_QuestTask.TabIndex = 20
-        Me.lblCondition_QuestTask.Text = "#1"
-        '
-        'optCondition_Quest1
-        '
-        Me.optCondition_Quest1.AutoSize = True
-        Me.optCondition_Quest1.Location = New System.Drawing.Point(5, 59)
-        Me.optCondition_Quest1.Name = "optCondition_Quest1"
-        Me.optCondition_Quest1.Size = New System.Drawing.Size(49, 17)
-        Me.optCondition_Quest1.TabIndex = 1
-        Me.optCondition_Quest1.TabStop = True
-        Me.optCondition_Quest1.Text = "Task"
-        Me.optCondition_Quest1.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(105, 61)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(93, 13)
-        Me.Label2.TabIndex = 19
-        Me.Label2.Text = "Player is on task..."
-        '
-        'lblRandomLabel50
-        '
-        Me.lblRandomLabel50.AutoSize = True
-        Me.lblRandomLabel50.Location = New System.Drawing.Point(104, 27)
-        Me.lblRandomLabel50.Name = "lblRandomLabel50"
-        Me.lblRandomLabel50.Size = New System.Drawing.Size(104, 13)
-        Me.lblRandomLabel50.TabIndex = 19
-        Me.lblRandomLabel50.Text = "If selected quest is..."
-        '
-        'optCondition_Quest0
-        '
-        Me.optCondition_Quest0.AutoSize = True
-        Me.optCondition_Quest0.Location = New System.Drawing.Point(5, 25)
-        Me.optCondition_Quest0.Name = "optCondition_Quest0"
-        Me.optCondition_Quest0.Size = New System.Drawing.Size(62, 17)
-        Me.optCondition_Quest0.TabIndex = 0
-        Me.optCondition_Quest0.TabStop = True
-        Me.optCondition_Quest0.Text = "General"
-        Me.optCondition_Quest0.UseVisualStyleBackColor = True
-        '
-        'cmbCondition_General
-        '
-        Me.cmbCondition_General.FormattingEnabled = True
-        Me.cmbCondition_General.Items.AddRange(New Object() {"Not Started", "Started", "Completed", "Can Start", "Can End"})
-        Me.cmbCondition_General.Location = New System.Drawing.Point(257, 24)
-        Me.cmbCondition_General.Name = "cmbCondition_General"
-        Me.cmbCondition_General.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_General.TabIndex = 6
-        '
-        'scrlCondition_QuestTask
-        '
-        Me.scrlCondition_QuestTask.Location = New System.Drawing.Point(257, 59)
-        Me.scrlCondition_QuestTask.Name = "scrlCondition_QuestTask"
-        Me.scrlCondition_QuestTask.Size = New System.Drawing.Size(121, 17)
-        Me.scrlCondition_QuestTask.TabIndex = 11
-        '
-        'lblConditionQuest
-        '
-        Me.lblConditionQuest.AutoSize = True
-        Me.lblConditionQuest.Location = New System.Drawing.Point(120, 310)
-        Me.lblConditionQuest.Name = "lblConditionQuest"
-        Me.lblConditionQuest.Size = New System.Drawing.Size(47, 13)
-        Me.lblConditionQuest.TabIndex = 19
-        Me.lblConditionQuest.Text = "Quest: 1"
-        '
-        'optCondition_Index7
-        '
-        Me.optCondition_Index7.AutoSize = True
-        Me.optCondition_Index7.Location = New System.Drawing.Point(7, 325)
-        Me.optCondition_Index7.Name = "optCondition_Index7"
-        Me.optCondition_Index7.Size = New System.Drawing.Size(86, 17)
-        Me.optCondition_Index7.TabIndex = 18
-        Me.optCondition_Index7.TabStop = True
-        Me.optCondition_Index7.Text = "Quest Status"
-        Me.optCondition_Index7.UseVisualStyleBackColor = True
-        '
-        'optCondition_Index6
-        '
-        Me.optCondition_Index6.AutoSize = True
-        Me.optCondition_Index6.Location = New System.Drawing.Point(7, 288)
-        Me.optCondition_Index6.Name = "optCondition_Index6"
-        Me.optCondition_Index6.Size = New System.Drawing.Size(78, 17)
-        Me.optCondition_Index6.TabIndex = 18
-        Me.optCondition_Index6.TabStop = True
-        Me.optCondition_Index6.Text = "Self Switch"
-        Me.optCondition_Index6.UseVisualStyleBackColor = True
-        '
-        'lblRandomLabel2
-        '
-        Me.lblRandomLabel2.AutoSize = True
-        Me.lblRandomLabel2.Location = New System.Drawing.Point(63, 252)
-        Me.lblRandomLabel2.Name = "lblRandomLabel2"
-        Me.lblRandomLabel2.Size = New System.Drawing.Size(14, 13)
-        Me.lblRandomLabel2.TabIndex = 17
-        Me.lblRandomLabel2.Text = "is"
-        '
-        'optCondition_Index5
-        '
-        Me.optCondition_Index5.AutoSize = True
-        Me.optCondition_Index5.Location = New System.Drawing.Point(6, 250)
-        Me.optCondition_Index5.Name = "optCondition_Index5"
-        Me.optCondition_Index5.Size = New System.Drawing.Size(51, 17)
-        Me.optCondition_Index5.TabIndex = 16
-        Me.optCondition_Index5.TabStop = True
-        Me.optCondition_Index5.Text = "Level"
-        Me.optCondition_Index5.UseVisualStyleBackColor = True
-        '
-        'cmbCondition_LearntSkill
-        '
-        Me.cmbCondition_LearntSkill.FormattingEnabled = True
-        Me.cmbCondition_LearntSkill.Location = New System.Drawing.Point(123, 214)
-        Me.cmbCondition_LearntSkill.Name = "cmbCondition_LearntSkill"
-        Me.cmbCondition_LearntSkill.Size = New System.Drawing.Size(267, 21)
-        Me.cmbCondition_LearntSkill.TabIndex = 15
-        '
-        'optCondition_Index4
-        '
-        Me.optCondition_Index4.AutoSize = True
-        Me.optCondition_Index4.Location = New System.Drawing.Point(6, 215)
-        Me.optCondition_Index4.Name = "optCondition_Index4"
-        Me.optCondition_Index4.Size = New System.Drawing.Size(79, 17)
-        Me.optCondition_Index4.TabIndex = 14
-        Me.optCondition_Index4.TabStop = True
-        Me.optCondition_Index4.Text = "Knows Skill"
-        Me.optCondition_Index4.UseVisualStyleBackColor = True
-        '
-        'cmbCondition_ClassIs
-        '
-        Me.cmbCondition_ClassIs.FormattingEnabled = True
-        Me.cmbCondition_ClassIs.Location = New System.Drawing.Point(123, 184)
-        Me.cmbCondition_ClassIs.Name = "cmbCondition_ClassIs"
-        Me.cmbCondition_ClassIs.Size = New System.Drawing.Size(267, 21)
-        Me.cmbCondition_ClassIs.TabIndex = 13
-        '
-        'optCondition_Index3
-        '
-        Me.optCondition_Index3.AutoSize = True
-        Me.optCondition_Index3.Location = New System.Drawing.Point(6, 185)
-        Me.optCondition_Index3.Name = "optCondition_Index3"
-        Me.optCondition_Index3.Size = New System.Drawing.Size(61, 17)
-        Me.optCondition_Index3.TabIndex = 12
-        Me.optCondition_Index3.TabStop = True
-        Me.optCondition_Index3.Text = "Class Is"
-        Me.optCondition_Index3.UseVisualStyleBackColor = True
-        '
-        'scrlCondition_Quest
-        '
-        Me.scrlCondition_Quest.Location = New System.Drawing.Point(123, 325)
-        Me.scrlCondition_Quest.Name = "scrlCondition_Quest"
-        Me.scrlCondition_Quest.Size = New System.Drawing.Size(267, 17)
-        Me.scrlCondition_Quest.TabIndex = 11
-        '
-        'scrlCondition_HasItem
-        '
-        Me.scrlCondition_HasItem.Location = New System.Drawing.Point(123, 152)
-        Me.scrlCondition_HasItem.Name = "scrlCondition_HasItem"
-        Me.scrlCondition_HasItem.Size = New System.Drawing.Size(267, 17)
-        Me.scrlCondition_HasItem.TabIndex = 11
-        '
-        'lblHasItemAmt
-        '
-        Me.lblHasItemAmt.AutoSize = True
-        Me.lblHasItemAmt.Location = New System.Drawing.Point(79, 156)
-        Me.lblHasItemAmt.Name = "lblHasItemAmt"
-        Me.lblHasItemAmt.Size = New System.Drawing.Size(24, 13)
-        Me.lblHasItemAmt.TabIndex = 10
-        Me.lblHasItemAmt.Text = "x: 1"
-        '
-        'optCondition_Index2
-        '
-        Me.optCondition_Index2.AutoSize = True
-        Me.optCondition_Index2.Location = New System.Drawing.Point(6, 154)
-        Me.optCondition_Index2.Name = "optCondition_Index2"
-        Me.optCondition_Index2.Size = New System.Drawing.Size(67, 17)
-        Me.optCondition_Index2.TabIndex = 9
-        Me.optCondition_Index2.TabStop = True
-        Me.optCondition_Index2.Text = "Has Item"
-        Me.optCondition_Index2.UseVisualStyleBackColor = True
-        '
-        'lblRandomLabel35
-        '
-        Me.lblRandomLabel35.AutoSize = True
-        Me.lblRandomLabel35.Location = New System.Drawing.Point(249, 287)
-        Me.lblRandomLabel35.Name = "lblRandomLabel35"
-        Me.lblRandomLabel35.Size = New System.Drawing.Size(14, 13)
-        Me.lblRandomLabel35.TabIndex = 8
-        Me.lblRandomLabel35.Text = "is"
-        '
-        'lblRandomLabel1
-        '
-        Me.lblRandomLabel1.AutoSize = True
-        Me.lblRandomLabel1.Location = New System.Drawing.Point(249, 94)
-        Me.lblRandomLabel1.Name = "lblRandomLabel1"
-        Me.lblRandomLabel1.Size = New System.Drawing.Size(14, 13)
-        Me.lblRandomLabel1.TabIndex = 8
-        Me.lblRandomLabel1.Text = "is"
-        '
-        'cmbCondition_SelfSwitchCondition
-        '
-        Me.cmbCondition_SelfSwitchCondition.FormattingEnabled = True
-        Me.cmbCondition_SelfSwitchCondition.Items.AddRange(New Object() {"True", "False"})
-        Me.cmbCondition_SelfSwitchCondition.Location = New System.Drawing.Point(269, 284)
-        Me.cmbCondition_SelfSwitchCondition.Name = "cmbCondition_SelfSwitchCondition"
-        Me.cmbCondition_SelfSwitchCondition.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_SelfSwitchCondition.TabIndex = 7
-        '
-        'cmbCondtion_PlayerSwitchCondition
-        '
-        Me.cmbCondtion_PlayerSwitchCondition.FormattingEnabled = True
-        Me.cmbCondtion_PlayerSwitchCondition.Items.AddRange(New Object() {"True", "False"})
-        Me.cmbCondtion_PlayerSwitchCondition.Location = New System.Drawing.Point(269, 91)
-        Me.cmbCondtion_PlayerSwitchCondition.Name = "cmbCondtion_PlayerSwitchCondition"
-        Me.cmbCondtion_PlayerSwitchCondition.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondtion_PlayerSwitchCondition.TabIndex = 7
-        '
-        'cmbCondition_LevelCompare
-        '
-        Me.cmbCondition_LevelCompare.FormattingEnabled = True
-        Me.cmbCondition_LevelCompare.Items.AddRange(New Object() {"Equal To", "Great Than Or Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
-        Me.cmbCondition_LevelCompare.Location = New System.Drawing.Point(123, 249)
-        Me.cmbCondition_LevelCompare.Name = "cmbCondition_LevelCompare"
-        Me.cmbCondition_LevelCompare.Size = New System.Drawing.Size(203, 21)
-        Me.cmbCondition_LevelCompare.TabIndex = 6
-        '
-        'cmbCondition_HasItem
-        '
-        Me.cmbCondition_HasItem.FormattingEnabled = True
-        Me.cmbCondition_HasItem.Location = New System.Drawing.Point(123, 118)
-        Me.cmbCondition_HasItem.Name = "cmbCondition_HasItem"
-        Me.cmbCondition_HasItem.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_HasItem.TabIndex = 6
-        '
-        'cmbCondition_SelfSwitch
-        '
-        Me.cmbCondition_SelfSwitch.FormattingEnabled = True
-        Me.cmbCondition_SelfSwitch.Location = New System.Drawing.Point(123, 284)
-        Me.cmbCondition_SelfSwitch.Name = "cmbCondition_SelfSwitch"
-        Me.cmbCondition_SelfSwitch.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_SelfSwitch.TabIndex = 6
-        '
-        'cmbCondition_PlayerSwitch
-        '
-        Me.cmbCondition_PlayerSwitch.FormattingEnabled = True
-        Me.cmbCondition_PlayerSwitch.Location = New System.Drawing.Point(123, 91)
-        Me.cmbCondition_PlayerSwitch.Name = "cmbCondition_PlayerSwitch"
-        Me.cmbCondition_PlayerSwitch.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_PlayerSwitch.TabIndex = 6
-        '
-        'optCondition_Index1
-        '
-        Me.optCondition_Index1.AutoSize = True
-        Me.optCondition_Index1.Location = New System.Drawing.Point(6, 92)
-        Me.optCondition_Index1.Name = "optCondition_Index1"
-        Me.optCondition_Index1.Size = New System.Drawing.Size(89, 17)
-        Me.optCondition_Index1.TabIndex = 5
-        Me.optCondition_Index1.TabStop = True
-        Me.optCondition_Index1.Text = "Player Switch"
-        Me.optCondition_Index1.UseVisualStyleBackColor = True
-        '
-        'txtCondition_LevelAmount
-        '
-        Me.txtCondition_LevelAmount.Location = New System.Drawing.Point(332, 249)
-        Me.txtCondition_LevelAmount.Name = "txtCondition_LevelAmount"
-        Me.txtCondition_LevelAmount.Size = New System.Drawing.Size(58, 20)
-        Me.txtCondition_LevelAmount.TabIndex = 4
-        Me.txtCondition_LevelAmount.Text = "0"
-        '
-        'txtCondition_PlayerVarCondition
-        '
-        Me.txtCondition_PlayerVarCondition.Location = New System.Drawing.Point(269, 51)
-        Me.txtCondition_PlayerVarCondition.Name = "txtCondition_PlayerVarCondition"
-        Me.txtCondition_PlayerVarCondition.Size = New System.Drawing.Size(100, 20)
-        Me.txtCondition_PlayerVarCondition.TabIndex = 4
-        Me.txtCondition_PlayerVarCondition.Text = "0"
-        '
-        'cmbCondition_PlayerVarCompare
-        '
-        Me.cmbCondition_PlayerVarCompare.FormattingEnabled = True
-        Me.cmbCondition_PlayerVarCompare.Items.AddRange(New Object() {"Equal To", "Great Than Or Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
-        Me.cmbCondition_PlayerVarCompare.Location = New System.Drawing.Point(123, 51)
-        Me.cmbCondition_PlayerVarCompare.Name = "cmbCondition_PlayerVarCompare"
-        Me.cmbCondition_PlayerVarCompare.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_PlayerVarCompare.TabIndex = 3
-        '
-        'lblRandomLabel0
-        '
-        Me.lblRandomLabel0.Location = New System.Drawing.Point(250, 25)
-        Me.lblRandomLabel0.Name = "lblRandomLabel0"
-        Me.lblRandomLabel0.Size = New System.Drawing.Size(115, 20)
-        Me.lblRandomLabel0.TabIndex = 2
-        Me.lblRandomLabel0.Text = "is"
-        '
-        'cmbCondition_PlayerVarIndex
-        '
-        Me.cmbCondition_PlayerVarIndex.FormattingEnabled = True
-        Me.cmbCondition_PlayerVarIndex.Location = New System.Drawing.Point(123, 24)
-        Me.cmbCondition_PlayerVarIndex.Name = "cmbCondition_PlayerVarIndex"
-        Me.cmbCondition_PlayerVarIndex.Size = New System.Drawing.Size(121, 21)
-        Me.cmbCondition_PlayerVarIndex.TabIndex = 1
-        '
-        'optCondition_Index0
-        '
-        Me.optCondition_Index0.AutoSize = True
-        Me.optCondition_Index0.Location = New System.Drawing.Point(6, 25)
-        Me.optCondition_Index0.Name = "optCondition_Index0"
-        Me.optCondition_Index0.Size = New System.Drawing.Size(95, 17)
-        Me.optCondition_Index0.TabIndex = 0
-        Me.optCondition_Index0.TabStop = True
-        Me.optCondition_Index0.Text = "Player Variable"
-        Me.optCondition_Index0.UseVisualStyleBackColor = True
         '
         'fraCommand27
         '
@@ -3604,109 +3543,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel42.TabIndex = 0
         Me.lblRandomLabel42.Text = "Npc:"
         '
-        'fraCommand3
-        '
-        Me.fraCommand3.Controls.Add(Me.btnCommand_Ok3)
-        Me.fraCommand3.Controls.Add(Me.btnCommand_Cancel3)
-        Me.fraCommand3.Controls.Add(Me.cmbChatBubbleTarget)
-        Me.fraCommand3.Controls.Add(Me.optChatBubbleTarget2)
-        Me.fraCommand3.Controls.Add(Me.optChatBubbleTarget1)
-        Me.fraCommand3.Controls.Add(Me.optChatBubbleTarget0)
-        Me.fraCommand3.Controls.Add(Me.lblRandomLabel39)
-        Me.fraCommand3.Controls.Add(Me.txtChatbubbleText)
-        Me.fraCommand3.Controls.Add(Me.lblRandomLabel38)
-        Me.fraCommand3.Location = New System.Drawing.Point(680, 12)
-        Me.fraCommand3.Name = "fraCommand3"
-        Me.fraCommand3.Size = New System.Drawing.Size(219, 153)
-        Me.fraCommand3.TabIndex = 19
-        Me.fraCommand3.TabStop = False
-        Me.fraCommand3.Text = "Show Chatbubble"
-        Me.fraCommand3.Visible = False
-        '
-        'btnCommand_Ok3
-        '
-        Me.btnCommand_Ok3.Location = New System.Drawing.Point(57, 122)
-        Me.btnCommand_Ok3.Name = "btnCommand_Ok3"
-        Me.btnCommand_Ok3.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Ok3.TabIndex = 24
-        Me.btnCommand_Ok3.Text = "Ok"
-        Me.btnCommand_Ok3.UseVisualStyleBackColor = True
-        '
-        'btnCommand_Cancel3
-        '
-        Me.btnCommand_Cancel3.Location = New System.Drawing.Point(138, 122)
-        Me.btnCommand_Cancel3.Name = "btnCommand_Cancel3"
-        Me.btnCommand_Cancel3.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Cancel3.TabIndex = 23
-        Me.btnCommand_Cancel3.Text = "Cancel"
-        Me.btnCommand_Cancel3.UseVisualStyleBackColor = True
-        '
-        'cmbChatBubbleTarget
-        '
-        Me.cmbChatBubbleTarget.FormattingEnabled = True
-        Me.cmbChatBubbleTarget.Location = New System.Drawing.Point(37, 95)
-        Me.cmbChatBubbleTarget.Name = "cmbChatBubbleTarget"
-        Me.cmbChatBubbleTarget.Size = New System.Drawing.Size(176, 21)
-        Me.cmbChatBubbleTarget.TabIndex = 22
-        '
-        'optChatBubbleTarget2
-        '
-        Me.optChatBubbleTarget2.AutoSize = True
-        Me.optChatBubbleTarget2.Location = New System.Drawing.Point(125, 71)
-        Me.optChatBubbleTarget2.Name = "optChatBubbleTarget2"
-        Me.optChatBubbleTarget2.Size = New System.Drawing.Size(53, 17)
-        Me.optChatBubbleTarget2.TabIndex = 21
-        Me.optChatBubbleTarget2.TabStop = True
-        Me.optChatBubbleTarget2.Text = "Event"
-        Me.optChatBubbleTarget2.UseVisualStyleBackColor = True
-        '
-        'optChatBubbleTarget1
-        '
-        Me.optChatBubbleTarget1.AutoSize = True
-        Me.optChatBubbleTarget1.Location = New System.Drawing.Point(68, 71)
-        Me.optChatBubbleTarget1.Name = "optChatBubbleTarget1"
-        Me.optChatBubbleTarget1.Size = New System.Drawing.Size(45, 17)
-        Me.optChatBubbleTarget1.TabIndex = 20
-        Me.optChatBubbleTarget1.TabStop = True
-        Me.optChatBubbleTarget1.Text = "Npc"
-        Me.optChatBubbleTarget1.UseVisualStyleBackColor = True
-        '
-        'optChatBubbleTarget0
-        '
-        Me.optChatBubbleTarget0.AutoSize = True
-        Me.optChatBubbleTarget0.Location = New System.Drawing.Point(6, 71)
-        Me.optChatBubbleTarget0.Name = "optChatBubbleTarget0"
-        Me.optChatBubbleTarget0.Size = New System.Drawing.Size(54, 17)
-        Me.optChatBubbleTarget0.TabIndex = 19
-        Me.optChatBubbleTarget0.TabStop = True
-        Me.optChatBubbleTarget0.Text = "Player"
-        Me.optChatBubbleTarget0.UseVisualStyleBackColor = True
-        '
-        'lblRandomLabel39
-        '
-        Me.lblRandomLabel39.AutoSize = True
-        Me.lblRandomLabel39.Location = New System.Drawing.Point(3, 55)
-        Me.lblRandomLabel39.Name = "lblRandomLabel39"
-        Me.lblRandomLabel39.Size = New System.Drawing.Size(68, 13)
-        Me.lblRandomLabel39.TabIndex = 18
-        Me.lblRandomLabel39.Text = "Target Type:"
-        '
-        'txtChatbubbleText
-        '
-        Me.txtChatbubbleText.Location = New System.Drawing.Point(6, 32)
-        Me.txtChatbubbleText.Name = "txtChatbubbleText"
-        Me.txtChatbubbleText.Size = New System.Drawing.Size(207, 20)
-        Me.txtChatbubbleText.TabIndex = 1
-        '
-        'lblRandomLabel38
-        '
-        Me.lblRandomLabel38.AutoSize = True
-        Me.lblRandomLabel38.Location = New System.Drawing.Point(6, 16)
-        Me.lblRandomLabel38.Name = "lblRandomLabel38"
-        Me.lblRandomLabel38.Size = New System.Drawing.Size(88, 13)
-        Me.lblRandomLabel38.TabIndex = 0
-        Me.lblRandomLabel38.Text = "Chatbubble Text:"
-        '
         'fraCommand13
         '
         Me.fraCommand13.Controls.Add(Me.btnCommand_Ok12)
@@ -3898,76 +3734,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel27.TabIndex = 0
         Me.lblRandomLabel27.Text = "Item Index:"
         '
-        'fraCommand6
-        '
-        Me.fraCommand6.Controls.Add(Me.btnCommand_Ok6)
-        Me.fraCommand6.Controls.Add(Me.btnCommand_Cancel6)
-        Me.fraCommand6.Controls.Add(Me.lblRandomLabel26)
-        Me.fraCommand6.Controls.Add(Me.lblRandomLabel24)
-        Me.fraCommand6.Controls.Add(Me.cmbSetSelfSwitchTo)
-        Me.fraCommand6.Controls.Add(Me.cmbSetSelfSwitch)
-        Me.fraCommand6.Location = New System.Drawing.Point(418, 16)
-        Me.fraCommand6.Name = "fraCommand6"
-        Me.fraCommand6.Size = New System.Drawing.Size(245, 100)
-        Me.fraCommand6.TabIndex = 6
-        Me.fraCommand6.TabStop = False
-        Me.fraCommand6.Text = "Self Switch"
-        Me.fraCommand6.Visible = False
-        '
-        'btnCommand_Ok6
-        '
-        Me.btnCommand_Ok6.Location = New System.Drawing.Point(81, 71)
-        Me.btnCommand_Ok6.Name = "btnCommand_Ok6"
-        Me.btnCommand_Ok6.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Ok6.TabIndex = 18
-        Me.btnCommand_Ok6.Text = "Ok"
-        Me.btnCommand_Ok6.UseVisualStyleBackColor = True
-        '
-        'btnCommand_Cancel6
-        '
-        Me.btnCommand_Cancel6.Location = New System.Drawing.Point(162, 71)
-        Me.btnCommand_Cancel6.Name = "btnCommand_Cancel6"
-        Me.btnCommand_Cancel6.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Cancel6.TabIndex = 17
-        Me.btnCommand_Cancel6.Text = "Cancel"
-        Me.btnCommand_Cancel6.UseVisualStyleBackColor = True
-        '
-        'lblRandomLabel26
-        '
-        Me.lblRandomLabel26.AutoSize = True
-        Me.lblRandomLabel26.Location = New System.Drawing.Point(8, 51)
-        Me.lblRandomLabel26.Name = "lblRandomLabel26"
-        Me.lblRandomLabel26.Size = New System.Drawing.Size(38, 13)
-        Me.lblRandomLabel26.TabIndex = 13
-        Me.lblRandomLabel26.Text = "Set to:"
-        '
-        'lblRandomLabel24
-        '
-        Me.lblRandomLabel24.AutoSize = True
-        Me.lblRandomLabel24.Location = New System.Drawing.Point(8, 18)
-        Me.lblRandomLabel24.Name = "lblRandomLabel24"
-        Me.lblRandomLabel24.Size = New System.Drawing.Size(60, 13)
-        Me.lblRandomLabel24.TabIndex = 14
-        Me.lblRandomLabel24.Text = "Self Switch"
-        '
-        'cmbSetSelfSwitchTo
-        '
-        Me.cmbSetSelfSwitchTo.FormattingEnabled = True
-        Me.cmbSetSelfSwitchTo.Items.AddRange(New Object() {"On", "Off"})
-        Me.cmbSetSelfSwitchTo.Location = New System.Drawing.Point(58, 44)
-        Me.cmbSetSelfSwitchTo.Name = "cmbSetSelfSwitchTo"
-        Me.cmbSetSelfSwitchTo.Size = New System.Drawing.Size(179, 21)
-        Me.cmbSetSelfSwitchTo.TabIndex = 15
-        '
-        'cmbSetSelfSwitch
-        '
-        Me.cmbSetSelfSwitch.FormattingEnabled = True
-        Me.cmbSetSelfSwitch.Items.AddRange(New Object() {"A", "B", "C", "D"})
-        Me.cmbSetSelfSwitch.Location = New System.Drawing.Point(80, 15)
-        Me.cmbSetSelfSwitch.Name = "cmbSetSelfSwitch"
-        Me.cmbSetSelfSwitch.Size = New System.Drawing.Size(157, 21)
-        Me.cmbSetSelfSwitch.TabIndex = 16
-        '
         'fraCommand9
         '
         Me.fraCommand9.Controls.Add(Me.btnCommand_Ok8)
@@ -4134,168 +3900,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel47.TabIndex = 0
         Me.lblRandomLabel47.Text = "Quest: 1."
         '
-        'fraCommand4
-        '
-        Me.fraCommand4.Controls.Add(Me.btnCommand_Ok4)
-        Me.fraCommand4.Controls.Add(Me.btnCommand_Cancel4)
-        Me.fraCommand4.Controls.Add(Me.lblRandomLabel37)
-        Me.fraCommand4.Controls.Add(Me.lblRandomLabel13)
-        Me.fraCommand4.Controls.Add(Me.txtVariableData4)
-        Me.fraCommand4.Controls.Add(Me.txtVariableData3)
-        Me.fraCommand4.Controls.Add(Me.optVariableAction3)
-        Me.fraCommand4.Controls.Add(Me.txtVariableData2)
-        Me.fraCommand4.Controls.Add(Me.optVariableAction2)
-        Me.fraCommand4.Controls.Add(Me.txtVariableData1)
-        Me.fraCommand4.Controls.Add(Me.optVariableAction1)
-        Me.fraCommand4.Controls.Add(Me.txtVariableData0)
-        Me.fraCommand4.Controls.Add(Me.optVariableAction0)
-        Me.fraCommand4.Controls.Add(Me.cmbVariable)
-        Me.fraCommand4.Controls.Add(Me.lblRandomLabel)
-        Me.fraCommand4.Location = New System.Drawing.Point(418, 15)
-        Me.fraCommand4.Name = "fraCommand4"
-        Me.fraCommand4.Size = New System.Drawing.Size(245, 171)
-        Me.fraCommand4.TabIndex = 1
-        Me.fraCommand4.TabStop = False
-        Me.fraCommand4.Text = "Player Variable"
-        Me.fraCommand4.Visible = False
-        '
-        'btnCommand_Ok4
-        '
-        Me.btnCommand_Ok4.Location = New System.Drawing.Point(83, 142)
-        Me.btnCommand_Ok4.Name = "btnCommand_Ok4"
-        Me.btnCommand_Ok4.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Ok4.TabIndex = 6
-        Me.btnCommand_Ok4.Text = "Ok"
-        Me.btnCommand_Ok4.UseVisualStyleBackColor = True
-        '
-        'btnCommand_Cancel4
-        '
-        Me.btnCommand_Cancel4.Location = New System.Drawing.Point(164, 142)
-        Me.btnCommand_Cancel4.Name = "btnCommand_Cancel4"
-        Me.btnCommand_Cancel4.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommand_Cancel4.TabIndex = 5
-        Me.btnCommand_Cancel4.Text = "Cancel"
-        Me.btnCommand_Cancel4.UseVisualStyleBackColor = True
-        '
-        'lblRandomLabel37
-        '
-        Me.lblRandomLabel37.AutoSize = True
-        Me.lblRandomLabel37.Location = New System.Drawing.Point(157, 119)
-        Me.lblRandomLabel37.Name = "lblRandomLabel37"
-        Me.lblRandomLabel37.Size = New System.Drawing.Size(29, 13)
-        Me.lblRandomLabel37.TabIndex = 4
-        Me.lblRandomLabel37.Text = "High"
-        '
-        'lblRandomLabel13
-        '
-        Me.lblRandomLabel13.AutoSize = True
-        Me.lblRandomLabel13.Location = New System.Drawing.Point(77, 119)
-        Me.lblRandomLabel13.Name = "lblRandomLabel13"
-        Me.lblRandomLabel13.Size = New System.Drawing.Size(27, 13)
-        Me.lblRandomLabel13.TabIndex = 4
-        Me.lblRandomLabel13.Text = "Low"
-        '
-        'txtVariableData4
-        '
-        Me.txtVariableData4.Location = New System.Drawing.Point(194, 116)
-        Me.txtVariableData4.Name = "txtVariableData4"
-        Me.txtVariableData4.Size = New System.Drawing.Size(45, 20)
-        Me.txtVariableData4.TabIndex = 3
-        Me.txtVariableData4.Text = "0"
-        '
-        'txtVariableData3
-        '
-        Me.txtVariableData3.Location = New System.Drawing.Point(106, 116)
-        Me.txtVariableData3.Name = "txtVariableData3"
-        Me.txtVariableData3.Size = New System.Drawing.Size(45, 20)
-        Me.txtVariableData3.TabIndex = 3
-        Me.txtVariableData3.Text = "0"
-        '
-        'optVariableAction3
-        '
-        Me.optVariableAction3.AutoSize = True
-        Me.optVariableAction3.Location = New System.Drawing.Point(6, 117)
-        Me.optVariableAction3.Name = "optVariableAction3"
-        Me.optVariableAction3.Size = New System.Drawing.Size(65, 17)
-        Me.optVariableAction3.TabIndex = 2
-        Me.optVariableAction3.TabStop = True
-        Me.optVariableAction3.Text = "Random"
-        Me.optVariableAction3.UseVisualStyleBackColor = True
-        '
-        'txtVariableData2
-        '
-        Me.txtVariableData2.Location = New System.Drawing.Point(106, 87)
-        Me.txtVariableData2.Name = "txtVariableData2"
-        Me.txtVariableData2.Size = New System.Drawing.Size(133, 20)
-        Me.txtVariableData2.TabIndex = 3
-        Me.txtVariableData2.Text = "0"
-        '
-        'optVariableAction2
-        '
-        Me.optVariableAction2.AutoSize = True
-        Me.optVariableAction2.Location = New System.Drawing.Point(6, 91)
-        Me.optVariableAction2.Name = "optVariableAction2"
-        Me.optVariableAction2.Size = New System.Drawing.Size(65, 17)
-        Me.optVariableAction2.TabIndex = 2
-        Me.optVariableAction2.TabStop = True
-        Me.optVariableAction2.Text = "Subtract"
-        Me.optVariableAction2.UseVisualStyleBackColor = True
-        '
-        'txtVariableData1
-        '
-        Me.txtVariableData1.Location = New System.Drawing.Point(106, 62)
-        Me.txtVariableData1.Name = "txtVariableData1"
-        Me.txtVariableData1.Size = New System.Drawing.Size(133, 20)
-        Me.txtVariableData1.TabIndex = 3
-        Me.txtVariableData1.Text = "0"
-        '
-        'optVariableAction1
-        '
-        Me.optVariableAction1.AutoSize = True
-        Me.optVariableAction1.Location = New System.Drawing.Point(6, 66)
-        Me.optVariableAction1.Name = "optVariableAction1"
-        Me.optVariableAction1.Size = New System.Drawing.Size(44, 17)
-        Me.optVariableAction1.TabIndex = 2
-        Me.optVariableAction1.TabStop = True
-        Me.optVariableAction1.Text = "Add"
-        Me.optVariableAction1.UseVisualStyleBackColor = True
-        '
-        'txtVariableData0
-        '
-        Me.txtVariableData0.Location = New System.Drawing.Point(106, 36)
-        Me.txtVariableData0.Name = "txtVariableData0"
-        Me.txtVariableData0.Size = New System.Drawing.Size(133, 20)
-        Me.txtVariableData0.TabIndex = 3
-        Me.txtVariableData0.Text = "0"
-        '
-        'optVariableAction0
-        '
-        Me.optVariableAction0.AutoSize = True
-        Me.optVariableAction0.Location = New System.Drawing.Point(6, 40)
-        Me.optVariableAction0.Name = "optVariableAction0"
-        Me.optVariableAction0.Size = New System.Drawing.Size(41, 17)
-        Me.optVariableAction0.TabIndex = 2
-        Me.optVariableAction0.TabStop = True
-        Me.optVariableAction0.Text = "Set"
-        Me.optVariableAction0.UseVisualStyleBackColor = True
-        '
-        'cmbVariable
-        '
-        Me.cmbVariable.FormattingEnabled = True
-        Me.cmbVariable.Location = New System.Drawing.Point(60, 13)
-        Me.cmbVariable.Name = "cmbVariable"
-        Me.cmbVariable.Size = New System.Drawing.Size(179, 21)
-        Me.cmbVariable.TabIndex = 1
-        '
-        'lblRandomLabel
-        '
-        Me.lblRandomLabel.AutoSize = True
-        Me.lblRandomLabel.Location = New System.Drawing.Point(6, 16)
-        Me.lblRandomLabel.Name = "lblRandomLabel"
-        Me.lblRandomLabel.Size = New System.Drawing.Size(48, 13)
-        Me.lblRandomLabel.TabIndex = 0
-        Me.lblRandomLabel.Text = "Variable:"
-        '
         'fraCommand16
         '
         Me.fraCommand16.Controls.Add(Me.btnCommand_Ok15)
@@ -4452,6 +4056,75 @@ Partial Class frmEditor_Events
         Me.lblChangeSprite.TabIndex = 0
         Me.lblChangeSprite.Text = "Sprite: 1"
         '
+        'fraPlayerSwitch
+        '
+        Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerSwitchOk)
+        Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerswitchCancel)
+        Me.fraPlayerSwitch.Controls.Add(Me.lblRandomLabel22)
+        Me.fraPlayerSwitch.Controls.Add(Me.lblRandomLabel23)
+        Me.fraPlayerSwitch.Controls.Add(Me.cmbPlayerSwitchSet)
+        Me.fraPlayerSwitch.Controls.Add(Me.cmbSwitch)
+        Me.fraPlayerSwitch.Location = New System.Drawing.Point(5, 13)
+        Me.fraPlayerSwitch.Name = "fraPlayerSwitch"
+        Me.fraPlayerSwitch.Size = New System.Drawing.Size(245, 98)
+        Me.fraPlayerSwitch.TabIndex = 5
+        Me.fraPlayerSwitch.TabStop = False
+        Me.fraPlayerSwitch.Text = "Player Switch"
+        Me.fraPlayerSwitch.Visible = False
+        '
+        'btnSetPlayerSwitchOk
+        '
+        Me.btnSetPlayerSwitchOk.Location = New System.Drawing.Point(83, 70)
+        Me.btnSetPlayerSwitchOk.Name = "btnSetPlayerSwitchOk"
+        Me.btnSetPlayerSwitchOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnSetPlayerSwitchOk.TabIndex = 12
+        Me.btnSetPlayerSwitchOk.Text = "Ok"
+        Me.btnSetPlayerSwitchOk.UseVisualStyleBackColor = True
+        '
+        'btnSetPlayerswitchCancel
+        '
+        Me.btnSetPlayerswitchCancel.Location = New System.Drawing.Point(164, 70)
+        Me.btnSetPlayerswitchCancel.Name = "btnSetPlayerswitchCancel"
+        Me.btnSetPlayerswitchCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnSetPlayerswitchCancel.TabIndex = 11
+        Me.btnSetPlayerswitchCancel.Text = "Cancel"
+        Me.btnSetPlayerswitchCancel.UseVisualStyleBackColor = True
+        '
+        'lblRandomLabel22
+        '
+        Me.lblRandomLabel22.AutoSize = True
+        Me.lblRandomLabel22.Location = New System.Drawing.Point(10, 50)
+        Me.lblRandomLabel22.Name = "lblRandomLabel22"
+        Me.lblRandomLabel22.Size = New System.Drawing.Size(38, 13)
+        Me.lblRandomLabel22.TabIndex = 0
+        Me.lblRandomLabel22.Text = "Set to:"
+        '
+        'lblRandomLabel23
+        '
+        Me.lblRandomLabel23.AutoSize = True
+        Me.lblRandomLabel23.Location = New System.Drawing.Point(10, 17)
+        Me.lblRandomLabel23.Name = "lblRandomLabel23"
+        Me.lblRandomLabel23.Size = New System.Drawing.Size(39, 13)
+        Me.lblRandomLabel23.TabIndex = 0
+        Me.lblRandomLabel23.Text = "Switch"
+        '
+        'cmbPlayerSwitchSet
+        '
+        Me.cmbPlayerSwitchSet.FormattingEnabled = True
+        Me.cmbPlayerSwitchSet.Items.AddRange(New Object() {"True", "False"})
+        Me.cmbPlayerSwitchSet.Location = New System.Drawing.Point(60, 43)
+        Me.cmbPlayerSwitchSet.Name = "cmbPlayerSwitchSet"
+        Me.cmbPlayerSwitchSet.Size = New System.Drawing.Size(179, 21)
+        Me.cmbPlayerSwitchSet.TabIndex = 1
+        '
+        'cmbSwitch
+        '
+        Me.cmbSwitch.FormattingEnabled = True
+        Me.cmbSwitch.Location = New System.Drawing.Point(60, 14)
+        Me.cmbSwitch.Name = "cmbSwitch"
+        Me.cmbSwitch.Size = New System.Drawing.Size(179, 21)
+        Me.cmbSwitch.TabIndex = 1
+        '
         'lblRandomLabel11
         '
         Me.lblRandomLabel11.AutoSize = True
@@ -4491,77 +4164,77 @@ Partial Class frmEditor_Events
         Me.lstvCommands.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.lstvCommands.Dock = System.Windows.Forms.DockStyle.Top
         Me.lstvCommands.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ListViewGroup13.Header = "Messages"
-        ListViewGroup13.Name = "lstVgMessages"
-        ListViewGroup14.Header = "Events Progressing"
-        ListViewGroup14.Name = "lstVgEvents"
-        ListViewGroup15.Header = "Flow Control"
-        ListViewGroup15.Name = "lstVgFlow"
-        ListViewGroup16.Header = "Player Options"
-        ListViewGroup16.Name = "lstVgPlayerOptions"
-        ListViewGroup17.Header = "Movement"
-        ListViewGroup17.Name = "lstVgMovement"
-        ListViewGroup18.Header = "Animation"
-        ListViewGroup18.Name = "lstVgAnimation"
-        ListViewGroup19.Header = "Questing"
-        ListViewGroup19.Name = "lstVgQuesting"
-        ListViewGroup20.Header = "Map Functions"
-        ListViewGroup20.Name = "lstVgMapFunctions"
-        ListViewGroup21.Header = "Music and Sound"
-        ListViewGroup21.Name = "lstVgSound"
-        ListViewGroup22.Header = "Etc..."
-        ListViewGroup22.Name = "lstVgEtc"
-        ListViewGroup23.Header = "Cut-scene Options"
-        ListViewGroup23.Name = "lstVgCutScene"
-        ListViewGroup24.Header = "Shop and Bank"
-        ListViewGroup24.Name = "lstVgShopBank"
-        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup13, ListViewGroup14, ListViewGroup15, ListViewGroup16, ListViewGroup17, ListViewGroup18, ListViewGroup19, ListViewGroup20, ListViewGroup21, ListViewGroup22, ListViewGroup23, ListViewGroup24})
+        ListViewGroup52.Header = "Messages"
+        ListViewGroup52.Name = "lstVgMessages"
+        ListViewGroup53.Header = "Events Progressing"
+        ListViewGroup53.Name = "lstVgEvents"
+        ListViewGroup54.Header = "Flow Control"
+        ListViewGroup54.Name = "lstVgFlow"
+        ListViewGroup55.Header = "Player Options"
+        ListViewGroup55.Name = "lstVgPlayerOptions"
+        ListViewGroup56.Header = "Movement"
+        ListViewGroup56.Name = "lstVgMovement"
+        ListViewGroup57.Header = "Animation"
+        ListViewGroup57.Name = "lstVgAnimation"
+        ListViewGroup58.Header = "Questing"
+        ListViewGroup58.Name = "lstVgQuesting"
+        ListViewGroup59.Header = "Map Functions"
+        ListViewGroup59.Name = "lstVgMapFunctions"
+        ListViewGroup60.Header = "Music and Sound"
+        ListViewGroup60.Name = "lstVgSound"
+        ListViewGroup61.Header = "Etc..."
+        ListViewGroup61.Name = "lstVgEtc"
+        ListViewGroup62.Header = "Cut-scene Options"
+        ListViewGroup62.Name = "lstVgCutScene"
+        ListViewGroup63.Header = "Shop and Bank"
+        ListViewGroup63.Name = "lstVgShopBank"
+        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup52, ListViewGroup53, ListViewGroup54, ListViewGroup55, ListViewGroup56, ListViewGroup57, ListViewGroup58, ListViewGroup59, ListViewGroup60, ListViewGroup61, ListViewGroup62, ListViewGroup63})
         Me.lstvCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        ListViewItem43.Group = ListViewGroup13
-        ListViewItem44.Group = ListViewGroup13
-        ListViewItem44.IndentCount = 1
-        ListViewItem45.Group = ListViewGroup13
-        ListViewItem46.Group = ListViewGroup13
-        ListViewItem46.IndentCount = 1
-        ListViewItem47.Group = ListViewGroup14
-        ListViewItem48.Group = ListViewGroup14
-        ListViewItem49.Group = ListViewGroup14
-        ListViewItem50.Group = ListViewGroup15
-        ListViewItem51.Group = ListViewGroup15
-        ListViewItem52.Group = ListViewGroup15
-        ListViewItem53.Group = ListViewGroup15
-        ListViewItem54.Group = ListViewGroup16
-        ListViewItem55.Group = ListViewGroup16
-        ListViewItem56.Group = ListViewGroup16
-        ListViewItem57.Group = ListViewGroup16
-        ListViewItem58.Group = ListViewGroup16
-        ListViewItem59.Group = ListViewGroup16
-        ListViewItem60.Group = ListViewGroup16
-        ListViewItem61.Group = ListViewGroup16
-        ListViewItem62.Group = ListViewGroup16
-        ListViewItem63.Group = ListViewGroup16
-        ListViewItem64.Group = ListViewGroup16
-        ListViewItem65.Group = ListViewGroup17
-        ListViewItem66.Group = ListViewGroup17
-        ListViewItem67.Group = ListViewGroup17
-        ListViewItem68.Group = ListViewGroup17
-        ListViewItem69.Group = ListViewGroup17
-        ListViewItem70.Group = ListViewGroup17
-        ListViewItem71.Group = ListViewGroup18
-        ListViewItem72.Group = ListViewGroup19
-        ListViewItem73.Group = ListViewGroup19
-        ListViewItem74.Group = ListViewGroup19
-        ListViewItem75.Group = ListViewGroup20
-        ListViewItem76.Group = ListViewGroup20
-        ListViewItem77.Group = ListViewGroup20
-        ListViewItem78.Group = ListViewGroup21
-        ListViewItem79.Group = ListViewGroup21
-        ListViewItem80.Group = ListViewGroup21
-        ListViewItem81.Group = ListViewGroup21
-        ListViewItem82.Group = ListViewGroup22
-        ListViewItem83.Group = ListViewGroup22
-        ListViewItem84.Group = ListViewGroup22
-        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem43, ListViewItem44, ListViewItem45, ListViewItem46, ListViewItem47, ListViewItem48, ListViewItem49, ListViewItem50, ListViewItem51, ListViewItem52, ListViewItem53, ListViewItem54, ListViewItem55, ListViewItem56, ListViewItem57, ListViewItem58, ListViewItem59, ListViewItem60, ListViewItem61, ListViewItem62, ListViewItem63, ListViewItem64, ListViewItem65, ListViewItem66, ListViewItem67, ListViewItem68, ListViewItem69, ListViewItem70, ListViewItem71, ListViewItem72, ListViewItem73, ListViewItem74, ListViewItem75, ListViewItem76, ListViewItem77, ListViewItem78, ListViewItem79, ListViewItem80, ListViewItem81, ListViewItem82, ListViewItem83, ListViewItem84})
+        ListViewItem214.Group = ListViewGroup52
+        ListViewItem215.Group = ListViewGroup52
+        ListViewItem215.IndentCount = 1
+        ListViewItem216.Group = ListViewGroup52
+        ListViewItem217.Group = ListViewGroup52
+        ListViewItem217.IndentCount = 1
+        ListViewItem218.Group = ListViewGroup53
+        ListViewItem219.Group = ListViewGroup53
+        ListViewItem220.Group = ListViewGroup53
+        ListViewItem221.Group = ListViewGroup54
+        ListViewItem222.Group = ListViewGroup54
+        ListViewItem223.Group = ListViewGroup54
+        ListViewItem224.Group = ListViewGroup54
+        ListViewItem225.Group = ListViewGroup55
+        ListViewItem226.Group = ListViewGroup55
+        ListViewItem227.Group = ListViewGroup55
+        ListViewItem228.Group = ListViewGroup55
+        ListViewItem229.Group = ListViewGroup55
+        ListViewItem230.Group = ListViewGroup55
+        ListViewItem231.Group = ListViewGroup55
+        ListViewItem232.Group = ListViewGroup55
+        ListViewItem233.Group = ListViewGroup55
+        ListViewItem234.Group = ListViewGroup55
+        ListViewItem235.Group = ListViewGroup55
+        ListViewItem236.Group = ListViewGroup56
+        ListViewItem237.Group = ListViewGroup56
+        ListViewItem238.Group = ListViewGroup56
+        ListViewItem239.Group = ListViewGroup56
+        ListViewItem240.Group = ListViewGroup56
+        ListViewItem241.Group = ListViewGroup56
+        ListViewItem242.Group = ListViewGroup57
+        ListViewItem243.Group = ListViewGroup58
+        ListViewItem244.Group = ListViewGroup58
+        ListViewItem245.Group = ListViewGroup58
+        ListViewItem246.Group = ListViewGroup59
+        ListViewItem247.Group = ListViewGroup59
+        ListViewItem248.Group = ListViewGroup59
+        ListViewItem249.Group = ListViewGroup60
+        ListViewItem250.Group = ListViewGroup60
+        ListViewItem251.Group = ListViewGroup60
+        ListViewItem252.Group = ListViewGroup60
+        ListViewItem253.Group = ListViewGroup61
+        ListViewItem254.Group = ListViewGroup61
+        ListViewItem255.Group = ListViewGroup61
+        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem214, ListViewItem215, ListViewItem216, ListViewItem217, ListViewItem218, ListViewItem219, ListViewItem220, ListViewItem221, ListViewItem222, ListViewItem223, ListViewItem224, ListViewItem225, ListViewItem226, ListViewItem227, ListViewItem228, ListViewItem229, ListViewItem230, ListViewItem231, ListViewItem232, ListViewItem233, ListViewItem234, ListViewItem235, ListViewItem236, ListViewItem237, ListViewItem238, ListViewItem239, ListViewItem240, ListViewItem241, ListViewItem242, ListViewItem243, ListViewItem244, ListViewItem245, ListViewItem246, ListViewItem247, ListViewItem248, ListViewItem249, ListViewItem250, ListViewItem251, ListViewItem252, ListViewItem253, ListViewItem254, ListViewItem255})
         Me.lstvCommands.LabelWrap = False
         Me.lstvCommands.Location = New System.Drawing.Point(0, 0)
         Me.lstvCommands.MultiSelect = False
@@ -4834,7 +4507,7 @@ Partial Class frmEditor_Events
         'cmbPlayerSwitchCompare
         '
         Me.cmbPlayerSwitchCompare.FormattingEnabled = True
-        Me.cmbPlayerSwitchCompare.Items.AddRange(New Object() {"True", "False"})
+        Me.cmbPlayerSwitchCompare.Items.AddRange(New Object() {"False = 0", "True = 1"})
         Me.cmbPlayerSwitchCompare.Location = New System.Drawing.Point(234, 48)
         Me.cmbPlayerSwitchCompare.Name = "cmbPlayerSwitchCompare"
         Me.cmbPlayerSwitchCompare.Size = New System.Drawing.Size(100, 21)
@@ -5093,9 +4766,9 @@ Partial Class frmEditor_Events
         Me.Controls.Add(Me.lblRandomLabel11)
         Me.Controls.Add(Me.fraDialogue)
         Me.Controls.Add(Me.btnLabeling)
-        Me.Controls.Add(Me.pnlMoveRoute)
         Me.Controls.Add(Me.fraGraphic)
         Me.Controls.Add(Me.pnlVariableSwitches)
+        Me.Controls.Add(Me.pnlMoveRoute)
         Me.Name = "frmEditor_Events"
         Me.Text = "Event Editor"
         Me.pnlVariableSwitches.ResumeLayout(False)
@@ -5116,8 +4789,16 @@ Partial Class frmEditor_Events
         Me.frarandom20.ResumeLayout(False)
         Me.frarandom20.PerformLayout()
         Me.fraDialogue.ResumeLayout(False)
-        Me.fraPlayerSwitch.ResumeLayout(False)
-        Me.fraPlayerSwitch.PerformLayout()
+        Me.fraConditionalBranch.ResumeLayout(False)
+        Me.fraConditionalBranch.PerformLayout()
+        Me.fraConditions_Quest.ResumeLayout(False)
+        Me.fraConditions_Quest.PerformLayout()
+        Me.fraSetSelfSwitch.ResumeLayout(False)
+        Me.fraSetSelfSwitch.PerformLayout()
+        Me.fraPlayerVariable.ResumeLayout(False)
+        Me.fraPlayerVariable.PerformLayout()
+        Me.fraShowChatBubble.ResumeLayout(False)
+        Me.fraShowChatBubble.PerformLayout()
         Me.fraCommand33.ResumeLayout(False)
         Me.fraCommand33.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5135,10 +4816,6 @@ Partial Class frmEditor_Events
         Me.fraAddText.PerformLayout()
         Me.fraCommand23.ResumeLayout(False)
         Me.fraCommand23.PerformLayout()
-        Me.fraCommand7.ResumeLayout(False)
-        Me.fraCommand7.PerformLayout()
-        Me.fraConditions_Quest.ResumeLayout(False)
-        Me.fraConditions_Quest.PerformLayout()
         Me.fraCommand27.ResumeLayout(False)
         Me.fraCommand27.PerformLayout()
         Me.fraCommand18.ResumeLayout(False)
@@ -5165,30 +4842,26 @@ Partial Class frmEditor_Events
         Me.fraCommand21.ResumeLayout(False)
         Me.fraCommand19.ResumeLayout(False)
         Me.fraCommand19.PerformLayout()
-        Me.fraCommand3.ResumeLayout(False)
-        Me.fraCommand3.PerformLayout()
         Me.fraCommand13.ResumeLayout(False)
         Me.fraCommand13.PerformLayout()
         Me.fraCommand11.ResumeLayout(False)
         Me.fraCommand11.PerformLayout()
         Me.fraCommand10.ResumeLayout(False)
         Me.fraCommand10.PerformLayout()
-        Me.fraCommand6.ResumeLayout(False)
-        Me.fraCommand6.PerformLayout()
         Me.fraCommand9.ResumeLayout(False)
         Me.fraCommand9.PerformLayout()
         Me.fraCommand8.ResumeLayout(False)
         Me.fraCommand8.PerformLayout()
         Me.fraCommand32.ResumeLayout(False)
         Me.fraCommand32.PerformLayout()
-        Me.fraCommand4.ResumeLayout(False)
-        Me.fraCommand4.PerformLayout()
         Me.fraCommand16.ResumeLayout(False)
         Me.fraCommand16.PerformLayout()
         Me.fraCommand15.ResumeLayout(False)
         Me.fraCommand15.PerformLayout()
         Me.fraCommand14.ResumeLayout(False)
         Me.fraCommand14.PerformLayout()
+        Me.fraPlayerSwitch.ResumeLayout(False)
+        Me.fraPlayerSwitch.PerformLayout()
         Me.fraCommands.ResumeLayout(False)
         Me.fraRandom17.ResumeLayout(False)
         Me.fraRandom17.PerformLayout()
@@ -5243,49 +4916,6 @@ Partial Class frmEditor_Events
     Friend WithEvents btnMoveRouteCancel As Windows.Forms.Button
     Friend WithEvents btnMoveRouteOk As Windows.Forms.Button
     Friend WithEvents fraRandom14 As Windows.Forms.GroupBox
-    Friend WithEvents btnAddMoveRoute43 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute42 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute41 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute40 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute39 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute38 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute37 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute36 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute35 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute34 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute33 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute32 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute31 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute30 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute29 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute28 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute27 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute26 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute25 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute24 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute23 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute22 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute21 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute20 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute19 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute18 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute17 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute16 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute15 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute14 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute13 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute12 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute11 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute10 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute9 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute8 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute7 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute6 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute5 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute4 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute3 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute2 As Windows.Forms.Button
-    Friend WithEvents btnAddMoveRoute1 As Windows.Forms.Button
     Friend WithEvents lstMoveRoute As Windows.Forms.ListBox
     Friend WithEvents cmbEvent As Windows.Forms.ComboBox
     Friend WithEvents tabPages As Windows.Forms.TabControl
@@ -5306,9 +4936,9 @@ Partial Class frmEditor_Events
     Friend WithEvents scrlCompleteQuestTaskQuest As Windows.Forms.HScrollBar
     Friend WithEvents lblRandomLabel48 As Windows.Forms.Label
     Friend WithEvents lblRandomLabel47 As Windows.Forms.Label
-    Friend WithEvents fraCommand4 As Windows.Forms.GroupBox
-    Friend WithEvents btnCommand_Ok4 As Windows.Forms.Button
-    Friend WithEvents btnCommand_Cancel4 As Windows.Forms.Button
+    Friend WithEvents fraPlayerVariable As Windows.Forms.GroupBox
+    Friend WithEvents btnPlayerVarOk As Windows.Forms.Button
+    Friend WithEvents btnPlayerVarCancel As Windows.Forms.Button
     Friend WithEvents lblRandomLabel37 As Windows.Forms.Label
     Friend WithEvents lblRandomLabel13 As Windows.Forms.Label
     Friend WithEvents txtVariableData4 As Windows.Forms.TextBox
@@ -5358,9 +4988,9 @@ Partial Class frmEditor_Events
     Friend WithEvents optChangeItemSet As Windows.Forms.RadioButton
     Friend WithEvents cmbChangeItemIndex As Windows.Forms.ComboBox
     Friend WithEvents lblRandomLabel27 As Windows.Forms.Label
-    Friend WithEvents fraCommand6 As Windows.Forms.GroupBox
-    Friend WithEvents btnCommand_Ok6 As Windows.Forms.Button
-    Friend WithEvents btnCommand_Cancel6 As Windows.Forms.Button
+    Friend WithEvents fraSetSelfSwitch As Windows.Forms.GroupBox
+    Friend WithEvents btnSelfswitchOk As Windows.Forms.Button
+    Friend WithEvents btnSelfswitchCancel As Windows.Forms.Button
     Friend WithEvents lblRandomLabel26 As Windows.Forms.Label
     Friend WithEvents lblRandomLabel24 As Windows.Forms.Label
     Friend WithEvents cmbSetSelfSwitchTo As Windows.Forms.ComboBox
@@ -5454,9 +5084,9 @@ Partial Class frmEditor_Events
     Friend WithEvents btnCommand_Cancel18 As Windows.Forms.Button
     Friend WithEvents cmbSpawnNPC As Windows.Forms.ComboBox
     Friend WithEvents lblRandomLabel42 As Windows.Forms.Label
-    Friend WithEvents fraCommand3 As Windows.Forms.GroupBox
-    Friend WithEvents btnCommand_Ok3 As Windows.Forms.Button
-    Friend WithEvents btnCommand_Cancel3 As Windows.Forms.Button
+    Friend WithEvents fraShowChatBubble As Windows.Forms.GroupBox
+    Friend WithEvents btnShowChatBubbleOK As Windows.Forms.Button
+    Friend WithEvents btnShowChatBubbleCancel As Windows.Forms.Button
     Friend WithEvents cmbChatBubbleTarget As Windows.Forms.ComboBox
     Friend WithEvents optChatBubbleTarget2 As Windows.Forms.RadioButton
     Friend WithEvents optChatBubbleTarget1 As Windows.Forms.RadioButton
@@ -5551,9 +5181,9 @@ Partial Class frmEditor_Events
     Friend WithEvents btnCommand_Cancel28 As Windows.Forms.Button
     Friend WithEvents scrlCustomScript As Windows.Forms.HScrollBar
     Friend WithEvents lblCustomScript As Windows.Forms.Label
-    Friend WithEvents fraCommand7 As Windows.Forms.GroupBox
-    Friend WithEvents btnCommand_Ok29 As Windows.Forms.Button
-    Friend WithEvents btnCommand_Cancel29 As Windows.Forms.Button
+    Friend WithEvents fraConditionalBranch As Windows.Forms.GroupBox
+    Friend WithEvents btnConditionalBranchOk As Windows.Forms.Button
+    Friend WithEvents btnConditionalBranchCancel As Windows.Forms.Button
     Friend WithEvents fraConditions_Quest As Windows.Forms.GroupBox
     Friend WithEvents lblCondition_QuestTask As Windows.Forms.Label
     Friend WithEvents optCondition_Quest1 As Windows.Forms.RadioButton
@@ -5563,18 +5193,18 @@ Partial Class frmEditor_Events
     Friend WithEvents cmbCondition_General As Windows.Forms.ComboBox
     Friend WithEvents scrlCondition_QuestTask As Windows.Forms.HScrollBar
     Friend WithEvents lblConditionQuest As Windows.Forms.Label
-    Friend WithEvents optCondition_Index7 As Windows.Forms.RadioButton
-    Friend WithEvents optCondition_Index6 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition7 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition6 As Windows.Forms.RadioButton
     Friend WithEvents lblRandomLabel2 As Windows.Forms.Label
-    Friend WithEvents optCondition_Index5 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition5 As Windows.Forms.RadioButton
     Friend WithEvents cmbCondition_LearntSkill As Windows.Forms.ComboBox
-    Friend WithEvents optCondition_Index4 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition4 As Windows.Forms.RadioButton
     Friend WithEvents cmbCondition_ClassIs As Windows.Forms.ComboBox
-    Friend WithEvents optCondition_Index3 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition3 As Windows.Forms.RadioButton
     Friend WithEvents scrlCondition_Quest As Windows.Forms.HScrollBar
     Friend WithEvents scrlCondition_HasItem As Windows.Forms.HScrollBar
     Friend WithEvents lblHasItemAmt As Windows.Forms.Label
-    Friend WithEvents optCondition_Index2 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition2 As Windows.Forms.RadioButton
     Friend WithEvents lblRandomLabel35 As Windows.Forms.Label
     Friend WithEvents lblRandomLabel1 As Windows.Forms.Label
     Friend WithEvents cmbCondition_SelfSwitchCondition As Windows.Forms.ComboBox
@@ -5583,13 +5213,13 @@ Partial Class frmEditor_Events
     Friend WithEvents cmbCondition_HasItem As Windows.Forms.ComboBox
     Friend WithEvents cmbCondition_SelfSwitch As Windows.Forms.ComboBox
     Friend WithEvents cmbCondition_PlayerSwitch As Windows.Forms.ComboBox
-    Friend WithEvents optCondition_Index1 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition1 As Windows.Forms.RadioButton
     Friend WithEvents txtCondition_LevelAmount As Windows.Forms.TextBox
     Friend WithEvents txtCondition_PlayerVarCondition As Windows.Forms.TextBox
     Friend WithEvents cmbCondition_PlayerVarCompare As Windows.Forms.ComboBox
     Friend WithEvents lblRandomLabel0 As Windows.Forms.Label
     Friend WithEvents cmbCondition_PlayerVarIndex As Windows.Forms.ComboBox
-    Friend WithEvents optCondition_Index0 As Windows.Forms.RadioButton
+    Friend WithEvents optCondition0 As Windows.Forms.RadioButton
     Friend WithEvents lblRandomLabel11 As Windows.Forms.Label
     Friend WithEvents lblRandomLabel14 As Windows.Forms.Label
     Friend WithEvents fraCommands As Windows.Forms.Panel
@@ -5655,4 +5285,7 @@ Partial Class frmEditor_Events
     Friend WithEvents lblWeatherIntensity As Windows.Forms.Label
     Friend WithEvents CmbWeather As Windows.Forms.ComboBox
     Friend WithEvents lblRandomLabel43 As Windows.Forms.Label
+    Friend WithEvents lstvwMoveRoute As Windows.Forms.ListView
+    Friend WithEvents ColumnHeader3 As Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As Windows.Forms.ColumnHeader
 End Class

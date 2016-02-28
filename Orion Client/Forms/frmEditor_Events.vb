@@ -191,12 +191,20 @@ Public Class frmEditor_Events
         Width = 858
     End Sub
 
+    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        EventEditorOK()
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Dispose()
+    End Sub
+
     Private Sub lstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
         Dim x As Long
 
         If lstvCommands.SelectedItems.Count = 0 Then Exit Sub
 
-        MsgBox(lstvCommands.SelectedItems(0).Index + 1)
+        'MsgBox(lstvCommands.SelectedItems(0).Index + 1)
 
         fraDialogue.BringToFront()
 
@@ -209,6 +217,7 @@ Public Class frmEditor_Events
                 fraDialogue.Visible = True
                 fraShowText.Visible = True
                 scrlShowTextFace.Value = 0
+                scrlShowTextFace.Maximum = NumFaces
                 fraCommands.Visible = False
             'show choices
             Case 2
@@ -231,11 +240,13 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'chat bubble
             Case 4
+                MsgBox("Sorry, no chatbubbels yet :(")
+                Exit Sub
                 txtChatbubbleText.Text = ""
                 optChatBubbleTarget0.Checked = True
                 cmbChatBubbleTarget.Visible = False
                 fraDialogue.Visible = True
-                fraCommand3.Visible = True
+                fraShowChatBubble.Visible = True
                 fraCommands.Visible = False
         'event progression
             'player variable
@@ -249,7 +260,7 @@ Public Class frmEditor_Events
                 cmbVariable.SelectedIndex = 0
                 optVariableAction0.Checked = True
                 fraDialogue.Visible = True
-                fraCommand4.Visible = True
+                fraPlayerVariable.Visible = True
                 fraCommands.Visible = False
             'player switch
             Case 6
@@ -262,15 +273,15 @@ Public Class frmEditor_Events
             Case 7
                 cmbSetSelfSwitchTo.SelectedIndex = 0
                 fraDialogue.Visible = True
-                fraCommand6.Visible = True
+                fraSetSelfSwitch.Visible = True
                 fraCommands.Visible = False
         'flow control
 
             'conditional branch
             Case 8
                 fraDialogue.Visible = True
-                fraCommand7.Visible = True
-                optCondition_Index0.Checked = True
+                fraConditionalBranch.Visible = True
+                optCondition0.Checked = True
                 ClearConditionFrame()
                 cmbCondition_PlayerVarIndex.Enabled = True
                 cmbCondition_PlayerVarCompare.Enabled = True
@@ -692,77 +703,18 @@ Public Class frmEditor_Events
     End Sub
 #End Region
 
-#Region "Conditional Branch"
-    Private Sub optCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index0.CheckedChanged
-        If Not optCondition_Index0.Checked Then Exit Sub
-
-        ClearConditionFrame()
-
-        cmbCondition_PlayerVarIndex.Enabled = True
-        cmbCondition_PlayerVarCompare.Enabled = True
-        txtCondition_PlayerVarCondition.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index1_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index1.CheckedChanged
-        If Not optCondition_Index1.Checked Then Exit Sub
-
-        cmbCondition_PlayerSwitch.Enabled = True
-        cmbCondtion_PlayerSwitchCondition.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index2_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index2.CheckedChanged
-        If Not optCondition_Index2.Checked Then Exit Sub
-
-        cmbCondition_HasItem.Enabled = True
-        scrlCondition_HasItem.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index3_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index3.CheckedChanged
-        If Not optCondition_Index3.Checked Then Exit Sub
-
-        cmbCondition_ClassIs.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index4_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index4.CheckedChanged
-        If Not optCondition_Index4.Checked Then Exit Sub
-
-        cmbCondition_LearntSkill.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index5_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index5.CheckedChanged
-        If Not optCondition_Index5.Checked Then Exit Sub
-
-        cmbCondition_LevelCompare.Enabled = True
-        txtCondition_LevelAmount.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index6_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index6.CheckedChanged
-        If Not optCondition_Index6.Checked Then Exit Sub
-
-        cmbCondition_SelfSwitch.Enabled = True
-        cmbCondition_SelfSwitchCondition.Enabled = True
-    End Sub
-
-    Private Sub optCondition_Index7_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition_Index7.CheckedChanged
-        If Not optCondition_Index7.Checked Then Exit Sub
-
-        fraConditions_Quest.Visible = True
-        scrlCondition_Quest.Enabled = True
-    End Sub
-
-#End Region
-
 #Region "Conditions"
     Private Sub chkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
-        tmpEvent.Pages(curPageNum).chkVariable = chkPlayerVar.Checked
         If chkPlayerVar.Checked = 0 Then
             cmbPlayerVar.Enabled = False
             txtPlayerVariable.Enabled = False
             cmbPlayervarCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkVariable = 0
         Else
             cmbPlayerVar.Enabled = True
             txtPlayerVariable.Enabled = True
             cmbPlayervarCompare.Enabled = True
+            tmpEvent.Pages(curPageNum).chkVariable = 1
         End If
     End Sub
 
@@ -781,13 +733,14 @@ Public Class frmEditor_Events
     End Sub
 
     Private Sub chkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
-        tmpEvent.Pages(curPageNum).chkSwitch = chkPlayerSwitch.Checked
         If chkPlayerSwitch.Checked = 0 Then
             cmbPlayerSwitch.Enabled = False
             cmbPlayerSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSwitch = 0
         Else
             cmbPlayerSwitch.Enabled = True
             cmbPlayerSwitchCompare.Enabled = True
+            tmpEvent.Pages(curPageNum).chkSwitch = 1
         End If
     End Sub
 
@@ -813,13 +766,14 @@ Public Class frmEditor_Events
     End Sub
 
     Private Sub chkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
-        tmpEvent.Pages(curPageNum).chkSelfSwitch = chkSelfSwitch.Checked
         If chkSelfSwitch.Checked = 0 Then
             cmbSelfSwitch.Enabled = False
             cmbSelfSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
         Else
             cmbSelfSwitch.Enabled = True
             cmbSelfSwitchCompare.Enabled = True
+            tmpEvent.Pages(curPageNum).chkSelfSwitch = 1
         End If
     End Sub
 
@@ -844,6 +798,109 @@ Public Class frmEditor_Events
         GraphicSelType = 0
     End Sub
 
+    Private Sub cmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
+        If cmbGraphic.SelectedIndex = -1 Then Exit Sub
+        tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
+        ' set the max on the scrollbar
+        Select Case cmbGraphic.SelectedIndex
+            Case 0 ' None
+                scrlGraphic.Value = 1
+                scrlGraphic.Enabled = False
+            Case 1 ' character
+                scrlGraphic.Maximum = NumCharacters
+                scrlGraphic.Enabled = True
+            Case 2 ' Tileset
+                scrlGraphic.Maximum = NumTileSets
+                scrlGraphic.Enabled = True
+        End Select
+        If scrlGraphic.Value = 0 Then
+            lblGraphic.Text = "Number: None"
+        Else
+            lblGraphic.Text = "Number: " & scrlGraphic.Value
+        End If
+        If tmpEvent.Pages(curPageNum).GraphicType = 1 Then
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
+
+        ElseIf tmpEvent.Pages(curPageNum).GraphicType = 2 Then
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumTileSets Then Exit Sub
+
+        End If
+        EditorEvent_DrawGraphic()
+    End Sub
+
+    Private Sub scrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
+        If scrlGraphic.Value = 0 Then
+            lblGraphic.Text = "Number: None"
+        Else
+            lblGraphic.Text = "Number: " & scrlGraphic.Value
+        End If
+        cmbGraphic_SelectedIndexChanged(sender, e)
+    End Sub
+
+    Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
+        Dim X As Long
+        Dim Y As Long
+
+        X = e.Location.X
+        Y = e.Location.Y
+
+        If Me.cmbGraphic.SelectedIndex = 2 Then
+            'Tileset... hard one....
+            If ShiftDown Then
+                If GraphicSelX > -1 And GraphicSelY > -1 Then
+                    'If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
+                    '    GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
+                    '    GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
+                    'End If
+                End If
+            Else
+                'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value) \ 32
+                'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value) \ 32
+                GraphicSelX2 = 0
+                GraphicSelY2 = 0
+            End If
+        ElseIf Me.cmbGraphic.SelectedIndex = 1 Then
+            'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value)
+            'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value)
+            GraphicSelX2 = 0
+            GraphicSelY2 = 0
+            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
+            For i = 0 To 3
+                If GraphicSelX >= ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * i) And GraphicSelX < ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * (i + 1)) Then
+                    GraphicSelX = i
+                End If
+            Next
+            For i = 0 To 3
+                If GraphicSelY >= ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * i) And GraphicSelY < ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * (i + 1)) Then
+                    GraphicSelY = i
+                End If
+            Next
+        End If
+        EditorEvent_DrawGraphic()
+    End Sub
+
+    Private Sub picGraphicSel_Click(sender As Object, e As EventArgs) Handles picGraphicSel.Click
+
+    End Sub
+
+    Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
+        If GraphicSelType = 0 Then
+            tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
+            tmpEvent.Pages(curPageNum).Graphic = scrlGraphic.Value
+            tmpEvent.Pages(curPageNum).GraphicX = GraphicSelX
+            tmpEvent.Pages(curPageNum).GraphicY = GraphicSelY
+            tmpEvent.Pages(curPageNum).GraphicX2 = GraphicSelX2
+            tmpEvent.Pages(curPageNum).GraphicY2 = GraphicSelY2
+        Else
+            AddMoveRouteCommand(42)
+            GraphicSelType = 0
+        End If
+        fraGraphic.Visible = False
+    End Sub
+
+    Private Sub btnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
+        fraGraphic.Visible = False
+    End Sub
 #End Region
 
 #Region "Movement"
@@ -1232,6 +1289,19 @@ Public Class frmEditor_Events
     Private Sub cmbEvent_Click(sender As Object, e As EventArgs) Handles cmbEvent.Click
 
     End Sub
+    'MoveRoute Commands
+    Private Sub lstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.SelectedIndexChanged
+        Select Case lstvCommands.SelectedItems(0).Index + 1
+            'Set Graphic
+            Case 43
+                fraGraphic.Width = 841
+                fraGraphic.Height = 585
+                fraGraphic.Visible = True
+                GraphicSelType = 1
+            Case Else
+                AddMoveRouteCommand(lstvCommands.SelectedItems(0).Index + 1)
+        End Select
+    End Sub
 
     Private Sub lstMoveRoute_KeyDown(sender As Object, e As KeyEventArgs) Handles lstMoveRoute.KeyDown
         If e.KeyCode = Keys.Delete Then
@@ -1263,12 +1333,12 @@ Public Class frmEditor_Events
                 TempMoveRoute(i).Data5 = GraphicSelY
                 TempMoveRoute(i).Data6 = GraphicSelY2
             End If
-            PopulateMoveRouteList
+            PopulateMoveRouteList()
         Else
             TempMoveRouteCount = TempMoveRouteCount + 1
             ReDim Preserve TempMoveRoute(TempMoveRouteCount)
             TempMoveRoute(TempMoveRouteCount).Index = Index
-            PopulateMoveRouteList
+            PopulateMoveRouteList()
             'if set graphic then....
             If Index = 43 Then
                 TempMoveRoute(TempMoveRouteCount).Data1 = cmbGraphic.SelectedIndex
@@ -1296,7 +1366,7 @@ Public Class frmEditor_Events
             Else
                 ReDim Preserve TempMoveRoute(TempMoveRouteCount)
             End If
-            PopulateMoveRouteList
+            PopulateMoveRouteList()
         End If
 
     End Sub
@@ -1432,337 +1502,6 @@ Public Class frmEditor_Events
         fraMoveRoute.Visible = False
     End Sub
 
-    'Commands
-
-    'Move Up
-    Private Sub btnAddMoveRoute1_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute1.Click
-        AddMoveRouteCommand(1)
-    End Sub
-
-    'Move Down
-    Private Sub btnAddMoveRoute2_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute2.Click
-        AddMoveRouteCommand(2)
-    End Sub
-
-    'Move Left
-    Private Sub btnAddMoveRoute3_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute3.Click
-        AddMoveRouteCommand(3)
-    End Sub
-
-    'Move Right
-    Private Sub btnAddMoveRoute4_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute4.Click
-        AddMoveRouteCommand(4)
-    End Sub
-
-    'Move Randomly
-    Private Sub btnAddMoveRoute5_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute5.Click
-        AddMoveRouteCommand(6)
-    End Sub
-
-    'Move to Player
-    Private Sub btnAddMoveRoute6_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute6.Click
-        AddMoveRouteCommand(6)
-    End Sub
-
-    'Move from Player
-    Private Sub btnAddMoveRoute7_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute7.Click
-        AddMoveRouteCommand(7)
-    End Sub
-
-    'Step Forward
-    Private Sub btnAddMoveRoute8_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute8.Click
-        AddMoveRouteCommand(8)
-    End Sub
-
-    'Step Back
-    Private Sub btnAddMoveRoute9_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute9.Click
-        AddMoveRouteCommand(9)
-    End Sub
-
-    'Wait 100ms
-    Private Sub btnAddMoveRoute10_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute10.Click
-        AddMoveRouteCommand(10)
-    End Sub
-
-    'Wait 500ms
-    Private Sub btnAddMoveRoute11_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute11.Click
-        AddMoveRouteCommand(11)
-    End Sub
-
-    'Wait 1000ms
-    Private Sub btnAddMoveRoute12_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute12.Click
-        AddMoveRouteCommand(12)
-    End Sub
-
-    'Turn Up
-    Private Sub btnAddMoveRoute13_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute13.Click
-        AddMoveRouteCommand(13)
-    End Sub
-
-    'Turn Down
-    Private Sub btnAddMoveRoute14_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute14.Click
-        AddMoveRouteCommand(14)
-    End Sub
-
-    'Turn Left
-    Private Sub btnAddMoveRoute15_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute15.Click
-        AddMoveRouteCommand(15)
-    End Sub
-
-    'Turn Right
-    Private Sub btnAddMoveRoute16_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute16.Click
-        AddMoveRouteCommand(16)
-    End Sub
-
-    'Turn 90 dg Right
-    Private Sub btnAddMoveRoute17_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute17.Click
-        AddMoveRouteCommand(17)
-    End Sub
-
-    'Turn 90 dg Left
-    Private Sub btnAddMoveRoute18_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute18.Click
-        AddMoveRouteCommand(18)
-    End Sub
-
-    'Turn 180 dg
-    Private Sub btnAddMoveRoute19_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute19.Click
-        AddMoveRouteCommand(19)
-    End Sub
-
-    'Turn Randomly
-    Private Sub btnAddMoveRoute20_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute20.Click
-        AddMoveRouteCommand(20)
-    End Sub
-
-    'Turn to Player
-    Private Sub btnAddMoveRoute21_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute21.Click
-        AddMoveRouteCommand(21)
-    End Sub
-
-    'Turn from Player
-    Private Sub btnAddMoveRoute22_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute22.Click
-        AddMoveRouteCommand(22)
-    End Sub
-
-    'Set Speed 8x Slower
-    Private Sub btnAddMoveRoute23_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute23.Click
-        AddMoveRouteCommand(23)
-    End Sub
-
-    'Set Speed 4x Slower
-    Private Sub btnAddMoveRoute24_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute24.Click
-        AddMoveRouteCommand(24)
-    End Sub
-
-    'Set Speed 2x Slower
-    Private Sub btnAddMoveRoute25_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute25.Click
-        AddMoveRouteCommand(25)
-    End Sub
-
-    'Set Speed to Normal
-    Private Sub btnAddMoveRoute26_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute26.Click
-        AddMoveRouteCommand(26)
-    End Sub
-
-    'Set Speed 2x Faster
-    Private Sub btnAddMoveRoute27_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute27.Click
-        AddMoveRouteCommand(27)
-    End Sub
-
-    'Set Speed 4x Faster
-    Private Sub btnAddMoveRoute28_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute28.Click
-        AddMoveRouteCommand(28)
-    End Sub
-
-    'Set Frequency to Lowest
-    Private Sub btnAddMoveRoute29_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute29.Click
-        AddMoveRouteCommand(29)
-    End Sub
-
-    'Set Frequency to Lower
-    Private Sub btnAddMoveRoute30_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute30.Click
-        AddMoveRouteCommand(30)
-    End Sub
-
-    'Set Frequency to Normal
-    Private Sub btnAddMoveRoute31_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute31.Click
-        AddMoveRouteCommand(31)
-    End Sub
-
-    'Set Frequency to Higher
-    Private Sub btnAddMoveRoute32_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute32.Click
-        AddMoveRouteCommand(32)
-    End Sub
-
-    'Set Frequency to Highest
-    Private Sub btnAddMoveRoute33_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute33.Click
-        AddMoveRouteCommand(33)
-    End Sub
-
-    'Walk Animation On
-    Private Sub btnAddMoveRoute34_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute34.Click
-        AddMoveRouteCommand(34)
-    End Sub
-
-    'Walk Animation Off
-    Private Sub btnAddMoveRoute35_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute35.Click
-        AddMoveRouteCommand(35)
-    End Sub
-
-    'Fixed Direction On
-    Private Sub btnAddMoveRoute36_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute36.Click
-        AddMoveRouteCommand(36)
-    End Sub
-
-    'Fixed Direction Off
-    Private Sub btnAddMoveRoute37_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute37.Click
-        AddMoveRouteCommand(37)
-    End Sub
-
-    'Walkthrough On
-    Private Sub btnAddMoveRoute38_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute38.Click
-        AddMoveRouteCommand(28)
-    End Sub
-
-    'Walkthrough Off
-    Private Sub btnAddMoveRoute39_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute39.Click
-        AddMoveRouteCommand(39)
-    End Sub
-
-    'Position Below Player
-    Private Sub btnAddMoveRoute40_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute40.Click
-        AddMoveRouteCommand(40)
-    End Sub
-
-    'Position Same as Player
-    Private Sub btnAddMoveRoute41_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute41.Click
-        AddMoveRouteCommand(41)
-    End Sub
-
-    'Position Above Player
-    Private Sub btnAddMoveRoute42_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute42.Click
-        AddMoveRouteCommand(42)
-    End Sub
-
-    'Set Graphic
-    Private Sub btnAddMoveRoute43_Click(sender As Object, e As EventArgs) Handles btnAddMoveRoute43.Click
-        fraGraphic.Width = 841
-        fraGraphic.Height = 585
-        fraGraphic.Visible = True
-        GraphicSelType = 1
-    End Sub
-
-    Private Sub cmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
-        If cmbGraphic.SelectedIndex = -1 Then Exit Sub
-        tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
-        ' set the max on the scrollbar
-        Select Case cmbGraphic.SelectedIndex
-            Case 0 ' None
-                scrlGraphic.Value = 1
-                scrlGraphic.Enabled = False
-            Case 1 ' character
-                scrlGraphic.Maximum = NumCharacters
-                scrlGraphic.Enabled = True
-            Case 2 ' Tileset
-                scrlGraphic.Maximum = NumTileSets
-                scrlGraphic.Enabled = True
-        End Select
-        If scrlGraphic.Value = 0 Then
-            lblGraphic.Text = "Number: None"
-        Else
-            lblGraphic.Text = "Number: " & scrlGraphic.Value
-        End If
-        If tmpEvent.Pages(curPageNum).GraphicType = 1 Then
-            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
-
-        ElseIf tmpEvent.Pages(curPageNum).GraphicType = 2 Then
-            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumTileSets Then Exit Sub
-
-        End If
-        EditorEvent_DrawGraphic()
-    End Sub
-
-    Private Sub scrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
-        If scrlGraphic.Value = 0 Then
-            lblGraphic.Text = "Number: None"
-        Else
-            lblGraphic.Text = "Number: " & scrlGraphic.Value
-        End If
-        cmbGraphic_SelectedIndexChanged(sender, e)
-    End Sub
-
-    Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
-        Dim X As Long
-        Dim Y As Long
-
-        X = e.Location.X
-        y = e.Location.Y
-
-        If Me.cmbGraphic.SelectedIndex = 2 Then
-            'Tileset... hard one....
-            If ShiftDown Then
-                If GraphicSelX > -1 And GraphicSelY > -1 Then
-                    'If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
-                    '    GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
-                    '    GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
-                    'End If
-                End If
-            Else
-                'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value) \ 32
-                'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value) \ 32
-                GraphicSelX2 = 0
-                GraphicSelY2 = 0
-            End If
-        ElseIf Me.cmbGraphic.SelectedIndex = 1 Then
-            'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value)
-            'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value)
-            GraphicSelX2 = 0
-            GraphicSelY2 = 0
-            If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
-            For i = 0 To 3
-                If GraphicSelX >= ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * i) And GraphicSelX < ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * (i + 1)) Then
-                    GraphicSelX = i
-                End If
-            Next
-            For i = 0 To 3
-                If GraphicSelY >= ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * i) And GraphicSelY < ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * (i + 1)) Then
-                    GraphicSelY = i
-                End If
-            Next
-        End If
-        EditorEvent_DrawGraphic()
-    End Sub
-
-    Private Sub picGraphicSel_Click(sender As Object, e As EventArgs) Handles picGraphicSel.Click
-
-    End Sub
-
-    Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
-        If GraphicSelType = 0 Then
-            tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
-            tmpEvent.Pages(curPageNum).Graphic = scrlGraphic.Value
-            tmpEvent.Pages(curPageNum).GraphicX = GraphicSelX
-            tmpEvent.Pages(curPageNum).GraphicY = GraphicSelY
-            tmpEvent.Pages(curPageNum).GraphicX2 = GraphicSelX2
-            tmpEvent.Pages(curPageNum).GraphicY2 = GraphicSelY2
-        Else
-            AddMoveRouteCommand(42)
-            GraphicSelType = 0
-        End If
-        fraGraphic.Visible = False
-    End Sub
-
-    Private Sub btnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
-        fraGraphic.Visible = False
-    End Sub
-
-    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        EventEditorOK()
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Dispose()
-    End Sub
 
 
 
@@ -1832,8 +1571,8 @@ Public Class frmEditor_Events
     Private Sub scrlShowChoicesFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowChoicesFace.Scroll
         If scrlShowChoicesFace.Value > 0 Then
             lblShowChoicesFace.Text = "Face: " & scrlShowChoicesFace.Value
-            If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT) Then
-                picShowChoicesFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT)
+            If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowChoicesFace.Value & GFX_EXT) Then
+                picShowChoicesFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowChoicesFace.Value & GFX_EXT)
             End If
         Else
             picShowChoicesFace.Text = "Face: None"
@@ -1856,7 +1595,139 @@ Public Class frmEditor_Events
     End Sub
 #End Region
 
-#Region "set player switch"
+#Region "Show Chatbubble"
+    Private Sub optChatBubbleTarget0_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget0.CheckedChanged
+        cmbChatBubbleTarget.Visible = False
+    End Sub
+
+    Private Sub optChatBubbleTarget1_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget1.CheckedChanged
+        cmbChatBubbleTarget.Visible = True
+        cmbChatBubbleTarget.Items.Clear()
+
+        For i = 1 To MAX_MAP_NPCS
+            If Map.Npc(i) <= 0 Then
+                cmbChatBubbleTarget.Items.Add(CStr(i) & ". ")
+            Else
+                cmbChatBubbleTarget.Items.Add(CStr(i) & ". " & Trim$(Npc(Map.Npc(i)).Name))
+            End If
+        Next
+        cmbChatBubbleTarget.SelectedIndex = 0
+    End Sub
+
+    Private Sub optChatBubbleTarget2_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget2.CheckedChanged
+        cmbChatBubbleTarget.Visible = True
+        cmbChatBubbleTarget.Items.Clear()
+
+        For i = 1 To Map.EventCount
+            cmbChatBubbleTarget.Items.Add(CStr(i) & ". " & Trim$(Map.Events(i).Name))
+        Next
+        cmbChatBubbleTarget.SelectedIndex = 0
+    End Sub
+
+    Private Sub btnShowChatBubbleOK_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleOK.Click
+        If Not isEdit Then
+            AddCommand(EventType.evShowChatBubble)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraShowChatBubble.Visible = False
+        fraCommands.Visible = False
+    End Sub
+
+    Private Sub btnShowChatBubbleCancel_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraShowChatBubble.Visible = False
+    End Sub
+#End Region
+
+#Region "Set Player Variable"
+    Private Sub cmbVariable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbVariable.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub optVariableAction0_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction0.CheckedChanged
+        If optVariableAction0.Checked = True Then
+            txtVariableData0.Enabled = True
+            txtVariableData0.Text = "0"
+            txtVariableData1.Enabled = False
+            txtVariableData1.Text = "0"
+            txtVariableData2.Enabled = False
+            txtVariableData2.Text = "0"
+            txtVariableData3.Enabled = False
+            txtVariableData3.Text = "0"
+            txtVariableData4.Enabled = False
+            txtVariableData4.Text = "0"
+        End If
+    End Sub
+
+    Private Sub optVariableAction1_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction1.CheckedChanged
+        If optVariableAction1.Checked = True Then
+            txtVariableData0.Enabled = False
+            txtVariableData0.Text = "0"
+            txtVariableData1.Enabled = True
+            txtVariableData1.Text = "0"
+            txtVariableData2.Enabled = False
+            txtVariableData2.Text = "0"
+            txtVariableData3.Enabled = False
+            txtVariableData3.Text = "0"
+            txtVariableData4.Enabled = False
+            txtVariableData4.Text = "0"
+        End If
+    End Sub
+
+    Private Sub optVariableAction2_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction2.CheckedChanged
+        If optVariableAction2.Checked = True Then
+            txtVariableData0.Enabled = False
+            txtVariableData0.Text = "0"
+            txtVariableData1.Enabled = False
+            txtVariableData1.Text = "0"
+            txtVariableData2.Enabled = True
+            txtVariableData2.Text = "0"
+            txtVariableData3.Enabled = False
+            txtVariableData3.Text = "0"
+            txtVariableData4.Enabled = False
+            txtVariableData4.Text = "0"
+        End If
+    End Sub
+
+    Private Sub optVariableAction3_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction3.CheckedChanged
+        If optVariableAction2.Checked = True Then
+            txtVariableData0.Enabled = False
+            txtVariableData0.Text = "0"
+            txtVariableData1.Enabled = False
+            txtVariableData1.Text = "0"
+            txtVariableData2.Enabled = False
+            txtVariableData2.Text = "0"
+            txtVariableData3.Enabled = True
+            txtVariableData3.Text = "0"
+            txtVariableData4.Enabled = True
+            txtVariableData4.Text = "0"
+        End If
+    End Sub
+
+    Private Sub btnPlayerVarOk_Click(sender As Object, e As EventArgs) Handles btnPlayerVarOk.Click
+        If Not isEdit Then
+            AddCommand(EventType.evPlayerVar)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraPlayerVariable.Visible = False
+        fraCommands.Visible = False
+    End Sub
+
+    Private Sub btnPlayerVarCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerVarCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraPlayerVariable.Visible = False
+    End Sub
+#End Region
+
+#Region "Set Player Switch"
     Private Sub cmbSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSwitch.SelectedIndexChanged
 
     End Sub
@@ -1883,16 +1754,137 @@ Public Class frmEditor_Events
         fraPlayerSwitch.Visible = False
     End Sub
 
-
 #End Region
 
+#Region "Set Self Switch"
+    Private Sub cmbSetSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetSelfSwitch.SelectedIndexChanged
 
+    End Sub
 
+    Private Sub cmbSetSelfSwitchTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetSelfSwitchTo.SelectedIndexChanged
 
+    End Sub
 
+    Private Sub btnSelfswitchOk_Click(sender As Object, e As EventArgs) Handles btnSelfswitchOk.Click
+        If Not isEdit Then
+            AddCommand(EventType.evSelfSwitch)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraSetSelfSwitch.Visible = False
+        fraCommands.Visible = False
+    End Sub
 
+    Private Sub btnSelfswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSelfswitchCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraSetSelfSwitch.Visible = False
+    End Sub
 #End Region
 
+#Region "Conditional Branch"
+    Private Sub optCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition0.CheckedChanged
+        If Not optCondition0.Checked Then Exit Sub
 
+        ClearConditionFrame()
+
+        cmbCondition_PlayerVarIndex.Enabled = True
+        cmbCondition_PlayerVarCompare.Enabled = True
+        txtCondition_PlayerVarCondition.Enabled = True
+    End Sub
+
+    Private Sub optCondition1_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition1.CheckedChanged
+        If Not optCondition1.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_PlayerSwitch.Enabled = True
+        cmbCondtion_PlayerSwitchCondition.Enabled = True
+    End Sub
+
+    Private Sub optCondition2_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition2.CheckedChanged
+        If Not optCondition2.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_HasItem.Enabled = True
+        scrlCondition_HasItem.Enabled = True
+    End Sub
+
+    Private Sub optCondition3_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition3.CheckedChanged
+        If Not optCondition3.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_ClassIs.Enabled = True
+    End Sub
+
+    Private Sub optCondition4_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition4.CheckedChanged
+        If Not optCondition4.Checked Then Exit Sub
+
+        cmbCondition_LearntSkill.Enabled = True
+    End Sub
+
+    Private Sub optCondition5_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition5.CheckedChanged
+        If Not optCondition5.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_LevelCompare.Enabled = True
+        txtCondition_LevelAmount.Enabled = True
+    End Sub
+
+    Private Sub optCondition6_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition6.CheckedChanged
+        If Not optCondition6.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_SelfSwitch.Enabled = True
+        cmbCondition_SelfSwitchCondition.Enabled = True
+    End Sub
+
+    Private Sub optCondition7_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition7.CheckedChanged
+        If Not optCondition7.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        fraConditions_Quest.Visible = True
+        scrlCondition_Quest.Enabled = True
+    End Sub
+
+    Private Sub scrlCondition_HasItem_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_HasItem.Scroll
+        lblHasItemAmt.Text = "x " & scrlCondition_HasItem.Value
+    End Sub
+
+    Private Sub scrlCondition_Quest_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_Quest.Scroll
+        lblCondition_QuestTask.Text = "#" & scrlCondition_QuestTask.Value
+    End Sub
+
+    Private Sub scrlCondition_QuestTask_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_QuestTask.Scroll
+        lblCondition_QuestTask.Text = "#" & scrlCondition_QuestTask.Value
+    End Sub
+
+    Private Sub btnConditionalBranchOk_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchOk.Click
+        If isEdit = False Then
+            AddCommand(EventType.evCondition)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraCommands.Visible = False
+        fraConditionalBranch.Visible = False
+    End Sub
+
+    Private Sub btnConditionalBranchCancel_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraConditionalBranch.Visible = False
+    End Sub
+#End Region
+
+#End Region
 
 End Class

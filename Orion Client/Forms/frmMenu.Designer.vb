@@ -70,13 +70,13 @@ Partial Class frmMenu
         Me.btnCredits = New System.Windows.Forms.Panel()
         Me.btnExit = New System.Windows.Forms.Panel()
         Me.pnlIPConfig = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblSaveIP = New System.Windows.Forms.Label()
         Me.txtPort = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtIP = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.lblSaveIP = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -565,26 +565,14 @@ Partial Class frmMenu
         Me.pnlIPConfig.TabIndex = 51
         Me.pnlIPConfig.Visible = False
         '
-        'Label8
+        'lblSaveIP
         '
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(86, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(247, 33)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "IPConfig"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.Label13.Location = New System.Drawing.Point(70, 179)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(0, 13)
-        Me.Label13.TabIndex = 17
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblSaveIP.AutoSize = True
+        Me.lblSaveIP.Location = New System.Drawing.Point(154, 107)
+        Me.lblSaveIP.Name = "lblSaveIP"
+        Me.lblSaveIP.Size = New System.Drawing.Size(45, 13)
+        Me.lblSaveIP.TabIndex = 29
+        Me.lblSaveIP.Text = "Save IP"
         '
         'txtPort
         '
@@ -619,14 +607,26 @@ Partial Class frmMenu
         Me.Label15.TabIndex = 25
         Me.Label15.Text = "IP Adres:"
         '
-        'lblSaveIP
+        'Label8
         '
-        Me.lblSaveIP.AutoSize = True
-        Me.lblSaveIP.Location = New System.Drawing.Point(154, 107)
-        Me.lblSaveIP.Name = "lblSaveIP"
-        Me.lblSaveIP.Size = New System.Drawing.Size(45, 13)
-        Me.lblSaveIP.TabIndex = 29
-        Me.lblSaveIP.Text = "Save IP"
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(86, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(247, 33)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "IPConfig"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.Label13.Location = New System.Drawing.Point(70, 179)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(0, 13)
+        Me.Label13.TabIndex = 17
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmMenu
         '

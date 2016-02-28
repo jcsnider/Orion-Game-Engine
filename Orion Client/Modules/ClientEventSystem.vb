@@ -53,6 +53,7 @@ Public Module ClientEventSystem
 
     Public InEvent As Boolean
     Public HoldPlayer As Boolean
+    Public InitEventEditorForm As Boolean
 
 #End Region
 
@@ -382,6 +383,7 @@ Public Module ClientEventSystem
         ClearEvent(count)
         ' set the new count
         Map.EventCount = count - 1
+        Map.CurrentEvents = count - 1
 
     End Sub
 
@@ -415,59 +417,42 @@ Public Module ClientEventSystem
     End Sub
 
     Sub ClearEvent(EventNum As Long)
-
-        'Call ZeroMemory(ByVal VarPtr(Map.Events(EventNum)), LenB(Map.Events(EventNum)))
+        If EventNum > Map.EventCount Or EventNum > UBound(Map.MapEvents) Then Exit Sub
+        With Map.MapEvents(EventNum)
+            .Name = ""
+            .dir = 0
+            .ShowDir = 0
+            .GraphicNum = 0
+            .GraphicType = 0
+            .GraphicX = 0
+            .GraphicX2 = 0
+            .GraphicY = 0
+            .GraphicY2 = 0
+            .MovementSpeed = 0
+            .Moving = 0
+            .X = 0
+            .Y = 0
+            .XOffset = 0
+            .YOffset = 0
+            .Position = 0
+            .Visible = 0
+            .WalkAnim = 0
+            .DirFix = 0
+            .WalkThrough = 0
+            .ShowName = 0
+            .questnum = 0
+        End With
 
     End Sub
 
     Sub EventEditorInit(EventNum As Long)
-        Dim i As Long
+        'Dim i As Long
 
         EditorEvent = EventNum
 
         tmpEvent = Map.Events(EventNum)
-        frmEditor_Events.InitEventEditorForm()
-        ' populate form
-        With frmEditor_Events
-            ' set the tabs
-            .tabPages.TabPages.Clear()
+        InitEventEditorForm = True
 
-            For i = 1 To tmpEvent.PageCount
-                .tabPages.TabPages.Add(Str(i))
-            Next
-            ' items
-            .cmbHasItem.Items.Clear()
-            .cmbHasItem.Items.Add("None")
-            For i = 1 To MAX_ITEMS
-                .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-            Next
-            ' variables
-            .cmbPlayerVar.Items.Clear()
-            .cmbPlayerVar.Items.Add("None")
-            For i = 1 To MAX_VARIABLES
-                .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
-            Next
-            ' variables
-            .cmbPlayerSwitch.Items.Clear()
-            .cmbPlayerSwitch.Items.Add("None")
-            For i = 1 To MAX_SWITCHES
-                .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
-            Next
-            ' name
-            .txtName.Text = tmpEvent.Name
-            ' enable delete button
-            If tmpEvent.PageCount > 1 Then
-                .btnDeletePage.Enabled = True
-            Else
-                .btnDeletePage.Enabled = False
-            End If
-            .btnPastePage.Enabled = False
-            ' Load page 1 to start off with
-            curPageNum = 1
-            EventEditorLoadPage(curPageNum)
-        End With
-        ' show the editor
-        frmEditor_Events.Show()
 
     End Sub
 
@@ -1131,14 +1116,14 @@ newlist:
                 tmpEvent.Pages(curPageNum).CommandList(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.CommandList).ParentList = curlist
                 tmpEvent.Pages(curPageNum).CommandList(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.ElseCommandList).ParentList = curlist
 
-                If frmEditor_Events.optCondition_Index0.Checked = True Then X = 0
-                If frmEditor_Events.optCondition_Index1.Checked = True Then X = 1
-                If frmEditor_Events.optCondition_Index2.Checked = True Then X = 2
-                If frmEditor_Events.optCondition_Index3.Checked = True Then X = 3
-                If frmEditor_Events.optCondition_Index4.Checked = True Then X = 4
-                If frmEditor_Events.optCondition_Index5.Checked = True Then X = 5
-                If frmEditor_Events.optCondition_Index6.Checked = True Then X = 6
-                If frmEditor_Events.optCondition_Index7.Checked = True Then X = 7
+                If frmEditor_Events.optCondition0.Checked = True Then X = 0
+                If frmEditor_Events.optCondition1.Checked = True Then X = 1
+                If frmEditor_Events.optCondition2.Checked = True Then X = 2
+                If frmEditor_Events.optCondition3.Checked = True Then X = 3
+                If frmEditor_Events.optCondition4.Checked = True Then X = 4
+                If frmEditor_Events.optCondition5.Checked = True Then X = 5
+                If frmEditor_Events.optCondition6.Checked = True Then X = 6
+                If frmEditor_Events.optCondition7.Checked = True Then X = 7
 
                 Select Case X
                     Case 0 'Player Var
@@ -1421,6 +1406,8 @@ newlist:
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 
+        frmEditor_Events.fraDialogue.BringToFront()
+
         curlist = EventList(i).CommandList
         curslot = EventList(i).CommandNum
         If curlist = 0 Then Exit Sub
@@ -1446,27 +1433,27 @@ newlist:
             Case EventType.evCondition
                 isEdit = True
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand7.Visible = True
+                frmEditor_Events.fraConditionalBranch.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
                 frmEditor_Events.ClearConditionFrame()
 
                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition
                     Case 0
-                        frmEditor_Events.optCondition_Index0.Checked = True
+                        frmEditor_Events.optCondition0.Checked = True
                     Case 1
-                        frmEditor_Events.optCondition_Index1.Checked = True
+                        frmEditor_Events.optCondition1.Checked = True
                     Case 2
-                        frmEditor_Events.optCondition_Index2.Checked = True
+                        frmEditor_Events.optCondition2.Checked = True
                     Case 3
-                        frmEditor_Events.optCondition_Index3.Checked = True
+                        frmEditor_Events.optCondition3.Checked = True
                     Case 4
-                        frmEditor_Events.optCondition_Index4.Checked = True
+                        frmEditor_Events.optCondition4.Checked = True
                     Case 5
-                        frmEditor_Events.optCondition_Index5.Checked = True
+                        frmEditor_Events.optCondition5.Checked = True
                     Case 6
-                        frmEditor_Events.optCondition_Index6.Checked = True
+                        frmEditor_Events.optCondition6.Checked = True
                     Case 7
-                        frmEditor_Events.optCondition_Index7.Checked = True
+                        frmEditor_Events.optCondition7.Checked = True
                 End Select
 
                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition
@@ -1556,7 +1543,7 @@ newlist:
                         frmEditor_Events.txtVariableData4.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4
                 End Select
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand4.Visible = True
+                frmEditor_Events.fraPlayerVariable.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evPlayerSwitch
                 isEdit = True
@@ -1570,7 +1557,7 @@ newlist:
                 frmEditor_Events.cmbSetSelfSwitch.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1
                 frmEditor_Events.cmbSetSelfSwitchTo.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand6.Visible = True
+                frmEditor_Events.fraSetSelfSwitch.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evChangeItems
                 isEdit = True
@@ -1848,7 +1835,7 @@ newlist:
                         frmEditor_Events.optChatBubbleTarget2.Checked = True
                 End Select
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand3.Visible = True
+                frmEditor_Events.fraShowChatBubble.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evLabel
                 isEdit = True
@@ -2047,34 +2034,34 @@ newlist:
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 2
                 End If
             Case EventType.evCondition
-                If frmEditor_Events.optCondition_Index0.Checked = True Then
+                If frmEditor_Events.optCondition0.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 0
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerVarIndex.SelectedIndex + 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_PlayerVarCompare.SelectedIndex
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = Val(frmEditor_Events.txtCondition_PlayerVarCondition.Text)
-                ElseIf frmEditor_Events.optCondition_Index1.Checked = True Then
+                ElseIf frmEditor_Events.optCondition1.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerSwitch.SelectedIndex + 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondtion_PlayerSwitchCondition.SelectedIndex
-                ElseIf frmEditor_Events.optCondition_Index2.Checked = True Then
+                ElseIf frmEditor_Events.optCondition2.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 2
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_HasItem.SelectedIndex + 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = Val(frmEditor_Events.scrlCondition_HasItem.Value)
-                ElseIf frmEditor_Events.optCondition_Index3.Checked = True Then
+                ElseIf frmEditor_Events.optCondition3.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 3
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_ClassIs.SelectedIndex + 1
-                ElseIf frmEditor_Events.optCondition_Index4.Checked = True Then
+                ElseIf frmEditor_Events.optCondition4.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 4
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
-                ElseIf frmEditor_Events.optCondition_Index5.Checked = True Then
+                ElseIf frmEditor_Events.optCondition5.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 5
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = Val(frmEditor_Events.txtCondition_LevelAmount.Text)
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_LevelCompare.SelectedIndex
-                ElseIf frmEditor_Events.optCondition_Index6.Checked = True Then
+                ElseIf frmEditor_Events.optCondition6.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 6
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_SelfSwitch.SelectedIndex
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_SelfSwitchCondition.SelectedIndex
-                ElseIf frmEditor_Events.optCondition_Index7.Checked = True Then
+                ElseIf frmEditor_Events.optCondition7.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 7
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.scrlCondition_Quest.Value
                     If frmEditor_Events.optCondition_Quest0.Checked Then
@@ -2115,6 +2102,7 @@ newlist:
             Case EventType.evPlayerSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSwitch.SelectedIndex + 1
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbPlayerSwitchSet.SelectedIndex
+                Debug.Print("client-data2 set to: " & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2)
             Case EventType.evSelfSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSetSelfSwitch.SelectedIndex
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbSetSelfSwitchTo.SelectedIndex
@@ -2623,6 +2611,7 @@ newlist:
 
 #End Region
 
+#Region "Drawing..."
     Public Sub EditorEvent_DrawGraphic()
         Dim sRect As RECT
         Dim dRect As RECT
@@ -2937,8 +2926,8 @@ nextevent:
                 End If
                 X = Map.MapEvents(id).X * 32
                 Y = Map.MapEvents(id).Y * 32
-                X = X - ((sRect.right - sRect.left) / 2)
-                Y = Y - (sRect.bottom - sRect.top) + 32
+                X = X - ((sRect.Right - sRect.Left) / 2)
+                Y = Y - (sRect.Bottom - sRect.Top) + 32
                 If Map.MapEvents(id).GraphicY2 > 0 Then
                     'RenderTexture Tex_Tileset(Map.MapEvents(id).GraphicNum), ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY((Map.MapEvents(id).Y - ((Map.MapEvents(id).GraphicY2 - Map.MapEvents(id).GraphicY) - 1)) * 32), sRect.left, sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, sRect.right - sRect.left, sRect.bottom - sRect.top, D3DColorRGBA(255, 255, 255, 255), True
                 Else
@@ -2947,6 +2936,81 @@ nextevent:
         End Select
 
     End Sub
+
+    Public Sub DrawEventChat()
+        Dim temptext As String
+
+        With frmMainGame
+            'face
+            If EventChatFace > 0 And EventChatFace < NumFaces Then
+                .picEventFace.Visible = True
+                .picEventFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & EventChatFace & GFX_EXT)
+            Else
+                .picEventFace.Visible = False
+            End If
+
+            'EventPrompt
+            temptext = EventText
+            .lblEventChat.Text = temptext
+
+            If EventChatType = 1 Then
+                .lblEventContinue.Visible = False
+
+                If EventChoiceVisible(1) Then
+                    'Response1
+                    temptext = EventChoices(1)
+                    .lblResponse1.Text = temptext
+                    .lblResponse1.Visible = True
+                Else
+                    .lblResponse1.Visible = False
+                End If
+
+                If EventChoiceVisible(2) Then
+                    'Response2
+                    temptext = EventChoices(2)
+                    .lblResponse2.Text = temptext
+                    .lblResponse2.Visible = True
+                Else
+                    .lblResponse2.Visible = False
+                End If
+
+                If EventChoiceVisible(3) Then
+                    'Response3
+                    temptext = EventChoices(3)
+                    .lblResponse3.Text = temptext
+                    .lblResponse3.Visible = True
+                Else
+                    .lblResponse3.Visible = False
+                End If
+
+                If EventChoiceVisible(4) Then
+                    'Response4
+                    temptext = EventChoices(4)
+                    .lblResponse4.Text = temptext
+                    .lblResponse4.Visible = True
+                Else
+                    .lblResponse4.Visible = False
+                End If
+
+            Else
+                .lblResponse1.Visible = False
+                .lblResponse2.Visible = False
+                .lblResponse3.Visible = False
+                .lblResponse4.Visible = False
+
+                temptext = "Continue."
+                .lblEventContinue.Text = temptext
+                .lblEventContinue.Visible = True
+            End If
+
+            frmMainGame.pnlEventChat.Visible = True
+            frmMainGame.pnlEventChat.BringToFront()
+        End With
+
+    End Sub
+#End Region
+
+#Region "Misc"
 
     Sub ProcessEventMovement(ByVal id As Long)
 
@@ -3057,81 +3121,10 @@ nextevent:
         frmMainGame.pnlEventChat.Visible = False
     End Sub
 
-    Public Sub DrawEventChat()
-        Dim temptext As String
-
-        With frmMainGame
-            'face
-            If EventChatFace > 0 And EventChatFace < NumFaces Then
-                .picEventFace.Visible = True
-                .picEventFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & EventChatFace & GFX_EXT)
-            Else
-                .picEventFace.Visible = False
-            End If
-
-            'EventPrompt
-            temptext = EventText
-            .lblEventChat.Text = temptext
-
-            If EventChatType = 1 Then
-                .lblEventContinue.Visible = False
-
-                If EventChoiceVisible(1) Then
-                    'Response1
-                    temptext = EventChoices(1)
-                    .lblResponse1.Text = temptext
-                    .lblResponse1.Visible = True
-                Else
-                    .lblResponse1.Visible = False
-                End If
-
-                If EventChoiceVisible(2) Then
-                    'Response2
-                    temptext = EventChoices(2)
-                    .lblResponse2.Text = temptext
-                    .lblResponse2.Visible = True
-                Else
-                    .lblResponse2.Visible = False
-                End If
-
-                If EventChoiceVisible(3) Then
-                    'Response3
-                    temptext = EventChoices(3)
-                    .lblResponse3.Text = temptext
-                    .lblResponse3.Visible = True
-                Else
-                    .lblResponse3.Visible = False
-                End If
-
-                If EventChoiceVisible(4) Then
-                    'Response4
-                    temptext = EventChoices(4)
-                    .lblResponse4.Text = temptext
-                    .lblResponse4.Visible = True
-                Else
-                    .lblResponse4.Visible = False
-                End If
-
-            Else
-                .lblResponse1.Visible = False
-                .lblResponse2.Visible = False
-                .lblResponse3.Visible = False
-                .lblResponse4.Visible = False
-
-                temptext = "Continue."
-                .lblEventContinue.Text = temptext
-                .lblEventContinue.Visible = True
-            End If
-
-            frmMainGame.pnlEventChat.Visible = True
-            frmMainGame.pnlEventChat.BringToFront()
-        End With
-
-    End Sub
-
     Public Sub ResetEventdata()
-        For i = 1 To Map.EventCount
+        For i = 0 To Map.EventCount
             ReDim Map.MapEvents(Map.EventCount)
+            Map.CurrentEvents = 0
             With Map.MapEvents(i)
                 .Name = ""
                 .dir = 0
@@ -3158,4 +3151,5 @@ nextevent:
             End With
         Next
     End Sub
+#End Region
 End Module

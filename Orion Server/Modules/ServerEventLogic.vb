@@ -2,11 +2,15 @@
     Public Sub RemoveDeadEvents()
         Dim i As Long, MapNum As Long, Buffer As ByteBuffer, x As Long, id As Long, page As Long, compare As Long
 
-        'See if we should remove any events....
+        'So this is removing events after a switch was set or something not deleting events from the map editor?
+
+        'i thought that too, But noooo, it still fucks up here xd
+        'Lets debug
 
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) = False Then TempPlayer(i).EventMap.CurrentEvents = 0 : Exit Sub
-            If TempPlayer(i).EventMap.CurrentEvents > 0 Then
+            MapNum = GetPlayerMap(i)
+            If TempPlayer(i).EventMap.CurrentEvents > 0 And Map(MapNum).Events IsNot Nothing Then
                 MapNum = GetPlayerMap(i)
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventID
@@ -71,12 +75,12 @@
                             End If
 
                             If Map(MapNum).Events(id).Pages(page).chkSwitch = 1 Then
-                                If Map(MapNum).Events(id).Pages(page).SwitchCompare = 1 Then
-                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 1 Then
+                                If Map(MapNum).Events(id).Pages(page).SwitchCompare = 1 Then 'we expect true
+                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 0 Then ' we see false so we despawn the event
                                         TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                     End If
                                 Else
-                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 0 Then
+                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 1 Then ' we expect false and we see true so we despawn the event
                                         TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                     End If
                                 End If
@@ -133,7 +137,7 @@
                     id = TempPlayer(i).EventMap.EventPages(x).EventID
                     pageID = TempPlayer(i).EventMap.EventPages(x).PageID
                     If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
-
+                    If (Map(MapNum).Events Is Nothing) Then Continue For
                     For z = Map(MapNum).Events(id).PageCount To 1 Step -1
 
                         spawnevent = True
@@ -192,15 +196,13 @@
                         End If
 
                         If Map(MapNum).Events(id).Pages(z).chkSwitch = 1 Then
-                            If Map(MapNum).Events(id).Pages(z).SwitchCompare = 0 Then
-                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 0 Then
-                                    spawnevent = False
+                            If Map(MapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false 
+                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 1 Then 'and switch is true
+                                    spawnevent = False 'do not spawn
                                 End If
                             Else
-                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 1 Then
+                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 0 Then ' else we want true and the switch is false
                                     spawnevent = False
-                                Else
-                                    spawnevent = True
                                 End If
                             End If
                         End If
@@ -723,6 +725,7 @@
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                        If (Map(GetPlayerMap(i)).Events Is Nothing) Then Continue For
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then
@@ -1213,6 +1216,7 @@
                                                 End If
                                                 If restartlist = False And endprocess = False Then
                                                     'If we are still here, then we are good to process shit :D
+                                                    'Debug.WriteLine(.CurSlot)
                                                     Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Index
                                                         Case EventType.evAddText
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2
@@ -1303,6 +1307,7 @@
                                                                     Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Random(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4)
                                                             End Select
                                                         Case EventType.evPlayerSwitch
+                                                            Debug.Print("server-data2 is: " & Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2)
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 1
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
@@ -2348,13 +2353,14 @@
                             End Select
                         End If
 
+                        'we are assuming the event will spawn, and are looking for ways to stop it
                         If .chkSwitch = 1 Then
-                            If .SwitchCompare = 1 Then
-                                If Player(Index).Switches(.SwitchIndex) = 1 Then
+                            If .SwitchCompare = 1 Then 'we want true
+                                If Player(Index).Switches(.SwitchIndex) = 0 Then 'it is false, so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             Else
-                                If Player(Index).Switches(.SwitchIndex) = 0 Then
+                                If Player(Index).Switches(.SwitchIndex) = 1 Then 'we want false and it is true so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             End If

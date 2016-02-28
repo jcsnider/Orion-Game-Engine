@@ -208,17 +208,19 @@ Public Class frmMenu
     End Sub
 
     Private Sub btnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLogin.Click
-        PlaySound("Click.ogg")
-        pnlRegisterVisible = False
-        pnlLoginVisible = True
-        pnlCharCreateVisible = False
-        pnlCreditsVisible = False
-        pnlIPConfig.Visible = False
-        txtLogin.Focus()
-        If Options.SavePass = True Then
-            Me.txtLogin.Text = Options.Username
-            Me.txtPassword.Text = Options.Password
-            Me.chkSavePass.Checked = True
+        If IsConnected() = True Then
+            PlaySound("Click.ogg")
+            pnlRegisterVisible = False
+            pnlLoginVisible = True
+            pnlCharCreateVisible = False
+            pnlCreditsVisible = False
+            pnlIPConfig.Visible = False
+            txtLogin.Focus()
+            If Options.SavePass = True Then
+                Me.txtLogin.Text = Options.Username
+                Me.txtPassword.Text = Options.Password
+                Me.chkSavePass.Checked = True
+            End If
         End If
     End Sub
 
@@ -266,4 +268,5 @@ Public Class frmMenu
 
         pnlIPConfig.Visible = False
     End Sub
+
 End Class

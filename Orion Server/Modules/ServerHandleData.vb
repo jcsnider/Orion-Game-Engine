@@ -1125,8 +1125,8 @@
                             .VariableCondition = Buffer.ReadLong
                             .VariableCompare = Buffer.ReadLong
 
-                            .chkSwitch = Buffer.ReadLong
-                            .SwitchIndex = Buffer.ReadLong
+                            Map(MapNum).Events(i).Pages(x).chkSwitch = Buffer.ReadLong
+                            Map(MapNum).Events(i).Pages(x).SwitchIndex = Buffer.ReadLong
                             .SwitchCompare = Buffer.ReadLong
 
                             .chkHasItem = Buffer.ReadLong

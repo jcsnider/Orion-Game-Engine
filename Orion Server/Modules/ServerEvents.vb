@@ -412,7 +412,7 @@ Public Module ServerEvents
         End If
         CanEventMove = True
 
-
+        If Index = 0 Then Exit Function
 
         Select Case Dir
             Case DIR_UP
@@ -477,7 +477,7 @@ Public Module ServerEvents
                     If globalevent = True Then
                         If TempEventMap(MapNum).EventCount > 0 Then
                             For z = 1 To TempEventMap(MapNum).EventCount
-                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x) And (TempEventMap(MapNum).Events(z).Y = y - 1) And (TempPlayer(Index).EventMap.EventPages(z).WalkThrough = 0) Then
+                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x) And (TempEventMap(MapNum).Events(z).Y = y - 1) And (TempEventMap(MapNum).Events(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
                                 End If
@@ -565,7 +565,7 @@ Public Module ServerEvents
                     If globalevent = True Then
                         If TempEventMap(MapNum).EventCount > 0 Then
                             For z = 1 To TempEventMap(MapNum).EventCount
-                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x) And (TempEventMap(MapNum).Events(z).Y = y + 1) And (TempPlayer(Index).EventMap.EventPages(z).WalkThrough = 0) Then
+                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x) And (TempEventMap(MapNum).Events(z).Y = y + 1) And (TempEventMap(MapNum).Events(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
                                 End If
@@ -653,7 +653,7 @@ Public Module ServerEvents
                     If globalevent = True Then
                         If TempEventMap(MapNum).EventCount > 0 Then
                             For z = 1 To TempEventMap(MapNum).EventCount
-                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x - 1) And (TempEventMap(MapNum).Events(z).Y = y) And (TempPlayer(Index).EventMap.EventPages(z).WalkThrough = 0) Then
+                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x - 1) And (TempEventMap(MapNum).Events(z).Y = y) And (TempEventMap(MapNum).Events(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
                                 End If
@@ -741,7 +741,7 @@ Public Module ServerEvents
                     If globalevent = True Then
                         If TempEventMap(MapNum).EventCount > 0 Then
                             For z = 1 To TempEventMap(MapNum).EventCount
-                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x + 1) And (TempEventMap(MapNum).Events(z).Y = y) And (TempPlayer(Index).EventMap.EventPages(z).WalkThrough = 0) Then
+                                If (z <> eventID) And (z > 0) And (TempEventMap(MapNum).Events(z).X = x + 1) And (TempEventMap(MapNum).Events(z).Y = y) And (TempEventMap(MapNum).Events(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
                                 End If
@@ -1691,10 +1691,13 @@ Public Module ServerEvents
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CEventChatReply Then Exit Sub
+
         eventID = Buffer.ReadLong
         pageID = Buffer.ReadLong
         reply = Buffer.ReadLong
-
+        'Think I saved. Anyways... lol  This sub is broken because that line should be called when okay is pressed in a dialog
         If TempPlayer(index).EventProcessingCount > 0 Then
             For i = 1 To TempPlayer(index).EventProcessingCount
                 If TempPlayer(index).EventProcessing(i).EventID = eventID And TempPlayer(index).EventProcessing(i).PageID = pageID Then
@@ -1786,18 +1789,20 @@ Public Module ServerEvents
         If begineventprocessing = True Then
             If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventID).Pages(TempPlayer(index).EventMap.EventPages(i).PageID).CommandListCount > 0 Then
                 'Process this event, it is action button and everything checks out.
-                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventID).Active = 1
-                With TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventID)
-                    .ActionTimer = GetTickCount()
-                    .CurList = 1
-                    .CurSlot = 1
-                    .EventID = TempPlayer(index).EventMap.EventPages(i).EventID
-                    .PageID = TempPlayer(index).EventMap.EventPages(i).PageID
-                    .WaitingForResponse = 0
-                    ReDim .ListLeftOff(0 To Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventID).Pages(TempPlayer(index).EventMap.EventPages(i).PageID).CommandListCount)
-                End With
+                If (TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventID).Active = 0) Then
+                    TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventID).Active = 1
+                    With TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventID)
+                        .ActionTimer = GetTickCount()
+                        .CurList = 1
+                        .CurSlot = 1
+                        .EventID = TempPlayer(index).EventMap.EventPages(i).EventID
+                        .PageID = TempPlayer(index).EventMap.EventPages(i).PageID
+                        .WaitingForResponse = 0
+                        ReDim .ListLeftOff(0 To Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventID).Pages(TempPlayer(index).EventMap.EventPages(i).PageID).CommandListCount)
+                    End With
+                End If
             End If
-            begineventprocessing = False
+                begineventprocessing = False
         End If
 
     End Sub
@@ -2065,6 +2070,7 @@ Public Module ServerEvents
     End Sub
 #End Region
 
+#Region "Misc"
     Public Sub GivePlayerEXP(ByVal Index As Long, ByVal Exp As Long)
         ' give the exp
 
@@ -2086,4 +2092,6 @@ Public Module ServerEvents
         End Select
 
     End Sub
+#End Region
+
 End Module

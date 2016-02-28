@@ -1342,7 +1342,7 @@ Module ClientGraphics
         Next
 
         'draw event names
-        For I = 1 To Map.CurrentEvents
+        For I = 0 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)

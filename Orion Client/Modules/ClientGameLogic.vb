@@ -1040,7 +1040,7 @@ Module ClientGameLogic
 
         If Adminvisible = True Then
             frmAdmin.Visible = Not frmAdmin.Visible
-            If frmAdmin.Visible Then frmAdmin.BringToFront()
+            'If frmAdmin.Visible Then frmAdmin.BringToFront()
             Adminvisible = False
         End If
 
@@ -1129,6 +1129,57 @@ Module ClientGameLogic
         If EventChat = True Then
             DrawEventChat()
             EventChat = False
+        End If
+
+        If InitEventEditorForm = True Then
+            frmEditor_Events.InitEventEditorForm()
+
+            ' populate form
+            With frmEditor_Events
+                ' set the tabs
+                .tabPages.TabPages.Clear()
+
+                For i = 1 To tmpEvent.PageCount
+                    .tabPages.TabPages.Add(Str(i))
+                Next
+                ' items
+                .cmbHasItem.Items.Clear()
+                .cmbHasItem.Items.Add("None")
+                For i = 1 To MAX_ITEMS
+                    .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+                Next
+                ' variables
+                .cmbPlayerVar.Items.Clear()
+                .cmbPlayerVar.Items.Add("None")
+                For i = 1 To MAX_VARIABLES
+                    .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
+                Next
+                ' variables
+                .cmbPlayerSwitch.Items.Clear()
+                .cmbPlayerSwitch.Items.Add("None")
+                For i = 1 To MAX_SWITCHES
+                    .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
+                Next
+                ' name
+                .txtName.Text = tmpEvent.Name
+                ' enable delete button
+                If tmpEvent.PageCount > 1 Then
+                    .btnDeletePage.Enabled = True
+                Else
+                    .btnDeletePage.Enabled = False
+                End If
+                .btnPastePage.Enabled = False
+                ' Load page 1 to start off with
+                curPageNum = 1
+                EventEditorLoadPage(curPageNum)
+
+                .scrlShowTextFace.Maximum = NumFaces
+                .scrlShowChoicesFace.Maximum = NumFaces
+            End With
+            ' show the editor
+            frmEditor_Events.Show()
+
+            InitEventEditorForm = False
         End If
     End Sub
 
