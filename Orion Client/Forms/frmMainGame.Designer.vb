@@ -192,13 +192,13 @@ Partial Class frmMainGame
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
         Me.pnlEventChat = New System.Windows.Forms.Panel()
-        Me.picEventFace = New System.Windows.Forms.PictureBox()
-        Me.lblResponse1 = New System.Windows.Forms.Label()
-        Me.lblResponse2 = New System.Windows.Forms.Label()
-        Me.lblResponse4 = New System.Windows.Forms.Label()
-        Me.lblResponse3 = New System.Windows.Forms.Label()
-        Me.lblEventContinue = New System.Windows.Forms.Label()
         Me.lblEventChat = New System.Windows.Forms.Label()
+        Me.lblEventContinue = New System.Windows.Forms.Label()
+        Me.lblResponse3 = New System.Windows.Forms.Label()
+        Me.lblResponse4 = New System.Windows.Forms.Label()
+        Me.lblResponse2 = New System.Windows.Forms.Label()
+        Me.lblResponse1 = New System.Windows.Forms.Label()
+        Me.picEventFace = New System.Windows.Forms.PictureBox()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlActionMenu.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2021,58 +2021,15 @@ Partial Class frmMainGame
         Me.pnlEventChat.TabIndex = 43
         Me.pnlEventChat.Visible = False
         '
-        'picEventFace
+        'lblEventChat
         '
-        Me.picEventFace.BackColor = System.Drawing.Color.Transparent
-        Me.picEventFace.Location = New System.Drawing.Point(13, 12)
-        Me.picEventFace.Name = "picEventFace"
-        Me.picEventFace.Size = New System.Drawing.Size(94, 94)
-        Me.picEventFace.TabIndex = 0
-        Me.picEventFace.TabStop = False
-        '
-        'lblResponse1
-        '
-        Me.lblResponse1.AutoSize = True
-        Me.lblResponse1.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse1.ForeColor = System.Drawing.Color.White
-        Me.lblResponse1.Location = New System.Drawing.Point(10, 124)
-        Me.lblResponse1.Name = "lblResponse1"
-        Me.lblResponse1.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse1.TabIndex = 1
-        Me.lblResponse1.Text = "reponse1"
-        '
-        'lblResponse2
-        '
-        Me.lblResponse2.AutoSize = True
-        Me.lblResponse2.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse2.ForeColor = System.Drawing.Color.White
-        Me.lblResponse2.Location = New System.Drawing.Point(10, 146)
-        Me.lblResponse2.Name = "lblResponse2"
-        Me.lblResponse2.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse2.TabIndex = 2
-        Me.lblResponse2.Text = "reponse2"
-        '
-        'lblResponse4
-        '
-        Me.lblResponse4.AutoSize = True
-        Me.lblResponse4.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse4.ForeColor = System.Drawing.Color.White
-        Me.lblResponse4.Location = New System.Drawing.Point(226, 146)
-        Me.lblResponse4.Name = "lblResponse4"
-        Me.lblResponse4.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse4.TabIndex = 3
-        Me.lblResponse4.Text = "reponse4"
-        '
-        'lblResponse3
-        '
-        Me.lblResponse3.AutoSize = True
-        Me.lblResponse3.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse3.ForeColor = System.Drawing.Color.White
-        Me.lblResponse3.Location = New System.Drawing.Point(226, 124)
-        Me.lblResponse3.Name = "lblResponse3"
-        Me.lblResponse3.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse3.TabIndex = 4
-        Me.lblResponse3.Text = "reponse3"
+        Me.lblEventChat.BackColor = System.Drawing.Color.Transparent
+        Me.lblEventChat.ForeColor = System.Drawing.Color.White
+        Me.lblEventChat.Location = New System.Drawing.Point(113, 14)
+        Me.lblEventChat.Name = "lblEventChat"
+        Me.lblEventChat.Size = New System.Drawing.Size(356, 92)
+        Me.lblEventChat.TabIndex = 6
+        Me.lblEventChat.Text = "Continue"
         '
         'lblEventContinue
         '
@@ -2085,15 +2042,58 @@ Partial Class frmMainGame
         Me.lblEventContinue.TabIndex = 5
         Me.lblEventContinue.Text = "Continue"
         '
-        'lblEventChat
+        'lblResponse3
         '
-        Me.lblEventChat.BackColor = System.Drawing.Color.Transparent
-        Me.lblEventChat.ForeColor = System.Drawing.Color.White
-        Me.lblEventChat.Location = New System.Drawing.Point(113, 14)
-        Me.lblEventChat.Name = "lblEventChat"
-        Me.lblEventChat.Size = New System.Drawing.Size(356, 92)
-        Me.lblEventChat.TabIndex = 6
-        Me.lblEventChat.Text = "Continue"
+        Me.lblResponse3.AutoSize = True
+        Me.lblResponse3.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse3.ForeColor = System.Drawing.Color.White
+        Me.lblResponse3.Location = New System.Drawing.Point(226, 124)
+        Me.lblResponse3.Name = "lblResponse3"
+        Me.lblResponse3.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse3.TabIndex = 4
+        Me.lblResponse3.Text = "reponse3"
+        '
+        'lblResponse4
+        '
+        Me.lblResponse4.AutoSize = True
+        Me.lblResponse4.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse4.ForeColor = System.Drawing.Color.White
+        Me.lblResponse4.Location = New System.Drawing.Point(226, 146)
+        Me.lblResponse4.Name = "lblResponse4"
+        Me.lblResponse4.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse4.TabIndex = 3
+        Me.lblResponse4.Text = "reponse4"
+        '
+        'lblResponse2
+        '
+        Me.lblResponse2.AutoSize = True
+        Me.lblResponse2.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse2.ForeColor = System.Drawing.Color.White
+        Me.lblResponse2.Location = New System.Drawing.Point(10, 146)
+        Me.lblResponse2.Name = "lblResponse2"
+        Me.lblResponse2.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse2.TabIndex = 2
+        Me.lblResponse2.Text = "reponse2"
+        '
+        'lblResponse1
+        '
+        Me.lblResponse1.AutoSize = True
+        Me.lblResponse1.BackColor = System.Drawing.Color.Transparent
+        Me.lblResponse1.ForeColor = System.Drawing.Color.White
+        Me.lblResponse1.Location = New System.Drawing.Point(10, 124)
+        Me.lblResponse1.Name = "lblResponse1"
+        Me.lblResponse1.Size = New System.Drawing.Size(51, 13)
+        Me.lblResponse1.TabIndex = 1
+        Me.lblResponse1.Text = "reponse1"
+        '
+        'picEventFace
+        '
+        Me.picEventFace.BackColor = System.Drawing.Color.Transparent
+        Me.picEventFace.Location = New System.Drawing.Point(13, 12)
+        Me.picEventFace.Name = "picEventFace"
+        Me.picEventFace.Size = New System.Drawing.Size(94, 94)
+        Me.picEventFace.TabIndex = 0
+        Me.picEventFace.TabStop = False
         '
         'frmMainGame
         '
@@ -2118,10 +2118,10 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlActionMenu)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.txtChat)
-        Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.pnlTmpSkill)
+        Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlInventory)

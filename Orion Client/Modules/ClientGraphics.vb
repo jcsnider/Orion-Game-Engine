@@ -80,6 +80,15 @@ Module ClientGraphics
     Public PanelGFX As Texture
     Public PanelGFXInfo As GraphicInfo
 
+    Public InvPanelGFX As Texture
+    Public InvPanelGFXInfo As GraphicInfo
+
+    Public SpellPanelGFX As Texture
+    Public SpellPanelGFXInfo As GraphicInfo
+
+    Public CharPanelGFX As Texture
+    Public CharPanelGFXInfo As GraphicInfo
+
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
 
@@ -316,6 +325,39 @@ Module ClientGraphics
             'Cache the width and height
             PanelGFXInfo.width = PanelGFX.Size.X
             PanelGFXInfo.height = PanelGFX.Size.Y
+
+        End If
+
+        InvPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\inventory" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            InvPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\inventory" & GFX_EXT)
+
+            'Cache the width and height
+            InvPanelGFXInfo.width = PanelGFX.Size.X
+            InvPanelGFXInfo.height = PanelGFX.Size.Y
+
+        End If
+
+        SpellPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\spells" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            SpellPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\spells" & GFX_EXT)
+
+            'Cache the width and height
+            SpellPanelGFXInfo.width = PanelGFX.Size.X
+            SpellPanelGFXInfo.height = PanelGFX.Size.Y
+
+        End If
+
+        CharPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\char" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            CharPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\char" & GFX_EXT)
+
+            'Cache the width and height
+            CharPanelGFXInfo.width = PanelGFX.Size.X
+            CharPanelGFXInfo.height = PanelGFX.Size.Y
 
         End If
 
@@ -2108,7 +2150,7 @@ Module ClientGraphics
     Sub DrawEquipment()
         Dim i As Long, itemnum As Long, itempic As Long
         Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
-        Dim tmpSprite2 As Sprite = New Sprite(PanelGFX)
+        Dim tmpSprite2 As Sprite = New Sprite(CharPanelGFX)
         If NumItems = 0 Then Exit Sub
 
         EquipmentWindow.Clear(ToSFMLColor(frmMainGame.pnlCharacter.BackColor))
@@ -2210,7 +2252,7 @@ Module ClientGraphics
         Dim Amount As String
         Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
         Dim colour As SFML.Graphics.Color
-        Dim tmpSprite2 As Sprite = New Sprite(PanelGFX)
+        Dim tmpSprite2 As Sprite = New Sprite(InvPanelGFX)
 
         If Not InGame Then Exit Sub
         InventoryWindow.Clear(ToSFMLColor(frmMainGame.pnlInventory.BackColor))
@@ -2722,7 +2764,7 @@ NextLoop:
     Sub DrawPlayerSpells()
         Dim i As Long, spellnum As Long, spellicon As Long
         Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
-        Dim tmpSprite2 As Sprite = New Sprite(PanelGFX)
+        Dim tmpSprite2 As Sprite = New Sprite(SpellPanelGFX)
 
         If Not InGame Then Exit Sub
         SpellsWindow.Clear(ToSFMLColor(frmMainGame.pnlSpells.BackColor))
@@ -2777,7 +2819,7 @@ NextLoop:
 
     End Sub
 
-    Public Function ToSFMLColor(ToConvert As System.Drawing.Color) As SFML.Graphics.Color
+    Public Function ToSFMLColor(ToConvert As Drawing.Color) As SFML.Graphics.Color
         Return New SFML.Graphics.Color(ToConvert.R, ToConvert.G, ToConvert.G, ToConvert.A)
     End Function
 

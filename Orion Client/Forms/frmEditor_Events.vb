@@ -295,13 +295,13 @@ Public Class frmEditor_Events
             'Label
             Case 10
                 txtLabelName.Text = ""
-                fraCommand8.Visible = True
+                fraCreateLabel.Visible = True
                 fraCommands.Visible = False
                 fraDialogue.Visible = True
             'GoTo Label
             Case 11
                 txtGotoLabel.Text = ""
-                fraCommand9.Visible = True
+                fraGoToLabel.Visible = True
                 fraCommands.Visible = False
                 fraDialogue.Visible = True
         'Player Control
@@ -312,7 +312,7 @@ Public Class frmEditor_Events
                 optChangeItemSet.Checked = True
                 txtChangeItemsAmount.Text = "0"
                 fraDialogue.Visible = True
-                fraCommand10.Visible = True
+                fraChangeItems.Visible = True
                 fraCommands.Visible = False
             'Restore Hp
             Case 13
@@ -1882,6 +1882,97 @@ Public Class frmEditor_Events
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraConditionalBranch.Visible = False
+    End Sub
+
+#End Region
+
+#Region "Create Label"
+    Private Sub txtLabelName_TextChanged(sender As Object, e As EventArgs) Handles txtLabelName.TextChanged
+
+    End Sub
+
+    Private Sub btnCreatelabelOk_Click(sender As Object, e As EventArgs) Handles btnCreatelabelOk.Click
+        If isEdit = False Then
+            AddCommand(EventType.evLabel)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraCreateLabel.Visible = False
+        fraCommands.Visible = False
+    End Sub
+
+    Private Sub btnCreateLabelCancel_Click(sender As Object, e As EventArgs) Handles btnCreateLabelCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraCreateLabel.Visible = False
+    End Sub
+
+#End Region
+
+#Region "GoTo Label"
+    Private Sub txtGotoLabel_TextChanged(sender As Object, e As EventArgs) Handles txtGotoLabel.TextChanged
+
+    End Sub
+
+    Private Sub btnGoToLabelOk_Click(sender As Object, e As EventArgs) Handles btnGoToLabelOk.Click
+        If isEdit = False Then
+            AddCommand(EventType.evGotoLabel)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraGoToLabel.Visible = False
+        fraCommands.Visible = False
+    End Sub
+
+    Private Sub btnGoToLabelCancel_Click(sender As Object, e As EventArgs) Handles btnGoToLabelCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraGoToLabel.Visible = False
+    End Sub
+
+#End Region
+
+#Region "Change Items"
+    Private Sub optChangeItemSet_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemSet.CheckedChanged
+
+    End Sub
+
+    Private Sub optChangeItemAdd_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemAdd.CheckedChanged
+
+    End Sub
+
+    Private Sub optChangeItemRemove_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemRemove.CheckedChanged
+
+    End Sub
+
+    Private Sub txtChangeItemsAmount_TextChanged(sender As Object, e As EventArgs) Handles txtChangeItemsAmount.TextChanged
+
+    End Sub
+
+    Private Sub btnChangeItemsOk_Click(sender As Object, e As EventArgs) Handles btnChangeItemsOk.Click
+        If isEdit = False Then
+            AddCommand(EventType.evChangeItems)
+        Else
+            EditCommand()
+        End If
+        ' hide
+        fraDialogue.Visible = False
+        fraCommands.Visible = False
+        fraChangeItems.Visible = False
+    End Sub
+
+    Private Sub btnChangeItemsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeItemsCancel.Click
+        If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
+        fraDialogue.Visible = False
+        fraChangeItems.Visible = False
+    End Sub
+
+    Private Sub cmbChangeItemIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeItemIndex.SelectedIndexChanged
+        tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
 #End Region
 

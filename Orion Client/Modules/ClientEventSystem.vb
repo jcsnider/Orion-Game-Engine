@@ -1571,7 +1571,7 @@ newlist:
                 End If
                 frmEditor_Events.txtChangeItemsAmount.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand10.Visible = True
+                frmEditor_Events.fraChangeItems.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evChangeLevel
                 isEdit = True
@@ -1841,13 +1841,13 @@ newlist:
                 isEdit = True
                 frmEditor_Events.txtLabelName.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand8.Visible = True
+                frmEditor_Events.fraCreateLabel.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evGotoLabel
                 isEdit = True
                 frmEditor_Events.txtGotoLabel.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1
                 frmEditor_Events.fraDialogue.Visible = True
-                frmEditor_Events.fraCommand9.Visible = True
+                frmEditor_Events.fraGoToLabel.Visible = True
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evSpawnNpc
                 isEdit = True
