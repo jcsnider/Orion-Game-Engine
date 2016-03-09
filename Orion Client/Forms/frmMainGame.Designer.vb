@@ -36,14 +36,6 @@ Partial Class frmMainGame
         Me.picTrade = New System.Windows.Forms.PictureBox()
         Me.picCharacter = New System.Windows.Forms.PictureBox()
         Me.picSkills = New System.Windows.Forms.PictureBox()
-        Me.picGeneral = New System.Windows.Forms.Panel()
-        Me.picFace = New System.Windows.Forms.PictureBox()
-        Me.lblPing = New System.Windows.Forms.Label()
-        Me.lblFPS = New System.Windows.Forms.Label()
-        Me.lblGold = New System.Windows.Forms.Label()
-        Me.lblPingLabel = New System.Windows.Forms.Label()
-        Me.lblGoldLabel = New System.Windows.Forms.Label()
-        Me.lblFPSLabel = New System.Windows.Forms.Label()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.lblVolume = New System.Windows.Forms.Label()
         Me.scrlVolume = New System.Windows.Forms.HScrollBar()
@@ -53,33 +45,6 @@ Partial Class frmMainGame
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optMOff = New System.Windows.Forms.RadioButton()
         Me.optMOn = New System.Windows.Forms.RadioButton()
-        Me.pnlCharacter = New System.Windows.Forms.Panel()
-        Me.lblTrainSpr = New System.Windows.Forms.Label()
-        Me.lblTrainWill = New System.Windows.Forms.Label()
-        Me.lblTrainEnd = New System.Windows.Forms.Label()
-        Me.lblTrainInt = New System.Windows.Forms.Label()
-        Me.lblTrainVit = New System.Windows.Forms.Label()
-        Me.lblTrainStr = New System.Windows.Forms.Label()
-        Me.lblCharSpr = New System.Windows.Forms.Label()
-        Me.lblCharWill = New System.Windows.Forms.Label()
-        Me.lblCharEnd = New System.Windows.Forms.Label()
-        Me.lblCharInt = New System.Windows.Forms.Label()
-        Me.lblCharVit = New System.Windows.Forms.Label()
-        Me.lblCharStr = New System.Windows.Forms.Label()
-        Me.lblCharPoints = New System.Windows.Forms.Label()
-        Me.lblCharLevel = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.lblCharGuild = New System.Windows.Forms.Label()
-        Me.lblCharName = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.pnlSpells = New System.Windows.Forms.Panel()
         Me.pnlInventory = New System.Windows.Forms.Panel()
         Me.pnlItemDesc = New System.Windows.Forms.Panel()
@@ -209,12 +174,9 @@ Partial Class frmMainGame
         CType(Me.picTrade, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picCharacter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picSkills, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.picGeneral.SuspendLayout()
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.pnlCharacter.SuspendLayout()
         Me.pnlItemDesc.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
         Me.pnlSpellDesc.SuspendLayout()
@@ -340,95 +302,9 @@ Partial Class frmMainGame
         Me.picSkills.TabIndex = 1
         Me.picSkills.TabStop = False
         '
-        'picGeneral
-        '
-        Me.picGeneral.BackColor = System.Drawing.Color.Transparent
-        Me.picGeneral.BackgroundImage = CType(resources.GetObject("picGeneral.BackgroundImage"), System.Drawing.Image)
-        Me.picGeneral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picGeneral.Controls.Add(Me.picFace)
-        Me.picGeneral.Controls.Add(Me.lblPing)
-        Me.picGeneral.Controls.Add(Me.lblFPS)
-        Me.picGeneral.Controls.Add(Me.lblGold)
-        Me.picGeneral.Controls.Add(Me.lblPingLabel)
-        Me.picGeneral.Controls.Add(Me.lblGoldLabel)
-        Me.picGeneral.Controls.Add(Me.lblFPSLabel)
-        Me.picGeneral.ForeColor = System.Drawing.Color.White
-        Me.picGeneral.Location = New System.Drawing.Point(3, 3)
-        Me.picGeneral.Name = "picGeneral"
-        Me.picGeneral.Size = New System.Drawing.Size(355, 85)
-        Me.picGeneral.TabIndex = 8
-        '
-        'picFace
-        '
-        Me.picFace.BackgroundImage = CType(resources.GetObject("picFace.BackgroundImage"), System.Drawing.Image)
-        Me.picFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picFace.Location = New System.Drawing.Point(9, 9)
-        Me.picFace.Name = "picFace"
-        Me.picFace.Size = New System.Drawing.Size(67, 67)
-        Me.picFace.TabIndex = 12
-        Me.picFace.TabStop = False
-        '
-        'lblPing
-        '
-        Me.lblPing.AutoSize = True
-        Me.lblPing.Location = New System.Drawing.Point(297, 42)
-        Me.lblPing.Name = "lblPing"
-        Me.lblPing.Size = New System.Drawing.Size(13, 13)
-        Me.lblPing.TabIndex = 11
-        Me.lblPing.Text = "0"
-        '
-        'lblFPS
-        '
-        Me.lblFPS.AutoSize = True
-        Me.lblFPS.Location = New System.Drawing.Point(297, 29)
-        Me.lblFPS.Name = "lblFPS"
-        Me.lblFPS.Size = New System.Drawing.Size(13, 13)
-        Me.lblFPS.TabIndex = 10
-        Me.lblFPS.Text = "0"
-        '
-        'lblGold
-        '
-        Me.lblGold.AutoSize = True
-        Me.lblGold.Location = New System.Drawing.Point(297, 16)
-        Me.lblGold.Name = "lblGold"
-        Me.lblGold.Size = New System.Drawing.Size(13, 13)
-        Me.lblGold.TabIndex = 9
-        Me.lblGold.Text = "0"
-        '
-        'lblPingLabel
-        '
-        Me.lblPingLabel.AutoSize = True
-        Me.lblPingLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPingLabel.Location = New System.Drawing.Point(258, 42)
-        Me.lblPingLabel.Name = "lblPingLabel"
-        Me.lblPingLabel.Size = New System.Drawing.Size(36, 13)
-        Me.lblPingLabel.TabIndex = 8
-        Me.lblPingLabel.Text = "Ping:"
-        '
-        'lblGoldLabel
-        '
-        Me.lblGoldLabel.AutoSize = True
-        Me.lblGoldLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGoldLabel.Location = New System.Drawing.Point(258, 16)
-        Me.lblGoldLabel.Name = "lblGoldLabel"
-        Me.lblGoldLabel.Size = New System.Drawing.Size(37, 13)
-        Me.lblGoldLabel.TabIndex = 7
-        Me.lblGoldLabel.Text = "Gold:"
-        '
-        'lblFPSLabel
-        '
-        Me.lblFPSLabel.AutoSize = True
-        Me.lblFPSLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFPSLabel.Location = New System.Drawing.Point(258, 29)
-        Me.lblFPSLabel.Name = "lblFPSLabel"
-        Me.lblFPSLabel.Size = New System.Drawing.Size(34, 13)
-        Me.lblFPSLabel.TabIndex = 6
-        Me.lblFPSLabel.Text = "FPS:"
-        '
         'pnlOptions
         '
-        Me.pnlOptions.BackColor = System.Drawing.Color.Transparent
-        Me.pnlOptions.BackgroundImage = CType(resources.GetObject("pnlOptions.BackgroundImage"), System.Drawing.Image)
+        Me.pnlOptions.BackColor = System.Drawing.Color.DimGray
         Me.pnlOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlOptions.Controls.Add(Me.lblVolume)
@@ -530,308 +406,9 @@ Partial Class frmMainGame
         Me.optMOn.Text = "On"
         Me.optMOn.UseVisualStyleBackColor = True
         '
-        'pnlCharacter
-        '
-        Me.pnlCharacter.BackColor = System.Drawing.Color.Transparent
-        Me.pnlCharacter.BackgroundImage = CType(resources.GetObject("pnlCharacter.BackgroundImage"), System.Drawing.Image)
-        Me.pnlCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlCharacter.Controls.Add(Me.lblTrainSpr)
-        Me.pnlCharacter.Controls.Add(Me.lblTrainWill)
-        Me.pnlCharacter.Controls.Add(Me.lblTrainEnd)
-        Me.pnlCharacter.Controls.Add(Me.lblTrainInt)
-        Me.pnlCharacter.Controls.Add(Me.lblTrainVit)
-        Me.pnlCharacter.Controls.Add(Me.lblTrainStr)
-        Me.pnlCharacter.Controls.Add(Me.lblCharSpr)
-        Me.pnlCharacter.Controls.Add(Me.lblCharWill)
-        Me.pnlCharacter.Controls.Add(Me.lblCharEnd)
-        Me.pnlCharacter.Controls.Add(Me.lblCharInt)
-        Me.pnlCharacter.Controls.Add(Me.lblCharVit)
-        Me.pnlCharacter.Controls.Add(Me.lblCharStr)
-        Me.pnlCharacter.Controls.Add(Me.lblCharPoints)
-        Me.pnlCharacter.Controls.Add(Me.lblCharLevel)
-        Me.pnlCharacter.Controls.Add(Me.Label16)
-        Me.pnlCharacter.Controls.Add(Me.Label17)
-        Me.pnlCharacter.Controls.Add(Me.Label18)
-        Me.pnlCharacter.Controls.Add(Me.Label15)
-        Me.pnlCharacter.Controls.Add(Me.Label14)
-        Me.pnlCharacter.Controls.Add(Me.Label13)
-        Me.pnlCharacter.Controls.Add(Me.Label12)
-        Me.pnlCharacter.Controls.Add(Me.lblCharGuild)
-        Me.pnlCharacter.Controls.Add(Me.lblCharName)
-        Me.pnlCharacter.Controls.Add(Me.Label11)
-        Me.pnlCharacter.Controls.Add(Me.Label9)
-        Me.pnlCharacter.Controls.Add(Me.Label10)
-        Me.pnlCharacter.ForeColor = System.Drawing.Color.White
-        Me.pnlCharacter.Location = New System.Drawing.Point(22, 147)
-        Me.pnlCharacter.Name = "pnlCharacter"
-        Me.pnlCharacter.Size = New System.Drawing.Size(204, 275)
-        Me.pnlCharacter.TabIndex = 11
-        Me.pnlCharacter.Visible = False
-        '
-        'lblTrainSpr
-        '
-        Me.lblTrainSpr.AutoSize = True
-        Me.lblTrainSpr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainSpr.Location = New System.Drawing.Point(157, 143)
-        Me.lblTrainSpr.Name = "lblTrainSpr"
-        Me.lblTrainSpr.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainSpr.TabIndex = 25
-        Me.lblTrainSpr.Text = "+"
-        '
-        'lblTrainWill
-        '
-        Me.lblTrainWill.AutoSize = True
-        Me.lblTrainWill.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainWill.Location = New System.Drawing.Point(157, 115)
-        Me.lblTrainWill.Name = "lblTrainWill"
-        Me.lblTrainWill.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainWill.TabIndex = 24
-        Me.lblTrainWill.Text = "+"
-        '
-        'lblTrainEnd
-        '
-        Me.lblTrainEnd.AutoSize = True
-        Me.lblTrainEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainEnd.Location = New System.Drawing.Point(157, 89)
-        Me.lblTrainEnd.Name = "lblTrainEnd"
-        Me.lblTrainEnd.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainEnd.TabIndex = 23
-        Me.lblTrainEnd.Text = "+"
-        '
-        'lblTrainInt
-        '
-        Me.lblTrainInt.AutoSize = True
-        Me.lblTrainInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainInt.Location = New System.Drawing.Point(69, 143)
-        Me.lblTrainInt.Name = "lblTrainInt"
-        Me.lblTrainInt.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainInt.TabIndex = 22
-        Me.lblTrainInt.Text = "+"
-        '
-        'lblTrainVit
-        '
-        Me.lblTrainVit.AutoSize = True
-        Me.lblTrainVit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainVit.Location = New System.Drawing.Point(69, 115)
-        Me.lblTrainVit.Name = "lblTrainVit"
-        Me.lblTrainVit.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainVit.TabIndex = 21
-        Me.lblTrainVit.Text = "+"
-        '
-        'lblTrainStr
-        '
-        Me.lblTrainStr.AutoSize = True
-        Me.lblTrainStr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTrainStr.Location = New System.Drawing.Point(69, 89)
-        Me.lblTrainStr.Name = "lblTrainStr"
-        Me.lblTrainStr.Size = New System.Drawing.Size(13, 13)
-        Me.lblTrainStr.TabIndex = 20
-        Me.lblTrainStr.Text = "+"
-        '
-        'lblCharSpr
-        '
-        Me.lblCharSpr.AutoSize = True
-        Me.lblCharSpr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharSpr.Location = New System.Drawing.Point(120, 143)
-        Me.lblCharSpr.Name = "lblCharSpr"
-        Me.lblCharSpr.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharSpr.TabIndex = 19
-        Me.lblCharSpr.Text = "99"
-        '
-        'lblCharWill
-        '
-        Me.lblCharWill.AutoSize = True
-        Me.lblCharWill.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharWill.Location = New System.Drawing.Point(120, 115)
-        Me.lblCharWill.Name = "lblCharWill"
-        Me.lblCharWill.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharWill.TabIndex = 18
-        Me.lblCharWill.Text = "99"
-        '
-        'lblCharEnd
-        '
-        Me.lblCharEnd.AutoSize = True
-        Me.lblCharEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharEnd.Location = New System.Drawing.Point(120, 89)
-        Me.lblCharEnd.Name = "lblCharEnd"
-        Me.lblCharEnd.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharEnd.TabIndex = 17
-        Me.lblCharEnd.Text = "99"
-        '
-        'lblCharInt
-        '
-        Me.lblCharInt.AutoSize = True
-        Me.lblCharInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharInt.Location = New System.Drawing.Point(32, 143)
-        Me.lblCharInt.Name = "lblCharInt"
-        Me.lblCharInt.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharInt.TabIndex = 16
-        Me.lblCharInt.Text = "99"
-        '
-        'lblCharVit
-        '
-        Me.lblCharVit.AutoSize = True
-        Me.lblCharVit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharVit.Location = New System.Drawing.Point(32, 115)
-        Me.lblCharVit.Name = "lblCharVit"
-        Me.lblCharVit.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharVit.TabIndex = 15
-        Me.lblCharVit.Text = "99"
-        '
-        'lblCharStr
-        '
-        Me.lblCharStr.AutoSize = True
-        Me.lblCharStr.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharStr.Location = New System.Drawing.Point(32, 89)
-        Me.lblCharStr.Name = "lblCharStr"
-        Me.lblCharStr.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharStr.TabIndex = 14
-        Me.lblCharStr.Text = "99"
-        '
-        'lblCharPoints
-        '
-        Me.lblCharPoints.AutoSize = True
-        Me.lblCharPoints.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharPoints.Location = New System.Drawing.Point(124, 60)
-        Me.lblCharPoints.Name = "lblCharPoints"
-        Me.lblCharPoints.Size = New System.Drawing.Size(25, 13)
-        Me.lblCharPoints.TabIndex = 13
-        Me.lblCharPoints.Text = "999"
-        '
-        'lblCharLevel
-        '
-        Me.lblCharLevel.AutoSize = True
-        Me.lblCharLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharLevel.Location = New System.Drawing.Point(32, 60)
-        Me.lblCharLevel.Name = "lblCharLevel"
-        Me.lblCharLevel.Size = New System.Drawing.Size(19, 13)
-        Me.lblCharLevel.TabIndex = 12
-        Me.lblCharLevel.Text = "99"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(88, 143)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(30, 13)
-        Me.Label16.TabIndex = 11
-        Me.Label16.Text = "Spr:"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(88, 115)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(32, 13)
-        Me.Label17.TabIndex = 10
-        Me.Label17.Text = "Will:"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(88, 89)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(33, 13)
-        Me.Label18.TabIndex = 9
-        Me.Label18.Text = "End:"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(6, 143)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(26, 13)
-        Me.Label15.TabIndex = 8
-        Me.Label15.Text = "Int:"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(6, 115)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(26, 13)
-        Me.Label14.TabIndex = 7
-        Me.Label14.Text = "Vit:"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(6, 89)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(27, 13)
-        Me.Label13.TabIndex = 6
-        Me.Label13.Text = "Str:"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(88, 60)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(36, 13)
-        Me.Label12.TabIndex = 5
-        Me.Label12.Text = "Pnts:"
-        '
-        'lblCharGuild
-        '
-        Me.lblCharGuild.AutoSize = True
-        Me.lblCharGuild.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharGuild.Location = New System.Drawing.Point(54, 36)
-        Me.lblCharGuild.Name = "lblCharGuild"
-        Me.lblCharGuild.Size = New System.Drawing.Size(37, 13)
-        Me.lblCharGuild.TabIndex = 4
-        Me.lblCharGuild.Text = "None"
-        '
-        'lblCharName
-        '
-        Me.lblCharName.AutoSize = True
-        Me.lblCharName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharName.Location = New System.Drawing.Point(54, 14)
-        Me.lblCharName.Name = "lblCharName"
-        Me.lblCharName.Size = New System.Drawing.Size(41, 13)
-        Me.lblCharName.TabIndex = 3
-        Me.lblCharName.Text = "Empty"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 60)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(28, 13)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "Lvl:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(6, 36)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(40, 13)
-        Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Guild:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(6, 14)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(43, 13)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "Name:"
-        '
         'pnlSpells
         '
-        Me.pnlSpells.BackColor = System.Drawing.Color.Transparent
-        Me.pnlSpells.BackgroundImage = CType(resources.GetObject("pnlSpells.BackgroundImage"), System.Drawing.Image)
+        Me.pnlSpells.BackColor = System.Drawing.Color.DimGray
         Me.pnlSpells.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlSpells.Location = New System.Drawing.Point(22, 147)
         Me.pnlSpells.Name = "pnlSpells"
@@ -841,13 +418,13 @@ Partial Class frmMainGame
         '
         'pnlInventory
         '
-        Me.pnlInventory.BackColor = System.Drawing.Color.Transparent
-        Me.pnlInventory.BackgroundImage = CType(resources.GetObject("pnlInventory.BackgroundImage"), System.Drawing.Image)
+        Me.pnlInventory.BackColor = System.Drawing.Color.DimGray
         Me.pnlInventory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlInventory.Location = New System.Drawing.Point(22, 147)
         Me.pnlInventory.Name = "pnlInventory"
         Me.pnlInventory.Size = New System.Drawing.Size(204, 275)
         Me.pnlInventory.TabIndex = 13
+        Me.pnlInventory.Visible = False
         '
         'pnlItemDesc
         '
@@ -2114,19 +1691,17 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlShop)
         Me.Controls.Add(Me.pnlSpellDesc)
         Me.Controls.Add(Me.pnlItemDesc)
-        Me.Controls.Add(Me.picGeneral)
         Me.Controls.Add(Me.pnlActionMenu)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.txtChat)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.pnlTmpSkill)
-        Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlSpells)
-        Me.Controls.Add(Me.pnlCharacter)
+        Me.Controls.Add(Me.pnlOptions)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -2143,17 +1718,12 @@ Partial Class frmMainGame
         CType(Me.picTrade, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picCharacter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picSkills, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.picGeneral.ResumeLayout(False)
-        Me.picGeneral.PerformLayout()
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlOptions.ResumeLayout(False)
         Me.pnlOptions.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.pnlCharacter.ResumeLayout(False)
-        Me.pnlCharacter.PerformLayout()
         Me.pnlItemDesc.ResumeLayout(False)
         Me.pnlItemDesc.PerformLayout()
         Me.pnlCurrency.ResumeLayout(False)
@@ -2187,39 +1757,11 @@ Partial Class frmMainGame
     Friend WithEvents picCharacter As System.Windows.Forms.PictureBox
     Friend WithEvents picSkills As System.Windows.Forms.PictureBox
     Friend WithEvents picInventory As System.Windows.Forms.PictureBox
-    Friend WithEvents picGeneral As System.Windows.Forms.Panel
     Friend WithEvents pnlOptions As System.Windows.Forms.Panel
     Friend WithEvents optMOff As System.Windows.Forms.RadioButton
     Friend WithEvents optMOn As System.Windows.Forms.RadioButton
     Friend WithEvents optSOff As System.Windows.Forms.RadioButton
     Friend WithEvents optSOn As System.Windows.Forms.RadioButton
-    Friend WithEvents pnlCharacter As System.Windows.Forms.Panel
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents lblCharGuild As System.Windows.Forms.Label
-    Friend WithEvents lblCharName As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents lblCharSpr As System.Windows.Forms.Label
-    Friend WithEvents lblCharWill As System.Windows.Forms.Label
-    Friend WithEvents lblCharEnd As System.Windows.Forms.Label
-    Friend WithEvents lblCharInt As System.Windows.Forms.Label
-    Friend WithEvents lblCharVit As System.Windows.Forms.Label
-    Friend WithEvents lblCharStr As System.Windows.Forms.Label
-    Friend WithEvents lblCharPoints As System.Windows.Forms.Label
-    Friend WithEvents lblCharLevel As System.Windows.Forms.Label
-    Friend WithEvents lblTrainSpr As System.Windows.Forms.Label
-    Friend WithEvents lblTrainWill As System.Windows.Forms.Label
-    Friend WithEvents lblTrainEnd As System.Windows.Forms.Label
-    Friend WithEvents lblTrainInt As System.Windows.Forms.Label
-    Friend WithEvents lblTrainVit As System.Windows.Forms.Label
-    Friend WithEvents lblTrainStr As System.Windows.Forms.Label
     Friend WithEvents pnlSpells As System.Windows.Forms.Panel
     Friend WithEvents pnlInventory As System.Windows.Forms.Panel
     Friend WithEvents pnlItemDesc As System.Windows.Forms.Panel
@@ -2332,16 +1874,9 @@ Partial Class frmMainGame
     Friend WithEvents lblDialogCancel As Windows.Forms.Label
     Friend WithEvents lblDialogOk As Windows.Forms.Label
     Friend WithEvents lblDialogText As Windows.Forms.Label
-    Friend WithEvents lblPing As Windows.Forms.Label
-    Friend WithEvents lblFPS As Windows.Forms.Label
-    Friend WithEvents lblGold As Windows.Forms.Label
-    Friend WithEvents lblPingLabel As Windows.Forms.Label
-    Friend WithEvents lblGoldLabel As Windows.Forms.Label
-    Friend WithEvents lblFPSLabel As Windows.Forms.Label
     Friend WithEvents pnlHotBar As Windows.Forms.Panel
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
-    Friend WithEvents picFace As Windows.Forms.PictureBox
     Friend WithEvents lblVolume As Windows.Forms.Label
     Friend WithEvents scrlVolume As Windows.Forms.HScrollBar
     Friend WithEvents pnlEventChat As Windows.Forms.Panel

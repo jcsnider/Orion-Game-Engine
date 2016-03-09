@@ -551,6 +551,9 @@
     <Content Include="data files\graphics\GUI\Main\Hotbar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\HUD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\inventory.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -562,12 +565,6 @@
     </Content>
     <Content Include="data files\graphics\GUI\Main\spells.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\GUI\ManaBar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\GUI\ManaBarEmpty.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Menu\btnCredits.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -588,6 +585,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Menu\panel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\GUI\MPBar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\GUI\MPBarEmpty.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\items\1.png">

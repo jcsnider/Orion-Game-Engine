@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-
-Module ClientUpdateUI
+﻿Module ClientUpdateUI
 
     Public GameDestroyed As Boolean
     Public ReloadFrmMain As Boolean
@@ -22,6 +20,10 @@ Module ClientUpdateUI
     Public ShakeTimer As Boolean
 
     Public Adminvisible As Boolean
+
+    'GUI drawing
+    Public HUDVisible As Boolean
+    Public pnlCharacterVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -59,23 +61,20 @@ Module ClientUpdateUI
 
     Public Tradername As String
 
+    'UI Panels Coordinates
+    Public HUDWindowX As Long = 1
+    Public HUDWindowY As Long = 1
+    Public HUDFaceX As Long = 5
+    Public HUDFaceY As Long = 5
+    'bars
+    Public HUDHPBarX As Long = 110
+    Public HUDHPBarY As Long = 10
+    Public HUDMPBarX As Long = 110
+    Public HUDMPBarY As Long = 30
+    Public HUDEXPBarX As Long = 110
+    Public HUDEXPBarY As Long = 50
 
-    Sub DrawStatBars()
-        Dim g As Graphics = Graphics.FromImage(StatBarBackbuffer)
-        Dim fnt As New Font("Microsoft Sans Serif", 8, FontStyle.Bold)
-        g.DrawImage(EmptyHPBar, New Point(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 12))
-        g.DrawImage(EmptyManaBar, New Point(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 35))
-        g.DrawImage(EmptyEXPBar, New Point(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 58))
-        g.DrawImage(HPBar, New Rectangle(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 15, picHpWidth, HPBar.Height), New Rectangle(0, 0, picHpWidth, HPBar.Height), GraphicsUnit.Pixel)
-        g.DrawImage(ManaBar, New Rectangle(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 38, picManaWidth, ManaBar.Height), New Rectangle(0, 0, picManaWidth, ManaBar.Height), GraphicsUnit.Pixel)
-        g.DrawImage(EXPBar, New Rectangle(frmMainGame.picFace.Left + frmMainGame.picFace.Width + 12, 61, picEXPWidth, EXPBar.Height), New Rectangle(0, 0, picEXPWidth, EXPBar.Height), GraphicsUnit.Pixel)
-        g.DrawString(lblHPText, fnt, New SolidBrush(Color.Black), frmMainGame.picFace.Left + frmMainGame.picFace.Width + 40, 15)
-        g.DrawString(lblManaText, fnt, New SolidBrush(Color.Black), frmMainGame.picFace.Left + frmMainGame.picFace.Width + 40, 38)
-        g.DrawString(lblEXPText, fnt, New SolidBrush(Color.Black), frmMainGame.picFace.Left + frmMainGame.picFace.Width + 40, 63)
-        g.Dispose()
+    Public CharWindowX As Long = 22
+    Public CharWindowY As Long = 147
 
-        g = frmMainGame.picGeneral.CreateGraphics
-        g.DrawImage(StatBarBackbuffer, New Point(0, 0))
-        g.Dispose()
-    End Sub
 End Module

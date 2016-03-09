@@ -1137,6 +1137,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Function PlayerData(ByVal Index As Long) As Byte()
         Dim Buffer As ByteBuffer, i As Long
         PlayerData = Nothing

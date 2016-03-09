@@ -7,7 +7,7 @@ Module ClientGameLogic
         Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
         Dim starttime As Long
         Dim Tick As Long
-        Dim fps As Long
+        Dim tmpfps As Long
         Dim WalkTimer As Long
         Dim FrameTime As Long
         Dim destrect As Rectangle
@@ -35,11 +35,11 @@ Module ClientGameLogic
                 frmmaingamevisible = True
 
                 If GetTickCount() - starttime >= 1000 Then
-                    frmMainGame.lblFPS.Text = fps
-                    fps = 0
+                    FPS = tmpfps
+                    tmpfps = 0
                     starttime = GetTickCount()
                 Else
-                    fps = fps + 1
+                    tmpfps = tmpfps + 1
                 End If
 
                 ' Update inv animation
@@ -51,9 +51,10 @@ Module ClientGameLogic
                         If frmMainGame.pnlSpells.Visible = True Then
                             DrawPlayerSpells()
                         End If
-                        If frmMainGame.pnlCharacter.Visible = True Then
-                            DrawEquipment()
-                        End If
+                        'If frmMainGame.pnlCharacter.Visible = True Or pnlCharacterVisible = True Then
+                        '    'DrawEquipment()
+                        '    DrawEquipment2()
+                        'End If
                         If frmMainGame.pnlHotBar.Visible = True Then
                             DrawHotbar()
                         End If
@@ -156,7 +157,7 @@ Module ClientGameLogic
 
                     'Auctual Game Loop Stuff :/
                     Render_Graphics()
-                    DrawStatBars()
+                    'DrawStatBars()
 
                     If FadeInSwitch = True Then
                         FadeIn()
@@ -700,17 +701,16 @@ Module ClientGameLogic
     End Function
 
     Sub DrawPing()
-        Dim PingToDraw As String
+
         PingToDraw = Ping
 
         Select Case Ping
             Case -1
-                PingToDraw = "Syncing"
+                PingToDraw = "Sync"
             Case 0 To 5
                 PingToDraw = "Local"
         End Select
 
-        frmMainGame.lblPing.Text = PingToDraw
     End Sub
 
     Public Function isInBounds()
@@ -982,35 +982,6 @@ Module ClientGameLogic
         End If
 
         If UpdateCharacterPanel = True Then
-            ' Set the character windows
-            frmMainGame.lblCharName.Text = GetPlayerName(MyIndex)
-            frmMainGame.lblCharLevel.Text = GetPlayerLevel(MyIndex)
-            frmMainGame.lblCharPoints.Text = GetPlayerPOINTS(MyIndex)
-
-            frmMainGame.lblCharStr.Text = GetPlayerStat(MyIndex, Stats.strength)
-            frmMainGame.lblCharEnd.Text = GetPlayerStat(MyIndex, Stats.endurance)
-            frmMainGame.lblCharInt.Text = GetPlayerStat(MyIndex, Stats.intelligence)
-            frmMainGame.lblCharVit.Text = GetPlayerStat(MyIndex, Stats.vitality)
-            frmMainGame.lblCharWill.Text = GetPlayerStat(MyIndex, Stats.willpower)
-            frmMainGame.lblCharSpr.Text = GetPlayerStat(MyIndex, Stats.spirit)
-
-
-            ' Set training label visiblity depending on points
-            If GetPlayerPOINTS(MyIndex) > 0 Then
-                frmMainGame.lblTrainStr.Visible = True
-                frmMainGame.lblTrainSpr.Visible = True
-                frmMainGame.lblTrainEnd.Visible = True
-                frmMainGame.lblTrainInt.Visible = True
-                frmMainGame.lblTrainVit.Visible = True
-                frmMainGame.lblTrainWill.Visible = True
-            Else
-                frmMainGame.lblTrainStr.Visible = False
-                frmMainGame.lblTrainSpr.Visible = False
-                frmMainGame.lblTrainEnd.Visible = False
-                frmMainGame.lblTrainInt.Visible = False
-                frmMainGame.lblTrainVit.Visible = False
-                frmMainGame.lblTrainWill.Visible = False
-            End If
             UpdateCharacterPanel = False
         End If
 
@@ -1113,7 +1084,6 @@ Module ClientGameLogic
         End If
 
         If HideGui = True Then
-            frmMainGame.picGeneral.Visible = Not frmMainGame.picGeneral.Visible
             frmMainGame.pnlActionMenu.Visible = Not frmMainGame.pnlActionMenu.Visible
             frmMainGame.txtChat.Visible = Not frmMainGame.txtChat.Visible
             frmMainGame.txtMeChat.Visible = Not frmMainGame.txtMeChat.Visible

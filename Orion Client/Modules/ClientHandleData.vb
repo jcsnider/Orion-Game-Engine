@@ -451,7 +451,7 @@
         CurrencyMenu = 0 ' clear
 
         'DrawInventory()
-        DrawEquipment()
+        'DrawEquipment()
 
         Buffer = Nothing
     End Sub
@@ -1571,13 +1571,13 @@
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ServerPackets.SPlayerEXP Then Exit Sub
+
         index = Buffer.ReadLong
         SetPlayerExp(index, Buffer.ReadLong)
         TNL = Buffer.ReadLong
         If TNL = 0 Then TNL = 1
-        lblEXPText = GetPlayerExp(index) & "\" & TNL
-        ' mp bar
-        picEXPWidth = Int(((GetPlayerExp(MyIndex) / 169) / (TNL / 169)) * 169)
+        NextlevelExp = TNL
+
         Buffer = Nothing
     End Sub
 

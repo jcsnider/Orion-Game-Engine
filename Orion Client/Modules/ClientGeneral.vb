@@ -187,6 +187,9 @@ Module ClientGeneral
         DirArrowX(4) = 23 ' right
         DirArrowY(4) = 12
 
+        'set gui switches
+        HUDVisible = True
+
         Call SetStatus("Starting Game...")
         started = True
         frmmenuvisible = True

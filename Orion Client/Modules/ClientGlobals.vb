@@ -54,6 +54,9 @@ Module ClientGlobals
     ' gui
     Public EqX As Long
     Public EqY As Long
+    Public FPS As Long
+    Public PingToDraw As String
+    Public GoldAmount As String
 
     Public InvItemFrame(0 To MAX_INV) As Byte ' Used for animated items
     Public LastItemDesc As Long ' Stores the last item we showed in desc
@@ -75,6 +78,7 @@ Module ClientGlobals
     Public SpellBufferTimer As Long
     Public SpellCD(0 To MAX_PLAYER_SPELLS) As Long
     Public StunDuration As Long
+    Public NextlevelExp As Long
 
     ' Stops movement when updating a map
     Public CanMoveNow As Boolean

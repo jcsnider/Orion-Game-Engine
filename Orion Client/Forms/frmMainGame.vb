@@ -103,7 +103,7 @@ Public Class frmMainGame
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         'Set the Chat Position
-        txtChat.Left = picGeneral.Left
+        txtChat.Left = 1
         txtChat.Top = Me.Height - txtChat.Height - 82
         txtMeChat.Left = txtChat.Left
         txtMeChat.Top = txtChat.Top + txtChat.Height + 10
@@ -124,12 +124,6 @@ Public Class frmMainGame
         pnlQuestSpeech.Left = txtChat.Left
         pnlQuestSpeech.Top = txtChat.Top
 
-        pnlCharacter.Left = picGeneral.Left
-        pnlInventory.Left = picGeneral.Left
-        pnlSpells.Left = picGeneral.Left
-        pnlOptions.Left = picGeneral.Left
-
-        DrawFace(Player(MyIndex).Sprite)
     End Sub
 
     Private Sub lblDialogOk_Click(sender As Object, e As EventArgs) Handles lblDialogOk.Click
@@ -166,7 +160,7 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub pnlGeneral_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picGeneral.Paint
+    Private Sub pnlGeneral_Paint(ByVal sender As Object, ByVal e As PaintEventArgs)
         'PlaceHolder
     End Sub
 
@@ -224,6 +218,7 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseMove
+
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
 
@@ -234,8 +229,10 @@ Public Class frmMainGame
             End If
         End If
 
-        pnlItemDesc.Visible = False
-        LastItemDesc = 0 ' no item was last loaded
+        CheckGuiMove(e.X, e.Y)
+
+        'pnlItemDesc.Visible = False
+        'LastItemDesc = 0 ' no item was last loaded
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
@@ -464,37 +461,37 @@ Public Class frmMainGame
 #End Region
 
 #Region "Char Panel"
-    Private Sub lblTrainStr_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainStr.Click
+    Private Sub lblTrainStr_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(1)
     End Sub
 
-    Private Sub lblTrainVit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainVit.Click
+    Private Sub lblTrainVit_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(3)
     End Sub
 
-    Private Sub lblTrainInt_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainInt.Click
+    Private Sub lblTrainInt_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(5)
     End Sub
 
-    Private Sub lblTrainEnd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainEnd.Click
+    Private Sub lblTrainEnd_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(2)
     End Sub
 
-    Private Sub lblTrainWill_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainWill.Click
+    Private Sub lblTrainWill_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(4)
     End Sub
 
-    Private Sub lblTrainSpr_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblTrainSpr.Click
+    Private Sub lblTrainSpr_Click(ByVal sender As Object, ByVal e As EventArgs)
         If GetPlayerPOINTS(MyIndex) = 0 Then Exit Sub
         SendTrainStat(6)
     End Sub
 
-    Private Sub pnlCharacter_Click(ByVal sender As Object, ByVal e As EventArgs) Handles pnlCharacter.Click
+    Private Sub pnlCharacter_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim EqNum As Long
         EqNum = IsEqItem(EqX, EqY)
 
@@ -513,9 +510,9 @@ Public Class frmMainGame
             If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
 
                 With tempRec
-                    .top = EqTop
+                    .top = CharWindowY + EqTop
                     .bottom = .top + PIC_Y
-                    .left = EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
+                    .left = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
                     .right = .left + PIC_X
                 End With
 
@@ -531,34 +528,6 @@ Public Class frmMainGame
 
     End Function
 
-    Private Sub pnlCharacter_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlCharacter.MouseMove
-        Dim EqNum As Long
-        Dim x As Long, y As Long
-        Dim x2 As Long, y2 As Long
-
-
-        x = e.Location.X
-        y = e.Location.Y
-
-        EqX = x
-        EqY = y
-        EqNum = IsEqItem(x, y)
-
-        If EqNum <> 0 Then
-            y2 = y + pnlCharacter.Top - Me.pnlItemDesc.Height - 2
-            x2 = x + pnlCharacter.Left + 2
-            UpdateDescWindow(GetPlayerEquipment(MyIndex, EqNum), 0, x2, y2)
-            LastItemDesc = GetPlayerEquipment(MyIndex, EqNum) ' set it so you don't re-set values
-            Exit Sub
-        End If
-
-        pnlItemDesc.Visible = False
-        LastItemDesc = 0 ' no item was last loaded
-    End Sub
-
-    Private Overloads Sub pnlCharacter_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlCharacter.Paint
-        Exit Sub
-    End Sub
 #End Region
 
 #Region "Options"
@@ -614,17 +583,16 @@ Public Class frmMainGame
     Private Sub picCharacter_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picCharacter.Click
         PlaySound("Click.ogg")
         SendRequestPlayerData()
-        pnlCharacter.Visible = Not pnlCharacter.Visible
+        'pnlCharacter.Visible = Not pnlCharacter.Visible
+        pnlCharacterVisible = Not pnlCharacterVisible
         pnlInventory.Visible = False
         pnlSpells.Visible = False
         pnlOptions.Visible = False
-        pnlCharacter.BringToFront()
-        DrawEquipment()
     End Sub
 
     Private Sub picOptions_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picOptions.Click
         PlaySound("Click.ogg")
-        pnlCharacter.Visible = False
+        pnlCharacterVisible = False
         pnlInventory.Visible = False
         pnlSpells.Visible = False
         pnlOptions.BringToFront()
@@ -634,7 +602,7 @@ Public Class frmMainGame
     Private Sub picInventory_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picInventory.Click
         PlaySound("Click.ogg")
         pnlInventory.Visible = Not pnlInventory.Visible
-        pnlCharacter.Visible = False
+        pnlCharacterVisible = False
         pnlSpells.Visible = False
         pnlOptions.Visible = False
         pnlInventory.BringToFront()
@@ -651,7 +619,7 @@ Public Class frmMainGame
         UpdateQuestLog()
         ' show the window
         pnlInventory.Visible = False
-        pnlCharacter.Visible = False
+        pnlCharacterVisible = False
         pnlOptions.Visible = False
         RefreshQuestLog()
         pnlQuestLog.Visible = Not pnlQuestLog.Visible
@@ -667,7 +635,7 @@ Public Class frmMainGame
         pnlSpells.Visible = Not pnlSpells.Visible
         pnlSpells.BringToFront()
         pnlInventory.Visible = False
-        pnlCharacter.Visible = False
+        pnlCharacterVisible = False
         pnlOptions.Visible = False
     End Sub
 #End Region
@@ -1557,17 +1525,51 @@ Public Class frmMainGame
 
         'continue
         buffer = New ByteBuffer
-            buffer.WriteLong(ClientPackets.CEventChatReply)
-            buffer.WriteLong(EventReplyID)
-            buffer.WriteLong(EventReplyPage)
-            buffer.WriteLong(0)
-            SendData(buffer.ToArray)
-            buffer = Nothing
-            ClearEventChat()
-            InEvent = False
-            Exit Sub
+        buffer.WriteLong(ClientPackets.CEventChatReply)
+        buffer.WriteLong(EventReplyID)
+        buffer.WriteLong(EventReplyPage)
+        buffer.WriteLong(0)
+        SendData(buffer.ToArray)
+        buffer = Nothing
+        ClearEventChat()
+        InEvent = False
+        Exit Sub
+
+    End Sub
+
+    Private Sub pnlCharacter_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub pnlCharacter_MouseMove(sender As Object, e As MouseEventArgs)
 
     End Sub
 #End Region
 
+#Region "CheckGUI"
+    Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
+        Dim x2 As Long, y2 As Long, eqNum As Long
+
+        'Charpanel
+        If pnlCharacterVisible Then
+            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
+                If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+                    eqNum = IsEqItem(X, Y)
+                    If eqNum <> 0 Then
+                        y2 = Y + CharWindowY - Me.pnlItemDesc.Height - 2
+                        x2 = X + CharWindowX + 2
+                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, x2, y2)
+                        LastItemDesc = GetPlayerEquipment(MyIndex, eqNum) ' set it so you don't re-set values
+                        Exit Sub
+                    Else
+                        pnlItemDesc.Visible = False
+                        LastItemDesc = 0 ' no item was last loaded
+                    End If
+                End If
+            End If
+        End If
+
+
+    End Sub
+#End Region
 End Class
