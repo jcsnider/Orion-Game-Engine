@@ -56,6 +56,7 @@
     Public NeedToOpenBank As Boolean
     Public NeedToOpenTrade As Boolean
     Public NeedtoCloseTrade As Boolean
+    Public NeedtoUpdateTrade As Boolean
 
     Public InitMapProperties As Boolean
 

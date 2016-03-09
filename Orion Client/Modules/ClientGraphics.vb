@@ -2870,6 +2870,11 @@ NextLoop:
                 itempic = Item(itemnum).Pic
 
                 If itempic > 0 And itempic <= NumItems Then
+
+                    If ItemsGFXInfo(itempic).IsLoaded = False Then
+                        LoadTexture(itempic, 4)
+                    End If
+
                     With rec
                         .Y = 0
                         .Height = 32
@@ -2909,6 +2914,7 @@ NextLoop:
                 End If
             End If
         Next
+        frmMainGame.lblYourWorth.Text = YourWorth
         YourTradeWindow.Display()
 
         TheirTradeWindow.Clear(ToSFMLColor(frmMainGame.pnlTheirTrade.BackColor))
@@ -2919,6 +2925,10 @@ NextLoop:
                 itempic = Item(itemnum).Pic
 
                 If itempic > 0 And itempic <= NumItems Then
+                    If ItemsGFXInfo(itempic).IsLoaded = False Then
+                        LoadTexture(itempic, 4)
+                    End If
+
                     With rec
                         .Y = 0
                         .Height = 32
@@ -2958,6 +2968,7 @@ NextLoop:
                 End If
             End If
         Next
+        frmMainGame.lblTheirWorth.Text = TheirWorth
         TheirTradeWindow.Display()
     End Sub
 

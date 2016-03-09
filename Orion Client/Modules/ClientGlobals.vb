@@ -30,6 +30,8 @@ Module ClientGlobals
     Public TradeTheirOffer(0 To MAX_INV) As PlayerInvRec
     Public TradeX As Long
     Public TradeY As Long
+    Public TheirWorth As String
+    Public YourWorth As String
 
     ' Cache the Resources in an array
     Public MapResource() As MapResourceRec

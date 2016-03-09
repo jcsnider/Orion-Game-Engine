@@ -60,6 +60,7 @@ Module ClientGameLogic
                         End If
                         If InBank Then DrawBank()
                         If InShop Then DrawShop()
+                        If intrade then drawtrade()
                         tmr100 = Tick + 100
                     End If
                 End If
@@ -979,6 +980,11 @@ Module ClientGameLogic
             frmMainGame.pnlTrade.Visible = False
             frmMainGame.lblTradeStatus.Text = vbNullString
             NeedtoCloseTrade = False
+        End If
+
+        If NeedtoUpdateTrade = True Then
+            DrawTrade()
+            NeedtoUpdateTrade = False
         End If
 
         If UpdateCharacterPanel = True Then

@@ -1852,7 +1852,7 @@
                 TradeYourOffer(i).Num = buffer.ReadLong
                 TradeYourOffer(i).Value = buffer.ReadLong
             Next
-            frmMainGame.lblYourWorth.Text = "Total Worth: " & buffer.ReadLong & "g"
+            YourWorth = "Total Worth: " & buffer.ReadLong & "g"
             ' remove any items we're offering
             'DrawInventory()
         ElseIf datatype = 1 Then 'theirs
@@ -1860,10 +1860,12 @@
                 TradeTheirOffer(i).Num = buffer.ReadLong
                 TradeYourOffer(i).Value = buffer.ReadLong
             Next
-            frmMainGame.lblTheirWorth.Text = "Total Worth: " & buffer.ReadLong & "g"
+            TheirWorth = "Total Worth: " & buffer.ReadLong & "g"
+            'frmMainGame.lblTheirWorth.Text = 
         End If
 
-        DrawTrade()
+        'DrawTrade()
+        NeedtoUpdateTrade = True
 
         buffer = Nothing
     End Sub
