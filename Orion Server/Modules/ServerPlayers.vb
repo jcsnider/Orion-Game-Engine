@@ -773,9 +773,9 @@
 
         Do While GetPlayerExp(Index) >= GetPlayerNextLevel(Index)
             expRollover = GetPlayerExp(Index) - GetPlayerNextLevel(Index)
-            Call SetPlayerLevel(Index, GetPlayerLevel(Index) + 1)
-            Call SetPlayerPOINTS(Index, GetPlayerPOINTS(Index) + 3)
-            Call SetPlayerExp(Index, expRollover)
+            SetPlayerLevel(Index, GetPlayerLevel(Index) + 1)
+            SetPlayerPOINTS(Index, GetPlayerPOINTS(Index) + 3)
+            SetPlayerExp(Index, expRollover)
             level_count = level_count + 1
         Loop
 
@@ -791,6 +791,7 @@
             SendPlayerData(Index)
         End If
     End Sub
+
     Sub PlayerMapGetItem(ByVal Index As Long)
         Dim i As Long
         Dim n As Long
@@ -815,13 +816,13 @@
                             ' Open slot available?
                             If n <> 0 Then
                                 ' Set item in players inventor
-                                Call SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
+                                SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
 
                                 If Item(GetPlayerInvItemNum(Index, n)).Type = ITEM_TYPE_CURRENCY Then
-                                    Call SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, i).Value)
+                                    SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, i).Value)
                                     Msg = MapItem(MapNum, i).Value & " " & Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
                                 Else
-                                    Call SetPlayerInvItemValue(Index, n, 0)
+                                    SetPlayerInvItemValue(Index, n, 0)
                                     Msg = CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name), 1)
                                 End If
 
@@ -830,14 +831,14 @@
                                 MapItem(MapNum, i).Value = 0
                                 MapItem(MapNum, i).x = 0
                                 MapItem(MapNum, i).y = 0
-                                Call SendInventoryUpdate(Index, n)
-                                Call SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
+                                SendInventoryUpdate(Index, n)
+                                SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
                                 'Call PlayerMsg(Index, Msg, Yellow)
                                 SendActionMsg(GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                                Call CheckTasks(Index, QUEST_TYPE_GOGATHER, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
+                                CheckTasks(Index, QUEST_TYPE_GOGATHER, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
                                 Exit For
                             Else
-                                Call PlayerMsg(Index, "Your inventory is full.")
+                                PlayerMsg(Index, "Your inventory is full.")
                                 Exit For
                             End If
                         End If
@@ -848,12 +849,15 @@
         Next
 
     End Sub
+
     Sub SetPlayerInvItemValue(ByVal Index As Long, ByVal invSlot As Long, ByVal ItemValue As Long)
         Player(Index).Inv(invSlot).Value = ItemValue
     End Sub
+
     Sub SetPlayerInvItemNum(ByVal Index As Long, ByVal invSlot As Long, ByVal itemNum As Long)
         Player(Index).Inv(invSlot).Num = itemNum
     End Sub
+
     Function FindOpenInvSlot(ByVal Index As Long, ByVal itemNum As Long) As Long
         Dim i As Long
 
@@ -907,18 +911,18 @@
                     If ItemVal >= GetPlayerInvItemValue(Index, i) Then
                         TakeInvItem = True
                     Else
-                        Call SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) - ItemVal)
-                        Call SendInventoryUpdate(Index, i)
+                        SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) - ItemVal)
+                        SendInventoryUpdate(Index, i)
                     End If
                 Else
                     TakeInvItem = True
                 End If
 
                 If TakeInvItem Then
-                    Call SetPlayerInvItemNum(Index, i, 0)
-                    Call SetPlayerInvItemValue(Index, i, 0)
+                    SetPlayerInvItemNum(Index, i, 0)
+                    SetPlayerInvItemValue(Index, i, 0)
                     ' Send the inventory update
-                    Call SendInventoryUpdate(Index, i)
+                    SendInventoryUpdate(Index, i)
                     Exit Function
                 End If
             End If
@@ -926,6 +930,7 @@
         Next
 
     End Function
+
     Function GiveInvItem(ByVal Index As Long, ByVal itemNum As Long, ByVal ItemVal As Long, Optional ByVal sendUpdate As Boolean = True) As Boolean
         Dim i As Long
 
@@ -939,9 +944,9 @@
 
         ' Check to see if inventory is full
         If i <> 0 Then
-            Call SetPlayerInvItemNum(Index, i, itemNum)
-            Call SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) + ItemVal)
-            If sendUpdate Then Call SendInventoryUpdate(Index, i)
+            SetPlayerInvItemNum(Index, i, itemNum)
+            SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) + ItemVal)
+            If sendUpdate Then SendInventoryUpdate(Index, i)
             GiveInvItem = True
         Else
             Call PlayerMsg(Index, "Your inventory is full.")
@@ -949,9 +954,11 @@
         End If
 
     End Function
+
     Function GetPlayerClass(ByVal Index As Long) As Long
         GetPlayerClass = Player(Index).Classes
     End Function
+
     Function FindOpenSpellSlot(ByVal Index As Long) As Long
         Dim i As Long
 

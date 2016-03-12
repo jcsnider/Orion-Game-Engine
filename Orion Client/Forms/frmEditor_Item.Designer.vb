@@ -630,6 +630,7 @@ Partial Class frmEditor_Item
         '
         Me.scrlSpeed.LargeChange = 1
         Me.scrlSpeed.Location = New System.Drawing.Point(130, 68)
+        Me.scrlSpeed.Maximum = 200
         Me.scrlSpeed.Name = "scrlSpeed"
         Me.scrlSpeed.Size = New System.Drawing.Size(274, 13)
         Me.scrlSpeed.TabIndex = 43
@@ -883,7 +884,6 @@ Partial Class frmEditor_Item
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(659, 551)
         Me.ControlBox = False
-        Me.Controls.Add(Me.fraFurniture)
         Me.Controls.Add(Me.fraVitals)
         Me.Controls.Add(Me.fraSpell)
         Me.Controls.Add(Me.btnCancel)
@@ -894,6 +894,7 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.cmdArray)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.fraFurniture)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmEditor_Item"
         Me.Text = "frmEditor_Item"

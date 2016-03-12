@@ -22,27 +22,27 @@ Partial Class frmEditor_Shop
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.lstTradeItem = New System.Windows.Forms.ListBox
-        Me.btnDeleteTrade = New System.Windows.Forms.Button
-        Me.btnUpdate = New System.Windows.Forms.Button
-        Me.cmbCostItem = New System.Windows.Forms.ComboBox
-        Me.cmbItem = New System.Windows.Forms.ComboBox
-        Me.txtCostValue = New System.Windows.Forms.TextBox
-        Me.txtItemValue = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.scrlBuy = New System.Windows.Forms.HScrollBar
-        Me.lblBuy = New System.Windows.Forms.Label
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lstTradeItem = New System.Windows.Forms.ListBox()
+        Me.btnDeleteTrade = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.cmbCostItem = New System.Windows.Forms.ComboBox()
+        Me.cmbItem = New System.Windows.Forms.ComboBox()
+        Me.txtCostValue = New System.Windows.Forms.TextBox()
+        Me.txtItemValue = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.scrlBuy = New System.Windows.Forms.HScrollBar()
+        Me.lblBuy = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -153,20 +153,20 @@ Partial Class frmEditor_Shop
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(270, 131)
+        Me.Label5.Location = New System.Drawing.Point(293, 131)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.Size = New System.Drawing.Size(14, 13)
         Me.Label5.TabIndex = 7
-        Me.Label5.Text = "Value:"
+        Me.Label5.Text = "X"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(270, 102)
+        Me.Label4.Location = New System.Drawing.Point(293, 102)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(37, 13)
+        Me.Label4.Size = New System.Drawing.Size(14, 13)
         Me.Label4.TabIndex = 6
-        Me.Label4.Text = "Value:"
+        Me.Label4.Text = "X"
         '
         'Label3
         '

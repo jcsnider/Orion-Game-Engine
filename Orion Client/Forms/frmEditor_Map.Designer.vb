@@ -637,7 +637,7 @@ Partial Class frmEditor_Map
         Me.fraKeyOpen.Controls.Add(Me.btnMapKeyOpen)
         Me.fraKeyOpen.Controls.Add(Me.scrlKeyX)
         Me.fraKeyOpen.Controls.Add(Me.lblKeyX)
-        Me.fraKeyOpen.Location = New System.Drawing.Point(287, 328)
+        Me.fraKeyOpen.Location = New System.Drawing.Point(212, 328)
         Me.fraKeyOpen.Name = "fraKeyOpen"
         Me.fraKeyOpen.Size = New System.Drawing.Size(252, 138)
         Me.fraKeyOpen.TabIndex = 9
@@ -765,7 +765,7 @@ Partial Class frmEditor_Map
         Me.fraMapKey.Controls.Add(Me.btnMapKey)
         Me.fraMapKey.Controls.Add(Me.scrlMapKey)
         Me.fraMapKey.Controls.Add(Me.lblMapKey)
-        Me.fraMapKey.Location = New System.Drawing.Point(281, 307)
+        Me.fraMapKey.Location = New System.Drawing.Point(208, 307)
         Me.fraMapKey.Name = "fraMapKey"
         Me.fraMapKey.Size = New System.Drawing.Size(252, 138)
         Me.fraMapKey.TabIndex = 8
@@ -918,7 +918,7 @@ Partial Class frmEditor_Map
         '
         Me.fraShop.Controls.Add(Me.cmbShop)
         Me.fraShop.Controls.Add(Me.btnShop)
-        Me.fraShop.Location = New System.Drawing.Point(261, 353)
+        Me.fraShop.Location = New System.Drawing.Point(219, 268)
         Me.fraShop.Name = "fraShop"
         Me.fraShop.Size = New System.Drawing.Size(252, 113)
         Me.fraShop.TabIndex = 12
@@ -948,7 +948,7 @@ Partial Class frmEditor_Map
         Me.fraResource.Controls.Add(Me.btnResourceOk)
         Me.fraResource.Controls.Add(Me.scrlResource)
         Me.fraResource.Controls.Add(Me.lblResource)
-        Me.fraResource.Location = New System.Drawing.Point(261, 14)
+        Me.fraResource.Location = New System.Drawing.Point(219, 14)
         Me.fraResource.Name = "fraResource"
         Me.fraResource.Size = New System.Drawing.Size(252, 138)
         Me.fraResource.TabIndex = 10
@@ -1076,7 +1076,7 @@ Partial Class frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(975, 479)
+        Me.ClientSize = New System.Drawing.Size(1033, 479)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlAttributes)
         Me.Controls.Add(Me.Label1)

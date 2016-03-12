@@ -5,14 +5,7 @@ Imports System.Windows.Forms
 Module ClientGraphics
     Public GameWindow As RenderWindow
 
-    Public EditorMap_Item As RenderWindow
-    Public EditorMap_Key As RenderWindow
-
-    Public EditorItem_Item As RenderWindow
     Public EditorItem_Furniture As RenderWindow
-    Public EditorItem_Paperdoll As RenderWindow
-
-    Public EditorNPC_Sprite As RenderWindow
 
     Public EditorResource_Resource As RenderWindow
     Public EditorResource_ExResource As RenderWindow
@@ -97,7 +90,7 @@ Module ClientGraphics
     Public TargetGFXInfo As GraphicInfo
 
     ' Number of graphic files
-    Public StatBarBackbuffer As Bitmap
+    'Public StatBarBackbuffer As Bitmap
     Public MapEditorBackBuffer As Bitmap
 
     Public NumTileSets As Long
@@ -110,7 +103,7 @@ Module ClientGraphics
     Public NumFaces As Long
 
     Public TempBitmap As Bitmap
-    Public TempBitmap1 As Bitmap
+    'Public TempBitmap1 As Bitmap
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -144,14 +137,7 @@ Module ClientGraphics
         GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
-        EditorMap_Item = New RenderWindow(frmEditor_Map.picMapItem.Handle)
-        EditorMap_Key = New RenderWindow(frmEditor_Map.picMapKey.Handle)
-
-        EditorItem_Item = New RenderWindow(frmEditor_Item.picItem.Handle)
-        EditorItem_Paperdoll = New RenderWindow(frmEditor_Item.picPaperdoll.Handle)
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
-
-        EditorNPC_Sprite = New RenderWindow(frmEditor_NPC.picSprite.Handle)
 
         EditorResource_Resource = New RenderWindow(frmEditor_Resource.picNormalpic.Handle)
         EditorResource_ExResource = New RenderWindow(frmEditor_Resource.picExhaustedPic.Handle)
@@ -183,8 +169,6 @@ Module ClientGraphics
 
         TempBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
 
-        'StatBarBackbuffer = New Bitmap(frmMainGame.picGeneral.Width, frmMainGame.picGeneral.Height, Imaging.PixelFormat.Format32bppPArgb)
-
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
@@ -207,7 +191,6 @@ Module ClientGraphics
             'Cache the width and height
             ResourcesGFXInfo(i).width = ResourcesGFX(i).Size.X
             ResourcesGFXInfo(i).height = ResourcesGFX(i).Size.Y
-
         Next
 
         ReDim AnimationsGFX(0 To NumAnimations)
@@ -219,7 +202,6 @@ Module ClientGraphics
             'Cache the width and height
             AnimationsGFXInfo(i).width = AnimationsGFX(i).Size.X
             AnimationsGFXInfo(i).height = AnimationsGFX(i).Size.Y
-
         Next
 
         ReDim SpellIconsGFX(0 To NumSpellIcons)
@@ -231,7 +213,6 @@ Module ClientGraphics
             'Cache the width and height
             SpellIconsGFXInfo(i).width = SpellIconsGFX(i).Size.X
             SpellIconsGFXInfo(i).height = SpellIconsGFX(i).Size.Y
-
         Next
 
         'Housing
@@ -244,7 +225,6 @@ Module ClientGraphics
             'Cache the width and height
             FurnitureGFXInfo(i).width = FurnitureGFX(i).Size.X
             FurnitureGFXInfo(i).height = FurnitureGFX(i).Size.Y
-
         Next
 
         'Faces
@@ -257,7 +237,6 @@ Module ClientGraphics
             'Cache the width and height
             FacesGFXInfo(i).width = FacesGFX(i).Size.X
             FacesGFXInfo(i).height = FacesGFX(i).Size.Y
-
         Next
 
         DoorGFXInfo = New GraphicInfo
@@ -268,7 +247,6 @@ Module ClientGraphics
             'Cache the width and height
             DoorGFXInfo.width = DoorGFX.Size.X
             DoorGFXInfo.height = DoorGFX.Size.Y
-
         End If
 
         BloodGFXInfo = New GraphicInfo
@@ -279,7 +257,6 @@ Module ClientGraphics
             'Cache the width and height
             BloodGFXInfo.width = BloodGFX.Size.X
             BloodGFXInfo.height = BloodGFX.Size.Y
-
         End If
 
         DirectionsGFXInfo = New GraphicInfo
@@ -290,7 +267,6 @@ Module ClientGraphics
             'Cache the width and height
             DirectionsGFXInfo.width = DirectionsGfx.Size.X
             DirectionsGFXInfo.height = DirectionsGfx.Size.Y
-
         End If
 
         MiscGFXInfo = New GraphicInfo
@@ -301,7 +277,6 @@ Module ClientGraphics
             'Cache the width and height
             MiscGFXInfo.width = MiscGFX.Size.X
             MiscGFXInfo.height = MiscGFX.Size.Y
-
         End If
 
         HUDPanelGFXInfo = New GraphicInfo
@@ -312,7 +287,6 @@ Module ClientGraphics
             'Cache the width and height
             HUDPanelGFXInfo.width = HUDPanelGFX.Size.X
             HUDPanelGFXInfo.height = HUDPanelGFX.Size.Y
-
         End If
 
         PanelGFXInfo = New GraphicInfo
@@ -323,7 +297,6 @@ Module ClientGraphics
             'Cache the width and height
             PanelGFXInfo.width = PanelGFX.Size.X
             PanelGFXInfo.height = PanelGFX.Size.Y
-
         End If
 
         InvPanelGFXInfo = New GraphicInfo
@@ -334,7 +307,6 @@ Module ClientGraphics
             'Cache the width and height
             InvPanelGFXInfo.width = PanelGFX.Size.X
             InvPanelGFXInfo.height = PanelGFX.Size.Y
-
         End If
 
         SpellPanelGFXInfo = New GraphicInfo
@@ -345,7 +317,6 @@ Module ClientGraphics
             'Cache the width and height
             SpellPanelGFXInfo.width = PanelGFX.Size.X
             SpellPanelGFXInfo.height = PanelGFX.Size.Y
-
         End If
 
         CharPanelGFXInfo = New GraphicInfo
@@ -356,7 +327,6 @@ Module ClientGraphics
             'Cache the width and height
             CharPanelGFXInfo.width = PanelGFX.Size.X
             CharPanelGFXInfo.height = PanelGFX.Size.Y
-
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -367,7 +337,6 @@ Module ClientGraphics
             'Cache the width and height
             TargetGFXInfo.width = TargetGFX.Size.X
             TargetGFXInfo.height = TargetGFX.Size.Y
-
         End If
 
         HotBarGFXInfo = New GraphicInfo
@@ -378,7 +347,6 @@ Module ClientGraphics
             'Cache the width and height
             HotBarGFXInfo.width = HotBarGFX.Size.X
             HotBarGFXInfo.height = HotBarGFX.Size.Y
-
         End If
 
         HPBarGFXInfo = New GraphicInfo
@@ -423,6 +391,7 @@ Module ClientGraphics
             EXPBarGFXInfo.width = EXPBarGFX.Size.X
             EXPBarGFXInfo.height = EXPBarGFX.Size.Y
         End If
+
         EmptyEXPBarGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "EXPBarEmpty" & GFX_EXT) Then
             EmptyEXPBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "EXPBarEmpty" & GFX_EXT)
@@ -431,17 +400,24 @@ Module ClientGraphics
             EmptyEXPBarGFXInfo.width = EmptyEXPBarGFX.Size.X
             EmptyEXPBarGFXInfo.height = EmptyEXPBarGFX.Size.Y
         End If
-        'ManaBar = New Bitmap(Application.StartupPath & GFX_PATH & "GUI\manaBar" & GFX_EXT)
-        'EXPBar = New Bitmap(Application.StartupPath & GFX_PATH & "GUI\expBar" & GFX_EXT)
-        'EmptyHPBar = New Bitmap(Application.StartupPath & GFX_PATH & "GUI\HPBarEmpty" & GFX_EXT)
-        'EmptyManaBar = New Bitmap(Application.StartupPath & GFX_PATH & "GUI\ManaBarEmpty" & GFX_EXT)
-        'EmptyEXPBar = New Bitmap(Application.StartupPath & GFX_PATH & "GUI\ExpBarEmpty" & GFX_EXT)
 
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Long, ByVal TexType As Byte)
 
-        If TexType = 1 Then 'tilesets
+        If TexType = 0 Then 'hud
+            'Load texture first, dont care about memory streams (just use the filename)
+            HUDPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\HUD" & GFX_EXT)
+
+            'Cache the width and height
+            With HUDPanelGFXInfo
+                .width = HUDPanelGFX.Size.X
+                .height = HUDPanelGFX.Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+        ElseIf TexType = 1 Then 'tilesets
             If Index < 0 Or Index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
@@ -505,7 +481,6 @@ Module ClientGraphics
         TmpImage.Position = New SFML.System.Vector2f(DestX, DestY)
         Target.Draw(TmpImage)
     End Sub
-
 
     Public Sub DrawDirections(ByVal X As Long, ByVal Y As Long)
         Dim rec As Rectangle, i As Long
@@ -672,11 +647,6 @@ Module ClientGraphics
         y = ConvertMapY(y2)
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
-
-        'Dim tmpSprite As Sprite = New Sprite(PaperDollGFX(Sprite))
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.System.Vector2f(X, y)
-        'GameWindow.Draw(tmpSprite)
 
         RenderTexture(PaperDollGFX(Sprite), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
@@ -1117,6 +1087,15 @@ Module ClientGraphics
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
+
+        'reload hud
+        If HUDPanelGFXInfo.IsLoaded Then
+            If HUDPanelGFXInfo.TextureTimer < GetTickCount() Then
+                HUDPanelGFX.Dispose()
+                HUDPanelGFXInfo.IsLoaded = False
+                HUDPanelGFXInfo.TextureTimer = 0
+            End If
+        End If
 
         'clear tilesets
         For I = 1 To NumTileSets
@@ -1711,11 +1690,11 @@ Module ClientGraphics
     Sub DestroyGraphics()
 
         ' Number of graphic files
-        If Not StatBarBackbuffer Is Nothing Then StatBarBackbuffer.Dispose()
+        'If Not StatBarBackbuffer Is Nothing Then StatBarBackbuffer.Dispose()
         If Not MapEditorBackBuffer Is Nothing Then MapEditorBackBuffer.Dispose()
 
         If Not TempBitmap Is Nothing Then TempBitmap.Dispose()
-        If Not TempBitmap1 Is Nothing Then TempBitmap1.Dispose()
+        'If Not TempBitmap1 Is Nothing Then TempBitmap1.Dispose()
 
         For i = 0 To NumAnimations
             If Not AnimationsGFX(i) Is Nothing Then AnimationsGFX(i).Dispose()
@@ -1761,138 +1740,73 @@ Module ClientGraphics
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
-        'If Not ManaBar Is Nothing Then ManaBar.Dispose()
-        'If Not EXPBar Is Nothing Then EXPBar.Dispose()
-        'If Not EmptyHPBar Is Nothing Then EmptyHPBar.Dispose()
-        'If Not EmptyManaBar Is Nothing Then EmptyManaBar.Dispose()
-        'If Not EmptyEXPBar Is Nothing Then EmptyEXPBar.Dispose()
+        If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
+        If Not EXPBarGFX Is Nothing Then EXPBarGFX.Dispose()
+        If Not EmptyHPBarGFX Is Nothing Then EmptyHPBarGFX.Dispose()
+        If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
+        If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
 
     End Sub
 
     Public Sub EditorMap_DrawMapItem()
         Dim itemnum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        Dim g As Graphics = frmEditor_Map.picMapItem.CreateGraphics
         itemnum = Item(frmEditor_Map.scrlMapItem.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            EditorMap_Item.Clear(ToSFMLColor(frmEditor_Map.picMapItem.BackColor))
-            EditorMap_Item.Display()
+            frmEditor_Map.picMapItem.BackgroundImage = Nothing
             Exit Sub
         End If
 
+        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
+            frmEditor_Map.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+        End If
 
-        sRECT.Y = 0
-        sRECT.Height = PIC_Y
-        sRECT.X = 0
-        sRECT.Width = PIC_X
-        dRECT.Y = 0
-        dRECT.Height = PIC_Y
-        dRECT.X = 0
-        dRECT.Width = PIC_X
-
-        EditorMap_Item.Clear(ToSFMLColor(frmEditor_Map.picMapItem.BackColor))
-        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itemnum))
-        tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-        EditorMap_Item.Draw(tmpSprite)
-        EditorMap_Item.Display()
     End Sub
 
     Public Sub EditorMap_DrawKey()
-        Dim itemnum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        Dim g As Graphics = frmEditor_Map.picMapKey.CreateGraphics
+        Dim itemnum As Long
+
         itemnum = Item(frmEditor_Map.scrlMapKey.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            EditorMap_Key.Clear(ToSFMLColor(frmEditor_Map.picMapKey.BackColor))
-            EditorMap_Key.Display()
+            frmEditor_Map.picMapKey.BackgroundImage = Nothing
             Exit Sub
         End If
 
-        sRECT.Y = 0
-        sRECT.Height = PIC_Y
-        sRECT.X = 0
-        sRECT.Width = PIC_X
-        dRECT.Y = 0
-        dRECT.Height = PIC_Y
-        dRECT.X = 0
-        dRECT.Width = PIC_X
+        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
+            frmEditor_Map.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+        End If
 
-        EditorMap_Key.Clear(ToSFMLColor(frmEditor_Map.picMapKey.BackColor))
-        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itemnum))
-        tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-        EditorMap_Key.Draw(tmpSprite)
-        EditorMap_Key.Display()
     End Sub
 
     Public Sub EditorItem_DrawItem()
         Dim itemnum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
         itemnum = frmEditor_Item.scrlPic.Value
 
         If itemnum < 1 Or itemnum > NumItems Then
-            EditorItem_Item.Clear(ToSFMLColor(frmEditor_Item.picItem.BackColor))
-            EditorItem_Item.Display()
+            frmEditor_Item.picItem.BackgroundImage = Nothing
             Exit Sub
         End If
 
-        If ItemsGFXInfo(itemnum).IsLoaded = False Then
-            LoadTexture(itemnum, 4)
+        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
+            frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
-        'seeying we still use it, lets update timer
-        With ItemsGFXInfo(itemnum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        ' rect for source
-        sRECT.Y = 0
-        sRECT.Height = PIC_Y
-        sRECT.X = 0
-        sRECT.Width = PIC_X
-        ' same for destination as source
-        dRECT = sRECT
-        EditorItem_Item.Clear(ToSFMLColor(frmEditor_Item.picItem.BackColor))
-        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itemnum))
-        tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-        EditorItem_Item.Draw(tmpSprite)
-        EditorItem_Item.Display()
     End Sub
 
     Public Sub EditorItem_DrawPaperdoll()
         Dim Sprite As Long
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-
 
         Sprite = frmEditor_Item.scrlPaperdoll.Value
 
         If Sprite < 1 Or Sprite > NumPaperdolls Then
-            EditorItem_Paperdoll.Clear(ToSFMLColor(frmEditor_Item.picPaperdoll.BackColor))
-            EditorItem_Paperdoll.Display()
+            frmEditor_Item.picPaperdoll.BackgroundImage = Nothing
             Exit Sub
         End If
 
-        ' rect for source
-        sRECT.Y = 0
-        sRECT.Height = PaperDollGFXInfo(Sprite).height
-        sRECT.X = 0
-        sRECT.Width = PaperDollGFXInfo(Sprite).width
-        ' same for destination as source
-        dRECT = sRECT
-        EditorItem_Paperdoll.Clear(ToSFMLColor(frmEditor_Item.picPaperdoll.BackColor))
-        Dim tmpSprite As Sprite = New Sprite(PaperDollGFX(Sprite))
-        tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-        EditorItem_Paperdoll.Draw(tmpSprite)
-        EditorItem_Paperdoll.Display()
+        If FileExist(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
+            frmEditor_Item.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
+        End If
     End Sub
 
     Public Sub EditorItem_DrawFurniture()
@@ -1953,31 +1867,17 @@ Module ClientGraphics
 
     Public Sub EditorNpc_DrawSprite()
         Dim Sprite As Long
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
+
         Sprite = frmEditor_NPC.scrlSprite.Value
 
         If Sprite < 1 Or Sprite > NumCharacters Then
-            EditorNPC_Sprite.Clear(ToSFMLColor(frmEditor_NPC.picSprite.BackColor))
-            EditorNPC_Sprite.Display()
+            frmEditor_NPC.picSprite.BackgroundImage = Nothing
             Exit Sub
         End If
 
-        sRECT.Y = 0
-        sRECT.Height = SIZE_Y * 2
-        sRECT.X = 0 ' facing down
-        sRECT.Width = SIZE_X
-        dRECT.Y = 0
-        dRECT.Height = SIZE_Y * 2
-        dRECT.X = 0
-        dRECT.Width = SIZE_X
-
-        EditorNPC_Sprite.Clear(ToSFMLColor(frmEditor_NPC.picSprite.BackColor))
-        Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Sprite))
-        tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-        EditorNPC_Sprite.Draw(tmpSprite)
-        EditorNPC_Sprite.Display()
+        If FileExist(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT) Then
+            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT)
+        End If
     End Sub
 
     Public Sub EditorResource_DrawSprite()
@@ -2174,6 +2074,10 @@ Module ClientGraphics
         Dim rec As Rectangle
         Dim tmpSprite2 As Sprite = New Sprite(HUDPanelGFX)
 
+        If HUDPanelGFXInfo.IsLoaded = False Then
+            LoadTexture(0, 0)
+        End If
+
         'first render backpanel
         With rec
             .Y = 0
@@ -2182,9 +2086,7 @@ Module ClientGraphics
             .Width = HUDPanelGFXInfo.width
         End With
 
-        tmpSprite2.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        tmpSprite2.Position = New SFML.System.Vector2f(HUDWindowX, HUDWindowY)
-        GameWindow.Draw(tmpSprite2)
+        RenderTexture(HUDPanelGFX, GameWindow, HUDWindowX, HUDWindowY, rec.X, rec.Y, rec.Width, rec.Height)
 
         If Player(MyIndex).Sprite <= NumFaces Then
             Dim tmpSprite As Sprite = New Sprite(FacesGFX(Player(MyIndex).Sprite))
@@ -2197,10 +2099,7 @@ Module ClientGraphics
                 .Width = FacesGFXInfo(Player(MyIndex).Sprite).width
             End With
 
-            tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-            tmpSprite.Position = New SFML.System.Vector2f(HUDFaceX, HUDFaceY)
-            tmpSprite.Scale = New SFML.System.Vector2f(0.6, 0.6)
-            GameWindow.Draw(tmpSprite)
+            RenderTexture(FacesGFX(Player(MyIndex).Sprite), GameWindow, HUDFaceX, HUDFaceY, rec.X, rec.Y, rec.Width, rec.Height)
         End If
 
         'Hp Bar etc
@@ -2230,9 +2129,7 @@ Module ClientGraphics
             .Width = EmptyHPBarGFXInfo.width
         End With
 
-        EmptyHPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        EmptyHPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY)
-        GameWindow.Draw(EmptyHPSprite)
+        RenderTexture(EmptyHPBarGFX, GameWindow, HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
         With rec
             .Y = 0
@@ -2241,10 +2138,13 @@ Module ClientGraphics
             .Width = CurHP * HPBarGFXInfo.width / 100
         End With
 
-        HPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        HPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY + 4)
-        GameWindow.Draw(HPSprite)
+        'then render full ontop of it
+        RenderTexture(HPBarGFX, GameWindow, HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY + 4, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'then draw the text onto that
         DrawText(HUDWindowX + HUDHPBarX + 65, HUDWindowY + HUDHPBarY + 4, GetPlayerVital(MyIndex, 1) & "/" & GetPlayerMaxVital(MyIndex, 1), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        '==============================
 
         'MP Bar
         CurMP = (GetPlayerVital(MyIndex, 2) / GetPlayerMaxVital(MyIndex, 2)) * 100
@@ -2257,10 +2157,9 @@ Module ClientGraphics
             .Width = EmptyMPBarGFXInfo.width
         End With
 
-        EmptyMPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        EmptyMPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY)
-        GameWindow.Draw(EmptyMPSprite)
+        RenderTexture(EmptyMPBarGFX, GameWindow, HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
+        'then render full ontop of it
         With rec
             .Y = 0
             .Height = MPBarGFXInfo.height
@@ -2268,11 +2167,12 @@ Module ClientGraphics
             .Width = CurMP * MPBarGFXInfo.width / 100
         End With
 
-        MPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        MPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY + 4)
-        GameWindow.Draw(MPSprite)
+        RenderTexture(MPBarGFX, GameWindow, HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY + 4, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'draw text onto that
         DrawText(HUDWindowX + HUDMPBarX + 65, HUDWindowY + HUDMPBarY + 4, GetPlayerVital(MyIndex, 2) & "/" & GetPlayerMaxVital(MyIndex, 2), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
+        '====================================================
         'EXP Bar
         CurEXP = (GetPlayerExp(MyIndex) / NextlevelExp) * 100
 
@@ -2284,10 +2184,9 @@ Module ClientGraphics
             .Width = EmptyEXPBarGFXInfo.width
         End With
 
-        EmptyEXPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        EmptyEXPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY)
-        GameWindow.Draw(EmptyEXPSprite)
+        RenderTexture(EmptyEXPBarGFX, GameWindow, HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
+        'then render full ontop of it
         With rec
             .Y = 0
             .Height = EXPBarGFXInfo.height
@@ -2295,9 +2194,9 @@ Module ClientGraphics
             .Width = CurEXP * EXPBarGFXInfo.width / 100
         End With
 
-        EXPSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        EXPSprite.Position = New SFML.System.Vector2f(HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY + 4)
-        GameWindow.Draw(EXPSprite)
+        RenderTexture(EXPBarGFX, GameWindow, HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY + 4, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'draw text onto that
         DrawText(HUDWindowX + HUDEXPBarX + 65, HUDWindowY + HUDEXPBarY + 4, GetPlayerExp(MyIndex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
@@ -2319,6 +2218,8 @@ Module ClientGraphics
         tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
         tmpSprite2.Position = New SFML.System.Vector2f(CharWindowX, CharWindowY)
         GameWindow.Draw(tmpSprite2)
+
+        RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, rec.X, rec.Y, rec.Width, rec.Height)
 
         For i = 1 To Equipment.Equipment_Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
@@ -3118,6 +3019,9 @@ NextLoop:
     End Sub
 
     Public Sub DrawGUI()
+        'hide GUI when mapping...
+        If InMapEditor Then Exit Sub
+
         If HUDVisible = True Then
             DrawHUD()
         End If

@@ -650,6 +650,7 @@ Module ClientGameEditors
                 frmEditor_Item.cmbTool.SelectedIndex = .Data3
 
                 If .Speed < 100 Then .Speed = 100
+                If .Speed > frmEditor_Item.scrlSpeed.Maximum Then .Speed = frmEditor_Item.scrlSpeed.Maximum
                 frmEditor_Item.scrlSpeed.Value = .Speed
 
                 frmEditor_Item.scrlAddStr.Value = .Add_Stat(Stats.strength)

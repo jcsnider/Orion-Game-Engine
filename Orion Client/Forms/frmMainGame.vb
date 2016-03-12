@@ -160,10 +160,6 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub pnlGeneral_Paint(ByVal sender As Object, ByVal e As PaintEventArgs)
-        'PlaceHolder
-    End Sub
-
     Private Sub lblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
         If IsNumeric(txtCurrency.Text) Then
             Select Case CurrencyMenu
@@ -186,27 +182,29 @@ Public Class frmMainGame
 #Region "PicScreen Code"
     Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
         If InMapEditor Then
-            Call MapEditorMouseDown(e.Button, e.X, e.Y, False)
+            MapEditorMouseDown(e.Button, e.X, e.Y, False)
         Else
             ' left click
             If e.Button = MouseButtons.Left Then
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
                     ' targetting
-                    Call PlayerSearch(CurX, CurY)
+                    PlayerSearch(CurX, CurY)
                 Else
                     ' trading
-                    Call SendTradeRequest(CurX, CurY)
+                    SendTradeRequest(CurX, CurY)
                 End If
                 ' right click
             ElseIf e.Button = MouseButtons.Right Then
-                If ShiftDown Then
+                If ShiftDown Or VbKeyShift = True Then
                     ' admin warp if we're pressing shift and right clicking
                     If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
                 End If
                 FurnitureSelected = 0
             End If
         End If
+
+        CheckGuiClick(e.X, e.Y, e)
 
         Me.txtMeChat.Focus()
 
@@ -225,7 +223,7 @@ Public Class frmMainGame
         If InMapEditor Then
 
             If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
-                Call MapEditorMouseDown(e.Button, e.X, e.Y)
+                MapEditorMouseDown(e.Button, e.X, e.Y)
             End If
         End If
 
@@ -259,6 +257,16 @@ Public Class frmMainGame
             End If
         End If
 
+    End Sub
+
+    Private Sub picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
+
+        If e.KeyCode = Keys.Down Then VbKeyDown = True
+        If e.KeyCode = Keys.Up Then VbKeyUp = True
+        If e.KeyCode = Keys.Left Then VbKeyLeft = True
+        If e.KeyCode = Keys.Right Then VbKeyRight = True
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
     End Sub
 
     Private Sub picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
@@ -1569,6 +1577,26 @@ Public Class frmMainGame
             End If
         End If
 
+    End Sub
+
+    Public Sub CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs)
+        Dim EqNum As Long
+
+        'Charpanel
+        If pnlCharacterVisible Then
+            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
+                If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+                    ' left click
+                    If e.Button = MouseButtons.Left Then
+                        EqNum = IsEqItem(X, Y)
+
+                        If EqNum <> 0 Then
+                            SendUnequip(EqNum)
+                        End If
+                    End If
+                End If
+            End If
+        End If
 
     End Sub
 #End Region

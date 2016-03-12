@@ -1093,7 +1093,7 @@ Partial Class frmMainGame
         '
         Me.pnlBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlBank.Controls.Add(Me.lblLeaveBank)
-        Me.pnlBank.Location = New System.Drawing.Point(198, 105)
+        Me.pnlBank.Location = New System.Drawing.Point(319, 105)
         Me.pnlBank.Name = "pnlBank"
         Me.pnlBank.Size = New System.Drawing.Size(368, 368)
         Me.pnlBank.TabIndex = 19
@@ -1131,7 +1131,7 @@ Partial Class frmMainGame
         Me.pnlTrade.Controls.Add(Me.pnlYourTrade)
         Me.pnlTrade.Controls.Add(Me.lblTheirOffer)
         Me.pnlTrade.Controls.Add(Me.lblYourOffer)
-        Me.pnlTrade.Location = New System.Drawing.Point(209, 102)
+        Me.pnlTrade.Location = New System.Drawing.Point(297, 102)
         Me.pnlTrade.Name = "pnlTrade"
         Me.pnlTrade.Size = New System.Drawing.Size(408, 344)
         Me.pnlTrade.TabIndex = 21

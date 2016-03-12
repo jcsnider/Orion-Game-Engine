@@ -1,7 +1,7 @@
 ﻿Public Class frmEditor_NPC
-    Private Sub scrlSprite_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite.ValueChanged
+    Private Sub scrlSprite_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite.ValueChanged, scrlSprite.Scroll
         lblSprite.Text = "Sprite: " & scrlSprite.Value
-        Call EditorNpc_DrawSprite()
+        EditorNpc_DrawSprite()
         Npc(EditorIndex).Sprite = scrlSprite.Value
     End Sub
 
@@ -128,5 +128,9 @@
     Private Sub scrlQuest_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlQuest.ValueChanged
         lblQuest.Text = "Quest: " & scrlQuest.Value
         Npc(EditorIndex).QuestNum = scrlQuest.Value
+    End Sub
+
+    Private Sub frmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        scrlSprite.Maximum = NumCharacters
     End Sub
 End Class

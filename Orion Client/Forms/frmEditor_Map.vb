@@ -3,7 +3,6 @@
 Public Class frmEditor_Map
 
     Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picBackSelect.MouseDown
-
         Call MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
 
@@ -103,6 +102,9 @@ Public Class frmEditor_Map
         pnlAttributes.Visible = False
         pnlAttributes.Left = 8
         Me.Width = 504
+        scrlTileSet.Value = 1
+        optBlocked.Checked = True
+        optLayers.Checked = True
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -358,7 +360,6 @@ Public Class frmEditor_Map
         fraBuyHouse.Visible = True
         scrlBuyHouse.Maximum = MAX_HOUSES
         scrlBuyHouse.Value = 1
-
     End Sub
 
     Private Sub scrlBuyHouse_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles scrlBuyHouse.Scroll

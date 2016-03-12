@@ -197,7 +197,7 @@ Module ClientGameLogic
 
             ' speed from weapon
             If GetPlayerEquipment(MyIndex, Equipment.Weapon) > 0 Then
-                attackspeed = Item(GetPlayerEquipment(MyIndex, Equipment.Weapon)).Speed
+                attackspeed = Item(GetPlayerEquipment(MyIndex, Equipment.Weapon)).Speed * 1000
             Else
                 attackspeed = 1000
             End If
@@ -2022,7 +2022,7 @@ Continue1:
     Public Sub UpdateDrawMapName()
         Dim g As Graphics = Graphics.FromImage(TempBitmap)
         Dim width As Long
-        width = g.MeasureString(Trim$(Map.Name), New System.Drawing.Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
+        width = g.MeasureString(Trim$(Map.Name), New Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
         DrawMapNameX = ((MAX_MAPX + 1) * PIC_X / 2) - width + 32
         DrawMapNameY = 1
 
