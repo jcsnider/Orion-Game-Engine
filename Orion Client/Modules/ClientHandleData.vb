@@ -1827,7 +1827,7 @@
         NeedToOpenTrade = True
         Buffer.ReadLong()
         Tradername = Buffer.ReadString
-        frmMainGame.picTrade.Visible = True
+        frmMainGame.pnlTrade.Visible = True
 
         Buffer = Nothing
     End Sub

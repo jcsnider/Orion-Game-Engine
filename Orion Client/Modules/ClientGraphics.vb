@@ -7,9 +7,6 @@ Module ClientGraphics
 
     Public EditorItem_Furniture As RenderWindow
 
-    Public EditorResource_Resource As RenderWindow
-    Public EditorResource_ExResource As RenderWindow
-
     Public EditorSpell_Icon As RenderWindow
 
     Public EditorAnimation_Anim1 As RenderWindow
@@ -74,8 +71,10 @@ Module ClientGraphics
     Public HUDPanelGFX As Texture
     Public HUDPanelGFXInfo As GraphicInfo
 
-    Public PanelGFX As Texture
-    Public PanelGFXInfo As GraphicInfo
+    Public ActionPanelGFX As Texture
+    Public ActionPanelGFXInfo As GraphicInfo
+    Public ActionPanelButtonsGFX(8) As Texture
+    Public ActionPanelButtonGFXInfo(8) As GraphicInfo
 
     Public InvPanelGFX As Texture
     Public InvPanelGFXInfo As GraphicInfo
@@ -90,7 +89,6 @@ Module ClientGraphics
     Public TargetGFXInfo As GraphicInfo
 
     ' Number of graphic files
-    'Public StatBarBackbuffer As Bitmap
     Public MapEditorBackBuffer As Bitmap
 
     Public NumTileSets As Long
@@ -103,7 +101,6 @@ Module ClientGraphics
     Public NumFaces As Long
 
     Public TempBitmap As Bitmap
-    'Public TempBitmap1 As Bitmap
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -138,9 +135,6 @@ Module ClientGraphics
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
-
-        EditorResource_Resource = New RenderWindow(frmEditor_Resource.picNormalpic.Handle)
-        EditorResource_ExResource = New RenderWindow(frmEditor_Resource.picExhaustedPic.Handle)
 
         EditorSpell_Icon = New RenderWindow(frmEditor_Spell.picSprite.Handle)
 
@@ -184,25 +178,25 @@ Module ClientGraphics
 
         ReDim ResourcesGFX(0 To NumResources)
         ReDim ResourcesGFXInfo(0 To NumResources)
-        For i = 1 To NumResources
-            'Load texture first, dont care about memory streams (just use the filename)
-            ResourcesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & i & GFX_EXT)
+        'For i = 1 To NumResources
+        '    'Load texture first, dont care about memory streams (just use the filename)
+        '    ResourcesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & i & GFX_EXT)
 
-            'Cache the width and height
-            ResourcesGFXInfo(i).width = ResourcesGFX(i).Size.X
-            ResourcesGFXInfo(i).height = ResourcesGFX(i).Size.Y
-        Next
+        '    'Cache the width and height
+        '    ResourcesGFXInfo(i).width = ResourcesGFX(i).Size.X
+        '    ResourcesGFXInfo(i).height = ResourcesGFX(i).Size.Y
+        'Next
 
         ReDim AnimationsGFX(0 To NumAnimations)
         ReDim AnimationsGFXInfo(0 To NumAnimations)
-        For i = 1 To NumAnimations
-            'Load texture first, dont care about memory streams (just use the filename)
-            AnimationsGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "animations\" & i & GFX_EXT)
+        'For i = 1 To NumAnimations
+        '    'Load texture first, dont care about memory streams (just use the filename)
+        '    AnimationsGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "animations\" & i & GFX_EXT)
 
-            'Cache the width and height
-            AnimationsGFXInfo(i).width = AnimationsGFX(i).Size.X
-            AnimationsGFXInfo(i).height = AnimationsGFX(i).Size.Y
-        Next
+        '    'Cache the width and height
+        '    AnimationsGFXInfo(i).width = AnimationsGFX(i).Size.X
+        '    AnimationsGFXInfo(i).height = AnimationsGFX(i).Size.Y
+        'Next
 
         ReDim SpellIconsGFX(0 To NumSpellIcons)
         ReDim SpellIconsGFXInfo(0 To NumSpellIcons)
@@ -289,14 +283,14 @@ Module ClientGraphics
             HUDPanelGFXInfo.height = HUDPanelGFX.Size.Y
         End If
 
-        PanelGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\panel" & GFX_EXT) Then
+        ActionPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "ActionBar\panel" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            PanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\panel" & GFX_EXT)
+            ActionPanelGFX = New Texture(Application.StartupPath & GFX_PATH & "ActionBar\panel" & GFX_EXT)
 
             'Cache the width and height
-            PanelGFXInfo.width = PanelGFX.Size.X
-            PanelGFXInfo.height = PanelGFX.Size.Y
+            ActionPanelGFXInfo.width = ActionPanelGFX.Size.X
+            ActionPanelGFXInfo.height = ActionPanelGFX.Size.Y
         End If
 
         InvPanelGFXInfo = New GraphicInfo
@@ -305,8 +299,8 @@ Module ClientGraphics
             InvPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\inventory" & GFX_EXT)
 
             'Cache the width and height
-            InvPanelGFXInfo.width = PanelGFX.Size.X
-            InvPanelGFXInfo.height = PanelGFX.Size.Y
+            InvPanelGFXInfo.width = InvPanelGFX.Size.X
+            InvPanelGFXInfo.height = InvPanelGFX.Size.Y
         End If
 
         SpellPanelGFXInfo = New GraphicInfo
@@ -315,8 +309,8 @@ Module ClientGraphics
             SpellPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\spells" & GFX_EXT)
 
             'Cache the width and height
-            SpellPanelGFXInfo.width = PanelGFX.Size.X
-            SpellPanelGFXInfo.height = PanelGFX.Size.Y
+            SpellPanelGFXInfo.width = SpellPanelGFX.Size.X
+            SpellPanelGFXInfo.height = SpellPanelGFX.Size.Y
         End If
 
         CharPanelGFXInfo = New GraphicInfo
@@ -325,8 +319,8 @@ Module ClientGraphics
             CharPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\char" & GFX_EXT)
 
             'Cache the width and height
-            CharPanelGFXInfo.width = PanelGFX.Size.X
-            CharPanelGFXInfo.height = PanelGFX.Size.Y
+            CharPanelGFXInfo.width = CharPanelGFX.Size.X
+            CharPanelGFXInfo.height = CharPanelGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -357,14 +351,6 @@ Module ClientGraphics
             HPBarGFXInfo.width = HPBarGFX.Size.X
             HPBarGFXInfo.height = HPBarGFX.Size.Y
         End If
-        EmptyHPBarGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "HPBarEmpty" & GFX_EXT) Then
-            EmptyHPBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "HPBarEmpty" & GFX_EXT)
-
-            'Cache the width and height
-            EmptyHPBarGFXInfo.width = EmptyHPBarGFX.Size.X
-            EmptyHPBarGFXInfo.height = EmptyHPBarGFX.Size.Y
-        End If
 
         MPBarGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "MPBar" & GFX_EXT) Then
@@ -374,14 +360,6 @@ Module ClientGraphics
             MPBarGFXInfo.width = MPBarGFX.Size.X
             MPBarGFXInfo.height = MPBarGFX.Size.Y
         End If
-        EmptyMPBarGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "MPBarEmpty" & GFX_EXT) Then
-            EmptyMPBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "MPBarEmpty" & GFX_EXT)
-
-            'Cache the width and height
-            EmptyMPBarGFXInfo.width = EmptyMPBarGFX.Size.X
-            EmptyMPBarGFXInfo.height = EmptyMPBarGFX.Size.Y
-        End If
 
         EXPBarGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "EXPBar" & GFX_EXT) Then
@@ -390,15 +368,6 @@ Module ClientGraphics
             'Cache the width and height
             EXPBarGFXInfo.width = EXPBarGFX.Size.X
             EXPBarGFXInfo.height = EXPBarGFX.Size.Y
-        End If
-
-        EmptyEXPBarGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "EXPBarEmpty" & GFX_EXT) Then
-            EmptyEXPBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "EXPBarEmpty" & GFX_EXT)
-
-            'Cache the width and height
-            EmptyEXPBarGFXInfo.width = EmptyEXPBarGFX.Size.X
-            EmptyEXPBarGFXInfo.height = EmptyEXPBarGFX.Size.Y
         End If
 
     End Sub
@@ -469,7 +438,45 @@ Module ClientGraphics
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
+        ElseIf TexType = 5 Then 'resources
+            If Index < 0 Or Index > NumItems Then Exit Sub
 
+            'Load texture first, dont care about memory streams (just use the filename)
+            ResourcesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With ResourcesGFXInfo(Index)
+                .width = ResourcesGFX(Index).Size.X
+                .height = ResourcesGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf TexType = 6 Then 'animations
+            If Index < 0 Or Index > NumItems Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            AnimationsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Animations\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With AnimationsGFXInfo(Index)
+                .width = AnimationsGFX(Index).Size.X
+                .height = AnimationsGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf TexType = 7 Then 'faces
+            If Index < 0 Or Index > NumItems Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            FacesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With FacesGFXInfo(Index)
+                .width = FacesGFX(Index).Size.X
+                .height = FacesGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
         End If
 
     End Sub
@@ -747,6 +754,10 @@ Module ClientGraphics
         height = (rec.Bottom - rec.Top)
 
         If rec.Width < 0 Or rec.Height < 0 Then Exit Sub
+
+        If ResourcesGFXInfo(Resource).IsLoaded = False Then
+            LoadTexture(Resource, 5)
+        End If
 
         'Dim tmpSprite As Sprite = New Sprite(ResourcesGFX(Resource))
         'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
@@ -1073,21 +1084,7 @@ Module ClientGraphics
 
     End Sub
 
-    Public Sub Render_Graphics()
-        Dim X As Long, Y As Long, I As Long
-
-        'Don't Render IF
-        If frmMainGame.WindowState = FormWindowState.Minimized Then Exit Sub
-        If GettingMap Then Exit Sub
-
-        UpdateCamera()
-
-        DoEvents()
-
-        'Clear each of our render targets
-        GameWindow.DispatchEvents()
-        GameWindow.Clear(SFML.Graphics.Color.Black)
-
+    Sub ClearGFX()
         'reload hud
         If HUDPanelGFXInfo.IsLoaded Then
             If HUDPanelGFXInfo.TextureTimer < GetTickCount() Then
@@ -1140,6 +1137,46 @@ Module ClientGraphics
                 End If
             End If
         Next
+
+        'clear resources
+        For I = 1 To NumResources
+            If ResourcesGFXInfo(I).IsLoaded Then
+                If ResourcesGFXInfo(I).TextureTimer < GetTickCount() Then
+                    ResourcesGFX(I).Dispose()
+                    ResourcesGFXInfo(I).IsLoaded = False
+                    ResourcesGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
+
+        'clear faces
+        For I = 1 To NumFaces
+            If FacesGFXInfo(I).IsLoaded Then
+                If FacesGFXInfo(I).TextureTimer < GetTickCount() Then
+                    FacesGFX(I).Dispose()
+                    FacesGFXInfo(I).IsLoaded = False
+                    FacesGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub Render_Graphics()
+        Dim X As Long, Y As Long, I As Long
+
+        'Don't Render IF
+        If frmMainGame.WindowState = FormWindowState.Minimized Then Exit Sub
+        If GettingMap Then Exit Sub
+
+        UpdateCamera()
+
+        DoEvents()
+
+        'Clear each of our render targets
+        GameWindow.DispatchEvents()
+        GameWindow.Clear(SFML.Graphics.Color.Black)
+
+        ClearGFX()
 
         ' update animation editor
         If Editor = EDITOR_ANIMATION Then
@@ -1350,11 +1387,9 @@ Module ClientGraphics
 
         ' draw cursor, player X and Y locations
         If BLoc Then
-
-            DrawText(1, 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                DrawText(1, 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                DrawText(1, 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.height + 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.height + 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.height + 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         ' draw player names
@@ -1494,6 +1529,10 @@ Module ClientGraphics
         Sprite = Animation(AnimInstance(Index).Animation).Sprite(Layer)
 
         If Sprite < 1 Or Sprite > NumAnimations Then Exit Sub
+
+        If AnimationsGFXInfo(Sprite).IsLoaded = False Then
+            LoadTexture(Sprite, 6)
+        End If
 
         FrameCount = Animation(AnimInstance(Index).Animation).Frames(Layer)
 
@@ -1733,7 +1772,7 @@ Module ClientGraphics
         If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
         If Not MiscGFX Is Nothing Then MiscGFX.Dispose()
-        If Not PanelGFX Is Nothing Then PanelGFX.Dispose()
+        If Not ActionPanelGFX Is Nothing Then ActionPanelGFX.Dispose()
         If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
         If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
@@ -1876,60 +1915,35 @@ Module ClientGraphics
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT) Then
+            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Width / 4
+            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Height / 4
             frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT)
         End If
     End Sub
 
     Public Sub EditorResource_DrawSprite()
         Dim Sprite As Long
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
 
         ' normal sprite
         Sprite = frmEditor_Resource.scrlNormalPic.Value
 
         If Sprite < 1 Or Sprite > NumResources Then
-            EditorResource_Resource.Clear(ToSFMLColor(frmEditor_Resource.picNormalpic.BackColor))
-            EditorResource_Resource.Display()
+            frmEditor_Resource.picNormalpic.BackgroundImage = Nothing
         Else
-            sRECT.Y = 0
-            sRECT.Height = ResourcesGFXInfo(Sprite).height
-            sRECT.X = 0
-            sRECT.Width = ResourcesGFXInfo(Sprite).width
-            dRECT.Y = 0
-            dRECT.Height = ResourcesGFXInfo(Sprite).height
-            dRECT.X = 0
-            dRECT.Width = ResourcesGFXInfo(Sprite).width
-
-            EditorResource_Resource.Clear(ToSFMLColor(frmEditor_Resource.picNormalpic.BackColor))
-            Dim tmpSprite As Sprite = New Sprite(ResourcesGFX(Sprite))
-            tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-            tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-            EditorResource_Resource.Draw(tmpSprite)
-            EditorResource_Resource.Display()
+            If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
+                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+            End If
         End If
 
         ' exhausted sprite
         Sprite = frmEditor_Resource.scrlExhaustedPic.Value
 
         If Sprite < 1 Or Sprite > NumResources Then
-            EditorResource_ExResource.Clear(ToSFMLColor(frmEditor_Resource.picExhaustedPic.BackColor))
-            EditorResource_ExResource.Display()
+            frmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
         Else
-            sRECT.Y = 0
-            sRECT.Height = ResourcesGFXInfo(Sprite).height
-            sRECT.X = 0
-            sRECT.Width = ResourcesGFXInfo(Sprite).width
-            dRECT.Y = 0
-            dRECT.Height = ResourcesGFXInfo(Sprite).height
-            dRECT.X = 0
-            dRECT.Width = ResourcesGFXInfo(Sprite).width
-            EditorResource_ExResource.Clear(ToSFMLColor(frmEditor_Resource.picExhaustedPic.BackColor))
-            Dim tmpSprite As Sprite = New Sprite(ResourcesGFX(Sprite))
-            tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-            tmpSprite.Position = New SFML.System.Vector2f(dRECT.X, dRECT.Y)
-            EditorResource_ExResource.Draw(tmpSprite)
-            EditorResource_ExResource.Display()
+            If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
+                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+            End If
         End If
     End Sub
 
@@ -1973,10 +1987,15 @@ Module ClientGraphics
 
         Animationnum = frmEditor_Animation.scrlSprite0.Value
 
+        If AnimationsGFXInfo(Animationnum).IsLoaded = False Then
+            LoadTexture(Animationnum, 6)
+        End If
+
         If Animationnum < 1 Or Animationnum > NumAnimations Then
             EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
             EditorAnimation_Anim1.Display()
         Else
+
             looptime = frmEditor_Animation.scrlLoopTime0.Value
             FrameCount = frmEditor_Animation.scrlFrameCount0.Value
 
@@ -2072,11 +2091,6 @@ Module ClientGraphics
 
     Sub DrawHUD()
         Dim rec As Rectangle
-        Dim tmpSprite2 As Sprite = New Sprite(HUDPanelGFX)
-
-        If HUDPanelGFXInfo.IsLoaded = False Then
-            LoadTexture(0, 0)
-        End If
 
         'first render backpanel
         With rec
@@ -2090,6 +2104,10 @@ Module ClientGraphics
 
         If Player(MyIndex).Sprite <= NumFaces Then
             Dim tmpSprite As Sprite = New Sprite(FacesGFX(Player(MyIndex).Sprite))
+
+            If FacesGFXInfo(Player(MyIndex).Sprite).IsLoaded = False Then
+                LoadTexture(Player(MyIndex).Sprite, 7)
+            End If
 
             'then render face
             With rec
@@ -2106,30 +2124,27 @@ Module ClientGraphics
         DrawStatBars()
 
         'Fps etc
-        DrawText(HUDWindowX + HUDHPBarX + EmptyHPBarGFXInfo.width + 10, HUDWindowY + HUDHPBarY + 4, "FPS: " & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HUDWindowX + HUDMPBarX + EmptyMPBarGFXInfo.width + 10, HUDWindowY + HUDMPBarY + 4, "Ping: " & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.width + 10, HUDWindowY + HUDHPBarY + 4, "FPS: " & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.width + 10, HUDWindowY + HUDMPBarY + 4, "Ping: " & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY + 20, "Gold: " & GoldAmount, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Sub DrawStatBars()
         Dim rec As Rectangle
         Dim CurHP As Long, CurMP As Long, CurEXP As Long
-        Dim HPSprite As Sprite = New Sprite(HPBarGFX), EmptyHPSprite As Sprite = New Sprite(EmptyHPBarGFX)
-        Dim MPSprite As Sprite = New Sprite(MPBarGFX), EmptyMPSprite As Sprite = New Sprite(EmptyMPBarGFX)
-        Dim EXPSprite As Sprite = New Sprite(EXPBarGFX), EmptyEXPSprite As Sprite = New Sprite(EmptyEXPBarGFX)
 
         'HP Bar
         CurHP = (GetPlayerVital(MyIndex, 1) / GetPlayerMaxVital(MyIndex, 1)) * 100
 
-        'first render empty
-        With rec
-            .Y = 0
-            .Height = EmptyHPBarGFXInfo.height
-            .X = 0
-            .Width = EmptyHPBarGFXInfo.width
-        End With
+        ''first render empty
+        'With rec
+        '    .Y = 0
+        '    .Height = EmptyHPBarGFXInfo.height
+        '    .X = 0
+        '    .Width = EmptyHPBarGFXInfo.width
+        'End With
 
-        RenderTexture(EmptyHPBarGFX, GameWindow, HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY, rec.X, rec.Y, rec.Width, rec.Height)
+        'RenderTexture(EmptyHPBarGFX, GameWindow, HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
         With rec
             .Y = 0
@@ -2149,15 +2164,15 @@ Module ClientGraphics
         'MP Bar
         CurMP = (GetPlayerVital(MyIndex, 2) / GetPlayerMaxVital(MyIndex, 2)) * 100
 
-        'first render empty
-        With rec
-            .Y = 0
-            .Height = EmptyMPBarGFXInfo.height
-            .X = 0
-            .Width = EmptyMPBarGFXInfo.width
-        End With
+        ''first render empty
+        'With rec
+        '    .Y = 0
+        '    .Height = EmptyMPBarGFXInfo.height
+        '    .X = 0
+        '    .Width = EmptyMPBarGFXInfo.width
+        'End With
 
-        RenderTexture(EmptyMPBarGFX, GameWindow, HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY, rec.X, rec.Y, rec.Width, rec.Height)
+        'RenderTexture(EmptyMPBarGFX, GameWindow, HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
         'then render full ontop of it
         With rec
@@ -2176,15 +2191,15 @@ Module ClientGraphics
         'EXP Bar
         CurEXP = (GetPlayerExp(MyIndex) / NextlevelExp) * 100
 
-        'first render empty
-        With rec
-            .Y = 0
-            .Height = EmptyEXPBarGFXInfo.height
-            .X = 0
-            .Width = EmptyEXPBarGFXInfo.width
-        End With
+        ''first render empty
+        'With rec
+        '    .Y = 0
+        '    .Height = EmptyEXPBarGFXInfo.height
+        '    .X = 0
+        '    .Width = EmptyEXPBarGFXInfo.width
+        'End With
 
-        RenderTexture(EmptyEXPBarGFX, GameWindow, HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY, rec.X, rec.Y, rec.Width, rec.Height)
+        'RenderTexture(EmptyEXPBarGFX, GameWindow, HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
         'then render full ontop of it
         With rec
@@ -2198,6 +2213,21 @@ Module ClientGraphics
 
         'draw text onto that
         DrawText(HUDWindowX + HUDEXPBarX + 65, HUDWindowY + HUDEXPBarY + 4, GetPlayerExp(MyIndex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+    End Sub
+
+    Sub DrawActionPanel()
+        Dim rec As Rectangle
+
+        'first render backpanel
+        With rec
+            .Y = 0
+            .Height = ActionPanelGFXInfo.height
+            .X = 0
+            .Width = ActionPanelGFXInfo.width
+        End With
+
+        RenderTexture(ActionPanelGFX, GameWindow, ActionPanelX, ActionPanelY, rec.X, rec.Y, rec.Width, rec.Height)
+
     End Sub
 
     Sub DrawEquipment()
@@ -2219,7 +2249,7 @@ Module ClientGraphics
         tmpSprite2.Position = New SFML.System.Vector2f(CharWindowX, CharWindowY)
         GameWindow.Draw(tmpSprite2)
 
-        RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, rec.X, rec.Y, rec.Width, rec.Height)
+        'RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, rec.X, rec.Y, rec.Width, rec.Height)
 
         For i = 1 To Equipment.Equipment_Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
@@ -2998,20 +3028,13 @@ NextLoop:
             frmMenu.btnExit.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnExit" & GFX_EXT)
         End If
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnLogin" & GFX_EXT) Then
-            frmMenu.btnLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnLogin" & GFX_EXT)
+            frmMenu.btnPlay.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnLogin" & GFX_EXT)
         End If
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnRegister" & GFX_EXT) Then
             frmMenu.btnRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnRegister" & GFX_EXT)
         End If
 
         'main game
-        frmMainGame.picInventory.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Inventory" & GFX_EXT
-        frmMainGame.picSkills.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Skills" & GFX_EXT
-        frmMainGame.picCharacter.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Character" & GFX_EXT
-        frmMainGame.picTrade.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Trade" & GFX_EXT
-        frmMainGame.picOptions.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Options" & GFX_EXT
-        frmMainGame.picExit.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Exit" & GFX_EXT
-        frmMainGame.picQuest.ImageLocation = Application.StartupPath & GFX_PATH & "actionbar\Quest" & GFX_EXT
         If FileExist(Application.StartupPath & GFX_PATH & "Gui\Main\main" & GFX_EXT) Then
             frmMenu.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Main\main" & GFX_EXT)
         End If
@@ -3024,6 +3047,7 @@ NextLoop:
 
         If HUDVisible = True Then
             DrawHUD()
+            DrawActionPanel()
         End If
 
         If pnlCharacterVisible = True Then

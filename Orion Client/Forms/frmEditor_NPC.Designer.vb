@@ -454,9 +454,10 @@ Partial Class frmEditor_NPC
         'picSprite
         '
         Me.picSprite.BackColor = System.Drawing.Color.Black
-        Me.picSprite.Location = New System.Drawing.Point(310, 66)
+        Me.picSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picSprite.Location = New System.Drawing.Point(298, 66)
         Me.picSprite.Name = "picSprite"
-        Me.picSprite.Size = New System.Drawing.Size(32, 49)
+        Me.picSprite.Size = New System.Drawing.Size(53, 49)
         Me.picSprite.TabIndex = 8
         Me.picSprite.TabStop = False
         '

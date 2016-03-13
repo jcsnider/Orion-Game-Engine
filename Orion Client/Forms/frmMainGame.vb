@@ -108,11 +108,8 @@ Public Class frmMainGame
         txtMeChat.Left = txtChat.Left
         txtMeChat.Top = txtChat.Top + txtChat.Height + 10
 
-        pnlActionMenu.Left = Me.Width - pnlActionMenu.Width - 25
-        pnlActionMenu.Top = Me.Height - pnlActionMenu.Height - 50
-
         pnlHotBar.Left = txtMeChat.Left + txtMeChat.Width + 10
-        pnlHotBar.Top = pnlActionMenu.Top + pnlActionMenu.Height - pnlHotBar.Height
+        pnlHotBar.Top = ActionPanelY + ActionPanelGFXInfo.height - pnlHotBar.Height
 
         frmAdmin.Visible = False
         pnlCurrency.Left = txtChat.Left
@@ -508,33 +505,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
-        Dim tempRec As RECT
-        Dim i As Long
-        IsEqItem = 0
 
-        For i = 1 To Equipment.Equipment_Count - 1
-
-            If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
-
-                With tempRec
-                    .top = CharWindowY + EqTop
-                    .bottom = .top + PIC_Y
-                    .left = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
-                    .right = .left + PIC_X
-                End With
-
-                If X >= tempRec.left And X <= tempRec.right Then
-                    If Y >= tempRec.top And Y <= tempRec.bottom Then
-                        IsEqItem = i
-                        Exit Function
-                    End If
-                End If
-            End If
-
-        Next
-
-    End Function
 
 #End Region
 
@@ -584,67 +555,6 @@ Public Class frmMainGame
 
     Private Sub scrlVolume_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVolume.ValueChanged
 
-    End Sub
-#End Region
-
-#Region "Action Panel"
-    Private Sub picCharacter_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picCharacter.Click
-        PlaySound("Click.ogg")
-        SendRequestPlayerData()
-        'pnlCharacter.Visible = Not pnlCharacter.Visible
-        pnlCharacterVisible = Not pnlCharacterVisible
-        pnlInventory.Visible = False
-        pnlSpells.Visible = False
-        pnlOptions.Visible = False
-    End Sub
-
-    Private Sub picOptions_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picOptions.Click
-        PlaySound("Click.ogg")
-        pnlCharacterVisible = False
-        pnlInventory.Visible = False
-        pnlSpells.Visible = False
-        pnlOptions.BringToFront()
-        pnlOptions.Visible = Not pnlOptions.Visible
-    End Sub
-
-    Private Sub picInventory_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picInventory.Click
-        PlaySound("Click.ogg")
-        pnlInventory.Visible = Not pnlInventory.Visible
-        pnlCharacterVisible = False
-        pnlSpells.Visible = False
-        pnlOptions.Visible = False
-        pnlInventory.BringToFront()
-        'DrawInventory()
-    End Sub
-
-    Private Sub picExit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picExit.Click
-        PlaySound("Click.ogg")
-        frmAdmin.Dispose()
-        DestroyGame()
-    End Sub
-
-    Private Sub picQuest_Click(sender As Object, e As EventArgs) Handles picQuest.Click
-        UpdateQuestLog()
-        ' show the window
-        pnlInventory.Visible = False
-        pnlCharacterVisible = False
-        pnlOptions.Visible = False
-        RefreshQuestLog()
-        pnlQuestLog.Visible = Not pnlQuestLog.Visible
-    End Sub
-
-    Private Sub picSkills_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picSkills.Click
-        Dim Buffer As ByteBuffer
-        PlaySound("Click.ogg")
-        Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CSpells)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-        pnlSpells.Visible = Not pnlSpells.Visible
-        pnlSpells.BringToFront()
-        pnlInventory.Visible = False
-        pnlCharacterVisible = False
-        pnlOptions.Visible = False
     End Sub
 #End Region
 
@@ -1107,13 +1017,6 @@ Public Class frmMainGame
 #End Region
 
 #Region "Trade Code"
-    Private Sub picTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles picTrade.Click
-        PlaySound("Click.ogg")
-        AddText("Click on the player you wish to trade with.")
-        TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
-        TradeRequest = True
-    End Sub
-
     Private Sub pnlYourTrade_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlYourTrade.DoubleClick
         Dim TradeNum As Long
 
@@ -1558,6 +1461,8 @@ Public Class frmMainGame
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
         Dim x2 As Long, y2 As Long, eqNum As Long
 
+        If InMapEditor Then Exit Sub
+
         'Charpanel
         If pnlCharacterVisible Then
             If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
@@ -1582,22 +1487,119 @@ Public Class frmMainGame
     Public Sub CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs)
         Dim EqNum As Long
 
-        'Charpanel
-        If pnlCharacterVisible Then
-            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
-                If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+        If InMapEditor Then Exit Sub
+
+        'action panel
+        If HUDVisible Then
+            If X > ActionPanelX And X < ActionPanelX + ActionPanelGFXInfo.width Then
+                If Y > ActionPanelY And Y < ActionPanelY + ActionPanelGFXInfo.height Then
                     ' left click
                     If e.Button = MouseButtons.Left Then
-                        EqNum = IsEqItem(X, Y)
-
-                        If EqNum <> 0 Then
-                            SendUnequip(EqNum)
+                        'Inventory
+                        If X > ActionPanelX + InvBtnX And X < ActionPanelX + InvBtnX + 32 And Y > ActionPanelY + InvBtnY And Y < ActionPanelY + InvBtnY + 32 Then
+                            PlaySound("Click.ogg")
+                            pnlInventory.Visible = Not pnlInventory.Visible
+                            pnlCharacterVisible = False
+                            pnlSpells.Visible = False
+                            pnlOptions.Visible = False
+                            pnlInventory.BringToFront()
+                            'Skills
+                        ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 32 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
+                            Dim Buffer As ByteBuffer
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CSpells)
+                            SendData(Buffer.ToArray())
+                            Buffer = Nothing
+                            pnlSpells.Visible = Not pnlSpells.Visible
+                            pnlSpells.BringToFront()
+                            pnlInventory.Visible = False
+                            pnlCharacterVisible = False
+                            pnlOptions.Visible = False
+                            'Char
+                        ElseIf X > ActionPanelX + CharBtnX And X < ActionPanelX + CharBtnX + 32 And Y > ActionPanelY + CharBtnY And Y < ActionPanelY + CharBtnY + 32 Then
+                            PlaySound("Click.ogg")
+                            SendRequestPlayerData()
+                            pnlCharacterVisible = Not pnlCharacterVisible
+                            pnlInventory.Visible = False
+                            pnlSpells.Visible = False
+                            pnlOptions.Visible = False
+                            'Quest
+                        ElseIf X > ActionPanelX + QuestBtnX And X < ActionPanelX + QuestBtnX + 32 And Y > ActionPanelY + QuestBtnY And Y < ActionPanelY + QuestBtnY + 32 Then
+                            UpdateQuestLog()
+                            ' show the window
+                            pnlInventory.Visible = False
+                            pnlCharacterVisible = False
+                            pnlOptions.Visible = False
+                            RefreshQuestLog()
+                            pnlQuestLog.Visible = Not pnlQuestLog.Visible
+                            'Trade
+                        ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
+                            PlaySound("Click.ogg")
+                            AddText("Click on the player you wish to trade with.")
+                            TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
+                            TradeRequest = True
+                            'Options
+                        ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 32 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
+                            PlaySound("Click.ogg")
+                            pnlCharacterVisible = False
+                            pnlInventory.Visible = False
+                            pnlSpells.Visible = False
+                            pnlOptions.BringToFront()
+                            pnlOptions.Visible = Not pnlOptions.Visible
+                            'Exit
+                        ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 32 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
+                            PlaySound("Click.ogg")
+                            frmAdmin.Dispose()
+                            DestroyGame()
                         End If
                     End If
                 End If
             End If
         End If
 
+        'Charpanel
+        If pnlCharacterVisible Then
+            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width And Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+                ' left click
+                If e.Button = MouseButtons.Left Then
+                    EqNum = IsEqItem(X, Y)
+
+                    If EqNum <> 0 Then
+                        SendUnequip(EqNum)
+                    End If
+                End If
+            End If
+        End If
+
     End Sub
+
+    Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+        IsEqItem = 0
+
+        For i = 1 To Equipment.Equipment_Count - 1
+
+            If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
+
+                With tempRec
+                    .top = CharWindowY + EqTop
+                    .bottom = .top + PIC_Y
+                    .left = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
+                    .right = .left + PIC_X
+                End With
+
+                If X >= tempRec.left And X <= tempRec.right Then
+                    If Y >= tempRec.top And Y <= tempRec.bottom Then
+                        IsEqItem = i
+                        Exit Function
+                    End If
+                End If
+            End If
+
+        Next
+
+    End Function
 #End Region
 End Class

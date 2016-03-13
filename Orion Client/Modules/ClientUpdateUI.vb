@@ -75,7 +75,26 @@
     Public HUDEXPBarX As Long = 110
     Public HUDEXPBarY As Long = 50
 
+    'Character window Coordinates
     Public CharWindowX As Long = 22
     Public CharWindowY As Long = 147
+
+    'Action Panel Coordinates
+    Public ActionPanelX As Long = 747
+    Public ActionPanelY As Long = 555
+    Public InvBtnX As Long = 16
+    Public InvBtnY As Long = 16
+    Public SkillBtnX As Long = 64
+    Public SkillBtnY As Long = 16
+    Public CharBtnX As Long = 112
+    Public CharBtnY As Long = 16
+    Public QuestBtnX As Long = 160
+    Public QuestBtnY As Long = 16
+    Public TradeBtnX As Long = 16
+    Public TradeBtnY As Long = 64
+    Public OptBtnX As Long = 64
+    Public OptBtnY As Long = 64
+    Public ExitBtnX As Long = 112
+    Public ExitBtnY As Long = 64
 
 End Module

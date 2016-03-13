@@ -761,6 +761,9 @@
 
     Public Sub EndQuest(ByVal Index As Long, ByVal QuestNum As Long)
         QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Chat(3)), 0)
+        If Quest(QuestNum).RewardItem > 0 Then
+            PlayerMsg(Index, "You recieved " & Quest(QuestNum).RewardItemAmount & " " & Trim(Item(Quest(QuestNum).RewardItem).Name))
+        End If
         GiveInvItem(Index, Quest(QuestNum).RewardItem, Quest(QuestNum).RewardItemAmount)
 
         If Quest(QuestNum).RewardExp > 0 Then

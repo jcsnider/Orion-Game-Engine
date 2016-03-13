@@ -1090,7 +1090,6 @@ Module ClientGameLogic
         End If
 
         If HideGui = True Then
-            frmMainGame.pnlActionMenu.Visible = Not frmMainGame.pnlActionMenu.Visible
             frmMainGame.txtChat.Visible = Not frmMainGame.txtChat.Visible
             frmMainGame.txtMeChat.Visible = Not frmMainGame.txtMeChat.Visible
             frmMainGame.pnlHotBar.Visible = Not frmMainGame.pnlHotBar.Visible

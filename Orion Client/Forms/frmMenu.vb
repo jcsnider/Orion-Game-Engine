@@ -97,7 +97,7 @@ Public Class frmMenu
         End If
     End Sub
 
-    Private Sub lblSendLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblSendLogin.Click
+    Private Sub lblSendLogin_Click(ByVal sender As Object, ByVal e As EventArgs)
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
             Call MenuState(MENU_STATE_LOGIN)
         End If
@@ -207,7 +207,7 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
-    Private Sub btnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLogin.Click
+    Private Sub btnPlay_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPlay.Click
         If IsConnected() = True Then
             PlaySound("Click.ogg")
             pnlRegisterVisible = False
@@ -269,4 +269,9 @@ Public Class frmMenu
         pnlIPConfig.Visible = False
     End Sub
 
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
+            Call MenuState(MENU_STATE_LOGIN)
+        End If
+    End Sub
 End Class

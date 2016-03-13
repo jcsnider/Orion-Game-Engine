@@ -22,36 +22,36 @@ Partial Class frmEditor_Resource
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.scrlAnimation = New System.Windows.Forms.HScrollBar
-        Me.lblAnim = New System.Windows.Forms.Label
-        Me.scrlRespawn = New System.Windows.Forms.HScrollBar
-        Me.lblRespawn = New System.Windows.Forms.Label
-        Me.scrlHealth = New System.Windows.Forms.HScrollBar
-        Me.lblHealth = New System.Windows.Forms.Label
-        Me.scrlTool = New System.Windows.Forms.HScrollBar
-        Me.lblTool = New System.Windows.Forms.Label
-        Me.scrlReward = New System.Windows.Forms.HScrollBar
-        Me.lblReward = New System.Windows.Forms.Label
-        Me.picExhaustedPic = New System.Windows.Forms.PictureBox
-        Me.picNormalpic = New System.Windows.Forms.PictureBox
-        Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar
-        Me.scrlNormalPic = New System.Windows.Forms.HScrollBar
-        Me.lblExhaustedPic = New System.Windows.Forms.Label
-        Me.lblNormalPic = New System.Windows.Forms.Label
-        Me.cmbType = New System.Windows.Forms.ComboBox
-        Me.txtMessage2 = New System.Windows.Forms.TextBox
-        Me.txtMessage = New System.Windows.Forms.TextBox
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
+        Me.lblAnim = New System.Windows.Forms.Label()
+        Me.scrlRespawn = New System.Windows.Forms.HScrollBar()
+        Me.lblRespawn = New System.Windows.Forms.Label()
+        Me.scrlHealth = New System.Windows.Forms.HScrollBar()
+        Me.lblHealth = New System.Windows.Forms.Label()
+        Me.scrlTool = New System.Windows.Forms.HScrollBar()
+        Me.lblTool = New System.Windows.Forms.Label()
+        Me.scrlReward = New System.Windows.Forms.HScrollBar()
+        Me.lblReward = New System.Windows.Forms.Label()
+        Me.picExhaustedPic = New System.Windows.Forms.PictureBox()
+        Me.picNormalpic = New System.Windows.Forms.PictureBox()
+        Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar()
+        Me.scrlNormalPic = New System.Windows.Forms.HScrollBar()
+        Me.lblExhaustedPic = New System.Windows.Forms.Label()
+        Me.lblNormalPic = New System.Windows.Forms.Label()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
+        Me.txtMessage2 = New System.Windows.Forms.TextBox()
+        Me.txtMessage = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picExhaustedPic, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -200,6 +200,7 @@ Partial Class frmEditor_Resource
         'picExhaustedPic
         '
         Me.picExhaustedPic.BackColor = System.Drawing.Color.Black
+        Me.picExhaustedPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.picExhaustedPic.Location = New System.Drawing.Point(182, 165)
         Me.picExhaustedPic.Name = "picExhaustedPic"
         Me.picExhaustedPic.Size = New System.Drawing.Size(152, 112)
@@ -209,6 +210,7 @@ Partial Class frmEditor_Resource
         'picNormalpic
         '
         Me.picNormalpic.BackColor = System.Drawing.Color.Black
+        Me.picNormalpic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.picNormalpic.Location = New System.Drawing.Point(13, 165)
         Me.picNormalpic.Name = "picNormalpic"
         Me.picNormalpic.Size = New System.Drawing.Size(152, 112)

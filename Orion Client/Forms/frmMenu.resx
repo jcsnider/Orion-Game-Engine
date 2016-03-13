@@ -138,6 +138,21 @@
         UutWT1m7nlfrn2Xx+apMD4/7qNq2bX4DmZ/jq5tC7yAAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLogin.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGoAAAAlCAYAAACqL3wuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC42/Ixj3wAAAdxJREFUaEPtm0FL
+        w0AQhfcXqD0qFD3FWm82xZNYtAoixaIUU4ke1F78//cxL2UlhNnEqrAzcR58CzszOT12k0OeI6KSJJ3Q
+        dL6k+3xF2euHWh7f5JO18PC8oqvCi8F4Uliz9qdcTi9nReOJdgcntLN/RFv9QyMivYMh9Y9Tul280Phi
+        VprlktE5XRcmmUHy2C48uVnklIzOyOG6w0niBo347A1Tmt5l5PBO6tlpEguuwXn+Tg4vYG7AkAM+MBwW
+        rmnIYWlG6cBOlBLMKCXY1acEM0oJZpQSzCgliDPKi+v9BV5cTzJmlBL+nVFaUWcUp+/MQNVefbb+nO9L
+        oTQKC9eMgVdTj1N9ZtM9Jz8jAZVGNdW8froP1WKDW8+MKuT3oVpsOmdUtebF9UL7UC02Yo2qq6kH1Z/3
+        +zpeoX2oFhtVRoX61efbZrxC+1AtNuKM+i1ebTVtmFFK6JxRgBM3p4lOGtVFSqOwcE1DDmaUEuzqU4Kd
+        KCXgb2aH/5rxfzM3YMQHuQDkAxySAkgMcENGfJC0QeLGIXuDDA6yONygEQ9k1pBdQ4atTBwi1YZ0G1Ju
+        dg3GBwbhJCEFijQoPPrK8CIvitwo8qP4wGiCy6VKoZrn1QreSbjukKte+0PuE5EswCHOPBA9AAAAAElF
+        TkSuQmCC
+</value>
+  </data>
   <data name="pnlRegister.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANYAAACWCAYAAACiu3ZCAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -234,19 +249,19 @@ For help or support please visit our site at http://ascensionforums.com.
 
 This project is based off of Eclipse Origins, feel free to check them out at http://www.eclipseorigins.com .</value>
   </data>
-  <data name="btnLogin.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnPlay.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGoAAAAlCAYAAACqL3wuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC42/Ixj3wAAAdxJREFUaEPtm0FL
-        w0AQhfcXqD0qFD3FWm82xZNYtAoixaIUU4ke1F78//cxL2UlhNnEqrAzcR58CzszOT12k0OeI6KSJJ3Q
-        dL6k+3xF2euHWh7f5JO18PC8oqvCi8F4Uliz9qdcTi9nReOJdgcntLN/RFv9QyMivYMh9Y9Tul280Phi
-        VprlktE5XRcmmUHy2C48uVnklIzOyOG6w0niBo347A1Tmt5l5PBO6tlpEguuwXn+Tg4vYG7AkAM+MBwW
-        rmnIYWlG6cBOlBLMKCXY1acEM0oJZpQSzCgliDPKi+v9BV5cTzJmlBL+nVFaUWcUp+/MQNVefbb+nO9L
-        oTQKC9eMgVdTj1N9ZtM9Jz8jAZVGNdW8froP1WKDW8+MKuT3oVpsOmdUtebF9UL7UC02Yo2qq6kH1Z/3
-        +zpeoX2oFhtVRoX61efbZrxC+1AtNuKM+i1ebTVtmFFK6JxRgBM3p4lOGtVFSqOwcE1DDmaUEuzqU4Kd
-        KCXgb2aH/5rxfzM3YMQHuQDkAxySAkgMcENGfJC0QeLGIXuDDA6yONygEQ9k1pBdQ4atTBwi1YZ0G1Ju
-        dg3GBwbhJCEFijQoPPrK8CIvitwo8qP4wGiCy6VKoZrn1QreSbjukKte+0PuE5EswCHOPBA9AAAAAElF
-        TkSuQmCC
+        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC45bDN+TgAAAeFJREFUaEPtmz9L
+        A0EQxfcTqCkVglYxxs4kWIlBoyASDEowkWihpvH79+O9CyvDMvnTyM5s5sHvYGdmq8fuXXEvEFFNqzeg
+        4XhGz/MFTT9/zPL6pZ/pBl7eF3RXedHuDyprlv7Uj8vbUdV4o8P2BR0cn9Fe89TJSOOkQ83zHj1OPqh/
+        M6rNCq3uNd1XJrlB+tivPHmYzKnVvaKA6w4nSRp08nPU6dHwaUoB76SGnya14Bocz78p4AUsDTh6wAdG
+        wENqOnqYuVE28BNlBDfKCH71GcGNMoIbZQTzRkVJvZJQbdQqSTO8ViImjYLSGb6vREwYta4WxWdKpDij
+        JK2a3VTXRG0UHlIzN1HralHpOpU0m+5J65owYZSkdIbv40Rtu9YKbj1zRkkzUo1r1XxUXGvFhFFSLxK1
+        7ZrXonhPK8UalUraE8V7WinOKF7j4n0+k9a1otqo/yRK6mlkJ42KknpacaOMsLNXnzVqo/CQmo4e3Cgj
+        +NVnBD9RRsDfzAH/NeP/ZmnAyQ9yAcgHBCQFkBiQhpz8IGmDxE1A9gYZHGRxpEEnH8isIbuGDFudOESq
+        Dek2pNz8GswPDMJJQgoUaVB49JfhRV4UuVHkR/GBsQ4pl6oFnue1Ct5JuO6Qq176Q+EXrmh9bsviobcA
+        AAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnRegister.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

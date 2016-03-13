@@ -27,15 +27,6 @@ Partial Class frmMainGame
         Me.txtMeChat = New System.Windows.Forms.TextBox()
         Me.txtChat = New System.Windows.Forms.TextBox()
         Me.picscreen = New System.Windows.Forms.PictureBox()
-        Me.pnlActionMenu = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.picQuest = New System.Windows.Forms.PictureBox()
-        Me.picInventory = New System.Windows.Forms.PictureBox()
-        Me.picExit = New System.Windows.Forms.PictureBox()
-        Me.picOptions = New System.Windows.Forms.PictureBox()
-        Me.picTrade = New System.Windows.Forms.PictureBox()
-        Me.picCharacter = New System.Windows.Forms.PictureBox()
-        Me.picSkills = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.lblVolume = New System.Windows.Forms.Label()
         Me.scrlVolume = New System.Windows.Forms.HScrollBar()
@@ -165,15 +156,6 @@ Partial Class frmMainGame
         Me.lblResponse1 = New System.Windows.Forms.Label()
         Me.picEventFace = New System.Windows.Forms.PictureBox()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlActionMenu.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picQuest, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picInventory, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picExit, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picOptions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picTrade, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picCharacter, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picSkills, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -217,90 +199,6 @@ Partial Class frmMainGame
         Me.picscreen.Size = New System.Drawing.Size(960, 674)
         Me.picscreen.TabIndex = 4
         Me.picscreen.TabStop = False
-        '
-        'pnlActionMenu
-        '
-        Me.pnlActionMenu.BackColor = System.Drawing.Color.Transparent
-        Me.pnlActionMenu.BackgroundImage = CType(resources.GetObject("pnlActionMenu.BackgroundImage"), System.Drawing.Image)
-        Me.pnlActionMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlActionMenu.Controls.Add(Me.PictureBox1)
-        Me.pnlActionMenu.Controls.Add(Me.picQuest)
-        Me.pnlActionMenu.Controls.Add(Me.picInventory)
-        Me.pnlActionMenu.Controls.Add(Me.picExit)
-        Me.pnlActionMenu.Controls.Add(Me.picOptions)
-        Me.pnlActionMenu.Controls.Add(Me.picTrade)
-        Me.pnlActionMenu.Controls.Add(Me.picCharacter)
-        Me.pnlActionMenu.Controls.Add(Me.picSkills)
-        Me.pnlActionMenu.ForeColor = System.Drawing.Color.White
-        Me.pnlActionMenu.Location = New System.Drawing.Point(22, 428)
-        Me.pnlActionMenu.Name = "pnlActionMenu"
-        Me.pnlActionMenu.Size = New System.Drawing.Size(204, 107)
-        Me.pnlActionMenu.TabIndex = 7
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(152, 63)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(33, 32)
-        Me.PictureBox1.TabIndex = 8
-        Me.PictureBox1.TabStop = False
-        Me.PictureBox1.Visible = False
-        '
-        'picQuest
-        '
-        Me.picQuest.Location = New System.Drawing.Point(152, 14)
-        Me.picQuest.Name = "picQuest"
-        Me.picQuest.Size = New System.Drawing.Size(32, 32)
-        Me.picQuest.TabIndex = 7
-        Me.picQuest.TabStop = False
-        '
-        'picInventory
-        '
-        Me.picInventory.Location = New System.Drawing.Point(16, 14)
-        Me.picInventory.Name = "picInventory"
-        Me.picInventory.Size = New System.Drawing.Size(33, 32)
-        Me.picInventory.TabIndex = 6
-        Me.picInventory.TabStop = False
-        '
-        'picExit
-        '
-        Me.picExit.Location = New System.Drawing.Point(107, 63)
-        Me.picExit.Name = "picExit"
-        Me.picExit.Size = New System.Drawing.Size(33, 32)
-        Me.picExit.TabIndex = 5
-        Me.picExit.TabStop = False
-        '
-        'picOptions
-        '
-        Me.picOptions.Location = New System.Drawing.Point(61, 63)
-        Me.picOptions.Name = "picOptions"
-        Me.picOptions.Size = New System.Drawing.Size(33, 32)
-        Me.picOptions.TabIndex = 4
-        Me.picOptions.TabStop = False
-        '
-        'picTrade
-        '
-        Me.picTrade.Location = New System.Drawing.Point(16, 63)
-        Me.picTrade.Name = "picTrade"
-        Me.picTrade.Size = New System.Drawing.Size(33, 32)
-        Me.picTrade.TabIndex = 3
-        Me.picTrade.TabStop = False
-        '
-        'picCharacter
-        '
-        Me.picCharacter.Location = New System.Drawing.Point(107, 14)
-        Me.picCharacter.Name = "picCharacter"
-        Me.picCharacter.Size = New System.Drawing.Size(32, 32)
-        Me.picCharacter.TabIndex = 2
-        Me.picCharacter.TabStop = False
-        '
-        'picSkills
-        '
-        Me.picSkills.Location = New System.Drawing.Point(61, 14)
-        Me.picSkills.Name = "picSkills"
-        Me.picSkills.Size = New System.Drawing.Size(33, 32)
-        Me.picSkills.TabIndex = 1
-        Me.picSkills.TabStop = False
         '
         'pnlOptions
         '
@@ -1030,6 +928,8 @@ Partial Class frmMainGame
         '
         'pnlShop
         '
+        Me.pnlShop.BackgroundImage = CType(resources.GetObject("pnlShop.BackgroundImage"), System.Drawing.Image)
+        Me.pnlShop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlShop.Controls.Add(Me.lblLeaveShop)
         Me.pnlShop.Controls.Add(Me.lblShopSell)
         Me.pnlShop.Controls.Add(Me.lblShopBuy)
@@ -1043,7 +943,9 @@ Partial Class frmMainGame
         '
         'lblLeaveShop
         '
+        Me.lblLeaveShop.BackColor = System.Drawing.Color.Transparent
         Me.lblLeaveShop.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLeaveShop.ForeColor = System.Drawing.Color.White
         Me.lblLeaveShop.Location = New System.Drawing.Point(18, 245)
         Me.lblLeaveShop.Name = "lblLeaveShop"
         Me.lblLeaveShop.Size = New System.Drawing.Size(237, 18)
@@ -1053,7 +955,9 @@ Partial Class frmMainGame
         '
         'lblShopSell
         '
+        Me.lblShopSell.BackColor = System.Drawing.Color.Transparent
         Me.lblShopSell.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblShopSell.ForeColor = System.Drawing.Color.White
         Me.lblShopSell.Location = New System.Drawing.Point(18, 227)
         Me.lblShopSell.Name = "lblShopSell"
         Me.lblShopSell.Size = New System.Drawing.Size(237, 18)
@@ -1063,7 +967,9 @@ Partial Class frmMainGame
         '
         'lblShopBuy
         '
+        Me.lblShopBuy.BackColor = System.Drawing.Color.Transparent
         Me.lblShopBuy.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblShopBuy.ForeColor = System.Drawing.Color.White
         Me.lblShopBuy.Location = New System.Drawing.Point(18, 210)
         Me.lblShopBuy.Name = "lblShopBuy"
         Me.lblShopBuy.Size = New System.Drawing.Size(237, 18)
@@ -1081,7 +987,9 @@ Partial Class frmMainGame
         '
         'lblShopName
         '
+        Me.lblShopName.BackColor = System.Drawing.Color.Transparent
         Me.lblShopName.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblShopName.ForeColor = System.Drawing.Color.White
         Me.lblShopName.Location = New System.Drawing.Point(3, 2)
         Me.lblShopName.Name = "lblShopName"
         Me.lblShopName.Size = New System.Drawing.Size(274, 35)
@@ -1122,6 +1030,8 @@ Partial Class frmMainGame
         'pnlTrade
         '
         Me.pnlTrade.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.pnlTrade.BackgroundImage = CType(resources.GetObject("pnlTrade.BackgroundImage"), System.Drawing.Image)
+        Me.pnlTrade.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlTrade.Controls.Add(Me.lblTradeStatus)
         Me.pnlTrade.Controls.Add(Me.lblDeclineTrade)
         Me.pnlTrade.Controls.Add(Me.lblAcceptTrade)
@@ -1139,6 +1049,7 @@ Partial Class frmMainGame
         '
         'lblTradeStatus
         '
+        Me.lblTradeStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblTradeStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTradeStatus.Location = New System.Drawing.Point(3, 305)
         Me.lblTradeStatus.Name = "lblTradeStatus"
@@ -1148,6 +1059,7 @@ Partial Class frmMainGame
         '
         'lblDeclineTrade
         '
+        Me.lblDeclineTrade.BackColor = System.Drawing.Color.Transparent
         Me.lblDeclineTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDeclineTrade.ForeColor = System.Drawing.Color.Red
         Me.lblDeclineTrade.Location = New System.Drawing.Point(205, 322)
@@ -1158,6 +1070,7 @@ Partial Class frmMainGame
         '
         'lblAcceptTrade
         '
+        Me.lblAcceptTrade.BackColor = System.Drawing.Color.Transparent
         Me.lblAcceptTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAcceptTrade.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblAcceptTrade.Location = New System.Drawing.Point(150, 322)
@@ -1169,7 +1082,9 @@ Partial Class frmMainGame
         '
         'lblTheirWorth
         '
+        Me.lblTheirWorth.BackColor = System.Drawing.Color.Transparent
         Me.lblTheirWorth.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTheirWorth.ForeColor = System.Drawing.Color.White
         Me.lblTheirWorth.Location = New System.Drawing.Point(208, 288)
         Me.lblTheirWorth.Name = "lblTheirWorth"
         Me.lblTheirWorth.Size = New System.Drawing.Size(193, 16)
@@ -1179,7 +1094,9 @@ Partial Class frmMainGame
         '
         'lblYourWorth
         '
+        Me.lblYourWorth.BackColor = System.Drawing.Color.Transparent
         Me.lblYourWorth.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblYourWorth.ForeColor = System.Drawing.Color.White
         Me.lblYourWorth.Location = New System.Drawing.Point(8, 288)
         Me.lblYourWorth.Name = "lblYourWorth"
         Me.lblYourWorth.Size = New System.Drawing.Size(193, 16)
@@ -1205,7 +1122,9 @@ Partial Class frmMainGame
         '
         'lblTheirOffer
         '
+        Me.lblTheirOffer.BackColor = System.Drawing.Color.Transparent
         Me.lblTheirOffer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTheirOffer.ForeColor = System.Drawing.Color.White
         Me.lblTheirOffer.Location = New System.Drawing.Point(208, 8)
         Me.lblTheirOffer.Name = "lblTheirOffer"
         Me.lblTheirOffer.Size = New System.Drawing.Size(193, 16)
@@ -1215,7 +1134,9 @@ Partial Class frmMainGame
         '
         'lblYourOffer
         '
+        Me.lblYourOffer.BackColor = System.Drawing.Color.Transparent
         Me.lblYourOffer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblYourOffer.ForeColor = System.Drawing.Color.White
         Me.lblYourOffer.Location = New System.Drawing.Point(8, 8)
         Me.lblYourOffer.Name = "lblYourOffer"
         Me.lblYourOffer.Size = New System.Drawing.Size(193, 16)
@@ -1686,12 +1607,9 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlHotBar)
         Me.Controls.Add(Me.pnlDialog)
         Me.Controls.Add(Me.pnlQuestSpeech)
-        Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlBank)
-        Me.Controls.Add(Me.pnlShop)
         Me.Controls.Add(Me.pnlSpellDesc)
         Me.Controls.Add(Me.pnlItemDesc)
-        Me.Controls.Add(Me.pnlActionMenu)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.txtChat)
         Me.Controls.Add(Me.pnlTempBank)
@@ -1702,6 +1620,8 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlSpells)
         Me.Controls.Add(Me.pnlOptions)
+        Me.Controls.Add(Me.pnlTrade)
+        Me.Controls.Add(Me.pnlShop)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -1709,15 +1629,6 @@ Partial Class frmMainGame
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMainGame"
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlActionMenu.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picQuest, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picInventory, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picExit, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picOptions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picTrade, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picCharacter, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picSkills, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlOptions.ResumeLayout(False)
         Me.pnlOptions.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1750,13 +1661,6 @@ Partial Class frmMainGame
     Friend WithEvents txtMeChat As System.Windows.Forms.TextBox
     Friend WithEvents txtChat As System.Windows.Forms.TextBox
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
-    Friend WithEvents pnlActionMenu As System.Windows.Forms.Panel
-    Friend WithEvents picExit As System.Windows.Forms.PictureBox
-    Friend WithEvents picOptions As System.Windows.Forms.PictureBox
-    Friend WithEvents picTrade As System.Windows.Forms.PictureBox
-    Friend WithEvents picCharacter As System.Windows.Forms.PictureBox
-    Friend WithEvents picSkills As System.Windows.Forms.PictureBox
-    Friend WithEvents picInventory As System.Windows.Forms.PictureBox
     Friend WithEvents pnlOptions As System.Windows.Forms.Panel
     Friend WithEvents optMOff As System.Windows.Forms.RadioButton
     Friend WithEvents optMOn As System.Windows.Forms.RadioButton
@@ -1868,8 +1772,6 @@ Partial Class frmMainGame
     Friend WithEvents lblQuestNameVisual As Windows.Forms.Label
     Friend WithEvents lblQuestAccept As Windows.Forms.Label
     Friend WithEvents lblQuestExtra As Windows.Forms.Label
-    Friend WithEvents PictureBox1 As Windows.Forms.PictureBox
-    Friend WithEvents picQuest As Windows.Forms.PictureBox
     Friend WithEvents pnlDialog As Windows.Forms.Panel
     Friend WithEvents lblDialogCancel As Windows.Forms.Label
     Friend WithEvents lblDialogOk As Windows.Forms.Label

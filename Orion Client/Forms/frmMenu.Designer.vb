@@ -25,10 +25,10 @@ Partial Class frmMenu
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         Me.pnlLogin = New System.Windows.Forms.Panel()
+        Me.btnLogin = New System.Windows.Forms.Panel()
         Me.chkSavePass = New System.Windows.Forms.CheckBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.lblSendLogin = New System.Windows.Forms.Label()
         Me.txtLogin = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -65,7 +65,7 @@ Partial Class frmMenu
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnLogin = New System.Windows.Forms.Panel()
+        Me.btnPlay = New System.Windows.Forms.Panel()
         Me.btnRegister = New System.Windows.Forms.Panel()
         Me.btnCredits = New System.Windows.Forms.Panel()
         Me.btnExit = New System.Windows.Forms.Panel()
@@ -91,10 +91,10 @@ Partial Class frmMenu
         Me.pnlLogin.BackColor = System.Drawing.Color.Transparent
         Me.pnlLogin.BackgroundImage = CType(resources.GetObject("pnlLogin.BackgroundImage"), System.Drawing.Image)
         Me.pnlLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlLogin.Controls.Add(Me.btnLogin)
         Me.pnlLogin.Controls.Add(Me.chkSavePass)
         Me.pnlLogin.Controls.Add(Me.txtPassword)
         Me.pnlLogin.Controls.Add(Me.Label7)
-        Me.pnlLogin.Controls.Add(Me.lblSendLogin)
         Me.pnlLogin.Controls.Add(Me.txtLogin)
         Me.pnlLogin.Controls.Add(Me.Label17)
         Me.pnlLogin.Controls.Add(Me.Label18)
@@ -104,6 +104,17 @@ Partial Class frmMenu
         Me.pnlLogin.Size = New System.Drawing.Size(400, 192)
         Me.pnlLogin.TabIndex = 37
         Me.pnlLogin.Visible = False
+        '
+        'btnLogin
+        '
+        Me.btnLogin.BackColor = System.Drawing.Color.Transparent
+        Me.btnLogin.BackgroundImage = CType(resources.GetObject("btnLogin.BackgroundImage"), System.Drawing.Image)
+        Me.btnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnLogin.ForeColor = System.Drawing.Color.White
+        Me.btnLogin.Location = New System.Drawing.Point(180, 159)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(78, 24)
+        Me.btnLogin.TabIndex = 48
         '
         'chkSavePass
         '
@@ -132,15 +143,6 @@ Partial Class frmMenu
         Me.Label7.Size = New System.Drawing.Size(56, 13)
         Me.Label7.TabIndex = 23
         Me.Label7.Text = "Password:"
-        '
-        'lblSendLogin
-        '
-        Me.lblSendLogin.AutoSize = True
-        Me.lblSendLogin.Location = New System.Drawing.Point(177, 170)
-        Me.lblSendLogin.Name = "lblSendLogin"
-        Me.lblSendLogin.Size = New System.Drawing.Size(33, 13)
-        Me.lblSendLogin.TabIndex = 22
-        Me.lblSendLogin.Text = "Login"
         '
         'txtLogin
         '
@@ -502,16 +504,16 @@ Partial Class frmMenu
         Me.Label6.Text = resources.GetString("Label6.Text")
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'btnLogin
+        'btnPlay
         '
-        Me.btnLogin.BackColor = System.Drawing.Color.Transparent
-        Me.btnLogin.BackgroundImage = CType(resources.GetObject("btnLogin.BackgroundImage"), System.Drawing.Image)
-        Me.btnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnLogin.ForeColor = System.Drawing.Color.White
-        Me.btnLogin.Location = New System.Drawing.Point(133, 490)
-        Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(109, 39)
-        Me.btnLogin.TabIndex = 47
+        Me.btnPlay.BackColor = System.Drawing.Color.Transparent
+        Me.btnPlay.BackgroundImage = CType(resources.GetObject("btnPlay.BackgroundImage"), System.Drawing.Image)
+        Me.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnPlay.ForeColor = System.Drawing.Color.White
+        Me.btnPlay.Location = New System.Drawing.Point(133, 490)
+        Me.btnPlay.Name = "btnPlay"
+        Me.btnPlay.Size = New System.Drawing.Size(109, 39)
+        Me.btnPlay.TabIndex = 47
         '
         'btnRegister
         '
@@ -636,13 +638,13 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(717, 541)
+        Me.ClientSize = New System.Drawing.Size(721, 541)
         Me.Controls.Add(Me.pnlIPConfig)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCredits)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.btnRegister)
-        Me.Controls.Add(Me.btnLogin)
+        Me.Controls.Add(Me.btnPlay)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.pnlCredits)
@@ -677,7 +679,6 @@ Partial Class frmMenu
     Friend WithEvents chkSavePass As System.Windows.Forms.CheckBox
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents lblSendLogin As System.Windows.Forms.Label
     Friend WithEvents txtLogin As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
@@ -714,7 +715,7 @@ Partial Class frmMenu
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents btnLogin As Windows.Forms.Panel
+    Friend WithEvents btnPlay As Windows.Forms.Panel
     Friend WithEvents btnRegister As Windows.Forms.Panel
     Friend WithEvents btnCredits As Windows.Forms.Panel
     Friend WithEvents btnExit As Windows.Forms.Panel
@@ -726,4 +727,5 @@ Partial Class frmMenu
     Friend WithEvents Label15 As Windows.Forms.Label
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents Label13 As Windows.Forms.Label
+    Friend WithEvents btnLogin As Windows.Forms.Panel
 End Class

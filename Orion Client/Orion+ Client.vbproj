@@ -383,27 +383,16 @@
     <Content Include="data files\Credits.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\actionbar\Character.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\actionbar\Exit.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\actionbar\Inventory.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\actionbar\Options.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\actionbar\Quest.png">
+    <Content Include="data files\graphics\actionbar\Character.png" />
+    <Content Include="data files\graphics\actionbar\Exit.png" />
+    <Content Include="data files\graphics\actionbar\Inventory.png" />
+    <Content Include="data files\graphics\actionbar\Options.png" />
+    <Content Include="data files\graphics\actionbar\Panel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\actionbar\Skills.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\actionbar\Trade.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="data files\graphics\actionbar\Quest.png" />
+    <Content Include="data files\graphics\actionbar\Skills.png" />
+    <Content Include="data files\graphics\actionbar\Trade.png" />
     <Content Include="data files\graphics\animations\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -573,6 +562,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Menu\btnLogin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\GUI\Menu\btnPlay.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Menu\btnRegister.png">
