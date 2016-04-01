@@ -278,11 +278,11 @@ Public Module ClientHousing
         i = 1
 
         While FileExist(Application.StartupPath & GFX_PATH & "Furniture\" & i & GFX_EXT)
-            numFurniture = numFurniture + 1
+            NumFurniture = NumFurniture + 1
             i = i + 1
         End While
 
-        If numFurniture = 0 Then Exit Sub
+        If NumFurniture = 0 Then Exit Sub
     End Sub
 
     Public Sub DrawFurniture(ByVal Index As Long, Layer As Long)
@@ -299,7 +299,7 @@ Public Module ClientHousing
 
         If Width > 4 Then Width = 4
         If Height > 4 Then Height = 4
-        If i <= 0 Or i > numFurniture Then Exit Sub
+        If i <= 0 Or i > NumFurniture Then Exit Sub
 
         ' make sure it's not out of map
         If Furniture(Index).X > Map.MaxX Then Exit Sub
@@ -316,7 +316,7 @@ Public Module ClientHousing
 
                     Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i))
                     tmpSprite.TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32)
-                    tmpSprite.Position = New SFML.System.Vector2f(X, Y)
+                    tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
                     GameWindow.Draw(tmpSprite)
                 End If
             Next

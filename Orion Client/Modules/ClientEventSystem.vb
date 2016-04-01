@@ -2770,7 +2770,7 @@ newlist:
                 End With
                 Dim tmpSprite As Sprite = New Sprite(MiscGFX)
                 tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                 GameWindow.Draw(tmpSprite)
                 GoTo nextevent
             End If
@@ -2801,7 +2801,7 @@ newlist:
                         End With
                         Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     Else
                         With rec
@@ -2812,7 +2812,7 @@ newlist:
                         End With
                         Dim tmpSprite As Sprite = New Sprite(MiscGFX)
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     End If
                 Case 2
@@ -2826,7 +2826,7 @@ newlist:
 
                         Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     Else
                         With rec
@@ -2837,7 +2837,7 @@ newlist:
                         End With
                         Dim tmpSprite As Sprite = New Sprite(MiscGFX)
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     End If
             End Select

@@ -58,7 +58,7 @@ Public Module ClientHotBar
         End With
 
         tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
-        tmpSprite2.Position = New SFML.System.Vector2f(0, 0)
+        tmpSprite2.Position = New SFML.Window.Vector2f(0, 0)
         HotbarWindow.Draw(tmpSprite2)
 
         For i = 1 To MAX_HOTBAR
@@ -88,7 +88,7 @@ Public Module ClientHotBar
 
                 Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
                 tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                tmpSprite.Position = New SFML.System.Vector2f(rec_pos.X, rec_pos.Y)
+                tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
                 HotbarWindow.Draw(tmpSprite)
             End If
 

@@ -7,20 +7,20 @@ Module ClientText
         mystring.CharacterSize = FONT_SIZE
 
         mystring.Color = BackColor
-        mystring.Position = New SFML.System.Vector2f(X - 1, y - 1)
+        mystring.Position = New SFML.Window.Vector2f(X - 1, y - 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.System.Vector2f(X - 1, y + 1)
+        mystring.Position = New SFML.Window.Vector2f(X - 1, y + 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.System.Vector2f(X + 1, y + 1)
+        mystring.Position = New SFML.Window.Vector2f(X + 1, y + 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.System.Vector2f(X + 1, y + -1)
+        mystring.Position = New SFML.Window.Vector2f(X + 1, y + -1)
         target.Draw(mystring)
 
         mystring.Color = color
-        mystring.Position = New SFML.System.Vector2f(X, y)
+        mystring.Position = New SFML.Window.Vector2f(X, y)
         target.Draw(mystring)
     End Sub
 
