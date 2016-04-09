@@ -35,49 +35,49 @@ Public Class frmMainGame
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
 
@@ -107,9 +107,6 @@ Public Class frmMainGame
         txtChat.Top = Me.Height - txtChat.Height - 82
         txtMeChat.Left = txtChat.Left
         txtMeChat.Top = txtChat.Top + txtChat.Height + 10
-
-        pnlHotBar.Left = txtMeChat.Left + txtMeChat.Width + 10
-        pnlHotBar.Top = ActionPanelY + ActionPanelGFXInfo.height - pnlHotBar.Height
 
         frmAdmin.Visible = False
         pnlCurrency.Left = txtChat.Left
@@ -181,27 +178,30 @@ Public Class frmMainGame
         If InMapEditor Then
             MapEditorMouseDown(e.Button, e.X, e.Y, False)
         Else
-            ' left click
-            If e.Button = MouseButtons.Left Then
-                ' if we're in the middle of choose the trade target or not
-                If Not TradeRequest Then
-                    ' targetting
-                    PlayerSearch(CurX, CurY)
-                Else
-                    ' trading
-                    SendTradeRequest(CurX, CurY)
+            If Not CheckGuiClick(e.X, e.Y, e) Then
+                ' left click
+                If e.Button = MouseButtons.Left Then
+                    ' if we're in the middle of choose the trade target or not
+                    If Not TradeRequest Then
+                        ' targetting
+                        PlayerSearch(CurX, CurY)
+                    Else
+                        ' trading
+                        SendTradeRequest(CurX, CurY)
+                    End If
+                    ' right click
+                ElseIf e.Button = MouseButtons.Right Then
+                    If ShiftDown Or VbKeyShift = True Then
+                        ' admin warp if we're pressing shift and right clicking
+                        If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
+                    End If
+                    FurnitureSelected = 0
                 End If
-                ' right click
-            ElseIf e.Button = MouseButtons.Right Then
-                If ShiftDown Or VbKeyShift = True Then
-                    ' admin warp if we're pressing shift and right clicking
-                    If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
-                End If
-                FurnitureSelected = 0
             End If
+
         End If
 
-        CheckGuiClick(e.X, e.Y, e)
+        'CheckGuiClick(e.X, e.Y, e)
 
         Me.txtMeChat.Focus()
 
@@ -1263,74 +1263,7 @@ Public Class frmMainGame
 
 #End Region
 
-#Region "HotBar"
-
-    Private Function IsHotBarSlot(ByVal X As Single, ByVal Y As Single) As Long
-        Dim tempRec As RECT
-        Dim i As Long
-
-        IsHotBarSlot = 0
-
-        For i = 1 To MAX_HOTBAR
-
-            With tempRec
-                .top = HotbarTop
-                .bottom = .top + PIC_Y
-                .left = HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MAX_HOTBAR)))
-                .right = .left + PIC_X
-            End With
-
-            If X >= tempRec.left And X <= tempRec.right Then
-                If Y >= tempRec.top And Y <= tempRec.bottom Then
-                    IsHotBarSlot = i
-                    Exit Function
-                End If
-            End If
-        Next
-
-    End Function
-
-    Private Sub pnlHotBar_Paint(sender As Object, e As PaintEventArgs) Handles pnlHotBar.Paint
-        'do nothing ;)
-    End Sub
-
-    Private Sub pnlHotBar_Click(sender As Object, e As MouseEventArgs) Handles pnlHotBar.Click
-        Dim spellnum As Long, hotbarslot As Long
-        Dim Buffer As ByteBuffer
-
-        hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
-
-        If e.Button = MouseButtons.Left Then
-            If hotbarslot > 0 Then
-                spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
-
-                If spellnum <> 0 Then
-                    Call CastSpell(spellnum)
-                End If
-            End If
-        ElseIf e.Button = MouseButtons.Right Then ' right click
-            If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
-                'forget hotbar skill
-                SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
-            Else
-                Buffer = New ByteBuffer
-                Buffer.WriteLong(ClientPackets.CSpells)
-                SendData(Buffer.ToArray())
-                Buffer = Nothing
-                pnlSpells.Visible = True
-                pnlSpells.BringToFront()
-                AddText("Click on the skill you want to place here")
-                SelSpellSlot = True
-                SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
-            End If
-
-
-        End If
-    End Sub
-
-    Private Sub pnlHotBar_MouseEnter(sender As Object, e As EventArgs) Handles pnlHotBar.MouseEnter
-
-    End Sub
+#Region "Misc"
 
     Private Sub tmrShake_Tick(sender As Object, e As EventArgs) Handles tmrShake.Tick
         If ShakeCount < 10 Then
@@ -1351,8 +1284,6 @@ Public Class frmMainGame
 
         ShakeCount += 1
     End Sub
-
-
 
 #End Region
 
@@ -1484,10 +1415,13 @@ Public Class frmMainGame
 
     End Sub
 
-    Public Sub CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs)
+    Public Function CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
         Dim EqNum As Long
+        Dim spellnum As Long, hotbarslot As Long
+        Dim Buffer As ByteBuffer
 
-        If InMapEditor Then Exit Sub
+        CheckGuiClick = False
+        If InMapEditor Then Exit Function
 
         'action panel
         If HUDVisible Then
@@ -1503,9 +1437,9 @@ Public Class frmMainGame
                             pnlSpells.Visible = False
                             pnlOptions.Visible = False
                             pnlInventory.BringToFront()
+                            CheckGuiClick = True
                             'Skills
                         ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 32 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
-                            Dim Buffer As ByteBuffer
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
                             Buffer.WriteLong(ClientPackets.CSpells)
@@ -1516,6 +1450,7 @@ Public Class frmMainGame
                             pnlInventory.Visible = False
                             pnlCharacterVisible = False
                             pnlOptions.Visible = False
+                            CheckGuiClick = True
                             'Char
                         ElseIf X > ActionPanelX + CharBtnX And X < ActionPanelX + CharBtnX + 32 And Y > ActionPanelY + CharBtnY And Y < ActionPanelY + CharBtnY + 32 Then
                             PlaySound("Click.ogg")
@@ -1524,6 +1459,7 @@ Public Class frmMainGame
                             pnlInventory.Visible = False
                             pnlSpells.Visible = False
                             pnlOptions.Visible = False
+                            CheckGuiClick = True
                             'Quest
                         ElseIf X > ActionPanelX + QuestBtnX And X < ActionPanelX + QuestBtnX + 32 And Y > ActionPanelY + QuestBtnY And Y < ActionPanelY + QuestBtnY + 32 Then
                             UpdateQuestLog()
@@ -1533,12 +1469,14 @@ Public Class frmMainGame
                             pnlOptions.Visible = False
                             RefreshQuestLog()
                             pnlQuestLog.Visible = Not pnlQuestLog.Visible
+                            CheckGuiClick = True
                             'Trade
                         ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
                             PlaySound("Click.ogg")
                             AddText("Click on the player you wish to trade with.")
                             TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
                             TradeRequest = True
+                            CheckGuiClick = True
                             'Options
                         ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 32 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
                             PlaySound("Click.ogg")
@@ -1547,11 +1485,13 @@ Public Class frmMainGame
                             pnlSpells.Visible = False
                             pnlOptions.BringToFront()
                             pnlOptions.Visible = Not pnlOptions.Visible
+                            CheckGuiClick = True
                             'Exit
                         ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 32 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
                             PlaySound("Click.ogg")
                             frmAdmin.Dispose()
                             DestroyGame()
+                            CheckGuiClick = True
                         End If
                     End If
                 End If
@@ -1567,12 +1507,49 @@ Public Class frmMainGame
 
                     If EqNum <> 0 Then
                         SendUnequip(EqNum)
+                        CheckGuiClick = True
                     End If
                 End If
             End If
         End If
 
-    End Sub
+        'hotbar
+        If HUDVisible Then
+            If X > HotbarX And X < HotbarX + HotBarGFXInfo.width And Y > HotbarY And Y < HotbarY + HotBarGFXInfo.height Then
+
+
+                hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
+
+                If e.Button = MouseButtons.Left Then
+                    If hotbarslot > 0 Then
+                        spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
+
+                        If spellnum <> 0 Then
+                            CastSpell(spellnum)
+                            CheckGuiClick = True
+                        End If
+                    End If
+                ElseIf e.Button = MouseButtons.Right Then ' right click
+                    If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
+                        'forget hotbar skill
+                        SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
+                        CheckGuiClick = True
+                    Else
+                        Buffer = New ByteBuffer
+                        Buffer.WriteLong(ClientPackets.CSpells)
+                        SendData(Buffer.ToArray())
+                        Buffer = Nothing
+                        pnlSpells.Visible = True
+                        pnlSpells.BringToFront()
+                        AddText("Click on the skill you want to place here")
+                        SelSpellSlot = True
+                        SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
+                        CheckGuiClick = True
+                    End If
+                End If
+            End If
+        End If
+    End Function
 
     Private Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As RECT

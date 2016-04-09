@@ -27,8 +27,6 @@ Module ClientGraphics
     Public SpellsWindow As RenderWindow
     Public TmpSpellWindow As RenderWindow
 
-    Public HotbarWindow As RenderWindow
-
     Public SFMLGameFont As SFML.Graphics.Font
 
     Public TileSetImgsGFX() As Bitmap
@@ -156,8 +154,6 @@ Module ClientGraphics
 
         SpellsWindow = New RenderWindow(frmMainGame.pnlSpells.Handle)
         TmpSpellWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
-
-        HotbarWindow = New RenderWindow(frmMainGame.pnlHotBar.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(FONT_NAME)
 
@@ -3048,6 +3044,7 @@ NextLoop:
         If HUDVisible = True Then
             DrawHUD()
             DrawActionPanel()
+            DrawHotbar()
         End If
 
         If pnlCharacterVisible = True Then

@@ -51,13 +51,7 @@ Module ClientGameLogic
                         If frmMainGame.pnlSpells.Visible = True Then
                             DrawPlayerSpells()
                         End If
-                        'If frmMainGame.pnlCharacter.Visible = True Or pnlCharacterVisible = True Then
-                        '    'DrawEquipment()
-                        '    DrawEquipment2()
-                        'End If
-                        If frmMainGame.pnlHotBar.Visible = True Then
-                            DrawHotbar()
-                        End If
+
                         If InBank Then DrawBank()
                         If InShop Then DrawShop()
                         If intrade then drawtrade()
@@ -1092,7 +1086,6 @@ Module ClientGameLogic
         If HideGui = True Then
             frmMainGame.txtChat.Visible = Not frmMainGame.txtChat.Visible
             frmMainGame.txtMeChat.Visible = Not frmMainGame.txtMeChat.Visible
-            frmMainGame.pnlHotBar.Visible = Not frmMainGame.pnlHotBar.Visible
             HideGui = False
         End If
 

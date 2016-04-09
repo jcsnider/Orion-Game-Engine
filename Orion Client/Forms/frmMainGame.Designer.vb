@@ -71,7 +71,6 @@ Partial Class frmMainGame
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
-        Me.pnlHotBar = New System.Windows.Forms.Panel()
         Me.pnlSpellDesc = New System.Windows.Forms.Panel()
         Me.lblSpellRange = New System.Windows.Forms.Label()
         Me.Label60 = New System.Windows.Forms.Label()
@@ -662,16 +661,6 @@ Partial Class frmMainGame
         Me.lblCurrency.TabIndex = 1
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'pnlHotBar
-        '
-        Me.pnlHotBar.BackColor = System.Drawing.Color.Transparent
-        Me.pnlHotBar.BackgroundImage = CType(resources.GetObject("pnlHotBar.BackgroundImage"), System.Drawing.Image)
-        Me.pnlHotBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlHotBar.Location = New System.Drawing.Point(444, 575)
-        Me.pnlHotBar.Name = "pnlHotBar"
-        Me.pnlHotBar.Size = New System.Drawing.Size(239, 36)
-        Me.pnlHotBar.TabIndex = 41
         '
         'pnlSpellDesc
         '
@@ -1604,7 +1593,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlCurrency)
-        Me.Controls.Add(Me.pnlHotBar)
         Me.Controls.Add(Me.pnlDialog)
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlBank)
@@ -1776,7 +1764,6 @@ Partial Class frmMainGame
     Friend WithEvents lblDialogCancel As Windows.Forms.Label
     Friend WithEvents lblDialogOk As Windows.Forms.Label
     Friend WithEvents lblDialogText As Windows.Forms.Label
-    Friend WithEvents pnlHotBar As Windows.Forms.Panel
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label

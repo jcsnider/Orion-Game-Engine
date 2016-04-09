@@ -97,4 +97,7 @@
     Public ExitBtnX As Long = 112
     Public ExitBtnY As Long = 64
 
+    Public HotbarX As Long = 489
+    Public HotbarY As Long = 626
+
 End Module

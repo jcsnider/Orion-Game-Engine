@@ -17,6 +17,31 @@ Public Module ClientHotBar
         Dim sType As Byte
     End Structure
 
+    Public Function IsHotBarSlot(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+
+        IsHotBarSlot = 0
+
+        For i = 1 To MAX_HOTBAR
+
+            With tempRec
+                .top = HotbarY + HotbarTop
+                .bottom = .top + PIC_Y
+                .left = HotbarX + HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MAX_HOTBAR)))
+                .right = .left + PIC_X
+            End With
+
+            If X >= tempRec.left And X <= tempRec.right Then
+                If Y >= tempRec.top And Y <= tempRec.bottom Then
+                    IsHotBarSlot = i
+                    Exit Function
+                End If
+            End If
+        Next
+
+    End Function
+
     Public Sub SendSetHotbarSkill(ByVal Slot As Long, ByVal Skill As Long)
         Dim Buffer As ByteBuffer
 
@@ -45,21 +70,16 @@ Public Module ClientHotBar
     Sub DrawHotbar()
         Dim i As Long, spellnum As Long, spellpic As Long
         Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
-        Dim tmpSprite2 As Sprite = New Sprite(HotBarGFX)
         If NumItems = 0 Then Exit Sub
-
-        HotbarWindow.Clear(ToSFMLColor(frmMainGame.pnlHotBar.BackColor))
 
         With rec2
             .Y = 0
-            .Height = frmMainGame.pnlHotBar.Height
+            .Height = HotBarGFXInfo.height
             .X = 0
-            .Width = frmMainGame.pnlHotBar.Width
+            .Width = HotBarGFXInfo.width
         End With
 
-        tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
-        tmpSprite2.Position = New SFML.Window.Vector2f(0, 0)
-        HotbarWindow.Draw(tmpSprite2)
+        RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, rec2.X, rec2.Y, HotBarGFXInfo.width, HotBarGFXInfo.height)
 
         For i = 1 To MAX_HOTBAR
             spellnum = Player(MyIndex).Hotbar(i).Slot
@@ -80,19 +100,21 @@ Public Module ClientHotBar
                 End If
 
                 With rec_pos
-                    .Y = HotbarTop
+                    .Y = HotbarY + HotbarTop
                     .Height = PIC_Y
-                    .X = HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1))))
+                    .X = HotbarX + HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1))))
                     .Width = PIC_X
                 End With
 
-                Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
-                tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                HotbarWindow.Draw(tmpSprite)
+                'Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
+                'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
+                'tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
+                'HotbarWindow.Draw(tmpSprite)
+
+                RenderTexture(SpellIconsGFX(spellpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
             End If
 
         Next
-        HotbarWindow.Display()
+
     End Sub
 End Module

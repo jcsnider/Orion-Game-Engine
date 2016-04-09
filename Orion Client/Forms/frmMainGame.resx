@@ -118,18 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pnlHotBar.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAPAAAAAkCAIAAAA4mCD8AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        uwAADrsBx/jUNgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC42/Ixj3wAAAV5JREFUeF7t2DFu
-        wkAYBWFOkBuk5iQpCGUafBgK35zfOLKtpWGKfUKrkT5ZLhDjJE8rK6ffaZaGcbpO89f3WRrAPujjxnvY
-        el1ZoQar1HV55Vjv1moP25dbeZMVav3yOp0dNGOFSlYcNGaFSlYcNGaFSlYcNGaFSlYcNGaFSlYcNGaF
-        SlYcNGaFSlYcNGaFSlYcNGaFSlYcNGaFSlbq6qAZK1Sy4gmNWaGSFQeNWaGSFQeNWaGSFQeNWaGSFQeN
-        WaGSleegb8vdMD/S8aYHK1SyUldPaMYKlaz4yoFZoZIVB41ZoZIV36ExK1SyUldPaMYKlaz4yoFZoZIV
-        B41ZoZIVB41ZoZIVB41ZoZIVB41ZoZIVB41ZoZKV56D9PzRhhUpW6rqf0F1t1a6sUINV9hNaGkDNejmh
-        Nz9/99r357hMreYDAc0DJB3/NP9eHq+H5jFK84GA5gHeUb+fyzQ/AFNbWRhOAO6hAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="pnlShop.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANYAAACWCAYAAACiu3ZCAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
