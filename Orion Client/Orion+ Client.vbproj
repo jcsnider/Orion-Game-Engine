@@ -213,6 +213,7 @@
     <Compile Include="Modules\ClientAutoTiles.vb" />
     <Compile Include="Modules\ClientEventSystem.vb" />
     <Compile Include="Modules\ClientGameEditors.vb" />
+    <Compile Include="Modules\ClientGuiFunctions.vb" />
     <Compile Include="Modules\ClientHandleData.vb" />
     <Compile Include="Modules\ClientGlobals.vb" />
     <Compile Include="Modules\ClientGeneral.vb" />
@@ -550,6 +551,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\panel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\GUI\Main\plus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\spells.png">

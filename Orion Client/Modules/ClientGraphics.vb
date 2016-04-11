@@ -14,8 +14,6 @@ Module ClientGraphics
 
     Public TmpItemWindow As RenderWindow
 
-    Public InventoryWindow As RenderWindow
-
     Public ShopWindow As RenderWindow
 
     Public BankWindow As RenderWindow
@@ -82,6 +80,8 @@ Module ClientGraphics
 
     Public CharPanelGFX As Texture
     Public CharPanelGFXInfo As GraphicInfo
+    Public CharPanelPlusGFX As Texture
+    Public CharPanelPlusGFXInfo As GraphicInfo
 
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
@@ -141,8 +141,6 @@ Module ClientGraphics
 
         TmpItemWindow = New RenderWindow(frmMainGame.pnlTmpInv.Handle)
 
-        InventoryWindow = New RenderWindow(frmMainGame.pnlInventory.Handle)
-
         ShopWindow = New RenderWindow(frmMainGame.pnlShopItems.Handle)
 
         BankWindow = New RenderWindow(frmMainGame.pnlBank.Handle)
@@ -174,25 +172,9 @@ Module ClientGraphics
 
         ReDim ResourcesGFX(0 To NumResources)
         ReDim ResourcesGFXInfo(0 To NumResources)
-        'For i = 1 To NumResources
-        '    'Load texture first, dont care about memory streams (just use the filename)
-        '    ResourcesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & i & GFX_EXT)
-
-        '    'Cache the width and height
-        '    ResourcesGFXInfo(i).width = ResourcesGFX(i).Size.X
-        '    ResourcesGFXInfo(i).height = ResourcesGFX(i).Size.Y
-        'Next
 
         ReDim AnimationsGFX(0 To NumAnimations)
         ReDim AnimationsGFXInfo(0 To NumAnimations)
-        'For i = 1 To NumAnimations
-        '    'Load texture first, dont care about memory streams (just use the filename)
-        '    AnimationsGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "animations\" & i & GFX_EXT)
-
-        '    'Cache the width and height
-        '    AnimationsGFXInfo(i).width = AnimationsGFX(i).Size.X
-        '    AnimationsGFXInfo(i).height = AnimationsGFX(i).Size.Y
-        'Next
 
         ReDim SpellIconsGFX(0 To NumSpellIcons)
         ReDim SpellIconsGFXInfo(0 To NumSpellIcons)
@@ -317,6 +299,16 @@ Module ClientGraphics
             'Cache the width and height
             CharPanelGFXInfo.width = CharPanelGFX.Size.X
             CharPanelGFXInfo.height = CharPanelGFX.Size.Y
+        End If
+
+        CharPanelPlusGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\plus" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            CharPanelPlusGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\plus" & GFX_EXT)
+
+            'Cache the width and height
+            CharPanelPlusGFXInfo.width = CharPanelPlusGFX.Size.X
+            CharPanelPlusGFXInfo.height = CharPanelPlusGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -2228,24 +2220,13 @@ Module ClientGraphics
 
     Sub DrawEquipment()
         Dim i As Long, itemnum As Long, itempic As Long
-        Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle, rec_pos As Rectangle
         Dim tmpSprite2 As Sprite = New Sprite(CharPanelGFX)
 
         If NumItems = 0 Then Exit Sub
 
         'first render panel
-        With rec2
-            .Y = 0
-            .Height = CharPanelGFXInfo.height
-            .X = 0
-            .Width = CharPanelGFXInfo.width
-        End With
-
-        tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
-        tmpSprite2.Position = New SFML.Window.Vector2f(CharWindowX, CharWindowY)
-        GameWindow.Draw(tmpSprite2)
-
-        'RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, 0, 0, CharPanelGFXInfo.width, CharPanelGFXInfo.height)
 
         For i = 1 To Equipment.Equipment_Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
@@ -2310,17 +2291,17 @@ Module ClientGraphics
 
         If GetPlayerPOINTS(MyIndex) > 0 Then
             'strength upgrade
-            DrawText(CharWindowX + 69, CharWindowY + 89, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + StrengthUpgradeX, CharWindowY + StrengthUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'endurance upgrade
-            DrawText(CharWindowX + 157, CharWindowY + 89, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + EnduranceUpgradeX, CharWindowY + EnduranceUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'vitality upgrade
-            DrawText(CharWindowX + 69, CharWindowY + 115, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + VitalityUpgradeX, CharWindowY + VitalityUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'intelligence upgrade
-            DrawText(CharWindowX + 69, CharWindowY + 143, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + IntellectUpgradeX, CharWindowY + IntellectUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'willpower upgrade
-            DrawText(CharWindowX + 157, CharWindowY + 115, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + WillPowerUpgradeX, CharWindowY + WillPowerUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'spirit upgrade
-            DrawText(CharWindowX + 157, CharWindowY + 143, "+", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + SpiritUpgradeX, CharWindowY + SpiritUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
         End If
     End Sub
 
@@ -2373,23 +2354,13 @@ Module ClientGraphics
     Sub DrawInventory()
         Dim i As Long, X As Long, Y As Long, itemnum As Long, itempic As Long
         Dim Amount As String
-        Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle, rec_pos As Rectangle
         Dim colour As SFML.Graphics.Color
-        Dim tmpSprite2 As Sprite = New Sprite(InvPanelGFX)
 
         If Not InGame Then Exit Sub
-        InventoryWindow.Clear(ToSFMLColor(frmMainGame.pnlInventory.BackColor))
 
-        With rec2
-            .Y = 0
-            .Height = frmMainGame.pnlInventory.Height
-            .X = 0
-            .Width = frmMainGame.pnlInventory.Width
-        End With
-
-        tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
-        tmpSprite2.Position = New SFML.Window.Vector2f(0, 0)
-        InventoryWindow.Draw(tmpSprite2)
+        'first render panel
+        RenderTexture(InvPanelGFX, GameWindow, InvWindowX, InvWindowY, 0, 0, InvPanelGFXInfo.width, InvPanelGFXInfo.height)
 
         For i = 1 To MAX_INV
             itemnum = GetPlayerInvItemNum(MyIndex, i)
@@ -2422,16 +2393,16 @@ Module ClientGraphics
                         End With
 
                         With rec_pos
-                            .Y = InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
+                            .Y = InvWindowY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
                             .Height = PIC_Y
-                            .X = InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                            .X = InvWindowX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
                             .Width = PIC_X
                         End With
 
                         Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                         tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                        InventoryWindow.Draw(tmpSprite)
+                        GameWindow.Draw(tmpSprite)
 
 
                         ' If item is a stack - draw the amount you have
@@ -2451,7 +2422,7 @@ Module ClientGraphics
                                 colour = SFML.Graphics.Color.Green
                             End If
 
-                            DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, InventoryWindow)
+                            DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
 
                             ' Check if it's gold, and update the label
                             If GetPlayerInvItemNum(MyIndex, i) = 1 Then '1 = gold :P
@@ -2465,7 +2436,6 @@ NextLoop:
         Next
 
         DrawAnimatedInvItems()
-        InventoryWindow.Display()
     End Sub
 
     Sub DrawAnimatedInvItems()
@@ -2546,7 +2516,7 @@ NextLoop:
                         Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                         tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                        InventoryWindow.Draw(tmpSprite)
+                        GameWindow.Draw(tmpSprite)
 
 
                         ' If item is a stack - draw the amount you have
@@ -2555,7 +2525,7 @@ NextLoop:
                             X = rec_pos.Left - 4
                             Amount = CStr(GetPlayerInvItemValue(MyIndex, i))
                             ' Draw currency but with k, m, b etc. using a convertion function
-                            DrawText(X, Y, ConvertCurrency(Amount), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, InventoryWindow)
+                            DrawText(X, Y, ConvertCurrency(Amount), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
                             ' Check if it's gold, and update the label
                             If GetPlayerInvItemNum(MyIndex, i) = 1 Then '1 = gold :P
                                 GoldAmount = Format(Amount, "#,###,###,###")
@@ -3049,6 +3019,10 @@ NextLoop:
 
         If pnlCharacterVisible = True Then
             DrawEquipment()
+        End If
+
+        If pnlInventoryVisible = True Then
+            DrawInventory()
         End If
     End Sub
 End Module

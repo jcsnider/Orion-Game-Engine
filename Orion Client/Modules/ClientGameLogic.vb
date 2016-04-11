@@ -45,9 +45,7 @@ Module ClientGameLogic
                 ' Update inv animation
                 If NumItems > 0 Then
                     If tmr100 < Tick Then
-                        If frmMainGame.pnlInventory.Visible = True Then
-                            DrawInventory()
-                        End If
+
                         If frmMainGame.pnlSpells.Visible = True Then
                             DrawPlayerSpells()
                         End If

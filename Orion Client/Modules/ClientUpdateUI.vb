@@ -24,6 +24,7 @@
     'GUI drawing
     Public HUDVisible As Boolean
     Public pnlCharacterVisible As Boolean
+    Public pnlInventoryVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -78,6 +79,18 @@
     'Character window Coordinates
     Public CharWindowX As Long = 22
     Public CharWindowY As Long = 147
+    Public StrengthUpgradeX As Long = 69
+    Public StrengthUpgradeY As Long = 93
+    Public EnduranceUpgradeX As Long = 157
+    Public EnduranceUpgradeY As Long = 93
+    Public VitalityUpgradeX As Long = 69
+    Public VitalityUpgradeY As Long = 118
+    Public IntellectUpgradeX As Long = 69
+    Public IntellectUpgradeY As Long = 146
+    Public WillPowerUpgradeX As Long = 157
+    Public WillPowerUpgradeY As Long = 118
+    Public SpiritUpgradeX As Long = 157
+    Public SpiritUpgradeY As Long = 146
 
     'Action Panel Coordinates
     Public ActionPanelX As Long = 747
@@ -97,7 +110,17 @@
     Public ExitBtnX As Long = 112
     Public ExitBtnY As Long = 64
 
+    'Hotbar Coordinates
     Public HotbarX As Long = 489
     Public HotbarY As Long = 626
+
+    'Inventory window Coordinates
+    Public InvWindowX As Long = 22
+    Public InvWindowY As Long = 147
+    Public Const InvTop As Byte = 8
+    Public Const InvLeft As Byte = 8
+    Public Const InvOffsetY As Byte = 4
+    Public Const InvOffsetX As Byte = 4
+    Public Const InvColumns As Byte = 5
 
 End Module

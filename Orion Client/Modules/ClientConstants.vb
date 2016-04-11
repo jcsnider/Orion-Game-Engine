@@ -6,13 +6,6 @@
     'Chatbubble
     Public Const ChatBubbleWidth As Long = 200
 
-    ' Inventory constants
-    Public Const InvTop As Byte = 8
-    Public Const InvLeft As Byte = 8
-    Public Const InvOffsetY As Byte = 4
-    Public Const InvOffsetX As Byte = 4
-    Public Const InvColumns As Byte = 5
-
     ' Bank constants
     Public Const BankTop As Byte = 8
     Public Const BankLeft As Byte = 8

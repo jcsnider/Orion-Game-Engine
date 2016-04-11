@@ -37,7 +37,6 @@ Partial Class frmMainGame
         Me.optMOff = New System.Windows.Forms.RadioButton()
         Me.optMOn = New System.Windows.Forms.RadioButton()
         Me.pnlSpells = New System.Windows.Forms.Panel()
-        Me.pnlInventory = New System.Windows.Forms.Panel()
         Me.pnlItemDesc = New System.Windows.Forms.Panel()
         Me.lblItemDescType = New System.Windows.Forms.Label()
         Me.lblItemDescCost = New System.Windows.Forms.Label()
@@ -312,16 +311,6 @@ Partial Class frmMainGame
         Me.pnlSpells.Size = New System.Drawing.Size(204, 275)
         Me.pnlSpells.TabIndex = 12
         Me.pnlSpells.Visible = False
-        '
-        'pnlInventory
-        '
-        Me.pnlInventory.BackColor = System.Drawing.Color.DimGray
-        Me.pnlInventory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlInventory.Location = New System.Drawing.Point(22, 147)
-        Me.pnlInventory.Name = "pnlInventory"
-        Me.pnlInventory.Size = New System.Drawing.Size(204, 275)
-        Me.pnlInventory.TabIndex = 13
-        Me.pnlInventory.Visible = False
         '
         'pnlItemDesc
         '
@@ -1605,7 +1594,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlMapreport)
-        Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlSpells)
         Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlTrade)
@@ -1655,7 +1643,6 @@ Partial Class frmMainGame
     Friend WithEvents optSOff As System.Windows.Forms.RadioButton
     Friend WithEvents optSOn As System.Windows.Forms.RadioButton
     Friend WithEvents pnlSpells As System.Windows.Forms.Panel
-    Friend WithEvents pnlInventory As System.Windows.Forms.Panel
     Friend WithEvents pnlItemDesc As System.Windows.Forms.Panel
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label

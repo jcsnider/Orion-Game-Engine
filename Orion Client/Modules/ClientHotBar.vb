@@ -69,17 +69,10 @@ Public Module ClientHotBar
 
     Sub DrawHotbar()
         Dim i As Long, spellnum As Long, spellpic As Long
-        Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle, rec_pos As Rectangle
         If NumItems = 0 Then Exit Sub
 
-        With rec2
-            .Y = 0
-            .Height = HotBarGFXInfo.height
-            .X = 0
-            .Width = HotBarGFXInfo.width
-        End With
-
-        RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, rec2.X, rec2.Y, HotBarGFXInfo.width, HotBarGFXInfo.height)
+        RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.width, HotBarGFXInfo.height)
 
         For i = 1 To MAX_HOTBAR
             spellnum = Player(MyIndex).Hotbar(i).Slot
@@ -105,11 +98,6 @@ Public Module ClientHotBar
                     .X = HotbarX + HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1))))
                     .Width = PIC_X
                 End With
-
-                'Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
-                'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                'tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                'HotbarWindow.Draw(tmpSprite)
 
                 RenderTexture(SpellIconsGFX(spellpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
             End If
