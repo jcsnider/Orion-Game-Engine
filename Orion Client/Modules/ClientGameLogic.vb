@@ -46,13 +46,9 @@ Module ClientGameLogic
                 If NumItems > 0 Then
                     If tmr100 < Tick Then
 
-                        If frmMainGame.pnlSpells.Visible = True Then
-                            DrawPlayerSpells()
-                        End If
-
                         If InBank Then DrawBank()
                         If InShop Then DrawShop()
-                        If intrade then drawtrade()
+                        If InTrade Then DrawTrade()
                         tmr100 = Tick + 100
                     End If
                 End If

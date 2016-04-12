@@ -1147,6 +1147,7 @@ Module ServerTCP
         Buffer.WriteLong(ServerPackets.SPlayerData)
         Buffer.WriteLong(Index)
         Buffer.WriteString(GetPlayerName(Index))
+        Buffer.WriteLong(GetPlayerClass(Index))
         Buffer.WriteLong(GetPlayerLevel(Index))
         Buffer.WriteLong(GetPlayerPOINTS(Index))
         Buffer.WriteLong(GetPlayerSprite(Index))

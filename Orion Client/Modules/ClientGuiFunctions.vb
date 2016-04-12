@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
-        Dim x2 As Long, y2 As Long, eqNum As Long, InvNum As Long
+        Dim x2 As Long, y2 As Long, eqNum As Long, InvNum As Long, spellslot As Long
 
         If InMapEditor Then Exit Sub
 
@@ -13,8 +13,8 @@ Public Module ClientGuiFunctions
                 If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
                     eqNum = IsEqItem(X, Y)
                     If eqNum <> 0 Then
-                        y2 = Y + CharWindowY - frmMainGame.pnlItemDesc.Height - 2
-                        x2 = X + CharWindowX + 2
+                        y2 = CharWindowY
+                        x2 = CharWindowX - frmMainGame.pnlItemDesc.Width - 2
                         UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, x2, y2)
                         LastItemDesc = GetPlayerEquipment(MyIndex, eqNum) ' set it so you don't re-set values
                         Exit Sub
@@ -45,14 +45,41 @@ Public Module ClientGuiFunctions
                                 Exit Sub
                             End If
                         Next
-                        y2 = Y + InvWindowY - frmMainGame.pnlItemDesc.Height - 2
-                        x2 = X + InvWindowX + 2
+                        y2 = InvWindowY ' - frmMainGame.pnlItemDesc.Height - 2
+                        x2 = InvWindowX - frmMainGame.pnlItemDesc.Width - 2
                         UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum), x2, y2)
                         LastItemDesc = GetPlayerInvItemNum(MyIndex, InvNum) ' set it so you don't re-set values
                         Exit Sub
                     Else
                         frmMainGame.pnlItemDesc.Visible = False
                         LastItemDesc = 0 ' no item was last loaded
+                    End If
+                End If
+
+            End If
+        ElseIf pnlSpellsVisible = True Then
+            If AboveSpellpanel(X, Y) Then
+                SpellX = X
+                SpellY = Y
+
+                If DragSpellSlotNum > 0 Then
+                    If InTrade Then Exit Sub
+                    If InBank Or InShop Then Exit Sub
+                    DrawSpellItem(X, Y)
+                    frmMainGame.pnlSpellDesc.Visible = False
+                    LastSpellDesc = 0 ' no item was last loaded
+                Else
+                    spellslot = IsPlayerSpell(X, Y)
+
+                    If spellslot <> 0 Then
+                        y2 = SpellWindowY ' - frmMainGame.pnlItemDesc.Height - 2
+                        x2 = SpellWindowX - frmMainGame.pnlSpellDesc.Width - 2
+                        UpdateSpellWindow(PlayerSpells(spellslot), x2, y2)
+                        LastSpellDesc = PlayerSpells(spellslot)
+                        Exit Sub
+                    Else
+                        frmMainGame.pnlSpellDesc.Visible = False
+                        LastSpellDesc = 0
                     End If
                 End If
 
@@ -79,7 +106,7 @@ Public Module ClientGuiFunctions
                         PlaySound("Click.ogg")
                         pnlInventoryVisible = Not pnlInventoryVisible
                         pnlCharacterVisible = False
-                        frmMainGame.pnlSpells.Visible = False
+                        pnlSpellsVisible = False
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Skills
@@ -89,8 +116,7 @@ Public Module ClientGuiFunctions
                         Buffer.WriteLong(ClientPackets.CSpells)
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
-                        frmMainGame.pnlSpells.Visible = Not frmMainGame.pnlSpells.Visible
-                        frmMainGame.pnlSpells.BringToFront()
+                        pnlSpellsVisible = Not pnlSpellsVisible
                         pnlInventoryVisible = False
                         pnlCharacterVisible = False
                         frmMainGame.pnlOptions.Visible = False
@@ -101,7 +127,7 @@ Public Module ClientGuiFunctions
                         SendRequestPlayerData()
                         pnlCharacterVisible = Not pnlCharacterVisible
                         pnlInventoryVisible = False
-                        frmMainGame.pnlSpells.Visible = False
+                        pnlSpellsVisible = False
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Quest
@@ -126,7 +152,7 @@ Public Module ClientGuiFunctions
                         PlaySound("Click.ogg")
                         pnlCharacterVisible = False
                         pnlInventoryVisible = False
-                        frmMainGame.pnlSpells.Visible = False
+                        pnlSpellsVisible = False
                         frmMainGame.pnlOptions.BringToFront()
                         frmMainGame.pnlOptions.Visible = Not frmMainGame.pnlOptions.Visible
                         CheckGuiClick = True
@@ -163,8 +189,7 @@ Public Module ClientGuiFunctions
                         Buffer.WriteLong(ClientPackets.CSpells)
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
-                        frmMainGame.pnlSpells.Visible = True
-                        frmMainGame.pnlSpells.BringToFront()
+                        pnlSpellsVisible = True
                         AddText("Click on the skill you want to place here")
                         SelSpellSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
@@ -226,9 +251,9 @@ Public Module ClientGuiFunctions
                     CheckGuiClick = True
                 End If
             End If
-        End If
 
-        If pnlInventoryVisible Then
+            'Inventory panel
+        ElseIf pnlInventoryVisible Then
             If AboveInvpanel(X, Y) Then
                 InvNum = IsInvItem(e.Location.X, e.Location.Y)
 
@@ -239,6 +264,7 @@ Public Module ClientGuiFunctions
 
                         If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_FURNITURE Then
                             FurnitureSelected = InvNum
+                            CheckGuiClick = True
                         End If
 
                     End If
@@ -247,10 +273,12 @@ Public Module ClientGuiFunctions
             End If
         End If
 
+
+
     End Function
 
     Public Function CheckGuiDoubleClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long
+        Dim InvNum As Long, spellnum As Long
         Dim Value As Long
         Dim multiplier As Double
         Dim i As Long
@@ -317,12 +345,23 @@ Public Module ClientGuiFunctions
                     Exit Function
                 End If
             End If
+            'Spell panel
+        ElseIf pnlSpellsVisible = True Then
+            If AboveSpellpanel(X, Y) Then
+
+                spellnum = IsPlayerSpell(SpellX, SpellY)
+
+                If spellnum <> 0 Then
+                    CastSpell(spellnum)
+                    Exit Function
+                End If
+            End If
         End If
 
     End Function
 
     Public Function CheckGuiMouseUp(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim i As Long, rec_pos As Rectangle
+        Dim i As Long, rec_pos As Rectangle, buffer As ByteBuffer
         'Inventory
         If pnlInventoryVisible Then
             If AboveInvpanel(X, Y) Then
@@ -355,13 +394,63 @@ Public Module ClientGuiFunctions
 
                 DragInvSlotNum = 0
                 frmMainGame.pnlTmpInv.Visible = False
+            Else
+                If FurnitureSelected > 0 Then
+                    If Player(MyIndex).InHouse = MyIndex Then
+                        If Item(PlayerInv(FurnitureSelected).Num).Type = ITEM_TYPE_FURNITURE Then
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CPlaceFurniture)
+                            i = CurX
+                            Buffer.WriteLong(i)
+                            i = CurY
+                            Buffer.WriteLong(i)
+                            Buffer.WriteLong(FurnitureSelected)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+
+                            FurnitureSelected = 0
+                        End If
+                    End If
+                End If
+            End If
+        ElseIf pnlspellsVisible Then
+            If AboveSpellpanel(X, Y) Then
+                If InTrade > 0 Then Exit Function
+                If InBank Or InShop Then Exit Function
+
+                If DragSpellSlotNum > 0 Then
+
+                    For i = 1 To MAX_PLAYER_SPELLS
+
+                        With rec_pos
+                            .Y = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                            .Height = PIC_Y
+                            .X = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                            .Width = PIC_X
+                        End With
+
+                        If e.Location.X >= rec_pos.Left And e.Location.X <= rec_pos.Right Then
+                            If e.Location.Y >= rec_pos.Top And e.Location.Y <= rec_pos.Bottom Then '
+                                If DragSpellSlotNum <> i Then
+                                    'SendChangeSpellSlots(DragSpellSlotNum, i)
+                                    Exit For
+                                End If
+                            End If
+                        End If
+
+                    Next
+
+                End If
+
+                DragSpellSlotNum = 0
+                frmMainGame.pnlTmpSkill.Visible = False
             End If
         End If
 
     End Function
 
     Public Function CheckGuiMouseDown(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long
+        Dim InvNum As Long, spellnum As Long
 
         'Inventory
         If pnlInventoryVisible Then
@@ -396,7 +485,31 @@ Public Module ClientGuiFunctions
                 frmMainGame.txtMeChat.Focus()
 
             End If
+        ElseIf pnlSpellsVisible = True Then
+            If AboveSpellpanel(X, Y) Then
+                spellnum = IsPlayerSpell(e.Location.X, e.Location.Y)
+
+                If e.Button = MouseButtons.Left Then
+                    If spellnum <> 0 Then
+                        If InTrade Then Exit Function
+
+                        DragSpellSlotNum = spellnum
+
+                        If SelSpellSlot = True Then
+                            SendSetHotbarSkill(SelHotbarSlot, spellnum)
+                        End If
+                    End If
+                ElseIf e.Button = MouseButtons.Right Then ' right click
+
+                    If spellnum <> 0 Then
+                        ForgetSpell(spellnum)
+                        Exit Function
+                    End If
+                End If
+            End If
         End If
+
+
     End Function
 
 #Region "Support Functions"
@@ -410,7 +523,7 @@ Public Module ClientGuiFunctions
             If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
 
                 With tempRec
-                    .top = CharWindowY + EqTop
+                    .top = CharWindowY + EqTop + ((EqOffsetY + 32) * ((i - 1) \ EqColumns))
                     .bottom = .top + PIC_Y
                     .left = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
                     .right = .left + PIC_X
@@ -456,6 +569,35 @@ Public Module ClientGuiFunctions
 
     End Function
 
+    Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+
+        IsPlayerSpell = 0
+
+        For i = 1 To MAX_PLAYER_SPELLS
+
+            If PlayerSpells(i) > 0 And PlayerSpells(i) <= MAX_PLAYER_SPELLS Then
+
+                With tempRec
+                    .top = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                    .bottom = .top + PIC_Y
+                    .left = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                    .right = .left + PIC_X
+                End With
+
+                If X >= tempRec.left And X <= tempRec.right Then
+                    If Y >= tempRec.top And Y <= tempRec.bottom Then
+                        IsPlayerSpell = i
+                        Exit Function
+                    End If
+                End If
+            End If
+
+        Next
+
+    End Function
+
     Function AboveActionPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveActionPanel = False
 
@@ -492,6 +634,16 @@ Public Module ClientGuiFunctions
         If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
             If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
                 AboveCharpanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveSpellpanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveSpellpanel = False
+
+        If X > SpellWindowX And X < SpellWindowX + SpellPanelGFXInfo.width Then
+            If Y > SpellWindowY And Y < SpellWindowY + SpellPanelGFXInfo.height Then
+                AboveSpellpanel = True
             End If
         End If
     End Function

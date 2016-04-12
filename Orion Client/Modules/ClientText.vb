@@ -1,6 +1,17 @@
-﻿Imports SFML.Graphics
+﻿Imports System.Text
+Imports SFML.Graphics
+
+
 
 Module ClientText
+    Public Const MaxChatDisplayLines As Byte = 8
+    Public Const ChatLineSpacing As Byte = 12 ' Should be same height as font
+    Public Const MyChatTextLimit As Integer = 70
+    Public Const MyCreateGuildNameLimit As Integer = 17
+    Public Const MyAmountValueLimit As Integer = 3
+    Public Const AllChatLineWidth As Integer = 70
+    Public Const MyChatLineWidth As Integer = 65
+
     'DirectX Text Drawing to GraphicsCard
     Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow)
         Dim mystring As Text = New Text(text, SFMLGameFont)
@@ -110,8 +121,8 @@ Module ClientText
 
         If InMapEditor Then Exit Sub
 
-        color = color.Yellow
-        backcolor = color.Black
+        color = Color.Yellow
+        backcolor = Color.Black
 
         Name = Trim$(Map.MapEvents(Index).Name)
         ' calc pos
@@ -152,7 +163,7 @@ Module ClientText
                     End If
                     Exit For
                 End If
-            ElseIf Player(MyIndex).PlayerQuest(i).status = QUEST_STARTED Then
+            ElseIf Player(MyIndex).PlayerQuest(i).Status = QUEST_STARTED Then
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[*]"
                     TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth((Trim$("[*]"))) + 8
@@ -353,126 +364,5 @@ Module ClientText
 
     'End Sub
 
-    Public Sub WordWrap_Array(ByVal Text As String, ByVal MaxLineLen As Long, ByRef theArray() As String)
-        Dim lineCount As Long, i As Long, size As Long, lastSpace As Long, b As Long
 
-        'Too small of text
-
-        If Len(Text) < 2 Then
-            ReDim theArray(0 To 1)
-            theArray(1) = Text
-            Exit Sub
-        End If
-        ' default values
-        b = 1
-        lastSpace = 1
-        size = 0
-        For i = 1 To Len(Text)
-            ' if it's a space, store it
-            Select Case Mid$(Text, i, 1)
-                Case " " : lastSpace = i
-                Case "_" : lastSpace = i
-                Case "-" : lastSpace = i
-            End Select
-            'Add up the size
-            size = size + getWidth(Asc(Mid$(Text, i, 1)))
-            'Check for too large of a size
-            If size > MaxLineLen Then
-                'Check if the last space was too far back
-                If i - lastSpace > 12 Then
-                    'Too far away to the last space, so break at the last character
-                    lineCount = lineCount + 1
-                    ReDim Preserve theArray(0 To lineCount)
-                    theArray(lineCount) = Trim$(Mid$(Text, b, (i - 1) - b))
-                    b = i - 1
-                    size = 0
-                Else
-                    'Break at the last space to preserve the word
-                    lineCount = lineCount + 1
-                    ReDim Preserve theArray(0 To lineCount)
-                    theArray(lineCount) = Trim$(Mid$(Text, b, lastSpace - b))
-                    b = lastSpace + 1
-                    'Count all the words we ignored (the ones that weren't printed, but are before "i")
-                    size = getWidth(Mid$(Text, lastSpace, i - lastSpace))
-                End If
-            End If
-            ' Remainder
-            If i = Len(Text) Then
-                If b <> i Then
-                    lineCount = lineCount + 1
-                    ReDim Preserve theArray(0 To lineCount)
-                    theArray(lineCount) = theArray(lineCount) & Mid$(Text, b, i)
-                End If
-            End If
-        Next
-
-    End Sub
-
-    Public Function WordWrap(ByVal Text As String, ByVal MaxLineLen As Integer) As String
-        Dim TempSplit() As String
-        Dim TSLoop As Long
-        Dim lastSpace As Long
-        Dim size As Long
-        Dim i As Long
-        Dim b As Long
-
-        WordWrap = ""
-
-        'Too small of text
-        If Len(Text) < 2 Then
-            WordWrap = Text
-            Exit Function
-        End If
-
-        'Check if there are any line breaks - if so, we will support them
-        TempSplit = Split(Text, vbNewLine)
-        For TSLoop = 0 To UBound(TempSplit)
-            'Clear the values for the new line
-            size = 0
-            b = 1
-            lastSpace = 1
-            'Add back in the vbNewLines
-            If TSLoop < UBound(TempSplit) Then TempSplit(TSLoop) = TempSplit(TSLoop) & vbNewLine
-            'Only check lines with a space
-            If InStr(1, TempSplit(TSLoop), " ") Or InStr(1, TempSplit(TSLoop), "-") Or InStr(1, TempSplit(TSLoop), "_") Then
-                'Loop through all the characters
-                For i = 1 To Len(TempSplit(TSLoop))
-                    'If it is a space, store it so we can easily break at it
-                    Select Case Mid$(TempSplit(TSLoop), i, 1)
-                        Case " " : lastSpace = i
-                        Case "_" : lastSpace = i
-                        Case "-" : lastSpace = i
-                    End Select
-                    'Add up the size
-                    size = size + getWidth(Asc(Mid$(TempSplit(TSLoop), i, 1)))
-
-                    'Check for too large of a size
-                    If size > MaxLineLen Then
-                        'Check if the last space was too far back
-                        If i - lastSpace > 12 Then
-                            'Too far away to the last space, so break at the last character
-                            WordWrap = WordWrap & Trim$(Mid$(TempSplit(TSLoop), b, (i - 1) - b)) & vbNewLine
-                            b = i - 1
-                            size = 0
-                        Else
-                            'Break at the last space to preserve the word
-                            WordWrap = WordWrap & Trim$(Mid$(TempSplit(TSLoop), b, lastSpace - b)) & vbNewLine
-                            b = lastSpace + 1
-                            'Count all the words we ignored (the ones that weren't printed, but are before "i")
-                            size = getWidth(Mid$(TempSplit(TSLoop), lastSpace, i - lastSpace))
-                        End If
-                    End If
-                    'This handles the remainder
-                    If i = Len(TempSplit(TSLoop)) Then
-                        If b <> i Then
-                            WordWrap = WordWrap & Mid$(TempSplit(TSLoop), b, i)
-                        End If
-                    End If
-                Next i
-            Else
-                WordWrap = WordWrap & TempSplit(TSLoop)
-            End If
-        Next
-
-    End Function
 End Module

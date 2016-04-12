@@ -234,28 +234,9 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
-        Dim buffer As ByteBuffer, I As Long
 
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
-        If FurnitureSelected > 0 Then
-            If Player(MyIndex).InHouse = MyIndex Then
-                If Item(PlayerInv(FurnitureSelected).Num).Type = ITEM_TYPE_FURNITURE Then
-                    buffer = New ByteBuffer
-                    buffer.WriteLong(ClientPackets.CPlaceFurniture)
-                    I = CurX
-                    buffer.WriteLong(I)
-                    I = CurY
-                    buffer.WriteLong(I)
-                    buffer.WriteLong(FurnitureSelected)
-                    SendData(buffer.ToArray)
-                    buffer = Nothing
-
-                    FurnitureSelected = 0
-                End If
-            End If
-        End If
 
         CheckGuiMouseUp(e.X, e.Y, e)
     End Sub
@@ -857,102 +838,6 @@ Public Class frmMainGame
     Private Sub lblDeclineTrade_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblDeclineTrade.Click
         DeclineTrade()
     End Sub
-#End Region
-
-#Region "Spell Code"
-    Private Sub pnlSpells_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlSpells.DoubleClick
-        Dim spellnum As Long
-
-        spellnum = IsPlayerSpell(SpellX, SpellY)
-
-        If spellnum <> 0 Then
-            Call CastSpell(spellnum)
-            Exit Sub
-        End If
-    End Sub
-
-    Private Sub pnlSpells_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlSpells.MouseDown
-        Dim spellnum As Long
-
-        spellnum = IsPlayerSpell(e.Location.X, e.Location.Y)
-
-        If e.Button = MouseButtons.Left Then
-            If spellnum <> 0 Then
-                If InTrade Then Exit Sub
-
-                DragSpellSlotNum = spellnum
-
-                If SelSpellSlot = True Then
-                    SendSetHotbarSkill(SelHotbarSlot, spellnum)
-                End If
-            End If
-        ElseIf e.Button = MouseButtons.Right Then ' right click
-
-            If spellnum <> 0 Then
-                Call ForgetSpell(spellnum)
-                Exit Sub
-            End If
-        End If
-    End Sub
-
-    Private Sub pnlSpells_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlSpells.MouseMove
-        Dim spellslot As Long
-        Dim x2 As Long, y2 As Long
-        Dim x As Long, y As Long
-
-        x = e.Location.X
-        y = e.Location.Y
-
-        SpellX = x
-        SpellY = y
-
-        spellslot = IsPlayerSpell(x, y)
-
-        If spellslot <> 0 Then
-            x2 = x + pnlSpells.Left + 2
-            y2 = y + pnlSpells.Top + 2
-            UpdateSpellWindow(PlayerSpells(spellslot), x2, y2)
-            LastSpellDesc = PlayerSpells(spellslot)
-            Exit Sub
-        End If
-
-        pnlSpellDesc.Visible = False
-        LastSpellDesc = 0
-    End Sub
-
-    Private Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
-        Dim tempRec As RECT
-        Dim i As Long
-
-        IsPlayerSpell = 0
-
-        For i = 1 To MAX_PLAYER_SPELLS
-
-            If PlayerSpells(i) > 0 And PlayerSpells(i) <= MAX_PLAYER_SPELLS Then
-
-                With tempRec
-                    .top = SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
-                    .bottom = .top + PIC_Y
-                    .left = SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
-                    .right = .left + PIC_X
-                End With
-
-                If X >= tempRec.left And X <= tempRec.right Then
-                    If Y >= tempRec.top And Y <= tempRec.bottom Then
-                        IsPlayerSpell = i
-                        Exit Function
-                    End If
-                End If
-            End If
-
-        Next
-
-    End Function
-
-    Private Sub pnlSpells_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlSpells.Paint
-        'do nothing ;)
-    End Sub
-
 #End Region
 
 #Region "Quest Code"

@@ -25,6 +25,7 @@
     Public HUDVisible As Boolean
     Public pnlCharacterVisible As Boolean
     Public pnlInventoryVisible As Boolean
+    Public pnlSpellsVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -64,10 +65,10 @@
     Public Tradername As String
 
     'UI Panels Coordinates
-    Public HUDWindowX As Long = 1
-    Public HUDWindowY As Long = 1
-    Public HUDFaceX As Long = 5
-    Public HUDFaceY As Long = 5
+    Public HUDWindowX As Long = 0
+    Public HUDWindowY As Long = 0
+    Public HUDFaceX As Long = 4
+    Public HUDFaceY As Long = 4
     'bars
     Public HUDHPBarX As Long = 110
     Public HUDHPBarY As Long = 10
@@ -77,20 +78,26 @@
     Public HUDEXPBarY As Long = 50
 
     'Character window Coordinates
-    Public CharWindowX As Long = 22
-    Public CharWindowY As Long = 147
+    Public CharWindowX As Long = 748
+    Public CharWindowY As Long = 275
+    Public Const EqTop As Byte = 85
+    Public Const EqLeft As Byte = 8
+    Public Const EqOffsetX As Byte = 125
+    Public Const EqOffsetY As Byte = 5
+    Public Const EqColumns As Byte = 2
+
     Public StrengthUpgradeX As Long = 69
-    Public StrengthUpgradeY As Long = 93
+    Public StrengthUpgradeY As Long = 221
     Public EnduranceUpgradeX As Long = 157
-    Public EnduranceUpgradeY As Long = 93
+    Public EnduranceUpgradeY As Long = 221
     Public VitalityUpgradeX As Long = 69
-    Public VitalityUpgradeY As Long = 118
+    Public VitalityUpgradeY As Long = 237
     Public IntellectUpgradeX As Long = 69
-    Public IntellectUpgradeY As Long = 146
+    Public IntellectUpgradeY As Long = 252
     Public WillPowerUpgradeX As Long = 157
-    Public WillPowerUpgradeY As Long = 118
+    Public WillPowerUpgradeY As Long = 237
     Public SpiritUpgradeX As Long = 157
-    Public SpiritUpgradeY As Long = 146
+    Public SpiritUpgradeY As Long = 252
 
     'Action Panel Coordinates
     Public ActionPanelX As Long = 747
@@ -115,12 +122,21 @@
     Public HotbarY As Long = 626
 
     'Inventory window Coordinates
-    Public InvWindowX As Long = 22
-    Public InvWindowY As Long = 147
-    Public Const InvTop As Byte = 8
-    Public Const InvLeft As Byte = 8
-    Public Const InvOffsetY As Byte = 4
-    Public Const InvOffsetX As Byte = 4
+    Public InvWindowX As Long = 748
+    Public InvWindowY As Long = 275
+    Public Const InvTop As Byte = 9
+    Public Const InvLeft As Byte = 10
+    Public Const InvOffsetY As Byte = 5
+    Public Const InvOffsetX As Byte = 6
     Public Const InvColumns As Byte = 5
 
+    'Spell window Coordinates
+    Public SpellWindowX As Long = 748
+    Public SpellWindowY As Long = 275
+    ' spells constants
+    Public Const SpellTop As Byte = 9
+    Public Const SpellLeft As Byte = 10
+    Public Const SpellOffsetY As Byte = 5
+    Public Const SpellOffsetX As Byte = 6
+    Public Const SpellColumns As Byte = 5
 End Module

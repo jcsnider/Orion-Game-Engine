@@ -468,6 +468,11 @@ Module ClientDataBase
         Player(Index).Name = Name
     End Sub
 
+    Sub SetPlayerClass(ByVal Index As Long, ByVal Classnum As Long)
+        If Index > MAX_PLAYERS Then Exit Sub
+        Player(Index).Classes = Classnum
+    End Sub
+
     Sub SetPlayerPOINTS(ByVal Index As Long, ByVal POINTS As Long)
 
         If Index > MAX_PLAYERS Then Exit Sub
@@ -590,6 +595,12 @@ Module ClientDataBase
         GetPlayerSprite = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerSprite = Player(Index).Sprite
+    End Function
+
+    Function GetPlayerClass(ByVal Index As Long) As Long
+        GetPlayerClass = 0
+        If Index > MAX_PLAYERS Then Exit Function
+        GetPlayerClass = Player(Index).Classes
     End Function
 
     Function GetPlayerMap(ByVal Index As Long) As Long

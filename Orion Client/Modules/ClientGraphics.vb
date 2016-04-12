@@ -22,7 +22,6 @@ Module ClientGraphics
     Public YourTradeWindow As RenderWindow
     Public TheirTradeWindow As RenderWindow
 
-    Public SpellsWindow As RenderWindow
     Public TmpSpellWindow As RenderWindow
 
     Public SFMLGameFont As SFML.Graphics.Font
@@ -150,7 +149,6 @@ Module ClientGraphics
         YourTradeWindow = New RenderWindow(frmMainGame.pnlYourTrade.Handle)
         TheirTradeWindow = New RenderWindow(frmMainGame.pnlTheirTrade.Handle)
 
-        SpellsWindow = New RenderWindow(frmMainGame.pnlSpells.Handle)
         TmpSpellWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(FONT_NAME)
@@ -803,8 +801,8 @@ Module ClientGraphics
 
         If PicNum < 1 Or PicNum > NumItems Then Exit Sub
 
-        If ItemsGFXInfo(PicNum).IsLoaded = False Then
-            LoadTexture(PicNum, 2)
+        If ItemsGFXInfo(itemnum).IsLoaded = False Then
+            LoadTexture(itemnum, 2)
         End If
 
         With MapItem(itemnum)
@@ -813,7 +811,7 @@ Module ClientGraphics
         End With
 
 
-        If ItemsGFXInfo(PicNum).width > 64 Then ' has more than 1 frame
+        If ItemsGFXInfo(PicNum).width > 32 Then ' has more than 1 frame
             srcrec = New Rectangle((MapItem(itemnum).Frame * 32), 0, 32, 32)
             destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PIC_X), ConvertMapY(MapItem(itemnum).Y * PIC_Y), 32, 32)
         Else
@@ -2220,13 +2218,25 @@ Module ClientGraphics
 
     Sub DrawEquipment()
         Dim i As Long, itemnum As Long, itempic As Long
-        Dim rec As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle, rec_pos As Rectangle, playersprite As Long
         Dim tmpSprite2 As Sprite = New Sprite(CharPanelGFX)
 
         If NumItems = 0 Then Exit Sub
 
         'first render panel
         RenderTexture(CharPanelGFX, GameWindow, CharWindowX, CharWindowY, 0, 0, CharPanelGFXInfo.width, CharPanelGFXInfo.height)
+
+        'lets get player sprite to render
+        playersprite = GetPlayerSprite(MyIndex)
+
+        With rec
+            .Y = 0
+            .Height = SpritesGFXInfo(playersprite).height / 4
+            .X = 0
+            .Width = SpritesGFXInfo(playersprite).width / 4
+        End With
+
+        RenderTexture(SpritesGFX(playersprite), GameWindow, CharWindowX + CharPanelGFXInfo.width / 2 - rec.Width / 2, CharWindowY + CharPanelGFXInfo.height / 2 - rec.Height / 2, rec.X, rec.Y, rec.Width, rec.Height)
 
         For i = 1 To Equipment.Equipment_Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
@@ -2252,7 +2262,7 @@ Module ClientGraphics
                 End With
 
                 With rec_pos
-                    .Y = CharWindowY + EqTop
+                    .Y = CharWindowY + EqTop + ((EqOffsetY + 32) * ((i - 1) \ EqColumns))
                     .Height = PIC_Y
                     .X = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
                     .Width = PIC_X
@@ -2268,26 +2278,26 @@ Module ClientGraphics
 
         ' Set the character windows
         'name
-        DrawText(CharWindowX + 6, CharWindowY + 14, "Name: " & GetPlayerName(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'guild
-        DrawText(CharWindowX + 6, CharWindowY + 36, "Guild: None", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 14, "Name: " & GetPlayerName(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'class
+        DrawText(CharWindowX + 10, CharWindowY + 33, "Class: " & Trim(Classes(GetPlayerClass(MyIndex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
-        DrawText(CharWindowX + 6, CharWindowY + 60, "Lvl: " & GetPlayerLevel(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 150, CharWindowY + 14, "Lvl: " & GetPlayerLevel(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'points
-        DrawText(CharWindowX + 88, CharWindowY + 60, "Points: " & GetPlayerPOINTS(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 6, CharWindowY + 200, "Points: " & GetPlayerPOINTS(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'strength stat
-        DrawText(CharWindowX + 6, CharWindowY + 89, "Str: " & GetPlayerStat(MyIndex, Stats.strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 6, CharWindowY + 219, "Str: " & GetPlayerStat(MyIndex, Stats.strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'endurance stat
-        DrawText(CharWindowX + 88, CharWindowY + 89, "End: " & GetPlayerStat(MyIndex, Stats.endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 88, CharWindowY + 219, "End: " & GetPlayerStat(MyIndex, Stats.endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'vitality stat
-        DrawText(CharWindowX + 6, CharWindowY + 115, "Vit: " & GetPlayerStat(MyIndex, Stats.vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'intelligence stat
-        DrawText(CharWindowX + 6, CharWindowY + 143, "Int: " & GetPlayerStat(MyIndex, Stats.intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 6, CharWindowY + 235, "Vit: " & GetPlayerStat(MyIndex, Stats.vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'willpower stat
-        DrawText(CharWindowX + 88, CharWindowY + 115, "Will: " & GetPlayerStat(MyIndex, Stats.willpower), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 88, CharWindowY + 235, "Will: " & GetPlayerStat(MyIndex, Stats.willpower), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'intelligence stat
+        DrawText(CharWindowX + 6, CharWindowY + 250, "Int: " & GetPlayerStat(MyIndex, Stats.intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'spirit stat
-        DrawText(CharWindowX + 88, CharWindowY + 143, "Sprt: " & GetPlayerStat(MyIndex, Stats.spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 88, CharWindowY + 250, "Sprt: " & GetPlayerStat(MyIndex, Stats.spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If GetPlayerPOINTS(MyIndex) > 0 Then
             'strength upgrade
@@ -2871,22 +2881,12 @@ NextLoop:
 
     Sub DrawPlayerSpells()
         Dim i As Long, spellnum As Long, spellicon As Long
-        Dim rec As Rectangle, rec2 As Rectangle, rec_pos As Rectangle
-        Dim tmpSprite2 As Sprite = New Sprite(SpellPanelGFX)
+        Dim rec As Rectangle, rec_pos As Rectangle
 
         If Not InGame Then Exit Sub
-        SpellsWindow.Clear(ToSFMLColor(frmMainGame.pnlSpells.BackColor))
 
-        With rec2
-            .Y = 0
-            .Height = frmMainGame.pnlSpells.Height
-            .X = 0
-            .Width = frmMainGame.pnlSpells.Width
-        End With
-
-        tmpSprite2.TextureRect = New IntRect(rec2.X, rec2.Y, rec2.Width, rec2.Height)
-        tmpSprite2.Position = New SFML.Window.Vector2f(0, 0)
-        SpellsWindow.Draw(tmpSprite2)
+        'first render panel
+        RenderTexture(SpellPanelGFX, GameWindow, SpellWindowX, SpellWindowY, 0, 0, SpellPanelGFXInfo.width, SpellPanelGFXInfo.height)
 
         For i = 1 To MAX_PLAYER_SPELLS
             spellnum = PlayerSpells(i)
@@ -2909,21 +2909,19 @@ NextLoop:
                     End If
 
                     With rec_pos
-                        .Y = SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                        .Y = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
                         .Height = PIC_Y
-                        .X = SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                        .X = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
                         .Width = PIC_X
                     End With
 
                     Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellicon))
                     tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                     tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                    SpellsWindow.Draw(tmpSprite)
+                    GameWindow.Draw(tmpSprite)
                 End If
             End If
         Next
-
-        SpellsWindow.Display()
 
     End Sub
 
@@ -3023,6 +3021,10 @@ NextLoop:
 
         If pnlInventoryVisible = True Then
             DrawInventory()
+        End If
+
+        If pnlSpellsVisible = True Then
+            DrawPlayerSpells()
         End If
     End Sub
 End Module

@@ -523,16 +523,17 @@
         If Buffer.ReadLong <> ServerPackets.SPlayerData Then Exit Sub
 
         i = Buffer.ReadLong
-        Call SetPlayerName(i, Buffer.ReadString)
-        Call SetPlayerLevel(i, Buffer.ReadLong)
-        Call SetPlayerPOINTS(i, Buffer.ReadLong)
-        Call SetPlayerSprite(i, Buffer.ReadLong)
-        Call SetPlayerMap(i, Buffer.ReadLong)
-        Call SetPlayerX(i, Buffer.ReadLong)
-        Call SetPlayerY(i, Buffer.ReadLong)
-        Call SetPlayerDir(i, Buffer.ReadLong)
-        Call SetPlayerAccess(i, Buffer.ReadLong)
-        Call SetPlayerPK(i, Buffer.ReadLong)
+        SetPlayerName(i, Buffer.ReadString)
+        SetPlayerClass(i, Buffer.ReadLong)
+        SetPlayerLevel(i, Buffer.ReadLong)
+        SetPlayerPOINTS(i, Buffer.ReadLong)
+        SetPlayerSprite(i, Buffer.ReadLong)
+        SetPlayerMap(i, Buffer.ReadLong)
+        SetPlayerX(i, Buffer.ReadLong)
+        SetPlayerY(i, Buffer.ReadLong)
+        SetPlayerDir(i, Buffer.ReadLong)
+        SetPlayerAccess(i, Buffer.ReadLong)
+        SetPlayerPK(i, Buffer.ReadLong)
 
         For X = 1 To Stats.stat_count - 1
             SetPlayerStat(i, X, Buffer.ReadLong)

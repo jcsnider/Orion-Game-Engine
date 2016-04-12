@@ -13,13 +13,6 @@
     Public Const BankOffsetX As Byte = 4
     Public Const BankColumns As Byte = 10
 
-    ' spells constants
-    Public Const SpellTop As Byte = 8
-    Public Const SpellLeft As Byte = 8
-    Public Const SpellOffsetY As Byte = 4
-    Public Const SpellOffsetX As Byte = 4
-    Public Const SpellColumns As Byte = 5
-
     ' shop constants
     Public Const ShopTop As Byte = 8
     Public Const ShopLeft As Byte = 8
@@ -27,11 +20,6 @@
     Public Const ShopOffsetX As Byte = 4
     Public Const ShopColumns As Byte = 5
 
-    ' Character consts
-    Public Const EqTop As Byte = 200
-    Public Const EqLeft As Byte = 8
-    Public Const EqOffsetX As Byte = 15
-    Public Const EqColumns As Byte = 4
     Public Const MAX_BYTE As Byte = 255
     Public Const MAX_INTEGER As Integer = 32767
     Public Const MAX_LONG As Long = 2147483647
