@@ -1554,6 +1554,7 @@ Partial Class frmMainGame
         'picEventFace
         '
         Me.picEventFace.BackColor = System.Drawing.Color.Transparent
+        Me.picEventFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.picEventFace.Location = New System.Drawing.Point(13, 12)
         Me.picEventFace.Name = "picEventFace"
         Me.picEventFace.Size = New System.Drawing.Size(94, 94)
@@ -1569,7 +1570,6 @@ Partial Class frmMainGame
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(960, 673)
         Me.Controls.Add(Me.pnlQuestLog)
-        Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlDialog)
         Me.Controls.Add(Me.pnlQuestSpeech)
@@ -1581,11 +1581,12 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.pnlTmpSkill)
+        Me.Controls.Add(Me.pnlTrade)
+        Me.Controls.Add(Me.pnlShop)
+        Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlOptions)
-        Me.Controls.Add(Me.pnlTrade)
-        Me.Controls.Add(Me.pnlShop)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False

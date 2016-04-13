@@ -195,6 +195,8 @@ Module ServerDatabase
             Next
         Next
 
+        Map(MapNum).EventCount = 0
+        ReDim Map(MapNum).Events(0)
         ' Reset the values for if a player is on the map or not
         PlayersOnMap(MapNum) = NO
         Map(MapNum).Tileset = 1

@@ -77,7 +77,7 @@
 
         ' Find open map item slot
         i = FindOpenMapItemSlot(MapNum)
-        Call SpawnItemSlot(i, itemNum, ItemVal, MapNum, x, y)
+        SpawnItemSlot(i, itemNum, ItemVal, MapNum, x, y)
     End Sub
 
     Sub SpawnItemSlot(ByVal MapItemSlot As Long, ByVal itemNum As Long, ByVal ItemVal As Long, ByVal MapNum As Long, ByVal x As Long, ByVal y As Long)

@@ -2,11 +2,6 @@
     Public Sub RemoveDeadEvents()
         Dim i As Long, MapNum As Long, Buffer As ByteBuffer, x As Long, id As Long, page As Long, compare As Long
 
-        'So this is removing events after a switch was set or something not deleting events from the map editor?
-
-        'i thought that too, But noooo, it still fucks up here xd
-        'Lets debug
-
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) = False Then TempPlayer(i).EventMap.CurrentEvents = 0 : Exit Sub
             MapNum = GetPlayerMap(i)
@@ -1631,7 +1626,7 @@
                                                         Case EventType.evChangeItems
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 If HasItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) > 0 Then
-                                                                    Call SetPlayerInvItemValue(i, HasItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
+                                                                    Call SetPlayerInvItemValue(i, FindItemSlot(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
                                                                     Call CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                     Call CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                 End If

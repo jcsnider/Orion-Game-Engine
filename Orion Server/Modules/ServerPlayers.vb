@@ -82,6 +82,7 @@
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerY = Player(Index).y
     End Function
+
     Sub SendLeaveMap(ByVal Index As Long, ByVal MapNum As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -134,12 +135,12 @@
         OldMap = GetPlayerMap(Index)
 
         If OldMap <> MapNum Then
-            Call SendLeaveMap(Index, OldMap)
+            SendLeaveMap(Index, OldMap)
         End If
 
-        Call SetPlayerMap(Index, MapNum)
-        Call SetPlayerX(Index, x)
-        Call SetPlayerY(Index, y)
+        SetPlayerMap(Index, MapNum)
+        SetPlayerX(Index, x)
+        SetPlayerY(Index, y)
 
         ' send equipment of all people on new map
         If GetTotalMapPlayers(MapNum) > 0 Then
@@ -171,7 +172,7 @@
         PlayersOnMap(MapNum) = YES
         TempPlayer(Index).GettingMap = YES
 
-        Call CheckTasks(Index, QUEST_TYPE_GOREACH, MapNum)
+        CheckTasks(Index, QUEST_TYPE_GOREACH, MapNum)
 
 
         Buffer = New ByteBuffer
@@ -180,22 +181,27 @@
         Buffer.WriteLong(Map(MapNum).Revision)
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
+
     End Sub
+
     Function GetPlayerDir(ByVal Index As Long) As Long
         GetPlayerDir = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerDir = Player(Index).Dir
     End Function
+
     Function GetPlayerSprite(ByVal Index As Long) As Long
         GetPlayerSprite = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerSprite = Player(Index).Sprite
     End Function
+
     Function GetPlayerPK(ByVal Index As Long) As Long
         GetPlayerPK = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerPK = Player(Index).PK
     End Function
+
     Sub CheckEquippedItems(ByVal Index As Long)
         Dim itemNum As Long
         Dim i As Long
@@ -672,6 +678,26 @@
                     HasItem = 1
                 End If
 
+                Exit Function
+            End If
+
+        Next
+
+    End Function
+
+    Function FindItemSlot(ByVal Index As Long, ByVal itemNum As Long) As Long
+        Dim i As Long
+
+        ' Check for subscript out of range
+        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+            Exit Function
+        End If
+
+        For i = 1 To MAX_INV
+
+            ' Check to see if the player has the item
+            If GetPlayerInvItemNum(Index, i) = itemNum Then
+                FindItemSlot = i
                 Exit Function
             End If
 
