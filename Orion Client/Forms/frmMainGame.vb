@@ -1001,6 +1001,11 @@ Public Class frmMainGame
 
     End Sub
 
+    Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
+        pnlMapreport.Hide()
+
+    End Sub
+
     Private Sub pnlCharacter_MouseMove(sender As Object, e As MouseEventArgs)
 
     End Sub

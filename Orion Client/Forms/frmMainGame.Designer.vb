@@ -1569,6 +1569,7 @@ Partial Class frmMainGame
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(960, 673)
+        Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlDialog)
@@ -1585,7 +1586,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlShop)
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.picscreen)
-        Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlOptions)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
