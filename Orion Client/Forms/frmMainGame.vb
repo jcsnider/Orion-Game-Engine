@@ -82,7 +82,7 @@ Public Class frmMainGame
         End If
 
         'admin
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.Insert Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If
@@ -229,8 +229,6 @@ Public Class frmMainGame
 
         CheckGuiMove(e.X, e.Y)
 
-        'pnlItemDesc.Visible = False
-        'LastItemDesc = 0 ' no item was last loaded
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
@@ -266,35 +264,35 @@ Public Class frmMainGame
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
@@ -308,12 +306,12 @@ Public Class frmMainGame
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                CastSpell(spellnum)
             End If
         End If
 
         'admin
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.Insert Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If
@@ -425,7 +423,7 @@ Public Class frmMainGame
         End If
 
         'admin
-        If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.Insert Then
             If Player(MyIndex).Access > 0 Then
                 SendRequestAdmin()
             End If

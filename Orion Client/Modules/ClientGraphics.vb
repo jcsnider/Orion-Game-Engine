@@ -485,6 +485,7 @@ Module ClientGraphics
         rec.Height = 32
 
         RenderTexture(DirectionsGfx, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+
         ' render dir blobs
         For i = 1 To 4
             rec.X = (i - 1) * 8
@@ -629,6 +630,11 @@ Module ClientGraphics
             LoadTexture(Sprite, 3)
         End If
 
+        ' we use it, lets update timer
+        With PaperDollGFXInfo(Sprite)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         With rec
             .Y = spritetop * (PaperDollGFXInfo(Sprite).height / 4)
             .Height = (PaperDollGFXInfo(Sprite).height / 4)
@@ -745,10 +751,10 @@ Module ClientGraphics
             LoadTexture(Resource, 5)
         End If
 
-        'Dim tmpSprite As Sprite = New Sprite(ResourcesGFX(Resource))
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.System.Vector2f(X, Y)
-        'GameWindow.Draw(tmpSprite)
+        'seeying we still use it, lets update timer
+        With ResourcesGFXInfo(Resource)
+            .TextureTimer = GetTickCount() + 100000
+        End With
 
         RenderTexture(ResourcesGFX(Resource), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
@@ -805,11 +811,15 @@ Module ClientGraphics
             LoadTexture(itemnum, 2)
         End If
 
+        'seeying we still use it, lets update timer
+        With ItemsGFXInfo(itemnum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         With MapItem(itemnum)
             If .X < TileView.left Or .X > TileView.right Then Exit Sub
             If .Y < TileView.top Or .Y > TileView.bottom Then Exit Sub
         End With
-
 
         If ItemsGFXInfo(PicNum).width > 32 Then ' has more than 1 frame
             srcrec = New Rectangle((MapItem(itemnum).Frame * 32), 0, 32, 32)
@@ -821,11 +831,6 @@ Module ClientGraphics
 
         x = ConvertMapX(MapItem(itemnum).X * PIC_X)
         y = ConvertMapY(MapItem(itemnum).Y * PIC_Y)
-
-        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(PicNum))
-        tmpSprite.TextureRect = New IntRect(srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
-        tmpSprite.Position = New SFML.Window.Vector2f(x, y)
-        GameWindow.Draw(tmpSprite)
 
         RenderTexture(ItemsGFX(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
@@ -853,10 +858,6 @@ Module ClientGraphics
         width = (rec.Width)
         height = (rec.Height)
 
-        'Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Sprite))
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.System.Vector2f(X, y)
-        'GameWindow.Draw(tmpSprite)
 
         RenderTexture(SpritesGFX(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
@@ -881,11 +882,6 @@ Module ClientGraphics
 
             destrec = New Rectangle(ConvertMapX(.X * PIC_X), ConvertMapY(.Y * PIC_Y), PIC_X, PIC_Y)
 
-            'Dim tmpSprite As Sprite = New Sprite(BloodGFX)
-            'tmpSprite.TextureRect = New IntRect(srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
-            'tmpSprite.Position = New SFML.System.Vector2f(x, y)
-            'GameWindow.Draw(tmpSprite)
-
             RenderTexture(BloodGFX, GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
         End With
 
@@ -904,6 +900,10 @@ Module ClientGraphics
                     If TileSetTextureInfo(.Layer(i).tileset).IsLoaded = False Then
                         LoadTexture(.Layer(i).tileset, 1)
                     End If
+                    ' we use it, lets update timer
+                    With TileSetTextureInfo(i)
+                        .TextureTimer = GetTickCount() + 100000
+                    End With
                     If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
                         With srcrect
                             .X = Map.Tile(X, Y).Layer(i).X * 32
@@ -911,10 +911,6 @@ Module ClientGraphics
                             .Width = 32
                             .Height = 32
                         End With
-                        'tmpSprite = New Sprite(TileSetTexture(.Layer(i).tileset))
-                        'tmpSprite.TextureRect = New IntRect(srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-                        'tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y))
-                        'GameWindow.Draw(tmpSprite)
 
                         RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then

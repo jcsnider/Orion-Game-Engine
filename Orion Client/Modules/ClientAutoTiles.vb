@@ -213,14 +213,6 @@ Public Module ClientAutoTiles
                     ReDim Autotile(X, Y).Layer(i).srcY(0 To 4)
                     ReDim Autotile(X, Y).Layer(i).QuarterTile(0 To 4)
                 Next
-
-                'ReDim Autotile(X, Y).ExLayer(0 To ExMapLayer.Layer_Count - 1)
-                'For i = 0 To ExMapLayer.Layer_Count - 1
-                '    ReDim Autotile(X, Y).ExLayer(i).srcX(0 To 4)
-                '    ReDim Autotile(X, Y).ExLayer(i).srcY(0 To 4)
-                '    ReDim Autotile(X, Y).ExLayer(i).QuarterTile(0 To 4)
-                'Next
-
             Next
         Next
 
@@ -298,12 +290,6 @@ Public Module ClientAutoTiles
                     ' cache the rendering state of the tiles and set them
                     CacheRenderState(X, Y, layerNum)
                 Next
-                'For layerNum = 1 To ExMapLayer.Layer_Count - 1
-                '    ' calculate the subtile positions and place them
-                '    CalculateAutotile(X, Y, layerNum + (MapLayer.Layer_Count - 1))
-                '    ' cache the rendering state of the tiles and set them
-                '    CacheRenderState(X, Y, layerNum + (MapLayer.Layer_Count - 1))
-                'Next
             Next
         Next
 
@@ -316,29 +302,6 @@ Public Module ClientAutoTiles
 
         If X < 0 Or X > Map.MaxX Or Y < 0 Or Y > Map.MaxY Then Exit Sub
 
-        ' If layerNum > MapLayer.Layer_Count - 1 Then
-        ' layerNum = layerNum - (MapLayer.Layer_Count - 1)
-        'With Map.exTile(X, Y)
-        '    ' check if the tile can be rendered
-        '    If .Layer(layerNum).tileset <= 0 Or .Layer(layerNum).tileset > NumTileSets Then
-        '        'ReDim Autotile(X, Y).ExLayer(0 To MapLayer.Layer_Count - 1)
-        '        Autotile(X, Y).ExLayer(layerNum).renderState = RENDER_STATE_NONE
-        '        Exit Sub
-        '    End If
-        '    ' check if it needs to be rendered as an autotile
-        '    If .Autotile(layerNum) = AUTOTILE_NONE Or .Autotile(layerNum) = AUTOTILE_FAKE Then
-        '        ' default to... default
-        '        Autotile(X, Y).ExLayer(layerNum).renderState = RENDER_STATE_NORMAL
-        '    Else
-        '        Autotile(X, Y).ExLayer(layerNum).renderState = RENDER_STATE_AUTOTILE
-        '        ' cache tileset positioning
-        '        For quarterNum = 1 To 4
-        '            Autotile(X, Y).ExLayer(layerNum).srcX(quarterNum) = (Map.exTile(X, Y).Layer(layerNum).X * 32) + Autotile(X, Y).ExLayer(layerNum).QuarterTile(quarterNum).X
-        '            Autotile(X, Y).ExLayer(layerNum).srcY(quarterNum) = (Map.exTile(X, Y).Layer(layerNum).Y * 32) + Autotile(X, Y).ExLayer(layerNum).QuarterTile(quarterNum).Y
-        '        Next
-        '    End If
-        'End With
-        ' Else
         With Map.Tile(X, Y)
                 ' check if the tile can be rendered
                 If .Layer(layerNum).tileset <= 0 Or .Layer(layerNum).tileset > NumTileSets Then
@@ -385,45 +348,6 @@ Public Module ClientAutoTiles
         ' The situations are "inner", "outer", "horizontal", "vertical" and "fill".
         ' Exit out if we don't have an autotile
 
-        'If layerNum > MapLayer.Layer_Count - 1 Then
-        '    If Map.exTile(X, Y).Autotile(layerNum - (MapLayer.Layer_Count - 1)) = 0 Then Exit Sub
-        '    ' Okay, we have autotiling but which one?
-        '    Select Case Map.exTile(X, Y).Autotile(layerNum - (MapLayer.Layer_Count - 1))
-        '        ' Normal or animated - same difference
-        '        Case AUTOTILE_NORMAL, AUTOTILE_ANIM
-        '            ' North West Quarter
-        '            CalculateNW_Normal(layerNum, X, Y)
-        '            ' North East Quarter
-        '            CalculateNE_Normal(layerNum, X, Y)
-        '            ' South West Quarter
-        '            CalculateSW_Normal(layerNum, X, Y)
-        '            ' South East Quarter
-        '            CalculateSE_Normal(layerNum, X, Y)
-        '        ' Cliff
-        '        Case AUTOTILE_CLIFF
-        '            ' North West Quarter
-        '            CalculateNW_Cliff(layerNum, X, Y)
-        '            ' North East Quarter
-        '            CalculateNE_Cliff(layerNum, X, Y)
-        '            ' South West Quarter
-        '            CalculateSW_Cliff(layerNum, X, Y)
-        '            ' South East Quarter
-        '            CalculateSE_Cliff(layerNum, X, Y)
-        '        ' Waterfalls
-        '        Case AUTOTILE_WATERFALL
-        '            ' North West Quarter
-        '            CalculateNW_Waterfall(layerNum, X, Y)
-        '            ' North East Quarter
-        '            CalculateNE_Waterfall(layerNum, X, Y)
-        '            ' South West Quarter
-        '            CalculateSW_Waterfall(layerNum, X, Y)
-        '            ' South East Quarter
-        '            CalculateSE_Waterfall(layerNum, X, Y)
-        '        ' Anything else
-        '        Case Else
-        '            ' Don't need to render anything... it's fake or not an autotile
-        '    End Select
-        'Else
         If Map.Tile(X, Y).Autotile(layerNum) = 0 Then Exit Sub
             ' Okay, we have autotiling but which one?
             Select Case Map.Tile(X, Y).Autotile(layerNum)
@@ -827,64 +751,37 @@ Public Module ClientAutoTiles
             checkTileMatch = True
             Exit Function
         End If
-        'If exTile Then
-        '    ' fakes ALWAYS return true
-        '    If Map.exTile(X2, Y2).Autotile(layerNum) = AUTOTILE_FAKE Then
-        '        checkTileMatch = True
-        '        Exit Function
-        '    End If
-        'Else
+
         ' fakes ALWAYS return true
         If Map.Tile(X2, Y2).Autotile(layerNum) = AUTOTILE_FAKE Then
                 checkTileMatch = True
                 Exit Function
             End If
         ' End If
-        'If exTile Then
-        '    ' check neighbour is an autotile
-        '    If Map.exTile(X2, Y2).Autotile(layerNum) = 0 Then
-        '        checkTileMatch = False
-        '        Exit Function
-        '    End If
-        'Else
+
         ' check neighbour is an autotile
         If Map.Tile(X2, Y2).Autotile(layerNum) = 0 Then
                 checkTileMatch = False
                 Exit Function
             End If
         ' End If
-        'If exTile Then
-        '    ' check we're a matching
-        '    If Map.exTile(X1, Y1).Layer(layerNum).tileset <> Map.exTile(X2, Y2).Layer(layerNum).tileset Then
-        '        checkTileMatch = False
-        '        Exit Function
-        '    End If
-        '    ' check tiles match
-        '    If Map.exTile(X1, Y1).Layer(layerNum).X <> Map.exTile(X2, Y2).Layer(layerNum).X Then
-        '        checkTileMatch = False
-        '        Exit Function
-        '    End If
-        '    If Map.exTile(X1, Y1).Layer(layerNum).Y <> Map.exTile(X2, Y2).Layer(layerNum).Y Then
-        '        checkTileMatch = False
-        '        Exit Function
-        '    End If
-        'Else
+
         ' check we're a matching
         If Map.Tile(X1, Y1).Layer(layerNum).tileset <> Map.Tile(X2, Y2).Layer(layerNum).tileset Then
-                checkTileMatch = False
-                Exit Function
-            End If
-            ' check tiles match
-            If Map.Tile(X1, Y1).Layer(layerNum).X <> Map.Tile(X2, Y2).Layer(layerNum).X Then
-                checkTileMatch = False
-                Exit Function
-            End If
+            checkTileMatch = False
+            Exit Function
+        End If
+
+        ' check tiles match
+        If Map.Tile(X1, Y1).Layer(layerNum).X <> Map.Tile(X2, Y2).Layer(layerNum).X Then
+            checkTileMatch = False
+            Exit Function
+
             If Map.Tile(X1, Y1).Layer(layerNum).Y <> Map.Tile(X2, Y2).Layer(layerNum).Y Then
                 checkTileMatch = False
                 Exit Function
             End If
-        ' End If
-
+        End If
     End Function
 
     Public Sub DrawAutoTile(ByVal layerNum As Long, ByVal destX As Long, ByVal destY As Long, ByVal quarterNum As Long, ByVal X As Long, ByVal Y As Long, Optional forceFrame As Long = 0, Optional strict As Boolean = True, Optional ExLayer As Boolean = False)
@@ -913,36 +810,21 @@ Public Module ClientAutoTiles
             End Select
         End If
 
-        'If ExLayer Then
-        '    Select Case Map.exTile(X, Y).Autotile(layerNum)
-        '        Case AUTOTILE_WATERFALL
-        '            YOffset = (waterfallFrame - 1) * 32
-        '        Case AUTOTILE_ANIM
-        '            XOffset = autoTileFrame * 64
-        '        Case AUTOTILE_CLIFF
-        '            YOffset = -32
-        '    End Select
-        '    ' Draw the quarter
-        '    tmpSprite = New Sprite(TileSetTexture(Map.exTile(X, Y).Layer(layerNum).tileset))
-        '    tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
-        '    tmpSprite.Position = New SFML.System.Vector2f(destX, destY)
-        '    GameWindow.Draw(tmpSprite)
-        'Else
 
         Select Case Map.Tile(X, Y).Autotile(layerNum)
-                Case AUTOTILE_WATERFALL
-                    YOffset = (waterfallFrame - 1) * 32
-                Case AUTOTILE_ANIM
-                    XOffset = autoTileFrame * 64
-                Case AUTOTILE_CLIFF
-                    YOffset = -32
-            End Select
-            ' Draw the quarter
-            tmpSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).tileset))
-            tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
+            Case AUTOTILE_WATERFALL
+                YOffset = (waterfallFrame - 1) * 32
+            Case AUTOTILE_ANIM
+                XOffset = autoTileFrame * 64
+            Case AUTOTILE_CLIFF
+                YOffset = -32
+        End Select
+
+        ' Draw the quarter
+        tmpSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).tileset))
+        tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
         tmpSprite.Position = New SFML.Window.Vector2f(destX, destY)
         GameWindow.Draw(tmpSprite)
-        ' End If
 
     End Sub
 End Module
