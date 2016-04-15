@@ -1047,13 +1047,13 @@ Module ClientTCP
 
         ' dont let them forget a spell which is in CD
         If SpellCD(spellslot) > 0 Then
-            AddText("Cannot forget a spell which is cooling down!")
+            AddText("Cannot forget a spell which is cooling down!", AlertColor)
             Exit Sub
         End If
 
         ' dont let them forget a spell which is buffered
         If SpellBuffer = spellslot Then
-            AddText("Cannot forget a spell which you are casting!")
+            AddText("Cannot forget a spell which you are casting!", AlertColor)
             Exit Sub
         End If
 
@@ -1064,7 +1064,7 @@ Module ClientTCP
             SendData(Buffer.ToArray())
             Buffer = Nothing
         Else
-            AddText("No spell here.")
+            AddText("No spell here.", AlertColor)
         End If
     End Sub
 

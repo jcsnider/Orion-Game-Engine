@@ -292,13 +292,150 @@ Module ClientText
         Return textBounds.Width
     End Function
 
-    Public Sub AddText(ByVal Msg As String)
+    Public Sub AddText(ByVal Msg As String, ByVal Color As Long)
         If txtChatAdd = "" Then
             txtChatAdd = txtChatAdd & Msg
+            AddChatRec(Msg, Color)
         Else
-            txtChatAdd = txtChatAdd & vbNewLine & Msg
+            For Each str As String In WordWrap(Msg, AllChatLineWidth)
+                txtChatAdd = txtChatAdd & vbNewLine & str
+                AddChatRec(str, Color)
+            Next
+
         End If
     End Sub
+
+    Public Sub AddChatRec(ByVal Msg As String, ByVal color As Int32)
+        Dim struct As ChatRec
+        struct.Text = Msg
+        struct.Color = color
+        Chat.Add(struct)
+    End Sub
+
+    Public AlertMsgColor As New Color(255, 0, 0, 180) ' Red
+    Public PlayerMsgColor = Color.White 'white
+    Public GlobalMsgColor As New Color(254, 90, 0, 180) ' Blue
+    Public MapMsgColor As New Color(0, 0, 0, 180) ' Black
+    Public WarningMsgColor As New Color(254, 90, 0, 180) ' Orange
+    Public NotificationMsgColor As New Color(0, 0, 242, 180) ' Blue
+    Public PrivateMsgColor As New Color(0, 185, 165, 180) ' Turquoise
+    Public EmoteMsgColor As New Color(0, 0, 242, 180) ' Blue
+
+    Public Function GetSFMLColor(ByVal Color As Byte) As Color
+        Select Case Color
+            Case SayColor
+                Return PlayerMsgColor
+            Case GlobalColor
+                Return GlobalMsgColor
+            Case BroadcastColor
+                Return SFML.Graphics.Color.White
+            Case TellColor
+                Return PrivateMsgColor
+            Case EmoteColor
+                Return EmoteMsgColor
+            Case AdminColor
+                Return AlertMsgColor
+            Case HelpColor
+                Return NotificationMsgColor
+            Case Else
+                Return SFML.Graphics.Color.White
+        End Select
+    End Function
+
+#Region "NewTextStuff"
+#Region "GlobalStuffs"
+    Public SplitChars As Char() = New Char() {" "c, "-"c, ControlChars.Tab}
+#End Region
+
+    Public Function WordWrap(str As String, width As Integer) As List(Of String)
+
+        Dim words As String() = Explode(str, SplitChars)
+        Dim curLineLength As Integer = 0
+        Dim strBuilder As New StringBuilder()
+        Dim i As Integer = 0
+        Dim rtnString As New List(Of String)
+
+        While i < words.Length
+            Dim word As String = words(i)
+
+            ' If adding the new word to the current line would be too long,
+            ' then put it on a new line (and split it up if it's too long).
+            If curLineLength + word.Length > width Then
+
+                ' Only move down to a new line if we have text on the current line.
+                ' Avoids situation where wrapped whitespace causes emptylines in text.
+                If curLineLength > 0 Then
+                    strBuilder.Append("|")
+                    curLineLength = 0
+                End If
+
+                ' If the current word is too long to fit on a line even on it's own then
+                ' split the word up.
+                While word.Length > width
+                    strBuilder.Append(word.Substring(0, width - 1) + "-")
+                    word = word.Substring(width - 1)
+                    strBuilder.Append("|")
+                End While
+
+                ' Remove leading whitespace from the word so the new line starts flush to the left.
+                word = word.TrimStart()
+
+            End If
+
+            strBuilder.Append(word)
+            curLineLength += word.Length
+            i += 1
+        End While
+
+        Dim lines As String() = strBuilder.ToString.Split("|")
+        For Each line As String In lines
+            'line = Replace(line, "|", "")
+            rtnString.Add(line.Replace("|", "")) ' & vbNewLine)
+        Next
+
+        Return rtnString
+
+    End Function
+
+    Public Function Explode(str As String, splitChars As Char()) As String()
+
+        Dim parts As New List(Of String)()
+        Dim startIndex As Integer = 0
+        Explode = Nothing
+        While True
+            Dim index As Integer = str.IndexOfAny(splitChars, startIndex)
+
+            If index = -1 Then
+                parts.Add(str.Substring(startIndex))
+                Return parts.ToArray()
+            End If
+
+            Dim word As String = str.Substring(startIndex, index - startIndex)
+            Dim nextChar As Char = str.Substring(index, 1)(0)
+            ' Dashes and the likes should stick to the word occuring before it. Whitespace doesn't have to.
+            If Char.IsWhiteSpace(nextChar) Then
+                parts.Add(word)
+                parts.Add(nextChar.ToString())
+            Else
+                parts.Add(word + nextChar)
+            End If
+
+            startIndex = index + 1
+        End While
+
+    End Function
+
+#End Region
+
+
+
+    'Public Sub AddText(ByVal Msg As String)
+    '    If txtChatAdd = "" Then
+    '        txtChatAdd = txtChatAdd & Msg
+    '    Else
+    '        txtChatAdd = txtChatAdd & vbNewLine & Msg
+    '    End If
+    'End Sub
 
     'Public Sub DrawChatBubble(ByVal Index As Long)
     '    Dim theArray() As String, X As Long, Y As Long, i As Long, MaxWidth As Long, X2 As Long, Y2 As Long

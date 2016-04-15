@@ -85,7 +85,7 @@ Module ClientGameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < Tick Then
-                        AddText("You took too long to decide. Please try again.")
+                        AddText("You took too long to decide. Please try again.", Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -856,11 +856,11 @@ Module ClientGameLogic
             frmMenu.pnlCredits.Visible = pnlCreditsVisible
         End If
 
-        If txtChatAdd <> frmMainGame.txtChat.Text Then
-            frmMainGame.txtChat.Text = txtChatAdd
-            frmMainGame.txtChat.SelectionStart = frmMainGame.txtChat.TextLength
-            frmMainGame.txtChat.ScrollToCaret()
-        End If
+        'If txtChatAdd <> frmMainGame.txtChat2.Text Then
+        '    frmMainGame.txtChat2.Text = txtChatAdd
+        '    frmMainGame.txtChat2.SelectionStart = frmMainGame.txtChat2.TextLength
+        '    frmMainGame.txtChat2.ScrollToCaret()
+        'End If
 
         If frmmenuvisible <> frmMenu.Visible Then
             frmMenu.Visible = frmmenuvisible
@@ -1106,7 +1106,6 @@ Module ClientGameLogic
         End If
 
         If HideGui = True Then
-            frmMainGame.txtChat.Visible = Not frmMainGame.txtChat.Visible
             frmMainGame.txtMeChat.Visible = Not frmMainGame.txtMeChat.Visible
             HideGui = False
         End If
@@ -1262,9 +1261,9 @@ Module ClientGameLogic
             ' Make sure they are actually sending something
             If Len(MyText) > 0 Then
                 ' Send the message to the player
-                Call PlayerMsg(MyText, Name)
+                PlayerMsg(MyText, Name)
             Else
-                Call AddText("Usage: !playername (message)")
+                AddText("Usage: !playername (message)", Yellow)
             End If
 
             MyText = vbNullString
@@ -1277,11 +1276,11 @@ Module ClientGameLogic
 
             Select Case Command(0)
                 Case "/help"
-                    Call AddText("Social Commands:")
-                    Call AddText("'msghere = Broadcast Message")
-                    Call AddText("-msghere = Emote Message")
-                    Call AddText("!namehere msghere = Player Message")
-                    Call AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /resetui, /sellhouse")
+                    AddText("Social Commands:", Yellow)
+                    AddText("'msghere = Broadcast Message", Yellow)
+                    AddText("-msghere = Emote Message", Yellow)
+                    AddText("!namehere msghere = Player Message", Yellow)
+                    AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /resetui, /sellhouse", Yellow)
                 Case "/sellhouse"
                     Buffer = New ByteBuffer
                     Buffer.WriteLong(ClientPackets.CSellHouse)
@@ -1291,12 +1290,12 @@ Module ClientGameLogic
 
                     ' Checks to make sure we have more than one string in the array
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /info (name)")
+                        AddText("Usage: /info (name)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /info (name)")
+                        AddText("Usage: /info (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1324,12 +1323,12 @@ Module ClientGameLogic
 
                     ' Make sure they are actually sending something
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /party (name)")
+                        AddText("Usage: /party (name)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /party (name)")
+                        AddText("Usage: /party (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1345,17 +1344,17 @@ Module ClientGameLogic
 
                 Case "/questreset"
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /questreset (quest #)")
+                        AddText("Usage: /questreset (quest #)", Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /questreset (quest #)")
+                        AddText("Usage: /questreset (quest #)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1365,36 +1364,36 @@ Module ClientGameLogic
                     If n > 0 And n <= MAX_QUESTS Then
                         Call QuestReset(n)
                     Else
-                        Call AddText("Invalid quest number.")
+                        Call AddText("Invalid quest number.", AlertColor)
                     End If
 
                 ' Admin Help
                 Case "/admin"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
-                    Call AddText("Social Commands:")
-                    Call AddText("""msghere = Global Admin Message")
-                    Call AddText("=msghere = Private Admin Message")
-                    Call AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editspell, /debug, /questreset")
+                    Call AddText("Social Commands:", Yellow)
+                    Call AddText("""msghere = Global Admin Message", Yellow)
+                    Call AddText("=msghere = Private Admin Message", Yellow)
+                    Call AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editspell, /debug, /questreset", Yellow)
                 ' Kicking a player
                 Case "/kick"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /kick (name)")
+                        AddText("Usage: /kick (name)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /kick (name)")
+                        AddText("Usage: /kick (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1404,7 +1403,7 @@ Module ClientGameLogic
                 Case "/loc"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1413,7 +1412,7 @@ Module ClientGameLogic
                 Case "/mapeditor"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1422,17 +1421,17 @@ Module ClientGameLogic
                 Case "/warpmeto"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warpmeto (name)")
+                        AddText("Usage: /warpmeto (name)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /warpmeto (name)")
+                        AddText("Usage: /warpmeto (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1441,17 +1440,17 @@ Module ClientGameLogic
                 Case "/warptome"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warptome (name)")
+                        AddText("Usage: /warptome (name)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /warptome (name)")
+                        AddText("Usage: /warptome (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1460,17 +1459,17 @@ Module ClientGameLogic
                 Case "/warpto"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warpto (map #)")
+                        AddText("Usage: /warpto (map #)", Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /warpto (map #)")
+                        AddText("Usage: /warpto (map #)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1480,24 +1479,24 @@ Module ClientGameLogic
                     If n > 0 And n <= MAX_MAPS Then
                         Call WarpTo(n)
                     Else
-                        Call AddText("Invalid map number.")
+                        Call AddText("Invalid map number.", AlertColor)
                     End If
 
                 ' Setting sprite
                 Case "/setsprite"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /setsprite (sprite #)")
+                        AddText("Usage: /setsprite (sprite #)", Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /setsprite (sprite #)")
+                        AddText("Usage: /setsprite (sprite #)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1506,7 +1505,7 @@ Module ClientGameLogic
                 Case "/mapreport"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1515,7 +1514,7 @@ Module ClientGameLogic
                 Case "/respawn"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1524,12 +1523,12 @@ Module ClientGameLogic
                 Case "/motd"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /motd (new motd)")
+                        AddText("Usage: /motd (new motd)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1538,7 +1537,7 @@ Module ClientGameLogic
                 Case "/banlist"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1547,12 +1546,12 @@ Module ClientGameLogic
                 Case "/ban"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /ban (name)")
+                        AddText("Usage: /ban (name)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1562,7 +1561,7 @@ Module ClientGameLogic
                 Case "/edititem"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1571,7 +1570,7 @@ Module ClientGameLogic
                 Case "/editanimation"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1580,7 +1579,7 @@ Module ClientGameLogic
                 Case "/editnpc"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1588,7 +1587,7 @@ Module ClientGameLogic
                 Case "/editresource"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1597,7 +1596,7 @@ Module ClientGameLogic
                 Case "/editshop"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1606,7 +1605,7 @@ Module ClientGameLogic
                 Case "/editspell"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1616,17 +1615,17 @@ Module ClientGameLogic
                 Case "/setaccess"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 2 Then
-                        AddText("Usage: /setaccess (name) (access)")
+                        AddText("Usage: /setaccess (name) (access)", Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Or Not IsNumeric(Command(2)) Then
-                        AddText("Usage: /setaccess (name) (access)")
+                        AddText("Usage: /setaccess (name) (access)", Yellow)
                         GoTo Continue1
                     End If
 
@@ -1635,7 +1634,7 @@ Module ClientGameLogic
                 Case "/destroybanlist"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
@@ -1644,13 +1643,13 @@ Module ClientGameLogic
                 Case "/debug"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-                        AddText("You need to be a high enough staff member to do this!")
+                        AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
                     DEBUG_MODE = (Not DEBUG_MODE)
                 Case Else
-                    AddText("Not a valid command!")
+                    AddText("Not a valid command!", AlertColor)
             End Select
 
             'continue label where we go instead of exiting the sub
@@ -1963,13 +1962,13 @@ Continue1:
         End If
 
         If SpellCD(spellslot) > 0 Then
-            AddText("Spell has not cooled down yet!")
+            AddText("Spell has not cooled down yet!", AlertColor)
             Exit Sub
         End If
 
         ' Check if player has enough MP
         If GetPlayerVital(MyIndex, Vitals.MP) < Spell(PlayerSpells(spellslot)).MPCost Then
-            Call AddText("Not enough MP to cast " & Trim$(Spell(PlayerSpells(spellslot)).Name) & ".")
+            AddText("Not enough MP to cast " & Trim$(Spell(PlayerSpells(spellslot)).Name) & ".", AlertColor)
             Exit Sub
         End If
 
@@ -1984,11 +1983,11 @@ Continue1:
                     SpellBuffer = spellslot
                     SpellBufferTimer = GetTickCount()
                 Else
-                    Call AddText("Cannot cast while walking!")
+                    AddText("Cannot cast while walking!", AlertColor)
                 End If
             End If
         Else
-            Call AddText("No spell here.")
+            AddText("No spell here.", AlertColor)
         End If
 
     End Sub

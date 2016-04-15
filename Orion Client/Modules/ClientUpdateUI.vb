@@ -77,6 +77,9 @@
     Public HUDEXPBarX As Long = 110
     Public HUDEXPBarY As Long = 50
 
+    Public ChatWindowX As Long = 10
+    Public ChatWindowY As Long = 515
+
     'Character window Coordinates
     Public CharWindowX As Long = 748
     Public CharWindowY As Long = 275

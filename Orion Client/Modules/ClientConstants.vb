@@ -6,6 +6,8 @@
     'Chatbubble
     Public Const ChatBubbleWidth As Long = 200
 
+    Public Const AllChatLineWidth As Integer = 50
+
     ' Bank constants
     Public Const BankTop As Byte = 8
     Public Const BankLeft As Byte = 8

@@ -11,7 +11,7 @@ Public Class frmAdmin
     Private Sub btnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
 
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -22,7 +22,7 @@ Public Class frmAdmin
         Dim n As Long
 
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -38,15 +38,15 @@ Public Class frmAdmin
 
         ' Check to make sure its a valid map #
         If n > 0 And n <= MAX_MAPS Then
-            Call WarpTo(n)
+            WarpTo(n)
         Else
-            Call AddText("Invalid map number.")
+            AddText("Invalid map number.", BrightRed)
         End If
     End Sub
 
     Private Sub btnAdminBan_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminBan.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -59,7 +59,7 @@ Public Class frmAdmin
 
     Private Sub btnAdminKick_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminKick.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -72,7 +72,7 @@ Public Class frmAdmin
 
     Private Sub btnAdminWarp2Me_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarp2Me.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -89,7 +89,7 @@ Public Class frmAdmin
 
     Private Sub btnAdminWarpMe2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpMe2.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -106,7 +106,7 @@ Public Class frmAdmin
 
     Private Sub btnAdminSetAccess_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetAccess.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -123,7 +123,7 @@ Public Class frmAdmin
 
     Private Sub btnAdminSetSprite_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetSprite.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -154,7 +154,7 @@ Public Class frmAdmin
 
     Private Sub btnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -163,7 +163,7 @@ Public Class frmAdmin
 
     Private Sub btnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -173,7 +173,7 @@ Public Class frmAdmin
 
     Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -182,7 +182,7 @@ Public Class frmAdmin
 
     Private Sub btnResourceEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -191,7 +191,7 @@ Public Class frmAdmin
 
     Private Sub btnNPCEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNPCEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -200,7 +200,7 @@ Public Class frmAdmin
 
     Private Sub btnSpellEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpellEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -209,7 +209,7 @@ Public Class frmAdmin
 
     Private Sub btnShopEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShopEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -218,7 +218,7 @@ Public Class frmAdmin
 
     Private Sub btnAnimationEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnimationEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -227,7 +227,7 @@ Public Class frmAdmin
 
     Private Sub btnALoc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnALoc.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -236,7 +236,7 @@ Public Class frmAdmin
 
     Private Sub btnDelBans_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelBans.Click
         If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -245,7 +245,7 @@ Public Class frmAdmin
 
     Private Sub btnRespawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRespawn.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
@@ -255,18 +255,10 @@ Public Class frmAdmin
     'Mapreport
     Private Sub btnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!")
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
         SendRequestMapreport()
-    End Sub
-
-    Private Sub lstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
-
-    End Sub
-
-    Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
-
     End Sub
 
     Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click

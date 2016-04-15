@@ -103,20 +103,20 @@ Public Class frmMainGame
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         'Set the Chat Position
-        txtChat.Left = 1
-        txtChat.Top = Me.Height - txtChat.Height - 82
-        txtMeChat.Left = txtChat.Left
-        txtMeChat.Top = txtChat.Top + txtChat.Height + 10
+
+        txtMeChat.Left = ChatWindowX
+        txtMeChat.Width = ChatWindowInfo.width
+        txtMeChat.Top = Me.Height - txtMeChat.Height - 40
 
         frmAdmin.Visible = False
-        pnlCurrency.Left = txtChat.Left
-        pnlCurrency.Top = txtChat.Top
+        pnlCurrency.Left = ChatWindowX
+        pnlCurrency.Top = ChatWindowY
 
-        pnlDialog.Left = txtChat.Left
-        pnlDialog.Top = txtChat.Top
+        pnlDialog.Left = ChatWindowX
+        pnlDialog.Top = ChatWindowY
 
-        pnlQuestSpeech.Left = txtChat.Left
-        pnlQuestSpeech.Top = txtChat.Top
+        pnlQuestSpeech.Left = ChatWindowX
+        pnlQuestSpeech.Top = ChatWindowY
 
     End Sub
 
@@ -501,13 +501,13 @@ Public Class frmMainGame
     Private Sub lblShopBuy_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblShopBuy.Click
         If ShopAction = 1 Then Exit Sub
         ShopAction = 1 ' buying an item
-        AddText("Click on the item in the shop you wish to buy.")
+        AddText("Click on the item in the shop you wish to buy.", Yellow)
     End Sub
 
     Private Sub lblShopSell_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblShopSell.Click
         If ShopAction = 2 Then Exit Sub
         ShopAction = 2 ' selling an item
-        AddText("Double-click on the item in your inventory you wish to sell.")
+        AddText("Double-click on the item in your inventory you wish to sell.", Yellow)
     End Sub
 
     Private Sub pnlShopItems_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlShopItems.MouseDown
@@ -521,7 +521,7 @@ Public Class frmMainGame
             Select Case ShopAction
                 Case 0 ' no action, give cost
                     With Shop(InShop).TradeItem(shopItem)
-                        AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".")
+                        AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", Yellow)
                     End With
                 Case 1 ' buy item
                     ' buy item code

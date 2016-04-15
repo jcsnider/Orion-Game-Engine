@@ -25,7 +25,6 @@ Partial Class frmMainGame
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
         Me.txtMeChat = New System.Windows.Forms.TextBox()
-        Me.txtChat = New System.Windows.Forms.TextBox()
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.lblVolume = New System.Windows.Forms.Label()
@@ -177,17 +176,6 @@ Partial Class frmMainGame
         Me.txtMeChat.Name = "txtMeChat"
         Me.txtMeChat.Size = New System.Drawing.Size(478, 20)
         Me.txtMeChat.TabIndex = 6
-        '
-        'txtChat
-        '
-        Me.txtChat.BackColor = System.Drawing.Color.White
-        Me.txtChat.Location = New System.Drawing.Point(248, 428)
-        Me.txtChat.Multiline = True
-        Me.txtChat.Name = "txtChat"
-        Me.txtChat.ReadOnly = True
-        Me.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtChat.Size = New System.Drawing.Size(479, 107)
-        Me.txtChat.TabIndex = 5
         '
         'picscreen
         '
@@ -1578,7 +1566,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlSpellDesc)
         Me.Controls.Add(Me.pnlItemDesc)
         Me.Controls.Add(Me.txtMeChat)
-        Me.Controls.Add(Me.txtChat)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.pnlTmpSkill)
@@ -1624,7 +1611,6 @@ Partial Class frmMainGame
 
     End Sub
     Friend WithEvents txtMeChat As System.Windows.Forms.TextBox
-    Friend WithEvents txtChat As System.Windows.Forms.TextBox
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
     Friend WithEvents pnlOptions As System.Windows.Forms.Panel
     Friend WithEvents optMOff As System.Windows.Forms.RadioButton

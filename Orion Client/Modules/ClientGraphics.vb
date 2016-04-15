@@ -61,6 +61,9 @@ Module ClientGraphics
     Public HotBarGFX As Texture
     Public HotBarGFXInfo As GraphicInfo
 
+    Public ChatWindow As Texture
+    Public ChatWindowInfo As GraphicInfo
+
     Public TextBB As Bitmap
 
     Public HUDPanelGFX As Texture
@@ -356,6 +359,48 @@ Module ClientGraphics
             EXPBarGFXInfo.height = EXPBarGFX.Size.Y
         End If
 
+        ChatWindowInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Chat" & GFX_EXT) Then
+            ChatWindow = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Chat" & GFX_EXT)
+
+            'Cache the width and height
+            ChatWindowInfo.width = ChatWindow.Size.X
+            ChatWindowInfo.height = ChatWindow.Size.Y
+        End If
+
+    End Sub
+
+    Sub DrawChat()
+        Dim i As Long, x As Long, y As Long
+        Dim text As String
+
+        'first draw back image
+        RenderTexture(ChatWindow, GameWindow, ChatWindowX, ChatWindowY, 0, 0, ChatWindowInfo.width, ChatWindowInfo.height)
+
+        y = 5
+        x = 5
+
+        Dim maxLines As Long = 8
+
+        Dim first As Long = Chat.Count - maxLines 'First element is the 5th from the last in the list
+        If first < 0 Then first = 0 'if the list has less than 5 elements, the first is the 0th index or first element
+
+        Dim last As Long = first + maxLines
+        If (last >= Chat.Count) Then last = Chat.Count - 1  'Based off of index 0, so the last element should be Chat.Count -1
+
+
+
+        'only loop tru last entries
+        For i = first To last
+            text = Chat(i).Text
+
+            If text <> "" Then ' or not
+                'DrawText(ChatWindowX + x, ChatWindowY + y, text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                DrawText(ChatWindowX + x, ChatWindowY + y, text, GetSFMLColor(Chat(i).Color), SFML.Graphics.Color.Black, GameWindow)
+                y = y + 15
+            End If
+
+        Next
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Long, ByVal TexType As Byte)
@@ -3063,6 +3108,7 @@ NextLoop:
         If HUDVisible = True Then
             DrawHUD()
             DrawActionPanel()
+            DrawChat()
             DrawHotbar()
         End If
 

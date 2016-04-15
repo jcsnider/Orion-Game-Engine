@@ -190,11 +190,14 @@ Module ClientGeneral
         'set gui switches
         HUDVisible = True
 
-        Call SetStatus("Starting Game...")
+        SetStatus("Starting Game...")
         started = True
         frmmenuvisible = True
         frmloadvisible = False
-        Call GameLoop()
+
+        pnlInventoryVisible = True
+
+        GameLoop()
     End Sub
     Public Function isLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
         If Len(Trim$(Username)) >= 3 Then

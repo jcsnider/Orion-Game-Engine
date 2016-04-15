@@ -143,7 +143,7 @@ Public Module ClientGuiFunctions
                         'Trade
                     ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
                         PlaySound("Click.ogg")
-                        AddText("Click on the player you wish to trade with.")
+                        AddText("Click on the player you wish to trade with.", TellColor)
                         TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
                         TradeRequest = True
                         CheckGuiClick = True
@@ -190,7 +190,7 @@ Public Module ClientGuiFunctions
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
                         pnlSpellsVisible = True
-                        AddText("Click on the skill you want to place here")
+                        AddText("Click on the skill you want to place here", TellColor)
                         SelSpellSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     End If
@@ -297,9 +297,9 @@ Public Module ClientGuiFunctions
                                 multiplier = Shop(InShop).BuyRate / 100
                                 Value = Item(GetPlayerInvItemNum(MyIndex, InvNum)).Price * multiplier
                                 If Value > 0 Then
-                                    AddText("You can sell this item for " & Value & " gold.")
+                                    AddText("You can sell this item for " & Value & " gold.", TellColor)
                                 Else
-                                    AddText("The shop does not want this item.")
+                                    AddText("The shop does not want this item.", AlertColor)
                                 End If
                             Case 2 ' 2 = sell
                                 SellItem(InvNum)

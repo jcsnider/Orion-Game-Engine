@@ -19,6 +19,7 @@
     Public ActionMsg(0 To MAX_BYTE) As ActionMsgRec
     Public Blood(0 To MAX_BYTE) As BloodRec
     Public AnimInstance(0 To MAX_BYTE) As AnimInstanceRec
+    Public Chat As New List(Of ChatRec)
 
     'Mapreport
     Public MapNames(0 To MAX_MAPS) As String
@@ -44,6 +45,12 @@
         Dim left As Long
         Dim right As Long
         Dim bottom As Long
+    End Structure
+
+    Public Structure ChatRec
+        Dim Text As String
+        Dim Color As Long
+        Dim Y As Byte
     End Structure
 
     Public Structure PlayerInvRec

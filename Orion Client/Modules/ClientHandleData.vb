@@ -1112,7 +1112,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg)
+        AddText(Msg, GlobalColor)
     End Sub
 
     Private Sub Packet_MapMessage(ByVal Data() As Byte)
@@ -1127,7 +1127,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg)
+        AddText(Msg, BroadcastColor)
 
     End Sub
 
@@ -1175,7 +1175,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg)
+        AddText(Msg, TellColor)
     End Sub
 
     Sub Packet_UpdateItem(ByVal data() As Byte)
@@ -1760,7 +1760,7 @@
         message = Trim(Buffer.ReadString)
         Header = Trim(Buffer.ReadString)
 
-        AddText(Header & Name & ": " & message)
+        AddText(Header & Name & ": " & message, SayColor)
 
         Buffer = Nothing
     End Sub
