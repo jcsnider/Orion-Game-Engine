@@ -80,6 +80,7 @@
         SAdmin
         SMapNames
         SCritical
+        SNews
 
         'quests
         SQuestEditor

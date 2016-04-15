@@ -274,4 +274,5 @@ Public Class frmMenu
             Call MenuState(MENU_STATE_LOGIN)
         End If
     End Sub
+
 End Class

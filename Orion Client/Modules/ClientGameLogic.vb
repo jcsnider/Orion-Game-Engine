@@ -13,7 +13,7 @@ Module ClientGameLogic
         Dim destrect As Rectangle
         Dim tmr10000 As Long
         Dim tmr1000 As Long
-        Dim tmr100 As Long
+        Dim tmr100 As Long, tmr500 As Long
         Dim g As Graphics = frmMainGame.picscreen.CreateGraphics
         starttime = GetTickCount()
         frmMenu.lblNextChar.Left = lblnextcharleft
@@ -54,10 +54,10 @@ Module ClientGameLogic
                 End If
 
                 ' Change map animation every 250 milliseconds
-                If MapAnimTimer < Tick Then
-                    MapAnim = Not MapAnim
-                    MapAnimTimer = Tick + 250
-                End If
+                'If MapAnimTimer < Tick Then
+                '    MapAnim = Not MapAnim
+                '    MapAnimTimer = Tick + 250
+                'End If
 
                 For i = 1 To MAX_BYTE
                     CheckAnimInstance(i)
@@ -115,8 +115,8 @@ Module ClientGameLogic
 
                 SyncLock MapLock
                     If CanMoveNow Then
-                        Call CheckMovement() ' Check if player is trying to move
-                        Call CheckAttack()   ' Check to see if player is trying to attack
+                        CheckMovement() ' Check if player is trying to move
+                        CheckAttack()   ' Check to see if player is trying to attack
                     End If
 
                     ' Process input before rendering, otherwise input will be behind by 1 frame
@@ -124,24 +124,47 @@ Module ClientGameLogic
 
                         For i = 1 To MAX_PLAYERS
                             If IsPlaying(i) Then
-                                Call ProcessMovement(i)
+                                ProcessMovement(i)
                             End If
                         Next i
 
                         ' Process npc movements (actually move them)
                         For i = 1 To MAX_MAP_NPCS
                             If Map.Npc(i) > 0 Then
-                                Call ProcessNpcMovement(i)
+                                ProcessNpcMovement(i)
                             End If
                         Next i
 
                         If Map.CurrentEvents > 0 Then
                             For i = 1 To Map.CurrentEvents
-                                Call ProcessEventMovement(i)
+                                ProcessEventMovement(i)
                             Next i
                         End If
 
                         WalkTimer = Tick + 30 ' edit this value to change WalkTimer
+                    End If
+
+                    If tmr500 < Tick Then
+                        ' animate waterfalls
+                        Select Case waterfallFrame
+                            Case 0
+                                waterfallFrame = 1
+                            Case 1
+                                waterfallFrame = 2
+                            Case 2
+                                waterfallFrame = 0
+                        End Select
+                        ' animate autotiles
+                        Select Case autoTileFrame
+                            Case 0
+                                autoTileFrame = 1
+                            Case 1
+                                autoTileFrame = 2
+                            Case 2
+                                autoTileFrame = 0
+                        End Select
+
+                        tmr500 = Tick + 500
                     End If
 
                     'Auctual Game Loop Stuff :/
@@ -787,6 +810,11 @@ Module ClientGameLogic
             ReloadFrmMain = False
         End If
 
+        If UpdateNews = True Then
+            frmMenu.lblNews.Text = News
+            UpdateNews = False
+        End If
+
         If pnlRegisterVisible <> frmMenu.pnlRegister.Visible Then
             frmMenu.pnlRegister.Visible = pnlRegisterVisible
         End If
@@ -985,7 +1013,7 @@ Module ClientGameLogic
 
         If InitMapProperties = True Then
             MapPropertiesInit()
-            frmEditor_MapProperties.Visible = True
+            'frmEditor_MapProperties.Visible = True
             InitMapProperties = False
         End If
 

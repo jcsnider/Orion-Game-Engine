@@ -156,12 +156,6 @@
     <Compile Include="Forms\frmEditor_Map.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmEditor_MapProperties.Designer.vb">
-      <DependentUpon>frmEditor_MapProperties.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmEditor_MapProperties.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmEditor_NPC.Designer.vb">
       <DependentUpon>frmEditor_NPC.vb</DependentUpon>
     </Compile>
@@ -265,9 +259,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_Map.resx">
       <DependentUpon>frmEditor_Map.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmEditor_MapProperties.resx">
-      <DependentUpon>frmEditor_MapProperties.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_NPC.resx">
       <DependentUpon>frmEditor_NPC.vb</DependentUpon>
@@ -961,6 +952,8 @@
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

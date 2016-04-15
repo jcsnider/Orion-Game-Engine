@@ -113,7 +113,6 @@
         Packets.Add(ClientPackets.CSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ClientPackets.CEventTouch, AddressOf Packet_EventTouch)
 
-
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Long, ByVal data() As Byte)
@@ -1879,8 +1878,11 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CWhosOnline Then Exit Sub
-        Call SendWhosOnline(index)
+
+        SendWhosOnline(index)
+
         buffer = Nothing
     End Sub
 
@@ -1888,16 +1890,20 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CSetMotd Then Exit Sub
+
         ' Prevent hacking
         If GetPlayerAccess(index) < ADMIN_MAPPER Then
             Exit Sub
         End If
 
-        Options.MOTD = Trim$(buffer.ReadString) 'Parse(1))
+        Options.MOTD = Trim$(buffer.ReadString)
         SaveOptions()
-        Call GlobalMsg("MOTD changed to: " & Options.MOTD)
-        Call Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.MOTD, ADMIN_LOG)
+
+        GlobalMsg("MOTD changed to: " & Options.MOTD)
+        Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.MOTD, ADMIN_LOG)
+
         buffer = Nothing
     End Sub
 

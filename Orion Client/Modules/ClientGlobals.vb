@@ -222,4 +222,8 @@ Module ClientGlobals
     Public Const DIALOGUE_TYPE_BUYHOME As Byte = 1
     Public Const DIALOGUE_TYPE_VISIT As Byte = 2
 
+    'store news here
+    Public News As String
+    Public UpdateNews As Boolean
+
 End Module

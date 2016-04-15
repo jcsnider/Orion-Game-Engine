@@ -22,34 +22,34 @@ Partial Class frmEditor_Animation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.picSprite1 = New System.Windows.Forms.PictureBox
-        Me.picSprite0 = New System.Windows.Forms.PictureBox
-        Me.scrlLoopTime1 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopTime1 = New System.Windows.Forms.Label
-        Me.scrlFrameCount1 = New System.Windows.Forms.HScrollBar
-        Me.lblFrameCount1 = New System.Windows.Forms.Label
-        Me.scrlLoopCount1 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopCount1 = New System.Windows.Forms.Label
-        Me.scrlLoopTime0 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopTime0 = New System.Windows.Forms.Label
-        Me.scrlFrameCount0 = New System.Windows.Forms.HScrollBar
-        Me.lblFrameCount0 = New System.Windows.Forms.Label
-        Me.scrlLoopCount0 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopCount0 = New System.Windows.Forms.Label
-        Me.scrlSprite1 = New System.Windows.Forms.HScrollBar
-        Me.lblSprite1 = New System.Windows.Forms.Label
-        Me.scrlSprite0 = New System.Windows.Forms.HScrollBar
-        Me.lblSprite0 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.picSprite1 = New System.Windows.Forms.PictureBox()
+        Me.picSprite0 = New System.Windows.Forms.PictureBox()
+        Me.scrlLoopTime1 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopTime1 = New System.Windows.Forms.Label()
+        Me.scrlFrameCount1 = New System.Windows.Forms.HScrollBar()
+        Me.lblFrameCount1 = New System.Windows.Forms.Label()
+        Me.scrlLoopCount1 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopCount1 = New System.Windows.Forms.Label()
+        Me.scrlLoopTime0 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopTime0 = New System.Windows.Forms.Label()
+        Me.scrlFrameCount0 = New System.Windows.Forms.HScrollBar()
+        Me.lblFrameCount0 = New System.Windows.Forms.Label()
+        Me.scrlLoopCount0 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopCount0 = New System.Windows.Forms.Label()
+        Me.scrlSprite1 = New System.Windows.Forms.HScrollBar()
+        Me.lblSprite1 = New System.Windows.Forms.Label()
+        Me.scrlSprite0 = New System.Windows.Forms.HScrollBar()
+        Me.lblSprite0 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picSprite1, System.ComponentModel.ISupportInitialize).BeginInit()

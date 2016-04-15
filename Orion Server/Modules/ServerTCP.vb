@@ -9,6 +9,7 @@ Public Class Client
     Public myStream As NetworkStream
     Public Closing As Boolean
     Private readBuff As Byte()
+
     Public Sub Start()
         Socket.SendBufferSize = 4096
         Socket.ReceiveBufferSize = 4096
@@ -17,6 +18,7 @@ Public Class Client
         myStream.BeginRead(readBuff, 0, Socket.ReceiveBufferSize, AddressOf OnReceiveData, Nothing)
         Closing = False
     End Sub
+
     Private Sub OnReceiveData(ar As IAsyncResult)
         Try
             Dim readbytes As Integer = myStream.EndRead(ar)
@@ -41,11 +43,13 @@ End Class
 Module ServerTCP
     Public Clients() As Client
     Public ServerSocket As TcpListener
+
     Public Sub InitNetwork()
         ServerSocket = New TcpListener(IPAddress.Any, Options.Port)
         ServerSocket.Start()
         ServerSocket.BeginAcceptTcpClient(AddressOf OnClientConnect, Nothing)
     End Sub
+
     Private Sub OnClientConnect(ar As IAsyncResult)
         Dim client As TcpClient = ServerSocket.EndAcceptTcpClient(ar)
         client.NoDelay = False
@@ -58,10 +62,12 @@ Module ServerTCP
                 Clients(i).Start()
                 TextAdd("Connection received from " & Clients(i).IP)
                 NeedToUpDatePlayerList = True
+                SendNews(i)
                 Exit For
             End If
         Next
     End Sub
+
     Public Sub SendDataTo(ByVal Index As Long, ByRef Data() As Byte)
         Try
             If Not IsConnected(Index) Then Exit Sub
@@ -877,11 +883,11 @@ Module ServerTCP
 
         ' Send them MOTD
         If Len(Options.MOTD) > 0 Then
-            Call PlayerMsg(Index, Options.MOTD)
+            PlayerMsg(Index, Options.MOTD)
         End If
 
         ' Send whos online
-        Call SendWhosOnline(Index)
+        SendWhosOnline(Index)
     End Sub
     Sub SendWhosOnline(ByVal Index As Long)
         Dim s As String
@@ -906,7 +912,7 @@ Module ServerTCP
             s = "There are " & n & " other players online: " & s & "."
         End If
 
-        Call PlayerMsg(Index, s)
+        PlayerMsg(Index, s)
     End Sub
 
     Sub SendWornEquipment(ByVal Index As Long)
@@ -1165,6 +1171,7 @@ Module ServerTCP
         Buffer.WriteLong(Player(Index).InHouse)
 
         PlayerData = Buffer.ToArray()
+
         Buffer = Nothing
     End Function
     Sub SendMapItemsTo(ByVal Index As Long, ByVal MapNum As Long)
@@ -1237,6 +1244,7 @@ Module ServerTCP
         Buffer.WriteLong(y)
 
         SendDataToMap(MapNum, Buffer.ToArray())
+
         Buffer = Nothing
     End Sub
     Sub SendMapKey(ByVal Index As Long, ByVal x As Long, ByVal y As Long, ByVal Value As Byte)
@@ -1247,6 +1255,7 @@ Module ServerTCP
         Buffer.WriteLong(x)
         Buffer.WriteLong(y)
         Buffer.WriteLong(Value)
+
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
@@ -1257,6 +1266,7 @@ Module ServerTCP
 
         Buffer.WriteLong(ServerPackets.SMapMsg)
         Buffer.WriteString(Msg)
+
         SendDataToMap(MapNum, Buffer.ToArray)
 
         Buffer = Nothing
@@ -1296,9 +1306,11 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendPlayerData(ByVal Index As Long)
         SendDataToMap(GetPlayerMap(Index), PlayerData(Index))
     End Sub
+
     Sub SendUpdateResourceToAll(ByVal ResourceNum As Long)
         Dim Buffer As ByteBuffer
 
@@ -1324,6 +1336,7 @@ Module ServerTCP
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendMapNpcVitals(ByVal MapNum As Long, ByVal MapNpcNum As Byte)
         Dim i As Long
         Dim Buffer As ByteBuffer
@@ -1340,6 +1353,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendMapKeyToMap(ByVal MapNum As Long, ByVal x As Long, ByVal y As Long, ByVal Value As Byte)
         Dim Buffer As ByteBuffer
 
@@ -1352,6 +1366,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendResourceCacheToMap(ByVal MapNum As Long, ByVal Resource_num As Long)
         Dim Buffer As ByteBuffer
         Dim i As Long
@@ -1372,6 +1387,7 @@ Module ServerTCP
         SendDataToMap(MapNum, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendGameData(ByVal index As Long)
         Dim buffer As ByteBuffer
         Dim i As Long
@@ -1805,6 +1821,19 @@ Module ServerTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SCritical)
+
+        SendDataTo(Index, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
+    Sub SendNews(ByVal Index As Long)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.SNews)
+
+        Buffer.WriteString(Trim(GetFileContents(Application.StartupPath & "\news.txt")))
 
         SendDataTo(Index, Buffer.ToArray())
 

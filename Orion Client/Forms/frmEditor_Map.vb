@@ -1,7 +1,9 @@
 ﻿Imports System.Drawing
+Imports System.Windows.Forms
+
 
 Public Class frmEditor_Map
-
+    Public cmbNpcs() As cmbNpc
     Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picBackSelect.MouseDown
         Call MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -50,12 +52,12 @@ Public Class frmEditor_Map
     End Sub
 
 
-    Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSend.Click
+    Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs)
         MapEditorSend()
         GettingMap = True
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs)
         MapEditorCancel()
     End Sub
 
@@ -99,12 +101,16 @@ Public Class frmEditor_Map
 
     Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         scrlTileSet.Maximum = NumTileSets
+        scrlTileSet.Value = 1
+        EditorMap_DrawTileset()
+        pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
         pnlAttributes.Left = 8
-        Me.Width = 504
+        Me.Width = 525
         scrlTileSet.Value = 1
         optBlocked.Checked = True
         optLayers.Checked = True
+        tabpages.SelectedTab = tpTiles
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -293,7 +299,7 @@ Public Class frmEditor_Map
         fraTrap.Visible = True
     End Sub
 
-    Private Sub btnProperties_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnProperties.Click
+    Private Sub btnProperties_Click(ByVal sender As Object, ByVal e As EventArgs)
         InitMapProperties = True
     End Sub
 
@@ -372,4 +378,103 @@ Public Class frmEditor_Map
         fraBuyHouse.Visible = False
     End Sub
 
+    Private Sub btnSaveNpc_Click(sender As Object, e As EventArgs) Handles btnSaveNpc.Click
+        Dim i As Long
+        Dim sTemp As Long
+        With Map
+            For i = 1 To MAX_MAP_NPCS
+                If cmbNpcs(i).cmbNpc.SelectedIndex > 0 Then
+                    sTemp = InStr(1, Trim$(cmbNpcs(i).cmbNpc.Text), ":", vbTextCompare)
+
+                    If Len(Trim$(cmbNpcs(i).cmbNpc.Text)) = sTemp Then
+                        cmbNpcs(i).cmbNpc.SelectedIndex = 0
+                    End If
+                End If
+            Next
+
+            For i = 1 To MAX_MAP_NPCS
+                .Npc(i) = cmbNpcs(i).cmbNpc.SelectedIndex
+            Next
+        End With
+    End Sub
+
+    Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+        Dim X As Long, x2 As Long
+        Dim Y As Long, y2 As Long
+        Dim tempArr(,) As TileRec
+
+        If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
+        If Val(txtMaxX.Text) < MAX_MAPX Then txtMaxX.Text = MAX_MAPX
+        If Val(txtMaxX.Text) > MAX_BYTE Then txtMaxX.Text = MAX_BYTE
+        If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
+        If Val(txtMaxY.Text) < MAX_MAPY Then txtMaxY.Text = MAX_MAPY
+        If Val(txtMaxY.Text) > MAX_BYTE Then txtMaxY.Text = MAX_BYTE
+
+        With Map
+            .Name = Trim$(txtName.Text)
+            If lstMusic.SelectedIndex >= 0 Then
+                .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
+            Else
+                .Music = vbNullString
+            End If
+            .Up = Val(txtUp.Text)
+            .Down = Val(txtDown.Text)
+            .Left = Val(txtLeft.Text)
+            .Right = Val(txtRight.Text)
+            .Moral = cmbMoral.SelectedIndex
+            .BootMap = Val(txtBootMap.Text)
+            .BootX = Val(txtBootX.Text)
+            .BootY = Val(txtBootY.Text)
+
+            ' set the data before changing it
+            tempArr = Map.Tile.Clone
+
+            x2 = Map.MaxX
+            y2 = Map.MaxY
+            ' change the data
+            .MaxX = Val(txtMaxX.Text)
+            .MaxY = Val(txtMaxY.Text)
+            ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
+
+            ReDim Autotile(0 To .MaxX, 0 To .MaxY)
+
+            If x2 > .MaxX Then x2 = .MaxX
+            If y2 > .MaxY Then y2 = .MaxY
+
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
+                    ReDim .Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
+                    ReDim .Tile(X, Y).Autotile(0 To MapLayer.Layer_Count - 1)
+
+                    ReDim Autotile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
+
+                    If X <= x2 Then
+                        If Y <= y2 Then
+                            .Tile(X, Y) = tempArr(X, Y)
+                        End If
+                    End If
+                Next
+            Next
+
+            ClearTempTile()
+            MapEditorSend()
+        End With
+    End Sub
+
+#Region "Toolbar"
+    Private Sub tsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
+        MapEditorSend()
+        GettingMap = True
+    End Sub
+
+    Private Sub tsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
+        MapEditorCancel()
+    End Sub
+
+
+#End Region
+    Public Class cmbNpc
+        Public WithEvents cmbNpc As ComboBox
+
+    End Class
 End Class

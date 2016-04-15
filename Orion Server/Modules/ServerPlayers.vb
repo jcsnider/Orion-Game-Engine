@@ -11,9 +11,9 @@
     End Function
     Public Sub HandleUseChar(ByVal Index As Long)
         If Not IsPlaying(Index) Then
-            Call JoinGame(Index)
-            Call Addlog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".", PLAYER_LOG)
-            Call TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
+            JoinGame(Index)
+            Addlog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".", PLAYER_LOG)
+            TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
         End If
     End Sub
     Function GetPlayerName(ByVal Index As Long) As String
@@ -251,26 +251,26 @@
 
         ' Send a global message that he/she joined
         If GetPlayerAccess(Index) <= ADMIN_MONITOR Then
-            Call GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
+            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
         Else
-            Call GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
+            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
         End If
 
         'Update the log
         ' Send an ok to client to start receiving in game data
-        Call SendLoginOk(Index)
+        SendLoginOk(Index)
         TotalPlayersOnline = TotalPlayersOnline + 1
         ' Send some more little goodies, no need to explain these
-        Call CheckEquippedItems(Index)
+        CheckEquippedItems(Index)
 
         SendGameData(Index)
 
-        Call SendInventory(Index)
-        Call SendWornEquipment(Index)
-        Call SendMapEquipment(Index)
+        SendInventory(Index)
+        SendWornEquipment(Index)
+        SendMapEquipment(Index)
 
         For i = 1 To Vitals.Vital_Count - 1
-            Call SendVital(Index, i)
+            SendVital(Index, i)
         Next
 
         SendEXP(Index)

@@ -64,7 +64,7 @@ Partial Class frmMenu
         Me.tmrDrawCharacter = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblNews = New System.Windows.Forms.Label()
         Me.btnPlay = New System.Windows.Forms.Panel()
         Me.btnRegister = New System.Windows.Forms.Panel()
         Me.btnCredits = New System.Windows.Forms.Panel()
@@ -476,7 +476,7 @@ Partial Class frmMenu
         Me.pnlMainMenu.BackgroundImage = CType(resources.GetObject("pnlMainMenu.BackgroundImage"), System.Drawing.Image)
         Me.pnlMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlMainMenu.Controls.Add(Me.Label5)
-        Me.pnlMainMenu.Controls.Add(Me.Label6)
+        Me.pnlMainMenu.Controls.Add(Me.lblNews)
         Me.pnlMainMenu.ForeColor = System.Drawing.Color.White
         Me.pnlMainMenu.Location = New System.Drawing.Point(160, 149)
         Me.pnlMainMenu.Name = "pnlMainMenu"
@@ -488,21 +488,21 @@ Partial Class frmMenu
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(120, 16)
+        Me.Label5.Location = New System.Drawing.Point(112, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(158, 33)
+        Me.Label5.Size = New System.Drawing.Size(175, 33)
         Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Main Menu"
+        Me.Label5.Text = "Latest News"
         '
-        'Label6
+        'lblNews
         '
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Location = New System.Drawing.Point(43, 61)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(308, 104)
-        Me.Label6.TabIndex = 37
-        Me.Label6.Text = resources.GetString("Label6.Text")
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblNews.BackColor = System.Drawing.Color.Transparent
+        Me.lblNews.Location = New System.Drawing.Point(17, 55)
+        Me.lblNews.Name = "lblNews"
+        Me.lblNews.Size = New System.Drawing.Size(366, 121)
+        Me.lblNews.TabIndex = 37
+        Me.lblNews.Text = resources.GetString("lblNews.Text")
+        Me.lblNews.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'btnPlay
         '
@@ -714,7 +714,7 @@ Partial Class frmMenu
     Friend WithEvents tmrDrawCharacter As System.Windows.Forms.Timer
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents lblNews As System.Windows.Forms.Label
     Friend WithEvents btnPlay As Windows.Forms.Panel
     Friend WithEvents btnRegister As Windows.Forms.Panel
     Friend WithEvents btnCredits As Windows.Forms.Panel

@@ -76,4 +76,9 @@
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         AnimationEditorCancel()
     End Sub
+
+    Private Sub frmEditor_Animation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        scrlSprite0.Maximum = NumAnimations
+        scrlSprite1.Maximum = NumAnimations
+    End Sub
 End Class
