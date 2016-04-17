@@ -1640,7 +1640,8 @@ Module ClientGraphics
         If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
             RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
         Else
-            RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+            'RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+            RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
         End If
 
     End Sub

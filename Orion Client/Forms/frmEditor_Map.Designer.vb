@@ -1150,7 +1150,7 @@ Partial Class frmEditor_Map
         'cmbNpcList
         '
         Me.cmbNpcList.FormattingEnabled = True
-        Me.cmbNpcList.Location = New System.Drawing.Point(260, 26)
+        Me.cmbNpcList.Location = New System.Drawing.Point(260, 19)
         Me.cmbNpcList.Name = "cmbNpcList"
         Me.cmbNpcList.Size = New System.Drawing.Size(213, 21)
         Me.cmbNpcList.TabIndex = 70

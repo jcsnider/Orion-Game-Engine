@@ -105,7 +105,12 @@ Module ClientGameEditors
         frmEditor_Map.lstMapNpc.Items.Clear()
 
         For X = 1 To MAX_MAP_NPCS
-            frmEditor_Map.lstMapNpc.Items.Add("No NPC")
+            If Map.Npc(X) = 0 Then
+                frmEditor_Map.lstMapNpc.Items.Add("No NPC")
+            Else
+                frmEditor_Map.lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
+            End If
+
         Next
 
         frmEditor_Map.cmbNpcList.Items.Clear()

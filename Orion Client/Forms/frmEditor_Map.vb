@@ -440,9 +440,15 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub cmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If lstMapNpc.SelectedIndex > -1 And cmbNpcList.SelectedIndex > 0 Then
-            lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
-            Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
+        If lstMapNpc.SelectedIndex > -1 Then
+            If cmbNpcList.SelectedIndex > 0 Then
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
+            Else
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
+            End If
+
         End If
     End Sub
 End Class
