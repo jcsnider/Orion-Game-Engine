@@ -141,11 +141,6 @@
         Dim DirBlock As Byte
     End Structure
 
-    Public Structure ExTileRec
-        Dim Layer() As TileDataRec
-        Dim Autotile() As Byte
-    End Structure
-
     Public Structure MapRec
         Dim Name As String
         Dim Music As String
@@ -288,6 +283,10 @@
         Dim CastAnim As Long
         Dim SpellAnim As Long
         Dim StunDuration As Long
+
+        'projectiles
+        Dim IsProjectile As Long '0 is no, 1 is yes
+        Dim Projectile As Long
     End Structure
 
     Public Structure TempTileRec

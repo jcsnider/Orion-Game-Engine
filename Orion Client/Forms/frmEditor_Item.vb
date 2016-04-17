@@ -325,4 +325,13 @@ Public Class frmEditor_Item
     Private Sub picFurniture_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picFurniture.Paint
         'Dont let it auto paint ;)
     End Sub
+
+    Private Sub scrlProjectile_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlProjectile.ValueChanged
+        If scrlProjectile.Value = 0 Then
+            lblProjectile.Text = "Projectile: 0 None"
+        Else
+            lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
+        End If
+        Item(EditorIndex).Data1 = scrlProjectile.Value
+    End Sub
 End Class

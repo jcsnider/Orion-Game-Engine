@@ -65,6 +65,7 @@ Partial Class frmAdmin
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblMapReportClose = New System.Windows.Forms.Label()
+        Me.btnProjectiles = New System.Windows.Forms.Button()
         Me.picAdmin.SuspendLayout()
         Me.pnlMapreport.SuspendLayout()
         Me.SuspendLayout()
@@ -73,6 +74,7 @@ Partial Class frmAdmin
         '
         Me.picAdmin.BackColor = System.Drawing.Color.Silver
         Me.picAdmin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picAdmin.Controls.Add(Me.btnProjectiles)
         Me.picAdmin.Controls.Add(Me.btnhouseEditor)
         Me.picAdmin.Controls.Add(Me.btnQuest)
         Me.picAdmin.Controls.Add(Me.btnRespawn)
@@ -475,6 +477,15 @@ Partial Class frmAdmin
         Me.lblMapReportClose.TabIndex = 1
         Me.lblMapReportClose.Text = "Close"
         '
+        'btnProjectiles
+        '
+        Me.btnProjectiles.Location = New System.Drawing.Point(126, 318)
+        Me.btnProjectiles.Name = "btnProjectiles"
+        Me.btnProjectiles.Size = New System.Drawing.Size(84, 22)
+        Me.btnProjectiles.TabIndex = 37
+        Me.btnProjectiles.Text = "Projectiles"
+        Me.btnProjectiles.UseVisualStyleBackColor = True
+        '
         'frmAdmin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -536,4 +547,5 @@ Partial Class frmAdmin
     Friend WithEvents ColumnHeader1 As Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
     Friend WithEvents lblMapReportClose As Windows.Forms.Label
+    Friend WithEvents btnProjectiles As Windows.Forms.Button
 End Class

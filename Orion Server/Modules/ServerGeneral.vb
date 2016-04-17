@@ -129,7 +129,8 @@
         ReDim Animation(0 To MAX_ANIMATIONS).LoopCount(0 To 1)
         ReDim Animation(0 To MAX_ANIMATIONS).LoopTime(0 To 1)
 
-
+        ReDim MapProjectiles(0 To MAX_MAPS, 0 To MAX_PROJECTILES)
+        ReDim Projectiles(MAX_PROJECTILES)
 
         ' Check if the directory is there, if its not make it
         If LCase$(Dir(Application.StartupPath & "\data", vbDirectory)) <> "data" Then
@@ -179,6 +180,10 @@
         'quests
         If LCase$(Dir(Application.StartupPath & "\data\quests", vbDirectory)) <> "quests" Then
             Call MkDir(Application.StartupPath & "\data\quests")
+        End If
+
+        If LCase$(Dir(Application.StartupPath & "\data\projectiles", vbDirectory)) <> "projectiles" Then
+            Call MkDir(Application.StartupPath & "\data\projectiles")
         End If
 
         ' set quote character
@@ -291,6 +296,12 @@
         'quests
         Call SetStatus("Clearing Quests...")
         Call ClearQuests()
+
+        'projectiles
+        Call SetStatus("Clearing map projectiles...")
+        Call ClearMapProjectiles()
+        Call SetStatus("Clearing projectiles...")
+        Call ClearProjectiles()
     End Sub
 
     Private Sub LoadGameData()
@@ -325,6 +336,10 @@
         'Events
         Call SetStatus("Spawning global events...")
         Call SpawnAllMapGlobalEvents()
+
+        'projectiles
+        Call SetStatus("Loading projectiles...")
+        Call LoadProjectiles()
     End Sub
 
     Sub TextAdd(ByVal Msg As String)

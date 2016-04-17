@@ -909,6 +909,10 @@ Module ClientDataBase
         If LCase$(Dir(Application.StartupPath & "\data files\graphics\faces", vbDirectory)) <> "faces" Then
             Call MkDir(Application.StartupPath & "\data files\graphics\faces")
         End If
+
+        If LCase$(Dir(Application.StartupPath & "\data files\graphics\projectiles", vbDirectory)) <> "projectiles" Then
+            Call MkDir(Application.StartupPath & "\data files\graphics\projectiles")
+        End If
     End Sub
 
 End Module

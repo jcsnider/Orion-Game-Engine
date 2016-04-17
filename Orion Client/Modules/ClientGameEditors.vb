@@ -629,6 +629,7 @@ Module ClientGameEditors
             ' Type specific settings
             If (frmEditor_Item.cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (frmEditor_Item.cmbType.SelectedIndex <= ITEM_TYPE_SHIELD) Then
                 frmEditor_Item.fraEquipment.Visible = True
+                frmEditor_Item.scrlProjectile.Value = .Data1
                 frmEditor_Item.scrlDamage.Value = .Data2
                 frmEditor_Item.cmbTool.SelectedIndex = .Data3
 
@@ -872,6 +873,7 @@ Module ClientGameEditors
             .scrlAOE.Maximum = MAX_BYTE
             .scrlRange.Maximum = MAX_BYTE
             .scrlMap.Maximum = MAX_MAPS
+            .scrlProjectile.Maximum = MAX_PROJECTILES
 
             ' build class combo
             .cmbClass.Items.Clear()
@@ -908,6 +910,13 @@ Module ClientGameEditors
             .scrlAnimCast.Value = Spell(EditorIndex).CastAnim
             .scrlAnim.Value = Spell(EditorIndex).SpellAnim
             .scrlStun.Value = Spell(EditorIndex).StunDuration
+
+            If Spell(EditorIndex).IsProjectile = 1 Then
+                .chkProjectile.Checked = 1
+            Else
+                .chkProjectile.Checked = 0
+            End If
+            .scrlProjectile.Value = Spell(EditorIndex).Projectile
         End With
 
         EditorSpell_BltIcon()

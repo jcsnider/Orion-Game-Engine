@@ -130,6 +130,9 @@ Module ClientGeneral
             Next
         Next
 
+        ReDim MapProjectiles(MAX_PROJECTILES)
+        ReDim Projectiles(MAX_PROJECTILES)
+
         'ReDim Item(0 To MAX_ITEMS)
         'ReDim Bank.Item(0 To MAX_BANK)
         ClearItems()
@@ -167,6 +170,7 @@ Module ClientGeneral
         CacheSound()
 
         CheckFurniture()
+        CheckProjectiles()
 
         InitGraphics()
         InitMessages()

@@ -269,6 +269,9 @@
         SendWornEquipment(Index)
         SendMapEquipment(Index)
 
+        'projectiles
+        SendProjectiles(Index)
+
         For i = 1 To Vitals.Vital_Count - 1
             SendVital(Index, i)
         Next
@@ -293,12 +296,14 @@
         SendHotbar(Index)
         SendPlayerSpells(Index)
 
-        Call SendStats(Index)
-        Call SendJoinMap(Index)
+        SendStats(Index)
+        SendJoinMap(Index)
+
         ' Warp the player to his saved location
-        Call PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+        PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+
         ' Send welcome messages
-        Call SendWelcome(Index)
+        SendWelcome(Index)
 
         ' Send Resource cache
         For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count

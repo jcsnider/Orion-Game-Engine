@@ -74,6 +74,9 @@ Partial Class frmEditor_Spell
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
+        Me.lblProjectile = New System.Windows.Forms.Label()
+        Me.chkProjectile = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -371,6 +374,9 @@ Partial Class frmEditor_Spell
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.scrlProjectile)
+        Me.GroupBox3.Controls.Add(Me.lblProjectile)
+        Me.GroupBox3.Controls.Add(Me.chkProjectile)
         Me.GroupBox3.Controls.Add(Me.picSprite)
         Me.GroupBox3.Controls.Add(Me.scrlIcon)
         Me.GroupBox3.Controls.Add(Me.lblIcon)
@@ -400,7 +406,7 @@ Partial Class frmEditor_Spell
         'picSprite
         '
         Me.picSprite.BackColor = System.Drawing.Color.Black
-        Me.picSprite.Location = New System.Drawing.Point(203, 372)
+        Me.picSprite.Location = New System.Drawing.Point(203, 334)
         Me.picSprite.Name = "picSprite"
         Me.picSprite.Size = New System.Drawing.Size(32, 32)
         Me.picSprite.TabIndex = 54
@@ -409,7 +415,7 @@ Partial Class frmEditor_Spell
         'scrlIcon
         '
         Me.scrlIcon.LargeChange = 1
-        Me.scrlIcon.Location = New System.Drawing.Point(12, 387)
+        Me.scrlIcon.Location = New System.Drawing.Point(12, 349)
         Me.scrlIcon.Name = "scrlIcon"
         Me.scrlIcon.Size = New System.Drawing.Size(184, 17)
         Me.scrlIcon.TabIndex = 53
@@ -417,7 +423,7 @@ Partial Class frmEditor_Spell
         'lblIcon
         '
         Me.lblIcon.AutoSize = True
-        Me.lblIcon.Location = New System.Drawing.Point(9, 374)
+        Me.lblIcon.Location = New System.Drawing.Point(9, 336)
         Me.lblIcon.Name = "lblIcon"
         Me.lblIcon.Size = New System.Drawing.Size(60, 13)
         Me.lblIcon.TabIndex = 52
@@ -591,6 +597,34 @@ Partial Class frmEditor_Spell
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'scrlProjectile
+        '
+        Me.scrlProjectile.LargeChange = 1
+        Me.scrlProjectile.Location = New System.Drawing.Point(11, 393)
+        Me.scrlProjectile.Maximum = 32767
+        Me.scrlProjectile.Name = "scrlProjectile"
+        Me.scrlProjectile.Size = New System.Drawing.Size(224, 16)
+        Me.scrlProjectile.TabIndex = 60
+        '
+        'lblProjectile
+        '
+        Me.lblProjectile.AutoSize = True
+        Me.lblProjectile.Location = New System.Drawing.Point(93, 370)
+        Me.lblProjectile.Name = "lblProjectile"
+        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
+        Me.lblProjectile.TabIndex = 59
+        Me.lblProjectile.Text = "Projectile: 0 None"
+        '
+        'chkProjectile
+        '
+        Me.chkProjectile.AutoSize = True
+        Me.chkProjectile.Location = New System.Drawing.Point(12, 369)
+        Me.chkProjectile.Name = "chkProjectile"
+        Me.chkProjectile.Size = New System.Drawing.Size(75, 17)
+        Me.chkProjectile.TabIndex = 58
+        Me.chkProjectile.Text = "Projectile?"
+        Me.chkProjectile.UseVisualStyleBackColor = True
+        '
         'frmEditor_Spell
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -667,4 +701,7 @@ Partial Class frmEditor_Spell
     Friend WithEvents lblAnim As System.Windows.Forms.Label
     Friend WithEvents scrlAnimCast As System.Windows.Forms.HScrollBar
     Friend WithEvents lblAnimCast As System.Windows.Forms.Label
+    Friend WithEvents scrlProjectile As Windows.Forms.HScrollBar
+    Friend WithEvents lblProjectile As Windows.Forms.Label
+    Friend WithEvents chkProjectile As Windows.Forms.CheckBox
 End Class

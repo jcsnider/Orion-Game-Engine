@@ -275,5 +275,12 @@ Public Class frmAdmin
         End If
         SendRequestEditHouse()
     End Sub
+
+    Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
+            Exit Sub
+        End If
+        SendRequestEditProjectiles()
+    End Sub
 #End Region
 End Class

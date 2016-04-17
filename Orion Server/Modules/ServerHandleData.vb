@@ -113,6 +113,12 @@
         Packets.Add(ClientPackets.CSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ClientPackets.CEventTouch, AddressOf Packet_EventTouch)
 
+        'projectiles
+        Packets.Add(ClientPackets.CRequestEditProjectiles, AddressOf HandleRequestEditProjectiles)
+        Packets.Add(ClientPackets.CSaveProjectile, AddressOf HandleSaveProjectile)
+        Packets.Add(ClientPackets.CRequestProjectiles, AddressOf HandleRequestProjectiles)
+        Packets.Add(ClientPackets.CClearProjectile, AddressOf HandleClearProjectile)
+
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Long, ByVal data() As Byte)
@@ -744,6 +750,15 @@
 
         ' can't attack whilst stunned
         If TempPlayer(Index).StunDuration > 0 Then Exit Sub
+
+        'projectiles
+        ' Projectile check
+        If GetPlayerEquipment(Index, Equipment.Weapon) > 0 Then
+            If Item(GetPlayerEquipment(Index, Equipment.Weapon)).Data1 > 0 Then 'Item has a projectile
+                Call PlayerFireProjectile(Index)
+                Exit Sub
+            End If
+        End If
 
         ' Try to attack a player
         For i = 1 To MAX_PLAYERS
@@ -1818,10 +1833,14 @@
         Spell(spellnum).x = buffer.ReadLong()
         Spell(spellnum).y = buffer.ReadLong()
 
+        'projectiles
+        Spell(spellnum).IsProjectile = buffer.ReadLong()
+        Spell(spellnum).Projectile = buffer.ReadLong()
+
         ' Save it
-        Call SendUpdateSpellToAll(spellnum)
-        Call SaveSpell(spellnum)
-        Call Addlog(GetPlayerName(index) & " saved Spell #" & spellnum & ".", ADMIN_LOG)
+        SendUpdateSpellToAll(spellnum)
+        SaveSpell(spellnum)
+        Addlog(GetPlayerName(index) & " saved Spell #" & spellnum & ".", ADMIN_LOG)
 
         buffer = Nothing
     End Sub

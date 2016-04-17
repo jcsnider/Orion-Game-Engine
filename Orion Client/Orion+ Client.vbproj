@@ -162,6 +162,12 @@
     <Compile Include="Forms\frmEditor_NPC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmEditor_Projectile.Designer.vb">
+      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmEditor_Projectile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmEditor_Quest.Designer.vb">
       <DependentUpon>frmEditor_Quest.vb</DependentUpon>
     </Compile>
@@ -215,6 +221,7 @@
     <Compile Include="Modules\ClientGraphics.vb" />
     <Compile Include="Modules\ClientHotBar.vb" />
     <Compile Include="Modules\ClientHousing.vb" />
+    <Compile Include="Modules\ClientProjectiles.vb" />
     <Compile Include="Modules\ClientQuest.vb" />
     <Compile Include="Modules\ClientSound.vb" />
     <Compile Include="Modules\ClientTCP.vb" />
@@ -262,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_NPC.resx">
       <DependentUpon>frmEditor_NPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEditor_Projectile.resx">
+      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_Quest.resx">
       <DependentUpon>frmEditor_Quest.vb</DependentUpon>
@@ -899,6 +909,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\paperdolls\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\Projectiles\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\Projectiles\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\Projectiles\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\resources\1.png">

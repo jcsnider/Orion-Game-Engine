@@ -1046,7 +1046,9 @@
         End If
 
         ' find out what kind of spell it is! self cast, target or AOE
-        If Spell(spellnum).range > 0 Then
+        If Spell(spellnum).IsProjectile = 1 Then
+            SpellCastType = 4 ' Projectile
+        ElseIf Spell(spellnum).range > 0 Then
             ' ranged attack, single target or aoe?
             If Not Spell(spellnum).IsAoE Then
                 SpellCastType = 2 ' targetted
@@ -1238,6 +1240,9 @@
                             End If
                         End If
                 End Select
+            Case 4 ' Projectile
+                PlayerFireProjectile(Index, spellnum)
+                DidCast = True
         End Select
 
         If DidCast Then

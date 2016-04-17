@@ -172,6 +172,9 @@
         'SPic
         Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
 
+        Packets.Add(ServerPackets.SProjectileEditor, AddressOf HandleProjectileEditor)
+        Packets.Add(ServerPackets.SUpdateProjectile, AddressOf HandleUpdateProjectile)
+        Packets.Add(ServerPackets.SMapProjectile, AddressOf HandleMapProjectile)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -1434,6 +1437,9 @@
         Spell(spellnum).X = Buffer.ReadLong()
         Spell(spellnum).Y = Buffer.ReadLong()
 
+        Spell(spellnum).IsProjectile = Buffer.ReadLong()
+        Spell(spellnum).Projectile = Buffer.ReadLong()
+
         If Spell(spellnum).Name Is Nothing Then Spell(spellnum).Name = ""
 
         Buffer = Nothing
@@ -2204,6 +2210,9 @@
             Spell(n).Vital = buffer.ReadLong()
             Spell(n).X = buffer.ReadLong()
             Spell(n).Y = buffer.ReadLong()
+
+            Spell(n).IsProjectile = buffer.ReadLong()
+            Spell(n).Projectile = buffer.ReadLong()
 
             If Spell(n).Name Is Nothing Then Spell(n).Name = ""
         Next

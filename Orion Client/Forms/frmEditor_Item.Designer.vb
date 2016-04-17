@@ -101,6 +101,8 @@ Partial Class frmEditor_Item
         Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
         Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
+        Me.lblProjectile = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -469,6 +471,8 @@ Partial Class frmEditor_Item
         '
         'fraEquipment
         '
+        Me.fraEquipment.Controls.Add(Me.scrlProjectile)
+        Me.fraEquipment.Controls.Add(Me.lblProjectile)
         Me.fraEquipment.Controls.Add(Me.scrlPaperdoll)
         Me.fraEquipment.Controls.Add(Me.lblPaperDoll)
         Me.fraEquipment.Controls.Add(Me.picPaperdoll)
@@ -501,7 +505,7 @@ Partial Class frmEditor_Item
         'scrlPaperdoll
         '
         Me.scrlPaperdoll.LargeChange = 1
-        Me.scrlPaperdoll.Location = New System.Drawing.Point(9, 189)
+        Me.scrlPaperdoll.Location = New System.Drawing.Point(184, 189)
         Me.scrlPaperdoll.Name = "scrlPaperdoll"
         Me.scrlPaperdoll.Size = New System.Drawing.Size(104, 18)
         Me.scrlPaperdoll.TabIndex = 58
@@ -509,7 +513,7 @@ Partial Class frmEditor_Item
         'lblPaperDoll
         '
         Me.lblPaperDoll.AutoSize = True
-        Me.lblPaperDoll.Location = New System.Drawing.Point(6, 170)
+        Me.lblPaperDoll.Location = New System.Drawing.Point(181, 170)
         Me.lblPaperDoll.Name = "lblPaperDoll"
         Me.lblPaperDoll.Size = New System.Drawing.Size(63, 13)
         Me.lblPaperDoll.TabIndex = 57
@@ -518,9 +522,9 @@ Partial Class frmEditor_Item
         'picPaperdoll
         '
         Me.picPaperdoll.BackColor = System.Drawing.Color.Black
-        Me.picPaperdoll.Location = New System.Drawing.Point(118, 159)
+        Me.picPaperdoll.Location = New System.Drawing.Point(299, 159)
         Me.picPaperdoll.Name = "picPaperdoll"
-        Me.picPaperdoll.Size = New System.Drawing.Size(288, 48)
+        Me.picPaperdoll.Size = New System.Drawing.Size(107, 48)
         Me.picPaperdoll.TabIndex = 56
         Me.picPaperdoll.TabStop = False
         '
@@ -878,6 +882,23 @@ Partial Class frmEditor_Item
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Furniture Type:"
         '
+        'scrlProjectile
+        '
+        Me.scrlProjectile.LargeChange = 1
+        Me.scrlProjectile.Location = New System.Drawing.Point(3, 189)
+        Me.scrlProjectile.Name = "scrlProjectile"
+        Me.scrlProjectile.Size = New System.Drawing.Size(160, 18)
+        Me.scrlProjectile.TabIndex = 62
+        '
+        'lblProjectile
+        '
+        Me.lblProjectile.AutoSize = True
+        Me.lblProjectile.Location = New System.Drawing.Point(6, 176)
+        Me.lblProjectile.Name = "lblProjectile"
+        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
+        Me.lblProjectile.TabIndex = 61
+        Me.lblProjectile.Text = "Projectile: 0 None"
+        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -996,4 +1017,6 @@ Partial Class frmEditor_Item
     Friend WithEvents optNoFurnitureEditing As Windows.Forms.RadioButton
     Friend WithEvents cmbFurnitureType As Windows.Forms.ComboBox
     Friend WithEvents Label4 As Windows.Forms.Label
+    Friend WithEvents scrlProjectile As Windows.Forms.HScrollBar
+    Friend WithEvents lblProjectile As Windows.Forms.Label
 End Class

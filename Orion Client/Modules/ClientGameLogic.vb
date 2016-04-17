@@ -1170,6 +1170,28 @@ Module ClientGameLogic
 
             InitEventEditorForm = False
         End If
+
+        If InitProjectileEditor = True Then
+            With frmEditor_Projectile
+                Editor = EDITOR_PROJECTILE
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_PROJECTILES
+                    .lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                ProjectileEditorInit()
+            End With
+
+            InitProjectileEditor = False
+        End If
+
+        If frmEditor_Projectile.Visible Then
+            EditorProjectile_DrawProjectile()
+        End If
     End Sub
 
     Public Function ConvertCurrency(ByVal Amount As Long) As String

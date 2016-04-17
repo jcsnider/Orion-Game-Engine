@@ -747,6 +747,10 @@ Module ServerTCP
         Buffer.WriteLong(Spell(spellnum).x)
         Buffer.WriteLong(Spell(spellnum).y)
 
+        'projectiles
+        Buffer.WriteLong(Spell(spellnum).IsProjectile)
+        Buffer.WriteLong(Spell(spellnum).Projectile)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -779,6 +783,10 @@ Module ServerTCP
         Buffer.WriteLong(Spell(spellnum).Vital)
         Buffer.WriteLong(Spell(spellnum).x)
         Buffer.WriteLong(Spell(spellnum).y)
+
+        'projectiles
+        Buffer.WriteLong(Spell(spellnum).IsProjectile)
+        Buffer.WriteLong(Spell(spellnum).Projectile)
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing

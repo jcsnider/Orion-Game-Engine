@@ -1211,6 +1211,9 @@ Module ServerDatabase
         FilePutObject(F, Spell(spellnum).SpellAnim)
         FilePutObject(F, Spell(spellnum).StunDuration)
 
+        FilePutObject(F, Spell(spellnum).IsProjectile)
+        FilePutObject(F, Spell(spellnum).Projectile)
+
         FileClose(F)
     End Sub
 
@@ -1257,6 +1260,9 @@ Module ServerDatabase
         FileGetObject(F, Spell(SpellNum).CastAnim)
         FileGetObject(F, Spell(SpellNum).SpellAnim)
         FileGetObject(F, Spell(SpellNum).StunDuration)
+
+        FileGetObject(F, Spell(SpellNum).IsProjectile)
+        FileGetObject(F, Spell(SpellNum).Projectile)
 
         FileClose(F)
     End Sub
@@ -2373,6 +2379,9 @@ Module ServerDatabase
         Buffer.WriteLong(Spell(spellnum).Vital)
         Buffer.WriteLong(Spell(spellnum).x)
         Buffer.WriteLong(Spell(spellnum).y)
+
+        Buffer.WriteLong(Spell(spellnum).IsProjectile)
+        Buffer.WriteLong(Spell(spellnum).Projectile)
 
         Return Buffer.ToArray
         Buffer = Nothing

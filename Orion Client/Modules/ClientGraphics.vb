@@ -49,6 +49,9 @@ Module ClientGraphics
     Public FacesGFX() As Texture
     Public FacesGFXInfo() As GraphicInfo
 
+    Public ProjectileGFX() As Texture
+    Public ProjectileGFXInfo() As GraphicInfo
+
     Public DoorGFX As Texture
     Public DoorGFXInfo As GraphicInfo
     Public BloodGFX As Texture
@@ -367,6 +370,17 @@ Module ClientGraphics
             ChatWindowInfo.width = ChatWindow.Size.X
             ChatWindowInfo.height = ChatWindow.Size.Y
         End If
+
+        ReDim ProjectileGFX(0 To NumProjectiles)
+        ReDim ProjectileGFXInfo(0 To NumProjectiles)
+        For i = 1 To NumProjectiles
+            'Load texture first, dont care about memory streams (just use the filename)
+            ProjectileGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "projectiles\" & i & GFX_EXT)
+
+            'Cache the width and height
+            ProjectileGFXInfo(i).width = ProjectileGFX(i).Size.X
+            ProjectileGFXInfo(i).height = ProjectileGFX(i).Size.Y
+        Next
 
     End Sub
 
@@ -1346,6 +1360,14 @@ Module ClientGraphics
             Next
         End If
 
+        If NumProjectiles > 0 Then
+            For I = 1 To MAX_PROJECTILES
+                If MapProjectiles(I).ProjectileNum > 0 Then
+                    DrawProjectile(I)
+                End If
+            Next
+        End If
+
         If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
 
             For I = 1 To Map.CurrentEvents
@@ -1463,6 +1485,7 @@ Module ClientGraphics
             ' lock to player
             tmpX = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset
             tmpY = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset + 35
+            If Spell(PlayerSpells(SpellBuffer)).CastTime = 0 Then Spell(PlayerSpells(SpellBuffer)).CastTime = 1
             ' calculate the width to fill
             barWidth = ((GetTickCount() - SpellBufferTimer) / ((GetTickCount() - SpellBufferTimer) + (Spell(PlayerSpells(SpellBuffer)).CastTime * 1000)) * 64)
             ' draw bars
@@ -1784,6 +1807,10 @@ Module ClientGraphics
             If Not FacesGFX(i) Is Nothing Then FacesGFX(i).Dispose()
         Next
 
+        For i = 0 To NumProjectiles
+            If Not ProjectileGFX(i) Is Nothing Then ProjectileGFX(i).Dispose()
+        Next
+
         If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
         If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
@@ -1793,6 +1820,7 @@ Module ClientGraphics
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
         If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
+        If Not ChatWindow Is Nothing Then ChatWindow.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()

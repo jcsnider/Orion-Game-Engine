@@ -193,5 +193,23 @@
 
     Private Sub frmEditor_Spell_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         scrlIcon.Maximum = NumSpellIcons
+        scrlCast.Value = 1
+    End Sub
+
+    Private Sub chkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
+        If chkProjectile.Checked = False Then
+            Spell(EditorIndex).IsProjectile = 0
+        Else
+            Spell(EditorIndex).IsProjectile = 1
+        End If
+    End Sub
+
+    Private Sub scrlProjectile_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles scrlProjectile.ValueChanged, scrlProjectile.Scroll
+        If scrlProjectile.Value > 0 Then
+            lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
+        Else
+            lblProjectile.Text = "Projectile: 0 None"
+        End If
+        Spell(EditorIndex).Projectile = scrlProjectile.Value
     End Sub
 End Class
