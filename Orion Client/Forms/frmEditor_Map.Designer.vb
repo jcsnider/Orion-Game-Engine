@@ -24,21 +24,8 @@ Partial Class frmEditor_Map
     Private Sub InitializeComponent()
         Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
         Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
-        Me.fraTileSet = New System.Windows.Forms.GroupBox()
-        Me.scrlTileSet = New System.Windows.Forms.HScrollBar()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.optEvent = New System.Windows.Forms.RadioButton()
-        Me.optBlocks = New System.Windows.Forms.RadioButton()
-        Me.fraLayers = New System.Windows.Forms.GroupBox()
-        Me.scrlAutotile = New System.Windows.Forms.HScrollBar()
-        Me.lblAutotile = New System.Windows.Forms.Label()
         Me.btnFill = New System.Windows.Forms.Button()
         Me.btnClearLayer = New System.Windows.Forms.Button()
-        Me.optFringe2 = New System.Windows.Forms.RadioButton()
-        Me.optFringe = New System.Windows.Forms.RadioButton()
-        Me.optMask2 = New System.Windows.Forms.RadioButton()
-        Me.optMask = New System.Windows.Forms.RadioButton()
-        Me.optGround = New System.Windows.Forms.RadioButton()
         Me.optHouse = New System.Windows.Forms.RadioButton()
         Me.btnClearAttribute = New System.Windows.Forms.Button()
         Me.optTrap = New System.Windows.Forms.RadioButton()
@@ -115,6 +102,12 @@ Partial Class frmEditor_Map
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
+        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cmbLayers = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
         Me.tpAttributes = New System.Windows.Forms.TabPage()
         Me.tpNpcs = New System.Windows.Forms.TabPage()
         Me.fraNpcs = New System.Windows.Forms.GroupBox()
@@ -148,9 +141,8 @@ Partial Class frmEditor_Map
         Me.lstMusic = New System.Windows.Forms.ListBox()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.fraTileSet.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.fraLayers.SuspendLayout()
+        Me.tpDirBlock = New System.Windows.Forms.TabPage()
+        Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -185,173 +177,34 @@ Partial Class frmEditor_Map
         Me.scrlPictureX.LargeChange = 1
         Me.scrlPictureX.Location = New System.Drawing.Point(3, 363)
         Me.scrlPictureX.Name = "scrlPictureX"
-        Me.scrlPictureX.Size = New System.Drawing.Size(352, 16)
+        Me.scrlPictureX.Size = New System.Drawing.Size(463, 16)
         Me.scrlPictureX.TabIndex = 1
         '
         'scrlPictureY
         '
         Me.scrlPictureY.LargeChange = 1
-        Me.scrlPictureY.Location = New System.Drawing.Point(358, 8)
+        Me.scrlPictureY.Location = New System.Drawing.Point(469, 9)
         Me.scrlPictureY.Name = "scrlPictureY"
         Me.scrlPictureY.Size = New System.Drawing.Size(16, 352)
         Me.scrlPictureY.TabIndex = 2
         '
-        'fraTileSet
-        '
-        Me.fraTileSet.Controls.Add(Me.scrlTileSet)
-        Me.fraTileSet.Location = New System.Drawing.Point(3, 396)
-        Me.fraTileSet.Name = "fraTileSet"
-        Me.fraTileSet.Size = New System.Drawing.Size(352, 46)
-        Me.fraTileSet.TabIndex = 3
-        Me.fraTileSet.TabStop = False
-        Me.fraTileSet.Text = "Tileset: 0"
-        '
-        'scrlTileSet
-        '
-        Me.scrlTileSet.LargeChange = 1
-        Me.scrlTileSet.Location = New System.Drawing.Point(18, 16)
-        Me.scrlTileSet.Name = "scrlTileSet"
-        Me.scrlTileSet.Size = New System.Drawing.Size(308, 18)
-        Me.scrlTileSet.TabIndex = 0
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.optEvent)
-        Me.GroupBox1.Controls.Add(Me.optBlocks)
-        Me.GroupBox1.Location = New System.Drawing.Point(377, 329)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(103, 113)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Type"
-        '
-        'optEvent
-        '
-        Me.optEvent.AutoSize = True
-        Me.optEvent.Location = New System.Drawing.Point(6, 87)
-        Me.optEvent.Name = "optEvent"
-        Me.optEvent.Size = New System.Drawing.Size(58, 17)
-        Me.optEvent.TabIndex = 3
-        Me.optEvent.TabStop = True
-        Me.optEvent.Text = "Events"
-        Me.optEvent.UseVisualStyleBackColor = True
-        '
-        'optBlocks
-        '
-        Me.optBlocks.AutoSize = True
-        Me.optBlocks.Location = New System.Drawing.Point(6, 65)
-        Me.optBlocks.Name = "optBlocks"
-        Me.optBlocks.Size = New System.Drawing.Size(73, 17)
-        Me.optBlocks.TabIndex = 2
-        Me.optBlocks.TabStop = True
-        Me.optBlocks.Text = "Dir Blocks"
-        Me.optBlocks.UseVisualStyleBackColor = True
-        '
-        'fraLayers
-        '
-        Me.fraLayers.Controls.Add(Me.scrlAutotile)
-        Me.fraLayers.Controls.Add(Me.lblAutotile)
-        Me.fraLayers.Controls.Add(Me.btnFill)
-        Me.fraLayers.Controls.Add(Me.btnClearLayer)
-        Me.fraLayers.Controls.Add(Me.optFringe2)
-        Me.fraLayers.Controls.Add(Me.optFringe)
-        Me.fraLayers.Controls.Add(Me.optMask2)
-        Me.fraLayers.Controls.Add(Me.optMask)
-        Me.fraLayers.Controls.Add(Me.optGround)
-        Me.fraLayers.Location = New System.Drawing.Point(377, 8)
-        Me.fraLayers.Name = "fraLayers"
-        Me.fraLayers.Size = New System.Drawing.Size(103, 315)
-        Me.fraLayers.TabIndex = 8
-        Me.fraLayers.TabStop = False
-        Me.fraLayers.Text = "Layers"
-        '
-        'scrlAutotile
-        '
-        Me.scrlAutotile.LargeChange = 1
-        Me.scrlAutotile.Location = New System.Drawing.Point(12, 197)
-        Me.scrlAutotile.Maximum = 5
-        Me.scrlAutotile.Name = "scrlAutotile"
-        Me.scrlAutotile.Size = New System.Drawing.Size(85, 18)
-        Me.scrlAutotile.TabIndex = 10
-        '
-        'lblAutotile
-        '
-        Me.lblAutotile.AutoSize = True
-        Me.lblAutotile.Location = New System.Drawing.Point(35, 181)
-        Me.lblAutotile.Name = "lblAutotile"
-        Me.lblAutotile.Size = New System.Drawing.Size(40, 13)
-        Me.lblAutotile.TabIndex = 9
-        Me.lblAutotile.Text = "Normal"
-        '
         'btnFill
         '
-        Me.btnFill.Location = New System.Drawing.Point(6, 273)
+        Me.btnFill.Location = New System.Drawing.Point(394, 437)
         Me.btnFill.Name = "btnFill"
         Me.btnFill.Size = New System.Drawing.Size(91, 25)
         Me.btnFill.TabIndex = 8
-        Me.btnFill.Text = "Fill"
+        Me.btnFill.Text = "Fill layer"
         Me.btnFill.UseVisualStyleBackColor = True
         '
         'btnClearLayer
         '
-        Me.btnClearLayer.Location = New System.Drawing.Point(6, 244)
+        Me.btnClearLayer.Location = New System.Drawing.Point(6, 437)
         Me.btnClearLayer.Name = "btnClearLayer"
         Me.btnClearLayer.Size = New System.Drawing.Size(91, 25)
         Me.btnClearLayer.TabIndex = 5
-        Me.btnClearLayer.Text = "Clear"
+        Me.btnClearLayer.Text = "Clear Layer"
         Me.btnClearLayer.UseVisualStyleBackColor = True
-        '
-        'optFringe2
-        '
-        Me.optFringe2.AutoSize = True
-        Me.optFringe2.Location = New System.Drawing.Point(6, 111)
-        Me.optFringe2.Name = "optFringe2"
-        Me.optFringe2.Size = New System.Drawing.Size(63, 17)
-        Me.optFringe2.TabIndex = 4
-        Me.optFringe2.Text = "Fringe 2"
-        Me.optFringe2.UseVisualStyleBackColor = True
-        '
-        'optFringe
-        '
-        Me.optFringe.AutoSize = True
-        Me.optFringe.Location = New System.Drawing.Point(6, 88)
-        Me.optFringe.Name = "optFringe"
-        Me.optFringe.Size = New System.Drawing.Size(54, 17)
-        Me.optFringe.TabIndex = 3
-        Me.optFringe.Text = "Fringe"
-        Me.optFringe.UseVisualStyleBackColor = True
-        '
-        'optMask2
-        '
-        Me.optMask2.AutoSize = True
-        Me.optMask2.Location = New System.Drawing.Point(6, 65)
-        Me.optMask2.Name = "optMask2"
-        Me.optMask2.Size = New System.Drawing.Size(60, 17)
-        Me.optMask2.TabIndex = 2
-        Me.optMask2.Text = "Mask 2"
-        Me.optMask2.UseVisualStyleBackColor = True
-        '
-        'optMask
-        '
-        Me.optMask.AutoSize = True
-        Me.optMask.Location = New System.Drawing.Point(6, 42)
-        Me.optMask.Name = "optMask"
-        Me.optMask.Size = New System.Drawing.Size(51, 17)
-        Me.optMask.TabIndex = 1
-        Me.optMask.Text = "Mask"
-        Me.optMask.UseVisualStyleBackColor = True
-        '
-        'optGround
-        '
-        Me.optGround.AutoSize = True
-        Me.optGround.Checked = True
-        Me.optGround.Location = New System.Drawing.Point(6, 19)
-        Me.optGround.Name = "optGround"
-        Me.optGround.Size = New System.Drawing.Size(60, 17)
-        Me.optGround.TabIndex = 0
-        Me.optGround.TabStop = True
-        Me.optGround.Text = "Ground"
-        Me.optGround.UseVisualStyleBackColor = True
         '
         'optHouse
         '
@@ -521,7 +374,7 @@ Partial Class frmEditor_Map
         Me.pnlBack.Controls.Add(Me.picBackSelect)
         Me.pnlBack.Location = New System.Drawing.Point(6, 8)
         Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(352, 352)
+        Me.pnlBack.Size = New System.Drawing.Size(460, 352)
         Me.pnlBack.TabIndex = 9
         '
         'picBackSelect
@@ -529,7 +382,7 @@ Partial Class frmEditor_Map
         Me.picBackSelect.BackColor = System.Drawing.Color.Black
         Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
         Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(352, 352)
+        Me.picBackSelect.Size = New System.Drawing.Size(460, 352)
         Me.picBackSelect.TabIndex = 1
         Me.picBackSelect.TabStop = False
         '
@@ -1045,7 +898,7 @@ Partial Class frmEditor_Map
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1210, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(505, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -1076,6 +929,8 @@ Partial Class frmEditor_Map
         Me.tabpages.Controls.Add(Me.tpAttributes)
         Me.tabpages.Controls.Add(Me.tpNpcs)
         Me.tabpages.Controls.Add(Me.tpSettings)
+        Me.tabpages.Controls.Add(Me.tpDirBlock)
+        Me.tabpages.Controls.Add(Me.tpEvents)
         Me.tabpages.Location = New System.Drawing.Point(4, 28)
         Me.tabpages.Name = "tabpages"
         Me.tabpages.SelectedIndex = 0
@@ -1084,13 +939,18 @@ Partial Class frmEditor_Map
         '
         'tpTiles
         '
+        Me.tpTiles.Controls.Add(Me.cmbAutoTile)
+        Me.tpTiles.Controls.Add(Me.Label11)
+        Me.tpTiles.Controls.Add(Me.btnFill)
+        Me.tpTiles.Controls.Add(Me.Label10)
+        Me.tpTiles.Controls.Add(Me.btnClearLayer)
+        Me.tpTiles.Controls.Add(Me.cmbLayers)
+        Me.tpTiles.Controls.Add(Me.Label9)
+        Me.tpTiles.Controls.Add(Me.cmbTileSets)
         Me.tpTiles.Controls.Add(Me.pnlBack)
-        Me.tpTiles.Controls.Add(Me.fraLayers)
         Me.tpTiles.Controls.Add(Me.Label1)
         Me.tpTiles.Controls.Add(Me.scrlPictureX)
         Me.tpTiles.Controls.Add(Me.scrlPictureY)
-        Me.tpTiles.Controls.Add(Me.fraTileSet)
-        Me.tpTiles.Controls.Add(Me.GroupBox1)
         Me.tpTiles.Location = New System.Drawing.Point(4, 22)
         Me.tpTiles.Name = "tpTiles"
         Me.tpTiles.Padding = New System.Windows.Forms.Padding(3)
@@ -1098,6 +958,59 @@ Partial Class frmEditor_Map
         Me.tpTiles.TabIndex = 0
         Me.tpTiles.Text = "Tiles"
         Me.tpTiles.UseVisualStyleBackColor = True
+        '
+        'cmbAutoTile
+        '
+        Me.cmbAutoTile.FormattingEnabled = True
+        Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)", "AutoTile (XP)", "Fake (XP)", "Animated (XP)", "Cliff (XP)", "Waterfall (XP)"})
+        Me.cmbAutoTile.Location = New System.Drawing.Point(366, 400)
+        Me.cmbAutoTile.Name = "cmbAutoTile"
+        Me.cmbAutoTile.Size = New System.Drawing.Size(119, 21)
+        Me.cmbAutoTile.TabIndex = 17
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(311, 403)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(49, 13)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "AutoTile:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(142, 403)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(36, 13)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Layer:"
+        '
+        'cmbLayers
+        '
+        Me.cmbLayers.FormattingEnabled = True
+        Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
+        Me.cmbLayers.Location = New System.Drawing.Point(184, 400)
+        Me.cmbLayers.Name = "cmbLayers"
+        Me.cmbLayers.Size = New System.Drawing.Size(121, 21)
+        Me.cmbLayers.TabIndex = 14
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 403)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(41, 13)
+        Me.Label9.TabIndex = 13
+        Me.Label9.Text = "Tileset:"
+        '
+        'cmbTileSets
+        '
+        Me.cmbTileSets.FormattingEnabled = True
+        Me.cmbTileSets.Location = New System.Drawing.Point(53, 400)
+        Me.cmbTileSets.Name = "cmbTileSets"
+        Me.cmbTileSets.Size = New System.Drawing.Size(83, 21)
+        Me.cmbTileSets.TabIndex = 12
         '
         'tpAttributes
         '
@@ -1432,11 +1345,31 @@ Partial Class frmEditor_Map
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "Name:"
         '
+        'tpDirBlock
+        '
+        Me.tpDirBlock.Location = New System.Drawing.Point(4, 22)
+        Me.tpDirBlock.Name = "tpDirBlock"
+        Me.tpDirBlock.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpDirBlock.Size = New System.Drawing.Size(491, 468)
+        Me.tpDirBlock.TabIndex = 4
+        Me.tpDirBlock.Text = "Directional Block"
+        Me.tpDirBlock.UseVisualStyleBackColor = True
+        '
+        'tpEvents
+        '
+        Me.tpEvents.Location = New System.Drawing.Point(4, 22)
+        Me.tpEvents.Name = "tpEvents"
+        Me.tpEvents.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpEvents.Size = New System.Drawing.Size(491, 468)
+        Me.tpEvents.TabIndex = 5
+        Me.tpEvents.Text = "Events"
+        Me.tpEvents.UseVisualStyleBackColor = True
+        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1210, 527)
+        Me.ClientSize = New System.Drawing.Size(505, 527)
         Me.ControlBox = False
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
@@ -1445,11 +1378,6 @@ Partial Class frmEditor_Map
         Me.MaximizeBox = False
         Me.Name = "frmEditor_Map"
         Me.Text = "Map Editor"
-        Me.fraTileSet.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.fraLayers.ResumeLayout(False)
-        Me.fraLayers.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAttributes.ResumeLayout(False)
@@ -1500,16 +1428,6 @@ Partial Class frmEditor_Map
     End Sub
     Friend WithEvents scrlPictureX As System.Windows.Forms.HScrollBar
     Friend WithEvents scrlPictureY As System.Windows.Forms.VScrollBar
-    Friend WithEvents fraTileSet As System.Windows.Forms.GroupBox
-    Friend WithEvents scrlTileSet As System.Windows.Forms.HScrollBar
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents optBlocks As System.Windows.Forms.RadioButton
-    Friend WithEvents fraLayers As System.Windows.Forms.GroupBox
-    Friend WithEvents optFringe2 As System.Windows.Forms.RadioButton
-    Friend WithEvents optFringe As System.Windows.Forms.RadioButton
-    Friend WithEvents optMask2 As System.Windows.Forms.RadioButton
-    Friend WithEvents optMask As System.Windows.Forms.RadioButton
-    Friend WithEvents optGround As System.Windows.Forms.RadioButton
     Friend WithEvents pnlBack As System.Windows.Forms.Panel
     Friend WithEvents optTrap As System.Windows.Forms.RadioButton
     Friend WithEvents optHeal As System.Windows.Forms.RadioButton
@@ -1577,14 +1495,11 @@ Partial Class frmEditor_Map
     Friend WithEvents btnTrap As System.Windows.Forms.Button
     Friend WithEvents scrlTrap As System.Windows.Forms.HScrollBar
     Friend WithEvents lblTrap As System.Windows.Forms.Label
-    Friend WithEvents scrlAutotile As Windows.Forms.HScrollBar
-    Friend WithEvents lblAutotile As Windows.Forms.Label
     Friend WithEvents optHouse As Windows.Forms.RadioButton
     Friend WithEvents fraBuyHouse As Windows.Forms.GroupBox
     Friend WithEvents btnHouseTileOk As Windows.Forms.Button
     Friend WithEvents scrlBuyHouse As Windows.Forms.HScrollBar
     Friend WithEvents lblHouseName As Windows.Forms.Label
-    Friend WithEvents optEvent As Windows.Forms.RadioButton
     Friend WithEvents ToolStrip As Windows.Forms.ToolStrip
     Friend WithEvents tsbSave As Windows.Forms.ToolStripButton
     Friend WithEvents tsbDiscard As Windows.Forms.ToolStripButton
@@ -1624,4 +1539,12 @@ Partial Class frmEditor_Map
     Friend WithEvents cmbNpcList As Windows.Forms.ComboBox
     Friend WithEvents lstMapNpc As Windows.Forms.ListBox
     Friend WithEvents tpAttributes As Windows.Forms.TabPage
+    Friend WithEvents cmbTileSets As Windows.Forms.ComboBox
+    Friend WithEvents cmbAutoTile As Windows.Forms.ComboBox
+    Friend WithEvents Label11 As Windows.Forms.Label
+    Friend WithEvents Label10 As Windows.Forms.Label
+    Friend WithEvents cmbLayers As Windows.Forms.ComboBox
+    Friend WithEvents Label9 As Windows.Forms.Label
+    Friend WithEvents tpDirBlock As Windows.Forms.TabPage
+    Friend WithEvents tpEvents As Windows.Forms.TabPage
 End Class

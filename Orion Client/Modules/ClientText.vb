@@ -305,10 +305,10 @@ Module ClientText
         End If
     End Sub
 
-    Public Sub AddChatRec(ByVal Msg As String, ByVal color As Int32)
+    Public Sub AddChatRec(ByVal Msg As String, ByVal Color As Integer)
         Dim struct As ChatRec
         struct.Text = Msg
-        struct.Color = color
+        struct.Color = Color
         Chat.Add(struct)
     End Sub
 
@@ -342,10 +342,7 @@ Module ClientText
         End Select
     End Function
 
-#Region "NewTextStuff"
-#Region "GlobalStuffs"
     Public SplitChars As Char() = New Char() {" "c, "-"c, ControlChars.Tab}
-#End Region
 
     Public Function WordWrap(str As String, width As Integer) As List(Of String)
 
@@ -424,18 +421,6 @@ Module ClientText
         End While
 
     End Function
-
-#End Region
-
-
-
-    'Public Sub AddText(ByVal Msg As String)
-    '    If txtChatAdd = "" Then
-    '        txtChatAdd = txtChatAdd & Msg
-    '    Else
-    '        txtChatAdd = txtChatAdd & vbNewLine & Msg
-    '    End If
-    'End Sub
 
     'Public Sub DrawChatBubble(ByVal Index As Long)
     '    Dim theArray() As String, X As Long, Y As Long, i As Long, MaxWidth As Long, X2 As Long, Y2 As Long

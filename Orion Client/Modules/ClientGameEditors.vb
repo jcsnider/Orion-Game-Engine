@@ -124,6 +124,13 @@ Module ClientGameEditors
         frmEditor_Map.txtMaxX.Text = Map.MaxX
         frmEditor_Map.txtMaxY.Text = Map.MaxY
 
+        frmEditor_Map.cmbTileSets.SelectedIndex = 0
+        frmEditor_Map.cmbLayers.SelectedIndex = 0
+        frmEditor_Map.cmbAutoTile.SelectedIndex = 0
+
+        ' render the tiles
+        EditorMap_DrawTileset()
+
         ' show the form
         frmEditor_Map.Visible = True
     End Sub
@@ -136,7 +143,7 @@ Module ClientGameEditors
         ' set the scrolly bars
         If Map.tileset = 0 Then Map.tileset = 1
         If Map.tileset > NumTileSets Then Map.tileset = 1
-        frmEditor_Map.fraTileSet.Text = "Tileset: " & Map.tileset
+        'frmEditor_Map.fraTileSet.Text = "Tileset: " & Map.tileset
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
@@ -147,8 +154,7 @@ Module ClientGameEditors
             TileSetImgsLoaded(i) = False
         Next
 
-        ' render the tiles
-        EditorMap_DrawTileset()
+
 
         ' set the scrollbars
         frmEditor_Map.scrlPictureY.Maximum = (frmEditor_Map.picBackSelect.Height \ PIC_Y)
@@ -167,6 +173,14 @@ Module ClientGameEditors
         ' music in map properties
         'If frmEditor_MapProperties.fMusic.Path <> Application.StartupPath & MUSIC_PATH Then frmEditor_MapProperties.fMusic.Path = Application.StartupPath & MUSIC_PATH
 
+        frmEditor_Map.cmbTileSets.Items.Clear()
+        For i = 1 To NumTileSets
+            frmEditor_Map.cmbTileSets.Items.Add("Tileset " & i)
+        Next
+
+        frmEditor_Map.cmbTileSets.SelectedIndex = 0
+        frmEditor_Map.cmbLayers.SelectedIndex = 0
+
         InitMapProperties = True
 
 
@@ -184,8 +198,8 @@ Module ClientGameEditors
             EditorTileWidth = 1
             EditorTileHeight = 1
 
-            If frmEditor_Map.scrlAutotile.Value > 0 Then
-                Select Case frmEditor_Map.scrlAutotile.Value
+            If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
+                Select Case frmEditor_Map.cmbAutoTile.SelectedIndex
                     Case 1 ' autotile
                         EditorTileWidth = 2
                         EditorTileHeight = 3
@@ -250,11 +264,7 @@ Module ClientGameEditors
         Dim i As Long
         Dim CurLayer As Long
 
-        If frmEditor_Map.optGround.Checked = True Then CurLayer = 1
-        If frmEditor_Map.optMask.Checked = True Then CurLayer = 2
-        If frmEditor_Map.optMask2.Checked = True Then CurLayer = 3
-        If frmEditor_Map.optFringe.Checked = True Then CurLayer = 4
-        If frmEditor_Map.optFringe2.Checked = True Then CurLayer = 5
+        CurLayer = frmEditor_Map.cmbLayers.SelectedIndex + 1
 
         If Not isInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
@@ -262,12 +272,12 @@ Module ClientGameEditors
                 ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 And (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
                 If EditorTileWidth = 1 And EditorTileHeight = 1 Then
 
-                    MapEditorSetTile(CurX, CurY, CurLayer, False, frmEditor_Map.scrlAutotile.Value)
+                    MapEditorSetTile(CurX, CurY, CurLayer, False, frmEditor_Map.cmbAutoTile.SelectedIndex)
                 Else ' multi tile!
-                    If frmEditor_Map.scrlAutotile.Value = 0 Then
+                    If frmEditor_Map.cmbAutoTile.SelectedIndex = 0 Then
                         MapEditorSetTile(CurX, CurY, CurLayer, True)
                     Else
-                        MapEditorSetTile(CurX, CurY, CurLayer, , frmEditor_Map.scrlAutotile.Value)
+                        MapEditorSetTile(CurX, CurY, CurLayer, , frmEditor_Map.cmbAutoTile.SelectedIndex)
                     End If
                 End If
             ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpattributes Then
@@ -366,7 +376,7 @@ Module ClientGameEditors
                         .Data3 = 0
                     End If
                 End With
-            ElseIf frmEditor_Map.optBlocks.Checked = True Then
+            ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpdirblock Then
                 If movedMouse Then Exit Sub
                 ' find what tile it is
                 X = X - ((X \ PIC_X) * PIC_X)
@@ -381,7 +391,7 @@ Module ClientGameEditors
                         End If
                     End If
                 Next
-            ElseIf frmEditor_Map.optEvent.Checked Then
+            ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then
                 If frmEditor_Events.Visible = False Then
                     AddEvent(CurX, CurY)
                 End If
@@ -412,7 +422,7 @@ Module ClientGameEditors
                     .Data2 = 0
                     .Data3 = 0
                 End With
-            ElseIf frmEditor_Map.optEvent.Checked Then
+            ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then
                 DeleteEvent(CurX, CurY)
             End If
         End If
@@ -459,7 +469,7 @@ Module ClientGameEditors
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).tileset = frmEditor_Map.scrlTileSet.Value
+                .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
                 .Autotile(CurLayer) = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -473,7 +483,7 @@ Module ClientGameEditors
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).tileset = frmEditor_Map.scrlTileSet.Value
+                .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
                 .Autotile(CurLayer) = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -487,7 +497,7 @@ Module ClientGameEditors
                             With Map.Tile(X, Y)
                                 .Layer(CurLayer).X = EditorTileX + x2
                                 .Layer(CurLayer).Y = EditorTileY + y2
-                                .Layer(CurLayer).tileset = frmEditor_Map.scrlTileSet.Value
+                                .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
                                 .Autotile(CurLayer) = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
@@ -505,11 +515,7 @@ Module ClientGameEditors
         Dim Y As Long
         Dim CurLayer As Long
 
-        If frmEditor_Map.optGround.Checked = True Then CurLayer = 1
-        If frmEditor_Map.optMask.Checked = True Then CurLayer = 2
-        If frmEditor_Map.optMask2.Checked = True Then CurLayer = 3
-        If frmEditor_Map.optFringe.Checked = True Then CurLayer = 4
-        If frmEditor_Map.optFringe2.Checked = True Then CurLayer = 5
+        CurLayer = frmEditor_Map.cmbLayers.SelectedIndex + 1
 
         If CurLayer = 0 Then Exit Sub
 
@@ -531,11 +537,7 @@ Module ClientGameEditors
         Dim Y As Long
         Dim CurLayer As Long
 
-        If frmEditor_Map.optGround.Checked = True Then CurLayer = 1
-        If frmEditor_Map.optMask.Checked = True Then CurLayer = 2
-        If frmEditor_Map.optMask2.Checked = True Then CurLayer = 3
-        If frmEditor_Map.optFringe.Checked = True Then CurLayer = 4
-        If frmEditor_Map.optFringe2.Checked = True Then CurLayer = 5
+        CurLayer = frmEditor_Map.cmbLayers.SelectedIndex + 1
 
         ' Ground layer
         If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, GAME_NAME) = vbYes Then
@@ -543,7 +545,7 @@ Module ClientGameEditors
                 For Y = 0 To Map.MaxY
                     Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                     Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                    Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.scrlTileSet.Value
+                    Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
                     CacheRenderState(X, Y, CurLayer)
                 Next
             Next

@@ -1381,7 +1381,7 @@ Module ClientGraphics
 
         ' Draw out a square at mouse cursor
         If InMapEditor Then
-            If frmEditor_Map.optBlocks.Checked = True Then
+            If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then
                 For X = TileView.left To TileView.right
                     For Y = TileView.top To TileView.bottom
                         If IsValidMapPoint(X, Y) Then
@@ -1438,7 +1438,7 @@ Module ClientGraphics
             DrawMapAttributes()
         End If
 
-        If InMapEditor And frmEditor_Map.optEvent.Checked = True Then DrawEvents()
+        If InMapEditor And frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then DrawEvents()
 
         ' Draw map name
         DrawMapName()
@@ -1627,7 +1627,7 @@ Module ClientGraphics
 
     Public Sub DrawTileOutline()
         Dim rec As Rectangle
-        If frmEditor_Map.optBlocks.Checked Then Exit Sub
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then Exit Sub
 
         With rec
             .Y = 0
@@ -1636,12 +1636,20 @@ Module ClientGraphics
             .Width = PIC_X
         End With
 
-        'EditorTileX, EditorTileY, frmEditor_Map.scrlTileSet.Value
         If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
             RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
         Else
-            'RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
-            RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+            If EditorTileWidth = 1 And EditorTileHeight = 1 Then
+                RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+            Else
+                If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                Else
+                    RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                End If
+
+            End If
+
         End If
 
     End Sub
@@ -1672,10 +1680,10 @@ Module ClientGraphics
         Dim tileset As Byte
 
         ' find tileset number
-        tileset = frmEditor_Map.scrlTileSet.Value
+        tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
 
         ' exit out if doesn't exist
-        If tileset < 0 Or tileset > NumTileSets Then Exit Sub
+        If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
 
         If tileset <> LastTileset Then
             If Not TileSetImgsGFX(LastTileset) Is Nothing Then TileSetImgsGFX(LastTileset).Dispose()
@@ -1701,8 +1709,8 @@ Module ClientGraphics
         frmEditor_Map.picBackSelect.Width = width
 
         ' change selected shape for autotiles
-        If frmEditor_Map.scrlAutotile.Value > 0 Then
-            Select Case frmEditor_Map.scrlAutotile.Value
+        If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case frmEditor_Map.cmbAutoTile.SelectedIndex
                 Case 1 ' autotile
                     EditorTileWidth = 2
                     EditorTileHeight = 3

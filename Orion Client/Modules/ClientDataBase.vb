@@ -22,7 +22,7 @@ Module ClientDataBase
             TilesetsClr(NumTileSets) = tmp.GetPixel(0, 0)
         Next
         If NumTileSets = 0 Then Exit Sub
-        frmEditor_Map.scrlTileSet.Minimum = 1
+
     End Sub
 
     Public Sub CheckCharacters()

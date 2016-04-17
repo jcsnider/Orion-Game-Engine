@@ -28,28 +28,28 @@ Public Class frmEditor_Map
         MapEditorTileScroll()
     End Sub
 
-    Private Sub scrlTileSet_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlTileSet.Scroll
-        If scrlTileSet.Value > NumTileSets Then
-            scrlTileSet.Value = 1
-        End If
+    'Private Sub scrlTileSet_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs)
+    '    If scrlTileSet.Value > NumTileSets Then
+    '        scrlTileSet.Value = 1
+    '    End If
 
-        Map.tileset = scrlTileSet.Value
-        fraTileSet.Text = "Tileset: " & scrlTileSet.Value
+    '    Map.tileset = scrlTileSet.Value
+    '    fraTileSet.Text = "Tileset: " & scrlTileSet.Value
 
-        EditorTileSelStart = New Point(0, 0)
-        EditorTileSelEnd = New Point(1, 1)
+    '    EditorTileSelStart = New Point(0, 0)
+    '    EditorTileSelEnd = New Point(1, 1)
 
-        EditorMap_DrawTileset()
+    '    EditorMap_DrawTileset()
 
-        pnlBack.Refresh()
+    '    pnlBack.Refresh()
 
-        picBackSelect.Height = TileSetImgsGFX(scrlTileSet.Value).Height
-        picBackSelect.Width = TileSetImgsGFX(scrlTileSet.Value).Width
+    '    picBackSelect.Height = TileSetImgsGFX(scrlTileSet.Value).Height
+    '    picBackSelect.Width = TileSetImgsGFX(scrlTileSet.Value).Width
 
 
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
-    End Sub
+    '    scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+    '    scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
+    'End Sub
 
 
     Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -86,14 +86,12 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        scrlTileSet.Maximum = NumTileSets
-        scrlTileSet.Value = 1
+        cmbTileSets.SelectedIndex = 1
         EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
         pnlAttributes.Left = 8
         Me.Width = 525
-        scrlTileSet.Value = 1
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
     End Sub
@@ -309,38 +307,6 @@ Public Class frmEditor_Map
         MapEditorFillLayer()
     End Sub
 
-    Private Sub optDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
-
-    End Sub
-
-    Private Sub scrlAutotile_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles scrlAutotile.Scroll
-        Select Case scrlAutotile.Value
-            Case 0 ' normal
-                lblAutotile.Text = "Normal"
-            Case 1 ' autotile
-                lblAutotile.Text = "Autotile (VX)"
-            Case 2 ' fake autotile
-                lblAutotile.Text = "Fake (VX)"
-            Case 3 ' animated
-                lblAutotile.Text = "Animated (VX)"
-            Case 4 ' cliff
-                lblAutotile.Text = "Cliff (VX)"
-            Case 5 ' waterfall
-                lblAutotile.Text = "Waterfall (VX)"
-            Case 6 ' autotile
-                lblAutotile.Text = "Autotile (XP)"
-            Case 7 ' fake autotile
-                lblAutotile.Text = "Fake (XP)"
-            Case 8 ' animated
-                lblAutotile.Text = "Animated (XP)"
-            Case 9 ' cliff
-                lblAutotile.Text = "Cliff (XP)"
-            Case 10 ' waterfall
-                lblAutotile.Text = "Waterfall (XP)"
-        End Select
-
-    End Sub
-
     Private Sub optHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
@@ -450,5 +416,27 @@ Public Class frmEditor_Map
             End If
 
         End If
+    End Sub
+
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
+        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
+            cmbTileSets.SelectedIndex = 0
+        End If
+
+        Map.tileset = cmbTileSets.SelectedIndex + 1
+
+        EditorTileSelStart = New Point(0, 0)
+        EditorTileSelEnd = New Point(1, 1)
+
+        EditorMap_DrawTileset()
+
+        pnlBack.Refresh()
+
+        picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
+        picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
+
+
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 End Class
