@@ -158,7 +158,6 @@
         Dim MaxY As Byte
 
         Dim Tile(,) As TileRec
-        ' Dim exTile(,) As ExTileRec
         Dim Npc() As Integer
         Dim EventCount As Long
         Dim Events() As EventRec

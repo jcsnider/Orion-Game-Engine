@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 
 
 Public Class frmEditor_Map
-    Public cmbNpcs() As cmbNpc
+
     Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picBackSelect.MouseDown
         Call MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -65,20 +65,6 @@ Public Class frmEditor_Map
         MapEditorClearLayer()
     End Sub
 
-    Private Sub optAttributes_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optAttributes.CheckedChanged
-        If optAttributes.Checked Then
-            fraLayers.Visible = False
-            fraAttributes.Visible = True
-        End If
-    End Sub
-
-    Private Sub optLayers_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optLayers.CheckedChanged
-        If optLayers.Checked Then
-            fraLayers.Visible = True
-            fraAttributes.Visible = False
-        End If
-    End Sub
-
     Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
@@ -109,8 +95,7 @@ Public Class frmEditor_Map
         Me.Width = 525
         scrlTileSet.Value = 1
         optBlocked.Checked = True
-        optLayers.Checked = True
-        tabpages.SelectedTab = tpTiles
+        tabpages.SelectedIndex = 0
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -299,10 +284,6 @@ Public Class frmEditor_Map
         fraTrap.Visible = True
     End Sub
 
-    Private Sub btnProperties_Click(ByVal sender As Object, ByVal e As EventArgs)
-        InitMapProperties = True
-    End Sub
-
     Private Sub btnClearAttribute_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClearAttribute.Click
         Call MapEditorClearAttribs()
     End Sub
@@ -376,26 +357,6 @@ Public Class frmEditor_Map
         HouseTileIndex = scrlBuyHouse.Value
         pnlAttributes.Visible = False
         fraBuyHouse.Visible = False
-    End Sub
-
-    Private Sub btnSaveNpc_Click(sender As Object, e As EventArgs) Handles btnSaveNpc.Click
-        Dim i As Long
-        Dim sTemp As Long
-        With Map
-            For i = 1 To MAX_MAP_NPCS
-                If cmbNpcs(i).cmbNpc.SelectedIndex > 0 Then
-                    sTemp = InStr(1, Trim$(cmbNpcs(i).cmbNpc.Text), ":", vbTextCompare)
-
-                    If Len(Trim$(cmbNpcs(i).cmbNpc.Text)) = sTemp Then
-                        cmbNpcs(i).cmbNpc.SelectedIndex = 0
-                    End If
-                End If
-            Next
-
-            For i = 1 To MAX_MAP_NPCS
-                .Npc(i) = cmbNpcs(i).cmbNpc.SelectedIndex
-            Next
-        End With
     End Sub
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
@@ -473,8 +434,15 @@ Public Class frmEditor_Map
 
 
 #End Region
-    Public Class cmbNpc
-        Public WithEvents cmbNpc As ComboBox
 
-    End Class
+    Private Sub lstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
+        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
+    End Sub
+
+    Private Sub cmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
+        If lstMapNpc.SelectedIndex > -1 And cmbNpcList.SelectedIndex > 0 Then
+            lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
+            Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
+        End If
+    End Sub
 End Class

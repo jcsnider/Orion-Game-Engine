@@ -68,38 +68,21 @@ Module ClientGameEditors
         Dim di As New IO.DirectoryInfo(Application.StartupPath & MUSIC_PATH)
         Dim aryFi As IO.FileInfo() = di.GetFiles("*.*")
         Dim fi As IO.FileInfo
-        'ReDim frmEditor_MapProperties.cmbNpcs(0 To 30)
-        ReDim frmEditor_Map.cmbNpcs(0 To 30)
-        Dim StartX
-        Dim StartY
-        StartX = 6
-        StartY = 19
 
-
-        'frmEditor_MapProperties.txtName.Text = Trim$(Map.Name)
         frmEditor_Map.txtName.Text = Trim$(Map.Name)
+
         ' find the music we have set
-        'frmEditor_MapProperties.lstMusic.Items.Clear()
-        'frmEditor_MapProperties.lstMusic.Items.Add("None")
 
         frmEditor_Map.lstMusic.Items.Clear()
         frmEditor_Map.lstMusic.Items.Add("None")
 
         For Each fi In aryFi
-            'frmEditor_MapProperties.lstMusic.Items.Add(fi.Name)
             frmEditor_Map.lstMusic.Items.Add(fi.Name)
         Next
 
         If Trim$(Map.Music) = "None" Then
-            'frmEditor_MapProperties.lstMusic.SelectedIndex = 0
             frmEditor_Map.lstMusic.SelectedIndex = 0
         Else
-            'For i = 1 To frmEditor_MapProperties.lstMusic.Items.Count
-            '    If frmEditor_MapProperties.lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
-            '        frmEditor_MapProperties.lstMusic.SelectedIndex = i - 1
-            '        Exit For
-            '    End If
-            'Next
             For i = 1 To frmEditor_Map.lstMusic.Items.Count
                 If frmEditor_Map.lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
                     frmEditor_Map.lstMusic.SelectedIndex = i - 1
@@ -109,14 +92,6 @@ Module ClientGameEditors
         End If
 
         ' rest of it
-        'frmEditor_MapProperties.txtUp.Text = Map.Up
-        'frmEditor_MapProperties.txtDown.Text = Map.Down
-        'frmEditor_MapProperties.txtLeft.Text = Map.Left
-        'frmEditor_MapProperties.txtRight.Text = Map.Right
-        'frmEditor_MapProperties.cmbMoral.SelectedIndex = Map.Moral
-        'frmEditor_MapProperties.txtBootMap.Text = Map.BootMap
-        'frmEditor_MapProperties.txtBootX.Text = Map.BootX
-        'frmEditor_MapProperties.txtBootY.Text = Map.BootY
         frmEditor_Map.txtUp.Text = Map.Up
         frmEditor_Map.txtDown.Text = Map.Down
         frmEditor_Map.txtLeft.Text = Map.Left
@@ -126,73 +101,20 @@ Module ClientGameEditors
         frmEditor_Map.txtBootX.Text = Map.BootX
         frmEditor_Map.txtBootY.Text = Map.BootY
 
-        'For i = 1 To 15
-        '    frmEditor_MapProperties.cmbNpcs(i) = New cmbNpc
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc = New ComboBox
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Width = 133
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Height = 21
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Left = StartX
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Top = StartY + ((i - 1) * 27)
-        '    frmEditor_MapProperties.Controls.Add(frmEditor_MapProperties.cmbNpcs(i).cmbNpc)
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.DropDownStyle = ComboBoxStyle.DropDownList
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Parent = frmEditor_MapProperties.fraNpcs
-        'Next
-        For i = 1 To 15
-            frmEditor_Map.cmbNpcs(i) = New frmEditor_Map.cmbNpc
-            frmEditor_Map.cmbNpcs(i).cmbNpc = New ComboBox
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Width = 133
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Height = 21
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Left = StartX
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Top = StartY + ((i - 1) * 27)
-            frmEditor_Map.Controls.Add(frmEditor_Map.cmbNpcs(i).cmbNpc)
-            frmEditor_Map.cmbNpcs(i).cmbNpc.DropDownStyle = ComboBoxStyle.DropDownList
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Parent = frmEditor_Map.fraNpcs
-        Next
-        StartX = 165
-        'For i = 16 To 30
-        '    frmEditor_MapProperties.cmbNpcs(i) = New cmbNpc
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc = New ComboBox
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Width = 133
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Height = 21
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Left = StartX
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Top = StartY + ((i - 16) * 27)
-        '    frmEditor_MapProperties.Controls.Add(frmEditor_MapProperties.cmbNpcs(i).cmbNpc)
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.DropDownStyle = ComboBoxStyle.DropDownList
-        '    frmEditor_MapProperties.cmbNpcs(i).cmbNpc.Parent = frmEditor_MapProperties.fraNpcs
-        'Next
-        For i = 16 To 30
-            frmEditor_Map.cmbNpcs(i) = New frmEditor_Map.cmbNpc
-            frmEditor_Map.cmbNpcs(i).cmbNpc = New ComboBox
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Width = 133
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Height = 21
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Left = StartX
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Top = StartY + ((i - 16) * 27)
-            frmEditor_Map.Controls.Add(frmEditor_Map.cmbNpcs(i).cmbNpc)
-            frmEditor_Map.cmbNpcs(i).cmbNpc.DropDownStyle = ComboBoxStyle.DropDownList
-            frmEditor_Map.cmbNpcs(i).cmbNpc.Parent = frmEditor_Map.fraNpcs
-        Next
+
+        frmEditor_Map.lstMapNpc.Items.Clear()
 
         For X = 1 To MAX_MAP_NPCS
-            'frmEditor_MapProperties.cmbNpcs(X).cmbNpc.Items.Add("No NPC")
-            frmEditor_Map.cmbNpcs(X).cmbNpc.Items.Add("No NPC")
+            frmEditor_Map.lstMapNpc.Items.Add("No NPC")
         Next
 
+        frmEditor_Map.cmbNpcList.Items.Clear()
+        frmEditor_Map.cmbNpcList.Items.Add("No NPC")
 
         For Y = 1 To MAX_NPCS
-            For X = 1 To MAX_MAP_NPCS
-                'frmEditor_MapProperties.cmbNpcs(X).cmbNpc.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
-                frmEditor_Map.cmbNpcs(X).cmbNpc.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
-            Next
+            frmEditor_Map.cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
-        For i = 1 To MAX_MAP_NPCS
-            'frmEditor_MapProperties.cmbNpcs(i).cmbNpc.SelectedIndex = Map.Npc(i)
-            frmEditor_Map.cmbNpcs(i).cmbNpc.SelectedIndex = Map.Npc(i)
-        Next
-
-        'frmEditor_MapProperties.lblMap.Text = "Current map: " & GetPlayerMap(MyIndex)
-        'frmEditor_MapProperties.txtMaxX.Text = Map.MaxX
-        'frmEditor_MapProperties.txtMaxY.Text = Map.MaxY
         frmEditor_Map.lblMap.Text = "Current map: " & GetPlayerMap(MyIndex)
         frmEditor_Map.txtMaxX.Text = Map.MaxX
         frmEditor_Map.txtMaxY.Text = Map.MaxY
@@ -331,7 +253,7 @@ Module ClientGameEditors
 
         If Not isInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
-            If frmEditor_Map.optLayers.Checked = True Then
+            If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpTiles Then
                 ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 And (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
                 If EditorTileWidth = 1 And EditorTileHeight = 1 Then
 
@@ -343,7 +265,7 @@ Module ClientGameEditors
                         MapEditorSetTile(CurX, CurY, CurLayer, , frmEditor_Map.scrlAutotile.Value)
                     End If
                 End If
-            ElseIf frmEditor_Map.optAttributes.Checked = True Then
+            ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpattributes Then
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
                     If frmEditor_Map.optBlocked.Checked = True Then .Type = TILE_TYPE_BLOCKED
@@ -462,7 +384,7 @@ Module ClientGameEditors
         End If
 
         If Button = MouseButtons.Right Then
-            If frmEditor_Map.optLayers.Checked = True Then
+            If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpTiles Then
 
                 With Map.Tile(CurX, CurY)
                     ' clear layer
@@ -477,7 +399,7 @@ Module ClientGameEditors
                     CacheRenderState(X, Y, CurLayer)
                 End With
 
-            ElseIf frmEditor_Map.optAttributes.Checked = True Then
+            ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpattributes Then
                 With Map.Tile(CurX, CurY)
                     ' clear attribute
                     .Type = 0

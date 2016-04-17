@@ -1636,12 +1636,13 @@ Module ClientGraphics
             .Width = PIC_X
         End With
 
-        'Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-        'GameWindow.Draw(tmpSprite)
+        'EditorTileX, EditorTileY, frmEditor_Map.scrlTileSet.Value
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
+            RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        Else
+            RenderTexture(TileSetTexture(frmEditor_Map.scrlTileSet.Value), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+        End If
 
-        RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawFurnitureOutline()

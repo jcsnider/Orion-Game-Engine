@@ -29,8 +29,6 @@ Partial Class frmEditor_Map
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optEvent = New System.Windows.Forms.RadioButton()
         Me.optBlocks = New System.Windows.Forms.RadioButton()
-        Me.optAttributes = New System.Windows.Forms.RadioButton()
-        Me.optLayers = New System.Windows.Forms.RadioButton()
         Me.fraLayers = New System.Windows.Forms.GroupBox()
         Me.scrlAutotile = New System.Windows.Forms.HScrollBar()
         Me.lblAutotile = New System.Windows.Forms.Label()
@@ -41,7 +39,6 @@ Partial Class frmEditor_Map
         Me.optMask2 = New System.Windows.Forms.RadioButton()
         Me.optMask = New System.Windows.Forms.RadioButton()
         Me.optGround = New System.Windows.Forms.RadioButton()
-        Me.fraAttributes = New System.Windows.Forms.GroupBox()
         Me.optHouse = New System.Windows.Forms.RadioButton()
         Me.btnClearAttribute = New System.Windows.Forms.Button()
         Me.optTrap = New System.Windows.Forms.RadioButton()
@@ -115,11 +112,14 @@ Partial Class frmEditor_Map
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.tsbSave = New System.Windows.Forms.ToolStripButton()
         Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
+        Me.tpAttributes = New System.Windows.Forms.TabPage()
         Me.tpNpcs = New System.Windows.Forms.TabPage()
-        Me.btnSaveNpc = New System.Windows.Forms.Button()
         Me.fraNpcs = New System.Windows.Forms.GroupBox()
+        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
+        Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.ComboBox23 = New System.Windows.Forms.ComboBox()
         Me.tpSettings = New System.Windows.Forms.TabPage()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
@@ -148,11 +148,9 @@ Partial Class frmEditor_Map
         Me.lstMusic = New System.Windows.Forms.ListBox()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.fraTileSet.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.fraLayers.SuspendLayout()
-        Me.fraAttributes.SuspendLayout()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -171,6 +169,7 @@ Partial Class frmEditor_Map
         Me.ToolStrip.SuspendLayout()
         Me.tabpages.SuspendLayout()
         Me.tpTiles.SuspendLayout()
+        Me.tpAttributes.SuspendLayout()
         Me.tpNpcs.SuspendLayout()
         Me.fraNpcs.SuspendLayout()
         Me.tpSettings.SuspendLayout()
@@ -219,8 +218,6 @@ Partial Class frmEditor_Map
         '
         Me.GroupBox1.Controls.Add(Me.optEvent)
         Me.GroupBox1.Controls.Add(Me.optBlocks)
-        Me.GroupBox1.Controls.Add(Me.optAttributes)
-        Me.GroupBox1.Controls.Add(Me.optLayers)
         Me.GroupBox1.Location = New System.Drawing.Point(377, 329)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(103, 113)
@@ -249,28 +246,6 @@ Partial Class frmEditor_Map
         Me.optBlocks.TabStop = True
         Me.optBlocks.Text = "Dir Blocks"
         Me.optBlocks.UseVisualStyleBackColor = True
-        '
-        'optAttributes
-        '
-        Me.optAttributes.AutoSize = True
-        Me.optAttributes.Location = New System.Drawing.Point(6, 42)
-        Me.optAttributes.Name = "optAttributes"
-        Me.optAttributes.Size = New System.Drawing.Size(69, 17)
-        Me.optAttributes.TabIndex = 1
-        Me.optAttributes.TabStop = True
-        Me.optAttributes.Text = "Attributes"
-        Me.optAttributes.UseVisualStyleBackColor = True
-        '
-        'optLayers
-        '
-        Me.optLayers.AutoSize = True
-        Me.optLayers.Location = New System.Drawing.Point(6, 19)
-        Me.optLayers.Name = "optLayers"
-        Me.optLayers.Size = New System.Drawing.Size(56, 17)
-        Me.optLayers.TabIndex = 0
-        Me.optLayers.TabStop = True
-        Me.optLayers.Text = "Layers"
-        Me.optLayers.UseVisualStyleBackColor = True
         '
         'fraLayers
         '
@@ -378,35 +353,10 @@ Partial Class frmEditor_Map
         Me.optGround.Text = "Ground"
         Me.optGround.UseVisualStyleBackColor = True
         '
-        'fraAttributes
-        '
-        Me.fraAttributes.Controls.Add(Me.optHouse)
-        Me.fraAttributes.Controls.Add(Me.btnClearAttribute)
-        Me.fraAttributes.Controls.Add(Me.optTrap)
-        Me.fraAttributes.Controls.Add(Me.optHeal)
-        Me.fraAttributes.Controls.Add(Me.optBank)
-        Me.fraAttributes.Controls.Add(Me.optShop)
-        Me.fraAttributes.Controls.Add(Me.optNPCSpawn)
-        Me.fraAttributes.Controls.Add(Me.optDoor)
-        Me.fraAttributes.Controls.Add(Me.optResource)
-        Me.fraAttributes.Controls.Add(Me.optKeyOpen)
-        Me.fraAttributes.Controls.Add(Me.optKey)
-        Me.fraAttributes.Controls.Add(Me.optNPCAvoid)
-        Me.fraAttributes.Controls.Add(Me.optItem)
-        Me.fraAttributes.Controls.Add(Me.optWarp)
-        Me.fraAttributes.Controls.Add(Me.optBlocked)
-        Me.fraAttributes.Location = New System.Drawing.Point(377, 8)
-        Me.fraAttributes.Name = "fraAttributes"
-        Me.fraAttributes.Size = New System.Drawing.Size(103, 315)
-        Me.fraAttributes.TabIndex = 10
-        Me.fraAttributes.TabStop = False
-        Me.fraAttributes.Text = "Attributes"
-        Me.fraAttributes.Visible = False
-        '
         'optHouse
         '
         Me.optHouse.AutoSize = True
-        Me.optHouse.Location = New System.Drawing.Point(5, 243)
+        Me.optHouse.Location = New System.Drawing.Point(320, 49)
         Me.optHouse.Name = "optHouse"
         Me.optHouse.Size = New System.Drawing.Size(77, 17)
         Me.optHouse.TabIndex = 15
@@ -416,17 +366,17 @@ Partial Class frmEditor_Map
         '
         'btnClearAttribute
         '
-        Me.btnClearAttribute.Location = New System.Drawing.Point(6, 285)
+        Me.btnClearAttribute.Location = New System.Drawing.Point(320, 437)
         Me.btnClearAttribute.Name = "btnClearAttribute"
-        Me.btnClearAttribute.Size = New System.Drawing.Size(91, 25)
+        Me.btnClearAttribute.Size = New System.Drawing.Size(165, 25)
         Me.btnClearAttribute.TabIndex = 14
-        Me.btnClearAttribute.Text = "Clear"
+        Me.btnClearAttribute.Text = "Clear All Attributes"
         Me.btnClearAttribute.UseVisualStyleBackColor = True
         '
         'optTrap
         '
         Me.optTrap.AutoSize = True
-        Me.optTrap.Location = New System.Drawing.Point(5, 227)
+        Me.optTrap.Location = New System.Drawing.Point(101, 85)
         Me.optTrap.Name = "optTrap"
         Me.optTrap.Size = New System.Drawing.Size(47, 17)
         Me.optTrap.TabIndex = 12
@@ -437,7 +387,7 @@ Partial Class frmEditor_Map
         'optHeal
         '
         Me.optHeal.AutoSize = True
-        Me.optHeal.Location = New System.Drawing.Point(5, 211)
+        Me.optHeal.Location = New System.Drawing.Point(10, 85)
         Me.optHeal.Name = "optHeal"
         Me.optHeal.Size = New System.Drawing.Size(47, 17)
         Me.optHeal.TabIndex = 11
@@ -448,7 +398,7 @@ Partial Class frmEditor_Map
         'optBank
         '
         Me.optBank.AutoSize = True
-        Me.optBank.Location = New System.Drawing.Point(5, 195)
+        Me.optBank.Location = New System.Drawing.Point(409, 49)
         Me.optBank.Name = "optBank"
         Me.optBank.Size = New System.Drawing.Size(50, 17)
         Me.optBank.TabIndex = 10
@@ -459,7 +409,7 @@ Partial Class frmEditor_Map
         'optShop
         '
         Me.optShop.AutoSize = True
-        Me.optShop.Location = New System.Drawing.Point(5, 177)
+        Me.optShop.Location = New System.Drawing.Point(409, 14)
         Me.optShop.Name = "optShop"
         Me.optShop.Size = New System.Drawing.Size(50, 17)
         Me.optShop.TabIndex = 9
@@ -470,7 +420,7 @@ Partial Class frmEditor_Map
         'optNPCSpawn
         '
         Me.optNPCSpawn.AutoSize = True
-        Me.optNPCSpawn.Location = New System.Drawing.Point(5, 160)
+        Me.optNPCSpawn.Location = New System.Drawing.Point(320, 14)
         Me.optNPCSpawn.Name = "optNPCSpawn"
         Me.optNPCSpawn.Size = New System.Drawing.Size(83, 17)
         Me.optNPCSpawn.TabIndex = 8
@@ -481,7 +431,7 @@ Partial Class frmEditor_Map
         'optDoor
         '
         Me.optDoor.AutoSize = True
-        Me.optDoor.Location = New System.Drawing.Point(5, 143)
+        Me.optDoor.Location = New System.Drawing.Point(101, 50)
         Me.optDoor.Name = "optDoor"
         Me.optDoor.Size = New System.Drawing.Size(48, 17)
         Me.optDoor.TabIndex = 7
@@ -492,7 +442,7 @@ Partial Class frmEditor_Map
         'optResource
         '
         Me.optResource.AutoSize = True
-        Me.optResource.Location = New System.Drawing.Point(5, 125)
+        Me.optResource.Location = New System.Drawing.Point(10, 50)
         Me.optResource.Name = "optResource"
         Me.optResource.Size = New System.Drawing.Size(71, 17)
         Me.optResource.TabIndex = 6
@@ -503,7 +453,7 @@ Partial Class frmEditor_Map
         'optKeyOpen
         '
         Me.optKeyOpen.AutoSize = True
-        Me.optKeyOpen.Location = New System.Drawing.Point(5, 110)
+        Me.optKeyOpen.Location = New System.Drawing.Point(237, 50)
         Me.optKeyOpen.Name = "optKeyOpen"
         Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
         Me.optKeyOpen.TabIndex = 5
@@ -514,7 +464,7 @@ Partial Class frmEditor_Map
         'optKey
         '
         Me.optKey.AutoSize = True
-        Me.optKey.Location = New System.Drawing.Point(5, 92)
+        Me.optKey.Location = New System.Drawing.Point(173, 50)
         Me.optKey.Name = "optKey"
         Me.optKey.Size = New System.Drawing.Size(43, 17)
         Me.optKey.TabIndex = 4
@@ -525,7 +475,7 @@ Partial Class frmEditor_Map
         'optNPCAvoid
         '
         Me.optNPCAvoid.AutoSize = True
-        Me.optNPCAvoid.Location = New System.Drawing.Point(5, 74)
+        Me.optNPCAvoid.Location = New System.Drawing.Point(237, 14)
         Me.optNPCAvoid.Name = "optNPCAvoid"
         Me.optNPCAvoid.Size = New System.Drawing.Size(77, 17)
         Me.optNPCAvoid.TabIndex = 3
@@ -536,7 +486,7 @@ Partial Class frmEditor_Map
         'optItem
         '
         Me.optItem.AutoSize = True
-        Me.optItem.Location = New System.Drawing.Point(5, 55)
+        Me.optItem.Location = New System.Drawing.Point(173, 14)
         Me.optItem.Name = "optItem"
         Me.optItem.Size = New System.Drawing.Size(45, 17)
         Me.optItem.TabIndex = 2
@@ -547,7 +497,7 @@ Partial Class frmEditor_Map
         'optWarp
         '
         Me.optWarp.AutoSize = True
-        Me.optWarp.Location = New System.Drawing.Point(5, 36)
+        Me.optWarp.Location = New System.Drawing.Point(101, 14)
         Me.optWarp.Name = "optWarp"
         Me.optWarp.Size = New System.Drawing.Size(51, 17)
         Me.optWarp.TabIndex = 1
@@ -558,7 +508,7 @@ Partial Class frmEditor_Map
         'optBlocked
         '
         Me.optBlocked.AutoSize = True
-        Me.optBlocked.Location = New System.Drawing.Point(5, 19)
+        Me.optBlocked.Location = New System.Drawing.Point(10, 14)
         Me.optBlocked.Name = "optBlocked"
         Me.optBlocked.Size = New System.Drawing.Size(64, 17)
         Me.optBlocked.TabIndex = 0
@@ -604,9 +554,9 @@ Partial Class frmEditor_Map
         Me.pnlAttributes.Controls.Add(Me.fraResource)
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.Location = New System.Drawing.Point(509, 49)
+        Me.pnlAttributes.Location = New System.Drawing.Point(509, 28)
         Me.pnlAttributes.Name = "pnlAttributes"
-        Me.pnlAttributes.Size = New System.Drawing.Size(482, 470)
+        Me.pnlAttributes.Size = New System.Drawing.Size(482, 491)
         Me.pnlAttributes.TabIndex = 12
         Me.pnlAttributes.Visible = False
         '
@@ -1095,7 +1045,7 @@ Partial Class frmEditor_Map
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(507, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(1210, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -1115,9 +1065,15 @@ Partial Class frmEditor_Map
         Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
         Me.tsbDiscard.Text = "Discard"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
         'tabpages
         '
         Me.tabpages.Controls.Add(Me.tpTiles)
+        Me.tabpages.Controls.Add(Me.tpAttributes)
         Me.tabpages.Controls.Add(Me.tpNpcs)
         Me.tabpages.Controls.Add(Me.tpSettings)
         Me.tabpages.Location = New System.Drawing.Point(4, 28)
@@ -1129,7 +1085,6 @@ Partial Class frmEditor_Map
         'tpTiles
         '
         Me.tpTiles.Controls.Add(Me.pnlBack)
-        Me.tpTiles.Controls.Add(Me.fraAttributes)
         Me.tpTiles.Controls.Add(Me.fraLayers)
         Me.tpTiles.Controls.Add(Me.Label1)
         Me.tpTiles.Controls.Add(Me.scrlPictureX)
@@ -1144,9 +1099,33 @@ Partial Class frmEditor_Map
         Me.tpTiles.Text = "Tiles"
         Me.tpTiles.UseVisualStyleBackColor = True
         '
+        'tpAttributes
+        '
+        Me.tpAttributes.Controls.Add(Me.optHouse)
+        Me.tpAttributes.Controls.Add(Me.btnClearAttribute)
+        Me.tpAttributes.Controls.Add(Me.optTrap)
+        Me.tpAttributes.Controls.Add(Me.optBlocked)
+        Me.tpAttributes.Controls.Add(Me.optHeal)
+        Me.tpAttributes.Controls.Add(Me.optWarp)
+        Me.tpAttributes.Controls.Add(Me.optBank)
+        Me.tpAttributes.Controls.Add(Me.optItem)
+        Me.tpAttributes.Controls.Add(Me.optShop)
+        Me.tpAttributes.Controls.Add(Me.optNPCAvoid)
+        Me.tpAttributes.Controls.Add(Me.optNPCSpawn)
+        Me.tpAttributes.Controls.Add(Me.optKey)
+        Me.tpAttributes.Controls.Add(Me.optDoor)
+        Me.tpAttributes.Controls.Add(Me.optKeyOpen)
+        Me.tpAttributes.Controls.Add(Me.optResource)
+        Me.tpAttributes.Location = New System.Drawing.Point(4, 22)
+        Me.tpAttributes.Name = "tpAttributes"
+        Me.tpAttributes.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpAttributes.Size = New System.Drawing.Size(491, 468)
+        Me.tpAttributes.TabIndex = 3
+        Me.tpAttributes.Text = "Attributes"
+        Me.tpAttributes.UseVisualStyleBackColor = True
+        '
         'tpNpcs
         '
-        Me.tpNpcs.Controls.Add(Me.btnSaveNpc)
         Me.tpNpcs.Controls.Add(Me.fraNpcs)
         Me.tpNpcs.Location = New System.Drawing.Point(4, 22)
         Me.tpNpcs.Name = "tpNpcs"
@@ -1156,17 +1135,10 @@ Partial Class frmEditor_Map
         Me.tpNpcs.Text = "Npc's"
         Me.tpNpcs.UseVisualStyleBackColor = True
         '
-        'btnSaveNpc
-        '
-        Me.btnSaveNpc.Location = New System.Drawing.Point(377, 440)
-        Me.btnSaveNpc.Name = "btnSaveNpc"
-        Me.btnSaveNpc.Size = New System.Drawing.Size(108, 23)
-        Me.btnSaveNpc.TabIndex = 17
-        Me.btnSaveNpc.Text = "Save Npc's"
-        Me.btnSaveNpc.UseVisualStyleBackColor = True
-        '
         'fraNpcs
         '
+        Me.fraNpcs.Controls.Add(Me.cmbNpcList)
+        Me.fraNpcs.Controls.Add(Me.lstMapNpc)
         Me.fraNpcs.Controls.Add(Me.ComboBox23)
         Me.fraNpcs.Location = New System.Drawing.Point(6, 8)
         Me.fraNpcs.Name = "fraNpcs"
@@ -1174,6 +1146,22 @@ Partial Class frmEditor_Map
         Me.fraNpcs.TabIndex = 11
         Me.fraNpcs.TabStop = False
         Me.fraNpcs.Text = "NPCs"
+        '
+        'cmbNpcList
+        '
+        Me.cmbNpcList.FormattingEnabled = True
+        Me.cmbNpcList.Location = New System.Drawing.Point(260, 26)
+        Me.cmbNpcList.Name = "cmbNpcList"
+        Me.cmbNpcList.Size = New System.Drawing.Size(213, 21)
+        Me.cmbNpcList.TabIndex = 70
+        '
+        'lstMapNpc
+        '
+        Me.lstMapNpc.FormattingEnabled = True
+        Me.lstMapNpc.Location = New System.Drawing.Point(6, 19)
+        Me.lstMapNpc.Name = "lstMapNpc"
+        Me.lstMapNpc.Size = New System.Drawing.Size(181, 394)
+        Me.lstMapNpc.TabIndex = 69
         '
         'ComboBox23
         '
@@ -1444,16 +1432,11 @@ Partial Class frmEditor_Map
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "Name:"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 527)
+        Me.ClientSize = New System.Drawing.Size(1210, 527)
         Me.ControlBox = False
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
@@ -1467,8 +1450,6 @@ Partial Class frmEditor_Map
         Me.GroupBox1.PerformLayout()
         Me.fraLayers.ResumeLayout(False)
         Me.fraLayers.PerformLayout()
-        Me.fraAttributes.ResumeLayout(False)
-        Me.fraAttributes.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAttributes.ResumeLayout(False)
@@ -1498,6 +1479,8 @@ Partial Class frmEditor_Map
         Me.tabpages.ResumeLayout(False)
         Me.tpTiles.ResumeLayout(False)
         Me.tpTiles.PerformLayout()
+        Me.tpAttributes.ResumeLayout(False)
+        Me.tpAttributes.PerformLayout()
         Me.tpNpcs.ResumeLayout(False)
         Me.fraNpcs.ResumeLayout(False)
         Me.tpSettings.ResumeLayout(False)
@@ -1521,8 +1504,6 @@ Partial Class frmEditor_Map
     Friend WithEvents scrlTileSet As System.Windows.Forms.HScrollBar
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents optBlocks As System.Windows.Forms.RadioButton
-    Friend WithEvents optAttributes As System.Windows.Forms.RadioButton
-    Friend WithEvents optLayers As System.Windows.Forms.RadioButton
     Friend WithEvents fraLayers As System.Windows.Forms.GroupBox
     Friend WithEvents optFringe2 As System.Windows.Forms.RadioButton
     Friend WithEvents optFringe As System.Windows.Forms.RadioButton
@@ -1530,7 +1511,6 @@ Partial Class frmEditor_Map
     Friend WithEvents optMask As System.Windows.Forms.RadioButton
     Friend WithEvents optGround As System.Windows.Forms.RadioButton
     Friend WithEvents pnlBack As System.Windows.Forms.Panel
-    Friend WithEvents fraAttributes As System.Windows.Forms.GroupBox
     Friend WithEvents optTrap As System.Windows.Forms.RadioButton
     Friend WithEvents optHeal As System.Windows.Forms.RadioButton
     Friend WithEvents optBank As System.Windows.Forms.RadioButton
@@ -1639,7 +1619,9 @@ Partial Class frmEditor_Map
     Friend WithEvents fraMapSettings As Windows.Forms.GroupBox
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents cmbMoral As Windows.Forms.ComboBox
-    Friend WithEvents btnSaveNpc As Windows.Forms.Button
     Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents cmbNpcList As Windows.Forms.ComboBox
+    Friend WithEvents lstMapNpc As Windows.Forms.ListBox
+    Friend WithEvents tpAttributes As Windows.Forms.TabPage
 End Class

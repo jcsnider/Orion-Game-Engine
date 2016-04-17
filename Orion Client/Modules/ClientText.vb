@@ -182,7 +182,7 @@ Module ClientText
         Dim tX As Long
         Dim tY As Long
 
-        If frmEditor_Map.optAttributes.Checked Then
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
             For X = TileView.left To TileView.right
                 For y = TileView.top To TileView.bottom
                     If IsValidMapPoint(X, y) Then
