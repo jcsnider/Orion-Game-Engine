@@ -143,6 +143,7 @@ Partial Class frmEditor_Map
         Me.Label6 = New System.Windows.Forms.Label()
         Me.tpDirBlock = New System.Windows.Forms.TabPage()
         Me.tpEvents = New System.Windows.Forms.TabPage()
+        Me.chkMapGrid = New System.Windows.Forms.CheckBox()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -939,6 +940,7 @@ Partial Class frmEditor_Map
         '
         'tpTiles
         '
+        Me.tpTiles.Controls.Add(Me.chkMapGrid)
         Me.tpTiles.Controls.Add(Me.cmbAutoTile)
         Me.tpTiles.Controls.Add(Me.Label11)
         Me.tpTiles.Controls.Add(Me.btnFill)
@@ -1365,6 +1367,16 @@ Partial Class frmEditor_Map
         Me.tpEvents.Text = "Events"
         Me.tpEvents.UseVisualStyleBackColor = True
         '
+        'chkMapGrid
+        '
+        Me.chkMapGrid.AutoSize = True
+        Me.chkMapGrid.Location = New System.Drawing.Point(184, 445)
+        Me.chkMapGrid.Name = "chkMapGrid"
+        Me.chkMapGrid.Size = New System.Drawing.Size(88, 17)
+        Me.chkMapGrid.TabIndex = 18
+        Me.chkMapGrid.Text = "Use MapGrid"
+        Me.chkMapGrid.UseVisualStyleBackColor = True
+        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1547,4 +1559,5 @@ Partial Class frmEditor_Map
     Friend WithEvents Label9 As Windows.Forms.Label
     Friend WithEvents tpDirBlock As Windows.Forms.TabPage
     Friend WithEvents tpEvents As Windows.Forms.TabPage
+    Friend WithEvents chkMapGrid As Windows.Forms.CheckBox
 End Class

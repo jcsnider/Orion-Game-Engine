@@ -1,6 +1,7 @@
 ﻿Imports SFML.Graphics
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports SFML.Window
 
 Module ClientGraphics
     Public GameWindow As RenderWindow
@@ -696,7 +697,7 @@ Module ClientGraphics
         End With
 
         X = ConvertMapX(x2)
-        y = ConvertMapY(y2)
+        Y = ConvertMapY(y2)
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
 
@@ -864,12 +865,12 @@ Module ClientGraphics
 
         If PicNum < 1 Or PicNum > NumItems Then Exit Sub
 
-        If ItemsGFXInfo(itemnum).IsLoaded = False Then
-            LoadTexture(itemnum, 2)
+        If ItemsGFXInfo(PicNum).IsLoaded = False Then
+            LoadTexture(PicNum, 4)
         End If
 
         'seeying we still use it, lets update timer
-        With ItemsGFXInfo(itemnum)
+        With ItemsGFXInfo(PicNum)
             .TextureTimer = GetTickCount() + 100000
         End With
 
@@ -1403,6 +1404,10 @@ Module ClientGraphics
 
         ' Draw out a square at mouse cursor
         If InMapEditor Then
+            If frmEditor_Map.chkMapGrid.Checked Then
+                DrawGrid()
+            End If
+
             If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then
                 For X = TileView.left To TileView.right
                     For Y = TileView.top To TileView.bottom
@@ -1412,7 +1417,9 @@ Module ClientGraphics
                     Next
                 Next
             End If
+
             DrawTileOutline()
+
         End If
 
         If FurnitureSelected > 0 Then
@@ -1659,22 +1666,32 @@ Module ClientGraphics
             .Width = PIC_X
         End With
 
+        Dim rec2 As New RectangleShape
+        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+        rec2.OutlineThickness = 0.6
+        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+
         If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
             RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
         Else
             If EditorTileWidth = 1 And EditorTileHeight = 1 Then
                 RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
                     RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                    rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
                     RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
             End If
 
         End If
 
+        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+        GameWindow.Draw(rec2)
     End Sub
 
     Public Sub DrawFurnitureOutline()
@@ -1695,6 +1712,31 @@ Module ClientGraphics
         'GameWindow.Draw(tmpSprite)
 
         RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+    End Sub
+
+    Public Sub DrawGrid()
+
+        Dim rec As New RectangleShape
+
+        For x = TileView.left To TileView.right ' - 1
+
+            For y = TileView.top To TileView.bottom ' - 1
+
+                If IsValidMapPoint(x, y) Then
+
+                    rec.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.White)
+                    rec.OutlineThickness = 0.6
+                    rec.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                    rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
+                    rec.Position = New Vector2f(ConvertMapX((x - 1) * PIC_X), ConvertMapY((y - 1) * PIC_Y))
+
+                    GameWindow.Draw(rec)
+                End If
+
+            Next
+
+        Next
+
     End Sub
 
     Public Sub EditorMap_DrawTileset()
