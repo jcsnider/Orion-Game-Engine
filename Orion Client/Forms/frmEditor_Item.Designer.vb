@@ -60,6 +60,9 @@ Partial Class frmEditor_Item
         Me.lblAccessReq = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.fraEquipment = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
+        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
         Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
         Me.lblProjectile = New System.Windows.Forms.Label()
         Me.scrlPaperdoll = New System.Windows.Forms.HScrollBar()
@@ -103,9 +106,6 @@ Partial Class frmEditor_Item
         Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
         Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
-        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -508,6 +508,35 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Text = "Equipment Data"
         Me.fraEquipment.Visible = False
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(119, 153)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 65
+        Me.Label5.Text = "X Tiles"
+        '
+        'cmbKnockBackTiles
+        '
+        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbKnockBackTiles.FormattingEnabled = True
+        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(172, 150)
+        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
+        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(121, 21)
+        Me.cmbKnockBackTiles.TabIndex = 64
+        '
+        'chkKnockBack
+        '
+        Me.chkKnockBack.AutoSize = True
+        Me.chkKnockBack.Location = New System.Drawing.Point(9, 152)
+        Me.chkKnockBack.Name = "chkKnockBack"
+        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
+        Me.chkKnockBack.TabIndex = 63
+        Me.chkKnockBack.Text = "Has KnockBack"
+        Me.chkKnockBack.UseVisualStyleBackColor = True
+        '
         'scrlProjectile
         '
         Me.scrlProjectile.LargeChange = 1
@@ -657,7 +686,7 @@ Partial Class frmEditor_Item
         '
         Me.scrlSpeed.LargeChange = 1
         Me.scrlSpeed.Location = New System.Drawing.Point(130, 68)
-        Me.scrlSpeed.Maximum = 200
+        Me.scrlSpeed.Maximum = 2000
         Me.scrlSpeed.Name = "scrlSpeed"
         Me.scrlSpeed.Size = New System.Drawing.Size(274, 13)
         Me.scrlSpeed.TabIndex = 43
@@ -904,35 +933,6 @@ Partial Class frmEditor_Item
         Me.Label4.Size = New System.Drawing.Size(78, 13)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Furniture Type:"
-        '
-        'chkKnockBack
-        '
-        Me.chkKnockBack.AutoSize = True
-        Me.chkKnockBack.Location = New System.Drawing.Point(9, 152)
-        Me.chkKnockBack.Name = "chkKnockBack"
-        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
-        Me.chkKnockBack.TabIndex = 63
-        Me.chkKnockBack.Text = "Has KnockBack"
-        Me.chkKnockBack.UseVisualStyleBackColor = True
-        '
-        'cmbKnockBackTiles
-        '
-        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbKnockBackTiles.FormattingEnabled = True
-        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
-        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(172, 150)
-        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
-        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(121, 21)
-        Me.cmbKnockBackTiles.TabIndex = 64
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(119, 153)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 13)
-        Me.Label5.TabIndex = 65
-        Me.Label5.Text = "X Tiles"
         '
         'frmEditor_Item
         '
