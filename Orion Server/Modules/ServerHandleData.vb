@@ -808,16 +808,16 @@
                 Else
                     n = GetPlayerDamage(Index)
                     Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.endurance) \ 2)
-                    Call PlayerMsg(Index, "You feel a surge of energy upon swinging!")
+                    PlayerMsg(Index, "You feel a surge of energy upon swinging!")
                     SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                     SendCritical(Index)
                     KnockBackNpc(Index, i)
                 End If
 
                 If Damage > 0 Then
-                    Call AttackNpc(Index, i, Damage)
+                    AttackNpc(Index, i, Damage)
                 Else
-                    Call PlayerMsg(Index, "Your attack does nothing.")
+                    PlayerMsg(Index, "Your attack does nothing.")
                 End If
 
                 Exit Sub
@@ -1070,6 +1070,8 @@
         ' Prevent hacking
         If GetPlayerAccess(Index) < ADMIN_MAPPER Then Exit Sub
 
+        Gettingmap = True
+
         MapNum = GetPlayerMap(Index)
         i = Map(MapNum).Revision + 1
         ClearMap(MapNum)
@@ -1132,6 +1134,7 @@
                 End With
                 If Map(MapNum).Events(i).PageCount > 0 Then
                     ReDim Map(MapNum).Events(i).Pages(0 To Map(MapNum).Events(i).PageCount)
+                    ReDim TempPlayer(i).EventMap.EventPages(0 To Map(MapNum).Events(i).PageCount)
                     For x = 1 To Map(MapNum).Events(i).PageCount
                         With Map(MapNum).Events(i).Pages(x)
                             .chkVariable = Buffer.ReadLong
@@ -1168,7 +1171,7 @@
                             .RepeatMoveRoute = Buffer.ReadLong
 
                             If .MoveRouteCount > 0 Then
-                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(0 To .MoveRouteCount)
+                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
                                 For y = 1 To .MoveRouteCount
                                     .MoveRoute(y).Index = Buffer.ReadLong
                                     .MoveRoute(y).Data1 = Buffer.ReadLong
@@ -1242,6 +1245,11 @@
         End If
         'End Event Data
 
+        ' Save the map
+        SaveMap(MapNum)
+
+        Gettingmap = False
+
         SendMapNpcsToMap(MapNum)
         SpawnMapNpcs(MapNum)
         SpawnGlobalEvents(MapNum)
@@ -1263,8 +1271,7 @@
         ' Respawn
         SpawnMapItems(GetPlayerMap(Index))
 
-        ' Save the map
-        SaveMap(MapNum)
+
         ClearTempTile(MapNum)
         CacheResources(MapNum)
 
@@ -1654,10 +1661,13 @@
             Next
         Next
 
+        Item(n).KnockBack = Buffer.ReadLong()
+        Item(n).KnockBackTiles = Buffer.ReadLong()
+
         ' Save it
-        Call SendUpdateItemToAll(n)
-        Call SaveItem(n)
-        Call Addlog(GetPlayerName(index) & " saved item #" & n & ".", ADMIN_LOG)
+        SendUpdateItemToAll(n)
+        SaveItem(n)
+        Addlog(GetPlayerName(index) & " saved item #" & n & ".", ADMIN_LOG)
         Buffer = Nothing
     End Sub
 

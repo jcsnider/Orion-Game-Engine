@@ -60,6 +60,8 @@ Partial Class frmEditor_Item
         Me.lblAccessReq = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.fraEquipment = New System.Windows.Forms.GroupBox()
+        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
+        Me.lblProjectile = New System.Windows.Forms.Label()
         Me.scrlPaperdoll = New System.Windows.Forms.HScrollBar()
         Me.lblPaperDoll = New System.Windows.Forms.Label()
         Me.picPaperdoll = New System.Windows.Forms.PictureBox()
@@ -101,8 +103,9 @@ Partial Class frmEditor_Item
         Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
         Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
-        Me.lblProjectile = New System.Windows.Forms.Label()
+        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
+        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -471,6 +474,9 @@ Partial Class frmEditor_Item
         '
         'fraEquipment
         '
+        Me.fraEquipment.Controls.Add(Me.Label5)
+        Me.fraEquipment.Controls.Add(Me.cmbKnockBackTiles)
+        Me.fraEquipment.Controls.Add(Me.chkKnockBack)
         Me.fraEquipment.Controls.Add(Me.scrlProjectile)
         Me.fraEquipment.Controls.Add(Me.lblProjectile)
         Me.fraEquipment.Controls.Add(Me.scrlPaperdoll)
@@ -502,6 +508,23 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Text = "Equipment Data"
         Me.fraEquipment.Visible = False
         '
+        'scrlProjectile
+        '
+        Me.scrlProjectile.LargeChange = 1
+        Me.scrlProjectile.Location = New System.Drawing.Point(3, 189)
+        Me.scrlProjectile.Name = "scrlProjectile"
+        Me.scrlProjectile.Size = New System.Drawing.Size(160, 18)
+        Me.scrlProjectile.TabIndex = 62
+        '
+        'lblProjectile
+        '
+        Me.lblProjectile.AutoSize = True
+        Me.lblProjectile.Location = New System.Drawing.Point(7, 174)
+        Me.lblProjectile.Name = "lblProjectile"
+        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
+        Me.lblProjectile.TabIndex = 61
+        Me.lblProjectile.Text = "Projectile: 0 None"
+        '
         'scrlPaperdoll
         '
         Me.scrlPaperdoll.LargeChange = 1
@@ -513,7 +536,7 @@ Partial Class frmEditor_Item
         'lblPaperDoll
         '
         Me.lblPaperDoll.AutoSize = True
-        Me.lblPaperDoll.Location = New System.Drawing.Point(181, 170)
+        Me.lblPaperDoll.Location = New System.Drawing.Point(181, 174)
         Me.lblPaperDoll.Name = "lblPaperDoll"
         Me.lblPaperDoll.Size = New System.Drawing.Size(63, 13)
         Me.lblPaperDoll.TabIndex = 57
@@ -716,7 +739,7 @@ Partial Class frmEditor_Item
         Me.fraSpell.Controls.Add(Me.scrlSpell)
         Me.fraSpell.Controls.Add(Me.lblSpell)
         Me.fraSpell.Controls.Add(Me.lblSpellName)
-        Me.fraSpell.Location = New System.Drawing.Point(237, 296)
+        Me.fraSpell.Location = New System.Drawing.Point(423, 296)
         Me.fraSpell.Name = "fraSpell"
         Me.fraSpell.Size = New System.Drawing.Size(232, 84)
         Me.fraSpell.TabIndex = 8
@@ -770,7 +793,7 @@ Partial Class frmEditor_Item
         '
         Me.fraVitals.Controls.Add(Me.scrlVitalMod)
         Me.fraVitals.Controls.Add(Me.lblVitalMod)
-        Me.fraVitals.Location = New System.Drawing.Point(237, 297)
+        Me.fraVitals.Location = New System.Drawing.Point(421, 297)
         Me.fraVitals.Name = "fraVitals"
         Me.fraVitals.Size = New System.Drawing.Size(232, 84)
         Me.fraVitals.TabIndex = 9
@@ -882,22 +905,34 @@ Partial Class frmEditor_Item
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Furniture Type:"
         '
-        'scrlProjectile
+        'chkKnockBack
         '
-        Me.scrlProjectile.LargeChange = 1
-        Me.scrlProjectile.Location = New System.Drawing.Point(3, 189)
-        Me.scrlProjectile.Name = "scrlProjectile"
-        Me.scrlProjectile.Size = New System.Drawing.Size(160, 18)
-        Me.scrlProjectile.TabIndex = 62
+        Me.chkKnockBack.AutoSize = True
+        Me.chkKnockBack.Location = New System.Drawing.Point(9, 152)
+        Me.chkKnockBack.Name = "chkKnockBack"
+        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
+        Me.chkKnockBack.TabIndex = 63
+        Me.chkKnockBack.Text = "Has KnockBack"
+        Me.chkKnockBack.UseVisualStyleBackColor = True
         '
-        'lblProjectile
+        'cmbKnockBackTiles
         '
-        Me.lblProjectile.AutoSize = True
-        Me.lblProjectile.Location = New System.Drawing.Point(6, 176)
-        Me.lblProjectile.Name = "lblProjectile"
-        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
-        Me.lblProjectile.TabIndex = 61
-        Me.lblProjectile.Text = "Projectile: 0 None"
+        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbKnockBackTiles.FormattingEnabled = True
+        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(172, 150)
+        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
+        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(121, 21)
+        Me.cmbKnockBackTiles.TabIndex = 64
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(119, 153)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 65
+        Me.Label5.Text = "X Tiles"
         '
         'frmEditor_Item
         '
@@ -1019,4 +1054,7 @@ Partial Class frmEditor_Item
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents scrlProjectile As Windows.Forms.HScrollBar
     Friend WithEvents lblProjectile As Windows.Forms.Label
+    Friend WithEvents Label5 As Windows.Forms.Label
+    Friend WithEvents cmbKnockBackTiles As Windows.Forms.ComboBox
+    Friend WithEvents chkKnockBack As Windows.Forms.CheckBox
 End Class

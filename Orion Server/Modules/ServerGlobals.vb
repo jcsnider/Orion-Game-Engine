@@ -26,4 +26,6 @@
     Public TempMapData As Byte
 
     Public NeedToUpDatePlayerList As Boolean
+
+    Public Gettingmap As Boolean
 End Module

@@ -197,6 +197,9 @@
         Dim FurnitureHeight As Long
         Dim FurnitureBlocks(,) As Long
         Dim FurnitureFringe(,) As Long
+
+        Dim KnockBack As Byte
+        Dim KnockBackTiles As Byte
     End Structure
 
     Public Structure MapItemRec

@@ -131,6 +131,11 @@ Module ClientGameEditors
         ' render the tiles
         EditorMap_DrawTileset()
 
+        'hide chatbox
+        frmMainGame.txtMeChat.Visible = False
+
+        frmEditor_Map.tabpages.SelectedIndex = 0
+
         ' show the form
         frmEditor_Map.Visible = True
     End Sub
@@ -453,6 +458,8 @@ Module ClientGameEditors
         frmEditor_Map.Visible = False
         GettingMap = True
 
+        frmMainGame.txtMeChat.Visible = True
+
         'clear memory
         For i = 0 To NumTileSets
             If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
@@ -644,6 +651,8 @@ Module ClientGameEditors
                 frmEditor_Item.scrlAddWill.Value = .Add_Stat(Stats.willpower)
                 frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.spirit)
 
+                frmEditor_Item.chkKnockBack.Checked = .KnockBack
+                frmEditor_Item.cmbKnockBackTiles.SelectedIndex = .KnockBackTiles
 
                 frmEditor_Item.scrlPaperdoll.Value = .Paperdoll
             Else

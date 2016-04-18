@@ -418,7 +418,7 @@ Public Class frmEditor_Map
         End If
     End Sub
 
-    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
         If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
         End If
@@ -438,5 +438,9 @@ Public Class frmEditor_Map
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
+    End Sub
+
+    Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
+        MapGrid = Not MapGrid
     End Sub
 End Class

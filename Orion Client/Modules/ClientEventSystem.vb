@@ -418,6 +418,14 @@ Public Module ClientEventSystem
 
     Sub ClearEvent(EventNum As Long)
         If EventNum > Map.EventCount Or EventNum > UBound(Map.MapEvents) Then Exit Sub
+        With Map.Events(EventNum)
+            .Name = ""
+            .PageCount = 0
+            ReDim .Pages(0)
+            .Globals = 0
+            .X = 0
+            .Y = 0
+        End With
         With Map.MapEvents(EventNum)
             .Name = ""
             .dir = 0

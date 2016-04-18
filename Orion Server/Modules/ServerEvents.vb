@@ -2065,7 +2065,7 @@ Public Module ServerEvents
         'End Event Data
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
-        Call SendSwitchesAndVariables(Index)
+        SendSwitchesAndVariables(Index)
 
     End Sub
 #End Region

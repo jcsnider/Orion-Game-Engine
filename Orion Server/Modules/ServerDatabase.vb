@@ -684,6 +684,9 @@ Module ServerDatabase
             Next
         Next
 
+        FilePutObject(F, Item(itemNum).KnockBack)
+        FilePutObject(F, Item(itemNum).KnockBackTiles)
+
         FileClose(F)
     End Sub
 
@@ -745,6 +748,9 @@ Module ServerDatabase
                 FileGetObject(F, Item(ItemNum).FurnitureFringe(a, b))
             Next
         Next
+
+        FileGetObject(F, Item(ItemNum).KnockBack)
+        FileGetObject(F, Item(ItemNum).KnockBackTiles)
 
         FileClose(F)
 
@@ -2199,6 +2205,9 @@ Module ServerDatabase
                 Buffer.WriteLong(Item(itemNum).FurnitureFringe(i, x))
             Next
         Next
+
+        Buffer.WriteLong(Item(itemNum).KnockBack)
+        Buffer.WriteLong(Item(itemNum).KnockBackTiles)
 
         Return Buffer.ToArray
         Buffer = Nothing

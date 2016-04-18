@@ -2,6 +2,8 @@
     Public Sub RemoveDeadEvents()
         Dim i As Long, MapNum As Long, Buffer As ByteBuffer, x As Long, id As Long, page As Long, compare As Long
 
+        If Gettingmap = True Then Exit Sub
+
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) = False Then TempPlayer(i).EventMap.CurrentEvents = 0 : Exit Sub
             MapNum = GetPlayerMap(i)
@@ -121,6 +123,8 @@
     Public Sub SpawnNewEvents()
         Dim Buffer As ByteBuffer, pageID As Long, id As Long, compare As Long, i As Long, MapNum As Long
         Dim n As Long, x As Long, z As Long, spawnevent As Boolean, p As Long
+
+        If Gettingmap = True Then Exit Sub
 
         'That was only removing events... now we gotta worry about spawning them again, luckily, it is almost the same exact thing, but backwards!
 
@@ -337,6 +341,8 @@
         Dim rand As Long, x As Long, i As Long, playerID As Long, eventID As Long, WalkThrough As Long, isglobal As Boolean, MapNum As Long
         Dim actualmovespeed As Long, Buffer As ByteBuffer, z As Long, sendupdate As Boolean
         Dim donotprocessmoveroute As Boolean, pageNum As Long
+
+        If Gettingmap = True Then Exit Sub
 
         'Process Movement if needed for each player/each map/each event....
 
@@ -715,12 +721,14 @@
         Dim isglobal As Boolean, MapNum As Long, actualmovespeed As Long, Buffer As ByteBuffer, z As Long, sendupdate As Boolean
         Dim donotprocessmoveroute As Boolean
 
+        If Gettingmap = True Then Exit Sub
+
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
-                        If (Map(GetPlayerMap(i)).Events Is Nothing) Then Continue For
+                        If Map(GetPlayerMap(i)).Events Is Nothing Then Continue For
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then
@@ -1103,6 +1111,8 @@
     Public Sub ProcessEventCommands()
         Dim Buffer As ByteBuffer, i As Long, x As Long, removeEventProcess As Boolean, w As Long, v As Long, p As Long
         Dim restartlist As Boolean, restartloop As Boolean, endprocess As Boolean
+
+        If Gettingmap = True Then Exit Sub
 
         'Now, we process the damn things for commands :P
 
@@ -1901,6 +1911,8 @@
 
     Public Sub UpdateEventLogic()
         'Check Removing and Adding of Events (Did switches change or something?)
+
+        If Gettingmap = True Then Exit Sub
 
         RemoveDeadEvents()
         SpawnNewEvents()

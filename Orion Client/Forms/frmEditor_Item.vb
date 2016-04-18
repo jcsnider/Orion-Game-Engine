@@ -151,45 +151,51 @@ Public Class frmEditor_Item
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblPaperDoll.Text = "Paperdoll: " & scrlPaperdoll.Value
         Item(EditorIndex).Paperdoll = scrlPaperdoll.Value
-        Call EditorItem_DrawPaperdoll()
+        EditorItem_DrawPaperdoll()
     End Sub
 
     Private Sub scrlAddStr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddStr.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddStr.Text = "+Str: " & scrlAddStr.Value
         Item(EditorIndex).Add_Stat(Stats.strength) = scrlAddStr.Value
     End Sub
 
     Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddWill.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddWill.Text = "+Will: " & scrlAddWill.Value
         Item(EditorIndex).Add_Stat(Stats.willpower) = scrlAddWill.Value
     End Sub
 
     Private Sub scrlAddEnd_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddEnd.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddEnd.Text = "+End: " & scrlAddEnd.Value
         Item(EditorIndex).Add_Stat(Stats.endurance) = scrlAddEnd.Value
     End Sub
 
     Private Sub scrlAddInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddInt.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddInt.Text = "+Int: " & scrlAddInt.Value
         Item(EditorIndex).Add_Stat(Stats.intelligence) = scrlAddInt.Value
     End Sub
 
     Private Sub scrlAddVit_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddVit.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddVit.Text = "+Vit: " & scrlAddVit.Value
         Item(EditorIndex).Add_Stat(Stats.vitality) = scrlAddVit.Value
     End Sub
 
     Private Sub scrlAddSpr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddSpr.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddSpr.Text = "+Spr: " & scrlAddSpr.Value
         Item(EditorIndex).Add_Stat(Stats.spirit) = scrlAddSpr.Value
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
-        Call ItemEditorOk()
+        ItemEditorOk()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
-        Call ItemEditorCancel()
+        ItemEditorCancel()
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
@@ -218,6 +224,7 @@ Public Class frmEditor_Item
     End Sub
 
     Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         ItemEditorInit()
     End Sub
 
@@ -261,28 +268,33 @@ Public Class frmEditor_Item
     End Sub
 
     Private Sub cmbFurnitureType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFurnitureType.SelectedIndexChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         Item(EditorIndex).Data1 = cmbFurnitureType.SelectedIndex
     End Sub
 
     Private Sub optNoFurnitureEditing_CheckedChanged(sender As Object, e As EventArgs) Handles optNoFurnitureEditing.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         If optNoFurnitureEditing.Checked = True Then
             lblSetOption.Text = "No Editing: Lets you look at the image without setting any options (blocks/fringes)."
         End If
     End Sub
 
     Private Sub optSetBlocks_CheckedChanged(sender As Object, e As EventArgs) Handles optSetBlocks.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         If optSetBlocks.Checked = True Then
             lblSetOption.Text = "Set Blocks: Os are passable and Xs are not. Simply place Xs where you do not want the player to walk."
         End If
     End Sub
 
     Private Sub optSetFringe_CheckedChanged(sender As Object, e As EventArgs) Handles optSetFringe.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         If optSetFringe.Checked = True Then
             lblSetOption.Text = "Set Fringe: Os are draw on the fringe layer (the player can walk behind)."
         End If
     End Sub
 
     Private Sub scrlFurniture_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFurniture.Scroll
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblFurniture.Text = "Furniture: " & scrlFurniture.Value
         Item(EditorIndex).Data2 = scrlFurniture.Value
 
@@ -299,6 +311,7 @@ Public Class frmEditor_Item
     End Sub
 
     Private Sub picFurniture_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picFurniture.MouseDown
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         Dim X As Long, Y As Long
         X = e.X / 32
         Y = e.Y / 32
@@ -327,11 +340,28 @@ Public Class frmEditor_Item
     End Sub
 
     Private Sub scrlProjectile_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlProjectile.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         If scrlProjectile.Value = 0 Then
             lblProjectile.Text = "Projectile: 0 None"
         Else
             lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
         End If
         Item(EditorIndex).Data1 = scrlProjectile.Value
+    End Sub
+
+    Private Sub chkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        If chkKnockBack.Checked = True Then
+            Item(EditorIndex).KnockBack = 1
+        Else
+            Item(EditorIndex).KnockBack = 0
+        End If
+    End Sub
+
+    Private Sub cmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
     End Sub
 End Class

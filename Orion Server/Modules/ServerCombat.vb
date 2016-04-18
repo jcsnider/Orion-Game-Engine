@@ -1,4 +1,5 @@
 ﻿Public Module ServerCombat
+
 #Region "PlayerCombat"
     Function CanAttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, Optional ByVal IsSpell As Boolean = False) As Boolean
 
@@ -529,7 +530,6 @@
     End Sub
 #End Region
 
-
 #Region "Npcombat"
     Function CanNpcAttackPlayer(ByVal MapNpcNum As Long, ByVal Index As Long) As Boolean
         Dim MapNum As Long
@@ -734,12 +734,16 @@
     End Sub
 
     Public Sub KnockBackNpc(ByVal Index As Long, ByVal NpcNum As Long)
-        If CanNpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index)) Then
-            NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
-            NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
+        If Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBack = 1 Then
+            For i = 1 To Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBackTiles
+                If CanNpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index)) Then
+                    NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
+                End If
+            Next
             MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunDuration = 1
             MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunTimer = GetTickCount()
         End If
+
     End Sub
 
 #End Region

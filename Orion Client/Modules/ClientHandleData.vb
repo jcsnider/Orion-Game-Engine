@@ -1231,6 +1231,9 @@
             Next
         Next
 
+        Item(n).KnockBack = Buffer.ReadLong()
+        Item(n).KnockBackTiles = Buffer.ReadLong()
+
         Buffer = Nothing
         ' changes to inventory, need to clear any drop menu
 
@@ -2053,6 +2056,9 @@
                     Item(n).FurnitureFringe(a, b) = buffer.ReadLong()
                 Next
             Next
+
+            Item(n).KnockBack = buffer.ReadLong()
+            Item(n).KnockBackTiles = buffer.ReadLong()
         Next
 
         ' changes to inventory, need to clear any drop menu

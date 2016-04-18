@@ -856,12 +856,6 @@ Module ClientGameLogic
             frmMenu.pnlCredits.Visible = pnlCreditsVisible
         End If
 
-        'If txtChatAdd <> frmMainGame.txtChat2.Text Then
-        '    frmMainGame.txtChat2.Text = txtChatAdd
-        '    frmMainGame.txtChat2.SelectionStart = frmMainGame.txtChat2.TextLength
-        '    frmMainGame.txtChat2.ScrollToCaret()
-        'End If
-
         If frmmenuvisible <> frmMenu.Visible Then
             frmMenu.Visible = frmmenuvisible
         End If

@@ -70,6 +70,9 @@
     ' Number of tiles in width in tilesets
     Public Const TILESHEET_WIDTH As Integer = 15 ' * PIC_X pixels
 
+    '
+    Public MapGrid As Boolean
+
     ' Speed moving vars
     Public Const WALK_SPEED As Byte = 6
     Public Const RUN_SPEED As Byte = 10

@@ -1404,7 +1404,7 @@ Module ClientGraphics
 
         ' Draw out a square at mouse cursor
         If InMapEditor Then
-            If frmEditor_Map.chkMapGrid.Checked Then
+            If MapGrid = True Then
                 DrawGrid()
             End If
 

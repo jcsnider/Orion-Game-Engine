@@ -380,7 +380,7 @@ Module ServerTCP
         For i = 1 To MAX_ITEMS
 
             If Len(Trim$(Item(i).Name)) > 0 Then
-                Call SendUpdateItemTo(Index, i)
+                SendUpdateItemTo(Index, i)
             End If
 
         Next
@@ -430,6 +430,9 @@ Module ServerTCP
             Next
         Next
 
+        Buffer.WriteLong(Item(itemNum).KnockBack)
+        Buffer.WriteLong(Item(itemNum).KnockBackTiles)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -476,6 +479,9 @@ Module ServerTCP
                 Buffer.WriteLong(Item(itemNum).FurnitureFringe(i, x))
             Next
         Next
+
+        Buffer.WriteLong(Item(itemNum).KnockBack)
+        Buffer.WriteLong(Item(itemNum).KnockBackTiles)
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing

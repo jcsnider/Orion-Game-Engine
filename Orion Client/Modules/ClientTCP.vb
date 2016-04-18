@@ -494,6 +494,9 @@ Module ClientTCP
             Next
         Next
 
+        Buffer.WriteLong(Item(itemNum).KnockBack)
+        Buffer.WriteLong(Item(itemNum).KnockBackTiles)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

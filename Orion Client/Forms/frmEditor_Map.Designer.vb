@@ -100,6 +100,7 @@ Partial Class frmEditor_Map
         Me.tsbSave = New System.Windows.Forms.ToolStripButton()
         Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbMapGrid = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -142,8 +143,9 @@ Partial Class frmEditor_Map
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.tpDirBlock = New System.Windows.Forms.TabPage()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
-        Me.chkMapGrid = New System.Windows.Forms.CheckBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -171,6 +173,8 @@ Partial Class frmEditor_Map
         Me.fraBootSettings.SuspendLayout()
         Me.fraMaxSizes.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.tpDirBlock.SuspendLayout()
+        Me.tpEvents.SuspendLayout()
         Me.SuspendLayout()
         '
         'scrlPictureX
@@ -896,7 +900,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(505, 25)
@@ -924,6 +928,14 @@ Partial Class frmEditor_Map
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
+        'tsbMapGrid
+        '
+        Me.tsbMapGrid.Image = Global.OrionClient.My.Resources.Resources.Grid
+        Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbMapGrid.Name = "tsbMapGrid"
+        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
+        Me.tsbMapGrid.Text = "Map Grid"
+        '
         'tabpages
         '
         Me.tabpages.Controls.Add(Me.tpTiles)
@@ -940,7 +952,6 @@ Partial Class frmEditor_Map
         '
         'tpTiles
         '
-        Me.tpTiles.Controls.Add(Me.chkMapGrid)
         Me.tpTiles.Controls.Add(Me.cmbAutoTile)
         Me.tpTiles.Controls.Add(Me.Label11)
         Me.tpTiles.Controls.Add(Me.btnFill)
@@ -963,8 +974,9 @@ Partial Class frmEditor_Map
         '
         'cmbAutoTile
         '
+        Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAutoTile.FormattingEnabled = True
-        Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)", "AutoTile (XP)", "Fake (XP)", "Animated (XP)", "Cliff (XP)", "Waterfall (XP)"})
+        Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)"})
         Me.cmbAutoTile.Location = New System.Drawing.Point(366, 400)
         Me.cmbAutoTile.Name = "cmbAutoTile"
         Me.cmbAutoTile.Size = New System.Drawing.Size(119, 21)
@@ -990,6 +1002,7 @@ Partial Class frmEditor_Map
         '
         'cmbLayers
         '
+        Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayers.FormattingEnabled = True
         Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
         Me.cmbLayers.Location = New System.Drawing.Point(184, 400)
@@ -1008,6 +1021,7 @@ Partial Class frmEditor_Map
         '
         'cmbTileSets
         '
+        Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTileSets.FormattingEnabled = True
         Me.cmbTileSets.Location = New System.Drawing.Point(53, 400)
         Me.cmbTileSets.Name = "cmbTileSets"
@@ -1349,6 +1363,7 @@ Partial Class frmEditor_Map
         '
         'tpDirBlock
         '
+        Me.tpDirBlock.Controls.Add(Me.Label12)
         Me.tpDirBlock.Location = New System.Drawing.Point(4, 22)
         Me.tpDirBlock.Name = "tpDirBlock"
         Me.tpDirBlock.Padding = New System.Windows.Forms.Padding(3)
@@ -1357,8 +1372,18 @@ Partial Class frmEditor_Map
         Me.tpDirBlock.Text = "Directional Block"
         Me.tpDirBlock.UseVisualStyleBackColor = True
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(22, 23)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(239, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Just press the arrows to block that side of the tile."
+        '
         'tpEvents
         '
+        Me.tpEvents.Controls.Add(Me.Label13)
         Me.tpEvents.Location = New System.Drawing.Point(4, 22)
         Me.tpEvents.Name = "tpEvents"
         Me.tpEvents.Padding = New System.Windows.Forms.Padding(3)
@@ -1367,15 +1392,14 @@ Partial Class frmEditor_Map
         Me.tpEvents.Text = "Events"
         Me.tpEvents.UseVisualStyleBackColor = True
         '
-        'chkMapGrid
+        'Label13
         '
-        Me.chkMapGrid.AutoSize = True
-        Me.chkMapGrid.Location = New System.Drawing.Point(184, 445)
-        Me.chkMapGrid.Name = "chkMapGrid"
-        Me.chkMapGrid.Size = New System.Drawing.Size(88, 17)
-        Me.chkMapGrid.TabIndex = 18
-        Me.chkMapGrid.Text = "Use MapGrid"
-        Me.chkMapGrid.UseVisualStyleBackColor = True
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(20, 21)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(239, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Click on the map where you want to add a event."
         '
         'frmEditor_Map
         '
@@ -1434,6 +1458,10 @@ Partial Class frmEditor_Map
         Me.fraMaxSizes.ResumeLayout(False)
         Me.fraMaxSizes.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.tpDirBlock.ResumeLayout(False)
+        Me.tpDirBlock.PerformLayout()
+        Me.tpEvents.ResumeLayout(False)
+        Me.tpEvents.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1559,5 +1587,7 @@ Partial Class frmEditor_Map
     Friend WithEvents Label9 As Windows.Forms.Label
     Friend WithEvents tpDirBlock As Windows.Forms.TabPage
     Friend WithEvents tpEvents As Windows.Forms.TabPage
-    Friend WithEvents chkMapGrid As Windows.Forms.CheckBox
+    Friend WithEvents Label12 As Windows.Forms.Label
+    Friend WithEvents Label13 As Windows.Forms.Label
+    Friend WithEvents tsbMapGrid As Windows.Forms.ToolStripButton
 End Class
