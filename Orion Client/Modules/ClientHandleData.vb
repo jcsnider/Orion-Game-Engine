@@ -1443,6 +1443,9 @@
         Spell(spellnum).IsProjectile = Buffer.ReadLong()
         Spell(spellnum).Projectile = Buffer.ReadLong()
 
+        Spell(spellnum).KnockBack = Buffer.ReadLong()
+        Spell(spellnum).KnockBackTiles = Buffer.ReadLong()
+
         If Spell(spellnum).Name Is Nothing Then Spell(spellnum).Name = ""
 
         Buffer = Nothing
@@ -2219,6 +2222,9 @@
 
             Spell(n).IsProjectile = buffer.ReadLong()
             Spell(n).Projectile = buffer.ReadLong()
+
+            Spell(n).KnockBack = buffer.ReadLong()
+            Spell(n).KnockBackTiles = buffer.ReadLong()
 
             If Spell(n).Name Is Nothing Then Spell(n).Name = ""
         Next

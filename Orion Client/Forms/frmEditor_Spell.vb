@@ -212,4 +212,20 @@
         End If
         Spell(EditorIndex).Projectile = scrlProjectile.Value
     End Sub
+
+    Private Sub chkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_SPELLS Then Exit Sub
+
+        If chkKnockBack.Checked = True Then
+            Spell(EditorIndex).KnockBack = 1
+        Else
+            Spell(EditorIndex).KnockBack = 0
+        End If
+    End Sub
+
+    Private Sub cmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_SPELLS Then Exit Sub
+
+        Spell(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
+    End Sub
 End Class

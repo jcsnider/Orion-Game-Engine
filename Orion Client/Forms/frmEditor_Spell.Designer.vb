@@ -52,6 +52,9 @@ Partial Class frmEditor_Spell
         Me.lblDir = New System.Windows.Forms.Label()
         Me.lblMap = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
+        Me.lblProjectile = New System.Windows.Forms.Label()
+        Me.chkProjectile = New System.Windows.Forms.CheckBox()
         Me.picSprite = New System.Windows.Forms.PictureBox()
         Me.scrlIcon = New System.Windows.Forms.HScrollBar()
         Me.lblIcon = New System.Windows.Forms.Label()
@@ -74,9 +77,9 @@ Partial Class frmEditor_Spell
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
-        Me.lblProjectile = New System.Windows.Forms.Label()
-        Me.chkProjectile = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
+        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -89,7 +92,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(210, 442)
+        Me.GroupBox1.Size = New System.Drawing.Size(210, 472)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Spell List"
@@ -108,7 +111,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Location = New System.Drawing.Point(228, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(482, 442)
+        Me.GroupBox2.Size = New System.Drawing.Size(482, 472)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Spell Properties"
@@ -142,7 +145,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox4.Controls.Add(Me.lblMap)
         Me.GroupBox4.Location = New System.Drawing.Point(262, 16)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(210, 419)
+        Me.GroupBox4.Size = New System.Drawing.Size(210, 450)
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Data"
@@ -374,6 +377,9 @@ Partial Class frmEditor_Spell
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.cmbKnockBackTiles)
+        Me.GroupBox3.Controls.Add(Me.chkKnockBack)
         Me.GroupBox3.Controls.Add(Me.scrlProjectile)
         Me.GroupBox3.Controls.Add(Me.lblProjectile)
         Me.GroupBox3.Controls.Add(Me.chkProjectile)
@@ -398,10 +404,38 @@ Partial Class frmEditor_Spell
         Me.GroupBox3.Controls.Add(Me.Label1)
         Me.GroupBox3.Location = New System.Drawing.Point(6, 16)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(250, 419)
+        Me.GroupBox3.Size = New System.Drawing.Size(250, 450)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Basic Information"
+        '
+        'scrlProjectile
+        '
+        Me.scrlProjectile.LargeChange = 1
+        Me.scrlProjectile.Location = New System.Drawing.Point(11, 393)
+        Me.scrlProjectile.Maximum = 32767
+        Me.scrlProjectile.Name = "scrlProjectile"
+        Me.scrlProjectile.Size = New System.Drawing.Size(224, 16)
+        Me.scrlProjectile.TabIndex = 60
+        '
+        'lblProjectile
+        '
+        Me.lblProjectile.AutoSize = True
+        Me.lblProjectile.Location = New System.Drawing.Point(93, 370)
+        Me.lblProjectile.Name = "lblProjectile"
+        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
+        Me.lblProjectile.TabIndex = 59
+        Me.lblProjectile.Text = "Projectile: 0 None"
+        '
+        'chkProjectile
+        '
+        Me.chkProjectile.AutoSize = True
+        Me.chkProjectile.Location = New System.Drawing.Point(12, 369)
+        Me.chkProjectile.Name = "chkProjectile"
+        Me.chkProjectile.Size = New System.Drawing.Size(75, 17)
+        Me.chkProjectile.TabIndex = 58
+        Me.chkProjectile.Text = "Projectile?"
+        Me.chkProjectile.UseVisualStyleBackColor = True
         '
         'picSprite
         '
@@ -572,7 +606,7 @@ Partial Class frmEditor_Spell
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(601, 459)
+        Me.btnCancel.Location = New System.Drawing.Point(605, 484)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 8
@@ -581,7 +615,7 @@ Partial Class frmEditor_Spell
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(490, 459)
+        Me.btnDelete.Location = New System.Drawing.Point(494, 484)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 7
@@ -590,46 +624,47 @@ Partial Class frmEditor_Spell
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(379, 459)
+        Me.btnSave.Location = New System.Drawing.Point(383, 484)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 6
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'scrlProjectile
+        'Label5
         '
-        Me.scrlProjectile.LargeChange = 1
-        Me.scrlProjectile.Location = New System.Drawing.Point(11, 393)
-        Me.scrlProjectile.Maximum = 32767
-        Me.scrlProjectile.Name = "scrlProjectile"
-        Me.scrlProjectile.Size = New System.Drawing.Size(224, 16)
-        Me.scrlProjectile.TabIndex = 60
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(121, 413)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 68
+        Me.Label5.Text = "X Tiles"
         '
-        'lblProjectile
+        'cmbKnockBackTiles
         '
-        Me.lblProjectile.AutoSize = True
-        Me.lblProjectile.Location = New System.Drawing.Point(93, 370)
-        Me.lblProjectile.Name = "lblProjectile"
-        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
-        Me.lblProjectile.TabIndex = 59
-        Me.lblProjectile.Text = "Projectile: 0 None"
+        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbKnockBackTiles.FormattingEnabled = True
+        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(174, 410)
+        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
+        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(70, 21)
+        Me.cmbKnockBackTiles.TabIndex = 67
         '
-        'chkProjectile
+        'chkKnockBack
         '
-        Me.chkProjectile.AutoSize = True
-        Me.chkProjectile.Location = New System.Drawing.Point(12, 369)
-        Me.chkProjectile.Name = "chkProjectile"
-        Me.chkProjectile.Size = New System.Drawing.Size(75, 17)
-        Me.chkProjectile.TabIndex = 58
-        Me.chkProjectile.Text = "Projectile?"
-        Me.chkProjectile.UseVisualStyleBackColor = True
+        Me.chkKnockBack.AutoSize = True
+        Me.chkKnockBack.Location = New System.Drawing.Point(11, 412)
+        Me.chkKnockBack.Name = "chkKnockBack"
+        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
+        Me.chkKnockBack.TabIndex = 66
+        Me.chkKnockBack.Text = "Has KnockBack"
+        Me.chkKnockBack.UseVisualStyleBackColor = True
         '
         'frmEditor_Spell
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(722, 496)
+        Me.ClientSize = New System.Drawing.Size(722, 516)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -704,4 +739,7 @@ Partial Class frmEditor_Spell
     Friend WithEvents scrlProjectile As Windows.Forms.HScrollBar
     Friend WithEvents lblProjectile As Windows.Forms.Label
     Friend WithEvents chkProjectile As Windows.Forms.CheckBox
+    Friend WithEvents Label5 As Windows.Forms.Label
+    Friend WithEvents cmbKnockBackTiles As Windows.Forms.ComboBox
+    Friend WithEvents chkKnockBack As Windows.Forms.CheckBox
 End Class

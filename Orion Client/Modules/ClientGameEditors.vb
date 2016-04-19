@@ -921,11 +921,18 @@ Module ClientGameEditors
             .scrlStun.Value = Spell(EditorIndex).StunDuration
 
             If Spell(EditorIndex).IsProjectile = 1 Then
-                .chkProjectile.Checked = 1
+                .chkProjectile.Checked = True
             Else
-                .chkProjectile.Checked = 0
+                .chkProjectile.Checked = False
             End If
             .scrlProjectile.Value = Spell(EditorIndex).Projectile
+
+            If Spell(EditorIndex).KnockBack = 1 Then
+                .chkKnockBack.Checked = True
+            Else
+                .chkKnockBack.Checked = False
+            End If
+            .cmbKnockBackTiles.SelectedIndex = Spell(EditorIndex).KnockBackTiles
         End With
 
         EditorSpell_BltIcon()

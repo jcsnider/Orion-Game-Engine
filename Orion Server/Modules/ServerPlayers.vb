@@ -1428,7 +1428,7 @@
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
-            Call PlayerMsg(Index, "Not enough mana!")
+            PlayerMsg(Index, "Not enough mana!")
             Exit Sub
         End If
 
@@ -1436,7 +1436,7 @@
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            Call PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
             Exit Sub
         End If
 
@@ -1444,7 +1444,7 @@
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            Call PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            PlayerMsg(Index, "You must be an administrator to cast this spell.")
             Exit Sub
         End If
 
@@ -1453,7 +1453,7 @@
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                Call PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
                 Exit Sub
             End If
         End If

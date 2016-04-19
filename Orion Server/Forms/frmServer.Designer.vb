@@ -84,6 +84,7 @@ Partial Class frmServer
         Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrUpdatePlayerList = New System.Windows.Forms.Timer(Me.components)
+        Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.TabPage2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -260,6 +261,7 @@ Partial Class frmServer
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnSaveAll)
         Me.GroupBox1.Controls.Add(Me.btnReloadAnimations)
         Me.GroupBox1.Controls.Add(Me.btnReloadResources)
         Me.GroupBox1.Controls.Add(Me.btnReloadItems)
@@ -598,6 +600,15 @@ Partial Class frmServer
         '
         Me.tmrUpdatePlayerList.Interval = 5000
         '
+        'btnSaveAll
+        '
+        Me.btnSaveAll.Location = New System.Drawing.Point(96, 131)
+        Me.btnSaveAll.Name = "btnSaveAll"
+        Me.btnSaveAll.Size = New System.Drawing.Size(83, 31)
+        Me.btnSaveAll.TabIndex = 8
+        Me.btnSaveAll.Text = "Save All"
+        Me.btnSaveAll.UseVisualStyleBackColor = True
+        '
         'frmServer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -686,4 +697,5 @@ Partial Class frmServer
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblNotifications As Label
+    Friend WithEvents btnSaveAll As Button
 End Class

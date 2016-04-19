@@ -717,7 +717,7 @@ Module ServerTCP
         For i = 1 To MAX_SPELLS
 
             If Len(Trim$(Spell(i).Name)) > 0 Then
-                Call SendUpdateSpellTo(Index, i)
+                SendUpdateSpellTo(Index, i)
             End If
 
         Next
@@ -757,6 +757,9 @@ Module ServerTCP
         Buffer.WriteLong(Spell(spellnum).IsProjectile)
         Buffer.WriteLong(Spell(spellnum).Projectile)
 
+        Buffer.WriteLong(Spell(spellnum).KnockBack)
+        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -794,9 +797,13 @@ Module ServerTCP
         Buffer.WriteLong(Spell(spellnum).IsProjectile)
         Buffer.WriteLong(Spell(spellnum).Projectile)
 
+        Buffer.WriteLong(Spell(spellnum).KnockBack)
+        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendStats(ByVal Index As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -811,6 +818,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendUpdateAnimationTo(ByVal Index As Long, ByVal AnimationNum As Long)
         Dim Buffer As ByteBuffer
 

@@ -290,6 +290,9 @@
         'projectiles
         Dim IsProjectile As Long '0 is no, 1 is yes
         Dim Projectile As Long
+
+        Dim KnockBack As Byte '0 is no, 1 is yes
+        Dim KnockBackTiles As Byte
     End Structure
 
     Public Structure TempTileRec

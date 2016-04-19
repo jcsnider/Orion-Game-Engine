@@ -525,7 +525,7 @@ Module ClientGraphics
            ByVal SourceWidth As Long, ByVal SourceHeight As Long)
         Dim TmpImage As Sprite = New Sprite(Txture)
         TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
-        TmpImage.Position = New SFML.Window.Vector2f(DestX, DestY)
+        TmpImage.Position = New Vector2f(DestX, DestY)
         Target.Draw(TmpImage)
     End Sub
 
@@ -1472,13 +1472,12 @@ Module ClientGraphics
         ' Draw map name
         DrawMapName()
 
+        DrawBars()
+
         'Render GUI
         DrawGUI()
 
         GameWindow.Display()
-
-        DrawBars() 'Uses graphicscard.clear method which isnt called DURING a scene :D
-
     End Sub
 
     Public Sub DrawBars()
@@ -1497,8 +1496,8 @@ Module ClientGraphics
             barWidth = ((GetTickCount() - SpellBufferTimer) / ((GetTickCount() - SpellBufferTimer) + (Spell(PlayerSpells(SpellBuffer)).CastTime * 1000)) * 64)
             ' draw bars
             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
-            Dim rectShape As New RectangleShape(New SFML.Window.Vector2f(barWidth, 4))
-            rectShape.Position = New SFML.Window.Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY))
+            Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+            rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY))
             rectShape.FillColor = SFML.Graphics.Color.Cyan
             GameWindow.Draw(rectShape)
         End If
@@ -2405,7 +2404,7 @@ Module ClientGraphics
 
                 Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                 tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
+                tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
                 GameWindow.Draw(tmpSprite)
             End If
 
@@ -2486,7 +2485,7 @@ Module ClientGraphics
 
             Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
             tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-            tmpSprite.Position = New SFML.Window.Vector2f(0, 0)
+            tmpSprite.Position = New Vector2f(0, 0)
             TmpItemWindow.Draw(tmpSprite)
 
             With frmMainGame.pnlTmpInv
@@ -2556,7 +2555,7 @@ Module ClientGraphics
 
                         Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
+                        tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
                         GameWindow.Draw(tmpSprite)
 
 
@@ -2670,7 +2669,7 @@ NextLoop:
                         'g.DrawImage(ItemsGFX(itempic), rec_pos, rec, GraphicsUnit.Pixel)
                         Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
+                        tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
                         GameWindow.Draw(tmpSprite)
 
 
@@ -2719,7 +2718,7 @@ NextLoop:
 
             Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
             tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-            tmpSprite.Position = New SFML.Window.Vector2f(0, 0)
+            tmpSprite.Position = New Vector2f(0, 0)
             TmpSpellWindow.Draw(tmpSprite)
 
             With frmMainGame.pnlTmpSkill
@@ -2773,7 +2772,7 @@ NextLoop:
 
                     Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
                     tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
+                    tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
                     ShopWindow.Draw(tmpSprite)
 
                     ' If item is a stack - draw the amount you have
@@ -2839,7 +2838,7 @@ NextLoop:
 
                     Dim tmpSprite As Sprite = New Sprite(ItemsGFX(Sprite))
                     tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-                    tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
+                    tmpSprite.Position = New Vector2f(dRECT.X, dRECT.Y)
                     BankWindow.Draw(tmpSprite)
 
                     ' If item is a stack - draw the amount you have
@@ -2904,7 +2903,7 @@ NextLoop:
         TmpBankItem.Clear(ToSFMLColor(frmMainGame.pnlTempBank.BackColor))
         Dim tmpSprite As Sprite = New Sprite(ItemsGFX(Sprite))
         tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
+        tmpSprite.Position = New Vector2f(dRECT.X, dRECT.Y)
         TmpBankItem.Draw(tmpSprite)
 
         With frmMainGame.pnlTempBank

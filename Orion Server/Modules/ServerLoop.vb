@@ -981,20 +981,11 @@
 
     End Sub
     Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long)
-        Dim spellnum As Long
-        Dim MPCost As Long
-        Dim LevelReq As Long
-        Dim MapNum As Long
-        Dim Vital As Long
-        Dim DidCast As Boolean
-        Dim ClassReq As Long
-        Dim AccessReq As Long
-        Dim i As Long
-        Dim AoE As Long
-        Dim range As Long
-        Dim VitalType As Byte
-        Dim increment As Boolean
-        Dim x As Long, y As Long
+        Dim spellnum As Long, MPCost As Long, LevelReq As Long
+        Dim MapNum As Long, Vital As Long, DidCast As Boolean
+        Dim ClassReq As Long, AccessReq As Long, i As Long
+        Dim AoE As Long, range As Long, VitalType As Byte
+        Dim increment As Boolean, x As Long, y As Long
 
         Dim TargetType As Byte
         Dim Target As Long
@@ -1015,7 +1006,7 @@
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
-            Call PlayerMsg(Index, "Not enough mana!")
+            PlayerMsg(Index, "Not enough mana!")
             Exit Sub
         End If
 
@@ -1023,7 +1014,7 @@
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            Call PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
             Exit Sub
         End If
 
@@ -1031,7 +1022,7 @@
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            Call PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            PlayerMsg(Index, "You must be an administrator to cast this spell.")
             Exit Sub
         End If
 
@@ -1040,7 +1031,7 @@
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                Call PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
                 Exit Sub
             End If
         End If
@@ -1083,6 +1074,7 @@
                         SendAnimation(GetPlayerMap(Index), Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
                         DidCast = True
                 End Select
+
             Case 1, 3 ' self-cast AOE & targetted AOE
                 If SpellCastType = 1 Then
                     x = GetPlayerX(Index)
@@ -1131,6 +1123,9 @@
                                         If CanAttackNpc(Index, i, True) Then
                                             SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_NPC, i)
                                             AttackNpc(Index, i, Vital, spellnum)
+                                            If Spell(spellnum).KnockBack = 1 Then
+                                                KnockBackNpc(Index, Target, spellnum)
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -1168,6 +1163,7 @@
                             End If
                         Next
                 End Select
+
             Case 2 ' targetted
 
                 TargetType = TempPlayer(Index).TargetType
@@ -1205,6 +1201,9 @@
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_NPC, Target)
                                     AttackNpc(Index, Target, Vital, spellnum)
+                                    If Spell(spellnum).KnockBack = 1 Then
+                                        KnockBackNpc(Index, Target, spellnum)
+                                    End If
                                     DidCast = True
                                 End If
                             End If
@@ -1242,16 +1241,18 @@
                 End Select
             Case 4 ' Projectile
                 PlayerFireProjectile(Index, spellnum)
+
                 DidCast = True
         End Select
 
         If DidCast Then
-            Call SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - MPCost)
-            Call SendVital(Index, Vitals.MP)
+            SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - MPCost)
+            SendVital(Index, Vitals.MP)
             TempPlayer(Index).SpellCD(spellslot) = GetTickCount() + (Spell(spellnum).CDTime * 1000)
-            Call SendCooldown(Index, spellslot)
+            SendCooldown(Index, spellslot)
         End If
     End Sub
+
     Public Sub SpellPlayer_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Long, ByVal Damage As Long, ByVal spellnum As Long)
         Dim sSymbol As String
         Dim Colour As Long

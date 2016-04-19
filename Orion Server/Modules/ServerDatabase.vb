@@ -1177,7 +1177,7 @@ Module ServerDatabase
 #Region "Spells"
     Sub SaveSpells()
         Dim i As Long
-        Call SetStatus("Saving spells... ")
+        SetStatus("Saving spells... ")
 
         For i = 1 To MAX_SPELLS
             SaveSpell(i)
@@ -1220,13 +1220,16 @@ Module ServerDatabase
         FilePutObject(F, Spell(spellnum).IsProjectile)
         FilePutObject(F, Spell(spellnum).Projectile)
 
+        FilePutObject(F, Spell(spellnum).KnockBack)
+        FilePutObject(F, Spell(spellnum).KnockBackTiles)
+
         FileClose(F)
     End Sub
 
     Sub LoadSpells()
         Dim i As Long
 
-        Call CheckSpells()
+        CheckSpells()
 
         For i = 1 To MAX_SPELLS
             LoadSpell(i)
@@ -1269,6 +1272,9 @@ Module ServerDatabase
 
         FileGetObject(F, Spell(SpellNum).IsProjectile)
         FileGetObject(F, Spell(SpellNum).Projectile)
+
+        FileGetObject(F, Spell(SpellNum).KnockBack)
+        FileGetObject(F, Spell(SpellNum).KnockBackTiles)
 
         FileClose(F)
     End Sub
@@ -2391,6 +2397,9 @@ Module ServerDatabase
 
         Buffer.WriteLong(Spell(spellnum).IsProjectile)
         Buffer.WriteLong(Spell(spellnum).Projectile)
+
+        Buffer.WriteLong(Spell(spellnum).KnockBack)
+        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
 
         Return Buffer.ToArray
         Buffer = Nothing

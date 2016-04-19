@@ -388,7 +388,7 @@
             .Timer = GetTickCount() + 60000
         End With
 
-        Call SendProjectileToMap(MapNum, ProjectileSlot)
+        SendProjectileToMap(MapNum, ProjectileSlot)
 
     End Sub
 #End Region

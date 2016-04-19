@@ -659,6 +659,9 @@ Module ClientTCP
         Buffer.WriteLong(Spell(spellnum).IsProjectile)
         Buffer.WriteLong(Spell(spellnum).Projectile)
 
+        Buffer.WriteLong(Spell(spellnum).KnockBack)
+        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+
         SendData(Buffer.ToArray())
 
         Buffer = Nothing

@@ -317,4 +317,15 @@
             txtYEntrance.Text = HouseConfig(lstHouses.SelectedIndex + 1).Y
         End If
     End Sub
+
+    Private Sub btnSaveAll_Click(sender As Object, e As EventArgs) Handles btnSaveAll.Click
+        SaveClasses()
+        SaveItems()
+        SaveMaps()
+        SaveResources()
+        SaveSpells()
+        SaveAnimations()
+        SaveShops()
+        SaveNpcs()
+    End Sub
 End Class

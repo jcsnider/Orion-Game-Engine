@@ -1847,6 +1847,9 @@
         Spell(spellnum).IsProjectile = buffer.ReadLong()
         Spell(spellnum).Projectile = buffer.ReadLong()
 
+        Spell(spellnum).KnockBack = buffer.ReadLong()
+        Spell(spellnum).KnockBackTiles = buffer.ReadLong()
+
         ' Save it
         SendUpdateSpellToAll(spellnum)
         SaveSpell(spellnum)
@@ -2221,7 +2224,7 @@
         n = buffer.ReadLong 'CLng(Parse(1))
         buffer = Nothing
         ' set the spell buffer before castin
-        Call BufferSpell(index, n)
+        BufferSpell(index, n)
 
         buffer = Nothing
     End Sub

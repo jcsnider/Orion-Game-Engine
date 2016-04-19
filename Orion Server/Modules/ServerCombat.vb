@@ -733,17 +733,26 @@
 
     End Sub
 
-    Public Sub KnockBackNpc(ByVal Index As Long, ByVal NpcNum As Long)
-        If Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBack = 1 Then
-            For i = 1 To Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBackTiles
+    Public Sub KnockBackNpc(ByVal Index As Long, ByVal NpcNum As Long, Optional IsSpell As Long = 0)
+        If IsSpell > 0 Then
+            For i = 1 To Spell(IsSpell).KnockBackTiles
                 If CanNpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index)) Then
                     NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
                 End If
             Next
             MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunDuration = 1
             MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunTimer = GetTickCount()
+        Else
+            If Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBack = 1 Then
+                For i = 1 To Item(GetPlayerEquipment(Index, Equipment.Weapon)).KnockBackTiles
+                    If CanNpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index)) Then
+                        NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
+                    End If
+                Next
+                MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunDuration = 1
+                MapNpc(GetPlayerMap(Index)).Npc(NpcNum).StunTimer = GetTickCount()
+            End If
         End If
-
     End Sub
 
 #End Region
