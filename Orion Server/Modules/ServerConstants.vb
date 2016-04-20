@@ -106,17 +106,18 @@
     Public Const ITEM_TYPE_ARMOR As Byte = 2
     Public Const ITEM_TYPE_HELMET As Byte = 3
     Public Const ITEM_TYPE_SHIELD As Byte = 4
-    Public Const ITEM_TYPE_POTIONADDHP As Byte = 5
-    Public Const ITEM_TYPE_POTIONADDMP As Byte = 6
-    Public Const ITEM_TYPE_POTIONADDSP As Byte = 7
-    Public Const ITEM_TYPE_POTIONSUBHP As Byte = 8
-    Public Const ITEM_TYPE_POTIONSUBMP As Byte = 9
-    Public Const ITEM_TYPE_POTIONSUBSP As Byte = 10
-    Public Const ITEM_TYPE_KEY As Byte = 11
-    Public Const ITEM_TYPE_CURRENCY As Byte = 12
-    Public Const ITEM_TYPE_SPELL As Byte = 13
-    'Housing
-    Public Const ITEM_TYPE_FURNITURE As Byte = 14
+    Public Const ITEM_TYPE_SHOES As Byte = 5
+    Public Const ITEM_TYPE_GLOVES As Byte = 6
+    Public Const ITEM_TYPE_POTIONADDHP As Byte = 7
+    Public Const ITEM_TYPE_POTIONADDMP As Byte = 8
+    Public Const ITEM_TYPE_POTIONADDSP As Byte = 9
+    Public Const ITEM_TYPE_POTIONSUBHP As Byte = 10
+    Public Const ITEM_TYPE_POTIONSUBMP As Byte = 11
+    Public Const ITEM_TYPE_POTIONSUBSP As Byte = 12
+    Public Const ITEM_TYPE_KEY As Byte = 13
+    Public Const ITEM_TYPE_CURRENCY As Byte = 14
+    Public Const ITEM_TYPE_SPELL As Byte = 15
+    Public Const ITEM_TYPE_FURNITURE As Byte = 16
 
     ' Direction constants
     Public Const DIR_UP As Byte = 0

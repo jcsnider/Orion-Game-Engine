@@ -218,7 +218,7 @@ Module ServerTCP
             Buffer.WriteLong(Classes(i).Stat(Stats.strength))
             Buffer.WriteLong(Classes(i).Stat(Stats.endurance))
             Buffer.WriteLong(Classes(i).Stat(Stats.vitality))
-            Buffer.WriteLong(Classes(i).Stat(Stats.willpower))
+            Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
         Next
@@ -351,13 +351,14 @@ Module ServerTCP
             Buffer.WriteLong(Classes(i).Stat(Stats.endurance))
             Buffer.WriteLong(Classes(i).Stat(Stats.vitality))
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteLong(Classes(i).Stat(Stats.willpower))
+            Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
         Next
 
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendInventory(ByVal Index As Long)
         Dim i As Long
         Dim Buffer As ByteBuffer
@@ -374,6 +375,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendItems(ByVal Index As Long)
         Dim i As Long
 
@@ -386,6 +388,7 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendUpdateItemTo(ByVal Index As Long, ByVal itemNum As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -412,6 +415,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+        Buffer.WriteLong(Item(itemNum).Randomize)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -436,6 +440,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendUpdateItemToAll(ByVal itemNum As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -462,6 +467,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+        Buffer.WriteLong(Item(itemNum).Randomize)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -503,6 +509,7 @@ Module ServerTCP
         SendDataToAllBut(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendMapEquipment(ByVal Index As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -513,11 +520,14 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Weapon))
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Helmet))
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Shield))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Shoes))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Gloves))
 
         SendDataToMap(GetPlayerMap(Index), Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
+
     Sub SendMapEquipmentTo(ByVal PlayerNum As Long, ByVal Index As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -528,11 +538,14 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerEquipment(PlayerNum, Equipment.Weapon))
         Buffer.WriteLong(GetPlayerEquipment(PlayerNum, Equipment.Helmet))
         Buffer.WriteLong(GetPlayerEquipment(PlayerNum, Equipment.Shield))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Shoes))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Gloves))
 
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
+
     Sub SendNpcs(ByVal Index As Long)
         Dim i As Long
 
@@ -545,17 +558,21 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendUpdateNpcTo(ByVal Index As Long, ByVal NpcNum As Long)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SUpdateNpc)
         Buffer.WriteLong(NpcNum)
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
-        Buffer.WriteLong(Npc(NpcNum).DropChance)
-        Buffer.WriteLong(Npc(NpcNum).DropItem)
-        Buffer.WriteLong(Npc(NpcNum).DropItemValue)
+        For i = 1 To 5
+            Buffer.WriteLong(Npc(NpcNum).DropChance(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItem(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItemValue(i))
+        Next
+
         Buffer.WriteLong(Npc(NpcNum).Exp)
         Buffer.WriteLong(Npc(NpcNum).Faction)
         Buffer.WriteLong(Npc(NpcNum).HP)
@@ -573,17 +590,21 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendUpdateNpcToAll(ByVal NpcNum As Long)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SUpdateNpc)
         Buffer.WriteLong(NpcNum)
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
-        Buffer.WriteLong(Npc(NpcNum).DropChance)
-        Buffer.WriteLong(Npc(NpcNum).DropItem)
-        Buffer.WriteLong(Npc(NpcNum).DropItemValue)
+        For i = 1 To 5
+            Buffer.WriteLong(Npc(NpcNum).DropChance(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItem(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItemValue(i))
+        Next
+
         Buffer.WriteLong(Npc(NpcNum).Exp)
         Buffer.WriteLong(Npc(NpcNum).Faction)
         Buffer.WriteLong(Npc(NpcNum).HP)
@@ -601,6 +622,7 @@ Module ServerTCP
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendResourceCacheTo(ByVal Index As Long, ByVal Resource_num As Long)
         Dim Buffer As ByteBuffer
         Dim i As Long
@@ -621,6 +643,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendResources(ByVal Index As Long)
         Dim i As Long
 
@@ -633,6 +656,7 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendUpdateResourceTo(ByVal Index As Long, ByVal ResourceNum As Long)
         Dim Buffer As ByteBuffer
 
@@ -812,7 +836,7 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerStat(Index, Stats.strength))
         Buffer.WriteLong(GetPlayerStat(Index, Stats.endurance))
         Buffer.WriteLong(GetPlayerStat(Index, Stats.vitality))
-        Buffer.WriteLong(GetPlayerStat(Index, Stats.willpower))
+        Buffer.WriteLong(GetPlayerStat(Index, Stats.luck))
         Buffer.WriteLong(GetPlayerStat(Index, Stats.intelligence))
         Buffer.WriteLong(GetPlayerStat(Index, Stats.spirit))
         SendDataTo(Index, Buffer.ToArray())
@@ -946,6 +970,8 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Weapon))
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Helmet))
         Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Shield))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Shoes))
+        Buffer.WriteLong(GetPlayerEquipment(Index, Equipment.Gloves))
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing

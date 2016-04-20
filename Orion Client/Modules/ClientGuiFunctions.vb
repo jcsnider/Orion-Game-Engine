@@ -13,13 +13,12 @@ Public Module ClientGuiFunctions
                 If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
                     eqNum = IsEqItem(X, Y)
                     If eqNum <> 0 Then
-                        y2 = CharWindowY
-                        x2 = CharWindowX - frmMainGame.pnlItemDesc.Width - 2
-                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, x2, y2)
+                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0)
                         LastItemDesc = GetPlayerEquipment(MyIndex, eqNum) ' set it so you don't re-set values
+                        ShowItemDesc = True
                         Exit Sub
                     Else
-                        frmMainGame.pnlItemDesc.Visible = False
+                        ShowItemDesc = False
                         LastItemDesc = 0 ' no item was last loaded
                     End If
                 End If
@@ -33,7 +32,7 @@ Public Module ClientGuiFunctions
                     If InTrade Then Exit Sub
                     If InBank Or InShop Then Exit Sub
                     DrawInventoryItem(X, Y)
-                    frmMainGame.pnlItemDesc.Visible = False
+                    ShowItemDesc = False
                     LastItemDesc = 0 ' no item was last loaded
                 Else
                     InvNum = IsInvItem(X, Y)
@@ -45,13 +44,12 @@ Public Module ClientGuiFunctions
                                 Exit Sub
                             End If
                         Next
-                        y2 = InvWindowY ' - frmMainGame.pnlItemDesc.Height - 2
-                        x2 = InvWindowX - frmMainGame.pnlItemDesc.Width - 2
-                        UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum), x2, y2)
+                        UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum))
                         LastItemDesc = GetPlayerInvItemNum(MyIndex, InvNum) ' set it so you don't re-set values
+                        ShowItemDesc = True
                         Exit Sub
                     Else
-                        frmMainGame.pnlItemDesc.Visible = False
+                        ShowItemDesc = False
                         LastItemDesc = 0 ' no item was last loaded
                     End If
                 End If
@@ -84,6 +82,8 @@ Public Module ClientGuiFunctions
                 End If
 
             End If
+        Else
+            ShowItemDesc = False
         End If
 
     End Sub
@@ -231,7 +231,7 @@ Public Module ClientGuiFunctions
                         End If
                     End If
                     'WillPower
-                    If X > CharWindowX + WillPowerUpgradeX And X < CharWindowX + WillPowerUpgradeX + 10 And Y > CharWindowY + WillPowerUpgradeY And Y < CharWindowY + WillPowerUpgradeY + 10 Then
+                    If X > CharWindowX + LuckUpgradeX And X < CharWindowX + LuckUpgradeX + 10 And Y > CharWindowY + LuckUpgradeY And Y < CharWindowY + LuckUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
                             SendTrainStat(4)
                         End If

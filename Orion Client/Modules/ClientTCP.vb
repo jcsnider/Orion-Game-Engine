@@ -476,6 +476,7 @@ Module ClientTCP
         Buffer.WriteLong(Item(itemNum).Price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+        Buffer.WriteLong(Item(itemNum).Randomize)
 
         For i = 0 To Stats.stat_count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -573,7 +574,7 @@ Module ClientTCP
     End Sub
 
     Public Sub SendSaveNpc(ByVal NpcNum As Long)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(ClientPackets.CSaveNpc)
         Buffer.WriteLong(NpcNum)
@@ -581,9 +582,12 @@ Module ClientTCP
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
-        Buffer.WriteLong(Npc(NpcNum).DropChance)
-        Buffer.WriteLong(Npc(NpcNum).DropItem)
-        Buffer.WriteLong(Npc(NpcNum).DropItemValue)
+        For i = 1 To 5
+            Buffer.WriteLong(Npc(NpcNum).DropChance(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItem(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItemValue(i))
+        Next
+
         Buffer.WriteLong(Npc(NpcNum).EXP)
         Buffer.WriteLong(Npc(NpcNum).faction)
         Buffer.WriteLong(Npc(NpcNum).HP)

@@ -183,7 +183,7 @@ Module ClientGameLogic
                     Application.DoEvents()
 
                     If GettingMap Then
-                        g.DrawString("Receiving Map", New System.Drawing.Font(FONT_NAME, FONT_SIZE), Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
+                        g.DrawString("Receiving Map", New Font(FONT_NAME, FONT_SIZE), Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
                     End If
 
                     If InMapEditor Then
@@ -1224,7 +1224,7 @@ Module ClientGameLogic
                 Buffer.WriteLong(0)
                 SendData(Buffer.ToArray)
                 Buffer = Nothing
-                ClearEventChat
+                ClearEventChat()
                 InEvent = False
                 Exit Sub
             End If
@@ -1699,162 +1699,171 @@ Continue1:
         Buffer = Nothing
     End Sub
 
-    Public Sub UpdateDescWindow(ByVal itemnum As Long, ByVal Amount As Long, ByVal X As Long, ByVal Y As Long)
+    Public Sub UpdateDescWindow(ByVal itemnum As Long, ByVal Amount As Long)
         Dim FirstLetter As String
-        Dim Name As String
 
         FirstLetter = LCase$(Left$(Trim$(Item(itemnum).Name), 1))
 
         If FirstLetter = "$" Then
-            Name = (Mid$(Trim$(Item(itemnum).Name), 2, Len(Trim$(Item(itemnum).Name)) - 1))
+            ItemDescName = (Mid$(Trim$(Item(itemnum).Name), 2, Len(Trim$(Item(itemnum).Name)) - 1))
         Else
-            Name = Trim$(Item(itemnum).Name)
+            ItemDescName = Trim$(Item(itemnum).Name)
         End If
 
-        ' check for off-screen
-        If Y + frmMainGame.pnlItemDesc.Height > frmMainGame.Height Then
-            Y = frmMainGame.Height - frmMainGame.pnlItemDesc.Height
-        End If
+        ItemDescItemNum = itemnum
 
         With frmMainGame
-            .pnlItemDesc.Top = Y
-            .pnlItemDesc.Left = X
-            .pnlItemDesc.Visible = True
-            .pnlItemDesc.BringToFront()
 
-            If LastItemDesc = itemnum Then Exit Sub ' exit out after setting x + y so we don't reset values
-
-            .lblItemDescName.Font = New System.Drawing.Font("Verdana Bold", 8.25)
+            If LastItemDesc = itemnum Then Exit Sub
 
             ' set the name
             Select Case Item(itemnum).Rarity
-                Case 0 ' black
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0)
+                Case 0 ' White
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_0
                 Case 1 ' green
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(18, 92, 40)
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_1
                 Case 2 ' blue
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(31, 37, 118)
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_2
                 Case 3 ' maroon
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(128, 0, 0)
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_3
                 Case 4 ' purple
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(81, 36, 81)
-                Case 5 '
-                    .lblItemDescName.ForeColor = System.Drawing.Color.FromArgb(112, 146, 190)
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_4
+                Case 5 'gold
+                    ItemDescRarityColor = ITEM_RARITY_COLOR_5
             End Select
-
-            .lblItemDescName.Text = Name
 
             ' For the stats label
             Select Case Item(itemnum).Type
                 Case ITEM_TYPE_NONE
-                    .lblItemDescInfo.Text = "N/A"
+                    ItemDescInfo = "N/A"
+                    ItemDescType = "N/A"
                 Case ITEM_TYPE_WEAPON
-                    .lblItemDescInfo.Text = "Damage: " & Item(itemnum).Data2
+                    ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                    ItemDescType = "Weapon"
                 Case ITEM_TYPE_ARMOR
-                    .lblItemDescInfo.Text = "Defence: " & Item(itemnum).Data2
+                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                    ItemDescType = "Armor"
                 Case ITEM_TYPE_HELMET
-                    .lblItemDescInfo.Text = "Defence: " & Item(itemnum).Data2
+                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                    ItemDescType = "Helmet"
                 Case ITEM_TYPE_SHIELD
-                    .lblItemDescInfo.Text = "Defence: " & Item(itemnum).Data2
+                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                    ItemDescType = "Shield"
+                Case ITEM_TYPE_SHOES
+                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                    ItemDescType = "Shoes"
+                Case ITEM_TYPE_GLOVES
+                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                    ItemDescType = "Gloves"
                 Case ITEM_TYPE_POTIONADDHP
-                    .lblItemDescInfo.Text = "Restore Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                    ItemDescType = "Potion"
                 Case ITEM_TYPE_POTIONADDMP
-                    .lblItemDescInfo.Text = "Restore Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                    ItemDescType = "Potion"
                 Case ITEM_TYPE_POTIONADDSP
-                    .lblItemDescInfo.Text = "Restore Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
                 Case ITEM_TYPE_POTIONSUBHP
-                    .lblItemDescInfo.Text = "Damage Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
                 Case ITEM_TYPE_POTIONSUBMP
-                    .lblItemDescInfo.Text = "Damage Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
                 Case ITEM_TYPE_POTIONSUBSP
-                    .lblItemDescInfo.Text = "Damage Amount: " & Item(itemnum).Data2
+                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
                 Case ITEM_TYPE_KEY
-                    .lblItemDescInfo.Text = "N/A"
+                    ItemDescInfo = "N/A"
+                    ItemDescType = "Key"
                 Case ITEM_TYPE_CURRENCY
-                    .lblItemDescInfo.Text = "N/A"
+                    ItemDescInfo = "N/A"
+                    ItemDescType = "Currency"
                 Case ITEM_TYPE_SPELL
-                    .lblItemDescInfo.Text = "N/A"
+                    ItemDescInfo = "N/A"
+                    ItemDescType = "Spell"
                 Case ITEM_TYPE_FURNITURE
-                    .lblItemDescInfo.Text = "Furniture"
+                    ItemDescInfo = "Furniture"
             End Select
 
+            ItemDescSize = 0
+
             ' Currency
-            .lblItemDescCost.Text = Item(itemnum).Price & "g"
+            ItemDescCost = Item(itemnum).Price & "g"
 
             ' If currency, exit out before all the other shit
             If Item(itemnum).Type = ITEM_TYPE_CURRENCY Or Item(itemnum).Type = ITEM_TYPE_NONE Then
                 ' Clear other labels
-                .lblItemDescLevel.Text = "N/A"
-                .lblItemDescSpeed.Text = "N/A"
+                ItemDescLevel = "N/A"
+                ItemDescSpeed = "N/A"
 
-                .lblItemDescStr.Text = "N/A"
-                .lblItemDescEnd.Text = "N/A"
-                .lblItemDescInt.Text = "N/A"
-                .lblItemDescSpr.Text = "N/A"
-                .lblItemDescVit.Text = "N/A"
-                .lblItemDescWill.Text = "N/A"
+                ItemDescStr = "N/A"
+                ItemDescEnd = "N/A"
+                ItemDescInt = "N/A"
+                ItemDescSpr = "N/A"
+                ItemDescVit = "N/A"
+                ItemDescLuck = "N/A"
+                ItemDescSize = 1
                 Exit Sub
             End If
 
             ' Potions + crap
-            .lblItemDescLevel.Text = Item(itemnum).LevelReq
+            ItemDescLevel = Item(itemnum).LevelReq
+
+
 
             ' Exit out for everything else 'scept equipment
-            If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_SHIELD Then
+            If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_GLOVES Then
                 ' Clear other labels
-                .lblItemDescSpeed.Text = "N/A"
+                ItemDescSpeed = "N/A"
 
-
-                .lblItemDescStr.Text = "N/A"
-                .lblItemDescEnd.Text = "N/A"
-                .lblItemDescInt.Text = "N/A"
-                .lblItemDescSpr.Text = "N/A"
-                .lblItemDescVit.Text = "N/A"
-                .lblItemDescWill.Text = "N/A"
+                ItemDescStr = "N/A"
+                ItemDescEnd = "N/A"
+                ItemDescInt = "N/A"
+                ItemDescSpr = "N/A"
+                ItemDescVit = "N/A"
+                ItemDescLuck = "N/A"
+                ItemDescSize = 1
                 Exit Sub
             End If
 
             ' Equipment specific
             If Item(itemnum).Add_Stat(Stats.strength) > 0 Then
-                .lblItemDescStr.Text = "+" & Item(itemnum).Add_Stat(Stats.strength)
+                ItemDescStr = "+" & Item(itemnum).Add_Stat(Stats.strength)
             Else
-                .lblItemDescStr.Text = "None"
+                ItemDescStr = "None"
             End If
 
             If Item(itemnum).Add_Stat(Stats.vitality) > 0 Then
-                .lblItemDescVit.Text = "+" & Item(itemnum).Add_Stat(Stats.vitality)
+                ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.vitality)
             Else
-                .lblItemDescVit.Text = "None"
+                ItemDescVit = "None"
             End If
 
             If Item(itemnum).Add_Stat(Stats.intelligence) > 0 Then
-                .lblItemDescInt.Text = "+" & Item(itemnum).Add_Stat(Stats.intelligence)
+                ItemDescInt = "+" & Item(itemnum).Add_Stat(Stats.intelligence)
             Else
-                .lblItemDescInt.Text = "None"
+                ItemDescInt = "None"
             End If
 
             If Item(itemnum).Add_Stat(Stats.endurance) > 0 Then
-                .lblItemDescEnd.Text = "+" & Item(itemnum).Add_Stat(Stats.endurance)
+                ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.endurance)
             Else
-                .lblItemDescEnd.Text = "None"
+                ItemDescEnd = "None"
             End If
 
-            If Item(itemnum).Add_Stat(Stats.willpower) > 0 Then
-                .lblItemDescWill.Text = "+" & Item(itemnum).Add_Stat(Stats.willpower)
+            If Item(itemnum).Add_Stat(Stats.luck) > 0 Then
+                ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.luck)
             Else
-                .lblItemDescWill.Text = "None"
+                ItemDescLuck = "None"
             End If
 
             If Item(itemnum).Add_Stat(Stats.spirit) > 0 Then
-                .lblItemDescSpr.Text = "+" & Item(itemnum).Add_Stat(Stats.spirit)
+                ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.spirit)
             Else
-                .lblItemDescSpr.Text = "None"
+                ItemDescSpr = "None"
             End If
 
             If Item(itemnum).Type = ITEM_TYPE_WEAPON Then
-                .lblItemDescSpeed.Text = Item(itemnum).Speed / 1000 & " secs"
+                ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
             Else
-                .lblItemDescSpeed.Text = "N/A"
+                ItemDescSpeed = "N/A"
             End If
 
             ' don't need to exit :3

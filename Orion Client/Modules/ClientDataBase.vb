@@ -234,6 +234,8 @@ Module ClientDataBase
         Player(Index).Equipment(Equipment.Helmet) = 0
         Player(Index).Equipment(Equipment.Shield) = 0
         Player(Index).Equipment(Equipment.Weapon) = 0
+        Player(Index).Equipment(Equipment.Shoes) = 0
+        Player(Index).Equipment(Equipment.Gloves) = 0
         Player(Index).EXP = 0
         Player(Index).Level = 0
         Player(Index).Map = 0
@@ -250,7 +252,7 @@ Module ClientDataBase
         Player(Index).Stat(Stats.spirit) = 0
         Player(Index).Stat(Stats.strength) = 0
         Player(Index).Stat(Stats.vitality) = 0
-        Player(Index).Stat(Stats.willpower) = 0
+        Player(Index).Stat(Stats.luck) = 0
         Player(Index).Steps = 0
         Player(Index).Vital(Vitals.HP) = 0
         Player(Index).Vital(Vitals.MP) = 0

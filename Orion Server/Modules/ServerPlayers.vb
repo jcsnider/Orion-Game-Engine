@@ -21,12 +21,15 @@
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerName = Trim$(Player(Index).Name)
     End Function
+
     Sub SetPlayerAccess(ByVal Index As Long, ByVal Access As Long)
         Player(Index).Access = Access
     End Sub
+
     Sub SetPlayerSprite(ByVal Index As Long, ByVal Sprite As Long)
         Player(Index).Sprite = Sprite
     End Sub
+
     Function GetPlayerMaxVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
 
         GetPlayerMaxVital = 0
@@ -43,6 +46,7 @@
         End Select
 
     End Function
+
     Public Function GetPlayerStat(ByVal Index As Long, ByVal Stat As Stats) As Long
         Dim x As Long, i As Long
 
@@ -225,6 +229,12 @@
                     Case Equipment.Shield
 
                         If Item(itemNum).Type <> ITEM_TYPE_SHIELD Then SetPlayerEquipment(Index, 0, i)
+                    Case Equipment.Shoes
+
+                        If Item(itemNum).Type <> ITEM_TYPE_SHOES Then SetPlayerEquipment(Index, 0, i)
+                    Case Equipment.Gloves
+
+                        If Item(itemNum).Type <> ITEM_TYPE_GLOVES Then SetPlayerEquipment(Index, 0, i)
                 End Select
 
             Else
@@ -234,15 +244,18 @@
         Next
 
     End Sub
+
     Function GetPlayerEquipment(ByVal Index As Long, ByVal EquipmentSlot As Equipment) As Byte
         GetPlayerEquipment = 0
         If Index > MAX_PLAYERS Then Exit Function
         If EquipmentSlot = 0 Then Exit Function
         GetPlayerEquipment = Player(Index).Equipment(EquipmentSlot)
     End Function
+
     Sub SetPlayerEquipment(ByVal Index As Long, ByVal InvNum As Long, ByVal EquipmentSlot As Equipment)
         Player(Index).Equipment(EquipmentSlot) = InvNum
     End Sub
+
     Sub JoinGame(ByVal Index As Long)
         Dim i As Long
         Dim Buffer As ByteBuffer

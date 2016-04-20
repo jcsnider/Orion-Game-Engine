@@ -253,7 +253,7 @@
         strength = 1
         endurance
         vitality
-        willpower
+        luck
         intelligence
         spirit
         ' Make sure Stat_Count is below everything else
@@ -275,6 +275,8 @@
         Armor
         Helmet
         Shield
+        Shoes
+        Gloves
         ' Make sure Equipment_Count is below everything else
         Equipment_Count
     End Enum
@@ -289,17 +291,5 @@
         ' Make sure Layer_Count is below everything else
         Layer_Count
     End Enum
-
-    ' Layers in a map
-    'Public Enum ExMapLayer
-    '    Mask3 = 1
-    '    Mask4
-    '    Mask5
-    '    Fringe3
-    '    Fringe4
-    '    Fringe5
-    '    ' Make sure Layer_Count is below everything else
-    '    Layer_Count
-    'End Enum
 
 End Module

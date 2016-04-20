@@ -294,7 +294,7 @@
                 .Stat(Stats.endurance) = Buffer.ReadLong
                 .Stat(Stats.vitality) = Buffer.ReadLong
                 .Stat(Stats.intelligence) = Buffer.ReadLong
-                .Stat(Stats.willpower) = Buffer.ReadLong
+                .Stat(Stats.luck) = Buffer.ReadLong
                 .Stat(Stats.spirit) = Buffer.ReadLong
             End With
 
@@ -370,7 +370,7 @@
                 .Stat(Stats.endurance) = Buffer.ReadLong
                 .Stat(Stats.vitality) = Buffer.ReadLong
                 .Stat(Stats.intelligence) = Buffer.ReadLong
-                .Stat(Stats.willpower) = Buffer.ReadLong
+                .Stat(Stats.luck) = Buffer.ReadLong
                 .Stat(Stats.spirit) = Buffer.ReadLong
             End With
 
@@ -442,6 +442,8 @@
         SetPlayerEquipment(MyIndex, Buffer.ReadLong, Equipment.Weapon)
         SetPlayerEquipment(MyIndex, Buffer.ReadLong, Equipment.Helmet)
         SetPlayerEquipment(MyIndex, Buffer.ReadLong, Equipment.Shield)
+        SetPlayerEquipment(MyIndex, Buffer.ReadLong, Equipment.Shoes)
+        SetPlayerEquipment(MyIndex, Buffer.ReadLong, Equipment.Gloves)
 
         ' changes to inventory, need to clear any drop menu
 
@@ -1213,6 +1215,7 @@
         Item(n).Price = Buffer.ReadLong()
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
+        Item(n).Randomize = Buffer.ReadLong()
 
         For i = 0 To Stats.stat_count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -1296,7 +1299,7 @@
     End Sub
 
     Sub Packet_UpdateNPC(ByVal data() As Byte)
-        Dim i As Long
+        Dim i As Long, x As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -1308,9 +1311,12 @@
         Npc(i).Animation = Buffer.ReadLong()
         Npc(i).AttackSay = Trim(Buffer.ReadString())
         Npc(i).Behaviour = Buffer.ReadLong()
-        Npc(i).DropChance = Buffer.ReadLong()
-        Npc(i).DropItem = Buffer.ReadLong()
-        Npc(i).DropItemValue = Buffer.ReadLong()
+        For x = 1 To 5
+            Npc(i).DropChance(x) = Buffer.ReadLong()
+            Npc(i).DropItem(x) = Buffer.ReadLong()
+            Npc(i).DropItemValue(x) = Buffer.ReadLong()
+        Next
+
         Npc(i).EXP = Buffer.ReadLong()
         Npc(i).faction = Buffer.ReadLong()
         Npc(i).HP = Buffer.ReadLong()
@@ -1830,6 +1836,8 @@
         SetPlayerEquipment(playernum, Buffer.ReadLong, Equipment.Weapon)
         SetPlayerEquipment(playernum, Buffer.ReadLong, Equipment.Helmet)
         SetPlayerEquipment(playernum, Buffer.ReadLong, Equipment.Shield)
+        SetPlayerEquipment(playernum, Buffer.ReadLong, Equipment.Shoes)
+        SetPlayerEquipment(playernum, Buffer.ReadLong, Equipment.Gloves)
 
         Buffer = Nothing
     End Sub
@@ -1996,7 +2004,7 @@
                 .Stat(Stats.endurance) = buffer.ReadLong
                 .Stat(Stats.vitality) = buffer.ReadLong
                 .Stat(Stats.intelligence) = buffer.ReadLong
-                .Stat(Stats.willpower) = buffer.ReadLong
+                .Stat(Stats.luck) = buffer.ReadLong
                 .Stat(Stats.spirit) = buffer.ReadLong
             End With
 
@@ -2042,6 +2050,7 @@
             Item(n).Price = buffer.ReadLong()
             Item(n).Rarity = buffer.ReadLong()
             Item(n).Speed = buffer.ReadLong()
+            Item(n).Randomize = buffer.ReadLong()
 
             For z = 0 To Stats.stat_count - 1
                 Item(n).Stat_Req(z) = buffer.ReadLong()
@@ -2129,9 +2138,12 @@
             Npc(n).Animation = buffer.ReadLong()
             Npc(n).AttackSay = Trim(buffer.ReadString())
             Npc(n).Behaviour = buffer.ReadLong()
-            Npc(n).DropChance = buffer.ReadLong()
-            Npc(n).DropItem = buffer.ReadLong()
-            Npc(n).DropItemValue = buffer.ReadLong()
+            For z = 1 To 5
+                Npc(n).DropChance(z) = buffer.ReadLong()
+                Npc(n).DropItem(z) = buffer.ReadLong()
+                Npc(n).DropItemValue(z) = buffer.ReadLong()
+            Next
+
             Npc(n).EXP = buffer.ReadLong()
             Npc(n).faction = buffer.ReadLong()
             Npc(n).HP = buffer.ReadLong()

@@ -35,33 +35,6 @@ Partial Class frmMainGame
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optMOff = New System.Windows.Forms.RadioButton()
         Me.optMOn = New System.Windows.Forms.RadioButton()
-        Me.pnlItemDesc = New System.Windows.Forms.Panel()
-        Me.lblItemDescType = New System.Windows.Forms.Label()
-        Me.lblItemDescCost = New System.Windows.Forms.Label()
-        Me.lblItemDescLevel = New System.Windows.Forms.Label()
-        Me.lblItemDescSpeed = New System.Windows.Forms.Label()
-        Me.lblItemDescInfo = New System.Windows.Forms.Label()
-        Me.lblItemDescName = New System.Windows.Forms.Label()
-        Me.lblItemDescSpr = New System.Windows.Forms.Label()
-        Me.lblItemDescWill = New System.Windows.Forms.Label()
-        Me.lblItemDescEnd = New System.Windows.Forms.Label()
-        Me.lblItemDescInt = New System.Windows.Forms.Label()
-        Me.lblItemDescVit = New System.Windows.Forms.Label()
-        Me.lblItemDescStr = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.pnlTmpInv = New System.Windows.Forms.Panel()
         Me.pnlCurrency = New System.Windows.Forms.Panel()
         Me.lblCurrencyCancel = New System.Windows.Forms.Label()
@@ -155,7 +128,6 @@ Partial Class frmMainGame
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.pnlItemDesc.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
         Me.pnlSpellDesc.SuspendLayout()
         Me.pnlShop.SuspendLayout()
@@ -288,279 +260,6 @@ Partial Class frmMainGame
         Me.optMOn.TabStop = True
         Me.optMOn.Text = "On"
         Me.optMOn.UseVisualStyleBackColor = True
-        '
-        'pnlItemDesc
-        '
-        Me.pnlItemDesc.BackColor = System.Drawing.Color.White
-        Me.pnlItemDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescType)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescCost)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescLevel)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescSpeed)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescInfo)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescName)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescSpr)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescWill)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescEnd)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescInt)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescVit)
-        Me.pnlItemDesc.Controls.Add(Me.lblItemDescStr)
-        Me.pnlItemDesc.Controls.Add(Me.Label30)
-        Me.pnlItemDesc.Controls.Add(Me.Label31)
-        Me.pnlItemDesc.Controls.Add(Me.Label32)
-        Me.pnlItemDesc.Controls.Add(Me.Label27)
-        Me.pnlItemDesc.Controls.Add(Me.Label28)
-        Me.pnlItemDesc.Controls.Add(Me.Label29)
-        Me.pnlItemDesc.Controls.Add(Me.Label26)
-        Me.pnlItemDesc.Controls.Add(Me.Label25)
-        Me.pnlItemDesc.Controls.Add(Me.Label24)
-        Me.pnlItemDesc.Controls.Add(Me.Label23)
-        Me.pnlItemDesc.Controls.Add(Me.Label22)
-        Me.pnlItemDesc.Controls.Add(Me.Label21)
-        Me.pnlItemDesc.Controls.Add(Me.Label20)
-        Me.pnlItemDesc.Controls.Add(Me.Label19)
-        Me.pnlItemDesc.ForeColor = System.Drawing.Color.Black
-        Me.pnlItemDesc.Location = New System.Drawing.Point(22, 541)
-        Me.pnlItemDesc.Name = "pnlItemDesc"
-        Me.pnlItemDesc.Size = New System.Drawing.Size(175, 200)
-        Me.pnlItemDesc.TabIndex = 14
-        Me.pnlItemDesc.Visible = False
-        '
-        'lblItemDescType
-        '
-        Me.lblItemDescType.AutoSize = True
-        Me.lblItemDescType.Location = New System.Drawing.Point(44, 94)
-        Me.lblItemDescType.Name = "lblItemDescType"
-        Me.lblItemDescType.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescType.TabIndex = 25
-        Me.lblItemDescType.Text = "N/A"
-        '
-        'lblItemDescCost
-        '
-        Me.lblItemDescCost.AutoSize = True
-        Me.lblItemDescCost.Location = New System.Drawing.Point(44, 79)
-        Me.lblItemDescCost.Name = "lblItemDescCost"
-        Me.lblItemDescCost.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescCost.TabIndex = 24
-        Me.lblItemDescCost.Text = "N/A"
-        '
-        'lblItemDescLevel
-        '
-        Me.lblItemDescLevel.AutoSize = True
-        Me.lblItemDescLevel.Location = New System.Drawing.Point(44, 64)
-        Me.lblItemDescLevel.Name = "lblItemDescLevel"
-        Me.lblItemDescLevel.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescLevel.TabIndex = 23
-        Me.lblItemDescLevel.Text = "N/A"
-        '
-        'lblItemDescSpeed
-        '
-        Me.lblItemDescSpeed.AutoSize = True
-        Me.lblItemDescSpeed.Location = New System.Drawing.Point(44, 49)
-        Me.lblItemDescSpeed.Name = "lblItemDescSpeed"
-        Me.lblItemDescSpeed.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescSpeed.TabIndex = 22
-        Me.lblItemDescSpeed.Text = "N/A"
-        '
-        'lblItemDescInfo
-        '
-        Me.lblItemDescInfo.AutoSize = True
-        Me.lblItemDescInfo.Location = New System.Drawing.Point(44, 34)
-        Me.lblItemDescInfo.Name = "lblItemDescInfo"
-        Me.lblItemDescInfo.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescInfo.TabIndex = 21
-        Me.lblItemDescInfo.Text = "N/A"
-        '
-        'lblItemDescName
-        '
-        Me.lblItemDescName.AutoSize = True
-        Me.lblItemDescName.Location = New System.Drawing.Point(44, 19)
-        Me.lblItemDescName.Name = "lblItemDescName"
-        Me.lblItemDescName.Size = New System.Drawing.Size(27, 13)
-        Me.lblItemDescName.TabIndex = 20
-        Me.lblItemDescName.Text = "N/A"
-        '
-        'lblItemDescSpr
-        '
-        Me.lblItemDescSpr.AutoSize = True
-        Me.lblItemDescSpr.Location = New System.Drawing.Point(105, 168)
-        Me.lblItemDescSpr.Name = "lblItemDescSpr"
-        Me.lblItemDescSpr.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescSpr.TabIndex = 19
-        Me.lblItemDescSpr.Text = "99"
-        '
-        'lblItemDescWill
-        '
-        Me.lblItemDescWill.AutoSize = True
-        Me.lblItemDescWill.Location = New System.Drawing.Point(105, 153)
-        Me.lblItemDescWill.Name = "lblItemDescWill"
-        Me.lblItemDescWill.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescWill.TabIndex = 18
-        Me.lblItemDescWill.Text = "99"
-        '
-        'lblItemDescEnd
-        '
-        Me.lblItemDescEnd.AutoSize = True
-        Me.lblItemDescEnd.Location = New System.Drawing.Point(105, 138)
-        Me.lblItemDescEnd.Name = "lblItemDescEnd"
-        Me.lblItemDescEnd.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescEnd.TabIndex = 17
-        Me.lblItemDescEnd.Text = "99"
-        '
-        'lblItemDescInt
-        '
-        Me.lblItemDescInt.AutoSize = True
-        Me.lblItemDescInt.Location = New System.Drawing.Point(23, 168)
-        Me.lblItemDescInt.Name = "lblItemDescInt"
-        Me.lblItemDescInt.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescInt.TabIndex = 16
-        Me.lblItemDescInt.Text = "99"
-        '
-        'lblItemDescVit
-        '
-        Me.lblItemDescVit.AutoSize = True
-        Me.lblItemDescVit.Location = New System.Drawing.Point(23, 153)
-        Me.lblItemDescVit.Name = "lblItemDescVit"
-        Me.lblItemDescVit.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescVit.TabIndex = 15
-        Me.lblItemDescVit.Text = "99"
-        '
-        'lblItemDescStr
-        '
-        Me.lblItemDescStr.AutoSize = True
-        Me.lblItemDescStr.Location = New System.Drawing.Point(23, 138)
-        Me.lblItemDescStr.Name = "lblItemDescStr"
-        Me.lblItemDescStr.Size = New System.Drawing.Size(19, 13)
-        Me.lblItemDescStr.TabIndex = 14
-        Me.lblItemDescStr.Text = "99"
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(80, 168)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(26, 13)
-        Me.Label30.TabIndex = 13
-        Me.Label30.Text = "Spr:"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(80, 153)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(27, 13)
-        Me.Label31.TabIndex = 12
-        Me.Label31.Text = "Will:"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(80, 138)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(29, 13)
-        Me.Label32.TabIndex = 11
-        Me.Label32.Text = "End:"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(3, 168)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(22, 13)
-        Me.Label27.TabIndex = 10
-        Me.Label27.Text = "Int:"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(3, 153)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(22, 13)
-        Me.Label28.TabIndex = 9
-        Me.Label28.Text = "Vit:"
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(3, 138)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(23, 13)
-        Me.Label29.TabIndex = 8
-        Me.Label29.Text = "Str:"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(3, 118)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(62, 15)
-        Me.Label26.TabIndex = 7
-        Me.Label26.Text = "Bonuses"
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(3, 94)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(34, 13)
-        Me.Label25.TabIndex = 6
-        Me.Label25.Text = "Type:"
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(3, 79)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(31, 13)
-        Me.Label24.TabIndex = 5
-        Me.Label24.Text = "Cost:"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(3, 64)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(36, 13)
-        Me.Label23.TabIndex = 4
-        Me.Label23.Text = "Level:"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(3, 49)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(41, 13)
-        Me.Label22.TabIndex = 3
-        Me.Label22.Text = "Speed:"
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(3, 34)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(28, 13)
-        Me.Label21.TabIndex = 2
-        Me.Label21.Text = "Info:"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(3, 19)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(38, 13)
-        Me.Label20.TabIndex = 1
-        Me.Label20.Text = "Name:"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(4, 4)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(80, 15)
-        Me.Label19.TabIndex = 0
-        Me.Label19.Text = "Information"
         '
         'pnlTmpInv
         '
@@ -1564,7 +1263,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlBank)
         Me.Controls.Add(Me.pnlSpellDesc)
-        Me.Controls.Add(Me.pnlItemDesc)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
@@ -1587,8 +1285,6 @@ Partial Class frmMainGame
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.pnlItemDesc.ResumeLayout(False)
-        Me.pnlItemDesc.PerformLayout()
         Me.pnlCurrency.ResumeLayout(False)
         Me.pnlCurrency.PerformLayout()
         Me.pnlSpellDesc.ResumeLayout(False)
@@ -1617,33 +1313,6 @@ Partial Class frmMainGame
     Friend WithEvents optMOn As System.Windows.Forms.RadioButton
     Friend WithEvents optSOff As System.Windows.Forms.RadioButton
     Friend WithEvents optSOn As System.Windows.Forms.RadioButton
-    Friend WithEvents pnlItemDesc As System.Windows.Forms.Panel
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents Label26 As System.Windows.Forms.Label
-    Friend WithEvents Label25 As System.Windows.Forms.Label
-    Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescSpr As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescWill As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescEnd As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescInt As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescVit As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescStr As System.Windows.Forms.Label
-    Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents Label31 As System.Windows.Forms.Label
-    Friend WithEvents Label32 As System.Windows.Forms.Label
-    Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescType As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescCost As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescLevel As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescSpeed As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescInfo As System.Windows.Forms.Label
-    Friend WithEvents lblItemDescName As System.Windows.Forms.Label
     Friend WithEvents pnlTmpInv As System.Windows.Forms.Panel
     Friend WithEvents pnlCurrency As System.Windows.Forms.Panel
     Friend WithEvents lblCurrency As System.Windows.Forms.Label

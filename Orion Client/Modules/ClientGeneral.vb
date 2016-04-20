@@ -82,6 +82,10 @@ Module ClientGeneral
             For x = 0 To Stats.stat_count - 1
                 ReDim Npc(i).Stat(x)
             Next
+
+            ReDim Npc(i).DropChance(5)
+            ReDim Npc(i).DropItem(5)
+            ReDim Npc(i).DropItemValue(5)
         Next
 
         ReDim MapNpc(0 To MAX_MAP_NPCS)

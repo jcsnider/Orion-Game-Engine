@@ -253,7 +253,7 @@
         strength = 1
         endurance
         vitality
-        willpower
+        luck
         intelligence
         spirit
         ' Make sure Stat_Count is below everything else
@@ -275,6 +275,8 @@
         Armor
         Helmet
         Shield
+        Shoes
+        Gloves
         ' Make sure Equipment_Count is below everything else
         Equipment_Count
     End Enum

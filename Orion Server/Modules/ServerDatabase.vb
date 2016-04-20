@@ -91,7 +91,7 @@ Module ServerDatabase
             Classes(i).Stat(Stats.strength) = Val(Getvar(filename, "CLASS" & i, "Str"))
             Classes(i).Stat(Stats.endurance) = Val(Getvar(filename, "CLASS" & i, "End"))
             Classes(i).Stat(Stats.vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
-            Classes(i).Stat(Stats.willpower) = Val(Getvar(filename, "CLASS" & i, "Will"))
+            Classes(i).Stat(Stats.luck) = Val(Getvar(filename, "CLASS" & i, "Will"))
             Classes(i).Stat(Stats.intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
             Classes(i).Stat(Stats.spirit) = Val(Getvar(filename, "CLASS" & i, "Spir"))
 
@@ -120,7 +120,7 @@ Module ServerDatabase
             Call PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
             Call PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))
             Call PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.vitality)))
-            Call PutVar(filename, "CLASS" & i, "Will", Str(Classes(i).Stat(Stats.willpower)))
+            Call PutVar(filename, "CLASS" & i, "Will", Str(Classes(i).Stat(Stats.luck)))
             Call PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
             Call PutVar(filename, "CLASS" & i, "Spr", Str(Classes(i).Stat(Stats.spirit)))
             ' loop for items & values
@@ -687,6 +687,8 @@ Module ServerDatabase
         FilePutObject(F, Item(itemNum).KnockBack)
         FilePutObject(F, Item(itemNum).KnockBackTiles)
 
+        FilePutObject(F, Item(itemNum).Randomize)
+
         FileClose(F)
     End Sub
 
@@ -751,6 +753,8 @@ Module ServerDatabase
 
         FileGetObject(F, Item(ItemNum).KnockBack)
         FileGetObject(F, Item(ItemNum).KnockBackTiles)
+
+        FileGetObject(F, Item(ItemNum).Randomize)
 
         FileClose(F)
 
@@ -819,9 +823,11 @@ Module ServerDatabase
         FilePutObject(F, Npc(NpcNum).SpawnSecs)
         FilePutObject(F, Npc(NpcNum).Behaviour)
         FilePutObject(F, Npc(NpcNum).Range)
-        FilePutObject(F, Npc(NpcNum).DropChance)
-        FilePutObject(F, Npc(NpcNum).DropItem)
-        FilePutObject(F, Npc(NpcNum).DropItemValue)
+        For i = 1 To 5
+            FilePutObject(F, Npc(NpcNum).DropChance(i))
+            FilePutObject(F, Npc(NpcNum).DropItem(i))
+            FilePutObject(F, Npc(NpcNum).DropItemValue(i))
+        Next
 
         For i = 0 To Stats.Stat_Count - 1
             FilePutObject(F, Npc(NpcNum).Stat(i))
@@ -840,7 +846,7 @@ Module ServerDatabase
     Sub LoadNpcs()
         Dim i As Long
 
-        Call CheckNpcs()
+        CheckNpcs()
 
         For i = 1 To MAX_NPCS
             LoadNpc(i)
@@ -865,9 +871,12 @@ Module ServerDatabase
         FileGetObject(F, Npc(NpcNum).SpawnSecs)
         FileGetObject(F, Npc(NpcNum).Behaviour)
         FileGetObject(F, Npc(NpcNum).Range)
-        FileGetObject(F, Npc(NpcNum).DropChance)
-        FileGetObject(F, Npc(NpcNum).DropItem)
-        FileGetObject(F, Npc(NpcNum).DropItemValue)
+
+        For i = 1 To 5
+            FileGetObject(F, Npc(NpcNum).DropChance(i))
+            FileGetObject(F, Npc(NpcNum).DropItem(i))
+            FileGetObject(F, Npc(NpcNum).DropItemValue(i))
+        Next
 
         For n = 0 To Stats.Stat_Count - 1
             FileGetObject(F, Npc(NpcNum).Stat(n))
@@ -924,6 +933,11 @@ Module ServerDatabase
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
         ReDim Npc(Index).Stat(0 To Stats.Stat_Count - 1)
+        For i = 1 To 5
+            ReDim Npc(Index).DropChance(5)
+            ReDim Npc(Index).DropItem(5)
+            ReDim Npc(Index).DropItemValue(5)
+        Next
     End Sub
 
     Sub ClearNpcs()
@@ -1541,6 +1555,8 @@ Module ServerDatabase
         FilePutObject(F, Player(Index).Equipment(Equipment.Helmet))
         FilePutObject(F, Player(Index).Equipment(Equipment.Shield))
         FilePutObject(F, Player(Index).Equipment(Equipment.Weapon))
+        FilePutObject(F, Player(Index).Equipment(Equipment.Shoes))
+        FilePutObject(F, Player(Index).Equipment(Equipment.Gloves))
         FilePutObject(F, Player(Index).exp)
 
         For i = 0 To MAX_INV
@@ -1628,6 +1644,8 @@ Module ServerDatabase
         FileGetObject(F, Player(Index).Equipment(Equipment.Helmet))
         FileGetObject(F, Player(Index).Equipment(Equipment.Shield))
         FileGetObject(F, Player(Index).Equipment(Equipment.Weapon))
+        FileGetObject(F, Player(Index).Equipment(Equipment.Shoes))
+        FileGetObject(F, Player(Index).Equipment(Equipment.Gloves))
         FileGetObject(F, Player(Index).exp)
 
         For i = 0 To MAX_INV
@@ -1686,12 +1704,10 @@ Module ServerDatabase
 
         ReDim Player(Index).Switches(MAX_SWITCHES)
         For i = 1 To MAX_SWITCHES
-            'Player(Index).Switches(i) = 0
             FileGetObject(F, Player(Index).Switches(i))
         Next
         ReDim Player(Index).Variables(MAX_VARIABLES)
         For i = 1 To MAX_VARIABLES
-            'Player(Index).Variables(i) = 0
             FileGetObject(F, Player(Index).Variables(i))
         Next
 
@@ -2143,7 +2159,7 @@ Module ServerDatabase
             Buffer.WriteLong(Classes(i).Stat(Stats.endurance))
             Buffer.WriteLong(Classes(i).Stat(Stats.vitality))
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteLong(Classes(i).Stat(Stats.willpower))
+            Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
         Next
 
@@ -2194,6 +2210,7 @@ Module ServerDatabase
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+        Buffer.WriteLong(Item(itemNum).Randomize)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -2283,15 +2300,19 @@ Module ServerDatabase
     End Function
 
     Function NpcData(ByVal NpcNum As Long) As Byte()
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(NpcNum)
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
-        Buffer.WriteLong(Npc(NpcNum).DropChance)
-        Buffer.WriteLong(Npc(NpcNum).DropItem)
-        Buffer.WriteLong(Npc(NpcNum).DropItemValue)
+
+        For i = 1 To 5
+            Buffer.WriteLong(Npc(NpcNum).DropChance(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItem(i))
+            Buffer.WriteLong(Npc(NpcNum).DropItemValue(i))
+        Next
+
         Buffer.WriteLong(Npc(NpcNum).Exp)
         Buffer.WriteLong(Npc(NpcNum).Faction)
         Buffer.WriteLong(Npc(NpcNum).HP)

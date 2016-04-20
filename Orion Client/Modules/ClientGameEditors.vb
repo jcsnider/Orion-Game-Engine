@@ -634,7 +634,7 @@ Module ClientGameEditors
             frmEditor_Item.scrlAnim.Value = .Animation
 
             ' Type specific settings
-            If (frmEditor_Item.cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (frmEditor_Item.cmbType.SelectedIndex <= ITEM_TYPE_SHIELD) Then
+            If (frmEditor_Item.cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (frmEditor_Item.cmbType.SelectedIndex <= ITEM_TYPE_GLOVES) Then
                 frmEditor_Item.fraEquipment.Visible = True
                 frmEditor_Item.scrlProjectile.Value = .Data1
                 frmEditor_Item.scrlDamage.Value = .Data2
@@ -648,11 +648,21 @@ Module ClientGameEditors
                 frmEditor_Item.scrlAddEnd.Value = .Add_Stat(Stats.endurance)
                 frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.intelligence)
                 frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.vitality)
-                frmEditor_Item.scrlAddWill.Value = .Add_Stat(Stats.willpower)
+                frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.luck)
                 frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.spirit)
 
-                frmEditor_Item.chkKnockBack.Checked = .KnockBack
+                If .KnockBack = 1 Then
+                    frmEditor_Item.chkKnockBack.Checked = True
+                Else
+                    frmEditor_Item.chkKnockBack.Checked = False
+                End If
                 frmEditor_Item.cmbKnockBackTiles.SelectedIndex = .KnockBackTiles
+
+                If .Randomize = 1 Then
+                    frmEditor_Item.chkRandomize.Checked = True
+                Else
+                    frmEditor_Item.chkRandomize.Checked = False
+                End If
 
                 frmEditor_Item.scrlPaperdoll.Value = .Paperdoll
             Else
@@ -691,7 +701,7 @@ Module ClientGameEditors
 
             frmEditor_Item.scrlStrReq.Value = .Stat_Req(Stats.strength)
             frmEditor_Item.scrlVitReq.Value = .Stat_Req(Stats.vitality)
-            frmEditor_Item.scrlWillReq.Value = .Stat_Req(Stats.willpower)
+            frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.luck)
             frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.endurance)
             frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.intelligence)
             frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.spirit)
@@ -756,7 +766,7 @@ Module ClientGameEditors
 
         If frmEditor_NPC.Visible = False Then Exit Sub
         EditorIndex = frmEditor_NPC.lstIndex.SelectedIndex + 1
-
+        frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
         If Npc(EditorIndex).AttackSay Is Nothing Then Npc(EditorIndex).AttackSay = ""
         If Npc(EditorIndex).Name Is Nothing Then Npc(EditorIndex).Name = ""
 
@@ -769,9 +779,15 @@ Module ClientGameEditors
             .cmbBehaviour.SelectedIndex = Npc(EditorIndex).Behaviour
             .cmbFaction.SelectedIndex = Npc(EditorIndex).faction
             .scrlRange.Value = Npc(EditorIndex).Range
-            .txtChance.Text = Npc(EditorIndex).DropChance
-            .scrlNum.Value = Npc(EditorIndex).DropItem
-            .scrlValue.Value = Npc(EditorIndex).DropItemValue
+            .txtChance.Text = Npc(EditorIndex).DropChance(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
+            .scrlNum.Value = Npc(EditorIndex).DropItem(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
+            frmEditor_NPC.lblNum.Text = "Num: " & frmEditor_NPC.scrlNum.Value
+            If frmEditor_NPC.scrlNum.Value > 0 Then
+                frmEditor_NPC.lblItemName.Text = "Item: " & Trim$(Item(frmEditor_NPC.scrlNum.Value).Name)
+            End If
+            .scrlValue.Value = Npc(EditorIndex).DropItemValue(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
+            frmEditor_NPC.lblValue.Text = "Value: " & frmEditor_NPC.scrlValue.Value
+
             .txtHP.Text = Npc(EditorIndex).HP
             .txtEXP.Text = Npc(EditorIndex).EXP
             .scrlQuest.Value = Npc(EditorIndex).QuestNum
@@ -780,11 +796,11 @@ Module ClientGameEditors
             .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.endurance)
             .scrlInt.Value = Npc(EditorIndex).Stat(Stats.intelligence)
             .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.spirit)
-            .scrlWill.Value = Npc(EditorIndex).Stat(Stats.willpower)
+            .scrlWill.Value = Npc(EditorIndex).Stat(Stats.luck)
             .scrlVit.Value = Npc(EditorIndex).Stat(Stats.vitality)
         End With
 
-        Call EditorNpc_DrawSprite()
+        EditorNpc_DrawSprite()
         NPC_Changed(EditorIndex) = True
     End Sub
 
@@ -793,7 +809,7 @@ Module ClientGameEditors
 
         For i = 1 To MAX_NPCS
             If NPC_Changed(i) Then
-                Call SendSaveNpc(i)
+                SendSaveNpc(i)
             End If
         Next
 

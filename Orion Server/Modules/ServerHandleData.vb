@@ -464,8 +464,8 @@
                         tempitem = 0
                     End If
 
-                    Call SendWornEquipment(Index)
-                    Call SendMapEquipment(Index)
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
                 Case ITEM_TYPE_WEAPON
 
                     For i = 1 To Stats.Stat_Count - 1
@@ -488,8 +488,8 @@
                         tempitem = 0
                     End If
 
-                    Call SendWornEquipment(Index)
-                    Call SendMapEquipment(Index)
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
                 Case ITEM_TYPE_HELMET
 
                     For i = 1 To Stats.Stat_Count - 1
@@ -512,8 +512,8 @@
                         tempitem = 0
                     End If
 
-                    Call SendWornEquipment(Index)
-                    Call SendMapEquipment(Index)
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
                 Case ITEM_TYPE_SHIELD
 
                     For i = 1 To Stats.Stat_Count - 1
@@ -536,8 +536,58 @@
                         tempitem = 0
                     End If
 
-                    Call SendWornEquipment(Index)
-                    Call SendMapEquipment(Index)
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
+
+                Case ITEM_TYPE_SHOES
+
+                    For i = 1 To Stats.Stat_Count - 1
+                        If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
+                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            Exit Sub
+                        End If
+                    Next
+
+                    If GetPlayerEquipment(Index, Equipment.Shoes) > 0 Then
+                        tempitem = GetPlayerEquipment(Index, Equipment.Shoes)
+                    End If
+
+                    SetPlayerEquipment(Index, GetPlayerInvItemNum(Index, invnum), Equipment.Shoes)
+                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
+
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
+                    End If
+
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
+
+                Case ITEM_TYPE_GLOVES
+
+                    For i = 1 To Stats.Stat_Count - 1
+                        If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
+                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
+                            Exit Sub
+                        End If
+                    Next
+
+                    If GetPlayerEquipment(Index, Equipment.Gloves) > 0 Then
+                        tempitem = GetPlayerEquipment(Index, Equipment.Gloves)
+                    End If
+
+                    SetPlayerEquipment(Index, GetPlayerInvItemNum(Index, invnum), Equipment.Gloves)
+                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(GetPlayerInvItemNum(Index, invnum)).Name))
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 1)
+
+                    If tempitem > 0 Then
+                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                        tempitem = 0
+                    End If
+
+                    SendWornEquipment(Index)
+                    SendMapEquipment(Index)
                 Case ITEM_TYPE_POTIONADDHP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -866,23 +916,23 @@
         i = FindPlayer(name)
 
         If i > 0 Then
-            Call PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i))
+            PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i))
 
             If GetPlayerAccess(Index) > ADMIN_MONITOR Then
-                Call PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-")
-                Call PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
-                Call PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP))
-                Call PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.spirit))
+                PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-")
+                PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
+                PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP))
+                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.spirit))
                 n = (GetPlayerStat(i, Stats.strength) \ 2) + (GetPlayerLevel(i) \ 2)
                 i = (GetPlayerStat(i, Stats.endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
                 If n > 100 Then n = 100
                 If i > 100 Then i = 100
-                Call PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+                PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
             End If
 
         Else
-            Call PlayerMsg(Index, "Player is not online.")
+            PlayerMsg(Index, "Player is not online.")
         End If
 
         Buffer = Nothing
@@ -907,16 +957,16 @@
 
         If n <> Index Then
             If n > 0 Then
-                Call PlayerWarp(Index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
-                Call PlayerMsg(n, GetPlayerName(Index) & " has warped to you.")
-                Call PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".")
-                Call Addlog(GetPlayerName(Index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
+                PlayerWarp(Index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
+                PlayerMsg(n, GetPlayerName(Index) & " has warped to you.")
+                PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".")
+                Addlog(GetPlayerName(Index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot warp to yourself!")
+            PlayerMsg(Index, "You cannot warp to yourself, dumbass!")
         End If
 
     End Sub
@@ -933,32 +983,28 @@
         If Buffer.ReadLong <> ClientPackets.CWarpToMe Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < ADMIN_MAPPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(Index) < ADMIN_MAPPER Then Exit Sub
 
         ' The player
-        n = FindPlayer(Buffer.ReadString) 'Parse(1))
+        n = FindPlayer(Buffer.ReadString)
         Buffer = Nothing
 
         If n <> Index Then
             If n > 0 Then
-                Call PlayerWarp(n, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
-                Call PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".")
-                Call PlayerMsg(Index, GetPlayerName(n) & " has been summoned.")
-                Call Addlog(GetPlayerName(Index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
+                PlayerWarp(n, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+                PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".")
+                PlayerMsg(Index, GetPlayerName(n) & " has been summoned.")
+                Addlog(GetPlayerName(Index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.")
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot warp yourself to yourself!")
+            PlayerMsg(Index, "You cannot warp yourself to yourself!")
         End If
 
     End Sub
-    ' :::::::::::::::::::::::
-    ' ::   Warp to Packet  ::
-    ' :::::::::::::::::::::::
+
     Sub Packet_WarpTo(ByVal Index As Long, ByVal Data() As Byte)
         Dim n As Long
         Dim Buffer As ByteBuffer
@@ -968,22 +1014,18 @@
         If Buffer.ReadLong <> ClientPackets.CWarpTo Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < ADMIN_MAPPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(Index) < ADMIN_MAPPER Then Exit Sub
 
         ' The map
-        n = Buffer.ReadLong 'CLng(Parse(1))
+        n = Buffer.ReadLong
         Buffer = Nothing
 
         ' Prevent hacking
-        If n < 0 Or n > MAX_MAPS Then
-            Exit Sub
-        End If
+        If n < 0 Or n > MAX_MAPS Then Exit Sub
 
-        Call PlayerWarp(Index, n, GetPlayerX(Index), GetPlayerY(Index))
-        Call PlayerMsg(Index, "You have been warped to map #" & n)
-        Call Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
+        PlayerWarp(Index, n, GetPlayerX(Index), GetPlayerY(Index))
+        PlayerMsg(Index, "You have been warped to map #" & n)
+        Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
 
     End Sub
 
@@ -1643,6 +1685,7 @@
         Item(n).price = Buffer.ReadLong()
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
+        Item(n).Randomize = Buffer.ReadLong()
 
         For i = 0 To Stats.Stat_Count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -1690,7 +1733,7 @@
 
     Sub Packet_SaveNPC(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
-        Dim NpcNum As Long
+        Dim NpcNum As Long, i As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CSaveNpc Then Exit Sub
@@ -1706,9 +1749,12 @@
         Npc(NpcNum).Animation = buffer.ReadLong()
         Npc(NpcNum).AttackSay = buffer.ReadString()
         Npc(NpcNum).Behaviour = buffer.ReadLong()
-        Npc(NpcNum).DropChance = buffer.ReadLong()
-        Npc(NpcNum).DropItem = buffer.ReadLong()
-        Npc(NpcNum).DropItemValue = buffer.ReadLong()
+        For i = 1 To 5
+            Npc(NpcNum).DropChance(i) = buffer.ReadLong()
+            Npc(NpcNum).DropItem(i) = buffer.ReadLong()
+            Npc(NpcNum).DropItemValue(i) = buffer.ReadLong()
+        Next
+
         Npc(NpcNum).Exp = buffer.ReadLong()
         Npc(NpcNum).Faction = buffer.ReadLong()
         Npc(NpcNum).HP = buffer.ReadLong()
@@ -2221,7 +2267,7 @@
         If buffer.ReadLong <> ClientPackets.CCast Then Exit Sub
 
         ' Spell slot
-        n = buffer.ReadLong 'CLng(Parse(1))
+        n = buffer.ReadLong
         buffer = Nothing
         ' set the spell buffer before castin
         BufferSpell(index, n)

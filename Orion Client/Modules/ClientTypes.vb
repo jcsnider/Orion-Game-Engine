@@ -191,6 +191,7 @@
         Dim Stat_Req() As Byte
         Dim Animation As Long
         Dim Paperdoll As Long
+        Dim Randomize As Byte
 
         'Housing
         Dim FurnitureWidth As Long
@@ -213,15 +214,15 @@
     Public Structure NpcRec
         Dim Name As String
         Dim AttackSay As String
-        Dim Sprite As Integer
+        Dim Sprite As Long
         Dim SpawnSecs As Long
         Dim Behaviour As Byte
         Dim Range As Byte
-        Dim DropChance As Integer
-        Dim DropItem As Byte
-        Dim DropItemValue As Integer
+        Dim DropChance() As Long
+        Dim DropItem() As Long
+        Dim DropItemValue() As Long
         Dim Stat() As Byte
-        Dim faction As Byte
+        Dim Faction As Byte
         Dim HP As Long
         Dim EXP As Long
         Dim Animation As Long

@@ -61,7 +61,6 @@ Partial Class frmMenu
         Me.lbl = New System.Windows.Forms.Label()
         Me.lblServerStatus = New System.Windows.Forms.Label()
         Me.tmrConnect = New System.Windows.Forms.Timer(Me.components)
-        Me.tmrDrawCharacter = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
@@ -325,9 +324,9 @@ Partial Class frmMenu
         '
         'placeholderforsprite
         '
-        Me.placeholderforsprite.Location = New System.Drawing.Point(325, 101)
+        Me.placeholderforsprite.Location = New System.Drawing.Point(319, 53)
         Me.placeholderforsprite.Name = "placeholderforsprite"
-        Me.placeholderforsprite.Size = New System.Drawing.Size(38, 60)
+        Me.placeholderforsprite.Size = New System.Drawing.Size(48, 60)
         Me.placeholderforsprite.TabIndex = 41
         Me.placeholderforsprite.TabStop = False
         Me.placeholderforsprite.Visible = False
@@ -464,11 +463,6 @@ Partial Class frmMenu
         '
         Me.tmrConnect.Enabled = True
         Me.tmrConnect.Interval = 1000
-        '
-        'tmrDrawCharacter
-        '
-        Me.tmrDrawCharacter.Enabled = True
-        Me.tmrDrawCharacter.Interval = 1000
         '
         'pnlMainMenu
         '
@@ -638,7 +632,7 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(721, 541)
+        Me.ClientSize = New System.Drawing.Size(711, 541)
         Me.Controls.Add(Me.pnlIPConfig)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCredits)
@@ -711,7 +705,6 @@ Partial Class frmMenu
     Friend WithEvents lbl As System.Windows.Forms.Label
     Friend WithEvents lblServerStatus As System.Windows.Forms.Label
     Friend WithEvents tmrConnect As System.Windows.Forms.Timer
-    Friend WithEvents tmrDrawCharacter As System.Windows.Forms.Timer
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblNews As System.Windows.Forms.Label

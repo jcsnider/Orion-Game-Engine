@@ -46,7 +46,7 @@ Partial Class frmEditor_NPC
         Me.scrlInt = New System.Windows.Forms.HScrollBar()
         Me.lblEnd = New System.Windows.Forms.Label()
         Me.scrlEnd = New System.Windows.Forms.HScrollBar()
-        Me.lblWill = New System.Windows.Forms.Label()
+        Me.lblLuck = New System.Windows.Forms.Label()
         Me.scrlWill = New System.Windows.Forms.HScrollBar()
         Me.lblStr = New System.Windows.Forms.Label()
         Me.scrlStr = New System.Windows.Forms.HScrollBar()
@@ -72,6 +72,8 @@ Partial Class frmEditor_NPC
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.cmbDropSlot = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -84,7 +86,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(231, 501)
+        Me.GroupBox1.Size = New System.Drawing.Size(231, 499)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "NPC List"
@@ -94,18 +96,18 @@ Partial Class frmEditor_NPC
         Me.lstIndex.FormattingEnabled = True
         Me.lstIndex.Location = New System.Drawing.Point(6, 19)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(219, 459)
+        Me.lstIndex.Size = New System.Drawing.Size(219, 472)
         Me.lstIndex.TabIndex = 1
         '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.scrlQuest)
         Me.GroupBox2.Controls.Add(Me.lblQuest)
-        Me.GroupBox2.Controls.Add(Me.GroupBox4)
-        Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Controls.Add(Me.scrlAnimation)
         Me.GroupBox2.Controls.Add(Me.lblAnimation)
+        Me.GroupBox2.Controls.Add(Me.txtSpawnSecs)
         Me.GroupBox2.Controls.Add(Me.txtEXP)
+        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtHP)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -124,7 +126,7 @@ Partial Class frmEditor_NPC
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(243, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(357, 501)
+        Me.GroupBox2.Size = New System.Drawing.Size(357, 246)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "NPC Properties"
@@ -132,15 +134,15 @@ Partial Class frmEditor_NPC
         'scrlQuest
         '
         Me.scrlQuest.LargeChange = 1
-        Me.scrlQuest.Location = New System.Drawing.Point(84, 126)
+        Me.scrlQuest.Location = New System.Drawing.Point(267, 102)
         Me.scrlQuest.Name = "scrlQuest"
-        Me.scrlQuest.Size = New System.Drawing.Size(211, 15)
+        Me.scrlQuest.Size = New System.Drawing.Size(84, 15)
         Me.scrlQuest.TabIndex = 53
         '
         'lblQuest
         '
         Me.lblQuest.AutoSize = True
-        Me.lblQuest.Location = New System.Drawing.Point(10, 126)
+        Me.lblQuest.Location = New System.Drawing.Point(199, 102)
         Me.lblQuest.Name = "lblQuest"
         Me.lblQuest.Size = New System.Drawing.Size(47, 13)
         Me.lblQuest.TabIndex = 52
@@ -148,18 +150,18 @@ Partial Class frmEditor_NPC
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.Label9)
+        Me.GroupBox4.Controls.Add(Me.cmbDropSlot)
         Me.GroupBox4.Controls.Add(Me.scrlValue)
         Me.GroupBox4.Controls.Add(Me.scrlNum)
         Me.GroupBox4.Controls.Add(Me.lblValue)
         Me.GroupBox4.Controls.Add(Me.lblNum)
         Me.GroupBox4.Controls.Add(Me.lblItemName)
-        Me.GroupBox4.Controls.Add(Me.txtSpawnSecs)
-        Me.GroupBox4.Controls.Add(Me.Label8)
         Me.GroupBox4.Controls.Add(Me.txtChance)
         Me.GroupBox4.Controls.Add(Me.Label7)
-        Me.GroupBox4.Location = New System.Drawing.Point(12, 355)
+        Me.GroupBox4.Location = New System.Drawing.Point(243, 355)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(327, 140)
+        Me.GroupBox4.Size = New System.Drawing.Size(357, 119)
         Me.GroupBox4.TabIndex = 47
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Drop"
@@ -167,7 +169,7 @@ Partial Class frmEditor_NPC
         'scrlValue
         '
         Me.scrlValue.LargeChange = 1
-        Me.scrlValue.Location = New System.Drawing.Point(113, 116)
+        Me.scrlValue.Location = New System.Drawing.Point(118, 94)
         Me.scrlValue.Name = "scrlValue"
         Me.scrlValue.Size = New System.Drawing.Size(211, 15)
         Me.scrlValue.TabIndex = 9
@@ -175,7 +177,7 @@ Partial Class frmEditor_NPC
         'scrlNum
         '
         Me.scrlNum.LargeChange = 1
-        Me.scrlNum.Location = New System.Drawing.Point(113, 89)
+        Me.scrlNum.Location = New System.Drawing.Point(118, 67)
         Me.scrlNum.Name = "scrlNum"
         Me.scrlNum.Size = New System.Drawing.Size(211, 15)
         Me.scrlNum.TabIndex = 8
@@ -183,7 +185,7 @@ Partial Class frmEditor_NPC
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(6, 114)
+        Me.lblValue.Location = New System.Drawing.Point(11, 92)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(46, 13)
         Me.lblValue.TabIndex = 6
@@ -192,7 +194,7 @@ Partial Class frmEditor_NPC
         'lblNum
         '
         Me.lblNum.AutoSize = True
-        Me.lblNum.Location = New System.Drawing.Point(5, 91)
+        Me.lblNum.Location = New System.Drawing.Point(10, 69)
         Me.lblNum.Name = "lblNum"
         Me.lblNum.Size = New System.Drawing.Size(41, 13)
         Me.lblNum.TabIndex = 5
@@ -201,7 +203,7 @@ Partial Class frmEditor_NPC
         'lblItemName
         '
         Me.lblItemName.AutoSize = True
-        Me.lblItemName.Location = New System.Drawing.Point(6, 68)
+        Me.lblItemName.Location = New System.Drawing.Point(11, 46)
         Me.lblItemName.Name = "lblItemName"
         Me.lblItemName.Size = New System.Drawing.Size(59, 13)
         Me.lblItemName.TabIndex = 4
@@ -209,16 +211,16 @@ Partial Class frmEditor_NPC
         '
         'txtSpawnSecs
         '
-        Me.txtSpawnSecs.Location = New System.Drawing.Point(197, 41)
+        Me.txtSpawnSecs.Location = New System.Drawing.Point(132, 210)
         Me.txtSpawnSecs.Name = "txtSpawnSecs"
-        Me.txtSpawnSecs.Size = New System.Drawing.Size(116, 20)
+        Me.txtSpawnSecs.Size = New System.Drawing.Size(85, 20)
         Me.txtSpawnSecs.TabIndex = 3
         Me.txtSpawnSecs.Text = "0"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 41)
+        Me.Label8.Location = New System.Drawing.Point(9, 213)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(117, 13)
         Me.Label8.TabIndex = 2
@@ -226,16 +228,16 @@ Partial Class frmEditor_NPC
         '
         'txtChance
         '
-        Me.txtChance.Location = New System.Drawing.Point(197, 16)
+        Me.txtChance.Location = New System.Drawing.Point(267, 16)
         Me.txtChance.Name = "txtChance"
-        Me.txtChance.Size = New System.Drawing.Size(116, 20)
+        Me.txtChance.Size = New System.Drawing.Size(82, 20)
         Me.txtChance.TabIndex = 1
         Me.txtChance.Text = "0"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 18)
+        Me.Label7.Location = New System.Drawing.Point(178, 19)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(83, 13)
         Me.Label7.TabIndex = 0
@@ -251,13 +253,13 @@ Partial Class frmEditor_NPC
         Me.GroupBox3.Controls.Add(Me.scrlInt)
         Me.GroupBox3.Controls.Add(Me.lblEnd)
         Me.GroupBox3.Controls.Add(Me.scrlEnd)
-        Me.GroupBox3.Controls.Add(Me.lblWill)
+        Me.GroupBox3.Controls.Add(Me.lblLuck)
         Me.GroupBox3.Controls.Add(Me.scrlWill)
         Me.GroupBox3.Controls.Add(Me.lblStr)
         Me.GroupBox3.Controls.Add(Me.scrlStr)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 258)
+        Me.GroupBox3.Location = New System.Drawing.Point(243, 258)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(329, 91)
+        Me.GroupBox3.Size = New System.Drawing.Size(357, 91)
         Me.GroupBox3.TabIndex = 46
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Stats"
@@ -265,16 +267,16 @@ Partial Class frmEditor_NPC
         'lblSpr
         '
         Me.lblSpr.AutoSize = True
-        Me.lblSpr.Location = New System.Drawing.Point(231, 68)
+        Me.lblSpr.Location = New System.Drawing.Point(264, 68)
         Me.lblSpr.Name = "lblSpr"
-        Me.lblSpr.Size = New System.Drawing.Size(35, 13)
+        Me.lblSpr.Size = New System.Drawing.Size(42, 13)
         Me.lblSpr.TabIndex = 11
-        Me.lblSpr.Text = "Spr: 0"
+        Me.lblSpr.Text = "Spirit: 0"
         '
         'scrlSpr
         '
         Me.scrlSpr.LargeChange = 1
-        Me.scrlSpr.Location = New System.Drawing.Point(234, 55)
+        Me.scrlSpr.Location = New System.Drawing.Point(267, 55)
         Me.scrlSpr.Name = "scrlSpr"
         Me.scrlSpr.Size = New System.Drawing.Size(82, 13)
         Me.scrlSpr.TabIndex = 10
@@ -282,16 +284,16 @@ Partial Class frmEditor_NPC
         'lblVit
         '
         Me.lblVit.AutoSize = True
-        Me.lblVit.Location = New System.Drawing.Point(231, 29)
+        Me.lblVit.Location = New System.Drawing.Point(264, 29)
         Me.lblVit.Name = "lblVit"
-        Me.lblVit.Size = New System.Drawing.Size(31, 13)
+        Me.lblVit.Size = New System.Drawing.Size(49, 13)
         Me.lblVit.TabIndex = 9
-        Me.lblVit.Text = "Vit: 0"
+        Me.lblVit.Text = "Vitality: 0"
         '
         'scrlVit
         '
         Me.scrlVit.LargeChange = 1
-        Me.scrlVit.Location = New System.Drawing.Point(234, 16)
+        Me.scrlVit.Location = New System.Drawing.Point(267, 16)
         Me.scrlVit.Name = "scrlVit"
         Me.scrlVit.Size = New System.Drawing.Size(82, 13)
         Me.scrlVit.TabIndex = 8
@@ -299,16 +301,16 @@ Partial Class frmEditor_NPC
         'lblInt
         '
         Me.lblInt.AutoSize = True
-        Me.lblInt.Location = New System.Drawing.Point(118, 68)
+        Me.lblInt.Location = New System.Drawing.Point(132, 68)
         Me.lblInt.Name = "lblInt"
-        Me.lblInt.Size = New System.Drawing.Size(31, 13)
+        Me.lblInt.Size = New System.Drawing.Size(73, 13)
         Me.lblInt.TabIndex = 7
-        Me.lblInt.Text = "Int: 0"
+        Me.lblInt.Text = "Intelligence: 0"
         '
         'scrlInt
         '
         Me.scrlInt.LargeChange = 1
-        Me.scrlInt.Location = New System.Drawing.Point(121, 55)
+        Me.scrlInt.Location = New System.Drawing.Point(135, 55)
         Me.scrlInt.Name = "scrlInt"
         Me.scrlInt.Size = New System.Drawing.Size(82, 13)
         Me.scrlInt.TabIndex = 6
@@ -316,28 +318,28 @@ Partial Class frmEditor_NPC
         'lblEnd
         '
         Me.lblEnd.AutoSize = True
-        Me.lblEnd.Location = New System.Drawing.Point(118, 29)
+        Me.lblEnd.Location = New System.Drawing.Point(132, 29)
         Me.lblEnd.Name = "lblEnd"
-        Me.lblEnd.Size = New System.Drawing.Size(38, 13)
+        Me.lblEnd.Size = New System.Drawing.Size(71, 13)
         Me.lblEnd.TabIndex = 5
-        Me.lblEnd.Text = "End: 0"
+        Me.lblEnd.Text = "Endurance: 0"
         '
         'scrlEnd
         '
         Me.scrlEnd.LargeChange = 1
-        Me.scrlEnd.Location = New System.Drawing.Point(121, 16)
+        Me.scrlEnd.Location = New System.Drawing.Point(135, 16)
         Me.scrlEnd.Name = "scrlEnd"
         Me.scrlEnd.Size = New System.Drawing.Size(82, 13)
         Me.scrlEnd.TabIndex = 4
         '
-        'lblWill
+        'lblLuck
         '
-        Me.lblWill.AutoSize = True
-        Me.lblWill.Location = New System.Drawing.Point(8, 68)
-        Me.lblWill.Name = "lblWill"
-        Me.lblWill.Size = New System.Drawing.Size(36, 13)
-        Me.lblWill.TabIndex = 3
-        Me.lblWill.Text = "Will: 0"
+        Me.lblLuck.AutoSize = True
+        Me.lblLuck.Location = New System.Drawing.Point(8, 68)
+        Me.lblLuck.Name = "lblLuck"
+        Me.lblLuck.Size = New System.Drawing.Size(43, 13)
+        Me.lblLuck.TabIndex = 3
+        Me.lblLuck.Text = "Luck: 0"
         '
         'scrlWill
         '
@@ -352,9 +354,9 @@ Partial Class frmEditor_NPC
         Me.lblStr.AutoSize = True
         Me.lblStr.Location = New System.Drawing.Point(8, 29)
         Me.lblStr.Name = "lblStr"
-        Me.lblStr.Size = New System.Drawing.Size(32, 13)
+        Me.lblStr.Size = New System.Drawing.Size(59, 13)
         Me.lblStr.TabIndex = 1
-        Me.lblStr.Text = "Str: 0"
+        Me.lblStr.Text = "Strenght: 0"
         '
         'scrlStr
         '
@@ -367,15 +369,15 @@ Partial Class frmEditor_NPC
         'scrlAnimation
         '
         Me.scrlAnimation.LargeChange = 1
-        Me.scrlAnimation.Location = New System.Drawing.Point(153, 237)
+        Me.scrlAnimation.Location = New System.Drawing.Point(199, 122)
         Me.scrlAnimation.Name = "scrlAnimation"
-        Me.scrlAnimation.Size = New System.Drawing.Size(189, 18)
+        Me.scrlAnimation.Size = New System.Drawing.Size(152, 18)
         Me.scrlAnimation.TabIndex = 45
         '
         'lblAnimation
         '
         Me.lblAnimation.AutoSize = True
-        Me.lblAnimation.Location = New System.Drawing.Point(10, 242)
+        Me.lblAnimation.Location = New System.Drawing.Point(10, 127)
         Me.lblAnimation.Name = "lblAnimation"
         Me.lblAnimation.Size = New System.Drawing.Size(85, 13)
         Me.lblAnimation.TabIndex = 44
@@ -383,7 +385,7 @@ Partial Class frmEditor_NPC
         '
         'txtEXP
         '
-        Me.txtEXP.Location = New System.Drawing.Point(243, 204)
+        Me.txtEXP.Location = New System.Drawing.Point(233, 210)
         Me.txtEXP.Name = "txtEXP"
         Me.txtEXP.Size = New System.Drawing.Size(100, 20)
         Me.txtEXP.TabIndex = 43
@@ -391,7 +393,7 @@ Partial Class frmEditor_NPC
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(196, 209)
+        Me.Label6.Location = New System.Drawing.Point(233, 190)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(31, 13)
         Me.Label6.TabIndex = 42
@@ -399,7 +401,7 @@ Partial Class frmEditor_NPC
         '
         'txtHP
         '
-        Me.txtHP.Location = New System.Drawing.Point(57, 206)
+        Me.txtHP.Location = New System.Drawing.Point(233, 156)
         Me.txtHP.Name = "txtHP"
         Me.txtHP.Size = New System.Drawing.Size(100, 20)
         Me.txtHP.TabIndex = 41
@@ -407,7 +409,7 @@ Partial Class frmEditor_NPC
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(10, 211)
+        Me.Label5.Location = New System.Drawing.Point(233, 140)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 13)
         Me.Label5.TabIndex = 40
@@ -418,9 +420,9 @@ Partial Class frmEditor_NPC
         Me.cmbFaction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFaction.FormattingEnabled = True
         Me.cmbFaction.Items.AddRange(New Object() {"None", "Baddies", "Goodies"})
-        Me.cmbFaction.Location = New System.Drawing.Point(81, 179)
+        Me.cmbFaction.Location = New System.Drawing.Point(81, 182)
         Me.cmbFaction.Name = "cmbFaction"
-        Me.cmbFaction.Size = New System.Drawing.Size(262, 21)
+        Me.cmbFaction.Size = New System.Drawing.Size(146, 21)
         Me.cmbFaction.TabIndex = 39
         '
         'cmbBehaviour
@@ -428,15 +430,15 @@ Partial Class frmEditor_NPC
         Me.cmbBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBehaviour.FormattingEnabled = True
         Me.cmbBehaviour.Items.AddRange(New Object() {"Attack on sight", "Attack when attacked", "Friendly", "Shop keeper", "Guard", "Quest"})
-        Me.cmbBehaviour.Location = New System.Drawing.Point(81, 152)
+        Me.cmbBehaviour.Location = New System.Drawing.Point(81, 156)
         Me.cmbBehaviour.Name = "cmbBehaviour"
-        Me.cmbBehaviour.Size = New System.Drawing.Size(262, 21)
+        Me.cmbBehaviour.Size = New System.Drawing.Size(146, 21)
         Me.cmbBehaviour.TabIndex = 38
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 182)
+        Me.Label4.Location = New System.Drawing.Point(11, 185)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 13)
         Me.Label4.TabIndex = 10
@@ -445,7 +447,7 @@ Partial Class frmEditor_NPC
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 155)
+        Me.Label3.Location = New System.Drawing.Point(9, 159)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 13)
         Me.Label3.TabIndex = 9
@@ -455,9 +457,9 @@ Partial Class frmEditor_NPC
         '
         Me.picSprite.BackColor = System.Drawing.Color.Black
         Me.picSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.picSprite.Location = New System.Drawing.Point(298, 66)
+        Me.picSprite.Location = New System.Drawing.Point(298, 16)
         Me.picSprite.Name = "picSprite"
-        Me.picSprite.Size = New System.Drawing.Size(53, 49)
+        Me.picSprite.Size = New System.Drawing.Size(53, 72)
         Me.picSprite.TabIndex = 8
         Me.picSprite.TabStop = False
         '
@@ -466,7 +468,7 @@ Partial Class frmEditor_NPC
         Me.scrlRange.LargeChange = 1
         Me.scrlRange.Location = New System.Drawing.Point(84, 102)
         Me.scrlRange.Name = "scrlRange"
-        Me.scrlRange.Size = New System.Drawing.Size(211, 15)
+        Me.scrlRange.Size = New System.Drawing.Size(84, 15)
         Me.scrlRange.TabIndex = 7
         '
         'scrlSprite
@@ -529,7 +531,7 @@ Partial Class frmEditor_NPC
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(495, 513)
+        Me.btnCancel.Location = New System.Drawing.Point(495, 480)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 40
@@ -538,7 +540,7 @@ Partial Class frmEditor_NPC
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(384, 513)
+        Me.btnDelete.Location = New System.Drawing.Point(370, 480)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 39
@@ -547,21 +549,41 @@ Partial Class frmEditor_NPC
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(273, 513)
+        Me.btnSave.Location = New System.Drawing.Point(243, 480)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 38
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'cmbDropSlot
+        '
+        Me.cmbDropSlot.FormattingEnabled = True
+        Me.cmbDropSlot.Items.AddRange(New Object() {"1", "2", "3", "4", "5"})
+        Me.cmbDropSlot.Location = New System.Drawing.Point(72, 16)
+        Me.cmbDropSlot.Name = "cmbDropSlot"
+        Me.cmbDropSlot.Size = New System.Drawing.Size(71, 21)
+        Me.cmbDropSlot.TabIndex = 10
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(9, 19)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(57, 13)
+        Me.Label9.TabIndex = 11
+        Me.Label9.Text = "Drop Slot: "
+        '
         'frmEditor_NPC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(612, 550)
+        Me.ClientSize = New System.Drawing.Size(608, 511)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -612,7 +634,7 @@ Partial Class frmEditor_NPC
     Friend WithEvents scrlInt As System.Windows.Forms.HScrollBar
     Friend WithEvents lblEnd As System.Windows.Forms.Label
     Friend WithEvents scrlEnd As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblWill As System.Windows.Forms.Label
+    Friend WithEvents lblLuck As System.Windows.Forms.Label
     Friend WithEvents scrlWill As System.Windows.Forms.HScrollBar
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents txtSpawnSecs As System.Windows.Forms.TextBox
@@ -629,4 +651,6 @@ Partial Class frmEditor_NPC
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents scrlQuest As Windows.Forms.HScrollBar
     Friend WithEvents lblQuest As Windows.Forms.Label
+    Friend WithEvents Label9 As Windows.Forms.Label
+    Friend WithEvents cmbDropSlot As Windows.Forms.ComboBox
 End Class

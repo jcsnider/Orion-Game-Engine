@@ -543,12 +543,13 @@ Public Class frmMainGame
         If shopslot <> 0 Then
             x2 = x + pnlShop.Left + pnlShopItems.Left + 3
             y2 = y + pnlShop.Top + pnlShopItems.Left + 19
-            UpdateDescWindow(Shop(InShop).TradeItem(shopslot).Item, Shop(InShop).TradeItem(shopslot).ItemValue, x2, y2)
+            UpdateDescWindow(Shop(InShop).TradeItem(shopslot).Item, Shop(InShop).TradeItem(shopslot).ItemValue)
             LastItemDesc = Shop(InShop).TradeItem(shopslot).Item
+            ShowItemDesc = True
             Exit Sub
         End If
 
-        pnlItemDesc.Visible = False
+        ShowItemDesc = False
         LastItemDesc = 0
     End Sub
 
@@ -679,12 +680,13 @@ Public Class frmMainGame
 
                 x2 = x + pnlBank.Left + 6
                 y2 = y + pnlBank.Top + 6
-                UpdateDescWindow(Bank.Item(bankNum).Num, Bank.Item(bankNum).Value, x2, y2)
+                UpdateDescWindow(Bank.Item(bankNum).Num, Bank.Item(bankNum).Value)
+                ShowItemDesc = True
                 Exit Sub
             End If
         End If
 
-        Me.pnlItemDesc.Visible = False
+        ShowItemDesc = False
         LastBankDesc = 0
     End Sub
 
@@ -756,12 +758,13 @@ Public Class frmMainGame
         If TradeNum <> 0 Then
             x = x + pnlTrade.Left + pnlYourTrade.Left + 4
             y = y + pnlTrade.Top + pnlYourTrade.Top + 4
-            UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value, x, y)
+            UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value)
             LastItemDesc = GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num) ' set it so you don't re-set values
+            ShowItemDesc = True
             Exit Sub
         End If
 
-        pnlItemDesc.Visible = False
+        ShowItemDesc = False
         LastItemDesc = 0 ' no item was last loaded
     End Sub
 
@@ -816,12 +819,13 @@ Public Class frmMainGame
         If TradeNum <> 0 Then
             x = x + pnlTrade.Left + pnlTheirTrade.Left + 4
             y = y + pnlTrade.Top + pnlTheirTrade.Top + 4
-            UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value, x, y)
+            UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value)
             LastItemDesc = TradeTheirOffer(TradeNum).Num ' set it so you don't re-set values
+            ShowItemDesc = True
             Exit Sub
         End If
 
-        pnlItemDesc.Visible = False
+        ShowItemDesc = False
         LastItemDesc = 0 ' no item was last loaded
     End Sub
 

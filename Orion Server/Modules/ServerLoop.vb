@@ -820,9 +820,9 @@
                                     If CanNpcAttackPlayer(x, Target) Then
                                         If Not CanPlayerBlockHit(Target) Then
                                             Damage = Npc(NpcNum).Stat(Stats.strength) - GetPlayerProtection(Target)
-                                            Call NpcAttackPlayer(x, Target, Damage)
+                                            NpcAttackPlayer(x, Target, Damage)
                                         Else
-                                            Call PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, Equipment.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!")
+                                            PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, Equipment.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!")
                                             SendActionMsg(GetPlayerMap(Target), "BLOCK!", Cyan, 1, (GetPlayerX(Target) * 32), (GetPlayerY(Target) * 32))
                                         End If
                                     End If

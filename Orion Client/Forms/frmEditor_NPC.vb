@@ -41,8 +41,8 @@
     End Sub
 
     Private Sub scrlWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlWill.ValueChanged
-        lblWill.Text = "Will: " & scrlWill.Value
-        Npc(EditorIndex).Stat(Stats.willpower) = scrlWill.Value
+        lblLuck.Text = "Will: " & scrlWill.Value
+        Npc(EditorIndex).Stat(Stats.luck) = scrlWill.Value
     End Sub
 
     Private Sub scrlInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlInt.ValueChanged
@@ -60,14 +60,16 @@
 
         If scrlNum.Value > 0 Then
             lblItemName.Text = "Item: " & Trim$(Item(scrlNum.Value).Name)
+        Else
+            lblItemName.Text = "Item: "
         End If
 
-        Npc(EditorIndex).DropItem = scrlNum.Value
+        Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1) = scrlNum.Value
     End Sub
 
     Private Sub scrlValue_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlValue.ValueChanged
         lblValue.Text = "Value: " & scrlValue.Value
-        Npc(EditorIndex).DropItemValue = scrlValue.Value
+        Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1) = scrlValue.Value
     End Sub
 
     Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
@@ -92,7 +94,7 @@
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
-        Call NpcEditorCancel()
+        NpcEditorCancel()
     End Sub
 
     Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
@@ -106,7 +108,7 @@
     End Sub
 
     Private Sub txtSpawnSecs_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtSpawnSecs.TextChanged
-        Npc(EditorIndex).SpawnSecs = txtSpawnSecs.Text
+        If IsNumeric(txtSpawnSecs.Text) Then Npc(EditorIndex).SpawnSecs = txtSpawnSecs.Text
     End Sub
 
     Private Sub txtAttackSay_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAttackSay.TextChanged
@@ -122,7 +124,7 @@
     End Sub
 
     Private Sub txtChance_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtChance.TextChanged
-        Npc(EditorIndex).DropChance = txtChance.Text
+        If IsNumeric(txtChance.Text) Then Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1) = txtChance.Text
     End Sub
 
     Private Sub scrlQuest_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlQuest.ValueChanged
@@ -132,5 +134,18 @@
 
     Private Sub frmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         scrlSprite.Maximum = NumCharacters
+    End Sub
+
+    Private Sub cmbDropSlot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDropSlot.SelectedIndexChanged
+        scrlNum.Value = Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1)
+        lblNum.Text = "Num: " & scrlNum.Value
+
+        If scrlNum.Value > 0 Then
+            lblItemName.Text = "Item: " & Trim$(Item(scrlNum.Value).Name)
+        End If
+        scrlValue.Value = Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1)
+        lblValue.Text = "Value: " & scrlValue.Value
+
+        txtChance.Text = Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1)
     End Sub
 End Class

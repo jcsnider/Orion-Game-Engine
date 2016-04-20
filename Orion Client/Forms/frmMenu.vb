@@ -9,7 +9,7 @@ Public Class frmMenu
     End Sub
 
     Private Sub Frmmenu_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        Me.Width = 730
+        Width = 730
         pnlLogin.Top = pnlMainMenu.Top
         pnlLogin.Left = pnlMainMenu.Left
 
@@ -46,21 +46,19 @@ Public Class frmMenu
 
         If isLoginLegal(Name, Password) Then
             If Password <> PasswordAgain Then
-                Call MsgBox("Passwords don't match.")
+                MsgBox("Passwords don't match.")
                 Exit Sub
             End If
 
-            If Not isStringLegal(Name) Then
-                Exit Sub
-            End If
+            If Not isStringLegal(Name) Then Exit Sub
 
-            Call MenuState(MENU_STATE_NEWACCOUNT)
+            MenuState(MENU_STATE_NEWACCOUNT)
         End If
     End Sub
 
     Sub DrawCharacter()
         If pnlNewChar.Visible = True Then
-            Dim g As Graphics = Me.pnlNewChar.CreateGraphics
+            Dim g As Graphics = pnlNewChar.CreateGraphics
             Dim filename As String
             Dim srcRect As Rectangle
             Dim destRect As Rectangle
@@ -99,12 +97,12 @@ Public Class frmMenu
 
     Private Sub lblSendLogin_Click(ByVal sender As Object, ByVal e As EventArgs)
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
-            Call MenuState(MENU_STATE_LOGIN)
+            MenuState(MENU_STATE_LOGIN)
         End If
     End Sub
 
     Private Sub lblCreateChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCreateChar.Click
-        Call MenuState(MENU_STATE_ADDCHAR)
+        MenuState(MENU_STATE_ADDCHAR)
     End Sub
 
     Private Sub pnlNewChar_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlNewChar.Paint
@@ -138,7 +136,6 @@ Public Class frmMenu
     Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
         newCharClass = cmbClass.SelectedIndex + 1
         DrawCharacter()
-
     End Sub
 
     Private Sub rdoMale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rdoMale.CheckedChanged
@@ -203,10 +200,6 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
-    Private Sub tmrDrawCharacter_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrDrawCharacter.Tick
-        DrawCharacter()
-    End Sub
-
     Private Sub btnPlay_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnPlay.Click
         If IsConnected() = True Then
             PlaySound("Click.ogg")
@@ -217,20 +210,22 @@ Public Class frmMenu
             pnlIPConfig.Visible = False
             txtLogin.Focus()
             If Options.SavePass = True Then
-                Me.txtLogin.Text = Options.Username
-                Me.txtPassword.Text = Options.Password
-                Me.chkSavePass.Checked = True
+                txtLogin.Text = Options.Username
+                txtPassword.Text = Options.Password
+                chkSavePass.Checked = True
             End If
         End If
     End Sub
 
     Private Sub btnRegister_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegister.Click
-        PlaySound("Click.ogg")
-        pnlRegisterVisible = True
-        pnlLoginVisible = False
-        pnlCharCreateVisible = False
-        pnlCreditsVisible = False
-        pnlIPConfig.Visible = False
+        If IsConnected() = True Then
+            PlaySound("Click.ogg")
+            pnlRegisterVisible = True
+            pnlLoginVisible = False
+            pnlCharCreateVisible = False
+            pnlCreditsVisible = False
+            pnlIPConfig.Visible = False
+        End If
     End Sub
 
     Private Sub btnCredits_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCredits.Click
@@ -271,7 +266,7 @@ Public Class frmMenu
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
-            Call MenuState(MENU_STATE_LOGIN)
+            MenuState(MENU_STATE_LOGIN)
         End If
     End Sub
 

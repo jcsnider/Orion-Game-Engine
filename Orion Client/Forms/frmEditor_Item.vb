@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 Public Class frmEditor_Item
-    Private Sub scrlPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPic.ValueChanged
+    Private Sub scrlPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPic.ValueChanged, scrlPic.Scroll
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblPic.Text = "Pic: " & scrlPic.Value
         Item(EditorIndex).Pic = scrlPic.Value
@@ -13,13 +13,13 @@ Public Class frmEditor_Item
         Item(EditorIndex).BindType = cmbBind.SelectedIndex
     End Sub
 
-    Private Sub scrlRarity_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRarity.ValueChanged
+    Private Sub scrlRarity_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRarity.ValueChanged, scrlRarity.Scroll
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblRarity.Text = "Rarity: " & scrlRarity.Value
         Item(EditorIndex).Rarity = scrlRarity.Value
     End Sub
 
-    Private Sub scrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnim.ValueChanged
+    Private Sub scrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnim.ValueChanged, scrlAnim.Scroll
         Dim sString As String
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         If scrlAnim.Value = 0 Then
@@ -34,7 +34,7 @@ Public Class frmEditor_Item
     Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
-        If (cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (cmbType.SelectedIndex <= ITEM_TYPE_SHIELD) Then
+        If (cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (cmbType.SelectedIndex <= ITEM_TYPE_GLOVES) Then
             fraEquipment.Visible = True
             'scrlDamage_Change
         Else
@@ -95,9 +95,9 @@ Public Class frmEditor_Item
         Item(EditorIndex).Stat_Req(Stats.vitality) = scrlVitReq.Value
     End Sub
 
-    Private Sub scrlWillReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlWillReq.ValueChanged
-        lblWillReq.Text = "Will: " & scrlWillReq.Value
-        Item(EditorIndex).Stat_Req(Stats.willpower) = scrlWillReq.Value
+    Private Sub scrlWillReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLuckReq.ValueChanged
+        lblLuckReq.Text = "Will: " & scrlLuckReq.Value
+        Item(EditorIndex).Stat_Req(Stats.luck) = scrlLuckReq.Value
     End Sub
 
     Private Sub scrlIntReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlIntReq.ValueChanged
@@ -160,10 +160,10 @@ Public Class frmEditor_Item
         Item(EditorIndex).Add_Stat(Stats.strength) = scrlAddStr.Value
     End Sub
 
-    Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddWill.ValueChanged
+    Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddLuck.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
-        lblAddWill.Text = "+Will: " & scrlAddWill.Value
-        Item(EditorIndex).Add_Stat(Stats.willpower) = scrlAddWill.Value
+        lblAddLuck.Text = "+Will: " & scrlAddLuck.Value
+        Item(EditorIndex).Add_Stat(Stats.luck) = scrlAddLuck.Value
     End Sub
 
     Private Sub scrlAddEnd_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddEnd.ValueChanged
@@ -363,5 +363,15 @@ Public Class frmEditor_Item
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
+    End Sub
+
+    Private Sub chkRandomize_CheckedChanged(sender As Object, e As EventArgs) Handles chkRandomize.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        If chkRandomize.Checked = True Then
+            Item(EditorIndex).Randomize = 1
+        Else
+            Item(EditorIndex).Randomize = 0
+        End If
     End Sub
 End Class

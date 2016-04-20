@@ -80,6 +80,24 @@
     Public ChatWindowX As Long = 10
     Public ChatWindowY As Long = 515
 
+    Public ShowItemDesc As Boolean
+    Public ItemDescSize As Byte
+    Public ItemDescItemNum As Long
+    Public ItemDescName As String
+    Public ItemDescValue As Long
+    Public ItemDescInfo As String
+    Public ItemDescType As String
+    Public ItemDescCost As String
+    Public ItemDescLevel As String
+    Public ItemDescSpeed As String
+    Public ItemDescStr As String
+    Public ItemDescEnd As String
+    Public ItemDescInt As String
+    Public ItemDescSpr As String
+    Public ItemDescVit As String
+    Public ItemDescLuck As String
+    Public ItemDescRarityColor As SFML.Graphics.Color
+
     'Character window Coordinates
     Public CharWindowX As Long = 748
     Public CharWindowY As Long = 275
@@ -97,8 +115,8 @@
     Public VitalityUpgradeY As Long = 237
     Public IntellectUpgradeX As Long = 69
     Public IntellectUpgradeY As Long = 252
-    Public WillPowerUpgradeX As Long = 157
-    Public WillPowerUpgradeY As Long = 237
+    Public LuckUpgradeX As Long = 157
+    Public LuckUpgradeY As Long = 237
     Public SpiritUpgradeX As Long = 157
     Public SpiritUpgradeY As Long = 252
 

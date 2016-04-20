@@ -24,8 +24,6 @@ Partial Class frmEditor_Item
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.cmdArray = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cmbType = New System.Windows.Forms.ComboBox()
         Me.scrlAnim = New System.Windows.Forms.HScrollBar()
         Me.scrlRarity = New System.Windows.Forms.HScrollBar()
@@ -40,7 +38,6 @@ Partial Class frmEditor_Item
         Me.lblPrice = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.scrlSprReq = New System.Windows.Forms.HScrollBar()
         Me.lblSprReq = New System.Windows.Forms.Label()
         Me.scrlVitReq = New System.Windows.Forms.HScrollBar()
@@ -49,8 +46,8 @@ Partial Class frmEditor_Item
         Me.lblIntReq = New System.Windows.Forms.Label()
         Me.scrlEndReq = New System.Windows.Forms.HScrollBar()
         Me.lblEndReq = New System.Windows.Forms.Label()
-        Me.scrlWillReq = New System.Windows.Forms.HScrollBar()
-        Me.lblWillReq = New System.Windows.Forms.Label()
+        Me.scrlLuckReq = New System.Windows.Forms.HScrollBar()
+        Me.lblLuckReq = New System.Windows.Forms.Label()
         Me.scrlStrReq = New System.Windows.Forms.HScrollBar()
         Me.lblStrReq = New System.Windows.Forms.Label()
         Me.scrlLevelReq = New System.Windows.Forms.HScrollBar()
@@ -76,8 +73,8 @@ Partial Class frmEditor_Item
         Me.lblAddInt = New System.Windows.Forms.Label()
         Me.scrlAddEnd = New System.Windows.Forms.HScrollBar()
         Me.lblAddEnd = New System.Windows.Forms.Label()
-        Me.scrlAddWill = New System.Windows.Forms.HScrollBar()
-        Me.lblAddWill = New System.Windows.Forms.Label()
+        Me.scrlAddLuck = New System.Windows.Forms.HScrollBar()
+        Me.lblAddLuck = New System.Windows.Forms.Label()
         Me.scrlAddStr = New System.Windows.Forms.HScrollBar()
         Me.lblAddStr = New System.Windows.Forms.Label()
         Me.scrlSpeed = New System.Windows.Forms.HScrollBar()
@@ -106,16 +103,23 @@ Partial Class frmEditor_Item
         Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
         Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.chkRandomize = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
         Me.fraEquipment.SuspendLayout()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraSpell.SuspendLayout()
         Me.fraVitals.SuspendLayout()
         Me.fraFurniture.SuspendLayout()
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -136,45 +140,12 @@ Partial Class frmEditor_Item
         Me.lstIndex.Size = New System.Drawing.Size(196, 485)
         Me.lstIndex.TabIndex = 0
         '
-        'cmdArray
-        '
-        Me.cmdArray.Location = New System.Drawing.Point(20, 511)
-        Me.cmdArray.Name = "cmdArray"
-        Me.cmdArray.Size = New System.Drawing.Size(196, 28)
-        Me.cmdArray.TabIndex = 1
-        Me.cmdArray.Text = "Change Array Size"
-        Me.cmdArray.UseVisualStyleBackColor = True
-        Me.cmdArray.Visible = False
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.cmbType)
-        Me.GroupBox2.Controls.Add(Me.scrlAnim)
-        Me.GroupBox2.Controls.Add(Me.scrlRarity)
-        Me.GroupBox2.Controls.Add(Me.cmbBind)
-        Me.GroupBox2.Controls.Add(Me.lblAnim)
-        Me.GroupBox2.Controls.Add(Me.lblRarity)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.picItem)
-        Me.GroupBox2.Controls.Add(Me.scrlPic)
-        Me.GroupBox2.Controls.Add(Me.lblPic)
-        Me.GroupBox2.Controls.Add(Me.scrlPrice)
-        Me.GroupBox2.Controls.Add(Me.lblPrice)
-        Me.GroupBox2.Controls.Add(Me.txtName)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(235, 11)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(418, 106)
-        Me.GroupBox2.TabIndex = 2
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Info"
-        '
         'cmbType
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture"})
-        Me.cmbType.Location = New System.Drawing.Point(13, 78)
+        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture"})
+        Me.cmbType.Location = New System.Drawing.Point(50, 46)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
         Me.cmbType.TabIndex = 40
@@ -182,17 +153,17 @@ Partial Class frmEditor_Item
         'scrlAnim
         '
         Me.scrlAnim.LargeChange = 1
-        Me.scrlAnim.Location = New System.Drawing.Point(330, 85)
+        Me.scrlAnim.Location = New System.Drawing.Point(94, 108)
         Me.scrlAnim.Name = "scrlAnim"
-        Me.scrlAnim.Size = New System.Drawing.Size(77, 14)
+        Me.scrlAnim.Size = New System.Drawing.Size(127, 19)
         Me.scrlAnim.TabIndex = 39
         '
         'scrlRarity
         '
         Me.scrlRarity.LargeChange = 1
-        Me.scrlRarity.Location = New System.Drawing.Point(300, 65)
+        Me.scrlRarity.Location = New System.Drawing.Point(302, 82)
         Me.scrlRarity.Name = "scrlRarity"
-        Me.scrlRarity.Size = New System.Drawing.Size(107, 17)
+        Me.scrlRarity.Size = New System.Drawing.Size(123, 17)
         Me.scrlRarity.TabIndex = 38
         '
         'cmbBind
@@ -200,24 +171,24 @@ Partial Class frmEditor_Item
         Me.cmbBind.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBind.FormattingEnabled = True
         Me.cmbBind.Items.AddRange(New Object() {"None", "Bind on Pickup", "Bind on Equip"})
-        Me.cmbBind.Location = New System.Drawing.Point(298, 40)
+        Me.cmbBind.Location = New System.Drawing.Point(302, 46)
         Me.cmbBind.Name = "cmbBind"
-        Me.cmbBind.Size = New System.Drawing.Size(110, 21)
+        Me.cmbBind.Size = New System.Drawing.Size(123, 21)
         Me.cmbBind.TabIndex = 37
         '
         'lblAnim
         '
         Me.lblAnim.AutoSize = True
-        Me.lblAnim.Location = New System.Drawing.Point(200, 86)
+        Me.lblAnim.Location = New System.Drawing.Point(6, 111)
         Me.lblAnim.Name = "lblAnim"
-        Me.lblAnim.Size = New System.Drawing.Size(62, 13)
+        Me.lblAnim.Size = New System.Drawing.Size(85, 13)
         Me.lblAnim.TabIndex = 9
-        Me.lblAnim.Text = "Anim: None"
+        Me.lblAnim.Text = "Animation: None"
         '
         'lblRarity
         '
         Me.lblRarity.AutoSize = True
-        Me.lblRarity.Location = New System.Drawing.Point(200, 62)
+        Me.lblRarity.Location = New System.Drawing.Point(238, 82)
         Me.lblRarity.Name = "lblRarity"
         Me.lblRarity.Size = New System.Drawing.Size(46, 13)
         Me.lblRarity.TabIndex = 8
@@ -226,7 +197,7 @@ Partial Class frmEditor_Item
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(200, 43)
+        Me.Label2.Location = New System.Drawing.Point(238, 49)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 7
@@ -235,7 +206,7 @@ Partial Class frmEditor_Item
         'picItem
         '
         Me.picItem.BackColor = System.Drawing.Color.Black
-        Me.picItem.Location = New System.Drawing.Point(152, 41)
+        Me.picItem.Location = New System.Drawing.Point(393, 9)
         Me.picItem.Name = "picItem"
         Me.picItem.Size = New System.Drawing.Size(32, 32)
         Me.picItem.TabIndex = 6
@@ -243,7 +214,7 @@ Partial Class frmEditor_Item
         '
         'scrlPic
         '
-        Me.scrlPic.Location = New System.Drawing.Point(52, 42)
+        Me.scrlPic.Location = New System.Drawing.Point(285, 10)
         Me.scrlPic.Name = "scrlPic"
         Me.scrlPic.Size = New System.Drawing.Size(89, 19)
         Me.scrlPic.TabIndex = 5
@@ -251,7 +222,7 @@ Partial Class frmEditor_Item
         'lblPic
         '
         Me.lblPic.AutoSize = True
-        Me.lblPic.Location = New System.Drawing.Point(10, 41)
+        Me.lblPic.Location = New System.Drawing.Point(238, 12)
         Me.lblPic.Name = "lblPic"
         Me.lblPic.Size = New System.Drawing.Size(34, 13)
         Me.lblPic.TabIndex = 4
@@ -259,221 +230,195 @@ Partial Class frmEditor_Item
         '
         'scrlPrice
         '
-        Me.scrlPrice.Location = New System.Drawing.Point(251, 16)
+        Me.scrlPrice.Location = New System.Drawing.Point(78, 80)
         Me.scrlPrice.Maximum = 100000
         Me.scrlPrice.Name = "scrlPrice"
-        Me.scrlPrice.Size = New System.Drawing.Size(157, 18)
+        Me.scrlPrice.Size = New System.Drawing.Size(143, 18)
         Me.scrlPrice.TabIndex = 3
         '
         'lblPrice
         '
         Me.lblPrice.AutoSize = True
-        Me.lblPrice.Location = New System.Drawing.Point(196, 16)
+        Me.lblPrice.Location = New System.Drawing.Point(6, 82)
         Me.lblPrice.Name = "lblPrice"
-        Me.lblPrice.Size = New System.Drawing.Size(43, 13)
+        Me.lblPrice.Size = New System.Drawing.Size(60, 13)
         Me.lblPrice.TabIndex = 2
-        Me.lblPrice.Text = "Price: 0"
+        Me.lblPrice.Text = "SellPrice: 0"
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(52, 14)
+        Me.txtName.Location = New System.Drawing.Point(50, 9)
         Me.txtName.MaxLength = 20
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(132, 20)
+        Me.txtName.Size = New System.Drawing.Size(171, 20)
         Me.txtName.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 17)
+        Me.Label1.Location = New System.Drawing.Point(6, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Name:"
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.scrlSprReq)
-        Me.GroupBox3.Controls.Add(Me.lblSprReq)
-        Me.GroupBox3.Controls.Add(Me.scrlVitReq)
-        Me.GroupBox3.Controls.Add(Me.lblVitReq)
-        Me.GroupBox3.Controls.Add(Me.scrlIntReq)
-        Me.GroupBox3.Controls.Add(Me.lblIntReq)
-        Me.GroupBox3.Controls.Add(Me.scrlEndReq)
-        Me.GroupBox3.Controls.Add(Me.lblEndReq)
-        Me.GroupBox3.Controls.Add(Me.scrlWillReq)
-        Me.GroupBox3.Controls.Add(Me.lblWillReq)
-        Me.GroupBox3.Controls.Add(Me.scrlStrReq)
-        Me.GroupBox3.Controls.Add(Me.lblStrReq)
-        Me.GroupBox3.Controls.Add(Me.scrlLevelReq)
-        Me.GroupBox3.Controls.Add(Me.scrlAccessReq)
-        Me.GroupBox3.Controls.Add(Me.cmbClassReq)
-        Me.GroupBox3.Controls.Add(Me.lblLevelReq)
-        Me.GroupBox3.Controls.Add(Me.lblAccessReq)
-        Me.GroupBox3.Controls.Add(Me.Label3)
-        Me.GroupBox3.Location = New System.Drawing.Point(236, 131)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(416, 160)
-        Me.GroupBox3.TabIndex = 3
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Requirements"
-        '
         'scrlSprReq
         '
         Me.scrlSprReq.LargeChange = 1
-        Me.scrlSprReq.Location = New System.Drawing.Point(349, 131)
+        Me.scrlSprReq.Location = New System.Drawing.Point(272, 217)
         Me.scrlSprReq.Name = "scrlSprReq"
-        Me.scrlSprReq.Size = New System.Drawing.Size(54, 14)
+        Me.scrlSprReq.Size = New System.Drawing.Size(84, 15)
         Me.scrlSprReq.TabIndex = 55
         '
         'lblSprReq
         '
         Me.lblSprReq.AutoSize = True
-        Me.lblSprReq.Location = New System.Drawing.Point(296, 132)
+        Me.lblSprReq.Location = New System.Drawing.Point(197, 217)
         Me.lblSprReq.Name = "lblSprReq"
-        Me.lblSprReq.Size = New System.Drawing.Size(35, 13)
+        Me.lblSprReq.Size = New System.Drawing.Size(42, 13)
         Me.lblSprReq.TabIndex = 54
-        Me.lblSprReq.Text = "Spr: 0"
+        Me.lblSprReq.Text = "Spirit: 0"
         '
         'scrlVitReq
         '
         Me.scrlVitReq.LargeChange = 1
-        Me.scrlVitReq.Location = New System.Drawing.Point(349, 103)
+        Me.scrlVitReq.Location = New System.Drawing.Point(69, 217)
         Me.scrlVitReq.Name = "scrlVitReq"
-        Me.scrlVitReq.Size = New System.Drawing.Size(54, 14)
+        Me.scrlVitReq.Size = New System.Drawing.Size(84, 15)
         Me.scrlVitReq.TabIndex = 53
         '
         'lblVitReq
         '
         Me.lblVitReq.AutoSize = True
-        Me.lblVitReq.Location = New System.Drawing.Point(296, 104)
+        Me.lblVitReq.Location = New System.Drawing.Point(7, 217)
         Me.lblVitReq.Name = "lblVitReq"
-        Me.lblVitReq.Size = New System.Drawing.Size(31, 13)
+        Me.lblVitReq.Size = New System.Drawing.Size(49, 13)
         Me.lblVitReq.TabIndex = 52
-        Me.lblVitReq.Text = "Vit: 0"
+        Me.lblVitReq.Text = "Vitality: 0"
         '
         'scrlIntReq
         '
         Me.scrlIntReq.LargeChange = 1
-        Me.scrlIntReq.Location = New System.Drawing.Point(204, 130)
+        Me.scrlIntReq.Location = New System.Drawing.Point(273, 188)
         Me.scrlIntReq.Name = "scrlIntReq"
-        Me.scrlIntReq.Size = New System.Drawing.Size(54, 14)
+        Me.scrlIntReq.Size = New System.Drawing.Size(83, 15)
         Me.scrlIntReq.TabIndex = 51
         '
         'lblIntReq
         '
         Me.lblIntReq.AutoSize = True
-        Me.lblIntReq.Location = New System.Drawing.Point(151, 131)
+        Me.lblIntReq.Location = New System.Drawing.Point(197, 188)
         Me.lblIntReq.Name = "lblIntReq"
-        Me.lblIntReq.Size = New System.Drawing.Size(28, 13)
+        Me.lblIntReq.Size = New System.Drawing.Size(73, 13)
         Me.lblIntReq.TabIndex = 50
-        Me.lblIntReq.Text = "Int:0"
+        Me.lblIntReq.Text = "Intelligence: 0"
         '
         'scrlEndReq
         '
         Me.scrlEndReq.LargeChange = 1
-        Me.scrlEndReq.Location = New System.Drawing.Point(204, 102)
+        Me.scrlEndReq.Location = New System.Drawing.Point(272, 160)
         Me.scrlEndReq.Name = "scrlEndReq"
-        Me.scrlEndReq.Size = New System.Drawing.Size(54, 14)
+        Me.scrlEndReq.Size = New System.Drawing.Size(84, 14)
         Me.scrlEndReq.TabIndex = 49
         '
         'lblEndReq
         '
         Me.lblEndReq.AutoSize = True
-        Me.lblEndReq.Location = New System.Drawing.Point(151, 103)
+        Me.lblEndReq.Location = New System.Drawing.Point(197, 161)
         Me.lblEndReq.Name = "lblEndReq"
-        Me.lblEndReq.Size = New System.Drawing.Size(38, 13)
+        Me.lblEndReq.Size = New System.Drawing.Size(71, 13)
         Me.lblEndReq.TabIndex = 48
-        Me.lblEndReq.Text = "End: 0"
+        Me.lblEndReq.Text = "Endurance: 0"
         '
-        'scrlWillReq
+        'scrlLuckReq
         '
-        Me.scrlWillReq.LargeChange = 1
-        Me.scrlWillReq.Location = New System.Drawing.Point(60, 131)
-        Me.scrlWillReq.Name = "scrlWillReq"
-        Me.scrlWillReq.Size = New System.Drawing.Size(54, 14)
-        Me.scrlWillReq.TabIndex = 47
+        Me.scrlLuckReq.LargeChange = 1
+        Me.scrlLuckReq.Location = New System.Drawing.Point(69, 188)
+        Me.scrlLuckReq.Name = "scrlLuckReq"
+        Me.scrlLuckReq.Size = New System.Drawing.Size(84, 15)
+        Me.scrlLuckReq.TabIndex = 47
         '
-        'lblWillReq
+        'lblLuckReq
         '
-        Me.lblWillReq.AutoSize = True
-        Me.lblWillReq.Location = New System.Drawing.Point(7, 132)
-        Me.lblWillReq.Name = "lblWillReq"
-        Me.lblWillReq.Size = New System.Drawing.Size(36, 13)
-        Me.lblWillReq.TabIndex = 46
-        Me.lblWillReq.Text = "Will: 0"
+        Me.lblLuckReq.AutoSize = True
+        Me.lblLuckReq.Location = New System.Drawing.Point(7, 188)
+        Me.lblLuckReq.Name = "lblLuckReq"
+        Me.lblLuckReq.Size = New System.Drawing.Size(43, 13)
+        Me.lblLuckReq.TabIndex = 46
+        Me.lblLuckReq.Text = "Luck: 0"
         '
         'scrlStrReq
         '
         Me.scrlStrReq.LargeChange = 1
-        Me.scrlStrReq.Location = New System.Drawing.Point(60, 103)
+        Me.scrlStrReq.Location = New System.Drawing.Point(69, 159)
         Me.scrlStrReq.Name = "scrlStrReq"
-        Me.scrlStrReq.Size = New System.Drawing.Size(54, 14)
+        Me.scrlStrReq.Size = New System.Drawing.Size(84, 15)
         Me.scrlStrReq.TabIndex = 45
         '
         'lblStrReq
         '
         Me.lblStrReq.AutoSize = True
-        Me.lblStrReq.Location = New System.Drawing.Point(7, 104)
+        Me.lblStrReq.Location = New System.Drawing.Point(7, 160)
         Me.lblStrReq.Name = "lblStrReq"
-        Me.lblStrReq.Size = New System.Drawing.Size(32, 13)
+        Me.lblStrReq.Size = New System.Drawing.Size(59, 13)
         Me.lblStrReq.TabIndex = 44
-        Me.lblStrReq.Text = "Str: 0"
+        Me.lblStrReq.Text = "Strenght: 0"
         '
         'scrlLevelReq
         '
         Me.scrlLevelReq.LargeChange = 1
-        Me.scrlLevelReq.Location = New System.Drawing.Point(130, 68)
+        Me.scrlLevelReq.Location = New System.Drawing.Point(150, 77)
         Me.scrlLevelReq.Name = "scrlLevelReq"
-        Me.scrlLevelReq.Size = New System.Drawing.Size(274, 13)
+        Me.scrlLevelReq.Size = New System.Drawing.Size(273, 20)
         Me.scrlLevelReq.TabIndex = 43
         '
         'scrlAccessReq
         '
         Me.scrlAccessReq.LargeChange = 1
-        Me.scrlAccessReq.Location = New System.Drawing.Point(103, 43)
+        Me.scrlAccessReq.Location = New System.Drawing.Point(150, 44)
         Me.scrlAccessReq.Name = "scrlAccessReq"
-        Me.scrlAccessReq.Size = New System.Drawing.Size(302, 13)
+        Me.scrlAccessReq.Size = New System.Drawing.Size(273, 20)
         Me.scrlAccessReq.TabIndex = 42
         '
         'cmbClassReq
         '
         Me.cmbClassReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClassReq.FormattingEnabled = True
-        Me.cmbClassReq.Location = New System.Drawing.Point(71, 13)
+        Me.cmbClassReq.Location = New System.Drawing.Point(150, 10)
         Me.cmbClassReq.Name = "cmbClassReq"
-        Me.cmbClassReq.Size = New System.Drawing.Size(335, 21)
+        Me.cmbClassReq.Size = New System.Drawing.Size(273, 21)
         Me.cmbClassReq.TabIndex = 41
         '
         'lblLevelReq
         '
         Me.lblLevelReq.AutoSize = True
-        Me.lblLevelReq.Location = New System.Drawing.Point(7, 68)
+        Me.lblLevelReq.Location = New System.Drawing.Point(7, 81)
         Me.lblLevelReq.Name = "lblLevelReq"
-        Me.lblLevelReq.Size = New System.Drawing.Size(68, 13)
+        Me.lblLevelReq.Size = New System.Drawing.Size(113, 13)
         Me.lblLevelReq.TabIndex = 2
-        Me.lblLevelReq.Text = "Level Req: 0"
+        Me.lblLevelReq.Text = "Level Requirements: 0"
         '
         'lblAccessReq
         '
         Me.lblAccessReq.AutoSize = True
-        Me.lblAccessReq.Location = New System.Drawing.Point(7, 42)
+        Me.lblAccessReq.Location = New System.Drawing.Point(6, 47)
         Me.lblAccessReq.Name = "lblAccessReq"
-        Me.lblAccessReq.Size = New System.Drawing.Size(77, 13)
+        Me.lblAccessReq.Size = New System.Drawing.Size(122, 13)
         Me.lblAccessReq.TabIndex = 1
-        Me.lblAccessReq.Text = "Access Req: 0"
+        Me.lblAccessReq.Text = "Access Requirements: 0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(7, 16)
+        Me.Label3.Location = New System.Drawing.Point(6, 13)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 13)
+        Me.Label3.Size = New System.Drawing.Size(98, 13)
         Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Class Req:"
+        Me.Label3.Text = "Class Requirement:"
         '
         'fraEquipment
         '
+        Me.fraEquipment.Controls.Add(Me.chkRandomize)
         Me.fraEquipment.Controls.Add(Me.Label5)
         Me.fraEquipment.Controls.Add(Me.cmbKnockBackTiles)
         Me.fraEquipment.Controls.Add(Me.chkKnockBack)
@@ -490,8 +435,8 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Controls.Add(Me.lblAddInt)
         Me.fraEquipment.Controls.Add(Me.scrlAddEnd)
         Me.fraEquipment.Controls.Add(Me.lblAddEnd)
-        Me.fraEquipment.Controls.Add(Me.scrlAddWill)
-        Me.fraEquipment.Controls.Add(Me.lblAddWill)
+        Me.fraEquipment.Controls.Add(Me.scrlAddLuck)
+        Me.fraEquipment.Controls.Add(Me.lblAddLuck)
         Me.fraEquipment.Controls.Add(Me.scrlAddStr)
         Me.fraEquipment.Controls.Add(Me.lblAddStr)
         Me.fraEquipment.Controls.Add(Me.scrlSpeed)
@@ -500,9 +445,9 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Controls.Add(Me.lblSpeed)
         Me.fraEquipment.Controls.Add(Me.lblDamage)
         Me.fraEquipment.Controls.Add(Me.Label12)
-        Me.fraEquipment.Location = New System.Drawing.Point(237, 297)
+        Me.fraEquipment.Location = New System.Drawing.Point(228, 282)
         Me.fraEquipment.Name = "fraEquipment"
-        Me.fraEquipment.Size = New System.Drawing.Size(416, 213)
+        Me.fraEquipment.Size = New System.Drawing.Size(437, 228)
         Me.fraEquipment.TabIndex = 4
         Me.fraEquipment.TabStop = False
         Me.fraEquipment.Text = "Equipment Data"
@@ -511,7 +456,7 @@ Partial Class frmEditor_Item
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(119, 153)
+        Me.Label5.Location = New System.Drawing.Point(120, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 13)
         Me.Label5.TabIndex = 65
@@ -522,15 +467,15 @@ Partial Class frmEditor_Item
         Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbKnockBackTiles.FormattingEnabled = True
         Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
-        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(172, 150)
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(165, 69)
         Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
-        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(121, 21)
+        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(93, 21)
         Me.cmbKnockBackTiles.TabIndex = 64
         '
         'chkKnockBack
         '
         Me.chkKnockBack.AutoSize = True
-        Me.chkKnockBack.Location = New System.Drawing.Point(9, 152)
+        Me.chkKnockBack.Location = New System.Drawing.Point(10, 71)
         Me.chkKnockBack.Name = "chkKnockBack"
         Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
         Me.chkKnockBack.TabIndex = 63
@@ -540,15 +485,15 @@ Partial Class frmEditor_Item
         'scrlProjectile
         '
         Me.scrlProjectile.LargeChange = 1
-        Me.scrlProjectile.Location = New System.Drawing.Point(3, 189)
+        Me.scrlProjectile.Location = New System.Drawing.Point(267, 71)
         Me.scrlProjectile.Name = "scrlProjectile"
-        Me.scrlProjectile.Size = New System.Drawing.Size(160, 18)
+        Me.scrlProjectile.Size = New System.Drawing.Size(162, 18)
         Me.scrlProjectile.TabIndex = 62
         '
         'lblProjectile
         '
         Me.lblProjectile.AutoSize = True
-        Me.lblProjectile.Location = New System.Drawing.Point(7, 174)
+        Me.lblProjectile.Location = New System.Drawing.Point(264, 42)
         Me.lblProjectile.Name = "lblProjectile"
         Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
         Me.lblProjectile.TabIndex = 61
@@ -557,7 +502,7 @@ Partial Class frmEditor_Item
         'scrlPaperdoll
         '
         Me.scrlPaperdoll.LargeChange = 1
-        Me.scrlPaperdoll.Location = New System.Drawing.Point(184, 189)
+        Me.scrlPaperdoll.Location = New System.Drawing.Point(10, 189)
         Me.scrlPaperdoll.Name = "scrlPaperdoll"
         Me.scrlPaperdoll.Size = New System.Drawing.Size(104, 18)
         Me.scrlPaperdoll.TabIndex = 58
@@ -565,7 +510,7 @@ Partial Class frmEditor_Item
         'lblPaperDoll
         '
         Me.lblPaperDoll.AutoSize = True
-        Me.lblPaperDoll.Location = New System.Drawing.Point(181, 174)
+        Me.lblPaperDoll.Location = New System.Drawing.Point(10, 169)
         Me.lblPaperDoll.Name = "lblPaperDoll"
         Me.lblPaperDoll.Size = New System.Drawing.Size(63, 13)
         Me.lblPaperDoll.TabIndex = 57
@@ -574,7 +519,7 @@ Partial Class frmEditor_Item
         'picPaperdoll
         '
         Me.picPaperdoll.BackColor = System.Drawing.Color.Black
-        Me.picPaperdoll.Location = New System.Drawing.Point(299, 159)
+        Me.picPaperdoll.Location = New System.Drawing.Point(139, 170)
         Me.picPaperdoll.Name = "picPaperdoll"
         Me.picPaperdoll.Size = New System.Drawing.Size(107, 48)
         Me.picPaperdoll.TabIndex = 56
@@ -583,43 +528,43 @@ Partial Class frmEditor_Item
         'scrlAddSpr
         '
         Me.scrlAddSpr.LargeChange = 1
-        Me.scrlAddSpr.Location = New System.Drawing.Point(349, 131)
+        Me.scrlAddSpr.Location = New System.Drawing.Point(360, 130)
         Me.scrlAddSpr.Name = "scrlAddSpr"
-        Me.scrlAddSpr.Size = New System.Drawing.Size(54, 14)
+        Me.scrlAddSpr.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddSpr.TabIndex = 55
         '
         'lblAddSpr
         '
         Me.lblAddSpr.AutoSize = True
-        Me.lblAddSpr.Location = New System.Drawing.Point(296, 132)
+        Me.lblAddSpr.Location = New System.Drawing.Point(307, 131)
         Me.lblAddSpr.Name = "lblAddSpr"
-        Me.lblAddSpr.Size = New System.Drawing.Size(41, 13)
+        Me.lblAddSpr.Size = New System.Drawing.Size(48, 13)
         Me.lblAddSpr.TabIndex = 54
-        Me.lblAddSpr.Text = "+Spr: 0"
+        Me.lblAddSpr.Text = "+Spirit: 0"
         '
         'scrlAddVit
         '
         Me.scrlAddVit.LargeChange = 1
-        Me.scrlAddVit.Location = New System.Drawing.Point(349, 103)
+        Me.scrlAddVit.Location = New System.Drawing.Point(75, 132)
         Me.scrlAddVit.Name = "scrlAddVit"
-        Me.scrlAddVit.Size = New System.Drawing.Size(54, 14)
+        Me.scrlAddVit.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddVit.TabIndex = 53
         '
         'lblAddVit
         '
         Me.lblAddVit.AutoSize = True
-        Me.lblAddVit.Location = New System.Drawing.Point(296, 104)
+        Me.lblAddVit.Location = New System.Drawing.Point(10, 132)
         Me.lblAddVit.Name = "lblAddVit"
-        Me.lblAddVit.Size = New System.Drawing.Size(37, 13)
+        Me.lblAddVit.Size = New System.Drawing.Size(55, 13)
         Me.lblAddVit.TabIndex = 52
-        Me.lblAddVit.Text = "+Vit: 0"
+        Me.lblAddVit.Text = "+Vitality: 0"
         '
         'scrlAddInt
         '
         Me.scrlAddInt.LargeChange = 1
-        Me.scrlAddInt.Location = New System.Drawing.Point(204, 130)
+        Me.scrlAddInt.Location = New System.Drawing.Point(231, 130)
         Me.scrlAddInt.Name = "scrlAddInt"
-        Me.scrlAddInt.Size = New System.Drawing.Size(54, 14)
+        Me.scrlAddInt.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddInt.TabIndex = 51
         '
         'lblAddInt
@@ -627,76 +572,76 @@ Partial Class frmEditor_Item
         Me.lblAddInt.AutoSize = True
         Me.lblAddInt.Location = New System.Drawing.Point(151, 131)
         Me.lblAddInt.Name = "lblAddInt"
-        Me.lblAddInt.Size = New System.Drawing.Size(34, 13)
+        Me.lblAddInt.Size = New System.Drawing.Size(79, 13)
         Me.lblAddInt.TabIndex = 50
-        Me.lblAddInt.Text = "+Int:0"
+        Me.lblAddInt.Text = "+Intelligence: 0"
         '
         'scrlAddEnd
         '
         Me.scrlAddEnd.LargeChange = 1
-        Me.scrlAddEnd.Location = New System.Drawing.Point(204, 102)
+        Me.scrlAddEnd.Location = New System.Drawing.Point(231, 104)
         Me.scrlAddEnd.Name = "scrlAddEnd"
-        Me.scrlAddEnd.Size = New System.Drawing.Size(54, 14)
+        Me.scrlAddEnd.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddEnd.TabIndex = 49
         '
         'lblAddEnd
         '
         Me.lblAddEnd.AutoSize = True
-        Me.lblAddEnd.Location = New System.Drawing.Point(151, 103)
+        Me.lblAddEnd.Location = New System.Drawing.Point(151, 106)
         Me.lblAddEnd.Name = "lblAddEnd"
-        Me.lblAddEnd.Size = New System.Drawing.Size(44, 13)
+        Me.lblAddEnd.Size = New System.Drawing.Size(77, 13)
         Me.lblAddEnd.TabIndex = 48
-        Me.lblAddEnd.Text = "+End: 0"
+        Me.lblAddEnd.Text = "+Endurance: 0"
         '
-        'scrlAddWill
+        'scrlAddLuck
         '
-        Me.scrlAddWill.LargeChange = 1
-        Me.scrlAddWill.Location = New System.Drawing.Point(60, 131)
-        Me.scrlAddWill.Name = "scrlAddWill"
-        Me.scrlAddWill.Size = New System.Drawing.Size(54, 14)
-        Me.scrlAddWill.TabIndex = 47
+        Me.scrlAddLuck.LargeChange = 1
+        Me.scrlAddLuck.Location = New System.Drawing.Point(360, 104)
+        Me.scrlAddLuck.Name = "scrlAddLuck"
+        Me.scrlAddLuck.Size = New System.Drawing.Size(69, 15)
+        Me.scrlAddLuck.TabIndex = 47
         '
-        'lblAddWill
+        'lblAddLuck
         '
-        Me.lblAddWill.AutoSize = True
-        Me.lblAddWill.Location = New System.Drawing.Point(7, 132)
-        Me.lblAddWill.Name = "lblAddWill"
-        Me.lblAddWill.Size = New System.Drawing.Size(42, 13)
-        Me.lblAddWill.TabIndex = 46
-        Me.lblAddWill.Text = "+Will: 0"
+        Me.lblAddLuck.AutoSize = True
+        Me.lblAddLuck.Location = New System.Drawing.Point(307, 106)
+        Me.lblAddLuck.Name = "lblAddLuck"
+        Me.lblAddLuck.Size = New System.Drawing.Size(49, 13)
+        Me.lblAddLuck.TabIndex = 46
+        Me.lblAddLuck.Text = "+Luck: 0"
         '
         'scrlAddStr
         '
         Me.scrlAddStr.LargeChange = 1
-        Me.scrlAddStr.Location = New System.Drawing.Point(60, 103)
+        Me.scrlAddStr.Location = New System.Drawing.Point(75, 104)
         Me.scrlAddStr.Name = "scrlAddStr"
-        Me.scrlAddStr.Size = New System.Drawing.Size(54, 14)
+        Me.scrlAddStr.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddStr.TabIndex = 45
         '
         'lblAddStr
         '
         Me.lblAddStr.AutoSize = True
-        Me.lblAddStr.Location = New System.Drawing.Point(7, 104)
+        Me.lblAddStr.Location = New System.Drawing.Point(7, 106)
         Me.lblAddStr.Name = "lblAddStr"
-        Me.lblAddStr.Size = New System.Drawing.Size(38, 13)
+        Me.lblAddStr.Size = New System.Drawing.Size(65, 13)
         Me.lblAddStr.TabIndex = 44
-        Me.lblAddStr.Text = "+Str: 0"
+        Me.lblAddStr.Text = "+Strenght: 0"
         '
         'scrlSpeed
         '
         Me.scrlSpeed.LargeChange = 1
-        Me.scrlSpeed.Location = New System.Drawing.Point(130, 68)
+        Me.scrlSpeed.Location = New System.Drawing.Point(102, 42)
         Me.scrlSpeed.Maximum = 2000
         Me.scrlSpeed.Name = "scrlSpeed"
-        Me.scrlSpeed.Size = New System.Drawing.Size(274, 13)
+        Me.scrlSpeed.Size = New System.Drawing.Size(156, 19)
         Me.scrlSpeed.TabIndex = 43
         '
         'scrlDamage
         '
         Me.scrlDamage.LargeChange = 1
-        Me.scrlDamage.Location = New System.Drawing.Point(103, 43)
+        Me.scrlDamage.Location = New System.Drawing.Point(326, 13)
         Me.scrlDamage.Name = "scrlDamage"
-        Me.scrlDamage.Size = New System.Drawing.Size(302, 13)
+        Me.scrlDamage.Size = New System.Drawing.Size(103, 18)
         Me.scrlDamage.TabIndex = 42
         '
         'cmbTool
@@ -706,13 +651,13 @@ Partial Class frmEditor_Item
         Me.cmbTool.Items.AddRange(New Object() {"None", "Hatchet", "Rod", "Pickaxe"})
         Me.cmbTool.Location = New System.Drawing.Point(102, 13)
         Me.cmbTool.Name = "cmbTool"
-        Me.cmbTool.Size = New System.Drawing.Size(304, 21)
+        Me.cmbTool.Size = New System.Drawing.Size(156, 21)
         Me.cmbTool.TabIndex = 41
         '
         'lblSpeed
         '
         Me.lblSpeed.AutoSize = True
-        Me.lblSpeed.Location = New System.Drawing.Point(7, 68)
+        Me.lblSpeed.Location = New System.Drawing.Point(7, 42)
         Me.lblSpeed.Name = "lblSpeed"
         Me.lblSpeed.Size = New System.Drawing.Size(79, 13)
         Me.lblSpeed.TabIndex = 2
@@ -721,7 +666,7 @@ Partial Class frmEditor_Item
         'lblDamage
         '
         Me.lblDamage.AutoSize = True
-        Me.lblDamage.Location = New System.Drawing.Point(7, 42)
+        Me.lblDamage.Location = New System.Drawing.Point(264, 16)
         Me.lblDamage.Name = "lblDamage"
         Me.lblDamage.Size = New System.Drawing.Size(59, 13)
         Me.lblDamage.TabIndex = 1
@@ -768,7 +713,7 @@ Partial Class frmEditor_Item
         Me.fraSpell.Controls.Add(Me.scrlSpell)
         Me.fraSpell.Controls.Add(Me.lblSpell)
         Me.fraSpell.Controls.Add(Me.lblSpellName)
-        Me.fraSpell.Location = New System.Drawing.Point(423, 296)
+        Me.fraSpell.Location = New System.Drawing.Point(427, 286)
         Me.fraSpell.Name = "fraSpell"
         Me.fraSpell.Size = New System.Drawing.Size(232, 84)
         Me.fraSpell.TabIndex = 8
@@ -822,7 +767,7 @@ Partial Class frmEditor_Item
         '
         Me.fraVitals.Controls.Add(Me.scrlVitalMod)
         Me.fraVitals.Controls.Add(Me.lblVitalMod)
-        Me.fraVitals.Location = New System.Drawing.Point(421, 297)
+        Me.fraVitals.Location = New System.Drawing.Point(430, 286)
         Me.fraVitals.Name = "fraVitals"
         Me.fraVitals.Size = New System.Drawing.Size(232, 84)
         Me.fraVitals.TabIndex = 9
@@ -841,9 +786,9 @@ Partial Class frmEditor_Item
         Me.fraFurniture.Controls.Add(Me.optNoFurnitureEditing)
         Me.fraFurniture.Controls.Add(Me.cmbFurnitureType)
         Me.fraFurniture.Controls.Add(Me.Label4)
-        Me.fraFurniture.Location = New System.Drawing.Point(237, 297)
+        Me.fraFurniture.Location = New System.Drawing.Point(228, 282)
         Me.fraFurniture.Name = "fraFurniture"
-        Me.fraFurniture.Size = New System.Drawing.Size(416, 213)
+        Me.fraFurniture.Size = New System.Drawing.Size(437, 213)
         Me.fraFurniture.TabIndex = 10
         Me.fraFurniture.TabStop = False
         Me.fraFurniture.Text = "Furniture"
@@ -934,32 +879,118 @@ Partial Class frmEditor_Item
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Furniture Type:"
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(228, 5)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(437, 271)
+        Me.TabControl1.TabIndex = 11
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Label6)
+        Me.TabPage1.Controls.Add(Me.Label1)
+        Me.TabPage1.Controls.Add(Me.Label2)
+        Me.TabPage1.Controls.Add(Me.cmbType)
+        Me.TabPage1.Controls.Add(Me.scrlPic)
+        Me.TabPage1.Controls.Add(Me.picItem)
+        Me.TabPage1.Controls.Add(Me.txtName)
+        Me.TabPage1.Controls.Add(Me.lblRarity)
+        Me.TabPage1.Controls.Add(Me.lblPic)
+        Me.TabPage1.Controls.Add(Me.scrlAnim)
+        Me.TabPage1.Controls.Add(Me.lblAnim)
+        Me.TabPage1.Controls.Add(Me.scrlPrice)
+        Me.TabPage1.Controls.Add(Me.cmbBind)
+        Me.TabPage1.Controls.Add(Me.scrlRarity)
+        Me.TabPage1.Controls.Add(Me.lblPrice)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(429, 245)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Info"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(6, 49)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(34, 13)
+        Me.Label6.TabIndex = 41
+        Me.Label6.Text = "Type:"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.Label7)
+        Me.TabPage2.Controls.Add(Me.scrlSprReq)
+        Me.TabPage2.Controls.Add(Me.Label3)
+        Me.TabPage2.Controls.Add(Me.lblSprReq)
+        Me.TabPage2.Controls.Add(Me.lblAccessReq)
+        Me.TabPage2.Controls.Add(Me.scrlVitReq)
+        Me.TabPage2.Controls.Add(Me.lblLevelReq)
+        Me.TabPage2.Controls.Add(Me.lblVitReq)
+        Me.TabPage2.Controls.Add(Me.cmbClassReq)
+        Me.TabPage2.Controls.Add(Me.scrlIntReq)
+        Me.TabPage2.Controls.Add(Me.scrlAccessReq)
+        Me.TabPage2.Controls.Add(Me.lblIntReq)
+        Me.TabPage2.Controls.Add(Me.scrlLevelReq)
+        Me.TabPage2.Controls.Add(Me.scrlEndReq)
+        Me.TabPage2.Controls.Add(Me.lblStrReq)
+        Me.TabPage2.Controls.Add(Me.lblEndReq)
+        Me.TabPage2.Controls.Add(Me.scrlStrReq)
+        Me.TabPage2.Controls.Add(Me.scrlLuckReq)
+        Me.TabPage2.Controls.Add(Me.lblLuckReq)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(429, 245)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Requirements"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 125)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(94, 13)
+        Me.Label7.TabIndex = 56
+        Me.Label7.Text = "Stat Requirements"
+        '
+        'chkRandomize
+        '
+        Me.chkRandomize.AutoSize = True
+        Me.chkRandomize.Location = New System.Drawing.Point(297, 201)
+        Me.chkRandomize.Name = "chkRandomize"
+        Me.chkRandomize.Size = New System.Drawing.Size(106, 17)
+        Me.chkRandomize.TabIndex = 66
+        Me.chkRandomize.Text = "Randomize Stats"
+        Me.chkRandomize.UseVisualStyleBackColor = True
+        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(659, 551)
+        Me.ClientSize = New System.Drawing.Size(671, 551)
         Me.ControlBox = False
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.fraVitals)
         Me.Controls.Add(Me.fraSpell)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.fraEquipment)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.cmdArray)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.fraFurniture)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmEditor_Item"
         Me.Text = "frmEditor_Item"
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.fraEquipment.ResumeLayout(False)
         Me.fraEquipment.PerformLayout()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).EndInit()
@@ -970,13 +1001,16 @@ Partial Class frmEditor_Item
         Me.fraFurniture.ResumeLayout(False)
         Me.fraFurniture.PerformLayout()
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lstIndex As System.Windows.Forms.ListBox
-    Friend WithEvents cmdArray As System.Windows.Forms.Button
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents picItem As System.Windows.Forms.PictureBox
     Friend WithEvents scrlPic As System.Windows.Forms.HScrollBar
     Friend WithEvents lblPic As System.Windows.Forms.Label
@@ -991,7 +1025,6 @@ Partial Class frmEditor_Item
     Friend WithEvents scrlAnim As System.Windows.Forms.HScrollBar
     Friend WithEvents scrlRarity As System.Windows.Forms.HScrollBar
     Friend WithEvents cmbBind As System.Windows.Forms.ComboBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents scrlLevelReq As System.Windows.Forms.HScrollBar
     Friend WithEvents scrlAccessReq As System.Windows.Forms.HScrollBar
     Friend WithEvents cmbClassReq As System.Windows.Forms.ComboBox
@@ -1008,8 +1041,8 @@ Partial Class frmEditor_Item
     Friend WithEvents lblIntReq As System.Windows.Forms.Label
     Friend WithEvents scrlEndReq As System.Windows.Forms.HScrollBar
     Friend WithEvents lblEndReq As System.Windows.Forms.Label
-    Friend WithEvents scrlWillReq As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblWillReq As System.Windows.Forms.Label
+    Friend WithEvents scrlLuckReq As System.Windows.Forms.HScrollBar
+    Friend WithEvents lblLuckReq As System.Windows.Forms.Label
     Friend WithEvents fraEquipment As System.Windows.Forms.GroupBox
     Friend WithEvents scrlAddSpr As System.Windows.Forms.HScrollBar
     Friend WithEvents lblAddSpr As System.Windows.Forms.Label
@@ -1019,8 +1052,8 @@ Partial Class frmEditor_Item
     Friend WithEvents lblAddInt As System.Windows.Forms.Label
     Friend WithEvents scrlAddEnd As System.Windows.Forms.HScrollBar
     Friend WithEvents lblAddEnd As System.Windows.Forms.Label
-    Friend WithEvents scrlAddWill As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblAddWill As System.Windows.Forms.Label
+    Friend WithEvents scrlAddLuck As System.Windows.Forms.HScrollBar
+    Friend WithEvents lblAddLuck As System.Windows.Forms.Label
     Friend WithEvents scrlAddStr As System.Windows.Forms.HScrollBar
     Friend WithEvents lblAddStr As System.Windows.Forms.Label
     Friend WithEvents scrlSpeed As System.Windows.Forms.HScrollBar
@@ -1057,4 +1090,10 @@ Partial Class frmEditor_Item
     Friend WithEvents Label5 As Windows.Forms.Label
     Friend WithEvents cmbKnockBackTiles As Windows.Forms.ComboBox
     Friend WithEvents chkKnockBack As Windows.Forms.CheckBox
+    Friend WithEvents TabControl1 As Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As Windows.Forms.TabPage
+    Friend WithEvents Label6 As Windows.Forms.Label
+    Friend WithEvents TabPage2 As Windows.Forms.TabPage
+    Friend WithEvents Label7 As Windows.Forms.Label
+    Friend WithEvents chkRandomize As Windows.Forms.CheckBox
 End Class

@@ -139,8 +139,7 @@
     End Function
 
     Function GetPlayerProtection(ByVal Index As Long) As Long
-        Dim Armor As Long
-        Dim Helm As Long
+        Dim Armor As Long, Helm As Long, Shoes As Long, Gloves As Long
         GetPlayerProtection = 0
 
         ' Check for subscript out of range
@@ -148,8 +147,10 @@
             Exit Function
         End If
 
-        Armor = GetPlayerEquipment(Index, Armor)
+        Armor = GetPlayerEquipment(Index, Equipment.Armor)
         Helm = GetPlayerEquipment(Index, Equipment.Helmet)
+        Shoes = GetPlayerEquipment(Index, Equipment.Shoes)
+        Gloves = GetPlayerEquipment(Index, Equipment.Gloves)
         GetPlayerProtection = (GetPlayerStat(Index, Stats.endurance) \ 5)
 
         If Armor > 0 Then
@@ -158,6 +159,14 @@
 
         If Helm > 0 Then
             GetPlayerProtection = GetPlayerProtection + Item(Helm).Data2
+        End If
+
+        If Shoes > 0 Then
+            GetPlayerProtection = GetPlayerProtection + Item(Shoes).Data2
+        End If
+
+        If Gloves > 0 Then
+            GetPlayerProtection = GetPlayerProtection + Item(Gloves).Data2
         End If
 
     End Function
@@ -441,10 +450,11 @@
             End If
 
             ' Drop the goods if they get it
-            n = Int(Rnd() * Npc(NpcNum).DropChance) + 1
+            Dim tmpitem = Random(1, 5)
+            n = Int(Rnd() * Npc(NpcNum).DropChance(tmpitem)) + 1
 
             If n = 1 Then
-                SpawnItem(Npc(NpcNum).DropItem, Npc(NpcNum).DropItemValue, MapNum, MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
+                SpawnItem(Npc(NpcNum).DropItem(tmpitem), Npc(NpcNum).DropItemValue(tmpitem), MapNum, MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
             End If
 
             ' Now set HP to 0 so we know to actually kill them in the server loop (this prevents subscript out of range)
@@ -707,9 +717,10 @@
             MapNpc(MapNum).Npc(Attacker).TargetType = 0
 
             ' Drop the goods if they get it
-            n = Int(Rnd() * Npc(vNpcNum).DropChance) + 1
+            Dim tmpitem = Random(1, 5)
+            n = Int(Rnd() * Npc(vNpcNum).DropChance(tmpitem)) + 1
             If n = 1 Then
-                SpawnItem(Npc(vNpcNum).DropItem, Npc(vNpcNum).DropItemValue, MapNum, MapNpc(MapNum).Npc(Victim).x, MapNpc(MapNum).Npc(Victim).y)
+                SpawnItem(Npc(vNpcNum).DropItem(tmpitem), Npc(vNpcNum).DropItemValue(tmpitem), MapNum, MapNpc(MapNum).Npc(Victim).x, MapNpc(MapNum).Npc(Victim).y)
             End If
 
             ' Reset victim's stuff so it dies in loop

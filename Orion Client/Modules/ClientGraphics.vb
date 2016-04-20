@@ -92,6 +92,9 @@ Module ClientGraphics
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
 
+    Public DescriptionGFX As Texture
+    Public DescriptionGFXInfo As GraphicInfo
+
     ' Number of graphic files
     Public MapEditorBackBuffer As Bitmap
 
@@ -382,6 +385,15 @@ Module ClientGraphics
             ProjectileGFXInfo(i).width = ProjectileGFX(i).Size.X
             ProjectileGFXInfo(i).height = ProjectileGFX(i).Size.Y
         Next
+
+        DescriptionGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Description" & GFX_EXT) Then
+            DescriptionGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Description" & GFX_EXT)
+
+            'Cache the width and height
+            DescriptionGFXInfo.width = DescriptionGFX.Size.X
+            DescriptionGFXInfo.height = DescriptionGFX.Size.Y
+        End If
 
     End Sub
 
@@ -2354,6 +2366,7 @@ Module ClientGraphics
         Dim i As Long, itemnum As Long, itempic As Long
         Dim rec As Rectangle, rec_pos As Rectangle, playersprite As Long
         Dim tmpSprite2 As Sprite = New Sprite(CharPanelGFX)
+        Dim tempRarityColor As SFML.Graphics.Color
 
         If NumItems = 0 Then Exit Sub
 
@@ -2398,7 +2411,7 @@ Module ClientGraphics
                 With rec_pos
                     .Y = CharWindowY + EqTop + ((EqOffsetY + 32) * ((i - 1) \ EqColumns))
                     .Height = PIC_Y
-                    .X = CharWindowX + EqLeft + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
+                    .X = CharWindowX + EqLeft + 1 + ((EqOffsetX + 32) * (((i - 1) Mod EqColumns)))
                     .Width = PIC_X
                 End With
 
@@ -2406,6 +2419,30 @@ Module ClientGraphics
                 tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                 tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
                 GameWindow.Draw(tmpSprite)
+
+                ' set the name
+                Select Case Item(itemnum).Rarity
+                    Case 0 ' White
+                        tempRarityColor = ITEM_RARITY_COLOR_0
+                    Case 1 ' green
+                        tempRarityColor = ITEM_RARITY_COLOR_1
+                    Case 2 ' blue
+                        tempRarityColor = ITEM_RARITY_COLOR_2
+                    Case 3 ' maroon
+                        tempRarityColor = ITEM_RARITY_COLOR_3
+                    Case 4 ' purple
+                        tempRarityColor = ITEM_RARITY_COLOR_4
+                    Case 5 'gold
+                        tempRarityColor = ITEM_RARITY_COLOR_5
+                End Select
+
+                Dim rec2 As New RectangleShape
+                rec2.OutlineColor = New SFML.Graphics.Color(tempRarityColor)
+                rec2.OutlineThickness = 2
+                rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                rec2.Size = New Vector2f(30, 30)
+                rec2.Position = New Vector2f(rec_pos.X, rec_pos.Y)
+                GameWindow.Draw(rec2)
             End If
 
         Next
@@ -2426,8 +2463,8 @@ Module ClientGraphics
         DrawText(CharWindowX + 88, CharWindowY + 219, "End: " & GetPlayerStat(MyIndex, Stats.endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'vitality stat
         DrawText(CharWindowX + 6, CharWindowY + 235, "Vit: " & GetPlayerStat(MyIndex, Stats.vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'willpower stat
-        DrawText(CharWindowX + 88, CharWindowY + 235, "Will: " & GetPlayerStat(MyIndex, Stats.willpower), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'luck stat
+        DrawText(CharWindowX + 88, CharWindowY + 235, "Luck: " & GetPlayerStat(MyIndex, Stats.luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'intelligence stat
         DrawText(CharWindowX + 6, CharWindowY + 250, "Int: " & GetPlayerStat(MyIndex, Stats.intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'spirit stat
@@ -2443,7 +2480,7 @@ Module ClientGraphics
             'intelligence upgrade
             RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + IntellectUpgradeX, CharWindowY + IntellectUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'willpower upgrade
-            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + WillPowerUpgradeX, CharWindowY + WillPowerUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
+            RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + LuckUpgradeX, CharWindowY + LuckUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
             'spirit upgrade
             RenderTexture(CharPanelPlusGFX, GameWindow, CharWindowX + SpiritUpgradeX, CharWindowY + SpiritUpgradeY, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
         End If
@@ -3115,11 +3152,6 @@ NextLoop:
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
 
-        'Dim tmpSprite As Sprite = New Sprite(TargetGFX)
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.Window.Vector2f(X, y)
-        'GameWindow.Draw(tmpSprite)
-
         RenderTexture(TargetGFX, GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
 
     End Sub
@@ -3141,12 +3173,49 @@ NextLoop:
         width = (rec.Right - rec.Left)
         height = (rec.Bottom - rec.Top)
 
-        'Dim tmpSprite As Sprite = New Sprite(TargetGFX)
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
-        'GameWindow.Draw(tmpSprite)
-
         RenderTexture(TargetGFX, GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+    End Sub
+
+    Public Sub DrawItemDesc()
+        'first render panel
+        If ItemDescSize = 0 Then ' normal
+            RenderTexture(DescriptionGFX, GameWindow, CharWindowX - DescriptionGFXInfo.width, CharWindowY, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
+        Else
+            RenderTexture(DescriptionGFX, GameWindow, CharWindowX - DescriptionGFXInfo.width, CharWindowY, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height \ 2)
+        End If
+
+
+        'name
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 12, ItemDescName, ItemDescRarityColor, SFML.Graphics.Color.Black, GameWindow)
+        'info
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 28, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'speed
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 44, "Speed: " & ItemDescSpeed, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'level
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 58, "Level required: " & ItemDescLevel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'cost
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 74, "Worth: " & ItemDescCost, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'type
+        DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 90, "Type: " & ItemDescType, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        If ItemDescSize = 0 Then
+            'bonuses
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 118, "=Bonuses=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'strength
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 134, "Strenght: " & ItemDescStr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'vitality
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 150, "Vitality: " & ItemDescVit, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'intelligence
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 166, "Intelligence: " & ItemDescInt, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'endurance
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 182, "Endurance: " & ItemDescEnd, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'luck
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 198, "Luck: " & ItemDescLuck, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'spirit
+            DrawText(CharWindowX - DescriptionGFXInfo.width + 10, CharWindowY + 214, "Spirit: " & ItemDescSpr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
+
+
     End Sub
 
     Public Sub LoadGuiGraphics()
@@ -3193,10 +3262,12 @@ NextLoop:
 
         If pnlCharacterVisible = True Then
             DrawEquipment()
+            If ShowItemDesc = True Then DrawItemDesc()
         End If
 
         If pnlInventoryVisible = True Then
             DrawInventory()
+            If ShowItemDesc = True Then DrawItemDesc()
         End If
 
         If pnlSpellsVisible = True Then
