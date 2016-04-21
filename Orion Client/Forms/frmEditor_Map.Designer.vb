@@ -1410,7 +1410,7 @@ Partial Class frmEditor_Map
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.pnlAttributes)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.Name = "frmEditor_Map"
         Me.Text = "Map Editor"

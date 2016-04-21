@@ -52,6 +52,9 @@ Partial Class frmEditor_Spell
         Me.lblDir = New System.Windows.Forms.Label()
         Me.lblMap = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
+        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
         Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
         Me.lblProjectile = New System.Windows.Forms.Label()
         Me.chkProjectile = New System.Windows.Forms.CheckBox()
@@ -77,9 +80,6 @@ Partial Class frmEditor_Spell
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
-        Me.chkKnockBack = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -409,6 +409,35 @@ Partial Class frmEditor_Spell
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Basic Information"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(121, 413)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 68
+        Me.Label5.Text = "X Tiles"
+        '
+        'cmbKnockBackTiles
+        '
+        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbKnockBackTiles.FormattingEnabled = True
+        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(174, 410)
+        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
+        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(70, 21)
+        Me.cmbKnockBackTiles.TabIndex = 67
+        '
+        'chkKnockBack
+        '
+        Me.chkKnockBack.AutoSize = True
+        Me.chkKnockBack.Location = New System.Drawing.Point(11, 412)
+        Me.chkKnockBack.Name = "chkKnockBack"
+        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
+        Me.chkKnockBack.TabIndex = 66
+        Me.chkKnockBack.Text = "Has KnockBack"
+        Me.chkKnockBack.UseVisualStyleBackColor = True
+        '
         'scrlProjectile
         '
         Me.scrlProjectile.LargeChange = 1
@@ -631,35 +660,6 @@ Partial Class frmEditor_Spell
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(121, 413)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 13)
-        Me.Label5.TabIndex = 68
-        Me.Label5.Text = "X Tiles"
-        '
-        'cmbKnockBackTiles
-        '
-        Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbKnockBackTiles.FormattingEnabled = True
-        Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
-        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(174, 410)
-        Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
-        Me.cmbKnockBackTiles.Size = New System.Drawing.Size(70, 21)
-        Me.cmbKnockBackTiles.TabIndex = 67
-        '
-        'chkKnockBack
-        '
-        Me.chkKnockBack.AutoSize = True
-        Me.chkKnockBack.Location = New System.Drawing.Point(11, 412)
-        Me.chkKnockBack.Name = "chkKnockBack"
-        Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
-        Me.chkKnockBack.TabIndex = 66
-        Me.chkKnockBack.Text = "Has KnockBack"
-        Me.chkKnockBack.UseVisualStyleBackColor = True
-        '
         'frmEditor_Spell
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -671,9 +671,9 @@ Partial Class frmEditor_Spell
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Spell"
-        Me.Text = "frmEditor_Spell"
+        Me.Text = "Spell Editor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)

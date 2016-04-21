@@ -76,6 +76,7 @@ Partial Class frmMenu
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -83,6 +84,7 @@ Partial Class frmMenu
         CType(Me.placeholderforsprite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMainMenu.SuspendLayout()
         Me.pnlIPConfig.SuspendLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlLogin
@@ -472,7 +474,7 @@ Partial Class frmMenu
         Me.pnlMainMenu.Controls.Add(Me.Label5)
         Me.pnlMainMenu.Controls.Add(Me.lblNews)
         Me.pnlMainMenu.ForeColor = System.Drawing.Color.White
-        Me.pnlMainMenu.Location = New System.Drawing.Point(160, 149)
+        Me.pnlMainMenu.Location = New System.Drawing.Point(160, 180)
         Me.pnlMainMenu.Name = "pnlMainMenu"
         Me.pnlMainMenu.Size = New System.Drawing.Size(400, 192)
         Me.pnlMainMenu.TabIndex = 46
@@ -624,6 +626,17 @@ Partial Class frmMenu
         Me.Label13.TabIndex = 17
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'picLogo
+        '
+        Me.picLogo.BackColor = System.Drawing.Color.Transparent
+        Me.picLogo.BackgroundImage = CType(resources.GetObject("picLogo.BackgroundImage"), System.Drawing.Image)
+        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.picLogo.Location = New System.Drawing.Point(77, 1)
+        Me.picLogo.Name = "picLogo"
+        Me.picLogo.Size = New System.Drawing.Size(560, 173)
+        Me.picLogo.TabIndex = 52
+        Me.picLogo.TabStop = False
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -645,6 +658,7 @@ Partial Class frmMenu
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
         Me.Controls.Add(Me.pnlMainMenu)
+        Me.Controls.Add(Me.picLogo)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -665,6 +679,7 @@ Partial Class frmMenu
         Me.pnlMainMenu.PerformLayout()
         Me.pnlIPConfig.ResumeLayout(False)
         Me.pnlIPConfig.PerformLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -721,4 +736,5 @@ Partial Class frmMenu
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents btnLogin As Windows.Forms.Panel
+    Friend WithEvents picLogo As Windows.Forms.PictureBox
 End Class

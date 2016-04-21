@@ -57,6 +57,7 @@ Partial Class frmEditor_Item
         Me.lblAccessReq = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.fraEquipment = New System.Windows.Forms.GroupBox()
+        Me.chkRandomize = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
         Me.chkKnockBack = New System.Windows.Forms.CheckBox()
@@ -108,7 +109,6 @@ Partial Class frmEditor_Item
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.chkRandomize = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
@@ -452,6 +452,16 @@ Partial Class frmEditor_Item
         Me.fraEquipment.TabStop = False
         Me.fraEquipment.Text = "Equipment Data"
         Me.fraEquipment.Visible = False
+        '
+        'chkRandomize
+        '
+        Me.chkRandomize.AutoSize = True
+        Me.chkRandomize.Location = New System.Drawing.Point(297, 201)
+        Me.chkRandomize.Name = "chkRandomize"
+        Me.chkRandomize.Size = New System.Drawing.Size(106, 17)
+        Me.chkRandomize.TabIndex = 66
+        Me.chkRandomize.Text = "Randomize Stats"
+        Me.chkRandomize.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -961,16 +971,6 @@ Partial Class frmEditor_Item
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
         '
-        'chkRandomize
-        '
-        Me.chkRandomize.AutoSize = True
-        Me.chkRandomize.Location = New System.Drawing.Point(297, 201)
-        Me.chkRandomize.Name = "chkRandomize"
-        Me.chkRandomize.Size = New System.Drawing.Size(106, 17)
-        Me.chkRandomize.TabIndex = 66
-        Me.chkRandomize.Text = "Randomize Stats"
-        Me.chkRandomize.UseVisualStyleBackColor = True
-        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -986,9 +986,9 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.fraFurniture)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Item"
-        Me.Text = "frmEditor_Item"
+        Me.Text = "Item Editor"
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraEquipment.ResumeLayout(False)

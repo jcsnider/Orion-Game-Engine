@@ -65,10 +65,13 @@ Module ClientGraphics
     Public HotBarGFX As Texture
     Public HotBarGFXInfo As GraphicInfo
 
-    Public ChatWindow As Texture
-    Public ChatWindowInfo As GraphicInfo
+    Public ChatWindowGFX As Texture
+    Public ChatWindowGFXInfo As GraphicInfo
 
-    Public TextBB As Bitmap
+    Public ButtonGFX As Texture
+    Public ButtonGFXInfo As GraphicInfo
+
+    'Public TextBB As Bitmap
 
     Public HUDPanelGFX As Texture
     Public HUDPanelGFXInfo As GraphicInfo
@@ -366,13 +369,13 @@ Module ClientGraphics
             EXPBarGFXInfo.height = EXPBarGFX.Size.Y
         End If
 
-        ChatWindowInfo = New GraphicInfo
+        ChatWindowGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Chat" & GFX_EXT) Then
-            ChatWindow = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Chat" & GFX_EXT)
+            ChatWindowGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Chat" & GFX_EXT)
 
             'Cache the width and height
-            ChatWindowInfo.width = ChatWindow.Size.X
-            ChatWindowInfo.height = ChatWindow.Size.Y
+            ChatWindowGFXInfo.width = ChatWindowGFX.Size.X
+            ChatWindowGFXInfo.height = ChatWindowGFX.Size.Y
         End If
 
         ReDim ProjectileGFX(0 To NumProjectiles)
@@ -395,6 +398,15 @@ Module ClientGraphics
             DescriptionGFXInfo.height = DescriptionGFX.Size.Y
         End If
 
+        ButtonGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Button" & GFX_EXT) Then
+            ButtonGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Button" & GFX_EXT)
+
+            'Cache the width and height
+            ButtonGFXInfo.width = ButtonGFX.Size.X
+            ButtonGFXInfo.height = ButtonGFX.Size.Y
+        End If
+
     End Sub
 
     Sub DrawChat()
@@ -402,7 +414,7 @@ Module ClientGraphics
         Dim text As String
 
         'first draw back image
-        RenderTexture(ChatWindow, GameWindow, ChatWindowX, ChatWindowY, 0, 0, ChatWindowInfo.width, ChatWindowInfo.height)
+        RenderTexture(ChatWindowGFX, GameWindow, ChatWindowX, ChatWindowY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
 
         y = 5
         x = 5
@@ -1513,6 +1525,29 @@ Module ClientGraphics
             rectShape.FillColor = SFML.Graphics.Color.Cyan
             GameWindow.Draw(rectShape)
         End If
+
+        ' check for hp bar
+        For i = 1 To MAX_MAP_NPCS
+            If Map.Npc(i) > 0 Then
+
+                ' lock to npc
+                tmpX = MapNpc(i).X * PIC_X + MapNpc(i).XOffset
+                tmpY = MapNpc(i).Y * PIC_Y + MapNpc(i).YOffset + 35
+                If MapNpc(i).Vital(Vitals.HP) > 0 Then
+                    ' calculate the width to fill
+                    barWidth = ((MapNpc(i).Vital(Vitals.HP) / (Npc(MapNpc(i).Num).HP) * 32))
+                    ' draw bars
+                    rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                    Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+                    rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 75))
+                    rectShape.FillColor = SFML.Graphics.Color.Red
+                    GameWindow.Draw(rectShape)
+                End If
+            End If
+        Next
+
+
+
     End Sub
 
     Sub DrawMapName()
@@ -1873,7 +1908,7 @@ Module ClientGraphics
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
         If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
-        If Not ChatWindow Is Nothing Then ChatWindow.Dispose()
+        If Not ChatWindowGFX Is Nothing Then ChatWindowGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -3120,10 +3155,6 @@ NextLoop:
                         .Width = PIC_X
                     End With
 
-                    'Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellicon))
-                    'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    'tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                    'GameWindow.Draw(tmpSprite)
                     RenderTexture(SpellIconsGFX(spellicon), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
             End If
@@ -3218,6 +3249,53 @@ NextLoop:
 
     End Sub
 
+    Public Sub DrawSpellDesc()
+        'first render panel
+        RenderTexture(DescriptionGFX, GameWindow, SpellWindowX - DescriptionGFXInfo.width, SpellWindowY, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
+
+        'name
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 12, SpellDescName, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'type
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 28, SpellDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'cast time
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 44, "Cast Time: " & SpellDescCastTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'cool down
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 58, "CoolDown: " & SpellDescCoolDown, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'Damage
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 74, "Damage: " & SpellDescDamage, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'AOE
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 90, "Aoe: " & SpellDescAOE, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'range
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 104, "Range: " & SpellDescRange, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        'requirements
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 128, "=Requirements=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'Mp
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 144, "MP: " & SpellDescReqMp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'level
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 160, "Level: " & SpellDescReqLvl, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'Access
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 176, "Access: " & SpellDescReqAccess, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'Class
+        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 192, "Class: " & SpellDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+    End Sub
+
+    Public Sub DrawDialogPanel()
+        'first render panel
+        RenderTexture(ChatWindowGFX, GameWindow, DialogPanelX, DialogPanelY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
+
+        DrawText(DialogPanelX + 40, DialogPanelY + 10, Trim(DialogMsg), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        'render ok button
+        RenderTexture(ButtonGFX, GameWindow, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
+        DrawText(DialogPanelX + OkButtonX + 40, DialogPanelY + OkButtonY + 10, "Ok", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        'render cancel button
+        RenderTexture(ButtonGFX, GameWindow, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
+        DrawText(DialogPanelX + CancelButtonX + 30, DialogPanelY + CancelButtonY + 10, "Cancel", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+    End Sub
+
     Public Sub LoadGuiGraphics()
 
         'main menu
@@ -3272,6 +3350,11 @@ NextLoop:
 
         If pnlSpellsVisible = True Then
             DrawPlayerSpells()
+            If ShowSpellDesc = True Then DrawSpellDesc()
+        End If
+
+        If DialogPanelVisible = True Then
+            DrawDialogPanel()
         End If
     End Sub
 End Module

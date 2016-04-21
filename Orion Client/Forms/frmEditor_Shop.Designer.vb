@@ -260,9 +260,9 @@ Partial Class frmEditor_Shop
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Shop"
-        Me.Text = "frmEditor_Shop"
+        Me.Text = "Shop Editor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()

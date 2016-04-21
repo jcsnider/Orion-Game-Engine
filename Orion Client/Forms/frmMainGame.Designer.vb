@@ -41,31 +41,6 @@ Partial Class frmMainGame
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
-        Me.pnlSpellDesc = New System.Windows.Forms.Panel()
-        Me.lblSpellRange = New System.Windows.Forms.Label()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.lblSpellAoE = New System.Windows.Forms.Label()
-        Me.lblSpellDamage = New System.Windows.Forms.Label()
-        Me.lblSpellCool = New System.Windows.Forms.Label()
-        Me.lblSpellCast = New System.Windows.Forms.Label()
-        Me.lblSpellType = New System.Windows.Forms.Label()
-        Me.lblSpellName = New System.Windows.Forms.Label()
-        Me.lblSpellClass = New System.Windows.Forms.Label()
-        Me.lblSpellAccess = New System.Windows.Forms.Label()
-        Me.lblSpellLevel = New System.Windows.Forms.Label()
-        Me.lblSpellMp = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.lblSpellVital = New System.Windows.Forms.Label()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
         Me.pnlShop = New System.Windows.Forms.Panel()
         Me.lblLeaveShop = New System.Windows.Forms.Label()
         Me.lblShopSell = New System.Windows.Forms.Label()
@@ -110,10 +85,6 @@ Partial Class frmMainGame
         Me.lblQuestNameVisual = New System.Windows.Forms.Label()
         Me.lblQuestAccept = New System.Windows.Forms.Label()
         Me.lblQuestExtra = New System.Windows.Forms.Label()
-        Me.pnlDialog = New System.Windows.Forms.Panel()
-        Me.lblDialogCancel = New System.Windows.Forms.Label()
-        Me.lblDialogOk = New System.Windows.Forms.Label()
-        Me.lblDialogText = New System.Windows.Forms.Label()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
         Me.pnlEventChat = New System.Windows.Forms.Panel()
@@ -129,14 +100,12 @@ Partial Class frmMainGame
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
-        Me.pnlSpellDesc.SuspendLayout()
         Me.pnlShop.SuspendLayout()
         Me.pnlBank.SuspendLayout()
         Me.pnlTrade.SuspendLayout()
         Me.pnlMapreport.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlQuestSpeech.SuspendLayout()
-        Me.pnlDialog.SuspendLayout()
         Me.pnlEventChat.SuspendLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -326,259 +295,6 @@ Partial Class frmMainGame
         Me.lblCurrency.TabIndex = 1
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'pnlSpellDesc
-        '
-        Me.pnlSpellDesc.BackColor = System.Drawing.Color.White
-        Me.pnlSpellDesc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellRange)
-        Me.pnlSpellDesc.Controls.Add(Me.Label60)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellAoE)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellDamage)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellCool)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellCast)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellType)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellName)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellClass)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellAccess)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellLevel)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellMp)
-        Me.pnlSpellDesc.Controls.Add(Me.Label47)
-        Me.pnlSpellDesc.Controls.Add(Me.Label48)
-        Me.pnlSpellDesc.Controls.Add(Me.Label49)
-        Me.pnlSpellDesc.Controls.Add(Me.Label50)
-        Me.pnlSpellDesc.Controls.Add(Me.Label51)
-        Me.pnlSpellDesc.Controls.Add(Me.Label52)
-        Me.pnlSpellDesc.Controls.Add(Me.lblSpellVital)
-        Me.pnlSpellDesc.Controls.Add(Me.Label54)
-        Me.pnlSpellDesc.Controls.Add(Me.Label55)
-        Me.pnlSpellDesc.Controls.Add(Me.Label56)
-        Me.pnlSpellDesc.Controls.Add(Me.Label57)
-        Me.pnlSpellDesc.Controls.Add(Me.Label58)
-        Me.pnlSpellDesc.ForeColor = System.Drawing.Color.Black
-        Me.pnlSpellDesc.Location = New System.Drawing.Point(203, 541)
-        Me.pnlSpellDesc.Name = "pnlSpellDesc"
-        Me.pnlSpellDesc.Size = New System.Drawing.Size(175, 200)
-        Me.pnlSpellDesc.TabIndex = 17
-        Me.pnlSpellDesc.Visible = False
-        '
-        'lblSpellRange
-        '
-        Me.lblSpellRange.AutoSize = True
-        Me.lblSpellRange.Location = New System.Drawing.Point(77, 110)
-        Me.lblSpellRange.Name = "lblSpellRange"
-        Me.lblSpellRange.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellRange.TabIndex = 27
-        Me.lblSpellRange.Text = "N/A"
-        '
-        'Label60
-        '
-        Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(3, 110)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(42, 13)
-        Me.Label60.TabIndex = 26
-        Me.Label60.Text = "Range:"
-        '
-        'lblSpellAoE
-        '
-        Me.lblSpellAoE.AutoSize = True
-        Me.lblSpellAoE.Location = New System.Drawing.Point(77, 94)
-        Me.lblSpellAoE.Name = "lblSpellAoE"
-        Me.lblSpellAoE.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellAoE.TabIndex = 25
-        Me.lblSpellAoE.Text = "N/A"
-        '
-        'lblSpellDamage
-        '
-        Me.lblSpellDamage.AutoSize = True
-        Me.lblSpellDamage.Location = New System.Drawing.Point(77, 79)
-        Me.lblSpellDamage.Name = "lblSpellDamage"
-        Me.lblSpellDamage.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellDamage.TabIndex = 24
-        Me.lblSpellDamage.Text = "N/A"
-        '
-        'lblSpellCool
-        '
-        Me.lblSpellCool.AutoSize = True
-        Me.lblSpellCool.Location = New System.Drawing.Point(77, 64)
-        Me.lblSpellCool.Name = "lblSpellCool"
-        Me.lblSpellCool.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellCool.TabIndex = 23
-        Me.lblSpellCool.Text = "N/A"
-        '
-        'lblSpellCast
-        '
-        Me.lblSpellCast.AutoSize = True
-        Me.lblSpellCast.Location = New System.Drawing.Point(77, 49)
-        Me.lblSpellCast.Name = "lblSpellCast"
-        Me.lblSpellCast.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellCast.TabIndex = 22
-        Me.lblSpellCast.Text = "N/A"
-        '
-        'lblSpellType
-        '
-        Me.lblSpellType.AutoSize = True
-        Me.lblSpellType.Location = New System.Drawing.Point(77, 34)
-        Me.lblSpellType.Name = "lblSpellType"
-        Me.lblSpellType.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellType.TabIndex = 21
-        Me.lblSpellType.Text = "N/A"
-        '
-        'lblSpellName
-        '
-        Me.lblSpellName.AutoSize = True
-        Me.lblSpellName.Location = New System.Drawing.Point(77, 19)
-        Me.lblSpellName.Name = "lblSpellName"
-        Me.lblSpellName.Size = New System.Drawing.Size(27, 13)
-        Me.lblSpellName.TabIndex = 20
-        Me.lblSpellName.Text = "N/A"
-        '
-        'lblSpellClass
-        '
-        Me.lblSpellClass.AutoSize = True
-        Me.lblSpellClass.Location = New System.Drawing.Point(47, 181)
-        Me.lblSpellClass.Name = "lblSpellClass"
-        Me.lblSpellClass.Size = New System.Drawing.Size(41, 13)
-        Me.lblSpellClass.TabIndex = 17
-        Me.lblSpellClass.Text = "Warrior"
-        '
-        'lblSpellAccess
-        '
-        Me.lblSpellAccess.AutoSize = True
-        Me.lblSpellAccess.Location = New System.Drawing.Point(47, 168)
-        Me.lblSpellAccess.Name = "lblSpellAccess"
-        Me.lblSpellAccess.Size = New System.Drawing.Size(13, 13)
-        Me.lblSpellAccess.TabIndex = 16
-        Me.lblSpellAccess.Text = "0"
-        '
-        'lblSpellLevel
-        '
-        Me.lblSpellLevel.AutoSize = True
-        Me.lblSpellLevel.Location = New System.Drawing.Point(47, 153)
-        Me.lblSpellLevel.Name = "lblSpellLevel"
-        Me.lblSpellLevel.Size = New System.Drawing.Size(19, 13)
-        Me.lblSpellLevel.TabIndex = 15
-        Me.lblSpellLevel.Text = "99"
-        '
-        'lblSpellMp
-        '
-        Me.lblSpellMp.AutoSize = True
-        Me.lblSpellMp.Location = New System.Drawing.Point(47, 138)
-        Me.lblSpellMp.Name = "lblSpellMp"
-        Me.lblSpellMp.Size = New System.Drawing.Size(19, 13)
-        Me.lblSpellMp.TabIndex = 14
-        Me.lblSpellMp.Text = "99"
-        '
-        'Label47
-        '
-        Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(3, 181)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(35, 13)
-        Me.Label47.TabIndex = 11
-        Me.Label47.Text = "Class:"
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(3, 168)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(45, 13)
-        Me.Label48.TabIndex = 10
-        Me.Label48.Text = "Access:"
-        '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(3, 153)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(36, 13)
-        Me.Label49.TabIndex = 9
-        Me.Label49.Text = "Level:"
-        '
-        'Label50
-        '
-        Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(3, 138)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(26, 13)
-        Me.Label50.TabIndex = 8
-        Me.Label50.Text = "MP:"
-        '
-        'Label51
-        '
-        Me.Label51.AutoSize = True
-        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(3, 123)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(97, 15)
-        Me.Label51.TabIndex = 7
-        Me.Label51.Text = "Requirements"
-        '
-        'Label52
-        '
-        Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(3, 94)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(75, 13)
-        Me.Label52.TabIndex = 6
-        Me.Label52.Text = "Area of Effect:"
-        '
-        'lblSpellVital
-        '
-        Me.lblSpellVital.AutoSize = True
-        Me.lblSpellVital.Location = New System.Drawing.Point(3, 79)
-        Me.lblSpellVital.Name = "lblSpellVital"
-        Me.lblSpellVital.Size = New System.Drawing.Size(50, 13)
-        Me.lblSpellVital.TabIndex = 5
-        Me.lblSpellVital.Text = "Damage:"
-        '
-        'Label54
-        '
-        Me.Label54.AutoSize = True
-        Me.Label54.Location = New System.Drawing.Point(3, 64)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(62, 13)
-        Me.Label54.TabIndex = 4
-        Me.Label54.Text = "Cool Down:"
-        '
-        'Label55
-        '
-        Me.Label55.AutoSize = True
-        Me.Label55.Location = New System.Drawing.Point(3, 49)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(57, 13)
-        Me.Label55.TabIndex = 3
-        Me.Label55.Text = "Cast Time:"
-        '
-        'Label56
-        '
-        Me.Label56.AutoSize = True
-        Me.Label56.Location = New System.Drawing.Point(3, 34)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(34, 13)
-        Me.Label56.TabIndex = 2
-        Me.Label56.Text = "Type:"
-        '
-        'Label57
-        '
-        Me.Label57.AutoSize = True
-        Me.Label57.Location = New System.Drawing.Point(3, 19)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(38, 13)
-        Me.Label57.TabIndex = 1
-        Me.Label57.Text = "Name:"
-        '
-        'Label58
-        '
-        Me.Label58.AutoSize = True
-        Me.Label58.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(4, 3)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(80, 15)
-        Me.Label58.TabIndex = 0
-        Me.Label58.Text = "Information"
         '
         'pnlShop
         '
@@ -1091,56 +807,6 @@ Partial Class frmMainGame
         Me.lblQuestExtra.Text = "Extra"
         Me.lblQuestExtra.Visible = False
         '
-        'pnlDialog
-        '
-        Me.pnlDialog.BackColor = System.Drawing.Color.Black
-        Me.pnlDialog.BackgroundImage = CType(resources.GetObject("pnlDialog.BackgroundImage"), System.Drawing.Image)
-        Me.pnlDialog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlDialog.Controls.Add(Me.lblDialogCancel)
-        Me.pnlDialog.Controls.Add(Me.lblDialogOk)
-        Me.pnlDialog.Controls.Add(Me.lblDialogText)
-        Me.pnlDialog.Location = New System.Drawing.Point(248, 402)
-        Me.pnlDialog.Name = "pnlDialog"
-        Me.pnlDialog.Size = New System.Drawing.Size(480, 133)
-        Me.pnlDialog.TabIndex = 40
-        Me.pnlDialog.Visible = False
-        '
-        'lblDialogCancel
-        '
-        Me.lblDialogCancel.BackColor = System.Drawing.Color.Transparent
-        Me.lblDialogCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDialogCancel.ForeColor = System.Drawing.Color.White
-        Me.lblDialogCancel.Location = New System.Drawing.Point(295, 98)
-        Me.lblDialogCancel.Name = "lblDialogCancel"
-        Me.lblDialogCancel.Size = New System.Drawing.Size(180, 16)
-        Me.lblDialogCancel.TabIndex = 4
-        Me.lblDialogCancel.Text = "Cancel"
-        Me.lblDialogCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblDialogOk
-        '
-        Me.lblDialogOk.BackColor = System.Drawing.Color.Transparent
-        Me.lblDialogOk.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDialogOk.ForeColor = System.Drawing.Color.White
-        Me.lblDialogOk.Location = New System.Drawing.Point(8, 98)
-        Me.lblDialogOk.Name = "lblDialogOk"
-        Me.lblDialogOk.Size = New System.Drawing.Size(180, 16)
-        Me.lblDialogOk.TabIndex = 3
-        Me.lblDialogOk.Text = "Okay"
-        Me.lblDialogOk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblDialogText
-        '
-        Me.lblDialogText.BackColor = System.Drawing.Color.Transparent
-        Me.lblDialogText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDialogText.ForeColor = System.Drawing.Color.White
-        Me.lblDialogText.Location = New System.Drawing.Point(3, 16)
-        Me.lblDialogText.Name = "lblDialogText"
-        Me.lblDialogText.Size = New System.Drawing.Size(474, 82)
-        Me.lblDialogText.TabIndex = 1
-        Me.lblDialogText.Text = "Dialog Text"
-        Me.lblDialogText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'pnlTmpSkill
         '
         Me.pnlTmpSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
@@ -1259,10 +925,8 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
-        Me.Controls.Add(Me.pnlDialog)
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlBank)
-        Me.Controls.Add(Me.pnlSpellDesc)
         Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
@@ -1287,8 +951,6 @@ Partial Class frmMainGame
         Me.GroupBox1.PerformLayout()
         Me.pnlCurrency.ResumeLayout(False)
         Me.pnlCurrency.PerformLayout()
-        Me.pnlSpellDesc.ResumeLayout(False)
-        Me.pnlSpellDesc.PerformLayout()
         Me.pnlShop.ResumeLayout(False)
         Me.pnlBank.ResumeLayout(False)
         Me.pnlTrade.ResumeLayout(False)
@@ -1298,7 +960,6 @@ Partial Class frmMainGame
         Me.pnlQuestLog.PerformLayout()
         Me.pnlQuestSpeech.ResumeLayout(False)
         Me.pnlQuestSpeech.PerformLayout()
-        Me.pnlDialog.ResumeLayout(False)
         Me.pnlEventChat.ResumeLayout(False)
         Me.pnlEventChat.PerformLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1319,31 +980,6 @@ Partial Class frmMainGame
     Friend WithEvents lblCurrencyCancel As System.Windows.Forms.Label
     Friend WithEvents lblCurrencyOk As System.Windows.Forms.Label
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
-    Friend WithEvents pnlSpellDesc As System.Windows.Forms.Panel
-    Friend WithEvents lblSpellRange As System.Windows.Forms.Label
-    Friend WithEvents Label60 As System.Windows.Forms.Label
-    Friend WithEvents lblSpellAoE As System.Windows.Forms.Label
-    Friend WithEvents lblSpellDamage As System.Windows.Forms.Label
-    Friend WithEvents lblSpellCool As System.Windows.Forms.Label
-    Friend WithEvents lblSpellCast As System.Windows.Forms.Label
-    Friend WithEvents lblSpellType As System.Windows.Forms.Label
-    Friend WithEvents lblSpellName As System.Windows.Forms.Label
-    Friend WithEvents lblSpellClass As System.Windows.Forms.Label
-    Friend WithEvents lblSpellAccess As System.Windows.Forms.Label
-    Friend WithEvents lblSpellLevel As System.Windows.Forms.Label
-    Friend WithEvents lblSpellMp As System.Windows.Forms.Label
-    Friend WithEvents Label47 As System.Windows.Forms.Label
-    Friend WithEvents Label48 As System.Windows.Forms.Label
-    Friend WithEvents Label49 As System.Windows.Forms.Label
-    Friend WithEvents Label50 As System.Windows.Forms.Label
-    Friend WithEvents Label51 As System.Windows.Forms.Label
-    Friend WithEvents Label52 As System.Windows.Forms.Label
-    Friend WithEvents lblSpellVital As System.Windows.Forms.Label
-    Friend WithEvents Label54 As System.Windows.Forms.Label
-    Friend WithEvents Label55 As System.Windows.Forms.Label
-    Friend WithEvents Label56 As System.Windows.Forms.Label
-    Friend WithEvents Label57 As System.Windows.Forms.Label
-    Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents pnlShop As System.Windows.Forms.Panel
     Friend WithEvents pnlShopItems As System.Windows.Forms.Panel
     Friend WithEvents lblShopName As System.Windows.Forms.Label
@@ -1390,10 +1026,6 @@ Partial Class frmMainGame
     Friend WithEvents lblQuestNameVisual As Windows.Forms.Label
     Friend WithEvents lblQuestAccept As Windows.Forms.Label
     Friend WithEvents lblQuestExtra As Windows.Forms.Label
-    Friend WithEvents pnlDialog As Windows.Forms.Panel
-    Friend WithEvents lblDialogCancel As Windows.Forms.Label
-    Friend WithEvents lblDialogOk As Windows.Forms.Label
-    Friend WithEvents lblDialogText As Windows.Forms.Label
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label

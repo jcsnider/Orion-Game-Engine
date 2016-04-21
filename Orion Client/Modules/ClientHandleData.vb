@@ -82,6 +82,7 @@
         Packets.Add(ServerPackets.SCheckforMap, AddressOf Packet_CheckMap)
         Packets.Add(ServerPackets.SMapData, AddressOf Packet_MapData)
         Packets.Add(ServerPackets.SMapNpcData, AddressOf Packet_MapNPCData)
+        Packets.Add(ServerPackets.SMapNpcUpdate, AddressOf Packet_MapNPCUpdate)
         Packets.Add(ServerPackets.SMapDone, AddressOf Packet_MapDone)
         Packets.Add(ServerPackets.SGlobalMsg, AddressOf Packet_GlobalMessage)
         Packets.Add(ServerPackets.SPlayerMsg, AddressOf Packet_PlayerMessage)
@@ -1082,6 +1083,27 @@
             End With
 
         Next
+
+        Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_MapNPCUpdate(ByVal Data() As Byte)
+        Dim NpcNum As Long
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadLong <> ServerPackets.SMapNpcUpdate Then Exit Sub
+
+        npcnum = Buffer.ReadLong
+
+        With MapNpc(npcnum)
+            .Num = Buffer.ReadLong
+            .X = Buffer.ReadLong
+            .Y = Buffer.ReadLong
+            .Dir = Buffer.ReadLong
+            .Vital(Vitals.HP) = Buffer.ReadLong
+        End With
 
         Buffer = Nothing
     End Sub

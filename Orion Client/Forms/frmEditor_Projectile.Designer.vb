@@ -202,6 +202,7 @@ Partial Class frmEditor_Projectile
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Projectile"
         Me.Text = "Projectile Editor"
         Me.GroupBox1.ResumeLayout(False)

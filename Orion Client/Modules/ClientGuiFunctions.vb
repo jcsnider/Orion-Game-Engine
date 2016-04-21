@@ -3,10 +3,10 @@ Imports System.Windows.Forms
 
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
-        Dim x2 As Long, y2 As Long, eqNum As Long, InvNum As Long, spellslot As Long
+        Dim eqNum As Long, InvNum As Long, spellslot As Long
 
         If InMapEditor Then Exit Sub
-
+        ShowItemDesc = False
         'Charpanel
         If pnlCharacterVisible Then
             If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
@@ -53,7 +53,6 @@ Public Module ClientGuiFunctions
                         LastItemDesc = 0 ' no item was last loaded
                     End If
                 End If
-
             End If
         ElseIf pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then
@@ -64,26 +63,26 @@ Public Module ClientGuiFunctions
                     If InTrade Then Exit Sub
                     If InBank Or InShop Then Exit Sub
                     DrawSpellItem(X, Y)
-                    frmMainGame.pnlSpellDesc.Visible = False
                     LastSpellDesc = 0 ' no item was last loaded
+                    ShowSpellDesc = False
                 Else
                     spellslot = IsPlayerSpell(X, Y)
 
                     If spellslot <> 0 Then
-                        y2 = SpellWindowY ' - frmMainGame.pnlItemDesc.Height - 2
-                        x2 = SpellWindowX - frmMainGame.pnlSpellDesc.Width - 2
-                        UpdateSpellWindow(PlayerSpells(spellslot), x2, y2)
+                        UpdateSpellWindow(PlayerSpells(spellslot))
                         LastSpellDesc = PlayerSpells(spellslot)
+                        ShowSpellDesc = True
                         Exit Sub
                     Else
-                        frmMainGame.pnlSpellDesc.Visible = False
                         LastSpellDesc = 0
+                        ShowSpellDesc = False
                     End If
                 End If
 
             End If
         Else
             ShowItemDesc = False
+            ShowSpellDesc = False
         End If
 
     End Sub
@@ -271,6 +270,56 @@ Public Module ClientGuiFunctions
                 End If
                 frmMainGame.txtMeChat.Focus()
             End If
+            'Spell panel
+            'ElseIf pnlSpellsVisible = True Then
+            '    If AboveSpellpanel(X, Y) Then
+            '        If SelSpellSlot = True Then
+            '            spellnum = IsPlayerSpell(SpellX, SpellY)
+
+            '            If spellnum <> 0 Then
+            '                SendSetHotbarSkill(SelHotbarSlot, spellnum)
+            '            End If
+            '        End If
+            '    End If
+
+        End If
+
+        If DialogPanelVisible Then
+            'ok button
+            If X > DialogPanelX + OkButtonX And X < DialogPanelX + OkButtonX + ButtonGFXInfo.width And Y > DialogPanelY + OkButtonY And Y < DialogPanelY + OkButtonY + ButtonGFXInfo.height Then
+                VbKeyDown = False
+                VbKeyUp = False
+                VbKeyLeft = False
+                VbKeyRight = False
+
+                If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer
+                    SendBuyHouse(1)
+                ElseIf DIALOGUE_TYPE_VISIT Then
+                    SendVisit(1)
+                ElseIf DIALOGUE_TYPE_PARTY Then
+                    SendJoinParty()
+                End If
+
+                DialogPanelVisible = False
+            End If
+            'cancel button
+            If X > DialogPanelX + CancelButtonX And X < DialogPanelX + CancelButtonX + ButtonGFXInfo.width And Y > DialogPanelY + CancelButtonY And Y < DialogPanelY + CancelButtonY + ButtonGFXInfo.height Then
+                VbKeyDown = False
+                VbKeyUp = False
+                VbKeyLeft = False
+                VbKeyRight = False
+
+                If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer declined
+                    SendBuyHouse(0)
+                ElseIf DIALOGUE_TYPE_VISIT Then
+                    SendVisit(0)
+                ElseIf DIALOGUE_TYPE_PARTY Then
+
+                End If
+
+                DialogPanelVisible = False
+            End If
+            CheckGuiClick = True
         End If
 
 

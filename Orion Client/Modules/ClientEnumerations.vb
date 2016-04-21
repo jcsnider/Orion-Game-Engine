@@ -28,6 +28,7 @@
         SMapData
         SMapItemData
         SMapNpcData
+        SMapNpcUpdate
         SMapDone
         SGlobalMsg
         SAdminMsg

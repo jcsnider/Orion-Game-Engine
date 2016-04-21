@@ -1007,7 +1007,6 @@ Module ClientGameLogic
 
         If InitMapProperties = True Then
             MapPropertiesInit()
-            'frmEditor_MapProperties.Visible = True
             InitMapProperties = False
         End If
 
@@ -1027,7 +1026,6 @@ Module ClientGameLogic
 
         If Adminvisible = True Then
             frmAdmin.Visible = Not frmAdmin.Visible
-            'If frmAdmin.Visible Then frmAdmin.BringToFront()
             Adminvisible = False
         End If
 
@@ -1088,12 +1086,11 @@ Module ClientGameLogic
         End If
 
         If UpdateDialog = True Then
-            If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer
-                frmMainGame.lblDialogText.Text = DialogMsg
-                frmMainGame.lblDialogOk.Visible = True
-                frmMainGame.lblDialogCancel.Visible = True
+            If DialogType = DIALOGUE_TYPE_BUYHOME Or DialogType = DIALOGUE_TYPE_VISIT Then 'house offer & visit
 
-                frmMainGame.pnlDialog.Visible = True
+                DialogPanelVisible = True
+            ElseIf DialogType = DIALOGUE_TYPE_PARTY Then
+                DialogPanelVisible = True
             End If
 
             UpdateDialog = False
@@ -1348,7 +1345,7 @@ Module ClientGameLogic
                         GoTo Continue1
                     End If
 
-                    Call SendPartyRequest(Command(1))
+                    SendPartyRequest(Command(1))
 
                 ' Join party
                 Case "/join"
@@ -1378,9 +1375,9 @@ Module ClientGameLogic
 
                     ' Check to make sure its a valid map #
                     If n > 0 And n <= MAX_QUESTS Then
-                        Call QuestReset(n)
+                        QuestReset(n)
                     Else
-                        Call AddText("Invalid quest number.", AlertColor)
+                        AddText("Invalid quest number.", AlertColor)
                     End If
 
                 ' Admin Help
@@ -1391,10 +1388,10 @@ Module ClientGameLogic
                         GoTo Continue1
                     End If
 
-                    Call AddText("Social Commands:", Yellow)
-                    Call AddText("""msghere = Global Admin Message", Yellow)
-                    Call AddText("=msghere = Private Admin Message", Yellow)
-                    Call AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editspell, /debug, /questreset", Yellow)
+                    AddText("Social Commands:", Yellow)
+                    AddText("""msghere = Global Admin Message", Yellow)
+                    AddText("=msghere = Private Admin Message", Yellow)
+                    AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editspell, /debug, /questreset", Yellow)
                 ' Kicking a player
                 Case "/kick"
 
@@ -1493,9 +1490,9 @@ Module ClientGameLogic
 
                     ' Check to make sure its a valid map #
                     If n > 0 And n <= MAX_MAPS Then
-                        Call WarpTo(n)
+                        WarpTo(n)
                     Else
-                        Call AddText("Invalid map number.", AlertColor)
+                        AddText("Invalid map number.", AlertColor)
                     End If
 
                 ' Setting sprite
@@ -1712,9 +1709,8 @@ Continue1:
 
         ItemDescItemNum = itemnum
 
-        With frmMainGame
 
-            If LastItemDesc = itemnum Then Exit Sub
+        If LastItemDesc = itemnum Then Exit Sub
 
             ' set the name
             Select Case Item(itemnum).Rarity
@@ -1806,10 +1802,8 @@ Continue1:
             ' Potions + crap
             ItemDescLevel = Item(itemnum).LevelReq
 
-
-
-            ' Exit out for everything else 'scept equipment
-            If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_GLOVES Then
+        ' Exit out for everything else 'scept equipment
+        If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_GLOVES Then
                 ' Clear other labels
                 ItemDescSpeed = "N/A"
 
@@ -1860,14 +1854,11 @@ Continue1:
                 ItemDescSpr = "None"
             End If
 
-            If Item(itemnum).Type = ITEM_TYPE_WEAPON Then
-                ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
-            Else
-                ItemDescSpeed = "N/A"
-            End If
-
-            ' don't need to exit :3
-        End With
+        If Item(itemnum).Type = ITEM_TYPE_WEAPON Then
+            ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
+        Else
+            ItemDescSpeed = "N/A"
+        End If
 
     End Sub
 
@@ -1917,65 +1908,55 @@ Continue1:
         ActionMsg(Index).Y = 0
     End Sub
 
-    Public Sub UpdateSpellWindow(ByVal spellnum As Long, ByVal X As Long, ByVal Y As Long)
+    Public Sub UpdateSpellWindow(ByVal spellnum As Long)
 
-        ' check for off-screen
-        If Y + frmMainGame.pnlSpellDesc.Height > frmMainGame.Size.Height Then
-            Y = frmMainGame.Size.Height - frmMainGame.pnlSpellDesc.Height
+        If LastSpellDesc = spellnum Then Exit Sub
+
+        SpellDescName = Spell(spellnum).Name
+
+        Select Case Spell(spellnum).Type
+            Case SPELL_TYPE_DAMAGEHP
+                SpellDescType = "Damage HP"
+                SpellDescVital = "Damage:"
+            Case SPELL_TYPE_DAMAGEMP
+                SpellDescType = "Damage MP"
+                SpellDescVital = "Damage:"
+            Case SPELL_TYPE_HEALHP
+                SpellDescType = "Heal HP"
+                SpellDescVital = "Heal:"
+            Case SPELL_TYPE_HEALMP
+                SpellDescType = "Heal MP"
+                SpellDescVital = "Heal:"
+            Case SPELL_TYPE_WARP
+                SpellDescType = "Warp"
+        End Select
+
+        SpellDescReqMp = Spell(spellnum).MPCost
+        SpellDescReqLvl = Spell(spellnum).LevelReq
+        SpellDescReqAccess = Spell(spellnum).AccessReq
+
+        If Spell(spellnum).ClassReq > 0 Then
+            SpellDescReqClass = Trim$(Classes(Spell(spellnum).ClassReq).Name)
+        Else
+            SpellDescReqClass = "None"
         End If
 
-        With frmMainGame
-            .pnlSpellDesc.Top = Y
-            .pnlSpellDesc.Left = X
-            .pnlSpellDesc.Visible = True
-            .pnlSpellDesc.BringToFront()
+        SpellDescCastTime = Spell(spellnum).CastTime & "s"
+        SpellDescCoolDown = Spell(spellnum).CDTime & "s"
+        SpellDescDamage = Spell(spellnum).Vital
 
-            If LastSpellDesc = spellnum Then Exit Sub
+        If Spell(spellnum).IsAoE Then
+            SpellDescAOE = Spell(spellnum).AoE & " tiles."
+        Else
+            SpellDescAOE = "No"
+        End If
 
-            .lblSpellName.Text = Spell(spellnum).Name
-            .lblSpellDamage.Visible = True
+        If Spell(spellnum).Range > 0 Then
+            SpellDescRange = Spell(spellnum).Range & " tiles."
+        Else
+            SpellDescRange = "Self-cast"
+        End If
 
-            Select Case Spell(spellnum).Type
-                Case SPELL_TYPE_DAMAGEHP
-                    .lblSpellType.Text = "Damage HP"
-                    .lblSpellVital.Text = "Damage:"
-                Case SPELL_TYPE_DAMAGEMP
-                    .lblSpellType.Text = "Damage MP"
-                    .lblSpellVital.Text = "Damage:"
-                Case SPELL_TYPE_HEALHP
-                    .lblSpellType.Text = "Heal HP"
-                    .lblSpellVital.Text = "Heal:"
-                Case SPELL_TYPE_HEALMP
-                    .lblSpellType.Text = "Heal MP"
-                    .lblSpellVital.Text = "Heal:"
-                Case SPELL_TYPE_WARP
-                    .lblSpellType.Text = "Warp"
-                    .lblSpellVital.Text = "Empty"
-                    .lblSpellDamage.Visible = False
-            End Select
-
-            .lblSpellMp.Text = Spell(spellnum).MPCost
-            .lblSpellLevel.Text = Spell(spellnum).LevelReq
-            .lblSpellAccess.Text = Spell(spellnum).AccessReq
-            If Spell(spellnum).ClassReq > 0 Then
-                .lblSpellClass.Text = Trim$(Classes(Spell(spellnum).ClassReq).Name)
-            Else
-                .lblSpellClass.Text = "None"
-            End If
-            .lblSpellCast.Text = Spell(spellnum).CastTime & "s"
-            .lblSpellCool.Text = Spell(spellnum).CDTime & "s"
-            .lblSpellDamage.Text = Spell(spellnum).Vital
-            If Spell(spellnum).IsAoE Then
-                .lblSpellAoE.Text = Spell(spellnum).AoE & " tiles."
-            Else
-                .lblSpellAoE.Text = "No"
-            End If
-            If Spell(spellnum).Range > 0 Then
-                .lblSpellRange.Text = Spell(spellnum).Range & " tiles."
-            Else
-                .lblSpellRange.Text = "Self-cast"
-            End If
-        End With
     End Sub
 
     Public Sub CastSpell(ByVal spellslot As Long)

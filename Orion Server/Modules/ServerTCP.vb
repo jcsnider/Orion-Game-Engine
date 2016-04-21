@@ -1259,6 +1259,28 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
+    Sub SendMapNpcTo(ByVal MapNum As Long, ByVal MapNpcNum As Long)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+
+        Buffer.WriteLong(ServerPackets.SMapNpcUpdate)
+
+        Buffer.WriteLong(MapNpcNum)
+
+        With MapNpc(MapNum).Npc(MapNpcNum)
+            Buffer.WriteLong(.Num)
+            Buffer.WriteLong(.x)
+            Buffer.WriteLong(.y)
+            Buffer.WriteLong(.Dir)
+            Buffer.WriteLong(.Vital(Vitals.HP))
+        End With
+
+        SendDataToMap(MapNum, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
     Sub SendPlayerXY(ByVal Index As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer

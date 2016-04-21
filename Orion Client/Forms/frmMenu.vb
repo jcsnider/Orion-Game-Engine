@@ -169,7 +169,7 @@ Public Class frmMenu
     Private Sub tmrConnect_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrConnect.Tick
         Static i As Long
         If IsConnected() = True Then
-            lblServerStatus.ForeColor = Color.Green
+            lblServerStatus.ForeColor = Color.LightGreen
             lblServerStatus.Text = "Online"
         Else
             lblServerStatus.ForeColor = Color.Red

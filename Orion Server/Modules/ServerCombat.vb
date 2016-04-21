@@ -530,6 +530,8 @@
             If spellnum > 0 Then
                 If Spell(spellnum).StunDuration > 0 Then StunNPC(MapNpcNum, MapNum, spellnum)
             End If
+
+            SendMapNpcTo(MapNum, MapNpcNum)
         End If
 
         If spellnum = 0 Then

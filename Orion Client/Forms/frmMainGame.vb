@@ -105,52 +105,15 @@ Public Class frmMainGame
         'Set the Chat Position
 
         txtMeChat.Left = ChatWindowX
-        txtMeChat.Width = ChatWindowInfo.width
+        txtMeChat.Width = ChatWindowGFXInfo.width
         txtMeChat.Top = Me.Height - txtMeChat.Height - 40
 
         frmAdmin.Visible = False
         pnlCurrency.Left = ChatWindowX
         pnlCurrency.Top = ChatWindowY
 
-        pnlDialog.Left = ChatWindowX
-        pnlDialog.Top = ChatWindowY
-
         pnlQuestSpeech.Left = ChatWindowX
         pnlQuestSpeech.Top = ChatWindowY
-
-    End Sub
-
-    Private Sub lblDialogOk_Click(sender As Object, e As EventArgs) Handles lblDialogOk.Click
-
-        VbKeyDown = False
-        VbKeyUp = False
-        VbKeyLeft = False
-        VbKeyRight = False
-
-        If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer
-            SendBuyHouse(1)
-        ElseIf DIALOGUE_TYPE_VISIT Then
-            SendVisit(1)
-        End If
-
-        pnlDialog.Visible = False
-
-    End Sub
-
-    Private Sub lblDialogCancel_Click(sender As Object, e As EventArgs) Handles lblDialogCancel.Click
-
-        VbKeyDown = False
-        VbKeyUp = False
-        VbKeyLeft = False
-        VbKeyRight = False
-
-        If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer declined
-            SendBuyHouse(0)
-        ElseIf DIALOGUE_TYPE_VISIT Then
-            SendVisit(0)
-        End If
-
-        pnlDialog.Visible = False
 
     End Sub
 
@@ -1001,18 +964,11 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub pnlCharacter_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
     Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
         pnlMapreport.Hide()
 
     End Sub
 
-    Private Sub pnlCharacter_MouseMove(sender As Object, e As MouseEventArgs)
-
-    End Sub
 #End Region
 
 End Class

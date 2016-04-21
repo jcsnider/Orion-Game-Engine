@@ -160,4 +160,31 @@
     Public Const SpellOffsetY As Byte = 5
     Public Const SpellOffsetX As Byte = 6
     Public Const SpellColumns As Byte = 5
+
+    Public ShowSpellDesc As Boolean
+    Public SpellDescSize As Byte
+    Public SpellDescSpellNum As Long
+    Public SpellDescName As String
+    Public SpellDescVital As String
+    Public SpellDescInfo As String
+    Public SpellDescType As String
+    Public SpellDescCastTime As String
+    Public SpellDescCoolDown As String
+    Public SpellDescDamage As String
+    Public SpellDescAOE As String
+    Public SpellDescRange As String
+    Public SpellDescReqMp As String
+    Public SpellDescReqLvl As String
+    Public SpellDescReqClass As String
+    Public SpellDescReqAccess As String
+
+    'dialog panel
+    Public DialogPanelVisible As Boolean
+    Public DialogPanelX As Long = 250
+    Public DialogPanelY As Long = 400
+    Public OkButtonX As Long = 10
+    Public OkButtonY As Long = 90
+    Public CancelButtonX As Long = 340
+    Public CancelButtonY As Long = 90
+
 End Module
