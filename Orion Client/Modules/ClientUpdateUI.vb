@@ -77,8 +77,8 @@
     Public HUDEXPBarX As Long = 110
     Public HUDEXPBarY As Long = 50
 
-    Public ChatWindowX As Long = 10
-    Public ChatWindowY As Long = 515
+    Public ChatWindowX As Long = 1
+    Public ChatWindowY As Long = 705
 
     Public ShowItemDesc As Boolean
     Public ItemDescSize As Byte
@@ -99,8 +99,8 @@
     Public ItemDescRarityColor As SFML.Graphics.Color
 
     'Character window Coordinates
-    Public CharWindowX As Long = 748
-    Public CharWindowY As Long = 275
+    Public CharWindowX As Long = 943
+    Public CharWindowY As Long = 475
     Public Const EqTop As Byte = 85
     Public Const EqLeft As Byte = 8
     Public Const EqOffsetX As Byte = 125
@@ -121,8 +121,8 @@
     Public SpiritUpgradeY As Long = 252
 
     'Action Panel Coordinates
-    Public ActionPanelX As Long = 747
-    Public ActionPanelY As Long = 555
+    Public ActionPanelX As Long = 942
+    Public ActionPanelY As Long = 755
     Public InvBtnX As Long = 16
     Public InvBtnY As Long = 16
     Public SkillBtnX As Long = 64
@@ -140,11 +140,11 @@
 
     'Hotbar Coordinates
     Public HotbarX As Long = 489
-    Public HotbarY As Long = 626
+    Public HotbarY As Long = 825
 
     'Inventory window Coordinates
-    Public InvWindowX As Long = 748
-    Public InvWindowY As Long = 275
+    Public InvWindowX As Long = 943
+    Public InvWindowY As Long = 475
     Public Const InvTop As Byte = 9
     Public Const InvLeft As Byte = 10
     Public Const InvOffsetY As Byte = 5
@@ -152,8 +152,8 @@
     Public Const InvColumns As Byte = 5
 
     'Spell window Coordinates
-    Public SpellWindowX As Long = 748
-    Public SpellWindowY As Long = 275
+    Public SpellWindowX As Long = 943
+    Public SpellWindowY As Long = 475
     ' spells constants
     Public Const SpellTop As Byte = 9
     Public Const SpellLeft As Byte = 10

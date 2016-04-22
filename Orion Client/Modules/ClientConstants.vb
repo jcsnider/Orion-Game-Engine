@@ -152,8 +152,8 @@
 
     ' Map constants
     Public Const MAX_MAPS As Long = 100
-    Public Const MAX_MAPX As Byte = 29
-    Public Const MAX_MAPY As Byte = 20
+    Public Const MAX_MAPX As Byte = 35
+    Public Const MAX_MAPY As Byte = 26
 
     Public Const MAP_MORAL_NONE As Byte = 0
     Public Const MAP_MORAL_SAFE As Byte = 1

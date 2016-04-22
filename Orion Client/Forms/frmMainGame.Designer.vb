@@ -112,7 +112,7 @@ Partial Class frmMainGame
         '
         'txtMeChat
         '
-        Me.txtMeChat.Location = New System.Drawing.Point(248, 402)
+        Me.txtMeChat.Location = New System.Drawing.Point(2, 842)
         Me.txtMeChat.MaxLength = 250
         Me.txtMeChat.Name = "txtMeChat"
         Me.txtMeChat.Size = New System.Drawing.Size(478, 20)
@@ -122,7 +122,7 @@ Partial Class frmMainGame
         '
         Me.picscreen.Location = New System.Drawing.Point(0, 0)
         Me.picscreen.Name = "picscreen"
-        Me.picscreen.Size = New System.Drawing.Size(960, 674)
+        Me.picscreen.Size = New System.Drawing.Size(1152, 864)
         Me.picscreen.TabIndex = 4
         Me.picscreen.TabStop = False
         '
@@ -247,7 +247,7 @@ Partial Class frmMainGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(480, 651)
+        Me.pnlCurrency.Location = New System.Drawing.Point(477, 692)
         Me.pnlCurrency.Name = "pnlCurrency"
         Me.pnlCurrency.Size = New System.Drawing.Size(480, 121)
         Me.pnlCurrency.TabIndex = 16
@@ -847,7 +847,7 @@ Partial Class frmMainGame
         Me.lblEventChat.Name = "lblEventChat"
         Me.lblEventChat.Size = New System.Drawing.Size(356, 92)
         Me.lblEventChat.TabIndex = 6
-        Me.lblEventChat.Text = "Continue"
+        Me.lblEventChat.Text = "chat"
         '
         'lblEventContinue
         '
@@ -921,20 +921,20 @@ Partial Class frmMainGame
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(960, 673)
+        Me.ClientSize = New System.Drawing.Size(1152, 864)
+        Me.Controls.Add(Me.txtMeChat)
+        Me.Controls.Add(Me.picscreen)
+        Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlBank)
-        Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlShop)
-        Me.Controls.Add(Me.pnlEventChat)
-        Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlOptions)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
