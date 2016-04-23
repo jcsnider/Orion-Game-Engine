@@ -1045,8 +1045,6 @@
             ClearAttributeDialogue()
         End If
 
-
-
         MapData = True
         Dim MusicFile As String
 
@@ -1800,7 +1798,7 @@
         message = Trim(Buffer.ReadString)
         Header = Trim(Buffer.ReadString)
 
-        AddText(Header & Name & ": " & message, SayColor)
+        AddText(Header & Name & ": " & message, 0)
 
         Buffer = Nothing
     End Sub

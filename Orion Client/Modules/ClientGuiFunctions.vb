@@ -268,7 +268,6 @@ Public Module ClientGuiFunctions
 
                     End If
                 End If
-                frmMainGame.txtMeChat.Focus()
             End If
             'Spell panel
             'ElseIf pnlSpellsVisible = True Then
@@ -530,9 +529,6 @@ Public Module ClientGuiFunctions
                         End If
                     End If
                 End If
-
-                frmMainGame.txtMeChat.Focus()
-
             End If
         ElseIf pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then

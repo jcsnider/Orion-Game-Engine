@@ -1,18 +1,18 @@
 ﻿Imports System.Text
+Imports System.Windows.Forms
 Imports SFML.Graphics
-
-
 
 Module ClientText
     Public Const MaxChatDisplayLines As Byte = 8
     Public Const ChatLineSpacing As Byte = 12 ' Should be same height as font
     Public Const MyChatTextLimit As Integer = 70
-    Public Const MyCreateGuildNameLimit As Integer = 17
     Public Const MyAmountValueLimit As Integer = 3
     Public Const AllChatLineWidth As Integer = 70
     Public Const MyChatLineWidth As Integer = 65
+    ' Game text buffer
+    Public MyText As String
 
-    'DirectX Text Drawing to GraphicsCard
+
     Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow)
         Dim mystring As Text = New Text(text, SFMLGameFont)
         mystring.CharacterSize = FONT_SIZE
@@ -313,13 +313,13 @@ Module ClientText
     End Sub
 
     Public AlertMsgColor As New Color(255, 0, 0, 180) ' Red
-    Public PlayerMsgColor = Color.White 'white
-    Public GlobalMsgColor As New Color(254, 90, 0, 180) ' Blue
-    Public MapMsgColor As New Color(0, 0, 0, 180) ' Black
+    Public PlayerMsgColor = Color.Magenta 'pink
+    Public GlobalMsgColor As New Color(73, 151, 208) ' Blue
+    Public MapMsgColor = Color.White
     Public WarningMsgColor As New Color(254, 90, 0, 180) ' Orange
     Public NotificationMsgColor As New Color(0, 0, 242, 180) ' Blue
-    Public PrivateMsgColor As New Color(0, 185, 165, 180) ' Turquoise
-    Public EmoteMsgColor As New Color(0, 0, 242, 180) ' Blue
+    Public PrivateMsgColor As New Color(102, 255, 0, 180) ' green
+    Public EmoteMsgColor As New Color(73, 151, 208) ' Blue
 
     Public Function GetSFMLColor(ByVal Color As Byte) As Color
         Select Case Color
@@ -419,6 +419,173 @@ Module ClientText
 
             startIndex = index + 1
         End While
+
+    End Function
+
+    Public Function KeyPressed(ByVal e As KeyEventArgs) As String
+
+        Dim keyValue As String = ""
+
+        If e.KeyCode = 32 Then ' Space
+            keyValue = ChrW(e.KeyCode)
+
+        ElseIf e.KeyCode >= 65 AndAlso e.KeyCode <= 90 Then ' Letters
+            If e.Shift Then
+                keyValue = ChrW(e.KeyCode)
+            Else
+                keyValue = ChrW(e.KeyCode + 32)
+            End If
+
+        ElseIf e.KeyCode = Keys.D0 Then
+            If e.Shift Then
+                keyValue = ")"
+            Else
+                keyValue = "0"
+            End If
+
+        ElseIf e.KeyCode = Keys.D1 Then
+            If e.Shift Then
+                keyValue = "!"
+            Else
+                keyValue = "1"
+            End If
+
+        ElseIf e.KeyCode = Keys.D2 Then
+            If e.Shift Then
+                keyValue = "@"
+            Else
+                keyValue = "2"
+            End If
+
+        ElseIf e.KeyCode = Keys.D3 Then
+            If e.Shift Then
+                keyValue = "#"
+            Else
+                keyValue = "3"
+            End If
+
+        ElseIf e.KeyCode = Keys.D4 Then
+            If e.Shift Then
+                keyValue = "$"
+            Else
+                keyValue = "4"
+            End If
+
+        ElseIf e.KeyCode = Keys.D5 Then
+            If e.Shift Then
+                keyValue = "%"
+            Else
+                keyValue = "5"
+            End If
+
+        ElseIf e.KeyCode = Keys.D6 Then
+            If e.Shift Then
+                keyValue = "^"
+            Else
+                keyValue = "6"
+            End If
+
+        ElseIf e.KeyCode = Keys.D7 Then
+            If e.Shift Then
+                keyValue = "&"
+            Else
+                keyValue = "7"
+            End If
+
+        ElseIf e.KeyCode = Keys.D8 Then
+            If e.Shift Then
+                keyValue = "*"
+            Else
+                keyValue = "8"
+            End If
+
+        ElseIf e.KeyCode = Keys.D9 Then
+            If e.Shift Then
+                keyValue = "("
+            Else
+                keyValue = "9"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemPeriod Then
+            If e.Shift Then
+                keyValue = ">"
+            Else
+                keyValue = "."
+            End If
+
+        ElseIf e.KeyCode = Keys.OemPipe Then
+            If e.Shift Then
+                'keyValue= "|" 
+            Else
+                keyValue = "\"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemCloseBrackets Then
+            If e.Shift Then
+                keyValue = "}"
+            Else
+                keyValue = "]"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemMinus Then
+            If e.Shift Then
+                keyValue = "_"
+            Else
+                keyValue = "-"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemOpenBrackets Then
+            If e.Shift Then
+                keyValue = "{"
+            Else
+                keyValue = "["
+            End If
+
+        ElseIf e.KeyCode = Keys.OemQuestion Then
+            If e.Shift Then
+                keyValue = "?"
+            Else
+                keyValue = "/"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemQuotes Then
+            If e.Shift Then
+                keyValue = Chr(34)
+            Else
+                keyValue = "'"
+            End If
+
+        ElseIf e.KeyCode = Keys.OemSemicolon Then
+            If e.Shift Then
+                keyValue = ":"
+            Else
+                keyValue = ";"
+            End If
+
+        ElseIf e.KeyCode = Keys.Oemcomma Then
+            If e.Shift Then
+                keyValue = "<"
+            Else
+                keyValue = ","
+            End If
+
+        ElseIf e.KeyCode = Keys.Oemplus Then
+            If e.Shift Then
+                keyValue = "+"
+            Else
+                keyValue = "="
+            End If
+
+        ElseIf e.KeyCode = Keys.Oemtilde Then
+            If e.Shift Then
+                keyValue = "~"
+            Else
+                keyValue = "`"
+            End If
+
+        End If
+
+        Return keyValue
 
     End Function
 

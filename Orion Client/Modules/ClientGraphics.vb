@@ -68,6 +68,9 @@ Module ClientGraphics
     Public ChatWindowGFX As Texture
     Public ChatWindowGFXInfo As GraphicInfo
 
+    Public MyChatWindowGFX As Texture
+    Public MyChatWindowGFXInfo As GraphicInfo
+
     Public ButtonGFX As Texture
     Public ButtonGFXInfo As GraphicInfo
 
@@ -378,6 +381,15 @@ Module ClientGraphics
             ChatWindowGFXInfo.height = ChatWindowGFX.Size.Y
         End If
 
+        MyChatWindowGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "MyChat" & GFX_EXT) Then
+            MyChatWindowGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "MyChat" & GFX_EXT)
+
+            'Cache the width and height
+            MyChatWindowGFXInfo.width = MyChatWindowGFX.Size.X
+            MyChatWindowGFXInfo.height = MyChatWindowGFX.Size.Y
+        End If
+
         ReDim ProjectileGFX(0 To NumProjectiles)
         ReDim ProjectileGFXInfo(0 To NumProjectiles)
         For i = 1 To NumProjectiles
@@ -434,12 +446,18 @@ Module ClientGraphics
             text = Chat(i).Text
 
             If text <> "" Then ' or not
-                'DrawText(ChatWindowX + x, ChatWindowY + y, text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
                 DrawText(ChatWindowX + x, ChatWindowY + y, text, GetSFMLColor(Chat(i).Color), SFML.Graphics.Color.Black, GameWindow)
                 y = y + 15
             End If
 
         Next
+
+        'My Text
+        'first draw back image
+        RenderTexture(MyChatWindowGFX, GameWindow, MyChatX, MyChatY - 5, 0, 0, MyChatWindowGFXInfo.width, MyChatWindowGFXInfo.height)
+        If Len(MyText) > 0 Then
+            DrawText(MyChatX + 5, MyChatY - 3, MyText, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Long, ByVal TexType As Byte)

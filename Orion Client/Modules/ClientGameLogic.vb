@@ -53,12 +53,6 @@ Module ClientGameLogic
                     End If
                 End If
 
-                ' Change map animation every 250 milliseconds
-                'If MapAnimTimer < Tick Then
-                '    MapAnim = Not MapAnim
-                '    MapAnimTimer = Tick + 250
-                'End If
-
                 For i = 1 To MAX_BYTE
                     CheckAnimInstance(i)
                 Next
@@ -1097,7 +1091,7 @@ Module ClientGameLogic
         End If
 
         If HideGui = True Then
-            frmMainGame.txtMeChat.Visible = Not frmMainGame.txtMeChat.Visible
+
             HideGui = False
         End If
 
@@ -1232,11 +1226,10 @@ Module ClientGameLogic
             ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
 
             If Len(ChatText) > 0 Then
-                Call BroadcastMsg(ChatText)
+                BroadcastMsg(ChatText)
             End If
 
             MyText = vbNullString
-            frmMainGame.txtMeChat.Text = vbNullString
             Exit Sub
         End If
 
@@ -1245,11 +1238,10 @@ Module ClientGameLogic
             MyText = Mid$(ChatText, 2, Len(ChatText) - 1)
 
             If Len(ChatText) > 0 Then
-                Call EmoteMsg(ChatText)
+                EmoteMsg(ChatText)
             End If
 
             MyText = vbNullString
-            frmMainGame.txtMeChat.Text = vbNullString
             Exit Sub
         End If
 
@@ -1280,7 +1272,6 @@ Module ClientGameLogic
             End If
 
             MyText = vbNullString
-            frmMainGame.txtMeChat.Text = vbNullString
             Exit Sub
         End If
 
@@ -1668,7 +1659,6 @@ Module ClientGameLogic
             'continue label where we go instead of exiting the sub
 Continue1:
             MyText = vbNullString
-            frmMainGame.txtMeChat.Text = vbNullString
             Exit Sub
         End If
 
@@ -1678,7 +1668,6 @@ Continue1:
         End If
 
         MyText = vbNullString
-        frmMainGame.txtMeChat.Text = vbNullString
     End Sub
 
     Sub CheckMapGetItem()

@@ -131,9 +131,6 @@ Module ClientGameEditors
         ' render the tiles
         EditorMap_DrawTileset()
 
-        'hide chatbox
-        frmMainGame.txtMeChat.Visible = False
-
         frmEditor_Map.tabpages.SelectedIndex = 0
 
         ' show the form
@@ -457,8 +454,6 @@ Module ClientGameEditors
         InMapEditor = False
         frmEditor_Map.Visible = False
         GettingMap = True
-
-        frmMainGame.txtMeChat.Visible = True
 
         'clear memory
         For i = 0 To NumTileSets

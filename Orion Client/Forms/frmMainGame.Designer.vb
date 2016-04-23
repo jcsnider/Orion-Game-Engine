@@ -24,7 +24,6 @@ Partial Class frmMainGame
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
-        Me.txtMeChat = New System.Windows.Forms.TextBox()
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.lblVolume = New System.Windows.Forms.Label()
@@ -109,14 +108,6 @@ Partial Class frmMainGame
         Me.pnlEventChat.SuspendLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'txtMeChat
-        '
-        Me.txtMeChat.Location = New System.Drawing.Point(2, 842)
-        Me.txtMeChat.MaxLength = 250
-        Me.txtMeChat.Name = "txtMeChat"
-        Me.txtMeChat.Size = New System.Drawing.Size(478, 20)
-        Me.txtMeChat.TabIndex = 6
         '
         'picscreen
         '
@@ -922,7 +913,6 @@ Partial Class frmMainGame
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1152, 864)
-        Me.Controls.Add(Me.txtMeChat)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlMapreport)
@@ -964,10 +954,8 @@ Partial Class frmMainGame
         Me.pnlEventChat.PerformLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtMeChat As System.Windows.Forms.TextBox
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
     Friend WithEvents pnlOptions As System.Windows.Forms.Panel
     Friend WithEvents optMOff As System.Windows.Forms.RadioButton

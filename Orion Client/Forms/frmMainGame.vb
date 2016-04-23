@@ -11,11 +11,30 @@ Public Class frmMainGame
     End Sub
 
     Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
+
+
+        If inChat = True Then
+            If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
+                MyText = MyText + KeyPressed(e)
+            End If
+
+            If e.KeyCode = Keys.Back Then
+                If MyText.Length > 0 Then
+                    MyText = MyText.Remove(MyText.Length - 1)
+                End If
+
+            End If
+        Else
+            If e.KeyCode = Keys.S Then VbKeyDown = True
+            If e.KeyCode = Keys.W Then VbKeyUp = True
+            If e.KeyCode = Keys.A Then VbKeyLeft = True
+            If e.KeyCode = Keys.D Then VbKeyRight = True
+        End If
+
         If e.KeyCode = Keys.Enter Then
+            HandlePressEnter()
+            CheckMapGetItem()
+            inChat = Not inChat
             e.Handled = True
             e.SuppressKeyPress = True
         End If
@@ -23,10 +42,10 @@ Public Class frmMainGame
 
     Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
         Dim spellnum As Long
-        If e.KeyCode = Keys.Down Then VbKeyDown = False
-        If e.KeyCode = Keys.Up Then VbKeyUp = False
-        If e.KeyCode = Keys.Left Then VbKeyLeft = False
-        If e.KeyCode = Keys.Right Then VbKeyRight = False
+        If e.KeyCode = Keys.S Then VbKeyDown = False
+        If e.KeyCode = Keys.W Then VbKeyUp = False
+        If e.KeyCode = Keys.A Then VbKeyLeft = False
+        If e.KeyCode = Keys.D Then VbKeyRight = False
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
 
@@ -92,21 +111,15 @@ Public Class frmMainGame
             HideGui = True
         End If
 
-        If e.KeyCode = Keys.Enter Then
-            HandlePressEnter()
-            CheckMapGetItem()
-            Me.txtMeChat.Text = ""
-            e.SuppressKeyPress = True
-        End If
+        'If e.KeyCode = Keys.Enter Then
+        '    HandlePressEnter()
+        '    CheckMapGetItem()
+        '    inChat = Not inChat
+        '    e.SuppressKeyPress = True
+        'End If
     End Sub
 
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-
-        'Set the Chat Position
-
-        txtMeChat.Left = ChatWindowX
-        txtMeChat.Width = ChatWindowGFXInfo.width
-        txtMeChat.Top = Me.Height - txtMeChat.Height - 40
 
         frmAdmin.Visible = False
         pnlCurrency.Left = ChatWindowX
@@ -166,7 +179,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        Me.txtMeChat.Focus()
+        Me.Focus()
 
     End Sub
 
@@ -203,24 +216,29 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
-
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
-    End Sub
-
-    Private Sub picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
         Dim spellnum As Long
 
-        If e.KeyCode = Keys.Down Then VbKeyDown = False
-        If e.KeyCode = Keys.Up Then VbKeyUp = False
-        If e.KeyCode = Keys.Left Then VbKeyLeft = False
-        If e.KeyCode = Keys.Right Then VbKeyRight = False
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+        If e.KeyCode = Keys.S Then VbKeyDown = True
+        If e.KeyCode = Keys.W Then VbKeyUp = True
+        If e.KeyCode = Keys.A Then VbKeyLeft = True
+        If e.KeyCode = Keys.D Then VbKeyRight = True
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+
+        If inChat = True Then
+            If e.KeyCode >= 32 And e.KeyCode <= 255 Then
+                MyText = MyText + KeyPressed(e)
+                e.Handled = True
+                e.SuppressKeyPress = True
+            End If
+
+            If e.KeyCode = Keys.Back Then
+                If MyText.Length > 0 Then
+                    MyText = MyText.Remove(MyText.Length - 1)
+                End If
+
+            End If
+        End If
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
@@ -287,9 +305,26 @@ Public Class frmMainGame
         If e.KeyCode = Keys.Enter Then
             HandlePressEnter()
             CheckMapGetItem()
-            Me.txtMeChat.Text = ""
+            inChat = Not inChat
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+    Private Sub picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
+
+        If e.KeyCode = Keys.S Then VbKeyDown = False
+        If e.KeyCode = Keys.W Then VbKeyUp = False
+        If e.KeyCode = Keys.A Then VbKeyLeft = False
+        If e.KeyCode = Keys.D Then VbKeyRight = False
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
+        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+
+        Dim keyData As Keys = e.KeyData
+        If IsAcceptable(keyData) Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
+
     End Sub
 
 #End Region
@@ -302,113 +337,6 @@ Public Class frmMainGame
         Return index >= 0
     End Function
 
-    Private Sub txtMeChat_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMeChat.KeyDown
-        If e.KeyCode = Keys.Down Then VbKeyDown = True
-        If e.KeyCode = Keys.Up Then VbKeyUp = True
-        If e.KeyCode = Keys.Left Then VbKeyLeft = True
-        If e.KeyCode = Keys.Right Then VbKeyRight = True
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
-
-        Dim keyData As Keys = e.KeyData
-        If IsAcceptable(keyData) Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-        End If
-
-
-        If e.KeyCode = Keys.Enter Then
-            e.Handled = True
-            e.SuppressKeyPress = True
-        End If
-    End Sub
-
-    Private Sub txtMeChat_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtMeChat.KeyUp
-        Dim spellnum As Long
-
-        If e.KeyCode = Keys.Down Then VbKeyDown = False
-        If e.KeyCode = Keys.Up Then VbKeyUp = False
-        If e.KeyCode = Keys.Left Then VbKeyLeft = False
-        If e.KeyCode = Keys.Right Then VbKeyRight = False
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
-        If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
-
-        'hotbar
-        If e.KeyCode = Keys.NumPad1 Then
-            spellnum = Player(MyIndex).Hotbar(1).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-                Exit Sub
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad2 Then
-            spellnum = Player(MyIndex).Hotbar(2).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad3 Then
-            spellnum = Player(MyIndex).Hotbar(3).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad4 Then
-            spellnum = Player(MyIndex).Hotbar(4).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad5 Then
-            spellnum = Player(MyIndex).Hotbar(5).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad6 Then
-            spellnum = Player(MyIndex).Hotbar(6).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-        If e.KeyCode = Keys.NumPad7 Then
-            spellnum = Player(MyIndex).Hotbar(7).Slot
-
-            If spellnum <> 0 Then
-                CastSpell(spellnum)
-            End If
-        End If
-
-        'admin
-        If e.KeyCode = Keys.Insert Then
-            If Player(MyIndex).Access > 0 Then
-                SendRequestAdmin()
-            End If
-        End If
-        'hide gui
-        If e.KeyCode = Keys.F10 Then
-            HideGui = True
-        End If
-
-        If e.KeyCode = Keys.Enter Then
-            HandlePressEnter()
-            CheckMapGetItem()
-            Me.txtMeChat.Text = ""
-            e.Handled = True
-            e.SuppressKeyPress = True
-        End If
-
-    End Sub
-
-    Private Sub txtMeChat_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMeChat.TextChanged
-        MyText = txtMeChat.Text
-    End Sub
 #End Region
 
 #Region "Options"

@@ -227,7 +227,7 @@ Module ClientGeneral
         For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 Or Asc(Mid$(sInput, i, 1)) > 126 Then
-                Call MsgBox("You cannot use high ASCII characters in your name, please re-enter.", vbOKOnly, GAME_NAME)
+                MsgBox("You cannot use high ASCII characters in your name, please re-enter.", vbOKOnly, GAME_NAME)
                 isStringLegal = False
                 Exit Function
             End If
@@ -241,7 +241,7 @@ Module ClientGeneral
         frmloadvisible = False
 
         ' Set the focus
-        frmMainGame.txtMeChat.Focus()
+        frmMainGame.picscreen.Focus()
 
         'stop the song playing
         StopMusic()

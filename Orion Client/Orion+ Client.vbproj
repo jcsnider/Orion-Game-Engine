@@ -557,6 +557,9 @@
     <Content Include="data files\graphics\GUI\Main\main.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\MyChat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\panel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

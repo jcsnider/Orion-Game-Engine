@@ -59,6 +59,7 @@ Module ClientGlobals
     Public FPS As Long
     Public PingToDraw As String
     Public GoldAmount As String
+    Public inChat As Boolean
 
     Public InvItemFrame(0 To MAX_INV) As Byte ' Used for animated items
     Public LastItemDesc As Long ' Stores the last item we showed in desc
@@ -88,8 +89,7 @@ Module ClientGlobals
     ' Debug mode
     Public DEBUG_MODE As Boolean
 
-    ' Game text buffer
-    Public MyText As String
+
 
     ' Controls main gameloop
     Public InGame As Boolean

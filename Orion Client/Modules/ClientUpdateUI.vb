@@ -77,6 +77,11 @@
     Public HUDEXPBarX As Long = 110
     Public HUDEXPBarY As Long = 50
 
+    'Set the Chat Position
+
+    Public MyChatX As Long = 1
+    Public MyChatY As Long = frmMainGame.Height - 55
+
     Public ChatWindowX As Long = 1
     Public ChatWindowY As Long = 705
 
