@@ -262,6 +262,7 @@ Public Class frmMenu
         Options.Port = txtPort.Text
 
         pnlIPConfig.Visible = False
+        SaveOptions()
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click

@@ -5,18 +5,15 @@ Module ClientGameLogic
     Sub GameLoop()
         Dim i As Long
         Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
-        Dim starttime As Long
-        Dim Tick As Long
-        Dim tmpfps As Long
-        Dim WalkTimer As Long
-        Dim FrameTime As Long
-        Dim destrect As Rectangle
-        Dim tmr10000 As Long
-        Dim tmr1000 As Long
-        Dim tmr100 As Long, tmr500 As Long
         Dim g As Graphics = frmMainGame.picscreen.CreateGraphics
+        Dim starttime As Long, Tick As Long
+        Dim tmpfps As Long, WalkTimer As Long, FrameTime As Long
+        Dim destrect As Rectangle, tmr10000 As Long
+        Dim tmr1000 As Long, tmr100 As Long, tmr500 As Long
+
         starttime = GetTickCount()
         frmMenu.lblNextChar.Left = lblnextcharleft
+
         Do
             If GameDestroyed Then End
             DirDown = VbKeyDown
@@ -49,6 +46,7 @@ Module ClientGameLogic
                         If InBank Then DrawBank()
                         If InShop Then DrawShop()
                         If InTrade Then DrawTrade()
+
                         tmr100 = Tick + 100
                     End If
                 End If
@@ -163,7 +161,6 @@ Module ClientGameLogic
 
                     'Auctual Game Loop Stuff :/
                     Render_Graphics()
-                    'DrawStatBars()
 
                     If FadeInSwitch = True Then
                         FadeIn()

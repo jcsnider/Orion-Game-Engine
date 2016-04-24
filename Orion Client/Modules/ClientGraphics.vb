@@ -1080,12 +1080,10 @@ Module ClientGraphics
     End Function
 
     Public Sub UpdateCamera()
-        Dim offsetX As Long
-        Dim offsetY As Long
-        Dim StartX As Long
-        Dim StartY As Long
-        Dim EndX As Long
-        Dim EndY As Long
+        Dim offsetX As Long, offsetY As Long
+        Dim StartX As Long, StartY As Long
+        Dim EndX As Long, EndY As Long
+
         offsetX = Player(MyIndex).XOffset + PIC_X
         offsetY = Player(MyIndex).YOffset + PIC_Y
         StartX = GetPlayerX(MyIndex) - ((MAX_MAPX + 1) \ 2) - 1
@@ -1239,14 +1237,19 @@ Module ClientGraphics
         If frmMainGame.WindowState = FormWindowState.Minimized Then Exit Sub
         If GettingMap Then Exit Sub
 
+        'lets get going
+
+        'update view around player
         UpdateCamera()
 
+        'let program do other things
         DoEvents()
 
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
 
+        'clear any unused gfx
         ClearGFX()
 
         ' update animation editor
@@ -1278,6 +1281,7 @@ Module ClientGraphics
             End If
         End If
 
+        ' events
         If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
 
             For I = 1 To Map.CurrentEvents
@@ -1287,6 +1291,7 @@ Module ClientGraphics
             Next
         End If
 
+        'blood
         For I = 1 To MAX_BYTE
             DrawBlood(I)
         Next
@@ -1344,6 +1349,7 @@ Module ClientGraphics
                     End If
                 Next
 
+                ' events
                 If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
 
                     For I = 1 To Map.CurrentEvents
@@ -1403,6 +1409,7 @@ Module ClientGraphics
             Next
         End If
 
+        'projectiles
         If NumProjectiles > 0 Then
             For I = 1 To MAX_PROJECTILES
                 If MapProjectiles(I).ProjectileNum > 0 Then
@@ -1411,6 +1418,7 @@ Module ClientGraphics
             Next
         End If
 
+        'events
         If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
 
             For I = 1 To Map.CurrentEvents
@@ -1464,6 +1472,7 @@ Module ClientGraphics
 
         End If
 
+        'furniture
         If FurnitureSelected > 0 Then
             If Player(MyIndex).InHouse = MyIndex Then
                 DrawFurnitureOutline()
@@ -1500,6 +1509,7 @@ Module ClientGraphics
             End If
         Next
 
+        'action msg
         For I = 1 To MAX_BYTE
             DrawActionMsg(I)
         Next I
@@ -1514,11 +1524,13 @@ Module ClientGraphics
         ' Draw map name
         DrawMapName()
 
+        'draw hp and casting bars
         DrawBars()
 
         'Render GUI
         DrawGUI()
 
+        'and finally show everything on screen
         GameWindow.Display()
     End Sub
 
@@ -1563,8 +1575,6 @@ Module ClientGraphics
                 End If
             End If
         Next
-
-
 
     End Sub
 
@@ -1769,11 +1779,6 @@ Module ClientGraphics
             .X = 0
             .Width = PIC_X
         End With
-
-        'Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        'tmpSprite.Position = New SFML.System.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-        'GameWindow.Draw(tmpSprite)
 
         RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
@@ -2022,10 +2027,6 @@ Module ClientGraphics
         dRECT = sRECT
 
         EditorItem_Furniture.Clear(ToSFMLColor(frmEditor_Item.picFurniture.BackColor))
-        'Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(Furniturenum))
-        'tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        'tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
-        'EditorItem_Furniture.Draw(tmpSprite)
 
         RenderTexture(FurnitureGFX(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
@@ -2125,10 +2126,6 @@ Module ClientGraphics
         dRECT = sRECT
 
         EditorSpell_Icon.Clear(ToSFMLColor(frmEditor_Spell.picSprite.BackColor))
-        'Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(iconnum))
-        'tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        'tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
-        'EditorSpell_Icon.Draw(tmpSprite)
 
         RenderTexture(SpellIconsGFX(iconnum), EditorSpell_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
@@ -2198,10 +2195,6 @@ Module ClientGraphics
                     End With
 
                     EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
-                    'Dim tmpSprite As Sprite = New Sprite(AnimationsGFX(Animationnum))
-                    'tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-                    'tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
-                    'EditorAnimation_Anim1.Draw(tmpSprite)
 
                     RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
@@ -2255,11 +2248,6 @@ Module ClientGraphics
                     End With
 
                     EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
-
-                    'Dim tmpSprite As Sprite = New Sprite(AnimationsGFX(Animationnum))
-                    'tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-                    'tmpSprite.Position = New SFML.Window.Vector2f(dRECT.X, dRECT.Y)
-                    'EditorAnimation_Anim2.Draw(tmpSprite)
 
                     RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
                     EditorAnimation_Anim2.Display()
@@ -2321,16 +2309,6 @@ Module ClientGraphics
         'HP Bar
         CurHP = (GetPlayerVital(MyIndex, 1) / GetPlayerMaxVital(MyIndex, 1)) * 100
 
-        ''first render empty
-        'With rec
-        '    .Y = 0
-        '    .Height = EmptyHPBarGFXInfo.height
-        '    .X = 0
-        '    .Width = EmptyHPBarGFXInfo.width
-        'End With
-
-        'RenderTexture(EmptyHPBarGFX, GameWindow, HUDWindowX + HUDHPBarX, HUDWindowY + HUDHPBarY, rec.X, rec.Y, rec.Width, rec.Height)
-
         With rec
             .Y = 0
             .Height = HPBarGFXInfo.height
@@ -2349,16 +2327,6 @@ Module ClientGraphics
         'MP Bar
         CurMP = (GetPlayerVital(MyIndex, 2) / GetPlayerMaxVital(MyIndex, 2)) * 100
 
-        ''first render empty
-        'With rec
-        '    .Y = 0
-        '    .Height = EmptyMPBarGFXInfo.height
-        '    .X = 0
-        '    .Width = EmptyMPBarGFXInfo.width
-        'End With
-
-        'RenderTexture(EmptyMPBarGFX, GameWindow, HUDWindowX + HUDMPBarX, HUDWindowY + HUDMPBarY, rec.X, rec.Y, rec.Width, rec.Height)
-
         'then render full ontop of it
         With rec
             .Y = 0
@@ -2375,16 +2343,6 @@ Module ClientGraphics
         '====================================================
         'EXP Bar
         CurEXP = (GetPlayerExp(MyIndex) / NextlevelExp) * 100
-
-        ''first render empty
-        'With rec
-        '    .Y = 0
-        '    .Height = EmptyEXPBarGFXInfo.height
-        '    .X = 0
-        '    .Width = EmptyEXPBarGFXInfo.width
-        'End With
-
-        'RenderTexture(EmptyEXPBarGFX, GameWindow, HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY, rec.X, rec.Y, rec.Width, rec.Height)
 
         'then render full ontop of it
         With rec
@@ -2643,11 +2601,7 @@ Module ClientGraphics
                             .Width = PIC_X
                         End With
 
-                        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
-                        GameWindow.Draw(tmpSprite)
-
+                        RenderTexture(ItemsGFX(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                         ' If item is a stack - draw the amount you have
                         If GetPlayerInvItemValue(MyIndex, i) > 1 Then
@@ -2756,12 +2710,7 @@ NextLoop:
                         End With
 
                         ' We'll now re-blt the item, and place the currency value over it again :P
-                        'g.DrawImage(ItemsGFX(itempic), rec_pos, rec, GraphicsUnit.Pixel)
-                        Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
-                        GameWindow.Draw(tmpSprite)
-
+                        RenderTexture(ItemsGFX(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                         ' If item is a stack - draw the amount you have
                         If GetPlayerInvItemValue(MyIndex, i) > 1 Then
@@ -3050,11 +2999,6 @@ NextLoop:
                         .Width = PIC_X
                     End With
 
-                    'Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
-                    'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    'tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                    'YourTradeWindow.Draw(tmpSprite)
-
                     RenderTexture(ItemsGFX(itempic), TheirTradeWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                     ' If item is a stack - draw the amount you have
@@ -3105,11 +3049,6 @@ NextLoop:
                         .X = InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
                         .Width = PIC_X
                     End With
-
-                    'Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
-                    'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    'tmpSprite.Position = New SFML.Window.Vector2f(rec_pos.X, rec_pos.Y)
-                    'TheirTradeWindow.Draw(tmpSprite)
 
                     RenderTexture(ItemsGFX(itempic), TheirTradeWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 

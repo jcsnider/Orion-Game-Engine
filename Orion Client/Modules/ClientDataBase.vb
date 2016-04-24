@@ -144,15 +144,16 @@ Module ClientDataBase
 
         FileName = Application.StartupPath & "\Data Files\config.ini"
 
-        Call PutVar(FileName, "Options", "Username", Trim$(Options.Username))
-        Call PutVar(FileName, "Options", "Password", Trim$(Options.Password))
-        Call PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
-        Call PutVar(FileName, "Options", "IP", Options.IP)
-        Call PutVar(FileName, "Options", "Port", Str(Options.Port))
-        Call PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
-        Call PutVar(FileName, "Options", "Music", Str(Options.Music))
-        Call PutVar(FileName, "Options", "Sound", Str(Options.Sound))
-        Call PutVar(FileName, "Options", "Volume", Str(Options.Volume))
+        PutVar(FileName, "Options", "Username", Trim$(Options.Username))
+        PutVar(FileName, "Options", "Password", Trim$(Options.Password))
+        PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
+        PutVar(FileName, "Options", "IP", Options.IP)
+        PutVar(FileName, "Options", "Port", Str(Options.Port))
+        PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
+        PutVar(FileName, "Options", "Music", Str(Options.Music))
+        PutVar(FileName, "Options", "Sound", Str(Options.Sound))
+        PutVar(FileName, "Options", "Volume", Str(Options.Volume))
+        PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
     End Sub
 
     Public Sub LoadOptions()
@@ -170,6 +171,7 @@ Module ClientDataBase
             Options.Music = 1
             Options.Sound = 1
             Options.Volume = 100
+            Options.ScreenSize = 0
             SaveOptions()
         Else
             Options.Username = Getvar(FileName, "Options", "Username")
@@ -185,6 +187,7 @@ Module ClientDataBase
                 SaveOptions()
             End If
             Options.Volume = Getvar(FileName, "Options", "Volume")
+            Options.ScreenSize = Val(Getvar(FileName, "Options", "ScreenSize"))
         End If
 
         ' show in GUI
@@ -201,6 +204,9 @@ Module ClientDataBase
         End If
         frmMainGame.lblVolume.Text = "Volume: " & Options.Volume
         frmMainGame.scrlVolume.Value = Options.Volume
+
+        frmMainGame.cmbScreenSize.SelectedIndex = Options.ScreenSize
+
     End Sub
 
     Public Function GetFileContents(ByVal FullPath As String, Optional ByRef ErrInfo As String = "") As String

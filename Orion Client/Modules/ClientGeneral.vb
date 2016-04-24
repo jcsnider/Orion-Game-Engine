@@ -137,8 +137,6 @@ Module ClientGeneral
         ReDim MapProjectiles(MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
 
-        'ReDim Item(0 To MAX_ITEMS)
-        'ReDim Bank.Item(0 To MAX_BANK)
         ClearItems()
 
         SetStatus("Loading...")
@@ -207,6 +205,7 @@ Module ClientGeneral
 
         GameLoop()
     End Sub
+
     Public Function isLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
         If Len(Trim$(Username)) >= 3 Then
             If Len(Trim$(Password)) >= 3 Then
@@ -246,9 +245,11 @@ Module ClientGeneral
         'stop the song playing
         StopMusic()
     End Sub
+
     Public Sub SetStatus(ByVal Caption As String)
         frmLoad.lblStatus.Text = Caption
     End Sub
+
     Public Sub MenuState(ByVal State As Long)
         frmloadvisible = True
         frmmenuvisible = False
@@ -263,9 +264,9 @@ Module ClientGeneral
                     Call SetStatus("Connected, sending character addition data...")
 
                     If frmMenu.rdoMale.Checked = True Then
-                        Call SendAddChar(frmMenu.txtCharName.Text, SEX_MALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(frmMenu.txtCharName.Text, SEX_MALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     Else
-                        Call SendAddChar(frmMenu.txtCharName.Text, SEX_FEMALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(frmMenu.txtCharName.Text, SEX_FEMALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     End If
                 End If
 
@@ -276,8 +277,8 @@ Module ClientGeneral
                 pnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    Call SetStatus("Connected, sending new account information...")
-                    Call SendNewAccount(frmMenu.txtRuser.Text, frmMenu.txtRPass.Text)
+                    SetStatus("Connected, sending new account information...")
+                    SendNewAccount(frmMenu.txtRuser.Text, frmMenu.txtRPass.Text)
                 End If
 
             Case MENU_STATE_LOGIN
@@ -289,8 +290,8 @@ Module ClientGeneral
                 tempPassword = frmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
-                    Call SetStatus("Connected, sending login information...")
-                    Call SendLogin(frmMenu.txtLogin.Text, frmMenu.txtPassword.Text)
+                    SetStatus("Connected, sending login information...")
+                    SendLogin(frmMenu.txtLogin.Text, frmMenu.txtPassword.Text)
                     Exit Sub
                 End If
         End Select
@@ -312,7 +313,7 @@ Module ClientGeneral
 
         Connect()
 
-        Call SetStatus("Connecting to server...(" & i & ")")
+        SetStatus("Connecting to server...(" & i & ")")
 
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not IsConnected()) And (GetTickCount() <= Wait + 3500)
@@ -326,7 +327,7 @@ Module ClientGeneral
         End If
 
         If Not ConnectToServer Then
-            Call ConnectToServer(i + 1)
+            ConnectToServer(i + 1)
         End If
 
     End Function
@@ -343,13 +344,77 @@ Module ClientGeneral
         FileExist = IO.File.Exists(file_path)
     End Function
 
+    Public Sub RePositionGUI()
+
+        'first change the window
+        If Options.ScreenSize = 0 Then
+            MAX_MAPX = 31
+            MAX_MAPY = 23
+            frmMainGame.Width = 1040
+            frmMainGame.Height = 807
+            frmMainGame.picscreen.Width = 1024
+            frmMainGame.picscreen.Height = 768
+        ElseIf Options.ScreenSize = 1 Then
+            MAX_MAPX = 35
+            MAX_MAPY = 26
+            frmMainGame.Width = 1168
+            frmMainGame.Height = 903
+            frmMainGame.picscreen.Width = 1152
+            frmMainGame.picscreen.Height = 864
+        End If
+
+        HalfX = ((MAX_MAPX + 1) \ 2) * PIC_X
+        HalfY = ((MAX_MAPY + 1) \ 2) * PIC_Y
+        ScreenX = (MAX_MAPX + 1) * PIC_X
+        ScreenY = (MAX_MAPY + 1) * PIC_Y
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)))
+
+        'Then we can recalculate the positions
+
+        frmMainGame.pnlCurrency.Left = ChatWindowX
+        frmMainGame.pnlCurrency.Top = ChatWindowY
+
+        frmMainGame.pnlQuestSpeech.Left = ChatWindowX
+        frmMainGame.pnlQuestSpeech.Top = ChatWindowY
+
+        'chatwindow
+        ChatWindowX = 1
+        ChatWindowY = frmMainGame.Height - ChatWindowGFXInfo.height - 65
+
+        MyChatX = 1
+        MyChatY = frmMainGame.Height - 55
+
+        'hotbar
+        HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
+        HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 50
+
+        'action panel
+        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.width - 24
+        ActionPanelY = frmMainGame.Height - ActionPanelGFXInfo.height - 45
+
+        'Char Window
+        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.width - 24
+        CharWindowY = frmMainGame.Height - CharPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+
+        'inv Window
+        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.width - 24
+        InvWindowY = frmMainGame.Height - InvPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+
+        'spell window
+        SpellWindowX = frmMainGame.Width - SpellPanelGFXInfo.width - 24
+        SpellWindowY = frmMainGame.Height - SpellPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+
+
+    End Sub
+
     Public Sub DestroyGame()
         SendLeaveGame()
 
         ' break out of GameLoop
         InGame = False
 
-        Call DestroyGraphics()
+        DestroyGraphics()
         GameDestroyed = True
         PlayerSocket.Close()
         PlayerSocket = Nothing

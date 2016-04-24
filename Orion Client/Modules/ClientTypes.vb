@@ -38,6 +38,7 @@
         Dim Music As Byte
         Dim Sound As Byte
         Dim Volume As Single
+        Dim ScreenSize As Byte
     End Structure
 
     Public Structure RECT

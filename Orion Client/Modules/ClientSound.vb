@@ -5,6 +5,7 @@ Module ClientSound
     Public FadeInSwitch As Boolean
     Public FadeOutSwitch As Boolean
     Public CurMusic As String
+    Public MaxVolume As Single
 
     Sub PlayMusic(ByVal FileName As String)
         If Not Options.Music = 1 Or Not FileExist(Application.StartupPath & MUSIC_PATH & FileName) Then Exit Sub
@@ -50,11 +51,13 @@ Module ClientSound
             SoundPlayer = New Sound()
             buffer = New SoundBuffer(Application.StartupPath & SOUND_PATH & FileName)
             SoundPlayer.SoundBuffer = buffer
+            SoundPlayer.Volume() = MaxVolume
             SoundPlayer.Play()
         Else
             SoundPlayer.Stop()
             buffer = New SoundBuffer(Application.StartupPath & SOUND_PATH & FileName)
             SoundPlayer.SoundBuffer = buffer
+            SoundPlayer.Volume() = MaxVolume
             SoundPlayer.Play()
         End If
     End Sub
@@ -66,20 +69,28 @@ Module ClientSound
     End Sub
 
     Sub FadeIn()
-        If MusicPlayer.Volume() = 100 Then FadeInSwitch = False
-        MusicPlayer.Volume() = MusicPlayer.Volume() + 1
+
+        If MusicPlayer Is Nothing Then Exit Sub
+
+        If MusicPlayer.Volume() >= MaxVolume Then FadeInSwitch = False
+        MusicPlayer.Volume() = MusicPlayer.Volume() + 3
+
     End Sub
 
     Sub FadeOut()
-        If MusicPlayer.Volume() = 0 Then
+
+        If MusicPlayer Is Nothing Then Exit Sub
+
+        If MusicPlayer.Volume() = 0 Or MusicPlayer.Volume() < 3 Then
             FadeOutSwitch = False
             If Map.Music = Nothing Then
                 StopMusic()
             Else
+                StopMusic()
                 PlayMusic(Map.Music)
             End If
         End If
+        MusicPlayer.Volume() = MusicPlayer.Volume() - 3
 
-        MusicPlayer.Volume() = MusicPlayer.Volume() - 1
     End Sub
 End Module

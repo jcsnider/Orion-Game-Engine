@@ -15,6 +15,7 @@
     Public chkSavePassChecked As Boolean
     Public tempUserName As String
     Public tempPassword As String
+
     'Mapreport
     Public UpdateMapnames As Boolean
     Public ShakeTimer As Boolean
@@ -103,6 +104,24 @@
     Public ItemDescLuck As String
     Public ItemDescRarityColor As SFML.Graphics.Color
 
+    'Action Panel Coordinates
+    Public ActionPanelX As Long = 942
+    Public ActionPanelY As Long = 755
+    Public InvBtnX As Long = 16
+    Public InvBtnY As Long = 16
+    Public SkillBtnX As Long = 64
+    Public SkillBtnY As Long = 16
+    Public CharBtnX As Long = 112
+    Public CharBtnY As Long = 16
+    Public QuestBtnX As Long = 160
+    Public QuestBtnY As Long = 16
+    Public TradeBtnX As Long = 16
+    Public TradeBtnY As Long = 64
+    Public OptBtnX As Long = 64
+    Public OptBtnY As Long = 64
+    Public ExitBtnX As Long = 112
+    Public ExitBtnY As Long = 64
+
     'Character window Coordinates
     Public CharWindowX As Long = 943
     Public CharWindowY As Long = 475
@@ -124,24 +143,6 @@
     Public LuckUpgradeY As Long = 237
     Public SpiritUpgradeX As Long = 157
     Public SpiritUpgradeY As Long = 252
-
-    'Action Panel Coordinates
-    Public ActionPanelX As Long = 942
-    Public ActionPanelY As Long = 755
-    Public InvBtnX As Long = 16
-    Public InvBtnY As Long = 16
-    Public SkillBtnX As Long = 64
-    Public SkillBtnY As Long = 16
-    Public CharBtnX As Long = 112
-    Public CharBtnY As Long = 16
-    Public QuestBtnX As Long = 160
-    Public QuestBtnY As Long = 16
-    Public TradeBtnX As Long = 16
-    Public TradeBtnY As Long = 64
-    Public OptBtnX As Long = 64
-    Public OptBtnY As Long = 64
-    Public ExitBtnX As Long = 112
-    Public ExitBtnY As Long = 64
 
     'Hotbar Coordinates
     Public HotbarX As Long = 489

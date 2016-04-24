@@ -26,6 +26,9 @@ Partial Class frmMainGame
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
+        Me.btnSaveSettings = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbScreenSize = New System.Windows.Forms.ComboBox()
         Me.lblVolume = New System.Windows.Forms.Label()
         Me.scrlVolume = New System.Windows.Forms.HScrollBar()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -113,7 +116,7 @@ Partial Class frmMainGame
         '
         Me.picscreen.Location = New System.Drawing.Point(0, 0)
         Me.picscreen.Name = "picscreen"
-        Me.picscreen.Size = New System.Drawing.Size(1152, 864)
+        Me.picscreen.Size = New System.Drawing.Size(1024, 768)
         Me.picscreen.TabIndex = 4
         Me.picscreen.TabStop = False
         '
@@ -122,23 +125,54 @@ Partial Class frmMainGame
         Me.pnlOptions.BackColor = System.Drawing.Color.DimGray
         Me.pnlOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlOptions.Controls.Add(Me.btnSaveSettings)
+        Me.pnlOptions.Controls.Add(Me.Label1)
+        Me.pnlOptions.Controls.Add(Me.cmbScreenSize)
         Me.pnlOptions.Controls.Add(Me.lblVolume)
         Me.pnlOptions.Controls.Add(Me.scrlVolume)
         Me.pnlOptions.Controls.Add(Me.GroupBox2)
         Me.pnlOptions.Controls.Add(Me.GroupBox1)
         Me.pnlOptions.ForeColor = System.Drawing.Color.White
-        Me.pnlOptions.Location = New System.Drawing.Point(22, 147)
+        Me.pnlOptions.Location = New System.Drawing.Point(776, 12)
         Me.pnlOptions.Name = "pnlOptions"
-        Me.pnlOptions.Size = New System.Drawing.Size(204, 275)
+        Me.pnlOptions.Size = New System.Drawing.Size(233, 275)
         Me.pnlOptions.TabIndex = 10
         Me.pnlOptions.Visible = False
+        '
+        'btnSaveSettings
+        '
+        Me.btnSaveSettings.ForeColor = System.Drawing.Color.Black
+        Me.btnSaveSettings.Location = New System.Drawing.Point(12, 240)
+        Me.btnSaveSettings.Name = "btnSaveSettings"
+        Me.btnSaveSettings.Size = New System.Drawing.Size(205, 23)
+        Me.btnSaveSettings.TabIndex = 14
+        Me.btnSaveSettings.Text = "Save Settings"
+        Me.btnSaveSettings.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 99)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(61, 13)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "ScreenSize"
+        '
+        'cmbScreenSize
+        '
+        Me.cmbScreenSize.FormattingEnabled = True
+        Me.cmbScreenSize.Items.AddRange(New Object() {"1024X768", "1152X864"})
+        Me.cmbScreenSize.Location = New System.Drawing.Point(11, 115)
+        Me.cmbScreenSize.Name = "cmbScreenSize"
+        Me.cmbScreenSize.Size = New System.Drawing.Size(206, 21)
+        Me.cmbScreenSize.TabIndex = 12
         '
         'lblVolume
         '
         Me.lblVolume.AutoSize = True
         Me.lblVolume.BackColor = System.Drawing.Color.Transparent
         Me.lblVolume.ForeColor = System.Drawing.Color.White
-        Me.lblVolume.Location = New System.Drawing.Point(15, 120)
+        Me.lblVolume.Location = New System.Drawing.Point(12, 53)
         Me.lblVolume.Name = "lblVolume"
         Me.lblVolume.Size = New System.Drawing.Size(48, 13)
         Me.lblVolume.TabIndex = 11
@@ -147,9 +181,9 @@ Partial Class frmMainGame
         'scrlVolume
         '
         Me.scrlVolume.LargeChange = 1
-        Me.scrlVolume.Location = New System.Drawing.Point(15, 135)
+        Me.scrlVolume.Location = New System.Drawing.Point(12, 68)
         Me.scrlVolume.Name = "scrlVolume"
-        Me.scrlVolume.Size = New System.Drawing.Size(172, 17)
+        Me.scrlVolume.Size = New System.Drawing.Size(205, 17)
         Me.scrlVolume.TabIndex = 10
         Me.scrlVolume.Value = 100
         '
@@ -158,7 +192,7 @@ Partial Class frmMainGame
         Me.GroupBox2.Controls.Add(Me.optSOff)
         Me.GroupBox2.Controls.Add(Me.optSOn)
         Me.GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 53)
+        Me.GroupBox2.Location = New System.Drawing.Point(117, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(100, 38)
         Me.GroupBox2.TabIndex = 7
@@ -912,7 +946,8 @@ Partial Class frmMainGame
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1152, 864)
+        Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlMapreport)
@@ -925,7 +960,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlShop)
-        Me.Controls.Add(Me.pnlOptions)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -1026,4 +1060,7 @@ Partial Class frmMainGame
     Friend WithEvents lblResponse1 As Windows.Forms.Label
     Friend WithEvents lblEventContinue As Windows.Forms.Label
     Friend WithEvents lblEventChat As Windows.Forms.Label
+    Friend WithEvents btnSaveSettings As Windows.Forms.Button
+    Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents cmbScreenSize As Windows.Forms.ComboBox
 End Class

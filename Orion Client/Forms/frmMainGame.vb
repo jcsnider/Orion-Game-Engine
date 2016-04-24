@@ -29,6 +29,8 @@ Public Class frmMainGame
             If e.KeyCode = Keys.W Then VbKeyUp = True
             If e.KeyCode = Keys.A Then VbKeyLeft = True
             If e.KeyCode = Keys.D Then VbKeyRight = True
+            If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+            If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
         End If
 
         If e.KeyCode = Keys.Enter Then
@@ -111,22 +113,14 @@ Public Class frmMainGame
             HideGui = True
         End If
 
-        'If e.KeyCode = Keys.Enter Then
-        '    HandlePressEnter()
-        '    CheckMapGetItem()
-        '    inChat = Not inChat
-        '    e.SuppressKeyPress = True
-        'End If
     End Sub
 
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        frmAdmin.Visible = False
-        pnlCurrency.Left = ChatWindowX
-        pnlCurrency.Top = ChatWindowY
+        RePositionGUI()
 
-        pnlQuestSpeech.Left = ChatWindowX
-        pnlQuestSpeech.Top = ChatWindowY
+        frmAdmin.Visible = False
+
 
     End Sub
 
@@ -146,6 +140,10 @@ Public Class frmMainGame
         tmpCurrencyItem = 0
         txtCurrency.Text = vbNullString
         CurrencyMenu = 0 ' clear
+    End Sub
+
+    Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
+        pnlMapreport.Hide()
     End Sub
 #End Region
 
@@ -329,63 +327,55 @@ Public Class frmMainGame
 
 #End Region
 
-#Region "Chat Code"
-    Private ReadOnly NonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
-
-    Public Function IsAcceptable(ByVal keyData As Keys) As Boolean
-        Dim index As Integer = Array.IndexOf(NonAcceptableKeys, keyData)
-        Return index >= 0
-    End Function
-
-#End Region
-
 #Region "Options"
-    Private Sub optMOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOn.CheckedChanged
+
+    Private Sub scrlVolume_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVolume.ValueChanged
+        Options.Volume = scrlVolume.Value
+
+        MaxVolume = Options.Volume
+
+        lblVolume.Text = "Volume: " & Options.Volume
+
+        If Not MusicPlayer Is Nothing Then MusicPlayer.Volume() = MaxVolume
+
+    End Sub
+
+    Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+        'music
         If optMOn.Checked = True Then
             Options.Music = 1
             ' start music playing
             PlayMusic(Trim$(Map.Music))
-            ' save to config.ini
-            SaveOptions()
-        End If
-
-    End Sub
-
-    Private Sub optMOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optMOff.CheckedChanged
-        If optMOff.Checked = True Then
+        Else
             Options.Music = 0
             ' stop music playing
             StopMusic()
             CurMusic = ""
-            ' save to config.ini
-            SaveOptions()
         End If
 
-    End Sub
-
-    Private Sub optSOn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOn.CheckedChanged
+        'sound
         If optSOn.Checked = True Then
             Options.Sound = 1
-
-            ' save to config.ini
-            SaveOptions()
-        End If
-
-    End Sub
-
-    Private Sub optSOff_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optSOff.CheckedChanged
-        If optSOff.Checked = True Then
+        Else
             Options.Sound = 0
             StopSound()
-            ' save to config.ini
-            SaveOptions()
         End If
 
+        'screensize
+        Options.ScreenSize = cmbScreenSize.SelectedIndex
+
+        ' save to config.ini
+        SaveOptions()
+
+        'reload options
+        LoadOptions()
+
+        RePositionGUI()
+
+        pnlOptions.Visible = False
     End Sub
 
-    Private Sub scrlVolume_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVolume.ValueChanged
 
-    End Sub
 #End Region
 
 #Region "Shop Code"
@@ -798,6 +788,13 @@ Public Class frmMainGame
         ShakeCount += 1
     End Sub
 
+    Private ReadOnly NonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
+
+    Public Function IsAcceptable(ByVal keyData As Keys) As Boolean
+        Dim index As Integer = Array.IndexOf(NonAcceptableKeys, keyData)
+        Return index >= 0
+    End Function
+
 #End Region
 
 #Region "Event Code"
@@ -892,10 +889,7 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
-        pnlMapreport.Hide()
 
-    End Sub
 
 #End Region
 

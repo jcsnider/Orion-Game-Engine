@@ -152,8 +152,8 @@
 
     ' Map constants
     Public Const MAX_MAPS As Long = 100
-    Public Const MAX_MAPX As Byte = 35
-    Public Const MAX_MAPY As Byte = 26
+    Public MAX_MAPX As Byte = 35
+    Public MAX_MAPY As Byte = 26
 
     Public Const MAP_MORAL_NONE As Byte = 0
     Public Const MAP_MORAL_SAFE As Byte = 1
@@ -249,10 +249,10 @@
     Public Const TARGET_TYPE_PLAYER As Byte = 1
     Public Const TARGET_TYPE_NPC As Byte = 2
     Public Const TARGET_TYPE_EVENT As Byte = 3
-    Public Const HalfX As Integer = ((MAX_MAPX + 1) \ 2) * PIC_X
-    Public Const HalfY As Integer = ((MAX_MAPY + 1) \ 2) * PIC_Y
-    Public Const ScreenX As Integer = (MAX_MAPX + 1) * PIC_X
-    Public Const ScreenY As Integer = (MAX_MAPY + 1) * PIC_Y
+    Public HalfX As Integer = ((MAX_MAPX + 1) \ 2) * PIC_X
+    Public HalfY As Integer = ((MAX_MAPY + 1) \ 2) * PIC_Y
+    Public ScreenX As Integer = (MAX_MAPX + 1) * PIC_X
+    Public ScreenY As Integer = (MAX_MAPY + 1) * PIC_Y
 
     ' Do Events
     Public Const nLng As Long = (&H80 Or &H1 Or &H4 Or &H20) + (&H8 Or &H40)
