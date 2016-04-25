@@ -416,6 +416,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).Stackable)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -468,6 +469,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).Stackable)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -650,7 +652,7 @@ Module ServerTCP
         For i = 1 To MAX_RESOURCES
 
             If Len(Trim$(Resource(i).Name)) > 0 Then
-                Call SendUpdateResourceTo(Index, i)
+                SendUpdateResourceTo(Index, i)
             End If
 
         Next
@@ -667,13 +669,15 @@ Module ServerTCP
         Buffer.WriteLong(Resource(ResourceNum).Animation)
         Buffer.WriteString(Resource(ResourceNum).EmptyMessage)
         Buffer.WriteLong(Resource(ResourceNum).ExhaustedImage)
-        Buffer.WriteLong(Resource(ResourceNum).health)
+        Buffer.WriteLong(Resource(ResourceNum).Health)
+        Buffer.WriteLong(Resource(ResourceNum).ExpReward)
         Buffer.WriteLong(Resource(ResourceNum).ItemReward)
         Buffer.WriteString(Resource(ResourceNum).Name)
         Buffer.WriteLong(Resource(ResourceNum).ResourceImage)
         Buffer.WriteLong(Resource(ResourceNum).ResourceType)
         Buffer.WriteLong(Resource(ResourceNum).RespawnTime)
         Buffer.WriteString(Resource(ResourceNum).SuccessMessage)
+        Buffer.WriteLong(Resource(ResourceNum).LvlRequired)
         Buffer.WriteLong(Resource(ResourceNum).ToolRequired)
         Buffer.WriteLong(Resource(ResourceNum).Walkthrough)
 
@@ -687,17 +691,17 @@ Module ServerTCP
         For i = 1 To MAX_SHOPS
 
             If Len(Trim$(Shop(i).Name)) > 0 Then
-                Call SendUpdateShopTo(Index, i)
+                SendUpdateShopTo(Index, i)
             End If
 
         Next
 
     End Sub
+
     Sub SendUpdateShopTo(ByVal Index As Long, ByVal shopNum As Long)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-
 
         Buffer.WriteLong(ServerPackets.SUpdateShop)
         Buffer.WriteLong(shopNum)
@@ -714,6 +718,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendUpdateShopToAll(ByVal shopNum As Long)
         Dim Buffer As ByteBuffer
 
@@ -735,6 +740,7 @@ Module ServerTCP
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendSpells(ByVal Index As Long)
         Dim i As Long
 
@@ -747,6 +753,7 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendUpdateSpellTo(ByVal Index As Long, ByVal spellnum As Long)
         Dim Buffer As ByteBuffer
 
@@ -787,6 +794,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendUpdateSpellToAll(ByVal spellnum As Long)
         Dim Buffer As ByteBuffer
 
@@ -1218,6 +1226,12 @@ Module ServerTCP
 
         Buffer.WriteLong(Player(Index).InHouse)
 
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillLevel)
+            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillCurExp)
+            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillNextLvlExp)
+        Next
+
         PlayerData = Buffer.ToArray()
 
         Buffer = Nothing
@@ -1393,13 +1407,15 @@ Module ServerTCP
         Buffer.WriteLong(Resource(ResourceNum).Animation)
         Buffer.WriteString(Resource(ResourceNum).EmptyMessage)
         Buffer.WriteLong(Resource(ResourceNum).ExhaustedImage)
-        Buffer.WriteLong(Resource(ResourceNum).health)
+        Buffer.WriteLong(Resource(ResourceNum).Health)
+        Buffer.WriteLong(Resource(ResourceNum).ExpReward)
         Buffer.WriteLong(Resource(ResourceNum).ItemReward)
         Buffer.WriteString(Resource(ResourceNum).Name)
         Buffer.WriteLong(Resource(ResourceNum).ResourceImage)
         Buffer.WriteLong(Resource(ResourceNum).ResourceType)
         Buffer.WriteLong(Resource(ResourceNum).RespawnTime)
         Buffer.WriteString(Resource(ResourceNum).SuccessMessage)
+        Buffer.WriteLong(Resource(ResourceNum).LvlRequired)
         Buffer.WriteLong(Resource(ResourceNum).ToolRequired)
         Buffer.WriteLong(Resource(ResourceNum).Walkthrough)
 

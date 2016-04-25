@@ -138,6 +138,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlOptions.Visible = False
                         RefreshQuestLog()
                         frmMainGame.pnlQuestLog.Visible = Not frmMainGame.pnlQuestLog.Visible
+                        frmMainGame.pnlQuestLog.BringToFront()
                         CheckGuiClick = True
                         'Trade
                     ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
@@ -310,10 +311,10 @@ Public Module ClientGuiFunctions
 
                 If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer declined
                     SendBuyHouse(0)
-                ElseIf DIALOGUE_TYPE_VISIT Then
+                ElseIf DIALOGUE_TYPE_VISIT Then 'visit declined
                     SendVisit(0)
-                ElseIf DIALOGUE_TYPE_PARTY Then
-
+                ElseIf DIALOGUE_TYPE_PARTY Then 'party declined
+                    SendLeaveParty()
                 End If
 
                 DialogPanelVisible = False
@@ -358,7 +359,7 @@ Public Module ClientGuiFunctions
 
                     ' in bank?
                     If InBank Then
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             CurrencyMenu = 2 ' deposit
                             frmMainGame.lblCurrency.Text = "How many do you want to deposit?"
                             tmpCurrencyItem = InvNum
@@ -379,7 +380,7 @@ Public Module ClientGuiFunctions
                                 Exit Function
                             End If
                         Next
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             ' currency shit here brah
                             Exit Function
                         End If
@@ -514,7 +515,7 @@ Public Module ClientGuiFunctions
                 ElseIf e.Button = MouseButtons.Right Then
                     If Not InBank And Not InShop And Not InTrade Then
                         If InvNum <> 0 Then
-                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                                 If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
                                     CurrencyMenu = 1 ' drop
                                     frmMainGame.lblCurrency.Text = "How many do you want to drop?"

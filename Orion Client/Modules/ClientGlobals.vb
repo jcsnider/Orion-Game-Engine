@@ -22,6 +22,8 @@ Module ClientGlobals
     Public chatBubble(0 To MAX_BYTE) As ChatBubbleRec
     Public chatBubbleIndex As Long
 
+    Public UpdateMiniMap As Boolean
+
     ' trading
     Public TradeTimer As Long
     Public TradeRequest As Boolean

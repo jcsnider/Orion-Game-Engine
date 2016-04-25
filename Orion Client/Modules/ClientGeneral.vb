@@ -35,6 +35,7 @@ Module ClientGeneral
 
             ReDim Player(i).Hotbar(MAX_HOTBAR)
 
+            ReDim Player(i).GatherSkills(ResourceSkills.Skill_Count - 1)
         Next
 
         ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)
@@ -387,22 +388,22 @@ Module ClientGeneral
 
         'hotbar
         HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
-        HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 50
+        HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 45
 
         'action panel
-        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.width - 24
+        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.width - 25
         ActionPanelY = frmMainGame.Height - ActionPanelGFXInfo.height - 45
 
         'Char Window
-        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.width - 24
+        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.width - 26
         CharWindowY = frmMainGame.Height - CharPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
 
         'inv Window
-        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.width - 24
+        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.width - 26
         InvWindowY = frmMainGame.Height - InvPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
 
         'spell window
-        SpellWindowX = frmMainGame.Width - SpellPanelGFXInfo.width - 24
+        SpellWindowX = frmMainGame.Width - SpellPanelGFXInfo.width - 26
         SpellWindowY = frmMainGame.Height - SpellPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
 
 

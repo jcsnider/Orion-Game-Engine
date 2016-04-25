@@ -25,16 +25,20 @@ Partial Class frmEditor_Resource
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.scrlLvlReq = New System.Windows.Forms.HScrollBar()
+        Me.lblLvlReq = New System.Windows.Forms.Label()
+        Me.scrlRewardExp = New System.Windows.Forms.HScrollBar()
+        Me.lblRewardExp = New System.Windows.Forms.Label()
+        Me.cmbTool = New System.Windows.Forms.ComboBox()
         Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
         Me.lblAnim = New System.Windows.Forms.Label()
         Me.scrlRespawn = New System.Windows.Forms.HScrollBar()
         Me.lblRespawn = New System.Windows.Forms.Label()
         Me.scrlHealth = New System.Windows.Forms.HScrollBar()
         Me.lblHealth = New System.Windows.Forms.Label()
-        Me.scrlTool = New System.Windows.Forms.HScrollBar()
         Me.lblTool = New System.Windows.Forms.Label()
-        Me.scrlReward = New System.Windows.Forms.HScrollBar()
-        Me.lblReward = New System.Windows.Forms.Label()
+        Me.scrlRewardItem = New System.Windows.Forms.HScrollBar()
+        Me.lblRewardItem = New System.Windows.Forms.Label()
         Me.picExhaustedPic = New System.Windows.Forms.PictureBox()
         Me.picNormalpic = New System.Windows.Forms.PictureBox()
         Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar()
@@ -63,7 +67,7 @@ Partial Class frmEditor_Resource
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(210, 505)
+        Me.GroupBox1.Size = New System.Drawing.Size(210, 536)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Resource List"
@@ -73,21 +77,25 @@ Partial Class frmEditor_Resource
         Me.lstIndex.FormattingEnabled = True
         Me.lstIndex.Location = New System.Drawing.Point(8, 16)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(196, 485)
+        Me.lstIndex.Size = New System.Drawing.Size(196, 511)
         Me.lstIndex.TabIndex = 0
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.scrlLvlReq)
+        Me.GroupBox2.Controls.Add(Me.lblLvlReq)
+        Me.GroupBox2.Controls.Add(Me.scrlRewardExp)
+        Me.GroupBox2.Controls.Add(Me.lblRewardExp)
+        Me.GroupBox2.Controls.Add(Me.cmbTool)
         Me.GroupBox2.Controls.Add(Me.scrlAnimation)
         Me.GroupBox2.Controls.Add(Me.lblAnim)
         Me.GroupBox2.Controls.Add(Me.scrlRespawn)
         Me.GroupBox2.Controls.Add(Me.lblRespawn)
         Me.GroupBox2.Controls.Add(Me.scrlHealth)
         Me.GroupBox2.Controls.Add(Me.lblHealth)
-        Me.GroupBox2.Controls.Add(Me.scrlTool)
         Me.GroupBox2.Controls.Add(Me.lblTool)
-        Me.GroupBox2.Controls.Add(Me.scrlReward)
-        Me.GroupBox2.Controls.Add(Me.lblReward)
+        Me.GroupBox2.Controls.Add(Me.scrlRewardItem)
+        Me.GroupBox2.Controls.Add(Me.lblRewardItem)
         Me.GroupBox2.Controls.Add(Me.picExhaustedPic)
         Me.GroupBox2.Controls.Add(Me.picNormalpic)
         Me.GroupBox2.Controls.Add(Me.scrlExhaustedPic)
@@ -104,10 +112,55 @@ Partial Class frmEditor_Resource
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(219, 2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(340, 505)
+        Me.GroupBox2.Size = New System.Drawing.Size(348, 505)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Resource Properties"
+        '
+        'scrlLvlReq
+        '
+        Me.scrlLvlReq.LargeChange = 1
+        Me.scrlLvlReq.Location = New System.Drawing.Point(11, 395)
+        Me.scrlLvlReq.Name = "scrlLvlReq"
+        Me.scrlLvlReq.Size = New System.Drawing.Size(154, 18)
+        Me.scrlLvlReq.TabIndex = 58
+        '
+        'lblLvlReq
+        '
+        Me.lblLvlReq.AutoSize = True
+        Me.lblLvlReq.Location = New System.Drawing.Point(12, 382)
+        Me.lblLvlReq.Name = "lblLvlReq"
+        Me.lblLvlReq.Size = New System.Drawing.Size(91, 13)
+        Me.lblLvlReq.TabIndex = 57
+        Me.lblLvlReq.Text = "Level Required: 0"
+        '
+        'scrlRewardExp
+        '
+        Me.scrlRewardExp.LargeChange = 1
+        Me.scrlRewardExp.Location = New System.Drawing.Point(182, 309)
+        Me.scrlRewardExp.Maximum = 10000
+        Me.scrlRewardExp.Name = "scrlRewardExp"
+        Me.scrlRewardExp.Size = New System.Drawing.Size(152, 17)
+        Me.scrlRewardExp.TabIndex = 56
+        '
+        'lblRewardExp
+        '
+        Me.lblRewardExp.AutoSize = True
+        Me.lblRewardExp.Location = New System.Drawing.Point(179, 290)
+        Me.lblRewardExp.Name = "lblRewardExp"
+        Me.lblRewardExp.Size = New System.Drawing.Size(97, 13)
+        Me.lblRewardExp.TabIndex = 55
+        Me.lblRewardExp.Text = "Exp Reward: None"
+        '
+        'cmbTool
+        '
+        Me.cmbTool.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTool.FormattingEnabled = True
+        Me.cmbTool.Items.AddRange(New Object() {"None", "Hatchet", "Pickaxe", "Fishing Rod"})
+        Me.cmbTool.Location = New System.Drawing.Point(13, 351)
+        Me.cmbTool.Name = "cmbTool"
+        Me.cmbTool.Size = New System.Drawing.Size(152, 21)
+        Me.cmbTool.TabIndex = 54
         '
         'scrlAnimation
         '
@@ -148,29 +201,20 @@ Partial Class frmEditor_Resource
         'scrlHealth
         '
         Me.scrlHealth.LargeChange = 1
-        Me.scrlHealth.Location = New System.Drawing.Point(11, 401)
+        Me.scrlHealth.Location = New System.Drawing.Point(175, 351)
         Me.scrlHealth.Maximum = 10000
         Me.scrlHealth.Name = "scrlHealth"
-        Me.scrlHealth.Size = New System.Drawing.Size(315, 17)
+        Me.scrlHealth.Size = New System.Drawing.Size(159, 21)
         Me.scrlHealth.TabIndex = 49
         '
         'lblHealth
         '
         Me.lblHealth.AutoSize = True
-        Me.lblHealth.Location = New System.Drawing.Point(10, 388)
+        Me.lblHealth.Location = New System.Drawing.Point(172, 335)
         Me.lblHealth.Name = "lblHealth"
         Me.lblHealth.Size = New System.Drawing.Size(50, 13)
         Me.lblHealth.TabIndex = 48
         Me.lblHealth.Text = "Health: 0"
-        '
-        'scrlTool
-        '
-        Me.scrlTool.LargeChange = 1
-        Me.scrlTool.Location = New System.Drawing.Point(13, 354)
-        Me.scrlTool.Maximum = 3
-        Me.scrlTool.Name = "scrlTool"
-        Me.scrlTool.Size = New System.Drawing.Size(319, 17)
-        Me.scrlTool.TabIndex = 47
         '
         'lblTool
         '
@@ -181,21 +225,21 @@ Partial Class frmEditor_Resource
         Me.lblTool.TabIndex = 46
         Me.lblTool.Text = "Tool Required: None"
         '
-        'scrlReward
+        'scrlRewardItem
         '
-        Me.scrlReward.Location = New System.Drawing.Point(11, 309)
-        Me.scrlReward.Name = "scrlReward"
-        Me.scrlReward.Size = New System.Drawing.Size(322, 17)
-        Me.scrlReward.TabIndex = 45
+        Me.scrlRewardItem.Location = New System.Drawing.Point(11, 309)
+        Me.scrlRewardItem.Name = "scrlRewardItem"
+        Me.scrlRewardItem.Size = New System.Drawing.Size(154, 17)
+        Me.scrlRewardItem.TabIndex = 45
         '
-        'lblReward
+        'lblRewardItem
         '
-        Me.lblReward.AutoSize = True
-        Me.lblReward.Location = New System.Drawing.Point(10, 290)
-        Me.lblReward.Name = "lblReward"
-        Me.lblReward.Size = New System.Drawing.Size(99, 13)
-        Me.lblReward.TabIndex = 44
-        Me.lblReward.Text = "Item Reward: None"
+        Me.lblRewardItem.AutoSize = True
+        Me.lblRewardItem.Location = New System.Drawing.Point(10, 290)
+        Me.lblRewardItem.Name = "lblRewardItem"
+        Me.lblRewardItem.Size = New System.Drawing.Size(99, 13)
+        Me.lblRewardItem.TabIndex = 44
+        Me.lblRewardItem.Text = "Item Reward: None"
         '
         'picExhaustedPic
         '
@@ -255,7 +299,7 @@ Partial Class frmEditor_Resource
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Tree", "Mine", "Fishing Spot"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Herb", "Tree", "Mine", "Fishing Spot"})
         Me.cmbType.Location = New System.Drawing.Point(58, 99)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(276, 21)
@@ -329,7 +373,7 @@ Partial Class frmEditor_Resource
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(330, 513)
+        Me.btnDelete.Location = New System.Drawing.Point(340, 513)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 4
@@ -338,7 +382,7 @@ Partial Class frmEditor_Resource
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(441, 513)
+        Me.btnCancel.Location = New System.Drawing.Point(462, 513)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 5
@@ -349,7 +393,7 @@ Partial Class frmEditor_Resource
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(571, 544)
+        Me.ClientSize = New System.Drawing.Size(573, 545)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -384,9 +428,8 @@ Partial Class frmEditor_Resource
     Friend WithEvents scrlNormalPic As System.Windows.Forms.HScrollBar
     Friend WithEvents lblExhaustedPic As System.Windows.Forms.Label
     Friend WithEvents lblNormalPic As System.Windows.Forms.Label
-    Friend WithEvents scrlReward As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblReward As System.Windows.Forms.Label
-    Friend WithEvents scrlTool As System.Windows.Forms.HScrollBar
+    Friend WithEvents scrlRewardItem As System.Windows.Forms.HScrollBar
+    Friend WithEvents lblRewardItem As System.Windows.Forms.Label
     Friend WithEvents lblTool As System.Windows.Forms.Label
     Friend WithEvents scrlAnimation As System.Windows.Forms.HScrollBar
     Friend WithEvents lblAnim As System.Windows.Forms.Label
@@ -397,4 +440,9 @@ Partial Class frmEditor_Resource
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents cmbTool As Windows.Forms.ComboBox
+    Friend WithEvents scrlRewardExp As Windows.Forms.HScrollBar
+    Friend WithEvents lblRewardExp As Windows.Forms.Label
+    Friend WithEvents scrlLvlReq As Windows.Forms.HScrollBar
+    Friend WithEvents lblLvlReq As Windows.Forms.Label
 End Class

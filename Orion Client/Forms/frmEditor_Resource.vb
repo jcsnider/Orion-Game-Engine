@@ -16,21 +16,41 @@
         Resource(EditorIndex).ExhaustedImage = scrlExhaustedPic.Value
     End Sub
 
-    Private Sub scrlReward_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlReward.ValueChanged
-        If scrlReward.Value > 0 Then
-            lblReward.Text = "Item Reward: " & Trim$(Item(scrlReward.Value).Name)
+    Private Sub scrlRewardItem_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRewardItem.ValueChanged
+        If scrlRewardItem.Value > 0 Then
+            lblRewardItem.Text = "Item Reward: " & Trim$(Item(scrlRewardItem.Value).Name)
         Else
-            lblReward.Text = "Item Reward: None"
+            lblRewardItem.Text = "Item Reward: None"
         End If
 
-        Resource(EditorIndex).ItemReward = scrlReward.Value
+        Resource(EditorIndex).ItemReward = scrlRewardItem.Value
     End Sub
 
-    Private Sub scrlTool_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlTool.ValueChanged
+    Private Sub scrlRewardExp_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRewardExp.ValueChanged
+        If scrlRewardExp.Value > 0 Then
+            lblRewardExp.Text = "Exp Reward: " & scrlRewardExp.Value
+        Else
+            lblRewardExp.Text = "Exp Reward: None"
+        End If
+
+        Resource(EditorIndex).ExpReward = scrlRewardExp.Value
+    End Sub
+
+    Private Sub scrlLvlReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLvlReq.ValueChanged
+        If scrlLvlReq.Value > 0 Then
+            lblLvlReq.Text = "Level Required: " & scrlLvlReq.Value
+        Else
+            lblLvlReq.Text = "level Required: None"
+        End If
+
+        Resource(EditorIndex).LvlRequired = scrlLvlReq.Value
+    End Sub
+
+    Private Sub cmbTool_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTool.SelectedIndexChanged
         Dim Name As String
         Name = ""
 
-        Select Case scrlTool.Value
+        Select Case cmbTool.SelectedIndex
             Case 0
                 Name = "None"
             Case 1
@@ -43,7 +63,7 @@
 
         lblTool.Text = "Tool Required: " & Name
 
-        Resource(EditorIndex).ToolRequired = scrlTool.Value
+        Resource(EditorIndex).ToolRequired = cmbTool.SelectedIndex
     End Sub
 
     Private Sub scrlHealth_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlHealth.ValueChanged
@@ -68,7 +88,7 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
-        Call ResourceEditorOk()
+        ResourceEditorOk()
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
@@ -89,7 +109,7 @@
     End Sub
 
     Private Sub frmEditor_Resource_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        scrlReward.Maximum = MAX_ITEMS
+        scrlRewardItem.Maximum = MAX_ITEMS
     End Sub
 
     Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
@@ -110,4 +130,6 @@
     Private Sub txtMessage2_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMessage2.TextChanged
         Resource(EditorIndex).EmptyMessage = Trim$(txtMessage2.Text)
     End Sub
+
+
 End Class

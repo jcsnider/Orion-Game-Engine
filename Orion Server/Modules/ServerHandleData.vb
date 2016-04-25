@@ -1351,7 +1351,7 @@
 
             ' Prevent hacking
             If Len(Trim$(Name)) < 3 Then
-                Call AlertMsg(index, "Character name must be at least three characters in length.")
+                AlertMsg(index, "Character name must be at least three characters in length.")
                 Exit Sub
             End If
 
@@ -1360,7 +1360,7 @@
                 n = AscW(Mid$(Name, i, 1))
 
                 If Not isNameLegal(n) Then
-                    Call AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
+                    AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
                     Exit Sub
                 End If
 
@@ -1378,19 +1378,19 @@
 
             ' Check if char already exists in slot
             If CharExist(index) Then
-                Call AlertMsg(index, "Character already exists!")
+                AlertMsg(index, "Character already exists!")
                 Exit Sub
             End If
 
             ' Check if name is already in use
             If FindChar(Name) Then
-                Call AlertMsg(index, "Sorry, but that name is in use!")
+                AlertMsg(index, "Sorry, but that name is in use!")
                 Exit Sub
             End If
 
             ' Everything went ok, add the character
-            Call AddChar(index, Name, Sex, Classes, Sprite)
-            Call Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
+            AddChar(index, Name, Sex, Classes, Sprite)
+            Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
             ' log them in!!
             HandleUseChar(index)
 
@@ -1439,8 +1439,8 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
         If Buffer.ReadLong <> ClientPackets.CMapDropItem Then Exit Sub
-        InvNum = Buffer.ReadLong 'CLng(Parse(1))
-        Amount = Buffer.ReadLong 'CLng(Parse(2))
+        InvNum = Buffer.ReadLong
+        Amount = Buffer.ReadLong
         Buffer = Nothing
 
         If TempPlayer(index).InBank Or TempPlayer(index).InShop Then Exit Sub
@@ -1448,7 +1448,7 @@
         ' Prevent hacking
         If InvNum < 1 Or InvNum > MAX_INV Then Exit Sub
         If GetPlayerInvItemNum(index, InvNum) < 1 Or GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
-        If Item(GetPlayerInvItemNum(index, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+        If Item(GetPlayerInvItemNum(index, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(index, InvNum)).Stackable = 1 Then
             If Amount < 1 Or Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
         End If
 
@@ -1686,6 +1686,7 @@
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
         Item(n).Randomize = Buffer.ReadLong()
+        Item(n).Stackable = Buffer.ReadLong()
 
         For i = 0 To Stats.Stat_Count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -2222,8 +2223,8 @@
 
         If n > 0 Then
             If TempPlayer(index).InParty = YES Then
-                Call PlayerMsg(index, "You have left the party.")
-                Call PlayerMsg(n, GetPlayerName(index) & " has left the party.")
+                PlayerMsg(index, "You have left the party.")
+                PlayerMsg(n, GetPlayerName(index) & " has left the party.")
                 TempPlayer(index).PartyPlayer = 0
                 TempPlayer(index).PartyStarter = NO
                 TempPlayer(index).InParty = NO
@@ -2252,6 +2253,7 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CSpells Then Exit Sub
 
         SendPlayerSpells(index)
@@ -2292,10 +2294,12 @@
         If buffer.ReadLong <> ClientPackets.CSwapInvSlots Then Exit Sub
 
         If TempPlayer(index).InTrade > 0 Or TempPlayer(index).InBank Or TempPlayer(index).InShop Then Exit Sub
+
         ' Old Slot
         oldSlot = buffer.ReadInteger
         newSlot = buffer.ReadInteger
         buffer = Nothing
+
         PlayerSwitchInvSlots(index, oldSlot, newSlot)
 
         buffer = Nothing
@@ -2305,15 +2309,16 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CRequestEditResource Then Exit Sub
+
         ' Prevent hacking
-        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then Exit Sub
 
         buffer = New ByteBuffer
         buffer.WriteLong(ServerPackets.SResourceEditor)
         SendDataTo(index, buffer.ToArray())
+
         buffer = Nothing
     End Sub
 
@@ -2322,36 +2327,38 @@
         Dim resourcenum As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CSaveResource Then Exit Sub
+
         ' Prevent hacking
-        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then Exit Sub
 
         resourcenum = buffer.ReadLong
 
         ' Prevent hacking
-        If resourcenum < 0 Or resourcenum > MAX_RESOURCES Then
-            Exit Sub
-        End If
+        If resourcenum < 0 Or resourcenum > MAX_RESOURCES Then Exit Sub
 
         Resource(resourcenum).Animation = buffer.ReadLong()
         Resource(resourcenum).EmptyMessage = buffer.ReadString()
         Resource(resourcenum).ExhaustedImage = buffer.ReadLong()
-        Resource(resourcenum).health = buffer.ReadLong()
+        Resource(resourcenum).Health = buffer.ReadLong()
+        Resource(resourcenum).ExpReward = buffer.ReadLong()
         Resource(resourcenum).ItemReward = buffer.ReadLong()
         Resource(resourcenum).Name = buffer.ReadString()
         Resource(resourcenum).ResourceImage = buffer.ReadLong()
         Resource(resourcenum).ResourceType = buffer.ReadLong()
         Resource(resourcenum).RespawnTime = buffer.ReadLong()
         Resource(resourcenum).SuccessMessage = buffer.ReadString()
+        Resource(resourcenum).LvlRequired = buffer.ReadLong()
         Resource(resourcenum).ToolRequired = buffer.ReadLong()
         Resource(resourcenum).Walkthrough = buffer.ReadLong()
 
         ' Save it
-        Call SendUpdateResourceToAll(resourcenum)
-        Call SaveResource(resourcenum)
-        Call Addlog(GetPlayerName(index) & " saved Resource #" & resourcenum & ".", ADMIN_LOG)
+        SendUpdateResourceToAll(resourcenum)
+        SaveResource(resourcenum)
+
+        Addlog(GetPlayerName(index) & " saved Resource #" & resourcenum & ".", ADMIN_LOG)
+
         buffer = Nothing
     End Sub
 

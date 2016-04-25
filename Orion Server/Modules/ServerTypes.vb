@@ -53,16 +53,21 @@
         Dim exp As Long
         Dim Access As Byte
         Dim PK As Byte
+
         ' Vitals
         Dim Vital() As Long
+
         ' Stats
         Dim Stat() As Byte
         Dim POINTS As Byte
+
         ' Worn equipment
         Dim Equipment() As Byte
+
         ' Inventory
         Dim Inv() As PlayerInvRec
         Dim Spell() As Byte
+
         ' Position
         Dim Map As Integer
         Dim x As Byte
@@ -85,6 +90,10 @@
         'Event
         Dim Switches() As Byte
         Dim Variables() As Long
+
+        'gather skills
+        Dim GatherSkills() As ResourceSkillsRec
+
     End Structure
 
     Public Structure TempPlayerRec
@@ -133,7 +142,7 @@
 
     Public Structure TileRec
         Dim Layer() As TileDataRec
-        Dim Autotile() As Byte '1 To MapLayer.Layer_Count - 1
+        Dim Autotile() As Byte
         Dim Type As Byte
         Dim Data1 As Long
         Dim Data2 As Long
@@ -162,7 +171,7 @@
         Dim MaxY As Byte
 
         Dim Tile(,) As TileRec
-        ' Dim ExTile(,) As ExTileRec
+
         Dim Npc() As Integer
 
         Dim EventCount As Long
@@ -200,6 +209,7 @@
         Dim Animation As Long
         Dim Paperdoll As Long
         Dim Randomize As Byte
+        Dim Stackable As Byte
 
         'Housing
         Dim FurnitureWidth As Long
@@ -325,9 +335,11 @@
         Dim ResourceType As Long
         Dim ResourceImage As Long
         Dim ExhaustedImage As Long
+        Dim ExpReward As Long
         Dim ItemReward As Long
+        Dim LvlRequired As Long
         Dim ToolRequired As Long
-        Dim health As Long
+        Dim Health As Long
         Dim RespawnTime As Long
         Dim Walkthrough As Boolean
         Dim Animation As Long
@@ -344,5 +356,11 @@
     Public Structure HotbarRec
         Dim Slot As Long
         Dim sType As Byte
+    End Structure
+
+    Public Structure ResourceSkillsRec
+        Dim SkillLevel As Long
+        Dim SkillCurExp As Long
+        Dim SkillNextLvlExp As Long
     End Structure
 End Module

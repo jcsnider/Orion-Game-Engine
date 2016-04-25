@@ -115,6 +115,9 @@
         Dim Hotbar() As HotbarRec
 
         Dim EventTimer As Long
+
+        'gather skills
+        Dim GatherSkills() As ResourceSkillsRec
     End Structure
 
     Public Structure TileDataRec
@@ -193,6 +196,7 @@
         Dim Animation As Long
         Dim Paperdoll As Long
         Dim Randomize As Byte
+        Dim Stackable As Byte
 
         'Housing
         Dim FurnitureWidth As Long
@@ -312,8 +316,10 @@
         Dim ResourceType As Long
         Dim ResourceImage As Long
         Dim ExhaustedImage As Long
+        Dim ExpReward As Long
         Dim ItemReward As Long
         Dim ToolRequired As Long
+        Dim LvlRequired As Long
         Dim Health As Long
         Dim RespawnTime As Long
         Dim Walkthrough As Boolean
@@ -369,6 +375,12 @@
         Dim targetType As Byte
         Dim Timer As Long
         Dim active As Boolean
+    End Structure
+
+    Public Structure ResourceSkillsRec
+        Dim SkillLevel As Long
+        Dim SkillCurExp As Long
+        Dim SkillNextLvlExp As Long
     End Structure
 
 End Module

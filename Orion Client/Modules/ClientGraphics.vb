@@ -5,6 +5,7 @@ Imports SFML.Window
 
 Module ClientGraphics
     Public GameWindow As RenderWindow
+    Public MiniMap As RenderTexture
 
     Public EditorItem_Furniture As RenderWindow
 
@@ -146,6 +147,8 @@ Module ClientGraphics
 
         GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
+
+        MiniMap = New RenderTexture(100, 100)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
 
@@ -424,6 +427,7 @@ Module ClientGraphics
     Sub DrawChat()
         Dim i As Long, x As Long, y As Long
         Dim text As String
+        Dim strLen As Integer
 
         'first draw back image
         RenderTexture(ChatWindowGFX, GameWindow, ChatWindowX, ChatWindowY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
@@ -456,8 +460,18 @@ Module ClientGraphics
         'first draw back image
         RenderTexture(MyChatWindowGFX, GameWindow, MyChatX, MyChatY - 5, 0, 0, MyChatWindowGFXInfo.width, MyChatWindowGFXInfo.height)
         If Len(MyText) > 0 Then
-            DrawText(MyChatX + 5, MyChatY - 3, MyText, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+
+            strLen = MyText.Length - MyChatTextLimit
+            If strLen < 0 Then strLen = 0
+            Dim chatStr As String = MyText.PadRight(MyChatTextLimit).Substring(strLen, MyChatTextLimit)
+            DrawText(MyChatX + 5, MyChatY - 3, chatStr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+            'DrawText(MyChatX + 5, MyChatY - 3, MyText, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
         End If
+
+
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Long, ByVal TexType As Byte)
@@ -568,6 +582,16 @@ Module ClientGraphics
         Dim TmpImage As Sprite = New Sprite(Txture)
         TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
         TmpImage.Position = New Vector2f(DestX, DestY)
+        Target.Draw(TmpImage)
+
+    End Sub
+
+    Public Sub RenderTextureMini(ByVal Txture As Texture, ByVal Target As RenderTexture, ByVal DestX As Long, ByVal DestY As Long, ByVal SourceX As Long, ByVal SourceY As Long,
+           ByVal SourceWidth As Long, ByVal SourceHeight As Long)
+        Dim TmpImage As Sprite = New Sprite(Txture)
+        TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
+        TmpImage.Position = New Vector2f(DestX / 0.5, DestY / 0.5)
+        TmpImage.Scale = New SFML.Window.Vector2f(0.5, 0.5)
         Target.Draw(TmpImage)
     End Sub
 
@@ -1013,6 +1037,10 @@ Module ClientGraphics
                         End With
 
                         RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'If UpdateMiniMap Then
+                        '    RenderTextureMini(TileSetTexture(.Layer(i).tileset), MiniMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'End If
+
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
                         DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
@@ -1055,7 +1083,9 @@ Module ClientGraphics
                         End With
 
                         RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-
+                        'If UpdateMiniMap Then
+                        '    RenderTextureMini(TileSetTexture(.Layer(i).tileset), MiniMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'End If
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
                         DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
@@ -1529,6 +1559,10 @@ Module ClientGraphics
 
         'Render GUI
         DrawGUI()
+
+        'MiniMap.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, 100, 100)))
+        'RenderTexture(MiniMap.Texture, GameWindow, frmMainGame.picscreen.Width - 200, 10, 0, 0, MiniMap.Size.X, MiniMap.Size.Y)
+        'If UpdateMiniMap = True Then UpdateMiniMap = False
 
         'and finally show everything on screen
         GameWindow.Display()

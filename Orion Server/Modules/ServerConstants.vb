@@ -73,6 +73,8 @@
     Public Const SEX_MALE As Byte = 0
     Public Const SEX_FEMALE As Byte = 1
 
+    Public Const StatPtsPerLvl As Byte = 3
+
     ' Map constants
     Public Const MAX_MAPS As Long = 100
     Public Const MAX_MAPX As Byte = 50
@@ -118,6 +120,18 @@
     Public Const ITEM_TYPE_CURRENCY As Byte = 14
     Public Const ITEM_TYPE_SPELL As Byte = 15
     Public Const ITEM_TYPE_FURNITURE As Byte = 16
+
+    'resource Constants
+    Public Const RESOURCE_TYPE_NONE As Byte = 0
+    Public Const RESOURCE_TYPE_HERB As Byte = 1
+    Public Const RESOURCE_TYPE_TREE As Byte = 2
+    Public Const RESOURCE_TYPE_ROCK As Byte = 3
+    Public Const RESOURCE_TYPE_FISH As Byte = 4
+
+    Public Const RESOURCE_TOOL_NONE As Byte = 0
+    Public Const RESOURCE_TOOL_HATCHET As Byte = 1
+    Public Const RESOURCE_TOOL_PICKAXE As Byte = 2
+    Public Const RESOURCE_TOOL_FISHROD As Byte = 3
 
     ' Direction constants
     Public Const DIR_UP As Byte = 0

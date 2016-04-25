@@ -109,6 +109,7 @@ Partial Class frmEditor_Item
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.chkStackable = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
@@ -462,6 +463,7 @@ Partial Class frmEditor_Item
         Me.chkRandomize.TabIndex = 66
         Me.chkRandomize.Text = "Randomize Stats"
         Me.chkRandomize.UseVisualStyleBackColor = True
+        Me.chkRandomize.Visible = False
         '
         'Label5
         '
@@ -901,6 +903,7 @@ Partial Class frmEditor_Item
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.chkStackable)
         Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Controls.Add(Me.Label2)
@@ -970,6 +973,16 @@ Partial Class frmEditor_Item
         Me.Label7.Size = New System.Drawing.Size(94, 13)
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
+        '
+        'chkStackable
+        '
+        Me.chkStackable.AutoSize = True
+        Me.chkStackable.Location = New System.Drawing.Point(302, 111)
+        Me.chkStackable.Name = "chkStackable"
+        Me.chkStackable.Size = New System.Drawing.Size(74, 17)
+        Me.chkStackable.TabIndex = 67
+        Me.chkStackable.Text = "Stackable"
+        Me.chkStackable.UseVisualStyleBackColor = True
         '
         'frmEditor_Item
         '
@@ -1096,4 +1109,5 @@ Partial Class frmEditor_Item
     Friend WithEvents TabPage2 As Windows.Forms.TabPage
     Friend WithEvents Label7 As Windows.Forms.Label
     Friend WithEvents chkRandomize As Windows.Forms.CheckBox
+    Friend WithEvents chkStackable As Windows.Forms.CheckBox
 End Class

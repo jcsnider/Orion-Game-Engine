@@ -74,7 +74,7 @@
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
         If Not Name = "Not Playing" Then
-            Call AlertMsg(FindPlayer(Name), "You have been kicked by the server owner!")
+            AlertMsg(FindPlayer(Name), "You have been kicked by the server owner!")
         End If
     End Sub
 
@@ -92,7 +92,7 @@
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
         If Not Name = "Not Playing" Then
-            Call ServerBanIndex(FindPlayer(Name))
+            ServerBanIndex(FindPlayer(Name))
         End If
     End Sub
 
@@ -101,9 +101,9 @@
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
         If Not Name = "Not Playing" Then
-            Call SetPlayerAccess(FindPlayer(Name), 4)
-            Call SendPlayerData(FindPlayer(Name))
-            Call PlayerMsg(FindPlayer(Name), "You have been granted administrator access.")
+            SetPlayerAccess(FindPlayer(Name), 4)
+            SendPlayerData(FindPlayer(Name))
+            PlayerMsg(FindPlayer(Name), "You have been granted administrator access.")
         End If
     End Sub
 
@@ -112,16 +112,16 @@
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
         If Not Name = "Not Playing" Then
-            Call SetPlayerAccess(FindPlayer(Name), 0)
-            Call SendPlayerData(FindPlayer(Name))
-            Call PlayerMsg(FindPlayer(Name), "You have had your administrator access revoked.")
+            SetPlayerAccess(FindPlayer(Name), 0)
+            SendPlayerData(FindPlayer(Name))
+            PlayerMsg(FindPlayer(Name), "You have had your administrator access revoked.")
         End If
     End Sub
 
     Private Sub btnReloadClasses_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadClasses.Click
         Dim i As Long
-        Call LoadClasses()
-        Call TextAdd("All classes reloaded.")
+        LoadClasses()
+        TextAdd("All classes reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendClasses(i)
@@ -131,8 +131,8 @@
 
     Private Sub btnReloadMaps_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadMaps.Click
         Dim i As Long
-        Call LoadMaps()
-        Call TextAdd("All maps reloaded.")
+        LoadMaps()
+        TextAdd("All maps reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 PlayerWarp(i, GetPlayerMap(i), GetPlayerX(i), GetPlayerY(i))
@@ -142,8 +142,8 @@
 
     Private Sub btnReloadSpells_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadSpells.Click
         Dim i As Long
-        Call LoadSpells()
-        Call TextAdd("All spells reloaded.")
+        LoadSpells()
+        TextAdd("All spells reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendSpells(i)
@@ -153,8 +153,8 @@
 
     Private Sub btnReloadShops_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadShops.Click
         Dim i As Long
-        Call LoadShops()
-        Call TextAdd("All shops reloaded.")
+        LoadShops()
+        TextAdd("All shops reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendShops(i)
@@ -164,8 +164,8 @@
 
     Private Sub btnReloadNPCs_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadNPCs.Click
         Dim i As Long
-        Call LoadNpcs()
-        Call TextAdd("All npcs reloaded.")
+        LoadNpcs()
+        TextAdd("All npcs reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendNpcs(i)
@@ -175,8 +175,8 @@
 
     Private Sub btnReloadItems_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadItems.Click
         Dim i As Long
-        Call LoadItems()
-        Call TextAdd("All items reloaded.")
+        LoadItems()
+        TextAdd("All items reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendItems(i)
@@ -186,8 +186,8 @@
 
     Private Sub btnReloadResources_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadResources.Click
         Dim i As Long
-        Call LoadResources()
-        Call TextAdd("All Resources reloaded.")
+        LoadResources()
+        TextAdd("All Resources reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendResources(i)
@@ -197,8 +197,8 @@
 
     Private Sub btnReloadAnimations_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadAnimations.Click
         Dim i As Long
-        Call LoadAnimations()
-        Call TextAdd("All Animations reloaded.")
+        LoadAnimations()
+        TextAdd("All Animations reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendAnimations(i)
@@ -221,8 +221,8 @@
     Private Sub txtChat_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtChat.KeyDown
         If e.KeyCode = Keys.Enter Then
             If Len(Trim$(txtChat.Text)) > 0 Then
-                Call GlobalMsg(txtChat.Text)
-                Call TextAdd("Server: " & txtChat.Text)
+                GlobalMsg(txtChat.Text)
+                TextAdd("Server: " & txtChat.Text)
                 txtChat.Text = vbNullString
             End If
         End If
@@ -327,5 +327,6 @@
         SaveAnimations()
         SaveShops()
         SaveNpcs()
+        TextAdd("Saved All!")
     End Sub
 End Class

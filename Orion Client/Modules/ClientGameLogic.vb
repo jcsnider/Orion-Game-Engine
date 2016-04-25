@@ -1004,14 +1004,13 @@ Module ClientGameLogic
         If UpdateMapnames = True Then
             Dim x As Integer
 
-            frmMainGame.lstMaps.Items.Clear()
+            frmAdmin.lstMaps.Items.Clear()
 
             For x = 1 To MAX_MAPS
-                frmMainGame.lstMaps.Items.Add(x)
-                frmMainGame.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
+                frmAdmin.lstMaps.Items.Add(x)
+                frmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
             Next
-            frmMainGame.pnlMapreport.Visible = True
-            frmMainGame.pnlMapreport.BringToFront()
+
             UpdateMapnames = False
         End If
 

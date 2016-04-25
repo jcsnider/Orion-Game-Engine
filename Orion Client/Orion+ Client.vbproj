@@ -929,6 +929,18 @@
     <Content Include="data files\graphics\resources\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\resources\3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\resources\4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\resources\5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\resources\6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\spellicons\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

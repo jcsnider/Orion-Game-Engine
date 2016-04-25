@@ -8,9 +8,9 @@ Module ClientText
     Public Const MyChatTextLimit As Integer = 70
     Public Const MyAmountValueLimit As Integer = 3
     Public Const AllChatLineWidth As Integer = 70
-    Public Const MyChatLineWidth As Integer = 65
+
     ' Game text buffer
-    Public MyText As String
+    Public MyText As String = ""
 
 
     Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow)

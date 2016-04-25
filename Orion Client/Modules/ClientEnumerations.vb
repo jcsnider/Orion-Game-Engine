@@ -293,4 +293,14 @@
         Layer_Count
     End Enum
 
+    ' resource skills
+    Public Enum ResourceSkills
+        Herbalist = 1
+        WoodCutter
+        Miner
+        Fisherman
+        ' Make sure Layer_Count is below everything else
+        Skill_Count
+    End Enum
+
 End Module

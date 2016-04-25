@@ -15,7 +15,9 @@ Public Class frmMainGame
 
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
-                MyText = MyText + KeyPressed(e)
+                If MyText.Length < 100 Then
+                    MyText = MyText + KeyPressed(e)
+                End If
             End If
 
             If e.KeyCode = Keys.Back Then
@@ -113,6 +115,14 @@ Public Class frmMainGame
             HideGui = True
         End If
 
+        'lets check for keys for inventory etc
+        If Not inChat Then
+            If e.KeyCode = Keys.I Then
+                pnlInventoryVisible = Not pnlInventoryVisible
+            End If
+
+        End If
+
     End Sub
 
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -120,7 +130,6 @@ Public Class frmMainGame
         RePositionGUI()
 
         frmAdmin.Visible = False
-
 
     End Sub
 
@@ -142,9 +151,6 @@ Public Class frmMainGame
         CurrencyMenu = 0 ' clear
     End Sub
 
-    Private Sub lblMapReportClose_Click(sender As Object, e As EventArgs) Handles lblMapReportClose.Click
-        pnlMapreport.Hide()
-    End Sub
 #End Region
 
 #Region "PicScreen Code"
@@ -485,7 +491,7 @@ Public Class frmMainGame
         If bankNum <> 0 Then
             If GetBankItemNum(bankNum) = ITEM_TYPE_NONE Then Exit Sub
 
-            If Item(GetBankItemNum(bankNum)).Type = ITEM_TYPE_CURRENCY Then
+            If Item(GetBankItemNum(bankNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetBankItemNum(bankNum)).Stackable = 1 Then
                 CurrencyMenu = 3 ' withdraw
                 lblCurrency.Text = "How many do you want to withdraw?"
                 tmpCurrencyItem = bankNum

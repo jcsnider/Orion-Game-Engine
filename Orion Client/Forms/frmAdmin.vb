@@ -7,17 +7,7 @@ Public Class frmAdmin
         scrlSpawnItem.Value = 1
     End Sub
 
-#Region "Admin Panel"
-    Private Sub btnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
-
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!", AlertColor)
-            Exit Sub
-        End If
-
-        SendRequestEditMap()
-    End Sub
-
+#Region "Moderation"
     Private Sub btnAdminWarpTo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpTo.Click
         Dim n As Long
 
@@ -114,11 +104,11 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        If IsNumeric(Trim$(txtAdminName.Text)) Or Not IsNumeric(Trim$(txtAdminAccess.Text)) Then
+        If IsNumeric(Trim$(txtAdminName.Text)) Or cmbAccess.SelectedIndex < 0 Then
             Exit Sub
         End If
 
-        SendSetAccess(Trim$(txtAdminName.Text), CLng(Trim$(txtAdminAccess.Text)))
+        SendSetAccess(Trim$(txtAdminName.Text), cmbAccess.SelectedIndex)
     End Sub
 
     Private Sub btnAdminSetSprite_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetSprite.Click
@@ -137,40 +127,18 @@ Public Class frmAdmin
 
         SendSetSprite(Trim$(txtAdminSprite.Text))
     End Sub
+#End Region
 
-    Private Sub scrlSpawnItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItem.Scroll
-        lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
-        If Item(scrlSpawnItem.Value).Type = ITEM_TYPE_CURRENCY Then
-            scrlSpawnItemAmount.Enabled = True
-            scrlSpawnItemAmount.Maximum = 100000
-            Exit Sub
-        End If
-        scrlSpawnItemAmount.Enabled = False
-    End Sub
+#Region "Editors"
+    Private Sub btnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
 
-    Private Sub scrlSpawnItemAmount_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
-        lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
-    End Sub
-
-    Private Sub btnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
+        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
             AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
-        SendSpawnItem(scrlSpawnItem.Value, scrlSpawnItemAmount.Value)
+        SendRequestEditMap()
     End Sub
-
-    Private Sub btnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", AlertColor)
-            Exit Sub
-        End If
-
-        SendRequestLevelUp()
-
-    End Sub
-
     Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
             AddText("You need to be a high enough staff member to do this!", AlertColor)
@@ -225,6 +193,87 @@ Public Class frmAdmin
         SendRequestEditAnimation()
     End Sub
 
+    Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
+            Exit Sub
+        End If
+
+        SendRequestEditQuest()
+    End Sub
+
+    Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
+            Exit Sub
+        End If
+        SendRequestEditHouse()
+    End Sub
+
+    Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
+            Exit Sub
+        End If
+        SendRequestEditProjectiles()
+    End Sub
+#End Region
+
+#Region "Map Report"
+    Private Sub btnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
+            Exit Sub
+        End If
+        SendRequestMapreport()
+    End Sub
+
+    Private Sub lstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
+        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
+            Exit Sub
+        End If
+
+        ' Check to make sure its a valid map #
+        If lstMaps.FocusedItem.Index + 1 > 0 And lstMaps.FocusedItem.Index + 1 <= MAX_MAPS Then
+            WarpTo(lstMaps.FocusedItem.Index + 1)
+        Else
+            AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, AlertColor)
+        End If
+    End Sub
+#End Region
+
+#Region "Misc"
+    Private Sub scrlSpawnItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItem.Scroll
+        lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
+        If Item(scrlSpawnItem.Value).Type = ITEM_TYPE_CURRENCY Or Item(scrlSpawnItem.Value).Stackable = 1 Then
+            scrlSpawnItemAmount.Enabled = True
+            scrlSpawnItemAmount.Maximum = 100000
+            Exit Sub
+        End If
+        scrlSpawnItemAmount.Enabled = False
+    End Sub
+
+    Private Sub scrlSpawnItemAmount_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
+        lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
+    End Sub
+
+    Private Sub btnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
+            Exit Sub
+        End If
+
+        SendSpawnItem(scrlSpawnItem.Value, scrlSpawnItemAmount.Value)
+    End Sub
+
+    Private Sub btnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
+            AddText("You need to be a high enough staff member to do this!", AlertColor)
+            Exit Sub
+        End If
+
+        SendRequestLevelUp()
+
+    End Sub
+
     Private Sub btnALoc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnALoc.Click
         If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
             AddText("You need to be a high enough staff member to do this!", AlertColor)
@@ -252,35 +301,11 @@ Public Class frmAdmin
         SendMapRespawn()
     End Sub
 
-    'Mapreport
-    Private Sub btnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            AddText("You need to be a high enough staff member to do this!", AlertColor)
-            Exit Sub
-        End If
-        SendRequestMapreport()
-    End Sub
 
-    Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            Exit Sub
-        End If
-
-        SendRequestEditQuest()
-    End Sub
-
-    Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-            Exit Sub
-        End If
-        SendRequestEditHouse()
-    End Sub
-
-    Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
-        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-            Exit Sub
-        End If
-        SendRequestEditProjectiles()
-    End Sub
 #End Region
+
+
+
+
+
 End Class

@@ -688,6 +688,7 @@ Module ServerDatabase
         FilePutObject(F, Item(itemNum).KnockBackTiles)
 
         FilePutObject(F, Item(itemNum).Randomize)
+        FilePutObject(F, Item(itemNum).Stackable)
 
         FileClose(F)
     End Sub
@@ -755,6 +756,7 @@ Module ServerDatabase
         FileGetObject(F, Item(ItemNum).KnockBackTiles)
 
         FileGetObject(F, Item(ItemNum).Randomize)
+        FileGetObject(F, Item(ItemNum).Stackable)
 
         FileClose(F)
 
@@ -978,9 +980,11 @@ Module ServerDatabase
         FilePutObject(F, Resource(ResourceNum).ResourceType)
         FilePutObject(F, Resource(ResourceNum).ResourceImage)
         FilePutObject(F, Resource(ResourceNum).ExhaustedImage)
+        FilePutObject(F, Resource(ResourceNum).ExpReward)
         FilePutObject(F, Resource(ResourceNum).ItemReward)
+        FilePutObject(F, Resource(ResourceNum).LvlRequired)
         FilePutObject(F, Resource(ResourceNum).ToolRequired)
-        FilePutObject(F, Resource(ResourceNum).health)
+        FilePutObject(F, Resource(ResourceNum).Health)
         FilePutObject(F, Resource(ResourceNum).RespawnTime)
         FilePutObject(F, Resource(ResourceNum).Walkthrough)
         FilePutObject(F, Resource(ResourceNum).Animation)
@@ -1014,7 +1018,9 @@ Module ServerDatabase
         FileGetObject(F, Resource(ResourceNum).ResourceType)
         FileGetObject(F, Resource(ResourceNum).ResourceImage)
         FileGetObject(F, Resource(ResourceNum).ExhaustedImage)
+        FileGetObject(F, Resource(ResourceNum).ExpReward)
         FileGetObject(F, Resource(ResourceNum).ItemReward)
+        FileGetObject(F, Resource(ResourceNum).LvlRequired)
         FileGetObject(F, Resource(ResourceNum).ToolRequired)
         FileGetObject(F, Resource(ResourceNum).health)
         FileGetObject(F, Resource(ResourceNum).RespawnTime)
@@ -1523,7 +1529,7 @@ Module ServerDatabase
 
 #End Region
 
-#Region "players"
+#Region "Players"
     Sub SaveAllPlayersOnline()
         Dim i As Long
 
@@ -1621,6 +1627,14 @@ Module ServerDatabase
             FilePutObject(F, Player(Index).Variables(i))
         Next
 
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            FilePutObject(F, Player(Index).GatherSkills(i).SkillLevel)
+            FilePutObject(F, Player(Index).GatherSkills(i).SkillCurExp)
+            FilePutObject(F, Player(Index).GatherSkills(i).SkillNextLvlExp)
+        Next
+
+
+
         FileClose(F)
     End Sub
 
@@ -1711,6 +1725,15 @@ Module ServerDatabase
             FileGetObject(F, Player(Index).Variables(i))
         Next
 
+        ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            FileGetObject(F, Player(Index).GatherSkills(i).SkillLevel)
+            FileGetObject(F, Player(Index).GatherSkills(i).SkillCurExp)
+            FileGetObject(F, Player(Index).GatherSkills(i).SkillNextLvlExp)
+            If Player(Index).GatherSkills(i).SkillLevel = 0 Then Player(Index).GatherSkills(i).SkillLevel = 1
+            If Player(Index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+        Next
+
         FileClose(F)
     End Sub
 
@@ -1798,6 +1821,12 @@ Module ServerDatabase
             Player(Index).Variables(i) = 0
         Next
 
+        ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            Player(Index).GatherSkills(i).SkillLevel = 1
+            Player(Index).GatherSkills(i).SkillCurExp = 0
+            Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+        Next
     End Sub
 
 #End Region
@@ -1865,7 +1894,7 @@ Module ServerDatabase
     End Function
 
     Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Byte, ByVal Sprite As Long)
-        Dim n As Long
+        Dim n As Long, i As Long
         Dim spritecheck As Boolean
 
         If Len(Trim$(Player(Index).Name)) = 0 Then
@@ -1903,6 +1932,14 @@ Module ServerDatabase
                     Player(Index).Inv(n).Num = Classes(ClassNum).StartItem(n)
                     Player(Index).Inv(n).Value = Classes(ClassNum).StartValue(n)
                 End If
+            Next
+
+            'set skills
+            ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
+            For i = 0 To ResourceSkills.Skill_Count - 1
+                Player(Index).GatherSkills(i).SkillLevel = 1
+                Player(Index).GatherSkills(i).SkillCurExp = 0
+                Player(Index).GatherSkills(i).SkillNextLvlExp = 100
             Next
 
             ' Append name to file
@@ -2211,6 +2248,7 @@ Module ServerDatabase
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).Stackable)
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -2453,13 +2491,15 @@ Module ServerDatabase
         Buffer.WriteLong(Resource(ResourceNum).Animation)
         Buffer.WriteString(Resource(ResourceNum).EmptyMessage)
         Buffer.WriteLong(Resource(ResourceNum).ExhaustedImage)
-        Buffer.WriteLong(Resource(ResourceNum).health)
+        Buffer.WriteLong(Resource(ResourceNum).Health)
+        Buffer.WriteLong(Resource(ResourceNum).ExpReward)
         Buffer.WriteLong(Resource(ResourceNum).ItemReward)
         Buffer.WriteString(Resource(ResourceNum).Name)
         Buffer.WriteLong(Resource(ResourceNum).ResourceImage)
         Buffer.WriteLong(Resource(ResourceNum).ResourceType)
         Buffer.WriteLong(Resource(ResourceNum).RespawnTime)
         Buffer.WriteString(Resource(ResourceNum).SuccessMessage)
+        Buffer.WriteLong(Resource(ResourceNum).LvlRequired)
         Buffer.WriteLong(Resource(ResourceNum).ToolRequired)
         Buffer.WriteLong(Resource(ResourceNum).Walkthrough)
 

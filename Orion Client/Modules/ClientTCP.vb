@@ -477,6 +477,7 @@ Module ClientTCP
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).Stackable)
 
         For i = 0 To Stats.stat_count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -548,19 +549,23 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteLong(ClientPackets.CSaveResource)
+
         Buffer.WriteLong(ResourceNum)
         Buffer.WriteLong(Resource(ResourceNum).Animation)
-        Buffer.WriteString(Resource(ResourceNum).EmptyMessage)
+        Buffer.WriteString(Trim(Resource(ResourceNum).EmptyMessage))
         Buffer.WriteLong(Resource(ResourceNum).ExhaustedImage)
         Buffer.WriteLong(Resource(ResourceNum).Health)
+        Buffer.WriteLong(Resource(ResourceNum).ExpReward)
         Buffer.WriteLong(Resource(ResourceNum).ItemReward)
-        Buffer.WriteString(Resource(ResourceNum).Name)
+        Buffer.WriteString(Trim(Resource(ResourceNum).Name))
         Buffer.WriteLong(Resource(ResourceNum).ResourceImage)
         Buffer.WriteLong(Resource(ResourceNum).ResourceType)
         Buffer.WriteLong(Resource(ResourceNum).RespawnTime)
-        Buffer.WriteString(Resource(ResourceNum).SuccessMessage)
+        Buffer.WriteString(Trim(Resource(ResourceNum).SuccessMessage))
+        Buffer.WriteLong(Resource(ResourceNum).LvlRequired)
         Buffer.WriteLong(Resource(ResourceNum).ToolRequired)
         Buffer.WriteLong(Resource(ResourceNum).Walkthrough)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -866,7 +871,7 @@ Module ClientTCP
         ' do basic checks
         If InvNum < 1 Or InvNum > MAX_INV Then Exit Sub
         If PlayerInv(InvNum).Num < 1 Or PlayerInv(InvNum).Num > MAX_ITEMS Then Exit Sub
-        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
             If Amount < 1 Or Amount > PlayerInv(InvNum).Value Then Exit Sub
         End If
 

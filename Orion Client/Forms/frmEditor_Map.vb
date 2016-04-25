@@ -110,7 +110,7 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub scrlMapItem_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapItem.Scroll
-        If Item(scrlMapItem.Value).Type = ITEM_TYPE_CURRENCY Then
+        If Item(scrlMapItem.Value).Type = ITEM_TYPE_CURRENCY Or Item(scrlMapItem.Value).Stackable = 1 Then
             scrlMapItemValue.Enabled = True
         Else
             scrlMapItemValue.Value = 1

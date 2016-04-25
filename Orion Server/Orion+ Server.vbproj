@@ -118,6 +118,7 @@
     <Compile Include="Modules\ServerLoop.vb" />
     <Compile Include="Modules\ServerProjectiles.vb" />
     <Compile Include="Modules\ServerQuest.vb" />
+    <Compile Include="Modules\ServerResources.vb" />
     <Compile Include="Modules\ServerTCP.vb" />
     <Compile Include="Modules\ServerTypes.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

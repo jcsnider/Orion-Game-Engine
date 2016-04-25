@@ -715,6 +715,12 @@ Module ClientGameEditors
             frmEditor_Item.cmbBind.SelectedIndex = .BindType
             frmEditor_Item.scrlRarity.Value = .Rarity
 
+            If .Stackable = 1 Then
+                frmEditor_Item.chkStackable.Checked = True
+            Else
+                frmEditor_Item.chkStackable.Checked = False
+            End If
+
             EditorIndex = frmEditor_Item.lstIndex.SelectedIndex + 1
         End With
 
@@ -843,13 +849,18 @@ Module ClientGameEditors
         frmEditor_Resource.cmbType.SelectedIndex = Resource(EditorIndex).ResourceType
         frmEditor_Resource.scrlNormalPic.Value = Resource(EditorIndex).ResourceImage
         frmEditor_Resource.scrlExhaustedPic.Value = Resource(EditorIndex).ExhaustedImage
-        frmEditor_Resource.scrlReward.Value = Resource(EditorIndex).ItemReward
-        frmEditor_Resource.scrlTool.Value = Resource(EditorIndex).ToolRequired
+        frmEditor_Resource.scrlRewardItem.Value = Resource(EditorIndex).ItemReward
+        frmEditor_Resource.scrlRewardExp.Value = Resource(EditorIndex).ExpReward
+        frmEditor_Resource.cmbTool.SelectedIndex = Resource(EditorIndex).ToolRequired
         frmEditor_Resource.scrlHealth.Value = Resource(EditorIndex).Health
         frmEditor_Resource.scrlRespawn.Value = Resource(EditorIndex).RespawnTime
         frmEditor_Resource.scrlAnimation.Value = Resource(EditorIndex).Animation
+        frmEditor_Resource.scrlLvlReq.Value = Resource(EditorIndex).LvlRequired
+
+
         frmEditor_Resource.Visible = True
-        Call EditorResource_DrawSprite()
+
+        EditorResource_DrawSprite()
 
         Resource_Changed(EditorIndex) = True
     End Sub
@@ -859,7 +870,7 @@ Module ClientGameEditors
 
         For i = 1 To MAX_RESOURCES
             If Resource_Changed(i) Then
-                Call SendSaveResource(i)
+                SendSaveResource(i)
             End If
         Next
 

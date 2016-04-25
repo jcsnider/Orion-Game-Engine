@@ -552,6 +552,12 @@
 
         Player(i).InHouse = Buffer.ReadLong
 
+        For X = 0 To ResourceSkills.Skill_Count - 1
+            Player(i).GatherSkills(X).SkillLevel = Buffer.ReadLong
+            Player(i).GatherSkills(X).SkillCurExp = Buffer.ReadLong
+            Player(i).GatherSkills(X).SkillNextLvlExp = Buffer.ReadLong
+        Next
+
         ' Check if the player is the client player
         If i = MyIndex Then
             ' Reset directions
@@ -800,6 +806,8 @@
         Buffer.WriteLong(NeedMap)
         SendData(Buffer.ToArray())
 
+        'UpdateMiniMap = True
+
         Buffer = Nothing
     End Sub
 
@@ -1036,6 +1044,7 @@
         SaveMap(MapNum)
 
         initAutotiles()
+        'UpdateMiniMap = True
 
         ' Check if we get a map from someone else and if we were editing a map cancel it out
         If InMapEditor Then
@@ -1236,6 +1245,7 @@
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
         Item(n).Randomize = Buffer.ReadLong()
+        Item(n).Stackable = Buffer.ReadLong()
 
         For i = 0 To Stats.stat_count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -1608,12 +1618,14 @@
         Resource(ResourceNum).EmptyMessage = Trim(Buffer.ReadString())
         Resource(ResourceNum).ExhaustedImage = Buffer.ReadLong()
         Resource(ResourceNum).Health = Buffer.ReadLong()
+        Resource(ResourceNum).ExpReward = Buffer.ReadLong()
         Resource(ResourceNum).ItemReward = Buffer.ReadLong()
         Resource(ResourceNum).Name = Trim(Buffer.ReadString())
         Resource(ResourceNum).ResourceImage = Buffer.ReadLong()
         Resource(ResourceNum).ResourceType = Buffer.ReadLong()
         Resource(ResourceNum).RespawnTime = Buffer.ReadLong()
         Resource(ResourceNum).SuccessMessage = Trim(Buffer.ReadString())
+        Resource(ResourceNum).LvlRequired = Buffer.ReadLong()
         Resource(ResourceNum).ToolRequired = Buffer.ReadLong()
         Resource(ResourceNum).Walkthrough = Buffer.ReadLong()
 
@@ -2071,6 +2083,7 @@
             Item(n).Rarity = buffer.ReadLong()
             Item(n).Speed = buffer.ReadLong()
             Item(n).Randomize = buffer.ReadLong()
+            Item(n).Stackable = buffer.ReadLong()
 
             For z = 0 To Stats.stat_count - 1
                 Item(n).Stat_Req(z) = buffer.ReadLong()
@@ -2282,12 +2295,14 @@
             Resource(n).EmptyMessage = Trim(buffer.ReadString())
             Resource(n).ExhaustedImage = buffer.ReadLong()
             Resource(n).Health = buffer.ReadLong()
+            Resource(n).ExpReward = buffer.ReadLong()
             Resource(n).ItemReward = buffer.ReadLong()
             Resource(n).Name = Trim(buffer.ReadString())
             Resource(n).ResourceImage = buffer.ReadLong()
             Resource(n).ResourceType = buffer.ReadLong()
             Resource(n).RespawnTime = buffer.ReadLong()
             Resource(n).SuccessMessage = Trim(buffer.ReadString())
+            Resource(n).LvlRequired = buffer.ReadLong()
             Resource(n).ToolRequired = buffer.ReadLong()
             Resource(n).Walkthrough = buffer.ReadLong()
 

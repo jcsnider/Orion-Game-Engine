@@ -203,18 +203,25 @@
         Dim NewNum As Long
         Dim NewValue As Long
 
-        If oldSlot = 0 Or newSlot = 0 Then
-            Exit Sub
-        End If
+        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
 
         OldNum = GetPlayerInvItemNum(Index, oldSlot)
         OldValue = GetPlayerInvItemValue(Index, oldSlot)
         NewNum = GetPlayerInvItemNum(Index, newSlot)
         NewValue = GetPlayerInvItemValue(Index, newSlot)
-        SetPlayerInvItemNum(Index, newSlot, OldNum)
-        SetPlayerInvItemValue(Index, newSlot, OldValue)
-        SetPlayerInvItemNum(Index, oldSlot, NewNum)
-        SetPlayerInvItemValue(Index, oldSlot, NewValue)
+
+        If OldNum = NewNum And Item(NewNum).Stackable = 1 Then ' same item, if we can stack it, lets do that :P
+            SetPlayerInvItemNum(Index, newSlot, NewNum)
+            SetPlayerInvItemValue(Index, newSlot, OldValue + NewValue)
+            SetPlayerInvItemNum(Index, oldSlot, 0)
+            SetPlayerInvItemValue(Index, oldSlot, 0)
+        Else
+            SetPlayerInvItemNum(Index, newSlot, OldNum)
+            SetPlayerInvItemValue(Index, newSlot, OldValue)
+            SetPlayerInvItemNum(Index, oldSlot, NewNum)
+            SetPlayerInvItemValue(Index, oldSlot, NewValue)
+        End If
+
         SendInventory(Index)
     End Sub
 
@@ -223,9 +230,7 @@
         Dim y As Long
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Then
-            Exit Sub
-        End If
+        If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Sub
 
         ' Spawn what we have
         For x = 0 To Map(MapNum).MaxX
@@ -235,10 +240,10 @@
                 If (Map(MapNum).Tile(x, y).Type = TILE_TYPE_ITEM) Then
 
                     ' Check to see if its a currency and if they set the value to 0 set it to 1 automatically
-                    If Item(Map(MapNum).Tile(x, y).Data1).Type = ITEM_TYPE_CURRENCY And Map(MapNum).Tile(x, y).Data2 <= 0 Then
-                        Call SpawnItem(Map(MapNum).Tile(x, y).Data1, 1, MapNum, x, y)
+                    If Item(Map(MapNum).Tile(x, y).Data1).Type = ITEM_TYPE_CURRENCY Or Item(Map(MapNum).Tile(x, y).Data1).Stackable = 1 And Map(MapNum).Tile(x, y).Data2 <= 0 Then
+                        SpawnItem(Map(MapNum).Tile(x, y).Data1, 1, MapNum, x, y)
                     Else
-                        Call SpawnItem(Map(MapNum).Tile(x, y).Data1, Map(MapNum).Tile(x, y).Data2, MapNum, x, y)
+                        SpawnItem(Map(MapNum).Tile(x, y).Data1, Map(MapNum).Tile(x, y).Data2, MapNum, x, y)
                     End If
                 End If
 

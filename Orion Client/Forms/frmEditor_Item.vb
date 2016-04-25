@@ -374,4 +374,12 @@ Public Class frmEditor_Item
             Item(EditorIndex).Randomize = 0
         End If
     End Sub
+
+    Private Sub chkStackable_CheckedChanged(sender As Object, e As EventArgs) Handles chkStackable.CheckedChanged
+        If chkStackable.Checked = True Then
+            Item(EditorIndex).Stackable = 1
+        Else
+            Item(EditorIndex).Stackable = 0
+        End If
+    End Sub
 End Class

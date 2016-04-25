@@ -66,21 +66,25 @@
 
         GetPlayerStat = x
     End Function
+
     Function GetPlayerAccess(ByVal Index As Long) As Long
         GetPlayerAccess = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerAccess = Player(Index).Access
     End Function
+
     Function GetPlayerMap(ByVal Index As Long) As Long
         GetPlayerMap = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerMap = Player(Index).Map
     End Function
+
     Function GetPlayerX(ByVal Index As Long) As Long
         GetPlayerX = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerX = Player(Index).x
     End Function
+
     Function GetPlayerY(ByVal Index As Long) As Long
         GetPlayerY = 0
         If Index > MAX_PLAYERS Then Exit Function
@@ -690,7 +694,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
                     HasItem = GetPlayerInvItemValue(Index, i)
                 Else
                     HasItem = 1
@@ -760,7 +764,7 @@
         GetPlayerPOINTS = Player(Index).POINTS
     End Function
     Function GetPlayerNextLevel(ByVal Index As Long) As Long
-        GetPlayerNextLevel = (GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.strength) + GetPlayerStat(Index, Stats.endurance) + GetPlayerStat(Index, Stats.intelligence) + GetPlayerStat(Index, Stats.spirit) + GetPlayerPOINTS(Index)) * 25
+        GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.strength) + GetPlayerStat(Index, Stats.endurance) + GetPlayerStat(Index, Stats.intelligence) + GetPlayerStat(Index, Stats.spirit) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * 25
     End Function
     Function GetPlayerExp(ByVal Index As Long) As Long
         GetPlayerExp = Player(Index).exp
@@ -862,7 +866,7 @@
                                 ' Set item in players inventor
                                 SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
 
-                                If Item(GetPlayerInvItemNum(Index, n)).Type = ITEM_TYPE_CURRENCY Then
+                                If Item(GetPlayerInvItemNum(Index, n)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, n)).Stackable = 1 Then
                                     SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, i).Value)
                                     Msg = MapItem(MapNum, i).Value & " " & Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
                                 Else
@@ -910,7 +914,7 @@
             Exit Function
         End If
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
 
             ' If currency then check to see if they already have an instance of the item and add it to that
             For i = 1 To MAX_INV
@@ -949,7 +953,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
 
                     ' Is what we are trying to take away more then what they have?  If so just set it to zero
                     If ItemVal >= GetPlayerInvItemValue(Index, i) Then
@@ -1016,11 +1020,13 @@
         Next
 
     End Function
+
     Function GetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long) As Long
         GetPlayerSpell = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerSpell = Player(Index).Spell(spellslot)
     End Function
+
     Function HasSpell(ByVal Index As Long, ByVal spellnum As Long) As Boolean
         Dim i As Long
 
@@ -1034,9 +1040,11 @@
         Next
 
     End Function
+
     Sub SetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal spellnum As Long)
         Player(Index).Spell(spellslot) = spellnum
     End Sub
+
     Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal amount As Long)
         Dim i As Long
 
@@ -1057,7 +1065,7 @@
                     MapItem(GetPlayerMap(Index), i).x = GetPlayerX(Index)
                     MapItem(GetPlayerMap(Index), i).y = GetPlayerY(Index)
 
-                    If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ITEM_TYPE_CURRENCY Then
+                    If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, InvNum)).Stackable = 1 Then
 
                         ' Check if its more then they have and if so drop it all
                         If amount >= GetPlayerInvItemValue(Index, InvNum) Then
@@ -1091,6 +1099,7 @@
         End If
 
     End Sub
+
     Sub GiveBankItem(ByVal Index As Long, ByVal invSlot As Long, ByVal amount As Long)
         Dim BankSlot
 
@@ -1106,7 +1115,7 @@
         BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, invSlot))
 
         If BankSlot > 0 Then
-            If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ITEM_TYPE_CURRENCY Then
+            If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, invSlot)).Stackable = 1 Then
                 If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) Then
                     Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + amount)
                     Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
@@ -1132,6 +1141,7 @@
         SendBank(Index)
 
     End Sub
+
     Function GetPlayerBankItemNum(ByVal Index As Long, ByVal BankSlot As Byte) As Integer
         GetPlayerBankItemNum = Bank(Index).Item(BankSlot).Num
     End Function
@@ -1147,13 +1157,14 @@
     Sub SetPlayerBankItemValue(ByVal Index As Long, ByVal BankSlot As Byte, ByVal ItemValue As Long)
         Bank(Index).Item(BankSlot).Value = ItemValue
     End Sub
+
     Function FindOpenBankSlot(ByVal Index As Long, ByVal itemNum As Integer) As Byte
         Dim i As Long
 
         If Not IsPlaying(Index) Then Exit Function
         If itemNum <= 0 Or itemNum > MAX_ITEMS Then Exit Function
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
             For i = 1 To MAX_BANK
                 If GetPlayerBankItemNum(Index, i) = itemNum Then
                     FindOpenBankSlot = i
@@ -1170,9 +1181,11 @@
         Next i
 
     End Function
+
     Sub SetPlayerPK(ByVal Index As Long, ByVal PK As Long)
         Player(Index).PK = PK
     End Sub
+
     Sub TakeBankItem(ByVal Index As Long, ByVal BankSlot As Long, ByVal amount As Long)
         Dim invSlot
 
@@ -1189,7 +1202,7 @@
         invSlot = FindOpenInvSlot(Index, GetPlayerBankItemNum(Index, BankSlot))
 
         If invSlot > 0 Then
-            If Item(GetPlayerBankItemNum(Index, BankSlot)).Type = ITEM_TYPE_CURRENCY Then
+            If Item(GetPlayerBankItemNum(Index, BankSlot)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerBankItemNum(Index, BankSlot)).Stackable = 1 Then
                 Call GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), amount)
                 Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - amount)
                 If GetPlayerBankItemValue(Index, BankSlot) <= 0 Then
@@ -1232,6 +1245,7 @@
 
         Call OnDeath(Index)
     End Sub
+
     Sub OnDeath(ByVal Index As Long)
         Dim i As Long
 
@@ -1289,7 +1303,7 @@
 
         itemNum = GetPlayerInvItemNum(Index, invSlot)
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Then
+        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
 
             ' Is what we are trying to take away more then what they have?  If so just set it to zero
             If ItemVal >= GetPlayerInvItemValue(Index, invSlot) Then
@@ -1329,83 +1343,9 @@
         If i < 2 Then i = 2
         GetPlayerVitalRegen = i
     End Function
-    Sub CheckResource(ByVal Index As Long, ByVal x As Long, ByVal y As Long)
-        Dim Resource_num As Long
-        Dim Resource_index As Long
-        Dim rX As Long, rY As Long
-        Dim i As Long
-        Dim Damage As Long
 
-        If Map(GetPlayerMap(Index)).Tile(x, y).Type = TILE_TYPE_RESOURCE Then
-            Resource_num = 0
-            Resource_index = Map(GetPlayerMap(Index)).Tile(x, y).Data1
 
-            ' Get the cache number
-            For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
 
-                If ResourceCache(GetPlayerMap(Index)).ResourceData(i).x = x Then
-                    If ResourceCache(GetPlayerMap(Index)).ResourceData(i).y = y Then
-                        Resource_num = i
-                    End If
-                End If
-
-            Next
-
-            If Resource_num > 0 Then
-                If GetPlayerEquipment(Index, Equipment.Weapon) > 0 Then
-                    If Item(GetPlayerEquipment(Index, Equipment.Weapon)).Data3 = Resource(Resource_index).ToolRequired Then
-
-                        ' inv space?
-                        If Resource(Resource_index).ItemReward > 0 Then
-                            If FindOpenInvSlot(Index, Resource(Resource_index).ItemReward) = 0 Then
-                                PlayerMsg(Index, "You have no inventory space.")
-                                Exit Sub
-                            End If
-                        End If
-
-                        ' check if already cut down
-                        If ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceState = 0 Then
-
-                            rX = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).x
-                            rY = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).y
-
-                            Damage = Item(GetPlayerEquipment(Index, Equipment.Weapon)).Data2
-
-                            ' check if damage is more than health
-                            If Damage > 0 Then
-                                ' cut it down!
-                                If ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health - Damage <= 0 Then
-                                    ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceState = 1 ' Cut
-                                    ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceTimer = GetTickCount()
-                                    SendResourceCacheToMap(GetPlayerMap(Index), Resource_num)
-                                    SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).SuccessMessage), BrightGreen, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                                    GiveInvItem(Index, Resource(Resource_index).ItemReward, 1)
-                                    SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
-                                Else
-                                    ' just do the damage
-                                    ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health - Damage
-                                    SendActionMsg(GetPlayerMap(Index), "-" & Damage, BrightRed, 1, (rX * 32), (rY * 32))
-                                    SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
-                                End If
-                                Call CheckTasks(Index, QUEST_TYPE_GOTRAIN, Resource_index)
-                            Else
-                                ' too weak
-                                SendActionMsg(GetPlayerMap(Index), "Miss!", BrightRed, 1, (rX * 32), (rY * 32))
-                            End If
-                        Else
-                            SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).EmptyMessage), BrightRed, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                        End If
-
-                    Else
-                        PlayerMsg(Index, "You have the wrong type of tool equiped.")
-                    End If
-
-                Else
-                    PlayerMsg(Index, "You need a tool to interact with this resource.")
-                End If
-            End If
-        End If
-    End Sub
     Public Sub BufferSpell(ByVal Index As Long, ByVal spellslot As Long)
         Dim spellnum As Long
         Dim MPCost As Long

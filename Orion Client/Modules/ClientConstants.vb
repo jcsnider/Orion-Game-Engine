@@ -203,6 +203,18 @@
     Public ITEM_RARITY_COLOR_4 = New SFML.Graphics.Color(159, 0, 197) ' purple
     Public ITEM_RARITY_COLOR_5 = New SFML.Graphics.Color(255, 215, 0) ' gold
 
+    'resource Constants
+    Public Const RESOURCE_TYPE_NONE As Byte = 0
+    Public Const RESOURCE_TYPE_HERB As Byte = 1
+    Public Const RESOURCE_TYPE_TREE As Byte = 2
+    Public Const RESOURCE_TYPE_ROCK As Byte = 3
+    Public Const RESOURCE_TYPE_FISH As Byte = 4
+
+    Public Const RESOURCE_TOOL_NONE As Byte = 0
+    Public Const RESOURCE_TOOL_HATCHET As Byte = 1
+    Public Const RESOURCE_TOOL_PICKAXE As Byte = 2
+    Public Const RESOURCE_TOOL_FISHROD As Byte = 3
+
     ' Direction constants
     Public Const DIR_UP As Byte = 0
     Public Const DIR_DOWN As Byte = 1

@@ -62,11 +62,6 @@ Partial Class frmMainGame
         Me.pnlYourTrade = New System.Windows.Forms.Panel()
         Me.lblTheirOffer = New System.Windows.Forms.Label()
         Me.lblYourOffer = New System.Windows.Forms.Label()
-        Me.pnlMapreport = New System.Windows.Forms.Panel()
-        Me.lstMaps = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.lblMapReportClose = New System.Windows.Forms.Label()
         Me.pnlQuestLog = New System.Windows.Forms.Panel()
         Me.lblQuestLogClose = New System.Windows.Forms.Label()
         Me.lblAbandonQuest = New System.Windows.Forms.Label()
@@ -105,7 +100,6 @@ Partial Class frmMainGame
         Me.pnlShop.SuspendLayout()
         Me.pnlBank.SuspendLayout()
         Me.pnlTrade.SuspendLayout()
-        Me.pnlMapreport.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlQuestSpeech.SuspendLayout()
         Me.pnlEventChat.SuspendLayout()
@@ -539,54 +533,6 @@ Partial Class frmMainGame
         Me.lblYourOffer.Text = "Your Offer"
         Me.lblYourOffer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'pnlMapreport
-        '
-        Me.pnlMapreport.BackColor = System.Drawing.Color.Transparent
-        Me.pnlMapreport.BackgroundImage = CType(resources.GetObject("pnlMapreport.BackgroundImage"), System.Drawing.Image)
-        Me.pnlMapreport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlMapreport.Controls.Add(Me.lstMaps)
-        Me.pnlMapreport.Controls.Add(Me.lblMapReportClose)
-        Me.pnlMapreport.Location = New System.Drawing.Point(22, 146)
-        Me.pnlMapreport.Name = "pnlMapreport"
-        Me.pnlMapreport.Size = New System.Drawing.Size(204, 275)
-        Me.pnlMapreport.TabIndex = 28
-        Me.pnlMapreport.Visible = False
-        '
-        'lstMaps
-        '
-        Me.lstMaps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.lstMaps.FullRowSelect = True
-        Me.lstMaps.GridLines = True
-        Me.lstMaps.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.lstMaps.HideSelection = False
-        Me.lstMaps.Location = New System.Drawing.Point(13, 10)
-        Me.lstMaps.MultiSelect = False
-        Me.lstMaps.Name = "lstMaps"
-        Me.lstMaps.Size = New System.Drawing.Size(175, 243)
-        Me.lstMaps.TabIndex = 4
-        Me.lstMaps.UseCompatibleStateImageBehavior = False
-        Me.lstMaps.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "#"
-        Me.ColumnHeader1.Width = 30
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Name"
-        Me.ColumnHeader2.Width = 120
-        '
-        'lblMapReportClose
-        '
-        Me.lblMapReportClose.AutoSize = True
-        Me.lblMapReportClose.ForeColor = System.Drawing.Color.White
-        Me.lblMapReportClose.Location = New System.Drawing.Point(73, 255)
-        Me.lblMapReportClose.Name = "lblMapReportClose"
-        Me.lblMapReportClose.Size = New System.Drawing.Size(33, 13)
-        Me.lblMapReportClose.TabIndex = 1
-        Me.lblMapReportClose.Text = "Close"
-        '
         'pnlQuestLog
         '
         Me.pnlQuestLog.BackColor = System.Drawing.Color.Transparent
@@ -948,18 +894,17 @@ Partial Class frmMainGame
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.pnlOptions)
-        Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlEventChat)
-        Me.Controls.Add(Me.pnlMapreport)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlBank)
-        Me.Controls.Add(Me.pnlTempBank)
-        Me.Controls.Add(Me.pnlTmpInv)
-        Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlShop)
+        Me.Controls.Add(Me.picscreen)
+        Me.Controls.Add(Me.pnlTmpInv)
+        Me.Controls.Add(Me.pnlTmpSkill)
+        Me.Controls.Add(Me.pnlTempBank)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -978,8 +923,6 @@ Partial Class frmMainGame
         Me.pnlShop.ResumeLayout(False)
         Me.pnlBank.ResumeLayout(False)
         Me.pnlTrade.ResumeLayout(False)
-        Me.pnlMapreport.ResumeLayout(False)
-        Me.pnlMapreport.PerformLayout()
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
         Me.pnlQuestSpeech.ResumeLayout(False)
@@ -1023,11 +966,6 @@ Partial Class frmMainGame
     Friend WithEvents lblTradeStatus As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents pnlMapreport As Windows.Forms.Panel
-    Friend WithEvents lstMaps As Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
-    Friend WithEvents lblMapReportClose As Windows.Forms.Label
     Friend WithEvents pnlQuestLog As Windows.Forms.Panel
     Friend WithEvents lblQuestLogClose As Windows.Forms.Label
     Friend WithEvents lblAbandonQuest As Windows.Forms.Label
