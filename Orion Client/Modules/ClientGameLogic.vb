@@ -1893,6 +1893,33 @@ Continue1:
         ActionMsg(Index).Y = 0
     End Sub
 
+    Function GetPlayerGatherSkillLvl(ByVal Index As Long, ByVal SkillSlot As Long) As Long
+
+        GetPlayerGatherSkillLvl = 0
+
+        If Index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillLvl = Player(Index).GatherSkills(SkillSlot).SkillLevel
+    End Function
+
+    Function GetPlayerGatherSkillExp(ByVal Index As Long, ByVal SkillSlot As Long) As Long
+
+        GetPlayerGatherSkillExp = 0
+
+        If Index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillExp = Player(Index).GatherSkills(SkillSlot).SkillCurExp
+    End Function
+
+    Function GetPlayerGatherSkillMaxExp(ByVal Index As Long, ByVal SkillSlot As Long) As Long
+
+        GetPlayerGatherSkillMaxExp = 0
+
+        If Index > MAX_PLAYERS Then Exit Function
+
+        GetPlayerGatherSkillMaxExp = Player(Index).GatherSkills(SkillSlot).SkillNextLvlExp
+    End Function
+
     Public Sub UpdateSpellWindow(ByVal spellnum As Long)
 
         If LastSpellDesc = spellnum Then Exit Sub

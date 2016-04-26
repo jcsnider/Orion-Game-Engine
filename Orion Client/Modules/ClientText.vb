@@ -13,9 +13,9 @@ Module ClientText
     Public MyText As String = ""
 
 
-    Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow)
+    Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
         Dim mystring As Text = New Text(text, SFMLGameFont)
-        mystring.CharacterSize = FONT_SIZE
+        mystring.CharacterSize = TextSize
 
         mystring.Color = BackColor
         mystring.Position = New SFML.Window.Vector2f(X - 1, y - 1)
@@ -33,6 +33,7 @@ Module ClientText
         mystring.Color = color
         mystring.Position = New SFML.Window.Vector2f(X, y)
         target.Draw(mystring)
+
     End Sub
 
     Public Sub DrawPlayerName(ByVal Index As Long)

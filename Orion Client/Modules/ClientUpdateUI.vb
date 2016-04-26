@@ -131,18 +131,18 @@
     Public Const EqOffsetY As Byte = 5
     Public Const EqColumns As Byte = 2
 
-    Public StrengthUpgradeX As Long = 69
-    Public StrengthUpgradeY As Long = 221
-    Public EnduranceUpgradeX As Long = 157
-    Public EnduranceUpgradeY As Long = 221
-    Public VitalityUpgradeX As Long = 69
-    Public VitalityUpgradeY As Long = 237
-    Public IntellectUpgradeX As Long = 69
-    Public IntellectUpgradeY As Long = 252
-    Public LuckUpgradeX As Long = 157
-    Public LuckUpgradeY As Long = 237
-    Public SpiritUpgradeX As Long = 157
-    Public SpiritUpgradeY As Long = 252
+    Public StrengthUpgradeX As Long = 370
+    Public StrengthUpgradeY As Long = 33
+    Public EnduranceUpgradeX As Long = 370
+    Public EnduranceUpgradeY As Long = 53
+    Public VitalityUpgradeX As Long = 370
+    Public VitalityUpgradeY As Long = 72
+    Public IntellectUpgradeX As Long = 370
+    Public IntellectUpgradeY As Long = 91
+    Public LuckUpgradeX As Long = 370
+    Public LuckUpgradeY As Long = 110
+    Public SpiritUpgradeX As Long = 370
+    Public SpiritUpgradeY As Long = 129
 
     'Hotbar Coordinates
     Public HotbarX As Long = 489
