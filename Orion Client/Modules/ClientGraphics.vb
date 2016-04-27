@@ -18,7 +18,6 @@ Module ClientGraphics
 
     Public ShopWindow As RenderWindow
 
-    Public BankWindow As RenderWindow
     Public TmpBankItem As RenderWindow
 
     Public YourTradeWindow As RenderWindow
@@ -96,6 +95,9 @@ Module ClientGraphics
     Public CharPanelPlusGFX As Texture
     Public CharPanelPlusGFXInfo As GraphicInfo
 
+    Public BankPanelGFX As Texture
+    Public BankPanelGFXInfo As GraphicInfo
+
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
 
@@ -161,8 +163,6 @@ Module ClientGraphics
 
         ShopWindow = New RenderWindow(frmMainGame.pnlShopItems.Handle)
 
-        BankWindow = New RenderWindow(frmMainGame.pnlBank.Handle)
-        frmMainGame.pnlBank.Hide()
         TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
 
         YourTradeWindow = New RenderWindow(frmMainGame.pnlYourTrade.Handle)
@@ -326,6 +326,16 @@ Module ClientGraphics
             'Cache the width and height
             CharPanelPlusGFXInfo.width = CharPanelPlusGFX.Size.X
             CharPanelPlusGFXInfo.height = CharPanelPlusGFX.Size.Y
+        End If
+
+        BankPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Bank" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            BankPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\Bank" & GFX_EXT)
+
+            'Cache the width and height
+            BankPanelGFXInfo.width = BankPanelGFX.Size.X
+            BankPanelGFXInfo.height = BankPanelGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -2878,7 +2888,7 @@ NextLoop:
                             colour = SFML.Graphics.Color.Green
                         End If
 
-                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, BankWindow)
+                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, ShopWindow)
                     End If
                 End If
             End If
@@ -2892,65 +2902,67 @@ NextLoop:
         Dim sRECT As Rectangle, dRECT As Rectangle
         Dim Sprite As Long, colour As SFML.Graphics.Color
 
-        If frmMainGame.pnlBank.Visible Then
-            BankWindow.Clear(ToSFMLColor(frmMainGame.pnlBank.BackColor))
-            For i = 1 To MAX_BANK
-                itemnum = GetBankItemNum(i)
-                If itemnum > 0 And itemnum <= MAX_ITEMS Then
+        'first render panel
+        RenderTexture(BankPanelGFX, GameWindow, BankWindowX, BankWindowY, 0, 0, BankPanelGFXInfo.width, BankPanelGFXInfo.height)
 
-                    Sprite = Item(itemnum).Pic
+        'Headertext
+        DrawText(BankWindowX + 140, BankWindowY + 6, "Your Bank", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
-                    If ItemsGFXInfo(Sprite).IsLoaded = False Then
-                        LoadTexture(Sprite, 4)
-                    End If
+        'close
+        DrawText(BankWindowX + 140, BankWindowY + BankPanelGFXInfo.height - 20, "Close Bank", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
-                    'seeying we still use it, lets update timer
-                    With ItemsGFXInfo(Sprite)
-                        .TextureTimer = GetTickCount() + 100000
-                    End With
+        For i = 1 To MAX_BANK
+            itemnum = GetBankItemNum(i)
+            If itemnum > 0 And itemnum <= MAX_ITEMS Then
 
-                    With sRECT
-                        .Y = 0
-                        .Height = PIC_Y
-                        .X = ItemsGFXInfo(Sprite).width / 2
-                        .Width = PIC_X
-                    End With
+                Sprite = Item(itemnum).Pic
 
-                    With dRECT
-                        .Y = BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
-                        .Height = PIC_Y
-                        .X = BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
-                        .Width = PIC_X
-                    End With
-
-
-                    Dim tmpSprite As Sprite = New Sprite(ItemsGFX(Sprite))
-                    tmpSprite.TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-                    tmpSprite.Position = New Vector2f(dRECT.X, dRECT.Y)
-                    BankWindow.Draw(tmpSprite)
-
-                    ' If item is a stack - draw the amount you have
-                    If GetBankItemValue(i) > 1 Then
-                        Y = dRECT.Top + 22
-                        X = dRECT.Left - 4
-
-                        Amount = GetBankItemValue(i)
-                        colour = SFML.Graphics.Color.White
-                        ' Draw currency but with k, m, b etc. using a convertion function
-                        If CLng(Amount) < 1000000 Then
-                            colour = SFML.Graphics.Color.White
-                        ElseIf CLng(Amount) > 1000000 And CLng(Amount) < 10000000 Then
-                            colour = SFML.Graphics.Color.Yellow
-                        ElseIf CLng(Amount) > 10000000 Then
-                            colour = SFML.Graphics.Color.Green
-                        End If
-                        'g.DrawString(ConvertCurrency(Amount), New Font(FONT_NAME, FONT_SIZE), colour, X, Y)
-                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, BankWindow)
-                    End If
+                If ItemsGFXInfo(Sprite).IsLoaded = False Then
+                    LoadTexture(Sprite, 4)
                 End If
-            Next
-            BankWindow.Display()
-        End If
+
+                'seeying we still use it, lets update timer
+                With ItemsGFXInfo(Sprite)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+                With sRECT
+                    .Y = 0
+                    .Height = PIC_Y
+                    .X = 0
+                    .Width = PIC_X
+                End With
+
+                With dRECT
+                    .Y = BankWindowY + BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
+                    .Height = PIC_Y
+                    .X = BankWindowX + BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
+                    .Width = PIC_X
+                End With
+
+                RenderTexture(ItemsGFX(Sprite), GameWindow, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+
+                ' If item is a stack - draw the amount you have
+                If GetBankItemValue(i) > 1 Then
+                    Y = dRECT.Top + 22
+                    X = dRECT.Left - 4
+
+                    Amount = GetBankItemValue(i)
+                    colour = SFML.Graphics.Color.White
+                    ' Draw currency but with k, m, b etc. using a convertion function
+                    If CLng(Amount) < 1000000 Then
+                        colour = SFML.Graphics.Color.White
+                    ElseIf CLng(Amount) > 1000000 And CLng(Amount) < 10000000 Then
+                        colour = SFML.Graphics.Color.Yellow
+                    ElseIf CLng(Amount) > 10000000 Then
+                        colour = SFML.Graphics.Color.Green
+                    End If
+
+                    DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
+                End If
+            End If
+        Next
+
     End Sub
 
     Public Sub DrawBankItem(ByVal X As Long, ByVal Y As Long)
@@ -3224,6 +3236,10 @@ NextLoop:
             Xoffset = InvWindowX
             Yoffset = InvWindowY
         End If
+        If pnlBankVisible = True Then
+            Xoffset = BankWindowX
+            Yoffset = BankWindowY
+        End If
 
         'first render panel
         If ItemDescSize = 0 Then ' normal
@@ -3372,6 +3388,10 @@ NextLoop:
 
         If DialogPanelVisible = True Then
             DrawDialogPanel()
+        End If
+
+        If pnlBankVisible = True Then
+            DrawBank()
         End If
     End Sub
 End Module

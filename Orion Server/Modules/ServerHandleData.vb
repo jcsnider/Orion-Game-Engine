@@ -1817,6 +1817,7 @@
 
         Shop(ShopNum).BuyRate = buffer.ReadLong()
         Shop(ShopNum).Name = buffer.ReadString()
+        Shop(ShopNum).Face = buffer.ReadLong()
 
         For i = 0 To MAX_TRADES
             Shop(ShopNum).TradeItem(i).costitem = buffer.ReadLong()
@@ -2511,7 +2512,7 @@
         ' Save it
         SaveAnimation(AnimNum)
         SendUpdateAnimationToAll(AnimNum)
-        Call Addlog(GetPlayerName(index) & " saved Animation #" & AnimNum & ".", ADMIN_LOG)
+        Addlog(GetPlayerName(index) & " saved Animation #" & AnimNum & ".", ADMIN_LOG)
 
     End Sub
 

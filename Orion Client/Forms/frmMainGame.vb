@@ -5,6 +5,14 @@ Public Class frmMainGame
 #Region "Frm Code"
     Dim ShakeCount As Byte, LastDir As Byte
 
+    Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        RePositionGUI()
+
+        frmAdmin.Visible = False
+
+    End Sub
+
     Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
         frmAdmin.Dispose()
         DestroyGame()
@@ -125,13 +133,7 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        RePositionGUI()
-
-        frmAdmin.Visible = False
-
-    End Sub
 
     Private Sub lblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
         If IsNumeric(txtCurrency.Text) Then
@@ -482,140 +484,10 @@ Public Class frmMainGame
 #End Region
 
 #Region "Bank Code"
-    Private Sub pnlBank_DoubleClick(ByVal sender As Object, ByVal e As EventArgs) Handles pnlBank.DoubleClick
-        Dim bankNum As Long
 
-        DragBankSlotNum = 0
 
-        bankNum = IsBankItem(BankX, BankY)
-        If bankNum <> 0 Then
-            If GetBankItemNum(bankNum) = ITEM_TYPE_NONE Then Exit Sub
+    Private Sub lblLeaveBank_Click(ByVal sender As Object, ByVal e As EventArgs)
 
-            If Item(GetBankItemNum(bankNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetBankItemNum(bankNum)).Stackable = 1 Then
-                CurrencyMenu = 3 ' withdraw
-                lblCurrency.Text = "How many do you want to withdraw?"
-                tmpCurrencyItem = bankNum
-                txtCurrency.Text = vbNullString
-                pnlCurrency.Visible = True
-                txtCurrency.Focus()
-                Exit Sub
-            End If
-
-            WithdrawItem(bankNum, 0)
-            Exit Sub
-        End If
-    End Sub
-
-    Private Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Long
-        Dim tempRec As RECT
-        Dim i As Long
-
-        IsBankItem = 0
-
-        For i = 1 To MAX_BANK
-            If GetBankItemNum(i) > 0 And GetBankItemNum(i) <= MAX_ITEMS Then
-
-                With tempRec
-                    .top = BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
-                    .bottom = .top + PIC_Y
-                    .left = BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
-                    .right = .left + PIC_X
-                End With
-
-                If X >= tempRec.left And X <= tempRec.right Then
-                    If Y >= tempRec.top And Y <= tempRec.bottom Then
-
-                        IsBankItem = i
-                        Exit Function
-                    End If
-                End If
-            End If
-        Next
-    End Function
-
-    Private Sub pnlBank_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseDown
-        Dim bankNum As Long
-        Dim x As Long, y As Long
-        x = e.Location.X
-        y = e.Location.Y
-        bankNum = IsBankItem(x, y)
-
-        If bankNum <> 0 Then
-
-            If e.Button = MouseButtons.Left Then
-                DragBankSlotNum = bankNum
-            End If
-        End If
-    End Sub
-
-    Private Sub pnlBank_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseMove
-        Dim bankNum As Long
-        Dim x2 As Long, y2 As Long, x As Long, y As Long
-
-        x = e.Location.X
-        y = e.Location.Y
-
-        BankX = x
-        BankY = y
-
-        If DragBankSlotNum > 0 Then
-            Call DrawBankItem(x + pnlBank.Left, y + pnlBank.Top)
-        Else
-            bankNum = IsBankItem(x, y)
-
-            If bankNum <> 0 Then
-
-                x2 = x + pnlBank.Left + 6
-                y2 = y + pnlBank.Top + 6
-                UpdateDescWindow(Bank.Item(bankNum).Num, Bank.Item(bankNum).Value)
-                ShowItemDesc = True
-                Exit Sub
-            End If
-        End If
-
-        ShowItemDesc = False
-        LastBankDesc = 0
-    End Sub
-
-    Private Sub pnlBank_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles pnlBank.MouseUp
-        Dim i As Long
-        Dim x As Long, y As Long
-        Dim rec_pos As Rectangle
-
-        x = e.Location.X
-        y = e.Location.Y
-
-        ' TODO : Add sub to change bankslots client side first so there's no delay in switching
-        If DragBankSlotNum > 0 Then
-            For i = 1 To MAX_BANK
-                With rec_pos
-                    .Y = BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
-                    .Height = PIC_Y
-                    .X = BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
-                    .Width = PIC_X
-                End With
-
-                If x >= rec_pos.Left And x <= rec_pos.Right Then
-                    If y >= rec_pos.Top And y <= rec_pos.Bottom Then
-                        If DragBankSlotNum <> i Then
-                            ChangeBankSlots(DragBankSlotNum, i)
-                            Exit For
-                        End If
-                    End If
-                End If
-            Next
-        End If
-
-        DragBankSlotNum = 0
-        pnlTempBank.Visible = False
-    End Sub
-
-    Private Sub pnlBank_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBank.Paint
-        'do nothing
-    End Sub
-
-    Private Sub lblLeaveBank_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblLeaveBank.Click
-        CloseBank()
     End Sub
 #End Region
 

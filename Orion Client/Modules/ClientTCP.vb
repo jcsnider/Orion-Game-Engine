@@ -692,6 +692,7 @@ Module ClientTCP
 
         Buffer.WriteLong(Shop(shopnum).BuyRate)
         Buffer.WriteString(Shop(shopnum).Name)
+        Buffer.WriteLong(Shop(shopnum).Face)
 
         For i = 0 To MAX_TRADES
             Buffer.WriteLong(Shop(shopnum).TradeItem(i).CostItem)
@@ -938,7 +939,7 @@ Module ClientTCP
         SendData(Buffer.ToArray())
         Buffer = Nothing
         InBank = False
-        frmMainGame.pnlBank.Visible = False
+        pnlBankVisible = False
     End Sub
 
     Sub PlayerSearch(ByVal CurX As Integer, ByVal CurY As Integer)

@@ -1005,6 +1005,11 @@ Module ClientGameEditors
             frmEditor_Shop.scrlBuy.Value = 100
         End If
 
+        frmEditor_Shop.scrlFace.Value = Shop(EditorIndex).Face
+        If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT) Then
+            frmEditor_Shop.picFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
+        End If
+
         frmEditor_Shop.cmbItem.Items.Clear()
         frmEditor_Shop.cmbItem.Items.Add("None")
         frmEditor_Shop.cmbCostItem.Items.Clear()
@@ -1046,7 +1051,7 @@ Module ClientGameEditors
 
         For i = 1 To MAX_SHOPS
             If Shop_Changed(i) Then
-                Call SendSaveShop(i)
+                SendSaveShop(i)
             End If
         Next
 
@@ -1069,4 +1074,5 @@ Module ClientGameEditors
         Next
     End Sub
 #End Region
+
 End Module

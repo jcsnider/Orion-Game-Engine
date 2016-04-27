@@ -8,13 +8,6 @@
 
     Public Const AllChatLineWidth As Integer = 50
 
-    ' Bank constants
-    Public Const BankTop As Byte = 8
-    Public Const BankLeft As Byte = 8
-    Public Const BankOffsetY As Byte = 4
-    Public Const BankOffsetX As Byte = 4
-    Public Const BankColumns As Byte = 10
-
     ' shop constants
     Public Const ShopTop As Byte = 8
     Public Const ShopLeft As Byte = 8
@@ -104,7 +97,7 @@
     Public Const MAX_TRADES As Byte = 20
     Public Const MAX_RESOURCES As Byte = 100
     Public Const MAX_LEVELS As Byte = 100
-    Public Const MAX_BANK As Byte = 100
+    Public Const MAX_BANK As Byte = 90
 
     ' Website
     Public Const GAME_WEBSITE As String = "http://ascensiongamedev.com/index.php"

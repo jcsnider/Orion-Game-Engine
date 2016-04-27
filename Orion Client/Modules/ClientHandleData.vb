@@ -1418,6 +1418,7 @@
 
         Shop(shopnum).BuyRate = Buffer.ReadLong()
         Shop(shopnum).Name = Trim(Buffer.ReadString())
+        Shop(shopnum).Face = Buffer.ReadLong()
 
         For i = 0 To MAX_TRADES
             Shop(shopnum).TradeItem(i).CostItem = Buffer.ReadLong()
@@ -1988,12 +1989,10 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
-        '\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Class Data\\\
-        '\\\\\\\\\\\\\\\\\\\\\\
 
         ' Max classes
-        Max_Classes = buffer.ReadLong 'CByte(Parse(n))
+        Max_Classes = buffer.ReadLong
         ReDim Classes(0 To Max_Classes)
 
         For i = 0 To Max_Classes
@@ -2048,13 +2047,9 @@
         n = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read Class Data\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Item Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
@@ -2118,13 +2113,9 @@
         x = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read Item Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Animation Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
@@ -2156,14 +2147,9 @@
         x = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read Animation Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-        '\\\\\\\\\\\\\\\\\\\\\\
         '\\\Read NPC Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
         For i = 1 To x
             n = buffer.ReadLong
@@ -2200,14 +2186,9 @@
         x = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read NPC Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-        '\\\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Shop Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
@@ -2215,6 +2196,7 @@
 
             Shop(n).BuyRate = buffer.ReadLong()
             Shop(n).Name = Trim(buffer.ReadString())
+            Shop(n).Face = buffer.ReadLong()
 
             For z = 0 To MAX_TRADES
                 Shop(n).TradeItem(z).CostItem = buffer.ReadLong()
@@ -2230,13 +2212,10 @@
         n = 0
         x = 0
         z = 0
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\
-        '\\\End Read Shop Data\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        '\\\End Read Shop Data\\\\\\\
+
         '\\\Read Spells Data\\\\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
@@ -2279,13 +2258,9 @@
         n = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read Spells Data\\\\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\Read Resource Data\\\\\\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
@@ -2316,9 +2291,7 @@
         x = 0
         z = 0
 
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         '\\\End Read Resource Data\\\\\\\\\\\\
-        '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
         buffer = Nothing
     End Sub

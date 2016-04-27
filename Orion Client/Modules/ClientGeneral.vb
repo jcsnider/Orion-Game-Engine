@@ -23,14 +23,6 @@ Module ClientGeneral
                 ReDim Player(i).Equipment(x)
             Next
 
-            ReDim Item(0 To MAX_BANK)
-            For x = 0 To Stats.stat_count - 1
-                ReDim Item(i).Add_Stat(x)
-            Next
-            For x = 0 To Stats.stat_count - 1
-                ReDim Item(i).Stat_Req(x)
-            Next
-
             ReDim Player(i).PlayerQuest(MAX_QUESTS)
 
             ReDim Player(i).Hotbar(MAX_HOTBAR)
@@ -134,6 +126,8 @@ Module ClientGeneral
                 ReDim AnimInstance(i).FrameIndex(x)
             Next
         Next
+
+        ReDim Bank.Item(0 To MAX_BANK)
 
         ReDim MapProjectiles(MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
@@ -372,9 +366,6 @@ Module ClientGeneral
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)))
 
         'Then we can recalculate the positions
-
-        frmMainGame.pnlCurrency.Left = ChatWindowX
-        frmMainGame.pnlCurrency.Top = ChatWindowY
 
         frmMainGame.pnlQuestSpeech.Left = ChatWindowX
         frmMainGame.pnlQuestSpeech.Top = ChatWindowY

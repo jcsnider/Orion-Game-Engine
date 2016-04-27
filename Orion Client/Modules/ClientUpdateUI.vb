@@ -27,6 +27,7 @@
     Public pnlCharacterVisible As Boolean
     Public pnlInventoryVisible As Boolean
     Public pnlSpellsVisible As Boolean
+    Public pnlBankVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -192,5 +193,16 @@
     Public OkButtonY As Long = 90
     Public CancelButtonX As Long = 340
     Public CancelButtonY As Long = 90
+
+    'bank window Coordinates
+    Public BankWindowX As Long = 319
+    Public BankWindowY As Long = 105
+
+    ' Bank constants
+    Public Const BankTop As Byte = 30
+    Public Const BankLeft As Byte = 16
+    Public Const BankOffsetY As Byte = 5
+    Public Const BankOffsetX As Byte = 6
+    Public Const BankColumns As Byte = 9
 
 End Module

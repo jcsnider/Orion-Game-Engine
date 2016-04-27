@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
         Dim eqNum As Long, InvNum As Long, spellslot As Long
+        Dim bankitem As Long
 
         If InMapEditor Then Exit Sub
         ShowItemDesc = False
@@ -23,7 +24,10 @@ Public Module ClientGuiFunctions
                     End If
                 End If
             End If
-        ElseIf pnlInventoryVisible Then
+        End If
+
+        'inventory
+        If pnlInventoryVisible Then
             If AboveInvpanel(X, Y) Then
                 InvX = X
                 InvY = Y
@@ -54,7 +58,10 @@ Public Module ClientGuiFunctions
                     End If
                 End If
             End If
-        ElseIf pnlSpellsVisible = True Then
+        End If
+
+        'spells
+        If pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then
                 SpellX = X
                 SpellY = Y
@@ -76,6 +83,31 @@ Public Module ClientGuiFunctions
                     Else
                         LastSpellDesc = 0
                         ShowSpellDesc = False
+                    End If
+                End If
+
+            End If
+        End If
+
+        'bank
+        If pnlBankVisible = True Then
+            If AboveBankpanel(X, Y) Then
+                BankX = X
+                BankY = Y
+
+                If DragBankSlotNum > 0 Then
+                    DrawBankItem(X, Y)
+                Else
+                    bankitem = IsBankItem(X, Y)
+
+                    If bankitem <> 0 Then
+
+                        UpdateDescWindow(Bank.Item(bankitem).Num, Bank.Item(bankitem).Value)
+                        ShowItemDesc = True
+                        Exit Sub
+                    Else
+                        ShowItemDesc = False
+                        LastItemDesc = 0 ' no item was last loaded
                     End If
                 End If
 
@@ -322,12 +354,20 @@ Public Module ClientGuiFunctions
             CheckGuiClick = True
         End If
 
-
-
+        If pnlBankVisible = True Then
+            If AboveBankpanel(X, Y) Then
+                If X > BankWindowX + 140 And X < BankWindowX + getTextWidth("Close Bank", 15) Then
+                    If Y > BankWindowY + 20 And Y < BankWindowY + BankPanelGFXInfo.height - 20 Then
+                        CloseBank()
+                    End If
+                End If
+            End If
+            CheckGuiClick = True
+        End If
     End Function
 
     Public Function CheckGuiDoubleClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long, spellnum As Long
+        Dim InvNum As Long, spellnum As Long, BankItem As Long
         Dim Value As Long
         Dim multiplier As Double
         Dim i As Long
@@ -365,6 +405,7 @@ Public Module ClientGuiFunctions
                             tmpCurrencyItem = InvNum
                             frmMainGame.txtCurrency.Text = vbNullString
                             frmMainGame.pnlCurrency.Visible = True
+                            frmMainGame.pnlCurrency.BringToFront()
                             frmMainGame.txtCurrency.Focus()
                             Exit Function
                         End If
@@ -394,14 +435,41 @@ Public Module ClientGuiFunctions
                     Exit Function
                 End If
             End If
-            'Spell panel
-        ElseIf pnlSpellsVisible = True Then
+        End If
+        'Spell panel
+        If pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then
 
                 spellnum = IsPlayerSpell(SpellX, SpellY)
 
                 If spellnum <> 0 Then
                     CastSpell(spellnum)
+                    Exit Function
+                End If
+            End If
+        End If
+
+        'Bank panel
+        If pnlBankVisible = True Then
+            If AboveBankpanel(X, Y) Then
+
+                DragBankSlotNum = 0
+
+                BankItem = IsBankItem(BankX, BankY)
+                If BankItem <> 0 Then
+                    If GetBankItemNum(BankItem) = ITEM_TYPE_NONE Then Exit Function
+
+                    If Item(GetBankItemNum(BankItem)).Type = ITEM_TYPE_CURRENCY Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
+                        CurrencyMenu = 3 ' withdraw
+                        frmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
+                        tmpCurrencyItem = BankItem
+                        frmMainGame.txtCurrency.Text = vbNullString
+                        frmMainGame.pnlCurrency.Visible = True
+                        frmMainGame.txtCurrency.Focus()
+                        Exit Function
+                    End If
+
+                    WithdrawItem(BankItem, 0)
                     Exit Function
                 End If
             End If
@@ -462,7 +530,10 @@ Public Module ClientGuiFunctions
                     End If
                 End If
             End If
-        ElseIf pnlspellsVisible Then
+        End If
+
+        'spells
+        If pnlSpellsVisible Then
             If AboveSpellpanel(X, Y) Then
                 If InTrade > 0 Then Exit Function
                 If InBank Or InShop Then Exit Function
@@ -496,10 +567,39 @@ Public Module ClientGuiFunctions
             End If
         End If
 
+        'bank
+        If pnlBankVisible = True Then
+            If AboveBankpanel(X, Y) Then
+                ' TODO : Add sub to change bankslots client side first so there's no delay in switching
+                If DragBankSlotNum > 0 Then
+                    For i = 1 To MAX_BANK
+                        With rec_pos
+                            .Y = BankWindowY + BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
+                            .Height = PIC_Y
+                            .X = BankWindowX + BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
+                            .Width = PIC_X
+                        End With
+
+                        If X >= rec_pos.Left And X <= rec_pos.Right Then
+                            If Y >= rec_pos.Top And Y <= rec_pos.Bottom Then
+                                If DragBankSlotNum <> i Then
+                                    ChangeBankSlots(DragBankSlotNum, i)
+                                    Exit For
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+
+                DragBankSlotNum = 0
+                frmMainGame.pnlTempBank.Visible = False
+            End If
+        End If
+
     End Function
 
     Public Function CheckGuiMouseDown(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long, spellnum As Long
+        Dim InvNum As Long, spellnum As Long, bankNum As Long
 
         'Inventory
         If pnlInventoryVisible Then
@@ -531,7 +631,10 @@ Public Module ClientGuiFunctions
                     End If
                 End If
             End If
-        ElseIf pnlSpellsVisible = True Then
+        End If
+
+        'spells
+        If pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then
                 spellnum = IsPlayerSpell(e.Location.X, e.Location.Y)
 
@@ -555,7 +658,20 @@ Public Module ClientGuiFunctions
             End If
         End If
 
+        'Bank
+        If pnlBankVisible = True Then
+            If AboveBankpanel(X, Y) Then
+                bankNum = IsBankItem(X, Y)
 
+                If bankNum <> 0 Then
+
+                    If e.Button = MouseButtons.Left Then
+                        DragBankSlotNum = bankNum
+                    End If
+
+                End If
+            End If
+        End If
     End Function
 
 #Region "Support Functions"
@@ -644,6 +760,33 @@ Public Module ClientGuiFunctions
 
     End Function
 
+    Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+
+        IsBankItem = 0
+
+        For i = 1 To MAX_BANK
+            If GetBankItemNum(i) > 0 And GetBankItemNum(i) <= MAX_ITEMS Then
+
+                With tempRec
+                    .top = BankWindowY + BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
+                    .bottom = .top + PIC_Y
+                    .left = BankWindowX + BankLeft + ((BankOffsetX + 32) * (((i - 1) Mod BankColumns)))
+                    .right = .left + PIC_X
+                End With
+
+                If X >= tempRec.left And X <= tempRec.right Then
+                    If Y >= tempRec.top And Y <= tempRec.bottom Then
+
+                        IsBankItem = i
+                        Exit Function
+                    End If
+                End If
+            End If
+        Next
+    End Function
+
     Function AboveActionPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveActionPanel = False
 
@@ -690,6 +833,16 @@ Public Module ClientGuiFunctions
         If X > SpellWindowX And X < SpellWindowX + SpellPanelGFXInfo.width Then
             If Y > SpellWindowY And Y < SpellWindowY + SpellPanelGFXInfo.height Then
                 AboveSpellpanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveBankpanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveBankpanel = False
+
+        If X > BankWindowX And X < BankWindowX + BankPanelGFXInfo.width Then
+            If Y > BankWindowY And Y < BankWindowY + BankPanelGFXInfo.height Then
+                AboveBankpanel = True
             End If
         End If
     End Function

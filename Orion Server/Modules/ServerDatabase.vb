@@ -696,7 +696,7 @@ Module ServerDatabase
     Sub LoadItems()
         Dim i As Long
 
-        Call CheckItems()
+        CheckItems()
 
         For i = 1 To MAX_ITEMS
             LoadItem(i)
@@ -1109,6 +1109,7 @@ Module ServerDatabase
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
 
         FilePutObject(F, Shop(shopNum).Name)
+        FilePutObject(F, Shop(shopNum).Face)
         FilePutObject(F, Shop(shopNum).BuyRate)
 
         For i = 1 To MAX_TRADES
@@ -1125,7 +1126,7 @@ Module ServerDatabase
 
         Dim i As Long
 
-        Call CheckShops()
+        CheckShops()
 
         For i = 1 To MAX_SHOPS
             LoadShop(i)
@@ -1144,6 +1145,7 @@ Module ServerDatabase
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
 
         FileGetObject(F, Shop(ShopNum).Name)
+        FileGetObject(F, Shop(ShopNum).Face)
         FileGetObject(F, Shop(ShopNum).BuyRate)
 
         For x = 1 To MAX_TRADES
@@ -1848,6 +1850,7 @@ Module ServerDatabase
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
 
+        ReDim Bank(Index).Item(MAX_BANK)
         For i = 0 To MAX_BANK
             FileGetObject(F, Bank(Index).Item(i).Num)
             FileGetObject(F, Bank(Index).Item(i).Value)
@@ -2395,6 +2398,7 @@ Module ServerDatabase
         Buffer.WriteLong(shopNum)
         Buffer.WriteLong(Shop(shopNum).BuyRate)
         Buffer.WriteString(Shop(shopNum).Name)
+        Buffer.WriteLong(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
             Buffer.WriteLong(Shop(shopNum).TradeItem(i).costitem)

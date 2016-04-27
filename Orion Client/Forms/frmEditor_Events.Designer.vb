@@ -178,6 +178,11 @@ Partial Class frmEditor_Events
         Me.lblRandomlabel32 = New System.Windows.Forms.Label()
         Me.btnLabeling = New System.Windows.Forms.Button()
         Me.fraDialogue = New System.Windows.Forms.GroupBox()
+        Me.fraSpawnNpc = New System.Windows.Forms.GroupBox()
+        Me.btnSpawnNpcOK = New System.Windows.Forms.Button()
+        Me.btnSpawnNpcCancel = New System.Windows.Forms.Button()
+        Me.cmbSpawnNPC = New System.Windows.Forms.ComboBox()
+        Me.lblRandomLabel42 = New System.Windows.Forms.Label()
         Me.fraShowChoices = New System.Windows.Forms.GroupBox()
         Me.txtChoices4 = New System.Windows.Forms.TextBox()
         Me.txtChoices3 = New System.Windows.Forms.TextBox()
@@ -347,11 +352,6 @@ Partial Class frmEditor_Events
         Me.lblPlayAnimX = New System.Windows.Forms.Label()
         Me.scrlPlayAnimTileX = New System.Windows.Forms.HScrollBar()
         Me.lblRandomLabel30 = New System.Windows.Forms.Label()
-        Me.fraSpawnNpc = New System.Windows.Forms.GroupBox()
-        Me.btnSpawnNpcOK = New System.Windows.Forms.Button()
-        Me.btnSpawnNpcCancel = New System.Windows.Forms.Button()
-        Me.cmbSpawnNPC = New System.Windows.Forms.ComboBox()
-        Me.lblRandomLabel42 = New System.Windows.Forms.Label()
         Me.fraMoveRouteWait = New System.Windows.Forms.GroupBox()
         Me.lblRandomLabel59 = New System.Windows.Forms.Label()
         Me.btnMoveWaitOK = New System.Windows.Forms.Button()
@@ -545,6 +545,7 @@ Partial Class frmEditor_Events
         Me.tabPages.SuspendLayout()
         Me.frarandom20.SuspendLayout()
         Me.fraDialogue.SuspendLayout()
+        Me.fraSpawnNpc.SuspendLayout()
         Me.fraShowChoices.SuspendLayout()
         CType(Me.picShowChoicesFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraAddText.SuspendLayout()
@@ -565,7 +566,6 @@ Partial Class frmEditor_Events
         Me.fraCompleteTask.SuspendLayout()
         Me.fraBeginQuest.SuspendLayout()
         Me.fraPlayAnimation.SuspendLayout()
-        Me.fraSpawnNpc.SuspendLayout()
         Me.fraMoveRouteWait.SuspendLayout()
         Me.fraChangePK.SuspendLayout()
         Me.fraChangeGender.SuspendLayout()
@@ -1180,6 +1180,55 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Size = New System.Drawing.Size(815, 592)
         Me.fraDialogue.TabIndex = 6
         Me.fraDialogue.TabStop = False
+        '
+        'fraSpawnNpc
+        '
+        Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcOK)
+        Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcCancel)
+        Me.fraSpawnNpc.Controls.Add(Me.cmbSpawnNPC)
+        Me.fraSpawnNpc.Controls.Add(Me.lblRandomLabel42)
+        Me.fraSpawnNpc.Location = New System.Drawing.Point(259, 441)
+        Me.fraSpawnNpc.Name = "fraSpawnNpc"
+        Me.fraSpawnNpc.Size = New System.Drawing.Size(246, 80)
+        Me.fraSpawnNpc.TabIndex = 20
+        Me.fraSpawnNpc.TabStop = False
+        Me.fraSpawnNpc.Text = "Spawn NPC"
+        Me.fraSpawnNpc.Visible = False
+        '
+        'btnSpawnNpcOK
+        '
+        Me.btnSpawnNpcOK.Location = New System.Drawing.Point(57, 40)
+        Me.btnSpawnNpcOK.Name = "btnSpawnNpcOK"
+        Me.btnSpawnNpcOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnSpawnNpcOK.TabIndex = 26
+        Me.btnSpawnNpcOK.Text = "Ok"
+        Me.btnSpawnNpcOK.UseVisualStyleBackColor = True
+        '
+        'btnSpawnNpcCancel
+        '
+        Me.btnSpawnNpcCancel.Location = New System.Drawing.Point(138, 40)
+        Me.btnSpawnNpcCancel.Name = "btnSpawnNpcCancel"
+        Me.btnSpawnNpcCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnSpawnNpcCancel.TabIndex = 25
+        Me.btnSpawnNpcCancel.Text = "Cancel"
+        Me.btnSpawnNpcCancel.UseVisualStyleBackColor = True
+        '
+        'cmbSpawnNPC
+        '
+        Me.cmbSpawnNPC.FormattingEnabled = True
+        Me.cmbSpawnNPC.Location = New System.Drawing.Point(42, 13)
+        Me.cmbSpawnNPC.Name = "cmbSpawnNPC"
+        Me.cmbSpawnNPC.Size = New System.Drawing.Size(171, 21)
+        Me.cmbSpawnNPC.TabIndex = 2
+        '
+        'lblRandomLabel42
+        '
+        Me.lblRandomLabel42.AutoSize = True
+        Me.lblRandomLabel42.Location = New System.Drawing.Point(6, 16)
+        Me.lblRandomLabel42.Name = "lblRandomLabel42"
+        Me.lblRandomLabel42.Size = New System.Drawing.Size(30, 13)
+        Me.lblRandomLabel42.TabIndex = 0
+        Me.lblRandomLabel42.Text = "Npc:"
         '
         'fraShowChoices
         '
@@ -2844,55 +2893,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel30.Size = New System.Drawing.Size(56, 13)
         Me.lblRandomLabel30.TabIndex = 0
         Me.lblRandomLabel30.Text = "Animation:"
-        '
-        'fraSpawnNpc
-        '
-        Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcOK)
-        Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcCancel)
-        Me.fraSpawnNpc.Controls.Add(Me.cmbSpawnNPC)
-        Me.fraSpawnNpc.Controls.Add(Me.lblRandomLabel42)
-        Me.fraSpawnNpc.Location = New System.Drawing.Point(259, 441)
-        Me.fraSpawnNpc.Name = "fraSpawnNpc"
-        Me.fraSpawnNpc.Size = New System.Drawing.Size(246, 80)
-        Me.fraSpawnNpc.TabIndex = 20
-        Me.fraSpawnNpc.TabStop = False
-        Me.fraSpawnNpc.Text = "Spawn NPC"
-        Me.fraSpawnNpc.Visible = False
-        '
-        'btnSpawnNpcOK
-        '
-        Me.btnSpawnNpcOK.Location = New System.Drawing.Point(57, 40)
-        Me.btnSpawnNpcOK.Name = "btnSpawnNpcOK"
-        Me.btnSpawnNpcOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnSpawnNpcOK.TabIndex = 26
-        Me.btnSpawnNpcOK.Text = "Ok"
-        Me.btnSpawnNpcOK.UseVisualStyleBackColor = True
-        '
-        'btnSpawnNpcCancel
-        '
-        Me.btnSpawnNpcCancel.Location = New System.Drawing.Point(138, 40)
-        Me.btnSpawnNpcCancel.Name = "btnSpawnNpcCancel"
-        Me.btnSpawnNpcCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnSpawnNpcCancel.TabIndex = 25
-        Me.btnSpawnNpcCancel.Text = "Cancel"
-        Me.btnSpawnNpcCancel.UseVisualStyleBackColor = True
-        '
-        'cmbSpawnNPC
-        '
-        Me.cmbSpawnNPC.FormattingEnabled = True
-        Me.cmbSpawnNPC.Location = New System.Drawing.Point(42, 13)
-        Me.cmbSpawnNPC.Name = "cmbSpawnNPC"
-        Me.cmbSpawnNPC.Size = New System.Drawing.Size(171, 21)
-        Me.cmbSpawnNPC.TabIndex = 2
-        '
-        'lblRandomLabel42
-        '
-        Me.lblRandomLabel42.AutoSize = True
-        Me.lblRandomLabel42.Location = New System.Drawing.Point(6, 16)
-        Me.lblRandomLabel42.Name = "lblRandomLabel42"
-        Me.lblRandomLabel42.Size = New System.Drawing.Size(30, 13)
-        Me.lblRandomLabel42.TabIndex = 0
-        Me.lblRandomLabel42.Text = "Npc:"
         '
         'fraMoveRouteWait
         '
@@ -4761,7 +4761,6 @@ Partial Class frmEditor_Events
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1681, 644)
         Me.ControlBox = False
-        Me.Controls.Add(Me.pnlMoveRoute)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.tabPages)
         Me.Controls.Add(Me.frarandom20)
@@ -4773,6 +4772,7 @@ Partial Class frmEditor_Events
         Me.Controls.Add(Me.pnlVariableSwitches)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.pnlMoveRoute)
         Me.Name = "frmEditor_Events"
         Me.Text = "Event Editor"
         Me.pnlVariableSwitches.ResumeLayout(False)
@@ -4793,6 +4793,8 @@ Partial Class frmEditor_Events
         Me.frarandom20.ResumeLayout(False)
         Me.frarandom20.PerformLayout()
         Me.fraDialogue.ResumeLayout(False)
+        Me.fraSpawnNpc.ResumeLayout(False)
+        Me.fraSpawnNpc.PerformLayout()
         Me.fraShowChoices.ResumeLayout(False)
         Me.fraShowChoices.PerformLayout()
         CType(Me.picShowChoicesFace, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4827,8 +4829,6 @@ Partial Class frmEditor_Events
         Me.fraBeginQuest.PerformLayout()
         Me.fraPlayAnimation.ResumeLayout(False)
         Me.fraPlayAnimation.PerformLayout()
-        Me.fraSpawnNpc.ResumeLayout(False)
-        Me.fraSpawnNpc.PerformLayout()
         Me.fraMoveRouteWait.ResumeLayout(False)
         Me.fraMoveRouteWait.PerformLayout()
         Me.fraChangePK.ResumeLayout(False)

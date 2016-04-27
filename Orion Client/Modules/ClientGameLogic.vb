@@ -963,7 +963,7 @@ Module ClientGameLogic
 
         If NeedToOpenBank = True Then
             InBank = True
-            frmMainGame.pnlBank.Visible = True
+            pnlBankVisible = True
             DrawBank()
             NeedToOpenBank = False
         End If
@@ -1852,6 +1852,7 @@ Continue1:
         InShop = shopnum
         ShopAction = 0
         frmMainGame.pnlShop.Visible = True
+        frmMainGame.pnlShop.BringToFront()
         DrawShop()
     End Sub
 

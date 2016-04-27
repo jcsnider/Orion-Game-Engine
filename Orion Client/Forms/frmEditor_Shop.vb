@@ -1,4 +1,6 @@
-﻿Public Class frmEditor_Shop
+﻿Imports System.Windows.Forms
+
+Public Class frmEditor_Shop
 
     Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Long
@@ -11,7 +13,7 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub scrlBuy_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlBuy.Scroll
+    Private Sub scrlBuy_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlBuy.Scroll
         lblBuy.Text = "Buy Rate: " & scrlBuy.Value & "%"
         Shop(EditorIndex).BuyRate = scrlBuy.Value
     End Sub
@@ -69,5 +71,15 @@
         lstIndex.SelectedIndex = tmpIndex
 
         ShopEditorInit()
+    End Sub
+
+    Private Sub scrlFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFace.Scroll
+        lblFace.Text = "Face: " & scrlFace.Value
+
+        If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlFace.Value & GFX_EXT) Then
+            Me.picFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & scrlFace.Value & GFX_EXT)
+        End If
+
+        Shop(EditorIndex).Face = scrlFace.Value
     End Sub
 End Class

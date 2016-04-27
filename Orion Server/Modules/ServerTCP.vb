@@ -706,7 +706,8 @@ Module ServerTCP
         Buffer.WriteLong(ServerPackets.SUpdateShop)
         Buffer.WriteLong(shopNum)
         Buffer.WriteLong(Shop(shopNum).BuyRate)
-        Buffer.WriteString(Shop(shopNum).Name)
+        Buffer.WriteString(Trim(Shop(shopNum).Name))
+        Buffer.WriteLong(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
             Buffer.WriteLong(Shop(shopNum).TradeItem(i).costitem)
@@ -729,6 +730,7 @@ Module ServerTCP
         Buffer.WriteLong(shopNum)
         Buffer.WriteLong(Shop(shopNum).BuyRate)
         Buffer.WriteString(Shop(shopNum).Name)
+        Buffer.WriteLong(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
             Buffer.WriteLong(Shop(shopNum).TradeItem(i).costitem)
@@ -775,7 +777,7 @@ Module ServerTCP
         Buffer.WriteLong(Spell(spellnum).LevelReq)
         Buffer.WriteLong(Spell(spellnum).Map)
         Buffer.WriteLong(Spell(spellnum).MPCost)
-        Buffer.WriteString(Spell(spellnum).Name)
+        Buffer.WriteString(Trim(Spell(spellnum).Name))
         Buffer.WriteLong(Spell(spellnum).range)
         Buffer.WriteLong(Spell(spellnum).SpellAnim)
         Buffer.WriteLong(Spell(spellnum).StunDuration)

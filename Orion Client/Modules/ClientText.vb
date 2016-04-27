@@ -70,7 +70,7 @@ Module ClientText
         Name = Trim$(Player(Index).Name)
         ' calc pos
         TextX = ConvertMapX(GetPlayerX(Index) * PIC_X) + Player(Index).XOffset + (PIC_X \ 2)
-        TextX = TextX - (getWidth((Trim$(Name))) / 2)
+        TextX = TextX - (getTextWidth((Trim$(Name))) / 2)
         If GetPlayerSprite(Index) < 1 Or GetPlayerSprite(Index) > NumCharacters Then
             TextY = ConvertMapY(GetPlayerY(Index) * PIC_Y) + Player(Index).YOffset - 16
         Else
@@ -103,7 +103,7 @@ Module ClientText
                 backcolor = Color.Black
         End Select
 
-        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - getWidth((Trim$(Npc(npcNum).Name))) / 2
+        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - getTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 Or Npc(npcNum).Sprite > NumCharacters Then
             TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - 16
         Else
@@ -127,7 +127,7 @@ Module ClientText
 
         Name = Trim$(Map.MapEvents(Index).Name)
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth(Trim$(Name)) / 2
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
             TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
@@ -155,7 +155,7 @@ Module ClientText
                 'the npc gives this quest?
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[!]"
-                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth((Trim$("[!]"))) + 8
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth((Trim$("[!]"))) + 8
                     TextY = TextY - 16
                     If Quest(i).Repeat = 1 Then
                         DrawText(TextX, TextY, Trim$(Name), Color.White, backcolor, GameWindow)
@@ -167,7 +167,7 @@ Module ClientText
             ElseIf Player(MyIndex).PlayerQuest(i).Status = QUEST_STARTED Then
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[*]"
-                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getWidth((Trim$("[*]"))) + 8
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth((Trim$("[*]"))) + 8
                     TextY = TextY - 16
                     DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
                     Exit For
@@ -285,10 +285,10 @@ Module ClientText
 
     End Sub
 
-    Public Function getWidth(ByVal text As String) As Long
+    Public Function getTextWidth(ByVal text As String, Optional textsize As Byte = FONT_SIZE) As Long
         Dim mystring As Text = New Text(text, SFMLGameFont)
         Dim textBounds As FloatRect
-        mystring.CharacterSize = FONT_SIZE
+        mystring.CharacterSize = textsize
         textBounds = mystring.GetLocalBounds()
         Return textBounds.Width
     End Function

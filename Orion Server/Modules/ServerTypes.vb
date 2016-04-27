@@ -270,6 +270,7 @@
 
     Public Structure ShopRec
         Dim Name As String
+        Dim Face As Byte
         Dim BuyRate As Long
         Dim TradeItem() As TradeItemRec
     End Structure

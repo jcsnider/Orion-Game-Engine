@@ -29,7 +29,7 @@
     Public Const MAX_TRADES As Byte = 20
     Public Const MAX_RESOURCES As Byte = 100
     Public Const MAX_LEVELS As Byte = 100
-    Public Const MAX_BANK As Byte = 100
+    Public Const MAX_BANK As Byte = 90
     Public Const MAX_HOTBAR As Byte = 7
 
     ' text color constants
