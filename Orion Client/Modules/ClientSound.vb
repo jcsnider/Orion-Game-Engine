@@ -25,12 +25,7 @@ Module ClientSound
         Else
             Try
                 FadeOutSwitch = True
-                'MusicPlayer.Stop()
-                'MusicPlayer.Dispose()
-                'MusicPlayer = Nothing
-                'MusicPlayer = New Music(Application.StartupPath & MUSIC_PATH & FileName)
-                'MusicPlayer.Loop() = True
-                'MusicPlayer.Play()
+
             Catch ex As Exception
 
             End Try

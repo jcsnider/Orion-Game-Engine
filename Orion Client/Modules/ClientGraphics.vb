@@ -16,8 +16,6 @@ Module ClientGraphics
 
     Public TmpItemWindow As RenderWindow
 
-    Public ShopWindow As RenderWindow
-
     Public TmpBankItem As RenderWindow
 
     Public YourTradeWindow As RenderWindow
@@ -98,6 +96,9 @@ Module ClientGraphics
     Public BankPanelGFX As Texture
     Public BankPanelGFXInfo As GraphicInfo
 
+    Public ShopPanelGFX As Texture
+    Public ShopPanelGFXInfo As GraphicInfo
+
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
 
@@ -161,8 +162,6 @@ Module ClientGraphics
 
         TmpItemWindow = New RenderWindow(frmMainGame.pnlTmpInv.Handle)
 
-        ShopWindow = New RenderWindow(frmMainGame.pnlShopItems.Handle)
-
         TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
 
         YourTradeWindow = New RenderWindow(frmMainGame.pnlYourTrade.Handle)
@@ -170,7 +169,7 @@ Module ClientGraphics
 
         TmpSpellWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
-        SFMLGameFont = New SFML.Graphics.Font(FONT_NAME)
+        SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
 
         TempBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
 
@@ -336,6 +335,16 @@ Module ClientGraphics
             'Cache the width and height
             BankPanelGFXInfo.width = BankPanelGFX.Size.X
             BankPanelGFXInfo.height = BankPanelGFX.Size.Y
+        End If
+
+        ShopPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Shop" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            ShopPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\Shop" & GFX_EXT)
+
+            'Cache the width and height
+            ShopPanelGFXInfo.width = ShopPanelGFX.Size.X
+            ShopPanelGFXInfo.height = ShopPanelGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -585,6 +594,11 @@ Module ClientGraphics
             End With
         End If
 
+    End Sub
+
+    Public Sub DrawButton(ByVal Text As String, ByVal DestX As Long, ByVal DestY As Long, ByVal TextX As Long, ByVal TextY As Long)
+        RenderTexture(ButtonGFX, GameWindow, DestX, DestY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
+        DrawText(DestX + TextX, DestY + TextY, Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Public Sub RenderTexture(ByVal Txture As Texture, ByVal Target As RenderWindow, ByVal DestX As Long, ByVal DestY As Long, ByVal SourceX As Long, ByVal SourceY As Long,
@@ -2837,8 +2851,37 @@ NextLoop:
         Dim rec As Rectangle, rec_pos As Rectangle
         Dim colour As SFML.Graphics.Color
 
-        If Not InGame Then Exit Sub
-        ShopWindow.Clear(ToSFMLColor(frmMainGame.pnlShopItems.BackColor))
+        If Not InGame Or pnlShopVisible = False Then Exit Sub
+
+        'first render panel
+        RenderTexture(ShopPanelGFX, GameWindow, ShopWindowX, ShopWindowY, 0, 0, ShopPanelGFXInfo.width, ShopPanelGFXInfo.height)
+
+        'render face
+        If FacesGFXInfo(Shop(InShop).Face).IsLoaded = False Then
+            LoadTexture(Shop(InShop).Face, 7)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FacesGFXInfo(Shop(InShop).Face)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+        RenderTexture(FacesGFX(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY, 0, 0, FacesGFXInfo(Shop(InShop).Face).width, FacesGFXInfo(Shop(InShop).Face).height)
+
+        'draw text
+        DrawText(ShopWindowX + ShopLeft, ShopWindowY + 10, Trim(Shop(InShop).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+
+        DrawText(ShopWindowX + 110, ShopWindowY + 40, "Hello, and welcome", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+        DrawText(ShopWindowX + 110, ShopWindowY + 55, "to the shop!", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+
+        'render buy button
+        DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY, 25, 10)
+
+        'render sell button
+        DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY, 25, 10)
+
+        'render close button
+        DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY, 20, 10)
+
         For i = 1 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
             If itemnum > 0 And itemnum <= MAX_ITEMS Then
@@ -2862,16 +2905,13 @@ NextLoop:
                     End With
 
                     With rec_pos
-                        .Y = ShopTop + ((ShopOffsetY + 32) * ((i - 1) \ ShopColumns))
+                        .Y = ShopWindowY + ShopTop + ((ShopOffsetY + 32) * ((i - 1) \ ShopColumns))
                         .Height = PIC_Y
-                        .X = ShopLeft + ((ShopOffsetX + 32) * (((i - 1) Mod ShopColumns)))
+                        .X = ShopWindowX + ShopLeft + ((ShopOffsetX + 1 + 32) * (((i - 1) Mod ShopColumns)))
                         .Width = PIC_X
                     End With
 
-                    Dim tmpSprite As Sprite = New Sprite(ItemsGFX(itempic))
-                    tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    tmpSprite.Position = New Vector2f(rec_pos.X, rec_pos.Y)
-                    ShopWindow.Draw(tmpSprite)
+                    RenderTexture(ItemsGFX(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                     ' If item is a stack - draw the amount you have
                     If Shop(InShop).TradeItem(i).ItemValue > 1 Then
@@ -2888,12 +2928,12 @@ NextLoop:
                             colour = SFML.Graphics.Color.Green
                         End If
 
-                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, ShopWindow)
+                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
                     End If
                 End If
             End If
         Next
-        ShopWindow.Display()
+
     End Sub
 
     Sub DrawBank()
@@ -3240,6 +3280,10 @@ NextLoop:
             Xoffset = BankWindowX
             Yoffset = BankWindowY
         End If
+        If pnlShopVisible = True Then
+            Xoffset = ShopWindowX
+            Yoffset = ShopWindowY
+        End If
 
         'first render panel
         If ItemDescSize = 0 Then ' normal
@@ -3250,7 +3294,7 @@ NextLoop:
 
 
         'name
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
         'info
         DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 28, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'speed
@@ -3392,6 +3436,10 @@ NextLoop:
 
         If pnlBankVisible = True Then
             DrawBank()
+        End If
+
+        If pnlShopVisible = True Then
+            DrawShop()
         End If
     End Sub
 End Module

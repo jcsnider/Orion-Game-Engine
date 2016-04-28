@@ -313,31 +313,40 @@ Module ClientText
         Chat.Add(struct)
     End Sub
 
-    Public AlertMsgColor As New Color(255, 0, 0, 180) ' Red
-    Public PlayerMsgColor = Color.Magenta 'pink
-    Public GlobalMsgColor As New Color(73, 151, 208) ' Blue
-    Public MapMsgColor = Color.White
-    Public WarningMsgColor As New Color(254, 90, 0, 180) ' Orange
-    Public NotificationMsgColor As New Color(0, 0, 242, 180) ' Blue
-    Public PrivateMsgColor As New Color(102, 255, 0, 180) ' green
-    Public EmoteMsgColor As New Color(73, 151, 208) ' Blue
-
     Public Function GetSFMLColor(ByVal Color As Byte) As Color
         Select Case Color
-            Case SayColor
-                Return PlayerMsgColor
-            Case GlobalColor
-                Return GlobalMsgColor
-            Case BroadcastColor
+            Case Black
+                Return SFML.Graphics.Color.Black
+            Case Blue
+                Return New Color(73, 151, 208)
+            Case Green
+                Return New Color(102, 255, 0, 180)
+            Case Cyan
+                Return New Color(0, 139, 139)
+            Case Red
+                Return New Color(255, 0, 0, 180)
+            Case Magenta
+                Return SFML.Graphics.Color.Magenta
+            Case Brown
+                Return New Color(139, 69, 19)
+            Case Grey
+                Return New Color(211, 211, 211)
+            Case DarkGrey
+                Return New Color(169, 169, 169)
+            Case BrightBlue
+                Return New Color(0, 191, 255)
+            Case BrightGreen
+                Return New Color(0, 255, 0)
+            Case BrightCyan
+                Return New Color(0, 255, 255)
+            Case BrightRed
+                Return New Color(255, 0, 0)
+            Case Pink
+                Return New Color(255, 192, 203)
+            Case Yellow
+                Return SFML.Graphics.Color.Yellow
+            Case White
                 Return SFML.Graphics.Color.White
-            Case TellColor
-                Return PrivateMsgColor
-            Case EmoteColor
-                Return EmoteMsgColor
-            Case AdminColor
-                Return AlertMsgColor
-            Case HelpColor
-                Return NotificationMsgColor
             Case Else
                 Return SFML.Graphics.Color.White
         End Select

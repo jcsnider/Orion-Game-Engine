@@ -28,6 +28,7 @@
     Public pnlInventoryVisible As Boolean
     Public pnlSpellsVisible As Boolean
     Public pnlBankVisible As Boolean
+    Public pnlShopVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -104,6 +105,7 @@
     Public ItemDescVit As String
     Public ItemDescLuck As String
     Public ItemDescRarityColor As SFML.Graphics.Color
+    Public ItemDescRarityBackColor As SFML.Graphics.Color
 
     'Action Panel Coordinates
     Public ActionPanelX As Long = 942
@@ -204,5 +206,27 @@
     Public Const BankOffsetY As Byte = 5
     Public Const BankOffsetX As Byte = 6
     Public Const BankColumns As Byte = 9
+
+    ' shop coordinates
+    Public ShopWindowX As Long = 250
+    Public ShopWindowY As Long = 125
+    Public ShopFaceX As Long = 20
+    Public ShopFaceY As Long = 20
+
+    Public ShopButtonBuyX As Long = 150
+    Public ShopButtonBuyY As Long = 140
+
+    Public ShopButtonSellX As Long = 150
+    Public ShopButtonSellY As Long = 190
+
+    Public ShopButtonCloseX As Long = 10
+    Public ShopButtonCloseY As Long = 215
+
+    ' shop constants
+    Public Const ShopTop As Byte = 46
+    Public Const ShopLeft As Long = 271
+    Public Const ShopOffsetY As Byte = 5
+    Public Const ShopOffsetX As Byte = 5
+    Public Const ShopColumns As Byte = 6
 
 End Module

@@ -959,6 +959,7 @@ Module ClientGameLogic
             OpenShop(NeedToOpenShopNum)
             NeedToOpenShop = False
             NeedToOpenShopNum = 0
+            pnlShopVisible = True
         End If
 
         If NeedToOpenBank = True Then
@@ -1700,18 +1701,24 @@ Continue1:
             ' set the name
             Select Case Item(itemnum).Rarity
                 Case 0 ' White
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_0
-                Case 1 ' green
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_1
-                Case 2 ' blue
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_2
-                Case 3 ' maroon
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_3
-                Case 4 ' purple
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_4
-                Case 5 'gold
-                    ItemDescRarityColor = ITEM_RARITY_COLOR_5
-            End Select
+                ItemDescRarityColor = ITEM_RARITY_COLOR_0
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+            Case 1 ' green
+                ItemDescRarityColor = ITEM_RARITY_COLOR_1
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+            Case 2 ' blue
+                ItemDescRarityColor = ITEM_RARITY_COLOR_2
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+            Case 3 ' maroon
+                ItemDescRarityColor = ITEM_RARITY_COLOR_3
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+            Case 4 ' purple
+                ItemDescRarityColor = ITEM_RARITY_COLOR_4
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+            Case 5 'gold
+                ItemDescRarityColor = ITEM_RARITY_COLOR_5
+                ItemDescRarityBackColor = SFML.Graphics.Color.Black
+        End Select
 
             ' For the stats label
             Select Case Item(itemnum).Type
@@ -1848,12 +1855,8 @@ Continue1:
     End Sub
 
     Public Sub OpenShop(ByVal shopnum As Long)
-        frmMainGame.lblShopName.Text = Trim$(Shop(shopnum).Name)
         InShop = shopnum
         ShopAction = 0
-        frmMainGame.pnlShop.Visible = True
-        frmMainGame.pnlShop.BringToFront()
-        DrawShop()
     End Sub
 
     Public Function GetBankItemNum(ByVal bankslot As Byte) As Integer

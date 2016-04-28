@@ -302,7 +302,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Arvo-Regular.ttf">
+    <None Include="data files\fonts\Arvo-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data files\config.ini" />
@@ -362,9 +362,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data files\fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
@@ -768,6 +766,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data files\graphics\GUI\Main\Shop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\spells.png">
@@ -1193,6 +1194,7 @@
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Preview.png" />
     <None Include="Resources\Grid.png" />
     <None Include="Resources\Exit.png" />
     <None Include="Resources\Save.png" />

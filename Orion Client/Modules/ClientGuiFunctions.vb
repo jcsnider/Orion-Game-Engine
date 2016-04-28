@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
         Dim eqNum As Long, InvNum As Long, spellslot As Long
-        Dim bankitem As Long
+        Dim bankitem As Long, shopslot As Long
 
         If InMapEditor Then Exit Sub
         ShowItemDesc = False
@@ -112,9 +112,25 @@ Public Module ClientGuiFunctions
                 End If
 
             End If
-        Else
-            ShowItemDesc = False
-            ShowSpellDesc = False
+        End If
+
+        'shop
+        If pnlShopVisible = True Then
+            If AboveShoppanel(X, Y) Then
+                shopslot = IsShopItem(X, Y)
+
+                If shopslot <> 0 Then
+
+                    UpdateDescWindow(Shop(InShop).TradeItem(shopslot).Item, Shop(InShop).TradeItem(shopslot).ItemValue)
+                    LastItemDesc = Shop(InShop).TradeItem(shopslot).Item
+                    ShowItemDesc = True
+                    Exit Sub
+                Else
+                    ShowItemDesc = False
+                    LastItemDesc = 0
+                End If
+
+            End If
         End If
 
     End Sub
@@ -599,7 +615,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Public Function CheckGuiMouseDown(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long, spellnum As Long, bankNum As Long
+        Dim InvNum As Long, spellnum As Long, bankNum As Long, shopItem As Long
 
         'Inventory
         If pnlInventoryVisible Then
@@ -669,6 +685,55 @@ Public Module ClientGuiFunctions
                         DragBankSlotNum = bankNum
                     End If
 
+                End If
+            End If
+        End If
+
+        'Shop
+        If pnlShopVisible = True Then
+            If AboveShoppanel(X, Y) Then
+                shopItem = IsShopItem(X, Y)
+
+                If shopItem > 0 Then
+                    Select Case ShopAction
+                        Case 0 ' no action, give cost
+                            With Shop(InShop).TradeItem(shopItem)
+                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", Yellow)
+                            End With
+                        Case 1 ' buy item
+                            ' buy item code
+                            BuyItem(shopItem)
+                    End Select
+                Else
+                    ' check for buy button
+                    If X > ShopWindowX + ShopButtonBuyX And X < ShopWindowX + ShopButtonBuyX + ButtonGFXInfo.width Then
+                        If Y > ShopWindowY + ShopButtonBuyY And Y < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.height Then
+                            If ShopAction = 1 Then Exit Function
+                            ShopAction = 1 ' buying an item
+                            AddText("Click on the item in the shop you wish to buy.", Yellow)
+                        End If
+                    End If
+                    ' check for sell button
+                    If X > ShopWindowX + ShopButtonSellX And X < ShopWindowX + ShopButtonSellX + ButtonGFXInfo.width Then
+                        If Y > ShopWindowY + ShopButtonSellY And Y < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.height Then
+                            If ShopAction = 2 Then Exit Function
+                            ShopAction = 2 ' selling an item
+                            AddText("Double-click on the item in your inventory you wish to sell.", Yellow)
+                        End If
+                    End If
+                    ' check for close button
+                    If X > ShopWindowX + ShopButtonCloseX And X < ShopWindowX + ShopButtonCloseX + ButtonGFXInfo.width Then
+                        If Y > ShopWindowY + ShopButtonCloseY And Y < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.height Then
+                            Dim Buffer As ByteBuffer
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CCloseShop)
+                            SendData(Buffer.ToArray())
+                            Buffer = Nothing
+                            pnlShopVisible = False
+                            InShop = 0
+                            ShopAction = 0
+                        End If
+                    End If
                 End If
             End If
         End If
@@ -787,6 +852,31 @@ Public Module ClientGuiFunctions
         Next
     End Function
 
+    Function IsShopItem(ByVal X As Single, ByVal Y As Single) As Long
+        Dim tempRec As Rectangle
+        Dim i As Long
+        IsShopItem = 0
+
+        For i = 1 To MAX_TRADES
+
+            If Shop(InShop).TradeItem(i).Item > 0 And Shop(InShop).TradeItem(i).Item <= MAX_ITEMS Then
+                With tempRec
+                    .Y = ShopWindowY + ShopTop + ((ShopOffsetY + 32) * ((i - 1) \ ShopColumns))
+                    .Height = PIC_Y
+                    .X = ShopWindowX + ShopLeft + ((ShopOffsetX + 32) * (((i - 1) Mod ShopColumns)))
+                    .Width = PIC_X
+                End With
+
+                If X >= tempRec.Left And X <= tempRec.Right Then
+                    If Y >= tempRec.Top And Y <= tempRec.Bottom Then
+                        IsShopItem = i
+                        Exit Function
+                    End If
+                End If
+            End If
+        Next
+    End Function
+
     Function AboveActionPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveActionPanel = False
 
@@ -843,6 +933,16 @@ Public Module ClientGuiFunctions
         If X > BankWindowX And X < BankWindowX + BankPanelGFXInfo.width Then
             If Y > BankWindowY And Y < BankWindowY + BankPanelGFXInfo.height Then
                 AboveBankpanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveShoppanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveShoppanel = False
+
+        If X > ShopWindowX And X < ShopWindowX + ShopPanelGFXInfo.width Then
+            If Y > ShopWindowY And Y < ShopWindowY + ShopPanelGFXInfo.height Then
+                AboveShoppanel = True
             End If
         End If
     End Function

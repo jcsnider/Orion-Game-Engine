@@ -436,11 +436,18 @@ Public Class frmEditor_Map
         picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
 
 
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) \ 2
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) \ 2
     End Sub
 
     Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
         MapGrid = Not MapGrid
+    End Sub
+
+    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
+        If lstMusic.SelectedIndex >= 0 Then
+            CurMusic = ""
+            PlayMusic(lstMusic.Items(lstMusic.SelectedIndex).ToString)
+        End If
     End Sub
 End Class

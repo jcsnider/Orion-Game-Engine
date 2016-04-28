@@ -101,7 +101,6 @@ Module ClientGameEditors
         frmEditor_Map.txtBootX.Text = Map.BootX
         frmEditor_Map.txtBootY.Text = Map.BootY
 
-
         frmEditor_Map.lstMapNpc.Items.Clear()
 
         For X = 1 To MAX_MAP_NPCS
@@ -141,11 +140,9 @@ Module ClientGameEditors
         ' we're in the map editor
         InMapEditor = True
 
-
         ' set the scrolly bars
         If Map.tileset = 0 Then Map.tileset = 1
         If Map.tileset > NumTileSets Then Map.tileset = 1
-        'frmEditor_Map.fraTileSet.Text = "Tileset: " & Map.tileset
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
@@ -156,11 +153,9 @@ Module ClientGameEditors
             TileSetImgsLoaded(i) = False
         Next
 
-
-
         ' set the scrollbars
-        frmEditor_Map.scrlPictureY.Maximum = (frmEditor_Map.picBackSelect.Height \ PIC_Y)
-        frmEditor_Map.scrlPictureX.Maximum = (frmEditor_Map.picBackSelect.Width \ PIC_X)
+        frmEditor_Map.scrlPictureY.Maximum = (frmEditor_Map.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
+        frmEditor_Map.scrlPictureX.Maximum = (frmEditor_Map.picBackSelect.Width \ PIC_X) \ 2
 
         ' set shops for the shop attribute
         frmEditor_Map.cmbShop.Items.Add("None")
@@ -172,9 +167,6 @@ Module ClientGameEditors
 
         frmEditor_Map.optBlocked.Checked = True
 
-        ' music in map properties
-        'If frmEditor_MapProperties.fMusic.Path <> Application.StartupPath & MUSIC_PATH Then frmEditor_MapProperties.fMusic.Path = Application.StartupPath & MUSIC_PATH
-
         frmEditor_Map.cmbTileSets.Items.Clear()
         For i = 1 To NumTileSets
             frmEditor_Map.cmbTileSets.Items.Add("Tileset " & i)
@@ -184,7 +176,6 @@ Module ClientGameEditors
         frmEditor_Map.cmbLayers.SelectedIndex = 0
 
         InitMapProperties = True
-
 
     End Sub
 
@@ -245,7 +236,6 @@ Module ClientGameEditors
             If X > EditorTileX Then ' drag right
                 'EditorTileWidth = X
                 EditorTileWidth = X - EditorTileX
-                'Debug.Print("EditorTileWidth = " & EditorTileWidth)
             Else ' drag left
                 ' TO DO
             End If
@@ -525,10 +515,13 @@ Module ClientGameEditors
         If MsgBox("Are you sure you wish to clear this layer?", vbYesNo, GAME_NAME) = vbYes Then
             For X = 0 To Map.MaxX
                 For Y = 0 To Map.MaxY
-                    Map.Tile(X, Y).Layer(CurLayer).X = 0
-                    Map.Tile(X, Y).Layer(CurLayer).Y = 0
-                    Map.Tile(X, Y).Layer(CurLayer).tileset = 0
-                    CacheRenderState(X, Y, CurLayer)
+                    With Map.Tile(X, Y)
+                        .Layer(CurLayer).X = 0
+                        .Layer(CurLayer).Y = 0
+                        .Layer(CurLayer).tileset = 0
+                        .Autotile(CurLayer) = 0
+                        CacheRenderState(X, Y, CurLayer)
+                    End With
                 Next
             Next
         End If

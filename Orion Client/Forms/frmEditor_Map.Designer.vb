@@ -22,6 +22,7 @@ Partial Class frmEditor_Map
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Map))
         Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
         Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
         Me.btnFill = New System.Windows.Forms.Button()
@@ -139,6 +140,7 @@ Partial Class frmEditor_Map
         Me.txtMaxX = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnPreview = New System.Windows.Forms.Button()
         Me.lstMusic = New System.Windows.Forms.ListBox()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -1167,14 +1169,14 @@ Partial Class frmEditor_Map
         Me.fraMapLinks.Controls.Add(Me.txtUp)
         Me.fraMapLinks.Location = New System.Drawing.Point(6, 79)
         Me.fraMapLinks.Name = "fraMapLinks"
-        Me.fraMapLinks.Size = New System.Drawing.Size(149, 84)
+        Me.fraMapLinks.Size = New System.Drawing.Size(232, 149)
         Me.fraMapLinks.TabIndex = 14
         Me.fraMapLinks.TabStop = False
         Me.fraMapLinks.Text = "Map Links"
         '
         'txtDown
         '
-        Me.txtDown.Location = New System.Drawing.Point(43, 58)
+        Me.txtDown.Location = New System.Drawing.Point(89, 120)
         Me.txtDown.Name = "txtDown"
         Me.txtDown.Size = New System.Drawing.Size(50, 20)
         Me.txtDown.TabIndex = 6
@@ -1182,7 +1184,7 @@ Partial Class frmEditor_Map
         '
         'txtLeft
         '
-        Me.txtLeft.Location = New System.Drawing.Point(6, 46)
+        Me.txtLeft.Location = New System.Drawing.Point(6, 59)
         Me.txtLeft.Name = "txtLeft"
         Me.txtLeft.Size = New System.Drawing.Size(43, 20)
         Me.txtLeft.TabIndex = 5
@@ -1191,7 +1193,7 @@ Partial Class frmEditor_Map
         'lblMap
         '
         Me.lblMap.AutoSize = True
-        Me.lblMap.Location = New System.Drawing.Point(6, 16)
+        Me.lblMap.Location = New System.Drawing.Point(74, 62)
         Me.lblMap.Name = "lblMap"
         Me.lblMap.Size = New System.Drawing.Size(77, 13)
         Me.lblMap.TabIndex = 4
@@ -1199,7 +1201,7 @@ Partial Class frmEditor_Map
         '
         'txtRight
         '
-        Me.txtRight.Location = New System.Drawing.Point(93, 46)
+        Me.txtRight.Location = New System.Drawing.Point(176, 59)
         Me.txtRight.Name = "txtRight"
         Me.txtRight.Size = New System.Drawing.Size(50, 20)
         Me.txtRight.TabIndex = 3
@@ -1207,7 +1209,7 @@ Partial Class frmEditor_Map
         '
         'txtUp
         '
-        Me.txtUp.Location = New System.Drawing.Point(43, 32)
+        Me.txtUp.Location = New System.Drawing.Point(89, 10)
         Me.txtUp.Name = "txtUp"
         Me.txtUp.Size = New System.Drawing.Size(50, 20)
         Me.txtUp.TabIndex = 1
@@ -1221,16 +1223,16 @@ Partial Class frmEditor_Map
         Me.fraBootSettings.Controls.Add(Me.Label3)
         Me.fraBootSettings.Controls.Add(Me.txtBootX)
         Me.fraBootSettings.Controls.Add(Me.Label4)
-        Me.fraBootSettings.Location = New System.Drawing.Point(174, 79)
+        Me.fraBootSettings.Location = New System.Drawing.Point(6, 234)
         Me.fraBootSettings.Name = "fraBootSettings"
-        Me.fraBootSettings.Size = New System.Drawing.Size(149, 98)
+        Me.fraBootSettings.Size = New System.Drawing.Size(232, 98)
         Me.fraBootSettings.TabIndex = 13
         Me.fraBootSettings.TabStop = False
-        Me.fraBootSettings.Text = "Boot Settings"
+        Me.fraBootSettings.Text = "Respawn Settings"
         '
         'txtBootMap
         '
-        Me.txtBootMap.Location = New System.Drawing.Point(89, 13)
+        Me.txtBootMap.Location = New System.Drawing.Point(176, 11)
         Me.txtBootMap.Name = "txtBootMap"
         Me.txtBootMap.Size = New System.Drawing.Size(50, 20)
         Me.txtBootMap.TabIndex = 5
@@ -1241,13 +1243,13 @@ Partial Class frmEditor_Map
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(6, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(56, 13)
+        Me.Label5.Size = New System.Drawing.Size(79, 13)
         Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Boot Map:"
+        Me.Label5.Text = "Respawn Map:"
         '
         'txtBootY
         '
-        Me.txtBootY.Location = New System.Drawing.Point(89, 72)
+        Me.txtBootY.Location = New System.Drawing.Point(176, 70)
         Me.txtBootY.Name = "txtBootY"
         Me.txtBootY.Size = New System.Drawing.Size(50, 20)
         Me.txtBootY.TabIndex = 3
@@ -1258,13 +1260,13 @@ Partial Class frmEditor_Map
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(6, 72)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(42, 13)
+        Me.Label3.Size = New System.Drawing.Size(65, 13)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Boot Y:"
+        Me.Label3.Text = "Respawn Y:"
         '
         'txtBootX
         '
-        Me.txtBootX.Location = New System.Drawing.Point(89, 46)
+        Me.txtBootX.Location = New System.Drawing.Point(176, 44)
         Me.txtBootX.Name = "txtBootX"
         Me.txtBootX.Size = New System.Drawing.Size(50, 20)
         Me.txtBootX.TabIndex = 1
@@ -1275,9 +1277,9 @@ Partial Class frmEditor_Map
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(6, 46)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(42, 13)
+        Me.Label4.Size = New System.Drawing.Size(65, 13)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Boot X:"
+        Me.Label4.Text = "Respawn X:"
         '
         'fraMaxSizes
         '
@@ -1285,16 +1287,16 @@ Partial Class frmEditor_Map
         Me.fraMaxSizes.Controls.Add(Me.Label2)
         Me.fraMaxSizes.Controls.Add(Me.txtMaxX)
         Me.fraMaxSizes.Controls.Add(Me.Label7)
-        Me.fraMaxSizes.Location = New System.Drawing.Point(6, 212)
+        Me.fraMaxSizes.Location = New System.Drawing.Point(6, 338)
         Me.fraMaxSizes.Name = "fraMaxSizes"
-        Me.fraMaxSizes.Size = New System.Drawing.Size(149, 75)
+        Me.fraMaxSizes.Size = New System.Drawing.Size(232, 124)
         Me.fraMaxSizes.TabIndex = 12
         Me.fraMaxSizes.TabStop = False
         Me.fraMaxSizes.Text = "Map Sizes"
         '
         'txtMaxY
         '
-        Me.txtMaxY.Location = New System.Drawing.Point(56, 42)
+        Me.txtMaxY.Location = New System.Drawing.Point(124, 101)
         Me.txtMaxY.Name = "txtMaxY"
         Me.txtMaxY.Size = New System.Drawing.Size(50, 20)
         Me.txtMaxY.TabIndex = 3
@@ -1303,15 +1305,15 @@ Partial Class frmEditor_Map
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 44)
+        Me.Label2.Location = New System.Drawing.Point(6, 104)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(40, 13)
+        Me.Label2.Size = New System.Drawing.Size(64, 13)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Max Y:"
+        Me.Label2.Text = "Maximum Y:"
         '
         'txtMaxX
         '
-        Me.txtMaxX.Location = New System.Drawing.Point(56, 16)
+        Me.txtMaxX.Location = New System.Drawing.Point(124, 75)
         Me.txtMaxX.Name = "txtMaxX"
         Me.txtMaxX.Size = New System.Drawing.Size(50, 20)
         Me.txtMaxX.TabIndex = 1
@@ -1320,21 +1322,33 @@ Partial Class frmEditor_Map
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 18)
+        Me.Label7.Location = New System.Drawing.Point(6, 78)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(40, 13)
+        Me.Label7.Size = New System.Drawing.Size(64, 13)
         Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Max X:"
+        Me.Label7.Text = "Maximum X:"
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btnPreview)
         Me.GroupBox2.Controls.Add(Me.lstMusic)
-        Me.GroupBox2.Location = New System.Drawing.Point(174, 186)
+        Me.GroupBox2.Location = New System.Drawing.Point(333, 36)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(155, 136)
+        Me.GroupBox2.Size = New System.Drawing.Size(152, 244)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Music"
+        '
+        'btnPreview
+        '
+        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
+        Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPreview.Location = New System.Drawing.Point(6, 210)
+        Me.btnPreview.Name = "btnPreview"
+        Me.btnPreview.Size = New System.Drawing.Size(139, 29)
+        Me.btnPreview.TabIndex = 4
+        Me.btnPreview.Text = "Preview Music"
+        Me.btnPreview.UseVisualStyleBackColor = True
         '
         'lstMusic
         '
@@ -1342,7 +1356,7 @@ Partial Class frmEditor_Map
         Me.lstMusic.Location = New System.Drawing.Point(6, 19)
         Me.lstMusic.Name = "lstMusic"
         Me.lstMusic.ScrollAlwaysVisible = True
-        Me.lstMusic.Size = New System.Drawing.Size(139, 108)
+        Me.lstMusic.Size = New System.Drawing.Size(139, 186)
         Me.lstMusic.TabIndex = 3
         '
         'txtName
@@ -1590,4 +1604,5 @@ Partial Class frmEditor_Map
     Friend WithEvents Label12 As Windows.Forms.Label
     Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents tsbMapGrid As Windows.Forms.ToolStripButton
+    Friend WithEvents btnPreview As Windows.Forms.Button
 End Class

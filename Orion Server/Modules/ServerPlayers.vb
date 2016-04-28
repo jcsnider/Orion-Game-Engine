@@ -1250,7 +1250,7 @@
         Dim i As Long
 
         ' Set HP to nothing
-        Call SetPlayerVital(Index, Vitals.HP, 0)
+        SetPlayerVital(Index, Vitals.HP, 0)
 
         ' Drop all worn items
         For i = 1 To Equipment.Equipment_Count - 1
@@ -1260,46 +1260,45 @@
         Next
 
         ' Warp player away
-        Call SetPlayerDir(Index, DIR_DOWN)
+        SetPlayerDir(Index, DIR_DOWN)
 
         With Map(GetPlayerMap(Index))
             ' to the bootmap if it is set
             If .BootMap > 0 Then
                 PlayerWarp(Index, .BootMap, .BootX, .BootY)
             Else
-                Call PlayerWarp(Index, START_MAP, START_X, START_Y)
+                PlayerWarp(Index, START_MAP, START_X, START_Y)
             End If
         End With
 
         ' Clear spell casting
         TempPlayer(Index).SpellBuffer = 0
         TempPlayer(Index).SpellBufferTimer = 0
-        Call SendClearSpellBuffer(Index)
+        SendClearSpellBuffer(Index)
 
         ' Restore vitals
-        Call SetPlayerVital(Index, Vitals.HP, GetPlayerMaxVital(Index, Vitals.HP))
-        Call SetPlayerVital(Index, Vitals.MP, GetPlayerMaxVital(Index, Vitals.MP))
-        Call SetPlayerVital(Index, Vitals.SP, GetPlayerMaxVital(Index, Vitals.SP))
-        Call SendVital(Index, Vitals.HP)
-        Call SendVital(Index, Vitals.MP)
-        Call SendVital(Index, Vitals.SP)
+        SetPlayerVital(Index, Vitals.HP, GetPlayerMaxVital(Index, Vitals.HP))
+        SetPlayerVital(Index, Vitals.MP, GetPlayerMaxVital(Index, Vitals.MP))
+        SetPlayerVital(Index, Vitals.SP, GetPlayerMaxVital(Index, Vitals.SP))
+        SendVital(Index, Vitals.HP)
+        SendVital(Index, Vitals.MP)
+        SendVital(Index, Vitals.SP)
 
         ' If the player the attacker killed was a pk then take it away
         If GetPlayerPK(Index) = YES Then
-            Call SetPlayerPK(Index, NO)
-            Call SendPlayerData(Index)
+            SetPlayerPK(Index, NO)
+            SendPlayerData(Index)
         End If
 
     End Sub
+
     Function TakeInvSlot(ByVal Index As Long, ByVal invSlot As Long, ByVal ItemVal As Long) As Boolean
         Dim itemNum
 
         TakeInvSlot = False
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or invSlot <= 0 Or invSlot > MAX_ITEMS Then
-            Exit Function
-        End If
+        If IsPlaying(Index) = False Or invSlot <= 0 Or invSlot > MAX_ITEMS Then Exit Function
 
         itemNum = GetPlayerInvItemNum(Index, invSlot)
 
@@ -1309,19 +1308,20 @@
             If ItemVal >= GetPlayerInvItemValue(Index, invSlot) Then
                 TakeInvSlot = True
             Else
-                Call SetPlayerInvItemValue(Index, invSlot, GetPlayerInvItemValue(Index, invSlot) - ItemVal)
+                SetPlayerInvItemValue(Index, invSlot, GetPlayerInvItemValue(Index, invSlot) - ItemVal)
             End If
         Else
             TakeInvSlot = True
         End If
 
         If TakeInvSlot Then
-            Call SetPlayerInvItemNum(Index, invSlot, 0)
-            Call SetPlayerInvItemValue(Index, invSlot, 0)
+            SetPlayerInvItemNum(Index, invSlot, 0)
+            SetPlayerInvItemValue(Index, invSlot, 0)
             Exit Function
         End If
 
     End Function
+
     Function GetPlayerVitalRegen(ByVal Index As Long, ByVal Vital As Vitals) As Long
         Dim i As Long
 
@@ -1343,7 +1343,6 @@
         If i < 2 Then i = 2
         GetPlayerVitalRegen = i
     End Function
-
 
 
     Public Sub BufferSpell(ByVal Index As Long, ByVal spellslot As Long)

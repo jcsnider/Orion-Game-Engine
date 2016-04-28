@@ -8,12 +8,7 @@
 
     Public Const AllChatLineWidth As Integer = 50
 
-    ' shop constants
-    Public Const ShopTop As Byte = 8
-    Public Const ShopLeft As Byte = 8
-    Public Const ShopOffsetY As Byte = 4
-    Public Const ShopOffsetX As Byte = 4
-    Public Const ShopColumns As Byte = 5
+
 
     Public Const MAX_BYTE As Byte = 255
     Public Const MAX_INTEGER As Integer = 32767
@@ -266,5 +261,10 @@
     Public Const ACTIONMSG_STATIC As Long = 0
     Public Const ACTIONMSG_SCROLL As Long = 1
     Public Const ACTIONMSG_SCREEN As Long = 2
+
+    'dialog types
+    Public Const DIALOGUE_TYPE_BUYHOME As Byte = 1
+    Public Const DIALOGUE_TYPE_VISIT As Byte = 2
+    Public Const DIALOGUE_TYPE_PARTY As Byte = 3
 
 End Module
