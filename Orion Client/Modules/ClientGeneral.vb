@@ -174,6 +174,7 @@ Module ClientGeneral
 
         ' check if we have main-menu music
         If Len(Trim$(Options.MenuMusic)) > 0 Then PlayMusic(Trim$(Options.MenuMusic))
+        MusicPlayer.Volume() = 100
 
         ' Reset values
         Ping = -1

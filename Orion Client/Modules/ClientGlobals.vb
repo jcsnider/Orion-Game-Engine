@@ -220,8 +220,8 @@ Module ClientGlobals
     Public DialogType As Byte
     Public DialogMsg As String
     Public UpdateDialog As Boolean
-
-
+    Public DialogButton1Text As String
+    Public DialogButton2Text As String
 
     'store news here
     Public News As String
