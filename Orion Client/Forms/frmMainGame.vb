@@ -20,7 +20,6 @@ Public Class frmMainGame
 
     Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
 
-
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
                 If MyText.Length < 100 Then
@@ -41,15 +40,20 @@ Public Class frmMainGame
             If e.KeyCode = Keys.D Then VbKeyRight = True
             If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
             If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+
+            If e.KeyCode = Keys.Space Then
+                CheckMapGetItem()
+            End If
         End If
 
         If e.KeyCode = Keys.Enter Then
             HandlePressEnter()
-            CheckMapGetItem()
+
             inChat = Not inChat
             e.Handled = True
             e.SuppressKeyPress = True
         End If
+
     End Sub
 
     Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
@@ -125,10 +129,14 @@ Public Class frmMainGame
 
         'lets check for keys for inventory etc
         If Not inChat Then
+            'inventory
             If e.KeyCode = Keys.I Then
                 pnlInventoryVisible = Not pnlInventoryVisible
             End If
-
+            'Character window
+            If e.KeyCode = Keys.C Then
+                pnlCharacterVisible = Not pnlCharacterVisible
+            End If
         End If
 
     End Sub
@@ -498,24 +506,7 @@ Public Class frmMainGame
 
 #Region "Quest Code"
 
-    Private Sub lblQuestClose_Click(sender As Object, e As EventArgs) Handles lblQuestClose.Click
-        pnlQuestSpeech.Visible = False
-        lblQuestExtra.Visible = False
-        lblQuestAccept.Visible = False
-        lblQuestAccept.Tag = vbNullString
-        lblQuestSay.Text = "-"
-    End Sub
-
-    Private Sub lblQuestAccept_Click(sender As Object, e As EventArgs) Handles lblQuestAccept.Click
-        PlayerHandleQuest(lblQuestAccept.Tag, 1)
-        pnlQuestSpeech.Visible = False
-        lblQuestAccept.Visible = False
-        lblQuestAccept.Tag = vbNullString
-        lblQuestSay.Text = "-"
-        RefreshQuestLog()
-    End Sub
-
-    Private Sub lblQuestExtra_Click(sender As Object, e As EventArgs) Handles lblQuestExtra.Click
+    Private Sub lblQuestExtra_Click(sender As Object, e As EventArgs)
         RunQuestDialogueExtraLabel()
     End Sub
 

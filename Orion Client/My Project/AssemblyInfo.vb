@@ -12,8 +12,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Orion+ Client")>
-<Assembly: AssemblyCopyright("Copyright ©  2015")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("Copyright ©  2015 - 2016")>
+<Assembly: AssemblyTrademark("Damian666")>
 
 <Assembly: ComVisible(False)>
 

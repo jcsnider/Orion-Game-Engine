@@ -596,9 +596,10 @@ Module ClientGraphics
 
     End Sub
 
-    Public Sub DrawButton(ByVal Text As String, ByVal DestX As Long, ByVal DestY As Long, ByVal TextX As Long, ByVal TextY As Long)
+    Public Sub DrawButton(ByVal Text As String, ByVal DestX As Long, ByVal DestY As Long)
         RenderTexture(ButtonGFX, GameWindow, DestX, DestY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
-        DrawText(DestX + TextX, DestY + TextY, Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DestX + (ButtonGFXInfo.width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonGFXInfo.height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
     End Sub
 
     Public Sub RenderTexture(ByVal Txture As Texture, ByVal Target As RenderWindow, ByVal DestX As Long, ByVal DestY As Long, ByVal SourceX As Long, ByVal SourceY As Long,
@@ -912,8 +913,9 @@ Module ClientGraphics
         Dim X As Long, Y As Long
 
         If GettingMap Then Exit Sub
+        If MapData = False Then Exit Sub
 
-        If MapResource(Resource_num).X > MAX_MAPX Or MapResource(Resource_num).Y > MAX_MAPY Then Exit Sub
+        If MapResource(Resource_num).X > Map.MaxX Or MapResource(Resource_num).Y > Map.MaxY Then Exit Sub
         ' Get the Resource type
         Resource_master = Map.Tile(MapResource(Resource_num).X, MapResource(Resource_num).Y).Data1
 
@@ -1617,19 +1619,20 @@ Module ClientGraphics
         ' check for hp bar
         For i = 1 To MAX_MAP_NPCS
             If Map.Npc(i) > 0 Then
-
-                ' lock to npc
-                tmpX = MapNpc(i).X * PIC_X + MapNpc(i).XOffset
-                tmpY = MapNpc(i).Y * PIC_Y + MapNpc(i).YOffset + 35
-                If MapNpc(i).Vital(Vitals.HP) > 0 Then
-                    ' calculate the width to fill
-                    barWidth = ((MapNpc(i).Vital(Vitals.HP) / (Npc(MapNpc(i).Num).HP) * 32))
-                    ' draw bars
-                    rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
-                    Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
-                    rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 75))
-                    rectShape.FillColor = SFML.Graphics.Color.Red
-                    GameWindow.Draw(rectShape)
+                If Npc(MapNpc(i).Num).Behaviour = NPC_BEHAVIOUR_ATTACKONSIGHT Or Npc(MapNpc(i).Num).Behaviour = NPC_BEHAVIOUR_ATTACKWHENATTACKED Or Npc(MapNpc(i).Num).Behaviour = NPC_BEHAVIOUR_GUARD Then
+                    ' lock to npc
+                    tmpX = MapNpc(i).X * PIC_X + MapNpc(i).XOffset
+                    tmpY = MapNpc(i).Y * PIC_Y + MapNpc(i).YOffset + 35
+                    If MapNpc(i).Vital(Vitals.HP) > 0 Then
+                        ' calculate the width to fill
+                        barWidth = ((MapNpc(i).Vital(Vitals.HP) / (Npc(MapNpc(i).Num).HP) * 32))
+                        ' draw bars
+                        rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                        Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+                        rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 75))
+                        rectShape.FillColor = SFML.Graphics.Color.Red
+                        GameWindow.Draw(rectShape)
+                    End If
                 End If
             End If
         Next
@@ -2874,13 +2877,13 @@ NextLoop:
         DrawText(ShopWindowX + 110, ShopWindowY + 55, "to the shop!", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
         'render buy button
-        DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY, 25, 10)
+        DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY)
 
         'render sell button
-        DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY, 25, 10)
+        DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY)
 
         'render close button
-        DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY, 20, 10)
+        DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY)
 
         For i = 1 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
@@ -3362,15 +3365,31 @@ NextLoop:
         'first render panel
         RenderTexture(ChatWindowGFX, GameWindow, DialogPanelX, DialogPanelY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
 
-        DrawText(DialogPanelX + 40, DialogPanelY + 10, Trim(DialogMsg), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DialogPanelX + 40, DialogPanelY + 10, Trim(DialogMsg1), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        'render ok button
-        RenderTexture(ButtonGFX, GameWindow, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
-        DrawText(DialogPanelX + OkButtonX + 40, DialogPanelY + OkButtonY + 10, "Ok", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        If Len(DialogMsg2) > 0 Then
+            DrawText(DialogPanelX + 40, DialogPanelY + 30, Trim(DialogMsg2), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
 
-        'render cancel button
-        RenderTexture(ButtonGFX, GameWindow, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
-        DrawText(DialogPanelX + CancelButtonX + 30, DialogPanelY + CancelButtonY + 10, "Cancel", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        If Len(DialogMsg3) > 0 Then
+            DrawText(DialogPanelX + 40, DialogPanelY + 50, Trim(DialogMsg3), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
+
+        If DialogType = DIALOGUE_TYPE_QUEST Then
+            If QuestAcceptTag > 0 Then
+                'render accept button
+                DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY)
+            End If
+            'render cancel button
+            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY)
+        Else
+            'render ok button
+            DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY)
+
+            'render cancel button
+            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY)
+        End If
+
     End Sub
 
     Public Sub LoadGuiGraphics()

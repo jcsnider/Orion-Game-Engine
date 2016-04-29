@@ -68,12 +68,6 @@ Partial Class frmMainGame
         Me.lblActualTask = New System.Windows.Forms.Label()
         Me.lstQuestLog = New System.Windows.Forms.ListBox()
         Me.txtQuestTaskLog = New System.Windows.Forms.TextBox()
-        Me.pnlQuestSpeech = New System.Windows.Forms.Panel()
-        Me.lblQuestClose = New System.Windows.Forms.Label()
-        Me.lblQuestSay = New System.Windows.Forms.Label()
-        Me.lblQuestNameVisual = New System.Windows.Forms.Label()
-        Me.lblQuestAccept = New System.Windows.Forms.Label()
-        Me.lblQuestExtra = New System.Windows.Forms.Label()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
         Me.pnlEventChat = New System.Windows.Forms.Panel()
@@ -91,7 +85,6 @@ Partial Class frmMainGame
         Me.pnlCurrency.SuspendLayout()
         Me.pnlTrade.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
-        Me.pnlQuestSpeech.SuspendLayout()
         Me.pnlEventChat.SuspendLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -604,79 +597,6 @@ Partial Class frmMainGame
         Me.txtQuestTaskLog.Size = New System.Drawing.Size(268, 95)
         Me.txtQuestTaskLog.TabIndex = 1
         '
-        'pnlQuestSpeech
-        '
-        Me.pnlQuestSpeech.BackColor = System.Drawing.Color.Black
-        Me.pnlQuestSpeech.Controls.Add(Me.lblQuestClose)
-        Me.pnlQuestSpeech.Controls.Add(Me.lblQuestSay)
-        Me.pnlQuestSpeech.Controls.Add(Me.lblQuestNameVisual)
-        Me.pnlQuestSpeech.Controls.Add(Me.lblQuestAccept)
-        Me.pnlQuestSpeech.Controls.Add(Me.lblQuestExtra)
-        Me.pnlQuestSpeech.Location = New System.Drawing.Point(248, 429)
-        Me.pnlQuestSpeech.Name = "pnlQuestSpeech"
-        Me.pnlQuestSpeech.Size = New System.Drawing.Size(479, 106)
-        Me.pnlQuestSpeech.TabIndex = 39
-        Me.pnlQuestSpeech.Visible = False
-        '
-        'lblQuestClose
-        '
-        Me.lblQuestClose.AutoSize = True
-        Me.lblQuestClose.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblQuestClose.Location = New System.Drawing.Point(433, 87)
-        Me.lblQuestClose.Name = "lblQuestClose"
-        Me.lblQuestClose.Size = New System.Drawing.Size(43, 15)
-        Me.lblQuestClose.TabIndex = 3
-        Me.lblQuestClose.Text = "Close"
-        '
-        'lblQuestSay
-        '
-        Me.lblQuestSay.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestSay.ForeColor = System.Drawing.Color.White
-        Me.lblQuestSay.Location = New System.Drawing.Point(3, 25)
-        Me.lblQuestSay.Name = "lblQuestSay"
-        Me.lblQuestSay.Size = New System.Drawing.Size(469, 49)
-        Me.lblQuestSay.TabIndex = 1
-        Me.lblQuestSay.Text = "..."
-        '
-        'lblQuestNameVisual
-        '
-        Me.lblQuestNameVisual.BackColor = System.Drawing.Color.Black
-        Me.lblQuestNameVisual.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestNameVisual.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblQuestNameVisual.Location = New System.Drawing.Point(81, 2)
-        Me.lblQuestNameVisual.Name = "lblQuestNameVisual"
-        Me.lblQuestNameVisual.Size = New System.Drawing.Size(315, 23)
-        Me.lblQuestNameVisual.TabIndex = 0
-        Me.lblQuestNameVisual.Text = "Quest Name"
-        Me.lblQuestNameVisual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblQuestAccept
-        '
-        Me.lblQuestAccept.AutoSize = True
-        Me.lblQuestAccept.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestAccept.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestAccept.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblQuestAccept.Location = New System.Drawing.Point(3, 87)
-        Me.lblQuestAccept.Name = "lblQuestAccept"
-        Me.lblQuestAccept.Size = New System.Drawing.Size(90, 15)
-        Me.lblQuestAccept.TabIndex = 2
-        Me.lblQuestAccept.Text = "Accept Quest"
-        '
-        'lblQuestExtra
-        '
-        Me.lblQuestExtra.AutoSize = True
-        Me.lblQuestExtra.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestExtra.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestExtra.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblQuestExtra.Location = New System.Drawing.Point(3, 87)
-        Me.lblQuestExtra.Name = "lblQuestExtra"
-        Me.lblQuestExtra.Size = New System.Drawing.Size(40, 15)
-        Me.lblQuestExtra.TabIndex = 4
-        Me.lblQuestExtra.Text = "Extra"
-        Me.lblQuestExtra.Visible = False
-        '
         'pnlTmpSkill
         '
         Me.pnlTmpSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
@@ -792,7 +712,6 @@ Partial Class frmMainGame
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.pnlQuestSpeech)
         Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlQuestLog)
@@ -820,8 +739,6 @@ Partial Class frmMainGame
         Me.pnlTrade.ResumeLayout(False)
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
-        Me.pnlQuestSpeech.ResumeLayout(False)
-        Me.pnlQuestSpeech.PerformLayout()
         Me.pnlEventChat.ResumeLayout(False)
         Me.pnlEventChat.PerformLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).EndInit()
@@ -867,12 +784,6 @@ Partial Class frmMainGame
     Friend WithEvents lblActualTask As Windows.Forms.Label
     Friend WithEvents lstQuestLog As Windows.Forms.ListBox
     Friend WithEvents txtQuestTaskLog As Windows.Forms.TextBox
-    Friend WithEvents pnlQuestSpeech As Windows.Forms.Panel
-    Friend WithEvents lblQuestClose As Windows.Forms.Label
-    Friend WithEvents lblQuestSay As Windows.Forms.Label
-    Friend WithEvents lblQuestNameVisual As Windows.Forms.Label
-    Friend WithEvents lblQuestAccept As Windows.Forms.Label
-    Friend WithEvents lblQuestExtra As Windows.Forms.Label
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label

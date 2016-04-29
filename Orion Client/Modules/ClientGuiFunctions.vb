@@ -342,12 +342,17 @@ Public Module ClientGuiFunctions
 
                 If DialogType = DIALOGUE_TYPE_BUYHOME Then 'house offer
                     SendBuyHouse(1)
-                ElseIf DIALOGUE_TYPE_VISIT Then
+                ElseIf DialogType = DIALOGUE_TYPE_VISIT Then
                     SendVisit(1)
-                ElseIf DIALOGUE_TYPE_PARTY Then
+                ElseIf DialogType = DIALOGUE_TYPE_PARTY Then
                     SendJoinParty()
+                ElseIf DialogType = DIALOGUE_TYPE_QUEST Then
+                    If QuestAcceptTag > 0 Then
+                        PlayerHandleQuest(QuestAcceptTag, 1)
+                        QuestAcceptTag = 0
+                        RefreshQuestLog()
+                    End If
                 End If
-
                 DialogPanelVisible = False
             End If
             'cancel button
@@ -363,6 +368,8 @@ Public Module ClientGuiFunctions
                     SendVisit(0)
                 ElseIf DIALOGUE_TYPE_PARTY Then 'party declined
                     SendLeaveParty()
+                ElseIf DIALOGUE_TYPE_QUEST Then 'quest declined
+                    QuestAcceptTag = 0
                 End If
 
                 DialogPanelVisible = False

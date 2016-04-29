@@ -387,7 +387,7 @@
             Exit Sub
         End If
 
-        Call PlayerMove(index, Dir, movement)
+        PlayerMove(index, Dir, movement, False)
 
         Buffer = Nothing
     End Sub
@@ -403,7 +403,7 @@
             Exit Sub
         End If
 
-        dir = Buffer.ReadLong 'CLng(Parse(1))
+        dir = Buffer.ReadLong
         Buffer = Nothing
 
         ' Prevent hacking
@@ -1059,16 +1059,16 @@
 
         If Buffer.ReadLong <> ClientPackets.CGetStats Then Exit Sub
 
-        Call PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-")
-        Call PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
-        Call PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP))
-        Call PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.spirit))
+        PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-")
+        PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
+        PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP))
+        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.spirit))
         n = (GetPlayerStat(Index, Stats.strength) \ 2) + (GetPlayerLevel(Index) \ 2)
         i = (GetPlayerStat(Index, Stats.endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
 
         If n > 100 Then n = 100
         If i > 100 Then i = 100
-        Call PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+        PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
         Buffer = Nothing
     End Sub
 
@@ -1079,15 +1079,15 @@
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ClientPackets.CRequestNewMap Then Exit Sub
-        dir = Buffer.ReadLong 'CLng(Parse(1))
+        dir = Buffer.ReadLong
         Buffer = Nothing
 
         ' Prevent hacking
-        If dir < DIR_UP Or dir > DIR_RIGHT Then
-            Exit Sub
-        End If
+        If dir < DIR_UP Or dir > DIR_RIGHT Then Exit Sub
 
-        Call PlayerMove(Index, dir, 1)
+        'Debug.Print("Server-RequestNewMap")
+
+        PlayerMove(Index, dir, 1, True)
         Buffer = Nothing
     End Sub
 
@@ -1408,14 +1408,14 @@
         If Buffer.ReadLong <> ClientPackets.CNeedMap Then Exit Sub
 
         ' Get yes/no value
-        s = Buffer.ReadLong 'Parse(1)
+        s = Buffer.ReadLong
         Buffer = Nothing
 
         ' Check if map data is needed to be sent
         If s = 1 Then
-            Call SendMapData(index, GetPlayerMap(index), True)
+            SendMapData(index, GetPlayerMap(index), True)
         Else
-            Call SendMapData(index, GetPlayerMap(index), False)
+            SendMapData(index, GetPlayerMap(index), False)
         End If
 
         SpawnMapEventsFor(index, GetPlayerMap(index))

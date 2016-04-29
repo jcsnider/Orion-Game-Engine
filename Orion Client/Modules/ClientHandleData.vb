@@ -612,6 +612,8 @@
                 Player(i).XOffset = PIC_X * -1
         End Select
 
+        'Debug.Print("Client-PlayerMove")
+
         Buffer = Nothing
     End Sub
 
@@ -806,14 +808,12 @@
         Buffer.WriteLong(NeedMap)
         SendData(Buffer.ToArray())
 
-        'UpdateMiniMap = True
-
         Buffer = Nothing
     End Sub
 
     Private Sub Packet_MapData(ByVal Data() As Byte)
         Dim X As Long, Y As Long, i As Long
-        Dim MapNum As Long
+        Dim MapNum As Long, MusicFile As String
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -1040,11 +1040,13 @@
 
         End SyncLock
 
+        'Debug.Print("Client Handled mapdata")
+
         ' Save the map
         SaveMap(MapNum)
 
         initAutotiles()
-        'UpdateMiniMap = True
+        'Debug.Print("Client Handled Autotile Init")
 
         ' Check if we get a map from someone else and if we were editing a map cancel it out
         If InMapEditor Then
@@ -1055,12 +1057,11 @@
         End If
 
         MapData = True
-        Dim MusicFile As String
+
 
         For i = 1 To MAX_BYTE
             ClearActionMsg(i)
         Next i
-
 
         MusicFile = Trim$(Map.Music)
         PlayMusic(MusicFile)
@@ -1069,6 +1070,8 @@
 
         GettingMap = False
         CanMoveNow = True
+
+        'Debug.Print("PacketMapdata: " & GettingMap)
     End Sub
 
     Private Sub Packet_MapNPCData(ByVal Data() As Byte)
@@ -1131,6 +1134,7 @@
 
         GettingMap = False
         CanMoveNow = True
+
     End Sub
 
     Private Sub Packet_GlobalMessage(ByVal Data() As Byte)
@@ -1811,7 +1815,7 @@
         message = Trim(Buffer.ReadString)
         Header = Trim(Buffer.ReadString)
 
-        AddText(Header & Name & ": " & message, 0)
+        AddText(Header & Name & ": " & message, SayColor)
 
         Buffer = Nothing
     End Sub

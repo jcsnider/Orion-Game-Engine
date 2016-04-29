@@ -9,7 +9,7 @@ Module ClientGameLogic
         Dim starttime As Long, Tick As Long
         Dim tmpfps As Long, WalkTimer As Long, FrameTime As Long
         Dim destrect As Rectangle, tmr10000 As Long
-        Dim tmr1000 As Long, tmr100 As Long, tmr500 As Long
+        Dim tmr100 As Long, tmr500 As Long
 
         starttime = GetTickCount()
         frmMenu.lblNextChar.Left = lblnextcharleft
@@ -62,10 +62,6 @@ Module ClientGameLogic
                             frmMainGame.pnlEventChat.Visible = False
                         End If
                     End If
-                End If
-
-                If tmr1000 < Tick Then
-                    tmr1000 = Tick + 1000
                 End If
 
                 If tmr10000 < Tick Then
@@ -185,6 +181,7 @@ Module ClientGameLogic
 
             Application.DoEvents()
             Threading.Thread.Sleep(1)
+
         Loop
     End Sub
 
@@ -297,6 +294,7 @@ Module ClientGameLogic
                     If Player(MyIndex).YOffset = 0 Then
                         If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TILE_TYPE_WARP Then
                             GettingMap = True
+                            Debug.Print("CheckMovement: " & GettingMap)
                         End If
                     End If
                 End If
@@ -315,6 +313,11 @@ Module ClientGameLogic
     Function CanMove() As Boolean
         Dim d As Long
         CanMove = True
+
+        If GettingMap = True Then
+            CanMove = False
+            Exit Function
+        End If
 
         ' Make sure they aren't trying to move when they are already moving
         If Player(MyIndex).Moving <> 0 Then
@@ -359,7 +362,7 @@ Module ClientGameLogic
         d = GetPlayerDir(MyIndex)
 
         If DirUp Then
-            Call SetPlayerDir(MyIndex, DIR_UP)
+            SetPlayerDir(MyIndex, DIR_UP)
 
             ' Check to see if they are trying to go out of bounds
             If GetPlayerY(MyIndex) > 0 Then
@@ -368,7 +371,7 @@ Module ClientGameLogic
 
                     ' Set the new direction if they weren't facing that direction
                     If d <> DIR_UP Then
-                        Call SendPlayerDir()
+                        SendPlayerDir()
                     End If
 
                     Exit Function
@@ -378,8 +381,8 @@ Module ClientGameLogic
 
                 ' Check if they can warp to a new map
                 If Map.Up > 0 Then
-                    Call MapEditorLeaveMap()
-                    Call SendPlayerRequestNewMap()
+                    MapEditorLeaveMap()
+                    SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
                 End If
@@ -390,7 +393,7 @@ Module ClientGameLogic
         End If
 
         If DirDown Then
-            Call SetPlayerDir(MyIndex, DIR_DOWN)
+            SetPlayerDir(MyIndex, DIR_DOWN)
 
             ' Check to see if they are trying to go out of bounds
             If GetPlayerY(MyIndex) < Map.MaxY Then
@@ -399,7 +402,7 @@ Module ClientGameLogic
 
                     ' Set the new direction if they weren't facing that direction
                     If d <> DIR_DOWN Then
-                        Call SendPlayerDir()
+                        SendPlayerDir()
                     End If
 
                     Exit Function
@@ -409,8 +412,8 @@ Module ClientGameLogic
 
                 ' Check if they can warp to a new map
                 If Map.Down > 0 Then
-                    Call MapEditorLeaveMap()
-                    Call SendPlayerRequestNewMap()
+                    MapEditorLeaveMap()
+                    SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
                 End If
@@ -421,7 +424,7 @@ Module ClientGameLogic
         End If
 
         If DirLeft Then
-            Call SetPlayerDir(MyIndex, DIR_LEFT)
+            SetPlayerDir(MyIndex, DIR_LEFT)
 
             ' Check to see if they are trying to go out of bounds
             If GetPlayerX(MyIndex) > 0 Then
@@ -430,7 +433,7 @@ Module ClientGameLogic
 
                     ' Set the new direction if they weren't facing that direction
                     If d <> DIR_LEFT Then
-                        Call SendPlayerDir()
+                        SendPlayerDir()
                     End If
 
                     Exit Function
@@ -440,8 +443,8 @@ Module ClientGameLogic
 
                 ' Check if they can warp to a new map
                 If Map.Left > 0 Then
-                    Call MapEditorLeaveMap()
-                    Call SendPlayerRequestNewMap()
+                    MapEditorLeaveMap()
+                    SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
                 End If
@@ -452,7 +455,7 @@ Module ClientGameLogic
         End If
 
         If DirRight Then
-            Call SetPlayerDir(MyIndex, DIR_RIGHT)
+            SetPlayerDir(MyIndex, DIR_RIGHT)
 
             ' Check to see if they are trying to go out of bounds
             If GetPlayerX(MyIndex) < Map.MaxX Then
@@ -461,7 +464,7 @@ Module ClientGameLogic
 
                     ' Set the new direction if they weren't facing that direction
                     If d <> DIR_RIGHT Then
-                        Call SendPlayerDir()
+                        SendPlayerDir()
                     End If
 
                     Exit Function
@@ -471,8 +474,8 @@ Module ClientGameLogic
 
                 ' Check if they can warp to a new map
                 If Map.Right > 0 Then
-                    Call MapEditorLeaveMap()
-                    Call SendPlayerRequestNewMap()
+                    MapEditorLeaveMap()
+                    SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
                 End If
@@ -1038,16 +1041,16 @@ Module ClientGameLogic
         End If
 
         If UpdateQuestChat = True Then
-            frmMainGame.lblQuestNameVisual.Text = Trim$(Quest(QuestNum).Name)
-            frmMainGame.lblQuestSay.Text = QuestMessage
+            DialogMsg1 = "Quest: " & Trim$(Quest(QuestNum).Name)
+            DialogMsg2 = QuestMessage
 
-            frmMainGame.lblQuestAccept.Visible = False
+            DialogType = DIALOGUE_TYPE_QUEST
 
             If QuestNumForStart > 0 And QuestNumForStart <= MAX_QUESTS Then
-                frmMainGame.lblQuestAccept.Visible = True
-                frmMainGame.lblQuestAccept.Tag = QuestNumForStart
+                QuestAcceptTag = QuestNumForStart
             End If
-            frmMainGame.pnlQuestSpeech.Visible = True
+
+            UpdateDialog = True
 
             UpdateQuestChat = False
         End If
@@ -1078,9 +1081,19 @@ Module ClientGameLogic
 
         If UpdateDialog = True Then
             If DialogType = DIALOGUE_TYPE_BUYHOME Or DialogType = DIALOGUE_TYPE_VISIT Then 'house offer & visit
-
+                DialogButton1Text = "Accept"
+                DialogButton2Text = "Decline"
                 DialogPanelVisible = True
             ElseIf DialogType = DIALOGUE_TYPE_PARTY Then
+                DialogButton1Text = "Accept"
+                DialogButton2Text = "Decline"
+                DialogPanelVisible = True
+            ElseIf DialogType = DIALOGUE_TYPE_QUEST Then
+                DialogButton1Text = "Accept"
+                DialogButton2Text = "Ok"
+                If QuestAcceptTag > 0 Then
+                    DialogButton2Text = "Decline"
+                End If
                 DialogPanelVisible = True
             End If
 
@@ -2055,7 +2068,7 @@ Continue1:
     End Sub
 
     Public Sub UpdateDrawMapName()
-        Dim g As Graphics = Graphics.FromImage(TempBitmap)
+        Dim g As Graphics = Graphics.FromImage(New Bitmap(1, 1))
         Dim width As Long
         width = g.MeasureString(Trim$(Map.Name), New Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
         DrawMapNameX = ((MAX_MAPX + 1) * PIC_X / 2) - width + 32

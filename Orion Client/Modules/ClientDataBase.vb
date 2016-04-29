@@ -364,6 +364,7 @@ Module ClientDataBase
         Dim Y As Long
         FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
 
+        'Debug.Print("Start Map Saving")
         f = FreeFile()
         FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
         FilePutObject(f, Map.Name)
@@ -393,7 +394,7 @@ Module ClientDataBase
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).tileset)
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).X)
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FilePutObject(f, Map.Tile(X, Y).Autotile)
+                    FilePutObject(f, Map.Tile(X, Y).Autotile(i))
                 Next
                 FilePutObject(f, Map.Tile(X, Y).Type)
             Next
@@ -403,8 +404,9 @@ Module ClientDataBase
             FilePutObject(f, Map.Npc(X))
         Next
 
-
         FileClose(f)
+
+        'Debug.Print("Ended Map Saving")
     End Sub
 
     Public Sub LoadMap(ByVal MapNum As Long)
@@ -447,7 +449,7 @@ Module ClientDataBase
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).tileset)
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).X)
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FileGetObject(f, Map.Tile(X, Y).Autotile)
+                    FileGetObject(f, Map.Tile(X, Y).Autotile(i))
                 Next
                 FileGetObject(f, Map.Tile(X, Y).Type)
             Next

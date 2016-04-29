@@ -75,9 +75,13 @@ Public Module ClientHousing
         DialogType = DIALOGUE_TYPE_BUYHOME
         If HouseConfig(i).MaxFurniture > 0 Then
             ' ask to buy house
-            DialogMsg = "Would you like to buy the house: " & Trim$(HouseConfig(i).ConfigName) & vbNewLine & "Cost: " & HouseConfig(i).Price & vbNewLine & "Furniture Limit: " & HouseConfig(i).MaxFurniture
+            DialogMsg1 = "Would you like to buy the house: " & Trim$(HouseConfig(i).ConfigName)
+            DialogMsg2 = "Cost: " & HouseConfig(i).Price
+            DialogMsg3 = "Furniture Limit: " & HouseConfig(i).MaxFurniture
         Else
-            DialogMsg = "Would you like to buy the house: " & Trim$(HouseConfig(i).ConfigName) & vbNewLine & "Cost: " & HouseConfig(i).Price & vbNewLine & "Furniture Limit: None."
+            DialogMsg1 = "Would you like to buy the house: " & Trim$(HouseConfig(i).ConfigName)
+            DialogMsg2 = "Cost: " & HouseConfig(i).Price
+            DialogMsg3 = "Furniture Limit: None."
         End If
 
         UpdateDialog = True
@@ -99,7 +103,9 @@ Public Module ClientHousing
 
         DialogType = DIALOGUE_TYPE_VISIT
 
-        DialogMsg = "You have been invited to visit " & Trim$(GetPlayerName(i)) & "'s house."
+        DialogMsg1 = "You have been invited to visit " & Trim$(GetPlayerName(i)) & "'s house."
+        DialogMsg2 = vbNullString
+        DialogMsg3 = vbNullString
 
         buffer = Nothing
 

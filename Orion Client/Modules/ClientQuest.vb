@@ -31,6 +31,7 @@
     Public QuestNum As Long
     Public QuestNumForStart As Long
     Public QuestMessage As String
+    Public QuestAcceptTag As Long
 
     'Types
     Public Quest(0 To MAX_QUESTS) As QuestRec
@@ -752,13 +753,13 @@
     End Sub
 
     Public Sub RunQuestDialogueExtraLabel()
-        If frmMainGame.lblQuestExtra.Text = "Cancel Quest" Then
-            PlayerHandleQuest(GetQuestNum(Trim$(frmMainGame.lblQuestNameVisual.Text)), 2)
-            frmMainGame.lblQuestExtra.Text = "Extra"
-            frmMainGame.lblQuestExtra.Visible = False
-            frmMainGame.pnlQuestSpeech.Visible = False
-            RefreshQuestLog()
-        End If
+        'If frmMainGame.lblQuestExtra.Text = "Cancel Quest" Then
+        '    PlayerHandleQuest(GetQuestNum(Trim$(frmMainGame.lblQuestNameVisual.Text)), 2)
+        '    frmMainGame.lblQuestExtra.Text = "Extra"
+        '    frmMainGame.lblQuestExtra.Visible = False
+        '    frmMainGame.pnlQuestSpeech.Visible = False
+        '    RefreshQuestLog()
+        'End If
     End Sub
 
     Public Sub ResetQuestLog()

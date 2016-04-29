@@ -173,8 +173,10 @@ Module ClientGeneral
         InitMessages()
 
         ' check if we have main-menu music
-        If Len(Trim$(Options.MenuMusic)) > 0 Then PlayMusic(Trim$(Options.MenuMusic))
-        MusicPlayer.Volume() = 100
+        If Options.Music = 1 Then
+            If Len(Trim$(Options.MenuMusic)) > 0 Then PlayMusic(Trim$(Options.MenuMusic))
+            MusicPlayer.Volume() = 100
+        End If
 
         ' Reset values
         Ping = -1
@@ -367,9 +369,6 @@ Module ClientGeneral
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)))
 
         'Then we can recalculate the positions
-
-        frmMainGame.pnlQuestSpeech.Left = ChatWindowX
-        frmMainGame.pnlQuestSpeech.Top = ChatWindowY
 
         'chatwindow
         ChatWindowX = 1

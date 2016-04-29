@@ -1156,7 +1156,6 @@ Module ServerTCP
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
         Next
 
-
         'send Resource cache
         If ResourceCache(GetPlayerMap(Index)).Resource_Count > 0 Then
             Buffer.WriteLong(1)
@@ -1176,7 +1175,7 @@ Module ServerTCP
         Buffer.WriteLong(ServerPackets.SMapData)
         Buffer.WriteBytes(data)
         SendDataTo(Index, Buffer.ToArray)
-
+        'Debug.Print("Server send mapdata")
         Buffer = Nothing
     End Sub
 
@@ -1318,6 +1317,8 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerDir(Index))
         Buffer.WriteLong(movement)
         SendDataToMapBut(Index, GetPlayerMap(Index), Buffer.ToArray())
+
+        'Debug.Print("Server-SendPlayerMove")
 
         Buffer = Nothing
     End Sub

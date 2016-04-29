@@ -107,10 +107,10 @@
         Dim i As Long
         Dim Buffer As ByteBuffer
 
+        'Debug.Print("Server-PlayerWarp")
+
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or MapNum <= 0 Or MapNum > MAX_MAPS Then
-            Exit Sub
-        End If
+        If IsPlaying(Index) = False Or MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Sub
 
         ' Check if you are out of bounds
         If x > Map(MapNum).MaxX Then x = Map(MapNum).MaxX
@@ -182,13 +182,14 @@
 
         CheckTasks(Index, QUEST_TYPE_GOREACH, MapNum)
 
-
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SCheckForMap)
         Buffer.WriteLong(MapNum)
         Buffer.WriteLong(Map(MapNum).Revision)
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
+
+        'Debug.Print("Server-CheckForMap")
 
     End Sub
 
@@ -387,19 +388,22 @@
 
         Call ClearPlayer(Index)
     End Sub
-    Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long)
+
+    Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, expectingwarp As Boolean)
         Dim MapNum As Long, Buffer As ByteBuffer
         Dim x As Long, y As Long, begineventprocessing As Boolean
-        Dim Moved As Byte
+        Dim Moved As Byte, DidWarp As Boolean
         Dim NewMapX As Byte, NewMapY As Byte
         Dim VitalType As Long, Colour As Long, amount As Long
+
+        'Debug.Print("Server-PlayerMove")
 
         ' Check for subscript out of range
         If IsPlaying(Index) = False Or Dir < DIR_UP Or Dir > DIR_RIGHT Or movement < 1 Or movement > 2 Then
             Exit Sub
         End If
 
-        Call SetPlayerDir(Index, Dir)
+        SetPlayerDir(Index, Dir)
         Moved = NO
         MapNum = GetPlayerMap(Index)
 
@@ -416,7 +420,7 @@
 
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) - 1) = YES) Then
-                                    Call SetPlayerY(Index, GetPlayerY(Index) - 1)
+                                    SetPlayerY(Index, GetPlayerY(Index) - 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
                                 End If
@@ -429,7 +433,8 @@
                     ' Check to see if we can move them to the another map
                     If Map(GetPlayerMap(Index)).Up > 0 Then
                         NewMapY = Map(Map(GetPlayerMap(Index)).Up).MaxY
-                        Call PlayerWarp(Index, Map(GetPlayerMap(Index)).Up, GetPlayerX(Index), NewMapY)
+                        PlayerWarp(Index, Map(GetPlayerMap(Index)).Up, GetPlayerX(Index), NewMapY)
+                        DidWarp = True
                         Moved = YES
                     End If
                 End If
@@ -458,7 +463,8 @@
 
                     ' Check to see if we can move them to the another map
                     If Map(GetPlayerMap(Index)).Down > 0 Then
-                        Call PlayerWarp(Index, Map(GetPlayerMap(Index)).Down, GetPlayerX(Index), 0)
+                        PlayerWarp(Index, Map(GetPlayerMap(Index)).Down, GetPlayerX(Index), 0)
+                        DidWarp = True
                         Moved = YES
                     End If
                 End If
@@ -475,7 +481,7 @@
 
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) - 1, GetPlayerY(Index)) = YES) Then
-                                    Call SetPlayerX(Index, GetPlayerX(Index) - 1)
+                                    SetPlayerX(Index, GetPlayerX(Index) - 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
                                 End If
@@ -488,7 +494,8 @@
                     ' Check to see if we can move them to the another map
                     If Map(GetPlayerMap(Index)).Left > 0 Then
                         NewMapX = Map(Map(GetPlayerMap(Index)).Left).MaxX
-                        Call PlayerWarp(Index, Map(GetPlayerMap(Index)).Left, NewMapX, GetPlayerY(Index))
+                        PlayerWarp(Index, Map(GetPlayerMap(Index)).Left, NewMapX, GetPlayerY(Index))
+                        DidWarp = True
                         Moved = YES
                     End If
                 End If
@@ -505,7 +512,7 @@
 
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) + 1, GetPlayerY(Index)) = YES) Then
-                                    Call SetPlayerX(Index, GetPlayerX(Index) + 1)
+                                    SetPlayerX(Index, GetPlayerX(Index) + 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
                                 End If
@@ -518,7 +525,8 @@
 
                     ' Check to see if we can move them to the another map
                     If Map(GetPlayerMap(Index)).Right > 0 Then
-                        Call PlayerWarp(Index, Map(GetPlayerMap(Index)).Right, 0, GetPlayerY(Index))
+                        PlayerWarp(Index, Map(GetPlayerMap(Index)).Right, 0, GetPlayerY(Index))
+                        DidWarp = True
                         Moved = YES
                     End If
                 End If
@@ -531,7 +539,8 @@
                 x = .Data2
                 y = .Data3
                 'TempPlayer(Index).CanPlayerMove = 1
-                Call PlayerWarp(Index, MapNum, x, y)
+                PlayerWarp(Index, MapNum, x, y)
+                DidWarp = True
                 Moved = YES
             End If
 
@@ -543,7 +552,8 @@
                 ' send the animation to the map
                 SendDoorAnimation(GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
                 'TempPlayer(Index).CanPlayerMove = 1
-                Call PlayerWarp(Index, MapNum, x, y)
+                PlayerWarp(Index, MapNum, x, y)
+                DidWarp = True
                 Moved = YES
             End If
 
@@ -556,7 +566,7 @@
                     TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                     TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                     SendMapKey(Index, x, y, 1)
-                    Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                    MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
                 End If
             End If
 
@@ -620,7 +630,8 @@
                     Player(Index).LastY = GetPlayerY(Index)
                     Player(Index).InHouse = Index
                     SendDataTo(Index, PlayerData(Index))
-                    Call PlayerWarp(Index, HouseConfig(Player(Index).House.HouseIndex).BaseMap, HouseConfig(Player(Index).House.HouseIndex).X, HouseConfig(Player(Index).House.HouseIndex).Y, True)
+                    PlayerWarp(Index, HouseConfig(Player(Index).House.HouseIndex).BaseMap, HouseConfig(Player(Index).House.HouseIndex).X, HouseConfig(Player(Index).House.HouseIndex).Y, True)
+                    DidWarp = True
                     Exit Sub
                 Else
                     'Send the buy sequence and see what happens. (To be recreated in events.)
@@ -639,15 +650,16 @@
             If Player(Index).InHouse > 0 Then
                 If Player(Index).x = HouseConfig(Player(Player(Index).InHouse).House.HouseIndex).X Then
                     If Player(Index).y = HouseConfig(Player(Player(Index).InHouse).House.HouseIndex).Y Then
-                        Call PlayerWarp(Index, Player(Index).LastMap, Player(Index).LastX, Player(Index).LastY)
+                        PlayerWarp(Index, Player(Index).LastMap, Player(Index).LastX, Player(Index).LastY)
+                        DidWarp = True
                     End If
                 End If
             End If
         End If
 
         ' They tried to hack
-        If Moved = NO Then
-            Call PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+        If Moved = NO Or (expectingwarp And Not DidWarp) Then
+            PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
         End If
 
         x = GetPlayerX(Index)

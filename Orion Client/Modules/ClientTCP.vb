@@ -521,12 +521,15 @@ Module ClientTCP
     End Sub
 
     Public Sub SendPlayerRequestNewMap()
+        If GettingMap Then Exit Sub
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteLong(ClientPackets.CRequestNewMap)
         Buffer.WriteLong(GetPlayerDir(MyIndex))
         SendData(Buffer.ToArray())
         Buffer = Nothing
+
+        'Debug.Print("Client-PlayerRequestNewMap")
     End Sub
 
     Public Sub SendRequestEditResource()

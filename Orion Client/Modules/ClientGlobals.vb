@@ -91,8 +91,6 @@ Module ClientGlobals
     ' Debug mode
     Public DEBUG_MODE As Boolean
 
-
-
     ' Controls main gameloop
     Public InGame As Boolean
     Public isLogging As Boolean
@@ -218,7 +216,9 @@ Module ClientGlobals
 
     'dialog
     Public DialogType As Byte
-    Public DialogMsg As String
+    Public DialogMsg1 As String
+    Public DialogMsg2 As String
+    Public DialogMsg3 As String
     Public UpdateDialog As Boolean
     Public DialogButton1Text As String
     Public DialogButton2Text As String
