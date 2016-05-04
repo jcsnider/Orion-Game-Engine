@@ -72,8 +72,6 @@ Module ClientGraphics
     Public ButtonGFX As Texture
     Public ButtonGFXInfo As GraphicInfo
 
-    'Public TextBB As Bitmap
-
     Public HUDPanelGFX As Texture
     Public HUDPanelGFXInfo As GraphicInfo
 
@@ -117,7 +115,7 @@ Module ClientGraphics
     Public NumSpellIcons As Long
     Public NumFaces As Long
 
-    Public TempBitmap As Bitmap
+    'Public TempBitmap As Bitmap
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -171,7 +169,7 @@ Module ClientGraphics
 
         SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
 
-        TempBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
+        'TempBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
 
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
@@ -1892,7 +1890,7 @@ Module ClientGraphics
             TileSetImgsLoaded(tileset) = True
         End If
 
-        'Draw the tileset into memory.)
+        'Draw the tileset into memory.
         height = TileSetImgsGFX(tileset).Height
         width = TileSetImgsGFX(tileset).Width
         MapEditorBackBuffer = New Bitmap(width, height)
@@ -1940,7 +1938,7 @@ Module ClientGraphics
         ' Number of graphic files
         If Not MapEditorBackBuffer Is Nothing Then MapEditorBackBuffer.Dispose()
 
-        If Not TempBitmap Is Nothing Then TempBitmap.Dispose()
+        'If Not TempBitmap Is Nothing Then TempBitmap.Dispose()
 
         For i = 0 To NumAnimations
             If Not AnimationsGFX(i) Is Nothing Then AnimationsGFX(i).Dispose()
@@ -3425,7 +3423,7 @@ NextLoop:
 
     Public Sub DrawGUI()
         'hide GUI when mapping...
-        If InMapEditor Then Exit Sub
+        If InMapEditor Or HideGui = True Then Exit Sub
 
         If HUDVisible = True Then
             DrawHUD()

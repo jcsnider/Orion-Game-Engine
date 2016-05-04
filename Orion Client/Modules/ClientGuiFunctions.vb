@@ -224,7 +224,7 @@ Public Module ClientGuiFunctions
                         spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
 
                         If spellnum <> 0 Then
-                            CastSpell(spellnum)
+                            PlayerCastSpell(spellnum)
                         End If
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click
@@ -466,7 +466,7 @@ Public Module ClientGuiFunctions
                 spellnum = IsPlayerSpell(SpellX, SpellY)
 
                 If spellnum <> 0 Then
-                    CastSpell(spellnum)
+                    PlayerCastSpell(spellnum)
                     Exit Function
                 End If
             End If

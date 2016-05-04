@@ -28,30 +28,6 @@ Public Class frmEditor_Map
         MapEditorTileScroll()
     End Sub
 
-    'Private Sub scrlTileSet_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs)
-    '    If scrlTileSet.Value > NumTileSets Then
-    '        scrlTileSet.Value = 1
-    '    End If
-
-    '    Map.tileset = scrlTileSet.Value
-    '    fraTileSet.Text = "Tileset: " & scrlTileSet.Value
-
-    '    EditorTileSelStart = New Point(0, 0)
-    '    EditorTileSelEnd = New Point(1, 1)
-
-    '    EditorMap_DrawTileset()
-
-    '    pnlBack.Refresh()
-
-    '    picBackSelect.Height = TileSetImgsGFX(scrlTileSet.Value).Height
-    '    picBackSelect.Width = TileSetImgsGFX(scrlTileSet.Value).Width
-
-
-    '    scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-    '    scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
-    'End Sub
-
-
     Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs)
         MapEditorSend()
         GettingMap = True
@@ -436,8 +412,8 @@ Public Class frmEditor_Map
         picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
 
 
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) \ 2
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) \ 2
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 
     Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click

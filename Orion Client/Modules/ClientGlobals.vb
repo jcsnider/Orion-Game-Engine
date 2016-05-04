@@ -22,8 +22,6 @@ Module ClientGlobals
     Public chatBubble(0 To MAX_BYTE) As ChatBubbleRec
     Public chatBubbleIndex As Long
 
-    Public UpdateMiniMap As Boolean
-
     ' trading
     Public TradeTimer As Long
     Public TradeRequest As Boolean
@@ -88,9 +86,6 @@ Module ClientGlobals
     ' Stops movement when updating a map
     Public CanMoveNow As Boolean
 
-    ' Debug mode
-    Public DEBUG_MODE As Boolean
-
     ' Controls main gameloop
     Public InGame As Boolean
     Public isLogging As Boolean
@@ -98,8 +93,6 @@ Module ClientGlobals
     Public PlayerData As Boolean
 
     ' Text variables
-    Public TexthDC As Long
-    Public GameFont As Long
 
     ' Draw map name location
     Public DrawMapNameX As Single
@@ -119,8 +112,8 @@ Module ClientGlobals
     Public SOffsetY As Integer
 
     ' Map animation #, used to keep track of what map animation is currently on
-    Public MapAnim As Byte
-    Public MapAnimTimer As Long
+    'Public MapAnim As Byte
+    'Public MapAnimTimer As Long
 
     ' Used to freeze controls when getting a new map
     Public GettingMap As Boolean
@@ -196,9 +189,6 @@ Module ClientGlobals
     Public ActionMsgIndex As Byte
     Public BloodIndex As Byte
     Public AnimationIndex As Byte
-
-    ' fps lock
-    Public FPS_Lock As Boolean
 
     ' Editor edited items array
     Public Item_Changed(0 To MAX_ITEMS) As Boolean

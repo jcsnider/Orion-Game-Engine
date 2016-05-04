@@ -375,7 +375,7 @@ Module ClientGeneral
         ChatWindowY = frmMainGame.Height - ChatWindowGFXInfo.height - 65
 
         MyChatX = 1
-        MyChatY = frmMainGame.Height - 55
+        MyChatY = frmMainGame.Height - 60
 
         'hotbar
         HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
@@ -396,7 +396,6 @@ Module ClientGeneral
         'spell window
         SpellWindowX = frmMainGame.Width - SpellPanelGFXInfo.width - 26
         SpellWindowY = frmMainGame.Height - SpellPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
-
 
     End Sub
 

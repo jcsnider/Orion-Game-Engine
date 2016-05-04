@@ -554,7 +554,7 @@ Module ServerTCP
         For i = 1 To MAX_NPCS
 
             If Len(Trim$(Npc(i).Name)) > 0 Then
-                Call SendUpdateNpcTo(Index, i)
+                SendUpdateNpcTo(Index, i)
             End If
 
         Next
@@ -565,10 +565,12 @@ Module ServerTCP
         Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SUpdateNpc)
+
         Buffer.WriteLong(NpcNum)
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
+
         For i = 1 To 5
             Buffer.WriteLong(Npc(NpcNum).DropChance(i))
             Buffer.WriteLong(Npc(NpcNum).DropItem(i))
@@ -597,10 +599,12 @@ Module ServerTCP
         Dim Buffer As ByteBuffer, i As Long
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SUpdateNpc)
+
         Buffer.WriteLong(NpcNum)
         Buffer.WriteLong(Npc(NpcNum).Animation)
         Buffer.WriteString(Npc(NpcNum).AttackSay)
         Buffer.WriteLong(Npc(NpcNum).Behaviour)
+
         For i = 1 To 5
             Buffer.WriteLong(Npc(NpcNum).DropChance(i))
             Buffer.WriteLong(Npc(NpcNum).DropItem(i))

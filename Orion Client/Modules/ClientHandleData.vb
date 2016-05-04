@@ -1345,6 +1345,9 @@
         Npc(i).Animation = Buffer.ReadLong()
         Npc(i).AttackSay = Trim(Buffer.ReadString())
         Npc(i).Behaviour = Buffer.ReadLong()
+        ReDim Npc(i).DropChance(5)
+        ReDim Npc(i).DropItem(5)
+        ReDim Npc(i).DropItemValue(5)
         For x = 1 To 5
             Npc(i).DropChance(x) = Buffer.ReadLong()
             Npc(i).DropItem(x) = Buffer.ReadLong()
@@ -1367,6 +1370,7 @@
 
         If Npc(i).AttackSay Is Nothing Then Npc(i).AttackSay = ""
         If Npc(i).Name Is Nothing Then Npc(i).Name = ""
+
         Buffer = Nothing
     End Sub
 

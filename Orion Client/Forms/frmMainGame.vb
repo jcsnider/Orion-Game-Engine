@@ -22,6 +22,7 @@ Public Class frmMainGame
 
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
+                If MyText = Nothing Then MyText = ""
                 If MyText.Length < 100 Then
                     MyText = MyText + KeyPressed(e)
                 End If
@@ -70,49 +71,49 @@ Public Class frmMainGame
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
 
@@ -124,7 +125,7 @@ Public Class frmMainGame
         End If
         'hide gui
         If e.KeyCode = Keys.F10 Then
-            HideGui = True
+            HideGui = Not HideGui
         End If
 
         'lets check for keys for inventory etc
@@ -259,49 +260,49 @@ Public Class frmMainGame
             spellnum = Player(MyIndex).Hotbar(1).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
             spellnum = Player(MyIndex).Hotbar(2).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
             spellnum = Player(MyIndex).Hotbar(3).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
             spellnum = Player(MyIndex).Hotbar(4).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
             spellnum = Player(MyIndex).Hotbar(5).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
             spellnum = Player(MyIndex).Hotbar(6).Slot
 
             If spellnum <> 0 Then
-                Call CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
             spellnum = Player(MyIndex).Hotbar(7).Slot
 
             If spellnum <> 0 Then
-                CastSpell(spellnum)
+                PlayerCastSpell(spellnum)
             End If
         End If
 
@@ -313,7 +314,7 @@ Public Class frmMainGame
         End If
         'hide gui
         If e.KeyCode = Keys.F10 Then
-            HideGui = True
+            HideGui = Not HideGui
         End If
 
         If e.KeyCode = Keys.Enter Then

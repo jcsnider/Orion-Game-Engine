@@ -180,7 +180,7 @@
     ' Default starting location [Server Only]
     Public Const START_MAP As Integer = 1
     Public Const START_X As Integer = 13
-    Public Const START_Y As Integer = 6
+    Public Const START_Y As Integer = 7
 
     ' Scrolling action message constants
     Public Const ACTIONMSG_STATIC As Long = 0

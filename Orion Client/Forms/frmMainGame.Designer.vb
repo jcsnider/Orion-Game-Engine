@@ -717,10 +717,10 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlTrade)
-        Me.Controls.Add(Me.pnlTmpInv)
-        Me.Controls.Add(Me.pnlTmpSkill)
-        Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.picscreen)
+        Me.Controls.Add(Me.pnlTempBank)
+        Me.Controls.Add(Me.pnlTmpSkill)
+        Me.Controls.Add(Me.pnlTmpInv)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
