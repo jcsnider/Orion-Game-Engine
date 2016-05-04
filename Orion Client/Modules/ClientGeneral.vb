@@ -174,8 +174,10 @@ Module ClientGeneral
 
         ' check if we have main-menu music
         If Options.Music = 1 Then
-            If Len(Trim$(Options.MenuMusic)) > 0 Then PlayMusic(Trim$(Options.MenuMusic))
-            MusicPlayer.Volume() = 100
+            If Len(Trim$(Options.MenuMusic)) > 0 Then
+                PlayMusic(Trim$(Options.MenuMusic))
+                MusicPlayer.Volume() = 100
+            End If
         End If
 
         ' Reset values
