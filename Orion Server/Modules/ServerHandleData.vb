@@ -7,8 +7,10 @@
         Packets = New Dictionary(Of Integer, Packet_)
 
         Packets.Add(ClientPackets.CNewAccount, AddressOf Packet_NewAccount)
+        'Packets.Add(ClientPackets.CDelAccount, AddressOf Packet_DeleteAccount)
         Packets.Add(ClientPackets.CLogin, AddressOf Packet_Login)
         Packets.Add(ClientPackets.CAddChar, AddressOf Packet_AddChar)
+        'Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
         Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
         Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
         Packets.Add(ClientPackets.CPlayerMsg, AddressOf Packet_PlayerMsg)
@@ -77,6 +79,7 @@
         Packets.Add(ClientPackets.CChangeBankSlots, AddressOf Packet_ChangeBankSlots)
         Packets.Add(ClientPackets.CDepositItem, AddressOf Packet_DepositItem)
         Packets.Add(ClientPackets.CWithdrawItem, AddressOf Packet_WithdrawItem)
+        Packets.Add(ClientPackets.CCloseBank, AddressOf Packet_CloseBank)
         Packets.Add(ClientPackets.CAdminWarp, AddressOf Packet_AdminWarp)
         Packets.Add(ClientPackets.CTradeRequest, AddressOf Packet_TradeRequest)
         Packets.Add(ClientPackets.CAcceptTrade, AddressOf Packet_AcceptTrade)

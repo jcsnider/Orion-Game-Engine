@@ -379,8 +379,8 @@ Public Module ClientGuiFunctions
 
         If pnlBankVisible = True Then
             If AboveBankpanel(X, Y) Then
-                If X > BankWindowX + 140 And X < BankWindowX + getTextWidth("Close Bank", 15) Then
-                    If Y > BankWindowY + 20 And Y < BankWindowY + BankPanelGFXInfo.height - 20 Then
+                If X > BankWindowX + 140 And X < BankWindowX + 140 + getTextWidth("Close Bank", 15) Then
+                    If Y > BankWindowY + BankPanelGFXInfo.height - 15 And Y < BankWindowY + BankPanelGFXInfo.height Then
                         CloseBank()
                     End If
                 End If

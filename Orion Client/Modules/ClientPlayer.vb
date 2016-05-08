@@ -95,7 +95,6 @@
                     If Player(MyIndex).YOffset = 0 Then
                         If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TILE_TYPE_WARP Then
                             GettingMap = True
-                            Debug.Print("CheckMovement: " & GettingMap)
                         End If
                     End If
                 End If
@@ -155,7 +154,7 @@
         End If
 
         ' not in bank
-        If InBank Then
+        If InBank > 0 Then
             CanMove = False
             Exit Function
         End If
