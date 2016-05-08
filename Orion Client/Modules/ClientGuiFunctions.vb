@@ -744,6 +744,20 @@ Public Module ClientGuiFunctions
                 End If
             End If
         End If
+
+        If HUDVisible = True Then
+            If AboveChatScrollUp(X, Y) Then
+                If ScrollMod + FirstLineIndex < MaxChatDisplayLines Then
+                    ScrollMod = ScrollMod + 1
+                End If
+            End If
+            If AboveChatScrollDown(X, Y) Then
+                If ScrollMod - 1 >= 0 Then
+                    ScrollMod = ScrollMod - 1
+                End If
+            End If
+        End If
+
     End Function
 
 #Region "Support Functions"
@@ -950,6 +964,26 @@ Public Module ClientGuiFunctions
         If X > ShopWindowX And X < ShopWindowX + ShopPanelGFXInfo.width Then
             If Y > ShopWindowY And Y < ShopWindowY + ShopPanelGFXInfo.height Then
                 AboveShoppanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveChatScrollUp(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveChatScrollUp = False
+
+        If X > ChatWindowX + ChatWindowGFXInfo.width - 24 And X < ChatWindowX + ChatWindowGFXInfo.width Then
+            If Y > ChatWindowY And Y < ChatWindowY + 24 Then 'ChatWindowGFXInfo.height Then
+                AboveChatScrollUp = True
+            End If
+        End If
+    End Function
+
+    Function AboveChatScrollDown(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveChatScrollDown = False
+
+        If X > ChatWindowX + ChatWindowGFXInfo.width - 24 And X < ChatWindowX + ChatWindowGFXInfo.width Then
+            If Y > ChatWindowY + ChatWindowGFXInfo.height - 24 And Y < ChatWindowY + ChatWindowGFXInfo.height Then
+                AboveChatScrollDown = True
             End If
         End If
     End Function

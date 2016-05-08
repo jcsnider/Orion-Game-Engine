@@ -447,28 +447,24 @@ Module ClientGraphics
         Dim strLen As Integer
 
         'first draw back image
-        RenderTexture(ChatWindowGFX, GameWindow, ChatWindowX, ChatWindowY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
+        RenderTexture(ChatWindowGFX, GameWindow, ChatWindowX, ChatWindowY - 2, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
 
         y = 5
         x = 5
 
-        Dim maxLines As Long = 8
+        FirstLineIndex = (Chat.Count - MaxChatDisplayLines) - ScrollMod 'First element is the 5th from the last in the list
+        If FirstLineIndex < 0 Then FirstLineIndex = 0 'if the list has less than 5 elements, the first is the 0th index or first element
 
-        Dim first As Long = Chat.Count - maxLines 'First element is the 5th from the last in the list
-        If first < 0 Then first = 0 'if the list has less than 5 elements, the first is the 0th index or first element
-
-        Dim last As Long = first + maxLines
-        If (last >= Chat.Count) Then last = Chat.Count - 1  'Based off of index 0, so the last element should be Chat.Count -1
-
-
+        LastLineIndex = (FirstLineIndex + MaxChatDisplayLines) ' - ScrollMod
+        If (LastLineIndex >= Chat.Count) Then LastLineIndex = Chat.Count - 1  'Based off of index 0, so the last element should be Chat.Count -1
 
         'only loop tru last entries
-        For i = first To last
+        For i = FirstLineIndex To LastLineIndex
             text = Chat(i).Text
 
             If text <> "" Then ' or not
                 DrawText(ChatWindowX + x, ChatWindowY + y, text, GetSFMLColor(Chat(i).Color), SFML.Graphics.Color.Black, GameWindow)
-                y = y + 15
+                y = y + ChatLineSpacing + 1
             End If
 
         Next
@@ -477,17 +473,11 @@ Module ClientGraphics
         'first draw back image
         RenderTexture(MyChatWindowGFX, GameWindow, MyChatX, MyChatY - 5, 0, 0, MyChatWindowGFXInfo.width, MyChatWindowGFXInfo.height)
         If Len(MyText) > 0 Then
-
-
             strLen = MyText.Length - MyChatTextLimit
             If strLen < 0 Then strLen = 0
             Dim chatStr As String = MyText.PadRight(MyChatTextLimit).Substring(strLen, MyChatTextLimit)
             DrawText(MyChatX + 5, MyChatY - 3, chatStr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-
-            'DrawText(MyChatX + 5, MyChatY - 3, MyText, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-
         End If
-
 
     End Sub
 

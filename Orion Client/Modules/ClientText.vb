@@ -5,9 +5,12 @@ Imports SFML.Graphics
 Module ClientText
     Public Const MaxChatDisplayLines As Byte = 8
     Public Const ChatLineSpacing As Byte = 12 ' Should be same height as font
-    Public Const MyChatTextLimit As Integer = 70
+    Public Const MyChatTextLimit As Integer = 55
     Public Const MyAmountValueLimit As Integer = 3
-    Public Const AllChatLineWidth As Integer = 70
+    Public Const AllChatLineWidth As Integer = 55
+    Public FirstLineIndex As Long = 0
+    Public LastLineIndex As Long = 0
+    Public ScrollMod As Long = 0
 
     ' Game text buffer
     Public MyText As String = ""
@@ -111,7 +114,7 @@ Module ClientText
         End If
 
         ' Draw name
-        Call DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
+        DrawText(TextX, TextY, Trim$(Npc(npcNum).Name), color, backcolor, GameWindow)
     End Sub
 
     Public Sub DrawEventName(ByVal Index As Long)
@@ -146,7 +149,7 @@ Module ClientText
         End If
 
         ' Draw name
-        Call DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
 
         For i = 1 To MAX_QUESTS
             'check if the npc is the starter to any quest: [!] symbol
