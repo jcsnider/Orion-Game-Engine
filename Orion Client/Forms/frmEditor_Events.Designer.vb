@@ -84,8 +84,8 @@ Partial Class frmEditor_Events
         Dim ListViewGroup17 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup18 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup19 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup20 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup21 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup20 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup21 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewItem44 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
         Dim ListViewItem45 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
         Dim ListViewItem46 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
@@ -128,6 +128,8 @@ Partial Class frmEditor_Events
         Dim ListViewItem83 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
         Dim ListViewItem84 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
         Dim ListViewItem85 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
+        Dim ListViewItem86 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Bank")
+        Dim ListViewItem87 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Shop")
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -4188,10 +4190,10 @@ Partial Class frmEditor_Events
         ListViewGroup18.Name = "lstVgSound"
         ListViewGroup19.Header = "Etc..."
         ListViewGroup19.Name = "lstVgEtc"
-        ListViewGroup20.Header = "Cut-scene Options"
-        ListViewGroup20.Name = "lstVgCutScene"
-        ListViewGroup21.Header = "Shop and Bank"
-        ListViewGroup21.Name = "lstVgShopBank"
+        ListViewGroup20.Header = "Shop and Bank"
+        ListViewGroup20.Name = "lstVgShopBank"
+        ListViewGroup21.Header = "Cut-scene Options"
+        ListViewGroup21.Name = "lstVgCutScene"
         Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup10, ListViewGroup11, ListViewGroup12, ListViewGroup13, ListViewGroup14, ListViewGroup15, ListViewGroup16, ListViewGroup17, ListViewGroup18, ListViewGroup19, ListViewGroup20, ListViewGroup21})
         Me.lstvCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         ListViewItem44.Group = ListViewGroup10
@@ -4238,7 +4240,9 @@ Partial Class frmEditor_Events
         ListViewItem83.Group = ListViewGroup19
         ListViewItem84.Group = ListViewGroup19
         ListViewItem85.Group = ListViewGroup19
-        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem44, ListViewItem45, ListViewItem46, ListViewItem47, ListViewItem48, ListViewItem49, ListViewItem50, ListViewItem51, ListViewItem52, ListViewItem53, ListViewItem54, ListViewItem55, ListViewItem56, ListViewItem57, ListViewItem58, ListViewItem59, ListViewItem60, ListViewItem61, ListViewItem62, ListViewItem63, ListViewItem64, ListViewItem65, ListViewItem66, ListViewItem67, ListViewItem68, ListViewItem69, ListViewItem70, ListViewItem71, ListViewItem72, ListViewItem73, ListViewItem74, ListViewItem75, ListViewItem76, ListViewItem77, ListViewItem78, ListViewItem79, ListViewItem80, ListViewItem81, ListViewItem82, ListViewItem83, ListViewItem84, ListViewItem85})
+        ListViewItem86.Group = ListViewGroup20
+        ListViewItem87.Group = ListViewGroup20
+        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem44, ListViewItem45, ListViewItem46, ListViewItem47, ListViewItem48, ListViewItem49, ListViewItem50, ListViewItem51, ListViewItem52, ListViewItem53, ListViewItem54, ListViewItem55, ListViewItem56, ListViewItem57, ListViewItem58, ListViewItem59, ListViewItem60, ListViewItem61, ListViewItem62, ListViewItem63, ListViewItem64, ListViewItem65, ListViewItem66, ListViewItem67, ListViewItem68, ListViewItem69, ListViewItem70, ListViewItem71, ListViewItem72, ListViewItem73, ListViewItem74, ListViewItem75, ListViewItem76, ListViewItem77, ListViewItem78, ListViewItem79, ListViewItem80, ListViewItem81, ListViewItem82, ListViewItem83, ListViewItem84, ListViewItem85, ListViewItem86, ListViewItem87})
         Me.lstvCommands.LabelWrap = False
         Me.lstvCommands.Location = New System.Drawing.Point(0, 0)
         Me.lstvCommands.MultiSelect = False

@@ -13,8 +13,8 @@
         'Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
         Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
         Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
-        Packets.Add(ClientPackets.CPlayerMsg, AddressOf Packet_PlayerMsg)
         Packets.Add(ClientPackets.CBroadcastMsg, AddressOf Packet_BroadCastMsg)
+        Packets.Add(ClientPackets.CPlayerMsg, AddressOf Packet_PlayerMsg)
         Packets.Add(ClientPackets.CPlayerMove, AddressOf Packet_PlayerMove)
         Packets.Add(ClientPackets.CPlayerDir, AddressOf Packet_PlayerDirection)
         Packets.Add(ClientPackets.CUseItem, AddressOf Packet_UseItem)
@@ -2685,7 +2685,7 @@
         GiveInvItem(index, 1, price)
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(index, "Trade successful.")
+        PlayerMsg(index, "Sold the " & Trim(Item(GetPlayerInvItemNum(index, invSlot)).Name) & " !")
         ResetShopAction(index)
 
         buffer = Nothing

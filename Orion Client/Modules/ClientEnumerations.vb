@@ -141,7 +141,6 @@
         CPlayerDir
         CUseItem
         CAttack
-        CUseStatPoint
         CPlayerInfoRequest
         CWarpMeTo
         CWarpToMe

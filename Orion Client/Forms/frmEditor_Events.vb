@@ -204,8 +204,6 @@ Public Class frmEditor_Events
 
         If lstvCommands.SelectedItems.Count = 0 Then Exit Sub
 
-        'MsgBox(lstvCommands.SelectedItems(0).Index + 1)
-
         fraDialogue.BringToFront()
 
         Select Case lstvCommands.SelectedItems(0).Index + 1
@@ -577,25 +575,43 @@ Public Class frmEditor_Events
                 fraDialogue.Visible = True
                 fraCustomScript.Visible = True
                 fraCommands.Visible = False
+            'Shop, bank etc
+
+            'Open bank
+            Case 43
+                AddCommand(EventType.evOpenBank)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
+            'Open shop
+            Case 44
+                fraDialogue.Visible = True
+                fraOpenShop.Visible = True
+                cmbOpenShop.SelectedIndex = 0
+                fraCommands.Visible = False
+            'Open Mail
+            Case 45
+                AddCommand(EventType.evOpenMail)
+                fraCommands.Visible = False
+                fraDialogue.Visible = False
         'cutscene options
 
             'Fade in
-            Case 43
+            Case 46
                 AddCommand(EventType.evFadeIn)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Fade out
-            Case 44
+            Case 47
                 AddCommand(EventType.evFadeOut)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Flash white
-            Case 45
+            Case 48
                 AddCommand(EventType.evFlashWhite)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Show pic
-            Case 46
+            Case 49
                 cmbPicIndex.SelectedIndex = 0
                 scrlShowPicture.Value = 1
                 optPic1.Checked = 1
@@ -605,29 +621,12 @@ Public Class frmEditor_Events
                 fraShowPic.Visible = True
                 fraCommands.Visible = False
             'Hide pic
-            Case 47
+            Case 50
                 cmbHidePic.SelectedIndex = 0
                 fraDialogue.Visible = True
                 fraHidePic.Visible = True
                 fraCommands.Visible = False
-        'Shop, bank etc
 
-            'Open bank
-            Case 48
-                AddCommand(EventType.evOpenBank)
-                fraCommands.Visible = False
-                fraDialogue.Visible = False
-            'Open shop
-            Case 49
-                fraDialogue.Visible = True
-                fraOpenShop.Visible = True
-                cmbOpenShop.SelectedIndex = 0
-                fraCommands.Visible = False
-            'Open Mail
-            Case 50
-                AddCommand(EventType.evOpenMail)
-                fraCommands.Visible = False
-                fraDialogue.Visible = False
         End Select
 
     End Sub

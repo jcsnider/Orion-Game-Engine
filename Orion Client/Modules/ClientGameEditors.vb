@@ -997,10 +997,12 @@ Module ClientGameEditors
         Else
             frmEditor_Shop.scrlBuy.Value = 100
         End If
+        frmEditor_Shop.lblBuy.Text = "Buy Rate: " & frmEditor_Shop.scrlBuy.Value & "%"
 
         frmEditor_Shop.scrlFace.Value = Shop(EditorIndex).Face
+        frmEditor_Shop.lblFace.Text = "Face: " & Shop(EditorIndex).Face
         If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT) Then
-            frmEditor_Shop.picFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
+            frmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
         End If
 
         frmEditor_Shop.cmbItem.Items.Clear()

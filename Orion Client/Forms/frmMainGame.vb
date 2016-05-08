@@ -194,7 +194,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        Me.Focus()
+        'Me.Focus()
 
     End Sub
 
