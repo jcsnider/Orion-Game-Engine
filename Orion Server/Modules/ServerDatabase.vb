@@ -241,6 +241,8 @@ Module ServerDatabase
         FilePutObject(F, Map(MapNum).BootY)
         FilePutObject(F, Map(MapNum).MaxX)
         FilePutObject(F, Map(MapNum).MaxY)
+        FilePutObject(F, Map(MapNum).WeatherType)
+        FilePutObject(F, Map(MapNum).WeatherIndex)
 
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
@@ -422,6 +424,8 @@ Module ServerDatabase
         FileGetObject(F, Map(MapNum).BootY)
         FileGetObject(F, Map(MapNum).MaxX)
         FileGetObject(F, Map(MapNum).MaxY)
+        FileGetObject(F, Map(MapNum).WeatherType)
+        FileGetObject(F, Map(MapNum).WeatherIndex)
 
         ' have to set the tile()
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)

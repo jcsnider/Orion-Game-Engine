@@ -810,7 +810,7 @@ Partial Class frmEditor_Events
         'cmbGraphic
         '
         Me.cmbGraphic.FormattingEnabled = True
-        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character", "Tileset"})
+        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character"})
         Me.cmbGraphic.Location = New System.Drawing.Point(46, 13)
         Me.cmbGraphic.Name = "cmbGraphic"
         Me.cmbGraphic.Size = New System.Drawing.Size(121, 21)
@@ -1141,6 +1141,7 @@ Partial Class frmEditor_Events
         '
         'fraDialogue
         '
+        Me.fraDialogue.Controls.Add(Me.fraSetFog)
         Me.fraDialogue.Controls.Add(Me.fraSpawnNpc)
         Me.fraDialogue.Controls.Add(Me.fraShowChoices)
         Me.fraDialogue.Controls.Add(Me.fraAddText)
@@ -1154,7 +1155,6 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraPlayBGM)
         Me.fraDialogue.Controls.Add(Me.fraMapTint)
         Me.fraDialogue.Controls.Add(Me.fraSetWeather)
-        Me.fraDialogue.Controls.Add(Me.fraSetFog)
         Me.fraDialogue.Controls.Add(Me.fraEndQuest)
         Me.fraDialogue.Controls.Add(Me.fraCompleteTask)
         Me.fraDialogue.Controls.Add(Me.fraBeginQuest)
@@ -4772,11 +4772,11 @@ Partial Class frmEditor_Events
         Me.Controls.Add(Me.lblRandomLabel11)
         Me.Controls.Add(Me.fraDialogue)
         Me.Controls.Add(Me.btnLabeling)
-        Me.Controls.Add(Me.fraGraphic)
         Me.Controls.Add(Me.pnlVariableSwitches)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.pnlMoveRoute)
+        Me.Controls.Add(Me.fraGraphic)
         Me.Name = "frmEditor_Events"
         Me.Text = "Event Editor"
         Me.pnlVariableSwitches.ResumeLayout(False)

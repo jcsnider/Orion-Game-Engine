@@ -117,6 +117,11 @@ Partial Class frmEditor_Map
         Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.ComboBox23 = New System.Windows.Forms.ComboBox()
         Me.tpSettings = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.scrlFog = New System.Windows.Forms.HScrollBar()
+        Me.lblFogIndex = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cmbWeather = New System.Windows.Forms.ComboBox()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.fraMapSettings = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -170,6 +175,7 @@ Partial Class frmEditor_Map
         Me.tpNpcs.SuspendLayout()
         Me.fraNpcs.SuspendLayout()
         Me.tpSettings.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.fraMapSettings.SuspendLayout()
         Me.fraMapLinks.SuspendLayout()
         Me.fraBootSettings.SuspendLayout()
@@ -1105,6 +1111,7 @@ Partial Class frmEditor_Map
         '
         'tpSettings
         '
+        Me.tpSettings.Controls.Add(Me.GroupBox1)
         Me.tpSettings.Controls.Add(Me.btnSaveSettings)
         Me.tpSettings.Controls.Add(Me.fraMapSettings)
         Me.tpSettings.Controls.Add(Me.fraMapLinks)
@@ -1121,6 +1128,54 @@ Partial Class frmEditor_Map
         Me.tpSettings.Text = "Settings"
         Me.tpSettings.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.scrlFog)
+        Me.GroupBox1.Controls.Add(Me.lblFogIndex)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.cmbWeather)
+        Me.GroupBox1.Location = New System.Drawing.Point(244, 282)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(241, 141)
+        Me.GroupBox1.TabIndex = 17
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Map Weather"
+        '
+        'scrlFog
+        '
+        Me.scrlFog.LargeChange = 1
+        Me.scrlFog.Location = New System.Drawing.Point(90, 55)
+        Me.scrlFog.Name = "scrlFog"
+        Me.scrlFog.Size = New System.Drawing.Size(145, 17)
+        Me.scrlFog.TabIndex = 3
+        '
+        'lblFogIndex
+        '
+        Me.lblFogIndex.AutoSize = True
+        Me.lblFogIndex.Location = New System.Drawing.Point(6, 56)
+        Me.lblFogIndex.Name = "lblFogIndex"
+        Me.lblFogIndex.Size = New System.Drawing.Size(37, 13)
+        Me.lblFogIndex.TabIndex = 2
+        Me.lblFogIndex.Text = "Fog: 1"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(6, 25)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(78, 13)
+        Me.Label14.TabIndex = 1
+        Me.Label14.Text = "Weather Type:"
+        '
+        'cmbWeather
+        '
+        Me.cmbWeather.FormattingEnabled = True
+        Me.cmbWeather.Items.AddRange(New Object() {"None", "Fog"})
+        Me.cmbWeather.Location = New System.Drawing.Point(90, 22)
+        Me.cmbWeather.Name = "cmbWeather"
+        Me.cmbWeather.Size = New System.Drawing.Size(145, 21)
+        Me.cmbWeather.TabIndex = 0
+        '
         'btnSaveSettings
         '
         Me.btnSaveSettings.Location = New System.Drawing.Point(366, 435)
@@ -1136,7 +1191,7 @@ Partial Class frmEditor_Map
         Me.fraMapSettings.Controls.Add(Me.cmbMoral)
         Me.fraMapSettings.Location = New System.Drawing.Point(6, 32)
         Me.fraMapSettings.Name = "fraMapSettings"
-        Me.fraMapSettings.Size = New System.Drawing.Size(304, 39)
+        Me.fraMapSettings.Size = New System.Drawing.Size(232, 39)
         Me.fraMapSettings.TabIndex = 15
         Me.fraMapSettings.TabStop = False
         Me.fraMapSettings.Text = "Map Settings"
@@ -1144,7 +1199,7 @@ Partial Class frmEditor_Map
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(19, 15)
+        Me.Label8.Location = New System.Drawing.Point(3, 15)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(36, 13)
         Me.Label8.TabIndex = 38
@@ -1155,9 +1210,9 @@ Partial Class frmEditor_Map
         Me.cmbMoral.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoral.FormattingEnabled = True
         Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone"})
-        Me.cmbMoral.Location = New System.Drawing.Point(77, 12)
+        Me.cmbMoral.Location = New System.Drawing.Point(45, 12)
         Me.cmbMoral.Name = "cmbMoral"
-        Me.cmbMoral.Size = New System.Drawing.Size(221, 21)
+        Me.cmbMoral.Size = New System.Drawing.Size(181, 21)
         Me.cmbMoral.TabIndex = 37
         '
         'fraMapLinks
@@ -1332,9 +1387,9 @@ Partial Class frmEditor_Map
         '
         Me.GroupBox2.Controls.Add(Me.btnPreview)
         Me.GroupBox2.Controls.Add(Me.lstMusic)
-        Me.GroupBox2.Location = New System.Drawing.Point(333, 36)
+        Me.GroupBox2.Location = New System.Drawing.Point(244, 32)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(152, 244)
+        Me.GroupBox2.Size = New System.Drawing.Size(241, 244)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Music"
@@ -1343,7 +1398,7 @@ Partial Class frmEditor_Map
         '
         Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
         Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPreview.Location = New System.Drawing.Point(6, 210)
+        Me.btnPreview.Location = New System.Drawing.Point(49, 208)
         Me.btnPreview.Name = "btnPreview"
         Me.btnPreview.Size = New System.Drawing.Size(139, 29)
         Me.btnPreview.TabIndex = 4
@@ -1356,7 +1411,7 @@ Partial Class frmEditor_Map
         Me.lstMusic.Location = New System.Drawing.Point(6, 19)
         Me.lstMusic.Name = "lstMusic"
         Me.lstMusic.ScrollAlwaysVisible = True
-        Me.lstMusic.Size = New System.Drawing.Size(139, 186)
+        Me.lstMusic.Size = New System.Drawing.Size(229, 186)
         Me.lstMusic.TabIndex = 3
         '
         'txtName
@@ -1463,6 +1518,8 @@ Partial Class frmEditor_Map
         Me.fraNpcs.ResumeLayout(False)
         Me.tpSettings.ResumeLayout(False)
         Me.tpSettings.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.fraMapSettings.ResumeLayout(False)
         Me.fraMapSettings.PerformLayout()
         Me.fraMapLinks.ResumeLayout(False)
@@ -1605,4 +1662,9 @@ Partial Class frmEditor_Map
     Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents tsbMapGrid As Windows.Forms.ToolStripButton
     Friend WithEvents btnPreview As Windows.Forms.Button
+    Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
+    Friend WithEvents scrlFog As Windows.Forms.HScrollBar
+    Friend WithEvents lblFogIndex As Windows.Forms.Label
+    Friend WithEvents Label14 As Windows.Forms.Label
+    Friend WithEvents cmbWeather As Windows.Forms.ComboBox
 End Class

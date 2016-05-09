@@ -176,6 +176,9 @@
 
         Dim EventCount As Long
         Dim Events() As EventRec
+
+        Dim WeatherType As Byte
+        Dim WeatherIndex As Long
     End Structure
 
     Public Structure ClassRec

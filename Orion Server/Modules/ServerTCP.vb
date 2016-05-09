@@ -949,6 +949,7 @@ Module ServerTCP
         ' Send whos online
         SendWhosOnline(Index)
     End Sub
+
     Sub SendWhosOnline(ByVal Index As Long)
         Dim s As String
         Dim n As Long
@@ -1013,6 +1014,8 @@ Module ServerTCP
             Buffer.WriteLong(Map(MapNum).BootY)
             Buffer.WriteLong(Map(MapNum).MaxX)
             Buffer.WriteLong(Map(MapNum).MaxY)
+            Buffer.WriteLong(Map(MapNum).WeatherType)
+            Buffer.WriteLong(Map(MapNum).WeatherIndex)
 
             For i = 1 To MAX_MAP_NPCS
                 Buffer.WriteLong(Map(MapNum).Npc(i))

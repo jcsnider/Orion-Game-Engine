@@ -74,21 +74,21 @@
 
                 Select Case GetPlayerDir(MyIndex)
                     Case DIR_UP
-                        Call SendPlayerMove()
+                        SendPlayerMove()
                         Player(MyIndex).YOffset = PIC_Y
-                        Call SetPlayerY(MyIndex, GetPlayerY(MyIndex) - 1)
+                        SetPlayerY(MyIndex, GetPlayerY(MyIndex) - 1)
                     Case DIR_DOWN
-                        Call SendPlayerMove()
+                        SendPlayerMove()
                         Player(MyIndex).YOffset = PIC_Y * -1
                         Call SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
                     Case DIR_LEFT
-                        Call SendPlayerMove()
+                        SendPlayerMove()
                         Player(MyIndex).XOffset = PIC_X
-                        Call SetPlayerX(MyIndex, GetPlayerX(MyIndex) - 1)
+                        SetPlayerX(MyIndex, GetPlayerX(MyIndex) - 1)
                     Case DIR_RIGHT
-                        Call SendPlayerMove()
+                        SendPlayerMove()
                         Player(MyIndex).XOffset = PIC_X * -1
-                        Call SetPlayerX(MyIndex, GetPlayerX(MyIndex) + 1)
+                        SetPlayerX(MyIndex, GetPlayerX(MyIndex) + 1)
                 End Select
 
                 If Player(MyIndex).XOffset = 0 Then

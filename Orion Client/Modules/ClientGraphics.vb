@@ -103,6 +103,9 @@ Module ClientGraphics
     Public DescriptionGFX As Texture
     Public DescriptionGFXInfo As GraphicInfo
 
+    Public FogGFX() As Texture
+    Public FogGFXInfo() As GraphicInfo
+
     ' Number of graphic files
     Public MapEditorBackBuffer As Bitmap
 
@@ -114,8 +117,8 @@ Module ClientGraphics
     Public NumAnimations As Long
     Public NumSpellIcons As Long
     Public NumFaces As Long
+    Public NumFogs As Long
 
-    'Public TempBitmap As Bitmap
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -169,8 +172,6 @@ Module ClientGraphics
 
         SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
 
-        'TempBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
-
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
@@ -189,6 +190,9 @@ Module ClientGraphics
 
         ReDim AnimationsGFX(0 To NumAnimations)
         ReDim AnimationsGFXInfo(0 To NumAnimations)
+
+        ReDim FogGFX(0 To NumFogs)
+        ReDim FogGFXInfo(0 To NumFogs)
 
         ReDim SpellIconsGFX(0 To NumSpellIcons)
         ReDim SpellIconsGFXInfo(0 To NumSpellIcons)
@@ -580,6 +584,20 @@ Module ClientGraphics
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
+
+        ElseIf TexType = 8 Then 'fogs
+            If Index < 0 Or Index > NumItems Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            FogGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Fogs\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With FogGFXInfo(Index)
+                .width = FogGFX(Index).Size.X
+                .height = FogGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
         End If
 
     End Sub
@@ -597,15 +615,6 @@ Module ClientGraphics
         TmpImage.Position = New Vector2f(DestX, DestY)
         Target.Draw(TmpImage)
 
-    End Sub
-
-    Public Sub RenderTextureMini(ByVal Txture As Texture, ByVal Target As RenderTexture, ByVal DestX As Long, ByVal DestY As Long, ByVal SourceX As Long, ByVal SourceY As Long,
-           ByVal SourceWidth As Long, ByVal SourceHeight As Long)
-        Dim TmpImage As Sprite = New Sprite(Txture)
-        TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
-        TmpImage.Position = New Vector2f(DestX / 0.5, DestY / 0.5)
-        TmpImage.Scale = New SFML.Window.Vector2f(0.5, 0.5)
-        Target.Draw(TmpImage)
     End Sub
 
     Public Sub DrawDirections(ByVal X As Long, ByVal Y As Long)
@@ -1553,6 +1562,10 @@ Module ClientGraphics
             End If
         Next
 
+        If Map.WeatherType = MAP_WEATHER_FOG Then
+            DrawFog()
+        End If
+
         'action msg
         For I = 1 To MAX_BYTE
             DrawActionMsg(I)
@@ -1965,6 +1978,10 @@ Module ClientGraphics
 
         For i = 0 To NumFaces
             If Not FacesGFX(i) Is Nothing Then FacesGFX(i).Dispose()
+        Next
+
+        For i = 0 To NumFogs
+            If Not FogGFX(i) Is Nothing Then FogGFX(i).Dispose()
         Next
 
         For i = 0 To NumProjectiles
@@ -3128,6 +3145,11 @@ NextLoop:
                         LoadTexture(itempic, 4)
                     End If
 
+                    'seeying we still use it, lets update timer
+                    With ItemsGFXInfo(itempic)
+                        .TextureTimer = GetTickCount() + 100000
+                    End With
+
                     With rec
                         .Y = 0
                         .Height = 32
@@ -3254,6 +3276,43 @@ NextLoop:
         height = (rec.Bottom - rec.Top)
 
         RenderTexture(TargetGFX, GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+    End Sub
+
+    Public Sub DrawFog()
+        If InMapEditor Then Exit Sub
+        If Map.Moral = MAP_MORAL_INDOOR Or Map.WeatherType = MAP_WEATHER_NONE Then Exit Sub
+
+        Dim horz As Integer = 0
+        Dim vert As Integer = 0
+
+        For x = TileView.left To TileView.right + 1
+            For y = TileView.top To TileView.bottom + 1
+                If IsValidMapPoint(x, y) Then
+                    horz = -x
+                    vert = -y
+                End If
+            Next
+        Next
+
+        If FogGFXInfo(Map.WeatherIndex).IsLoaded = False Then
+            LoadTexture(Map.WeatherIndex, 8)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FogGFXInfo(Map.WeatherIndex)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        Dim tmpSprite As Sprite
+        tmpSprite = New Sprite(FogGFX(Map.WeatherIndex))
+        'tmpSprite.Color = New SFML.Graphics.Color(255, 255, 255, Map.WeatherIntensity)
+        tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
+
+        tmpSprite.Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50)
+        tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(Map.WeatherIndex).width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(Map.WeatherIndex).height)))
+
+        GameWindow.Draw(tmpSprite) '
+
     End Sub
 
     Public Sub DrawItemDesc()

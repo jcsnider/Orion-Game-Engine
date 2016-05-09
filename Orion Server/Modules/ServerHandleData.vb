@@ -1135,6 +1135,9 @@
         Map(MapNum).BootY = Buffer.ReadLong
         Map(MapNum).MaxX = Buffer.ReadLong
         Map(MapNum).MaxY = Buffer.ReadLong
+        Map(MapNum).WeatherType = Buffer.ReadLong
+        Map(MapNum).WeatherIndex = Buffer.ReadLong
+
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 
         For x = 1 To MAX_MAP_NPCS

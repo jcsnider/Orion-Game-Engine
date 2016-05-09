@@ -167,7 +167,7 @@ Public Class frmEditor_Events
             cmbEndQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
         cmbSpawnNPC.SelectedIndex = 0
-        'ScrlFogData0.Maximum = NumFogs
+        ScrlFogData0.Maximum = NumFogs
         cmbEventQuest.Items.Clear()
         cmbEventQuest.Items.Add("None")
         For i = 1 To MAX_QUESTS
@@ -853,12 +853,12 @@ Public Class frmEditor_Events
         If Me.cmbGraphic.SelectedIndex = 2 Then
             'Tileset... hard one....
             If ShiftDown Then
-                If GraphicSelX > -1 And GraphicSelY > -1 Then
-                    'If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
-                    '    GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
-                    '    GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
-                    'End If
-                End If
+                'If GraphicSelX > -1 And GraphicSelY > -1 Then
+                '    If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
+                '        GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
+                '        GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
+                '    End If
+                'End If
             Else
                 'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value) \ 32
                 'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value) \ 32
@@ -883,10 +883,6 @@ Public Class frmEditor_Events
             Next
         End If
         EditorEvent_DrawGraphic()
-    End Sub
-
-    Private Sub picGraphicSel_Click(sender As Object, e As EventArgs) Handles picGraphicSel.Click
-
     End Sub
 
     Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click

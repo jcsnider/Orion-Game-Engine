@@ -310,7 +310,7 @@ Public Class frmEditor_Item
         EditorItem_DrawFurniture()
     End Sub
 
-    Private Sub picFurniture_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picFurniture.MouseDown
+    Private Sub picFurniture_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picFurniture.MouseDown
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         Dim X As Long, Y As Long
         X = e.X / 32

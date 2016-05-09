@@ -6,11 +6,9 @@ Public Class frmMainGame
     Dim ShakeCount As Byte, LastDir As Byte
 
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-
         RePositionGUI()
 
         frmAdmin.Visible = False
-
     End Sub
 
     Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
@@ -142,8 +140,6 @@ Public Class frmMainGame
 
     End Sub
 
-
-
     Private Sub lblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
         If IsNumeric(txtCurrency.Text) Then
             Select Case CurrencyMenu
@@ -194,7 +190,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        'Me.Focus()
+        If Editor = 0 Then Focus()
 
     End Sub
 

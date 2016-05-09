@@ -162,10 +162,10 @@
         Packets.Add(ServerPackets.SEventChat, AddressOf Packet_EventChat)
         Packets.Add(ServerPackets.SEventStart, AddressOf Packet_EventStart)
         Packets.Add(ServerPackets.SEventEnd, AddressOf Packet_EventEnd)
-        'Packets.Add(ServerPackets.SPlayBGM, AddressOf Packet_PlayBGM)
-        'Packets.Add(ServerPackets.SPlaySound, AddressOf Packet_PlaySound)
-        'Packets.Add(ServerPackets.SFadeoutBGM, AddressOf Packet_FadeoutBGM)
-        'Packets.Add(ServerPackets.SStopSound, AddressOf Packet_StopSound)
+        Packets.Add(ServerPackets.SPlayBGM, AddressOf Packet_PlayBGM)
+        Packets.Add(ServerPackets.SPlaySound, AddressOf Packet_PlaySound)
+        Packets.Add(ServerPackets.SFadeoutBGM, AddressOf Packet_FadeoutBGM)
+        Packets.Add(ServerPackets.SStopSound, AddressOf Packet_StopSound)
         Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
         'SChatBubble
@@ -844,6 +844,8 @@
                 Map.BootY = Buffer.ReadLong
                 Map.MaxX = Buffer.ReadLong
                 Map.MaxY = Buffer.ReadLong
+                Map.WeatherType = Buffer.ReadLong
+                Map.WeatherIndex = Buffer.ReadLong
 
                 ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 

@@ -25,7 +25,7 @@ Module ClientGameEditors
             EditorIndex = frmEditor_Animation.lstIndex.SelectedIndex + 1
         End With
 
-        Call EditorAnim_DrawAnim()
+        EditorAnim_DrawAnim()
         Animation_Changed(EditorIndex) = True
     End Sub
 
@@ -127,6 +127,9 @@ Module ClientGameEditors
         frmEditor_Map.cmbLayers.SelectedIndex = 0
         frmEditor_Map.cmbAutoTile.SelectedIndex = 0
 
+        frmEditor_Map.cmbWeather.SelectedIndex = Map.WeatherType
+        frmEditor_Map.scrlFog.Value = Map.WeatherIndex
+        frmEditor_Map.lblFogIndex.Text = "Fog: " & frmEditor_Map.scrlFog.Value
         ' render the tiles
         EditorMap_DrawTileset()
 

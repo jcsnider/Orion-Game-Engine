@@ -1,30 +1,29 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 
-
 Public Class frmEditor_Map
 
-    Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picBackSelect.MouseDown
-        Call MapEditorChooseTile(e.Button, e.X, e.Y)
+    Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
+        MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
 
-    Private Sub picBackSelect_MouseMove(ByVal sender As Object, ByVal e As Windows.Forms.MouseEventArgs) Handles picBackSelect.MouseMove
-        Call MapEditorDrag(e.Button, e.X, e.Y)
+    Private Sub picBackSelect_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseMove
+        MapEditorDrag(e.Button, e.X, e.Y)
     End Sub
 
-    Private Sub picBackSelect_Paint(ByVal sender As Object, ByVal e As Windows.Forms.PaintEventArgs) Handles picBackSelect.Paint
+    Private Sub picBackSelect_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picBackSelect.Paint
         'Overrides the paint sub
     End Sub
 
-    Private Sub pnlBack_Paint(ByVal sender As Object, ByVal e As Windows.Forms.PaintEventArgs) Handles pnlBack.Paint
+    Private Sub pnlBack_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack.Paint
         'Overrides the paint sub
     End Sub
 
-    Private Sub scrlPictureY_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlPictureY.Scroll
+    Private Sub scrlPictureY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureY.Scroll
         MapEditorTileScroll()
     End Sub
 
-    Private Sub scrlPictureX_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlPictureX.Scroll
+    Private Sub scrlPictureX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureX.Scroll
         MapEditorTileScroll()
     End Sub
 
@@ -41,15 +40,15 @@ Public Class frmEditor_Map
         MapEditorClearLayer()
     End Sub
 
-    Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapWarpMap.Scroll
+    Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
 
-    Private Sub scrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapWarpX.Scroll
+    Private Sub scrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpX.Scroll
         lblMapWarpX.Text = "X: " & scrlMapWarpX.Value
     End Sub
 
-    Private Sub scrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapWarpY.Scroll
+    Private Sub scrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpY.Scroll
         lblMapWarpY.Text = "Y: " & scrlMapWarpY.Value
     End Sub
 
@@ -62,7 +61,7 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        cmbTileSets.SelectedIndex = 1
+        cmbTileSets.SelectedIndex = 0
         EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
@@ -70,6 +69,8 @@ Public Class frmEditor_Map
         Me.Width = 525
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
+
+        scrlFog.Maximum = NumFogs
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -85,7 +86,7 @@ Public Class frmEditor_Map
         scrlMapWarpY.Value = 0
     End Sub
 
-    Private Sub scrlMapItem_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapItem.Scroll
+    Private Sub scrlMapItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItem.Scroll
         If Item(scrlMapItem.Value).Type = ITEM_TYPE_CURRENCY Or Item(scrlMapItem.Value).Stackable = 1 Then
             scrlMapItemValue.Enabled = True
         Else
@@ -97,7 +98,7 @@ Public Class frmEditor_Map
         lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
-    Private Sub scrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapItemValue.Scroll
+    Private Sub scrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItemValue.Scroll
         lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
@@ -119,7 +120,7 @@ Public Class frmEditor_Map
         EditorMap_DrawMapItem()
     End Sub
 
-    Private Sub scrlMapKey_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlMapKey.Scroll
+    Private Sub scrlMapKey_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapKey.Scroll
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
         EditorMap_DrawKey()
     End Sub
@@ -143,11 +144,11 @@ Public Class frmEditor_Map
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
     End Sub
 
-    Private Sub scrlKeyX_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlKeyX.Scroll
+    Private Sub scrlKeyX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyX.Scroll
         lblKeyX.Text = "X: " & scrlKeyX.Value
     End Sub
 
-    Private Sub scrlKeyY_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlKeyY.Scroll
+    Private Sub scrlKeyY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyY.Scroll
         lblKeyY.Text = "X: " & scrlKeyY.Value
     End Sub
 
@@ -175,7 +176,7 @@ Public Class frmEditor_Map
         fraResource.Visible = False
     End Sub
 
-    Private Sub scrlResource_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlResource.Scroll
+    Private Sub scrlResource_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlResource.Scroll
         lblResource.Text = "Resource: " & Resource(scrlResource.Value).Name
     End Sub
 
@@ -232,7 +233,7 @@ Public Class frmEditor_Map
         fraHeal.Visible = False
     End Sub
 
-    Private Sub scrlHeal_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlHeal.Scroll
+    Private Sub scrlHeal_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlHeal.Scroll
         lblHeal.Text = "Amount: " & scrlHeal.Value
     End Sub
 
@@ -242,7 +243,7 @@ Public Class frmEditor_Map
         fraHeal.Visible = True
     End Sub
 
-    Private Sub scrlTrap_Scroll(ByVal sender As Object, ByVal e As Windows.Forms.ScrollEventArgs) Handles scrlTrap.Scroll
+    Private Sub scrlTrap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlTrap.Scroll
         lblTrap.Text = "Amount: " & scrlTrap.Value
     End Sub
 
@@ -259,10 +260,10 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub btnClearAttribute_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClearAttribute.Click
-        Call MapEditorClearAttribs()
+        MapEditorClearAttribs()
     End Sub
 
-    Private Sub scrlNpcDir_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles scrlNpcDir.Scroll
+    Private Sub scrlNpcDir_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlNpcDir.Scroll
         Select Case scrlNpcDir.Value
             Case 0
                 lblNpcDir.Text = "Direction: Up"
@@ -291,7 +292,7 @@ Public Class frmEditor_Map
         scrlBuyHouse.Value = 1
     End Sub
 
-    Private Sub scrlBuyHouse_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles scrlBuyHouse.Scroll
+    Private Sub scrlBuyHouse_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlBuyHouse.Scroll
         lblHouseName.Text = scrlBuyHouse.Value & ". " & HouseConfig(scrlBuyHouse.Value).ConfigName
     End Sub
 
@@ -425,5 +426,14 @@ Public Class frmEditor_Map
             CurMusic = ""
             PlayMusic(lstMusic.Items(lstMusic.SelectedIndex).ToString)
         End If
+    End Sub
+
+    Private Sub cmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
+        Map.WeatherType = cmbWeather.SelectedIndex
+    End Sub
+
+    Private Sub scrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
+        Map.WeatherIndex = scrlFog.Value
+        lblFogIndex.Text = "Fog: " & scrlFog.Value
     End Sub
 End Class

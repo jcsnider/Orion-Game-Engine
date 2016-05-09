@@ -322,7 +322,6 @@ Public Module ClientEventSystem
         For i = 1 To count
             If Map.Events(i).X = X And Map.Events(i).Y = Y Then
                 ' copy it
-                'CopyMemory ByVal VarPtr(cpEvent), ByVal VarPtr(Map.Events(i)), LenB(Map.Events(i))
                 CopyEvent = Map.Events(i)
                 ' exit
                 Exit Sub
@@ -460,7 +459,6 @@ Public Module ClientEventSystem
 
         tmpEvent = Map.Events(EventNum)
         InitEventEditorForm = True
-
 
     End Sub
 
@@ -2303,7 +2301,6 @@ newlist:
         SendData(Buffer.ToArray)
 
         Buffer = Nothing
-
     End Sub
 
     Sub SendSwitchesAndVariables()
@@ -2667,6 +2664,62 @@ newlist:
 
         buffer = Nothing
 
+    End Sub
+
+    Sub Packet_PlayBGM(ByVal data() As Byte)
+        Dim buffer As ByteBuffer, music As String
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SPlayBGM Then Exit Sub
+
+        music = buffer.ReadString
+
+        PlayMusic(music)
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_FadeOutBGM(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SFadeoutBGM Then Exit Sub
+
+        FadeOutSwitch = True
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_PlaySound(ByVal data() As Byte)
+        Dim buffer As ByteBuffer, sound As String
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SPlaySound Then Exit Sub
+
+        sound = buffer.ReadString
+
+        PlaySound(sound)
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_StopSound(ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SStopSound Then Exit Sub
+
+        StopSound()
+
+        buffer = Nothing
     End Sub
 
 #End Region

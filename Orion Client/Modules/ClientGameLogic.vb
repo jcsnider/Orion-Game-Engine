@@ -6,7 +6,7 @@ Module ClientGameLogic
         Dim i As Long
         Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
         Dim g As Graphics = frmMainGame.picscreen.CreateGraphics
-        Dim starttime As Long, Tick As Long
+        Dim starttime As Long, Tick As Long, fogtmr As Long
         Dim tmpfps As Long, WalkTimer As Long, FrameTime As Long
         Dim destrect As Rectangle, tmr10000 As Long
         Dim tmr100 As Long, tmr500 As Long
@@ -130,6 +130,19 @@ Module ClientGameLogic
                         End If
 
                         WalkTimer = Tick + 30 ' edit this value to change WalkTimer
+                    End If
+
+                    ' fog scrolling
+                    If fogtmr < Tick Then
+                        If CurrentFogSpeed > 0 Then
+                            ' move
+                            fogOffsetX = fogOffsetX - 1
+                            fogOffsetY = fogOffsetY - 1
+                            ' reset
+                            If fogOffsetX < -256 Then fogOffsetX = 0
+                            If fogOffsetY < -256 Then fogOffsetY = 0
+                            fogtmr = Tick + 255 - CurrentFogSpeed
+                        End If
                     End If
 
                     If tmr500 < Tick Then

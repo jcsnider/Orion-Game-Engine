@@ -193,6 +193,8 @@ Module ClientTCP
         Buffer.WriteLong(Map.BootY)
         Buffer.WriteLong(Map.MaxX)
         Buffer.WriteLong(Map.MaxY)
+        Buffer.WriteLong(Map.WeatherType)
+        Buffer.WriteLong(Map.WeatherIndex)
 
         For i = 1 To MAX_MAP_NPCS
             Buffer.WriteLong(Map.Npc(i))

@@ -161,6 +161,9 @@
         Dim EventCount As Long
         Dim Events() As EventRec
 
+        Dim WeatherType As Byte
+        Dim WeatherIndex As Long
+
         'Client Side Only -- Temporary
         Dim CurrentEvents As Long
         Dim MapEvents() As MapEventRec

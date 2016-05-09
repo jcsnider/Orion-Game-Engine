@@ -217,4 +217,19 @@ Module ClientGlobals
     Public News As String
     Public UpdateNews As Boolean
 
+    ' fog
+    Public fogOffsetX As Long
+    Public fogOffsetY As Long
+
+    'Weather Stuff... events take precedent OVER map settings so we will keep temp map weather settings here.
+    Public CurrentWeather As Long
+    Public CurrentWeatherIntensity As Long
+    Public CurrentFog As Long
+    Public CurrentFogSpeed As Long
+    Public CurrentFogOpacity As Long
+    Public CurrentTintR As Long
+    Public CurrentTintG As Long
+    Public CurrentTintB As Long
+    Public CurrentTintA As Long
+    Public DrawThunder As Long
 End Module

@@ -1636,22 +1636,22 @@
                                                         Case EventType.evChangeItems
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 If HasItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) > 0 Then
-                                                                    Call SetPlayerInvItemValue(i, FindItemSlot(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
-                                                                    Call CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
-                                                                    Call CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                    SetPlayerInvItemValue(i, FindItemSlot(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
+                                                                    CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                    CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                 End If
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 GiveInvItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3, True)
-                                                                Call CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
-                                                                Call CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 2 Then
                                                                 Dim itemAmount As Long
                                                                 itemAmount = HasItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                 ' Check Amount
                                                                 If itemAmount >= Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3 Then
                                                                     TakeInvItem(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
-                                                                    Call CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
-                                                                    Call CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                    CheckTasks(i, QUEST_TYPE_GOGET, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                    CheckTasks(i, QUEST_TYPE_GOGIVE, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                 End If
                                                             End If
                                                             SendInventory(i)
@@ -1754,7 +1754,7 @@
                                                             End If
                                                         Case EventType.evCustomScript
                                                             'Runs Through Cases for a script
-                                                            Call CustomScript(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                            CustomScript(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                         Case EventType.evPlayBGM
                                                             Buffer = New ByteBuffer
                                                             Buffer.WriteLong(ServerPackets.SPlayBGM)

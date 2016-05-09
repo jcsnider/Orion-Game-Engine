@@ -911,6 +911,9 @@
     <Content Include="data files\graphics\Faces\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\Fogs\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\Furniture\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

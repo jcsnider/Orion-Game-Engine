@@ -163,6 +163,7 @@ Module ClientGeneral
         CheckResources()
         CheckSpellIcons()
         CheckFaces()
+        CheckFog()
         CacheMusic()
         CacheSound()
 

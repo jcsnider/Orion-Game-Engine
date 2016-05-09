@@ -6,9 +6,7 @@
     'Chatbubble
     Public Const ChatBubbleWidth As Long = 200
 
-    Public Const AllChatLineWidth As Integer = 50
-
-
+    'Public Const AllChatLineWidth As Integer = 50
 
     Public Const MAX_BYTE As Byte = 255
     Public Const MAX_INTEGER As Integer = 32767
@@ -146,6 +144,9 @@
     Public Const MAP_MORAL_NONE As Byte = 0
     Public Const MAP_MORAL_SAFE As Byte = 1
     Public Const MAP_MORAL_INDOOR As Byte = 2
+
+    Public Const MAP_WEATHER_NONE As Byte = 0
+    Public Const MAP_WEATHER_FOG As Byte = 1
 
     ' Tile consants
     Public Const TILE_TYPE_WALKABLE As Byte = 0
