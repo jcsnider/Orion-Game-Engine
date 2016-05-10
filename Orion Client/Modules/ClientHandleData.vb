@@ -169,7 +169,7 @@
         Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
         'SChatBubble
-        'SSpecialEffect
+        Packets.Add(ServerPackets.SSpecialEffect, AddressOf Packet_SpecialEffect)
         'SPic
         Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
 
@@ -845,7 +845,15 @@
                 Map.MaxX = Buffer.ReadLong
                 Map.MaxY = Buffer.ReadLong
                 Map.WeatherType = Buffer.ReadLong
-                Map.WeatherIndex = Buffer.ReadLong
+                Map.FogIndex = Buffer.ReadLong
+                Map.WeatherIntensity = Buffer.ReadLong
+                Map.FogAlpha = Buffer.ReadLong
+                Map.FogSpeed = Buffer.ReadLong
+                Map.HasMapTint = Buffer.ReadLong
+                Map.MapTintR = Buffer.ReadLong
+                Map.MapTintG = Buffer.ReadLong
+                Map.MapTintB = Buffer.ReadLong
+                Map.MapTintA = Buffer.ReadLong
 
                 ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 
@@ -1065,6 +1073,16 @@
             ClearActionMsg(i)
         Next i
 
+        CurrentWeather = Map.WeatherType
+        CurrentWeatherIntensity = Map.WeatherIntensity
+        CurrentFog = Map.FogIndex
+        CurrentFogSpeed = Map.FogSpeed
+        CurrentFogOpacity = Map.FogAlpha
+        CurrentTintR = Map.MapTintR
+        CurrentTintG = Map.MapTintG
+        CurrentTintB = Map.MapTintB
+        CurrentTintA = Map.MapTintA
+
         MusicFile = Trim$(Map.Music)
         PlayMusic(MusicFile)
 
@@ -1128,6 +1146,15 @@
             ClearActionMsg(i)
         Next i
 
+        CurrentWeather = Map.WeatherType
+        CurrentWeatherIntensity = Map.WeatherIntensity
+        CurrentFog = Map.FogIndex
+        CurrentFogSpeed = Map.FogSpeed
+        CurrentFogOpacity = Map.FogAlpha
+        CurrentTintR = Map.MapTintR
+        CurrentTintG = Map.MapTintG
+        CurrentTintB = Map.MapTintB
+        CurrentTintA = Map.MapTintA
 
         MusicFile = Trim$(Map.Music)
         PlayMusic(MusicFile)

@@ -271,4 +271,7 @@ Public Class frmMenu
         End If
     End Sub
 
+    Private Sub btnPlay_Paint(sender As Object, e As PaintEventArgs) Handles btnPlay.Paint
+
+    End Sub
 End Class

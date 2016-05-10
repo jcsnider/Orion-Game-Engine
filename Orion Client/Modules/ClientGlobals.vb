@@ -1,11 +1,7 @@
 ﻿Imports System.Drawing
 
 Module ClientGlobals
-    'Music + Sound Players
-    Public SoundPlayer As SFML.Audio.Sound
-    Public MusicPlayer As SFML.Audio.Music
-    Public MusicCache(0 To 100) As String
-    Public SoundCache(0 To 100) As String
+
 
     ' for directional blocking
     Public DirArrowX(0 To 4) As Byte
@@ -13,6 +9,10 @@ Module ClientGlobals
 
     Public TilesetsClr() As Color
     Public LastTileset As Byte
+
+    Public FadeType As Long
+    Public FadeAmount As Long
+    Public FlashTimer As Long
 
     ' targetting
     Public myTarget As Long

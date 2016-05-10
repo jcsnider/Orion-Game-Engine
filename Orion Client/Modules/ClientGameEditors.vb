@@ -128,8 +128,11 @@ Module ClientGameEditors
         frmEditor_Map.cmbAutoTile.SelectedIndex = 0
 
         frmEditor_Map.cmbWeather.SelectedIndex = Map.WeatherType
-        frmEditor_Map.scrlFog.Value = Map.WeatherIndex
+        frmEditor_Map.scrlFog.Value = Map.FogIndex
         frmEditor_Map.lblFogIndex.Text = "Fog: " & frmEditor_Map.scrlFog.Value
+        frmEditor_Map.scrlIntensity.Value = Map.WeatherIntensity
+        frmEditor_Map.lblIntensity.Text = "Intensity: " & frmEditor_Map.scrlIntensity.Value
+
         ' render the tiles
         EditorMap_DrawTileset()
 

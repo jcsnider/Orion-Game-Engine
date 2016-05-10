@@ -118,6 +118,8 @@ Partial Class frmEditor_Map
         Me.ComboBox23 = New System.Windows.Forms.ComboBox()
         Me.tpSettings = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.scrlIntensity = New System.Windows.Forms.HScrollBar()
+        Me.lblIntensity = New System.Windows.Forms.Label()
         Me.scrlFog = New System.Windows.Forms.HScrollBar()
         Me.lblFogIndex = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -153,6 +155,20 @@ Partial Class frmEditor_Map
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblFogSpeed = New System.Windows.Forms.Label()
+        Me.scrlFogSpeed = New System.Windows.Forms.HScrollBar()
+        Me.lblFogAlpha = New System.Windows.Forms.Label()
+        Me.scrlFogAlpha = New System.Windows.Forms.HScrollBar()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.scrlMapRed = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapGreen = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapBlue = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapAlpha = New System.Windows.Forms.HScrollBar()
+        Me.lblMapRed = New System.Windows.Forms.Label()
+        Me.lblMapGreen = New System.Windows.Forms.Label()
+        Me.lblMapBlue = New System.Windows.Forms.Label()
+        Me.lblMapAlpha = New System.Windows.Forms.Label()
+        Me.chkUseTint = New System.Windows.Forms.CheckBox()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -183,6 +199,7 @@ Partial Class frmEditor_Map
         Me.GroupBox2.SuspendLayout()
         Me.tpDirBlock.SuspendLayout()
         Me.tpEvents.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'scrlPictureX
@@ -1111,6 +1128,7 @@ Partial Class frmEditor_Map
         '
         'tpSettings
         '
+        Me.tpSettings.Controls.Add(Me.GroupBox3)
         Me.tpSettings.Controls.Add(Me.GroupBox1)
         Me.tpSettings.Controls.Add(Me.btnSaveSettings)
         Me.tpSettings.Controls.Add(Me.fraMapSettings)
@@ -1130,21 +1148,44 @@ Partial Class frmEditor_Map
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.scrlFogAlpha)
+        Me.GroupBox1.Controls.Add(Me.lblFogAlpha)
+        Me.GroupBox1.Controls.Add(Me.scrlFogSpeed)
+        Me.GroupBox1.Controls.Add(Me.lblFogSpeed)
+        Me.GroupBox1.Controls.Add(Me.scrlIntensity)
+        Me.GroupBox1.Controls.Add(Me.lblIntensity)
         Me.GroupBox1.Controls.Add(Me.scrlFog)
         Me.GroupBox1.Controls.Add(Me.lblFogIndex)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.cmbWeather)
-        Me.GroupBox1.Location = New System.Drawing.Point(244, 282)
+        Me.GroupBox1.Location = New System.Drawing.Point(244, 217)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(241, 141)
+        Me.GroupBox1.Size = New System.Drawing.Size(241, 154)
         Me.GroupBox1.TabIndex = 17
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Map Weather"
         '
+        'scrlIntensity
+        '
+        Me.scrlIntensity.LargeChange = 1
+        Me.scrlIntensity.Location = New System.Drawing.Point(90, 51)
+        Me.scrlIntensity.Name = "scrlIntensity"
+        Me.scrlIntensity.Size = New System.Drawing.Size(145, 17)
+        Me.scrlIntensity.TabIndex = 5
+        '
+        'lblIntensity
+        '
+        Me.lblIntensity.AutoSize = True
+        Me.lblIntensity.Location = New System.Drawing.Point(6, 53)
+        Me.lblIntensity.Name = "lblIntensity"
+        Me.lblIntensity.Size = New System.Drawing.Size(70, 13)
+        Me.lblIntensity.TabIndex = 4
+        Me.lblIntensity.Text = "Intensity: 100"
+        '
         'scrlFog
         '
         Me.scrlFog.LargeChange = 1
-        Me.scrlFog.Location = New System.Drawing.Point(90, 55)
+        Me.scrlFog.Location = New System.Drawing.Point(90, 81)
         Me.scrlFog.Name = "scrlFog"
         Me.scrlFog.Size = New System.Drawing.Size(145, 17)
         Me.scrlFog.TabIndex = 3
@@ -1152,7 +1193,7 @@ Partial Class frmEditor_Map
         'lblFogIndex
         '
         Me.lblFogIndex.AutoSize = True
-        Me.lblFogIndex.Location = New System.Drawing.Point(6, 56)
+        Me.lblFogIndex.Location = New System.Drawing.Point(6, 82)
         Me.lblFogIndex.Name = "lblFogIndex"
         Me.lblFogIndex.Size = New System.Drawing.Size(37, 13)
         Me.lblFogIndex.TabIndex = 2
@@ -1170,7 +1211,7 @@ Partial Class frmEditor_Map
         'cmbWeather
         '
         Me.cmbWeather.FormattingEnabled = True
-        Me.cmbWeather.Items.AddRange(New Object() {"None", "Fog"})
+        Me.cmbWeather.Items.AddRange(New Object() {"None", "Rain", "Snow", "Hail", "Sand Storm", "Storm", "Fog"})
         Me.cmbWeather.Location = New System.Drawing.Point(90, 22)
         Me.cmbWeather.Name = "cmbWeather"
         Me.cmbWeather.Size = New System.Drawing.Size(145, 21)
@@ -1222,16 +1263,16 @@ Partial Class frmEditor_Map
         Me.fraMapLinks.Controls.Add(Me.lblMap)
         Me.fraMapLinks.Controls.Add(Me.txtRight)
         Me.fraMapLinks.Controls.Add(Me.txtUp)
-        Me.fraMapLinks.Location = New System.Drawing.Point(6, 79)
+        Me.fraMapLinks.Location = New System.Drawing.Point(6, 77)
         Me.fraMapLinks.Name = "fraMapLinks"
-        Me.fraMapLinks.Size = New System.Drawing.Size(232, 149)
+        Me.fraMapLinks.Size = New System.Drawing.Size(232, 112)
         Me.fraMapLinks.TabIndex = 14
         Me.fraMapLinks.TabStop = False
         Me.fraMapLinks.Text = "Map Links"
         '
         'txtDown
         '
-        Me.txtDown.Location = New System.Drawing.Point(89, 120)
+        Me.txtDown.Location = New System.Drawing.Point(90, 86)
         Me.txtDown.Name = "txtDown"
         Me.txtDown.Size = New System.Drawing.Size(50, 20)
         Me.txtDown.TabIndex = 6
@@ -1239,7 +1280,7 @@ Partial Class frmEditor_Map
         '
         'txtLeft
         '
-        Me.txtLeft.Location = New System.Drawing.Point(6, 59)
+        Me.txtLeft.Location = New System.Drawing.Point(7, 47)
         Me.txtLeft.Name = "txtLeft"
         Me.txtLeft.Size = New System.Drawing.Size(43, 20)
         Me.txtLeft.TabIndex = 5
@@ -1248,7 +1289,7 @@ Partial Class frmEditor_Map
         'lblMap
         '
         Me.lblMap.AutoSize = True
-        Me.lblMap.Location = New System.Drawing.Point(74, 62)
+        Me.lblMap.Location = New System.Drawing.Point(75, 50)
         Me.lblMap.Name = "lblMap"
         Me.lblMap.Size = New System.Drawing.Size(77, 13)
         Me.lblMap.TabIndex = 4
@@ -1256,7 +1297,7 @@ Partial Class frmEditor_Map
         '
         'txtRight
         '
-        Me.txtRight.Location = New System.Drawing.Point(176, 59)
+        Me.txtRight.Location = New System.Drawing.Point(177, 47)
         Me.txtRight.Name = "txtRight"
         Me.txtRight.Size = New System.Drawing.Size(50, 20)
         Me.txtRight.TabIndex = 3
@@ -1278,9 +1319,9 @@ Partial Class frmEditor_Map
         Me.fraBootSettings.Controls.Add(Me.Label3)
         Me.fraBootSettings.Controls.Add(Me.txtBootX)
         Me.fraBootSettings.Controls.Add(Me.Label4)
-        Me.fraBootSettings.Location = New System.Drawing.Point(6, 234)
+        Me.fraBootSettings.Location = New System.Drawing.Point(6, 195)
         Me.fraBootSettings.Name = "fraBootSettings"
-        Me.fraBootSettings.Size = New System.Drawing.Size(232, 98)
+        Me.fraBootSettings.Size = New System.Drawing.Size(232, 91)
         Me.fraBootSettings.TabIndex = 13
         Me.fraBootSettings.TabStop = False
         Me.fraBootSettings.Text = "Respawn Settings"
@@ -1304,7 +1345,7 @@ Partial Class frmEditor_Map
         '
         'txtBootY
         '
-        Me.txtBootY.Location = New System.Drawing.Point(176, 70)
+        Me.txtBootY.Location = New System.Drawing.Point(176, 63)
         Me.txtBootY.Name = "txtBootY"
         Me.txtBootY.Size = New System.Drawing.Size(50, 20)
         Me.txtBootY.TabIndex = 3
@@ -1313,7 +1354,7 @@ Partial Class frmEditor_Map
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 72)
+        Me.Label3.Location = New System.Drawing.Point(6, 65)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 13)
         Me.Label3.TabIndex = 2
@@ -1321,7 +1362,7 @@ Partial Class frmEditor_Map
         '
         'txtBootX
         '
-        Me.txtBootX.Location = New System.Drawing.Point(176, 44)
+        Me.txtBootX.Location = New System.Drawing.Point(176, 37)
         Me.txtBootX.Name = "txtBootX"
         Me.txtBootX.Size = New System.Drawing.Size(50, 20)
         Me.txtBootX.TabIndex = 1
@@ -1330,7 +1371,7 @@ Partial Class frmEditor_Map
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 46)
+        Me.Label4.Location = New System.Drawing.Point(6, 37)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(65, 13)
         Me.Label4.TabIndex = 0
@@ -1342,16 +1383,16 @@ Partial Class frmEditor_Map
         Me.fraMaxSizes.Controls.Add(Me.Label2)
         Me.fraMaxSizes.Controls.Add(Me.txtMaxX)
         Me.fraMaxSizes.Controls.Add(Me.Label7)
-        Me.fraMaxSizes.Location = New System.Drawing.Point(6, 338)
+        Me.fraMaxSizes.Location = New System.Drawing.Point(6, 292)
         Me.fraMaxSizes.Name = "fraMaxSizes"
-        Me.fraMaxSizes.Size = New System.Drawing.Size(232, 124)
+        Me.fraMaxSizes.Size = New System.Drawing.Size(232, 78)
         Me.fraMaxSizes.TabIndex = 12
         Me.fraMaxSizes.TabStop = False
         Me.fraMaxSizes.Text = "Map Sizes"
         '
         'txtMaxY
         '
-        Me.txtMaxY.Location = New System.Drawing.Point(124, 101)
+        Me.txtMaxY.Location = New System.Drawing.Point(124, 42)
         Me.txtMaxY.Name = "txtMaxY"
         Me.txtMaxY.Size = New System.Drawing.Size(50, 20)
         Me.txtMaxY.TabIndex = 3
@@ -1360,7 +1401,7 @@ Partial Class frmEditor_Map
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 104)
+        Me.Label2.Location = New System.Drawing.Point(6, 45)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(64, 13)
         Me.Label2.TabIndex = 2
@@ -1368,7 +1409,7 @@ Partial Class frmEditor_Map
         '
         'txtMaxX
         '
-        Me.txtMaxX.Location = New System.Drawing.Point(124, 75)
+        Me.txtMaxX.Location = New System.Drawing.Point(124, 16)
         Me.txtMaxX.Name = "txtMaxX"
         Me.txtMaxX.Size = New System.Drawing.Size(50, 20)
         Me.txtMaxX.TabIndex = 1
@@ -1377,7 +1418,7 @@ Partial Class frmEditor_Map
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 78)
+        Me.Label7.Location = New System.Drawing.Point(6, 19)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(64, 13)
         Me.Label7.TabIndex = 0
@@ -1387,9 +1428,9 @@ Partial Class frmEditor_Map
         '
         Me.GroupBox2.Controls.Add(Me.btnPreview)
         Me.GroupBox2.Controls.Add(Me.lstMusic)
-        Me.GroupBox2.Location = New System.Drawing.Point(244, 32)
+        Me.GroupBox2.Location = New System.Drawing.Point(244, 3)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(241, 244)
+        Me.GroupBox2.Size = New System.Drawing.Size(241, 208)
         Me.GroupBox2.TabIndex = 11
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Music"
@@ -1398,7 +1439,7 @@ Partial Class frmEditor_Map
         '
         Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
         Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPreview.Location = New System.Drawing.Point(49, 208)
+        Me.btnPreview.Location = New System.Drawing.Point(48, 173)
         Me.btnPreview.Name = "btnPreview"
         Me.btnPreview.Size = New System.Drawing.Size(139, 29)
         Me.btnPreview.TabIndex = 4
@@ -1411,14 +1452,14 @@ Partial Class frmEditor_Map
         Me.lstMusic.Location = New System.Drawing.Point(6, 19)
         Me.lstMusic.Name = "lstMusic"
         Me.lstMusic.ScrollAlwaysVisible = True
-        Me.lstMusic.Size = New System.Drawing.Size(229, 186)
+        Me.lstMusic.Size = New System.Drawing.Size(229, 147)
         Me.lstMusic.TabIndex = 3
         '
         'txtName
         '
         Me.txtName.Location = New System.Drawing.Point(53, 6)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(432, 20)
+        Me.txtName.Size = New System.Drawing.Size(185, 20)
         Me.txtName.TabIndex = 10
         '
         'Label6
@@ -1469,6 +1510,141 @@ Partial Class frmEditor_Map
         Me.Label13.Size = New System.Drawing.Size(239, 13)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
+        '
+        'lblFogSpeed
+        '
+        Me.lblFogSpeed.AutoSize = True
+        Me.lblFogSpeed.Location = New System.Drawing.Point(6, 105)
+        Me.lblFogSpeed.Name = "lblFogSpeed"
+        Me.lblFogSpeed.Size = New System.Drawing.Size(80, 13)
+        Me.lblFogSpeed.TabIndex = 6
+        Me.lblFogSpeed.Text = "FogSpeed: 100"
+        '
+        'scrlFogSpeed
+        '
+        Me.scrlFogSpeed.LargeChange = 1
+        Me.scrlFogSpeed.Location = New System.Drawing.Point(90, 101)
+        Me.scrlFogSpeed.Name = "scrlFogSpeed"
+        Me.scrlFogSpeed.Size = New System.Drawing.Size(145, 17)
+        Me.scrlFogSpeed.TabIndex = 7
+        '
+        'lblFogAlpha
+        '
+        Me.lblFogAlpha.AutoSize = True
+        Me.lblFogAlpha.Location = New System.Drawing.Point(6, 126)
+        Me.lblFogAlpha.Name = "lblFogAlpha"
+        Me.lblFogAlpha.Size = New System.Drawing.Size(79, 13)
+        Me.lblFogAlpha.TabIndex = 8
+        Me.lblFogAlpha.Text = "Fog Alpha: 255"
+        '
+        'scrlFogAlpha
+        '
+        Me.scrlFogAlpha.LargeChange = 1
+        Me.scrlFogAlpha.Location = New System.Drawing.Point(90, 124)
+        Me.scrlFogAlpha.Maximum = 255
+        Me.scrlFogAlpha.Name = "scrlFogAlpha"
+        Me.scrlFogAlpha.Size = New System.Drawing.Size(145, 17)
+        Me.scrlFogAlpha.TabIndex = 9
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.chkUseTint)
+        Me.GroupBox3.Controls.Add(Me.lblMapAlpha)
+        Me.GroupBox3.Controls.Add(Me.lblMapBlue)
+        Me.GroupBox3.Controls.Add(Me.lblMapGreen)
+        Me.GroupBox3.Controls.Add(Me.lblMapRed)
+        Me.GroupBox3.Controls.Add(Me.scrlMapAlpha)
+        Me.GroupBox3.Controls.Add(Me.scrlMapBlue)
+        Me.GroupBox3.Controls.Add(Me.scrlMapGreen)
+        Me.GroupBox3.Controls.Add(Me.scrlMapRed)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 376)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(354, 86)
+        Me.GroupBox3.TabIndex = 18
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Map Tint"
+        '
+        'scrlMapRed
+        '
+        Me.scrlMapRed.LargeChange = 1
+        Me.scrlMapRed.Location = New System.Drawing.Point(84, 9)
+        Me.scrlMapRed.Maximum = 255
+        Me.scrlMapRed.Name = "scrlMapRed"
+        Me.scrlMapRed.Size = New System.Drawing.Size(145, 17)
+        Me.scrlMapRed.TabIndex = 10
+        '
+        'scrlMapGreen
+        '
+        Me.scrlMapGreen.LargeChange = 1
+        Me.scrlMapGreen.Location = New System.Drawing.Point(84, 28)
+        Me.scrlMapGreen.Maximum = 255
+        Me.scrlMapGreen.Name = "scrlMapGreen"
+        Me.scrlMapGreen.Size = New System.Drawing.Size(145, 17)
+        Me.scrlMapGreen.TabIndex = 11
+        '
+        'scrlMapBlue
+        '
+        Me.scrlMapBlue.LargeChange = 1
+        Me.scrlMapBlue.Location = New System.Drawing.Point(84, 47)
+        Me.scrlMapBlue.Maximum = 255
+        Me.scrlMapBlue.Name = "scrlMapBlue"
+        Me.scrlMapBlue.Size = New System.Drawing.Size(145, 17)
+        Me.scrlMapBlue.TabIndex = 12
+        '
+        'scrlMapAlpha
+        '
+        Me.scrlMapAlpha.LargeChange = 1
+        Me.scrlMapAlpha.Location = New System.Drawing.Point(84, 66)
+        Me.scrlMapAlpha.Maximum = 255
+        Me.scrlMapAlpha.Name = "scrlMapAlpha"
+        Me.scrlMapAlpha.Size = New System.Drawing.Size(145, 17)
+        Me.scrlMapAlpha.TabIndex = 13
+        '
+        'lblMapRed
+        '
+        Me.lblMapRed.AutoSize = True
+        Me.lblMapRed.Location = New System.Drawing.Point(4, 11)
+        Me.lblMapRed.Name = "lblMapRed"
+        Me.lblMapRed.Size = New System.Drawing.Size(39, 13)
+        Me.lblMapRed.TabIndex = 14
+        Me.lblMapRed.Text = "Red: 0"
+        '
+        'lblMapGreen
+        '
+        Me.lblMapGreen.AutoSize = True
+        Me.lblMapGreen.Location = New System.Drawing.Point(6, 30)
+        Me.lblMapGreen.Name = "lblMapGreen"
+        Me.lblMapGreen.Size = New System.Drawing.Size(48, 13)
+        Me.lblMapGreen.TabIndex = 15
+        Me.lblMapGreen.Text = "Green: 0"
+        '
+        'lblMapBlue
+        '
+        Me.lblMapBlue.AutoSize = True
+        Me.lblMapBlue.Location = New System.Drawing.Point(6, 49)
+        Me.lblMapBlue.Name = "lblMapBlue"
+        Me.lblMapBlue.Size = New System.Drawing.Size(40, 13)
+        Me.lblMapBlue.TabIndex = 16
+        Me.lblMapBlue.Text = "Blue: 0"
+        '
+        'lblMapAlpha
+        '
+        Me.lblMapAlpha.AutoSize = True
+        Me.lblMapAlpha.Location = New System.Drawing.Point(6, 68)
+        Me.lblMapAlpha.Name = "lblMapAlpha"
+        Me.lblMapAlpha.Size = New System.Drawing.Size(46, 13)
+        Me.lblMapAlpha.TabIndex = 17
+        Me.lblMapAlpha.Text = "Alpha: 0"
+        '
+        'chkUseTint
+        '
+        Me.chkUseTint.AutoSize = True
+        Me.chkUseTint.Location = New System.Drawing.Point(244, 13)
+        Me.chkUseTint.Name = "chkUseTint"
+        Me.chkUseTint.Size = New System.Drawing.Size(93, 17)
+        Me.chkUseTint.TabIndex = 18
+        Me.chkUseTint.Text = "Use MapTint?"
+        Me.chkUseTint.UseVisualStyleBackColor = True
         '
         'frmEditor_Map
         '
@@ -1533,6 +1709,8 @@ Partial Class frmEditor_Map
         Me.tpDirBlock.PerformLayout()
         Me.tpEvents.ResumeLayout(False)
         Me.tpEvents.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1667,4 +1845,20 @@ Partial Class frmEditor_Map
     Friend WithEvents lblFogIndex As Windows.Forms.Label
     Friend WithEvents Label14 As Windows.Forms.Label
     Friend WithEvents cmbWeather As Windows.Forms.ComboBox
+    Friend WithEvents scrlIntensity As Windows.Forms.HScrollBar
+    Friend WithEvents lblIntensity As Windows.Forms.Label
+    Friend WithEvents GroupBox3 As Windows.Forms.GroupBox
+    Friend WithEvents chkUseTint As Windows.Forms.CheckBox
+    Friend WithEvents lblMapAlpha As Windows.Forms.Label
+    Friend WithEvents lblMapBlue As Windows.Forms.Label
+    Friend WithEvents lblMapGreen As Windows.Forms.Label
+    Friend WithEvents lblMapRed As Windows.Forms.Label
+    Friend WithEvents scrlMapAlpha As Windows.Forms.HScrollBar
+    Friend WithEvents scrlMapBlue As Windows.Forms.HScrollBar
+    Friend WithEvents scrlMapGreen As Windows.Forms.HScrollBar
+    Friend WithEvents scrlMapRed As Windows.Forms.HScrollBar
+    Friend WithEvents scrlFogAlpha As Windows.Forms.HScrollBar
+    Friend WithEvents lblFogAlpha As Windows.Forms.Label
+    Friend WithEvents scrlFogSpeed As Windows.Forms.HScrollBar
+    Friend WithEvents lblFogSpeed As Windows.Forms.Label
 End Class

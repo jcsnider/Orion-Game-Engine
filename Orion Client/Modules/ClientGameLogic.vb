@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 
 Module ClientGameLogic
+    Public GameRand As New Random()
     Sub GameLoop()
         Dim i As Long
         Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
@@ -168,6 +169,8 @@ Module ClientGameLogic
                         tmr500 = Tick + 500
                     End If
 
+                    ProcessWeather()
+
                     'Auctual Game Loop Stuff :/
                     Render_Graphics()
 
@@ -319,21 +322,13 @@ Module ClientGameLogic
     End Sub
 
     Public Function Rand(ByVal MaxNumber As Integer, Optional ByVal MinNumber As Integer = 0) As Integer
-
-        'initialize random number generator
-        Dim r As New Random(System.DateTime.Now.Millisecond)
-
-        'if passed incorrect arguments, swap them
-        'can also throw exception or return 0
-
         If MinNumber > MaxNumber Then
             Dim t As Integer = MinNumber
             MinNumber = MaxNumber
             MaxNumber = t
         End If
 
-        Return r.Next(MinNumber, MaxNumber)
-
+        Return GameRand.Next(MinNumber, MaxNumber)
     End Function
 
     ' BitWise Operators for directional blocking
@@ -862,9 +857,9 @@ Continue1:
 
         If LastItemDesc = itemnum Then Exit Sub
 
-            ' set the name
-            Select Case Item(itemnum).Rarity
-                Case 0 ' White
+        ' set the name
+        Select Case Item(itemnum).Rarity
+            Case 0 ' White
                 ItemDescRarityColor = ITEM_RARITY_COLOR_0
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
             Case 1 ' green
@@ -884,131 +879,131 @@ Continue1:
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
         End Select
 
-            ' For the stats label
-            Select Case Item(itemnum).Type
-                Case ITEM_TYPE_NONE
-                    ItemDescInfo = "N/A"
-                    ItemDescType = "N/A"
-                Case ITEM_TYPE_WEAPON
-                    ItemDescInfo = "Damage: " & Item(itemnum).Data2
-                    ItemDescType = "Weapon"
-                Case ITEM_TYPE_ARMOR
-                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                    ItemDescType = "Armor"
-                Case ITEM_TYPE_HELMET
-                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                    ItemDescType = "Helmet"
-                Case ITEM_TYPE_SHIELD
-                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                    ItemDescType = "Shield"
-                Case ITEM_TYPE_SHOES
-                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                    ItemDescType = "Shoes"
-                Case ITEM_TYPE_GLOVES
-                    ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                    ItemDescType = "Gloves"
-                Case ITEM_TYPE_POTIONADDHP
-                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-                    ItemDescType = "Potion"
-                Case ITEM_TYPE_POTIONADDMP
-                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-                    ItemDescType = "Potion"
-                Case ITEM_TYPE_POTIONADDSP
-                    ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-                Case ITEM_TYPE_POTIONSUBHP
-                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-                Case ITEM_TYPE_POTIONSUBMP
-                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-                Case ITEM_TYPE_POTIONSUBSP
-                    ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-                Case ITEM_TYPE_KEY
-                    ItemDescInfo = "N/A"
-                    ItemDescType = "Key"
-                Case ITEM_TYPE_CURRENCY
-                    ItemDescInfo = "N/A"
-                    ItemDescType = "Currency"
-                Case ITEM_TYPE_SPELL
-                    ItemDescInfo = "N/A"
-                    ItemDescType = "Spell"
-                Case ITEM_TYPE_FURNITURE
-                    ItemDescInfo = "Furniture"
-            End Select
+        ' For the stats label
+        Select Case Item(itemnum).Type
+            Case ITEM_TYPE_NONE
+                ItemDescInfo = "N/A"
+                ItemDescType = "N/A"
+            Case ITEM_TYPE_WEAPON
+                ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                ItemDescType = "Weapon"
+            Case ITEM_TYPE_ARMOR
+                ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                ItemDescType = "Armor"
+            Case ITEM_TYPE_HELMET
+                ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                ItemDescType = "Helmet"
+            Case ITEM_TYPE_SHIELD
+                ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                ItemDescType = "Shield"
+            Case ITEM_TYPE_SHOES
+                ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                ItemDescType = "Shoes"
+            Case ITEM_TYPE_GLOVES
+                ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                ItemDescType = "Gloves"
+            Case ITEM_TYPE_POTIONADDHP
+                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                ItemDescType = "Potion"
+            Case ITEM_TYPE_POTIONADDMP
+                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                ItemDescType = "Potion"
+            Case ITEM_TYPE_POTIONADDSP
+                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+            Case ITEM_TYPE_POTIONSUBHP
+                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
+            Case ITEM_TYPE_POTIONSUBMP
+                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
+            Case ITEM_TYPE_POTIONSUBSP
+                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
+            Case ITEM_TYPE_KEY
+                ItemDescInfo = "N/A"
+                ItemDescType = "Key"
+            Case ITEM_TYPE_CURRENCY
+                ItemDescInfo = "N/A"
+                ItemDescType = "Currency"
+            Case ITEM_TYPE_SPELL
+                ItemDescInfo = "N/A"
+                ItemDescType = "Spell"
+            Case ITEM_TYPE_FURNITURE
+                ItemDescInfo = "Furniture"
+        End Select
 
-            ItemDescSize = 0
+        ItemDescSize = 0
 
-            ' Currency
-            ItemDescCost = Item(itemnum).Price & "g"
+        ' Currency
+        ItemDescCost = Item(itemnum).Price & "g"
 
-            ' If currency, exit out before all the other shit
-            If Item(itemnum).Type = ITEM_TYPE_CURRENCY Or Item(itemnum).Type = ITEM_TYPE_NONE Then
-                ' Clear other labels
-                ItemDescLevel = "N/A"
-                ItemDescSpeed = "N/A"
+        ' If currency, exit out before all the other shit
+        If Item(itemnum).Type = ITEM_TYPE_CURRENCY Or Item(itemnum).Type = ITEM_TYPE_NONE Then
+            ' Clear other labels
+            ItemDescLevel = "N/A"
+            ItemDescSpeed = "N/A"
 
-                ItemDescStr = "N/A"
-                ItemDescEnd = "N/A"
-                ItemDescInt = "N/A"
-                ItemDescSpr = "N/A"
-                ItemDescVit = "N/A"
-                ItemDescLuck = "N/A"
-                ItemDescSize = 1
-                Exit Sub
-            End If
+            ItemDescStr = "N/A"
+            ItemDescEnd = "N/A"
+            ItemDescInt = "N/A"
+            ItemDescSpr = "N/A"
+            ItemDescVit = "N/A"
+            ItemDescLuck = "N/A"
+            ItemDescSize = 1
+            Exit Sub
+        End If
 
-            ' Potions + crap
-            ItemDescLevel = Item(itemnum).LevelReq
+        ' Potions + crap
+        ItemDescLevel = Item(itemnum).LevelReq
 
         ' Exit out for everything else 'scept equipment
         If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_GLOVES Then
-                ' Clear other labels
-                ItemDescSpeed = "N/A"
+            ' Clear other labels
+            ItemDescSpeed = "N/A"
 
-                ItemDescStr = "N/A"
-                ItemDescEnd = "N/A"
-                ItemDescInt = "N/A"
-                ItemDescSpr = "N/A"
-                ItemDescVit = "N/A"
-                ItemDescLuck = "N/A"
-                ItemDescSize = 1
-                Exit Sub
-            End If
+            ItemDescStr = "N/A"
+            ItemDescEnd = "N/A"
+            ItemDescInt = "N/A"
+            ItemDescSpr = "N/A"
+            ItemDescVit = "N/A"
+            ItemDescLuck = "N/A"
+            ItemDescSize = 1
+            Exit Sub
+        End If
 
-            ' Equipment specific
-            If Item(itemnum).Add_Stat(Stats.strength) > 0 Then
-                ItemDescStr = "+" & Item(itemnum).Add_Stat(Stats.strength)
-            Else
-                ItemDescStr = "None"
-            End If
+        ' Equipment specific
+        If Item(itemnum).Add_Stat(Stats.strength) > 0 Then
+            ItemDescStr = "+" & Item(itemnum).Add_Stat(Stats.strength)
+        Else
+            ItemDescStr = "None"
+        End If
 
-            If Item(itemnum).Add_Stat(Stats.vitality) > 0 Then
-                ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.vitality)
-            Else
-                ItemDescVit = "None"
-            End If
+        If Item(itemnum).Add_Stat(Stats.vitality) > 0 Then
+            ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.vitality)
+        Else
+            ItemDescVit = "None"
+        End If
 
-            If Item(itemnum).Add_Stat(Stats.intelligence) > 0 Then
-                ItemDescInt = "+" & Item(itemnum).Add_Stat(Stats.intelligence)
-            Else
-                ItemDescInt = "None"
-            End If
+        If Item(itemnum).Add_Stat(Stats.intelligence) > 0 Then
+            ItemDescInt = "+" & Item(itemnum).Add_Stat(Stats.intelligence)
+        Else
+            ItemDescInt = "None"
+        End If
 
-            If Item(itemnum).Add_Stat(Stats.endurance) > 0 Then
-                ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.endurance)
-            Else
-                ItemDescEnd = "None"
-            End If
+        If Item(itemnum).Add_Stat(Stats.endurance) > 0 Then
+            ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.endurance)
+        Else
+            ItemDescEnd = "None"
+        End If
 
-            If Item(itemnum).Add_Stat(Stats.luck) > 0 Then
-                ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.luck)
-            Else
-                ItemDescLuck = "None"
-            End If
+        If Item(itemnum).Add_Stat(Stats.luck) > 0 Then
+            ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.luck)
+        Else
+            ItemDescLuck = "None"
+        End If
 
-            If Item(itemnum).Add_Stat(Stats.spirit) > 0 Then
-                ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.spirit)
-            Else
-                ItemDescSpr = "None"
-            End If
+        If Item(itemnum).Add_Stat(Stats.spirit) > 0 Then
+            ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.spirit)
+        Else
+            ItemDescSpr = "None"
+        End If
 
         If Item(itemnum).Type = ITEM_TYPE_WEAPON Then
             ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"

@@ -178,7 +178,16 @@
         Dim Events() As EventRec
 
         Dim WeatherType As Byte
-        Dim WeatherIndex As Long
+        Dim FogIndex As Long
+        Dim WeatherIntensity As Long
+        Dim FogAlpha As Byte
+        Dim FogSpeed As Byte
+
+        Dim HasMapTint As Byte
+        Dim MapTintR As Byte
+        Dim MapTintG As Byte
+        Dim MapTintB As Byte
+        Dim MapTintA As Byte
     End Structure
 
     Public Structure ClassRec

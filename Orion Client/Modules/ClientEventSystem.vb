@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports SFML.Graphics
+Imports SFML.Window
 
 Public Module ClientEventSystem
 #Region "Globals"
@@ -968,18 +969,18 @@ newlist:
                             Case EventType.evSetFog
                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Fog [Fog: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1) & " Speed: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & " Opacity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data3) & "]")
                             Case EventType.evSetWeather
-                                'Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1
-                                '    Case WEATHER_TYPE_NONE
-                                '        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [None]")
-                                '    Case WEATHER_TYPE_RAIN
-                                '        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Rain - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                '    Case WEATHER_TYPE_SNOW
-                                '        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Snow - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                '    Case WEATHER_TYPE_SANDSTORM
-                                '        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Sand Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                '    Case WEATHER_TYPE_STORM
-                                '        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                'End Select
+                                Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1
+                                    Case MAP_WEATHER_NONE
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [None]")
+                                    Case MAP_WEATHER_RAIN
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Rain - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
+                                    Case MAP_WEATHER_SNOW
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Snow - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
+                                    Case MAP_WEATHER_SANDSTORM
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Sand Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
+                                    Case MAP_WEATHER_STORM
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
+                                End Select
                             Case EventType.evSetTint
                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Map Tint RGBA [" & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1) & "," & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "," & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data3) & "," & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data4) & "]")
                             Case EventType.evWait
@@ -2722,6 +2723,43 @@ newlist:
         buffer = Nothing
     End Sub
 
+    Sub Packet_SpecialEffect(ByVal data() As Byte)
+        Dim buffer As ByteBuffer, effectType As Long
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ServerPackets.SSpecialEffect Then Exit Sub
+
+        effectType = buffer.ReadLong
+
+        Select Case effectType
+            Case EFFECT_TYPE_FADEIN
+                FadeType = 1
+                FadeAmount = 0
+            Case EFFECT_TYPE_FADEOUT
+                FadeType = 0
+                FadeAmount = 255
+            Case EFFECT_TYPE_FLASH
+                FlashTimer = GetTickCount() + 150
+            Case EFFECT_TYPE_FOG
+                CurrentFog = buffer.ReadLong
+                CurrentFogSpeed = buffer.ReadLong
+                CurrentFogOpacity = buffer.ReadLong
+            Case EFFECT_TYPE_WEATHER
+                CurrentWeather = buffer.ReadLong
+                CurrentWeatherIntensity = buffer.ReadLong
+            Case EFFECT_TYPE_TINT
+                Map.HasMapTint = 1
+                CurrentTintR = buffer.ReadLong
+                CurrentTintG = buffer.ReadLong
+                CurrentTintB = buffer.ReadLong
+                CurrentTintA = buffer.ReadLong
+        End Select
+
+        buffer = Nothing
+    End Sub
+
 #End Region
 
 #Region "Drawing..."
@@ -2881,10 +2919,13 @@ newlist:
                     .X = 0
                     .Width = PIC_X
                 End With
-                Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-                tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                GameWindow.Draw(tmpSprite)
+                Dim rec2 As New RectangleShape
+                rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+                rec2.OutlineThickness = 0.6
+                rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                rec2.Size = New Vector2f(rec.Width, rec.Height)
+                rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                GameWindow.Draw(rec2)
                 GoTo nextevent
             End If
             X = ConvertMapX(X)
@@ -2914,7 +2955,7 @@ newlist:
                         End With
                         Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+                        tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     Else
                         With rec
@@ -2923,10 +2964,13 @@ newlist:
                             .X = 0
                             .Width = PIC_X
                         End With
-                        Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                        GameWindow.Draw(tmpSprite)
+                        Dim rec2 As New RectangleShape
+                        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+                        rec2.OutlineThickness = 0.6
+                        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                        rec2.Size = New Vector2f(rec.Width, rec.Height)
+                        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        GameWindow.Draw(rec2)
                     End If
                 Case 2
                     If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic < NumTileSets Then
@@ -2939,7 +2983,7 @@ newlist:
 
                         Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        tmpSprite.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(tmpSprite)
                     Else
                         With rec
@@ -2948,10 +2992,13 @@ newlist:
                             .X = 0
                             .Width = PIC_X
                         End With
-                        Dim tmpSprite As Sprite = New Sprite(MiscGFX)
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New SFML.Window.Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-                        GameWindow.Draw(tmpSprite)
+                        Dim rec2 As New RectangleShape
+                        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+                        rec2.OutlineThickness = 0.6
+                        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                        rec2.Size = New Vector2f(rec.Width, rec.Height)
+                        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+                        GameWindow.Draw(rec2)
                     End If
             End Select
 nextevent:

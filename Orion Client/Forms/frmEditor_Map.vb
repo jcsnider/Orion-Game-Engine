@@ -433,7 +433,50 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub scrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
-        Map.WeatherIndex = scrlFog.Value
+        Map.FogIndex = scrlFog.Value
         lblFogIndex.Text = "Fog: " & scrlFog.Value
+    End Sub
+
+    Private Sub scrlIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntensity.Scroll
+        Map.WeatherIntensity = scrlIntensity.Value
+        lblIntensity.Text = "Intensity: " & scrlIntensity.Value
+    End Sub
+
+    Private Sub scrlFogSpeed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogSpeed.Scroll
+        Map.FogSpeed = scrlFogSpeed.Value
+        lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
+    End Sub
+
+    Private Sub scrlFogAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogAlpha.Scroll
+        Map.FogAlpha = scrlFogAlpha.Value
+        lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
+    End Sub
+
+    Private Sub chkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
+        If chkUseTint.Checked = True Then
+            Map.HasMapTint = 1
+        Else
+            Map.HasMapTint = 0
+        End If
+    End Sub
+
+    Private Sub scrlMapRed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapRed.Scroll
+        Map.MapTintR = scrlMapRed.Value
+        lblMapRed.Text = "Red: " & scrlMapRed.Value
+    End Sub
+
+    Private Sub scrlMapGreen_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapGreen.Scroll
+        Map.MapTintG = scrlMapGreen.Value
+        lblMapGreen.Text = "Green: " & scrlMapGreen.Value
+    End Sub
+
+    Private Sub scrlMapBlue_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBlue.Scroll
+        Map.MapTintB = scrlMapBlue.Value
+        lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
+    End Sub
+
+    Private Sub scrlMapAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapAlpha.Scroll
+        Map.MapTintA = scrlMapAlpha.Value
+        lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
     End Sub
 End Class

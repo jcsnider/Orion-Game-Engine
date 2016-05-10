@@ -157,12 +157,10 @@ Module ServerDatabase
         Dim i As Long
 
         For i = 1 To MAX_MAPS
-
             If Not FileExist(Application.StartupPath & "\Data\maps\map" & i & ".dat") Then
                 SaveMap(i)
                 DoEvents()
             End If
-
         Next
 
     End Sub
@@ -242,7 +240,15 @@ Module ServerDatabase
         FilePutObject(F, Map(MapNum).MaxX)
         FilePutObject(F, Map(MapNum).MaxY)
         FilePutObject(F, Map(MapNum).WeatherType)
-        FilePutObject(F, Map(MapNum).WeatherIndex)
+        FilePutObject(F, Map(MapNum).FogIndex)
+        FilePutObject(F, Map(MapNum).WeatherIntensity)
+        FilePutObject(F, Map(MapNum).FogAlpha)
+        FilePutObject(F, Map(MapNum).FogSpeed)
+        FilePutObject(F, Map(MapNum).HasMapTint)
+        FilePutObject(F, Map(MapNum).MapTintR)
+        FilePutObject(F, Map(MapNum).MapTintG)
+        FilePutObject(F, Map(MapNum).MapTintB)
+        FilePutObject(F, Map(MapNum).MapTintA)
 
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
@@ -425,7 +431,15 @@ Module ServerDatabase
         FileGetObject(F, Map(MapNum).MaxX)
         FileGetObject(F, Map(MapNum).MaxY)
         FileGetObject(F, Map(MapNum).WeatherType)
-        FileGetObject(F, Map(MapNum).WeatherIndex)
+        FileGetObject(F, Map(MapNum).FogIndex)
+        FileGetObject(F, Map(MapNum).WeatherIntensity)
+        FileGetObject(F, Map(MapNum).FogAlpha)
+        FileGetObject(F, Map(MapNum).FogSpeed)
+        FileGetObject(F, Map(MapNum).HasMapTint)
+        FileGetObject(F, Map(MapNum).MapTintR)
+        FileGetObject(F, Map(MapNum).MapTintG)
+        FileGetObject(F, Map(MapNum).MapTintB)
+        FileGetObject(F, Map(MapNum).MapTintA)
 
         ' have to set the tile()
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)

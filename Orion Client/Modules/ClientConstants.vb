@@ -6,7 +6,12 @@
     'Chatbubble
     Public Const ChatBubbleWidth As Long = 200
 
-    'Public Const AllChatLineWidth As Integer = 50
+    Public Const EFFECT_TYPE_FADEIN As Long = 1
+    Public Const EFFECT_TYPE_FADEOUT As Long = 2
+    Public Const EFFECT_TYPE_FLASH As Long = 3
+    Public Const EFFECT_TYPE_FOG As Long = 4
+    Public Const EFFECT_TYPE_WEATHER As Long = 5
+    Public Const EFFECT_TYPE_TINT As Long = 6
 
     Public Const MAX_BYTE As Byte = 255
     Public Const MAX_INTEGER As Integer = 32767
@@ -56,7 +61,6 @@
     ' Number of tiles in width in tilesets
     Public Const TILESHEET_WIDTH As Integer = 15 ' * PIC_X pixels
 
-    '
     Public MapGrid As Boolean
 
     ' Speed moving vars
@@ -144,9 +148,6 @@
     Public Const MAP_MORAL_NONE As Byte = 0
     Public Const MAP_MORAL_SAFE As Byte = 1
     Public Const MAP_MORAL_INDOOR As Byte = 2
-
-    Public Const MAP_WEATHER_NONE As Byte = 0
-    Public Const MAP_WEATHER_FOG As Byte = 1
 
     ' Tile consants
     Public Const TILE_TYPE_WALKABLE As Byte = 0

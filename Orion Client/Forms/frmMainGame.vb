@@ -190,7 +190,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        If Editor = 0 Then Focus()
+        If Editor = 0 And Not InMapEditor Then Focus()
 
     End Sub
 

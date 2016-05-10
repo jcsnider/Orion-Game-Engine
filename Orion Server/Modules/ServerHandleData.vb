@@ -1136,7 +1136,15 @@
         Map(MapNum).MaxX = Buffer.ReadLong
         Map(MapNum).MaxY = Buffer.ReadLong
         Map(MapNum).WeatherType = Buffer.ReadLong
-        Map(MapNum).WeatherIndex = Buffer.ReadLong
+        Map(MapNum).FogIndex = Buffer.ReadLong
+        Map(MapNum).WeatherIntensity = Buffer.ReadLong
+        Map(MapNum).FogAlpha = Buffer.ReadLong
+        Map(MapNum).FogSpeed = Buffer.ReadLong
+        Map(MapNum).HasMapTint = Buffer.ReadLong
+        Map(MapNum).MapTintR = Buffer.ReadLong
+        Map(MapNum).MapTintG = Buffer.ReadLong
+        Map(MapNum).MapTintB = Buffer.ReadLong
+        Map(MapNum).MapTintA = Buffer.ReadLong
 
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 

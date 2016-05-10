@@ -1015,7 +1015,15 @@ Module ServerTCP
             Buffer.WriteLong(Map(MapNum).MaxX)
             Buffer.WriteLong(Map(MapNum).MaxY)
             Buffer.WriteLong(Map(MapNum).WeatherType)
-            Buffer.WriteLong(Map(MapNum).WeatherIndex)
+            Buffer.WriteLong(Map(MapNum).FogIndex)
+            Buffer.WriteLong(Map(MapNum).WeatherIntensity)
+            Buffer.WriteLong(Map(MapNum).FogAlpha)
+            Buffer.WriteLong(Map(MapNum).FogSpeed)
+            Buffer.WriteLong(Map(MapNum).HasMapTint)
+            Buffer.WriteLong(Map(MapNum).MapTintR)
+            Buffer.WriteLong(Map(MapNum).MapTintG)
+            Buffer.WriteLong(Map(MapNum).MapTintB)
+            Buffer.WriteLong(Map(MapNum).MapTintA)
 
             For i = 1 To MAX_MAP_NPCS
                 Buffer.WriteLong(Map(MapNum).Npc(i))

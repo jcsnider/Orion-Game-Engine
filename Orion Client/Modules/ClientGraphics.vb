@@ -5,7 +5,6 @@ Imports SFML.Window
 
 Module ClientGraphics
     Public GameWindow As RenderWindow
-    Public MiniMap As RenderTexture
 
     Public EditorItem_Furniture As RenderWindow
 
@@ -59,6 +58,8 @@ Module ClientGraphics
     Public DirectionsGFXInfo As GraphicInfo
     Public MiscGFX As Texture
     Public MiscGFXInfo As GraphicInfo
+    Public WeatherGFX As Texture
+    Public WeatherGFXInfo As GraphicInfo
 
     Public HotBarGFX As Texture
     Public HotBarGFXInfo As GraphicInfo
@@ -151,8 +152,6 @@ Module ClientGraphics
 
         GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
-
-        MiniMap = New RenderTexture(100, 100)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
 
@@ -357,6 +356,16 @@ Module ClientGraphics
             'Cache the width and height
             TargetGFXInfo.width = TargetGFX.Size.X
             TargetGFXInfo.height = TargetGFX.Size.Y
+        End If
+
+        WeatherGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            WeatherGFX = New Texture(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT)
+
+            'Cache the width and height
+            WeatherGFXInfo.width = WeatherGFX.Size.X
+            WeatherGFXInfo.height = WeatherGFX.Size.Y
         End If
 
         HotBarGFXInfo = New GraphicInfo
@@ -1505,6 +1514,10 @@ Module ClientGraphics
             End If
         End If
 
+        DrawWeather()
+        DrawThunderEffect()
+        DrawMapTint()
+
         ' Draw out a square at mouse cursor
         If InMapEditor Then
             If MapGrid = True Then
@@ -1562,7 +1575,7 @@ Module ClientGraphics
             End If
         Next
 
-        If Map.WeatherType = MAP_WEATHER_FOG Then
+        If CurrentFog > 0 Then
             DrawFog()
         End If
 
@@ -1808,7 +1821,8 @@ Module ClientGraphics
         rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
 
         If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
-            RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+            'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+            rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
             If EditorTileWidth = 1 And EditorTileHeight = 1 Then
                 RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
@@ -1837,12 +1851,20 @@ Module ClientGraphics
 
         With rec
             .Y = 0
-            .Height = PIC_Y
+            .Height = Item(GetPlayerInvItemNum(MyIndex, FurnitureSelected)).FurnitureHeight * PIC_Y
             .X = 0
-            .Width = PIC_X
+            .Width = Item(GetPlayerInvItemNum(MyIndex, FurnitureSelected)).FurnitureWidth * PIC_X
         End With
 
-        RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        Dim rec2 As New RectangleShape
+        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+        rec2.OutlineThickness = 0.6
+        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        rec2.Size = New Vector2f(rec.Width, rec.Height)
+        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
+        GameWindow.Draw(rec2)
+
+        'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawGrid()
@@ -1868,6 +1890,23 @@ Module ClientGraphics
 
         Next
 
+    End Sub
+
+    Public Sub DrawMapTint()
+        'If InMapEditor Then Exit Sub
+
+        If Map.HasMapTint = 0 Then Exit Sub
+
+        Dim tmpSprite As Sprite
+        tmpSprite = New Sprite(MiscGFX)
+        tmpSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
+        tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+
+        tmpSprite.Position = New Vector2f(0, 0)
+
+        GameWindow.Draw(tmpSprite) '
+
+        tmpSprite.Dispose()
     End Sub
 
     Public Sub EditorMap_DrawTileset()
@@ -1996,6 +2035,7 @@ Module ClientGraphics
         If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
         If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
+        If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
         If Not ChatWindowGFX Is Nothing Then ChatWindowGFX.Dispose()
 
@@ -3276,43 +3316,6 @@ NextLoop:
         height = (rec.Bottom - rec.Top)
 
         RenderTexture(TargetGFX, GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
-    End Sub
-
-    Public Sub DrawFog()
-        If InMapEditor Then Exit Sub
-        If Map.Moral = MAP_MORAL_INDOOR Or Map.WeatherType = MAP_WEATHER_NONE Then Exit Sub
-
-        Dim horz As Integer = 0
-        Dim vert As Integer = 0
-
-        For x = TileView.left To TileView.right + 1
-            For y = TileView.top To TileView.bottom + 1
-                If IsValidMapPoint(x, y) Then
-                    horz = -x
-                    vert = -y
-                End If
-            Next
-        Next
-
-        If FogGFXInfo(Map.WeatherIndex).IsLoaded = False Then
-            LoadTexture(Map.WeatherIndex, 8)
-        End If
-
-        'seeying we still use it, lets update timer
-        With FogGFXInfo(Map.WeatherIndex)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        Dim tmpSprite As Sprite
-        tmpSprite = New Sprite(FogGFX(Map.WeatherIndex))
-        'tmpSprite.Color = New SFML.Graphics.Color(255, 255, 255, Map.WeatherIntensity)
-        tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
-
-        tmpSprite.Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50)
-        tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(Map.WeatherIndex).width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(Map.WeatherIndex).height)))
-
-        GameWindow.Draw(tmpSprite) '
-
     End Sub
 
     Public Sub DrawItemDesc()
