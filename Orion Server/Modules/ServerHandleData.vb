@@ -454,6 +454,20 @@
                         End If
                     Next
 
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
+
                     If GetPlayerEquipment(Index, Equipment.Armor) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Armor)
                     End If
@@ -477,6 +491,20 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
 
                     If GetPlayerEquipment(Index, Equipment.Weapon) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Weapon)
@@ -502,6 +530,20 @@
                         End If
                     Next
 
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
+
                     If GetPlayerEquipment(Index, Equipment.Helmet) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Helmet)
                     End If
@@ -525,6 +567,20 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
 
                     If GetPlayerEquipment(Index, Equipment.Shield) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Shield)
@@ -551,6 +607,20 @@
                         End If
                     Next
 
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
+
                     If GetPlayerEquipment(Index, Equipment.Shoes) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Shoes)
                     End If
@@ -576,6 +646,20 @@
                         End If
                     Next
 
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
+                        Exit Sub
+                    End If
+
                     If GetPlayerEquipment(Index, Equipment.Gloves) > 0 Then
                         tempitem = GetPlayerEquipment(Index, Equipment.Gloves)
                     End If
@@ -598,11 +682,26 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
                     SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Inv(invnum).Num).Data1, BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.HP)
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONADDMP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -610,11 +709,26 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
                     SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Inv(invnum).Num).Data1, BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.MP)
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONADDSP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -622,10 +736,25 @@
                             Exit Sub
                         End If
                     Next
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.SP)
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_POTIONSUBHP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -633,11 +762,26 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
                     SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Inv(invnum).Num).Data1, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.HP)
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONSUBMP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -645,11 +789,26 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
                     SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Inv(invnum).Num).Data1, Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.MP)
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONSUBSP
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -657,10 +816,25 @@
                             Exit Sub
                         End If
                     Next
-                    Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    Call SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    Call TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
-                    Call SendVital(Index, Vitals.SP)
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_KEY
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -668,6 +842,20 @@
                             Exit Sub
                         End If
                     Next
+
+                    ' Make sure they are the right level
+                    i = Item(GetPlayerInvItemNum(Index, invnum)).LevelReq
+
+                    If i > GetPlayerLevel(Index) Then
+                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
+                        Exit Sub
+                    End If
+
+                    ' Make sure they are the right class
+                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
+                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
+                        Exit Sub
+                    End If
 
                     Select Case GetPlayerDir(Index)
                         Case DIR_UP
@@ -716,14 +904,14 @@
                             TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                             TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                             SendMapKey(Index, x, y, 1)
-                            Call MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                            MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
 
-                            Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, x, y)
+                            SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, x, y)
 
                             ' Check if we are supposed to take away the item
                             If Map(GetPlayerMap(Index)).Tile(x, y).Data2 = 1 Then
-                                Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
-                                Call PlayerMsg(Index, "The key is destroyed in the lock.")
+                                TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
+                                PlayerMsg(Index, "The key is destroyed in the lock.")
                             End If
                         End If
                     End If
@@ -755,29 +943,29 @@
 
                                     ' Make sure they dont already have the spell
                                     If Not HasSpell(Index, n) Then
-                                        Call SetPlayerSpell(Index, i, n)
-                                        Call SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                                        Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
-                                        Call PlayerMsg(Index, "You study the spell carefully.")
-                                        Call PlayerMsg(Index, "You have learned a new spell!")
+                                        SetPlayerSpell(Index, i, n)
+                                        SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
+                                        TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
+                                        PlayerMsg(Index, "You study the spell carefully.")
+                                        PlayerMsg(Index, "You have learned a new spell!")
                                     Else
-                                        Call PlayerMsg(Index, "You have already learned this spell!")
+                                        PlayerMsg(Index, "You have already learned this spell!")
                                     End If
 
                                 Else
-                                    Call PlayerMsg(Index, "You have learned all that you can learn!")
+                                    PlayerMsg(Index, "You have learned all that you can learn!")
                                 End If
 
                             Else
-                                Call PlayerMsg(Index, "You must be level " & i & " to learn this spell.")
+                                PlayerMsg(Index, "You must be level " & i & " to learn this spell.")
                             End If
 
                         Else
-                            Call PlayerMsg(Index, "This spell can only be learned by " & CheckGrammar(GetClassName(Spell(n).ClassReq)) & ".")
+                            PlayerMsg(Index, "This spell can only be learned by " & CheckGrammar(GetClassName(Spell(n).ClassReq)) & ".")
                         End If
 
                     Else
-                        Call PlayerMsg(Index, "This scroll is not connected to a spell, please inform an admin!")
+                        PlayerMsg(Index, "This scroll is not connected to a spell, please inform an admin!")
                     End If
                 Case ITEM_TYPE_FURNITURE
                     PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.")
