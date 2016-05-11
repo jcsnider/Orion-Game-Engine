@@ -8,6 +8,7 @@ Public Module ClientWeather
 
     Public WeatherParticle(0 To MAX_WEATHER_PARTICLES) As WeatherParticleRec
     Public WeatherSoundPlayer As Sound
+    Public CurWeatherMusic As String
 
     Public Structure WeatherParticleRec
         Dim type As Long
@@ -158,6 +159,7 @@ Public Module ClientWeather
 
     Sub PlayWeatherSound(ByVal FileName As String, Optional Looped As Boolean = False)
         If Not Options.Sound = 1 Or Not FileExist(Application.StartupPath & SOUND_PATH & FileName) Then Exit Sub
+        If CurWeatherMusic = FileName Then Exit Sub
 
         Dim buffer As SoundBuffer
         If WeatherSoundPlayer Is Nothing Then
@@ -175,11 +177,15 @@ Public Module ClientWeather
         End If
         WeatherSoundPlayer.Volume() = MaxVolume
         WeatherSoundPlayer.Play()
+
+        CurWeatherMusic = FileName
     End Sub
 
     Sub StopWeatherSound()
-        If ExtraSoundPlayer Is Nothing Then Exit Sub
-        ExtraSoundPlayer.Dispose()
-        ExtraSoundPlayer = Nothing
+        If WeatherSoundPlayer Is Nothing Then Exit Sub
+        WeatherSoundPlayer.Dispose()
+        WeatherSoundPlayer = Nothing
+
+        CurWeatherMusic = ""
     End Sub
 End Module

@@ -422,9 +422,14 @@ Public Class frmEditor_Map
     End Sub
 
     Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
-        If lstMusic.SelectedIndex >= 0 Then
-            CurMusic = ""
-            PlayMusic(lstMusic.Items(lstMusic.SelectedIndex).ToString)
+        If PreviewPlayer Is Nothing Then
+            If lstMusic.SelectedIndex >= 0 Then
+                StopMusic()
+                PlayPreview(lstMusic.Items(lstMusic.SelectedIndex).ToString)
+            End If
+        Else
+            StopPreview()
+            PlayMusic(Map.Music)
         End If
     End Sub
 

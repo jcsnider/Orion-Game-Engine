@@ -6,6 +6,7 @@ Module ClientSound
     Public SoundPlayer As Sound
     Public ExtraSoundPlayer As Sound
     Public MusicPlayer As Music
+    Public PreviewPlayer As Music
     Public MusicCache(0 To 100) As String
     Public SoundCache(0 To 100) As String
 
@@ -45,6 +46,39 @@ Module ClientSound
         MusicPlayer.Dispose()
         MusicPlayer = Nothing
         CurMusic = ""
+    End Sub
+
+    Sub PlayPreview(ByVal FileName As String)
+        If Not Options.Music = 1 Or Not FileExist(Application.StartupPath & MUSIC_PATH & FileName) Then Exit Sub
+
+        If PreviewPlayer Is Nothing Then
+            Try
+                PreviewPlayer = New Music(Application.StartupPath & MUSIC_PATH & FileName)
+                PreviewPlayer.Loop() = True
+                PreviewPlayer.Volume() = 75
+                PreviewPlayer.Play()
+
+            Catch ex As Exception
+
+            End Try
+        Else
+            Try
+                StopPreview()
+                PreviewPlayer = New Music(Application.StartupPath & MUSIC_PATH & FileName)
+                PreviewPlayer.Loop() = True
+                PreviewPlayer.Volume() = 75
+                PreviewPlayer.Play()
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+
+    Sub StopPreview()
+        If PreviewPlayer Is Nothing Then Exit Sub
+        PreviewPlayer.Stop()
+        PreviewPlayer.Dispose()
+        PreviewPlayer = Nothing
     End Sub
 
     Sub PlaySound(ByVal FileName As String, Optional Looped As Boolean = False)
