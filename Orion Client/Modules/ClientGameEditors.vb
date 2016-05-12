@@ -62,12 +62,7 @@ Module ClientGameEditors
 #Region "Map Editor"
 
     Public Sub MapPropertiesInit()
-        Dim X As Long
-        Dim Y As Long
-        Dim i As Long
-        Dim di As New IO.DirectoryInfo(Application.StartupPath & MUSIC_PATH)
-        Dim aryFi As IO.FileInfo() = di.GetFiles("*.*")
-        Dim fi As IO.FileInfo
+        Dim X As Long, Y As Long, i As Long
 
         frmEditor_Map.txtName.Text = Trim$(Map.Name)
 
@@ -76,9 +71,11 @@ Module ClientGameEditors
         frmEditor_Map.lstMusic.Items.Clear()
         frmEditor_Map.lstMusic.Items.Add("None")
 
-        For Each fi In aryFi
-            frmEditor_Map.lstMusic.Items.Add(fi.Name)
-        Next
+        If UBound(MusicCache) > 0 Then
+            For i = 1 To UBound(MusicCache)
+                frmEditor_Map.lstMusic.Items.Add(MusicCache(i))
+            Next
+        End If
 
         If Trim$(Map.Music) = "None" Then
             frmEditor_Map.lstMusic.SelectedIndex = 0

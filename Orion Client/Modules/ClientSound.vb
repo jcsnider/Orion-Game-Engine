@@ -32,6 +32,7 @@ Module ClientSound
             End Try
         Else
             Try
+                CurMusic = FileName
                 FadeOutSwitch = True
 
             Catch ex As Exception
@@ -162,18 +163,21 @@ Module ClientSound
     End Sub
 
     Sub FadeOut()
-
+        Dim tmpmusic As String
         If MusicPlayer Is Nothing Then Exit Sub
 
         If MusicPlayer.Volume() = 0 Or MusicPlayer.Volume() < 3 Then
             FadeOutSwitch = False
-            If Map.Music = Nothing Then
+            If CurMusic = "" Then
                 StopMusic()
             Else
+                tmpmusic = CurMusic
                 StopMusic()
-                PlayMusic(Map.Music)
+                PlayMusic(tmpmusic)
             End If
         End If
+        If MusicPlayer Is Nothing Then Exit Sub
+
         MusicPlayer.Volume() = MusicPlayer.Volume() - 3
 
     End Sub

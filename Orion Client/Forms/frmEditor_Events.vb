@@ -238,7 +238,7 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'chat bubble
             Case 4
-                MsgBox("Sorry, no chatbubbels yet :(")
+                MsgBox("Sorry, no chatbubbles yet :(")
                 Exit Sub
                 txtChatbubbleText.Text = ""
                 optChatBubbleTarget0.Checked = True
@@ -415,7 +415,7 @@ Public Class frmEditor_Events
                 TempMoveRouteCount = 0
                 ReDim TempMoveRoute(0)
                 pnlMoveRoute.Width = 841
-                pnlMoveRoute.Height = 585
+                pnlMoveRoute.Height = 636
                 pnlMoveRoute.Visible = True
                 pnlMoveRoute.BringToFront()
                 fraCommands.Visible = False
@@ -798,7 +798,7 @@ Public Class frmEditor_Events
 #Region "Graphic"
     Private Sub picGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.Width = 841
-        fraGraphic.Height = 585
+        fraGraphic.Height = 636
         fraGraphic.BringToFront()
         fraGraphic.Visible = True
         GraphicSelType = 0
@@ -917,8 +917,7 @@ Public Class frmEditor_Events
     End Sub
 
     Private Sub btnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
-        pnlMoveRoute.Visible = True
-        fraMoveRoute.Visible = True
+        pnlMoveRoute.BringToFront()
         lstMoveRoute.Items.Clear()
         cmbEvent.Items.Clear()
         cmbEvent.Items.Add("This Event")
@@ -1022,7 +1021,7 @@ Public Class frmEditor_Events
             End Select
         Next
         pnlMoveRoute.Width = 841
-        pnlMoveRoute.Height = 585
+        pnlMoveRoute.Height = 636
         pnlMoveRoute.Visible = True
 
     End Sub
@@ -1499,7 +1498,7 @@ Public Class frmEditor_Events
             End If
             TempMoveRouteCount = 0
             ReDim TempMoveRoute(0)
-            fraMoveRoute.Visible = False
+            pnlMoveRoute.Visible = False
         Else
             tmpEvent.Pages(curPageNum).MoveRouteCount = TempMoveRouteCount
             tmpEvent.Pages(curPageNum).MoveRoute = TempMoveRoute

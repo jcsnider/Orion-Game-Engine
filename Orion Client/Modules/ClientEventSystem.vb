@@ -1692,7 +1692,8 @@ newlist:
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evSetMoveRoute
                 isEdit = True
-                frmEditor_Events.fraMoveRoute.Visible = True
+                frmEditor_Events.pnlMoveRoute.Visible = True
+                frmEditor_Events.pnlMoveRoute.BringToFront()
                 frmEditor_Events.lstMoveRoute.Items.Clear()
                 frmEditor_Events.cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
@@ -1805,7 +1806,7 @@ newlist:
                     End Select
                 Next
                 frmEditor_Events.fraMoveRoute.Width = 841
-                frmEditor_Events.fraMoveRoute.Height = 609
+                frmEditor_Events.fraMoveRoute.Height = 636
                 frmEditor_Events.fraMoveRoute.Visible = True
                 frmEditor_Events.fraDialogue.Visible = False
                 frmEditor_Events.fraCommands.Visible = False

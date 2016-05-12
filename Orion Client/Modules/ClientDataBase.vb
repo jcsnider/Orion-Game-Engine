@@ -129,7 +129,7 @@ Module ClientDataBase
         For Each FileName In Files
             ReDim Preserve MusicCache(Counter)
 
-            MusicCache(Counter) = FileName
+            MusicCache(Counter) = Path.GetFileName(FileName)
             Counter = Counter + 1
             Application.DoEvents()
         Next
@@ -144,7 +144,7 @@ Module ClientDataBase
         For Each FileName In Files
             ReDim Preserve SoundCache(Counter)
 
-            SoundCache(Counter) = FileName
+            SoundCache(Counter) = Path.GetFileName(FileName)
             Counter = Counter + 1
             Application.DoEvents()
         Next
