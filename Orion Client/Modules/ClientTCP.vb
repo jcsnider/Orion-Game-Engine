@@ -260,7 +260,7 @@ Module ClientTCP
                             Buffer.WriteLong(.MoveType)
                             Buffer.WriteLong(.MoveSpeed)
                             Buffer.WriteLong(.MoveFreq)
-                            Buffer.WriteLong(.MoveRouteCount)
+                            Buffer.WriteLong(Map.Events(i).Pages(X).MoveRouteCount)
                             Buffer.WriteLong(.IgnoreMoveRoute)
                             Buffer.WriteLong(.RepeatMoveRoute)
                             If .MoveRouteCount > 0 Then

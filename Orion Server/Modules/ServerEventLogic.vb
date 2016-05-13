@@ -728,7 +728,6 @@
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
-                        If Map(GetPlayerMap(i)).Events Is Nothing Then Continue For
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then
@@ -765,8 +764,8 @@
                                                 playerID = i
                                                 eventID = x
                                                 WalkThrough = .WalkThrough
-                                                If .MoveRouteCount > 0 Then
-                                                    If .MoveRouteStep >= .MoveRouteCount And .RepeatMoveRoute = 1 Then
+                                                If TempPlayer(i).EventMap.EventPages(x).MoveRouteCount > 0 Then
+                                                    If TempPlayer(i).EventMap.EventPages(x).MoveRouteStep >= TempPlayer(i).EventMap.EventPages(x).MoveRouteCount And TempPlayer(i).EventMap.EventPages(x).RepeatMoveRoute = 1 Then
                                                         .MoveRouteStep = 0
                                                         .MoveRouteComplete = 1
                                                     ElseIf .MoveRouteStep >= .MoveRouteCount And .RepeatMoveRoute = 0 Then
@@ -776,8 +775,8 @@
                                                         .MoveRouteComplete = 0
                                                     End If
                                                     If donotprocessmoveroute = False Then
-                                                        .MoveRouteStep = .MoveRouteStep + 1
-                                                        Select Case .MoveSpeed
+
+                                                        Select Case TempPlayer(i).EventMap.EventPages(x).MoveSpeed
                                                             Case 0
                                                                 actualmovespeed = 2
                                                             Case 1
@@ -791,12 +790,13 @@
                                                             Case 5
                                                                 actualmovespeed = 24
                                                         End Select
-                                                        Select Case .MoveRoute(.MoveRouteStep).Index
+                                                        TempPlayer(i).EventMap.EventPages(x).MoveRouteStep = TempPlayer(i).EventMap.EventPages(x).MoveRouteStep + 1
+                                                        Select Case TempPlayer(i).EventMap.EventPages(x).MoveRoute(TempPlayer(i).EventMap.EventPages(x).MoveRouteStep).Index
                                                             Case 1
                                                                 If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, DIR_UP, isglobal) Then
                                                                     EventMove(playerID, MapNum, eventID, DIR_UP, actualmovespeed, isglobal)
                                                                 Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
+                                                                    If TempPlayer(i).EventMap.EventPages(x).IgnoreIfCannotMove = 0 Then
                                                                         .MoveRouteStep = .MoveRouteStep - 1
                                                                     End If
                                                                 End If
@@ -1312,7 +1312,6 @@
                                                                     Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Random(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4)
                                                             End Select
                                                         Case EventType.evPlayerSwitch
-                                                            'Debug.Print("server-data2 is: " & Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2)
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 1
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then

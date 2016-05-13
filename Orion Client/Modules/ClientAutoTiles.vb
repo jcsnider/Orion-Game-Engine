@@ -776,7 +776,7 @@ Public Module ClientAutoTiles
         If Map.Tile(X1, Y1).Layer(layerNum).X <> Map.Tile(X2, Y2).Layer(layerNum).X Then
             checkTileMatch = False
             Exit Function
-
+        Else
             If Map.Tile(X1, Y1).Layer(layerNum).Y <> Map.Tile(X2, Y2).Layer(layerNum).Y Then
                 checkTileMatch = False
                 Exit Function

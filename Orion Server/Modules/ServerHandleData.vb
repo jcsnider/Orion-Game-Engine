@@ -1466,9 +1466,10 @@
                                             .ConditionalBranch.Data3 = Buffer.ReadLong
                                             .ConditionalBranch.ElseCommandList = Buffer.ReadLong
                                             .MoveRouteCount = Buffer.ReadLong
-                                            If .MoveRouteCount > 0 Then
-                                                ReDim Preserve .MoveRoute(.MoveRouteCount)
-                                                For w = 1 To .MoveRouteCount
+                                            Dim tmpcount As Long = .MoveRouteCount
+                                            If tmpcount > 0 Then
+                                                ReDim Preserve .MoveRoute(tmpcount)
+                                                For w = 1 To tmpcount
                                                     .MoveRoute(w).Index = Buffer.ReadLong
                                                     .MoveRoute(w).Data1 = Buffer.ReadLong
                                                     .MoveRoute(w).Data2 = Buffer.ReadLong

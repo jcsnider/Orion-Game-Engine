@@ -541,6 +541,8 @@ Public Module ClientEventSystem
             frmEditor_Events.cmbPositioning.SelectedIndex = .Position
             ' show the commands
             EventListCommands()
+
+            EditorEvent_DrawGraphic()
         End With
 
     End Sub
@@ -1300,8 +1302,18 @@ newlist:
             Case EventType.evSetMoveRoute
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(frmEditor_Events.cmbEvent.SelectedIndex)
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.chkIgnoreMove.Checked
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.chkRepeatRoute.Checked
+                If frmEditor_Events.chkIgnoreMove.Checked = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
+                Else
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
+                End If
+
+                If frmEditor_Events.chkRepeatRoute.Checked = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 1
+                Else
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 0
+                End If
+
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).MoveRouteCount = TempMoveRouteCount
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).MoveRoute = TempMoveRoute
 
@@ -2162,7 +2174,6 @@ newlist:
             Case EventType.evPlayerSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSwitch.SelectedIndex + 1
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbPlayerSwitchSet.SelectedIndex
-                Debug.Print("client-data2 set to: " & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2)
             Case EventType.evSelfSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSetSelfSwitch.SelectedIndex
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbSetSelfSwitchTo.SelectedIndex
@@ -2208,8 +2219,17 @@ newlist:
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.cmbWarpPlayerDir.SelectedIndex
             Case EventType.evSetMoveRoute
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(frmEditor_Events.cmbEvent.SelectedIndex)
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.chkIgnoreMove.Checked
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.chkRepeatRoute.Checked
+                If frmEditor_Events.chkIgnoreMove.Checked = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
+                Else
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
+                End If
+
+                If frmEditor_Events.chkRepeatRoute.Checked = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 1
+                Else
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 0
+                End If
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).MoveRouteCount = TempMoveRouteCount
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).MoveRoute = TempMoveRoute
             Case EventType.evPlayAnimation
@@ -2690,7 +2710,7 @@ newlist:
         buffer.WriteBytes(data)
 
         If buffer.ReadLong <> ServerPackets.SFadeoutBGM Then Exit Sub
-
+        CurMusic = ""
         FadeOutSwitch = True
 
         buffer = Nothing

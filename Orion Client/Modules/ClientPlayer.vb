@@ -114,6 +114,11 @@
         Dim d As Long
         CanMove = True
 
+        If HoldPlayer = True Then
+            CanMove = False
+            Exit Function
+        End If
+
         If GettingMap = True Then
             CanMove = False
             Exit Function
