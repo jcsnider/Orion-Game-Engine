@@ -7,7 +7,7 @@ Home: http://www.ascensionforums.com
 
 What is it?
 ===========
-This is a simple, tilebased 2D ORPG game engine. It features a client and server application setup with a basic GUI on both ends.
+This is a tilebased 2D ORPG game engine. It features a client and server application setup with a basic GUI on both ends.
 
 Game Features:
 ==============

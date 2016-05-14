@@ -350,16 +350,16 @@ Module ClientGeneral
         'first change the window
         If Options.ScreenSize = 0 Then
             MAX_MAPX = 31
-            MAX_MAPY = 23
-            frmMainGame.Width = 1025
-            frmMainGame.Height = 769
+            MAX_MAPY = 22
+            frmMainGame.Width = 1037 '1025
+            frmMainGame.Height = 775 '769
             frmMainGame.picscreen.Width = 1024
             frmMainGame.picscreen.Height = 768
         ElseIf Options.ScreenSize = 1 Then
             MAX_MAPX = 35
-            MAX_MAPY = 26
-            frmMainGame.Width = 1153
-            frmMainGame.Height = 865
+            MAX_MAPY = 25
+            frmMainGame.Width = 1165 '1153
+            frmMainGame.Height = 871 '865
             frmMainGame.picscreen.Width = 1152
             frmMainGame.picscreen.Height = 864
         End If
