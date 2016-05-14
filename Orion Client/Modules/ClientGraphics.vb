@@ -2609,9 +2609,9 @@ Module ClientGraphics
         'Header
         DrawText(CharWindowX + 250, CharWindowY + 145, "==Gather Stats==", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'herbalist skill
-        DrawText(CharWindowX + 210, CharWindowY + 164, "Herbalist Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Herbalist) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 164, "Herbalist Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Herbalist) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'woodcutter
-        DrawText(CharWindowX + 210, CharWindowY + 184, "Woodcutter Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.WoodCutter) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 184, "Woodcutter Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.WoodCutter) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'miner
         DrawText(CharWindowX + 210, CharWindowY + 204, "Miner Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Miner) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'fisherman

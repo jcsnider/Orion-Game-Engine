@@ -1243,9 +1243,9 @@ Module ServerTCP
         Buffer.WriteLong(Player(Index).InHouse)
 
         For i = 0 To ResourceSkills.Skill_Count - 1
-            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillLevel)
-            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillCurExp)
-            Buffer.WriteLong(Player(Index).GatherSkills(i).SkillNextLvlExp)
+            Buffer.WriteLong(GetPlayerGatherSkillLvl(Index, i))
+            Buffer.WriteLong(GetPlayerGatherSkillExp(Index, i))
+            Buffer.WriteLong(GetPlayerGatherSkillMaxExp(Index, i))
         Next
 
         PlayerData = Buffer.ToArray()

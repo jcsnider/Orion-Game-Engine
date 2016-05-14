@@ -8,7 +8,7 @@
     End Function
 
     Sub Main()
-        Call InitServer()
+        InitServer()
     End Sub
 
     Sub InitServer()
@@ -230,6 +230,9 @@
             frmServer.lstView.Items(x - 1).SubItems.Add("")
             ClearPlayer(x)
         Next
+
+        'resource system
+        LoadSkillExp()
 
         UpdateCaption()
         time2 = GetTickCount()

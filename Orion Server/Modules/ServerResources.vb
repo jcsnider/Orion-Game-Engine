@@ -1,4 +1,14 @@
 ﻿Public Module ServerResources
+    Public SkillExpTable(100) As Long
+
+    Sub LoadSkillExp()
+        Dim i As Long
+
+        For i = 1 To 100
+            SkillExpTable(i) = CLng(Getvar(Application.StartupPath & "\SkillExp.ini", "Level", i))
+        Next
+    End Sub
+
     Sub CheckResource(ByVal Index As Long, ByVal x As Long, ByVal y As Long)
         Dim Resource_num As Long, ResourceType As Byte
         Dim Resource_index As Long
@@ -75,7 +85,9 @@
                                         Case ResourceSkills.Fisherman
                                             PlayerMsg(Index, "Your fishing skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType))
                                     End Select
+                                    SendPlayerData(Index)
 
+                                    CheckResourceLevelUp(Index, ResourceType)
                                 Else
                                     ' just do the damage
                                     ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health - Damage
@@ -159,6 +171,7 @@
             expRollover = GetPlayerGatherSkillExp(Index, SkillSlot) - GetPlayerGatherSkillMaxExp(Index, SkillSlot)
             SetPlayerGatherSkillLvl(Index, SkillSlot, GetPlayerGatherSkillLvl(Index, SkillSlot) + 1)
             SetPlayerGatherSkillExp(Index, SkillSlot, expRollover)
+            SetPlayerGatherSkillMaxExp(Index, SkillSlot, GetSkillNextLevel(Index, SkillSlot))
             level_count = level_count + 1
         Loop
 
@@ -187,4 +200,10 @@
         End If
     End Sub
 
+    Function GetSkillNextLevel(ByVal Index As Long, ByVal SkillSlot As Long) As Long
+        GetSkillNextLevel = 0
+        If Index < 0 Or Index > MAX_PLAYERS Then Exit Function
+
+        GetSkillNextLevel = SkillExpTable(GetPlayerGatherSkillLvl(Index, SkillSlot) + 1)
+    End Function
 End Module
