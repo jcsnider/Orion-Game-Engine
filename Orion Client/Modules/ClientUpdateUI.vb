@@ -430,8 +430,6 @@
         If NeedToOpenTrade = True Then
             InTrade = True
             pnlTradeVisible = True
-            'frmMainGame.pnlTrade.Visible = True
-            frmMainGame.lblTheirOffer.Text = Tradername & "'s offer."
 
             NeedToOpenTrade = False
         End If
@@ -439,8 +437,7 @@
         If NeedtoCloseTrade = True Then
             InTrade = False
             pnlTradeVisible = False
-            frmMainGame.pnlTrade.Visible = False
-            frmMainGame.lblTradeStatus.Text = vbNullString
+
             NeedtoCloseTrade = False
         End If
 

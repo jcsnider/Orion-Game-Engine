@@ -17,9 +17,6 @@ Module ClientGraphics
 
     Public TmpBankItem As RenderWindow
 
-    Public YourTradeWindow As RenderWindow
-    Public TheirTradeWindow As RenderWindow
-
     Public TmpSpellWindow As RenderWindow
 
     Public SFMLGameFont As SFML.Graphics.Font
@@ -165,9 +162,6 @@ Module ClientGraphics
         TmpItemWindow = New RenderWindow(frmMainGame.pnlTmpInv.Handle)
 
         TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
-
-        YourTradeWindow = New RenderWindow(frmMainGame.pnlYourTrade.Handle)
-        TheirTradeWindow = New RenderWindow(frmMainGame.pnlTheirTrade.Handle)
 
         TmpSpellWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
@@ -3241,7 +3235,7 @@ NextLoop:
                         End If
 
                         Amount = TradeTheirOffer(i).Value
-                        DrawText(X, Y, Amount, colour, SFML.Graphics.Color.Black, TheirTradeWindow)
+                        DrawText(X, Y, Amount, colour, SFML.Graphics.Color.Black, GameWindow)
                     End If
                 End If
             End If

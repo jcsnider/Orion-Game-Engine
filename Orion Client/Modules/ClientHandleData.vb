@@ -1953,7 +1953,7 @@
         NeedToOpenTrade = True
         Buffer.ReadLong()
         Tradername = Trim(Buffer.ReadString)
-        frmMainGame.pnlTrade.Visible = True
+        pnlTradeVisible = True
 
         Buffer = Nothing
     End Sub
@@ -2003,11 +2003,11 @@
 
         Select Case tradestatus
             Case 0 ' clear
-                frmMainGame.lblTradeStatus.Text = vbNullString
+                'frmMainGame.lblTradeStatus.Text = vbNullString
             Case 1 ' they've accepted
-                frmMainGame.lblTradeStatus.Text = "Other player has accepted."
+                AddText("Other player has accepted.", White)
             Case 2 ' you've accepted
-                frmMainGame.lblTradeStatus.Text = "Waiting for other player to accept."
+                AddText("Waiting for other player to accept.", White)
         End Select
 
         buffer = Nothing

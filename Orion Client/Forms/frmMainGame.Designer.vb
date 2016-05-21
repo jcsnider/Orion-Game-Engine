@@ -44,16 +44,6 @@ Partial Class frmMainGame
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
         Me.pnlTempBank = New System.Windows.Forms.Panel()
-        Me.pnlTrade = New System.Windows.Forms.Panel()
-        Me.lblTradeStatus = New System.Windows.Forms.Label()
-        Me.lblDeclineTrade = New System.Windows.Forms.Label()
-        Me.lblAcceptTrade = New System.Windows.Forms.Label()
-        Me.lblTheirWorth = New System.Windows.Forms.Label()
-        Me.lblYourWorth = New System.Windows.Forms.Label()
-        Me.pnlTheirTrade = New System.Windows.Forms.Panel()
-        Me.pnlYourTrade = New System.Windows.Forms.Panel()
-        Me.lblTheirOffer = New System.Windows.Forms.Label()
-        Me.lblYourOffer = New System.Windows.Forms.Label()
         Me.pnlQuestLog = New System.Windows.Forms.Panel()
         Me.lblQuestLogClose = New System.Windows.Forms.Label()
         Me.lblAbandonQuest = New System.Windows.Forms.Label()
@@ -83,7 +73,6 @@ Partial Class frmMainGame
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
-        Me.pnlTrade.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlEventChat.SuspendLayout()
         CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,123 +297,6 @@ Partial Class frmMainGame
         Me.pnlTempBank.TabIndex = 20
         Me.pnlTempBank.Visible = False
         '
-        'pnlTrade
-        '
-        Me.pnlTrade.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.pnlTrade.BackgroundImage = CType(resources.GetObject("pnlTrade.BackgroundImage"), System.Drawing.Image)
-        Me.pnlTrade.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlTrade.Controls.Add(Me.lblTradeStatus)
-        Me.pnlTrade.Controls.Add(Me.lblDeclineTrade)
-        Me.pnlTrade.Controls.Add(Me.lblAcceptTrade)
-        Me.pnlTrade.Controls.Add(Me.lblTheirWorth)
-        Me.pnlTrade.Controls.Add(Me.lblYourWorth)
-        Me.pnlTrade.Controls.Add(Me.pnlTheirTrade)
-        Me.pnlTrade.Controls.Add(Me.pnlYourTrade)
-        Me.pnlTrade.Controls.Add(Me.lblTheirOffer)
-        Me.pnlTrade.Controls.Add(Me.lblYourOffer)
-        Me.pnlTrade.Location = New System.Drawing.Point(150, 60)
-        Me.pnlTrade.Name = "pnlTrade"
-        Me.pnlTrade.Size = New System.Drawing.Size(408, 344)
-        Me.pnlTrade.TabIndex = 21
-        Me.pnlTrade.Visible = False
-        '
-        'lblTradeStatus
-        '
-        Me.lblTradeStatus.BackColor = System.Drawing.Color.Transparent
-        Me.lblTradeStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTradeStatus.Location = New System.Drawing.Point(3, 305)
-        Me.lblTradeStatus.Name = "lblTradeStatus"
-        Me.lblTradeStatus.Size = New System.Drawing.Size(402, 17)
-        Me.lblTradeStatus.TabIndex = 8
-        Me.lblTradeStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'lblDeclineTrade
-        '
-        Me.lblDeclineTrade.BackColor = System.Drawing.Color.Transparent
-        Me.lblDeclineTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDeclineTrade.ForeColor = System.Drawing.Color.Red
-        Me.lblDeclineTrade.Location = New System.Drawing.Point(274, 322)
-        Me.lblDeclineTrade.Name = "lblDeclineTrade"
-        Me.lblDeclineTrade.Size = New System.Drawing.Size(56, 16)
-        Me.lblDeclineTrade.TabIndex = 7
-        Me.lblDeclineTrade.Text = "Decline"
-        '
-        'lblAcceptTrade
-        '
-        Me.lblAcceptTrade.BackColor = System.Drawing.Color.Transparent
-        Me.lblAcceptTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAcceptTrade.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblAcceptTrade.Location = New System.Drawing.Point(79, 322)
-        Me.lblAcceptTrade.Name = "lblAcceptTrade"
-        Me.lblAcceptTrade.Size = New System.Drawing.Size(49, 16)
-        Me.lblAcceptTrade.TabIndex = 6
-        Me.lblAcceptTrade.Text = "Accept"
-        Me.lblAcceptTrade.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'lblTheirWorth
-        '
-        Me.lblTheirWorth.BackColor = System.Drawing.Color.Transparent
-        Me.lblTheirWorth.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTheirWorth.ForeColor = System.Drawing.Color.White
-        Me.lblTheirWorth.Location = New System.Drawing.Point(208, 288)
-        Me.lblTheirWorth.Name = "lblTheirWorth"
-        Me.lblTheirWorth.Size = New System.Drawing.Size(193, 16)
-        Me.lblTheirWorth.TabIndex = 5
-        Me.lblTheirWorth.Text = "Total Worth: 0g"
-        Me.lblTheirWorth.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'lblYourWorth
-        '
-        Me.lblYourWorth.BackColor = System.Drawing.Color.Transparent
-        Me.lblYourWorth.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblYourWorth.ForeColor = System.Drawing.Color.White
-        Me.lblYourWorth.Location = New System.Drawing.Point(8, 288)
-        Me.lblYourWorth.Name = "lblYourWorth"
-        Me.lblYourWorth.Size = New System.Drawing.Size(193, 16)
-        Me.lblYourWorth.TabIndex = 4
-        Me.lblYourWorth.Text = "Total Worth: 0g"
-        Me.lblYourWorth.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'pnlTheirTrade
-        '
-        Me.pnlTheirTrade.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.pnlTheirTrade.Location = New System.Drawing.Point(208, 24)
-        Me.pnlTheirTrade.Name = "pnlTheirTrade"
-        Me.pnlTheirTrade.Size = New System.Drawing.Size(191, 261)
-        Me.pnlTheirTrade.TabIndex = 3
-        '
-        'pnlYourTrade
-        '
-        Me.pnlYourTrade.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.pnlYourTrade.Location = New System.Drawing.Point(8, 24)
-        Me.pnlYourTrade.Name = "pnlYourTrade"
-        Me.pnlYourTrade.Size = New System.Drawing.Size(191, 261)
-        Me.pnlYourTrade.TabIndex = 2
-        '
-        'lblTheirOffer
-        '
-        Me.lblTheirOffer.BackColor = System.Drawing.Color.Transparent
-        Me.lblTheirOffer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTheirOffer.ForeColor = System.Drawing.Color.White
-        Me.lblTheirOffer.Location = New System.Drawing.Point(208, 8)
-        Me.lblTheirOffer.Name = "lblTheirOffer"
-        Me.lblTheirOffer.Size = New System.Drawing.Size(193, 16)
-        Me.lblTheirOffer.TabIndex = 1
-        Me.lblTheirOffer.Text = "[Name]'s Offer"
-        Me.lblTheirOffer.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'lblYourOffer
-        '
-        Me.lblYourOffer.BackColor = System.Drawing.Color.Transparent
-        Me.lblYourOffer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblYourOffer.ForeColor = System.Drawing.Color.White
-        Me.lblYourOffer.Location = New System.Drawing.Point(8, 8)
-        Me.lblYourOffer.Name = "lblYourOffer"
-        Me.lblYourOffer.Size = New System.Drawing.Size(193, 16)
-        Me.lblYourOffer.TabIndex = 0
-        Me.lblYourOffer.Text = "Your Offer"
-        Me.lblYourOffer.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
         'pnlQuestLog
         '
         Me.pnlQuestLog.BackColor = System.Drawing.Color.Transparent
@@ -443,7 +315,7 @@ Partial Class frmMainGame
         Me.pnlQuestLog.Controls.Add(Me.lblActualTask)
         Me.pnlQuestLog.Controls.Add(Me.lstQuestLog)
         Me.pnlQuestLog.Controls.Add(Me.txtQuestTaskLog)
-        Me.pnlQuestLog.Location = New System.Drawing.Point(788, 320)
+        Me.pnlQuestLog.Location = New System.Drawing.Point(136, 81)
         Me.pnlQuestLog.Name = "pnlQuestLog"
         Me.pnlQuestLog.Size = New System.Drawing.Size(478, 382)
         Me.pnlQuestLog.TabIndex = 38
@@ -623,7 +495,7 @@ Partial Class frmMainGame
         Me.pnlEventChat.Controls.Add(Me.lblResponse2)
         Me.pnlEventChat.Controls.Add(Me.lblResponse1)
         Me.pnlEventChat.Controls.Add(Me.picEventFace)
-        Me.pnlEventChat.Location = New System.Drawing.Point(408, 475)
+        Me.pnlEventChat.Location = New System.Drawing.Point(248, 210)
         Me.pnlEventChat.Name = "pnlEventChat"
         Me.pnlEventChat.Size = New System.Drawing.Size(480, 175)
         Me.pnlEventChat.TabIndex = 43
@@ -716,7 +588,6 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
-        Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpSkill)
@@ -736,7 +607,6 @@ Partial Class frmMainGame
         Me.GroupBox1.PerformLayout()
         Me.pnlCurrency.ResumeLayout(False)
         Me.pnlCurrency.PerformLayout()
-        Me.pnlTrade.ResumeLayout(False)
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
         Me.pnlEventChat.ResumeLayout(False)
@@ -758,16 +628,6 @@ Partial Class frmMainGame
     Friend WithEvents lblCurrencyOk As System.Windows.Forms.Label
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
     Friend WithEvents pnlTempBank As System.Windows.Forms.Panel
-    Friend WithEvents pnlTrade As System.Windows.Forms.Panel
-    Friend WithEvents pnlYourTrade As System.Windows.Forms.Panel
-    Friend WithEvents lblTheirOffer As System.Windows.Forms.Label
-    Friend WithEvents lblYourOffer As System.Windows.Forms.Label
-    Friend WithEvents lblDeclineTrade As System.Windows.Forms.Label
-    Friend WithEvents lblAcceptTrade As System.Windows.Forms.Label
-    Friend WithEvents lblTheirWorth As System.Windows.Forms.Label
-    Friend WithEvents lblYourWorth As System.Windows.Forms.Label
-    Friend WithEvents pnlTheirTrade As System.Windows.Forms.Panel
-    Friend WithEvents lblTradeStatus As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents pnlQuestLog As Windows.Forms.Panel
