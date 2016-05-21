@@ -29,6 +29,7 @@
     Public pnlSpellsVisible As Boolean
     Public pnlBankVisible As Boolean
     Public pnlShopVisible As Boolean
+    Public pnlTradeVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -229,6 +230,30 @@
     Public Const ShopOffsetX As Byte = 5
     Public Const ShopColumns As Byte = 6
 
+    'trade constants
+    Public Const TradeWindowX As Long = 200
+    Public Const TradeWindowY As Byte = 100
+    Public Const OurTradeX As Long = 2
+    Public Const OurTradeY As Byte = 17
+    Public Const TheirTradeX As Long = 201
+    Public Const TheirTradeY As Byte = 17
+
+    Public TradeButtonAcceptX As Long = 50
+    Public TradeButtonAcceptY As Long = 320
+
+    Public TradeButtonDeclineX As Long = 250
+    Public TradeButtonDeclineY As Long = 320
+
+    Public TradeTimer As Long
+    Public TradeRequest As Boolean
+    Public InTrade As Boolean
+    Public TradeYourOffer(0 To MAX_INV) As PlayerInvRec
+    Public TradeTheirOffer(0 To MAX_INV) As PlayerInvRec
+    Public TradeX As Long
+    Public TradeY As Long
+    Public TheirWorth As String
+    Public YourWorth As String
+
     Sub UpdateUI()
         If ReloadFrmMain = True Then
             ReloadFrmMain = False
@@ -404,14 +429,16 @@
 
         If NeedToOpenTrade = True Then
             InTrade = True
-            frmMainGame.pnlTrade.Visible = True
+            pnlTradeVisible = True
+            'frmMainGame.pnlTrade.Visible = True
             frmMainGame.lblTheirOffer.Text = Tradername & "'s offer."
-            DrawTrade()
+
             NeedToOpenTrade = False
         End If
 
         If NeedtoCloseTrade = True Then
             InTrade = False
+            pnlTradeVisible = False
             frmMainGame.pnlTrade.Visible = False
             frmMainGame.lblTradeStatus.Text = vbNullString
             NeedtoCloseTrade = False

@@ -990,6 +990,9 @@
     <Content Include="data files\graphics\GUI\Main\spells.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\Trade.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Menu\btnCredits.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

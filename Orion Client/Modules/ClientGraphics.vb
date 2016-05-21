@@ -95,6 +95,9 @@ Module ClientGraphics
     Public BankPanelGFX As Texture
     Public BankPanelGFXInfo As GraphicInfo
 
+    Public TradePanelGFX As Texture
+    Public TradePanelGFXInfo As GraphicInfo
+
     Public ShopPanelGFX As Texture
     Public ShopPanelGFXInfo As GraphicInfo
 
@@ -119,7 +122,6 @@ Module ClientGraphics
     Public NumSpellIcons As Long
     Public NumFaces As Long
     Public NumFogs As Long
-
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -346,6 +348,16 @@ Module ClientGraphics
             'Cache the width and height
             ShopPanelGFXInfo.width = ShopPanelGFX.Size.X
             ShopPanelGFXInfo.height = ShopPanelGFX.Size.Y
+        End If
+
+        TradePanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Trade" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            TradePanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\Trade" & GFX_EXT)
+
+            'Cache the width and height
+            TradePanelGFXInfo.width = TradePanelGFX.Size.X
+            TradePanelGFXInfo.height = TradePanelGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -1980,8 +1992,6 @@ Module ClientGraphics
         ' Number of graphic files
         If Not MapEditorBackBuffer Is Nothing Then MapEditorBackBuffer.Dispose()
 
-        'If Not TempBitmap Is Nothing Then TempBitmap.Dispose()
-
         For i = 0 To NumAnimations
             If Not AnimationsGFX(i) Is Nothing Then AnimationsGFX(i).Dispose()
         Next i
@@ -2038,6 +2048,9 @@ Module ClientGraphics
         If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
         If Not ChatWindowGFX Is Nothing Then ChatWindowGFX.Dispose()
+        If Not BankPanelGFX Is Nothing Then BankPanelGFX.Dispose()
+        If Not ShopPanelGFX Is Nothing Then ShopPanelGFX.Dispose()
+        If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -3112,10 +3125,18 @@ NextLoop:
         Dim colour As SFML.Graphics.Color
 
         Amount = 0
+        colour = SFML.Graphics.Color.White
 
         If Not InGame Then Exit Sub
-        colour = SFML.Graphics.Color.White
-        YourTradeWindow.Clear(ToSFMLColor(frmMainGame.pnlYourTrade.BackColor))
+
+        'first render panel
+        RenderTexture(TradePanelGFX, GameWindow, TradeWindowX, TradeWindowY, 0, 0, TradePanelGFXInfo.width, TradePanelGFXInfo.height)
+
+        'Headertext
+        DrawText(TradeWindowX + 70, TradeWindowY + 6, "Your Offer", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+
+        DrawText(TradeWindowX + 260, TradeWindowY + 6, Tradername & "'s Offer.", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+
         For i = 1 To MAX_INV
             ' blt your own offer
             itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
@@ -3136,19 +3157,19 @@ NextLoop:
 
                     With rec
                         .Y = 0
-                        .Height = 32
-                        .X = 0
-                        .Width = 32
-                    End With
-
-                    With rec_pos
-                        .Y = InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
                         .Height = PIC_Y
-                        .X = InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                        .X = 0
                         .Width = PIC_X
                     End With
 
-                    RenderTexture(ItemsGFX(itempic), TheirTradeWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                    With rec_pos
+                        .Y = TradeWindowY + OurTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
+                        .Height = PIC_Y
+                        .X = TradeWindowX + OurTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                        .Width = PIC_X
+                    End With
+
+                    RenderTexture(ItemsGFX(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                     ' If item is a stack - draw the amount you have
                     If TradeYourOffer(i).Value > 1 Then
@@ -3165,15 +3186,14 @@ NextLoop:
                         End If
 
                         Amount = TradeYourOffer(i).Value
-                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, YourTradeWindow)
+                        DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
                     End If
                 End If
             End If
         Next
-        frmMainGame.lblYourWorth.Text = YourWorth
-        YourTradeWindow.Display()
 
-        TheirTradeWindow.Clear(ToSFMLColor(frmMainGame.pnlTheirTrade.BackColor))
+        DrawText(TradeWindowX + 8, TradeWindowY + 288, YourWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+
         For i = 1 To MAX_INV
             ' blt their offer
             itemnum = TradeTheirOffer(i).Num
@@ -3192,21 +3212,21 @@ NextLoop:
 
                     With rec
                         .Y = 0
-                        .Height = 32
-                        .X = 0
-                        .Width = 32
-                    End With
-
-                    With rec_pos
-                        .Y = InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
                         .Height = PIC_Y
-                        .X = InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                        .X = 0
                         .Width = PIC_X
                     End With
 
-                    RenderTexture(ItemsGFX(itempic), TheirTradeWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                    With rec_pos
+                        .Y = TradeWindowY + TheirTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
+                        .Height = PIC_Y
+                        .X = TradeWindowX + TheirTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                        .Width = PIC_X
+                    End With
 
-                    ' If item is a stack - draw the amount you have
+                    RenderTexture(ItemsGFX(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+
+                    ' If item is a stack - draw the amount they have
                     If TradeTheirOffer(i).Value > 1 Then
                         Y = rec_pos.Top + 22
                         X = rec_pos.Left - 4
@@ -3226,8 +3246,14 @@ NextLoop:
                 End If
             End If
         Next
-        frmMainGame.lblTheirWorth.Text = TheirWorth
-        TheirTradeWindow.Display()
+
+        DrawText(TradeWindowX + 208, TradeWindowY + 288, TheirWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+
+        'render accept button
+        DrawButton("Accept Trade", TradeWindowX + TradeButtonAcceptX, TradeWindowY + TradeButtonAcceptY)
+
+        'render decline button
+        DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY)
     End Sub
 
     Sub DrawPlayerSpells()
@@ -3336,6 +3362,10 @@ NextLoop:
         If pnlShopVisible = True Then
             Xoffset = ShopWindowX
             Yoffset = ShopWindowY
+        End If
+        If pnlTradeVisible = True Then
+            Xoffset = TradeWindowX
+            Yoffset = TradeWindowY
         End If
 
         'first render panel
@@ -3509,6 +3539,10 @@ NextLoop:
 
         If pnlShopVisible = True Then
             DrawShop()
+        End If
+
+        If pnlTradeVisible = True Then
+            DrawTrade()
         End If
     End Sub
 End Module

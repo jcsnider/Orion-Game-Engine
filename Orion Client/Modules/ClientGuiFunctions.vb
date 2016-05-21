@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
         Dim eqNum As Long, InvNum As Long, spellslot As Long
-        Dim bankitem As Long, shopslot As Long
+        Dim bankitem As Long, shopslot As Long, TradeNum As Long
 
         If InMapEditor Then Exit Sub
         ShowItemDesc = False
@@ -130,6 +130,40 @@ Public Module ClientGuiFunctions
                     LastItemDesc = 0
                 End If
 
+            End If
+        End If
+
+        'trade
+        If pnlTradeVisible = True Then
+            If AboveTradepanel(X, Y) Then
+                TradeX = X
+                TradeY = Y
+
+                'ours
+                TradeNum = IsTradeItem(X, Y, True)
+
+                If TradeNum <> 0 Then
+                    UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value)
+                    LastItemDesc = GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num) ' set it so you don't re-set values
+                    ShowItemDesc = True
+                    Exit Sub
+                Else
+                    ShowItemDesc = False
+                    LastItemDesc = 0
+                End If
+
+                'theirs
+                TradeNum = IsTradeItem(X, Y, False)
+
+                If TradeNum <> 0 Then
+                    UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value)
+                    LastItemDesc = TradeTheirOffer(TradeNum).Num ' set it so you don't re-set values
+                    ShowItemDesc = True
+                    Exit Sub
+                Else
+                    ShowItemDesc = False
+                    LastItemDesc = 0
+                End If
             End If
         End If
 
@@ -387,11 +421,31 @@ Public Module ClientGuiFunctions
             End If
             CheckGuiClick = True
         End If
+
+        'trade
+        If pnlTradeVisible = True Then
+            If AboveTradepanel(X, Y) Then
+                'accept button
+                If X > TradeWindowX + TradeButtonAcceptX And X < TradeWindowX + TradeButtonAcceptX + ButtonGFXInfo.width Then
+                    If Y > TradeWindowY + TradeButtonAcceptY And Y < TradeWindowY + TradeButtonAcceptY + ButtonGFXInfo.height Then
+                        AcceptTrade()
+                    End If
+                End If
+            End If
+
+            'decline button
+            If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.width Then
+                If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.height Then
+                    DeclineTrade()
+                End If
+            End If
+        End If
+
     End Function
 
     Public Function CheckGuiDoubleClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
         Dim InvNum As Long, spellnum As Long, BankItem As Long
-        Dim Value As Long
+        Dim Value As Long, TradeNum As Long
         Dim multiplier As Double
         Dim i As Long
 
@@ -459,6 +513,7 @@ Public Module ClientGuiFunctions
                 End If
             End If
         End If
+
         'Spell panel
         If pnlSpellsVisible = True Then
             If AboveSpellpanel(X, Y) Then
@@ -494,6 +549,18 @@ Public Module ClientGuiFunctions
 
                     WithdrawItem(BankItem, 0)
                     Exit Function
+                End If
+            End If
+        End If
+
+        'trade panel
+        If pnlTradeVisible = True Then
+            'ours?
+            If AboveTradepanel(X, Y) Then
+                TradeNum = IsTradeItem(TradeX, TradeY, True)
+
+                If TradeNum <> 0 Then
+                    UntradeItem(TradeNum)
                 End If
             End If
         End If
@@ -898,6 +965,50 @@ Public Module ClientGuiFunctions
         Next
     End Function
 
+    Function IsTradeItem(ByVal X As Single, ByVal Y As Single, ByVal Yours As Boolean) As Long
+        Dim tempRec As RECT
+        Dim i As Long
+        Dim itemnum As Long
+
+        IsTradeItem = 0
+
+        For i = 1 To MAX_INV
+
+            If Yours Then
+                itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
+
+                With tempRec
+                    .top = TradeWindowY + OurTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
+                    .bottom = .top + PIC_Y
+                    .left = TradeWindowX + OurTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                    .right = .left + PIC_X
+                End With
+            Else
+                itemnum = TradeTheirOffer(i).Num
+
+                With tempRec
+                    .top = TradeWindowY + TheirTradeY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
+                    .bottom = .top + PIC_Y
+                    .left = TradeWindowX + TheirTradeX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
+                    .right = .left + PIC_X
+                End With
+            End If
+
+            If itemnum > 0 And itemnum <= MAX_ITEMS Then
+
+                If X >= tempRec.left And X <= tempRec.right Then
+                    If Y >= tempRec.top And Y <= tempRec.bottom Then
+                        IsTradeItem = i
+                        Exit Function
+                    End If
+                End If
+
+            End If
+
+        Next
+
+    End Function
+
     Function AboveActionPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveActionPanel = False
 
@@ -964,6 +1075,16 @@ Public Module ClientGuiFunctions
         If X > ShopWindowX And X < ShopWindowX + ShopPanelGFXInfo.width Then
             If Y > ShopWindowY And Y < ShopWindowY + ShopPanelGFXInfo.height Then
                 AboveShoppanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveTradepanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveTradepanel = False
+
+        If X > TradeWindowX And X < TradeWindowX + TradePanelGFXInfo.width Then
+            If Y > TradeWindowY And Y < TradeWindowY + TradePanelGFXInfo.height Then
+                AboveTradepanel = True
             End If
         End If
     End Function

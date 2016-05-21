@@ -756,7 +756,7 @@
                                             Else
                                                 EventDir(0, GetPlayerMap(i), x, rand, True)
                                             End If
-                                        Case 2 'Move Route - later!
+                                        Case 2 'Move Route
                                             With TempPlayer(i).EventMap.EventPages(x)
                                                 isglobal = False
                                                 sendupdate = False

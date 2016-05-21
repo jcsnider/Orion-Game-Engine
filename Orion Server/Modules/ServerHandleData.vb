@@ -3025,6 +3025,7 @@
             TempPlayer(index).InTrade = tradetarget
             TempPlayer(tradetarget).InTrade = index
             ' clear out their trade offers
+            ReDim TempPlayer(index).TradeOffer(MAX_INV)
             For i = 1 To MAX_INV
                 TempPlayer(index).TradeOffer(i).Num = 0
                 TempPlayer(index).TradeOffer(i).Value = 0

@@ -272,5 +272,6 @@
     Public Const DIALOGUE_TYPE_VISIT As Byte = 2
     Public Const DIALOGUE_TYPE_PARTY As Byte = 3
     Public Const DIALOGUE_TYPE_QUEST As Byte = 4
+    Public Const DIALOGUE_TYPE_TRADE As Byte = 5
 
 End Module

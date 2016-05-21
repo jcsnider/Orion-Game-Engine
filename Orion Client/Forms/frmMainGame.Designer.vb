@@ -249,7 +249,7 @@ Partial Class frmMainGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(136, 415)
+        Me.pnlCurrency.Location = New System.Drawing.Point(0, 515)
         Me.pnlCurrency.Name = "pnlCurrency"
         Me.pnlCurrency.Size = New System.Drawing.Size(480, 121)
         Me.pnlCurrency.TabIndex = 16
@@ -322,7 +322,7 @@ Partial Class frmMainGame
         Me.pnlTrade.Controls.Add(Me.pnlYourTrade)
         Me.pnlTrade.Controls.Add(Me.lblTheirOffer)
         Me.pnlTrade.Controls.Add(Me.lblYourOffer)
-        Me.pnlTrade.Location = New System.Drawing.Point(297, 102)
+        Me.pnlTrade.Location = New System.Drawing.Point(150, 60)
         Me.pnlTrade.Name = "pnlTrade"
         Me.pnlTrade.Size = New System.Drawing.Size(408, 344)
         Me.pnlTrade.TabIndex = 21
@@ -343,7 +343,7 @@ Partial Class frmMainGame
         Me.lblDeclineTrade.BackColor = System.Drawing.Color.Transparent
         Me.lblDeclineTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDeclineTrade.ForeColor = System.Drawing.Color.Red
-        Me.lblDeclineTrade.Location = New System.Drawing.Point(205, 322)
+        Me.lblDeclineTrade.Location = New System.Drawing.Point(274, 322)
         Me.lblDeclineTrade.Name = "lblDeclineTrade"
         Me.lblDeclineTrade.Size = New System.Drawing.Size(56, 16)
         Me.lblDeclineTrade.TabIndex = 7
@@ -354,7 +354,7 @@ Partial Class frmMainGame
         Me.lblAcceptTrade.BackColor = System.Drawing.Color.Transparent
         Me.lblAcceptTrade.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAcceptTrade.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblAcceptTrade.Location = New System.Drawing.Point(150, 322)
+        Me.lblAcceptTrade.Location = New System.Drawing.Point(79, 322)
         Me.lblAcceptTrade.Name = "lblAcceptTrade"
         Me.lblAcceptTrade.Size = New System.Drawing.Size(49, 16)
         Me.lblAcceptTrade.TabIndex = 6
@@ -443,7 +443,7 @@ Partial Class frmMainGame
         Me.pnlQuestLog.Controls.Add(Me.lblActualTask)
         Me.pnlQuestLog.Controls.Add(Me.lstQuestLog)
         Me.pnlQuestLog.Controls.Add(Me.txtQuestTaskLog)
-        Me.pnlQuestLog.Location = New System.Drawing.Point(232, 97)
+        Me.pnlQuestLog.Location = New System.Drawing.Point(788, 320)
         Me.pnlQuestLog.Name = "pnlQuestLog"
         Me.pnlQuestLog.Size = New System.Drawing.Size(478, 382)
         Me.pnlQuestLog.TabIndex = 38
@@ -623,7 +623,7 @@ Partial Class frmMainGame
         Me.pnlEventChat.Controls.Add(Me.lblResponse2)
         Me.pnlEventChat.Controls.Add(Me.lblResponse1)
         Me.pnlEventChat.Controls.Add(Me.picEventFace)
-        Me.pnlEventChat.Location = New System.Drawing.Point(251, 253)
+        Me.pnlEventChat.Location = New System.Drawing.Point(408, 475)
         Me.pnlEventChat.Name = "pnlEventChat"
         Me.pnlEventChat.Size = New System.Drawing.Size(480, 175)
         Me.pnlEventChat.TabIndex = 43

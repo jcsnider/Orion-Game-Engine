@@ -22,17 +22,6 @@ Module ClientGlobals
     Public chatBubble(0 To MAX_BYTE) As ChatBubbleRec
     Public chatBubbleIndex As Long
 
-    ' trading
-    Public TradeTimer As Long
-    Public TradeRequest As Boolean
-    Public InTrade As Boolean
-    Public TradeYourOffer(0 To MAX_INV) As PlayerInvRec
-    Public TradeTheirOffer(0 To MAX_INV) As PlayerInvRec
-    Public TradeX As Long
-    Public TradeY As Long
-    Public TheirWorth As String
-    Public YourWorth As String
-
     ' Cache the Resources in an array
     Public MapResource() As MapResourceRec
     Public Resource_Index As Long

@@ -351,15 +351,15 @@ Module ClientGeneral
         If Options.ScreenSize = 0 Then
             MAX_MAPX = 31
             MAX_MAPY = 22
-            frmMainGame.Width = 1037 '1025
-            frmMainGame.Height = 775 '769
+            frmMainGame.Width = 1025 '1025
+            frmMainGame.Height = 769 '769
             frmMainGame.picscreen.Width = 1024
             frmMainGame.picscreen.Height = 768
         ElseIf Options.ScreenSize = 1 Then
             MAX_MAPX = 35
             MAX_MAPY = 25
-            frmMainGame.Width = 1165 '1153
-            frmMainGame.Height = 871 '865
+            frmMainGame.Width = 1153 '1153
+            frmMainGame.Height = 865 '865
             frmMainGame.picscreen.Width = 1152
             frmMainGame.picscreen.Height = 864
         End If
