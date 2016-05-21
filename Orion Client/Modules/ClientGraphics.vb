@@ -98,6 +98,9 @@ Module ClientGraphics
     Public ShopPanelGFX As Texture
     Public ShopPanelGFXInfo As GraphicInfo
 
+    Public EventChatGFX As Texture
+    Public EventChatGFXInfo As GraphicInfo
+
     Public TargetGFX As Texture
     Public TargetGFXInfo As GraphicInfo
 
@@ -352,6 +355,16 @@ Module ClientGraphics
             'Cache the width and height
             TradePanelGFXInfo.width = TradePanelGFX.Size.X
             TradePanelGFXInfo.height = TradePanelGFX.Size.Y
+        End If
+
+        EventChatGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\EventChat" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            EventChatGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\EventChat" & GFX_EXT)
+
+            'Cache the width and height
+            EventChatGFXInfo.width = EventChatGFX.Size.X
+            EventChatGFXInfo.height = EventChatGFX.Size.Y
         End If
 
         TargetGFXInfo = New GraphicInfo
@@ -2045,6 +2058,7 @@ Module ClientGraphics
         If Not BankPanelGFX Is Nothing Then BankPanelGFX.Dispose()
         If Not ShopPanelGFX Is Nothing Then ShopPanelGFX.Dispose()
         If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
+        If Not EventChatGFX Is Nothing Then EventChatGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -3537,6 +3551,10 @@ NextLoop:
 
         If pnlTradeVisible = True Then
             DrawTrade()
+        End If
+
+        If pnlEventChatVisible = True Then
+            DrawEventChat()
         End If
     End Sub
 End Module

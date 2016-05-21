@@ -60,7 +60,7 @@ Module ClientGameLogic
                     If EventText = "" Then
                         If EventChat = True Then
                             EventChat = False
-                            frmMainGame.pnlEventChat.Visible = False
+                            pnlEventChatVisible = False
                         End If
                     End If
                 End If

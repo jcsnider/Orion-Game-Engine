@@ -3119,73 +3119,70 @@ nextevent:
     End Sub
 
     Public Sub DrawEventChat()
-        Dim temptext As String
+        Dim temptext As String, txtArray As New List(Of String)
+        Dim tmpY As Long = 0
+
+        'first render panel
+        RenderTexture(EventChatGFX, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGFXInfo.width, EventChatGFXInfo.height)
 
         With frmMainGame
             'face
             If EventChatFace > 0 And EventChatFace < NumFaces Then
-                .picEventFace.Visible = True
-                .picEventFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & EventChatFace & GFX_EXT)
+                'render face
+                If FacesGFXInfo(EventChatFace).IsLoaded = False Then
+                    LoadTexture(EventChatFace, 7)
+                End If
+
+                'seeying we still use it, lets update timer
+                With FacesGFXInfo(EventChatFace)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+                RenderTexture(FacesGFX(EventChatFace), GameWindow, EventChatX + 12, EventChatY + 14, 0, 0, FacesGFXInfo(EventChatFace).width, FacesGFXInfo(EventChatFace).height)
+                EventChatTextX = 113
             Else
-                .picEventFace.Visible = False
+                EventChatTextX = 14
             End If
 
             'EventPrompt
-            temptext = EventText
-            .lblEventChat.Text = temptext
+            txtArray = WordWrap(EventText, 50)
+            For i = 0 To txtArray.Count
+                If i = txtArray.Count Then Exit For
+                'draw text
+                DrawText(EventChatX + EventChatTextX, EventChatY + EventChatTextY + tmpY, Trim(txtArray(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                tmpY = tmpY + 13
+            Next
 
             If EventChatType = 1 Then
-                .lblEventContinue.Visible = False
 
                 If EventChoiceVisible(1) Then
                     'Response1
                     temptext = EventChoices(1)
-                    .lblResponse1.Text = temptext
-                    .lblResponse1.Visible = True
-                Else
-                    .lblResponse1.Visible = False
+                    DrawText(EventChatX + 10, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(2) Then
                     'Response2
                     temptext = EventChoices(2)
-                    .lblResponse2.Text = temptext
-                    .lblResponse2.Visible = True
-                Else
-                    .lblResponse2.Visible = False
+                    DrawText(EventChatX + 10, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(3) Then
                     'Response3
                     temptext = EventChoices(3)
-                    .lblResponse3.Text = temptext
-                    .lblResponse3.Visible = True
-                Else
-                    .lblResponse3.Visible = False
+                    DrawText(EventChatX + 226, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(4) Then
                     'Response4
                     temptext = EventChoices(4)
-                    .lblResponse4.Text = temptext
-                    .lblResponse4.Visible = True
-                Else
-                    .lblResponse4.Visible = False
+                    DrawText(EventChatX + 226, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
             Else
-                .lblResponse1.Visible = False
-                .lblResponse2.Visible = False
-                .lblResponse3.Visible = False
-                .lblResponse4.Visible = False
-
-                temptext = "Continue."
-                .lblEventContinue.Text = temptext
-                .lblEventContinue.Visible = True
+                temptext = "Continue"
+                DrawText(EventChatX + 410, EventChatY + 156, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
             End If
 
-            frmMainGame.pnlEventChat.Visible = True
-            frmMainGame.pnlEventChat.BringToFront()
         End With
 
     End Sub
@@ -3299,7 +3296,7 @@ nextevent:
         Else
             EventChat = False
         End If
-        frmMainGame.pnlEventChat.Visible = False
+        pnlEventChatVisible = False
     End Sub
 
     Public Sub ResetEventdata()

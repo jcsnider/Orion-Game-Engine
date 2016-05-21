@@ -30,6 +30,7 @@
     Public pnlBankVisible As Boolean
     Public pnlShopVisible As Boolean
     Public pnlTradeVisible As Boolean
+    Public pnlEventChatVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -253,6 +254,12 @@
     Public TradeY As Long
     Public TheirWorth As String
     Public YourWorth As String
+
+    'event chat constants
+    Public Const EventChatX As Long = 250
+    Public Const EventChatY As Byte = 210
+    Public EventChatTextX As Long = 113
+    Public EventChatTextY As Long = 14
 
     Sub UpdateUI()
         If ReloadFrmMain = True Then
@@ -560,7 +567,7 @@
         End If
 
         If EventChat = True Then
-            DrawEventChat()
+            pnlEventChatVisible = True
             EventChat = False
         End If
 

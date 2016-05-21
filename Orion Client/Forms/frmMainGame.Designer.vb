@@ -23,7 +23,6 @@ Partial Class frmMainGame
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
@@ -60,22 +59,12 @@ Partial Class frmMainGame
         Me.txtQuestTaskLog = New System.Windows.Forms.TextBox()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlEventChat = New System.Windows.Forms.Panel()
-        Me.lblEventChat = New System.Windows.Forms.Label()
-        Me.lblEventContinue = New System.Windows.Forms.Label()
-        Me.lblResponse3 = New System.Windows.Forms.Label()
-        Me.lblResponse4 = New System.Windows.Forms.Label()
-        Me.lblResponse2 = New System.Windows.Forms.Label()
-        Me.lblResponse1 = New System.Windows.Forms.Label()
-        Me.picEventFace = New System.Windows.Forms.PictureBox()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
-        Me.pnlEventChat.SuspendLayout()
-        CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picscreen
@@ -233,7 +222,7 @@ Partial Class frmMainGame
         '
         'pnlCurrency
         '
-        Me.pnlCurrency.BackColor = System.Drawing.Color.Black
+        Me.pnlCurrency.BackColor = System.Drawing.Color.DimGray
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyCancel)
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
@@ -299,8 +288,7 @@ Partial Class frmMainGame
         '
         'pnlQuestLog
         '
-        Me.pnlQuestLog.BackColor = System.Drawing.Color.Transparent
-        Me.pnlQuestLog.BackgroundImage = CType(resources.GetObject("pnlQuestLog.BackgroundImage"), System.Drawing.Image)
+        Me.pnlQuestLog.BackColor = System.Drawing.Color.DimGray
         Me.pnlQuestLog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlQuestLog.Controls.Add(Me.lblQuestLogClose)
         Me.pnlQuestLog.Controls.Add(Me.lblAbandonQuest)
@@ -483,109 +471,14 @@ Partial Class frmMainGame
         '
         Me.tmrShake.Interval = 50
         '
-        'pnlEventChat
-        '
-        Me.pnlEventChat.BackColor = System.Drawing.Color.Black
-        Me.pnlEventChat.BackgroundImage = CType(resources.GetObject("pnlEventChat.BackgroundImage"), System.Drawing.Image)
-        Me.pnlEventChat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlEventChat.Controls.Add(Me.lblEventChat)
-        Me.pnlEventChat.Controls.Add(Me.lblEventContinue)
-        Me.pnlEventChat.Controls.Add(Me.lblResponse3)
-        Me.pnlEventChat.Controls.Add(Me.lblResponse4)
-        Me.pnlEventChat.Controls.Add(Me.lblResponse2)
-        Me.pnlEventChat.Controls.Add(Me.lblResponse1)
-        Me.pnlEventChat.Controls.Add(Me.picEventFace)
-        Me.pnlEventChat.Location = New System.Drawing.Point(248, 210)
-        Me.pnlEventChat.Name = "pnlEventChat"
-        Me.pnlEventChat.Size = New System.Drawing.Size(480, 175)
-        Me.pnlEventChat.TabIndex = 43
-        Me.pnlEventChat.Visible = False
-        '
-        'lblEventChat
-        '
-        Me.lblEventChat.BackColor = System.Drawing.Color.Transparent
-        Me.lblEventChat.ForeColor = System.Drawing.Color.White
-        Me.lblEventChat.Location = New System.Drawing.Point(113, 14)
-        Me.lblEventChat.Name = "lblEventChat"
-        Me.lblEventChat.Size = New System.Drawing.Size(356, 92)
-        Me.lblEventChat.TabIndex = 6
-        Me.lblEventChat.Text = "chat"
-        '
-        'lblEventContinue
-        '
-        Me.lblEventContinue.AutoSize = True
-        Me.lblEventContinue.BackColor = System.Drawing.Color.Transparent
-        Me.lblEventContinue.ForeColor = System.Drawing.Color.White
-        Me.lblEventContinue.Location = New System.Drawing.Point(423, 156)
-        Me.lblEventContinue.Name = "lblEventContinue"
-        Me.lblEventContinue.Size = New System.Drawing.Size(49, 13)
-        Me.lblEventContinue.TabIndex = 5
-        Me.lblEventContinue.Text = "Continue"
-        '
-        'lblResponse3
-        '
-        Me.lblResponse3.AutoSize = True
-        Me.lblResponse3.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse3.ForeColor = System.Drawing.Color.White
-        Me.lblResponse3.Location = New System.Drawing.Point(226, 124)
-        Me.lblResponse3.Name = "lblResponse3"
-        Me.lblResponse3.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse3.TabIndex = 4
-        Me.lblResponse3.Text = "reponse3"
-        '
-        'lblResponse4
-        '
-        Me.lblResponse4.AutoSize = True
-        Me.lblResponse4.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse4.ForeColor = System.Drawing.Color.White
-        Me.lblResponse4.Location = New System.Drawing.Point(226, 146)
-        Me.lblResponse4.Name = "lblResponse4"
-        Me.lblResponse4.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse4.TabIndex = 3
-        Me.lblResponse4.Text = "reponse4"
-        '
-        'lblResponse2
-        '
-        Me.lblResponse2.AutoSize = True
-        Me.lblResponse2.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse2.ForeColor = System.Drawing.Color.White
-        Me.lblResponse2.Location = New System.Drawing.Point(10, 146)
-        Me.lblResponse2.Name = "lblResponse2"
-        Me.lblResponse2.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse2.TabIndex = 2
-        Me.lblResponse2.Text = "reponse2"
-        '
-        'lblResponse1
-        '
-        Me.lblResponse1.AutoSize = True
-        Me.lblResponse1.BackColor = System.Drawing.Color.Transparent
-        Me.lblResponse1.ForeColor = System.Drawing.Color.White
-        Me.lblResponse1.Location = New System.Drawing.Point(10, 124)
-        Me.lblResponse1.Name = "lblResponse1"
-        Me.lblResponse1.Size = New System.Drawing.Size(51, 13)
-        Me.lblResponse1.TabIndex = 1
-        Me.lblResponse1.Text = "reponse1"
-        '
-        'picEventFace
-        '
-        Me.picEventFace.BackColor = System.Drawing.Color.Transparent
-        Me.picEventFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picEventFace.Location = New System.Drawing.Point(13, 12)
-        Me.picEventFace.Name = "picEventFace"
-        Me.picEventFace.Size = New System.Drawing.Size(94, 94)
-        Me.picEventFace.TabIndex = 0
-        Me.picEventFace.TabStop = False
-        '
         'frmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.Controls.Add(Me.pnlOptions)
-        Me.Controls.Add(Me.pnlEventChat)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.picscreen)
@@ -609,9 +502,6 @@ Partial Class frmMainGame
         Me.pnlCurrency.PerformLayout()
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
-        Me.pnlEventChat.ResumeLayout(False)
-        Me.pnlEventChat.PerformLayout()
-        CType(Me.picEventFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -648,14 +538,6 @@ Partial Class frmMainGame
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label
     Friend WithEvents scrlVolume As Windows.Forms.HScrollBar
-    Friend WithEvents pnlEventChat As Windows.Forms.Panel
-    Friend WithEvents picEventFace As Windows.Forms.PictureBox
-    Friend WithEvents lblResponse3 As Windows.Forms.Label
-    Friend WithEvents lblResponse4 As Windows.Forms.Label
-    Friend WithEvents lblResponse2 As Windows.Forms.Label
-    Friend WithEvents lblResponse1 As Windows.Forms.Label
-    Friend WithEvents lblEventContinue As Windows.Forms.Label
-    Friend WithEvents lblEventChat As Windows.Forms.Label
     Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents cmbScreenSize As Windows.Forms.ComboBox

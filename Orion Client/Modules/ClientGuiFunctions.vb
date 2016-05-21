@@ -258,6 +258,7 @@ Public Module ClientGuiFunctions
                         spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
 
                         If spellnum <> 0 Then
+                            PlaySound("Click.ogg")
                             PlayerCastSpell(spellnum)
                         End If
                     End If
@@ -290,6 +291,7 @@ Public Module ClientGuiFunctions
                     EqNum = IsEqItem(X, Y)
 
                     If EqNum <> 0 Then
+                        PlaySound("Click.ogg")
                         SendUnequip(EqNum)
                     End If
 
@@ -297,36 +299,42 @@ Public Module ClientGuiFunctions
                     'Strenght
                     If X > CharWindowX + StrengthUpgradeX And X < CharWindowX + StrengthUpgradeX + 10 And Y > CharWindowY + StrengthUpgradeY And Y < CharWindowY + StrengthUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(1)
                         End If
                     End If
                     'Endurance
                     If X > CharWindowX + EnduranceUpgradeX And X < CharWindowX + EnduranceUpgradeX + 10 And Y > CharWindowY + EnduranceUpgradeY And Y < CharWindowY + EnduranceUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(2)
                         End If
                     End If
                     'Vitality
                     If X > CharWindowX + VitalityUpgradeX And X < CharWindowX + VitalityUpgradeX + 10 And Y > CharWindowY + VitalityUpgradeY And Y < CharWindowY + VitalityUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(3)
                         End If
                     End If
                     'WillPower
                     If X > CharWindowX + LuckUpgradeX And X < CharWindowX + LuckUpgradeX + 10 And Y > CharWindowY + LuckUpgradeY And Y < CharWindowY + LuckUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(4)
                         End If
                     End If
                     'Intellect
                     If X > CharWindowX + IntellectUpgradeX And X < CharWindowX + IntellectUpgradeX + 10 And Y > CharWindowY + IntellectUpgradeY And Y < CharWindowY + IntellectUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(5)
                         End If
                     End If
                     'Spirit
                     If X > CharWindowX + SpiritUpgradeX And X < CharWindowX + SpiritUpgradeX + 10 And Y > CharWindowY + SpiritUpgradeY And Y < CharWindowY + SpiritUpgradeY + 10 Then
                         If Not GetPlayerPOINTS(MyIndex) = 0 Then
+                            PlaySound("Click.ogg")
                             SendTrainStat(6)
                         End If
                     End If
@@ -345,6 +353,7 @@ Public Module ClientGuiFunctions
                         If InBank Or InShop Then Exit Function
 
                         If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_FURNITURE Then
+                            PlaySound("Click.ogg")
                             FurnitureSelected = InvNum
                             CheckGuiClick = True
                         End If
@@ -352,18 +361,6 @@ Public Module ClientGuiFunctions
                     End If
                 End If
             End If
-            'Spell panel
-            'ElseIf pnlSpellsVisible = True Then
-            '    If AboveSpellpanel(X, Y) Then
-            '        If SelSpellSlot = True Then
-            '            spellnum = IsPlayerSpell(SpellX, SpellY)
-
-            '            If spellnum <> 0 Then
-            '                SendSetHotbarSkill(SelHotbarSlot, spellnum)
-            '            End If
-            '        End If
-            '    End If
-
         End If
 
         If DialogPanelVisible Then
@@ -387,6 +384,7 @@ Public Module ClientGuiFunctions
                         RefreshQuestLog()
                     End If
                 End If
+                PlaySound("Click.ogg")
                 DialogPanelVisible = False
             End If
             'cancel button
@@ -405,7 +403,7 @@ Public Module ClientGuiFunctions
                 ElseIf DIALOGUE_TYPE_QUEST Then 'quest declined
                     QuestAcceptTag = 0
                 End If
-
+                PlaySound("Click.ogg")
                 DialogPanelVisible = False
             End If
             CheckGuiClick = True
@@ -415,6 +413,7 @@ Public Module ClientGuiFunctions
             If AboveBankpanel(X, Y) Then
                 If X > BankWindowX + 140 And X < BankWindowX + 140 + getTextWidth("Close Bank", 15) Then
                     If Y > BankWindowY + BankPanelGFXInfo.height - 15 And Y < BankWindowY + BankPanelGFXInfo.height Then
+                        PlaySound("Click.ogg")
                         CloseBank()
                     End If
                 End If
@@ -428,6 +427,7 @@ Public Module ClientGuiFunctions
                 'accept button
                 If X > TradeWindowX + TradeButtonAcceptX And X < TradeWindowX + TradeButtonAcceptX + ButtonGFXInfo.width Then
                     If Y > TradeWindowY + TradeButtonAcceptY And Y < TradeWindowY + TradeButtonAcceptY + ButtonGFXInfo.height Then
+                        PlaySound("Click.ogg")
                         AcceptTrade()
                     End If
                 End If
@@ -436,7 +436,103 @@ Public Module ClientGuiFunctions
             'decline button
             If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.width Then
                 If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.height Then
+                    PlaySound("Click.ogg")
                     DeclineTrade()
+                End If
+            End If
+        End If
+
+        'eventchat
+        If pnlEventChatVisible = True Then
+            If AboveEventChat(X, Y) Then
+                'Response1
+                If EventChoiceVisible(1) Then
+                    If X > EventChatX + 10 And X < EventChatX + 10 + getTextWidth(EventChoices(1)) Then
+                        If Y > EventChatY + 124 And Y < EventChatY + 124 + 13 Then
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEventChatReply)
+                            Buffer.WriteLong(EventReplyID)
+                            Buffer.WriteLong(EventReplyPage)
+                            Buffer.WriteLong(1)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            ClearEventChat()
+                            InEvent = False
+                        End If
+                    End If
+                End If
+
+                'Response2
+                If EventChoiceVisible(2) Then
+                    If X > EventChatX + 10 And X < EventChatX + 10 + getTextWidth(EventChoices(2)) Then
+                        If Y > EventChatY + 146 And Y < EventChatY + 146 + 13 Then
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEventChatReply)
+                            Buffer.WriteLong(EventReplyID)
+                            Buffer.WriteLong(EventReplyPage)
+                            Buffer.WriteLong(2)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            ClearEventChat()
+                            InEvent = False
+                        End If
+                    End If
+                End If
+
+                'Response3
+                If EventChoiceVisible(3) Then
+                    If X > EventChatX + 226 And X < EventChatX + 226 + getTextWidth(EventChoices(3)) Then
+                        If Y > EventChatY + 124 And Y < EventChatY + 124 + 13 Then
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEventChatReply)
+                            Buffer.WriteLong(EventReplyID)
+                            Buffer.WriteLong(EventReplyPage)
+                            Buffer.WriteLong(3)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            ClearEventChat()
+                            InEvent = False
+                        End If
+                    End If
+                End If
+
+                'Response4
+                If EventChoiceVisible(4) Then
+                    If X > EventChatX + 226 And X < EventChatX + 226 + getTextWidth(EventChoices(4)) Then
+                        If Y > EventChatY + 146 And Y < EventChatY + 146 + 13 Then
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEventChatReply)
+                            Buffer.WriteLong(EventReplyID)
+                            Buffer.WriteLong(EventReplyPage)
+                            Buffer.WriteLong(4)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            ClearEventChat()
+                            InEvent = False
+                        End If
+                    End If
+                End If
+
+                'continue
+                If EventChatType <> 1 Then
+                    If X > EventChatX + 410 And X < EventChatX + 410 + getTextWidth("Continue") Then
+                        If Y > EventChatY + 156 And Y < EventChatY + 156 + 13 Then
+                            PlaySound("Click.ogg")
+                            Buffer = New ByteBuffer
+                            Buffer.WriteLong(ClientPackets.CEventChatReply)
+                            Buffer.WriteLong(EventReplyID)
+                            Buffer.WriteLong(EventReplyPage)
+                            Buffer.WriteLong(0)
+                            SendData(Buffer.ToArray)
+                            Buffer = Nothing
+                            ClearEventChat()
+                            InEvent = False
+                        End If
+                    End If
                 End If
             End If
         End If
@@ -1085,6 +1181,16 @@ Public Module ClientGuiFunctions
         If X > TradeWindowX And X < TradeWindowX + TradePanelGFXInfo.width Then
             If Y > TradeWindowY And Y < TradeWindowY + TradePanelGFXInfo.height Then
                 AboveTradepanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveEventChat(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveEventChat = False
+
+        If X > EventChatX And X < EventChatX + EventChatGFXInfo.width Then
+            If Y > EventChatY And Y < EventChatY + EventChatGFXInfo.height Then
+                AboveEventChat = True
             End If
         End If
     End Function
