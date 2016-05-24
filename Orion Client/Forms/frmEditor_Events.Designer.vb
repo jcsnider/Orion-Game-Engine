@@ -180,6 +180,16 @@ Partial Class frmEditor_Events
         Me.lblRandomlabel32 = New System.Windows.Forms.Label()
         Me.btnLabeling = New System.Windows.Forms.Button()
         Me.fraDialogue = New System.Windows.Forms.GroupBox()
+        Me.fraPlayerWarp = New System.Windows.Forms.GroupBox()
+        Me.cmbWarpPlayerDir = New System.Windows.Forms.ComboBox()
+        Me.scrlWPY = New System.Windows.Forms.HScrollBar()
+        Me.lblWPY = New System.Windows.Forms.Label()
+        Me.lblWPX = New System.Windows.Forms.Label()
+        Me.scrlWPX = New System.Windows.Forms.HScrollBar()
+        Me.btnPlayerWarpOK = New System.Windows.Forms.Button()
+        Me.btnPlayerWarpCancel = New System.Windows.Forms.Button()
+        Me.lblWPMap = New System.Windows.Forms.Label()
+        Me.scrlWPMap = New System.Windows.Forms.HScrollBar()
         Me.fraMapTint = New System.Windows.Forms.GroupBox()
         Me.scrlMapTintData3 = New System.Windows.Forms.HScrollBar()
         Me.lblMapTintData3 = New System.Windows.Forms.Label()
@@ -446,16 +456,6 @@ Partial Class frmEditor_Events
         Me.picShowTextFace = New System.Windows.Forms.PictureBox()
         Me.txtShowText = New System.Windows.Forms.TextBox()
         Me.lblRandomLabel18 = New System.Windows.Forms.Label()
-        Me.fraPlayerWarp = New System.Windows.Forms.GroupBox()
-        Me.cmbWarpPlayerDir = New System.Windows.Forms.ComboBox()
-        Me.scrlWPY = New System.Windows.Forms.HScrollBar()
-        Me.lblWPY = New System.Windows.Forms.Label()
-        Me.lblWPX = New System.Windows.Forms.Label()
-        Me.scrlWPX = New System.Windows.Forms.HScrollBar()
-        Me.btnPlayerWarpOK = New System.Windows.Forms.Button()
-        Me.btnPlayerWarpCancel = New System.Windows.Forms.Button()
-        Me.lblWPMap = New System.Windows.Forms.Label()
-        Me.scrlWPMap = New System.Windows.Forms.HScrollBar()
         Me.fraHidePic = New System.Windows.Forms.GroupBox()
         Me.lblRandomLabel58 = New System.Windows.Forms.Label()
         Me.btnHidePicOK = New System.Windows.Forms.Button()
@@ -547,6 +547,7 @@ Partial Class frmEditor_Events
         Me.tabPages.SuspendLayout()
         Me.frarandom20.SuspendLayout()
         Me.fraDialogue.SuspendLayout()
+        Me.fraPlayerWarp.SuspendLayout()
         Me.fraMapTint.SuspendLayout()
         Me.fraSetWeather.SuspendLayout()
         Me.fraSetFog.SuspendLayout()
@@ -582,7 +583,6 @@ Partial Class frmEditor_Events
         Me.fraGiveExp.SuspendLayout()
         Me.fraShowText.SuspendLayout()
         CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.fraPlayerWarp.SuspendLayout()
         Me.fraHidePic.SuspendLayout()
         Me.fraPlayerSwitch.SuspendLayout()
         Me.fraCreateLabel.SuspendLayout()
@@ -802,6 +802,7 @@ Partial Class frmEditor_Events
         '
         'scrlGraphic
         '
+        Me.scrlGraphic.LargeChange = 1
         Me.scrlGraphic.Location = New System.Drawing.Point(256, 17)
         Me.scrlGraphic.Name = "scrlGraphic"
         Me.scrlGraphic.Size = New System.Drawing.Size(151, 17)
@@ -1140,6 +1141,7 @@ Partial Class frmEditor_Events
         '
         'fraDialogue
         '
+        Me.fraDialogue.Controls.Add(Me.fraPlayerWarp)
         Me.fraDialogue.Controls.Add(Me.fraMapTint)
         Me.fraDialogue.Controls.Add(Me.fraSetWeather)
         Me.fraDialogue.Controls.Add(Me.fraSetFog)
@@ -1171,7 +1173,6 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraShowChatBubble)
         Me.fraDialogue.Controls.Add(Me.fraGiveExp)
         Me.fraDialogue.Controls.Add(Me.fraShowText)
-        Me.fraDialogue.Controls.Add(Me.fraPlayerWarp)
         Me.fraDialogue.Controls.Add(Me.fraHidePic)
         Me.fraDialogue.Controls.Add(Me.fraPlayerSwitch)
         Me.fraDialogue.Controls.Add(Me.fraCreateLabel)
@@ -1181,6 +1182,100 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Size = New System.Drawing.Size(815, 592)
         Me.fraDialogue.TabIndex = 6
         Me.fraDialogue.TabStop = False
+        '
+        'fraPlayerWarp
+        '
+        Me.fraPlayerWarp.Controls.Add(Me.cmbWarpPlayerDir)
+        Me.fraPlayerWarp.Controls.Add(Me.scrlWPY)
+        Me.fraPlayerWarp.Controls.Add(Me.lblWPY)
+        Me.fraPlayerWarp.Controls.Add(Me.lblWPX)
+        Me.fraPlayerWarp.Controls.Add(Me.scrlWPX)
+        Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpOK)
+        Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpCancel)
+        Me.fraPlayerWarp.Controls.Add(Me.lblWPMap)
+        Me.fraPlayerWarp.Controls.Add(Me.scrlWPMap)
+        Me.fraPlayerWarp.Location = New System.Drawing.Point(260, 112)
+        Me.fraPlayerWarp.Name = "fraPlayerWarp"
+        Me.fraPlayerWarp.Size = New System.Drawing.Size(245, 145)
+        Me.fraPlayerWarp.TabIndex = 32
+        Me.fraPlayerWarp.TabStop = False
+        Me.fraPlayerWarp.Text = "Warp Player"
+        Me.fraPlayerWarp.Visible = False
+        '
+        'cmbWarpPlayerDir
+        '
+        Me.cmbWarpPlayerDir.FormattingEnabled = True
+        Me.cmbWarpPlayerDir.Items.AddRange(New Object() {"Retain Direction", "Up", "Down", "Left", "Right"})
+        Me.cmbWarpPlayerDir.Location = New System.Drawing.Point(10, 85)
+        Me.cmbWarpPlayerDir.Name = "cmbWarpPlayerDir"
+        Me.cmbWarpPlayerDir.Size = New System.Drawing.Size(229, 21)
+        Me.cmbWarpPlayerDir.TabIndex = 26
+        '
+        'scrlWPY
+        '
+        Me.scrlWPY.Location = New System.Drawing.Point(96, 65)
+        Me.scrlWPY.Name = "scrlWPY"
+        Me.scrlWPY.Size = New System.Drawing.Size(143, 17)
+        Me.scrlWPY.TabIndex = 25
+        '
+        'lblWPY
+        '
+        Me.lblWPY.AutoSize = True
+        Me.lblWPY.Location = New System.Drawing.Point(5, 68)
+        Me.lblWPY.Name = "lblWPY"
+        Me.lblWPY.Size = New System.Drawing.Size(26, 13)
+        Me.lblWPY.TabIndex = 24
+        Me.lblWPY.Text = "Y: 0"
+        '
+        'lblWPX
+        '
+        Me.lblWPX.AutoSize = True
+        Me.lblWPX.Location = New System.Drawing.Point(6, 42)
+        Me.lblWPX.Name = "lblWPX"
+        Me.lblWPX.Size = New System.Drawing.Size(26, 13)
+        Me.lblWPX.TabIndex = 23
+        Me.lblWPX.Text = "X: 0"
+        '
+        'scrlWPX
+        '
+        Me.scrlWPX.Location = New System.Drawing.Point(96, 39)
+        Me.scrlWPX.Name = "scrlWPX"
+        Me.scrlWPX.Size = New System.Drawing.Size(143, 17)
+        Me.scrlWPX.TabIndex = 22
+        '
+        'btnPlayerWarpOK
+        '
+        Me.btnPlayerWarpOK.Location = New System.Drawing.Point(83, 116)
+        Me.btnPlayerWarpOK.Name = "btnPlayerWarpOK"
+        Me.btnPlayerWarpOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnPlayerWarpOK.TabIndex = 20
+        Me.btnPlayerWarpOK.Text = "Ok"
+        Me.btnPlayerWarpOK.UseVisualStyleBackColor = True
+        '
+        'btnPlayerWarpCancel
+        '
+        Me.btnPlayerWarpCancel.Location = New System.Drawing.Point(164, 116)
+        Me.btnPlayerWarpCancel.Name = "btnPlayerWarpCancel"
+        Me.btnPlayerWarpCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnPlayerWarpCancel.TabIndex = 19
+        Me.btnPlayerWarpCancel.Text = "Cancel"
+        Me.btnPlayerWarpCancel.UseVisualStyleBackColor = True
+        '
+        'lblWPMap
+        '
+        Me.lblWPMap.AutoSize = True
+        Me.lblWPMap.Location = New System.Drawing.Point(6, 16)
+        Me.lblWPMap.Name = "lblWPMap"
+        Me.lblWPMap.Size = New System.Drawing.Size(40, 13)
+        Me.lblWPMap.TabIndex = 13
+        Me.lblWPMap.Text = "Map: 0"
+        '
+        'scrlWPMap
+        '
+        Me.scrlWPMap.Location = New System.Drawing.Point(96, 14)
+        Me.scrlWPMap.Name = "scrlWPMap"
+        Me.scrlWPMap.Size = New System.Drawing.Size(143, 17)
+        Me.scrlWPMap.TabIndex = 12
         '
         'fraMapTint
         '
@@ -3835,99 +3930,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel18.TabIndex = 0
         Me.lblRandomLabel18.Text = "Text:"
         '
-        'fraPlayerWarp
-        '
-        Me.fraPlayerWarp.Controls.Add(Me.cmbWarpPlayerDir)
-        Me.fraPlayerWarp.Controls.Add(Me.scrlWPY)
-        Me.fraPlayerWarp.Controls.Add(Me.lblWPY)
-        Me.fraPlayerWarp.Controls.Add(Me.lblWPX)
-        Me.fraPlayerWarp.Controls.Add(Me.scrlWPX)
-        Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpOK)
-        Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpCancel)
-        Me.fraPlayerWarp.Controls.Add(Me.lblWPMap)
-        Me.fraPlayerWarp.Controls.Add(Me.scrlWPMap)
-        Me.fraPlayerWarp.Location = New System.Drawing.Point(260, 112)
-        Me.fraPlayerWarp.Name = "fraPlayerWarp"
-        Me.fraPlayerWarp.Size = New System.Drawing.Size(245, 145)
-        Me.fraPlayerWarp.TabIndex = 32
-        Me.fraPlayerWarp.TabStop = False
-        Me.fraPlayerWarp.Text = "Warp Player"
-        Me.fraPlayerWarp.Visible = False
-        '
-        'cmbWarpPlayerDir
-        '
-        Me.cmbWarpPlayerDir.FormattingEnabled = True
-        Me.cmbWarpPlayerDir.Location = New System.Drawing.Point(10, 85)
-        Me.cmbWarpPlayerDir.Name = "cmbWarpPlayerDir"
-        Me.cmbWarpPlayerDir.Size = New System.Drawing.Size(229, 21)
-        Me.cmbWarpPlayerDir.TabIndex = 26
-        '
-        'scrlWPY
-        '
-        Me.scrlWPY.Location = New System.Drawing.Point(96, 65)
-        Me.scrlWPY.Name = "scrlWPY"
-        Me.scrlWPY.Size = New System.Drawing.Size(143, 17)
-        Me.scrlWPY.TabIndex = 25
-        '
-        'lblWPY
-        '
-        Me.lblWPY.AutoSize = True
-        Me.lblWPY.Location = New System.Drawing.Point(5, 68)
-        Me.lblWPY.Name = "lblWPY"
-        Me.lblWPY.Size = New System.Drawing.Size(26, 13)
-        Me.lblWPY.TabIndex = 24
-        Me.lblWPY.Text = "Y: 0"
-        '
-        'lblWPX
-        '
-        Me.lblWPX.AutoSize = True
-        Me.lblWPX.Location = New System.Drawing.Point(6, 42)
-        Me.lblWPX.Name = "lblWPX"
-        Me.lblWPX.Size = New System.Drawing.Size(26, 13)
-        Me.lblWPX.TabIndex = 23
-        Me.lblWPX.Text = "X: 0"
-        '
-        'scrlWPX
-        '
-        Me.scrlWPX.Location = New System.Drawing.Point(96, 39)
-        Me.scrlWPX.Name = "scrlWPX"
-        Me.scrlWPX.Size = New System.Drawing.Size(143, 17)
-        Me.scrlWPX.TabIndex = 22
-        '
-        'btnPlayerWarpOK
-        '
-        Me.btnPlayerWarpOK.Location = New System.Drawing.Point(83, 116)
-        Me.btnPlayerWarpOK.Name = "btnPlayerWarpOK"
-        Me.btnPlayerWarpOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnPlayerWarpOK.TabIndex = 20
-        Me.btnPlayerWarpOK.Text = "Ok"
-        Me.btnPlayerWarpOK.UseVisualStyleBackColor = True
-        '
-        'btnPlayerWarpCancel
-        '
-        Me.btnPlayerWarpCancel.Location = New System.Drawing.Point(164, 116)
-        Me.btnPlayerWarpCancel.Name = "btnPlayerWarpCancel"
-        Me.btnPlayerWarpCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnPlayerWarpCancel.TabIndex = 19
-        Me.btnPlayerWarpCancel.Text = "Cancel"
-        Me.btnPlayerWarpCancel.UseVisualStyleBackColor = True
-        '
-        'lblWPMap
-        '
-        Me.lblWPMap.AutoSize = True
-        Me.lblWPMap.Location = New System.Drawing.Point(6, 16)
-        Me.lblWPMap.Name = "lblWPMap"
-        Me.lblWPMap.Size = New System.Drawing.Size(40, 13)
-        Me.lblWPMap.TabIndex = 13
-        Me.lblWPMap.Text = "Map: 0"
-        '
-        'scrlWPMap
-        '
-        Me.scrlWPMap.Location = New System.Drawing.Point(96, 14)
-        Me.scrlWPMap.Name = "scrlWPMap"
-        Me.scrlWPMap.Size = New System.Drawing.Size(143, 17)
-        Me.scrlWPMap.TabIndex = 12
-        '
         'fraHidePic
         '
         Me.fraHidePic.Controls.Add(Me.lblRandomLabel58)
@@ -4786,8 +4788,8 @@ Partial Class frmEditor_Events
         Me.Controls.Add(Me.pnlVariableSwitches)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.fraGraphic)
         Me.Controls.Add(Me.pnlMoveRoute)
+        Me.Controls.Add(Me.fraGraphic)
         Me.Name = "frmEditor_Events"
         Me.Text = "Event Editor"
         Me.pnlVariableSwitches.ResumeLayout(False)
@@ -4808,6 +4810,8 @@ Partial Class frmEditor_Events
         Me.frarandom20.ResumeLayout(False)
         Me.frarandom20.PerformLayout()
         Me.fraDialogue.ResumeLayout(False)
+        Me.fraPlayerWarp.ResumeLayout(False)
+        Me.fraPlayerWarp.PerformLayout()
         Me.fraMapTint.ResumeLayout(False)
         Me.fraMapTint.PerformLayout()
         Me.fraSetWeather.ResumeLayout(False)
@@ -4871,8 +4875,6 @@ Partial Class frmEditor_Events
         Me.fraShowText.ResumeLayout(False)
         Me.fraShowText.PerformLayout()
         CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.fraPlayerWarp.ResumeLayout(False)
-        Me.fraPlayerWarp.PerformLayout()
         Me.fraHidePic.ResumeLayout(False)
         Me.fraHidePic.PerformLayout()
         Me.fraPlayerSwitch.ResumeLayout(False)

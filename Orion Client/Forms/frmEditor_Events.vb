@@ -840,7 +840,8 @@ Public Class frmEditor_Events
         Else
             lblGraphic.Text = "Number: " & scrlGraphic.Value
         End If
-        cmbGraphic_SelectedIndexChanged(sender, e)
+        EditorEvent_DrawGraphic()
+        'cmbGraphic_SelectedIndexChanged(sender, e)
     End Sub
 
     Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
