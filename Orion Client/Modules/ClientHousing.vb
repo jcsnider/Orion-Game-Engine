@@ -189,11 +189,22 @@ Public Module ClientHousing
         buffer = Nothing
     End Sub
 
-    Public Sub SendVisit(ByVal Accepted As Byte)
+    Public Sub SendInvite(ByVal Name As String)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
 
         buffer.WriteLong(ClientPackets.CVisit)
+        buffer.WriteString(Name)
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+    End Sub
+
+    Public Sub SendVisit(ByVal Accepted As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+
+        buffer.WriteLong(ClientPackets.CAcceptVisit)
         buffer.WriteLong(Accepted)
         SendData(buffer.ToArray)
 

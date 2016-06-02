@@ -171,16 +171,20 @@ Public Class frmMainGame
                     ' if we're in the middle of choose the trade target or not
                     If Not TradeRequest Then
                         ' targetting
-                        PlayerSearch(CurX, CurY)
+                        PlayerSearch(CurX, CurY, 0)
                     Else
                         ' trading
                         SendTradeRequest(CurX, CurY)
                     End If
+                    pnlRClick.Visible = False
                     ' right click
                 ElseIf e.Button = MouseButtons.Right Then
                     If ShiftDown Or VbKeyShift = True Then
                         ' admin warp if we're pressing shift and right clicking
                         If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
+                    Else
+                        ' rightclick menu
+                        PlayerSearch(CurX, CurY, 1)
                     End If
                     FurnitureSelected = 0
                 End If
@@ -440,6 +444,10 @@ Public Class frmMainGame
     End Sub
 
     Private ReadOnly NonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
+
+    Private Sub lblRCClose_Click(sender As Object, e As EventArgs) 
+        pnlRClick.Visible = False
+    End Sub
 
     Public Function IsAcceptable(ByVal keyData As Keys) As Boolean
         Dim index As Integer = Array.IndexOf(NonAcceptableKeys, keyData)

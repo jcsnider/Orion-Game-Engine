@@ -1943,4 +1943,15 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
+    Sub SendRightClick(ByVal Index As Long)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.SrClick)
+
+        SendDataTo(Index, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
 End Module

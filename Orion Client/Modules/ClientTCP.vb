@@ -955,7 +955,7 @@ Module ClientTCP
         pnlBankVisible = False
     End Sub
 
-    Sub PlayerSearch(ByVal CurX As Integer, ByVal CurY As Integer)
+    Sub PlayerSearch(ByVal CurX As Integer, ByVal CurY As Integer, ByVal RClick As Byte)
         Dim Buffer As ByteBuffer
 
         If isInBounds() Then
@@ -963,6 +963,7 @@ Module ClientTCP
             Buffer.WriteLong(ClientPackets.CSearch)
             Buffer.WriteLong(CurX)
             Buffer.WriteLong(CurY)
+            Buffer.WriteLong(RClick)
             SendData(Buffer.ToArray())
             Buffer = Nothing
         End If

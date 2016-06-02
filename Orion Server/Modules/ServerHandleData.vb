@@ -2191,19 +2191,19 @@
     End Sub
 
     Sub Packet_PlayerSearch(ByVal index As Long, ByVal data() As Byte)
-        Dim buffer As ByteBuffer, TargetFound As Byte
+        Dim buffer As ByteBuffer, TargetFound As Byte, rclick As Byte
         Dim x As Long, y As Long, i As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CSearch Then Exit Sub
 
         x = buffer.ReadLong
         y = buffer.ReadLong
+        rclick = buffer.ReadLong
 
         ' Prevent subscript out of range
-        If x < 0 Or x > Map(GetPlayerMap(index)).MaxX Or y < 0 Or y > Map(GetPlayerMap(index)).MaxY Then
-            Exit Sub
-        End If
+        If x < 0 Or x > Map(GetPlayerMap(index)).MaxX Or y < 0 Or y > Map(GetPlayerMap(index)).MaxY Then Exit Sub
 
         ' Check for a player
         For i = 1 To MAX_PLAYERS
@@ -2216,23 +2216,23 @@
                             ' Consider the player
                             If i <> index Then
                                 If GetPlayerLevel(i) >= GetPlayerLevel(index) + 5 Then
-                                    Call PlayerMsg(index, "You wouldn't stand a chance.")
+                                    PlayerMsg(index, "You wouldn't stand a chance.")
                                 Else
 
                                     If GetPlayerLevel(i) > GetPlayerLevel(index) Then
-                                        Call PlayerMsg(index, "This one seems to have an advantage over you.")
+                                        PlayerMsg(index, "This one seems to have an advantage over you.")
                                     Else
 
                                         If GetPlayerLevel(i) = GetPlayerLevel(index) Then
-                                            Call PlayerMsg(index, "This would be an even fight.")
+                                            PlayerMsg(index, "This would be an even fight.")
                                         Else
 
                                             If GetPlayerLevel(index) >= GetPlayerLevel(i) + 5 Then
-                                                Call PlayerMsg(index, "You could slaughter that player.")
+                                                PlayerMsg(index, "You could slaughter that player.")
                                             Else
 
                                                 If GetPlayerLevel(index) > GetPlayerLevel(i) Then
-                                                    Call PlayerMsg(index, "You would have an advantage over that player.")
+                                                    PlayerMsg(index, "You would have an advantage over that player.")
                                                 End If
                                             End If
                                         End If
@@ -2243,9 +2243,10 @@
                             ' Change target
                             TempPlayer(index).Target = i
                             TempPlayer(index).TargetType = TARGET_TYPE_PLAYER
-                            Call PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".")
+                            PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".")
                             SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                             TargetFound = 1
+                            If rclick = 1 Then SendRightClick(index)
                             Exit Sub
                         End If
                     End If
@@ -2260,7 +2261,7 @@
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
                 If MapItem(GetPlayerMap(index), i).x = x Then
                     If MapItem(GetPlayerMap(index), i).y = y Then
-                        Call PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".")
+                        PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".")
                         Exit Sub
                     End If
                 End If
@@ -2277,7 +2278,7 @@
                         ' Change target
                         TempPlayer(index).Target = i
                         TempPlayer(index).TargetType = TARGET_TYPE_NPC
-                        Call PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".")
+                        PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".")
                         SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                         TargetFound = 1
                         Exit Sub

@@ -49,6 +49,7 @@ Module ClientGlobals
     Public PingToDraw As String
     Public GoldAmount As String
     Public inChat As Boolean
+    Public ShowRClick As Boolean
 
     Public InvItemFrame(0 To MAX_INV) As Byte ' Used for animated items
     Public LastItemDesc As Long ' Stores the last item we showed in desc

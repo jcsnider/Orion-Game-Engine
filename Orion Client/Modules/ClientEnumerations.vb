@@ -82,6 +82,7 @@
         SMapNames
         SCritical
         SNews
+        SrClick
 
         'quests
         SQuestEditor

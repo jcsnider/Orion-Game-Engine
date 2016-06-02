@@ -137,6 +137,7 @@
 
         Packets.Add(ServerPackets.SCritical, AddressOf Packet_Critical)
         Packets.Add(ServerPackets.SNews, AddressOf Packet_News)
+        Packets.Add(ServerPackets.SrClick, AddressOf Packet_RClick)
 
         'quests
         Packets.Add(ServerPackets.SQuestEditor, AddressOf Packet_QuestEditor)
@@ -2416,8 +2417,8 @@
     End Sub
 
     Private Sub Packet_News(ByVal Data() As Byte)
-
         Dim Buffer As ByteBuffer
+
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
@@ -2429,4 +2430,18 @@
 
         Buffer = Nothing
     End Sub
+
+    Private Sub Packet_RClick(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadLong <> ServerPackets.SrClick Then Exit Sub
+
+        ShowRClick = True
+
+        Buffer = Nothing
+    End Sub
+
 End Module

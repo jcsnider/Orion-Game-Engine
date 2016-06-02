@@ -643,6 +643,15 @@
         If frmEditor_Projectile.Visible Then
             EditorProjectile_DrawProjectile()
         End If
+
+        If ShowRClick = True Then
+            frmMainGame.lblRCName.Text = Player(myTarget).Name
+            frmMainGame.pnlRClick.Left = CurX * PIC_X
+            frmMainGame.pnlRClick.Top = CurY * PIC_Y
+            frmMainGame.pnlRClick.Visible = True
+            ShowRClick = False
+        End If
+
     End Sub
 
 End Module
