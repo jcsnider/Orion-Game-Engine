@@ -23,6 +23,7 @@ Partial Class frmMainGame
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
@@ -59,15 +60,12 @@ Partial Class frmMainGame
         Me.txtQuestTaskLog = New System.Windows.Forms.TextBox()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlRClick = New System.Windows.Forms.Panel()
-        Me.lblRCName = New System.Windows.Forms.Label()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
-        Me.pnlRClick.SuspendLayout()
         Me.SuspendLayout()
         '
         'picscreen
@@ -230,7 +228,7 @@ Partial Class frmMainGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(0, 515)
+        Me.pnlCurrency.Location = New System.Drawing.Point(12, 471)
         Me.pnlCurrency.Name = "pnlCurrency"
         Me.pnlCurrency.Size = New System.Drawing.Size(480, 121)
         Me.pnlCurrency.TabIndex = 16
@@ -474,32 +472,13 @@ Partial Class frmMainGame
         '
         Me.tmrShake.Interval = 50
         '
-        'pnlRClick
-        '
-        Me.pnlRClick.Controls.Add(Me.lblRCName)
-        Me.pnlRClick.Location = New System.Drawing.Point(802, 413)
-        Me.pnlRClick.Name = "pnlRClick"
-        Me.pnlRClick.Size = New System.Drawing.Size(135, 184)
-        Me.pnlRClick.TabIndex = 43
-        Me.pnlRClick.Visible = False
-        '
-        'lblRCName
-        '
-        Me.lblRCName.Location = New System.Drawing.Point(3, 1)
-        Me.lblRCName.Name = "lblRCName"
-        Me.lblRCName.Size = New System.Drawing.Size(129, 23)
-        Me.lblRCName.TabIndex = 0
-        Me.lblRCName.Text = "Name"
-        Me.lblRCName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'frmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.pnlRClick)
+        Me.ClientSize = New System.Drawing.Size(1024, 604)
         Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
@@ -509,6 +488,7 @@ Partial Class frmMainGame
         Me.Controls.Add(Me.pnlTmpInv)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmMainGame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -524,7 +504,6 @@ Partial Class frmMainGame
         Me.pnlCurrency.PerformLayout()
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
-        Me.pnlRClick.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -564,6 +543,4 @@ Partial Class frmMainGame
     Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents cmbScreenSize As Windows.Forms.ComboBox
-    Friend WithEvents pnlRClick As Windows.Forms.Panel
-    Friend WithEvents lblRCName As Windows.Forms.Label
 End Class

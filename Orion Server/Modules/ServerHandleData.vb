@@ -81,11 +81,14 @@
         Packets.Add(ClientPackets.CWithdrawItem, AddressOf Packet_WithdrawItem)
         Packets.Add(ClientPackets.CCloseBank, AddressOf Packet_CloseBank)
         Packets.Add(ClientPackets.CAdminWarp, AddressOf Packet_AdminWarp)
-        Packets.Add(ClientPackets.CTradeRequest, AddressOf Packet_TradeRequest)
+
+        Packets.Add(ClientPackets.CTradeInvite, AddressOf Packet_TradeInvite)
+        Packets.Add(ClientPackets.CTradeInviteAccept, AddressOf Packet_TradeInviteAccept)
         Packets.Add(ClientPackets.CAcceptTrade, AddressOf Packet_AcceptTrade)
         Packets.Add(ClientPackets.CDeclineTrade, AddressOf Packet_DeclineTrade)
         Packets.Add(ClientPackets.CTradeItem, AddressOf Packet_TradeItem)
         Packets.Add(ClientPackets.CUntradeItem, AddressOf Packet_UntradeItem)
+
         Packets.Add(ClientPackets.CAdmin, AddressOf Packet_Admin)
 
         'quests
@@ -2334,17 +2337,15 @@
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CParty Then Exit Sub
 
-        n = FindPlayer(buffer.ReadString) 'Parse(1))
+        n = FindPlayer(buffer.ReadString)
         buffer = Nothing
 
         ' Prevent partying with self
-        If n = index Then
-            Exit Sub
-        End If
+        If n = index Then Exit Sub
 
         ' Check for a previous party and if so drop it
         If TempPlayer(index).InParty = YES Then
-            Call PlayerMsg(index, "You are already in a party!")
+            PlayerMsg(index, "You are already in a party!")
             Exit Sub
         End If
 
@@ -2973,35 +2974,20 @@
         buffer = Nothing
     End Sub
 
-    Sub Packet_TradeRequest(ByVal index As Long, ByVal data() As Byte)
+    Sub Packet_TradeInvite(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
-        Dim x As Long, y As Long, i As Long, tradetarget As Long
+        Dim Name As String, tradetarget As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadLong <> ClientPackets.CTradeRequest Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CTradeInvite Then Exit Sub
 
-        x = buffer.ReadLong
-        y = buffer.ReadLong
+        Name = buffer.ReadString
 
         buffer = Nothing
 
-        ' Prevent subscript out of range
-        If x < 0 Or x > Map(GetPlayerMap(index)).MaxX Or y < 0 Or y > Map(GetPlayerMap(index)).MaxY Then
-            Exit Sub
-        End If
-
         ' Check for a player
-        For i = 1 To MAX_PLAYERS
-            If IsPlaying(i) Then
-                If GetPlayerMap(index) = GetPlayerMap(i) Then
-                    If GetPlayerX(i) = x Then
-                        If GetPlayerY(i) = y Then
-                            tradetarget = i
-                        End If
-                    End If
-                End If
-            End If
-        Next
+
+        tradetarget = FindPlayer(Name)
 
         ' make sure we don't error
         If tradetarget <= 0 Or tradetarget > MAX_PLAYERS Then Exit Sub
@@ -3012,19 +2998,47 @@
             Exit Sub
         End If
 
-        ' if the request accepts an open request, let them trade!
+        ' send the trade request
+        TempPlayer(index).TradeRequest = tradetarget
+        TempPlayer(tradetarget).TradeRequest = index
+
+        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.")
+        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.")
+        SendClearTradeTimer(index)
+
+        SendTradeInvite(tradetarget, index)
+    End Sub
+
+    Sub Packet_TradeInviteAccept(ByVal index As Long, ByVal data() As Byte)
+        Dim buffer As ByteBuffer, tradetarget As Long, status As Byte
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+        If buffer.ReadLong <> ClientPackets.CTradeInviteAccept Then Exit Sub
+
+        status = buffer.ReadLong
+
+        buffer = Nothing
+
+        If status = 0 Then  Exit Sub
+
+        tradetarget = TempPlayer(index).TradeRequest
+
+        ' Let them trade!
         If TempPlayer(tradetarget).TradeRequest = index Then
             ' let them know they're trading
             PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.")
             PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.")
             ' clear the trade timeout clientside
             SendClearTradeTimer(index)
+
             ' clear the tradeRequest server-side
             TempPlayer(index).TradeRequest = 0
             TempPlayer(tradetarget).TradeRequest = 0
+
             ' set that they're trading with each other
             TempPlayer(index).InTrade = tradetarget
             TempPlayer(tradetarget).InTrade = index
+
             ' clear out their trade offers
             ReDim TempPlayer(index).TradeOffer(MAX_INV)
             For i = 1 To MAX_INV
@@ -3036,6 +3050,7 @@
             ' Used to init the trade window clientside
             SendTrade(index, tradetarget)
             SendTrade(tradetarget, index)
+
             ' Send the offer data - Used to clear their client
             SendTradeUpdate(index, 0)
             SendTradeUpdate(index, 1)
@@ -3043,23 +3058,17 @@
             SendTradeUpdate(tradetarget, 1)
             Exit Sub
         End If
-
-        ' send the trade request
-        TempPlayer(index).TradeRequest = tradetarget
-        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.")
-        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.")
-        SendClearTradeTimer(index)
     End Sub
 
     Sub Packet_AcceptTrade(ByVal index As Long, ByVal data() As Byte)
-        Dim buffer As ByteBuffer
-        Dim tradeTarget As Long
-        Dim i As Long
+        Dim buffer As ByteBuffer, itemNum As Long
+        Dim tradeTarget As Long, i As Long
         Dim tmpTradeItem(0 To MAX_INV) As PlayerInvRec
         Dim tmpTradeItem2(0 To MAX_INV) As PlayerInvRec
-        Dim itemNum As Long
+
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
+
         If buffer.ReadLong <> ClientPackets.CAcceptTrade Then Exit Sub
 
         TempPlayer(index).AcceptTrade = True

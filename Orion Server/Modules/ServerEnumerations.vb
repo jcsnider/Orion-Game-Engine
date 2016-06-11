@@ -70,11 +70,14 @@
         SStunned
         SMapWornEq
         SBank
+
         SClearTradeTimer
+        STradeInvite
         STrade
         SCloseTrade
         STradeUpdate
         STradeStatus
+
         SGameData
         SMapReport
         STarget
@@ -204,11 +207,14 @@
         CWithdrawItem
         CCloseBank
         CAdminWarp
-        CTradeRequest
+
+        CTradeInvite
+        CTradeInviteAccept
         CAcceptTrade
         CDeclineTrade
         CTradeItem
         CUntradeItem
+
         CAdmin
 
         'quests

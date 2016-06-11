@@ -728,6 +728,7 @@
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                        If Gettingmap = True Then Exit Sub
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then

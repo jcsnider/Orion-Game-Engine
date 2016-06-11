@@ -123,11 +123,14 @@
         Packets.Add(ServerPackets.SStunned, AddressOf Packet_Stunned)
         Packets.Add(ServerPackets.SMapWornEq, AddressOf Packet_MapWornEquipment)
         Packets.Add(ServerPackets.SBank, AddressOf Packet_OpenBank)
+
         Packets.Add(ServerPackets.SClearTradeTimer, AddressOf Packet_ClearTradeTimer)
+        Packets.Add(ServerPackets.STradeInvite, AddressOf Packet_TradeInvite)
         Packets.Add(ServerPackets.STrade, AddressOf Packet_Trade)
         Packets.Add(ServerPackets.SCloseTrade, AddressOf Packet_CloseTrade)
         Packets.Add(ServerPackets.STradeUpdate, AddressOf Packet_TradeUpdate)
         Packets.Add(ServerPackets.STradeStatus, AddressOf Packet_TradeStatus)
+
         Packets.Add(ServerPackets.SGameData, AddressOf Packet_GameData)
         Packets.Add(ServerPackets.SMapReport, AddressOf Packet_Mapreport) 'Mapreport
         Packets.Add(ServerPackets.STarget, AddressOf Packet_Target)
@@ -1940,6 +1943,24 @@
 
         TradeRequest = False
         TradeTimer = 0
+
+        Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_TradeInvite(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer, requester As Long
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadLong <> ServerPackets.STradeInvite Then Exit Sub
+
+        requester = Buffer.ReadLong
+
+        DialogType = DIALOGUE_TYPE_TRADE
+
+        DialogMsg1 = Trim$(Player(requester).Name) & " invites you to a trade!"
+
+        UpdateDialog = True
 
         Buffer = Nothing
     End Sub

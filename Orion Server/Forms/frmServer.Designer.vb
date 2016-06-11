@@ -23,6 +23,7 @@ Partial Class frmServer
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServer))
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lstView = New System.Windows.Forms.ListView()
         Me.colIndex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -43,6 +44,7 @@ Partial Class frmServer
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnShutDown = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.btnReloadAnimations = New System.Windows.Forms.Button()
         Me.btnReloadResources = New System.Windows.Forms.Button()
         Me.btnReloadItems = New System.Windows.Forms.Button()
@@ -84,7 +86,6 @@ Partial Class frmServer
         Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrUpdatePlayerList = New System.Windows.Forms.Timer(Me.components)
-        Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.TabPage2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -276,6 +277,15 @@ Partial Class frmServer
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Reload"
+        '
+        'btnSaveAll
+        '
+        Me.btnSaveAll.Location = New System.Drawing.Point(96, 131)
+        Me.btnSaveAll.Name = "btnSaveAll"
+        Me.btnSaveAll.Size = New System.Drawing.Size(83, 31)
+        Me.btnSaveAll.TabIndex = 8
+        Me.btnSaveAll.Text = "Save All"
+        Me.btnSaveAll.UseVisualStyleBackColor = True
         '
         'btnReloadAnimations
         '
@@ -600,15 +610,6 @@ Partial Class frmServer
         '
         Me.tmrUpdatePlayerList.Interval = 5000
         '
-        'btnSaveAll
-        '
-        Me.btnSaveAll.Location = New System.Drawing.Point(96, 131)
-        Me.btnSaveAll.Name = "btnSaveAll"
-        Me.btnSaveAll.Size = New System.Drawing.Size(83, 31)
-        Me.btnSaveAll.TabIndex = 8
-        Me.btnSaveAll.Text = "Save All"
-        Me.btnSaveAll.UseVisualStyleBackColor = True
-        '
         'frmServer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -616,6 +617,7 @@ Partial Class frmServer
         Me.ClientSize = New System.Drawing.Size(544, 277)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmServer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

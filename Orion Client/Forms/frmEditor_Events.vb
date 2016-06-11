@@ -3,6 +3,13 @@
 Public Class frmEditor_Events
 
 #Region "Frm Code"
+    Private Sub frmEditor_Events_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+    End Sub
+
+    Private Sub frmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
+        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
+    End Sub
     Sub ClearConditionFrame()
         Dim i As Long
 
@@ -851,24 +858,27 @@ Public Class frmEditor_Events
         X = e.Location.X
         Y = e.Location.Y
 
+        Dim selW As Long = Math.Ceiling(X \ PIC_X) - GraphicSelX
+        Dim selH As Long = Math.Ceiling(Y \ PIC_Y) - GraphicSelY
+
         If Me.cmbGraphic.SelectedIndex = 2 Then
             'Tileset... hard one....
-            If ShiftDown Then
-                'If GraphicSelX > -1 And GraphicSelY > -1 Then
-                '    If CLng(X + Me.hScrlGraphicSel.Value) / 32 > GraphicSelX And CLng(Y + Me.vScrlGraphicSel.Value) / 32 > GraphicSelY Then
-                '        GraphicSelX2 = CLng(X + Me.hScrlGraphicSel.Value) / 32
-                '        GraphicSelY2 = CLng(Y + Me.vScrlGraphicSel.Value) / 32
-                '    End If
-                'End If
+            If Control.ModifierKeys = Keys.Shift Then
+                If GraphicSelX > -1 And GraphicSelY > -1 Then
+                    If selW >= 0 And selH >= 0 Then
+                        GraphicSelX2 = selW + 1
+                        GraphicSelY2 = selH + 1
+                    End If
+                End If
             Else
-                'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value) \ 32
-                'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value) \ 32
-                GraphicSelX2 = 0
-                GraphicSelY2 = 0
+                GraphicSelX = X \ PIC_X
+                GraphicSelY = Y \ PIC_Y
+                GraphicSelX2 = 1
+                GraphicSelY2 = 1
             End If
         ElseIf Me.cmbGraphic.SelectedIndex = 1 Then
-            'GraphicSelX = CLng(X + Me.hScrlGraphicSel.Value)
-            'GraphicSelY = CLng(Y + Me.vScrlGraphicSel.Value)
+            GraphicSelX = X
+            GraphicSelY = Y
             GraphicSelX2 = 0
             GraphicSelY2 = 0
             If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub

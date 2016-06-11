@@ -31,6 +31,7 @@
     Public pnlShopVisible As Boolean
     Public pnlTradeVisible As Boolean
     Public pnlEventChatVisible As Boolean
+    Public pnlRClickVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -260,6 +261,12 @@
     Public Const EventChatY As Byte = 210
     Public EventChatTextX As Long = 113
     Public EventChatTextY As Long = 14
+
+    'right click menu
+    Public RClickname As String
+    Public RClickX As Long
+    Public RClickY As Long
+
 
     Sub UpdateUI()
         If ReloadFrmMain = True Then
@@ -545,7 +552,7 @@
                 DialogButton1Text = "Accept"
                 DialogButton2Text = "Decline"
                 DialogPanelVisible = True
-            ElseIf DialogType = DIALOGUE_TYPE_PARTY Then
+            ElseIf DialogType = DIALOGUE_TYPE_PARTY Or DialogType = DIALOGUE_TYPE_TRADE Then
                 DialogButton1Text = "Accept"
                 DialogButton2Text = "Decline"
                 DialogPanelVisible = True
@@ -645,10 +652,11 @@
         End If
 
         If ShowRClick = True Then
-            frmMainGame.lblRCName.Text = Player(myTarget).Name
-            frmMainGame.pnlRClick.Left = CurX * PIC_X
-            frmMainGame.pnlRClick.Top = CurY * PIC_Y
-            frmMainGame.pnlRClick.Visible = True
+            RClickname = Player(myTarget).Name
+            RClickX = ConvertMapX(CurX * PIC_X)
+            RClickY = ConvertMapY(CurY * PIC_Y)
+            pnlRClickVisible = True
+
             ShowRClick = False
         End If
 

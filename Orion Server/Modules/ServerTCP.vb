@@ -1698,6 +1698,19 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
+    Sub SendTradeInvite(ByVal Index As Long, ByVal TradeIndex As Long)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.STradeInvite)
+
+        Buffer.WriteLong(TradeIndex)
+
+        SendDataTo(Index, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
     Sub SendTrade(ByVal Index As Long, ByVal tradeTarget As Long)
         Dim Buffer As ByteBuffer
 
@@ -1833,7 +1846,9 @@ Module ServerTCP
 
     Public Function GetIP() As String
 
-        Dim uri_val As New Uri("http://ascensionforums.com/resources/myip.php")
+        'Return "127.0.0.1"
+
+        Dim uri_val As New Uri("http://ascensiongamedev.com/resources/myip.php")
         Dim request As HttpWebRequest = HttpWebRequest.Create(uri_val)
 
         request.Method = WebRequestMethods.Http.Get

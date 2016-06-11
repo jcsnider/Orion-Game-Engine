@@ -107,6 +107,10 @@ Module ClientGraphics
     Public DescriptionGFX As Texture
     Public DescriptionGFXInfo As GraphicInfo
 
+
+    Public RClickGFX As Texture
+    Public RClickGFXInfo As GraphicInfo
+
     Public FogGFX() As Texture
     Public FogGFXInfo() As GraphicInfo
 
@@ -460,6 +464,15 @@ Module ClientGraphics
             'Cache the width and height
             DescriptionGFXInfo.width = DescriptionGFX.Size.X
             DescriptionGFXInfo.height = DescriptionGFX.Size.Y
+        End If
+
+        RClickGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "RightClick" & GFX_EXT) Then
+            RClickGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "RightClick" & GFX_EXT)
+
+            'Cache the width and height
+            RClickGFXInfo.width = RClickGFX.Size.X
+            RClickGFXInfo.height = RClickGFX.Size.Y
         End If
 
         ButtonGFXInfo = New GraphicInfo
@@ -1608,7 +1621,10 @@ Module ClientGraphics
             DrawMapAttributes()
         End If
 
-        If InMapEditor And frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then DrawEvents()
+        If InMapEditor And frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then
+            DrawEvents()
+            EditorEvent_DrawGraphic()
+        End If
 
         ' Draw map name
         DrawMapName()
@@ -2059,6 +2075,7 @@ Module ClientGraphics
         If Not ShopPanelGFX Is Nothing Then ShopPanelGFX.Dispose()
         If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
         If Not EventChatGFX Is Nothing Then EventChatGFX.Dispose()
+        If Not RClickGFX Is Nothing Then RClickGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -3451,7 +3468,7 @@ NextLoop:
 
     Public Sub DrawDialogPanel()
         'first render panel
-        RenderTexture(ChatWindowGFX, GameWindow, DialogPanelX, DialogPanelY, 0, 0, ChatWindowGFXInfo.width, ChatWindowGFXInfo.height)
+        RenderTexture(EventChatGFX, GameWindow, DialogPanelX, DialogPanelY, 0, 0, EventChatGFXInfo.width, EventChatGFXInfo.height)
 
         DrawText(DialogPanelX + 40, DialogPanelY + 10, Trim(DialogMsg1), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
@@ -3477,6 +3494,20 @@ NextLoop:
             'render cancel button
             DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY)
         End If
+
+    End Sub
+
+    Public Sub DrawRClick()
+        'first render panel
+        RenderTexture(RClickGFX, GameWindow, RClickX, RClickY, 0, 0, RClickGFXInfo.width, RClickGFXInfo.height)
+
+        DrawText(RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth(RClickname) \ 2), RClickY + 10, RClickname, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Trade") \ 2), RClickY + 35, "Invite to Trade", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Party") \ 2), RClickY + 60, "Invite to Party", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to House") \ 2), RClickY + 85, "Invite to House", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
 
@@ -3555,6 +3586,10 @@ NextLoop:
 
         If pnlEventChatVisible = True Then
             DrawEventChat()
+        End If
+
+        If pnlRClickVisible = True Then
+            DrawRClick()
         End If
     End Sub
 End Module

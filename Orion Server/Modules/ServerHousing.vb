@@ -128,9 +128,15 @@
         invitee = FindPlayer(Name)
         Buffer = Nothing
 
-        If invitee = 0 Then PlayerMsg(index, "Player not found.") Exit Sub
+        If invitee = 0 Then
+            PlayerMsg(index, "Player not found.")
+            Exit Sub
+        End If
 
-        If index = invitee Then PlayerMsg(index, "You cannot invite yourself to you own house!") Exit Sub
+        If index = invitee Then
+            PlayerMsg(index, "You cannot invite yourself to you own house!")
+            Exit Sub
+        End If
 
         If TempPlayer(invitee).InvitationIndex > 0 Then
             If TempPlayer(invitee).InvitationTimer > GetTickCount() Then

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor_Events
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,116 +20,116 @@ Partial Class frmEditor_Events
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ListViewGroup43 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup44 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup45 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup46 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Speed", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup47 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Walk Animation", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup48 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Fixed Direction", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup49 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("WalkThrough", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup50 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Position", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup51 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Graphic", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem175 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Up")
-        Dim ListViewItem176 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Down")
-        Dim ListViewItem177 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move left")
-        Dim ListViewItem178 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Right")
-        Dim ListViewItem179 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Randomly")
-        Dim ListViewItem180 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move To Player***")
-        Dim ListViewItem181 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move from Player***")
-        Dim ListViewItem182 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Forwards")
-        Dim ListViewItem183 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Backwards")
-        Dim ListViewItem184 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 100Ms")
-        Dim ListViewItem185 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 500Ms")
-        Dim ListViewItem186 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 1000Ms")
-        Dim ListViewItem187 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Up")
-        Dim ListViewItem188 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Down")
-        Dim ListViewItem189 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Left")
-        Dim ListViewItem190 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Right")
-        Dim ListViewItem191 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Right")
-        Dim ListViewItem192 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Left")
-        Dim ListViewItem193 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 180DG")
-        Dim ListViewItem194 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Randomly")
-        Dim ListViewItem195 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn To Player***")
-        Dim ListViewItem196 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn From Player***")
-        Dim ListViewItem197 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 8x Slower")
-        Dim ListViewItem198 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Slower")
-        Dim ListViewItem199 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Slower")
-        Dim ListViewItem200 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed To Normal")
-        Dim ListViewItem201 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Faster")
-        Dim ListViewItem202 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Faster")
-        Dim ListViewItem203 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lowest")
-        Dim ListViewItem204 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lower")
-        Dim ListViewItem205 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Normal")
-        Dim ListViewItem206 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Higher")
-        Dim ListViewItem207 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Highest")
-        Dim ListViewItem208 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation ON")
-        Dim ListViewItem209 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation OFF")
-        Dim ListViewItem210 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction ON")
-        Dim ListViewItem211 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction OFF")
-        Dim ListViewItem212 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
-        Dim ListViewItem213 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
-        Dim ListViewItem214 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Below Player")
-        Dim ListViewItem215 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set PositionWith Player")
-        Dim ListViewItem216 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
-        Dim ListViewItem217 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
-        Dim ListViewGroup52 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Messages", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup53 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Events Progressing", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup54 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Flow Control", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup55 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Player Options", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup56 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup57 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup58 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup59 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup60 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup61 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup62 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup63 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem218 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
-        Dim ListViewItem219 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
-        Dim ListViewItem220 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
-        Dim ListViewItem221 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show ChatBubble")
-        Dim ListViewItem222 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Variable")
-        Dim ListViewItem223 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Switch")
-        Dim ListViewItem224 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Self Switch")
-        Dim ListViewItem225 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Conditional Branch")
-        Dim ListViewItem226 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Exit Event Process")
-        Dim ListViewItem227 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Label")
-        Dim ListViewItem228 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("GoTo Label")
-        Dim ListViewItem229 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Items")
-        Dim ListViewItem230 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore HP")
-        Dim ListViewItem231 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore MP")
-        Dim ListViewItem232 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Level Up")
-        Dim ListViewItem233 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Level")
-        Dim ListViewItem234 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Skills")
-        Dim ListViewItem235 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Class")
-        Dim ListViewItem236 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Sprite")
-        Dim ListViewItem237 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Gender")
-        Dim ListViewItem238 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change PK")
-        Dim ListViewItem239 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Give Experience")
-        Dim ListViewItem240 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Warp Player")
-        Dim ListViewItem241 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Move Route")
-        Dim ListViewItem242 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait for Route Completion")
-        Dim ListViewItem243 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
-        Dim ListViewItem244 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
-        Dim ListViewItem245 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
-        Dim ListViewItem246 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Animation")
-        Dim ListViewItem247 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Begin Quest")
-        Dim ListViewItem248 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Complete Task")
-        Dim ListViewItem249 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("End Quest")
-        Dim ListViewItem250 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Fog")
-        Dim ListViewItem251 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Weather")
-        Dim ListViewItem252 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Map Tinting")
-        Dim ListViewItem253 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play BGM")
-        Dim ListViewItem254 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop BGM")
-        Dim ListViewItem255 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play Sound")
-        Dim ListViewItem256 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop Sounds")
-        Dim ListViewItem257 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
-        Dim ListViewItem258 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
-        Dim ListViewItem259 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
-        Dim ListViewItem260 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Bank")
-        Dim ListViewItem261 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Shop")
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Speed", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Walk Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Fixed Direction", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("WalkThrough", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Position", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup9 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Graphic", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Up")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Down")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move left")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Right")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Randomly")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move To Player***")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move from Player***")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Forwards")
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Backwards")
+        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 100Ms")
+        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 500Ms")
+        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 1000Ms")
+        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Up")
+        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Down")
+        Dim ListViewItem15 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Left")
+        Dim ListViewItem16 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Right")
+        Dim ListViewItem17 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Right")
+        Dim ListViewItem18 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Left")
+        Dim ListViewItem19 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 180DG")
+        Dim ListViewItem20 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Randomly")
+        Dim ListViewItem21 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn To Player***")
+        Dim ListViewItem22 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn From Player***")
+        Dim ListViewItem23 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 8x Slower")
+        Dim ListViewItem24 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Slower")
+        Dim ListViewItem25 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Slower")
+        Dim ListViewItem26 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed To Normal")
+        Dim ListViewItem27 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Faster")
+        Dim ListViewItem28 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Faster")
+        Dim ListViewItem29 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lowest")
+        Dim ListViewItem30 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lower")
+        Dim ListViewItem31 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Normal")
+        Dim ListViewItem32 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Higher")
+        Dim ListViewItem33 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Highest")
+        Dim ListViewItem34 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation ON")
+        Dim ListViewItem35 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation OFF")
+        Dim ListViewItem36 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction ON")
+        Dim ListViewItem37 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction OFF")
+        Dim ListViewItem38 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem39 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem40 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Below Player")
+        Dim ListViewItem41 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set PositionWith Player")
+        Dim ListViewItem42 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
+        Dim ListViewItem43 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
+        Dim ListViewGroup10 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Messages", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup11 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Events Progressing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup12 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Flow Control", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup13 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Player Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup14 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup15 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup16 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Questing", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup17 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Map Functions", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup18 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Music and Sound", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup19 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Etc...", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup20 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Shop and Bank", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup21 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Cut-scene Options", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem44 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Text")
+        Dim ListViewItem45 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show Choices")
+        Dim ListViewItem46 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Add Chatbox Text")
+        Dim ListViewItem47 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Show ChatBubble")
+        Dim ListViewItem48 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Variable")
+        Dim ListViewItem49 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Player Switch")
+        Dim ListViewItem50 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Self Switch")
+        Dim ListViewItem51 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Conditional Branch")
+        Dim ListViewItem52 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Exit Event Process")
+        Dim ListViewItem53 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Label")
+        Dim ListViewItem54 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("GoTo Label")
+        Dim ListViewItem55 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Items")
+        Dim ListViewItem56 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore HP")
+        Dim ListViewItem57 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Restore MP")
+        Dim ListViewItem58 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Level Up")
+        Dim ListViewItem59 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Level")
+        Dim ListViewItem60 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Skills")
+        Dim ListViewItem61 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Class")
+        Dim ListViewItem62 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Sprite")
+        Dim ListViewItem63 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change Gender")
+        Dim ListViewItem64 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Change PK")
+        Dim ListViewItem65 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Give Experience")
+        Dim ListViewItem66 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Warp Player")
+        Dim ListViewItem67 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Move Route")
+        Dim ListViewItem68 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait for Route Completion")
+        Dim ListViewItem69 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Force Spawn Npc")
+        Dim ListViewItem70 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Hold Player")
+        Dim ListViewItem71 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Release Player")
+        Dim ListViewItem72 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Animation")
+        Dim ListViewItem73 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Begin Quest")
+        Dim ListViewItem74 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Complete Task")
+        Dim ListViewItem75 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("End Quest")
+        Dim ListViewItem76 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Fog")
+        Dim ListViewItem77 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Weather")
+        Dim ListViewItem78 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Map Tinting")
+        Dim ListViewItem79 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play BGM")
+        Dim ListViewItem80 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop BGM")
+        Dim ListViewItem81 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Play Sound")
+        Dim ListViewItem82 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Stop Sounds")
+        Dim ListViewItem83 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait...")
+        Dim ListViewItem84 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Access")
+        Dim ListViewItem85 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Custom Script")
+        Dim ListViewItem86 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Bank")
+        Dim ListViewItem87 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Open Shop")
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.fraLabeling = New System.Windows.Forms.GroupBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -147,14 +147,14 @@ Partial Class frmEditor_Events
         Me.txtRename = New System.Windows.Forms.TextBox()
         Me.lblEditing = New System.Windows.Forms.Label()
         Me.fraGraphic = New System.Windows.Forms.GroupBox()
+        Me.pnlGraphicSelect = New System.Windows.Forms.Panel()
+        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.btnGraphicCancel = New System.Windows.Forms.Button()
         Me.btnGraphicOk = New System.Windows.Forms.Button()
         Me.lblGraphic = New System.Windows.Forms.Label()
         Me.scrlGraphic = New System.Windows.Forms.HScrollBar()
         Me.cmbGraphic = New System.Windows.Forms.ComboBox()
         Me.lblRandomLabel33 = New System.Windows.Forms.Label()
-        Me.pnlGraphicSelect = New System.Windows.Forms.Panel()
-        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.pnlMoveRoute = New System.Windows.Forms.Panel()
         Me.fraMoveRoute = New System.Windows.Forms.GroupBox()
         Me.lblRandomLabel15 = New System.Windows.Forms.Label()
@@ -758,24 +758,41 @@ Partial Class frmEditor_Events
         '
         'fraGraphic
         '
+        Me.fraGraphic.Controls.Add(Me.pnlGraphicSelect)
         Me.fraGraphic.Controls.Add(Me.btnGraphicCancel)
         Me.fraGraphic.Controls.Add(Me.btnGraphicOk)
         Me.fraGraphic.Controls.Add(Me.lblGraphic)
         Me.fraGraphic.Controls.Add(Me.scrlGraphic)
         Me.fraGraphic.Controls.Add(Me.cmbGraphic)
         Me.fraGraphic.Controls.Add(Me.lblRandomLabel33)
-        Me.fraGraphic.Controls.Add(Me.pnlGraphicSelect)
         Me.fraGraphic.Location = New System.Drawing.Point(2, 3)
         Me.fraGraphic.Name = "fraGraphic"
-        Me.fraGraphic.Size = New System.Drawing.Size(433, 517)
+        Me.fraGraphic.Size = New System.Drawing.Size(829, 596)
         Me.fraGraphic.TabIndex = 3
         Me.fraGraphic.TabStop = False
         Me.fraGraphic.Text = "Graphic Selection"
         Me.fraGraphic.Visible = False
         '
+        'pnlGraphicSelect
+        '
+        Me.pnlGraphicSelect.AutoScroll = True
+        Me.pnlGraphicSelect.Controls.Add(Me.picGraphicSel)
+        Me.pnlGraphicSelect.Location = New System.Drawing.Point(6, 39)
+        Me.pnlGraphicSelect.Name = "pnlGraphicSelect"
+        Me.pnlGraphicSelect.Size = New System.Drawing.Size(816, 522)
+        Me.pnlGraphicSelect.TabIndex = 9
+        '
+        'picGraphicSel
+        '
+        Me.picGraphicSel.Location = New System.Drawing.Point(4, 4)
+        Me.picGraphicSel.Name = "picGraphicSel"
+        Me.picGraphicSel.Size = New System.Drawing.Size(807, 515)
+        Me.picGraphicSel.TabIndex = 4
+        Me.picGraphicSel.TabStop = False
+        '
         'btnGraphicCancel
         '
-        Me.btnGraphicCancel.Location = New System.Drawing.Point(349, 483)
+        Me.btnGraphicCancel.Location = New System.Drawing.Point(748, 567)
         Me.btnGraphicCancel.Name = "btnGraphicCancel"
         Me.btnGraphicCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnGraphicCancel.TabIndex = 8
@@ -784,7 +801,7 @@ Partial Class frmEditor_Events
         '
         'btnGraphicOk
         '
-        Me.btnGraphicOk.Location = New System.Drawing.Point(268, 483)
+        Me.btnGraphicOk.Location = New System.Drawing.Point(667, 567)
         Me.btnGraphicOk.Name = "btnGraphicOk"
         Me.btnGraphicOk.Size = New System.Drawing.Size(75, 23)
         Me.btnGraphicOk.TabIndex = 7
@@ -811,7 +828,7 @@ Partial Class frmEditor_Events
         'cmbGraphic
         '
         Me.cmbGraphic.FormattingEnabled = True
-        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character"})
+        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character", "Tileset"})
         Me.cmbGraphic.Location = New System.Drawing.Point(46, 13)
         Me.cmbGraphic.Name = "cmbGraphic"
         Me.cmbGraphic.Size = New System.Drawing.Size(121, 21)
@@ -825,22 +842,6 @@ Partial Class frmEditor_Events
         Me.lblRandomLabel33.Size = New System.Drawing.Size(34, 13)
         Me.lblRandomLabel33.TabIndex = 0
         Me.lblRandomLabel33.Text = "Type:"
-        '
-        'pnlGraphicSelect
-        '
-        Me.pnlGraphicSelect.Controls.Add(Me.picGraphicSel)
-        Me.pnlGraphicSelect.Location = New System.Drawing.Point(6, 39)
-        Me.pnlGraphicSelect.Name = "pnlGraphicSelect"
-        Me.pnlGraphicSelect.Size = New System.Drawing.Size(421, 436)
-        Me.pnlGraphicSelect.TabIndex = 9
-        '
-        'picGraphicSel
-        '
-        Me.picGraphicSel.Location = New System.Drawing.Point(4, 4)
-        Me.picGraphicSel.Name = "picGraphicSel"
-        Me.picGraphicSel.Size = New System.Drawing.Size(149, 132)
-        Me.picGraphicSel.TabIndex = 4
-        Me.picGraphicSel.TabStop = False
         '
         'pnlMoveRoute
         '
@@ -933,72 +934,72 @@ Partial Class frmEditor_Events
         Me.lstvwMoveRoute.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4})
         Me.lstvwMoveRoute.Dock = System.Windows.Forms.DockStyle.Top
         Me.lstvwMoveRoute.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ListViewGroup43.Header = "Movement"
-        ListViewGroup43.Name = "lstVgMovement"
-        ListViewGroup44.Header = "Wait"
-        ListViewGroup44.Name = "lstVgWait"
-        ListViewGroup45.Header = "Turning"
-        ListViewGroup45.Name = "lstVgTurn"
-        ListViewGroup46.Header = "Speed"
-        ListViewGroup46.Name = "lstVgSpeed"
-        ListViewGroup47.Header = "Walk Animation"
-        ListViewGroup47.Name = "lstVgWalk"
-        ListViewGroup48.Header = "Fixed Direction"
-        ListViewGroup48.Name = "lstVgDirection"
-        ListViewGroup49.Header = "WalkThrough"
-        ListViewGroup49.Name = "lstVgWalkThrough"
-        ListViewGroup50.Header = "Set Position"
-        ListViewGroup50.Name = "lstVgSetposition"
-        ListViewGroup51.Header = "Set Graphic"
-        ListViewGroup51.Name = "lstVgSetGraphic"
-        Me.lstvwMoveRoute.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup43, ListViewGroup44, ListViewGroup45, ListViewGroup46, ListViewGroup47, ListViewGroup48, ListViewGroup49, ListViewGroup50, ListViewGroup51})
+        ListViewGroup1.Header = "Movement"
+        ListViewGroup1.Name = "lstVgMovement"
+        ListViewGroup2.Header = "Wait"
+        ListViewGroup2.Name = "lstVgWait"
+        ListViewGroup3.Header = "Turning"
+        ListViewGroup3.Name = "lstVgTurn"
+        ListViewGroup4.Header = "Speed"
+        ListViewGroup4.Name = "lstVgSpeed"
+        ListViewGroup5.Header = "Walk Animation"
+        ListViewGroup5.Name = "lstVgWalk"
+        ListViewGroup6.Header = "Fixed Direction"
+        ListViewGroup6.Name = "lstVgDirection"
+        ListViewGroup7.Header = "WalkThrough"
+        ListViewGroup7.Name = "lstVgWalkThrough"
+        ListViewGroup8.Header = "Set Position"
+        ListViewGroup8.Name = "lstVgSetposition"
+        ListViewGroup9.Header = "Set Graphic"
+        ListViewGroup9.Name = "lstVgSetGraphic"
+        Me.lstvwMoveRoute.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4, ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8, ListViewGroup9})
         Me.lstvwMoveRoute.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        ListViewItem175.Group = ListViewGroup43
-        ListViewItem176.Group = ListViewGroup43
-        ListViewItem176.IndentCount = 1
-        ListViewItem177.Group = ListViewGroup43
-        ListViewItem178.Group = ListViewGroup43
-        ListViewItem178.IndentCount = 1
-        ListViewItem179.Group = ListViewGroup43
-        ListViewItem180.Group = ListViewGroup43
-        ListViewItem181.Group = ListViewGroup43
-        ListViewItem182.Group = ListViewGroup43
-        ListViewItem183.Group = ListViewGroup43
-        ListViewItem184.Group = ListViewGroup44
-        ListViewItem185.Group = ListViewGroup44
-        ListViewItem186.Group = ListViewGroup44
-        ListViewItem187.Group = ListViewGroup45
-        ListViewItem188.Group = ListViewGroup45
-        ListViewItem189.Group = ListViewGroup45
-        ListViewItem190.Group = ListViewGroup45
-        ListViewItem191.Group = ListViewGroup45
-        ListViewItem192.Group = ListViewGroup45
-        ListViewItem193.Group = ListViewGroup45
-        ListViewItem194.Group = ListViewGroup45
-        ListViewItem195.Group = ListViewGroup45
-        ListViewItem196.Group = ListViewGroup45
-        ListViewItem197.Group = ListViewGroup46
-        ListViewItem198.Group = ListViewGroup46
-        ListViewItem199.Group = ListViewGroup46
-        ListViewItem200.Group = ListViewGroup46
-        ListViewItem201.Group = ListViewGroup46
-        ListViewItem202.Group = ListViewGroup46
-        ListViewItem203.Group = ListViewGroup46
-        ListViewItem204.Group = ListViewGroup46
-        ListViewItem205.Group = ListViewGroup46
-        ListViewItem206.Group = ListViewGroup46
-        ListViewItem207.Group = ListViewGroup46
-        ListViewItem208.Group = ListViewGroup47
-        ListViewItem209.Group = ListViewGroup47
-        ListViewItem210.Group = ListViewGroup48
-        ListViewItem211.Group = ListViewGroup48
-        ListViewItem212.Group = ListViewGroup49
-        ListViewItem213.Group = ListViewGroup49
-        ListViewItem214.Group = ListViewGroup50
-        ListViewItem215.Group = ListViewGroup50
-        ListViewItem216.Group = ListViewGroup50
-        ListViewItem217.Group = ListViewGroup51
-        Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem175, ListViewItem176, ListViewItem177, ListViewItem178, ListViewItem179, ListViewItem180, ListViewItem181, ListViewItem182, ListViewItem183, ListViewItem184, ListViewItem185, ListViewItem186, ListViewItem187, ListViewItem188, ListViewItem189, ListViewItem190, ListViewItem191, ListViewItem192, ListViewItem193, ListViewItem194, ListViewItem195, ListViewItem196, ListViewItem197, ListViewItem198, ListViewItem199, ListViewItem200, ListViewItem201, ListViewItem202, ListViewItem203, ListViewItem204, ListViewItem205, ListViewItem206, ListViewItem207, ListViewItem208, ListViewItem209, ListViewItem210, ListViewItem211, ListViewItem212, ListViewItem213, ListViewItem214, ListViewItem215, ListViewItem216, ListViewItem217})
+        ListViewItem1.Group = ListViewGroup1
+        ListViewItem2.Group = ListViewGroup1
+        ListViewItem2.IndentCount = 1
+        ListViewItem3.Group = ListViewGroup1
+        ListViewItem4.Group = ListViewGroup1
+        ListViewItem4.IndentCount = 1
+        ListViewItem5.Group = ListViewGroup1
+        ListViewItem6.Group = ListViewGroup1
+        ListViewItem7.Group = ListViewGroup1
+        ListViewItem8.Group = ListViewGroup1
+        ListViewItem9.Group = ListViewGroup1
+        ListViewItem10.Group = ListViewGroup2
+        ListViewItem11.Group = ListViewGroup2
+        ListViewItem12.Group = ListViewGroup2
+        ListViewItem13.Group = ListViewGroup3
+        ListViewItem14.Group = ListViewGroup3
+        ListViewItem15.Group = ListViewGroup3
+        ListViewItem16.Group = ListViewGroup3
+        ListViewItem17.Group = ListViewGroup3
+        ListViewItem18.Group = ListViewGroup3
+        ListViewItem19.Group = ListViewGroup3
+        ListViewItem20.Group = ListViewGroup3
+        ListViewItem21.Group = ListViewGroup3
+        ListViewItem22.Group = ListViewGroup3
+        ListViewItem23.Group = ListViewGroup4
+        ListViewItem24.Group = ListViewGroup4
+        ListViewItem25.Group = ListViewGroup4
+        ListViewItem26.Group = ListViewGroup4
+        ListViewItem27.Group = ListViewGroup4
+        ListViewItem28.Group = ListViewGroup4
+        ListViewItem29.Group = ListViewGroup4
+        ListViewItem30.Group = ListViewGroup4
+        ListViewItem31.Group = ListViewGroup4
+        ListViewItem32.Group = ListViewGroup4
+        ListViewItem33.Group = ListViewGroup4
+        ListViewItem34.Group = ListViewGroup5
+        ListViewItem35.Group = ListViewGroup5
+        ListViewItem36.Group = ListViewGroup6
+        ListViewItem37.Group = ListViewGroup6
+        ListViewItem38.Group = ListViewGroup7
+        ListViewItem39.Group = ListViewGroup7
+        ListViewItem40.Group = ListViewGroup8
+        ListViewItem41.Group = ListViewGroup8
+        ListViewItem42.Group = ListViewGroup8
+        ListViewItem43.Group = ListViewGroup9
+        Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28, ListViewItem29, ListViewItem30, ListViewItem31, ListViewItem32, ListViewItem33, ListViewItem34, ListViewItem35, ListViewItem36, ListViewItem37, ListViewItem38, ListViewItem39, ListViewItem40, ListViewItem41, ListViewItem42, ListViewItem43})
         Me.lstvwMoveRoute.LabelWrap = False
         Me.lstvwMoveRoute.Location = New System.Drawing.Point(3, 16)
         Me.lstvwMoveRoute.MultiSelect = False
@@ -4183,79 +4184,79 @@ Partial Class frmEditor_Events
         Me.lstvCommands.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.lstvCommands.Dock = System.Windows.Forms.DockStyle.Top
         Me.lstvCommands.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ListViewGroup52.Header = "Messages"
-        ListViewGroup52.Name = "lstVgMessages"
-        ListViewGroup53.Header = "Events Progressing"
-        ListViewGroup53.Name = "lstVgEvents"
-        ListViewGroup54.Header = "Flow Control"
-        ListViewGroup54.Name = "lstVgFlow"
-        ListViewGroup55.Header = "Player Options"
-        ListViewGroup55.Name = "lstVgPlayerOptions"
-        ListViewGroup56.Header = "Movement"
-        ListViewGroup56.Name = "lstVgMovement"
-        ListViewGroup57.Header = "Animation"
-        ListViewGroup57.Name = "lstVgAnimation"
-        ListViewGroup58.Header = "Questing"
-        ListViewGroup58.Name = "lstVgQuesting"
-        ListViewGroup59.Header = "Map Functions"
-        ListViewGroup59.Name = "lstVgMapFunctions"
-        ListViewGroup60.Header = "Music and Sound"
-        ListViewGroup60.Name = "lstVgSound"
-        ListViewGroup61.Header = "Etc..."
-        ListViewGroup61.Name = "lstVgEtc"
-        ListViewGroup62.Header = "Shop and Bank"
-        ListViewGroup62.Name = "lstVgShopBank"
-        ListViewGroup63.Header = "Cut-scene Options"
-        ListViewGroup63.Name = "lstVgCutScene"
-        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup52, ListViewGroup53, ListViewGroup54, ListViewGroup55, ListViewGroup56, ListViewGroup57, ListViewGroup58, ListViewGroup59, ListViewGroup60, ListViewGroup61, ListViewGroup62, ListViewGroup63})
+        ListViewGroup10.Header = "Messages"
+        ListViewGroup10.Name = "lstVgMessages"
+        ListViewGroup11.Header = "Events Progressing"
+        ListViewGroup11.Name = "lstVgEvents"
+        ListViewGroup12.Header = "Flow Control"
+        ListViewGroup12.Name = "lstVgFlow"
+        ListViewGroup13.Header = "Player Options"
+        ListViewGroup13.Name = "lstVgPlayerOptions"
+        ListViewGroup14.Header = "Movement"
+        ListViewGroup14.Name = "lstVgMovement"
+        ListViewGroup15.Header = "Animation"
+        ListViewGroup15.Name = "lstVgAnimation"
+        ListViewGroup16.Header = "Questing"
+        ListViewGroup16.Name = "lstVgQuesting"
+        ListViewGroup17.Header = "Map Functions"
+        ListViewGroup17.Name = "lstVgMapFunctions"
+        ListViewGroup18.Header = "Music and Sound"
+        ListViewGroup18.Name = "lstVgSound"
+        ListViewGroup19.Header = "Etc..."
+        ListViewGroup19.Name = "lstVgEtc"
+        ListViewGroup20.Header = "Shop and Bank"
+        ListViewGroup20.Name = "lstVgShopBank"
+        ListViewGroup21.Header = "Cut-scene Options"
+        ListViewGroup21.Name = "lstVgCutScene"
+        Me.lstvCommands.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup10, ListViewGroup11, ListViewGroup12, ListViewGroup13, ListViewGroup14, ListViewGroup15, ListViewGroup16, ListViewGroup17, ListViewGroup18, ListViewGroup19, ListViewGroup20, ListViewGroup21})
         Me.lstvCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        ListViewItem218.Group = ListViewGroup52
-        ListViewItem219.Group = ListViewGroup52
-        ListViewItem219.IndentCount = 1
-        ListViewItem220.Group = ListViewGroup52
-        ListViewItem221.Group = ListViewGroup52
-        ListViewItem221.IndentCount = 1
-        ListViewItem222.Group = ListViewGroup53
-        ListViewItem223.Group = ListViewGroup53
-        ListViewItem224.Group = ListViewGroup53
-        ListViewItem225.Group = ListViewGroup54
-        ListViewItem226.Group = ListViewGroup54
-        ListViewItem227.Group = ListViewGroup54
-        ListViewItem228.Group = ListViewGroup54
-        ListViewItem229.Group = ListViewGroup55
-        ListViewItem230.Group = ListViewGroup55
-        ListViewItem231.Group = ListViewGroup55
-        ListViewItem232.Group = ListViewGroup55
-        ListViewItem233.Group = ListViewGroup55
-        ListViewItem234.Group = ListViewGroup55
-        ListViewItem235.Group = ListViewGroup55
-        ListViewItem236.Group = ListViewGroup55
-        ListViewItem237.Group = ListViewGroup55
-        ListViewItem238.Group = ListViewGroup55
-        ListViewItem239.Group = ListViewGroup55
-        ListViewItem240.Group = ListViewGroup56
-        ListViewItem241.Group = ListViewGroup56
-        ListViewItem242.Group = ListViewGroup56
-        ListViewItem243.Group = ListViewGroup56
-        ListViewItem244.Group = ListViewGroup56
-        ListViewItem245.Group = ListViewGroup56
-        ListViewItem246.Group = ListViewGroup57
-        ListViewItem247.Group = ListViewGroup58
-        ListViewItem248.Group = ListViewGroup58
-        ListViewItem249.Group = ListViewGroup58
-        ListViewItem250.Group = ListViewGroup59
-        ListViewItem251.Group = ListViewGroup59
-        ListViewItem252.Group = ListViewGroup59
-        ListViewItem253.Group = ListViewGroup60
-        ListViewItem254.Group = ListViewGroup60
-        ListViewItem255.Group = ListViewGroup60
-        ListViewItem256.Group = ListViewGroup60
-        ListViewItem257.Group = ListViewGroup61
-        ListViewItem258.Group = ListViewGroup61
-        ListViewItem259.Group = ListViewGroup61
-        ListViewItem260.Group = ListViewGroup62
-        ListViewItem261.Group = ListViewGroup62
-        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem218, ListViewItem219, ListViewItem220, ListViewItem221, ListViewItem222, ListViewItem223, ListViewItem224, ListViewItem225, ListViewItem226, ListViewItem227, ListViewItem228, ListViewItem229, ListViewItem230, ListViewItem231, ListViewItem232, ListViewItem233, ListViewItem234, ListViewItem235, ListViewItem236, ListViewItem237, ListViewItem238, ListViewItem239, ListViewItem240, ListViewItem241, ListViewItem242, ListViewItem243, ListViewItem244, ListViewItem245, ListViewItem246, ListViewItem247, ListViewItem248, ListViewItem249, ListViewItem250, ListViewItem251, ListViewItem252, ListViewItem253, ListViewItem254, ListViewItem255, ListViewItem256, ListViewItem257, ListViewItem258, ListViewItem259, ListViewItem260, ListViewItem261})
+        ListViewItem44.Group = ListViewGroup10
+        ListViewItem45.Group = ListViewGroup10
+        ListViewItem45.IndentCount = 1
+        ListViewItem46.Group = ListViewGroup10
+        ListViewItem47.Group = ListViewGroup10
+        ListViewItem47.IndentCount = 1
+        ListViewItem48.Group = ListViewGroup11
+        ListViewItem49.Group = ListViewGroup11
+        ListViewItem50.Group = ListViewGroup11
+        ListViewItem51.Group = ListViewGroup12
+        ListViewItem52.Group = ListViewGroup12
+        ListViewItem53.Group = ListViewGroup12
+        ListViewItem54.Group = ListViewGroup12
+        ListViewItem55.Group = ListViewGroup13
+        ListViewItem56.Group = ListViewGroup13
+        ListViewItem57.Group = ListViewGroup13
+        ListViewItem58.Group = ListViewGroup13
+        ListViewItem59.Group = ListViewGroup13
+        ListViewItem60.Group = ListViewGroup13
+        ListViewItem61.Group = ListViewGroup13
+        ListViewItem62.Group = ListViewGroup13
+        ListViewItem63.Group = ListViewGroup13
+        ListViewItem64.Group = ListViewGroup13
+        ListViewItem65.Group = ListViewGroup13
+        ListViewItem66.Group = ListViewGroup14
+        ListViewItem67.Group = ListViewGroup14
+        ListViewItem68.Group = ListViewGroup14
+        ListViewItem69.Group = ListViewGroup14
+        ListViewItem70.Group = ListViewGroup14
+        ListViewItem71.Group = ListViewGroup14
+        ListViewItem72.Group = ListViewGroup15
+        ListViewItem73.Group = ListViewGroup16
+        ListViewItem74.Group = ListViewGroup16
+        ListViewItem75.Group = ListViewGroup16
+        ListViewItem76.Group = ListViewGroup17
+        ListViewItem77.Group = ListViewGroup17
+        ListViewItem78.Group = ListViewGroup17
+        ListViewItem79.Group = ListViewGroup18
+        ListViewItem80.Group = ListViewGroup18
+        ListViewItem81.Group = ListViewGroup18
+        ListViewItem82.Group = ListViewGroup18
+        ListViewItem83.Group = ListViewGroup19
+        ListViewItem84.Group = ListViewGroup19
+        ListViewItem85.Group = ListViewGroup19
+        ListViewItem86.Group = ListViewGroup20
+        ListViewItem87.Group = ListViewGroup20
+        Me.lstvCommands.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem44, ListViewItem45, ListViewItem46, ListViewItem47, ListViewItem48, ListViewItem49, ListViewItem50, ListViewItem51, ListViewItem52, ListViewItem53, ListViewItem54, ListViewItem55, ListViewItem56, ListViewItem57, ListViewItem58, ListViewItem59, ListViewItem60, ListViewItem61, ListViewItem62, ListViewItem63, ListViewItem64, ListViewItem65, ListViewItem66, ListViewItem67, ListViewItem68, ListViewItem69, ListViewItem70, ListViewItem71, ListViewItem72, ListViewItem73, ListViewItem74, ListViewItem75, ListViewItem76, ListViewItem77, ListViewItem78, ListViewItem79, ListViewItem80, ListViewItem81, ListViewItem82, ListViewItem83, ListViewItem84, ListViewItem85, ListViewItem86, ListViewItem87})
         Me.lstvCommands.LabelWrap = False
         Me.lstvCommands.Location = New System.Drawing.Point(0, 0)
         Me.lstvCommands.MultiSelect = False
@@ -4486,6 +4487,7 @@ Partial Class frmEditor_Events
         '
         'picGraphic
         '
+        Me.picGraphic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.picGraphic.Location = New System.Drawing.Point(6, 17)
         Me.picGraphic.Name = "picGraphic"
         Me.picGraphic.Size = New System.Drawing.Size(161, 207)

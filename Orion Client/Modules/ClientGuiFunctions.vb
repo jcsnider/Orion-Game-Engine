@@ -167,6 +167,8 @@ Public Module ClientGuiFunctions
             End If
         End If
 
+
+
     End Sub
 
     Public Function CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
@@ -383,7 +385,10 @@ Public Module ClientGuiFunctions
                         QuestAcceptTag = 0
                         RefreshQuestLog()
                     End If
+                ElseIf DialogType = DIALOGUE_TYPE_TRADE Then
+                    SendTradeInviteAccept(1)
                 End If
+
                 PlaySound("Click.ogg")
                 DialogPanelVisible = False
             End If
@@ -402,6 +407,8 @@ Public Module ClientGuiFunctions
                     SendLeaveParty()
                 ElseIf DIALOGUE_TYPE_QUEST Then 'quest declined
                     QuestAcceptTag = 0
+                ElseIf DialogType = DIALOGUE_TYPE_TRADE Then
+                    SendTradeInviteAccept(0)
                 End If
                 PlaySound("Click.ogg")
                 DialogPanelVisible = False
@@ -417,8 +424,8 @@ Public Module ClientGuiFunctions
                         CloseBank()
                     End If
                 End If
+                CheckGuiClick = True
             End If
-            CheckGuiClick = True
         End If
 
         'trade
@@ -431,15 +438,18 @@ Public Module ClientGuiFunctions
                         AcceptTrade()
                     End If
                 End If
+
+                'decline button
+                If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.width Then
+                    If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.height Then
+                        PlaySound("Click.ogg")
+                        DeclineTrade()
+                    End If
+                End If
+
+                CheckGuiClick = True
             End If
 
-            'decline button
-            If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.width Then
-                If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.height Then
-                    PlaySound("Click.ogg")
-                    DeclineTrade()
-                End If
-            End If
         End If
 
         'eventchat
@@ -534,6 +544,44 @@ Public Module ClientGuiFunctions
                         End If
                     End If
                 End If
+                CheckGuiClick = True
+            End If
+        End If
+
+        'right click
+        If pnlRClickVisible = True Then
+            If AboveRClickPanel(X, Y) Then
+                'trade
+                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Trade") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Trade") \ 2) + getTextWidth("Invite to Trade") Then
+                    If Y > RClickY + 35 And Y < RClickY + 35 + 12 Then
+                        If myTarget > 0 Then
+                            SendTradeRequest(Player(myTarget).Name)
+                        End If
+                        pnlRClickVisible = False
+                    End If
+                End If
+
+                'party
+                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Party") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Party") \ 2) + getTextWidth("Invite to Party") Then
+                    If Y > RClickY + 60 And Y < RClickY + 60 + 12 Then
+                        If myTarget > 0 Then
+                            SendPartyRequest(Player(myTarget).Name)
+                        End If
+                        pnlRClickVisible = False
+                    End If
+                End If
+
+                'House
+                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to House") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to House") \ 2) + getTextWidth("Invite to House") Then
+                    If Y > RClickY + 85 And Y < RClickY + 85 + 12 Then
+                        If myTarget > 0 Then
+                            SendInvite(Player(myTarget).Name)
+                        End If
+                        pnlRClickVisible = False
+                    End If
+                End If
+
+                CheckGuiClick = True
             End If
         End If
 
@@ -1211,6 +1259,16 @@ Public Module ClientGuiFunctions
         If X > ChatWindowX + ChatWindowGFXInfo.width - 24 And X < ChatWindowX + ChatWindowGFXInfo.width Then
             If Y > ChatWindowY + ChatWindowGFXInfo.height - 24 And Y < ChatWindowY + ChatWindowGFXInfo.height Then
                 AboveChatScrollDown = True
+            End If
+        End If
+    End Function
+
+    Function AboveRClickPanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveRClickPanel = False
+
+        If X > RClickX And X < RClickX + RClickGFXInfo.width Then
+            If Y > RClickY And Y < RClickY + RClickGFXInfo.height Then
+                AboveRClickPanel = True
             End If
         End If
     End Function

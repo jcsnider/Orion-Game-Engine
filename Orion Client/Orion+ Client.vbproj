@@ -987,6 +987,9 @@
     <Content Include="data files\graphics\GUI\Main\plus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\RightClick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\Shop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

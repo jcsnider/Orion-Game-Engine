@@ -142,7 +142,8 @@ Module ClientText
             End If
         ElseIf Map.MapEvents(Index).GraphicType = 2 Then
             If Map.MapEvents(Index).GraphicY2 > 0 Then
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - ((Map.MapEvents(Index).GraphicY2 - Map.MapEvents(Index).GraphicY) * 32) + 16
+                'TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (((Map.MapEvents(Index).GraphicY2 * PIC_Y) - Map.MapEvents(Index).GraphicY * PIC_Y) * 32) + 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
             Else
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
             End If

@@ -970,19 +970,6 @@ Module ClientTCP
 
     End Sub
 
-    Sub SendTradeRequest(ByVal CurX As Integer, ByVal CurY As Integer)
-        Dim Buffer As ByteBuffer
-        If isInBounds() Then
-            Buffer = New ByteBuffer
-            Buffer.WriteLong(ClientPackets.CTradeRequest)
-            Buffer.WriteLong(CurX)
-            Buffer.WriteLong(CurY)
-            SendData(Buffer.ToArray())
-            Buffer = Nothing
-        End If
-
-    End Sub
-
     Public Sub AdminWarp(ByVal X As Long, ByVal Y As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -991,6 +978,32 @@ Module ClientTCP
         Buffer.WriteLong(Y)
         SendData(Buffer.ToArray())
         Buffer = Nothing
+    End Sub
+
+    Sub SendTradeRequest(ByVal Name As String)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ClientPackets.CTradeInvite)
+
+        Buffer.WriteString(Name)
+
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+
+    End Sub
+
+    Sub SendTradeInviteAccept(ByVal Awnser As Byte)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ClientPackets.CTradeInviteAccept)
+
+        Buffer.WriteLong(Awnser)
+
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+
     End Sub
 
     Public Sub TradeItem(ByVal invslot As Long, ByVal Amount As Long)
