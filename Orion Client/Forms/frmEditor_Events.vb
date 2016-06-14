@@ -883,12 +883,12 @@ Public Class frmEditor_Events
             GraphicSelY2 = 0
             If Me.scrlGraphic.Value <= 0 Or Me.scrlGraphic.Value > NumCharacters Then Exit Sub
             For i = 0 To 3
-                If GraphicSelX >= ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * i) And GraphicSelX < ((SpritesGFXInfo(Me.scrlGraphic.Value).width / 4) * (i + 1)) Then
+                If GraphicSelX >= ((CharacterGFXInfo(Me.scrlGraphic.Value).width / 4) * i) And GraphicSelX < ((CharacterGFXInfo(Me.scrlGraphic.Value).width / 4) * (i + 1)) Then
                     GraphicSelX = i
                 End If
             Next
             For i = 0 To 3
-                If GraphicSelY >= ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * i) And GraphicSelY < ((SpritesGFXInfo(Me.scrlGraphic.Value).height / 4) * (i + 1)) Then
+                If GraphicSelY >= ((CharacterGFXInfo(Me.scrlGraphic.Value).height / 4) * i) And GraphicSelY < ((CharacterGFXInfo(Me.scrlGraphic.Value).height / 4) * (i + 1)) Then
                     GraphicSelY = i
                 End If
             Next

@@ -2997,21 +2997,21 @@ newlist:
                     DrawText(tX, tY, "EV", (SFML.Graphics.Color.Green), (SFML.Graphics.Color.Black), GameWindow)
                 Case 1
                     If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic <= NumCharacters Then
-                        If SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
+                        If CharacterGFXInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
                             LoadTexture(Map.Events(i).Pages(1).Graphic, 2)
                         End If
 
                         'seeying we still use it, lets update timer
-                        With SpritesGFXInfo(Map.Events(i).Pages(1).Graphic)
+                        With CharacterGFXInfo(Map.Events(i).Pages(1).Graphic)
                             .TextureTimer = GetTickCount() + 100000
                         End With
                         With rec
-                            .Y = (Map.Events(i).Pages(1).GraphicY * (SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).height / 4))
+                            .Y = (Map.Events(i).Pages(1).GraphicY * (CharacterGFXInfo(Map.Events(i).Pages(1).Graphic).height / 4))
                             .Height = .Y + PIC_Y
-                            .X = (Map.Events(i).Pages(1).GraphicX * (SpritesGFXInfo(Map.Events(i).Pages(1).Graphic).width / 4))
+                            .X = (Map.Events(i).Pages(1).GraphicX * (CharacterGFXInfo(Map.Events(i).Pages(1).Graphic).width / 4))
                             .Width = .X + PIC_X
                         End With
-                        Dim tmpSprite As Sprite = New Sprite(SpritesGFX(Map.Events(i).Pages(1).Graphic))
+                        Dim tmpSprite As Sprite = New Sprite(CharacterGFX(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
                         tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
                         GameWindow.Draw(tmpSprite)
@@ -3108,23 +3108,23 @@ nextevent:
                 If Map.MapEvents(id).WalkAnim = 1 Then Anim = 0
                 If Map.MapEvents(id).Moving = 0 Then Anim = Map.MapEvents(id).GraphicX
 
-                Width = SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4
-                Height = SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4
+                Width = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4
+                Height = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4
 
-                sRect = New Rectangle((Anim) * (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), spritetop * (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4), (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4))
+                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4))
                 ' Calculate the X
-                X = Map.MapEvents(id).X * PIC_X + Map.MapEvents(id).XOffset - ((SpritesGFXInfo(Map.MapEvents(id).GraphicNum).width / 4 - 32) / 2)
+                X = Map.MapEvents(id).X * PIC_X + Map.MapEvents(id).XOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4 - 32) / 2)
 
                 ' Is the player's height more than 32..?
-                If (SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height * 4) > 32 Then
+                If (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height * 4) > 32 Then
                     ' Create a 32 pixel offset for larger sprites
-                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset - ((SpritesGFXInfo(Map.MapEvents(id).GraphicNum).height / 4) - 32)
+                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4) - 32)
                 Else
                     ' Proceed as normal
                     Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset
                 End If
                 ' render the actual sprite
-                DrawSprite(Map.MapEvents(id).GraphicNum, X, Y, sRect)
+                DrawCharacter(Map.MapEvents(id).GraphicNum, X, Y, sRect)
             Case 2
                 If Map.MapEvents(id).GraphicNum < 1 Or Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
                 If Map.MapEvents(id).GraphicY2 > 0 Or Map.MapEvents(id).GraphicX2 > 0 Then

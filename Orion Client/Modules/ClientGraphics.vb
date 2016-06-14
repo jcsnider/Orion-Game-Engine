@@ -25,8 +25,8 @@ Module ClientGraphics
     Public TileSetImgsLoaded() As Boolean
     Public TileSetTexture() As Texture
     Public TileSetTextureInfo() As GraphicInfo
-    Public SpritesGFX() As Texture
-    Public SpritesGFXInfo() As GraphicInfo
+    Public CharacterGFX() As Texture
+    Public CharacterGFXInfo() As GraphicInfo
     Public PaperDollGFX() As Texture
     Public PaperDollGFXInfo() As GraphicInfo
     Public ItemsGFX() As Texture
@@ -178,8 +178,8 @@ Module ClientGraphics
         ReDim TileSetTexture(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
 
-        ReDim SpritesGFX(0 To NumCharacters)
-        ReDim SpritesGFXInfo(0 To NumCharacters)
+        ReDim CharacterGFX(0 To NumCharacters)
+        ReDim CharacterGFXInfo(0 To NumCharacters)
 
         ReDim PaperDollGFX(0 To NumPaperdolls)
         ReDim PaperDollGFXInfo(0 To NumPaperdolls)
@@ -546,12 +546,12 @@ Module ClientGraphics
             If Index < 0 Or Index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SpritesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "characters\" & Index & GFX_EXT)
+            CharacterGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "characters\" & Index & GFX_EXT)
 
             'Cache the width and height
-            With SpritesGFXInfo(Index)
-                .width = SpritesGFX(Index).Size.X
-                .height = SpritesGFX(Index).Size.Y
+            With CharacterGFXInfo(Index)
+                .width = CharacterGFX(Index).Size.X
+                .height = CharacterGFX(Index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
@@ -765,22 +765,22 @@ Module ClientGraphics
         End Select
 
         If AttackSprite = 1 Then
-            srcrec = New Rectangle((Anim) * (SpritesGFXInfo(Spritenum).width / 5), spriteleft * (SpritesGFXInfo(Spritenum).height / 4), (SpritesGFXInfo(Spritenum).width / 5), (SpritesGFXInfo(Spritenum).height / 4))
+            srcrec = New Rectangle((Anim) * (CharacterGFXInfo(Spritenum).width / 5), spriteleft * (CharacterGFXInfo(Spritenum).height / 4), (CharacterGFXInfo(Spritenum).width / 5), (CharacterGFXInfo(Spritenum).height / 4))
         Else
-            srcrec = New Rectangle((Anim) * (SpritesGFXInfo(Spritenum).width / 4), spriteleft * (SpritesGFXInfo(Spritenum).height / 4), (SpritesGFXInfo(Spritenum).width / 4), (SpritesGFXInfo(Spritenum).height / 4))
+            srcrec = New Rectangle((Anim) * (CharacterGFXInfo(Spritenum).width / 4), spriteleft * (CharacterGFXInfo(Spritenum).height / 4), (CharacterGFXInfo(Spritenum).width / 4), (CharacterGFXInfo(Spritenum).height / 4))
         End If
 
         ' Calculate the X
         If AttackSprite = 1 Then
-            X = GetPlayerX(Index) * PIC_X + Player(Index).XOffset - ((SpritesGFXInfo(Spritenum).width / 5 - 32) / 2)
+            X = GetPlayerX(Index) * PIC_X + Player(Index).XOffset - ((CharacterGFXInfo(Spritenum).width / 5 - 32) / 2)
         Else
-            X = GetPlayerX(Index) * PIC_X + Player(Index).XOffset - ((SpritesGFXInfo(Spritenum).width / 4 - 32) / 2)
+            X = GetPlayerX(Index) * PIC_X + Player(Index).XOffset - ((CharacterGFXInfo(Spritenum).width / 4 - 32) / 2)
         End If
 
         ' Is the player's height more than 32..?
-        If (SpritesGFXInfo(Spritenum).height) > 32 Then
+        If (CharacterGFXInfo(Spritenum).height) > 32 Then
             ' Create a 32 pixel offset for larger sprites
-            Y = GetPlayerY(Index) * PIC_Y + Player(Index).YOffset - ((SpritesGFXInfo(Spritenum).height / 4) - 32)
+            Y = GetPlayerY(Index) * PIC_Y + Player(Index).YOffset - ((CharacterGFXInfo(Spritenum).height / 4) - 32)
         Else
             ' Proceed as normal
             Y = GetPlayerY(Index) * PIC_Y + Player(Index).YOffset
@@ -788,7 +788,7 @@ Module ClientGraphics
 
         ' render the actual sprite
 
-        DrawSprite(Spritenum, X, Y, srcrec)
+        DrawCharacter(Spritenum, X, Y, srcrec)
 
         'check for paperdolling
         For i = 1 To Equipment.Equipment_Count - 1
@@ -896,23 +896,23 @@ Module ClientGraphics
         End Select
 
 
-        srcrec = New Rectangle((anim) * (SpritesGFXInfo(Sprite).width / 4), spriteleft * (SpritesGFXInfo(Sprite).height / 4), (SpritesGFXInfo(Sprite).width / 4), (SpritesGFXInfo(Sprite).height / 4))
+        srcrec = New Rectangle((anim) * (CharacterGFXInfo(Sprite).width / 4), spriteleft * (CharacterGFXInfo(Sprite).height / 4), (CharacterGFXInfo(Sprite).width / 4), (CharacterGFXInfo(Sprite).height / 4))
 
         ' Calculate the X
-        X = MapNpc(MapNpcNum).X * PIC_X + MapNpc(MapNpcNum).XOffset - ((SpritesGFXInfo(Sprite).width / 4 - 32) / 2)
+        X = MapNpc(MapNpcNum).X * PIC_X + MapNpc(MapNpcNum).XOffset - ((CharacterGFXInfo(Sprite).width / 4 - 32) / 2)
 
         ' Is the player's height more than 32..?
-        If (SpritesGFXInfo(Sprite).height / 4) > 32 Then
+        If (CharacterGFXInfo(Sprite).height / 4) > 32 Then
             ' Create a 32 pixel offset for larger sprites
-            Y = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - ((SpritesGFXInfo(Sprite).height / 4) - 32)
+            Y = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset - ((CharacterGFXInfo(Sprite).height / 4) - 32)
         Else
             ' Proceed as normal
             Y = MapNpc(MapNpcNum).Y * PIC_Y + MapNpc(MapNpcNum).YOffset
         End If
 
-        destrec = New Rectangle(X, Y, SpritesGFXInfo(Sprite).width / 4, SpritesGFXInfo(Sprite).height / 4)
+        destrec = New Rectangle(X, Y, CharacterGFXInfo(Sprite).width / 4, CharacterGFXInfo(Sprite).height / 4)
 
-        DrawSprite(Sprite, X, Y, srcrec)
+        DrawCharacter(Sprite, X, Y, srcrec)
 
     End Sub
 
@@ -1023,7 +1023,7 @@ Module ClientGraphics
         RenderTexture(ItemsGFX(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
 
-    Public Sub DrawSprite(ByVal Sprite As Long, ByVal x2 As Long, ByVal y2 As Long, ByVal rec As Rectangle)
+    Public Sub DrawCharacter(ByVal Sprite As Long, ByVal x2 As Long, ByVal y2 As Long, ByVal rec As Rectangle)
         Dim X As Long
         Dim y As Long
         Dim width As Long
@@ -1032,12 +1032,12 @@ Module ClientGraphics
 
         If Sprite < 1 Or Sprite > NumCharacters Then Exit Sub
 
-        If SpritesGFXInfo(Sprite).IsLoaded = False Then
+        If CharacterGFXInfo(Sprite).IsLoaded = False Then
             LoadTexture(Sprite, 2)
         End If
 
         'seeying we still use it, lets update timer
-        With SpritesGFXInfo(Sprite)
+        With CharacterGFXInfo(Sprite)
             .TextureTimer = GetTickCount() + 100000
         End With
 
@@ -1046,7 +1046,7 @@ Module ClientGraphics
         width = (rec.Width)
         height = (rec.Height)
 
-        RenderTexture(SpritesGFX(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderTexture(CharacterGFX(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawBlood(ByVal Index As Long)
@@ -1270,11 +1270,11 @@ Module ClientGraphics
 
         'clear characters
         For I = 1 To NumCharacters
-            If SpritesGFXInfo(I).IsLoaded Then
-                If SpritesGFXInfo(I).TextureTimer < GetTickCount() Then
-                    SpritesGFX(I).Dispose()
-                    SpritesGFXInfo(I).IsLoaded = False
-                    SpritesGFXInfo(I).TextureTimer = 0
+            If CharacterGFXInfo(I).IsLoaded Then
+                If CharacterGFXInfo(I).TextureTimer < GetTickCount() Then
+                    CharacterGFX(I).Dispose()
+                    CharacterGFXInfo(I).IsLoaded = False
+                    CharacterGFXInfo(I).TextureTimer = 0
                 End If
             End If
         Next
@@ -2020,7 +2020,7 @@ Module ClientGraphics
         Next i
 
         For i = 0 To NumCharacters
-            If Not SpritesGFX(i) Is Nothing Then SpritesGFX(i).Dispose()
+            If Not CharacterGFX(i) Is Nothing Then CharacterGFX(i).Dispose()
         Next
 
         For i = 0 To NumItems
@@ -2533,12 +2533,12 @@ Module ClientGraphics
 
         With rec
             .Y = 0
-            .Height = SpritesGFXInfo(playersprite).height / 4
+            .Height = CharacterGFXInfo(playersprite).height / 4
             .X = 0
-            .Width = SpritesGFXInfo(playersprite).width / 4
+            .Width = CharacterGFXInfo(playersprite).width / 4
         End With
 
-        RenderTexture(SpritesGFX(playersprite), GameWindow, CharWindowX + CharPanelGFXInfo.width / 4 - rec.Width / 2, CharWindowY + CharPanelGFXInfo.height / 2 - rec.Height / 2, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderTexture(CharacterGFX(playersprite), GameWindow, CharWindowX + CharPanelGFXInfo.width / 4 - rec.Width / 2, CharWindowY + CharPanelGFXInfo.height / 2 - rec.Height / 2, rec.X, rec.Y, rec.Width, rec.Height)
 
         For i = 1 To Equipment.Equipment_Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
