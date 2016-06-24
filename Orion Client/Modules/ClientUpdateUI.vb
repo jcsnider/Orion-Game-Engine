@@ -123,9 +123,9 @@
     Public QuestBtnY As Long = 16
     Public TradeBtnX As Long = 16
     Public TradeBtnY As Long = 64
-    Public OptBtnX As Long = 64
+    Public OptBtnX As Long = 112
     Public OptBtnY As Long = 64
-    Public ExitBtnX As Long = 112
+    Public ExitBtnX As Long = 160
     Public ExitBtnY As Long = 64
 
     'Character window Coordinates

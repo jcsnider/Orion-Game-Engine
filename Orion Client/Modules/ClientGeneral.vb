@@ -410,7 +410,7 @@ Module ClientGeneral
 
         DestroyGraphics()
         GameDestroyed = True
-        PlayerSocket.Close()
+        If Not PlayerSocket Is Nothing Then PlayerSocket.Close()
         PlayerSocket = Nothing
         Application.Exit()
         End

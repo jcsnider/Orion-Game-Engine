@@ -226,11 +226,11 @@ Public Module ClientGuiFunctions
                         CheckGuiClick = True
                         'Trade
                     ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
-                        PlaySound("Click.ogg")
-                        AddText("Click on the player you wish to trade with.", TellColor)
-                        TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
-                        TradeRequest = True
-                        CheckGuiClick = True
+                        'PlaySound("Click.ogg")
+                        'AddText("Click on the player you wish to trade with.", TellColor)
+                        'TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
+                        'TradeRequest = True
+                        'CheckGuiClick = True
                         'Options
                     ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 32 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
                         PlaySound("Click.ogg")

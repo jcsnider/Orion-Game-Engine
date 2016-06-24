@@ -401,7 +401,6 @@
     </Content>
     <Content Include="data files\graphics\actionbar\Quest.png" />
     <Content Include="data files\graphics\actionbar\Skills.png" />
-    <Content Include="data files\graphics\actionbar\Trade.png" />
     <Content Include="data files\graphics\animations\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
