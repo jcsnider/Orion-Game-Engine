@@ -2,7 +2,6 @@
 
 Module ClientGlobals
 
-
     ' for directional blocking
     Public DirArrowX(0 To 4) As Byte
     Public DirArrowY(0 To 4) As Byte
@@ -100,10 +99,6 @@ Module ClientGlobals
     ' Used for dragging Picture Boxes
     Public SOffsetX As Integer
     Public SOffsetY As Integer
-
-    ' Map animation #, used to keep track of what map animation is currently on
-    'Public MapAnim As Byte
-    'Public MapAnimTimer As Long
 
     ' Used to freeze controls when getting a new map
     Public GettingMap As Boolean

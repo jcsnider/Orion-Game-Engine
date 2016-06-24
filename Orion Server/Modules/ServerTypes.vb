@@ -197,6 +197,9 @@
         Dim FemaleSprite() As Long
         Dim StartItem() As Long
         Dim StartValue() As Long
+        Dim StartMap As Long
+        Dim StartX As Byte
+        Dim StartY As Byte
     End Structure
 
     Public Structure ItemRec

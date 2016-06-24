@@ -5,22 +5,26 @@ Module ServerDatabase
     'Public Declare Function VarPtr Lib "msvbvm60.dll" Alias "VarPtr" (ByVal lpObject As Object) As Long
 
 #Region "Classes"
-    Public Sub CreateClassesINI()
+    Public Sub CreateClassesIni()
         Dim filename As String
         filename = Application.StartupPath & "\data\classes.ini"
         Max_Classes = 1
 
         If Not FileExist(filename) Then
-            Call PutVar(filename, "INIT", "MaxClasses", Max_Classes)
-            Call PutVar(filename, "CLASS1", "Name", "Warrior")
-            Call PutVar(filename, "CLASS1", "Malesprite", "1")
-            Call PutVar(filename, "CLASS1", "Femalesprite", "2")
-            Call PutVar(filename, "CLASS1", "Str", "5")
-            Call PutVar(filename, "CLASS1", "End", "5")
-            Call PutVar(filename, "CLASS1", "Vit", "5")
-            Call PutVar(filename, "CLASS1", "Will", "5")
-            Call PutVar(filename, "CLASS1", "Int", "5")
-            Call PutVar(filename, "CLASS1", "Spir", "5")
+            PutVar(filename, "INIT", "MaxClasses", Max_Classes)
+            PutVar(filename, "CLASS1", "Name", "Warrior")
+            PutVar(filename, "CLASS1", "Malesprite", "1")
+            PutVar(filename, "CLASS1", "Femalesprite", "2")
+            PutVar(filename, "CLASS1", "Str", "5")
+            PutVar(filename, "CLASS1", "End", "5")
+            PutVar(filename, "CLASS1", "Vit", "5")
+            PutVar(filename, "CLASS1", "Will", "5")
+            PutVar(filename, "CLASS1", "Int", "5")
+            PutVar(filename, "CLASS1", "Spir", "5")
+
+            PutVar(filename, "CLASS1", "StartMap", START_MAP)
+            PutVar(filename, "CLASS1", "StartX", START_X)
+            PutVar(filename, "CLASS1", "StartY", START_Y)
         End If
     End Sub
 
@@ -50,7 +54,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\classes.ini"
 
-        If Not FileExist(filename) Then Call CreateClassesINI()
+        If Not FileExist(filename) Then CreateClassesINI()
 
         Max_Classes = Val(Getvar(filename, "INIT", "MaxClasses"))
         ReDim Classes(0 To Max_Classes)
@@ -60,7 +64,7 @@ Module ServerDatabase
             ReDim Classes(i).StartValue(0 To 5)
         Next
 
-        Call ClearClasses()
+        ClearClasses()
 
         For i = 1 To Max_Classes
             Classes(i).Name = Getvar(filename, "CLASS" & i, "Name")
@@ -101,6 +105,10 @@ Module ServerDatabase
                 Classes(i).StartValue(x) = Val(Getvar(filename, "CLASS" & i, "StartValue" & x))
             Next
 
+            Classes(i).StartMap = Val(Getvar(filename, "CLASS" & i, "StartMap"))
+            Classes(i).StartX = Val(Getvar(filename, "CLASS" & i, "StartX"))
+            Classes(i).StartY = Val(Getvar(filename, "CLASS" & i, "StartY"))
+
             DoEvents()
         Next
 
@@ -114,20 +122,25 @@ Module ServerDatabase
         filename = Application.StartupPath & "\data\classes.ini"
 
         For i = 1 To Max_Classes
-            Call PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
-            Call PutVar(filename, "CLASS" & i, "Maleprite", "1")
-            Call PutVar(filename, "CLASS" & i, "Femaleprite", "1")
-            Call PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
-            Call PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))
-            Call PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.vitality)))
-            Call PutVar(filename, "CLASS" & i, "Will", Str(Classes(i).Stat(Stats.luck)))
-            Call PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
-            Call PutVar(filename, "CLASS" & i, "Spr", Str(Classes(i).Stat(Stats.spirit)))
+            PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
+            PutVar(filename, "CLASS" & i, "Maleprite", "1")
+            PutVar(filename, "CLASS" & i, "Femaleprite", "1")
+            PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
+            PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))
+            PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.vitality)))
+            PutVar(filename, "CLASS" & i, "Will", Str(Classes(i).Stat(Stats.luck)))
+            PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
+            PutVar(filename, "CLASS" & i, "Spr", Str(Classes(i).Stat(Stats.spirit)))
             ' loop for items & values
             For x = 1 To 5
-                Call PutVar(filename, "CLASS" & i, "StartItem" & x, Str(Classes(i).StartItem(x)))
-                Call PutVar(filename, "CLASS" & i, "StartValue" & x, Str(Classes(i).StartValue(x)))
+                PutVar(filename, "CLASS" & i, "StartItem" & x, Str(Classes(i).StartItem(x)))
+                PutVar(filename, "CLASS" & i, "StartValue" & x, Str(Classes(i).StartValue(x)))
             Next
+
+            PutVar(filename, "CLASS" & i, "StartMap", Str(Classes(i).StartMap))
+            PutVar(filename, "CLASS" & i, "StartX", Str(Classes(i).StartX))
+            PutVar(filename, "CLASS" & i, "StartY", Str(Classes(i).StartY))
+
             DoEvents()
         Next
 
@@ -1939,9 +1952,9 @@ Module ServerDatabase
             Next n
 
             Player(Index).Dir = DIR_DOWN
-            Player(Index).Map = START_MAP
-            Player(Index).x = START_X
-            Player(Index).y = START_Y
+            Player(Index).Map = Classes(ClassNum).StartMap
+            Player(Index).x = Classes(ClassNum).StartX
+            Player(Index).y = Classes(ClassNum).StartY
             Player(Index).Dir = DIR_DOWN
             Player(Index).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
             Player(Index).Vital(Vitals.MP) = GetPlayerMaxVital(Index, Vitals.MP)
