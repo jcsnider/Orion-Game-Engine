@@ -13,8 +13,8 @@
 
     Sub InitServer()
         Dim i As Long, F As Long, x As Integer
-        x = 0
         Dim time1 As Long, time2 As Long
+        x = 0
 
         time1 = GetTickCount()
         frmServer.Show()
@@ -131,58 +131,31 @@
         ReDim Projectiles(MAX_PROJECTILES)
 
         ' Check if the directory is there, if its not make it
-        If LCase$(Dir(Application.StartupPath & "\data", vbDirectory)) <> "data" Then
-            MkDir(Application.StartupPath & "\data")
-        End If
+        CheckDir(Application.StartupPath & "\data")
 
-        If LCase$(Dir(Application.StartupPath & "\Data\items", vbDirectory)) <> "items" Then
-            MkDir(Application.StartupPath & "\Data\items")
-        End If
+        CheckDir(Application.StartupPath & "\Data\items")
 
-        If LCase$(Dir(Application.StartupPath & "\Data\maps", vbDirectory)) <> "maps" Then
-            MkDir(Application.StartupPath & "\Data\maps")
-        End If
+        CheckDir(Application.StartupPath & "\Data\maps")
 
-        If LCase$(Dir(Application.StartupPath & "\Data\npcs", vbDirectory)) <> "npcs" Then
-            MkDir(Application.StartupPath & "\Data\npcs")
-        End If
+        CheckDir(Application.StartupPath & "\Data\npcs")
 
-        If LCase$(Dir(Application.StartupPath & "\Data\shops", vbDirectory)) <> "shops" Then
-            MkDir(Application.StartupPath & "\Data\shops")
-        End If
+        CheckDir(Application.StartupPath & "\Data\shops")
 
-        If LCase$(Dir(Application.StartupPath & "\Data\spells", vbDirectory)) <> "spells" Then
-            MkDir(Application.StartupPath & "\Data\spells")
-        End If
+        CheckDir(Application.StartupPath & "\Data\spells")
 
-        If LCase$(Dir(Application.StartupPath & "\data\accounts", vbDirectory)) <> "accounts" Then
-            MkDir(Application.StartupPath & "\data\accounts")
-        End If
+        CheckDir(Application.StartupPath & "\data\accounts")
 
-        If LCase$(Dir(Application.StartupPath & "\data\resources", vbDirectory)) <> "resources" Then
-            MkDir(Application.StartupPath & "\data\resources")
-        End If
+        CheckDir(Application.StartupPath & "\data\resources")
 
-        If LCase$(Dir(Application.StartupPath & "\data\animations", vbDirectory)) <> "animations" Then
-            MkDir(Application.StartupPath & "\data\animations")
-        End If
+        CheckDir(Application.StartupPath & "\data\animations")
 
-        If LCase$(Dir(Application.StartupPath & "\data\banks", vbDirectory)) <> "banks" Then
-            MkDir(Application.StartupPath & "\data\banks")
-        End If
+        CheckDir(Application.StartupPath & "\data\banks")
 
-        If LCase$(Dir(Application.StartupPath & "\data\logs", vbDirectory)) <> "logs" Then
-            MkDir(Application.StartupPath & "\data\logs")
-        End If
+        CheckDir(Application.StartupPath & "\data\logs")
 
-        'quests
-        If LCase$(Dir(Application.StartupPath & "\data\quests", vbDirectory)) <> "quests" Then
-            MkDir(Application.StartupPath & "\data\quests")
-        End If
+        CheckDir(Application.StartupPath & "\data\quests")
 
-        If LCase$(Dir(Application.StartupPath & "\data\projectiles", vbDirectory)) <> "projectiles" Then
-            MkDir(Application.StartupPath & "\data\projectiles")
-        End If
+        CheckDir(Application.StartupPath & "\data\projectiles")
 
         ' set quote character
         vbQuote = Chr(34) ' "
@@ -206,7 +179,6 @@
         SpawnAllMapsItems()
         SetStatus("Spawning map npcs...")
         SpawnAllMapNpcs()
-        SetStatus("Creating map cache...")
 
         ' Check if the master charlist file exists for checking duplicate names, and if it doesnt make it
         If Not FileExist("data\accounts\charlist.txt") Then
@@ -239,9 +211,6 @@
         SetStatus("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
 
         MyIPAddress = GetIP()
-        If MyIPAddress = "" Then
-            'MyIPAddress = ServerSocket.
-        End If
 
         UpdateCaption()
 
@@ -380,17 +349,24 @@
 
         If Secs <= 0 Then Secs = 30
         If Secs Mod 5 = 0 Or Secs <= 5 Then
-            Call GlobalMsg("Server Shutdown in " & Secs & " seconds.")
-            Call TextAdd("Automated Server Shutdown in " & Secs & " seconds.")
+            GlobalMsg("Server Shutdown in " & Secs & " seconds.")
+            TextAdd("Automated Server Shutdown in " & Secs & " seconds.")
         End If
 
         Secs = Secs - 1
 
         If Secs <= 0 Then
-            Call GlobalMsg("Server Shutdown.")
-            Call DestroyServer()
+            GlobalMsg("Server Shutdown.")
+            DestroyServer()
         End If
 
     End Sub
 
+    Public Sub CheckDir(ByVal DirPath As String)
+
+        If Not IO.Directory.Exists(DirPath) Then
+            IO.Directory.CreateDirectory(DirPath)
+        End If
+
+    End Sub
 End Module

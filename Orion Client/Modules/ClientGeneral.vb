@@ -415,4 +415,12 @@ Module ClientGeneral
         Application.Exit()
         End
     End Sub
+
+    Public Sub CheckDir(ByVal DirPath As String)
+
+        If Not IO.Directory.Exists(DirPath) Then
+            IO.Directory.CreateDirectory(DirPath)
+        End If
+
+    End Sub
 End Module

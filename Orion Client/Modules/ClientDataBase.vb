@@ -707,7 +707,7 @@ Module ClientDataBase
         Dim i As Long
 
         For i = 1 To MAX_ITEMS
-            Call ClearItem(i)
+            ClearItem(i)
         Next
 
     End Sub
@@ -729,7 +729,7 @@ Module ClientDataBase
         Dim i As Long
 
         For i = 1 To MAX_RESOURCES
-            Call ClearResource(i)
+            ClearResource(i)
         Next
 
     End Sub
@@ -738,7 +738,7 @@ Module ClientDataBase
         Dim i As Long
 
         For i = 1 To MAX_NPCS
-            Call ClearNpc(i)
+            ClearNpc(i)
         Next
 
     End Sub
@@ -827,8 +827,8 @@ Module ClientDataBase
     End Sub
 
     Public Function Compress(ByVal b() As Byte) As Byte()
-        Dim ms As New System.IO.MemoryStream()
-        Dim gzipstream As New Compression.GZipStream(ms, CompressionMode.Compress)
+        Dim ms As New MemoryStream()
+        Dim gzipstream As New GZipStream(ms, CompressionMode.Compress)
         gzipstream.Write(b, 0, b.Length)
         gzipstream.Flush()
         gzipstream.Close()
@@ -868,73 +868,40 @@ Module ClientDataBase
 
     Sub CheckDirectories()
         ' Check if the directory is there, if its not make it
-        If LCase$(Dir(Application.StartupPath & "\data files", vbDirectory)) <> "data files" Then
-            Call MkDir(Application.StartupPath & "\data files")
-        End If
+        CheckDir(Application.StartupPath & "\data files")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\fonts", vbDirectory)) <> "fonts" Then
-            Call MkDir(Application.StartupPath & "\data files\fonts")
-        End If
+        CheckDir(Application.StartupPath & "\data files\fonts")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics", vbDirectory)) <> "graphics" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\maps", vbDirectory)) <> "maps" Then
-            Call MkDir(Application.StartupPath & "\data files\maps")
-        End If
+        CheckDir(Application.StartupPath & "\data files\maps")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\music", vbDirectory)) <> "music" Then
-            Call MkDir(Application.StartupPath & "\data files\music")
-        End If
+        CheckDir(Application.StartupPath & "\data files\music")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\sound", vbDirectory)) <> "sound" Then
-            Call MkDir(Application.StartupPath & "\data files\sound")
-        End If
+        CheckDir(Application.StartupPath & "\data files\sound")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\actionbar", vbDirectory)) <> "actionbar" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\actionbar")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\actionbar")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\animations", vbDirectory)) <> "animations" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\animations")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\animations")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\characters", vbDirectory)) <> "characters" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\characters")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\characters")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\gui", vbDirectory)) <> "gui" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\gui")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\gui")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\items", vbDirectory)) <> "items" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\items")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\items")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\paperdolls", vbDirectory)) <> "paperdolls" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\paperdolls")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\paperdolls")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\resources", vbDirectory)) <> "resources" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\resources")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\resources")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\spellicons", vbDirectory)) <> "spellicons" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\spellicons")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\spellicons")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\tilesets", vbDirectory)) <> "tilesets" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\tilesets")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\tilesets")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\faces", vbDirectory)) <> "faces" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\faces")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\faces")
 
-        If LCase$(Dir(Application.StartupPath & "\data files\graphics\projectiles", vbDirectory)) <> "projectiles" Then
-            Call MkDir(Application.StartupPath & "\data files\graphics\projectiles")
-        End If
+        CheckDir(Application.StartupPath & "\data files\graphics\projectiles")
+
     End Sub
 
 End Module
