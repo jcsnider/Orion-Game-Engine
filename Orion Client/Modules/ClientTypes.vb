@@ -27,6 +27,15 @@
     ' options
     Public Options As OptionsRec
 
+    Public CharSelection() As CharSelRec
+    Public Structure CharSelRec
+        Dim Name As String
+        Dim Sprite As Long
+        Dim Gender As Integer
+        Dim ClassName As String
+        Dim Level As Integer
+    End Structure
+
     ' Type recs
     Public Structure OptionsRec
         Dim SavePass As Boolean

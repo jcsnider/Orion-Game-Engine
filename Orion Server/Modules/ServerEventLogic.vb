@@ -45,27 +45,27 @@
                             If Map(MapNum).Events(id).Pages(page).chkVariable = 1 Then
                                 Select Case Map(MapNum).Events(id).Pages(page).VariableCompare
                                     Case 0
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) <> Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) <> Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                     Case 1
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) < Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) < Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                     Case 2
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) > Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) > Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                     Case 3
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) <= Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) <= Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                     Case 4
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) >= Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) >= Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                     Case 5
-                                        If Player(i).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) = Map(MapNum).Events(id).Pages(page).VariableCondition Then
+                                        If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(page).VariableIndex) = Map(MapNum).Events(id).Pages(page).VariableCondition Then
                                             TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                         End If
                                 End Select
@@ -73,11 +73,11 @@
 
                             If Map(MapNum).Events(id).Pages(page).chkSwitch = 1 Then
                                 If Map(MapNum).Events(id).Pages(page).SwitchCompare = 1 Then 'we expect true
-                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 0 Then ' we see false so we despawn the event
+                                    If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 0 Then ' we see false so we despawn the event
                                         TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                     End If
                                 Else
-                                    If Player(i).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 1 Then ' we expect false and we see true so we despawn the event
+                                    If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(MapNum).Events(id).Pages(page).SwitchIndex) = 1 Then ' we expect false and we see true so we despawn the event
                                         TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                     End If
                                 End If
@@ -168,27 +168,27 @@
                         If Map(MapNum).Events(id).Pages(z).chkVariable = 1 Then
                             Select Case Map(MapNum).Events(id).Pages(z).VariableCompare
                                 Case 0
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) <> Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) <> Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                                 Case 1
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) < Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) < Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                                 Case 2
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) > Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) > Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                                 Case 3
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) <= Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) <= Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                                 Case 4
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) >= Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) >= Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                                 Case 5
-                                    If Player(i).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) = Map(MapNum).Events(id).Pages(z).VariableCondition Then
+                                    If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(MapNum).Events(id).Pages(z).VariableIndex) = Map(MapNum).Events(id).Pages(z).VariableCondition Then
                                         spawnevent = False
                                     End If
                             End Select
@@ -196,11 +196,11 @@
 
                         If Map(MapNum).Events(id).Pages(z).chkSwitch = 1 Then
                             If Map(MapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false 
-                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 1 Then 'and switch is true
+                                If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 1 Then 'and switch is true
                                     spawnevent = False 'do not spawn
                                 End If
                             Else
-                                If Player(i).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 0 Then ' else we want true and the switch is false
+                                If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 0 Then ' else we want true and the switch is false
                                     spawnevent = False
                                 End If
                             End If
@@ -1121,7 +1121,7 @@
             If IsPlaying(i) Then
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     If TempPlayer(i).EventMap.EventPages(x).Visible Then
-                        If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Pages(TempPlayer(i).EventMap.EventPages(x).PageID).Trigger = 2 Then 'Parallel Process baby!
+                        If Map(Player(i).Character(TempPlayer(i).CurChar).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Pages(TempPlayer(i).EventMap.EventPages(x).PageID).Trigger = 2 Then 'Parallel Process baby!
                             If TempPlayer(i).EventProcessingCount > 0 Then
                                 If TempPlayer(i).EventProcessing(x).Active = 0 Then
                                     If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Pages(TempPlayer(i).EventMap.EventPages(x).PageID).CommandListCount > 0 Then
@@ -1204,7 +1204,7 @@
                                                     .CurSlot = .ListLeftOff(.CurList) + 1
                                                     .ListLeftOff(.CurList) = 0
                                                 End If
-                                                If .CurList > Map(Player(i).Map).Events(.EventID).Pages(.PageID).CommandListCount Then
+                                                If .CurList > Map(Player(i).Character(TempPlayer(i).CurChar).Map).Events(.EventID).Pages(.PageID).CommandListCount Then
                                                     'Get rid of this event, it is bad
                                                     removeEventProcess = True
                                                     endprocess = True
@@ -1304,19 +1304,19 @@
                                                         Case EventType.evPlayerVar
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2
                                                                 Case 0
-                                                                    Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
+                                                                    Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
                                                                 Case 1
-                                                                    Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) + Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
+                                                                    Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) + Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
                                                                 Case 2
-                                                                    Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) - Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
+                                                                    Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) - Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3
                                                                 Case 3
-                                                                    Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Random(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4)
+                                                                    Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = Random(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4)
                                                             End Select
                                                         Case EventType.evPlayerSwitch
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
-                                                                Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 1
+                                                                Player(i).Character(TempPlayer(i).CurChar).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 1
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
-                                                                Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 0
+                                                                Player(i).Character(TempPlayer(i).CurChar).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = 0
                                                             End If
                                                         Case EventType.evSelfSwitch
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Globals = 1 Then
@@ -1337,7 +1337,7 @@
                                                                 Case 0
                                                                     Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2
                                                                         Case 0
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1347,7 +1347,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 1
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) >= Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) >= Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1357,7 +1357,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 2
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) <= Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) <= Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1367,7 +1367,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 3
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) > Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) > Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1377,7 +1377,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 4
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) < Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) < Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1387,7 +1387,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 5
-                                                                            If Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) <> Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Variables(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) <> Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1400,7 +1400,7 @@
                                                                 Case 1
                                                                     Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2
                                                                         Case 0
-                                                                            If Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = 1 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = 1 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1410,7 +1410,7 @@
                                                                                 .CurSlot = 1
                                                                             End If
                                                                         Case 1
-                                                                            If Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = 0 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = 0 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1431,7 +1431,7 @@
                                                                         .CurSlot = 1
                                                                     End If
                                                                 Case 3
-                                                                    If Player(i).Classes = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 Then
+                                                                    If Player(i).Character(TempPlayer(i).CurChar).Classes = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 Then
                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                         .CurSlot = 1
@@ -1566,7 +1566,7 @@
                                                                         If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2 = 0 Then
                                                                             Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3
                                                                                 Case 0
-                                                                                    If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 0 Then
+                                                                                    If Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 0 Then
                                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                         .CurSlot = 1
@@ -1576,7 +1576,7 @@
                                                                                         .CurSlot = 1
                                                                                     End If
                                                                                 Case 1
-                                                                                    If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 1 Then
+                                                                                    If Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 1 Then
                                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                         .CurSlot = 1
@@ -1586,7 +1586,7 @@
                                                                                         .CurSlot = 1
                                                                                     End If
                                                                                 Case 2
-                                                                                    If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 2 Or Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 3 Then
+                                                                                    If Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 2 Or Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).Status = 3 Then
                                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                         .CurSlot = 1
@@ -1617,7 +1617,7 @@
                                                                                     End If
                                                                             End Select
                                                                         ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2 = 1 Then
-                                                                            If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).ActualTask = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
+                                                                            If Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1).ActualTask = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data3 Then
                                                                                 .ListLeftOff(.CurList) = .CurSlot
                                                                                 .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                                 .CurSlot = 1
@@ -1685,7 +1685,7 @@
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 If HasSpell(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = True Then
                                                                     For p = 1 To MAX_PLAYER_SPELLS
-                                                                        If Player(i).Spell(p) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 Then
+                                                                        If Player(i).Character(TempPlayer(i).CurChar).Spell(p) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 Then
                                                                             SetPlayerSpell(i, p, 0)
                                                                         End If
                                                                     Next
@@ -1693,30 +1693,30 @@
                                                             End If
                                                             SendPlayerSpells(i)
                                                         Case EventType.evChangeClass
-                                                            Player(i).Classes = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1
+                                                            Player(i).Character(TempPlayer(i).CurChar).Classes = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSprite
                                                             SetPlayerSprite(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSex
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
-                                                                Player(i).Sex = SEX_MALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SEX_MALE
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
-                                                                Player(i).Sex = SEX_FEMALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SEX_FEMALE
                                                             End If
                                                             SendPlayerData(i)
                                                         Case EventType.evChangePK
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
-                                                                Player(i).PK = NO
+                                                                Player(i).Character(TempPlayer(i).CurChar).PK = NO
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
-                                                                Player(i).PK = YES
+                                                                Player(i).Character(TempPlayer(i).CurChar).PK = YES
                                                             End If
                                                             SendPlayerData(i)
                                                         Case EventType.evWarpPlayer
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4 = 0 Then
                                                                 PlayerWarp(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
                                                             Else
-                                                                Player(i).Dir = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4 - 1
+                                                                Player(i).Character(TempPlayer(i).CurChar).Dir = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data4 - 1
                                                                 PlayerWarp(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3)
                                                             End If
 
@@ -1838,9 +1838,9 @@
                                                             End If
                                                         Case EventType.evQuestTask
                                                             If QuestInProgress(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) Then
-                                                                If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 Then
-                                                                    If Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QUEST_TYPE_TALKEVENT Or Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QUEST_TYPE_GOGET Then
-                                                                        CheckTask(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType, -1)
+                                                                If Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 Then
+                                                                    If Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QUEST_TYPE_TALKEVENT Or Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QUEST_TYPE_GOGET Then
+                                                                        CheckTask(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Quest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).Character(TempPlayer(i).CurChar).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType, -1)
                                                                     End If
                                                                 End If
                                                             End If
@@ -1925,8 +1925,8 @@
     Function ParseEventText(ByVal Index As Long, ByVal txt As String) As String
         Dim i As Long, x As Long, newtxt As String, parsestring As String, z As Long
 
-        txt = Replace(txt, "/name", Trim$(Player(Index).Name))
-        txt = Replace(txt, "/p", Trim$(Player(Index).Name))
+        txt = Replace(txt, "/name", Trim$(Player(Index).Character(TempPlayer(i).CurChar).Name))
+        txt = Replace(txt, "/p", Trim$(Player(Index).Character(TempPlayer(i).CurChar).Name))
         Do While InStr(1, txt, "/v") > 0
             x = InStr(1, txt, "/v")
             If x > 0 Then
@@ -1936,7 +1936,7 @@
                 Loop
                 newtxt = Mid(txt, 1, x - 1)
                 parsestring = Mid(txt, x + 2, i)
-                z = Player(Index).Variables(Val(parsestring))
+                z = Player(Index).Character(TempPlayer(i).CurChar).Variables(Val(parsestring))
                 newtxt = newtxt & CStr(z)
                 newtxt = newtxt & Mid(txt, x + 2 + i, Len(txt) - (x + i))
                 txt = newtxt
@@ -2334,27 +2334,27 @@
                         If .chkVariable = 1 Then
                             Select Case .VariableCompare
                                 Case 0
-                                    If Player(Index).Variables(.VariableIndex) <> .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) <> .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 1
-                                    If Player(Index).Variables(.VariableIndex) < .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) < .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 2
-                                    If Player(Index).Variables(.VariableIndex) > .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) > .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 3
-                                    If Player(Index).Variables(.VariableIndex) <= .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) <= .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 4
-                                    If Player(Index).Variables(.VariableIndex) >= .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) >= .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 5
-                                    If Player(Index).Variables(.VariableIndex) = .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) = .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                             End Select
@@ -2363,11 +2363,11 @@
                         'we are assuming the event will spawn, and are looking for ways to stop it
                         If .chkSwitch = 1 Then
                             If .SwitchCompare = 1 Then 'we want true
-                                If Player(Index).Switches(.SwitchIndex) = 0 Then 'it is false, so we stop the spawn
+                                If Player(Index).Character(TempPlayer(i).CurChar).Switches(.SwitchIndex) = 0 Then 'it is false, so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             Else
-                                If Player(Index).Switches(.SwitchIndex) = 1 Then 'we want false and it is true so we stop the spawn
+                                If Player(Index).Character(TempPlayer(i).CurChar).Switches(.SwitchIndex) = 1 Then 'we want false and it is true so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             End If

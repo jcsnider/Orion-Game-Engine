@@ -12,6 +12,8 @@ Module ClientGeneral
 
         ReDim Player(0 To MAX_PLAYERS)
 
+        ReDim CharSelection(3)
+
         For i = 0 To MAX_PLAYERS
             For x = 0 To Vitals.Vital_Count - 1
                 ReDim Player(i).Vital(x)
@@ -265,9 +267,9 @@ Module ClientGeneral
                     Call SetStatus("Connected, sending character addition data...")
 
                     If frmMenu.rdoMale.Checked = True Then
-                        SendAddChar(frmMenu.txtCharName.Text, SEX_MALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SEX_MALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     Else
-                        SendAddChar(frmMenu.txtCharName.Text, SEX_FEMALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SEX_FEMALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     End If
                 End If
 

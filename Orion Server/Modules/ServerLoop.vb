@@ -22,7 +22,7 @@
                     If IsPlaying(i) Then
                         ' check if they've completed casting, and if so set the actual spell going
                         If TempPlayer(i).SpellBuffer > 0 Then
-                            If GetTickCount() > TempPlayer(i).SpellBufferTimer + (Spell(Player(i).Spell(TempPlayer(i).SpellBuffer)).CastTime * 1000) Then
+                            If GetTickCount() > TempPlayer(i).SpellBufferTimer + (Spell(Player(i).Character(TempPlayer(i).CurChar).Spell(TempPlayer(i).SpellBuffer)).CastTime * 1000) Then
                                 CastSpell(i, TempPlayer(i).SpellBuffer)
                                 TempPlayer(i).SpellBuffer = 0
                                 TempPlayer(i).SpellBufferTimer = 0
@@ -57,16 +57,17 @@
                 For i = 1 To MAX_PLAYERS
                     'Housing
                     If IsPlaying(i) Then
-                        If Player(i).InHouse > 0 Then
-                            If IsPlaying(Player(i).InHouse) Then
-                                If Player(Player(i).InHouse).InHouse <> Player(i).InHouse Then
-                                    Player(i).InHouse = 0
-                                    PlayerWarp(i, Player(i).LastMap, Player(i).LastX, Player(i).LastY)
+                        If Player(i).Character(TempPlayer(i).CurChar).InHouse > 0 Then
+                            If IsPlaying(Player(i).Character(TempPlayer(i).CurChar).InHouse) Then
+                                If Player(Player(i).Character(TempPlayer(i).CurChar).InHouse).Character(TempPlayer(i).CurChar).InHouse <> Player(i).Character(TempPlayer(i).CurChar).InHouse Then
+                                    Player(i).Character(TempPlayer(i).CurChar).InHouse = 0
+                                    PlayerWarp(i, Player(i).Character(TempPlayer(i).CurChar).LastMap, Player(i).Character(TempPlayer(i).CurChar).LastX, Player(i).Character(TempPlayer(i).CurChar).LastY)
                                     PlayerMsg(i, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.")
                                 End If
                             End If
                         End If
                     End If
+
                     If Not Clients(i).Socket Is Nothing Then
                         If Not Clients(i).Socket.Connected Then
                             CloseSocket(i)

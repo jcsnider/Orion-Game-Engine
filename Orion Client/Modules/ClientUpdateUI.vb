@@ -15,6 +15,7 @@
     Public chkSavePassChecked As Boolean
     Public tempUserName As String
     Public tempPassword As String
+    Public pnlCharSelectVisible As Boolean
 
     'Mapreport
     Public UpdateMapnames As Boolean
@@ -321,6 +322,13 @@
 
         If frmmenuvisible <> frmMenu.Visible Then
             frmMenu.Visible = frmmenuvisible
+        End If
+
+        If pnlCharSelectVisible <> frmMenu.pnlCharSelect.Visible Then
+            frmMenu.pnlCharSelect.Visible = pnlCharSelectVisible
+            If pnlCharSelectVisible Then
+                frmMenu.DrawCharacterSelect()
+            End If
         End If
 
         If frmmaingamevisible <> frmMainGame.Visible Then

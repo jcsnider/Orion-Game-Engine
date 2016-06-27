@@ -95,13 +95,14 @@
                 price = HouseConfig(TempPlayer(index).BuyHouseIndex).Price
                 If HasItem(index, 1) >= price Then
                     TakeInvItem(index, 1, price)
-                    Player(index).House.HouseIndex = TempPlayer(index).BuyHouseIndex
+                    Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex = TempPlayer(index).BuyHouseIndex
                     PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseIndex).ConfigName) & " house!")
-                    Player(index).LastMap = GetPlayerMap(index)
-                    Player(index).LastX = GetPlayerX(index)
-                    Player(index).LastY = GetPlayerY(index)
-                    Player(index).InHouse = index
-                    Call PlayerWarp(index, HouseConfig(Player(index).House.HouseIndex).BaseMap, HouseConfig(Player(index).House.HouseIndex).X, HouseConfig(Player(index).House.HouseIndex).Y, True)
+                    Player(index).Character(TempPlayer(index).CurChar).LastMap = GetPlayerMap(index)
+                    Player(index).Character(TempPlayer(index).CurChar).LastX = GetPlayerX(index)
+                    Player(index).Character(TempPlayer(index).CurChar).LastY = GetPlayerY(index)
+                    Player(index).Character(TempPlayer(index).CurChar).InHouse = index
+
+                    PlayerWarp(index, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).BaseMap, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).X, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).Y, True)
                     SavePlayer(index)
                 Else
                     PlayerMsg(index, "You cannot afford this house!")
@@ -145,11 +146,11 @@
             End If
         End If
 
-        If Player(index).House.HouseIndex > 0 Then
-            If Player(index).InHouse > 0 Then
-                If Player(index).InHouse = index Then
-                    If Player(invitee).InHouse > 0 Then
-                        If Player(invitee).InHouse = index Then
+        If Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex > 0 Then
+            If Player(index).Character(TempPlayer(index).CurChar).InHouse > 0 Then
+                If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
+                    If Player(invitee).Character(TempPlayer(invitee).CurChar).InHouse > 0 Then
+                        If Player(invitee).Character(TempPlayer(invitee).CurChar).InHouse = index Then
                             PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already in your house!")
                         Else
                             PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already visiting someone elses house!")
@@ -193,12 +194,12 @@
                 If TempPlayer(index).InvitationTimer > GetTickCount() Then
                     'Accept this invite
                     If IsPlaying(TempPlayer(index).InvitationIndex) Then
-                        Player(index).InHouse = TempPlayer(index).InvitationIndex
-                        Player(index).LastX = GetPlayerX(index)
-                        Player(index).LastY = GetPlayerY(index)
-                        Player(index).LastMap = GetPlayerMap(index)
+                        Player(index).Character(TempPlayer(index).CurChar).InHouse = TempPlayer(index).InvitationIndex
+                        Player(index).Character(TempPlayer(index).CurChar).LastX = GetPlayerX(index)
+                        Player(index).Character(TempPlayer(index).CurChar).LastY = GetPlayerY(index)
+                        Player(index).Character(TempPlayer(index).CurChar).LastMap = GetPlayerMap(index)
                         TempPlayer(index).InvitationTimer = 0
-                        PlayerWarp(index, Player(TempPlayer(index).InvitationIndex).Map, HouseConfig(Player(TempPlayer(index).InvitationIndex).House.HouseIndex).X, HouseConfig(Player(TempPlayer(index).InvitationIndex).House.HouseIndex).Y, True)
+                        PlayerWarp(index, Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(index).CurChar).Map, HouseConfig(Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(TempPlayer(index).InvitationIndex).CurChar).House.HouseIndex).X, HouseConfig(Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(TempPlayer(index).InvitationIndex).CurChar).House.HouseIndex).Y, True)
                     Else
                         TempPlayer(index).InvitationTimer = 0
                         PlayerMsg(index, "Cannot find player!")
@@ -235,14 +236,14 @@
         invslot = Buffer.ReadLong
         Buffer = Nothing
 
-        ItemNum = Player(index).Inv(invslot).Num
+        ItemNum = Player(index).Character(TempPlayer(index).CurChar).Inv(invslot).Num
 
         ' Prevent hacking
         If ItemNum < 1 Or ItemNum > MAX_ITEMS Then
             Exit Sub
         End If
 
-        If Player(index).InHouse = index Then
+        If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
             If Item(ItemNum).Type = ITEM_TYPE_FURNITURE Then
                 ' stat requirements
                 For i = 1 To Stats.Stat_Count - 1
@@ -273,13 +274,13 @@
                 End If
 
                 'Ok, now we got to see what can be done about this furniture :/
-                If Player(index).InHouse <> index Then
+                If Player(index).Character(TempPlayer(index).CurChar).InHouse <> index Then
                     PlayerMsg(index, "You must be inside your house to place furniture!")
                     Exit Sub
                 End If
 
-                If Player(index).House.FurnitureCount >= HouseConfig(Player(index).House.HouseIndex).MaxFurniture Then
-                    If HouseConfig(Player(index).House.HouseIndex).MaxFurniture > 0 Then
+                If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount >= HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).MaxFurniture Then
+                    If HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).MaxFurniture > 0 Then
                         PlayerMsg(index, "Your house cannot hold any more furniture!")
                         Exit Sub
                     End If
@@ -311,8 +312,8 @@
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
-                                            If Player(i).InHouse = Player(index).InHouse Then
-                                                If Player(i).x = x And Player(i).y = y Then
+                                            If Player(i).Character(TempPlayer(i).CurChar).InHouse = Player(index).Character(TempPlayer(index).CurChar).InHouse Then
+                                                If Player(i).Character(TempPlayer(i).CurChar).x = x And Player(i).Character(TempPlayer(i).CurChar).y = y Then
                                                     Exit Sub
                                                 End If
                                             End If
@@ -321,10 +322,10 @@
                                 End If
                             Next
 
-                            If Player(index).House.FurnitureCount > 0 Then
-                                For i = 1 To Player(index).House.FurnitureCount
-                                    If x >= Player(index).House.Furniture(i).X And x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                        If y <= Player(index).House.Furniture(i).Y And y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+                            If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
+                                For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                                    If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X And x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                        If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y And y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                             'Blocked!
                                             Exit Sub
                                         End If
@@ -342,8 +343,8 @@
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
-                                            If Player(i).InHouse = Player(index).InHouse Then
-                                                If Player(i).x = x And Player(i).y = y Then
+                                            If Player(i).Character(TempPlayer(i).CurChar).InHouse = Player(index).Character(TempPlayer(index).CurChar).InHouse Then
+                                                If Player(i).Character(TempPlayer(i).CurChar).x = x And Player(i).Character(TempPlayer(i).CurChar).y = y Then
                                                     Exit Sub
                                                 End If
                                             End If
@@ -352,10 +353,10 @@
                                 End If
                             Next
 
-                            If Player(index).House.FurnitureCount > 0 Then
-                                For i = 1 To Player(index).House.FurnitureCount
-                                    If x >= Player(index).House.Furniture(i).X And x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                        If y <= Player(index).House.Furniture(i).Y And y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+                            If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
+                                For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                                    If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X And x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                        If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y And y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                             'Blocked!
                                             Exit Sub
                                         End If
@@ -373,8 +374,8 @@
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
-                                            If Player(i).InHouse = Player(index).InHouse Then
-                                                If Player(i).x = x And Player(i).y = y Then
+                                            If Player(i).Character(TempPlayer(i).CurChar).InHouse = Player(index).Character(TempPlayer(index).CurChar).InHouse Then
+                                                If Player(i).Character(TempPlayer(i).CurChar).x = x And Player(i).Character(TempPlayer(i).CurChar).y = y Then
                                                     Exit Sub
                                                 End If
                                             End If
@@ -383,10 +384,10 @@
                                 End If
                             Next
 
-                            If Player(index).House.FurnitureCount > 0 Then
-                                For i = 1 To Player(index).House.FurnitureCount
-                                    If x >= Player(index).House.Furniture(i).X And x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                        If y <= Player(index).House.Furniture(i).Y And y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+                            If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
+                                For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                                    If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X And x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                        If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y And y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                             'Blocked!
                                             Exit Sub
                                         End If
@@ -401,16 +402,15 @@
                 y = y1
 
                 'If all checks out, place furniture and send the update to everyone in the player's house.
-                Player(index).House.FurnitureCount = Player(index).House.FurnitureCount + 1
-                ReDim Preserve Player(index).House.Furniture(Player(index).House.FurnitureCount)
-                Player(index).House.Furniture(Player(index).House.FurnitureCount).ItemNum = ItemNum
-                Player(index).House.Furniture(Player(index).House.FurnitureCount).X = x
-                Player(index).House.Furniture(Player(index).House.FurnitureCount).Y = y
+                Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount = Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount + 1
+                ReDim Preserve Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount)
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount).ItemNum = ItemNum
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount).X = x
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount).Y = y
 
+                TakeInvItem(index, ItemNum, 0)
 
-                Call TakeInvItem(index, ItemNum, 0)
-
-                SendFurnitureToHouse(Player(index).InHouse)
+                SendFurnitureToHouse(Player(index).Character(TempPlayer(index).CurChar).InHouse)
 
                 SavePlayer(index)
             End If
@@ -475,10 +475,11 @@
                 HouseConfig(i).Y = Buffer.ReadLong
                 HouseConfig(i).Price = Buffer.ReadLong
                 HouseConfig(i).MaxFurniture = Buffer.ReadLong
-                Call SaveHouse(i)
+                SaveHouse(i)
+
                 For x = 1 To MAX_PLAYERS
                     If IsPlaying(x) Then
-                        If Player(x).InHouse = i Then
+                        If Player(x).Character(TempPlayer(x).CurChar).InHouse = i Then
 
                         End If
                     End If
@@ -499,23 +500,23 @@
         ' Confirm it is the right packet
         If Buffer.ReadLong <> ClientPackets.CSellHouse Then Exit Sub
 
-        TmpIndex = Player(index).House.HouseIndex
+        TmpIndex = Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex
         If TmpIndex > 0 Then
             'get some money back
             refund = HouseConfig(TmpIndex).Price / 2
 
-            Player(index).House.HouseIndex = 0
-            Player(index).House.FurnitureCount = 0
-            ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
+            Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex = 0
+            Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount = 0
+            ReDim Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount)
 
-            For i = 0 To Player(index).House.FurnitureCount
-                Player(index).House.Furniture(i).ItemNum = 0
-                Player(index).House.Furniture(i).X = 0
-                Player(index).House.Furniture(i).Y = 0
+            For i = 0 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum = 0
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X = 0
+                Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y = 0
             Next
 
-            If Player(index).InHouse = TmpIndex Then
-                Call PlayerWarp(index, Player(index).LastMap, Player(index).LastX, Player(index).LastY)
+            If Player(index).Character(TempPlayer(index).CurChar).InHouse = TmpIndex Then
+                PlayerWarp(index, Player(index).Character(TempPlayer(index).CurChar).LastMap, Player(index).Character(TempPlayer(index).CurChar).LastX, Player(index).Character(TempPlayer(index).CurChar).LastY)
             End If
 
             SavePlayer(index)
@@ -557,18 +558,18 @@
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SFurniture)
         Buffer.WriteLong(HouseIndex)
-        Buffer.WriteLong(Player(HouseIndex).House.FurnitureCount)
-        If Player(HouseIndex).House.FurnitureCount > 0 Then
-            For i = 1 To Player(HouseIndex).House.FurnitureCount
-                Buffer.WriteLong(Player(HouseIndex).House.Furniture(i).ItemNum)
-                Buffer.WriteLong(Player(HouseIndex).House.Furniture(i).X)
-                Buffer.WriteLong(Player(HouseIndex).House.Furniture(i).Y)
+        Buffer.WriteLong(Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.FurnitureCount)
+        If Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.FurnitureCount > 0 Then
+            For i = 1 To Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.FurnitureCount
+                Buffer.WriteLong(Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.Furniture(i).ItemNum)
+                Buffer.WriteLong(Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.Furniture(i).X)
+                Buffer.WriteLong(Player(HouseIndex).Character(TempPlayer(HouseIndex).CurChar).House.Furniture(i).Y)
             Next
         End If
 
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
-                If Player(i).InHouse = HouseIndex Then
+                If Player(i).Character(TempPlayer(i).CurChar).InHouse = HouseIndex Then
                     SendDataTo(i, Buffer.ToArray)
                 End If
             End If

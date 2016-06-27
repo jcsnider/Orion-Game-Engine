@@ -19,7 +19,7 @@
     Function GetPlayerName(ByVal Index As Long) As String
         GetPlayerName = ""
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Trim$(Player(Index).Name)
+        GetPlayerName = Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name)
     End Function
 
     Sub SetPlayerAccess(ByVal Index As Long, ByVal Access As Long)
@@ -27,7 +27,7 @@
     End Sub
 
     Sub SetPlayerSprite(ByVal Index As Long, ByVal Sprite As Long)
-        Player(Index).Sprite = Sprite
+        Player(Index).Character(TempPlayer(Index).CurChar).Sprite = Sprite
     End Sub
 
     Function GetPlayerMaxVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
@@ -38,11 +38,11 @@
 
         Select Case Vital
             Case Vitals.HP
-                GetPlayerMaxVital = (Player(Index).Level + (GetPlayerStat(Index, Stats.vitality) \ 2) + Classes(Player(Index).Classes).Stat(Stats.vitality)) * 2
+                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.vitality) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.vitality)) * 2
             Case Vitals.MP
-                GetPlayerMaxVital = (Player(Index).Level + (GetPlayerStat(Index, Stats.intelligence) \ 2) + Classes(Player(Index).Classes).Stat(Stats.intelligence)) * 2
+                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.intelligence) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.intelligence)) * 2
             Case Vitals.SP
-                GetPlayerMaxVital = (Player(Index).Level + (GetPlayerStat(Index, Stats.spirit) \ 2) + Classes(Player(Index).Classes).Stat(Stats.spirit)) * 2
+                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.spirit) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.spirit)) * 2
         End Select
 
     End Function
@@ -54,12 +54,12 @@
 
         If Index > MAX_PLAYERS Then Exit Function
 
-        x = Player(Index).Stat(Stat)
+        x = Player(Index).Character(TempPlayer(Index).CurChar).Stat(Stat)
 
         For i = 1 To Equipment.Equipment_Count - 1
-            If Player(Index).Equipment(i) > 0 Then
-                If Item(Player(Index).Equipment(i)).Add_Stat(Stat) > 0 Then
-                    x = x + Item(Player(Index).Equipment(i)).Add_Stat(Stat)
+            If Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i) > 0 Then
+                If Item(Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i)).Add_Stat(Stat) > 0 Then
+                    x = x + Item(Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i)).Add_Stat(Stat)
                 End If
             End If
         Next
@@ -76,19 +76,19 @@
     Function GetPlayerMap(ByVal Index As Long) As Long
         GetPlayerMap = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerMap = Player(Index).Map
+        GetPlayerMap = Player(Index).Character(TempPlayer(Index).CurChar).Map
     End Function
 
     Function GetPlayerX(ByVal Index As Long) As Long
         GetPlayerX = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerX = Player(Index).x
+        GetPlayerX = Player(Index).Character(TempPlayer(Index).CurChar).x
     End Function
 
     Function GetPlayerY(ByVal Index As Long) As Long
         GetPlayerY = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerY = Player(Index).y
+        GetPlayerY = Player(Index).Character(TempPlayer(Index).CurChar).y
     End Function
 
     Sub SendLeaveMap(ByVal Index As Long, ByVal MapNum As Long)
@@ -120,17 +120,17 @@
         TempPlayer(Index).EventMap.CurrentEvents = 0
 
         If HouseTeleport = False Then
-            Player(Index).InHouse = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
         End If
 
-        If Player(Index).InHouse > 0 Then
-            If IsPlaying(Player(Index).InHouse) Then
-                If Player(Index).InHouse <> Player(Index).InHouse Then
-                    Player(Index).InHouse = 0
-                    PlayerWarp(Index, Player(Index).LastMap, Player(Index).LastX, Player(Index).LastY)
+        If Player(Index).Character(TempPlayer(Index).CurChar).InHouse > 0 Then
+            If IsPlaying(Player(Index).Character(TempPlayer(Index).CurChar).InHouse) Then
+                If Player(Index).Character(TempPlayer(Index).CurChar).InHouse <> Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
+                    Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
+                    PlayerWarp(Index, Player(Index).Character(TempPlayer(Index).CurChar).LastMap, Player(Index).Character(TempPlayer(Index).CurChar).LastX, Player(Index).Character(TempPlayer(Index).CurChar).LastY)
                     Exit Sub
                 Else
-                    SendFurnitureToHouse(Player(Index).InHouse)
+                    SendFurnitureToHouse(Player(Index).Character(TempPlayer(Index).CurChar).InHouse)
                 End If
             End If
         End If
@@ -196,19 +196,19 @@
     Function GetPlayerDir(ByVal Index As Long) As Long
         GetPlayerDir = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerDir = Player(Index).Dir
+        GetPlayerDir = Player(Index).Character(TempPlayer(Index).CurChar).Dir
     End Function
 
     Function GetPlayerSprite(ByVal Index As Long) As Long
         GetPlayerSprite = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerSprite = Player(Index).Sprite
+        GetPlayerSprite = Player(Index).Character(TempPlayer(Index).CurChar).Sprite
     End Function
 
     Function GetPlayerPK(ByVal Index As Long) As Long
         GetPlayerPK = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPK = Player(Index).PK
+        GetPlayerPK = Player(Index).Character(TempPlayer(Index).CurChar).PK
     End Function
 
     Sub CheckEquippedItems(ByVal Index As Long)
@@ -254,11 +254,11 @@
         GetPlayerEquipment = 0
         If Index > MAX_PLAYERS Then Exit Function
         If EquipmentSlot = 0 Then Exit Function
-        GetPlayerEquipment = Player(Index).Equipment(EquipmentSlot)
+        GetPlayerEquipment = Player(Index).Character(TempPlayer(Index).CurChar).Equipment(EquipmentSlot)
     End Function
 
     Sub SetPlayerEquipment(ByVal Index As Long, ByVal InvNum As Long, ByVal EquipmentSlot As Equipment)
-        Player(Index).Equipment(EquipmentSlot) = InvNum
+        Player(Index).Character(TempPlayer(Index).CurChar).Equipment(EquipmentSlot) = InvNum
     End Sub
 
     Sub JoinGame(ByVal Index As Long)
@@ -297,11 +297,11 @@
         SendEXP(Index)
 
         'Housing
-        If Player(Index).InHouse Then
-            Player(Index).InHouse = 0
-            Player(Index).x = Player(Index).LastX
-            Player(Index).y = Player(Index).LastY
-            Player(Index).Map = Player(Index).LastMap
+        If Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
+            Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).x = Player(Index).Character(TempPlayer(Index).CurChar).LastX
+            Player(Index).Character(TempPlayer(Index).CurChar).y = Player(Index).Character(TempPlayer(Index).CurChar).LastY
+            Player(Index).Character(TempPlayer(Index).CurChar).Map = Player(Index).Character(TempPlayer(Index).CurChar).LastMap
         End If
         SendHouseConfigs(Index)
 
@@ -334,6 +334,7 @@
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub LeftGame(ByVal Index As Long)
         Dim n As Long, i As Long
         Dim tradeTarget As Long
@@ -349,7 +350,7 @@
             ' Check if the player was in a party, and if so cancel it out so the other player doesn't continue to get half exp
             If TempPlayer(Index).InParty = YES Then
                 n = TempPlayer(Index).PartyPlayer
-                Call PlayerMsg(n, GetPlayerName(Index) & " has left " & Options.Game_Name & ", disbanning party.")
+                PlayerMsg(n, GetPlayerName(Index) & " has left " & Options.Game_Name & ", disbanning party.")
                 TempPlayer(n).InParty = NO
                 TempPlayer(n).PartyPlayer = 0
             End If
@@ -367,19 +368,20 @@
                 SendCloseTrade(tradeTarget)
             End If
 
-            Call SavePlayer(Index)
-            Call SaveBank(Index)
-            Call ClearBank(Index)
+            SavePlayer(Index)
+            SaveBank(Index)
+            ClearBank(Index)
 
             ' Send a global message that he/she left
             If GetPlayerAccess(Index) <= ADMIN_MONITOR Then
-                Call GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
+                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
             Else
-                Call GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
+                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
             End If
 
             TextAdd(GetPlayerName(Index) & " has disconnected from " & Options.Game_Name & ".")
-            Call SendLeftGame(Index)
+            SendLeftGame(Index)
+
             TotalPlayersOnline = TotalPlayersOnline - 1
             TempPlayer(Index) = Nothing
             ReDim TempPlayer(i).SpellCD(0 To MAX_PLAYER_SPELLS)
@@ -623,14 +625,14 @@
 
             'Housing
             If .Type = TILE_TYPE_HOUSE Then
-                If Player(Index).House.HouseIndex = .Data1 Then
+                If Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex = .Data1 Then
                     'Do warping and such to the player's house :/
-                    Player(Index).LastMap = GetPlayerMap(Index)
-                    Player(Index).LastX = GetPlayerX(Index)
-                    Player(Index).LastY = GetPlayerY(Index)
-                    Player(Index).InHouse = Index
+                    Player(Index).Character(TempPlayer(Index).CurChar).LastMap = GetPlayerMap(Index)
+                    Player(Index).Character(TempPlayer(Index).CurChar).LastX = GetPlayerX(Index)
+                    Player(Index).Character(TempPlayer(Index).CurChar).LastY = GetPlayerY(Index)
+                    Player(Index).Character(TempPlayer(Index).CurChar).InHouse = Index
                     SendDataTo(Index, PlayerData(Index))
-                    PlayerWarp(Index, HouseConfig(Player(Index).House.HouseIndex).BaseMap, HouseConfig(Player(Index).House.HouseIndex).X, HouseConfig(Player(Index).House.HouseIndex).Y, True)
+                    PlayerWarp(Index, HouseConfig(Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex).BaseMap, HouseConfig(Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex).X, HouseConfig(Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex).Y, True)
                     DidWarp = True
                     Exit Sub
                 Else
@@ -647,10 +649,10 @@
         End With
 
         If Moved = YES Then
-            If Player(Index).InHouse > 0 Then
-                If Player(Index).x = HouseConfig(Player(Player(Index).InHouse).House.HouseIndex).X Then
-                    If Player(Index).y = HouseConfig(Player(Player(Index).InHouse).House.HouseIndex).Y Then
-                        PlayerWarp(Index, Player(Index).LastMap, Player(Index).LastX, Player(Index).LastY)
+            If Player(Index).Character(TempPlayer(Index).CurChar).InHouse > 0 Then
+                If Player(Index).Character(TempPlayer(Index).CurChar).x = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).X Then
+                    If Player(Index).Character(TempPlayer(Index).CurChar).y = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).Y Then
+                        PlayerWarp(Index, Player(Index).Character(TempPlayer(Index).CurChar).LastMap, Player(Index).Character(TempPlayer(Index).CurChar).LastX, Player(Index).Character(TempPlayer(Index).CurChar).LastY)
                         DidWarp = True
                     End If
                 End If
@@ -739,17 +741,17 @@
 
     End Function
     Sub SetPlayerDir(ByVal Index As Long, ByVal Dir As Long)
-        Player(Index).Dir = Dir
+        Player(Index).Character(TempPlayer(Index).CurChar).Dir = Dir
     End Sub
     Sub SetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals, ByVal Value As Long)
-        Player(Index).Vital(Vital) = Value
+        Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital) = Value
 
         If GetPlayerVital(Index, Vital) > GetPlayerMaxVital(Index, Vital) Then
-            Player(Index).Vital(Vital) = GetPlayerMaxVital(Index, Vital)
+            Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital) = GetPlayerMaxVital(Index, Vital)
         End If
 
         If GetPlayerVital(Index, Vital) < 0 Then
-            Player(Index).Vital(Vital) = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital) = 0
         End If
 
     End Sub
@@ -763,67 +765,67 @@
     Function GetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
         GetPlayerVital = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerVital = Player(Index).Vital(Vital)
+        GetPlayerVital = Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital)
     End Function
     Function GetPlayerLevel(ByVal Index As Long) As Long
         GetPlayerLevel = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerLevel = Player(Index).Level
+        GetPlayerLevel = Player(Index).Character(TempPlayer(Index).CurChar).Level
     End Function
     Function GetPlayerPOINTS(ByVal Index As Long) As Long
         GetPlayerPOINTS = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(Index).POINTS
+        GetPlayerPOINTS = Player(Index).Character(TempPlayer(Index).CurChar).POINTS
     End Function
     Function GetPlayerNextLevel(ByVal Index As Long) As Long
         GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.strength) + GetPlayerStat(Index, Stats.endurance) + GetPlayerStat(Index, Stats.intelligence) + GetPlayerStat(Index, Stats.spirit) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * 25
     End Function
     Function GetPlayerExp(ByVal Index As Long) As Long
-        GetPlayerExp = Player(Index).exp
+        GetPlayerExp = Player(Index).Character(TempPlayer(Index).CurChar).exp
     End Function
     Sub SetPlayerMap(ByVal Index As Long, ByVal MapNum As Long)
         If MapNum > 0 And MapNum <= MAX_MAPS Then
-            Player(Index).Map = MapNum
+            Player(Index).Character(TempPlayer(Index).CurChar).Map = MapNum
         End If
     End Sub
     Sub SetPlayerX(ByVal Index As Long, ByVal x As Long)
-        Player(Index).x = x
+        Player(Index).Character(TempPlayer(Index).CurChar).x = x
     End Sub
     Sub SetPlayerY(ByVal Index As Long, ByVal y As Long)
-        Player(Index).y = y
+        Player(Index).Character(TempPlayer(Index).CurChar).y = y
     End Sub
     Function GetPlayerInvItemNum(ByVal Index As Long, ByVal invSlot As Long) As Long
         GetPlayerInvItemNum = 0
         If Index > MAX_PLAYERS Then Exit Function
         If invSlot = 0 Then Exit Function
 
-        GetPlayerInvItemNum = Player(Index).Inv(invSlot).Num
+        GetPlayerInvItemNum = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Num
     End Function
     Function GetPlayerInvItemValue(ByVal Index As Long, ByVal invSlot As Long) As Long
         GetPlayerInvItemValue = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerInvItemValue = Player(Index).Inv(invSlot).Value
+        GetPlayerInvItemValue = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Value
     End Function
     Sub SetPlayerExp(ByVal Index As Long, ByVal exp As Long)
-        Player(Index).exp = exp
+        Player(Index).Character(TempPlayer(Index).CurChar).exp = exp
     End Sub
     Public Function GetPlayerRawStat(ByVal Index As Long, ByVal Stat As Stats) As Long
         GetPlayerRawStat = 0
         If Index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerRawStat = Player(Index).Stat(Stat)
+        GetPlayerRawStat = Player(Index).Character(TempPlayer(Index).CurChar).Stat(Stat)
     End Function
 
     Public Sub SetPlayerStat(ByVal Index As Long, ByVal Stat As Stats, ByVal Value As Long)
-        Player(Index).Stat(Stat) = Value
+        Player(Index).Character(TempPlayer(Index).CurChar).Stat(Stat) = Value
     End Sub
     Sub SetPlayerLevel(ByVal Index As Long, ByVal Level As Long)
 
         If Level > MAX_LEVELS Then Exit Sub
-        Player(Index).Level = Level
+        Player(Index).Character(TempPlayer(Index).CurChar).Level = Level
     End Sub
     Sub SetPlayerPOINTS(ByVal Index As Long, ByVal POINTS As Long)
-        Player(Index).POINTS = POINTS
+        Player(Index).Character(TempPlayer(Index).CurChar).POINTS = POINTS
     End Sub
     Sub CheckPlayerLevelUp(ByVal Index As Long)
         Dim expRollover As Long
@@ -911,11 +913,11 @@
     End Sub
 
     Sub SetPlayerInvItemValue(ByVal Index As Long, ByVal invSlot As Long, ByVal ItemValue As Long)
-        Player(Index).Inv(invSlot).Value = ItemValue
+        Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Value = ItemValue
     End Sub
 
     Sub SetPlayerInvItemNum(ByVal Index As Long, ByVal invSlot As Long, ByVal itemNum As Long)
-        Player(Index).Inv(invSlot).Num = itemNum
+        Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Num = itemNum
     End Sub
 
     Function FindOpenInvSlot(ByVal Index As Long, ByVal itemNum As Long) As Long
@@ -951,6 +953,7 @@
         Next
 
     End Function
+
     Function TakeInvItem(ByVal Index As Long, ByVal itemNum As Long, ByVal ItemVal As Long) As Boolean
         Dim i As Long
 
@@ -1016,7 +1019,7 @@
     End Function
 
     Function GetPlayerClass(ByVal Index As Long) As Long
-        GetPlayerClass = Player(Index).Classes
+        GetPlayerClass = Player(Index).Character(TempPlayer(Index).CurChar).Classes
     End Function
 
     Function FindOpenSpellSlot(ByVal Index As Long) As Long
@@ -1036,7 +1039,7 @@
     Function GetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long) As Long
         GetPlayerSpell = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerSpell = Player(Index).Spell(spellslot)
+        GetPlayerSpell = Player(Index).Character(TempPlayer(Index).CurChar).Spell(spellslot)
     End Function
 
     Function HasSpell(ByVal Index As Long, ByVal spellnum As Long) As Boolean
@@ -1054,7 +1057,7 @@
     End Function
 
     Sub SetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal spellnum As Long)
-        Player(Index).Spell(spellslot) = spellnum
+        Player(Index).Character(TempPlayer(Index).CurChar).Spell(spellslot) = spellnum
     End Sub
 
     Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal amount As Long)
@@ -1195,7 +1198,7 @@
     End Function
 
     Sub SetPlayerPK(ByVal Index As Long, ByVal PK As Long)
-        Player(Index).PK = PK
+        Player(Index).Character(TempPlayer(Index).CurChar).PK = PK
     End Sub
 
     Sub TakeBankItem(ByVal Index As Long, ByVal BankSlot As Long, ByVal amount As Long)
@@ -1453,7 +1456,7 @@
                 End If
                 If TargetType = TARGET_TYPE_PLAYER Then
                     'Housing
-                    If Player(Target).InHouse = Player(Index).InHouse Then
+                    If Player(Target).Character(TempPlayer(Target).CurChar).InHouse = Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
                         If CanAttackPlayer(Index, Target, True) Then
                             HasBuffered = True
                         End If

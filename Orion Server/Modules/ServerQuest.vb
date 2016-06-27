@@ -327,22 +327,22 @@
         Order = Buffer.ReadLong '1 = accept, 2 = cancel
 
         If Order = 1 Then
-            Player(Index).PlayerQuest(QuestNum).Status = QUEST_STARTED '1
-            Player(Index).PlayerQuest(QuestNum).ActualTask = 1
-            Player(Index).PlayerQuest(QuestNum).CurrentCount = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_STARTED '1
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
             PlayerMsg(Index, "New quest accepted: " & Trim$(Quest(QuestNum).Name) & "!")
         ElseIf Order = 2 Then
-            Player(Index).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED '2
-            Player(Index).PlayerQuest(QuestNum).ActualTask = 1
-            Player(Index).PlayerQuest(QuestNum).CurrentCount = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED '2
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
             PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & " has been canceled!")
 
             If GetPlayerAccess(Index) > 0 And QuestNum = 1 Then
                 For I = 1 To MAX_QUESTS
-                    Player(Index).PlayerQuest(I).Status = QUEST_NOT_STARTED '2
-                    Player(Index).PlayerQuest(I).ActualTask = 1
-                    Player(Index).PlayerQuest(I).CurrentCount = 0
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).Status = QUEST_NOT_STARTED '2
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).ActualTask = 1
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).CurrentCount = 0
                 Next
             End If
         End If
@@ -488,9 +488,9 @@
         Buffer.WriteLong(ServerPackets.SPlayerQuests)
 
         For I = 1 To MAX_QUESTS
-            Buffer.WriteLong(Player(Index).PlayerQuest(I).Status)
-            Buffer.WriteLong(Player(Index).PlayerQuest(I).ActualTask)
-            Buffer.WriteLong(Player(Index).PlayerQuest(I).CurrentCount)
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).Status)
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).ActualTask)
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).CurrentCount)
         Next
 
         SendDataTo(Index, Buffer.ToArray)
@@ -504,9 +504,9 @@
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SPlayerQuest)
         Buffer.WriteLong(QuestNum)
-        Buffer.WriteLong(Player(Index).PlayerQuest(QuestNum).Status)
-        Buffer.WriteLong(Player(Index).PlayerQuest(QuestNum).ActualTask)
-        Buffer.WriteLong(Player(Index).PlayerQuest(QuestNum).CurrentCount)
+        Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status)
+        Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask)
+        Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount)
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
@@ -530,12 +530,12 @@
 
     Public Sub ResetQuest(ByVal Index As Long, ByVal QuestNum As Long)
         If GetPlayerAccess(Index) > 0 Then
-            Player(Index).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED
-            Player(Index).PlayerQuest(QuestNum).ActualTask = 1
-            Player(Index).PlayerQuest(QuestNum).CurrentCount = 0
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
             SendPlayerQuests(Index)
-            Call PlayerMsg(Index, "Quest " & QuestNum & " reset!")
+            PlayerMsg(Index, "Quest " & QuestNum & " reset!")
         End If
     End Sub
 
@@ -545,7 +545,7 @@
         If QuestInProgress(Index, QuestNum) Then Exit Function
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
-        If Player(Index).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(Index).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
             'Check if item is needed
             If Quest(QuestNum).Requirement(1) > 0 And Quest(QuestNum).Requirement(1) <= MAX_ITEMS Then
                 If HasItem(Index, Quest(QuestNum).Requirement(2)) = 0 Then
@@ -556,7 +556,7 @@
             'Check if previous quest is needed
             'Debug.Print(Quest(QuestNum).Requirement(2))
             If Quest(QuestNum).Requirement(2) > 0 And Quest(QuestNum).Requirement(2) <= MAX_QUESTS Then
-                If Player(Index).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
+                If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
                     PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!")
                     Exit Function
                 End If
@@ -570,7 +570,7 @@
 
     Public Function CanEndQuest(ByVal Index As Long, QuestNum As Long) As Boolean
         CanEndQuest = False
-        If Quest(QuestNum).Task(Player(Index).PlayerQuest(QuestNum).ActualTask).QuestEnd = True Then
+        If Quest(QuestNum).Task(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask).QuestEnd = True Then
             CanEndQuest = True
         End If
     End Function
@@ -580,7 +580,7 @@
         QuestInProgress = False
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
 
-        If Player(Index).PlayerQuest(QuestNum).Status = QUEST_STARTED Then 'Status=1 means started
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_STARTED Then 'Status=1 means started
             QuestInProgress = True
         End If
     End Function
@@ -589,7 +589,7 @@
         QuestCompleted = False
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
 
-        If Player(Index).PlayerQuest(QuestNum).Status = 2 Or Player(Index).PlayerQuest(QuestNum).Status = 3 Then
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = 2 Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = 3 Then
             QuestCompleted = True
         End If
     End Function
@@ -635,7 +635,7 @@
 
     Public Sub CheckTask(ByVal Index As Long, ByVal QuestNum As Long, ByVal TaskType As Long, ByVal TargetIndex As Long)
         Dim ActualTask As Long, I As Long
-        ActualTask = Player(Index).PlayerQuest(QuestNum).ActualTask
+        ActualTask = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask
 
         'PlayerMsg Index, "actual tasknr: " & ActualTask, Yellow
 
@@ -645,29 +645,29 @@
                 'is poke defeated id same as the poke i have to defeat?
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
                     'Count +1
-                    Player(Index).PlayerQuest(QuestNum).CurrentCount = Player(Index).PlayerQuest(QuestNum).CurrentCount + 1
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
                     'did i finish the work?
-                    If Player(Index).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
+                    If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
                         QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
                         'is the quest's end?
                         If CanEndQuest(Index, QuestNum) Then
                             EndQuest(Index, QuestNum)
                         Else
                             'otherwise continue to the next task
-                            Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                         End If
                     End If
                 End If
 
             Case QUEST_TYPE_GOGATHER 'Gather X amount of X item.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).Item Then
-                    Player(Index).PlayerQuest(QuestNum).CurrentCount = Player(Index).PlayerQuest(QuestNum).CurrentCount + 1
-                    If Player(Index).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
+                    If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
                         QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
                         If CanEndQuest(Index, QuestNum) Then
                             EndQuest(Index, QuestNum)
                         Else
-                            Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                         End If
                     End If
                 End If
@@ -678,7 +678,7 @@
                     If CanEndQuest(Index, QuestNum) Then
                         EndQuest(Index, QuestNum)
                     Else
-                        Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                        Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                     End If
                 End If
 
@@ -688,7 +688,7 @@
                     If CanEndQuest(Index, QuestNum) Then
                         EndQuest(Index, QuestNum)
                     Else
-                        Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                        Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                     End If
                 End If
 
@@ -702,7 +702,7 @@
                                 If CanEndQuest(Index, QuestNum) Then
                                     EndQuest(Index, QuestNum)
                                 Else
-                                    Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                                 End If
                                 Exit For
                             End If
@@ -711,25 +711,25 @@
                 End If
 
             Case QUEST_TYPE_GOKILL 'Kill X amount of players.
-                Player(Index).PlayerQuest(QuestNum).CurrentCount = Player(Index).PlayerQuest(QuestNum).CurrentCount + 1
-                If Player(Index).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
+                Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
+                If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
                     QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
                     If CanEndQuest(Index, QuestNum) Then
                         EndQuest(Index, QuestNum)
                     Else
-                        Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                        Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                     End If
                 End If
 
             Case QUEST_TYPE_GOTRAIN 'Hit X amount of times X resource.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).Resource Then
-                    Player(Index).PlayerQuest(QuestNum).CurrentCount = Player(Index).PlayerQuest(QuestNum).CurrentCount + 1
-                    If Player(Index).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
+                    If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
                         QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
                         If CanEndQuest(Index, QuestNum) Then
                             EndQuest(Index, QuestNum)
                         Else
-                            Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                         End If
                     End If
                 End If
@@ -741,7 +741,7 @@
                     If CanEndQuest(Index, QuestNum) Then
                         EndQuest(Index, QuestNum)
                     Else
-                        Player(Index).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
+                        Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = ActualTask + 1
                     End If
                 End If
         End Select
@@ -775,9 +775,9 @@
 
         'Check if quest is repeatable, set it as completed
         If Quest(QuestNum).Repeat = YES Then
-            Player(Index).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT
         Else
-            Player(Index).PlayerQuest(QuestNum).Status = QUEST_COMPLETED
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED
         End If
         PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & ": quest completed")
 

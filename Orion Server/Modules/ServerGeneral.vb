@@ -60,32 +60,18 @@
         ReDim Player(0 To MAX_PLAYERS)
 
         For i = 0 To MAX_PLAYERS
-            ReDim Player(i).PlayerQuest(MAX_QUESTS)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Switches(MAX_SWITCHES)
-            ReDim Player(i).Variables(MAX_VARIABLES)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Vital(0 To Vitals.Vital_Count - 1)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Stat(0 To Stats.Stat_Count - 1)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Equipment(0 To Equipment.Equipment_Count - 1)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Inv(0 To MAX_INV)
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Spell(0 To MAX_PLAYER_SPELLS)
+            'multi char
+            ReDim Player(i).Character(MAX_CHARS)
+            For x = 1 To MAX_CHARS
+                ReDim Player(i).Character(x).Switches(MAX_SWITCHES)
+                ReDim Player(i).Character(x).Variables(MAX_VARIABLES)
+                ReDim Player(i).Character(x).Vital(0 To Vitals.Vital_Count - 1)
+                ReDim Player(i).Character(x).Stat(0 To Stats.Stat_Count - 1)
+                ReDim Player(i).Character(x).Equipment(0 To Equipment.Equipment_Count - 1)
+                ReDim Player(i).Character(x).Inv(0 To MAX_INV)
+                ReDim Player(i).Character(x).Spell(0 To MAX_PLAYER_SPELLS)
+                ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
+            Next
         Next
 
         ReDim TempPlayer(0 To MAX_PLAYERS)

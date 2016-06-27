@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 
 Module ClientGlobals
+    Public SelectedChar As Byte
 
     ' for directional blocking
     Public DirArrowX(0 To 4) As Byte

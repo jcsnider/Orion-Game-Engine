@@ -25,7 +25,7 @@ Partial Class frmMenu
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
         Me.pnlLogin = New System.Windows.Forms.Panel()
-        Me.btnLogin = New System.Windows.Forms.Panel()
+        Me.btnLogin = New System.Windows.Forms.Button()
         Me.chkSavePass = New System.Windows.Forms.CheckBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -33,7 +33,7 @@ Partial Class frmMenu
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.pnlRegister = New System.Windows.Forms.Panel()
-        Me.lblCreateAcc = New System.Windows.Forms.Label()
+        Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.txtRPass2 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtRPass = New System.Windows.Forms.TextBox()
@@ -46,13 +46,13 @@ Partial Class frmMenu
         Me.lblScrollingCredits = New System.Windows.Forms.Label()
         Me.tmrCredits = New System.Windows.Forms.Timer(Me.components)
         Me.pnlNewChar = New System.Windows.Forms.Panel()
+        Me.btnCreateCharacter = New System.Windows.Forms.Button()
         Me.placeholderforsprite = New System.Windows.Forms.PictureBox()
         Me.lblNextChar = New System.Windows.Forms.Label()
         Me.lblPrevChar = New System.Windows.Forms.Label()
         Me.rdoFemale = New System.Windows.Forms.RadioButton()
         Me.rdoMale = New System.Windows.Forms.RadioButton()
         Me.cmbClass = New System.Windows.Forms.ComboBox()
-        Me.lblCreateChar = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtCharName = New System.Windows.Forms.TextBox()
@@ -64,12 +64,8 @@ Partial Class frmMenu
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
-        Me.btnPlay = New System.Windows.Forms.Panel()
-        Me.btnRegister = New System.Windows.Forms.Panel()
-        Me.btnCredits = New System.Windows.Forms.Panel()
-        Me.btnExit = New System.Windows.Forms.Panel()
         Me.pnlIPConfig = New System.Windows.Forms.Panel()
-        Me.lblSaveIP = New System.Windows.Forms.Label()
+        Me.btnSaveIP = New System.Windows.Forms.Button()
         Me.txtPort = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtIP = New System.Windows.Forms.TextBox()
@@ -77,6 +73,19 @@ Partial Class frmMenu
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
+        Me.btnPlay = New System.Windows.Forms.Button()
+        Me.btnRegister = New System.Windows.Forms.Button()
+        Me.btnCredits = New System.Windows.Forms.Button()
+        Me.btnExit = New System.Windows.Forms.Button()
+        Me.pnlCharSelect = New System.Windows.Forms.Panel()
+        Me.btnUseChar = New System.Windows.Forms.Button()
+        Me.btnDelChar = New System.Windows.Forms.Button()
+        Me.btnNewChar = New System.Windows.Forms.Button()
+        Me.picChar3 = New System.Windows.Forms.PictureBox()
+        Me.picChar2 = New System.Windows.Forms.PictureBox()
+        Me.picChar1 = New System.Windows.Forms.PictureBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -85,6 +94,10 @@ Partial Class frmMenu
         Me.pnlMainMenu.SuspendLayout()
         Me.pnlIPConfig.SuspendLayout()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlCharSelect.SuspendLayout()
+        CType(Me.picChar3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picChar2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picChar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlLogin
@@ -108,14 +121,17 @@ Partial Class frmMenu
         '
         'btnLogin
         '
-        Me.btnLogin.BackColor = System.Drawing.Color.Transparent
         Me.btnLogin.BackgroundImage = CType(resources.GetObject("btnLogin.BackgroundImage"), System.Drawing.Image)
         Me.btnLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnLogin.ForeColor = System.Drawing.Color.White
-        Me.btnLogin.Location = New System.Drawing.Point(180, 159)
+        Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLogin.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnLogin.Location = New System.Drawing.Point(180, 157)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(78, 24)
-        Me.btnLogin.TabIndex = 48
+        Me.btnLogin.Size = New System.Drawing.Size(110, 26)
+        Me.btnLogin.TabIndex = 49
+        Me.btnLogin.Text = "Login"
+        Me.btnLogin.UseVisualStyleBackColor = True
         '
         'chkSavePass
         '
@@ -176,7 +192,7 @@ Partial Class frmMenu
         Me.pnlRegister.BackColor = System.Drawing.Color.Transparent
         Me.pnlRegister.BackgroundImage = CType(resources.GetObject("pnlRegister.BackgroundImage"), System.Drawing.Image)
         Me.pnlRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlRegister.Controls.Add(Me.lblCreateAcc)
+        Me.pnlRegister.Controls.Add(Me.btnCreateAccount)
         Me.pnlRegister.Controls.Add(Me.txtRPass2)
         Me.pnlRegister.Controls.Add(Me.Label4)
         Me.pnlRegister.Controls.Add(Me.txtRPass)
@@ -191,14 +207,19 @@ Partial Class frmMenu
         Me.pnlRegister.TabIndex = 38
         Me.pnlRegister.Visible = False
         '
-        'lblCreateAcc
+        'btnCreateAccount
         '
-        Me.lblCreateAcc.AutoSize = True
-        Me.lblCreateAcc.Location = New System.Drawing.Point(160, 170)
-        Me.lblCreateAcc.Name = "lblCreateAcc"
-        Me.lblCreateAcc.Size = New System.Drawing.Size(81, 13)
-        Me.lblCreateAcc.TabIndex = 22
-        Me.lblCreateAcc.Text = "Create Account"
+        Me.btnCreateAccount.BackgroundImage = CType(resources.GetObject("btnCreateAccount.BackgroundImage"), System.Drawing.Image)
+        Me.btnCreateAccount.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCreateAccount.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCreateAccount.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreateAccount.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnCreateAccount.Location = New System.Drawing.Point(180, 157)
+        Me.btnCreateAccount.Name = "btnCreateAccount"
+        Me.btnCreateAccount.Size = New System.Drawing.Size(110, 26)
+        Me.btnCreateAccount.TabIndex = 23
+        Me.btnCreateAccount.Text = "Create Account"
+        Me.btnCreateAccount.UseVisualStyleBackColor = True
         '
         'txtRPass2
         '
@@ -305,13 +326,13 @@ Partial Class frmMenu
         Me.pnlNewChar.BackColor = System.Drawing.Color.Transparent
         Me.pnlNewChar.BackgroundImage = CType(resources.GetObject("pnlNewChar.BackgroundImage"), System.Drawing.Image)
         Me.pnlNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlNewChar.Controls.Add(Me.btnCreateCharacter)
         Me.pnlNewChar.Controls.Add(Me.placeholderforsprite)
         Me.pnlNewChar.Controls.Add(Me.lblNextChar)
         Me.pnlNewChar.Controls.Add(Me.lblPrevChar)
         Me.pnlNewChar.Controls.Add(Me.rdoFemale)
         Me.pnlNewChar.Controls.Add(Me.rdoMale)
         Me.pnlNewChar.Controls.Add(Me.cmbClass)
-        Me.pnlNewChar.Controls.Add(Me.lblCreateChar)
         Me.pnlNewChar.Controls.Add(Me.Label9)
         Me.pnlNewChar.Controls.Add(Me.Label10)
         Me.pnlNewChar.Controls.Add(Me.txtCharName)
@@ -323,6 +344,20 @@ Partial Class frmMenu
         Me.pnlNewChar.Size = New System.Drawing.Size(400, 192)
         Me.pnlNewChar.TabIndex = 43
         Me.pnlNewChar.Visible = False
+        '
+        'btnCreateCharacter
+        '
+        Me.btnCreateCharacter.BackgroundImage = CType(resources.GetObject("btnCreateCharacter.BackgroundImage"), System.Drawing.Image)
+        Me.btnCreateCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCreateCharacter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCreateCharacter.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreateCharacter.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnCreateCharacter.Location = New System.Drawing.Point(179, 151)
+        Me.btnCreateCharacter.Name = "btnCreateCharacter"
+        Me.btnCreateCharacter.Size = New System.Drawing.Size(121, 26)
+        Me.btnCreateCharacter.TabIndex = 42
+        Me.btnCreateCharacter.Text = "Create Character"
+        Me.btnCreateCharacter.UseVisualStyleBackColor = True
         '
         'placeholderforsprite
         '
@@ -379,17 +414,8 @@ Partial Class frmMenu
         Me.cmbClass.FormattingEnabled = True
         Me.cmbClass.Location = New System.Drawing.Point(179, 88)
         Me.cmbClass.Name = "cmbClass"
-        Me.cmbClass.Size = New System.Drawing.Size(110, 21)
+        Me.cmbClass.Size = New System.Drawing.Size(121, 21)
         Me.cmbClass.TabIndex = 36
-        '
-        'lblCreateChar
-        '
-        Me.lblCreateChar.AutoSize = True
-        Me.lblCreateChar.Location = New System.Drawing.Point(156, 160)
-        Me.lblCreateChar.Name = "lblCreateChar"
-        Me.lblCreateChar.Size = New System.Drawing.Size(87, 13)
-        Me.lblCreateChar.TabIndex = 35
-        Me.lblCreateChar.Text = "Create Character"
         '
         'Label9
         '
@@ -413,7 +439,7 @@ Partial Class frmMenu
         '
         Me.txtCharName.Location = New System.Drawing.Point(179, 53)
         Me.txtCharName.Name = "txtCharName"
-        Me.txtCharName.Size = New System.Drawing.Size(110, 20)
+        Me.txtCharName.Size = New System.Drawing.Size(121, 20)
         Me.txtCharName.TabIndex = 32
         '
         'Label11
@@ -500,56 +526,12 @@ Partial Class frmMenu
         Me.lblNews.Text = resources.GetString("lblNews.Text")
         Me.lblNews.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'btnPlay
-        '
-        Me.btnPlay.BackColor = System.Drawing.Color.Transparent
-        Me.btnPlay.BackgroundImage = CType(resources.GetObject("btnPlay.BackgroundImage"), System.Drawing.Image)
-        Me.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnPlay.ForeColor = System.Drawing.Color.White
-        Me.btnPlay.Location = New System.Drawing.Point(133, 490)
-        Me.btnPlay.Name = "btnPlay"
-        Me.btnPlay.Size = New System.Drawing.Size(109, 39)
-        Me.btnPlay.TabIndex = 47
-        '
-        'btnRegister
-        '
-        Me.btnRegister.BackColor = System.Drawing.Color.Transparent
-        Me.btnRegister.BackgroundImage = CType(resources.GetObject("btnRegister.BackgroundImage"), System.Drawing.Image)
-        Me.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnRegister.ForeColor = System.Drawing.Color.White
-        Me.btnRegister.Location = New System.Drawing.Point(248, 490)
-        Me.btnRegister.Name = "btnRegister"
-        Me.btnRegister.Size = New System.Drawing.Size(109, 39)
-        Me.btnRegister.TabIndex = 48
-        '
-        'btnCredits
-        '
-        Me.btnCredits.BackColor = System.Drawing.Color.Transparent
-        Me.btnCredits.BackgroundImage = CType(resources.GetObject("btnCredits.BackgroundImage"), System.Drawing.Image)
-        Me.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnCredits.ForeColor = System.Drawing.Color.White
-        Me.btnCredits.Location = New System.Drawing.Point(363, 490)
-        Me.btnCredits.Name = "btnCredits"
-        Me.btnCredits.Size = New System.Drawing.Size(109, 39)
-        Me.btnCredits.TabIndex = 49
-        '
-        'btnExit
-        '
-        Me.btnExit.BackColor = System.Drawing.Color.Transparent
-        Me.btnExit.BackgroundImage = CType(resources.GetObject("btnExit.BackgroundImage"), System.Drawing.Image)
-        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnExit.ForeColor = System.Drawing.Color.White
-        Me.btnExit.Location = New System.Drawing.Point(478, 490)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(109, 39)
-        Me.btnExit.TabIndex = 50
-        '
         'pnlIPConfig
         '
         Me.pnlIPConfig.BackColor = System.Drawing.Color.Transparent
         Me.pnlIPConfig.BackgroundImage = CType(resources.GetObject("pnlIPConfig.BackgroundImage"), System.Drawing.Image)
         Me.pnlIPConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlIPConfig.Controls.Add(Me.lblSaveIP)
+        Me.pnlIPConfig.Controls.Add(Me.btnSaveIP)
         Me.pnlIPConfig.Controls.Add(Me.txtPort)
         Me.pnlIPConfig.Controls.Add(Me.Label14)
         Me.pnlIPConfig.Controls.Add(Me.txtIP)
@@ -557,20 +539,25 @@ Partial Class frmMenu
         Me.pnlIPConfig.Controls.Add(Me.Label8)
         Me.pnlIPConfig.Controls.Add(Me.Label13)
         Me.pnlIPConfig.ForeColor = System.Drawing.Color.White
-        Me.pnlIPConfig.Location = New System.Drawing.Point(737, 402)
+        Me.pnlIPConfig.Location = New System.Drawing.Point(1143, 402)
         Me.pnlIPConfig.Name = "pnlIPConfig"
         Me.pnlIPConfig.Size = New System.Drawing.Size(400, 133)
         Me.pnlIPConfig.TabIndex = 51
         Me.pnlIPConfig.Visible = False
         '
-        'lblSaveIP
+        'btnSaveIP
         '
-        Me.lblSaveIP.AutoSize = True
-        Me.lblSaveIP.Location = New System.Drawing.Point(154, 107)
-        Me.lblSaveIP.Name = "lblSaveIP"
-        Me.lblSaveIP.Size = New System.Drawing.Size(45, 13)
-        Me.lblSaveIP.TabIndex = 29
-        Me.lblSaveIP.Text = "Save IP"
+        Me.btnSaveIP.BackgroundImage = CType(resources.GetObject("btnSaveIP.BackgroundImage"), System.Drawing.Image)
+        Me.btnSaveIP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSaveIP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnSaveIP.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveIP.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnSaveIP.Location = New System.Drawing.Point(157, 101)
+        Me.btnSaveIP.Name = "btnSaveIP"
+        Me.btnSaveIP.Size = New System.Drawing.Size(110, 22)
+        Me.btnSaveIP.TabIndex = 50
+        Me.btnSaveIP.Text = "Save IP"
+        Me.btnSaveIP.UseVisualStyleBackColor = True
         '
         'txtPort
         '
@@ -637,6 +624,179 @@ Partial Class frmMenu
         Me.picLogo.TabIndex = 52
         Me.picLogo.TabStop = False
         '
+        'btnPlay
+        '
+        Me.btnPlay.BackgroundImage = CType(resources.GetObject("btnPlay.BackgroundImage"), System.Drawing.Image)
+        Me.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPlay.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPlay.ForeColor = System.Drawing.Color.White
+        Me.btnPlay.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnPlay.Location = New System.Drawing.Point(142, 490)
+        Me.btnPlay.Name = "btnPlay"
+        Me.btnPlay.Size = New System.Drawing.Size(106, 37)
+        Me.btnPlay.TabIndex = 53
+        Me.btnPlay.Text = "Play"
+        Me.btnPlay.UseVisualStyleBackColor = True
+        '
+        'btnRegister
+        '
+        Me.btnRegister.BackgroundImage = CType(resources.GetObject("btnRegister.BackgroundImage"), System.Drawing.Image)
+        Me.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnRegister.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRegister.ForeColor = System.Drawing.Color.White
+        Me.btnRegister.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnRegister.Location = New System.Drawing.Point(254, 490)
+        Me.btnRegister.Name = "btnRegister"
+        Me.btnRegister.Size = New System.Drawing.Size(106, 37)
+        Me.btnRegister.TabIndex = 54
+        Me.btnRegister.Text = "Register"
+        Me.btnRegister.UseVisualStyleBackColor = True
+        '
+        'btnCredits
+        '
+        Me.btnCredits.BackgroundImage = CType(resources.GetObject("btnCredits.BackgroundImage"), System.Drawing.Image)
+        Me.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCredits.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCredits.ForeColor = System.Drawing.Color.White
+        Me.btnCredits.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnCredits.Location = New System.Drawing.Point(366, 490)
+        Me.btnCredits.Name = "btnCredits"
+        Me.btnCredits.Size = New System.Drawing.Size(106, 37)
+        Me.btnCredits.TabIndex = 55
+        Me.btnCredits.Text = "Credits"
+        Me.btnCredits.UseVisualStyleBackColor = True
+        '
+        'btnExit
+        '
+        Me.btnExit.BackgroundImage = CType(resources.GetObject("btnExit.BackgroundImage"), System.Drawing.Image)
+        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnExit.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExit.ForeColor = System.Drawing.Color.White
+        Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnExit.Location = New System.Drawing.Point(478, 490)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(106, 37)
+        Me.btnExit.TabIndex = 56
+        Me.btnExit.Text = "Exit"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
+        'pnlCharSelect
+        '
+        Me.pnlCharSelect.BackColor = System.Drawing.Color.Transparent
+        Me.pnlCharSelect.BackgroundImage = CType(resources.GetObject("pnlCharSelect.BackgroundImage"), System.Drawing.Image)
+        Me.pnlCharSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlCharSelect.Controls.Add(Me.btnUseChar)
+        Me.pnlCharSelect.Controls.Add(Me.btnDelChar)
+        Me.pnlCharSelect.Controls.Add(Me.btnNewChar)
+        Me.pnlCharSelect.Controls.Add(Me.picChar3)
+        Me.pnlCharSelect.Controls.Add(Me.picChar2)
+        Me.pnlCharSelect.Controls.Add(Me.picChar1)
+        Me.pnlCharSelect.Controls.Add(Me.Label6)
+        Me.pnlCharSelect.Controls.Add(Me.Label16)
+        Me.pnlCharSelect.ForeColor = System.Drawing.Color.White
+        Me.pnlCharSelect.Location = New System.Drawing.Point(737, 342)
+        Me.pnlCharSelect.Name = "pnlCharSelect"
+        Me.pnlCharSelect.Size = New System.Drawing.Size(400, 192)
+        Me.pnlCharSelect.TabIndex = 57
+        Me.pnlCharSelect.Visible = False
+        '
+        'btnUseChar
+        '
+        Me.btnUseChar.BackgroundImage = CType(resources.GetObject("btnUseChar.BackgroundImage"), System.Drawing.Image)
+        Me.btnUseChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnUseChar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnUseChar.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUseChar.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnUseChar.Location = New System.Drawing.Point(147, 154)
+        Me.btnUseChar.Name = "btnUseChar"
+        Me.btnUseChar.Size = New System.Drawing.Size(110, 26)
+        Me.btnUseChar.TabIndex = 52
+        Me.btnUseChar.Text = "Use Character"
+        Me.btnUseChar.UseVisualStyleBackColor = True
+        '
+        'btnDelChar
+        '
+        Me.btnDelChar.BackgroundImage = CType(resources.GetObject("btnDelChar.BackgroundImage"), System.Drawing.Image)
+        Me.btnDelChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDelChar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDelChar.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelChar.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnDelChar.Location = New System.Drawing.Point(263, 154)
+        Me.btnDelChar.Name = "btnDelChar"
+        Me.btnDelChar.Size = New System.Drawing.Size(119, 26)
+        Me.btnDelChar.TabIndex = 51
+        Me.btnDelChar.Text = "Delete Character"
+        Me.btnDelChar.UseVisualStyleBackColor = True
+        '
+        'btnNewChar
+        '
+        Me.btnNewChar.BackgroundImage = CType(resources.GetObject("btnNewChar.BackgroundImage"), System.Drawing.Image)
+        Me.btnNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnNewChar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnNewChar.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewChar.ImageAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.btnNewChar.Location = New System.Drawing.Point(20, 154)
+        Me.btnNewChar.Name = "btnNewChar"
+        Me.btnNewChar.Size = New System.Drawing.Size(121, 26)
+        Me.btnNewChar.TabIndex = 50
+        Me.btnNewChar.Text = "New Character"
+        Me.btnNewChar.UseVisualStyleBackColor = True
+        '
+        'picChar3
+        '
+        Me.picChar3.BackColor = System.Drawing.Color.Transparent
+        Me.picChar3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picChar3.Location = New System.Drawing.Point(300, 52)
+        Me.picChar3.Name = "picChar3"
+        Me.picChar3.Size = New System.Drawing.Size(48, 60)
+        Me.picChar3.TabIndex = 44
+        Me.picChar3.TabStop = False
+        '
+        'picChar2
+        '
+        Me.picChar2.BackColor = System.Drawing.Color.Transparent
+        Me.picChar2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picChar2.Location = New System.Drawing.Point(175, 52)
+        Me.picChar2.Name = "picChar2"
+        Me.picChar2.Size = New System.Drawing.Size(48, 60)
+        Me.picChar2.TabIndex = 43
+        Me.picChar2.TabStop = False
+        '
+        'picChar1
+        '
+        Me.picChar1.BackColor = System.Drawing.Color.Transparent
+        Me.picChar1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picChar1.Location = New System.Drawing.Point(52, 52)
+        Me.picChar1.Name = "picChar1"
+        Me.picChar1.Size = New System.Drawing.Size(48, 60)
+        Me.picChar1.TabIndex = 42
+        Me.picChar1.TabStop = False
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(46, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(312, 33)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Character Selection"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.BackColor = System.Drawing.Color.Transparent
+        Me.Label16.Location = New System.Drawing.Point(70, 179)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(0, 13)
+        Me.Label16.TabIndex = 17
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -645,13 +805,14 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(711, 541)
-        Me.Controls.Add(Me.pnlIPConfig)
+        Me.ClientSize = New System.Drawing.Size(1590, 541)
+        Me.Controls.Add(Me.pnlCharSelect)
+        Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCredits)
-        Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnPlay)
+        Me.Controls.Add(Me.pnlIPConfig)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lbl)
         Me.Controls.Add(Me.pnlCredits)
@@ -680,6 +841,11 @@ Partial Class frmMenu
         Me.pnlIPConfig.ResumeLayout(False)
         Me.pnlIPConfig.PerformLayout()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlCharSelect.ResumeLayout(False)
+        Me.pnlCharSelect.PerformLayout()
+        CType(Me.picChar3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picChar2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picChar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -692,7 +858,6 @@ Partial Class frmMenu
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents pnlRegister As System.Windows.Forms.Panel
-    Friend WithEvents lblCreateAcc As System.Windows.Forms.Label
     Friend WithEvents txtRPass2 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtRPass As System.Windows.Forms.TextBox
@@ -711,7 +876,6 @@ Partial Class frmMenu
     Friend WithEvents rdoFemale As System.Windows.Forms.RadioButton
     Friend WithEvents rdoMale As System.Windows.Forms.RadioButton
     Friend WithEvents cmbClass As System.Windows.Forms.ComboBox
-    Friend WithEvents lblCreateChar As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtCharName As System.Windows.Forms.TextBox
@@ -723,18 +887,29 @@ Partial Class frmMenu
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblNews As System.Windows.Forms.Label
-    Friend WithEvents btnPlay As Windows.Forms.Panel
-    Friend WithEvents btnRegister As Windows.Forms.Panel
-    Friend WithEvents btnCredits As Windows.Forms.Panel
-    Friend WithEvents btnExit As Windows.Forms.Panel
     Public WithEvents pnlIPConfig As Windows.Forms.Panel
-    Friend WithEvents lblSaveIP As Windows.Forms.Label
     Friend WithEvents txtPort As Windows.Forms.TextBox
     Friend WithEvents Label14 As Windows.Forms.Label
     Friend WithEvents txtIP As Windows.Forms.TextBox
     Friend WithEvents Label15 As Windows.Forms.Label
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents Label13 As Windows.Forms.Label
-    Friend WithEvents btnLogin As Windows.Forms.Panel
     Friend WithEvents picLogo As Windows.Forms.PictureBox
+    Friend WithEvents btnLogin As Windows.Forms.Button
+    Friend WithEvents btnCreateAccount As Windows.Forms.Button
+    Friend WithEvents btnPlay As Windows.Forms.Button
+    Friend WithEvents btnRegister As Windows.Forms.Button
+    Friend WithEvents btnCredits As Windows.Forms.Button
+    Friend WithEvents btnExit As Windows.Forms.Button
+    Friend WithEvents btnCreateCharacter As Windows.Forms.Button
+    Friend WithEvents btnSaveIP As Windows.Forms.Button
+    Public WithEvents pnlCharSelect As Windows.Forms.Panel
+    Friend WithEvents Label6 As Windows.Forms.Label
+    Friend WithEvents Label16 As Windows.Forms.Label
+    Friend WithEvents picChar3 As Windows.Forms.PictureBox
+    Friend WithEvents picChar2 As Windows.Forms.PictureBox
+    Friend WithEvents picChar1 As Windows.Forms.PictureBox
+    Friend WithEvents btnDelChar As Windows.Forms.Button
+    Friend WithEvents btnNewChar As Windows.Forms.Button
+    Friend WithEvents btnUseChar As Windows.Forms.Button
 End Class

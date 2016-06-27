@@ -10,7 +10,7 @@
         'Packets.Add(ClientPackets.CDelAccount, AddressOf Packet_DeleteAccount)
         Packets.Add(ClientPackets.CLogin, AddressOf Packet_Login)
         Packets.Add(ClientPackets.CAddChar, AddressOf Packet_AddChar)
-        'Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
+        Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
         Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
         Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
         Packets.Add(ClientPackets.CBroadcastMsg, AddressOf Packet_BroadCastMsg)
@@ -160,7 +160,7 @@
                 password = buffer.ReadString
                 ' Prevent hacking
                 If Len(Trim$(username)) < 3 Or Len(Trim$(password)) < 3 Then
-                    Call AlertMsg(index, "Your username and password must be at least three characters in length")
+                    AlertMsg(index, "Your username and password must be at least three characters in length")
                     Exit Sub
                 End If
 
@@ -169,7 +169,7 @@
                     n = AscW(Mid$(username, i, 1))
 
                     If Not isNameLegal(n) Then
-                        Call AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
+                        AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
                         Exit Sub
                     End If
 
@@ -177,29 +177,30 @@
 
                 ' Check to see if account already exists
                 If Not AccountExist(username) Then
-                    Call AddAccount(index, username, password)
+                    AddAccount(index, username, password)
+
                     TextAdd("Account " & username & " has been created.")
-                    Call Addlog("Account " & username & " has been created.", PLAYER_LOG)
+                    Addlog("Account " & username & " has been created.", PLAYER_LOG)
 
                     ' Load the player
-                    Call LoadPlayer(index, username)
+                    LoadPlayer(index, username)
 
                     ' Check if character data has been created
-                    If Len(Trim$(Player(index).Name)) > 0 Then
+                    If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
                         ' we have a char!
                         HandleUseChar(index)
                     Else
                         ' send new char shit
                         If Not IsPlaying(index) Then
-                            Call SendNewCharClasses(index)
+                            SendNewCharClasses(index)
                         End If
                     End If
 
                     ' Show the player up on the socket status
-                    Call Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
+                    Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
                     TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
                 Else
-                    Call AlertMsg(index, "Sorry, that account username is already taken!")
+                    AlertMsg(index, "Sorry, that account username is already taken!")
                 End If
 
                 buffer = Nothing
@@ -225,50 +226,74 @@
 
                 ' Check versions
                 If Buffer.ReadString <> Application.ProductVersion Then
-                    Call AlertMsg(index, "Version outdated, please visit " & Options.Website)
+                    AlertMsg(index, "Version outdated, please visit " & Options.Website)
                     Exit Sub
                 End If
 
                 If isShuttingDown Then
-                    Call AlertMsg(index, "Server is either rebooting or being shutdown.")
+                    AlertMsg(index, "Server is either rebooting or being shutdown.")
                     Exit Sub
                 End If
 
                 If Len(Trim$(Name)) < 3 Or Len(Trim$(Password)) < 3 Then
-                    Call AlertMsg(index, "Your name and password must be at least three characters in length")
+                    AlertMsg(index, "Your name and password must be at least three characters in length")
                     Exit Sub
                 End If
 
                 If Not AccountExist(Name) Then
-                    Call AlertMsg(index, "That account name does not exist.")
+                    AlertMsg(index, "That account name does not exist.")
                     Exit Sub
                 End If
 
                 If Not PasswordOK(Name, Password) Then
-                    Call AlertMsg(index, "Incorrect password.")
+                    AlertMsg(index, "Incorrect password.")
                     Exit Sub
                 End If
 
                 If IsMultiAccounts(Name) Then
-                    Call AlertMsg(index, "Multiple account logins is not authorized.")
+                    AlertMsg(index, "Multiple account logins is not authorized.")
                     Exit Sub
                 End If
 
                 ' Load the player
-                Call LoadPlayer(index, Name)
+                LoadPlayer(index, Name)
                 ClearBank(index)
                 LoadBank(index, Name)
 
-                ' Check if character data has been created
-                If Len(Trim$(Player(index).Name)) > 0 Then
-                    ' we have a char!
-                    HandleUseChar(index)
-                Else
-                    ' send new char shit
-                    If Not IsPlaying(index) Then
-                        Call SendNewCharClasses(index)
+                Buffer = Nothing
+                Buffer = New ByteBuffer
+                Buffer.WriteLong(ServerPackets.SSelChar)
+                Buffer.WriteLong(MAX_CHARS)
+
+                For i = 1 To MAX_CHARS
+                    If Player(index).Character(i).Classes <= 0 Then
+                        Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                        Buffer.WriteLong(Player(index).Character(i).Sprite)
+                        Buffer.WriteLong(Player(index).Character(i).Level)
+                        Buffer.WriteString("")
+                        Buffer.WriteLong(0)
+                    Else
+                        Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                        Buffer.WriteLong(Player(index).Character(i).Sprite)
+                        Buffer.WriteLong(Player(index).Character(i).Level)
+                        Buffer.WriteString(Trim$(Classes(Player(index).Character(i).Classes).Name))
+                        Buffer.WriteLong(Player(index).Character(i).Sex)
                     End If
+
+                Next
+
+                SendDataTo(index, Buffer.ToArray)
+
+                '' Check if character data has been created
+                'If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
+                '    ' we have a char!
+                '    HandleUseChar(index)
+                'Else
+                '    ' send new char shit
+                If Not IsPlaying(index) Then
+                    Call SendNewCharClasses(index)
                 End If
+                'End If
 
                 ' Show the player up on the socket status
                 Call Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
@@ -700,10 +725,10 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Inv(invnum).Num).Data1, BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONADDMP
                     For i = 1 To Stats.Stat_Count - 1
@@ -727,10 +752,10 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Inv(invnum).Num).Data1, BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONADDSP
                     For i = 1 To Stats.Stat_Count - 1
@@ -755,8 +780,8 @@
                     End If
 
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_POTIONSUBHP
                     For i = 1 To Stats.Stat_Count - 1
@@ -780,10 +805,10 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Inv(invnum).Num).Data1, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONSUBMP
                     For i = 1 To Stats.Stat_Count - 1
@@ -807,10 +832,10 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Inv(invnum).Num).Data1, Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONSUBSP
                     For i = 1 To Stats.Stat_Count - 1
@@ -835,8 +860,8 @@
                     End If
 
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Inv(invnum).Num, 0)
+                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
+                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_KEY
                     For i = 1 To Stats.Stat_Count - 1
@@ -1504,7 +1529,7 @@
 
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
-                If Player(i).Map = MapNum Then
+                If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
                     SpawnMapEventsFor(i, MapNum)
                 End If
             End If
@@ -1537,7 +1562,7 @@
 
     Private Sub Packet_AddChar(ByVal index As Long, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
-        Dim Name As String
+        Dim Name As String, slot As Byte
         Dim Sex As Long
         Dim Classes As Long
         Dim Sprite As Long
@@ -1549,7 +1574,7 @@
         If Buffer.ReadLong <> ClientPackets.CAddChar Then Exit Sub
 
         If Not IsPlaying(index) Then
-
+            slot = Buffer.ReadLong
             Name = Buffer.ReadString
             Sex = Buffer.ReadLong
             Classes = Buffer.ReadLong
@@ -1573,17 +1598,13 @@
             Next
 
             ' Prevent hacking
-            If (Sex < SEX_MALE) Or (Sex > SEX_FEMALE) Then
-                Exit Sub
-            End If
+            If (Sex < SEX_MALE) Or (Sex > SEX_FEMALE) Then Exit Sub
 
             ' Prevent hacking
-            If Classes < 1 Or Classes > Max_Classes Then
-                Exit Sub
-            End If
+            If Classes < 1 Or Classes > Max_Classes Then Exit Sub
 
             ' Check if char already exists in slot
-            If CharExist(index) Then
+            If CharExist(index, slot) Then
                 AlertMsg(index, "Character already exists!")
                 Exit Sub
             End If
@@ -1595,13 +1616,51 @@
             End If
 
             ' Everything went ok, add the character
-            AddChar(index, Name, Sex, Classes, Sprite)
+            TempPlayer(index).CurChar = slot
+            AddChar(index, slot, Name, Sex, Classes, Sprite)
             Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
+
             ' log them in!!
             HandleUseChar(index)
 
             Buffer = Nothing
         End If
+
+        NeedToUpDatePlayerList = True
+    End Sub
+
+    Private Sub Packet_UseChar(ByVal index As Long, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim slot As Byte
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CUseChar Then Exit Sub
+
+        If Not IsPlaying(index) Then
+            If IsLoggedIn(index) Then
+
+                slot = Buffer.ReadLong
+
+                ' Check if character data has been created
+                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
+                    ' we have a char!
+                    TempPlayer(index).CurChar = slot
+                    HandleUseChar(index)
+                    ClearBank(index)
+                    LoadBank(index, Trim$(Player(index).Login))
+                Else
+                    ' send new char shit
+                    If Not IsPlaying(index) Then
+                        SendNewCharClasses(index)
+                        TempPlayer(index).CurChar = slot
+                    End If
+                End If
+            End If
+        End If
+
+
         NeedToUpDatePlayerList = True
     End Sub
 
@@ -2292,22 +2351,22 @@
         Next
 
         'Housing
-        If Player(index).InHouse > 0 Then
-            If Player(index).InHouse = index Then
-                If Player(index).House.HouseIndex > 0 Then
-                    If Player(index).House.FurnitureCount > 0 Then
-                        For i = 1 To Player(index).House.FurnitureCount
-                            If x >= Player(index).House.Furniture(i).X And x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                If y <= Player(index).House.Furniture(i).Y And y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+        If Player(index).Character(TempPlayer(index).CurChar).InHouse > 0 Then
+            If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
+                If Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex > 0 Then
+                    If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
+                        For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
+                            If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X And x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y And y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                     'Found an Item, get the index and lets pick it up!
-                                    x = FindOpenInvSlot(index, Player(index).House.Furniture(i).ItemNum)
+                                    x = FindOpenInvSlot(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum)
                                     If x > 0 Then
-                                        GiveInvItem(index, Player(index).House.Furniture(i).ItemNum, 0, True)
-                                        Player(index).House.FurnitureCount = Player(index).House.FurnitureCount - 1
-                                        For x = i + 1 To Player(index).House.FurnitureCount + 1
-                                            Player(index).House.Furniture(x - 1) = Player(index).House.Furniture(x)
+                                        GiveInvItem(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum, 0, True)
+                                        Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount = Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount - 1
+                                        For x = i + 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount + 1
+                                            Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x - 1) = Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x)
                                         Next
-                                        ReDim Preserve Player(index).House.Furniture(Player(index).House.FurnitureCount)
+                                        ReDim Preserve Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount)
                                         SendFurnitureToHouse(index)
                                         Exit Sub
                                     Else
@@ -2796,7 +2855,7 @@
             Exit Sub
         End If
 
-        Player(index).Spell(spellslot) = 0
+        Player(index).Character(TempPlayer(index).CurChar).Spell(spellslot) = 0
         SendPlayerSpells(index)
 
         buffer = Nothing
@@ -3086,7 +3145,7 @@
         For i = 1 To MAX_INV
             ' player
             If TempPlayer(index).TradeOffer(i).Num > 0 Then
-                itemNum = Player(index).Inv(TempPlayer(index).TradeOffer(i).Num).Num
+                itemNum = Player(index).Character(TempPlayer(index).CurChar).Inv(TempPlayer(index).TradeOffer(i).Num).Num
                 If itemNum > 0 Then
                     ' store temp
                     tmpTradeItem(i).Num = itemNum
@@ -3399,8 +3458,8 @@
         slot = buffer.ReadLong
         skill = buffer.ReadLong
 
-        Player(index).Hotbar(slot).Slot = skill
-        Player(index).Hotbar(slot).sType = 1
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = skill
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).sType = 1
 
         SendHotbar(index)
 
@@ -3416,8 +3475,8 @@
 
         slot = buffer.ReadLong
 
-        Player(index).Hotbar(slot).Slot = 0
-        Player(index).Hotbar(slot).sType = 0
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = 0
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).sType = 0
 
         SendHotbar(index)
 

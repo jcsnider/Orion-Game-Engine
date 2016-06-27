@@ -43,7 +43,14 @@
         ' Account
         Dim Login As String
         Dim Password As String
+        Dim Access As Byte
 
+        'multi char
+        Dim Character() As CharacterRec
+
+    End Structure
+
+    Public Structure CharacterRec
         ' General
         Dim Name As String
         Dim Sex As Byte
@@ -51,7 +58,7 @@
         Dim Sprite As Integer
         Dim Level As Byte
         Dim exp As Long
-        Dim Access As Byte
+
         Dim PK As Byte
 
         ' Vitals
@@ -93,7 +100,6 @@
 
         'gather skills
         Dim GatherSkills() As ResourceSkillsRec
-
     End Structure
 
     Public Structure TempPlayerRec
@@ -132,6 +138,9 @@
         Dim EventMap As EventMapRec
         Dim EventProcessingCount As Long
         Dim EventProcessing() As EventProcessingRec
+
+        'multi char
+        Dim CurChar As Byte
     End Structure
 
     Public Structure TileDataRec

@@ -116,10 +116,11 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendAddChar(ByVal Name As String, ByVal Sex As Long, ByVal ClassNum As Long, ByVal Sprite As Long)
+    Public Sub SendAddChar(ByVal Slot As Long, ByVal Name As String, ByVal Sex As Long, ByVal ClassNum As Long, ByVal Sprite As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteLong(ClientPackets.CAddChar)
+        Buffer.WriteLong(Slot)
         Buffer.WriteString(Name)
         Buffer.WriteLong(Sex)
         Buffer.WriteLong(ClassNum)

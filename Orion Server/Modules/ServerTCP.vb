@@ -184,6 +184,7 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendNewCharClasses(ByVal Index As Long)
         Dim i As Long, n As Long, q As Long
         Dim Buffer As ByteBuffer
@@ -226,6 +227,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Public Function GetClientIP(ByVal index As Long) As String
         GetClientIP = Clients(index).IP
     End Function
@@ -1240,7 +1242,7 @@ Module ServerTCP
             Buffer.WriteLong(GetPlayerStat(Index, i))
         Next
 
-        Buffer.WriteLong(Player(Index).InHouse)
+        Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).InHouse)
 
         For i = 0 To ResourceSkills.Skill_Count - 1
             Buffer.WriteLong(GetPlayerGatherSkillLvl(Index, i))
@@ -1926,8 +1928,8 @@ Module ServerTCP
         Buffer.WriteLong(ServerPackets.SHotbar)
 
         For i = 1 To MAX_HOTBAR
-            Buffer.WriteLong(Player(Index).Hotbar(i).Slot)
-            Buffer.WriteLong(Player(Index).Hotbar(i).sType)
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(i).Slot)
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(i).sType)
         Next
 
         SendDataTo(Index, Buffer.ToArray())

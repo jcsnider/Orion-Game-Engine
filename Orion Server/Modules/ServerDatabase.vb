@@ -1486,7 +1486,7 @@ Module ServerDatabase
 #Region "Accounts"
     Function AccountExist(ByVal Name As String) As Boolean
         Dim filename As String
-        filename = Application.StartupPath & "\data\accounts\" & Trim(Name) & ".bin"
+        filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
 
         If FileExist(filename) Then
             AccountExist = True
@@ -1506,7 +1506,7 @@ Module ServerDatabase
         PasswordOK = False
 
         If AccountExist(Name) Then
-            filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & ".bin"
+            filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
             nFileNum = FreeFile()
             FileOpen(nFileNum, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Shared)
             FileGetObject(nFileNum, namecheck)
@@ -1580,7 +1580,9 @@ Module ServerDatabase
         Dim filename As String
         Dim F As Long
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & ".bin"
+        CheckDir(Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login))
+
+        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & Trim$(Player(Index).Login) & ".bin"
 
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
@@ -1588,87 +1590,13 @@ Module ServerDatabase
         FilePutObject(F, Player(Index).Login)
         FilePutObject(F, Player(Index).Password)
         FilePutObject(F, Player(Index).Access)
-        FilePutObject(F, Player(Index).Classes)
-        FilePutObject(F, Player(Index).Dir)
-        FilePutObject(F, Player(Index).Equipment(Equipment.Armor))
-        FilePutObject(F, Player(Index).Equipment(Equipment.Helmet))
-        FilePutObject(F, Player(Index).Equipment(Equipment.Shield))
-        FilePutObject(F, Player(Index).Equipment(Equipment.Weapon))
-        FilePutObject(F, Player(Index).Equipment(Equipment.Shoes))
-        FilePutObject(F, Player(Index).Equipment(Equipment.Gloves))
-        FilePutObject(F, Player(Index).exp)
-
-        For i = 0 To MAX_INV
-            FilePutObject(F, Player(Index).Inv(i).Num)
-            FilePutObject(F, Player(Index).Inv(i).Value)
-        Next
-
-        FilePutObject(F, Player(Index).Level)
-        FilePutObject(F, Player(Index).Map)
-        FilePutObject(F, Player(Index).Name)
-        FilePutObject(F, Player(Index).PK)
-        FilePutObject(F, Player(Index).POINTS)
-        FilePutObject(F, Player(Index).Sex)
-
-        For i = 0 To MAX_PLAYER_SPELLS
-            FilePutObject(F, Player(Index).Spell(i))
-        Next
-
-        FilePutObject(F, Player(Index).Sprite)
-
-        For i = 0 To Stats.Stat_Count - 1
-            FilePutObject(F, Player(Index).Stat(i))
-        Next
-
-        For i = 0 To Vitals.Vital_Count - 1
-            FilePutObject(F, Player(Index).Vital(i))
-        Next
-
-        FilePutObject(F, Player(Index).x)
-        FilePutObject(F, Player(Index).y)
-
-        For i = 1 To MAX_QUESTS
-            FilePutObject(F, Player(Index).PlayerQuest(i).Status)
-            FilePutObject(F, Player(Index).PlayerQuest(i).ActualTask)
-            FilePutObject(F, Player(Index).PlayerQuest(i).CurrentCount)
-        Next
-
-        'Housing
-        FilePutObject(F, Player(Index).House.HouseIndex)
-        FilePutObject(F, Player(Index).House.FurnitureCount)
-        For i = 0 To Player(Index).House.FurnitureCount
-            FilePutObject(F, Player(Index).House.Furniture(i).ItemNum)
-            FilePutObject(F, Player(Index).House.Furniture(i).X)
-            FilePutObject(F, Player(Index).House.Furniture(i).Y)
-        Next
-        FilePutObject(F, Player(Index).InHouse)
-        FilePutObject(F, Player(Index).LastMap)
-        FilePutObject(F, Player(Index).LastX)
-        FilePutObject(F, Player(Index).LastY)
-
-
-        For i = 1 To MAX_HOTBAR
-            FilePutObject(F, Player(Index).Hotbar(i).Slot)
-            FilePutObject(F, Player(Index).Hotbar(i).sType)
-        Next
-
-        For i = 1 To MAX_SWITCHES
-            FilePutObject(F, Player(Index).Switches(i))
-        Next
-
-        For i = 1 To MAX_VARIABLES
-            FilePutObject(F, Player(Index).Variables(i))
-        Next
-
-        For i = 0 To ResourceSkills.Skill_Count - 1
-            FilePutObject(F, Player(Index).GatherSkills(i).SkillLevel)
-            FilePutObject(F, Player(Index).GatherSkills(i).SkillCurExp)
-            FilePutObject(F, Player(Index).GatherSkills(i).SkillNextLvlExp)
-        Next
-
-
 
         FileClose(F)
+
+        For i = 1 To MAX_CHARS
+            SaveCharacter(Index, i)
+        Next
+
     End Sub
 
     Sub LoadPlayer(ByVal Index As Long, ByVal Name As String)
@@ -1677,7 +1605,7 @@ Module ServerDatabase
 
         ClearPlayer(Index)
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim(Name) & ".bin"
+        filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
 
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
@@ -1685,89 +1613,13 @@ Module ServerDatabase
         FileGetObject(F, Player(Index).Login)
         FileGetObject(F, Player(Index).Password)
         FileGetObject(F, Player(Index).Access)
-        FileGetObject(F, Player(Index).Classes)
-        FileGetObject(F, Player(Index).Dir)
-        FileGetObject(F, Player(Index).Equipment(Equipment.Armor))
-        FileGetObject(F, Player(Index).Equipment(Equipment.Helmet))
-        FileGetObject(F, Player(Index).Equipment(Equipment.Shield))
-        FileGetObject(F, Player(Index).Equipment(Equipment.Weapon))
-        FileGetObject(F, Player(Index).Equipment(Equipment.Shoes))
-        FileGetObject(F, Player(Index).Equipment(Equipment.Gloves))
-        FileGetObject(F, Player(Index).exp)
-
-        For i = 0 To MAX_INV
-            FileGetObject(F, Player(Index).Inv(i).Num)
-            FileGetObject(F, Player(Index).Inv(i).Value)
-        Next
-
-        FileGetObject(F, Player(Index).Level)
-        FileGetObject(F, Player(Index).Map)
-        FileGetObject(F, Player(Index).Name)
-        FileGetObject(F, Player(Index).PK)
-        FileGetObject(F, Player(Index).POINTS)
-        FileGetObject(F, Player(Index).Sex)
-
-        For i = 0 To MAX_PLAYER_SPELLS
-            FileGetObject(F, Player(Index).Spell(i))
-        Next
-
-        FileGetObject(F, Player(Index).Sprite)
-
-        For i = 0 To Stats.Stat_Count - 1
-            FileGetObject(F, Player(Index).Stat(i))
-        Next
-
-        For i = 0 To Vitals.Vital_Count - 1
-            FileGetObject(F, Player(Index).Vital(i))
-        Next
-
-        FileGetObject(F, Player(Index).x)
-        FileGetObject(F, Player(Index).y)
-
-        For i = 1 To MAX_QUESTS
-            FileGetObject(F, Player(Index).PlayerQuest(i).Status)
-            FileGetObject(F, Player(Index).PlayerQuest(i).ActualTask)
-            FileGetObject(F, Player(Index).PlayerQuest(i).CurrentCount)
-        Next
-
-        'Housing
-        FileGetObject(F, Player(Index).House.HouseIndex)
-        FileGetObject(F, Player(Index).House.FurnitureCount)
-        ReDim Player(Index).House.Furniture(Player(Index).House.FurnitureCount)
-        For i = 0 To Player(Index).House.FurnitureCount
-            FileGetObject(F, Player(Index).House.Furniture(i).ItemNum)
-            FileGetObject(F, Player(Index).House.Furniture(i).X)
-            FileGetObject(F, Player(Index).House.Furniture(i).Y)
-        Next
-        FileGetObject(F, Player(Index).InHouse)
-        FileGetObject(F, Player(Index).LastMap)
-        FileGetObject(F, Player(Index).LastX)
-        FileGetObject(F, Player(Index).LastY)
-
-        For i = 1 To MAX_HOTBAR
-            FileGetObject(F, Player(Index).Hotbar(i).Slot)
-            FileGetObject(F, Player(Index).Hotbar(i).sType)
-        Next
-
-        ReDim Player(Index).Switches(MAX_SWITCHES)
-        For i = 1 To MAX_SWITCHES
-            FileGetObject(F, Player(Index).Switches(i))
-        Next
-        ReDim Player(Index).Variables(MAX_VARIABLES)
-        For i = 1 To MAX_VARIABLES
-            FileGetObject(F, Player(Index).Variables(i))
-        Next
-
-        ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
-        For i = 0 To ResourceSkills.Skill_Count - 1
-            FileGetObject(F, Player(Index).GatherSkills(i).SkillLevel)
-            FileGetObject(F, Player(Index).GatherSkills(i).SkillCurExp)
-            FileGetObject(F, Player(Index).GatherSkills(i).SkillNextLvlExp)
-            If Player(Index).GatherSkills(i).SkillLevel = 0 Then Player(Index).GatherSkills(i).SkillLevel = 1
-            If Player(Index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(Index).GatherSkills(i).SkillNextLvlExp = 100
-        Next
 
         FileClose(F)
+
+        For i = 1 To MAX_CHARS
+            LoadCharacter(Index, i)
+        Next
+
     End Sub
 
     Sub ClearPlayer(ByVal Index As Long)
@@ -1779,87 +1631,11 @@ Module ServerDatabase
         Player(Index).Password = ""
 
         Player(Index).Access = 0
-        Player(Index).Classes = 0
-        Player(Index).Dir = 0
 
-        For i = 0 To Equipment.Equipment_Count - 1
-            Player(Index).Equipment(i) = 0
+        For i = 1 To MAX_CHARS
+            ClearCharacter(Index, i)
         Next
 
-        For i = 0 To MAX_INV
-            Player(Index).Inv(i).Num = 0
-            Player(Index).Inv(i).Value = 0
-        Next
-
-        Player(Index).exp = 0
-        Player(Index).Level = 0
-        Player(Index).Map = 0
-        Player(Index).Name = ""
-        Player(Index).PK = 0
-        Player(Index).POINTS = 0
-        Player(Index).Sex = 0
-
-        For i = 0 To MAX_PLAYER_SPELLS
-            Player(Index).Spell(i) = 0
-        Next
-
-        Player(Index).Sprite = 0
-
-        For i = 0 To Stats.Stat_Count - 1
-            Player(Index).Stat(i) = 0
-        Next
-
-        For i = 0 To Vitals.Vital_Count - 1
-            Player(Index).Vital(i) = 0
-        Next
-
-        Player(Index).x = 0
-        Player(Index).y = 0
-
-        ReDim Player(Index).PlayerQuest(MAX_QUESTS)
-        For i = 1 To MAX_QUESTS
-            Player(Index).PlayerQuest(i).Status = 0
-            Player(Index).PlayerQuest(i).ActualTask = 0
-            Player(Index).PlayerQuest(i).CurrentCount = 0
-        Next
-
-        'Housing
-        Player(Index).House.HouseIndex = 0
-        Player(Index).House.FurnitureCount = 0
-        ReDim Player(Index).House.Furniture(Player(Index).House.FurnitureCount)
-
-        For i = 0 To Player(Index).House.FurnitureCount
-            Player(Index).House.Furniture(i).ItemNum = 0
-            Player(Index).House.Furniture(i).X = 0
-            Player(Index).House.Furniture(i).Y = 0
-        Next
-
-        Player(Index).InHouse = 0
-        Player(Index).LastMap = 0
-        Player(Index).LastX = 0
-        Player(Index).LastY = 0
-
-        ReDim Player(Index).Hotbar(MAX_HOTBAR)
-        For i = 1 To MAX_HOTBAR
-            Player(Index).Hotbar(i).Slot = 0
-            Player(Index).Hotbar(i).sType = 0
-        Next
-
-        ReDim Player(Index).Switches(MAX_SWITCHES)
-        For i = 1 To MAX_SWITCHES
-            Player(Index).Switches(i) = 0
-        Next
-        ReDim Player(Index).Variables(MAX_VARIABLES)
-        For i = 1 To MAX_VARIABLES
-            Player(Index).Variables(i) = 0
-        Next
-
-        ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
-        For i = 0 To ResourceSkills.Skill_Count - 1
-            Player(Index).GatherSkills(i).SkillLevel = 1
-            Player(Index).GatherSkills(i).SkillCurExp = 0
-            Player(Index).GatherSkills(i).SkillNextLvlExp = 100
-        Next
     End Sub
 
 #End Region
@@ -1917,9 +1693,280 @@ Module ServerDatabase
 #End Region
 
 #Region "Characters"
-    Function CharExist(ByVal Index As Long) As Boolean
+    Sub ClearCharacter(ByVal Index As Long, ByVal CharNum As Long)
+        Player(Index).Character(CharNum).Classes = 0
+        Player(Index).Character(CharNum).Dir = 0
 
-        If Len(Trim$(Player(Index).Name)) > 0 Then
+        For i = 0 To Equipment.Equipment_Count - 1
+            Player(Index).Character(CharNum).Equipment(i) = 0
+        Next
+
+        For i = 0 To MAX_INV
+            Player(Index).Character(CharNum).Inv(i).Num = 0
+            Player(Index).Character(CharNum).Inv(i).Value = 0
+        Next
+
+        Player(Index).Character(CharNum).exp = 0
+        Player(Index).Character(CharNum).Level = 0
+        Player(Index).Character(CharNum).Map = 0
+        Player(Index).Character(CharNum).Name = ""
+        Player(Index).Character(CharNum).PK = 0
+        Player(Index).Character(CharNum).POINTS = 0
+        Player(Index).Character(CharNum).Sex = 0
+
+        For i = 0 To MAX_PLAYER_SPELLS
+            Player(Index).Character(CharNum).Spell(i) = 0
+        Next
+
+        Player(Index).Character(CharNum).Sprite = 0
+
+        For i = 0 To Stats.Stat_Count - 1
+            Player(Index).Character(CharNum).Stat(i) = 0
+        Next
+
+        For i = 0 To Vitals.Vital_Count - 1
+            Player(Index).Character(CharNum).Vital(i) = 0
+        Next
+
+        Player(Index).Character(CharNum).x = 0
+        Player(Index).Character(CharNum).y = 0
+
+        ReDim Player(Index).Character(CharNum).PlayerQuest(MAX_QUESTS)
+        For i = 1 To MAX_QUESTS
+            Player(Index).Character(CharNum).PlayerQuest(i).Status = 0
+            Player(Index).Character(CharNum).PlayerQuest(i).ActualTask = 0
+            Player(Index).Character(CharNum).PlayerQuest(i).CurrentCount = 0
+        Next
+
+        'Housing
+        Player(Index).Character(CharNum).House.HouseIndex = 0
+        Player(Index).Character(CharNum).House.FurnitureCount = 0
+        ReDim Player(Index).Character(CharNum).House.Furniture(Player(Index).Character(CharNum).House.FurnitureCount)
+
+        For i = 0 To Player(Index).Character(CharNum).House.FurnitureCount
+            Player(Index).Character(CharNum).House.Furniture(i).ItemNum = 0
+            Player(Index).Character(CharNum).House.Furniture(i).X = 0
+            Player(Index).Character(CharNum).House.Furniture(i).Y = 0
+        Next
+
+        Player(Index).Character(CharNum).InHouse = 0
+        Player(Index).Character(CharNum).LastMap = 0
+        Player(Index).Character(CharNum).LastX = 0
+        Player(Index).Character(CharNum).LastY = 0
+
+        ReDim Player(Index).Character(CharNum).Hotbar(MAX_HOTBAR)
+        For i = 1 To MAX_HOTBAR
+            Player(Index).Character(CharNum).Hotbar(i).Slot = 0
+            Player(Index).Character(CharNum).Hotbar(i).sType = 0
+        Next
+
+        ReDim Player(Index).Character(CharNum).Switches(MAX_SWITCHES)
+        For i = 1 To MAX_SWITCHES
+            Player(Index).Character(CharNum).Switches(i) = 0
+        Next
+        ReDim Player(Index).Character(CharNum).Variables(MAX_VARIABLES)
+        For i = 1 To MAX_VARIABLES
+            Player(Index).Character(CharNum).Variables(i) = 0
+        Next
+
+        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 1
+            Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp = 0
+            Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
+        Next
+
+    End Sub
+
+    Sub LoadCharacter(ByVal Index As Long, ByVal CharNum As Long)
+        Dim filename As String
+        Dim F As Long
+
+        ClearCharacter(Index, CharNum)
+
+        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
+
+        F = FreeFile()
+        FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
+
+        FileGetObject(F, Player(Index).Character(CharNum).Classes)
+        FileGetObject(F, Player(Index).Character(CharNum).Dir)
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Armor))
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Helmet))
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Shield))
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Weapon))
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Shoes))
+        FileGetObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Gloves))
+        FileGetObject(F, Player(Index).Character(CharNum).exp)
+
+        For i = 0 To MAX_INV
+            FileGetObject(F, Player(Index).Character(CharNum).Inv(i).Num)
+            FileGetObject(F, Player(Index).Character(CharNum).Inv(i).Value)
+        Next
+
+        FileGetObject(F, Player(Index).Character(CharNum).Level)
+        FileGetObject(F, Player(Index).Character(CharNum).Map)
+        FileGetObject(F, Player(Index).Character(CharNum).Name)
+        FileGetObject(F, Player(Index).Character(CharNum).PK)
+        FileGetObject(F, Player(Index).Character(CharNum).POINTS)
+        FileGetObject(F, Player(Index).Character(CharNum).Sex)
+
+        For i = 0 To MAX_PLAYER_SPELLS
+            FileGetObject(F, Player(Index).Character(CharNum).Spell(i))
+        Next
+
+        FileGetObject(F, Player(Index).Character(CharNum).Sprite)
+
+        For i = 0 To Stats.Stat_Count - 1
+            FileGetObject(F, Player(Index).Character(CharNum).Stat(i))
+        Next
+
+        For i = 0 To Vitals.Vital_Count - 1
+            FileGetObject(F, Player(Index).Character(CharNum).Vital(i))
+        Next
+
+        FileGetObject(F, Player(Index).Character(CharNum).x)
+        FileGetObject(F, Player(Index).Character(CharNum).y)
+
+        For i = 1 To MAX_QUESTS
+            FileGetObject(F, Player(Index).Character(CharNum).PlayerQuest(i).Status)
+            FileGetObject(F, Player(Index).Character(CharNum).PlayerQuest(i).ActualTask)
+            FileGetObject(F, Player(Index).Character(CharNum).PlayerQuest(i).CurrentCount)
+        Next
+
+        'Housing
+        FileGetObject(F, Player(Index).Character(CharNum).House.HouseIndex)
+        FileGetObject(F, Player(Index).Character(CharNum).House.FurnitureCount)
+        ReDim Player(Index).Character(CharNum).House.Furniture(Player(Index).Character(CharNum).House.FurnitureCount)
+        For i = 0 To Player(Index).Character(CharNum).House.FurnitureCount
+            FileGetObject(F, Player(Index).Character(CharNum).House.Furniture(i).ItemNum)
+            FileGetObject(F, Player(Index).Character(CharNum).House.Furniture(i).X)
+            FileGetObject(F, Player(Index).Character(CharNum).House.Furniture(i).Y)
+        Next
+        FileGetObject(F, Player(Index).Character(CharNum).InHouse)
+        FileGetObject(F, Player(Index).Character(CharNum).LastMap)
+        FileGetObject(F, Player(Index).Character(CharNum).LastX)
+        FileGetObject(F, Player(Index).Character(CharNum).LastY)
+
+        For i = 1 To MAX_HOTBAR
+            FileGetObject(F, Player(Index).Character(CharNum).Hotbar(i).Slot)
+            FileGetObject(F, Player(Index).Character(CharNum).Hotbar(i).sType)
+        Next
+
+        ReDim Player(Index).Character(CharNum).Switches(MAX_SWITCHES)
+        For i = 1 To MAX_SWITCHES
+            FileGetObject(F, Player(Index).Character(CharNum).Switches(i))
+        Next
+        ReDim Player(Index).Character(CharNum).Variables(MAX_VARIABLES)
+        For i = 1 To MAX_VARIABLES
+            FileGetObject(F, Player(Index).Character(CharNum).Variables(i))
+        Next
+
+        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillLevel)
+            FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp)
+            FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp)
+            If Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 0 Then Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 1
+            If Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 0 Then Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
+        Next
+
+        FileClose(F)
+    End Sub
+
+    Sub SaveCharacter(ByVal Index As Long, ByVal CharNum As Long)
+        Dim filename As String
+        Dim F As Long
+
+        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
+
+        F = FreeFile()
+        FileOpen(F, filename, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
+
+        FilePutObject(F, Player(Index).Character(CharNum).Classes)
+        FilePutObject(F, Player(Index).Character(CharNum).Dir)
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Armor))
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Helmet))
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Shield))
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Weapon))
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Shoes))
+        FilePutObject(F, Player(Index).Character(CharNum).Equipment(Equipment.Gloves))
+        FilePutObject(F, Player(Index).Character(CharNum).exp)
+
+        For i = 0 To MAX_INV
+            FilePutObject(F, Player(Index).Character(CharNum).Inv(i).Num)
+            FilePutObject(F, Player(Index).Character(CharNum).Inv(i).Value)
+        Next
+
+        FilePutObject(F, Player(Index).Character(CharNum).Level)
+        FilePutObject(F, Player(Index).Character(CharNum).Map)
+        FilePutObject(F, Player(Index).Character(CharNum).Name)
+        FilePutObject(F, Player(Index).Character(CharNum).PK)
+        FilePutObject(F, Player(Index).Character(CharNum).POINTS)
+        FilePutObject(F, Player(Index).Character(CharNum).Sex)
+
+        For i = 0 To MAX_PLAYER_SPELLS
+            FilePutObject(F, Player(Index).Character(CharNum).Spell(i))
+        Next
+
+        FilePutObject(F, Player(Index).Character(CharNum).Sprite)
+
+        For i = 0 To Stats.Stat_Count - 1
+            FilePutObject(F, Player(Index).Character(CharNum).Stat(i))
+        Next
+
+        For i = 0 To Vitals.Vital_Count - 1
+            FilePutObject(F, Player(Index).Character(CharNum).Vital(i))
+        Next
+
+        FilePutObject(F, Player(Index).Character(CharNum).x)
+        FilePutObject(F, Player(Index).Character(CharNum).y)
+
+        For i = 1 To MAX_QUESTS
+            FilePutObject(F, Player(Index).Character(CharNum).PlayerQuest(i).Status)
+            FilePutObject(F, Player(Index).Character(CharNum).PlayerQuest(i).ActualTask)
+            FilePutObject(F, Player(Index).Character(CharNum).PlayerQuest(i).CurrentCount)
+        Next
+
+        'Housing
+        FilePutObject(F, Player(Index).Character(CharNum).House.HouseIndex)
+        FilePutObject(F, Player(Index).Character(CharNum).House.FurnitureCount)
+        For i = 0 To Player(Index).Character(CharNum).House.FurnitureCount
+            FilePutObject(F, Player(Index).Character(CharNum).House.Furniture(i).ItemNum)
+            FilePutObject(F, Player(Index).Character(CharNum).House.Furniture(i).X)
+            FilePutObject(F, Player(Index).Character(CharNum).House.Furniture(i).Y)
+        Next
+        FilePutObject(F, Player(Index).Character(CharNum).InHouse)
+        FilePutObject(F, Player(Index).Character(CharNum).LastMap)
+        FilePutObject(F, Player(Index).Character(CharNum).LastX)
+        FilePutObject(F, Player(Index).Character(CharNum).LastY)
+
+
+        For i = 1 To MAX_HOTBAR
+            FilePutObject(F, Player(Index).Character(CharNum).Hotbar(i).Slot)
+            FilePutObject(F, Player(Index).Character(CharNum).Hotbar(i).sType)
+        Next
+
+        For i = 1 To MAX_SWITCHES
+            FilePutObject(F, Player(Index).Character(CharNum).Switches(i))
+        Next
+
+        For i = 1 To MAX_VARIABLES
+            FilePutObject(F, Player(Index).Character(CharNum).Variables(i))
+        Next
+
+        For i = 0 To ResourceSkills.Skill_Count - 1
+            FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillLevel)
+            FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp)
+            FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp)
+        Next
+
+        FileClose(F)
+    End Sub
+
+    Function CharExist(ByVal Index As Long, ByVal CharNum As Long) As Boolean
+
+        If Len(Trim$(Player(Index).Character(CharNum).Name)) > 0 Then
             CharExist = True
         Else
             CharExist = False
@@ -1927,57 +1974,58 @@ Module ServerDatabase
 
     End Function
 
-    Sub AddChar(ByVal Index As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Byte, ByVal Sprite As Long)
+    Sub AddChar(ByVal Index As Long, ByVal CharNum As Long, ByVal Name As String, ByVal Sex As Byte, ByVal ClassNum As Byte, ByVal Sprite As Long)
         Dim n As Long, i As Long
         Dim spritecheck As Boolean
 
-        If Len(Trim$(Player(Index).Name)) = 0 Then
+        If Len(Trim$(Player(Index).Character(CharNum).Name)) = 0 Then
 
             spritecheck = False
 
-            Player(Index).Name = Name
-            Player(Index).Sex = Sex
-            Player(Index).Classes = ClassNum
+            Player(Index).Character(CharNum).Name = Name
+            Player(Index).Character(CharNum).Sex = Sex
+            Player(Index).Character(CharNum).Classes = ClassNum
 
-            If Player(Index).Sex = SEX_MALE Then
-                Player(Index).Sprite = Classes(ClassNum).MaleSprite(Sprite - 1)
+            If Player(Index).Character(CharNum).Sex = SEX_MALE Then
+                Player(Index).Character(CharNum).Sprite = Classes(ClassNum).MaleSprite(Sprite - 1)
             Else
-                Player(Index).Sprite = Classes(ClassNum).FemaleSprite(Sprite - 1)
+                Player(Index).Character(CharNum).Sprite = Classes(ClassNum).FemaleSprite(Sprite - 1)
             End If
 
-            Player(Index).Level = 1
+            Player(Index).Character(CharNum).Level = 1
 
             For n = 1 To Stats.Stat_Count - 1
-                Player(Index).Stat(n) = Classes(ClassNum).Stat(n)
+                Player(Index).Character(CharNum).Stat(n) = Classes(ClassNum).Stat(n)
             Next n
 
-            Player(Index).Dir = DIR_DOWN
-            Player(Index).Map = Classes(ClassNum).StartMap
-            Player(Index).x = Classes(ClassNum).StartX
-            Player(Index).y = Classes(ClassNum).StartY
-            Player(Index).Dir = DIR_DOWN
-            Player(Index).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
-            Player(Index).Vital(Vitals.MP) = GetPlayerMaxVital(Index, Vitals.MP)
-            Player(Index).Vital(Vitals.SP) = GetPlayerMaxVital(Index, Vitals.SP)
+            Player(Index).Character(CharNum).Dir = DIR_DOWN
+            Player(Index).Character(CharNum).Map = Classes(ClassNum).StartMap
+            Player(Index).Character(CharNum).x = Classes(ClassNum).StartX
+            Player(Index).Character(CharNum).y = Classes(ClassNum).StartY
+            Player(Index).Character(CharNum).Dir = DIR_DOWN
+            Player(Index).Character(CharNum).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
+            Player(Index).Character(CharNum).Vital(Vitals.MP) = GetPlayerMaxVital(Index, Vitals.MP)
+            Player(Index).Character(CharNum).Vital(Vitals.SP) = GetPlayerMaxVital(Index, Vitals.SP)
 
             ' set starter equipment
             For n = 1 To 5
                 If Classes(ClassNum).StartItem(n) > 0 Then
-                    Player(Index).Inv(n).Num = Classes(ClassNum).StartItem(n)
-                    Player(Index).Inv(n).Value = Classes(ClassNum).StartValue(n)
+                    Player(Index).Character(CharNum).Inv(n).Num = Classes(ClassNum).StartItem(n)
+                    Player(Index).Character(CharNum).Inv(n).Value = Classes(ClassNum).StartValue(n)
                 End If
             Next
 
             'set skills
-            ReDim Player(Index).GatherSkills(ResourceSkills.Skill_Count - 1)
+            ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
             For i = 0 To ResourceSkills.Skill_Count - 1
-                Player(Index).GatherSkills(i).SkillLevel = 1
-                Player(Index).GatherSkills(i).SkillCurExp = 0
-                Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+                Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 1
+                Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp = 0
+                Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
             Next
 
             ' Append name to file
             AddTextToFile(Name, "accounts\charlist.txt")
+
             SavePlayer(Index)
             Exit Sub
         End If

@@ -61,6 +61,7 @@
 
         Packets.Add(ServerPackets.SAlertMsg, AddressOf Packet_AlertMSG)
         Packets.Add(ServerPackets.SLoginOk, AddressOf Packet_LoginOk)
+        Packets.Add(ServerPackets.SSelChar, AddressOf Packet_SelChar)
         Packets.Add(ServerPackets.SNewCharClasses, AddressOf Packet_NewCharClasses)
         Packets.Add(ServerPackets.SClassesData, AddressOf Packet_ClassesData)
         Packets.Add(ServerPackets.SInGame, AddressOf Packet_InGame)
@@ -251,6 +252,47 @@
         SetStatus("Receiving game data...")
     End Sub
 
+    Sub Packet_SelChar(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer, MaxChars As Byte, CharName As String, Sprite As Long, Level As Long, ClassName As String, Gender As Byte
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If Buffer.ReadLong <> ServerPackets.SSelChar Then Exit Sub
+
+        ' Now we can receive char data
+        MaxChars = Buffer.ReadLong
+        ReDim CharSelection(MaxChars)
+
+        SelectedChar = 1
+
+        For i = 1 To MaxChars
+            CharName = Buffer.ReadString
+            Sprite = Buffer.ReadLong
+            Level = Buffer.ReadLong
+            ClassName = Buffer.ReadString
+            Gender = Buffer.ReadLong
+
+            CharSelection(i).Name = CharName
+            CharSelection(i).Sprite = Sprite
+            CharSelection(i).Level = Level
+            CharSelection(i).ClassName = ClassName
+            CharSelection(i).Gender = Gender
+        Next
+
+        Buffer = Nothing
+        ' Used for if the player is creating a new character
+        frmmenuvisible = True
+        frmloadvisible = False
+        pnlCreditsVisible = False
+        pnlRegisterVisible = False
+        pnlCharCreateVisible = False
+        pnlLoginVisible = False
+
+        pnlCharSelectVisible = True
+
+    End Sub
+
     Sub Packet_NewCharClasses(ByVal data() As Byte)
         Dim i As Long, z As Long, X As Long
         Dim Buffer As ByteBuffer
@@ -263,6 +305,8 @@
         ' Max classes
         Max_Classes = Buffer.ReadLong
         ReDim Classes(0 To Max_Classes)
+
+        SelectedChar = 1
 
         For i = 1 To Max_Classes
 
@@ -312,8 +356,10 @@
         frmloadvisible = False
         pnlCreditsVisible = False
         pnlRegisterVisible = False
-        pnlCharCreateVisible = True
+        'pnlCharCreateVisible = True
         pnlLoginVisible = False
+
+        pnlCharSelectVisible = True
 
         ReDim cmbclass(0 To Max_Classes)
 

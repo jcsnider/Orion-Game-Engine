@@ -156,8 +156,8 @@
                                 frmServer.lstView.Items(i - 1).SubItems(1).Text = Clients(i).IP
                                 If Player(i).Login <> "" Then
                                     frmServer.lstView.Items(i - 1).SubItems(2).Text = Player(i).Login
-                                    If Player(i).Name <> "" Then
-                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Name
+                                    If Player(i).Character(TempPlayer(i).CurChar).Name <> "" Then
+                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Character(TempPlayer(i).CurChar).Name
                                     Else
                                         frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
                                     End If

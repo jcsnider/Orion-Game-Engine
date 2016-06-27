@@ -120,7 +120,7 @@
 
         If Index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillLvl = Player(Index).GatherSkills(SkillSlot).SkillLevel
+        GetPlayerGatherSkillLvl = Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillLevel
     End Function
 
     Function GetPlayerGatherSkillExp(ByVal Index As Long, ByVal SkillSlot As Long) As Long
@@ -129,7 +129,7 @@
 
         If Index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillExp = Player(Index).GatherSkills(SkillSlot).SkillCurExp
+        GetPlayerGatherSkillExp = Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillCurExp
     End Function
 
     Function GetPlayerGatherSkillMaxExp(ByVal Index As Long, ByVal SkillSlot As Long) As Long
@@ -138,25 +138,25 @@
 
         If Index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillMaxExp = Player(Index).GatherSkills(SkillSlot).SkillNextLvlExp
+        GetPlayerGatherSkillMaxExp = Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillNextLvlExp
     End Function
 
     Sub SetPlayerGatherSkillLvl(ByVal Index As Long, ByVal SkillSlot As Long, ByVal lvl As Long)
         If Index > MAX_PLAYERS Then Exit Sub
 
-        Player(Index).GatherSkills(SkillSlot).SkillLevel = lvl
+        Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillLevel = lvl
     End Sub
 
     Sub SetPlayerGatherSkillExp(ByVal Index As Long, ByVal SkillSlot As Long, ByVal Exp As Long)
         If Index > MAX_PLAYERS Then Exit Sub
 
-        Player(Index).GatherSkills(SkillSlot).SkillCurExp = Exp
+        Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillCurExp = Exp
     End Sub
 
     Sub SetPlayerGatherSkillMaxExp(ByVal Index As Long, ByVal SkillSlot As Long, ByVal MaxExp As Long)
         If Index > MAX_PLAYERS Then Exit Sub
 
-        Player(Index).GatherSkills(SkillSlot).SkillNextLvlExp = MaxExp
+        Player(Index).Character(TempPlayer(Index).CurChar).GatherSkills(SkillSlot).SkillNextLvlExp = MaxExp
     End Sub
 
     Sub CheckResourceLevelUp(ByVal Index As Long, ByVal SkillSlot As Long)

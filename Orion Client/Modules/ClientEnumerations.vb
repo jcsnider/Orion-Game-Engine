@@ -6,6 +6,7 @@
     Public Enum ServerPackets
         SAlertMsg = 1
         SLoginOk
+        SSelChar
         SNewCharClasses
         SClassesData
         SInGame

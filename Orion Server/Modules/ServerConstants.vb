@@ -12,6 +12,8 @@
 
     Public jcs As Long
 
+    Public MAX_CHARS As Byte = 3
+
     ' ********************************************************
     ' * The values below must match with the client's values *
     ' ********************************************************

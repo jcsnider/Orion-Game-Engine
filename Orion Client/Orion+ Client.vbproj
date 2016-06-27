@@ -974,13 +974,7 @@
     <Content Include="data files\graphics\GUI\Main\inventory.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\main.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="data files\graphics\GUI\Main\MyChat.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\GUI\Main\panel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\plus.png">
@@ -998,21 +992,13 @@
     <Content Include="data files\graphics\GUI\Main\Trade.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\btnCredits.png">
+    <Content Include="data files\graphics\GUI\Menu\button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\btnExit.png">
+    <Content Include="data files\graphics\GUI\Menu\Button_Hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\btnLogin.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\GUI\Menu\btnPlay.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data files\graphics\GUI\Menu\btnRegister.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="data files\graphics\GUI\Menu\logo.png" />
     <Content Include="data files\graphics\GUI\Menu\menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
