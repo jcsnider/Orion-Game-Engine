@@ -314,6 +314,9 @@
         SendHotbar(Index)
         SendPlayerSpells(Index)
 
+        'craft
+        SendRecipes(Index)
+
         SendStats(Index)
         SendJoinMap(Index)
 
@@ -644,6 +647,14 @@
                     Buffer = Nothing
                     TempPlayer(Index).BuyHouseIndex = .Data1
                 End If
+            End If
+
+            'crafting
+            If .Type = TILE_TYPE_CRAFT Then
+                TempPlayer(Index).IsCrafting = True
+                SendPlayerRecipes(Index)
+                SendOpenCraft(Index)
+                Moved = YES
             End If
 
         End With

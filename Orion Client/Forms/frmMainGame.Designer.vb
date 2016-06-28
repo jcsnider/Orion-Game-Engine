@@ -60,12 +60,65 @@ Partial Class frmMainGame
         Me.txtQuestTaskLog = New System.Windows.Forms.TextBox()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
+        Me.pnlCraft = New System.Windows.Forms.Panel()
+        Me.btnCraftClose = New System.Windows.Forms.Button()
+        Me.pgbCraftProgress = New System.Windows.Forms.ProgressBar()
+        Me.btnCraftStop = New System.Windows.Forms.Button()
+        Me.btnCraft = New System.Windows.Forms.Button()
+        Me.nudCraftAmount = New System.Windows.Forms.NumericUpDown()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.lblMaterialAmount5 = New System.Windows.Forms.Label()
+        Me.lblMaterialName5 = New System.Windows.Forms.Label()
+        Me.picMaterial5 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.lblMaterialAmount4 = New System.Windows.Forms.Label()
+        Me.lblMaterialName4 = New System.Windows.Forms.Label()
+        Me.picMaterial4 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.lblMaterialAmount3 = New System.Windows.Forms.Label()
+        Me.lblMaterialName3 = New System.Windows.Forms.Label()
+        Me.picMaterial3 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.lblMaterialAmount2 = New System.Windows.Forms.Label()
+        Me.lblMaterialName2 = New System.Windows.Forms.Label()
+        Me.picMaterial2 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.lblMaterialAmount1 = New System.Windows.Forms.Label()
+        Me.lblMaterialName1 = New System.Windows.Forms.Label()
+        Me.picMaterial1 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.lblProductAmount = New System.Windows.Forms.Label()
+        Me.lblProductName = New System.Windows.Forms.Label()
+        Me.picProduct = New System.Windows.Forms.PictureBox()
+        Me.chkKnownOnly = New System.Windows.Forms.CheckBox()
+        Me.lblCraftExp = New System.Windows.Forms.Label()
+        Me.lblCraftLvl = New System.Windows.Forms.Label()
+        Me.lstRecipe = New System.Windows.Forms.ListBox()
+        Me.tmrCraft = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
+        Me.pnlCraft.SuspendLayout()
+        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
+        CType(Me.picMaterial5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox9.SuspendLayout()
+        CType(Me.picMaterial4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox8.SuspendLayout()
+        CType(Me.picMaterial3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox7.SuspendLayout()
+        CType(Me.picMaterial2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox6.SuspendLayout()
+        CType(Me.picMaterial1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.picProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picscreen
@@ -472,6 +525,397 @@ Partial Class frmMainGame
         '
         Me.tmrShake.Interval = 50
         '
+        'pnlCraft
+        '
+        Me.pnlCraft.BackColor = System.Drawing.Color.Gray
+        Me.pnlCraft.Controls.Add(Me.btnCraftClose)
+        Me.pnlCraft.Controls.Add(Me.pgbCraftProgress)
+        Me.pnlCraft.Controls.Add(Me.btnCraftStop)
+        Me.pnlCraft.Controls.Add(Me.btnCraft)
+        Me.pnlCraft.Controls.Add(Me.nudCraftAmount)
+        Me.pnlCraft.Controls.Add(Me.GroupBox3)
+        Me.pnlCraft.Controls.Add(Me.chkKnownOnly)
+        Me.pnlCraft.Controls.Add(Me.lblCraftExp)
+        Me.pnlCraft.Controls.Add(Me.lblCraftLvl)
+        Me.pnlCraft.Controls.Add(Me.lstRecipe)
+        Me.pnlCraft.ForeColor = System.Drawing.Color.White
+        Me.pnlCraft.Location = New System.Drawing.Point(15, 14)
+        Me.pnlCraft.Name = "pnlCraft"
+        Me.pnlCraft.Size = New System.Drawing.Size(748, 497)
+        Me.pnlCraft.TabIndex = 47
+        Me.pnlCraft.Visible = False
+        '
+        'btnCraftClose
+        '
+        Me.btnCraftClose.ForeColor = System.Drawing.Color.Black
+        Me.btnCraftClose.Location = New System.Drawing.Point(661, 471)
+        Me.btnCraftClose.Name = "btnCraftClose"
+        Me.btnCraftClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnCraftClose.TabIndex = 9
+        Me.btnCraftClose.Text = "Close"
+        Me.btnCraftClose.UseVisualStyleBackColor = True
+        '
+        'pgbCraftProgress
+        '
+        Me.pgbCraftProgress.ForeColor = System.Drawing.Color.Lime
+        Me.pgbCraftProgress.Location = New System.Drawing.Point(442, 438)
+        Me.pgbCraftProgress.Name = "pgbCraftProgress"
+        Me.pgbCraftProgress.Size = New System.Drawing.Size(213, 20)
+        Me.pgbCraftProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.pgbCraftProgress.TabIndex = 8
+        Me.pgbCraftProgress.Value = 95
+        '
+        'btnCraftStop
+        '
+        Me.btnCraftStop.ForeColor = System.Drawing.Color.Black
+        Me.btnCraftStop.Location = New System.Drawing.Point(661, 438)
+        Me.btnCraftStop.Name = "btnCraftStop"
+        Me.btnCraftStop.Size = New System.Drawing.Size(75, 20)
+        Me.btnCraftStop.TabIndex = 7
+        Me.btnCraftStop.Text = "Stop Craft"
+        Me.btnCraftStop.UseVisualStyleBackColor = True
+        '
+        'btnCraft
+        '
+        Me.btnCraft.ForeColor = System.Drawing.Color.Black
+        Me.btnCraft.Location = New System.Drawing.Point(276, 438)
+        Me.btnCraft.Name = "btnCraft"
+        Me.btnCraft.Size = New System.Drawing.Size(75, 20)
+        Me.btnCraft.TabIndex = 6
+        Me.btnCraft.Text = "Craft"
+        Me.btnCraft.UseVisualStyleBackColor = True
+        '
+        'nudCraftAmount
+        '
+        Me.nudCraftAmount.Location = New System.Drawing.Point(357, 438)
+        Me.nudCraftAmount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudCraftAmount.Name = "nudCraftAmount"
+        Me.nudCraftAmount.Size = New System.Drawing.Size(79, 20)
+        Me.nudCraftAmount.TabIndex = 5
+        Me.nudCraftAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.nudCraftAmount.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
+        Me.nudCraftAmount.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.BackColor = System.Drawing.Color.DarkGray
+        Me.GroupBox3.Controls.Add(Me.GroupBox5)
+        Me.GroupBox3.Controls.Add(Me.GroupBox4)
+        Me.GroupBox3.Location = New System.Drawing.Point(276, 6)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(460, 429)
+        Me.GroupBox3.TabIndex = 4
+        Me.GroupBox3.TabStop = False
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.GroupBox10)
+        Me.GroupBox5.Controls.Add(Me.GroupBox9)
+        Me.GroupBox5.Controls.Add(Me.GroupBox8)
+        Me.GroupBox5.Controls.Add(Me.GroupBox7)
+        Me.GroupBox5.Controls.Add(Me.GroupBox6)
+        Me.GroupBox5.ForeColor = System.Drawing.Color.White
+        Me.GroupBox5.Location = New System.Drawing.Point(6, 88)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(448, 333)
+        Me.GroupBox5.TabIndex = 1
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Required Materials"
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox10.Controls.Add(Me.lblMaterialAmount5)
+        Me.GroupBox10.Controls.Add(Me.lblMaterialName5)
+        Me.GroupBox10.Controls.Add(Me.picMaterial5)
+        Me.GroupBox10.ForeColor = System.Drawing.Color.White
+        Me.GroupBox10.Location = New System.Drawing.Point(7, 266)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox10.TabIndex = 5
+        Me.GroupBox10.TabStop = False
+        '
+        'lblMaterialAmount5
+        '
+        Me.lblMaterialAmount5.AutoSize = True
+        Me.lblMaterialAmount5.Location = New System.Drawing.Point(51, 32)
+        Me.lblMaterialAmount5.Name = "lblMaterialAmount5"
+        Me.lblMaterialAmount5.Size = New System.Drawing.Size(83, 13)
+        Me.lblMaterialAmount5.TabIndex = 2
+        Me.lblMaterialAmount5.Text = "Product Amount"
+        '
+        'lblMaterialName5
+        '
+        Me.lblMaterialName5.AutoSize = True
+        Me.lblMaterialName5.Location = New System.Drawing.Point(51, 13)
+        Me.lblMaterialName5.Name = "lblMaterialName5"
+        Me.lblMaterialName5.Size = New System.Drawing.Size(72, 13)
+        Me.lblMaterialName5.TabIndex = 1
+        Me.lblMaterialName5.Text = "ProductName"
+        '
+        'picMaterial5
+        '
+        Me.picMaterial5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picMaterial5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picMaterial5.Location = New System.Drawing.Point(9, 13)
+        Me.picMaterial5.Name = "picMaterial5"
+        Me.picMaterial5.Size = New System.Drawing.Size(32, 32)
+        Me.picMaterial5.TabIndex = 0
+        Me.picMaterial5.TabStop = False
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox9.Controls.Add(Me.lblMaterialAmount4)
+        Me.GroupBox9.Controls.Add(Me.lblMaterialName4)
+        Me.GroupBox9.Controls.Add(Me.picMaterial4)
+        Me.GroupBox9.ForeColor = System.Drawing.Color.White
+        Me.GroupBox9.Location = New System.Drawing.Point(7, 203)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox9.TabIndex = 4
+        Me.GroupBox9.TabStop = False
+        '
+        'lblMaterialAmount4
+        '
+        Me.lblMaterialAmount4.AutoSize = True
+        Me.lblMaterialAmount4.Location = New System.Drawing.Point(51, 32)
+        Me.lblMaterialAmount4.Name = "lblMaterialAmount4"
+        Me.lblMaterialAmount4.Size = New System.Drawing.Size(83, 13)
+        Me.lblMaterialAmount4.TabIndex = 2
+        Me.lblMaterialAmount4.Text = "Product Amount"
+        '
+        'lblMaterialName4
+        '
+        Me.lblMaterialName4.AutoSize = True
+        Me.lblMaterialName4.Location = New System.Drawing.Point(51, 13)
+        Me.lblMaterialName4.Name = "lblMaterialName4"
+        Me.lblMaterialName4.Size = New System.Drawing.Size(72, 13)
+        Me.lblMaterialName4.TabIndex = 1
+        Me.lblMaterialName4.Text = "ProductName"
+        '
+        'picMaterial4
+        '
+        Me.picMaterial4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picMaterial4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picMaterial4.Location = New System.Drawing.Point(9, 13)
+        Me.picMaterial4.Name = "picMaterial4"
+        Me.picMaterial4.Size = New System.Drawing.Size(32, 32)
+        Me.picMaterial4.TabIndex = 0
+        Me.picMaterial4.TabStop = False
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox8.Controls.Add(Me.lblMaterialAmount3)
+        Me.GroupBox8.Controls.Add(Me.lblMaterialName3)
+        Me.GroupBox8.Controls.Add(Me.picMaterial3)
+        Me.GroupBox8.ForeColor = System.Drawing.Color.White
+        Me.GroupBox8.Location = New System.Drawing.Point(7, 145)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox8.TabIndex = 3
+        Me.GroupBox8.TabStop = False
+        '
+        'lblMaterialAmount3
+        '
+        Me.lblMaterialAmount3.AutoSize = True
+        Me.lblMaterialAmount3.Location = New System.Drawing.Point(51, 32)
+        Me.lblMaterialAmount3.Name = "lblMaterialAmount3"
+        Me.lblMaterialAmount3.Size = New System.Drawing.Size(83, 13)
+        Me.lblMaterialAmount3.TabIndex = 2
+        Me.lblMaterialAmount3.Text = "Product Amount"
+        '
+        'lblMaterialName3
+        '
+        Me.lblMaterialName3.AutoSize = True
+        Me.lblMaterialName3.Location = New System.Drawing.Point(51, 13)
+        Me.lblMaterialName3.Name = "lblMaterialName3"
+        Me.lblMaterialName3.Size = New System.Drawing.Size(72, 13)
+        Me.lblMaterialName3.TabIndex = 1
+        Me.lblMaterialName3.Text = "ProductName"
+        '
+        'picMaterial3
+        '
+        Me.picMaterial3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picMaterial3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picMaterial3.Location = New System.Drawing.Point(9, 13)
+        Me.picMaterial3.Name = "picMaterial3"
+        Me.picMaterial3.Size = New System.Drawing.Size(32, 32)
+        Me.picMaterial3.TabIndex = 0
+        Me.picMaterial3.TabStop = False
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox7.Controls.Add(Me.lblMaterialAmount2)
+        Me.GroupBox7.Controls.Add(Me.lblMaterialName2)
+        Me.GroupBox7.Controls.Add(Me.picMaterial2)
+        Me.GroupBox7.ForeColor = System.Drawing.Color.White
+        Me.GroupBox7.Location = New System.Drawing.Point(7, 82)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox7.TabIndex = 2
+        Me.GroupBox7.TabStop = False
+        '
+        'lblMaterialAmount2
+        '
+        Me.lblMaterialAmount2.AutoSize = True
+        Me.lblMaterialAmount2.Location = New System.Drawing.Point(51, 32)
+        Me.lblMaterialAmount2.Name = "lblMaterialAmount2"
+        Me.lblMaterialAmount2.Size = New System.Drawing.Size(83, 13)
+        Me.lblMaterialAmount2.TabIndex = 2
+        Me.lblMaterialAmount2.Text = "Product Amount"
+        '
+        'lblMaterialName2
+        '
+        Me.lblMaterialName2.AutoSize = True
+        Me.lblMaterialName2.Location = New System.Drawing.Point(51, 13)
+        Me.lblMaterialName2.Name = "lblMaterialName2"
+        Me.lblMaterialName2.Size = New System.Drawing.Size(72, 13)
+        Me.lblMaterialName2.TabIndex = 1
+        Me.lblMaterialName2.Text = "ProductName"
+        '
+        'picMaterial2
+        '
+        Me.picMaterial2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picMaterial2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picMaterial2.Location = New System.Drawing.Point(9, 13)
+        Me.picMaterial2.Name = "picMaterial2"
+        Me.picMaterial2.Size = New System.Drawing.Size(32, 32)
+        Me.picMaterial2.TabIndex = 0
+        Me.picMaterial2.TabStop = False
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox6.Controls.Add(Me.lblMaterialAmount1)
+        Me.GroupBox6.Controls.Add(Me.lblMaterialName1)
+        Me.GroupBox6.Controls.Add(Me.picMaterial1)
+        Me.GroupBox6.ForeColor = System.Drawing.Color.White
+        Me.GroupBox6.Location = New System.Drawing.Point(7, 19)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        '
+        'lblMaterialAmount1
+        '
+        Me.lblMaterialAmount1.AutoSize = True
+        Me.lblMaterialAmount1.Location = New System.Drawing.Point(51, 32)
+        Me.lblMaterialAmount1.Name = "lblMaterialAmount1"
+        Me.lblMaterialAmount1.Size = New System.Drawing.Size(83, 13)
+        Me.lblMaterialAmount1.TabIndex = 2
+        Me.lblMaterialAmount1.Text = "Product Amount"
+        '
+        'lblMaterialName1
+        '
+        Me.lblMaterialName1.AutoSize = True
+        Me.lblMaterialName1.Location = New System.Drawing.Point(51, 13)
+        Me.lblMaterialName1.Name = "lblMaterialName1"
+        Me.lblMaterialName1.Size = New System.Drawing.Size(72, 13)
+        Me.lblMaterialName1.TabIndex = 1
+        Me.lblMaterialName1.Text = "ProductName"
+        '
+        'picMaterial1
+        '
+        Me.picMaterial1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picMaterial1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picMaterial1.Location = New System.Drawing.Point(9, 13)
+        Me.picMaterial1.Name = "picMaterial1"
+        Me.picMaterial1.Size = New System.Drawing.Size(32, 32)
+        Me.picMaterial1.TabIndex = 0
+        Me.picMaterial1.TabStop = False
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox4.Controls.Add(Me.lblProductAmount)
+        Me.GroupBox4.Controls.Add(Me.lblProductName)
+        Me.GroupBox4.Controls.Add(Me.picProduct)
+        Me.GroupBox4.ForeColor = System.Drawing.Color.White
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 14)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(448, 68)
+        Me.GroupBox4.TabIndex = 0
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Product"
+        '
+        'lblProductAmount
+        '
+        Me.lblProductAmount.AutoSize = True
+        Me.lblProductAmount.Location = New System.Drawing.Point(51, 38)
+        Me.lblProductAmount.Name = "lblProductAmount"
+        Me.lblProductAmount.Size = New System.Drawing.Size(83, 13)
+        Me.lblProductAmount.TabIndex = 2
+        Me.lblProductAmount.Text = "Product Amount"
+        '
+        'lblProductName
+        '
+        Me.lblProductName.AutoSize = True
+        Me.lblProductName.Location = New System.Drawing.Point(51, 19)
+        Me.lblProductName.Name = "lblProductName"
+        Me.lblProductName.Size = New System.Drawing.Size(72, 13)
+        Me.lblProductName.TabIndex = 1
+        Me.lblProductName.Text = "ProductName"
+        '
+        'picProduct
+        '
+        Me.picProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picProduct.Location = New System.Drawing.Point(9, 19)
+        Me.picProduct.Name = "picProduct"
+        Me.picProduct.Size = New System.Drawing.Size(32, 32)
+        Me.picProduct.TabIndex = 0
+        Me.picProduct.TabStop = False
+        '
+        'chkKnownOnly
+        '
+        Me.chkKnownOnly.AutoSize = True
+        Me.chkKnownOnly.ForeColor = System.Drawing.Color.White
+        Me.chkKnownOnly.Location = New System.Drawing.Point(17, 433)
+        Me.chkKnownOnly.Name = "chkKnownOnly"
+        Me.chkKnownOnly.Size = New System.Drawing.Size(155, 17)
+        Me.chkKnownOnly.TabIndex = 3
+        Me.chkKnownOnly.Text = "Show Known Recipes Only"
+        Me.chkKnownOnly.UseVisualStyleBackColor = True
+        '
+        'lblCraftExp
+        '
+        Me.lblCraftExp.AutoSize = True
+        Me.lblCraftExp.BackColor = System.Drawing.Color.Transparent
+        Me.lblCraftExp.ForeColor = System.Drawing.Color.White
+        Me.lblCraftExp.Location = New System.Drawing.Point(417, 466)
+        Me.lblCraftExp.Name = "lblCraftExp"
+        Me.lblCraftExp.Size = New System.Drawing.Size(157, 13)
+        Me.lblCraftExp.TabIndex = 2
+        Me.lblCraftExp.Text = "Current Craft Experience: 1/100"
+        '
+        'lblCraftLvl
+        '
+        Me.lblCraftLvl.AutoSize = True
+        Me.lblCraftLvl.BackColor = System.Drawing.Color.Transparent
+        Me.lblCraftLvl.ForeColor = System.Drawing.Color.White
+        Me.lblCraftLvl.Location = New System.Drawing.Point(273, 466)
+        Me.lblCraftLvl.Name = "lblCraftLvl"
+        Me.lblCraftLvl.Size = New System.Drawing.Size(107, 13)
+        Me.lblCraftLvl.TabIndex = 1
+        Me.lblCraftLvl.Text = "Current Craft Level: 1"
+        '
+        'lstRecipe
+        '
+        Me.lstRecipe.BackColor = System.Drawing.Color.DarkGray
+        Me.lstRecipe.ForeColor = System.Drawing.Color.White
+        Me.lstRecipe.FormattingEnabled = True
+        Me.lstRecipe.Location = New System.Drawing.Point(17, 7)
+        Me.lstRecipe.Name = "lstRecipe"
+        Me.lstRecipe.Size = New System.Drawing.Size(235, 420)
+        Me.lstRecipe.TabIndex = 0
+        '
+        'tmrCraft
+        '
+        Me.tmrCraft.Interval = 1000
+        '
         'frmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -479,6 +923,7 @@ Partial Class frmMainGame
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1024, 604)
+        Me.Controls.Add(Me.pnlCraft)
         Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
@@ -504,6 +949,29 @@ Partial Class frmMainGame
         Me.pnlCurrency.PerformLayout()
         Me.pnlQuestLog.ResumeLayout(False)
         Me.pnlQuestLog.PerformLayout()
+        Me.pnlCraft.ResumeLayout(False)
+        Me.pnlCraft.PerformLayout()
+        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
+        CType(Me.picMaterial5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
+        CType(Me.picMaterial4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
+        CType(Me.picMaterial3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        CType(Me.picMaterial2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        CType(Me.picMaterial1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.picProduct, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -543,4 +1011,41 @@ Partial Class frmMainGame
     Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents cmbScreenSize As Windows.Forms.ComboBox
+    Friend WithEvents pnlCraft As Windows.Forms.Panel
+    Friend WithEvents btnCraftClose As Windows.Forms.Button
+    Friend WithEvents pgbCraftProgress As Windows.Forms.ProgressBar
+    Friend WithEvents btnCraftStop As Windows.Forms.Button
+    Friend WithEvents btnCraft As Windows.Forms.Button
+    Friend WithEvents nudCraftAmount As Windows.Forms.NumericUpDown
+    Friend WithEvents GroupBox3 As Windows.Forms.GroupBox
+    Friend WithEvents GroupBox5 As Windows.Forms.GroupBox
+    Friend WithEvents GroupBox10 As Windows.Forms.GroupBox
+    Friend WithEvents lblMaterialAmount5 As Windows.Forms.Label
+    Friend WithEvents lblMaterialName5 As Windows.Forms.Label
+    Friend WithEvents picMaterial5 As Windows.Forms.PictureBox
+    Friend WithEvents GroupBox9 As Windows.Forms.GroupBox
+    Friend WithEvents lblMaterialAmount4 As Windows.Forms.Label
+    Friend WithEvents lblMaterialName4 As Windows.Forms.Label
+    Friend WithEvents picMaterial4 As Windows.Forms.PictureBox
+    Friend WithEvents GroupBox8 As Windows.Forms.GroupBox
+    Friend WithEvents lblMaterialAmount3 As Windows.Forms.Label
+    Friend WithEvents lblMaterialName3 As Windows.Forms.Label
+    Friend WithEvents picMaterial3 As Windows.Forms.PictureBox
+    Friend WithEvents GroupBox7 As Windows.Forms.GroupBox
+    Friend WithEvents lblMaterialAmount2 As Windows.Forms.Label
+    Friend WithEvents lblMaterialName2 As Windows.Forms.Label
+    Friend WithEvents picMaterial2 As Windows.Forms.PictureBox
+    Friend WithEvents GroupBox6 As Windows.Forms.GroupBox
+    Friend WithEvents lblMaterialAmount1 As Windows.Forms.Label
+    Friend WithEvents lblMaterialName1 As Windows.Forms.Label
+    Friend WithEvents picMaterial1 As Windows.Forms.PictureBox
+    Friend WithEvents GroupBox4 As Windows.Forms.GroupBox
+    Friend WithEvents lblProductAmount As Windows.Forms.Label
+    Friend WithEvents lblProductName As Windows.Forms.Label
+    Friend WithEvents picProduct As Windows.Forms.PictureBox
+    Friend WithEvents chkKnownOnly As Windows.Forms.CheckBox
+    Friend WithEvents lblCraftExp As Windows.Forms.Label
+    Friend WithEvents lblCraftLvl As Windows.Forms.Label
+    Friend WithEvents lstRecipe As Windows.Forms.ListBox
+    Friend WithEvents tmrCraft As Windows.Forms.Timer
 End Class

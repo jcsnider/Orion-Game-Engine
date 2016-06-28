@@ -5,7 +5,7 @@
         Dim tmr25 As Long
         Dim tmr300 As Long
         Dim tmr500 As Long
-        Dim tmr1000 As Long
+        Dim tmr1000 As Long, tmrCraft As Long
         Dim LastUpdateSavePlayers As Long
         Dim LastUpdateMapSpawnItems As Long
         Dim LastUpdatePlayerVitals As Long
@@ -49,6 +49,22 @@
                 End If
 
                 tmr1000 = GetTickCount() + 1000
+            End If
+
+            If Tick > tmrCraft Then
+                For i = 1 To MAX_PLAYERS
+                    If IsPlaying(i) Then
+                        If TempPlayer(i).CraftIt = 1 Then
+                            If GetTickCount() > TempPlayer(i).CraftTimer + (TempPlayer(i).CraftTimeNeeded * 1000) Then
+                                TempPlayer(i).CraftIt = 0
+                                TempPlayer(i).CraftTimer = 0
+                                TempPlayer(i).CraftTimeNeeded = 0
+                                UpdateCraft(i)
+                            End If
+                        End If
+                    End If
+                Next
+                tmrCraft = GetTickCount() + 1000
             End If
 
             ' Check for disconnections every half second

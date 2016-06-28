@@ -185,7 +185,7 @@ Public Module ClientGuiFunctions
                 ' left click
                 If e.Button = MouseButtons.Left Then
                     'Inventory
-                    If X > ActionPanelX + InvBtnX And X < ActionPanelX + InvBtnX + 32 And Y > ActionPanelY + InvBtnY And Y < ActionPanelY + InvBtnY + 32 Then
+                    If X > ActionPanelX + InvBtnX And X < ActionPanelX + InvBtnX + 48 And Y > ActionPanelY + InvBtnY And Y < ActionPanelY + InvBtnY + 32 Then
                         PlaySound("Click.ogg")
                         pnlInventoryVisible = Not pnlInventoryVisible
                         pnlCharacterVisible = False
@@ -193,7 +193,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Skills
-                    ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 32 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
+                    ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 48 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
                         PlaySound("Click.ogg")
                         Buffer = New ByteBuffer
                         Buffer.WriteLong(ClientPackets.CSpells)
@@ -205,7 +205,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Char
-                    ElseIf X > ActionPanelX + CharBtnX And X < ActionPanelX + CharBtnX + 32 And Y > ActionPanelY + CharBtnY And Y < ActionPanelY + CharBtnY + 32 Then
+                    ElseIf X > ActionPanelX + CharBtnX And X < ActionPanelX + CharBtnX + 48 And Y > ActionPanelY + CharBtnY And Y < ActionPanelY + CharBtnY + 32 Then
                         PlaySound("Click.ogg")
                         SendRequestPlayerData()
                         pnlCharacterVisible = Not pnlCharacterVisible
@@ -214,7 +214,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Quest
-                    ElseIf X > ActionPanelX + QuestBtnX And X < ActionPanelX + QuestBtnX + 32 And Y > ActionPanelY + QuestBtnY And Y < ActionPanelY + QuestBtnY + 32 Then
+                    ElseIf X > ActionPanelX + QuestBtnX And X < ActionPanelX + QuestBtnX + 48 And Y > ActionPanelY + QuestBtnY And Y < ActionPanelY + QuestBtnY + 32 Then
                         UpdateQuestLog()
                         ' show the window
                         pnlInventoryVisible = False
@@ -224,15 +224,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlQuestLog.Visible = Not frmMainGame.pnlQuestLog.Visible
                         frmMainGame.pnlQuestLog.BringToFront()
                         CheckGuiClick = True
-                        'Trade
-                    ElseIf X > ActionPanelX + TradeBtnX And X < ActionPanelX + TradeBtnX + 32 And Y > ActionPanelY + TradeBtnY And Y < ActionPanelY + TradeBtnY + 32 Then
-                        'PlaySound("Click.ogg")
-                        'AddText("Click on the player you wish to trade with.", TellColor)
-                        'TradeTimer = GetTickCount() + 10000 ' 10 seconds to click on the player
-                        'TradeRequest = True
-                        'CheckGuiClick = True
-                        'Options
-                    ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 32 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
+                    ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 48 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
                         PlaySound("Click.ogg")
                         pnlCharacterVisible = False
                         pnlInventoryVisible = False
@@ -241,7 +233,7 @@ Public Module ClientGuiFunctions
                         frmMainGame.pnlOptions.Visible = Not frmMainGame.pnlOptions.Visible
                         CheckGuiClick = True
                         'Exit
-                    ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 32 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
+                    ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 48 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
                         PlaySound("Click.ogg")
                         frmAdmin.Dispose()
                         DestroyGame()

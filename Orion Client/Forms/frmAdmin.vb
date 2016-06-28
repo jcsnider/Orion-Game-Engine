@@ -301,6 +301,13 @@ Public Class frmAdmin
         SendMapRespawn()
     End Sub
 
+    Private Sub btnRecipeEditor_Click(sender As Object, e As EventArgs) Handles btnRecipeEditor.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
+            Exit Sub
+        End If
+        SendRequestEditRecipes()
+    End Sub
+
 
 #End Region
 

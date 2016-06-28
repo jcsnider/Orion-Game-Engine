@@ -282,9 +282,9 @@ Module ClientGraphics
         End If
 
         ActionPanelGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "ActionBar\panel" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "ActionBar\panel" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            ActionPanelGFX = New Texture(Application.StartupPath & GFX_PATH & "ActionBar\panel" & GFX_EXT)
+            ActionPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "ActionBar\panel" & GFX_EXT)
 
             'Cache the width and height
             ActionPanelGFXInfo.width = ActionPanelGFX.Size.X
@@ -2951,13 +2951,13 @@ NextLoop:
         With FacesGFXInfo(Shop(InShop).Face)
             .TextureTimer = GetTickCount() + 100000
         End With
-        RenderTexture(FacesGFX(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY, 0, 0, FacesGFXInfo(Shop(InShop).Face).width, FacesGFXInfo(Shop(InShop).Face).height)
+        RenderTexture(FacesGFX(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX + 40, ShopWindowY + ShopFaceY + 40, 0, 0, FacesGFXInfo(Shop(InShop).Face).width, FacesGFXInfo(Shop(InShop).Face).height)
 
         'draw text
         DrawText(ShopWindowX + ShopLeft, ShopWindowY + 10, Trim(Shop(InShop).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
-        DrawText(ShopWindowX + 110, ShopWindowY + 40, "Hello, and welcome", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
-        DrawText(ShopWindowX + 110, ShopWindowY + 55, "to the shop!", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+        DrawText(ShopWindowX + 10, ShopWindowY + 10, "Hello, and welcome", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
+        DrawText(ShopWindowX + 10, ShopWindowY + 25, "to the shop!", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
         'render buy button
         DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY)
@@ -3519,25 +3519,33 @@ NextLoop:
         End If
 
         'main menu buttons
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnCredits" & GFX_EXT) Then
-            frmMenu.btnCredits.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnCredits" & GFX_EXT)
-        End If
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnExit" & GFX_EXT) Then
-            frmMenu.btnExit.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnExit" & GFX_EXT)
-        End If
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnPlay" & GFX_EXT) Then
-            frmMenu.btnPlay.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnPlay" & GFX_EXT)
-        End If
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnLogin" & GFX_EXT) Then
-            frmMenu.btnLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnLogin" & GFX_EXT)
-        End If
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\btnRegister" & GFX_EXT) Then
-            frmMenu.btnRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\btnRegister" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT) Then
+            frmMenu.btnCredits.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnExit.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnPlay.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnNewChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnUseChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnDelChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnCreateAccount.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            frmMenu.btnSaveIP.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
         End If
 
-        'main game
-        If FileExist(Application.StartupPath & GFX_PATH & "Gui\Main\main" & GFX_EXT) Then
-            frmMenu.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Main\main" & GFX_EXT)
+        'main menu panels
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT) Then
+            frmMenu.pnlMainMenu.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlNewChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlCharSelect.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlCredits.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            frmMenu.pnlIPConfig.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+        End If
+
+        'logo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT) Then
+            frmMenu.picLogo.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
         End If
 
     End Sub

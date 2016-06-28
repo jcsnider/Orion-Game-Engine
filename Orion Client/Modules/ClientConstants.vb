@@ -167,7 +167,7 @@
     'Housing
     Public Const TILE_TYPE_HOUSE As Byte = 14
     'craft
-    Public Const TILE_TYPE_CRAFT As Byte = 15
+    'Public Const TILE_TYPE_CRAFT As Byte = 15
 
     ' Item constants
     Public Const ITEM_TYPE_NONE As Byte = 0
@@ -248,6 +248,7 @@
     Public Const EDITOR_ANIMATION As Byte = 6
     Public Const EDITOR_QUEST As Byte = 7
     Public Const EDITOR_HOUSE As Byte = 8
+    Public Const EDITOR_RECIPE As Byte = 9
 
     ' Target type constants
     Public Const TARGET_TYPE_NONE As Byte = 0

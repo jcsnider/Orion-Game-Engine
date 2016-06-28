@@ -377,6 +377,14 @@ Public Class frmMenu
         End If
     End Sub
 
+    Private Sub btnLogin_MouseEnter(sender As Object, e As EventArgs) Handles btnLogin.MouseEnter
+        btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
+    End Sub
+
+    Private Sub btnLogin_MouseLeave(sender As Object, e As EventArgs) Handles btnLogin.MouseLeave
+        btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+    End Sub
+
     Private Sub btnCreateAccount_Click(sender As Object, e As EventArgs) Handles btnCreateAccount.Click
         Dim Name As String
         Dim Password As String
@@ -397,8 +405,24 @@ Public Class frmMenu
         End If
     End Sub
 
+    Private Sub btnCreateAccount_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseEnter
+        btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
+    End Sub
+
+    Private Sub btnCreateAccount_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseLeave
+        btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+    End Sub
+
     Private Sub btnCreateCharacter_Click(sender As Object, e As EventArgs) Handles btnCreateCharacter.Click
         MenuState(MENU_STATE_ADDCHAR)
+    End Sub
+
+    Private Sub btnCreateCharacter_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseEnter
+        btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
+    End Sub
+
+    Private Sub btnCreateCharacter_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseLeave
+        btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
     Private Sub btnSaveIP_Click(sender As Object, e As EventArgs) Handles btnSaveIP.Click
@@ -427,6 +451,7 @@ Public Class frmMenu
     Private Sub btnNewChar_Click(sender As Object, e As EventArgs) Handles btnNewChar.Click
         pnlCharCreateVisible = True
         pnlCharSelectVisible = False
+        DrawChar = True
     End Sub
 
     Private Sub btnUseChar_Click(sender As Object, e As EventArgs) Handles btnUseChar.Click
@@ -438,6 +463,20 @@ Public Class frmMenu
         buffer.WriteLong(ClientPackets.CUseChar)
         buffer.WriteLong(SelectedChar)
         SendData(buffer.ToArray)
+
+        buffer = Nothing
+    End Sub
+
+    Private Sub btnDelChar_Click(sender As Object, e As EventArgs) Handles btnDelChar.Click
+        Dim buffer As ByteBuffer
+
+        Dim result1 As DialogResult = MessageBox.Show("Sure you want to delete character " & SelectedChar & "?", "You sure?", MessageBoxButtons.YesNo)
+        If result1 = DialogResult.Yes Then
+            buffer = New ByteBuffer
+            buffer.WriteLong(ClientPackets.CDelChar)
+            buffer.WriteLong(SelectedChar)
+            SendData(buffer.ToArray)
+        End If
 
         buffer = Nothing
     End Sub

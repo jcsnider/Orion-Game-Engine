@@ -137,9 +137,10 @@ Partial Class frmMenu
         '
         Me.chkSavePass.AutoSize = True
         Me.chkSavePass.BackColor = System.Drawing.Color.Transparent
+        Me.chkSavePass.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkSavePass.Location = New System.Drawing.Point(110, 128)
         Me.chkSavePass.Name = "chkSavePass"
-        Me.chkSavePass.Size = New System.Drawing.Size(106, 17)
+        Me.chkSavePass.Size = New System.Drawing.Size(108, 19)
         Me.chkSavePass.TabIndex = 25
         Me.chkSavePass.Text = "Save Password?"
         Me.chkSavePass.UseVisualStyleBackColor = False
@@ -155,9 +156,10 @@ Partial Class frmMenu
         'Label7
         '
         Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(107, 101)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(56, 13)
+        Me.Label7.Size = New System.Drawing.Size(59, 15)
         Me.Label7.TabIndex = 23
         Me.Label7.Text = "Password:"
         '
@@ -171,19 +173,20 @@ Partial Class frmMenu
         'Label17
         '
         Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(107, 66)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(38, 13)
+        Me.Label17.Size = New System.Drawing.Size(40, 15)
         Me.Label17.TabIndex = 16
         Me.Label17.Text = "Name:"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(170, 12)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(86, 33)
+        Me.Label18.Size = New System.Drawing.Size(90, 31)
         Me.Label18.TabIndex = 15
         Me.Label18.Text = "Login"
         '
@@ -232,9 +235,10 @@ Partial Class frmMenu
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(70, 128)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(93, 13)
+        Me.Label4.Size = New System.Drawing.Size(98, 15)
         Me.Label4.TabIndex = 20
         Me.Label4.Text = "Retype Password:"
         '
@@ -249,9 +253,10 @@ Partial Class frmMenu
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(107, 100)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 13)
+        Me.Label3.Size = New System.Drawing.Size(59, 15)
         Me.Label3.TabIndex = 18
         Me.Label3.Text = "Password:"
         '
@@ -265,19 +270,20 @@ Partial Class frmMenu
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(107, 70)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.Size = New System.Drawing.Size(62, 15)
         Me.Label2.TabIndex = 16
         Me.Label2.Text = "Username:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(104, 17)
+        Me.Label1.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(122, 12)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(186, 33)
+        Me.Label1.Size = New System.Drawing.Size(168, 31)
         Me.Label1.TabIndex = 15
         Me.Label1.Text = "New Account"
         '
@@ -298,8 +304,8 @@ Partial Class frmMenu
         'lblCreditsTop
         '
         Me.lblCreditsTop.BackColor = System.Drawing.Color.Transparent
-        Me.lblCreditsTop.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCreditsTop.Location = New System.Drawing.Point(86, 0)
+        Me.lblCreditsTop.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCreditsTop.Location = New System.Drawing.Point(78, 6)
         Me.lblCreditsTop.Name = "lblCreditsTop"
         Me.lblCreditsTop.Size = New System.Drawing.Size(247, 33)
         Me.lblCreditsTop.TabIndex = 15
@@ -389,9 +395,10 @@ Partial Class frmMenu
         'rdoFemale
         '
         Me.rdoFemale.AutoSize = True
+        Me.rdoFemale.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rdoFemale.Location = New System.Drawing.Point(241, 116)
         Me.rdoFemale.Name = "rdoFemale"
-        Me.rdoFemale.Size = New System.Drawing.Size(59, 17)
+        Me.rdoFemale.Size = New System.Drawing.Size(63, 19)
         Me.rdoFemale.TabIndex = 38
         Me.rdoFemale.TabStop = True
         Me.rdoFemale.Text = "Female"
@@ -400,9 +407,10 @@ Partial Class frmMenu
         'rdoMale
         '
         Me.rdoMale.AutoSize = True
+        Me.rdoMale.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rdoMale.Location = New System.Drawing.Point(175, 116)
         Me.rdoMale.Name = "rdoMale"
-        Me.rdoMale.Size = New System.Drawing.Size(48, 17)
+        Me.rdoMale.Size = New System.Drawing.Size(51, 19)
         Me.rdoMale.TabIndex = 37
         Me.rdoMale.TabStop = True
         Me.rdoMale.Text = "Male"
@@ -420,18 +428,20 @@ Partial Class frmMenu
         'Label9
         '
         Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(106, 118)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(45, 13)
+        Me.Label9.Size = New System.Drawing.Size(47, 15)
         Me.Label9.TabIndex = 34
         Me.Label9.Text = "Gender:"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(106, 90)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(35, 13)
+        Me.Label10.Size = New System.Drawing.Size(37, 15)
         Me.Label10.TabIndex = 33
         Me.Label10.Text = "Class:"
         '
@@ -445,21 +455,22 @@ Partial Class frmMenu
         'Label11
         '
         Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.White
         Me.Label11.Location = New System.Drawing.Point(106, 56)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 13)
+        Me.Label11.Size = New System.Drawing.Size(40, 15)
         Me.Label11.TabIndex = 31
         Me.Label11.Text = "Name:"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(90, 5)
+        Me.Label12.Location = New System.Drawing.Point(90, 8)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(238, 33)
+        Me.Label12.Size = New System.Drawing.Size(207, 31)
         Me.Label12.TabIndex = 30
         Me.Label12.Text = "Create Character"
         '
@@ -467,11 +478,11 @@ Partial Class frmMenu
         '
         Me.lbl.AutoSize = True
         Me.lbl.BackColor = System.Drawing.Color.Transparent
-        Me.lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl.Font = New System.Drawing.Font("Modern No. 20", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl.ForeColor = System.Drawing.Color.White
         Me.lbl.Location = New System.Drawing.Point(482, 9)
         Me.lbl.Name = "lbl"
-        Me.lbl.Size = New System.Drawing.Size(105, 16)
+        Me.lbl.Size = New System.Drawing.Size(109, 18)
         Me.lbl.TabIndex = 44
         Me.lbl.Text = "Server Status:"
         '
@@ -479,11 +490,11 @@ Partial Class frmMenu
         '
         Me.lblServerStatus.AutoSize = True
         Me.lblServerStatus.BackColor = System.Drawing.Color.Transparent
-        Me.lblServerStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblServerStatus.Font = New System.Drawing.Font("Modern No. 20", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblServerStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblServerStatus.Location = New System.Drawing.Point(593, 9)
+        Me.lblServerStatus.Location = New System.Drawing.Point(589, 9)
         Me.lblServerStatus.Name = "lblServerStatus"
-        Me.lblServerStatus.Size = New System.Drawing.Size(52, 16)
+        Me.lblServerStatus.Size = New System.Drawing.Size(62, 18)
         Me.lblServerStatus.TabIndex = 45
         Me.lblServerStatus.Text = "Offline"
         '
@@ -509,16 +520,17 @@ Partial Class frmMenu
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(112, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(175, 33)
+        Me.Label5.Size = New System.Drawing.Size(156, 31)
         Me.Label5.TabIndex = 36
         Me.Label5.Text = "Latest News"
         '
         'lblNews
         '
         Me.lblNews.BackColor = System.Drawing.Color.Transparent
+        Me.lblNews.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNews.Location = New System.Drawing.Point(17, 55)
         Me.lblNews.Name = "lblNews"
         Me.lblNews.Size = New System.Drawing.Size(366, 121)
@@ -570,15 +582,16 @@ Partial Class frmMenu
         'Label14
         '
         Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(84, 74)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(29, 13)
+        Me.Label14.Size = New System.Drawing.Size(33, 15)
         Me.Label14.TabIndex = 27
         Me.Label14.Text = "Port:"
         '
         'txtIP
         '
-        Me.txtIP.Location = New System.Drawing.Point(157, 36)
+        Me.txtIP.Location = New System.Drawing.Point(157, 39)
         Me.txtIP.Name = "txtIP"
         Me.txtIP.Size = New System.Drawing.Size(192, 20)
         Me.txtIP.TabIndex = 26
@@ -586,19 +599,20 @@ Partial Class frmMenu
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(84, 39)
+        Me.Label15.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(84, 42)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(50, 13)
+        Me.Label15.Size = New System.Drawing.Size(57, 15)
         Me.Label15.TabIndex = 25
         Me.Label15.Text = "IP Adres:"
         '
         'Label8
         '
         Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(86, 0)
+        Me.Label8.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(86, 4)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(247, 33)
+        Me.Label8.Size = New System.Drawing.Size(247, 38)
         Me.Label8.TabIndex = 15
         Me.Label8.Text = "IPConfig"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -779,8 +793,8 @@ Partial Class frmMenu
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(46, 0)
+        Me.Label6.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(45, 12)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(312, 33)
         Me.Label6.TabIndex = 15
@@ -823,6 +837,7 @@ Partial Class frmMenu
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

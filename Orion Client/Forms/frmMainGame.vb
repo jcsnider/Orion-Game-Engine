@@ -453,4 +453,50 @@ Public Class frmMainGame
 
 #End Region
 
+#Region "Crafting"
+    Private Sub lstRecipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRecipe.SelectedIndexChanged
+        If lstRecipe.SelectedIndex + 1 > 0 Then
+            LoadRecipe(lstRecipe.Text)
+        End If
+    End Sub
+
+    Private Sub chkKnownOnly_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnownOnly.CheckedChanged
+        CraftingInit()
+    End Sub
+
+    Private Sub btnCraft_Click(sender As Object, e As EventArgs) Handles btnCraft.Click
+        If lstRecipe.SelectedIndex + 1 > 0 Then
+            SendCraftIt(lstRecipe.Text, nudCraftAmount.Value)
+            tmrCraft.Enabled = True
+
+            btnCraft.Enabled = False
+            btnCraftStop.Enabled = False
+            btnCraftStop.Enabled = False
+            nudCraftAmount.Enabled = False
+            lstRecipe.Enabled = False
+            chkKnownOnly.Enabled = False
+        End If
+    End Sub
+
+    Private Sub nudCraftAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudCraftAmount.ValueChanged
+
+    End Sub
+
+    Private Sub tmrCraft_Tick(sender As Object, e As EventArgs) Handles tmrCraft.Tick
+        pgbCraftProgress.Value = pgbCraftProgress.Value + (100 / Recipe(lstRecipe.SelectedIndex + 1).CreateTime)
+
+        If pgbCraftProgress.Value >= 100 Then
+            'pgbCraftProgress.Value = 0
+            tmrCraft.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub btnCraftClose_Click(sender As Object, e As EventArgs) Handles btnCraftClose.Click
+        InCraft = False
+        SendCloseCraft()
+        pnlCraft.Visible = False
+    End Sub
+
+#End Region
 End Class

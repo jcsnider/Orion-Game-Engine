@@ -106,10 +106,13 @@ Partial Class frmEditor_Item
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.chkStackable = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.chkStackable = New System.Windows.Forms.CheckBox()
+        Me.fraRecipe = New System.Windows.Forms.GroupBox()
+        Me.scrlRecipe = New System.Windows.Forms.HScrollBar()
+        Me.lblRecipename = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
@@ -121,6 +124,7 @@ Partial Class frmEditor_Item
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.fraRecipe.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -145,7 +149,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture", "Recipe"})
         Me.cmbType.Location = New System.Drawing.Point(50, 46)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
@@ -725,9 +729,9 @@ Partial Class frmEditor_Item
         Me.fraSpell.Controls.Add(Me.scrlSpell)
         Me.fraSpell.Controls.Add(Me.lblSpell)
         Me.fraSpell.Controls.Add(Me.lblSpellName)
-        Me.fraSpell.Location = New System.Drawing.Point(427, 286)
+        Me.fraSpell.Location = New System.Drawing.Point(227, 134)
         Me.fraSpell.Name = "fraSpell"
-        Me.fraSpell.Size = New System.Drawing.Size(232, 84)
+        Me.fraSpell.Size = New System.Drawing.Size(198, 70)
         Me.fraSpell.TabIndex = 8
         Me.fraSpell.TabStop = False
         Me.fraSpell.Text = "Spell Data"
@@ -737,7 +741,7 @@ Partial Class frmEditor_Item
         '
         Me.scrlSpell.Location = New System.Drawing.Point(79, 46)
         Me.scrlSpell.Name = "scrlSpell"
-        Me.scrlSpell.Size = New System.Drawing.Size(136, 13)
+        Me.scrlSpell.Size = New System.Drawing.Size(93, 13)
         Me.scrlSpell.TabIndex = 2
         '
         'lblSpell
@@ -770,18 +774,18 @@ Partial Class frmEditor_Item
         'scrlVitalMod
         '
         Me.scrlVitalMod.LargeChange = 1
-        Me.scrlVitalMod.Location = New System.Drawing.Point(13, 46)
+        Me.scrlVitalMod.Location = New System.Drawing.Point(110, 18)
         Me.scrlVitalMod.Name = "scrlVitalMod"
-        Me.scrlVitalMod.Size = New System.Drawing.Size(202, 17)
+        Me.scrlVitalMod.Size = New System.Drawing.Size(102, 17)
         Me.scrlVitalMod.TabIndex = 2
         '
         'fraVitals
         '
         Me.fraVitals.Controls.Add(Me.scrlVitalMod)
         Me.fraVitals.Controls.Add(Me.lblVitalMod)
-        Me.fraVitals.Location = New System.Drawing.Point(430, 286)
+        Me.fraVitals.Location = New System.Drawing.Point(6, 130)
         Me.fraVitals.Name = "fraVitals"
-        Me.fraVitals.Size = New System.Drawing.Size(232, 84)
+        Me.fraVitals.Size = New System.Drawing.Size(215, 45)
         Me.fraVitals.TabIndex = 9
         Me.fraVitals.TabStop = False
         Me.fraVitals.Text = "Vitals"
@@ -903,7 +907,10 @@ Partial Class frmEditor_Item
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.fraRecipe)
         Me.TabPage1.Controls.Add(Me.chkStackable)
+        Me.TabPage1.Controls.Add(Me.fraSpell)
+        Me.TabPage1.Controls.Add(Me.fraVitals)
         Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Controls.Add(Me.Label2)
@@ -926,6 +933,16 @@ Partial Class frmEditor_Item
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Info"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'chkStackable
+        '
+        Me.chkStackable.AutoSize = True
+        Me.chkStackable.Location = New System.Drawing.Point(302, 111)
+        Me.chkStackable.Name = "chkStackable"
+        Me.chkStackable.Size = New System.Drawing.Size(74, 17)
+        Me.chkStackable.TabIndex = 67
+        Me.chkStackable.Text = "Stackable"
+        Me.chkStackable.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -974,15 +991,33 @@ Partial Class frmEditor_Item
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
         '
-        'chkStackable
+        'fraRecipe
         '
-        Me.chkStackable.AutoSize = True
-        Me.chkStackable.Location = New System.Drawing.Point(302, 111)
-        Me.chkStackable.Name = "chkStackable"
-        Me.chkStackable.Size = New System.Drawing.Size(74, 17)
-        Me.chkStackable.TabIndex = 67
-        Me.chkStackable.Text = "Stackable"
-        Me.chkStackable.UseVisualStyleBackColor = True
+        Me.fraRecipe.Controls.Add(Me.scrlRecipe)
+        Me.fraRecipe.Controls.Add(Me.lblRecipename)
+        Me.fraRecipe.Location = New System.Drawing.Point(6, 180)
+        Me.fraRecipe.Name = "fraRecipe"
+        Me.fraRecipe.Size = New System.Drawing.Size(215, 56)
+        Me.fraRecipe.TabIndex = 69
+        Me.fraRecipe.TabStop = False
+        Me.fraRecipe.Text = "Recipe"
+        Me.fraRecipe.Visible = False
+        '
+        'scrlRecipe
+        '
+        Me.scrlRecipe.Location = New System.Drawing.Point(3, 29)
+        Me.scrlRecipe.Name = "scrlRecipe"
+        Me.scrlRecipe.Size = New System.Drawing.Size(209, 15)
+        Me.scrlRecipe.TabIndex = 4
+        '
+        'lblRecipename
+        '
+        Me.lblRecipename.AutoSize = True
+        Me.lblRecipename.Location = New System.Drawing.Point(6, 16)
+        Me.lblRecipename.Name = "lblRecipename"
+        Me.lblRecipename.Size = New System.Drawing.Size(67, 13)
+        Me.lblRecipename.TabIndex = 1
+        Me.lblRecipename.Text = "Name: None"
         '
         'frmEditor_Item
         '
@@ -991,8 +1026,6 @@ Partial Class frmEditor_Item
         Me.ClientSize = New System.Drawing.Size(671, 551)
         Me.ControlBox = False
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.fraVitals)
-        Me.Controls.Add(Me.fraSpell)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
@@ -1019,6 +1052,8 @@ Partial Class frmEditor_Item
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.fraRecipe.ResumeLayout(False)
+        Me.fraRecipe.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1110,4 +1145,7 @@ Partial Class frmEditor_Item
     Friend WithEvents Label7 As Windows.Forms.Label
     Friend WithEvents chkRandomize As Windows.Forms.CheckBox
     Friend WithEvents chkStackable As Windows.Forms.CheckBox
+    Friend WithEvents fraRecipe As Windows.Forms.GroupBox
+    Friend WithEvents scrlRecipe As Windows.Forms.HScrollBar
+    Friend WithEvents lblRecipename As Windows.Forms.Label
 End Class

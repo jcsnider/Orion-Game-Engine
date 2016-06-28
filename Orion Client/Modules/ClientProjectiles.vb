@@ -1,5 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports SFML.Graphics
 
 Public Module ClientProjectiles

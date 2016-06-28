@@ -1,5 +1,4 @@
 ﻿Imports System.Drawing
-Imports SFML.Graphics
 
 Public Module ClientHotBar
     Public SelHotbarSlot As Long

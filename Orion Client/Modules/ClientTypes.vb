@@ -127,6 +127,8 @@
 
         'gather skills
         Dim GatherSkills() As ResourceSkillsRec
+
+        Dim RecipeLearned() As Byte
     End Structure
 
     Public Structure TileDataRec

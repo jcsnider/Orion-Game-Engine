@@ -127,6 +127,13 @@
         SUpdateProjectile
         SMapProjectile
 
+        'craft
+        SUpdateRecipe
+        SRecipeEditor
+        SSendPlayerRecipe
+        SOpenCraft
+        SUpdateCraft
+
         ' Make sure SMSG_COUNT is below everything else
         SMSG_COUNT
     End Enum
@@ -138,6 +145,7 @@
         CLogin
         CAddChar
         CUseChar
+        CDelChar
         CSayMsg
         CEmoteMsg
         CBroadcastMsg
@@ -250,6 +258,13 @@
         CSaveProjectile
         CRequestProjectiles
         CClearProjectile
+
+        'craft
+        CRequestRecipes
+        CRequestEditRecipes
+        CSaveRecipe
+        CCloseCraft
+        CStartCraft
 
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT

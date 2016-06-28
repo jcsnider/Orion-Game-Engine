@@ -484,4 +484,11 @@ Public Class frmEditor_Map
         Map.MapTintA = scrlMapAlpha.Value
         lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
     End Sub
+
+    Private Sub cmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
+        If cmbAutoTile.SelectedIndex = 0 Then
+            EditorTileWidth = 1
+            EditorTileHeight = 1
+        End If
+    End Sub
 End Class

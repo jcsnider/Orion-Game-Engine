@@ -1776,6 +1776,11 @@ Module ServerDatabase
             Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
         Next
 
+        ReDim Player(Index).Character(CharNum).RecipeLearned(MAX_RECIPE)
+        For i = 1 To MAX_RECIPE
+            Player(Index).Character(CharNum).RecipeLearned(i) = 0
+        Next
+
     End Sub
 
     Sub LoadCharacter(ByVal Index As Long, ByVal CharNum As Long)
@@ -1871,6 +1876,11 @@ Module ServerDatabase
             If Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 0 Then Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
         Next
 
+        ReDim Player(Index).Character(CharNum).RecipeLearned(MAX_RECIPE)
+        For i = 1 To MAX_RECIPE
+            FileGetObject(F, Player(Index).Character(CharNum).RecipeLearned(i))
+        Next
+
         FileClose(F)
     End Sub
 
@@ -1959,6 +1969,10 @@ Module ServerDatabase
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillLevel)
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp)
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp)
+        Next
+
+        For i = 1 To MAX_RECIPE
+            FilePutObject(F, Player(Index).Character(CharNum).RecipeLearned(i))
         Next
 
         FileClose(F)

@@ -143,6 +143,8 @@
 
         CheckDir(Application.StartupPath & "\data\projectiles")
 
+        CheckDir(Application.StartupPath & "\data\recipes")
+
         ' set quote character
         vbQuote = Chr(34) ' "
 
@@ -255,6 +257,9 @@
         ClearMapProjectiles()
         SetStatus("Clearing projectiles...")
         ClearProjectiles()
+
+        'recipes
+        ClearRecipes()
     End Sub
 
     Private Sub LoadGameData()
@@ -293,6 +298,9 @@
         'projectiles
         SetStatus("Loading projectiles...")
         LoadProjectiles()
+
+        'recipes
+        LoadRecipes()
     End Sub
 
     Sub TextAdd(ByVal Msg As String)

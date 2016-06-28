@@ -60,6 +60,12 @@ Public Class frmEditor_Item
             fraFurniture.Visible = False
         End If
 
+        If cmbType.SelectedIndex = ITEM_TYPE_RECIPES Then
+            fraRecipe.Visible = True
+        Else
+            fraRecipe.Visible = False
+        End If
+
         Item(EditorIndex).Type = cmbType.SelectedIndex
     End Sub
 
@@ -381,5 +387,15 @@ Public Class frmEditor_Item
         Else
             Item(EditorIndex).Stackable = 0
         End If
+    End Sub
+
+    Private Sub scrlRecipe_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlRecipe.Scroll
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+        If scrlRecipe.Value = 0 Then
+            lblRecipename.Text = "Recipe: 0 None"
+        Else
+            lblRecipename.Text = "Recipe: " & scrlRecipe.Value & " " & Trim$(Recipe(scrlRecipe.Value).Name)
+        End If
+        Item(EditorIndex).Data1 = scrlRecipe.Value
     End Sub
 End Class

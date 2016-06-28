@@ -1250,6 +1250,10 @@ Module ServerTCP
             Buffer.WriteLong(GetPlayerGatherSkillMaxExp(Index, i))
         Next
 
+        For i = 1 To MAX_RECIPE
+            Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).RecipeLearned(i))
+        Next
+
         PlayerData = Buffer.ToArray()
 
         Buffer = Nothing

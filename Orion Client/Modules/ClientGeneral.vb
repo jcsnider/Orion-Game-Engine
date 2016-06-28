@@ -30,6 +30,8 @@ Module ClientGeneral
             ReDim Player(i).Hotbar(MAX_HOTBAR)
 
             ReDim Player(i).GatherSkills(ResourceSkills.Skill_Count - 1)
+
+            ReDim Player(i).RecipeLearned(MAX_RECIPE)
         Next
 
         ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)
@@ -135,6 +137,9 @@ Module ClientGeneral
         ReDim Projectiles(MAX_PROJECTILES)
 
         ClearItems()
+
+        'craft
+        ClearRecipes()
 
         SetStatus("Loading...")
         GettingMap = True

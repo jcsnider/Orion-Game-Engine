@@ -100,6 +100,8 @@
 
         'gather skills
         Dim GatherSkills() As ResourceSkillsRec
+
+        Dim RecipeLearned() As Byte
     End Structure
 
     Public Structure TempPlayerRec
@@ -141,6 +143,15 @@
 
         'multi char
         Dim CurChar As Byte
+
+        'craft shit
+        Dim IsCrafting As Boolean
+        Dim CraftIt As Byte
+        Dim CraftTimer As Long
+        Dim CraftTimeNeeded As Long
+
+        Dim CraftRecipe As Long
+        Dim CraftAmount As Long
     End Structure
 
     Public Structure TileDataRec

@@ -114,19 +114,19 @@
     'Action Panel Coordinates
     Public ActionPanelX As Long = 942
     Public ActionPanelY As Long = 755
+
     Public InvBtnX As Long = 16
     Public InvBtnY As Long = 16
-    Public SkillBtnX As Long = 64
+    Public SkillBtnX As Long = 80
     Public SkillBtnY As Long = 16
-    Public CharBtnX As Long = 112
+    Public CharBtnX As Long = 144
     Public CharBtnY As Long = 16
-    Public QuestBtnX As Long = 160
-    Public QuestBtnY As Long = 16
-    Public TradeBtnX As Long = 16
-    Public TradeBtnY As Long = 64
-    Public OptBtnX As Long = 112
+
+    Public QuestBtnX As Long = 25
+    Public QuestBtnY As Long = 64
+    Public OptBtnX As Long = 88
     Public OptBtnY As Long = 64
-    Public ExitBtnX As Long = 160
+    Public ExitBtnX As Long = 144
     Public ExitBtnY As Long = 64
 
     'Character window Coordinates
@@ -268,6 +268,8 @@
     Public RClickX As Long
     Public RClickY As Long
 
+    Public DrawChar As Boolean
+
 
     Sub UpdateUI()
         If ReloadFrmMain = True Then
@@ -283,14 +285,19 @@
             frmMenu.pnlRegister.Visible = pnlRegisterVisible
         End If
 
+        If DrawChar = True Then
+            frmMenu.DrawCharacter()
+            DrawChar = False
+        End If
+
         If pnlCharCreateVisible <> frmMenu.pnlNewChar.Visible Then
             frmMenu.pnlNewChar.Visible = pnlCharCreateVisible
-            frmMenu.DrawCharacter()
+            DrawChar = True
         End If
 
         If lblnextcharleft <> frmMenu.lblNextChar.Left Then
             frmMenu.lblNextChar.Left = lblnextcharleft
-            frmMenu.DrawCharacter()
+
         End If
 
         If Not cmbclass Is Nothing Then
@@ -343,6 +350,17 @@
         If InitItemEditor = True Then
             ItemEditorPreInit()
             InitItemEditor = False
+        End If
+
+        'craft
+        If InitRecipeEditor = True Then
+            RecipeEditorPreInit()
+            InitRecipeEditor = False
+        End If
+
+        If InitCrafting = True Then
+            CraftingInit()
+            InitCrafting = False
         End If
 
         If InitResourceEditor = True Then

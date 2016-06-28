@@ -32,13 +32,16 @@ Module ClientGameLogic
                 FrameTime = Tick
                 frmmaingamevisible = True
 
-                If GetTickCount() - starttime >= 1000 Then
+                'Calculate FPS
+                If starttime < GetTickCount() Then
                     FPS = tmpfps
+
+                    'Code to show FPS goes here
+
                     tmpfps = 0
-                    starttime = GetTickCount()
-                Else
-                    tmpfps = tmpfps + 1
+                    starttime = GetTickCount() + 1000
                 End If
+                tmpfps = tmpfps + 1
 
                 ' Update inv animation
                 If NumItems > 0 Then

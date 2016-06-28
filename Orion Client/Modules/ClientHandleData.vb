@@ -181,6 +181,13 @@
         Packets.Add(ServerPackets.SProjectileEditor, AddressOf HandleProjectileEditor)
         Packets.Add(ServerPackets.SUpdateProjectile, AddressOf HandleUpdateProjectile)
         Packets.Add(ServerPackets.SMapProjectile, AddressOf HandleMapProjectile)
+
+        'craft
+        Packets.Add(ServerPackets.SUpdateRecipe, AddressOf Packet_UpdateRecipe)
+        Packets.Add(ServerPackets.SRecipeEditor, AddressOf Packet_RecipeEditor)
+        Packets.Add(ServerPackets.SSendPlayerRecipe, AddressOf Packet_SendPlayerRecipe)
+        Packets.Add(ServerPackets.SOpenCraft, AddressOf Packet_OpenCraft)
+        Packets.Add(ServerPackets.SUpdateCraft, AddressOf Packet_UpdateCraft)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -291,6 +298,9 @@
 
         pnlCharSelectVisible = True
 
+        frmMenu.DrawCharacter()
+        frmMenu.DrawCharacterSelect()
+
     End Sub
 
     Sub Packet_NewCharClasses(ByVal data() As Byte)
@@ -366,6 +376,8 @@
         For i = 1 To Max_Classes
             cmbclass(i) = Classes(i).Name
         Next
+
+        frmMenu.DrawCharacter()
 
         newCharSprite = 1
     End Sub
@@ -606,6 +618,10 @@
             Player(i).GatherSkills(X).SkillLevel = Buffer.ReadLong
             Player(i).GatherSkills(X).SkillCurExp = Buffer.ReadLong
             Player(i).GatherSkills(X).SkillNextLvlExp = Buffer.ReadLong
+        Next
+
+        For X = 1 To MAX_RECIPE
+            Player(i).RecipeLearned(X) = Buffer.ReadLong
         Next
 
         ' Check if the player is the client player

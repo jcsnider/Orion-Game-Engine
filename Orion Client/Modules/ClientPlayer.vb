@@ -147,6 +147,12 @@
             Exit Function
         End If
 
+        ' craft
+        If InCraft Then
+            CanMove = False
+            Exit Function
+        End If
+
         ' make sure they're not in a shop
         If InShop > 0 Then
             CanMove = False

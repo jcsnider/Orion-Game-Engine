@@ -2334,27 +2334,27 @@
                         If .chkVariable = 1 Then
                             Select Case .VariableCompare
                                 Case 0
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) <> .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) <> .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 1
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) < .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) < .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 2
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) > .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) > .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 3
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) <= .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) <= .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 4
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) >= .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) >= .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                                 Case 5
-                                    If Player(Index).Character(TempPlayer(i).CurChar).Variables(.VariableIndex) = .VariableCondition Then
+                                    If Player(Index).Character(TempPlayer(Index).CurChar).Variables(.VariableIndex) = .VariableCondition Then
                                         spawncurrentevent = False
                                     End If
                             End Select
@@ -2363,11 +2363,11 @@
                         'we are assuming the event will spawn, and are looking for ways to stop it
                         If .chkSwitch = 1 Then
                             If .SwitchCompare = 1 Then 'we want true
-                                If Player(Index).Character(TempPlayer(i).CurChar).Switches(.SwitchIndex) = 0 Then 'it is false, so we stop the spawn
+                                If Player(Index).Character(TempPlayer(Index).CurChar).Switches(.SwitchIndex) = 0 Then 'it is false, so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             Else
-                                If Player(Index).Character(TempPlayer(i).CurChar).Switches(.SwitchIndex) = 1 Then 'we want false and it is true so we stop the spawn
+                                If Player(Index).Character(TempPlayer(Index).CurChar).Switches(.SwitchIndex) = 1 Then 'we want false and it is true so we stop the spawn
                                     spawncurrentevent = False
                                 End If
                             End If

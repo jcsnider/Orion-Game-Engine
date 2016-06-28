@@ -65,6 +65,7 @@ Partial Class frmAdmin
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -441,6 +442,7 @@ Partial Class frmAdmin
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnRecipeEditor)
         Me.TabPage2.Controls.Add(Me.btnProjectiles)
         Me.TabPage2.Controls.Add(Me.btnQuest)
         Me.TabPage2.Controls.Add(Me.btnhouseEditor)
@@ -489,6 +491,15 @@ Partial Class frmAdmin
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Misc"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'btnRecipeEditor
+        '
+        Me.btnRecipeEditor.Location = New System.Drawing.Point(6, 161)
+        Me.btnRecipeEditor.Name = "btnRecipeEditor"
+        Me.btnRecipeEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnRecipeEditor.TabIndex = 39
+        Me.btnRecipeEditor.Text = "Recipe Editor"
+        Me.btnRecipeEditor.UseVisualStyleBackColor = True
         '
         'frmAdmin
         '
@@ -553,4 +564,5 @@ Partial Class frmAdmin
     Friend WithEvents TabPage3 As Windows.Forms.TabPage
     Friend WithEvents TabPage4 As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
+    Friend WithEvents btnRecipeEditor As Windows.Forms.Button
 End Class

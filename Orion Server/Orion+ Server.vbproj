@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Modules\ServerCombat.vb" />
     <Compile Include="Modules\ServerConstants.vb" />
+    <Compile Include="Modules\ServerCrafting.vb" />
     <Compile Include="Modules\ServerDatabase.vb" />
     <Compile Include="Modules\ServerEnumerations.vb" />
     <Compile Include="Modules\ServerEventLogic.vb" />

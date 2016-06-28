@@ -223,6 +223,8 @@ Module ClientText
                                     DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
                                 Case TILE_TYPE_HOUSE
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
+                                Case TILE_TYPE_CRAFT
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
                             End Select
                         End With
                     End If

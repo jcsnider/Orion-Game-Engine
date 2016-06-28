@@ -11,6 +11,7 @@
         Packets.Add(ClientPackets.CLogin, AddressOf Packet_Login)
         Packets.Add(ClientPackets.CAddChar, AddressOf Packet_AddChar)
         Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
+        Packets.Add(ClientPackets.CDelChar, AddressOf Packet_DeleteChar)
         Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
         Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
         Packets.Add(ClientPackets.CBroadcastMsg, AddressOf Packet_BroadCastMsg)
@@ -124,6 +125,13 @@
         Packets.Add(ClientPackets.CSaveProjectile, AddressOf HandleSaveProjectile)
         Packets.Add(ClientPackets.CRequestProjectiles, AddressOf HandleRequestProjectiles)
         Packets.Add(ClientPackets.CClearProjectile, AddressOf HandleClearProjectile)
+
+        'craft
+        Packets.Add(ClientPackets.CRequestRecipes, AddressOf Packet_RequestRecipes)
+        Packets.Add(ClientPackets.CRequestEditRecipes, AddressOf Packet_RequestEditRecipes)
+        Packets.Add(ClientPackets.CSaveRecipe, AddressOf Packet_SaveRecipe)
+        Packets.Add(ClientPackets.CCloseCraft, AddressOf Packet_CloseCraft)
+        Packets.Add(ClientPackets.CStartCraft, AddressOf Packet_StartCraft)
 
     End Sub
 
@@ -997,6 +1005,11 @@
                     End If
                 Case ITEM_TYPE_FURNITURE
                     PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.")
+                Case ITEM_TYPE_RECIPES
+                    PlayerMsg(Index, "Lets learn this recipe :)")
+                    ' Get the recipe num
+                    n = Item(GetPlayerInvItemNum(Index, invnum)).Data1
+                    LearnRecipe(Index, n, invnum)
             End Select
 
         End If
@@ -1662,6 +1675,56 @@
 
 
         NeedToUpDatePlayerList = True
+    End Sub
+
+    Private Sub Packet_DeleteChar(ByVal index As Long, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim slot As Byte
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadLong <> ClientPackets.CDelChar Then Exit Sub
+
+        If Not IsPlaying(index) Then
+            If IsLoggedIn(index) Then
+
+                slot = Buffer.ReadLong
+
+                ' Check if character data has been created
+                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
+                    ' we have a char!
+                    DeleteName(Trim$(Player(index).Character(slot).Name))
+                    ClearCharacter(index, slot)
+                    SaveCharacter(index, slot)
+
+                    Buffer = Nothing
+                    Buffer = New ByteBuffer
+                    Buffer.WriteLong(ServerPackets.SSelChar)
+                    Buffer.WriteLong(MAX_CHARS)
+
+                    For i = 1 To MAX_CHARS
+                        If Player(index).Character(i).Classes <= 0 Then
+                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                            Buffer.WriteLong(Player(index).Character(i).Sprite)
+                            Buffer.WriteLong(Player(index).Character(i).Level)
+                            Buffer.WriteString("")
+                            Buffer.WriteLong(0)
+                        Else
+                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                            Buffer.WriteLong(Player(index).Character(i).Sprite)
+                            Buffer.WriteLong(Player(index).Character(i).Level)
+                            Buffer.WriteString(Trim$(Classes(Player(index).Character(i).Classes).Name))
+                            Buffer.WriteLong(Player(index).Character(i).Sex)
+                        End If
+
+                    Next
+
+                    SendDataTo(index, Buffer.ToArray)
+                End If
+            End If
+        End If
+
     End Sub
 
     Private Sub Packet_NeedMap(ByVal index As Long, ByVal data() As Byte)

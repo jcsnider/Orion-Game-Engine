@@ -370,6 +370,13 @@ Module ClientGameEditors
                         .Data2 = 0
                         .Data3 = 0
                     End If
+                    'craft tile
+                    If frmEditor_Map.optCraft.Checked Then
+                        .Type = TILE_TYPE_CRAFT
+                        .Data1 = 0
+                        .Data2 = 0
+                        .Data3 = 0
+                    End If
                 End With
             ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpdirblock Then
                 If movedMouse Then Exit Sub
