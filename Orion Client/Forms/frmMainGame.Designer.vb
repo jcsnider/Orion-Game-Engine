@@ -61,12 +61,6 @@ Partial Class frmMainGame
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
         Me.pnlCraft = New System.Windows.Forms.Panel()
-        Me.btnCraftClose = New System.Windows.Forms.Button()
-        Me.pgbCraftProgress = New System.Windows.Forms.ProgressBar()
-        Me.btnCraftStop = New System.Windows.Forms.Button()
-        Me.btnCraft = New System.Windows.Forms.Button()
-        Me.nudCraftAmount = New System.Windows.Forms.NumericUpDown()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.lblMaterialAmount5 = New System.Windows.Forms.Label()
@@ -88,10 +82,15 @@ Partial Class frmMainGame
         Me.lblMaterialAmount1 = New System.Windows.Forms.Label()
         Me.lblMaterialName1 = New System.Windows.Forms.Label()
         Me.picMaterial1 = New System.Windows.Forms.PictureBox()
+        Me.btnCraftClose = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.lblProductAmount = New System.Windows.Forms.Label()
         Me.lblProductName = New System.Windows.Forms.Label()
         Me.picProduct = New System.Windows.Forms.PictureBox()
+        Me.pgbCraftProgress = New System.Windows.Forms.ProgressBar()
+        Me.btnCraftStop = New System.Windows.Forms.Button()
+        Me.btnCraft = New System.Windows.Forms.Button()
+        Me.nudCraftAmount = New System.Windows.Forms.NumericUpDown()
         Me.chkKnownOnly = New System.Windows.Forms.CheckBox()
         Me.lblCraftExp = New System.Windows.Forms.Label()
         Me.lblCraftLvl = New System.Windows.Forms.Label()
@@ -104,8 +103,6 @@ Partial Class frmMainGame
         Me.pnlCurrency.SuspendLayout()
         Me.pnlQuestLog.SuspendLayout()
         Me.pnlCraft.SuspendLayout()
-        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         CType(Me.picMaterial5, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,6 +116,7 @@ Partial Class frmMainGame
         CType(Me.picMaterial1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         CType(Me.picProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picscreen
@@ -528,96 +526,37 @@ Partial Class frmMainGame
         'pnlCraft
         '
         Me.pnlCraft.BackColor = System.Drawing.Color.Gray
+        Me.pnlCraft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.pnlCraft.Controls.Add(Me.GroupBox5)
         Me.pnlCraft.Controls.Add(Me.btnCraftClose)
+        Me.pnlCraft.Controls.Add(Me.GroupBox4)
         Me.pnlCraft.Controls.Add(Me.pgbCraftProgress)
         Me.pnlCraft.Controls.Add(Me.btnCraftStop)
         Me.pnlCraft.Controls.Add(Me.btnCraft)
         Me.pnlCraft.Controls.Add(Me.nudCraftAmount)
-        Me.pnlCraft.Controls.Add(Me.GroupBox3)
         Me.pnlCraft.Controls.Add(Me.chkKnownOnly)
         Me.pnlCraft.Controls.Add(Me.lblCraftExp)
         Me.pnlCraft.Controls.Add(Me.lblCraftLvl)
         Me.pnlCraft.Controls.Add(Me.lstRecipe)
-        Me.pnlCraft.ForeColor = System.Drawing.Color.White
-        Me.pnlCraft.Location = New System.Drawing.Point(15, 14)
+        Me.pnlCraft.ForeColor = System.Drawing.Color.Black
+        Me.pnlCraft.Location = New System.Drawing.Point(18, 14)
         Me.pnlCraft.Name = "pnlCraft"
-        Me.pnlCraft.Size = New System.Drawing.Size(748, 497)
+        Me.pnlCraft.Size = New System.Drawing.Size(700, 500)
         Me.pnlCraft.TabIndex = 47
         Me.pnlCraft.Visible = False
         '
-        'btnCraftClose
-        '
-        Me.btnCraftClose.ForeColor = System.Drawing.Color.Black
-        Me.btnCraftClose.Location = New System.Drawing.Point(661, 471)
-        Me.btnCraftClose.Name = "btnCraftClose"
-        Me.btnCraftClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnCraftClose.TabIndex = 9
-        Me.btnCraftClose.Text = "Close"
-        Me.btnCraftClose.UseVisualStyleBackColor = True
-        '
-        'pgbCraftProgress
-        '
-        Me.pgbCraftProgress.ForeColor = System.Drawing.Color.Lime
-        Me.pgbCraftProgress.Location = New System.Drawing.Point(442, 438)
-        Me.pgbCraftProgress.Name = "pgbCraftProgress"
-        Me.pgbCraftProgress.Size = New System.Drawing.Size(213, 20)
-        Me.pgbCraftProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.pgbCraftProgress.TabIndex = 8
-        Me.pgbCraftProgress.Value = 95
-        '
-        'btnCraftStop
-        '
-        Me.btnCraftStop.ForeColor = System.Drawing.Color.Black
-        Me.btnCraftStop.Location = New System.Drawing.Point(661, 438)
-        Me.btnCraftStop.Name = "btnCraftStop"
-        Me.btnCraftStop.Size = New System.Drawing.Size(75, 20)
-        Me.btnCraftStop.TabIndex = 7
-        Me.btnCraftStop.Text = "Stop Craft"
-        Me.btnCraftStop.UseVisualStyleBackColor = True
-        '
-        'btnCraft
-        '
-        Me.btnCraft.ForeColor = System.Drawing.Color.Black
-        Me.btnCraft.Location = New System.Drawing.Point(276, 438)
-        Me.btnCraft.Name = "btnCraft"
-        Me.btnCraft.Size = New System.Drawing.Size(75, 20)
-        Me.btnCraft.TabIndex = 6
-        Me.btnCraft.Text = "Craft"
-        Me.btnCraft.UseVisualStyleBackColor = True
-        '
-        'nudCraftAmount
-        '
-        Me.nudCraftAmount.Location = New System.Drawing.Point(357, 438)
-        Me.nudCraftAmount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudCraftAmount.Name = "nudCraftAmount"
-        Me.nudCraftAmount.Size = New System.Drawing.Size(79, 20)
-        Me.nudCraftAmount.TabIndex = 5
-        Me.nudCraftAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.nudCraftAmount.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
-        Me.nudCraftAmount.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.BackColor = System.Drawing.Color.DarkGray
-        Me.GroupBox3.Controls.Add(Me.GroupBox5)
-        Me.GroupBox3.Controls.Add(Me.GroupBox4)
-        Me.GroupBox3.Location = New System.Drawing.Point(276, 6)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(460, 429)
-        Me.GroupBox3.TabIndex = 4
-        Me.GroupBox3.TabStop = False
-        '
         'GroupBox5
         '
+        Me.GroupBox5.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox5.Controls.Add(Me.GroupBox10)
         Me.GroupBox5.Controls.Add(Me.GroupBox9)
         Me.GroupBox5.Controls.Add(Me.GroupBox8)
         Me.GroupBox5.Controls.Add(Me.GroupBox7)
         Me.GroupBox5.Controls.Add(Me.GroupBox6)
         Me.GroupBox5.ForeColor = System.Drawing.Color.White
-        Me.GroupBox5.Location = New System.Drawing.Point(6, 88)
+        Me.GroupBox5.Location = New System.Drawing.Point(259, 77)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(448, 333)
+        Me.GroupBox5.Size = New System.Drawing.Size(435, 333)
         Me.GroupBox5.TabIndex = 1
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Required Materials"
@@ -631,7 +570,7 @@ Partial Class frmMainGame
         Me.GroupBox10.ForeColor = System.Drawing.Color.White
         Me.GroupBox10.Location = New System.Drawing.Point(7, 266)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox10.Size = New System.Drawing.Size(422, 57)
         Me.GroupBox10.TabIndex = 5
         Me.GroupBox10.TabStop = False
         '
@@ -672,7 +611,7 @@ Partial Class frmMainGame
         Me.GroupBox9.ForeColor = System.Drawing.Color.White
         Me.GroupBox9.Location = New System.Drawing.Point(7, 203)
         Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox9.Size = New System.Drawing.Size(422, 57)
         Me.GroupBox9.TabIndex = 4
         Me.GroupBox9.TabStop = False
         '
@@ -713,7 +652,7 @@ Partial Class frmMainGame
         Me.GroupBox8.ForeColor = System.Drawing.Color.White
         Me.GroupBox8.Location = New System.Drawing.Point(7, 145)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox8.Size = New System.Drawing.Size(422, 57)
         Me.GroupBox8.TabIndex = 3
         Me.GroupBox8.TabStop = False
         '
@@ -754,7 +693,7 @@ Partial Class frmMainGame
         Me.GroupBox7.ForeColor = System.Drawing.Color.White
         Me.GroupBox7.Location = New System.Drawing.Point(7, 82)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox7.Size = New System.Drawing.Size(422, 57)
         Me.GroupBox7.TabIndex = 2
         Me.GroupBox7.TabStop = False
         '
@@ -795,7 +734,7 @@ Partial Class frmMainGame
         Me.GroupBox6.ForeColor = System.Drawing.Color.White
         Me.GroupBox6.Location = New System.Drawing.Point(7, 19)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(428, 57)
+        Me.GroupBox6.Size = New System.Drawing.Size(422, 57)
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         '
@@ -827,6 +766,20 @@ Partial Class frmMainGame
         Me.picMaterial1.TabIndex = 0
         Me.picMaterial1.TabStop = False
         '
+        'btnCraftClose
+        '
+        Me.btnCraftClose.BackgroundImage = CType(resources.GetObject("btnCraftClose.BackgroundImage"), System.Drawing.Image)
+        Me.btnCraftClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCraftClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCraftClose.Font = New System.Drawing.Font("Modern No. 20", 8.249999!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCraftClose.ForeColor = System.Drawing.Color.White
+        Me.btnCraftClose.Location = New System.Drawing.Point(615, 473)
+        Me.btnCraftClose.Name = "btnCraftClose"
+        Me.btnCraftClose.Size = New System.Drawing.Size(75, 24)
+        Me.btnCraftClose.TabIndex = 9
+        Me.btnCraftClose.Text = "Close"
+        Me.btnCraftClose.UseVisualStyleBackColor = True
+        '
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.Transparent
@@ -834,9 +787,9 @@ Partial Class frmMainGame
         Me.GroupBox4.Controls.Add(Me.lblProductName)
         Me.GroupBox4.Controls.Add(Me.picProduct)
         Me.GroupBox4.ForeColor = System.Drawing.Color.White
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 14)
+        Me.GroupBox4.Location = New System.Drawing.Point(259, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(448, 68)
+        Me.GroupBox4.Size = New System.Drawing.Size(435, 68)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Product"
@@ -869,23 +822,72 @@ Partial Class frmMainGame
         Me.picProduct.TabIndex = 0
         Me.picProduct.TabStop = False
         '
+        'pgbCraftProgress
+        '
+        Me.pgbCraftProgress.ForeColor = System.Drawing.Color.Lime
+        Me.pgbCraftProgress.Location = New System.Drawing.Point(410, 418)
+        Me.pgbCraftProgress.Name = "pgbCraftProgress"
+        Me.pgbCraftProgress.Size = New System.Drawing.Size(199, 20)
+        Me.pgbCraftProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.pgbCraftProgress.TabIndex = 8
+        Me.pgbCraftProgress.Value = 95
+        '
+        'btnCraftStop
+        '
+        Me.btnCraftStop.BackgroundImage = CType(resources.GetObject("btnCraftStop.BackgroundImage"), System.Drawing.Image)
+        Me.btnCraftStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCraftStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCraftStop.ForeColor = System.Drawing.Color.White
+        Me.btnCraftStop.Location = New System.Drawing.Point(615, 416)
+        Me.btnCraftStop.Name = "btnCraftStop"
+        Me.btnCraftStop.Size = New System.Drawing.Size(75, 24)
+        Me.btnCraftStop.TabIndex = 7
+        Me.btnCraftStop.Text = "Stop Craft"
+        Me.btnCraftStop.UseVisualStyleBackColor = True
+        '
+        'btnCraft
+        '
+        Me.btnCraft.BackgroundImage = CType(resources.GetObject("btnCraft.BackgroundImage"), System.Drawing.Image)
+        Me.btnCraft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCraft.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCraft.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCraft.ForeColor = System.Drawing.Color.Transparent
+        Me.btnCraft.Location = New System.Drawing.Point(259, 416)
+        Me.btnCraft.Name = "btnCraft"
+        Me.btnCraft.Size = New System.Drawing.Size(75, 24)
+        Me.btnCraft.TabIndex = 6
+        Me.btnCraft.Text = "Craft"
+        Me.btnCraft.UseVisualStyleBackColor = True
+        '
+        'nudCraftAmount
+        '
+        Me.nudCraftAmount.Location = New System.Drawing.Point(340, 418)
+        Me.nudCraftAmount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudCraftAmount.Name = "nudCraftAmount"
+        Me.nudCraftAmount.Size = New System.Drawing.Size(64, 20)
+        Me.nudCraftAmount.TabIndex = 5
+        Me.nudCraftAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.nudCraftAmount.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
+        Me.nudCraftAmount.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'chkKnownOnly
         '
         Me.chkKnownOnly.AutoSize = True
+        Me.chkKnownOnly.BackColor = System.Drawing.Color.Transparent
         Me.chkKnownOnly.ForeColor = System.Drawing.Color.White
-        Me.chkKnownOnly.Location = New System.Drawing.Point(17, 433)
+        Me.chkKnownOnly.Location = New System.Drawing.Point(11, 444)
         Me.chkKnownOnly.Name = "chkKnownOnly"
         Me.chkKnownOnly.Size = New System.Drawing.Size(155, 17)
         Me.chkKnownOnly.TabIndex = 3
         Me.chkKnownOnly.Text = "Show Known Recipes Only"
-        Me.chkKnownOnly.UseVisualStyleBackColor = True
+        Me.chkKnownOnly.UseVisualStyleBackColor = False
         '
         'lblCraftExp
         '
         Me.lblCraftExp.AutoSize = True
         Me.lblCraftExp.BackColor = System.Drawing.Color.Transparent
         Me.lblCraftExp.ForeColor = System.Drawing.Color.White
-        Me.lblCraftExp.Location = New System.Drawing.Point(417, 466)
+        Me.lblCraftExp.Location = New System.Drawing.Point(407, 448)
         Me.lblCraftExp.Name = "lblCraftExp"
         Me.lblCraftExp.Size = New System.Drawing.Size(157, 13)
         Me.lblCraftExp.TabIndex = 2
@@ -896,7 +898,7 @@ Partial Class frmMainGame
         Me.lblCraftLvl.AutoSize = True
         Me.lblCraftLvl.BackColor = System.Drawing.Color.Transparent
         Me.lblCraftLvl.ForeColor = System.Drawing.Color.White
-        Me.lblCraftLvl.Location = New System.Drawing.Point(273, 466)
+        Me.lblCraftLvl.Location = New System.Drawing.Point(256, 448)
         Me.lblCraftLvl.Name = "lblCraftLvl"
         Me.lblCraftLvl.Size = New System.Drawing.Size(107, 13)
         Me.lblCraftLvl.TabIndex = 1
@@ -904,12 +906,13 @@ Partial Class frmMainGame
         '
         'lstRecipe
         '
-        Me.lstRecipe.BackColor = System.Drawing.Color.DarkGray
+        Me.lstRecipe.BackColor = System.Drawing.Color.FromArgb(CType(CType(34, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(34, Byte), Integer))
+        Me.lstRecipe.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lstRecipe.ForeColor = System.Drawing.Color.White
         Me.lstRecipe.FormattingEnabled = True
-        Me.lstRecipe.Location = New System.Drawing.Point(17, 7)
+        Me.lstRecipe.Location = New System.Drawing.Point(11, 11)
         Me.lstRecipe.Name = "lstRecipe"
-        Me.lstRecipe.Size = New System.Drawing.Size(235, 420)
+        Me.lstRecipe.Size = New System.Drawing.Size(229, 416)
         Me.lstRecipe.TabIndex = 0
         '
         'tmrCraft
@@ -951,8 +954,6 @@ Partial Class frmMainGame
         Me.pnlQuestLog.PerformLayout()
         Me.pnlCraft.ResumeLayout(False)
         Me.pnlCraft.PerformLayout()
-        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
@@ -972,6 +973,7 @@ Partial Class frmMainGame
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         CType(Me.picProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudCraftAmount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1017,7 +1019,6 @@ Partial Class frmMainGame
     Friend WithEvents btnCraftStop As Windows.Forms.Button
     Friend WithEvents btnCraft As Windows.Forms.Button
     Friend WithEvents nudCraftAmount As Windows.Forms.NumericUpDown
-    Friend WithEvents GroupBox3 As Windows.Forms.GroupBox
     Friend WithEvents GroupBox5 As Windows.Forms.GroupBox
     Friend WithEvents GroupBox10 As Windows.Forms.GroupBox
     Friend WithEvents lblMaterialAmount5 As Windows.Forms.Label

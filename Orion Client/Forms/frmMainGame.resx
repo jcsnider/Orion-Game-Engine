@@ -120,13 +120,43 @@
   <metadata name="tmrShake.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnCraftClose.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGoAAAAmCAYAAAAsuw6AAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAAd0SU1FB+AGHAQFLum3/fMAAADQSURBVHhe7du5DcRADATBDUEh6P9fQ/mHtjrJ
+        OGcSGAJNoAj6bTPl3xRFAWPvpPe47xvG3kb/UNd1wZCEOs8ThiTUcRwwRKggJNS+7zAkobZtgyFCBSGh
+        1nWFIQm1LAsMESoICTXPMwxJqGmaYEhCjeMIQ4QKQkINwwBDEqrvexgiVBASqus6GJJQbdvCEKGCkFBN
+        08CQhKrrGoYkVFVVMESoICRUWZYwRKggCBUEoYIgVBCECoJQQRAqCEIFIaHg6wvFD6+/74f3WynBWM45
+        P6c8iEGn797qAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnCraftStop.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGoAAAAmCAYAAAAsuw6AAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAAd0SU1FB+AGHAQFLum3/fMAAADQSURBVHhe7du5DcRADATBDUEh6P9fQ/mHtjrJ
+        OGcSGAJNoAj6bTPl3xRFAWPvpPe47xvG3kb/UNd1wZCEOs8ThiTUcRwwRKggJNS+7zAkobZtgyFCBSGh
+        1nWFIQm1LAsMESoICTXPMwxJqGmaYEhCjeMIQ4QKQkINwwBDEqrvexgiVBASqus6GJJQbdvCEKGCkFBN
+        08CQhKrrGoYkVFVVMESoICRUWZYwRKggCBUEoYIgVBCECoJQQRAqCEIFIaHg6wvFD6+/74f3WynBWM45
+        P6c8iEGn797qAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnCraft.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGoAAAAmCAYAAAAsuw6AAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAAd0SU1FB+AGHAQFLum3/fMAAADQSURBVHhe7du5DcRADATBDUEh6P9fQ/mHtjrJ
+        OGcSGAJNoAj6bTPl3xRFAWPvpPe47xvG3kb/UNd1wZCEOs8ThiTUcRwwRKggJNS+7zAkobZtgyFCBSGh
+        1nWFIQm1LAsMESoICTXPMwxJqGmaYEhCjeMIQ4QKQkINwwBDEqrvexgiVBASqus6GJJQbdvCEKGCkFBN
+        08CQhKrrGoYkVFVVMESoICRUWZYwRKggCBUEoYIgVBCECoJQQRAqCEIFIaHg6wvFD6+/74f3WynBWM45
+        P6c8iEGn797qAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="tmrCraft.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAcAAAAAAAEAIAAoIAQAdgAAAICAAAABACAAKAgBAJ4gBABAQAAAAQAgAChCAADGKAUAMDAAAAEA

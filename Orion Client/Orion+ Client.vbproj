@@ -963,6 +963,9 @@
     <Content Include="data files\graphics\GUI\Main\chat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\Craft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\Description.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

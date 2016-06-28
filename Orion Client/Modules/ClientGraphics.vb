@@ -3548,6 +3548,11 @@ NextLoop:
             frmMenu.picLogo.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
         End If
 
+        'craft
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Craft" & GFX_EXT) Then
+            frmMainGame.pnlCraft.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Main\Craft" & GFX_EXT)
+        End If
+
     End Sub
 
     Public Sub DrawGUI()
