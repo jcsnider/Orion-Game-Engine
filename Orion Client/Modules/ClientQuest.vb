@@ -663,11 +663,14 @@
     Public Sub RefreshQuestLog()
         Dim I As Long, x As Long
 
+        For I = 1 To MAX_ACTIVEQUESTS
+            QuestNames(I) = ""
+        Next
+
         x = 1
 
         For I = 1 To MAX_QUESTS
             If QuestInProgress(I) And x < MAX_ACTIVEQUESTS Then
-                'frmMainGame.lstQuestLog.Items.Add(Trim$(Quest(I).Name))
                 QuestNames(x) = Trim$(Quest(I).Name)
                 x = x + 1
             End If
