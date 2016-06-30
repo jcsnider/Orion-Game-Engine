@@ -119,6 +119,8 @@ Module ClientGlobals
     ' Mouse cursor tile location
     Public CurX As Integer
     Public CurY As Integer
+    Public CurMouseX As Integer
+    Public CurMouseY As Integer
 
     ' Game editors
     Public Editor As Byte

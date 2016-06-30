@@ -195,10 +195,10 @@
     Public DialogPanelVisible As Boolean
     Public DialogPanelX As Long = 250
     Public DialogPanelY As Long = 400
-    Public OkButtonX As Long = 10
-    Public OkButtonY As Long = 90
-    Public CancelButtonX As Long = 340
-    Public CancelButtonY As Long = 90
+    Public OkButtonX As Long = 50
+    Public OkButtonY As Long = 130
+    Public CancelButtonX As Long = 200
+    Public CancelButtonY As Long = 130
 
     'bank window Coordinates
     Public BankWindowX As Long = 319
@@ -214,8 +214,8 @@
     ' shop coordinates
     Public ShopWindowX As Long = 250
     Public ShopWindowY As Long = 125
-    Public ShopFaceX As Long = 20
-    Public ShopFaceY As Long = 20
+    Public ShopFaceX As Long = 60
+    Public ShopFaceY As Long = 60
 
     Public ShopButtonBuyX As Long = 150
     Public ShopButtonBuyY As Long = 140

@@ -213,6 +213,9 @@ Public Class frmMainGame
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
 
+        CurMouseX = e.Location.X
+        CurMouseY = e.Location.Y
+
         If InMapEditor Then
             If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
                 MapEditorMouseDown(e.Button, e.X, e.Y)
@@ -398,26 +401,13 @@ Public Class frmMainGame
 
 #Region "Quest Code"
 
-    Private Sub lblQuestExtra_Click(sender As Object, e As EventArgs)
-        RunQuestDialogueExtraLabel()
-    End Sub
+    Private Sub lblAbandonQuest_Click(sender As Object, e As EventArgs)
+        'Dim QuestNum As Long = GetQuestNum(Trim$(lstQuestLog.Text))
+        'If Trim$(lstQuestLog.Text) = vbNullString Then Exit Sub
 
-    Private Sub lstQuestLog_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstQuestLog.SelectedIndexChanged
-        UpdateQuestWindow = True
-    End Sub
-
-    Private Sub lblQuestLogClose_Click(sender As Object, e As EventArgs) Handles lblQuestLogClose.Click
-        ResetQuestLog()
-        pnlQuestLog.Visible = False
-    End Sub
-
-    Private Sub lblAbandonQuest_Click(sender As Object, e As EventArgs) Handles lblAbandonQuest.Click
-        Dim QuestNum As Long = GetQuestNum(Trim$(lstQuestLog.Text))
-        If Trim$(lstQuestLog.Text) = vbNullString Then Exit Sub
-
-        PlayerHandleQuest(QuestNum, 2)
-        ResetQuestLog()
-        pnlQuestLog.Visible = False
+        'PlayerHandleQuest(QuestNum, 2)
+        'ResetQuestLog()
+        'pnlQuestLog.Visible = False
     End Sub
 
 #End Region

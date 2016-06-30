@@ -44,20 +44,6 @@ Partial Class frmMainGame
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
         Me.pnlTempBank = New System.Windows.Forms.Panel()
-        Me.pnlQuestLog = New System.Windows.Forms.Panel()
-        Me.lblQuestLogClose = New System.Windows.Forms.Label()
-        Me.lblAbandonQuest = New System.Windows.Forms.Label()
-        Me.lblQuestRewards = New System.Windows.Forms.Label()
-        Me.lblQuestRequirements = New System.Windows.Forms.Label()
-        Me.lblQuestStatus2 = New System.Windows.Forms.Label()
-        Me.lblQuestStatus = New System.Windows.Forms.Label()
-        Me.txtQuestDialog = New System.Windows.Forms.TextBox()
-        Me.lblQuestDialog = New System.Windows.Forms.Label()
-        Me.txtActualTask = New System.Windows.Forms.TextBox()
-        Me.lblTaskLog = New System.Windows.Forms.Label()
-        Me.lblActualTask = New System.Windows.Forms.Label()
-        Me.lstQuestLog = New System.Windows.Forms.ListBox()
-        Me.txtQuestTaskLog = New System.Windows.Forms.TextBox()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
         Me.pnlCraft = New System.Windows.Forms.Panel()
@@ -101,7 +87,6 @@ Partial Class frmMainGame
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.pnlCurrency.SuspendLayout()
-        Me.pnlQuestLog.SuspendLayout()
         Me.pnlCraft.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -140,7 +125,7 @@ Partial Class frmMainGame
         Me.pnlOptions.Controls.Add(Me.GroupBox2)
         Me.pnlOptions.Controls.Add(Me.GroupBox1)
         Me.pnlOptions.ForeColor = System.Drawing.Color.White
-        Me.pnlOptions.Location = New System.Drawing.Point(776, 12)
+        Me.pnlOptions.Location = New System.Drawing.Point(608, 12)
         Me.pnlOptions.Name = "pnlOptions"
         Me.pnlOptions.Size = New System.Drawing.Size(233, 275)
         Me.pnlOptions.TabIndex = 10
@@ -279,9 +264,9 @@ Partial Class frmMainGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(12, 471)
+        Me.pnlCurrency.Location = New System.Drawing.Point(108, 343)
         Me.pnlCurrency.Name = "pnlCurrency"
-        Me.pnlCurrency.Size = New System.Drawing.Size(480, 121)
+        Me.pnlCurrency.Size = New System.Drawing.Size(351, 98)
         Me.pnlCurrency.TabIndex = 16
         Me.pnlCurrency.Visible = False
         '
@@ -290,9 +275,9 @@ Partial Class frmMainGame
         Me.lblCurrencyCancel.BackColor = System.Drawing.Color.Transparent
         Me.lblCurrencyCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCurrencyCancel.ForeColor = System.Drawing.Color.White
-        Me.lblCurrencyCancel.Location = New System.Drawing.Point(147, 82)
+        Me.lblCurrencyCancel.Location = New System.Drawing.Point(214, 71)
         Me.lblCurrencyCancel.Name = "lblCurrencyCancel"
-        Me.lblCurrencyCancel.Size = New System.Drawing.Size(180, 16)
+        Me.lblCurrencyCancel.Size = New System.Drawing.Size(108, 16)
         Me.lblCurrencyCancel.TabIndex = 4
         Me.lblCurrencyCancel.Text = "Cancel"
         Me.lblCurrencyCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -302,16 +287,16 @@ Partial Class frmMainGame
         Me.lblCurrencyOk.BackColor = System.Drawing.Color.Transparent
         Me.lblCurrencyOk.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCurrencyOk.ForeColor = System.Drawing.Color.White
-        Me.lblCurrencyOk.Location = New System.Drawing.Point(147, 66)
+        Me.lblCurrencyOk.Location = New System.Drawing.Point(13, 71)
         Me.lblCurrencyOk.Name = "lblCurrencyOk"
-        Me.lblCurrencyOk.Size = New System.Drawing.Size(180, 16)
+        Me.lblCurrencyOk.Size = New System.Drawing.Size(102, 16)
         Me.lblCurrencyOk.TabIndex = 3
         Me.lblCurrencyOk.Text = "Okay"
         Me.lblCurrencyOk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtCurrency
         '
-        Me.txtCurrency.Location = New System.Drawing.Point(147, 43)
+        Me.txtCurrency.Location = New System.Drawing.Point(84, 35)
         Me.txtCurrency.Name = "txtCurrency"
         Me.txtCurrency.Size = New System.Drawing.Size(180, 20)
         Me.txtCurrency.TabIndex = 2
@@ -321,9 +306,9 @@ Partial Class frmMainGame
         Me.lblCurrency.BackColor = System.Drawing.Color.Transparent
         Me.lblCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCurrency.ForeColor = System.Drawing.Color.White
-        Me.lblCurrency.Location = New System.Drawing.Point(3, 16)
+        Me.lblCurrency.Location = New System.Drawing.Point(3, 0)
         Me.lblCurrency.Name = "lblCurrency"
-        Me.lblCurrency.Size = New System.Drawing.Size(474, 24)
+        Me.lblCurrency.Size = New System.Drawing.Size(345, 24)
         Me.lblCurrency.TabIndex = 1
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -337,177 +322,6 @@ Partial Class frmMainGame
         Me.pnlTempBank.Size = New System.Drawing.Size(32, 32)
         Me.pnlTempBank.TabIndex = 20
         Me.pnlTempBank.Visible = False
-        '
-        'pnlQuestLog
-        '
-        Me.pnlQuestLog.BackColor = System.Drawing.Color.DimGray
-        Me.pnlQuestLog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestLogClose)
-        Me.pnlQuestLog.Controls.Add(Me.lblAbandonQuest)
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestRewards)
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestRequirements)
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestStatus2)
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestStatus)
-        Me.pnlQuestLog.Controls.Add(Me.txtQuestDialog)
-        Me.pnlQuestLog.Controls.Add(Me.lblQuestDialog)
-        Me.pnlQuestLog.Controls.Add(Me.txtActualTask)
-        Me.pnlQuestLog.Controls.Add(Me.lblTaskLog)
-        Me.pnlQuestLog.Controls.Add(Me.lblActualTask)
-        Me.pnlQuestLog.Controls.Add(Me.lstQuestLog)
-        Me.pnlQuestLog.Controls.Add(Me.txtQuestTaskLog)
-        Me.pnlQuestLog.Location = New System.Drawing.Point(136, 81)
-        Me.pnlQuestLog.Name = "pnlQuestLog"
-        Me.pnlQuestLog.Size = New System.Drawing.Size(478, 382)
-        Me.pnlQuestLog.TabIndex = 38
-        Me.pnlQuestLog.Visible = False
-        '
-        'lblQuestLogClose
-        '
-        Me.lblQuestLogClose.AutoSize = True
-        Me.lblQuestLogClose.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestLogClose.ForeColor = System.Drawing.Color.White
-        Me.lblQuestLogClose.Location = New System.Drawing.Point(197, 360)
-        Me.lblQuestLogClose.Name = "lblQuestLogClose"
-        Me.lblQuestLogClose.Size = New System.Drawing.Size(82, 13)
-        Me.lblQuestLogClose.TabIndex = 14
-        Me.lblQuestLogClose.Text = "Close QuestLog"
-        '
-        'lblAbandonQuest
-        '
-        Me.lblAbandonQuest.AutoSize = True
-        Me.lblAbandonQuest.BackColor = System.Drawing.Color.Transparent
-        Me.lblAbandonQuest.ForeColor = System.Drawing.Color.Red
-        Me.lblAbandonQuest.Location = New System.Drawing.Point(390, 360)
-        Me.lblAbandonQuest.Name = "lblAbandonQuest"
-        Me.lblAbandonQuest.Size = New System.Drawing.Size(81, 13)
-        Me.lblAbandonQuest.TabIndex = 13
-        Me.lblAbandonQuest.Text = "Abandon Quest"
-        Me.lblAbandonQuest.Visible = False
-        '
-        'lblQuestRewards
-        '
-        Me.lblQuestRewards.AutoSize = True
-        Me.lblQuestRewards.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestRewards.ForeColor = System.Drawing.Color.White
-        Me.lblQuestRewards.Location = New System.Drawing.Point(197, 317)
-        Me.lblQuestRewards.Name = "lblQuestRewards"
-        Me.lblQuestRewards.Size = New System.Drawing.Size(52, 13)
-        Me.lblQuestRewards.TabIndex = 12
-        Me.lblQuestRewards.Text = "Rewards:"
-        '
-        'lblQuestRequirements
-        '
-        Me.lblQuestRequirements.AutoSize = True
-        Me.lblQuestRequirements.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestRequirements.ForeColor = System.Drawing.Color.White
-        Me.lblQuestRequirements.Location = New System.Drawing.Point(197, 290)
-        Me.lblQuestRequirements.Name = "lblQuestRequirements"
-        Me.lblQuestRequirements.Size = New System.Drawing.Size(75, 13)
-        Me.lblQuestRequirements.TabIndex = 10
-        Me.lblQuestRequirements.Text = "Requirements:"
-        '
-        'lblQuestStatus2
-        '
-        Me.lblQuestStatus2.AutoSize = True
-        Me.lblQuestStatus2.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestStatus2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblQuestStatus2.Location = New System.Drawing.Point(274, 265)
-        Me.lblQuestStatus2.Name = "lblQuestStatus2"
-        Me.lblQuestStatus2.Size = New System.Drawing.Size(25, 13)
-        Me.lblQuestStatus2.TabIndex = 9
-        Me.lblQuestStatus2.Text = "???"
-        '
-        'lblQuestStatus
-        '
-        Me.lblQuestStatus.AutoSize = True
-        Me.lblQuestStatus.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestStatus.ForeColor = System.Drawing.Color.White
-        Me.lblQuestStatus.Location = New System.Drawing.Point(197, 265)
-        Me.lblQuestStatus.Name = "lblQuestStatus"
-        Me.lblQuestStatus.Size = New System.Drawing.Size(71, 13)
-        Me.lblQuestStatus.TabIndex = 8
-        Me.lblQuestStatus.Text = "Quest Status:"
-        '
-        'txtQuestDialog
-        '
-        Me.txtQuestDialog.BackColor = System.Drawing.Color.Black
-        Me.txtQuestDialog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtQuestDialog.ForeColor = System.Drawing.Color.White
-        Me.txtQuestDialog.Location = New System.Drawing.Point(197, 211)
-        Me.txtQuestDialog.Multiline = True
-        Me.txtQuestDialog.Name = "txtQuestDialog"
-        Me.txtQuestDialog.ReadOnly = True
-        Me.txtQuestDialog.Size = New System.Drawing.Size(268, 51)
-        Me.txtQuestDialog.TabIndex = 7
-        '
-        'lblQuestDialog
-        '
-        Me.lblQuestDialog.AutoSize = True
-        Me.lblQuestDialog.BackColor = System.Drawing.Color.Transparent
-        Me.lblQuestDialog.ForeColor = System.Drawing.Color.White
-        Me.lblQuestDialog.Location = New System.Drawing.Point(200, 195)
-        Me.lblQuestDialog.Name = "lblQuestDialog"
-        Me.lblQuestDialog.Size = New System.Drawing.Size(91, 13)
-        Me.lblQuestDialog.TabIndex = 6
-        Me.lblQuestDialog.Text = "Last Quest Dialog"
-        '
-        'txtActualTask
-        '
-        Me.txtActualTask.BackColor = System.Drawing.Color.Black
-        Me.txtActualTask.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtActualTask.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.txtActualTask.Location = New System.Drawing.Point(197, 139)
-        Me.txtActualTask.Multiline = True
-        Me.txtActualTask.Name = "txtActualTask"
-        Me.txtActualTask.ReadOnly = True
-        Me.txtActualTask.Size = New System.Drawing.Size(268, 51)
-        Me.txtActualTask.TabIndex = 5
-        '
-        'lblTaskLog
-        '
-        Me.lblTaskLog.AutoSize = True
-        Me.lblTaskLog.BackColor = System.Drawing.Color.Transparent
-        Me.lblTaskLog.ForeColor = System.Drawing.Color.White
-        Me.lblTaskLog.Location = New System.Drawing.Point(200, 5)
-        Me.lblTaskLog.Name = "lblTaskLog"
-        Me.lblTaskLog.Size = New System.Drawing.Size(52, 13)
-        Me.lblTaskLog.TabIndex = 4
-        Me.lblTaskLog.Text = "Task Log"
-        '
-        'lblActualTask
-        '
-        Me.lblActualTask.AutoSize = True
-        Me.lblActualTask.BackColor = System.Drawing.Color.Transparent
-        Me.lblActualTask.ForeColor = System.Drawing.Color.White
-        Me.lblActualTask.Location = New System.Drawing.Point(197, 123)
-        Me.lblActualTask.Name = "lblActualTask"
-        Me.lblActualTask.Size = New System.Drawing.Size(64, 13)
-        Me.lblActualTask.TabIndex = 3
-        Me.lblActualTask.Text = "Actual Task"
-        '
-        'lstQuestLog
-        '
-        Me.lstQuestLog.BackColor = System.Drawing.Color.Black
-        Me.lstQuestLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstQuestLog.ForeColor = System.Drawing.Color.White
-        Me.lstQuestLog.FormattingEnabled = True
-        Me.lstQuestLog.Location = New System.Drawing.Point(3, 5)
-        Me.lstQuestLog.Name = "lstQuestLog"
-        Me.lstQuestLog.Size = New System.Drawing.Size(188, 366)
-        Me.lstQuestLog.TabIndex = 2
-        '
-        'txtQuestTaskLog
-        '
-        Me.txtQuestTaskLog.BackColor = System.Drawing.Color.Black
-        Me.txtQuestTaskLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtQuestTaskLog.ForeColor = System.Drawing.Color.Green
-        Me.txtQuestTaskLog.Location = New System.Drawing.Point(197, 22)
-        Me.txtQuestTaskLog.Multiline = True
-        Me.txtQuestTaskLog.Name = "txtQuestTaskLog"
-        Me.txtQuestTaskLog.ReadOnly = True
-        Me.txtQuestTaskLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtQuestTaskLog.Size = New System.Drawing.Size(268, 95)
-        Me.txtQuestTaskLog.TabIndex = 1
         '
         'pnlTmpSkill
         '
@@ -526,6 +340,7 @@ Partial Class frmMainGame
         'pnlCraft
         '
         Me.pnlCraft.BackColor = System.Drawing.Color.Gray
+        Me.pnlCraft.BackgroundImage = CType(resources.GetObject("pnlCraft.BackgroundImage"), System.Drawing.Image)
         Me.pnlCraft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.pnlCraft.Controls.Add(Me.GroupBox5)
         Me.pnlCraft.Controls.Add(Me.btnCraftClose)
@@ -539,7 +354,7 @@ Partial Class frmMainGame
         Me.pnlCraft.Controls.Add(Me.lblCraftLvl)
         Me.pnlCraft.Controls.Add(Me.lstRecipe)
         Me.pnlCraft.ForeColor = System.Drawing.Color.Black
-        Me.pnlCraft.Location = New System.Drawing.Point(18, 14)
+        Me.pnlCraft.Location = New System.Drawing.Point(911, 487)
         Me.pnlCraft.Name = "pnlCraft"
         Me.pnlCraft.Size = New System.Drawing.Size(700, 500)
         Me.pnlCraft.TabIndex = 47
@@ -928,12 +743,11 @@ Partial Class frmMainGame
         Me.ClientSize = New System.Drawing.Size(1024, 604)
         Me.Controls.Add(Me.pnlCraft)
         Me.Controls.Add(Me.pnlOptions)
-        Me.Controls.Add(Me.pnlQuestLog)
         Me.Controls.Add(Me.pnlCurrency)
-        Me.Controls.Add(Me.picscreen)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.pnlTmpInv)
+        Me.Controls.Add(Me.picscreen)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -950,8 +764,6 @@ Partial Class frmMainGame
         Me.GroupBox1.PerformLayout()
         Me.pnlCurrency.ResumeLayout(False)
         Me.pnlCurrency.PerformLayout()
-        Me.pnlQuestLog.ResumeLayout(False)
-        Me.pnlQuestLog.PerformLayout()
         Me.pnlCraft.ResumeLayout(False)
         Me.pnlCraft.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
@@ -992,20 +804,6 @@ Partial Class frmMainGame
     Friend WithEvents pnlTempBank As System.Windows.Forms.Panel
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents pnlQuestLog As Windows.Forms.Panel
-    Friend WithEvents lblQuestLogClose As Windows.Forms.Label
-    Friend WithEvents lblAbandonQuest As Windows.Forms.Label
-    Friend WithEvents lblQuestRewards As Windows.Forms.Label
-    Friend WithEvents lblQuestRequirements As Windows.Forms.Label
-    Friend WithEvents lblQuestStatus2 As Windows.Forms.Label
-    Friend WithEvents lblQuestStatus As Windows.Forms.Label
-    Friend WithEvents txtQuestDialog As Windows.Forms.TextBox
-    Friend WithEvents lblQuestDialog As Windows.Forms.Label
-    Friend WithEvents txtActualTask As Windows.Forms.TextBox
-    Friend WithEvents lblTaskLog As Windows.Forms.Label
-    Friend WithEvents lblActualTask As Windows.Forms.Label
-    Friend WithEvents lstQuestLog As Windows.Forms.ListBox
-    Friend WithEvents txtQuestTaskLog As Windows.Forms.TextBox
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
     Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label

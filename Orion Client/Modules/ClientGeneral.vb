@@ -354,22 +354,21 @@ Module ClientGeneral
 
     Public Sub RePositionGUI()
 
-        'first change the window
+        'first change the tiles
         If Options.ScreenSize = 0 Then
             MAX_MAPX = 31
-            MAX_MAPY = 22
-            frmMainGame.Width = 1025 '1025
-            frmMainGame.Height = 769 '769
-            frmMainGame.picscreen.Width = 1024
-            frmMainGame.picscreen.Height = 768
+            MAX_MAPY = 24
+
         ElseIf Options.ScreenSize = 1 Then
             MAX_MAPX = 35
-            MAX_MAPY = 25
-            frmMainGame.Width = 1153 '1153
-            frmMainGame.Height = 865 '865
-            frmMainGame.picscreen.Width = 1152
-            frmMainGame.picscreen.Height = 864
+            MAX_MAPY = 26
         End If
+
+        'then the window
+        frmMainGame.Width = ((MAX_MAPX + 2) * PIC_X) - 16
+        frmMainGame.Height = ((MAX_MAPY + 2) * PIC_Y) + 8
+        frmMainGame.picscreen.Width = (MAX_MAPX + 2) * PIC_X
+        frmMainGame.picscreen.Height = (MAX_MAPY + 2) * PIC_Y
 
         HalfX = ((MAX_MAPX + 1) \ 2) * PIC_X
         HalfY = ((MAX_MAPY + 1) \ 2) * PIC_Y

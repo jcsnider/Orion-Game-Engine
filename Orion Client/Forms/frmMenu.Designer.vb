@@ -126,7 +126,7 @@ Partial Class frmMenu
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLogin.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btnLogin.Location = New System.Drawing.Point(180, 157)
+        Me.btnLogin.Location = New System.Drawing.Point(180, 153)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(110, 26)
         Me.btnLogin.TabIndex = 49
@@ -656,7 +656,7 @@ Partial Class frmMenu
         'btnRegister
         '
         Me.btnRegister.BackgroundImage = CType(resources.GetObject("btnRegister.BackgroundImage"), System.Drawing.Image)
-        Me.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnRegister.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRegister.ForeColor = System.Drawing.Color.White
@@ -671,7 +671,7 @@ Partial Class frmMenu
         'btnCredits
         '
         Me.btnCredits.BackgroundImage = CType(resources.GetObject("btnCredits.BackgroundImage"), System.Drawing.Image)
-        Me.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCredits.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCredits.ForeColor = System.Drawing.Color.White
@@ -686,7 +686,7 @@ Partial Class frmMenu
         'btnExit
         '
         Me.btnExit.BackgroundImage = CType(resources.GetObject("btnExit.BackgroundImage"), System.Drawing.Image)
-        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExit.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.White
@@ -819,7 +819,7 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1590, 541)
+        Me.ClientSize = New System.Drawing.Size(715, 541)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.btnExit)

@@ -1,8 +1,10 @@
 ﻿Public Module ServerQuest
 #Region "Constants"
     'Constants
-    Public Const MAX_TASKS As Byte = 10
     Public Const MAX_QUESTS As Byte = 250
+    Public Const MAX_TASKS As Byte = 10
+    Public Const MAX_ACTIVEQUESTS = 10
+
     Public Const EDITOR_TASKS As Byte = 7
 
     Public Const QUEST_TYPE_GOSLAY As Byte = 1
@@ -306,9 +308,9 @@
         Buffer = Nothing
 
         ' Save it
-        Call SendUpdateQuestToAll(QuestNum)
-        Call SaveQuest(QuestNum)
-        Call Addlog(GetPlayerName(Index) & " saved Quest #" & QuestNum & ".", ADMIN_LOG)
+        SendUpdateQuestToAll(QuestNum)
+        SaveQuest(QuestNum)
+        Addlog(GetPlayerName(Index) & " saved Quest #" & QuestNum & ".", ADMIN_LOG)
     End Sub
 
     Sub Packet_RequestQuests(ByVal Index As Long, ByVal Data() As Byte)
@@ -383,7 +385,7 @@
 
         For I = 1 To MAX_QUESTS
             If Len(Trim$(Quest(I).Name)) > 0 Then
-                Call SendUpdateQuestTo(Index, I)
+                SendUpdateQuestTo(Index, I)
             End If
         Next
     End Sub

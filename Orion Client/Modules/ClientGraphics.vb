@@ -69,6 +69,8 @@ Module ClientGraphics
 
     Public ButtonGFX As Texture
     Public ButtonGFXInfo As GraphicInfo
+    Public ButtonHoverGFX As Texture
+    Public ButtonHoverGFXInfo As GraphicInfo
 
     Public HUDPanelGFX As Texture
     Public HUDPanelGFXInfo As GraphicInfo
@@ -107,6 +109,11 @@ Module ClientGraphics
     Public DescriptionGFX As Texture
     Public DescriptionGFXInfo As GraphicInfo
 
+    Public QuestGFX As Texture
+    Public QuestGFXInfo As GraphicInfo
+
+    Public CraftGFX As Texture
+    Public CraftGFXInfo As GraphicInfo
 
     Public RClickGFX As Texture
     Public RClickGFXInfo As GraphicInfo
@@ -484,6 +491,33 @@ Module ClientGraphics
             ButtonGFXInfo.height = ButtonGFX.Size.Y
         End If
 
+        ButtonHoverGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Button_Hover" & GFX_EXT) Then
+            ButtonHoverGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Button_Hover" & GFX_EXT)
+
+            'Cache the width and height
+            ButtonHoverGFXInfo.width = ButtonHoverGFX.Size.X
+            ButtonHoverGFXInfo.height = ButtonHoverGFX.Size.Y
+        End If
+
+        QuestGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "QuestLog" & GFX_EXT) Then
+            QuestGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "QuestLog" & GFX_EXT)
+
+            'Cache the width and height
+            QuestGFXInfo.width = QuestGFX.Size.X
+            QuestGFXInfo.height = QuestGFX.Size.Y
+        End If
+
+        CraftGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Craft" & GFX_EXT) Then
+            CraftGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Craft" & GFX_EXT)
+
+            'Cache the width and height
+            CraftGFXInfo.width = CraftGFX.Size.X
+            CraftGFXInfo.height = CraftGFX.Size.Y
+        End If
+
     End Sub
 
     Sub DrawChat()
@@ -643,9 +677,16 @@ Module ClientGraphics
 
     End Sub
 
-    Public Sub DrawButton(ByVal Text As String, ByVal DestX As Long, ByVal DestY As Long)
-        RenderTexture(ButtonGFX, GameWindow, DestX, DestY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
-        DrawText(DestX + (ButtonGFXInfo.width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonGFXInfo.height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+    Public Sub DrawButton(ByVal Text As String, ByVal DestX As Long, ByVal DestY As Long, ByVal Hover As Byte)
+        If Hover = 0 Then
+            RenderTexture(ButtonGFX, GameWindow, DestX, DestY, 0, 0, ButtonGFXInfo.width, ButtonGFXInfo.height)
+            DrawText(DestX + (ButtonGFXInfo.width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonGFXInfo.height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        Else
+            RenderTexture(ButtonHoverGFX, GameWindow, DestX, DestY, 0, 0, ButtonHoverGFXInfo.width, ButtonHoverGFXInfo.height)
+            DrawText(DestX + (ButtonHoverGFXInfo.width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonHoverGFXInfo.height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
+
+
 
     End Sub
 
@@ -2076,6 +2117,10 @@ Module ClientGraphics
         If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
         If Not EventChatGFX Is Nothing Then EventChatGFX.Dispose()
         If Not RClickGFX Is Nothing Then RClickGFX.Dispose()
+        If Not ButtonGFX Is Nothing Then ButtonGFX.Dispose()
+        If Not ButtonHoverGFX Is Nothing Then ButtonHoverGFX.Dispose()
+        If Not QuestGFX Is Nothing Then QuestGFX.Dispose()
+        If Not CraftGFX Is Nothing Then CraftGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -2951,7 +2996,7 @@ NextLoop:
         With FacesGFXInfo(Shop(InShop).Face)
             .TextureTimer = GetTickCount() + 100000
         End With
-        RenderTexture(FacesGFX(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX + 40, ShopWindowY + ShopFaceY + 40, 0, 0, FacesGFXInfo(Shop(InShop).Face).width, FacesGFXInfo(Shop(InShop).Face).height)
+        RenderTexture(FacesGFX(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY, 0, 0, FacesGFXInfo(Shop(InShop).Face).width, FacesGFXInfo(Shop(InShop).Face).height)
 
         'draw text
         DrawText(ShopWindowX + ShopLeft, ShopWindowY + 10, Trim(Shop(InShop).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
@@ -2960,13 +3005,28 @@ NextLoop:
         DrawText(ShopWindowX + 10, ShopWindowY + 25, "to the shop!", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
         'render buy button
-        DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY)
+        If CurMouseX > ShopWindowX + ShopButtonBuyX And CurMouseX < ShopWindowX + ShopButtonBuyX + ButtonGFXInfo.width And
+             CurMouseY > ShopWindowY + ShopButtonBuyY And CurMouseY < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.height Then
+            DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY, 1)
+        Else
+            DrawButton("Buy Item", ShopWindowX + ShopButtonBuyX, ShopWindowY + ShopButtonBuyY, 0)
+        End If
 
         'render sell button
-        DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY)
+        If CurMouseX > ShopWindowX + ShopButtonSellX And CurMouseX < ShopWindowX + ShopButtonSellX + ButtonGFXInfo.width And
+             CurMouseY > ShopWindowY + ShopButtonSellY And CurMouseY < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.height Then
+            DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY, 1)
+        Else
+            DrawButton("Sell Item", ShopWindowX + ShopButtonSellX, ShopWindowY + ShopButtonSellY, 0)
+        End If
 
         'render close button
-        DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY)
+        If CurMouseX > ShopWindowX + ShopButtonCloseX And CurMouseX < ShopWindowX + ShopButtonCloseX + ButtonGFXInfo.width And
+             CurMouseY > ShopWindowY + ShopButtonCloseY And CurMouseY < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.height Then
+            DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY, 1)
+        Else
+            DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY, 0)
+        End If
 
         For i = 1 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
@@ -3275,10 +3335,10 @@ NextLoop:
         DrawText(TradeWindowX + 208, TradeWindowY + 288, TheirWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
 
         'render accept button
-        DrawButton("Accept Trade", TradeWindowX + TradeButtonAcceptX, TradeWindowY + TradeButtonAcceptY)
+        DrawButton("Accept Trade", TradeWindowX + TradeButtonAcceptX, TradeWindowY + TradeButtonAcceptY, 0)
 
         'render decline button
-        DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY)
+        DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY, 0)
     End Sub
 
     Sub DrawPlayerSpells()
@@ -3470,29 +3530,29 @@ NextLoop:
         'first render panel
         RenderTexture(EventChatGFX, GameWindow, DialogPanelX, DialogPanelY, 0, 0, EventChatGFXInfo.width, EventChatGFXInfo.height)
 
-        DrawText(DialogPanelX + 40, DialogPanelY + 10, Trim(DialogMsg1), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DialogPanelX + 175, DialogPanelY + 10, Trim(DialogMsg1), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If Len(DialogMsg2) > 0 Then
-            DrawText(DialogPanelX + 40, DialogPanelY + 30, Trim(DialogMsg2), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(DialogPanelX + 60, DialogPanelY + 30, Trim(DialogMsg2), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         If Len(DialogMsg3) > 0 Then
-            DrawText(DialogPanelX + 40, DialogPanelY + 50, Trim(DialogMsg3), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(DialogPanelX + 60, DialogPanelY + 50, Trim(DialogMsg3), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         If DialogType = DIALOGUE_TYPE_QUEST Then
             If QuestAcceptTag > 0 Then
                 'render accept button
-                DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY)
+                DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY, 0)
             End If
             'render cancel button
-            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY)
+            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX - 140, DialogPanelY + CancelButtonY, 0)
         Else
             'render ok button
-            DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY)
+            DrawButton(DialogButton1Text, DialogPanelX + OkButtonX, DialogPanelY + OkButtonY, 0)
 
             'render cancel button
-            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY)
+            DrawButton(DialogButton2Text, DialogPanelX + CancelButtonX, DialogPanelY + CancelButtonY, 0)
         End If
 
     End Sub
@@ -3603,6 +3663,10 @@ NextLoop:
 
         If pnlRClickVisible = True Then
             DrawRClick()
+        End If
+
+        If pnlQuestLogVisible = True Then
+            DrawQuestLog()
         End If
     End Sub
 End Module

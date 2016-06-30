@@ -221,8 +221,8 @@ Public Module ClientGuiFunctions
                         pnlCharacterVisible = False
                         frmMainGame.pnlOptions.Visible = False
                         RefreshQuestLog()
-                        frmMainGame.pnlQuestLog.Visible = Not frmMainGame.pnlQuestLog.Visible
-                        frmMainGame.pnlQuestLog.BringToFront()
+                        pnlQuestLogVisible = Not pnlQuestLogVisible
+                        'frmMainGame.pnlQuestLog.BringToFront()
                         CheckGuiClick = True
                     ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 48 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
                         PlaySound("Click.ogg")
@@ -574,6 +574,33 @@ Public Module ClientGuiFunctions
                 End If
 
                 CheckGuiClick = True
+            End If
+        End If
+
+        If pnlQuestLogVisible Then
+            If AboveQuestPanel(X, Y) Then
+                'check if they press the list
+                Dim tmpy As Long = 10
+                For i = 1 To MAX_ACTIVEQUESTS
+                    If Len(Trim$(QuestNames(i))) > 0 Then
+                        If X > (QuestLogX + 7) And X < (QuestLogX + 7) + (getTextWidth(QuestNames(i))) Then
+                            If Y > (QuestLogY + tmpy) And Y < (QuestLogY + tmpy + 13) Then
+                                SelectedQuest = i
+                                LoadQuestlogBox()
+                            End If
+                        End If
+                        tmpy = tmpy + 20
+                    End If
+                Next
+
+                'close button
+                If X > (QuestLogX + 195) And X < (QuestLogX + 290) Then
+                    If Y > (QuestLogY + 358) And Y < (QuestLogY + 375) Then
+                        ResetQuestLog()
+                    End If
+
+                    CheckGuiClick = True
+                End If
             End If
         End If
 
@@ -1261,6 +1288,16 @@ Public Module ClientGuiFunctions
         If X > RClickX And X < RClickX + RClickGFXInfo.width Then
             If Y > RClickY And Y < RClickY + RClickGFXInfo.height Then
                 AboveRClickPanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveQuestPanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveQuestPanel = False
+
+        If X > QuestLogX And X < QuestLogX + QuestGFXInfo.width Then
+            If Y > QuestLogY And Y < QuestLogY + QuestGFXInfo.height Then
+                AboveQuestPanel = True
             End If
         End If
     End Function

@@ -1,8 +1,8 @@
 ﻿Public Module ClientQuest
 #Region "Global Info"
     'Constants
-    Public Const MAX_TASKS As Byte = 10
     Public Const MAX_QUESTS As Byte = 250
+    Public Const MAX_TASKS As Byte = 10
     Public Const EDITOR_TASKS As Byte = 7
 
     Public Const QUEST_TYPE_GOSLAY As Byte = 1
@@ -20,10 +20,29 @@
     Public Const QUEST_COMPLETED_BUT As Byte = 3
 
     Public QuestLogPage As Long
+    Public QuestNames(MAX_ACTIVEQUESTS) As String
 
-    Public Quest_Changed(0 To MAX_QUESTS) As Boolean
+    Public Quest_Changed(MAX_QUESTS) As Boolean
 
     Public QuestEditorShow As Boolean
+
+    'questlog variables
+
+    Public Const MAX_ACTIVEQUESTS = 10
+
+    Public QuestLogX As Long = 150
+    Public QuestLogY As Long = 100
+
+    Public pnlQuestLogVisible As Boolean
+    Public SelectedQuest As String
+    Public QuestTaskLogText As String = ""
+    Public ActualTaskText As String = ""
+    Public QuestDialogText As String = ""
+    Public QuestStatus2Text As String = ""
+    Public AbandonQuestText As String = ""
+    Public AbandonQuestVisible As Boolean
+    Public QuestRequirementsText As String = ""
+    Public QuestRewardsText As String = ""
 
     'here we store temp info because off UpdateUI >.<
     Public UpdateQuestWindow As Boolean
@@ -642,13 +661,15 @@
     End Function
 
     Public Sub RefreshQuestLog()
-        Dim I As Long
+        Dim I As Long, x As Long
 
-        frmMainGame.lstQuestLog.Items.Clear()
+        x = 1
 
         For I = 1 To MAX_QUESTS
-            If QuestInProgress(I) Then
-                frmMainGame.lstQuestLog.Items.Add(Trim$(Quest(I).Name))
+            If QuestInProgress(I) And x < MAX_ACTIVEQUESTS Then
+                'frmMainGame.lstQuestLog.Items.Add(Trim$(Quest(I).Name))
+                QuestNames(x) = Trim$(Quest(I).Name)
+                x = x + 1
             End If
         Next
 
@@ -661,40 +682,39 @@
     Public Sub LoadQuestlogBox()
         Dim QuestNum As Long, CurTask As Long
 
-        With frmMainGame
-            If Trim$(.lstQuestLog.Text) = vbNullString Then Exit Sub
+        If Trim$(SelectedQuest) = vbNullString Then Exit Sub
 
-            QuestNum = GetQuestNum(Trim$(.lstQuestLog.Text))
-            CurTask = Player(MyIndex).PlayerQuest(QuestNum).ActualTask
+        QuestNum = SelectedQuest
+        CurTask = Player(MyIndex).PlayerQuest(QuestNum).ActualTask
 
             'Quest Log (Main Task)
-            .txtQuestTaskLog.Text = Trim$(Quest(QuestNum).QuestLog)
+            QuestTaskLogText = Trim$(Quest(QuestNum).QuestLog)
 
             'Actual Task
-            .txtActualTask.Text = Trim$(Quest(QuestNum).Task(CurTask).TaskLog)
+            ActualTaskText = Trim$(Quest(QuestNum).Task(CurTask).TaskLog)
 
             'Last dialog
             If Player(MyIndex).PlayerQuest(QuestNum).ActualTask > 1 Then
                 If Len(Trim$(Quest(QuestNum).Task(CurTask - 1).Speech)) > 0 Then
-                    .txtQuestDialog.Text = Trim$(Quest(QuestNum).Task(CurTask - 1).Speech).Replace("$playername$", GetPlayerName(MyIndex))
+                    QuestDialogText = Trim$(Quest(QuestNum).Task(CurTask - 1).Speech).Replace("$playername$", GetPlayerName(MyIndex))
                 Else
-                    .txtQuestDialog.Text = Trim$(Quest(QuestNum).Chat(1).Replace("$playername$", GetPlayerName(MyIndex)))
+                    QuestDialogText = Trim$(Quest(QuestNum).Chat(1).Replace("$playername$", GetPlayerName(MyIndex)))
                 End If
             Else
-                .txtQuestDialog.Text = Trim$(Quest(QuestNum).Chat(1).Replace("$playername$", GetPlayerName(MyIndex)))
+                QuestDialogText = Trim$(Quest(QuestNum).Chat(1).Replace("$playername$", GetPlayerName(MyIndex)))
             End If
 
             'Quest Status
             If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_STARTED Then
-                .lblQuestStatus2.Text = "Quest Started"
-                .lblAbandonQuest.Text = "Cancel Quest"
-                .lblAbandonQuest.Visible = True
+                QuestStatus2Text = "Quest Started"
+                AbandonQuestText = "Cancel Quest"
+                AbandonQuestVisible = True
             ElseIf Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED Then
-                .lblQuestStatus2.Text = "Quest Completed"
-                .lblAbandonQuest.Visible = False
+                QuestStatus2Text = "Quest Completed"
+                AbandonQuestVisible = False
             Else
-                .lblQuestStatus2.Text = "???"
-                .lblAbandonQuest.Visible = False
+                QuestStatus2Text = "???"
+                AbandonQuestVisible = False
             End If
 
             'defeat x amount of Npc
@@ -702,77 +722,96 @@
                 Dim CurCount As Long = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
                 Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-                .lblQuestRequirements.Text = "Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
+                QuestRequirementsText = "Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
                 'gather x amount of items
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOGATHER Then
                 Dim CurCount As Long = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                .lblQuestRequirements.Text = "Collect " & CurCount & "/" & MaxAmount & " " & ItemName
+                QuestRequirementsText = "Collect " & CurCount & "/" & MaxAmount & " " & ItemName
                 'go talk to npc
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTALK Then
                 Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-                .lblQuestRequirements.Text = "Go talk to  " & NpcName
+                QuestRequirementsText = "Go talk to  " & NpcName
                 'reach certain map
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOREACH Then
                 Dim MapName As String = MapNames(Quest(QuestNum).Task(CurTask).Map)
-                .lblQuestRequirements.Text = "Go to " & MapName
+                QuestRequirementsText = "Go to " & MapName
                 'give x amount of items to npc
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOGIVE Then
                 Dim NpcName As String = Item(Quest(QuestNum).Task(CurTask).Npc).Name
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                .lblQuestRequirements.Text = "Give " & NpcName & " the " & ItemName & "X" & MaxAmount & " they requested"
+                QuestRequirementsText = "Give " & NpcName & " the " & ItemName & "X" & MaxAmount & " they requested"
                 'defeat certain amount of players
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOKILL Then
                 Dim CurCount As Long = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
-                .lblQuestRequirements.Text = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
+                QuestRequirementsText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
                 'go collect resources
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTRAIN Then
                 Dim CurCount As Long = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
                 Dim ResourceName As String = Resource(Quest(QuestNum).Task(CurTask).Resource).Name
-                .lblQuestRequirements.Text = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
+                QuestRequirementsText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
                 'collect x amount of items from npc
             ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTRAIN Then
                 Dim NpcName As String = Item(Quest(QuestNum).Task(CurTask).Npc).Name
                 Dim MaxAmount As Long = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                .lblQuestRequirements.Text = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
+                QuestRequirementsText = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
             Else
-                .lblQuestRequirements.Text = "Requirements: "  'ToDo
+                QuestRequirementsText = "Requirements: "  'ToDo
             End If
 
             'Rewards
-            .lblQuestRewards.Text = "Rewards: " & Item(Quest(QuestNum).RewardItem).Name & " X" & Str(Quest(QuestNum).RewardItemAmount)
+            QuestRewardsText = "Rewards: " & Item(Quest(QuestNum).RewardItem).Name & " X" & Str(Quest(QuestNum).RewardItemAmount)
 
-            .pnlQuestLog.Visible = True
-
-        End With
     End Sub
 
-    Public Sub RunQuestDialogueExtraLabel()
-        'If frmMainGame.lblQuestExtra.Text = "Cancel Quest" Then
-        '    PlayerHandleQuest(GetQuestNum(Trim$(frmMainGame.lblQuestNameVisual.Text)), 2)
-        '    frmMainGame.lblQuestExtra.Text = "Extra"
-        '    frmMainGame.lblQuestExtra.Visible = False
-        '    frmMainGame.pnlQuestSpeech.Visible = False
-        '    RefreshQuestLog()
-        'End If
+    Public Sub DrawQuestLog()
+        Dim i As Long, y As Long
+
+        y = 10
+
+        'first render panel
+        RenderTexture(QuestGFX, GameWindow, QuestLogX, QuestLogY, 0, 0, QuestGFXInfo.width, QuestGFXInfo.height)
+
+        'draw quest names
+        For i = 1 To MAX_ACTIVEQUESTS
+            If Len(Trim$(QuestNames(i))) > 0 Then
+                DrawText(QuestLogX + 7, QuestLogY + y, Trim$(QuestNames(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                y = y + 20
+            End If
+        Next
+
+        If SelectedQuest <= 0 Then Exit Sub
+
+        'quest log text
+        DrawText(QuestLogX + 204, QuestLogY + 30, Trim$(QuestTaskLogText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(QuestLogX + 204, QuestLogY + 147, Trim$(ActualTaskText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(QuestLogX + 204, QuestLogY + 218, Trim$(QuestDialogText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(QuestLogX + 280, QuestLogY + 263, Trim$(QuestStatus2Text), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(QuestLogX + 285, QuestLogY + 288, Trim$(QuestRequirementsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Public Sub ResetQuestLog()
-        With frmMainGame
-            .txtQuestTaskLog.Text = ""
-            .txtActualTask.Text = ""
-            .txtQuestDialog.Text = ""
-            .lblQuestStatus2.Text = ""
-            .lblAbandonQuest.Text = ""
-            .lblAbandonQuest.Visible = False
-            .lblQuestRequirements.Text = ""
-            .lblQuestRewards.Text = ""
-        End With
+
+        QuestTaskLogText = ""
+            ActualTaskText = ""
+            QuestDialogText = ""
+            QuestStatus2Text = ""
+            AbandonQuestText = ""
+            AbandonQuestVisible = False
+            QuestRequirementsText = ""
+            QuestRewardsText = ""
+        pnlQuestLogVisible = False
+
+        SelectedQuest = 0
     End Sub
 #End Region
 
