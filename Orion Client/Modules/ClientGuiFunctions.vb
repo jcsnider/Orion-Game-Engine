@@ -604,6 +604,44 @@ Public Module ClientGuiFunctions
             End If
         End If
 
+        If pnlCraftVisible Then
+            If AboveCraftPanel(X, Y) Then
+                'check if they press the list
+                Dim tmpy As Long = 10
+                For i = 1 To MAX_RECIPE
+                    If Len(Trim$(RecipeNames(i))) > 0 Then
+                        If X > (CraftPanelX + 12) And X < (CraftPanelX + 12) + (getTextWidth(RecipeNames(i))) Then
+                            If Y > (CraftPanelY + tmpy) And Y < (CraftPanelY + tmpy + 13) Then
+                                SelectedRecipe = i
+                                CraftingInit()
+                            End If
+                        End If
+                        tmpy = tmpy + 20
+                    End If
+                Next
+
+                'start button
+                If X > (CraftPanelX + 256) And X < (CraftPanelX + 330) Then
+                    If Y > (CraftPanelY + 415) And Y < (CraftPanelY + 437) Then
+                        If SelectedRecipe > 0 Then
+                            SendCraftIt(RecipeNames(SelectedRecipe), CraftAmountValue)
+                        End If
+                    End If
+                End If
+
+                'close button
+                If X > (CraftPanelX + 614) And X < (CraftPanelX + 689) Then
+                    If Y > (CraftPanelY + 472) And Y < (CraftPanelY + 494) Then
+                        ResetCraftPanel()
+                        pnlCraftVisible = False
+                        InCraft = False
+                        SendCloseCraft()
+                    End If
+                End If
+                CheckGuiClick = True
+            End If
+        End If
+
     End Function
 
     Public Function CheckGuiDoubleClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
@@ -1298,6 +1336,16 @@ Public Module ClientGuiFunctions
         If X > QuestLogX And X < QuestLogX + QuestGFXInfo.width Then
             If Y > QuestLogY And Y < QuestLogY + QuestGFXInfo.height Then
                 AboveQuestPanel = True
+            End If
+        End If
+    End Function
+
+    Function AboveCraftPanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveCraftPanel = False
+
+        If X > CraftPanelX And X < CraftPanelX + CraftGFXInfo.width Then
+            If Y > CraftPanelY And Y < CraftPanelY + CraftGFXInfo.height Then
+                AboveCraftPanel = True
             End If
         End If
     End Function

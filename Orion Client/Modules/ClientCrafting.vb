@@ -12,10 +12,32 @@ Public Module ClientCrafting
     Public InitRecipeEditor As Boolean
     Public InitCrafting As Boolean
     Public InCraft As Boolean
+    Public pnlCraftVisible As Boolean
 
     Public Const RecipeType_Herb As Byte = 0
     Public Const RecipeType_Wood As Byte = 1
     Public Const RecipeType_Metal As Byte = 2
+
+    Public RecipeNames(MAX_RECIPE) As String
+
+    Public chkKnownOnlyChecked As Boolean
+    Public chkKnownOnlyEnabled As Boolean
+    Public btnCraftEnabled As Boolean
+    Public btnCraftStopEnabled As Boolean
+    Public nudCraftAmountEnabled As Boolean
+    Public lstRecipeEnabled As Boolean
+
+    Public CraftAmountValue As Byte
+    Public CraftProgressValue As Long
+    Public picProductIndex As Long
+    Public lblProductNameText As String
+    Public lblProductAmountText As String
+
+    Public picMaterialIndex(MAX_INGREDIENT) As Long
+    Public lblMaterialName(MAX_INGREDIENT) As String
+    Public lblMaterialAmount(MAX_INGREDIENT) As String
+
+    Public SelectedRecipe As Long = 0
 
     Public Structure RecipeRec
         Dim Name As String
@@ -238,7 +260,7 @@ Public Module ClientCrafting
             InitCrafting = True
         Else
 
-            frmMainGame.pgbCraftProgress.Value = 0
+            CraftProgressValue = 0
             frmMainGame.tmrCraft.Enabled = True
         End If
 
@@ -309,7 +331,10 @@ Public Module ClientCrafting
         'enough ingredients?
         For i = 1 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
-                If HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then Exit Sub
+                If HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
+                    AddText("Not Enough Materials!", Red)
+                    Exit Sub
+                End If
             End If
         Next
 
@@ -323,6 +348,15 @@ Public Module ClientCrafting
         SendData(Buffer.ToArray())
 
         Buffer = Nothing
+
+        frmMainGame.tmrCraft.Enabled = True
+
+        btnCraftEnabled = False
+        btnCraftStopEnabled = False
+        btnCraftStopEnabled = False
+        nudCraftAmountEnabled = False
+        lstRecipeEnabled = False
+        chkKnownOnlyEnabled = False
     End Sub
 
     Sub SendCloseCraft()
@@ -339,62 +373,31 @@ Public Module ClientCrafting
 
 #Region "Functions"
     Public Sub CraftingInit()
-        Dim i As Long
+        Dim i As Long, x As Long
 
-        frmMainGame.lstRecipe.Items.Clear()
+        x = 1
 
         For i = 1 To MAX_RECIPE
-            If frmMainGame.chkKnownOnly.Checked = True Then
+            If chkKnownOnlyChecked = True Then
                 If Player(MyIndex).RecipeLearned(i) = 1 Then
-                    frmMainGame.lstRecipe.Items.Add(Trim(Recipe(i).Name))
+                    RecipeNames(x) = Trim$(Recipe(i).Name)
+                    x = x + 1
                 End If
             Else
                 If Len(Trim(Recipe(i).Name)) > 0 Then
-                    frmMainGame.lstRecipe.Items.Add(Trim(Recipe(i).Name))
+                    RecipeNames(x) = Trim$(Recipe(i).Name)
+                    x = x + 1
                 End If
             End If
-
         Next
 
-        'reset the panel's info
-        frmMainGame.pgbCraftProgress.Value = 0
-
-        frmMainGame.picProduct.BackgroundImage = Nothing
-        frmMainGame.lblProductName.Text = "None Selected"
-        frmMainGame.lblProductAmount.Text = "0"
-
-        frmMainGame.picMaterial1.BackgroundImage = Nothing
-        frmMainGame.lblMaterialName1.Text = "Empty Slot"
-        frmMainGame.lblMaterialAmount1.Text = "0"
-
-        frmMainGame.picMaterial2.BackgroundImage = Nothing
-        frmMainGame.lblMaterialName2.Text = "Empty Slot"
-        frmMainGame.lblMaterialAmount2.Text = "0"
-
-        frmMainGame.picMaterial3.BackgroundImage = Nothing
-        frmMainGame.lblMaterialName3.Text = "Empty Slot"
-        frmMainGame.lblMaterialAmount3.Text = "0"
-
-        frmMainGame.picMaterial4.BackgroundImage = Nothing
-        frmMainGame.lblMaterialName4.Text = "Empty Slot"
-        frmMainGame.lblMaterialAmount4.Text = "0"
-
-        frmMainGame.picMaterial5.BackgroundImage = Nothing
-        frmMainGame.lblMaterialName5.Text = "Empty Slot"
-        frmMainGame.lblMaterialAmount5.Text = "0"
+        CraftAmountValue = 1
 
         InCraft = True
 
-        frmMainGame.tmrCraft.Enabled = False
+        LoadRecipe(RecipeNames(SelectedRecipe))
 
-        frmMainGame.btnCraft.Enabled = True
-        frmMainGame.btnCraftStop.Enabled = True
-        frmMainGame.btnCraftStop.Enabled = True
-        frmMainGame.nudCraftAmount.Enabled = True
-        frmMainGame.lstRecipe.Enabled = True
-        frmMainGame.chkKnownOnly.Enabled = True
-
-        frmMainGame.pnlCraft.Visible = True
+        pnlCraftVisible = True
     End Sub
 
     Sub LoadRecipe(ByVal RecipeName As String)
@@ -404,49 +407,21 @@ Public Module ClientCrafting
 
         If recipeindex <= 0 Then Exit Sub
 
-        frmMainGame.picProduct.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).MakeItemNum).Pic & GFX_EXT)
-        frmMainGame.lblProductName.Text = Item(Recipe(recipeindex).MakeItemNum).Name
-        frmMainGame.lblProductAmount.Text = "X 1"
+        picProductIndex = Item(Recipe(recipeindex).MakeItemNum).Pic
+        lblProductNameText = Item(Recipe(recipeindex).MakeItemNum).Name
+        lblProductAmountText = "X 1"
 
-        If Recipe(recipeindex).Ingredients(1).ItemNum > 0 Then
-            frmMainGame.picMaterial1.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).Ingredients(1).ItemNum).Pic & GFX_EXT)
-            frmMainGame.lblMaterialName1.Text = Item(Recipe(recipeindex).Ingredients(1).ItemNum).Name
-            frmMainGame.lblMaterialAmount1.Text = "X " & Recipe(recipeindex).Ingredients(1).Value & "/" & HasItem(MyIndex, Recipe(recipeindex).Ingredients(1).ItemNum)
-        Else
-            frmMainGame.picMaterial1.BackgroundImage = Nothing
-        End If
-
-        If Recipe(recipeindex).Ingredients(2).ItemNum > 0 Then
-            frmMainGame.picMaterial2.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).Ingredients(2).ItemNum).Pic & GFX_EXT)
-            frmMainGame.lblMaterialName2.Text = Item(Recipe(recipeindex).Ingredients(2).ItemNum).Name
-            frmMainGame.lblMaterialAmount2.Text = "X " & Recipe(recipeindex).Ingredients(2).Value & "/" & HasItem(MyIndex, Recipe(recipeindex).Ingredients(2).ItemNum)
-        Else
-            frmMainGame.picMaterial2.BackgroundImage = Nothing
-        End If
-
-        If Recipe(recipeindex).Ingredients(3).ItemNum > 0 Then
-            frmMainGame.picMaterial3.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).Ingredients(3).ItemNum).Pic & GFX_EXT)
-            frmMainGame.lblMaterialName3.Text = Item(Recipe(recipeindex).Ingredients(3).ItemNum).Name
-            frmMainGame.lblMaterialAmount3.Text = "X " & Recipe(recipeindex).Ingredients(3).Value & "/" & HasItem(MyIndex, Recipe(recipeindex).Ingredients(3).ItemNum)
-        Else
-            frmMainGame.picMaterial3.BackgroundImage = Nothing
-        End If
-
-        If Recipe(recipeindex).Ingredients(4).ItemNum > 0 Then
-            frmMainGame.picMaterial4.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).Ingredients(4).ItemNum).Pic & GFX_EXT)
-            frmMainGame.lblMaterialName4.Text = Item(Recipe(recipeindex).Ingredients(4).ItemNum).Name
-            frmMainGame.lblMaterialAmount4.Text = "X " & Recipe(recipeindex).Ingredients(4).Value & "/" & HasItem(MyIndex, Recipe(recipeindex).Ingredients(4).ItemNum)
-        Else
-            frmMainGame.picMaterial4.BackgroundImage = Nothing
-        End If
-
-        If Recipe(recipeindex).Ingredients(5).ItemNum > 0 Then
-            frmMainGame.picMaterial5.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & Item(Recipe(recipeindex).Ingredients(5).ItemNum).Pic & GFX_EXT)
-            frmMainGame.lblMaterialName5.Text = Item(Recipe(recipeindex).Ingredients(5).ItemNum).Name
-            frmMainGame.lblMaterialAmount5.Text = "X " & Recipe(recipeindex).Ingredients(5).Value & "/" & HasItem(MyIndex, Recipe(recipeindex).Ingredients(5).ItemNum)
-        Else
-            frmMainGame.picMaterial5.BackgroundImage = Nothing
-        End If
+        For i = 1 To MAX_INGREDIENT
+            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
+                picMaterialIndex(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Pic
+                lblMaterialName(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Name
+                lblMaterialAmount(i) = "X " & HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) & "/" & Recipe(recipeindex).Ingredients(i).Value
+            Else
+                picMaterialIndex(i) = 0
+                lblMaterialName(i) = ""
+                lblMaterialAmount(i) = ""
+            End If
+        Next
 
     End Sub
 
@@ -463,6 +438,111 @@ Public Module ClientCrafting
         Next
 
     End Function
+
+    Public Sub DrawCraftPanel()
+        Dim i As Long, y As Long
+        Dim rec As Rectangle, pgbvalue As Long
+
+        'first render panel
+        RenderTexture(CraftGFX, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.width, CraftGFXInfo.height)
+
+        y = 10
+
+        'draw recipe names
+        For i = 1 To MAX_RECIPE
+            If Len(Trim$(RecipeNames(i))) > 0 Then
+                DrawText(CraftPanelX + 12, CraftPanelY + y, Trim$(RecipeNames(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                y = y + 20
+            End If
+        Next
+
+        If SelectedRecipe = 0 Then Exit Sub
+
+        If picProductIndex > 0 Then
+            If ItemsGFXInfo(picProductIndex).IsLoaded = False Then
+                LoadTexture(picProductIndex, 4)
+            End If
+
+            'seeying we still use it, lets update timer
+            With ItemsGFXInfo(picProductIndex)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            RenderTexture(ItemsGFX(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).width, ItemsGFXInfo(picProductIndex).height)
+
+            DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(lblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+            DrawText(CraftPanelX + 310, CraftPanelY + 35, Trim$(lblProductAmountText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
+
+        y = 107
+
+        For i = 1 To MAX_INGREDIENT
+            If picMaterialIndex(i) > 0 Then
+                If ItemsGFXInfo(picMaterialIndex(i)).IsLoaded = False Then
+                    LoadTexture(picMaterialIndex(i), 4)
+                End If
+
+                'seeying we still use it, lets update timer
+                With ItemsGFXInfo(picMaterialIndex(i))
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+
+                RenderTexture(ItemsGFX(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).width, ItemsGFXInfo(picMaterialIndex(i)).height)
+
+                DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(lblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+                DrawText(CraftPanelX + 315, CraftPanelY + y + 15, Trim$(lblMaterialAmount(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+                y = y + 63
+            End If
+        Next
+
+        'progress bar
+        pgbvalue = (CraftProgressValue / 100) * 100
+
+        With rec
+            .Y = 0
+            .Height = ProgBarGFXInfo.height
+            .X = 0
+            .Width = pgbvalue * ProgBarGFXInfo.width / 100
+        End With
+
+        'then render full ontop of it
+        RenderTexture(ProgBarGFX, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
+    End Sub
+
+    Public Sub ResetCraftPanel()
+        'reset the panel's info
+        ReDim RecipeNames(MAX_RECIPE)
+
+        For i = 1 To MAX_RECIPE
+            RecipeNames(i) = ""
+        Next
+
+        CraftProgressValue = 0
+
+        picProductIndex = 0
+        lblProductNameText = "None Selected"
+        lblProductAmountText = "0"
+
+        For i = 1 To MAX_INGREDIENT
+            picMaterialIndex(i) = 0
+            lblMaterialName(i) = ""
+            lblMaterialAmount(i) = ""
+        Next
+
+        frmMainGame.tmrCraft.Enabled = False
+
+        btnCraftEnabled = True
+        btnCraftStopEnabled = True
+        nudCraftAmountEnabled = True
+        lstRecipeEnabled = True
+        chkKnownOnlyEnabled = True
+
+        SelectedRecipe = 0
+    End Sub
 
 #End Region
 

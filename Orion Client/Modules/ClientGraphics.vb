@@ -115,6 +115,9 @@ Module ClientGraphics
     Public CraftGFX As Texture
     Public CraftGFXInfo As GraphicInfo
 
+    Public ProgBarGFX As Texture
+    Public ProgBarGFXInfo As GraphicInfo
+
     Public RClickGFX As Texture
     Public RClickGFXInfo As GraphicInfo
 
@@ -148,7 +151,7 @@ Module ClientGraphics
     Public EXPBarGFXInfo As GraphicInfo
     Public EmptyEXPBarGFX As Texture
     Public EmptyEXPBarGFXInfo As GraphicInfo
-    Dim bmp_stream As IO.MemoryStream
+    'Dim bmp_stream As IO.MemoryStream
 
     Public Structure GraphicInfo
         Dim width As Long
@@ -518,6 +521,15 @@ Module ClientGraphics
             CraftGFXInfo.height = CraftGFX.Size.Y
         End If
 
+        ProgBarGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "ProgBar" & GFX_EXT) Then
+            ProgBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\" & "ProgBar" & GFX_EXT)
+
+            'Cache the width and height
+            ProgBarGFXInfo.width = ProgBarGFX.Size.X
+            ProgBarGFXInfo.height = ProgBarGFX.Size.Y
+        End If
+
     End Sub
 
     Sub DrawChat()
@@ -605,7 +617,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 4 Then 'items
-            If Index < 0 Or Index > NumItems Then Exit Sub
+            If Index <= 0 Or Index > NumItems Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             ItemsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "items\" & Index & GFX_EXT)
@@ -2121,6 +2133,7 @@ Module ClientGraphics
         If Not ButtonHoverGFX Is Nothing Then ButtonHoverGFX.Dispose()
         If Not QuestGFX Is Nothing Then QuestGFX.Dispose()
         If Not CraftGFX Is Nothing Then CraftGFX.Dispose()
+        If Not ProgBarGFX Is Nothing Then ProgBarGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
@@ -3608,11 +3621,6 @@ NextLoop:
             frmMenu.picLogo.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
         End If
 
-        'craft
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Craft" & GFX_EXT) Then
-            frmMainGame.pnlCraft.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Main\Craft" & GFX_EXT)
-        End If
-
     End Sub
 
     Public Sub DrawGUI()
@@ -3667,6 +3675,10 @@ NextLoop:
 
         If pnlQuestLogVisible = True Then
             DrawQuestLog()
+        End If
+
+        If pnlCraftVisible = True Then
+            DrawCraftPanel()
         End If
     End Sub
 End Module

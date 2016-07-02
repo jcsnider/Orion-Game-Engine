@@ -990,6 +990,9 @@
     <Content Include="data files\graphics\GUI\Main\plus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\ProgBar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\QuestLog.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

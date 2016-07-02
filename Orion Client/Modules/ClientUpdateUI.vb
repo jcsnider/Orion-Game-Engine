@@ -270,6 +270,10 @@
 
     Public DrawChar As Boolean
 
+    Public CraftPanelX As Long = 25
+    Public CraftPanelY As Long = 25
+
+
 
     Sub UpdateUI()
         If ReloadFrmMain = True Then
