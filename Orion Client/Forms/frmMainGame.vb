@@ -136,6 +136,18 @@ Public Class frmMainGame
             If e.KeyCode = Keys.C Then
                 pnlCharacterVisible = Not pnlCharacterVisible
             End If
+            'quest window
+            If e.KeyCode = Keys.Q Then
+                pnlQuestLogVisible = Not pnlQuestLogVisible
+            End If
+            'options window
+            If e.KeyCode = Keys.O Then
+                pnlOptions.Visible = Not pnlOptions.Visible
+            End If
+            'spell window
+            If e.KeyCode = Keys.K Then
+                pnlSpellsVisible = Not pnlSpellsVisible
+            End If
         End If
 
     End Sub

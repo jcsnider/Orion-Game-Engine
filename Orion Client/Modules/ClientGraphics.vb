@@ -90,6 +90,8 @@ Module ClientGraphics
     Public CharPanelGFXInfo As GraphicInfo
     Public CharPanelPlusGFX As Texture
     Public CharPanelPlusGFXInfo As GraphicInfo
+    Public CharPanelMinGFX As Texture
+    Public CharPanelMinGFXInfo As GraphicInfo
 
     Public BankPanelGFX As Texture
     Public BankPanelGFXInfo As GraphicInfo
@@ -151,7 +153,6 @@ Module ClientGraphics
     Public EXPBarGFXInfo As GraphicInfo
     Public EmptyEXPBarGFX As Texture
     Public EmptyEXPBarGFXInfo As GraphicInfo
-    'Dim bmp_stream As IO.MemoryStream
 
     Public Structure GraphicInfo
         Dim width As Long
@@ -184,6 +185,8 @@ Module ClientGraphics
 
         SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
 
+        'this stuff only loads when needed :)
+
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
@@ -208,39 +211,17 @@ Module ClientGraphics
 
         ReDim SpellIconsGFX(0 To NumSpellIcons)
         ReDim SpellIconsGFXInfo(0 To NumSpellIcons)
-        For i = 1 To NumSpellIcons
-            'Load texture first, dont care about memory streams (just use the filename)
-            SpellIconsGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "spellicons\" & i & GFX_EXT)
 
-            'Cache the width and height
-            SpellIconsGFXInfo(i).width = SpellIconsGFX(i).Size.X
-            SpellIconsGFXInfo(i).height = SpellIconsGFX(i).Size.Y
-        Next
-
-        'Housing
-        ReDim FurnitureGFX(0 To NumFurniture)
-        ReDim FurnitureGFXInfo(0 To NumFurniture)
-        For i = 1 To NumFurniture
-            'Load texture first, dont care about memory streams (just use the filename)
-            FurnitureGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "Furniture\" & i & GFX_EXT)
-
-            'Cache the width and height
-            FurnitureGFXInfo(i).width = FurnitureGFX(i).Size.X
-            FurnitureGFXInfo(i).height = FurnitureGFX(i).Size.Y
-        Next
-
-        'Faces
         ReDim FacesGFX(0 To NumFaces)
         ReDim FacesGFXInfo(0 To NumFaces)
-        For i = 1 To NumFaces
-            'Load texture first, dont care about memory streams (just use the filename)
-            FacesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & i & GFX_EXT)
 
-            'Cache the width and height
-            FacesGFXInfo(i).width = FacesGFX(i).Size.X
-            FacesGFXInfo(i).height = FacesGFX(i).Size.Y
-        Next
+        ReDim FurnitureGFX(0 To NumFurniture)
+        ReDim FurnitureGFXInfo(0 To NumFurniture)
 
+        ReDim ProjectileGFX(0 To NumProjectiles)
+        ReDim ProjectileGFXInfo(0 To NumProjectiles)
+
+        'sadly, gui shit is always needed, so we preload it :/
         DoorGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "door" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
@@ -339,6 +320,16 @@ Module ClientGraphics
             'Cache the width and height
             CharPanelPlusGFXInfo.width = CharPanelPlusGFX.Size.X
             CharPanelPlusGFXInfo.height = CharPanelPlusGFX.Size.Y
+        End If
+
+        CharPanelMinGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\min" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            CharPanelMinGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\min" & GFX_EXT)
+
+            'Cache the width and height
+            CharPanelMinGFXInfo.width = CharPanelMinGFX.Size.X
+            CharPanelMinGFXInfo.height = CharPanelMinGFX.Size.Y
         End If
 
         BankPanelGFXInfo = New GraphicInfo
@@ -455,17 +446,6 @@ Module ClientGraphics
             MyChatWindowGFXInfo.width = MyChatWindowGFX.Size.X
             MyChatWindowGFXInfo.height = MyChatWindowGFX.Size.Y
         End If
-
-        ReDim ProjectileGFX(0 To NumProjectiles)
-        ReDim ProjectileGFXInfo(0 To NumProjectiles)
-        For i = 1 To NumProjectiles
-            'Load texture first, dont care about memory streams (just use the filename)
-            ProjectileGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "projectiles\" & i & GFX_EXT)
-
-            'Cache the width and height
-            ProjectileGFXInfo(i).width = ProjectileGFX(i).Size.X
-            ProjectileGFXInfo(i).height = ProjectileGFX(i).Size.Y
-        Next
 
         DescriptionGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\" & "Description" & GFX_EXT) Then
@@ -631,7 +611,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 5 Then 'resources
-            If Index < 0 Or Index > NumItems Then Exit Sub
+            If Index < 0 Or Index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             ResourcesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & Index & GFX_EXT)
@@ -645,7 +625,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 6 Then 'animations
-            If Index <= 0 Or Index > NumItems Then Exit Sub
+            If Index <= 0 Or Index > NumAnimations Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             AnimationsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Animations\" & Index & GFX_EXT)
@@ -659,7 +639,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 7 Then 'faces
-            If Index < 0 Or Index > NumItems Then Exit Sub
+            If Index < 0 Or Index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             FacesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & Index & GFX_EXT)
@@ -673,7 +653,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 8 Then 'fogs
-            If Index < 0 Or Index > NumItems Then Exit Sub
+            If Index < 0 Or Index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             FogGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Fogs\" & Index & GFX_EXT)
@@ -682,6 +662,46 @@ Module ClientGraphics
             With FogGFXInfo(Index)
                 .width = FogGFX(Index).Size.X
                 .height = FogGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+        ElseIf TexType = 9 Then 'spell icons
+            If Index < 0 Or Index > NumSpellIcons Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            SpellIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SpellIcons\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With SpellIconsGFXInfo(Index)
+                .width = SpellIconsGFX(Index).Size.X
+                .height = SpellIconsGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf TexType = 10 Then 'furniture
+            If Index < 0 Or Index > NumFurniture Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            FurnitureGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Furniture\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With FurnitureGFXInfo(Index)
+                .width = FurnitureGFX(Index).Size.X
+                .height = FurnitureGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf TexType = 11 Then 'projectiles
+            If Index < 0 Or Index > NumProjectiles Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            ProjectileGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Projectiles\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With ProjectileGFXInfo(Index)
+                .width = ProjectileGFX(Index).Size.X
+                .height = ProjectileGFX(Index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
@@ -2120,6 +2140,8 @@ Module ClientGraphics
         If Not ActionPanelGFX Is Nothing Then ActionPanelGFX.Dispose()
         If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
+        If Not CharPanelPlusGFX Is Nothing Then CharPanelPlusGFX.Dispose()
+        If Not CharPanelMinGFX Is Nothing Then CharPanelMinGFX.Dispose()
         If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
         If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
         If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
@@ -2216,6 +2238,15 @@ Module ClientGraphics
             EditorItem_Furniture.Display()
             Exit Sub
         End If
+
+        If FurnitureGFXInfo(Furniturenum).IsLoaded = False Then
+            LoadTexture(Furniturenum, 10)
+        End If
+
+        'seeying we still use it, lets update timer
+        With FurnitureGFXInfo(Furniturenum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
 
         ' rect for source
         With sRECT
@@ -2316,6 +2347,15 @@ Module ClientGraphics
             EditorSpell_Icon.Display()
             Exit Sub
         End If
+
+        If SpellIconsGFXInfo(iconnum).IsLoaded = False Then
+            LoadTexture(iconnum, 9)
+        End If
+
+        'seeying we still use it, lets update timer
+        With SpellIconsGFXInfo(iconnum)
+            .TextureTimer = GetTickCount() + 100000
+        End With
 
         With sRECT
             .Y = 0
@@ -3371,6 +3411,15 @@ NextLoop:
 
                 If spellicon > 0 And spellicon <= NumSpellIcons Then
 
+                    If SpellIconsGFXInfo(spellicon).IsLoaded = False Then
+                        LoadTexture(spellicon, 9)
+                    End If
+
+                    'seeying we still use it, lets update timer
+                    With SpellIconsGFXInfo(spellicon)
+                        .TextureTimer = GetTickCount() + 100000
+                    End With
+
                     With rec
                         .Y = 0
                         .Height = 32
@@ -3472,7 +3521,6 @@ NextLoop:
         Else
             RenderTexture(DescriptionGFX, GameWindow, Xoffset - DescriptionGFXInfo.width, Yoffset, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height \ 2)
         End If
-
 
         'name
         DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)

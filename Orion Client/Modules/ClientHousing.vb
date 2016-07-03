@@ -311,6 +311,16 @@ Public Module ClientHousing
         If Item(ItemNum).Type <> ITEM_TYPE_FURNITURE Then Exit Sub
 
         i = Item(ItemNum).Data2
+
+        If FurnitureGFXInfo(i).IsLoaded = False Then
+            LoadTexture(i, 10)
+        End If
+
+        'seeying we still use it, lets update timer
+        With SpellIconsGFXInfo(i)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         Width = Item(ItemNum).FurnitureWidth
         Height = Item(ItemNum).FurnitureHeight
 

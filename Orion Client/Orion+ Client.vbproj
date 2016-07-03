@@ -984,6 +984,9 @@
     <Content Include="data files\graphics\GUI\Main\inventory.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data files\graphics\GUI\Main\min.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data files\graphics\GUI\Main\MyChat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

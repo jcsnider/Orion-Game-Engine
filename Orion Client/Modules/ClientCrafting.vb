@@ -509,8 +509,14 @@ Public Module ClientCrafting
             .Width = pgbvalue * ProgBarGFXInfo.width / 100
         End With
 
-        'then render full ontop of it
         RenderTexture(ProgBarGFX, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'amount controls
+        RenderTexture(CharPanelMinGFX, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.width, CharPanelMinGFXInfo.height)
+
+        DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
+
+        RenderTexture(CharPanelPlusGFX, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
     End Sub
 
     Public Sub ResetCraftPanel()
@@ -522,6 +528,8 @@ Public Module ClientCrafting
         Next
 
         CraftProgressValue = 0
+
+        CraftAmountValue = 1
 
         picProductIndex = 0
         lblProductNameText = "None Selected"

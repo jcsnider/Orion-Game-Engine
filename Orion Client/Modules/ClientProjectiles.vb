@@ -182,9 +182,6 @@ Public Module ClientProjectiles
 
 #Region "Drawing"
 
-    'Public ProjectileGFX() As Texture
-    'Public ProjectileGFXInfo() As GraphicInfo
-
     Public Sub CheckProjectiles()
         Dim i As Long
 
@@ -302,6 +299,15 @@ Public Module ClientProjectiles
         Sprite = Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Sprite
         If Sprite < 1 Or Sprite > NumProjectiles Then Exit Sub
 
+        If ProjectileGFXInfo(Sprite).IsLoaded = False Then
+            LoadTexture(Sprite, 11)
+        End If
+
+        'seeying we still use it, lets update timer
+        With ProjectileGFXInfo(Sprite)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
         ' src rect
         With rec
             .top = 0
@@ -325,10 +331,7 @@ Public Module ClientProjectiles
         X = ConvertMapX(X * PIC_X)
         Y = ConvertMapY(Y * PIC_Y)
 
-        'RenderTexture Tex_Projectiles(Sprite), X + XOffset, Y + YOffset, rec.left, rec.top, rec.right - rec.left, rec.bottom - rec.top, rec.right - rec.left, rec.bottom - rec.top, D3DColorRGBA(255, 255, 255, 255), True
-
         Dim tmpSprite As Sprite = New Sprite(ProjectileGFX(Sprite))
-        'tmpSprite.TextureRect = New IntRect(rec.left, rec.top, rec.right, rec.bottom)
         tmpSprite.TextureRect = New IntRect(rec.left, rec.top, 32, 32)
         tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
         GameWindow.Draw(tmpSprite)

@@ -79,6 +79,15 @@ Public Module ClientHotBar
             If spellnum > 0 Then
                 spellpic = Spell(spellnum).Icon
 
+                If SpellIconsGFXInfo(spellpic).IsLoaded = False Then
+                    LoadTexture(spellpic, 9)
+                End If
+
+                'seeying we still use it, lets update timer
+                With SpellIconsGFXInfo(spellpic)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
                 With rec
                     .Y = 0
                     .Height = 32

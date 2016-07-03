@@ -638,6 +638,25 @@ Public Module ClientGuiFunctions
                         SendCloseCraft()
                     End If
                 End If
+
+                'minus
+                If X > (CraftPanelX + 340) And X < (CraftPanelX + 340 + 10) Then
+                    If Y > (CraftPanelY + 422) And Y < (CraftPanelY + 422 + 10) Then
+                        If CraftAmountValue > 1 Then
+                            CraftAmountValue = CraftAmountValue - 1
+                        End If
+                    End If
+                End If
+
+                'plus
+                If X > (CraftPanelX + 392) And X < (CraftPanelX + 392 + 10) Then
+                    If Y > (CraftPanelY + 422) And Y < (CraftPanelY + 422 + 10) Then
+                        If CraftAmountValue < 100 Then
+                            CraftAmountValue = CraftAmountValue + 1
+                        End If
+                    End If
+                End If
+
                 CheckGuiClick = True
             End If
         End If
