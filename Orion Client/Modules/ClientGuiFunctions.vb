@@ -14,7 +14,7 @@ Public Module ClientGuiFunctions
                 If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
                     eqNum = IsEqItem(X, Y)
                     If eqNum <> 0 Then
-                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0)
+                        UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, eqNum)
                         LastItemDesc = GetPlayerEquipment(MyIndex, eqNum) ' set it so you don't re-set values
                         ShowItemDesc = True
                         Exit Sub
@@ -48,7 +48,7 @@ Public Module ClientGuiFunctions
                                 Exit Sub
                             End If
                         Next
-                        UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum))
+                        UpdateDescWindow(GetPlayerInvItemNum(MyIndex, InvNum), GetPlayerInvItemValue(MyIndex, InvNum), InvNum)
                         LastItemDesc = GetPlayerInvItemNum(MyIndex, InvNum) ' set it so you don't re-set values
                         ShowItemDesc = True
                         Exit Sub
@@ -102,7 +102,7 @@ Public Module ClientGuiFunctions
 
                     If bankitem <> 0 Then
 
-                        UpdateDescWindow(Bank.Item(bankitem).Num, Bank.Item(bankitem).Value)
+                        UpdateDescWindow(Bank.Item(bankitem).Num, Bank.Item(bankitem).Value, bankitem)
                         ShowItemDesc = True
                         Exit Sub
                     Else
@@ -121,7 +121,7 @@ Public Module ClientGuiFunctions
 
                 If shopslot <> 0 Then
 
-                    UpdateDescWindow(Shop(InShop).TradeItem(shopslot).Item, Shop(InShop).TradeItem(shopslot).ItemValue)
+                    UpdateDescWindow(Shop(InShop).TradeItem(shopslot).Item, Shop(InShop).TradeItem(shopslot).ItemValue, shopslot)
                     LastItemDesc = Shop(InShop).TradeItem(shopslot).Item
                     ShowItemDesc = True
                     Exit Sub
@@ -143,7 +143,7 @@ Public Module ClientGuiFunctions
                 TradeNum = IsTradeItem(X, Y, True)
 
                 If TradeNum <> 0 Then
-                    UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value)
+                    UpdateDescWindow(GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num), TradeYourOffer(TradeNum).Value, TradeNum)
                     LastItemDesc = GetPlayerInvItemNum(MyIndex, TradeYourOffer(TradeNum).Num) ' set it so you don't re-set values
                     ShowItemDesc = True
                     Exit Sub
@@ -156,7 +156,7 @@ Public Module ClientGuiFunctions
                 TradeNum = IsTradeItem(X, Y, False)
 
                 If TradeNum <> 0 Then
-                    UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value)
+                    UpdateDescWindow(TradeTheirOffer(TradeNum).Num, TradeTheirOffer(TradeNum).Value, TradeNum)
                     LastItemDesc = TradeTheirOffer(TradeNum).Num ' set it so you don't re-set values
                     ShowItemDesc = True
                     Exit Sub

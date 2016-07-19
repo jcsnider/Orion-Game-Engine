@@ -3492,7 +3492,9 @@ NextLoop:
     End Sub
 
     Public Sub DrawItemDesc()
-        Dim Xoffset As Long, Yoffset As Long
+        Dim Xoffset As Long, Yoffset As Long, y As Long
+
+        y = 0
 
         If pnlCharacterVisible = True Then
             Xoffset = CharWindowX
@@ -3526,16 +3528,24 @@ NextLoop:
         DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
         'info
         DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 28, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'speed
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 44, "Speed: " & ItemDescSpeed, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'level
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 58, "Level required: " & ItemDescLevel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        For Each str As String In WordWrap(ItemDescDescription, 25)
+            'description
+            DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 44 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            y = y + 15
+        Next
+
+
         'cost
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Worth: " & ItemDescCost, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Worth: " & ItemDescCost, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'type
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 90, "Type: " & ItemDescType, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 90, "Type: " & ItemDescType, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If ItemDescSize = 0 Then
+            'speed
+            DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Speed: " & ItemDescSpeed, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'level
+            DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 90, "Level required: " & ItemDescLevel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'bonuses
             DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 118, "=Bonuses=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'strength

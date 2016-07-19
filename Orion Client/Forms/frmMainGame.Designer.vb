@@ -22,7 +22,6 @@ Partial Class frmMainGame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlOptions = New System.Windows.Forms.Panel()
@@ -45,8 +44,6 @@ Partial Class frmMainGame
         Me.lblCurrency = New System.Windows.Forms.Label()
         Me.pnlTempBank = New System.Windows.Forms.Panel()
         Me.pnlTmpSkill = New System.Windows.Forms.Panel()
-        Me.tmrShake = New System.Windows.Forms.Timer(Me.components)
-        Me.tmrCraft = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlOptions.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -283,14 +280,6 @@ Partial Class frmMainGame
         Me.pnlTmpSkill.TabIndex = 42
         Me.pnlTmpSkill.Visible = False
         '
-        'tmrShake
-        '
-        Me.tmrShake.Interval = 50
-        '
-        'tmrCraft
-        '
-        Me.tmrCraft.Interval = 1000
-        '
         'frmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -339,11 +328,9 @@ Partial Class frmMainGame
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
-    Friend WithEvents tmrShake As Windows.Forms.Timer
     Friend WithEvents lblVolume As Windows.Forms.Label
     Friend WithEvents scrlVolume As Windows.Forms.HScrollBar
     Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents cmbScreenSize As Windows.Forms.ComboBox
-    Friend WithEvents tmrCraft As Windows.Forms.Timer
 End Class

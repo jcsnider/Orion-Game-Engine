@@ -3182,12 +3182,12 @@ nextevent:
             End If
 
             'EventPrompt
-            txtArray = WordWrap(EventText, 50)
+            txtArray = WordWrap(EventText, 45)
             For i = 0 To txtArray.Count
                 If i = txtArray.Count Then Exit For
                 'draw text
-                DrawText(EventChatX + EventChatTextX, EventChatY + EventChatTextY + tmpY, Trim(txtArray(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
-                tmpY = tmpY + 13
+                DrawText(EventChatX + EventChatTextX, EventChatY + EventChatTextY + tmpY, Trim$(txtArray(i).Replace(vbCrLf, "")), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
+                tmpY = tmpY + 20
             Next
 
             If EventChatType = 1 Then

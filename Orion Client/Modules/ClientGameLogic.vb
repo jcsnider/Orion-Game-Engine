@@ -74,6 +74,41 @@ Module ClientGameLogic
                     tmr10000 = Tick + 10000
                 End If
 
+                'crafting timer
+                If CraftTimerEnabled Then
+                    If CraftTimer < Tick Then
+                        CraftProgressValue = CraftProgressValue + (100 / Recipe(GetRecipeIndex(RecipeNames(SelectedRecipe))).CreateTime)
+
+                        If CraftProgressValue >= 100 Then
+                            CraftTimerEnabled = False
+                        End If
+                        CraftTimer = Tick + 1000
+                    End If
+                End If
+
+                'screenshake timer
+                If ShakeTimerEnabled Then
+                    If ShakeTimer < Tick Then
+                        If ShakeCount < 10 Then
+                            If LastDir = 0 Then
+                                frmMainGame.picscreen.Location = New Point(frmMainGame.picscreen.Location.X + 20, frmMainGame.picscreen.Location.Y)
+                                LastDir = 1
+                            Else
+                                frmMainGame.picscreen.Location = New Point(frmMainGame.picscreen.Location.X - 20, frmMainGame.picscreen.Location.Y)
+                                LastDir = 0
+                            End If
+                        Else
+                            frmMainGame.picscreen.Location = New Point(0, 0)
+                            ShakeCount = 0
+                            ShakeTimerEnabled = False
+                        End If
+
+                        ShakeCount += 1
+
+                        ShakeTimer = Tick + 50
+                    End If
+                End If
+
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < Tick Then
@@ -844,7 +879,7 @@ Continue1:
         Buffer = Nothing
     End Sub
 
-    Public Sub UpdateDescWindow(ByVal itemnum As Long, ByVal Amount As Long)
+    Public Sub UpdateDescWindow(ByVal itemnum As Long, ByVal Amount As Long, ByVal InvNum As Long)
         Dim FirstLetter As String
 
         FirstLetter = LCase$(Left$(Trim$(Item(itemnum).Name), 1))
@@ -881,6 +916,8 @@ Continue1:
                 ItemDescRarityColor = ITEM_RARITY_COLOR_5
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
         End Select
+
+        ItemDescDescription = Item(itemnum).Description
 
         ' For the stats label
         Select Case Item(itemnum).Type
@@ -1037,16 +1074,16 @@ Continue1:
         GetBankItemNum = Bank.Item(bankslot).Num
     End Function
 
-    Public Sub SetBankItemNum(ByVal bankslot As Byte, ByVal itemnum As Integer)
-        Bank.Item(bankslot).Num = itemnum
+    Public Sub SetBankItemNum(ByVal Bankslot As Byte, ByVal itemnum As Integer)
+        Bank.Item(Bankslot).Num = itemnum
     End Sub
 
-    Public Function GetBankItemValue(ByVal bankslot As Byte) As Long
-        GetBankItemValue = Bank.Item(bankslot).Value
+    Public Function GetBankItemValue(ByVal Bankslot As Byte) As Long
+        GetBankItemValue = Bank.Item(Bankslot).Value
     End Function
 
-    Public Sub SetBankItemValue(ByVal bankslot As Byte, ByVal ItemValue As Long)
-        Bank.Item(bankslot).Value = ItemValue
+    Public Sub SetBankItemValue(ByVal Bankslot As Byte, ByVal ItemValue As Long)
+        Bank.Item(Bankslot).Value = ItemValue
     End Sub
 
     Public Sub ClearActionMsg(ByVal Index As Byte)

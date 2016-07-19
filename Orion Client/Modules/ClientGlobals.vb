@@ -220,4 +220,13 @@ Module ClientGlobals
     Public CurrentTintB As Long
     Public CurrentTintA As Long
     Public DrawThunder As Long
+
+    Public ShakeTimerEnabled As Boolean
+    Public ShakeTimer As Long
+    Public ShakeCount As Byte
+    Public LastDir As Byte
+
+    Public CraftTimerEnabled As Boolean
+    Public CraftTimer As Long
+
 End Module

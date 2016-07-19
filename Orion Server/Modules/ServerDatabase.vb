@@ -2,7 +2,6 @@
 Imports System.IO.Compression
 
 Module ServerDatabase
-    'Public Declare Function VarPtr Lib "msvbvm60.dll" Alias "VarPtr" (ByVal lpObject As Object) As Long
 
 #Region "Classes"
     Public Sub CreateClassesIni()
@@ -18,9 +17,10 @@ Module ServerDatabase
             PutVar(filename, "CLASS1", "Str", "5")
             PutVar(filename, "CLASS1", "End", "5")
             PutVar(filename, "CLASS1", "Vit", "5")
-            PutVar(filename, "CLASS1", "Will", "5")
+            PutVar(filename, "CLASS1", "Luck", "5")
             PutVar(filename, "CLASS1", "Int", "5")
             PutVar(filename, "CLASS1", "Spir", "5")
+            PutVar(filename, "CLASS1", "BaseExp", "25")
 
             PutVar(filename, "CLASS1", "StartMap", START_MAP)
             PutVar(filename, "CLASS1", "StartX", START_X)
@@ -54,7 +54,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\classes.ini"
 
-        If Not FileExist(filename) Then CreateClassesINI()
+        If Not FileExist(filename) Then CreateClassesIni()
 
         Max_Classes = Val(Getvar(filename, "INIT", "MaxClasses"))
         ReDim Classes(0 To Max_Classes)
@@ -95,7 +95,7 @@ Module ServerDatabase
             Classes(i).Stat(Stats.strength) = Val(Getvar(filename, "CLASS" & i, "Str"))
             Classes(i).Stat(Stats.endurance) = Val(Getvar(filename, "CLASS" & i, "End"))
             Classes(i).Stat(Stats.vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
-            Classes(i).Stat(Stats.luck) = Val(Getvar(filename, "CLASS" & i, "Will"))
+            Classes(i).Stat(Stats.luck) = Val(Getvar(filename, "CLASS" & i, "Luck"))
             Classes(i).Stat(Stats.intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
             Classes(i).Stat(Stats.spirit) = Val(Getvar(filename, "CLASS" & i, "Spir"))
 
@@ -109,13 +109,15 @@ Module ServerDatabase
             Classes(i).StartX = Val(Getvar(filename, "CLASS" & i, "StartX"))
             Classes(i).StartY = Val(Getvar(filename, "CLASS" & i, "StartY"))
 
+            Classes(i).BaseExp = Val(Getvar(filename, "CLASS" & i, "BaseExp"))
+
             DoEvents()
         Next
 
     End Sub
 
     Sub SaveClasses()
-        Dim filename As String
+        Dim filename As String, tmpstring As String = ""
         Dim i As Long
         Dim x As Long
 
@@ -123,14 +125,25 @@ Module ServerDatabase
 
         For i = 1 To Max_Classes
             PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
-            PutVar(filename, "CLASS" & i, "Maleprite", "1")
-            PutVar(filename, "CLASS" & i, "Femaleprite", "1")
+            For x = 0 To UBound(Classes(i).MaleSprite)
+                tmpstring = tmpstring & CStr(Classes(i).MaleSprite(x)) & ","
+            Next
+
+            PutVar(filename, "CLASS" & i, "MaleSprite", tmpstring.TrimEnd(","))
+
+            tmpstring = ""
+
+            For x = 0 To UBound(Classes(i).FemaleSprite)
+                tmpstring = tmpstring & CStr(Classes(i).FemaleSprite(x)) & ","
+            Next
+            PutVar(filename, "CLASS" & i, "FemaleSprite", tmpstring.TrimEnd(","))
+
             PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
             PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))
             PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.vitality)))
-            PutVar(filename, "CLASS" & i, "Will", Str(Classes(i).Stat(Stats.luck)))
+            PutVar(filename, "CLASS" & i, "Luck", Str(Classes(i).Stat(Stats.luck)))
             PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
-            PutVar(filename, "CLASS" & i, "Spr", Str(Classes(i).Stat(Stats.spirit)))
+            PutVar(filename, "CLASS" & i, "Spir", Str(Classes(i).Stat(Stats.spirit)))
             ' loop for items & values
             For x = 1 To 5
                 PutVar(filename, "CLASS" & i, "StartItem" & x, Str(Classes(i).StartItem(x)))
@@ -208,6 +221,7 @@ Module ServerDatabase
 
         Map(MapNum).EventCount = 0
         ReDim Map(MapNum).Events(0)
+
         ' Reset the values for if a player is on the map or not
         PlayersOnMap(MapNum) = NO
         Map(MapNum).Tileset = 1
@@ -643,6 +657,7 @@ Module ServerDatabase
 
     Sub ClearMapItem(ByVal Index As Long, ByVal MapNum As Long)
         MapItem(MapNum, Index) = Nothing
+
     End Sub
 
     Sub ClearMapItems()
@@ -651,7 +666,7 @@ Module ServerDatabase
 
         For y = 1 To MAX_MAPS
             For x = 1 To MAX_MAP_ITEMS
-                Call ClearMapItem(x, y)
+                ClearMapItem(x, y)
             Next
         Next
 
@@ -678,6 +693,8 @@ Module ServerDatabase
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
         FilePutObject(F, Item(itemNum).Name)
         FilePutObject(F, Item(itemNum).Pic)
+        FilePutObject(F, Item(itemNum).Description)
+
         FilePutObject(F, Item(itemNum).Type)
         FilePutObject(F, Item(itemNum).Data1)
         FilePutObject(F, Item(itemNum).Data2)
@@ -719,6 +736,9 @@ Module ServerDatabase
         FilePutObject(F, Item(itemNum).KnockBackTiles)
 
         FilePutObject(F, Item(itemNum).Randomize)
+        FilePutObject(F, Item(itemNum).RandomMin)
+        FilePutObject(F, Item(itemNum).RandomMax)
+
         FilePutObject(F, Item(itemNum).Stackable)
 
         FileClose(F)
@@ -746,6 +766,8 @@ Module ServerDatabase
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
         FileGetObject(F, Item(ItemNum).Name)
         FileGetObject(F, Item(ItemNum).Pic)
+        FileGetObject(F, Item(ItemNum).Description)
+
         FileGetObject(F, Item(ItemNum).Type)
         FileGetObject(F, Item(ItemNum).Data1)
         FileGetObject(F, Item(ItemNum).Data2)
@@ -787,6 +809,9 @@ Module ServerDatabase
         FileGetObject(F, Item(ItemNum).KnockBackTiles)
 
         FileGetObject(F, Item(ItemNum).Randomize)
+        FileGetObject(F, Item(ItemNum).RandomMin)
+        FileGetObject(F, Item(ItemNum).RandomMax)
+
         FileGetObject(F, Item(ItemNum).Stackable)
 
         FileClose(F)
@@ -809,13 +834,14 @@ Module ServerDatabase
     Sub ClearItem(ByVal Index As Long)
         Item(Index) = Nothing
         Item(Index).Name = ""
+        Item(Index).Description = ""
+
         For i = 0 To MAX_ITEMS
             ReDim Item(i).Add_Stat(0 To Stats.Stat_Count - 1)
             ReDim Item(i).Stat_Req(0 To Stats.Stat_Count - 1)
             ReDim Item(i).FurnitureBlocks(0 To 3, 0 To 3)
             ReDim Item(i).FurnitureFringe(0 To 3, 0 To 3)
         Next
-
 
     End Sub
 
@@ -1053,7 +1079,7 @@ Module ServerDatabase
         FileGetObject(F, Resource(ResourceNum).ItemReward)
         FileGetObject(F, Resource(ResourceNum).LvlRequired)
         FileGetObject(F, Resource(ResourceNum).ToolRequired)
-        FileGetObject(F, Resource(ResourceNum).health)
+        FileGetObject(F, Resource(ResourceNum).Health)
         FileGetObject(F, Resource(ResourceNum).RespawnTime)
         FileGetObject(F, Resource(ResourceNum).Walkthrough)
         FileGetObject(F, Resource(ResourceNum).Animation)
@@ -1108,7 +1134,7 @@ Module ServerDatabase
                     ReDim Preserve ResourceCache(MapNum).ResourceData(0 To Resource_Count)
                     ResourceCache(MapNum).ResourceData(Resource_Count).x = x
                     ResourceCache(MapNum).ResourceData(Resource_Count).y = y
-                    ResourceCache(MapNum).ResourceData(Resource_Count).cur_health = Resource(Map(MapNum).Tile(x, y).Data1).health
+                    ResourceCache(MapNum).ResourceData(Resource_Count).cur_health = Resource(Map(MapNum).Tile(x, y).Data1).Health
                 End If
 
             Next
@@ -1657,7 +1683,7 @@ Module ServerDatabase
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
 
-        ReDim Bank(Index).Item(MAX_BANK)
+
         For i = 0 To MAX_BANK
             FileGetObject(F, Bank(Index).Item(i).Num)
             FileGetObject(F, Bank(Index).Item(i).Value)
@@ -1684,9 +1710,13 @@ Module ServerDatabase
     End Sub
 
     Sub ClearBank(ByVal Index As Long)
+        ReDim Bank(Index).Item(MAX_BANK)
+
         For i = 0 To MAX_BANK
+
             Bank(Index).Item(i).Num = 0
             Bank(Index).Item(i).Value = 0
+
         Next
     End Sub
 
@@ -2294,6 +2324,17 @@ Module ServerDatabase
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
             Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
+
+            For q = 1 To 5
+                Buffer.WriteLong(Classes(i).StartItem(q))
+                Buffer.WriteLong(Classes(i).StartValue(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).StartMap)
+            Buffer.WriteLong(Classes(i).StartX)
+            Buffer.WriteLong(Classes(i).StartY)
+
+            Buffer.WriteLong(Classes(i).BaseExp)
         Next
 
         Return Buffer.ToArray()
@@ -2337,14 +2378,19 @@ Module ServerDatabase
         Buffer.WriteLong(Item(itemNum).Handed)
         Buffer.WriteLong(Item(itemNum).LevelReq)
         Buffer.WriteLong(Item(itemNum).Mastery)
-        Buffer.WriteString(Item(itemNum).Name)
+        Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteLong(Item(itemNum).Paperdoll)
         Buffer.WriteLong(Item(itemNum).Pic)
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).RandomMin)
+        Buffer.WriteLong(Item(itemNum).RandomMax)
+
         Buffer.WriteLong(Item(itemNum).Stackable)
+        Buffer.WriteString(Trim$(Item(itemNum).Description))
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))

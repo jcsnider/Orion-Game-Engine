@@ -29,6 +29,7 @@
     Public Structure PlayerInvRec
         Dim Num As Byte
         Dim Value As Long
+
     End Structure
 
     Public Structure Cache
@@ -220,11 +221,13 @@
         Dim StartMap As Long
         Dim StartX As Byte
         Dim StartY As Byte
+        Dim BaseExp As Long
     End Structure
 
     Public Structure ItemRec
         Dim Name As String
         Dim Pic As Integer
+        Dim Description As String
 
         Dim Type As Byte
         Dim Data1 As Integer
@@ -243,7 +246,11 @@
         Dim Stat_Req() As Byte
         Dim Animation As Long
         Dim Paperdoll As Long
+
         Dim Randomize As Byte
+        Dim RandomMin As Byte
+        Dim RandomMax As Byte
+
         Dim Stackable As Byte
 
         'Housing
@@ -261,6 +268,7 @@
         Dim Value As Long
         Dim x As Byte
         Dim y As Byte
+
     End Structure
 
     Public Structure NpcRec

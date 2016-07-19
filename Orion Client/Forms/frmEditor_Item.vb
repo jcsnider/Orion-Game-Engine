@@ -398,4 +398,22 @@ Public Class frmEditor_Item
         End If
         Item(EditorIndex).Data1 = scrlRecipe.Value
     End Sub
+
+    Private Sub txtDescription_TextChanged(sender As Object, e As EventArgs) Handles txtDescription.TextChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).Description = Trim$(txtDescription.Text)
+    End Sub
+
+    Private Sub numMin_ValueChanged(sender As Object, e As EventArgs) Handles numMin.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).RandomMin = numMin.Value
+    End Sub
+
+    Private Sub numMax_ValueChanged(sender As Object, e As EventArgs) Handles numMax.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).RandomMax = numMax.Value
+    End Sub
 End Class

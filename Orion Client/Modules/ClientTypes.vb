@@ -139,7 +139,7 @@
 
     Public Structure TileRec
         Dim Layer() As TileDataRec
-        Dim Autotile() As Byte '1 To MapLayer.Layer_Count - 1
+        Dim Autotile() As Byte
         Dim Type As Byte
         Dim Data1 As Long
         Dim Data2 As Long
@@ -194,6 +194,12 @@
         Dim Stat() As Byte
         Dim MaleSprite() As Long
         Dim FemaleSprite() As Long
+        Dim StartItem() As Long
+        Dim StartValue() As Long
+        Dim StartMap As Long
+        Dim StartX As Byte
+        Dim StartY As Byte
+        Dim BaseExp As Long
         ' For client use
         Dim Vital() As Long
     End Structure
@@ -201,6 +207,8 @@
     Public Structure ItemRec
         Dim Name As String
         Dim Pic As Integer
+        Dim Description As String
+
         Dim Type As Byte
         Dim Data1 As Integer
         Dim Data2 As Integer
@@ -218,7 +226,11 @@
         Dim Stat_Req() As Byte
         Dim Animation As Long
         Dim Paperdoll As Long
+
         Dim Randomize As Byte
+        Dim RandomMin As Byte
+        Dim RandomMax As Byte
+
         Dim Stackable As Byte
 
         'Housing

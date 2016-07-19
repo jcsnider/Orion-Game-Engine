@@ -188,6 +188,8 @@
         Packets.Add(ServerPackets.SSendPlayerRecipe, AddressOf Packet_SendPlayerRecipe)
         Packets.Add(ServerPackets.SOpenCraft, AddressOf Packet_OpenCraft)
         Packets.Add(ServerPackets.SUpdateCraft, AddressOf Packet_UpdateCraft)
+
+        Packets.Add(ServerPackets.SClassEditor, AddressOf Packet_ClassEditor)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -321,7 +323,7 @@
         For i = 1 To Max_Classes
 
             With Classes(i)
-                .Name = Buffer.ReadString
+                .Name = Trim(Buffer.ReadString)
 
                 ReDim .Vital(0 To Vitals.Vital_Count - 1)
 
@@ -355,6 +357,19 @@
                 .Stat(Stats.intelligence) = Buffer.ReadLong
                 .Stat(Stats.luck) = Buffer.ReadLong
                 .Stat(Stats.spirit) = Buffer.ReadLong
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+                For q = 1 To 5
+                    .StartItem(q) = Buffer.ReadLong
+                    .StartValue(q) = Buffer.ReadLong
+                Next
+
+                .StartMap = Buffer.ReadLong
+                .StartX = Buffer.ReadLong
+                .StartY = Buffer.ReadLong
+
+                .BaseExp = Buffer.ReadLong
             End With
 
         Next
@@ -435,6 +450,19 @@
                 .Stat(Stats.intelligence) = Buffer.ReadLong
                 .Stat(Stats.luck) = Buffer.ReadLong
                 .Stat(Stats.spirit) = Buffer.ReadLong
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+                For q = 1 To 5
+                    .StartItem(q) = Buffer.ReadLong
+                    .StartValue(q) = Buffer.ReadLong
+                Next
+
+                .StartMap = Buffer.ReadLong
+                .StartX = Buffer.ReadLong
+                .StartY = Buffer.ReadLong
+
+                .BaseExp = Buffer.ReadLong
             End With
 
         Next
@@ -1337,14 +1365,19 @@
         Item(n).Handed = Buffer.ReadLong()
         Item(n).LevelReq = Buffer.ReadLong()
         Item(n).Mastery = Buffer.ReadLong()
-        Item(n).Name = Trim(Buffer.ReadString())
+        Item(n).Name = Trim$(Buffer.ReadString())
         Item(n).Paperdoll = Buffer.ReadLong()
         Item(n).Pic = Buffer.ReadLong()
         Item(n).Price = Buffer.ReadLong()
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
+
         Item(n).Randomize = Buffer.ReadLong()
+        Item(n).RandomMin = Buffer.ReadLong()
+        Item(n).RandomMax = Buffer.ReadLong()
+
         Item(n).Stackable = Buffer.ReadLong()
+        Item(n).Description = Trim$(Buffer.ReadString())
 
         For i = 0 To Stats.stat_count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -2124,8 +2157,6 @@
             ReDim Classes(i).Vital(0 To Vitals.Vital_Count - 1)
         Next
 
-        n = n + 1
-
         For i = 1 To Max_Classes
 
             With Classes(i)
@@ -2158,9 +2189,21 @@
                 .Stat(Stats.intelligence) = buffer.ReadLong
                 .Stat(Stats.luck) = buffer.ReadLong
                 .Stat(Stats.spirit) = buffer.ReadLong
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+                For q = 1 To 5
+                    .StartItem(q) = buffer.ReadLong
+                    .StartValue(q) = buffer.ReadLong
+                Next
+
+                .StartMap = buffer.ReadLong
+                .StartX = buffer.ReadLong
+                .StartY = buffer.ReadLong
+
+                .BaseExp = buffer.ReadLong
             End With
 
-            n = n + 10
         Next
 
         i = 0
@@ -2192,14 +2235,19 @@
             Item(n).Handed = buffer.ReadLong()
             Item(n).LevelReq = buffer.ReadLong()
             Item(n).Mastery = buffer.ReadLong()
-            Item(n).Name = Trim(buffer.ReadString())
+            Item(n).Name = Trim$(buffer.ReadString())
             Item(n).Paperdoll = buffer.ReadLong()
             Item(n).Pic = buffer.ReadLong()
             Item(n).Price = buffer.ReadLong()
             Item(n).Rarity = buffer.ReadLong()
             Item(n).Speed = buffer.ReadLong()
+
             Item(n).Randomize = buffer.ReadLong()
+            Item(n).RandomMin = buffer.ReadLong()
+            Item(n).RandomMax = buffer.ReadLong()
+
             Item(n).Stackable = buffer.ReadLong()
+            Item(n).Description = Trim$(buffer.ReadString())
 
             For z = 0 To Stats.stat_count - 1
                 Item(n).Stat_Req(z) = buffer.ReadLong()
@@ -2494,7 +2542,8 @@
 
         If Buffer.ReadLong <> ServerPackets.SCritical Then Exit Sub
 
-        ShakeTimer = True
+        ShakeTimerEnabled = True
+        ShakeTimer = GetTickCount()
 
         Buffer = Nothing
     End Sub
@@ -2523,6 +2572,19 @@
         If Buffer.ReadLong <> ServerPackets.SrClick Then Exit Sub
 
         ShowRClick = True
+
+        Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_ClassEditor(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadLong <> ServerPackets.SClassEditor Then Exit Sub
+
+        InitClassEditor = True
 
         Buffer = Nothing
     End Sub

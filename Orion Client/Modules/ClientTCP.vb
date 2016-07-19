@@ -481,14 +481,19 @@ Module ClientTCP
         Buffer.WriteLong(Item(itemNum).Handed)
         Buffer.WriteLong(Item(itemNum).LevelReq)
         Buffer.WriteLong(Item(itemNum).Mastery)
-        Buffer.WriteString(Item(itemNum).Name)
+        Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteLong(Item(itemNum).Paperdoll)
         Buffer.WriteLong(Item(itemNum).Pic)
         Buffer.WriteLong(Item(itemNum).Price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).RandomMin)
+        Buffer.WriteLong(Item(itemNum).RandomMax)
+
         Buffer.WriteLong(Item(itemNum).Stackable)
+        Buffer.WriteString(Trim$(Item(itemNum).Description))
 
         For i = 0 To Stats.stat_count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -1132,4 +1137,76 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
+    Public Sub SendRequestClasses()
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ClientPackets.CRequestClasses)
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
+    Public Sub SendRequestEditClass()
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ClientPackets.CRequestEditClasses)
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
+    Public Sub SendSaveClasses()
+        Dim i As Long, n As Long, q As Long
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+
+        Buffer.WriteLong(ClientPackets.CSaveClasses)
+
+        Buffer.WriteLong(Max_Classes)
+
+        For i = 1 To Max_Classes
+            Buffer.WriteString(Trim$(Classes(i).Name))
+
+            ' set sprite array size
+            n = UBound(Classes(i).MaleSprite)
+
+            ' send array size
+            Buffer.WriteLong(n)
+
+            ' loop around sending each sprite
+            For q = 0 To n
+                Buffer.WriteLong(Classes(i).MaleSprite(q))
+            Next
+
+            ' set sprite array size
+            n = UBound(Classes(i).FemaleSprite)
+
+            ' send array size
+            Buffer.WriteLong(n)
+
+            ' loop around sending each sprite
+            For q = 0 To n
+                Buffer.WriteLong(Classes(i).FemaleSprite(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).Stat(Stats.strength))
+            Buffer.WriteLong(Classes(i).Stat(Stats.endurance))
+            Buffer.WriteLong(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteLong(Classes(i).Stat(Stats.luck))
+            Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
+
+            For q = 1 To 5
+                Buffer.WriteLong(Classes(i).StartItem(q))
+                Buffer.WriteLong(Classes(i).StartValue(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).StartMap)
+            Buffer.WriteLong(Classes(i).StartX)
+            Buffer.WriteLong(Classes(i).StartY)
+
+            Buffer.WriteLong(Classes(i).BaseExp)
+        Next
+
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
 End Module

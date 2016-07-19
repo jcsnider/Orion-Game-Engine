@@ -364,7 +364,7 @@ Module ClientDataBase
         Dim i As Long
 
         For i = 1 To MAX_MAP_NPCS
-            Call ClearMapNpc(i)
+            ClearMapNpc(i)
         Next
 
     End Sub
@@ -376,7 +376,6 @@ Module ClientDataBase
         Dim Y As Long
         FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
 
-        'Debug.Print("Start Map Saving")
         f = FreeFile()
         FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
         FilePutObject(f, Map.Name)
@@ -418,7 +417,6 @@ Module ClientDataBase
 
         FileClose(f)
 
-        'Debug.Print("Ended Map Saving")
     End Sub
 
     Public Sub LoadMap(ByVal MapNum As Long)
@@ -470,7 +468,6 @@ Module ClientDataBase
         For X = 1 To MAX_MAP_NPCS
             FileGetObject(f, Map.Npc(X))
         Next
-
 
         FileClose(f)
 

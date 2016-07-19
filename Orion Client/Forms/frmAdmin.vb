@@ -308,6 +308,12 @@ Public Class frmAdmin
         SendRequestEditRecipes()
     End Sub
 
+    Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnClassEditor.Click
+        If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then Exit Sub
+
+        SendRequestEditClass()
+    End Sub
+
 
 #End Region
 

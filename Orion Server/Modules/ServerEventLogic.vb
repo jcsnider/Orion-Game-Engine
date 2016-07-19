@@ -2,10 +2,14 @@
     Public Sub RemoveDeadEvents()
         Dim i As Long, MapNum As Long, Buffer As ByteBuffer, x As Long, id As Long, page As Long, compare As Long
 
-        If Gettingmap = True Then Exit Sub
-
         For i = 1 To MAX_PLAYERS
-            If IsPlaying(i) = False Then TempPlayer(i).EventMap.CurrentEvents = 0 : Exit Sub
+            If Gettingmap = True Then Exit Sub
+
+            If IsPlaying(i) = False Then
+                TempPlayer(i).EventMap.CurrentEvents = 0
+                Exit Sub
+            End If
+
             MapNum = GetPlayerMap(i)
             If TempPlayer(i).EventMap.CurrentEvents > 0 And Map(MapNum).Events IsNot Nothing Then
                 MapNum = GetPlayerMap(i)
@@ -22,8 +26,6 @@
                                     TempPlayer(i).EventMap.EventPages(x).Visible = 0
                                 End If
                             End If
-
-
 
                             If Map(MapNum).Events(id).Pages(page).chkSelfSwitch = 1 Then
                                 If Map(MapNum).Events(id).Pages(page).SelfSwitchCompare = 0 Then
@@ -124,11 +126,11 @@
         Dim Buffer As ByteBuffer, pageID As Long, id As Long, compare As Long, i As Long, MapNum As Long
         Dim n As Long, x As Long, z As Long, spawnevent As Boolean, p As Long
 
-        If Gettingmap = True Then Exit Sub
-
         'That was only removing events... now we gotta worry about spawning them again, luckily, it is almost the same exact thing, but backwards!
 
         For i = 1 To MAX_PLAYERS
+            If Gettingmap = True Then Exit Sub
+
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 MapNum = GetPlayerMap(i)
                 If MapNum = 0 Then Exit Sub
@@ -342,11 +344,11 @@
         Dim actualmovespeed As Long, Buffer As ByteBuffer, z As Long, sendupdate As Boolean
         Dim donotprocessmoveroute As Boolean, pageNum As Long
 
-        If Gettingmap = True Then Exit Sub
-
         'Process Movement if needed for each player/each map/each event....
 
         For i = 1 To MAX_MAPS
+            If Gettingmap = True Then Exit Sub
+
             If PlayersOnMap(i) Then
                 'Manage Global Events First, then all the others.....
                 If TempEventMap(i).EventCount > 0 Then
@@ -721,9 +723,10 @@
         Dim isglobal As Boolean, MapNum As Long, actualmovespeed As Long, Buffer As ByteBuffer, z As Long, sendupdate As Boolean
         Dim donotprocessmoveroute As Boolean
 
-        If Gettingmap = True Then Exit Sub
-
         For i = 1 To MAX_PLAYERS
+
+            If Gettingmap = True Then Exit Sub
+
             If IsPlaying(i) Then
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
@@ -1113,11 +1116,11 @@
         Dim Buffer As ByteBuffer, i As Long, x As Long, removeEventProcess As Boolean, w As Long, v As Long, p As Long
         Dim restartlist As Boolean, restartloop As Boolean, endprocess As Boolean
 
-        If Gettingmap = True Then Exit Sub
-
         'Now, we process the damn things for commands :P
 
         For i = 1 To MAX_PLAYERS
+            If Gettingmap = True Then Exit Sub
+
             If IsPlaying(i) Then
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     If TempPlayer(i).EventMap.EventPages(x).Visible Then
@@ -1161,6 +1164,8 @@
 
         'That is it for starting parallel processes :D now we just have to make the code that actually processes the events to their fullest
         For i = 1 To MAX_PLAYERS
+            If Gettingmap = True Then Exit Sub
+
             If IsPlaying(i) Then
                 If TempPlayer(i).EventProcessingCount > 0 Then
                     restartloop = True
@@ -1925,8 +1930,9 @@
     Function ParseEventText(ByVal Index As Long, ByVal txt As String) As String
         Dim i As Long, x As Long, newtxt As String, parsestring As String, z As Long
 
-        txt = Replace(txt, "/name", Trim$(Player(Index).Character(TempPlayer(i).CurChar).Name))
-        txt = Replace(txt, "/p", Trim$(Player(Index).Character(TempPlayer(i).CurChar).Name))
+        txt = Replace(txt, "/name", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
+        txt = Replace(txt, "/p", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
+        txt = Replace(txt, "$playername$", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
         Do While InStr(1, txt, "/v") > 0
             x = InStr(1, txt, "/v")
             If x > 0 Then

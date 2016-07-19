@@ -3,7 +3,6 @@ Imports System.Drawing
 
 Public Class frmMainGame
 #Region "Frm Code"
-    Dim ShakeCount As Byte, LastDir As Byte
 
     Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         RePositionGUI()
@@ -426,26 +425,6 @@ Public Class frmMainGame
 
 #Region "Misc"
 
-    Private Sub tmrShake_Tick(sender As Object, e As EventArgs) Handles tmrShake.Tick
-        If ShakeCount < 10 Then
-
-            If LastDir = 0 Then
-                picscreen.Location = New Point(picscreen.Location.X + 20, picscreen.Location.Y)
-                LastDir = 1
-            Else
-                picscreen.Location = New Point(picscreen.Location.X - 20, picscreen.Location.Y)
-                LastDir = 0
-            End If
-
-        Else
-            picscreen.Location = New Point(0, 0)
-            ShakeCount = 0
-            tmrShake.Enabled = False
-        End If
-
-        ShakeCount += 1
-    End Sub
-
     Private ReadOnly NonAcceptableKeys() As Keys = {Keys.NumPad0, Keys.NumPad1, Keys.NumPad2, Keys.NumPad3, Keys.NumPad4, Keys.NumPad5, Keys.NumPad6, Keys.NumPad7, Keys.NumPad8, Keys.NumPad9}
 
     Public Function IsAcceptable(ByVal keyData As Keys) As Boolean
@@ -459,15 +438,6 @@ Public Class frmMainGame
 
     Private Sub chkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
         CraftingInit()
-    End Sub
-
-    Private Sub tmrCraft_Tick(sender As Object, e As EventArgs) Handles tmrCraft.Tick
-        CraftProgressValue = CraftProgressValue + (100 / Recipe(GetRecipeIndex(RecipeNames(SelectedRecipe))).CreateTime)
-
-        If CraftProgressValue >= 100 Then
-            tmrCraft.Enabled = False
-        End If
-
     End Sub
 
 #End Region

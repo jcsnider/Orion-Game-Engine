@@ -222,6 +222,17 @@ Module ServerTCP
             Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
+
+            For q = 1 To 5
+                Buffer.WriteLong(Classes(i).StartItem(q))
+                Buffer.WriteLong(Classes(i).StartValue(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).StartMap)
+            Buffer.WriteLong(Classes(i).StartX)
+            Buffer.WriteLong(Classes(i).StartY)
+
+            Buffer.WriteLong(Classes(i).BaseExp)
         Next
 
         SendDataTo(Index, Buffer.ToArray())
@@ -306,6 +317,7 @@ Module ServerTCP
         Next
 
     End Function
+
     Sub SendLoginOk(ByVal index As Long)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -314,7 +326,67 @@ Module ServerTCP
         SendDataTo(index, buffer.ToArray)
         buffer = Nothing
     End Sub
+
     Sub SendClasses(ByVal Index As Long)
+        Dim i As Long, n As Long, q As Long
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.SClassesData)
+        Buffer.WriteLong(Max_Classes)
+
+        For i = 1 To Max_Classes
+            Buffer.WriteString(Trim$(GetClassName(i)))
+
+            Buffer.WriteLong(GetClassMaxVital(i, Vitals.HP))
+            Buffer.WriteLong(GetClassMaxVital(i, Vitals.MP))
+            Buffer.WriteLong(GetClassMaxVital(i, Vitals.SP))
+
+            ' set sprite array size
+            n = UBound(Classes(i).MaleSprite)
+
+            ' send array size
+            Buffer.WriteLong(n)
+
+            ' loop around sending each sprite
+            For q = 0 To n
+                Buffer.WriteLong(Classes(i).MaleSprite(q))
+            Next
+
+            ' set sprite array size
+            n = UBound(Classes(i).FemaleSprite)
+
+            ' send array size
+            Buffer.WriteLong(n)
+
+            ' loop around sending each sprite
+            For q = 0 To n
+                Buffer.WriteLong(Classes(i).FemaleSprite(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).Stat(Stats.strength))
+            Buffer.WriteLong(Classes(i).Stat(Stats.endurance))
+            Buffer.WriteLong(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteLong(Classes(i).Stat(Stats.luck))
+            Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
+
+            For q = 1 To 5
+                Buffer.WriteLong(Classes(i).StartItem(q))
+                Buffer.WriteLong(Classes(i).StartValue(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).StartMap)
+            Buffer.WriteLong(Classes(i).StartX)
+            Buffer.WriteLong(Classes(i).StartY)
+
+            Buffer.WriteLong(Classes(i).BaseExp)
+        Next
+
+        SendDataTo(Index, Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
+    Sub SendClassesToAll()
         Dim i As Long, n As Long, q As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -355,9 +427,20 @@ Module ServerTCP
             Buffer.WriteLong(Classes(i).Stat(Stats.intelligence))
             Buffer.WriteLong(Classes(i).Stat(Stats.luck))
             Buffer.WriteLong(Classes(i).Stat(Stats.spirit))
+
+            For q = 1 To 5
+                Buffer.WriteLong(Classes(i).StartItem(q))
+                Buffer.WriteLong(Classes(i).StartValue(q))
+            Next
+
+            Buffer.WriteLong(Classes(i).StartMap)
+            Buffer.WriteLong(Classes(i).StartX)
+            Buffer.WriteLong(Classes(i).StartY)
+
+            Buffer.WriteLong(Classes(i).BaseExp)
         Next
 
-        SendDataTo(Index, Buffer.ToArray())
+        SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
@@ -411,14 +494,19 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Handed)
         Buffer.WriteLong(Item(itemNum).LevelReq)
         Buffer.WriteLong(Item(itemNum).Mastery)
-        Buffer.WriteString(Item(itemNum).Name)
+        Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteLong(Item(itemNum).Paperdoll)
         Buffer.WriteLong(Item(itemNum).Pic)
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).RandomMin)
+        Buffer.WriteLong(Item(itemNum).RandomMax)
+
         Buffer.WriteLong(Item(itemNum).Stackable)
+        Buffer.WriteString(Trim$(Item(itemNum).Description))
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -464,14 +552,19 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Handed)
         Buffer.WriteLong(Item(itemNum).LevelReq)
         Buffer.WriteLong(Item(itemNum).Mastery)
-        Buffer.WriteString(Item(itemNum).Name)
+        Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteLong(Item(itemNum).Paperdoll)
         Buffer.WriteLong(Item(itemNum).Pic)
         Buffer.WriteLong(Item(itemNum).price)
         Buffer.WriteLong(Item(itemNum).Rarity)
         Buffer.WriteLong(Item(itemNum).Speed)
+
         Buffer.WriteLong(Item(itemNum).Randomize)
+        Buffer.WriteLong(Item(itemNum).RandomMin)
+        Buffer.WriteLong(Item(itemNum).RandomMax)
+
         Buffer.WriteLong(Item(itemNum).Stackable)
+        Buffer.WriteString(Trim$(Item(itemNum).Description))
 
         For i = 0 To Stats.Stat_Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
@@ -1623,6 +1716,7 @@ Module ServerTCP
         Buffer.WriteLong(invSlot)
         Buffer.WriteLong(GetPlayerInvItemNum(Index, invSlot))
         Buffer.WriteLong(GetPlayerInvItemValue(Index, invSlot))
+
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
@@ -1970,6 +2064,17 @@ Module ServerTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SrClick)
+
+        SendDataTo(Index, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
+    Sub SendClassEditor(ByVal Index As Long)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.SClassEditor)
 
         SendDataTo(Index, Buffer.ToArray())
 

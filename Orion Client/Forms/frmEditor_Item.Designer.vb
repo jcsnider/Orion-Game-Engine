@@ -106,13 +106,17 @@ Partial Class frmEditor_Item
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.fraRecipe = New System.Windows.Forms.GroupBox()
+        Me.scrlRecipe = New System.Windows.Forms.HScrollBar()
+        Me.lblRecipename = New System.Windows.Forms.Label()
         Me.chkStackable = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.fraRecipe = New System.Windows.Forms.GroupBox()
-        Me.scrlRecipe = New System.Windows.Forms.HScrollBar()
-        Me.lblRecipename = New System.Windows.Forms.Label()
+        Me.numMin = New System.Windows.Forms.NumericUpDown()
+        Me.numMax = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
@@ -123,8 +127,10 @@ Partial Class frmEditor_Item
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.fraRecipe.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.numMin, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numMax, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -423,6 +429,8 @@ Partial Class frmEditor_Item
         '
         'fraEquipment
         '
+        Me.fraEquipment.Controls.Add(Me.numMax)
+        Me.fraEquipment.Controls.Add(Me.numMin)
         Me.fraEquipment.Controls.Add(Me.chkRandomize)
         Me.fraEquipment.Controls.Add(Me.Label5)
         Me.fraEquipment.Controls.Add(Me.cmbKnockBackTiles)
@@ -461,13 +469,12 @@ Partial Class frmEditor_Item
         'chkRandomize
         '
         Me.chkRandomize.AutoSize = True
-        Me.chkRandomize.Location = New System.Drawing.Point(297, 201)
+        Me.chkRandomize.Location = New System.Drawing.Point(267, 169)
         Me.chkRandomize.Name = "chkRandomize"
         Me.chkRandomize.Size = New System.Drawing.Size(106, 17)
         Me.chkRandomize.TabIndex = 66
         Me.chkRandomize.Text = "Randomize Stats"
         Me.chkRandomize.UseVisualStyleBackColor = True
-        Me.chkRandomize.Visible = False
         '
         'Label5
         '
@@ -774,7 +781,7 @@ Partial Class frmEditor_Item
         'scrlVitalMod
         '
         Me.scrlVitalMod.LargeChange = 1
-        Me.scrlVitalMod.Location = New System.Drawing.Point(110, 18)
+        Me.scrlVitalMod.Location = New System.Drawing.Point(92, 18)
         Me.scrlVitalMod.Name = "scrlVitalMod"
         Me.scrlVitalMod.Size = New System.Drawing.Size(102, 17)
         Me.scrlVitalMod.TabIndex = 2
@@ -783,9 +790,9 @@ Partial Class frmEditor_Item
         '
         Me.fraVitals.Controls.Add(Me.scrlVitalMod)
         Me.fraVitals.Controls.Add(Me.lblVitalMod)
-        Me.fraVitals.Location = New System.Drawing.Point(6, 130)
+        Me.fraVitals.Location = New System.Drawing.Point(227, 130)
         Me.fraVitals.Name = "fraVitals"
-        Me.fraVitals.Size = New System.Drawing.Size(215, 45)
+        Me.fraVitals.Size = New System.Drawing.Size(200, 45)
         Me.fraVitals.TabIndex = 9
         Me.fraVitals.TabStop = False
         Me.fraVitals.Text = "Vitals"
@@ -907,6 +914,8 @@ Partial Class frmEditor_Item
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.txtDescription)
+        Me.TabPage1.Controls.Add(Me.Label8)
         Me.TabPage1.Controls.Add(Me.fraRecipe)
         Me.TabPage1.Controls.Add(Me.chkStackable)
         Me.TabPage1.Controls.Add(Me.fraSpell)
@@ -933,6 +942,51 @@ Partial Class frmEditor_Item
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Info"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(9, 145)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(212, 91)
+        Me.txtDescription.TabIndex = 71
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(8, 130)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(83, 13)
+        Me.Label8.TabIndex = 70
+        Me.Label8.Text = "Item Description"
+        '
+        'fraRecipe
+        '
+        Me.fraRecipe.Controls.Add(Me.scrlRecipe)
+        Me.fraRecipe.Controls.Add(Me.lblRecipename)
+        Me.fraRecipe.Location = New System.Drawing.Point(227, 180)
+        Me.fraRecipe.Name = "fraRecipe"
+        Me.fraRecipe.Size = New System.Drawing.Size(198, 56)
+        Me.fraRecipe.TabIndex = 69
+        Me.fraRecipe.TabStop = False
+        Me.fraRecipe.Text = "Recipe"
+        Me.fraRecipe.Visible = False
+        '
+        'scrlRecipe
+        '
+        Me.scrlRecipe.Location = New System.Drawing.Point(3, 29)
+        Me.scrlRecipe.Name = "scrlRecipe"
+        Me.scrlRecipe.Size = New System.Drawing.Size(190, 15)
+        Me.scrlRecipe.TabIndex = 4
+        '
+        'lblRecipename
+        '
+        Me.lblRecipename.AutoSize = True
+        Me.lblRecipename.Location = New System.Drawing.Point(6, 16)
+        Me.lblRecipename.Name = "lblRecipename"
+        Me.lblRecipename.Size = New System.Drawing.Size(67, 13)
+        Me.lblRecipename.TabIndex = 1
+        Me.lblRecipename.Text = "Name: None"
         '
         'chkStackable
         '
@@ -991,33 +1045,24 @@ Partial Class frmEditor_Item
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
         '
-        'fraRecipe
+        'numMin
         '
-        Me.fraRecipe.Controls.Add(Me.scrlRecipe)
-        Me.fraRecipe.Controls.Add(Me.lblRecipename)
-        Me.fraRecipe.Location = New System.Drawing.Point(6, 180)
-        Me.fraRecipe.Name = "fraRecipe"
-        Me.fraRecipe.Size = New System.Drawing.Size(215, 56)
-        Me.fraRecipe.TabIndex = 69
-        Me.fraRecipe.TabStop = False
-        Me.fraRecipe.Text = "Recipe"
-        Me.fraRecipe.Visible = False
+        Me.numMin.Location = New System.Drawing.Point(267, 198)
+        Me.numMin.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.numMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numMin.Name = "numMin"
+        Me.numMin.Size = New System.Drawing.Size(50, 20)
+        Me.numMin.TabIndex = 67
+        Me.numMin.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'scrlRecipe
+        'numMax
         '
-        Me.scrlRecipe.Location = New System.Drawing.Point(3, 29)
-        Me.scrlRecipe.Name = "scrlRecipe"
-        Me.scrlRecipe.Size = New System.Drawing.Size(209, 15)
-        Me.scrlRecipe.TabIndex = 4
-        '
-        'lblRecipename
-        '
-        Me.lblRecipename.AutoSize = True
-        Me.lblRecipename.Location = New System.Drawing.Point(6, 16)
-        Me.lblRecipename.Name = "lblRecipename"
-        Me.lblRecipename.Size = New System.Drawing.Size(67, 13)
-        Me.lblRecipename.TabIndex = 1
-        Me.lblRecipename.Text = "Name: None"
+        Me.numMax.Location = New System.Drawing.Point(330, 198)
+        Me.numMax.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.numMax.Name = "numMax"
+        Me.numMax.Size = New System.Drawing.Size(50, 20)
+        Me.numMax.TabIndex = 68
+        Me.numMax.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'frmEditor_Item
         '
@@ -1050,10 +1095,12 @@ Partial Class frmEditor_Item
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         Me.fraRecipe.ResumeLayout(False)
         Me.fraRecipe.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        CType(Me.numMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numMax, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1148,4 +1195,8 @@ Partial Class frmEditor_Item
     Friend WithEvents fraRecipe As Windows.Forms.GroupBox
     Friend WithEvents scrlRecipe As Windows.Forms.HScrollBar
     Friend WithEvents lblRecipename As Windows.Forms.Label
+    Friend WithEvents txtDescription As Windows.Forms.TextBox
+    Friend WithEvents Label8 As Windows.Forms.Label
+    Friend WithEvents numMax As Windows.Forms.NumericUpDown
+    Friend WithEvents numMin As Windows.Forms.NumericUpDown
 End Class

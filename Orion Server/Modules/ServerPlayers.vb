@@ -5,10 +5,12 @@
     Function GetPlayerLogin(ByVal Index As Long) As String
         GetPlayerLogin = Trim$(Player(Index).Login)
     End Function
+
     Function GetPlayerIP(ByVal Index As Long) As String
         GetPlayerIP = ""
         GetPlayerIP = GetClientIP(Index)
     End Function
+
     Public Sub HandleUseChar(ByVal Index As Long)
         If Not IsPlaying(Index) Then
             JoinGame(Index)
@@ -16,6 +18,7 @@
             TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
         End If
     End Sub
+
     Function GetPlayerName(ByVal Index As Long) As String
         GetPlayerName = ""
         If Index > MAX_PLAYERS Then Exit Function
@@ -107,8 +110,6 @@
         Dim i As Long
         Dim Buffer As ByteBuffer
 
-        'Debug.Print("Server-PlayerWarp")
-
         ' Check for subscript out of range
         If IsPlaying(Index) = False Or MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Sub
 
@@ -187,9 +188,8 @@
         Buffer.WriteLong(MapNum)
         Buffer.WriteLong(Map(MapNum).Revision)
         SendDataTo(Index, Buffer.ToArray())
-        Buffer = Nothing
 
-        'Debug.Print("Server-CheckForMap")
+        Buffer = Nothing
 
     End Sub
 
@@ -751,9 +751,11 @@
         Next
 
     End Function
+
     Sub SetPlayerDir(ByVal Index As Long, ByVal Dir As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).Dir = Dir
     End Sub
+
     Sub SetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals, ByVal Value As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital) = Value
 
@@ -766,6 +768,7 @@
         End If
 
     End Sub
+
     Public Function isDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
         If Not blockvar And (2 ^ Dir) Then
             isDirBlocked = False
@@ -773,38 +776,47 @@
             isDirBlocked = True
         End If
     End Function
+
     Function GetPlayerVital(ByVal Index As Long, ByVal Vital As Vitals) As Long
         GetPlayerVital = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerVital = Player(Index).Character(TempPlayer(Index).CurChar).Vital(Vital)
     End Function
+
     Function GetPlayerLevel(ByVal Index As Long) As Long
         GetPlayerLevel = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerLevel = Player(Index).Character(TempPlayer(Index).CurChar).Level
     End Function
+
     Function GetPlayerPOINTS(ByVal Index As Long) As Long
         GetPlayerPOINTS = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerPOINTS = Player(Index).Character(TempPlayer(Index).CurChar).POINTS
     End Function
+
     Function GetPlayerNextLevel(ByVal Index As Long) As Long
-        GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.strength) + GetPlayerStat(Index, Stats.endurance) + GetPlayerStat(Index, Stats.intelligence) + GetPlayerStat(Index, Stats.spirit) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * 25
+        GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.strength) + GetPlayerStat(Index, Stats.endurance) + GetPlayerStat(Index, Stats.intelligence) + GetPlayerStat(Index, Stats.spirit) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * Classes(GetPlayerClass(Index)).BaseExp '25
     End Function
+
     Function GetPlayerExp(ByVal Index As Long) As Long
         GetPlayerExp = Player(Index).Character(TempPlayer(Index).CurChar).exp
     End Function
+
     Sub SetPlayerMap(ByVal Index As Long, ByVal MapNum As Long)
         If MapNum > 0 And MapNum <= MAX_MAPS Then
             Player(Index).Character(TempPlayer(Index).CurChar).Map = MapNum
         End If
     End Sub
+
     Sub SetPlayerX(ByVal Index As Long, ByVal x As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).x = x
     End Sub
+
     Sub SetPlayerY(ByVal Index As Long, ByVal y As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).y = y
     End Sub
+
     Function GetPlayerInvItemNum(ByVal Index As Long, ByVal invSlot As Long) As Long
         GetPlayerInvItemNum = 0
         If Index > MAX_PLAYERS Then Exit Function
@@ -812,14 +824,17 @@
 
         GetPlayerInvItemNum = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Num
     End Function
+
     Function GetPlayerInvItemValue(ByVal Index As Long, ByVal invSlot As Long) As Long
         GetPlayerInvItemValue = 0
         If Index > MAX_PLAYERS Then Exit Function
         GetPlayerInvItemValue = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Value
     End Function
+
     Sub SetPlayerExp(ByVal Index As Long, ByVal exp As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).exp = exp
     End Sub
+
     Public Function GetPlayerRawStat(ByVal Index As Long, ByVal Stat As Stats) As Long
         GetPlayerRawStat = 0
         If Index > MAX_PLAYERS Then Exit Function
@@ -830,14 +845,17 @@
     Public Sub SetPlayerStat(ByVal Index As Long, ByVal Stat As Stats, ByVal Value As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).Stat(Stat) = Value
     End Sub
+
     Sub SetPlayerLevel(ByVal Index As Long, ByVal Level As Long)
 
         If Level > MAX_LEVELS Then Exit Sub
         Player(Index).Character(TempPlayer(Index).CurChar).Level = Level
     End Sub
+
     Sub SetPlayerPOINTS(ByVal Index As Long, ByVal POINTS As Long)
         Player(Index).Character(TempPlayer(Index).CurChar).POINTS = POINTS
     End Sub
+
     Sub CheckPlayerLevelUp(ByVal Index As Long)
         Dim expRollover As Long
         Dim level_count As Long
@@ -904,9 +922,10 @@
                                 MapItem(MapNum, i).Value = 0
                                 MapItem(MapNum, i).x = 0
                                 MapItem(MapNum, i).y = 0
+
                                 SendInventoryUpdate(Index, n)
                                 SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
-                                'Call PlayerMsg(Index, Msg, Yellow)
+
                                 SendActionMsg(GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                                 CheckTasks(Index, QUEST_TYPE_GOGATHER, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
                                 Exit For

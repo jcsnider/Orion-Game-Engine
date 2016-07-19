@@ -134,6 +134,10 @@
         SOpenCraft
         SUpdateCraft
 
+        'Class Editor
+        SClassEditor
+        SUpdateClasses
+
         ' Make sure SMSG_COUNT is below everything else
         SMSG_COUNT
     End Enum
@@ -265,6 +269,11 @@
         CSaveRecipe
         CCloseCraft
         CStartCraft
+
+        'Class Editor
+        CRequestClasses
+        CRequestEditClasses
+        CSaveClasses
 
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT

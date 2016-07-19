@@ -261,7 +261,7 @@ Public Module ClientCrafting
         Else
 
             CraftProgressValue = 0
-            frmMainGame.tmrCraft.Enabled = True
+            CraftTimerEnabled = True
         End If
 
         Buffer = Nothing
@@ -349,7 +349,8 @@ Public Module ClientCrafting
 
         Buffer = Nothing
 
-        frmMainGame.tmrCraft.Enabled = True
+        CraftTimer = GetTickCount()
+        CraftTimerEnabled = True
 
         btnCraftEnabled = False
         btnCraftStopEnabled = False
@@ -541,7 +542,7 @@ Public Module ClientCrafting
             lblMaterialAmount(i) = ""
         Next
 
-        frmMainGame.tmrCraft.Enabled = False
+        CraftTimerEnabled = False
 
         btnCraftEnabled = True
         btnCraftStopEnabled = True

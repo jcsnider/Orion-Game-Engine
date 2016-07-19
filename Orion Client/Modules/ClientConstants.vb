@@ -249,6 +249,7 @@
     Public Const EDITOR_QUEST As Byte = 7
     Public Const EDITOR_HOUSE As Byte = 8
     Public Const EDITOR_RECIPE As Byte = 9
+    Public Const EDITOR_CLASSES As Byte = 10
 
     ' Target type constants
     Public Const TARGET_TYPE_NONE As Byte = 0

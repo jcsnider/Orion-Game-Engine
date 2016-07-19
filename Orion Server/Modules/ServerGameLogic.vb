@@ -77,6 +77,9 @@
 
         ' Find open map item slot
         i = FindOpenMapItemSlot(MapNum)
+
+        If i = 0 Then Exit Sub
+
         SpawnItemSlot(i, itemNum, ItemVal, MapNum, x, y)
     End Sub
 
@@ -92,23 +95,26 @@
         i = MapItemSlot
 
         If i <> 0 Then
-            If itemNum >= 0 Then
-                If itemNum <= MAX_ITEMS Then
-                    MapItem(MapNum, i).Num = itemNum
-                    MapItem(MapNum, i).Value = ItemVal
-                    MapItem(MapNum, i).x = x
-                    MapItem(MapNum, i).y = y
-                    Buffer = New ByteBuffer
-                    Buffer.WriteLong(ServerPackets.SSpawnItem)
-                    Buffer.WriteLong(i)
-                    Buffer.WriteLong(itemNum)
-                    Buffer.WriteLong(ItemVal)
-                    Buffer.WriteLong(x)
-                    Buffer.WriteLong(y)
-                    SendDataToMap(MapNum, Buffer.ToArray())
-                    Buffer = Nothing
-                End If
+            If itemNum >= 0 And itemNum <= MAX_ITEMS Then
+                MapItem(MapNum, i).Num = itemNum
+                MapItem(MapNum, i).Value = ItemVal
+                MapItem(MapNum, i).x = x
+                MapItem(MapNum, i).y = y
+
+                Buffer = New ByteBuffer
+                Buffer.WriteLong(ServerPackets.SSpawnItem)
+                Buffer.WriteLong(i)
+                Buffer.WriteLong(itemNum)
+                Buffer.WriteLong(ItemVal)
+                Buffer.WriteLong(x)
+                Buffer.WriteLong(y)
+
+                SendDataToMap(MapNum, Buffer.ToArray())
+
+                Buffer = Nothing
+
             End If
+
         End If
 
     End Sub
@@ -118,9 +124,7 @@
         FindOpenMapItemSlot = 0
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Then
-            Exit Function
-        End If
+        If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Function
 
         For i = 1 To MAX_MAP_ITEMS
 
@@ -192,7 +196,7 @@
         Dim i As Long
 
         For i = 1 To MAX_MAPS
-            Call SpawnMapItems(i)
+            SpawnMapItems(i)
         Next
 
     End Sub

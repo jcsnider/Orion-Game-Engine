@@ -133,6 +133,9 @@
         Packets.Add(ClientPackets.CCloseCraft, AddressOf Packet_CloseCraft)
         Packets.Add(ClientPackets.CStartCraft, AddressOf Packet_StartCraft)
 
+        Packets.Add(ClientPackets.CRequestClasses, AddressOf Packet_RequestClasses)
+        Packets.Add(ClientPackets.CRequestEditClasses, AddressOf Packet_RequestEditClasses)
+        Packets.Add(ClientPackets.CSaveClasses, AddressOf Packet_SaveClasses)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Long, ByVal data() As Byte)
@@ -438,9 +441,7 @@
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadLong <> ClientPackets.CPlayerDir Then Exit Sub
-        If TempPlayer(Index).GettingMap = YES Then
-            Exit Sub
-        End If
+        If TempPlayer(Index).GettingMap = YES Then Exit Sub
 
         dir = Buffer.ReadLong
         Buffer = Nothing
@@ -1757,7 +1758,9 @@
         Buffer.WriteBytes(data)
 
         If Buffer.ReadLong <> ClientPackets.CMapGetItem Then Exit Sub
-        Call PlayerMapGetItem(index)
+
+        PlayerMapGetItem(index)
+
         Buffer = Nothing
     End Sub
 
@@ -1980,12 +1983,11 @@
         Buffer.WriteBytes(data)
 
         If Buffer.ReadLong <> ClientPackets.CSaveItem Then Exit Sub
-        ' Prevent hacking
-        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then
-            Exit Sub
-        End If
 
-        n = Buffer.ReadLong 'CLng(Parse(1))
+        ' Prevent hacking
+        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then Exit Sub
+
+        n = Buffer.ReadLong
 
         If n < 0 Or n > MAX_ITEMS Then
             Exit Sub
@@ -2007,14 +2009,19 @@
         Item(n).Handed = Buffer.ReadLong()
         Item(n).LevelReq = Buffer.ReadLong()
         Item(n).Mastery = Buffer.ReadLong()
-        Item(n).Name = Buffer.ReadString()
+        Item(n).Name = Trim$(Buffer.ReadString)
         Item(n).Paperdoll = Buffer.ReadLong()
         Item(n).Pic = Buffer.ReadLong()
         Item(n).price = Buffer.ReadLong()
         Item(n).Rarity = Buffer.ReadLong()
         Item(n).Speed = Buffer.ReadLong()
+
         Item(n).Randomize = Buffer.ReadLong()
+        Item(n).RandomMin = Buffer.ReadLong()
+        Item(n).RandomMax = Buffer.ReadLong()
+
         Item(n).Stackable = Buffer.ReadLong()
+        Item(n).Description = Trim$(Buffer.ReadString)
 
         For i = 0 To Stats.Stat_Count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
@@ -3485,9 +3492,7 @@
         If buffer.ReadLong <> ClientPackets.CMapReport Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < ADMIN_MAPPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(index) < ADMIN_MAPPER Then Exit Sub
 
         SendMapReport(index)
 
@@ -3502,9 +3507,7 @@
         If buffer.ReadLong <> ClientPackets.CAdmin Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < ADMIN_MAPPER Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(index) < ADMIN_MAPPER Then Exit Sub
 
         SendAdminPanel(index)
 
@@ -3545,4 +3548,108 @@
 
         buffer = Nothing
     End Sub
+
+    Sub Packet_RequestClasses(ByVal index As Long, ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ClientPackets.CRequestClasses Then Exit Sub
+
+        SendClasses(index)
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_RequestEditClasses(ByVal index As Long, ByVal data() As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ClientPackets.CRequestEditClasses Then Exit Sub
+
+        ' Prevent hacking
+        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then Exit Sub
+
+        SendClasses(index)
+
+        SendClassEditor(index)
+
+        buffer = Nothing
+    End Sub
+
+    Sub Packet_SaveClasses(ByVal index As Long, ByVal data() As Byte)
+        Dim buffer As ByteBuffer, i As Long, z As Long, x As Long
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadLong <> ClientPackets.CSaveClasses Then Exit Sub
+
+        ' Prevent hacking
+        If GetPlayerAccess(index) < ADMIN_DEVELOPER Then Exit Sub
+
+        ' Max classes
+        Max_Classes = buffer.ReadLong
+        ReDim Classes(0 To Max_Classes)
+
+        For i = 0 To Max_Classes
+            ReDim Classes(i).Stat(0 To Stats.Stat_Count - 1)
+        Next
+
+        For i = 1 To Max_Classes
+
+            With Classes(i)
+                .Name = buffer.ReadString
+
+                ' get array size
+                z = buffer.ReadLong
+
+                ' redim array
+                ReDim .MaleSprite(0 To z)
+                ' loop-receive data
+                For X = 0 To z
+                    .MaleSprite(X) = buffer.ReadLong
+                Next
+
+                ' get array size
+                z = buffer.ReadLong
+                ' redim array
+                ReDim .FemaleSprite(0 To z)
+                ' loop-receive data
+                For X = 0 To z
+                    .FemaleSprite(X) = buffer.ReadLong
+                Next
+
+                .Stat(Stats.strength) = buffer.ReadLong
+                .Stat(Stats.endurance) = buffer.ReadLong
+                .Stat(Stats.vitality) = buffer.ReadLong
+                .Stat(Stats.intelligence) = buffer.ReadLong
+                .Stat(Stats.luck) = buffer.ReadLong
+                .Stat(Stats.spirit) = buffer.ReadLong
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+                For q = 1 To 5
+                    .StartItem(q) = buffer.ReadLong
+                    .StartValue(q) = buffer.ReadLong
+                Next
+
+                .StartMap = buffer.ReadLong
+                .StartX = buffer.ReadLong
+                .StartY = buffer.ReadLong
+
+                .BaseExp = buffer.ReadLong
+            End With
+
+        Next
+
+        buffer = Nothing
+
+        SaveClasses()
+
+        LoadClasses()
+
+        SendClassesToAll()
+    End Sub
+
 End Module

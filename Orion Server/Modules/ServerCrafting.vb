@@ -301,9 +301,7 @@
         Buffer.WriteLong(ServerPackets.SSendPlayerRecipe)
 
         For i = 1 To MAX_RECIPE
-
             Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).RecipeLearned(i))
-
         Next
 
         SendDataTo(Index, Buffer.ToArray())

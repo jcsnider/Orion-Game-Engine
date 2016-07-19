@@ -133,6 +133,12 @@
     <Compile Include="Forms\frmEditor_Animation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmEditor_Classes.Designer.vb">
+      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmEditor_Classes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmEditor_Events.Designer.vb">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_Animation.resx">
       <DependentUpon>frmEditor_Animation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEditor_Classes.resx">
+      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditor_Events.resx">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>

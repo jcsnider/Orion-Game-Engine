@@ -60,9 +60,16 @@ Public Class frmEditor_Events
         cmbCondition_LevelCompare.SelectedIndex = 0
         txtCondition_LevelAmount.Enabled = False
         txtCondition_LevelAmount.Text = "0"
-        cmbCondition_SelfSwitch.SelectedIndex = 0
+        If cmbCondition_SelfSwitch.Items.Count > 0 Then
+            cmbCondition_SelfSwitch.SelectedIndex = 0
+        End If
+
         cmbCondition_SelfSwitch.Enabled = False
-        cmbCondition_SelfSwitchCondition.SelectedIndex = 0
+
+        If cmbCondition_SelfSwitchCondition.Items.Count > 0 Then
+            cmbCondition_SelfSwitchCondition.SelectedIndex = 0
+        End If
+
         cmbCondition_SelfSwitchCondition.Enabled = False
         scrlCondition_Quest.Enabled = False
         scrlCondition_Quest.Value = 1

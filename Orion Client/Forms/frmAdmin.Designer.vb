@@ -63,9 +63,10 @@ Partial Class frmAdmin
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.btnRecipeEditor = New System.Windows.Forms.Button()
+        Me.btnClassEditor = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -442,6 +443,7 @@ Partial Class frmAdmin
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnClassEditor)
         Me.TabPage2.Controls.Add(Me.btnRecipeEditor)
         Me.TabPage2.Controls.Add(Me.btnProjectiles)
         Me.TabPage2.Controls.Add(Me.btnQuest)
@@ -460,6 +462,15 @@ Partial Class frmAdmin
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Editors"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnRecipeEditor
+        '
+        Me.btnRecipeEditor.Location = New System.Drawing.Point(6, 161)
+        Me.btnRecipeEditor.Name = "btnRecipeEditor"
+        Me.btnRecipeEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnRecipeEditor.TabIndex = 39
+        Me.btnRecipeEditor.Text = "Recipe Editor"
+        Me.btnRecipeEditor.UseVisualStyleBackColor = True
         '
         'TabPage3
         '
@@ -492,14 +503,14 @@ Partial Class frmAdmin
         Me.TabPage4.Text = "Misc"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
-        'btnRecipeEditor
+        'btnClassEditor
         '
-        Me.btnRecipeEditor.Location = New System.Drawing.Point(6, 161)
-        Me.btnRecipeEditor.Name = "btnRecipeEditor"
-        Me.btnRecipeEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnRecipeEditor.TabIndex = 39
-        Me.btnRecipeEditor.Text = "Recipe Editor"
-        Me.btnRecipeEditor.UseVisualStyleBackColor = True
+        Me.btnClassEditor.Location = New System.Drawing.Point(124, 161)
+        Me.btnClassEditor.Name = "btnClassEditor"
+        Me.btnClassEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnClassEditor.TabIndex = 40
+        Me.btnClassEditor.Text = "Class Editor"
+        Me.btnClassEditor.UseVisualStyleBackColor = True
         '
         'frmAdmin
         '
@@ -565,4 +576,5 @@ Partial Class frmAdmin
     Friend WithEvents TabPage4 As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
     Friend WithEvents btnRecipeEditor As Windows.Forms.Button
+    Friend WithEvents btnClassEditor As Windows.Forms.Button
 End Class

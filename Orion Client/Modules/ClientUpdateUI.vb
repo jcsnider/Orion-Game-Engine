@@ -1,5 +1,6 @@
 ﻿Module ClientUpdateUI
 
+#Region "Defines"
     Public GameDestroyed As Boolean
     Public ReloadFrmMain As Boolean
     Public pnlRegisterVisible As Boolean
@@ -19,7 +20,6 @@
 
     'Mapreport
     Public UpdateMapnames As Boolean
-    Public ShakeTimer As Boolean
 
     Public Adminvisible As Boolean
 
@@ -57,6 +57,7 @@
     Public InitSpellEditor As Boolean
     Public InitShopEditor As Boolean
     Public InitAnimationEditor As Boolean
+    Public InitClassEditor As Boolean
 
     Public UpdateCharacterPanel As Boolean
 
@@ -96,6 +97,7 @@
     Public ItemDescSize As Byte
     Public ItemDescItemNum As Long
     Public ItemDescName As String
+    Public ItemDescDescription As String
     Public ItemDescValue As Long
     Public ItemDescInfo As String
     Public ItemDescType As String
@@ -272,8 +274,8 @@
 
     Public CraftPanelX As Long = 25
     Public CraftPanelY As Long = 25
-
-
+    Public LoadClassInfo As Boolean
+#End Region
 
     Sub UpdateUI()
         If ReloadFrmMain = True Then
@@ -301,7 +303,6 @@
 
         If lblnextcharleft <> frmMenu.lblNextChar.Left Then
             frmMenu.lblNextChar.Left = lblnextcharleft
-
         End If
 
         If Not cmbclass Is Nothing Then
@@ -365,6 +366,16 @@
         If InitCrafting = True Then
             CraftingInit()
             InitCrafting = False
+        End If
+
+        If InitClassEditor = True Then
+            ClassEditorInit()
+            InitClassEditor = False
+        End If
+
+        If LoadClassInfo = True Then
+            LoadClass()
+            LoadClassInfo = False
         End If
 
         If InitResourceEditor = True Then
@@ -596,11 +607,6 @@
             End If
 
             UpdateDialog = False
-        End If
-
-        If ShakeTimer = True Then
-            frmMainGame.tmrShake.Enabled = True
-            ShakeTimer = False
         End If
 
         If EventChat = True Then

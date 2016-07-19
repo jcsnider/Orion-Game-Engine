@@ -359,7 +359,7 @@ Public Module ServerEvents
         filename = Application.StartupPath & "\data\switches.ini"
 
         For i = 1 To MAX_SWITCHES
-            Call PutVar(filename, "Switches", "Switch" & CStr(i) & "Name", Switches(i))
+            PutVar(filename, "Switches", "Switch" & i & "Name", Switches(i))
         Next
 
     End Sub
@@ -370,7 +370,7 @@ Public Module ServerEvents
         filename = Application.StartupPath & "\data\variables.ini"
 
         For i = 1 To MAX_VARIABLES
-            Call PutVar(filename, "Variables", "Variable" & CStr(i) & "Name", Variables(i))
+            PutVar(filename, "Variables", "Variable" & i & "Name", Variables(i))
         Next
 
     End Sub
@@ -382,7 +382,7 @@ Public Module ServerEvents
 
         For i = 1 To MAX_SWITCHES
             DoEvents()
-            Switches(i) = Getvar(filename, "Switches", "Switch" & CStr(i) & "Name")
+            Switches(i) = Getvar(filename, "Switches", "Switch" & i & "Name")
         Next
 
     End Sub
@@ -394,7 +394,7 @@ Public Module ServerEvents
 
         For i = 1 To MAX_VARIABLES
             DoEvents()
-            Variables(i) = Getvar(filename, "Variables", "Variable" & CStr(i) & "Name")
+            Variables(i) = Getvar(filename, "Variables", "Variable" & i & "Name")
         Next
 
     End Sub
@@ -407,9 +407,10 @@ Public Module ServerEvents
 
         ' Check for subscript out of range
 
-        If MapNum <= 0 Or MapNum > MAX_MAPS Or Dir < DIR_UP Or Dir > DIR_RIGHT Then
-            Exit Function
-        End If
+        If MapNum <= 0 Or MapNum > MAX_MAPS Or Dir < DIR_UP Or Dir > DIR_RIGHT Then Exit Function
+
+        If Gettingmap = True Then Exit Function
+
         CanEventMove = True
 
         If Index = 0 Then Exit Function
@@ -777,6 +778,8 @@ Public Module ServerEvents
 
         ' Check for subscript out of range
 
+        If Gettingmap = True Then Exit Sub
+
         If MapNum <= 0 Or MapNum > MAX_MAPS Or Dir < DIR_UP Or Dir > DIR_RIGHT Then
             Exit Sub
         End If
@@ -822,6 +825,7 @@ Public Module ServerEvents
         Dim eventIndex As Long, i As Long
 
         ' Check for subscript out of range
+        If Gettingmap = True Then Exit Sub
 
         If MapNum <= 0 Or MapNum > MAX_MAPS Or Dir < DIR_UP Or Dir > DIR_RIGHT Then
             Exit Sub
@@ -1056,6 +1060,7 @@ Public Module ServerEvents
         If playerID <= 0 Or playerID > MAX_PLAYERS Then Exit Function
         If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Function
         If eventID <= 0 Or eventID > TempPlayer(playerID).EventMap.CurrentEvents Then Exit Function
+        If Gettingmap = True Then Exit Function
 
         x = GetPlayerX(playerID)
         y = GetPlayerY(playerID)
@@ -1232,10 +1237,6 @@ Public Module ServerEvents
             FY = y
 
             ReDim pos(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
-
-            'CacheMapBlocks mapnum
-
-            'pos = MapBlocks(MapNum).Blocks
 
             For i = 1 To TempPlayer(playerID).EventMap.CurrentEvents
                 If TempPlayer(playerID).EventMap.EventPages(i).Visible Then
@@ -1424,6 +1425,7 @@ Public Module ServerEvents
         If playerID <= 0 Or playerID > MAX_PLAYERS Then Exit Function
         If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Function
         If eventID <= 0 Or eventID > TempPlayer(playerID).EventMap.CurrentEvents Then Exit Function
+        If Gettingmap = True Then Exit Function
 
         x = GetPlayerX(playerID)
         y = GetPlayerY(playerID)
