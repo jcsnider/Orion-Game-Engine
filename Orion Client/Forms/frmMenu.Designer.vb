@@ -86,6 +86,8 @@ Partial Class frmMenu
         Me.picChar1 = New System.Windows.Forms.PictureBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -332,6 +334,8 @@ Partial Class frmMenu
         Me.pnlNewChar.BackColor = System.Drawing.Color.Transparent
         Me.pnlNewChar.BackgroundImage = CType(resources.GetObject("pnlNewChar.BackgroundImage"), System.Drawing.Image)
         Me.pnlNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlNewChar.Controls.Add(Me.txtDescription)
+        Me.pnlNewChar.Controls.Add(Me.Label19)
         Me.pnlNewChar.Controls.Add(Me.btnCreateCharacter)
         Me.pnlNewChar.Controls.Add(Me.placeholderforsprite)
         Me.pnlNewChar.Controls.Add(Me.lblNextChar)
@@ -358,7 +362,7 @@ Partial Class frmMenu
         Me.btnCreateCharacter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCreateCharacter.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCreateCharacter.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btnCreateCharacter.Location = New System.Drawing.Point(179, 151)
+        Me.btnCreateCharacter.Location = New System.Drawing.Point(263, 150)
         Me.btnCreateCharacter.Name = "btnCreateCharacter"
         Me.btnCreateCharacter.Size = New System.Drawing.Size(121, 26)
         Me.btnCreateCharacter.TabIndex = 42
@@ -367,7 +371,7 @@ Partial Class frmMenu
         '
         'placeholderforsprite
         '
-        Me.placeholderforsprite.Location = New System.Drawing.Point(319, 53)
+        Me.placeholderforsprite.Location = New System.Drawing.Point(50, 91)
         Me.placeholderforsprite.Name = "placeholderforsprite"
         Me.placeholderforsprite.Size = New System.Drawing.Size(48, 60)
         Me.placeholderforsprite.TabIndex = 41
@@ -377,7 +381,7 @@ Partial Class frmMenu
         'lblNextChar
         '
         Me.lblNextChar.AutoSize = True
-        Me.lblNextChar.Location = New System.Drawing.Point(369, 118)
+        Me.lblNextChar.Location = New System.Drawing.Point(100, 156)
         Me.lblNextChar.Name = "lblNextChar"
         Me.lblNextChar.Size = New System.Drawing.Size(13, 13)
         Me.lblNextChar.TabIndex = 40
@@ -386,7 +390,7 @@ Partial Class frmMenu
         'lblPrevChar
         '
         Me.lblPrevChar.AutoSize = True
-        Me.lblPrevChar.Location = New System.Drawing.Point(306, 118)
+        Me.lblPrevChar.Location = New System.Drawing.Point(37, 156)
         Me.lblPrevChar.Name = "lblPrevChar"
         Me.lblPrevChar.Size = New System.Drawing.Size(13, 13)
         Me.lblPrevChar.TabIndex = 39
@@ -396,7 +400,7 @@ Partial Class frmMenu
         '
         Me.rdoFemale.AutoSize = True
         Me.rdoFemale.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoFemale.Location = New System.Drawing.Point(241, 116)
+        Me.rdoFemale.Location = New System.Drawing.Point(135, 118)
         Me.rdoFemale.Name = "rdoFemale"
         Me.rdoFemale.Size = New System.Drawing.Size(63, 19)
         Me.rdoFemale.TabIndex = 38
@@ -408,7 +412,7 @@ Partial Class frmMenu
         '
         Me.rdoMale.AutoSize = True
         Me.rdoMale.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rdoMale.Location = New System.Drawing.Point(175, 116)
+        Me.rdoMale.Location = New System.Drawing.Point(135, 93)
         Me.rdoMale.Name = "rdoMale"
         Me.rdoMale.Size = New System.Drawing.Size(51, 19)
         Me.rdoMale.TabIndex = 37
@@ -420,16 +424,16 @@ Partial Class frmMenu
         '
         Me.cmbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClass.FormattingEnabled = True
-        Me.cmbClass.Location = New System.Drawing.Point(179, 88)
+        Me.cmbClass.Location = New System.Drawing.Point(227, 43)
         Me.cmbClass.Name = "cmbClass"
-        Me.cmbClass.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClass.Size = New System.Drawing.Size(157, 21)
         Me.cmbClass.TabIndex = 36
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(106, 118)
+        Me.Label9.Location = New System.Drawing.Point(133, 75)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(47, 15)
         Me.Label9.TabIndex = 34
@@ -439,7 +443,7 @@ Partial Class frmMenu
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(106, 90)
+        Me.Label10.Location = New System.Drawing.Point(186, 45)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(37, 15)
         Me.Label10.TabIndex = 33
@@ -447,7 +451,7 @@ Partial Class frmMenu
         '
         'txtCharName
         '
-        Me.txtCharName.Location = New System.Drawing.Point(179, 53)
+        Me.txtCharName.Location = New System.Drawing.Point(59, 42)
         Me.txtCharName.Name = "txtCharName"
         Me.txtCharName.Size = New System.Drawing.Size(121, 20)
         Me.txtCharName.TabIndex = 32
@@ -457,7 +461,7 @@ Partial Class frmMenu
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(106, 56)
+        Me.Label11.Location = New System.Drawing.Point(13, 45)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(40, 15)
         Me.Label11.TabIndex = 31
@@ -811,6 +815,23 @@ Partial Class frmMenu
         Me.Label16.TabIndex = 17
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(56, 75)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(34, 13)
+        Me.Label19.TabIndex = 43
+        Me.Label19.Text = "Sprite"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(227, 76)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(157, 62)
+        Me.txtDescription.TabIndex = 44
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -819,9 +840,9 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(715, 541)
-        Me.Controls.Add(Me.pnlCharSelect)
+        Me.ClientSize = New System.Drawing.Size(1281, 541)
         Me.Controls.Add(Me.pnlNewChar)
+        Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCredits)
         Me.Controls.Add(Me.btnRegister)
@@ -927,4 +948,6 @@ Partial Class frmMenu
     Friend WithEvents btnDelChar As Windows.Forms.Button
     Friend WithEvents btnNewChar As Windows.Forms.Button
     Friend WithEvents btnUseChar As Windows.Forms.Button
+    Friend WithEvents txtDescription As Windows.Forms.TextBox
+    Friend WithEvents Label19 As Windows.Forms.Label
 End Class

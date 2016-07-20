@@ -75,6 +75,8 @@ Partial Class frmEditor_Classes
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnAddClass = New System.Windows.Forms.Button()
         Me.btnRemoveClass = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -135,6 +137,8 @@ Partial Class frmEditor_Classes
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtDescription)
+        Me.GroupBox2.Controls.Add(Me.Label14)
         Me.GroupBox2.Controls.Add(Me.GroupBox7)
         Me.GroupBox2.Controls.Add(Me.GroupBox6)
         Me.GroupBox2.Controls.Add(Me.GroupBox5)
@@ -157,7 +161,7 @@ Partial Class frmEditor_Classes
         Me.GroupBox7.Controls.Add(Me.picFemale)
         Me.GroupBox7.Controls.Add(Me.btnDeleteFemaleSprite)
         Me.GroupBox7.Controls.Add(Me.scrlFemaleSprite)
-        Me.GroupBox7.Location = New System.Drawing.Point(173, 39)
+        Me.GroupBox7.Location = New System.Drawing.Point(173, 73)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(161, 116)
         Me.GroupBox7.TabIndex = 20
@@ -224,7 +228,7 @@ Partial Class frmEditor_Classes
         Me.GroupBox6.Controls.Add(Me.scrlMaleSprite)
         Me.GroupBox6.Controls.Add(Me.btnDeleteMaleSprite)
         Me.GroupBox6.Controls.Add(Me.btnAddMaleSprite)
-        Me.GroupBox6.Location = New System.Drawing.Point(6, 39)
+        Me.GroupBox6.Location = New System.Drawing.Point(6, 73)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(161, 116)
         Me.GroupBox6.TabIndex = 19
@@ -368,7 +372,7 @@ Partial Class frmEditor_Classes
         Me.GroupBox4.Controls.Add(Me.Label5)
         Me.GroupBox4.Controls.Add(Me.numStrength)
         Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 161)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 190)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(328, 100)
         Me.GroupBox4.TabIndex = 11
@@ -509,16 +513,16 @@ Partial Class frmEditor_Classes
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.cmbItems)
         Me.GroupBox3.Controls.Add(Me.lstStartItems)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 267)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 296)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(328, 140)
+        Me.GroupBox3.Size = New System.Drawing.Size(328, 111)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Starting Items"
         '
         'btnItemAdd
         '
-        Me.btnItemAdd.Location = New System.Drawing.Point(183, 105)
+        Me.btnItemAdd.Location = New System.Drawing.Point(183, 78)
         Me.btnItemAdd.Name = "btnItemAdd"
         Me.btnItemAdd.Size = New System.Drawing.Size(139, 23)
         Me.btnItemAdd.TabIndex = 5
@@ -528,7 +532,7 @@ Partial Class frmEditor_Classes
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(183, 69)
+        Me.Label4.Location = New System.Drawing.Point(183, 54)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(46, 13)
         Me.Label4.TabIndex = 4
@@ -536,7 +540,7 @@ Partial Class frmEditor_Classes
         '
         'numItemAmount
         '
-        Me.numItemAmount.Location = New System.Drawing.Point(276, 67)
+        Me.numItemAmount.Location = New System.Drawing.Point(276, 52)
         Me.numItemAmount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numItemAmount.Name = "numItemAmount"
         Me.numItemAmount.Size = New System.Drawing.Size(46, 20)
@@ -546,7 +550,7 @@ Partial Class frmEditor_Classes
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(183, 20)
+        Me.Label3.Location = New System.Drawing.Point(183, 9)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 13)
         Me.Label3.TabIndex = 2
@@ -556,7 +560,7 @@ Partial Class frmEditor_Classes
         '
         Me.cmbItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItems.FormattingEnabled = True
-        Me.cmbItems.Location = New System.Drawing.Point(183, 40)
+        Me.cmbItems.Location = New System.Drawing.Point(183, 25)
         Me.cmbItems.Name = "cmbItems"
         Me.cmbItems.Size = New System.Drawing.Size(139, 21)
         Me.cmbItems.TabIndex = 1
@@ -564,9 +568,10 @@ Partial Class frmEditor_Classes
         'lstStartItems
         '
         Me.lstStartItems.FormattingEnabled = True
+        Me.lstStartItems.Items.AddRange(New Object() {"1", "2", "3", "4", "5"})
         Me.lstStartItems.Location = New System.Drawing.Point(6, 19)
         Me.lstStartItems.Name = "lstStartItems"
-        Me.lstStartItems.Size = New System.Drawing.Size(171, 108)
+        Me.lstStartItems.Size = New System.Drawing.Size(171, 82)
         Me.lstStartItems.TabIndex = 0
         '
         'Label1
@@ -603,6 +608,23 @@ Partial Class frmEditor_Classes
         Me.btnRemoveClass.TabIndex = 16
         Me.btnRemoveClass.Text = "Remove Class"
         Me.btnRemoveClass.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 42)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(63, 13)
+        Me.Label14.TabIndex = 21
+        Me.Label14.Text = "Description:"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(75, 39)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(259, 28)
+        Me.txtDescription.TabIndex = 22
         '
         'frmEditor_Classes
         '
@@ -701,4 +723,6 @@ Partial Class frmEditor_Classes
     Friend WithEvents numBaseExp As Windows.Forms.NumericUpDown
     Friend WithEvents lblFemaleSprite As Windows.Forms.Label
     Friend WithEvents lblMaleSprite As Windows.Forms.Label
+    Friend WithEvents txtDescription As Windows.Forms.TextBox
+    Friend WithEvents Label14 As Windows.Forms.Label
 End Class

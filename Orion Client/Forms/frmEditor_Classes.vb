@@ -69,6 +69,10 @@ Public Class frmEditor_Classes
         ClassesEditorCancel()
     End Sub
 
+    Private Sub txtDescription_TextChanged(sender As Object, e As EventArgs) Handles txtDescription.TextChanged
+        Classes(EditorIndex).Desc = txtDescription.Text
+    End Sub
+
     Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Long
         If EditorIndex = 0 Or EditorIndex > Max_Classes Then Exit Sub
@@ -284,6 +288,8 @@ Public Class frmEditor_Classes
 
         Classes(EditorIndex).StartY = numStartY.Value
     End Sub
+
+
 
 #End Region
 

@@ -324,6 +324,7 @@
 
             With Classes(i)
                 .Name = Trim(Buffer.ReadString)
+                .Desc = Trim(Buffer.ReadString)
 
                 ReDim .Vital(0 To Vitals.Vital_Count - 1)
 
@@ -421,7 +422,9 @@
         For i = 1 To Max_Classes
 
             With Classes(i)
-                .Name = Buffer.ReadString
+                .Name = Trim$(Buffer.ReadString)
+                .Desc = Trim$(Buffer.ReadString)
+
                 .Vital(Vitals.HP) = Buffer.ReadLong
                 .Vital(Vitals.MP) = Buffer.ReadLong
                 .Vital(Vitals.SP) = Buffer.ReadLong
@@ -2161,6 +2164,8 @@
 
             With Classes(i)
                 .Name = Trim(buffer.ReadString)
+                .Desc = Trim$(buffer.ReadString)
+
                 .Vital(Vitals.HP) = buffer.ReadLong
                 .Vital(Vitals.MP) = buffer.ReadLong
                 .Vital(Vitals.SP) = buffer.ReadLong

@@ -213,6 +213,7 @@
 
     Public Structure ClassRec
         Dim Name As String
+        Dim Desc As String
         Dim Stat() As Byte
         Dim MaleSprite() As Long
         Dim FemaleSprite() As Long

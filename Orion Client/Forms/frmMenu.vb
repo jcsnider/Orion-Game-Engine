@@ -68,9 +68,9 @@ Public Class frmMenu
             charsprite.MakeTransparent(charsprite.GetPixel(0, 0))
 
             If charwidth > 32 Then
-                lblnextcharleft = (370 - (64 - charwidth))
+                lblnextcharleft = (100 - (64 - charwidth))
             Else
-                lblnextcharleft = 370
+                lblnextcharleft = 100
             End If
             pnlNewChar.Refresh()
             g.DrawImage(charsprite, destRect, srcRect, GraphicsUnit.Pixel)
@@ -212,6 +212,7 @@ Public Class frmMenu
 
     Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
         newCharClass = cmbClass.SelectedIndex + 1
+        txtDescription.Text = Classes(newCharClass).Desc
         DrawCharacter()
     End Sub
 

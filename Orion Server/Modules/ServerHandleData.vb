@@ -3595,6 +3595,7 @@
 
             With Classes(i)
                 .Name = buffer.ReadString
+                .Desc = buffer.ReadString
 
                 ' get array size
                 z = buffer.ReadLong

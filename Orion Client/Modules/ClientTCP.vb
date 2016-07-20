@@ -1164,6 +1164,7 @@ Module ClientTCP
 
         For i = 1 To Max_Classes
             Buffer.WriteString(Trim$(Classes(i).Name))
+            Buffer.WriteString(Trim$(Classes(i).Desc))
 
             ' set sprite array size
             n = UBound(Classes(i).MaleSprite)

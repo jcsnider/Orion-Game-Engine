@@ -1134,6 +1134,7 @@ Module ClientGameEditors
         If EditorIndex <= 0 Or EditorIndex > Max_Classes Then Exit Sub
 
         frmEditor_Classes.txtName.Text = Classes(EditorIndex).Name
+        frmEditor_Classes.txtDescription.Text = Classes(EditorIndex).Desc
 
         frmEditor_Classes.cmbMaleSprite.Items.Clear()
 

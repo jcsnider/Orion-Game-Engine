@@ -12,6 +12,7 @@ Module ServerDatabase
         If Not FileExist(filename) Then
             PutVar(filename, "INIT", "MaxClasses", Max_Classes)
             PutVar(filename, "CLASS1", "Name", "Warrior")
+            PutVar(filename, "CLASS1", "Desc", "Warrior Description")
             PutVar(filename, "CLASS1", "Malesprite", "1")
             PutVar(filename, "CLASS1", "Femalesprite", "2")
             PutVar(filename, "CLASS1", "Str", "5")
@@ -34,6 +35,7 @@ Module ServerDatabase
         For i = 1 To Max_Classes
             Classes(i) = Nothing
             Classes(i).Name = vbNullString
+            Classes(i).Desc = vbNullString
         Next
 
         ReDim Classes(0 To Max_Classes)
@@ -68,6 +70,7 @@ Module ServerDatabase
 
         For i = 1 To Max_Classes
             Classes(i).Name = Getvar(filename, "CLASS" & i, "Name")
+            Classes(i).Desc = Getvar(filename, "CLASS" & i, "Desc")
 
             ' read string of sprites
             tmpSprite = Getvar(filename, "CLASS" & i, "MaleSprite")
@@ -125,6 +128,8 @@ Module ServerDatabase
 
         For i = 1 To Max_Classes
             PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
+            PutVar(filename, "CLASS" & i, "Desc", Trim$(Classes(i).Desc))
+
             For x = 0 To UBound(Classes(i).MaleSprite)
                 tmpstring = tmpstring & CStr(Classes(i).MaleSprite(x)) & ","
             Next
@@ -2291,7 +2296,8 @@ Module ServerDatabase
         Buffer.WriteLong(Max_Classes)
 
         For i = 1 To Max_Classes
-            Buffer.WriteString(GetClassName(i))
+            Buffer.WriteString(Trim$(GetClassName(i)))
+            Buffer.WriteString(Trim(Classes(i).Desc))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.HP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.MP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.SP))

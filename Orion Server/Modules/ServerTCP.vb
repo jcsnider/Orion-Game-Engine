@@ -194,6 +194,8 @@ Module ServerTCP
 
         For i = 1 To Max_Classes
             Buffer.WriteString(GetClassName(i))
+            Buffer.WriteString(Trim$(Classes(i).Desc))
+
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.HP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.MP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.SP))
@@ -336,6 +338,7 @@ Module ServerTCP
 
         For i = 1 To Max_Classes
             Buffer.WriteString(Trim$(GetClassName(i)))
+            Buffer.WriteString(Trim$(Classes(i).Desc))
 
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.HP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.MP))
@@ -395,6 +398,8 @@ Module ServerTCP
 
         For i = 1 To Max_Classes
             Buffer.WriteString(GetClassName(i))
+            Buffer.WriteString(Trim$(Classes(i).Desc))
+
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.HP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.MP))
             Buffer.WriteLong(GetClassMaxVital(i, Vitals.SP))
