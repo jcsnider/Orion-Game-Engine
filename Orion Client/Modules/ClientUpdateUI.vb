@@ -27,7 +27,7 @@
     Public HUDVisible As Boolean
     Public pnlCharacterVisible As Boolean
     Public pnlInventoryVisible As Boolean
-    Public pnlSpellsVisible As Boolean
+    Public pnlSkillsVisible As Boolean
     Public pnlBankVisible As Boolean
     Public pnlShopVisible As Boolean
     Public pnlTradeVisible As Boolean
@@ -54,7 +54,7 @@
     Public InitItemEditor As Boolean
     Public InitResourceEditor As Boolean
     Public InitNPCEditor As Boolean
-    Public InitSpellEditor As Boolean
+    Public InitSkillEditor As Boolean
     Public InitShopEditor As Boolean
     Public InitAnimationEditor As Boolean
     Public InitClassEditor As Boolean
@@ -166,32 +166,32 @@
     Public Const InvOffsetX As Byte = 6
     Public Const InvColumns As Byte = 5
 
-    'Spell window Coordinates
-    Public SpellWindowX As Long = 943
-    Public SpellWindowY As Long = 475
-    ' spells constants
-    Public Const SpellTop As Byte = 9
-    Public Const SpellLeft As Byte = 10
-    Public Const SpellOffsetY As Byte = 5
-    Public Const SpellOffsetX As Byte = 6
-    Public Const SpellColumns As Byte = 5
+    'Skill window Coordinates
+    Public SkillWindowX As Long = 943
+    Public SkillWindowY As Long = 475
+    ' skills constants
+    Public Const SkillTop As Byte = 9
+    Public Const SkillLeft As Byte = 10
+    Public Const SkillOffsetY As Byte = 5
+    Public Const SkillOffsetX As Byte = 6
+    Public Const SkillColumns As Byte = 5
 
-    Public ShowSpellDesc As Boolean
-    Public SpellDescSize As Byte
-    Public SpellDescSpellNum As Long
-    Public SpellDescName As String
-    Public SpellDescVital As String
-    Public SpellDescInfo As String
-    Public SpellDescType As String
-    Public SpellDescCastTime As String
-    Public SpellDescCoolDown As String
-    Public SpellDescDamage As String
-    Public SpellDescAOE As String
-    Public SpellDescRange As String
-    Public SpellDescReqMp As String
-    Public SpellDescReqLvl As String
-    Public SpellDescReqClass As String
-    Public SpellDescReqAccess As String
+    Public ShowSkillDesc As Boolean
+    Public SkillDescSize As Byte
+    Public SkillDescSkillNum As Long
+    Public SkillDescName As String
+    Public SkillDescVital As String
+    Public SkillDescInfo As String
+    Public SkillDescType As String
+    Public SkillDescCastTime As String
+    Public SkillDescCoolDown As String
+    Public SkillDescDamage As String
+    Public SkillDescAOE As String
+    Public SkillDescRange As String
+    Public SkillDescReqMp As String
+    Public SkillDescReqLvl As String
+    Public SkillDescReqClass As String
+    Public SkillDescReqAccess As String
 
     'dialog panel
     Public DialogPanelVisible As Boolean
@@ -417,21 +417,21 @@
             InitNPCEditor = False
         End If
 
-        If InitSpellEditor = True Then
-            With frmEditor_Spell
-                Editor = EDITOR_SPELL
+        If InitSkillEditor = True Then
+            With frmEditor_Skill
+                Editor = EDITOR_SKILL
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_SPELLS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Spell(i).Name))
+                For i = 1 To MAX_SKILLS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
                 Next
 
                 .Show()
                 .lstIndex.SelectedIndex = 0
-                SpellEditorInit()
+                SkillEditorInit()
             End With
-            InitSpellEditor = False
+            InitSkillEditor = False
         End If
 
         If InitShopEditor = True Then

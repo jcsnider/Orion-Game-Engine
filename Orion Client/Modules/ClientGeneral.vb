@@ -168,7 +168,7 @@ Module ClientGeneral
         CheckAnimations()
         CheckItems()
         CheckResources()
-        CheckSpellIcons()
+        CheckSkillIcons()
         CheckFaces()
         CheckFog()
         CacheMusic()
@@ -402,9 +402,9 @@ Module ClientGeneral
         InvWindowX = frmMainGame.Width - InvPanelGFXInfo.width - 26
         InvWindowY = frmMainGame.Height - InvPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
 
-        'spell window
-        SpellWindowX = frmMainGame.Width - SpellPanelGFXInfo.width - 26
-        SpellWindowY = frmMainGame.Height - SpellPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+        'skill window
+        SkillWindowX = frmMainGame.Width - SkillPanelGFXInfo.width - 26
+        SkillWindowY = frmMainGame.Height - SkillPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
 
     End Sub
 

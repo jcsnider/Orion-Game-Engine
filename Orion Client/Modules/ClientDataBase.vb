@@ -85,16 +85,16 @@ Module ClientDataBase
         If NumResources = 0 Then Exit Sub
     End Sub
 
-    Public Sub CheckSpellIcons()
+    Public Sub CheckSkillIcons()
         Dim i As Long
         i = 1
 
-        While FileExist(Application.StartupPath & GFX_PATH & "SpellIcons\" & i & GFX_EXT)
-            NumSpellIcons = NumSpellIcons + 1
+        While FileExist(Application.StartupPath & GFX_PATH & "SkillIcons\" & i & GFX_EXT)
+            NumSkillIcons = NumSkillIcons + 1
             i = i + 1
         End While
 
-        If NumSpellIcons = 0 Then Exit Sub
+        If NumSkillIcons = 0 Then Exit Sub
     End Sub
 
     Public Sub CheckFaces()
@@ -774,19 +774,19 @@ Module ClientDataBase
 
     End Sub
 
-    Sub ClearSpells()
+    Sub ClearSkills()
         Dim i As Long
 
-        For i = 1 To MAX_SPELLS
-            Call ClearSpell(i)
+        For i = 1 To MAX_SKILLS
+            Call ClearSkill(i)
         Next
 
     End Sub
 
-    Sub ClearSpell(ByVal Index As Long)
-        Spell(Index) = Nothing
-        Spell(Index) = New SpellRec
-        Spell(Index).Name = ""
+    Sub ClearSkill(ByVal Index As Long)
+        Skill(Index) = Nothing
+        Skill(Index) = New SkillRec
+        Skill(Index).Name = ""
     End Sub
 
     Sub ClearShop(ByVal Index As Long)
@@ -891,7 +891,7 @@ Module ClientDataBase
 
         CheckDir(Application.StartupPath & "\data files\graphics\resources")
 
-        CheckDir(Application.StartupPath & "\data files\graphics\spellicons")
+        CheckDir(Application.StartupPath & "\data files\graphics\skillicons")
 
         CheckDir(Application.StartupPath & "\data files\graphics\tilesets")
 

@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 
 Public Module ClientGuiFunctions
     Public Sub CheckGuiMove(ByVal X As Long, ByVal Y As Long)
-        Dim eqNum As Long, InvNum As Long, spellslot As Long
+        Dim eqNum As Long, InvNum As Long, skillslot As Long
         Dim bankitem As Long, shopslot As Long, TradeNum As Long
 
         If InMapEditor Then Exit Sub
@@ -60,29 +60,29 @@ Public Module ClientGuiFunctions
             End If
         End If
 
-        'spells
-        If pnlSpellsVisible = True Then
-            If AboveSpellpanel(X, Y) Then
-                SpellX = X
-                SpellY = Y
+        'skills
+        If pnlSkillsVisible = True Then
+            If AboveSkillpanel(X, Y) Then
+                SkillX = X
+                SkillY = Y
 
-                If DragSpellSlotNum > 0 Then
+                If DragSkillSlotNum > 0 Then
                     If InTrade Then Exit Sub
                     If InBank Or InShop Then Exit Sub
-                    DrawSpellItem(X, Y)
-                    LastSpellDesc = 0 ' no item was last loaded
-                    ShowSpellDesc = False
+                    DrawSkillItem(X, Y)
+                    LastSkillDesc = 0 ' no item was last loaded
+                    ShowSkillDesc = False
                 Else
-                    spellslot = IsPlayerSpell(X, Y)
+                    skillslot = IsPlayerSkill(X, Y)
 
-                    If spellslot <> 0 Then
-                        UpdateSpellWindow(PlayerSpells(spellslot))
-                        LastSpellDesc = PlayerSpells(spellslot)
-                        ShowSpellDesc = True
+                    If skillslot <> 0 Then
+                        UpdateSkillWindow(PlayerSkills(skillslot))
+                        LastSkillDesc = PlayerSkills(skillslot)
+                        ShowSkillDesc = True
                         Exit Sub
                     Else
-                        LastSpellDesc = 0
-                        ShowSpellDesc = False
+                        LastSkillDesc = 0
+                        ShowSkillDesc = False
                     End If
                 End If
 
@@ -173,7 +173,7 @@ Public Module ClientGuiFunctions
 
     Public Function CheckGuiClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
         Dim EqNum As Long, InvNum As Long
-        Dim spellnum As Long, hotbarslot As Long
+        Dim skillnum As Long, hotbarslot As Long
         Dim Buffer As ByteBuffer
 
         CheckGuiClick = False
@@ -189,17 +189,17 @@ Public Module ClientGuiFunctions
                         PlaySound("Click.ogg")
                         pnlInventoryVisible = Not pnlInventoryVisible
                         pnlCharacterVisible = False
-                        pnlSpellsVisible = False
+                        pnlSkillsVisible = False
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Skills
                     ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 48 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
                         PlaySound("Click.ogg")
                         Buffer = New ByteBuffer
-                        Buffer.WriteLong(ClientPackets.CSpells)
+                        Buffer.WriteLong(ClientPackets.CSkills)
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
-                        pnlSpellsVisible = Not pnlSpellsVisible
+                        pnlSkillsVisible = Not pnlSkillsVisible
                         pnlInventoryVisible = False
                         pnlCharacterVisible = False
                         frmMainGame.pnlOptions.Visible = False
@@ -210,7 +210,7 @@ Public Module ClientGuiFunctions
                         SendRequestPlayerData()
                         pnlCharacterVisible = Not pnlCharacterVisible
                         pnlInventoryVisible = False
-                        pnlSpellsVisible = False
+                        pnlSkillsVisible = False
                         frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Quest
@@ -228,7 +228,7 @@ Public Module ClientGuiFunctions
                         PlaySound("Click.ogg")
                         pnlCharacterVisible = False
                         pnlInventoryVisible = False
-                        pnlSpellsVisible = False
+                        pnlSkillsVisible = False
                         frmMainGame.pnlOptions.BringToFront()
                         frmMainGame.pnlOptions.Visible = Not frmMainGame.pnlOptions.Visible
                         CheckGuiClick = True
@@ -249,11 +249,11 @@ Public Module ClientGuiFunctions
 
                 If e.Button = MouseButtons.Left Then
                     If hotbarslot > 0 Then
-                        spellnum = PlayerSpells(Player(MyIndex).Hotbar(hotbarslot).Slot)
+                        skillnum = PlayerSkills(Player(MyIndex).Hotbar(hotbarslot).Slot)
 
-                        If spellnum <> 0 Then
+                        If skillnum <> 0 Then
                             PlaySound("Click.ogg")
-                            PlayerCastSpell(spellnum)
+                            PlayerCastSkill(skillnum)
                         End If
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click
@@ -263,12 +263,12 @@ Public Module ClientGuiFunctions
                         CheckGuiClick = True
                     Else
                         Buffer = New ByteBuffer
-                        Buffer.WriteLong(ClientPackets.CSpells)
+                        Buffer.WriteLong(ClientPackets.CSkills)
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
-                        pnlSpellsVisible = True
+                        pnlSkillsVisible = True
                         AddText("Click on the skill you want to place here", TellColor)
-                        SelSpellSlot = True
+                        SelSkillSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     End If
                 End If
@@ -664,7 +664,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Public Function CheckGuiDoubleClick(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long, spellnum As Long, BankItem As Long
+        Dim InvNum As Long, skillnum As Long, BankItem As Long
         Dim Value As Long, TradeNum As Long
         Dim multiplier As Double
         Dim i As Long
@@ -734,14 +734,14 @@ Public Module ClientGuiFunctions
             End If
         End If
 
-        'Spell panel
-        If pnlSpellsVisible = True Then
-            If AboveSpellpanel(X, Y) Then
+        'Skill panel
+        If pnlSkillsVisible = True Then
+            If AboveSkillpanel(X, Y) Then
 
-                spellnum = IsPlayerSpell(SpellX, SpellY)
+                skillnum = IsPlayerSkill(SkillX, SkillY)
 
-                If spellnum <> 0 Then
-                    PlayerCastSpell(spellnum)
+                If skillnum <> 0 Then
+                    PlayerCastSkill(skillnum)
                     Exit Function
                 End If
             End If
@@ -825,15 +825,15 @@ Public Module ClientGuiFunctions
                 If FurnitureSelected > 0 Then
                     If Player(MyIndex).InHouse = MyIndex Then
                         If Item(PlayerInv(FurnitureSelected).Num).Type = ITEM_TYPE_FURNITURE Then
-                            Buffer = New ByteBuffer
-                            Buffer.WriteLong(ClientPackets.CPlaceFurniture)
+                            buffer = New ByteBuffer
+                            buffer.WriteLong(ClientPackets.CPlaceFurniture)
                             i = CurX
-                            Buffer.WriteLong(i)
+                            buffer.WriteLong(i)
                             i = CurY
-                            Buffer.WriteLong(i)
-                            Buffer.WriteLong(FurnitureSelected)
-                            SendData(Buffer.ToArray)
-                            Buffer = Nothing
+                            buffer.WriteLong(i)
+                            buffer.WriteLong(FurnitureSelected)
+                            SendData(buffer.ToArray)
+                            buffer = Nothing
 
                             FurnitureSelected = 0
                         End If
@@ -842,27 +842,27 @@ Public Module ClientGuiFunctions
             End If
         End If
 
-        'spells
-        If pnlSpellsVisible Then
-            If AboveSpellpanel(X, Y) Then
+        'skills
+        If pnlSkillsVisible Then
+            If AboveSkillpanel(X, Y) Then
                 If InTrade > 0 Then Exit Function
                 If InBank Or InShop Then Exit Function
 
-                If DragSpellSlotNum > 0 Then
+                If DragSkillSlotNum > 0 Then
 
-                    For i = 1 To MAX_PLAYER_SPELLS
+                    For i = 1 To MAX_PLAYER_SKILLS
 
                         With rec_pos
-                            .Y = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                            .Y = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))
                             .Height = PIC_Y
-                            .X = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                            .X = SkillWindowX + SkillLeft + ((SkillOffsetX + 32) * (((i - 1) Mod SkillColumns)))
                             .Width = PIC_X
                         End With
 
                         If e.Location.X >= rec_pos.Left And e.Location.X <= rec_pos.Right Then
                             If e.Location.Y >= rec_pos.Top And e.Location.Y <= rec_pos.Bottom Then '
-                                If DragSpellSlotNum <> i Then
-                                    'SendChangeSpellSlots(DragSpellSlotNum, i)
+                                If DragSkillSlotNum <> i Then
+                                    'SendChangeSkillSlots(DragSkillSlotNum, i)
                                     Exit For
                                 End If
                             End If
@@ -872,7 +872,7 @@ Public Module ClientGuiFunctions
 
                 End If
 
-                DragSpellSlotNum = 0
+                DragSkillSlotNum = 0
                 frmMainGame.pnlTmpSkill.Visible = False
             End If
         End If
@@ -909,7 +909,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Public Function CheckGuiMouseDown(ByVal X As Long, ByVal Y As Long, ByVal e As MouseEventArgs) As Boolean
-        Dim InvNum As Long, spellnum As Long, bankNum As Long, shopItem As Long
+        Dim InvNum As Long, skillnum As Long, bankNum As Long, shopItem As Long
 
         'Inventory
         If pnlInventoryVisible Then
@@ -943,25 +943,25 @@ Public Module ClientGuiFunctions
             End If
         End If
 
-        'spells
-        If pnlSpellsVisible = True Then
-            If AboveSpellpanel(X, Y) Then
-                spellnum = IsPlayerSpell(e.Location.X, e.Location.Y)
+        'skills
+        If pnlSkillsVisible = True Then
+            If AboveSkillpanel(X, Y) Then
+                skillnum = IsPlayerSkill(e.Location.X, e.Location.Y)
 
                 If e.Button = MouseButtons.Left Then
-                    If spellnum <> 0 Then
+                    If skillnum <> 0 Then
                         If InTrade Then Exit Function
 
-                        DragSpellSlotNum = spellnum
+                        DragSkillSlotNum = skillnum
 
-                        If SelSpellSlot = True Then
-                            SendSetHotbarSkill(SelHotbarSlot, spellnum)
+                        If SelSkillSlot = True Then
+                            SendSetHotbarSkill(SelHotbarSlot, skillnum)
                         End If
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click
 
-                    If spellnum <> 0 Then
-                        ForgetSpell(spellnum)
+                    If skillnum <> 0 Then
+                        ForgetSkill(skillnum)
                         Exit Function
                     End If
                 End If
@@ -1104,26 +1104,26 @@ Public Module ClientGuiFunctions
 
     End Function
 
-    Function IsPlayerSpell(ByVal X As Single, ByVal Y As Single) As Long
+    Function IsPlayerSkill(ByVal X As Single, ByVal Y As Single) As Long
         Dim tempRec As RECT
         Dim i As Long
 
-        IsPlayerSpell = 0
+        IsPlayerSkill = 0
 
-        For i = 1 To MAX_PLAYER_SPELLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
-            If PlayerSpells(i) > 0 And PlayerSpells(i) <= MAX_PLAYER_SPELLS Then
+            If PlayerSkills(i) > 0 And PlayerSkills(i) <= MAX_PLAYER_SKILLS Then
 
                 With tempRec
-                    .top = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                    .top = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))
                     .bottom = .top + PIC_Y
-                    .left = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                    .left = SkillWindowX + SkillLeft + ((SkillOffsetX + 32) * (((i - 1) Mod SkillColumns)))
                     .right = .left + PIC_X
                 End With
 
                 If X >= tempRec.left And X <= tempRec.right Then
                     If Y >= tempRec.top And Y <= tempRec.bottom Then
-                        IsPlayerSpell = i
+                        IsPlayerSkill = i
                         Exit Function
                     End If
                 End If
@@ -1269,12 +1269,12 @@ Public Module ClientGuiFunctions
         End If
     End Function
 
-    Function AboveSpellpanel(ByVal X As Single, ByVal Y As Single) As Boolean
-        AboveSpellpanel = False
+    Function AboveSkillpanel(ByVal X As Single, ByVal Y As Single) As Boolean
+        AboveSkillpanel = False
 
-        If X > SpellWindowX And X < SpellWindowX + SpellPanelGFXInfo.width Then
-            If Y > SpellWindowY And Y < SpellWindowY + SpellPanelGFXInfo.height Then
-                AboveSpellpanel = True
+        If X > SkillWindowX And X < SkillWindowX + SkillPanelGFXInfo.width Then
+            If Y > SkillWindowY And Y < SkillWindowY + SkillPanelGFXInfo.height Then
+                AboveSkillpanel = True
             End If
         End If
     End Function

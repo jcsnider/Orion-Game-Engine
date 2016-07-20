@@ -52,8 +52,8 @@ Public Class frmEditor_Events
         cmbCondition_LearntSkill.Enabled = False
         cmbCondition_LearntSkill.Items.Clear()
 
-        For i = 1 To MAX_SPELLS
-            cmbCondition_LearntSkill.Items.Add(i & ". " & Trim$(Spell(i).Name))
+        For i = 1 To MAX_SKILLS
+            cmbCondition_LearntSkill.Items.Add(i & ". " & Trim$(Skill(i).Name))
         Next
         cmbCondition_LearntSkill.SelectedIndex = 0
         cmbCondition_LevelCompare.Enabled = False
@@ -115,8 +115,8 @@ Public Class frmEditor_Events
         lblChangeLevel.Text = "Level: 1"
         cmbChangeSkills.Items.Clear()
 
-        For i = 1 To MAX_SPELLS
-            cmbChangeSkills.Items.Add(Trim$(Spell(i).Name))
+        For i = 1 To MAX_SKILLS
+            cmbChangeSkills.Items.Add(Trim$(Skill(i).Name))
         Next
         cmbChangeSkills.SelectedIndex = 0
         cmbChangeClass.Items.Clear()

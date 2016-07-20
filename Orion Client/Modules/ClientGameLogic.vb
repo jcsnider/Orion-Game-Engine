@@ -119,24 +119,24 @@ Module ClientGameLogic
                 End If
 
                 ' check if we need to end the CD icon
-                If NumSpellIcons > 0 Then
-                    For i = 1 To MAX_PLAYER_SPELLS
-                        If PlayerSpells(i) > 0 Then
-                            If SpellCD(i) > 0 Then
-                                If SpellCD(i) + (Spell(PlayerSpells(i)).CDTime * 1000) < Tick Then
-                                    SpellCD(i) = 0
-                                    DrawPlayerSpells()
+                If NumSkillIcons > 0 Then
+                    For i = 1 To MAX_PLAYER_SKILLS
+                        If PlayerSkills(i) > 0 Then
+                            If SkillCD(i) > 0 Then
+                                If SkillCD(i) + (Skill(PlayerSkills(i)).CDTime * 1000) < Tick Then
+                                    SkillCD(i) = 0
+                                    DrawPlayerSkills()
                                 End If
                             End If
                         End If
                     Next
                 End If
 
-                ' check if we need to unlock the player's spell casting restriction
-                If SpellBuffer > 0 Then
-                    If SpellBufferTimer + (Spell(PlayerSpells(SpellBuffer)).CastTime * 1000) < Tick Then
-                        SpellBuffer = 0
-                        SpellBufferTimer = 0
+                ' check if we need to unlock the player's skill casting restriction
+                If SkillBuffer > 0 Then
+                    If SkillBufferTimer + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000) < Tick Then
+                        SkillBuffer = 0
+                        SkillBufferTimer = 0
                     End If
                 End If
 
@@ -585,7 +585,7 @@ Module ClientGameLogic
                     AddText("Social Commands:", Yellow)
                     AddText("""msghere = Global Admin Message", Yellow)
                     AddText("=msghere = Private Admin Message", Yellow)
-                    AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editspell, /debug, /questreset", Yellow)
+                    AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editskill, /debug, /questreset", Yellow)
                 ' Kicking a player
                 Case "/kick"
 
@@ -808,15 +808,15 @@ Module ClientGameLogic
                     End If
 
                     SendRequestEditShop()
-                ' Editing spell request
-                Case "/editspell"
+                ' Editing skill request
+                Case "/editskill"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
                         AddText("You need to be a high enough staff member to do this!", AlertColor)
                         GoTo Continue1
                     End If
 
-                    SendRequestEditSpell()
+                    SendRequestEditSkill()
                 ' // Creator Admin Commands //
                 ' Giving another player access
                 Case "/setaccess"
@@ -962,9 +962,9 @@ Continue1:
             Case ITEM_TYPE_CURRENCY
                 ItemDescInfo = "N/A"
                 ItemDescType = "Currency"
-            Case ITEM_TYPE_SPELL
+            Case ITEM_TYPE_SKILL
                 ItemDescInfo = "N/A"
-                ItemDescType = "Spell"
+                ItemDescType = "Skill"
             Case ITEM_TYPE_FURNITURE
                 ItemDescInfo = "Furniture"
         End Select
@@ -1096,53 +1096,53 @@ Continue1:
         ActionMsg(Index).Y = 0
     End Sub
 
-    Public Sub UpdateSpellWindow(ByVal spellnum As Long)
+    Public Sub UpdateSkillWindow(ByVal skillnum As Long)
 
-        If LastSpellDesc = spellnum Then Exit Sub
+        If LastSkillDesc = skillnum Then Exit Sub
 
-        SpellDescName = Spell(spellnum).Name
+        SkillDescName = Skill(skillnum).Name
 
-        Select Case Spell(spellnum).Type
-            Case SPELL_TYPE_DAMAGEHP
-                SpellDescType = "Damage HP"
-                SpellDescVital = "Damage:"
-            Case SPELL_TYPE_DAMAGEMP
-                SpellDescType = "Damage MP"
-                SpellDescVital = "Damage:"
-            Case SPELL_TYPE_HEALHP
-                SpellDescType = "Heal HP"
-                SpellDescVital = "Heal:"
-            Case SPELL_TYPE_HEALMP
-                SpellDescType = "Heal MP"
-                SpellDescVital = "Heal:"
-            Case SPELL_TYPE_WARP
-                SpellDescType = "Warp"
+        Select Case Skill(skillnum).Type
+            Case SKILL_TYPE_DAMAGEHP
+                SkillDescType = "Damage HP"
+                SkillDescVital = "Damage:"
+            Case SKILL_TYPE_DAMAGEMP
+                SkillDescType = "Damage MP"
+                SkillDescVital = "Damage:"
+            Case SKILL_TYPE_HEALHP
+                SkillDescType = "Heal HP"
+                SkillDescVital = "Heal:"
+            Case SKILL_TYPE_HEALMP
+                SkillDescType = "Heal MP"
+                SkillDescVital = "Heal:"
+            Case SKILL_TYPE_WARP
+                SkillDescType = "Warp"
         End Select
 
-        SpellDescReqMp = Spell(spellnum).MPCost
-        SpellDescReqLvl = Spell(spellnum).LevelReq
-        SpellDescReqAccess = Spell(spellnum).AccessReq
+        SkillDescReqMp = Skill(skillnum).MPCost
+        SkillDescReqLvl = Skill(skillnum).LevelReq
+        SkillDescReqAccess = Skill(skillnum).AccessReq
 
-        If Spell(spellnum).ClassReq > 0 Then
-            SpellDescReqClass = Trim$(Classes(Spell(spellnum).ClassReq).Name)
+        If Skill(skillnum).ClassReq > 0 Then
+            SkillDescReqClass = Trim$(Classes(Skill(skillnum).ClassReq).Name)
         Else
-            SpellDescReqClass = "None"
+            SkillDescReqClass = "None"
         End If
 
-        SpellDescCastTime = Spell(spellnum).CastTime & "s"
-        SpellDescCoolDown = Spell(spellnum).CDTime & "s"
-        SpellDescDamage = Spell(spellnum).Vital
+        SkillDescCastTime = Skill(skillnum).CastTime & "s"
+        SkillDescCoolDown = Skill(skillnum).CDTime & "s"
+        SkillDescDamage = Skill(skillnum).Vital
 
-        If Spell(spellnum).IsAoE Then
-            SpellDescAOE = Spell(spellnum).AoE & " tiles."
+        If Skill(skillnum).IsAoE Then
+            SkillDescAOE = Skill(skillnum).AoE & " tiles."
         Else
-            SpellDescAOE = "No"
+            SkillDescAOE = "No"
         End If
 
-        If Spell(spellnum).Range > 0 Then
-            SpellDescRange = Spell(spellnum).Range & " tiles."
+        If Skill(skillnum).Range > 0 Then
+            SkillDescRange = Skill(skillnum).Range & " tiles."
         Else
-            SpellDescRange = "Self-cast"
+            SkillDescRange = "Self-cast"
         End If
 
     End Sub

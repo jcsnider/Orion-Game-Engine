@@ -199,10 +199,10 @@
     <Compile Include="Forms\frmEditor_Shop.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmEditor_Spell.Designer.vb">
-      <DependentUpon>frmEditor_Spell.vb</DependentUpon>
+    <Compile Include="Forms\frmEditor_Skill.designer.vb">
+      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmEditor_Spell.vb">
+    <Compile Include="Forms\frmEditor_Skill.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmLoad.Designer.vb">
@@ -304,8 +304,8 @@
     <EmbeddedResource Include="Forms\frmEditor_Shop.resx">
       <DependentUpon>frmEditor_Shop.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmEditor_Spell.resx">
-      <DependentUpon>frmEditor_Spell.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmEditor_Skill.resx">
+      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLoad.resx">
       <DependentUpon>frmLoad.vb</DependentUpon>
@@ -1014,7 +1014,7 @@
     <Content Include="data files\graphics\GUI\Main\Shop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\spells.png">
+    <Content Include="data files\graphics\GUI\Main\skills.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\GUI\Main\Trade.png">
@@ -1951,340 +1951,340 @@
     <Content Include="data files\graphics\resources\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\1.png">
+    <Content Include="data files\graphics\skillicons\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\10.png">
+    <Content Include="data files\graphics\skillicons\10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\100.png">
+    <Content Include="data files\graphics\skillicons\100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\101.png">
+    <Content Include="data files\graphics\skillicons\101.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\102.png">
+    <Content Include="data files\graphics\skillicons\102.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\103.png">
+    <Content Include="data files\graphics\skillicons\103.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\104.png">
+    <Content Include="data files\graphics\skillicons\104.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\105.png">
+    <Content Include="data files\graphics\skillicons\105.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\106.png">
+    <Content Include="data files\graphics\skillicons\106.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\107.png">
+    <Content Include="data files\graphics\skillicons\107.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\108.png">
+    <Content Include="data files\graphics\skillicons\108.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\109.png">
+    <Content Include="data files\graphics\skillicons\109.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\11.png">
+    <Content Include="data files\graphics\skillicons\11.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\110.png">
+    <Content Include="data files\graphics\skillicons\110.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\111.png">
+    <Content Include="data files\graphics\skillicons\111.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\112.png">
+    <Content Include="data files\graphics\skillicons\112.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\12.png">
+    <Content Include="data files\graphics\skillicons\12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\13.png">
+    <Content Include="data files\graphics\skillicons\13.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\14.png">
+    <Content Include="data files\graphics\skillicons\14.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\15.png">
+    <Content Include="data files\graphics\skillicons\15.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\16.png">
+    <Content Include="data files\graphics\skillicons\16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\17.png">
+    <Content Include="data files\graphics\skillicons\17.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\18.png">
+    <Content Include="data files\graphics\skillicons\18.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\19.png">
+    <Content Include="data files\graphics\skillicons\19.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\2.png">
+    <Content Include="data files\graphics\skillicons\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\20.png">
+    <Content Include="data files\graphics\skillicons\20.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\21.png">
+    <Content Include="data files\graphics\skillicons\21.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\22.png">
+    <Content Include="data files\graphics\skillicons\22.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\23.png">
+    <Content Include="data files\graphics\skillicons\23.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\24.png">
+    <Content Include="data files\graphics\skillicons\24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\25.png">
+    <Content Include="data files\graphics\skillicons\25.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\26.png">
+    <Content Include="data files\graphics\skillicons\26.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\27.png">
+    <Content Include="data files\graphics\skillicons\27.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\28.png">
+    <Content Include="data files\graphics\skillicons\28.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\29.png">
+    <Content Include="data files\graphics\skillicons\29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\3.png">
+    <Content Include="data files\graphics\skillicons\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\30.png">
+    <Content Include="data files\graphics\skillicons\30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\31.png">
+    <Content Include="data files\graphics\skillicons\31.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\32.png">
+    <Content Include="data files\graphics\skillicons\32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\33.png">
+    <Content Include="data files\graphics\skillicons\33.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\34.png">
+    <Content Include="data files\graphics\skillicons\34.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\35.png">
+    <Content Include="data files\graphics\skillicons\35.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\36.png">
+    <Content Include="data files\graphics\skillicons\36.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\37.png">
+    <Content Include="data files\graphics\skillicons\37.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\38.png">
+    <Content Include="data files\graphics\skillicons\38.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\39.png">
+    <Content Include="data files\graphics\skillicons\39.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\4.png">
+    <Content Include="data files\graphics\skillicons\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\40.png">
+    <Content Include="data files\graphics\skillicons\40.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\41.png">
+    <Content Include="data files\graphics\skillicons\41.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\42.png">
+    <Content Include="data files\graphics\skillicons\42.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\43.png">
+    <Content Include="data files\graphics\skillicons\43.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\44.png">
+    <Content Include="data files\graphics\skillicons\44.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\45.png">
+    <Content Include="data files\graphics\skillicons\45.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\46.png">
+    <Content Include="data files\graphics\skillicons\46.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\47.png">
+    <Content Include="data files\graphics\skillicons\47.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\48.png">
+    <Content Include="data files\graphics\skillicons\48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\49.png">
+    <Content Include="data files\graphics\skillicons\49.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\5.png">
+    <Content Include="data files\graphics\skillicons\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\50.png">
+    <Content Include="data files\graphics\skillicons\50.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\51.png">
+    <Content Include="data files\graphics\skillicons\51.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\52.png">
+    <Content Include="data files\graphics\skillicons\52.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\53.png">
+    <Content Include="data files\graphics\skillicons\53.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\54.png">
+    <Content Include="data files\graphics\skillicons\54.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\55.png">
+    <Content Include="data files\graphics\skillicons\55.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\56.png">
+    <Content Include="data files\graphics\skillicons\56.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\57.png">
+    <Content Include="data files\graphics\skillicons\57.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\58.png">
+    <Content Include="data files\graphics\skillicons\58.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\59.png">
+    <Content Include="data files\graphics\skillicons\59.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\6.png">
+    <Content Include="data files\graphics\skillicons\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\60.png">
+    <Content Include="data files\graphics\skillicons\60.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\61.png">
+    <Content Include="data files\graphics\skillicons\61.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\62.png">
+    <Content Include="data files\graphics\skillicons\62.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\63.png">
+    <Content Include="data files\graphics\skillicons\63.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\64.png">
+    <Content Include="data files\graphics\skillicons\64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\65.png">
+    <Content Include="data files\graphics\skillicons\65.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\66.png">
+    <Content Include="data files\graphics\skillicons\66.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\67.png">
+    <Content Include="data files\graphics\skillicons\67.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\68.png">
+    <Content Include="data files\graphics\skillicons\68.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\69.png">
+    <Content Include="data files\graphics\skillicons\69.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\7.png">
+    <Content Include="data files\graphics\skillicons\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\70.png">
+    <Content Include="data files\graphics\skillicons\70.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\71.png">
+    <Content Include="data files\graphics\skillicons\71.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\72.png">
+    <Content Include="data files\graphics\skillicons\72.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\73.png">
+    <Content Include="data files\graphics\skillicons\73.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\74.png">
+    <Content Include="data files\graphics\skillicons\74.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\75.png">
+    <Content Include="data files\graphics\skillicons\75.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\76.png">
+    <Content Include="data files\graphics\skillicons\76.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\77.png">
+    <Content Include="data files\graphics\skillicons\77.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\78.png">
+    <Content Include="data files\graphics\skillicons\78.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\79.png">
+    <Content Include="data files\graphics\skillicons\79.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\8.png">
+    <Content Include="data files\graphics\skillicons\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\80.png">
+    <Content Include="data files\graphics\skillicons\80.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\81.png">
+    <Content Include="data files\graphics\skillicons\81.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\82.png">
+    <Content Include="data files\graphics\skillicons\82.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\83.png">
+    <Content Include="data files\graphics\skillicons\83.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\84.png">
+    <Content Include="data files\graphics\skillicons\84.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\85.png">
+    <Content Include="data files\graphics\skillicons\85.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\86.png">
+    <Content Include="data files\graphics\skillicons\86.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\87.png">
+    <Content Include="data files\graphics\skillicons\87.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\88.png">
+    <Content Include="data files\graphics\skillicons\88.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\89.png">
+    <Content Include="data files\graphics\skillicons\89.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\9.png">
+    <Content Include="data files\graphics\skillicons\9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\90.png">
+    <Content Include="data files\graphics\skillicons\90.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\91.png">
+    <Content Include="data files\graphics\skillicons\91.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\92.png">
+    <Content Include="data files\graphics\skillicons\92.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\93.png">
+    <Content Include="data files\graphics\skillicons\93.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\94.png">
+    <Content Include="data files\graphics\skillicons\94.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\95.png">
+    <Content Include="data files\graphics\skillicons\95.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\96.png">
+    <Content Include="data files\graphics\skillicons\96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\97.png">
+    <Content Include="data files\graphics\skillicons\97.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\98.png">
+    <Content Include="data files\graphics\skillicons\98.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\spellicons\99.png">
+    <Content Include="data files\graphics\skillicons\99.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data files\graphics\target.png">

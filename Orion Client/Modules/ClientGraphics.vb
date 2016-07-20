@@ -8,7 +8,7 @@ Module ClientGraphics
 
     Public EditorItem_Furniture As RenderWindow
 
-    Public EditorSpell_Icon As RenderWindow
+    Public EditorSkill_Icon As RenderWindow
 
     Public EditorAnimation_Anim1 As RenderWindow
     Public EditorAnimation_Anim2 As RenderWindow
@@ -17,7 +17,7 @@ Module ClientGraphics
 
     Public TmpBankItem As RenderWindow
 
-    Public TmpSpellWindow As RenderWindow
+    Public TmpSkillWindow As RenderWindow
 
     Public SFMLGameFont As SFML.Graphics.Font
 
@@ -35,8 +35,8 @@ Module ClientGraphics
     Public ResourcesGFXInfo() As GraphicInfo
     Public AnimationsGFX() As Texture
     Public AnimationsGFXInfo() As GraphicInfo
-    Public SpellIconsGFX() As Texture
-    Public SpellIconsGFXInfo() As GraphicInfo
+    Public SkillIconsGFX() As Texture
+    Public SkillIconsGFXInfo() As GraphicInfo
     'Housing
     Public FurnitureGFX() As Texture
     Public FurnitureGFXInfo() As GraphicInfo
@@ -83,8 +83,8 @@ Module ClientGraphics
     Public InvPanelGFX As Texture
     Public InvPanelGFXInfo As GraphicInfo
 
-    Public SpellPanelGFX As Texture
-    Public SpellPanelGFXInfo As GraphicInfo
+    Public SkillPanelGFX As Texture
+    Public SkillPanelGFXInfo As GraphicInfo
 
     Public CharPanelGFX As Texture
     Public CharPanelGFXInfo As GraphicInfo
@@ -135,7 +135,7 @@ Module ClientGraphics
     Public NumItems As Long
     Public NumResources As Long
     Public NumAnimations As Long
-    Public NumSpellIcons As Long
+    Public NumSkillIcons As Long
     Public NumFaces As Long
     Public NumFogs As Long
 
@@ -172,7 +172,7 @@ Module ClientGraphics
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
 
-        EditorSpell_Icon = New RenderWindow(frmEditor_Spell.picSprite.Handle)
+        EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
 
         EditorAnimation_Anim1 = New RenderWindow(frmEditor_Animation.picSprite0.Handle)
         EditorAnimation_Anim2 = New RenderWindow(frmEditor_Animation.picSprite1.Handle)
@@ -181,7 +181,7 @@ Module ClientGraphics
 
         TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
 
-        TmpSpellWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
+        TmpSkillWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
 
@@ -209,8 +209,8 @@ Module ClientGraphics
         ReDim FogGFX(0 To NumFogs)
         ReDim FogGFXInfo(0 To NumFogs)
 
-        ReDim SpellIconsGFX(0 To NumSpellIcons)
-        ReDim SpellIconsGFXInfo(0 To NumSpellIcons)
+        ReDim SkillIconsGFX(0 To NumSkillIcons)
+        ReDim SkillIconsGFXInfo(0 To NumSkillIcons)
 
         ReDim FacesGFX(0 To NumFaces)
         ReDim FacesGFXInfo(0 To NumFaces)
@@ -292,14 +292,14 @@ Module ClientGraphics
             InvPanelGFXInfo.height = InvPanelGFX.Size.Y
         End If
 
-        SpellPanelGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\spells" & GFX_EXT) Then
+        SkillPanelGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\skills" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            SpellPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\spells" & GFX_EXT)
+            SkillPanelGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\skills" & GFX_EXT)
 
             'Cache the width and height
-            SpellPanelGFXInfo.width = SpellPanelGFX.Size.X
-            SpellPanelGFXInfo.height = SpellPanelGFX.Size.Y
+            SkillPanelGFXInfo.width = SkillPanelGFX.Size.X
+            SkillPanelGFXInfo.height = SkillPanelGFX.Size.Y
         End If
 
         CharPanelGFXInfo = New GraphicInfo
@@ -666,16 +666,16 @@ Module ClientGraphics
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-        ElseIf TexType = 9 Then 'spell icons
-            If Index < 0 Or Index > NumSpellIcons Then Exit Sub
+        ElseIf TexType = 9 Then 'skill icons
+            If Index < 0 Or Index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SpellIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SpellIcons\" & Index & GFX_EXT)
+            SkillIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SkillIcons\" & Index & GFX_EXT)
 
             'Cache the width and height
-            With SpellIconsGFXInfo(Index)
-                .width = SpellIconsGFX(Index).Size.X
-                .height = SpellIconsGFX(Index).Size.Y
+            With SkillIconsGFXInfo(Index)
+                .width = SkillIconsGFX(Index).Size.X
+                .height = SkillIconsGFX(Index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
@@ -1723,13 +1723,13 @@ Module ClientGraphics
         Dim rec(1) As Rectangle
 
         ' check for casting time bar
-        If SpellBuffer > 0 Then
+        If SkillBuffer > 0 Then
             ' lock to player
             tmpX = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset
             tmpY = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset + 35
-            If Spell(PlayerSpells(SpellBuffer)).CastTime = 0 Then Spell(PlayerSpells(SpellBuffer)).CastTime = 1
+            If Skill(PlayerSkills(SkillBuffer)).CastTime = 0 Then Skill(PlayerSkills(SkillBuffer)).CastTime = 1
             ' calculate the width to fill
-            barWidth = ((GetTickCount() - SpellBufferTimer) / ((GetTickCount() - SpellBufferTimer) + (Spell(PlayerSpells(SpellBuffer)).CastTime * 1000)) * 64)
+            barWidth = ((GetTickCount() - SkillBufferTimer) / ((GetTickCount() - SkillBufferTimer) + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000)) * 64)
             ' draw bars
             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
             Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
@@ -2108,8 +2108,8 @@ Module ClientGraphics
             If Not ResourcesGFX(i) Is Nothing Then ResourcesGFX(i).Dispose()
         Next
 
-        For i = 0 To NumSpellIcons
-            If Not SpellIconsGFX(i) Is Nothing Then SpellIconsGFX(i).Dispose()
+        For i = 0 To NumSkillIcons
+            If Not SkillIconsGFX(i) Is Nothing Then SkillIconsGFX(i).Dispose()
         Next
 
         For i = 0 To NumTileSets
@@ -2336,24 +2336,24 @@ Module ClientGraphics
         End If
     End Sub
 
-    Public Sub EditorSpell_BltIcon()
+    Public Sub EditorSkill_BltIcon()
         Dim iconnum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
-        iconnum = frmEditor_Spell.scrlIcon.Value
+        iconnum = frmEditor_Skill.scrlIcon.Value
 
-        If iconnum < 1 Or iconnum > NumSpellIcons Then
-            EditorSpell_Icon.Clear(ToSFMLColor(frmEditor_Spell.picSprite.BackColor))
-            EditorSpell_Icon.Display()
+        If iconnum < 1 Or iconnum > NumSkillIcons Then
+            EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
+            EditorSkill_Icon.Display()
             Exit Sub
         End If
 
-        If SpellIconsGFXInfo(iconnum).IsLoaded = False Then
+        If SkillIconsGFXInfo(iconnum).IsLoaded = False Then
             LoadTexture(iconnum, 9)
         End If
 
         'seeying we still use it, lets update timer
-        With SpellIconsGFXInfo(iconnum)
+        With SkillIconsGFXInfo(iconnum)
             .TextureTimer = GetTickCount() + 100000
         End With
 
@@ -2367,11 +2367,11 @@ Module ClientGraphics
         'drect is the same, so just copy it
         dRECT = sRECT
 
-        EditorSpell_Icon.Clear(ToSFMLColor(frmEditor_Spell.picSprite.BackColor))
+        EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
 
-        RenderTexture(SpellIconsGFX(iconnum), EditorSpell_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+        RenderTexture(SkillIconsGFX(iconnum), EditorSkill_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
-        EditorSpell_Icon.Display()
+        EditorSkill_Icon.Display()
     End Sub
 
     Public Sub EditorAnim_DrawAnim()
@@ -2988,15 +2988,15 @@ NextLoop:
         Next
     End Sub
 
-    Public Sub DrawSpellItem(ByVal X As Long, ByVal Y As Long)
+    Public Sub DrawSkillItem(ByVal X As Long, ByVal Y As Long)
         Dim rec As Rectangle, rec_pos As Rectangle
-        Dim spellnum As Long, spellpic As Long
+        Dim skillnum As Long, skillpic As Long
 
-        spellnum = DragSpellSlotNum
-        TmpSpellWindow.Clear(ToSFMLColor(frmMainGame.pnlTmpSkill.BackColor))
-        If spellnum > 0 And spellnum <= MAX_SPELLS Then
-            spellpic = Spell(spellnum).Icon
-            If spellpic = 0 Then Exit Sub
+        skillnum = DragSkillSlotNum
+        TmpSkillWindow.Clear(ToSFMLColor(frmMainGame.pnlTmpSkill.BackColor))
+        If skillnum > 0 And skillnum <= MAX_SKILLS Then
+            skillpic = Skill(skillnum).Icon
+            If skillpic = 0 Then Exit Sub
 
             With rec
                 .Y = 0
@@ -3012,10 +3012,10 @@ NextLoop:
                 .Width = PIC_X
             End With
 
-            Dim tmpSprite As Sprite = New Sprite(SpellIconsGFX(spellpic))
+            Dim tmpSprite As Sprite = New Sprite(SkillIconsGFX(skillpic))
             tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
             tmpSprite.Position = New Vector2f(0, 0)
-            TmpSpellWindow.Draw(tmpSprite)
+            TmpSkillWindow.Draw(tmpSprite)
 
             With frmMainGame.pnlTmpSkill
                 .Top = Y
@@ -3025,7 +3025,7 @@ NextLoop:
             End With
 
         End If
-        TmpSpellWindow.Display()
+        TmpSkillWindow.Display()
 
     End Sub
 
@@ -3394,29 +3394,29 @@ NextLoop:
         DrawButton("Decline Trade", TradeWindowX + TradeButtonDeclineX, TradeWindowY + TradeButtonDeclineY, 0)
     End Sub
 
-    Sub DrawPlayerSpells()
-        Dim i As Long, spellnum As Long, spellicon As Long
+    Sub DrawPlayerSkills()
+        Dim i As Long, skillnum As Long, skillicon As Long
         Dim rec As Rectangle, rec_pos As Rectangle
 
         If Not InGame Then Exit Sub
 
         'first render panel
-        RenderTexture(SpellPanelGFX, GameWindow, SpellWindowX, SpellWindowY, 0, 0, SpellPanelGFXInfo.width, SpellPanelGFXInfo.height)
+        RenderTexture(SkillPanelGFX, GameWindow, SkillWindowX, SkillWindowY, 0, 0, SkillPanelGFXInfo.width, SkillPanelGFXInfo.height)
 
-        For i = 1 To MAX_PLAYER_SPELLS
-            spellnum = PlayerSpells(i)
+        For i = 1 To MAX_PLAYER_SKILLS
+            skillnum = PlayerSkills(i)
 
-            If spellnum > 0 And spellnum <= MAX_SPELLS Then
-                spellicon = Spell(spellnum).Icon
+            If skillnum > 0 And skillnum <= MAX_SKILLS Then
+                skillicon = Skill(skillnum).Icon
 
-                If spellicon > 0 And spellicon <= NumSpellIcons Then
+                If skillicon > 0 And skillicon <= NumSkillIcons Then
 
-                    If SpellIconsGFXInfo(spellicon).IsLoaded = False Then
-                        LoadTexture(spellicon, 9)
+                    If SkillIconsGFXInfo(skillicon).IsLoaded = False Then
+                        LoadTexture(skillicon, 9)
                     End If
 
                     'seeying we still use it, lets update timer
-                    With SpellIconsGFXInfo(spellicon)
+                    With SkillIconsGFXInfo(skillicon)
                         .TextureTimer = GetTickCount() + 100000
                     End With
 
@@ -3427,19 +3427,19 @@ NextLoop:
                         .Width = 32
                     End With
 
-                    If Not SpellCD(i) = 0 Then
+                    If Not SkillCD(i) = 0 Then
                         rec.X = 32
                         rec.Width = 32
                     End If
 
                     With rec_pos
-                        .Y = SpellWindowY + SpellTop + ((SpellOffsetY + 32) * ((i - 1) \ SpellColumns))
+                        .Y = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))
                         .Height = PIC_Y
-                        .X = SpellWindowX + SpellLeft + ((SpellOffsetX + 32) * (((i - 1) Mod SpellColumns)))
+                        .X = SkillWindowX + SkillLeft + ((SkillOffsetX + 32) * (((i - 1) Mod SkillColumns)))
                         .Width = PIC_X
                     End With
 
-                    RenderTexture(SpellIconsGFX(spellicon), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                    RenderTexture(SkillIconsGFX(skillicon), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
             End If
         Next
@@ -3565,35 +3565,35 @@ NextLoop:
 
     End Sub
 
-    Public Sub DrawSpellDesc()
+    Public Sub DrawSkillDesc()
         'first render panel
-        RenderTexture(DescriptionGFX, GameWindow, SpellWindowX - DescriptionGFXInfo.width, SpellWindowY, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
+        RenderTexture(DescriptionGFX, GameWindow, SkillWindowX - DescriptionGFXInfo.width, SkillWindowY, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
 
         'name
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 12, SpellDescName, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 12, SkillDescName, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'type
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 28, SpellDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 28, SkillDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'cast time
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 44, "Cast Time: " & SpellDescCastTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 44, "Cast Time: " & SkillDescCastTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'cool down
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 58, "CoolDown: " & SpellDescCoolDown, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 58, "CoolDown: " & SkillDescCoolDown, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Damage
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 74, "Damage: " & SpellDescDamage, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 74, "Damage: " & SkillDescDamage, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'AOE
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 90, "Aoe: " & SpellDescAOE, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 90, "Aoe: " & SkillDescAOE, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'range
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 104, "Range: " & SpellDescRange, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 104, "Range: " & SkillDescRange, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'requirements
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 128, "=Requirements=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 128, "=Requirements=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Mp
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 144, "MP: " & SpellDescReqMp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 144, "MP: " & SkillDescReqMp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 160, "Level: " & SpellDescReqLvl, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 160, "Level: " & SkillDescReqLvl, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Access
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 176, "Access: " & SpellDescReqAccess, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 176, "Access: " & SkillDescReqAccess, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Class
-        DrawText(SpellWindowX - DescriptionGFXInfo.width + 10, SpellWindowY + 192, "Class: " & SpellDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGFXInfo.width + 10, SkillWindowY + 192, "Class: " & SkillDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
 
@@ -3702,9 +3702,9 @@ NextLoop:
             If ShowItemDesc = True Then DrawItemDesc()
         End If
 
-        If pnlSpellsVisible = True Then
-            DrawPlayerSpells()
-            If ShowSpellDesc = True Then DrawSpellDesc()
+        If pnlSkillsVisible = True Then
+            DrawPlayerSkills()
+            If ShowSkillDesc = True Then DrawSkillDesc()
         End If
 
         If DialogPanelVisible = True Then

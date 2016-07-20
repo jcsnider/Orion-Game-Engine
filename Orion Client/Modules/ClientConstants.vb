@@ -71,7 +71,7 @@
     Public Const PIC_X As Integer = 32
     Public Const PIC_Y As Integer = 32
 
-    ' Sprite, item, spell size constants
+    ' Sprite, item, skill size constants
     Public Const SIZE_X As Integer = 32
     Public Const SIZE_Y As Integer = 32
 
@@ -89,8 +89,8 @@
     Public Const MAX_MAP_ITEMS As Byte = 255
     Public Const MAX_MAP_NPCS As Byte = 30
     Public Const MAX_SHOPS As Byte = 50
-    Public Const MAX_PLAYER_SPELLS As Byte = 20
-    Public Const MAX_SPELLS As Byte = 255
+    Public Const MAX_PLAYER_SKILLS As Byte = 20
+    Public Const MAX_SKILLS As Byte = 255
     Public Const MAX_TRADES As Byte = 20
     Public Const MAX_RESOURCES As Byte = 100
     Public Const MAX_LEVELS As Byte = 100
@@ -185,7 +185,7 @@
     Public Const ITEM_TYPE_POTIONSUBSP As Byte = 12
     Public Const ITEM_TYPE_KEY As Byte = 13
     Public Const ITEM_TYPE_CURRENCY As Byte = 14
-    Public Const ITEM_TYPE_SPELL As Byte = 15
+    Public Const ITEM_TYPE_SKILL As Byte = 15
     Public Const ITEM_TYPE_FURNITURE As Byte = 16
 
 
@@ -232,17 +232,17 @@
     Public Const NPC_BEHAVIOUR_GUARD As Byte = 4
     Public Const NPC_BEHAVIOUR_QUEST As Byte = 5
 
-    ' Spell constants
-    Public Const SPELL_TYPE_DAMAGEHP As Byte = 0
-    Public Const SPELL_TYPE_DAMAGEMP As Byte = 1
-    Public Const SPELL_TYPE_HEALHP As Byte = 2
-    Public Const SPELL_TYPE_HEALMP As Byte = 3
-    Public Const SPELL_TYPE_WARP As Byte = 4
+    ' Skill constants
+    Public Const SKILL_TYPE_DAMAGEHP As Byte = 0
+    Public Const SKILL_TYPE_DAMAGEMP As Byte = 1
+    Public Const SKILL_TYPE_HEALHP As Byte = 2
+    Public Const SKILL_TYPE_HEALMP As Byte = 3
+    Public Const SKILL_TYPE_WARP As Byte = 4
 
     ' Game editor constants
     Public Const EDITOR_ITEM As Byte = 1
     Public Const EDITOR_NPC As Byte = 2
-    Public Const EDITOR_SPELL As Byte = 3
+    Public Const EDITOR_SKILL As Byte = 3
     Public Const EDITOR_SHOP As Byte = 4
     Public Const EDITOR_RESOURCE As Byte = 5
     Public Const EDITOR_ANIMATION As Byte = 6

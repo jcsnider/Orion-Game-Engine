@@ -166,13 +166,13 @@ Public Class frmAdmin
         SendRequestEditNpc()
     End Sub
 
-    Private Sub btnSpellEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpellEditor.Click
+    Private Sub btnSkillEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSkillEditor.Click
         If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
             AddText("You need to be a high enough staff member to do this!", AlertColor)
             Exit Sub
         End If
 
-        SendRequestEditSpell()
+        SendRequestEditSkill()
     End Sub
 
     Private Sub btnShopEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShopEditor.Click

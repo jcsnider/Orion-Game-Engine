@@ -312,7 +312,7 @@
 
         'hotbar
         SendHotbar(Index)
-        SendPlayerSpells(Index)
+        SendPlayerSkills(Index)
 
         'craft
         SendRecipes(Index)
@@ -387,7 +387,7 @@
 
             TotalPlayersOnline = TotalPlayersOnline - 1
             TempPlayer(Index) = Nothing
-            ReDim TempPlayer(i).SpellCD(0 To MAX_PLAYER_SPELLS)
+            ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
         End If
 
@@ -1052,13 +1052,13 @@
         GetPlayerClass = Player(Index).Character(TempPlayer(Index).CurChar).Classes
     End Function
 
-    Function FindOpenSpellSlot(ByVal Index As Long) As Long
+    Function FindOpenSkillSlot(ByVal Index As Long) As Long
         Dim i As Long
 
-        For i = 1 To MAX_PLAYER_SPELLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
-            If GetPlayerSpell(Index, i) = 0 Then
-                FindOpenSpellSlot = i
+            If GetPlayerSkill(Index, i) = 0 Then
+                FindOpenSkillSlot = i
                 Exit Function
             End If
 
@@ -1066,19 +1066,19 @@
 
     End Function
 
-    Function GetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long) As Long
-        GetPlayerSpell = 0
+    Function GetPlayerSkill(ByVal Index As Long, ByVal skillslot As Long) As Long
+        GetPlayerSkill = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerSpell = Player(Index).Character(TempPlayer(Index).CurChar).Spell(spellslot)
+        GetPlayerSkill = Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot)
     End Function
 
-    Function HasSpell(ByVal Index As Long, ByVal spellnum As Long) As Boolean
+    Function HasSkill(ByVal Index As Long, ByVal skillnum As Long) As Boolean
         Dim i As Long
 
-        For i = 1 To MAX_PLAYER_SPELLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
-            If GetPlayerSpell(Index, i) = spellnum Then
-                HasSpell = True
+            If GetPlayerSkill(Index, i) = skillnum Then
+                HasSkill = True
                 Exit Function
             End If
 
@@ -1086,8 +1086,8 @@
 
     End Function
 
-    Sub SetPlayerSpell(ByVal Index As Long, ByVal spellslot As Long, ByVal spellnum As Long)
-        Player(Index).Character(TempPlayer(Index).CurChar).Spell(spellslot) = spellnum
+    Sub SetPlayerSkill(ByVal Index As Long, ByVal skillslot As Long, ByVal skillnum As Long)
+        Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot) = skillnum
     End Sub
 
     Sub PlayerMapDropItem(ByVal Index As Long, ByVal InvNum As Long, ByVal amount As Long)
@@ -1316,10 +1316,10 @@
             End If
         End With
 
-        ' Clear spell casting
-        TempPlayer(Index).SpellBuffer = 0
-        TempPlayer(Index).SpellBufferTimer = 0
-        SendClearSpellBuffer(Index)
+        ' Clear skill casting
+        TempPlayer(Index).SkillBuffer = 0
+        TempPlayer(Index).SkillBufferTimer = 0
+        SendClearSkillBuffer(Index)
 
         ' Restore vitals
         SetPlayerVital(Index, Vitals.HP, GetPlayerMaxVital(Index, Vitals.HP))
@@ -1390,12 +1390,12 @@
     End Function
 
 
-    Public Sub BufferSpell(ByVal Index As Long, ByVal spellslot As Long)
-        Dim spellnum As Long
+    Public Sub BufferSkill(ByVal Index As Long, ByVal skillslot As Long)
+        Dim skillnum As Long
         Dim MPCost As Long
         Dim LevelReq As Long
         Dim MapNum As Long
-        Dim SpellCastType As Long
+        Dim SkillCastType As Long
         Dim ClassReq As Long
         Dim AccessReq As Long
         Dim range As Long
@@ -1405,23 +1405,23 @@
         Dim Target As Long
 
         ' Prevent subscript out of range
-        If spellslot <= 0 Or spellslot > MAX_PLAYER_SPELLS Then Exit Sub
+        If skillslot <= 0 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
-        spellnum = GetPlayerSpell(Index, spellslot)
+        skillnum = GetPlayerSkill(Index, skillslot)
         MapNum = GetPlayerMap(Index)
 
-        If spellnum <= 0 Or spellnum > MAX_SPELLS Then Exit Sub
+        If skillnum <= 0 Or skillnum > MAX_SKILLS Then Exit Sub
 
-        ' Make sure player has the spell
-        If Not HasSpell(Index, spellnum) Then Exit Sub
+        ' Make sure player has the skill
+        If Not HasSkill(Index, skillnum) Then Exit Sub
 
         ' see if cooldown has finished
-        If TempPlayer(Index).SpellCD(spellslot) > GetTickCount() Then
-            PlayerMsg(Index, "Spell hasn't cooled down yet!")
+        If TempPlayer(Index).SkillCD(skillslot) > GetTickCount() Then
+            PlayerMsg(Index, "Skill hasn't cooled down yet!")
             Exit Sub
         End If
 
-        MPCost = Spell(spellnum).MPCost
+        MPCost = Skill(skillnum).MPCost
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
@@ -1429,54 +1429,54 @@
             Exit Sub
         End If
 
-        LevelReq = Spell(spellnum).LevelReq
+        LevelReq = Skill(skillnum).LevelReq
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            PlayerMsg(Index, "You must be level " & LevelReq & " to use this skill.")
             Exit Sub
         End If
 
-        AccessReq = Spell(spellnum).AccessReq
+        AccessReq = Skill(skillnum).AccessReq
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            PlayerMsg(Index, "You must be an administrator to use this skill.")
             Exit Sub
         End If
 
-        ClassReq = Spell(spellnum).ClassReq
+        ClassReq = Skill(skillnum).ClassReq
 
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.")
                 Exit Sub
             End If
         End If
 
-        ' find out what kind of spell it is! self cast, target or AOE
-        If Spell(spellnum).range > 0 Then
+        ' find out what kind of skill it is! self cast, target or AOE
+        If Skill(skillnum).range > 0 Then
             ' ranged attack, single target or aoe?
-            If Not Spell(spellnum).IsAoE Then
-                SpellCastType = 2 ' targetted
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 2 ' targetted
             Else
-                SpellCastType = 3 ' targetted aoe
+                SkillCastType = 3 ' targetted aoe
             End If
         Else
-            If Not Spell(spellnum).IsAoE Then
-                SpellCastType = 0 ' self-cast
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 0 ' self-cast
             Else
-                SpellCastType = 1 ' self-cast AoE
+                SkillCastType = 1 ' self-cast AoE
             End If
         End If
 
         TargetType = TempPlayer(Index).TargetType
         Target = TempPlayer(Index).Target
-        range = Spell(spellnum).range
+        range = Skill(skillnum).range
         HasBuffered = False
 
-        Select Case SpellCastType
+        Select Case SkillCastType
             Case 0, 1 ' self-cast & self-cast AOE
                 HasBuffered = True
             Case 2, 3 ' targeted & targeted AOE
@@ -1495,8 +1495,8 @@
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), GetPlayerX(Target), GetPlayerY(Target)) Then
                         PlayerMsg(Index, "Target not in range.")
                     Else
-                        ' go through spell types
-                        If Spell(spellnum).Type <> SPELL_TYPE_DAMAGEHP And Spell(spellnum).Type <> SPELL_TYPE_DAMAGEMP Then
+                        ' go through skill types
+                        If Skill(skillnum).Type <> SKILL_TYPE_DAMAGEHP And Skill(skillnum).Type <> SKILL_TYPE_DAMAGEMP Then
                             HasBuffered = True
                         Else
                             If CanAttackPlayer(Index, Target, True) Then
@@ -1510,8 +1510,8 @@
                         PlayerMsg(Index, "Target not in range.")
                         HasBuffered = False
                     Else
-                        ' go through spell types
-                        If Spell(spellnum).Type <> SPELL_TYPE_DAMAGEHP And Spell(spellnum).Type <> SPELL_TYPE_DAMAGEMP Then
+                        ' go through skill types
+                        If Skill(skillnum).Type <> SKILL_TYPE_DAMAGEHP And Skill(skillnum).Type <> SKILL_TYPE_DAMAGEMP Then
                             HasBuffered = True
                         Else
                             If CanAttackNpc(Index, Target, True) Then
@@ -1523,12 +1523,12 @@
         End Select
 
         If HasBuffered Then
-            SendAnimation(MapNum, Spell(spellnum).CastAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
-            TempPlayer(Index).SpellBuffer = spellslot
-            TempPlayer(Index).SpellBufferTimer = GetTickCount()
+            SendAnimation(MapNum, Skill(skillnum).CastAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
+            TempPlayer(Index).SkillBuffer = skillslot
+            TempPlayer(Index).SkillBufferTimer = GetTickCount()
             Exit Sub
         Else
-            SendClearSpellBuffer(Index)
+            SendClearSkillBuffer(Index)
         End If
     End Sub
 End Module

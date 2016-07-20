@@ -14,7 +14,7 @@
     Public MapItem(0 To MAX_MAPS, 0 To MAX_MAP_ITEMS) As MapItemRec
     Public MapNpc(0 To MAX_MAPS) As MapDataRec
     Public Shop(0 To MAX_SHOPS) As ShopRec
-    Public Spell(0 To MAX_SPELLS) As SpellRec
+    Public Skill(0 To MAX_SKILLS) As SkillRec
     Public Resource(0 To MAX_RESOURCES) As ResourceRec
     Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
     Public Options As OptionsRec
@@ -74,7 +74,7 @@
 
         ' Inventory
         Dim Inv() As PlayerInvRec
-        Dim Spell() As Byte
+        Dim Skill() As Byte
 
         ' Position
         Dim Map As Integer
@@ -119,9 +119,9 @@
         Dim Target As Byte
         Dim PartyStarter As Byte
         Dim GettingMap As Byte
-        Dim SpellBuffer As Long
-        Dim SpellBufferTimer As Long
-        Dim SpellCD() As Long
+        Dim SkillBuffer As Long
+        Dim SkillBufferTimer As Long
+        Dim SkillCD() As Long
         Dim InShop As Long
         Dim StunTimer As Long
         Dim StunDuration As Long
@@ -287,6 +287,7 @@
         Dim Exp As Long
         Dim Animation As Long
         Dim QuestNum As Long
+        Dim Skill() As Byte
     End Structure
 
     Public Structure MapNpcRec
@@ -318,7 +319,7 @@
         Dim TradeItem() As TradeItemRec
     End Structure
 
-    Public Structure SpellRec
+    Public Structure SkillRec
         Dim Name As String
         Dim Type As Byte
         Dim MPCost As Long
@@ -339,7 +340,7 @@
         Dim IsAoE As Boolean
         Dim AoE As Long
         Dim CastAnim As Long
-        Dim SpellAnim As Long
+        Dim SkillAnim As Long
         Dim StunDuration As Long
 
         'projectiles

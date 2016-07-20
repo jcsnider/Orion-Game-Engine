@@ -1,9 +1,9 @@
 ﻿Public Module ServerCombat
 
 #Region "PlayerCombat"
-    Function CanAttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, Optional ByVal IsSpell As Boolean = False) As Boolean
+    Function CanAttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, Optional ByVal IsSkill As Boolean = False) As Boolean
 
-        If Not IsSpell Then
+        If Not IsSkill Then
             ' Check attack timer
             If GetPlayerEquipment(Attacker, Equipment.Weapon) > 0 Then
                 If GetTickCount() < TempPlayer(Attacker).AttackTimer + Item(GetPlayerEquipment(Attacker, Equipment.Weapon)).Speed Then Exit Function
@@ -21,7 +21,7 @@
         ' Make sure we dont attack the player if they are switching maps
         If TempPlayer(Victim).GettingMap = YES Then Exit Function
 
-        If Not IsSpell Then
+        If Not IsSkill Then
             ' Check if at same coordinates
             Select Case GetPlayerDir(Attacker)
                 Case DIR_UP
@@ -171,7 +171,7 @@
 
     End Function
 
-    Sub AttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, ByVal Damage As Long, Optional ByVal spellnum As Long = 0)
+    Sub AttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, ByVal Damage As Long, Optional ByVal skillnum As Long = 0)
         Dim exp As Long
         Dim n As Long
         Dim Buffer As ByteBuffer
@@ -250,9 +250,9 @@
             SendVital(Victim, Vitals.HP)
             SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
-            'if a stunning spell, stun the player
-            If spellnum > 0 Then
-                If Spell(spellnum).StunDuration > 0 Then StunPlayer(Victim, spellnum)
+            'if a stunning skill, stun the player
+            If skillnum > 0 Then
+                If Skill(skillnum).StunDuration > 0 Then StunPlayer(Victim, skillnum)
             End If
         End If
 
@@ -260,20 +260,20 @@
         TempPlayer(Attacker).AttackTimer = GetTickCount()
     End Sub
 
-    Public Sub StunPlayer(ByVal Index As Long, ByVal spellnum As Long)
-        ' check if it's a stunning spell
-        If Spell(spellnum).StunDuration > 0 Then
+    Public Sub StunPlayer(ByVal Index As Long, ByVal skillnum As Long)
+        ' check if it's a stunning skill
+        If Skill(skillnum).StunDuration > 0 Then
             ' set the values on index
-            TempPlayer(Index).StunDuration = Spell(spellnum).StunDuration
+            TempPlayer(Index).StunDuration = Skill(skillnum).StunDuration
             TempPlayer(Index).StunTimer = GetTickCount()
             ' send it to the index
             SendStunned(Index)
             ' tell him he's stunned
-            PlayerMsg(Index, "You have been stunned.")
+            PlayerMsg(Index, "You have been stunned!")
         End If
     End Sub
 
-    Function CanAttackNpc(ByVal Attacker As Long, ByVal MapNpcNum As Long, Optional ByVal IsSpell As Boolean = False) As Boolean
+    Function CanAttackNpc(ByVal Attacker As Long, ByVal MapNpcNum As Long, Optional ByVal IsSkill As Boolean = False) As Boolean
         Dim MapNum As Long
         Dim NpcNum As Long
         Dim atkX As Long
@@ -311,7 +311,7 @@
             If NpcNum > 0 And GetTickCount() > TempPlayer(Attacker).AttackTimer + attackspeed Then
 
                 ' exit out early
-                If IsSpell Then
+                If IsSkill Then
                     If Npc(NpcNum).Behaviour <> NPC_BEHAVIOUR_FRIENDLY And Npc(NpcNum).Behaviour <> NPC_BEHAVIOUR_SHOPKEEPER Then
                         CanAttackNpc = True
                         Exit Function
@@ -369,16 +369,16 @@
 
     End Function
 
-    Public Sub StunNPC(ByVal Index As Long, ByVal MapNum As Long, ByVal spellnum As Long)
-        ' check if it's a stunning spell
-        If Spell(spellnum).StunDuration > 0 Then
+    Public Sub StunNPC(ByVal Index As Long, ByVal MapNum As Long, ByVal skillnum As Long)
+        ' check if it's a stunning skill
+        If Skill(skillnum).StunDuration > 0 Then
             ' set the values on index
-            MapNpc(MapNum).Npc(Index).StunDuration = Spell(spellnum).StunDuration
+            MapNpc(MapNum).Npc(Index).StunDuration = Skill(skillnum).StunDuration
             MapNpc(MapNum).Npc(Index).StunTimer = GetTickCount()
         End If
     End Sub
 
-    Sub AttackNpc(ByVal Attacker As Long, ByVal MapNpcNum As Long, ByVal Damage As Long, Optional ByVal spellnum As Long = 0)
+    Sub AttackNpc(ByVal Attacker As Long, ByVal MapNpcNum As Long, ByVal Damage As Long, Optional ByVal skillnum As Long = 0)
         Dim Name As String
         Dim exp As Long
         Dim n As Long
@@ -396,7 +396,7 @@
         NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num
         Name = Trim$(Npc(NpcNum).Name)
 
-        If spellnum = 0 Then
+        If skillnum = 0 Then
             ' Send this packet so they can see the person attacking
             Buffer = New ByteBuffer
             Buffer.WriteLong(ServerPackets.SAttack)
@@ -498,7 +498,7 @@
 
             ' send animation
             If n > 0 Then
-                If spellnum = 0 Then SendAnimation(MapNum, Item(GetPlayerEquipment(Attacker, Equipment.Weapon)).Animation, 0, 0, TARGET_TYPE_NPC, MapNpcNum)
+                If skillnum = 0 Then SendAnimation(MapNum, Item(GetPlayerEquipment(Attacker, Equipment.Weapon)).Animation, 0, 0, TARGET_TYPE_NPC, MapNpcNum)
             End If
 
             ' Check if we should send a message
@@ -526,15 +526,15 @@
 
             End If
 
-            ' if stunning spell, stun the npc
-            If spellnum > 0 Then
-                If Spell(spellnum).StunDuration > 0 Then StunNPC(MapNpcNum, MapNum, spellnum)
+            ' if stunning skill, stun the npc
+            If skillnum > 0 Then
+                If Skill(skillnum).StunDuration > 0 Then StunNPC(MapNpcNum, MapNum, skillnum)
             End If
 
             SendMapNpcTo(MapNum, MapNpcNum)
         End If
 
-        If spellnum = 0 Then
+        If skillnum = 0 Then
             ' Reset attack timer
             TempPlayer(Attacker).AttackTimer = GetTickCount()
         End If
@@ -606,12 +606,8 @@
     End Function
 
     Function CanNpcAttackNpc(ByVal MapNum As Long, ByVal Attacker As Long, ByVal Victim As Long) As Boolean
-        Dim aNpcNum As Long
-        Dim vNpcNum As Long
-        Dim VictimX As Long
-        Dim VictimY As Long
-        Dim AttackerX As Long
-        Dim AttackerY As Long
+        Dim aNpcNum As Long, vNpcNum As Long, VictimX As Long
+        Dim VictimY As Long, AttackerX As Long, AttackerY As Long
 
         CanNpcAttackNpc = False
 
@@ -684,6 +680,62 @@
 
     End Function
 
+    Sub NpcAttackPlayer(ByVal MapNpcNum As Long, ByVal Victim As Long, ByVal Damage As Long)
+        Dim Name As String
+        Dim MapNum As Long
+        Dim Buffer As ByteBuffer
+
+        ' Check for subscript out of range
+        If MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or IsPlaying(Victim) = False Then Exit Sub
+
+        ' Check for subscript out of range
+        If MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num <= 0 Then Exit Sub
+
+        MapNum = GetPlayerMap(Victim)
+        Name = Trim$(Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Name)
+
+        ' Send this packet so they can see the person attacking
+        Buffer = New ByteBuffer
+        Buffer.WriteLong(ServerPackets.SNpcAttack)
+        Buffer.WriteLong(MapNpcNum)
+        SendDataToMap(MapNum, Buffer.ToArray())
+        Buffer = Nothing
+
+        If Damage <= 0 Then
+            SendActionMsg(GetPlayerMap(Victim), "BLOCK!", Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            Exit Sub
+        End If
+
+        If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
+            ' Say damage
+            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+            ' kill player
+            KillPlayer(Victim)
+
+            ' Player is dead
+            GlobalMsg(GetPlayerName(Victim) & " has been killed by " & CheckGrammar(Name))
+
+            ' Set NPC target to 0
+            For i = 1 To MAX_MAP_NPCS
+                If MapNpc(MapNum).Npc(i).TargetType = TARGET_TYPE_PLAYER Then
+                    If MapNpc(MapNum).Npc(i).Target = Victim Then
+                        MapNpc(MapNum).Npc(i).Target = 0
+                        MapNpc(MapNum).Npc(i).TargetType = 0
+                    End If
+                End If
+            Next
+        Else
+            ' Player not dead, just do the damage
+            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+            SendVital(Victim, Vitals.HP)
+            SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TARGET_TYPE_PLAYER, Victim)
+            ' Say damage
+            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+        End If
+
+    End Sub
+
     Sub NpcAttackNpc(ByVal MapNum As Long, ByVal Attacker As Long, ByVal Victim As Long, ByVal Damage As Long)
         Dim Buffer As ByteBuffer
         Dim aNpcNum As Long
@@ -746,9 +798,9 @@
 
     End Sub
 
-    Public Sub KnockBackNpc(ByVal Index As Long, ByVal NpcNum As Long, Optional IsSpell As Long = 0)
-        If IsSpell > 0 Then
-            For i = 1 To Spell(IsSpell).KnockBackTiles
+    Public Sub KnockBackNpc(ByVal Index As Long, ByVal NpcNum As Long, Optional IsSkill As Long = 0)
+        If IsSkill > 0 Then
+            For i = 1 To Skill(IsSkill).KnockBackTiles
                 If CanNpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index)) Then
                     NpcMove(GetPlayerMap(Index), NpcNum, GetPlayerDir(Index), MOVING_WALKING)
                 End If

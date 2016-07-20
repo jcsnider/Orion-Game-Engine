@@ -100,9 +100,9 @@
         Packets.Add(ServerPackets.SEditMap, AddressOf Packet_EditMap)
         Packets.Add(ServerPackets.SShopEditor, AddressOf Packet_EditShop)
         Packets.Add(ServerPackets.SUpdateShop, AddressOf Packet_UpdateShop)
-        Packets.Add(ServerPackets.SSpellEditor, AddressOf Packet_EditSpell)
-        Packets.Add(ServerPackets.SUpdateSpell, AddressOf Packet_UpdateSpell)
-        Packets.Add(ServerPackets.SSpells, AddressOf Packet_Spells)
+        Packets.Add(ServerPackets.SSkillEditor, AddressOf Packet_EditSkill)
+        Packets.Add(ServerPackets.SUpdateSkill, AddressOf Packet_UpdateSkill)
+        Packets.Add(ServerPackets.SSkills, AddressOf Packet_Skills)
         Packets.Add(ServerPackets.SLeftMap, AddressOf Packet_LeftMap)
         Packets.Add(ServerPackets.SResourceCache, AddressOf Packet_ResourceCache)
         Packets.Add(ServerPackets.SResourceEditor, AddressOf Packet_ResourceEditor)
@@ -117,7 +117,7 @@
         Packets.Add(ServerPackets.SAnimation, AddressOf Packet_Animation)
         Packets.Add(ServerPackets.SMapNpcVitals, AddressOf Packet_NPCVitals)
         Packets.Add(ServerPackets.SCooldown, AddressOf Packet_Cooldown)
-        Packets.Add(ServerPackets.SClearSpellBuffer, AddressOf Packet_ClearSpellBuffer)
+        Packets.Add(ServerPackets.SClearSkillBuffer, AddressOf Packet_ClearSkillBuffer)
         Packets.Add(ServerPackets.SSayMsg, AddressOf Packet_SayMessage)
         Packets.Add(ServerPackets.SOpenShop, AddressOf Packet_OpenShop)
         Packets.Add(ServerPackets.SResetShopAction, AddressOf Packet_ResetShopAction)
@@ -169,7 +169,7 @@
         Packets.Add(ServerPackets.SEventEnd, AddressOf Packet_EventEnd)
         Packets.Add(ServerPackets.SPlayBGM, AddressOf Packet_PlayBGM)
         Packets.Add(ServerPackets.SPlaySound, AddressOf Packet_PlaySound)
-        Packets.Add(ServerPackets.SFadeoutBGM, AddressOf Packet_FadeoutBGM)
+        Packets.Add(ServerPackets.SFadeoutBGM, AddressOf Packet_FadeOutBGM)
         Packets.Add(ServerPackets.SStopSound, AddressOf Packet_StopSound)
         Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
@@ -1219,9 +1219,9 @@
 
         If Buffer.ReadLong <> ServerPackets.SMapNpcUpdate Then Exit Sub
 
-        npcnum = Buffer.ReadLong
+        NpcNum = Buffer.ReadLong
 
-        With MapNpc(npcnum)
+        With MapNpc(NpcNum)
             .Num = Buffer.ReadLong
             .X = Buffer.ReadLong
             .Y = Buffer.ReadLong
@@ -1483,7 +1483,7 @@
         Next
 
         Npc(i).EXP = Buffer.ReadLong()
-        Npc(i).faction = Buffer.ReadLong()
+        Npc(i).Faction = Buffer.ReadLong()
         Npc(i).HP = Buffer.ReadLong()
         Npc(i).Name = Trim(Buffer.ReadString())
         Npc(i).Range = Buffer.ReadLong()
@@ -1568,74 +1568,74 @@
         Buffer = Nothing
     End Sub
 
-    Sub Packet_EditSpell(ByVal data() As Byte)
+    Sub Packet_EditSkill(ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadLong <> ServerPackets.SSpellEditor Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SSkillEditor Then Exit Sub
 
-        InitSpellEditor = True
+        InitSkillEditor = True
 
         Buffer = Nothing
     End Sub
 
-    Sub Packet_UpdateSpell(ByVal data() As Byte)
-        Dim spellnum As Long
+    Sub Packet_UpdateSkill(ByVal data() As Byte)
+        Dim skillnum As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadLong <> ServerPackets.SUpdateSpell Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SUpdateSkill Then Exit Sub
 
-        spellnum = Buffer.ReadLong
+        skillnum = Buffer.ReadLong
 
-        Spell(spellnum).AccessReq = Buffer.ReadLong()
-        Spell(spellnum).AoE = Buffer.ReadLong()
-        Spell(spellnum).CastAnim = Buffer.ReadLong()
-        Spell(spellnum).CastTime = Buffer.ReadLong()
-        Spell(spellnum).CDTime = Buffer.ReadLong()
-        Spell(spellnum).ClassReq = Buffer.ReadLong()
-        Spell(spellnum).Dir = Buffer.ReadLong()
-        Spell(spellnum).Duration = Buffer.ReadLong()
-        Spell(spellnum).Icon = Buffer.ReadLong()
-        Spell(spellnum).Interval = Buffer.ReadLong()
-        Spell(spellnum).IsAoE = Buffer.ReadLong()
-        Spell(spellnum).LevelReq = Buffer.ReadLong()
-        Spell(spellnum).Map = Buffer.ReadLong()
-        Spell(spellnum).MPCost = Buffer.ReadLong()
-        Spell(spellnum).Name = Trim(Buffer.ReadString())
-        Spell(spellnum).Range = Buffer.ReadLong()
-        Spell(spellnum).SpellAnim = Buffer.ReadLong()
-        Spell(spellnum).StunDuration = Buffer.ReadLong()
-        Spell(spellnum).Type = Buffer.ReadLong()
-        Spell(spellnum).Vital = Buffer.ReadLong()
-        Spell(spellnum).X = Buffer.ReadLong()
-        Spell(spellnum).Y = Buffer.ReadLong()
+        Skill(skillnum).AccessReq = Buffer.ReadLong()
+        Skill(skillnum).AoE = Buffer.ReadLong()
+        Skill(skillnum).CastAnim = Buffer.ReadLong()
+        Skill(skillnum).CastTime = Buffer.ReadLong()
+        Skill(skillnum).CDTime = Buffer.ReadLong()
+        Skill(skillnum).ClassReq = Buffer.ReadLong()
+        Skill(skillnum).Dir = Buffer.ReadLong()
+        Skill(skillnum).Duration = Buffer.ReadLong()
+        Skill(skillnum).Icon = Buffer.ReadLong()
+        Skill(skillnum).Interval = Buffer.ReadLong()
+        Skill(skillnum).IsAoE = Buffer.ReadLong()
+        Skill(skillnum).LevelReq = Buffer.ReadLong()
+        Skill(skillnum).Map = Buffer.ReadLong()
+        Skill(skillnum).MPCost = Buffer.ReadLong()
+        Skill(skillnum).Name = Trim(Buffer.ReadString())
+        Skill(skillnum).Range = Buffer.ReadLong()
+        Skill(skillnum).SkillAnim = Buffer.ReadLong()
+        Skill(skillnum).StunDuration = Buffer.ReadLong()
+        Skill(skillnum).Type = Buffer.ReadLong()
+        Skill(skillnum).Vital = Buffer.ReadLong()
+        Skill(skillnum).X = Buffer.ReadLong()
+        Skill(skillnum).Y = Buffer.ReadLong()
 
-        Spell(spellnum).IsProjectile = Buffer.ReadLong()
-        Spell(spellnum).Projectile = Buffer.ReadLong()
+        Skill(skillnum).IsProjectile = Buffer.ReadLong()
+        Skill(skillnum).Projectile = Buffer.ReadLong()
 
-        Spell(spellnum).KnockBack = Buffer.ReadLong()
-        Spell(spellnum).KnockBackTiles = Buffer.ReadLong()
+        Skill(skillnum).KnockBack = Buffer.ReadLong()
+        Skill(skillnum).KnockBackTiles = Buffer.ReadLong()
 
-        If Spell(spellnum).Name Is Nothing Then Spell(spellnum).Name = ""
+        If Skill(skillnum).Name Is Nothing Then Skill(skillnum).Name = ""
 
         Buffer = Nothing
 
     End Sub
 
-    Sub Packet_Spells(ByVal data() As Byte)
+    Sub Packet_Skills(ByVal data() As Byte)
         Dim i As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
-        If Buffer.ReadLong <> ServerPackets.SSpells Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SSkills Then Exit Sub
 
-        For i = 1 To MAX_PLAYER_SPELLS
-            PlayerSpells(i) = Buffer.ReadLong
+        For i = 1 To MAX_PLAYER_SKILLS
+            PlayerSkills(i) = Buffer.ReadLong
         Next
 
         Buffer = Nothing
@@ -1912,20 +1912,20 @@
         If Buffer.ReadLong <> ServerPackets.SCooldown Then Exit Sub
 
         slot = Buffer.ReadLong
-        SpellCD(slot) = GetTickCount()
+        SkillCD(slot) = GetTickCount()
 
         Buffer = Nothing
     End Sub
 
-    Private Sub Packet_ClearSpellBuffer(ByVal Data() As Byte)
+    Private Sub Packet_ClearSkillBuffer(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-        If Buffer.ReadLong <> ServerPackets.SClearSpellBuffer Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SClearSkillBuffer Then Exit Sub
 
-        SpellBuffer = 0
-        SpellBufferTimer = 0
+        SkillBuffer = 0
+        SkillBufferTimer = 0
 
         Buffer = Nothing
     End Sub
@@ -2384,42 +2384,42 @@
 
         '\\\End Read Shop Data\\\\\\\
 
-        '\\\Read Spells Data\\\\\\\\\\
+        '\\\Read Skills Data\\\\\\\\\\
         x = buffer.ReadLong
 
         For i = 1 To x
             n = buffer.ReadLong
 
-            Spell(n).AccessReq = buffer.ReadLong()
-            Spell(n).AoE = buffer.ReadLong()
-            Spell(n).CastAnim = buffer.ReadLong()
-            Spell(n).CastTime = buffer.ReadLong()
-            Spell(n).CDTime = buffer.ReadLong()
-            Spell(n).ClassReq = buffer.ReadLong()
-            Spell(n).Dir = buffer.ReadLong()
-            Spell(n).Duration = buffer.ReadLong()
-            Spell(n).Icon = buffer.ReadLong()
-            Spell(n).Interval = buffer.ReadLong()
-            Spell(n).IsAoE = buffer.ReadLong()
-            Spell(n).LevelReq = buffer.ReadLong()
-            Spell(n).Map = buffer.ReadLong()
-            Spell(n).MPCost = buffer.ReadLong()
-            Spell(n).Name = Trim(buffer.ReadString())
-            Spell(n).Range = buffer.ReadLong()
-            Spell(n).SpellAnim = buffer.ReadLong()
-            Spell(n).StunDuration = buffer.ReadLong()
-            Spell(n).Type = buffer.ReadLong()
-            Spell(n).Vital = buffer.ReadLong()
-            Spell(n).X = buffer.ReadLong()
-            Spell(n).Y = buffer.ReadLong()
+            Skill(n).AccessReq = buffer.ReadLong()
+            Skill(n).AoE = buffer.ReadLong()
+            Skill(n).CastAnim = buffer.ReadLong()
+            Skill(n).CastTime = buffer.ReadLong()
+            Skill(n).CDTime = buffer.ReadLong()
+            Skill(n).ClassReq = buffer.ReadLong()
+            Skill(n).Dir = buffer.ReadLong()
+            Skill(n).Duration = buffer.ReadLong()
+            Skill(n).Icon = buffer.ReadLong()
+            Skill(n).Interval = buffer.ReadLong()
+            Skill(n).IsAoE = buffer.ReadLong()
+            Skill(n).LevelReq = buffer.ReadLong()
+            Skill(n).Map = buffer.ReadLong()
+            Skill(n).MPCost = buffer.ReadLong()
+            Skill(n).Name = Trim(buffer.ReadString())
+            Skill(n).Range = buffer.ReadLong()
+            Skill(n).SkillAnim = buffer.ReadLong()
+            Skill(n).StunDuration = buffer.ReadLong()
+            Skill(n).Type = buffer.ReadLong()
+            Skill(n).Vital = buffer.ReadLong()
+            Skill(n).X = buffer.ReadLong()
+            Skill(n).Y = buffer.ReadLong()
 
-            Spell(n).IsProjectile = buffer.ReadLong()
-            Spell(n).Projectile = buffer.ReadLong()
+            Skill(n).IsProjectile = buffer.ReadLong()
+            Skill(n).Projectile = buffer.ReadLong()
 
-            Spell(n).KnockBack = buffer.ReadLong()
-            Spell(n).KnockBackTiles = buffer.ReadLong()
+            Skill(n).KnockBack = buffer.ReadLong()
+            Skill(n).KnockBackTiles = buffer.ReadLong()
 
-            If Spell(n).Name Is Nothing Then Spell(n).Name = ""
+            If Skill(n).Name Is Nothing Then Skill(n).Name = ""
         Next
 
         i = 0
@@ -2427,7 +2427,7 @@
         n = 0
         z = 0
 
-        '\\\End Read Spells Data\\\\\\\\\\
+        '\\\End Read Skills Data\\\\\\\\\\
 
         '\\\Read Resource Data\\\\\\\\\\\\
         x = buffer.ReadLong

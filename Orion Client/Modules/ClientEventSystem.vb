@@ -611,7 +611,7 @@ newlist:
                                     Case 3
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Trim$(Classes(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 4
-                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Trim$(Spell(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
+                                        frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Trim$(Skill(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 5
                                         Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2
                                             Case 0
@@ -870,9 +870,9 @@ newlist:
                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Level to " & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.evChangeSkills
                                 If tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2 = 0 Then
-                                    frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Teach Player Skill [" & Trim$(Spell(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                    frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Teach Player Skill [" & Trim$(Skill(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
                                 ElseIf tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2 = 1 Then
-                                    frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Trim$(Spell(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
+                                    frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Trim$(Skill(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
                                 End If
                             Case EventType.evChangeClass
                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Trim$(Classes(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1).Name))

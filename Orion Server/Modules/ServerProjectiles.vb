@@ -352,7 +352,7 @@
 #End Region
 
 #Region "Functions"
-    Public Sub PlayerFireProjectile(ByVal Index As Long, Optional ByVal IsSpell As Long = 0)
+    Public Sub PlayerFireProjectile(ByVal Index As Long, Optional ByVal IsSkill As Long = 0)
         Dim ProjectileSlot As Long
         Dim ProjectileNum As Long
         Dim MapNum As Long
@@ -371,9 +371,9 @@
         'Check for no projectile, if so just overwrite the first slot
         If ProjectileSlot = 0 Then ProjectileSlot = 1
 
-        'Check for spell, if so then load data acordingly
-        If IsSpell > 0 Then
-            ProjectileNum = Spell(IsSpell).Projectile
+        'Check for skill, if so then load data acordingly
+        If IsSkill > 0 Then
+            ProjectileNum = Skill(IsSkill).Projectile
         Else
             ProjectileNum = Item(GetPlayerEquipment(Index, Equipment.Weapon)).Data1
         End If

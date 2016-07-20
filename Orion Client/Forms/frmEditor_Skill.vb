@@ -1,18 +1,17 @@
-﻿Public Class frmEditor_Spell
-
+﻿Public Class frmEditor_Skill
     Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Long
 
         If EditorIndex = 0 Then Exit Sub
         tmpIndex = lstIndex.SelectedIndex
-        Spell(EditorIndex).Name = Trim$(txtName.Text)
+        Skill(EditorIndex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Spell(EditorIndex).Name)
+        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Skill(EditorIndex).Name)
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
     Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
-        Spell(EditorIndex).Type = cmbType.SelectedIndex
+        Skill(EditorIndex).Type = cmbType.SelectedIndex
     End Sub
 
     Private Sub scrlMP_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMP.ValueChanged
@@ -21,7 +20,7 @@
         Else
             lblMP.Text = "MP Cost: None"
         End If
-        Spell(EditorIndex).MPCost = scrlMP.Value
+        Skill(EditorIndex).MPCost = scrlMP.Value
     End Sub
 
     Private Sub scrlLevel_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLevel.ValueChanged
@@ -30,7 +29,7 @@
         Else
             lblLevel.Text = "Level Required: None"
         End If
-        Spell(EditorIndex).LevelReq = scrlLevel.Value
+        Skill(EditorIndex).LevelReq = scrlLevel.Value
     End Sub
 
     Private Sub scrlAccess_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAccess.ValueChanged
@@ -39,21 +38,21 @@
         Else
             lblAccess.Text = "Access Required: None"
         End If
-        Spell(EditorIndex).AccessReq = scrlAccess.Value
+        Skill(EditorIndex).AccessReq = scrlAccess.Value
     End Sub
 
     Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        Spell(EditorIndex).ClassReq = cmbClass.SelectedIndex
+        Skill(EditorIndex).ClassReq = cmbclass.SelectedIndex
     End Sub
 
     Private Sub scrlCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlCast.ValueChanged
         lblCast.Text = "Casting Time: " & scrlCast.Value & "s"
-        Spell(EditorIndex).CastTime = scrlCast.Value
+        Skill(EditorIndex).CastTime = scrlCast.Value
     End Sub
 
     Private Sub scrlCool_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlCool.ValueChanged
         lblCool.Text = "Cooldown Time: " & scrlCool.Value & "s"
-        Spell(EditorIndex).CDTime = scrlCool.Value
+        Skill(EditorIndex).CDTime = scrlCool.Value
     End Sub
 
     Private Sub scrlIcon_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlIcon.ValueChanged
@@ -62,13 +61,13 @@
         Else
             lblIcon.Text = "Icon: None"
         End If
-        Spell(EditorIndex).Icon = scrlIcon.Value
-        EditorSpell_BltIcon()
+        Skill(EditorIndex).Icon = scrlIcon.Value
+        EditorSkill_BltIcon()
     End Sub
 
     Private Sub scrlMap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMap.ValueChanged
         lblMap.Text = "Map: " & scrlMap.Value
-        Spell(EditorIndex).Map = scrlMap.Value
+        Skill(EditorIndex).Map = scrlMap.Value
     End Sub
 
     Private Sub scrlDir_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlDir.ValueChanged
@@ -85,32 +84,32 @@
                 sDir = "Left"
         End Select
         lblDir.Text = "Dir: " & sDir
-        Spell(EditorIndex).Dir = scrlDir.Value
+        Skill(EditorIndex).Dir = scrlDir.Value
     End Sub
 
     Private Sub scrlX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlX.ValueChanged
         lblX.Text = "X: " & scrlX.Value
-        Spell(EditorIndex).X = scrlX.Value
+        Skill(EditorIndex).X = scrlX.Value
     End Sub
 
     Private Sub scrlY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlY.ValueChanged
         lblY.Text = "Y: " & scrlY.Value
-        Spell(EditorIndex).Y = scrlY.Value
+        Skill(EditorIndex).Y = scrlY.Value
     End Sub
 
     Private Sub scrlVital_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVital.ValueChanged
         lblVital.Text = "Vital: " & scrlVital.Value
-        Spell(EditorIndex).Vital = scrlVital.Value
+        Skill(EditorIndex).Vital = scrlVital.Value
     End Sub
 
     Private Sub scrlDuration_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlDuration.ValueChanged
         lblDuration.Text = "Duration: " & scrlDuration.Value & "s"
-        Spell(EditorIndex).Duration = scrlDuration.Value
+        Skill(EditorIndex).Duration = scrlDuration.Value
     End Sub
 
     Private Sub scrlInterval_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlInterval.ValueChanged
         lblInterval.Text = "Interval: " & scrlInterval.Value & "s"
-        Spell(EditorIndex).Interval = scrlInterval.Value
+        Skill(EditorIndex).Interval = scrlInterval.Value
     End Sub
 
     Private Sub scrlRange_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRange.ValueChanged
@@ -119,14 +118,14 @@
         Else
             lblRange.Text = "Range: Self-cast"
         End If
-        Spell(EditorIndex).Range = scrlRange.Value
+        Skill(EditorIndex).Range = scrlRange.Value
     End Sub
 
     Private Sub chkAOE_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkAOE.CheckedChanged
         If chkAOE.Checked = False Then
-            Spell(EditorIndex).IsAoE = False
+            Skill(EditorIndex).IsAoE = False
         Else
-            Spell(EditorIndex).IsAoE = True
+            Skill(EditorIndex).IsAoE = True
         End If
     End Sub
 
@@ -136,7 +135,7 @@
         Else
             lblAOE.Text = "AoE: Self-cast"
         End If
-        Spell(EditorIndex).AoE = scrlAOE.Value
+        Skill(EditorIndex).AoE = scrlAOE.Value
     End Sub
 
     Private Sub scrlAnimCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnimCast.ValueChanged
@@ -145,7 +144,7 @@
         Else
             lblAnimCast.Text = "Cast Anim: None"
         End If
-        Spell(EditorIndex).CastAnim = scrlAnimCast.Value
+        Skill(EditorIndex).CastAnim = scrlAnimCast.Value
     End Sub
 
     Private Sub scrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnim.ValueChanged
@@ -154,7 +153,7 @@
         Else
             lblAnim.Text = "Animation: None"
         End If
-        Spell(EditorIndex).SpellAnim = scrlAnim.Value
+        Skill(EditorIndex).SkillAnim = scrlAnim.Value
     End Sub
 
     Private Sub scrlStun_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlStun.ValueChanged
@@ -163,44 +162,44 @@
         Else
             lblStun.Text = "Stun Duration: None"
         End If
-        Spell(EditorIndex).StunDuration = scrlStun.Value
+        Skill(EditorIndex).StunDuration = scrlStun.Value
     End Sub
 
     Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
-        SpellEditorInit()
+        SkillEditorInit()
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
-        SpellEditorOk()
+        SkillEditorOk()
     End Sub
 
     Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
         Dim tmpIndex As Long
 
-        ClearSpell(EditorIndex)
+        ClearSkill(EditorIndex)
 
         tmpIndex = lstIndex.SelectedIndex
         lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Spell(EditorIndex).Name)
+        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Skill(EditorIndex).Name)
         lstIndex.SelectedIndex = tmpIndex
 
-        SpellEditorInit()
+        SkillEditorInit()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
-        SpellEditorCancel()
+        SkillEditorCancel()
     End Sub
 
-    Private Sub frmEditor_Spell_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        scrlIcon.Maximum = NumSpellIcons
+    Private Sub frmEditor_Skill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        scrlIcon.Maximum = NumSkillIcons
         scrlCast.Value = 1
     End Sub
 
     Private Sub chkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
         If chkProjectile.Checked = False Then
-            Spell(EditorIndex).IsProjectile = 0
+            Skill(EditorIndex).IsProjectile = 0
         Else
-            Spell(EditorIndex).IsProjectile = 1
+            Skill(EditorIndex).IsProjectile = 1
         End If
     End Sub
 
@@ -210,22 +209,22 @@
         Else
             lblProjectile.Text = "Projectile: 0 None"
         End If
-        Spell(EditorIndex).Projectile = scrlProjectile.Value
+        Skill(EditorIndex).Projectile = scrlProjectile.Value
     End Sub
 
     Private Sub chkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
-        If EditorIndex = 0 Or EditorIndex > MAX_SPELLS Then Exit Sub
+        If EditorIndex = 0 Or EditorIndex > MAX_SKILLS Then Exit Sub
 
         If chkKnockBack.Checked = True Then
-            Spell(EditorIndex).KnockBack = 1
+            Skill(EditorIndex).KnockBack = 1
         Else
-            Spell(EditorIndex).KnockBack = 0
+            Skill(EditorIndex).KnockBack = 0
         End If
     End Sub
 
     Private Sub cmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
-        If EditorIndex = 0 Or EditorIndex > MAX_SPELLS Then Exit Sub
+        If EditorIndex = 0 Or EditorIndex > MAX_SKILLS Then Exit Sub
 
-        Spell(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
+        Skill(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
     End Sub
 End Class

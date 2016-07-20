@@ -20,12 +20,12 @@
             If Tick > tmr25 Then
                 For i = 1 To MAX_PLAYERS
                     If IsPlaying(i) Then
-                        ' check if they've completed casting, and if so set the actual spell going
-                        If TempPlayer(i).SpellBuffer > 0 Then
-                            If GetTickCount() > TempPlayer(i).SpellBufferTimer + (Spell(Player(i).Character(TempPlayer(i).CurChar).Spell(TempPlayer(i).SpellBuffer)).CastTime * 1000) Then
-                                CastSpell(i, TempPlayer(i).SpellBuffer)
-                                TempPlayer(i).SpellBuffer = 0
-                                TempPlayer(i).SpellBufferTimer = 0
+                        ' check if they've completed casting, and if so set the actual skill going
+                        If TempPlayer(i).SkillBuffer > 0 Then
+                            If GetTickCount() > TempPlayer(i).SkillBufferTimer + (Skill(Player(i).Character(TempPlayer(i).CurChar).Skill(TempPlayer(i).SkillBuffer)).CastTime * 1000) Then
+                                CastSkill(i, TempPlayer(i).SkillBuffer)
+                                TempPlayer(i).SkillBuffer = 0
+                                TempPlayer(i).SkillBufferTimer = 0
                             End If
                         End If
                         ' check if need to turn off stunned
@@ -184,18 +184,18 @@
 
             If IsPlaying(i) Then
                 If GetPlayerVital(i, Vitals.HP) <> GetPlayerMaxVital(i, Vitals.HP) Then
-                    Call SetPlayerVital(i, Vitals.HP, GetPlayerVital(i, Vitals.HP) + GetPlayerVitalRegen(i, Vitals.HP))
-                    Call SendVital(i, Vitals.HP)
+                    SetPlayerVital(i, Vitals.HP, GetPlayerVital(i, Vitals.HP) + GetPlayerVitalRegen(i, Vitals.HP))
+                    SendVital(i, Vitals.HP)
                 End If
 
                 If GetPlayerVital(i, Vitals.MP) <> GetPlayerMaxVital(i, Vitals.MP) Then
-                    Call SetPlayerVital(i, Vitals.MP, GetPlayerVital(i, Vitals.MP) + GetPlayerVitalRegen(i, Vitals.MP))
-                    Call SendVital(i, Vitals.MP)
+                    SetPlayerVital(i, Vitals.MP, GetPlayerVital(i, Vitals.MP) + GetPlayerVitalRegen(i, Vitals.MP))
+                    SendVital(i, Vitals.MP)
                 End If
 
                 If GetPlayerVital(i, Vitals.SP) <> GetPlayerMaxVital(i, Vitals.SP) Then
-                    Call SetPlayerVital(i, Vitals.SP, GetPlayerVital(i, Vitals.SP) + GetPlayerVitalRegen(i, Vitals.SP))
-                    Call SendVital(i, Vitals.SP)
+                    SetPlayerVital(i, Vitals.SP, GetPlayerVital(i, Vitals.SP) + GetPlayerVitalRegen(i, Vitals.SP))
+                    SendVital(i, Vitals.SP)
                 End If
             End If
 
@@ -240,7 +240,7 @@
                                 ResourceCache(MapNum).ResourceData(i).ResourceTimer = GetTickCount()
                                 ResourceCache(MapNum).ResourceData(i).ResourceState = 0 ' normal
                                 ' re-set health to resource root
-                                ResourceCache(MapNum).ResourceData(i).cur_health = Resource(Resource_index).health
+                                ResourceCache(MapNum).ResourceData(i).cur_health = Resource(Resource_index).Health
                                 SendResourceCacheToMap(MapNum, i)
                             End If
                         End If
@@ -281,7 +281,7 @@
                                             If DistanceX <= n And DistanceY <= n Then
                                                 If Npc(NpcNum).Behaviour = NPC_BEHAVIOUR_ATTACKONSIGHT Or GetPlayerPK(i) = YES Then
                                                     If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                                                        Call PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says, '" & Trim$(Npc(NpcNum).AttackSay) & "' to you.")
+                                                        PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says, '" & Trim$(Npc(NpcNum).AttackSay) & "' to you.")
                                                     End If
                                                     MapNpc(MapNum).Npc(x).TargetType = 1 ' player
                                                     MapNpc(MapNum).Npc(x).Target = i
@@ -394,7 +394,7 @@
                                                     ' Up
                                                     If MapNpc(MapNum).Npc(x).y > TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_UP) Then
-                                                            Call NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -402,7 +402,7 @@
                                                     ' Down
                                                     If MapNpc(MapNum).Npc(x).y < TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_DOWN) Then
-                                                            Call NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -410,7 +410,7 @@
                                                     ' Left
                                                     If MapNpc(MapNum).Npc(x).x > TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_LEFT) Then
-                                                            Call NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -418,7 +418,7 @@
                                                     ' Right
                                                     If MapNpc(MapNum).Npc(x).x < TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_RIGHT) Then
-                                                            Call NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -428,7 +428,7 @@
                                                     ' Right
                                                     If MapNpc(MapNum).Npc(x).x < TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_RIGHT) Then
-                                                            Call NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -436,7 +436,7 @@
                                                     ' Left
                                                     If MapNpc(MapNum).Npc(x).x > TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_LEFT) Then
-                                                            Call NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -444,7 +444,7 @@
                                                     ' Down
                                                     If MapNpc(MapNum).Npc(x).y < TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_DOWN) Then
-                                                            Call NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -452,7 +452,7 @@
                                                     ' Up
                                                     If MapNpc(MapNum).Npc(x).y > TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_UP) Then
-                                                            Call NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -462,7 +462,7 @@
                                                     ' Down
                                                     If MapNpc(MapNum).Npc(x).y < TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_DOWN) Then
-                                                            Call NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -470,7 +470,7 @@
                                                     ' Up
                                                     If MapNpc(MapNum).Npc(x).y > TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_UP) Then
-                                                            Call NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -478,7 +478,7 @@
                                                     ' Right
                                                     If MapNpc(MapNum).Npc(x).x < TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_RIGHT) Then
-                                                            Call NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -486,7 +486,7 @@
                                                     ' Left
                                                     If MapNpc(MapNum).Npc(x).x > TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_LEFT) Then
-                                                            Call NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -496,7 +496,7 @@
                                                     ' Left
                                                     If MapNpc(MapNum).Npc(x).x > TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_LEFT) Then
-                                                            Call NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_LEFT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -504,7 +504,7 @@
                                                     ' Right
                                                     If MapNpc(MapNum).Npc(x).x < TargetX And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_RIGHT) Then
-                                                            Call NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_RIGHT, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -512,7 +512,7 @@
                                                     ' Up
                                                     If MapNpc(MapNum).Npc(x).y > TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_UP) Then
-                                                            Call NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_UP, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -520,7 +520,7 @@
                                                     ' Down
                                                     If MapNpc(MapNum).Npc(x).y < TargetY And Not DidWalk Then
                                                         If CanNpcMove(MapNum, x, DIR_DOWN) Then
-                                                            Call NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, DIR_DOWN, MOVING_WALKING)
                                                             DidWalk = True
                                                         End If
                                                     End If
@@ -531,7 +531,7 @@
                                             If Not DidWalk Then
                                                 If MapNpc(MapNum).Npc(x).x - 1 = TargetX And MapNpc(MapNum).Npc(x).y = TargetY Then
                                                     If MapNpc(MapNum).Npc(x).Dir <> DIR_LEFT Then
-                                                        Call NpcDir(MapNum, x, DIR_LEFT)
+                                                        NpcDir(MapNum, x, DIR_LEFT)
                                                     End If
 
                                                     DidWalk = True
@@ -539,7 +539,7 @@
 
                                                 If MapNpc(MapNum).Npc(x).x + 1 = TargetX And MapNpc(MapNum).Npc(x).y = TargetY Then
                                                     If MapNpc(MapNum).Npc(x).Dir <> DIR_RIGHT Then
-                                                        Call NpcDir(MapNum, x, DIR_RIGHT)
+                                                        NpcDir(MapNum, x, DIR_RIGHT)
                                                     End If
 
                                                     DidWalk = True
@@ -547,7 +547,7 @@
 
                                                 If MapNpc(MapNum).Npc(x).x = TargetX And MapNpc(MapNum).Npc(x).y - 1 = TargetY Then
                                                     If MapNpc(MapNum).Npc(x).Dir <> DIR_UP Then
-                                                        Call NpcDir(MapNum, x, DIR_UP)
+                                                        NpcDir(MapNum, x, DIR_UP)
                                                     End If
 
                                                     DidWalk = True
@@ -555,7 +555,7 @@
 
                                                 If MapNpc(MapNum).Npc(x).x = TargetX And MapNpc(MapNum).Npc(x).y + 1 = TargetY Then
                                                     If MapNpc(MapNum).Npc(x).Dir <> DIR_DOWN Then
-                                                        Call NpcDir(MapNum, x, DIR_DOWN)
+                                                        NpcDir(MapNum, x, DIR_DOWN)
                                                     End If
 
                                                     DidWalk = True
@@ -569,7 +569,7 @@
                                                         i = Int(Rnd() * 4)
 
                                                         If CanNpcMove(MapNum, x, i) Then
-                                                            Call NpcMove(MapNum, x, i, MOVING_WALKING)
+                                                            NpcMove(MapNum, x, i, MOVING_WALKING)
                                                         End If
                                                     End If
                                                 End If
@@ -586,14 +586,14 @@
                                                     i = Int(Rnd() * 4)
 
                                                     If CanNpcMove(MapNum, x, i) Then
-                                                        Call NpcMove(MapNum, x, i, MOVING_WALKING)
+                                                        NpcMove(MapNum, x, i, MOVING_WALKING)
                                                     End If
                                                 End If
                                             End If
                                         End If
                                     Else
 
-                                        Call NpcDir(MapNum, x, GetNpcDir(TargetX, TargetY, CLng(MapNpc(MapNum).Npc(x).x), CLng(MapNpc(MapNum).Npc(x).y)))
+                                        NpcDir(MapNum, x, GetNpcDir(TargetX, TargetY, CLng(MapNpc(MapNum).Npc(x).x), CLng(MapNpc(MapNum).Npc(x).y)))
                                     End If
                                 Else
                                     i = Int(Rnd() * 4)
@@ -602,7 +602,7 @@
                                         i = Int(Rnd() * 4)
 
                                         If CanNpcMove(MapNum, x, i) Then
-                                            Call NpcMove(MapNum, x, i, MOVING_WALKING)
+                                            NpcMove(MapNum, x, i, MOVING_WALKING)
                                         End If
                                     End If
                                 End If
@@ -713,6 +713,7 @@
         End If
 
     End Sub
+
     Function GetNpcVitalRegen(ByVal NpcNum As Long, ByVal Vital As Vitals) As Long
         Dim i As Long
 
@@ -731,6 +732,7 @@
         End Select
 
     End Function
+
     Sub NpcAttackPlayer(ByVal MapNpcNum As Long, ByVal Victim As Long, ByVal Damage As Long)
         Dim Name As String
         Dim MapNum As Long
@@ -781,16 +783,17 @@
             Next
         Else
             ' Player not dead, just do the damage
-            Call SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
-            Call SendVital(Victim, Vitals.HP)
-            Call SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TARGET_TYPE_PLAYER, Victim)
+            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+            SendVital(Victim, Vitals.HP)
+            SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TARGET_TYPE_PLAYER, Victim)
             ' Say damage
             SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
         End If
 
     End Sub
-    Public Sub CastSpell(ByVal Index As Long, ByVal spellslot As Long)
-        Dim spellnum As Long, MPCost As Long, LevelReq As Long
+
+    Public Sub CastSkill(ByVal Index As Long, ByVal skillslot As Long)
+        Dim skillnum As Long, MPCost As Long, LevelReq As Long
         Dim MapNum As Long, Vital As Long, DidCast As Boolean
         Dim ClassReq As Long, AccessReq As Long, i As Long
         Dim AoE As Long, range As Long, VitalType As Byte
@@ -798,20 +801,20 @@
 
         Dim TargetType As Byte
         Dim Target As Long
-        Dim SpellCastType As Long
+        Dim SkillCastType As Long
 
         DidCast = False
 
         ' Prevent subscript out of range
-        If spellslot <= 0 Or spellslot > MAX_PLAYER_SPELLS Then Exit Sub
+        If skillslot <= 0 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
-        spellnum = GetPlayerSpell(Index, spellslot)
+        skillnum = GetPlayerSkill(Index, skillslot)
         MapNum = GetPlayerMap(Index)
 
-        ' Make sure player has the spell
-        If Not HasSpell(Index, spellnum) Then Exit Sub
+        ' Make sure player has the skill
+        If Not HasSkill(Index, skillnum) Then Exit Sub
 
-        MPCost = Spell(spellnum).MPCost
+        MPCost = Skill(skillnum).MPCost
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
@@ -819,76 +822,76 @@
             Exit Sub
         End If
 
-        LevelReq = Spell(spellnum).LevelReq
+        LevelReq = Skill(skillnum).LevelReq
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            PlayerMsg(Index, "You must be level " & LevelReq & " to cast this spell.")
+            PlayerMsg(Index, "You must be level " & LevelReq & " to use this skill.")
             Exit Sub
         End If
 
-        AccessReq = Spell(spellnum).AccessReq
+        AccessReq = Skill(skillnum).AccessReq
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            PlayerMsg(Index, "You must be an administrator to cast this spell.")
+            PlayerMsg(Index, "You must be an administrator to use this skill.")
             Exit Sub
         End If
 
-        ClassReq = Spell(spellnum).ClassReq
+        ClassReq = Skill(skillnum).ClassReq
 
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this spell.")
+                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.")
                 Exit Sub
             End If
         End If
 
-        ' find out what kind of spell it is! self cast, target or AOE
-        If Spell(spellnum).IsProjectile = 1 Then
-            SpellCastType = 4 ' Projectile
-        ElseIf Spell(spellnum).range > 0 Then
+        ' find out what kind of skill it is! self cast, target or AOE
+        If Skill(skillnum).IsProjectile = 1 Then
+            SkillCastType = 4 ' Projectile
+        ElseIf Skill(skillnum).range > 0 Then
             ' ranged attack, single target or aoe?
-            If Not Spell(spellnum).IsAoE Then
-                SpellCastType = 2 ' targetted
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 2 ' targetted
             Else
-                SpellCastType = 3 ' targetted aoe
+                SkillCastType = 3 ' targetted aoe
             End If
         Else
-            If Not Spell(spellnum).IsAoE Then
-                SpellCastType = 0 ' self-cast
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 0 ' self-cast
             Else
-                SpellCastType = 1 ' self-cast AoE
+                SkillCastType = 1 ' self-cast AoE
             End If
         End If
 
         ' set the vital
-        Vital = Spell(spellnum).Vital
-        AoE = Spell(spellnum).AoE
-        range = Spell(spellnum).range
+        Vital = Skill(skillnum).Vital
+        AoE = Skill(skillnum).AoE
+        range = Skill(skillnum).range
 
-        Select Case SpellCastType
+        Select Case SkillCastType
             Case 0 ' self-cast target
-                Select Case Spell(spellnum).Type
-                    Case SPELL_TYPE_HEALHP
-                        SpellPlayer_Effect(Vitals.HP, True, Index, Vital, spellnum)
+                Select Case Skill(skillnum).Type
+                    Case SKILL_TYPE_HEALHP
+                        SkillPlayer_Effect(Vitals.HP, True, Index, Vital, skillnum)
                         DidCast = True
-                    Case SPELL_TYPE_HEALMP
-                        SpellPlayer_Effect(Vitals.MP, True, Index, Vital, spellnum)
+                    Case SKILL_TYPE_HEALMP
+                        SkillPlayer_Effect(Vitals.MP, True, Index, Vital, skillnum)
                         DidCast = True
-                    Case SPELL_TYPE_WARP
-                        SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
-                        PlayerWarp(Index, Spell(spellnum).Map, Spell(spellnum).x, Spell(spellnum).y)
-                        SendAnimation(GetPlayerMap(Index), Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
+                    Case SKILL_TYPE_WARP
+                        SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
+                        PlayerWarp(Index, Skill(skillnum).Map, Skill(skillnum).x, Skill(skillnum).y)
+                        SendAnimation(GetPlayerMap(Index), Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
                         DidCast = True
                 End Select
 
             Case 1, 3 ' self-cast AOE & targetted AOE
-                If SpellCastType = 1 Then
+                If SkillCastType = 1 Then
                     x = GetPlayerX(Index)
                     y = GetPlayerY(Index)
-                ElseIf SpellCastType = 3 Then
+                ElseIf SkillCastType = 3 Then
                     TargetType = TempPlayer(Index).TargetType
                     Target = TempPlayer(Index).Target
 
@@ -905,11 +908,11 @@
 
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
                         PlayerMsg(Index, "Target not in range.")
-                        SendClearSpellBuffer(Index)
+                        SendClearSkillBuffer(Index)
                     End If
                 End If
-                Select Case Spell(spellnum).Type
-                    Case SPELL_TYPE_DAMAGEHP
+                Select Case Skill(skillnum).Type
+                    Case SKILL_TYPE_DAMAGEHP
                         DidCast = True
                         For i = 1 To MAX_PLAYERS
                             If IsPlaying(i) Then
@@ -917,8 +920,8 @@
                                     If GetPlayerMap(i) = GetPlayerMap(Index) Then
                                         If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
                                             If CanAttackPlayer(Index, i, True) Then
-                                                SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, i)
-                                                AttackPlayer(Index, i, Vital, spellnum)
+                                                SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, i)
+                                                AttackPlayer(Index, i, Vital, skillnum)
                                             End If
                                         End If
                                     End If
@@ -930,24 +933,24 @@
                                 If MapNpc(MapNum).Npc(i).Vital(Vitals.HP) > 0 Then
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
                                         If CanAttackNpc(Index, i, True) Then
-                                            SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_NPC, i)
-                                            AttackNpc(Index, i, Vital, spellnum)
-                                            If Spell(spellnum).KnockBack = 1 Then
-                                                KnockBackNpc(Index, Target, spellnum)
+                                            SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_NPC, i)
+                                            AttackNpc(Index, i, Vital, skillnum)
+                                            If Skill(skillnum).KnockBack = 1 Then
+                                                KnockBackNpc(Index, Target, skillnum)
                                             End If
                                         End If
                                     End If
                                 End If
                             End If
                         Next
-                    Case SPELL_TYPE_HEALHP, SPELL_TYPE_HEALMP, SPELL_TYPE_DAMAGEMP
-                        If Spell(spellnum).Type = SPELL_TYPE_HEALHP Then
+                    Case SKILL_TYPE_HEALHP, SKILL_TYPE_HEALMP, SKILL_TYPE_DAMAGEMP
+                        If Skill(skillnum).Type = SKILL_TYPE_HEALHP Then
                             VitalType = Vitals.HP
                             increment = True
-                        ElseIf Spell(spellnum).Type = SPELL_TYPE_HEALMP Then
+                        ElseIf Skill(skillnum).Type = SKILL_TYPE_HEALMP Then
                             VitalType = Vitals.MP
                             increment = True
-                        ElseIf Spell(spellnum).Type = SPELL_TYPE_DAMAGEMP Then
+                        ElseIf Skill(skillnum).Type = SKILL_TYPE_DAMAGEMP Then
                             VitalType = Vitals.MP
                             increment = False
                         End If
@@ -957,7 +960,7 @@
                             If IsPlaying(i) Then
                                 If GetPlayerMap(i) = GetPlayerMap(Index) Then
                                     If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
-                                        SpellPlayer_Effect(VitalType, increment, i, Vital, spellnum)
+                                        SkillPlayer_Effect(VitalType, increment, i, Vital, skillnum)
                                     End If
                                 End If
                             End If
@@ -966,7 +969,7 @@
                             If MapNpc(MapNum).Npc(i).Num > 0 Then
                                 If MapNpc(MapNum).Npc(i).Vital(Vitals.HP) > 0 Then
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
-                                        SpellNpc_Effect(VitalType, increment, i, Vital, spellnum, MapNum)
+                                        SkillNpc_Effect(VitalType, increment, i, Vital, skillnum, MapNum)
                                     End If
                                 End If
                             End If
@@ -991,65 +994,65 @@
 
                 If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
                     PlayerMsg(Index, "Target not in range.")
-                    SendClearSpellBuffer(Index)
+                    SendClearSkillBuffer(Index)
                     Exit Sub
                 End If
 
-                Select Case Spell(spellnum).Type
-                    Case SPELL_TYPE_DAMAGEHP
+                Select Case Skill(skillnum).Type
+                    Case SKILL_TYPE_DAMAGEHP
                         If TempPlayer(Index).TargetType = TARGET_TYPE_PLAYER Then
                             If CanAttackPlayer(Index, Target, True) Then
                                 If Vital > 0 Then
-                                    SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, Target)
-                                    AttackPlayer(Index, Target, Vital, spellnum)
+                                    SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Target)
+                                    AttackPlayer(Index, Target, Vital, skillnum)
                                     DidCast = True
                                 End If
                             End If
                         Else
                             If CanAttackNpc(Index, Target, True) Then
                                 If Vital > 0 Then
-                                    SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_NPC, Target)
-                                    AttackNpc(Index, Target, Vital, spellnum)
-                                    If Spell(spellnum).KnockBack = 1 Then
-                                        KnockBackNpc(Index, Target, spellnum)
+                                    SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_NPC, Target)
+                                    AttackNpc(Index, Target, Vital, skillnum)
+                                    If Skill(skillnum).KnockBack = 1 Then
+                                        KnockBackNpc(Index, Target, skillnum)
                                     End If
                                     DidCast = True
                                 End If
                             End If
                         End If
 
-                    Case SPELL_TYPE_DAMAGEMP, SPELL_TYPE_HEALMP, SPELL_TYPE_HEALHP
-                        If Spell(spellnum).Type = SPELL_TYPE_DAMAGEMP Then
+                    Case SKILL_TYPE_DAMAGEMP, SKILL_TYPE_HEALMP, SKILL_TYPE_HEALHP
+                        If Skill(skillnum).Type = SKILL_TYPE_DAMAGEMP Then
                             VitalType = Vitals.MP
                             increment = False
-                        ElseIf Spell(spellnum).Type = SPELL_TYPE_HEALMP Then
+                        ElseIf Skill(skillnum).Type = SKILL_TYPE_HEALMP Then
                             VitalType = Vitals.MP
                             increment = True
-                        ElseIf Spell(spellnum).Type = SPELL_TYPE_HEALHP Then
+                        ElseIf Skill(skillnum).Type = SKILL_TYPE_HEALHP Then
                             VitalType = Vitals.HP
                             increment = True
                         End If
 
                         If TempPlayer(Index).TargetType = TARGET_TYPE_PLAYER Then
-                            If Spell(spellnum).Type = SPELL_TYPE_DAMAGEMP Then
+                            If Skill(skillnum).Type = SKILL_TYPE_DAMAGEMP Then
                                 If CanAttackPlayer(Index, Target, True) Then
-                                    SpellPlayer_Effect(VitalType, increment, Target, Vital, spellnum)
+                                    SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
                                 End If
                             Else
-                                SpellPlayer_Effect(VitalType, increment, Target, Vital, spellnum)
+                                SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
                             End If
                         Else
-                            If Spell(spellnum).Type = SPELL_TYPE_DAMAGEMP Then
+                            If Skill(skillnum).Type = SKILL_TYPE_DAMAGEMP Then
                                 If CanAttackNpc(Index, Target, True) Then
-                                    SpellNpc_Effect(VitalType, increment, Target, Vital, spellnum, MapNum)
+                                    SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
                                 End If
                             Else
-                                SpellNpc_Effect(VitalType, increment, Target, Vital, spellnum, MapNum)
+                                SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
                             End If
                         End If
                 End Select
             Case 4 ' Projectile
-                PlayerFireProjectile(Index, spellnum)
+                PlayerFireProjectile(Index, skillnum)
 
                 DidCast = True
         End Select
@@ -1057,12 +1060,12 @@
         If DidCast Then
             SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - MPCost)
             SendVital(Index, Vitals.MP)
-            TempPlayer(Index).SpellCD(spellslot) = GetTickCount() + (Spell(spellnum).CDTime * 1000)
-            SendCooldown(Index, spellslot)
+            TempPlayer(Index).SkillCD(skillslot) = GetTickCount() + (Skill(skillnum).CDTime * 1000)
+            SendCooldown(Index, skillslot)
         End If
     End Sub
 
-    Public Sub SpellPlayer_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Long, ByVal Damage As Long, ByVal spellnum As Long)
+    Public Sub SkillPlayer_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Long, ByVal Damage As Long, ByVal Skillnum As Long)
         Dim sSymbol As String
         Dim Colour As Long
 
@@ -1076,14 +1079,14 @@
                 Colour = Blue
             End If
 
-            SendAnimation(GetPlayerMap(Index), Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
+            SendAnimation(GetPlayerMap(Index), Skill(Skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
             SendActionMsg(GetPlayerMap(Index), sSymbol & Damage, Colour, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
             If increment Then SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) + Damage)
             If Not increment Then SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) - Damage)
         End If
     End Sub
 
-    Public Sub SpellNpc_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Long, ByVal Damage As Long, ByVal spellnum As Long, ByVal MapNum As Long)
+    Public Sub SkillNpc_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Long, ByVal Damage As Long, ByVal skillnum As Long, ByVal MapNum As Long)
         Dim sSymbol As String
         Dim Colour As Long
 
@@ -1097,7 +1100,7 @@
                 Colour = Blue
             End If
 
-            SendAnimation(MapNum, Spell(spellnum).SpellAnim, 0, 0, TARGET_TYPE_NPC, Index)
+            SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_NPC, Index)
             SendActionMsg(MapNum, sSymbol & Damage, Colour, ACTIONMSG_SCROLL, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
             If increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) + Damage
             If Not increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) - Damage

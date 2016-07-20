@@ -683,11 +683,11 @@ Module ClientGameEditors
                 frmEditor_Item.fraVitals.Visible = False
             End If
 
-            If (frmEditor_Item.cmbType.SelectedIndex = ITEM_TYPE_SPELL) Then
-                frmEditor_Item.fraSpell.Visible = True
-                frmEditor_Item.scrlSpell.Value = .Data1
+            If (frmEditor_Item.cmbType.SelectedIndex = ITEM_TYPE_SKILL) Then
+                frmEditor_Item.fraSkill.Visible = True
+                frmEditor_Item.scrlSkill.Value = .Data1
             Else
-                frmEditor_Item.fraSpell.Visible = False
+                frmEditor_Item.fraSkill.Visible = False
             End If
 
             If frmEditor_Item.cmbType.SelectedIndex = ITEM_TYPE_FURNITURE Then
@@ -900,16 +900,16 @@ Module ClientGameEditors
     End Sub
 #End Region
 
-#Region "Spell Editor"
-    Public Sub SpellEditorInit()
+#Region "Skill Editor"
+    Public Sub SkillEditorInit()
         Dim i As Long
 
-        If frmEditor_Spell.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Spell.lstIndex.SelectedIndex + 1
+        If frmEditor_Skill.Visible = False Then Exit Sub
+        EditorIndex = frmEditor_Skill.lstIndex.SelectedIndex + 1
 
-        If Spell(EditorIndex).Name Is Nothing Then Spell(EditorIndex).Name = ""
+        If Skill(EditorIndex).Name Is Nothing Then Skill(EditorIndex).Name = ""
 
-        With frmEditor_Spell
+        With frmEditor_Skill
             ' set max values
             .scrlAnimCast.Maximum = MAX_ANIMATIONS
             .scrlAnim.Maximum = MAX_ANIMATIONS
@@ -927,78 +927,78 @@ Module ClientGameEditors
             .cmbClass.SelectedIndex = 0
 
             ' set values
-            .txtName.Text = Trim$(Spell(EditorIndex).Name)
-            .cmbType.SelectedIndex = Spell(EditorIndex).Type
-            .scrlMP.Value = Spell(EditorIndex).MPCost
-            .scrlLevel.Value = Spell(EditorIndex).LevelReq
-            .scrlAccess.Value = Spell(EditorIndex).AccessReq
-            .cmbClass.SelectedIndex = Spell(EditorIndex).ClassReq
-            .scrlCast.Value = Spell(EditorIndex).CastTime
-            .scrlCool.Value = Spell(EditorIndex).CDTime
-            .scrlIcon.Value = Spell(EditorIndex).Icon
-            .scrlMap.Value = Spell(EditorIndex).Map
-            .scrlX.Value = Spell(EditorIndex).X
-            .scrlY.Value = Spell(EditorIndex).Y
-            .scrlDir.Value = Spell(EditorIndex).Dir
-            .scrlVital.Value = Spell(EditorIndex).Vital
-            .scrlDuration.Value = Spell(EditorIndex).Duration
-            .scrlInterval.Value = Spell(EditorIndex).Interval
-            .scrlRange.Value = Spell(EditorIndex).Range
-            If Spell(EditorIndex).IsAoE = True Then
+            .txtName.Text = Trim$(Skill(EditorIndex).Name)
+            .cmbType.SelectedIndex = Skill(EditorIndex).Type
+            .scrlMP.Value = Skill(EditorIndex).MPCost
+            .scrlLevel.Value = Skill(EditorIndex).LevelReq
+            .scrlAccess.Value = Skill(EditorIndex).AccessReq
+            .cmbClass.SelectedIndex = Skill(EditorIndex).ClassReq
+            .scrlCast.Value = Skill(EditorIndex).CastTime
+            .scrlCool.Value = Skill(EditorIndex).CDTime
+            .scrlIcon.Value = Skill(EditorIndex).Icon
+            .scrlMap.Value = Skill(EditorIndex).Map
+            .scrlX.Value = Skill(EditorIndex).X
+            .scrlY.Value = Skill(EditorIndex).Y
+            .scrlDir.Value = Skill(EditorIndex).Dir
+            .scrlVital.Value = Skill(EditorIndex).Vital
+            .scrlDuration.Value = Skill(EditorIndex).Duration
+            .scrlInterval.Value = Skill(EditorIndex).Interval
+            .scrlRange.Value = Skill(EditorIndex).Range
+            If Skill(EditorIndex).IsAoE = True Then
                 .chkAOE.Checked = True
             Else
                 .chkAOE.Checked = False
             End If
-            .scrlAOE.Value = Spell(EditorIndex).AoE
-            .scrlAnimCast.Value = Spell(EditorIndex).CastAnim
-            .scrlAnim.Value = Spell(EditorIndex).SpellAnim
-            .scrlStun.Value = Spell(EditorIndex).StunDuration
+            .scrlAOE.Value = Skill(EditorIndex).AoE
+            .scrlAnimCast.Value = Skill(EditorIndex).CastAnim
+            .scrlAnim.Value = Skill(EditorIndex).SkillAnim
+            .scrlStun.Value = Skill(EditorIndex).StunDuration
 
-            If Spell(EditorIndex).IsProjectile = 1 Then
+            If Skill(EditorIndex).IsProjectile = 1 Then
                 .chkProjectile.Checked = True
             Else
                 .chkProjectile.Checked = False
             End If
-            .scrlProjectile.Value = Spell(EditorIndex).Projectile
+            .scrlProjectile.Value = Skill(EditorIndex).Projectile
 
-            If Spell(EditorIndex).KnockBack = 1 Then
+            If Skill(EditorIndex).KnockBack = 1 Then
                 .chkKnockBack.Checked = True
             Else
                 .chkKnockBack.Checked = False
             End If
-            .cmbKnockBackTiles.SelectedIndex = Spell(EditorIndex).KnockBackTiles
+            .cmbKnockBackTiles.SelectedIndex = Skill(EditorIndex).KnockBackTiles
         End With
 
-        EditorSpell_BltIcon()
+        EditorSkill_BltIcon()
 
-        Spell_Changed(EditorIndex) = True
+        Skill_Changed(EditorIndex) = True
     End Sub
 
-    Public Sub SpellEditorOk()
+    Public Sub SkillEditorOk()
         Dim i As Long
 
-        For i = 1 To MAX_SPELLS
-            If Spell_Changed(i) Then
-                Call SendSaveSpell(i)
+        For i = 1 To MAX_SKILLS
+            If Skill_Changed(i) Then
+                SendSaveSkill(i)
             End If
         Next
 
-        frmEditor_Spell.Visible = False
+        frmEditor_Skill.Visible = False
         Editor = 0
-        ClearChanged_Spell()
+        ClearChanged_Skill()
     End Sub
 
-    Public Sub SpellEditorCancel()
+    Public Sub SkillEditorCancel()
         Editor = 0
-        frmEditor_Spell.Visible = False
-        ClearChanged_Spell()
-        ClearSpells()
-        SendRequestSpells()
+        frmEditor_Skill.Visible = False
+        ClearChanged_Skill()
+        ClearSkills()
+        SendRequestSkills()
     End Sub
 
-    Public Sub ClearChanged_Spell()
-        For i = 1 To MAX_SPELLS
-            Spell_Changed(i) = False
+    Public Sub ClearChanged_Skill()
+        For i = 1 To MAX_SKILLS
+            Skill_Changed(i) = False
         Next
     End Sub
 #End Region

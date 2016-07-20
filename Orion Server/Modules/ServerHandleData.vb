@@ -44,8 +44,8 @@
         Packets.Add(ClientPackets.CSaveNpc, AddressOf Packet_SaveNPC)
         Packets.Add(ClientPackets.CRequestEditShop, AddressOf Packet_EditShop)
         Packets.Add(ClientPackets.CSaveShop, AddressOf Packet_SaveShop)
-        Packets.Add(ClientPackets.CRequestEditSpell, AddressOf Packet_EditSpell)
-        Packets.Add(ClientPackets.CSaveSpell, AddressOf Packet_SaveSpell)
+        Packets.Add(ClientPackets.CRequestEditSkill, AddressOf Packet_EditSkill)
+        Packets.Add(ClientPackets.CSaveSkill, AddressOf Packet_SaveSkill)
         Packets.Add(ClientPackets.CSetAccess, AddressOf Packet_SetAccess)
         Packets.Add(ClientPackets.CWhosOnline, AddressOf Packet_WhosOnline)
         Packets.Add(ClientPackets.CSetMotd, AddressOf Packet_SetMotd)
@@ -53,7 +53,7 @@
         Packets.Add(ClientPackets.CParty, AddressOf Packet_Party)
         Packets.Add(ClientPackets.CJoinParty, AddressOf Packet_JoinParty)
         Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
-        Packets.Add(ClientPackets.CSpells, AddressOf Packet_Spells)
+        Packets.Add(ClientPackets.CSkills, AddressOf Packet_Skills)
         Packets.Add(ClientPackets.CCast, AddressOf Packet_Cast)
         Packets.Add(ClientPackets.CQuit, AddressOf Packet_QuitGame)
         Packets.Add(ClientPackets.CSwapInvSlots, AddressOf Packet_SwapInvSlots)
@@ -70,10 +70,10 @@
         Packets.Add(ClientPackets.CRequestEditAnimation, AddressOf Packet_EditAnimation)
         Packets.Add(ClientPackets.CSaveAnimation, AddressOf Packet_SaveAnimation)
         Packets.Add(ClientPackets.CRequestAnimations, AddressOf Packet_RequestAnimations)
-        Packets.Add(ClientPackets.CRequestSpells, AddressOf Packet_RequestSpells)
+        Packets.Add(ClientPackets.CRequestSkills, AddressOf Packet_RequestSkills)
         Packets.Add(ClientPackets.CRequestShops, AddressOf Packet_RequestShops)
         Packets.Add(ClientPackets.CRequestLevelUp, AddressOf Packet_RequestLevelUp)
-        Packets.Add(ClientPackets.CForgetSpell, AddressOf Packet_ForgetSpell)
+        Packets.Add(ClientPackets.CForgetSkill, AddressOf Packet_ForgetSkill)
         Packets.Add(ClientPackets.CCloseShop, AddressOf Packet_CloseShop)
         Packets.Add(ClientPackets.CBuyItem, AddressOf Packet_BuyItem)
         Packets.Add(ClientPackets.CSellItem, AddressOf Packet_SellItem)
@@ -374,47 +374,41 @@
 
         If Buffer.ReadLong <> ClientPackets.CPlayerMove Then Exit Sub
 
-        If TempPlayer(index).GettingMap = YES Then
-            Exit Sub
-        End If
+        If TempPlayer(index).GettingMap = YES Then Exit Sub
 
-        Dir = Buffer.ReadLong 'CLng(Parse(1))
-        movement = Buffer.ReadLong 'CLng(Parse(2))
+        Dir = Buffer.ReadLong
+        movement = Buffer.ReadLong
         tmpX = Buffer.ReadLong
         tmpY = Buffer.ReadLong
         Buffer = Nothing
 
         ' Prevent hacking
-        If Dir < DIR_UP Or Dir > DIR_RIGHT Then
-            Exit Sub
-        End If
+        If Dir < DIR_UP Or Dir > DIR_RIGHT Then Exit Sub
 
         ' Prevent hacking
-        If movement < 1 Or movement > 2 Then
-            Exit Sub
-        End If
+        If movement < 1 Or movement > 2 Then Exit Sub
 
-        ' Prevent player from moving if they have casted a spell
-        If TempPlayer(index).SpellBuffer > 0 Then
-            Call SendPlayerXY(index)
+        ' Prevent player from moving if they have casted a skill
+        If TempPlayer(index).SkillBuffer > 0 Then
+            SendPlayerXY(index)
             Exit Sub
         End If
 
         'Cant move if in the bank!
         If TempPlayer(index).InBank Then
-            Call SendPlayerXY(index)
+            SendPlayerXY(index)
             Exit Sub
         End If
 
         ' if stunned, stop them moving
         If TempPlayer(index).StunDuration > 0 Then
-            Call SendPlayerXY(index)
+            SendPlayerXY(index)
             Exit Sub
         End If
 
         ' Prever player from moving if in shop
         If TempPlayer(index).InShop > 0 Then
-            Call SendPlayerXY(index)
+            SendPlayerXY(index)
             Exit Sub
         End If
 
@@ -953,7 +947,7 @@
                         End If
                     End If
 
-                Case ITEM_TYPE_SPELL
+                Case ITEM_TYPE_SKILL
 
                     For i = 1 To Stats.Stat_Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -962,31 +956,31 @@
                         End If
                     Next
 
-                    ' Get the spell num
+                    ' Get the skill num
                     n = Item(GetPlayerInvItemNum(Index, invnum)).Data1
 
                     If n > 0 Then
 
                         ' Make sure they are the right class
-                        If Spell(n).ClassReq = GetPlayerClass(Index) Or Spell(n).ClassReq = 0 Then
+                        If Skill(n).ClassReq = GetPlayerClass(Index) Or Skill(n).ClassReq = 0 Then
                             ' Make sure they are the right level
-                            i = Spell(n).LevelReq
+                            i = Skill(n).LevelReq
 
                             If i <= GetPlayerLevel(Index) Then
-                                i = FindOpenSpellSlot(Index)
+                                i = FindOpenSkillSlot(Index)
 
-                                ' Make sure they have an open spell slot
+                                ' Make sure they have an open skill slot
                                 If i > 0 Then
 
-                                    ' Make sure they dont already have the spell
-                                    If Not HasSpell(Index, n) Then
-                                        SetPlayerSpell(Index, i, n)
+                                    ' Make sure they dont already have the skill
+                                    If Not HasSkill(Index, n) Then
+                                        SetPlayerSkill(Index, i, n)
                                         SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                                         TakeInvItem(Index, GetPlayerInvItemNum(Index, invnum), 0)
-                                        PlayerMsg(Index, "You study the spell carefully.")
-                                        PlayerMsg(Index, "You have learned a new spell!")
+                                        PlayerMsg(Index, "You study the skill carefully.")
+                                        PlayerMsg(Index, "You have learned a new skill!")
                                     Else
-                                        PlayerMsg(Index, "You have already learned this spell!")
+                                        PlayerMsg(Index, "You have already learned this skill!")
                                     End If
 
                                 Else
@@ -994,15 +988,15 @@
                                 End If
 
                             Else
-                                PlayerMsg(Index, "You must be level " & i & " to learn this spell.")
+                                PlayerMsg(Index, "You must be level " & i & " to learn this skill.")
                             End If
 
                         Else
-                            PlayerMsg(Index, "This spell can only be learned by " & CheckGrammar(GetClassName(Spell(n).ClassReq)) & ".")
+                            PlayerMsg(Index, "This skill can only be learned by " & CheckGrammar(GetClassName(Skill(n).ClassReq)) & ".")
                         End If
 
                     Else
-                        PlayerMsg(Index, "This scroll is not connected to a spell, please inform an admin!")
+                        PlayerMsg(Index, "This scroll is not connected to a skill, please inform an admin!")
                     End If
                 Case ITEM_TYPE_FURNITURE
                     PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.")
@@ -1029,7 +1023,7 @@
         If Buffer.ReadLong <> ClientPackets.CAttack Then Exit Sub
 
         ' can't attack whilst casting
-        If TempPlayer(Index).SpellBuffer > 0 Then Exit Sub
+        If TempPlayer(Index).SkillBuffer > 0 Then Exit Sub
 
         ' can't attack whilst stunned
         If TempPlayer(Index).StunDuration > 0 Then Exit Sub
@@ -2171,11 +2165,11 @@
         Call Addlog(GetPlayerName(index) & " saving shop #" & ShopNum & ".", ADMIN_LOG)
     End Sub
 
-    Sub Packet_EditSpell(ByVal index As Long, ByVal data() As Byte)
+    Sub Packet_EditSkill(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadLong <> ClientPackets.CRequestEditSpell Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CRequestEditSkill Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < ADMIN_DEVELOPER Then
@@ -2183,60 +2177,60 @@
         End If
 
         buffer = New ByteBuffer
-        buffer.WriteLong(ServerPackets.SSpellEditor)
+        buffer.WriteLong(ServerPackets.SSkillEditor)
         SendDataTo(index, buffer.ToArray())
 
         buffer = Nothing
     End Sub
 
-    Sub Packet_SaveSpell(ByVal index As Long, ByVal data() As Byte)
+    Sub Packet_SaveSkill(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
-        Dim spellnum As Long
+        Dim skillnum As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadLong <> ClientPackets.CSaveSpell Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CSaveSkill Then Exit Sub
 
-        spellnum = buffer.ReadLong
+        skillnum = buffer.ReadLong
 
         ' Prevent hacking
-        If spellnum < 0 Or spellnum > MAX_SPELLS Then
+        If skillnum < 0 Or skillnum > MAX_SKILLS Then
             Exit Sub
         End If
 
-        Spell(spellnum).AccessReq = buffer.ReadLong()
-        Spell(spellnum).AoE = buffer.ReadLong()
-        Spell(spellnum).CastAnim = buffer.ReadLong()
-        Spell(spellnum).CastTime = buffer.ReadLong()
-        Spell(spellnum).CDTime = buffer.ReadLong()
-        Spell(spellnum).ClassReq = buffer.ReadLong()
-        Spell(spellnum).Dir = buffer.ReadLong()
-        Spell(spellnum).Duration = buffer.ReadLong()
-        Spell(spellnum).Icon = buffer.ReadLong()
-        Spell(spellnum).Interval = buffer.ReadLong()
-        Spell(spellnum).IsAoE = buffer.ReadLong()
-        Spell(spellnum).LevelReq = buffer.ReadLong()
-        Spell(spellnum).Map = buffer.ReadLong()
-        Spell(spellnum).MPCost = buffer.ReadLong()
-        Spell(spellnum).Name = buffer.ReadString()
-        Spell(spellnum).range = buffer.ReadLong()
-        Spell(spellnum).SpellAnim = buffer.ReadLong()
-        Spell(spellnum).StunDuration = buffer.ReadLong()
-        Spell(spellnum).Type = buffer.ReadLong()
-        Spell(spellnum).Vital = buffer.ReadLong()
-        Spell(spellnum).x = buffer.ReadLong()
-        Spell(spellnum).y = buffer.ReadLong()
+        Skill(skillnum).AccessReq = buffer.ReadLong()
+        Skill(skillnum).AoE = buffer.ReadLong()
+        Skill(skillnum).CastAnim = buffer.ReadLong()
+        Skill(skillnum).CastTime = buffer.ReadLong()
+        Skill(skillnum).CDTime = buffer.ReadLong()
+        Skill(skillnum).ClassReq = buffer.ReadLong()
+        Skill(skillnum).Dir = buffer.ReadLong()
+        Skill(skillnum).Duration = buffer.ReadLong()
+        Skill(skillnum).Icon = buffer.ReadLong()
+        Skill(skillnum).Interval = buffer.ReadLong()
+        Skill(skillnum).IsAoE = buffer.ReadLong()
+        Skill(skillnum).LevelReq = buffer.ReadLong()
+        Skill(skillnum).Map = buffer.ReadLong()
+        Skill(skillnum).MPCost = buffer.ReadLong()
+        Skill(skillnum).Name = buffer.ReadString()
+        Skill(skillnum).range = buffer.ReadLong()
+        Skill(skillnum).SkillAnim = buffer.ReadLong()
+        Skill(skillnum).StunDuration = buffer.ReadLong()
+        Skill(skillnum).Type = buffer.ReadLong()
+        Skill(skillnum).Vital = buffer.ReadLong()
+        Skill(skillnum).x = buffer.ReadLong()
+        Skill(skillnum).y = buffer.ReadLong()
 
         'projectiles
-        Spell(spellnum).IsProjectile = buffer.ReadLong()
-        Spell(spellnum).Projectile = buffer.ReadLong()
+        Skill(skillnum).IsProjectile = buffer.ReadLong()
+        Skill(skillnum).Projectile = buffer.ReadLong()
 
-        Spell(spellnum).KnockBack = buffer.ReadLong()
-        Spell(spellnum).KnockBackTiles = buffer.ReadLong()
+        Skill(skillnum).KnockBack = buffer.ReadLong()
+        Skill(skillnum).KnockBackTiles = buffer.ReadLong()
 
         ' Save it
-        SendUpdateSpellToAll(spellnum)
-        SaveSpell(spellnum)
-        Addlog(GetPlayerName(index) & " saved Spell #" & spellnum & ".", ADMIN_LOG)
+        SendUpdateSkillToAll(skillnum)
+        SaveSkill(skillnum)
+        Addlog(GetPlayerName(index) & " saved Skill #" & skillnum & ".", ADMIN_LOG)
 
         buffer = Nothing
     End Sub
@@ -2584,14 +2578,14 @@
         buffer = Nothing
     End Sub
 
-    Sub Packet_Spells(ByVal index As Long, ByVal data() As Byte)
+    Sub Packet_Skills(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadLong <> ClientPackets.CSpells Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CSkills Then Exit Sub
 
-        SendPlayerSpells(index)
+        SendPlayerSkills(index)
 
         buffer = Nothing
     End Sub
@@ -2603,11 +2597,12 @@
         buffer.WriteBytes(data)
         If buffer.ReadLong <> ClientPackets.CCast Then Exit Sub
 
-        ' Spell slot
+        ' Skill slot
         n = buffer.ReadLong
         buffer = Nothing
-        ' set the spell buffer before castin
-        BufferSpell(index, n)
+
+        ' set the skill buffer before castin
+        BufferSkill(index, n)
 
         buffer = Nothing
     End Sub
@@ -2861,13 +2856,13 @@
         buffer = Nothing
     End Sub
 
-    Sub Packet_RequestSpells(ByVal index As Long, ByVal data() As Byte)
+    Sub Packet_RequestSkills(ByVal index As Long, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadLong <> ClientPackets.CRequestSpells Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CRequestSkills Then Exit Sub
 
-        SendSpells(index)
+        SendSkills(index)
 
         buffer = Nothing
     End Sub
@@ -2900,33 +2895,33 @@
         buffer = Nothing
     End Sub
 
-    Sub Packet_ForgetSpell(ByVal index As Long, ByVal data() As Byte)
-        Dim buffer As ByteBuffer, spellslot As Long
+    Sub Packet_ForgetSkill(ByVal index As Long, ByVal data() As Byte)
+        Dim buffer As ByteBuffer, skillslot As Long
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadLong <> ClientPackets.CForgetSpell Then Exit Sub
+        If buffer.ReadLong <> ClientPackets.CForgetSkill Then Exit Sub
 
-        spellslot = buffer.ReadLong
+        skillslot = buffer.ReadLong
 
         ' Check for subscript out of range
-        If spellslot < 1 Or spellslot > MAX_PLAYER_SPELLS Then
+        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then
             Exit Sub
         End If
 
-        ' dont let them forget a spell which is in CD
-        If TempPlayer(index).SpellCD(spellslot) > 0 Then
-            PlayerMsg(index, "Cannot forget a spell which is cooling down!")
+        ' dont let them forget a skill which is in CD
+        If TempPlayer(index).SkillCD(skillslot) > 0 Then
+            PlayerMsg(index, "Cannot forget a skill which is cooling down!")
             Exit Sub
         End If
 
-        ' dont let them forget a spell which is buffered
-        If TempPlayer(index).SpellBuffer = spellslot Then
-            PlayerMsg(index, "Cannot forget a spell which you are casting!")
+        ' dont let them forget a skill which is buffered
+        If TempPlayer(index).SkillBuffer = skillslot Then
+            PlayerMsg(index, "Cannot forget a skill which you are casting!")
             Exit Sub
         End If
 
-        Player(index).Character(TempPlayer(index).CurChar).Spell(spellslot) = 0
-        SendPlayerSpells(index)
+        Player(index).Character(TempPlayer(index).CurChar).Skill(skillslot) = 0
+        SendPlayerSkills(index)
 
         buffer = Nothing
     End Sub

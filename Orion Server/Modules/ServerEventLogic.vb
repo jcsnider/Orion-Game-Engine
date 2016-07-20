@@ -1446,7 +1446,7 @@
                                                                         .CurSlot = 1
                                                                     End If
                                                                 Case 4
-                                                                    If HasSpell(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = True Then
+                                                                    If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1) = True Then
                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                         .CurSlot = 1
@@ -1678,25 +1678,25 @@
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSkills
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
-                                                                If FindOpenSpellSlot(i) > 0 Then
-                                                                    If HasSpell(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = False Then
-                                                                        SetPlayerSpell(i, FindOpenSpellSlot(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                If FindOpenSkillSlot(i) > 0 Then
+                                                                    If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = False Then
+                                                                        SetPlayerSkill(i, FindOpenSkillSlot(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                     Else
-                                                                        'Error, already knows spell
+                                                                        'Error, already knows skill
                                                                     End If
                                                                 Else
-                                                                    'Error, no room for spells
+                                                                    'Error, no room for skills
                                                                 End If
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
-                                                                If HasSpell(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = True Then
-                                                                    For p = 1 To MAX_PLAYER_SPELLS
-                                                                        If Player(i).Character(TempPlayer(i).CurChar).Spell(p) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 Then
-                                                                            SetPlayerSpell(i, p, 0)
+                                                                If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1) = True Then
+                                                                    For p = 1 To MAX_PLAYER_SKILLS
+                                                                        If Player(i).Character(TempPlayer(i).CurChar).Skill(p) = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 Then
+                                                                            SetPlayerSkill(i, p, 0)
                                                                         End If
                                                                     Next
                                                                 End If
                                                             End If
-                                                            SendPlayerSpells(i)
+                                                            SendPlayerSkills(i)
                                                         Case EventType.evChangeClass
                                                             Player(i).Character(TempPlayer(i).CurChar).Classes = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)

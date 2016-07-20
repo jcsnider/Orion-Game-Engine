@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_Spell
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmEditor_Skill
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEditor_Spell
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
@@ -95,7 +95,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox1.Size = New System.Drawing.Size(210, 472)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Spell List"
+        Me.GroupBox1.Text = "Skill List"
         '
         'lstIndex
         '
@@ -114,7 +114,7 @@ Partial Class frmEditor_Spell
         Me.GroupBox2.Size = New System.Drawing.Size(482, 472)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Spell Properties"
+        Me.GroupBox2.Text = "Skill Properties"
         '
         'GroupBox4
         '
@@ -227,9 +227,9 @@ Partial Class frmEditor_Spell
         Me.chkAOE.AutoSize = True
         Me.chkAOE.Location = New System.Drawing.Point(17, 231)
         Me.chkAOE.Name = "chkAOE"
-        Me.chkAOE.Size = New System.Drawing.Size(123, 17)
+        Me.chkAOE.Size = New System.Drawing.Size(119, 17)
         Me.chkAOE.TabIndex = 17
-        Me.chkAOE.Text = "Area of Effect Spell?"
+        Me.chkAOE.Text = "Area of Effect Skill?"
         Me.chkAOE.UseVisualStyleBackColor = True
         '
         'scrlRange
@@ -660,7 +660,7 @@ Partial Class frmEditor_Spell
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'frmEditor_Spell
+        'frmEditor_Skill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -672,8 +672,8 @@ Partial Class frmEditor_Spell
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmEditor_Spell"
-        Me.Text = "Spell Editor"
+        Me.Name = "frmEditor_Skill"
+        Me.Text = "Skill Editor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)

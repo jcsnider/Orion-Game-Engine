@@ -842,96 +842,96 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendSpells(ByVal Index As Long)
+    Sub SendSkills(ByVal Index As Long)
         Dim i As Long
 
-        For i = 1 To MAX_SPELLS
+        For i = 1 To MAX_SKILLS
 
-            If Len(Trim$(Spell(i).Name)) > 0 Then
-                SendUpdateSpellTo(Index, i)
+            If Len(Trim$(Skill(i).Name)) > 0 Then
+                SendUpdateSkillTo(Index, i)
             End If
 
         Next
 
     End Sub
 
-    Sub SendUpdateSpellTo(ByVal Index As Long, ByVal spellnum As Long)
+    Sub SendUpdateSkillTo(ByVal Index As Long, ByVal skillnum As Long)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
 
-        Buffer.WriteLong(ServerPackets.SUpdateSpell)
-        Buffer.WriteLong(spellnum)
-        Buffer.WriteLong(Spell(spellnum).AccessReq)
-        Buffer.WriteLong(Spell(spellnum).AoE)
-        Buffer.WriteLong(Spell(spellnum).CastAnim)
-        Buffer.WriteLong(Spell(spellnum).CastTime)
-        Buffer.WriteLong(Spell(spellnum).CDTime)
-        Buffer.WriteLong(Spell(spellnum).ClassReq)
-        Buffer.WriteLong(Spell(spellnum).Dir)
-        Buffer.WriteLong(Spell(spellnum).Duration)
-        Buffer.WriteLong(Spell(spellnum).Icon)
-        Buffer.WriteLong(Spell(spellnum).Interval)
-        Buffer.WriteLong(Spell(spellnum).IsAoE)
-        Buffer.WriteLong(Spell(spellnum).LevelReq)
-        Buffer.WriteLong(Spell(spellnum).Map)
-        Buffer.WriteLong(Spell(spellnum).MPCost)
-        Buffer.WriteString(Trim(Spell(spellnum).Name))
-        Buffer.WriteLong(Spell(spellnum).range)
-        Buffer.WriteLong(Spell(spellnum).SpellAnim)
-        Buffer.WriteLong(Spell(spellnum).StunDuration)
-        Buffer.WriteLong(Spell(spellnum).Type)
-        Buffer.WriteLong(Spell(spellnum).Vital)
-        Buffer.WriteLong(Spell(spellnum).x)
-        Buffer.WriteLong(Spell(spellnum).y)
+        Buffer.WriteLong(ServerPackets.SUpdateSkill)
+        Buffer.WriteLong(skillnum)
+        Buffer.WriteLong(Skill(skillnum).AccessReq)
+        Buffer.WriteLong(Skill(skillnum).AoE)
+        Buffer.WriteLong(Skill(skillnum).CastAnim)
+        Buffer.WriteLong(Skill(skillnum).CastTime)
+        Buffer.WriteLong(Skill(skillnum).CDTime)
+        Buffer.WriteLong(Skill(skillnum).ClassReq)
+        Buffer.WriteLong(Skill(skillnum).Dir)
+        Buffer.WriteLong(Skill(skillnum).Duration)
+        Buffer.WriteLong(Skill(skillnum).Icon)
+        Buffer.WriteLong(Skill(skillnum).Interval)
+        Buffer.WriteLong(Skill(skillnum).IsAoE)
+        Buffer.WriteLong(Skill(skillnum).LevelReq)
+        Buffer.WriteLong(Skill(skillnum).Map)
+        Buffer.WriteLong(Skill(skillnum).MPCost)
+        Buffer.WriteString(Trim(Skill(skillnum).Name))
+        Buffer.WriteLong(Skill(skillnum).range)
+        Buffer.WriteLong(Skill(skillnum).SkillAnim)
+        Buffer.WriteLong(Skill(skillnum).StunDuration)
+        Buffer.WriteLong(Skill(skillnum).Type)
+        Buffer.WriteLong(Skill(skillnum).Vital)
+        Buffer.WriteLong(Skill(skillnum).x)
+        Buffer.WriteLong(Skill(skillnum).y)
 
         'projectiles
-        Buffer.WriteLong(Spell(spellnum).IsProjectile)
-        Buffer.WriteLong(Spell(spellnum).Projectile)
+        Buffer.WriteLong(Skill(skillnum).IsProjectile)
+        Buffer.WriteLong(Skill(skillnum).Projectile)
 
-        Buffer.WriteLong(Spell(spellnum).KnockBack)
-        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+        Buffer.WriteLong(Skill(skillnum).KnockBack)
+        Buffer.WriteLong(Skill(skillnum).KnockBackTiles)
 
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
-    Sub SendUpdateSpellToAll(ByVal spellnum As Long)
+    Sub SendUpdateSkillToAll(ByVal skillnum As Long)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
 
-        Buffer.WriteLong(ServerPackets.SUpdateSpell)
-        Buffer.WriteLong(spellnum)
-        Buffer.WriteLong(Spell(spellnum).AccessReq)
-        Buffer.WriteLong(Spell(spellnum).AoE)
-        Buffer.WriteLong(Spell(spellnum).CastAnim)
-        Buffer.WriteLong(Spell(spellnum).CastTime)
-        Buffer.WriteLong(Spell(spellnum).CDTime)
-        Buffer.WriteLong(Spell(spellnum).ClassReq)
-        Buffer.WriteLong(Spell(spellnum).Dir)
-        Buffer.WriteLong(Spell(spellnum).Duration)
-        Buffer.WriteLong(Spell(spellnum).Icon)
-        Buffer.WriteLong(Spell(spellnum).Interval)
-        Buffer.WriteLong(Spell(spellnum).IsAoE)
-        Buffer.WriteLong(Spell(spellnum).LevelReq)
-        Buffer.WriteLong(Spell(spellnum).Map)
-        Buffer.WriteLong(Spell(spellnum).MPCost)
-        Buffer.WriteString(Spell(spellnum).Name)
-        Buffer.WriteLong(Spell(spellnum).range)
-        Buffer.WriteLong(Spell(spellnum).SpellAnim)
-        Buffer.WriteLong(Spell(spellnum).StunDuration)
-        Buffer.WriteLong(Spell(spellnum).Type)
-        Buffer.WriteLong(Spell(spellnum).Vital)
-        Buffer.WriteLong(Spell(spellnum).x)
-        Buffer.WriteLong(Spell(spellnum).y)
+        Buffer.WriteLong(ServerPackets.SUpdateSkill)
+        Buffer.WriteLong(skillnum)
+        Buffer.WriteLong(Skill(skillnum).AccessReq)
+        Buffer.WriteLong(Skill(skillnum).AoE)
+        Buffer.WriteLong(Skill(skillnum).CastAnim)
+        Buffer.WriteLong(Skill(skillnum).CastTime)
+        Buffer.WriteLong(Skill(skillnum).CDTime)
+        Buffer.WriteLong(Skill(skillnum).ClassReq)
+        Buffer.WriteLong(Skill(skillnum).Dir)
+        Buffer.WriteLong(Skill(skillnum).Duration)
+        Buffer.WriteLong(Skill(skillnum).Icon)
+        Buffer.WriteLong(Skill(skillnum).Interval)
+        Buffer.WriteLong(Skill(skillnum).IsAoE)
+        Buffer.WriteLong(Skill(skillnum).LevelReq)
+        Buffer.WriteLong(Skill(skillnum).Map)
+        Buffer.WriteLong(Skill(skillnum).MPCost)
+        Buffer.WriteString(Skill(skillnum).Name)
+        Buffer.WriteLong(Skill(skillnum).range)
+        Buffer.WriteLong(Skill(skillnum).SkillAnim)
+        Buffer.WriteLong(Skill(skillnum).StunDuration)
+        Buffer.WriteLong(Skill(skillnum).Type)
+        Buffer.WriteLong(Skill(skillnum).Vital)
+        Buffer.WriteLong(Skill(skillnum).x)
+        Buffer.WriteLong(Skill(skillnum).y)
 
         'projectiles
-        Buffer.WriteLong(Spell(spellnum).IsProjectile)
-        Buffer.WriteLong(Spell(spellnum).Projectile)
+        Buffer.WriteLong(Skill(skillnum).IsProjectile)
+        Buffer.WriteLong(Skill(skillnum).Projectile)
 
-        Buffer.WriteLong(Spell(spellnum).KnockBack)
-        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+        Buffer.WriteLong(Skill(skillnum).KnockBack)
+        Buffer.WriteLong(Skill(skillnum).KnockBackTiles)
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
@@ -1652,16 +1652,16 @@ Module ServerTCP
 
         i = 0
 
-        For x = 1 To MAX_SPELLS
+        For x = 1 To MAX_SKILLS
 
-            If Len(Trim$(Spell(x).Name)) > 0 Then
+            If Len(Trim$(Skill(x).Name)) > 0 Then
                 i = i + 1
             End If
 
         Next
 
         buffer.WriteLong(i)
-        buffer.WriteBytes(SpellsData)
+        buffer.WriteBytes(SkillsData)
 
         i = 0
 
@@ -1777,11 +1777,11 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendClearSpellBuffer(ByVal Index As Long)
+    Sub SendClearSkillBuffer(ByVal Index As Long)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ServerPackets.SClearSpellBuffer)
+        Buffer.WriteLong(ServerPackets.SClearSkillBuffer)
 
         SendDataTo(Index, Buffer.ToArray())
 
@@ -1918,14 +1918,14 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendPlayerSpells(ByVal Index As Long)
+    Sub SendPlayerSkills(ByVal Index As Long)
         Dim i As Long
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ServerPackets.SSpells)
+        Buffer.WriteLong(ServerPackets.SSkills)
 
-        For i = 1 To MAX_PLAYER_SPELLS
-            Buffer.WriteLong(GetPlayerSpell(Index, i))
+        For i = 1 To MAX_PLAYER_SKILLS
+            Buffer.WriteLong(GetPlayerSkill(Index, i))
         Next
 
         SendDataTo(Index, Buffer.ToArray())

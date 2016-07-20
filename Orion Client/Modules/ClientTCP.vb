@@ -638,57 +638,57 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendRequestEditSpell()
+    Public Sub SendRequestEditSkill()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CRequestEditSpell)
+        Buffer.WriteLong(ClientPackets.CRequestEditSkill)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
-    Sub SendRequestSpells()
+    Sub SendRequestSkills()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteLong(ClientPackets.CRequestSpells)
+        Buffer.WriteLong(ClientPackets.CRequestSkills)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
-    Public Sub SendSaveSpell(ByVal spellnum As Long)
+    Public Sub SendSaveSkill(ByVal skillnum As Long)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteLong(ClientPackets.CSaveSpell)
-        Buffer.WriteLong(spellnum)
+        Buffer.WriteLong(ClientPackets.CSaveSkill)
+        Buffer.WriteLong(skillnum)
 
-        Buffer.WriteLong(Spell(spellnum).AccessReq)
-        Buffer.WriteLong(Spell(spellnum).AoE)
-        Buffer.WriteLong(Spell(spellnum).CastAnim)
-        Buffer.WriteLong(Spell(spellnum).CastTime)
-        Buffer.WriteLong(Spell(spellnum).CDTime)
-        Buffer.WriteLong(Spell(spellnum).ClassReq)
-        Buffer.WriteLong(Spell(spellnum).Dir)
-        Buffer.WriteLong(Spell(spellnum).Duration)
-        Buffer.WriteLong(Spell(spellnum).Icon)
-        Buffer.WriteLong(Spell(spellnum).Interval)
-        Buffer.WriteLong(Spell(spellnum).IsAoE)
-        Buffer.WriteLong(Spell(spellnum).LevelReq)
-        Buffer.WriteLong(Spell(spellnum).Map)
-        Buffer.WriteLong(Spell(spellnum).MPCost)
-        Buffer.WriteString(Spell(spellnum).Name)
-        Buffer.WriteLong(Spell(spellnum).Range)
-        Buffer.WriteLong(Spell(spellnum).SpellAnim)
-        Buffer.WriteLong(Spell(spellnum).StunDuration)
-        Buffer.WriteLong(Spell(spellnum).Type)
-        Buffer.WriteLong(Spell(spellnum).Vital)
-        Buffer.WriteLong(Spell(spellnum).X)
-        Buffer.WriteLong(Spell(spellnum).Y)
+        Buffer.WriteLong(Skill(skillnum).AccessReq)
+        Buffer.WriteLong(Skill(skillnum).AoE)
+        Buffer.WriteLong(Skill(skillnum).CastAnim)
+        Buffer.WriteLong(Skill(skillnum).CastTime)
+        Buffer.WriteLong(Skill(skillnum).CDTime)
+        Buffer.WriteLong(Skill(skillnum).ClassReq)
+        Buffer.WriteLong(Skill(skillnum).Dir)
+        Buffer.WriteLong(Skill(skillnum).Duration)
+        Buffer.WriteLong(Skill(skillnum).Icon)
+        Buffer.WriteLong(Skill(skillnum).Interval)
+        Buffer.WriteLong(Skill(skillnum).IsAoE)
+        Buffer.WriteLong(Skill(skillnum).LevelReq)
+        Buffer.WriteLong(Skill(skillnum).Map)
+        Buffer.WriteLong(Skill(skillnum).MPCost)
+        Buffer.WriteString(Skill(skillnum).Name)
+        Buffer.WriteLong(Skill(skillnum).Range)
+        Buffer.WriteLong(Skill(skillnum).SkillAnim)
+        Buffer.WriteLong(Skill(skillnum).StunDuration)
+        Buffer.WriteLong(Skill(skillnum).Type)
+        Buffer.WriteLong(Skill(skillnum).Vital)
+        Buffer.WriteLong(Skill(skillnum).X)
+        Buffer.WriteLong(Skill(skillnum).Y)
 
-        Buffer.WriteLong(Spell(spellnum).IsProjectile)
-        Buffer.WriteLong(Spell(spellnum).Projectile)
+        Buffer.WriteLong(Skill(skillnum).IsProjectile)
+        Buffer.WriteLong(Skill(skillnum).Projectile)
 
-        Buffer.WriteLong(Spell(spellnum).KnockBack)
-        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+        Buffer.WriteLong(Skill(skillnum).KnockBack)
+        Buffer.WriteLong(Skill(skillnum).KnockBackTiles)
 
         SendData(Buffer.ToArray())
 
@@ -1089,34 +1089,34 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub ForgetSpell(ByVal spellslot As Long)
+    Public Sub ForgetSkill(ByVal skillslot As Long)
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If spellslot < 1 Or spellslot > MAX_PLAYER_SPELLS Then
+        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then
             Exit Sub
         End If
 
-        ' dont let them forget a spell which is in CD
-        If SpellCD(spellslot) > 0 Then
-            AddText("Cannot forget a spell which is cooling down!", AlertColor)
+        ' dont let them forget a skill which is in CD
+        If SkillCD(skillslot) > 0 Then
+            AddText("Cannot forget a skill which is cooling down!", AlertColor)
             Exit Sub
         End If
 
-        ' dont let them forget a spell which is buffered
-        If SpellBuffer = spellslot Then
-            AddText("Cannot forget a spell which you are casting!", AlertColor)
+        ' dont let them forget a skill which is buffered
+        If SkillBuffer = skillslot Then
+            AddText("Cannot forget a skill which you are casting!", AlertColor)
             Exit Sub
         End If
 
-        If PlayerSpells(spellslot) > 0 Then
+        If PlayerSkills(skillslot) > 0 Then
             Buffer = New ByteBuffer
-            Buffer.WriteLong(ClientPackets.CForgetSpell)
-            Buffer.WriteLong(spellslot)
+            Buffer.WriteLong(ClientPackets.CForgetSkill)
+            Buffer.WriteLong(skillslot)
             SendData(Buffer.ToArray())
             Buffer = Nothing
         Else
-            AddText("No spell here.", AlertColor)
+            AddText("No skill found.", AlertColor)
         End If
     End Sub
 

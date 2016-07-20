@@ -50,7 +50,7 @@ Partial Class frmServer
         Me.btnReloadItems = New System.Windows.Forms.Button()
         Me.btnReloadNPCs = New System.Windows.Forms.Button()
         Me.btnReloadShops = New System.Windows.Forms.Button()
-        Me.btnReloadSpells = New System.Windows.Forms.Button()
+        Me.btnReloadSkills = New System.Windows.Forms.Button()
         Me.btnReloadMaps = New System.Windows.Forms.Button()
         Me.btnReloadClasses = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
@@ -268,7 +268,7 @@ Partial Class frmServer
         Me.GroupBox1.Controls.Add(Me.btnReloadItems)
         Me.GroupBox1.Controls.Add(Me.btnReloadNPCs)
         Me.GroupBox1.Controls.Add(Me.btnReloadShops)
-        Me.GroupBox1.Controls.Add(Me.btnReloadSpells)
+        Me.GroupBox1.Controls.Add(Me.btnReloadSkills)
         Me.GroupBox1.Controls.Add(Me.btnReloadMaps)
         Me.GroupBox1.Controls.Add(Me.btnReloadClasses)
         Me.GroupBox1.Location = New System.Drawing.Point(11, 10)
@@ -332,14 +332,14 @@ Partial Class frmServer
         Me.btnReloadShops.Text = "Shops"
         Me.btnReloadShops.UseVisualStyleBackColor = True
         '
-        'btnReloadSpells
+        'btnReloadSkills
         '
-        Me.btnReloadSpells.Location = New System.Drawing.Point(7, 94)
-        Me.btnReloadSpells.Name = "btnReloadSpells"
-        Me.btnReloadSpells.Size = New System.Drawing.Size(83, 31)
-        Me.btnReloadSpells.TabIndex = 2
-        Me.btnReloadSpells.Text = "Spells"
-        Me.btnReloadSpells.UseVisualStyleBackColor = True
+        Me.btnReloadSkills.Location = New System.Drawing.Point(7, 94)
+        Me.btnReloadSkills.Name = "btnReloadSkills"
+        Me.btnReloadSkills.Size = New System.Drawing.Size(83, 31)
+        Me.btnReloadSkills.TabIndex = 2
+        Me.btnReloadSkills.Text = "Skills"
+        Me.btnReloadSkills.UseVisualStyleBackColor = True
         '
         'btnReloadMaps
         '
@@ -671,7 +671,7 @@ Partial Class frmServer
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnReloadNPCs As System.Windows.Forms.Button
     Friend WithEvents btnReloadShops As System.Windows.Forms.Button
-    Friend WithEvents btnReloadSpells As System.Windows.Forms.Button
+    Friend WithEvents btnReloadSkills As System.Windows.Forms.Button
     Friend WithEvents btnReloadMaps As System.Windows.Forms.Button
     Friend WithEvents btnReloadClasses As System.Windows.Forms.Button
     Friend WithEvents btnReloadAnimations As System.Windows.Forms.Button

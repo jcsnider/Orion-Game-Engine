@@ -5,7 +5,7 @@
 
         If VbKeyControl Then
             If InEvent = True Then Exit Sub
-            If SpellBuffer > 0 Then Exit Sub ' currently casting a spell, can't attack
+            If SkillBuffer > 0 Then Exit Sub ' currently casting a skill, can't attack
             If StunDuration > 0 Then Exit Sub ' stunned, can't attack
 
             ' speed from weapon
@@ -130,8 +130,8 @@
             Exit Function
         End If
 
-        ' Make sure they haven't just casted a spell
-        If SpellBuffer > 0 Then
+        ' Make sure they haven't just casted a skill
+        If SkillBuffer > 0 Then
             CanMove = False
             Exit Function
         End If
@@ -495,41 +495,41 @@
         GetPlayerGatherSkillMaxExp = Player(Index).GatherSkills(SkillSlot).SkillNextLvlExp
     End Function
 
-    Public Sub PlayerCastSpell(ByVal spellslot As Long)
+    Public Sub PlayerCastSkill(ByVal skillslot As Long)
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If spellslot < 1 Or spellslot > MAX_PLAYER_SPELLS Then
+        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then
             Exit Sub
         End If
 
-        If SpellCD(spellslot) > 0 Then
-            AddText("Spell has not cooled down yet!", AlertColor)
+        If SkillCD(skillslot) > 0 Then
+            AddText("Skill has not cooled down yet!", AlertColor)
             Exit Sub
         End If
 
         ' Check if player has enough MP
-        If GetPlayerVital(MyIndex, Vitals.MP) < Spell(PlayerSpells(spellslot)).MPCost Then
-            AddText("Not enough MP to cast " & Trim$(Spell(PlayerSpells(spellslot)).Name) & ".", AlertColor)
+        If GetPlayerVital(MyIndex, Vitals.MP) < Skill(PlayerSkills(skillslot)).MPCost Then
+            AddText("Not enough MP to cast " & Trim$(Skill(PlayerSkills(skillslot)).Name) & ".", AlertColor)
             Exit Sub
         End If
 
-        If PlayerSpells(spellslot) > 0 Then
+        If PlayerSkills(skillslot) > 0 Then
             If GetTickCount() > Player(MyIndex).AttackTimer + 1000 Then
                 If Player(MyIndex).Moving = 0 Then
                     Buffer = New ByteBuffer
                     Buffer.WriteLong(ClientPackets.CCast)
-                    Buffer.WriteLong(spellslot)
+                    Buffer.WriteLong(skillslot)
                     SendData(Buffer.ToArray())
                     Buffer = Nothing
-                    SpellBuffer = spellslot
-                    SpellBufferTimer = GetTickCount()
+                    SkillBuffer = skillslot
+                    SkillBufferTimer = GetTickCount()
                 Else
                     AddText("Cannot cast while walking!", AlertColor)
                 End If
             End If
         Else
-            AddText("No spell here.", AlertColor)
+            AddText("No skill here.", AlertColor)
         End If
 
     End Sub

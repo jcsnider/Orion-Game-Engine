@@ -1253,118 +1253,118 @@ Module ServerDatabase
 
 #End Region
 
-#Region "Spells"
-    Sub SaveSpells()
+#Region "Skills"
+    Sub SaveSkills()
         Dim i As Long
-        SetStatus("Saving spells... ")
+        SetStatus("Saving skills... ")
 
-        For i = 1 To MAX_SPELLS
-            SaveSpell(i)
+        For i = 1 To MAX_SKILLS
+            SaveSkill(i)
             DoEvents()
         Next
 
     End Sub
 
-    Sub SaveSpell(ByVal spellnum As Long)
+    Sub SaveSkill(ByVal skillnum As Long)
         Dim filename As String
         Dim F As Long
-        filename = Application.StartupPath & "\data\spells\spells" & spellnum & ".dat"
+        filename = Application.StartupPath & "\data\skills\skills" & skillnum & ".dat"
 
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
 
-        FilePutObject(F, Spell(spellnum).Name)
-        FilePutObject(F, Spell(spellnum).Type)
-        FilePutObject(F, Spell(spellnum).MPCost)
-        FilePutObject(F, Spell(spellnum).LevelReq)
-        FilePutObject(F, Spell(spellnum).AccessReq)
-        FilePutObject(F, Spell(spellnum).ClassReq)
-        FilePutObject(F, Spell(spellnum).CastTime)
-        FilePutObject(F, Spell(spellnum).CDTime)
-        FilePutObject(F, Spell(spellnum).Icon)
-        FilePutObject(F, Spell(spellnum).Map)
-        FilePutObject(F, Spell(spellnum).x)
-        FilePutObject(F, Spell(spellnum).y)
-        FilePutObject(F, Spell(spellnum).Dir)
-        FilePutObject(F, Spell(spellnum).Vital)
-        FilePutObject(F, Spell(spellnum).Duration)
-        FilePutObject(F, Spell(spellnum).Interval)
-        FilePutObject(F, Spell(spellnum).range)
-        FilePutObject(F, Spell(spellnum).IsAoE)
-        FilePutObject(F, Spell(spellnum).AoE)
-        FilePutObject(F, Spell(spellnum).CastAnim)
-        FilePutObject(F, Spell(spellnum).SpellAnim)
-        FilePutObject(F, Spell(spellnum).StunDuration)
+        FilePutObject(F, Skill(skillnum).Name)
+        FilePutObject(F, Skill(skillnum).Type)
+        FilePutObject(F, Skill(skillnum).MPCost)
+        FilePutObject(F, Skill(skillnum).LevelReq)
+        FilePutObject(F, Skill(skillnum).AccessReq)
+        FilePutObject(F, Skill(skillnum).ClassReq)
+        FilePutObject(F, Skill(skillnum).CastTime)
+        FilePutObject(F, Skill(skillnum).CDTime)
+        FilePutObject(F, Skill(skillnum).Icon)
+        FilePutObject(F, Skill(skillnum).Map)
+        FilePutObject(F, Skill(skillnum).x)
+        FilePutObject(F, Skill(skillnum).y)
+        FilePutObject(F, Skill(skillnum).Dir)
+        FilePutObject(F, Skill(skillnum).Vital)
+        FilePutObject(F, Skill(skillnum).Duration)
+        FilePutObject(F, Skill(skillnum).Interval)
+        FilePutObject(F, Skill(skillnum).range)
+        FilePutObject(F, Skill(skillnum).IsAoE)
+        FilePutObject(F, Skill(skillnum).AoE)
+        FilePutObject(F, Skill(skillnum).CastAnim)
+        FilePutObject(F, Skill(skillnum).SkillAnim)
+        FilePutObject(F, Skill(skillnum).StunDuration)
 
-        FilePutObject(F, Spell(spellnum).IsProjectile)
-        FilePutObject(F, Spell(spellnum).Projectile)
+        FilePutObject(F, Skill(skillnum).IsProjectile)
+        FilePutObject(F, Skill(skillnum).Projectile)
 
-        FilePutObject(F, Spell(spellnum).KnockBack)
-        FilePutObject(F, Spell(spellnum).KnockBackTiles)
+        FilePutObject(F, Skill(skillnum).KnockBack)
+        FilePutObject(F, Skill(skillnum).KnockBackTiles)
 
         FileClose(F)
     End Sub
 
-    Sub LoadSpells()
+    Sub LoadSkills()
         Dim i As Long
 
-        CheckSpells()
+        CheckSkills()
 
-        For i = 1 To MAX_SPELLS
-            LoadSpell(i)
+        For i = 1 To MAX_SKILLS
+            LoadSkill(i)
             DoEvents()
         Next
 
     End Sub
 
-    Sub LoadSpell(ByVal SpellNum As Long)
+    Sub LoadSkill(ByVal SkillNum As Long)
         Dim filename As String
         Dim F As Long
 
-        filename = Application.StartupPath & "\data\spells\spells" & SpellNum & ".dat"
+        filename = Application.StartupPath & "\data\skills\skills" & SkillNum & ".dat"
 
         F = FreeFile()
         FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
 
-        FileGetObject(F, Spell(SpellNum).Name)
-        FileGetObject(F, Spell(SpellNum).Type)
-        FileGetObject(F, Spell(SpellNum).MPCost)
-        FileGetObject(F, Spell(SpellNum).LevelReq)
-        FileGetObject(F, Spell(SpellNum).AccessReq)
-        FileGetObject(F, Spell(SpellNum).ClassReq)
-        FileGetObject(F, Spell(SpellNum).CastTime)
-        FileGetObject(F, Spell(SpellNum).CDTime)
-        FileGetObject(F, Spell(SpellNum).Icon)
-        FileGetObject(F, Spell(SpellNum).Map)
-        FileGetObject(F, Spell(SpellNum).x)
-        FileGetObject(F, Spell(SpellNum).y)
-        FileGetObject(F, Spell(SpellNum).Dir)
-        FileGetObject(F, Spell(SpellNum).Vital)
-        FileGetObject(F, Spell(SpellNum).Duration)
-        FileGetObject(F, Spell(SpellNum).Interval)
-        FileGetObject(F, Spell(SpellNum).range)
-        FileGetObject(F, Spell(SpellNum).IsAoE)
-        FileGetObject(F, Spell(SpellNum).AoE)
-        FileGetObject(F, Spell(SpellNum).CastAnim)
-        FileGetObject(F, Spell(SpellNum).SpellAnim)
-        FileGetObject(F, Spell(SpellNum).StunDuration)
+        FileGetObject(F, Skill(SkillNum).Name)
+        FileGetObject(F, Skill(SkillNum).Type)
+        FileGetObject(F, Skill(SkillNum).MPCost)
+        FileGetObject(F, Skill(SkillNum).LevelReq)
+        FileGetObject(F, Skill(SkillNum).AccessReq)
+        FileGetObject(F, Skill(SkillNum).ClassReq)
+        FileGetObject(F, Skill(SkillNum).CastTime)
+        FileGetObject(F, Skill(SkillNum).CDTime)
+        FileGetObject(F, Skill(SkillNum).Icon)
+        FileGetObject(F, Skill(SkillNum).Map)
+        FileGetObject(F, Skill(SkillNum).x)
+        FileGetObject(F, Skill(SkillNum).y)
+        FileGetObject(F, Skill(SkillNum).Dir)
+        FileGetObject(F, Skill(SkillNum).Vital)
+        FileGetObject(F, Skill(SkillNum).Duration)
+        FileGetObject(F, Skill(SkillNum).Interval)
+        FileGetObject(F, Skill(SkillNum).range)
+        FileGetObject(F, Skill(SkillNum).IsAoE)
+        FileGetObject(F, Skill(SkillNum).AoE)
+        FileGetObject(F, Skill(SkillNum).CastAnim)
+        FileGetObject(F, Skill(SkillNum).SkillAnim)
+        FileGetObject(F, Skill(SkillNum).StunDuration)
 
-        FileGetObject(F, Spell(SpellNum).IsProjectile)
-        FileGetObject(F, Spell(SpellNum).Projectile)
+        FileGetObject(F, Skill(SkillNum).IsProjectile)
+        FileGetObject(F, Skill(SkillNum).Projectile)
 
-        FileGetObject(F, Spell(SpellNum).KnockBack)
-        FileGetObject(F, Spell(SpellNum).KnockBackTiles)
+        FileGetObject(F, Skill(SkillNum).KnockBack)
+        FileGetObject(F, Skill(SkillNum).KnockBackTiles)
 
         FileClose(F)
     End Sub
 
-    Sub CheckSpells()
+    Sub CheckSkills()
         Dim i As Long
 
-        For i = 1 To MAX_SPELLS
+        For i = 1 To MAX_SKILLS
 
-            If Not FileExist(Application.StartupPath & "\Data\spells\spells" & i & ".dat") Then
-                SaveSpell(i)
+            If Not FileExist(Application.StartupPath & "\Data\skills\skills" & i & ".dat") Then
+                SaveSkill(i)
                 DoEvents()
             End If
 
@@ -1372,17 +1372,17 @@ Module ServerDatabase
 
     End Sub
 
-    Sub ClearSpell(ByVal Index As Long)
-        Spell(Index) = Nothing
-        Spell(Index).Name = vbNullString
-        Spell(Index).LevelReq = 1 'Needs to be 1 for the spell editor
+    Sub ClearSkill(ByVal Index As Long)
+        Skill(Index) = Nothing
+        Skill(Index).Name = vbNullString
+        Skill(Index).LevelReq = 1 'Needs to be 1 for the skill editor
     End Sub
 
-    Sub ClearSpells()
+    Sub ClearSkills()
         Dim i As Long
 
-        For i = 1 To MAX_SPELLS
-            ClearSpell(i)
+        For i = 1 To MAX_SKILLS
+            ClearSkill(i)
             DoEvents()
         Next
 
@@ -1744,8 +1744,8 @@ Module ServerDatabase
         Player(Index).Character(CharNum).POINTS = 0
         Player(Index).Character(CharNum).Sex = 0
 
-        For i = 0 To MAX_PLAYER_SPELLS
-            Player(Index).Character(CharNum).Spell(i) = 0
+        For i = 0 To MAX_PLAYER_SKILLS
+            Player(Index).Character(CharNum).Skill(i) = 0
         Next
 
         Player(Index).Character(CharNum).Sprite = 0
@@ -1846,8 +1846,8 @@ Module ServerDatabase
         FileGetObject(F, Player(Index).Character(CharNum).POINTS)
         FileGetObject(F, Player(Index).Character(CharNum).Sex)
 
-        For i = 0 To MAX_PLAYER_SPELLS
-            FileGetObject(F, Player(Index).Character(CharNum).Spell(i))
+        For i = 0 To MAX_PLAYER_SKILLS
+            FileGetObject(F, Player(Index).Character(CharNum).Skill(i))
         Next
 
         FileGetObject(F, Player(Index).Character(CharNum).Sprite)
@@ -1945,8 +1945,8 @@ Module ServerDatabase
         FilePutObject(F, Player(Index).Character(CharNum).POINTS)
         FilePutObject(F, Player(Index).Character(CharNum).Sex)
 
-        For i = 0 To MAX_PLAYER_SPELLS
-            FilePutObject(F, Player(Index).Character(CharNum).Spell(i))
+        For i = 0 To MAX_PLAYER_SKILLS
+            FilePutObject(F, Player(Index).Character(CharNum).Skill(i))
         Next
 
         FilePutObject(F, Player(Index).Character(CharNum).Sprite)
@@ -2550,16 +2550,16 @@ Module ServerDatabase
         Buffer = Nothing
     End Function
 
-    Function SpellsData() As Byte()
+    Function SkillsData() As Byte()
         Dim i As Long
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
 
-        For i = 1 To MAX_SPELLS
+        For i = 1 To MAX_SKILLS
 
-            If Len(Trim$(Spell(i).Name)) > 0 Then
-                buffer.WriteBytes(SpellData(i))
+            If Len(Trim$(Skill(i).Name)) > 0 Then
+                buffer.WriteBytes(SkillData(i))
             End If
 
         Next
@@ -2568,40 +2568,40 @@ Module ServerDatabase
         buffer = Nothing
     End Function
 
-    Function SpellData(ByVal spellnum As Long) As Byte()
+    Function SkillData(ByVal skillnum As Long) As Byte()
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
 
-        Buffer.WriteLong(spellnum)
-        Buffer.WriteLong(Spell(spellnum).AccessReq)
-        Buffer.WriteLong(Spell(spellnum).AoE)
-        Buffer.WriteLong(Spell(spellnum).CastAnim)
-        Buffer.WriteLong(Spell(spellnum).CastTime)
-        Buffer.WriteLong(Spell(spellnum).CDTime)
-        Buffer.WriteLong(Spell(spellnum).ClassReq)
-        Buffer.WriteLong(Spell(spellnum).Dir)
-        Buffer.WriteLong(Spell(spellnum).Duration)
-        Buffer.WriteLong(Spell(spellnum).Icon)
-        Buffer.WriteLong(Spell(spellnum).Interval)
-        Buffer.WriteLong(Spell(spellnum).IsAoE)
-        Buffer.WriteLong(Spell(spellnum).LevelReq)
-        Buffer.WriteLong(Spell(spellnum).Map)
-        Buffer.WriteLong(Spell(spellnum).MPCost)
-        Buffer.WriteString(Spell(spellnum).Name)
-        Buffer.WriteLong(Spell(spellnum).range)
-        Buffer.WriteLong(Spell(spellnum).SpellAnim)
-        Buffer.WriteLong(Spell(spellnum).StunDuration)
-        Buffer.WriteLong(Spell(spellnum).Type)
-        Buffer.WriteLong(Spell(spellnum).Vital)
-        Buffer.WriteLong(Spell(spellnum).x)
-        Buffer.WriteLong(Spell(spellnum).y)
+        Buffer.WriteLong(skillnum)
+        Buffer.WriteLong(Skill(skillnum).AccessReq)
+        Buffer.WriteLong(Skill(skillnum).AoE)
+        Buffer.WriteLong(Skill(skillnum).CastAnim)
+        Buffer.WriteLong(Skill(skillnum).CastTime)
+        Buffer.WriteLong(Skill(skillnum).CDTime)
+        Buffer.WriteLong(Skill(skillnum).ClassReq)
+        Buffer.WriteLong(Skill(skillnum).Dir)
+        Buffer.WriteLong(Skill(skillnum).Duration)
+        Buffer.WriteLong(Skill(skillnum).Icon)
+        Buffer.WriteLong(Skill(skillnum).Interval)
+        Buffer.WriteLong(Skill(skillnum).IsAoE)
+        Buffer.WriteLong(Skill(skillnum).LevelReq)
+        Buffer.WriteLong(Skill(skillnum).Map)
+        Buffer.WriteLong(Skill(skillnum).MPCost)
+        Buffer.WriteString(Skill(skillnum).Name)
+        Buffer.WriteLong(Skill(skillnum).range)
+        Buffer.WriteLong(Skill(skillnum).SkillAnim)
+        Buffer.WriteLong(Skill(skillnum).StunDuration)
+        Buffer.WriteLong(Skill(skillnum).Type)
+        Buffer.WriteLong(Skill(skillnum).Vital)
+        Buffer.WriteLong(Skill(skillnum).x)
+        Buffer.WriteLong(Skill(skillnum).y)
 
-        Buffer.WriteLong(Spell(spellnum).IsProjectile)
-        Buffer.WriteLong(Spell(spellnum).Projectile)
+        Buffer.WriteLong(Skill(skillnum).IsProjectile)
+        Buffer.WriteLong(Skill(skillnum).Projectile)
 
-        Buffer.WriteLong(Spell(spellnum).KnockBack)
-        Buffer.WriteLong(Spell(spellnum).KnockBackTiles)
+        Buffer.WriteLong(Skill(skillnum).KnockBack)
+        Buffer.WriteLong(Skill(skillnum).KnockBackTiles)
 
         Return Buffer.ToArray
         Buffer = Nothing

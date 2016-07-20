@@ -47,9 +47,9 @@
         SEditMap
         SShopEditor
         SUpdateShop
-        SSpellEditor
-        SUpdateSpell
-        SSpells
+        SSkillEditor
+        SUpdateSkill
+        SSkills
         SLeftMap
         SResourceCache
         SResourceEditor
@@ -64,7 +64,7 @@
         SAnimation
         SMapNpcVitals
         SCooldown
-        SClearSpellBuffer
+        SClearSkillBuffer
         SSayMsg
         SOpenShop
         SResetShopAction
@@ -182,8 +182,8 @@
         CSaveNpc
         CRequestEditShop
         CSaveShop
-        CRequestEditSpell
-        CSaveSpell
+        CRequestEditSkill
+        CSaveSkill
         CSetAccess
         CWhosOnline
         CSetMotd
@@ -191,7 +191,7 @@
         CParty
         CJoinParty
         CLeaveParty
-        CSpells
+        CSkills
         CCast
         CQuit
         CSwapInvSlots
@@ -208,10 +208,10 @@
         CRequestEditAnimation
         CSaveAnimation
         CRequestAnimations
-        CRequestSpells
+        CRequestSkills
         CRequestShops
         CRequestLevelUp
-        CForgetSpell
+        CForgetSkill
         CCloseShop
         CBuyItem
         CSellItem

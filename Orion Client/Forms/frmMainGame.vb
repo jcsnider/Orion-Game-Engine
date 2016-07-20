@@ -55,7 +55,7 @@ Public Class frmMainGame
     End Sub
 
     Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
-        Dim spellnum As Long
+        Dim skillnum As Long
         If e.KeyCode = Keys.S Then VbKeyDown = False
         If e.KeyCode = Keys.W Then VbKeyUp = False
         If e.KeyCode = Keys.A Then VbKeyLeft = False
@@ -65,52 +65,52 @@ Public Class frmMainGame
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
-            spellnum = Player(MyIndex).Hotbar(1).Slot
+            skillnum = Player(MyIndex).Hotbar(1).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
-            spellnum = Player(MyIndex).Hotbar(2).Slot
+            skillnum = Player(MyIndex).Hotbar(2).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
-            spellnum = Player(MyIndex).Hotbar(3).Slot
+            skillnum = Player(MyIndex).Hotbar(3).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
-            spellnum = Player(MyIndex).Hotbar(4).Slot
+            skillnum = Player(MyIndex).Hotbar(4).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
-            spellnum = Player(MyIndex).Hotbar(5).Slot
+            skillnum = Player(MyIndex).Hotbar(5).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
-            spellnum = Player(MyIndex).Hotbar(6).Slot
+            skillnum = Player(MyIndex).Hotbar(6).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
-            spellnum = Player(MyIndex).Hotbar(7).Slot
+            skillnum = Player(MyIndex).Hotbar(7).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
 
@@ -143,9 +143,9 @@ Public Class frmMainGame
             If e.KeyCode = Keys.O Then
                 pnlOptions.Visible = Not pnlOptions.Visible
             End If
-            'spell window
+            'skill window
             If e.KeyCode = Keys.K Then
-                pnlSpellsVisible = Not pnlSpellsVisible
+                pnlSkillsVisible = Not pnlSkillsVisible
             End If
         End If
 
@@ -246,7 +246,7 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
-        Dim spellnum As Long
+        Dim skillnum As Long
 
         If e.KeyCode = Keys.S Then VbKeyDown = True
         If e.KeyCode = Keys.W Then VbKeyUp = True
@@ -272,52 +272,52 @@ Public Class frmMainGame
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
-            spellnum = Player(MyIndex).Hotbar(1).Slot
+            skillnum = Player(MyIndex).Hotbar(1).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
-            spellnum = Player(MyIndex).Hotbar(2).Slot
+            skillnum = Player(MyIndex).Hotbar(2).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
-            spellnum = Player(MyIndex).Hotbar(3).Slot
+            skillnum = Player(MyIndex).Hotbar(3).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
-            spellnum = Player(MyIndex).Hotbar(4).Slot
+            skillnum = Player(MyIndex).Hotbar(4).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
-            spellnum = Player(MyIndex).Hotbar(5).Slot
+            skillnum = Player(MyIndex).Hotbar(5).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
-            spellnum = Player(MyIndex).Hotbar(6).Slot
+            skillnum = Player(MyIndex).Hotbar(6).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
-            spellnum = Player(MyIndex).Hotbar(7).Slot
+            skillnum = Player(MyIndex).Hotbar(7).Slot
 
-            If spellnum <> 0 Then
-                PlayerCastSpell(spellnum)
+            If skillnum <> 0 Then
+                PlayerCastSkill(skillnum)
             End If
         End If
 

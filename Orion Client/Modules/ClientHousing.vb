@@ -317,7 +317,7 @@ Public Module ClientHousing
         End If
 
         'seeying we still use it, lets update timer
-        With SpellIconsGFXInfo(i)
+        With SkillIconsGFXInfo(i)
             .TextureTimer = GetTickCount() + 100000
         End With
 

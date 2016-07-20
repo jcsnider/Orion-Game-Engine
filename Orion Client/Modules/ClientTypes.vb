@@ -11,7 +11,7 @@
     Public MapItem(0 To MAX_MAP_ITEMS) As MapItemRec
     Public MapNpc(0 To MAX_MAP_NPCS) As MapNpcRec
     Public Shop(0 To MAX_SHOPS) As ShopRec
-    Public Spell(0 To MAX_SPELLS) As SpellRec
+    Public Skill(0 To MAX_SKILLS) As SkillRec
     Public Resource(0 To MAX_RESOURCES) As ResourceRec
     Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
 
@@ -72,8 +72,8 @@
         Dim Item() As PlayerInvRec
     End Structure
 
-    Public Structure SpellAnim
-        Dim spellnum As Integer
+    Public Structure SkillAnim
+        Dim skillnum As Integer
         Dim Timer As Long
         Dim FramePointer As Long
     End Structure
@@ -267,6 +267,7 @@
         Dim EXP As Long
         Dim Animation As Long
         Dim QuestNum As Long
+        Dim Skill() As Byte
     End Structure
 
     Public Structure MapNpcRec
@@ -301,7 +302,7 @@
         Dim TradeItem() As TradeItemRec
     End Structure
 
-    Public Structure SpellRec
+    Public Structure SkillRec
         Dim Name As String
         Dim Type As Byte
         Dim MPCost As Long
@@ -322,7 +323,7 @@
         Dim IsAoE As Boolean
         Dim AoE As Long
         Dim CastAnim As Long
-        Dim SpellAnim As Long
+        Dim SkillAnim As Long
         Dim StunDuration As Long
 
         Dim IsProjectile As Long '0 is no, 1 is yes

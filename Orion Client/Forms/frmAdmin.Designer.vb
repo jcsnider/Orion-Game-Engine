@@ -37,7 +37,7 @@ Partial Class frmAdmin
         Me.lblItemSpawn = New System.Windows.Forms.Label()
         Me.btnAnimationEditor = New System.Windows.Forms.Button()
         Me.btnShopEditor = New System.Windows.Forms.Button()
-        Me.btnSpellEditor = New System.Windows.Forms.Button()
+        Me.btnSkillEditor = New System.Windows.Forms.Button()
         Me.btnNPCEditor = New System.Windows.Forms.Button()
         Me.btnResourceEditor = New System.Windows.Forms.Button()
         Me.btnItemEditor = New System.Windows.Forms.Button()
@@ -63,10 +63,10 @@ Partial Class frmAdmin
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnClassEditor = New System.Windows.Forms.Button()
         Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.btnClassEditor = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -205,14 +205,14 @@ Partial Class frmAdmin
         Me.btnShopEditor.Text = "Shop Editor"
         Me.btnShopEditor.UseVisualStyleBackColor = True
         '
-        'btnSpellEditor
+        'btnSkillEditor
         '
-        Me.btnSpellEditor.Location = New System.Drawing.Point(124, 68)
-        Me.btnSpellEditor.Name = "btnSpellEditor"
-        Me.btnSpellEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnSpellEditor.TabIndex = 22
-        Me.btnSpellEditor.Text = "Spell Editor"
-        Me.btnSpellEditor.UseVisualStyleBackColor = True
+        Me.btnSkillEditor.Location = New System.Drawing.Point(124, 68)
+        Me.btnSkillEditor.Name = "btnSkillEditor"
+        Me.btnSkillEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnSkillEditor.TabIndex = 22
+        Me.btnSkillEditor.Text = "Skill Editor"
+        Me.btnSkillEditor.UseVisualStyleBackColor = True
         '
         'btnNPCEditor
         '
@@ -452,7 +452,7 @@ Partial Class frmAdmin
         Me.TabPage2.Controls.Add(Me.btnItemEditor)
         Me.TabPage2.Controls.Add(Me.btnResourceEditor)
         Me.TabPage2.Controls.Add(Me.btnNPCEditor)
-        Me.TabPage2.Controls.Add(Me.btnSpellEditor)
+        Me.TabPage2.Controls.Add(Me.btnSkillEditor)
         Me.TabPage2.Controls.Add(Me.btnShopEditor)
         Me.TabPage2.Controls.Add(Me.btnAnimationEditor)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
@@ -462,6 +462,15 @@ Partial Class frmAdmin
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Editors"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnClassEditor
+        '
+        Me.btnClassEditor.Location = New System.Drawing.Point(124, 161)
+        Me.btnClassEditor.Name = "btnClassEditor"
+        Me.btnClassEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnClassEditor.TabIndex = 40
+        Me.btnClassEditor.Text = "Class Editor"
+        Me.btnClassEditor.UseVisualStyleBackColor = True
         '
         'btnRecipeEditor
         '
@@ -503,15 +512,6 @@ Partial Class frmAdmin
         Me.TabPage4.Text = "Misc"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
-        'btnClassEditor
-        '
-        Me.btnClassEditor.Location = New System.Drawing.Point(124, 161)
-        Me.btnClassEditor.Name = "btnClassEditor"
-        Me.btnClassEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnClassEditor.TabIndex = 40
-        Me.btnClassEditor.Text = "Class Editor"
-        Me.btnClassEditor.UseVisualStyleBackColor = True
-        '
         'frmAdmin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -546,7 +546,7 @@ Partial Class frmAdmin
     Friend WithEvents lblItemSpawn As Windows.Forms.Label
     Friend WithEvents btnAnimationEditor As Windows.Forms.Button
     Friend WithEvents btnShopEditor As Windows.Forms.Button
-    Friend WithEvents btnSpellEditor As Windows.Forms.Button
+    Friend WithEvents btnSkillEditor As Windows.Forms.Button
     Friend WithEvents btnNPCEditor As Windows.Forms.Button
     Friend WithEvents btnResourceEditor As Windows.Forms.Button
     Friend WithEvents btnItemEditor As Windows.Forms.Button

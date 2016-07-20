@@ -48,10 +48,10 @@ Public Class frmEditor_Item
             fraVitals.Visible = False
         End If
 
-        If (cmbType.SelectedIndex = ITEM_TYPE_SPELL) Then
-            fraSpell.Visible = True
+        If (cmbType.SelectedIndex = ITEM_TYPE_SKILL) Then
+            fraSkill.Visible = True
         Else
-            fraSpell.Visible = False
+            fraSkill.Visible = False
         End If
 
         If cmbType.SelectedIndex = ITEM_TYPE_FURNITURE Then
@@ -122,18 +122,18 @@ Public Class frmEditor_Item
         Item(EditorIndex).Data1 = scrlVitalMod.Value
     End Sub
 
-    Private Sub scrlSpell_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSpell.ValueChanged
+    Private Sub scrlSkill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSkill.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
-        If Len(Trim$(Spell(scrlSpell.Value).Name)) > 0 Then
-            lblSpellName.Text = "Name: " & Trim$(Spell(scrlSpell.Value).Name)
+        If Len(Trim$(Skill(scrlSkill.Value).Name)) > 0 Then
+            lblSkillName.Text = "Name: " & Trim$(Skill(scrlSkill.Value).Name)
         Else
-            lblSpellName.Text = "Name: None"
+            lblSkillName.Text = "Name: None"
         End If
 
-        lblSpell.Text = "Spell: " & scrlSpell.Value
+        lblSkill.Text = "Skill: " & scrlSkill.Value
 
-        Item(EditorIndex).Data1 = scrlSpell.Value
+        Item(EditorIndex).Data1 = scrlSkill.Value
     End Sub
 
     Private Sub cmbTool_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTool.SelectedIndexChanged

@@ -32,10 +32,10 @@ Module ClientGlobals
     Public InvX As Long
     Public InvY As Long
 
-    ' spell drag + drop
-    Public DragSpellSlotNum As Integer
-    Public SpellX As Long
-    Public SpellY As Long
+    ' skill drag + drop
+    Public DragSkillSlotNum As Integer
+    Public SkillX As Long
+    Public SkillY As Long
 
     ' bank drag + drop
     Public DragBankSlotNum As Integer
@@ -53,7 +53,7 @@ Module ClientGlobals
 
     Public InvItemFrame(0 To MAX_INV) As Byte ' Used for animated items
     Public LastItemDesc As Long ' Stores the last item we showed in desc
-    Public LastSpellDesc As Long ' Stores the last spell we showed in desc
+    Public LastSkillDesc As Long ' Stores the last skill we showed in desc
     Public LastBankDesc As Long ' Stores the last bank item we showed in desc
     Public tmpCurrencyItem As Long
     Public InShop As Long ' is the player in a shop?
@@ -65,11 +65,11 @@ Module ClientGlobals
     ' Player variables
     Public MyIndex As Long ' Index of actual player
     Public PlayerInv(0 To MAX_INV) As PlayerInvRec   ' Inventory
-    Public PlayerSpells(0 To MAX_PLAYER_SPELLS) As Byte
+    Public PlayerSkills(0 To MAX_PLAYER_SKILLS) As Byte
     Public InventoryItemSelected As Integer
-    Public SpellBuffer As Long
-    Public SpellBufferTimer As Long
-    Public SpellCD(0 To MAX_PLAYER_SPELLS) As Long
+    Public SkillBuffer As Long
+    Public SkillBufferTimer As Long
+    Public SkillCD(0 To MAX_PLAYER_SKILLS) As Long
     Public StunDuration As Long
     Public NextlevelExp As Long
 
@@ -183,7 +183,7 @@ Module ClientGlobals
     Public NPC_Changed(0 To MAX_NPCS) As Boolean
     Public Resource_Changed(0 To MAX_NPCS) As Boolean
     Public Animation_Changed(0 To MAX_ANIMATIONS) As Boolean
-    Public Spell_Changed(0 To MAX_SPELLS) As Boolean
+    Public Skill_Changed(0 To MAX_SKILLS) As Boolean
     Public Shop_Changed(0 To MAX_SHOPS) As Boolean
 
     ' New char

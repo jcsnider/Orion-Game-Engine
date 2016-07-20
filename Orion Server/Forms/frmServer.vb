@@ -140,13 +140,13 @@
         Next
     End Sub
 
-    Private Sub btnReloadSpells_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadSpells.Click
+    Private Sub btnReloadSkills_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnReloadSkills.Click
         Dim i As Long
-        LoadSpells()
-        TextAdd("All spells reloaded.")
+        LoadSkills()
+        TextAdd("All skills reloaded.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
-                SendSpells(i)
+                SendSkills(i)
             End If
         Next
     End Sub
@@ -323,7 +323,7 @@
         SaveItems()
         SaveMaps()
         SaveResources()
-        SaveSpells()
+        SaveSkills()
         SaveAnimations()
         SaveShops()
         SaveNpcs()

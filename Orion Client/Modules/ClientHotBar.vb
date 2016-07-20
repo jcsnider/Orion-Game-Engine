@@ -2,7 +2,7 @@
 
 Public Module ClientHotBar
     Public SelHotbarSlot As Long
-    Public SelSpellSlot As Boolean
+    Public SelSkillSlot As Boolean
 
     Public Const MAX_HOTBAR As Byte = 7
 
@@ -67,24 +67,24 @@ Public Module ClientHotBar
     End Sub
 
     Sub DrawHotbar()
-        Dim i As Long, spellnum As Long, spellpic As Long
+        Dim i As Long, skillnum As Long, skillpic As Long
         Dim rec As Rectangle, rec_pos As Rectangle
         If NumItems = 0 Then Exit Sub
 
         RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.width, HotBarGFXInfo.height)
 
         For i = 1 To MAX_HOTBAR
-            spellnum = Player(MyIndex).Hotbar(i).Slot
+            skillnum = Player(MyIndex).Hotbar(i).Slot
 
-            If spellnum > 0 Then
-                spellpic = Spell(spellnum).Icon
+            If skillnum > 0 Then
+                skillpic = Skill(skillnum).Icon
 
-                If SpellIconsGFXInfo(spellpic).IsLoaded = False Then
-                    LoadTexture(spellpic, 9)
+                If SkillIconsGFXInfo(skillpic).IsLoaded = False Then
+                    LoadTexture(skillpic, 9)
                 End If
 
                 'seeying we still use it, lets update timer
-                With SpellIconsGFXInfo(spellpic)
+                With SkillIconsGFXInfo(skillpic)
                     .TextureTimer = GetTickCount() + 100000
                 End With
 
@@ -95,7 +95,7 @@ Public Module ClientHotBar
                     .Width = 32
                 End With
 
-                If Not SpellCD(i) = 0 Then
+                If Not SkillCD(i) = 0 Then
                     rec.X = 32
                     rec.Width = 32
                 End If
@@ -107,7 +107,7 @@ Public Module ClientHotBar
                     .Width = PIC_X
                 End With
 
-                RenderTexture(SpellIconsGFX(spellpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                RenderTexture(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
             End If
 
         Next

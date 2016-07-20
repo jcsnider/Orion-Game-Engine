@@ -69,7 +69,7 @@
                 ReDim Player(i).Character(x).Stat(0 To Stats.Stat_Count - 1)
                 ReDim Player(i).Character(x).Equipment(0 To Equipment.Equipment_Count - 1)
                 ReDim Player(i).Character(x).Inv(0 To MAX_INV)
-                ReDim Player(i).Character(x).Spell(0 To MAX_PLAYER_SPELLS)
+                ReDim Player(i).Character(x).Skill(0 To MAX_PLAYER_SKILLS)
                 ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
             Next
         Next
@@ -77,7 +77,7 @@
         ReDim TempPlayer(0 To MAX_PLAYERS)
 
         For i = 0 To MAX_PLAYERS
-            ReDim TempPlayer(i).SpellCD(0 To MAX_PLAYER_SPELLS)
+            ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
         Next
 
         For i = 0 To MAX_PLAYERS
@@ -127,7 +127,7 @@
 
         CheckDir(Application.StartupPath & "\Data\shops")
 
-        CheckDir(Application.StartupPath & "\Data\spells")
+        CheckDir(Application.StartupPath & "\Data\skills")
 
         CheckDir(Application.StartupPath & "\data\accounts")
 
@@ -244,8 +244,8 @@
         ClearItems()
         SetStatus("Clearing Shops...")
         ClearShops()
-        SetStatus("Clearing Spells...")
-        ClearSpells()
+        SetStatus("Clearing Skills...")
+        ClearSkills()
         SetStatus("Clearing Animations...")
         ClearAnimations()
         'quests
@@ -275,8 +275,8 @@
         LoadResources()
         SetStatus("Loading Shops...")
         LoadShops()
-        SetStatus("Loading Spells...")
-        LoadSpells()
+        SetStatus("Loading Skills...")
+        LoadSkills()
         SetStatus("Loading Animations...")
         LoadAnimations()
         'quests

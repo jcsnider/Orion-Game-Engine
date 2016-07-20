@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor_Item
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEditor_Item
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
@@ -57,6 +57,8 @@ Partial Class frmEditor_Item
         Me.lblAccessReq = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.fraEquipment = New System.Windows.Forms.GroupBox()
+        Me.numMax = New System.Windows.Forms.NumericUpDown()
+        Me.numMin = New System.Windows.Forms.NumericUpDown()
         Me.chkRandomize = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
@@ -87,10 +89,10 @@ Partial Class frmEditor_Item
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.fraSpell = New System.Windows.Forms.GroupBox()
-        Me.scrlSpell = New System.Windows.Forms.HScrollBar()
-        Me.lblSpell = New System.Windows.Forms.Label()
-        Me.lblSpellName = New System.Windows.Forms.Label()
+        Me.fraSkill = New System.Windows.Forms.GroupBox()
+        Me.scrlSkill = New System.Windows.Forms.HScrollBar()
+        Me.lblSkill = New System.Windows.Forms.Label()
+        Me.lblSkillName = New System.Windows.Forms.Label()
         Me.lblVitalMod = New System.Windows.Forms.Label()
         Me.scrlVitalMod = New System.Windows.Forms.HScrollBar()
         Me.fraVitals = New System.Windows.Forms.GroupBox()
@@ -115,13 +117,13 @@ Partial Class frmEditor_Item
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.numMin = New System.Windows.Forms.NumericUpDown()
-        Me.numMax = New System.Windows.Forms.NumericUpDown()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
+        CType(Me.numMax, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.numMin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.fraSpell.SuspendLayout()
+        Me.fraSkill.SuspendLayout()
         Me.fraVitals.SuspendLayout()
         Me.fraFurniture.SuspendLayout()
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,8 +131,6 @@ Partial Class frmEditor_Item
         Me.TabPage1.SuspendLayout()
         Me.fraRecipe.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.numMin, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numMax, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -155,7 +155,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Spell", "Furniture", "Recipe"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Skill", "Furniture", "Recipe"})
         Me.cmbType.Location = New System.Drawing.Point(50, 46)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
@@ -466,6 +466,27 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Text = "Equipment Data"
         Me.fraEquipment.Visible = False
         '
+        'numMax
+        '
+        Me.numMax.Location = New System.Drawing.Point(330, 198)
+        Me.numMax.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.numMax.Name = "numMax"
+        Me.numMax.Size = New System.Drawing.Size(50, 20)
+        Me.numMax.TabIndex = 68
+        Me.numMax.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.numMax.Visible = False
+        '
+        'numMin
+        '
+        Me.numMin.Location = New System.Drawing.Point(267, 198)
+        Me.numMin.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.numMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numMin.Name = "numMin"
+        Me.numMin.Size = New System.Drawing.Size(50, 20)
+        Me.numMin.TabIndex = 67
+        Me.numMin.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.numMin.Visible = False
+        '
         'chkRandomize
         '
         Me.chkRandomize.AutoSize = True
@@ -475,6 +496,7 @@ Partial Class frmEditor_Item
         Me.chkRandomize.TabIndex = 66
         Me.chkRandomize.Text = "Randomize Stats"
         Me.chkRandomize.UseVisualStyleBackColor = True
+        Me.chkRandomize.Visible = False
         '
         'Label5
         '
@@ -731,43 +753,43 @@ Partial Class frmEditor_Item
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'fraSpell
+        'fraSkill
         '
-        Me.fraSpell.Controls.Add(Me.scrlSpell)
-        Me.fraSpell.Controls.Add(Me.lblSpell)
-        Me.fraSpell.Controls.Add(Me.lblSpellName)
-        Me.fraSpell.Location = New System.Drawing.Point(227, 134)
-        Me.fraSpell.Name = "fraSpell"
-        Me.fraSpell.Size = New System.Drawing.Size(198, 70)
-        Me.fraSpell.TabIndex = 8
-        Me.fraSpell.TabStop = False
-        Me.fraSpell.Text = "Spell Data"
-        Me.fraSpell.Visible = False
+        Me.fraSkill.Controls.Add(Me.scrlSkill)
+        Me.fraSkill.Controls.Add(Me.lblSkill)
+        Me.fraSkill.Controls.Add(Me.lblSkillName)
+        Me.fraSkill.Location = New System.Drawing.Point(227, 134)
+        Me.fraSkill.Name = "fraSkill"
+        Me.fraSkill.Size = New System.Drawing.Size(198, 70)
+        Me.fraSkill.TabIndex = 8
+        Me.fraSkill.TabStop = False
+        Me.fraSkill.Text = "Skill Data"
+        Me.fraSkill.Visible = False
         '
-        'scrlSpell
+        'scrlSkill
         '
-        Me.scrlSpell.Location = New System.Drawing.Point(79, 46)
-        Me.scrlSpell.Name = "scrlSpell"
-        Me.scrlSpell.Size = New System.Drawing.Size(93, 13)
-        Me.scrlSpell.TabIndex = 2
+        Me.scrlSkill.Location = New System.Drawing.Point(79, 46)
+        Me.scrlSkill.Name = "scrlSkill"
+        Me.scrlSkill.Size = New System.Drawing.Size(93, 13)
+        Me.scrlSkill.TabIndex = 2
         '
-        'lblSpell
+        'lblSkill
         '
-        Me.lblSpell.AutoSize = True
-        Me.lblSpell.Location = New System.Drawing.Point(10, 46)
-        Me.lblSpell.Name = "lblSpell"
-        Me.lblSpell.Size = New System.Drawing.Size(41, 13)
-        Me.lblSpell.TabIndex = 1
-        Me.lblSpell.Text = "Num: 0"
+        Me.lblSkill.AutoSize = True
+        Me.lblSkill.Location = New System.Drawing.Point(10, 46)
+        Me.lblSkill.Name = "lblSkill"
+        Me.lblSkill.Size = New System.Drawing.Size(41, 13)
+        Me.lblSkill.TabIndex = 1
+        Me.lblSkill.Text = "Num: 0"
         '
-        'lblSpellName
+        'lblSkillName
         '
-        Me.lblSpellName.AutoSize = True
-        Me.lblSpellName.Location = New System.Drawing.Point(10, 22)
-        Me.lblSpellName.Name = "lblSpellName"
-        Me.lblSpellName.Size = New System.Drawing.Size(67, 13)
-        Me.lblSpellName.TabIndex = 0
-        Me.lblSpellName.Text = "Name: None"
+        Me.lblSkillName.AutoSize = True
+        Me.lblSkillName.Location = New System.Drawing.Point(10, 22)
+        Me.lblSkillName.Name = "lblSkillName"
+        Me.lblSkillName.Size = New System.Drawing.Size(67, 13)
+        Me.lblSkillName.TabIndex = 0
+        Me.lblSkillName.Text = "Name: None"
         '
         'lblVitalMod
         '
@@ -914,11 +936,11 @@ Partial Class frmEditor_Item
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.fraSkill)
         Me.TabPage1.Controls.Add(Me.txtDescription)
         Me.TabPage1.Controls.Add(Me.Label8)
         Me.TabPage1.Controls.Add(Me.fraRecipe)
         Me.TabPage1.Controls.Add(Me.chkStackable)
-        Me.TabPage1.Controls.Add(Me.fraSpell)
         Me.TabPage1.Controls.Add(Me.fraVitals)
         Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.Label1)
@@ -1045,25 +1067,6 @@ Partial Class frmEditor_Item
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
         '
-        'numMin
-        '
-        Me.numMin.Location = New System.Drawing.Point(267, 198)
-        Me.numMin.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
-        Me.numMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.numMin.Name = "numMin"
-        Me.numMin.Size = New System.Drawing.Size(50, 20)
-        Me.numMin.TabIndex = 67
-        Me.numMin.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'numMax
-        '
-        Me.numMax.Location = New System.Drawing.Point(330, 198)
-        Me.numMax.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.numMax.Name = "numMax"
-        Me.numMax.Size = New System.Drawing.Size(50, 20)
-        Me.numMax.TabIndex = 68
-        Me.numMax.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1084,9 +1087,11 @@ Partial Class frmEditor_Item
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraEquipment.ResumeLayout(False)
         Me.fraEquipment.PerformLayout()
+        CType(Me.numMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numMin, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.fraSpell.ResumeLayout(False)
-        Me.fraSpell.PerformLayout()
+        Me.fraSkill.ResumeLayout(False)
+        Me.fraSkill.PerformLayout()
         Me.fraVitals.ResumeLayout(False)
         Me.fraVitals.PerformLayout()
         Me.fraFurniture.ResumeLayout(False)
@@ -1099,8 +1104,6 @@ Partial Class frmEditor_Item
         Me.fraRecipe.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        CType(Me.numMin, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numMax, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1163,10 +1166,10 @@ Partial Class frmEditor_Item
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents fraSpell As System.Windows.Forms.GroupBox
-    Friend WithEvents scrlSpell As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblSpell As System.Windows.Forms.Label
-    Friend WithEvents lblSpellName As System.Windows.Forms.Label
+    Friend WithEvents fraSkill As System.Windows.Forms.GroupBox
+    Friend WithEvents scrlSkill As System.Windows.Forms.HScrollBar
+    Friend WithEvents lblSkill As System.Windows.Forms.Label
+    Friend WithEvents lblSkillName As System.Windows.Forms.Label
     Friend WithEvents lblVitalMod As System.Windows.Forms.Label
     Friend WithEvents scrlVitalMod As System.Windows.Forms.HScrollBar
     Friend WithEvents fraVitals As System.Windows.Forms.GroupBox
