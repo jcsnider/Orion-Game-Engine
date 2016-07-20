@@ -38,6 +38,7 @@ Public Class frmMainGame
             If e.KeyCode = Keys.D Then VbKeyRight = True
             If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
             If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+            If e.KeyCode = Keys.Alt Then VbKeyAlt = True
 
             If e.KeyCode = Keys.Space Then
                 CheckMapGetItem()
@@ -62,6 +63,7 @@ Public Class frmMainGame
         If e.KeyCode = Keys.D Then VbKeyRight = False
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+        If e.KeyCode = Keys.Alt Then VbKeyAlt = False
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
@@ -254,6 +256,7 @@ Public Class frmMainGame
         If e.KeyCode = Keys.D Then VbKeyRight = True
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
+        If e.KeyCode = Keys.Alt Then VbKeyAlt = True
 
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 Then
@@ -348,6 +351,7 @@ Public Class frmMainGame
         If e.KeyCode = Keys.D Then VbKeyRight = False
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = False
+        If e.KeyCode = Keys.Alt Then VbKeyAlt = False
 
         Dim keyData As Keys = e.KeyData
         If IsAcceptable(keyData) Then

@@ -40,6 +40,7 @@
     Public VbKeyDown As Boolean
     Public VbKeyShift As Boolean
     Public VbKeyControl As Boolean
+    Public VbKeyAlt As Boolean
 
     Public picHpWidth As Long
     Public picManaWidth As Long
@@ -94,7 +95,6 @@
     Public ChatWindowY As Long = 705
 
     Public ShowItemDesc As Boolean
-    Public ItemDescSize As Byte
     Public ItemDescItemNum As Long
     Public ItemDescName As String
     Public ItemDescDescription As String

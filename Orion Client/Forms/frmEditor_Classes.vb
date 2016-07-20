@@ -289,8 +289,6 @@ Public Class frmEditor_Classes
         Classes(EditorIndex).StartY = numStartY.Value
     End Sub
 
-
-
 #End Region
 
 End Class

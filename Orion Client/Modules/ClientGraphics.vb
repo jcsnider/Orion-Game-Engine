@@ -3518,30 +3518,20 @@ NextLoop:
         End If
 
         'first render panel
-        If ItemDescSize = 0 Then ' normal
-            RenderTexture(DescriptionGFX, GameWindow, Xoffset - DescriptionGFXInfo.width, Yoffset, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
-        Else
-            RenderTexture(DescriptionGFX, GameWindow, Xoffset - DescriptionGFXInfo.width, Yoffset, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height \ 2)
-        End If
+        RenderTexture(DescriptionGFX, GameWindow, Xoffset - DescriptionGFXInfo.width, Yoffset, 0, 0, DescriptionGFXInfo.width, DescriptionGFXInfo.height)
 
         'name
         DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
-        'info
-        DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 28, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-
-        For Each str As String In WordWrap(ItemDescDescription, 25)
-            'description
-            DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 44 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-            y = y + 15
-        Next
 
 
-        'cost
-        'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Worth: " & ItemDescCost, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'type
-        'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 90, "Type: " & ItemDescType, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        If ShiftDown Or VbKeyShift = True Then
+            'info
+            DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 56, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        If ItemDescSize = 0 Then
+            'cost
+            'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Worth: " & ItemDescCost, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            'type
+            'DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 90, "Type: " & ItemDescType, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'speed
             DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 74, "Speed: " & ItemDescSpeed, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'level
@@ -3560,6 +3550,12 @@ NextLoop:
             DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 198, "Luck: " & ItemDescLuck, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'spirit
             DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 214, "Spirit: " & ItemDescSpr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        Else
+            For Each str As String In WordWrap(ItemDescDescription, 22)
+                'description
+                DrawText(Xoffset - DescriptionGFXInfo.width + 10, Yoffset + 44 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+                y = y + 15
+            Next
         End If
 
 

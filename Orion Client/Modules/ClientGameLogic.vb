@@ -969,8 +969,6 @@ Continue1:
                 ItemDescInfo = "Furniture"
         End Select
 
-        ItemDescSize = 0
-
         ' Currency
         ItemDescCost = Item(itemnum).Price & "g"
 
@@ -986,7 +984,6 @@ Continue1:
             ItemDescSpr = "N/A"
             ItemDescVit = "N/A"
             ItemDescLuck = "N/A"
-            ItemDescSize = 1
             Exit Sub
         End If
 
@@ -1004,7 +1001,6 @@ Continue1:
             ItemDescSpr = "N/A"
             ItemDescVit = "N/A"
             ItemDescLuck = "N/A"
-            ItemDescSize = 1
             Exit Sub
         End If
 
