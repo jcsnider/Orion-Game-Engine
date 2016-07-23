@@ -1124,6 +1124,7 @@
                                     If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
                                         If CanNpcAttackPlayer(NpcNum, i) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, i)
+                                            PlayerMsg(i, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!")
                                             AttackPlayer(NpcNum, i, Vital, skillnum, NpcNum)
                                         End If
                                     End If
@@ -1204,6 +1205,7 @@
                             If CanNpcAttackPlayer(NpcNum, Target) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Target)
+                                    PlayerMsg(Target, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!")
                                     AttackPlayer(NpcNum, Target, Vital, skillnum, NpcNum)
                                     DidCast = True
                                 End If
