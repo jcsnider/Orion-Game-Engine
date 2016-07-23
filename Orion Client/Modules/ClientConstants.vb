@@ -90,6 +90,7 @@
     Public Const MAX_MAP_NPCS As Byte = 30
     Public Const MAX_SHOPS As Byte = 50
     Public Const MAX_PLAYER_SKILLS As Byte = 20
+    Public Const MAX_NPC_SKILLS As Byte = 6
     Public Const MAX_SKILLS As Byte = 255
     Public Const MAX_TRADES As Byte = 20
     Public Const MAX_RESOURCES As Byte = 100

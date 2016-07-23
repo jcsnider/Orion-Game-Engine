@@ -847,7 +847,7 @@
 
         i = Buffer.ReadLong
 
-        ' Set player to attacking
+        ' Set npc to attacking
         MapNpc(i).Attacking = 1
         MapNpc(i).AttackTimer = GetTickCount()
 
@@ -1119,6 +1119,7 @@
                 MapNpc(i).Y = Buffer.ReadLong()
                 MapNpc(i).Dir = Buffer.ReadLong()
                 MapNpc(i).Vital(Vitals.HP) = Buffer.ReadLong()
+                MapNpc(i).Vital(Vitals.MP) = Buffer.ReadLong()
             Next
 
             If Buffer.ReadLong = 1 Then
@@ -1207,6 +1208,7 @@
                 .Y = Buffer.ReadLong
                 .Dir = Buffer.ReadLong
                 .Vital(Vitals.HP) = Buffer.ReadLong
+                .Vital(Vitals.MP) = Buffer.ReadLong
             End With
 
         Next
@@ -1230,6 +1232,7 @@
             .Y = Buffer.ReadLong
             .Dir = Buffer.ReadLong
             .Vital(Vitals.HP) = Buffer.ReadLong
+            .Vital(Vitals.MP) = Buffer.ReadLong
         End With
 
         Buffer = Nothing
@@ -1427,6 +1430,10 @@
             .X = Buffer.ReadLong
             .Y = Buffer.ReadLong
             .Dir = Buffer.ReadLong
+
+            For i = 1 To Vitals.Vital_Count - 1
+                .Vital(i) = Buffer.ReadLong
+            Next
             ' Client use only
             .XOffset = 0
             .YOffset = 0
@@ -1498,6 +1505,10 @@
         Next
 
         Npc(i).QuestNum = Buffer.ReadLong()
+
+        For x = 1 To MAX_NPC_SKILLS
+            Npc(i).Skill(x) = Buffer.ReadLong()
+        Next
 
         If Npc(i).AttackSay Is Nothing Then Npc(i).AttackSay = ""
         If Npc(i).Name Is Nothing Then Npc(i).Name = ""
@@ -2350,6 +2361,11 @@
             Next
 
             Npc(n).QuestNum = buffer.ReadLong()
+
+            ReDim Npc(n).Skill(MAX_NPC_SKILLS)
+            For z = 1 To MAX_NPC_SKILLS
+                Npc(n).Skill(z) = buffer.ReadLong()
+            Next
 
             If Npc(n).AttackSay Is Nothing Then Npc(n).AttackSay = ""
             If Npc(n).Name Is Nothing Then Npc(n).Name = ""

@@ -745,6 +745,7 @@ Module ClientDataBase
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
         ReDim Npc(Index).Stat(0 To Stats.stat_count - 1)
+        ReDim Npc(Index).Skill(0 To MAX_NPC_SKILLS)
     End Sub
 
     Sub ClearAnimation(ByVal Index As Long)

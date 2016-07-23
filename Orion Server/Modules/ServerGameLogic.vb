@@ -343,6 +343,11 @@
                 Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).x)
                 Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).y)
                 Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).Dir)
+
+                For i = 1 To Vitals.Vital_Count - 1
+                    Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).Vital(i))
+                Next
+
                 SendDataToMap(MapNum, Buffer.ToArray())
                 Buffer = Nothing
             End If
@@ -586,6 +591,10 @@
                 End If
 
         End Select
+
+        If MapNpc(MapNum).Npc(MapNpcNum).SkillBuffer > 0 Then
+            CanNpcMove = False
+        End If
 
     End Function
 

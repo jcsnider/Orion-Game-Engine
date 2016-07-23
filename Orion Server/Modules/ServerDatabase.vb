@@ -887,6 +887,7 @@ Module ServerDatabase
         FilePutObject(F, Npc(NpcNum).SpawnSecs)
         FilePutObject(F, Npc(NpcNum).Behaviour)
         FilePutObject(F, Npc(NpcNum).Range)
+
         For i = 1 To 5
             FilePutObject(F, Npc(NpcNum).DropChance(i))
             FilePutObject(F, Npc(NpcNum).DropItem(i))
@@ -903,6 +904,10 @@ Module ServerDatabase
         FilePutObject(F, Npc(NpcNum).Animation)
 
         FilePutObject(F, Npc(NpcNum).QuestNum)
+
+        For i = 1 To MAX_NPC_SKILLS
+            FilePutObject(F, Npc(NpcNum).Skill(i))
+        Next
 
         FileClose(F)
     End Sub
@@ -953,6 +958,10 @@ Module ServerDatabase
 
         FileGetObject(F, Npc(NpcNum).QuestNum)
 
+        For i = 1 To MAX_NPC_SKILLS
+            FileGetObject(F, Npc(NpcNum).Skill(i))
+        Next
+
         FileClose(F)
 
         If Npc(NpcNum).Name Is Nothing Then Npc(NpcNum).Name = ""
@@ -977,6 +986,7 @@ Module ServerDatabase
         MapNpc(MapNum).Npc(Index) = Nothing
 
         ReDim MapNpc(MapNum).Npc(Index).Vital(0 To Vitals.Vital_Count)
+        ReDim MapNpc(MapNum).Npc(Index).SkillCD(MAX_NPC_SKILLS)
     End Sub
 
     Sub ClearMapNpcs()
@@ -1001,6 +1011,7 @@ Module ServerDatabase
             ReDim Npc(Index).DropChance(5)
             ReDim Npc(Index).DropItem(5)
             ReDim Npc(Index).DropItemValue(5)
+            ReDim Npc(Index).Skill(MAX_NPC_SKILLS)
         Next
     End Sub
 
@@ -1418,19 +1429,19 @@ Module ServerDatabase
 
         FilePutObject(F, Animation(AnimationNum).Name)
 
-        For x = 1 To UBound(Animation(AnimationNum).Sprite)
+        For x = 0 To UBound(Animation(AnimationNum).Sprite)
             FilePutObject(F, Animation(AnimationNum).Sprite(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).Frames)
+        For x = 0 To UBound(Animation(AnimationNum).Frames)
             FilePutObject(F, Animation(AnimationNum).Frames(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).LoopCount)
+        For x = 0 To UBound(Animation(AnimationNum).LoopCount)
             FilePutObject(F, Animation(AnimationNum).LoopCount(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).LoopTime)
+        For x = 0 To UBound(Animation(AnimationNum).LoopTime)
             FilePutObject(F, Animation(AnimationNum).LoopTime(x))
         Next
 
@@ -1460,19 +1471,19 @@ Module ServerDatabase
 
         FileGetObject(F, Animation(AnimationNum).Name)
 
-        For x = 1 To UBound(Animation(AnimationNum).Sprite)
+        For x = 0 To UBound(Animation(AnimationNum).Sprite)
             FileGetObject(F, Animation(AnimationNum).Sprite(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).Frames)
+        For x = 0 To UBound(Animation(AnimationNum).Frames)
             FileGetObject(F, Animation(AnimationNum).Frames(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).LoopCount)
+        For x = 0 To UBound(Animation(AnimationNum).LoopCount)
             FileGetObject(F, Animation(AnimationNum).LoopCount(x))
         Next
 
-        For x = 1 To UBound(Animation(AnimationNum).LoopTime)
+        For x = 0 To UBound(Animation(AnimationNum).LoopTime)
             FileGetObject(F, Animation(AnimationNum).LoopTime(x))
         Next
 
@@ -1507,7 +1518,7 @@ Module ServerDatabase
         Dim i As Long
 
         For i = 1 To MAX_ANIMATIONS
-            Call ClearAnimation(i)
+            ClearAnimation(i)
             DoEvents()
         Next
     End Sub
@@ -2512,6 +2523,10 @@ Module ServerDatabase
         Next
 
         Buffer.WriteLong(Npc(NpcNum).QuestNum)
+
+        For i = 1 To MAX_NPC_SKILLS
+            Buffer.WriteLong(Npc(NpcNum).Skill(i))
+        Next
 
         Return Buffer.ToArray
         Buffer = Nothing

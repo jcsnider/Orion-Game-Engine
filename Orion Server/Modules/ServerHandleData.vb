@@ -2099,10 +2099,14 @@
 
         Npc(NpcNum).QuestNum = buffer.ReadLong()
 
+        For i = 1 To MAX_NPC_SKILLS
+            Npc(NpcNum).Skill(i) = buffer.ReadLong()
+        Next
+
         ' Save it
-        Call SendUpdateNpcToAll(NpcNum)
-        Call SaveNpc(NpcNum)
-        Call Addlog(GetPlayerName(index) & " saved Npc #" & NpcNum & ".", ADMIN_LOG)
+        SendUpdateNpcToAll(NpcNum)
+        SaveNpc(NpcNum)
+        Addlog(GetPlayerName(index) & " saved Npc #" & NpcNum & ".", ADMIN_LOG)
 
         buffer = Nothing
     End Sub

@@ -691,6 +691,10 @@ Module ServerTCP
 
         Buffer.WriteLong(Npc(NpcNum).QuestNum)
 
+        For i = 1 To MAX_NPC_SKILLS
+            Buffer.WriteLong(Npc(NpcNum).Skill(i))
+        Next
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -724,6 +728,10 @@ Module ServerTCP
         Next
 
         Buffer.WriteLong(Npc(NpcNum).QuestNum)
+
+        For i = 1 To MAX_NPC_SKILLS
+            Buffer.WriteLong(Npc(NpcNum).Skill(i))
+        Next
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
@@ -1269,6 +1277,7 @@ Module ServerTCP
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).y)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Dir)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
+            Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.MP))
         Next
 
         'send Resource cache
@@ -1374,6 +1383,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendMapNpcsTo(ByVal Index As Long, ByVal MapNum As Long)
         Dim i As Long
         Dim Buffer As ByteBuffer
@@ -1387,6 +1397,7 @@ Module ServerTCP
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).y)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Dir)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
+            Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.MP))
         Next
 
         SendDataTo(Index, Buffer.ToArray())
@@ -1408,6 +1419,7 @@ Module ServerTCP
             Buffer.WriteLong(.y)
             Buffer.WriteLong(.Dir)
             Buffer.WriteLong(.Vital(Vitals.HP))
+            Buffer.WriteLong(.Vital(Vitals.MP))
         End With
 
         SendDataToMap(MapNum, Buffer.ToArray())

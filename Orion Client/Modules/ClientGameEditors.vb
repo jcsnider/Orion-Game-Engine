@@ -776,6 +776,7 @@ Module ClientGameEditors
 
 #Region "Npc Editor"
     Public Sub NpcEditorInit()
+        Dim i As Long
 
         If frmEditor_NPC.Visible = False Then Exit Sub
         EditorIndex = frmEditor_NPC.lstIndex.SelectedIndex + 1
@@ -794,7 +795,7 @@ Module ClientGameEditors
             .scrlRange.Value = Npc(EditorIndex).Range
             .txtChance.Text = Npc(EditorIndex).DropChance(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
             .scrlNum.Value = Npc(EditorIndex).DropItem(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
-            frmEditor_NPC.lblNum.Text = "Num: " & frmEditor_NPC.scrlNum.Value
+            'frmEditor_NPC.lblNum.Text = "Num: " & frmEditor_NPC.scrlNum.Value
             If frmEditor_NPC.scrlNum.Value > 0 Then
                 frmEditor_NPC.lblItemName.Text = "Item: " & Trim$(Item(frmEditor_NPC.scrlNum.Value).Name)
             End If
@@ -809,8 +810,40 @@ Module ClientGameEditors
             .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.endurance)
             .scrlInt.Value = Npc(EditorIndex).Stat(Stats.intelligence)
             .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.spirit)
-            .scrlWill.Value = Npc(EditorIndex).Stat(Stats.luck)
+            .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.luck)
             .scrlVit.Value = Npc(EditorIndex).Stat(Stats.vitality)
+
+            .cmbSkill1.Items.Clear()
+            .cmbSkill2.Items.Clear()
+            .cmbSkill3.Items.Clear()
+            .cmbSkill4.Items.Clear()
+            .cmbSkill5.Items.Clear()
+            .cmbSkill6.Items.Clear()
+
+            .cmbSkill1.Items.Add("None")
+            .cmbSkill2.Items.Add("None")
+            .cmbSkill3.Items.Add("None")
+            .cmbSkill4.Items.Add("None")
+            .cmbSkill5.Items.Add("None")
+            .cmbSkill6.Items.Add("None")
+
+            For i = 1 To MAX_SKILLS
+                If Len(Skill(i).Name) > 0 Then
+                    .cmbSkill1.Items.Add(Skill(i).Name)
+                    .cmbSkill2.Items.Add(Skill(i).Name)
+                    .cmbSkill3.Items.Add(Skill(i).Name)
+                    .cmbSkill4.Items.Add(Skill(i).Name)
+                    .cmbSkill5.Items.Add(Skill(i).Name)
+                    .cmbSkill6.Items.Add(Skill(i).Name)
+                End If
+            Next
+
+            .cmbSkill1.SelectedIndex = Npc(EditorIndex).Skill(1)
+            .cmbSkill2.SelectedIndex = Npc(EditorIndex).Skill(2)
+            .cmbSkill3.SelectedIndex = Npc(EditorIndex).Skill(3)
+            .cmbSkill4.SelectedIndex = Npc(EditorIndex).Skill(4)
+            .cmbSkill5.SelectedIndex = Npc(EditorIndex).Skill(5)
+            .cmbSkill6.SelectedIndex = Npc(EditorIndex).Skill(6)
         End With
 
         EditorNpc_DrawSprite()

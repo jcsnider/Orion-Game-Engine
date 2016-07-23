@@ -304,6 +304,9 @@
         Dim AttackTimer As Long
         Dim StunDuration As Long
         Dim StunTimer As Long
+        Dim SkillBuffer As Long
+        Dim SkillBufferTimer As Long
+        Dim SkillCD() As Long
     End Structure
 
     Public Structure TradeItemRec

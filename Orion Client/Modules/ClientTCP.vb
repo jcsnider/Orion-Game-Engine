@@ -626,6 +626,10 @@ Module ClientTCP
 
         Buffer.WriteLong(Npc(NpcNum).QuestNum)
 
+        For i = 1 To MAX_NPC_SKILLS
+            Buffer.WriteLong(Npc(NpcNum).Skill(i))
+        Next
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

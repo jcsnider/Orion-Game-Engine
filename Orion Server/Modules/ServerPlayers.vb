@@ -391,7 +391,7 @@
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
         End If
 
-        Call ClearPlayer(Index)
+        ClearPlayer(Index)
     End Sub
 
     Sub PlayerMove(ByVal Index As Long, ByVal Dir As Long, ByVal movement As Long, expectingwarp As Boolean)

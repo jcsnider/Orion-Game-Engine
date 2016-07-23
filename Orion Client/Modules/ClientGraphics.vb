@@ -1755,6 +1755,16 @@ Module ClientGraphics
                         rectShape.FillColor = SFML.Graphics.Color.Red
                         GameWindow.Draw(rectShape)
                     End If
+                    If MapNpc(i).Vital(Vitals.MP) > 0 Then
+                        ' calculate the width to fill
+                        barWidth = ((MapNpc(i).Vital(Vitals.MP) / (Npc(MapNpc(i).Num).Stat(Stats.intelligence) * 2) * 32))
+                        ' draw bars
+                        rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                        Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+                        rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 80))
+                        rectShape.FillColor = SFML.Graphics.Color.Blue
+                        GameWindow.Draw(rectShape)
+                    End If
                 End If
             End If
         Next

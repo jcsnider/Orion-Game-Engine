@@ -171,93 +171,139 @@
 
     End Function
 
-    Sub AttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, ByVal Damage As Long, Optional ByVal skillnum As Long = 0)
-        Dim exp As Long
+    Sub AttackPlayer(ByVal Attacker As Long, ByVal Victim As Long, ByVal Damage As Long, Optional ByVal skillnum As Long = 0, Optional ByVal npcnum As Byte = 0)
+        Dim exp As Long, mapnum As Long
         Dim n As Long
         Dim Buffer As ByteBuffer
 
-        ' Check for subscript out of range
-        If IsPlaying(Attacker) = False Or IsPlaying(Victim) = False Or Damage < 0 Then
-            Exit Sub
-        End If
-
-        ' Check for weapon
-        n = 0
-
-        If GetPlayerEquipment(Attacker, Equipment.Weapon) > 0 Then
-            n = GetPlayerEquipment(Attacker, Equipment.Weapon)
-        End If
-
-        ' Send this packet so they can see the person attacking
-        Buffer = New ByteBuffer
-        Buffer.WriteLong(ServerPackets.SAttack)
-        Buffer.WriteLong(Attacker)
-        SendDataToMapBut(Attacker, GetPlayerMap(Attacker), Buffer.ToArray())
-        Buffer = Nothing
-
-        If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
-
-            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
-
-            ' Player is dead
-            GlobalMsg(GetPlayerName(Victim) & " has been killed by " & GetPlayerName(Attacker))
-            ' Calculate exp to give attacker
-            exp = (GetPlayerExp(Victim) \ 10)
-
-            ' Make sure we dont get less then 0
-            If exp < 0 Then
-                exp = 0
+        If npcnum = 0 Then
+            ' Check for subscript out of range
+            If IsPlaying(Attacker) = False Or IsPlaying(Victim) = False Or Damage < 0 Then
+                Exit Sub
             End If
 
-            If exp = 0 Then
-                PlayerMsg(Victim, "You lost no exp.")
-                PlayerMsg(Attacker, "You received no exp.")
+            ' Check for weapon
+            n = 0
+
+            If GetPlayerEquipment(Attacker, Equipment.Weapon) > 0 Then
+                n = GetPlayerEquipment(Attacker, Equipment.Weapon)
+            End If
+
+            ' Send this packet so they can see the person attacking
+            Buffer = New ByteBuffer
+            Buffer.WriteLong(ServerPackets.SAttack)
+            Buffer.WriteLong(Attacker)
+            SendDataToMapBut(Attacker, GetPlayerMap(Attacker), Buffer.ToArray())
+            Buffer = Nothing
+
+            If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
+
+                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+                ' Player is dead
+                GlobalMsg(GetPlayerName(Victim) & " has been killed by " & GetPlayerName(Attacker))
+                ' Calculate exp to give attacker
+                exp = (GetPlayerExp(Victim) \ 10)
+
+                ' Make sure we dont get less then 0
+                If exp < 0 Then
+                    exp = 0
+                End If
+
+                If exp = 0 Then
+                    PlayerMsg(Victim, "You lost no exp.")
+                    PlayerMsg(Attacker, "You received no exp.")
+                Else
+                    SetPlayerExp(Victim, GetPlayerExp(Victim) - exp)
+                    SendEXP(Victim)
+                    PlayerMsg(Victim, "You lost " & exp & " exp.")
+                    SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
+                    SendEXP(Attacker)
+                    PlayerMsg(Attacker, "You received " & exp & " exp.")
+                End If
+
+                ' Check for a level up
+                CheckPlayerLevelUp(Attacker)
+
+                ' Check if target is player who died and if so set target to 0
+                If TempPlayer(Attacker).TargetType = TARGET_TYPE_PLAYER Then
+                    If TempPlayer(Attacker).Target = Victim Then
+                        TempPlayer(Attacker).Target = 0
+                        TempPlayer(Attacker).TargetType = TARGET_TYPE_NONE
+                    End If
+                End If
+
+                If GetPlayerPK(Victim) = NO Then
+                    If GetPlayerPK(Attacker) = NO Then
+                        SetPlayerPK(Attacker, YES)
+                        SendPlayerData(Attacker)
+                        GlobalMsg(GetPlayerName(Attacker) & " has been deemed a Player Killer!!!")
+                    End If
+
+                Else
+                    GlobalMsg(GetPlayerName(Victim) & " has paid the price for being a Player Killer!!!")
+                End If
+
+                OnDeath(Victim)
             Else
-                SetPlayerExp(Victim, GetPlayerExp(Victim) - exp)
-                SendEXP(Victim)
-                PlayerMsg(Victim, "You lost " & exp & " exp.")
-                SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                SendEXP(Attacker)
-                PlayerMsg(Attacker, "You received " & exp & " exp.")
-            End If
+                ' Player not dead, just do the damage
+                SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+                SendVital(Victim, Vitals.HP)
+                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
-            ' Check for a level up
-            CheckPlayerLevelUp(Attacker)
-
-            ' Check if target is player who died and if so set target to 0
-            If TempPlayer(Attacker).TargetType = TARGET_TYPE_PLAYER Then
-                If TempPlayer(Attacker).Target = Victim Then
-                    TempPlayer(Attacker).Target = 0
-                    TempPlayer(Attacker).TargetType = TARGET_TYPE_NONE
+                'if a stunning skill, stun the player
+                If skillnum > 0 Then
+                    If Skill(skillnum).StunDuration > 0 Then StunPlayer(Victim, skillnum)
                 End If
             End If
 
-            If GetPlayerPK(Victim) = NO Then
-                If GetPlayerPK(Attacker) = NO Then
-                    SetPlayerPK(Attacker, YES)
-                    SendPlayerData(Attacker)
-                    GlobalMsg(GetPlayerName(Attacker) & " has been deemed a Player Killer!!!")
+            ' Reset attack timer
+            TempPlayer(Attacker).AttackTimer = GetTickCount()
+        Else ' npc to player
+            ' Check for subscript out of range
+            If IsPlaying(Victim) = False Or Damage < 0 Then Exit Sub
+
+            mapnum = GetPlayerMap(Victim)
+
+            ' Send this packet so they can see the person attacking
+            Buffer = New ByteBuffer
+            Buffer.WriteLong(ServerPackets.SNpcAttack)
+            Buffer.WriteLong(Attacker)
+            SendDataToMap(mapnum, Buffer.ToArray())
+            Buffer = Nothing
+
+            If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
+
+                SendActionMsg(mapnum, "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+                ' Player is dead
+                GlobalMsg(GetPlayerName(Victim) & " has been killed by " & Npc(MapNpc(mapnum).Npc(Attacker).Num).Name)
+
+                ' Check if target is player who died and if so set target to 0
+                If TempPlayer(Attacker).TargetType = TARGET_TYPE_PLAYER Then
+                    If TempPlayer(Attacker).Target = Victim Then
+                        TempPlayer(Attacker).Target = 0
+                        TempPlayer(Attacker).TargetType = TARGET_TYPE_NONE
+                    End If
                 End If
 
+                OnDeath(Victim)
             Else
-                GlobalMsg(GetPlayerName(Victim) & " has paid the price for being a Player Killer!!!")
+                ' Player not dead, just do the damage
+                SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+                SendVital(Victim, Vitals.HP)
+                SendActionMsg(mapnum, "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+                'if a stunning skill, stun the player
+                If skillnum > 0 Then
+                    If Skill(skillnum).StunDuration > 0 Then StunPlayer(Victim, skillnum)
+                End If
             End If
 
-            OnDeath(Victim)
-        Else
-            ' Player not dead, just do the damage
-            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
-            SendVital(Victim, Vitals.HP)
-            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
-
-            'if a stunning skill, stun the player
-            If skillnum > 0 Then
-                If Skill(skillnum).StunDuration > 0 Then StunPlayer(Victim, skillnum)
-            End If
+            ' Reset attack timer
+            MapNpc(mapnum).Npc(Attacker).AttackTimer = GetTickCount()
         End If
 
-        ' Reset attack timer
-        TempPlayer(Attacker).AttackTimer = GetTickCount()
     End Sub
 
     Public Sub StunPlayer(ByVal Index As Long, ByVal skillnum As Long)
@@ -680,8 +726,8 @@
 
     End Function
 
-    Sub NpcAttackPlayer(ByVal MapNpcNum As Long, ByVal Victim As Long, ByVal Damage As Long)
-        Dim Name As String
+    Public Sub NpcAttackPlayer(ByVal MapNpcNum As Long, ByVal Victim As Long)
+        Dim Name As String, damage As Long
         Dim MapNum As Long
         Dim Buffer As ByteBuffer
 
@@ -694,21 +740,23 @@
         MapNum = GetPlayerMap(Victim)
         Name = Trim$(Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Name)
 
-        ' Send this packet so they can see the person attacking
+        ' Send this packet so they can see the npc attacking
         Buffer = New ByteBuffer
         Buffer.WriteLong(ServerPackets.SNpcAttack)
         Buffer.WriteLong(MapNpcNum)
         SendDataToMap(MapNum, Buffer.ToArray())
         Buffer = Nothing
 
-        If Damage <= 0 Then
+        damage = Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Stat(Stats.strength) - GetPlayerProtection(Victim)
+
+        If damage <= 0 Then
             SendActionMsg(GetPlayerMap(Victim), "BLOCK!", Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
             Exit Sub
         End If
 
-        If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
+        If damage >= GetPlayerVital(Victim, Vitals.HP) Then
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
             ' kill player
             KillPlayer(Victim)
@@ -727,11 +775,11 @@
             Next
         Else
             ' Player not dead, just do the damage
-            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - damage)
             SendVital(Victim, Vitals.HP)
             SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TARGET_TYPE_PLAYER, Victim)
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
         End If
 
     End Sub
@@ -820,6 +868,121 @@
         End If
     End Sub
 
+    Public Function RandomNpcAttack(ByVal MapNum As Long, ByVal NpcNum As Long) As Long
+        Dim i As Long, SkillList As New List(Of Byte)
+
+        RandomNpcAttack = 0
+
+        If MapNpc(MapNum).Npc(NpcNum).SkillBuffer > 0 Then Exit Function
+
+        For i = 1 To MAX_NPC_SKILLS
+            If Npc(NpcNum).Skill(i) > 0 Then
+                SkillList.Add(Npc(NpcNum).Skill(i))
+            End If
+        Next
+
+        If SkillList.Count > 1 Then
+            RandomNpcAttack = SkillList(Random(0, SkillList.Count))
+        Else
+            RandomNpcAttack = SkillList(0)
+        End If
+
+    End Function
+
+    Public Function GetNpcSkill(ByVal NpcNum As Long, ByVal skillslot As Long) As Long
+        GetNpcSkill = Npc(NpcNum).Skill(skillslot)
+    End Function
+
+    Public Sub BufferNpcSkill(ByVal MapNum As Long, ByVal MapNpcNum As Long, ByVal skillslot As Long)
+        Dim skillnum As Long
+        Dim MPCost As Long
+        Dim SkillCastType As Long
+        Dim range As Long
+        Dim HasBuffered As Boolean
+
+        Dim TargetType As Byte
+        Dim Target As Long
+
+        ' Prevent subscript out of range
+        If skillslot <= 0 Or skillslot > MAX_NPC_SKILLS Then Exit Sub
+
+
+        skillnum = GetNpcSkill(MapNpc(MapNum).Npc(MapNpcNum).Num, skillslot)
+
+        If skillnum <= 0 Or skillnum > MAX_SKILLS Then Exit Sub
+
+        ' see if cooldown has finished
+        If MapNpc(MapNum).Npc(MapNpcNum).SkillCD(skillslot) > GetTickCount() Then
+            NpcAttackPlayer(MapNpcNum, MapNpc(MapNum).Npc(MapNpcNum).Target)
+            Exit Sub
+        End If
+
+        MPCost = Skill(skillnum).MPCost
+
+        ' Check if they have enough MP
+        If MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.MP) < MPCost Then Exit Sub
+
+        ' find out what kind of skill it is! self cast, target or AOE
+        If Skill(skillnum).range > 0 Then
+            ' ranged attack, single target or aoe?
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 2 ' targetted
+            Else
+                SkillCastType = 3 ' targetted aoe
+            End If
+        Else
+            If Not Skill(skillnum).IsAoE Then
+                SkillCastType = 0 ' self-cast
+            Else
+                SkillCastType = 1 ' self-cast AoE
+            End If
+        End If
+
+        TargetType = MapNpc(MapNum).Npc(MapNpcNum).TargetType
+        Target = MapNpc(MapNum).Npc(MapNpcNum).Target
+        range = Skill(skillnum).range
+        HasBuffered = False
+
+        Select Case SkillCastType
+            Case 0, 1 ' self-cast & self-cast AOE
+                HasBuffered = True
+            Case 2, 3 ' targeted & targeted AOE
+                ' check if have target
+                If Not Target > 0 Then
+                    Exit Sub
+                End If
+                If TargetType = TARGET_TYPE_PLAYER Then
+                    ' if have target, check in range
+                    If Not isInRange(range, MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y, GetPlayerX(Target), GetPlayerY(Target)) Then
+                        Exit Sub
+                    Else
+                        HasBuffered = True
+                    End If
+                ElseIf TargetType = TARGET_TYPE_NPC Then
+                    '' if have target, check in range
+                    'If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
+                    '    PlayerMsg(Index, "Target not in range.")
+                    '    HasBuffered = False
+                    'Else
+                    '    ' go through skill types
+                    '    If Skill(skillnum).Type <> SKILL_TYPE_DAMAGEHP And Skill(skillnum).Type <> SKILL_TYPE_DAMAGEMP Then
+                    '        HasBuffered = True
+                    '    Else
+                    '        If CanAttackNpc(Index, Target, True) Then
+                    '            HasBuffered = True
+                    '        End If
+                    '    End If
+                    'End If
+                End If
+        End Select
+
+        If HasBuffered Then
+            SendAnimation(MapNum, Skill(skillnum).CastAnim, 0, 0, TARGET_TYPE_PLAYER, Target)
+            MapNpc(MapNum).Npc(MapNpcNum).SkillBuffer = skillslot
+            MapNpc(MapNum).Npc(MapNpcNum).SkillBufferTimer = GetTickCount()
+            Exit Sub
+        End If
+    End Sub
 #End Region
 
     Function isInRange(ByVal range As Long, ByVal x1 As Long, ByVal y1 As Long, ByVal x2 As Long, ByVal y2 As Long) As Boolean
