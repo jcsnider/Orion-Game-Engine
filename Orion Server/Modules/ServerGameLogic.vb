@@ -677,7 +677,7 @@
         Dim i As Long
 
         For i = 1 To MAX_MAPS
-            Call SpawnMapNpcs(i)
+            SpawnMapNpcs(i)
         Next
 
     End Sub
@@ -685,10 +685,11 @@
         Dim i As Long
 
         For i = 1 To MAX_MAP_NPCS
-            Call SpawnNpc(i, MapNum)
+            SpawnNpc(i, MapNum)
         Next
 
     End Sub
+
     Sub SendMapNpcsToMap(ByVal MapNum As Long)
         Dim i As Long
         Dim Buffer As ByteBuffer
@@ -702,21 +703,21 @@
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).y)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Dir)
             Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
+            Buffer.WriteLong(MapNpc(MapNum).Npc(i).Vital(Vitals.MP))
         Next
 
         SendDataToMap(MapNum, Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
+
     Sub PlayerSwitchBankSlots(ByVal Index As Long, ByVal oldSlot As Long, ByVal newSlot As Long)
         Dim OldNum As Long
         Dim OldValue As Long
         Dim NewNum As Long
         Dim NewValue As Long
 
-        If oldSlot = 0 Or newSlot = 0 Then
-            Exit Sub
-        End If
+        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
 
         OldNum = GetPlayerBankItemNum(Index, oldSlot)
         OldValue = GetPlayerBankItemValue(Index, oldSlot)

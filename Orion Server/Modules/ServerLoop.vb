@@ -1263,7 +1263,6 @@
             MapNpc(MapNum).Npc(NpcNum).Vital(Vitals.MP) = MapNpc(MapNum).Npc(NpcNum).Vital(Vitals.MP) - MPCost
             SendMapNpcVitals(MapNum, NpcNum)
             MapNpc(MapNum).Npc(NpcNum).SkillCD(skillslot) = GetTickCount() + (Skill(skillnum).CDTime * 1000)
-            'SendCooldown(NpcNum, skillslot)
         End If
     End Sub
 

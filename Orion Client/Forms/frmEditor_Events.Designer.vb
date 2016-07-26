@@ -1142,6 +1142,7 @@ Partial Class frmEditor_Events
         '
         'fraDialogue
         '
+        Me.fraDialogue.Controls.Add(Me.fraShowText)
         Me.fraDialogue.Controls.Add(Me.fraPlayerWarp)
         Me.fraDialogue.Controls.Add(Me.fraMapTint)
         Me.fraDialogue.Controls.Add(Me.fraSetWeather)
@@ -1173,7 +1174,6 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraPlayerVariable)
         Me.fraDialogue.Controls.Add(Me.fraShowChatBubble)
         Me.fraDialogue.Controls.Add(Me.fraGiveExp)
-        Me.fraDialogue.Controls.Add(Me.fraShowText)
         Me.fraDialogue.Controls.Add(Me.fraHidePic)
         Me.fraDialogue.Controls.Add(Me.fraPlayerSwitch)
         Me.fraDialogue.Controls.Add(Me.fraCreateLabel)

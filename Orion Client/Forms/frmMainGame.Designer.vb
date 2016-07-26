@@ -198,7 +198,7 @@ Partial Class frmMainGame
         '
         Me.pnlTmpInv.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTmpInv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpInv.Location = New System.Drawing.Point(1053, 491)
+        Me.pnlTmpInv.Location = New System.Drawing.Point(1285, 439)
         Me.pnlTmpInv.Name = "pnlTmpInv"
         Me.pnlTmpInv.Size = New System.Drawing.Size(32, 32)
         Me.pnlTmpInv.TabIndex = 15
@@ -264,7 +264,7 @@ Partial Class frmMainGame
         '
         Me.pnlTempBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTempBank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTempBank.Location = New System.Drawing.Point(1057, 601)
+        Me.pnlTempBank.Location = New System.Drawing.Point(1289, 549)
         Me.pnlTempBank.Name = "pnlTempBank"
         Me.pnlTempBank.Size = New System.Drawing.Size(32, 32)
         Me.pnlTempBank.TabIndex = 20
@@ -274,7 +274,7 @@ Partial Class frmMainGame
         '
         Me.pnlTmpSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.pnlTmpSkill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpSkill.Location = New System.Drawing.Point(1060, 541)
+        Me.pnlTmpSkill.Location = New System.Drawing.Point(1292, 489)
         Me.pnlTmpSkill.Name = "pnlTmpSkill"
         Me.pnlTmpSkill.Size = New System.Drawing.Size(32, 32)
         Me.pnlTmpSkill.TabIndex = 42
@@ -286,7 +286,7 @@ Partial Class frmMainGame
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1024, 604)
+        Me.ClientSize = New System.Drawing.Size(1027, 680)
         Me.Controls.Add(Me.pnlOptions)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlTempBank)

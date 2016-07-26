@@ -1178,7 +1178,11 @@ newlist:
 
             Case EventType.evShowText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtShowText.Text
+                Dim tmptxt As String = ""
+                For i = 0 To frmEditor_Events.txtShowText.Lines(UBound(frmEditor_Events.txtShowText.Lines))
+                    tmptxt = tmptxt & frmEditor_Events.txtShowText.Lines(i)
+                Next
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = tmptxt
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlShowTextFace.Value
 
             Case EventType.evShowChoices
