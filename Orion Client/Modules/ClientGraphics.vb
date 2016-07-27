@@ -1842,6 +1842,8 @@ Module ClientGraphics
 
         FrameCount = Animation(AnimInstance(Index).Animation).Frames(Layer)
 
+        If FrameCount <= 0 Then Exit Sub
+
         ' total width divided by frame count
         width = AnimationsGFXInfo(Sprite).width / FrameCount
         height = AnimationsGFXInfo(Sprite).height
