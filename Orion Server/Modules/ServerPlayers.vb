@@ -1069,6 +1069,7 @@
     Function GetPlayerSkill(ByVal Index As Long, ByVal skillslot As Long) As Long
         GetPlayerSkill = 0
         If Index > MAX_PLAYERS Then Exit Function
+
         GetPlayerSkill = Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot)
     End Function
 

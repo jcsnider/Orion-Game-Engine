@@ -1143,8 +1143,6 @@ Continue1:
 
     End Sub
 
-
-
     Public Sub CheckAnimInstance(ByVal Index As Long)
         Dim looptime As Long
         Dim Layer As Long

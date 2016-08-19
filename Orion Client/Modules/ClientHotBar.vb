@@ -74,7 +74,7 @@ Public Module ClientHotBar
         RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.width, HotBarGFXInfo.height)
 
         For i = 1 To MAX_HOTBAR
-            skillnum = Player(MyIndex).Hotbar(i).Slot
+            skillnum = PlayerSkills(Player(MyIndex).Hotbar(i).Slot)
 
             If skillnum > 0 Then
                 skillpic = Skill(skillnum).Icon

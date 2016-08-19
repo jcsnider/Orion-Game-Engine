@@ -667,7 +667,7 @@ Module ClientGraphics
             End With
 
         ElseIf TexType = 9 Then 'skill icons
-            If Index < 0 Or Index > NumSkillIcons Then Exit Sub
+            If Index <= 0 Or Index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             SkillIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SkillIcons\" & Index & GFX_EXT)

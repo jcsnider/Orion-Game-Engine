@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports System.Drawing
 
 Public Class frmMainGame
 #Region "Frm Code"
@@ -208,7 +207,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        If Editor = 0 And Not InMapEditor And Not Adminvisible Then Focus()
+        If Editor = 0 And Not InMapEditor And Not frmAdmin.Visible Then Focus()
 
     End Sub
 

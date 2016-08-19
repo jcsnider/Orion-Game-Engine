@@ -249,7 +249,7 @@ Public Module ClientGuiFunctions
 
                 If e.Button = MouseButtons.Left Then
                     If hotbarslot > 0 Then
-                        skillnum = PlayerSkills(Player(MyIndex).Hotbar(hotbarslot).Slot)
+                        skillnum = Player(MyIndex).Hotbar(hotbarslot).Slot
 
                         If skillnum <> 0 Then
                             PlaySound("Click.ogg")
