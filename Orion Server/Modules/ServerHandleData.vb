@@ -731,7 +731,11 @@
                     SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONADDMP
                     For i = 1 To Stats.Stat_Count - 1
@@ -758,7 +762,11 @@
                     SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONADDSP
                     For i = 1 To Stats.Stat_Count - 1
@@ -784,7 +792,11 @@
 
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_POTIONSUBHP
                     For i = 1 To Stats.Stat_Count - 1
@@ -811,7 +823,11 @@
                     SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONSUBMP
                     For i = 1 To Stats.Stat_Count - 1
@@ -838,7 +854,11 @@
                     SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONSUBSP
                     For i = 1 To Stats.Stat_Count - 1
@@ -864,7 +884,12 @@
 
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
+                    Else
+                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
+                    End If
+
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_KEY
                     For i = 1 To Stats.Stat_Count - 1
