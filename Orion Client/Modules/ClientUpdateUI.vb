@@ -17,6 +17,7 @@
     Public tempUserName As String
     Public tempPassword As String
     Public pnlCharSelectVisible As Boolean
+    Public DrawCharSelect As Boolean
 
     'Mapreport
     Public UpdateMapnames As Boolean
@@ -336,10 +337,15 @@
             frmMenu.Visible = frmmenuvisible
         End If
 
+        If DrawCharSelect Then
+            frmMenu.DrawCharacterSelect()
+            DrawCharSelect = False
+        End If
+
         If pnlCharSelectVisible <> frmMenu.pnlCharSelect.Visible Then
             frmMenu.pnlCharSelect.Visible = pnlCharSelectVisible
             If pnlCharSelectVisible Then
-                frmMenu.DrawCharacterSelect()
+                DrawCharSelect = True
             End If
         End If
 

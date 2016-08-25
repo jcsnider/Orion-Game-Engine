@@ -113,6 +113,7 @@ Public Class frmMenu
                 g.Dispose()
             Else
                 picChar1.BorderStyle = BorderStyle.FixedSingle
+                picChar1.Refresh()
             End If
 
 
@@ -142,6 +143,7 @@ Public Class frmMenu
                 g.Dispose()
             Else
                 picChar2.BorderStyle = BorderStyle.FixedSingle
+                picChar2.Refresh()
             End If
 
 
@@ -171,6 +173,7 @@ Public Class frmMenu
                 g.Dispose()
             Else
                 picChar3.BorderStyle = BorderStyle.FixedSingle
+                picChar3.Refresh()
             End If
 
         End If

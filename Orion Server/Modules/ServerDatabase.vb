@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.IO.Compression
+Imports System.Linq
 
 Module ServerDatabase
 
@@ -1577,29 +1578,21 @@ Module ServerDatabase
     End Sub
 
     Sub DeleteName(ByVal Name As String)
-        Dim f1 As Long
-        Dim f2 As Long
-        Dim s As String
-        s = ""
-        Call FileCopy(Application.StartupPath & "\data\accounts\charlist.txt", Application.StartupPath & "\data\accounts\chartemp.txt")
-        ' Destroy name from charlist
-        f1 = FreeFile()
-        FileOpen(f1, Application.StartupPath & "\data\accounts\chartemp.txt", OpenMode.Input, OpenAccess.ReadWrite, OpenShare.Default)
-        f2 = FreeFile()
-        FileOpen(f2, Application.StartupPath & "\data\accounts\charlist.txt", OpenMode.Output, OpenAccess.ReadWrite, OpenShare.Default)
 
-        Do While Not EOF(f1)
-            FileGetObject(f1, s)
+        Dim fileName As String = Application.StartupPath & "\data\accounts\charlist.txt"
 
-            If Trim$(LCase$(s)) <> Trim$(LCase$(Name)) Then
-                FilePutObject(f2, s)
+        ' Read the file line by line
+        Dim fileContents = File.ReadAllLines(fileName).ToList
+
+        ' Remove unwanted stuff
+        For i = 0 To fileContents.Count - 1
+            If fileContents(i).Contains(Trim$(LCase$(Name))) Then
+                fileContents.RemoveAt(i)
             End If
+        Next
 
-        Loop
-
-        FileClose(f1)
-        FileClose(f2)
-        Kill(Application.StartupPath & "\data\accounts\chartemp.txt")
+        ' Write the file to disk
+        File.WriteAllLines(fileName, fileContents.ToArray)
     End Sub
 
 #End Region

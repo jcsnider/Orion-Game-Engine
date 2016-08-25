@@ -275,6 +275,15 @@
 
         SelectedChar = 1
 
+        'reset for deleting chars
+        For i = 1 To MaxChars
+            CharSelection(i).Name = ""
+            CharSelection(i).Sprite = 0
+            CharSelection(i).Level = 0
+            CharSelection(i).ClassName = ""
+            CharSelection(i).Gender = 0
+        Next
+
         For i = 1 To MaxChars
             CharName = Buffer.ReadString
             Sprite = Buffer.ReadLong
@@ -301,7 +310,9 @@
         pnlCharSelectVisible = True
 
         frmMenu.DrawCharacter()
-        frmMenu.DrawCharacterSelect()
+
+
+        DrawCharSelect = True
 
     End Sub
 
