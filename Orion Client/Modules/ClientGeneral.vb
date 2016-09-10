@@ -83,6 +83,8 @@ Module ClientGeneral
             ReDim Npc(i).DropChance(5)
             ReDim Npc(i).DropItem(5)
             ReDim Npc(i).DropItemValue(5)
+
+            ReDim Npc(i).Skill(6)
         Next
 
         ReDim MapNpc(0 To MAX_MAP_NPCS)

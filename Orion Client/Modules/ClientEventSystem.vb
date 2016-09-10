@@ -1179,7 +1179,7 @@ newlist:
             Case EventType.evShowText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 Dim tmptxt As String = ""
-                For i = 0 To frmEditor_Events.txtShowText.Lines(UBound(frmEditor_Events.txtShowText.Lines))
+                For i = 0 To UBound(frmEditor_Events.txtShowText.Lines)
                     tmptxt = tmptxt & frmEditor_Events.txtShowText.Lines(i)
                 Next
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = tmptxt

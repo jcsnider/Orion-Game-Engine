@@ -183,7 +183,7 @@
         End If
     End Sub
 
-    Private Sub scrlItemRew_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRew1.ValueChanged
+    Private Sub scrlItemRew1_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRew1.ValueChanged
         If scrlItemRew1.Value = 0 Then
             lblItemReward1.Text = "Item Reward: None" & " (" & scrlItemRewValue1.Value & ")"
         Else
@@ -192,7 +192,7 @@
         Quest(EditorIndex).RewardItem = scrlItemRew1.Value
     End Sub
 
-    Private Sub scrlItemRewValue_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRewValue1.ValueChanged
+    Private Sub scrlItemRew1Value_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRewValue1.ValueChanged
         If scrlItemRew1.Value = 0 Then
             lblItemReward1.Text = "Item Reward: None" & " (" & scrlItemRewValue1.Value & ")"
         Else
@@ -341,4 +341,5 @@
         lblExpReward.Text = "Experience Gained: " & scrlExpReward.Value
         Quest(EditorIndex).RewardExp = scrlExpReward.Value
     End Sub
+
 End Class

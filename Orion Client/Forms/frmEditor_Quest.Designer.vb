@@ -439,7 +439,7 @@ Partial Class frmEditor_Quest
         Me.fraRewards.Controls.Add(Me.scrlItemRewValue1)
         Me.fraRewards.Controls.Add(Me.scrlItemRew1)
         Me.fraRewards.Controls.Add(Me.lblItemReward1)
-        Me.fraRewards.Location = New System.Drawing.Point(703, 12)
+        Me.fraRewards.Location = New System.Drawing.Point(699, 12)
         Me.fraRewards.Name = "fraRewards"
         Me.fraRewards.Size = New System.Drawing.Size(405, 390)
         Me.fraRewards.TabIndex = 7
