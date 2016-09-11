@@ -883,8 +883,6 @@
 
         If SkillList.Count > 1 Then
             RandomNpcAttack = SkillList(Random(0, SkillList.Count))
-        Else
-            RandomNpcAttack = SkillList(0)
         End If
 
     End Function
