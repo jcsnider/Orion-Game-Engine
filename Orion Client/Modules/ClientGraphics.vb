@@ -1174,9 +1174,6 @@ Module ClientGraphics
                         End With
 
                         RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-                        'If UpdateMiniMap Then
-                        '    RenderTextureMini(TileSetTexture(.Layer(i).tileset), MiniMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-                        'End If
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -1220,9 +1217,7 @@ Module ClientGraphics
                         End With
 
                         RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-                        'If UpdateMiniMap Then
-                        '    RenderTextureMini(TileSetTexture(.Layer(i).tileset), MiniMap, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-                        'End If
+
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
                         DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
@@ -1474,7 +1469,7 @@ Module ClientGraphics
             Next
         End If
 
-        ''Draw sum d00rs.
+        'Draw sum d00rs.
         For X = TileView.left To TileView.right
             For Y = TileView.top To TileView.bottom
 
@@ -1708,10 +1703,6 @@ Module ClientGraphics
         'Render GUI
         DrawGUI()
 
-        'MiniMap.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, 100, 100)))
-        'RenderTexture(MiniMap.Texture, GameWindow, frmMainGame.picscreen.Width - 200, 10, 0, 0, MiniMap.Size.X, MiniMap.Size.Y)
-        'If UpdateMiniMap = True Then UpdateMiniMap = False
-
         'and finally show everything on screen
         GameWindow.Display()
     End Sub
@@ -1754,16 +1745,17 @@ Module ClientGraphics
                         rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 75))
                         rectShape.FillColor = SFML.Graphics.Color.Red
                         GameWindow.Draw(rectShape)
-                    End If
-                    If MapNpc(i).Vital(Vitals.MP) > 0 Then
-                        ' calculate the width to fill
-                        barWidth = ((MapNpc(i).Vital(Vitals.MP) / (Npc(MapNpc(i).Num).Stat(Stats.intelligence) * 2) * 32))
-                        ' draw bars
-                        rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
-                        Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
-                        rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 80))
-                        rectShape.FillColor = SFML.Graphics.Color.Blue
-                        GameWindow.Draw(rectShape)
+
+                        If MapNpc(i).Vital(Vitals.MP) > 0 Then
+                            ' calculate the width to fill
+                            barWidth = ((MapNpc(i).Vital(Vitals.MP) / (Npc(MapNpc(i).Num).Stat(Stats.intelligence) * 2) * 32))
+                            ' draw bars
+                            rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                            Dim rectShape2 As New RectangleShape(New Vector2f(barWidth, 4))
+                            rectShape2.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 80))
+                            rectShape2.FillColor = SFML.Graphics.Color.Blue
+                            GameWindow.Draw(rectShape2)
+                        End If
                     End If
                 End If
             End If

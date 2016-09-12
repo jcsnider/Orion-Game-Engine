@@ -100,7 +100,7 @@ Partial Class frmMainGame
         'cmbScreenSize
         '
         Me.cmbScreenSize.FormattingEnabled = True
-        Me.cmbScreenSize.Items.AddRange(New Object() {"1024X768", "1152X864"})
+        Me.cmbScreenSize.Items.AddRange(New Object() {"800X600", "1024X768", "1152X864"})
         Me.cmbScreenSize.Location = New System.Drawing.Point(11, 115)
         Me.cmbScreenSize.Name = "cmbScreenSize"
         Me.cmbScreenSize.Size = New System.Drawing.Size(206, 21)

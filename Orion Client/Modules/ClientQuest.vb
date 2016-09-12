@@ -767,8 +767,8 @@
                 QuestRequirementsText = "Requirements: "  'ToDo
             End If
 
-            'Rewards
-            QuestRewardsText = "Rewards: " & Item(Quest(QuestNum).RewardItem).Name & " X" & Str(Quest(QuestNum).RewardItemAmount)
+        'Rewards
+        QuestRewardsText = Item(Quest(QuestNum).RewardItem).Name & " X" & Str(Quest(QuestNum).RewardItemAmount)
 
     End Sub
 
@@ -795,11 +795,17 @@
 
         DrawText(QuestLogX + 204, QuestLogY + 147, Trim$(ActualTaskText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        DrawText(QuestLogX + 204, QuestLogY + 218, Trim$(QuestDialogText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-
+        y = 0
+        For Each str As String In WordWrap(Trim$(QuestDialogText), 40)
+            'description
+            DrawText(QuestLogX + 204, QuestLogY + 218 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            y = y + 15
+        Next
         DrawText(QuestLogX + 280, QuestLogY + 263, Trim$(QuestStatus2Text), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         DrawText(QuestLogX + 285, QuestLogY + 288, Trim$(QuestRequirementsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(QuestLogX + 255, QuestLogY + 313, Trim$(QuestRewardsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Public Sub ResetQuestLog()

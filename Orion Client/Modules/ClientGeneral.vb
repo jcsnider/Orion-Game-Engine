@@ -357,11 +357,13 @@ Module ClientGeneral
     Public Sub RePositionGUI()
 
         'first change the tiles
-        If Options.ScreenSize = 0 Then
+        If Options.ScreenSize = 0 Then ' 800x600
+            MAX_MAPX = 25
+            MAX_MAPY = 19
+        ElseIf Options.ScreenSize = 1 Then '1024x768
             MAX_MAPX = 31
             MAX_MAPY = 24
-
-        ElseIf Options.ScreenSize = 1 Then
+        ElseIf Options.ScreenSize = 2 Then
             MAX_MAPX = 35
             MAX_MAPY = 26
         End If
@@ -389,8 +391,13 @@ Module ClientGeneral
         MyChatY = frmMainGame.Height - 60
 
         'hotbar
-        HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
-        HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 45
+        If Options.ScreenSize = 0 Then
+            HotbarX = HUDWindowX + HUDPanelGFXInfo.width + 20
+            HotbarY = 25
+        Else
+            HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
+            HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 45
+        End If
 
         'action panel
         ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.width - 25
