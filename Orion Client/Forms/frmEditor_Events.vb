@@ -81,6 +81,8 @@ Public Class frmEditor_Events
         scrlCondition_QuestTask.Value = 1
         lblCondition_QuestTask.Text = "#1"
 
+
+        cmbCondition_Gender.Enabled = False
     End Sub
 
     Public Sub InitEventEditorForm()
@@ -1896,6 +1898,14 @@ Public Class frmEditor_Events
 
         fraConditions_Quest.Visible = True
         scrlCondition_Quest.Enabled = True
+    End Sub
+
+    Private Sub optCondition8_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition8.CheckedChanged
+        If Not optCondition8.Checked Then Exit Sub
+
+        ClearConditionFrame()
+
+        cmbCondition_Gender.Enabled = True
     End Sub
 
     Private Sub scrlCondition_HasItem_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_HasItem.Scroll
