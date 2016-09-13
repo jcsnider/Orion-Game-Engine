@@ -283,8 +283,6 @@ Module ClientTCP
                             Buffer.WriteLong(.CommandListCount)
                             Buffer.WriteLong(.Position)
                             Buffer.WriteLong(.Questnum)
-
-                            Buffer.WriteLong(.chkPlayerGender)
                         End With
                         If Map.Events(i).Pages(X).CommandListCount > 0 Then
                             For Y = 1 To Map.Events(i).Pages(X).CommandListCount

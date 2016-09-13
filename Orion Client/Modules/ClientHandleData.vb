@@ -1063,8 +1063,6 @@
 
                                     .Position = Buffer.ReadLong
                                     .Questnum = Buffer.ReadLong
-
-                                    .chkPlayerGender = Buffer.ReadLong
                                 End With
 
                                 If Map.Events(i).Pages(X).CommandListCount > 0 Then

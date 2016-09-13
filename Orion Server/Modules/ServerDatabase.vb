@@ -375,8 +375,6 @@ Module ServerDatabase
 
                             PutVar(filename, "Event" & i & "Page" & x, "Position", Val(.Position))
                             PutVar(filename, "Event" & i & "Page" & x, "QuestNum", Val(.QuestNum))
-
-                            PutVar(filename, "Event" & i & "Page" & x, "PlayerGender", Val(.chkPlayerGender))
                         End With
 
                         If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
@@ -584,8 +582,6 @@ Module ServerDatabase
 
                                 .Position = Val(Getvar(filename, "Event" & i & "Page" & x, "Position"))
                                 .QuestNum = Val(Getvar(filename, "Event" & i & "Page" & x, "QuestNum"))
-
-                                .chkPlayerGender = Val(Getvar(filename, "Event" & i & "Page" & x, "PlayerGender"))
                             End With
 
                             If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then

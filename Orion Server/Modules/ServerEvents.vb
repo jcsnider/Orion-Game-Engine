@@ -122,7 +122,6 @@ Public Module ServerEvents
         Dim chkSelfSwitch As Long
         Dim SelfSwitchIndex As Long
         Dim SelfSwitchCompare As Long
-        Dim chkPlayerGender As Long
         'End Conditions
 
         'Handles the Event Sprite

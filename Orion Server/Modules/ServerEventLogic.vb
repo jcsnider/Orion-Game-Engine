@@ -1633,16 +1633,6 @@
                                                                             End If
                                                                         End If
                                                                     End If
-                                                                Case 8
-                                                                    If Player(i).Character(TempPlayer(i).CurChar).Sex = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 Then
-                                                                        .ListLeftOff(.CurList) = .CurSlot
-                                                                        .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
-                                                                        .CurSlot = 1
-                                                                    Else
-                                                                        .ListLeftOff(.CurList) = .CurSlot
-                                                                        .CurList = Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.ElseCommandList
-                                                                        .CurSlot = 1
-                                                                    End If
                                                             End Select
                                                             endprocess = True
                                                         Case EventType.evExitProcess
@@ -1930,21 +1920,9 @@
         If Gettingmap = True Then Exit Sub
 
         RemoveDeadEvents()
-
-        If Gettingmap = True Then Exit Sub
-
         SpawnNewEvents()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessEventMovement()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessLocalEventMovement()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessEventCommands()
 
     End Sub
