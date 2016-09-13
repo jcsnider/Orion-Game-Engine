@@ -180,6 +180,14 @@ Partial Class frmEditor_Events
         Me.lblRandomlabel32 = New System.Windows.Forms.Label()
         Me.btnLabeling = New System.Windows.Forms.Button()
         Me.fraDialogue = New System.Windows.Forms.GroupBox()
+        Me.fraShowText = New System.Windows.Forms.GroupBox()
+        Me.btnShowTextOk = New System.Windows.Forms.Button()
+        Me.btnShowTextCancel = New System.Windows.Forms.Button()
+        Me.scrlShowTextFace = New System.Windows.Forms.HScrollBar()
+        Me.lblShowTextFace = New System.Windows.Forms.Label()
+        Me.picShowTextFace = New System.Windows.Forms.PictureBox()
+        Me.txtShowText = New System.Windows.Forms.TextBox()
+        Me.lblRandomLabel18 = New System.Windows.Forms.Label()
         Me.fraPlayerWarp = New System.Windows.Forms.GroupBox()
         Me.cmbWarpPlayerDir = New System.Windows.Forms.ComboBox()
         Me.scrlWPY = New System.Windows.Forms.HScrollBar()
@@ -448,14 +456,6 @@ Partial Class frmEditor_Events
         Me.btnGiveExpCancel = New System.Windows.Forms.Button()
         Me.lblGiveExp = New System.Windows.Forms.Label()
         Me.scrlGiveExp = New System.Windows.Forms.HScrollBar()
-        Me.fraShowText = New System.Windows.Forms.GroupBox()
-        Me.btnShowTextOk = New System.Windows.Forms.Button()
-        Me.btnShowTextCancel = New System.Windows.Forms.Button()
-        Me.scrlShowTextFace = New System.Windows.Forms.HScrollBar()
-        Me.lblShowTextFace = New System.Windows.Forms.Label()
-        Me.picShowTextFace = New System.Windows.Forms.PictureBox()
-        Me.txtShowText = New System.Windows.Forms.TextBox()
-        Me.lblRandomLabel18 = New System.Windows.Forms.Label()
         Me.fraHidePic = New System.Windows.Forms.GroupBox()
         Me.lblRandomLabel58 = New System.Windows.Forms.Label()
         Me.btnHidePicOK = New System.Windows.Forms.Button()
@@ -534,6 +534,9 @@ Partial Class frmEditor_Events
         Me.lstCommands = New System.Windows.Forms.ListBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.optCondition8 = New System.Windows.Forms.RadioButton()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbCondition_Gender = New System.Windows.Forms.ComboBox()
         Me.pnlVariableSwitches.SuspendLayout()
         Me.fraLabeling.SuspendLayout()
         Me.FraRenaming.SuspendLayout()
@@ -547,6 +550,8 @@ Partial Class frmEditor_Events
         Me.tabPages.SuspendLayout()
         Me.frarandom20.SuspendLayout()
         Me.fraDialogue.SuspendLayout()
+        Me.fraShowText.SuspendLayout()
+        CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraPlayerWarp.SuspendLayout()
         Me.fraMapTint.SuspendLayout()
         Me.fraSetWeather.SuspendLayout()
@@ -581,8 +586,6 @@ Partial Class frmEditor_Events
         Me.fraPlayerVariable.SuspendLayout()
         Me.fraShowChatBubble.SuspendLayout()
         Me.fraGiveExp.SuspendLayout()
-        Me.fraShowText.SuspendLayout()
-        CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraHidePic.SuspendLayout()
         Me.fraPlayerSwitch.SuspendLayout()
         Me.fraCreateLabel.SuspendLayout()
@@ -1142,6 +1145,7 @@ Partial Class frmEditor_Events
         '
         'fraDialogue
         '
+        Me.fraDialogue.Controls.Add(Me.fraConditionalBranch)
         Me.fraDialogue.Controls.Add(Me.fraShowText)
         Me.fraDialogue.Controls.Add(Me.fraPlayerWarp)
         Me.fraDialogue.Controls.Add(Me.fraMapTint)
@@ -1150,7 +1154,6 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraSpawnNpc)
         Me.fraDialogue.Controls.Add(Me.fraShowChoices)
         Me.fraDialogue.Controls.Add(Me.fraAddText)
-        Me.fraDialogue.Controls.Add(Me.fraConditionalBranch)
         Me.fraDialogue.Controls.Add(Me.fraOpenShop)
         Me.fraDialogue.Controls.Add(Me.fraShowPic)
         Me.fraDialogue.Controls.Add(Me.fraCustomScript)
@@ -1183,6 +1186,84 @@ Partial Class frmEditor_Events
         Me.fraDialogue.Size = New System.Drawing.Size(815, 592)
         Me.fraDialogue.TabIndex = 6
         Me.fraDialogue.TabStop = False
+        '
+        'fraShowText
+        '
+        Me.fraShowText.Controls.Add(Me.btnShowTextOk)
+        Me.fraShowText.Controls.Add(Me.btnShowTextCancel)
+        Me.fraShowText.Controls.Add(Me.scrlShowTextFace)
+        Me.fraShowText.Controls.Add(Me.lblShowTextFace)
+        Me.fraShowText.Controls.Add(Me.picShowTextFace)
+        Me.fraShowText.Controls.Add(Me.txtShowText)
+        Me.fraShowText.Controls.Add(Me.lblRandomLabel18)
+        Me.fraShowText.Location = New System.Drawing.Point(6, 236)
+        Me.fraShowText.Name = "fraShowText"
+        Me.fraShowText.Size = New System.Drawing.Size(245, 319)
+        Me.fraShowText.TabIndex = 15
+        Me.fraShowText.TabStop = False
+        Me.fraShowText.Text = "Show Text"
+        Me.fraShowText.Visible = False
+        '
+        'btnShowTextOk
+        '
+        Me.btnShowTextOk.Location = New System.Drawing.Point(83, 293)
+        Me.btnShowTextOk.Name = "btnShowTextOk"
+        Me.btnShowTextOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowTextOk.TabIndex = 20
+        Me.btnShowTextOk.Text = "Ok"
+        Me.btnShowTextOk.UseVisualStyleBackColor = True
+        '
+        'btnShowTextCancel
+        '
+        Me.btnShowTextCancel.Location = New System.Drawing.Point(164, 293)
+        Me.btnShowTextCancel.Name = "btnShowTextCancel"
+        Me.btnShowTextCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnShowTextCancel.TabIndex = 19
+        Me.btnShowTextCancel.Text = "Cancel"
+        Me.btnShowTextCancel.UseVisualStyleBackColor = True
+        '
+        'scrlShowTextFace
+        '
+        Me.scrlShowTextFace.Location = New System.Drawing.Point(109, 264)
+        Me.scrlShowTextFace.Name = "scrlShowTextFace"
+        Me.scrlShowTextFace.Size = New System.Drawing.Size(130, 17)
+        Me.scrlShowTextFace.TabIndex = 12
+        '
+        'lblShowTextFace
+        '
+        Me.lblShowTextFace.AutoSize = True
+        Me.lblShowTextFace.Location = New System.Drawing.Point(112, 245)
+        Me.lblShowTextFace.Name = "lblShowTextFace"
+        Me.lblShowTextFace.Size = New System.Drawing.Size(63, 13)
+        Me.lblShowTextFace.TabIndex = 3
+        Me.lblShowTextFace.Text = "Face: None"
+        '
+        'picShowTextFace
+        '
+        Me.picShowTextFace.BackColor = System.Drawing.Color.Black
+        Me.picShowTextFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picShowTextFace.Location = New System.Drawing.Point(6, 192)
+        Me.picShowTextFace.Name = "picShowTextFace"
+        Me.picShowTextFace.Size = New System.Drawing.Size(100, 93)
+        Me.picShowTextFace.TabIndex = 2
+        Me.picShowTextFace.TabStop = False
+        '
+        'txtShowText
+        '
+        Me.txtShowText.Location = New System.Drawing.Point(6, 31)
+        Me.txtShowText.Multiline = True
+        Me.txtShowText.Name = "txtShowText"
+        Me.txtShowText.Size = New System.Drawing.Size(231, 155)
+        Me.txtShowText.TabIndex = 1
+        '
+        'lblRandomLabel18
+        '
+        Me.lblRandomLabel18.AutoSize = True
+        Me.lblRandomLabel18.Location = New System.Drawing.Point(7, 15)
+        Me.lblRandomLabel18.Name = "lblRandomLabel18"
+        Me.lblRandomLabel18.Size = New System.Drawing.Size(31, 13)
+        Me.lblRandomLabel18.TabIndex = 0
+        Me.lblRandomLabel18.Text = "Text:"
         '
         'fraPlayerWarp
         '
@@ -1858,6 +1939,9 @@ Partial Class frmEditor_Events
         '
         'fraConditionalBranch
         '
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Gender)
+        Me.fraConditionalBranch.Controls.Add(Me.Label3)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition8)
         Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
         Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchCancel)
         Me.fraConditionalBranch.Controls.Add(Me.fraConditions_Quest)
@@ -1891,7 +1975,7 @@ Partial Class frmEditor_Events
         Me.fraConditionalBranch.Controls.Add(Me.optCondition0)
         Me.fraConditionalBranch.Location = New System.Drawing.Point(7, 11)
         Me.fraConditionalBranch.Name = "fraConditionalBranch"
-        Me.fraConditionalBranch.Size = New System.Drawing.Size(400, 484)
+        Me.fraConditionalBranch.Size = New System.Drawing.Size(400, 525)
         Me.fraConditionalBranch.TabIndex = 35
         Me.fraConditionalBranch.TabStop = False
         Me.fraConditionalBranch.Text = "Conditional Branch"
@@ -1899,7 +1983,7 @@ Partial Class frmEditor_Events
         '
         'btnConditionalBranchOk
         '
-        Me.btnConditionalBranchOk.Location = New System.Drawing.Point(234, 452)
+        Me.btnConditionalBranchOk.Location = New System.Drawing.Point(238, 495)
         Me.btnConditionalBranchOk.Name = "btnConditionalBranchOk"
         Me.btnConditionalBranchOk.Size = New System.Drawing.Size(75, 23)
         Me.btnConditionalBranchOk.TabIndex = 21
@@ -1908,7 +1992,7 @@ Partial Class frmEditor_Events
         '
         'btnConditionalBranchCancel
         '
-        Me.btnConditionalBranchCancel.Location = New System.Drawing.Point(315, 452)
+        Me.btnConditionalBranchCancel.Location = New System.Drawing.Point(319, 495)
         Me.btnConditionalBranchCancel.Name = "btnConditionalBranchCancel"
         Me.btnConditionalBranchCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnConditionalBranchCancel.TabIndex = 21
@@ -1926,7 +2010,7 @@ Partial Class frmEditor_Events
         Me.fraConditions_Quest.Controls.Add(Me.scrlCondition_QuestTask)
         Me.fraConditions_Quest.Location = New System.Drawing.Point(6, 345)
         Me.fraConditions_Quest.Name = "fraConditions_Quest"
-        Me.fraConditions_Quest.Size = New System.Drawing.Size(384, 93)
+        Me.fraConditions_Quest.Size = New System.Drawing.Size(384, 88)
         Me.fraConditions_Quest.TabIndex = 20
         Me.fraConditions_Quest.TabStop = False
         Me.fraConditions_Quest.Text = "Quest Conditions"
@@ -3853,84 +3937,6 @@ Partial Class frmEditor_Events
         Me.scrlGiveExp.Size = New System.Drawing.Size(213, 17)
         Me.scrlGiveExp.TabIndex = 12
         '
-        'fraShowText
-        '
-        Me.fraShowText.Controls.Add(Me.btnShowTextOk)
-        Me.fraShowText.Controls.Add(Me.btnShowTextCancel)
-        Me.fraShowText.Controls.Add(Me.scrlShowTextFace)
-        Me.fraShowText.Controls.Add(Me.lblShowTextFace)
-        Me.fraShowText.Controls.Add(Me.picShowTextFace)
-        Me.fraShowText.Controls.Add(Me.txtShowText)
-        Me.fraShowText.Controls.Add(Me.lblRandomLabel18)
-        Me.fraShowText.Location = New System.Drawing.Point(6, 236)
-        Me.fraShowText.Name = "fraShowText"
-        Me.fraShowText.Size = New System.Drawing.Size(245, 319)
-        Me.fraShowText.TabIndex = 15
-        Me.fraShowText.TabStop = False
-        Me.fraShowText.Text = "Show Text"
-        Me.fraShowText.Visible = False
-        '
-        'btnShowTextOk
-        '
-        Me.btnShowTextOk.Location = New System.Drawing.Point(83, 293)
-        Me.btnShowTextOk.Name = "btnShowTextOk"
-        Me.btnShowTextOk.Size = New System.Drawing.Size(75, 23)
-        Me.btnShowTextOk.TabIndex = 20
-        Me.btnShowTextOk.Text = "Ok"
-        Me.btnShowTextOk.UseVisualStyleBackColor = True
-        '
-        'btnShowTextCancel
-        '
-        Me.btnShowTextCancel.Location = New System.Drawing.Point(164, 293)
-        Me.btnShowTextCancel.Name = "btnShowTextCancel"
-        Me.btnShowTextCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnShowTextCancel.TabIndex = 19
-        Me.btnShowTextCancel.Text = "Cancel"
-        Me.btnShowTextCancel.UseVisualStyleBackColor = True
-        '
-        'scrlShowTextFace
-        '
-        Me.scrlShowTextFace.Location = New System.Drawing.Point(109, 264)
-        Me.scrlShowTextFace.Name = "scrlShowTextFace"
-        Me.scrlShowTextFace.Size = New System.Drawing.Size(130, 17)
-        Me.scrlShowTextFace.TabIndex = 12
-        '
-        'lblShowTextFace
-        '
-        Me.lblShowTextFace.AutoSize = True
-        Me.lblShowTextFace.Location = New System.Drawing.Point(112, 245)
-        Me.lblShowTextFace.Name = "lblShowTextFace"
-        Me.lblShowTextFace.Size = New System.Drawing.Size(63, 13)
-        Me.lblShowTextFace.TabIndex = 3
-        Me.lblShowTextFace.Text = "Face: None"
-        '
-        'picShowTextFace
-        '
-        Me.picShowTextFace.BackColor = System.Drawing.Color.Black
-        Me.picShowTextFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picShowTextFace.Location = New System.Drawing.Point(6, 192)
-        Me.picShowTextFace.Name = "picShowTextFace"
-        Me.picShowTextFace.Size = New System.Drawing.Size(100, 93)
-        Me.picShowTextFace.TabIndex = 2
-        Me.picShowTextFace.TabStop = False
-        '
-        'txtShowText
-        '
-        Me.txtShowText.Location = New System.Drawing.Point(6, 31)
-        Me.txtShowText.Multiline = True
-        Me.txtShowText.Name = "txtShowText"
-        Me.txtShowText.Size = New System.Drawing.Size(231, 155)
-        Me.txtShowText.TabIndex = 1
-        '
-        'lblRandomLabel18
-        '
-        Me.lblRandomLabel18.AutoSize = True
-        Me.lblRandomLabel18.Location = New System.Drawing.Point(7, 15)
-        Me.lblRandomLabel18.Name = "lblRandomLabel18"
-        Me.lblRandomLabel18.Size = New System.Drawing.Size(31, 13)
-        Me.lblRandomLabel18.TabIndex = 0
-        Me.lblRandomLabel18.Text = "Text:"
-        '
         'fraHidePic
         '
         Me.fraHidePic.Controls.Add(Me.lblRandomLabel58)
@@ -4774,6 +4780,35 @@ Partial Class frmEditor_Events
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'optCondition8
+        '
+        Me.optCondition8.AutoSize = True
+        Me.optCondition8.Location = New System.Drawing.Point(5, 443)
+        Me.optCondition8.Name = "optCondition8"
+        Me.optCondition8.Size = New System.Drawing.Size(92, 17)
+        Me.optCondition8.TabIndex = 22
+        Me.optCondition8.TabStop = True
+        Me.optCondition8.Text = "Player Gender"
+        Me.optCondition8.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(98, 445)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(14, 13)
+        Me.Label3.TabIndex = 23
+        Me.Label3.Text = "is"
+        '
+        'cmbCondition_Gender
+        '
+        Me.cmbCondition_Gender.FormattingEnabled = True
+        Me.cmbCondition_Gender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cmbCondition_Gender.Location = New System.Drawing.Point(120, 442)
+        Me.cmbCondition_Gender.Name = "cmbCondition_Gender"
+        Me.cmbCondition_Gender.Size = New System.Drawing.Size(121, 21)
+        Me.cmbCondition_Gender.TabIndex = 24
+        '
         'frmEditor_Events
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4812,6 +4847,9 @@ Partial Class frmEditor_Events
         Me.frarandom20.ResumeLayout(False)
         Me.frarandom20.PerformLayout()
         Me.fraDialogue.ResumeLayout(False)
+        Me.fraShowText.ResumeLayout(False)
+        Me.fraShowText.PerformLayout()
+        CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraPlayerWarp.ResumeLayout(False)
         Me.fraPlayerWarp.PerformLayout()
         Me.fraMapTint.ResumeLayout(False)
@@ -4874,9 +4912,6 @@ Partial Class frmEditor_Events
         Me.fraShowChatBubble.PerformLayout()
         Me.fraGiveExp.ResumeLayout(False)
         Me.fraGiveExp.PerformLayout()
-        Me.fraShowText.ResumeLayout(False)
-        Me.fraShowText.PerformLayout()
-        CType(Me.picShowTextFace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraHidePic.ResumeLayout(False)
         Me.fraHidePic.PerformLayout()
         Me.fraPlayerSwitch.ResumeLayout(False)
@@ -5311,4 +5346,7 @@ Partial Class frmEditor_Events
     Friend WithEvents ColumnHeader4 As Windows.Forms.ColumnHeader
     Friend WithEvents btnOK As Windows.Forms.Button
     Friend WithEvents btnCancel As Windows.Forms.Button
+    Friend WithEvents cmbCondition_Gender As Windows.Forms.ComboBox
+    Friend WithEvents Label3 As Windows.Forms.Label
+    Friend WithEvents optCondition8 As Windows.Forms.RadioButton
 End Class

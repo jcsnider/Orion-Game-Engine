@@ -117,6 +117,7 @@ Public Module ClientEventSystem
         Dim chkSelfSwitch As Long
         Dim SelfSwitchIndex As Long
         Dim SelfSwitchCompare As Long
+        Dim chkPlayerGender As Long
         'End Conditions
 
         'Handles the Event Sprite
@@ -668,6 +669,13 @@ newlist:
                                         ElseIf tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2 = 1 Then
                                             frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Quest [" & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1 & "] in progress and on task #" & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data3)
                                         End If
+                                    Case 8
+                                        Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1
+                                            Case SEX_MALE
+                                                frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Gender is Male")
+                                            Case SEX_FEMALE
+                                                frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's  Gender is Female")
+                                        End Select
                                 End Select
                                 indent = indent & "       "
                                 listleftoff(curlist) = i
@@ -1135,6 +1143,7 @@ newlist:
                 If frmEditor_Events.optCondition5.Checked = True Then X = 5
                 If frmEditor_Events.optCondition6.Checked = True Then X = 6
                 If frmEditor_Events.optCondition7.Checked = True Then X = 7
+                If frmEditor_Events.optCondition7.Checked = True Then X = 8
 
                 Select Case X
                     Case 0 'Player Var
@@ -1174,6 +1183,9 @@ newlist:
                             tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 1
                             tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.scrlCondition_QuestTask.Value
                         End If
+                    Case 8 'Gender
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 8
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_Gender.SelectedIndex
                 End Select
 
             Case EventType.evShowText
@@ -1529,6 +1541,8 @@ newlist:
                         frmEditor_Events.optCondition6.Checked = True
                     Case 7
                         frmEditor_Events.optCondition7.Checked = True
+                    Case 8
+                        frmEditor_Events.optCondition8.Checked = True
                 End Select
 
                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition
@@ -1580,6 +1594,9 @@ newlist:
                             frmEditor_Events.scrlCondition_QuestTask.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
                             frmEditor_Events.lblCondition_QuestTask.Text = "#" & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
                         End If
+                    Case 8
+                        frmEditor_Events.cmbCondition_Gender.Enabled = True
+                        frmEditor_Events.cmbCondition_Gender.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
                 End Select
             Case EventType.evShowText
                 isEdit = True
@@ -2147,6 +2164,9 @@ newlist:
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 1
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.scrlCondition_QuestTask.Value
                     End If
+                ElseIf frmEditor_Events.optCondition8.Checked = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 8
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_Gender.SelectedIndex
                 End If
             Case EventType.evShowText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtShowText.Text
