@@ -36,8 +36,8 @@ Public Class frmEditor_Map
         MapEditorCancel()
     End Sub
 
-    Private Sub btnClearLayer_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClearLayer.Click
-        MapEditorClearLayer()
+    Private Sub btnClearLayer_Click(ByVal sender As Object, ByVal e As EventArgs)
+
     End Sub
 
     Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
@@ -280,8 +280,8 @@ Public Class frmEditor_Map
         If optBlocked.Checked Then pnlAttributes.Visible = False
     End Sub
 
-    Private Sub btnFill_Click(sender As Object, e As EventArgs) Handles btnFill.Click
-        MapEditorFillLayer()
+    Private Sub btnFill_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub optHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
@@ -490,5 +490,13 @@ Public Class frmEditor_Map
             EditorTileWidth = 1
             EditorTileHeight = 1
         End If
+    End Sub
+
+    Private Sub tsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
+        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+    End Sub
+
+    Private Sub tsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
+        MapEditorClearLayer()
     End Sub
 End Class

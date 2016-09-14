@@ -25,8 +25,6 @@ Partial Class frmEditor_Map
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Map))
         Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
         Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
-        Me.btnFill = New System.Windows.Forms.Button()
-        Me.btnClearLayer = New System.Windows.Forms.Button()
         Me.optHouse = New System.Windows.Forms.RadioButton()
         Me.btnClearAttribute = New System.Windows.Forms.Button()
         Me.optTrap = New System.Windows.Forms.RadioButton()
@@ -43,7 +41,6 @@ Partial Class frmEditor_Map
         Me.optWarp = New System.Windows.Forms.RadioButton()
         Me.optBlocked = New System.Windows.Forms.RadioButton()
         Me.pnlBack = New System.Windows.Forms.Panel()
-        Me.picBackSelect = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraBuyHouse = New System.Windows.Forms.GroupBox()
@@ -66,7 +63,6 @@ Partial Class frmEditor_Map
         Me.lblMapWarpMap = New System.Windows.Forms.Label()
         Me.fraMapKey = New System.Windows.Forms.GroupBox()
         Me.chkMapKey = New System.Windows.Forms.CheckBox()
-        Me.picMapKey = New System.Windows.Forms.PictureBox()
         Me.btnMapKey = New System.Windows.Forms.Button()
         Me.scrlMapKey = New System.Windows.Forms.HScrollBar()
         Me.lblMapKey = New System.Windows.Forms.Label()
@@ -88,7 +84,6 @@ Partial Class frmEditor_Map
         Me.scrlResource = New System.Windows.Forms.HScrollBar()
         Me.lblResource = New System.Windows.Forms.Label()
         Me.fraMapItem = New System.Windows.Forms.GroupBox()
-        Me.picMapItem = New System.Windows.Forms.PictureBox()
         Me.btnMapItem = New System.Windows.Forms.Button()
         Me.scrlMapItemValue = New System.Windows.Forms.HScrollBar()
         Me.scrlMapItem = New System.Windows.Forms.HScrollBar()
@@ -98,10 +93,7 @@ Partial Class frmEditor_Map
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.tsbSave = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbMapGrid = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -162,7 +154,6 @@ Partial Class frmEditor_Map
         Me.txtMaxX = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnPreview = New System.Windows.Forms.Button()
         Me.lstMusic = New System.Windows.Forms.ListBox()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -170,20 +161,27 @@ Partial Class frmEditor_Map
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.btnPreview = New System.Windows.Forms.Button()
+        Me.tsbSave = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
+        Me.tsbMapGrid = New System.Windows.Forms.ToolStripButton()
+        Me.tsbFill = New System.Windows.Forms.ToolStripButton()
+        Me.picMapKey = New System.Windows.Forms.PictureBox()
+        Me.picMapItem = New System.Windows.Forms.PictureBox()
+        Me.tsbClear = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.pnlBack.SuspendLayout()
-        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
         Me.fraBuyHouse.SuspendLayout()
         Me.fraKeyOpen.SuspendLayout()
         Me.fraMapWarp.SuspendLayout()
         Me.fraMapKey.SuspendLayout()
-        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraNpcSpawn.SuspendLayout()
         Me.fraHeal.SuspendLayout()
         Me.fraShop.SuspendLayout()
         Me.fraResource.SuspendLayout()
         Me.fraMapItem.SuspendLayout()
-        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraTrap.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         Me.tabpages.SuspendLayout()
@@ -201,12 +199,15 @@ Partial Class frmEditor_Map
         Me.GroupBox2.SuspendLayout()
         Me.tpDirBlock.SuspendLayout()
         Me.tpEvents.SuspendLayout()
+        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'scrlPictureX
         '
         Me.scrlPictureX.LargeChange = 1
-        Me.scrlPictureX.Location = New System.Drawing.Point(3, 363)
+        Me.scrlPictureX.Location = New System.Drawing.Point(3, 408)
         Me.scrlPictureX.Name = "scrlPictureX"
         Me.scrlPictureX.Size = New System.Drawing.Size(463, 16)
         Me.scrlPictureX.TabIndex = 1
@@ -218,24 +219,6 @@ Partial Class frmEditor_Map
         Me.scrlPictureY.Name = "scrlPictureY"
         Me.scrlPictureY.Size = New System.Drawing.Size(16, 352)
         Me.scrlPictureY.TabIndex = 2
-        '
-        'btnFill
-        '
-        Me.btnFill.Location = New System.Drawing.Point(394, 437)
-        Me.btnFill.Name = "btnFill"
-        Me.btnFill.Size = New System.Drawing.Size(91, 25)
-        Me.btnFill.TabIndex = 8
-        Me.btnFill.Text = "Fill layer"
-        Me.btnFill.UseVisualStyleBackColor = True
-        '
-        'btnClearLayer
-        '
-        Me.btnClearLayer.Location = New System.Drawing.Point(6, 437)
-        Me.btnClearLayer.Name = "btnClearLayer"
-        Me.btnClearLayer.Size = New System.Drawing.Size(91, 25)
-        Me.btnClearLayer.TabIndex = 5
-        Me.btnClearLayer.Text = "Clear Layer"
-        Me.btnClearLayer.UseVisualStyleBackColor = True
         '
         'optHouse
         '
@@ -405,22 +388,13 @@ Partial Class frmEditor_Map
         Me.pnlBack.Controls.Add(Me.picBackSelect)
         Me.pnlBack.Location = New System.Drawing.Point(6, 8)
         Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(460, 352)
+        Me.pnlBack.Size = New System.Drawing.Size(460, 397)
         Me.pnlBack.TabIndex = 9
-        '
-        'picBackSelect
-        '
-        Me.picBackSelect.BackColor = System.Drawing.Color.Black
-        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
-        Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(460, 352)
-        Me.picBackSelect.TabIndex = 1
-        Me.picBackSelect.TabStop = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(78, 380)
+        Me.Label1.Location = New System.Drawing.Point(78, 423)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(174, 13)
         Me.Label1.TabIndex = 11
@@ -636,15 +610,6 @@ Partial Class frmEditor_Map
         Me.chkMapKey.Text = "Take Key Away Upon Use"
         Me.chkMapKey.UseVisualStyleBackColor = True
         '
-        'picMapKey
-        '
-        Me.picMapKey.BackColor = System.Drawing.Color.Black
-        Me.picMapKey.Location = New System.Drawing.Point(197, 43)
-        Me.picMapKey.Name = "picMapKey"
-        Me.picMapKey.Size = New System.Drawing.Size(32, 32)
-        Me.picMapKey.TabIndex = 7
-        Me.picMapKey.TabStop = False
-        '
         'btnMapKey
         '
         Me.btnMapKey.Location = New System.Drawing.Point(79, 97)
@@ -846,15 +811,6 @@ Partial Class frmEditor_Map
         Me.fraMapItem.TabStop = False
         Me.fraMapItem.Text = "Map Item"
         '
-        'picMapItem
-        '
-        Me.picMapItem.BackColor = System.Drawing.Color.Black
-        Me.picMapItem.Location = New System.Drawing.Point(197, 43)
-        Me.picMapItem.Name = "picMapItem"
-        Me.picMapItem.Size = New System.Drawing.Size(32, 32)
-        Me.picMapItem.TabIndex = 7
-        Me.picMapItem.TabStop = False
-        '
         'btnMapItem
         '
         Me.btnMapItem.Location = New System.Drawing.Point(79, 97)
@@ -926,41 +882,17 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(505, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip1"
         '
-        'tsbSave
-        '
-        Me.tsbSave.Image = Global.OrionClient.My.Resources.Resources.Save
-        Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbSave.Name = "tsbSave"
-        Me.tsbSave.Size = New System.Drawing.Size(51, 22)
-        Me.tsbSave.Text = "Save"
-        '
-        'tsbDiscard
-        '
-        Me.tsbDiscard.Image = Global.OrionClient.My.Resources.Resources.Discard
-        Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbDiscard.Name = "tsbDiscard"
-        Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
-        Me.tsbDiscard.Text = "Discard"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbMapGrid
-        '
-        Me.tsbMapGrid.Image = Global.OrionClient.My.Resources.Resources.Grid
-        Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbMapGrid.Name = "tsbMapGrid"
-        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
-        Me.tsbMapGrid.Text = "Map Grid"
         '
         'tabpages
         '
@@ -980,9 +912,7 @@ Partial Class frmEditor_Map
         '
         Me.tpTiles.Controls.Add(Me.cmbAutoTile)
         Me.tpTiles.Controls.Add(Me.Label11)
-        Me.tpTiles.Controls.Add(Me.btnFill)
         Me.tpTiles.Controls.Add(Me.Label10)
-        Me.tpTiles.Controls.Add(Me.btnClearLayer)
         Me.tpTiles.Controls.Add(Me.cmbLayers)
         Me.tpTiles.Controls.Add(Me.Label9)
         Me.tpTiles.Controls.Add(Me.cmbTileSets)
@@ -1003,7 +933,7 @@ Partial Class frmEditor_Map
         Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAutoTile.FormattingEnabled = True
         Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)"})
-        Me.cmbAutoTile.Location = New System.Drawing.Point(366, 400)
+        Me.cmbAutoTile.Location = New System.Drawing.Point(366, 443)
         Me.cmbAutoTile.Name = "cmbAutoTile"
         Me.cmbAutoTile.Size = New System.Drawing.Size(119, 21)
         Me.cmbAutoTile.TabIndex = 17
@@ -1011,7 +941,7 @@ Partial Class frmEditor_Map
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(311, 403)
+        Me.Label11.Location = New System.Drawing.Point(311, 446)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 13)
         Me.Label11.TabIndex = 16
@@ -1020,7 +950,7 @@ Partial Class frmEditor_Map
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(142, 403)
+        Me.Label10.Location = New System.Drawing.Point(142, 446)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(36, 13)
         Me.Label10.TabIndex = 15
@@ -1031,7 +961,7 @@ Partial Class frmEditor_Map
         Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayers.FormattingEnabled = True
         Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
-        Me.cmbLayers.Location = New System.Drawing.Point(184, 400)
+        Me.cmbLayers.Location = New System.Drawing.Point(184, 443)
         Me.cmbLayers.Name = "cmbLayers"
         Me.cmbLayers.Size = New System.Drawing.Size(121, 21)
         Me.cmbLayers.TabIndex = 14
@@ -1039,7 +969,7 @@ Partial Class frmEditor_Map
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 403)
+        Me.Label9.Location = New System.Drawing.Point(6, 446)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(41, 13)
         Me.Label9.TabIndex = 13
@@ -1049,7 +979,7 @@ Partial Class frmEditor_Map
         '
         Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTileSets.FormattingEnabled = True
-        Me.cmbTileSets.Location = New System.Drawing.Point(53, 400)
+        Me.cmbTileSets.Location = New System.Drawing.Point(53, 443)
         Me.cmbTileSets.Name = "cmbTileSets"
         Me.cmbTileSets.Size = New System.Drawing.Size(83, 21)
         Me.cmbTileSets.TabIndex = 12
@@ -1583,17 +1513,6 @@ Partial Class frmEditor_Map
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Music"
         '
-        'btnPreview
-        '
-        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
-        Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPreview.Location = New System.Drawing.Point(48, 173)
-        Me.btnPreview.Name = "btnPreview"
-        Me.btnPreview.Size = New System.Drawing.Size(139, 29)
-        Me.btnPreview.TabIndex = 4
-        Me.btnPreview.Text = "Preview Music"
-        Me.btnPreview.UseVisualStyleBackColor = True
-        '
         'lstMusic
         '
         Me.lstMusic.FormattingEnabled = True
@@ -1659,6 +1578,90 @@ Partial Class frmEditor_Map
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
         '
+        'picBackSelect
+        '
+        Me.picBackSelect.BackColor = System.Drawing.Color.Black
+        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
+        Me.picBackSelect.Name = "picBackSelect"
+        Me.picBackSelect.Size = New System.Drawing.Size(460, 397)
+        Me.picBackSelect.TabIndex = 1
+        Me.picBackSelect.TabStop = False
+        '
+        'btnPreview
+        '
+        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
+        Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPreview.Location = New System.Drawing.Point(48, 173)
+        Me.btnPreview.Name = "btnPreview"
+        Me.btnPreview.Size = New System.Drawing.Size(139, 29)
+        Me.btnPreview.TabIndex = 4
+        Me.btnPreview.Text = "Preview Music"
+        Me.btnPreview.UseVisualStyleBackColor = True
+        '
+        'tsbSave
+        '
+        Me.tsbSave.Image = Global.OrionClient.My.Resources.Resources.Save
+        Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbSave.Name = "tsbSave"
+        Me.tsbSave.Size = New System.Drawing.Size(51, 22)
+        Me.tsbSave.Text = "Save"
+        '
+        'tsbDiscard
+        '
+        Me.tsbDiscard.Image = Global.OrionClient.My.Resources.Resources.Discard
+        Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbDiscard.Name = "tsbDiscard"
+        Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
+        Me.tsbDiscard.Text = "Discard"
+        '
+        'tsbMapGrid
+        '
+        Me.tsbMapGrid.Image = Global.OrionClient.My.Resources.Resources.Grid
+        Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbMapGrid.Name = "tsbMapGrid"
+        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
+        Me.tsbMapGrid.Text = "Map Grid"
+        '
+        'tsbFill
+        '
+        Me.tsbFill.Image = Global.OrionClient.My.Resources.Resources.Fill
+        Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbFill.Name = "tsbFill"
+        Me.tsbFill.Size = New System.Drawing.Size(73, 22)
+        Me.tsbFill.Text = "Fill Layer"
+        Me.tsbFill.ToolTipText = "Fill Layer"
+        '
+        'picMapKey
+        '
+        Me.picMapKey.BackColor = System.Drawing.Color.Black
+        Me.picMapKey.Location = New System.Drawing.Point(197, 43)
+        Me.picMapKey.Name = "picMapKey"
+        Me.picMapKey.Size = New System.Drawing.Size(32, 32)
+        Me.picMapKey.TabIndex = 7
+        Me.picMapKey.TabStop = False
+        '
+        'picMapItem
+        '
+        Me.picMapItem.BackColor = System.Drawing.Color.Black
+        Me.picMapItem.Location = New System.Drawing.Point(197, 43)
+        Me.picMapItem.Name = "picMapItem"
+        Me.picMapItem.Size = New System.Drawing.Size(32, 32)
+        Me.picMapItem.TabIndex = 7
+        Me.picMapItem.TabStop = False
+        '
+        'tsbClear
+        '
+        Me.tsbClear.Image = Global.OrionClient.My.Resources.Resources.Clear
+        Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbClear.Name = "tsbClear"
+        Me.tsbClear.Size = New System.Drawing.Size(85, 22)
+        Me.tsbClear.Text = "Clear Layer"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1673,7 +1676,6 @@ Partial Class frmEditor_Map
         Me.Name = "frmEditor_Map"
         Me.Text = "Map Editor"
         Me.pnlBack.ResumeLayout(False)
-        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlAttributes.ResumeLayout(False)
         Me.fraBuyHouse.ResumeLayout(False)
         Me.fraBuyHouse.PerformLayout()
@@ -1683,7 +1685,6 @@ Partial Class frmEditor_Map
         Me.fraMapWarp.PerformLayout()
         Me.fraMapKey.ResumeLayout(False)
         Me.fraMapKey.PerformLayout()
-        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraNpcSpawn.ResumeLayout(False)
         Me.fraNpcSpawn.PerformLayout()
         Me.fraHeal.ResumeLayout(False)
@@ -1693,7 +1694,6 @@ Partial Class frmEditor_Map
         Me.fraResource.PerformLayout()
         Me.fraMapItem.ResumeLayout(False)
         Me.fraMapItem.PerformLayout()
-        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraTrap.ResumeLayout(False)
         Me.fraTrap.PerformLayout()
         Me.ToolStrip.ResumeLayout(False)
@@ -1724,6 +1724,9 @@ Partial Class frmEditor_Map
         Me.tpDirBlock.PerformLayout()
         Me.tpEvents.ResumeLayout(False)
         Me.tpEvents.PerformLayout()
+        CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1744,11 +1747,9 @@ Partial Class frmEditor_Map
     Friend WithEvents optItem As System.Windows.Forms.RadioButton
     Friend WithEvents optWarp As System.Windows.Forms.RadioButton
     Friend WithEvents optBlocked As System.Windows.Forms.RadioButton
-    Friend WithEvents btnClearLayer As System.Windows.Forms.Button
     Public WithEvents picBackSelect As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnClearAttribute As System.Windows.Forms.Button
-    Friend WithEvents btnFill As System.Windows.Forms.Button
     Friend WithEvents pnlAttributes As System.Windows.Forms.Panel
     Friend WithEvents fraMapWarp As System.Windows.Forms.GroupBox
     Friend WithEvents lblMapWarpY As System.Windows.Forms.Label
@@ -1875,4 +1876,7 @@ Partial Class frmEditor_Map
     Friend WithEvents scrlFogSpeed As Windows.Forms.HScrollBar
     Friend WithEvents lblFogSpeed As Windows.Forms.Label
     Friend WithEvents optCraft As Windows.Forms.RadioButton
+    Friend WithEvents tsbFill As Windows.Forms.ToolStripButton
+    Friend WithEvents tsbClear As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
 End Class

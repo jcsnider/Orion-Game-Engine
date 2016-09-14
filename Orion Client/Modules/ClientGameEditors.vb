@@ -538,23 +538,37 @@ Module ClientGameEditors
         End If
     End Sub
 
-    Public Sub MapEditorFillLayer()
+    Public Sub MapEditorFillLayer(Optional ByVal theAutotile As Byte = 0)
         Dim X As Long
         Dim Y As Long
         Dim CurLayer As Long
 
         CurLayer = frmEditor_Map.cmbLayers.SelectedIndex + 1
 
-        ' Ground layer
         If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, GAME_NAME) = vbYes Then
-            For X = 0 To Map.MaxX
-                For Y = 0 To Map.MaxY
-                    Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
-                    Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                    Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-                    CacheRenderState(X, Y, CurLayer)
+            If theAutotile > 0 Then
+                For X = 0 To Map.MaxX
+                    For Y = 0 To Map.MaxY
+                        Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
+                        Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
+                        Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Autotile(CurLayer) = theAutotile
+                        CacheRenderState(X, Y, CurLayer)
+                    Next
                 Next
-            Next
+
+                ' do a re-init so we can see our changes
+                initAutotiles()
+            Else
+                For X = 0 To Map.MaxX
+                    For Y = 0 To Map.MaxY
+                        Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
+                        Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
+                        Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
+                        CacheRenderState(X, Y, CurLayer)
+                    Next
+                Next
+            End If
         End If
     End Sub
 

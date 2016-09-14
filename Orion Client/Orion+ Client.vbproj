@@ -2332,6 +2332,8 @@
     <Content Include="openal32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Clear.png" />
+    <None Include="Resources\Fill.png" />
     <None Include="Resources\Preview.png" />
     <None Include="Resources\Grid.png" />
     <None Include="Resources\Exit.png" />
