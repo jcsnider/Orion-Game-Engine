@@ -1315,12 +1315,13 @@ Public Class frmEditor_Events
     Private Sub lstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.Click
         If lstvwMoveRoute.SelectedItems.Count = 0 Then Exit Sub
 
-        Select Case lstvwMoveRoute.SelectedItems(0).Index' + 1
+        Select Case lstvwMoveRoute.SelectedItems(0).Index + 1
             'Set Graphic
             Case 43
                 fraGraphic.Width = 841
                 fraGraphic.Height = 585
                 fraGraphic.Visible = True
+                fraGraphic.BringToFront()
                 GraphicSelType = 1
             Case Else
                 AddMoveRouteCommand(lstvwMoveRoute.SelectedItems(0).Index)

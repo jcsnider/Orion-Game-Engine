@@ -1080,6 +1080,7 @@
                                                                 Buffer.WriteLong(.FixedDir)
                                                                 Buffer.WriteLong(.WalkThrough)
                                                                 Buffer.WriteLong(.ShowName)
+                                                                Buffer.WriteLong(.QuestNum)
                                                             End With
                                                             SendDataTo(playerID, Buffer.ToArray)
                                                             Buffer = Nothing
