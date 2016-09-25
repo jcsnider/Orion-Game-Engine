@@ -1956,6 +1956,7 @@
         txt = Replace(txt, "/name", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
         txt = Replace(txt, "/p", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
         txt = Replace(txt, "$playername$", Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name))
+        txt = Replace(txt, "$playerclass$", Trim$(Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Name))
         Do While InStr(1, txt, "/v") > 0
             x = InStr(1, txt, "/v")
             If x > 0 Then

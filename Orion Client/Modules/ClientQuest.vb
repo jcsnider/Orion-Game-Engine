@@ -687,7 +687,13 @@
 
         If Trim$(SelectedQuest) = vbNullString Then Exit Sub
 
-        QuestNum = SelectedQuest
+        For I = 1 To MAX_QUESTS
+            If QuestNames(SelectedQuest) = Trim$(Quest(I).Name) Then
+                QuestNum = I
+            End If
+        Next
+
+
         CurTask = Player(MyIndex).PlayerQuest(QuestNum).ActualTask
 
             'Quest Log (Main Task)
