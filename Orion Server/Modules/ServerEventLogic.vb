@@ -1228,7 +1228,7 @@
                                                 End If
                                                 If restartlist = False And endprocess = False Then
                                                     'If we are still here, then we are good to process shit :D
-                                                    'Debug.WriteLine(.CurSlot)
+                                                    'Debug.Print(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Index)
                                                     Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Index
                                                         Case EventType.evAddText
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2
@@ -1976,7 +1976,7 @@
 
     End Function
 
-    Sub FindEventLabel(ByVal Label As String, MapNum As Long, eventID As Long, pageID As Long, CurSlot As Long, CurList As Long, ListLeftOff() As Long)
+    Sub FindEventLabel(ByVal Label As String, ByVal MapNum As Long, ByVal eventID As Long, ByVal pageID As Long, ByRef CurSlot As Long, ByRef CurList As Long, ByRef ListLeftOff() As Long)
         Dim tmpCurSlot As Long, tmpCurList As Long, CurrentListOption() As Long
         Dim removeEventProcess As Boolean, tmpListLeftOff() As Long, restartlist As Boolean, w As Long
 

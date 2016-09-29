@@ -1046,22 +1046,22 @@ newlist:
         End If
         frmEditor_Events.lstCommands.Items.Add(indent & "@> ")
 
-        Dim z As Long
-        X = 0
-        For i = 0 To frmEditor_Events.lstCommands.Items.Count - 1
-            'X = frmEditor_Events.TextWidth(frmEditor_Events.lstCommands.Items.Item(i).ToString)
-            If X > z Then z = X
-        Next
+        'Dim z As Long
+        'X = 0
+        'For i = 0 To frmEditor_Events.lstCommands.Items.Count - 1
+        '    'X = frmEditor_Events.TextWidth(frmEditor_Events.lstCommands.Items.Item(i).ToString)
+        '    If X > z Then z = X
+        'Next
 
-        ScrollCommands(z)
-
-    End Sub
-
-    Public Sub ScrollCommands(size As Integer)
-
-        'Call SendMessage(frmEditor_Events.lstCommands.hwnd, LB_SETHORIZONTALEXTENT, (size) + 6, 0&)
+        'ScrollCommands(z)
 
     End Sub
+
+    'Public Sub ScrollCommands(size As Integer)
+
+    '    'Call SendMessage(frmEditor_Events.lstCommands.hwnd, LB_SETHORIZONTALEXTENT, (size) + 6, 0&)
+
+    'End Sub
 
     Sub ListCommandAdd(s As String)
 
