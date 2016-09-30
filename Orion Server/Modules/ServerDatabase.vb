@@ -41,7 +41,7 @@ Module ServerDatabase
 
         ReDim Classes(0 To Max_Classes)
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Stat_Count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
             ReDim Classes(i).StartItem(0 To 5)
             ReDim Classes(i).StartValue(0 To 5)
         Next
@@ -62,7 +62,7 @@ Module ServerDatabase
         Max_Classes = Val(Getvar(filename, "INIT", "MaxClasses"))
         ReDim Classes(0 To Max_Classes)
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Stat_Count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
             ReDim Classes(i).StartItem(0 To 5)
             ReDim Classes(i).StartValue(0 To 5)
         Next
@@ -220,8 +220,8 @@ Module ServerDatabase
 
         For x = 0 To MAX_MAPX
             For y = 0 To MAX_MAPY
-                ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
-                ReDim Map(MapNum).Tile(x, y).Autotile(0 To MapLayer.Layer_Count - 1)
+                ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Count - 1)
+                'ReDim Map(MapNum).Tile(x, y).Autotile(0 To MapLayer.Count - 1)
             Next
         Next
 
@@ -289,11 +289,11 @@ Module ServerDatabase
                 FilePutObject(F, Map(MapNum).Tile(x, y).Data2)
                 FilePutObject(F, Map(MapNum).Tile(x, y).Data3)
                 FilePutObject(F, Map(MapNum).Tile(x, y).DirBlock)
-                For l = 0 To MapLayer.Layer_Count - 1
+                For l = 0 To MapLayer.Count - 1
                     FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).Tileset)
-                    FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).x)
-                    FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).y)
-                    FilePutObject(F, Map(MapNum).Tile(x, y).Autotile)
+                    FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).X)
+                    FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).Y)
+                    FilePutObject(F, Map(MapNum).Tile(x, y).Layer(l).Autotile)
                 Next
                 FilePutObject(F, Map(MapNum).Tile(x, y).Type)
             Next
@@ -485,13 +485,13 @@ Module ServerDatabase
                 FileGetObject(F, Map(MapNum).Tile(x, y).Data2)
                 FileGetObject(F, Map(MapNum).Tile(x, y).Data3)
                 FileGetObject(F, Map(MapNum).Tile(x, y).DirBlock)
-                ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
-                ReDim Map(MapNum).Tile(x, y).Autotile(0 To MapLayer.Layer_Count - 1)
-                For l = 0 To MapLayer.Layer_Count - 1
+                ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Count - 1)
+                'ReDim Map(MapNum).Tile(x, y).Autotile(0 To MapLayer.Count - 1)
+                For l = 0 To MapLayer.Count - 1
                     FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).Tileset)
-                    FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).x)
-                    FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).y)
-                    FileGetObject(F, Map(MapNum).Tile(x, y).Autotile)
+                    FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).X)
+                    FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).Y)
+                    FileGetObject(F, Map(MapNum).Tile(x, y).Layer(l).Autotile)
                 Next
                 FileGetObject(F, Map(MapNum).Tile(x, y).Type)
             Next
@@ -715,7 +715,7 @@ Module ServerDatabase
         FilePutObject(F, Item(itemNum).Mastery)
         FilePutObject(F, Item(itemNum).price)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             FilePutObject(F, Item(itemNum).Add_Stat(i))
         Next
 
@@ -724,7 +724,7 @@ Module ServerDatabase
         FilePutObject(F, Item(itemNum).Handed)
         FilePutObject(F, Item(itemNum).BindType)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             FilePutObject(F, Item(itemNum).Stat_Req(i))
         Next
 
@@ -788,7 +788,7 @@ Module ServerDatabase
         FileGetObject(F, Item(ItemNum).Mastery)
         FileGetObject(F, Item(ItemNum).price)
 
-        For s = 0 To Stats.Stat_Count - 1
+        For s = 0 To Stats.Count - 1
             FileGetObject(F, Item(ItemNum).Add_Stat(s))
         Next
 
@@ -797,7 +797,7 @@ Module ServerDatabase
         FileGetObject(F, Item(ItemNum).Handed)
         FileGetObject(F, Item(ItemNum).BindType)
 
-        For s = 0 To Stats.Stat_Count - 1
+        For s = 0 To Stats.Count - 1
             FileGetObject(F, Item(ItemNum).Stat_Req(s))
         Next
 
@@ -847,8 +847,8 @@ Module ServerDatabase
         Item(Index).Description = ""
 
         For i = 0 To MAX_ITEMS
-            ReDim Item(i).Add_Stat(0 To Stats.Stat_Count - 1)
-            ReDim Item(i).Stat_Req(0 To Stats.Stat_Count - 1)
+            ReDim Item(i).Add_Stat(0 To Stats.Count - 1)
+            ReDim Item(i).Stat_Req(0 To Stats.Count - 1)
             ReDim Item(i).FurnitureBlocks(0 To 3, 0 To 3)
             ReDim Item(i).FurnitureFringe(0 To 3, 0 To 3)
         Next
@@ -899,7 +899,7 @@ Module ServerDatabase
             FilePutObject(F, Npc(NpcNum).DropItemValue(i))
         Next
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             FilePutObject(F, Npc(NpcNum).Stat(i))
         Next
 
@@ -952,7 +952,7 @@ Module ServerDatabase
             FileGetObject(F, Npc(NpcNum).DropItemValue(i))
         Next
 
-        For n = 0 To Stats.Stat_Count - 1
+        For n = 0 To Stats.Count - 1
             FileGetObject(F, Npc(NpcNum).Stat(n))
         Next
 
@@ -990,7 +990,7 @@ Module ServerDatabase
     Sub ClearMapNpc(ByVal Index As Long, ByVal MapNum As Long)
         MapNpc(MapNum).Npc(Index) = Nothing
 
-        ReDim MapNpc(MapNum).Npc(Index).Vital(0 To Vitals.Vital_Count)
+        ReDim MapNpc(MapNum).Npc(Index).Vital(0 To Vitals.Count)
         ReDim MapNpc(MapNum).Npc(Index).SkillCD(MAX_NPC_SKILLS)
     End Sub
 
@@ -1011,7 +1011,7 @@ Module ServerDatabase
         Npc(Index) = Nothing
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
-        ReDim Npc(Index).Stat(0 To Stats.Stat_Count - 1)
+        ReDim Npc(Index).Stat(0 To Stats.Count - 1)
         For i = 1 To 5
             ReDim Npc(Index).DropChance(5)
             ReDim Npc(Index).DropItem(5)
@@ -1740,7 +1740,7 @@ Module ServerDatabase
         Player(Index).Character(CharNum).Classes = 0
         Player(Index).Character(CharNum).Dir = 0
 
-        For i = 0 To Equipment.Equipment_Count - 1
+        For i = 0 To Equipment.Count - 1
             Player(Index).Character(CharNum).Equipment(i) = 0
         Next
 
@@ -1763,11 +1763,11 @@ Module ServerDatabase
 
         Player(Index).Character(CharNum).Sprite = 0
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Player(Index).Character(CharNum).Stat(i) = 0
         Next
 
-        For i = 0 To Vitals.Vital_Count - 1
+        For i = 0 To Vitals.Count - 1
             Player(Index).Character(CharNum).Vital(i) = 0
         Next
 
@@ -1812,8 +1812,8 @@ Module ServerDatabase
             Player(Index).Character(CharNum).Variables(i) = 0
         Next
 
-        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
-        For i = 0 To ResourceSkills.Skill_Count - 1
+        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Count - 1)
+        For i = 0 To ResourceSkills.Count - 1
             Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 1
             Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp = 0
             Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
@@ -1865,11 +1865,11 @@ Module ServerDatabase
 
         FileGetObject(F, Player(Index).Character(CharNum).Sprite)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             FileGetObject(F, Player(Index).Character(CharNum).Stat(i))
         Next
 
-        For i = 0 To Vitals.Vital_Count - 1
+        For i = 0 To Vitals.Count - 1
             FileGetObject(F, Player(Index).Character(CharNum).Vital(i))
         Next
 
@@ -1910,8 +1910,8 @@ Module ServerDatabase
             FileGetObject(F, Player(Index).Character(CharNum).Variables(i))
         Next
 
-        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
-        For i = 0 To ResourceSkills.Skill_Count - 1
+        ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Count - 1)
+        For i = 0 To ResourceSkills.Count - 1
             FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillLevel)
             FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp)
             FileGetObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp)
@@ -1964,11 +1964,11 @@ Module ServerDatabase
 
         FilePutObject(F, Player(Index).Character(CharNum).Sprite)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             FilePutObject(F, Player(Index).Character(CharNum).Stat(i))
         Next
 
-        For i = 0 To Vitals.Vital_Count - 1
+        For i = 0 To Vitals.Count - 1
             FilePutObject(F, Player(Index).Character(CharNum).Vital(i))
         Next
 
@@ -2008,7 +2008,7 @@ Module ServerDatabase
             FilePutObject(F, Player(Index).Character(CharNum).Variables(i))
         Next
 
-        For i = 0 To ResourceSkills.Skill_Count - 1
+        For i = 0 To ResourceSkills.Count - 1
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillLevel)
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp)
             FilePutObject(F, Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp)
@@ -2051,7 +2051,7 @@ Module ServerDatabase
 
             Player(Index).Character(CharNum).Level = 1
 
-            For n = 1 To Stats.Stat_Count - 1
+            For n = 1 To Stats.Count - 1
                 Player(Index).Character(CharNum).Stat(n) = Classes(ClassNum).Stat(n)
             Next n
 
@@ -2073,8 +2073,8 @@ Module ServerDatabase
             Next
 
             'set skills
-            ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Skill_Count - 1)
-            For i = 0 To ResourceSkills.Skill_Count - 1
+            ReDim Player(Index).Character(CharNum).GatherSkills(ResourceSkills.Count - 1)
+            For i = 0 To ResourceSkills.Count - 1
                 Player(Index).Character(CharNum).GatherSkills(i).SkillLevel = 1
                 Player(Index).Character(CharNum).GatherSkills(i).SkillCurExp = 0
                 Player(Index).Character(CharNum).GatherSkills(i).SkillNextLvlExp = 100
@@ -2379,7 +2379,7 @@ Module ServerDatabase
         Buffer.WriteLong(itemNum)
         Buffer.WriteLong(Item(itemNum).AccessReq)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Add_Stat(i))
         Next
 
@@ -2406,7 +2406,7 @@ Module ServerDatabase
         Buffer.WriteLong(Item(itemNum).Stackable)
         Buffer.WriteString(Trim$(Item(itemNum).Description))
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
         Next
 
@@ -2515,7 +2515,7 @@ Module ServerDatabase
         Buffer.WriteLong(Npc(NpcNum).SpawnSecs)
         Buffer.WriteLong(Npc(NpcNum).Sprite)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Npc(NpcNum).Stat(i))
         Next
 

@@ -26,14 +26,14 @@ Public Class frmEditor_Classes
 
         Classes(Max_Classes).Name = "New Class"
 
-        ReDim Classes(Max_Classes).Stat(0 To Stats.stat_count - 1)
+        ReDim Classes(Max_Classes).Stat(0 To Stats.Count - 1)
 
-        ReDim Classes(Max_Classes).Vital(0 To Vitals.Vital_Count - 1)
+        ReDim Classes(Max_Classes).Vital(0 To Vitals.Count - 1)
 
         ReDim Classes(Max_Classes).MaleSprite(1)
         ReDim Classes(Max_Classes).FemaleSprite(1)
 
-        For i = 1 To Stats.stat_count - 1
+        For i = 1 To Stats.Count - 1
             Classes(Max_Classes).Stat(i) = 1
         Next
         ClassEditorInit()

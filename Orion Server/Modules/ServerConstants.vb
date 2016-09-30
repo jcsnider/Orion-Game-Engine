@@ -18,21 +18,21 @@
     ' * The values below must match with the client's values *
     ' ********************************************************
     ' General constants
-    Public Const MAX_PLAYERS As Byte = 70
-    Public Const MAX_ITEMS As Byte = 255
-    Public Const MAX_NPCS As Byte = 255
-    Public Const MAX_ANIMATIONS As Long = 255
-    Public Const MAX_INV As Byte = 35
-    Public Const MAX_MAP_ITEMS As Byte = 255
-    Public Const MAX_MAP_NPCS As Byte = 30
-    Public Const MAX_SHOPS As Byte = 50
-    Public Const MAX_PLAYER_SKILLS As Byte = 20
-    Public Const MAX_NPC_SKILLS As Byte = 6
-    Public Const MAX_SKILLS As Byte = 255
-    Public Const MAX_TRADES As Byte = 20
-    Public Const MAX_RESOURCES As Byte = 100
-    Public Const MAX_LEVELS As Byte = 100
-    Public Const MAX_BANK As Byte = 90
+    'Public Const MAX_PLAYERS As Byte = 70
+    'Public Const MAX_ITEMS As Byte = 255
+    'Public Const MAX_NPCS As Byte = 255
+    'Public Const MAX_ANIMATIONS As Long = 255
+    'Public Const MAX_INV As Byte = 35
+    'Public Const MAX_MAP_ITEMS As Byte = 255
+    'Public Const MAX_MAP_NPCS As Byte = 30
+    'Public Const MAX_SHOPS As Byte = 50
+    'Public Const MAX_PLAYER_SKILLS As Byte = 20
+    'Public Const MAX_NPC_SKILLS As Byte = 6
+    'Public Const MAX_SKILLS As Byte = 255
+    'Public Const MAX_TRADES As Byte = 20
+    'Public Const MAX_RESOURCES As Byte = 100
+    'Public Const MAX_LEVELS As Byte = 100
+    'Public Const MAX_BANK As Byte = 90
     Public Const MAX_HOTBAR As Byte = 7
 
     ' text color constants
@@ -79,7 +79,7 @@
     Public Const StatPtsPerLvl As Byte = 3
 
     ' Map constants
-    Public Const MAX_MAPS As Long = 100
+    'Public Const MAX_MAPS As Long = 100
     Public Const MAX_MAPX As Byte = 50
     Public Const MAX_MAPY As Byte = 50
 

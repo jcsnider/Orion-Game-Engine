@@ -409,8 +409,8 @@ Module ClientGameEditors
                     .Layer(CurLayer).X = 0
                     .Layer(CurLayer).Y = 0
                     .Layer(CurLayer).tileset = 0
-                    If .Autotile(CurLayer) > 0 Then
-                        .Autotile(CurLayer) = 0
+                    If .Layer(CurLayer).Autotile > 0 Then
+                        .Layer(CurLayer).Autotile = 0
                         ' do a re-init so we can see our changes
                         initAutotiles()
                     End If
@@ -473,7 +473,7 @@ Module ClientGameEditors
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
                 .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-                .Autotile(CurLayer) = theAutotile
+                .Layer(CurLayer).Autotile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
@@ -487,7 +487,7 @@ Module ClientGameEditors
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
                 .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-                .Autotile(CurLayer) = 0
+                .Layer(CurLayer).Autotile = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
         Else ' multitile
@@ -501,7 +501,7 @@ Module ClientGameEditors
                                 .Layer(CurLayer).X = EditorTileX + x2
                                 .Layer(CurLayer).Y = EditorTileY + y2
                                 .Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-                                .Autotile(CurLayer) = 0
+                                .Layer(CurLayer).Autotile = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
                         End If
@@ -530,7 +530,7 @@ Module ClientGameEditors
                         .Layer(CurLayer).X = 0
                         .Layer(CurLayer).Y = 0
                         .Layer(CurLayer).tileset = 0
-                        .Autotile(CurLayer) = 0
+                        .Layer(CurLayer).Autotile = 0
                         CacheRenderState(X, Y, CurLayer)
                     End With
                 Next
@@ -552,7 +552,7 @@ Module ClientGameEditors
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
                         Map.Tile(X, Y).Layer(CurLayer).tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-                        Map.Tile(X, Y).Autotile(CurLayer) = theAutotile
+                        Map.Tile(X, Y).Layer(CurLayer).Autotile = theAutotile
                         CacheRenderState(X, Y, CurLayer)
                     Next
                 Next

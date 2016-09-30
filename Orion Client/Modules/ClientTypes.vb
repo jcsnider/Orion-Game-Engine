@@ -134,12 +134,12 @@
     Public Structure TileDataRec
         Dim X As Byte
         Dim Y As Byte
-        Dim tileset As Byte
+        Dim Tileset As Byte
+        Dim Autotile As Byte
     End Structure
 
     Public Structure TileRec
         Dim Layer() As TileDataRec
-        Dim Autotile() As Byte
         Dim Type As Byte
         Dim Data1 As Long
         Dim Data2 As Long

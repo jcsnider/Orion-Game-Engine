@@ -337,7 +337,7 @@
                 .Name = Trim(Buffer.ReadString)
                 .Desc = Trim(Buffer.ReadString)
 
-                ReDim .Vital(0 To Vitals.Vital_Count - 1)
+                ReDim .Vital(0 To Vitals.Count - 1)
 
                 .Vital(Vitals.HP) = Buffer.ReadLong
                 .Vital(Vitals.MP) = Buffer.ReadLong
@@ -361,7 +361,7 @@
                     .FemaleSprite(X) = Buffer.ReadLong
                 Next
 
-                ReDim .Stat(0 To Stats.stat_count - 1)
+                ReDim .Stat(0 To Stats.Count - 1)
 
                 .Stat(Stats.strength) = Buffer.ReadLong
                 .Stat(Stats.endurance) = Buffer.ReadLong
@@ -423,11 +423,11 @@
         ReDim Classes(0 To Max_Classes)
 
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.stat_count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
         Next
 
         For i = 0 To Max_Classes
-            ReDim Classes(i).Vital(0 To Vitals.Vital_Count - 1)
+            ReDim Classes(i).Vital(0 To Vitals.Count - 1)
         Next
 
         For i = 1 To Max_Classes
@@ -621,7 +621,7 @@
         If Buffer.ReadLong <> ServerPackets.SPlayerStats Then Exit Sub
 
         index = Buffer.ReadLong
-        For i = 1 To Stats.stat_count - 1
+        For i = 1 To Stats.Count - 1
             SetPlayerStat(index, i, Buffer.ReadLong)
         Next
         UpdateCharacterPanel = True
@@ -650,13 +650,13 @@
         SetPlayerAccess(i, Buffer.ReadLong)
         SetPlayerPK(i, Buffer.ReadLong)
 
-        For X = 1 To Stats.stat_count - 1
+        For X = 1 To Stats.Count - 1
             SetPlayerStat(i, X, Buffer.ReadLong)
         Next
 
         Player(i).InHouse = Buffer.ReadLong
 
-        For X = 0 To ResourceSkills.Skill_Count - 1
+        For X = 0 To ResourceSkills.Count - 1
             Player(i).GatherSkills(X).SkillLevel = Buffer.ReadLong
             Player(i).GatherSkills(X).SkillCurExp = Buffer.ReadLong
             Player(i).GatherSkills(X).SkillNextLvlExp = Buffer.ReadLong
@@ -872,7 +872,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-        If Buffer.ReadLong <> ServerPackets.SCheckforMap Then Exit Sub
+        If Buffer.ReadLong <> ServerPackets.SCheckForMap Then Exit Sub
 
         ' Erase all players except self
         For i = 1 To MAX_PLAYERS
@@ -976,14 +976,14 @@
                         Map.Tile(X, Y).Data3 = Buffer.ReadLong
                         Map.Tile(X, Y).DirBlock = Buffer.ReadLong
 
-                        ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
-                        ReDim Map.Tile(X, Y).Autotile(0 To MapLayer.Layer_Count - 1)
+                        ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Count - 1)
+                        'ReDim Map.Tile(X, Y).Autotile(0 To MapLayer.Count - 1)
 
-                        For i = 0 To MapLayer.Layer_Count - 1
-                            Map.Tile(X, Y).Layer(i).tileset = Buffer.ReadLong
+                        For i = 0 To MapLayer.Count - 1
+                            Map.Tile(X, Y).Layer(i).Tileset = Buffer.ReadLong
                             Map.Tile(X, Y).Layer(i).X = Buffer.ReadLong
                             Map.Tile(X, Y).Layer(i).Y = Buffer.ReadLong
-                            Map.Tile(X, Y).Autotile(i) = Buffer.ReadLong
+                            Map.Tile(X, Y).Layer(i).Autotile = Buffer.ReadLong
                         Next
                         Map.Tile(X, Y).Type = Buffer.ReadLong
                     Next
@@ -1371,7 +1371,7 @@
         ' Update the item
         Item(n).AccessReq = Buffer.ReadLong()
 
-        For i = 0 To Stats.stat_count - 1
+        For i = 0 To Stats.Count - 1
             Item(n).Add_Stat(i) = Buffer.ReadLong()
         Next
 
@@ -1398,7 +1398,7 @@
         Item(n).Stackable = Buffer.ReadLong()
         Item(n).Description = Trim$(Buffer.ReadString())
 
-        For i = 0 To Stats.stat_count - 1
+        For i = 0 To Stats.Count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
         Next
 
@@ -1444,7 +1444,7 @@
             .Y = Buffer.ReadLong
             .Dir = Buffer.ReadLong
 
-            For i = 1 To Vitals.Vital_Count - 1
+            For i = 1 To Vitals.Count - 1
                 .Vital(i) = Buffer.ReadLong
             Next
             ' Client use only
@@ -1513,7 +1513,7 @@
         Npc(i).SpawnSecs = Buffer.ReadLong()
         Npc(i).Sprite = Buffer.ReadLong()
 
-        For i = 0 To Stats.stat_count - 1
+        For i = 0 To Stats.Count - 1
             Npc(i).Stat(i) = Buffer.ReadLong()
         Next
 
@@ -1923,7 +1923,7 @@
         If Buffer.ReadLong <> ServerPackets.SMapNpcVitals Then Exit Sub
 
         MapNpcNum = Buffer.ReadLong
-        For i = 1 To Vitals.Vital_Count - 1
+        For i = 1 To Vitals.Count - 1
             MapNpc(MapNpcNum).Vital(i) = Buffer.ReadLong
         Next
 
@@ -2177,11 +2177,11 @@
         ReDim Classes(0 To Max_Classes)
 
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.stat_count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
         Next
 
         For i = 0 To Max_Classes
-            ReDim Classes(i).Vital(0 To Vitals.Vital_Count - 1)
+            ReDim Classes(i).Vital(0 To Vitals.Count - 1)
         Next
 
         For i = 1 To Max_Classes
@@ -2251,7 +2251,7 @@
             ' Update the item
             Item(n).AccessReq = buffer.ReadLong()
 
-            For z = 0 To Stats.stat_count - 1
+            For z = 0 To Stats.Count - 1
                 Item(n).Add_Stat(z) = buffer.ReadLong()
             Next
 
@@ -2278,7 +2278,7 @@
             Item(n).Stackable = buffer.ReadLong()
             Item(n).Description = Trim$(buffer.ReadString())
 
-            For z = 0 To Stats.stat_count - 1
+            For z = 0 To Stats.Count - 1
                 Item(n).Stat_Req(z) = buffer.ReadLong()
             Next
 
@@ -2362,14 +2362,14 @@
             Next
 
             Npc(n).EXP = buffer.ReadLong()
-            Npc(n).faction = buffer.ReadLong()
+            Npc(n).Faction = buffer.ReadLong()
             Npc(n).HP = buffer.ReadLong()
             Npc(n).Name = Trim(buffer.ReadString())
             Npc(n).Range = buffer.ReadLong()
             Npc(n).SpawnSecs = buffer.ReadLong()
             Npc(n).Sprite = buffer.ReadLong()
 
-            For z = 0 To Stats.stat_count - 1
+            For z = 0 To Stats.Count - 1
                 Npc(n).Stat(z) = buffer.ReadLong()
             Next
 

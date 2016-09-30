@@ -109,7 +109,6 @@
     <Compile Include="Modules\ServerConstants.vb" />
     <Compile Include="Modules\ServerCrafting.vb" />
     <Compile Include="Modules\ServerDatabase.vb" />
-    <Compile Include="Modules\ServerEnumerations.vb" />
     <Compile Include="Modules\ServerEventLogic.vb" />
     <Compile Include="Modules\ServerEvents.vb" />
     <Compile Include="Modules\ServerGameLogic.vb" />
@@ -205,6 +204,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

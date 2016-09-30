@@ -16,13 +16,13 @@ Module ClientGeneral
         ReDim CharSelection(3)
 
         For i = 0 To MAX_PLAYERS
-            For x = 0 To Vitals.Vital_Count - 1
+            For x = 0 To Vitals.Count - 1
                 ReDim Player(i).Vital(x)
             Next
-            For x = 0 To Stats.stat_count - 1
+            For x = 0 To Stats.Count - 1
                 ReDim Player(i).Stat(x)
             Next
-            For x = 0 To Equipment.Equipment_Count - 1
+            For x = 0 To Equipment.Count - 1
                 ReDim Player(i).Equipment(x)
             Next
 
@@ -30,7 +30,7 @@ Module ClientGeneral
 
             ReDim Player(i).Hotbar(MAX_HOTBAR)
 
-            ReDim Player(i).GatherSkills(ResourceSkills.Skill_Count - 1)
+            ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 
             ReDim Player(i).RecipeLearned(MAX_RECIPE)
         Next
@@ -39,8 +39,8 @@ Module ClientGeneral
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
-                ReDim Autotile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
-                For i = 0 To MapLayer.Layer_Count - 1
+                ReDim Autotile(X, Y).Layer(0 To MapLayer.Count - 1)
+                For i = 0 To MapLayer.Count - 1
                     ReDim Autotile(X, Y).Layer(i).srcX(0 To 4)
                     ReDim Autotile(X, Y).Layer(i).srcY(0 To 4)
                     ReDim Autotile(X, Y).Layer(i).QuarterTile(0 To 4)
@@ -64,10 +64,10 @@ Module ClientGeneral
 
         ReDim Item(0 To MAX_ITEMS)
         For i = 0 To MAX_ITEMS
-            For x = 0 To Stats.stat_count - 1
+            For x = 0 To Stats.Count - 1
                 ReDim Item(i).Add_Stat(x)
             Next
-            For x = 0 To Stats.stat_count - 1
+            For x = 0 To Stats.Count - 1
                 ReDim Item(i).Stat_Req(x)
             Next
 
@@ -77,7 +77,7 @@ Module ClientGeneral
 
         ReDim Npc(0 To MAX_NPCS)
         For i = 0 To MAX_NPCS
-            For x = 0 To Stats.stat_count - 1
+            For x = 0 To Stats.Count - 1
                 ReDim Npc(i).Stat(x)
             Next
 
@@ -90,7 +90,7 @@ Module ClientGeneral
 
         ReDim MapNpc(0 To MAX_MAP_NPCS)
         For i = 0 To MAX_MAP_NPCS
-            For x = 0 To Vitals.Vital_Count - 1
+            For x = 0 To Vitals.Count - 1
                 ReDim MapNpc(i).Vital(x)
             Next
         Next

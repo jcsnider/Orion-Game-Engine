@@ -1053,7 +1053,7 @@ Public Module ClientGuiFunctions
         Dim i As Long
         IsEqItem = 0
 
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
 
             If GetPlayerEquipment(MyIndex, i) > 0 And GetPlayerEquipment(MyIndex, i) <= MAX_ITEMS Then
 

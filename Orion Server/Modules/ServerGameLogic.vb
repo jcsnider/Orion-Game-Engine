@@ -344,7 +344,7 @@
                 Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).y)
                 Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).Dir)
 
-                For i = 1 To Vitals.Vital_Count - 1
+                For i = 1 To Vitals.Count - 1
                     Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).Vital(i))
                 Next
 
@@ -736,7 +736,7 @@
 
     Sub PlayerUnequipItem(ByVal Index As Long, ByVal EqSlot As Long)
 
-        If EqSlot <= 0 Or EqSlot > Equipment.Equipment_Count - 1 Then Exit Sub ' exit out early if error'd
+        If EqSlot <= 0 Or EqSlot > Equipment.Count - 1 Then Exit Sub ' exit out early if error'd
         If FindOpenInvSlot(Index, GetPlayerEquipment(Index, EqSlot)) > 0 Then
             GiveInvItem(Index, GetPlayerEquipment(Index, EqSlot), 0)
             PlayerMsg(Index, "You unequip " & CheckGrammar(Item(GetPlayerEquipment(Index, EqSlot)).Name))

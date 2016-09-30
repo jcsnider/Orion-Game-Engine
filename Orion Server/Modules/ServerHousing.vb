@@ -246,7 +246,7 @@
         If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
             If Item(ItemNum).Type = ITEM_TYPE_FURNITURE Then
                 ' stat requirements
-                For i = 1 To Stats.Stat_Count - 1
+                For i = 1 To Stats.Count - 1
                     If GetPlayerRawStat(index, i) < Item(ItemNum).Stat_Req(i) Then
                         PlayerMsg(index, "You do not meet the stat requirements to use this item.")
                         Exit Sub

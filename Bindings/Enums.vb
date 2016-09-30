@@ -149,7 +149,7 @@
     End Enum
 
     ''' <Summary> Stats used by Players Npcs and Classes </Summary>
-    Public Enum StatType As Byte
+    Public Enum Stats As Byte
         strength = 1
         endurance
         vitality
@@ -160,7 +160,7 @@
     End Enum
 
     ''' <Summary> Vitals used by Players, Npcs, and Classes </Summary>
-    Public Enum VitalType As Byte
+    Public Enum Vitals As Byte
         HP = 1
         MP
         SP
@@ -168,28 +168,24 @@
     End Enum
 
     ''' <Summary> Equipment used by Players </Summary>
-    Public Enum EquipmentType As Byte
+    Public Enum Equipment
         Weapon = 1
         Armor
         Helmet
         Shield
         Shoes
         Gloves
+        ' Make sure Count is below everything else
         Count
     End Enum
 
     ''' <Summary> Layers in a map </Summary>
     Public Enum MapLayer As Byte
         Ground = 1
-        GroundCorruption
         Mask
-        MaskCorruption
         Mask2
-        Mask2Corruption
         Fringe
-        FringeCorruption
         Fringe2
-        Fringe2Corruption
         Count
     End Enum
 

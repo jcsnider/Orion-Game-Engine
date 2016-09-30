@@ -47,7 +47,7 @@
 
         For i = 0 To MAX_MAPS
             For x = 0 To MAX_MAP_NPCS
-                ReDim MapNpc(i).Npc(x).Vital(0 To Vitals.Vital_Count)
+                ReDim MapNpc(i).Npc(x).Vital(0 To Vitals.Count)
             Next
         Next
 
@@ -65,9 +65,9 @@
             For x = 1 To MAX_CHARS
                 ReDim Player(i).Character(x).Switches(MAX_SWITCHES)
                 ReDim Player(i).Character(x).Variables(MAX_VARIABLES)
-                ReDim Player(i).Character(x).Vital(0 To Vitals.Vital_Count - 1)
-                ReDim Player(i).Character(x).Stat(0 To Stats.Stat_Count - 1)
-                ReDim Player(i).Character(x).Equipment(0 To Equipment.Equipment_Count - 1)
+                ReDim Player(i).Character(x).Vital(0 To Vitals.Count - 1)
+                ReDim Player(i).Character(x).Stat(0 To Stats.Count - 1)
+                ReDim Player(i).Character(x).Equipment(0 To Equipment.Count - 1)
                 ReDim Player(i).Character(x).Inv(0 To MAX_INV)
                 ReDim Player(i).Character(x).Skill(0 To MAX_PLAYER_SKILLS)
                 ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
@@ -92,18 +92,18 @@
 
         ReDim Classes(0 To Max_Classes)
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Stat_Count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
             ReDim Classes(i).StartItem(0 To 5)
             ReDim Classes(i).StartValue(0 To 5)
         Next
 
         For i = 0 To MAX_ITEMS
-            ReDim Item(i).Add_Stat(0 To Stats.Stat_Count - 1)
-            ReDim Item(i).Stat_Req(0 To Stats.Stat_Count - 1)
+            ReDim Item(i).Add_Stat(0 To Stats.Count - 1)
+            ReDim Item(i).Stat_Req(0 To Stats.Count - 1)
             ReDim Item(i).FurnitureBlocks(0 To 3, 0 To 3)
             ReDim Item(i).FurnitureFringe(0 To 3, 0 To 3)
         Next
-        ReDim Npc(0 To MAX_NPCS).Stat(0 To Stats.Stat_Count - 1)
+        ReDim Npc(0 To MAX_NPCS).Stat(0 To Stats.Count - 1)
 
 
         ReDim Shop(0 To MAX_SHOPS).TradeItem(0 To MAX_TRADES)

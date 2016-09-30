@@ -81,21 +81,21 @@
 
     ' General constants
     Public Const GAME_NAME As String = "Orion+"
-    Public Const MAX_PLAYERS As Byte = 70
-    Public Const MAX_ITEMS As Byte = 255
-    Public Const MAX_NPCS As Byte = 255
-    Public Const MAX_ANIMATIONS As Long = 255
-    Public Const MAX_INV As Byte = 35
-    Public Const MAX_MAP_ITEMS As Byte = 255
-    Public Const MAX_MAP_NPCS As Byte = 30
-    Public Const MAX_SHOPS As Byte = 50
-    Public Const MAX_PLAYER_SKILLS As Byte = 20
-    Public Const MAX_NPC_SKILLS As Byte = 6
-    Public Const MAX_SKILLS As Byte = 255
-    Public Const MAX_TRADES As Byte = 20
-    Public Const MAX_RESOURCES As Byte = 100
-    Public Const MAX_LEVELS As Byte = 100
-    Public Const MAX_BANK As Byte = 90
+    'Public Const MAX_PLAYERS As Byte = 70
+    'Public Const MAX_ITEMS As Byte = 255
+    'Public Const MAX_NPCS As Byte = 255
+    'Public Const MAX_ANIMATIONS As Long = 255
+    'Public Const MAX_INV As Byte = 35
+    'Public Const MAX_MAP_ITEMS As Byte = 255
+    'Public Const MAX_MAP_NPCS As Byte = 30
+    'Public Const MAX_SHOPS As Byte = 50
+    'Public Const MAX_PLAYER_SKILLS As Byte = 20
+    'Public Const MAX_NPC_SKILLS As Byte = 6
+    'Public Const MAX_SKILLS As Byte = 255
+    'Public Const MAX_TRADES As Byte = 20
+    'Public Const MAX_RESOURCES As Byte = 100
+    'Public Const MAX_LEVELS As Byte = 100
+    'Public Const MAX_BANK As Byte = 90
 
     ' Website
     Public Const GAME_WEBSITE As String = "http://ascensiongamedev.com/index.php"
@@ -142,7 +142,7 @@
     Public Const SEX_FEMALE As Byte = 1
 
     ' Map constants
-    Public Const MAX_MAPS As Long = 100
+    'Public Const MAX_MAPS As Long = 100
     Public MAX_MAPX As Byte = 35
     Public MAX_MAPY As Byte = 26
 

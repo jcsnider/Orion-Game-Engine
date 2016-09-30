@@ -303,13 +303,12 @@ Module ClientDataBase
 
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
-                    ReDim Map.Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
-                    ReDim Map.Tile(x, y).Autotile(0 To MapLayer.Layer_Count - 1)
-                    For l = 0 To MapLayer.Layer_Count - 1
+                    ReDim Map.Tile(x, y).Layer(0 To MapLayer.Count - 1)
+                    For l = 0 To MapLayer.Count - 1
                         Map.Tile(x, y).Layer(l).tileset = 0
                         Map.Tile(x, y).Layer(l).X = 0
                         Map.Tile(x, y).Layer(l).Y = 0
-                        Map.Tile(x, y).Autotile(l) = 0
+                        Map.Tile(x, y).Layer(l).Autotile = 0
                     Next
 
                 Next
@@ -405,7 +404,7 @@ Module ClientDataBase
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).tileset)
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).X)
                     FilePutObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FilePutObject(f, Map.Tile(X, Y).Autotile(i))
+                    FilePutObject(f, Map.Tile(X, Y).Layer(i).Autotile)
                 Next
                 FilePutObject(f, Map.Tile(X, Y).Type)
             Next
@@ -454,12 +453,12 @@ Module ClientDataBase
                 FileGetObject(f, Map.Tile(X, Y).Data2)
                 FileGetObject(f, Map.Tile(X, Y).Data3)
                 FileGetObject(f, Map.Tile(X, Y).DirBlock)
-                ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Layer_Count - 1)
+                ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Count - 1)
                 For i = 0 To UBound(Map.Tile(X, Y).Layer)
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).tileset)
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).X)
                     FileGetObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FileGetObject(f, Map.Tile(X, Y).Autotile(i))
+                    FileGetObject(f, Map.Tile(X, Y).Layer(i).Autotile)
                 Next
                 FileGetObject(f, Map.Tile(X, Y).Type)
             Next
@@ -680,10 +679,10 @@ Module ClientDataBase
         Index = Index - 1
         Item(Index) = Nothing
         Item(Index) = New ItemRec
-        For x = 0 To Stats.stat_count - 1
+        For x = 0 To Stats.Count - 1
             ReDim Item(Index).Add_Stat(x)
         Next
-        For x = 0 To Stats.stat_count - 1
+        For x = 0 To Stats.Count - 1
             ReDim Item(Index).Stat_Req(x)
         Next
 
@@ -744,7 +743,7 @@ Module ClientDataBase
         Npc(Index) = Nothing
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
-        ReDim Npc(Index).Stat(0 To Stats.stat_count - 1)
+        ReDim Npc(Index).Stat(0 To Stats.Count - 1)
         ReDim Npc(Index).Skill(0 To MAX_NPC_SKILLS)
     End Sub
 

@@ -94,6 +94,7 @@
   <ItemGroup>
     <Reference Include="SFML.Net">
       <HintPath>.\SFML.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -230,7 +231,6 @@
     <Compile Include="Modules\ClientTCP.vb" />
     <Compile Include="Modules\ClientConstants.vb" />
     <Compile Include="Modules\ClientDataBase.vb" />
-    <Compile Include="Modules\ClientEnumerations.vb" />
     <Compile Include="Modules\ClientINIAccess.vb" />
     <Compile Include="Modules\ClientUpdateUI.vb" />
     <Compile Include="Modules\ClientText.vb" />
@@ -315,20 +315,20 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="data files\fonts\Arvo-Regular.ttf">
+    <None Include="Data Files\fonts\Arvo-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data files\config.ini" />
-    <None Include="data files\music\Forest.ogg">
+    <None Include="Data Files\config.ini" />
+    <None Include="Data Files\music\Forest.ogg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="data files\sound\Click.ogg">
+    <None Include="Data Files\sound\Click.ogg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="data files\sound\rain.ogg">
+    <None Include="Data Files\sound\rain.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data files\sound\Thunder.ogg">
+    <None Include="Data Files\sound\Thunder.ogg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="My Project\app.manifest" />
@@ -380,1920 +380,1920 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data files\maps\" />
+    <Folder Include="Data Files\maps\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="burn.ico" />
-    <Content Include="data files\Credits.txt">
+    <Content Include="Data Files\Credits.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Actionbar\Panel.png">
+    <Content Include="Data Files\graphics\GUI\Actionbar\Panel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\animations\1.png">
+    <Content Include="Data Files\graphics\animations\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\blood.png">
+    <Content Include="Data Files\graphics\blood.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\1.png">
+    <Content Include="Data Files\graphics\characters\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\10.png">
+    <Content Include="Data Files\graphics\characters\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\11.png">
+    <Content Include="Data Files\graphics\characters\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\12.png">
+    <Content Include="Data Files\graphics\characters\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\13.png">
+    <Content Include="Data Files\graphics\characters\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\14.png">
+    <Content Include="Data Files\graphics\characters\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\15.png">
+    <Content Include="Data Files\graphics\characters\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\16.png">
+    <Content Include="Data Files\graphics\characters\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\17.png">
+    <Content Include="Data Files\graphics\characters\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\18.png">
+    <Content Include="Data Files\graphics\characters\18.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\19.png">
+    <Content Include="Data Files\graphics\characters\19.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\2.png">
+    <Content Include="Data Files\graphics\characters\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\20.png">
+    <Content Include="Data Files\graphics\characters\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\21.png">
+    <Content Include="Data Files\graphics\characters\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\22.png">
+    <Content Include="Data Files\graphics\characters\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\23.png">
+    <Content Include="Data Files\graphics\characters\23.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\24.png">
+    <Content Include="Data Files\graphics\characters\24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\25.png">
+    <Content Include="Data Files\graphics\characters\25.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\26.png">
+    <Content Include="Data Files\graphics\characters\26.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\27.png">
+    <Content Include="Data Files\graphics\characters\27.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\28.png">
+    <Content Include="Data Files\graphics\characters\28.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\29.png">
+    <Content Include="Data Files\graphics\characters\29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\3.png">
+    <Content Include="Data Files\graphics\characters\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\30.png">
+    <Content Include="Data Files\graphics\characters\30.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\31.png">
+    <Content Include="Data Files\graphics\characters\31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\32.png">
+    <Content Include="Data Files\graphics\characters\32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\33.png">
+    <Content Include="Data Files\graphics\characters\33.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\34.png">
+    <Content Include="Data Files\graphics\characters\34.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\35.png">
+    <Content Include="Data Files\graphics\characters\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\36.png">
+    <Content Include="Data Files\graphics\characters\36.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\37.png">
+    <Content Include="Data Files\graphics\characters\37.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\38.png">
+    <Content Include="Data Files\graphics\characters\38.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\39.png">
+    <Content Include="Data Files\graphics\characters\39.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\4.png">
+    <Content Include="Data Files\graphics\characters\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\40.png">
+    <Content Include="Data Files\graphics\characters\40.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\41.png">
+    <Content Include="Data Files\graphics\characters\41.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\42.png">
+    <Content Include="Data Files\graphics\characters\42.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\43.png">
+    <Content Include="Data Files\graphics\characters\43.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\44.png">
+    <Content Include="Data Files\graphics\characters\44.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\45.png">
+    <Content Include="Data Files\graphics\characters\45.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\46.png">
+    <Content Include="Data Files\graphics\characters\46.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\47.png">
+    <Content Include="Data Files\graphics\characters\47.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\48.png">
+    <Content Include="Data Files\graphics\characters\48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\49.png">
+    <Content Include="Data Files\graphics\characters\49.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\5.png">
+    <Content Include="Data Files\graphics\characters\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\50.png">
+    <Content Include="Data Files\graphics\characters\50.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\51.png">
+    <Content Include="Data Files\graphics\characters\51.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\52.png">
+    <Content Include="Data Files\graphics\characters\52.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\53.png">
+    <Content Include="Data Files\graphics\characters\53.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\54.png">
+    <Content Include="Data Files\graphics\characters\54.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\55.png">
+    <Content Include="Data Files\graphics\characters\55.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\56.png">
+    <Content Include="Data Files\graphics\characters\56.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\57.png">
+    <Content Include="Data Files\graphics\characters\57.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\58.png">
+    <Content Include="Data Files\graphics\characters\58.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\59.png">
+    <Content Include="Data Files\graphics\characters\59.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\6.png">
+    <Content Include="Data Files\graphics\characters\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\60.png">
+    <Content Include="Data Files\graphics\characters\60.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\61.png">
+    <Content Include="Data Files\graphics\characters\61.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\62.png">
+    <Content Include="Data Files\graphics\characters\62.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\63.png">
+    <Content Include="Data Files\graphics\characters\63.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\64.png">
+    <Content Include="Data Files\graphics\characters\64.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\65.png">
+    <Content Include="Data Files\graphics\characters\65.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\66.png">
+    <Content Include="Data Files\graphics\characters\66.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\67.png">
+    <Content Include="Data Files\graphics\characters\67.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\68.png">
+    <Content Include="Data Files\graphics\characters\68.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\69.png">
+    <Content Include="Data Files\graphics\characters\69.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\7.png">
+    <Content Include="Data Files\graphics\characters\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\70.png">
+    <Content Include="Data Files\graphics\characters\70.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\71.png">
+    <Content Include="Data Files\graphics\characters\71.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\72.png">
+    <Content Include="Data Files\graphics\characters\72.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\73.png">
+    <Content Include="Data Files\graphics\characters\73.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\74.png">
+    <Content Include="Data Files\graphics\characters\74.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\75.png">
+    <Content Include="Data Files\graphics\characters\75.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\76.png">
+    <Content Include="Data Files\graphics\characters\76.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\77.png">
+    <Content Include="Data Files\graphics\characters\77.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\78.png">
+    <Content Include="Data Files\graphics\characters\78.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\79.png">
+    <Content Include="Data Files\graphics\characters\79.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\8.png">
+    <Content Include="Data Files\graphics\characters\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\80.png">
+    <Content Include="Data Files\graphics\characters\80.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\81.png">
+    <Content Include="Data Files\graphics\characters\81.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\82.png">
+    <Content Include="Data Files\graphics\characters\82.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\83.png">
+    <Content Include="Data Files\graphics\characters\83.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\84.png">
+    <Content Include="Data Files\graphics\characters\84.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\85.png">
+    <Content Include="Data Files\graphics\characters\85.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\86.png">
+    <Content Include="Data Files\graphics\characters\86.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\87.png">
+    <Content Include="Data Files\graphics\characters\87.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\88.png">
+    <Content Include="Data Files\graphics\characters\88.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\characters\9.png">
+    <Content Include="Data Files\graphics\characters\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\direction.png">
+    <Content Include="Data Files\graphics\direction.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\door.png">
+    <Content Include="Data Files\graphics\door.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\1.png">
+    <Content Include="Data Files\graphics\Faces\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\10.png">
+    <Content Include="Data Files\graphics\Faces\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\11.png">
+    <Content Include="Data Files\graphics\Faces\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\12.png">
+    <Content Include="Data Files\graphics\Faces\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\13.png">
+    <Content Include="Data Files\graphics\Faces\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\14.png">
+    <Content Include="Data Files\graphics\Faces\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\15.png">
+    <Content Include="Data Files\graphics\Faces\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\16.png">
+    <Content Include="Data Files\graphics\Faces\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\17.png">
+    <Content Include="Data Files\graphics\Faces\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\18.png">
+    <Content Include="Data Files\graphics\Faces\18.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\19.png">
+    <Content Include="Data Files\graphics\Faces\19.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\2.png">
+    <Content Include="Data Files\graphics\Faces\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\20.png">
+    <Content Include="Data Files\graphics\Faces\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\21.png">
+    <Content Include="Data Files\graphics\Faces\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\22.png">
+    <Content Include="Data Files\graphics\Faces\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\23.png">
+    <Content Include="Data Files\graphics\Faces\23.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\24.png">
+    <Content Include="Data Files\graphics\Faces\24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\25.png">
+    <Content Include="Data Files\graphics\Faces\25.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\26.png">
+    <Content Include="Data Files\graphics\Faces\26.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\27.png">
+    <Content Include="Data Files\graphics\Faces\27.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\28.png">
+    <Content Include="Data Files\graphics\Faces\28.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\29.png">
+    <Content Include="Data Files\graphics\Faces\29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\3.png">
+    <Content Include="Data Files\graphics\Faces\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\30.png">
+    <Content Include="Data Files\graphics\Faces\30.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\31.png">
+    <Content Include="Data Files\graphics\Faces\31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\32.png">
+    <Content Include="Data Files\graphics\Faces\32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\33.png">
+    <Content Include="Data Files\graphics\Faces\33.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\34.png">
+    <Content Include="Data Files\graphics\Faces\34.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\35.png">
+    <Content Include="Data Files\graphics\Faces\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\36.png">
+    <Content Include="Data Files\graphics\Faces\36.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\37.png">
+    <Content Include="Data Files\graphics\Faces\37.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\38.png">
+    <Content Include="Data Files\graphics\Faces\38.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\39.png">
+    <Content Include="Data Files\graphics\Faces\39.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\4.png">
+    <Content Include="Data Files\graphics\Faces\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\40.png">
+    <Content Include="Data Files\graphics\Faces\40.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\41.png">
+    <Content Include="Data Files\graphics\Faces\41.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\42.png">
+    <Content Include="Data Files\graphics\Faces\42.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\43.png">
+    <Content Include="Data Files\graphics\Faces\43.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\44.png">
+    <Content Include="Data Files\graphics\Faces\44.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\45.png">
+    <Content Include="Data Files\graphics\Faces\45.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\46.png">
+    <Content Include="Data Files\graphics\Faces\46.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\47.png">
+    <Content Include="Data Files\graphics\Faces\47.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\48.png">
+    <Content Include="Data Files\graphics\Faces\48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\49.png">
+    <Content Include="Data Files\graphics\Faces\49.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\5.png">
+    <Content Include="Data Files\graphics\Faces\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\50.png">
+    <Content Include="Data Files\graphics\Faces\50.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\51.png">
+    <Content Include="Data Files\graphics\Faces\51.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\52.png">
+    <Content Include="Data Files\graphics\Faces\52.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\53.png">
+    <Content Include="Data Files\graphics\Faces\53.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\54.png">
+    <Content Include="Data Files\graphics\Faces\54.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\55.png">
+    <Content Include="Data Files\graphics\Faces\55.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\56.png">
+    <Content Include="Data Files\graphics\Faces\56.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\57.png">
+    <Content Include="Data Files\graphics\Faces\57.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\58.png">
+    <Content Include="Data Files\graphics\Faces\58.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\59.png">
+    <Content Include="Data Files\graphics\Faces\59.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\6.png">
+    <Content Include="Data Files\graphics\Faces\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\60.png">
+    <Content Include="Data Files\graphics\Faces\60.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\61.png">
+    <Content Include="Data Files\graphics\Faces\61.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\62.png">
+    <Content Include="Data Files\graphics\Faces\62.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\63.png">
+    <Content Include="Data Files\graphics\Faces\63.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\64.png">
+    <Content Include="Data Files\graphics\Faces\64.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\65.png">
+    <Content Include="Data Files\graphics\Faces\65.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\66.png">
+    <Content Include="Data Files\graphics\Faces\66.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\67.png">
+    <Content Include="Data Files\graphics\Faces\67.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\68.png">
+    <Content Include="Data Files\graphics\Faces\68.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\69.png">
+    <Content Include="Data Files\graphics\Faces\69.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\7.png">
+    <Content Include="Data Files\graphics\Faces\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\70.png">
+    <Content Include="Data Files\graphics\Faces\70.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\71.png">
+    <Content Include="Data Files\graphics\Faces\71.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\72.png">
+    <Content Include="Data Files\graphics\Faces\72.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\73.png">
+    <Content Include="Data Files\graphics\Faces\73.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\74.png">
+    <Content Include="Data Files\graphics\Faces\74.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\75.png">
+    <Content Include="Data Files\graphics\Faces\75.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\76.png">
+    <Content Include="Data Files\graphics\Faces\76.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\77.png">
+    <Content Include="Data Files\graphics\Faces\77.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\78.png">
+    <Content Include="Data Files\graphics\Faces\78.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\79.png">
+    <Content Include="Data Files\graphics\Faces\79.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\8.png">
+    <Content Include="Data Files\graphics\Faces\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\80.png">
+    <Content Include="Data Files\graphics\Faces\80.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Faces\9.png">
+    <Content Include="Data Files\graphics\Faces\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Fogs\1.png">
+    <Content Include="Data Files\graphics\Fogs\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Furniture\1.png">
+    <Content Include="Data Files\graphics\Furniture\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Furniture\2.png">
+    <Content Include="Data Files\graphics\Furniture\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Furniture\3.png">
+    <Content Include="Data Files\graphics\Furniture\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Furniture\4.png">
+    <Content Include="Data Files\graphics\Furniture\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Furniture\5.png">
+    <Content Include="Data Files\graphics\Furniture\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\button.png">
+    <Content Include="Data Files\graphics\GUI\button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\button_hover.png">
+    <Content Include="Data Files\graphics\GUI\button_hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\EXPBar.png">
+    <Content Include="Data Files\graphics\GUI\EXPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\EXPBarEmpty.png">
+    <Content Include="Data Files\graphics\GUI\EXPBarEmpty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\HPBar.png">
+    <Content Include="Data Files\graphics\GUI\HPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\HPBarEmpty.png">
+    <Content Include="Data Files\graphics\GUI\HPBarEmpty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Bank.png">
+    <Content Include="Data Files\graphics\GUI\Main\Bank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\char.png">
+    <Content Include="Data Files\graphics\GUI\Main\char.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\chat.png">
+    <Content Include="Data Files\graphics\GUI\Main\chat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Craft.png">
+    <Content Include="Data Files\graphics\GUI\Main\Craft.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Description.png">
+    <Content Include="Data Files\graphics\GUI\Main\Description.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\EventChat.png">
+    <Content Include="Data Files\graphics\GUI\Main\EventChat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Hotbar.png">
+    <Content Include="Data Files\graphics\GUI\Main\Hotbar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\HUD.png">
+    <Content Include="Data Files\graphics\GUI\Main\HUD.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\inventory.png">
+    <Content Include="Data Files\graphics\GUI\Main\inventory.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\min.png">
+    <Content Include="Data Files\graphics\GUI\Main\min.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\MyChat.png">
+    <Content Include="Data Files\graphics\GUI\Main\MyChat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\plus.png">
+    <Content Include="Data Files\graphics\GUI\Main\plus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\ProgBar.png">
+    <Content Include="Data Files\graphics\GUI\Main\ProgBar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\QuestLog.png">
+    <Content Include="Data Files\graphics\GUI\Main\QuestLog.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\RightClick.png">
+    <Content Include="Data Files\graphics\GUI\Main\RightClick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Shop.png">
+    <Content Include="Data Files\graphics\GUI\Main\Shop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\skills.png">
+    <Content Include="Data Files\graphics\GUI\Main\skills.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Main\Trade.png">
+    <Content Include="Data Files\graphics\GUI\Main\Trade.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\button.png">
+    <Content Include="Data Files\graphics\GUI\Menu\button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\Button_Hover.png">
+    <Content Include="Data Files\graphics\GUI\Menu\Button_Hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\logo.png" />
-    <Content Include="data files\graphics\GUI\Menu\menu.png">
+    <Content Include="Data Files\graphics\GUI\Menu\logo.png" />
+    <Content Include="Data Files\graphics\GUI\Menu\menu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\Menu\panel.png">
+    <Content Include="Data Files\graphics\GUI\Menu\panel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\MPBar.png">
+    <Content Include="Data Files\graphics\GUI\MPBar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\GUI\MPBarEmpty.png">
+    <Content Include="Data Files\graphics\GUI\MPBarEmpty.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\1.png">
+    <Content Include="Data Files\graphics\items\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\10.png">
+    <Content Include="Data Files\graphics\items\10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\100.png">
+    <Content Include="Data Files\graphics\items\100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\101.png">
+    <Content Include="Data Files\graphics\items\101.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\102.png">
+    <Content Include="Data Files\graphics\items\102.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\103.png">
+    <Content Include="Data Files\graphics\items\103.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\104.png">
+    <Content Include="Data Files\graphics\items\104.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\105.png">
+    <Content Include="Data Files\graphics\items\105.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\106.png">
+    <Content Include="Data Files\graphics\items\106.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\107.png">
+    <Content Include="Data Files\graphics\items\107.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\108.png">
+    <Content Include="Data Files\graphics\items\108.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\109.png">
+    <Content Include="Data Files\graphics\items\109.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\11.png">
+    <Content Include="Data Files\graphics\items\11.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\110.png">
+    <Content Include="Data Files\graphics\items\110.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\111.png">
+    <Content Include="Data Files\graphics\items\111.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\112.png">
+    <Content Include="Data Files\graphics\items\112.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\113.png">
+    <Content Include="Data Files\graphics\items\113.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\114.png">
+    <Content Include="Data Files\graphics\items\114.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\115.png">
+    <Content Include="Data Files\graphics\items\115.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\116.png">
+    <Content Include="Data Files\graphics\items\116.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\117.png">
+    <Content Include="Data Files\graphics\items\117.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\118.png">
+    <Content Include="Data Files\graphics\items\118.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\119.png">
+    <Content Include="Data Files\graphics\items\119.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\12.png">
+    <Content Include="Data Files\graphics\items\12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\120.png">
+    <Content Include="Data Files\graphics\items\120.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\121.png">
+    <Content Include="Data Files\graphics\items\121.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\122.png">
+    <Content Include="Data Files\graphics\items\122.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\123.png">
+    <Content Include="Data Files\graphics\items\123.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\124.png">
+    <Content Include="Data Files\graphics\items\124.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\125.png">
+    <Content Include="Data Files\graphics\items\125.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\126.png">
+    <Content Include="Data Files\graphics\items\126.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\127.png">
+    <Content Include="Data Files\graphics\items\127.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\128.png">
+    <Content Include="Data Files\graphics\items\128.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\129.png">
+    <Content Include="Data Files\graphics\items\129.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\13.png">
+    <Content Include="Data Files\graphics\items\13.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\130.png">
+    <Content Include="Data Files\graphics\items\130.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\131.png">
+    <Content Include="Data Files\graphics\items\131.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\132.png">
+    <Content Include="Data Files\graphics\items\132.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\133.png">
+    <Content Include="Data Files\graphics\items\133.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\134.png">
+    <Content Include="Data Files\graphics\items\134.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\135.png">
+    <Content Include="Data Files\graphics\items\135.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\136.png">
+    <Content Include="Data Files\graphics\items\136.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\137.png">
+    <Content Include="Data Files\graphics\items\137.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\138.png">
+    <Content Include="Data Files\graphics\items\138.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\139.png">
+    <Content Include="Data Files\graphics\items\139.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\14.png">
+    <Content Include="Data Files\graphics\items\14.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\140.png">
+    <Content Include="Data Files\graphics\items\140.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\141.png">
+    <Content Include="Data Files\graphics\items\141.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\142.png">
+    <Content Include="Data Files\graphics\items\142.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\143.png">
+    <Content Include="Data Files\graphics\items\143.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\144.png">
+    <Content Include="Data Files\graphics\items\144.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\145.png">
+    <Content Include="Data Files\graphics\items\145.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\146.png">
+    <Content Include="Data Files\graphics\items\146.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\147.png">
+    <Content Include="Data Files\graphics\items\147.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\148.png">
+    <Content Include="Data Files\graphics\items\148.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\149.png">
+    <Content Include="Data Files\graphics\items\149.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\15.png">
+    <Content Include="Data Files\graphics\items\15.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\150.png">
+    <Content Include="Data Files\graphics\items\150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\151.png">
+    <Content Include="Data Files\graphics\items\151.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\152.png">
+    <Content Include="Data Files\graphics\items\152.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\153.png">
+    <Content Include="Data Files\graphics\items\153.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\154.png">
+    <Content Include="Data Files\graphics\items\154.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\155.png">
+    <Content Include="Data Files\graphics\items\155.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\156.png">
+    <Content Include="Data Files\graphics\items\156.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\157.png">
+    <Content Include="Data Files\graphics\items\157.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\158.png">
+    <Content Include="Data Files\graphics\items\158.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\159.png">
+    <Content Include="Data Files\graphics\items\159.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\16.png">
+    <Content Include="Data Files\graphics\items\16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\160.png">
+    <Content Include="Data Files\graphics\items\160.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\161.png">
+    <Content Include="Data Files\graphics\items\161.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\162.png">
+    <Content Include="Data Files\graphics\items\162.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\163.png">
+    <Content Include="Data Files\graphics\items\163.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\164.png">
+    <Content Include="Data Files\graphics\items\164.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\165.png">
+    <Content Include="Data Files\graphics\items\165.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\166.png">
+    <Content Include="Data Files\graphics\items\166.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\167.png">
+    <Content Include="Data Files\graphics\items\167.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\168.png">
+    <Content Include="Data Files\graphics\items\168.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\169.png">
+    <Content Include="Data Files\graphics\items\169.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\17.png">
+    <Content Include="Data Files\graphics\items\17.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\170.png">
+    <Content Include="Data Files\graphics\items\170.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\171.png">
+    <Content Include="Data Files\graphics\items\171.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\172.png">
+    <Content Include="Data Files\graphics\items\172.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\173.png">
+    <Content Include="Data Files\graphics\items\173.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\174.png">
+    <Content Include="Data Files\graphics\items\174.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\175.png">
+    <Content Include="Data Files\graphics\items\175.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\176.png">
+    <Content Include="Data Files\graphics\items\176.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\177.png">
+    <Content Include="Data Files\graphics\items\177.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\178.png">
+    <Content Include="Data Files\graphics\items\178.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\179.png">
+    <Content Include="Data Files\graphics\items\179.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\18.png">
+    <Content Include="Data Files\graphics\items\18.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\180.png">
+    <Content Include="Data Files\graphics\items\180.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\181.png">
+    <Content Include="Data Files\graphics\items\181.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\182.png">
+    <Content Include="Data Files\graphics\items\182.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\183.png">
+    <Content Include="Data Files\graphics\items\183.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\184.png">
+    <Content Include="Data Files\graphics\items\184.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\185.png">
+    <Content Include="Data Files\graphics\items\185.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\186.png">
+    <Content Include="Data Files\graphics\items\186.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\187.png">
+    <Content Include="Data Files\graphics\items\187.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\188.png">
+    <Content Include="Data Files\graphics\items\188.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\189.png">
+    <Content Include="Data Files\graphics\items\189.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\19.png">
+    <Content Include="Data Files\graphics\items\19.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\190.png">
+    <Content Include="Data Files\graphics\items\190.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\191.png">
+    <Content Include="Data Files\graphics\items\191.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\192.png">
+    <Content Include="Data Files\graphics\items\192.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\193.png">
+    <Content Include="Data Files\graphics\items\193.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\194.png">
+    <Content Include="Data Files\graphics\items\194.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\195.png">
+    <Content Include="Data Files\graphics\items\195.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\196.png">
+    <Content Include="Data Files\graphics\items\196.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\197.png">
+    <Content Include="Data Files\graphics\items\197.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\198.png">
+    <Content Include="Data Files\graphics\items\198.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\199.png">
+    <Content Include="Data Files\graphics\items\199.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\2.png">
+    <Content Include="Data Files\graphics\items\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\20.png">
+    <Content Include="Data Files\graphics\items\20.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\200.png">
+    <Content Include="Data Files\graphics\items\200.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\201.png">
+    <Content Include="Data Files\graphics\items\201.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\202.png">
+    <Content Include="Data Files\graphics\items\202.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\203.png">
+    <Content Include="Data Files\graphics\items\203.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\204.png">
+    <Content Include="Data Files\graphics\items\204.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\205.png">
+    <Content Include="Data Files\graphics\items\205.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\206.png">
+    <Content Include="Data Files\graphics\items\206.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\207.png">
+    <Content Include="Data Files\graphics\items\207.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\208.png">
+    <Content Include="Data Files\graphics\items\208.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\209.png">
+    <Content Include="Data Files\graphics\items\209.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\21.png">
+    <Content Include="Data Files\graphics\items\21.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\210.png">
+    <Content Include="Data Files\graphics\items\210.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\211.png">
+    <Content Include="Data Files\graphics\items\211.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\212.png">
+    <Content Include="Data Files\graphics\items\212.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\213.png">
+    <Content Include="Data Files\graphics\items\213.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\214.png">
+    <Content Include="Data Files\graphics\items\214.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\215.png">
+    <Content Include="Data Files\graphics\items\215.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\216.png">
+    <Content Include="Data Files\graphics\items\216.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\217.png">
+    <Content Include="Data Files\graphics\items\217.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\218.png">
+    <Content Include="Data Files\graphics\items\218.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\219.png">
+    <Content Include="Data Files\graphics\items\219.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\22.png">
+    <Content Include="Data Files\graphics\items\22.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\220.png">
+    <Content Include="Data Files\graphics\items\220.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\221.png">
+    <Content Include="Data Files\graphics\items\221.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\222.png">
+    <Content Include="Data Files\graphics\items\222.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\223.png">
+    <Content Include="Data Files\graphics\items\223.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\224.png">
+    <Content Include="Data Files\graphics\items\224.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\225.png">
+    <Content Include="Data Files\graphics\items\225.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\226.png">
+    <Content Include="Data Files\graphics\items\226.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\227.png">
+    <Content Include="Data Files\graphics\items\227.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\228.png">
+    <Content Include="Data Files\graphics\items\228.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\229.png">
+    <Content Include="Data Files\graphics\items\229.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\23.png">
+    <Content Include="Data Files\graphics\items\23.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\230.png">
+    <Content Include="Data Files\graphics\items\230.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\231.png">
+    <Content Include="Data Files\graphics\items\231.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\232.png">
+    <Content Include="Data Files\graphics\items\232.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\233.png">
+    <Content Include="Data Files\graphics\items\233.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\234.png">
+    <Content Include="Data Files\graphics\items\234.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\235.png">
+    <Content Include="Data Files\graphics\items\235.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\236.png">
+    <Content Include="Data Files\graphics\items\236.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\237.png">
+    <Content Include="Data Files\graphics\items\237.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\238.png">
+    <Content Include="Data Files\graphics\items\238.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\239.png">
+    <Content Include="Data Files\graphics\items\239.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\24.png">
+    <Content Include="Data Files\graphics\items\24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\240.png">
+    <Content Include="Data Files\graphics\items\240.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\241.png">
+    <Content Include="Data Files\graphics\items\241.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\242.png">
+    <Content Include="Data Files\graphics\items\242.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\243.png">
+    <Content Include="Data Files\graphics\items\243.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\244.png">
+    <Content Include="Data Files\graphics\items\244.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\245.png">
+    <Content Include="Data Files\graphics\items\245.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\246.png">
+    <Content Include="Data Files\graphics\items\246.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\247.png">
+    <Content Include="Data Files\graphics\items\247.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\248.png">
+    <Content Include="Data Files\graphics\items\248.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\249.png">
+    <Content Include="Data Files\graphics\items\249.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\25.png">
+    <Content Include="Data Files\graphics\items\25.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\250.png">
+    <Content Include="Data Files\graphics\items\250.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\251.png">
+    <Content Include="Data Files\graphics\items\251.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\252.png">
+    <Content Include="Data Files\graphics\items\252.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\253.png">
+    <Content Include="Data Files\graphics\items\253.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\254.png">
+    <Content Include="Data Files\graphics\items\254.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\255.png">
+    <Content Include="Data Files\graphics\items\255.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\256.png">
+    <Content Include="Data Files\graphics\items\256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\257.png">
+    <Content Include="Data Files\graphics\items\257.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\258.png">
+    <Content Include="Data Files\graphics\items\258.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\259.png">
+    <Content Include="Data Files\graphics\items\259.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\26.png">
+    <Content Include="Data Files\graphics\items\26.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\260.png">
+    <Content Include="Data Files\graphics\items\260.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\261.png">
+    <Content Include="Data Files\graphics\items\261.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\262.png">
+    <Content Include="Data Files\graphics\items\262.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\263.png">
+    <Content Include="Data Files\graphics\items\263.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\264.png">
+    <Content Include="Data Files\graphics\items\264.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\265.png">
+    <Content Include="Data Files\graphics\items\265.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\266.png">
+    <Content Include="Data Files\graphics\items\266.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\267.png">
+    <Content Include="Data Files\graphics\items\267.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\268.png">
+    <Content Include="Data Files\graphics\items\268.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\269.png">
+    <Content Include="Data Files\graphics\items\269.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\27.png">
+    <Content Include="Data Files\graphics\items\27.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\270.png">
+    <Content Include="Data Files\graphics\items\270.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\271.png">
+    <Content Include="Data Files\graphics\items\271.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\272.png">
+    <Content Include="Data Files\graphics\items\272.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\273.png">
+    <Content Include="Data Files\graphics\items\273.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\274.png">
+    <Content Include="Data Files\graphics\items\274.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\275.png">
+    <Content Include="Data Files\graphics\items\275.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\276.png">
+    <Content Include="Data Files\graphics\items\276.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\277.png">
+    <Content Include="Data Files\graphics\items\277.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\278.png">
+    <Content Include="Data Files\graphics\items\278.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\279.png">
+    <Content Include="Data Files\graphics\items\279.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\28.png">
+    <Content Include="Data Files\graphics\items\28.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\280.png">
+    <Content Include="Data Files\graphics\items\280.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\281.png">
+    <Content Include="Data Files\graphics\items\281.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\282.png">
+    <Content Include="Data Files\graphics\items\282.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\283.png">
+    <Content Include="Data Files\graphics\items\283.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\284.png">
+    <Content Include="Data Files\graphics\items\284.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\285.png">
+    <Content Include="Data Files\graphics\items\285.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\286.png">
+    <Content Include="Data Files\graphics\items\286.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\287.png">
+    <Content Include="Data Files\graphics\items\287.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\288.png">
+    <Content Include="Data Files\graphics\items\288.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\289.png">
+    <Content Include="Data Files\graphics\items\289.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\29.png">
+    <Content Include="Data Files\graphics\items\29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\290.png">
+    <Content Include="Data Files\graphics\items\290.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\291.png">
+    <Content Include="Data Files\graphics\items\291.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\292.png">
+    <Content Include="Data Files\graphics\items\292.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\3.png">
+    <Content Include="Data Files\graphics\items\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\30.png">
+    <Content Include="Data Files\graphics\items\30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\31.png">
+    <Content Include="Data Files\graphics\items\31.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\32.png">
+    <Content Include="Data Files\graphics\items\32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\33.png">
+    <Content Include="Data Files\graphics\items\33.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\34.png">
+    <Content Include="Data Files\graphics\items\34.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\35.png">
+    <Content Include="Data Files\graphics\items\35.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\36.png">
+    <Content Include="Data Files\graphics\items\36.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\37.png">
+    <Content Include="Data Files\graphics\items\37.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\38.png">
+    <Content Include="Data Files\graphics\items\38.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\39.png">
+    <Content Include="Data Files\graphics\items\39.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\4.png">
+    <Content Include="Data Files\graphics\items\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\40.png">
+    <Content Include="Data Files\graphics\items\40.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\41.png">
+    <Content Include="Data Files\graphics\items\41.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\42.png">
+    <Content Include="Data Files\graphics\items\42.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\43.png">
+    <Content Include="Data Files\graphics\items\43.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\44.png">
+    <Content Include="Data Files\graphics\items\44.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\45.png">
+    <Content Include="Data Files\graphics\items\45.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\46.png">
+    <Content Include="Data Files\graphics\items\46.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\47.png">
+    <Content Include="Data Files\graphics\items\47.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\48.png">
+    <Content Include="Data Files\graphics\items\48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\49.png">
+    <Content Include="Data Files\graphics\items\49.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\5.png">
+    <Content Include="Data Files\graphics\items\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\50.png">
+    <Content Include="Data Files\graphics\items\50.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\51.png">
+    <Content Include="Data Files\graphics\items\51.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\52.png">
+    <Content Include="Data Files\graphics\items\52.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\53.png">
+    <Content Include="Data Files\graphics\items\53.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\54.png">
+    <Content Include="Data Files\graphics\items\54.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\55.png">
+    <Content Include="Data Files\graphics\items\55.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\56.png">
+    <Content Include="Data Files\graphics\items\56.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\57.png">
+    <Content Include="Data Files\graphics\items\57.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\58.png">
+    <Content Include="Data Files\graphics\items\58.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\59.png">
+    <Content Include="Data Files\graphics\items\59.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\6.png">
+    <Content Include="Data Files\graphics\items\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\60.png">
+    <Content Include="Data Files\graphics\items\60.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\61.png">
+    <Content Include="Data Files\graphics\items\61.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\62.png">
+    <Content Include="Data Files\graphics\items\62.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\63.png">
+    <Content Include="Data Files\graphics\items\63.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\64.png">
+    <Content Include="Data Files\graphics\items\64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\65.png">
+    <Content Include="Data Files\graphics\items\65.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\66.png">
+    <Content Include="Data Files\graphics\items\66.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\67.png">
+    <Content Include="Data Files\graphics\items\67.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\68.png">
+    <Content Include="Data Files\graphics\items\68.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\69.png">
+    <Content Include="Data Files\graphics\items\69.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\7.png">
+    <Content Include="Data Files\graphics\items\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\70.png">
+    <Content Include="Data Files\graphics\items\70.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\71.png">
+    <Content Include="Data Files\graphics\items\71.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\72.png">
+    <Content Include="Data Files\graphics\items\72.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\73.png">
+    <Content Include="Data Files\graphics\items\73.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\74.png">
+    <Content Include="Data Files\graphics\items\74.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\75.png">
+    <Content Include="Data Files\graphics\items\75.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\76.png">
+    <Content Include="Data Files\graphics\items\76.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\77.png">
+    <Content Include="Data Files\graphics\items\77.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\78.png">
+    <Content Include="Data Files\graphics\items\78.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\79.png">
+    <Content Include="Data Files\graphics\items\79.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\8.png">
+    <Content Include="Data Files\graphics\items\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\80.png">
+    <Content Include="Data Files\graphics\items\80.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\81.png">
+    <Content Include="Data Files\graphics\items\81.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\82.png">
+    <Content Include="Data Files\graphics\items\82.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\83.png">
+    <Content Include="Data Files\graphics\items\83.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\84.png">
+    <Content Include="Data Files\graphics\items\84.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\85.png">
+    <Content Include="Data Files\graphics\items\85.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\86.png">
+    <Content Include="Data Files\graphics\items\86.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\87.png">
+    <Content Include="Data Files\graphics\items\87.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\88.png">
+    <Content Include="Data Files\graphics\items\88.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\89.png">
+    <Content Include="Data Files\graphics\items\89.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\9.png">
+    <Content Include="Data Files\graphics\items\9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\90.png">
+    <Content Include="Data Files\graphics\items\90.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\91.png">
+    <Content Include="Data Files\graphics\items\91.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\92.png">
+    <Content Include="Data Files\graphics\items\92.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\93.png">
+    <Content Include="Data Files\graphics\items\93.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\94.png">
+    <Content Include="Data Files\graphics\items\94.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\95.png">
+    <Content Include="Data Files\graphics\items\95.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\96.png">
+    <Content Include="Data Files\graphics\items\96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\97.png">
+    <Content Include="Data Files\graphics\items\97.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\98.png">
+    <Content Include="Data Files\graphics\items\98.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\items\99.png">
+    <Content Include="Data Files\graphics\items\99.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\MapEditorSelect.png">
+    <Content Include="Data Files\graphics\MapEditorSelect.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\misc.png">
+    <Content Include="Data Files\graphics\misc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\paperdolls\1.png">
+    <Content Include="Data Files\graphics\paperdolls\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Projectiles\1.png">
+    <Content Include="Data Files\graphics\Projectiles\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Projectiles\2.png">
+    <Content Include="Data Files\graphics\Projectiles\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\Projectiles\3.png">
+    <Content Include="Data Files\graphics\Projectiles\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\1.png">
+    <Content Include="Data Files\graphics\resources\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\2.png">
+    <Content Include="Data Files\graphics\resources\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\3.png">
+    <Content Include="Data Files\graphics\resources\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\4.png">
+    <Content Include="Data Files\graphics\resources\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\5.png">
+    <Content Include="Data Files\graphics\resources\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\resources\6.png">
+    <Content Include="Data Files\graphics\resources\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\1.png">
+    <Content Include="Data Files\graphics\skillicons\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\10.png">
+    <Content Include="Data Files\graphics\skillicons\10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\100.png">
+    <Content Include="Data Files\graphics\skillicons\100.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\101.png">
+    <Content Include="Data Files\graphics\skillicons\101.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\102.png">
+    <Content Include="Data Files\graphics\skillicons\102.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\103.png">
+    <Content Include="Data Files\graphics\skillicons\103.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\104.png">
+    <Content Include="Data Files\graphics\skillicons\104.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\105.png">
+    <Content Include="Data Files\graphics\skillicons\105.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\106.png">
+    <Content Include="Data Files\graphics\skillicons\106.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\107.png">
+    <Content Include="Data Files\graphics\skillicons\107.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\108.png">
+    <Content Include="Data Files\graphics\skillicons\108.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\109.png">
+    <Content Include="Data Files\graphics\skillicons\109.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\11.png">
+    <Content Include="Data Files\graphics\skillicons\11.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\110.png">
+    <Content Include="Data Files\graphics\skillicons\110.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\111.png">
+    <Content Include="Data Files\graphics\skillicons\111.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\112.png">
+    <Content Include="Data Files\graphics\skillicons\112.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\12.png">
+    <Content Include="Data Files\graphics\skillicons\12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\13.png">
+    <Content Include="Data Files\graphics\skillicons\13.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\14.png">
+    <Content Include="Data Files\graphics\skillicons\14.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\15.png">
+    <Content Include="Data Files\graphics\skillicons\15.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\16.png">
+    <Content Include="Data Files\graphics\skillicons\16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\17.png">
+    <Content Include="Data Files\graphics\skillicons\17.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\18.png">
+    <Content Include="Data Files\graphics\skillicons\18.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\19.png">
+    <Content Include="Data Files\graphics\skillicons\19.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\2.png">
+    <Content Include="Data Files\graphics\skillicons\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\20.png">
+    <Content Include="Data Files\graphics\skillicons\20.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\21.png">
+    <Content Include="Data Files\graphics\skillicons\21.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\22.png">
+    <Content Include="Data Files\graphics\skillicons\22.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\23.png">
+    <Content Include="Data Files\graphics\skillicons\23.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\24.png">
+    <Content Include="Data Files\graphics\skillicons\24.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\25.png">
+    <Content Include="Data Files\graphics\skillicons\25.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\26.png">
+    <Content Include="Data Files\graphics\skillicons\26.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\27.png">
+    <Content Include="Data Files\graphics\skillicons\27.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\28.png">
+    <Content Include="Data Files\graphics\skillicons\28.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\29.png">
+    <Content Include="Data Files\graphics\skillicons\29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\3.png">
+    <Content Include="Data Files\graphics\skillicons\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\30.png">
+    <Content Include="Data Files\graphics\skillicons\30.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\31.png">
+    <Content Include="Data Files\graphics\skillicons\31.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\32.png">
+    <Content Include="Data Files\graphics\skillicons\32.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\33.png">
+    <Content Include="Data Files\graphics\skillicons\33.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\34.png">
+    <Content Include="Data Files\graphics\skillicons\34.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\35.png">
+    <Content Include="Data Files\graphics\skillicons\35.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\36.png">
+    <Content Include="Data Files\graphics\skillicons\36.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\37.png">
+    <Content Include="Data Files\graphics\skillicons\37.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\38.png">
+    <Content Include="Data Files\graphics\skillicons\38.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\39.png">
+    <Content Include="Data Files\graphics\skillicons\39.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\4.png">
+    <Content Include="Data Files\graphics\skillicons\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\40.png">
+    <Content Include="Data Files\graphics\skillicons\40.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\41.png">
+    <Content Include="Data Files\graphics\skillicons\41.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\42.png">
+    <Content Include="Data Files\graphics\skillicons\42.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\43.png">
+    <Content Include="Data Files\graphics\skillicons\43.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\44.png">
+    <Content Include="Data Files\graphics\skillicons\44.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\45.png">
+    <Content Include="Data Files\graphics\skillicons\45.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\46.png">
+    <Content Include="Data Files\graphics\skillicons\46.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\47.png">
+    <Content Include="Data Files\graphics\skillicons\47.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\48.png">
+    <Content Include="Data Files\graphics\skillicons\48.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\49.png">
+    <Content Include="Data Files\graphics\skillicons\49.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\5.png">
+    <Content Include="Data Files\graphics\skillicons\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\50.png">
+    <Content Include="Data Files\graphics\skillicons\50.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\51.png">
+    <Content Include="Data Files\graphics\skillicons\51.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\52.png">
+    <Content Include="Data Files\graphics\skillicons\52.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\53.png">
+    <Content Include="Data Files\graphics\skillicons\53.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\54.png">
+    <Content Include="Data Files\graphics\skillicons\54.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\55.png">
+    <Content Include="Data Files\graphics\skillicons\55.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\56.png">
+    <Content Include="Data Files\graphics\skillicons\56.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\57.png">
+    <Content Include="Data Files\graphics\skillicons\57.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\58.png">
+    <Content Include="Data Files\graphics\skillicons\58.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\59.png">
+    <Content Include="Data Files\graphics\skillicons\59.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\6.png">
+    <Content Include="Data Files\graphics\skillicons\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\60.png">
+    <Content Include="Data Files\graphics\skillicons\60.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\61.png">
+    <Content Include="Data Files\graphics\skillicons\61.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\62.png">
+    <Content Include="Data Files\graphics\skillicons\62.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\63.png">
+    <Content Include="Data Files\graphics\skillicons\63.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\64.png">
+    <Content Include="Data Files\graphics\skillicons\64.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\65.png">
+    <Content Include="Data Files\graphics\skillicons\65.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\66.png">
+    <Content Include="Data Files\graphics\skillicons\66.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\67.png">
+    <Content Include="Data Files\graphics\skillicons\67.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\68.png">
+    <Content Include="Data Files\graphics\skillicons\68.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\69.png">
+    <Content Include="Data Files\graphics\skillicons\69.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\7.png">
+    <Content Include="Data Files\graphics\skillicons\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\70.png">
+    <Content Include="Data Files\graphics\skillicons\70.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\71.png">
+    <Content Include="Data Files\graphics\skillicons\71.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\72.png">
+    <Content Include="Data Files\graphics\skillicons\72.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\73.png">
+    <Content Include="Data Files\graphics\skillicons\73.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\74.png">
+    <Content Include="Data Files\graphics\skillicons\74.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\75.png">
+    <Content Include="Data Files\graphics\skillicons\75.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\76.png">
+    <Content Include="Data Files\graphics\skillicons\76.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\77.png">
+    <Content Include="Data Files\graphics\skillicons\77.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\78.png">
+    <Content Include="Data Files\graphics\skillicons\78.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\79.png">
+    <Content Include="Data Files\graphics\skillicons\79.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\8.png">
+    <Content Include="Data Files\graphics\skillicons\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\80.png">
+    <Content Include="Data Files\graphics\skillicons\80.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\81.png">
+    <Content Include="Data Files\graphics\skillicons\81.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\82.png">
+    <Content Include="Data Files\graphics\skillicons\82.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\83.png">
+    <Content Include="Data Files\graphics\skillicons\83.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\84.png">
+    <Content Include="Data Files\graphics\skillicons\84.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\85.png">
+    <Content Include="Data Files\graphics\skillicons\85.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\86.png">
+    <Content Include="Data Files\graphics\skillicons\86.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\87.png">
+    <Content Include="Data Files\graphics\skillicons\87.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\88.png">
+    <Content Include="Data Files\graphics\skillicons\88.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\89.png">
+    <Content Include="Data Files\graphics\skillicons\89.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\9.png">
+    <Content Include="Data Files\graphics\skillicons\9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\90.png">
+    <Content Include="Data Files\graphics\skillicons\90.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\91.png">
+    <Content Include="Data Files\graphics\skillicons\91.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\92.png">
+    <Content Include="Data Files\graphics\skillicons\92.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\93.png">
+    <Content Include="Data Files\graphics\skillicons\93.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\94.png">
+    <Content Include="Data Files\graphics\skillicons\94.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\95.png">
+    <Content Include="Data Files\graphics\skillicons\95.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\96.png">
+    <Content Include="Data Files\graphics\skillicons\96.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\97.png">
+    <Content Include="Data Files\graphics\skillicons\97.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\98.png">
+    <Content Include="Data Files\graphics\skillicons\98.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\skillicons\99.png">
+    <Content Include="Data Files\graphics\skillicons\99.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\target.png">
+    <Content Include="Data Files\graphics\target.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\1.png">
+    <Content Include="Data Files\graphics\tilesets\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\2.png">
+    <Content Include="Data Files\graphics\tilesets\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\3.png">
+    <Content Include="Data Files\graphics\tilesets\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\4.png">
+    <Content Include="Data Files\graphics\tilesets\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\5.png">
+    <Content Include="Data Files\graphics\tilesets\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\6.png">
+    <Content Include="Data Files\graphics\tilesets\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\7.png">
+    <Content Include="Data Files\graphics\tilesets\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\tilesets\8.png">
+    <Content Include="Data Files\graphics\tilesets\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data files\graphics\weather.png">
+    <Content Include="Data Files\graphics\weather.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="licenses\Eclipse Public License v1.1.txt">
@@ -2308,9 +2308,6 @@
     <Content Include="licenses\SIL Open Font License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SFML.Net.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Clear.png" />
     <None Include="Resources\Fill.png" />
     <None Include="Resources\Preview.png" />
@@ -2318,6 +2315,7 @@
     <None Include="Resources\Exit.png" />
     <None Include="Resources\Save.png" />
   </ItemGroup>
+  <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

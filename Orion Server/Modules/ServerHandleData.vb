@@ -478,7 +478,7 @@
             Select Case Item(GetPlayerInvItemNum(Index, invnum)).Type
                 Case ITEM_TYPE_ARMOR
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -516,7 +516,7 @@
                     SendMapEquipment(Index)
                 Case ITEM_TYPE_WEAPON
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -554,7 +554,7 @@
                     SendMapEquipment(Index)
                 Case ITEM_TYPE_HELMET
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -592,7 +592,7 @@
                     SendMapEquipment(Index)
                 Case ITEM_TYPE_SHIELD
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -631,7 +631,7 @@
 
                 Case ITEM_TYPE_SHOES
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -670,7 +670,7 @@
 
                 Case ITEM_TYPE_GLOVES
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
                             Exit Sub
@@ -707,7 +707,7 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
                 Case ITEM_TYPE_POTIONADDHP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -738,7 +738,7 @@
                     End If
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONADDMP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -769,7 +769,7 @@
                     End If
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONADDSP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -799,7 +799,7 @@
                     End If
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_POTIONSUBHP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -830,7 +830,7 @@
                     End If
                     SendVital(Index, Vitals.HP)
                 Case ITEM_TYPE_POTIONSUBMP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -861,7 +861,7 @@
                     End If
                     SendVital(Index, Vitals.MP)
                 Case ITEM_TYPE_POTIONSUBSP
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -892,7 +892,7 @@
 
                     SendVital(Index, Vitals.SP)
                 Case ITEM_TYPE_KEY
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -974,7 +974,7 @@
 
                 Case ITEM_TYPE_SKILL
 
-                    For i = 1 To Stats.Stat_Count - 1
+                    For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
                             Exit Sub
@@ -1409,13 +1409,13 @@
                     .Tile(x, y).Data2 = Buffer.ReadLong
                     .Tile(x, y).Data3 = Buffer.ReadLong
                     .Tile(x, y).DirBlock = Buffer.ReadLong
-                    ReDim .Tile(x, y).Layer(0 To MapLayer.Layer_Count - 1)
-                    ReDim .Tile(x, y).Autotile(0 To MapLayer.Layer_Count - 1)
-                    For i = 0 To MapLayer.Layer_Count - 1
+                    ReDim .Tile(x, y).Layer(0 To MapLayer.Count - 1)
+                    'ReDim .Tile(x, y).Autotile(0 To MapLayer.Count - 1)
+                    For i = 0 To MapLayer.Count - 1
                         .Tile(x, y).Layer(i).Tileset = Buffer.ReadLong
-                        .Tile(x, y).Layer(i).x = Buffer.ReadLong
-                        .Tile(x, y).Layer(i).y = Buffer.ReadLong
-                        .Tile(x, y).Autotile(i) = Buffer.ReadLong
+                        .Tile(x, y).Layer(i).X = Buffer.ReadLong
+                        .Tile(x, y).Layer(i).Y = Buffer.ReadLong
+                        .Tile(x, y).Layer(i).Autotile = Buffer.ReadLong
                     Next
                     .Tile(x, y).Type = Buffer.ReadLong
                 Next
@@ -2017,7 +2017,7 @@
         ' Update the item
         Item(n).AccessReq = Buffer.ReadLong()
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Item(n).Add_Stat(i) = Buffer.ReadLong()
         Next
 
@@ -2044,7 +2044,7 @@
         Item(n).Stackable = Buffer.ReadLong()
         Item(n).Description = Trim$(Buffer.ReadString)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Item(n).Stat_Req(i) = Buffer.ReadLong()
         Next
 
@@ -2120,7 +2120,7 @@
         Npc(NpcNum).SpawnSecs = buffer.ReadLong()
         Npc(NpcNum).Sprite = buffer.ReadLong()
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Npc(NpcNum).Stat(i) = buffer.ReadLong()
         Next
 
@@ -3174,7 +3174,7 @@
 
         buffer = Nothing
 
-        If status = 0 Then  Exit Sub
+        If status = 0 Then Exit Sub
 
         tradetarget = TempPlayer(index).TradeRequest
 
@@ -3619,7 +3619,7 @@
         ReDim Classes(0 To Max_Classes)
 
         For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Stat_Count - 1)
+            ReDim Classes(i).Stat(0 To Stats.Count - 1)
         Next
 
         For i = 1 To Max_Classes

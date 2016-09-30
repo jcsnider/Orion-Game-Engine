@@ -864,7 +864,7 @@ Module ClientGraphics
         DrawCharacter(Spritenum, X, Y, srcrec)
 
         'check for paperdolling
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
             If GetPlayerEquipment(Index, i) > 0 Then
                 If Item(GetPlayerEquipment(Index, i)).Paperdoll > 0 Then
                     DrawPaperdoll(X, Y, Item(GetPlayerEquipment(Index, i)).Paperdoll, Anim, spriteleft)
@@ -1157,9 +1157,9 @@ Module ClientGraphics
         With Map.Tile(X, Y)
             For i = MapLayer.Ground To MapLayer.Mask2
                 ' skip tile if tileset isn't set
-                If .Layer(i).tileset > 0 And .Layer(i).tileset <= NumTileSets Then
-                    If TileSetTextureInfo(.Layer(i).tileset).IsLoaded = False Then
-                        LoadTexture(.Layer(i).tileset, 1)
+                If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
+                    If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
+                        LoadTexture(.Layer(i).Tileset, 1)
                     End If
                     ' we use it, lets update timer
                     With TileSetTextureInfo(i)
@@ -1173,7 +1173,7 @@ Module ClientGraphics
                             .Height = 32
                         End With
 
-                        RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderTexture(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -1197,9 +1197,9 @@ Module ClientGraphics
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
                 ' skip tile if tileset isn't set
-                If .Layer(i).tileset > 0 And .Layer(i).tileset <= NumTileSets Then
-                    If TileSetTextureInfo(.Layer(i).tileset).IsLoaded = False Then
-                        LoadTexture(.Layer(i).tileset, 1)
+                If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
+                    If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
+                        LoadTexture(.Layer(i).Tileset, 1)
                     End If
 
                     ' we use it, lets update timer
@@ -1216,7 +1216,7 @@ Module ClientGraphics
                             .Height = 32
                         End With
 
-                        RenderTexture(TileSetTexture(.Layer(i).tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderTexture(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -2642,7 +2642,7 @@ Module ClientGraphics
 
         RenderTexture(CharacterGFX(playersprite), GameWindow, CharWindowX + CharPanelGFXInfo.width / 4 - rec.Width / 2, CharWindowY + CharPanelGFXInfo.height / 2 - rec.Height / 2, rec.X, rec.Y, rec.Width, rec.Height)
 
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
             itemnum = GetPlayerEquipment(MyIndex, i)
 
             If itemnum > 0 Then

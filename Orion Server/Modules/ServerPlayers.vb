@@ -59,7 +59,7 @@
 
         x = Player(Index).Character(TempPlayer(Index).CurChar).Stat(Stat)
 
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
             If Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i) > 0 Then
                 If Item(Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i)).Add_Stat(Stat) > 0 Then
                     x = x + Item(Player(Index).Character(TempPlayer(Index).CurChar).Equipment(i)).Add_Stat(Stat)
@@ -216,7 +216,7 @@
         Dim i As Long
 
         ' We want to check incase an admin takes away an object but they had it equipped
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
             itemNum = GetPlayerEquipment(Index, i)
 
             If itemNum > 0 Then
@@ -290,7 +290,7 @@
         'projectiles
         SendProjectiles(Index)
 
-        For i = 1 To Vitals.Vital_Count - 1
+        For i = 1 To Vitals.Count - 1
             SendVital(Index, i)
         Next
 
@@ -1299,7 +1299,7 @@
         SetPlayerVital(Index, Vitals.HP, 0)
 
         ' Drop all worn items
-        For i = 1 To Equipment.Equipment_Count - 1
+        For i = 1 To Equipment.Count - 1
             If GetPlayerEquipment(Index, i) > 0 Then
                 PlayerMapDropItem(Index, GetPlayerEquipment(Index, i), 0)
             End If

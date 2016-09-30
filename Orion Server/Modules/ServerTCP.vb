@@ -486,7 +486,7 @@ Module ServerTCP
         Buffer.WriteLong(itemNum)
         Buffer.WriteLong(Item(itemNum).AccessReq)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Add_Stat(i))
         Next
 
@@ -513,7 +513,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Stackable)
         Buffer.WriteString(Trim$(Item(itemNum).Description))
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
         Next
 
@@ -544,7 +544,7 @@ Module ServerTCP
         Buffer.WriteLong(itemNum)
         Buffer.WriteLong(Item(itemNum).AccessReq)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Add_Stat(i))
         Next
 
@@ -571,7 +571,7 @@ Module ServerTCP
         Buffer.WriteLong(Item(itemNum).Stackable)
         Buffer.WriteString(Trim$(Item(itemNum).Description))
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Item(itemNum).Stat_Req(i))
         Next
 
@@ -685,7 +685,7 @@ Module ServerTCP
         Buffer.WriteLong(Npc(NpcNum).SpawnSecs)
         Buffer.WriteLong(Npc(NpcNum).Sprite)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Npc(NpcNum).Stat(i))
         Next
 
@@ -723,7 +723,7 @@ Module ServerTCP
         Buffer.WriteLong(Npc(NpcNum).SpawnSecs)
         Buffer.WriteLong(Npc(NpcNum).Sprite)
 
-        For i = 0 To Stats.Stat_Count - 1
+        For i = 0 To Stats.Count - 1
             Buffer.WriteLong(Npc(NpcNum).Stat(i))
         Next
 
@@ -1143,11 +1143,11 @@ Module ServerTCP
                     Buffer.WriteLong(Map(MapNum).Tile(x, y).Data2)
                     Buffer.WriteLong(Map(MapNum).Tile(x, y).Data3)
                     Buffer.WriteLong(Map(MapNum).Tile(x, y).DirBlock)
-                    For i = 0 To MapLayer.Layer_Count - 1
+                    For i = 0 To MapLayer.Count - 1
                         Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).Tileset)
-                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).x)
-                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).y)
-                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Autotile(i))
+                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).X)
+                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).Y)
+                        Buffer.WriteLong(Map(MapNum).Tile(x, y).Layer(i).Autotile)
                     Next
                     Buffer.WriteLong(Map(MapNum).Tile(x, y).Type)
 
@@ -1347,13 +1347,13 @@ Module ServerTCP
         Buffer.WriteLong(GetPlayerAccess(Index))
         Buffer.WriteLong(GetPlayerPK(Index))
 
-        For i = 1 To Stats.Stat_Count - 1
+        For i = 1 To Stats.Count - 1
             Buffer.WriteLong(GetPlayerStat(Index, i))
         Next
 
         Buffer.WriteLong(Player(Index).Character(TempPlayer(Index).CurChar).InHouse)
 
-        For i = 0 To ResourceSkills.Skill_Count - 1
+        For i = 0 To ResourceSkills.Count - 1
             Buffer.WriteLong(GetPlayerGatherSkillLvl(Index, i))
             Buffer.WriteLong(GetPlayerGatherSkillExp(Index, i))
             Buffer.WriteLong(GetPlayerGatherSkillMaxExp(Index, i))
@@ -1567,7 +1567,7 @@ Module ServerTCP
         Buffer.WriteLong(ServerPackets.SMapNpcVitals)
         Buffer.WriteLong(MapNpcNum)
 
-        For i = 1 To Vitals.Vital_Count - 1
+        For i = 1 To Vitals.Count - 1
             Buffer.WriteLong(MapNpc(MapNum).Npc(MapNpcNum).Vital(i))
         Next
 
