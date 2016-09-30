@@ -9,6 +9,7 @@ Module ClientGeneral
     End Function
 
     Sub startup()
+        SFML.CSFML.Activate()
 
         ReDim Player(0 To MAX_PLAYERS)
 
