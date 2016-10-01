@@ -43,7 +43,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\Build\Server\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
@@ -52,7 +52,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>..\Build\Server\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <Optimize>true</Optimize>
@@ -61,7 +61,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>1.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -97,33 +97,33 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\clsByteBuffer.vb" />
-    <Compile Include="Forms\frmServer.vb">
+    <Compile Include="Source\Classes\clsByteBuffer.vb" />
+    <Compile Include="Source\Forms\frmServer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmServer.Designer.vb">
+    <Compile Include="Source\Forms\frmServer.Designer.vb">
       <DependentUpon>frmServer.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\ServerCombat.vb" />
-    <Compile Include="Modules\ServerConstants.vb" />
-    <Compile Include="Modules\ServerCrafting.vb" />
-    <Compile Include="Modules\ServerDatabase.vb" />
-    <Compile Include="Modules\ServerEventLogic.vb" />
-    <Compile Include="Modules\ServerEvents.vb" />
-    <Compile Include="Modules\ServerGameLogic.vb" />
-    <Compile Include="Modules\ServerGeneral.vb" />
-    <Compile Include="Modules\ServerGlobals.vb" />
-    <Compile Include="Modules\ServerHandleData.vb" />
-    <Compile Include="Modules\ServerHousing.vb" />
-    <Compile Include="Modules\ServerINIAccess.vb" />
-    <Compile Include="Modules\ServerPlayers.vb" />
-    <Compile Include="Modules\ServerLoop.vb" />
-    <Compile Include="Modules\ServerProjectiles.vb" />
-    <Compile Include="Modules\ServerQuest.vb" />
-    <Compile Include="Modules\ServerResources.vb" />
-    <Compile Include="Modules\ServerTCP.vb" />
-    <Compile Include="Modules\ServerTypes.vb" />
+    <Compile Include="Source\Modules\ServerCombat.vb" />
+    <Compile Include="Source\Modules\ServerConstants.vb" />
+    <Compile Include="Source\Modules\ServerCrafting.vb" />
+    <Compile Include="Source\Modules\ServerDatabase.vb" />
+    <Compile Include="Source\Modules\ServerEventLogic.vb" />
+    <Compile Include="Source\Modules\ServerEvents.vb" />
+    <Compile Include="Source\Modules\ServerGameLogic.vb" />
+    <Compile Include="Source\Modules\ServerGeneral.vb" />
+    <Compile Include="Source\Modules\ServerGlobals.vb" />
+    <Compile Include="Source\Modules\ServerHandleData.vb" />
+    <Compile Include="Source\Modules\ServerHousing.vb" />
+    <Compile Include="Source\Modules\ServerINIAccess.vb" />
+    <Compile Include="Source\Modules\ServerPlayers.vb" />
+    <Compile Include="Source\Modules\ServerLoop.vb" />
+    <Compile Include="Source\Modules\ServerProjectiles.vb" />
+    <Compile Include="Source\Modules\ServerQuest.vb" />
+    <Compile Include="Source\Modules\ServerResources.vb" />
+    <Compile Include="Source\Modules\ServerTCP.vb" />
+    <Compile Include="Source\Modules\ServerTypes.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -141,7 +141,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\frmServer.resx">
+    <EmbeddedResource Include="Source\Forms\frmServer.resx">
       <DependentUpon>frmServer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -199,11 +199,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1.ico" />
-    <Content Include="news.txt">
+    <Content Include="Icon.ico" />
+    <Content Include="News.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

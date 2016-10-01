@@ -1,5 +1,6 @@
-Creator:
-JC Snider (jcsnider)
+Creators:
+JC Snider
+Damian666
 
 Base:
 Eclipse Origins v1.1.0 by Robin Perris*
@@ -11,16 +12,14 @@ Font:
 Arvo-Regular Font by Anton Koovit*
 
 Temporary Graphics:
-Mack's Graphics*
-
-Inspiration/Support:
-Ambard
-Joe a.k.a Irokaiser/Kibbelz
+Rpgmaker MV
 
 Testing:
-Ambard
-Timmah
+Kras
+Pamiclo
+H3lp
 
-* fixed up by Damian666
+Optimisations:
+SpiceyWolf
 
 *License copies can be found in the license directory.

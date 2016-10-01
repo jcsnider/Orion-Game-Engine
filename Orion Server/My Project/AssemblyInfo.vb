@@ -10,8 +10,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Orion Server")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("EO.Net Server")>
-<Assembly: AssemblyCopyright("Copyright ©  2014")>
+<Assembly: AssemblyProduct("Orion Server")>
+<Assembly: AssemblyCopyright("Copyright ©  2016")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
