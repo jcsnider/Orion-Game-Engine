@@ -112,7 +112,7 @@ Module ClientGameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < Tick Then
-                        AddText("You took too long to decide. Please try again.", Yellow)
+                        AddText("You took too long to decide. Please try again.", ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -475,7 +475,7 @@ Module ClientGameLogic
                 ' Send the message to the player
                 PlayerMsg(MyText, Name)
             Else
-                AddText("Usage: !playername (message)", Yellow)
+                AddText("Usage: !playername (message)", ColorType.Yellow)
             End If
 
             MyText = vbNullString
@@ -487,11 +487,11 @@ Module ClientGameLogic
 
             Select Case Command(0)
                 Case "/help"
-                    AddText("Social Commands:", Yellow)
-                    AddText("'msghere = Broadcast Message", Yellow)
-                    AddText("-msghere = Emote Message", Yellow)
-                    AddText("!namehere msghere = Player Message", Yellow)
-                    AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /sellhouse", Yellow)
+                    AddText("Social Commands:", ColorType.Yellow)
+                    AddText("'msghere = Broadcast Message", ColorType.Yellow)
+                    AddText("-msghere = Emote Message", ColorType.Yellow)
+                    AddText("!namehere msghere = Player Message", ColorType.Yellow)
+                    AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /sellhouse", ColorType.Yellow)
                 Case "/sellhouse"
                     Buffer = New ByteBuffer
                     Buffer.WriteLong(ClientPackets.CSellHouse)
@@ -501,12 +501,12 @@ Module ClientGameLogic
 
                     ' Checks to make sure we have more than one string in the array
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /info (name)", Yellow)
+                        AddText("Usage: /info (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /info (name)", Yellow)
+                        AddText("Usage: /info (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -530,12 +530,12 @@ Module ClientGameLogic
                 Case "/party"
                     ' Make sure they are actually sending something
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /party (name)", Yellow)
+                        AddText("Usage: /party (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /party (name)", Yellow)
+                        AddText("Usage: /party (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -551,17 +551,17 @@ Module ClientGameLogic
 
                 Case "/questreset"
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /questreset (quest #)", Yellow)
+                        AddText("Usage: /questreset (quest #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /questreset (quest #)", Yellow)
+                        AddText("Usage: /questreset (quest #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -571,36 +571,36 @@ Module ClientGameLogic
                     If n > 0 And n <= MAX_QUESTS Then
                         QuestReset(n)
                     Else
-                        AddText("Invalid quest number.", AlertColor)
+                        AddText("Invalid quest number.", QColorType.AlertColor)
                     End If
 
                 ' Admin Help
                 Case "/admin"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
-                    AddText("Social Commands:", Yellow)
-                    AddText("""msghere = Global Admin Message", Yellow)
-                    AddText("=msghere = Private Admin Message", Yellow)
-                    AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editskill, /debug, /questreset", Yellow)
+                    AddText("Social Commands:", ColorType.Yellow)
+                    AddText("""msghere = Global Admin Message", ColorType.Yellow)
+                    AddText("=msghere = Private Admin Message", ColorType.Yellow)
+                    AddText("Available Commands: /admin, /loc, /mapeditor, /warpmeto, /warptome, /warpto, /setsprite, /mapreport, /kick, /ban, /edititem, /respawn, /editnpc, /motd, /editshop, /editskill, /debug, /questreset", ColorType.Yellow)
                 ' Kicking a player
                 Case "/kick"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MONITOR Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /kick (name)", Yellow)
+                        AddText("Usage: /kick (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /kick (name)", Yellow)
+                        AddText("Usage: /kick (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -610,7 +610,7 @@ Module ClientGameLogic
                 Case "/loc"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -619,7 +619,7 @@ Module ClientGameLogic
                 Case "/mapeditor"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -628,17 +628,17 @@ Module ClientGameLogic
                 Case "/warpmeto"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warpmeto (name)", Yellow)
+                        AddText("Usage: /warpmeto (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /warpmeto (name)", Yellow)
+                        AddText("Usage: /warpmeto (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -647,17 +647,17 @@ Module ClientGameLogic
                 Case "/warptome"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warptome (name)", Yellow)
+                        AddText("Usage: /warptome (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Then
-                        AddText("Usage: /warptome (name)", Yellow)
+                        AddText("Usage: /warptome (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -666,17 +666,17 @@ Module ClientGameLogic
                 Case "/warpto"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /warpto (map #)", Yellow)
+                        AddText("Usage: /warpto (map #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /warpto (map #)", Yellow)
+                        AddText("Usage: /warpto (map #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -686,24 +686,24 @@ Module ClientGameLogic
                     If n > 0 And n <= MAX_MAPS Then
                         WarpTo(n)
                     Else
-                        AddText("Invalid map number.", AlertColor)
+                        AddText("Invalid map number.", QColorType.AlertColor)
                     End If
 
                 ' Setting sprite
                 Case "/setsprite"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /setsprite (sprite #)", Yellow)
+                        AddText("Usage: /setsprite (sprite #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If Not IsNumeric(Command(1)) Then
-                        AddText("Usage: /setsprite (sprite #)", Yellow)
+                        AddText("Usage: /setsprite (sprite #)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -712,7 +712,7 @@ Module ClientGameLogic
                 Case "/mapreport"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -721,7 +721,7 @@ Module ClientGameLogic
                 Case "/respawn"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -730,12 +730,12 @@ Module ClientGameLogic
                 Case "/motd"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /motd (new motd)", Yellow)
+                        AddText("Usage: /motd (new motd)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -744,7 +744,7 @@ Module ClientGameLogic
                 Case "/banlist"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -753,12 +753,12 @@ Module ClientGameLogic
                 Case "/ban"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_MAPPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 1 Then
-                        AddText("Usage: /ban (name)", Yellow)
+                        AddText("Usage: /ban (name)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -768,7 +768,7 @@ Module ClientGameLogic
                 Case "/edititem"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -777,7 +777,7 @@ Module ClientGameLogic
                 Case "/editanimation"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -786,7 +786,7 @@ Module ClientGameLogic
                 Case "/editnpc"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -794,7 +794,7 @@ Module ClientGameLogic
                 Case "/editresource"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -803,7 +803,7 @@ Module ClientGameLogic
                 Case "/editshop"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -812,7 +812,7 @@ Module ClientGameLogic
                 Case "/editskill"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_DEVELOPER Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
@@ -822,17 +822,17 @@ Module ClientGameLogic
                 Case "/setaccess"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     If UBound(Command) < 2 Then
-                        AddText("Usage: /setaccess (name) (access)", Yellow)
+                        AddText("Usage: /setaccess (name) (access)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
                     If IsNumeric(Command(1)) Or Not IsNumeric(Command(2)) Then
-                        AddText("Usage: /setaccess (name) (access)", Yellow)
+                        AddText("Usage: /setaccess (name) (access)", ColorType.Yellow)
                         GoTo Continue1
                     End If
 
@@ -841,13 +841,13 @@ Module ClientGameLogic
                 Case "/destroybanlist"
 
                     If GetPlayerAccess(MyIndex) < ADMIN_CREATOR Then
-                        AddText("You need to be a high enough staff member to do this!", AlertColor)
+                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
                         GoTo Continue1
                     End If
 
                     SendBanDestroy()
                 Case Else
-                    AddText("Not a valid command!", AlertColor)
+                    AddText("Not a valid command!", QColorType.AlertColor)
             End Select
 
             'continue label where we go instead of exiting the sub

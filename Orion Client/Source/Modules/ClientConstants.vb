@@ -39,13 +39,13 @@
     Public Const GFX_EXT As String = ".png"
 
     ' Key constants
-    Public Const VK_UP As Long = &H26
-    Public Const VK_DOWN As Long = &H28
-    Public Const VK_LEFT As Long = &H25
-    Public Const VK_RIGHT As Long = &H27
-    Public Const VK_SHIFT As Long = &H10
-    Public Const VK_RETURN As Long = &HD
-    Public Const VK_CONTROL As Long = &H11
+    'Public Const VK_UP As Long = &H26
+    'Public Const VK_DOWN As Long = &H28
+    'Public Const VK_LEFT As Long = &H25
+    'Public Const VK_RIGHT As Long = &H27
+    'Public Const VK_SHIFT As Long = &H10
+    'Public Const VK_RETURN As Long = &HD
+    'Public Const VK_CONTROL As Long = &H11
 
     ' Menu states
     Public Const MENU_STATE_NEWACCOUNT As Byte = 0
@@ -81,58 +81,9 @@
 
     ' General constants
     Public Const GAME_NAME As String = "Orion+"
-    'Public Const MAX_PLAYERS As Byte = 70
-    'Public Const MAX_ITEMS As Byte = 255
-    'Public Const MAX_NPCS As Byte = 255
-    'Public Const MAX_ANIMATIONS As Long = 255
-    'Public Const MAX_INV As Byte = 35
-    'Public Const MAX_MAP_ITEMS As Byte = 255
-    'Public Const MAX_MAP_NPCS As Byte = 30
-    'Public Const MAX_SHOPS As Byte = 50
-    'Public Const MAX_PLAYER_SKILLS As Byte = 20
-    'Public Const MAX_NPC_SKILLS As Byte = 6
-    'Public Const MAX_SKILLS As Byte = 255
-    'Public Const MAX_TRADES As Byte = 20
-    'Public Const MAX_RESOURCES As Byte = 100
-    'Public Const MAX_LEVELS As Byte = 100
-    'Public Const MAX_BANK As Byte = 90
 
     ' Website
     Public Const GAME_WEBSITE As String = "http://ascensiongamedev.com/index.php"
-
-    ' text color constants
-    Public Const Black As Byte = 0
-    Public Const Blue As Byte = 1
-    Public Const Green As Byte = 2
-    Public Const Cyan As Byte = 3
-    Public Const Red As Byte = 4
-    Public Const Magenta As Byte = 5
-    Public Const Brown As Byte = 6
-    Public Const Grey As Byte = 7
-    Public Const DarkGrey As Byte = 8
-    Public Const BrightBlue As Byte = 9
-    Public Const BrightGreen As Byte = 10
-    Public Const BrightCyan As Byte = 11
-    Public Const BrightRed As Byte = 12
-    Public Const Pink As Byte = 13
-    Public Const Yellow As Byte = 14
-    Public Const White As Byte = 15
-    Public Const SayColor As Byte = White
-    Public Const GlobalColor As Byte = BrightBlue
-    Public Const BroadcastColor As Byte = White
-    Public Const TellColor As Byte = BrightGreen
-    Public Const EmoteColor As Byte = BrightCyan
-    Public Const AdminColor As Byte = BrightCyan
-    Public Const HelpColor As Byte = BrightBlue
-    Public Const WhoColor As Byte = BrightBlue
-    Public Const JoinLeftColor As Byte = DarkGrey
-    Public Const NpcColor As Byte = Brown
-    Public Const AlertColor As Byte = Red
-    Public Const NewMapColor As Byte = BrightBlue
-
-    ' Boolean constants
-    Public Const NO As Byte = 0
-    Public Const YES As Byte = 1
 
     ' Account constants
     Public Const NAME_LENGTH As Byte = 20
@@ -142,7 +93,6 @@
     Public Const SEX_FEMALE As Byte = 1
 
     ' Map constants
-    'Public Const MAX_MAPS As Long = 100
     Public MAX_MAPX As Byte = 35
     Public MAX_MAPY As Byte = 26
 

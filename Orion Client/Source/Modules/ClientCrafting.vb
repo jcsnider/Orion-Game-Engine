@@ -332,7 +332,7 @@ Public Module ClientCrafting
         For i = 1 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
                 If HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
-                    AddText("Not Enough Materials!", Red)
+                    AddText("Not Enough Materials!", ColorType.Red)
                     Exit Sub
                 End If
             End If

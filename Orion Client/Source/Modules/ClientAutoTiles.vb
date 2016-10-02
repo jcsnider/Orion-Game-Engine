@@ -311,7 +311,7 @@ Public Module ClientAutoTiles
             ' check if it's a key - hide mask if key is closed
             If layerNum = MapLayer.Mask Then
                 If .Type = TILE_TYPE_KEY Then
-                    If TempTile(X, Y).DoorOpen = NO Then
+                    If TempTile(X, Y).DoorOpen = 0 Then
                         Autotile(X, Y).Layer(layerNum).renderState = RENDER_STATE_NONE
                         Exit Sub
                     Else

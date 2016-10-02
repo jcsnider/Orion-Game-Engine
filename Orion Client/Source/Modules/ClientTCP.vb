@@ -1105,13 +1105,13 @@ Module ClientTCP
 
         ' dont let them forget a skill which is in CD
         If SkillCD(skillslot) > 0 Then
-            AddText("Cannot forget a skill which is cooling down!", AlertColor)
+            AddText("Cannot forget a skill which is cooling down!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' dont let them forget a skill which is buffered
         If SkillBuffer = skillslot Then
-            AddText("Cannot forget a skill which you are casting!", AlertColor)
+            AddText("Cannot forget a skill which you are casting!", QColorType.AlertColor)
             Exit Sub
         End If
 
@@ -1122,7 +1122,7 @@ Module ClientTCP
             SendData(Buffer.ToArray())
             Buffer = Nothing
         Else
-            AddText("No skill found.", AlertColor)
+            AddText("No skill found.", QColorType.AlertColor)
         End If
     End Sub
 

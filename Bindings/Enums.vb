@@ -8,8 +8,8 @@
         Red
         Magenta
         Brown
-        Gray
-        DarkGray
+        Grey
+        DarkGrey
         BrightBlue
         BrightGreen
         BrightCyan
@@ -29,7 +29,7 @@
         AdminColor = ColorType.BrightCyan
         HelpColor = ColorType.BrightBlue
         WhoColor = ColorType.BrightBlue
-        JoinLeftColor = ColorType.DarkGray
+        JoinLeftColor = ColorType.DarkGrey
         NpcColor = ColorType.Brown
         AlertColor = ColorType.Red
         NewMapColor = ColorType.BrightBlue

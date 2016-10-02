@@ -46,7 +46,7 @@ Module ClientText
         Dim Name As String
 
         ' Check access level
-        If GetPlayerPK(Index) = NO Then
+        If GetPlayerPK(Index) = 0 Then
 
             Select Case GetPlayerAccess(Index)
                 Case 0
@@ -321,37 +321,37 @@ Module ClientText
 
     Public Function GetSFMLColor(ByVal Color As Byte) As Color
         Select Case Color
-            Case Black
+            Case ColorType.Black
                 Return SFML.Graphics.Color.Black
-            Case Blue
+            Case ColorType.Blue
                 Return New Color(73, 151, 208)
-            Case Green
+            Case ColorType.Green
                 Return New Color(102, 255, 0, 180)
-            Case Cyan
+            Case ColorType.Cyan
                 Return New Color(0, 139, 139)
-            Case Red
+            Case ColorType.Red
                 Return New Color(255, 0, 0, 180)
-            Case Magenta
+            Case ColorType.Magenta
                 Return SFML.Graphics.Color.Magenta
-            Case Brown
+            Case ColorType.Brown
                 Return New Color(139, 69, 19)
-            Case Grey
+            Case ColorType.Grey
                 Return New Color(211, 211, 211)
-            Case DarkGrey
+            Case ColorType.DarkGrey
                 Return New Color(169, 169, 169)
-            Case BrightBlue
+            Case ColorType.BrightBlue
                 Return New Color(0, 191, 255)
-            Case BrightGreen
+            Case ColorType.BrightGreen
                 Return New Color(0, 255, 0)
-            Case BrightCyan
+            Case ColorType.BrightCyan
                 Return New Color(0, 255, 255)
-            Case BrightRed
+            Case ColorType.BrightRed
                 Return New Color(255, 0, 0)
-            Case Pink
+            Case ColorType.Pink
                 Return New Color(255, 192, 203)
-            Case Yellow
+            Case ColorType.Yellow
                 Return SFML.Graphics.Color.Yellow
-            Case White
+            Case ColorType.White
                 Return SFML.Graphics.Color.White
             Case Else
                 Return SFML.Graphics.Color.White

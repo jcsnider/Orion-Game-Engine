@@ -18,52 +18,7 @@
     ' * The values below must match with the client's values *
     ' ********************************************************
     ' General constants
-    'Public Const MAX_PLAYERS As Byte = 70
-    'Public Const MAX_ITEMS As Byte = 255
-    'Public Const MAX_NPCS As Byte = 255
-    'Public Const MAX_ANIMATIONS As Long = 255
-    'Public Const MAX_INV As Byte = 35
-    'Public Const MAX_MAP_ITEMS As Byte = 255
-    'Public Const MAX_MAP_NPCS As Byte = 30
-    'Public Const MAX_SHOPS As Byte = 50
-    'Public Const MAX_PLAYER_SKILLS As Byte = 20
-    'Public Const MAX_NPC_SKILLS As Byte = 6
-    'Public Const MAX_SKILLS As Byte = 255
-    'Public Const MAX_TRADES As Byte = 20
-    'Public Const MAX_RESOURCES As Byte = 100
-    'Public Const MAX_LEVELS As Byte = 100
-    'Public Const MAX_BANK As Byte = 90
     Public Const MAX_HOTBAR As Byte = 7
-
-    ' text color constants
-    Public Const Black As Byte = 0
-    Public Const Blue As Byte = 1
-    Public Const Green As Byte = 2
-    Public Const Cyan As Byte = 3
-    Public Const Red As Byte = 4
-    Public Const Magenta As Byte = 5
-    Public Const Brown As Byte = 6
-    Public Const Grey As Byte = 7
-    Public Const DarkGrey As Byte = 8
-    Public Const BrightBlue As Byte = 9
-    Public Const BrightGreen As Byte = 10
-    Public Const BrightCyan As Byte = 11
-    Public Const BrightRed As Byte = 12
-    Public Const Pink As Byte = 13
-    Public Const Yellow As Byte = 14
-    Public Const White As Byte = 15
-    Public Const SayColor As Byte = White
-    Public Const GlobalColor As Byte = BrightBlue
-    Public Const BroadcastColor As Byte = White
-    Public Const TellColor As Byte = BrightGreen
-    Public Const EmoteColor As Byte = BrightCyan
-    Public Const AdminColor As Byte = BrightCyan
-    Public Const HelpColor As Byte = BrightBlue
-    Public Const WhoColor As Byte = BrightBlue
-    Public Const JoinLeftColor As Byte = DarkGrey
-    Public Const NpcColor As Byte = Brown
-    Public Const AlertColor As Byte = Red
-    Public Const NewMapColor As Byte = BrightBlue
 
     ' Boolean constants
     Public Const NO As Byte = 0

@@ -342,7 +342,7 @@
         If Map.Tile(X, Y).Type = TILE_TYPE_KEY Then
 
             ' This actually checks if its open or not
-            If TempTile(X, Y).DoorOpen = NO Then
+            If TempTile(X, Y).DoorOpen = 0 Then
                 CheckDirection = True
                 Exit Function
             End If
@@ -504,13 +504,13 @@
         End If
 
         If SkillCD(skillslot) > 0 Then
-            AddText("Skill has not cooled down yet!", AlertColor)
+            AddText("Skill has not cooled down yet!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' Check if player has enough MP
         If GetPlayerVital(MyIndex, Vitals.MP) < Skill(PlayerSkills(skillslot)).MPCost Then
-            AddText("Not enough MP to cast " & Trim$(Skill(PlayerSkills(skillslot)).Name) & ".", AlertColor)
+            AddText("Not enough MP to cast " & Trim$(Skill(PlayerSkills(skillslot)).Name) & ".", QColorType.AlertColor)
             Exit Sub
         End If
 
@@ -525,11 +525,11 @@
                     SkillBuffer = skillslot
                     SkillBufferTimer = GetTickCount()
                 Else
-                    AddText("Cannot cast while walking!", AlertColor)
+                    AddText("Cannot cast while walking!", QColorType.AlertColor)
                 End If
             End If
         Else
-            AddText("No skill here.", AlertColor)
+            AddText("No skill here.", QColorType.AlertColor)
         End If
 
     End Sub

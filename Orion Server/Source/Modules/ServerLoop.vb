@@ -656,7 +656,7 @@
 
                                         Else
                                             PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, Equipment.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!")
-                                            SendActionMsg(GetPlayerMap(Target), "BLOCK!", Cyan, 1, (GetPlayerX(Target) * 32), (GetPlayerY(Target) * 32))
+                                            SendActionMsg(GetPlayerMap(Target), "BLOCK!", ColorType.Cyan, 1, (GetPlayerX(Target) * 32), (GetPlayerY(Target) * 32))
                                         End If
                                     End If
 
@@ -1273,11 +1273,11 @@
         If Damage > 0 Then
             If increment Then
                 sSymbol = "+"
-                If Vital = Vitals.HP Then Colour = BrightGreen
-                If Vital = Vitals.MP Then Colour = BrightBlue
+                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
             Else
                 sSymbol = "-"
-                Colour = Blue
+                Colour = ColorType.Blue
             End If
 
             SendAnimation(GetPlayerMap(Index), Skill(Skillnum).SkillAnim, 0, 0, TARGET_TYPE_PLAYER, Index)
@@ -1294,11 +1294,11 @@
         If Damage > 0 Then
             If increment Then
                 sSymbol = "+"
-                If Vital = Vitals.HP Then Colour = BrightGreen
-                If Vital = Vitals.MP Then Colour = BrightBlue
+                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
             Else
                 sSymbol = "-"
-                Colour = Blue
+                Colour = ColorType.Blue
             End If
 
             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TARGET_TYPE_NPC, Index)

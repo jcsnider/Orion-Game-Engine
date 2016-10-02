@@ -571,7 +571,7 @@
                     TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                     TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                     SendMapKey(Index, x, y, 1)
-                    MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                    MapMsg(GetPlayerMap(Index), "A door has been unlocked.", ColorType.White)
                 End If
             End If
 
@@ -599,9 +599,9 @@
                 amount = .Data2
                 If Not GetPlayerVital(Index, VitalType) = GetPlayerMaxVital(Index, VitalType) Then
                     If VitalType = Vitals.HP Then
-                        Colour = BrightGreen
+                        Colour = ColorType.BrightGreen
                     Else
-                        Colour = BrightBlue
+                        Colour = ColorType.BrightBlue
                     End If
                     SendActionMsg(GetPlayerMap(Index), "+" & amount, Colour, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                     SetPlayerVital(Index, VitalType, GetPlayerVital(Index, VitalType) + amount)
@@ -614,7 +614,7 @@
             ' Check if it's a trap tile
             If .Type = TILE_TYPE_TRAP Then
                 amount = .Data1
-                SendActionMsg(GetPlayerMap(Index), "-" & amount, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
+                SendActionMsg(GetPlayerMap(Index), "-" & amount, ColorType.BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                 If GetPlayerVital(Index, Vitals.HP) - amount <= 0 Then
                     KillPlayer(Index)
                     PlayerMsg(Index, "You're killed by a trap.")
@@ -926,7 +926,7 @@
                                 SendInventoryUpdate(Index, n)
                                 SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
 
-                                SendActionMsg(GetPlayerMap(Index), Msg, White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                                SendActionMsg(GetPlayerMap(Index), Msg, ColorType.White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                                 CheckTasks(Index, QUEST_TYPE_GOGATHER, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
                                 Exit For
                             Else
@@ -1116,12 +1116,12 @@
                         ' Check if its more then they have and if so drop it all
                         If amount >= GetPlayerInvItemValue(Index, InvNum) Then
                             MapItem(GetPlayerMap(Index), i).Value = GetPlayerInvItemValue(Index, InvNum)
-                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & GetPlayerInvItemValue(Index, InvNum) & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", Yellow)
+                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & GetPlayerInvItemValue(Index, InvNum) & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", ColorType.Yellow)
                             Call SetPlayerInvItemNum(Index, InvNum, 0)
                             Call SetPlayerInvItemValue(Index, InvNum, 0)
                         Else
                             MapItem(GetPlayerMap(Index), i).Value = amount
-                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & amount & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", Yellow)
+                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & amount & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", ColorType.Yellow)
                             Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - amount)
                         End If
 
@@ -1129,7 +1129,7 @@
                         ' Its not a currency object so this is easy
                         MapItem(GetPlayerMap(Index), i).Value = 0
                         ' send message
-                        Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)) & ".", Yellow)
+                        Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)) & ".", ColorType.Yellow)
                         Call SetPlayerInvItemNum(Index, InvNum, 0)
                         Call SetPlayerInvItemValue(Index, InvNum, 0)
                     End If

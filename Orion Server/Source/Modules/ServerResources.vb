@@ -70,7 +70,7 @@
                                     ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceState = 1 ' Cut
                                     ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).ResourceTimer = GetTickCount()
                                     SendResourceCacheToMap(GetPlayerMap(Index), Resource_num)
-                                    SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).SuccessMessage), BrightGreen, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                                    SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).SuccessMessage), ColorType.BrightGreen, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                                     GiveInvItem(Index, Resource(Resource_index).ItemReward, 1)
                                     SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
                                     SetPlayerGatherSkillExp(Index, ResourceType, GetPlayerGatherSkillExp(Index, ResourceType) + Resource(Resource_index).ExpReward)
@@ -91,16 +91,16 @@
                                 Else
                                     ' just do the damage
                                     ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health = ResourceCache(GetPlayerMap(Index)).ResourceData(Resource_num).cur_health - Damage
-                                    SendActionMsg(GetPlayerMap(Index), "-" & Damage, BrightRed, 1, (rX * 32), (rY * 32))
+                                    SendActionMsg(GetPlayerMap(Index), "-" & Damage, ColorType.BrightRed, 1, (rX * 32), (rY * 32))
                                     SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
                                 End If
                                 CheckTasks(Index, QUEST_TYPE_GOTRAIN, Resource_index)
                             Else
                                 ' too weak
-                                SendActionMsg(GetPlayerMap(Index), "Miss!", BrightRed, 1, (rX * 32), (rY * 32))
+                                SendActionMsg(GetPlayerMap(Index), "Miss!", ColorType.BrightRed, 1, (rX * 32), (rY * 32))
                             End If
                         Else
-                            SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).EmptyMessage), BrightRed, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                            SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).EmptyMessage), ColorType.BrightRed, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                         End If
 
                     Else

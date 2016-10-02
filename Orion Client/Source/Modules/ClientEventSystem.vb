@@ -3329,7 +3329,7 @@ nextevent:
             Case 13
                 GetColorString = "Pink"
             Case 14
-                GetColorString = "Yellow"
+                GetColorString = "ColorType.Yellow"
             Case 15
                 GetColorString = "White"
             Case Else

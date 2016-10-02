@@ -267,7 +267,7 @@ Public Module ClientGuiFunctions
                         SendData(Buffer.ToArray())
                         Buffer = Nothing
                         pnlSkillsVisible = True
-                        AddText("Click on the skill you want to place here", TellColor)
+                        AddText("Click on the skill you want to place here", QColorType.TellColor)
                         SelSkillSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     End If
@@ -683,9 +683,9 @@ Public Module ClientGuiFunctions
                                 multiplier = Shop(InShop).BuyRate / 100
                                 Value = Item(GetPlayerInvItemNum(MyIndex, InvNum)).Price * multiplier
                                 If Value > 0 Then
-                                    AddText("You can sell this item for " & Value & " gold.", TellColor)
+                                    AddText("You can sell this item for " & Value & " gold.", QColorType.TellColor)
                                 Else
-                                    AddText("The shop does not want this item.", AlertColor)
+                                    AddText("The shop does not want this item.", QColorType.AlertColor)
                                 End If
                             Case 2 ' 2 = sell
                                 SellItem(InvNum)
@@ -992,7 +992,7 @@ Public Module ClientGuiFunctions
                     Select Case ShopAction
                         Case 0 ' no action, give cost
                             With Shop(InShop).TradeItem(shopItem)
-                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", Yellow)
+                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", ColorType.Yellow)
                             End With
                         Case 1 ' buy item
                             ' buy item code
@@ -1004,7 +1004,7 @@ Public Module ClientGuiFunctions
                         If Y > ShopWindowY + ShopButtonBuyY And Y < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.height Then
                             If ShopAction = 1 Then Exit Function
                             ShopAction = 1 ' buying an item
-                            AddText("Click on the item in the shop you wish to buy.", Yellow)
+                            AddText("Click on the item in the shop you wish to buy.", ColorType.Yellow)
                         End If
                     End If
                     ' check for sell button
@@ -1012,7 +1012,7 @@ Public Module ClientGuiFunctions
                         If Y > ShopWindowY + ShopButtonSellY And Y < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.height Then
                             If ShopAction = 2 Then Exit Function
                             ShopAction = 2 ' selling an item
-                            AddText("Double-click on the item in your inventory you wish to sell.", Yellow)
+                            AddText("Double-click on the item in your inventory you wish to sell.", ColorType.Yellow)
                         End If
                     End If
                     ' check for close button

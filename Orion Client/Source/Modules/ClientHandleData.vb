@@ -1277,7 +1277,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg, GlobalColor)
+        AddText(Msg, QColorType.GlobalColor)
     End Sub
 
     Private Sub Packet_MapMessage(ByVal Data() As Byte)
@@ -1292,7 +1292,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg, BroadcastColor)
+        AddText(Msg, QColorType.BroadcastColor)
 
     End Sub
 
@@ -1340,7 +1340,7 @@
 
         Buffer = Nothing
 
-        AddText(Msg, TellColor)
+        AddText(Msg, QColorType.TellColor)
     End Sub
 
     Sub Packet_UpdateItem(ByVal data() As Byte)
@@ -1959,7 +1959,7 @@
         message = Trim(Buffer.ReadString)
         Header = Trim(Buffer.ReadString)
 
-        AddText(Header & Name & ": " & message, SayColor)
+        AddText(Header & Name & ": " & message, QColorType.SayColor)
 
         Buffer = Nothing
     End Sub
@@ -2134,9 +2134,9 @@
             Case 0 ' clear
                 'frmMainGame.lblTradeStatus.Text = vbNullString
             Case 1 ' they've accepted
-                AddText("Other player has accepted.", White)
+                AddText("Other player has accepted.", ColorType.White)
             Case 2 ' you've accepted
-                AddText("Waiting for other player to accept.", White)
+                AddText("Waiting for other player to accept.", ColorType.White)
         End Select
 
         buffer = Nothing

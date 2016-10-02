@@ -2078,7 +2078,7 @@ Public Module ServerEvents
         ' give the exp
 
         Call SetPlayerExp(Index, GetPlayerExp(Index) + Exp)
-        SendActionMsg(GetPlayerMap(Index), "+" & Exp & " EXP", White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+        SendActionMsg(GetPlayerMap(Index), "+" & Exp & " EXP", ColorType.White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
         ' check if we've leveled
         CheckPlayerLevelUp(Index)
 

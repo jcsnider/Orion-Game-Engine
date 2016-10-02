@@ -198,7 +198,7 @@
 
             If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
 
-                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
                 ' Player is dead
                 GlobalMsg(GetPlayerName(Victim) & " has been killed by " & GetPlayerName(Attacker))
@@ -249,7 +249,7 @@
                 ' Player not dead, just do the damage
                 SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
                 SendVital(Victim, Vitals.HP)
-                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                SendActionMsg(GetPlayerMap(Victim), "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
                 'if a stunning skill, stun the player
                 If skillnum > 0 Then
@@ -274,7 +274,7 @@
 
             If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
 
-                SendActionMsg(mapnum, "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                SendActionMsg(mapnum, "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
                 ' Player is dead
                 GlobalMsg(GetPlayerName(Victim) & " has been killed by " & Npc(MapNpc(mapnum).Npc(Attacker).Num).Name)
@@ -292,7 +292,7 @@
                 ' Player not dead, just do the damage
                 SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
                 SendVital(Victim, Vitals.HP)
-                SendActionMsg(mapnum, "-" & Damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                SendActionMsg(mapnum, "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
                 'if a stunning skill, stun the player
                 If skillnum > 0 Then
@@ -460,7 +460,7 @@
 
         If Damage >= MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) Then
 
-            SendActionMsg(GetPlayerMap(Attacker), "-" & Damage, BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+            SendActionMsg(GetPlayerMap(Attacker), "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
             SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
 
             ' Calculate exp to give attacker
@@ -475,7 +475,7 @@
             If TempPlayer(Attacker).InParty = NO Then
                 SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
                 SendEXP(Attacker)
-                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " EXP", White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
+                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
             Else
                 exp = exp / 2
 
@@ -485,13 +485,13 @@
 
                 SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
                 SendEXP(Attacker)
-                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " Shared EXP", White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
+                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " Shared EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
                 n = TempPlayer(Attacker).PartyPlayer
 
                 If n > 0 Then
                     SetPlayerExp(n, GetPlayerExp(n) + exp)
                     SendEXP(n)
-                    SendActionMsg(GetPlayerMap(n), "+" & exp & " EXP", White, 1, (GetPlayerX(n) * 32), (GetPlayerY(n) * 32))
+                    SendActionMsg(GetPlayerMap(n), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(n) * 32), (GetPlayerY(n) * 32))
                 End If
             End If
 
@@ -539,7 +539,7 @@
             MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) - Damage
 
             ' Check for a weapon and say damage
-            SendActionMsg(MapNum, "-" & Damage, BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
             SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
 
             ' send animation
@@ -750,13 +750,13 @@
         damage = Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Stat(Stats.strength) - GetPlayerProtection(Victim)
 
         If damage <= 0 Then
-            SendActionMsg(GetPlayerMap(Victim), "BLOCK!", Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "BLOCK!", ColorType.Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
             Exit Sub
         End If
 
         If damage >= GetPlayerVital(Victim, Vitals.HP) Then
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
 
             ' kill player
             KillPlayer(Victim)
@@ -779,7 +779,7 @@
             SendVital(Victim, Vitals.HP)
             SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TARGET_TYPE_PLAYER, Victim)
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & damage, BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
         End If
 
     End Sub
@@ -809,7 +809,7 @@
         Buffer = Nothing
 
         If Damage >= MapNpc(MapNum).Npc(Victim).Vital(Vitals.HP) Then
-            SendActionMsg(MapNum, "-" & Damage, BrightRed, 1, (MapNpc(MapNum).Npc(Victim).x * 32), (MapNpc(MapNum).Npc(Victim).y * 32))
+            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(Victim).x * 32), (MapNpc(MapNum).Npc(Victim).y * 32))
             SendBlood(MapNum, MapNpc(MapNum).Npc(Victim).x, MapNpc(MapNum).Npc(Victim).y)
 
             ' npc is dead.
@@ -840,7 +840,7 @@
             ' npc not dead, just do the damage
             MapNpc(MapNum).Npc(Victim).Vital(Vitals.HP) = MapNpc(MapNum).Npc(Victim).Vital(Vitals.HP) - Damage
             ' Say damage
-            SendActionMsg(MapNum, "-" & Damage, BrightRed, 1, (MapNpc(MapNum).Npc(Victim).x * 32), (MapNpc(MapNum).Npc(Victim).y * 32))
+            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(Victim).x * 32), (MapNpc(MapNum).Npc(Victim).y * 32))
             SendBlood(MapNum, MapNpc(MapNum).Npc(Victim).x, MapNpc(MapNum).Npc(Victim).y)
         End If
 

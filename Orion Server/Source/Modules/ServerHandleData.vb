@@ -327,7 +327,7 @@
 
         Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
 
-        Call SayMsg_Map(GetPlayerMap(index), index, msg, QBColor(White))
+        Call SayMsg_Map(GetPlayerMap(index), index, msg, QBColor(ColorType.White))
 
         Buffer = Nothing
     End Sub
@@ -342,7 +342,7 @@
         msg = Buffer.ReadString
 
         Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
-        Call MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), EmoteColor)
+        Call MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), QColorType.EmoteColor)
 
         Buffer = Nothing
     End Sub
@@ -358,7 +358,7 @@
         msg = Buffer.ReadString
 
         s = "[Global]" & GetPlayerName(index) & ": " & msg
-        Call SayMsg_Global(index, msg, QBColor(White))
+        Call SayMsg_Global(index, msg, QBColor(ColorType.White))
         Call Addlog(s, PLAYER_LOG)
         Call TextAdd(s)
         Buffer = Nothing
@@ -728,7 +728,7 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, ColorType.BrightGreen, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
                     If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
@@ -759,7 +759,7 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "+" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, ColorType.BrightBlue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
                     If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
@@ -820,7 +820,7 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, ColorType.BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
                     If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
@@ -851,7 +851,7 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                    SendActionMsg(GetPlayerMap(Index), "-" & Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1, ColorType.Blue, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
                     SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TARGET_TYPE_PLAYER, Index)
                     SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
                     If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
@@ -960,7 +960,7 @@
                             TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                             TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                             SendMapKey(Index, x, y, 1)
-                            MapMsg(GetPlayerMap(Index), "A door has been unlocked.", White)
+                            MapMsg(GetPlayerMap(Index), "A door has been unlocked.", ColorType.White)
 
                             SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, x, y)
 
@@ -1081,7 +1081,7 @@
                             Damage = n + Int(Rnd() * (n \ 2)) + 1 - GetPlayerProtection(TempIndex)
                             PlayerMsg(Index, "You feel a surge of energy upon swinging!")
                             PlayerMsg(TempIndex, GetPlayerName(Index) & " swings with enormous might!")
-                            SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                            SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                             SendCritical(Index)
                         End If
 
@@ -1089,7 +1089,7 @@
                     Else
                         PlayerMsg(Index, GetPlayerName(TempIndex) & "'s " & Trim$(Item(GetPlayerEquipment(TempIndex, Equipment.Shield)).Name) & " has blocked your hit!")
                         PlayerMsg(TempIndex, "Your " & Trim$(Item(GetPlayerEquipment(TempIndex, Equipment.Shield)).Name) & " has blocked " & GetPlayerName(Index) & "'s hit!")
-                        SendActionMsg(GetPlayerMap(TempIndex), "BLOCK!", Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
+                        SendActionMsg(GetPlayerMap(TempIndex), "BLOCK!", ColorType.Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
                     End If
 
                     Exit Sub
@@ -1111,7 +1111,7 @@
                     n = GetPlayerDamage(Index)
                     Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.endurance) \ 2)
                     PlayerMsg(Index, "You feel a surge of energy upon swinging!")
-                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                     SendCritical(Index)
                     KnockBackNpc(Index, i)
                 End If

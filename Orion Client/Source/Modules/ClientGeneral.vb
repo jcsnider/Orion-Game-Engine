@@ -2,7 +2,7 @@
 
 Module ClientGeneral
     Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Long) As Long
-    Public started As Boolean
+    Public Started As Boolean
 
     Public Function GetTickCount()
         Return Environment.TickCount
@@ -208,7 +208,7 @@ Module ClientGeneral
         HUDVisible = True
 
         SetStatus("Starting Game...")
-        started = True
+        Started = True
         frmmenuvisible = True
         frmloadvisible = False
 
