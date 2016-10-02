@@ -29,7 +29,6 @@ Public Class frmMenu
         pnlCharSelect.Left = pnlMainMenu.Left
 
         LoadGuiGraphics()
-        CheckDirectories()
         Connect()
     End Sub
 

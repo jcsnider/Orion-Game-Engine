@@ -892,21 +892,6 @@
         ' Get revision
         Y = Buffer.ReadLong
 
-        If FileExist(MAP_PATH & "map" & X & MAP_EXT) Then
-            LoadMap(X)
-            ' Check to see if the revisions match
-            NeedMap = 1
-
-            If Map.Revision = Y Then
-                NeedMap = 0
-                MapData = True
-            End If
-
-        Else
-            NeedMap = 1
-            GettingMap = True
-        End If
-
         NeedMap = 1
         GettingMap = True
 
@@ -1164,7 +1149,7 @@
         'Debug.Print("Client Handled mapdata")
 
         ' Save the map
-        SaveMap(MapNum)
+        'SaveMap(MapNum)
 
         initAutotiles()
         'Debug.Print("Client Handled Autotile Init")

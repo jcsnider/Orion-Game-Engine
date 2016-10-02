@@ -368,110 +368,110 @@ Module ClientDataBase
 
     End Sub
 
-    Public Sub SaveMap(ByVal MapNum As Long)
-        Dim FileName As String
-        Dim f As Long
-        Dim X As Long
-        Dim Y As Long
-        FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
+    'Public Sub SaveMap(ByVal MapNum As Long)
+    '    Dim FileName As String
+    '    Dim f As Long
+    '    Dim X As Long
+    '    Dim Y As Long
+    '    FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
 
-        f = FreeFile()
-        FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
-        FilePutObject(f, Map.Name)
-        FilePutObject(f, Map.Music)
-        FilePutObject(f, Map.Revision)
-        FilePutObject(f, Map.Moral)
-        FilePutObject(f, Map.tileset)
-        FilePutObject(f, Map.Up)
-        FilePutObject(f, Map.Down)
-        FilePutObject(f, Map.Left)
-        FilePutObject(f, Map.Right)
-        FilePutObject(f, Map.BootMap)
-        FilePutObject(f, Map.BootX)
-        FilePutObject(f, Map.BootY)
-        FilePutObject(f, Map.MaxX)
-        FilePutObject(f, Map.MaxY)
+    '    f = FreeFile()
+    '    FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Write, OpenShare.Default)
+    '    FilePutObject(f, Map.Name)
+    '    FilePutObject(f, Map.Music)
+    '    FilePutObject(f, Map.Revision)
+    '    FilePutObject(f, Map.Moral)
+    '    FilePutObject(f, Map.tileset)
+    '    FilePutObject(f, Map.Up)
+    '    FilePutObject(f, Map.Down)
+    '    FilePutObject(f, Map.Left)
+    '    FilePutObject(f, Map.Right)
+    '    FilePutObject(f, Map.BootMap)
+    '    FilePutObject(f, Map.BootX)
+    '    FilePutObject(f, Map.BootY)
+    '    FilePutObject(f, Map.MaxX)
+    '    FilePutObject(f, Map.MaxY)
 
-        ' have to set the tile()
+    '    ' have to set the tile()
 
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                FilePutObject(f, Map.Tile(X, Y).Data1)
-                FilePutObject(f, Map.Tile(X, Y).Data2)
-                FilePutObject(f, Map.Tile(X, Y).Data3)
-                FilePutObject(f, Map.Tile(X, Y).DirBlock)
-                For i = 0 To UBound(Map.Tile(X, Y).Layer)
-                    FilePutObject(f, Map.Tile(X, Y).Layer(i).tileset)
-                    FilePutObject(f, Map.Tile(X, Y).Layer(i).X)
-                    FilePutObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FilePutObject(f, Map.Tile(X, Y).Layer(i).Autotile)
-                Next
-                FilePutObject(f, Map.Tile(X, Y).Type)
-            Next
-        Next
+    '    For X = 0 To Map.MaxX
+    '        For Y = 0 To Map.MaxY
+    '            FilePutObject(f, Map.Tile(X, Y).Data1)
+    '            FilePutObject(f, Map.Tile(X, Y).Data2)
+    '            FilePutObject(f, Map.Tile(X, Y).Data3)
+    '            FilePutObject(f, Map.Tile(X, Y).DirBlock)
+    '            For i = 0 To UBound(Map.Tile(X, Y).Layer)
+    '                FilePutObject(f, Map.Tile(X, Y).Layer(i).tileset)
+    '                FilePutObject(f, Map.Tile(X, Y).Layer(i).X)
+    '                FilePutObject(f, Map.Tile(X, Y).Layer(i).Y)
+    '                FilePutObject(f, Map.Tile(X, Y).Layer(i).Autotile)
+    '            Next
+    '            FilePutObject(f, Map.Tile(X, Y).Type)
+    '        Next
+    '    Next
 
-        For X = 1 To MAX_MAP_NPCS
-            FilePutObject(f, Map.Npc(X))
-        Next
+    '    For X = 1 To MAX_MAP_NPCS
+    '        FilePutObject(f, Map.Npc(X))
+    '    Next
 
-        FileClose(f)
+    '    FileClose(f)
 
-    End Sub
+    'End Sub
 
-    Public Sub LoadMap(ByVal MapNum As Long)
-        Dim FileName As String
-        Dim f As Long
-        Dim X As Long
-        Dim Y As Long
-        FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
+    'Public Sub LoadMap(ByVal MapNum As Long)
+    '    Dim FileName As String
+    '    Dim f As Long
+    '    Dim X As Long
+    '    Dim Y As Long
+    '    FileName = Application.StartupPath & MAP_PATH & "map" & MapNum & MAP_EXT
 
-        ClearMap()
+    '    ClearMap()
 
-        f = FreeFile()
-        FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
-        FileGetObject(f, Map.Name)
-        FileGetObject(f, Map.Music)
-        FileGetObject(f, Map.Revision)
-        FileGetObject(f, Map.Moral)
-        FileGetObject(f, Map.tileset)
-        FileGetObject(f, Map.Up)
-        FileGetObject(f, Map.Down)
-        FileGetObject(f, Map.Left)
-        FileGetObject(f, Map.Right)
-        FileGetObject(f, Map.BootMap)
-        FileGetObject(f, Map.BootX)
-        FileGetObject(f, Map.BootY)
-        FileGetObject(f, Map.MaxX)
-        FileGetObject(f, Map.MaxY)
+    '    f = FreeFile()
+    '    FileOpen(f, FileName, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
+    '    FileGetObject(f, Map.Name)
+    '    FileGetObject(f, Map.Music)
+    '    FileGetObject(f, Map.Revision)
+    '    FileGetObject(f, Map.Moral)
+    '    FileGetObject(f, Map.tileset)
+    '    FileGetObject(f, Map.Up)
+    '    FileGetObject(f, Map.Down)
+    '    FileGetObject(f, Map.Left)
+    '    FileGetObject(f, Map.Right)
+    '    FileGetObject(f, Map.BootMap)
+    '    FileGetObject(f, Map.BootX)
+    '    FileGetObject(f, Map.BootY)
+    '    FileGetObject(f, Map.MaxX)
+    '    FileGetObject(f, Map.MaxY)
 
-        ' have to set the tile()
-        ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
+    '    ' have to set the tile()
+    '    ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                FileGetObject(f, Map.Tile(X, Y).Data1)
-                FileGetObject(f, Map.Tile(X, Y).Data2)
-                FileGetObject(f, Map.Tile(X, Y).Data3)
-                FileGetObject(f, Map.Tile(X, Y).DirBlock)
-                ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Count - 1)
-                For i = 0 To UBound(Map.Tile(X, Y).Layer)
-                    FileGetObject(f, Map.Tile(X, Y).Layer(i).tileset)
-                    FileGetObject(f, Map.Tile(X, Y).Layer(i).X)
-                    FileGetObject(f, Map.Tile(X, Y).Layer(i).Y)
-                    FileGetObject(f, Map.Tile(X, Y).Layer(i).Autotile)
-                Next
-                FileGetObject(f, Map.Tile(X, Y).Type)
-            Next
-        Next
+    '    For X = 0 To Map.MaxX
+    '        For Y = 0 To Map.MaxY
+    '            FileGetObject(f, Map.Tile(X, Y).Data1)
+    '            FileGetObject(f, Map.Tile(X, Y).Data2)
+    '            FileGetObject(f, Map.Tile(X, Y).Data3)
+    '            FileGetObject(f, Map.Tile(X, Y).DirBlock)
+    '            ReDim Map.Tile(X, Y).Layer(0 To MapLayer.Count - 1)
+    '            For i = 0 To UBound(Map.Tile(X, Y).Layer)
+    '                FileGetObject(f, Map.Tile(X, Y).Layer(i).tileset)
+    '                FileGetObject(f, Map.Tile(X, Y).Layer(i).X)
+    '                FileGetObject(f, Map.Tile(X, Y).Layer(i).Y)
+    '                FileGetObject(f, Map.Tile(X, Y).Layer(i).Autotile)
+    '            Next
+    '            FileGetObject(f, Map.Tile(X, Y).Type)
+    '        Next
+    '    Next
 
-        For X = 1 To MAX_MAP_NPCS
-            FileGetObject(f, Map.Npc(X))
-        Next
+    '    For X = 1 To MAX_MAP_NPCS
+    '        FileGetObject(f, Map.Npc(X))
+    '    Next
 
-        FileClose(f)
+    '    FileClose(f)
 
-        ClearTempTile()
-    End Sub
+    '    ClearTempTile()
+    'End Sub
 
     Function GetPlayerInvItemNum(ByVal Index As Long, ByVal invslot As Long) As Long
         GetPlayerInvItemNum = 0
@@ -862,43 +862,5 @@ Module ClientDataBase
         Array.ConstrainedCopy(buffer, 0, ra, 0, total)
         Return ra
     End Function
-
-    Sub CheckDirectories()
-        ' Check if the directory is there, if its not make it
-        CheckDir(Application.StartupPath & "\data files")
-
-        CheckDir(Application.StartupPath & "\data files\fonts")
-
-        CheckDir(Application.StartupPath & "\data files\graphics")
-
-        CheckDir(Application.StartupPath & "\data files\maps")
-
-        CheckDir(Application.StartupPath & "\data files\music")
-
-        CheckDir(Application.StartupPath & "\data files\sound")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\actionbar")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\animations")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\characters")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\gui")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\items")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\paperdolls")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\resources")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\skillicons")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\tilesets")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\faces")
-
-        CheckDir(Application.StartupPath & "\data files\graphics\projectiles")
-
-    End Sub
 
 End Module
