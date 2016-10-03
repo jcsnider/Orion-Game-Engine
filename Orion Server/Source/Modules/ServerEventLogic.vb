@@ -1716,9 +1716,9 @@
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSex
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SEX_MALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SexType.Male
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SEX_FEMALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = SexType.Female
                                                             End If
                                                             SendPlayerData(i)
                                                         Case EventType.evChangePK

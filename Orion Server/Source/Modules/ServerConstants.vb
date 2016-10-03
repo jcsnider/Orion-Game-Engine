@@ -28,8 +28,8 @@
     Public Const NAME_LENGTH As Byte = 20
 
     ' Sex constants
-    Public Const SEX_MALE As Byte = 0
-    Public Const SEX_FEMALE As Byte = 1
+    'Public Const SEX_MALE As Byte = 0
+    'Public Const SEX_FEMALE As Byte = 1
 
     Public Const StatPtsPerLvl As Byte = 3
 

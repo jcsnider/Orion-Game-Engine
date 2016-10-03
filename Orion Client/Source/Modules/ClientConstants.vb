@@ -89,8 +89,8 @@
     Public Const NAME_LENGTH As Byte = 20
 
     ' Sex constants
-    Public Const SEX_MALE As Byte = 0
-    Public Const SEX_FEMALE As Byte = 1
+    'Public Const SEX_MALE As Byte = 0
+    'Public Const SEX_FEMALE As Byte = 1
 
     ' Map constants
     Public MAX_MAPX As Byte = 35

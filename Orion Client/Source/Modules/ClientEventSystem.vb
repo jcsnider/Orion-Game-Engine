@@ -671,9 +671,9 @@ newlist:
                                         End If
                                     Case 8
                                         Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1
-                                            Case SEX_MALE
+                                            Case SexType.Male
                                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Gender is Male")
-                                            Case SEX_FEMALE
+                                            Case SexType.Female
                                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's  Gender is Female")
                                         End Select
                                 End Select

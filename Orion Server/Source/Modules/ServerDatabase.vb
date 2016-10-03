@@ -2043,7 +2043,7 @@ Module ServerDatabase
             Player(Index).Character(CharNum).Sex = Sex
             Player(Index).Character(CharNum).Classes = ClassNum
 
-            If Player(Index).Character(CharNum).Sex = SEX_MALE Then
+            If Player(Index).Character(CharNum).Sex = SexType.Male Then
                 Player(Index).Character(CharNum).Sprite = Classes(ClassNum).MaleSprite(Sprite - 1)
             Else
                 Player(Index).Character(CharNum).Sprite = Classes(ClassNum).FemaleSprite(Sprite - 1)

@@ -1633,7 +1633,7 @@
             Next
 
             ' Prevent hacking
-            If (Sex < SEX_MALE) Or (Sex > SEX_FEMALE) Then Exit Sub
+            If (Sex < SexType.Male) Or (Sex > SexType.Female) Then Exit Sub
 
             ' Prevent hacking
             If Classes < 1 Or Classes > Max_Classes Then Exit Sub

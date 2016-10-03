@@ -275,9 +275,9 @@ Module ClientGeneral
                     Call SetStatus("Connected, sending character addition data...")
 
                     If frmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SEX_MALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SexType.Male, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     Else
-                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SEX_FEMALE, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, SexType.Female, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     End If
                 End If
 
