@@ -96,9 +96,9 @@
     Public MAX_MAPX As Byte = 35
     Public MAX_MAPY As Byte = 26
 
-    Public Const MAP_MORAL_NONE As Byte = 0
-    Public Const MAP_MORAL_SAFE As Byte = 1
-    Public Const MAP_MORAL_INDOOR As Byte = 2
+    'Public Const MAP_MORAL_NONE As Byte = 0
+    'Public Const MAP_MORAL_SAFE As Byte = 1
+    'Public Const MAP_MORAL_INDOOR As Byte = 2
 
     ' Tile consants
     Public Const TILE_TYPE_WALKABLE As Byte = 0

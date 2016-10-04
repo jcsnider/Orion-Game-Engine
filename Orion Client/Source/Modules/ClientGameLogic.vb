@@ -1191,9 +1191,9 @@ Continue1:
         DrawMapNameY = 1
 
         Select Case Map.Moral
-            Case MAP_MORAL_NONE
+            Case MapMoralType.None
                 DrawMapNameColor = SFML.Graphics.Color.Red
-            Case MAP_MORAL_SAFE
+            Case MapMoralType.Safe
                 DrawMapNameColor = SFML.Graphics.Color.Green
             Case Else
                 DrawMapNameColor = SFML.Graphics.Color.White

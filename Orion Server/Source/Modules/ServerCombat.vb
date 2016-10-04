@@ -42,7 +42,7 @@
         End If
 
         ' Check if map is attackable
-        If Not Map(GetPlayerMap(Attacker)).Moral = MAP_MORAL_NONE Then
+        If Not Map(GetPlayerMap(Attacker)).Moral = MapMoralType.None Then
             If GetPlayerPK(Victim) = NO Then
                 PlayerMsg(Attacker, "This is a safe zone!")
                 Exit Function
