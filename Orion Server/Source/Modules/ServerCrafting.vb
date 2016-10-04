@@ -1,7 +1,7 @@
 ﻿Public Module ServerCrafting
 #Region "Globals"
     Public Const ITEM_TYPE_RECIPES As Byte = 17
-    Public Const TILE_TYPE_CRAFT As Byte = 15
+    'Public Const TILE_TYPE_CRAFT As Byte = 15
     'Public Const MAX_RECIPE As Long = 100
     Public Const MAX_INGREDIENT As Byte = 5
     Public Recipe(MAX_RECIPE) As RecipeRec

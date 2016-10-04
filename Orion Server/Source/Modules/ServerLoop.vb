@@ -220,7 +220,7 @@
 
                 For x1 = 0 To Map(MapNum).MaxX
                     For y1 = 0 To Map(MapNum).MaxY
-                        If Map(MapNum).Tile(x1, y1).Type = TILE_TYPE_KEY And TempTile(MapNum).DoorOpen(x1, y1) = YES Then
+                        If Map(MapNum).Tile(x1, y1).Type = TileType.Key And TempTile(MapNum).DoorOpen(x1, y1) = YES Then
                             TempTile(MapNum).DoorOpen(x1, y1) = NO
                             SendMapKeyToMap(MapNum, x1, y1, 0)
                         End If

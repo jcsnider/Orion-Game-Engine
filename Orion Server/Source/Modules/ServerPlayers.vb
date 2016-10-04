@@ -420,11 +420,11 @@
 
                     ' Check to make sure that the tile is walkable
                     If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, DIR_UP + 1) Then
-                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TILE_TYPE_BLOCKED Then
-                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TILE_TYPE_RESOURCE Then
+                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Blocked Then
+                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Resource Then
 
                                 ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) - 1) = YES) Then
+                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) - 1) = YES) Then
                                     SetPlayerY(Index, GetPlayerY(Index) - 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
@@ -451,11 +451,11 @@
 
                     ' Check to make sure that the tile is walkable
                     If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, DIR_DOWN + 1) Then
-                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TILE_TYPE_BLOCKED Then
-                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TILE_TYPE_RESOURCE Then
+                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Blocked Then
+                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Resource Then
 
                                 ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) + 1) = YES) Then
+                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) + 1) = YES) Then
                                     Call SetPlayerY(Index, GetPlayerY(Index) + 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
@@ -481,11 +481,11 @@
 
                     ' Check to make sure that the tile is walkable
                     If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, DIR_LEFT + 1) Then
-                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TILE_TYPE_BLOCKED Then
-                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TILE_TYPE_RESOURCE Then
+                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Blocked Then
+                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Resource Then
 
                                 ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) - 1, GetPlayerY(Index)) = YES) Then
+                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) - 1, GetPlayerY(Index)) = YES) Then
                                     SetPlayerX(Index, GetPlayerX(Index) - 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
@@ -512,11 +512,11 @@
 
                     ' Check to make sure that the tile is walkable
                     If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, DIR_RIGHT + 1) Then
-                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TILE_TYPE_BLOCKED Then
-                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TILE_TYPE_RESOURCE Then
+                        If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Blocked Then
+                            If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Resource Then
 
                                 ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TILE_TYPE_KEY Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) + 1, GetPlayerY(Index)) = YES) Then
+                                If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) + 1, GetPlayerY(Index)) = YES) Then
                                     SetPlayerX(Index, GetPlayerX(Index) + 1)
                                     SendPlayerMove(Index, movement)
                                     Moved = YES
@@ -539,7 +539,7 @@
 
         With Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index))
             ' Check to see if the tile is a warp tile, and if so warp them
-            If .Type = TILE_TYPE_WARP Then
+            If .Type = TileType.Warp Then
                 MapNum = .Data1
                 x = .Data2
                 y = .Data3
@@ -550,7 +550,7 @@
             End If
 
             ' Check to see if the tile is a door tile, and if so warp them
-            If .Type = TILE_TYPE_DOOR Then
+            If .Type = TileType.Door Then
                 MapNum = .Data1
                 x = .Data2
                 y = .Data3
@@ -563,11 +563,11 @@
             End If
 
             ' Check for key trigger open
-            If .Type = TILE_TYPE_KEYOPEN Then
+            If .Type = TileType.KeyOpen Then
                 x = .Data1
                 y = .Data2
 
-                If Map(GetPlayerMap(Index)).Tile(x, y).Type = TILE_TYPE_KEY And TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = NO Then
+                If Map(GetPlayerMap(Index)).Tile(x, y).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = NO Then
                     TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = YES
                     TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
                     SendMapKey(Index, x, y, 1)
@@ -576,7 +576,7 @@
             End If
 
             ' Check for a shop, and if so open it
-            If .Type = TILE_TYPE_SHOP Then
+            If .Type = TileType.Shop Then
                 x = .Data1
                 If x > 0 Then ' shop exists?
                     If Len(Trim$(Shop(x).Name)) > 0 Then ' name exists?
@@ -587,14 +587,14 @@
             End If
 
             ' Check to see if the tile is a bank, and if so send bank
-            If .Type = TILE_TYPE_BANK Then
+            If .Type = TileType.Bank Then
                 SendBank(Index)
                 TempPlayer(Index).InBank = True
                 Moved = YES
             End If
 
             ' Check if it's a heal tile
-            If .Type = TILE_TYPE_HEAL Then
+            If .Type = TileType.Heal Then
                 VitalType = .Data1
                 amount = .Data2
                 If Not GetPlayerVital(Index, VitalType) = GetPlayerMaxVital(Index, VitalType) Then
@@ -612,7 +612,7 @@
             End If
 
             ' Check if it's a trap tile
-            If .Type = TILE_TYPE_TRAP Then
+            If .Type = TileType.Trap Then
                 amount = .Data1
                 SendActionMsg(GetPlayerMap(Index), "-" & amount, ColorType.BrightRed, ACTIONMSG_SCROLL, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                 If GetPlayerVital(Index, Vitals.HP) - amount <= 0 Then
@@ -627,7 +627,7 @@
             End If
 
             'Housing
-            If .Type = TILE_TYPE_HOUSE Then
+            If .Type = TileType.House Then
                 If Player(Index).Character(TempPlayer(Index).CurChar).House.HouseIndex = .Data1 Then
                     'Do warping and such to the player's house :/
                     Player(Index).Character(TempPlayer(Index).CurChar).LastMap = GetPlayerMap(Index)
@@ -650,7 +650,7 @@
             End If
 
             'crafting
-            If .Type = TILE_TYPE_CRAFT Then
+            If .Type = TileType.Craft Then
                 TempPlayer(Index).IsCrafting = True
                 SendPlayerRecipes(Index)
                 SendOpenCraft(Index)

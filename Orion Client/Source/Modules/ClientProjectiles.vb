@@ -251,7 +251,7 @@ Public Module ClientProjectiles
 
         'Check for blocked wall collision
         If CanClearProjectile = False Then 'Add a check to prevent crashing
-            If Map.Tile(X, Y).Type = TILE_TYPE_BLOCKED Then CanClearProjectile = True
+            If Map.Tile(X, Y).Type = TileType.Blocked Then CanClearProjectile = True
         End If
 
         'Check for npc collision

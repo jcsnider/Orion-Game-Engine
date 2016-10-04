@@ -195,35 +195,35 @@ Module ClientText
                             tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
                             tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
                             Select Case .Type
-                                Case TILE_TYPE_BLOCKED
+                                Case TileType.Blocked
                                     DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
-                                Case TILE_TYPE_WARP
+                                Case TileType.Warp
                                     DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
-                                Case TILE_TYPE_ITEM
+                                Case TileType.Item
                                     DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
-                                Case TILE_TYPE_NPCAVOID
+                                Case TileType.NpcAvoid
                                     DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
-                                Case TILE_TYPE_KEY
+                                Case TileType.Key
                                     DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
-                                Case TILE_TYPE_KEYOPEN
+                                Case TileType.KeyOpen
                                     DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
-                                Case TILE_TYPE_RESOURCE
+                                Case TileType.Resource
                                     DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
-                                Case TILE_TYPE_DOOR
+                                Case TileType.Door
                                     DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
-                                Case TILE_TYPE_NPCSPAWN
+                                Case TileType.NpcSpawn
                                     DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
-                                Case TILE_TYPE_SHOP
+                                Case TileType.Shop
                                     DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
-                                Case TILE_TYPE_BANK
+                                Case TileType.Bank
                                     DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), GameWindow)
-                                Case TILE_TYPE_HEAL
+                                Case TileType.Heal
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
-                                Case TILE_TYPE_TRAP
+                                Case TileType.Trap
                                     DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
-                                Case TILE_TYPE_HOUSE
+                                Case TileType.House
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
-                                Case TILE_TYPE_CRAFT
+                                Case TileType.Craft
                                     DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
                             End Select
                         End With

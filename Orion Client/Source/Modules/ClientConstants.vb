@@ -100,24 +100,24 @@
     'Public Const MAP_MORAL_SAFE As Byte = 1
     'Public Const MAP_MORAL_INDOOR As Byte = 2
 
-    ' Tile consants
-    Public Const TILE_TYPE_WALKABLE As Byte = 0
-    Public Const TILE_TYPE_BLOCKED As Byte = 1
-    Public Const TILE_TYPE_WARP As Byte = 2
-    Public Const TILE_TYPE_ITEM As Byte = 3
-    Public Const TILE_TYPE_NPCAVOID As Byte = 4
-    Public Const TILE_TYPE_KEY As Byte = 5
-    Public Const TILE_TYPE_KEYOPEN As Byte = 6
-    Public Const TILE_TYPE_RESOURCE As Byte = 7
-    Public Const TILE_TYPE_DOOR As Byte = 8
-    Public Const TILE_TYPE_NPCSPAWN As Byte = 9
-    Public Const TILE_TYPE_SHOP As Byte = 10
-    Public Const TILE_TYPE_BANK As Byte = 11
-    Public Const TILE_TYPE_HEAL As Byte = 12
-    Public Const TILE_TYPE_TRAP As Byte = 13
-    'Housing
-    Public Const TILE_TYPE_HOUSE As Byte = 14
-    'craft
+    '' Tile consants
+    'Public Const TILE_TYPE_WALKABLE As Byte = 0
+    'Public Const TILE_TYPE_BLOCKED As Byte = 1
+    'Public Const TILE_TYPE_WARP As Byte = 2
+    'Public Const TILE_TYPE_ITEM As Byte = 3
+    'Public Const TILE_TYPE_NPCAVOID As Byte = 4
+    'Public Const TILE_TYPE_KEY As Byte = 5
+    'Public Const TILE_TYPE_KEYOPEN As Byte = 6
+    'Public Const TILE_TYPE_RESOURCE As Byte = 7
+    'Public Const TILE_TYPE_DOOR As Byte = 8
+    'Public Const TILE_TYPE_NPCSPAWN As Byte = 9
+    'Public Const TILE_TYPE_SHOP As Byte = 10
+    'Public Const TILE_TYPE_BANK As Byte = 11
+    'Public Const TILE_TYPE_HEAL As Byte = 12
+    'Public Const TILE_TYPE_TRAP As Byte = 13
+    ''Housing
+    'Public Const TILE_TYPE_HOUSE As Byte = 14
+    ''craft
     'Public Const TILE_TYPE_CRAFT As Byte = 15
 
     ' Item constants
@@ -138,7 +138,7 @@
     Public Const ITEM_TYPE_CURRENCY As Byte = 14
     Public Const ITEM_TYPE_SKILL As Byte = 15
     Public Const ITEM_TYPE_FURNITURE As Byte = 16
-
+    Public Const ITEM_TYPE_RECIPES As Byte = 17
 
     Public ITEM_RARITY_COLOR_0 = SFML.Graphics.Color.White ' white
     Public ITEM_RARITY_COLOR_1 = New SFML.Graphics.Color(102, 255, 0) ' green

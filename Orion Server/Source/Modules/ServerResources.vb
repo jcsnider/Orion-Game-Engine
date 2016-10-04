@@ -16,7 +16,7 @@
         Dim i As Long
         Dim Damage As Long
 
-        If Map(GetPlayerMap(Index)).Tile(x, y).Type = TILE_TYPE_RESOURCE Then
+        If Map(GetPlayerMap(Index)).Tile(x, y).Type = TileType.Resource Then
             Resource_num = 0
             Resource_index = Map(GetPlayerMap(Index)).Tile(x, y).Data1
             ResourceType = Resource(Resource_index).ResourceType

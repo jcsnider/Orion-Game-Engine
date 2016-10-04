@@ -1150,7 +1150,7 @@ Module ServerDatabase
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
 
-                If Map(MapNum).Tile(x, y).Type = TILE_TYPE_RESOURCE Then
+                If Map(MapNum).Tile(x, y).Type = TileType.Resource Then
                     Resource_Count = Resource_Count + 1
                     ReDim Preserve ResourceCache(MapNum).ResourceData(0 To Resource_Count)
                     ResourceCache(MapNum).ResourceData(Resource_Count).x = x

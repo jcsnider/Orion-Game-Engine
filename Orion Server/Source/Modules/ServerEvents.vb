@@ -430,12 +430,12 @@ Public Module ServerEvents
 
 
                     ' Check to make sure that the tile is walkable
-                    If n = TILE_TYPE_BLOCKED Then
+                    If n = TileType.Blocked Then
                         CanEventMove = False
                         Exit Function
                     End If
 
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -517,12 +517,12 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
-                    If n = TILE_TYPE_BLOCKED Then
+                    If n = TileType.Blocked Then
                         CanEventMove = False
                         Exit Function
                     End If
 
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -605,12 +605,12 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
-                    If n = TILE_TYPE_BLOCKED Then
+                    If n = TileType.Blocked Then
                         CanEventMove = False
                         Exit Function
                     End If
 
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -693,12 +693,12 @@ Public Module ServerEvents
                     End If
 
                     ' Check to make sure that the tile is walkable
-                    If n = TILE_TYPE_BLOCKED Then
+                    If n = TileType.Blocked Then
                         CanEventMove = False
                         Exit Function
                     End If
 
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanEventMove = False
                         Exit Function
                     End If

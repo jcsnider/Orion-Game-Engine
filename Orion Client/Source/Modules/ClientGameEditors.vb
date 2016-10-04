@@ -279,101 +279,101 @@ Module ClientGameEditors
             ElseIf frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpattributes Then
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
-                    If frmEditor_Map.optBlocked.Checked = True Then .Type = TILE_TYPE_BLOCKED
+                    If frmEditor_Map.optBlocked.Checked = True Then .Type = TileType.Blocked
                     ' warp tile
                     If frmEditor_Map.optWarp.Checked = True Then
-                        .Type = TILE_TYPE_WARP
+                        .Type = TileType.Warp
                         .Data1 = EditorWarpMap
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
                     ' item spawn
                     If frmEditor_Map.optItem.Checked = True Then
-                        .Type = TILE_TYPE_ITEM
+                        .Type = TileType.Item
                         .Data1 = ItemEditorNum
                         .Data2 = ItemEditorValue
                         .Data3 = 0
                     End If
                     ' npc avoid
                     If frmEditor_Map.optNPCAvoid.Checked = True Then
-                        .Type = TILE_TYPE_NPCAVOID
+                        .Type = TileType.NpcAvoid
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' key
                     If frmEditor_Map.optKey.Checked = True Then
-                        .Type = TILE_TYPE_KEY
+                        .Type = TileType.Key
                         .Data1 = KeyEditorNum
                         .Data2 = KeyEditorTake
                         .Data3 = 0
                     End If
                     ' key open
                     If frmEditor_Map.optKeyOpen.Checked = True Then
-                        .Type = TILE_TYPE_KEYOPEN
+                        .Type = TileType.KeyOpen
                         .Data1 = KeyOpenEditorX
                         .Data2 = KeyOpenEditorY
                         .Data3 = 0
                     End If
                     ' resource
                     If frmEditor_Map.optResource.Checked = True Then
-                        .Type = TILE_TYPE_RESOURCE
+                        .Type = TileType.Resource
                         .Data1 = ResourceEditorNum
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' door
                     If frmEditor_Map.optDoor.Checked = True Then
-                        .Type = TILE_TYPE_DOOR
+                        .Type = TileType.Door
                         .Data1 = EditorWarpMap
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
                     ' npc spawn
                     If frmEditor_Map.optNPCSpawn.Checked = True Then
-                        .Type = TILE_TYPE_NPCSPAWN
+                        .Type = TileType.NpcSpawn
                         .Data1 = SpawnNpcNum
                         .Data2 = SpawnNpcDir
                         .Data3 = 0
                     End If
                     ' shop
                     If frmEditor_Map.optShop.Checked = True Then
-                        .Type = TILE_TYPE_SHOP
+                        .Type = TileType.Shop
                         .Data1 = EditorShop
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' bank
                     If frmEditor_Map.optBank.Checked = True Then
-                        .Type = TILE_TYPE_BANK
+                        .Type = TileType.Bank
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' heal
                     If frmEditor_Map.optHeal.Checked = True Then
-                        .Type = TILE_TYPE_HEAL
+                        .Type = TileType.Heal
                         .Data1 = MapEditorHealType
                         .Data2 = MapEditorHealAmount
                         .Data3 = 0
                     End If
                     ' trap
                     If frmEditor_Map.optTrap.Checked = True Then
-                        .Type = TILE_TYPE_TRAP
+                        .Type = TileType.Trap
                         .Data1 = MapEditorHealAmount
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     'Housing
                     If frmEditor_Map.optHouse.Checked Then
-                        .Type = TILE_TYPE_HOUSE
+                        .Type = TileType.House
                         .Data1 = HouseTileIndex
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     'craft tile
                     If frmEditor_Map.optCraft.Checked Then
-                        .Type = TILE_TYPE_CRAFT
+                        .Type = TileType.Craft
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0

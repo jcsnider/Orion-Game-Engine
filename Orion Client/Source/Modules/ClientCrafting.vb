@@ -3,8 +3,8 @@ Imports System.Windows.Forms
 
 Public Module ClientCrafting
 #Region "Globals"
-    Public Const ITEM_TYPE_RECIPES As Byte = 17
-    Public Const TILE_TYPE_CRAFT As Byte = 15
+    'Public Const ITEM_TYPE_RECIPES As Byte = 17
+    'Public Const TILE_TYPE_CRAFT As Byte = 15
     'Public Const MAX_RECIPE As Long = 100
     Public Const MAX_INGREDIENT As Byte = 5
     Public Recipe_Changed(0 To MAX_RECIPE) As Boolean

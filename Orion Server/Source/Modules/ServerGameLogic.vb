@@ -241,7 +241,7 @@
             For y = 0 To Map(MapNum).MaxY
 
                 ' Check if the tile type is an item or a saved tile incase someone drops something
-                If (Map(MapNum).Tile(x, y).Type = TILE_TYPE_ITEM) Then
+                If (Map(MapNum).Tile(x, y).Type = TileType.Item) Then
 
                     ' Check to see if its a currency and if they set the value to 0 set it to 1 automatically
                     If Item(Map(MapNum).Tile(x, y).Data1).Type = ITEM_TYPE_CURRENCY Or Item(Map(MapNum).Tile(x, y).Data1).Stackable = 1 And Map(MapNum).Tile(x, y).Data2 <= 0 Then
@@ -283,7 +283,7 @@
             'Check if theres a spawn tile for the specific npc
             For x = 0 To Map(MapNum).MaxX
                 For y = 0 To Map(MapNum).MaxY
-                    If Map(MapNum).Tile(x, y).Type = TILE_TYPE_NPCSPAWN Then
+                    If Map(MapNum).Tile(x, y).Type = TileType.NpcSpawn Then
                         If Map(MapNum).Tile(x, y).Data1 = MapNpcNum Then
                             MapNpc(MapNum).Npc(MapNpcNum).x = x
                             MapNpc(MapNum).Npc(MapNpcNum).y = y
@@ -396,9 +396,9 @@
 
         Next
 
-        If Map(MapNum).Tile(x, y).Type <> TILE_TYPE_WALKABLE Then
-            If Map(MapNum).Tile(x, y).Type <> TILE_TYPE_NPCSPAWN Then
-                If Map(MapNum).Tile(x, y).Type <> TILE_TYPE_ITEM Then
+        If Map(MapNum).Tile(x, y).Type <> TileType.None Then
+            If Map(MapNum).Tile(x, y).Type <> TileType.NpcSpawn Then
+                If Map(MapNum).Tile(x, y).Type <> TileType.Item Then
                     NpcTileIsOpen = False
                 End If
             End If
@@ -445,7 +445,7 @@
                     n = Map(MapNum).Tile(x, y - 1).Type
 
                     ' Check to make sure that the tile is walkable
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -483,7 +483,7 @@
                     n = Map(MapNum).Tile(x, y + 1).Type
 
                     ' Check to make sure that the tile is walkable
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -521,7 +521,7 @@
                     n = Map(MapNum).Tile(x - 1, y).Type
 
                     ' Check to make sure that the tile is walkable
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanNpcMove = False
                         Exit Function
                     End If
@@ -559,7 +559,7 @@
                     n = Map(MapNum).Tile(x + 1, y).Type
 
                     ' Check to make sure that the tile is walkable
-                    If n <> TILE_TYPE_WALKABLE And n <> TILE_TYPE_ITEM And n <> TILE_TYPE_NPCSPAWN Then
+                    If n <> TileType.None And n <> TileType.Item And n <> TileType.NpcSpawn Then
                         CanNpcMove = False
                         Exit Function
                     End If

@@ -953,7 +953,7 @@
                     End Select
 
                     ' Check if a key exists
-                    If Map(GetPlayerMap(Index)).Tile(x, y).Type = TILE_TYPE_KEY Then
+                    If Map(GetPlayerMap(Index)).Tile(x, y).Type = TileType.Key Then
 
                         ' Check if the key they are using matches the map key
                         If GetPlayerInvItemNum(Index, invnum) = Map(GetPlayerMap(Index)).Tile(x, y).Data1 Then

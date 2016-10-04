@@ -306,7 +306,7 @@
 
                     For x = x1 To x1 + widthoffset
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TILE_TYPE_BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then
@@ -337,7 +337,7 @@
 
                     For x = x1 To x1 - (Item(ItemNum).FurnitureWidth - widthoffset) Step -1
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TILE_TYPE_BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then
@@ -368,7 +368,7 @@
                 Else
                     For x = x1 To x1 + Item(ItemNum).FurnitureWidth - 1
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TILE_TYPE_BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then

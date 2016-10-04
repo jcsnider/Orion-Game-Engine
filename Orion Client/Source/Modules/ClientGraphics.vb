@@ -1474,7 +1474,7 @@ Module ClientGraphics
             For Y = TileView.top To TileView.bottom
 
                 If IsValidMapPoint(X, Y) Then
-                    If Map.Tile(X, Y).Type = TILE_TYPE_DOOR Then
+                    If Map.Tile(X, Y).Type = TileType.Door Then
                         DrawDoor(X, Y)
                     End If
                 End If

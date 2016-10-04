@@ -93,7 +93,7 @@
 
                 If Player(MyIndex).XOffset = 0 Then
                     If Player(MyIndex).YOffset = 0 Then
-                        If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TILE_TYPE_WARP Then
+                        If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Warp Then
                             GettingMap = True
                         End If
                     End If
@@ -327,19 +327,19 @@
         End Select
 
         ' Check to see if the map tile is blocked or not
-        If Map.Tile(X, Y).Type = TILE_TYPE_BLOCKED Then
+        If Map.Tile(X, Y).Type = TileType.Blocked Then
             CheckDirection = True
             Exit Function
         End If
 
         ' Check to see if the map tile is tree or not
-        If Map.Tile(X, Y).Type = TILE_TYPE_RESOURCE Then
+        If Map.Tile(X, Y).Type = TileType.Resource Then
             CheckDirection = True
             Exit Function
         End If
 
         ' Check to see if the key door is open or not
-        If Map.Tile(X, Y).Type = TILE_TYPE_KEY Then
+        If Map.Tile(X, Y).Type = TileType.Key Then
 
             ' This actually checks if its open or not
             If TempTile(X, Y).DoorOpen = 0 Then
