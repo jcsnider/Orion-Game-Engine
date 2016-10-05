@@ -346,7 +346,7 @@ Public Module ClientGuiFunctions
                         If InTrade Then Exit Function
                         If InBank Or InShop Then Exit Function
 
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_FURNITURE Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Furniture Then
                             PlaySound("Click.ogg")
                             FurnitureSelected = InvNum
                             CheckGuiClick = True
@@ -696,7 +696,7 @@ Public Module ClientGuiFunctions
 
                     ' in bank?
                     If InBank Then
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             CurrencyMenu = 2 ' deposit
                             frmMainGame.lblCurrency.Text = "How many do you want to deposit?"
                             tmpCurrencyItem = InvNum
@@ -718,7 +718,7 @@ Public Module ClientGuiFunctions
                                 Exit Function
                             End If
                         Next
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             ' currency shit here brah
                             Exit Function
                         End If
@@ -727,7 +727,7 @@ Public Module ClientGuiFunctions
                     End If
 
                     ' use item if not doing anything else
-                    If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_NONE Then Exit Function
+                    If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.None Then Exit Function
                     SendUseItem(InvNum)
                     Exit Function
                 End If
@@ -755,9 +755,9 @@ Public Module ClientGuiFunctions
 
                 BankItem = IsBankItem(BankX, BankY)
                 If BankItem <> 0 Then
-                    If GetBankItemNum(BankItem) = ITEM_TYPE_NONE Then Exit Function
+                    If GetBankItemNum(BankItem) = ItemType.None Then Exit Function
 
-                    If Item(GetBankItemNum(BankItem)).Type = ITEM_TYPE_CURRENCY Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
+                    If Item(GetBankItemNum(BankItem)).Type = ItemType.Currency Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
                         CurrencyMenu = 3 ' withdraw
                         frmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
                         tmpCurrencyItem = BankItem
@@ -824,7 +824,7 @@ Public Module ClientGuiFunctions
             Else
                 If FurnitureSelected > 0 Then
                     If Player(MyIndex).InHouse = MyIndex Then
-                        If Item(PlayerInv(FurnitureSelected).Num).Type = ITEM_TYPE_FURNITURE Then
+                        If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.Furniture Then
                             buffer = New ByteBuffer
                             buffer.WriteLong(ClientPackets.CPlaceFurniture)
                             i = CurX
@@ -925,7 +925,7 @@ Public Module ClientGuiFunctions
                 ElseIf e.Button = MouseButtons.Right Then
                     If Not InBank And Not InShop And Not InTrade Then
                         If InvNum <> 0 Then
-                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                                 If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
                                     CurrencyMenu = 1 ' drop
                                     frmMainGame.lblCurrency.Text = "How many do you want to drop?"

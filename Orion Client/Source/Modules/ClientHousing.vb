@@ -308,7 +308,7 @@ Public Module ClientHousing
 
         ItemNum = Furniture(Index).ItemNum
 
-        If Item(ItemNum).Type <> ITEM_TYPE_FURNITURE Then Exit Sub
+        If Item(ItemNum).Type <> ItemType.Furniture Then Exit Sub
 
         i = Item(ItemNum).Data2
 

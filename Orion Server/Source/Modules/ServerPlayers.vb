@@ -224,22 +224,22 @@
                 Select Case i
                     Case Equipment.Weapon
 
-                        If Item(itemNum).Type <> ITEM_TYPE_WEAPON Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Weapon Then SetPlayerEquipment(Index, 0, i)
                     Case Equipment.Armor
 
-                        If Item(itemNum).Type <> ITEM_TYPE_ARMOR Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Armor Then SetPlayerEquipment(Index, 0, i)
                     Case Equipment.Helmet
 
-                        If Item(itemNum).Type <> ITEM_TYPE_HELMET Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Helmet Then SetPlayerEquipment(Index, 0, i)
                     Case Equipment.Shield
 
-                        If Item(itemNum).Type <> ITEM_TYPE_SHIELD Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Shield Then SetPlayerEquipment(Index, 0, i)
                     Case Equipment.Shoes
 
-                        If Item(itemNum).Type <> ITEM_TYPE_SHOES Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Shoes Then SetPlayerEquipment(Index, 0, i)
                     Case Equipment.Gloves
 
-                        If Item(itemNum).Type <> ITEM_TYPE_GLOVES Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).Type <> ItemType.Gloves Then SetPlayerEquipment(Index, 0, i)
                 End Select
 
             Else
@@ -719,7 +719,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
                     HasItem = GetPlayerInvItemValue(Index, i)
                 Else
                     HasItem = 1
@@ -909,7 +909,7 @@
                                 ' Set item in players inventor
                                 SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
 
-                                If Item(GetPlayerInvItemNum(Index, n)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, n)).Stackable = 1 Then
+                                If Item(GetPlayerInvItemNum(Index, n)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, n)).Stackable = 1 Then
                                     SetPlayerInvItemValue(Index, n, GetPlayerInvItemValue(Index, n) + MapItem(MapNum, i).Value)
                                     Msg = MapItem(MapNum, i).Value & " " & Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)
                                 Else
@@ -958,7 +958,7 @@
             Exit Function
         End If
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+        If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
 
             ' If currency then check to see if they already have an instance of the item and add it to that
             For i = 1 To MAX_INV
@@ -998,7 +998,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
 
                     ' Is what we are trying to take away more then what they have?  If so just set it to zero
                     If ItemVal >= GetPlayerInvItemValue(Index, i) Then
@@ -1111,7 +1111,7 @@
                     MapItem(GetPlayerMap(Index), i).x = GetPlayerX(Index)
                     MapItem(GetPlayerMap(Index), i).y = GetPlayerY(Index)
 
-                    If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, InvNum)).Stackable = 1 Then
+                    If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, InvNum)).Stackable = 1 Then
 
                         ' Check if its more then they have and if so drop it all
                         If amount >= GetPlayerInvItemValue(Index, InvNum) Then
@@ -1161,7 +1161,7 @@
         BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, invSlot))
 
         If BankSlot > 0 Then
-            If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(Index, invSlot)).Stackable = 1 Then
+            If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, invSlot)).Stackable = 1 Then
                 If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) Then
                     Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + amount)
                     Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
@@ -1210,7 +1210,7 @@
         If Not IsPlaying(Index) Then Exit Function
         If itemNum <= 0 Or itemNum > MAX_ITEMS Then Exit Function
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+        If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
             For i = 1 To MAX_BANK
                 If GetPlayerBankItemNum(Index, i) = itemNum Then
                     FindOpenBankSlot = i
@@ -1248,7 +1248,7 @@
         invSlot = FindOpenInvSlot(Index, GetPlayerBankItemNum(Index, BankSlot))
 
         If invSlot > 0 Then
-            If Item(GetPlayerBankItemNum(Index, BankSlot)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerBankItemNum(Index, BankSlot)).Stackable = 1 Then
+            If Item(GetPlayerBankItemNum(Index, BankSlot)).Type = ItemType.Currency Or Item(GetPlayerBankItemNum(Index, BankSlot)).Stackable = 1 Then
                 Call GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), amount)
                 Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - amount)
                 If GetPlayerBankItemValue(Index, BankSlot) <= 0 Then
@@ -1348,7 +1348,7 @@
 
         itemNum = GetPlayerInvItemNum(Index, invSlot)
 
-        If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+        If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
 
             ' Is what we are trying to take away more then what they have?  If so just set it to zero
             If ItemVal >= GetPlayerInvItemValue(Index, invSlot) Then

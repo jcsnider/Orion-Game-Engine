@@ -476,7 +476,7 @@
 
             ' Find out what kind of item it is
             Select Case Item(GetPlayerInvItemNum(Index, invnum)).Type
-                Case ITEM_TYPE_ARMOR
+                Case ItemType.Armor
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -514,7 +514,7 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
-                Case ITEM_TYPE_WEAPON
+                Case ItemType.Weapon
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -552,7 +552,7 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
-                Case ITEM_TYPE_HELMET
+                Case ItemType.Helmet
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -590,7 +590,7 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
-                Case ITEM_TYPE_SHIELD
+                Case ItemType.Shield
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -629,7 +629,7 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
 
-                Case ITEM_TYPE_SHOES
+                Case ItemType.Shoes
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -668,7 +668,7 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
 
-                Case ITEM_TYPE_GLOVES
+                Case ItemType.Gloves
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -706,7 +706,7 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
-                Case ITEM_TYPE_POTIONADDHP
+                Case ItemType.PotionHp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -737,7 +737,7 @@
                         TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     End If
                     SendVital(Index, Vitals.HP)
-                Case ITEM_TYPE_POTIONADDMP
+                Case ItemType.PotionMp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -768,7 +768,7 @@
                         TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     End If
                     SendVital(Index, Vitals.MP)
-                Case ITEM_TYPE_POTIONADDSP
+                Case ItemType.PotionSp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -798,7 +798,7 @@
                         TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     End If
                     SendVital(Index, Vitals.SP)
-                Case ITEM_TYPE_POTIONSUBHP
+                Case ItemType.PoisonHp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -829,7 +829,7 @@
                         TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     End If
                     SendVital(Index, Vitals.HP)
-                Case ITEM_TYPE_POTIONSUBMP
+                Case ItemType.PoisonMp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -860,7 +860,7 @@
                         TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
                     End If
                     SendVital(Index, Vitals.MP)
-                Case ITEM_TYPE_POTIONSUBSP
+                Case ItemType.PoisonSp
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -891,7 +891,7 @@
                     End If
 
                     SendVital(Index, Vitals.SP)
-                Case ITEM_TYPE_KEY
+                Case ItemType.Key
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
@@ -972,7 +972,7 @@
                         End If
                     End If
 
-                Case ITEM_TYPE_SKILL
+                Case ItemType.Skill
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(GetPlayerInvItemNum(Index, invnum)).Stat_Req(i) Then
@@ -1023,9 +1023,9 @@
                     Else
                         PlayerMsg(Index, "This scroll is not connected to a skill, please inform an admin!")
                     End If
-                Case ITEM_TYPE_FURNITURE
+                Case ItemType.Furniture
                     PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.")
-                Case ITEM_TYPE_RECIPES
+                Case ItemType.Recipe
                     PlayerMsg(Index, "Lets learn this recipe :)")
                     ' Get the recipe num
                     n = Item(GetPlayerInvItemNum(Index, invnum)).Data1
@@ -1800,7 +1800,7 @@
         ' Prevent hacking
         If InvNum < 1 Or InvNum > MAX_INV Then Exit Sub
         If GetPlayerInvItemNum(index, InvNum) < 1 Or GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
-        If Item(GetPlayerInvItemNum(index, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(index, InvNum)).Stackable = 1 Then
+        If Item(GetPlayerInvItemNum(index, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(index, InvNum)).Stackable = 1 Then
             If Amount < 1 Or Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
         End If
 

@@ -897,7 +897,7 @@ Module ClientTCP
         ' do basic checks
         If InvNum < 1 Or InvNum > MAX_INV Then Exit Sub
         If PlayerInv(InvNum).Num < 1 Or PlayerInv(InvNum).Num > MAX_ITEMS Then Exit Sub
-        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ITEM_TYPE_CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
             If Amount < 1 Or Amount > PlayerInv(InvNum).Value Then Exit Sub
         End If
 

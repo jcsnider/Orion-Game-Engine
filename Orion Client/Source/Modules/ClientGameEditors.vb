@@ -649,7 +649,7 @@ Module ClientGameEditors
             frmEditor_Item.scrlAnim.Value = .Animation
 
             ' Type specific settings
-            If (frmEditor_Item.cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (frmEditor_Item.cmbType.SelectedIndex <= ITEM_TYPE_GLOVES) Then
+            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Weapon) And (frmEditor_Item.cmbType.SelectedIndex <= ItemType.Gloves) Then
                 frmEditor_Item.fraEquipment.Visible = True
                 frmEditor_Item.scrlProjectile.Value = .Data1
                 frmEditor_Item.scrlDamage.Value = .Data2
@@ -690,21 +690,21 @@ Module ClientGameEditors
                 frmEditor_Item.fraEquipment.Visible = False
             End If
 
-            If (frmEditor_Item.cmbType.SelectedIndex >= ITEM_TYPE_POTIONADDHP) And (frmEditor_Item.cmbType.SelectedIndex <= ITEM_TYPE_POTIONSUBSP) Then
+            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.PotionHp) And (frmEditor_Item.cmbType.SelectedIndex <= ItemType.PoisonSp) Then
                 frmEditor_Item.fraVitals.Visible = True
                 frmEditor_Item.scrlVitalMod.Value = .Data1
             Else
                 frmEditor_Item.fraVitals.Visible = False
             End If
 
-            If (frmEditor_Item.cmbType.SelectedIndex = ITEM_TYPE_SKILL) Then
+            If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Skill) Then
                 frmEditor_Item.fraSkill.Visible = True
                 frmEditor_Item.scrlSkill.Value = .Data1
             Else
                 frmEditor_Item.fraSkill.Visible = False
             End If
 
-            If frmEditor_Item.cmbType.SelectedIndex = ITEM_TYPE_FURNITURE Then
+            If frmEditor_Item.cmbType.SelectedIndex = ItemType.Furniture Then
                 frmEditor_Item.fraFurniture.Visible = True
                 If Item(EditorIndex).Data2 > 0 And Item(EditorIndex).Data2 <= NumFurniture Then
                     frmEditor_Item.scrlFurniture.Value = Item(EditorIndex).Data2

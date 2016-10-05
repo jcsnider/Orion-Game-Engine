@@ -244,7 +244,7 @@
         End If
 
         If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
-            If Item(ItemNum).Type = ITEM_TYPE_FURNITURE Then
+            If Item(ItemNum).Type = ItemType.Furniture Then
                 ' stat requirements
                 For i = 1 To Stats.Count - 1
                     If GetPlayerRawStat(index, i) < Item(ItemNum).Stat_Req(i) Then

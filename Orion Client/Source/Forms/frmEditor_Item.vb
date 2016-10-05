@@ -34,33 +34,33 @@ Public Class frmEditor_Item
     Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
-        If (cmbType.SelectedIndex >= ITEM_TYPE_WEAPON) And (cmbType.SelectedIndex <= ITEM_TYPE_GLOVES) Then
+        If (cmbType.SelectedIndex >= ItemType.Weapon) And (cmbType.SelectedIndex <= ItemType.Gloves) Then
             fraEquipment.Visible = True
             'scrlDamage_Change
         Else
             fraEquipment.Visible = False
         End If
 
-        If (cmbType.SelectedIndex >= ITEM_TYPE_POTIONADDHP) And (cmbType.SelectedIndex <= ITEM_TYPE_POTIONSUBSP) Then
+        If (cmbType.SelectedIndex >= ItemType.PotionHp) And (cmbType.SelectedIndex <= ItemType.PoisonSp) Then
             fraVitals.Visible = True
             'scrlVitalMod_Change
         Else
             fraVitals.Visible = False
         End If
 
-        If (cmbType.SelectedIndex = ITEM_TYPE_SKILL) Then
+        If (cmbType.SelectedIndex = ItemType.Skill) Then
             fraSkill.Visible = True
         Else
             fraSkill.Visible = False
         End If
 
-        If cmbType.SelectedIndex = ITEM_TYPE_FURNITURE Then
+        If cmbType.SelectedIndex = ItemType.Furniture Then
             fraFurniture.Visible = True
         Else
             fraFurniture.Visible = False
         End If
 
-        If cmbType.SelectedIndex = ITEM_TYPE_RECIPES Then
+        If cmbType.SelectedIndex = ItemType.Recipe Then
             fraRecipe.Visible = True
         Else
             fraRecipe.Visible = False

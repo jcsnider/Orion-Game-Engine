@@ -243,7 +243,7 @@ Public Class frmAdmin
 #Region "Misc"
     Private Sub scrlSpawnItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItem.Scroll
         lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
-        If Item(scrlSpawnItem.Value).Type = ITEM_TYPE_CURRENCY Or Item(scrlSpawnItem.Value).Stackable = 1 Then
+        If Item(scrlSpawnItem.Value).Type = ItemType.Currency Or Item(scrlSpawnItem.Value).Stackable = 1 Then
             scrlSpawnItemAmount.Enabled = True
             scrlSpawnItemAmount.Maximum = 100000
             Exit Sub

@@ -921,51 +921,51 @@ Continue1:
 
         ' For the stats label
         Select Case Item(itemnum).Type
-            Case ITEM_TYPE_NONE
+            Case ItemType.None
                 ItemDescInfo = "N/A"
                 ItemDescType = "N/A"
-            Case ITEM_TYPE_WEAPON
+            Case ItemType.Weapon
                 ItemDescInfo = "Damage: " & Item(itemnum).Data2
                 ItemDescType = "Weapon"
-            Case ITEM_TYPE_ARMOR
+            Case ItemType.Armor
                 ItemDescInfo = "Defence: " & Item(itemnum).Data2
                 ItemDescType = "Armor"
-            Case ITEM_TYPE_HELMET
+            Case ItemType.Helmet
                 ItemDescInfo = "Defence: " & Item(itemnum).Data2
                 ItemDescType = "Helmet"
-            Case ITEM_TYPE_SHIELD
+            Case ItemType.Shield
                 ItemDescInfo = "Defence: " & Item(itemnum).Data2
                 ItemDescType = "Shield"
-            Case ITEM_TYPE_SHOES
+            Case ItemType.Shoes
                 ItemDescInfo = "Defence: " & Item(itemnum).Data2
                 ItemDescType = "Shoes"
-            Case ITEM_TYPE_GLOVES
+            Case ItemType.Gloves
                 ItemDescInfo = "Defence: " & Item(itemnum).Data2
                 ItemDescType = "Gloves"
-            Case ITEM_TYPE_POTIONADDHP
+            Case ItemType.PotionHp
                 ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
                 ItemDescType = "Potion"
-            Case ITEM_TYPE_POTIONADDMP
+            Case ItemType.PotionMp
                 ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
                 ItemDescType = "Potion"
-            Case ITEM_TYPE_POTIONADDSP
+            Case ItemType.PotionSp
                 ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-            Case ITEM_TYPE_POTIONSUBHP
+            Case ItemType.PoisonHp
                 ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-            Case ITEM_TYPE_POTIONSUBMP
+            Case ItemType.PoisonMp
                 ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-            Case ITEM_TYPE_POTIONSUBSP
+            Case ItemType.PoisonSp
                 ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-            Case ITEM_TYPE_KEY
+            Case ItemType.Key
                 ItemDescInfo = "N/A"
                 ItemDescType = "Key"
-            Case ITEM_TYPE_CURRENCY
+            Case ItemType.Currency
                 ItemDescInfo = "N/A"
                 ItemDescType = "Currency"
-            Case ITEM_TYPE_SKILL
+            Case ItemType.Skill
                 ItemDescInfo = "N/A"
                 ItemDescType = "Skill"
-            Case ITEM_TYPE_FURNITURE
+            Case ItemType.Furniture
                 ItemDescInfo = "Furniture"
         End Select
 
@@ -973,7 +973,7 @@ Continue1:
         ItemDescCost = Item(itemnum).Price & "g"
 
         ' If currency, exit out before all the other shit
-        If Item(itemnum).Type = ITEM_TYPE_CURRENCY Or Item(itemnum).Type = ITEM_TYPE_NONE Then
+        If Item(itemnum).Type = ItemType.Currency Or Item(itemnum).Type = ItemType.None Then
             ' Clear other labels
             ItemDescLevel = "N/A"
             ItemDescSpeed = "N/A"
@@ -991,7 +991,7 @@ Continue1:
         ItemDescLevel = Item(itemnum).LevelReq
 
         ' Exit out for everything else 'scept equipment
-        If Item(itemnum).Type < ITEM_TYPE_WEAPON Or Item(itemnum).Type > ITEM_TYPE_GLOVES Then
+        If Item(itemnum).Type < ItemType.Weapon Or Item(itemnum).Type > ItemType.Gloves Then
             ' Clear other labels
             ItemDescSpeed = "N/A"
 
@@ -1041,7 +1041,7 @@ Continue1:
             ItemDescSpr = "None"
         End If
 
-        If Item(itemnum).Type = ITEM_TYPE_WEAPON Then
+        If Item(itemnum).Type = ItemType.Weapon Then
             ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
         Else
             ItemDescSpeed = "N/A"

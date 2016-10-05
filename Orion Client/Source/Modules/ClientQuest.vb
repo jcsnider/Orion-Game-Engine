@@ -647,7 +647,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ITEM_TYPE_CURRENCY Or Item(itemNum).Stackable = 1 Then
+                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
                     HasItem = GetPlayerInvItemValue(Index, i)
                 Else
                     HasItem = 1

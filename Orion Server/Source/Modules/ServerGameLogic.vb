@@ -244,7 +244,7 @@
                 If (Map(MapNum).Tile(x, y).Type = TileType.Item) Then
 
                     ' Check to see if its a currency and if they set the value to 0 set it to 1 automatically
-                    If Item(Map(MapNum).Tile(x, y).Data1).Type = ITEM_TYPE_CURRENCY Or Item(Map(MapNum).Tile(x, y).Data1).Stackable = 1 And Map(MapNum).Tile(x, y).Data2 <= 0 Then
+                    If Item(Map(MapNum).Tile(x, y).Data1).Type = ItemType.Currency Or Item(Map(MapNum).Tile(x, y).Data1).Stackable = 1 And Map(MapNum).Tile(x, y).Data2 <= 0 Then
                         SpawnItem(Map(MapNum).Tile(x, y).Data1, 1, MapNum, x, y)
                     Else
                         SpawnItem(Map(MapNum).Tile(x, y).Data1, Map(MapNum).Tile(x, y).Data2, MapNum, x, y)
