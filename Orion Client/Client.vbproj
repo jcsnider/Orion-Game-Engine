@@ -2306,6 +2306,9 @@
     <Content Include="Licenses\SIL Open Font License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="SFML.Net.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Clear.png" />
     <None Include="Resources\Fill.png" />
     <None Include="Resources\Preview.png" />
