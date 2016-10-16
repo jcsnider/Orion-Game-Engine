@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>71445ca4-1713-4144-8cf5-2ab69788d6fc</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Bindings</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ByteBuffer.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
+  </ItemGroup>
+</Project>
