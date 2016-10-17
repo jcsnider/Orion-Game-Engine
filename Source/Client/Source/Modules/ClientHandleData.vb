@@ -2571,6 +2571,7 @@
 
         If Buffer.ReadInteger <> ServerPackets.SNews Then Exit Sub
 
+        GAME_NAME = Buffer.ReadString
         News = Buffer.ReadString
 
         UpdateNews = True

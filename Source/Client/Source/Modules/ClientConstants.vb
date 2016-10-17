@@ -63,7 +63,7 @@
     ' ********************************************************
 
     ' General constants
-    Public Const GAME_NAME As String = "Orion+"
+    Public GAME_NAME As String = "Orion+"
 
     ' Website
     Public Const GAME_WEBSITE As String = "http://ascensiongamedev.com/index.php"

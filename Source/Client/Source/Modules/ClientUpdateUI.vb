@@ -285,6 +285,8 @@
 
         If UpdateNews = True Then
             frmMenu.lblNews.Text = News
+            frmMenu.Text = GAME_NAME
+            frmMainGame.Text = GAME_NAME
             UpdateNews = False
         End If
 

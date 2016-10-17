@@ -2071,6 +2071,7 @@ Module ServerTCP
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SNews)
 
+        Buffer.WriteString(Trim(Options.Game_Name))
         Buffer.WriteString(Trim(GetFileContents(Application.StartupPath & "\news.txt")))
 
         SendDataTo(Index, Buffer.ToArray())
