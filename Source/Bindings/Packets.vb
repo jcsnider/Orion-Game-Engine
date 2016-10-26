@@ -272,6 +272,9 @@
         CRequestEditClasses
         CSaveClasses
 
+        'Editor login
+        CEditorLogin
+
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT
     End Enum

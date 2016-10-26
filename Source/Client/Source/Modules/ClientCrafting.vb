@@ -173,7 +173,7 @@ Public Module ClientCrafting
             End With
         Next
 
-        frmEditor_Shop.lstTradeItem.SelectedIndex = 0
+        frmEditor_Recipe.lstIngredients.SelectedIndex = 0
     End Sub
 #End Region
 

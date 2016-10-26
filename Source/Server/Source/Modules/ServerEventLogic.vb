@@ -2082,7 +2082,7 @@
 
     End Sub
 
-    Function FindNpcPath(MapNum As Integer, mapnpcnum As Integer, targetx As Integer, targety As Integer) As Integer
+    Function FindNpcPath(ByVal MapNum As Integer, ByVal mapnpcnum As Integer, ByVal targetx As Integer, ByVal targety As Integer) As Integer
         Dim tim As Integer, sX As Integer, sY As Integer, pos(,) As Integer, reachable As Boolean, j As Integer, LastSum As Integer, Sum As Integer, FX As Integer, FY As Integer, i As Integer
         Dim path() As Point, LastX As Integer, LastY As Integer, did As Boolean
 
@@ -2259,13 +2259,13 @@
 
         'Ok we got a path. Now, lets look at the first step and see what direction we should take.
         If path(1).X > LastX Then
-            FindNpcPath = Direction.RIGHT
+            FindNpcPath = Direction.Right
         ElseIf path(1).Y > LastY Then
-            FindNpcPath = Direction.DOWN
+            FindNpcPath = Direction.Down
         ElseIf path(1).Y < LastY Then
-            FindNpcPath = Direction.UP
+            FindNpcPath = Direction.Up
         ElseIf path(1).X < LastX Then
-            FindNpcPath = Direction.LEFT
+            FindNpcPath = Direction.Left
         End If
 
     End Function
@@ -2340,7 +2340,7 @@
 
     End Sub
 
-    Public Sub SpawnMapEventsFor(Index As Integer, MapNum As Integer)
+    Public Sub SpawnMapEventsFor(ByVal Index As Integer, ByVal MapNum As Integer)
         Dim i As Integer, z As Integer, spawncurrentevent As Boolean, p As Integer, compare As Integer
         Dim Buffer As ByteBuffer
 
@@ -2434,13 +2434,13 @@
                                 If Map(MapNum).Events(i).Pages(z).GraphicType = 1 Then
                                     Select Case Map(MapNum).Events(i).Pages(z).GraphicY
                                         Case 0
-                                            .Dir = Direction.DOWN
+                                            .Dir = Direction.Down
                                         Case 1
-                                            .Dir = Direction.LEFT
+                                            .Dir = Direction.Left
                                         Case 2
-                                            .Dir = Direction.RIGHT
+                                            .Dir = Direction.Right
                                         Case 3
-                                            .Dir = Direction.UP
+                                            .Dir = Direction.Up
                                     End Select
                                 Else
                                     .Dir = 0

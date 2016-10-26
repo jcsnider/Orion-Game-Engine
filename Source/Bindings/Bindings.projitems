@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ByteBuffer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Functions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
   </ItemGroup>
 </Project>

@@ -165,6 +165,7 @@ Module ClientGlobals
 
     ' Maximum classes
     Public Max_Classes As Byte
+
     Public Camera As Rectangle
     Public TileView As RECT
 

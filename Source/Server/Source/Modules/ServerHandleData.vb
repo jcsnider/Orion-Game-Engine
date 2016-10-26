@@ -136,6 +136,9 @@
         Packets.Add(ClientPackets.CRequestClasses, AddressOf Packet_RequestClasses)
         Packets.Add(ClientPackets.CRequestEditClasses, AddressOf Packet_RequestEditClasses)
         Packets.Add(ClientPackets.CSaveClasses, AddressOf Packet_SaveClasses)
+
+        'editor login
+        Packets.Add(ClientPackets.CEditorLogin, AddressOf Packet_EditorLogin)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -3676,6 +3679,76 @@
         LoadClasses()
 
         SendClassesToAll()
+    End Sub
+
+    Private Sub Packet_EditorLogin(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim Name As String, Password As String, Version As String
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CEditorLogin Then Exit Sub
+
+        If Not IsLoggedIn(index) Then
+
+            ' Get the data
+            Name = Buffer.ReadString
+            Password = Buffer.ReadString
+            Version = Buffer.ReadString
+
+            ' Check versions
+            If version <> Application.ProductVersion Then
+                AlertMsg(index, "Version outdated, please visit " & Options.Website)
+                Exit Sub
+            End If
+
+            If isShuttingDown Then
+                AlertMsg(index, "Server is either rebooting or being shutdown.")
+                Exit Sub
+            End If
+
+            If Len(Trim$(Name)) < 3 Or Len(Trim$(Password)) < 3 Then
+                AlertMsg(index, "Your name and password must be at least three characters in length")
+                Exit Sub
+            End If
+
+            If Not AccountExist(Name) Then
+                AlertMsg(index, "That account name does not exist.")
+                Exit Sub
+            End If
+
+            If Not PasswordOK(Name, Password) Then
+                AlertMsg(index, "Incorrect password.")
+                Exit Sub
+            End If
+
+            If IsMultiAccounts(Name) Then
+                AlertMsg(index, "Multiple account logins is not authorized.")
+                Exit Sub
+            End If
+
+            ' Load the player
+            LoadPlayer(index, Name)
+
+            If GetPlayerAccess(index) > AdminType.Player Then
+                SendLoginOk(index)
+                SendMapData(index, 1, True)
+                SendGameData(index)
+            Else
+                AlertMsg(index, "Multiple account logins is not authorized.")
+                Exit Sub
+            End If
+
+            ' Show the player up on the socket status
+            Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
+
+            TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
+
+        End If
+
+        NeedToUpDatePlayerList = True
+
+        Buffer = Nothing
     End Sub
 
 End Module

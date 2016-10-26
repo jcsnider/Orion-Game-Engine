@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{332AA7A4-686D-4808-BA75-55D705118314}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Editors.My.MyApplication</StartupObject>
+    <RootNamespace>Editors</RootNamespace>
+    <AssemblyName>Editors</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\Build\Editors\</OutputPath>
+    <DocumentationFile>Editors.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Editors\</OutputPath>
+    <DocumentationFile>Editors.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SFML.Net">
+      <HintPath>..\Client\SFML.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Source\Forms\frmEditor_Animation.Designer.vb">
+      <DependentUpon>frmEditor_Animation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Animation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Classes.Designer.vb">
+      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Classes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
+      <DependentUpon>frmEditor_Events.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Events.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_House.Designer.vb">
+      <DependentUpon>frmEditor_House.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_House.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Item.Designer.vb">
+      <DependentUpon>frmEditor_Item.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Item.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_MapEditor.Designer.vb">
+      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_NPC.Designer.vb">
+      <DependentUpon>frmEditor_NPC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_NPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Projectile.Designer.vb">
+      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Projectile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Quest.Designer.vb">
+      <DependentUpon>frmEditor_Quest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Quest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Recipe.Designer.vb">
+      <DependentUpon>frmEditor_Recipe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Recipe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Resource.Designer.vb">
+      <DependentUpon>frmEditor_Resource.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Resource.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Shop.Designer.vb">
+      <DependentUpon>frmEditor_Shop.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Shop.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Skill.Designer.vb">
+      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Source\Modules\EditorLoop.vb" />
+    <Compile Include="Source\Modules\EditorProjectiles.vb" />
+    <Compile Include="Source\Modules\EditorWeather.vb" />
+    <Compile Include="Source\Modules\EditorSound.vb" />
+    <Compile Include="Source\Modules\EditorText.vb" />
+    <Compile Include="Source\Modules\EditorHousing.vb" />
+    <Compile Include="Source\Modules\EditorEventSystem.vb" />
+    <Compile Include="Source\Modules\EditorAutoTiles.vb" />
+    <Compile Include="Source\Modules\EditorGraphics.vb" />
+    <Compile Include="Source\Modules\EditorDataBase.vb" />
+    <Compile Include="Source\Modules\EditorCrafting.vb" />
+    <Compile Include="Source\Modules\GameEditors.vb" />
+    <Compile Include="Source\Modules\EditorQuest.vb" />
+    <Compile Include="Source\Modules\EditorGlobals.vb" />
+    <Compile Include="Source\Modules\EditorHandleData.vb" />
+    <Compile Include="Source\Modules\EditorTypes.vb" />
+    <Compile Include="Source\Modules\EditorTCP.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Animation.resx">
+      <DependentUpon>frmEditor_Animation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Classes.resx">
+      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
+      <DependentUpon>frmEditor_Events.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_House.resx">
+      <DependentUpon>frmEditor_House.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Item.resx">
+      <DependentUpon>frmEditor_Item.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_MapEditor.resx">
+      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_NPC.resx">
+      <DependentUpon>frmEditor_NPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Projectile.resx">
+      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Quest.resx">
+      <DependentUpon>frmEditor_Quest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Recipe.resx">
+      <DependentUpon>frmEditor_Recipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Resource.resx">
+      <DependentUpon>frmEditor_Resource.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Shop.resx">
+      <DependentUpon>frmEditor_Shop.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Skill.resx">
+      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.vbproj">
+      <Project>{531b337c-bc02-44ed-90c2-c448fe5190a2}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
