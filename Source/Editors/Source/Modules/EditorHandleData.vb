@@ -159,9 +159,7 @@
 
         MsgBox(Msg, vbOKOnly, "OrionClient+ Editors")
 
-        frmLogin.tmrThread.Stop()
-
-        Application.Exit()
+        CloseEditor()
     End Sub
 
     Sub Packet_LoginOk(ByVal Data() As Byte)

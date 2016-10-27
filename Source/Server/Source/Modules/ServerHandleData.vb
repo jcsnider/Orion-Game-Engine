@@ -1369,7 +1369,13 @@
 
         Gettingmap = True
 
-        MapNum = GetPlayerMap(Index)
+        Dim ineditor As Integer = Buffer.ReadInteger
+        If ineditor > 0 Then
+            MapNum = ineditor
+        Else
+            MapNum = GetPlayerMap(Index)
+        End If
+
         i = Map(MapNum).Revision + 1
         ClearMap(MapNum)
 
@@ -3734,6 +3740,7 @@
                 SendLoginOk(index)
                 SendMapData(index, 1, True)
                 SendGameData(index)
+                SendMapNames(index)
             Else
                 AlertMsg(index, "Multiple account logins is not authorized.")
                 Exit Sub

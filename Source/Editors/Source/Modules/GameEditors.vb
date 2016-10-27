@@ -163,6 +163,12 @@ Module GameEditors
         frmEditor_MapEditor.scrlPictureY.Maximum = (frmEditor_MapEditor.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
         frmEditor_MapEditor.scrlPictureX.Maximum = (frmEditor_MapEditor.picBackSelect.Width \ PIC_X) \ 2
 
+        'set map names
+        For i = 1 To MAX_MAPS
+            frmEditor_MapEditor.cmbMapList.Items.Add(i & ": " & MapNames(i))
+        Next
+        frmEditor_MapEditor.cmbMapList.SelectedIndex = 0
+
         ' set shops for the shop attribute
         frmEditor_MapEditor.cmbShop.Items.Add("None")
         For i = 1 To MAX_SHOPS

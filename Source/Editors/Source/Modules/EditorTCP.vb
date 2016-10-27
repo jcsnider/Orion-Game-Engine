@@ -132,6 +132,9 @@ Module EditorTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
+        'set this to > 0 to make server know we are the editor, not client - ill change it when i ripped out editors from client
+        Buffer.WriteInteger(1)
+
         Buffer.WriteString(Trim$(Map.Name))
         Buffer.WriteString(Trim$(Map.Music))
         Buffer.WriteInteger(Map.Moral)
@@ -682,6 +685,14 @@ Module EditorTCP
             Buffer.WriteInteger(Classes(i).BaseExp)
         Next
 
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
+    Public Sub SendLeaveGame()
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ClientPackets.CQuit)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmLogin
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmLogin
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
@@ -44,7 +44,6 @@ Partial Class frmLogin
         Me.btnSkillEditor = New System.Windows.Forms.Button()
         Me.btnShopEditor = New System.Windows.Forms.Button()
         Me.btnAnimationEditor = New System.Windows.Forms.Button()
-        Me.tmrThread = New System.Windows.Forms.Timer(Me.components)
         Me.pnlAdmin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -242,10 +241,6 @@ Partial Class frmLogin
         Me.btnAnimationEditor.Text = "Animation Editor"
         Me.btnAnimationEditor.UseVisualStyleBackColor = True
         '
-        'tmrThread
-        '
-        Me.tmrThread.Enabled = True
-        '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -293,5 +288,4 @@ Partial Class frmLogin
     Friend WithEvents btnSkillEditor As Button
     Friend WithEvents btnShopEditor As Button
     Friend WithEvents btnAnimationEditor As Button
-    Friend WithEvents tmrThread As Timer
 End Class
