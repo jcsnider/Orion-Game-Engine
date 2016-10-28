@@ -101,7 +101,7 @@ Public Module EditorWeather
     Public Sub DrawWeather()
         Dim i As Integer, SpriteLeft As Integer
 
-        If InMapEditor Then Exit Sub
+        'If InMapEditor Then Exit Sub
 
         For i = 1 To MAX_WEATHER_PARTICLES
             If WeatherParticle(i).InUse Then
@@ -119,7 +119,7 @@ Public Module EditorWeather
     Public Sub DrawFog()
         Dim fogNum As Integer
 
-        If InMapEditor Then Exit Sub
+        'If InMapEditor Then Exit Sub
 
         fogNum = CurrentFog
         If fogNum <= 0 Or fogNum > NumFogs Then Exit Sub

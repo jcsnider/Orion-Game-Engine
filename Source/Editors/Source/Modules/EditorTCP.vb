@@ -697,4 +697,13 @@ Module EditorTCP
         Buffer = Nothing
     End Sub
 
+    Public Sub SendEditorRequestMap(ByVal MapNum As Integer)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ClientPackets.CEditorRequestMap)
+        Buffer.WriteInteger(MapNum)
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
 End Module

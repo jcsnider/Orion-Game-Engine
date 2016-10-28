@@ -506,6 +506,8 @@
 
         MusicFile = Trim$(Map.Music)
 
+        'InitMapEditor = True
+
     End Sub
 
     Private Sub Packet_MapNPCData(ByVal Data() As Byte)

@@ -28,10 +28,24 @@
         End If
     End Sub
 
+    Public Function isLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
+        If Len(Trim$(Username)) >= 3 Then
+            If Len(Trim$(Password)) >= 3 Then
+                isLoginLegal = True
+            Else
+                isLoginLegal = False
+            End If
+        Else
+            isLoginLegal = False
+        End If
+
+    End Function
+
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If IsConnected() Then
-            SendEditorLogin(txtLogin.Text, txtPassword.Text)
-            Exit Sub
+            If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
+                SendEditorLogin(txtLogin.Text, txtPassword.Text)
+            End If
         End If
     End Sub
 

@@ -139,6 +139,7 @@
 
         'editor login
         Packets.Add(ClientPackets.CEditorLogin, AddressOf Packet_EditorLogin)
+        Packets.Add(ClientPackets.CEditorRequestMap, AddressOf Packet_EditorRequestMap)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -3758,4 +3759,29 @@
         Buffer = Nothing
     End Sub
 
+    Private Sub Packet_EditorRequestMap(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim MapNum As Integer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CEditorRequestMap Then Exit Sub
+
+        MapNum = Buffer.ReadInteger
+
+        Buffer = Nothing
+
+        If GetPlayerAccess(index) > AdminType.Player Then
+            SendMapData(index, MapNum, True)
+            SendMapNames(index)
+
+            Buffer = New ByteBuffer
+            Buffer.WriteInteger(ServerPackets.SEditMap)
+            SendDataTo(index, Buffer.ToArray())
+            Buffer = Nothing
+        Else
+            AlertMsg(index, "Not Allowed!")
+        End If
+
+    End Sub
 End Module

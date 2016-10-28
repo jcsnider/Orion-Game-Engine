@@ -861,7 +861,7 @@ Module EditorGraphics
             EditorAnim_DrawAnim()
         End If
 
-        If InMapEditor Then
+        If InMapEditor And MapData = True Then
             ' blit lower tiles
             If NumTileSets > 0 Then
                 For X = TileView.left To TileView.right + 1

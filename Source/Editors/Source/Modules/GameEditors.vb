@@ -457,7 +457,6 @@ Module GameEditors
             TileSetImgsLoaded(i) = False
         Next
 
-        GameDestroyed = True
     End Sub
 
     Public Sub MapEditorSend()

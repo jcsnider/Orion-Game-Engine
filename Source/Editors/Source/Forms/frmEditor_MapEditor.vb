@@ -1,4 +1,24 @@
 ﻿Public Class frmEditor_MapEditor
+#Region "Form Code"
+    Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        cmbTileSets.SelectedIndex = 0
+        EditorMap_DrawTileset()
+        pnlAttributes.BringToFront()
+        pnlAttributes.Visible = False
+        pnlAttributes.Left = 8
+        'Me.Width = 525
+        optBlocked.Checked = True
+        tabpages.SelectedIndex = 0
+
+        scrlFog.Maximum = NumFogs
+
+        picScreen.Width = Map.MaxX * PIC_X
+        picScreen.Height = Map.MaxY * PIC_Y
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
+
+    End Sub
+
     Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -23,15 +43,37 @@
         MapEditorTileScroll()
     End Sub
 
-    Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs)
-        MapEditorSend()
-        GettingMap = True
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
+            cmbTileSets.SelectedIndex = 0
+        End If
+
+        Map.tileset = cmbTileSets.SelectedIndex + 1
+
+        EditorTileSelStart = New Point(0, 0)
+        EditorTileSelEnd = New Point(1, 1)
+
+        EditorMap_DrawTileset()
+
+        pnlBack.Refresh()
+
+        picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
+        picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
+
+
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs)
-        MapEditorCancel()
+    Private Sub cmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
+        If cmbAutoTile.SelectedIndex = 0 Then
+            EditorTileWidth = 1
+            EditorTileHeight = 1
+        End If
     End Sub
+#End Region
 
+#Region "Attributes"
     Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
@@ -50,24 +92,6 @@
         EditorWarpY = scrlMapWarpY.Value
         pnlAttributes.Visible = False
         fraMapWarp.Visible = False
-    End Sub
-
-    Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        cmbTileSets.SelectedIndex = 0
-        EditorMap_DrawTileset()
-        pnlAttributes.BringToFront()
-        pnlAttributes.Visible = False
-        pnlAttributes.Left = 8
-        'Me.Width = 525
-        optBlocked.Checked = True
-        tabpages.SelectedIndex = 0
-
-        scrlFog.Maximum = NumFogs
-
-        picScreen.Width = Map.MaxX * PIC_X
-        picScreen.Height = Map.MaxY * PIC_Y
-
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -295,6 +319,197 @@
         fraBuyHouse.Visible = False
     End Sub
 
+
+#End Region
+
+#Region "Toolbar"
+    Private Sub tsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
+        MapEditorSend()
+        GettingMap = True
+    End Sub
+
+    Private Sub tsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
+        MapEditorCancel()
+    End Sub
+
+    Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
+        MapGrid = Not MapGrid
+    End Sub
+
+    Private Sub tsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
+        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+    End Sub
+
+    Private Sub tsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
+        MapEditorClearLayer()
+    End Sub
+
+#End Region
+
+#Region "Npc's"
+    Private Sub lstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
+        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
+    End Sub
+
+    Private Sub cmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
+        If lstMapNpc.SelectedIndex > -1 Then
+            If cmbNpcList.SelectedIndex > 0 Then
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
+            Else
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
+            End If
+
+        End If
+    End Sub
+#End Region
+
+#Region "PicScreen"
+    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
+
+        MapEditorMouseDown(e.Button, e.X, e.Y, False)
+
+    End Sub
+
+    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picScreen.Paint
+        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
+        Exit Sub
+    End Sub
+
+    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseMove
+
+        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
+        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+
+        CurMouseX = e.Location.X
+        CurMouseY = e.Location.Y
+
+        If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
+            MapEditorMouseDown(e.Button, e.X, e.Y)
+        End If
+
+    End Sub
+
+    Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseUp
+
+        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
+        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+
+    End Sub
+
+#End Region
+
+#Region "Map Settings"
+    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+        Map.Name = Trim$(txtName.Text)
+    End Sub
+
+    Private Sub cmbMoral_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoral.SelectedIndexChanged
+        Map.Moral = cmbMoral.SelectedIndex
+    End Sub
+
+    Private Sub txtLeft_TextChanged(sender As Object, e As EventArgs) Handles txtLeft.TextChanged
+        Map.Left = Val(txtLeft.Text)
+    End Sub
+
+    Private Sub txtRight_TextChanged(sender As Object, e As EventArgs) Handles txtRight.TextChanged
+        Map.Right = Val(txtRight.Text)
+    End Sub
+
+    Private Sub txtUp_TextChanged(sender As Object, e As EventArgs) Handles txtUp.TextChanged
+        Map.Up = Val(txtUp.Text)
+    End Sub
+
+    Private Sub txtDown_TextChanged(sender As Object, e As EventArgs) Handles txtDown.TextChanged
+        Map.Down = Val(txtDown.Text)
+    End Sub
+
+    Private Sub txtBootMap_TextChanged(sender As Object, e As EventArgs) Handles txtBootMap.TextChanged
+        Map.BootMap = Val(txtBootMap.Text)
+    End Sub
+
+    Private Sub txtBootX_TextChanged(sender As Object, e As EventArgs) Handles txtBootX.TextChanged
+        Map.BootX = Val(txtBootX.Text)
+    End Sub
+
+    Private Sub txtBootY_TextChanged(sender As Object, e As EventArgs) Handles txtBootY.TextChanged
+        Map.BootY = Val(txtBootY.Text)
+    End Sub
+
+    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
+        If PreviewPlayer Is Nothing Then
+            If lstMusic.SelectedIndex >= 0 Then
+                StopMusic()
+                PlayPreview(lstMusic.Items(lstMusic.SelectedIndex).ToString)
+            End If
+        Else
+            StopPreview()
+            PlayMusic(Map.Music)
+        End If
+    End Sub
+
+    Private Sub cmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
+        Map.WeatherType = cmbWeather.SelectedIndex
+        CurrentWeather = cmbWeather.SelectedIndex
+    End Sub
+
+    Private Sub scrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
+        Map.FogIndex = scrlFog.Value
+        lblFogIndex.Text = "Fog: " & scrlFog.Value
+        CurrentFog = scrlFog.Value
+    End Sub
+
+    Private Sub scrlIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntensity.Scroll
+        Map.WeatherIntensity = scrlIntensity.Value
+        lblIntensity.Text = "Intensity: " & scrlIntensity.Value
+        CurrentWeatherIntensity = scrlIntensity.Value
+    End Sub
+
+    Private Sub scrlFogSpeed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogSpeed.Scroll
+        Map.FogSpeed = scrlFogSpeed.Value
+        lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
+        CurrentFogSpeed = scrlFogSpeed.Value
+    End Sub
+
+    Private Sub scrlFogAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogAlpha.Scroll
+        Map.FogAlpha = scrlFogAlpha.Value
+        lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
+        CurrentFogOpacity = scrlFogAlpha.Value
+    End Sub
+
+    Private Sub chkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
+        If chkUseTint.Checked = True Then
+            Map.HasMapTint = 1
+        Else
+            Map.HasMapTint = 0
+        End If
+    End Sub
+
+    Private Sub scrlMapRed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapRed.Scroll
+        Map.MapTintR = scrlMapRed.Value
+        lblMapRed.Text = "Red: " & scrlMapRed.Value
+        CurrentTintR = scrlMapRed.Value
+    End Sub
+
+    Private Sub scrlMapGreen_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapGreen.Scroll
+        Map.MapTintG = scrlMapGreen.Value
+        lblMapGreen.Text = "Green: " & scrlMapGreen.Value
+        CurrentTintG = scrlMapGreen.Value
+    End Sub
+
+    Private Sub scrlMapBlue_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBlue.Scroll
+        Map.MapTintB = scrlMapBlue.Value
+        lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
+        CurrentTintB = scrlMapBlue.Value
+    End Sub
+
+    Private Sub scrlMapAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapAlpha.Scroll
+        Map.MapTintA = scrlMapAlpha.Value
+        lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
+        CurrentTintA = scrlMapAlpha.Value
+    End Sub
+
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         Dim X As Integer, x2 As Integer
         Dim Y As Integer, y2 As Integer
@@ -308,20 +523,12 @@
         If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
 
         With Map
-            .Name = Trim$(txtName.Text)
+
             If lstMusic.SelectedIndex >= 0 Then
                 .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
             Else
                 .Music = vbNullString
             End If
-            .Up = Val(txtUp.Text)
-            .Down = Val(txtDown.Text)
-            .Left = Val(txtLeft.Text)
-            .Right = Val(txtRight.Text)
-            .Moral = cmbMoral.SelectedIndex
-            .BootMap = Val(txtBootMap.Text)
-            .BootX = Val(txtBootX.Text)
-            .BootY = Val(txtBootY.Text)
 
             ' set the data before changing it
             tempArr = Map.Tile.Clone
@@ -357,170 +564,9 @@
         End With
     End Sub
 
-#Region "Toolbar"
-    Private Sub tsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
-        MapEditorSend()
-        GettingMap = True
+    Private Sub btnLoadMap_Click(sender As Object, e As EventArgs) Handles btnLoadMap.Click
+        SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
     End Sub
-
-    Private Sub tsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
-        MapEditorCancel()
-    End Sub
-
 
 #End Region
-
-    Private Sub lstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
-        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
-    End Sub
-
-    Private Sub cmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If lstMapNpc.SelectedIndex > -1 Then
-            If cmbNpcList.SelectedIndex > 0 Then
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
-            Else
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
-            End If
-
-        End If
-    End Sub
-
-    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
-        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
-            cmbTileSets.SelectedIndex = 0
-        End If
-
-        Map.tileset = cmbTileSets.SelectedIndex + 1
-
-        EditorTileSelStart = New Point(0, 0)
-        EditorTileSelEnd = New Point(1, 1)
-
-        EditorMap_DrawTileset()
-
-        pnlBack.Refresh()
-
-        picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
-        picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
-
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
-    End Sub
-
-    Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
-        MapGrid = Not MapGrid
-    End Sub
-
-    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
-        If PreviewPlayer Is Nothing Then
-            If lstMusic.SelectedIndex >= 0 Then
-                StopMusic()
-                PlayPreview(lstMusic.Items(lstMusic.SelectedIndex).ToString)
-            End If
-        Else
-            StopPreview()
-            PlayMusic(Map.Music)
-        End If
-    End Sub
-
-    Private Sub cmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
-        Map.WeatherType = cmbWeather.SelectedIndex
-    End Sub
-
-    Private Sub scrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
-        Map.FogIndex = scrlFog.Value
-        lblFogIndex.Text = "Fog: " & scrlFog.Value
-    End Sub
-
-    Private Sub scrlIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntensity.Scroll
-        Map.WeatherIntensity = scrlIntensity.Value
-        lblIntensity.Text = "Intensity: " & scrlIntensity.Value
-    End Sub
-
-    Private Sub scrlFogSpeed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogSpeed.Scroll
-        Map.FogSpeed = scrlFogSpeed.Value
-        lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
-    End Sub
-
-    Private Sub scrlFogAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogAlpha.Scroll
-        Map.FogAlpha = scrlFogAlpha.Value
-        lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
-    End Sub
-
-    Private Sub chkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
-        If chkUseTint.Checked = True Then
-            Map.HasMapTint = 1
-        Else
-            Map.HasMapTint = 0
-        End If
-    End Sub
-
-    Private Sub scrlMapRed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapRed.Scroll
-        Map.MapTintR = scrlMapRed.Value
-        lblMapRed.Text = "Red: " & scrlMapRed.Value
-    End Sub
-
-    Private Sub scrlMapGreen_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapGreen.Scroll
-        Map.MapTintG = scrlMapGreen.Value
-        lblMapGreen.Text = "Green: " & scrlMapGreen.Value
-    End Sub
-
-    Private Sub scrlMapBlue_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBlue.Scroll
-        Map.MapTintB = scrlMapBlue.Value
-        lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
-    End Sub
-
-    Private Sub scrlMapAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapAlpha.Scroll
-        Map.MapTintA = scrlMapAlpha.Value
-        lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
-    End Sub
-
-    Private Sub cmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
-        If cmbAutoTile.SelectedIndex = 0 Then
-            EditorTileWidth = 1
-            EditorTileHeight = 1
-        End If
-    End Sub
-
-    Private Sub tsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
-        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
-    End Sub
-
-    Private Sub tsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
-        MapEditorClearLayer()
-    End Sub
-
-    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
-
-        MapEditorMouseDown(e.Button, e.X, e.Y, False)
-
-    End Sub
-
-    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picScreen.Paint
-        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
-        Exit Sub
-    End Sub
-
-    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseMove
-
-        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
-        CurMouseX = e.Location.X
-        CurMouseY = e.Location.Y
-
-        If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
-                MapEditorMouseDown(e.Button, e.X, e.Y)
-            End If
-
-    End Sub
-
-    Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseUp
-
-        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
-    End Sub
 End Class

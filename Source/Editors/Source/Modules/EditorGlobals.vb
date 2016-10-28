@@ -22,6 +22,10 @@
     Public Resource_Index As Integer
     Public Resources_Init As Boolean
 
+    ' fog
+    Public fogOffsetX As Integer
+    Public fogOffsetY As Integer
+
     Public CurrentWeather As Integer
     Public CurrentWeatherIntensity As Integer
     Public CurrentFog As Integer
