@@ -124,7 +124,7 @@ Module EditorTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendMap()
+    Public Sub SendEditorMap()
         Dim X As Integer
         Dim Y As Integer
         Dim i As Integer
@@ -132,8 +132,7 @@ Module EditorTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        'set this to > 0 to make server know we are the editor, not client - ill change it when i ripped out editors from client
-        Buffer.WriteInteger(1)
+        Buffer.WriteInteger(Map.MapNum)
 
         Buffer.WriteString(Trim$(Map.Name))
         Buffer.WriteString(Trim$(Map.Music))
@@ -291,7 +290,7 @@ Module EditorTCP
         data = Buffer.ToArray
 
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CMapData)
+        Buffer.WriteInteger(ClientPackets.CEditorMapData)
         Buffer.WriteBytes(Compress(data))
 
         SendData(Buffer.ToArray())

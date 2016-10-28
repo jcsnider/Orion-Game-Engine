@@ -37,7 +37,9 @@
         Packets.Add(ClientPackets.CBanList, AddressOf Packet_Banlist)
         Packets.Add(ClientPackets.CBanDestroy, AddressOf Packet_DestroyBans)
         Packets.Add(ClientPackets.CBanPlayer, AddressOf Packet_BanPlayer)
+
         Packets.Add(ClientPackets.CRequestEditMap, AddressOf Packet_EditMapRequest)
+
         Packets.Add(ClientPackets.CRequestEditItem, AddressOf Packet_EditItem)
         Packets.Add(ClientPackets.CSaveItem, AddressOf Packet_SaveItem)
         Packets.Add(ClientPackets.CRequestEditNpc, AddressOf Packet_EditNpc)
@@ -140,6 +142,7 @@
         'editor login
         Packets.Add(ClientPackets.CEditorLogin, AddressOf Packet_EditorLogin)
         Packets.Add(ClientPackets.CEditorRequestMap, AddressOf Packet_EditorRequestMap)
+        Packets.Add(ClientPackets.CEditorMapData, AddressOf Packet_EditorMapData)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -1370,12 +1373,7 @@
 
         Gettingmap = True
 
-        Dim ineditor As Integer = Buffer.ReadInteger
-        If ineditor > 0 Then
-            MapNum = ineditor
-        Else
-            MapNum = GetPlayerMap(Index)
-        End If
+        MapNum = GetPlayerMap(Index)
 
         i = Map(MapNum).Revision + 1
         ClearMap(MapNum)
@@ -1599,7 +1597,7 @@
                 ' Send map
                 SendMapData(i, MapNum, True)
             End If
-        Next i
+        Next
 
         Buffer = Nothing
     End Sub
@@ -3783,5 +3781,254 @@
             AlertMsg(index, "Not Allowed!")
         End If
 
+    End Sub
+
+    Sub Packet_EditorMapData(ByVal Index As Integer, ByVal Data() As Byte)
+        Dim i As Integer
+        Dim MapNum As Integer
+        Dim x As Integer
+        Dim y As Integer
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> ClientPackets.CEditorMapData Then Exit Sub
+
+        Data = Buffer.ReadBytes(Data.Length - 4)
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Decompress(Data))
+
+        ' Prevent hacking
+        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
+
+        Gettingmap = True
+
+        MapNum = Buffer.ReadInteger
+
+        i = Map(MapNum).Revision + 1
+        ClearMap(MapNum)
+
+        Map(MapNum).Name = Buffer.ReadString
+        Map(MapNum).Music = Buffer.ReadString
+        Map(MapNum).Revision = i
+        Map(MapNum).Moral = Buffer.ReadInteger
+        Map(MapNum).Tileset = Buffer.ReadInteger
+        Map(MapNum).Up = Buffer.ReadInteger
+        Map(MapNum).Down = Buffer.ReadInteger
+        Map(MapNum).Left = Buffer.ReadInteger
+        Map(MapNum).Right = Buffer.ReadInteger
+        Map(MapNum).BootMap = Buffer.ReadInteger
+        Map(MapNum).BootX = Buffer.ReadInteger
+        Map(MapNum).BootY = Buffer.ReadInteger
+        Map(MapNum).MaxX = Buffer.ReadInteger
+        Map(MapNum).MaxY = Buffer.ReadInteger
+        Map(MapNum).WeatherType = Buffer.ReadInteger
+        Map(MapNum).FogIndex = Buffer.ReadInteger
+        Map(MapNum).WeatherIntensity = Buffer.ReadInteger
+        Map(MapNum).FogAlpha = Buffer.ReadInteger
+        Map(MapNum).FogSpeed = Buffer.ReadInteger
+        Map(MapNum).HasMapTint = Buffer.ReadInteger
+        Map(MapNum).MapTintR = Buffer.ReadInteger
+        Map(MapNum).MapTintG = Buffer.ReadInteger
+        Map(MapNum).MapTintB = Buffer.ReadInteger
+        Map(MapNum).MapTintA = Buffer.ReadInteger
+
+        ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
+
+        For x = 1 To MAX_MAP_NPCS
+            ClearMapNpc(x, MapNum)
+            Map(MapNum).Npc(x) = Buffer.ReadInteger
+        Next
+
+        With Map(MapNum)
+            For x = 0 To .MaxX
+                For y = 0 To .MaxY
+                    .Tile(x, y).Data1 = Buffer.ReadInteger
+                    .Tile(x, y).Data2 = Buffer.ReadInteger
+                    .Tile(x, y).Data3 = Buffer.ReadInteger
+                    .Tile(x, y).DirBlock = Buffer.ReadInteger
+                    ReDim .Tile(x, y).Layer(0 To MapLayer.Count - 1)
+                    For i = 0 To MapLayer.Count - 1
+                        .Tile(x, y).Layer(i).Tileset = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).x = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).y = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).AutoTile = Buffer.ReadInteger
+                    Next
+                    .Tile(x, y).Type = Buffer.ReadInteger
+                Next
+            Next
+
+
+        End With
+
+        'Event Data!
+        Map(MapNum).EventCount = Buffer.ReadInteger
+
+        If Map(MapNum).EventCount > 0 Then
+            ReDim Map(MapNum).Events(0 To Map(MapNum).EventCount)
+            For i = 1 To Map(MapNum).EventCount
+                With Map(MapNum).Events(i)
+                    .Name = Buffer.ReadString
+                    .Globals = Buffer.ReadInteger
+                    .X = Buffer.ReadInteger
+                    .Y = Buffer.ReadInteger
+                    .PageCount = Buffer.ReadInteger
+                End With
+                If Map(MapNum).Events(i).PageCount > 0 Then
+                    ReDim Map(MapNum).Events(i).Pages(0 To Map(MapNum).Events(i).PageCount)
+                    ReDim TempPlayer(i).EventMap.EventPages(0 To Map(MapNum).Events(i).PageCount)
+                    For x = 1 To Map(MapNum).Events(i).PageCount
+                        With Map(MapNum).Events(i).Pages(x)
+                            .chkVariable = Buffer.ReadInteger
+                            .VariableIndex = Buffer.ReadInteger
+                            .VariableCondition = Buffer.ReadInteger
+                            .VariableCompare = Buffer.ReadInteger
+
+                            Map(MapNum).Events(i).Pages(x).chkSwitch = Buffer.ReadInteger
+                            Map(MapNum).Events(i).Pages(x).SwitchIndex = Buffer.ReadInteger
+                            .SwitchCompare = Buffer.ReadInteger
+
+                            .chkHasItem = Buffer.ReadInteger
+                            .HasItemIndex = Buffer.ReadInteger
+                            .HasItemAmount = Buffer.ReadInteger
+
+                            .chkSelfSwitch = Buffer.ReadInteger
+                            .SelfSwitchIndex = Buffer.ReadInteger
+                            .SelfSwitchCompare = Buffer.ReadInteger
+
+                            .GraphicType = Buffer.ReadInteger
+                            .Graphic = Buffer.ReadInteger
+                            .GraphicX = Buffer.ReadInteger
+                            .GraphicY = Buffer.ReadInteger
+                            .GraphicX2 = Buffer.ReadInteger
+                            .GraphicY2 = Buffer.ReadInteger
+
+                            .MoveType = Buffer.ReadInteger
+                            .MoveSpeed = Buffer.ReadInteger
+                            .MoveFreq = Buffer.ReadInteger
+
+                            .MoveRouteCount = Buffer.ReadInteger
+
+                            .IgnoreMoveRoute = Buffer.ReadInteger
+                            .RepeatMoveRoute = Buffer.ReadInteger
+
+                            If .MoveRouteCount > 0 Then
+                                ReDim Map(MapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                For y = 1 To .MoveRouteCount
+                                    .MoveRoute(y).Index = Buffer.ReadInteger
+                                    .MoveRoute(y).Data1 = Buffer.ReadInteger
+                                    .MoveRoute(y).Data2 = Buffer.ReadInteger
+                                    .MoveRoute(y).Data3 = Buffer.ReadInteger
+                                    .MoveRoute(y).Data4 = Buffer.ReadInteger
+                                    .MoveRoute(y).Data5 = Buffer.ReadInteger
+                                    .MoveRoute(y).Data6 = Buffer.ReadInteger
+                                Next
+                            End If
+
+                            .WalkAnim = Buffer.ReadInteger
+                            .DirFix = Buffer.ReadInteger
+                            .WalkThrough = Buffer.ReadInteger
+                            .ShowName = Buffer.ReadInteger
+                            .Trigger = Buffer.ReadInteger
+                            .CommandListCount = Buffer.ReadInteger
+
+                            .Position = Buffer.ReadInteger
+                            .QuestNum = Buffer.ReadInteger
+
+                            .chkPlayerGender = Buffer.ReadInteger
+                        End With
+
+                        If Map(MapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                            ReDim Map(MapNum).Events(i).Pages(x).CommandList(0 To Map(MapNum).Events(i).Pages(x).CommandListCount)
+                            For y = 1 To Map(MapNum).Events(i).Pages(x).CommandListCount
+                                Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount = Buffer.ReadInteger
+                                Map(MapNum).Events(i).Pages(x).CommandList(y).ParentList = Buffer.ReadInteger
+                                If Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                    ReDim Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(0 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                    For z = 1 To Map(MapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                        With Map(MapNum).Events(i).Pages(x).CommandList(y).Commands(z)
+                                            .Index = Buffer.ReadInteger
+                                            .Text1 = Buffer.ReadString
+                                            .Text2 = Buffer.ReadString
+                                            .Text3 = Buffer.ReadString
+                                            .Text4 = Buffer.ReadString
+                                            .Text5 = Buffer.ReadString
+                                            .Data1 = Buffer.ReadInteger
+                                            .Data2 = Buffer.ReadInteger
+                                            .Data3 = Buffer.ReadInteger
+                                            .Data4 = Buffer.ReadInteger
+                                            .Data5 = Buffer.ReadInteger
+                                            .Data6 = Buffer.ReadInteger
+                                            .ConditionalBranch.CommandList = Buffer.ReadInteger
+                                            .ConditionalBranch.Condition = Buffer.ReadInteger
+                                            .ConditionalBranch.Data1 = Buffer.ReadInteger
+                                            .ConditionalBranch.Data2 = Buffer.ReadInteger
+                                            .ConditionalBranch.Data3 = Buffer.ReadInteger
+                                            .ConditionalBranch.ElseCommandList = Buffer.ReadInteger
+                                            .MoveRouteCount = Buffer.ReadInteger
+                                            Dim tmpcount As Integer = .MoveRouteCount
+                                            If tmpcount > 0 Then
+                                                ReDim Preserve .MoveRoute(tmpcount)
+                                                For w = 1 To tmpcount
+                                                    .MoveRoute(w).Index = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data1 = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data2 = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data3 = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data4 = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data5 = Buffer.ReadInteger
+                                                    .MoveRoute(w).Data6 = Buffer.ReadInteger
+                                                Next
+                                            End If
+                                        End With
+                                    Next
+                                End If
+                            Next
+                        End If
+                    Next
+                End If
+            Next
+        End If
+        'End Event Data
+
+        ' Save the map
+        SaveMap(MapNum)
+
+        Gettingmap = False
+
+        SendMapNpcsToMap(MapNum)
+        SpawnMapNpcs(MapNum)
+        SpawnGlobalEvents(MapNum)
+
+        For i = 1 To MAX_PLAYERS
+            If IsPlaying(i) Then
+                If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
+                    SpawnMapEventsFor(i, MapNum)
+                End If
+            End If
+        Next
+
+        ' Clear out it all
+        For i = 1 To MAX_MAP_ITEMS
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).x, MapItem(GetPlayerMap(Index), i).y)
+            ClearMapItem(i, GetPlayerMap(Index))
+        Next
+
+        ' Respawn
+        SpawnMapItems(MapNum)
+
+
+        ClearTempTile(MapNum)
+        CacheResources(MapNum)
+
+        ' Refresh map for everyone online
+        For i = 1 To MAX_PLAYERS
+            If IsPlaying(i) And GetPlayerMap(i) = MapNum Then
+                PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
+                ' Send map
+                SendMapData(i, MapNum, True)
+            End If
+        Next
+
+        Buffer = Nothing
     End Sub
 End Module

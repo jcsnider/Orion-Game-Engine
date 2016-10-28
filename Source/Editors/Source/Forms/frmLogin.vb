@@ -13,7 +13,7 @@
             lblConnectionStatus.ForeColor = Color.Green
             lblConnectionStatus.Text = "Online..."
 
-            tmrConnect.Stop()
+            'tmrConnect.Stop()
         Else
             lblConnectionStatus.ForeColor = Color.Red
             i = i + 1

@@ -57,6 +57,7 @@
     End Structure
 
     Public Structure MapRec
+        Dim MapNum As Integer
         Dim Name As String
         Dim Music As String
 

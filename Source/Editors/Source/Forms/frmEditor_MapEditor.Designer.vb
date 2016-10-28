@@ -127,7 +127,7 @@ Partial Class frmEditor_MapEditor
         Me.btnTrap = New System.Windows.Forms.Button()
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pnlBack2 = New System.Windows.Forms.Panel()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cmbMapList = New System.Windows.Forms.ComboBox()
         Me.btnLoadMap = New System.Windows.Forms.Button()
@@ -201,7 +201,7 @@ Partial Class frmEditor_MapEditor
         Me.fraMapItem.SuspendLayout()
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraTrap.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.pnlBack2.SuspendLayout()
         Me.pnlSettings.SuspendLayout()
         Me.grpSettings.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -311,6 +311,7 @@ Partial Class frmEditor_MapEditor
         '
         'pnlBack
         '
+        Me.pnlBack.BackColor = System.Drawing.Color.Black
         Me.pnlBack.Controls.Add(Me.picBackSelect)
         Me.pnlBack.Location = New System.Drawing.Point(6, 8)
         Me.pnlBack.Name = "pnlBack"
@@ -322,7 +323,7 @@ Partial Class frmEditor_MapEditor
         Me.picBackSelect.BackColor = System.Drawing.Color.Black
         Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
         Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(334, 397)
+        Me.picBackSelect.Size = New System.Drawing.Size(267, 397)
         Me.picBackSelect.TabIndex = 1
         Me.picBackSelect.TabStop = False
         '
@@ -1237,14 +1238,15 @@ Partial Class frmEditor_MapEditor
         Me.lblTrap.TabIndex = 40
         Me.lblTrap.Text = "Amount: 0"
         '
-        'Panel1
+        'pnlBack2
         '
-        Me.Panel1.AutoScroll = True
-        Me.Panel1.Controls.Add(Me.picScreen)
-        Me.Panel1.Location = New System.Drawing.Point(324, 31)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(727, 550)
-        Me.Panel1.TabIndex = 18
+        Me.pnlBack2.AutoScroll = True
+        Me.pnlBack2.BackColor = System.Drawing.Color.Black
+        Me.pnlBack2.Controls.Add(Me.picScreen)
+        Me.pnlBack2.Location = New System.Drawing.Point(324, 31)
+        Me.pnlBack2.Name = "pnlBack2"
+        Me.pnlBack2.Size = New System.Drawing.Size(727, 550)
+        Me.pnlBack2.TabIndex = 18
         '
         'Label15
         '
@@ -1718,7 +1720,7 @@ Partial Class frmEditor_MapEditor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1285, 583)
         Me.ControlBox = False
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.pnlBack2)
         Me.Controls.Add(Me.pnlSettings)
         Me.Controls.Add(Me.btnLoadMap)
         Me.Controls.Add(Me.cmbMapList)
@@ -1768,7 +1770,7 @@ Partial Class frmEditor_MapEditor
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraTrap.ResumeLayout(False)
         Me.fraTrap.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
+        Me.pnlBack2.ResumeLayout(False)
         Me.pnlSettings.ResumeLayout(False)
         Me.grpSettings.ResumeLayout(False)
         Me.grpSettings.PerformLayout()
@@ -1891,7 +1893,7 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents btnTrap As Button
     Friend WithEvents scrlTrap As HScrollBar
     Friend WithEvents lblTrap As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents pnlBack2 As Panel
     Friend WithEvents Label15 As Label
     Friend WithEvents cmbMapList As ComboBox
     Friend WithEvents btnLoadMap As Button

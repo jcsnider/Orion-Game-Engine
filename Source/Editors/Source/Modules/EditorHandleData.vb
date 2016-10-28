@@ -252,7 +252,7 @@
 
     Private Sub Packet_MapData(ByVal Data() As Byte)
         Dim X As Integer, Y As Integer, i As Integer
-        Dim MapNum As Integer, MusicFile As String
+        Dim MusicFile As String
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -268,7 +268,7 @@
         SyncLock MapLock
             If Buffer.ReadInteger = 1 Then
 
-                MapNum = Buffer.ReadInteger
+                Map.MapNum = Buffer.ReadInteger
                 Map.Name = Trim(Buffer.ReadString)
                 Map.Music = Trim(Buffer.ReadString)
                 Map.Revision = Buffer.ReadInteger
@@ -507,7 +507,9 @@
         MusicFile = Trim$(Map.Music)
 
         'InitMapEditor = True
+        InMapEditor = True
 
+        GettingMap = False
     End Sub
 
     Private Sub Packet_MapNPCData(ByVal Data() As Byte)

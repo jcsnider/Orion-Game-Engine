@@ -218,6 +218,7 @@ Module ClientDataBase
 
     Sub ClearMap()
         SyncLock MapLock
+            Map.MapNum = 0
             Map.Name = vbNullString
             Map.tileset = 1
             Map.MaxX = SCREEN_MAPX

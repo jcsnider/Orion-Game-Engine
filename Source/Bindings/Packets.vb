@@ -275,6 +275,7 @@
         'Editor login
         CEditorLogin
         CEditorRequestMap
+        CEditorMapData
 
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT

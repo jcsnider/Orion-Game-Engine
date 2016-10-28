@@ -136,6 +136,11 @@ Module GameEditors
 
         frmEditor_MapEditor.tabpages.SelectedIndex = 0
 
+        frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
+        frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_MapEditor.picScreen.Width, frmEditor_MapEditor.picScreen.Height)))
+
         ' show the form
         frmEditor_MapEditor.Visible = True
 
@@ -164,10 +169,18 @@ Module GameEditors
         frmEditor_MapEditor.scrlPictureX.Maximum = (frmEditor_MapEditor.picBackSelect.Width \ PIC_X) \ 2
 
         'set map names
+        frmEditor_MapEditor.cmbMapList.Items.Clear()
+
         For i = 1 To MAX_MAPS
             frmEditor_MapEditor.cmbMapList.Items.Add(i & ": " & MapNames(i))
         Next
-        frmEditor_MapEditor.cmbMapList.SelectedIndex = 0
+
+        If Map.MapNum > 0 Then
+            frmEditor_MapEditor.cmbMapList.SelectedIndex = Map.MapNum - 1
+        Else
+            frmEditor_MapEditor.cmbMapList.SelectedIndex = 0
+        End If
+
 
         ' set shops for the shop attribute
         frmEditor_MapEditor.cmbShop.Items.Add("None")
@@ -188,6 +201,8 @@ Module GameEditors
         frmEditor_MapEditor.cmbLayers.SelectedIndex = 0
 
         InitMapProperties = True
+
+        If MapData = True Then GettingMap = False
 
     End Sub
 
@@ -460,7 +475,7 @@ Module GameEditors
     End Sub
 
     Public Sub MapEditorSend()
-        SendMap()
+        SendEditorMap()
         InMapEditor = False
         frmEditor_MapEditor.Visible = False
         GettingMap = True

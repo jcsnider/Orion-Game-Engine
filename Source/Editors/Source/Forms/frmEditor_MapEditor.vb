@@ -35,6 +35,10 @@
         'Overrides the paint sub
     End Sub
 
+    Private Sub pnlBack2_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack2.Paint
+        'Overrides the paint sub
+    End Sub
+
     Private Sub scrlPictureY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureY.Scroll
         MapEditorTileScroll()
     End Sub
@@ -325,7 +329,6 @@
 #Region "Toolbar"
     Private Sub tsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
         MapEditorSend()
-        GettingMap = True
     End Sub
 
     Private Sub tsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
@@ -547,9 +550,9 @@
 
             For X = 0 To .MaxX
                 For Y = 0 To .MaxY
-                    ReDim .Tile(X, Y).Layer(0 To MapLayer.Count - 1)
+                    ReDim Preserve .Tile(X, Y).Layer(0 To MapLayer.Count - 1)
 
-                    ReDim Autotile(X, Y).Layer(0 To MapLayer.Count - 1)
+                    ReDim Preserve Autotile(X, Y).Layer(0 To MapLayer.Count - 1)
 
                     If X <= x2 Then
                         If Y <= y2 Then

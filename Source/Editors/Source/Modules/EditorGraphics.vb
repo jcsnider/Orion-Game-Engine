@@ -637,6 +637,8 @@ Module EditorGraphics
         Dim dest As Rectangle = New Rectangle(frmEditor_MapEditor.PointToScreen(frmEditor_MapEditor.picScreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
 
+        If GettingMap Then Exit Sub
+
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
                 ' skip tile if tileset isn't set
@@ -839,7 +841,7 @@ Module EditorGraphics
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
-        If GettingMap Then Exit Sub
+        'If GettingMap Then Exit Sub
 
         'lets get going
 
