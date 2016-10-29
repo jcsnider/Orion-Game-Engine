@@ -267,57 +267,6 @@
         NeedToUpDatePlayerList = True
     End Sub
 
-    Private Sub btnSaveHouse_Click(sender As Object, e As EventArgs) Handles btnSaveHouse.Click
-        If Val(txtBaseMap.Text) <= 0 Or Val(txtBaseMap.Text) > MAX_MAPS Then
-            lblNotifications.Text = "Base Map value invalid. Must be a number between 1 and " & MAX_MAPS
-            lblNotifications.ForeColor = Color.Red
-            Exit Sub
-        End If
-        If Val(txtHouseFurniture.Text) < 0 Or Val(txtHouseFurniture.Text) > 1000 Then
-            lblNotifications.Text = "Value of max furnitures invalid. Must be a number between 0 (infinite) and 1000"
-            lblNotifications.ForeColor = Color.Red
-            Exit Sub
-        End If
-
-        If Val(txtXEntrance.Text) < 0 Or Val(txtXEntrance.Text) > Map(txtBaseMap.Text).MaxX Then
-            lblNotifications.Text = "Value of x coordinate is invalid. Must be a number between 0  and map max x value."
-            lblNotifications.ForeColor = Color.Red
-            Exit Sub
-        End If
-
-        If Val(txtYEntrance.Text) < 0 Or Val(txtYEntrance.Text) > Map(txtBaseMap.Text).MaxY Then
-            lblNotifications.Text = "Value of y coordinate is invalid. Must be a number between 0  and map max y value."
-            lblNotifications.ForeColor = Color.Red
-            Exit Sub
-        End If
-
-        If Me.lstHouses.SelectedIndex > -1 And Me.lstHouses.SelectedIndex < MAX_HOUSES Then
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).BaseMap = Val(txtBaseMap.Text)
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).ConfigName = txtHouseName.Text
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).MaxFurniture = Val(txtHouseFurniture.Text)
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).Price = Val(txtHousePrice.Text)
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).X = Val(txtXEntrance.Text)
-            HouseConfig(Me.lstHouses.SelectedIndex + 1).Y = Val(txtYEntrance.Text)
-            SaveHouse(Me.lstHouses.SelectedIndex + 1)
-            lblNotifications.Text = "House Saved."
-            lblNotifications.ForeColor = Color.Green
-        Else
-            lblNotifications.Text = "Error: No house configuration selected in lst config. House not saved."
-            lblNotifications.ForeColor = Color.Red
-        End If
-    End Sub
-
-    Private Sub lstHouses_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstHouses.SelectedIndexChanged
-        If lstHouses.SelectedIndex > -1 And lstHouses.SelectedIndex < MAX_HOUSES Then
-            txtBaseMap.Text = HouseConfig(lstHouses.SelectedIndex + 1).BaseMap
-            txtHouseName.Text = HouseConfig(lstHouses.SelectedIndex + 1).ConfigName
-            txtHouseFurniture.Text = HouseConfig(lstHouses.SelectedIndex + 1).MaxFurniture
-            txtHousePrice.Text = HouseConfig(lstHouses.SelectedIndex + 1).Price
-            txtXEntrance.Text = HouseConfig(lstHouses.SelectedIndex + 1).X
-            txtYEntrance.Text = HouseConfig(lstHouses.SelectedIndex + 1).Y
-        End If
-    End Sub
-
     Private Sub btnSaveAll_Click(sender As Object, e As EventArgs) Handles btnSaveAll.Click
         SaveClasses()
         SaveItems()
