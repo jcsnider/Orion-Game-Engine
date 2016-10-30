@@ -7,14 +7,17 @@
         Return Environment.TickCount
     End Function
 
-    Sub Main()
-        InitServer()
-    End Sub
+    'Sub Main()
+    '    InitServer()
+    'End Sub
 
     Sub InitServer()
         Dim i As Integer, F As Integer, x As Integer
         Dim time1 As Integer, time2 As Integer
         x = 0
+
+        Console.Title = "Orion+ Server"
+        Console.SetWindowSize(120, 20)
 
         time1 = GetTickCount()
         'frmServer.Show()
@@ -196,6 +199,17 @@
 
         UpdateCaption()
         time2 = GetTickCount()
+
+        Console.Clear()
+        Console.WriteLine("  ____       _                        _____                          ")
+        Console.WriteLine(" / __ \     (_)                _     / ____|                         ")
+        Console.WriteLine("| |  | |_ __ _  ___  _ __    _| |_  | (___   ___ _ ____   _____ _ __ ")
+        Console.WriteLine("| |  | | '__| |/ _ \| '_ \  |_   _|  \___ \ / _ \ '__\ \ / / _ \ '__|")
+        Console.WriteLine("| |__| | |  | | (_) | | | |   |_|    ____) |  __/ |   \ V /  __/ |   ")
+        Console.WriteLine(" \____/|_|  |_|\___/|_| |_|         |_____/ \___|_|    \_/ \___|_|   ")
+
+        Console.WriteLine("")
+
         SetStatus("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
 
         MyIPAddress = GetIP()
@@ -204,6 +218,10 @@
 
         ' reset shutdown value
         isShuttingDown = False
+
+        'init the console msg
+        AddCommandHandler("/exit", AddressOf HandleCommandExit)
+        AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
 
         ' Starts the server loop
         ServerLoop.ServerLoop()
