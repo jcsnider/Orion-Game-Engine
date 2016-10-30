@@ -1,10 +1,11 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Threading
+Imports System.Windows.Forms
 
 Module ClientGeneral
     Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Integer) As Integer
     Public started As Boolean
 
-    Public Function GetTickCount()
+    Public Function GetTickCount() As Integer
         Return Environment.TickCount
     End Function
 
@@ -311,7 +312,7 @@ Module ClientGeneral
     End Sub
 
     Public Function ConnectToServer(ByVal i As Integer) As Boolean
-        Dim Wait As Integer
+        Dim until As Integer
         ConnectToServer = False
 
         ' Check to see if we are already connected, if so just exit
@@ -321,16 +322,16 @@ Module ClientGeneral
         End If
 
         If i = 4 Then Exit Function
-        Wait = GetTickCount()
+        until = GetTickCount() + 3500
 
         Connect()
 
         SetStatus("Connecting to server...(" & i & ")")
 
         ' Wait until connected or a few seconds have passed and report the server being down
-        Do While (Not IsConnected()) And (GetTickCount() <= Wait + 3500)
+        Do While (Not IsConnected()) And (GetTickCount() <= until)
             DoEvents()
-            Sleep(20)
+            Thread.Sleep(20)
         Loop
 
         ' return value
@@ -343,10 +344,6 @@ Module ClientGeneral
         End If
 
     End Function
-
-    Public Sub Sleep(ByVal milleseconds As Integer)
-        Threading.Thread.Sleep(milleseconds)
-    End Sub
 
     Public Sub DoEvents()
         Application.DoEvents()

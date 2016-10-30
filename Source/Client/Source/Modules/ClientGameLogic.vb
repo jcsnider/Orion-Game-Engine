@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Threading
 Imports System.Windows.Forms
 
 Module ClientGameLogic
@@ -234,8 +235,7 @@ Module ClientGameLogic
             End If
 
             Application.DoEvents()
-            Threading.Thread.Sleep(1)
-
+            Thread.Yield()
         Loop
     End Sub
 

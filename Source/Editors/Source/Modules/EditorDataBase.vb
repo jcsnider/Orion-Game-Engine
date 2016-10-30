@@ -30,10 +30,6 @@ Module ClientDataBase
 
     End Function
 
-    Public Sub Sleep(ByVal milleseconds As Integer)
-        Threading.Thread.Sleep(milleseconds)
-    End Sub
-
     Public Sub DoEvents()
         Application.DoEvents()
     End Sub

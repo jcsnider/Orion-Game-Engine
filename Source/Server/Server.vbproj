@@ -6,12 +6,12 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>OrionServer.My.MyApplication</StartupObject>
+    <OutputType>Exe</OutputType>
+    <StartupObject>OrionServer.ServerConsole</StartupObject>
     <RootNamespace>OrionServer</RootNamespace>
     <AssemblyName>Orion+ Server</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
@@ -63,6 +63,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
@@ -87,6 +89,7 @@
     <Compile Include="3rd Party\ArchaicSoft_BinaryReader.vb" />
     <Compile Include="3rd Party\ArchaicSoft_BinaryWriter.vb" />
     <Compile Include="Source\Modules\ServerCombat.vb" />
+    <Compile Include="Source\Modules\ServerConsole.vb" />
     <Compile Include="Source\Modules\ServerConstants.vb" />
     <Compile Include="Source\Modules\ServerCrafting.vb" />
     <Compile Include="Source\Modules\ServerDatabase.vb" />
