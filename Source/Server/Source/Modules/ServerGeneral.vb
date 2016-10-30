@@ -17,7 +17,7 @@
         x = 0
 
         time1 = GetTickCount()
-        frmServer.Show()
+        'frmServer.Show()
 
         ' Initialize the random-number generator
         Randomize() ', seed
@@ -184,10 +184,10 @@
 
         For x = 1 To MAX_PLAYERS
             Clients(x) = New Client
-            frmServer.lstView.Items.Add(x)
-            frmServer.lstView.Items(x - 1).SubItems.Add("")
-            frmServer.lstView.Items(x - 1).SubItems.Add("")
-            frmServer.lstView.Items(x - 1).SubItems.Add("")
+            'frmServer.lstView.Items.Add(x)
+            'frmServer.lstView.Items(x - 1).SubItems.Add("")
+            'frmServer.lstView.Items(x - 1).SubItems.Add("")
+            'frmServer.lstView.Items(x - 1).SubItems.Add("")
             ClearPlayer(x)
         Next
 
@@ -210,7 +210,8 @@
     End Sub
 
     Sub UpdateCaption()
-        frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        'frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
     End Sub
 
     Sub DestroyServer()
@@ -304,16 +305,17 @@
     End Sub
 
     Sub TextAdd(ByVal Msg As String)
-        If ConsoleText = "" Then
-            ConsoleText = ConsoleText & Msg
-        Else
-            ConsoleText = ConsoleText & vbNewLine & Msg
-        End If
-        Try
-            UpdateUI()
-        Catch ex As Exception
-            'Dont handle error
-        End Try
+        Console.WriteLine(Msg)
+        'If ConsoleText = "" Then
+        '    ConsoleText = ConsoleText & Msg
+        'Else
+        '    ConsoleText = ConsoleText & vbNewLine & Msg
+        'End If
+        'Try
+        '    UpdateUI()
+        'Catch ex As Exception
+        '    'Dont handle error
+        'End Try
     End Sub
 
     ' Used for checking validity of names
@@ -333,10 +335,6 @@
 
     Public Sub DoEvents()
         Application.DoEvents()
-    End Sub
-
-    Public Sub Sleep(ByVal milleseconds As Integer)
-        Threading.Thread.Sleep(milleseconds)
     End Sub
 
     Public Sub HandleShutdown()

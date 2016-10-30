@@ -1,4 +1,6 @@
-﻿Module EditorLoop
+﻿Imports System.Threading
+
+Module EditorLoop
 
     Public Sub Main()
 
@@ -197,8 +199,7 @@
             End If
 
             Application.DoEvents()
-            Threading.Thread.Sleep(1)
-
+            Thread.Yield()
         Loop
     End Sub
 

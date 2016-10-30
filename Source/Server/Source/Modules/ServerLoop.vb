@@ -1,4 +1,6 @@
-﻿Module ServerLoop
+﻿Imports System.Threading
+
+Module ServerLoop
     Sub ServerLoop()
         Dim i As Integer
         Dim Tick As Integer
@@ -125,7 +127,7 @@
             End If
 
             DoEvents()
-            Sleep(1)
+            Thread.Yield()
         Loop
     End Sub
 
