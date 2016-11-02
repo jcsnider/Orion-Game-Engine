@@ -1296,7 +1296,7 @@ Module ServerTCP
             Buffer.WriteInteger(0)
         End If
 
-        data = Compress(Buffer.ToArray)
+        data = ArchaicIO.Compression.Compress(Buffer.ToArray)
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SMapData)
         Buffer.WriteBytes(data)
@@ -1697,7 +1697,7 @@ Module ServerTCP
 
         data = buffer.ToArray
 
-        data = Compress(data)
+        data = ArchaicIO.Compression.Compress(data)
 
         buffer = New ByteBuffer
 

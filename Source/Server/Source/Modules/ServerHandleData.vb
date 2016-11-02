@@ -1366,7 +1366,7 @@
 
         Data = Buffer.ReadBytes(Data.Length - 4)
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(Decompress(Data))
+        Buffer.WriteBytes(ArchaicIO.Compression.Decompress(Data))
 
         ' Prevent hacking
         If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
@@ -3796,7 +3796,7 @@
 
         Data = Buffer.ReadBytes(Data.Length - 4)
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(Decompress(Data))
+        Buffer.WriteBytes(ArchaicIO.Compression.Decompress(Data))
 
         ' Prevent hacking
         If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub

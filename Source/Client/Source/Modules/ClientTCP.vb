@@ -338,7 +338,7 @@ Module ClientTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CMapData)
-        Buffer.WriteBytes(Compress(data))
+        Buffer.WriteBytes(ArchaicIO.Compression.Compress(data))
 
         SendData(Buffer.ToArray())
         Buffer = Nothing

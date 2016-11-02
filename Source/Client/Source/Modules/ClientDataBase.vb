@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.IO.Compression
 Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Linq

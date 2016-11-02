@@ -918,7 +918,7 @@
 
         Data = Buffer.ReadBytes(Buffer.Count - 4)
         Buffer = New ByteBuffer
-        Buffer.WriteBytes(Decompress(Data))
+        Buffer.WriteBytes(ArchaicIO.Compression.Decompress(Data))
 
         MapData = False
 
@@ -2147,7 +2147,7 @@
         If buffer.ReadInteger <> ServerPackets.SGameData Then Exit Sub
 
         Data = buffer.ReadBytes(buffer.Count - 4)
-        Data = Decompress(Data)
+        Data = ArchaicIO.Compression.Decompress(Data)
         buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 

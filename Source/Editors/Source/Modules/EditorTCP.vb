@@ -291,7 +291,7 @@ Module EditorTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CEditorMapData)
-        Buffer.WriteBytes(Compress(data))
+        Buffer.WriteBytes(ArchaicIO.Compression.Compress(data))
 
         SendData(Buffer.ToArray())
         Buffer = Nothing

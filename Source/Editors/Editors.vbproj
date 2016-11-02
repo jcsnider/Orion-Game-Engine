@@ -48,6 +48,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ArchaicIO, Version=2.6.6150.21228, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ArchaicIO.2.6.0.0\lib\ArchaicIO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SFML.Net, Version=2.1.6150.20578, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SFML-Portable-2.1.1.0.0\lib\SFML.Net.dll</HintPath>
       <Private>True</Private>
