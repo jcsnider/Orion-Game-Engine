@@ -127,7 +127,8 @@ Module ServerLoop
             End If
 
             DoEvents()
-            Thread.Yield()
+            'Thread.Yield()
+            Thread.Sleep(1)
         Loop
     End Sub
 
