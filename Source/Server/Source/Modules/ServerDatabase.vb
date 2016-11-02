@@ -35,8 +35,8 @@ Module ServerDatabase
 
         For i = 1 To Max_Classes
             Classes(i) = Nothing
-            Classes(i).Name = vbNullString
-            Classes(i).Desc = vbNullString
+            Classes(i).Name = ""
+            Classes(i).Desc = ""
         Next
 
         ReDim Classes(0 To Max_Classes)
@@ -1235,7 +1235,7 @@ Module ServerDatabase
         Dim i As Integer
 
         Shop(Index) = Nothing
-        Shop(Index).Name = vbNullString
+        Shop(Index).Name = ""
 
         ReDim Shop(Index).TradeItem(MAX_TRADES)
         For i = 0 To MAX_SHOPS
@@ -1370,7 +1370,7 @@ Module ServerDatabase
 
     Sub ClearSkill(ByVal Index As Integer)
         Skill(Index) = Nothing
-        Skill(Index).Name = vbNullString
+        Skill(Index).Name = ""
         Skill(Index).LevelReq = 1 'Needs to be 1 for the skill editor
     End Sub
 

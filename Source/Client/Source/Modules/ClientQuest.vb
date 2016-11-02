@@ -199,8 +199,8 @@
         Dim I As Integer
 
         ' clear the Quest
-        Quest(QuestNum).Name = vbNullString
-        Quest(QuestNum).QuestLog = vbNullString
+        Quest(QuestNum).Name = ""
+        Quest(QuestNum).QuestLog = ""
         Quest(QuestNum).TasksCount = 0
         Quest(QuestNum).Repeat = 0
 
@@ -214,7 +214,7 @@
         Quest(QuestNum).QuestRemoveItemValue = 0
 
         For I = 1 To 3
-            Quest(QuestNum).Chat(I) = vbNullString
+            Quest(QuestNum).Chat(I) = ""
         Next
 
         Quest(QuestNum).RewardItem = 0
@@ -228,8 +228,8 @@
             Quest(QuestNum).Task(I).Map = 0
             Quest(QuestNum).Task(I).Resource = 0
             Quest(QuestNum).Task(I).Amount = 0
-            Quest(QuestNum).Task(I).Speech = vbNullString
-            Quest(QuestNum).Task(I).TaskLog = vbNullString
+            Quest(QuestNum).Task(I).Speech = ""
+            Quest(QuestNum).Task(I).TaskLog = ""
             Quest(QuestNum).Task(I).QuestEnd = 0
             Quest(QuestNum).Task(I).TaskType = 0
         Next
@@ -532,7 +532,7 @@
             End Select
 
             'Load textboxes
-            .txtSpeech.Text = vbNullString
+            .txtSpeech.Text = ""
             .txtTaskLog.Text = "" & Trim$(TaskToLoad.TaskLog)
 
             'Set scrolls to 0 and disable them so they can be enabled when needed
@@ -685,7 +685,7 @@
     Public Sub LoadQuestlogBox()
         Dim QuestNum As Integer, CurTask As Integer
 
-        If Trim$(SelectedQuest) = vbNullString Then Exit Sub
+        If Trim$(SelectedQuest) = "" Then Exit Sub
 
         For I = 1 To MAX_QUESTS
             If QuestNames(SelectedQuest) = Trim$(Quest(I).Name) Then

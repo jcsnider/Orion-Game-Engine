@@ -223,7 +223,7 @@
             If Len(Trim$(txtChat.Text)) > 0 Then
                 GlobalMsg(txtChat.Text)
                 TextAdd("Server: " & txtChat.Text)
-                txtChat.Text = vbNullString
+                txtChat.Text = ""
             End If
         End If
     End Sub

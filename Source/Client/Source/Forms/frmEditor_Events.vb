@@ -227,7 +227,7 @@ Public Class frmEditor_Events
 
             'show text
             Case 1
-                txtShowText.Text = vbNullString
+                txtShowText.Text = ""
                 fraDialogue.Visible = True
                 fraShowText.Visible = True
                 scrlShowTextFace.Value = 0
@@ -235,18 +235,18 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'show choices
             Case 2
-                txtChoicePrompt.Text = vbNullString
-                txtChoices1.Text = vbNullString
-                txtChoices2.Text = vbNullString
-                txtChoices3.Text = vbNullString
-                txtChoices4.Text = vbNullString
+                txtChoicePrompt.Text = ""
+                txtChoices1.Text = ""
+                txtChoices2.Text = ""
+                txtChoices3.Text = ""
+                txtChoices4.Text = ""
                 scrlShowChoicesFace.Value = 0
                 fraDialogue.Visible = True
                 fraShowChoices.Visible = True
                 fraCommands.Visible = False
             'chatbox text
             Case 3
-                txtAddText_Text.Text = vbNullString
+                txtAddText_Text.Text = ""
                 scrlAddText_Colour.Value = 0
                 optAddText_Player.Checked = True
                 fraDialogue.Visible = True

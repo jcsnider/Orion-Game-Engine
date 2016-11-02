@@ -700,7 +700,7 @@ Public Module ClientGuiFunctions
                             CurrencyMenu = 2 ' deposit
                             frmMainGame.lblCurrency.Text = "How many do you want to deposit?"
                             tmpCurrencyItem = InvNum
-                            frmMainGame.txtCurrency.Text = vbNullString
+                            frmMainGame.txtCurrency.Text = ""
                             frmMainGame.pnlCurrency.Visible = True
                             frmMainGame.pnlCurrency.BringToFront()
                             frmMainGame.txtCurrency.Focus()
@@ -761,7 +761,7 @@ Public Module ClientGuiFunctions
                         CurrencyMenu = 3 ' withdraw
                         frmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
                         tmpCurrencyItem = BankItem
-                        frmMainGame.txtCurrency.Text = vbNullString
+                        frmMainGame.txtCurrency.Text = ""
                         frmMainGame.pnlCurrency.Visible = True
                         frmMainGame.txtCurrency.Focus()
                         Exit Function
@@ -930,7 +930,7 @@ Public Module ClientGuiFunctions
                                     CurrencyMenu = 1 ' drop
                                     frmMainGame.lblCurrency.Text = "How many do you want to drop?"
                                     tmpCurrencyItem = InvNum
-                                    frmMainGame.txtCurrency.Text = vbNullString
+                                    frmMainGame.txtCurrency.Text = ""
                                     frmMainGame.pnlCurrency.Visible = True
                                     frmMainGame.txtCurrency.Focus()
                                 End If

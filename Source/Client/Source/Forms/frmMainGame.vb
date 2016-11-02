@@ -166,7 +166,7 @@ Public Class frmMainGame
 
         pnlCurrency.Visible = False
         tmpCurrencyItem = 0
-        txtCurrency.Text = vbNullString
+        txtCurrency.Text = ""
         CurrencyMenu = 0 ' clear
     End Sub
 
@@ -417,7 +417,7 @@ Public Class frmMainGame
 
     Private Sub lblAbandonQuest_Click(sender As Object, e As EventArgs)
         'Dim QuestNum As Integer = GetQuestNum(Trim$(lstQuestLog.Text))
-        'If Trim$(lstQuestLog.Text) = vbNullString Then Exit Sub
+        'If Trim$(lstQuestLog.Text) = "" Then Exit Sub
 
         'PlayerHandleQuest(QuestNum, 2)
         'ResetQuestLog()

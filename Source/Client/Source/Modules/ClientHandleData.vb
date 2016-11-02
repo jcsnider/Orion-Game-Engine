@@ -245,7 +245,7 @@
         Options.Username = Trim$(tempUserName)
 
         If chkSavePassChecked = False Then
-            Options.Password = vbNullString
+            Options.Password = ""
         Else
             Options.Password = Trim$(tempPassword)
         End If
@@ -508,7 +508,7 @@
 
         ' changes to inventory, need to clear any drop menu
         frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = vbNullString
+        frmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -529,7 +529,7 @@
 
         ' changes, clear drop menu
         frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = vbNullString
+        frmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -553,7 +553,7 @@
         ' changes to inventory, need to clear any drop menu
 
         frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = vbNullString
+        frmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -1403,7 +1403,7 @@
         ' changes to inventory, need to clear any drop menu
 
         frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = vbNullString
+        frmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -2128,7 +2128,7 @@
 
         Select Case tradestatus
             Case 0 ' clear
-                'frmMainGame.lblTradeStatus.Text = vbNullString
+                'frmMainGame.lblTradeStatus.Text = ""
             Case 1 ' they've accepted
                 AddText("Other player has accepted.", ColorType.White)
             Case 2 ' you've accepted
@@ -2283,7 +2283,7 @@
         ' changes to inventory, need to clear any drop menu
 
         frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = vbNullString
+        frmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 

@@ -158,7 +158,7 @@ Public Module ClientProjectiles
 
     Sub ClearProjectile(ByVal Index As Integer)
 
-        Projectiles(Index).Name = vbNullString
+        Projectiles(Index).Name = ""
         Projectiles(Index).Sprite = 0
         Projectiles(Index).Range = 0
         Projectiles(Index).Speed = 0

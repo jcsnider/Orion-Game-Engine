@@ -215,7 +215,7 @@ Module ClientDataBase
     Sub ClearMap()
         SyncLock MapLock
             Map.MapNum = 0
-            Map.Name = vbNullString
+            Map.Name = ""
             Map.tileset = 1
             Map.MaxX = SCREEN_MAPX
             Map.MaxY = SCREEN_MAPY
@@ -338,7 +338,7 @@ Module ClientDataBase
     Sub ClearResource(ByVal Index As Integer)
         Resource(Index) = Nothing
         Resource(Index) = New ResourceRec
-        Resource(Index).Name = vbNullString
+        Resource(Index).Name = ""
     End Sub
 
     Sub ClearResources()

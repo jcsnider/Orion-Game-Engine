@@ -530,7 +530,7 @@
             If lstMusic.SelectedIndex >= 0 Then
                 .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
             Else
-                .Music = vbNullString
+                .Music = ""
             End If
 
             ' set the data before changing it

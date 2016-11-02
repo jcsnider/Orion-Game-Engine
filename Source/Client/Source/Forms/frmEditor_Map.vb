@@ -319,7 +319,7 @@ Public Class frmEditor_Map
             If lstMusic.SelectedIndex >= 0 Then
                 .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
             Else
-                .Music = vbNullString
+                .Music = ""
             End If
             .Up = Val(txtUp.Text)
             .Down = Val(txtDown.Text)

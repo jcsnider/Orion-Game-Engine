@@ -174,12 +174,12 @@ Module ClientDataBase
         FileName = Application.StartupPath & "\Data Files\config.ini"
 
         If Not FileExist(FileName) Then
-            Options.Password = vbNullString
+            Options.Password = ""
             Options.SavePass = 0
-            Options.Username = vbNullString
+            Options.Username = ""
             Options.IP = "127.0.0.1"
             Options.Port = 7001
-            Options.MenuMusic = vbNullString
+            Options.MenuMusic = ""
             Options.Music = 1
             Options.Sound = 1
             Options.Volume = 100
@@ -242,7 +242,7 @@ Module ClientDataBase
     End Sub
 
     Sub ClearPlayer(ByVal Index As Integer)
-        Player(Index).Name = vbNullString
+        Player(Index).Name = ""
         Player(Index).Access = 0
         Player(Index).Attacking = 0
         Player(Index).AttackTimer = 0
@@ -283,7 +283,7 @@ Module ClientDataBase
 
     Sub ClearMap()
         SyncLock MapLock
-            Map.Name = vbNullString
+            Map.Name = ""
             Map.tileset = 1
             Map.MaxX = SCREEN_MAPX
             Map.MaxY = SCREEN_MAPY
@@ -613,7 +613,7 @@ Module ClientDataBase
     Sub ClearResource(ByVal Index As Integer)
         Resource(Index) = Nothing
         Resource(Index) = New ResourceRec
-        Resource(Index).Name = vbNullString
+        Resource(Index).Name = ""
     End Sub
 
     Sub ClearResources()

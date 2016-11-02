@@ -437,7 +437,7 @@ Module ClientGameLogic
                 BroadcastMsg(ChatText)
             End If
 
-            MyText = vbNullString
+            MyText = ""
             Exit Sub
         End If
 
@@ -449,14 +449,14 @@ Module ClientGameLogic
                 EmoteMsg(ChatText)
             End If
 
-            MyText = vbNullString
+            MyText = ""
             Exit Sub
         End If
 
         ' Player message
         If Left$(ChatText, 1) = "!" Then
             ChatText = Mid$(ChatText, 2, Len(ChatText) - 1)
-            Name = vbNullString
+            Name = ""
 
             ' Get the desired player from the user text
             For i = 1 To Len(ChatText)
@@ -479,7 +479,7 @@ Module ClientGameLogic
                 AddText("Usage: !playername (message)", ColorType.Yellow)
             End If
 
-            MyText = vbNullString
+            MyText = ""
             Exit Sub
         End If
 
@@ -853,7 +853,7 @@ Module ClientGameLogic
 
             'continue label where we go instead of exiting the sub
 Continue1:
-            MyText = vbNullString
+            MyText = ""
             Exit Sub
         End If
 
@@ -862,7 +862,7 @@ Continue1:
             SayMsg(ChatText)
         End If
 
-        MyText = vbNullString
+        MyText = ""
     End Sub
 
     Sub CheckMapGetItem()
@@ -870,7 +870,7 @@ Continue1:
         Buffer = New ByteBuffer
 
         If GetTickCount() > Player(MyIndex).MapGetTimer + 250 Then
-            If Trim$(MyText) = vbNullString Then
+            If Trim$(MyText) = "" Then
                 Player(MyIndex).MapGetTimer = GetTickCount()
                 Buffer.WriteInteger(ClientPackets.CMapGetItem)
                 SendData(Buffer.ToArray())
@@ -1084,7 +1084,7 @@ Continue1:
     End Sub
 
     Public Sub ClearActionMsg(ByVal Index As Byte)
-        ActionMsg(Index).message = vbNullString
+        ActionMsg(Index).message = ""
         ActionMsg(Index).Created = 0
         ActionMsg(Index).Type = 0
         ActionMsg(Index).color = 0

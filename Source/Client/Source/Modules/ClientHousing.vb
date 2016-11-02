@@ -104,8 +104,8 @@ Public Module ClientHousing
         DialogType = DIALOGUE_TYPE_VISIT
 
         DialogMsg1 = "You have been invited to visit " & Trim$(GetPlayerName(i)) & "'s house."
-        DialogMsg2 = vbNullString
-        DialogMsg3 = vbNullString
+        DialogMsg2 = ""
+        DialogMsg3 = ""
 
         buffer = Nothing
 
