@@ -225,7 +225,8 @@ Module ClientGameLogic
                     Application.DoEvents()
 
                     If GettingMap Then
-                        g.DrawString("Receiving Map", New Font(FONT_NAME, FONT_SIZE), Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
+                        Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME, FONT_SIZE)
+                        g.DrawString("Receiving Map", font, Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
                     End If
 
                     If InMapEditor Then

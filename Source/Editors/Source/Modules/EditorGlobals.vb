@@ -122,7 +122,7 @@
     Public GettingMap As Boolean
 
     ' Font variables
-    Public Const FONT_NAME As String = "Arvo-Regular.ttf"
+    Public Const FONT_NAME As String = "Arial.ttf"
     Public Const FONT_SIZE As Byte = 13
 
     ' Tile size constants

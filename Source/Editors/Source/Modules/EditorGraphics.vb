@@ -92,7 +92,7 @@ Module EditorGraphics
         EditorAnimation_Anim1 = New RenderWindow(frmEditor_Animation.picSprite0.Handle)
         EditorAnimation_Anim2 = New RenderWindow(frmEditor_Animation.picSprite1.Handle)
 
-        SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
+        SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
         'this stuff only loads when needed :)
 

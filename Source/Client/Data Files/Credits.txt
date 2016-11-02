@@ -8,9 +8,6 @@ Eclipse Origins v1.1.0 by Robin Perris*
 Graphics/Media Engine:
 SFML*
 
-Font:
-Arvo-Regular Font by Anton Koovit*
-
 Temporary Graphics:
 Rpgmaker MV
 

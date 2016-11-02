@@ -18,7 +18,7 @@
     Public Const MUSIC_PATH As String = "\Data Files\music\"
 
     ' Font variables
-    Public Const FONT_NAME As String = "Arvo-Regular.ttf"
+    Public Const FONT_NAME As String = "Arial.ttf"
     Public Const FONT_SIZE As Byte = 13
 
     ' Log Path and variables

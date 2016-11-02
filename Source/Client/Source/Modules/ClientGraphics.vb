@@ -183,7 +183,7 @@ Module ClientGraphics
 
         TmpSkillWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
-        SFMLGameFont = New SFML.Graphics.Font(Application.StartupPath & "\Data Files\fonts\" & FONT_NAME)
+        SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
         'this stuff only loads when needed :)
 
