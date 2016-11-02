@@ -253,7 +253,7 @@ Module ServerDatabase
         Dim x As Integer, y As Integer, l As Integer
 
         filename = Application.StartupPath & "\data\maps\map" & MapNum & ".dat"
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Map(MapNum).Name)
         writer.Write(Map(MapNum).Music)
         writer.Write(Map(MapNum).Revision)
@@ -579,7 +579,7 @@ Module ServerDatabase
         Dim l As Integer
 
         filename = Application.StartupPath & "\data\maps\map" & MapNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Map(MapNum).Name)
         reader.Read(Map(MapNum).Music)
@@ -699,7 +699,7 @@ Module ServerDatabase
         Dim filename As String
         filename = Application.StartupPath & "\data\items\item" & itemNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Item(itemNum).Name)
         writer.Write(Item(itemNum).Pic)
         writer.Write(Item(itemNum).Description)
@@ -771,7 +771,7 @@ Module ServerDatabase
         Dim s As Integer
 
         filename = Application.StartupPath & "\data\Items\Item" & ItemNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Item(ItemNum).Name)
         reader.Read(Item(ItemNum).Pic)
@@ -881,7 +881,7 @@ Module ServerDatabase
         Dim i As Integer
         filename = Application.StartupPath & "\data\npcs\npc" & NpcNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Npc(NpcNum).Name)
         writer.Write(Npc(NpcNum).AttackSay)
         writer.Write(Npc(NpcNum).Sprite)
@@ -930,7 +930,7 @@ Module ServerDatabase
         Dim n As Integer
 
         filename = Application.StartupPath & "\data\npcs\npc" & NpcNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Npc(NpcNum).Name)
         reader.Read(Npc(NpcNum).AttackSay)
@@ -1039,7 +1039,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\resources\resource" & ResourceNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Resource(ResourceNum).Name)
         writer.Write(Resource(ResourceNum).SuccessMessage)
@@ -1075,7 +1075,7 @@ Module ServerDatabase
         Dim filename As String
 
         filename = Application.StartupPath & "\data\resources\resource" & ResourceNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Resource(ResourceNum).Name)
         reader.Read(Resource(ResourceNum).SuccessMessage)
@@ -1168,7 +1168,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\shops\shop" & shopNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Shop(shopNum).Name)
         writer.Write(Shop(shopNum).Face)
@@ -1202,7 +1202,7 @@ Module ServerDatabase
         Dim x As Integer
 
         filename = Application.StartupPath & "\data\shops\shop" & ShopNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Shop(ShopNum).Name)
         reader.Read(Shop(ShopNum).Face)
@@ -1271,7 +1271,7 @@ Module ServerDatabase
         Dim filename As String
         filename = Application.StartupPath & "\data\skills\skills" & skillnum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Skill(skillnum).Name)
         writer.Write(Skill(skillnum).Type)
@@ -1321,7 +1321,7 @@ Module ServerDatabase
         Dim filename As String
 
         filename = Application.StartupPath & "\data\skills\skills" & SkillNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Skill(SkillNum).Name)
         reader.Read(Skill(SkillNum).Type)
@@ -1403,7 +1403,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\animations\animation" & AnimationNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Animation(AnimationNum).Name)
 
@@ -1442,7 +1442,7 @@ Module ServerDatabase
         Dim filename As String
 
         filename = Application.StartupPath & "\data\animations\animation" & AnimationNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Animation(AnimationNum).Name)
 
@@ -1521,7 +1521,7 @@ Module ServerDatabase
 
         If AccountExist(Name) Then
             filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
-            Dim reader As New ArchaicSoftReader(filename)
+            Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
             reader.Read(namecheck)
             reader.Read(RightPassword)
 
@@ -1587,7 +1587,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & Trim$(Player(Index).Login) & ".bin"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Player(Index).Login)
         writer.Write(Player(Index).Password)
@@ -1607,7 +1607,7 @@ Module ServerDatabase
         ClearPlayer(Index)
 
         filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Player(Index).Login)
         reader.Read(Player(Index).Password)
@@ -1650,7 +1650,7 @@ Module ServerDatabase
             Exit Sub
         End If
 
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         For i = 0 To MAX_BANK
             reader.Read(Bank(Index).Item(i).Num)
@@ -1663,7 +1663,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\banks\" & Trim$(Player(Index).Login) & ".bin"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         For i = 0 To MAX_BANK
             writer.Write(Bank(Index).Item(i).Num)
@@ -1784,7 +1784,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
 
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Player(Index).Character(CharNum).Classes)
         reader.Read(Player(Index).Character(CharNum).Dir)
@@ -1879,7 +1879,7 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Player(Index).Character(CharNum).Classes)
         writer.Write(Player(Index).Character(CharNum).Dir)

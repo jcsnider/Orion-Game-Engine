@@ -42,7 +42,7 @@
 
         filename = Application.StartupPath & "\data\projectiles\Projectile" & ProjectileNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Projectiles(ProjectileNum).Name)
         writer.Write(Projectiles(ProjectileNum).Sprite)
@@ -62,7 +62,7 @@
 
         For i = 1 To MAX_PROJECTILES
             filename = Application.StartupPath & "\data\projectiles\Projectile" & i & ".dat"
-            Dim reader As New ArchaicSoftReader(filename)
+            Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
             reader.Read(Projectiles(i).Name)
             reader.Read(Projectiles(i).Sprite)

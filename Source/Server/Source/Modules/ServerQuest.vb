@@ -81,8 +81,7 @@
         Dim I As Integer
         filename = Application.StartupPath & "\data\quests\quest" & QuestNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
-
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer
         writer.Write(Quest(QuestNum).Name)
         writer.Write(Quest(QuestNum).QuestLog)
         writer.Write(Quest(QuestNum).TasksCount)
@@ -138,7 +137,7 @@
 
         FileName = Application.StartupPath & "\data\quests\quest" & QuestNum & ".dat"
 
-        Dim reader As New ArchaicSoftReader(FileName)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(FileName)
 
         reader.Read(Quest(QuestNum).Name)
         reader.Read(Quest(QuestNum).QuestLog)

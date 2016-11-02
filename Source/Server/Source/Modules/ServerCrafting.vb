@@ -50,7 +50,7 @@
 
         filename = Application.StartupPath & "\Data\recipes\recipe" & RecipeNum & ".dat"
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Recipe(RecipeNum).Name)
         writer.Write(Recipe(RecipeNum).RecipeType)
@@ -84,7 +84,7 @@
         CheckRecipes()
 
         filename = Application.StartupPath & "\Data\recipes\recipe" & RecipeNum & ".dat"
-        Dim reader As New ArchaicSoftReader(filename)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Recipe(RecipeNum).Name)
         reader.Read(Recipe(RecipeNum).RecipeType)
