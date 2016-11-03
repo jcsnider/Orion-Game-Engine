@@ -197,22 +197,6 @@ Public Module ClientProjectiles
 
     End Sub
 
-    Public Sub EditorProjectile_DrawProjectile()
-        Dim iconnum As Integer
-
-        iconnum = frmEditor_Projectile.scrlPic.Value
-
-        If iconnum < 1 Or iconnum > NumProjectiles Then
-            frmEditor_Projectile.picProjectile.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "Projectiles\" & iconnum & GFX_EXT) Then
-            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Projectiles\" & iconnum & GFX_EXT)
-        End If
-
-    End Sub
-
     Public Sub DrawProjectile(ByVal ProjectileNum As Integer)
         Dim rec As RECT
         Dim CanClearProjectile As Boolean
@@ -335,61 +319,6 @@ Public Module ClientProjectiles
         tmpSprite.TextureRect = New IntRect(rec.left, rec.top, 32, 32)
         tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
         GameWindow.Draw(tmpSprite)
-
-    End Sub
-
-#End Region
-
-#Region "Projectile Editor"
-
-    Public Sub ProjectileEditorInit()
-
-        If frmEditor_Projectile.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Projectile.lstIndex.SelectedIndex + 1
-
-        With Projectiles(EditorIndex)
-            frmEditor_Projectile.txtName.Text = Trim$(.Name)
-            frmEditor_Projectile.scrlPic.Value = .Sprite
-            frmEditor_Projectile.scrlRange.Value = .Range
-            frmEditor_Projectile.scrlSpeed.Value = .Speed
-            frmEditor_Projectile.scrlDamage.Value = .Damage
-        End With
-
-        Projectile_Changed(EditorIndex) = True
-
-    End Sub
-
-    Public Sub ProjectileEditorOk()
-        Dim i As Integer
-
-        For i = 1 To MAX_PROJECTILES
-            If Projectile_Changed(i) Then
-                Call SendSaveProjectile(i)
-            End If
-        Next
-
-        frmEditor_Projectile.Dispose()
-        Editor = 0
-        ClearChanged_Projectile()
-
-    End Sub
-
-    Public Sub ProjectileEditorCancel()
-
-        Editor = 0
-        frmEditor_Projectile.Dispose()
-        ClearChanged_Projectile()
-        ClearProjectiles()
-        SendRequestProjectiles()
-
-    End Sub
-
-    Public Sub ClearChanged_Projectile()
-        Dim i As Integer
-
-        For i = 0 To MAX_PROJECTILES
-            Projectile_Changed(i) = False
-        Next
 
     End Sub
 

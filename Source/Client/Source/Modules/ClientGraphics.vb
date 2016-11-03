@@ -170,13 +170,6 @@ Module ClientGraphics
         GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
-        EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
-
-        EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
-
-        EditorAnimation_Anim1 = New RenderWindow(frmEditor_Animation.picSprite0.Handle)
-        EditorAnimation_Anim2 = New RenderWindow(frmEditor_Animation.picSprite1.Handle)
-
         TmpItemWindow = New RenderWindow(frmMainGame.pnlTmpInv.Handle)
 
         TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
@@ -1414,11 +1407,6 @@ Module ClientGraphics
         'clear any unused gfx
         ClearGFX()
 
-        ' update animation editor
-        If Editor = EDITOR_ANIMATION Then
-            EditorAnim_DrawAnim()
-        End If
-
         ' blit lower tiles
         If NumTileSets > 0 Then
             For X = TileView.left To TileView.right + 1
@@ -1618,26 +1606,6 @@ Module ClientGraphics
         DrawThunderEffect()
         DrawMapTint()
 
-        ' Draw out a square at mouse cursor
-        If InMapEditor Then
-            If MapGrid = True Then
-                DrawGrid()
-            End If
-
-            If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then
-                For X = TileView.left To TileView.right
-                    For Y = TileView.top To TileView.bottom
-                        If IsValidMapPoint(X, Y) Then
-                            DrawDirections(X, Y)
-                        End If
-                    Next
-                Next
-            End If
-
-            DrawTileOutline()
-
-        End If
-
         'furniture
         If FurnitureSelected > 0 Then
             If Player(MyIndex).InHouse = MyIndex Then
@@ -1683,16 +1651,6 @@ Module ClientGraphics
         For I = 1 To Byte.MaxValue
             DrawActionMsg(I)
         Next I
-
-        ' Blit out map attributes
-        If InMapEditor Then
-            DrawMapAttributes()
-        End If
-
-        If InMapEditor And frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then
-            DrawEvents()
-            EditorEvent_DrawGraphic()
-        End If
 
         ' Draw map name
         DrawMapName()
@@ -1916,50 +1874,8 @@ Module ClientGraphics
         RenderTexture(AnimationsGFX(Sprite), GameWindow, X, Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
     End Sub
 
-    Public Sub DrawTileOutline()
-        Dim rec As Rectangle
-        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then Exit Sub
-
-        With rec
-            .Y = 0
-            .Height = PIC_Y
-            .X = 0
-            .Width = PIC_X
-        End With
-
-        Dim rec2 As New RectangleShape
-        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
-        rec2.OutlineThickness = 0.6
-        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-
-        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
-            'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
-            rec2.Size = New Vector2f(rec.Width, rec.Height)
-        Else
-            If EditorTileWidth = 1 And EditorTileHeight = 1 Then
-                RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
-                rec2.Size = New Vector2f(rec.Width, rec.Height)
-            Else
-                If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
-                    rec2.Size = New Vector2f(rec.Width, rec.Height)
-                Else
-                    RenderTexture(TileSetTexture(frmEditor_Map.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
-                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
-                End If
-
-            End If
-
-        End If
-
-        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-        GameWindow.Draw(rec2)
-    End Sub
-
     Public Sub DrawFurnitureOutline()
         Dim rec As Rectangle
-
-        If InMapEditor Then Exit Sub
 
         With rec
             .Y = 0
@@ -2019,72 +1935,6 @@ Module ClientGraphics
         GameWindow.Draw(tmpSprite) '
 
         tmpSprite.Dispose()
-    End Sub
-
-    Public Sub EditorMap_DrawTileset()
-        Dim height As Integer
-        Dim width As Integer
-        Dim tileset As Byte
-
-        ' find tileset number
-        tileset = frmEditor_Map.cmbTileSets.SelectedIndex + 1
-
-        ' exit out if doesn't exist
-        If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
-
-        If tileset <> LastTileset Then
-            If Not TileSetImgsGFX(LastTileset) Is Nothing Then TileSetImgsGFX(LastTileset).Dispose()
-            TileSetImgsGFX(LastTileset) = Nothing
-            TileSetImgsLoaded(LastTileset) = False
-        End If
-
-        'check if its loaded
-        If TileSetImgsLoaded(tileset) = False Then
-            TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
-            TileSetImgsLoaded(tileset) = True
-        End If
-
-        'Draw the tileset into memory.
-        height = TileSetImgsGFX(tileset).Height
-        width = TileSetImgsGFX(tileset).Width
-        MapEditorBackBuffer = New Bitmap(width, height)
-
-        Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
-        g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
-
-        frmEditor_Map.picBackSelect.Height = height
-        frmEditor_Map.picBackSelect.Width = width
-
-        ' change selected shape for autotiles
-        If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case frmEditor_Map.cmbAutoTile.SelectedIndex
-                Case 1 ' autotile
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case 2 ' fake autotile
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-                Case 3 ' animated
-                    EditorTileWidth = 6
-                    EditorTileHeight = 3
-                Case 4 ' cliff
-                    EditorTileWidth = 2
-                    EditorTileHeight = 2
-                Case 5 ' waterfall
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-            End Select
-        End If
-
-        g.DrawImage(TileSetImgsGFX(tileset), New Rectangle(0, 0, TileSetImgsGFX(tileset).Width, TileSetImgsGFX(tileset).Height))
-        g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileWidth * PIC_X, EditorTileHeight * PIC_X))
-        g.Dispose()
-
-        g = frmEditor_Map.picBackSelect.CreateGraphics
-        g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
-        g.Dispose()
-
-        LastTileset = tileset
     End Sub
 
     Sub DestroyGraphics()
@@ -2168,339 +2018,6 @@ Module ClientGraphics
         If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
         If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
 
-    End Sub
-
-    Public Sub EditorMap_DrawMapItem()
-        Dim itemnum As Integer
-        itemnum = Item(frmEditor_Map.scrlMapItem.Value).Pic
-
-        If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_Map.picMapItem.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_Map.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Public Sub EditorMap_DrawKey()
-        Dim itemnum As Integer
-
-        itemnum = Item(frmEditor_Map.scrlMapKey.Value).Pic
-
-        If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_Map.picMapKey.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_Map.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Public Sub EditorItem_DrawItem()
-        Dim itemnum As Integer
-        itemnum = frmEditor_Item.scrlPic.Value
-
-        If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_Item.picItem.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Public Sub EditorItem_DrawPaperdoll()
-        Dim Sprite As Integer
-
-        Sprite = frmEditor_Item.scrlPaperdoll.Value
-
-        If Sprite < 1 Or Sprite > NumPaperdolls Then
-            frmEditor_Item.picPaperdoll.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT) Then
-            frmEditor_Item.picPaperdoll.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "paperdolls\" & Sprite & GFX_EXT)
-        End If
-    End Sub
-
-    Public Sub EditorItem_DrawFurniture()
-        Dim Furniturenum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        Furniturenum = frmEditor_Item.scrlFurniture.Value
-
-        If Furniturenum < 1 Or Furniturenum > NumFurniture Then
-            EditorItem_Furniture.Clear(ToSFMLColor(frmEditor_Item.picFurniture.BackColor))
-            EditorItem_Furniture.Display()
-            Exit Sub
-        End If
-
-        If FurnitureGFXInfo(Furniturenum).IsLoaded = False Then
-            LoadTexture(Furniturenum, 10)
-        End If
-
-        'seeying we still use it, lets update timer
-        With FurnitureGFXInfo(Furniturenum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        ' rect for source
-        With sRECT
-            .Y = 0
-            .Height = FurnitureGFXInfo(Furniturenum).height
-            .X = 0
-            .Width = FurnitureGFXInfo(Furniturenum).width
-        End With
-
-        ' same for destination as source
-        dRECT = sRECT
-
-        EditorItem_Furniture.Clear(ToSFMLColor(frmEditor_Item.picFurniture.BackColor))
-
-        RenderTexture(FurnitureGFX(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-
-        If frmEditor_Item.optSetBlocks.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
-                        If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) - 1 Then
-                            If Item(EditorIndex).FurnitureBlocks(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "X", SFML.Graphics.Color.Red, SFML.Graphics.Color.Black, EditorItem_Furniture)
-                            Else
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", SFML.Graphics.Color.Blue, SFML.Graphics.Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        ElseIf frmEditor_Item.optSetFringe.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= Item(EditorIndex).FurnitureWidth - 1 Then
-                        If Y <= Item(EditorIndex).FurnitureHeight Then
-                            If Item(EditorIndex).FurnitureFringe(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", SFML.Graphics.Color.Blue, SFML.Graphics.Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        End If
-        EditorItem_Furniture.Display()
-    End Sub
-
-    Public Sub EditorNpc_DrawSprite()
-        Dim Sprite As Integer
-
-        Sprite = frmEditor_NPC.scrlSprite.Value
-
-        If Sprite < 1 Or Sprite > NumCharacters Then
-            frmEditor_NPC.picSprite.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT) Then
-            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Width / 4
-            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Height / 4
-            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT)
-        End If
-    End Sub
-
-    Public Sub EditorResource_DrawSprite()
-        Dim Sprite As Integer
-
-        ' normal sprite
-        Sprite = frmEditor_Resource.scrlNormalPic.Value
-
-        If Sprite < 1 Or Sprite > NumResources Then
-            frmEditor_Resource.picNormalpic.BackgroundImage = Nothing
-        Else
-            If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
-            End If
-        End If
-
-        ' exhausted sprite
-        Sprite = frmEditor_Resource.scrlExhaustedPic.Value
-
-        If Sprite < 1 Or Sprite > NumResources Then
-            frmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
-        Else
-            If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
-            End If
-        End If
-    End Sub
-
-    Public Sub EditorSkill_BltIcon()
-        Dim iconnum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        iconnum = frmEditor_Skill.scrlIcon.Value
-
-        If iconnum < 1 Or iconnum > NumSkillIcons Then
-            EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
-            EditorSkill_Icon.Display()
-            Exit Sub
-        End If
-
-        If SkillIconsGFXInfo(iconnum).IsLoaded = False Then
-            LoadTexture(iconnum, 9)
-        End If
-
-        'seeying we still use it, lets update timer
-        With SkillIconsGFXInfo(iconnum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        With sRECT
-            .Y = 0
-            .Height = PIC_Y
-            .X = 0
-            .Width = PIC_X
-        End With
-
-        'drect is the same, so just copy it
-        dRECT = sRECT
-
-        EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
-
-        RenderTexture(SkillIconsGFX(iconnum), EditorSkill_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-
-        EditorSkill_Icon.Display()
-    End Sub
-
-    Public Sub EditorAnim_DrawAnim()
-        Dim Animationnum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-        Dim width As Integer, height As Integer
-        Dim looptime As Integer
-        Dim FrameCount As Integer
-        Dim ShouldRender As Boolean
-
-        Animationnum = frmEditor_Animation.scrlSprite0.Value
-
-        If AnimationsGFXInfo(Animationnum).IsLoaded = False Then
-            LoadTexture(Animationnum, 6)
-        End If
-
-        'seeying we still use it, lets update timer
-        With AnimationsGFXInfo(Animationnum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        If Animationnum < 1 Or Animationnum > NumAnimations Then
-            EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
-            EditorAnimation_Anim1.Display()
-        Else
-
-            looptime = frmEditor_Animation.scrlLoopTime0.Value
-            FrameCount = frmEditor_Animation.scrlFrameCount0.Value
-
-            ShouldRender = False
-
-            ' check if we need to render new frame
-            If AnimEditorTimer(0) + looptime <= GetTickCount() Then
-                ' check if out of range
-                If AnimEditorFrame(0) >= FrameCount Then
-                    AnimEditorFrame(0) = 1
-                Else
-                    AnimEditorFrame(0) = AnimEditorFrame(0) + 1
-                End If
-                AnimEditorTimer(0) = GetTickCount()
-                ShouldRender = True
-            End If
-
-            If ShouldRender Then
-                If frmEditor_Animation.scrlFrameCount0.Value > 0 Then
-                    ' total width divided by frame count
-                    height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmEditor_Animation.scrlFrameCount0.Value
-
-                    With sRECT
-                        .Y = 0
-                        .Height = height
-                        .X = (AnimEditorFrame(0) - 1) * width
-                        .Width = width
-                    End With
-
-                    With dRECT
-                        .Y = 0
-                        .Height = height
-                        .X = 0
-                        .Width = width
-                    End With
-
-                    EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
-
-                    RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-
-                    EditorAnimation_Anim1.Display()
-                End If
-            End If
-        End If
-
-
-        Animationnum = frmEditor_Animation.scrlSprite1.Value
-
-        If Animationnum < 1 Or Animationnum > NumAnimations Then
-            EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
-            EditorAnimation_Anim2.Display()
-        Else
-            looptime = frmEditor_Animation.scrlLoopTime1.Value
-            FrameCount = frmEditor_Animation.scrlFrameCount1.Value
-
-            ShouldRender = False
-
-            ' check if we need to render new frame
-            If AnimEditorTimer(1) + looptime <= GetTickCount() Then
-                ' check if out of range
-                If AnimEditorFrame(1) >= FrameCount Then
-                    AnimEditorFrame(1) = 1
-                Else
-                    AnimEditorFrame(1) = AnimEditorFrame(1) + 1
-                End If
-                AnimEditorTimer(1) = GetTickCount()
-                ShouldRender = True
-            End If
-
-            If ShouldRender Then
-                If frmEditor_Animation.scrlFrameCount1.Value > 0 Then
-                    ' total width divided by frame count
-                    height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmEditor_Animation.scrlFrameCount1.Value
-
-                    With sRECT
-                        .Y = 0
-                        .Height = height
-                        .X = (AnimEditorFrame(1) - 1) * width
-                        .Width = width
-                    End With
-
-                    With dRECT
-                        .Y = 0
-                        .Height = height
-                        .X = 0
-                        .Width = width
-                    End With
-
-                    EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
-
-                    RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-                    EditorAnimation_Anim2.Display()
-
-                End If
-            End If
-        End If
     End Sub
 
     Sub DrawHUD()
@@ -3685,7 +3202,7 @@ NextLoop:
 
     Public Sub DrawGUI()
         'hide GUI when mapping...
-        If InMapEditor Or HideGui = True Then Exit Sub
+        If HideGui = True Then Exit Sub
 
         If HUDVisible = True Then
             DrawHUD()

@@ -174,40 +174,35 @@ Public Class frmMainGame
 
 #Region "PicScreen Code"
     Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
-        If InMapEditor Then
-            MapEditorMouseDown(e.Button, e.X, e.Y, False)
-        Else
-            If Not CheckGuiClick(e.X, e.Y, e) Then
-                ' left click
-                If e.Button = MouseButtons.Left Then
-                    ' if we're in the middle of choose the trade target or not
-                    If Not TradeRequest Then
-                        ' targetting
-                        PlayerSearch(CurX, CurY, 0)
-                    Else
-                        ' trading
-                        SendTradeRequest(Player(myTarget).Name)
-                    End If
-                    pnlRClickVisible = False
-
-                    ' right click
-                ElseIf e.Button = MouseButtons.Right Then
-                    If ShiftDown Or VbKeyShift = True Then
-                        ' admin warp if we're pressing shift and right clicking
-                        If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
-                    Else
-                        ' rightclick menu
-                        PlayerSearch(CurX, CurY, 1)
-                    End If
-                    FurnitureSelected = 0
+        If Not CheckGuiClick(e.X, e.Y, e) Then
+            ' left click
+            If e.Button = MouseButtons.Left Then
+                ' if we're in the middle of choose the trade target or not
+                If Not TradeRequest Then
+                    ' targetting
+                    PlayerSearch(CurX, CurY, 0)
+                Else
+                    ' trading
+                    SendTradeRequest(Player(myTarget).Name)
                 End If
-            End If
+                pnlRClickVisible = False
 
+                ' right click
+            ElseIf e.Button = MouseButtons.Right Then
+                If ShiftDown Or VbKeyShift = True Then
+                    ' admin warp if we're pressing shift and right clicking
+                    If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
+                Else
+                    ' rightclick menu
+                    PlayerSearch(CurX, CurY, 1)
+                End If
+                FurnitureSelected = 0
+            End If
         End If
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        If Editor = 0 And Not InMapEditor And Not frmAdmin.Visible Then Focus()
+        If Not frmAdmin.Visible Then Focus()
 
     End Sub
 
@@ -221,34 +216,21 @@ Public Class frmMainGame
     End Sub
 
     Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseMove
-
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
         CurMouseX = e.Location.X
         CurMouseY = e.Location.Y
-
-        If InMapEditor Then
-            If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
-                MapEditorMouseDown(e.Button, e.X, e.Y)
-            End If
-        End If
-
         CheckGuiMove(e.X, e.Y)
-
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
-
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
         CheckGuiMouseUp(e.X, e.Y, e)
     End Sub
 
     Private Sub picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
         Dim skillnum As Integer
-
         If e.KeyCode = Keys.S Then VbKeyDown = True
         If e.KeyCode = Keys.W Then VbKeyUp = True
         If e.KeyCode = Keys.A Then VbKeyLeft = True
@@ -256,7 +238,6 @@ Public Class frmMainGame
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
         If e.KeyCode = Keys.Alt Then VbKeyAlt = True
-
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 Then
                 MyText = MyText + KeyPressed(e)

@@ -95,84 +95,6 @@
     <Compile Include="Source\Forms\frmAdmin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_Animation.Designer.vb">
-      <DependentUpon>frmEditor_Animation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Animation.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Classes.Designer.vb">
-      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Classes.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
-      <DependentUpon>frmEditor_Events.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Events.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_House.Designer.vb">
-      <DependentUpon>frmEditor_House.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_House.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Item.Designer.vb">
-      <DependentUpon>frmEditor_Item.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Item.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Map.Designer.vb">
-      <DependentUpon>frmEditor_Map.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Map.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_NPC.Designer.vb">
-      <DependentUpon>frmEditor_NPC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_NPC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Projectile.Designer.vb">
-      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Projectile.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Quest.Designer.vb">
-      <DependentUpon>frmEditor_Quest.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Quest.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Recipies.designer.vb">
-      <DependentUpon>frmEditor_Recipies.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Recipies.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Resource.Designer.vb">
-      <DependentUpon>frmEditor_Resource.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Resource.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Shop.Designer.vb">
-      <DependentUpon>frmEditor_Shop.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Shop.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Skill.designer.vb">
-      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_Skill.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\Forms\frmLoad.Designer.vb">
       <DependentUpon>frmLoad.vb</DependentUpon>
     </Compile>
@@ -194,7 +116,6 @@
     <Compile Include="Source\Modules\ClientAutoTiles.vb" />
     <Compile Include="Source\Modules\ClientCrafting.vb" />
     <Compile Include="Source\Modules\ClientEventSystem.vb" />
-    <Compile Include="Source\Modules\ClientGameEditors.vb" />
     <Compile Include="Source\Modules\ClientGuiFunctions.vb" />
     <Compile Include="Source\Modules\ClientHandleData.vb" />
     <Compile Include="Source\Modules\ClientGlobals.vb" />
@@ -235,46 +156,6 @@
     <EmbeddedResource Include="Source\Forms\frmAdmin.resx">
       <DependentUpon>frmAdmin.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Animation.resx">
-      <DependentUpon>frmEditor_Animation.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Classes.resx">
-      <DependentUpon>frmEditor_Classes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
-      <DependentUpon>frmEditor_Events.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_House.resx">
-      <DependentUpon>frmEditor_House.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Item.resx">
-      <DependentUpon>frmEditor_Item.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Map.resx">
-      <DependentUpon>frmEditor_Map.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_NPC.resx">
-      <DependentUpon>frmEditor_NPC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Projectile.resx">
-      <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Quest.resx">
-      <DependentUpon>frmEditor_Quest.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Recipies.resx">
-      <DependentUpon>frmEditor_Recipies.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Resource.resx">
-      <DependentUpon>frmEditor_Resource.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Shop.resx">
-      <DependentUpon>frmEditor_Shop.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_Skill.resx">
-      <DependentUpon>frmEditor_Skill.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmLoad.resx">
       <DependentUpon>frmLoad.vb</DependentUpon>

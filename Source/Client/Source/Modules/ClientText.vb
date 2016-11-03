@@ -123,8 +123,6 @@ Module ClientText
         Dim color As Color, backcolor As Color
         Dim Name As String, i As Integer
 
-        If InMapEditor Then Exit Sub
-
         color = Color.Yellow
         backcolor = Color.Black
 
@@ -178,59 +176,6 @@ Module ClientText
                 End If
             End If
         Next
-
-    End Sub
-
-    Public Sub DrawMapAttributes()
-        Dim X As Integer
-        Dim y As Integer
-        Dim tX As Integer
-        Dim tY As Integer
-
-        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
-            For X = TileView.left To TileView.right
-                For y = TileView.top To TileView.bottom
-                    If IsValidMapPoint(X, y) Then
-                        With Map.Tile(X, y)
-                            tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
-                            tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
-                            Select Case .Type
-                                Case TileType.BLOCKED
-                                    DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
-                                Case TileType.WARP
-                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
-                                Case TileType.ITEM
-                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.NPCAVOID
-                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.KEY
-                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.KEYOPEN
-                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.RESOURCE
-                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
-                                Case TileType.DOOR
-                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
-                                Case TileType.NPCSPAWN
-                                    DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
-                                Case TileType.SHOP
-                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
-                                Case TileType.BANK
-                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), GameWindow)
-                                Case TileType.HEAL
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
-                                Case TileType.TRAP
-                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
-                                Case TileType.HOUSE
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
-                                Case TileType.CRAFT
-                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
-                            End Select
-                        End With
-                    End If
-                Next
-            Next
-        End If
 
     End Sub
 

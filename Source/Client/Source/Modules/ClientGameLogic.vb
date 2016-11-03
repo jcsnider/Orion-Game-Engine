@@ -229,14 +229,10 @@ Module ClientGameLogic
                         g.DrawString("Receiving Map", font, Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
                     End If
 
-                    If InMapEditor Then
-                        EditorMap_DrawTileset()
-                    End If
                 End SyncLock
             End If
 
             Application.DoEvents()
-            'Thread.Yield()
             Thread.Sleep(1)
         Loop
     End Sub

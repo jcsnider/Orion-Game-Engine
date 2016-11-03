@@ -6,7 +6,6 @@ Public Module ClientGuiFunctions
         Dim eqNum As Integer, InvNum As Integer, skillslot As Integer
         Dim bankitem As Integer, shopslot As Integer, TradeNum As Integer
 
-        If InMapEditor Then Exit Sub
         ShowItemDesc = False
         'Charpanel
         If pnlCharacterVisible Then
@@ -177,8 +176,6 @@ Public Module ClientGuiFunctions
         Dim Buffer As ByteBuffer
 
         CheckGuiClick = False
-        If InMapEditor Then Exit Function
-
         'action panel
         If HUDVisible Then
             If AboveActionPanel(X, Y) Then

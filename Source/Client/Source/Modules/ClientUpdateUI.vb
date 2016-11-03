@@ -355,125 +355,9 @@
             frmMainGame.Visible = frmmaingamevisible
         End If
 
-        If InitMapEditor = True Then
-            MapEditorInit()
-            InitMapEditor = False
-        End If
-
-        If InitItemEditor = True Then
-            ItemEditorPreInit()
-            InitItemEditor = False
-        End If
-
-        'craft
-        If InitRecipeEditor = True Then
-            RecipeEditorPreInit()
-            InitRecipeEditor = False
-        End If
-
         If InitCrafting = True Then
             CraftingInit()
             InitCrafting = False
-        End If
-
-        If InitClassEditor = True Then
-            ClassEditorInit()
-            InitClassEditor = False
-        End If
-
-        If LoadClassInfo = True Then
-            LoadClass()
-            LoadClassInfo = False
-        End If
-
-        If InitResourceEditor = True Then
-            Dim i As Integer
-
-            With frmEditor_Resource
-                Editor = EDITOR_RESOURCE
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_RESOURCES
-                    If Resource(i).Name Is Nothing Then Resource(i).Name = ""
-                    If Resource(i).SuccessMessage Is Nothing Then Resource(i).SuccessMessage = ""
-                    If Resource(i).EmptyMessage Is Nothing Then Resource(i).EmptyMessage = ""
-                    .lstIndex.Items.Add(i & ": " & Trim$(Resource(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                ResourceEditorInit()
-            End With
-            InitResourceEditor = False
-        End If
-
-        If InitNPCEditor = True Then
-            With frmEditor_NPC
-                Editor = EDITOR_NPC
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_NPCS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                NpcEditorInit()
-            End With
-            InitNPCEditor = False
-        End If
-
-        If InitSkillEditor = True Then
-            With frmEditor_Skill
-                Editor = EDITOR_SKILL
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_SKILLS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                SkillEditorInit()
-            End With
-            InitSkillEditor = False
-        End If
-
-        If InitShopEditor = True Then
-            With frmEditor_Shop
-                Editor = EDITOR_SHOP
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_SHOPS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                ShopEditorInit()
-            End With
-            InitShopEditor = False
-        End If
-
-        If InitAnimationEditor = True Then
-            With frmEditor_Animation
-                Editor = EDITOR_ANIMATION
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_ANIMATIONS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                AnimationEditorInit()
-            End With
-            InitAnimationEditor = False
         End If
 
         If NeedToOpenShop = True Then
@@ -517,11 +401,6 @@
             frmLoad.Visible = frmloadvisible
         End If
 
-        If InitMapProperties = True Then
-            MapPropertiesInit()
-            InitMapProperties = False
-        End If
-
         If UpdateMapnames = True Then
             Dim x As Integer
 
@@ -538,23 +417,6 @@
         If Adminvisible = True Then
             frmAdmin.Visible = Not frmAdmin.Visible
             Adminvisible = False
-        End If
-
-        If QuestEditorShow = True Then
-            With frmEditor_Quest
-                Editor = EDITOR_TASKS
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For I = 1 To MAX_QUESTS
-                    .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                QuestEditorInit()
-            End With
-            QuestEditorShow = False
         End If
 
         If UpdateQuestChat = True Then
@@ -575,25 +437,6 @@
         If UpdateQuestWindow = True Then
             LoadQuestlogBox()
             UpdateQuestWindow = False
-        End If
-
-        If HouseEdit = True Then
-            With frmEditor_House
-                Editor = EDITOR_HOUSE
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_HOUSES
-                    .lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-            End With
-
-            HouseEditorInit()
-
-            HouseEdit = False
         End If
 
         If UpdateDialog = True Then
@@ -620,79 +463,6 @@
         If EventChat = True Then
             pnlEventChatVisible = True
             EventChat = False
-        End If
-
-        If InitEventEditorForm = True Then
-            frmEditor_Events.InitEventEditorForm()
-
-            ' populate form
-            With frmEditor_Events
-                ' set the tabs
-                .tabPages.TabPages.Clear()
-
-                For i = 1 To tmpEvent.PageCount
-                    .tabPages.TabPages.Add(Str(i))
-                Next
-                ' items
-                .cmbHasItem.Items.Clear()
-                .cmbHasItem.Items.Add("None")
-                For i = 1 To MAX_ITEMS
-                    .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-                Next
-                ' variables
-                .cmbPlayerVar.Items.Clear()
-                .cmbPlayerVar.Items.Add("None")
-                For i = 1 To MAX_VARIABLES
-                    .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
-                Next
-                ' variables
-                .cmbPlayerSwitch.Items.Clear()
-                .cmbPlayerSwitch.Items.Add("None")
-                For i = 1 To MAX_SWITCHES
-                    .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
-                Next
-                ' name
-                .txtName.Text = tmpEvent.Name
-                ' enable delete button
-                If tmpEvent.PageCount > 1 Then
-                    .btnDeletePage.Enabled = True
-                Else
-                    .btnDeletePage.Enabled = False
-                End If
-                .btnPastePage.Enabled = False
-                ' Load page 1 to start off with
-                curPageNum = 1
-                EventEditorLoadPage(curPageNum)
-
-                .scrlShowTextFace.Maximum = NumFaces
-                .scrlShowChoicesFace.Maximum = NumFaces
-            End With
-            ' show the editor
-            frmEditor_Events.Show()
-
-            InitEventEditorForm = False
-        End If
-
-        If InitProjectileEditor = True Then
-            With frmEditor_Projectile
-                Editor = EDITOR_PROJECTILE
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 1 To MAX_PROJECTILES
-                    .lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                ProjectileEditorInit()
-            End With
-
-            InitProjectileEditor = False
-        End If
-
-        If frmEditor_Projectile.Visible Then
-            EditorProjectile_DrawProjectile()
         End If
 
         If ShowRClick = True Then

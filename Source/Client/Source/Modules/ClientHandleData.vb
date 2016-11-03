@@ -1149,15 +1149,6 @@
         End SyncLock
 
         initAutotiles()
-        'Debug.Print("Client Handled Autotile Init")
-
-        ' Check if we get a map from someone else and if we were editing a map cancel it out
-        If InMapEditor Then
-            InMapEditor = False
-            frmEditor_Map.Visible = False
-
-            ClearAttributeDialogue()
-        End If
 
         MapData = True
 
@@ -1665,9 +1656,6 @@
     Private Sub Packet_ResourceCache(ByVal Data() As Byte)
         Dim i As Integer
         Dim Buffer As ByteBuffer
-
-        ' if in map editor, we cache shit ourselves
-        If InMapEditor Then Exit Sub
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)

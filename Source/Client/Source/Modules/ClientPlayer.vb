@@ -192,7 +192,6 @@
 
                 ' Check if they can warp to a new map
                 If Map.Up > 0 Then
-                    MapEditorLeaveMap()
                     SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
@@ -223,7 +222,6 @@
 
                 ' Check if they can warp to a new map
                 If Map.Down > 0 Then
-                    MapEditorLeaveMap()
                     SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
@@ -254,7 +252,6 @@
 
                 ' Check if they can warp to a new map
                 If Map.Left > 0 Then
-                    MapEditorLeaveMap()
                     SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False
@@ -285,7 +282,6 @@
 
                 ' Check if they can warp to a new map
                 If Map.Right > 0 Then
-                    MapEditorLeaveMap()
                     SendPlayerRequestNewMap()
                     GettingMap = True
                     CanMoveNow = False

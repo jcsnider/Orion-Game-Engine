@@ -80,7 +80,6 @@ Public Module ClientWeather
     End Sub
 
     Public Sub DrawThunderEffect()
-        If InMapEditor Then Exit Sub
 
         If DrawThunder > 0 Then
             Dim tmpSprite As Sprite
@@ -101,8 +100,6 @@ Public Module ClientWeather
     Public Sub DrawWeather()
         Dim i As Integer, SpriteLeft As Integer
 
-        If InMapEditor Then Exit Sub
-
         For i = 1 To MAX_WEATHER_PARTICLES
             If WeatherParticle(i).InUse Then
                 If WeatherParticle(i).type = MAP_WEATHER_STORM Then
@@ -118,8 +115,6 @@ Public Module ClientWeather
 
     Public Sub DrawFog()
         Dim fogNum As Integer
-
-        If InMapEditor Then Exit Sub
 
         fogNum = CurrentFog
         If fogNum <= 0 Or fogNum > NumFogs Then Exit Sub

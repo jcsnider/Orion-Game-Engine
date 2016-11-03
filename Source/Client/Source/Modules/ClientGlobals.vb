@@ -129,19 +129,8 @@ Module ClientGlobals
     Public AnimEditorTimer(0 To 1) As Integer
 
     ' Used to check if in editor or not and variables for use in editor
-    Public InMapEditor As Boolean
-    Public EditorTileX As Integer
-    Public EditorTileY As Integer
-    Public EditorTileWidth As Integer
-    Public EditorTileHeight As Integer
-    Public EditorWarpMap As Integer
-    Public EditorWarpX As Integer
-    Public EditorWarpY As Integer
     Public SpawnNpcNum As Byte
     Public SpawnNpcDir As Byte
-    Public EditorShop As Integer
-    Public EditorTileSelStart As Point
-    Public EditorTileSelEnd As Point
 
     ' Used for map item editor
     Public ItemEditorNum As Integer
