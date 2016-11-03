@@ -181,9 +181,11 @@
     <Compile Include="Source\Modules\EditorText.vb" />
     <Compile Include="Source\Modules\EditorHousing.vb" />
     <Compile Include="Source\Modules\EditorEventSystem.vb" />
+    <Compile Include="Source\Modules\EditorAutoTiles.vb" />
     <Compile Include="Source\Modules\EditorGraphics.vb" />
     <Compile Include="Source\Modules\EditorDataBase.vb" />
     <Compile Include="Source\Modules\EditorCrafting.vb" />
+    <Compile Include="Source\Modules\GameEditors.vb" />
     <Compile Include="Source\Modules\EditorQuest.vb" />
     <Compile Include="Source\Modules\EditorGlobals.vb" />
     <Compile Include="Source\Modules\EditorHandleData.vb" />
