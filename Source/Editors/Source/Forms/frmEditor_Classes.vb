@@ -291,4 +291,96 @@ Public Class frmEditor_Classes
 
 #End Region
 
+#Region "Class Editor"
+
+    Public Sub ClassesEditorOk()
+        SendSaveClasses()
+
+        frmEditor_Classes.Visible = False
+        Editor = 0
+    End Sub
+
+    Public Sub ClassesEditorCancel()
+        SendRequestClasses()
+        frmEditor_Classes.Visible = False
+        Editor = 0
+    End Sub
+
+    Public Sub ClassEditorInit()
+        Dim i As Integer
+
+        frmEditor_Classes.lstIndex.Items.Clear()
+
+        For i = 1 To Max_Classes
+            frmEditor_Classes.lstIndex.Items.Add(Trim(Classes(i).Name))
+        Next
+
+        Editor = EDITOR_CLASSES
+
+        frmEditor_Classes.scrlMaleSprite.Maximum = NumCharacters
+        frmEditor_Classes.scrlFemaleSprite.Maximum = NumCharacters
+
+        frmEditor_Classes.cmbItems.Items.Clear()
+
+        frmEditor_Classes.cmbItems.Items.Add("None")
+        For i = 1 To MAX_ITEMS
+            frmEditor_Classes.cmbItems.Items.Add(Trim(Item(i).Name))
+        Next
+
+        frmEditor_Classes.Visible = True
+    End Sub
+
+    Public Sub LoadClass()
+        Dim i As Integer
+
+        If EditorIndex <= 0 Or EditorIndex > Max_Classes Then Exit Sub
+
+        frmEditor_Classes.txtName.Text = Classes(EditorIndex).Name
+        frmEditor_Classes.txtDescription.Text = Classes(EditorIndex).Desc
+
+        frmEditor_Classes.cmbMaleSprite.Items.Clear()
+
+        For i = 0 To UBound(Classes(EditorIndex).MaleSprite)
+            frmEditor_Classes.cmbMaleSprite.Items.Add("Sprite " & i + 1)
+        Next
+
+        frmEditor_Classes.cmbFemaleSprite.Items.Clear()
+
+        For i = 0 To UBound(Classes(EditorIndex).FemaleSprite)
+            frmEditor_Classes.cmbFemaleSprite.Items.Add("Sprite " & i + 1)
+        Next
+
+        frmEditor_Classes.scrlMaleSprite.Value = Classes(EditorIndex).MaleSprite(0)
+        frmEditor_Classes.scrlFemaleSprite.Value = Classes(EditorIndex).FemaleSprite(0)
+
+        frmEditor_Classes.cmbMaleSprite.SelectedIndex = 0
+        frmEditor_Classes.cmbFemaleSprite.SelectedIndex = 0
+
+        frmEditor_Classes.DrawPreview()
+
+        frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.strength)
+        frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.luck)
+        frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.endurance)
+        frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.intelligence)
+        frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.vitality)
+        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.spirit)
+
+        frmEditor_Classes.numBaseExp.Value = Classes(EditorIndex).BaseExp
+
+        frmEditor_Classes.lstStartItems.Items.Clear()
+        For i = 1 To 5
+            If Classes(EditorIndex).StartItem(i) > 0 Then
+                frmEditor_Classes.lstStartItems.Items.Add(Item(Classes(EditorIndex).StartItem(i)).Name & " X " & Classes(EditorIndex).StartValue(i))
+            Else
+                frmEditor_Classes.lstStartItems.Items.Add("None")
+            End If
+        Next
+
+        frmEditor_Classes.numStartMap.Value = Classes(EditorIndex).StartMap
+        frmEditor_Classes.numStartX.Value = Classes(EditorIndex).StartX
+        frmEditor_Classes.numStartY.Value = Classes(EditorIndex).StartY
+    End Sub
+
+#End Region
+
 End Class

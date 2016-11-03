@@ -131,5 +131,57 @@
         Resource(EditorIndex).EmptyMessage = Trim$(txtMessage2.Text)
     End Sub
 
+#Region "Resource Editor"
+    Public Sub ResourceEditorInit()
 
+        If frmEditor_Resource.Visible = False Then Exit Sub
+        EditorIndex = frmEditor_Resource.lstIndex.SelectedIndex + 1
+
+        frmEditor_Resource.scrlExhaustedPic.Maximum = NumResources
+        frmEditor_Resource.scrlNormalPic.Maximum = NumResources
+        frmEditor_Resource.scrlAnimation.Maximum = MAX_ANIMATIONS
+        frmEditor_Resource.txtName.Text = Trim$(Resource(EditorIndex).Name)
+        frmEditor_Resource.txtMessage.Text = Trim$(Resource(EditorIndex).SuccessMessage)
+        frmEditor_Resource.txtMessage2.Text = Trim$(Resource(EditorIndex).EmptyMessage)
+        frmEditor_Resource.cmbType.SelectedIndex = Resource(EditorIndex).ResourceType
+        frmEditor_Resource.scrlNormalPic.Value = Resource(EditorIndex).ResourceImage
+        frmEditor_Resource.scrlExhaustedPic.Value = Resource(EditorIndex).ExhaustedImage
+        frmEditor_Resource.scrlRewardItem.Value = Resource(EditorIndex).ItemReward
+        frmEditor_Resource.scrlRewardExp.Value = Resource(EditorIndex).ExpReward
+        frmEditor_Resource.cmbTool.SelectedIndex = Resource(EditorIndex).ToolRequired
+        frmEditor_Resource.scrlHealth.Value = Resource(EditorIndex).Health
+        frmEditor_Resource.scrlRespawn.Value = Resource(EditorIndex).RespawnTime
+        frmEditor_Resource.scrlAnimation.Value = Resource(EditorIndex).Animation
+        frmEditor_Resource.scrlLvlReq.Value = Resource(EditorIndex).LvlRequired
+
+
+        frmEditor_Resource.Visible = True
+
+        EditorResource_DrawSprite()
+
+        Resource_Changed(EditorIndex) = True
+    End Sub
+
+    Public Sub ResourceEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_RESOURCES
+            If Resource_Changed(i) Then
+                SendSaveResource(i)
+            End If
+        Next
+
+        frmEditor_Resource.Visible = False
+        Editor = 0
+        ClearChanged_Resource()
+    End Sub
+
+    Public Sub ResourceEditorCancel()
+        Editor = 0
+        frmEditor_Resource.Visible = False
+        ClearChanged_Resource()
+        ClearResources()
+        SendRequestResources()
+    End Sub
+#End Region
 End Class

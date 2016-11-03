@@ -199,7 +199,6 @@ Module EditorLoop
             End If
 
             Application.DoEvents()
-            'Thread.Yield()
             Thread.Sleep(1)
         Loop
     End Sub

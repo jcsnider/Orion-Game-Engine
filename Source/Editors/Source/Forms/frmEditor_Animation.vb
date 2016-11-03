@@ -80,4 +80,61 @@
         scrlSprite0.Maximum = NumAnimations
         scrlSprite1.Maximum = NumAnimations
     End Sub
+
+#Region "Animation Editor"
+    Public Sub AnimationEditorInit()
+
+        If frmEditor_Animation.Visible = False Then Exit Sub
+
+        EditorIndex = frmEditor_Animation.lstIndex.SelectedIndex + 1
+
+        With Animation(EditorIndex)
+            frmEditor_Animation.txtName.Text = Trim$(.Name)
+
+            frmEditor_Animation.scrlSprite0.Value = .Sprite(0)
+            frmEditor_Animation.scrlFrameCount0.Value = .Frames(0)
+            frmEditor_Animation.scrlLoopCount0.Value = .LoopCount(0)
+            frmEditor_Animation.scrlLoopTime0.Value = .looptime(0)
+
+            frmEditor_Animation.scrlSprite1.Value = .Sprite(1)
+            frmEditor_Animation.scrlFrameCount1.Value = .Frames(1)
+            frmEditor_Animation.scrlLoopCount1.Value = .LoopCount(1)
+            frmEditor_Animation.scrlLoopTime1.Value = .looptime(1)
+
+            EditorIndex = frmEditor_Animation.lstIndex.SelectedIndex + 1
+        End With
+
+        EditorAnim_DrawAnim()
+        Animation_Changed(EditorIndex) = True
+    End Sub
+
+    Public Sub AnimationEditorOk()
+        Dim i As Integer
+
+        For i = 1 To MAX_ANIMATIONS
+            If Animation_Changed(i) Then
+                SendSaveAnimation(i)
+            End If
+        Next
+
+        frmEditor_Animation.Visible = False
+        Editor = 0
+        ClearChanged_Animation()
+    End Sub
+
+    Public Sub AnimationEditorCancel()
+        Editor = 0
+        frmEditor_Animation.Visible = False
+        ClearChanged_Animation()
+        ClearAnimations()
+        SendRequestAnimations()
+    End Sub
+
+    Public Sub ClearChanged_Animation()
+        For i = 0 To MAX_ANIMATIONS
+            Animation_Changed(i) = False
+        Next
+    End Sub
+
+#End Region
 End Class
