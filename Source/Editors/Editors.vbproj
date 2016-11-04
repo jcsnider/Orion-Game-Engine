@@ -257,12 +257,6 @@
     <None Include="SFML.Net.dll.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.vbproj">
-      <Project>{531b337c-bc02-44ed-90c2-c448fe5190a2}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Clear.png" />
   </ItemGroup>
   <ItemGroup>
