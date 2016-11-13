@@ -139,81 +139,81 @@ Public Class frmAdmin
 
         SendRequestEditMap()
     End Sub
-    Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditItem()
-    End Sub
+    '    SendRequestEditItem()
+    'End Sub
 
-    Private Sub btnResourceEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnResourceEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditResource()
-    End Sub
+    '    SendRequestEditResource()
+    'End Sub
 
-    Private Sub btnNPCEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNPCEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnNPCEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNPCEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditNpc()
-    End Sub
+    '    SendRequestEditNpc()
+    'End Sub
 
-    Private Sub btnSkillEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSkillEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnSkillEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSkillEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditSkill()
-    End Sub
+    '    SendRequestEditSkill()
+    'End Sub
 
-    Private Sub btnShopEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShopEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnShopEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShopEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditShop()
-    End Sub
+    '    SendRequestEditShop()
+    'End Sub
 
-    Private Sub btnAnimationEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnimationEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
+    'Private Sub btnAnimationEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnimationEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditAnimation()
-    End Sub
+    '    SendRequestEditAnimation()
+    'End Sub
 
-    Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            Exit Sub
-        End If
+    'Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        Exit Sub
+    '    End If
 
-        SendRequestEditQuest()
-    End Sub
+    '    SendRequestEditQuest()
+    'End Sub
 
-    Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
-            Exit Sub
-        End If
-        SendRequestEditHouse()
-    End Sub
+    'Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    '        Exit Sub
+    '    End If
+    '    SendRequestEditHouse()
+    'End Sub
 
-    Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-            Exit Sub
-        End If
-        SendRequestEditProjectiles()
-    End Sub
+    'Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
+    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    '        Exit Sub
+    '    End If
+    '    SendRequestEditProjectiles()
+    'End Sub
 #End Region
 
 #Region "Map Report"
@@ -301,14 +301,14 @@ Public Class frmAdmin
         SendMapRespawn()
     End Sub
 
-    Private Sub btnRecipeEditor_Click(sender As Object, e As EventArgs) Handles btnRecipeEditor.Click
+    Private Sub btnRecipeEditor_Click(sender As Object, e As EventArgs) 
         If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
             Exit Sub
         End If
         SendRequestEditRecipes()
     End Sub
 
-    Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnClassEditor.Click
+    Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) 
         If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then Exit Sub
 
         SendRequestEditClass()

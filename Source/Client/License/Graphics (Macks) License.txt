@@ -36,7 +36,7 @@ When you want alter the resources
 
 You can use these resources to alter. (Ex: change colors or hairstyle, add weapon, etc.)
 
-When you alter our resources, you can distribute them on your website or our "Material Database" as long as they are free game resources. (When you distribute altered resources, please write clearly under them that this material changes the REFMAP's free graphics for games, and our URL).
+When you alter our resources, you can distribute them on your website or our "Material Database" as Integer as they are free game resources. (When you distribute altered resources, please write clearly under them that this material changes the REFMAP's free graphics for games, and our URL).
 
 Caution:
 Permission of alteration and distributing altered one is very unique among the game resources websites in Japan. Most of websites don't permit alteration, or permit alteration only making the user's game and don't permit to distribute altered graphics. 

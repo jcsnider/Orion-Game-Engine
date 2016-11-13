@@ -3,6 +3,7 @@
     'Constants
     Public Const MAX_QUESTS As Byte = 250
     Public Const MAX_TASKS As Byte = 10
+    Public Const MAX_REQUIREMENTS As Byte = 10
     Public Const MAX_ACTIVEQUESTS = 10
 
     Public Const EDITOR_TASKS As Byte = 7
@@ -627,7 +628,7 @@
 
         For I = 1 To MAX_QUESTS
             If QuestInProgress(Index, I) Then
-                Call CheckTask(Index, I, TaskType, TargetIndex)
+                CheckTask(Index, I, TaskType, TargetIndex)
             End If
         Next
     End Sub
@@ -639,9 +640,9 @@
         'PlayerMsg Index, "actual tasknr: " & ActualTask, Yellow
 
         Select Case TaskType
-            Case QUEST_TYPE_GOSLAY 'defeat X amount of X poke's.
+            Case QUEST_TYPE_GOSLAY 'defeat X amount of X npc's.
 
-                'is poke defeated id same as the poke i have to defeat?
+                'is npc defeated id same as the npc i have to defeat?
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
                     'Count +1
                     Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
@@ -672,7 +673,7 @@
                 End If
 
             Case QUEST_TYPE_GOTALK 'Interact with X npc.
-                If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
+                If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC And Quest(QuestNum).Task(ActualTask).Amount = 0 Then
                     QuestMessage(Index, QuestNum, Quest(QuestNum).Task(ActualTask).Speech, 0)
                     If CanEndQuest(Index, QuestNum) Then
                         EndQuest(Index, QuestNum)
@@ -696,7 +697,7 @@
                     For I = 1 To MAX_INV
                         If GetPlayerInvItemNum(Index, I) = Quest(QuestNum).Task(ActualTask).Item Then
                             If GetPlayerInvItemValue(Index, I) >= Quest(QuestNum).Task(ActualTask).Amount Then
-                                TakeInvItem(Index, I, Quest(QuestNum).Task(ActualTask).Amount)
+                                TakeInvItem(Index, GetPlayerInvItemNum(Index, I), Quest(QuestNum).Task(ActualTask).Amount)
                                 QuestMessage(Index, QuestNum, Quest(QuestNum).Task(ActualTask).Speech, 0)
                                 If CanEndQuest(Index, QuestNum) Then
                                     EndQuest(Index, QuestNum)
