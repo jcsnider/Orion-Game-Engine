@@ -175,14 +175,8 @@ Public Class frmMainGame
 #Region "PicScreen Code"
     Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
         If Not CheckGuiClick(e.X, e.Y, e) Then
-
-            If InMapEditor Then
-                frmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y, False)
-            End If
-
             ' left click
             If e.Button = MouseButtons.Left Then
-
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
                     ' targetting

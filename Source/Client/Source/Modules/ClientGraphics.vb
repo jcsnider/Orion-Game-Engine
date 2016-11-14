@@ -1606,23 +1606,6 @@ Module ClientGraphics
         DrawThunderEffect()
         DrawMapTint()
 
-        ' Draw out a square at mouse cursor
-        If MapGrid = True Then
-            DrawGrid()
-        End If
-
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpDirBlock Then
-            For X = TileView.left To TileView.right
-                For Y = TileView.top To TileView.bottom
-                    If IsValidMapPoint(X, Y) Then
-                        DrawDirections(X, Y)
-                    End If
-                Next
-            Next
-        End If
-
-        If InMapEditor Then DrawTileOutline()
-
         'furniture
         If FurnitureSelected > 0 Then
             If Player(MyIndex).InHouse = MyIndex Then
@@ -1680,46 +1663,6 @@ Module ClientGraphics
 
         'and finally show everything on screen
         GameWindow.Display()
-    End Sub
-
-    Public Sub DrawTileOutline()
-        Dim rec As Rectangle
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpDirBlock Then Exit Sub
-
-        With rec
-            .Y = 0
-            .Height = PIC_Y
-            .X = 0
-            .Width = PIC_X
-        End With
-
-        Dim rec2 As New RectangleShape
-        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
-        rec2.OutlineThickness = 0.6
-        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
-            'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
-            rec2.Size = New Vector2f(rec.Width, rec.Height)
-        Else
-            If EditorTileWidth = 1 And EditorTileHeight = 1 Then
-                RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
-                rec2.Size = New Vector2f(rec.Width, rec.Height)
-            Else
-                If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
-                    rec2.Size = New Vector2f(rec.Width, rec.Height)
-                Else
-                    RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
-                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
-                End If
-
-            End If
-
-        End If
-
-        rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
-        GameWindow.Draw(rec2)
     End Sub
 
     Public Sub DrawBars()
@@ -3314,103 +3257,6 @@ NextLoop:
         If pnlCraftVisible = True Then
             DrawCraftPanel()
         End If
-    End Sub
-
-    Public Sub EditorMap_DrawMapItem()
-        Dim itemnum As Integer
-        itemnum = Item(frmEditor_MapEditor.scrlMapItem.Value).Pic
-
-        If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Public Sub EditorMap_DrawKey()
-        Dim itemnum As Integer
-
-        itemnum = Item(frmEditor_MapEditor.scrlMapKey.Value).Pic
-
-        If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
-        End If
-
-    End Sub
-
-    Public Sub EditorMap_DrawTileset()
-        Dim height As Integer
-        Dim width As Integer
-        Dim tileset As Byte
-
-        ' find tileset number
-        tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
-
-        ' exit out if doesn't exist
-        If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
-
-        If tileset <> LastTileset Then
-            If Not TileSetImgsGFX(LastTileset) Is Nothing Then TileSetImgsGFX(LastTileset).Dispose()
-            TileSetImgsGFX(LastTileset) = Nothing
-            TileSetImgsLoaded(LastTileset) = False
-        End If
-
-        'check if its loaded
-        If TileSetImgsLoaded(tileset) = False Then
-            TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
-            TileSetImgsLoaded(tileset) = True
-        End If
-
-        'Draw the tileset into memory.
-        height = TileSetImgsGFX(tileset).Height
-        width = TileSetImgsGFX(tileset).Width
-        MapEditorBackBuffer = New Bitmap(width, height)
-
-        Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
-        g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
-
-        frmEditor_MapEditor.picBackSelect.Height = height
-        frmEditor_MapEditor.picBackSelect.Width = width
-
-        ' change selected shape for autotiles
-        If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case frmEditor_MapEditor.cmbAutoTile.SelectedIndex
-                Case 1 ' autotile
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-                Case 2 ' fake autotile
-                    EditorTileWidth = 1
-                    EditorTileHeight = 1
-                Case 3 ' animated
-                    EditorTileWidth = 6
-                    EditorTileHeight = 3
-                Case 4 ' cliff
-                    EditorTileWidth = 2
-                    EditorTileHeight = 2
-                Case 5 ' waterfall
-                    EditorTileWidth = 2
-                    EditorTileHeight = 3
-            End Select
-        End If
-
-        g.DrawImage(TileSetImgsGFX(tileset), New Rectangle(0, 0, TileSetImgsGFX(tileset).Width, TileSetImgsGFX(tileset).Height))
-        g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileWidth * PIC_X, EditorTileHeight * PIC_X))
-        g.Dispose()
-
-        g = frmEditor_MapEditor.picBackSelect.CreateGraphics
-        g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
-        g.Dispose()
-
-        LastTileset = tileset
     End Sub
 End Module
 

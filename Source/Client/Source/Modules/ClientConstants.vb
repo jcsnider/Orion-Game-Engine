@@ -1,6 +1,4 @@
-﻿Imports System.Drawing
-
-Module ClientConstants
+﻿Module ClientConstants
 
     'Graphics
     Public Const FPS_LIMIT As Integer = 64
@@ -92,19 +90,6 @@ Module ClientConstants
     Public Const EDITOR_HOUSE As Byte = 8
     Public Const EDITOR_RECIPE As Byte = 9
     Public Const EDITOR_CLASSES As Byte = 10
-
-    ' Used to check if in editor or not and variables for use in editor
-    Public InMapEditor As Boolean
-    Public EditorTileX As Integer
-    Public EditorTileY As Integer
-    Public EditorTileWidth As Integer
-    Public EditorTileHeight As Integer
-    Public EditorWarpMap As Integer
-    Public EditorWarpX As Integer
-    Public EditorWarpY As Integer
-    Public EditorShop As Integer
-    Public EditorTileSelStart As Point
-    Public EditorTileSelEnd As Point
 
     Public HalfX As Integer = ((SCREEN_MAPX + 1) \ 2) * PIC_X
     Public HalfY As Integer = ((SCREEN_MAPY + 1) \ 2) * PIC_Y

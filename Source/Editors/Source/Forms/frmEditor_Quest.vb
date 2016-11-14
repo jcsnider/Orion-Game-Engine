@@ -1,13 +1,12 @@
 ﻿Public Class frmEditor_Quest
     Private Sub frmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim i As Integer
+        Me.Width = 715
 
-        Width = 740
+        fraRequirements.Location = fraText.Location
+        fraRewards.Location = fraText.Location
+        fraTasks.Location = fraText.Location
 
-        fraRequirements.Location = fraGeneral.Location
-        fraRewards.Location = fraGeneral.Location
-        fraTasks.Location = fraGeneral.Location
-
+        scrlTotalTasks.Maximum = MAX_TASKS
         scrlNPC.Maximum = MAX_NPCS
         scrlItem.Maximum = MAX_ITEMS
         scrlMap.Maximum = MAX_MAPS
@@ -22,16 +21,7 @@
         scrlItemRew1.Maximum = MAX_ITEMS
         scrlItemRewValue1.Maximum = 999999
 
-        lstRequirements.Items.Clear()
-        For i = 1 To MAX_REQUIREMENTS
-            lstRequirements.Items.Add(i & ":")
-        Next
-
-        lstTasks.Items.Clear()
-        For i = 1 To MAX_TASKS
-            lstTasks.Items.Add(i & ":")
-        Next
-
+        optSpeech.Checked = True
     End Sub
 
     Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
@@ -48,6 +38,50 @@
         lstIndex.Items.RemoveAt(EditorIndex - 1)
         lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Quest(EditorIndex).Name)
         lstIndex.SelectedIndex = tmpIndex
+    End Sub
+
+    Private Sub optSpeech_CheckedChanged(sender As Object, e As EventArgs) Handles optSpeech.CheckedChanged
+        fraText.Visible = False
+        fraRequirements.Visible = False
+        fraRewards.Visible = False
+        fraTasks.Visible = False
+
+        If optSpeech.Checked = True Then
+            fraText.Visible = True
+        End If
+    End Sub
+
+    Private Sub optRequirements_CheckedChanged(sender As Object, e As EventArgs) Handles optRequirements.CheckedChanged
+        fraText.Visible = False
+        fraRequirements.Visible = False
+        fraRewards.Visible = False
+        fraTasks.Visible = False
+
+        If optRequirements.Checked = True Then
+            fraRequirements.Visible = True
+        End If
+    End Sub
+
+    Private Sub optRewards_CheckedChanged(sender As Object, e As EventArgs) Handles optRewards.CheckedChanged
+        fraText.Visible = False
+        fraRequirements.Visible = False
+        fraRewards.Visible = False
+        fraTasks.Visible = False
+
+        If optRewards.Checked = True Then
+            fraRewards.Visible = True
+        End If
+    End Sub
+
+    Private Sub optTasks_CheckedChanged(sender As Object, e As EventArgs) Handles optTasks.CheckedChanged
+        fraText.Visible = False
+        fraRequirements.Visible = False
+        fraRewards.Visible = False
+        fraTasks.Visible = False
+
+        If optTasks.Checked = True Then
+            fraTasks.Visible = True
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -167,85 +201,70 @@
         Quest(EditorIndex).RewardItemAmount = scrlItemRewValue1.Value
     End Sub
 
-
-
-    Private Sub scrlExpReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlExpReward.ValueChanged
-        lblExpReward.Text = "Experience Gained: " & scrlExpReward.Value
-        Quest(EditorIndex).RewardExp = scrlExpReward.Value
+    Private Sub txtQuestLog_TextChanged(sender As Object, e As EventArgs) Handles txtQuestLog.TextChanged
+        Quest(EditorIndex).QuestLog = Trim$(txtQuestLog.Text)
     End Sub
 
-#Region "Tasks"
-    Private Sub lstTasks_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstTasks.SelectedIndexChanged
-        LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
-        'fraTasks.Visible = True
+    Private Sub scrlTotalTasks_ValueChanged(sender As Object, e As EventArgs) Handles scrlTotalTasks.ValueChanged
+        lblSelected.Text = "Selected Task: " & scrlTotalTasks.Value
+
+        LoadTask(EditorIndex, scrlTotalTasks.Value)
     End Sub
 
-    Private Sub btnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
-        fraTasks.Visible = True
+    Private Sub txtSpeech_TextChanged(sender As Object, e As EventArgs) Handles txtSpeech.TextChanged
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Speech = Trim$(txtSpeech.Text)
     End Sub
 
-    Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
-        LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+    Private Sub txtTaskLog_TextChanged(sender As Object, e As EventArgs) Handles txtTaskLog.TextChanged
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskLog = Trim$(txtTaskLog.Text)
     End Sub
 
-    Private Sub btnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskLog = Trim$(txtTaskLog.Text)
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Speech = txtTaskSpeech.Text
-
-        If chkEnd.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).QuestEnd = True
-        Else
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).QuestEnd = False
-        End If
-
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Npc = scrlNPC.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Item = scrlItem.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Map = scrlMap.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Resource = scrlResource.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Amount = scrlAmount.Value
-
-
-        fraTasks.Visible = False
-    End Sub
-
-    Private Sub btnCancelTask_Click(sender As Object, e As EventArgs) Handles btnCancelTask.Click
-        fraTasks.Visible = False
-    End Sub
-
-#End Region
     Private Sub scrlNPC_ValueChanged(sender As Object, e As EventArgs) Handles scrlNPC.ValueChanged
         lblNpc.Text = "NPC: " & Npc(scrlNPC.Value).Name
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Npc = scrlNPC.Value
     End Sub
 
     Private Sub scrlItem_ValueChanged(sender As Object, e As EventArgs) Handles scrlItem.ValueChanged
         lblItem.Text = "Item: " & Item(scrlItem.Value).Name
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Item = scrlItem.Value
     End Sub
 
     Private Sub scrlMap_ValueChanged(sender As Object, e As EventArgs) Handles scrlMap.ValueChanged
         lblMap.Text = "Map: " & scrlMap.Value & " " & MapNames(scrlMap.Value)
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Map = scrlMap.Value
     End Sub
 
     Private Sub scrlResource_ValueChanged(sender As Object, e As EventArgs) Handles scrlResource.ValueChanged
         lblResource.Text = "Resource: " & Resource(scrlResource.Value).Name
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Resource = scrlResource.Value
     End Sub
 
     Private Sub scrlAmount_ValueChanged(sender As Object, e As EventArgs) Handles scrlAmount.ValueChanged
         lblAmount.Text = "Amount: " & scrlAmount.Value
+        Quest(EditorIndex).Task(scrlTotalTasks.Value).Amount = scrlAmount.Value
+    End Sub
+
+    Private Sub chkEnd_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnd.CheckedChanged
+        If chkEnd.Checked = True Then
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).QuestEnd = True
+        Else
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).QuestEnd = False
+        End If
     End Sub
 
     Private Sub optTask0_CheckedChanged(sender As Object, e As EventArgs) Handles optTask0.CheckedChanged
         If optTask0.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 0
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = 0
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 0
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = 0
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
         End If
     End Sub
 
     Private Sub optTask1_CheckedChanged(sender As Object, e As EventArgs) Handles optTask1.CheckedChanged
         If optTask1.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 1
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOSLAY
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 1
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOSLAY
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlNPC.Enabled = True
         Else
             scrlNPC.Enabled = False
@@ -254,9 +273,9 @@
 
     Private Sub optTask2_CheckedChanged(sender As Object, e As EventArgs) Handles optTask2.CheckedChanged
         If optTask2.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 2
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOGATHER
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 2
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOGATHER
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlItem.Enabled = True
         Else
             scrlItem.Enabled = False
@@ -265,9 +284,9 @@
 
     Private Sub optTask3_CheckedChanged(sender As Object, e As EventArgs) Handles optTask3.CheckedChanged
         If optTask3.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 3
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOTALK
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 3
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOTALK
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlNPC.Enabled = True
         Else
             scrlNPC.Enabled = False
@@ -276,9 +295,9 @@
 
     Private Sub optTask4_CheckedChanged(sender As Object, e As EventArgs) Handles optTask4.CheckedChanged
         If optTask4.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 4
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOREACH
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 4
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOREACH
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlMap.Enabled = True
         Else
             scrlMap.Enabled = False
@@ -287,9 +306,9 @@
 
     Private Sub optTask5_CheckedChanged(sender As Object, e As EventArgs) Handles optTask5.CheckedChanged
         If optTask5.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 5
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOGIVE
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 5
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOGIVE
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlItem.Enabled = True
         Else
             scrlItem.Enabled = False
@@ -298,9 +317,9 @@
 
     Private Sub optTask6_CheckedChanged(sender As Object, e As EventArgs) Handles optTask6.CheckedChanged
         If optTask6.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 6
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOTRAIN
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 6
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOTRAIN
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlResource.Enabled = True
         Else
             scrlResource.Enabled = False
@@ -309,14 +328,17 @@
 
     Private Sub optTask7_CheckedChanged(sender As Object, e As EventArgs) Handles optTask7.CheckedChanged
         If optTask7.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Order = 7
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskType = QUEST_TYPE_GOGET
-            LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).Order = 7
+            Quest(EditorIndex).Task(scrlTotalTasks.Value).TaskType = QUEST_TYPE_GOGET
+            LoadTask(EditorIndex, scrlTotalTasks.Value)
             scrlNPC.Enabled = True
         Else
             scrlNPC.Enabled = False
         End If
     End Sub
 
-
+    Private Sub scrlExpReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlExpReward.ValueChanged
+        lblExpReward.Text = "Experience Gained: " & scrlExpReward.Value
+        Quest(EditorIndex).RewardExp = scrlExpReward.Value
+    End Sub
 End Class

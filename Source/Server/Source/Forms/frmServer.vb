@@ -278,8 +278,4 @@
         SaveNpcs()
         TextAdd("Saved All!")
     End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        OpenAutomapper()
-    End Sub
 End Class
