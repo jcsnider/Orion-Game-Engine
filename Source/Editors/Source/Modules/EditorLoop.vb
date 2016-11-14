@@ -46,7 +46,7 @@ Module EditorLoop
         'quests
         ReDim Quest(MAX_QUESTS)
         For i = 0 To MAX_QUESTS
-            ReDim Quest(i).Requirement(3)
+            ReDim Quest(i).Requirement(MAX_REQUIREMENTS)
             ReDim Quest(i).Chat(3)
             ReDim Quest(i).Task(MAX_TASKS)
         Next

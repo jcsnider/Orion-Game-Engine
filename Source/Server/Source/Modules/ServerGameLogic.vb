@@ -138,58 +138,58 @@
     End Function
 
     Sub UpdateUI()
-        'If ConsoleText <> frmServer.txtText.Text Then
-        '    frmServer.txtText.Text = ConsoleText
-        '    frmServer.txtText.SelectionStart = frmServer.txtText.TextLength
-        '    frmServer.txtText.ScrollToCaret()
-        'End If
-        'If NeedToUpDatePlayerList = True Then
-        '    UpdateCaption()
-        '    frmServer.lstView.Items.Clear()
-        '    For x = 1 To MAX_PLAYERS
-        '        frmServer.lstView.Items.Add(x)
-        '        frmServer.lstView.Items(x - 1).SubItems.Add("")
-        '        frmServer.lstView.Items(x - 1).SubItems.Add("")
-        '        frmServer.lstView.Items(x - 1).SubItems.Add("")
-        '    Next
-        '    Try
-        '        For i = 1 To MAX_PLAYERS
-        '            If Not Clients(i) Is Nothing Then
-        '                If Not Clients(i).Socket Is Nothing Then
-        '                    If Clients(i).Socket.Connected Then
-        '                        frmServer.lstView.Items(i - 1).SubItems(1).Text = Clients(i).IP
-        '                        If Player(i).Login <> "" Then
-        '                            frmServer.lstView.Items(i - 1).SubItems(2).Text = Player(i).Login
-        '                            If Player(i).Character(TempPlayer(i).CurChar).Name <> "" Then
-        '                                frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Character(TempPlayer(i).CurChar).Name
-        '                            Else
-        '                                frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-        '                            End If
-        '                        Else
-        '                            frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
-        '                            frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-        '                        End If
-        '                    Else
-        '                        frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
-        '                        frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
-        '                        frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-        '                    End If
-        '                Else
-        '                    frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
-        '                    frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
-        '                    frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-        '                End If
-        '            Else
-        '                frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
-        '                frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
-        '                frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
-        '            End If
-        '        Next
-        '    Catch ex As Exception
-        '        NeedToUpDatePlayerList = False
-        '    End Try
-        '    NeedToUpDatePlayerList = False
-        'End If
+        If ConsoleText <> frmServer.txtText.Text Then
+            frmServer.txtText.Text = ConsoleText
+            frmServer.txtText.SelectionStart = frmServer.txtText.TextLength
+            frmServer.txtText.ScrollToCaret()
+        End If
+        If NeedToUpDatePlayerList = True Then
+            UpdateCaption()
+            frmServer.lstView.Items.Clear()
+            For x = 1 To MAX_PLAYERS
+                frmServer.lstView.Items.Add(x)
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+                frmServer.lstView.Items(x - 1).SubItems.Add("")
+            Next
+            Try
+                For i = 1 To MAX_PLAYERS
+                    If Not Clients(i) Is Nothing Then
+                        If Not Clients(i).Socket Is Nothing Then
+                            If Clients(i).Socket.Connected Then
+                                frmServer.lstView.Items(i - 1).SubItems(1).Text = Clients(i).IP
+                                If Player(i).Login <> "" Then
+                                    frmServer.lstView.Items(i - 1).SubItems(2).Text = Player(i).Login
+                                    If Player(i).Character(TempPlayer(i).CurChar).Name <> "" Then
+                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = Player(i).Character(TempPlayer(i).CurChar).Name
+                                    Else
+                                        frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                                    End If
+                                Else
+                                    frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
+                                    frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                                End If
+                            Else
+                                frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
+                                frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
+                                frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                            End If
+                        Else
+                            frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
+                            frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
+                            frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                        End If
+                    Else
+                        frmServer.lstView.Items(i - 1).SubItems(1).Text = ""
+                        frmServer.lstView.Items(i - 1).SubItems(2).Text = ""
+                        frmServer.lstView.Items(i - 1).SubItems(3).Text = ""
+                    End If
+                Next
+            Catch ex As Exception
+                NeedToUpDatePlayerList = False
+            End Try
+            NeedToUpDatePlayerList = False
+        End If
     End Sub
 
     Sub SpawnAllMapsItems()

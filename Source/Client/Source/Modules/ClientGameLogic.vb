@@ -113,7 +113,7 @@ Module ClientGameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < Tick Then
-                        AddText("You took too long to decide. Please try again.", ColorType.Yellow)
+                        AddText("You took too Integer to decide. Please try again.", ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -220,6 +220,8 @@ Module ClientGameLogic
                     If FadeOutSwitch = True Then
                         FadeOut()
                     End If
+
+                    If InMapEditor Then EditorMap_DrawTileset()
 
                     destrect = New Rectangle(0, 0, ScreenX, ScreenY)
                     Application.DoEvents()

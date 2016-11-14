@@ -3,7 +3,7 @@ Module ServerINIAccess
 
 #Region "API Calls"
     ' standard API declarations for INI access
-    ' changing only "As Long" to "As Int32" (As Integer would work also)
+    ' changing only "As Integer" to "As Int32" (As Integer would work also)
     Private Declare Unicode Function WritePrivateProfileString Lib "kernel32" _
     Alias "WritePrivateProfileStringW" (ByVal lpApplicationName As String,
     ByVal lpKeyName As String, ByVal lpString As String,

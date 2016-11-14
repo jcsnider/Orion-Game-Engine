@@ -182,7 +182,7 @@ Module ClientText
     Sub DrawActionMsg(ByVal Index As Integer)
         Dim X As Integer, y As Integer, i As Integer, Time As Integer
 
-        ' how long we want each message to appear
+        ' how Integer we want each message to appear
         Select Case ActionMsg(Index).Type
             Case ActionMsgType.STATIC
                 Time = 1500
@@ -316,8 +316,8 @@ Module ClientText
         While i < words.Length
             Dim word As String = words(i)
 
-            ' If adding the new word to the current line would be too long,
-            ' then put it on a new line (and split it up if it's too long).
+            ' If adding the new word to the current line would be too Integer,
+            ' then put it on a new line (and split it up if it's too Integer).
             If curLineLength + word.Length > width Then
 
                 ' Only move down to a new line if we have text on the current line.
@@ -327,7 +327,7 @@ Module ClientText
                     curLineLength = 0
                 End If
 
-                ' If the current word is too long to fit on a line even on it's own then
+                ' If the current word is too Integer to fit on a line even on it's own then
                 ' split the word up.
                 While word.Length > width
                     strBuilder.Append(word.Substring(0, width - 1) + "-")

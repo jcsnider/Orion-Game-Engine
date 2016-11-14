@@ -69,6 +69,7 @@ Partial Class frmServer
         Me.TimedShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShutdownToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrUpdatePlayerList = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -191,6 +192,7 @@ Partial Class frmServer
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.Button1)
         Me.TabPage3.Controls.Add(Me.GroupBox2)
         Me.TabPage3.Controls.Add(Me.GroupBox1)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
@@ -433,6 +435,15 @@ Partial Class frmServer
         '
         Me.tmrUpdatePlayerList.Interval = 5000
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(209, 141)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(121, 31)
+        Me.Button1.TabIndex = 9
+        Me.Button1.Text = "Auto Mapper"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmServer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -503,4 +514,5 @@ Partial Class frmServer
     Friend WithEvents btnShutDown As System.Windows.Forms.Button
     Friend WithEvents tmrUpdatePlayerList As System.Windows.Forms.Timer
     Friend WithEvents btnSaveAll As Button
+    Friend WithEvents Button1 As Button
 End Class

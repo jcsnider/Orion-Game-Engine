@@ -474,6 +474,15 @@
             ShowRClick = False
         End If
 
+        If InitMapEditor = True Then
+            frmEditor_MapEditor.MapEditorInit()
+            InitMapEditor = False
+        End If
+
+        If InitMapProperties = True Then
+            frmEditor_MapEditor.MapPropertiesInit()
+            InitMapProperties = False
+        End If
     End Sub
 
 End Module

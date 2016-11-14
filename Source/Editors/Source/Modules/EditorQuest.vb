@@ -2,6 +2,7 @@
 #Region "Global Info"
     'Constants
     Public Const MAX_QUESTS As Byte = 250
+    Public Const MAX_REQUIREMENTS As Byte = 10
     Public Const MAX_TASKS As Byte = 10
     Public Const EDITOR_TASKS As Byte = 7
 
@@ -106,7 +107,6 @@
 
         With frmEditor_Quest
             .txtName.Text = Trim$(Quest(EditorIndex).Name)
-            .txtQuestLog.Text = Trim$(Quest(EditorIndex).QuestLog)
 
             If Quest(EditorIndex).Repeat = 1 Then
                 .chkRepeat.Checked = 1
@@ -150,10 +150,19 @@
                 .scrlExpReward.Value = 1
             End If
 
+            frmEditor_Quest.lstRequirements.Items.Clear()
+            For i = 1 To MAX_REQUIREMENTS
+                frmEditor_Quest.lstRequirements.Items.Add(i & ":" & Quest(EditorIndex).Requirement(i))
+            Next
+
+            frmEditor_Quest.lstTasks.Items.Clear()
+            For i = 1 To MAX_TASKS
+                frmEditor_Quest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
+            Next
 
             'load task nº1
-            .scrlTotalTasks.Value = 1
-            LoadTask(EditorIndex, 1)
+            .lstTasks.SelectedIndex = 0
+            LoadTask(EditorIndex, .lstTasks.SelectedIndex + 1)
 
         End With
 
@@ -457,7 +466,6 @@
             End Select
 
             'Load textboxes
-            .txtSpeech.Text = ""
             .txtTaskLog.Text = "" & Trim$(TaskToLoad.TaskLog)
 
             'Set scrolls to 0 and disable them so they can be enabled when needed
@@ -466,7 +474,6 @@
             .scrlMap.Value = 0
             .scrlResource.Value = 0
             .scrlAmount.Value = 0
-            .txtSpeech.Enabled = False
             .scrlNPC.Enabled = False
             .scrlItem.Enabled = False
             .scrlMap.Enabled = False
@@ -497,8 +504,6 @@
                 Case QUEST_TYPE_GOTALK '3
                     .scrlNPC.Enabled = True
                     .scrlNPC.Value = TaskToLoad.Npc
-                    .txtSpeech.Enabled = True
-                    .txtSpeech.Text = "" & Trim$(TaskToLoad.Speech)
 
                 Case QUEST_TYPE_GOREACH '4
                     .scrlMap.Enabled = True
@@ -511,8 +516,7 @@
                     .scrlAmount.Value = TaskToLoad.Amount
                     .scrlNPC.Enabled = True
                     .scrlNPC.Value = TaskToLoad.Npc
-                    .txtSpeech.Enabled = True
-                    .txtSpeech.Text = "" & Trim$(TaskToLoad.Speech)
+                    .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
 
                 Case QUEST_TYPE_GOTRAIN '6
                     .scrlResource.Enabled = True
@@ -527,8 +531,7 @@
                     .scrlItem.Value = TaskToLoad.Item
                     .scrlAmount.Enabled = True
                     .scrlAmount.Value = TaskToLoad.Amount
-                    .txtSpeech.Enabled = True
-                    .txtSpeech.Text = "" & Trim$(TaskToLoad.Speech)
+                    .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
             End Select
         End With
     End Sub

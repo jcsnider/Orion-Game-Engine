@@ -16,11 +16,11 @@
         Dim time1 As Integer, time2 As Integer
         x = 0
 
-        Console.Title = "Orion+ Server"
-        Console.SetWindowSize(120, 20)
+        'Console.Title = "Orion+ Server"
+        'Console.SetWindowSize(120, 20)
 
         time1 = GetTickCount()
-        'frmServer.Show()
+        frmServer.Show()
 
         ' Initialize the random-number generator
         Randomize() ', seed
@@ -200,15 +200,15 @@
         UpdateCaption()
         time2 = GetTickCount()
 
-        Console.Clear()
-        Console.WriteLine("  ____       _                        _____                          ")
-        Console.WriteLine(" / __ \     (_)                _     / ____|                         ")
-        Console.WriteLine("| |  | |_ __ _  ___  _ __    _| |_  | (___   ___ _ ____   _____ _ __ ")
-        Console.WriteLine("| |  | | '__| |/ _ \| '_ \  |_   _|  \___ \ / _ \ '__\ \ / / _ \ '__|")
-        Console.WriteLine("| |__| | |  | | (_) | | | |   |_|    ____) |  __/ |   \ V /  __/ |   ")
-        Console.WriteLine(" \____/|_|  |_|\___/|_| |_|         |_____/ \___|_|    \_/ \___|_|   ")
+        'Console.Clear()
+        'Console.WriteLine("  ____       _                        _____                          ")
+        'Console.WriteLine(" / __ \     (_)                _     / ____|                         ")
+        'Console.WriteLine("| |  | |_ __ _  ___  _ __    _| |_  | (___   ___ _ ____   _____ _ __ ")
+        'Console.WriteLine("| |  | | '__| |/ _ \| '_ \  |_   _|  \___ \ / _ \ '__\ \ / / _ \ '__|")
+        'Console.WriteLine("| |__| | |  | | (_) | | | |   |_|    ____) |  __/ |   \ V /  __/ |   ")
+        'Console.WriteLine(" \____/|_|  |_|\___/|_| |_|         |_____/ \___|_|    \_/ \___|_|   ")
 
-        Console.WriteLine("")
+        'Console.WriteLine("")
 
         SetStatus("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
 
@@ -220,16 +220,16 @@
         isShuttingDown = False
 
         'init the console msg
-        AddCommandHandler("/exit", AddressOf HandleCommandExit)
-        AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
+        'AddCommandHandler("/exit", AddressOf HandleCommandExit)
+        'AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
 
         ' Starts the server loop
         ServerLoop.ServerLoop()
     End Sub
 
     Sub UpdateCaption()
-        Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
-        'frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        'Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
     End Sub
 
     Sub DestroyServer()
@@ -323,7 +323,18 @@
     End Sub
 
     Sub TextAdd(ByVal Msg As String)
-        Console.WriteLine(Msg)
+        'Console.WriteLine(Msg)
+
+        If ConsoleText = "" Then
+            ConsoleText = ConsoleText & Msg
+        Else
+            ConsoleText = ConsoleText & vbNewLine & Msg
+        End If
+        Try
+            UpdateUI()
+        Catch ex As Exception
+            'Dont handle error
+        End Try
     End Sub
 
     ' Used for checking validity of names

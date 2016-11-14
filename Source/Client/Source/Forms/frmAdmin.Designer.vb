@@ -22,9 +22,6 @@ Partial Class frmAdmin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnProjectiles = New System.Windows.Forms.Button()
-        Me.btnhouseEditor = New System.Windows.Forms.Button()
-        Me.btnQuest = New System.Windows.Forms.Button()
         Me.btnRespawn = New System.Windows.Forms.Button()
         Me.btnMapReport = New System.Windows.Forms.Button()
         Me.btnDelBans = New System.Windows.Forms.Button()
@@ -35,12 +32,6 @@ Partial Class frmAdmin
         Me.scrlSpawnItem = New System.Windows.Forms.HScrollBar()
         Me.lblSpawnItemAmount = New System.Windows.Forms.Label()
         Me.lblItemSpawn = New System.Windows.Forms.Label()
-        Me.btnAnimationEditor = New System.Windows.Forms.Button()
-        Me.btnShopEditor = New System.Windows.Forms.Button()
-        Me.btnSkillEditor = New System.Windows.Forms.Button()
-        Me.btnNPCEditor = New System.Windows.Forms.Button()
-        Me.btnResourceEditor = New System.Windows.Forms.Button()
-        Me.btnItemEditor = New System.Windows.Forms.Button()
         Me.btnMapEditor = New System.Windows.Forms.Button()
         Me.btnAdminSetSprite = New System.Windows.Forms.Button()
         Me.btnAdminWarpTo = New System.Windows.Forms.Button()
@@ -63,8 +54,6 @@ Partial Class frmAdmin
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.btnClassEditor = New System.Windows.Forms.Button()
-        Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabControl1.SuspendLayout()
@@ -73,33 +62,6 @@ Partial Class frmAdmin
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnProjectiles
-        '
-        Me.btnProjectiles.Location = New System.Drawing.Point(124, 130)
-        Me.btnProjectiles.Name = "btnProjectiles"
-        Me.btnProjectiles.Size = New System.Drawing.Size(112, 25)
-        Me.btnProjectiles.TabIndex = 37
-        Me.btnProjectiles.Text = "Projectiles Editor"
-        Me.btnProjectiles.UseVisualStyleBackColor = True
-        '
-        'btnhouseEditor
-        '
-        Me.btnhouseEditor.Location = New System.Drawing.Point(6, 130)
-        Me.btnhouseEditor.Name = "btnhouseEditor"
-        Me.btnhouseEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnhouseEditor.TabIndex = 36
-        Me.btnhouseEditor.Text = "Houses Editor"
-        Me.btnhouseEditor.UseVisualStyleBackColor = True
-        '
-        'btnQuest
-        '
-        Me.btnQuest.Location = New System.Drawing.Point(6, 6)
-        Me.btnQuest.Name = "btnQuest"
-        Me.btnQuest.Size = New System.Drawing.Size(112, 25)
-        Me.btnQuest.TabIndex = 35
-        Me.btnQuest.Text = "Quest Editor"
-        Me.btnQuest.UseVisualStyleBackColor = True
         '
         'btnRespawn
         '
@@ -186,60 +148,6 @@ Partial Class frmAdmin
         Me.lblItemSpawn.Size = New System.Drawing.Size(95, 13)
         Me.lblItemSpawn.TabIndex = 25
         Me.lblItemSpawn.Text = "Spawn Item: None"
-        '
-        'btnAnimationEditor
-        '
-        Me.btnAnimationEditor.Location = New System.Drawing.Point(124, 99)
-        Me.btnAnimationEditor.Name = "btnAnimationEditor"
-        Me.btnAnimationEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnAnimationEditor.TabIndex = 24
-        Me.btnAnimationEditor.Text = "Animation Editor"
-        Me.btnAnimationEditor.UseVisualStyleBackColor = True
-        '
-        'btnShopEditor
-        '
-        Me.btnShopEditor.Location = New System.Drawing.Point(6, 99)
-        Me.btnShopEditor.Name = "btnShopEditor"
-        Me.btnShopEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnShopEditor.TabIndex = 23
-        Me.btnShopEditor.Text = "Shop Editor"
-        Me.btnShopEditor.UseVisualStyleBackColor = True
-        '
-        'btnSkillEditor
-        '
-        Me.btnSkillEditor.Location = New System.Drawing.Point(124, 68)
-        Me.btnSkillEditor.Name = "btnSkillEditor"
-        Me.btnSkillEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnSkillEditor.TabIndex = 22
-        Me.btnSkillEditor.Text = "Skill Editor"
-        Me.btnSkillEditor.UseVisualStyleBackColor = True
-        '
-        'btnNPCEditor
-        '
-        Me.btnNPCEditor.Location = New System.Drawing.Point(6, 68)
-        Me.btnNPCEditor.Name = "btnNPCEditor"
-        Me.btnNPCEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnNPCEditor.TabIndex = 21
-        Me.btnNPCEditor.Text = "NPC Editor"
-        Me.btnNPCEditor.UseVisualStyleBackColor = True
-        '
-        'btnResourceEditor
-        '
-        Me.btnResourceEditor.Location = New System.Drawing.Point(124, 37)
-        Me.btnResourceEditor.Name = "btnResourceEditor"
-        Me.btnResourceEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnResourceEditor.TabIndex = 20
-        Me.btnResourceEditor.Text = "Resource Editor"
-        Me.btnResourceEditor.UseVisualStyleBackColor = True
-        '
-        'btnItemEditor
-        '
-        Me.btnItemEditor.Location = New System.Drawing.Point(6, 37)
-        Me.btnItemEditor.Name = "btnItemEditor"
-        Me.btnItemEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnItemEditor.TabIndex = 19
-        Me.btnItemEditor.Text = "Item Editor"
-        Me.btnItemEditor.UseVisualStyleBackColor = True
         '
         'btnMapEditor
         '
@@ -443,18 +351,7 @@ Partial Class frmAdmin
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.btnClassEditor)
-        Me.TabPage2.Controls.Add(Me.btnRecipeEditor)
-        Me.TabPage2.Controls.Add(Me.btnProjectiles)
-        Me.TabPage2.Controls.Add(Me.btnQuest)
-        Me.TabPage2.Controls.Add(Me.btnhouseEditor)
         Me.TabPage2.Controls.Add(Me.btnMapEditor)
-        Me.TabPage2.Controls.Add(Me.btnItemEditor)
-        Me.TabPage2.Controls.Add(Me.btnResourceEditor)
-        Me.TabPage2.Controls.Add(Me.btnNPCEditor)
-        Me.TabPage2.Controls.Add(Me.btnSkillEditor)
-        Me.TabPage2.Controls.Add(Me.btnShopEditor)
-        Me.TabPage2.Controls.Add(Me.btnAnimationEditor)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -462,24 +359,6 @@ Partial Class frmAdmin
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Editors"
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'btnClassEditor
-        '
-        Me.btnClassEditor.Location = New System.Drawing.Point(124, 161)
-        Me.btnClassEditor.Name = "btnClassEditor"
-        Me.btnClassEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnClassEditor.TabIndex = 40
-        Me.btnClassEditor.Text = "Class Editor"
-        Me.btnClassEditor.UseVisualStyleBackColor = True
-        '
-        'btnRecipeEditor
-        '
-        Me.btnRecipeEditor.Location = New System.Drawing.Point(6, 161)
-        Me.btnRecipeEditor.Name = "btnRecipeEditor"
-        Me.btnRecipeEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnRecipeEditor.TabIndex = 39
-        Me.btnRecipeEditor.Text = "Recipe Editor"
-        Me.btnRecipeEditor.UseVisualStyleBackColor = True
         '
         'TabPage3
         '
@@ -532,8 +411,6 @@ Partial Class frmAdmin
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents btnhouseEditor As Windows.Forms.Button
-    Friend WithEvents btnQuest As Windows.Forms.Button
     Friend WithEvents btnRespawn As Windows.Forms.Button
     Friend WithEvents btnMapReport As Windows.Forms.Button
     Friend WithEvents btnDelBans As Windows.Forms.Button
@@ -544,12 +421,6 @@ Partial Class frmAdmin
     Friend WithEvents scrlSpawnItem As Windows.Forms.HScrollBar
     Friend WithEvents lblSpawnItemAmount As Windows.Forms.Label
     Friend WithEvents lblItemSpawn As Windows.Forms.Label
-    Friend WithEvents btnAnimationEditor As Windows.Forms.Button
-    Friend WithEvents btnShopEditor As Windows.Forms.Button
-    Friend WithEvents btnSkillEditor As Windows.Forms.Button
-    Friend WithEvents btnNPCEditor As Windows.Forms.Button
-    Friend WithEvents btnResourceEditor As Windows.Forms.Button
-    Friend WithEvents btnItemEditor As Windows.Forms.Button
     Friend WithEvents btnMapEditor As Windows.Forms.Button
     Friend WithEvents btnAdminSetSprite As Windows.Forms.Button
     Friend WithEvents btnAdminWarpTo As Windows.Forms.Button
@@ -568,13 +439,10 @@ Partial Class frmAdmin
     Friend WithEvents lstMaps As Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
-    Friend WithEvents btnProjectiles As Windows.Forms.Button
     Friend WithEvents TabControl1 As Windows.Forms.TabControl
     Friend WithEvents TabPage1 As Windows.Forms.TabPage
     Friend WithEvents TabPage2 As Windows.Forms.TabPage
     Friend WithEvents TabPage3 As Windows.Forms.TabPage
     Friend WithEvents TabPage4 As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
-    Friend WithEvents btnRecipeEditor As Windows.Forms.Button
-    Friend WithEvents btnClassEditor As Windows.Forms.Button
 End Class
