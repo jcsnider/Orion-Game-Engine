@@ -51,20 +51,22 @@
         Dim TasksCount As Integer 'todo
         Dim Repeat As Integer
 
-        Dim Requirement() As Integer '1=item, 2=quest
+        Dim Requirement() As Integer '1=item, 2=quest, 3=class
+        Dim RequirementIndex() As Integer
 
-        Dim StartItem As Integer
-        Dim StartItemValue As Integer
-        Dim StartRemoveItem As Integer
-        Dim StartRemoveItemValue As Integer
+        Dim QuestGiveItem As Integer 'Todo: make this dynamic
+        Dim QuestGiveItemValue As Integer
+        Dim QuestRemoveItem As Integer
+        Dim QuestRemoveItemValue As Integer
 
         Dim Chat() As String
 
-        Dim RewardItem As Integer
+        Dim RewardItem As Integer 'ToDo: make this dynamic
         Dim RewardItemAmount As Integer
         Dim RewardExp As Integer
 
         Dim Task() As TaskRec
+
     End Structure
 #End Region
 
@@ -72,7 +74,7 @@
     Sub SaveQuests()
         Dim I As Integer
         For I = 1 To MAX_QUESTS
-            Call SaveQuest(I)
+            SaveQuest(I)
             DoEvents()
         Next
     End Sub
@@ -88,14 +90,15 @@
         writer.Write(Quest(QuestNum).TasksCount)
         writer.Write(Quest(QuestNum).Repeat)
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             writer.Write(Quest(QuestNum).Requirement(I))
+            writer.Write(Quest(QuestNum).RequirementIndex(I))
         Next
 
-        writer.Write(Quest(QuestNum).StartItem)
-        writer.Write(Quest(QuestNum).StartItemValue)
-        writer.Write(Quest(QuestNum).StartRemoveItem)
-        writer.Write(Quest(QuestNum).StartRemoveItemValue)
+        writer.Write(Quest(QuestNum).QuestGiveItem)
+        writer.Write(Quest(QuestNum).QuestGiveItemValue)
+        writer.Write(Quest(QuestNum).QuestRemoveItem)
+        writer.Write(Quest(QuestNum).QuestRemoveItemValue)
 
         For I = 1 To 3
             writer.Write(Quest(QuestNum).Chat(I))
@@ -124,7 +127,7 @@
     Sub LoadQuests()
         Dim I As Integer
 
-        Call CheckQuests()
+        CheckQuests()
 
         For I = 1 To MAX_QUESTS
             LoadQuest(I)
@@ -145,14 +148,15 @@
         reader.Read(Quest(QuestNum).TasksCount)
         reader.Read(Quest(QuestNum).Repeat)
 
-        For n = 1 To 3
+        For n = 1 To MAX_REQUIREMENTS
             reader.Read(Quest(QuestNum).Requirement(n))
+            reader.Read(Quest(QuestNum).RequirementIndex(n))
         Next
 
-        reader.Read(Quest(QuestNum).StartItem)
-        reader.Read(Quest(QuestNum).StartItemValue)
-        reader.Read(Quest(QuestNum).StartRemoveItem)
-        reader.Read(Quest(QuestNum).StartRemoveItemValue)
+        reader.Read(Quest(QuestNum).QuestGiveItem)
+        reader.Read(Quest(QuestNum).QuestGiveItemValue)
+        reader.Read(Quest(QuestNum).QuestRemoveItem)
+        reader.Read(Quest(QuestNum).QuestRemoveItemValue)
 
         For n = 1 To 3
             reader.Read(Quest(QuestNum).Chat(n))
@@ -180,7 +184,7 @@
         Dim I As Integer
         For I = 1 To MAX_QUESTS
             If Not FileExist(Application.StartupPath & "\Data\quests\quest" & I & ".dat") Then
-                Call SaveQuest(I)
+                SaveQuest(I)
                 DoEvents()
             End If
         Next
@@ -195,14 +199,15 @@
         Quest(QuestNum).TasksCount = 0
         Quest(QuestNum).Repeat = 0
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = 0
+            Quest(QuestNum).RequirementIndex(I) = 0
         Next
 
-        Quest(QuestNum).StartItem = 0
-        Quest(QuestNum).StartItemValue = 0
-        Quest(QuestNum).StartRemoveItem = 0
-        Quest(QuestNum).StartRemoveItemValue = 0
+        Quest(QuestNum).QuestGiveItem = 0
+        Quest(QuestNum).QuestGiveItemValue = 0
+        Quest(QuestNum).QuestRemoveItem = 0
+        Quest(QuestNum).QuestRemoveItemValue = 0
 
         For I = 1 To 3
             Quest(QuestNum).Chat(I) = ""
@@ -231,7 +236,7 @@
         Dim I As Integer
 
         For I = 1 To MAX_QUESTS
-            Call ClearQuest(I)
+            ClearQuest(I)
             DoEvents()
         Next
     End Sub
@@ -273,14 +278,15 @@
         Quest(QuestNum).TasksCount = Buffer.ReadInteger
         Quest(QuestNum).Repeat = Buffer.ReadInteger
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = Buffer.ReadInteger
+            Quest(QuestNum).RequirementIndex(I) = Buffer.ReadInteger
         Next
 
-        Quest(QuestNum).StartItem = Buffer.ReadInteger
-        Quest(QuestNum).StartItemValue = Buffer.ReadInteger
-        Quest(QuestNum).StartRemoveItem = Buffer.ReadInteger
-        Quest(QuestNum).StartRemoveItemValue = Buffer.ReadInteger
+        Quest(QuestNum).QuestGiveItem = Buffer.ReadInteger
+        Quest(QuestNum).QuestGiveItemValue = Buffer.ReadInteger
+        Quest(QuestNum).QuestRemoveItem = Buffer.ReadInteger
+        Quest(QuestNum).QuestRemoveItemValue = Buffer.ReadInteger
 
         For I = 1 To 3
             Quest(QuestNum).Chat(I) = Buffer.ReadString
@@ -400,14 +406,15 @@
         Buffer.WriteInteger(Quest(QuestNum).TasksCount)
         Buffer.WriteInteger(Quest(QuestNum).Repeat)
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Buffer.WriteInteger(Quest(QuestNum).Requirement(I))
+            Buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
         Next
 
-        Buffer.WriteInteger(Quest(QuestNum).StartItem)
-        Buffer.WriteInteger(Quest(QuestNum).StartItemValue)
-        Buffer.WriteInteger(Quest(QuestNum).StartRemoveItem)
-        Buffer.WriteInteger(Quest(QuestNum).StartRemoveItemValue)
+        Buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
+        Buffer.WriteInteger(Quest(QuestNum).QuestGiveItemValue)
+        Buffer.WriteInteger(Quest(QuestNum).QuestRemoveItem)
+        Buffer.WriteInteger(Quest(QuestNum).QuestRemoveItemValue)
 
         For I = 1 To 3
             Buffer.WriteString(Trim(Quest(QuestNum).Chat(I)))
@@ -446,14 +453,15 @@
         Buffer.WriteInteger(Quest(QuestNum).TasksCount)
         Buffer.WriteInteger(Quest(QuestNum).Repeat)
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Buffer.WriteInteger(Quest(QuestNum).Requirement(I))
+            Buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
         Next
 
-        Buffer.WriteInteger(Quest(QuestNum).StartItem)
-        Buffer.WriteInteger(Quest(QuestNum).StartItemValue)
-        Buffer.WriteInteger(Quest(QuestNum).StartRemoveItem)
-        Buffer.WriteInteger(Quest(QuestNum).StartRemoveItemValue)
+        Buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
+        Buffer.WriteInteger(Quest(QuestNum).QuestGiveItemValue)
+        Buffer.WriteInteger(Quest(QuestNum).QuestRemoveItem)
+        Buffer.WriteInteger(Quest(QuestNum).QuestRemoveItemValue)
 
         For I = 1 To 3
             Buffer.WriteString(Trim(Quest(QuestNum).Chat(I)))
@@ -503,10 +511,12 @@
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPlayerQuest)
+
         Buffer.WriteInteger(QuestNum)
         Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status)
         Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask)
         Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount)
+
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
@@ -517,9 +527,11 @@
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SQuestMessage)
+
         Buffer.WriteInteger(QuestNum)
         Buffer.WriteString(Trim$(message))
         Buffer.WriteInteger(QuestNumForStart)
+
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
 
@@ -546,21 +558,29 @@
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
         If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
-            'Check if item is needed
-            If Quest(QuestNum).Requirement(1) > 0 And Quest(QuestNum).Requirement(1) <= MAX_ITEMS Then
-                If HasItem(Index, Quest(QuestNum).Requirement(2)) = 0 Then
-                    PlayerMsg(Index, "You need " & Item(Quest(QuestNum).Requirement(2)).Name & " to take this quest!")
-                    Exit Function
+            For i = 1 To MAX_REQUIREMENTS
+                'Check if item is needed
+                If Quest(QuestNum).Requirement(i) = 1 Then
+                    If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_ITEMS Then
+                        If HasItem(Index, Quest(QuestNum).RequirementIndex(i)) = 0 Then
+                            PlayerMsg(Index, "You need " & Item(Quest(QuestNum).Requirement(2)).Name & " to take this quest!")
+                            Exit Function
+                        End If
+                    End If
                 End If
-            End If
-            'Check if previous quest is needed
-            'Debug.Print(Quest(QuestNum).Requirement(2))
-            If Quest(QuestNum).Requirement(2) > 0 And Quest(QuestNum).Requirement(2) <= MAX_QUESTS Then
-                If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
-                    PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!")
-                    Exit Function
+
+                'Check if previous quest is needed
+                If Quest(QuestNum).Requirement(i) = 2 Then
+                    If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_QUESTS Then
+                        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
+                            PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!")
+                            Exit Function
+                        End If
+                    End If
                 End If
-            End If
+
+            Next
+
             'Go on :)
             CanStartQuest = True
         Else

@@ -6,12 +6,12 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>OrionServer.My.MyApplication</StartupObject>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>OrionServer</RootNamespace>
     <AssemblyName>Orion+ Server</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
@@ -83,12 +83,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Forms\frmAutoMapper.Designer.vb">
-      <DependentUpon>frmAutoMapper.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmAutoMapper.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\Forms\frmServer.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -134,9 +128,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\frmAutoMapper.resx">
-      <DependentUpon>frmAutoMapper.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmServer.resx">
       <DependentUpon>frmServer.vb</DependentUpon>
     </EmbeddedResource>

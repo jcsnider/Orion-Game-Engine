@@ -127,6 +127,9 @@
         Packets.Add(ServerPackets.SRecipeEditor, AddressOf Packet_RecipeEditor)
 
         Packets.Add(ServerPackets.SClassEditor, AddressOf Packet_ClassEditor)
+
+        'Auto Mapper
+        Packets.Add(ServerPackets.SAutoMapper, AddressOf Packet_AutoMapper)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -1264,4 +1267,40 @@
         Buffer = Nothing
     End Sub
 
+    Private Sub Packet_AutoMapper(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer, Layer As Integer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> ServerPackets.SAutoMapper Then Exit Sub
+
+        MapStart = Buffer.ReadInteger
+        MapSize = Buffer.ReadInteger
+        MapX = Buffer.ReadInteger
+        MapY = Buffer.ReadInteger
+        SandBorder = Buffer.ReadInteger
+        DetailFreq = Buffer.ReadInteger
+        ResourceFreq = Buffer.ReadInteger
+
+        'get ini info
+        PutVar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum", Buffer.ReadString())
+
+        For Prefab = 1 To TilePrefab.Count - 1
+            ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
+
+            Layer = Buffer.ReadInteger()
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile", Buffer.ReadInteger)
+
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type", Buffer.ReadInteger)
+        Next
+
+        Buffer = Nothing
+
+        InitAutoMapper = True
+
+    End Sub
 End Module

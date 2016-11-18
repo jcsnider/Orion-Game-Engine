@@ -6,6 +6,22 @@
 
     Private MapOrientation() As MapOrientationRec
 
+    Public MapStart As Integer = 1
+    Public MapSize As Integer = 4
+    Public MapX As Integer = 50
+    Public MapY As Integer = 50
+
+    Public SandBorder As Integer = 4
+    Public DetailFreq As Integer = 10
+    Public ResourceFreq As Integer = 20
+
+    Public DetailsChecked As Boolean = True
+    Public PathsChecked As Boolean = True
+    Public RiversChecked As Boolean = True
+    Public MountainsChecked As Boolean = True
+    Public OverGrassChecked As Boolean = True
+    Public ResourcesChecked As Boolean = True
+
     Enum TilePrefab
         Water = 1
         Sand
@@ -14,13 +30,13 @@
         Overgrass
         River
         Mountain
-        Total_Count
+        Count
     End Enum
 
     'Distance between mountains and the map limit, so the player can walk freely when teleport between maps
     Private Const MountainBorder As Byte = 5
 
-    Public Tile(0 To TilePrefab.Total_Count - 1) As TileRec
+    Public Tile(0 To TilePrefab.Count - 1) As TileRec
     Public Detail() As DetailRec
     Public ResourcesNum As String
     Private Resources() As String
@@ -71,18 +87,13 @@
         Dim Tile(,) As TilePrefab
     End Structure
 
-    Sub OpenAutomapper()
-        LoadTilePrefab()
-        frmAutoMapper.Visible = True
-    End Sub
-
     Sub LoadTilePrefab()
         Dim Prefab As Integer
         Dim Layer As Integer
 
-        ReDim Tile(TilePrefab.Total_Count - 1)
+        ReDim Tile(TilePrefab.Count - 1)
 
-        For Prefab = 1 To TilePrefab.Total_Count - 1
+        For Prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
 
@@ -121,9 +132,9 @@
 
         Detail(DetailCount).DetailBase = Prefab
         Detail(DetailCount).Tile.Type = TileType
-        Detail(DetailCount).Tile.Layer(3).Tileset = Tileset
-        Detail(DetailCount).Tile.Layer(3).x = X
-        Detail(DetailCount).Tile.Layer(3).y = Y
+        Detail(DetailCount).Tile.Layer(MapLayer.Mask2).Tileset = Tileset
+        Detail(DetailCount).Tile.Layer(MapLayer.Mask2).x = X
+        Detail(DetailCount).Tile.Layer(MapLayer.Mask2).y = Y
     End Sub
 
     Sub LoadDetails()
@@ -131,9 +142,8 @@
 
         'Detail config area
         'Use: LoadDetail TilePrefab, Tileset, StartTilesetX, StartTilesetY, TileType, EndTilesetX, EndTilesetY
-        LoadDetail(TilePrefab.Grass, 9, 0, 0, TileType.None, 7, 7)
-        LoadDetail(TilePrefab.Grass, 9, 0, 10, TileType.None, 6, 15)
-        LoadDetail(TilePrefab.Grass, 9, 0, 13, TileType.None, 7, 14)
+        LoadDetail(TilePrefab.Grass, 9, 0, 0, TileType.None, 9, 15)
+
         LoadDetail(TilePrefab.Sand, 10, 0, 13, TileType.None, 7, 14)
         LoadDetail(TilePrefab.Sand, 11, 0, 0, TileType.None, 1, 1)
     End Sub
@@ -143,12 +153,11 @@
     End Function
 
     Sub AddTile(ByVal Prefab As TilePrefab, ByVal MapNum As Integer, ByVal X As Integer, ByVal Y As Integer)
-        Dim DetailFreq As Integer
         Dim TileDest As TileRec
         Dim CleanNextTiles As Boolean
         Dim i As Integer
 
-        DetailFreq = Val(frmAutoMapper.txtDetail.Text)
+        'DetailFreq = Val(frmAutoMapper.txtDetail.Text)
 
         TileDest = Map(MapNum).Tile(X, Y)
         TileDest.Type = Tile(Prefab).Type
@@ -163,7 +172,7 @@
         Next i
 
         If Prefab = TilePrefab.Grass Or Prefab = TilePrefab.Sand Then
-            If frmAutoMapper.DetailsToolStripMenuItem.Checked = True Then
+            If DetailsChecked = True Then
                 If Random(1, DetailFreq) = 1 Then
                     Dim DetailNum As Integer
                     Dim Details() As Integer
@@ -208,8 +217,7 @@
             For y = 1 To Map(MapNum).MaxY - 1
                 If CanPlaceResource(MapNum, x, y) And CanPlaceResource(MapNum, x - 1, y) And CanPlaceResource(MapNum, x + 1, y) And CanPlaceResource(MapNum, x, y - 1) And CanPlaceResource(MapNum, x, y + 1) Then
                     Dim ResourceNum As Integer
-                    Dim ResourceFreq As Integer
-                    ResourceFreq = Val(frmAutoMapper.txtResourceFreq.Text)
+
                     If Random(1, ResourceFreq) = 1 Then
                         ResourceNum = Val(Resources(Random(1, UBound(Resources))))
                         Map(MapNum).Tile(x, y).Type = TileType.Resource
@@ -225,7 +233,7 @@
         Dim TotalMaps As Integer
         Dim tick As Integer
 
-        frmAutoMapper.lblResourcesTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
         tick = GetTickCount()
         TotalMaps = Size * Size
@@ -236,7 +244,7 @@
         Next i
 
         tick = GetTickCount() - tick
-        frmAutoMapper.lblResourcesTime.Text = "Done and cached resources in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done and cached resources in " & CDbl(tick / 1000) & "s")
         DoEvents()
     End Sub
 
@@ -245,7 +253,7 @@
         Dim TotalMaps As Integer
         Dim tick As Integer
 
-        frmAutoMapper.lblOvergrassTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
         tick = GetTickCount()
         TotalMaps = Size * Size
@@ -255,7 +263,7 @@
         Next i
 
         tick = GetTickCount() - tick
-        frmAutoMapper.lblOvergrassTime.Text = "Done overgrasses in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done overgrasses in " & CDbl(tick / 1000) & "s")
         DoEvents()
     End Sub
 
@@ -418,7 +426,7 @@
         Dim RiverSteps As Integer
         Dim tick As Integer
 
-        frmAutoMapper.lblRiversTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
         tick = GetTickCount()
         RiverBorder = 4
@@ -532,7 +540,7 @@ SelectMap:
         Loop
 
         tick = GetTickCount() - tick
-        frmAutoMapper.lblRiversTime.Text = "Done " & TotalRivers & " rivers in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done " & TotalRivers & " rivers in " & CDbl(tick / 1000) & "s")
         DoEvents()
     End Sub
 
@@ -745,7 +753,7 @@ Important:
         Dim TotalMaps As Integer
         Dim tick As Integer
         Dim MapCount As Integer
-        frmAutoMapper.lblMountainsTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
         tick = GetTickCount()
         TotalMaps = Size * Size
@@ -757,7 +765,7 @@ Important:
             End If
         Next i
         tick = GetTickCount() - tick
-        frmAutoMapper.lblMountainsTime.Text = "Done mountains in " & (MapCount) & " maps in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done mountains in " & (MapCount) & " maps in " & CDbl(tick / 1000) & "s")
         DoEvents()
     End Sub
 
@@ -766,11 +774,9 @@ Important:
         Dim TileX As Integer, TileY As Integer
         Dim TileStartX As Integer, TileStartY As Integer
         Dim TileEndX As Integer, TileEndY As Integer
-        Dim SandBorder As Integer
         Dim Change As Integer
         Dim Changed As Boolean
 
-        SandBorder = Val(frmAutoMapper.txtSandBorder.Text)
         MapOrientation(MapNum).Prefab = Prefab
 
         With Map(MapNum)
@@ -861,7 +867,7 @@ Important:
                 TileEndX = TileX
             End If
             If Prefab = MapPrefab.LeftBorder Then
-                If .Up = Val(frmAutoMapper.txtMapStart.Text) Then
+                If .Up = MapStart Then
                     TileStartX = MapOrientation(.Up).TileStartX
                 Else
                     TileStartX = MapOrientation(.Up).TileEndX
@@ -895,7 +901,7 @@ Important:
                 MapOrientation(MapNum).TileEndX = TileX
             End If
             If Prefab = MapPrefab.RightBorder Then
-                If .Up = Val(frmAutoMapper.txtMapStart.Text) Then
+                If .Up = MapStart Then
                     TileStartX = MapOrientation(.Up).TileStartX
                 Else
                     TileStartX = MapOrientation(.Up).TileEndX
@@ -1152,14 +1158,14 @@ ChangeDir:
 
     Sub MakeMapPaths(ByVal MapNum As Integer)
         Dim x As Integer, y As Integer
-        Dim StartX() As Integer, StartY() As Integer
+        Dim StartX() As Integer = {0}, StartY() As Integer = {0}
         Dim LocationCount As Integer
         Dim TotalPaths As Integer
         Dim MaxTries As Integer
         Dim Tries As Integer
         Dim tick As Integer
 
-        frmAutoMapper.lblPathTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
         tick = GetTickCount()
 
@@ -1220,12 +1226,11 @@ ChangeDir:
         End If
 
         tick = GetTickCount() - tick
-        frmAutoMapper.lblPathTime.Text = "Done " & TotalPaths & " paths in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done " & TotalPaths & " paths in " & CDbl(tick / 1000) & "s")
         DoEvents()
     End Sub
 
     Sub MakePaths(ByVal MapStart As Integer, ByVal Size As Integer)
-        'Dim i As Integer
         Dim TotalMaps As Integer
         TotalMaps = Size * Size
 
@@ -1247,7 +1252,7 @@ ChangeDir:
         LoadTilePrefab()
         LoadDetails()
 
-        Dim mapnum As Integer
+        Dim mapnum As Integer = MapStart
         Dim TotalMaps As Integer
         TotalMaps = (Size * Size)
 
@@ -1326,17 +1331,17 @@ ChangeDir:
         Next mapnum
 
         tick = GetTickCount() - tick
-        frmAutoMapper.lblMapTime.Text = "Done " & TotalMaps & " maps models in " & CDbl(tick / 1000) & "s"
+        TextAdd("Done " & TotalMaps & " maps models in " & CDbl(tick / 1000) & "s")
         DoEvents()
 
-        If frmAutoMapper.PathsToolStripMenuItem.Checked = True Then MakePaths(MapStart, Size)
-        If frmAutoMapper.RiversToolStripMenuItem.Checked = True Then MakeRivers(MapStart, Size)
-        If frmAutoMapper.MountainsToolStripMenuItem.Checked = True Then MakeMountains(MapStart, Size)
-        If frmAutoMapper.OverGrassToolStripMenuItem.Checked = True Then MakeOvergrasses(MapStart, Size)
-        If frmAutoMapper.ResourcesToolStripMenuItem1.Checked = True Then MakeResources(MapStart, Size)
+        If PathsChecked = True Then MakePaths(MapStart, Size)
+        If RiversChecked = True Then MakeRivers(MapStart, Size)
+        If MountainsChecked = True Then MakeMountains(MapStart, Size)
+        If OverGrassChecked = True Then MakeOvergrasses(MapStart, Size)
+        If ResourcesChecked = True Then MakeResources(MapStart, Size)
 
         tick = GetTickCount()
-        frmAutoMapper.lblCacheTime.Text = "Working..."
+        TextAdd("Working...")
         DoEvents()
 
         For mapnum = MapStart To MapStart + TotalMaps - 1
@@ -1347,8 +1352,8 @@ ChangeDir:
         tick = GetTickCount() - tick
         StartTick = GetTickCount() - StartTick
 
-        frmAutoMapper.lblCacheTime.Text = "Cached all maps in " & CDbl(tick / 1000) & "s (" & ((tick / StartTick) * 100) & "%)"
-        frmAutoMapper.lblTime.Text = "Done " & TotalMaps & " maps in " & CDbl(StartTick / 1000) & "s"
+        TextAdd("Cached all maps in " & CDbl(tick / 1000) & "s (" & ((tick / StartTick) * 100) & "%)")
+        TextAdd("Done " & TotalMaps & " maps in " & CDbl(StartTick / 1000) & "s")
 
     End Sub
 

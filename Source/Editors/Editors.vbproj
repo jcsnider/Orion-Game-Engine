@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Forms\frmAutoMapper.Designer.vb">
+      <DependentUpon>frmAutoMapper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmAutoMapper.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\frmEditor_Animation.Designer.vb">
       <DependentUpon>frmEditor_Animation.vb</DependentUpon>
     </Compile>
@@ -189,6 +195,8 @@
     <Compile Include="Source\Modules\EditorHandleData.vb" />
     <Compile Include="Source\Modules\EditorTypes.vb" />
     <Compile Include="Source\Modules\EditorTCP.vb" />
+    <Compile Include="Source\Modules\EditorAutoMap.vb" />
+    <Compile Include="Source\Modules\EditorINIAccess.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -196,6 +204,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmAutoMapper.resx">
+      <DependentUpon>frmAutoMapper.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Animation.resx">
       <DependentUpon>frmEditor_Animation.vb</DependentUpon>

@@ -81,7 +81,8 @@
         Dim TasksCount As Integer 'todo
         Dim Repeat As Integer
 
-        Dim Requirement() As Integer '1=item, 2=quest
+        Dim Requirement() As Integer '1=item, 2=quest, 3=class
+        Dim RequirementIndex() As Integer
 
         Dim QuestGiveItem As Integer 'Todo: make this dynamic
         Dim QuestGiveItemValue As Integer
@@ -114,8 +115,8 @@
                 .chkRepeat.Checked = 0
             End If
 
-            .scrlItemRec.Value = Quest(EditorIndex).Requirement(1)
-            .scrlQuestRec.Value = Quest(EditorIndex).Requirement(2)
+            '.scrlItemRec.Value = Quest(EditorIndex).Requirement(1)
+            '.scrlQuestRec.Value = Quest(EditorIndex).Requirement(2)
 
             .txtStartText.Text = Trim$(Quest(EditorIndex).Chat(1))
             .txtProgressText.Text = Trim$(Quest(EditorIndex).Chat(2))
@@ -176,7 +177,7 @@
 
         For I = 1 To MAX_QUESTS
             If Quest_Changed(I) Then
-                Call SendSaveQuest(I)
+                SendSaveQuest(I)
             End If
         Next
 
@@ -213,8 +214,9 @@
         Quest(QuestNum).TasksCount = 0
         Quest(QuestNum).Repeat = 0
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = 0
+            Quest(QuestNum).RequirementIndex(I) = 0
         Next
 
         Quest(QuestNum).QuestGiveItem = 0
@@ -249,7 +251,7 @@
         Dim I As Integer
 
         For I = 1 To MAX_QUESTS
-            Call ClearQuest(I)
+            ClearQuest(I)
         Next
     End Sub
 #End Region
@@ -285,8 +287,9 @@
         Quest(QuestNum).TasksCount = buffer.ReadInteger
         Quest(QuestNum).Repeat = buffer.ReadInteger
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = buffer.ReadInteger
+            Quest(QuestNum).RequirementIndex(I) = buffer.ReadInteger
         Next
 
         Quest(QuestNum).QuestGiveItem = buffer.ReadInteger
@@ -333,7 +336,6 @@
 
     Public Sub SendSaveQuest(ByVal QuestNum As Integer)
         Dim buffer As ByteBuffer
-
         buffer = New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CSaveQuest)
@@ -344,8 +346,9 @@
         buffer.WriteInteger(Quest(QuestNum).TasksCount)
         buffer.WriteInteger(Quest(QuestNum).Repeat)
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             buffer.WriteInteger(Quest(QuestNum).Requirement(I))
+            buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
         Next
 
         buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
@@ -436,6 +439,7 @@
             End If
         Next
     End Function
+
 #End Region
 
 #Region "Misc Functions"

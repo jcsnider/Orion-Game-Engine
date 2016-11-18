@@ -44,6 +44,7 @@ Partial Class frmLogin
         Me.btnSkillEditor = New System.Windows.Forms.Button()
         Me.btnShopEditor = New System.Windows.Forms.Button()
         Me.btnAnimationEditor = New System.Windows.Forms.Button()
+        Me.btnAutoMapper = New System.Windows.Forms.Button()
         Me.pnlAdmin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -115,6 +116,7 @@ Partial Class frmLogin
         'pnlAdmin
         '
         Me.pnlAdmin.BackColor = System.Drawing.Color.Transparent
+        Me.pnlAdmin.Controls.Add(Me.btnAutoMapper)
         Me.pnlAdmin.Controls.Add(Me.btnClassEditor)
         Me.pnlAdmin.Controls.Add(Me.btnRecipeEditor)
         Me.pnlAdmin.Controls.Add(Me.btnProjectiles)
@@ -241,6 +243,15 @@ Partial Class frmLogin
         Me.btnAnimationEditor.Text = "Animation Editor"
         Me.btnAnimationEditor.UseVisualStyleBackColor = True
         '
+        'btnAutoMapper
+        '
+        Me.btnAutoMapper.Location = New System.Drawing.Point(154, 3)
+        Me.btnAutoMapper.Name = "btnAutoMapper"
+        Me.btnAutoMapper.Size = New System.Drawing.Size(112, 25)
+        Me.btnAutoMapper.TabIndex = 53
+        Me.btnAutoMapper.Text = "Auto Mapper"
+        Me.btnAutoMapper.UseVisualStyleBackColor = True
+        '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -288,4 +299,5 @@ Partial Class frmLogin
     Friend WithEvents btnSkillEditor As Button
     Friend WithEvents btnShopEditor As Button
     Friend WithEvents btnAnimationEditor As Button
+    Friend WithEvents btnAutoMapper As Button
 End Class

@@ -2100,4 +2100,40 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
+    Sub SendAutoMapper(ByVal Index As Integer)
+        Dim Buffer As ByteBuffer, Prefab As Integer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SAutoMapper)
+
+        Buffer.WriteInteger(MapStart)
+        Buffer.WriteInteger(MapSize)
+        Buffer.WriteInteger(MapX)
+        Buffer.WriteInteger(MapY)
+        Buffer.WriteInteger(SandBorder)
+        Buffer.WriteInteger(DetailFreq)
+        Buffer.WriteInteger(ResourceFreq)
+
+        'send ini info
+        Buffer.WriteString(Getvar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum"))
+
+        For Prefab = 1 To TilePrefab.Count - 1
+            For Layer = 1 To MapLayer.Count - 1
+                If Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset")) > 0 Then
+                    Buffer.WriteInteger(Layer)
+                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset")))
+                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X")))
+                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y")))
+                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile")))
+                End If
+            Next
+            Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type")))
+        Next
+
+        SendDataTo(Index, Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
 End Module

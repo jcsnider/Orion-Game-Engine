@@ -143,6 +143,10 @@
         Packets.Add(ClientPackets.CEditorLogin, AddressOf Packet_EditorLogin)
         Packets.Add(ClientPackets.CEditorRequestMap, AddressOf Packet_EditorRequestMap)
         Packets.Add(ClientPackets.CEditorMapData, AddressOf Packet_EditorMapData)
+
+        'Auto Mapper
+        Packets.Add(ClientPackets.CRequestAutoMap, AddressOf Packet_RequestAutoMap)
+        Packets.Add(ClientPackets.CSaveAutoMap, AddressOf Packet_SaveAutoMap)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -4030,5 +4034,57 @@
         Next
 
         Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_RequestAutoMap(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CRequestAutoMap Then Exit Sub
+
+        Buffer = Nothing
+
+        If GetPlayerAccess(index) = AdminType.Player Then Exit Sub
+
+        SendAutoMapper(index)
+    End Sub
+
+    Private Sub Packet_SaveAutoMap(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer, Layer As Integer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CSaveAutoMap Then Exit Sub
+
+        If GetPlayerAccess(index) = AdminType.Player Then Exit Sub
+
+        MapStart = Buffer.ReadInteger
+        MapSize = Buffer.ReadInteger
+        MapX = Buffer.ReadInteger
+        MapY = Buffer.ReadInteger
+        SandBorder = Buffer.ReadInteger
+        DetailFreq = Buffer.ReadInteger
+        ResourceFreq = Buffer.ReadInteger
+
+        'get ini info
+        PutVar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum", Buffer.ReadString())
+
+        For Prefab = 1 To TilePrefab.Count - 1
+            ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
+
+            Layer = Buffer.ReadInteger()
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y", Buffer.ReadInteger)
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile", Buffer.ReadInteger)
+
+            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type", Buffer.ReadInteger)
+        Next
+
+        Buffer = Nothing
+
+        StartAutomapper(MapStart, MapSize, MapX, MapY)
+
     End Sub
 End Module

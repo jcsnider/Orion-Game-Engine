@@ -47,6 +47,7 @@ Module EditorLoop
         ReDim Quest(MAX_QUESTS)
         For i = 0 To MAX_QUESTS
             ReDim Quest(i).Requirement(MAX_REQUIREMENTS)
+            ReDim Quest(i).RequirementIndex(MAX_REQUIREMENTS)
             ReDim Quest(i).Chat(3)
             ReDim Quest(i).Task(MAX_TASKS)
         Next
@@ -454,6 +455,11 @@ Module EditorLoop
 
         If frmEditor_Projectile.Visible Then
             EditorProjectile_DrawProjectile()
+        End If
+
+        If InitAutoMapper = True Then
+            frmAutoMapper.Visible = True
+            InitAutoMapper = False
         End If
     End Sub
 

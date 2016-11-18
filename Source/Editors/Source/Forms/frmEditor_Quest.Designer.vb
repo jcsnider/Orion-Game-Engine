@@ -25,15 +25,6 @@ Partial Class frmEditor_Quest
         Me.fraRewards = New System.Windows.Forms.GroupBox()
         Me.scrlExpReward = New System.Windows.Forms.HScrollBar()
         Me.lblExpReward = New System.Windows.Forms.Label()
-        Me.HScrollBar7 = New System.Windows.Forms.HScrollBar()
-        Me.HScrollBar8 = New System.Windows.Forms.HScrollBar()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.HScrollBar5 = New System.Windows.Forms.HScrollBar()
-        Me.HScrollBar6 = New System.Windows.Forms.HScrollBar()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.HScrollBar3 = New System.Windows.Forms.HScrollBar()
-        Me.HScrollBar4 = New System.Windows.Forms.HScrollBar()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.scrlItemRewValue1 = New System.Windows.Forms.HScrollBar()
         Me.scrlItemRew1 = New System.Windows.Forms.HScrollBar()
         Me.lblItemReward1 = New System.Windows.Forms.Label()
@@ -75,6 +66,13 @@ Partial Class frmEditor_Quest
         Me.optTask0 = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.fraRequirements = New System.Windows.Forms.GroupBox()
+        Me.scrlClassRec = New System.Windows.Forms.HScrollBar()
+        Me.lblClassRec = New System.Windows.Forms.Label()
+        Me.rdbClassReq = New System.Windows.Forms.RadioButton()
+        Me.rdbQuestReq = New System.Windows.Forms.RadioButton()
+        Me.rdbItemReq = New System.Windows.Forms.RadioButton()
+        Me.btnRequirementSave = New System.Windows.Forms.Button()
+        Me.btnRequirementCancel = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.scrlEndItemAmount = New System.Windows.Forms.HScrollBar()
         Me.scrlEndItemName = New System.Windows.Forms.HScrollBar()
@@ -103,9 +101,8 @@ Partial Class frmEditor_Quest
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BbtnUndoutton1 = New System.Windows.Forms.Button()
-        Me.btnNewQuest = New System.Windows.Forms.Button()
         Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.rdbNoneReq = New System.Windows.Forms.RadioButton()
         Me.fraRewards.SuspendLayout()
         Me.fraTasks.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -122,29 +119,19 @@ Partial Class frmEditor_Quest
         '
         Me.fraRewards.Controls.Add(Me.scrlExpReward)
         Me.fraRewards.Controls.Add(Me.lblExpReward)
-        Me.fraRewards.Controls.Add(Me.HScrollBar7)
-        Me.fraRewards.Controls.Add(Me.HScrollBar8)
-        Me.fraRewards.Controls.Add(Me.Label7)
-        Me.fraRewards.Controls.Add(Me.HScrollBar5)
-        Me.fraRewards.Controls.Add(Me.HScrollBar6)
-        Me.fraRewards.Controls.Add(Me.Label6)
-        Me.fraRewards.Controls.Add(Me.HScrollBar3)
-        Me.fraRewards.Controls.Add(Me.HScrollBar4)
-        Me.fraRewards.Controls.Add(Me.Label5)
         Me.fraRewards.Controls.Add(Me.scrlItemRewValue1)
         Me.fraRewards.Controls.Add(Me.scrlItemRew1)
         Me.fraRewards.Controls.Add(Me.lblItemReward1)
-        Me.fraRewards.Location = New System.Drawing.Point(727, 2)
+        Me.fraRewards.Location = New System.Drawing.Point(6, 146)
         Me.fraRewards.Name = "fraRewards"
-        Me.fraRewards.Size = New System.Drawing.Size(196, 354)
+        Me.fraRewards.Size = New System.Drawing.Size(488, 102)
         Me.fraRewards.TabIndex = 16
         Me.fraRewards.TabStop = False
         Me.fraRewards.Text = "Rewards"
-        Me.fraRewards.Visible = False
         '
         'scrlExpReward
         '
-        Me.scrlExpReward.Location = New System.Drawing.Point(3, 99)
+        Me.scrlExpReward.Location = New System.Drawing.Point(200, 32)
         Me.scrlExpReward.Maximum = 10000000
         Me.scrlExpReward.Name = "scrlExpReward"
         Me.scrlExpReward.Size = New System.Drawing.Size(187, 17)
@@ -153,89 +140,11 @@ Partial Class frmEditor_Quest
         'lblExpReward
         '
         Me.lblExpReward.AutoSize = True
-        Me.lblExpReward.Location = New System.Drawing.Point(6, 86)
+        Me.lblExpReward.Location = New System.Drawing.Point(203, 19)
         Me.lblExpReward.Name = "lblExpReward"
         Me.lblExpReward.Size = New System.Drawing.Size(109, 13)
         Me.lblExpReward.TabIndex = 16
         Me.lblExpReward.Text = "Experience Gained: 0"
-        '
-        'HScrollBar7
-        '
-        Me.HScrollBar7.Location = New System.Drawing.Point(3, 304)
-        Me.HScrollBar7.Name = "HScrollBar7"
-        Me.HScrollBar7.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar7.TabIndex = 15
-        Me.HScrollBar7.Visible = False
-        '
-        'HScrollBar8
-        '
-        Me.HScrollBar8.Location = New System.Drawing.Point(3, 282)
-        Me.HScrollBar8.Name = "HScrollBar8"
-        Me.HScrollBar8.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar8.TabIndex = 14
-        Me.HScrollBar8.Visible = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 269)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(136, 13)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Give item on start: None (1)"
-        Me.Label7.Visible = False
-        '
-        'HScrollBar5
-        '
-        Me.HScrollBar5.Location = New System.Drawing.Point(3, 242)
-        Me.HScrollBar5.Name = "HScrollBar5"
-        Me.HScrollBar5.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar5.TabIndex = 12
-        Me.HScrollBar5.Visible = False
-        '
-        'HScrollBar6
-        '
-        Me.HScrollBar6.Location = New System.Drawing.Point(3, 216)
-        Me.HScrollBar6.Name = "HScrollBar6"
-        Me.HScrollBar6.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar6.TabIndex = 11
-        Me.HScrollBar6.Visible = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 203)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(136, 13)
-        Me.Label6.TabIndex = 10
-        Me.Label6.Text = "Give item on start: None (1)"
-        Me.Label6.Visible = False
-        '
-        'HScrollBar3
-        '
-        Me.HScrollBar3.Location = New System.Drawing.Point(3, 178)
-        Me.HScrollBar3.Name = "HScrollBar3"
-        Me.HScrollBar3.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar3.TabIndex = 9
-        Me.HScrollBar3.Visible = False
-        '
-        'HScrollBar4
-        '
-        Me.HScrollBar4.Location = New System.Drawing.Point(3, 155)
-        Me.HScrollBar4.Name = "HScrollBar4"
-        Me.HScrollBar4.Size = New System.Drawing.Size(187, 17)
-        Me.HScrollBar4.TabIndex = 8
-        Me.HScrollBar4.Visible = False
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 140)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(136, 13)
-        Me.Label5.TabIndex = 7
-        Me.Label5.Text = "Give item on start: None (1)"
-        Me.Label5.Visible = False
         '
         'scrlItemRewValue1
         '
@@ -265,7 +174,7 @@ Partial Class frmEditor_Quest
         '
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.Color.Red
-        Me.Label11.Location = New System.Drawing.Point(9, 151)
+        Me.Label11.Location = New System.Drawing.Point(213, 477)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(218, 13)
         Me.Label11.TabIndex = 6
@@ -331,9 +240,9 @@ Partial Class frmEditor_Quest
         Me.fraTasks.Controls.Add(Me.btnCancelTask)
         Me.fraTasks.Controls.Add(Me.btnSaveTask)
         Me.fraTasks.Controls.Add(Me.GroupBox5)
-        Me.fraTasks.Location = New System.Drawing.Point(929, 6)
+        Me.fraTasks.Location = New System.Drawing.Point(731, -1)
         Me.fraTasks.Name = "fraTasks"
-        Me.fraTasks.Size = New System.Drawing.Size(405, 344)
+        Me.fraTasks.Size = New System.Drawing.Size(507, 497)
         Me.fraTasks.TabIndex = 17
         Me.fraTasks.TabStop = False
         Me.fraTasks.Text = "Tasks"
@@ -506,7 +415,7 @@ Partial Class frmEditor_Quest
         '
         'btnCancelTask
         '
-        Me.btnCancelTask.Location = New System.Drawing.Point(244, 315)
+        Me.btnCancelTask.Location = New System.Drawing.Point(343, 465)
         Me.btnCancelTask.Name = "btnCancelTask"
         Me.btnCancelTask.Size = New System.Drawing.Size(155, 23)
         Me.btnCancelTask.TabIndex = 5
@@ -515,7 +424,7 @@ Partial Class frmEditor_Quest
         '
         'btnSaveTask
         '
-        Me.btnSaveTask.Location = New System.Drawing.Point(244, 289)
+        Me.btnSaveTask.Location = New System.Drawing.Point(163, 465)
         Me.btnSaveTask.Name = "btnSaveTask"
         Me.btnSaveTask.Size = New System.Drawing.Size(155, 23)
         Me.btnSaveTask.TabIndex = 4
@@ -639,18 +548,91 @@ Partial Class frmEditor_Quest
         'fraRequirements
         '
         Me.fraRequirements.BackColor = System.Drawing.SystemColors.Window
+        Me.fraRequirements.Controls.Add(Me.rdbNoneReq)
+        Me.fraRequirements.Controls.Add(Me.scrlClassRec)
+        Me.fraRequirements.Controls.Add(Me.lblClassRec)
+        Me.fraRequirements.Controls.Add(Me.rdbClassReq)
+        Me.fraRequirements.Controls.Add(Me.rdbQuestReq)
+        Me.fraRequirements.Controls.Add(Me.rdbItemReq)
+        Me.fraRequirements.Controls.Add(Me.btnRequirementSave)
+        Me.fraRequirements.Controls.Add(Me.btnRequirementCancel)
         Me.fraRequirements.Controls.Add(Me.GroupBox3)
         Me.fraRequirements.Controls.Add(Me.scrlQuestRec)
         Me.fraRequirements.Controls.Add(Me.lblQuestRec)
         Me.fraRequirements.Controls.Add(Me.scrlItemRec)
         Me.fraRequirements.Controls.Add(Me.lblItemReq)
-        Me.fraRequirements.Location = New System.Drawing.Point(929, 356)
+        Me.fraRequirements.Location = New System.Drawing.Point(729, 2)
         Me.fraRequirements.Name = "fraRequirements"
-        Me.fraRequirements.Size = New System.Drawing.Size(426, 344)
+        Me.fraRequirements.Size = New System.Drawing.Size(505, 497)
         Me.fraRequirements.TabIndex = 15
         Me.fraRequirements.TabStop = False
         Me.fraRequirements.Text = "Requirements"
         Me.fraRequirements.Visible = False
+        '
+        'scrlClassRec
+        '
+        Me.scrlClassRec.Enabled = False
+        Me.scrlClassRec.Location = New System.Drawing.Point(74, 165)
+        Me.scrlClassRec.Name = "scrlClassRec"
+        Me.scrlClassRec.Size = New System.Drawing.Size(204, 17)
+        Me.scrlClassRec.TabIndex = 11
+        '
+        'lblClassRec
+        '
+        Me.lblClassRec.AutoSize = True
+        Me.lblClassRec.Location = New System.Drawing.Point(72, 147)
+        Me.lblClassRec.Name = "lblClassRec"
+        Me.lblClassRec.Size = New System.Drawing.Size(127, 13)
+        Me.lblClassRec.TabIndex = 10
+        Me.lblClassRec.Text = "Class Requirement: None"
+        '
+        'rdbClassReq
+        '
+        Me.rdbClassReq.AutoSize = True
+        Me.rdbClassReq.Location = New System.Drawing.Point(8, 154)
+        Me.rdbClassReq.Name = "rdbClassReq"
+        Me.rdbClassReq.Size = New System.Drawing.Size(50, 17)
+        Me.rdbClassReq.TabIndex = 9
+        Me.rdbClassReq.Text = "Class"
+        Me.rdbClassReq.UseVisualStyleBackColor = True
+        '
+        'rdbQuestReq
+        '
+        Me.rdbQuestReq.AutoSize = True
+        Me.rdbQuestReq.Location = New System.Drawing.Point(8, 103)
+        Me.rdbQuestReq.Name = "rdbQuestReq"
+        Me.rdbQuestReq.Size = New System.Drawing.Size(53, 17)
+        Me.rdbQuestReq.TabIndex = 8
+        Me.rdbQuestReq.Text = "Quest"
+        Me.rdbQuestReq.UseVisualStyleBackColor = True
+        '
+        'rdbItemReq
+        '
+        Me.rdbItemReq.AutoSize = True
+        Me.rdbItemReq.Location = New System.Drawing.Point(8, 52)
+        Me.rdbItemReq.Name = "rdbItemReq"
+        Me.rdbItemReq.Size = New System.Drawing.Size(45, 17)
+        Me.rdbItemReq.TabIndex = 7
+        Me.rdbItemReq.Text = "Item"
+        Me.rdbItemReq.UseVisualStyleBackColor = True
+        '
+        'btnRequirementSave
+        '
+        Me.btnRequirementSave.Location = New System.Drawing.Point(256, 468)
+        Me.btnRequirementSave.Name = "btnRequirementSave"
+        Me.btnRequirementSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnRequirementSave.TabIndex = 6
+        Me.btnRequirementSave.Text = "Save"
+        Me.btnRequirementSave.UseVisualStyleBackColor = True
+        '
+        'btnRequirementCancel
+        '
+        Me.btnRequirementCancel.Location = New System.Drawing.Point(359, 468)
+        Me.btnRequirementCancel.Name = "btnRequirementCancel"
+        Me.btnRequirementCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnRequirementCancel.TabIndex = 5
+        Me.btnRequirementCancel.Text = "Cancel"
+        Me.btnRequirementCancel.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -661,11 +643,12 @@ Partial Class frmEditor_Quest
         Me.GroupBox3.Controls.Add(Me.scrlStartItemAmount)
         Me.GroupBox3.Controls.Add(Me.scrlStartItemName)
         Me.GroupBox3.Controls.Add(Me.lblStartItem)
-        Me.GroupBox3.Location = New System.Drawing.Point(10, 102)
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 194)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(387, 229)
         Me.GroupBox3.TabIndex = 4
         Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Items Needed For Quest"
         '
         'scrlEndItemAmount
         '
@@ -715,15 +698,16 @@ Partial Class frmEditor_Quest
         '
         'scrlQuestRec
         '
-        Me.scrlQuestRec.Location = New System.Drawing.Point(9, 80)
+        Me.scrlQuestRec.Enabled = False
+        Me.scrlQuestRec.Location = New System.Drawing.Point(75, 113)
         Me.scrlQuestRec.Name = "scrlQuestRec"
-        Me.scrlQuestRec.Size = New System.Drawing.Size(377, 17)
+        Me.scrlQuestRec.Size = New System.Drawing.Size(204, 17)
         Me.scrlQuestRec.TabIndex = 3
         '
         'lblQuestRec
         '
         Me.lblQuestRec.AutoSize = True
-        Me.lblQuestRec.Location = New System.Drawing.Point(7, 62)
+        Me.lblQuestRec.Location = New System.Drawing.Point(73, 95)
         Me.lblQuestRec.Name = "lblQuestRec"
         Me.lblQuestRec.Size = New System.Drawing.Size(130, 13)
         Me.lblQuestRec.TabIndex = 2
@@ -731,15 +715,16 @@ Partial Class frmEditor_Quest
         '
         'scrlItemRec
         '
-        Me.scrlItemRec.Location = New System.Drawing.Point(9, 38)
+        Me.scrlItemRec.Enabled = False
+        Me.scrlItemRec.Location = New System.Drawing.Point(76, 61)
         Me.scrlItemRec.Name = "scrlItemRec"
-        Me.scrlItemRec.Size = New System.Drawing.Size(377, 17)
+        Me.scrlItemRec.Size = New System.Drawing.Size(204, 17)
         Me.scrlItemRec.TabIndex = 1
         '
         'lblItemReq
         '
         Me.lblItemReq.AutoSize = True
-        Me.lblItemReq.Location = New System.Drawing.Point(6, 16)
+        Me.lblItemReq.Location = New System.Drawing.Point(73, 39)
         Me.lblItemReq.Name = "lblItemReq"
         Me.lblItemReq.Size = New System.Drawing.Size(122, 13)
         Me.lblItemReq.TabIndex = 0
@@ -757,7 +742,7 @@ Partial Class frmEditor_Quest
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(618, 402)
+        Me.btnCancel.Location = New System.Drawing.Point(616, 467)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 23)
         Me.btnCancel.TabIndex = 14
@@ -766,7 +751,7 @@ Partial Class frmEditor_Quest
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(6, 331)
+        Me.btnDelete.Location = New System.Drawing.Point(6, 459)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(195, 23)
         Me.btnDelete.TabIndex = 13
@@ -775,7 +760,7 @@ Partial Class frmEditor_Quest
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(525, 402)
+        Me.btnSave.Location = New System.Drawing.Point(523, 467)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(87, 23)
         Me.btnSave.TabIndex = 12
@@ -786,9 +771,9 @@ Partial Class frmEditor_Quest
         '
         Me.fraGeneral.BackColor = System.Drawing.SystemColors.Window
         Me.fraGeneral.Controls.Add(Me.chkQuestCancel)
+        Me.fraGeneral.Controls.Add(Me.fraRewards)
         Me.fraGeneral.Controls.Add(Me.GroupBox7)
         Me.fraGeneral.Controls.Add(Me.GroupBox6)
-        Me.fraGeneral.Controls.Add(Me.Label11)
         Me.fraGeneral.Controls.Add(Me.txtStartText)
         Me.fraGeneral.Controls.Add(Me.chkRepeat)
         Me.fraGeneral.Controls.Add(Me.txtEndText)
@@ -800,7 +785,7 @@ Partial Class frmEditor_Quest
         Me.fraGeneral.Controls.Add(Me.Label2)
         Me.fraGeneral.Location = New System.Drawing.Point(216, 2)
         Me.fraGeneral.Name = "fraGeneral"
-        Me.fraGeneral.Size = New System.Drawing.Size(505, 394)
+        Me.fraGeneral.Size = New System.Drawing.Size(505, 459)
         Me.fraGeneral.TabIndex = 10
         Me.fraGeneral.TabStop = False
         Me.fraGeneral.Text = "General"
@@ -820,7 +805,7 @@ Partial Class frmEditor_Quest
         Me.GroupBox7.Controls.Add(Me.btnRemoveTask)
         Me.GroupBox7.Controls.Add(Me.btnAddTask)
         Me.GroupBox7.Controls.Add(Me.lstTasks)
-        Me.GroupBox7.Location = New System.Drawing.Point(255, 175)
+        Me.GroupBox7.Location = New System.Drawing.Point(255, 254)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(243, 199)
         Me.GroupBox7.TabIndex = 27
@@ -858,7 +843,7 @@ Partial Class frmEditor_Quest
         Me.GroupBox6.Controls.Add(Me.btnRemoveRequirement)
         Me.GroupBox6.Controls.Add(Me.btnAddRequirement)
         Me.GroupBox6.Controls.Add(Me.lstRequirements)
-        Me.GroupBox6.Location = New System.Drawing.Point(6, 175)
+        Me.GroupBox6.Location = New System.Drawing.Point(6, 254)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(243, 199)
         Me.GroupBox6.TabIndex = 26
@@ -910,57 +895,49 @@ Partial Class frmEditor_Quest
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Window
-        Me.GroupBox1.Controls.Add(Me.BbtnUndoutton1)
-        Me.GroupBox1.Controls.Add(Me.btnNewQuest)
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Controls.Add(Me.btnDelete)
         Me.GroupBox1.Location = New System.Drawing.Point(2, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(208, 394)
+        Me.GroupBox1.Size = New System.Drawing.Size(208, 488)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Quest List"
-        '
-        'BbtnUndoutton1
-        '
-        Me.BbtnUndoutton1.Location = New System.Drawing.Point(6, 360)
-        Me.BbtnUndoutton1.Name = "BbtnUndoutton1"
-        Me.BbtnUndoutton1.Size = New System.Drawing.Size(195, 23)
-        Me.BbtnUndoutton1.TabIndex = 14
-        Me.BbtnUndoutton1.Text = "Undo"
-        Me.BbtnUndoutton1.UseVisualStyleBackColor = True
-        '
-        'btnNewQuest
-        '
-        Me.btnNewQuest.Location = New System.Drawing.Point(6, 302)
-        Me.btnNewQuest.Name = "btnNewQuest"
-        Me.btnNewQuest.Size = New System.Drawing.Size(195, 23)
-        Me.btnNewQuest.TabIndex = 1
-        Me.btnNewQuest.Text = "New"
-        Me.btnNewQuest.UseVisualStyleBackColor = True
         '
         'lstIndex
         '
         Me.lstIndex.FormattingEnabled = True
         Me.lstIndex.Location = New System.Drawing.Point(7, 19)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(194, 277)
+        Me.lstIndex.Size = New System.Drawing.Size(194, 433)
         Me.lstIndex.TabIndex = 0
+        '
+        'rdbNoneReq
+        '
+        Me.rdbNoneReq.AutoSize = True
+        Me.rdbNoneReq.Checked = True
+        Me.rdbNoneReq.Location = New System.Drawing.Point(8, 16)
+        Me.rdbNoneReq.Name = "rdbNoneReq"
+        Me.rdbNoneReq.Size = New System.Drawing.Size(51, 17)
+        Me.rdbNoneReq.TabIndex = 12
+        Me.rdbNoneReq.TabStop = True
+        Me.rdbNoneReq.Text = "None"
+        Me.rdbNoneReq.UseVisualStyleBackColor = True
         '
         'frmEditor_Quest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
-        Me.ClientSize = New System.Drawing.Size(724, 430)
+        Me.ClientSize = New System.Drawing.Size(1175, 502)
         Me.ControlBox = False
-        Me.Controls.Add(Me.fraTasks)
-        Me.Controls.Add(Me.fraRewards)
         Me.Controls.Add(Me.fraGeneral)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.fraRequirements)
+        Me.Controls.Add(Me.fraTasks)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Quest"
         Me.Text = "Quest Editor"
@@ -981,21 +958,13 @@ Partial Class frmEditor_Quest
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents fraRewards As GroupBox
     Friend WithEvents scrlExpReward As HScrollBar
     Friend WithEvents lblExpReward As Label
-    Friend WithEvents HScrollBar7 As HScrollBar
-    Friend WithEvents HScrollBar8 As HScrollBar
-    Friend WithEvents Label7 As Label
-    Friend WithEvents HScrollBar5 As HScrollBar
-    Friend WithEvents HScrollBar6 As HScrollBar
-    Friend WithEvents Label6 As Label
-    Friend WithEvents HScrollBar3 As HScrollBar
-    Friend WithEvents HScrollBar4 As HScrollBar
-    Friend WithEvents Label5 As Label
     Friend WithEvents scrlItemRewValue1 As HScrollBar
     Friend WithEvents scrlItemRew1 As HScrollBar
     Friend WithEvents lblItemReward1 As Label
@@ -1061,11 +1030,17 @@ Partial Class frmEditor_Quest
     Friend WithEvents btnRemoveRequirement As Button
     Friend WithEvents btnAddRequirement As Button
     Friend WithEvents lstRequirements As ListBox
-    Friend WithEvents BbtnUndoutton1 As Button
-    Friend WithEvents btnNewQuest As Button
     Friend WithEvents txtTaskSpeech As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnCancelTask As Button
     Friend WithEvents btnSaveTask As Button
+    Friend WithEvents btnRequirementSave As Button
+    Friend WithEvents btnRequirementCancel As Button
+    Friend WithEvents scrlClassRec As HScrollBar
+    Friend WithEvents lblClassRec As Label
+    Friend WithEvents rdbClassReq As RadioButton
+    Friend WithEvents rdbQuestReq As RadioButton
+    Friend WithEvents rdbItemReq As RadioButton
+    Friend WithEvents rdbNoneReq As RadioButton
 End Class

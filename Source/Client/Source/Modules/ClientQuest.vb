@@ -81,7 +81,8 @@
         Dim TasksCount As Integer 'todo
         Dim Repeat As Integer
 
-        Dim Requirement() As Integer '1=item, 2=quest
+        Dim Requirement() As Integer '1=item, 2=quest, 3=class
+        Dim RequirementIndex() As Integer
 
         Dim QuestGiveItem As Integer 'Todo: make this dynamic
         Dim QuestGiveItemValue As Integer
@@ -109,8 +110,9 @@
         Quest(QuestNum).TasksCount = 0
         Quest(QuestNum).Repeat = 0
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = 0
+            Quest(QuestNum).RequirementIndex(I) = 0
         Next
 
         Quest(QuestNum).QuestGiveItem = 0
@@ -145,7 +147,7 @@
         Dim I As Integer
 
         For I = 1 To MAX_QUESTS
-            Call ClearQuest(I)
+            ClearQuest(I)
         Next
     End Sub
 #End Region
@@ -181,8 +183,9 @@
         Quest(QuestNum).TasksCount = buffer.ReadInteger
         Quest(QuestNum).Repeat = buffer.ReadInteger
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             Quest(QuestNum).Requirement(I) = buffer.ReadInteger
+            Quest(QuestNum).RequirementIndex(I) = buffer.ReadInteger
         Next
 
         Quest(QuestNum).QuestGiveItem = buffer.ReadInteger
@@ -297,8 +300,9 @@
         buffer.WriteInteger(Quest(QuestNum).TasksCount)
         buffer.WriteInteger(Quest(QuestNum).Repeat)
 
-        For I = 1 To 3
+        For I = 1 To MAX_REQUIREMENTS
             buffer.WriteInteger(Quest(QuestNum).Requirement(I))
+            buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
         Next
 
         buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
@@ -411,29 +415,41 @@
 
 #Region "Misc Functions"
     Public Function CanStartQuest(ByVal QuestNum As Integer) As Boolean
+        Dim i As Integer
+
         CanStartQuest = False
+
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
         If QuestInProgress(QuestNum) Then Exit Function
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
         If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
-            'Check if item is needed
-            If Quest(QuestNum).Requirement(1) > 0 And Quest(QuestNum).Requirement(1) <= MAX_ITEMS Then
-                If HasItem(MyIndex, Quest(QuestNum).Requirement(2)) = 0 Then
-                    Exit Function
-                End If
-            End If
 
-            'Check if previous quest is needed
-            If Quest(QuestNum).Requirement(2) > 0 And Quest(QuestNum).Requirement(2) <= MAX_QUESTS Then
-                If Player(MyIndex).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
-                    Exit Function
+            For i = 1 To MAX_REQUIREMENTS
+                'Check if item is needed
+                If Quest(QuestNum).Requirement(i) = 1 Then
+                    If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_ITEMS Then
+                        If HasItem(MyIndex, Quest(QuestNum).RequirementIndex(i)) = 0 Then
+                            Exit Function
+                        End If
+                    End If
                 End If
-            End If
+
+                'Check if previous quest is needed
+                If Quest(QuestNum).Requirement(i) = 2 Then
+                    If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_QUESTS Then
+                        If Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QUEST_STARTED Then
+                            Exit Function
+                        End If
+                    End If
+                End If
+
+            Next
+
             'Go on :)
             CanStartQuest = True
         Else
-
+            CanStartQuest = False
         End If
     End Function
 
@@ -632,13 +648,13 @@
     Public Sub ResetQuestLog()
 
         QuestTaskLogText = ""
-            ActualTaskText = ""
-            QuestDialogText = ""
-            QuestStatus2Text = ""
-            AbandonQuestText = ""
-            AbandonQuestVisible = False
-            QuestRequirementsText = ""
-            QuestRewardsText = ""
+        ActualTaskText = ""
+        QuestDialogText = ""
+        QuestStatus2Text = ""
+        AbandonQuestText = ""
+        AbandonQuestVisible = False
+        QuestRequirementsText = ""
+        QuestRewardsText = ""
         pnlQuestLogVisible = False
 
         SelectedQuest = 0

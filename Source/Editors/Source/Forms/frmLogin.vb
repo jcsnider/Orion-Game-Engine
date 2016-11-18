@@ -101,6 +101,10 @@
         SendRequestClasses()
         SendRequestEditClass()
     End Sub
+
+    Private Sub btnAutoMapper_Click(sender As Object, e As EventArgs) Handles btnAutoMapper.Click
+        SendRequestAutoMapper()
+    End Sub
 #End Region
 
 End Class

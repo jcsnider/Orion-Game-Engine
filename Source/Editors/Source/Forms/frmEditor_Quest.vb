@@ -5,7 +5,6 @@
         Width = 740
 
         fraRequirements.Location = fraGeneral.Location
-        fraRewards.Location = fraGeneral.Location
         fraTasks.Location = fraGeneral.Location
 
         scrlNPC.Maximum = MAX_NPCS
@@ -15,6 +14,7 @@
         scrlAmount.Maximum = 999999
         scrlItemRec.Maximum = MAX_ITEMS
         scrlQuestRec.Maximum = MAX_QUESTS
+        scrlClassRec.Maximum = Max_Classes
         scrlStartItemName.Maximum = MAX_ITEMS
         scrlStartItemAmount.Maximum = Byte.MaxValue
         scrlEndItemName.Maximum = MAX_ITEMS
@@ -52,7 +52,7 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Len(Trim$(txtName.Text)) = 0 Then
-            Call MsgBox("Name required.")
+            MsgBox("Name required.")
         Else
             QuestEditorOk()
         End If
@@ -85,24 +85,6 @@
         Quest(EditorIndex).Chat(3) = Trim$(txtEndText.Text)
     End Sub
 
-    Private Sub scrlItemRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRec.ValueChanged
-        If scrlItemRec.Value = 0 Then
-            lblItemReq.Text = "Item Requirement: None"
-        Else
-            lblItemReq.Text = "Item Requirement: " & Trim(Item(scrlItemRec.Value).Name)
-        End If
-        Quest(EditorIndex).Requirement(1) = scrlItemRec.Value
-    End Sub
-
-    Private Sub scrlQuestRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlQuestRec.ValueChanged
-        If scrlQuestRec.Value = 0 Then
-            lblQuestRec.Text = "Quest Requirement: None"
-        Else
-            lblQuestRec.Text = "Quest Requirement: " & Trim(Quest(scrlQuestRec.Value).Name)
-        End If
-        Quest(EditorIndex).Requirement(2) = scrlQuestRec.Value
-    End Sub
-
     Private Sub scrlStartItemName_ValueChanged(sender As Object, e As EventArgs) Handles scrlStartItemName.ValueChanged
         If scrlStartItemName.Value = 0 Then
             lblStartItem.Text = "Give Item on Start: None" & " (" & scrlStartItemAmount.Value & ")"
@@ -132,7 +114,7 @@
         Quest(EditorIndex).QuestGiveItemValue = scrlStartItemAmount.Value
     End Sub
 
-    Private Sub sscrlEndItemAmount_ValueChanged(sender As Object, e As EventArgs) Handles scrlEndItemAmount.ValueChanged
+    Private Sub scrlEndItemAmount_ValueChanged(sender As Object, e As EventArgs) Handles scrlEndItemAmount.ValueChanged
         If scrlEndItemName.Value = 0 Then
             lblEnditem.Text = "Take Item on End: None" & " (" & scrlEndItemAmount.Value & ")"
         Else
@@ -166,8 +148,6 @@
         End If
         Quest(EditorIndex).RewardItemAmount = scrlItemRewValue1.Value
     End Sub
-
-
 
     Private Sub scrlExpReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlExpReward.ValueChanged
         lblExpReward.Text = "Experience Gained: " & scrlExpReward.Value
@@ -204,6 +184,10 @@
         Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Resource = scrlResource.Value
         Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Amount = scrlAmount.Value
 
+        lstTasks.Items.Clear()
+        For i = 1 To MAX_TASKS
+            lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
+        Next
 
         fraTasks.Visible = False
     End Sub
@@ -212,7 +196,6 @@
         fraTasks.Visible = False
     End Sub
 
-#End Region
     Private Sub scrlNPC_ValueChanged(sender As Object, e As EventArgs) Handles scrlNPC.ValueChanged
         lblNpc.Text = "NPC: " & Npc(scrlNPC.Value).Name
     End Sub
@@ -317,6 +300,88 @@
             scrlNPC.Enabled = False
         End If
     End Sub
+#End Region
 
+#Region "Requirements"
+    Private Sub btnAddRequirement_Click(sender As Object, e As EventArgs) Handles btnAddRequirement.Click
+        fraRequirements.Visible = True
+        fraRequirements.BringToFront()
+    End Sub
+
+    Private Sub btnRemoveRequirement_Click(sender As Object, e As EventArgs) Handles btnRemoveRequirement.Click
+
+    End Sub
+
+    Private Sub lstRequirements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRequirements.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub scrlItemRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRec.ValueChanged
+        If scrlItemRec.Value = 0 Then
+            lblItemReq.Text = "Item Requirement: None"
+        Else
+            lblItemReq.Text = "Item Requirement: " & Trim(Item(scrlItemRec.Value).Name)
+        End If
+        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlItemRec.Value
+    End Sub
+
+    Private Sub scrlQuestRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlQuestRec.ValueChanged
+        If scrlQuestRec.Value = 0 Then
+            lblQuestRec.Text = "Quest Requirement: None"
+        Else
+            lblQuestRec.Text = "Quest Requirement: " & Trim(Quest(scrlQuestRec.Value).Name)
+        End If
+        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlQuestRec.Value
+    End Sub
+
+    Private Sub scrlClassRec_ValueChanged(sender As Object, e As ScrollEventArgs) Handles scrlClassRec.ValueChanged
+        If scrlClassRec.Value = 0 Then
+            lblClassRec.Text = "Class Requirement: None"
+        Else
+            lblClassRec.Text = "Class Requirement: " & Trim(Classes(scrlClassRec.Value).Name)
+        End If
+        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlClassRec.Value
+    End Sub
+
+    Private Sub btnRequirementSave_Click(sender As Object, e As EventArgs) Handles btnRequirementSave.Click
+        If rdbNoneReq.Checked = True Then
+
+        End If
+        lstRequirements.Items.Clear()
+        For i = 1 To MAX_REQUIREMENTS
+            lstRequirements.Items.Add(i & ":")
+        Next
+
+        fraRequirements.Visible = False
+    End Sub
+
+    Private Sub btnRequirementCancel_Click(sender As Object, e As EventArgs) Handles btnRequirementCancel.Click
+        fraRequirements.Visible = False
+    End Sub
+
+    Private Sub rdbNoneReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbNoneReq.CheckedChanged
+        scrlItemRec.Value = 0
+        scrlItemRec.Enabled = False
+
+        scrlQuestRec.Value = 0
+        scrlQuestRec.Enabled = False
+
+        scrlClassRec.Value = 0
+        scrlClassRec.Enabled = False
+    End Sub
+
+    Private Sub rdbItemReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbItemReq.CheckedChanged
+        scrlItemRec.Enabled = True
+    End Sub
+
+    Private Sub rdbQuestReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbQuestReq.CheckedChanged
+        scrlQuestRec.Enabled = True
+    End Sub
+
+    Private Sub rdbClassReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbClassReq.CheckedChanged
+        scrlClassRec.Enabled = True
+    End Sub
+
+#End Region
 
 End Class

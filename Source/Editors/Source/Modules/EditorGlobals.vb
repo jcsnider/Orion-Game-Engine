@@ -55,6 +55,7 @@
     Public InitShopEditor As Boolean
     Public InitAnimationEditor As Boolean
     Public InitClassEditor As Boolean
+    Public InitAutoMapper As Boolean
 
     Public InitMapProperties As Boolean
 
