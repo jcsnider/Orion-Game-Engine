@@ -212,6 +212,8 @@
         Console.WriteLine("")
 
         SetStatus("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
+        Console.WriteLine("")
+        SetStatus("Use /help for the available commands.")
 
         MyIPAddress = GetIP()
 
@@ -221,6 +223,7 @@
         isShuttingDown = False
 
         'init the console msg
+        AddCommandHandler("/help", AddressOf HandleCommandHelp)
         AddCommandHandler("/exit", AddressOf HandleCommandExit)
         AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
 

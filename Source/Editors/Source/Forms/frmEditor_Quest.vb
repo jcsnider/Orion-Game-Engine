@@ -162,6 +162,7 @@
 
     Private Sub btnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
         fraTasks.Visible = True
+        fraTasks.BringToFront()
     End Sub
 
     Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
@@ -322,7 +323,6 @@
         Else
             lblItemReq.Text = "Item Requirement: " & Trim(Item(scrlItemRec.Value).Name)
         End If
-        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlItemRec.Value
     End Sub
 
     Private Sub scrlQuestRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlQuestRec.ValueChanged
@@ -331,7 +331,6 @@
         Else
             lblQuestRec.Text = "Quest Requirement: " & Trim(Quest(scrlQuestRec.Value).Name)
         End If
-        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlQuestRec.Value
     End Sub
 
     Private Sub scrlClassRec_ValueChanged(sender As Object, e As ScrollEventArgs) Handles scrlClassRec.ValueChanged
@@ -340,16 +339,36 @@
         Else
             lblClassRec.Text = "Class Requirement: " & Trim(Classes(scrlClassRec.Value).Name)
         End If
-        Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = scrlClassRec.Value
     End Sub
 
     Private Sub btnRequirementSave_Click(sender As Object, e As EventArgs) Handles btnRequirementSave.Click
         If rdbNoneReq.Checked = True Then
-
+            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 0
+            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = 0
+        ElseIf rdbItemReq.Checked = True Then
+            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 1
+            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlItemRec.Value
+        ElseIf rdbQuestReq.Checked = True Then
+            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 2
+            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlQuestRec.Value
+        ElseIf rdbClassReq.Checked = True Then
+            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 3
+            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlClassRec.Value
         End If
+
         lstRequirements.Items.Clear()
         For i = 1 To MAX_REQUIREMENTS
-            lstRequirements.Items.Add(i & ":")
+            Select Case Quest(EditorIndex).Requirement(i)
+                Case 1
+                    lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case 2
+                    lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case 3
+                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case Else
+                    lstRequirements.Items.Add(i & ":")
+            End Select
+
         Next
 
         fraRequirements.Visible = False
