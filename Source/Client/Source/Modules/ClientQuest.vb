@@ -2,8 +2,8 @@
 #Region "Global Info"
     'Constants
     Public Const MAX_QUESTS As Byte = 250
-    Public Const MAX_TASKS As Byte = 10
-    Public Const MAX_REQUIREMENTS As Byte = 10
+    'Public Const MAX_TASKS As Byte = 10
+    'Public Const MAX_REQUIREMENTS As Byte = 10
     Public Const EDITOR_TASKS As Byte = 7
 
     Public Const QUEST_TYPE_GOSLAY As Byte = 1
@@ -78,9 +78,10 @@
     Public Structure QuestRec
         Dim Name As String
         Dim QuestLog As String
-        Dim TasksCount As Integer 'todo
-        Dim Repeat As Integer
+        Dim Repeat As Byte
+        Dim Cancelable As Byte
 
+        Dim ReqCount As Integer
         Dim Requirement() As Integer '1=item, 2=quest, 3=class
         Dim RequirementIndex() As Integer
 
@@ -91,10 +92,12 @@
 
         Dim Chat() As String
 
-        Dim RewardItem As Integer 'ToDo: make this dynamic
-        Dim RewardItemAmount As Integer
+        Dim RewardCount As Integer
+        Dim RewardItem() As Integer
+        Dim RewardItemAmount() As Integer
         Dim RewardExp As Integer
 
+        Dim TaskCount As Integer
         Dim Task() As TaskRec
 
     End Structure
@@ -107,10 +110,13 @@
         ' clear the Quest
         Quest(QuestNum).Name = ""
         Quest(QuestNum).QuestLog = ""
-        Quest(QuestNum).TasksCount = 0
         Quest(QuestNum).Repeat = 0
+        Quest(QuestNum).Cancelable = 0
 
-        For I = 1 To MAX_REQUIREMENTS
+        Quest(I).ReqCount = 0
+        ReDim Quest(QuestNum).Requirement(Quest(I).ReqCount)
+        ReDim Quest(QuestNum).RequirementIndex(Quest(I).ReqCount)
+        For I = 1 To Quest(I).ReqCount
             Quest(QuestNum).Requirement(I) = 0
             Quest(QuestNum).RequirementIndex(I) = 0
         Next
@@ -120,15 +126,23 @@
         Quest(QuestNum).QuestRemoveItem = 0
         Quest(QuestNum).QuestRemoveItemValue = 0
 
+        ReDim Quest(QuestNum).Chat(3)
         For I = 1 To 3
             Quest(QuestNum).Chat(I) = ""
         Next
 
-        Quest(QuestNum).RewardItem = 0
-        Quest(QuestNum).RewardItemAmount = 0
+        Quest(QuestNum).RewardCount = 0
+        ReDim Quest(QuestNum).RewardItem(Quest(QuestNum).RewardCount)
+        ReDim Quest(QuestNum).RewardItemAmount(Quest(QuestNum).RewardCount)
+        For I = 1 To Quest(QuestNum).RewardCount
+            Quest(QuestNum).RewardItem(I) = 0
+            Quest(QuestNum).RewardItemAmount(I) = 0
+        Next
         Quest(QuestNum).RewardExp = 0
 
-        For I = 1 To MAX_TASKS
+        Quest(QuestNum).TaskCount = 0
+        ReDim Quest(QuestNum).Task(Quest(QuestNum).TaskCount)
+        For I = 1 To Quest(QuestNum).TaskCount
             Quest(QuestNum).Task(I).Order = 0
             Quest(QuestNum).Task(I).Npc = 0
             Quest(QuestNum).Task(I).Item = 0
@@ -180,10 +194,13 @@
         ' Update the Quest
         Quest(QuestNum).Name = buffer.ReadString
         Quest(QuestNum).QuestLog = buffer.ReadString
-        Quest(QuestNum).TasksCount = buffer.ReadInteger
         Quest(QuestNum).Repeat = buffer.ReadInteger
+        Quest(QuestNum).Cancelable = buffer.ReadInteger
 
-        For I = 1 To MAX_REQUIREMENTS
+        Quest(QuestNum).ReqCount = buffer.ReadInteger
+        ReDim Quest(QuestNum).Requirement(Quest(QuestNum).ReqCount)
+        ReDim Quest(QuestNum).RequirementIndex(Quest(QuestNum).ReqCount)
+        For I = 1 To Quest(QuestNum).ReqCount
             Quest(QuestNum).Requirement(I) = buffer.ReadInteger
             Quest(QuestNum).RequirementIndex(I) = buffer.ReadInteger
         Next
@@ -197,11 +214,19 @@
             Quest(QuestNum).Chat(I) = buffer.ReadString
         Next
 
-        Quest(QuestNum).RewardItem = buffer.ReadInteger
-        Quest(QuestNum).RewardItemAmount = buffer.ReadInteger
+        Quest(QuestNum).RewardCount = buffer.ReadInteger
+        ReDim Quest(QuestNum).RewardItem(Quest(QuestNum).RewardCount)
+        ReDim Quest(QuestNum).RewardItemAmount(Quest(QuestNum).RewardCount)
+        For i = 1 To Quest(QuestNum).RewardCount
+            Quest(QuestNum).RewardItem(i) = buffer.ReadInteger
+            Quest(QuestNum).RewardItemAmount(i) = buffer.ReadInteger
+        Next
+
         Quest(QuestNum).RewardExp = buffer.ReadInteger
 
-        For I = 1 To MAX_TASKS
+        Quest(QuestNum).TaskCount = buffer.ReadInteger
+        ReDim Quest(QuestNum).Task(Quest(QuestNum).TaskCount)
+        For I = 1 To Quest(QuestNum).TaskCount
             Quest(QuestNum).Task(I).Order = buffer.ReadInteger
             Quest(QuestNum).Task(I).Npc = buffer.ReadInteger
             Quest(QuestNum).Task(I).Item = buffer.ReadInteger
@@ -277,64 +302,70 @@
 #End Region
 
 #Region "Outgoing Packets"
-    Public Sub SendRequestEditQuest()
-        Dim buffer As ByteBuffer
+    'Public Sub SendRequestEditQuest()
+    '    Dim buffer As ByteBuffer
 
-        buffer = New ByteBuffer
-        buffer.WriteInteger(ClientPackets.CRequestEditQuest)
-        SendData(buffer.ToArray)
-        buffer = Nothing
+    '    buffer = New ByteBuffer
+    '    buffer.WriteInteger(ClientPackets.CRequestEditQuest)
+    '    SendData(buffer.ToArray)
+    '    buffer = Nothing
 
-    End Sub
+    'End Sub
 
-    Public Sub SendSaveQuest(ByVal QuestNum As Integer)
-        Dim buffer As ByteBuffer
+    'Public Sub SendSaveQuest(ByVal QuestNum As Integer)
+    '    Dim buffer As ByteBuffer
 
-        buffer = New ByteBuffer
+    '    buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CSaveQuest)
-        buffer.WriteInteger(QuestNum)
+    '    buffer.WriteInteger(ClientPackets.CSaveQuest)
+    '    buffer.WriteInteger(QuestNum)
 
-        buffer.WriteString(Trim(Quest(QuestNum).Name))
-        buffer.WriteString(Trim(Quest(QuestNum).QuestLog))
-        buffer.WriteInteger(Quest(QuestNum).TasksCount)
-        buffer.WriteInteger(Quest(QuestNum).Repeat)
+    '    buffer.WriteString(Trim(Quest(QuestNum).Name))
+    '    buffer.WriteString(Trim(Quest(QuestNum).QuestLog))
+    '    buffer.WriteInteger(Quest(QuestNum).Repeat)
+    '    buffer.WriteInteger(Quest(QuestNum).Cancelable)
 
-        For I = 1 To MAX_REQUIREMENTS
-            buffer.WriteInteger(Quest(QuestNum).Requirement(I))
-            buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
-        Next
+    '    buffer.WriteInteger(Quest(QuestNum).ReqCount)
+    '    For I = 1 To Quest(QuestNum).ReqCount
+    '        buffer.WriteInteger(Quest(QuestNum).Requirement(I))
+    '        buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
+    '    Next
 
-        buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
-        buffer.WriteInteger(Quest(QuestNum).QuestGiveItemValue)
-        buffer.WriteInteger(Quest(QuestNum).QuestRemoveItem)
-        buffer.WriteInteger(Quest(QuestNum).QuestRemoveItemValue)
+    '    buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
+    '    buffer.WriteInteger(Quest(QuestNum).QuestGiveItemValue)
+    '    buffer.WriteInteger(Quest(QuestNum).QuestRemoveItem)
+    '    buffer.WriteInteger(Quest(QuestNum).QuestRemoveItemValue)
 
-        For I = 1 To 3
-            buffer.WriteString(Trim(Quest(QuestNum).Chat(I)))
-        Next
+    '    For I = 1 To 3
+    '        buffer.WriteString(Trim(Quest(QuestNum).Chat(I)))
+    '    Next
 
-        buffer.WriteInteger(Quest(QuestNum).RewardItem)
-        buffer.WriteInteger(Quest(QuestNum).RewardItemAmount)
-        buffer.WriteInteger(Quest(QuestNum).RewardExp)
+    '    buffer.WriteInteger(Quest(QuestNum).RewardCount)
+    '    For i = 1 To Quest(QuestNum).RewardCount
+    '        buffer.WriteInteger(Quest(QuestNum).RewardItem(i))
+    '        buffer.WriteInteger(Quest(QuestNum).RewardItemAmount(i))
+    '    Next
 
-        For I = 1 To MAX_TASKS
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Order)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Npc)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Item)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Map)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Resource)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).Amount)
-            buffer.WriteString(Trim(Quest(QuestNum).Task(I).Speech))
-            buffer.WriteString(Trim(Quest(QuestNum).Task(I).TaskLog))
-            buffer.WriteInteger(Quest(QuestNum).Task(I).QuestEnd)
-            buffer.WriteInteger(Quest(QuestNum).Task(I).TaskType)
-        Next
+    '    buffer.WriteInteger(Quest(QuestNum).RewardExp)
 
-        SendData(buffer.ToArray)
-        buffer = Nothing
+    '    buffer.WriteInteger(Quest(QuestNum).TaskCount)
+    '    For I = 1 To Quest(QuestNum).TaskCount
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Order)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Npc)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Item)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Map)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Resource)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Amount)
+    '        buffer.WriteString(Trim(Quest(QuestNum).Task(I).Speech))
+    '        buffer.WriteString(Trim(Quest(QuestNum).Task(I).TaskLog))
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).QuestEnd)
+    '        buffer.WriteInteger(Quest(QuestNum).Task(I).TaskType)
+    '    Next
 
-    End Sub
+    '    SendData(buffer.ToArray)
+    '    buffer = Nothing
+
+    'End Sub
 
     Sub SendRequestQuests()
         Dim buffer As ByteBuffer
@@ -425,7 +456,7 @@
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
         If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
 
-            For i = 1 To MAX_REQUIREMENTS
+            For i = 1 To Quest(QuestNum).ReqCount
                 'Check if item is needed
                 If Quest(QuestNum).Requirement(i) = 1 Then
                     If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_ITEMS Then
@@ -593,7 +624,7 @@
         End If
 
         'Rewards
-        QuestRewardsText = Item(Quest(QuestNum).RewardItem).Name & " X" & Str(Quest(QuestNum).RewardItemAmount) & " -" & Str(Quest(QuestNum).RewardExp) & " EXP"
+        QuestRewardsText = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1)) & " -" & Str(Quest(QuestNum).RewardExp) & " EXP"
 
     End Sub
 

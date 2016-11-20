@@ -56,11 +56,7 @@ Module ClientGeneral
 
         'quests
         ReDim Quest(MAX_QUESTS)
-        For i = 0 To MAX_QUESTS
-            ReDim Quest(i).Requirement(MAX_REQUIREMENTS)
-            ReDim Quest(i).Chat(3)
-            ReDim Quest(i).Task(MAX_TASKS)
-        Next
+        ClearQuests()
 
         ReDim Map.Npc(0 To MAX_MAP_NPCS)
 

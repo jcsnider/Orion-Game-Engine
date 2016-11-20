@@ -1,7 +1,5 @@
 ﻿Public Class frmEditor_Quest
     Private Sub frmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim i As Integer
-
         Width = 740
 
         fraRequirements.Location = fraGeneral.Location
@@ -19,18 +17,8 @@
         scrlStartItemAmount.Maximum = Byte.MaxValue
         scrlEndItemName.Maximum = MAX_ITEMS
         scrlEndItemAmount.Maximum = Byte.MaxValue
-        scrlItemRew1.Maximum = MAX_ITEMS
-        scrlItemRewValue1.Maximum = 999999
-
-        lstRequirements.Items.Clear()
-        For i = 1 To MAX_REQUIREMENTS
-            lstRequirements.Items.Add(i & ":")
-        Next
-
-        lstTasks.Items.Clear()
-        For i = 1 To MAX_TASKS
-            lstTasks.Items.Add(i & ":")
-        Next
+        scrlItemReward.Maximum = MAX_ITEMS
+        scrlItemRewValue.Maximum = 999999
 
     End Sub
 
@@ -58,7 +46,7 @@
         End If
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs)
         Dim tmpIndex As Integer
 
         ClearQuest(EditorIndex)
@@ -131,22 +119,26 @@
         End If
     End Sub
 
-    Private Sub scrlItemRew1_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRew1.ValueChanged
-        If scrlItemRew1.Value = 0 Then
-            lblItemReward1.Text = "Item Reward: None" & " (" & scrlItemRewValue1.Value & ")"
+    Private Sub scrlItemReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemReward.ValueChanged
+        If lstRewards.SelectedIndex < 0 Then Exit Sub
+
+        If scrlItemReward.Value = 0 Then
+            lblItemReward.Text = "Item Reward: None" & " (" & scrlItemRewValue.Value & ")"
         Else
-            lblItemReward1.Text = "Item Reward: " & Trim(Item(scrlItemRew1.Value).Name) & " (" & scrlItemRewValue1.Value & ")"
+            lblItemReward.Text = "Item Reward: " & Trim(Item(scrlItemReward.Value).Name) & " (" & scrlItemRewValue.Value & ")"
         End If
-        Quest(EditorIndex).RewardItem = scrlItemRew1.Value
+        Quest(EditorIndex).RewardItem(lstRewards.SelectedIndex + 1) = scrlItemReward.Value
     End Sub
 
-    Private Sub scrlItemRew1Value_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRewValue1.ValueChanged
-        If scrlItemRew1.Value = 0 Then
-            lblItemReward1.Text = "Item Reward: None" & " (" & scrlItemRewValue1.Value & ")"
+    Private Sub scrlItemRewValue_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRewValue.ValueChanged
+        If lstRewards.SelectedIndex < 0 Then Exit Sub
+
+        If scrlItemReward.Value = 0 Then
+            lblItemReward.Text = "Item Reward: None" & " (" & scrlItemRewValue.Value & ")"
         Else
-            lblItemReward1.Text = "Item Reward: " & Trim(Item(scrlItemRew1.Value).Name) & " (" & scrlItemRewValue1.Value & ")"
+            lblItemReward.Text = "Item Reward: " & Trim(Item(scrlItemReward.Value).Name) & " (" & scrlItemRewValue.Value & ")"
         End If
-        Quest(EditorIndex).RewardItemAmount = scrlItemRewValue1.Value
+        Quest(EditorIndex).RewardItemAmount(lstRewards.SelectedIndex + 1) = scrlItemRewValue.Value
     End Sub
 
     Private Sub scrlExpReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlExpReward.ValueChanged
@@ -155,38 +147,80 @@
     End Sub
 
 #Region "Tasks"
-    Private Sub lstTasks_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstTasks.SelectedIndexChanged
+    Private Sub lstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
+        If lstTasks.SelectedIndex < 0 Then Exit Sub
+
         LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
-        'fraTasks.Visible = True
+        fraTasks.Visible = True
+        fraTasks.BringToFront()
     End Sub
 
     Private Sub btnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
+        Quest(EditorIndex).TaskCount = Quest(EditorIndex).TaskCount + 1
+
+        ReDim Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
+
         fraTasks.Visible = True
         fraTasks.BringToFront()
     End Sub
 
     Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
-        LoadTask(EditorIndex, lstTasks.SelectedIndex + 1)
+        Dim i As Integer, tmptask() As TaskRec
+
+        If lstTasks.SelectedIndex < 0 Then Exit Sub
+        If Quest(EditorIndex).TaskCount <= 0 Then Exit Sub
+
+        ReDim tmptask(Quest(EditorIndex).TaskCount - 1)
+
+        For i = 1 To Quest(EditorIndex).TaskCount
+            If Not i = lstTasks.SelectedIndex + 1 Then
+                tmptask(i) = Quest(EditorIndex).Task(i)
+            End If
+        Next
+
+        Quest(EditorIndex).TaskCount = Quest(EditorIndex).TaskCount - 1
+
+        ReDim Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
+
+        For i = 1 To Quest(EditorIndex).TaskCount
+            If Not i = lstTasks.SelectedIndex + 1 Then
+                Quest(EditorIndex).Task(i) = tmptask(i)
+            End If
+        Next
+
+        lstTasks.Items.Clear()
+        For i = 1 To Quest(EditorIndex).TaskCount
+            lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
+        Next
+
     End Sub
 
     Private Sub btnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).TaskLog = Trim$(txtTaskLog.Text)
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Speech = txtTaskSpeech.Text
+        Dim selectedtask As Integer
 
-        If chkEnd.Checked = True Then
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).QuestEnd = True
+        If lstTasks.SelectedIndex < 0 Then
+            selectedtask = Quest(EditorIndex).TaskCount
         Else
-            Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).QuestEnd = False
+            selectedtask = lstTasks.SelectedIndex + 1
         End If
 
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Npc = scrlNPC.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Item = scrlItem.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Map = scrlMap.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Resource = scrlResource.Value
-        Quest(EditorIndex).Task(lstTasks.SelectedIndex + 1).Amount = scrlAmount.Value
+        Quest(EditorIndex).Task(selectedtask).TaskLog = Trim$(txtTaskLog.Text)
+        Quest(EditorIndex).Task(selectedtask).Speech = txtTaskSpeech.Text
+
+        If chkEnd.Checked = True Then
+            Quest(EditorIndex).Task(selectedtask).QuestEnd = True
+        Else
+            Quest(EditorIndex).Task(selectedtask).QuestEnd = False
+        End If
+
+        Quest(EditorIndex).Task(selectedtask).Npc = scrlNPC.Value
+        Quest(EditorIndex).Task(selectedtask).Item = scrlItem.Value
+        Quest(EditorIndex).Task(selectedtask).Map = scrlMap.Value
+        Quest(EditorIndex).Task(selectedtask).Resource = scrlResource.Value
+        Quest(EditorIndex).Task(selectedtask).Amount = scrlAmount.Value
 
         lstTasks.Items.Clear()
-        For i = 1 To MAX_TASKS
+        For i = 1 To Quest(EditorIndex).TaskCount
             lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
         Next
 
@@ -305,16 +339,64 @@
 
 #Region "Requirements"
     Private Sub btnAddRequirement_Click(sender As Object, e As EventArgs) Handles btnAddRequirement.Click
+        Quest(EditorIndex).ReqCount = Quest(EditorIndex).ReqCount + 1
+
+        ReDim Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount)
+        ReDim Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount)
+
         fraRequirements.Visible = True
         fraRequirements.BringToFront()
     End Sub
 
     Private Sub btnRemoveRequirement_Click(sender As Object, e As EventArgs) Handles btnRemoveRequirement.Click
+        Dim i As Integer, tmpRequirement() As Integer, tmpRequirementIndex() As Integer
 
+        If lstRequirements.SelectedIndex < 0 Then Exit Sub
+
+        ReDim tmpRequirement(Quest(EditorIndex).ReqCount - 1)
+        ReDim tmpRequirementIndex(Quest(EditorIndex).ReqCount - 1)
+
+        For i = 1 To Quest(EditorIndex).ReqCount
+            If Not i = lstRequirements.SelectedIndex + 1 Then
+                tmpRequirement(i) = Quest(EditorIndex).Requirement(i)
+                tmpRequirementIndex(i) = Quest(EditorIndex).RequirementIndex(i)
+            End If
+        Next
+
+        Quest(EditorIndex).ReqCount = Quest(EditorIndex).ReqCount - 1
+
+        ReDim Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount)
+        ReDim Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount)
+
+        For i = 1 To Quest(EditorIndex).ReqCount
+            If Not i = lstRequirements.SelectedIndex + 1 Then
+                Quest(EditorIndex).Requirement(i) = tmpRequirement(i)
+                Quest(EditorIndex).RequirementIndex(i) = tmpRequirementIndex(i)
+            End If
+        Next
+
+        lstRequirements.Items.Clear()
+        For i = 1 To Quest(EditorIndex).ReqCount
+            Select Case Quest(EditorIndex).Requirement(i)
+                Case 1
+                    lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case 2
+                    lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case 3
+                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(EditorIndex).RequirementIndex(i)).Name))
+                Case Else
+                    lstRequirements.Items.Add(i & ":")
+            End Select
+
+        Next
     End Sub
 
     Private Sub lstRequirements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRequirements.SelectedIndexChanged
+        If lstRequirements.SelectedIndex < 0 Then Exit Sub
 
+        LoadRequirement(EditorIndex, lstRequirements.SelectedIndex + 1)
+        fraRequirements.Visible = True
+        fraRequirements.BringToFront()
     End Sub
 
     Private Sub scrlItemRec_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRec.ValueChanged
@@ -343,21 +425,21 @@
 
     Private Sub btnRequirementSave_Click(sender As Object, e As EventArgs) Handles btnRequirementSave.Click
         If rdbNoneReq.Checked = True Then
-            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 0
-            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = 0
+            Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount) = 0
+            Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount) = 0
         ElseIf rdbItemReq.Checked = True Then
-            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 1
-            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlItemRec.Value
+            Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount) = 1
+            Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount) = scrlItemRec.Value
         ElseIf rdbQuestReq.Checked = True Then
-            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 2
-            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlQuestRec.Value
+            Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount) = 2
+            Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount) = scrlQuestRec.Value
         ElseIf rdbClassReq.Checked = True Then
-            Quest(EditorIndex).Requirement(lstRequirements.SelectedIndex + 1) = 3
-            Quest(EditorIndex).RequirementIndex(lstRequirements.SelectedIndex + 1) = scrlClassRec.Value
+            Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount) = 3
+            Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount) = scrlClassRec.Value
         End If
 
         lstRequirements.Items.Clear()
-        For i = 1 To MAX_REQUIREMENTS
+        For i = 1 To Quest(EditorIndex).ReqCount
             Select Case Quest(EditorIndex).Requirement(i)
                 Case 1
                     lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))

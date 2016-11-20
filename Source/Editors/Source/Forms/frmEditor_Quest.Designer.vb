@@ -23,11 +23,14 @@ Partial Class frmEditor_Quest
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.fraRewards = New System.Windows.Forms.GroupBox()
+        Me.btnRemoveReward = New System.Windows.Forms.Button()
+        Me.btnAddReward = New System.Windows.Forms.Button()
+        Me.lstRewards = New System.Windows.Forms.ListBox()
         Me.scrlExpReward = New System.Windows.Forms.HScrollBar()
         Me.lblExpReward = New System.Windows.Forms.Label()
-        Me.scrlItemRewValue1 = New System.Windows.Forms.HScrollBar()
-        Me.scrlItemRew1 = New System.Windows.Forms.HScrollBar()
-        Me.lblItemReward1 = New System.Windows.Forms.Label()
+        Me.scrlItemRewValue = New System.Windows.Forms.HScrollBar()
+        Me.scrlItemReward = New System.Windows.Forms.HScrollBar()
+        Me.lblItemReward = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtEndText = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -66,6 +69,7 @@ Partial Class frmEditor_Quest
         Me.optTask0 = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.fraRequirements = New System.Windows.Forms.GroupBox()
+        Me.rdbNoneReq = New System.Windows.Forms.RadioButton()
         Me.scrlClassRec = New System.Windows.Forms.HScrollBar()
         Me.lblClassRec = New System.Windows.Forms.Label()
         Me.rdbClassReq = New System.Windows.Forms.RadioButton()
@@ -86,7 +90,6 @@ Partial Class frmEditor_Quest
         Me.lblItemReq = New System.Windows.Forms.Label()
         Me.chkRepeat = New System.Windows.Forms.CheckBox()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.fraGeneral = New System.Windows.Forms.GroupBox()
         Me.chkQuestCancel = New System.Windows.Forms.CheckBox()
@@ -102,7 +105,6 @@ Partial Class frmEditor_Quest
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.rdbNoneReq = New System.Windows.Forms.RadioButton()
         Me.fraRewards.SuspendLayout()
         Me.fraTasks.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -117,11 +119,14 @@ Partial Class frmEditor_Quest
         '
         'fraRewards
         '
+        Me.fraRewards.Controls.Add(Me.btnRemoveReward)
+        Me.fraRewards.Controls.Add(Me.btnAddReward)
+        Me.fraRewards.Controls.Add(Me.lstRewards)
         Me.fraRewards.Controls.Add(Me.scrlExpReward)
         Me.fraRewards.Controls.Add(Me.lblExpReward)
-        Me.fraRewards.Controls.Add(Me.scrlItemRewValue1)
-        Me.fraRewards.Controls.Add(Me.scrlItemRew1)
-        Me.fraRewards.Controls.Add(Me.lblItemReward1)
+        Me.fraRewards.Controls.Add(Me.scrlItemRewValue)
+        Me.fraRewards.Controls.Add(Me.scrlItemReward)
+        Me.fraRewards.Controls.Add(Me.lblItemReward)
         Me.fraRewards.Location = New System.Drawing.Point(6, 146)
         Me.fraRewards.Name = "fraRewards"
         Me.fraRewards.Size = New System.Drawing.Size(488, 102)
@@ -129,46 +134,72 @@ Partial Class frmEditor_Quest
         Me.fraRewards.TabStop = False
         Me.fraRewards.Text = "Rewards"
         '
+        'btnRemoveReward
+        '
+        Me.btnRemoveReward.Location = New System.Drawing.Point(243, 74)
+        Me.btnRemoveReward.Name = "btnRemoveReward"
+        Me.btnRemoveReward.Size = New System.Drawing.Size(75, 23)
+        Me.btnRemoveReward.TabIndex = 20
+        Me.btnRemoveReward.Text = "Remove"
+        Me.btnRemoveReward.UseVisualStyleBackColor = True
+        '
+        'btnAddReward
+        '
+        Me.btnAddReward.Location = New System.Drawing.Point(243, 15)
+        Me.btnAddReward.Name = "btnAddReward"
+        Me.btnAddReward.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddReward.TabIndex = 19
+        Me.btnAddReward.Text = "Add"
+        Me.btnAddReward.UseVisualStyleBackColor = True
+        '
+        'lstRewards
+        '
+        Me.lstRewards.FormattingEnabled = True
+        Me.lstRewards.Location = New System.Drawing.Point(6, 15)
+        Me.lstRewards.Name = "lstRewards"
+        Me.lstRewards.Size = New System.Drawing.Size(231, 82)
+        Me.lstRewards.TabIndex = 18
+        '
         'scrlExpReward
         '
-        Me.scrlExpReward.Location = New System.Drawing.Point(200, 32)
+        Me.scrlExpReward.Location = New System.Drawing.Point(332, 23)
         Me.scrlExpReward.Maximum = 10000000
         Me.scrlExpReward.Name = "scrlExpReward"
-        Me.scrlExpReward.Size = New System.Drawing.Size(187, 17)
+        Me.scrlExpReward.Size = New System.Drawing.Size(96, 17)
         Me.scrlExpReward.TabIndex = 17
         '
         'lblExpReward
         '
         Me.lblExpReward.AutoSize = True
-        Me.lblExpReward.Location = New System.Drawing.Point(203, 19)
+        Me.lblExpReward.Location = New System.Drawing.Point(329, 8)
         Me.lblExpReward.Name = "lblExpReward"
         Me.lblExpReward.Size = New System.Drawing.Size(109, 13)
         Me.lblExpReward.TabIndex = 16
         Me.lblExpReward.Text = "Experience Gained: 0"
         '
-        'scrlItemRewValue1
+        'scrlItemRewValue
         '
-        Me.scrlItemRewValue1.Location = New System.Drawing.Point(3, 55)
-        Me.scrlItemRewValue1.Maximum = 100000
-        Me.scrlItemRewValue1.Name = "scrlItemRewValue1"
-        Me.scrlItemRewValue1.Size = New System.Drawing.Size(187, 17)
-        Me.scrlItemRewValue1.TabIndex = 6
+        Me.scrlItemRewValue.Location = New System.Drawing.Point(330, 80)
+        Me.scrlItemRewValue.Maximum = 100000
+        Me.scrlItemRewValue.Name = "scrlItemRewValue"
+        Me.scrlItemRewValue.Size = New System.Drawing.Size(151, 17)
+        Me.scrlItemRewValue.TabIndex = 6
         '
-        'scrlItemRew1
+        'scrlItemReward
         '
-        Me.scrlItemRew1.Location = New System.Drawing.Point(3, 32)
-        Me.scrlItemRew1.Name = "scrlItemRew1"
-        Me.scrlItemRew1.Size = New System.Drawing.Size(187, 17)
-        Me.scrlItemRew1.TabIndex = 5
+        Me.scrlItemReward.Location = New System.Drawing.Point(330, 58)
+        Me.scrlItemReward.Name = "scrlItemReward"
+        Me.scrlItemReward.Size = New System.Drawing.Size(151, 17)
+        Me.scrlItemReward.TabIndex = 5
         '
-        'lblItemReward1
+        'lblItemReward
         '
-        Me.lblItemReward1.AutoSize = True
-        Me.lblItemReward1.Location = New System.Drawing.Point(10, 19)
-        Me.lblItemReward1.Name = "lblItemReward1"
-        Me.lblItemReward1.Size = New System.Drawing.Size(114, 13)
-        Me.lblItemReward1.TabIndex = 4
-        Me.lblItemReward1.Text = "Item Reward: None (1)"
+        Me.lblItemReward.AutoSize = True
+        Me.lblItemReward.Location = New System.Drawing.Point(329, 42)
+        Me.lblItemReward.Name = "lblItemReward"
+        Me.lblItemReward.Size = New System.Drawing.Size(114, 13)
+        Me.lblItemReward.TabIndex = 4
+        Me.lblItemReward.Text = "Item Reward: None (1)"
         '
         'Label11
         '
@@ -569,6 +600,18 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.Text = "Requirements"
         Me.fraRequirements.Visible = False
         '
+        'rdbNoneReq
+        '
+        Me.rdbNoneReq.AutoSize = True
+        Me.rdbNoneReq.Checked = True
+        Me.rdbNoneReq.Location = New System.Drawing.Point(8, 16)
+        Me.rdbNoneReq.Name = "rdbNoneReq"
+        Me.rdbNoneReq.Size = New System.Drawing.Size(51, 17)
+        Me.rdbNoneReq.TabIndex = 12
+        Me.rdbNoneReq.TabStop = True
+        Me.rdbNoneReq.Text = "None"
+        Me.rdbNoneReq.UseVisualStyleBackColor = True
+        '
         'scrlClassRec
         '
         Me.scrlClassRec.Enabled = False
@@ -749,15 +792,6 @@ Partial Class frmEditor_Quest
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(6, 459)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(195, 23)
-        Me.btnDelete.TabIndex = 13
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(523, 467)
@@ -827,7 +861,7 @@ Partial Class frmEditor_Quest
         Me.btnAddTask.Name = "btnAddTask"
         Me.btnAddTask.Size = New System.Drawing.Size(102, 23)
         Me.btnAddTask.TabIndex = 3
-        Me.btnAddTask.Text = "Edit Task"
+        Me.btnAddTask.Text = "Add Task"
         Me.btnAddTask.UseVisualStyleBackColor = True
         '
         'lstTasks
@@ -896,7 +930,6 @@ Partial Class frmEditor_Quest
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Window
         Me.GroupBox1.Controls.Add(Me.lstIndex)
-        Me.GroupBox1.Controls.Add(Me.btnDelete)
         Me.GroupBox1.Location = New System.Drawing.Point(2, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(208, 488)
@@ -909,20 +942,8 @@ Partial Class frmEditor_Quest
         Me.lstIndex.FormattingEnabled = True
         Me.lstIndex.Location = New System.Drawing.Point(7, 19)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(194, 433)
+        Me.lstIndex.Size = New System.Drawing.Size(194, 459)
         Me.lstIndex.TabIndex = 0
-        '
-        'rdbNoneReq
-        '
-        Me.rdbNoneReq.AutoSize = True
-        Me.rdbNoneReq.Checked = True
-        Me.rdbNoneReq.Location = New System.Drawing.Point(8, 16)
-        Me.rdbNoneReq.Name = "rdbNoneReq"
-        Me.rdbNoneReq.Size = New System.Drawing.Size(51, 17)
-        Me.rdbNoneReq.TabIndex = 12
-        Me.rdbNoneReq.TabStop = True
-        Me.rdbNoneReq.Text = "None"
-        Me.rdbNoneReq.UseVisualStyleBackColor = True
         '
         'frmEditor_Quest
         '
@@ -965,9 +986,9 @@ Partial Class frmEditor_Quest
     Friend WithEvents fraRewards As GroupBox
     Friend WithEvents scrlExpReward As HScrollBar
     Friend WithEvents lblExpReward As Label
-    Friend WithEvents scrlItemRewValue1 As HScrollBar
-    Friend WithEvents scrlItemRew1 As HScrollBar
-    Friend WithEvents lblItemReward1 As Label
+    Friend WithEvents scrlItemRewValue As HScrollBar
+    Friend WithEvents scrlItemReward As HScrollBar
+    Friend WithEvents lblItemReward As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtEndText As TextBox
     Friend WithEvents Label3 As Label
@@ -1014,7 +1035,6 @@ Partial Class frmEditor_Quest
     Friend WithEvents scrlItemRec As HScrollBar
     Friend WithEvents lblItemReq As Label
     Friend WithEvents btnCancel As Button
-    Friend WithEvents btnDelete As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents fraGeneral As GroupBox
     Friend WithEvents txtName As TextBox
@@ -1043,4 +1063,7 @@ Partial Class frmEditor_Quest
     Friend WithEvents rdbQuestReq As RadioButton
     Friend WithEvents rdbItemReq As RadioButton
     Friend WithEvents rdbNoneReq As RadioButton
+    Friend WithEvents btnRemoveReward As Button
+    Friend WithEvents btnAddReward As Button
+    Friend WithEvents lstRewards As ListBox
 End Class
