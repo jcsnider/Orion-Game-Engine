@@ -1,6 +1,4 @@
 ﻿Imports SFML.Graphics
-Imports System.Drawing
-Imports System.Windows.Forms
 Imports SFML.Window
 
 Module EditorGraphics
@@ -686,83 +684,103 @@ Module EditorGraphics
         IsValidMapPoint = True
     End Function
 
+    'Public Sub UpdateCamera()
+    '    Dim offsetX As Integer, offsetY As Integer
+    '    Dim StartX As Integer, StartY As Integer
+    '    Dim EndX As Integer, EndY As Integer
+
+    '    'offsetX = Player(MyIndex).XOffset + PIC_X
+    '    'offsetY = Player(MyIndex).YOffset + PIC_Y
+    '    'StartX = GetPlayerX(MyIndex) - ((SCREEN_MAPX + 1) \ 2) - 1
+    '    'StartY = GetPlayerY(MyIndex) - ((SCREEN_MAPY + 1) \ 2) - 1
+
+    '    If StartX < 0 Then
+    '        offsetX = 0
+
+    '        'If StartX = -1 Then
+    '        '    If Player(MyIndex).XOffset > 0 Then
+    '        '        offsetX = Player(MyIndex).XOffset
+    '        '    End If
+    '        'End If
+
+    '        StartX = 0
+    '    End If
+
+    '    If StartY < 0 Then
+    '        offsetY = 0
+
+    '        If StartY = -1 Then
+    '            'If Player(MyIndex).YOffset > 0 Then
+    '            '    offsetY = Player(MyIndex).YOffset
+    '            'End If
+    '        End If
+
+    '        StartY = 0
+    '    End If
+
+    '    EndX = StartX + (SCREEN_MAPX + 1) + 1
+    '    EndY = StartY + (SCREEN_MAPY + 1) + 1
+
+    '    If EndX > Map.MaxX Then
+    '        offsetX = 32
+
+    '        If EndX = Map.MaxX + 1 Then
+    '            'If Player(MyIndex).XOffset < 0 Then
+    '            '    offsetX = Player(MyIndex).XOffset + PIC_X
+    '            'End If
+    '        End If
+
+    '        EndX = Map.MaxX
+    '        StartX = EndX - SCREEN_MAPX - 1
+    '    End If
+
+    '    If EndY > Map.MaxY Then
+    '        offsetY = 32
+
+    '        If EndY = Map.MaxY + 1 Then
+    '            'If Player(MyIndex).YOffset < 0 Then
+    '            '    offsetY = Player(MyIndex).YOffset + PIC_Y
+    '            'End If
+    '        End If
+
+    '        EndY = Map.MaxY
+    '        StartY = EndY - SCREEN_MAPY - 1
+    '    End If
+
+    '    With TileView
+    '        .top = StartY
+    '        .bottom = EndY
+    '        .left = StartX
+    '        .right = EndX
+    '    End With
+
+    '    With Camera
+    '        .Y = offsetY
+    '        .Height = ScreenY + 32
+    '        .X = offsetX
+    '        .Width = ScreenX + 32
+    '    End With
+
+
+    '    UpdateDrawMapName()
+
+    'End Sub
+
     Public Sub UpdateCamera()
-        Dim offsetX As Integer, offsetY As Integer
-        Dim StartX As Integer, StartY As Integer
-        Dim EndX As Integer, EndY As Integer
-
-        'offsetX = Player(MyIndex).XOffset + PIC_X
-        'offsetY = Player(MyIndex).YOffset + PIC_Y
-        'StartX = GetPlayerX(MyIndex) - ((SCREEN_MAPX + 1) \ 2) - 1
-        'StartY = GetPlayerY(MyIndex) - ((SCREEN_MAPY + 1) \ 2) - 1
-
-        If StartX < 0 Then
-            offsetX = 0
-
-            'If StartX = -1 Then
-            '    If Player(MyIndex).XOffset > 0 Then
-            '        offsetX = Player(MyIndex).XOffset
-            '    End If
-            'End If
-
-            StartX = 0
-        End If
-
-        If StartY < 0 Then
-            offsetY = 0
-
-            If StartY = -1 Then
-                'If Player(MyIndex).YOffset > 0 Then
-                '    offsetY = Player(MyIndex).YOffset
-                'End If
-            End If
-
-            StartY = 0
-        End If
-
-        EndX = StartX + (SCREEN_MAPX + 1) + 1
-        EndY = StartY + (SCREEN_MAPY + 1) + 1
-
-        If EndX > Map.MaxX Then
-            offsetX = 32
-
-            If EndX = Map.MaxX + 1 Then
-                'If Player(MyIndex).XOffset < 0 Then
-                '    offsetX = Player(MyIndex).XOffset + PIC_X
-                'End If
-            End If
-
-            EndX = Map.MaxX
-            StartX = EndX - SCREEN_MAPX - 1
-        End If
-
-        If EndY > Map.MaxY Then
-            offsetY = 32
-
-            If EndY = Map.MaxY + 1 Then
-                'If Player(MyIndex).YOffset < 0 Then
-                '    offsetY = Player(MyIndex).YOffset + PIC_Y
-                'End If
-            End If
-
-            EndY = Map.MaxY
-            StartY = EndY - SCREEN_MAPY - 1
-        End If
 
         With TileView
-            .top = StartY
-            .bottom = EndY
-            .left = StartX
-            .right = EndX
+            .top = 0
+            .bottom = Map.MaxY
+            .left = 0
+            .right = Map.MaxX
         End With
 
         With Camera
-            .Y = offsetY
-            .Height = ScreenY + 32
-            .X = offsetX
-            .Width = ScreenX + 32
+            .Y = 0
+            .Height = Map.MaxY * 32
+            .X = 0
+            .Width = Map.MaxX * 32
         End With
-
 
         UpdateDrawMapName()
 
@@ -853,7 +871,7 @@ Module EditorGraphics
 
         'Clear each of our render targets
         GameWindow.DispatchEvents()
-        GameWindow.Clear(SFML.Graphics.Color.Black)
+        GameWindow.Clear(Color.Black)
 
         'clear any unused gfx
         ClearGFX()
@@ -1030,7 +1048,7 @@ Module EditorGraphics
     End Sub
 
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, Color.Black, GameWindow)
     End Sub
 
     Public Sub DrawDoor(ByVal X As Integer, ByVal Y As Integer)
@@ -1088,9 +1106,9 @@ Module EditorGraphics
         End With
 
         Dim rec2 As New RectangleShape
-        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
+        rec2.OutlineColor = New SFML.Graphics.Color(Color.Blue)
         rec2.OutlineThickness = 0.6
-        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        rec2.FillColor = New SFML.Graphics.Color(Color.Transparent)
 
         If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
             'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
@@ -1126,9 +1144,9 @@ Module EditorGraphics
 
                 If IsValidMapPoint(x, y) Then
 
-                    rec.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.White)
+                    rec.OutlineColor = New SFML.Graphics.Color(Color.White)
                     rec.OutlineThickness = 0.6
-                    rec.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+                    rec.FillColor = New SFML.Graphics.Color(Color.Transparent)
                     rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
                     rec.Position = New Vector2f(ConvertMapX((x - 1) * PIC_X), ConvertMapY((y - 1) * PIC_Y))
 
@@ -1380,9 +1398,9 @@ Module EditorGraphics
                     If X <= (FurnitureGFXInfo(Furniturenum).width / 32) - 1 Then
                         If Y <= (FurnitureGFXInfo(Furniturenum).height / 32) - 1 Then
                             If Item(EditorIndex).FurnitureBlocks(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "X", SFML.Graphics.Color.Red, SFML.Graphics.Color.Black, EditorItem_Furniture)
+                                DrawText(X * 32 + 8, Y * 32 + 8, "X", Color.Red, Color.Black, EditorItem_Furniture)
                             Else
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", SFML.Graphics.Color.Blue, SFML.Graphics.Color.Black, EditorItem_Furniture)
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
                             End If
                         End If
                     End If
@@ -1394,7 +1412,7 @@ Module EditorGraphics
                     If X <= Item(EditorIndex).FurnitureWidth - 1 Then
                         If Y <= Item(EditorIndex).FurnitureHeight Then
                             If Item(EditorIndex).FurnitureFringe(X, Y) = 1 Then
-                                DrawText(X * 32 + 8, Y * 32 + 8, "O", SFML.Graphics.Color.Blue, SFML.Graphics.Color.Black, EditorItem_Furniture)
+                                DrawText(X * 32 + 8, Y * 32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
                             End If
                         End If
                     End If
@@ -1619,11 +1637,11 @@ Module EditorGraphics
 
         Select Case Map.Moral
             Case MapMoral.None
-                DrawMapNameColor = SFML.Graphics.Color.Red
+                DrawMapNameColor = Color.Red
             Case MapMoral.Safe
-                DrawMapNameColor = SFML.Graphics.Color.Green
+                DrawMapNameColor = Color.Green
             Case Else
-                DrawMapNameColor = SFML.Graphics.Color.White
+                DrawMapNameColor = Color.White
         End Select
         g.Dispose()
     End Sub

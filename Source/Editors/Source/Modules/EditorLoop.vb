@@ -8,6 +8,16 @@ Module EditorLoop
 
         SFML.CSFML.Activate()
 
+        ' set values for directional blocking arrows
+        DirArrowX(1) = 12 ' up
+        DirArrowY(1) = 0
+        DirArrowX(2) = 12 ' down
+        DirArrowY(2) = 23
+        DirArrowX(3) = 0 ' left
+        DirArrowY(3) = 12
+        DirArrowX(4) = 23 ' right
+        DirArrowY(4) = 12
+
         CheckTilesets()
         CheckCharacters()
         CheckPaperdolls()

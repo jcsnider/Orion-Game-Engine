@@ -3745,7 +3745,7 @@
                 SendGameData(index)
                 SendMapNames(index)
             Else
-                AlertMsg(index, "Multiple account logins is not authorized.")
+                AlertMsg(index, "not authorized.")
                 Exit Sub
             End If
 

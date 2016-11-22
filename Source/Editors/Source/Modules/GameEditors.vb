@@ -456,11 +456,6 @@ Module GameEditors
     End Sub
 
     Public Sub MapEditorCancel()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CNeedMap)
-        Buffer.WriteInteger(1)
-        SendData(Buffer.ToArray())
         InMapEditor = False
         frmEditor_MapEditor.Visible = False
         GettingMap = True

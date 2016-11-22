@@ -1,12 +1,13 @@
-﻿Public Class frmEditor_MapEditor
+﻿Imports System.ComponentModel
+
+Public Class frmEditor_MapEditor
 #Region "Form Code"
     Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         cmbTileSets.SelectedIndex = 0
         EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
-        pnlAttributes.Left = 8
-        'Me.Width = 525
+
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
 
@@ -17,6 +18,19 @@
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
+    End Sub
+
+    Private Sub frmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If GameWindow Is Nothing Then Exit Sub
+
+        picScreen.Width = Map.MaxX * PIC_X
+        picScreen.Height = Map.MaxY * PIC_Y
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
+    End Sub
+
+    Private Sub frmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+        MapEditorCancel()
     End Sub
 
     Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
@@ -570,6 +584,10 @@
     Private Sub btnLoadMap_Click(sender As Object, e As EventArgs) Handles btnLoadMap.Click
         SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
     End Sub
+
+
+
+
 
 #End Region
 End Class
