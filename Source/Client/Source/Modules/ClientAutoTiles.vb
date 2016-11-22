@@ -1,5 +1,4 @@
-﻿Imports System.Drawing
-Imports SFML.Graphics
+﻿Imports SFML.Graphics
 
 Public Module ClientAutoTiles
 #Region "Globals and Types"
@@ -24,15 +23,15 @@ Public Module ClientAutoTiles
     Public Const RENDER_STATE_AUTOTILE As Integer = 2
 
     ' autotiling
-    Public autoInner(0 To 4) As PointRec
-    Public autoNW(0 To 4) As PointRec
-    Public autoNE(0 To 4) As PointRec
-    Public autoSW(0 To 4) As PointRec
-    Public autoSE(0 To 4) As PointRec
+    Public AutoInner(4) As PointRec
+    Public AutoNw(4) As PointRec
+    Public AutoNe(4) As PointRec
+    Public AutoSw(4) As PointRec
+    Public AutoSe(4) As PointRec
 
     ' Map animations
-    Public waterfallFrame As Integer
-    Public autoTileFrame As Integer
+    Public WaterfallFrame As Integer
+    Public AutoTileFrame As Integer
 
     Public Autotile(,) As AutotileRec
 
@@ -57,137 +56,137 @@ Public Module ClientAutoTiles
     '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     '   All of this code is for auto tiles and the math behind generating them.
     '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    Public Sub placeAutotile(ByVal layerNum As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal tileQuarter As Byte, ByVal autoTileLetter As String)
+    Public Sub PlaceAutotile(ByVal layerNum As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal tileQuarter As Byte, ByVal autoTileLetter As String)
 
         If layerNum > MapLayer.Count - 1 Then
             layerNum = layerNum - (MapLayer.Count - 1)
             With Autotile(X, Y).ExLayer(layerNum).QuarterTile(tileQuarter)
                 Select Case autoTileLetter
                     Case "a"
-                        .X = autoInner(1).X
-                        .Y = autoInner(1).Y
+                        .X = AutoInner(1).X
+                        .Y = AutoInner(1).Y
                     Case "b"
-                        .X = autoInner(2).X
-                        .Y = autoInner(2).Y
+                        .X = AutoInner(2).X
+                        .Y = AutoInner(2).Y
                     Case "c"
-                        .X = autoInner(3).X
-                        .Y = autoInner(3).Y
+                        .X = AutoInner(3).X
+                        .Y = AutoInner(3).Y
                     Case "d"
-                        .X = autoInner(4).X
-                        .Y = autoInner(4).Y
+                        .X = AutoInner(4).X
+                        .Y = AutoInner(4).Y
                     Case "e"
-                        .X = autoNW(1).X
-                        .Y = autoNW(1).Y
+                        .X = AutoNw(1).X
+                        .Y = AutoNw(1).Y
                     Case "f"
-                        .X = autoNW(2).X
-                        .Y = autoNW(2).Y
+                        .X = AutoNw(2).X
+                        .Y = AutoNw(2).Y
                     Case "g"
-                        .X = autoNW(3).X
-                        .Y = autoNW(3).Y
+                        .X = AutoNw(3).X
+                        .Y = AutoNw(3).Y
                     Case "h"
-                        .X = autoNW(4).X
-                        .Y = autoNW(4).Y
+                        .X = AutoNw(4).X
+                        .Y = AutoNw(4).Y
                     Case "i"
-                        .X = autoNE(1).X
-                        .Y = autoNE(1).Y
+                        .X = AutoNe(1).X
+                        .Y = AutoNe(1).Y
                     Case "j"
-                        .X = autoNE(2).X
-                        .Y = autoNE(2).Y
+                        .X = AutoNe(2).X
+                        .Y = AutoNe(2).Y
                     Case "k"
-                        .X = autoNE(3).X
-                        .Y = autoNE(3).Y
+                        .X = AutoNe(3).X
+                        .Y = AutoNe(3).Y
                     Case "l"
-                        .X = autoNE(4).X
-                        .Y = autoNE(4).Y
+                        .X = AutoNe(4).X
+                        .Y = AutoNe(4).Y
                     Case "m"
-                        .X = autoSW(1).X
-                        .Y = autoSW(1).Y
+                        .X = AutoSw(1).X
+                        .Y = AutoSw(1).Y
                     Case "n"
-                        .X = autoSW(2).X
-                        .Y = autoSW(2).Y
+                        .X = AutoSw(2).X
+                        .Y = AutoSw(2).Y
                     Case "o"
-                        .X = autoSW(3).X
-                        .Y = autoSW(3).Y
+                        .X = AutoSw(3).X
+                        .Y = AutoSw(3).Y
                     Case "p"
-                        .X = autoSW(4).X
-                        .Y = autoSW(4).Y
+                        .X = AutoSw(4).X
+                        .Y = AutoSw(4).Y
                     Case "q"
-                        .X = autoSE(1).X
-                        .Y = autoSE(1).Y
+                        .X = AutoSe(1).X
+                        .Y = AutoSe(1).Y
                     Case "r"
-                        .X = autoSE(2).X
-                        .Y = autoSE(2).Y
+                        .X = AutoSe(2).X
+                        .Y = AutoSe(2).Y
                     Case "s"
-                        .X = autoSE(3).X
-                        .Y = autoSE(3).Y
+                        .X = AutoSe(3).X
+                        .Y = AutoSe(3).Y
                     Case "t"
-                        .X = autoSE(4).X
-                        .Y = autoSE(4).Y
+                        .X = AutoSe(4).X
+                        .Y = AutoSe(4).Y
                 End Select
             End With
         Else
             With Autotile(X, Y).Layer(layerNum).QuarterTile(tileQuarter)
                 Select Case autoTileLetter
                     Case "a"
-                        .X = autoInner(1).X
-                        .Y = autoInner(1).Y
+                        .X = AutoInner(1).X
+                        .Y = AutoInner(1).Y
                     Case "b"
-                        .X = autoInner(2).X
-                        .Y = autoInner(2).Y
+                        .X = AutoInner(2).X
+                        .Y = AutoInner(2).Y
                     Case "c"
-                        .X = autoInner(3).X
-                        .Y = autoInner(3).Y
+                        .X = AutoInner(3).X
+                        .Y = AutoInner(3).Y
                     Case "d"
-                        .X = autoInner(4).X
-                        .Y = autoInner(4).Y
+                        .X = AutoInner(4).X
+                        .Y = AutoInner(4).Y
                     Case "e"
-                        .X = autoNW(1).X
-                        .Y = autoNW(1).Y
+                        .X = AutoNw(1).X
+                        .Y = AutoNw(1).Y
                     Case "f"
-                        .X = autoNW(2).X
-                        .Y = autoNW(2).Y
+                        .X = AutoNw(2).X
+                        .Y = AutoNw(2).Y
                     Case "g"
-                        .X = autoNW(3).X
-                        .Y = autoNW(3).Y
+                        .X = AutoNw(3).X
+                        .Y = AutoNw(3).Y
                     Case "h"
-                        .X = autoNW(4).X
-                        .Y = autoNW(4).Y
+                        .X = AutoNw(4).X
+                        .Y = AutoNw(4).Y
                     Case "i"
-                        .X = autoNE(1).X
-                        .Y = autoNE(1).Y
+                        .X = AutoNe(1).X
+                        .Y = AutoNe(1).Y
                     Case "j"
-                        .X = autoNE(2).X
-                        .Y = autoNE(2).Y
+                        .X = AutoNe(2).X
+                        .Y = AutoNe(2).Y
                     Case "k"
-                        .X = autoNE(3).X
-                        .Y = autoNE(3).Y
+                        .X = AutoNe(3).X
+                        .Y = AutoNe(3).Y
                     Case "l"
-                        .X = autoNE(4).X
-                        .Y = autoNE(4).Y
+                        .X = AutoNe(4).X
+                        .Y = AutoNe(4).Y
                     Case "m"
-                        .X = autoSW(1).X
-                        .Y = autoSW(1).Y
+                        .X = AutoSw(1).X
+                        .Y = AutoSw(1).Y
                     Case "n"
-                        .X = autoSW(2).X
-                        .Y = autoSW(2).Y
+                        .X = AutoSw(2).X
+                        .Y = AutoSw(2).Y
                     Case "o"
-                        .X = autoSW(3).X
-                        .Y = autoSW(3).Y
+                        .X = AutoSw(3).X
+                        .Y = AutoSw(3).Y
                     Case "p"
-                        .X = autoSW(4).X
-                        .Y = autoSW(4).Y
+                        .X = AutoSw(4).X
+                        .Y = AutoSw(4).Y
                     Case "q"
-                        .X = autoSE(1).X
-                        .Y = autoSE(1).Y
+                        .X = AutoSe(1).X
+                        .Y = AutoSe(1).Y
                     Case "r"
-                        .X = autoSE(2).X
-                        .Y = autoSE(2).Y
+                        .X = AutoSe(2).X
+                        .Y = AutoSe(2).Y
                     Case "s"
-                        .X = autoSE(3).X
-                        .Y = autoSE(3).Y
+                        .X = AutoSe(3).X
+                        .Y = AutoSe(3).Y
                     Case "t"
-                        .X = autoSE(4).X
-                        .Y = autoSE(4).Y
+                        .X = AutoSe(4).X
+                        .Y = AutoSe(4).Y
                 End Select
             End With
         End If
@@ -218,69 +217,69 @@ Public Module ClientAutoTiles
 
         ' Inner tiles (Top right subtile region)
         ' NW - a
-        autoInner(1).X = 32
-        autoInner(1).Y = 0
+        AutoInner(1).X = 32
+        AutoInner(1).Y = 0
         ' NE - b
-        autoInner(2).X = 48
-        autoInner(2).Y = 0
+        AutoInner(2).X = 48
+        AutoInner(2).Y = 0
         ' SW - c
-        autoInner(3).X = 32
-        autoInner(3).Y = 16
+        AutoInner(3).X = 32
+        AutoInner(3).Y = 16
         ' SE - d
-        autoInner(4).X = 48
-        autoInner(4).Y = 16
+        AutoInner(4).X = 48
+        AutoInner(4).Y = 16
         ' Outer Tiles - NW (bottom subtile region)
         ' NW - e
-        autoNW(1).X = 0
-        autoNW(1).Y = 32
+        AutoNw(1).X = 0
+        AutoNw(1).Y = 32
         ' NE - f
-        autoNW(2).X = 16
-        autoNW(2).Y = 32
+        AutoNw(2).X = 16
+        AutoNw(2).Y = 32
         ' SW - g
-        autoNW(3).X = 0
-        autoNW(3).Y = 48
+        AutoNw(3).X = 0
+        AutoNw(3).Y = 48
         ' SE - h
-        autoNW(4).X = 16
-        autoNW(4).Y = 48
+        AutoNw(4).X = 16
+        AutoNw(4).Y = 48
         ' Outer Tiles - NE (bottom subtile region)
         ' NW - i
-        autoNE(1).X = 32
-        autoNE(1).Y = 32
+        AutoNe(1).X = 32
+        AutoNe(1).Y = 32
         ' NE - g
-        autoNE(2).X = 48
-        autoNE(2).Y = 32
+        AutoNe(2).X = 48
+        AutoNe(2).Y = 32
         ' SW - k
-        autoNE(3).X = 32
-        autoNE(3).Y = 48
+        AutoNe(3).X = 32
+        AutoNe(3).Y = 48
         ' SE - l
-        autoNE(4).X = 48
-        autoNE(4).Y = 48
+        AutoNe(4).X = 48
+        AutoNe(4).Y = 48
         ' Outer Tiles - SW (bottom subtile region)
         ' NW - m
-        autoSW(1).X = 0
-        autoSW(1).Y = 64
+        AutoSw(1).X = 0
+        AutoSw(1).Y = 64
         ' NE - n
-        autoSW(2).X = 16
-        autoSW(2).Y = 64
+        AutoSw(2).X = 16
+        AutoSw(2).Y = 64
         ' SW - o
-        autoSW(3).X = 0
-        autoSW(3).Y = 80
+        AutoSw(3).X = 0
+        AutoSw(3).Y = 80
         ' SE - p
-        autoSW(4).X = 16
-        autoSW(4).Y = 80
+        AutoSw(4).X = 16
+        AutoSw(4).Y = 80
         ' Outer Tiles - SE (bottom subtile region)
         ' NW - q
-        autoSE(1).X = 32
-        autoSE(1).Y = 64
+        AutoSe(1).X = 32
+        AutoSe(1).Y = 64
         ' NE - r
-        autoSE(2).X = 48
-        autoSE(2).Y = 64
+        AutoSe(2).X = 48
+        AutoSe(2).Y = 64
         ' SW - s
-        autoSE(3).X = 32
-        autoSE(3).Y = 80
+        AutoSe(3).X = 32
+        AutoSe(3).Y = 80
         ' SE - t
-        autoSE(4).X = 48
-        autoSE(4).Y = 80
+        AutoSe(4).X = 48
+        AutoSe(4).Y = 80
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
@@ -310,7 +309,7 @@ Public Module ClientAutoTiles
             End If
             ' check if it's a key - hide mask if key is closed
             If layerNum = MapLayer.Mask Then
-                If .Type = TileType.KEY Then
+                If .Type = TileType.Key Then
                     If TempTile(X, Y).DoorOpen = False Then
                         Autotile(X, Y).Layer(layerNum).renderState = RENDER_STATE_NONE
                         Exit Sub
@@ -784,38 +783,38 @@ Public Module ClientAutoTiles
         End If
     End Function
 
-    Public Sub DrawAutoTile(ByVal layerNum As Integer, ByVal destX As Integer, ByVal destY As Integer, ByVal quarterNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional forceFrame As Integer = 0, Optional strict As Boolean = True, Optional ExLayer As Boolean = False)
+    Public Sub DrawAutoTile(ByVal layerNum As Integer, ByVal destX As Integer, ByVal destY As Integer, ByVal quarterNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional forceFrame As Integer = 0, Optional strict As Boolean = True, Optional exLayer As Boolean = False)
         Dim YOffset As Integer, XOffset As Integer
-        Dim srcrect As New Rectangle(0, 0, 0, 0)
+        'Dim srcrect As New Rectangle(0, 0, 0, 0)
         Dim tmpSprite As Sprite
 
         ' calculate the offset
         If forceFrame > 0 Then
             Select Case forceFrame - 1
                 Case 0
-                    waterfallFrame = 1
+                    WaterfallFrame = 1
                 Case 1
-                    waterfallFrame = 2
+                    WaterfallFrame = 2
                 Case 2
-                    waterfallFrame = 0
+                    WaterfallFrame = 0
             End Select
             ' animate autotiles
             Select Case forceFrame - 1
                 Case 0
-                    autoTileFrame = 1
+                    AutoTileFrame = 1
                 Case 1
-                    autoTileFrame = 2
+                    AutoTileFrame = 2
                 Case 2
-                    autoTileFrame = 0
+                    AutoTileFrame = 0
             End Select
         End If
 
 
         Select Case Map.Tile(X, Y).Layer(layerNum).AutoTile
             Case AUTOTILE_WATERFALL
-                YOffset = (waterfallFrame - 1) * 32
+                YOffset = (WaterfallFrame - 1) * 32
             Case AUTOTILE_ANIM
-                XOffset = autoTileFrame * 64
+                XOffset = AutoTileFrame * 64
             Case AUTOTILE_CLIFF
                 YOffset = -32
         End Select

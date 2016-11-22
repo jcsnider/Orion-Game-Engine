@@ -4,6 +4,12 @@ Module EditorLoop
 
     Public Sub Main()
 
+        'check if we are in the right place...
+        If Not IO.Directory.Exists(Application.StartupPath & "\Data Files") Then
+            MsgBox("Run Editor from inside the Client folder!")
+            End
+        End If
+
         If GameStarted = True Then Exit Sub
 
         SFML.CSFML.Activate()

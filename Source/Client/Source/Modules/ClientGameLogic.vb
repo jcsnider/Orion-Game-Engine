@@ -187,22 +187,22 @@ Module ClientGameLogic
 
                     If tmr500 < Tick Then
                         ' animate waterfalls
-                        Select Case waterfallFrame
+                        Select Case WaterfallFrame
                             Case 0
-                                waterfallFrame = 1
+                                WaterfallFrame = 1
                             Case 1
-                                waterfallFrame = 2
+                                WaterfallFrame = 2
                             Case 2
-                                waterfallFrame = 0
+                                WaterfallFrame = 0
                         End Select
                         ' animate autotiles
-                        Select Case autoTileFrame
+                        Select Case AutoTileFrame
                             Case 0
-                                autoTileFrame = 1
+                                AutoTileFrame = 1
                             Case 1
-                                autoTileFrame = 2
+                                AutoTileFrame = 2
                             Case 2
-                                autoTileFrame = 0
+                                AutoTileFrame = 0
                         End Select
 
                         tmr500 = Tick + 500

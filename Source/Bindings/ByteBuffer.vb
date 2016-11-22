@@ -1,5 +1,4 @@
-﻿'+-----------------------Class--------------------------+
-Imports System.Text
+﻿Imports System.Text
 Public Class ByteBuffer
     Implements IDisposable
     Dim Buff As List(Of Byte)

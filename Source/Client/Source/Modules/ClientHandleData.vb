@@ -1154,7 +1154,7 @@
 
         For i = 1 To Byte.MaxValue
             ClearActionMsg(i)
-        Next i
+        Next
 
         CurrentWeather = Map.WeatherType
         CurrentWeatherIntensity = Map.WeatherIntensity
