@@ -294,7 +294,7 @@
             SendVital(Index, i)
         Next
 
-        SendEXP(Index)
+        SendExp(Index)
 
         'Housing
         If Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
@@ -878,7 +878,7 @@
                 'plural
                 GlobalMsg(GetPlayerName(Index) & " has gained " & level_count & " levels!")
             End If
-            SendEXP(Index)
+            SendExp(Index)
             SendPlayerData(Index)
         End If
     End Sub
@@ -1285,7 +1285,7 @@
             Call PlayerMsg(Index, "You lost no exp.")
         Else
             Call SetPlayerExp(Index, GetPlayerExp(Index) - exp)
-            SendEXP(Index)
+            SendExp(Index)
             Call PlayerMsg(Index, "You lost " & exp & " exp.")
         End If
 

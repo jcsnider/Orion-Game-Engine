@@ -118,9 +118,6 @@
                 .chkRepeat.Checked = 0
             End If
 
-            '.scrlItemRec.Value = Quest(EditorIndex).Requirement(1)
-            '.scrlQuestRec.Value = Quest(EditorIndex).Requirement(2)
-
             .txtStartText.Text = Trim$(Quest(EditorIndex).Chat(1))
             .txtProgressText.Text = Trim$(Quest(EditorIndex).Chat(2))
             .txtEndText.Text = Trim$(Quest(EditorIndex).Chat(3))
@@ -140,13 +137,10 @@
                 .scrlEndItemAmount.Value = 1
             End If
 
-            '.scrlItemReward.Value = Quest(EditorIndex).RewardItem
-
-            'If Not Quest(EditorIndex).RewardItemAmount = 0 Then
-            '    .scrlItemRewValue.Value = Quest(EditorIndex).RewardItemAmount
-            'Else
-            '    .scrlItemRewValue.Value = 1
-            'End If
+            frmEditor_Quest.lstRewards.Items.Clear()
+            For i = 1 To Quest(EditorIndex).RewardCount
+                frmEditor_Quest.lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
+            Next
 
             If Not Quest(EditorIndex).RewardExp = 0 Then
                 .scrlExpReward.Value = Quest(EditorIndex).RewardExp
@@ -228,10 +222,10 @@
         Quest(QuestNum).Repeat = 0
         Quest(QuestNum).Cancelable = 0
 
-        Quest(I).ReqCount = 0
-        ReDim Quest(QuestNum).Requirement(Quest(I).ReqCount)
-        ReDim Quest(QuestNum).RequirementIndex(Quest(I).ReqCount)
-        For I = 1 To Quest(I).ReqCount
+        Quest(QuestNum).ReqCount = 0
+        ReDim Quest(QuestNum).Requirement(Quest(QuestNum).ReqCount)
+        ReDim Quest(QuestNum).RequirementIndex(Quest(QuestNum).ReqCount)
+        For I = 1 To Quest(QuestNum).ReqCount
             Quest(QuestNum).Requirement(I) = 0
             Quest(QuestNum).RequirementIndex(I) = 0
         Next
@@ -555,6 +549,7 @@
             .scrlMap.Value = 0
             .scrlResource.Value = 0
             .scrlAmount.Value = 0
+
             .scrlNPC.Enabled = False
             .scrlItem.Enabled = False
             .scrlMap.Enabled = False

@@ -218,12 +218,12 @@
         Quest(QuestNum).Repeat = 0
         Quest(QuestNum).Cancelable = 0
 
-        Quest(I).ReqCount = 0
-        ReDim Quest(QuestNum).Requirement(Quest(I).ReqCount)
-        ReDim Quest(QuestNum).RequirementIndex(Quest(I).ReqCount)
-        For I = 1 To Quest(I).ReqCount
-            Quest(QuestNum).Requirement(I) = 0
-            Quest(QuestNum).RequirementIndex(I) = 0
+        Quest(QuestNum).ReqCount = 0
+        ReDim Quest(QuestNum).Requirement(Quest(QuestNum).ReqCount)
+        ReDim Quest(QuestNum).RequirementIndex(Quest(QuestNum).ReqCount)
+        For I = 1 To Quest(QuestNum).ReqCount
+            Quest(QuestNum).Requirement(QuestNum) = 0
+            Quest(QuestNum).RequirementIndex(QuestNum) = 0
         Next
 
         Quest(QuestNum).QuestGiveItem = 0
@@ -641,6 +641,10 @@
 
     Public Function CanEndQuest(ByVal Index As Integer, QuestNum As Integer) As Boolean
         CanEndQuest = False
+
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask >= Quest(QuestNum).Task.Length Then
+            CanEndQuest = True
+        End If
         If Quest(QuestNum).Task(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask).QuestEnd = True Then
             CanEndQuest = True
         End If
@@ -708,7 +712,7 @@
         Dim ActualTask As Integer, I As Integer
         ActualTask = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask
 
-        'PlayerMsg Index, "actual tasknr: " & ActualTask, Yellow
+        If ActualTask >= Quest(QuestNum).Task.Length Then Exit Sub
 
         Select Case TaskType
             Case QUEST_TYPE_GOSLAY 'defeat X amount of X npc's.
@@ -845,7 +849,7 @@
 
         If Quest(QuestNum).RewardExp > 0 Then
             SetPlayerExp(Index, GetPlayerExp(Index) + Quest(QuestNum).RewardExp)
-            SendEXP(Index)
+            SendExp(Index)
             ' Check for level up
             CheckPlayerLevelUp(Index)
         End If

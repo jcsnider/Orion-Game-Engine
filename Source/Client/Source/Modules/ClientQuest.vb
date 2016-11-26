@@ -113,10 +113,10 @@
         Quest(QuestNum).Repeat = 0
         Quest(QuestNum).Cancelable = 0
 
-        Quest(I).ReqCount = 0
-        ReDim Quest(QuestNum).Requirement(Quest(I).ReqCount)
-        ReDim Quest(QuestNum).RequirementIndex(Quest(I).ReqCount)
-        For I = 1 To Quest(I).ReqCount
+        Quest(QuestNum).ReqCount = 0
+        ReDim Quest(QuestNum).Requirement(Quest(QuestNum).ReqCount)
+        ReDim Quest(QuestNum).RequirementIndex(Quest(QuestNum).ReqCount)
+        For I = 1 To Quest(QuestNum).ReqCount
             Quest(QuestNum).Requirement(I) = 0
             Quest(QuestNum).RequirementIndex(I) = 0
         Next
@@ -549,7 +549,7 @@
         QuestTaskLogText = Trim$(Quest(QuestNum).QuestLog)
 
         'Actual Task
-        'ActualTaskText = Trim$(Quest(QuestNum).Task(CurTask).TaskLog)
+        QuestTaskLogText = Trim$(Quest(QuestNum).Task(CurTask).TaskLog)
 
         'Last dialog
         If Player(MyIndex).PlayerQuest(QuestNum).ActualTask > 1 Then
@@ -624,7 +624,7 @@
         End If
 
         'Rewards
-        QuestRewardsText = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1)) & " -" & Str(Quest(QuestNum).RewardExp) & " EXP"
+        'QuestRewardsText = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1)) & " -" & Str(Quest(QuestNum).RewardExp) & " EXP"
 
     End Sub
 

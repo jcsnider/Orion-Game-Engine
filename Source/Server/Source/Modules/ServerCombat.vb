@@ -215,10 +215,10 @@
                     PlayerMsg(Attacker, "You received no exp.")
                 Else
                     SetPlayerExp(Victim, GetPlayerExp(Victim) - exp)
-                    SendEXP(Victim)
+                    SendExp(Victim)
                     PlayerMsg(Victim, "You lost " & exp & " exp.")
                     SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                    SendEXP(Attacker)
+                    SendExp(Attacker)
                     PlayerMsg(Attacker, "You received " & exp & " exp.")
                 End If
 
@@ -474,7 +474,7 @@
             ' Check if in party, if so divide the exp up by 2
             If TempPlayer(Attacker).InParty = False Then
                 SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                SendEXP(Attacker)
+                SendExp(Attacker)
                 SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
             Else
                 exp = exp / 2
@@ -484,13 +484,13 @@
                 End If
 
                 SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                SendEXP(Attacker)
+                SendExp(Attacker)
                 SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " Shared EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
                 n = TempPlayer(Attacker).PartyPlayer
 
                 If n > 0 Then
                     SetPlayerExp(n, GetPlayerExp(n) + exp)
-                    SendEXP(n)
+                    SendExp(n)
                     SendActionMsg(GetPlayerMap(n), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(n) * 32), (GetPlayerY(n) * 32))
                 End If
             End If

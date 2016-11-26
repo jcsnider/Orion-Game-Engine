@@ -3,7 +3,7 @@ Imports System.Net
 Imports System.IO
 
 Public Class Client
-    Public index As Integer
+    Public Index As Integer
     Public IP As String
     Public Socket As TcpClient
     Public myStream As NetworkStream
@@ -81,17 +81,19 @@ Module ServerTCP
 
         End Try
     End Sub
+
     Public Sub SendDataToAll(ByRef data() As Byte)
         Dim i As Integer
 
         For i = 1 To MAX_PLAYERS
 
             If IsPlaying(i) Then
-                Call SendDataTo(i, data)
+                SendDataTo(i, data)
             End If
 
         Next
     End Sub
+
     Sub SendDataToAllBut(ByVal Index As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
@@ -99,13 +101,14 @@ Module ServerTCP
 
             If IsPlaying(i) Then
                 If i <> Index Then
-                    Call SendDataTo(i, Data)
+                    SendDataTo(i, Data)
                 End If
             End If
 
         Next
 
     End Sub
+
     Sub SendDataToMapBut(ByVal Index As Integer, ByVal MapNum As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
@@ -114,7 +117,7 @@ Module ServerTCP
             If IsPlaying(i) Then
                 If GetPlayerMap(i) = MapNum Then
                     If i <> Index Then
-                        Call SendDataTo(i, Data)
+                        SendDataTo(i, Data)
                     End If
                 End If
             End If
@@ -122,6 +125,7 @@ Module ServerTCP
         Next
 
     End Sub
+
     Sub SendDataToMap(ByVal MapNum As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
@@ -129,13 +133,14 @@ Module ServerTCP
 
             If IsPlaying(i) Then
                 If GetPlayerMap(i) = MapNum Then
-                    Call SendDataTo(i, Data)
+                    SendDataTo(i, Data)
                 End If
             End If
 
         Next
 
     End Sub
+
     Private Function GetIPAddr() As String
         'This function will return the users IP address as a string
         'Note: If the user is on a machine with multiple IPs, it will ONLY
@@ -146,6 +151,7 @@ Module ServerTCP
         strIPAddress = Dns.GetHostEntry(strHostName).AddressList(0).ToString()
         GetIPAddr = strIPAddress
     End Function
+
     Public Sub AlertMsg(ByVal Index As Integer, ByVal Msg As String)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -154,6 +160,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
+
     Public Sub GlobalMsg(ByVal Msg As String)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -164,6 +171,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Public Sub PlayerMsg(ByVal Index As Integer, ByVal Msg As String)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -172,13 +180,14 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
+
     Sub SendAnimations(ByVal Index As Integer)
         Dim i As Integer
 
         For i = 1 To MAX_ANIMATIONS
 
             If Len(Trim$(Animation(i).Name)) > 0 Then
-                Call SendUpdateAnimationTo(Index, i)
+                SendUpdateAnimationTo(Index, i)
             End If
 
         Next
@@ -244,6 +253,7 @@ Module ServerTCP
     Public Function GetClientIP(ByVal index As Integer) As String
         GetClientIP = Clients(index).IP
     End Function
+
     Sub SendCloseTrade(ByVal Index As Integer)
         Dim Buffer As ByteBuffer
 
@@ -252,7 +262,8 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
-    Sub SendEXP(ByVal Index As Integer)
+
+    Sub SendExp(ByVal Index As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
@@ -264,22 +275,25 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub CloseSocket(ByVal Index As Integer)
         Try
             If Index > 0 Then
                 If (Clients(Index).Closing = True) Then Exit Sub
                 Clients(Index).Closing = True
-                Call LeftGame(Index)
-                Call TextAdd("Connection from " & GetPlayerIP(Index) & " has been terminated.")
+                LeftGame(Index)
+                TextAdd("Connection from " & GetPlayerIP(Index) & " has been terminated.")
                 Clients(Index).Socket.Close()
                 Clients(Index).Socket = Nothing
-                Call ClearPlayer(Index)
+                ClearPlayer(Index)
+
                 NeedToUpDatePlayerList = True
             End If
         Catch ex As Exception
 
         End Try
     End Sub
+
     Function IsPlaying(ByVal Index As Integer) As Boolean
         IsPlaying = False
         If TempPlayer(Index).InGame = True Then
@@ -295,6 +309,7 @@ Module ServerTCP
         End If
 
     End Function
+
     Public Function IsConnected(ByVal Index As Integer) As Boolean
         If Clients(Index).Socket.Connected Then
             IsConnected = True
@@ -302,6 +317,7 @@ Module ServerTCP
             IsConnected = False
         End If
     End Function
+
     Function IsMultiAccounts(ByVal Login As String) As Boolean
         Dim i As Integer
 
@@ -1024,6 +1040,7 @@ Module ServerTCP
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendVital(ByVal Index As Integer, ByVal Vital As Vitals)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1047,6 +1064,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendWelcome(ByVal Index As Integer)
 
         ' Send them MOTD
@@ -1089,12 +1107,14 @@ Module ServerTCP
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SPlayerWornEq)
+
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Armor))
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Weapon))
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Helmet))
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Shield))
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Shoes))
         Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Gloves))
+
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
@@ -1301,7 +1321,7 @@ Module ServerTCP
         Buffer.WriteInteger(ServerPackets.SMapData)
         Buffer.WriteBytes(data)
         SendDataTo(Index, Buffer.ToArray)
-        'Debug.Print("Server send mapdata")
+
         Buffer = Nothing
     End Sub
 
@@ -1367,6 +1387,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Function
+
     Sub SendMapItemsTo(ByVal Index As Integer, ByVal MapNum As Integer)
         Dim i As Integer
         Dim Buffer As ByteBuffer
@@ -1439,6 +1460,7 @@ Module ServerTCP
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SendPlayerMove(ByVal Index As Integer, ByVal movement As Integer)
         Dim Buffer As ByteBuffer
 
@@ -1451,10 +1473,9 @@ Module ServerTCP
         Buffer.WriteInteger(movement)
         SendDataToMapBut(Index, GetPlayerMap(Index), Buffer.ToArray())
 
-        'Debug.Print("Server-SendPlayerMove")
-
         Buffer = Nothing
     End Sub
+
     Sub SendDoorAnimation(ByVal MapNum As Integer, ByVal x As Integer, ByVal y As Integer)
         Dim Buffer As ByteBuffer
 
@@ -1467,6 +1488,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendMapKey(ByVal Index As Integer, ByVal x As Integer, ByVal y As Integer, ByVal Value As Byte)
         Dim Buffer As ByteBuffer
 
@@ -1480,6 +1502,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Public Sub MapMsg(ByVal MapNum As Integer, ByVal Msg As String, ByVal color As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1491,6 +1514,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SendActionMsg(ByVal MapNum As Integer, ByVal message As String, ByVal color As Integer, ByVal MsgType As Integer, ByVal x As Integer, ByVal y As Integer, Optional ByVal PlayerOnlyNum As Integer = 0)
         Dim Buffer As ByteBuffer
 
@@ -1510,6 +1534,7 @@ Module ServerTCP
 
         Buffer = Nothing
     End Sub
+
     Sub SayMsg_Map(ByVal MapNum As Integer, ByVal Index As Integer, ByVal message As String, ByVal saycolour As Integer)
         Dim Buffer As ByteBuffer
 

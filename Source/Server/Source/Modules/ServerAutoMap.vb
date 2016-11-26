@@ -87,6 +87,9 @@
         Dim Tile(,) As TilePrefab
     End Structure
 
+    ''' <summary>
+    ''' Loads TilePrefab from the Automapper.ini
+    ''' </summary>
     Sub LoadTilePrefab()
         Dim Prefab As Integer
         Dim Layer As Integer
@@ -110,6 +113,16 @@
         Resources = Split(ResourcesNum, ";")
     End Sub
 
+    ''' <summary>
+    ''' Load details to the rec
+    ''' </summary>
+    ''' <param name="Prefab">Which TilePrefab to use.</param>
+    ''' <param name="Tileset">Tileset number to use.</param>
+    ''' <param name="X">The X coordinate, where the tiles start on the tilesheet.</param>
+    ''' <param name="Y">The Y coordinate, where the tiles start on the tilesheet.</param>
+    ''' <param name="TileType">Which TileType to use, if any, blocked, None, etc</param>
+    ''' <param name="EndX">The X coordinate, where the tiles end on the tilesheet.</param>
+    ''' <param name="EndY">The Y coordinate, where the tiles end on the tilesheet.</param>
     Sub LoadDetail(ByVal Prefab As TilePrefab, ByVal Tileset As Integer, ByVal X As Integer, ByVal Y As Integer, Optional TileType As Integer = 0, Optional EndX As Integer = 0, Optional EndY As Integer = 0)
         If EndX = 0 Then EndX = X
         If EndY = 0 Then EndY = Y
@@ -118,13 +131,22 @@
         For pX = X To EndX
             For pY = Y To EndY
                 AddDetail(Prefab, Tileset, pX, pY, TileType)
-            Next pY
-        Next pX
+            Next
+        Next
 
     End Sub
 
+    ''' <summary>
+    ''' Load details to memory for mapping.
+    ''' </summary>
+    ''' <param name="Prefab">Which TilePrefab to use.</param>
+    ''' <param name="Tileset">Tileset number to use.</param>
+    ''' <param name="X">The X coordinate, where the tiles start on the tilesheet.</param>
+    ''' <param name="Y">The Y coordinate, where the tiles start on the tilesheet.</param>
+    ''' <param name="TileType">Which TileType to use, if any, blocked, None, etc.</param>
     Sub AddDetail(ByVal Prefab As TilePrefab, ByVal Tileset As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal TileType As Integer)
         Dim DetailCount As Integer
+
         DetailCount = UBound(Detail) + 1
 
         ReDim Preserve Detail(0 To DetailCount)
@@ -137,6 +159,9 @@
         Detail(DetailCount).Tile.Layer(MapLayer.Mask2).y = Y
     End Sub
 
+    ''' <summary>
+    ''' Here a user can define which details to add
+    ''' </summary>
     Sub LoadDetails()
         ReDim Detail(0 To 1)
 
@@ -148,6 +173,11 @@
         LoadDetail(TilePrefab.Sand, 11, 0, 0, TileType.None, 1, 1)
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="Prefab"></param>
+    ''' <returns></returns>
     Function HaveDetails(ByVal Prefab As TilePrefab) As Boolean
         HaveDetails = Not (Prefab = TilePrefab.Water Or Prefab = TilePrefab.River)
     End Function

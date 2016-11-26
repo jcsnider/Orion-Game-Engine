@@ -2082,7 +2082,7 @@ Public Module ServerEvents
         ' check if we've leveled
         CheckPlayerLevelUp(Index)
 
-        SendEXP(Index)
+        SendExp(Index)
         SendPlayerData(Index)
 
     End Sub

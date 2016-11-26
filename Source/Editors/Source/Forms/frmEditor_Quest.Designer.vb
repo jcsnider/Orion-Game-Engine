@@ -957,8 +957,8 @@ Partial Class frmEditor_Quest
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraTasks)
+        Me.Controls.Add(Me.fraRequirements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Quest"
         Me.Text = "Quest Editor"

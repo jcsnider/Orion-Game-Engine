@@ -46,17 +46,6 @@
         End If
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs)
-        Dim tmpIndex As Integer
-
-        ClearQuest(EditorIndex)
-        tmpIndex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(EditorIndex - 1)
-        lstIndex.Items.Insert(EditorIndex - 1, EditorIndex & ": " & Quest(EditorIndex).Name)
-        lstIndex.SelectedIndex = tmpIndex
-        QuestEditorInit()
-    End Sub
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         QuestEditorCancel()
     End Sub
@@ -119,32 +108,52 @@
         End If
     End Sub
 
+#Region "Rewards"
     Private Sub scrlItemReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemReward.ValueChanged
-        If lstRewards.SelectedIndex < 0 Then Exit Sub
 
         If scrlItemReward.Value = 0 Then
             lblItemReward.Text = "Item Reward: None" & " (" & scrlItemRewValue.Value & ")"
         Else
             lblItemReward.Text = "Item Reward: " & Trim(Item(scrlItemReward.Value).Name) & " (" & scrlItemRewValue.Value & ")"
         End If
-        Quest(EditorIndex).RewardItem(lstRewards.SelectedIndex + 1) = scrlItemReward.Value
+
     End Sub
 
     Private Sub scrlItemRewValue_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemRewValue.ValueChanged
-        If lstRewards.SelectedIndex < 0 Then Exit Sub
 
         If scrlItemReward.Value = 0 Then
             lblItemReward.Text = "Item Reward: None" & " (" & scrlItemRewValue.Value & ")"
         Else
             lblItemReward.Text = "Item Reward: " & Trim(Item(scrlItemReward.Value).Name) & " (" & scrlItemRewValue.Value & ")"
         End If
-        Quest(EditorIndex).RewardItemAmount(lstRewards.SelectedIndex + 1) = scrlItemRewValue.Value
+
     End Sub
 
     Private Sub scrlExpReward_ValueChanged(sender As Object, e As EventArgs) Handles scrlExpReward.ValueChanged
         lblExpReward.Text = "Experience Gained: " & scrlExpReward.Value
         Quest(EditorIndex).RewardExp = scrlExpReward.Value
     End Sub
+
+    Private Sub btnAddReward_Click(sender As Object, e As EventArgs) Handles btnAddReward.Click
+        Quest(EditorIndex).RewardCount = Quest(EditorIndex).RewardCount + 1
+
+        ReDim Preserve Quest(EditorIndex).RewardItem(Quest(EditorIndex).RewardCount)
+        ReDim Preserve Quest(EditorIndex).RewardItemAmount(Quest(EditorIndex).RewardCount)
+
+        Quest(EditorIndex).RewardItem(Quest(EditorIndex).RewardCount) = scrlItemReward.Value
+        Quest(EditorIndex).RewardItemAmount(Quest(EditorIndex).RewardCount) = scrlItemRewValue.Value
+
+        lstRewards.Items.Clear()
+        For i = 1 To Quest(EditorIndex).RewardCount
+            lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
+        Next
+    End Sub
+
+    Private Sub btnRemoveReward_Click(sender As Object, e As EventArgs) Handles btnRemoveReward.Click
+
+    End Sub
+#End Region
+
 
 #Region "Tasks"
     Private Sub lstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
@@ -196,28 +205,46 @@
     End Sub
 
     Private Sub btnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
-        Dim selectedtask As Integer
+        Dim SelectedTask As Integer
 
         If lstTasks.SelectedIndex < 0 Then
-            selectedtask = Quest(EditorIndex).TaskCount
+            SelectedTask = Quest(EditorIndex).TaskCount
         Else
-            selectedtask = lstTasks.SelectedIndex + 1
+            SelectedTask = lstTasks.SelectedIndex + 1
         End If
 
-        Quest(EditorIndex).Task(selectedtask).TaskLog = Trim$(txtTaskLog.Text)
-        Quest(EditorIndex).Task(selectedtask).Speech = txtTaskSpeech.Text
+        Quest(EditorIndex).Task(SelectedTask).TaskLog = Trim$(txtTaskLog.Text)
+        Quest(EditorIndex).Task(SelectedTask).Speech = txtTaskSpeech.Text
 
         If chkEnd.Checked = True Then
-            Quest(EditorIndex).Task(selectedtask).QuestEnd = True
+            Quest(EditorIndex).Task(SelectedTask).QuestEnd = True
         Else
-            Quest(EditorIndex).Task(selectedtask).QuestEnd = False
+            Quest(EditorIndex).Task(SelectedTask).QuestEnd = False
         End If
 
-        Quest(EditorIndex).Task(selectedtask).Npc = scrlNPC.Value
-        Quest(EditorIndex).Task(selectedtask).Item = scrlItem.Value
-        Quest(EditorIndex).Task(selectedtask).Map = scrlMap.Value
-        Quest(EditorIndex).Task(selectedtask).Resource = scrlResource.Value
-        Quest(EditorIndex).Task(selectedtask).Amount = scrlAmount.Value
+        Quest(EditorIndex).Task(SelectedTask).Npc = scrlNPC.Value
+        Quest(EditorIndex).Task(SelectedTask).Item = scrlItem.Value
+        Quest(EditorIndex).Task(SelectedTask).Map = scrlMap.Value
+        Quest(EditorIndex).Task(SelectedTask).Resource = scrlResource.Value
+        Quest(EditorIndex).Task(SelectedTask).Amount = scrlAmount.Value
+
+        If optTask0.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 0
+        ElseIf optTask1.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 1
+        ElseIf optTask2.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 2
+        ElseIf optTask3.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 3
+        ElseIf optTask4.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 4
+        ElseIf optTask5.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 5
+        ElseIf optTask6.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 6
+        ElseIf optTask7.Checked = True Then
+            Quest(EditorIndex).Task(SelectedTask).Order = 7
+        End If
 
         lstTasks.Items.Clear()
         For i = 1 To Quest(EditorIndex).TaskCount

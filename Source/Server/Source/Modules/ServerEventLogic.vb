@@ -1680,12 +1680,12 @@
                                                         Case EventType.evLevelUp
                                                             SetPlayerExp(i, GetPlayerNextLevel(i))
                                                             CheckPlayerLevelUp(i)
-                                                            SendEXP(i)
+                                                            SendExp(i)
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeLevel
                                                             SetPlayerLevel(i, Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             SetPlayerExp(i, 0)
-                                                            SendEXP(i)
+                                                            SendExp(i)
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSkills
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
