@@ -71,7 +71,7 @@
         Dim Amount As Integer
         Dim Speech As String
         Dim TaskLog As String
-        Dim QuestEnd As Boolean
+        Dim QuestEnd As Byte
         Dim TaskType As Integer
     End Structure
 
@@ -113,9 +113,9 @@
             .txtName.Text = Trim$(Quest(EditorIndex).Name)
 
             If Quest(EditorIndex).Repeat = 1 Then
-                .chkRepeat.Checked = 1
+                .chkRepeat.Checked = True
             Else
-                .chkRepeat.Checked = 0
+                .chkRepeat.Checked = False
             End If
 
             .txtStartText.Text = Trim$(Quest(EditorIndex).Chat(1))
@@ -556,10 +556,10 @@
             .scrlResource.Enabled = False
             .scrlAmount.Enabled = False
 
-            If TaskToLoad.QuestEnd = True Then
-                .chkEnd.Checked = 1
+            If TaskToLoad.QuestEnd = 1 Then
+                .chkEnd.Checked = True
             Else
-                .chkEnd.Checked = 0
+                .chkEnd.Checked = False
             End If
 
             Select Case TaskToLoad.Order
@@ -609,6 +609,8 @@
                     .scrlAmount.Value = TaskToLoad.Amount
                     .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
             End Select
+
+            .lblTaskNum.Text = "Task Number: " & TaskNum
         End With
     End Sub
 #End Region

@@ -43,7 +43,7 @@
     Public AbandonQuestText As String = ""
     Public AbandonQuestVisible As Boolean
     Public QuestRequirementsText As String = ""
-    Public QuestRewardsText As String = ""
+    Public QuestRewardsText() As String
 
     'here we store temp info because off UpdateUI >.<
     Public UpdateQuestWindow As Boolean
@@ -71,7 +71,7 @@
         Dim Amount As Integer
         Dim Speech As String
         Dim TaskLog As String
-        Dim QuestEnd As Boolean
+        Dim QuestEnd As Byte
         Dim TaskType As Integer
     End Structure
 
@@ -532,7 +532,7 @@
     ' ////////////////////////
 
     Public Sub LoadQuestlogBox()
-        Dim QuestNum As Integer, CurTask As Integer
+        Dim QuestNum As Integer, CurTask As Integer, I As Integer
 
         If Trim$(SelectedQuest) = "" Then Exit Sub
 
@@ -575,57 +575,61 @@
             AbandonQuestVisible = False
         End If
 
-        'defeat x amount of Npc
-        If Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOSLAY Then
-            Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-            ActualTaskText = "Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
-            'gather x amount of items
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOGATHER Then
-            Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-            ActualTaskText = "Collect " & CurCount & "/" & MaxAmount & " " & ItemName
-            'go talk to npc
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTALK Then
-            Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-            ActualTaskText = "Go talk to  " & NpcName
-            'reach certain map
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOREACH Then
-            Dim MapName As String = MapNames(Quest(QuestNum).Task(CurTask).Map)
-            ActualTaskText = "Go to " & MapName
-            'give x amount of items to npc
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOGIVE Then
-            Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-            Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-            ActualTaskText = "Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
-            'defeat certain amount of players
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOKILL Then
-            Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
-            'go collect resources
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTRAIN Then
-            Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            Dim ResourceName As String = Resource(Quest(QuestNum).Task(CurTask).Resource).Name
-            ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
-            'collect x amount of items from npc
-        ElseIf Quest(QuestNum).Task(Player(MyIndex).PlayerQuest(QuestNum).ActualTask).TaskType = QUEST_TYPE_GOTRAIN Then
-            Dim NpcName As String = Item(Quest(QuestNum).Task(CurTask).Npc).Name
-            Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-            Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-            ActualTaskText = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
-        Else
-            ActualTaskText = "Requirements: "  'ToDo
-        End If
+        Select Case Quest(QuestNum).Task(CurTask).TaskType
+                'defeat x amount of Npc
+            Case QUEST_TYPE_GOSLAY
+                Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
+                ActualTaskText = "Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
+                'gather x amount of items
+            Case QUEST_TYPE_GOGATHER
+                Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
+                ActualTaskText = "Collect " & CurCount & "/" & MaxAmount & " " & ItemName
+                'go talk to npc
+            Case QUEST_TYPE_GOTALK
+                Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
+                ActualTaskText = "Go talk to  " & NpcName
+                'reach certain map
+            Case QUEST_TYPE_GOREACH
+                Dim MapName As String = MapNames(Quest(QuestNum).Task(CurTask).Map)
+                ActualTaskText = "Go to " & MapName
+            Case QUEST_TYPE_GOGIVE
+                'give x amount of items to npc
+                Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
+                Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
+                ActualTaskText = "Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
+                'defeat certain amount of players
+            Case QUEST_TYPE_GOKILL
+                Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
+                'go collect resources
+            Case QUEST_TYPE_GOTRAIN
+                Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                Dim ResourceName As String = Resource(Quest(QuestNum).Task(CurTask).Resource).Name
+                ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
+                'collect x amount of items from npc
+            Case QUEST_TYPE_GOGET
+                Dim NpcName As String = Item(Quest(QuestNum).Task(CurTask).Npc).Name
+                Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
+                Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
+                ActualTaskText = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
+            Case Else
+                ActualTaskText = "errr..."  'ToDo
+        End Select
 
         'Rewards
-        'QuestRewardsText = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1)) & " -" & Str(Quest(QuestNum).RewardExp) & " EXP"
-
+        ReDim QuestRewardsText(Quest(EditorIndex).RewardCount + 1)
+        For i = 1 To Quest(EditorIndex).RewardCount
+            QuestRewardsText(I) = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1))
+        Next
+        QuestRewardsText(I + 1) = Str(Quest(QuestNum).RewardExp) & " EXP"
     End Sub
 
     Public Sub DrawQuestLog()
@@ -647,7 +651,6 @@
         If SelectedQuest <= 0 Then Exit Sub
 
         'quest log text
-        'DrawText(QuestLogX + 204, QuestLogY + 30, Trim$(QuestTaskLogText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         y = 0
         For Each str As String In WordWrap(Trim$(QuestTaskLogText), 35)
             'description
@@ -655,7 +658,6 @@
             y = y + 15
         Next
 
-        'DrawText(QuestLogX + 204, QuestLogY + 147, Trim$(ActualTaskText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         y = 0
         For Each str As String In WordWrap(Trim$(ActualTaskText), 40)
             'description
@@ -673,7 +675,13 @@
 
         'DrawText(QuestLogX + 285, QuestLogY + 288, Trim$(QuestRequirementsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        DrawText(QuestLogX + 255, QuestLogY + 292, Trim$(QuestRewardsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        y = 0
+        For i = 1 To Quest(QuestNum).RewardCount
+            'description
+            DrawText(QuestLogX + 255, QuestLogY + 292 + y, Trim$(QuestRewardsText(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            y = y + 15
+        Next
+
     End Sub
 
     Public Sub ResetQuestLog()
@@ -685,7 +693,7 @@
         AbandonQuestText = ""
         AbandonQuestVisible = False
         QuestRequirementsText = ""
-        QuestRewardsText = ""
+        ReDim QuestRewardsText(0)
         pnlQuestLogVisible = False
 
         SelectedQuest = 0

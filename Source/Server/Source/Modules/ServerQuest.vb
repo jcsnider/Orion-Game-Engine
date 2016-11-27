@@ -41,7 +41,7 @@
         Dim Amount As Integer
         Dim Speech As String
         Dim TaskLog As String
-        Dim QuestEnd As Boolean
+        Dim QuestEnd As Byte
         Dim TaskType As Integer
     End Structure
 
@@ -131,6 +131,8 @@
         Next
 
         writer.Save(filename)
+        'load it so see if it matches O.o
+        LoadQuest(QuestNum)
     End Sub
 
     Sub LoadQuests()
@@ -351,7 +353,8 @@
         Buffer = Nothing
 
         ' Save it
-        SendUpdateQuestToAll(QuestNum)
+        SendQuests(Index) ' editor
+        SendUpdateQuestToAll(QuestNum) 'players
         SaveQuest(QuestNum)
         Addlog(GetPlayerName(Index) & " saved Quest #" & QuestNum & ".", ADMIN_LOG)
     End Sub
@@ -645,7 +648,7 @@
         If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask >= Quest(QuestNum).Task.Length Then
             CanEndQuest = True
         End If
-        If Quest(QuestNum).Task(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask).QuestEnd = True Then
+        If Quest(QuestNum).Task(Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask).QuestEnd = 1 Then
             CanEndQuest = True
         End If
     End Function

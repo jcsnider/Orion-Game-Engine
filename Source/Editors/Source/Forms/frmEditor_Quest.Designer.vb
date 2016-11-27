@@ -105,6 +105,7 @@ Partial Class frmEditor_Quest
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.lblTaskNum = New System.Windows.Forms.Label()
         Me.fraRewards.SuspendLayout()
         Me.fraTasks.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -267,6 +268,7 @@ Partial Class frmEditor_Quest
         '
         'fraTasks
         '
+        Me.fraTasks.Controls.Add(Me.lblTaskNum)
         Me.fraTasks.Controls.Add(Me.Panel1)
         Me.fraTasks.Controls.Add(Me.btnCancelTask)
         Me.fraTasks.Controls.Add(Me.btnSaveTask)
@@ -945,6 +947,15 @@ Partial Class frmEditor_Quest
         Me.lstIndex.Size = New System.Drawing.Size(194, 459)
         Me.lstIndex.TabIndex = 0
         '
+        'lblTaskNum
+        '
+        Me.lblTaskNum.AutoSize = True
+        Me.lblTaskNum.Location = New System.Drawing.Point(6, 340)
+        Me.lblTaskNum.Name = "lblTaskNum"
+        Me.lblTaskNum.Size = New System.Drawing.Size(74, 13)
+        Me.lblTaskNum.TabIndex = 7
+        Me.lblTaskNum.Text = "Task Number:"
+        '
         'frmEditor_Quest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -965,6 +976,7 @@ Partial Class frmEditor_Quest
         Me.fraRewards.ResumeLayout(False)
         Me.fraRewards.PerformLayout()
         Me.fraTasks.ResumeLayout(False)
+        Me.fraTasks.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
@@ -1066,4 +1078,5 @@ Partial Class frmEditor_Quest
     Friend WithEvents btnRemoveReward As Button
     Friend WithEvents btnAddReward As Button
     Friend WithEvents lstRewards As ListBox
+    Friend WithEvents lblTaskNum As Label
 End Class
