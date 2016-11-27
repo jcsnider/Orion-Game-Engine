@@ -364,17 +364,16 @@ Module ClientGeneral
         End If
 
         'then the window
-        frmMainGame.Width = ((SCREEN_MAPX + 2) * PIC_X) - 16
-        frmMainGame.Height = ((SCREEN_MAPY + 2) * PIC_Y) + 8
-        frmMainGame.picscreen.Width = (SCREEN_MAPX + 2) * PIC_X
-        frmMainGame.picscreen.Height = (SCREEN_MAPY + 2) * PIC_Y
+        frmMainGame.ClientSize = new Drawing.Size((SCREEN_MAPX) * PIC_X, (SCREEN_MAPY) * PIC_Y)
+        frmMainGame.picscreen.Width = (SCREEN_MAPX) * PIC_X
+        frmMainGame.picscreen.Height = (SCREEN_MAPY) * PIC_Y
 
-        HalfX = ((SCREEN_MAPX + 1) \ 2) * PIC_X
-        HalfY = ((SCREEN_MAPY + 1) \ 2) * PIC_Y
-        ScreenX = (SCREEN_MAPX + 1) * PIC_X
-        ScreenY = (SCREEN_MAPY + 1) * PIC_Y
+        HalfX = ((SCREEN_MAPX) \ 2) * PIC_X
+        HalfY = ((SCREEN_MAPY) \ 2) * PIC_Y
+        ScreenX = (SCREEN_MAPX) * PIC_X
+        ScreenY = (SCREEN_MAPY) * PIC_Y
 
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)))
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, (SCREEN_MAPX) * PIC_X, (SCREEN_MAPY) * PIC_Y)))
 
         'Then we can recalculate the positions
 

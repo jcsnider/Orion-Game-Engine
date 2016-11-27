@@ -111,8 +111,8 @@
 
         writer.Write(Quest(QuestNum).RewardCount)
         For I = 1 To Quest(QuestNum).RewardCount
-            writer.Write(Quest(QuestNum).RewardItem)
-            writer.Write(Quest(QuestNum).RewardItemAmount)
+            writer.Write(Quest(QuestNum).RewardItem(i))
+            writer.Write(Quest(QuestNum).RewardItemAmount(i))
         Next
         writer.Write(Quest(QuestNum).RewardExp)
 
