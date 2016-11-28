@@ -39,6 +39,7 @@ Partial Class frmEditor_Quest
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtStartText = New System.Windows.Forms.TextBox()
         Me.fraTasks = New System.Windows.Forms.GroupBox()
+        Me.lblTaskNum = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblLog = New System.Windows.Forms.Label()
@@ -103,9 +104,8 @@ Partial Class frmEditor_Quest
         Me.lstRequirements = New System.Windows.Forms.ListBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.fraQuestList = New System.Windows.Forms.GroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.lblTaskNum = New System.Windows.Forms.Label()
         Me.fraRewards.SuspendLayout()
         Me.fraTasks.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -115,7 +115,7 @@ Partial Class frmEditor_Quest
         Me.fraGeneral.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.fraQuestList.SuspendLayout()
         Me.SuspendLayout()
         '
         'fraRewards
@@ -273,13 +273,22 @@ Partial Class frmEditor_Quest
         Me.fraTasks.Controls.Add(Me.btnCancelTask)
         Me.fraTasks.Controls.Add(Me.btnSaveTask)
         Me.fraTasks.Controls.Add(Me.GroupBox5)
-        Me.fraTasks.Location = New System.Drawing.Point(731, -1)
+        Me.fraTasks.Location = New System.Drawing.Point(743, 5)
         Me.fraTasks.Name = "fraTasks"
-        Me.fraTasks.Size = New System.Drawing.Size(507, 497)
+        Me.fraTasks.Size = New System.Drawing.Size(719, 497)
         Me.fraTasks.TabIndex = 17
         Me.fraTasks.TabStop = False
         Me.fraTasks.Text = "Tasks"
         Me.fraTasks.Visible = False
+        '
+        'lblTaskNum
+        '
+        Me.lblTaskNum.AutoSize = True
+        Me.lblTaskNum.Location = New System.Drawing.Point(6, 340)
+        Me.lblTaskNum.Name = "lblTaskNum"
+        Me.lblTaskNum.Size = New System.Drawing.Size(74, 13)
+        Me.lblTaskNum.TabIndex = 7
+        Me.lblTaskNum.Text = "Task Number:"
         '
         'Panel1
         '
@@ -594,9 +603,9 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.Controls.Add(Me.lblQuestRec)
         Me.fraRequirements.Controls.Add(Me.scrlItemRec)
         Me.fraRequirements.Controls.Add(Me.lblItemReq)
-        Me.fraRequirements.Location = New System.Drawing.Point(729, 2)
+        Me.fraRequirements.Location = New System.Drawing.Point(742, 6)
         Me.fraRequirements.Name = "fraRequirements"
-        Me.fraRequirements.Size = New System.Drawing.Size(505, 497)
+        Me.fraRequirements.Size = New System.Drawing.Size(719, 497)
         Me.fraRequirements.TabIndex = 15
         Me.fraRequirements.TabStop = False
         Me.fraRequirements.Text = "Requirements"
@@ -928,16 +937,16 @@ Partial Class frmEditor_Quest
         Me.txtName.Size = New System.Drawing.Size(211, 20)
         Me.txtName.TabIndex = 0
         '
-        'GroupBox1
+        'fraQuestList
         '
-        Me.GroupBox1.BackColor = System.Drawing.SystemColors.Window
-        Me.GroupBox1.Controls.Add(Me.lstIndex)
-        Me.GroupBox1.Location = New System.Drawing.Point(2, 2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(208, 488)
-        Me.GroupBox1.TabIndex = 9
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Quest List"
+        Me.fraQuestList.BackColor = System.Drawing.SystemColors.Window
+        Me.fraQuestList.Controls.Add(Me.lstIndex)
+        Me.fraQuestList.Location = New System.Drawing.Point(2, 2)
+        Me.fraQuestList.Name = "fraQuestList"
+        Me.fraQuestList.Size = New System.Drawing.Size(208, 488)
+        Me.fraQuestList.TabIndex = 9
+        Me.fraQuestList.TabStop = False
+        Me.fraQuestList.Text = "Quest List"
         '
         'lstIndex
         '
@@ -946,15 +955,6 @@ Partial Class frmEditor_Quest
         Me.lstIndex.Name = "lstIndex"
         Me.lstIndex.Size = New System.Drawing.Size(194, 459)
         Me.lstIndex.TabIndex = 0
-        '
-        'lblTaskNum
-        '
-        Me.lblTaskNum.AutoSize = True
-        Me.lblTaskNum.Location = New System.Drawing.Point(6, 340)
-        Me.lblTaskNum.Name = "lblTaskNum"
-        Me.lblTaskNum.Size = New System.Drawing.Size(74, 13)
-        Me.lblTaskNum.TabIndex = 7
-        Me.lblTaskNum.Text = "Task Number:"
         '
         'frmEditor_Quest
         '
@@ -967,7 +967,7 @@ Partial Class frmEditor_Quest
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.fraQuestList)
         Me.Controls.Add(Me.fraTasks)
         Me.Controls.Add(Me.fraRequirements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -989,7 +989,7 @@ Partial Class frmEditor_Quest
         Me.fraGeneral.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
+        Me.fraQuestList.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1050,7 +1050,7 @@ Partial Class frmEditor_Quest
     Friend WithEvents btnSave As Button
     Friend WithEvents fraGeneral As GroupBox
     Friend WithEvents txtName As TextBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents fraQuestList As GroupBox
     Friend WithEvents lstIndex As ListBox
     Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents GroupBox6 As GroupBox

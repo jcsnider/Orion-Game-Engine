@@ -624,7 +624,8 @@
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
                 ActualTaskText = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
             Case Else
-                ActualTaskText = "errr..."  'ToDo
+                'ToDo
+                ActualTaskText = "errr..."
         End Select
 
         'Rewards

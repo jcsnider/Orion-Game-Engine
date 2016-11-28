@@ -4,8 +4,8 @@
     Private Sub frmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Width = 740
 
-        fraRequirements.Location = fraGeneral.Location
-        fraTasks.Location = fraGeneral.Location
+        fraRequirements.Location = fraQuestList.Location
+        fraTasks.Location = fraQuestList.Location
 
         scrlNPC.Maximum = MAX_NPCS
         scrlItem.Maximum = MAX_ITEMS
@@ -107,6 +107,14 @@
             Quest(EditorIndex).Repeat = 1
         Else
             Quest(EditorIndex).Repeat = 0
+        End If
+    End Sub
+
+    Private Sub chkQuestCancel_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuestCancel.CheckedChanged
+        If chkQuestCancel.Checked = True Then
+            Quest(EditorIndex).Cancelable = 1
+        Else
+            Quest(EditorIndex).Cancelable = 0
         End If
     End Sub
 
@@ -548,6 +556,8 @@
     Private Sub rdbClassReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbClassReq.CheckedChanged
         scrlClassRec.Enabled = True
     End Sub
+
+
 
 #End Region
 

@@ -128,13 +128,13 @@
             If Not Quest(EditorIndex).QuestGiveItemValue = 0 Then
                 .scrlStartItemAmount.Value = Quest(EditorIndex).QuestGiveItemValue
             Else
-                .scrlStartItemAmount.Value = 1
+                .scrlStartItemAmount.Value = 0
             End If
 
             If Not Quest(EditorIndex).QuestRemoveItemValue = 0 Then
                 .scrlEndItemAmount.Value = Quest(EditorIndex).QuestRemoveItemValue
             Else
-                .scrlEndItemAmount.Value = 1
+                .scrlEndItemAmount.Value = 0
             End If
 
             frmEditor_Quest.lstRewards.Items.Clear()
@@ -145,7 +145,7 @@
             If Not Quest(EditorIndex).RewardExp = 0 Then
                 .scrlExpReward.Value = Quest(EditorIndex).RewardExp
             Else
-                .scrlExpReward.Value = 1
+                .scrlExpReward.Value = 0
             End If
 
             frmEditor_Quest.lstRequirements.Items.Clear()
@@ -169,13 +169,8 @@
                 frmEditor_Quest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
             Next
 
-            'load task nº1
-            '.lstTasks.SelectedIndex = 0
-            'LoadTask(EditorIndex, .lstTasks.SelectedIndex + 1)
-
         End With
 
-        'frmEditor_Quest.lstIndex.SelectedIndex = 0
         Quest_Changed(EditorIndex) = True
 
     End Sub
