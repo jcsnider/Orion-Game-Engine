@@ -35,7 +35,7 @@
     Public QuestLogY As Integer = 100
 
     Public pnlQuestLogVisible As Boolean
-    Public SelectedQuest As String
+    Public SelectedQuest As Integer
     Public QuestTaskLogText As String = ""
     Public ActualTaskText As String = ""
     Public QuestDialogText As String = ""
@@ -534,16 +534,19 @@
     Public Sub LoadQuestlogBox()
         Dim QuestNum As Integer, CurTask As Integer, I As Integer
 
-        If Trim$(SelectedQuest) = "" Then Exit Sub
+        If SelectedQuest = 0 Then Exit Sub
 
         For I = 1 To MAX_QUESTS
-            If QuestNames(SelectedQuest) = Trim$(Quest(I).Name) Then
+            If Trim$(QuestNames(SelectedQuest)) = Trim$(Quest(I).Name) Then
                 QuestNum = I
             End If
         Next
 
+        If QuestNum = 0 Then Exit Sub
 
         CurTask = Player(MyIndex).PlayerQuest(QuestNum).ActualTask
+
+        If CurTask >= Quest(QuestNum).Task.Length Then Exit Sub
 
         'Quest Log (Main Task)
         QuestTaskLogText = Trim$(Quest(QuestNum).QuestLog)
@@ -625,11 +628,11 @@
         End Select
 
         'Rewards
-        ReDim QuestRewardsText(Quest(EditorIndex).RewardCount + 1)
-        For i = 1 To Quest(EditorIndex).RewardCount
-            QuestRewardsText(I) = Item(Quest(QuestNum).RewardItem(1)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(1))
+        ReDim QuestRewardsText(Quest(QuestNum).RewardCount + 1)
+        For I = 1 To Quest(QuestNum).RewardCount
+            QuestRewardsText(I) = Item(Quest(QuestNum).RewardItem(I)).Name & " X" & Str(Quest(QuestNum).RewardItemAmount(I))
         Next
-        QuestRewardsText(I + 1) = Str(Quest(QuestNum).RewardExp) & " EXP"
+        QuestRewardsText(I) = Str(Quest(QuestNum).RewardExp) & " EXP"
     End Sub
 
     Public Sub DrawQuestLog()
@@ -676,7 +679,7 @@
         'DrawText(QuestLogX + 285, QuestLogY + 288, Trim$(QuestRequirementsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         y = 0
-        For i = 1 To Quest(QuestNum).RewardCount
+        For i = 1 To QuestRewardsText.Length - 1
             'description
             DrawText(QuestLogX + 255, QuestLogY + 292 + y, Trim$(QuestRewardsText(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             y = y + 15

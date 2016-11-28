@@ -179,6 +179,59 @@ Module ClientText
 
     End Sub
 
+    Public Sub DrawMapAttributes()
+        Dim X As Integer
+        Dim y As Integer
+        Dim tX As Integer
+        Dim tY As Integer
+
+        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
+            For X = TileView.left To TileView.right
+                For y = TileView.top To TileView.bottom
+                    If IsValidMapPoint(X, y) Then
+                        With Map.Tile(X, y)
+                            tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
+                            tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
+                            Select Case .Type
+                                Case TileType.Blocked
+                                    DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
+                                Case TileType.Warp
+                                    DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Item
+                                    DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.NpcAvoid
+                                    DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.Key
+                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.KeyOpen
+                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
+                                Case TileType.Resource
+                                    DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Door
+                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
+                                Case TileType.NpcSpawn
+                                    DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
+                                Case TileType.Shop
+                                    DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Bank
+                                    DrawText(tX, tY, "BA", (Color.Blue), (Color.Black), GameWindow)
+                                Case TileType.Heal
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Trap
+                                    DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
+                                Case TileType.House
+                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Craft
+                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
+                            End Select
+                        End With
+                    End If
+                Next
+            Next
+        End If
+
+    End Sub
+
     Sub DrawActionMsg(ByVal Index As Integer)
         Dim X As Integer, y As Integer, i As Integer, Time As Integer
 

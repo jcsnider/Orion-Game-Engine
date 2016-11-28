@@ -1669,6 +1669,11 @@ Module ClientGraphics
             DrawActionMsg(I)
         Next I
 
+        ' Blit out map attributes
+        If InMapEditor Then
+            DrawMapAttributes()
+        End If
+
         ' Draw map name
         DrawMapName()
 
