@@ -174,7 +174,7 @@
     End Sub
 
     ''' <summary>
-    ''' 
+    ''' Check for details
     ''' </summary>
     ''' <param name="Prefab"></param>
     ''' <returns></returns>

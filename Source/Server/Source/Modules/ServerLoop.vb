@@ -16,7 +16,7 @@ Module ServerLoop
 
         Do
             Tick = GetTickCount()
-            UpdateUI()
+            'UpdateUI()
             If ServerDestroyed Then End
 
             If Tick > tmr25 Then

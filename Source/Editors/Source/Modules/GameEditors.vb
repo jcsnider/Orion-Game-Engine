@@ -1195,6 +1195,8 @@ Module GameEditors
             frmEditor_Classes.cmbItems.Items.Add(Trim(Item(i).Name))
         Next
 
+        frmEditor_Classes.lstIndex.SelectedIndex = 0
+
         frmEditor_Classes.Visible = True
     End Sub
 

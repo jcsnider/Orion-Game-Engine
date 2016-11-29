@@ -135,6 +135,8 @@ Public Class frmEditor_Classes
     End Sub
 
     Private Sub scrlMaleSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMaleSprite.Scroll
+        If cmbMaleSprite.SelectedIndex < 0 Then Exit Sub
+
         lblMaleSprite.Text = "Sprite: " & scrlMaleSprite.Value
 
         Classes(EditorIndex).MaleSprite(cmbMaleSprite.SelectedIndex) = scrlMaleSprite.Value

@@ -224,6 +224,9 @@
 
         ' Starts the server loop
         ServerLoop.ServerLoop()
+
+        'cleanup and close
+        DestroyServer()
     End Sub
 
     Sub UpdateCaption()

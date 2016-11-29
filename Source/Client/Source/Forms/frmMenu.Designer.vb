@@ -46,6 +46,8 @@ Partial Class frmMenu
         Me.lblScrollingCredits = New System.Windows.Forms.Label()
         Me.tmrCredits = New System.Windows.Forms.Timer(Me.components)
         Me.pnlNewChar = New System.Windows.Forms.Panel()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.btnCreateCharacter = New System.Windows.Forms.Button()
         Me.placeholderforsprite = New System.Windows.Forms.PictureBox()
         Me.lblNextChar = New System.Windows.Forms.Label()
@@ -86,8 +88,6 @@ Partial Class frmMenu
         Me.picChar1 = New System.Windows.Forms.PictureBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -354,6 +354,23 @@ Partial Class frmMenu
         Me.pnlNewChar.Size = New System.Drawing.Size(400, 192)
         Me.pnlNewChar.TabIndex = 43
         Me.pnlNewChar.Visible = False
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(227, 76)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(157, 62)
+        Me.txtDescription.TabIndex = 44
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(56, 75)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(34, 13)
+        Me.Label19.TabIndex = 43
+        Me.Label19.Text = "Sprite"
         '
         'btnCreateCharacter
         '
@@ -815,30 +832,12 @@ Partial Class frmMenu
         Me.Label16.TabIndex = 17
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(56, 75)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(34, 13)
-        Me.Label19.TabIndex = 43
-        Me.Label19.Text = "Sprite"
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Location = New System.Drawing.Point(227, 76)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(157, 62)
-        Me.txtDescription.TabIndex = 44
-        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1281, 541)
         Me.Controls.Add(Me.pnlNewChar)
