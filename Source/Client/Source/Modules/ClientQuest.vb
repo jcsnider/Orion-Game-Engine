@@ -642,7 +642,7 @@
         y = 10
 
         'first render panel
-        RenderTexture(QuestGFX, GameWindow, QuestLogX, QuestLogY, 0, 0, QuestGFXInfo.width, QuestGFXInfo.height)
+        RenderTextures(QuestGFX, GameWindow, QuestLogX, QuestLogY, 0, 0, QuestGFXInfo.Width, QuestGFXInfo.Height)
 
         'draw quest names
         For i = 1 To MAX_ACTIVEQUESTS

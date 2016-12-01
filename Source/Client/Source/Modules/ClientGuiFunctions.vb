@@ -9,8 +9,8 @@ Public Module ClientGuiFunctions
         ShowItemDesc = False
         'Charpanel
         If pnlCharacterVisible Then
-            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
-                If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+            If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.Width Then
+                If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.Height Then
                     eqNum = IsEqItem(X, Y)
                     If eqNum <> 0 Then
                         UpdateDescWindow(GetPlayerEquipment(MyIndex, eqNum), 0, eqNum)
@@ -356,7 +356,7 @@ Public Module ClientGuiFunctions
 
         If DialogPanelVisible Then
             'ok button
-            If X > DialogPanelX + OkButtonX And X < DialogPanelX + OkButtonX + ButtonGFXInfo.width And Y > DialogPanelY + OkButtonY And Y < DialogPanelY + OkButtonY + ButtonGFXInfo.height Then
+            If X > DialogPanelX + OkButtonX And X < DialogPanelX + OkButtonX + ButtonGFXInfo.Width And Y > DialogPanelY + OkButtonY And Y < DialogPanelY + OkButtonY + ButtonGFXInfo.Height Then
                 VbKeyDown = False
                 VbKeyUp = False
                 VbKeyLeft = False
@@ -382,7 +382,7 @@ Public Module ClientGuiFunctions
                 DialogPanelVisible = False
             End If
             'cancel button
-            If X > DialogPanelX + CancelButtonX And X < DialogPanelX + CancelButtonX + ButtonGFXInfo.width And Y > DialogPanelY + CancelButtonY And Y < DialogPanelY + CancelButtonY + ButtonGFXInfo.height Then
+            If X > DialogPanelX + CancelButtonX And X < DialogPanelX + CancelButtonX + ButtonGFXInfo.Width And Y > DialogPanelY + CancelButtonY And Y < DialogPanelY + CancelButtonY + ButtonGFXInfo.Height Then
                 VbKeyDown = False
                 VbKeyUp = False
                 VbKeyLeft = False
@@ -408,7 +408,7 @@ Public Module ClientGuiFunctions
         If pnlBankVisible = True Then
             If AboveBankpanel(X, Y) Then
                 If X > BankWindowX + 140 And X < BankWindowX + 140 + getTextWidth("Close Bank", 15) Then
-                    If Y > BankWindowY + BankPanelGFXInfo.height - 15 And Y < BankWindowY + BankPanelGFXInfo.height Then
+                    If Y > BankWindowY + BankPanelGFXInfo.Height - 15 And Y < BankWindowY + BankPanelGFXInfo.Height Then
                         PlaySound("Click.ogg")
                         CloseBank()
                     End If
@@ -421,16 +421,16 @@ Public Module ClientGuiFunctions
         If pnlTradeVisible = True Then
             If AboveTradepanel(X, Y) Then
                 'accept button
-                If X > TradeWindowX + TradeButtonAcceptX And X < TradeWindowX + TradeButtonAcceptX + ButtonGFXInfo.width Then
-                    If Y > TradeWindowY + TradeButtonAcceptY And Y < TradeWindowY + TradeButtonAcceptY + ButtonGFXInfo.height Then
+                If X > TradeWindowX + TradeButtonAcceptX And X < TradeWindowX + TradeButtonAcceptX + ButtonGFXInfo.Width Then
+                    If Y > TradeWindowY + TradeButtonAcceptY And Y < TradeWindowY + TradeButtonAcceptY + ButtonGFXInfo.Height Then
                         PlaySound("Click.ogg")
                         AcceptTrade()
                     End If
                 End If
 
                 'decline button
-                If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.width Then
-                    If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.height Then
+                If X > TradeWindowX + TradeButtonDeclineX And X < TradeWindowX + TradeButtonDeclineX + ButtonGFXInfo.Width Then
+                    If Y > TradeWindowY + TradeButtonDeclineY And Y < TradeWindowY + TradeButtonDeclineY + ButtonGFXInfo.Height Then
                         PlaySound("Click.ogg")
                         DeclineTrade()
                     End If
@@ -541,7 +541,7 @@ Public Module ClientGuiFunctions
         If pnlRClickVisible = True Then
             If AboveRClickPanel(X, Y) Then
                 'trade
-                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Trade") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Trade") \ 2) + getTextWidth("Invite to Trade") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Trade") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Trade") \ 2) + getTextWidth("Invite to Trade") Then
                     If Y > RClickY + 35 And Y < RClickY + 35 + 12 Then
                         If myTarget > 0 Then
                             SendTradeRequest(Player(myTarget).Name)
@@ -551,7 +551,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 'party
-                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Party") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to Party") \ 2) + getTextWidth("Invite to Party") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Party") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Party") \ 2) + getTextWidth("Invite to Party") Then
                     If Y > RClickY + 60 And Y < RClickY + 60 + 12 Then
                         If myTarget > 0 Then
                             SendPartyRequest(Player(myTarget).Name)
@@ -561,7 +561,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 'House
-                If X > RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to House") \ 2) And X < RClickX + (RClickGFXInfo.width \ 2) - (getTextWidth("Invite to House") \ 2) + getTextWidth("Invite to House") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2) + getTextWidth("Invite to House") Then
                     If Y > RClickY + 85 And Y < RClickY + 85 + 12 Then
                         If myTarget > 0 Then
                             SendInvite(Player(myTarget).Name)
@@ -997,24 +997,24 @@ Public Module ClientGuiFunctions
                     End Select
                 Else
                     ' check for buy button
-                    If X > ShopWindowX + ShopButtonBuyX And X < ShopWindowX + ShopButtonBuyX + ButtonGFXInfo.width Then
-                        If Y > ShopWindowY + ShopButtonBuyY And Y < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.height Then
+                    If X > ShopWindowX + ShopButtonBuyX And X < ShopWindowX + ShopButtonBuyX + ButtonGFXInfo.Width Then
+                        If Y > ShopWindowY + ShopButtonBuyY And Y < ShopWindowY + ShopButtonBuyY + ButtonGFXInfo.Height Then
                             If ShopAction = 1 Then Exit Function
                             ShopAction = 1 ' buying an item
                             AddText("Click on the item in the shop you wish to buy.", ColorType.Yellow)
                         End If
                     End If
                     ' check for sell button
-                    If X > ShopWindowX + ShopButtonSellX And X < ShopWindowX + ShopButtonSellX + ButtonGFXInfo.width Then
-                        If Y > ShopWindowY + ShopButtonSellY And Y < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.height Then
+                    If X > ShopWindowX + ShopButtonSellX And X < ShopWindowX + ShopButtonSellX + ButtonGFXInfo.Width Then
+                        If Y > ShopWindowY + ShopButtonSellY And Y < ShopWindowY + ShopButtonSellY + ButtonGFXInfo.Height Then
                             If ShopAction = 2 Then Exit Function
                             ShopAction = 2 ' selling an item
                             AddText("Double-click on the item in your inventory you wish to sell.", ColorType.Yellow)
                         End If
                     End If
                     ' check for close button
-                    If X > ShopWindowX + ShopButtonCloseX And X < ShopWindowX + ShopButtonCloseX + ButtonGFXInfo.width Then
-                        If Y > ShopWindowY + ShopButtonCloseY And Y < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.height Then
+                    If X > ShopWindowX + ShopButtonCloseX And X < ShopWindowX + ShopButtonCloseX + ButtonGFXInfo.Width Then
+                        If Y > ShopWindowY + ShopButtonCloseY And Y < ShopWindowY + ShopButtonCloseY + ButtonGFXInfo.Height Then
                             Dim Buffer As ByteBuffer
                             Buffer = New ByteBuffer
                             Buffer.WriteInteger(ClientPackets.CCloseShop)
@@ -1229,8 +1229,8 @@ Public Module ClientGuiFunctions
     Function AboveActionPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveActionPanel = False
 
-        If X > ActionPanelX And X < ActionPanelX + ActionPanelGFXInfo.width Then
-            If Y > ActionPanelY And Y < ActionPanelY + ActionPanelGFXInfo.height Then
+        If X > ActionPanelX And X < ActionPanelX + ActionPanelGFXInfo.Width Then
+            If Y > ActionPanelY And Y < ActionPanelY + ActionPanelGFXInfo.Height Then
                 AboveActionPanel = True
             End If
         End If
@@ -1239,8 +1239,8 @@ Public Module ClientGuiFunctions
     Function AboveHotbar(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveHotbar = False
 
-        If X > HotbarX And X < HotbarX + HotBarGFXInfo.width Then
-            If Y > HotbarY And Y < HotbarY + HotBarGFXInfo.height Then
+        If X > HotbarX And X < HotbarX + HotBarGFXInfo.Width Then
+            If Y > HotbarY And Y < HotbarY + HotBarGFXInfo.Height Then
                 AboveHotbar = True
             End If
         End If
@@ -1249,8 +1249,8 @@ Public Module ClientGuiFunctions
     Function AboveInvpanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveInvpanel = False
 
-        If X > InvWindowX And X < InvWindowX + InvPanelGFXInfo.width Then
-            If Y > InvWindowY And Y < InvWindowY + InvPanelGFXInfo.height Then
+        If X > InvWindowX And X < InvWindowX + InvPanelGFXInfo.Width Then
+            If Y > InvWindowY And Y < InvWindowY + InvPanelGFXInfo.Height Then
                 AboveInvpanel = True
             End If
         End If
@@ -1259,8 +1259,8 @@ Public Module ClientGuiFunctions
     Function AboveCharpanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveCharpanel = False
 
-        If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.width Then
-            If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.height Then
+        If X > CharWindowX And X < CharWindowX + CharPanelGFXInfo.Width Then
+            If Y > CharWindowY And Y < CharWindowY + CharPanelGFXInfo.Height Then
                 AboveCharpanel = True
             End If
         End If
@@ -1269,8 +1269,8 @@ Public Module ClientGuiFunctions
     Function AboveSkillpanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveSkillpanel = False
 
-        If X > SkillWindowX And X < SkillWindowX + SkillPanelGFXInfo.width Then
-            If Y > SkillWindowY And Y < SkillWindowY + SkillPanelGFXInfo.height Then
+        If X > SkillWindowX And X < SkillWindowX + SkillPanelGFXInfo.Width Then
+            If Y > SkillWindowY And Y < SkillWindowY + SkillPanelGFXInfo.Height Then
                 AboveSkillpanel = True
             End If
         End If
@@ -1279,8 +1279,8 @@ Public Module ClientGuiFunctions
     Function AboveBankpanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveBankpanel = False
 
-        If X > BankWindowX And X < BankWindowX + BankPanelGFXInfo.width Then
-            If Y > BankWindowY And Y < BankWindowY + BankPanelGFXInfo.height Then
+        If X > BankWindowX And X < BankWindowX + BankPanelGFXInfo.Width Then
+            If Y > BankWindowY And Y < BankWindowY + BankPanelGFXInfo.Height Then
                 AboveBankpanel = True
             End If
         End If
@@ -1289,8 +1289,8 @@ Public Module ClientGuiFunctions
     Function AboveShoppanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveShoppanel = False
 
-        If X > ShopWindowX And X < ShopWindowX + ShopPanelGFXInfo.width Then
-            If Y > ShopWindowY And Y < ShopWindowY + ShopPanelGFXInfo.height Then
+        If X > ShopWindowX And X < ShopWindowX + ShopPanelGFXInfo.Width Then
+            If Y > ShopWindowY And Y < ShopWindowY + ShopPanelGFXInfo.Height Then
                 AboveShoppanel = True
             End If
         End If
@@ -1299,8 +1299,8 @@ Public Module ClientGuiFunctions
     Function AboveTradepanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveTradepanel = False
 
-        If X > TradeWindowX And X < TradeWindowX + TradePanelGFXInfo.width Then
-            If Y > TradeWindowY And Y < TradeWindowY + TradePanelGFXInfo.height Then
+        If X > TradeWindowX And X < TradeWindowX + TradePanelGFXInfo.Width Then
+            If Y > TradeWindowY And Y < TradeWindowY + TradePanelGFXInfo.Height Then
                 AboveTradepanel = True
             End If
         End If
@@ -1309,8 +1309,8 @@ Public Module ClientGuiFunctions
     Function AboveEventChat(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveEventChat = False
 
-        If X > EventChatX And X < EventChatX + EventChatGFXInfo.width Then
-            If Y > EventChatY And Y < EventChatY + EventChatGFXInfo.height Then
+        If X > EventChatX And X < EventChatX + EventChatGFXInfo.Width Then
+            If Y > EventChatY And Y < EventChatY + EventChatGFXInfo.Height Then
                 AboveEventChat = True
             End If
         End If
@@ -1319,7 +1319,7 @@ Public Module ClientGuiFunctions
     Function AboveChatScrollUp(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveChatScrollUp = False
 
-        If X > ChatWindowX + ChatWindowGFXInfo.width - 24 And X < ChatWindowX + ChatWindowGFXInfo.width Then
+        If X > ChatWindowX + ChatWindowGFXInfo.Width - 24 And X < ChatWindowX + ChatWindowGFXInfo.Width Then
             If Y > ChatWindowY And Y < ChatWindowY + 24 Then 'ChatWindowGFXInfo.height Then
                 AboveChatScrollUp = True
             End If
@@ -1329,8 +1329,8 @@ Public Module ClientGuiFunctions
     Function AboveChatScrollDown(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveChatScrollDown = False
 
-        If X > ChatWindowX + ChatWindowGFXInfo.width - 24 And X < ChatWindowX + ChatWindowGFXInfo.width Then
-            If Y > ChatWindowY + ChatWindowGFXInfo.height - 24 And Y < ChatWindowY + ChatWindowGFXInfo.height Then
+        If X > ChatWindowX + ChatWindowGFXInfo.Width - 24 And X < ChatWindowX + ChatWindowGFXInfo.Width Then
+            If Y > ChatWindowY + ChatWindowGFXInfo.Height - 24 And Y < ChatWindowY + ChatWindowGFXInfo.Height Then
                 AboveChatScrollDown = True
             End If
         End If
@@ -1339,8 +1339,8 @@ Public Module ClientGuiFunctions
     Function AboveRClickPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveRClickPanel = False
 
-        If X > RClickX And X < RClickX + RClickGFXInfo.width Then
-            If Y > RClickY And Y < RClickY + RClickGFXInfo.height Then
+        If X > RClickX And X < RClickX + RClickGFXInfo.Width Then
+            If Y > RClickY And Y < RClickY + RClickGFXInfo.Height Then
                 AboveRClickPanel = True
             End If
         End If
@@ -1349,8 +1349,8 @@ Public Module ClientGuiFunctions
     Function AboveQuestPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveQuestPanel = False
 
-        If X > QuestLogX And X < QuestLogX + QuestGFXInfo.width Then
-            If Y > QuestLogY And Y < QuestLogY + QuestGFXInfo.height Then
+        If X > QuestLogX And X < QuestLogX + QuestGFXInfo.Width Then
+            If Y > QuestLogY And Y < QuestLogY + QuestGFXInfo.Height Then
                 AboveQuestPanel = True
             End If
         End If
@@ -1359,8 +1359,8 @@ Public Module ClientGuiFunctions
     Function AboveCraftPanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveCraftPanel = False
 
-        If X > CraftPanelX And X < CraftPanelX + CraftGFXInfo.width Then
-            If Y > CraftPanelY And Y < CraftPanelY + CraftGFXInfo.height Then
+        If X > CraftPanelX And X < CraftPanelX + CraftGFXInfo.Width Then
+            If Y > CraftPanelY And Y < CraftPanelY + CraftGFXInfo.Height Then
                 AboveCraftPanel = True
             End If
         End If

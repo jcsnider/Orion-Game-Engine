@@ -4,11 +4,6 @@
     Public Const ADMIN_LOG As String = "admin.log"
     Public Const PLAYER_LOG As String = "player.log"
 
-    ' Version constants
-    Public Const CLIENT_MAJOR As Byte = 4
-    Public Const CLIENT_MINOR As Byte = 0
-    Public Const CLIENT_REVISION As Byte = 0
-
     Public MAX_CHARS As Byte = 3
 
     ' General constants

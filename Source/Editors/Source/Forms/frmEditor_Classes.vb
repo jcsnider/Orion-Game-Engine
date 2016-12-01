@@ -36,6 +36,14 @@ Public Class frmEditor_Classes
         For i = 1 To Stats.Count - 1
             Classes(Max_Classes).Stat(i) = 1
         Next
+
+        ReDim Classes(Max_Classes).StartItem(5)
+        ReDim Classes(Max_Classes).StartValue(5)
+
+        Classes(Max_Classes).StartMap = 1
+        Classes(Max_Classes).StartX = 1
+        Classes(Max_Classes).StartY = 1
+
         ClassEditorInit()
     End Sub
 
@@ -145,6 +153,8 @@ Public Class frmEditor_Classes
     End Sub
 
     Private Sub scrlFemaleSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFemaleSprite.Scroll
+        If cmbFemaleSprite.SelectedIndex < 0 Then Exit Sub
+
         lblFemaleSprite.Text = "Sprite: " & scrlFemaleSprite.Value
 
         Classes(EditorIndex).FemaleSprite(cmbFemaleSprite.SelectedIndex) = scrlFemaleSprite.Value

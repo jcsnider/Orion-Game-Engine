@@ -780,6 +780,7 @@ Module GameEditors
             frmEditor_Item.scrlPaperdoll.Maximum = NumPaperdolls + 1
         End If
 
+        frmEditor_Item.tabInfo.SelectedTab = frmEditor_Item.tabPageInfo
 
         EditorItem_DrawItem()
         EditorItem_DrawPaperdoll()
@@ -1235,9 +1236,15 @@ Module GameEditors
         frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.vitality)
         frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.spirit)
 
-        frmEditor_Classes.numBaseExp.Value = Classes(EditorIndex).BaseExp
+        If Classes(EditorIndex).BaseExp < 10 Then
+            frmEditor_Classes.numBaseExp.Value = 10
+        Else
+            frmEditor_Classes.numBaseExp.Value = Classes(EditorIndex).BaseExp
+        End If
+
 
         frmEditor_Classes.lstStartItems.Items.Clear()
+
         For i = 1 To 5
             If Classes(EditorIndex).StartItem(i) > 0 Then
                 frmEditor_Classes.lstStartItems.Items.Add(Item(Classes(EditorIndex).StartItem(i)).Name & " X " & Classes(EditorIndex).StartValue(i))

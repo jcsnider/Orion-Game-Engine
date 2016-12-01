@@ -364,51 +364,54 @@ Module ClientGeneral
         End If
 
         'then the window
-        frmMainGame.ClientSize = new Drawing.Size((SCREEN_MAPX) * PIC_X, (SCREEN_MAPY) * PIC_Y)
-        frmMainGame.picscreen.Width = (SCREEN_MAPX) * PIC_X
-        frmMainGame.picscreen.Height = (SCREEN_MAPY) * PIC_Y
+        frmMainGame.ClientSize = New Drawing.Size((SCREEN_MAPX) * PIC_X + PIC_X, (SCREEN_MAPY) * PIC_Y + PIC_Y)
+        frmMainGame.picscreen.Width = (SCREEN_MAPX) * PIC_X + PIC_X
+        frmMainGame.picscreen.Height = (SCREEN_MAPY) * PIC_Y + PIC_Y
 
         HalfX = ((SCREEN_MAPX) \ 2) * PIC_X
         HalfY = ((SCREEN_MAPY) \ 2) * PIC_Y
         ScreenX = (SCREEN_MAPX) * PIC_X
         ScreenY = (SCREEN_MAPY) * PIC_Y
 
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, (SCREEN_MAPX) * PIC_X, (SCREEN_MAPY) * PIC_Y)))
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, (SCREEN_MAPX) * PIC_X + PIC_X, (SCREEN_MAPY) * PIC_Y + PIC_Y)))
 
         'Then we can recalculate the positions
 
         'chatwindow
         ChatWindowX = 1
-        ChatWindowY = frmMainGame.Height - ChatWindowGFXInfo.height - 65
+        ChatWindowY = frmMainGame.Height - ChatWindowGFXInfo.Height - 65
 
         MyChatX = 1
         MyChatY = frmMainGame.Height - 60
 
         'hotbar
         If Options.ScreenSize = 0 Then
-            HotbarX = HUDWindowX + HUDPanelGFXInfo.width + 20
+            HotbarX = HUDWindowX + HUDPanelGFXInfo.Width + 20
             HotbarY = 25
         Else
-            HotbarX = ChatWindowX + MyChatWindowGFXInfo.width + 50
-            HotbarY = frmMainGame.Height - HotBarGFXInfo.height - 45
+            HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
+            HotbarY = frmMainGame.Height - HotBarGFXInfo.Height - 45
         End If
 
         'action panel
-        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.width - 25
-        ActionPanelY = frmMainGame.Height - ActionPanelGFXInfo.height - 45
+        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.Width - 25
+        ActionPanelY = frmMainGame.Height - ActionPanelGFXInfo.Height - 45
 
         'Char Window
-        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.width - 26
-        CharWindowY = frmMainGame.Height - CharPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.Width - 26
+        CharWindowY = frmMainGame.Height - CharPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
         'inv Window
-        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.width - 26
-        InvWindowY = frmMainGame.Height - InvPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.Width - 26
+        InvWindowY = frmMainGame.Height - InvPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
         'skill window
-        SkillWindowX = frmMainGame.Width - SkillPanelGFXInfo.width - 26
-        SkillWindowY = frmMainGame.Height - SkillPanelGFXInfo.height - ActionPanelGFXInfo.height - 50
+        SkillWindowX = frmMainGame.Width - SkillPanelGFXInfo.Width - 26
+        SkillWindowY = frmMainGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
+        If Not NightGfx Is Nothing Then NightGfx.Dispose()
+
+        NightGfx = New SFML.Graphics.RenderTexture(frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)
     End Sub
 
     Public Sub DestroyGame()

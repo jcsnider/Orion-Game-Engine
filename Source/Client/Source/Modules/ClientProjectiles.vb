@@ -295,7 +295,7 @@ Public Module ClientProjectiles
         ' src rect
         With rec
             .top = 0
-            .bottom = ProjectileGFXInfo(Sprite).height
+            .bottom = ProjectileGFXInfo(Sprite).Height
             .left = MapProjectiles(ProjectileNum).dir * PIC_X
             .right = .left + PIC_X
         End With

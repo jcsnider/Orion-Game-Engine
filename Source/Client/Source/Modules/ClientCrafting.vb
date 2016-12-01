@@ -345,7 +345,7 @@ Public Module ClientCrafting
         Dim rec As Rectangle, pgbvalue As Integer
 
         'first render panel
-        RenderTexture(CraftGFX, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.width, CraftGFXInfo.height)
+        RenderTextures(CraftGFX, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.Width, CraftGFXInfo.Height)
 
         y = 10
 
@@ -369,7 +369,7 @@ Public Module ClientCrafting
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            RenderTexture(ItemsGFX(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).width, ItemsGFXInfo(picProductIndex).height)
+            RenderTextures(ItemsGFX(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
 
             DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(lblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
@@ -390,7 +390,7 @@ Public Module ClientCrafting
                 End With
 
 
-                RenderTexture(ItemsGFX(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).width, ItemsGFXInfo(picMaterialIndex(i)).height)
+                RenderTextures(ItemsGFX(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
 
                 DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(lblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
@@ -405,19 +405,19 @@ Public Module ClientCrafting
 
         With rec
             .Y = 0
-            .Height = ProgBarGFXInfo.height
+            .Height = ProgBarGFXInfo.Height
             .X = 0
-            .Width = pgbvalue * ProgBarGFXInfo.width / 100
+            .Width = pgbvalue * ProgBarGFXInfo.Width / 100
         End With
 
-        RenderTexture(ProgBarGFX, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderTextures(ProgBarGFX, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
 
         'amount controls
-        RenderTexture(CharPanelMinGFX, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.width, CharPanelMinGFXInfo.height)
+        RenderTextures(CharPanelMinGFX, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
 
         DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
 
-        RenderTexture(CharPanelPlusGFX, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.width, CharPanelPlusGFXInfo.height)
+        RenderTextures(CharPanelPlusGFX, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
     End Sub
 
     Public Sub ResetCraftPanel()

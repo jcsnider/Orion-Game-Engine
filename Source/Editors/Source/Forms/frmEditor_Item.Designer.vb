@@ -106,8 +106,8 @@ Partial Class frmEditor_Item
         Me.optNoFurnitureEditing = New System.Windows.Forms.RadioButton()
         Me.cmbFurnitureType = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tabInfo = New System.Windows.Forms.TabControl()
+        Me.tabPageInfo = New System.Windows.Forms.TabPage()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.fraRecipe = New System.Windows.Forms.GroupBox()
@@ -127,8 +127,8 @@ Partial Class frmEditor_Item
         Me.fraVitals.SuspendLayout()
         Me.fraFurniture.SuspendLayout()
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.tabInfo.SuspendLayout()
+        Me.tabPageInfo.SuspendLayout()
         Me.fraRecipe.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
@@ -924,46 +924,46 @@ Partial Class frmEditor_Item
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Furniture Type:"
         '
-        'TabControl1
+        'tabInfo
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(228, 5)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(437, 271)
-        Me.TabControl1.TabIndex = 11
+        Me.tabInfo.Controls.Add(Me.tabPageInfo)
+        Me.tabInfo.Controls.Add(Me.TabPage2)
+        Me.tabInfo.Location = New System.Drawing.Point(228, 5)
+        Me.tabInfo.Name = "tabInfo"
+        Me.tabInfo.SelectedIndex = 0
+        Me.tabInfo.Size = New System.Drawing.Size(437, 271)
+        Me.tabInfo.TabIndex = 11
         '
-        'TabPage1
+        'tabPageInfo
         '
-        Me.TabPage1.Controls.Add(Me.fraSkill)
-        Me.TabPage1.Controls.Add(Me.txtDescription)
-        Me.TabPage1.Controls.Add(Me.Label8)
-        Me.TabPage1.Controls.Add(Me.fraRecipe)
-        Me.TabPage1.Controls.Add(Me.chkStackable)
-        Me.TabPage1.Controls.Add(Me.fraVitals)
-        Me.TabPage1.Controls.Add(Me.Label6)
-        Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.cmbType)
-        Me.TabPage1.Controls.Add(Me.scrlPic)
-        Me.TabPage1.Controls.Add(Me.picItem)
-        Me.TabPage1.Controls.Add(Me.txtName)
-        Me.TabPage1.Controls.Add(Me.lblRarity)
-        Me.TabPage1.Controls.Add(Me.lblPic)
-        Me.TabPage1.Controls.Add(Me.scrlAnim)
-        Me.TabPage1.Controls.Add(Me.lblAnim)
-        Me.TabPage1.Controls.Add(Me.scrlPrice)
-        Me.TabPage1.Controls.Add(Me.cmbBind)
-        Me.TabPage1.Controls.Add(Me.scrlRarity)
-        Me.TabPage1.Controls.Add(Me.lblPrice)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(429, 245)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Info"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tabPageInfo.Controls.Add(Me.fraSkill)
+        Me.tabPageInfo.Controls.Add(Me.txtDescription)
+        Me.tabPageInfo.Controls.Add(Me.Label8)
+        Me.tabPageInfo.Controls.Add(Me.fraRecipe)
+        Me.tabPageInfo.Controls.Add(Me.chkStackable)
+        Me.tabPageInfo.Controls.Add(Me.fraVitals)
+        Me.tabPageInfo.Controls.Add(Me.Label6)
+        Me.tabPageInfo.Controls.Add(Me.Label1)
+        Me.tabPageInfo.Controls.Add(Me.Label2)
+        Me.tabPageInfo.Controls.Add(Me.cmbType)
+        Me.tabPageInfo.Controls.Add(Me.scrlPic)
+        Me.tabPageInfo.Controls.Add(Me.picItem)
+        Me.tabPageInfo.Controls.Add(Me.txtName)
+        Me.tabPageInfo.Controls.Add(Me.lblRarity)
+        Me.tabPageInfo.Controls.Add(Me.lblPic)
+        Me.tabPageInfo.Controls.Add(Me.scrlAnim)
+        Me.tabPageInfo.Controls.Add(Me.lblAnim)
+        Me.tabPageInfo.Controls.Add(Me.scrlPrice)
+        Me.tabPageInfo.Controls.Add(Me.cmbBind)
+        Me.tabPageInfo.Controls.Add(Me.scrlRarity)
+        Me.tabPageInfo.Controls.Add(Me.lblPrice)
+        Me.tabPageInfo.Location = New System.Drawing.Point(4, 22)
+        Me.tabPageInfo.Name = "tabPageInfo"
+        Me.tabPageInfo.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageInfo.Size = New System.Drawing.Size(429, 245)
+        Me.tabPageInfo.TabIndex = 0
+        Me.tabPageInfo.Text = "Info"
+        Me.tabPageInfo.UseVisualStyleBackColor = True
         '
         'txtDescription
         '
@@ -1073,7 +1073,7 @@ Partial Class frmEditor_Item
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(671, 551)
         Me.ControlBox = False
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.tabInfo)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
@@ -1097,9 +1097,9 @@ Partial Class frmEditor_Item
         Me.fraFurniture.ResumeLayout(False)
         Me.fraFurniture.PerformLayout()
         CType(Me.picFurniture, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
+        Me.tabInfo.ResumeLayout(False)
+        Me.tabPageInfo.ResumeLayout(False)
+        Me.tabPageInfo.PerformLayout()
         Me.fraRecipe.ResumeLayout(False)
         Me.fraRecipe.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -1188,8 +1188,8 @@ Partial Class frmEditor_Item
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cmbKnockBackTiles As System.Windows.Forms.ComboBox
     Friend WithEvents chkKnockBack As System.Windows.Forms.CheckBox
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents tabInfo As System.Windows.Forms.TabControl
+    Friend WithEvents tabPageInfo As System.Windows.Forms.TabPage
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents Label7 As System.Windows.Forms.Label

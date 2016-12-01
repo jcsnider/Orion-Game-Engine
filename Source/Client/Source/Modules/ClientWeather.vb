@@ -107,7 +107,7 @@ Public Module ClientWeather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderTexture(WeatherGFX, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                RenderTextures(WeatherGFX, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 
@@ -146,7 +146,7 @@ Public Module ClientWeather
         tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
 
         tmpSprite.Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50)
-        tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).height)))
+        tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).Width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).Height)))
 
         GameWindow.Draw(tmpSprite) '
 

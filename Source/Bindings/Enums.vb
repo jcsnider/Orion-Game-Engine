@@ -66,6 +66,7 @@
         Trap
         House
         Craft
+        Light
     End Enum
 
     ''' <Summary> Item Constant </Summary>
@@ -148,7 +149,7 @@
         Screen
     End Enum
 
-    ''' <Summary> Stats used by Players Npcs and Classes </Summary>
+    ''' <Summary> Stats used by Players, Npcs and Classes </Summary>
     Public Enum Stats As Byte
         strength = 1
         endurance

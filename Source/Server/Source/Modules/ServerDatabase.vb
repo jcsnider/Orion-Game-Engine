@@ -126,6 +126,8 @@ Module ServerDatabase
 
         filename = Application.StartupPath & "\data\classes.ini"
 
+        PutVar(filename, "INIT", "MaxClasses", Str(Max_Classes))
+
         For i = 1 To Max_Classes
             PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
             PutVar(filename, "CLASS" & i, "Desc", Trim$(Classes(i).Desc))

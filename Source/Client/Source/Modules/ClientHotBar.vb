@@ -71,7 +71,7 @@ Public Module ClientHotBar
         Dim rec As Rectangle, rec_pos As Rectangle
         If NumItems = 0 Then Exit Sub
 
-        RenderTexture(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.width, HotBarGFXInfo.height)
+        RenderTextures(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.Width, HotBarGFXInfo.Height)
 
         For i = 1 To MAX_HOTBAR
             skillnum = PlayerSkills(Player(MyIndex).Hotbar(i).Slot)
@@ -107,7 +107,7 @@ Public Module ClientHotBar
                     .Width = PIC_X
                 End With
 
-                RenderTexture(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                RenderTextures(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
             End If
 
         Next
