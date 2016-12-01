@@ -32,13 +32,14 @@ Module ServerDatabase
     Sub ClearClasses()
         Dim i As Integer
 
+        ReDim Classes(0 To Max_Classes)
+
         For i = 1 To Max_Classes
             Classes(i) = Nothing
             Classes(i).Name = ""
             Classes(i).Desc = ""
         Next
 
-        ReDim Classes(0 To Max_Classes)
         For i = 0 To Max_Classes
             ReDim Classes(i).Stat(0 To Stats.Count - 1)
             ReDim Classes(i).StartItem(0 To 5)
@@ -59,12 +60,12 @@ Module ServerDatabase
         If Not FileExist(filename) Then CreateClassesIni()
 
         Max_Classes = Val(Getvar(filename, "INIT", "MaxClasses"))
-        ReDim Classes(0 To Max_Classes)
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Count - 1)
-            ReDim Classes(i).StartItem(0 To 5)
-            ReDim Classes(i).StartValue(0 To 5)
-        Next
+        'ReDim Classes(0 To Max_Classes)
+        'For i = 0 To Max_Classes
+        '    ReDim Classes(i).Stat(0 To Stats.Count - 1)
+        '    ReDim Classes(i).StartItem(0 To 5)
+        '    ReDim Classes(i).StartValue(0 To 5)
+        'Next
 
         ClearClasses()
 
@@ -132,6 +133,8 @@ Module ServerDatabase
             PutVar(filename, "CLASS" & i, "Name", Trim$(Classes(i).Name))
             PutVar(filename, "CLASS" & i, "Desc", Trim$(Classes(i).Desc))
 
+            tmpstring = ""
+
             For x = 0 To UBound(Classes(i).MaleSprite)
                 tmpstring = tmpstring & CStr(Classes(i).MaleSprite(x)) & ","
             Next
@@ -144,6 +147,8 @@ Module ServerDatabase
                 tmpstring = tmpstring & CStr(Classes(i).FemaleSprite(x)) & ","
             Next
             PutVar(filename, "CLASS" & i, "FemaleSprite", tmpstring.TrimEnd(","))
+
+            tmpstring = ""
 
             PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
             PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))

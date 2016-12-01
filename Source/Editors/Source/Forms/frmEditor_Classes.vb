@@ -263,7 +263,7 @@ Public Class frmEditor_Classes
     End Sub
 
     Private Sub numBaseExp_ValueChanged(sender As Object, e As EventArgs) Handles numBaseExp.ValueChanged
-        If EditorIndex >= 0 Or EditorIndex > Max_Classes Then Exit Sub
+        If EditorIndex <= 0 Or EditorIndex > Max_Classes Then Exit Sub
 
         Classes(EditorIndex).BaseExp = numBaseExp.Value
     End Sub
