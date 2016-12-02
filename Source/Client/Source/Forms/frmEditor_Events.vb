@@ -506,6 +506,7 @@ Public Class frmEditor_Events
             Case 30
                 cmbBeginQuest.SelectedIndex = 0
                 fraDialogue.Visible = True
+                fraDialogue.BringToFront()
                 fraBeginQuest.Visible = True
                 fraCommands.Visible = False
             'Complete Give/Talk Task
@@ -513,12 +514,14 @@ Public Class frmEditor_Events
                 scrlCompleteQuestTaskQuest.Value = 1
                 scrlCompleteQuestTask.Value = 1
                 fraDialogue.Visible = True
+                fraDialogue.BringToFront()
                 fraCompleteTask.Visible = True
                 fraCommands.Visible = False
             'End Quest
             Case 32
                 cmbEndQuest.SelectedIndex = 0
                 fraDialogue.Visible = True
+                fraDialogue.BringToFront()
                 fraEndQuest.Visible = True
                 fraCommands.Visible = False
         'Map Functions

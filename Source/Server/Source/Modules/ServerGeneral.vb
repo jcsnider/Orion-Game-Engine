@@ -19,6 +19,9 @@
         Console.Title = "Orion+ Server"
         Console.SetWindowSize(120, 20)
 
+        handler = New ConsoleEventDelegate(AddressOf ConsoleEventCallback)
+        SetConsoleCtrlHandler(handler, True)
+
         time1 = GetTickCount()
         'frmServer.Show()
 
@@ -225,9 +228,25 @@
         ' Starts the server loop
         ServerLoop.ServerLoop()
 
-        'cleanup and close
-        DestroyServer()
     End Sub
+
+    Private Function ConsoleEventCallback(eventType As Integer) As Boolean
+        If eventType = 2 Then
+            Console.WriteLine("Console window closing, death imminent")
+            'cleanup and close
+            DestroyServer()
+        End If
+        Return False
+    End Function
+
+    Private handler As ConsoleEventDelegate
+    ' Keeps it from getting garbage collected
+    ' Pinvoke
+    Private Delegate Function ConsoleEventDelegate(eventType As Integer) As Boolean
+
+    <Runtime.InteropServices.DllImport("kernel32.dll", SetLastError:=True)>
+    Private Function SetConsoleCtrlHandler(callback As ConsoleEventDelegate, add As Boolean) As Boolean
+    End Function
 
     Sub UpdateCaption()
         Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
