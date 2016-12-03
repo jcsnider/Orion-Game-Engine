@@ -174,6 +174,7 @@ Module ClientGeneral
         CheckFog()
         CacheMusic()
         CacheSound()
+        CheckEmotes()
 
         CheckFurniture()
         CheckProjectiles()

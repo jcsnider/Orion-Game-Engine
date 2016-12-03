@@ -138,6 +138,9 @@
         'AutoMapper
         SAutoMapper
 
+        'emotes
+        SEmote
+
         ' Make sure SMSG_COUNT is below everything else
         SMSG_COUNT
     End Enum
@@ -283,6 +286,9 @@
         'AutoMapper
         CRequestAutoMap
         CSaveAutoMap
+
+        'emotes
+        CEmote
 
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT

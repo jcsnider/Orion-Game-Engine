@@ -219,4 +219,6 @@ Module ClientGlobals
     Public CraftTimerEnabled As Boolean
     Public CraftTimer As Integer
 
+    Public ShowAnimLayers As Boolean
+    Public ShowAnimTimer As Integer
 End Module

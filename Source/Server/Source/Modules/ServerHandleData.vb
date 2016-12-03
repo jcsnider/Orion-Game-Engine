@@ -147,6 +147,9 @@
         'Auto Mapper
         Packets.Add(ClientPackets.CRequestAutoMap, AddressOf Packet_RequestAutoMap)
         Packets.Add(ClientPackets.CSaveAutoMap, AddressOf Packet_SaveAutoMap)
+
+        'emotes
+        Packets.Add(ClientPackets.CEmote, AddressOf Packet_Emote)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -4126,5 +4129,19 @@
 
         StartAutomapper(MapStart, MapSize, MapX, MapY)
 
+    End Sub
+
+    Private Sub Packet_Emote(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim Emote As Integer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CEmote Then Exit Sub
+        Emote = Buffer.ReadInteger
+
+        SendEmote(index, Emote)
+
+        Buffer = Nothing
     End Sub
 End Module

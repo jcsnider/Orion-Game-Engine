@@ -56,6 +56,11 @@ Module ClientGameLogic
                     End If
                 End If
 
+                If ShowAnimTimer < Tick Then
+                    ShowAnimLayers = Not ShowAnimLayers
+                    ShowAnimTimer = Tick + 500
+                End If
+
                 For i = 1 To Byte.MaxValue
                     CheckAnimInstance(i)
                 Next
@@ -486,6 +491,20 @@ Module ClientGameLogic
             Command = Split(MyText, Space(1))
 
             Select Case Command(0)
+                Case "/emote"
+                    ' Checks to make sure we have more than one string in the array
+                    If UBound(Command) < 1 Then
+                        AddText("Usage: /emote (number 1 to 11)", ColorType.Yellow)
+                        GoTo Continue1
+                    End If
+
+                    If Not IsNumeric(Command(1)) Then
+                        AddText("Usage: /emote (number 1 to 11)", ColorType.Yellow)
+                        GoTo Continue1
+                    End If
+
+                    SendUseEmote(Command(1))
+
                 Case "/help"
                     AddText("Social Commands:", ColorType.Yellow)
                     AddText("'msghere = Broadcast Message", ColorType.Yellow)

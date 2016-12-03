@@ -138,6 +138,7 @@ Module ClientGraphics
     Public NumSkillIcons As Integer
     Public NumFaces As Integer
     Public NumFogs As Integer
+    Public NumEmotes As Integer
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
@@ -154,11 +155,14 @@ Module ClientGraphics
     Public EmptyEXPBarGFX As Texture
     Public EmptyEXPBarGFXInfo As GraphicInfo
 
-    Public NightGfx As RenderTexture
+    Public NightGFX As RenderTexture
     Public NightSprite As Sprite
 
     Public LightGFX As Texture
     Public LightGFXInfo As GraphicInfo
+
+    Public EmotesGFX() As Texture
+    Public EmotesGFXInfo() As GraphicInfo
 
     Public Structure GraphicInfo
         Dim Width As Integer
@@ -522,7 +526,50 @@ Module ClientGraphics
 
         End If
 
+        ReDim EmotesGFX(0 To NumEmotes)
+        ReDim EmotesGFXInfo(0 To NumEmotes)
+        For i = 1 To NumEmotes
+            'Load texture first, dont care about memory streams (just use the filename)
+            EmotesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "Emotes\" & i & GFX_EXT)
 
+            'Cache the width and height
+            EmotesGFXInfo(i).Width = EmotesGFX(i).Size.X
+            EmotesGFXInfo(i).Height = EmotesGFX(i).Size.Y
+
+        Next
+    End Sub
+
+    Public Sub DrawEmotes(ByVal x2 As Long, ByVal y2 As Long, ByVal Sprite As Long)
+        Dim rec As Rectangle
+        Dim X As Long, y As Long, Anim As Long
+        Dim width As Long, height As Long
+
+        ' If debug mode, handle error then exit out
+
+        If Sprite < 1 Or Sprite > NumEmotes Then Exit Sub
+
+        If ShowAnimLayers = True Then
+            Anim = 1
+        Else
+            Anim = 0
+        End If
+
+        With rec
+            .Y = 0
+            .Height = PIC_X
+            .X = Anim * (EmotesGFXInfo(Sprite).Width / 2)
+            .Width = (EmotesGFXInfo(Sprite).Width / 2)
+        End With
+
+        X = ConvertMapX(x2)
+        y = ConvertMapY(y2) - (PIC_Y + 16)
+        width = (rec.Right - rec.Left)
+        height = (rec.Bottom - rec.Top)
+
+        Dim tmpSprite As Sprite = New Sprite(EmotesGFX(Sprite))
+        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
+        tmpSprite.Position = New SFML.Window.Vector2f(X, y)
+        GameWindow.Draw(tmpSprite)
     End Sub
 
     Sub DrawNight()
@@ -910,6 +957,20 @@ Module ClientGraphics
                 End If
             End If
         Next
+
+        ' Check to see if we want to stop showing emote
+        With Player(Index)
+            If .EmoteTimer < GetTickCount() Then
+                .Emote = 0
+                .EmoteTimer = 0
+            End If
+        End With
+
+        'check for emotes
+        'Player(Index).Emote = 4
+        If Player(Index).Emote > 0 Then
+            DrawEmotes(X, Y, Player(Index).Emote)
+        End If
     End Sub
 
     Public Sub DrawPaperdoll(ByVal x2 As Integer, ByVal y2 As Integer, ByVal Sprite As Integer, ByVal Anim As Integer, ByVal spritetop As Integer)
@@ -1025,6 +1086,16 @@ Module ClientGraphics
         destrec = New Rectangle(X, Y, CharacterGFXInfo(Sprite).Width / 4, CharacterGFXInfo(Sprite).Height / 4)
 
         DrawCharacter(Sprite, X, Y, srcrec)
+
+        If Npc(MapNpc(MapNpcNum).Num).Behaviour = NpcBehavior.Quest Then
+            If CanStartQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum) Then
+                If Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QUEST_NOT_STARTED Then
+                    DrawEmotes(X, Y, 5)
+                End If
+            ElseIf Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QUEST_STARTED Then
+                DrawEmotes(X, Y, 9)
+            End If
+        End If
 
     End Sub
 
@@ -2097,6 +2168,10 @@ Module ClientGraphics
             If Not ProjectileGFX(i) Is Nothing Then ProjectileGFX(i).Dispose()
         Next
 
+        For i = 0 To NumEmotes
+            If Not EmotesGFX(i) Is Nothing Then EmotesGFX(i).Dispose()
+        Next
+
         If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
         If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
@@ -2128,6 +2203,8 @@ Module ClientGraphics
         If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
         If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
 
+        If Not LightGFX Is Nothing Then LightGFX.Dispose()
+        If Not NightGfx Is Nothing Then NightGfx.Dispose()
     End Sub
 
     Sub DrawHUD()

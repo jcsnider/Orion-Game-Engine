@@ -120,6 +120,18 @@ Module ClientDataBase
         If NumFogs = 0 Then Exit Sub
     End Sub
 
+    Public Sub CheckEmotes()
+        Dim i As Integer
+        i = 1
+
+        While FileExist(Application.StartupPath & GFX_PATH & "Emotes\" & i & GFX_EXT)
+            NumEmotes = NumEmotes + 1
+            i = i + 1
+        End While
+
+        If NumEmotes = 0 Then Exit Sub
+    End Sub
+
     Public Sub CacheMusic()
         Dim Files As String() = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg")
         Dim MaxNum As String = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg").Count

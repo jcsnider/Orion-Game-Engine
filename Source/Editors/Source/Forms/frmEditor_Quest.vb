@@ -206,7 +206,7 @@
     Private Sub btnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
         Quest(EditorIndex).TaskCount = Quest(EditorIndex).TaskCount + 1
 
-        ReDim Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
+        ReDim Preserve Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
 
         SelectedTask = Quest(EditorIndex).TaskCount
 

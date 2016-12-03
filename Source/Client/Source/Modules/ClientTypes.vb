@@ -99,6 +99,7 @@
         Dim X As Byte
         Dim Y As Byte
         Dim Dir As Byte
+
         ' Client use only
         Dim MaxHP As Integer
         Dim MaxMP As Integer
@@ -110,6 +111,9 @@
         Dim AttackTimer As Integer
         Dim MapGetTimer As Integer
         Dim Steps As Byte
+
+        Dim Emote As Integer
+        Dim EmoteTimer As Integer
 
         Dim PlayerQuest() As PlayerQuestRec
 

@@ -389,7 +389,7 @@
                                 If QuestCompleted(Attacker, Npc(NpcNum).QuestNum) Then
                                     PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay))
                                     Exit Function
-                                ElseIf Not CanStartQuest(Attacker, Npc(NpcNum).QuestNum) Then
+                                ElseIf Not CanStartQuest(Attacker, Npc(NpcNum).QuestNum) And Not QuestInProgress(Attacker, Npc(NpcNum).QuestNum) Then
                                     CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
                                     CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
                                     CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)

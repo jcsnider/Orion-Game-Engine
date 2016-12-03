@@ -190,6 +190,9 @@
         Packets.Add(ServerPackets.SUpdateCraft, AddressOf Packet_UpdateCraft)
 
         Packets.Add(ServerPackets.SClassEditor, AddressOf Packet_ClassEditor)
+
+        'emotes
+        Packets.Add(ServerPackets.SEmote, AddressOf Packet_Emote)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -2591,6 +2594,27 @@
         InitClassEditor = True
 
         Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_Emote(ByVal Data() As Byte)
+        Dim buffer As ByteBuffer
+        Dim index As Integer, emote As Integer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        If buffer.ReadInteger <> ServerPackets.SEmote Then Exit Sub
+
+        index = buffer.ReadInteger
+        emote = buffer.ReadInteger
+
+        With Player(index)
+            .Emote = emote
+            .EmoteTimer = GetTickCount() + 5000
+        End With
+
+        buffer = Nothing
+
     End Sub
 
 End Module

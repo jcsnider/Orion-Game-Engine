@@ -1216,4 +1216,13 @@ Module ClientTCP
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
+    Public Sub SendUseEmote(ByVal Emote As Integer)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ClientPackets.CEmote)
+        Buffer.WriteInteger(Emote)
+        SendData(Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
 End Module

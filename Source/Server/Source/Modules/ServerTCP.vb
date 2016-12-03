@@ -2161,4 +2161,18 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
+    Sub SendEmote(ByVal Index As Integer, ByVal Emote As Integer)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SEmote)
+
+        Buffer.WriteInteger(Index)
+        Buffer.WriteInteger(Emote)
+
+        SendDataToMap(GetPlayerMap(Index), Buffer.ToArray())
+
+        Buffer = Nothing
+    End Sub
+
 End Module

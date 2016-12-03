@@ -484,6 +484,17 @@
         End If
     End Function
 
+    Public Function CanEndQuest(ByVal Index As Integer, QuestNum As Integer) As Boolean
+        CanEndQuest = False
+
+        If Player(Index).PlayerQuest(QuestNum).ActualTask >= Quest(QuestNum).Task.Length Then
+            CanEndQuest = True
+        End If
+        If Quest(QuestNum).Task(Player(Index).PlayerQuest(QuestNum).ActualTask).QuestEnd = 1 Then
+            CanEndQuest = True
+        End If
+    End Function
+
     Function HasItem(ByVal Index As Integer, ByVal itemNum As Integer) As Integer
         Dim i As Integer
 
