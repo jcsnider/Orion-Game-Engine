@@ -868,21 +868,23 @@
         End If
     End Sub
 
-    Public Function RandomNpcAttack(ByVal MapNum As Integer, ByVal NpcNum As Integer) As Integer
+    Public Function RandomNpcAttack(ByVal MapNum As Integer, ByVal MapNpcNum As Integer) As Integer
         Dim i As Integer, SkillList As New List(Of Byte)
 
         RandomNpcAttack = 0
 
-        If MapNpc(MapNum).Npc(NpcNum).SkillBuffer > 0 Then Exit Function
+        If MapNpc(MapNum).Npc(MapNpcNum).SkillBuffer > 0 Then Exit Function
 
         For i = 1 To MAX_NPC_SKILLS
-            If Npc(NpcNum).Skill(i) > 0 Then
-                SkillList.Add(Npc(NpcNum).Skill(i))
+            If Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Skill(i) > 0 Then
+                SkillList.Add(Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Skill(i))
             End If
         Next
 
         If SkillList.Count > 1 Then
             RandomNpcAttack = SkillList(Random(0, SkillList.Count - 1))
+        Else
+            RandomNpcAttack = 0
         End If
 
     End Function

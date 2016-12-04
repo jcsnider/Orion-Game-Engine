@@ -17,25 +17,27 @@ Module ClientText
 
 
     Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
-        Dim mystring As Text = New Text(text, SFMLGameFont)
-        mystring.CharacterSize = TextSize
+        Dim BackString As Text = New Text(text, SFMLGameFont)
+        Dim FrontString As Text = New Text(text, SFMLGameFont)
+        BackString.CharacterSize = TextSize
+        FrontString.CharacterSize = TextSize
 
-        mystring.Color = BackColor
-        mystring.Position = New SFML.Window.Vector2f(X - 1, y - 1)
-        target.Draw(mystring)
+        BackString.Color = BackColor
+        BackString.Position = New SFML.Window.Vector2f(X, y)
+        target.Draw(BackString)
 
-        mystring.Position = New SFML.Window.Vector2f(X - 1, y + 1)
-        target.Draw(mystring)
+        BackString.Position = New SFML.Window.Vector2f(X - 1, y + 1)
+        target.Draw(BackString)
 
-        mystring.Position = New SFML.Window.Vector2f(X + 1, y + 1)
-        target.Draw(mystring)
+        BackString.Position = New SFML.Window.Vector2f(X + 1, y + 1)
+        target.Draw(BackString)
 
-        mystring.Position = New SFML.Window.Vector2f(X + 1, y + -1)
-        target.Draw(mystring)
+        BackString.Position = New SFML.Window.Vector2f(X + 1, y + -1)
+        target.Draw(BackString)
 
-        mystring.Color = color
-        mystring.Position = New SFML.Window.Vector2f(X, y)
-        target.Draw(mystring)
+        FrontString.Color = color
+        FrontString.Position = New SFML.Window.Vector2f(X + 1, y + 1)
+        target.Draw(FrontString)
 
     End Sub
 

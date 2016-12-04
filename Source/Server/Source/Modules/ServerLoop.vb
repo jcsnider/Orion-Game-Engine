@@ -647,7 +647,7 @@ Module ServerLoop
                                         If Not CanPlayerBlockHit(Target) Then
                                             If Random(1, 3) = 1 Then
                                                 'Damage = Npc(NpcNum).Stat(StatType.Strength) - GetPlayerProtection(Target)
-                                                Dim skillnum As Byte = RandomNpcAttack(MapNum, MapNpc(MapNum).Npc(x).Num)
+                                                Dim skillnum As Byte = RandomNpcAttack(MapNum, x)
                                                 If skillnum > 0 Then
                                                     BufferNpcSkill(MapNum, x, skillnum)
                                                 Else
@@ -701,6 +701,17 @@ Module ServerLoop
                         End If
                     End If
 
+                    If MapNpc(MapNum).Npc(x).Num > 0 And TickCount > GiveNPCMPTimer + 10000 Then
+                        If MapNpc(MapNum).Npc(x).Vital(Vitals.MP) > 0 Then
+                            MapNpc(MapNum).Npc(x).Vital(Vitals.MP) = MapNpc(MapNum).Npc(x).Vital(Vitals.MP) + GetNpcVitalRegen(NpcNum, Vitals.MP)
+
+                            ' Check if they have more then they should and if so just set it to max
+                            If MapNpc(MapNum).Npc(x).Vital(Vitals.MP) > GetNpcMaxVital(NpcNum, Vitals.MP) Then
+                                MapNpc(MapNum).Npc(x).Vital(Vitals.MP) = GetNpcMaxVital(NpcNum, Vitals.MP)
+                            End If
+                        End If
+                    End If
+
                     ' ////////////////////////////////////////////////////////
                     ' // This is used for checking if an NPC is dead or not //
                     ' ////////////////////////////////////////////////////////
@@ -733,6 +744,9 @@ Module ServerLoop
         If GetTickCount() > GiveNPCHPTimer + 10000 Then
             GiveNPCHPTimer = GetTickCount()
         End If
+        If GetTickCount() > GiveNPCMPTimer + 10000 Then
+            GiveNPCMPTimer = GetTickCount()
+        End If
 
         ' Make sure we reset the timer for door closing
         If GetTickCount() > KeyTimer + 15000 Then
@@ -753,6 +767,11 @@ Module ServerLoop
         Select Case Vital
             Case Vitals.HP
                 i = Npc(NpcNum).Stat(Stats.vitality) \ 3
+
+                If i < 1 Then i = 1
+                GetNpcVitalRegen = i
+            Case Vitals.MP
+                i = Npc(NpcNum).Stat(Stats.intelligence) \ 3
 
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i

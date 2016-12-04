@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 
 Module ClientGeneral
-    Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Integer) As Integer
+    'Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Integer) As Integer
     Public started As Boolean
 
     Public Function GetTickCount() As Integer

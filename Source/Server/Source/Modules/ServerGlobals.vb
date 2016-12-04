@@ -6,6 +6,8 @@
     Public KeyTimer As Integer
     ' Used for gradually giving back npcs hp
     Public GiveNPCHPTimer As Integer
+    Public GiveNPCMPTimer As Integer
+
     ' Used for logging
     Public ServerLog As Boolean
     ' Text vars
