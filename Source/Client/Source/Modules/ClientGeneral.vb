@@ -410,9 +410,6 @@ Module ClientGeneral
         SkillWindowX = frmMainGame.Width - SkillPanelGFXInfo.Width - 26
         SkillWindowY = frmMainGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
-        If Not NightGfx Is Nothing Then NightGfx.Dispose()
-
-        NightGfx = New SFML.Graphics.RenderTexture(frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)
     End Sub
 
     Public Sub DestroyGame()

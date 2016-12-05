@@ -155,12 +155,6 @@ Module ClientGraphics
     Public EmptyEXPBarGFX As Texture
     Public EmptyEXPBarGFXInfo As GraphicInfo
 
-    Public NightGFX As RenderTexture
-    Public NightSprite As Sprite
-
-    Public LightGFX As Texture
-    Public LightGFXInfo As GraphicInfo
-
     Public EmotesGFX() As Texture
     Public EmotesGFXInfo() As GraphicInfo
 
@@ -187,8 +181,6 @@ Module ClientGraphics
         TmpSkillWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
-
-        NightGfx = New RenderTexture(frmMainGame.picscreen.Width, frmMainGame.picscreen.Height)
 
         'this stuff only loads when needed :)
 
@@ -515,17 +507,6 @@ Module ClientGraphics
             ProgBarGFXInfo.Height = ProgBarGFX.Size.Y
         End If
 
-        LightGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
-            'Load texture first, dont care about memory streams (just use the filename)
-            LightGFX = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
-
-            'Cache the width and height
-            LightGFXInfo.Width = LightGFX.Size.X
-            LightGFXInfo.Height = LightGFX.Size.Y
-
-        End If
-
         ReDim EmotesGFX(0 To NumEmotes)
         ReDim EmotesGFXInfo(0 To NumEmotes)
         For i = 1 To NumEmotes
@@ -570,34 +551,6 @@ Module ClientGraphics
         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
         tmpSprite.Position = New SFML.Window.Vector2f(X, y)
         GameWindow.Draw(tmpSprite)
-    End Sub
-
-    Sub DrawNight()
-        'Create a RenderTexture for our Dark/Night overlay
-
-        NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 200))
-        NightSprite = New Sprite(NightGfx.Texture)
-
-        For X = TileView.left To TileView.right
-            For Y = TileView.top To TileView.bottom
-
-                If IsValidMapPoint(X, Y) Then
-                    If Map.Tile(X, Y).Type = TileType.LIGHT Then
-
-                        Dim X1 = ConvertMapX(X * 32) + 16 - LightGFXInfo.Width / 2
-                        Dim Y1 = ConvertMapY(Y * 32) + 16 - LightGFXInfo.Height / 2
-
-                        'Create the light texture to multiply over the dark texture.
-                        Dim lightSprite As New Sprite(LightGFX)
-                        lightSprite.Position = New SFML.Window.Vector2f(X1, Y1)
-                        NightGfx.Draw(lightSprite, New RenderStates(BlendMode.Multiply))
-                    End If
-                End If
-
-            Next Y
-        Next X
-        NightGfx.Display()
-        GameWindow.Draw(NightSprite)
     End Sub
 
     Sub DrawChat()
@@ -2203,8 +2156,6 @@ Module ClientGraphics
         If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
         If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
 
-        If Not LightGFX Is Nothing Then LightGFX.Dispose()
-        If Not NightGfx Is Nothing Then NightGfx.Dispose()
     End Sub
 
     Sub DrawHUD()

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditor_MapEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmEditor_MapEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_MapEditor))
         Me.ToolStrip = New System.Windows.Forms.ToolStrip()
@@ -31,10 +31,9 @@ Partial Class frmEditor_MapEditor
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbFill = New System.Windows.Forms.ToolStripButton()
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.cmbMapList = New System.Windows.Forms.ToolStripComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnLoadMap = New System.Windows.Forms.Button()
-        Me.cmbMapList = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -215,7 +214,7 @@ Partial Class frmEditor_MapEditor
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripLabel1, Me.cmbMapList})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(1285, 25)
@@ -273,44 +272,26 @@ Partial Class frmEditor_MapEditor
         Me.tsbClear.Size = New System.Drawing.Size(85, 22)
         Me.tsbClear.Text = "Clear Layer"
         '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(52, 22)
+        Me.ToolStripLabel1.Text = "Map List"
+        '
+        'cmbMapList
+        '
+        Me.cmbMapList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbMapList.Name = "cmbMapList"
+        Me.cmbMapList.Size = New System.Drawing.Size(121, 25)
+        '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.btnLoadMap)
-        Me.Panel1.Controls.Add(Me.cmbMapList)
-        Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Controls.Add(Me.tabpages)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 25)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(327, 587)
         Me.Panel1.TabIndex = 18
-        '
-        'btnLoadMap
-        '
-        Me.btnLoadMap.Location = New System.Drawing.Point(249, 12)
-        Me.btnLoadMap.Name = "btnLoadMap"
-        Me.btnLoadMap.Size = New System.Drawing.Size(75, 23)
-        Me.btnLoadMap.TabIndex = 24
-        Me.btnLoadMap.Text = "Load"
-        Me.btnLoadMap.UseVisualStyleBackColor = True
-        '
-        'cmbMapList
-        '
-        Me.cmbMapList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMapList.FormattingEnabled = True
-        Me.cmbMapList.Location = New System.Drawing.Point(40, 13)
-        Me.cmbMapList.Name = "cmbMapList"
-        Me.cmbMapList.Size = New System.Drawing.Size(203, 21)
-        Me.cmbMapList.TabIndex = 23
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(3, 16)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(31, 13)
-        Me.Label15.TabIndex = 22
-        Me.Label15.Text = "Map:"
         '
         'tabpages
         '
@@ -319,10 +300,10 @@ Partial Class frmEditor_MapEditor
         Me.tabpages.Controls.Add(Me.tpNpcs)
         Me.tabpages.Controls.Add(Me.tpDirBlock)
         Me.tabpages.Controls.Add(Me.tpEvents)
-        Me.tabpages.Location = New System.Drawing.Point(3, 41)
+        Me.tabpages.Location = New System.Drawing.Point(3, 3)
         Me.tabpages.Name = "tabpages"
         Me.tabpages.SelectedIndex = 0
-        Me.tabpages.Size = New System.Drawing.Size(322, 521)
+        Me.tabpages.Size = New System.Drawing.Size(322, 581)
         Me.tabpages.TabIndex = 18
         '
         'tpTiles
@@ -340,7 +321,7 @@ Partial Class frmEditor_MapEditor
         Me.tpTiles.Location = New System.Drawing.Point(4, 22)
         Me.tpTiles.Name = "tpTiles"
         Me.tpTiles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpTiles.Size = New System.Drawing.Size(314, 495)
+        Me.tpTiles.Size = New System.Drawing.Size(314, 555)
         Me.tpTiles.TabIndex = 0
         Me.tpTiles.Text = "Tiles"
         Me.tpTiles.UseVisualStyleBackColor = True
@@ -350,7 +331,7 @@ Partial Class frmEditor_MapEditor
         Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAutoTile.FormattingEnabled = True
         Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)"})
-        Me.cmbAutoTile.Location = New System.Drawing.Point(59, 470)
+        Me.cmbAutoTile.Location = New System.Drawing.Point(60, 526)
         Me.cmbAutoTile.Name = "cmbAutoTile"
         Me.cmbAutoTile.Size = New System.Drawing.Size(119, 21)
         Me.cmbAutoTile.TabIndex = 17
@@ -358,7 +339,7 @@ Partial Class frmEditor_MapEditor
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(4, 473)
+        Me.Label11.Location = New System.Drawing.Point(5, 529)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 13)
         Me.Label11.TabIndex = 16
@@ -367,7 +348,7 @@ Partial Class frmEditor_MapEditor
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(142, 446)
+        Me.Label10.Location = New System.Drawing.Point(143, 502)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(36, 13)
         Me.Label10.TabIndex = 15
@@ -378,7 +359,7 @@ Partial Class frmEditor_MapEditor
         Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayers.FormattingEnabled = True
         Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
-        Me.cmbLayers.Location = New System.Drawing.Point(184, 443)
+        Me.cmbLayers.Location = New System.Drawing.Point(185, 499)
         Me.cmbLayers.Name = "cmbLayers"
         Me.cmbLayers.Size = New System.Drawing.Size(121, 21)
         Me.cmbLayers.TabIndex = 14
@@ -386,7 +367,7 @@ Partial Class frmEditor_MapEditor
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 446)
+        Me.Label9.Location = New System.Drawing.Point(7, 502)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(41, 13)
         Me.Label9.TabIndex = 13
@@ -396,7 +377,7 @@ Partial Class frmEditor_MapEditor
         '
         Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTileSets.FormattingEnabled = True
-        Me.cmbTileSets.Location = New System.Drawing.Point(53, 443)
+        Me.cmbTileSets.Location = New System.Drawing.Point(54, 499)
         Me.cmbTileSets.Name = "cmbTileSets"
         Me.cmbTileSets.Size = New System.Drawing.Size(83, 21)
         Me.cmbTileSets.TabIndex = 12
@@ -407,7 +388,7 @@ Partial Class frmEditor_MapEditor
         Me.pnlBack.Controls.Add(Me.picBackSelect)
         Me.pnlBack.Location = New System.Drawing.Point(6, 8)
         Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(267, 397)
+        Me.pnlBack.Size = New System.Drawing.Size(286, 454)
         Me.pnlBack.TabIndex = 9
         '
         'picBackSelect
@@ -415,14 +396,14 @@ Partial Class frmEditor_MapEditor
         Me.picBackSelect.BackColor = System.Drawing.Color.Black
         Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
         Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(267, 397)
+        Me.picBackSelect.Size = New System.Drawing.Size(283, 451)
         Me.picBackSelect.TabIndex = 1
         Me.picBackSelect.TabStop = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(78, 423)
+        Me.Label1.Location = New System.Drawing.Point(66, 483)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(174, 13)
         Me.Label1.TabIndex = 11
@@ -431,7 +412,7 @@ Partial Class frmEditor_MapEditor
         'scrlPictureX
         '
         Me.scrlPictureX.LargeChange = 1
-        Me.scrlPictureX.Location = New System.Drawing.Point(3, 408)
+        Me.scrlPictureX.Location = New System.Drawing.Point(6, 465)
         Me.scrlPictureX.Name = "scrlPictureX"
         Me.scrlPictureX.Size = New System.Drawing.Size(289, 16)
         Me.scrlPictureX.TabIndex = 1
@@ -439,7 +420,7 @@ Partial Class frmEditor_MapEditor
         'scrlPictureY
         '
         Me.scrlPictureY.LargeChange = 1
-        Me.scrlPictureY.Location = New System.Drawing.Point(276, 8)
+        Me.scrlPictureY.Location = New System.Drawing.Point(295, 7)
         Me.scrlPictureY.Name = "scrlPictureY"
         Me.scrlPictureY.Size = New System.Drawing.Size(16, 398)
         Me.scrlPictureY.TabIndex = 2
@@ -465,7 +446,7 @@ Partial Class frmEditor_MapEditor
         Me.tpAttributes.Location = New System.Drawing.Point(4, 22)
         Me.tpAttributes.Name = "tpAttributes"
         Me.tpAttributes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAttributes.Size = New System.Drawing.Size(314, 495)
+        Me.tpAttributes.Size = New System.Drawing.Size(314, 555)
         Me.tpAttributes.TabIndex = 3
         Me.tpAttributes.Text = "Attributes"
         Me.tpAttributes.UseVisualStyleBackColor = True
@@ -650,7 +631,7 @@ Partial Class frmEditor_MapEditor
         Me.tpNpcs.Location = New System.Drawing.Point(4, 22)
         Me.tpNpcs.Name = "tpNpcs"
         Me.tpNpcs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpNpcs.Size = New System.Drawing.Size(314, 495)
+        Me.tpNpcs.Size = New System.Drawing.Size(314, 555)
         Me.tpNpcs.TabIndex = 1
         Me.tpNpcs.Text = "Npc's"
         Me.tpNpcs.UseVisualStyleBackColor = True
@@ -698,7 +679,7 @@ Partial Class frmEditor_MapEditor
         Me.tpDirBlock.Location = New System.Drawing.Point(4, 22)
         Me.tpDirBlock.Name = "tpDirBlock"
         Me.tpDirBlock.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpDirBlock.Size = New System.Drawing.Size(314, 495)
+        Me.tpDirBlock.Size = New System.Drawing.Size(314, 555)
         Me.tpDirBlock.TabIndex = 4
         Me.tpDirBlock.Text = "Directional Block"
         Me.tpDirBlock.UseVisualStyleBackColor = True
@@ -718,7 +699,7 @@ Partial Class frmEditor_MapEditor
         Me.tpEvents.Location = New System.Drawing.Point(4, 22)
         Me.tpEvents.Name = "tpEvents"
         Me.tpEvents.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpEvents.Size = New System.Drawing.Size(314, 495)
+        Me.tpEvents.Size = New System.Drawing.Size(314, 555)
         Me.tpEvents.TabIndex = 5
         Me.tpEvents.Text = "Events"
         Me.tpEvents.UseVisualStyleBackColor = True
@@ -1743,7 +1724,6 @@ Partial Class frmEditor_MapEditor
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.tabpages.ResumeLayout(False)
         Me.tpTiles.ResumeLayout(False)
         Me.tpTiles.PerformLayout()
@@ -1899,9 +1879,6 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents lblMap As Label
     Friend WithEvents txtRight As TextBox
     Friend WithEvents txtUp As TextBox
-    Friend WithEvents btnLoadMap As Button
-    Friend WithEvents cmbMapList As ComboBox
-    Friend WithEvents Label15 As Label
     Friend WithEvents pnlAttributes As Panel
     Friend WithEvents fraBuyHouse As GroupBox
     Friend WithEvents btnHouseTileOk As Button
@@ -1954,4 +1931,6 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents btnTrap As Button
     Friend WithEvents scrlTrap As HScrollBar
     Friend WithEvents lblTrap As Label
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents cmbMapList As ToolStripComboBox
 End Class

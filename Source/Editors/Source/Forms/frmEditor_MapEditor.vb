@@ -361,6 +361,9 @@ Public Class frmEditor_MapEditor
         MapEditorClearLayer()
     End Sub
 
+    Private Sub cmbMapList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapList.SelectedIndexChanged
+        SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
+    End Sub
 #End Region
 
 #Region "Npc's"
@@ -581,13 +584,10 @@ Public Class frmEditor_MapEditor
         End With
     End Sub
 
-    Private Sub btnLoadMap_Click(sender As Object, e As EventArgs) Handles btnLoadMap.Click
-        SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
-    End Sub
-
 
 
 
 
 #End Region
+
 End Class

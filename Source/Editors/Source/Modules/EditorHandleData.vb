@@ -268,6 +268,8 @@
 
         MapData = False
 
+        ClearMap()
+
         SyncLock MapLock
             If Buffer.ReadInteger = 1 Then
 

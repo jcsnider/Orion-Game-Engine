@@ -789,6 +789,9 @@ Public Module EditorAutoTiles
         Dim srcrect As New Rectangle(0, 0, 0, 0)
         Dim tmpSprite As Sprite
 
+        If GettingMap Then Exit Sub
+        If MapData = False Then Exit Sub
+
         ' calculate the offset
         If forceFrame > 0 Then
             Select Case forceFrame - 1

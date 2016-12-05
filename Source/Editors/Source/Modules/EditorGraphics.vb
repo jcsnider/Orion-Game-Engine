@@ -594,6 +594,7 @@ Module EditorGraphics
         Dim srcrect As New Rectangle(0, 0, 0, 0)
 
         If GettingMap Then Exit Sub
+        If MapData = False Then Exit Sub
 
         With Map.Tile(X, Y)
             For i = MapLayer.Ground To MapLayer.Mask2
@@ -636,6 +637,7 @@ Module EditorGraphics
         'Dim tmpSprite As Sprite
 
         If GettingMap Then Exit Sub
+        If MapData = False Then Exit Sub
 
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
