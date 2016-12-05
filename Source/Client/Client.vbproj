@@ -293,7 +293,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Light.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data Files\Graphics\Night.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Tilesets\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

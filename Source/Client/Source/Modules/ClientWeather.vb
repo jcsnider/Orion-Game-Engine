@@ -148,7 +148,7 @@ Public Module ClientWeather
         tmpSprite.Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50)
         tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).Width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).Height)))
 
-        GameWindow.Draw(tmpSprite) '
+        GameWindow.Draw(tmpSprite)
 
     End Sub
 

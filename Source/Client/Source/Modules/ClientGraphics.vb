@@ -158,6 +158,13 @@ Module ClientGraphics
     Public EmotesGFX() As Texture
     Public EmotesGFXInfo() As GraphicInfo
 
+    ' #Day/Night
+    'Public NightGfx As Texture
+    'Public NightGfxInfo As GraphicInfo
+
+    'Public LightGfx As Texture
+    'Public LightGfxInfo As GraphicInfo
+
     Public Structure GraphicInfo
         Dim Width As Integer
         Dim Height As Integer
@@ -518,6 +525,24 @@ Module ClientGraphics
             EmotesGFXInfo(i).Height = EmotesGFX(i).Size.Y
 
         Next
+
+        'LightGfxInfo = New GraphicInfo
+        'If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
+        '    LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
+
+        '    'Cache the width and height
+        '    LightGfxInfo.Width = LightGfx.Size.X
+        '    LightGfxInfo.Height = LightGfx.Size.Y
+        'End If
+
+        'NightGfxInfo = New GraphicInfo
+        'If FileExist(Application.StartupPath & GFX_PATH & "Night" & GFX_EXT) Then
+        '    NightGfx = New Texture(Application.StartupPath & GFX_PATH & "Night" & GFX_EXT)
+
+        '    'Cache the width and height
+        '    NightGfxInfo.Width = NightGfx.Size.X
+        '    NightGfxInfo.Height = NightGfx.Size.Y
+        'End If
     End Sub
 
     Public Sub DrawEmotes(ByVal x2 As Long, ByVal y2 As Long, ByVal Sprite As Long)
@@ -3493,5 +3518,46 @@ NextLoop:
 
         LastTileset = tileset
     End Sub
+
+    'Sub DrawNight()
+
+    '    If Map.Moral = MapMoral.Indoors Then Exit Sub
+
+    '    Dim currLightLevel As Integer = 200
+    '    'If InMapEditor Then
+    '    '    currLightLevel = frmMainGame.nudLightLevel.Value
+    '    'Else : currLightLevel = CurrLevel
+    '    'End If
+
+    '    Dim tmpNight1 As Sprite
+    '    tmpNight1 = New Sprite(NightGfx)
+    '    tmpNight1.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+    '    tmpNight1.Color = New SFML.Graphics.Color(255, 255, 255, currLightLevel)
+    '    tmpNight1.Position = New Vector2f(0, 0)
+    '    tmpNight1.Draw(GameWindow, New RenderStates(BlendMode.Alpha))
+    '    tmpNight1.Dispose()
+
+
+    '    For x = TileView.left To TileView.right + 1
+    '        For y = TileView.top To TileView.bottom + 1
+    '            If IsValidMapPoint(x, y) Then
+
+    '                If Map.Tile(x, y).Type = TileType.Light Then
+    '                    Dim tmpLight As Sprite
+    '                    tmpLight = New Sprite(LightGfx)
+    '                    tmpLight.TextureRect = New IntRect(0, 0, tmpLight.Texture.Size.X, tmpLight.Texture.Size.Y)
+    '                    tmpLight.Color = New SFML.Graphics.Color(255, 255, 255, 255)
+    '                    tmpLight.Origin = New Vector2f(tmpLight.TextureRect.Width / 2 - 16, tmpLight.TextureRect.Height / 2 - 16) ' 16 offset is for the center of the graphic
+    '                    tmpLight.Position = New Vector2f(ConvertMapX(x * 32), ConvertMapY(y * 32))
+    '                    tmpLight.Draw(GameWindow, New RenderStates(BlendMode.Add))
+    '                    tmpLight.Dispose()
+    '                End If
+
+    '            End If
+    '        Next
+    '    Next
+
+    'End Sub
+
 End Module
 
