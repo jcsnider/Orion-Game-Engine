@@ -133,7 +133,31 @@ Module ServerConsole
 
     End Sub
 
+    Sub HandleCommandKick(ByVal Line As String, ByVal Command As String, ByVal Parts As String())
+        Dim Name As String
 
+        If Parts.Length < 1 Then Exit Sub
+
+        Name = Parts(1)
+
+        If Not FindPlayer(Name) > 0 Then Exit Sub
+
+        AlertMsg(FindPlayer(Name), "You have been kicked by the server owner!")
+
+    End Sub
+
+    Sub HandleCommandBan(ByVal Line As String, ByVal Command As String, ByVal Parts As String())
+        Dim Name As String
+
+        If Parts.Length < 1 Then Exit Sub
+
+        Name = Parts(1)
+
+        If Not FindPlayer(Name) > 0 Then Exit Sub
+
+        ServerBanIndex(FindPlayer(Name))
+
+    End Sub
 #End Region
 
 End Module

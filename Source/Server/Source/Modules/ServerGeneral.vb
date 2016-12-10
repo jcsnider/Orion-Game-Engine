@@ -224,6 +224,8 @@
         AddCommandHandler("/help", AddressOf HandleCommandHelp)
         AddCommandHandler("/exit", AddressOf HandleCommandExit)
         AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
+        AddCommandHandler("/kick", AddressOf HandleCommandKick)
+        AddCommandHandler("/ban", AddressOf HandleCommandBan)
 
         ' Starts the server loop
         ServerLoop.ServerLoop()
@@ -352,7 +354,7 @@
         '    ConsoleText = ConsoleText & vbNewLine & Msg
         'End If
         'Try
-        '    UpdateUI()
+        'UpdateUI()
         'Catch ex As Exception
         '    'Dont handle error
         'End Try

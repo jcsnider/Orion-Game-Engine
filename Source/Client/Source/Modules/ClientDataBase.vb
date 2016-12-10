@@ -4,6 +4,21 @@ Imports System.Drawing
 Imports System.Linq
 
 Module ClientDataBase
+    Public Function GetFileContents(ByVal FullPath As String, Optional ByRef ErrInfo As String = "") As String
+        Dim strContents As String
+        Dim objReader As StreamReader
+        strContents = ""
+        Try
+            objReader = New StreamReader(FullPath)
+            strContents = objReader.ReadToEnd()
+            objReader.Close()
+        Catch Ex As Exception
+            ErrInfo = Ex.Message
+        End Try
+        Return strContents
+    End Function
+
+#Region "Assets Check"
     Public Sub CheckTilesets()
         Dim i As Integer
         Dim tmp As Bitmap
@@ -161,7 +176,9 @@ Module ClientDataBase
         Next
 
     End Sub
+#End Region
 
+#Region "Options"
     Public Sub SaveOptions()
         Dim FileName As String
 
@@ -231,68 +248,13 @@ Module ClientDataBase
         frmMainGame.cmbScreenSize.SelectedIndex = Options.ScreenSize
 
     End Sub
+#End Region
 
-    Public Function GetFileContents(ByVal FullPath As String, Optional ByRef ErrInfo As String = "") As String
-        Dim strContents As String
-        Dim objReader As StreamReader
-        strContents = ""
-        Try
-            objReader = New StreamReader(FullPath)
-            strContents = objReader.ReadToEnd()
-            objReader.Close()
-        Catch Ex As Exception
-            ErrInfo = Ex.Message
-        End Try
-        Return strContents
-    End Function
-
-    Sub SetPlayerEquipment(ByVal Index As Integer, ByVal InvNum As Integer, ByVal EquipmentSlot As EquipmentType)
-
-        If Index < 1 Or Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Equipment(EquipmentSlot) = InvNum
-    End Sub
-
-    Sub ClearPlayer(ByVal Index As Integer)
-        Player(Index).Name = ""
-        Player(Index).Access = 0
-        Player(Index).Attacking = 0
-        Player(Index).AttackTimer = 0
-        Player(Index).Classes = 0
-        Player(Index).Dir = 0
-        Player(Index).Equipment(EquipmentType.Armor) = 0
-        Player(Index).Equipment(EquipmentType.Helmet) = 0
-        Player(Index).Equipment(EquipmentType.Shield) = 0
-        Player(Index).Equipment(EquipmentType.Weapon) = 0
-        Player(Index).Equipment(EquipmentType.Shoes) = 0
-        Player(Index).Equipment(EquipmentType.Gloves) = 0
-        Player(Index).EXP = 0
-        Player(Index).Level = 0
-        Player(Index).Map = 0
-        Player(Index).MapGetTimer = 0
-        Player(Index).MaxHP = 0
-        Player(Index).MaxMP = 0
-        Player(Index).MaxSP = 0
-        Player(Index).Moving = 0
-        Player(Index).PK = 0
-        Player(Index).POINTS = 0
-        Player(Index).Sprite = 0
-        Player(Index).Stat(Stats.Endurance) = 0
-        Player(Index).Stat(Stats.Intelligence) = 0
-        Player(Index).Stat(Stats.Spirit) = 0
-        Player(Index).Stat(Stats.Strength) = 0
-        Player(Index).Stat(Stats.Vitality) = 0
-        Player(Index).Stat(Stats.Luck) = 0
-        Player(Index).Steps = 0
-        Player(Index).Vital(Vitals.HP) = 0
-        Player(Index).Vital(Vitals.MP) = 0
-        Player(Index).Vital(Vitals.SP) = 0
-        Player(Index).X = 0
-        Player(Index).XOffset = 0
-        Player(Index).Y = 0
-        Player(Index).YOffset = 0
-    End Sub
-
+#Region "Maps"
     Sub ClearMap()
+        Map = Nothing
+        Map = New MapRec
+
         SyncLock MapLock
             Map.Name = ""
             Map.tileset = 1
@@ -365,11 +327,6 @@ Module ClientDataBase
         MapNpc(Index).YOffset = 0
     End Sub
 
-    Sub SetPlayerMap(ByVal Index As Integer, ByVal MapNum As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Map = MapNum
-    End Sub
-
     Sub ClearMapNpcs()
         Dim i As Integer
 
@@ -378,209 +335,9 @@ Module ClientDataBase
         Next
 
     End Sub
+#End Region
 
-    Function GetPlayerInvItemNum(ByVal Index As Integer, ByVal invslot As Integer) As Integer
-        GetPlayerInvItemNum = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        If invslot = 0 Then Exit Function
-        GetPlayerInvItemNum = PlayerInv(invslot).Num
-    End Function
-
-    Sub SetPlayerName(ByVal Index As Integer, ByVal Name As String)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Name = Name
-    End Sub
-
-    Sub SetPlayerClass(ByVal Index As Integer, ByVal Classnum As Integer)
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Classes = Classnum
-    End Sub
-
-    Sub SetPlayerPOINTS(ByVal Index As Integer, ByVal POINTS As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).POINTS = POINTS
-    End Sub
-
-    Sub SetPlayerStat(ByVal Index As Integer, ByVal Stat As Stats, ByVal Value As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        If Value <= 0 Then Value = 1
-        If Value > Byte.MaxValue Then Value = Byte.MaxValue
-        Player(Index).Stat(Stat) = Value
-    End Sub
-
-    Sub SetPlayerInvItemNum(ByVal Index As Integer, ByVal invslot As Integer, ByVal itemnum As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        PlayerInv(invslot).Num = itemnum
-    End Sub
-
-    Function GetPlayerInvItemValue(ByVal Index As Integer, ByVal invslot As Integer) As Integer
-        GetPlayerInvItemValue = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerInvItemValue = PlayerInv(invslot).Value
-    End Function
-
-    Sub SetPlayerInvItemValue(ByVal Index As Integer, ByVal invslot As Integer, ByVal ItemValue As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        PlayerInv(invslot).Value = ItemValue
-    End Sub
-
-    Function GetPlayerPOINTS(ByVal Index As Integer) As Integer
-        GetPlayerPOINTS = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(Index).POINTS
-    End Function
-
-    Sub SetPlayerAccess(ByVal Index As Integer, ByVal Access As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Access = Access
-    End Sub
-
-    Sub SetPlayerPK(ByVal Index As Integer, ByVal PK As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).PK = PK
-    End Sub
-
-    Sub SetPlayerVital(ByVal Index As Integer, ByVal Vital As Vitals, ByVal Value As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Vital(Vital) = Value
-
-        If GetPlayerVital(Index, Vital) > GetPlayerMaxVital(Index, Vital) Then
-            Player(Index).Vital(Vital) = GetPlayerMaxVital(Index, Vital)
-        End If
-
-    End Sub
-
-    Function GetPlayerMaxVital(ByVal Index As Integer, ByVal Vital As Vitals) As Integer
-        GetPlayerMaxVital = 0
-        If Index > MAX_PLAYERS Then Exit Function
-
-        Select Case Vital
-            Case Vitals.HP
-                GetPlayerMaxVital = Player(Index).MaxHP
-            Case Vitals.MP
-                GetPlayerMaxVital = Player(Index).MaxMP
-            Case Vitals.SP
-                GetPlayerMaxVital = Player(Index).MaxSP
-        End Select
-
-    End Function
-
-    Sub SetPlayerX(ByVal Index As Integer, ByVal X As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).X = X
-    End Sub
-
-    Sub SetPlayerY(ByVal Index As Integer, ByVal Y As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Y = Y
-    End Sub
-
-    Sub SetPlayerSprite(ByVal Index As Integer, ByVal Sprite As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Sprite = Sprite
-    End Sub
-
-    Sub SetPlayerExp(ByVal Index As Integer, ByVal EXP As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).EXP = EXP
-    End Sub
-
-    Sub SetPlayerLevel(ByVal Index As Integer, ByVal Level As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Level = Level
-    End Sub
-
-    Sub SetPlayerDir(ByVal Index As Integer, ByVal Dir As Integer)
-
-        If Index > MAX_PLAYERS Then Exit Sub
-        Player(Index).Dir = Dir
-    End Sub
-
-    Function GetPlayerVital(ByVal Index As Integer, ByVal Vital As Vitals) As Integer
-        GetPlayerVital = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerVital = Player(Index).Vital(Vital)
-    End Function
-
-    Function GetPlayerSprite(ByVal Index As Integer) As Integer
-        GetPlayerSprite = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerSprite = Player(Index).Sprite
-    End Function
-
-    Function GetPlayerClass(ByVal Index As Integer) As Integer
-        GetPlayerClass = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerClass = Player(Index).Classes
-    End Function
-
-    Function GetPlayerMap(ByVal Index As Integer) As Integer
-        GetPlayerMap = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerMap = Player(Index).Map
-    End Function
-
-    Function GetPlayerLevel(ByVal Index As Integer) As Integer
-        GetPlayerLevel = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerLevel = Player(Index).Level
-    End Function
-
-    Function GetPlayerEquipment(ByVal Index As Integer, ByVal EquipmentSlot As EquipmentType) As Byte
-        GetPlayerEquipment = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerEquipment = Player(Index).Equipment(EquipmentSlot)
-    End Function
-
-    Function GetPlayerStat(ByVal Index As Integer, ByVal Stat As Stats) As Integer
-        GetPlayerStat = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerStat = Player(Index).Stat(Stat)
-    End Function
-
-    Function GetPlayerExp(ByVal Index As Integer) As Integer
-
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerExp = Player(Index).EXP
-    End Function
-
-    Function GetPlayerX(ByVal Index As Integer) As Integer
-        GetPlayerX = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerX = Player(Index).X
-    End Function
-
-    Function GetPlayerY(ByVal Index As Integer) As Integer
-        GetPlayerY = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerY = Player(Index).Y
-    End Function
-
-    Function GetPlayerAccess(ByVal Index As Integer) As Integer
-        GetPlayerAccess = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerAccess = Player(Index).Access
-    End Function
-
-    Function GetPlayerPK(ByVal Index As Integer) As Integer
-        GetPlayerPK = 0
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPK = Player(Index).PK
-    End Function
-
+#Region "Items"
     Public Sub ClearItem(ByVal Index As Integer)
         Index = Index - 1
         Item(Index) = Nothing
@@ -613,7 +370,9 @@ Module ClientDataBase
         Next
 
     End Sub
+#End Region
 
+#Region "Resources"
     Public Sub ClearChanged_Resource()
         For i = 1 To MAX_RESOURCES
             Resource_Changed(i) = Nothing
@@ -635,7 +394,9 @@ Module ClientDataBase
         Next
 
     End Sub
+#End Region
 
+#Region "Npc's"
     Sub ClearNpcs()
         Dim i As Integer
 
@@ -647,12 +408,16 @@ Module ClientDataBase
 
     Sub ClearNpc(ByVal Index As Integer)
         Npc(Index) = Nothing
+        Npc(Index) = New NpcRec
+
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
         ReDim Npc(Index).Stat(0 To Stats.Count - 1)
         ReDim Npc(Index).Skill(0 To MAX_NPC_SKILLS)
     End Sub
+#End Region
 
+#Region "Animations"
     Sub ClearAnimation(ByVal Index As Integer)
         Animation(Index) = Nothing
         Animation(Index) = New AnimationRec
@@ -675,38 +440,7 @@ Module ClientDataBase
         Dim i As Integer
 
         For i = 1 To MAX_ANIMATIONS
-            Call ClearAnimation(i)
-        Next
-
-    End Sub
-
-    Sub ClearSkills()
-        Dim i As Integer
-
-        For i = 1 To MAX_SKILLS
-            Call ClearSkill(i)
-        Next
-
-    End Sub
-
-    Sub ClearSkill(ByVal Index As Integer)
-        Skill(Index) = Nothing
-        Skill(Index) = New SkillRec
-        Skill(Index).Name = ""
-    End Sub
-
-    Sub ClearShop(ByVal Index As Integer)
-        Shop(Index) = Nothing
-        Shop(Index) = New ShopRec
-        Shop(Index).Name = ""
-        ReDim Shop(Index).TradeItem(MAX_TRADES)
-    End Sub
-
-    Sub ClearShops()
-        Dim i As Integer
-
-        For i = 1 To MAX_SHOPS
-            Call ClearShop(i)
+            ClearAnimation(i)
         Next
 
     End Sub
@@ -728,6 +462,41 @@ Module ClientDataBase
         AnimInstance(index).LockType = 0
         AnimInstance(index).lockindex = 0
     End Sub
+#End Region
 
+#Region "Skills"
+    Sub ClearSkills()
+        Dim i As Integer
+
+        For i = 1 To MAX_SKILLS
+            ClearSkill(i)
+        Next
+
+    End Sub
+
+    Sub ClearSkill(ByVal Index As Integer)
+        Skill(Index) = Nothing
+        Skill(Index) = New SkillRec
+        Skill(Index).Name = ""
+    End Sub
+#End Region
+
+#Region "Shops"
+    Sub ClearShop(ByVal Index As Integer)
+        Shop(Index) = Nothing
+        Shop(Index) = New ShopRec
+        Shop(Index).Name = ""
+        ReDim Shop(Index).TradeItem(MAX_TRADES)
+    End Sub
+
+    Sub ClearShops()
+        Dim i As Integer
+
+        For i = 1 To MAX_SHOPS
+            ClearShop(i)
+        Next
+
+    End Sub
+#End Region
 
 End Module
