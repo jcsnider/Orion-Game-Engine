@@ -1030,8 +1030,8 @@ Continue1:
             ItemDescStr = "None"
         End If
 
-        If Item(itemnum).Add_Stat(Stats.vitality) > 0 Then
-            ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.vitality)
+        If Item(itemnum).Add_Stat(Stats.Vitality) > 0 Then
+            ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.Vitality)
         Else
             ItemDescVit = "None"
         End If
@@ -1042,20 +1042,20 @@ Continue1:
             ItemDescInt = "None"
         End If
 
-        If Item(itemnum).Add_Stat(Stats.endurance) > 0 Then
-            ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.endurance)
+        If Item(itemnum).Add_Stat(Stats.Endurance) > 0 Then
+            ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.Endurance)
         Else
             ItemDescEnd = "None"
         End If
 
-        If Item(itemnum).Add_Stat(Stats.luck) > 0 Then
-            ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.luck)
+        If Item(itemnum).Add_Stat(Stats.Luck) > 0 Then
+            ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.Luck)
         Else
             ItemDescLuck = "None"
         End If
 
-        If Item(itemnum).Add_Stat(Stats.spirit) > 0 Then
-            ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.spirit)
+        If Item(itemnum).Add_Stat(Stats.Speed) > 0 Then
+            ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.Speed)
         Else
             ItemDescSpr = "None"
         End If

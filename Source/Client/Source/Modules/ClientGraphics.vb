@@ -2400,15 +2400,15 @@ Module ClientGraphics
         'strength stat
         DrawText(CharWindowX + 210, CharWindowY + 30, "Strength: " & GetPlayerStat(MyIndex, Stats.strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'endurance stat
-        DrawText(CharWindowX + 210, CharWindowY + 50, "Endurance: " & GetPlayerStat(MyIndex, Stats.endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 50, "Endurance: " & GetPlayerStat(MyIndex, Stats.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'vitality stat
-        DrawText(CharWindowX + 210, CharWindowY + 70, "Vitality: " & GetPlayerStat(MyIndex, Stats.vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 70, "Vitality: " & GetPlayerStat(MyIndex, Stats.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'intelligence stat
         DrawText(CharWindowX + 210, CharWindowY + 90, "Intelligence: " & GetPlayerStat(MyIndex, Stats.intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'luck stat
-        DrawText(CharWindowX + 210, CharWindowY + 110, "Luck: " & GetPlayerStat(MyIndex, Stats.luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 110, "Luck: " & GetPlayerStat(MyIndex, Stats.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'spirit stat
-        DrawText(CharWindowX + 210, CharWindowY + 130, "Spirit: " & GetPlayerStat(MyIndex, Stats.spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 130, "Spirit: " & GetPlayerStat(MyIndex, Stats.Speed), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
 
         If GetPlayerPOINTS(MyIndex) > 0 Then
             'strength upgrade

@@ -672,7 +672,7 @@ Module ServerLoop
                                 If MapNpc(MapNum).Npc(Target).Num > 0 Then ' npc exists
                                     'Can the npc attack the npc?
                                     If CanNpcAttackNpc(MapNum, x, Target) Then
-                                        Damage = Npc(NpcNum).Stat(Stats.strength) - CLng(Npc(Target).Stat(Stats.endurance))
+                                        Damage = Npc(NpcNum).Stat(Stats.strength) - CLng(Npc(Target).Stat(Stats.Endurance))
                                         If Damage < 1 Then Damage = 1
                                         NpcAttackNpc(MapNum, x, Target, Damage)
                                     End If
@@ -766,7 +766,7 @@ Module ServerLoop
 
         Select Case Vital
             Case Vitals.HP
-                i = Npc(NpcNum).Stat(Stats.vitality) \ 3
+                i = Npc(NpcNum).Stat(Stats.Vitality) \ 3
 
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i

@@ -770,12 +770,12 @@ Module ClientPlayer
         Player(Index).PK = 0
         Player(Index).POINTS = 0
         Player(Index).Sprite = 0
-        Player(Index).Stat(Stats.endurance) = 0
+        Player(Index).Stat(Stats.Endurance) = 0
         Player(Index).Stat(Stats.intelligence) = 0
-        Player(Index).Stat(Stats.spirit) = 0
+        Player(Index).Stat(Stats.Speed) = 0
         Player(Index).Stat(Stats.strength) = 0
-        Player(Index).Stat(Stats.vitality) = 0
-        Player(Index).Stat(Stats.luck) = 0
+        Player(Index).Stat(Stats.Vitality) = 0
+        Player(Index).Stat(Stats.Luck) = 0
         Player(Index).Steps = 0
         Player(Index).Vital(Vitals.HP) = 0
         Player(Index).Vital(Vitals.MP) = 0

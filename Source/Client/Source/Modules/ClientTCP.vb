@@ -1195,11 +1195,11 @@ Module ClientTCP
             Next
 
             Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))

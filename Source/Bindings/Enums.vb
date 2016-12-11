@@ -151,12 +151,12 @@
 
     ''' <Summary> Stats used by Players, Npcs and Classes </Summary>
     Public Enum Stats As Byte
-        strength = 1
-        endurance
-        vitality
-        luck
-        intelligence
-        spirit
+        Strength = 1
+        Endurance
+        Vitality
+        Luck
+        Intelligence
+        Speed
         Count
     End Enum
 

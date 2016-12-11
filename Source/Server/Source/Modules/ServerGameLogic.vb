@@ -41,7 +41,7 @@
             Case Vitals.MP
                 GetNpcMaxVital = Npc(NpcNum).Stat(Stats.intelligence) * 2
             Case Vitals.SP
-                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.spirit) * 2
+                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.Speed) * 2
         End Select
 
     End Function

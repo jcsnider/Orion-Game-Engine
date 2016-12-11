@@ -670,7 +670,7 @@ Module EditorTCP
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))

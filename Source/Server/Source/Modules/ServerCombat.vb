@@ -89,7 +89,7 @@
             n = Int(Rnd() * 2)
 
             If n = 1 Then
-                i = (GetPlayerStat(Index, Stats.endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
+                i = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
                 n = Int(Rnd() * 100) + 1
 
                 If n <= i Then
@@ -109,7 +109,7 @@
             n = (Rnd()) * 2
 
             If n = 1 Then
-                i = (GetPlayerStat(Index, Stats.strength) \ 2) + (GetPlayerLevel(Index) \ 2)
+                i = (GetPlayerStat(Index, Stats.Strength) \ 2) + (GetPlayerLevel(Index) \ 2)
                 n = Int(Rnd() * 100) + 1
 
                 If n <= i Then
@@ -121,7 +121,8 @@
     End Function
 
     Function GetPlayerDamage(ByVal Index As Integer) As Integer
-        Dim Weapon As Integer
+        Dim weaponNum As Integer
+
         GetPlayerDamage = 0
 
         ' Check for subscript out of range
@@ -129,11 +130,11 @@
             Exit Function
         End If
 
-        GetPlayerDamage = GetPlayerStat(Index, Stats.strength)
-
-        If GetPlayerEquipment(Index, Weapon) > 0 Then
-            Weapon = GetPlayerEquipment(Index, Weapon)
-            GetPlayerDamage = GetPlayerDamage + Item(Weapon).Data2
+        If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
+            weaponNum = GetPlayerEquipment(Index, EquipmentType.Weapon)
+            GetPlayerDamage = (GetPlayerStat(Index, Stats.Strength) * 2) + (Item(weaponNum).Data2 * 2) + (GetPlayerLevel(Index) * 3) + Random(0, 20)
+        Else
+            GetPlayerDamage = (GetPlayerStat(Index, Stats.Strength) * 2) + (GetPlayerLevel(Index) * 3) + Random(0, 20)
         End If
 
     End Function
@@ -151,7 +152,7 @@
         Helm = GetPlayerEquipment(Index, EquipmentType.Helmet)
         Shoes = GetPlayerEquipment(Index, EquipmentType.Shoes)
         Gloves = GetPlayerEquipment(Index, EquipmentType.Gloves)
-        GetPlayerProtection = (GetPlayerStat(Index, Stats.endurance) \ 5)
+        GetPlayerProtection = (GetPlayerStat(Index, Stats.Endurance) \ 5)
 
         If Armor > 0 Then
             GetPlayerProtection = GetPlayerProtection + Item(Armor).Data2

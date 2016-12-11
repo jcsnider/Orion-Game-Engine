@@ -367,11 +367,11 @@
                 ReDim .Stat(0 To Stats.Count - 1)
 
                 .Stat(Stats.strength) = Buffer.ReadInteger
-                .Stat(Stats.endurance) = Buffer.ReadInteger
-                .Stat(Stats.vitality) = Buffer.ReadInteger
+                .Stat(Stats.Endurance) = Buffer.ReadInteger
+                .Stat(Stats.Vitality) = Buffer.ReadInteger
                 .Stat(Stats.intelligence) = Buffer.ReadInteger
-                .Stat(Stats.luck) = Buffer.ReadInteger
-                .Stat(Stats.spirit) = Buffer.ReadInteger
+                .Stat(Stats.Luck) = Buffer.ReadInteger
+                .Stat(Stats.Speed) = Buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -462,11 +462,11 @@
                 Next
 
                 .Stat(Stats.strength) = Buffer.ReadInteger
-                .Stat(Stats.endurance) = Buffer.ReadInteger
-                .Stat(Stats.vitality) = Buffer.ReadInteger
+                .Stat(Stats.Endurance) = Buffer.ReadInteger
+                .Stat(Stats.Vitality) = Buffer.ReadInteger
                 .Stat(Stats.intelligence) = Buffer.ReadInteger
-                .Stat(Stats.luck) = Buffer.ReadInteger
-                .Stat(Stats.spirit) = Buffer.ReadInteger
+                .Stat(Stats.Luck) = Buffer.ReadInteger
+                .Stat(Stats.Speed) = Buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -2185,11 +2185,11 @@
                 Next
 
                 .Stat(Stats.strength) = buffer.ReadInteger
-                .Stat(Stats.endurance) = buffer.ReadInteger
-                .Stat(Stats.vitality) = buffer.ReadInteger
+                .Stat(Stats.Endurance) = buffer.ReadInteger
+                .Stat(Stats.Vitality) = buffer.ReadInteger
                 .Stat(Stats.intelligence) = buffer.ReadInteger
-                .Stat(Stats.luck) = buffer.ReadInteger
-                .Stat(Stats.spirit) = buffer.ReadInteger
+                .Stat(Stats.Luck) = buffer.ReadInteger
+                .Stat(Stats.Speed) = buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)

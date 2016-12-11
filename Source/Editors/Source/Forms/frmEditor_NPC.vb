@@ -74,7 +74,7 @@
         If EditorIndex <= 0 Then Exit Sub
 
         lblSpr.Text = "Spr: " & scrlSpr.Value
-        Npc(EditorIndex).Stat(Stats.Spirit) = scrlSpr.Value
+        Npc(EditorIndex).Stat(Stats.Speed) = scrlSpr.Value
     End Sub
 
     Private Sub scrlNum_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlNum.ValueChanged

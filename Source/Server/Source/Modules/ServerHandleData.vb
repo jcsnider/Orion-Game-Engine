@@ -7,7 +7,7 @@
         Packets = New Dictionary(Of Integer, Packet_)
 
         Packets.Add(ClientPackets.CNewAccount, AddressOf Packet_NewAccount)
-        'Packets.Add(ClientPackets.CDelAccount, AddressOf Packet_DeleteAccount)
+        Packets.Add(ClientPackets.CDelAccount, AddressOf Packet_DeleteAccount)
         Packets.Add(ClientPackets.CLogin, AddressOf Packet_Login)
         Packets.Add(ClientPackets.CAddChar, AddressOf Packet_AddChar)
         Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
@@ -233,6 +233,35 @@
         End If
     End Sub
 
+    Private Sub Packet_DeleteAccount(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim Name As String
+        'Dim Password As String
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CDelChar Then Exit Sub
+
+        ' Get the data
+        Name = Buffer.ReadString
+
+        If GetPlayerLogin(index) = Trim$(Name) Then
+            PlayerMsg(index, "You cannot delete your own account while online!")
+            Exit Sub
+        End If
+
+        For i = 1 To MAX_PLAYERS
+
+            If IsPlaying(i) Then
+                If Trim$(Player(i).Login) = Trim$(Name) Then
+                    AlertMsg(i, "Your account has been removed by an admin!")
+                    ClearPlayer(i)
+                End If
+            End If
+
+        Next
+    End Sub
+
     Private Sub Packet_Login(ByVal index As Integer, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim Name As String
@@ -315,19 +344,173 @@
                 '    HandleUseChar(index)
                 'Else
                 '    ' send new char shit
-                If Not IsPlaying(index) Then
-                    Call SendNewCharClasses(index)
-                End If
+                'If Not IsPlaying(index) Then
+                '    Call SendNewCharClasses(index)
+                'End If
                 'End If
 
                 ' Show the player up on the socket status
-                Call Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
+                Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
                 TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
 
                 Buffer = Nothing
             End If
         End If
         NeedToUpDatePlayerList = True
+    End Sub
+
+    Private Sub Packet_UseChar(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim slot As Byte
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CUseChar Then Exit Sub
+
+        If Not IsPlaying(index) Then
+            If IsLoggedIn(index) Then
+
+                slot = Buffer.ReadInteger
+
+                ' Check if character data has been created
+                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
+                    ' we have a char!
+                    TempPlayer(index).CurChar = slot
+                    HandleUseChar(index)
+                    ClearBank(index)
+                    LoadBank(index, Trim$(Player(index).Login))
+                Else
+                    ' send new char shit
+                    If Not IsPlaying(index) Then
+                        SendNewCharClasses(index)
+                        TempPlayer(index).CurChar = slot
+                    End If
+                End If
+            End If
+        End If
+
+
+        NeedToUpDatePlayerList = True
+    End Sub
+
+    Private Sub Packet_AddChar(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim Name As String, slot As Byte
+        Dim Sex As Integer
+        Dim Classes As Integer
+        Dim Sprite As Integer
+        Dim i As Integer
+        Dim n As Integer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CAddChar Then Exit Sub
+
+        If Not IsPlaying(index) Then
+            slot = Buffer.ReadInteger
+            Name = Buffer.ReadString
+            Sex = Buffer.ReadInteger
+            Classes = Buffer.ReadInteger
+            Sprite = Buffer.ReadInteger
+
+            ' Prevent hacking
+            If Len(Trim$(Name)) < 3 Then
+                AlertMsg(index, "Character name must be at least three characters in length.")
+                Exit Sub
+            End If
+
+            ' Prevent hacking
+            For i = 1 To Len(Name)
+                n = AscW(Mid$(Name, i, 1))
+
+                If Not isNameLegal(n) Then
+                    AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
+                    Exit Sub
+                End If
+
+            Next
+
+            ' Prevent hacking
+            If (Sex < Enums.Sex.Male) Or (Sex > Enums.Sex.Female) Then Exit Sub
+
+            ' Prevent hacking
+            If Classes < 1 Or Classes > Max_Classes Then Exit Sub
+
+            ' Check if char already exists in slot
+            If CharExist(index, slot) Then
+                AlertMsg(index, "Character already exists!")
+                Exit Sub
+            End If
+
+            ' Check if name is already in use
+            If FindChar(Name) Then
+                AlertMsg(index, "Sorry, but that name is in use!")
+                Exit Sub
+            End If
+
+            ' Everything went ok, add the character
+            TempPlayer(index).CurChar = slot
+            AddChar(index, slot, Name, Sex, Classes, Sprite)
+            Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
+
+            ' log them in!!
+            HandleUseChar(index)
+
+            Buffer = Nothing
+        End If
+
+        NeedToUpDatePlayerList = True
+    End Sub
+
+    Private Sub Packet_DeleteChar(ByVal index As Integer, ByVal data() As Byte)
+        Dim Buffer As ByteBuffer
+        Dim slot As Byte
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(data)
+
+        If Buffer.ReadInteger <> ClientPackets.CDelChar Then Exit Sub
+
+        If Not IsPlaying(index) Then
+            If IsLoggedIn(index) Then
+
+                slot = Buffer.ReadInteger
+
+                ' Check if character data has been created
+                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
+                    ' we have a char!
+                    DeleteName(Trim$(Player(index).Character(slot).Name))
+                    ClearCharacter(index, slot)
+                    SaveCharacter(index, slot)
+
+                    Buffer = Nothing
+                    Buffer = New ByteBuffer
+                    Buffer.WriteInteger(ServerPackets.SSelChar)
+                    Buffer.WriteInteger(MAX_CHARS)
+
+                    For i = 1 To MAX_CHARS
+                        If Player(index).Character(i).Classes <= 0 Then
+                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                            Buffer.WriteInteger(Player(index).Character(i).Sprite)
+                            Buffer.WriteInteger(Player(index).Character(i).Level)
+                            Buffer.WriteString("")
+                            Buffer.WriteInteger(0)
+                        Else
+                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
+                            Buffer.WriteInteger(Player(index).Character(i).Sprite)
+                            Buffer.WriteInteger(Player(index).Character(i).Level)
+                            Buffer.WriteString(Trim$(Classes(Player(index).Character(i).Classes).Name))
+                            Buffer.WriteInteger(Player(index).Character(i).Sex)
+                        End If
+
+                    Next
+
+                    SendDataTo(index, Buffer.ToArray)
+                End If
+            End If
+        End If
+
     End Sub
 
     Private Sub Packet_SayMessage(ByVal index As Integer, ByVal data() As Byte)
@@ -339,9 +522,9 @@
         If Buffer.ReadInteger <> ClientPackets.CSayMsg Then Exit Sub
         msg = Buffer.ReadString
 
-        Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
+        Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
 
-        Call SayMsg_Map(GetPlayerMap(index), index, msg, QBColor(ColorType.White))
+        SayMsg_Map(GetPlayerMap(index), index, msg, ColorType.White)
 
         Buffer = Nothing
     End Sub
@@ -355,8 +538,8 @@
         If Buffer.ReadInteger <> ClientPackets.CEmoteMsg Then Exit Sub
         msg = Buffer.ReadString
 
-        Call Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
-        Call MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), QColorType.EmoteColor)
+        Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
+        MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), QColorType.EmoteColor)
 
         Buffer = Nothing
     End Sub
@@ -372,10 +555,37 @@
         msg = Buffer.ReadString
 
         s = "[Global]" & GetPlayerName(index) & ": " & msg
-        Call SayMsg_Global(index, msg, QBColor(ColorType.White))
-        Call Addlog(s, PLAYER_LOG)
-        Call TextAdd(s)
+        SayMsg_Global(index, msg, ColorType.White)
+        Addlog(s, PLAYER_LOG)
+        TextAdd(s)
+
         Buffer = Nothing
+    End Sub
+
+    Public Sub Packet_PlayerMsg(ByVal index As Integer, ByVal Data() As Byte)
+        Dim buffer As ByteBuffer, OtherPlayer As String, Msg As String, OtherPlayerIndex As Integer
+
+        buffer = New ByteBuffer()
+        buffer.WriteBytes(Data)
+
+        If buffer.ReadInteger <> ClientPackets.CPlayerMsg Then Exit Sub
+
+        OtherPlayer = buffer.ReadString
+        Msg = buffer.ReadString
+        buffer = Nothing
+
+        OtherPlayerIndex = FindPlayer(OtherPlayer)
+        If OtherPlayerIndex <> index Then
+            If OtherPlayerIndex > 0 Then
+                Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
+                PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'")
+                PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
+            Else
+                PlayerMsg(index, "Player is not online.")
+            End If
+        Else
+            PlayerMsg(index, "Cannot message your self!")
+        End If
     End Sub
 
     Private Sub Packet_PlayerMove(ByVal index As Integer, ByVal data() As Byte)
@@ -449,17 +659,17 @@
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ClientPackets.CPlayerDir Then Exit Sub
+
         If TempPlayer(Index).GettingMap = True Then Exit Sub
 
         dir = Buffer.ReadInteger
         Buffer = Nothing
 
         ' Prevent hacking
-        If dir < Direction.Up Or dir > Direction.Right Then
-            Exit Sub
-        End If
+        If dir < Direction.Up Or dir > Direction.Right Then Exit Sub
 
-        Call SetPlayerDir(Index, dir)
+        SetPlayerDir(Index, dir)
+
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPlayerDir)
         Buffer.WriteInteger(Index)
@@ -470,8 +680,8 @@
     End Sub
 
     Sub Packet_UseItem(ByVal Index As Integer, ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer, InvItemNum As Integer
-        Dim invnum As Integer, i As Integer, n As Integer, x As Integer, y As Integer, tempitem As Integer
+        Dim Buffer As ByteBuffer
+        Dim invnum As Integer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
@@ -480,613 +690,7 @@
         invnum = Buffer.ReadInteger
         Buffer = Nothing
 
-        ' Prevent hacking
-        If invnum < 1 Or invnum > MAX_ITEMS Then
-            Exit Sub
-        End If
-
-        If (GetPlayerInvItemNum(Index, invnum) > 0) And (GetPlayerInvItemNum(Index, invnum) <= MAX_ITEMS) Then
-            n = Item(GetPlayerInvItemNum(Index, invnum)).Data2
-
-            ' Find out what kind of item it is
-            Select Case Item(GetPlayerInvItemNum(Index, invnum)).Type
-                Case ItemType.Armor
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Armor) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Armor)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Armor)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 0)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.Weapon
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Weapon)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Weapon)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.Helmet
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Helmet) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Helmet)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Helmet)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.Shield
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Shield)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shield)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.Shoes
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Shoes) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Shoes)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shoes)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.Gloves
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.")
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Gloves) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Gloves)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Gloves)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name))
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.PotionHp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, invnum)).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.HP)
-
-                Case ItemType.PotionMp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.MP)
-
-                Case ItemType.PotionSp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.SP)
-
-                Case ItemType.PoisonHp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(InvItemNum).Data1, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.HP)
-
-                Case ItemType.PoisonMp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(InvItemNum).Data1, ColorType.Blue, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.MP)
-
-                Case ItemType.PoisonSp
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, invnum)).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Data1)
-                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num).Stackable = 1 Then
-                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 1)
-                    Else
-                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(invnum).Num, 0)
-                    End If
-
-                    SendVital(Index, Vitals.SP)
-
-                Case ItemType.Key
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    Select Case GetPlayerDir(Index)
-                        Case Direction.Up
-
-                            If GetPlayerY(Index) > 0 Then
-                                x = GetPlayerX(Index)
-                                y = GetPlayerY(Index) - 1
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case Direction.Down
-
-                            If GetPlayerY(Index) < Map(GetPlayerMap(Index)).MaxY Then
-                                x = GetPlayerX(Index)
-                                y = GetPlayerY(Index) + 1
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case Direction.Left
-
-                            If GetPlayerX(Index) > 0 Then
-                                x = GetPlayerX(Index) - 1
-                                y = GetPlayerY(Index)
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case Direction.Right
-
-                            If GetPlayerX(Index) < Map(GetPlayerMap(Index)).MaxX Then
-                                x = GetPlayerX(Index) + 1
-                                y = GetPlayerY(Index)
-                            Else
-                                Exit Sub
-                            End If
-
-                    End Select
-
-                    ' Check if a key exists
-                    If Map(GetPlayerMap(Index)).Tile(x, y).Type = TileType.Key Then
-
-                        ' Check if the key they are using matches the map key
-                        If InvItemNum = Map(GetPlayerMap(Index)).Tile(x, y).Data1 Then
-                            TempTile(GetPlayerMap(Index)).DoorOpen(x, y) = True
-                            TempTile(GetPlayerMap(Index)).DoorTimer = GetTickCount()
-                            SendMapKey(Index, x, y, 1)
-                            MapMsg(GetPlayerMap(Index), "A door has been unlocked.", ColorType.White)
-
-                            SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, x, y)
-
-                            ' Check if we are supposed to take away the item
-                            If Map(GetPlayerMap(Index)).Tile(x, y).Data2 = 1 Then
-                                TakeInvItem(Index, InvItemNum, 0)
-                                PlayerMsg(Index, "The key is destroyed in the lock.")
-                            End If
-                        End If
-                    End If
-
-                Case ItemType.Skill
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.")
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.")
-                        Exit Sub
-                    End If
-
-                    ' Get the skill num
-                    n = Item(InvItemNum).Data1
-
-                    If n > 0 Then
-
-                        ' Make sure they are the right class
-                        If Skill(n).ClassReq = GetPlayerClass(Index) Or Skill(n).ClassReq = 0 Then
-                            ' Make sure they are the right level
-                            i = Skill(n).LevelReq
-
-                            If i <= GetPlayerLevel(Index) Then
-                                i = FindOpenSkillSlot(Index)
-
-                                ' Make sure they have an open skill slot
-                                If i > 0 Then
-
-                                    ' Make sure they dont already have the skill
-                                    If Not HasSkill(Index, n) Then
-                                        SetPlayerSkill(Index, i, n)
-                                        SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                                        TakeInvItem(Index, InvItemNum, 0)
-                                        PlayerMsg(Index, "You study the skill carefully.")
-                                        PlayerMsg(Index, "You have learned a new skill!")
-                                    Else
-                                        PlayerMsg(Index, "You have already learned this skill!")
-                                    End If
-
-                                Else
-                                    PlayerMsg(Index, "You have learned all that you can learn!")
-                                End If
-
-                            Else
-                                PlayerMsg(Index, "You must be level " & i & " to learn this skill.")
-                            End If
-
-                        Else
-                            PlayerMsg(Index, "This skill can only be learned by " & CheckGrammar(GetClassName(Skill(n).ClassReq)) & ".")
-                        End If
-
-                    Else
-                        PlayerMsg(Index, "This scroll is not connected to a skill, please inform an admin!")
-                    End If
-                Case ItemType.Furniture
-                    PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.")
-
-                Case ItemType.Recipe
-                    InvItemNum = GetPlayerInvItemNum(Index, invnum)
-
-                    PlayerMsg(Index, "Lets learn this recipe :)")
-                    ' Get the recipe num
-                    n = Item(InvItemNum).Data1
-                    LearnRecipe(Index, n, invnum)
-            End Select
-
-        End If
+        UseItem(Index, invnum)
     End Sub
 
     Sub Packet_Attack(ByVal Index As Integer, ByVal Data() As Byte)
@@ -1111,7 +715,7 @@
         ' Projectile check
         If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
             If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Data1 > 0 Then 'Item has a projectile
-                Call PlayerFireProjectile(Index)
+                PlayerFireProjectile(Index)
                 Exit Sub
             End If
         End If
@@ -1159,11 +763,11 @@
 
                 ' Get the damage we can do
                 If Not CanPlayerCriticalHit(Index) Then
-                    Damage = GetPlayerDamage(Index) - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.endurance) \ 2)
+                    Damage = GetPlayerDamage(Index) - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.Endurance) \ 2)
                     'KnockBackNpc(Index, i)
                 Else
                     n = GetPlayerDamage(Index)
-                    Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.endurance) \ 2)
+                    Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.Endurance) \ 2)
                     PlayerMsg(Index, "You feel a surge of energy upon swinging!")
                     SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                     SendCritical(Index)
@@ -1228,9 +832,9 @@
                 PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-")
                 PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
                 PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP))
-                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.spirit))
+                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.Endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.Speed))
                 n = (GetPlayerStat(i, Stats.strength) \ 2) + (GetPlayerLevel(i) \ 2)
-                i = (GetPlayerStat(i, Stats.endurance) \ 2) + (GetPlayerLevel(i) \ 2)
+                i = (GetPlayerStat(i, Stats.Endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
                 If n > 100 Then n = 100
                 If i > 100 Then i = 100
@@ -1368,9 +972,9 @@
         PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-")
         PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
         PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP))
-        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.spirit))
+        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.Endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.Speed))
         n = (GetPlayerStat(Index, Stats.strength) \ 2) + (GetPlayerLevel(Index) \ 2)
-        i = (GetPlayerStat(Index, Stats.endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
+        i = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
 
         If n > 100 Then n = 100
         If i > 100 Then i = 100
@@ -1649,159 +1253,7 @@
         Buffer = Nothing
     End Sub
 
-    Private Sub Packet_AddChar(ByVal index As Integer, ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Dim Name As String, slot As Byte
-        Dim Sex As Integer
-        Dim Classes As Integer
-        Dim Sprite As Integer
-        Dim i As Integer
-        Dim n As Integer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CAddChar Then Exit Sub
-
-        If Not IsPlaying(index) Then
-            slot = Buffer.ReadInteger
-            Name = Buffer.ReadString
-            Sex = Buffer.ReadInteger
-            Classes = Buffer.ReadInteger
-            Sprite = Buffer.ReadInteger
-
-            ' Prevent hacking
-            If Len(Trim$(Name)) < 3 Then
-                AlertMsg(index, "Character name must be at least three characters in length.")
-                Exit Sub
-            End If
-
-            ' Prevent hacking
-            For i = 1 To Len(Name)
-                n = AscW(Mid$(Name, i, 1))
-
-                If Not isNameLegal(n) Then
-                    AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
-                    Exit Sub
-                End If
-
-            Next
-
-            ' Prevent hacking
-            If (Sex < Enums.Sex.Male) Or (Sex > Enums.Sex.Female) Then Exit Sub
-
-            ' Prevent hacking
-            If Classes < 1 Or Classes > Max_Classes Then Exit Sub
-
-            ' Check if char already exists in slot
-            If CharExist(index, slot) Then
-                AlertMsg(index, "Character already exists!")
-                Exit Sub
-            End If
-
-            ' Check if name is already in use
-            If FindChar(Name) Then
-                AlertMsg(index, "Sorry, but that name is in use!")
-                Exit Sub
-            End If
-
-            ' Everything went ok, add the character
-            TempPlayer(index).CurChar = slot
-            AddChar(index, slot, Name, Sex, Classes, Sprite)
-            Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
-
-            ' log them in!!
-            HandleUseChar(index)
-
-            Buffer = Nothing
-        End If
-
-        NeedToUpDatePlayerList = True
-    End Sub
-
-    Private Sub Packet_UseChar(ByVal index As Integer, ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Dim slot As Byte
-
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ClientPackets.CUseChar Then Exit Sub
-
-        If Not IsPlaying(index) Then
-            If IsLoggedIn(index) Then
-
-                slot = Buffer.ReadInteger
-
-                ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
-                    ' we have a char!
-                    TempPlayer(index).CurChar = slot
-                    HandleUseChar(index)
-                    ClearBank(index)
-                    LoadBank(index, Trim$(Player(index).Login))
-                Else
-                    ' send new char shit
-                    If Not IsPlaying(index) Then
-                        SendNewCharClasses(index)
-                        TempPlayer(index).CurChar = slot
-                    End If
-                End If
-            End If
-        End If
-
-
-        NeedToUpDatePlayerList = True
-    End Sub
-
-    Private Sub Packet_DeleteChar(ByVal index As Integer, ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Dim slot As Byte
-
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ClientPackets.CDelChar Then Exit Sub
-
-        If Not IsPlaying(index) Then
-            If IsLoggedIn(index) Then
-
-                slot = Buffer.ReadInteger
-
-                ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
-                    ' we have a char!
-                    DeleteName(Trim$(Player(index).Character(slot).Name))
-                    ClearCharacter(index, slot)
-                    SaveCharacter(index, slot)
-
-                    Buffer = Nothing
-                    Buffer = New ByteBuffer
-                    Buffer.WriteInteger(ServerPackets.SSelChar)
-                    Buffer.WriteInteger(MAX_CHARS)
-
-                    For i = 1 To MAX_CHARS
-                        If Player(index).Character(i).Classes <= 0 Then
-                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
-                            Buffer.WriteInteger(Player(index).Character(i).Sprite)
-                            Buffer.WriteInteger(Player(index).Character(i).Level)
-                            Buffer.WriteString("")
-                            Buffer.WriteInteger(0)
-                        Else
-                            Buffer.WriteString(Trim$(Player(index).Character(i).Name))
-                            Buffer.WriteInteger(Player(index).Character(i).Sprite)
-                            Buffer.WriteInteger(Player(index).Character(i).Level)
-                            Buffer.WriteString(Trim$(Classes(Player(index).Character(i).Classes).Name))
-                            Buffer.WriteInteger(Player(index).Character(i).Sex)
-                        End If
-
-                    Next
-
-                    SendDataTo(index, Buffer.ToArray)
-                End If
-            End If
-        End If
-
-    End Sub
 
     Private Sub Packet_NeedMap(ByVal index As Integer, ByVal data() As Byte)
         Dim s As String
@@ -3455,30 +2907,6 @@
         SendTradeUpdate(TempPlayer(index).InTrade, 1)
     End Sub
 
-    Public Sub Packet_PlayerMsg(ByVal index As Integer, ByVal Data() As Byte)
-        Dim buffer As ByteBuffer, OtherPlayer As String, Msg As String, OtherPlayerIndex As Integer
-
-        buffer = New ByteBuffer()
-        buffer.WriteBytes(Data)
-        If buffer.ReadInteger <> ClientPackets.CPlayerMsg Then Exit Sub
-        OtherPlayer = buffer.ReadString
-        Msg = buffer.ReadString
-        buffer = Nothing
-
-        OtherPlayerIndex = FindPlayer(OtherPlayer)
-        If OtherPlayerIndex <> index Then
-            If OtherPlayerIndex > 0 Then
-                Call Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
-                Call PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'")
-                Call PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
-            Else
-                Call PlayerMsg(index, "Player is not online.")
-            End If
-        Else
-            Call PlayerMsg(index, "Cannot message your self!")
-        End If
-    End Sub
-
     Public Sub HandleData(ByVal index As Integer, ByVal data() As Byte)
         Dim Buffer() As Byte
         Buffer = data.Clone
@@ -3702,11 +3130,11 @@
                 Next
 
                 .Stat(Stats.strength) = buffer.ReadInteger
-                .Stat(Stats.endurance) = buffer.ReadInteger
-                .Stat(Stats.vitality) = buffer.ReadInteger
+                .Stat(Stats.Endurance) = buffer.ReadInteger
+                .Stat(Stats.Vitality) = buffer.ReadInteger
                 .Stat(Stats.intelligence) = buffer.ReadInteger
-                .Stat(Stats.luck) = buffer.ReadInteger
-                .Stat(Stats.spirit) = buffer.ReadInteger
+                .Stat(Stats.Luck) = buffer.ReadInteger
+                .Stat(Stats.Speed) = buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)

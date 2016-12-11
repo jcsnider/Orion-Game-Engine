@@ -228,11 +228,11 @@ Module ServerTCP
             Next
 
             Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.vitality))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.luck))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -383,11 +383,11 @@ Module ServerTCP
             Next
 
             Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -443,11 +443,11 @@ Module ServerTCP
             Next
 
             Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -972,11 +972,11 @@ Module ServerTCP
         Buffer.WriteInteger(ServerPackets.SPlayerStats)
         Buffer.WriteInteger(Index)
         Buffer.WriteInteger(GetPlayerStat(Index, Stats.strength))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.endurance))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.vitality))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.luck))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Endurance))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Vitality))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Luck))
         Buffer.WriteInteger(GetPlayerStat(Index, Stats.intelligence))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.spirit))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Speed))
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub

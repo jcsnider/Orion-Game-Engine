@@ -93,17 +93,17 @@ Public Class frmEditor_Item
 
     Private Sub scrlEndReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlEndReq.ValueChanged
         lblEndReq.Text = "End: " & scrlEndReq.Value
-        Item(EditorIndex).Stat_Req(Stats.endurance) = scrlEndReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Endurance) = scrlEndReq.Value
     End Sub
 
     Private Sub scrlVitReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVitReq.ValueChanged
         lblVitReq.Text = "Vit: " & scrlVitReq.Value
-        Item(EditorIndex).Stat_Req(Stats.vitality) = scrlVitReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Vitality) = scrlVitReq.Value
     End Sub
 
     Private Sub scrlWillReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLuckReq.ValueChanged
         lblLuckReq.Text = "Will: " & scrlLuckReq.Value
-        Item(EditorIndex).Stat_Req(Stats.luck) = scrlLuckReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Luck) = scrlLuckReq.Value
     End Sub
 
     Private Sub scrlIntReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlIntReq.ValueChanged
@@ -113,7 +113,7 @@ Public Class frmEditor_Item
 
     Private Sub scrlSprReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprReq.ValueChanged
         lblSprReq.Text = "Spr: " & scrlSprReq.Value
-        Item(EditorIndex).Stat_Req(Stats.spirit) = scrlSprReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Speed) = scrlSprReq.Value
     End Sub
 
     Private Sub scrlVitalMod_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVitalMod.ValueChanged
@@ -169,13 +169,13 @@ Public Class frmEditor_Item
     Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddLuck.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddLuck.Text = "+Will: " & scrlAddLuck.Value
-        Item(EditorIndex).Add_Stat(Stats.luck) = scrlAddLuck.Value
+        Item(EditorIndex).Add_Stat(Stats.Luck) = scrlAddLuck.Value
     End Sub
 
     Private Sub scrlAddEnd_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddEnd.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddEnd.Text = "+End: " & scrlAddEnd.Value
-        Item(EditorIndex).Add_Stat(Stats.endurance) = scrlAddEnd.Value
+        Item(EditorIndex).Add_Stat(Stats.Endurance) = scrlAddEnd.Value
     End Sub
 
     Private Sub scrlAddInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddInt.ValueChanged
@@ -187,13 +187,13 @@ Public Class frmEditor_Item
     Private Sub scrlAddVit_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddVit.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddVit.Text = "+Vit: " & scrlAddVit.Value
-        Item(EditorIndex).Add_Stat(Stats.vitality) = scrlAddVit.Value
+        Item(EditorIndex).Add_Stat(Stats.Vitality) = scrlAddVit.Value
     End Sub
 
     Private Sub scrlAddSpr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddSpr.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddSpr.Text = "+Spr: " & scrlAddSpr.Value
-        Item(EditorIndex).Add_Stat(Stats.spirit) = scrlAddSpr.Value
+        Item(EditorIndex).Add_Stat(Stats.Speed) = scrlAddSpr.Value
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click

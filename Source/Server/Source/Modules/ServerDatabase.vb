@@ -97,11 +97,11 @@ Module ServerDatabase
 
             ' continue
             Classes(i).Stat(Stats.strength) = Val(Getvar(filename, "CLASS" & i, "Str"))
-            Classes(i).Stat(Stats.endurance) = Val(Getvar(filename, "CLASS" & i, "End"))
-            Classes(i).Stat(Stats.vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
-            Classes(i).Stat(Stats.luck) = Val(Getvar(filename, "CLASS" & i, "Luck"))
+            Classes(i).Stat(Stats.Endurance) = Val(Getvar(filename, "CLASS" & i, "End"))
+            Classes(i).Stat(Stats.Vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
+            Classes(i).Stat(Stats.Luck) = Val(Getvar(filename, "CLASS" & i, "Luck"))
             Classes(i).Stat(Stats.intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
-            Classes(i).Stat(Stats.spirit) = Val(Getvar(filename, "CLASS" & i, "Spir"))
+            Classes(i).Stat(Stats.Speed) = Val(Getvar(filename, "CLASS" & i, "Speed"))
 
             ' loop for items & values
             For x = 1 To 5
@@ -151,11 +151,11 @@ Module ServerDatabase
             tmpstring = ""
 
             PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
-            PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.endurance)))
-            PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.vitality)))
-            PutVar(filename, "CLASS" & i, "Luck", Str(Classes(i).Stat(Stats.luck)))
+            PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.Endurance)))
+            PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.Vitality)))
+            PutVar(filename, "CLASS" & i, "Luck", Str(Classes(i).Stat(Stats.Luck)))
             PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
-            PutVar(filename, "CLASS" & i, "Spir", Str(Classes(i).Stat(Stats.spirit)))
+            PutVar(filename, "CLASS" & i, "Speed", Str(Classes(i).Stat(Stats.Speed)))
             ' loop for items & values
             For x = 1 To 5
                 PutVar(filename, "CLASS" & i, "StartItem" & x, Str(Classes(i).StartItem(x)))
@@ -176,11 +176,11 @@ Module ServerDatabase
 
         Select Case Vital
             Case Vitals.HP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.vitality) \ 2) + Classes(ClassNum).Stat(Stats.vitality)) * 2
+                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Vitality) \ 2) + Classes(ClassNum).Stat(Stats.Vitality)) * 2
             Case Vitals.MP
                 GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.intelligence) \ 2) + Classes(ClassNum).Stat(Stats.intelligence)) * 2
             Case Vitals.SP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.spirit) \ 2) + Classes(ClassNum).Stat(Stats.spirit)) * 2
+                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Speed) \ 2) + Classes(ClassNum).Stat(Stats.Speed)) * 2
         End Select
 
     End Function
@@ -2242,11 +2242,11 @@ Module ServerDatabase
             Next
 
             Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.vitality))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.spirit))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))

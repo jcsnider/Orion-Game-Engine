@@ -683,11 +683,11 @@ Module GameEditors
                 frmEditor_Item.scrlSpeed.Value = .Speed
 
                 frmEditor_Item.scrlAddStr.Value = .Add_Stat(Stats.strength)
-                frmEditor_Item.scrlAddEnd.Value = .Add_Stat(Stats.endurance)
+                frmEditor_Item.scrlAddEnd.Value = .Add_Stat(Stats.Endurance)
                 frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.intelligence)
-                frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.vitality)
-                frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.luck)
-                frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.spirit)
+                frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.Vitality)
+                frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.Luck)
+                frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.Speed)
 
                 If .KnockBack = 1 Then
                     frmEditor_Item.chkKnockBack.Checked = True
@@ -744,11 +744,11 @@ Module GameEditors
             frmEditor_Item.scrlLevelReq.Value = .LevelReq
 
             frmEditor_Item.scrlStrReq.Value = .Stat_Req(Stats.strength)
-            frmEditor_Item.scrlVitReq.Value = .Stat_Req(Stats.vitality)
-            frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.luck)
-            frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.endurance)
+            frmEditor_Item.scrlVitReq.Value = .Stat_Req(Stats.Vitality)
+            frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.Luck)
+            frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.Endurance)
             frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.intelligence)
-            frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.spirit)
+            frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.Speed)
 
             ' Build cmbClassReq
             frmEditor_Item.cmbClassReq.Items.Clear()
@@ -845,11 +845,11 @@ Module GameEditors
             .scrlQuest.Value = Npc(EditorIndex).QuestNum
 
             .scrlStr.Value = Npc(EditorIndex).Stat(Stats.strength)
-            .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.endurance)
+            .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.Endurance)
             .scrlInt.Value = Npc(EditorIndex).Stat(Stats.intelligence)
-            .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.spirit)
-            .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.luck)
-            .scrlVit.Value = Npc(EditorIndex).Stat(Stats.vitality)
+            .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.Speed)
+            .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.Luck)
+            .scrlVit.Value = Npc(EditorIndex).Stat(Stats.Vitality)
 
             .cmbSkill1.Items.Clear()
             .cmbSkill2.Items.Clear()
@@ -1230,11 +1230,11 @@ Module GameEditors
         frmEditor_Classes.DrawPreview()
 
         frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.strength)
-        frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.luck)
-        frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.endurance)
+        frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.Luck)
+        frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
         frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.intelligence)
-        frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.vitality)
-        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.spirit)
+        frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
+        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Speed)
 
         If Classes(EditorIndex).BaseExp < 10 Then
             frmEditor_Classes.numBaseExp.Value = 10
