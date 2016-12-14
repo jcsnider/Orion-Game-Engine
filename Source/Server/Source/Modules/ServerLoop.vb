@@ -201,7 +201,8 @@ Module ServerLoop
                     SendVital(i, Vitals.SP)
                 End If
             End If
-
+            ' send vitals to party if in one
+            If TempPlayer(i).InParty > 0 Then SendPartyVitals(TempPlayer(i).InParty, i)
         Next
 
     End Sub

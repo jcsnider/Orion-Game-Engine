@@ -118,6 +118,9 @@
         ReDim MapProjectiles(0 To MAX_MAPS, 0 To MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
 
+        'partys
+        ClearPartys()
+
         ' Check if the directory is there, if its not make it
         CheckDir(Application.StartupPath & "\data")
 

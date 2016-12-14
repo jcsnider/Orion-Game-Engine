@@ -339,7 +339,7 @@
     End Sub
 
     Sub LeftGame(ByVal Index As Integer)
-        Dim n As Integer, i As Integer
+        Dim i As Integer
         Dim tradeTarget As Integer
 
         If TempPlayer(Index).InGame Then
@@ -351,12 +351,8 @@
             End If
 
             ' Check if the player was in a party, and if so cancel it out so the other player doesn't continue to get half exp
-            If TempPlayer(Index).InParty = True Then
-                n = TempPlayer(Index).PartyPlayer
-                PlayerMsg(n, GetPlayerName(Index) & " has left " & Options.Game_Name & ", disbanning party.")
-                TempPlayer(n).InParty = False
-                TempPlayer(n).PartyPlayer = 0
-            End If
+            ' leave party.
+            Party_PlayerLeave(Index)
 
             ' cancel any trade they're in
             If TempPlayer(Index).InTrade > 0 Then
@@ -543,8 +539,13 @@
                 MapNum = .Data1
                 x = .Data2
                 y = .Data3
-                'TempPlayer(Index).CanPlayerMove = 1
-                PlayerWarp(Index, MapNum, x, y)
+
+                If TempPlayer(Index).InParty Then
+                    PartyWarp(Index, MapNum, x, y)
+                Else
+                    PlayerWarp(Index, MapNum, x, y)
+                End If
+
                 DidWarp = True
                 Moved = True
             End If
@@ -556,7 +557,11 @@
                 y = .Data3
                 ' send the animation to the map
                 SendDoorAnimation(GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
-                'TempPlayer(Index).CanPlayerMove = 1
+                If TempPlayer(Index).InParty Then
+                    PartyWarp(Index, MapNum, x, y)
+                Else
+                    PlayerWarp(Index, MapNum, x, y)
+                End If
                 PlayerWarp(Index, MapNum, x, y)
                 DidWarp = True
                 Moved = True
@@ -606,7 +611,9 @@
                     SendActionMsg(GetPlayerMap(Index), "+" & amount, Colour, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                     SetPlayerVital(Index, VitalType, GetPlayerVital(Index, VitalType) + amount)
                     PlayerMsg(Index, "You feel rejuvinating forces flowing through your boy.")
-                    Call SendVital(Index, VitalType)
+                    SendVital(Index, VitalType)
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
                 End If
                 Moved = True
             End If
@@ -621,7 +628,9 @@
                 Else
                     SetPlayerVital(Index, Enums.Vitals.HP, GetPlayerVital(Index, Enums.Vitals.HP) - amount)
                     PlayerMsg(Index, "You're injured by a trap.")
-                    Call SendVital(Index, Enums.Vitals.HP)
+                    SendVital(Index, Enums.Vitals.HP)
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
                 End If
                 Moved = True
             End If
@@ -1330,6 +1339,9 @@
         SendVital(Index, Vitals.MP)
         SendVital(Index, Vitals.SP)
 
+        ' send vitals to party if in one
+        If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+
         ' If the player the attacker killed was a pk then take it away
         If GetPlayerPK(Index) = True Then
             SetPlayerPK(Index, False)
@@ -1584,6 +1596,9 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
 
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+
                 Case ItemType.Weapon
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)
 
@@ -1623,6 +1638,9 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
+
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
                 Case ItemType.Helmet
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)
@@ -1664,6 +1682,9 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
 
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+
                 Case ItemType.Shield
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)
 
@@ -1704,6 +1725,9 @@
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
 
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+
                 Case ItemType.Shoes
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)
 
@@ -1743,6 +1767,9 @@
 
                     SendWornEquipment(Index)
                     SendMapEquipment(Index)
+
+                    ' send vitals to party if in one
+                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
                 Case ItemType.Gloves
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)

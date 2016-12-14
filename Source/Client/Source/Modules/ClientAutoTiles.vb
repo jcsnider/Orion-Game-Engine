@@ -741,9 +741,9 @@ Public Module ClientAutoTiles
 
     Public Function checkTileMatch(ByVal layerNum As Integer, ByVal X1 As Integer, ByVal Y1 As Integer, ByVal X2 As Integer, ByVal Y2 As Integer) As Boolean
         ' we'll exit out early if true
-        Dim exTile As Boolean
+        'Dim exTile As Boolean
 
-        If layerNum > MapLayer.Count - 1 Then exTile = True : layerNum = layerNum - (MapLayer.Count - 1)
+        'If layerNum > MapLayer.Count - 1 Then exTile = True : layerNum = layerNum - (MapLayer.Count - 1)
         checkTileMatch = True
         ' if it's off the map then set it as autotile and exit out early
         If X2 < 0 Or X2 > Map.MaxX Or Y2 < 0 Or Y2 > Map.MaxY Then
@@ -787,6 +787,8 @@ Public Module ClientAutoTiles
         Dim YOffset As Integer, XOffset As Integer
         'Dim srcrect As New Rectangle(0, 0, 0, 0)
         Dim tmpSprite As Sprite
+
+        If GettingMap Then Exit Sub
 
         ' calculate the offset
         If forceFrame > 0 Then

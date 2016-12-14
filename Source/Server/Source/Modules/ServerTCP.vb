@@ -2175,4 +2175,19 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
+    Sub SendChatBubble(ByVal MapNum As Integer, ByVal Target As Integer, ByVal TargetType As Integer, ByVal message As String, ByVal Colour As Integer)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SChatBubble)
+
+        Buffer.WriteInteger(Target)
+        Buffer.WriteInteger(TargetType)
+        Buffer.WriteString(message)
+        Buffer.WriteInteger(Colour)
+        SendDataToMap(MapNum, Buffer.ToArray)
+
+        Buffer = Nothing
+
+    End Sub
 End Module

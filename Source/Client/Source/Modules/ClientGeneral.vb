@@ -142,6 +142,9 @@ Module ClientGeneral
         'craft
         ClearRecipes()
 
+        'party
+        ClearParty()
+
         SetStatus("Loading...")
         GettingMap = True
         vbQuote = Chr(34) ' "

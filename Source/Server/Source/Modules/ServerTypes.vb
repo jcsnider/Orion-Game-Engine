@@ -113,7 +113,7 @@
         Dim DataTimer As Integer
         Dim DataBytes As Integer
         Dim DataPackets As Integer
-        Dim PartyPlayer As Integer
+        Dim partyInvite As Integer
         Dim InParty As Byte
         Dim TargetType As Byte
         Dim Target As Byte

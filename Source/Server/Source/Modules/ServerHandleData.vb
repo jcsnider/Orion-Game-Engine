@@ -52,9 +52,6 @@
         Packets.Add(ClientPackets.CWhosOnline, AddressOf Packet_WhosOnline)
         Packets.Add(ClientPackets.CSetMotd, AddressOf Packet_SetMotd)
         Packets.Add(ClientPackets.CSearch, AddressOf Packet_PlayerSearch)
-        Packets.Add(ClientPackets.CParty, AddressOf Packet_Party)
-        Packets.Add(ClientPackets.CJoinParty, AddressOf Packet_JoinParty)
-        Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
         Packets.Add(ClientPackets.CSkills, AddressOf Packet_Skills)
         Packets.Add(ClientPackets.CCast, AddressOf Packet_Cast)
         Packets.Add(ClientPackets.CQuit, AddressOf Packet_QuitGame)
@@ -150,6 +147,14 @@
 
         'emotes
         Packets.Add(ClientPackets.CEmote, AddressOf Packet_Emote)
+
+        'parties
+        Packets.Add(ClientPackets.CRequestParty, AddressOf Packet_PartyRquest)
+        Packets.Add(ClientPackets.CAcceptParty, AddressOf Packet_AcceptParty)
+        Packets.Add(ClientPackets.CDeclineParty, AddressOf Packet_DeclineParty)
+        Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
+        Packets.Add(ClientPackets.CPartyChatMsg, AddressOf Packet_PartyChatMsg)
+
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)
@@ -525,6 +530,7 @@
         Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
 
         SayMsg_Map(GetPlayerMap(index), index, msg, ColorType.White)
+        SendChatBubble(GetPlayerMap(index), index, TargetType.Player, msg, ColorType.White)
 
         Buffer = Nothing
     End Sub
@@ -1985,131 +1991,6 @@
 
         If TargetFound = 0 Then
             SendTarget(index, 0, 0)
-        End If
-
-        buffer = Nothing
-    End Sub
-
-    Sub Packet_Party(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer
-        Dim n As Integer
-        buffer = New ByteBuffer
-        buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CParty Then Exit Sub
-
-        n = FindPlayer(buffer.ReadString)
-        buffer = Nothing
-
-        ' Prevent partying with self
-        If n = index Then Exit Sub
-
-        ' Check for a previous party and if so drop it
-        If TempPlayer(index).InParty = True Then
-            PlayerMsg(index, "You are already in a party!")
-            Exit Sub
-        End If
-
-        If n > 0 Then
-
-            ' Check if its an admin
-            If GetPlayerAccess(index) > AdminType.Monitor Then
-                Call PlayerMsg(index, "You can't join a party, you are an admin!")
-                Exit Sub
-            End If
-
-            If GetPlayerAccess(n) > AdminType.Monitor Then
-                Call PlayerMsg(index, "Admins cannot join parties!")
-                Exit Sub
-            End If
-
-            ' Make sure they are in right level range
-            If GetPlayerLevel(index) + 5 < GetPlayerLevel(n) Or GetPlayerLevel(index) - 5 > GetPlayerLevel(n) Then
-                Call PlayerMsg(index, "There is more then a 5 level gap between you two, party failed.")
-                Exit Sub
-            End If
-
-            ' Check to see if player is already in a party
-            If TempPlayer(n).InParty = False Then
-                Call PlayerMsg(index, "Party request has been sent to " & GetPlayerName(n) & ".")
-                Call PlayerMsg(n, GetPlayerName(index) & " wants you to join their party.  Type /join to join, or /leave to decline.")
-                TempPlayer(index).PartyStarter = True
-                TempPlayer(index).PartyPlayer = n
-                TempPlayer(n).PartyPlayer = index
-            Else
-                Call PlayerMsg(index, "Player is already in a party!")
-            End If
-
-        Else
-            Call PlayerMsg(index, "Player is not online.")
-        End If
-    End Sub
-
-    Sub Packet_JoinParty(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer
-        Dim n As Integer
-        buffer = New ByteBuffer
-        buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CJoinParty Then Exit Sub
-        n = TempPlayer(index).PartyPlayer
-
-        If n > 0 Then
-
-            ' Check to make sure they aren't the starter
-            If TempPlayer(index).PartyStarter = False Then
-
-                ' Check to make sure that each of there party players match
-                If TempPlayer(n).PartyPlayer = index Then
-                    Call PlayerMsg(index, "You have joined " & GetPlayerName(n) & "'s party!")
-                    Call PlayerMsg(n, GetPlayerName(index) & " has joined your party!")
-                    TempPlayer(index).InParty = True
-                    TempPlayer(n).InParty = True
-                Else
-                    Call PlayerMsg(index, "Party failed.")
-                End If
-
-            Else
-                Call PlayerMsg(index, "You have not been invited to join a party!")
-            End If
-
-        Else
-            Call PlayerMsg(index, "You have not been invited into a party!")
-        End If
-
-        buffer = Nothing
-    End Sub
-
-    Sub Packet_LeaveParty(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer
-        Dim n As Integer
-        buffer = New ByteBuffer
-        buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CLeaveParty Then Exit Sub
-
-        n = TempPlayer(index).PartyPlayer
-
-        If n > 0 Then
-            If TempPlayer(index).InParty = True Then
-                PlayerMsg(index, "You have left the party.")
-                PlayerMsg(n, GetPlayerName(index) & " has left the party.")
-                TempPlayer(index).PartyPlayer = 0
-                TempPlayer(index).PartyStarter = False
-                TempPlayer(index).InParty = False
-                TempPlayer(n).PartyPlayer = 0
-                TempPlayer(n).PartyStarter = False
-                TempPlayer(n).InParty = False
-            Else
-                PlayerMsg(index, "Declined party request.")
-                PlayerMsg(n, GetPlayerName(index) & " declined your request.")
-                TempPlayer(index).PartyPlayer = 0
-                TempPlayer(index).PartyStarter = False
-                TempPlayer(index).InParty = False
-                TempPlayer(n).PartyPlayer = 0
-                TempPlayer(n).PartyStarter = False
-                TempPlayer(n).InParty = False
-            End If
-
-        Else
-            PlayerMsg(index, "You are not in a party!")
         End If
 
         buffer = Nothing

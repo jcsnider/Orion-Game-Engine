@@ -1053,35 +1053,10 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendPartyRequest(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CParty)
-        Buffer.WriteString(Name)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendJoinParty()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CJoinParty)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Public Sub SendLeaveGame()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CQuit)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendLeaveParty()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CLeaveParty)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

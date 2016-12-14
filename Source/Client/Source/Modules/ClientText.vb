@@ -605,68 +605,69 @@ Module ClientText
 
     End Function
 
-    'Public Sub DrawChatBubble(ByVal Index As Integer)
-    '    Dim theArray() As String, X As Integer, Y As Integer, i As Integer, MaxWidth As Integer, X2 As Integer, Y2 As Integer
+    Public Sub DrawChatBubble(ByVal Index As Integer)
+        Dim theArray As List(Of String), X As Integer, Y As Integer, i As Integer, MaxWidth As Integer, X2 As Integer, Y2 As Integer
 
 
-    '    With chatBubble(Index)
-    '        If .targetType = TargetType.PLAYER Then
-    '            ' it's a player
-    '            If GetPlayerMap(.target) = GetPlayerMap(MyIndex) Then
-    '                ' it's on our map - get co-ords
-    '                X = ConvertMapX((Player(.target).X * 32) + Player(.target).XOffset) + 16
-    '                Y = ConvertMapY((Player(.target).Y * 32) + Player(.target).YOffset) - 40
-    '            End If
-    '        ElseIf .targetType = TargetType.NPC Then
-    '            ' it's on our map - get co-ords
-    '            X = ConvertMapX((MapNpc(.target).X * 32) + MapNpc(.target).XOffset) + 16
-    '            Y = ConvertMapY((MapNpc(.target).Y * 32) + MapNpc(.target).YOffset) - 40
-    '        ElseIf .targetType = TargetType.EVENT Then
-    '            X = ConvertMapX((Map.MapEvents(.target).X * 32) + Map.MapEvents(.target).XOffset) + 16
-    '            Y = ConvertMapY((Map.MapEvents(.target).Y * 32) + Map.MapEvents(.target).YOffset) - 40
-    '        End If
-    '        ' word wrap the text
-    '        WordWrap_Array(.Msg, ChatBubbleWidth, theArray)
-    '        ' find max width
-    '        For i = 1 To UBound(theArray)
-    '            If getWidth(theArray(i)) > MaxWidth Then MaxWidth = getWidth(theArray(i))
-    '        Next
-    '        ' calculate the new position
-    '        X2 = X - (MaxWidth \ 2)
-    '        Y2 = Y - (UBound(theArray) * 12)
-    '        ' render bubble - top left
-    '        RenderTexture Tex_ChatBubble, X2 - 9, Y2 - 5, 0, 0, 9, 5, 9, 5, -1, True
-    '    ' top right
-    '        RenderTexture Tex_ChatBubble, X2 + MaxWidth, Y2 - 5, 119, 0, 9, 5, 9, 5, -1, True
-    '    ' top
-    '        RenderTexture Tex_ChatBubble, X2, Y2 - 5, 10, 0, MaxWidth, 5, 5, 5, -1, True
-    '    ' bottom left
-    '        RenderTexture Tex_ChatBubble, X2 - 9, Y, 0, 19, 9, 6, 9, 6, -1, True
-    '    ' bottom right
-    '        RenderTexture Tex_ChatBubble, X2 + MaxWidth, Y, 119, 19, 9, 6, 9, 6, -1, True
-    '    ' bottom - left half
-    '        RenderTexture Tex_ChatBubble, X2, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6, -1, True
-    '    ' bottom - right half
-    '        RenderTexture Tex_ChatBubble, X2 + (MaxWidth \ 2) + 6, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6, -1, True
-    '    ' left
-    '        RenderTexture Tex_ChatBubble, X2 - 9, Y2, 0, 6, 9, (UBound(theArray) * 12), 9, 1, -1, True
-    '    ' right
-    '        RenderTexture Tex_ChatBubble, X2 + MaxWidth, Y2, 119, 6, 9, (UBound(theArray) * 12), 9, 1, -1, True
-    '    ' center
-    '        RenderTexture Tex_ChatBubble, X2, Y2, 9, 5, MaxWidth, (UBound(theArray) * 12), 1, 1, -1, True
-    '    ' little pointy bit
-    '        RenderTexture Tex_ChatBubble, X - 5, Y, 58, 19, 11, 11, 11, 11, -1, True
-    '                ' render each line centralised
-    '        For i = 1 To UBound(theArray)
-    '            RenderText Font_Georgia, theArray(i), X - (getWidth(theArray(i)) / 2), Y2, DarkGrey, 0, True, True
-    '        Y2 = Y2 + 12
-    '        Next
-    '        ' check if it's timed out - close it if so
-    '        If .Timer + 5000 < GetTickCount() Then
-    '            .active = False
-    '        End If
-    '    End With
+        With chatBubble(Index)
+            If .targetType = TargetType.Player Then
+                ' it's a player
+                If GetPlayerMap(.target) = GetPlayerMap(MyIndex) Then
+                    ' it's on our map - get co-ords
+                    X = ConvertMapX((Player(.target).X * 32) + Player(.target).XOffset) + 16
+                    Y = ConvertMapY((Player(.target).Y * 32) + Player(.target).YOffset) - 40
+                End If
+            ElseIf .targetType = TargetType.Npc Then
+                ' it's on our map - get co-ords
+                X = ConvertMapX((MapNpc(.target).X * 32) + MapNpc(.target).XOffset) + 16
+                Y = ConvertMapY((MapNpc(.target).Y * 32) + MapNpc(.target).YOffset) - 40
+            ElseIf .targetType = TargetType.Event Then
+                X = ConvertMapX((Map.MapEvents(.target).X * 32) + Map.MapEvents(.target).XOffset) + 16
+                Y = ConvertMapY((Map.MapEvents(.target).Y * 32) + Map.MapEvents(.target).YOffset) - 40
+            End If
+            ' word wrap the text
+            theArray = WordWrap(.Msg, ChatBubbleWidth)
+            ' find max width
+            For i = 0 To theArray.Count - 1
+                If getTextWidth(theArray(i)) > MaxWidth Then MaxWidth = getTextWidth(theArray(i))
+            Next
+            ' calculate the new position
+            X2 = X - (MaxWidth \ 2)
+            Y2 = Y - (theArray.Count * 12)
+            ' render bubble - top left
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2 - 5, 0, 0, 9, 5)
+            ' top right
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2 - 5, 119, 0, 9, 5)
+            ' top
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2 - 5, 10, 0, MaxWidth, 5)
+            ' bottom left
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y, 0, 19, 9, 6)
+            ' bottom right
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y, 119, 19, 9, 6)
+            ' bottom - left half
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y, 10, 19, (MaxWidth \ 2) - 5, 6)
+            ' bottom - right half
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + (MaxWidth \ 2) + 6, Y, 10, 19, (MaxWidth \ 2) - 5, 6)
+            ' left
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2, 0, 6, 9, (theArray.Count * 12))
+            ' right
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2, 119, 6, 9, (theArray.Count * 12))
+            ' center
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2, 9, 5, MaxWidth, (theArray.Count * 12))
+            ' little pointy bit
+            RenderTextures(ChatBubbleGFX, GameWindow, X - 5, Y, 58, 19, 11, 11)
 
-    'End Sub
+            ' render each line centralised
+            For i = 0 To theArray.Count - 1
+                DrawText(X - (getTextWidth(theArray(i)) / 2), Y2, theArray(i), ToSFMLColor(Drawing.ColorTranslator.FromOle(QBColor(.colour))), Color.Black, GameWindow)
+                Y2 = Y2 + 12
+            Next
+            ' check if it's timed out - close it if so
+            If .Timer + 5000 < GetTickCount() Then
+                .active = False
+            End If
+        End With
+
+    End Sub
 
 End Module

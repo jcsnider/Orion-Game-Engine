@@ -174,6 +174,7 @@
         Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
         'SChatBubble
+        Packets.Add(ServerPackets.SChatBubble, AddressOf Packet_ChatBubble)
         Packets.Add(ServerPackets.SSpecialEffect, AddressOf Packet_SpecialEffect)
         'SPic
         Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
@@ -193,6 +194,11 @@
 
         'emotes
         Packets.Add(ServerPackets.SEmote, AddressOf Packet_Emote)
+
+        'party
+        Packets.Add(ServerPackets.SPartyInvite, AddressOf Packet_PartyInvite)
+        Packets.Add(ServerPackets.SPartyUpdate, AddressOf Packet_PartyUpdate)
+        Packets.Add(ServerPackets.SPartyVitals, AddressOf Packet_PartyVitals)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)
@@ -2612,6 +2618,25 @@
             .Emote = emote
             .EmoteTimer = GetTickCount() + 5000
         End With
+
+        buffer = Nothing
+
+    End Sub
+
+    Private Sub Packet_ChatBubble(ByVal Data() As Byte)
+        Dim buffer As ByteBuffer
+        Dim targetType As Integer, target As Integer, Message As String, colour As Integer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        If buffer.ReadInteger <> ServerPackets.SChatBubble Then Exit Sub
+
+        target = buffer.ReadInteger
+        TargetType = buffer.ReadInteger
+        Message = buffer.ReadString
+        colour = buffer.ReadInteger
+        AddChatBubble(target, TargetType, Message, colour)
 
         buffer = Nothing
 

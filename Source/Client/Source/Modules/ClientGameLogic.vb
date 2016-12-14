@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 
 Module ClientGameLogic
     Public GameRand As New Random()
+
     Sub GameLoop()
         Dim i As Integer
         Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
@@ -18,6 +19,7 @@ Module ClientGameLogic
 
         Do
             If GameDestroyed Then End
+
             DirDown = VbKeyDown
             DirUp = VbKeyUp
             DirLeft = VbKeyLeft
@@ -36,8 +38,6 @@ Module ClientGameLogic
                 'Calculate FPS
                 If starttime < GetTickCount() Then
                     FPS = tmpfps
-
-                    'Code to show FPS goes here
 
                     tmpfps = 0
                     starttime = GetTickCount() + 1000
@@ -75,8 +75,11 @@ Module ClientGameLogic
                 End If
 
                 If tmr10000 < Tick Then
+                    'clear any unused gfx
+                    ClearGFX()
                     GetPing()
                     DrawPing()
+
                     tmr10000 = Tick + 10000
                 End If
 
@@ -562,7 +565,7 @@ Module ClientGameLogic
 
                 ' Join party
                 Case "/join"
-                    SendJoinParty()
+                    SendAcceptParty()
                 ' Leave party
                 Case "/leave"
                     SendLeaveParty()
@@ -1218,6 +1221,39 @@ Continue1:
                 DrawMapNameColor = SFML.Graphics.Color.White
         End Select
         g.Dispose()
+    End Sub
+
+    Public Sub AddChatBubble(ByVal target As Long, ByVal targetType As Byte, ByVal Msg As String, ByVal colour As Long)
+        Dim i As Long, Index As Long
+
+        ' set the global index
+
+        chatBubbleIndex = chatBubbleIndex + 1
+        If chatBubbleIndex < 1 Or chatBubbleIndex > Byte.MaxValue Then chatBubbleIndex = 1
+        ' default to new bubble
+        Index = chatBubbleIndex
+        ' loop through and see if that player/npc already has a chat bubble
+        For i = 1 To Byte.MaxValue
+            If chatBubble(i).targetType = targetType Then
+                If chatBubble(i).target = target Then
+                    ' reset master index
+                    If chatBubbleIndex > 1 Then chatBubbleIndex = chatBubbleIndex - 1
+                    ' we use this one now, yes?
+                    Index = i
+                    Exit For
+                End If
+            End If
+        Next
+        ' set the bubble up
+        With chatBubble(Index)
+            .target = target
+            .targetType = targetType
+            .Msg = Msg
+            .colour = colour
+            .Timer = GetTickCount()
+            .active = True
+        End With
+
     End Sub
 
 End Module

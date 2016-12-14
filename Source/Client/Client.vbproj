@@ -137,6 +137,7 @@
     <Compile Include="Source\Modules\ClientHotBar.vb" />
     <Compile Include="Source\Modules\ClientHousing.vb" />
     <Compile Include="Source\Modules\ClientINIAccess.vb" />
+    <Compile Include="Source\Modules\ClientPartys.vb" />
     <Compile Include="Source\Modules\ClientPlayer.vb" />
     <Compile Include="Source\Modules\ClientProjectiles.vb" />
     <Compile Include="Source\Modules\ClientQuest.vb" />
@@ -259,6 +260,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Data Files\Graphics\ChatBubble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data Files\Graphics\Emotes\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

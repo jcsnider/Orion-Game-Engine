@@ -1904,19 +1904,19 @@ Public Module ServerEvents
 
     End Sub
 
-    Sub SendChatBubble(ByVal MapNum As Integer, ByVal Target As Integer, ByVal TargetType As Integer, ByVal message As String, ByVal Colour As Integer)
-        Dim Buffer As ByteBuffer
+    'Sub SendChatBubble(ByVal MapNum As Integer, ByVal Target As Integer, ByVal TargetType As Integer, ByVal message As String, ByVal Colour As Integer)
+    '    Dim Buffer As ByteBuffer
 
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ServerPackets.SChatBubble)
-        Buffer.WriteInteger(Target)
-        Buffer.WriteInteger(TargetType)
-        Buffer.WriteString(message)
-        Buffer.WriteInteger(Colour)
-        SendDataToMap(MapNum, Buffer.ToArray)
-        Buffer = Nothing
+    '    Buffer = New ByteBuffer
+    '    Buffer.WriteInteger(ServerPackets.SChatBubble)
+    '    Buffer.WriteInteger(Target)
+    '    Buffer.WriteInteger(TargetType)
+    '    Buffer.WriteString(message)
+    '    Buffer.WriteInteger(Colour)
+    '    SendDataToMap(MapNum, Buffer.ToArray)
+    '    Buffer = Nothing
 
-    End Sub
+    'End Sub
 
     Sub SendSwitchesAndVariables(Index As Integer, Optional everyone As Boolean = False)
         Dim Buffer As ByteBuffer, i As Integer

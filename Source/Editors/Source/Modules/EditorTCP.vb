@@ -28,7 +28,7 @@ Module EditorTCP
         PlayerSocket.SendBufferSize = 4096
         PlayerSocket.NoDelay = False
         ReDim asyncBuff(8192)
-        PlayerSocket.BeginConnect("localhost", 7001, New AsyncCallback(AddressOf ConnectCallback), PlayerSocket)
+        PlayerSocket.BeginConnect(Options.IP, Options.Port, New AsyncCallback(AddressOf ConnectCallback), PlayerSocket)
         SckConnecting = True
     End Sub
 

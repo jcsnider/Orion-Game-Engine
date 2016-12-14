@@ -367,7 +367,7 @@ Public Module ClientGuiFunctions
                 ElseIf DialogType = DIALOGUE_TYPE_VISIT Then
                     SendVisit(1)
                 ElseIf DialogType = DIALOGUE_TYPE_PARTY Then
-                    SendJoinParty()
+                    SendAcceptParty()
                 ElseIf DialogType = DIALOGUE_TYPE_QUEST Then
                     If QuestAcceptTag > 0 Then
                         PlayerHandleQuest(QuestAcceptTag, 1)

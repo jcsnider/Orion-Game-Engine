@@ -141,6 +141,11 @@
         'emotes
         SEmote
 
+        'Parties
+        SPartyInvite
+        SPartyUpdate
+        SPartyVitals
+
         ' Make sure SMSG_COUNT is below everything else
         SMSG_COUNT
     End Enum
@@ -191,9 +196,6 @@
         CWhosOnline
         CSetMotd
         CSearch
-        CParty
-        CJoinParty
-        CLeaveParty
         CSkills
         CCast
         CQuit
@@ -289,6 +291,13 @@
 
         'emotes
         CEmote
+
+        'party
+        CRequestParty
+        CAcceptParty
+        CDeclineParty
+        CLeaveParty
+        CPartyChatMsg
 
         ' Make sure CMSG_COUNT is below everything else
         CMSG_COUNT

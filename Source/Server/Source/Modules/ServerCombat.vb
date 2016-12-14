@@ -472,28 +472,13 @@
                 exp = 1
             End If
 
-            ' Check if in party, if so divide the exp up by 2
-            If TempPlayer(Attacker).InParty = False Then
-                SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                SendExp(Attacker)
-                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
+            ' in party?
+            If TempPlayer(Attacker).InParty > 0 Then
+                ' pass through party sharing function
+                Party_ShareExp(TempPlayer(Attacker).InParty, exp, Attacker, GetPlayerMap(Attacker))
             Else
-                exp = exp / 2
-
-                If exp < 0 Then
-                    exp = 1
-                End If
-
-                SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
-                SendExp(Attacker)
-                SendActionMsg(GetPlayerMap(Attacker), "+" & exp & " Shared EXP", ColorType.White, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
-                n = TempPlayer(Attacker).PartyPlayer
-
-                If n > 0 Then
-                    SetPlayerExp(n, GetPlayerExp(n) + exp)
-                    SendExp(n)
-                    SendActionMsg(GetPlayerMap(n), "+" & exp & " EXP", ColorType.White, 1, (GetPlayerX(n) * 32), (GetPlayerY(n) * 32))
-                End If
+                ' no party - keep exp for self
+                GivePlayerEXP(Attacker, exp)
             End If
 
             ' Drop the goods if they get it
@@ -516,14 +501,6 @@
             Buffer.WriteInteger(MapNpcNum)
             SendDataToMap(MapNum, Buffer.ToArray())
             Buffer = Nothing
-
-            ' Check for level up
-            CheckPlayerLevelUp(Attacker)
-
-            ' Check for level up party member
-            If TempPlayer(Attacker).InParty = True Then
-                CheckPlayerLevelUp(TempPlayer(Attacker).PartyPlayer)
-            End If
 
             ' Check if target is npc that died and if so set target to 0
             If TempPlayer(Attacker).TargetType = TargetType.Npc Then
@@ -778,6 +755,10 @@
             ' Player not dead, just do the damage
             SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - damage)
             SendVital(Victim, Vitals.HP)
+
+            ' send vitals to party if in one
+            If TempPlayer(Victim).InParty > 0 Then SendPartyVitals(TempPlayer(Victim).InParty, Victim)
+
             SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TargetType.Player, Victim)
             ' Say damage
             SendActionMsg(GetPlayerMap(Victim), "-" & damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))

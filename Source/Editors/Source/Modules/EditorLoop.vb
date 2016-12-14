@@ -124,6 +124,9 @@ Module EditorLoop
         'craft
         ClearRecipes()
 
+        ' load options
+        LoadOptions()
+
         GameDestroyed = False
         GameStarted = True
 
@@ -132,6 +135,61 @@ Module EditorLoop
         GameLoop()
 
     End Sub
+
+#Region "Options"
+    Public Sub SaveOptions()
+        Dim FileName As String
+
+        FileName = Application.StartupPath & "\Data Files\config.ini"
+
+        PutVar(FileName, "Options", "Username", Trim$(Options.Username))
+        PutVar(FileName, "Options", "Password", Trim$(Options.Password))
+        PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
+        PutVar(FileName, "Options", "IP", Options.IP)
+        PutVar(FileName, "Options", "Port", Str(Options.Port))
+        PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
+        PutVar(FileName, "Options", "Music", Str(Options.Music))
+        PutVar(FileName, "Options", "Sound", Str(Options.Sound))
+        PutVar(FileName, "Options", "Volume", Str(Options.Volume))
+        PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
+    End Sub
+
+    Public Sub LoadOptions()
+        Dim FileName As String
+
+        FileName = Application.StartupPath & "\Data Files\config.ini"
+
+        If Not FileExist(FileName) Then
+            Options.Password = ""
+            Options.SavePass = 0
+            Options.Username = ""
+            Options.IP = "127.0.0.1"
+            Options.Port = 7001
+            Options.MenuMusic = ""
+            Options.Music = 1
+            Options.Sound = 1
+            Options.Volume = 100
+            Options.ScreenSize = 0
+            SaveOptions()
+        Else
+            Options.Username = Getvar(FileName, "Options", "Username")
+            Options.Password = Getvar(FileName, "Options", "Password")
+            Options.SavePass = Getvar(FileName, "Options", "SavePass")
+            Options.IP = Getvar(FileName, "Options", "IP")
+            Options.Port = Val(Getvar(FileName, "Options", "Port"))
+            Options.MenuMusic = Getvar(FileName, "Options", "MenuMusic")
+            Options.Music = Getvar(FileName, "Options", "Music")
+            Options.Sound = Getvar(FileName, "Options", "Sound")
+            If Getvar(FileName, "Options", "Volume") = "" Then
+                Options.Volume = 100
+                SaveOptions()
+            End If
+            Options.Volume = Getvar(FileName, "Options", "Volume")
+            Options.ScreenSize = Val(Getvar(FileName, "Options", "ScreenSize"))
+        End If
+
+    End Sub
+#End Region
 
     Sub GameLoop()
         Dim dest As Point = New Point(frmEditor_MapEditor.PointToScreen(frmEditor_MapEditor.picScreen.Location))

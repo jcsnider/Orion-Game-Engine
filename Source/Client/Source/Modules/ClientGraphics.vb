@@ -158,6 +158,10 @@ Module ClientGraphics
     Public EmotesGFX() As Texture
     Public EmotesGFXInfo() As GraphicInfo
 
+    Public ChatBubbleGFX As Texture
+    Public ChatBubbleGFXInfo As GraphicInfo
+
+
     ' #Day/Night
     'Public NightGfx As Texture
     'Public NightGfxInfo As GraphicInfo
@@ -514,6 +518,15 @@ Module ClientGraphics
             ProgBarGFXInfo.Height = ProgBarGFX.Size.Y
         End If
 
+        ChatBubbleGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "ChatBubble" & GFX_EXT) Then
+            ChatBubbleGFX = New Texture(Application.StartupPath & GFX_PATH & "ChatBubble" & GFX_EXT)
+
+            'Cache the width and height
+            ChatBubbleGFXInfo.Width = ChatBubbleGFX.Size.X
+            ChatBubbleGFXInfo.Height = ChatBubbleGFX.Size.Y
+        End If
+
         ReDim EmotesGFX(0 To NumEmotes)
         ReDim EmotesGFXInfo(0 To NumEmotes)
         For i = 1 To NumEmotes
@@ -545,10 +558,10 @@ Module ClientGraphics
         'End If
     End Sub
 
-    Public Sub DrawEmotes(ByVal x2 As Long, ByVal y2 As Long, ByVal Sprite As Long)
+    Public Sub DrawEmotes(ByVal x2 As Integer, ByVal y2 As Integer, ByVal Sprite As Integer)
         Dim rec As Rectangle
-        Dim X As Long, y As Long, Anim As Long
-        Dim width As Long, height As Long
+        Dim X As Integer, y As Integer, Anim As Integer
+        Dim width As Integer, height As Integer
 
         ' If debug mode, handle error then exit out
 
@@ -1281,6 +1294,7 @@ Module ClientGraphics
         Dim srcrect As New Rectangle(0, 0, 0, 0)
         Dim dest As Rectangle = New Rectangle(frmMainGame.PointToScreen(frmMainGame.picscreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
+        If GettingMap Then Exit Sub
 
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
@@ -1499,9 +1513,6 @@ Module ClientGraphics
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
 
-        'clear any unused gfx
-        ClearGFX()
-
         ' blit lower tiles
         If NumTileSets > 0 Then
             For X = TileView.left To TileView.right + 1
@@ -1553,10 +1564,12 @@ Module ClientGraphics
         End If
 
         'Draw sum d00rs.
+        If GettingMap Then Exit Sub
+
         For X = TileView.left To TileView.right
             For Y = TileView.top To TileView.bottom
-
                 If IsValidMapPoint(X, Y) Then
+                    If Map.Tile Is Nothing Then Exit Sub
                     If Map.Tile(X, Y).Type = TileType.Door Then
                         DrawDoor(X, Y)
                     End If
@@ -1761,6 +1774,13 @@ Module ClientGraphics
             DrawFog()
         End If
 
+        ' draw the messages
+        For I = 1 To Byte.MaxValue
+            If chatBubble(I).active Then
+                'DrawChatBubble(I)
+            End If
+        Next
+
         'action msg
         For I = 1 To Byte.MaxValue
             DrawActionMsg(I)
@@ -1776,6 +1796,9 @@ Module ClientGraphics
 
         'draw hp and casting bars
         DrawBars()
+
+        'party
+        DrawParty()
 
         'Render GUI
         DrawGUI()
