@@ -391,7 +391,7 @@ Module ClientGeneral
         'hotbar
         If Options.ScreenSize = 0 Then
             HotbarX = HUDWindowX + HUDPanelGFXInfo.Width + 20
-            HotbarY = 25
+            HotbarY = 5
         Else
             HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
             HotbarY = frmMainGame.Height - HotBarGFXInfo.Height - 45

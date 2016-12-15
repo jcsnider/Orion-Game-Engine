@@ -103,7 +103,7 @@
         If Not Name = "Not Playing" Then
             SetPlayerAccess(FindPlayer(Name), 4)
             SendPlayerData(FindPlayer(Name))
-            PlayerMsg(FindPlayer(Name), "You have been granted administrator access.")
+            'PlayerMsg(FindPlayer(Name), "You have been granted administrator access.")
         End If
     End Sub
 
@@ -114,7 +114,7 @@
         If Not Name = "Not Playing" Then
             SetPlayerAccess(FindPlayer(Name), 0)
             SendPlayerData(FindPlayer(Name))
-            PlayerMsg(FindPlayer(Name), "You have had your administrator access revoked.")
+            'PlayerMsg(FindPlayer(Name), "You have had your administrator access revoked.")
         End If
     End Sub
 

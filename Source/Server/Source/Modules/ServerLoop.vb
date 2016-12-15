@@ -81,7 +81,7 @@ Module ServerLoop
                                 If Player(Player(i).Character(TempPlayer(i).CurChar).InHouse).Character(TempPlayer(i).CurChar).InHouse <> Player(i).Character(TempPlayer(i).CurChar).InHouse Then
                                     Player(i).Character(TempPlayer(i).CurChar).InHouse = 0
                                     PlayerWarp(i, Player(i).Character(TempPlayer(i).CurChar).LastMap, Player(i).Character(TempPlayer(i).CurChar).LastX, Player(i).Character(TempPlayer(i).CurChar).LastY)
-                                    PlayerMsg(i, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.")
+                                    PlayerMsg(i, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.", ColorType.Yellow)
                                 End If
                             End If
                         End If
@@ -160,7 +160,7 @@ Module ServerLoop
         ' ///////////////////////////////////////////
         ' // This is used for respawning map items //
         ' ///////////////////////////////////////////
-        For y = 1 To MAX_MAPS
+        For y = 1 To MAX_CACHED_MAPS
 
             ' Make sure no one is on the map when it respawns
             If Not PlayersOnMap(y) Then
@@ -217,7 +217,9 @@ Module ServerLoop
         Dim DidWalk As Boolean
         Dim Resource_index As Integer
 
-        For MapNum = 1 To MAX_MAPS
+        For MapNum = 1 To MAX_CACHED_MAPS
+
+            If ServerDestroyed Then End
 
             '  Close the doors
             If TickCount > TempTile(MapNum).DoorTimer + 5000 Then
@@ -296,7 +298,7 @@ Module ServerLoop
                                                 If DistanceX <= n And DistanceY <= n Then
                                                     If Npc(NpcNum).Behaviour = NpcBehavior.AttackOnSight Or GetPlayerPK(i) = True Then
                                                         If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                                                            PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says, '" & Trim$(Npc(NpcNum).AttackSay) & "' to you.")
+                                                            PlayerMsg(i, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says, '" & Trim$(Npc(NpcNum).AttackSay) & "' to you.", ColorType.Yellow)
                                                         End If
                                                         MapNpc(MapNum).Npc(x).TargetType = 1 ' player
                                                         MapNpc(MapNum).Npc(x).Target = i
@@ -659,7 +661,7 @@ Module ServerLoop
                                             End If
 
                                         Else
-                                            PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, EquipmentType.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!")
+                                            PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, EquipmentType.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!", ColorType.BrightGreen)
                                             SendActionMsg(GetPlayerMap(Target), "BLOCK!", ColorType.Cyan, 1, (GetPlayerX(Target) * 32), (GetPlayerY(Target) * 32))
                                         End If
                                     End If
@@ -673,7 +675,7 @@ Module ServerLoop
                                 If MapNpc(MapNum).Npc(Target).Num > 0 Then ' npc exists
                                     'Can the npc attack the npc?
                                     If CanNpcAttackNpc(MapNum, x, Target) Then
-                                        Damage = Npc(NpcNum).Stat(Stats.strength) - CLng(Npc(Target).Stat(Stats.Endurance))
+                                        Damage = Npc(NpcNum).Stat(Stats.Strength) - CLng(Npc(Target).Stat(Stats.Endurance))
                                         If Damage < 1 Then Damage = 1
                                         NpcAttackNpc(MapNum, x, Target, Damage)
                                     End If
@@ -806,7 +808,7 @@ Module ServerLoop
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Enums.Vitals.MP) < MPCost Then
-            PlayerMsg(Index, "Not enough mana!")
+            PlayerMsg(Index, "Not enough mana!", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -814,7 +816,7 @@ Module ServerLoop
 
         ' Make sure they are the right level
         If LevelReq > GetPlayerLevel(Index) Then
-            PlayerMsg(Index, "You must be level " & LevelReq & " to use this skill.")
+            PlayerMsg(Index, "You must be level " & LevelReq & " to use this skill.", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -822,7 +824,7 @@ Module ServerLoop
 
         ' make sure they have the right access
         If AccessReq > GetPlayerAccess(Index) Then
-            PlayerMsg(Index, "You must be an administrator to use this skill.")
+            PlayerMsg(Index, "You must be an administrator to use this skill.", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -831,7 +833,7 @@ Module ServerLoop
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(Index) Then
-                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.")
+                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.", ColorType.BrightRed)
                 Exit Sub
             End If
         End If
@@ -895,7 +897,7 @@ Module ServerLoop
                     End If
 
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                        PlayerMsg(Index, "Target not in range.")
+                        PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
                         SendClearSkillBuffer(Index)
                     End If
                 End If
@@ -981,7 +983,7 @@ Module ServerLoop
                 End If
 
                 If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                    PlayerMsg(Index, "Target not in range.")
+                    PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
                     SendClearSkillBuffer(Index)
                     Exit Sub
                 End If
@@ -1147,7 +1149,7 @@ Module ServerLoop
                                     If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
                                         If CanNpcAttackPlayer(NpcNum, i) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
-                                            PlayerMsg(i, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!")
+                                            PlayerMsg(i, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
                                             AttackPlayer(NpcNum, i, Vital, skillnum, NpcNum)
                                         End If
                                     End If
@@ -1228,7 +1230,7 @@ Module ServerLoop
                             If CanNpcAttackPlayer(NpcNum, Target) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Target)
-                                    PlayerMsg(Target, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!")
+                                    PlayerMsg(Target, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
                                     AttackPlayer(NpcNum, Target, Vital, skillnum, NpcNum)
                                     DidCast = True
                                 End If

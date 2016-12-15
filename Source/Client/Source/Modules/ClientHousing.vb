@@ -171,7 +171,7 @@ Public Module ClientHousing
 
         buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CRequestEditHouse)
+        buffer.WriteInteger(EditorPackets.RequestEditHouse)
         SendData(buffer.ToArray)
 
         buffer = Nothing

@@ -51,8 +51,9 @@
 
 #Region "Editors"
     Private Sub btnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
-        SendRequestEditMap()
+        SendEditorRequestMap(1)
     End Sub
+
     Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
         SendRequestItems()
         SendRequestEditItem()

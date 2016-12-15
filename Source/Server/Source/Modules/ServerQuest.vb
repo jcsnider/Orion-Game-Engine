@@ -276,11 +276,16 @@
 
 #Region "Incoming Packets"
     Sub Packet_RequestEditQuest(ByVal Index As Integer, ByVal Data() As Byte)
-
         Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> EditorPackets.RequestEditQuest Then Exit Sub
+
+        Buffer = Nothing
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.DEVELOPER Then Exit Sub
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SQuestEditor)
@@ -294,7 +299,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-        If Buffer.ReadInteger <> ClientPackets.CSaveQuest Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveQuest Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(Index) < AdminType.DEVELOPER Then Exit Sub
@@ -378,13 +383,13 @@
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_STARTED '1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
-            PlayerMsg(Index, "New quest accepted: " & Trim$(Quest(QuestNum).Name) & "!")
+            PlayerMsg(Index, "New quest accepted: " & Trim$(Quest(QuestNum).Name) & "!", ColorType.BrightGreen)
         ElseIf Order = 2 Then
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED '2
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
-            PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & " has been canceled!")
+            PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & " has been canceled!", ColorType.BrightRed)
 
             If GetPlayerAccess(Index) > 0 And QuestNum = 1 Then
                 For I = 1 To MAX_QUESTS
@@ -601,7 +606,7 @@
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
             SendPlayerQuests(Index)
-            PlayerMsg(Index, "Quest " & QuestNum & " reset!")
+            PlayerMsg(Index, "Quest " & QuestNum & " reset!", ColorType.BrightRed)
         End If
     End Sub
 
@@ -617,7 +622,7 @@
                 If Quest(QuestNum).Requirement(i) = 1 Then
                     If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_ITEMS Then
                         If HasItem(Index, Quest(QuestNum).RequirementIndex(i)) = 0 Then
-                            PlayerMsg(Index, "You need " & Item(Quest(QuestNum).Requirement(2)).Name & " to take this quest!")
+                            PlayerMsg(Index, "You need " & Item(Quest(QuestNum).Requirement(2)).Name & " to take this quest!", ColorType.Yellow)
                             Exit Function
                         End If
                     End If
@@ -627,7 +632,7 @@
                 If Quest(QuestNum).Requirement(i) = 2 Then
                     If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_QUESTS Then
                         If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
-                            PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!")
+                            PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!", ColorType.Yellow)
                             Exit Function
                         End If
                     End If
@@ -844,7 +849,7 @@
 
         For I = 1 To Quest(QuestNum).RewardCount
             If Quest(QuestNum).RewardItem(I) > 0 Then
-                PlayerMsg(Index, "You recieved " & Quest(QuestNum).RewardItemAmount(I) & " " & Trim(Item(Quest(QuestNum).RewardItem(I)).Name))
+                PlayerMsg(Index, "You recieved " & Quest(QuestNum).RewardItemAmount(I) & " " & Trim(Item(Quest(QuestNum).RewardItem(I)).Name), ColorType.BrightGreen)
             End If
             GiveInvItem(Index, Quest(QuestNum).RewardItem(I), Quest(QuestNum).RewardItemAmount(I))
         Next
@@ -863,7 +868,7 @@
         Else
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED
         End If
-        PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & ": quest completed")
+        PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & ": quest completed", ColorType.BrightGreen)
 
         SavePlayer(Index)
         SendPlayerData(Index)

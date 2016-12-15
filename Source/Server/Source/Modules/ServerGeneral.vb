@@ -28,9 +28,10 @@
         ' Initialize the random-number generator
         Randomize() ', seed
 
-        ReDim Map(0 To MAX_MAPS)
-        ReDim MapNpc(0 To MAX_MAPS)
-        For i = 0 To MAX_MAPS
+        ReDim Map(MAX_CACHED_MAPS)
+
+        ReDim MapNpc(MAX_CACHED_MAPS)
+        For i = 0 To MAX_CACHED_MAPS
             ReDim MapNpc(i).Npc(0 To MAX_MAP_NPCS)
             ReDim Map(i).Npc(0 To MAX_MAP_NPCS)
         Next
@@ -42,12 +43,12 @@
         'event
         ReDim Switches(0 To MAX_SWITCHES)
         ReDim Variables(0 To MAX_VARIABLES)
-        ReDim TempEventMap(0 To MAX_MAPS)
+        ReDim TempEventMap(MAX_CACHED_MAPS)
 
         'Housing
         ReDim HouseConfig(0 To MAX_HOUSES)
 
-        For i = 0 To MAX_MAPS
+        For i = 0 To MAX_CACHED_MAPS
             For x = 0 To MAX_MAP_NPCS
                 ReDim MapNpc(i).Npc(x).Vital(0 To Vitals.Count)
             Next
@@ -115,7 +116,7 @@
         ReDim Animation(0 To MAX_ANIMATIONS).LoopCount(0 To 1)
         ReDim Animation(0 To MAX_ANIMATIONS).LoopTime(0 To 1)
 
-        ReDim MapProjectiles(0 To MAX_MAPS, 0 To MAX_PROJECTILES)
+        ReDim MapProjectiles(MAX_CACHED_MAPS, 0 To MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
 
         'partys

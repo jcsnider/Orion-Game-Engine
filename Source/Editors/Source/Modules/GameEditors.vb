@@ -141,10 +141,15 @@ Module GameEditors
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_MapEditor.picScreen.Width, frmEditor_MapEditor.picScreen.Height)))
 
+        frmEditor_MapEditor.tslCurMap.Text = "Map: " & Map.MapNum
         ' show the form
         frmEditor_MapEditor.Visible = True
 
         GameStarted = True
+
+        frmEditor_MapEditor.picScreen.Focus()
+
+        InitMapEditor = False
     End Sub
 
     Public Sub MapEditorInit()

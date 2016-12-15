@@ -96,7 +96,7 @@
                 If HasItem(index, 1) >= price Then
                     TakeInvItem(index, 1, price)
                     Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex = TempPlayer(index).BuyHouseIndex
-                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseIndex).ConfigName) & " house!")
+                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseIndex).ConfigName) & " house!", ColorType.BrightGreen)
                     Player(index).Character(TempPlayer(index).CurChar).LastMap = GetPlayerMap(index)
                     Player(index).Character(TempPlayer(index).CurChar).LastX = GetPlayerX(index)
                     Player(index).Character(TempPlayer(index).CurChar).LastY = GetPlayerY(index)
@@ -105,7 +105,7 @@
                     PlayerWarp(index, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).BaseMap, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).X, HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).Y, True)
                     SavePlayer(index)
                 Else
-                    PlayerMsg(index, "You cannot afford this house!")
+                    PlayerMsg(index, "You cannot afford this house!", ColorType.BrightRed)
                 End If
             End If
         End If
@@ -130,18 +130,18 @@
         Buffer = Nothing
 
         If invitee = 0 Then
-            PlayerMsg(index, "Player not found.")
+            PlayerMsg(index, "Player not found.", ColorType.BrightRed)
             Exit Sub
         End If
 
         If index = invitee Then
-            PlayerMsg(index, "You cannot invite yourself to you own house!")
+            PlayerMsg(index, "You cannot invite yourself to you own house!", ColorType.BrightRed)
             Exit Sub
         End If
 
         If TempPlayer(invitee).InvitationIndex > 0 Then
             If TempPlayer(invitee).InvitationTimer > GetTickCount() Then
-                PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is currently busy!")
+                PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is currently busy!", ColorType.Yellow)
                 Exit Sub
             End If
         End If
@@ -151,9 +151,9 @@
                 If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
                     If Player(invitee).Character(TempPlayer(invitee).CurChar).InHouse > 0 Then
                         If Player(invitee).Character(TempPlayer(invitee).CurChar).InHouse = index Then
-                            PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already in your house!")
+                            PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already in your house!", ColorType.Yellow)
                         Else
-                            PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already visiting someone elses house!")
+                            PlayerMsg(index, Trim$(GetPlayerName(invitee)) & " is already visiting someone elses house!", ColorType.Yellow)
                         End If
                     Else
                         'Send invite
@@ -166,13 +166,13 @@
                         Buffer = Nothing
                     End If
                 Else
-                    PlayerMsg(index, "Only the house owner can invite other players into their house.")
+                    PlayerMsg(index, "Only the house owner can invite other players into their house.", ColorType.BrightRed)
                 End If
             Else
-                PlayerMsg(index, "You must be inside your house before you can invite someone to visit!")
+                PlayerMsg(index, "You must be inside your house before you can invite someone to visit!", ColorType.BrightRed)
             End If
         Else
-            PlayerMsg(index, "You do not have a house to invite anyone to!")
+            PlayerMsg(index, "You do not have a house to invite anyone to!", ColorType.BrightRed)
         End If
 
     End Sub
@@ -202,10 +202,10 @@
                         PlayerWarp(index, Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(index).CurChar).Map, HouseConfig(Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(TempPlayer(index).InvitationIndex).CurChar).House.HouseIndex).X, HouseConfig(Player(TempPlayer(index).InvitationIndex).Character(TempPlayer(TempPlayer(index).InvitationIndex).CurChar).House.HouseIndex).Y, True)
                     Else
                         TempPlayer(index).InvitationTimer = 0
-                        PlayerMsg(index, "Cannot find player!")
+                        PlayerMsg(index, "Cannot find player!", ColorType.BrightRed)
                     End If
                 Else
-                    PlayerMsg(index, "Your invitation has expired, have your friend re-invite you.")
+                    PlayerMsg(index, "Your invitation has expired, have your friend re-invite you.", ColorType.Yellow)
                 End If
             Else
 
@@ -213,7 +213,7 @@
         Else
             If IsPlaying(TempPlayer(index).InvitationIndex) Then
                 TempPlayer(index).InvitationTimer = 0
-                PlayerMsg(TempPlayer(index).InvitationIndex, Trim$(GetPlayerName(index)) & " rejected your invitation")
+                PlayerMsg(TempPlayer(index).InvitationIndex, Trim$(GetPlayerName(index)) & " rejected your invitation", ColorType.BrightRed)
             End If
         End If
 
@@ -248,40 +248,40 @@
                 ' stat requirements
                 For i = 1 To Stats.Count - 1
                     If GetPlayerRawStat(index, i) < Item(ItemNum).Stat_Req(i) Then
-                        PlayerMsg(index, "You do not meet the stat requirements to use this item.")
+                        PlayerMsg(index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
                 Next
 
                 ' level requirement
                 If GetPlayerLevel(index) < Item(ItemNum).LevelReq Then
-                    PlayerMsg(index, "You do not meet the level requirement to use this item.")
+                    PlayerMsg(index, "You do not meet the level requirement to use this item.", ColorType.BrightRed)
                     Exit Sub
                 End If
 
                 ' class requirement
                 If Item(ItemNum).ClassReq > 0 Then
                     If Not GetPlayerClass(index) = Item(ItemNum).ClassReq Then
-                        PlayerMsg(index, "You do not meet the class requirement to use this item.")
+                        PlayerMsg(index, "You do not meet the class requirement to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
                 End If
 
                 ' access requirement
                 If Not GetPlayerAccess(index) >= Item(ItemNum).AccessReq Then
-                    PlayerMsg(index, "You do not meet the access requirement to use this item.")
+                    PlayerMsg(index, "You do not meet the access requirement to use this item.", ColorType.BrightRed)
                     Exit Sub
                 End If
 
                 'Ok, now we got to see what can be done about this furniture :/
                 If Player(index).Character(TempPlayer(index).CurChar).InHouse <> index Then
-                    PlayerMsg(index, "You must be inside your house to place furniture!")
+                    PlayerMsg(index, "You must be inside your house to place furniture!", ColorType.Yellow)
                     Exit Sub
                 End If
 
                 If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount >= HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).MaxFurniture Then
                     If HouseConfig(Player(index).Character(TempPlayer(index).CurChar).House.HouseIndex).MaxFurniture > 0 Then
-                        PlayerMsg(index, "Your house cannot hold any more furniture!")
+                        PlayerMsg(index, "Your house cannot hold any more furniture!", ColorType.BrightRed)
                         Exit Sub
                     End If
                 End If
@@ -415,7 +415,7 @@
                 SavePlayer(index)
             End If
         Else
-            PlayerMsg(index, "You cannot place furniture unless you are in your own house!")
+            PlayerMsg(index, "You cannot place furniture unless you are in your own house!", ColorType.BrightRed)
         End If
 
     End Sub
@@ -427,7 +427,7 @@
         Buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
-        If Buffer.ReadInteger <> ClientPackets.CRequestEditHouse Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.RequestEditHouse Then Exit Sub
 
         Buffer = Nothing
 
@@ -463,7 +463,7 @@
         Buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
-        If Buffer.ReadInteger <> ClientPackets.CSaveHouses Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveHouses Then Exit Sub
 
         Count = Buffer.ReadInteger
         If Count > 0 Then
@@ -521,10 +521,10 @@
 
             SavePlayer(index)
 
-            PlayerMsg(index, "You sold your House for " & refund & " Gold!")
+            PlayerMsg(index, "You sold your House for " & refund & " Gold!", ColorType.BrightGreen)
             GiveInvItem(index, 1, refund)
         Else
-            PlayerMsg(index, "You dont own a House!")
+            PlayerMsg(index, "You dont own a House!", ColorType.BrightRed)
         End If
 
         Buffer = Nothing

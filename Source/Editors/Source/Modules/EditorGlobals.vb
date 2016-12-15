@@ -1,4 +1,7 @@
 ﻿Module EditorGlobals
+    Public Const INSTANCED_MAP_MASK As Long = 16777216 '1 << 24
+    Public Const MAP_NUMBER_MASK As Long = INSTANCED_MAP_MASK - 1
+
     Public GameStarted As Boolean
     Public GameDestroyed As Boolean
 

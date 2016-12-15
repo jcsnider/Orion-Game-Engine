@@ -337,7 +337,7 @@ Module ClientTCP
         data = Buffer.ToArray
 
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CMapData)
+        Buffer.WriteInteger(ClientPackets.CSaveMap)
         Buffer.WriteBytes(ArchaicIO.Compression.Compress(data))
 
         SendData(Buffer.ToArray())
@@ -463,72 +463,6 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendSaveItem(ByVal itemNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveItem)
-        Buffer.WriteInteger(itemNum)
-        Buffer.WriteInteger(Item(itemNum).AccessReq)
-
-        For i = 0 To Stats.Count - 1
-            Buffer.WriteInteger(Item(itemNum).Add_Stat(i))
-        Next
-
-        Buffer.WriteInteger(Item(itemNum).Animation)
-        Buffer.WriteInteger(Item(itemNum).BindType)
-        Buffer.WriteInteger(Item(itemNum).ClassReq)
-        Buffer.WriteInteger(Item(itemNum).Data1)
-        Buffer.WriteInteger(Item(itemNum).Data2)
-        Buffer.WriteInteger(Item(itemNum).Data3)
-        Buffer.WriteInteger(Item(itemNum).Handed)
-        Buffer.WriteInteger(Item(itemNum).LevelReq)
-        Buffer.WriteInteger(Item(itemNum).Mastery)
-        Buffer.WriteString(Trim$(Item(itemNum).Name))
-        Buffer.WriteInteger(Item(itemNum).Paperdoll)
-        Buffer.WriteInteger(Item(itemNum).Pic)
-        Buffer.WriteInteger(Item(itemNum).Price)
-        Buffer.WriteInteger(Item(itemNum).Rarity)
-        Buffer.WriteInteger(Item(itemNum).Speed)
-
-        Buffer.WriteInteger(Item(itemNum).Randomize)
-        Buffer.WriteInteger(Item(itemNum).RandomMin)
-        Buffer.WriteInteger(Item(itemNum).RandomMax)
-
-        Buffer.WriteInteger(Item(itemNum).Stackable)
-        Buffer.WriteString(Trim$(Item(itemNum).Description))
-
-        For i = 0 To Stats.Count - 1
-            Buffer.WriteInteger(Item(itemNum).Stat_Req(i))
-        Next
-
-        Buffer.WriteInteger(Item(itemNum).Type)
-
-        'Housing
-        Buffer.WriteInteger(Item(itemNum).FurnitureWidth)
-        Buffer.WriteInteger(Item(itemNum).FurnitureHeight)
-
-        For i = 1 To 3
-            For x = 1 To 3
-                Buffer.WriteInteger(Item(itemNum).FurnitureBlocks(i, x))
-                Buffer.WriteInteger(Item(itemNum).FurnitureFringe(i, x))
-            Next
-        Next
-
-        Buffer.WriteInteger(Item(itemNum).KnockBack)
-        Buffer.WriteInteger(Item(itemNum).KnockBackTiles)
-
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendRequestEditItem()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditItem)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Public Sub SendPlayerDir()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -550,88 +484,10 @@ Module ClientTCP
         'Debug.Print("Client-PlayerRequestNewMap")
     End Sub
 
-    Public Sub SendRequestEditResource()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditResource)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Sub SendRequestResources()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CRequestResources)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendSaveResource(ByVal ResourceNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveResource)
-
-        Buffer.WriteInteger(ResourceNum)
-        Buffer.WriteInteger(Resource(ResourceNum).Animation)
-        Buffer.WriteString(Trim(Resource(ResourceNum).EmptyMessage))
-        Buffer.WriteInteger(Resource(ResourceNum).ExhaustedImage)
-        Buffer.WriteInteger(Resource(ResourceNum).Health)
-        Buffer.WriteInteger(Resource(ResourceNum).ExpReward)
-        Buffer.WriteInteger(Resource(ResourceNum).ItemReward)
-        Buffer.WriteString(Trim(Resource(ResourceNum).Name))
-        Buffer.WriteInteger(Resource(ResourceNum).ResourceImage)
-        Buffer.WriteInteger(Resource(ResourceNum).ResourceType)
-        Buffer.WriteInteger(Resource(ResourceNum).RespawnTime)
-        Buffer.WriteString(Trim(Resource(ResourceNum).SuccessMessage))
-        Buffer.WriteInteger(Resource(ResourceNum).LvlRequired)
-        Buffer.WriteInteger(Resource(ResourceNum).ToolRequired)
-        Buffer.WriteInteger(Resource(ResourceNum).Walkthrough)
-
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendRequestEditNpc()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditNpc)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendSaveNpc(ByVal NpcNum As Integer)
-        Dim Buffer As ByteBuffer, i As Integer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveNpc)
-        Buffer.WriteInteger(NpcNum)
-
-        Buffer.WriteInteger(Npc(NpcNum).Animation)
-        Buffer.WriteString(Npc(NpcNum).AttackSay)
-        Buffer.WriteInteger(Npc(NpcNum).Behaviour)
-        For i = 1 To 5
-            Buffer.WriteInteger(Npc(NpcNum).DropChance(i))
-            Buffer.WriteInteger(Npc(NpcNum).DropItem(i))
-            Buffer.WriteInteger(Npc(NpcNum).DropItemValue(i))
-        Next
-
-        Buffer.WriteInteger(Npc(NpcNum).EXP)
-        Buffer.WriteInteger(Npc(NpcNum).Faction)
-        Buffer.WriteInteger(Npc(NpcNum).HP)
-        Buffer.WriteString(Npc(NpcNum).Name)
-        Buffer.WriteInteger(Npc(NpcNum).Range)
-        Buffer.WriteInteger(Npc(NpcNum).SpawnSecs)
-        Buffer.WriteInteger(Npc(NpcNum).Sprite)
-
-        For i = 0 To Stats.Count - 1
-            Buffer.WriteInteger(Npc(NpcNum).Stat(i))
-        Next
-
-        Buffer.WriteInteger(Npc(NpcNum).QuestNum)
-
-        For i = 1 To MAX_NPC_SKILLS
-            Buffer.WriteInteger(Npc(NpcNum).Skill(i))
-        Next
-
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -644,60 +500,11 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendRequestEditSkill()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditSkill)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Sub SendRequestSkills()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CRequestSkills)
         SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendSaveSkill(ByVal skillnum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-
-        Buffer.WriteInteger(ClientPackets.CSaveSkill)
-        Buffer.WriteInteger(skillnum)
-
-        Buffer.WriteInteger(Skill(skillnum).AccessReq)
-        Buffer.WriteInteger(Skill(skillnum).AoE)
-        Buffer.WriteInteger(Skill(skillnum).CastAnim)
-        Buffer.WriteInteger(Skill(skillnum).CastTime)
-        Buffer.WriteInteger(Skill(skillnum).CDTime)
-        Buffer.WriteInteger(Skill(skillnum).ClassReq)
-        Buffer.WriteInteger(Skill(skillnum).Dir)
-        Buffer.WriteInteger(Skill(skillnum).Duration)
-        Buffer.WriteInteger(Skill(skillnum).Icon)
-        Buffer.WriteInteger(Skill(skillnum).Interval)
-        Buffer.WriteInteger(Skill(skillnum).IsAoE)
-        Buffer.WriteInteger(Skill(skillnum).LevelReq)
-        Buffer.WriteInteger(Skill(skillnum).Map)
-        Buffer.WriteInteger(Skill(skillnum).MPCost)
-        Buffer.WriteString(Skill(skillnum).Name)
-        Buffer.WriteInteger(Skill(skillnum).Range)
-        Buffer.WriteInteger(Skill(skillnum).SkillAnim)
-        Buffer.WriteInteger(Skill(skillnum).StunDuration)
-        Buffer.WriteInteger(Skill(skillnum).Type)
-        Buffer.WriteInteger(Skill(skillnum).Vital)
-        Buffer.WriteInteger(Skill(skillnum).X)
-        Buffer.WriteInteger(Skill(skillnum).Y)
-
-        Buffer.WriteInteger(Skill(skillnum).IsProjectile)
-        Buffer.WriteInteger(Skill(skillnum).Projectile)
-
-        Buffer.WriteInteger(Skill(skillnum).KnockBack)
-        Buffer.WriteInteger(Skill(skillnum).KnockBackTiles)
-
-        SendData(Buffer.ToArray())
-
         Buffer = Nothing
     End Sub
 
@@ -709,77 +516,10 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendSaveShop(ByVal shopnum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveShop)
-        Buffer.WriteInteger(shopnum)
-
-        Buffer.WriteInteger(Shop(shopnum).BuyRate)
-        Buffer.WriteString(Shop(shopnum).Name)
-        Buffer.WriteInteger(Shop(shopnum).Face)
-
-        For i = 0 To MAX_TRADES
-            Buffer.WriteInteger(Shop(shopnum).TradeItem(i).CostItem)
-            Buffer.WriteInteger(Shop(shopnum).TradeItem(i).CostValue)
-            Buffer.WriteInteger(Shop(shopnum).TradeItem(i).Item)
-            Buffer.WriteInteger(Shop(shopnum).TradeItem(i).ItemValue)
-        Next
-
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-
-    End Sub
-
-    Public Sub SendRequestEditShop()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditShop)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendSaveAnimation(ByVal Animationnum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveAnimation)
-        Buffer.WriteInteger(Animationnum)
-
-        For i = 0 To UBound(Animation(Animationnum).Frames)
-            Buffer.WriteInteger(Animation(Animationnum).Frames(i))
-        Next
-
-        For i = 0 To UBound(Animation(Animationnum).LoopCount)
-            Buffer.WriteInteger(Animation(Animationnum).LoopCount(i))
-        Next
-
-        For i = 0 To UBound(Animation(Animationnum).looptime)
-            Buffer.WriteInteger(Animation(Animationnum).looptime(i))
-        Next
-
-        Buffer.WriteString(Trim(Animation(Animationnum).Name))
-
-        For i = 0 To UBound(Animation(Animationnum).Sprite)
-            Buffer.WriteInteger(Animation(Animationnum).Sprite(i))
-        Next
-
-
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Sub SendRequestAnimations()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CRequestAnimations)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendRequestEditAnimation()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditAnimation)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -821,15 +561,6 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CBroadcastMsg)
-        Buffer.WriteString(text)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub EmoteMsg(ByVal text As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CEmoteMsg)
         Buffer.WriteString(text)
         SendData(Buffer.ToArray())
         Buffer = Nothing
@@ -1122,72 +853,6 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CRequestClasses)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendRequestEditClass()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditClasses)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendSaveClasses()
-        Dim i As Integer, n As Integer, q As Integer
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-
-        Buffer.WriteInteger(ClientPackets.CSaveClasses)
-
-        Buffer.WriteInteger(Max_Classes)
-
-        For i = 1 To Max_Classes
-            Buffer.WriteString(Trim$(Classes(i).Name))
-            Buffer.WriteString(Trim$(Classes(i).Desc))
-
-            ' set sprite array size
-            n = UBound(Classes(i).MaleSprite)
-
-            ' send array size
-            Buffer.WriteInteger(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                Buffer.WriteInteger(Classes(i).MaleSprite(q))
-            Next
-
-            ' set sprite array size
-            n = UBound(Classes(i).FemaleSprite)
-
-            ' send array size
-            Buffer.WriteInteger(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                Buffer.WriteInteger(Classes(i).FemaleSprite(q))
-            Next
-
-            Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
-
-            For q = 1 To 5
-                Buffer.WriteInteger(Classes(i).StartItem(q))
-                Buffer.WriteInteger(Classes(i).StartValue(q))
-            Next
-
-            Buffer.WriteInteger(Classes(i).StartMap)
-            Buffer.WriteInteger(Classes(i).StartX)
-            Buffer.WriteInteger(Classes(i).StartY)
-
-            Buffer.WriteInteger(Classes(i).BaseExp)
-        Next
-
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

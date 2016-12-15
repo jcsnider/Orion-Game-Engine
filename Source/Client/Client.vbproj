@@ -2235,7 +2235,7 @@
     <Content Include="License\Eclipse Public License v1.1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="License\Graphics %28Macks%29 License.txt">
+    <Content Include="License\Item Credits.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="License\SFML License.txt">

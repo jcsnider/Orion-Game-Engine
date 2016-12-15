@@ -39,14 +39,14 @@
                         ' inv space?
                         If Resource(Resource_index).ItemReward > 0 Then
                             If FindOpenInvSlot(Index, Resource(Resource_index).ItemReward) = 0 Then
-                                PlayerMsg(Index, "You have no inventory space.")
+                                PlayerMsg(Index, "You have no inventory space.", ColorType.Yellow)
                                 Exit Sub
                             End If
                         End If
 
                         'required lvl?
                         If Resource(Resource_index).LvlRequired > GetPlayerGatherSkillLvl(Index, ResourceType) Then
-                            PlayerMsg(Index, "You're level is to low!")
+                            PlayerMsg(Index, "You're level is to low!", ColorType.Yellow)
                             Exit Sub
                         End If
 
@@ -77,13 +77,13 @@
                                     'send msg
                                     Select Case ResourceType
                                         Case ResourceSkills.Herbalist
-                                            PlayerMsg(Index, "Your herbalist skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType))
+                                            PlayerMsg(Index, "Your herbalist skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
                                         Case ResourceSkills.WoodCutter
-                                            PlayerMsg(Index, "Your woodcutter skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType))
+                                            PlayerMsg(Index, "Your woodcutter skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
                                         Case ResourceSkills.Miner
-                                            PlayerMsg(Index, "Your miner skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType))
+                                            PlayerMsg(Index, "Your miner skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
                                         Case ResourceSkills.Fisherman
-                                            PlayerMsg(Index, "Your fishing skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType))
+                                            PlayerMsg(Index, "Your fishing skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
                                     End Select
                                     SendPlayerData(Index)
 
@@ -104,11 +104,11 @@
                         End If
 
                     Else
-                        PlayerMsg(Index, "You have the wrong type of tool equiped.")
+                        PlayerMsg(Index, "You have the wrong type of tool equiped.", ColorType.Yellow)
                     End If
 
                 Else
-                    PlayerMsg(Index, "You need a tool to interact with this resource.")
+                    PlayerMsg(Index, "You need a tool to interact with this resource.", ColorType.Yellow)
                 End If
             End If
         End If
@@ -189,10 +189,10 @@
         If level_count > 0 Then
             If level_count = 1 Then
                 'singular
-                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " level!")
+                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " level!", ColorType.BrightGreen)
             Else
                 'plural
-                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " levels!")
+                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " levels!", ColorType.BrightGreen)
             End If
 
             SavePlayer(Index)

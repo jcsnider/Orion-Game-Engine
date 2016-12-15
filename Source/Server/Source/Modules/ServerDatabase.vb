@@ -206,7 +206,7 @@ Module ServerDatabase
     Sub ClearMaps()
         Dim i As Integer
 
-        For i = 1 To MAX_MAPS
+        For i = 1 To MAX_CACHED_MAPS
             ClearMap(i)
             DoEvents()
         Next
@@ -240,8 +240,10 @@ Module ServerDatabase
         Map(MapNum).Music = ""
         Map(MapNum).MaxX = MAX_MAPX
         Map(MapNum).MaxY = MAX_MAPY
+
+        ClearTempTile(MapNum)
         ' Reset the map cache array for this map.
-        MapCache(MapNum).Data = Nothing
+        'MapCache(MapNum).Data = Nothing
     End Sub
 
     Sub SaveMaps()
@@ -651,7 +653,9 @@ Module ServerDatabase
     Sub ClearTempTiles()
         Dim i As Integer
 
-        For i = 1 To MAX_MAPS
+        ReDim TempTile(MAX_CACHED_MAPS)
+
+        For i = 1 To MAX_CACHED_MAPS
             ClearTempTile(i)
         Next
 
@@ -680,7 +684,7 @@ Module ServerDatabase
         Dim x As Integer
         Dim y As Integer
 
-        For y = 1 To MAX_MAPS
+        For y = 1 To MAX_CACHED_MAPS
             For x = 1 To MAX_MAP_ITEMS
                 ClearMapItem(x, y)
             Next
@@ -995,7 +999,7 @@ Module ServerDatabase
         Dim x As Integer
         Dim y As Integer
 
-        For y = 1 To MAX_MAPS
+        For y = 1 To MAX_CACHED_MAPS
             For x = 1 To MAX_MAP_NPCS
                 ClearMapNpc(x, y)
                 DoEvents()

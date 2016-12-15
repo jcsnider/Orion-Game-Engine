@@ -2091,7 +2091,7 @@ Public Module ServerEvents
 
         Select Case caseID
             Case Else
-                PlayerMsg(Index, "You just activated custom script " & caseID & ". This script is not yet programmed.")
+                PlayerMsg(Index, "You just activated custom script " & caseID & ". This script is not yet programmed.", ColorType.BrightRed)
         End Select
 
     End Sub

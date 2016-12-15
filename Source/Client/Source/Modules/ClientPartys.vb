@@ -132,12 +132,22 @@ Module ClientPartys
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
+    Public Sub SendPartyChatMsg(ByVal Text As String)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+
+        Buffer.WriteInteger(ClientPackets.CPartyChatMsg)
+        Buffer.WriteString(Text)
+
+        SendData(Buffer.ToArray)
+        Buffer = Nothing
+    End Sub
 #End Region
 
 
-
     Sub ClearParty()
-        Party = Nothing
+        Party = New PartyRec
         Party.Leader = 0
         Party.MemberCount = 0
         ReDim Party.Member(MAX_PARTY_MEMBERS)

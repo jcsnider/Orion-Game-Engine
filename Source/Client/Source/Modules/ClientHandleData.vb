@@ -883,6 +883,8 @@
 
         If Buffer.ReadInteger <> ServerPackets.SCheckForMap Then Exit Sub
 
+        GettingMap = True
+
         ' Erase all players except self
         For i = 1 To MAX_PLAYERS
             If i <> MyIndex Then
@@ -894,6 +896,7 @@
         ClearTempTile()
         ClearMapNpcs()
         ClearMapItems()
+        ClearBlood()
         ClearMap()
 
         ' Get map num
@@ -902,10 +905,7 @@
         Y = Buffer.ReadInteger
 
         NeedMap = 1
-        GettingMap = True
 
-        NeedMap = 1
-        GettingMap = True
 
         ' Either the revisions didn't match or we dont have the map, so we need it
         Buffer = New ByteBuffer
@@ -930,6 +930,8 @@
         Buffer.WriteBytes(ArchaicIO.Compression.Decompress(Data))
 
         MapData = False
+
+        ClearMap()
 
         SyncLock MapLock
             If Buffer.ReadInteger = 1 Then
@@ -1325,7 +1327,7 @@
     End Sub
 
     Private Sub Packet_PlayerMessage(ByVal Data() As Byte)
-        Dim Msg As String
+        Dim Msg As String, colour As Integer
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -1333,10 +1335,10 @@
         If Buffer.ReadInteger <> ServerPackets.SPlayerMsg Then Exit Sub
 
         Msg = Trim(Buffer.ReadString)
-
+        colour = Buffer.ReadInteger
         Buffer = Nothing
 
-        AddText(Msg, QColorType.TellColor)
+        AddText(Msg, colour)
     End Sub
 
     Sub Packet_UpdateItem(ByVal data() As Byte)

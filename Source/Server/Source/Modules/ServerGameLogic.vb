@@ -71,9 +71,7 @@
         Dim i As Integer
 
         ' Check for subscript out of range
-        If itemNum < 1 Or itemNum > MAX_ITEMS Or MapNum <= 0 Or MapNum > MAX_MAPS Then
-            Exit Sub
-        End If
+        If itemNum < 1 Or itemNum > MAX_ITEMS Or MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Find open map item slot
         i = FindOpenMapItemSlot(MapNum)
@@ -88,9 +86,7 @@
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If MapItemSlot <= 0 Or MapItemSlot > MAX_MAP_ITEMS Or itemNum < 0 Or itemNum > MAX_ITEMS Or MapNum <= 0 Or MapNum > MAX_MAPS Then
-            Exit Sub
-        End If
+        If MapItemSlot <= 0 Or MapItemSlot > MAX_MAP_ITEMS Or itemNum < 0 Or itemNum > MAX_ITEMS Or MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Sub
 
         i = MapItemSlot
 
@@ -124,7 +120,7 @@
         FindOpenMapItemSlot = 0
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Function
+        If MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Function
 
         For i = 1 To MAX_MAP_ITEMS
 
@@ -195,7 +191,7 @@
     Sub SpawnAllMapsItems()
         Dim i As Integer
 
-        For i = 1 To MAX_MAPS
+        For i = 1 To MAX_CACHED_MAPS
             SpawnMapItems(i)
         Next
 
@@ -234,7 +230,7 @@
         Dim y As Integer
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Sub
+        If MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Spawn what we have
         For x = 0 To Map(MapNum).MaxX
@@ -265,7 +261,8 @@
         Dim Spawned As Boolean
 
         ' Check for subscript out of range
-        If MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or MapNum <= 0 Or MapNum > MAX_MAPS Then Exit Sub
+        If MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Sub
+
         NpcNum = Map(MapNum).Npc(MapNpcNum)
 
         If NpcNum > 0 Then
@@ -429,7 +426,7 @@
         Dim y As Integer
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Then
+        If MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Then
             Exit Function
         End If
 
@@ -602,7 +599,7 @@
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Or movement < 1 Or movement > 2 Then
+        If MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Or movement < 1 Or movement > 2 Then
             Exit Sub
         End If
 
@@ -661,7 +658,7 @@
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If MapNum <= 0 Or MapNum > MAX_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Then
+        If MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Dir < Direction.Up Or Dir > Direction.Right Then
             Exit Sub
         End If
 
@@ -673,14 +670,16 @@
         SendDataToMap(MapNum, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
     Sub SpawnAllMapNpcs()
         Dim i As Integer
 
-        For i = 1 To MAX_MAPS
+        For i = 1 To MAX_CACHED_MAPS
             SpawnMapNpcs(i)
         Next
 
     End Sub
+
     Sub SpawnMapNpcs(ByVal MapNum As Integer)
         Dim i As Integer
 
@@ -739,13 +738,13 @@
         If EqSlot <= 0 Or EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
         If FindOpenInvSlot(Index, GetPlayerEquipment(Index, EqSlot)) > 0 Then
             GiveInvItem(Index, GetPlayerEquipment(Index, EqSlot), 0)
-            PlayerMsg(Index, "You unequip " & CheckGrammar(Item(GetPlayerEquipment(Index, EqSlot)).Name))
+            PlayerMsg(Index, "You unequip " & CheckGrammar(Item(GetPlayerEquipment(Index, EqSlot)).Name), ColorType.Yellow)
             SetPlayerEquipment(Index, 0, EqSlot)
             SendWornEquipment(Index)
             SendMapEquipment(Index)
             SendStats(Index)
         Else
-            PlayerMsg(Index, "Your inventory is full.")
+            PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
         End If
 
     End Sub

@@ -1,6 +1,8 @@
 ﻿Imports System.Drawing
 
 Module ClientConstants
+    Public Const INSTANCED_MAP_MASK As Long = 16777216 '1 << 24
+    Public Const MAP_NUMBER_MASK As Long = INSTANCED_MAP_MASK - 1
 
     'Graphics
     Public Const FPS_LIMIT As Integer = 64

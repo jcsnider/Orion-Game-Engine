@@ -159,7 +159,7 @@
 
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CSaveRecipe Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveRecipe Then Exit Sub
 
         'recipe index
         n = Buffer.ReadInteger
@@ -336,11 +336,11 @@
 
     Public Sub LearnRecipe(ByVal Index As Integer, ByVal RecipeNum As Integer, ByVal InvNum As Integer)
         If CheckLearnedRecipe(Index, RecipeNum) Then ' we know this one allready
-            PlayerMsg(Index, "You allready know this recipe!")
+            PlayerMsg(Index, "You allready know this recipe!", ColorType.BrightRed)
         Else ' lets learn it
             Player(Index).Character(TempPlayer(Index).CurChar).RecipeLearned(RecipeNum) = 1
 
-            PlayerMsg(Index, "You learned the " & Recipe(RecipeNum).Name & " recipe!")
+            PlayerMsg(Index, "You learned the " & Recipe(RecipeNum).Name & " recipe!", ColorType.BrightGreen)
 
             TakeInvItem(Index, GetPlayerInvItemNum(Index, InvNum), 0)
 
@@ -371,7 +371,7 @@
             For i = 1 To MAX_INGREDIENT
                 TakeInvItem(Index, Recipe(TempPlayer(Index).CraftRecipe).Ingredients(i).ItemNum, Recipe(TempPlayer(Index).CraftRecipe).Ingredients(i).Value)
             Next
-            PlayerMsg(Index, "You created " & Trim(Item(Recipe(TempPlayer(Index).CraftRecipe).MakeItemNum).Name) & " X " & Recipe(TempPlayer(Index).CraftRecipe).MakeItemAmount)
+            PlayerMsg(Index, "You created " & Trim(Item(Recipe(TempPlayer(Index).CraftRecipe).MakeItemNum).Name) & " X " & Recipe(TempPlayer(Index).CraftRecipe).MakeItemAmount, ColorType.BrightGreen)
         End If
 
         If TempPlayer?(Index).IsCrafting Then

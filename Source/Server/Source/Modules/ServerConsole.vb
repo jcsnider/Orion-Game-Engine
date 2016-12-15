@@ -105,27 +105,27 @@ Module ServerConsole
             Case 0
                 SetPlayerAccess(FindPlayer(Name), Power)
                 SendPlayerData(FindPlayer(Name))
-                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Player Rank!")
+                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Player Rank!", ColorType.BrightCyan)
                 TextAdd("Successfully set the power level to " & Power & " for player " & Name)
             Case 1
                 SetPlayerAccess(FindPlayer(Name), Power)
                 SendPlayerData(FindPlayer(Name))
-                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Monitor Rank!")
+                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Monitor Rank!", ColorType.BrightCyan)
                 TextAdd("Successfully set the power level to " & Power & " for player " & Name)
             Case 2
                 SetPlayerAccess(FindPlayer(Name), Power)
                 SendPlayerData(FindPlayer(Name))
-                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Mapper Rank!")
+                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Mapper Rank!", ColorType.BrightCyan)
                 TextAdd("Successfully set the power level to " & Power & " for player " & Name)
             Case 3
                 SetPlayerAccess(FindPlayer(Name), Power)
                 SendPlayerData(FindPlayer(Name))
-                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Developer Rank!")
+                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Developer Rank!", ColorType.BrightCyan)
                 TextAdd("Successfully set the power level to " & Power & " for player " & Name)
             Case 4
                 SetPlayerAccess(FindPlayer(Name), Power)
                 SendPlayerData(FindPlayer(Name))
-                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Creator Rank!")
+                PlayerMsg(FindPlayer(Name), "Your PowerLevel has been set to Creator Rank!", ColorType.BrightCyan)
                 TextAdd("Successfully set the power level to " & Power & " for player " & Name)
             Case Else
                 TextAdd("Failed to set the power level to " & Power & " for player " & Name)

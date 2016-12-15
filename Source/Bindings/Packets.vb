@@ -146,8 +146,8 @@
         SPartyUpdate
         SPartyVitals
 
-        ' Make sure SMSG_COUNT is below everything else
-        SMSG_COUNT
+        ' Make sure COUNT is below everything else
+        COUNT
     End Enum
 
     ' Packets sent by client to server
@@ -159,7 +159,6 @@
         CUseChar
         CDelChar
         CSayMsg
-        CEmoteMsg
         CBroadcastMsg
         CPlayerMsg
         CPlayerMove
@@ -173,7 +172,7 @@
         CSetSprite
         CGetStats
         CRequestNewMap
-        CMapData
+        CSaveMap
         CNeedMap
         CMapGetItem
         CMapDropItem
@@ -184,14 +183,7 @@
         CBanDestroy
         CBanPlayer
         CRequestEditMap
-        CRequestEditItem
-        CSaveItem
-        CRequestEditNpc
-        CSaveNpc
-        CRequestEditShop
-        CSaveShop
-        CRequestEditSkill
-        CSaveSkill
+
         CSetAccess
         CWhosOnline
         CSetMotd
@@ -200,8 +192,7 @@
         CCast
         CQuit
         CSwapInvSlots
-        CRequestEditResource
-        CSaveResource
+
         CCheckPing
         CUnequip
         CRequestPlayerData
@@ -210,8 +201,7 @@
         CRequestResources
         CSpawnItem
         CTrainStat
-        CRequestEditAnimation
-        CSaveAnimation
+
         CRequestAnimations
         CRequestSkills
         CRequestShops
@@ -236,8 +226,6 @@
         CAdmin
 
         'quests
-        CRequestEditQuest
-        CSaveQuest
         CRequestQuests
         CQuestLogUpdate
         CPlayerHandleQuest
@@ -248,8 +236,7 @@
         CVisit
         CAcceptVisit
         CPlaceFurniture
-        CRequestEditHouse
-        CSaveHouses
+
         CSellHouse
 
         'Hotbar
@@ -263,31 +250,15 @@
         CRequestSwitchesAndVariables
         CEventTouch
 
-        CRequestEditProjectiles
-        CSaveProjectile
         CRequestProjectiles
         CClearProjectile
 
-        'craft
         CRequestRecipes
-        CRequestEditRecipes
-        CSaveRecipe
+
         CCloseCraft
         CStartCraft
 
-        'Class Editor
         CRequestClasses
-        CRequestEditClasses
-        CSaveClasses
-
-        'Editor login
-        CEditorLogin
-        CEditorRequestMap
-        CEditorMapData
-
-        'AutoMapper
-        CRequestAutoMap
-        CSaveAutoMap
 
         'emotes
         CEmote
@@ -299,7 +270,68 @@
         CLeaveParty
         CPartyChatMsg
 
-        ' Make sure CMSG_COUNT is below everything else
-        CMSG_COUNT
+        ' Make sure COUNT is below everything else
+        Count
+    End Enum
+
+    Public Enum EditorPackets
+        'Editor login
+        EditorLogin = ClientPackets.Count
+
+        'maps
+        EditorRequestMap
+        EditorSaveMap
+        MapData
+
+        'items
+        RequestEditItem
+        SaveItem
+
+        'npc's
+        RequestEditNpc
+        SaveNpc
+
+        'shops
+        RequestEditShop
+        SaveShop
+
+        'skills
+        RequestEditSkill
+        SaveSkill
+
+        'resources
+        RequestEditResource
+        SaveResource
+
+        'animations
+        RequestEditAnimation
+        SaveAnimation
+
+        'quests
+        RequestEditQuest
+        SaveQuest
+
+        'houses
+        RequestEditHouse
+        SaveHouses
+
+        'projectiles
+        RequestEditProjectiles
+        SaveProjectile
+
+        'craft
+        RequestEditRecipes
+        SaveRecipe
+
+        'Class Editor
+        RequestEditClasses
+        SaveClasses
+
+        'AutoMapper
+        RequestAutoMap
+        SaveAutoMap
+
+        ' Make sure COUNT is below everything else
+        Count
     End Enum
 End Module

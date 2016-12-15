@@ -177,7 +177,7 @@ Public Module ClientGuiFunctions
 
         CheckGuiClick = False
         'action panel
-        If HUDVisible Then
+        If HUDVisible And HideGui = False Then
             If AboveActionPanel(X, Y) Then
                 ' left click
                 If e.Button = MouseButtons.Left Then

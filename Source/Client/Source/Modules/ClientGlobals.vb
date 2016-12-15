@@ -47,7 +47,6 @@ Module ClientGlobals
     Public EqY As Integer
     Public FPS As Integer
     Public PingToDraw As String
-    Public GoldAmount As String
     Public inChat As Boolean
     Public ShowRClick As Boolean
 
@@ -85,8 +84,8 @@ Module ClientGlobals
     ' Text variables
 
     ' Draw map name location
-    Public DrawMapNameX As Single
-    Public DrawMapNameY As Single
+    Public DrawMapNameX As Single = 110
+    Public DrawMapNameY As Single = 70
     Public DrawMapNameColor As SFML.Graphics.Color
 
     ' Game direction vars

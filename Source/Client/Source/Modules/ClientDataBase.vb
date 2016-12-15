@@ -252,8 +252,6 @@ Module ClientDataBase
 
 #Region "Maps"
     Sub ClearMap()
-        Map = Nothing
-        Map = New MapRec
 
         SyncLock MapLock
             Map.Name = ""
@@ -335,6 +333,13 @@ Module ClientDataBase
         Next
 
     End Sub
+
+    Sub ClearBlood()
+        For I = 1 To Byte.MaxValue
+            Blood(I).Timer = 0
+        Next
+    End Sub
+
 #End Region
 
 #Region "Items"

@@ -1254,6 +1254,7 @@ Module ClientGraphics
         Dim srcrect As New Rectangle(0, 0, 0, 0)
         'Dim tmpSprite As Sprite
         If GettingMap Then Exit Sub
+        If Map.Tile Is Nothing Then Exit Sub
 
         With Map.Tile(X, Y)
             For i = MapLayer.Ground To MapLayer.Mask2
@@ -1295,6 +1296,7 @@ Module ClientGraphics
         Dim dest As Rectangle = New Rectangle(frmMainGame.PointToScreen(frmMainGame.picscreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
         If GettingMap Then Exit Sub
+        If Map.Tile Is Nothing Then Exit Sub
 
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
@@ -1755,7 +1757,7 @@ Module ClientGraphics
         Next
 
         'draw event names
-        For I = 0 To Map.CurrentEvents
+        For I = 1 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)
@@ -1792,7 +1794,9 @@ Module ClientGraphics
         End If
 
         ' Draw map name
-        DrawMapName()
+        'DrawMapName()
+
+        If GettingMap Then Exit Sub
 
         'draw hp and casting bars
         DrawBars()
@@ -1853,6 +1857,8 @@ Module ClientGraphics
         Dim barWidth As Integer
         Dim rec(1) As Rectangle
 
+        If GettingMap Then Exit Sub
+
         ' check for casting time bar
         If SkillBuffer > 0 Then
             ' lock to player
@@ -1871,6 +1877,7 @@ Module ClientGraphics
 
         ' check for hp bar
         For i = 1 To MAX_MAP_NPCS
+            If Map.Npc Is Nothing Then Exit Sub
             If Map.Npc(i) > 0 Then
                 If Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackOnSight Or Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackWhenAttacked Or Npc(MapNpc(i).Num).Behaviour = NpcBehavior.Guard Then
                     ' lock to npc
@@ -1888,7 +1895,7 @@ Module ClientGraphics
 
                         If MapNpc(i).Vital(Vitals.MP) > 0 Then
                             ' calculate the width to fill
-                            barWidth = ((MapNpc(i).Vital(Vitals.MP) / (Npc(MapNpc(i).Num).Stat(Stats.intelligence) * 2) * 32))
+                            barWidth = ((MapNpc(i).Vital(Vitals.MP) / (Npc(MapNpc(i).Num).Stat(Stats.Intelligence) * 2) * 32))
                             ' draw bars
                             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                             Dim rectShape2 As New RectangleShape(New Vector2f(barWidth, 4))
@@ -1904,7 +1911,7 @@ Module ClientGraphics
     End Sub
 
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DrawMapNameX, DrawMapNameY, "Map: " & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Public Sub DrawDoor(ByVal X As Integer, ByVal Y As Integer)
@@ -2248,7 +2255,9 @@ Module ClientGraphics
         'Fps etc
         DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, "FPS: " & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, "Ping: " & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HUDWindowX + HUDEXPBarX, HUDWindowY + HUDEXPBarY + 20, "Gold: " & GoldAmount, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        ' Draw map name
+        DrawMapName()
     End Sub
 
     Sub DrawStatBars()
@@ -2586,10 +2595,6 @@ Module ClientGraphics
 
                             DrawText(X, Y, ConvertCurrency(Amount), colour, SFML.Graphics.Color.Black, GameWindow)
 
-                            ' Check if it's gold, and update the label
-                            If GetPlayerInvItemNum(MyIndex, i) = 1 Then '1 = gold :P
-                                GoldAmount = Format(CLng(Amount), "#,###,###,###")
-                            End If
                         End If
                     End If
                 End If
@@ -2683,10 +2688,7 @@ NextLoop:
                             Amount = CStr(GetPlayerInvItemValue(MyIndex, i))
                             ' Draw currency but with k, m, b etc. using a convertion function
                             DrawText(X, Y, ConvertCurrency(Amount), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-                            ' Check if it's gold, and update the label
-                            If GetPlayerInvItemNum(MyIndex, i) = 1 Then '1 = gold :P
-                                GoldAmount = Format(Amount, "#,###,###,###")
-                            End If
+
                         End If
                     End If
                 End If

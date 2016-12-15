@@ -13,7 +13,6 @@
         Packets.Add(ClientPackets.CUseChar, AddressOf Packet_UseChar)
         Packets.Add(ClientPackets.CDelChar, AddressOf Packet_DeleteChar)
         Packets.Add(ClientPackets.CSayMsg, AddressOf Packet_SayMessage)
-        Packets.Add(ClientPackets.CEmoteMsg, AddressOf Packet_EmoteMsg)
         Packets.Add(ClientPackets.CBroadcastMsg, AddressOf Packet_BroadCastMsg)
         Packets.Add(ClientPackets.CPlayerMsg, AddressOf Packet_PlayerMsg)
         Packets.Add(ClientPackets.CPlayerMove, AddressOf Packet_PlayerMove)
@@ -27,7 +26,7 @@
         Packets.Add(ClientPackets.CSetSprite, AddressOf Packet_SetSprite)
         Packets.Add(ClientPackets.CGetStats, AddressOf Packet_GetStats)
         Packets.Add(ClientPackets.CRequestNewMap, AddressOf Packet_RequestNewMap)
-        Packets.Add(ClientPackets.CMapData, AddressOf Packet_MapData)
+        Packets.Add(ClientPackets.CSaveMap, AddressOf Packet_MapData)
         Packets.Add(ClientPackets.CNeedMap, AddressOf Packet_NeedMap)
         Packets.Add(ClientPackets.CMapGetItem, AddressOf Packet_GetItem)
         Packets.Add(ClientPackets.CMapDropItem, AddressOf Packet_DropItem)
@@ -40,14 +39,6 @@
 
         Packets.Add(ClientPackets.CRequestEditMap, AddressOf Packet_EditMapRequest)
 
-        Packets.Add(ClientPackets.CRequestEditItem, AddressOf Packet_EditItem)
-        Packets.Add(ClientPackets.CSaveItem, AddressOf Packet_SaveItem)
-        Packets.Add(ClientPackets.CRequestEditNpc, AddressOf Packet_EditNpc)
-        Packets.Add(ClientPackets.CSaveNpc, AddressOf Packet_SaveNPC)
-        Packets.Add(ClientPackets.CRequestEditShop, AddressOf Packet_EditShop)
-        Packets.Add(ClientPackets.CSaveShop, AddressOf Packet_SaveShop)
-        Packets.Add(ClientPackets.CRequestEditSkill, AddressOf Packet_EditSkill)
-        Packets.Add(ClientPackets.CSaveSkill, AddressOf Packet_SaveSkill)
         Packets.Add(ClientPackets.CSetAccess, AddressOf Packet_SetAccess)
         Packets.Add(ClientPackets.CWhosOnline, AddressOf Packet_WhosOnline)
         Packets.Add(ClientPackets.CSetMotd, AddressOf Packet_SetMotd)
@@ -56,8 +47,7 @@
         Packets.Add(ClientPackets.CCast, AddressOf Packet_Cast)
         Packets.Add(ClientPackets.CQuit, AddressOf Packet_QuitGame)
         Packets.Add(ClientPackets.CSwapInvSlots, AddressOf Packet_SwapInvSlots)
-        Packets.Add(ClientPackets.CRequestEditResource, AddressOf Packet_EditResource)
-        Packets.Add(ClientPackets.CSaveResource, AddressOf Packet_SaveResource)
+
         Packets.Add(ClientPackets.CCheckPing, AddressOf Packet_CheckPing)
         Packets.Add(ClientPackets.CUnequip, AddressOf Packet_Unequip)
         Packets.Add(ClientPackets.CRequestPlayerData, AddressOf Packet_RequestPlayerData)
@@ -66,8 +56,7 @@
         Packets.Add(ClientPackets.CRequestResources, AddressOf Packet_RequestResources)
         Packets.Add(ClientPackets.CSpawnItem, AddressOf Packet_SpawnItem)
         Packets.Add(ClientPackets.CTrainStat, AddressOf Packet_TrainStat)
-        Packets.Add(ClientPackets.CRequestEditAnimation, AddressOf Packet_EditAnimation)
-        Packets.Add(ClientPackets.CSaveAnimation, AddressOf Packet_SaveAnimation)
+
         Packets.Add(ClientPackets.CRequestAnimations, AddressOf Packet_RequestAnimations)
         Packets.Add(ClientPackets.CRequestSkills, AddressOf Packet_RequestSkills)
         Packets.Add(ClientPackets.CRequestShops, AddressOf Packet_RequestShops)
@@ -92,8 +81,6 @@
         Packets.Add(ClientPackets.CAdmin, AddressOf Packet_Admin)
 
         'quests
-        Packets.Add(ClientPackets.CRequestEditQuest, AddressOf Packet_RequestEditQuest)
-        Packets.Add(ClientPackets.CSaveQuest, AddressOf Packet_SaveQuest)
         Packets.Add(ClientPackets.CRequestQuests, AddressOf Packet_RequestQuests)
         Packets.Add(ClientPackets.CQuestLogUpdate, AddressOf Packet_QuestLogUpdate)
         Packets.Add(ClientPackets.CPlayerHandleQuest, AddressOf Packet_PlayerHandleQuest)
@@ -104,8 +91,7 @@
         Packets.Add(ClientPackets.CVisit, AddressOf Packet_InviteToHouse)
         Packets.Add(ClientPackets.CAcceptVisit, AddressOf Packet_AcceptInvite)
         Packets.Add(ClientPackets.CPlaceFurniture, AddressOf Packet_PlaceFurniture)
-        Packets.Add(ClientPackets.CRequestEditHouse, AddressOf Packet_RequestEditHouse)
-        Packets.Add(ClientPackets.CSaveHouses, AddressOf Packet_SaveHouses)
+
         Packets.Add(ClientPackets.CSellHouse, AddressOf Packet_SellHouse)
 
         'hotbar
@@ -120,30 +106,17 @@
         Packets.Add(ClientPackets.CEventTouch, AddressOf Packet_EventTouch)
 
         'projectiles
-        Packets.Add(ClientPackets.CRequestEditProjectiles, AddressOf HandleRequestEditProjectiles)
-        Packets.Add(ClientPackets.CSaveProjectile, AddressOf HandleSaveProjectile)
+
         Packets.Add(ClientPackets.CRequestProjectiles, AddressOf HandleRequestProjectiles)
         Packets.Add(ClientPackets.CClearProjectile, AddressOf HandleClearProjectile)
 
         'craft
         Packets.Add(ClientPackets.CRequestRecipes, AddressOf Packet_RequestRecipes)
-        Packets.Add(ClientPackets.CRequestEditRecipes, AddressOf Packet_RequestEditRecipes)
-        Packets.Add(ClientPackets.CSaveRecipe, AddressOf Packet_SaveRecipe)
+
         Packets.Add(ClientPackets.CCloseCraft, AddressOf Packet_CloseCraft)
         Packets.Add(ClientPackets.CStartCraft, AddressOf Packet_StartCraft)
 
         Packets.Add(ClientPackets.CRequestClasses, AddressOf Packet_RequestClasses)
-        Packets.Add(ClientPackets.CRequestEditClasses, AddressOf Packet_RequestEditClasses)
-        Packets.Add(ClientPackets.CSaveClasses, AddressOf Packet_SaveClasses)
-
-        'editor login
-        Packets.Add(ClientPackets.CEditorLogin, AddressOf Packet_EditorLogin)
-        Packets.Add(ClientPackets.CEditorRequestMap, AddressOf Packet_EditorRequestMap)
-        Packets.Add(ClientPackets.CEditorMapData, AddressOf Packet_EditorMapData)
-
-        'Auto Mapper
-        Packets.Add(ClientPackets.CRequestAutoMap, AddressOf Packet_RequestAutoMap)
-        Packets.Add(ClientPackets.CSaveAutoMap, AddressOf Packet_SaveAutoMap)
 
         'emotes
         Packets.Add(ClientPackets.CEmote, AddressOf Packet_Emote)
@@ -154,6 +127,37 @@
         Packets.Add(ClientPackets.CDeclineParty, AddressOf Packet_DeclineParty)
         Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
         Packets.Add(ClientPackets.CPartyChatMsg, AddressOf Packet_PartyChatMsg)
+
+        'editor login
+        Packets.Add(EditorPackets.EditorLogin, AddressOf Packet_EditorLogin)
+        Packets.Add(EditorPackets.EditorRequestMap, AddressOf Packet_EditorRequestMap)
+        Packets.Add(EditorPackets.EditorSaveMap, AddressOf Packet_EditorMapData)
+
+        'editor
+        Packets.Add(EditorPackets.RequestEditItem, AddressOf Packet_EditItem)
+        Packets.Add(EditorPackets.SaveItem, AddressOf Packet_SaveItem)
+        Packets.Add(EditorPackets.RequestEditNpc, AddressOf Packet_EditNpc)
+        Packets.Add(EditorPackets.SaveNpc, AddressOf Packet_SaveNPC)
+        Packets.Add(EditorPackets.RequestEditShop, AddressOf Packet_EditShop)
+        Packets.Add(EditorPackets.SaveShop, AddressOf Packet_SaveShop)
+        Packets.Add(EditorPackets.RequestEditSkill, AddressOf Packet_EditSkill)
+        Packets.Add(EditorPackets.SaveSkill, AddressOf Packet_SaveSkill)
+        Packets.Add(EditorPackets.RequestEditResource, AddressOf Packet_EditResource)
+        Packets.Add(EditorPackets.SaveResource, AddressOf Packet_SaveResource)
+        Packets.Add(EditorPackets.RequestEditAnimation, AddressOf Packet_EditAnimation)
+        Packets.Add(EditorPackets.SaveAnimation, AddressOf Packet_SaveAnimation)
+        Packets.Add(EditorPackets.RequestEditQuest, AddressOf Packet_RequestEditQuest)
+        Packets.Add(EditorPackets.SaveQuest, AddressOf Packet_SaveQuest)
+        Packets.Add(EditorPackets.RequestEditHouse, AddressOf Packet_RequestEditHouse)
+        Packets.Add(EditorPackets.SaveHouses, AddressOf Packet_SaveHouses)
+        Packets.Add(EditorPackets.RequestEditProjectiles, AddressOf HandleRequestEditProjectiles)
+        Packets.Add(EditorPackets.SaveProjectile, AddressOf HandleSaveProjectile)
+        Packets.Add(EditorPackets.RequestEditRecipes, AddressOf Packet_RequestEditRecipes)
+        Packets.Add(EditorPackets.SaveRecipe, AddressOf Packet_SaveRecipe)
+        Packets.Add(EditorPackets.RequestEditClasses, AddressOf Packet_RequestEditClasses)
+        Packets.Add(EditorPackets.SaveClasses, AddressOf Packet_SaveClasses)
+        Packets.Add(EditorPackets.RequestAutoMap, AddressOf Packet_RequestAutoMap)
+        Packets.Add(EditorPackets.SaveAutoMap, AddressOf Packet_SaveAutoMap)
 
     End Sub
 
@@ -251,7 +255,7 @@
         Name = Buffer.ReadString
 
         If GetPlayerLogin(index) = Trim$(Name) Then
-            PlayerMsg(index, "You cannot delete your own account while online!")
+            PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -535,21 +539,6 @@
         Buffer = Nothing
     End Sub
 
-    Private Sub Packet_EmoteMsg(ByVal index As Integer, ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Dim msg As String
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ClientPackets.CEmoteMsg Then Exit Sub
-        msg = Buffer.ReadString
-
-        Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " " & msg, PLAYER_LOG)
-        MapMsg(GetPlayerMap(index), GetPlayerName(index) & " " & Right$(msg, Len(msg) - 1), QColorType.EmoteColor)
-
-        Buffer = Nothing
-    End Sub
-
     Private Sub Packet_BroadCastMsg(ByVal index As Integer, ByVal data() As Byte)
         Dim Buffer As ByteBuffer
         Dim msg As String
@@ -584,13 +573,13 @@
         If OtherPlayerIndex <> index Then
             If OtherPlayerIndex > 0 Then
                 Addlog(GetPlayerName(index) & " tells " & GetPlayerName(index) & ", '" & Msg & "'", PLAYER_LOG)
-                PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'")
-                PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'")
+                PlayerMsg(OtherPlayerIndex, GetPlayerName(index) & " tells you, '" & Msg & "'", ColorType.Pink)
+                PlayerMsg(index, "You tell " & GetPlayerName(OtherPlayerIndex) & ", '" & Msg & "'", ColorType.Pink)
             Else
-                PlayerMsg(index, "Player is not online.")
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
         Else
-            PlayerMsg(index, "Cannot message your self!")
+            PlayerMsg(index, "Cannot message your self!", ColorType.BrightRed)
         End If
     End Sub
 
@@ -743,16 +732,16 @@
                         Else
                             n = GetPlayerDamage(Index)
                             Damage = n + Int(Rnd() * (n \ 2)) + 1 - GetPlayerProtection(TempIndex)
-                            PlayerMsg(Index, "You feel a surge of energy upon swinging!")
-                            PlayerMsg(TempIndex, GetPlayerName(Index) & " swings with enormous might!")
+                            PlayerMsg(Index, "You feel a surge of energy upon swinging!", ColorType.Yellow)
+                            PlayerMsg(TempIndex, GetPlayerName(Index) & " swings with enormous might!", ColorType.BrightRed)
                             SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                             SendCritical(Index)
                         End If
 
                         AttackPlayer(Index, TempIndex, Damage)
                     Else
-                        PlayerMsg(Index, GetPlayerName(TempIndex) & "'s " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked your hit!")
-                        PlayerMsg(TempIndex, "Your " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked " & GetPlayerName(Index) & "'s hit!")
+                        PlayerMsg(Index, GetPlayerName(TempIndex) & "'s " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked your hit!", ColorType.BrightRed)
+                        PlayerMsg(TempIndex, "Your " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked " & GetPlayerName(Index) & "'s hit!", ColorType.BrightGreen)
                         SendActionMsg(GetPlayerMap(TempIndex), "BLOCK!", ColorType.Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
                     End If
 
@@ -774,8 +763,8 @@
                 Else
                     n = GetPlayerDamage(Index)
                     Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.Endurance) \ 2)
-                    PlayerMsg(Index, "You feel a surge of energy upon swinging!")
-                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                    PlayerMsg(Index, "You feel a surge of energy upon swinging!", ColorType.Yellow)
+                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.Yellow, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                     SendCritical(Index)
                     KnockBackNpc(Index, i)
                 End If
@@ -783,7 +772,7 @@
                 If Damage > 0 Then
                     AttackNpc(Index, i, Damage)
                 Else
-                    PlayerMsg(Index, "Your attack does nothing.")
+                    PlayerMsg(Index, "Your attack does nothing.", ColorType.BrightRed)
                 End If
 
                 Exit Sub
@@ -832,23 +821,23 @@
         i = FindPlayer(name)
 
         If i > 0 Then
-            PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i))
+            PlayerMsg(Index, "Account: " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
 
             If GetPlayerAccess(Index) > AdminType.Monitor Then
-                PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-")
-                PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i))
-                PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP))
-                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.strength) & "  Defense: " & GetPlayerStat(i, Stats.Endurance) & "  Magic: " & GetPlayerStat(i, Stats.intelligence) & "  Speed: " & GetPlayerStat(i, Stats.Speed))
-                n = (GetPlayerStat(i, Stats.strength) \ 2) + (GetPlayerLevel(i) \ 2)
+                PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-", ColorType.Yellow)
+                PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
+                PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP), ColorType.Yellow)
+                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.Strength) & "  Defense: " & GetPlayerStat(i, Stats.Endurance) & "  Magic: " & GetPlayerStat(i, Stats.Intelligence) & "  Speed: " & GetPlayerStat(i, Stats.Speed), ColorType.Yellow)
+                n = (GetPlayerStat(i, Stats.Strength) \ 2) + (GetPlayerLevel(i) \ 2)
                 i = (GetPlayerStat(i, Stats.Endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
                 If n > 100 Then n = 100
                 If i > 100 Then i = 100
-                PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+                PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
             End If
 
         Else
-            PlayerMsg(Index, "Player is not online.")
+            PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
         End If
 
         Buffer = Nothing
@@ -874,15 +863,15 @@
         If n <> Index Then
             If n > 0 Then
                 PlayerWarp(Index, GetPlayerMap(n), GetPlayerX(n), GetPlayerY(n))
-                PlayerMsg(n, GetPlayerName(Index) & " has warped to you.")
-                PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".")
+                PlayerMsg(n, GetPlayerName(Index) & " has warped to you.", ColorType.Yellow)
+                PlayerMsg(Index, "You have been warped to " & GetPlayerName(n) & ".", ColorType.Yellow)
                 Addlog(GetPlayerName(Index) & " has warped to " & GetPlayerName(n) & ", map #" & GetPlayerMap(n) & ".", ADMIN_LOG)
             Else
-                PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
             End If
 
         Else
-            PlayerMsg(Index, "You cannot warp to yourself, dumbass!")
+            PlayerMsg(Index, "You cannot warp to yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
@@ -908,15 +897,15 @@
         If n <> Index Then
             If n > 0 Then
                 PlayerWarp(n, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
-                PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".")
-                PlayerMsg(Index, GetPlayerName(n) & " has been summoned.")
+                PlayerMsg(n, "You have been summoned by " & GetPlayerName(Index) & ".", ColorType.Yellow)
+                PlayerMsg(Index, GetPlayerName(n) & " has been summoned.", ColorType.Yellow)
                 Addlog(GetPlayerName(Index) & " has warped " & GetPlayerName(n) & " to self, map #" & GetPlayerMap(Index) & ".", ADMIN_LOG)
             Else
-                PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
             End If
 
         Else
-            PlayerMsg(Index, "You cannot warp yourself to yourself!")
+            PlayerMsg(Index, "You cannot warp yourself to yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
@@ -937,10 +926,10 @@
         Buffer = Nothing
 
         ' Prevent hacking
-        If n < 0 Or n > MAX_MAPS Then Exit Sub
+        If n < 0 Or n > MAX_CACHED_MAPS Then Exit Sub
 
         PlayerWarp(Index, n, GetPlayerX(Index), GetPlayerY(Index))
-        PlayerMsg(Index, "You have been warped to map #" & n)
+        PlayerMsg(Index, "You have been warped to map #" & n, ColorType.Yellow)
         Addlog(GetPlayerName(Index) & " warped to map #" & n & ".", ADMIN_LOG)
 
     End Sub
@@ -975,16 +964,16 @@
 
         If Buffer.ReadInteger <> ClientPackets.CGetStats Then Exit Sub
 
-        PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-")
-        PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index))
-        PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP))
-        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.strength) & "  DEF: " & GetPlayerStat(Index, Stats.Endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.Speed))
-        n = (GetPlayerStat(Index, Stats.strength) \ 2) + (GetPlayerLevel(Index) \ 2)
+        PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-", ColorType.Yellow)
+        PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index), ColorType.Yellow)
+        PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP), ColorType.Yellow)
+        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.Strength) & "  DEF: " & GetPlayerStat(Index, Stats.Endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.Intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.Speed), ColorType.Yellow)
+        n = (GetPlayerStat(Index, Stats.Strength) \ 2) + (GetPlayerLevel(Index) \ 2)
         i = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
 
         If n > 100 Then n = 100
         If i > 100 Then i = 100
-        PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%")
+        PlayerMsg(Index, "Critical Hit Chance: " & n & "%, Block Chance: " & i & "%", ColorType.Yellow)
         Buffer = Nothing
     End Sub
 
@@ -1019,7 +1008,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-        If Buffer.ReadInteger <> ClientPackets.CMapData Then Exit Sub
+        If Buffer.ReadInteger <> ClientPackets.CSaveMap Then Exit Sub
 
         Data = Buffer.ReadBytes(Data.Length - 4)
         Buffer = New ByteBuffer
@@ -1259,8 +1248,6 @@
         Buffer = Nothing
     End Sub
 
-
-
     Private Sub Packet_NeedMap(ByVal index As Integer, ByVal data() As Byte)
         Dim s As String
         Dim Buffer As ByteBuffer
@@ -1348,7 +1335,7 @@
         Next
 
         CacheResources(GetPlayerMap(Index))
-        Call PlayerMsg(Index, "Map respawned.")
+        Call PlayerMsg(Index, "Map respawned.", ColorType.BrightGreen)
         Call Addlog(GetPlayerName(Index) & " has respawned map #" & GetPlayerMap(Index), ADMIN_LOG)
 
         Buffer = Nothing
@@ -1377,19 +1364,19 @@
         If n <> Index Then
             If n > 0 Then
                 If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    Call GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.Game_Name & " by " & GetPlayerName(Index) & "!")
-                    Call Addlog(GetPlayerName(Index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
-                    Call AlertMsg(n, "You have been kicked by " & GetPlayerName(Index) & "!")
+                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.Game_Name & " by " & GetPlayerName(Index) & "!")
+                    Addlog(GetPlayerName(Index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
+                    AlertMsg(n, "You have been kicked by " & GetPlayerName(Index) & "!")
                 Else
-                    Call PlayerMsg(Index, "That is a higher or same access admin then you!")
+                    PlayerMsg(Index, "That is a higher or same access admin then you!", ColorType.BrightRed)
                 End If
 
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot kick yourself!")
+            PlayerMsg(Index, "You cannot kick yourself!", ColorType.BrightRed)
         End If
     End Sub
 
@@ -1405,7 +1392,7 @@
             Exit Sub
         End If
 
-        PlayerMsg(Index, "Command /banlist is not available in EO.Net... yet ;).")
+        PlayerMsg(Index, "Command /banlist is not available in Orion+... yet ;)", ColorType.Yellow)
 
         Buffer = Nothing
     End Sub
@@ -1426,7 +1413,9 @@
         filename = Application.StartupPath & "\data\banlist.txt"
 
         If System.IO.File.Exists(filename) Then Kill(filename)
-        Call PlayerMsg(Index, "Ban list destroyed.")
+
+        PlayerMsg(Index, "Ban list destroyed.", ColorType.BrightGreen)
+
         Buffer = Nothing
     End Sub
 
@@ -1448,23 +1437,23 @@
         End If
 
         ' The player index
-        n = FindPlayer(Buffer.ReadString) 'Parse(1))
+        n = FindPlayer(Buffer.ReadString)
         Buffer = Nothing
 
         If n <> Index Then
             If n > 0 Then
                 If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    Call BanIndex(n, Index)
+                    BanIndex(n, Index)
                 Else
-                    Call PlayerMsg(Index, "That is a higher or same access admin then you!")
+                    PlayerMsg(Index, "That is a higher or same access admin then you!", ColorType.BrightRed)
                 End If
 
             Else
-                Call PlayerMsg(Index, "Player is not online.")
+                PlayerMsg(Index, "Player is not online.", ColorType.BrightRed)
             End If
 
         Else
-            Call PlayerMsg(Index, "You cannot ban yourself!")
+            PlayerMsg(Index, "You cannot ban yourself, dumbass!", ColorType.BrightRed)
         End If
 
     End Sub
@@ -1477,10 +1466,12 @@
         If Buffer.ReadInteger <> ClientPackets.CRequestEditMap Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Mapper Then
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
+
+        If GetPlayerMap(index) > MAX_MAPS Then
+            PlayerMsg(index, "Cant edit instanced maps!", ColorType.BrightRed)
             Exit Sub
         End If
-
         SendMapEventData(index)
 
         Buffer = New ByteBuffer
@@ -1494,7 +1485,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CRequestEditItem Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.RequestEditItem Then Exit Sub
         Buffer = Nothing
 
         ' Prevent hacking
@@ -1515,7 +1506,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CSaveItem Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveItem Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -1587,7 +1578,7 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CRequestEditNpc Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditNpc Then Exit Sub
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
             Exit Sub
@@ -1605,7 +1596,7 @@
         Dim NpcNum As Integer, i As Integer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CSaveNpc Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveNpc Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
@@ -1654,7 +1645,7 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CRequestEditShop Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditShop Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
@@ -1673,7 +1664,7 @@
         Dim ShopNum As Integer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CSaveShop Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveShop Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
@@ -1712,7 +1703,7 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CRequestEditSkill Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditSkill Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
@@ -1731,7 +1722,7 @@
         Dim skillnum As Integer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CSaveSkill Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveSkill Then Exit Sub
 
         skillnum = buffer.ReadInteger
 
@@ -1787,14 +1778,12 @@
         Dim i As Integer
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Creator Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(index) < AdminType.Creator Then Exit Sub
 
         ' The index
-        n = FindPlayer(buffer.ReadString) 'Parse(1))
+        n = FindPlayer(buffer.ReadString)
         ' The access
-        i = buffer.ReadInteger 'CLng(Parse(2))
+        i = buffer.ReadInteger
 
         ' Check for invalid access level
         If i >= 0 Or i <= 3 Then
@@ -1804,23 +1793,23 @@
 
                 'check to see if same level access is trying to change another access of the very same level and boot them if they are.
                 If GetPlayerAccess(n) = GetPlayerAccess(index) Then
-                    Call PlayerMsg(index, "Invalid access level.")
+                    PlayerMsg(index, "Invalid access level.", ColorType.BrightRed)
                     Exit Sub
                 End If
 
                 If GetPlayerAccess(n) <= 0 Then
-                    Call GlobalMsg(GetPlayerName(n) & " has been blessed with administrative access.")
+                    GlobalMsg(GetPlayerName(n) & " has been blessed with administrative access.")
                 End If
 
-                Call SetPlayerAccess(n, i)
-                Call SendPlayerData(n)
-                Call Addlog(GetPlayerName(index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
+                SetPlayerAccess(n, i)
+                SendPlayerData(n)
+                Addlog(GetPlayerName(index) & " has modified " & GetPlayerName(n) & "'s access.", ADMIN_LOG)
             Else
-                Call PlayerMsg(index, "Player is not online.")
+                PlayerMsg(index, "Player is not online.", ColorType.BrightRed)
             End If
 
         Else
-            Call PlayerMsg(index, "Invalid access level.")
+            PlayerMsg(index, "Invalid access level.", ColorType.BrightRed)
         End If
 
         buffer = Nothing
@@ -1885,23 +1874,23 @@
                             ' Consider the player
                             If i <> index Then
                                 If GetPlayerLevel(i) >= GetPlayerLevel(index) + 5 Then
-                                    PlayerMsg(index, "You wouldn't stand a chance.")
+                                    PlayerMsg(index, "You wouldn't stand a chance.", ColorType.BrightRed)
                                 Else
 
                                     If GetPlayerLevel(i) > GetPlayerLevel(index) Then
-                                        PlayerMsg(index, "This one seems to have an advantage over you.")
+                                        PlayerMsg(index, "This one seems to have an advantage over you.", ColorType.Yellow)
                                     Else
 
                                         If GetPlayerLevel(i) = GetPlayerLevel(index) Then
-                                            PlayerMsg(index, "This would be an even fight.")
+                                            PlayerMsg(index, "This would be an even fight.", ColorType.White)
                                         Else
 
                                             If GetPlayerLevel(index) >= GetPlayerLevel(i) + 5 Then
-                                                PlayerMsg(index, "You could slaughter that player.")
+                                                PlayerMsg(index, "You could slaughter that player.", ColorType.BrightBlue)
                                             Else
 
                                                 If GetPlayerLevel(index) > GetPlayerLevel(i) Then
-                                                    PlayerMsg(index, "You would have an advantage over that player.")
+                                                    PlayerMsg(index, "You would have an advantage over that player.", ColorType.BrightCyan)
                                                 End If
                                             End If
                                         End If
@@ -1912,7 +1901,7 @@
                             ' Change target
                             TempPlayer(index).Target = i
                             TempPlayer(index).TargetType = TargetType.Player
-                            PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".")
+                            PlayerMsg(index, "Your target is now " & GetPlayerName(i) & ".", ColorType.Yellow)
                             SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                             TargetFound = 1
                             If rclick = 1 Then SendRightClick(index)
@@ -1930,7 +1919,7 @@
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
                 If MapItem(GetPlayerMap(index), i).x = x Then
                     If MapItem(GetPlayerMap(index), i).y = y Then
-                        PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".")
+                        PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".", ColorType.White)
                         Exit Sub
                     End If
                 End If
@@ -1947,7 +1936,7 @@
                         ' Change target
                         TempPlayer(index).Target = i
                         TempPlayer(index).TargetType = TargetType.Npc
-                        PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".")
+                        PlayerMsg(index, "Your target is now " & CheckGrammar(Trim$(Npc(MapNpc(GetPlayerMap(index)).Npc(i).Num).Name)) & ".", ColorType.Yellow)
                         SendTarget(index, TempPlayer(index).Target, TempPlayer(index).TargetType)
                         TargetFound = 1
                         Exit Sub
@@ -1977,7 +1966,7 @@
                                         SendFurnitureToHouse(index)
                                         Exit Sub
                                     Else
-                                        PlayerMsg(index, "No inventory space available!")
+                                        PlayerMsg(index, "No inventory space available!", ColorType.BrightRed)
                                     End If
                                     Exit Sub
                                 End If
@@ -2058,7 +2047,7 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CRequestEditResource Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditResource Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -2076,7 +2065,7 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CSaveResource Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveResource Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -2212,7 +2201,7 @@
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CRequestEditAnimation Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditAnimation Then Exit Sub
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then
             Exit Sub
@@ -2229,7 +2218,7 @@
         Dim AnimNum As Integer
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CSaveAnimation Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveAnimation Then Exit Sub
 
         AnimNum = buffer.ReadInteger
 
@@ -2328,13 +2317,13 @@
 
         ' dont let them forget a skill which is in CD
         If TempPlayer(index).SkillCD(skillslot) > 0 Then
-            PlayerMsg(index, "Cannot forget a skill which is cooling down!")
+            PlayerMsg(index, "Cannot forget a skill which is cooling down!", ColorType.BrightRed)
             Exit Sub
         End If
 
         ' dont let them forget a skill which is buffered
         If TempPlayer(index).SkillBuffer = skillslot Then
-            PlayerMsg(index, "Cannot forget a skill which you are casting!")
+            PlayerMsg(index, "Cannot forget a skill which you are casting!", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -2375,7 +2364,7 @@
             ' check has the cost item
             itemamount = HasItem(index, .costitem)
             If itemamount = 0 Or itemamount < .costvalue Then
-                PlayerMsg(index, "You do not have enough to buy this item.")
+                PlayerMsg(index, "You do not have enough to buy this item.", ColorType.BrightRed)
                 ResetShopAction(index)
                 Exit Sub
             End If
@@ -2386,7 +2375,7 @@
         End With
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(index, "Trade successful.")
+        PlayerMsg(index, "Trade successful.", ColorType.BrightGreen)
         ResetShopAction(index)
 
         buffer = Nothing
@@ -2419,7 +2408,7 @@
 
         ' item has cost?
         If price <= 0 Then
-            PlayerMsg(index, "The shop doesn't want that item.")
+            PlayerMsg(index, "The shop doesn't want that item.", ColorType.Yellow)
             ResetShopAction(index)
             Exit Sub
         End If
@@ -2429,7 +2418,7 @@
         GiveInvItem(index, 1, price)
 
         ' send confirmation message & reset their shop action
-        PlayerMsg(index, "Sold the " & Trim(Item(GetPlayerInvItemNum(index, invSlot)).Name) & " !")
+        PlayerMsg(index, "Sold the " & Trim(Item(GetPlayerInvItemNum(index, invSlot)).Name) & " !", ColorType.BrightGreen)
         ResetShopAction(index)
 
         buffer = Nothing
@@ -2536,7 +2525,7 @@
 
         ' can't trade with yourself..
         If tradetarget = index Then
-            PlayerMsg(index, "You can't trade with yourself.")
+            PlayerMsg(index, "You can't trade with yourself.", ColorType.BrightRed)
             Exit Sub
         End If
 
@@ -2544,8 +2533,8 @@
         TempPlayer(index).TradeRequest = tradetarget
         TempPlayer(tradetarget).TradeRequest = index
 
-        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.")
-        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.")
+        PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has invited you to trade.", ColorType.Yellow)
+        PlayerMsg(index, "You have invited " & Trim$(GetPlayerName(tradetarget)) & " to trade.", ColorType.BrightGreen)
         SendClearTradeTimer(index)
 
         SendTradeInvite(tradetarget, index)
@@ -2568,8 +2557,8 @@
         ' Let them trade!
         If TempPlayer(tradetarget).TradeRequest = index Then
             ' let them know they're trading
-            PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.")
-            PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.")
+            PlayerMsg(index, "You have accepted " & Trim$(GetPlayerName(tradetarget)) & "'s trade request.", ColorType.Yellow)
+            PlayerMsg(tradetarget, Trim$(GetPlayerName(index)) & " has accepted your trade request.", ColorType.BrightGreen)
             ' clear the trade timeout clientside
             SendClearTradeTimer(index)
 
@@ -2678,8 +2667,8 @@
         TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(index, "Trade completed.")
-        PlayerMsg(tradeTarget, "Trade completed.")
+        PlayerMsg(index, "Trade completed.", ColorType.BrightGreen)
+        PlayerMsg(tradeTarget, "Trade completed.", ColorType.BrightGreen)
 
         SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
@@ -2706,8 +2695,8 @@
         TempPlayer(index).InTrade = 0
         TempPlayer(tradeTarget).InTrade = 0
 
-        PlayerMsg(index, "You declined the trade.")
-        PlayerMsg(tradeTarget, GetPlayerName(index) & " has declined the trade.")
+        PlayerMsg(index, "You declined the trade.", ColorType.Yellow)
+        PlayerMsg(tradeTarget, GetPlayerName(index) & " has declined the trade.", ColorType.BrightRed)
 
         SendCloseTrade(index)
         SendCloseTrade(tradeTarget)
@@ -2733,7 +2722,7 @@
         ' make sure they're not already offering it
         For i = 1 To MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = invslot Then
-                PlayerMsg(index, "You've already offered this item.")
+                PlayerMsg(index, "You've already offered this item.", ColorType.Yellow)
                 Exit Sub
             End If
         Next
@@ -2955,7 +2944,7 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CRequestEditClasses Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.RequestEditClasses Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -2972,7 +2961,7 @@
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CSaveClasses Then Exit Sub
+        If buffer.ReadInteger <> EditorPackets.SaveClasses Then Exit Sub
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
@@ -3010,10 +2999,10 @@
                     .FemaleSprite(x) = buffer.ReadInteger
                 Next
 
-                .Stat(Stats.strength) = buffer.ReadInteger
+                .Stat(Stats.Strength) = buffer.ReadInteger
                 .Stat(Stats.Endurance) = buffer.ReadInteger
                 .Stat(Stats.Vitality) = buffer.ReadInteger
-                .Stat(Stats.intelligence) = buffer.ReadInteger
+                .Stat(Stats.Intelligence) = buffer.ReadInteger
                 .Stat(Stats.Luck) = buffer.ReadInteger
                 .Stat(Stats.Speed) = buffer.ReadInteger
 
@@ -3048,7 +3037,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CEditorLogin Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.EditorLogin Then Exit Sub
 
         If Not IsLoggedIn(index) Then
 
@@ -3058,7 +3047,7 @@
             Version = Buffer.ReadString
 
             ' Check versions
-            If version <> Application.ProductVersion Then
+            If Version <> Application.ProductVersion Then
                 AlertMsg(index, "Version outdated, please visit " & Options.Website)
                 Exit Sub
             End If
@@ -3119,7 +3108,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CEditorRequestMap Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.EditorRequestMap Then Exit Sub
 
         MapNum = Buffer.ReadInteger
 
@@ -3148,7 +3137,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-        If Buffer.ReadInteger <> ClientPackets.CEditorMapData Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.EditorSaveMap Then Exit Sub
 
         Data = Buffer.ReadBytes(Data.Length - 4)
         Buffer = New ByteBuffer
@@ -3393,7 +3382,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CRequestAutoMap Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.RequestAutoMap Then Exit Sub
 
         Buffer = Nothing
 
@@ -3407,7 +3396,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CSaveAutoMap Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveAutoMap Then Exit Sub
 
         If GetPlayerAccess(index) = AdminType.Player Then Exit Sub
 

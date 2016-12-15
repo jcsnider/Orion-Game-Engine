@@ -54,6 +54,11 @@ Public Class frmEditor_MapEditor
 
     Private Sub btnMapWarp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapWarp.Click
         EditorWarpMap = scrlMapWarpMap.Value
+
+        If chkIsInstanced.Checked = True Then
+            EditorWarpMap = scrlMapWarpMap.Value Or INSTANCED_MAP_MASK
+        End If
+
         EditorWarpX = scrlMapWarpX.Value
         EditorWarpY = scrlMapWarpY.Value
         pnlAttributes.Visible = False
@@ -278,10 +283,6 @@ Public Class frmEditor_MapEditor
 
     Private Sub optBlocked_CheckedChanged(sender As Object, e As EventArgs) Handles optBlocked.CheckedChanged
         If optBlocked.Checked Then pnlAttributes.Visible = False
-    End Sub
-
-    Private Sub btnFill_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub optHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged

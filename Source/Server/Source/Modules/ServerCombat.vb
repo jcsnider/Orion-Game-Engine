@@ -44,7 +44,7 @@
         ' Check if map is attackable
         If Not Map(GetPlayerMap(Attacker)).Moral = MapMoral.None Then
             If GetPlayerPK(Victim) = False Then
-                PlayerMsg(Attacker, "This is a safe zone!")
+                PlayerMsg(Attacker, "This is a safe zone!", ColorType.BrightRed)
                 Exit Function
             End If
         End If
@@ -54,25 +54,25 @@
 
         ' Check to make sure that they dont have access
         If GetPlayerAccess(Attacker) > AdminType.Monitor Then
-            PlayerMsg(Attacker, "You cannot attack any player for thou art an admin!")
+            PlayerMsg(Attacker, "You cannot attack any player for thou art an admin!", ColorType.BrightRed)
             Exit Function
         End If
 
         ' Check to make sure the victim isn't an admin
         If GetPlayerAccess(Victim) > AdminType.Monitor Then
-            PlayerMsg(Attacker, "You cannot attack " & GetPlayerName(Victim) & "!")
+            PlayerMsg(Attacker, "You cannot attack " & GetPlayerName(Victim) & "!", ColorType.BrightRed)
             Exit Function
         End If
 
         ' Make sure attacker is high enough level
         If GetPlayerLevel(Attacker) < 10 Then
-            PlayerMsg(Attacker, "You are below level 10, you cannot attack another player yet!")
+            PlayerMsg(Attacker, "You are below level 10, you cannot attack another player yet!", ColorType.BrightRed)
             Exit Function
         End If
 
         ' Make sure victim is high enough level
         If GetPlayerLevel(Victim) < 10 Then
-            PlayerMsg(Attacker, GetPlayerName(Victim) & " is below level 10, you cannot attack this player yet!")
+            PlayerMsg(Attacker, GetPlayerName(Victim) & " is below level 10, you cannot attack this player yet!", ColorType.BrightRed)
             Exit Function
         End If
 
@@ -212,15 +212,15 @@
                 End If
 
                 If exp = 0 Then
-                    PlayerMsg(Victim, "You lost no exp.")
-                    PlayerMsg(Attacker, "You received no exp.")
+                    PlayerMsg(Victim, "You lost no exp.", ColorType.BrightGreen)
+                    PlayerMsg(Attacker, "You received no exp.", ColorType.BrightRed)
                 Else
                     SetPlayerExp(Victim, GetPlayerExp(Victim) - exp)
                     SendExp(Victim)
-                    PlayerMsg(Victim, "You lost " & exp & " exp.")
+                    PlayerMsg(Victim, "You lost " & exp & " exp.", ColorType.BrightRed)
                     SetPlayerExp(Attacker, GetPlayerExp(Attacker) + exp)
                     SendExp(Attacker)
-                    PlayerMsg(Attacker, "You received " & exp & " exp.")
+                    PlayerMsg(Attacker, "You received " & exp & " exp.", ColorType.BrightGreen)
                 End If
 
                 ' Check for a level up
@@ -316,7 +316,7 @@
             ' send it to the index
             SendStunned(Index)
             ' tell him he's stunned
-            PlayerMsg(Index, "You have been stunned!")
+            PlayerMsg(Index, "You have been stunned!", ColorType.Yellow)
         End If
     End Sub
 
@@ -388,7 +388,7 @@
                         Else
                             If Npc(NpcNum).Behaviour = NpcBehavior.Quest Then
                                 If QuestCompleted(Attacker, Npc(NpcNum).QuestNum) Then
-                                    PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay))
+                                    PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay), ColorType.Yellow)
                                     Exit Function
                                 ElseIf Not CanStartQuest(Attacker, Npc(NpcNum).QuestNum) And Not QuestInProgress(Attacker, Npc(NpcNum).QuestNum) Then
                                     CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
@@ -406,7 +406,7 @@
                                 'Exit Function
                             End If
                             If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                                PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay))
+                                PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay), ColorType.Yellow)
                             End If
                         End If
                     End If
@@ -528,7 +528,7 @@
             ' Check if we should send a message
             If MapNpc(MapNum).Npc(MapNpcNum).Target = 0 Then
                 If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                    PlayerMsg(Attacker, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says: " & Trim$(Npc(NpcNum).AttackSay))
+                    PlayerMsg(Attacker, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says: " & Trim$(Npc(NpcNum).AttackSay), ColorType.Yellow)
                 End If
             End If
 

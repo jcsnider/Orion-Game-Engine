@@ -21,4 +21,6 @@ SpiceyWolf
 
 AutoMapper System: boasfesta
 
+Instanced map system, other functions: BugSick
+
 *License copies can be found in the license directory.

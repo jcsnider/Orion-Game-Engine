@@ -119,7 +119,7 @@ Public Module EditorHousing
 
         buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CRequestEditHouse)
+        buffer.WriteInteger(EditorPackets.RequestEditHouse)
         SendData(buffer.ToArray)
 
         buffer = Nothing
@@ -195,7 +195,7 @@ Public Module EditorHousing
         Dim i As Integer, buffer As ByteBuffer, count As Integer
         buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CSaveHouses)
+        buffer.WriteInteger(EditorPackets.SaveHouses)
 
         For i = 1 To MAX_HOUSES
             If House_Changed(i) Then count = count + 1

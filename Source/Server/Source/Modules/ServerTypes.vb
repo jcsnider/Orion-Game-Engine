@@ -1,18 +1,18 @@
 ﻿Module ServerTypes
     ' Public data structures
-    Public Map(0 To MAX_MAPS) As MapRec
-    Public MapCache(0 To MAX_MAPS) As Cache
-    Public TempTile(0 To MAX_MAPS) As TempTileRec
-    Public PlayersOnMap(0 To MAX_MAPS) As Integer
-    Public ResourceCache(0 To MAX_MAPS) As ResourceCacheRec
+    Public Map(MAX_CACHED_MAPS) As MapRec
+    'Public MapCache(0 To MAX_MAPS) As Cache
+    Public TempTile(MAX_CACHED_MAPS) As TempTileRec
+    Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
+    Public ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
     Public Player(0 To MAX_PLAYERS) As PlayerRec
     Public Bank(0 To MAX_PLAYERS) As BankRec
     Public TempPlayer(0 To MAX_PLAYERS) As TempPlayerRec
     Public Classes() As ClassRec
     Public Item(0 To MAX_ITEMS) As ItemRec
     Public Npc(0 To MAX_NPCS) As NpcRec
-    Public MapItem(0 To MAX_MAPS, 0 To MAX_MAP_ITEMS) As MapItemRec
-    Public MapNpc(0 To MAX_MAPS) As MapDataRec
+    Public MapItem(MAX_CACHED_MAPS, 0 To MAX_MAP_ITEMS) As MapItemRec
+    Public MapNpc(MAX_CACHED_MAPS) As MapDataRec
     Public Shop(0 To MAX_SHOPS) As ShopRec
     Public Skill(0 To MAX_SKILLS) As SkillRec
     Public Resource(0 To MAX_RESOURCES) As ResourceRec

@@ -448,12 +448,12 @@ Module ClientGameLogic
             Exit Sub
         End If
 
-        ' Emote message
+        ' party message
         If Left$(ChatText, 1) = "-" Then
             MyText = Mid$(ChatText, 2, Len(ChatText) - 1)
 
             If Len(ChatText) > 0 Then
-                EmoteMsg(ChatText)
+                SendPartyChatMsg(MyText)
             End If
 
             MyText = ""
@@ -511,7 +511,7 @@ Module ClientGameLogic
                 Case "/help"
                     AddText("Social Commands:", ColorType.Yellow)
                     AddText("'msghere = Broadcast Message", ColorType.Yellow)
-                    AddText("-msghere = Emote Message", ColorType.Yellow)
+                    AddText("-msghere = party Message", ColorType.Yellow)
                     AddText("!namehere msghere = Player Message", ColorType.Yellow)
                     AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /sellhouse", ColorType.Yellow)
                 Case "/sellhouse"
@@ -569,6 +569,7 @@ Module ClientGameLogic
                 ' Leave party
                 Case "/leave"
                     SendLeaveParty()
+
                 ' // Monitor Admin Commands //
 
                 Case "/questreset"
@@ -786,59 +787,8 @@ Module ClientGameLogic
 
                     SendBan(Command(1))
                 ' // Developer Admin Commands //
-                ' Editing item request
-                Case "/edititem"
 
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
 
-                    SendRequestEditItem()
-                ' Editing animation request
-                Case "/editanimation"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditAnimation()
-                ' Editing npc request
-                Case "/editnpc"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditNpc()
-                Case "/editresource"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditResource()
-                ' Editing shop request
-                Case "/editshop"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditShop()
-                ' Editing skill request
-                Case "/editskill"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Developer Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendRequestEditSkill()
                 ' // Creator Admin Commands //
                 ' Giving another player access
                 Case "/setaccess"
@@ -859,15 +809,6 @@ Module ClientGameLogic
                     End If
 
                     SendSetAccess(Command(1), CLng(Command(2)))
-                ' Ban destroy
-                Case "/destroybanlist"
-
-                    If GetPlayerAccess(MyIndex) < AdminType.Creator Then
-                        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-                        GoTo Continue1
-                    End If
-
-                    SendBanDestroy()
                 Case Else
                     AddText("Not a valid command!", QColorType.AlertColor)
             End Select
@@ -1207,10 +1148,10 @@ Continue1:
 
     Public Sub UpdateDrawMapName()
         Dim g As Graphics = Graphics.FromImage(New Bitmap(1, 1))
-        Dim width As Integer
-        width = g.MeasureString(Trim$(Map.Name), New Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
-        DrawMapNameX = ((SCREEN_MAPX + 1) * PIC_X / 2) - width + 32
-        DrawMapNameY = 1
+        'Dim width As Integer
+        'width = g.MeasureString(Trim$(Map.Name), New Font(FONT_NAME, FONT_SIZE, FontStyle.Bold, GraphicsUnit.Pixel)).Width
+        'DrawMapNameX = ((SCREEN_MAPX + 1) * PIC_X / 2) - width + 32
+        'DrawMapNameY = 1
 
         Select Case Map.Moral
             Case MapMoral.None

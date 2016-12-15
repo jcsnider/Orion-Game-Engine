@@ -158,7 +158,7 @@
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
-        If Buffer.ReadInteger <> ClientPackets.CSaveProjectile Then Exit Sub
+        If Buffer.ReadInteger <> EditorPackets.SaveProjectile Then Exit Sub
 
         If GetPlayerAccess(Index) < AdminType.DEVELOPER Then
             Exit Sub

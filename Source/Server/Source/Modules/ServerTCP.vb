@@ -172,11 +172,13 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub PlayerMsg(ByVal Index As Integer, ByVal Msg As String)
+    Public Sub PlayerMsg(ByVal Index As Integer, ByVal Msg As String, ByVal Colour As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPlayerMsg)
         Buffer.WriteString(Msg)
+        Buffer.WriteInteger(Colour)
+
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
@@ -1069,7 +1071,7 @@ Module ServerTCP
 
         ' Send them MOTD
         If Len(Options.MOTD) > 0 Then
-            PlayerMsg(Index, Options.MOTD)
+            PlayerMsg(Index, Options.MOTD, ColorType.BrightCyan)
         End If
 
         ' Send whos online
@@ -1099,7 +1101,7 @@ Module ServerTCP
             s = "There are " & n & " other players online: " & s & "."
         End If
 
-        PlayerMsg(Index, s)
+        PlayerMsg(Index, s, ColorType.White)
     End Sub
 
     Sub SendWornEquipment(ByVal Index As Integer)

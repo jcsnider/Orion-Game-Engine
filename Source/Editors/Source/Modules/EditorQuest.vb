@@ -353,7 +353,7 @@
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
-        buffer.WriteInteger(ClientPackets.CRequestEditQuest)
+        buffer.WriteInteger(EditorPackets.RequestEditQuest)
         SendData(buffer.ToArray)
         buffer = Nothing
 
@@ -364,7 +364,7 @@
 
         buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CSaveQuest)
+        buffer.WriteInteger(EditorPackets.SaveQuest)
         buffer.WriteInteger(QuestNum)
 
         buffer.WriteString(Trim(Quest(QuestNum).Name))

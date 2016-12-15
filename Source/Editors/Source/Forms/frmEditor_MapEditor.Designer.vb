@@ -124,6 +124,15 @@ Partial Class frmEditor_MapEditor
         Me.txtUp = New System.Windows.Forms.TextBox()
         Me.pnlBack2 = New System.Windows.Forms.Panel()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
+        Me.fraMapWarp = New System.Windows.Forms.GroupBox()
+        Me.chkIsInstanced = New System.Windows.Forms.CheckBox()
+        Me.btnMapWarp = New System.Windows.Forms.Button()
+        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar()
+        Me.lblMapWarpY = New System.Windows.Forms.Label()
+        Me.lblMapWarpX = New System.Windows.Forms.Label()
+        Me.lblMapWarpMap = New System.Windows.Forms.Label()
         Me.fraBuyHouse = New System.Windows.Forms.GroupBox()
         Me.btnHouseTileOk = New System.Windows.Forms.Button()
         Me.scrlBuyHouse = New System.Windows.Forms.HScrollBar()
@@ -134,14 +143,6 @@ Partial Class frmEditor_MapEditor
         Me.btnMapKeyOpen = New System.Windows.Forms.Button()
         Me.scrlKeyX = New System.Windows.Forms.HScrollBar()
         Me.lblKeyX = New System.Windows.Forms.Label()
-        Me.fraMapWarp = New System.Windows.Forms.GroupBox()
-        Me.btnMapWarp = New System.Windows.Forms.Button()
-        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar()
-        Me.lblMapWarpY = New System.Windows.Forms.Label()
-        Me.lblMapWarpX = New System.Windows.Forms.Label()
-        Me.lblMapWarpMap = New System.Windows.Forms.Label()
         Me.fraMapKey = New System.Windows.Forms.GroupBox()
         Me.chkMapKey = New System.Windows.Forms.CheckBox()
         Me.picMapKey = New System.Windows.Forms.PictureBox()
@@ -176,6 +177,10 @@ Partial Class frmEditor_MapEditor
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
         Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.SSInfo = New System.Windows.Forms.StatusStrip()
+        Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
         Me.ToolStrip.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tabpages.SuspendLayout()
@@ -197,9 +202,9 @@ Partial Class frmEditor_MapEditor
         Me.fraMapLinks.SuspendLayout()
         Me.pnlBack2.SuspendLayout()
         Me.pnlAttributes.SuspendLayout()
+        Me.fraMapWarp.SuspendLayout()
         Me.fraBuyHouse.SuspendLayout()
         Me.fraKeyOpen.SuspendLayout()
-        Me.fraMapWarp.SuspendLayout()
         Me.fraMapKey.SuspendLayout()
         CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraNpcSpawn.SuspendLayout()
@@ -210,14 +215,22 @@ Partial Class frmEditor_MapEditor
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraTrap.SuspendLayout()
         CType(Me.picScreen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SSInfo.SuspendLayout()
+        Me.ToolStripContainer1.BottomToolStripPanel.SuspendLayout()
+        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
+        Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
+        Me.ToolStripContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip
         '
+        Me.ToolStrip.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripLabel1, Me.cmbMapList})
-        Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip.Location = New System.Drawing.Point(3, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1285, 25)
+        Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip.Size = New System.Drawing.Size(541, 25)
         Me.ToolStrip.TabIndex = 17
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -288,9 +301,9 @@ Partial Class frmEditor_MapEditor
         '
         Me.Panel1.Controls.Add(Me.tabpages)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel1.Location = New System.Drawing.Point(0, 25)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(327, 587)
+        Me.Panel1.Size = New System.Drawing.Size(327, 565)
         Me.Panel1.TabIndex = 18
         '
         'tabpages
@@ -422,7 +435,7 @@ Partial Class frmEditor_MapEditor
         Me.scrlPictureY.LargeChange = 1
         Me.scrlPictureY.Location = New System.Drawing.Point(295, 7)
         Me.scrlPictureY.Name = "scrlPictureY"
-        Me.scrlPictureY.Size = New System.Drawing.Size(16, 398)
+        Me.scrlPictureY.Size = New System.Drawing.Size(16, 455)
         Me.scrlPictureY.TabIndex = 2
         '
         'tpAttributes
@@ -718,9 +731,9 @@ Partial Class frmEditor_MapEditor
         Me.pnlSettings.AutoScroll = True
         Me.pnlSettings.Controls.Add(Me.grpSettings)
         Me.pnlSettings.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlSettings.Location = New System.Drawing.Point(1056, 25)
+        Me.pnlSettings.Location = New System.Drawing.Point(1056, 0)
         Me.pnlSettings.Name = "pnlSettings"
-        Me.pnlSettings.Size = New System.Drawing.Size(229, 587)
+        Me.pnlSettings.Size = New System.Drawing.Size(229, 565)
         Me.pnlSettings.TabIndex = 19
         '
         'grpSettings
@@ -877,7 +890,7 @@ Partial Class frmEditor_MapEditor
         '
         Me.cmbMoral.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMoral.FormattingEnabled = True
-        Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone"})
+        Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone", "Indoors"})
         Me.cmbMoral.Location = New System.Drawing.Point(41, 39)
         Me.cmbMoral.Name = "cmbMoral"
         Me.cmbMoral.Size = New System.Drawing.Size(157, 21)
@@ -1198,16 +1211,16 @@ Partial Class frmEditor_MapEditor
         Me.pnlBack2.Controls.Add(Me.pnlAttributes)
         Me.pnlBack2.Controls.Add(Me.picScreen)
         Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlBack2.Location = New System.Drawing.Point(327, 25)
+        Me.pnlBack2.Location = New System.Drawing.Point(327, 0)
         Me.pnlBack2.Name = "pnlBack2"
-        Me.pnlBack2.Size = New System.Drawing.Size(729, 587)
+        Me.pnlBack2.Size = New System.Drawing.Size(729, 565)
         Me.pnlBack2.TabIndex = 20
         '
         'pnlAttributes
         '
+        Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
         Me.pnlAttributes.Controls.Add(Me.fraBuyHouse)
         Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
-        Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
         Me.pnlAttributes.Controls.Add(Me.fraMapKey)
         Me.pnlAttributes.Controls.Add(Me.fraNpcSpawn)
         Me.pnlAttributes.Controls.Add(Me.fraHeal)
@@ -1220,6 +1233,90 @@ Partial Class frmEditor_MapEditor
         Me.pnlAttributes.Size = New System.Drawing.Size(482, 491)
         Me.pnlAttributes.TabIndex = 16
         Me.pnlAttributes.Visible = False
+        '
+        'fraMapWarp
+        '
+        Me.fraMapWarp.Controls.Add(Me.chkIsInstanced)
+        Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpMap)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
+        Me.fraMapWarp.Location = New System.Drawing.Point(131, 125)
+        Me.fraMapWarp.Name = "fraMapWarp"
+        Me.fraMapWarp.Size = New System.Drawing.Size(252, 172)
+        Me.fraMapWarp.TabIndex = 0
+        Me.fraMapWarp.TabStop = False
+        Me.fraMapWarp.Text = "Map Warp"
+        '
+        'chkIsInstanced
+        '
+        Me.chkIsInstanced.AutoSize = True
+        Me.chkIsInstanced.Location = New System.Drawing.Point(167, 12)
+        Me.chkIsInstanced.Name = "chkIsInstanced"
+        Me.chkIsInstanced.Size = New System.Drawing.Size(79, 17)
+        Me.chkIsInstanced.TabIndex = 8
+        Me.chkIsInstanced.Text = "Instanced?"
+        Me.chkIsInstanced.UseVisualStyleBackColor = True
+        '
+        'btnMapWarp
+        '
+        Me.btnMapWarp.Location = New System.Drawing.Point(85, 138)
+        Me.btnMapWarp.Name = "btnMapWarp"
+        Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
+        Me.btnMapWarp.TabIndex = 6
+        Me.btnMapWarp.Text = "Accept"
+        Me.btnMapWarp.UseVisualStyleBackColor = True
+        '
+        'scrlMapWarpY
+        '
+        Me.scrlMapWarpY.Location = New System.Drawing.Point(36, 107)
+        Me.scrlMapWarpY.Name = "scrlMapWarpY"
+        Me.scrlMapWarpY.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpY.TabIndex = 5
+        '
+        'scrlMapWarpX
+        '
+        Me.scrlMapWarpX.Location = New System.Drawing.Point(36, 70)
+        Me.scrlMapWarpX.Name = "scrlMapWarpX"
+        Me.scrlMapWarpX.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpX.TabIndex = 4
+        '
+        'scrlMapWarpMap
+        '
+        Me.scrlMapWarpMap.Location = New System.Drawing.Point(36, 38)
+        Me.scrlMapWarpMap.Name = "scrlMapWarpMap"
+        Me.scrlMapWarpMap.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpMap.TabIndex = 3
+        '
+        'lblMapWarpY
+        '
+        Me.lblMapWarpY.AutoSize = True
+        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 90)
+        Me.lblMapWarpY.Name = "lblMapWarpY"
+        Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
+        Me.lblMapWarpY.TabIndex = 2
+        Me.lblMapWarpY.Text = "Y: 1"
+        '
+        'lblMapWarpX
+        '
+        Me.lblMapWarpX.AutoSize = True
+        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 56)
+        Me.lblMapWarpX.Name = "lblMapWarpX"
+        Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
+        Me.lblMapWarpX.TabIndex = 1
+        Me.lblMapWarpX.Text = "X: 1"
+        '
+        'lblMapWarpMap
+        '
+        Me.lblMapWarpMap.AutoSize = True
+        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 25)
+        Me.lblMapWarpMap.Name = "lblMapWarpMap"
+        Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
+        Me.lblMapWarpMap.TabIndex = 0
+        Me.lblMapWarpMap.Text = "Map: 1"
         '
         'fraBuyHouse
         '
@@ -1313,79 +1410,6 @@ Partial Class frmEditor_MapEditor
         Me.lblKeyX.Size = New System.Drawing.Size(26, 13)
         Me.lblKeyX.TabIndex = 0
         Me.lblKeyX.Text = "X: 0"
-        '
-        'fraMapWarp
-        '
-        Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpMap)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
-        Me.fraMapWarp.Location = New System.Drawing.Point(131, 125)
-        Me.fraMapWarp.Name = "fraMapWarp"
-        Me.fraMapWarp.Size = New System.Drawing.Size(252, 172)
-        Me.fraMapWarp.TabIndex = 0
-        Me.fraMapWarp.TabStop = False
-        Me.fraMapWarp.Text = "Map Warp"
-        '
-        'btnMapWarp
-        '
-        Me.btnMapWarp.Location = New System.Drawing.Point(85, 138)
-        Me.btnMapWarp.Name = "btnMapWarp"
-        Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
-        Me.btnMapWarp.TabIndex = 6
-        Me.btnMapWarp.Text = "Accept"
-        Me.btnMapWarp.UseVisualStyleBackColor = True
-        '
-        'scrlMapWarpY
-        '
-        Me.scrlMapWarpY.Location = New System.Drawing.Point(36, 107)
-        Me.scrlMapWarpY.Name = "scrlMapWarpY"
-        Me.scrlMapWarpY.Size = New System.Drawing.Size(202, 18)
-        Me.scrlMapWarpY.TabIndex = 5
-        '
-        'scrlMapWarpX
-        '
-        Me.scrlMapWarpX.Location = New System.Drawing.Point(36, 70)
-        Me.scrlMapWarpX.Name = "scrlMapWarpX"
-        Me.scrlMapWarpX.Size = New System.Drawing.Size(202, 18)
-        Me.scrlMapWarpX.TabIndex = 4
-        '
-        'scrlMapWarpMap
-        '
-        Me.scrlMapWarpMap.Location = New System.Drawing.Point(36, 38)
-        Me.scrlMapWarpMap.Name = "scrlMapWarpMap"
-        Me.scrlMapWarpMap.Size = New System.Drawing.Size(202, 18)
-        Me.scrlMapWarpMap.TabIndex = 3
-        '
-        'lblMapWarpY
-        '
-        Me.lblMapWarpY.AutoSize = True
-        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 90)
-        Me.lblMapWarpY.Name = "lblMapWarpY"
-        Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
-        Me.lblMapWarpY.TabIndex = 2
-        Me.lblMapWarpY.Text = "Y: 1"
-        '
-        'lblMapWarpX
-        '
-        Me.lblMapWarpX.AutoSize = True
-        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 56)
-        Me.lblMapWarpX.Name = "lblMapWarpX"
-        Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
-        Me.lblMapWarpX.TabIndex = 1
-        Me.lblMapWarpX.Text = "X: 1"
-        '
-        'lblMapWarpMap
-        '
-        Me.lblMapWarpMap.AutoSize = True
-        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 25)
-        Me.lblMapWarpMap.Name = "lblMapWarpMap"
-        Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
-        Me.lblMapWarpMap.TabIndex = 0
-        Me.lblMapWarpMap.Text = "Map: 1"
         '
         'fraMapKey
         '
@@ -1710,17 +1734,64 @@ Partial Class frmEditor_MapEditor
         Me.picScreen.TabIndex = 1
         Me.picScreen.TabStop = False
         '
+        'SSInfo
+        '
+        Me.SSInfo.Dock = System.Windows.Forms.DockStyle.None
+        Me.SSInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY})
+        Me.SSInfo.Location = New System.Drawing.Point(0, 0)
+        Me.SSInfo.Name = "SSInfo"
+        Me.SSInfo.Size = New System.Drawing.Size(1285, 22)
+        Me.SSInfo.TabIndex = 21
+        Me.SSInfo.Text = "StatusStrip1"
+        '
+        'tslCurMap
+        '
+        Me.tslCurMap.Name = "tslCurMap"
+        Me.tslCurMap.Size = New System.Drawing.Size(77, 17)
+        Me.tslCurMap.Text = "Current Map:"
+        '
+        'tslCurXY
+        '
+        Me.tslCurXY.Name = "tslCurXY"
+        Me.tslCurXY.Size = New System.Drawing.Size(50, 17)
+        Me.tslCurXY.Text = "X:1 - Y:1"
+        '
+        'ToolStripContainer1
+        '
+        '
+        'ToolStripContainer1.BottomToolStripPanel
+        '
+        Me.ToolStripContainer1.BottomToolStripPanel.Controls.Add(Me.SSInfo)
+        '
+        'ToolStripContainer1.ContentPanel
+        '
+        Me.ToolStripContainer1.ContentPanel.AutoScroll = True
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlBack2)
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlSettings)
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1285, 565)
+        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ToolStripContainer1.LeftToolStripPanelVisible = False
+        Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStripContainer1.Name = "ToolStripContainer1"
+        Me.ToolStripContainer1.RightToolStripPanelVisible = False
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(1285, 612)
+        Me.ToolStripContainer1.TabIndex = 22
+        Me.ToolStripContainer1.Text = "ToolStripContainer1"
+        '
+        'ToolStripContainer1.TopToolStripPanel
+        '
+        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip)
+        '
         'frmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1285, 612)
-        Me.Controls.Add(Me.pnlBack2)
-        Me.Controls.Add(Me.pnlSettings)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.ToolStrip)
+        Me.Controls.Add(Me.ToolStripContainer1)
+        Me.DoubleBuffered = True
         Me.Name = "frmEditor_MapEditor"
-        Me.Text = "frmEditor_MapEditor2"
+        Me.Text = "Map Editor"
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -1753,12 +1824,12 @@ Partial Class frmEditor_MapEditor
         Me.fraMapLinks.PerformLayout()
         Me.pnlBack2.ResumeLayout(False)
         Me.pnlAttributes.ResumeLayout(False)
+        Me.fraMapWarp.ResumeLayout(False)
+        Me.fraMapWarp.PerformLayout()
         Me.fraBuyHouse.ResumeLayout(False)
         Me.fraBuyHouse.PerformLayout()
         Me.fraKeyOpen.ResumeLayout(False)
         Me.fraKeyOpen.PerformLayout()
-        Me.fraMapWarp.ResumeLayout(False)
-        Me.fraMapWarp.PerformLayout()
         Me.fraMapKey.ResumeLayout(False)
         Me.fraMapKey.PerformLayout()
         CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1775,8 +1846,16 @@ Partial Class frmEditor_MapEditor
         Me.fraTrap.ResumeLayout(False)
         Me.fraTrap.PerformLayout()
         CType(Me.picScreen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SSInfo.ResumeLayout(False)
+        Me.SSInfo.PerformLayout()
+        Me.ToolStripContainer1.BottomToolStripPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.BottomToolStripPanel.PerformLayout()
+        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
+        Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
+        Me.ToolStripContainer1.ResumeLayout(False)
+        Me.ToolStripContainer1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -1933,4 +2012,9 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents lblTrap As Label
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
     Friend WithEvents cmbMapList As ToolStripComboBox
+    Friend WithEvents SSInfo As StatusStrip
+    Friend WithEvents tslCurMap As ToolStripStatusLabel
+    Friend WithEvents tslCurXY As ToolStripStatusLabel
+    Friend WithEvents ToolStripContainer1 As ToolStripContainer
+    Friend WithEvents chkIsInstanced As CheckBox
 End Class

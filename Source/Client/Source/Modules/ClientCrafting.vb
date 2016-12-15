@@ -183,7 +183,7 @@ Public Module ClientCrafting
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteInteger(ClientPackets.CRequestEditRecipes)
+        Buffer.WriteInteger(EditorPackets.RequestEditRecipes)
 
         SendData(Buffer.ToArray())
         Buffer = Nothing
@@ -193,7 +193,7 @@ Public Module ClientCrafting
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteInteger(ClientPackets.CSaveRecipe)
+        Buffer.WriteInteger(EditorPackets.SaveRecipe)
 
         Buffer.WriteInteger(RecipeNum)
 

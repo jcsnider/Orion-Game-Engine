@@ -108,18 +108,10 @@ Module EditorTCP
     Public Sub SendEditorLogin(ByVal Name As String, ByVal Password As String)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CEditorLogin)
+        Buffer.WriteInteger(EditorPackets.EditorLogin)
         Buffer.WriteString(Name)
         Buffer.WriteString(Password)
         Buffer.WriteString(Application.ProductVersion)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
-    Public Sub SendRequestEditMap()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditMap)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -290,7 +282,7 @@ Module EditorTCP
         data = Buffer.ToArray
 
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CEditorMapData)
+        Buffer.WriteInteger(EditorPackets.EditorSaveMap)
         Buffer.WriteBytes(ArchaicIO.Compression.Compress(data))
 
         SendData(Buffer.ToArray())
@@ -308,7 +300,7 @@ Module EditorTCP
     Sub SendSaveItem(ByVal itemNum As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveItem)
+        Buffer.WriteInteger(EditorPackets.SaveItem)
         Buffer.WriteInteger(itemNum)
         Buffer.WriteInteger(Item(itemNum).AccessReq)
 
@@ -366,7 +358,7 @@ Module EditorTCP
     Public Sub SendRequestEditItem()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditItem)
+        Buffer.WriteInteger(EditorPackets.RequestEditItem)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -374,7 +366,7 @@ Module EditorTCP
     Public Sub SendRequestEditResource()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditResource)
+        Buffer.WriteInteger(EditorPackets.RequestEditResource)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -390,7 +382,7 @@ Module EditorTCP
     Public Sub SendSaveResource(ByVal ResourceNum As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveResource)
+        Buffer.WriteInteger(EditorPackets.SaveResource)
 
         Buffer.WriteInteger(ResourceNum)
         Buffer.WriteInteger(Resource(ResourceNum).Animation)
@@ -415,7 +407,7 @@ Module EditorTCP
     Public Sub SendRequestEditNpc()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditNpc)
+        Buffer.WriteInteger(EditorPackets.RequestEditNpc)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -423,7 +415,7 @@ Module EditorTCP
     Public Sub SendSaveNpc(ByVal NpcNum As Integer)
         Dim Buffer As ByteBuffer, i As Integer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveNpc)
+        Buffer.WriteInteger(EditorPackets.SaveNpc)
         Buffer.WriteInteger(NpcNum)
 
         Buffer.WriteInteger(Npc(NpcNum).Animation)
@@ -468,7 +460,7 @@ Module EditorTCP
     Public Sub SendRequestEditSkill()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditSkill)
+        Buffer.WriteInteger(EditorPackets.RequestEditSkill)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -485,7 +477,7 @@ Module EditorTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteInteger(ClientPackets.CSaveSkill)
+        Buffer.WriteInteger(EditorPackets.SaveSkill)
         Buffer.WriteInteger(skillnum)
 
         Buffer.WriteInteger(Skill(skillnum).AccessReq)
@@ -533,7 +525,7 @@ Module EditorTCP
     Public Sub SendSaveShop(ByVal shopnum As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveShop)
+        Buffer.WriteInteger(EditorPackets.SaveShop)
         Buffer.WriteInteger(shopnum)
 
         Buffer.WriteInteger(Shop(shopnum).BuyRate)
@@ -555,7 +547,7 @@ Module EditorTCP
     Public Sub SendRequestEditShop()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditShop)
+        Buffer.WriteInteger(EditorPackets.RequestEditShop)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -563,7 +555,7 @@ Module EditorTCP
     Public Sub SendSaveAnimation(ByVal Animationnum As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveAnimation)
+        Buffer.WriteInteger(EditorPackets.SaveAnimation)
         Buffer.WriteInteger(Animationnum)
 
         For i = 0 To UBound(Animation(Animationnum).Frames)
@@ -600,7 +592,7 @@ Module EditorTCP
     Public Sub SendRequestEditAnimation()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditAnimation)
+        Buffer.WriteInteger(EditorPackets.RequestEditAnimation)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -625,7 +617,7 @@ Module EditorTCP
     Public Sub SendRequestEditClass()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestEditClasses)
+        Buffer.WriteInteger(EditorPackets.RequestEditClasses)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -635,7 +627,7 @@ Module EditorTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
-        Buffer.WriteInteger(ClientPackets.CSaveClasses)
+        Buffer.WriteInteger(EditorPackets.SaveClasses)
 
         Buffer.WriteInteger(Max_Classes)
 
@@ -699,7 +691,7 @@ Module EditorTCP
     Public Sub SendEditorRequestMap(ByVal MapNum As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CEditorRequestMap)
+        Buffer.WriteInteger(EditorPackets.EditorRequestMap)
         Buffer.WriteInteger(MapNum)
         SendData(Buffer.ToArray())
         Buffer = Nothing
@@ -708,7 +700,7 @@ Module EditorTCP
     Public Sub SendRequestAutoMapper()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CRequestAutoMap)
+        Buffer.WriteInteger(EditorPackets.RequestAutoMap)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -716,7 +708,7 @@ Module EditorTCP
     Public Sub SendSaveAutoMapper()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CSaveAutoMap)
+        Buffer.WriteInteger(EditorPackets.SaveAutoMap)
 
         Buffer.WriteInteger(MapStart)
         Buffer.WriteInteger(MapSize)

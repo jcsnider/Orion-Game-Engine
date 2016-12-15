@@ -156,7 +156,7 @@
 
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
-        If buffer.ReadInteger <> ClientPackets.CLeaveParty Then Exit Sub
+        If buffer.ReadInteger <> ClientPackets.CPartyChatMsg Then Exit Sub
 
         PartyMsg(index, buffer.ReadString)
 
@@ -189,7 +189,7 @@
             If Party(PartyNum).Member(i) > 0 Then
                 ' make sure they're logged on
                 If IsConnected(Party(PartyNum).Member(i)) And IsPlaying(Party(PartyNum).Member(i)) Then
-                    PlayerMsg(Party(PartyNum).Member(i), Msg)
+                    PlayerMsg(Party(PartyNum).Member(i), Msg, ColorType.BrightBlue)
                 End If
             End If
         Next
@@ -286,14 +286,14 @@
         ' make sure they're not busy
         If TempPlayer(Target).partyInvite > 0 Or TempPlayer(Target).TradeRequest > 0 Then
             ' they've already got a request for trade/party
-            PlayerMsg(index, "This player is busy.")
+            PlayerMsg(index, "This player is busy.", ColorType.BrightRed)
             ' exit out early
             Exit Sub
         End If
         ' make syure they're not in a party
         If TempPlayer(Target).InParty > 0 Then
             ' they're already in a party
-            PlayerMsg(index, "This player is already in a party.")
+            PlayerMsg(index, "This player is already in a party.", ColorType.BrightRed)
             'exit out early
             Exit Sub
         End If
@@ -311,16 +311,16 @@
                         ' set the invite target
                         TempPlayer(Target).partyInvite = index
                         ' let them know
-                        PlayerMsg(index, "Invitation sent.")
+                        PlayerMsg(index, "Invitation sent.", ColorType.Yellow)
                         Exit Sub
                     End If
                 Next
                 ' no room
-                PlayerMsg(index, "Party is full.")
+                PlayerMsg(index, "Party is full.", ColorType.BrightRed)
                 Exit Sub
             Else
                 ' not the leader
-                PlayerMsg(index, "You are not the party leader.")
+                PlayerMsg(index, "You are not the party leader.", ColorType.BrightRed)
                 Exit Sub
             End If
         Else
@@ -329,7 +329,7 @@
             ' set the invite target
             TempPlayer(Target).partyInvite = index
             ' let them know
-            PlayerMsg(index, "Invitation sent.")
+            PlayerMsg(index, "Invitation sent.", ColorType.Yellow)
             Exit Sub
         End If
     End Sub
@@ -359,8 +359,8 @@
                 End If
             Next
             ' no empty slots - let them know
-            PlayerMsg(index, "Party is full.")
-            PlayerMsg(Target, "Party is full.")
+            PlayerMsg(index, "Party is full.", ColorType.BrightRed)
+            PlayerMsg(Target, "Party is full.", ColorType.BrightRed)
             Exit Sub
         Else
             ' not in a party. Create one with the new person.
@@ -393,8 +393,8 @@
     End Sub
 
     Public Sub Party_InviteDecline(ByVal index As Integer, ByVal TARGETPLAYER As Integer)
-        PlayerMsg(index, GetPlayerName(TARGETPLAYER) & " has declined to join the party.")
-        PlayerMsg(TARGETPLAYER, "You declined to join the party.")
+        PlayerMsg(index, GetPlayerName(TARGETPLAYER) & " has declined to join the party.", ColorType.BrightRed)
+        PlayerMsg(TARGETPLAYER, "You declined to join the party.", ColorType.Yellow)
         ' clear the invitation
         TempPlayer(TARGETPLAYER).partyInvite = 0
     End Sub

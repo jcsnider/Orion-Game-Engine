@@ -18,6 +18,7 @@ Public Class frmEditor_MapEditor
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
+        picScreen.Focus()
     End Sub
 
     Private Sub frmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
@@ -106,6 +107,11 @@ Public Class frmEditor_MapEditor
 
     Private Sub btnMapWarp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapWarp.Click
         EditorWarpMap = scrlMapWarpMap.Value
+
+        If chkIsInstanced.Checked = True Then
+            EditorWarpMap = scrlMapWarpMap.Value Or INSTANCED_MAP_MASK
+        End If
+
         EditorWarpX = scrlMapWarpX.Value
         EditorWarpY = scrlMapWarpY.Value
         pnlAttributes.Visible = False
@@ -409,6 +415,8 @@ Public Class frmEditor_MapEditor
             MapEditorMouseDown(e.Button, e.X, e.Y)
         End If
 
+
+        tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseUp
@@ -583,10 +591,6 @@ Public Class frmEditor_MapEditor
             MapEditorSend()
         End With
     End Sub
-
-
-
-
 
 #End Region
 

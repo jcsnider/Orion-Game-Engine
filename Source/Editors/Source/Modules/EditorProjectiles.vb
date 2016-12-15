@@ -39,7 +39,7 @@ Public Module EditorProjectiles
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
-        buffer.WriteInteger(ClientPackets.CRequestEditProjectiles)
+        buffer.WriteInteger(EditorPackets.RequestEditProjectiles)
         SendData(buffer.ToArray())
         buffer = Nothing
 
@@ -50,7 +50,7 @@ Public Module EditorProjectiles
 
         buffer = New ByteBuffer
 
-        buffer.WriteInteger(ClientPackets.CSaveProjectile)
+        buffer.WriteInteger(EditorPackets.SaveProjectile)
         buffer.WriteInteger(ProjectileNum)
 
         buffer.WriteString(Trim(Projectiles(ProjectileNum).Name))
