@@ -108,6 +108,8 @@ Partial Class frmEditor_Item
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tabInfo = New System.Windows.Forms.TabControl()
         Me.tabPageInfo = New System.Windows.Forms.TabPage()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cmbSubType = New System.Windows.Forms.ComboBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.fraRecipe = New System.Windows.Forms.GroupBox()
@@ -155,8 +157,8 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Skill", "Furniture", "Recipe"})
-        Me.cmbType.Location = New System.Drawing.Point(50, 46)
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Key", "Currency", "Skill", "Furniture", "Recipe"})
+        Me.cmbType.Location = New System.Drawing.Point(50, 35)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
         Me.cmbType.TabIndex = 40
@@ -164,7 +166,7 @@ Partial Class frmEditor_Item
         'scrlAnim
         '
         Me.scrlAnim.LargeChange = 1
-        Me.scrlAnim.Location = New System.Drawing.Point(94, 108)
+        Me.scrlAnim.Location = New System.Drawing.Point(94, 112)
         Me.scrlAnim.Name = "scrlAnim"
         Me.scrlAnim.Size = New System.Drawing.Size(127, 19)
         Me.scrlAnim.TabIndex = 39
@@ -190,7 +192,7 @@ Partial Class frmEditor_Item
         'lblAnim
         '
         Me.lblAnim.AutoSize = True
-        Me.lblAnim.Location = New System.Drawing.Point(6, 111)
+        Me.lblAnim.Location = New System.Drawing.Point(6, 115)
         Me.lblAnim.Name = "lblAnim"
         Me.lblAnim.Size = New System.Drawing.Size(85, 13)
         Me.lblAnim.TabIndex = 9
@@ -241,7 +243,7 @@ Partial Class frmEditor_Item
         '
         'scrlPrice
         '
-        Me.scrlPrice.Location = New System.Drawing.Point(78, 80)
+        Me.scrlPrice.Location = New System.Drawing.Point(78, 84)
         Me.scrlPrice.Maximum = 100000
         Me.scrlPrice.Name = "scrlPrice"
         Me.scrlPrice.Size = New System.Drawing.Size(143, 18)
@@ -250,7 +252,7 @@ Partial Class frmEditor_Item
         'lblPrice
         '
         Me.lblPrice.AutoSize = True
-        Me.lblPrice.Location = New System.Drawing.Point(6, 82)
+        Me.lblPrice.Location = New System.Drawing.Point(6, 86)
         Me.lblPrice.Name = "lblPrice"
         Me.lblPrice.Size = New System.Drawing.Size(60, 13)
         Me.lblPrice.TabIndex = 2
@@ -936,6 +938,8 @@ Partial Class frmEditor_Item
         '
         'tabPageInfo
         '
+        Me.tabPageInfo.Controls.Add(Me.Label9)
+        Me.tabPageInfo.Controls.Add(Me.cmbSubType)
         Me.tabPageInfo.Controls.Add(Me.fraSkill)
         Me.tabPageInfo.Controls.Add(Me.txtDescription)
         Me.tabPageInfo.Controls.Add(Me.Label8)
@@ -965,18 +969,37 @@ Partial Class frmEditor_Item
         Me.tabPageInfo.Text = "Info"
         Me.tabPageInfo.UseVisualStyleBackColor = True
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 63)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(53, 13)
+        Me.Label9.TabIndex = 73
+        Me.Label9.Text = "SubType:"
+        '
+        'cmbSubType
+        '
+        Me.cmbSubType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSubType.FormattingEnabled = True
+        Me.cmbSubType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Skill", "Furniture", "Recipe"})
+        Me.cmbSubType.Location = New System.Drawing.Point(65, 60)
+        Me.cmbSubType.Name = "cmbSubType"
+        Me.cmbSubType.Size = New System.Drawing.Size(156, 21)
+        Me.cmbSubType.TabIndex = 72
+        '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(9, 145)
+        Me.txtDescription.Location = New System.Drawing.Point(9, 156)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(212, 91)
+        Me.txtDescription.Size = New System.Drawing.Size(212, 80)
         Me.txtDescription.TabIndex = 71
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(8, 130)
+        Me.Label8.Location = New System.Drawing.Point(6, 140)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(83, 13)
         Me.Label8.TabIndex = 70
@@ -1023,7 +1046,7 @@ Partial Class frmEditor_Item
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 49)
+        Me.Label6.Location = New System.Drawing.Point(6, 38)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(34, 13)
         Me.Label6.TabIndex = 41
@@ -1202,4 +1225,6 @@ Partial Class frmEditor_Item
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents numMax As System.Windows.Forms.NumericUpDown
     Friend WithEvents numMin As System.Windows.Forms.NumericUpDown
+    Friend WithEvents Label9 As Label
+    Friend WithEvents cmbSubType As ComboBox
 End Class

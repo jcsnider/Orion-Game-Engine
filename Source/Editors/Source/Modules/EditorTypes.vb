@@ -121,6 +121,7 @@
         Dim Description As String
 
         Dim Type As Byte
+        Dim SubType As Byte
         Dim Data1 As Integer
         Dim Data2 As Integer
         Dim Data3 As Integer

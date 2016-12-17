@@ -673,11 +673,12 @@ Module GameEditors
 
             If .Pic > frmEditor_Item.scrlPic.Maximum Then .Pic = 0
             frmEditor_Item.scrlPic.Value = .Pic
+            If .Type > ItemType.count - 1 Then .Type = 0
             frmEditor_Item.cmbType.SelectedIndex = .Type
             frmEditor_Item.scrlAnim.Value = .Animation
 
             ' Type specific settings
-            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Weapon) And (frmEditor_Item.cmbType.SelectedIndex <= ItemType.Gloves) Then
+            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Equipment) Then
                 frmEditor_Item.fraEquipment.Visible = True
                 frmEditor_Item.scrlProjectile.Value = .Data1
                 frmEditor_Item.scrlDamage.Value = .Data2
@@ -687,9 +688,9 @@ Module GameEditors
                 If .Speed > frmEditor_Item.scrlSpeed.Maximum Then .Speed = frmEditor_Item.scrlSpeed.Maximum
                 frmEditor_Item.scrlSpeed.Value = .Speed
 
-                frmEditor_Item.scrlAddStr.Value = .Add_Stat(Stats.strength)
+                frmEditor_Item.scrlAddStr.Value = .Add_Stat(Stats.Strength)
                 frmEditor_Item.scrlAddEnd.Value = .Add_Stat(Stats.Endurance)
-                frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.intelligence)
+                frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.Intelligence)
                 frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.Vitality)
                 frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.Luck)
                 frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.Speed)
@@ -718,7 +719,7 @@ Module GameEditors
                 frmEditor_Item.fraEquipment.Visible = False
             End If
 
-            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.PotionHp) And (frmEditor_Item.cmbType.SelectedIndex <= ItemType.PoisonSp) Then
+            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Consumable) Then
                 frmEditor_Item.fraVitals.Visible = True
                 frmEditor_Item.scrlVitalMod.Value = .Data1
             Else

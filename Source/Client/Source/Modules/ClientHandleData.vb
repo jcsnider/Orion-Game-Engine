@@ -89,30 +89,23 @@
         Packets.Add(ServerPackets.SPlayerMsg, AddressOf Packet_PlayerMessage)
         Packets.Add(ServerPackets.SMapMsg, AddressOf Packet_MapMessage)
         Packets.Add(ServerPackets.SSpawnItem, AddressOf Packet_SpawnItem)
-        Packets.Add(ServerPackets.SItemEditor, AddressOf Packet_EditItem)
         Packets.Add(ServerPackets.SUpdateItem, AddressOf Packet_UpdateItem)
-        Packets.Add(ServerPackets.SREditor, AddressOf Packet_ResourceEditor)
         Packets.Add(ServerPackets.SSpawnNpc, AddressOf Packet_SpawnNPC)
         Packets.Add(ServerPackets.SNpcDead, AddressOf Packet_NpcDead)
-        Packets.Add(ServerPackets.SNpcEditor, AddressOf Packet_NPCEditor)
         Packets.Add(ServerPackets.SUpdateNpc, AddressOf Packet_UpdateNPC)
         Packets.Add(ServerPackets.SMapKey, AddressOf Packet_MapKey)
         Packets.Add(ServerPackets.SEditMap, AddressOf Packet_EditMap)
-        Packets.Add(ServerPackets.SShopEditor, AddressOf Packet_EditShop)
         Packets.Add(ServerPackets.SUpdateShop, AddressOf Packet_UpdateShop)
-        Packets.Add(ServerPackets.SSkillEditor, AddressOf Packet_EditSkill)
         Packets.Add(ServerPackets.SUpdateSkill, AddressOf Packet_UpdateSkill)
         Packets.Add(ServerPackets.SSkills, AddressOf Packet_Skills)
         Packets.Add(ServerPackets.SLeftMap, AddressOf Packet_LeftMap)
         Packets.Add(ServerPackets.SResourceCache, AddressOf Packet_ResourceCache)
-        Packets.Add(ServerPackets.SResourceEditor, AddressOf Packet_ResourceEditor)
         Packets.Add(ServerPackets.SUpdateResource, AddressOf Packet_UpdateResource)
         Packets.Add(ServerPackets.SSendPing, AddressOf Packet_Ping)
         Packets.Add(ServerPackets.SDoorAnimation, AddressOf Packet_DoorAnimation)
         Packets.Add(ServerPackets.SActionMsg, AddressOf Packet_ActionMessage)
         Packets.Add(ServerPackets.SPlayerEXP, AddressOf Packet_PlayerExp)
         Packets.Add(ServerPackets.SBlood, AddressOf Packet_Blood)
-        Packets.Add(ServerPackets.SAnimationEditor, AddressOf Packet_EditAnimation)
         Packets.Add(ServerPackets.SUpdateAnimation, AddressOf Packet_UpdateAnimation)
         Packets.Add(ServerPackets.SAnimation, AddressOf Packet_Animation)
         Packets.Add(ServerPackets.SMapNpcVitals, AddressOf Packet_NPCVitals)
@@ -144,7 +137,6 @@
         Packets.Add(ServerPackets.SrClick, AddressOf Packet_RClick)
 
         'quests
-        Packets.Add(ServerPackets.SQuestEditor, AddressOf Packet_QuestEditor)
         Packets.Add(ServerPackets.SUpdateQuest, AddressOf Packet_UpdateQuest)
         Packets.Add(ServerPackets.SPlayerQuest, AddressOf Packet_PlayerQuest)
         Packets.Add(ServerPackets.SPlayerQuests, AddressOf Packet_PlayerQuests)
@@ -155,7 +147,6 @@
         Packets.Add(ServerPackets.SBuyHouse, AddressOf Packet_HouseOffer)
         Packets.Add(ServerPackets.SVisit, AddressOf Packet_Visit)
         Packets.Add(ServerPackets.SFurniture, AddressOf Packet_Furniture)
-        Packets.Add(ServerPackets.SHouseEdit, AddressOf Packet_EditHouses)
 
         'hotbar
         Packets.Add(ServerPackets.SHotbar, AddressOf Packet_Hotbar)
@@ -179,18 +170,14 @@
         'SPic
         Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
 
-        Packets.Add(ServerPackets.SProjectileEditor, AddressOf HandleProjectileEditor)
         Packets.Add(ServerPackets.SUpdateProjectile, AddressOf HandleUpdateProjectile)
         Packets.Add(ServerPackets.SMapProjectile, AddressOf HandleMapProjectile)
 
         'craft
         Packets.Add(ServerPackets.SUpdateRecipe, AddressOf Packet_UpdateRecipe)
-        Packets.Add(ServerPackets.SRecipeEditor, AddressOf Packet_RecipeEditor)
         Packets.Add(ServerPackets.SSendPlayerRecipe, AddressOf Packet_SendPlayerRecipe)
         Packets.Add(ServerPackets.SOpenCraft, AddressOf Packet_OpenCraft)
         Packets.Add(ServerPackets.SUpdateCraft, AddressOf Packet_UpdateCraft)
-
-        Packets.Add(ServerPackets.SClassEditor, AddressOf Packet_ClassEditor)
 
         'emotes
         Packets.Add(ServerPackets.SEmote, AddressOf Packet_Emote)
@@ -1314,18 +1301,6 @@
         Buffer = Nothing
     End Sub
 
-    Private Sub Packet_EditItem(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
-
-        If Buffer.ReadInteger <> ServerPackets.SItemEditor Then Exit Sub
-
-        InitItemEditor = True
-
-        Buffer = Nothing
-    End Sub
-
     Private Sub Packet_PlayerMessage(ByVal Data() As Byte)
         Dim Msg As String, colour As Integer
         Dim Buffer As ByteBuffer
@@ -1386,6 +1361,7 @@
         Next
 
         Item(n).Type = Buffer.ReadInteger()
+        Item(n).SubType = Buffer.ReadInteger
 
         'Housing
         Item(n).FurnitureWidth = Buffer.ReadInteger()
@@ -1450,18 +1426,6 @@
 
         i = Buffer.ReadInteger
         ClearMapNpc(i)
-
-        Buffer = Nothing
-    End Sub
-
-    Sub Packet_NPCEditor(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ServerPackets.SNpcEditor Then Exit Sub
-
-        InitNPCEditor = True
 
         Buffer = Nothing
     End Sub
@@ -1540,18 +1504,6 @@
         Buffer = Nothing
     End Sub
 
-    Sub Packet_EditShop(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ServerPackets.SShopEditor Then Exit Sub
-
-        InitShopEditor = True
-
-        Buffer = Nothing
-    End Sub
-
     Sub Packet_UpdateShop(ByVal data() As Byte)
         Dim shopnum As Integer
         Dim Buffer As ByteBuffer
@@ -1574,18 +1526,6 @@
         Next
 
         If Shop(shopnum).Name Is Nothing Then Shop(shopnum).Name = ""
-
-        Buffer = Nothing
-    End Sub
-
-    Sub Packet_EditSkill(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(data)
-
-        If Buffer.ReadInteger <> ServerPackets.SSkillEditor Then Exit Sub
-
-        InitSkillEditor = True
 
         Buffer = Nothing
     End Sub
@@ -1736,18 +1676,6 @@
         CreateActionMsg(message, color, tmpType, X, Y)
     End Sub
 
-    Private Sub Packet_ResourceEditor(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
-
-        If Buffer.ReadInteger <> ServerPackets.SResourceEditor Then Exit Sub
-
-        InitResourceEditor = True
-
-        Buffer = Nothing
-    End Sub
-
     Private Sub Packet_UpdateResource(ByVal Data() As Byte)
         Dim ResourceNum As Integer
         Dim Buffer As ByteBuffer
@@ -1824,17 +1752,6 @@
             .Sprite = Sprite
             .Timer = GetTickCount()
         End With
-
-        Buffer = Nothing
-    End Sub
-
-    Private Sub Packet_EditAnimation(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
-        If Buffer.ReadInteger <> ServerPackets.SAnimationEditor Then Exit Sub
-
-        InitAnimationEditor = True
 
         Buffer = Nothing
     End Sub
@@ -2263,6 +2180,7 @@
             Next
 
             Item(n).Type = buffer.ReadInteger()
+            Item(n).SubType = buffer.ReadInteger
 
             'Housing
             Item(n).FurnitureWidth = buffer.ReadInteger()
@@ -2587,19 +2505,6 @@
         If Buffer.ReadInteger <> ServerPackets.SrClick Then Exit Sub
 
         ShowRClick = True
-
-        Buffer = Nothing
-    End Sub
-
-    Private Sub Packet_ClassEditor(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer
-
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
-
-        If Buffer.ReadInteger <> ServerPackets.SClassEditor Then Exit Sub
-
-        InitClassEditor = True
 
         Buffer = Nothing
     End Sub

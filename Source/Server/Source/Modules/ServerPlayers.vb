@@ -241,22 +241,22 @@
                 Select Case i
                     Case EquipmentType.Weapon
 
-                        If Item(itemNum).Type <> ItemType.Weapon Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Weapon Then SetPlayerEquipment(Index, 0, i)
                     Case EquipmentType.Armor
 
-                        If Item(itemNum).Type <> ItemType.Armor Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Armor Then SetPlayerEquipment(Index, 0, i)
                     Case EquipmentType.Helmet
 
-                        If Item(itemNum).Type <> ItemType.Helmet Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Helmet Then SetPlayerEquipment(Index, 0, i)
                     Case EquipmentType.Shield
 
-                        If Item(itemNum).Type <> ItemType.Shield Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Shield Then SetPlayerEquipment(Index, 0, i)
                     Case EquipmentType.Shoes
 
-                        If Item(itemNum).Type <> ItemType.Shoes Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Shoes Then SetPlayerEquipment(Index, 0, i)
                     Case EquipmentType.Gloves
 
-                        If Item(itemNum).Type <> ItemType.Gloves Then SetPlayerEquipment(Index, 0, i)
+                        If Item(itemNum).SubType <> EquipmentType.Gloves Then SetPlayerEquipment(Index, 0, i)
                 End Select
 
             Else
@@ -1588,13 +1588,13 @@
         If InvNum < 1 Or InvNum > MAX_ITEMS Then Exit Sub
 
         If (GetPlayerInvItemNum(Index, InvNum) > 0) And (GetPlayerInvItemNum(Index, InvNum) <= MAX_ITEMS) Then
-            n = Item(GetPlayerInvItemNum(Index, InvNum)).Data2
+            InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+
+            n = Item(InvItemNum).Data2
 
             ' Find out what kind of item it is
-            Select Case Item(GetPlayerInvItemNum(Index, InvNum)).Type
-                Case ItemType.Armor
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
+            Select Case Item(InvItemNum).Type
+                Case ItemType.Equipment
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
                             PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
@@ -1616,273 +1616,134 @@
                         Exit Sub
                     End If
 
-                    If GetPlayerEquipment(Index, EquipmentType.Armor) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Armor)
-                    End If
+                    'if that went fine, we progress the subtype
 
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Armor)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 0)
+                    Select Case Item(InvItemNum).SubType
+                        Case EquipmentType.Weapon
 
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
+                            If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Weapon)
+                            End If
 
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Weapon)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 1)
 
-                    ' send vitals to party if in one
-                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                Case ItemType.Weapon
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
+                        Case EquipmentType.Armor
 
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                            If GetPlayerEquipment(Index, EquipmentType.Armor) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Armor)
+                            End If
 
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Armor)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 0)
 
-                    If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Weapon)
-                    End If
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Weapon)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 1)
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
+                        Case EquipmentType.Helmet
 
-                    ' send vitals to party if in one
-                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+                            If GetPlayerEquipment(Index, EquipmentType.Helmet) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Helmet)
+                            End If
 
-                Case ItemType.Helmet
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Helmet)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 1)
 
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                        Case EquipmentType.Shield
+                            If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Shield)
+                            End If
 
-                    If GetPlayerEquipment(Index, EquipmentType.Helmet) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Helmet)
-                    End If
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shield)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 1)
 
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Helmet)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 1)
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' send vitals to party if in one
-                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+                        Case EquipmentType.Shoes
+                            If GetPlayerEquipment(Index, EquipmentType.Shoes) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Shoes)
+                            End If
 
-                Case ItemType.Shield
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shoes)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 1)
 
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                        Case EquipmentType.Gloves
+                            If GetPlayerEquipment(Index, EquipmentType.Gloves) > 0 Then
+                                tempitem = GetPlayerEquipment(Index, EquipmentType.Gloves)
+                            End If
 
-                    If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Shield)
-                    End If
+                            SetPlayerEquipment(Index, InvItemNum, EquipmentType.Gloves)
+                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            TakeInvItem(Index, InvItemNum, 1)
 
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shield)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 1)
+                            If tempitem > 0 Then
+                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                                tempitem = 0
+                            End If
 
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
+                            SendWornEquipment(Index)
+                            SendMapEquipment(Index)
 
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+                    End Select
 
-                    ' send vitals to party if in one
-                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
-
-                Case ItemType.Shoes
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Shoes) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Shoes)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shoes)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                    ' send vitals to party if in one
-                    If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
-
-                Case ItemType.Gloves
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    If GetPlayerEquipment(Index, EquipmentType.Gloves) > 0 Then
-                        tempitem = GetPlayerEquipment(Index, EquipmentType.Gloves)
-                    End If
-
-                    SetPlayerEquipment(Index, InvItemNum, EquipmentType.Gloves)
-                    PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                    TakeInvItem(Index, InvItemNum, 1)
-
-                    If tempitem > 0 Then
-                        GiveInvItem(Index, tempitem, 0) ' give back the stored item
-                        tempitem = 0
-                    End If
-
-                    SendWornEquipment(Index)
-                    SendMapEquipment(Index)
-
-                Case ItemType.PotionHp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(GetPlayerInvItemNum(Index, InvNum)).ClassReq = GetPlayerClass(Index) And Not Item(GetPlayerInvItemNum(Index, InvNum)).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.HP)
-
-                Case ItemType.PotionMp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                Case ItemType.Consumable
 
                     For i = 1 To Stats.Count - 1
                         If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
@@ -1905,150 +1766,54 @@
                         Exit Sub
                     End If
 
-                    SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, InvNum)).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.MP)
+                    'if that went fine, we progress the subtype
 
-                Case ItemType.PotionSp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                    Select Case Item(InvItemNum).SubType
+                        Case ConsumableType.Hp
+                            SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                            SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
+                            SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) + Item(InvItemNum).Data1)
+                            If Item(InvItemNum).Stackable = 1 Then
+                                TakeInvItem(Index, InvItemNum, 1)
+                            Else
+                                TakeInvItem(Index, InvItemNum, 0)
+                            End If
+                            SendVital(Index, Vitals.HP)
 
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
+                        Case ConsumableType.Mp
+                            SendActionMsg(GetPlayerMap(Index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+                            SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
+                            SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) + Item(InvItemNum).Data1)
+                            If Item(InvItemNum).Stackable = 1 Then
+                                TakeInvItem(Index, InvItemNum, 1)
+                            Else
+                                TakeInvItem(Index, InvItemNum, 0)
+                            End If
+                            SendVital(Index, Vitals.MP)
 
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                        Case ConsumableType.Mp
+                            SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
+                            SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(InvItemNum).Data1)
+                            If Item(InvItemNum).Stackable = 1 Then
+                                TakeInvItem(Index, InvItemNum, 1)
+                            Else
+                                TakeInvItem(Index, InvItemNum, 0)
+                            End If
+                            SendVital(Index, Vitals.SP)
 
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) + Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.SP)
+                            ' send vitals to party if in one
+                            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
-                Case ItemType.PoisonHp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
+                        Case ConsumableType.Exp
 
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                    End Select
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(InvItemNum).Data1, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.HP, GetPlayerVital(Index, Vitals.HP) - Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.HP)
-
-                Case ItemType.PoisonMp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    SendActionMsg(GetPlayerMap(Index), "-" & Item(InvItemNum).Data1, ColorType.Blue, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
-                    SendAnimation(GetPlayerMap(Index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.MP, GetPlayerVital(Index, Vitals.MP) - Item(InvItemNum).Data1)
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(Index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(Index, InvItemNum, 0)
-                    End If
-                    SendVital(Index, Vitals.MP)
-
-                Case ItemType.PoisonSp
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
-
-                    For i = 1 To Stats.Count - 1
-                        If GetPlayerStat(Index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(Index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(Index) Then
-                        PlayerMsg(Index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
-                        PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    SendAnimation(GetPlayerMap(Index), Item(GetPlayerInvItemNum(Index, InvNum)).Animation, 0, 0, TargetType.Player, Index)
-                    SetPlayerVital(Index, Vitals.SP, GetPlayerVital(Index, Vitals.SP) - Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvNum).Num).Data1)
-                    If Item(Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvNum).Num).Stackable = 1 Then
-                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvNum).Num, 1)
-                    Else
-                        TakeInvItem(Index, Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvNum).Num, 0)
-                    End If
-
-                    SendVital(Index, Vitals.SP)
 
                 Case ItemType.Key
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)
@@ -2195,7 +1960,6 @@
                     PlayerMsg(Index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.", ColorType.Yellow)
 
                 Case ItemType.Recipe
-                    InvItemNum = GetPlayerInvItemNum(Index, InvNum)
 
                     PlayerMsg(Index, "Lets learn this recipe :)", ColorType.BrightGreen)
                     ' Get the recipe num

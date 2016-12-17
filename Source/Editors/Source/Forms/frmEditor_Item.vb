@@ -34,27 +34,53 @@ Public Class frmEditor_Item
     Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
-        If (cmbType.SelectedIndex >= ItemType.WEAPON) And (cmbType.SelectedIndex <= ItemType.GLOVES) Then
+        cmbSubType.Enabled = False
+
+        If (cmbType.SelectedIndex = ItemType.Equipment) Then
             fraEquipment.Visible = True
-            'scrlDamage_Change
+
+            ' Build subtype cmb
+            cmbSubType.Items.Clear()
+            cmbSubType.Items.Add("None")
+
+            cmbSubType.Items.Add("Weapon")
+            cmbSubType.Items.Add("Armor")
+            cmbSubType.Items.Add("Helmet")
+            cmbSubType.Items.Add("Shield")
+            cmbSubType.Items.Add("Shoes")
+            cmbSubType.Items.Add("Gloves")
+
+            cmbSubType.Enabled = True
+            cmbSubType.SelectedIndex = Item(EditorIndex).SubType
         Else
             fraEquipment.Visible = False
         End If
 
-        If (cmbType.SelectedIndex >= ItemType.PotionHP) And (cmbType.SelectedIndex <= ItemType.PoisonSP) Then
+        If (cmbType.SelectedIndex = ItemType.Consumable) Then
             fraVitals.Visible = True
-            'scrlVitalMod_Change
+
+            ' Build subtype cmb
+            cmbSubType.Items.Clear()
+            cmbSubType.Items.Add("None")
+
+            cmbSubType.Items.Add("Hp")
+            cmbSubType.Items.Add("Mp")
+            cmbSubType.Items.Add("Sp")
+            cmbSubType.Items.Add("Exp")
+
+            cmbSubType.Enabled = True
+            cmbSubType.SelectedIndex = Item(EditorIndex).SubType
         Else
             fraVitals.Visible = False
         End If
 
-        If (cmbType.SelectedIndex = ItemType.SKILL) Then
+        If (cmbType.SelectedIndex = ItemType.Skill) Then
             fraSkill.Visible = True
         Else
             fraSkill.Visible = False
         End If
 
-        If cmbType.SelectedIndex = ItemType.FURNITURE Then
+        If cmbType.SelectedIndex = ItemType.Furniture Then
             fraFurniture.Visible = True
         Else
             fraFurniture.Visible = False
@@ -117,7 +143,7 @@ Public Class frmEditor_Item
     End Sub
 
     Private Sub scrlVitalMod_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVitalMod.ValueChanged
-        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+        If EditorIndex <= 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblVitalMod.Text = "Vital Mod: " & scrlVitalMod.Value
         Item(EditorIndex).Data1 = scrlVitalMod.Value
     End Sub
@@ -415,5 +441,11 @@ Public Class frmEditor_Item
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).RandomMax = numMax.Value
+    End Sub
+
+    Private Sub cmbSubType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSubType.SelectedIndexChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).SubType = cmbSubType.SelectedIndex
     End Sub
 End Class

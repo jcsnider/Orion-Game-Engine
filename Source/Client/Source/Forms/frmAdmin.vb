@@ -283,15 +283,6 @@ Public Class frmAdmin
         BLoc = Not BLoc
     End Sub
 
-    Private Sub btnDelBans_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelBans.Click
-        If GetPlayerAccess(MyIndex) < AdminType.CREATOR Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
-
-        SendBanDestroy()
-    End Sub
-
     Private Sub btnRespawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRespawn.Click
         If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)

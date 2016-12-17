@@ -1530,7 +1530,7 @@
         Item(n).Data1 = Buffer.ReadInteger()
         Item(n).Data2 = Buffer.ReadInteger()
         Item(n).Data3 = Buffer.ReadInteger()
-        Item(n).Handed = Buffer.ReadInteger()
+        Item(n).TwoHanded = Buffer.ReadInteger()
         Item(n).LevelReq = Buffer.ReadInteger()
         Item(n).Mastery = Buffer.ReadInteger()
         Item(n).Name = Trim$(Buffer.ReadString)
@@ -1552,6 +1552,7 @@
         Next
 
         Item(n).Type = Buffer.ReadInteger()
+        Item(n).SubType = Buffer.ReadInteger
 
         'Housing
         Item(n).FurnitureWidth = Buffer.ReadInteger()

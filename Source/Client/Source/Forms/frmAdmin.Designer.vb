@@ -24,7 +24,6 @@ Partial Class frmAdmin
     Private Sub InitializeComponent()
         Me.btnRespawn = New System.Windows.Forms.Button()
         Me.btnMapReport = New System.Windows.Forms.Button()
-        Me.btnDelBans = New System.Windows.Forms.Button()
         Me.btnALoc = New System.Windows.Forms.Button()
         Me.btnLevelUp = New System.Windows.Forms.Button()
         Me.btnSpawnItem = New System.Windows.Forms.Button()
@@ -65,9 +64,9 @@ Partial Class frmAdmin
         '
         'btnRespawn
         '
-        Me.btnRespawn.Location = New System.Drawing.Point(14, 44)
+        Me.btnRespawn.Location = New System.Drawing.Point(136, 16)
         Me.btnRespawn.Name = "btnRespawn"
-        Me.btnRespawn.Size = New System.Drawing.Size(228, 22)
+        Me.btnRespawn.Size = New System.Drawing.Size(106, 22)
         Me.btnRespawn.TabIndex = 34
         Me.btnRespawn.Text = "Respawn Map"
         Me.btnRespawn.UseVisualStyleBackColor = True
@@ -80,15 +79,6 @@ Partial Class frmAdmin
         Me.btnMapReport.TabIndex = 33
         Me.btnMapReport.Text = "Refresh List"
         Me.btnMapReport.UseVisualStyleBackColor = True
-        '
-        'btnDelBans
-        '
-        Me.btnDelBans.Location = New System.Drawing.Point(126, 16)
-        Me.btnDelBans.Name = "btnDelBans"
-        Me.btnDelBans.Size = New System.Drawing.Size(116, 22)
-        Me.btnDelBans.TabIndex = 32
-        Me.btnDelBans.Text = "Delete Bans"
-        Me.btnDelBans.UseVisualStyleBackColor = True
         '
         'btnALoc
         '
@@ -377,7 +367,6 @@ Partial Class frmAdmin
         Me.TabPage4.Controls.Add(Me.btnRespawn)
         Me.TabPage4.Controls.Add(Me.btnALoc)
         Me.TabPage4.Controls.Add(Me.lblItemSpawn)
-        Me.TabPage4.Controls.Add(Me.btnDelBans)
         Me.TabPage4.Controls.Add(Me.lblSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.scrlSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnLevelUp)
@@ -413,7 +402,6 @@ Partial Class frmAdmin
     End Sub
     Friend WithEvents btnRespawn As Windows.Forms.Button
     Friend WithEvents btnMapReport As Windows.Forms.Button
-    Friend WithEvents btnDelBans As Windows.Forms.Button
     Friend WithEvents btnALoc As Windows.Forms.Button
     Friend WithEvents btnLevelUp As Windows.Forms.Button
     Friend WithEvents btnSpawnItem As Windows.Forms.Button

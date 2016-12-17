@@ -514,7 +514,7 @@ Module ServerTCP
         Buffer.WriteInteger(Item(itemNum).Data1)
         Buffer.WriteInteger(Item(itemNum).Data2)
         Buffer.WriteInteger(Item(itemNum).Data3)
-        Buffer.WriteInteger(Item(itemNum).Handed)
+        Buffer.WriteInteger(Item(itemNum).TwoHanded)
         Buffer.WriteInteger(Item(itemNum).LevelReq)
         Buffer.WriteInteger(Item(itemNum).Mastery)
         Buffer.WriteString(Trim$(Item(itemNum).Name))
@@ -536,6 +536,7 @@ Module ServerTCP
         Next
 
         Buffer.WriteInteger(Item(itemNum).Type)
+        Buffer.WriteInteger(Item(itemNum).SubType)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)
@@ -572,7 +573,7 @@ Module ServerTCP
         Buffer.WriteInteger(Item(itemNum).Data1)
         Buffer.WriteInteger(Item(itemNum).Data2)
         Buffer.WriteInteger(Item(itemNum).Data3)
-        Buffer.WriteInteger(Item(itemNum).Handed)
+        Buffer.WriteInteger(Item(itemNum).TwoHanded)
         Buffer.WriteInteger(Item(itemNum).LevelReq)
         Buffer.WriteInteger(Item(itemNum).Mastery)
         Buffer.WriteString(Trim$(Item(itemNum).Name))
@@ -594,6 +595,7 @@ Module ServerTCP
         Next
 
         Buffer.WriteInteger(Item(itemNum).Type)
+        Buffer.WriteInteger(Item(itemNum).SubType)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)

@@ -67,28 +67,30 @@
         House
         Craft
         Light
+
+        Count
     End Enum
 
     ''' <Summary> Item Constant </Summary>
     Enum ItemType As Byte
         None
-        Weapon
-        Armor
-        Helmet
-        Shield
-        Shoes
-        Gloves
-        PotionHp
-        PotionMp
-        PotionSp
-        PoisonHp
-        PoisonMp
-        PoisonSp
+        Equipment
+        Consumable
         Key
         Currency
         Skill
         Furniture
         Recipe
+
+        Count
+    End Enum
+
+    ''' <Summary> Direction Constant </Summary>
+    Enum ConsumableType As Byte
+        Hp
+        Mp
+        Sp
+        Exp
     End Enum
 
     ''' <Summary> Direction Constant </Summary>
@@ -157,6 +159,7 @@
         Luck
         Intelligence
         Speed
+
         Count
     End Enum
 
@@ -165,6 +168,7 @@
         HP = 1
         MP
         SP
+
         Count
     End Enum
 
@@ -176,6 +180,7 @@
         Shield
         Shoes
         Gloves
+
         Count
     End Enum
 
@@ -186,6 +191,7 @@
         Mask2
         Fringe
         Fringe2
+
         Count
     End Enum
 
@@ -195,6 +201,7 @@
         WoodCutter
         Miner
         Fisherman
+
         Count
     End Enum
 End Module

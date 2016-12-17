@@ -620,6 +620,7 @@
         Next
 
         Item(n).Type = Buffer.ReadInteger()
+        Item(n).subType = Buffer.ReadInteger()
 
         'Housing
         Item(n).FurnitureWidth = Buffer.ReadInteger()
@@ -1017,6 +1018,7 @@
             Next
 
             Item(n).Type = buffer.ReadInteger()
+            Item(n).SubType = buffer.ReadInteger()
 
             'Housing
             Item(n).FurnitureWidth = buffer.ReadInteger()

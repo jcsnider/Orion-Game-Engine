@@ -677,7 +677,8 @@ Module ServerDatabase
 
     Sub ClearMapItem(ByVal Index As Integer, ByVal MapNum As Integer)
         MapItem(MapNum, Index) = Nothing
-
+        MapItem(MapNum, Index).RandData.Prefix = ""
+        MapItem(MapNum, Index).RandData.Suffix = ""
     End Sub
 
     Sub ClearMapItems()
@@ -715,6 +716,7 @@ Module ServerDatabase
         writer.Write(Item(itemNum).Description)
 
         writer.Write(Item(itemNum).Type)
+        writer.Write(Item(itemNum).SubType)
         writer.Write(Item(itemNum).Data1)
         writer.Write(Item(itemNum).Data2)
         writer.Write(Item(itemNum).Data3)
@@ -730,7 +732,7 @@ Module ServerDatabase
 
         writer.Write(Item(itemNum).Rarity)
         writer.Write(Item(itemNum).Speed)
-        writer.Write(Item(itemNum).Handed)
+        writer.Write(Item(itemNum).TwoHanded)
         writer.Write(Item(itemNum).BindType)
 
         For i = 0 To Stats.Count - 1
@@ -760,6 +762,8 @@ Module ServerDatabase
 
         writer.Write(Item(itemNum).Stackable)
 
+        writer.Write(Item(itemNum).ItemLevel)
+
         writer.Save(filename)
     End Sub
 
@@ -772,7 +776,7 @@ Module ServerDatabase
             LoadItem(i)
             DoEvents()
         Next
-
+        'SaveItems()
     End Sub
 
     Sub LoadItem(ByVal ItemNum As Integer)
@@ -788,6 +792,7 @@ Module ServerDatabase
         reader.Read(Item(ItemNum).Description)
 
         reader.Read(Item(ItemNum).Type)
+        reader.Read(Item(ItemNum).SubType)
         reader.Read(Item(ItemNum).Data1)
         reader.Read(Item(ItemNum).Data2)
         reader.Read(Item(ItemNum).Data3)
@@ -803,7 +808,7 @@ Module ServerDatabase
 
         reader.Read(Item(ItemNum).Rarity)
         reader.Read(Item(ItemNum).Speed)
-        reader.Read(Item(ItemNum).Handed)
+        reader.Read(Item(ItemNum).TwoHanded)
         reader.Read(Item(ItemNum).BindType)
 
         For s = 0 To Stats.Count - 1
@@ -832,6 +837,8 @@ Module ServerDatabase
         reader.Read(Item(ItemNum).RandomMax)
 
         reader.Read(Item(ItemNum).Stackable)
+
+        reader.Read(Item(ItemNum).ItemLevel)
 
         FileClose(F)
 
@@ -1703,6 +1710,17 @@ Module ServerDatabase
 
         For i = 0 To EquipmentType.Count - 1
             Player(Index).Character(CharNum).Equipment(i) = 0
+
+            Player(Index).Character(CharNum).RandEquip(i).Prefix = ""
+            Player(Index).Character(CharNum).RandEquip(i).Suffix = ""
+            Player(Index).Character(CharNum).RandEquip(i).Rarity = 0
+            Player(Index).Character(CharNum).RandEquip(i).Damage = 0
+            Player(Index).Character(CharNum).RandEquip(i).Speed = 0
+
+            ReDim Player(Index).Character(CharNum).RandEquip(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Player(Index).Character(CharNum).RandEquip(i).Stat(x) = 0
+            Next
         Next
 
         For i = 0 To MAX_INV
@@ -1785,6 +1803,34 @@ Module ServerDatabase
             Player(Index).Character(CharNum).RecipeLearned(i) = 0
         Next
 
+        'random items
+        ReDim Player(Index).Character(CharNum).RandInv(MAX_INV)
+        For i = 1 To MAX_INV
+            Player(Index).Character(CharNum).RandInv(i).Prefix = ""
+            Player(Index).Character(CharNum).RandInv(i).Suffix = ""
+            Player(Index).Character(CharNum).RandInv(i).Rarity = 0
+            Player(Index).Character(CharNum).RandInv(i).Damage = 0
+            Player(Index).Character(CharNum).RandInv(i).Speed = 0
+
+            ReDim Player(Index).Character(CharNum).RandInv(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Player(Index).Character(CharNum).RandInv(i).Stat(x) = 0
+            Next
+        Next
+
+        ReDim Player(Index).Character(CharNum).RandEquip(EquipmentType.Count - 1)
+        For i = 1 To EquipmentType.Count - 1
+            Player(Index).Character(CharNum).RandEquip(i).Prefix = ""
+            Player(Index).Character(CharNum).RandEquip(i).Suffix = ""
+            Player(Index).Character(CharNum).RandEquip(i).Rarity = 0
+            Player(Index).Character(CharNum).RandEquip(i).Damage = 0
+            Player(Index).Character(CharNum).RandEquip(i).Speed = 0
+
+            ReDim Player(Index).Character(CharNum).RandEquip(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Player(Index).Character(CharNum).RandEquip(i).Stat(x) = 0
+            Next
+        Next
     End Sub
 
     Sub LoadCharacter(ByVal Index As Integer, ByVal CharNum As Integer)
@@ -1798,12 +1844,11 @@ Module ServerDatabase
 
         reader.Read(Player(Index).Character(CharNum).Classes)
         reader.Read(Player(Index).Character(CharNum).Dir)
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Armor))
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Helmet))
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Shield))
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Weapon))
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Shoes))
-        reader.Read(Player(Index).Character(CharNum).Equipment(EquipmentType.Gloves))
+
+        For i = 1 To EquipmentType.Count - 1
+            reader.Read(Player(Index).Character(CharNum).Equipment(i))
+        Next
+
         reader.Read(Player(Index).Character(CharNum).exp)
 
         For i = 0 To MAX_INV
@@ -1882,6 +1927,35 @@ Module ServerDatabase
         For i = 1 To MAX_RECIPE
             reader.Read(Player(Index).Character(CharNum).RecipeLearned(i))
         Next
+
+        'random items
+        ReDim Player(Index).Character(CharNum).RandInv(MAX_INV)
+        For i = 1 To MAX_INV
+            reader.Read(Player(Index).Character(CharNum).RandInv(i).Prefix)
+            reader.Read(Player(Index).Character(CharNum).RandInv(i).Suffix)
+            reader.Read(Player(Index).Character(CharNum).RandInv(i).Rarity)
+            reader.Read(Player(Index).Character(CharNum).RandInv(i).Damage)
+            reader.Read(Player(Index).Character(CharNum).RandInv(i).Speed)
+
+            ReDim Player(Index).Character(CharNum).RandInv(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                reader.Read(Player(Index).Character(CharNum).RandInv(i).Stat(x))
+            Next
+        Next
+
+        ReDim Player(Index).Character(CharNum).RandEquip(EquipmentType.Count - 1)
+        For i = 1 To EquipmentType.Count - 1
+            reader.Read(Player(Index).Character(CharNum).RandEquip(i).Prefix)
+            reader.Read(Player(Index).Character(CharNum).RandEquip(i).Suffix)
+            reader.Read(Player(Index).Character(CharNum).RandEquip(i).Rarity)
+            reader.Read(Player(Index).Character(CharNum).RandEquip(i).Damage)
+            reader.Read(Player(Index).Character(CharNum).RandEquip(i).Speed)
+
+            ReDim Player(Index).Character(CharNum).RandEquip(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                reader.Read(Player(Index).Character(CharNum).RandEquip(i).Stat(x))
+            Next
+        Next
     End Sub
 
     Sub SaveCharacter(ByVal Index As Integer, ByVal CharNum As Integer)
@@ -1893,12 +1967,12 @@ Module ServerDatabase
 
         writer.Write(Player(Index).Character(CharNum).Classes)
         writer.Write(Player(Index).Character(CharNum).Dir)
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Armor))
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Helmet))
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Shield))
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Weapon))
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Shoes))
-        writer.Write(Player(Index).Character(CharNum).Equipment(EquipmentType.Gloves))
+
+
+        For i = 1 To EquipmentType.Count - 1
+            writer.Write(Player(Index).Character(CharNum).Equipment(i))
+        Next
+
         writer.Write(Player(Index).Character(CharNum).exp)
 
         For i = 0 To MAX_INV
@@ -1971,6 +2045,29 @@ Module ServerDatabase
 
         For i = 1 To MAX_RECIPE
             writer.Write(Player(Index).Character(CharNum).RecipeLearned(i))
+        Next
+
+        'random items
+        For i = 1 To MAX_INV
+            writer.Write(Player(Index).Character(CharNum).RandInv(i).Prefix)
+            writer.Write(Player(Index).Character(CharNum).RandInv(i).Suffix)
+            writer.Write(Player(Index).Character(CharNum).RandInv(i).Rarity)
+            writer.Write(Player(Index).Character(CharNum).RandInv(i).Damage)
+            writer.Write(Player(Index).Character(CharNum).RandInv(i).Speed)
+            For x = 1 To Stats.Count - 1
+                writer.Write(Player(Index).Character(CharNum).RandInv(i).Stat(x))
+            Next
+        Next
+
+        For i = 1 To EquipmentType.Count - 1
+            writer.Write(Player(Index).Character(CharNum).RandEquip(i).Prefix)
+            writer.Write(Player(Index).Character(CharNum).RandEquip(i).Suffix)
+            writer.Write(Player(Index).Character(CharNum).RandEquip(i).Rarity)
+            writer.Write(Player(Index).Character(CharNum).RandEquip(i).Damage)
+            writer.Write(Player(Index).Character(CharNum).RandEquip(i).Speed)
+            For x = 1 To Stats.Count - 1
+                writer.Write(Player(Index).Character(CharNum).RandEquip(i).Stat(x))
+            Next
         Next
 
         writer.Save(filename)
@@ -2302,7 +2399,7 @@ Module ServerDatabase
         Buffer.WriteInteger(Item(itemNum).Data1)
         Buffer.WriteInteger(Item(itemNum).Data2)
         Buffer.WriteInteger(Item(itemNum).Data3)
-        Buffer.WriteInteger(Item(itemNum).Handed)
+        Buffer.WriteInteger(Item(itemNum).TwoHanded)
         Buffer.WriteInteger(Item(itemNum).LevelReq)
         Buffer.WriteInteger(Item(itemNum).Mastery)
         Buffer.WriteString(Trim$(Item(itemNum).Name))
@@ -2324,6 +2421,7 @@ Module ServerDatabase
         Next
 
         Buffer.WriteInteger(Item(itemNum).Type)
+        Buffer.WriteInteger(Item(itemNum).SubType)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)

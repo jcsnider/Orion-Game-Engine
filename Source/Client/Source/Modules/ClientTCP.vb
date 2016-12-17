@@ -524,14 +524,6 @@ Module ClientTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub SendBanDestroy()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ClientPackets.CBanDestroy)
-        SendData(Buffer.ToArray())
-        Buffer = Nothing
-    End Sub
-
     Public Sub SendMapRespawn()
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -805,9 +797,7 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
-        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then
-            Exit Sub
-        End If
+        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
         If SkillCD(skillslot) > 0 Then

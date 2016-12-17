@@ -4,7 +4,7 @@ Imports SFML.Graphics
 
 Module ClientText
     Public Const MaxChatDisplayLines As Byte = 8
-    Public Const ChatLineSpacing As Byte = 12 ' Should be same height as font
+    Public Const ChatLineSpacing As Byte = FONT_SIZE ' Should be same height as font
     Public Const MyChatTextLimit As Integer = 55
     Public Const MyAmountValueLimit As Integer = 3
     Public Const AllChatLineWidth As Integer = 55
@@ -14,7 +14,6 @@ Module ClientText
 
     ' Game text buffer
     Public MyText As String = ""
-
 
     Public Sub DrawText(ByVal X As Integer, ByVal Y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
         Dim BackString As Text = New Text(text, SFMLGameFont)
@@ -95,7 +94,6 @@ Module ClientText
 
         npcNum = MapNpc(MapNpcNum).Num
 
-
         Select Case Npc(npcNum).Behaviour
             Case 0 ' attack on sight
                 color = Color.Red
@@ -129,6 +127,7 @@ Module ClientText
         backcolor = Color.Black
 
         Name = Trim$(Map.MapEvents(Index).Name)
+
         ' calc pos
         TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
@@ -142,7 +141,6 @@ Module ClientText
             End If
         ElseIf Map.MapEvents(Index).GraphicType = 2 Then
             If Map.MapEvents(Index).GraphicY2 > 0 Then
-                'TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (((Map.MapEvents(Index).GraphicY2 * PIC_Y) - Map.MapEvents(Index).GraphicY * PIC_Y) * 32) + 16
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
             Else
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16
@@ -237,7 +235,7 @@ Module ClientText
     Sub DrawActionMsg(ByVal Index As Integer)
         Dim X As Integer, y As Integer, i As Integer, Time As Integer
 
-        ' how Integer we want each message to appear
+        ' how long we want each message to appear
         Select Case ActionMsg(Index).Type
             Case ActionMsgType.STATIC
                 Time = 1500
@@ -284,7 +282,7 @@ Module ClientText
         y = ConvertMapY(y)
 
         If GetTickCount() < ActionMsg(Index).Created + Time Then
-            DrawText(X, y, ActionMsg(Index).message, ToSFMLColor(Drawing.ColorTranslator.FromOle(QBColor(ActionMsg(Index).color))), (Color.Black), GameWindow) 'Drawing.ColorTranslator.FromOle(QBColor(ActionMsg(Index).color))
+            DrawText(X, y, ActionMsg(Index).message, GetSFMLColor(ActionMsg(Index).color), (Color.Black), GameWindow)
         Else
             ClearActionMsg(Index)
         End If

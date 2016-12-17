@@ -53,13 +53,6 @@
 
     'Editors
     Public InitMapEditor As Boolean
-    Public InitItemEditor As Boolean
-    Public InitResourceEditor As Boolean
-    Public InitNPCEditor As Boolean
-    Public InitSkillEditor As Boolean
-    Public InitShopEditor As Boolean
-    Public InitAnimationEditor As Boolean
-    Public InitClassEditor As Boolean
 
     Public UpdateCharacterPanel As Boolean
 

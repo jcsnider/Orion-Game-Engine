@@ -1,4 +1,6 @@
-﻿Module ServerGeneral
+﻿Imports System.IO
+
+Module ServerGeneral
     Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Integer) As Integer
     Public ServerDestroyed As Boolean
     Public MyIPAddress As String
@@ -15,6 +17,9 @@
         Dim i As Integer, F As Integer, x As Integer
         Dim time1 As Integer, time2 As Integer
         x = 0
+
+        Dim currentDomain As AppDomain = AppDomain.CurrentDomain
+        AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
 
         Console.Title = "Orion+ Server"
         Console.SetWindowSize(120, 20)
@@ -74,6 +79,15 @@
                 ReDim Player(i).Character(x).Inv(0 To MAX_INV)
                 ReDim Player(i).Character(x).Skill(0 To MAX_PLAYER_SKILLS)
                 ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
+
+                ReDim Player(i).Character(x).RandEquip(EquipmentType.Count - 1)
+                ReDim Player(i).Character(x).RandInv(MAX_INV)
+                For y = 1 To EquipmentType.Count - 1
+                    ReDim Player(i).Character(x).RandEquip(y).Stat(Stats.Count - 1)
+                Next
+                For y = 1 To MAX_INV
+                    ReDim Player(i).Character(x).RandInv(y).Stat(Stats.Count - 1)
+                Next
             Next
         Next
 
@@ -407,4 +421,19 @@
         End If
 
     End Sub
+
+    Sub ErrorHandler(ByVal sender As Object, ByVal args As UnhandledExceptionEventArgs)
+        Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
+        Dim myFilePath As String = "\ErrorLog.log"
+
+        Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
+            sw.WriteLine(DateTime.Now)
+            sw.WriteLine(e.Message)
+        End Using
+
+        MessageBox.Show("An unexpected error occured. Application will be terminated.")
+        End
+    End Sub
+
 End Module
+

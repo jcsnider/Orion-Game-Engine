@@ -887,38 +887,45 @@ Continue1:
             Case ItemType.None
                 ItemDescInfo = "N/A"
                 ItemDescType = "N/A"
-            Case ItemType.Weapon
-                ItemDescInfo = "Damage: " & Item(itemnum).Data2
-                ItemDescType = "Weapon"
-            Case ItemType.Armor
-                ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                ItemDescType = "Armor"
-            Case ItemType.Helmet
-                ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                ItemDescType = "Helmet"
-            Case ItemType.Shield
-                ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                ItemDescType = "Shield"
-            Case ItemType.Shoes
-                ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                ItemDescType = "Shoes"
-            Case ItemType.Gloves
-                ItemDescInfo = "Defence: " & Item(itemnum).Data2
-                ItemDescType = "Gloves"
-            Case ItemType.PotionHp
-                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-                ItemDescType = "Potion"
-            Case ItemType.PotionMp
-                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-                ItemDescType = "Potion"
-            Case ItemType.PotionSp
-                ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
-            Case ItemType.PoisonHp
-                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-            Case ItemType.PoisonMp
-                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
-            Case ItemType.PoisonSp
-                ItemDescInfo = "Damage Amount: " & Item(itemnum).Data2
+
+            Case ItemType.Equipment
+                Select Case Item(itemnum).SubType
+                    Case EquipmentType.Weapon
+                        ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                        ItemDescType = "Weapon"
+                    Case EquipmentType.Armor
+                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                        ItemDescType = "Armor"
+                    Case EquipmentType.Helmet
+                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                        ItemDescType = "Helmet"
+                    Case EquipmentType.Shield
+                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                        ItemDescType = "Shield"
+                    Case EquipmentType.Shoes
+                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                        ItemDescType = "Shoes"
+                    Case EquipmentType.Gloves
+                        ItemDescInfo = "Defence: " & Item(itemnum).Data2
+                        ItemDescType = "Gloves"
+                End Select
+
+            Case ItemType.Consumable
+                Select Case Item(itemnum).SubType
+                    Case ConsumableType.Hp
+                        ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                        ItemDescType = "Potion"
+                    Case ConsumableType.Mp
+                        ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                        ItemDescType = "Potion"
+                    Case ConsumableType.Sp
+                        ItemDescInfo = "Restore Amount: " & Item(itemnum).Data2
+                        ItemDescType = "Potion"
+                    Case ConsumableType.Exp
+                        ItemDescInfo = "Amount: " & Item(itemnum).Data2
+                        ItemDescType = "Potion"
+                End Select
+
             Case ItemType.Key
                 ItemDescInfo = "N/A"
                 ItemDescType = "Key"
@@ -954,7 +961,7 @@ Continue1:
         ItemDescLevel = Item(itemnum).LevelReq
 
         ' Exit out for everything else 'scept equipment
-        If Item(itemnum).Type < ItemType.Weapon Or Item(itemnum).Type > ItemType.Gloves Then
+        If Item(itemnum).Type <> ItemType.Equipment Then
             ' Clear other labels
             ItemDescSpeed = "N/A"
 
@@ -1004,7 +1011,7 @@ Continue1:
             ItemDescSpr = "None"
         End If
 
-        If Item(itemnum).Type = ItemType.Weapon Then
+        If Item(itemnum).SubType = EquipmentType.Weapon Then
             ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
         Else
             ItemDescSpeed = "N/A"

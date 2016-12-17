@@ -336,6 +336,7 @@ Module EditorTCP
         Next
 
         Buffer.WriteInteger(Item(itemNum).Type)
+        Buffer.WriteInteger(Item(itemNum).SubType)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)

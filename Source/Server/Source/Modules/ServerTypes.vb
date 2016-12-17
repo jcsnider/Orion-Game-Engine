@@ -1,7 +1,6 @@
 ﻿Module ServerTypes
     ' Public data structures
     Public Map(MAX_CACHED_MAPS) As MapRec
-    'Public MapCache(0 To MAX_MAPS) As Cache
     Public TempTile(MAX_CACHED_MAPS) As TempTileRec
     Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Public ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
@@ -19,6 +18,15 @@
     Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
     Public Options As OptionsRec
 
+    Public Structure RandInvRec
+        Dim Prefix As String
+        Dim Suffix As String
+        Dim Stat() As Long
+        Dim Rarity As Long
+        Dim Damage As Long
+        Dim Speed As Long
+    End Structure
+
     Public Structure OptionsRec
         Dim Game_Name As String
         Dim MOTD As String
@@ -29,7 +37,6 @@
     Public Structure PlayerInvRec
         Dim Num As Byte
         Dim Value As Integer
-
     End Structure
 
     Public Structure Cache
@@ -38,6 +45,7 @@
 
     Public Structure BankRec
         Dim Item() As PlayerInvRec
+        Dim ItemRand() As RandInvRec
     End Structure
 
     Public Structure PlayerRec
@@ -103,6 +111,10 @@
         Dim GatherSkills() As ResourceSkillsRec
 
         Dim RecipeLearned() As Byte
+
+        ' Random Items
+        Dim RandInv() As RandInvRec
+        Dim RandEquip() As RandInvRec
     End Structure
 
     Public Structure TempPlayerRec
@@ -231,6 +243,7 @@
         Dim Description As String
 
         Dim Type As Byte
+        Dim SubType As Byte
         Dim Data1 As Integer
         Dim Data2 As Integer
         Dim Data3 As Integer
@@ -242,7 +255,7 @@
         Dim Add_Stat() As Byte
         Dim Rarity As Byte
         Dim Speed As Integer
-        Dim Handed As Integer
+        Dim TwoHanded As Integer
         Dim BindType As Byte
         Dim Stat_Req() As Byte
         Dim Animation As Integer
@@ -253,6 +266,8 @@
         Dim RandomMax As Byte
 
         Dim Stackable As Byte
+
+        Dim ItemLevel As Byte
 
         'Housing
         Dim FurnitureWidth As Integer
@@ -270,6 +285,7 @@
         Dim x As Byte
         Dim y As Byte
 
+        Dim RandData As RandInvRec
     End Structure
 
     Public Structure NpcRec
