@@ -35,6 +35,15 @@ Module ClientGeneral
             ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 
             ReDim Player(i).RecipeLearned(MAX_RECIPE)
+
+            ReDim Player(i).RandEquip(EquipmentType.Count - 1)
+            ReDim Player(i).RandInv(0 To MAX_INV)
+            For y = 1 To EquipmentType.Count - 1
+                ReDim Player(i).RandEquip(y).Stat(Stats.Count - 1)
+            Next
+            For y = 1 To MAX_INV
+                ReDim Player(i).RandInv(y).Stat(Stats.Count - 1)
+            Next
         Next
 
         ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)

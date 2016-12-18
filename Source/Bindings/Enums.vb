@@ -158,7 +158,7 @@
         Vitality
         Luck
         Intelligence
-        Speed
+        Spirit
 
         Count
     End Enum
@@ -203,5 +203,32 @@
         Fisherman
 
         Count
+    End Enum
+
+    Public Enum RandomBonusType
+        RANDOM_SPEED = 1            ' Reduces time between attacks by 20%
+        RANDOM_DAMAGE        ' Increases base damage by 25%
+        RANDOM_WARRIOR         ' Adds Strength and Endurance
+        RANDOM_ARCHER        ' Adds Achery and Endurance
+        RANDOM_MAGE          ' Adds Magic and Endurance
+        RANDOM_JESTER         ' Adds Magic and Archery
+        RANDOM_BATTLEMAGE     ' Adds Attack and Magic
+        RANDOM_ROGUE         ' Adds Attack and Archery
+        RANDOM_TOWER           ' Adds Endurance and Defense
+        RANDOM_SURVIVALIST     ' Adds Cooking and Fishing
+        RANDOM_PERFECTIONIST   ' Adds Mining and Jeweler
+        RANDOM_COALMEN         ' Adds Mining and Blacksmithing
+        RANDOM_BOWYER          ' Adds Woodcutting and Fletching
+        RANDOM_BROKEN          ' Reduces damage and increases speed by 10%
+        RANDOM_PRISM           ' Gives four random stats, but will always turn soulbound
+        RANDOM_CANNON          ' Gives Attack, Ranged and Magic
+    End Enum
+
+    Public Enum RarityType
+        RARITY_BROKEN = 1
+        RARITY_COMMON
+        RARITY_UNCOMMON
+        RARITY_RARE
+        RARITY_EPIC
     End Enum
 End Module

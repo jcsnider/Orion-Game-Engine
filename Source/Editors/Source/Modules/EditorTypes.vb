@@ -144,6 +144,7 @@
         Dim RandomMax As Byte
 
         Dim Stackable As Byte
+        Dim ItemLevel As Byte
 
         'Housing
         Dim FurnitureWidth As Integer

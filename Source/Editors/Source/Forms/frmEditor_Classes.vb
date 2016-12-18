@@ -259,7 +259,7 @@ Public Class frmEditor_Classes
     Private Sub numSpirit_ValueChanged(sender As Object, e As EventArgs) Handles numSpirit.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > Max_Classes Then Exit Sub
 
-        Classes(EditorIndex).Stat(Stats.Speed) = numSpirit.Value
+        Classes(EditorIndex).Stat(Stats.Spirit) = numSpirit.Value
     End Sub
 
     Private Sub numBaseExp_ValueChanged(sender As Object, e As EventArgs) Handles numBaseExp.ValueChanged

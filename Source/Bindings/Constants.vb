@@ -22,4 +22,6 @@
 
     Public Const MAX_PARTYS As Long = 35
     Public Const MAX_PARTY_MEMBERS As Long = 4
+
+    Public Const MAX_RANDOM_TYPES As Byte = 16
 End Module

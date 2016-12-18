@@ -234,7 +234,7 @@ Module ServerTCP
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
             Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -384,12 +384,12 @@ Module ServerTCP
                 Buffer.WriteInteger(Classes(i).FemaleSprite(q))
             Next
 
-            Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Strength))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -444,12 +444,12 @@ Module ServerTCP
                 Buffer.WriteInteger(Classes(i).FemaleSprite(q))
             Next
 
-            Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Strength))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -468,7 +468,7 @@ Module ServerTCP
     End Sub
 
     Sub SendInventory(ByVal Index As Integer)
-        Dim i As Integer
+        Dim i As Integer, n As Integer
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
@@ -477,6 +477,14 @@ Module ServerTCP
         For i = 1 To MAX_INV
             Buffer.WriteInteger(GetPlayerInvItemNum(Index, i))
             Buffer.WriteInteger(GetPlayerInvItemValue(Index, i))
+            Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Prefix)
+            Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Suffix)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Rarity)
+            For n = 1 To Stats.Count - 1
+                Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Stat(n))
+            Next
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Damage)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(i).Speed)
         Next
 
         SendDataTo(Index, Buffer.ToArray())
@@ -538,6 +546,8 @@ Module ServerTCP
         Buffer.WriteInteger(Item(itemNum).Type)
         Buffer.WriteInteger(Item(itemNum).SubType)
 
+        Buffer.WriteInteger(Item(itemNum).ItemLevel)
+
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)
         Buffer.WriteInteger(Item(itemNum).FurnitureHeight)
@@ -596,6 +606,8 @@ Module ServerTCP
 
         Buffer.WriteInteger(Item(itemNum).Type)
         Buffer.WriteInteger(Item(itemNum).SubType)
+
+        Buffer.WriteInteger(Item(itemNum).ItemLevel)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)
@@ -975,12 +987,12 @@ Module ServerTCP
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPlayerStats)
         Buffer.WriteInteger(Index)
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.strength))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Strength))
         Buffer.WriteInteger(GetPlayerStat(Index, Stats.Endurance))
         Buffer.WriteInteger(GetPlayerStat(Index, Stats.Vitality))
         Buffer.WriteInteger(GetPlayerStat(Index, Stats.Luck))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.intelligence))
-        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Speed))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Intelligence))
+        Buffer.WriteInteger(GetPlayerStat(Index, Stats.Spirit))
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -1112,12 +1124,20 @@ Module ServerTCP
 
         Buffer.WriteInteger(ServerPackets.SPlayerWornEq)
 
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Armor))
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Weapon))
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Helmet))
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Shield))
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Shoes))
-        Buffer.WriteInteger(GetPlayerEquipment(Index, EquipmentType.Gloves))
+        For i = 1 To EquipmentType.Count - 1
+            Buffer.WriteInteger(GetPlayerEquipment(Index, i))
+        Next
+
+        For i = 1 To EquipmentType.Count - 1
+            Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Prefix)
+            Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Suffix)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Damage)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Speed)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Rarity)
+            For n = 1 To Stats.Count - 1
+                Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(i).Stat(n))
+            Next
+        Next
 
         SendDataTo(Index, Buffer.ToArray())
 
@@ -1757,13 +1777,22 @@ Module ServerTCP
     End Sub
 
     Sub SendInventoryUpdate(ByVal Index As Integer, ByVal invSlot As Integer)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, n As Integer
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SPlayerInvUpdate)
         Buffer.WriteInteger(invSlot)
         Buffer.WriteInteger(GetPlayerInvItemNum(Index, invSlot))
         Buffer.WriteInteger(GetPlayerInvItemValue(Index, invSlot))
+
+        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Prefix)
+        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Suffix)
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Rarity)
+        For n = 1 To Stats.Count - 1
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Stat(n))
+        Next n
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Damage)
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Speed)
 
         SendDataTo(Index, Buffer.ToArray())
 

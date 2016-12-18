@@ -677,12 +677,18 @@ Module GameEditors
             frmEditor_Item.cmbType.SelectedIndex = .Type
             frmEditor_Item.scrlAnim.Value = .Animation
 
+            If .ItemLevel = 0 Then .ItemLevel = 1
+            frmEditor_Item.scrlItemLevel.Value = .ItemLevel
+            frmEditor_Item.lblItemLvl.Text = "Item Level: " & frmEditor_Item.scrlItemLevel.Value
+
             ' Type specific settings
-            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Equipment) Then
+            If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Equipment) Then
                 frmEditor_Item.fraEquipment.Visible = True
                 frmEditor_Item.scrlProjectile.Value = .Data1
                 frmEditor_Item.scrlDamage.Value = .Data2
                 frmEditor_Item.cmbTool.SelectedIndex = .Data3
+
+                frmEditor_Item.cmbSubType.SelectedIndex = .SubType
 
                 If .Speed < 100 Then .Speed = 100
                 If .Speed > frmEditor_Item.scrlSpeed.Maximum Then .Speed = frmEditor_Item.scrlSpeed.Maximum
@@ -693,7 +699,7 @@ Module GameEditors
                 frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.Intelligence)
                 frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.Vitality)
                 frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.Luck)
-                frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.Speed)
+                frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.Spirit)
 
                 If .KnockBack = 1 Then
                     frmEditor_Item.chkKnockBack.Checked = True
@@ -719,7 +725,7 @@ Module GameEditors
                 frmEditor_Item.fraEquipment.Visible = False
             End If
 
-            If (frmEditor_Item.cmbType.SelectedIndex >= ItemType.Consumable) Then
+            If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Consumable) Then
                 frmEditor_Item.fraVitals.Visible = True
                 frmEditor_Item.scrlVitalMod.Value = .Data1
             Else
@@ -754,7 +760,7 @@ Module GameEditors
             frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.Luck)
             frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.Endurance)
             frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.intelligence)
-            frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.Speed)
+            frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.Spirit)
 
             ' Build cmbClassReq
             frmEditor_Item.cmbClassReq.Items.Clear()
@@ -853,7 +859,7 @@ Module GameEditors
             .scrlStr.Value = Npc(EditorIndex).Stat(Stats.strength)
             .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.Endurance)
             .scrlInt.Value = Npc(EditorIndex).Stat(Stats.intelligence)
-            .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.Speed)
+            .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.Spirit)
             .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.Luck)
             .scrlVit.Value = Npc(EditorIndex).Stat(Stats.Vitality)
 
@@ -1244,7 +1250,7 @@ Module GameEditors
         frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
         frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.intelligence)
         frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
-        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Speed)
+        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Spirit)
 
 
         If Classes(EditorIndex).BaseExp < 10 Then

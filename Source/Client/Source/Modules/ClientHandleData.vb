@@ -364,7 +364,7 @@
                 .Stat(Stats.Vitality) = Buffer.ReadInteger
                 .Stat(Stats.intelligence) = Buffer.ReadInteger
                 .Stat(Stats.Luck) = Buffer.ReadInteger
-                .Stat(Stats.Speed) = Buffer.ReadInteger
+                .Stat(Stats.Spirit) = Buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -454,12 +454,12 @@
                     .FemaleSprite(X) = Buffer.ReadInteger
                 Next
 
-                .Stat(Stats.strength) = Buffer.ReadInteger
+                .Stat(Stats.Strength) = Buffer.ReadInteger
                 .Stat(Stats.Endurance) = Buffer.ReadInteger
                 .Stat(Stats.Vitality) = Buffer.ReadInteger
-                .Stat(Stats.intelligence) = Buffer.ReadInteger
+                .Stat(Stats.Intelligence) = Buffer.ReadInteger
                 .Stat(Stats.Luck) = Buffer.ReadInteger
-                .Stat(Stats.Speed) = Buffer.ReadInteger
+                .Stat(Stats.Spirit) = Buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -500,6 +500,15 @@
             Amount = Buffer.ReadInteger
             SetPlayerInvItemNum(MyIndex, i, InvNum)
             SetPlayerInvItemValue(MyIndex, i, Amount)
+
+            Player(MyIndex).RandInv(i).Prefix = Buffer.ReadString
+            Player(MyIndex).RandInv(i).Suffix = Buffer.ReadString
+            Player(MyIndex).RandInv(i).Rarity = Buffer.ReadInteger
+            For n = 1 To Stats.Count - 1
+                Player(MyIndex).RandInv(i).Stat(n) = Buffer.ReadInteger
+            Next
+            Player(MyIndex).RandInv(i).Damage = Buffer.ReadInteger
+            Player(MyIndex).RandInv(i).Speed = Buffer.ReadInteger
         Next
 
         ' changes to inventory, need to clear any drop menu
@@ -512,7 +521,7 @@
     End Sub
 
     Private Sub Packet_PlayerInvUpdate(ByVal data() As Byte)
-        Dim n As Integer
+        Dim n As Integer, i As Integer
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -522,6 +531,15 @@
         n = Buffer.ReadInteger
         SetPlayerInvItemNum(MyIndex, n, Buffer.ReadInteger)
         SetPlayerInvItemValue(MyIndex, n, Buffer.ReadInteger)
+
+        Player(MyIndex).RandInv(n).Prefix = Buffer.ReadString
+        Player(MyIndex).RandInv(n).Suffix = Buffer.ReadString
+        Player(MyIndex).RandInv(n).Rarity = Buffer.ReadInteger
+        For i = 1 To Stats.Count - 1
+            Player(MyIndex).RandInv(n).Stat(i) = Buffer.ReadInteger
+        Next
+        Player(MyIndex).RandInv(n).Damage = Buffer.ReadInteger
+        Player(MyIndex).RandInv(n).Speed = Buffer.ReadInteger
 
         ' changes, clear drop menu
         frmMainGame.pnlCurrency.Visible = False
@@ -533,18 +551,27 @@
     End Sub
 
     Private Sub Packet_PlayerWornEquipment(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As ByteBuffer, i As Integer, n As Integer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SPlayerWornEq Then Exit Sub
 
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Armor)
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Weapon)
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Helmet)
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Shield)
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Shoes)
-        SetPlayerEquipment(MyIndex, Buffer.ReadInteger, EquipmentType.Gloves)
+        For i = 1 To EquipmentType.Count - 1
+            SetPlayerEquipment(MyIndex, Buffer.ReadInteger, i)
+        Next
+
+        For i = 1 To EquipmentType.Count - 1
+            Player(MyIndex).RandEquip(i).Prefix = Buffer.ReadString
+            Player(MyIndex).RandEquip(i).Suffix = Buffer.ReadString
+            Player(MyIndex).RandEquip(i).Damage = Buffer.ReadInteger
+            Player(MyIndex).RandEquip(i).Speed = Buffer.ReadInteger
+            Player(MyIndex).RandEquip(i).Rarity = Buffer.ReadInteger
+
+            For n = 1 To Stats.Count - 1
+                Player(MyIndex).RandEquip(i).Stat(n) = Buffer.ReadInteger
+            Next
+        Next
 
         ' changes to inventory, need to clear any drop menu
 
@@ -1339,7 +1366,7 @@
         Item(n).Data1 = Buffer.ReadInteger()
         Item(n).Data2 = Buffer.ReadInteger()
         Item(n).Data3 = Buffer.ReadInteger()
-        Item(n).Handed = Buffer.ReadInteger()
+        Item(n).TwoHanded = Buffer.ReadInteger()
         Item(n).LevelReq = Buffer.ReadInteger()
         Item(n).Mastery = Buffer.ReadInteger()
         Item(n).Name = Trim$(Buffer.ReadString())
@@ -2109,12 +2136,12 @@
                     .FemaleSprite(x) = buffer.ReadInteger
                 Next
 
-                .Stat(Stats.strength) = buffer.ReadInteger
+                .Stat(Stats.Strength) = buffer.ReadInteger
                 .Stat(Stats.Endurance) = buffer.ReadInteger
                 .Stat(Stats.Vitality) = buffer.ReadInteger
-                .Stat(Stats.intelligence) = buffer.ReadInteger
+                .Stat(Stats.Intelligence) = buffer.ReadInteger
                 .Stat(Stats.Luck) = buffer.ReadInteger
-                .Stat(Stats.Speed) = buffer.ReadInteger
+                .Stat(Stats.Spirit) = buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -2158,7 +2185,7 @@
             Item(n).Data1 = buffer.ReadInteger()
             Item(n).Data2 = buffer.ReadInteger()
             Item(n).Data3 = buffer.ReadInteger()
-            Item(n).Handed = buffer.ReadInteger()
+            Item(n).TwoHanded = buffer.ReadInteger()
             Item(n).LevelReq = buffer.ReadInteger()
             Item(n).Mastery = buffer.ReadInteger()
             Item(n).Name = Trim$(buffer.ReadString())
@@ -2181,6 +2208,8 @@
 
             Item(n).Type = buffer.ReadInteger()
             Item(n).SubType = buffer.ReadInteger
+
+            Item(n).ItemLevel = buffer.ReadInteger
 
             'Housing
             Item(n).FurnitureWidth = buffer.ReadInteger()

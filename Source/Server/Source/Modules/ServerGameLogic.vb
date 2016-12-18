@@ -41,7 +41,7 @@
             Case Vitals.MP
                 GetNpcMaxVital = Npc(NpcNum).Stat(Stats.intelligence) * 2
             Case Vitals.SP
-                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.Speed) * 2
+                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.Spirit) * 2
         End Select
 
     End Function
@@ -197,33 +197,7 @@
 
     End Sub
 
-    Sub PlayerSwitchInvSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
-        Dim OldNum As Integer
-        Dim OldValue As Integer
-        Dim NewNum As Integer
-        Dim NewValue As Integer
 
-        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
-
-        OldNum = GetPlayerInvItemNum(Index, oldSlot)
-        OldValue = GetPlayerInvItemValue(Index, oldSlot)
-        NewNum = GetPlayerInvItemNum(Index, newSlot)
-        NewValue = GetPlayerInvItemValue(Index, newSlot)
-
-        If OldNum = NewNum And Item(NewNum).Stackable = 1 Then ' same item, if we can stack it, lets do that :P
-            SetPlayerInvItemNum(Index, newSlot, NewNum)
-            SetPlayerInvItemValue(Index, newSlot, OldValue + NewValue)
-            SetPlayerInvItemNum(Index, oldSlot, 0)
-            SetPlayerInvItemValue(Index, oldSlot, 0)
-        Else
-            SetPlayerInvItemNum(Index, newSlot, OldNum)
-            SetPlayerInvItemValue(Index, newSlot, OldValue)
-            SetPlayerInvItemNum(Index, oldSlot, NewNum)
-            SetPlayerInvItemValue(Index, oldSlot, NewValue)
-        End If
-
-        SendInventory(Index)
-    End Sub
 
     Sub SpawnMapItems(ByVal MapNum As Integer)
         Dim x As Integer
@@ -710,43 +684,6 @@
         Buffer = Nothing
     End Sub
 
-    Sub PlayerSwitchBankSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
-        Dim OldNum As Integer
-        Dim OldValue As Integer
-        Dim NewNum As Integer
-        Dim NewValue As Integer
 
-        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
-
-        OldNum = GetPlayerBankItemNum(Index, oldSlot)
-        OldValue = GetPlayerBankItemValue(Index, oldSlot)
-        NewNum = GetPlayerBankItemNum(Index, newSlot)
-        NewValue = GetPlayerBankItemValue(Index, newSlot)
-
-        SetPlayerBankItemNum(Index, newSlot, OldNum)
-        SetPlayerBankItemValue(Index, newSlot, OldValue)
-
-        SetPlayerBankItemNum(Index, oldSlot, NewNum)
-        SetPlayerBankItemValue(Index, oldSlot, NewValue)
-
-        SendBank(Index)
-    End Sub
-
-
-    Sub PlayerUnequipItem(ByVal Index As Integer, ByVal EqSlot As Integer)
-
-        If EqSlot <= 0 Or EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
-        If FindOpenInvSlot(Index, GetPlayerEquipment(Index, EqSlot)) > 0 Then
-            GiveInvItem(Index, GetPlayerEquipment(Index, EqSlot), 0)
-            PlayerMsg(Index, "You unequip " & CheckGrammar(Item(GetPlayerEquipment(Index, EqSlot)).Name), ColorType.Yellow)
-            SetPlayerEquipment(Index, 0, EqSlot)
-            SendWornEquipment(Index)
-            SendMapEquipment(Index)
-            SendStats(Index)
-        Else
-            PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
-        End If
-
-    End Sub
 
 End Module

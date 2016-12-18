@@ -232,7 +232,7 @@
                 .Stat(Stats.Vitality) = Buffer.ReadInteger
                 .Stat(Stats.intelligence) = Buffer.ReadInteger
                 .Stat(Stats.Luck) = Buffer.ReadInteger
-                .Stat(Stats.Speed) = Buffer.ReadInteger
+                .Stat(Stats.Spirit) = Buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -620,7 +620,9 @@
         Next
 
         Item(n).Type = Buffer.ReadInteger()
-        Item(n).subType = Buffer.ReadInteger()
+        Item(n).SubType = Buffer.ReadInteger()
+
+        Item(n).ItemLevel = Buffer.ReadInteger()
 
         'Housing
         Item(n).FurnitureWidth = Buffer.ReadInteger()
@@ -952,7 +954,7 @@
                 .Stat(Stats.Vitality) = buffer.ReadInteger
                 .Stat(Stats.intelligence) = buffer.ReadInteger
                 .Stat(Stats.Luck) = buffer.ReadInteger
-                .Stat(Stats.Speed) = buffer.ReadInteger
+                .Stat(Stats.Spirit) = buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
@@ -1019,6 +1021,8 @@
 
             Item(n).Type = buffer.ReadInteger()
             Item(n).SubType = buffer.ReadInteger()
+
+            Item(n).ItemLevel = buffer.ReadInteger()
 
             'Housing
             Item(n).FurnitureWidth = buffer.ReadInteger()

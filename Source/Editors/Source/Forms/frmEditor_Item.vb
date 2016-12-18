@@ -139,7 +139,7 @@ Public Class frmEditor_Item
 
     Private Sub scrlSprReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprReq.ValueChanged
         lblSprReq.Text = "Spr: " & scrlSprReq.Value
-        Item(EditorIndex).Stat_Req(Stats.Speed) = scrlSprReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Spirit) = scrlSprReq.Value
     End Sub
 
     Private Sub scrlVitalMod_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVitalMod.ValueChanged
@@ -219,7 +219,7 @@ Public Class frmEditor_Item
     Private Sub scrlAddSpr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddSpr.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddSpr.Text = "+Spr: " & scrlAddSpr.Value
-        Item(EditorIndex).Add_Stat(Stats.Speed) = scrlAddSpr.Value
+        Item(EditorIndex).Add_Stat(Stats.Spirit) = scrlAddSpr.Value
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
@@ -448,4 +448,13 @@ Public Class frmEditor_Item
 
         Item(EditorIndex).SubType = cmbSubType.SelectedIndex
     End Sub
+
+    Private Sub scrlItemLevel_ValueChanged(sender As Object, e As EventArgs) Handles scrlItemLevel.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        Item(EditorIndex).ItemLevel = scrlItemLevel.Value
+
+        lblItemLvl.Text = "Item Level: " & scrlItemLevel.Value
+    End Sub
+
 End Class

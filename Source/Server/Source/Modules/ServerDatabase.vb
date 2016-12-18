@@ -101,7 +101,7 @@ Module ServerDatabase
             Classes(i).Stat(Stats.Vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
             Classes(i).Stat(Stats.Luck) = Val(Getvar(filename, "CLASS" & i, "Luck"))
             Classes(i).Stat(Stats.intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
-            Classes(i).Stat(Stats.Speed) = Val(Getvar(filename, "CLASS" & i, "Speed"))
+            Classes(i).Stat(Stats.Spirit) = Val(Getvar(filename, "CLASS" & i, "Speed"))
 
             ' loop for items & values
             For x = 1 To 5
@@ -150,12 +150,12 @@ Module ServerDatabase
 
             tmpstring = ""
 
-            PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.strength)))
+            PutVar(filename, "CLASS" & i, "Str", Str(Classes(i).Stat(Stats.Strength)))
             PutVar(filename, "CLASS" & i, "End", Str(Classes(i).Stat(Stats.Endurance)))
             PutVar(filename, "CLASS" & i, "Vit", Str(Classes(i).Stat(Stats.Vitality)))
             PutVar(filename, "CLASS" & i, "Luck", Str(Classes(i).Stat(Stats.Luck)))
-            PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.intelligence)))
-            PutVar(filename, "CLASS" & i, "Speed", Str(Classes(i).Stat(Stats.Speed)))
+            PutVar(filename, "CLASS" & i, "Int", Str(Classes(i).Stat(Stats.Intelligence)))
+            PutVar(filename, "CLASS" & i, "Speed", Str(Classes(i).Stat(Stats.Spirit)))
             ' loop for items & values
             For x = 1 To 5
                 PutVar(filename, "CLASS" & i, "StartItem" & x, Str(Classes(i).StartItem(x)))
@@ -178,9 +178,9 @@ Module ServerDatabase
             Case Vitals.HP
                 GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Vitality) \ 2) + Classes(ClassNum).Stat(Stats.Vitality)) * 2
             Case Vitals.MP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.intelligence) \ 2) + Classes(ClassNum).Stat(Stats.intelligence)) * 2
+                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Intelligence) \ 2) + Classes(ClassNum).Stat(Stats.Intelligence)) * 2
             Case Vitals.SP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Speed) \ 2) + Classes(ClassNum).Stat(Stats.Speed)) * 2
+                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(Stats.Spirit) \ 2) + Classes(ClassNum).Stat(Stats.Spirit)) * 2
         End Select
 
     End Function
@@ -1710,17 +1710,6 @@ Module ServerDatabase
 
         For i = 0 To EquipmentType.Count - 1
             Player(Index).Character(CharNum).Equipment(i) = 0
-
-            Player(Index).Character(CharNum).RandEquip(i).Prefix = ""
-            Player(Index).Character(CharNum).RandEquip(i).Suffix = ""
-            Player(Index).Character(CharNum).RandEquip(i).Rarity = 0
-            Player(Index).Character(CharNum).RandEquip(i).Damage = 0
-            Player(Index).Character(CharNum).RandEquip(i).Speed = 0
-
-            ReDim Player(Index).Character(CharNum).RandEquip(i).Stat(Stats.Count - 1)
-            For x = 1 To Stats.Count - 1
-                Player(Index).Character(CharNum).RandEquip(i).Stat(x) = 0
-            Next
         Next
 
         For i = 0 To MAX_INV
@@ -2121,6 +2110,17 @@ Module ServerDatabase
                 If Classes(ClassNum).StartItem(n) > 0 Then
                     Player(Index).Character(CharNum).Inv(n).Num = Classes(ClassNum).StartItem(n)
                     Player(Index).Character(CharNum).Inv(n).Value = Classes(ClassNum).StartValue(n)
+
+                    If Item(Classes(ClassNum).StartItem(n)).Randomize Then
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Prefix = ""
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Suffix = ""
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Rarity = RarityType.RARITY_COMMON
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Damage = Item(Classes(ClassNum).StartItem(n)).Data2
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Speed = Item(Classes(ClassNum).StartItem(n)).Speed
+                        For i = 1 To Stats.Count - 1
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Stat(i) = Item(Classes(ClassNum).StartItem(n)).Add_Stat(i)
+                        Next
+                    End If
                 End If
             Next
 
@@ -2342,12 +2342,12 @@ Module ServerDatabase
                 Buffer.WriteInteger(Classes(i).FemaleSprite(q))
             Next
 
-            Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Strength))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))
@@ -2422,6 +2422,8 @@ Module ServerDatabase
 
         Buffer.WriteInteger(Item(itemNum).Type)
         Buffer.WriteInteger(Item(itemNum).SubType)
+
+        Buffer.WriteInteger(Item(itemNum).ItemLevel)
 
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)

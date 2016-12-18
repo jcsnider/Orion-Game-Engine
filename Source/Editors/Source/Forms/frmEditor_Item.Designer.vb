@@ -108,6 +108,8 @@ Partial Class frmEditor_Item
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tabInfo = New System.Windows.Forms.TabControl()
         Me.tabPageInfo = New System.Windows.Forms.TabPage()
+        Me.lblItemLvl = New System.Windows.Forms.Label()
+        Me.scrlItemLevel = New System.Windows.Forms.HScrollBar()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmbSubType = New System.Windows.Forms.ComboBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
@@ -174,7 +176,7 @@ Partial Class frmEditor_Item
         'scrlRarity
         '
         Me.scrlRarity.LargeChange = 1
-        Me.scrlRarity.Location = New System.Drawing.Point(302, 82)
+        Me.scrlRarity.Location = New System.Drawing.Point(300, 71)
         Me.scrlRarity.Name = "scrlRarity"
         Me.scrlRarity.Size = New System.Drawing.Size(123, 17)
         Me.scrlRarity.TabIndex = 38
@@ -184,7 +186,7 @@ Partial Class frmEditor_Item
         Me.cmbBind.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBind.FormattingEnabled = True
         Me.cmbBind.Items.AddRange(New Object() {"None", "Bind on Pickup", "Bind on Equip"})
-        Me.cmbBind.Location = New System.Drawing.Point(302, 46)
+        Me.cmbBind.Location = New System.Drawing.Point(300, 47)
         Me.cmbBind.Name = "cmbBind"
         Me.cmbBind.Size = New System.Drawing.Size(123, 21)
         Me.cmbBind.TabIndex = 37
@@ -201,7 +203,7 @@ Partial Class frmEditor_Item
         'lblRarity
         '
         Me.lblRarity.AutoSize = True
-        Me.lblRarity.Location = New System.Drawing.Point(238, 82)
+        Me.lblRarity.Location = New System.Drawing.Point(238, 75)
         Me.lblRarity.Name = "lblRarity"
         Me.lblRarity.Size = New System.Drawing.Size(46, 13)
         Me.lblRarity.TabIndex = 8
@@ -210,7 +212,7 @@ Partial Class frmEditor_Item
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(238, 49)
+        Me.Label2.Location = New System.Drawing.Point(238, 50)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 7
@@ -243,7 +245,7 @@ Partial Class frmEditor_Item
         '
         'scrlPrice
         '
-        Me.scrlPrice.Location = New System.Drawing.Point(78, 84)
+        Me.scrlPrice.Location = New System.Drawing.Point(78, 86)
         Me.scrlPrice.Maximum = 100000
         Me.scrlPrice.Name = "scrlPrice"
         Me.scrlPrice.Size = New System.Drawing.Size(143, 18)
@@ -498,7 +500,6 @@ Partial Class frmEditor_Item
         Me.chkRandomize.TabIndex = 66
         Me.chkRandomize.Text = "Randomize Stats"
         Me.chkRandomize.UseVisualStyleBackColor = True
-        Me.chkRandomize.Visible = False
         '
         'Label5
         '
@@ -938,6 +939,8 @@ Partial Class frmEditor_Item
         '
         'tabPageInfo
         '
+        Me.tabPageInfo.Controls.Add(Me.lblItemLvl)
+        Me.tabPageInfo.Controls.Add(Me.scrlItemLevel)
         Me.tabPageInfo.Controls.Add(Me.Label9)
         Me.tabPageInfo.Controls.Add(Me.cmbSubType)
         Me.tabPageInfo.Controls.Add(Me.fraSkill)
@@ -968,6 +971,24 @@ Partial Class frmEditor_Item
         Me.tabPageInfo.TabIndex = 0
         Me.tabPageInfo.Text = "Info"
         Me.tabPageInfo.UseVisualStyleBackColor = True
+        '
+        'lblItemLvl
+        '
+        Me.lblItemLvl.AutoSize = True
+        Me.lblItemLvl.Location = New System.Drawing.Point(239, 115)
+        Me.lblItemLvl.Name = "lblItemLvl"
+        Me.lblItemLvl.Size = New System.Drawing.Size(59, 13)
+        Me.lblItemLvl.TabIndex = 75
+        Me.lblItemLvl.Text = "Item Level:"
+        '
+        'scrlItemLevel
+        '
+        Me.scrlItemLevel.Location = New System.Drawing.Point(326, 111)
+        Me.scrlItemLevel.Minimum = 1
+        Me.scrlItemLevel.Name = "scrlItemLevel"
+        Me.scrlItemLevel.Size = New System.Drawing.Size(97, 19)
+        Me.scrlItemLevel.TabIndex = 74
+        Me.scrlItemLevel.Value = 1
         '
         'Label9
         '
@@ -1036,7 +1057,7 @@ Partial Class frmEditor_Item
         'chkStackable
         '
         Me.chkStackable.AutoSize = True
-        Me.chkStackable.Location = New System.Drawing.Point(302, 111)
+        Me.chkStackable.Location = New System.Drawing.Point(300, 91)
         Me.chkStackable.Name = "chkStackable"
         Me.chkStackable.Size = New System.Drawing.Size(74, 17)
         Me.chkStackable.TabIndex = 67
@@ -1227,4 +1248,6 @@ Partial Class frmEditor_Item
     Friend WithEvents numMin As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label9 As Label
     Friend WithEvents cmbSubType As ComboBox
+    Friend WithEvents lblItemLvl As Label
+    Friend WithEvents scrlItemLevel As HScrollBar
 End Class

@@ -2332,7 +2332,7 @@ Module ClientGraphics
     End Sub
 
     Sub DrawEquipment()
-        Dim i As Integer, itemnum As Integer, itempic As Integer
+        Dim i As Integer, itemnum As Integer, itempic As Integer, tmprarity As Byte
         Dim rec As Rectangle, rec_pos As Rectangle, playersprite As Integer
         Dim tmpSprite2 As Sprite = New Sprite(CharPanelGFX)
         Dim tempRarityColor As SFML.Graphics.Color
@@ -2390,7 +2390,13 @@ Module ClientGraphics
                 GameWindow.Draw(tmpSprite)
 
                 ' set the name
-                Select Case Item(itemnum).Rarity
+                If Item(itemnum).Randomize <> 0 Then
+                    tmprarity = Player(MyIndex).RandEquip(i).Rarity
+                Else
+                    tmprarity = Item(itemnum).Rarity
+                End If
+
+                Select Case tmprarity
                     Case 0 ' White
                         tempRarityColor = ITEM_RARITY_COLOR_0
                     Case 1 ' green
@@ -2440,7 +2446,7 @@ Module ClientGraphics
         'luck stat
         DrawText(CharWindowX + 210, CharWindowY + 110, "Luck: " & GetPlayerStat(MyIndex, Stats.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'spirit stat
-        DrawText(CharWindowX + 210, CharWindowY + 130, "Spirit: " & GetPlayerStat(MyIndex, Stats.Speed), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 130, "Spirit: " & GetPlayerStat(MyIndex, Stats.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
 
         If GetPlayerPOINTS(MyIndex) > 0 Then
             'strength upgrade
@@ -3230,7 +3236,11 @@ NextLoop:
         RenderTextures(DescriptionGFX, GameWindow, Xoffset - DescriptionGFXInfo.Width, Yoffset, 0, 0, DescriptionGFXInfo.Width, DescriptionGFXInfo.Height)
 
         'name
-        DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 12, ItemDescName, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
+        For Each str As String In WordWrap(ItemDescName, 22)
+            'description
+            DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 12 + y, str, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
+            y = y + 15
+        Next
 
 
         If ShiftDown Or VbKeyShift = True Then

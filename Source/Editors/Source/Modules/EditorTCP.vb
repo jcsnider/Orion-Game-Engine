@@ -338,6 +338,8 @@ Module EditorTCP
         Buffer.WriteInteger(Item(itemNum).Type)
         Buffer.WriteInteger(Item(itemNum).SubType)
 
+        Buffer.WriteInteger(Item(itemNum).ItemLevel)
+
         'Housing
         Buffer.WriteInteger(Item(itemNum).FurnitureWidth)
         Buffer.WriteInteger(Item(itemNum).FurnitureHeight)
@@ -663,7 +665,7 @@ Module EditorTCP
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.Speed))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
                 Buffer.WriteInteger(Classes(i).StartItem(q))

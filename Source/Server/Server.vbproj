@@ -110,6 +110,7 @@
     <Compile Include="Source\Modules\ServerLoop.vb" />
     <Compile Include="Source\Modules\ServerProjectiles.vb" />
     <Compile Include="Source\Modules\ServerQuest.vb" />
+    <Compile Include="Source\Modules\ServerRandomItems.vb" />
     <Compile Include="Source\Modules\ServerResources.vb" />
     <Compile Include="Source\Modules\ServerTCP.vb" />
     <Compile Include="Source\Modules\ServerTypes.vb" />

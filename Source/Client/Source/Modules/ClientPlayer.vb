@@ -753,12 +753,11 @@ Module ClientPlayer
         Player(Index).AttackTimer = 0
         Player(Index).Classes = 0
         Player(Index).Dir = 0
-        Player(Index).Equipment(EquipmentType.Armor) = 0
-        Player(Index).Equipment(EquipmentType.Helmet) = 0
-        Player(Index).Equipment(EquipmentType.Shield) = 0
-        Player(Index).Equipment(EquipmentType.Weapon) = 0
-        Player(Index).Equipment(EquipmentType.Shoes) = 0
-        Player(Index).Equipment(EquipmentType.Gloves) = 0
+
+        For y = 1 To EquipmentType.Count - 1
+            Player(Index).Equipment(y) = 0
+        Next
+
         Player(Index).EXP = 0
         Player(Index).Level = 0
         Player(Index).Map = 0
@@ -770,19 +769,33 @@ Module ClientPlayer
         Player(Index).PK = 0
         Player(Index).POINTS = 0
         Player(Index).Sprite = 0
-        Player(Index).Stat(Stats.Endurance) = 0
-        Player(Index).Stat(Stats.intelligence) = 0
-        Player(Index).Stat(Stats.Speed) = 0
-        Player(Index).Stat(Stats.strength) = 0
-        Player(Index).Stat(Stats.Vitality) = 0
-        Player(Index).Stat(Stats.Luck) = 0
+
+        For x = 1 To Stats.Count - 1
+            Player(Index).Stat(x) = 0
+        Next
+
         Player(Index).Steps = 0
+
         Player(Index).Vital(Vitals.HP) = 0
         Player(Index).Vital(Vitals.MP) = 0
         Player(Index).Vital(Vitals.SP) = 0
+
         Player(Index).X = 0
         Player(Index).XOffset = 0
         Player(Index).Y = 0
         Player(Index).YOffset = 0
+
+        For y = 1 To EquipmentType.Count - 1
+            ReDim Player(Index).RandEquip(y).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Player(Index).RandEquip(y).Stat(x) = 0
+            Next
+        Next
+        For y = 1 To MAX_INV
+            ReDim Player(Index).RandInv(y).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Player(Index).RandInv(y).Stat(x) = 0
+            Next
+        Next
     End Sub
 End Module

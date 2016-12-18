@@ -842,24 +842,39 @@ Continue1:
         Buffer = Nothing
     End Sub
 
-    Public Sub UpdateDescWindow(ByVal itemnum As Integer, ByVal Amount As Integer, ByVal InvNum As Integer)
-        Dim FirstLetter As String
+    Public Sub UpdateDescWindow(ByVal itemnum As Integer, ByVal Amount As Integer, ByVal InvNum As Integer, ByVal WindowType As Byte)
+        Dim theName As String = "", tmpRarity As Integer
 
-        FirstLetter = LCase$(Left$(Trim$(Item(itemnum).Name), 1))
-
-        If FirstLetter = "$" Then
-            ItemDescName = (Mid$(Trim$(Item(itemnum).Name), 2, Len(Trim$(Item(itemnum).Name)) - 1))
+        If Item(itemnum).Randomize <> 0 And InvNum <> 0 Then
+            If WindowType = 0 Then ' inventory
+                theName = Trim(Player(MyIndex).RandInv(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandInv(InvNum).Suffix)
+                tmpRarity = Player(MyIndex).RandInv(InvNum).Rarity
+            ElseIf WindowType = 1 Then ' equip
+                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
+                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+            ElseIf WindowType = 2 Then ' bank
+                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
+                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+            ElseIf WindowType = 3 Then ' shop
+                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
+                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+            ElseIf WindowType = 4 Then ' trade
+                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
+                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+            End If
         Else
-            ItemDescName = Trim$(Item(itemnum).Name)
+            theName = Trim$(Item(itemnum).Name)
+            tmpRarity = Item(itemnum).Rarity
         End If
 
-        ItemDescItemNum = itemnum
+        ItemDescName = theName
 
+        ItemDescItemNum = itemnum
 
         If LastItemDesc = itemnum Then Exit Sub
 
         ' set the name
-        Select Case Item(itemnum).Rarity
+        Select Case tmpRarity
             Case 0 ' White
                 ItemDescRarityColor = ITEM_RARITY_COLOR_0
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
@@ -869,7 +884,7 @@ Continue1:
             Case 2 ' blue
                 ItemDescRarityColor = ITEM_RARITY_COLOR_2
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
-            Case 3 ' maroon
+            Case 3 ' red
                 ItemDescRarityColor = ITEM_RARITY_COLOR_3
                 ItemDescRarityBackColor = SFML.Graphics.Color.Black
             Case 4 ' purple
@@ -890,8 +905,17 @@ Continue1:
 
             Case ItemType.Equipment
                 Select Case Item(itemnum).SubType
+
                     Case EquipmentType.Weapon
-                        ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                        If Item(itemnum).Randomize <> 0 Then
+                            If WindowType = 0 Then
+                                ItemDescInfo = "Damage: " & Player(MyIndex).RandInv(InvNum).Damage
+                            Else
+                                ItemDescInfo = "Damage: " & Player(MyIndex).RandEquip(InvNum).Damage
+                            End If
+                        Else
+                            ItemDescInfo = "Damage: " & Item(itemnum).Data2
+                        End If
                         ItemDescType = "Weapon"
                     Case EquipmentType.Armor
                         ItemDescInfo = "Defence: " & Item(itemnum).Data2
@@ -975,47 +999,165 @@ Continue1:
         End If
 
         ' Equipment specific
-        If Item(itemnum).Add_Stat(Stats.strength) > 0 Then
-            ItemDescStr = "+" & Item(itemnum).Add_Stat(Stats.strength)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Strength) > 0 Then
+                    ItemDescStr = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Strength)
+                Else
+                    ItemDescStr = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Strength) > 0 Then
+                    ItemDescStr = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Strength)
+                Else
+                    ItemDescStr = "None"
+                End If
+            End If
+
         Else
-            ItemDescStr = "None"
+            If Item(itemnum).Add_Stat(Stats.Strength) > 0 Then
+                ItemDescStr = "+" & Item(itemnum).Add_Stat(Stats.Strength)
+            Else
+                ItemDescStr = "None"
+            End If
         End If
 
-        If Item(itemnum).Add_Stat(Stats.Vitality) > 0 Then
-            ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.Vitality)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Vitality) > 0 Then
+                    ItemDescVit = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Vitality)
+                Else
+                    ItemDescVit = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Vitality) > 0 Then
+                    ItemDescVit = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Vitality)
+                Else
+                    ItemDescVit = "None"
+                End If
+            End If
         Else
-            ItemDescVit = "None"
+            If Item(itemnum).Add_Stat(Stats.Vitality) > 0 Then
+                ItemDescVit = "+" & Item(itemnum).Add_Stat(Stats.Vitality)
+            Else
+                ItemDescVit = "None"
+            End If
         End If
 
-        If Item(itemnum).Add_Stat(Stats.intelligence) > 0 Then
-            ItemDescInt = "+" & Item(itemnum).Add_Stat(Stats.intelligence)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Intelligence) > 0 Then
+                    ItemDescInt = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Intelligence)
+                Else
+                    ItemDescInt = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Intelligence) > 0 Then
+                    ItemDescInt = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Intelligence)
+                Else
+                    ItemDescInt = "None"
+                End If
+            End If
         Else
-            ItemDescInt = "None"
+            If Item(itemnum).Add_Stat(Stats.Intelligence) > 0 Then
+                ItemDescInt = "+" & Item(itemnum).Add_Stat(Stats.Intelligence)
+            Else
+                ItemDescInt = "None"
+            End If
         End If
 
-        If Item(itemnum).Add_Stat(Stats.Endurance) > 0 Then
-            ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.Endurance)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Endurance) > 0 Then
+                    ItemDescEnd = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Endurance)
+                Else
+                    ItemDescEnd = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Endurance) > 0 Then
+                    ItemDescEnd = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Endurance)
+                Else
+                    ItemDescEnd = "None"
+                End If
+            End If
+
         Else
-            ItemDescEnd = "None"
+            If Item(itemnum).Add_Stat(Stats.Endurance) > 0 Then
+                ItemDescEnd = "+" & Item(itemnum).Add_Stat(Stats.Endurance)
+            Else
+                ItemDescEnd = "None"
+            End If
         End If
 
-        If Item(itemnum).Add_Stat(Stats.Luck) > 0 Then
-            ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.Luck)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Luck) > 0 Then
+                    ItemDescLuck = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Luck)
+                Else
+                    ItemDescLuck = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Luck) > 0 Then
+                    ItemDescLuck = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Luck)
+                Else
+                    ItemDescLuck = "None"
+                End If
+            End If
+
         Else
-            ItemDescLuck = "None"
+            If Item(itemnum).Add_Stat(Stats.Luck) > 0 Then
+                ItemDescLuck = "+" & Item(itemnum).Add_Stat(Stats.Luck)
+            Else
+                ItemDescLuck = "None"
+            End If
         End If
 
-        If Item(itemnum).Add_Stat(Stats.Speed) > 0 Then
-            ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.Speed)
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Player(MyIndex).RandInv(InvNum).Stat(Stats.Spirit) > 0 Then
+                    ItemDescSpr = "+" & Player(MyIndex).RandInv(InvNum).Stat(Stats.Spirit)
+                Else
+                    ItemDescSpr = "None"
+                End If
+            Else
+                If Player(MyIndex).RandEquip(InvNum).Stat(Stats.Spirit) > 0 Then
+                    ItemDescSpr = "+" & Player(MyIndex).RandEquip(InvNum).Stat(Stats.Spirit)
+                Else
+                    ItemDescSpr = "None"
+                End If
+            End If
+
         Else
-            ItemDescSpr = "None"
+            If Item(itemnum).Add_Stat(Stats.Spirit) > 0 Then
+                ItemDescSpr = "+" & Item(itemnum).Add_Stat(Stats.Spirit)
+            Else
+                ItemDescSpr = "None"
+            End If
         End If
 
-        If Item(itemnum).SubType = EquipmentType.Weapon Then
-            ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
+        If Item(itemnum).Randomize <> 0 Then
+            If WindowType = 0 Then
+                If Item(itemnum).SubType = EquipmentType.Weapon Then
+                    ItemDescSpeed = Player(MyIndex).RandInv(InvNum).Speed / 1000 & " secs"
+                Else
+                    ItemDescSpeed = "N/A"
+                End If
+            Else
+                If Item(itemnum).SubType = EquipmentType.Weapon Then
+                    ItemDescSpeed = Player(MyIndex).RandEquip(InvNum).Speed / 1000 & " secs"
+                Else
+                    ItemDescSpeed = "N/A"
+                End If
+            End If
+
         Else
-            ItemDescSpeed = "N/A"
+            If Item(itemnum).SubType = EquipmentType.Weapon Then
+                ItemDescSpeed = Item(itemnum).Speed / 1000 & " secs"
+            Else
+                ItemDescSpeed = "N/A"
+            End If
         End If
+
 
     End Sub
 

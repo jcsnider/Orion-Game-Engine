@@ -45,7 +45,7 @@
             Case Vitals.MP
                 GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.intelligence) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.intelligence)) * 2
             Case Vitals.SP
-                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.Speed) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.Speed)) * 2
+                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.Spirit) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.Spirit)) * 2
         End Select
 
     End Function
@@ -841,7 +841,7 @@
     End Function
 
     Function GetPlayerNextLevel(ByVal Index As Integer) As Integer
-        GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.Strength) + GetPlayerStat(Index, Stats.Endurance) + GetPlayerStat(Index, Stats.Intelligence) + GetPlayerStat(Index, Stats.Speed) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * Classes(GetPlayerClass(Index)).BaseExp '25
+        GetPlayerNextLevel = ((GetPlayerLevel(Index) + 1) * (GetPlayerStat(Index, Stats.Strength) + GetPlayerStat(Index, Stats.Endurance) + GetPlayerStat(Index, Stats.Intelligence) + GetPlayerStat(Index, Stats.Spirit) + GetPlayerPOINTS(Index)) + StatPtsPerLvl) * Classes(GetPlayerClass(Index)).BaseExp '25
     End Function
 
     Function GetPlayerExp(ByVal Index As Integer) As Integer
@@ -929,7 +929,7 @@
     End Sub
 
     Sub PlayerMapGetItem(ByVal Index As Integer)
-        Dim i As Integer
+        Dim i As Integer, itemnum As Integer
         Dim n As Integer
         Dim MapNum As Integer
         Dim Msg As String
@@ -952,6 +952,23 @@
                             ' Open slot available?
                             If n <> 0 Then
                                 ' Set item in players inventor
+                                itemnum = MapItem(MapNum, i).Num
+
+                                If Item(itemnum).Randomize <> 0 Then
+                                    If Trim(MapItem(MapNum, i).RandData.Prefix) <> "" Or Trim(MapItem(MapNum, i).RandData.Suffix) <> "" Then
+                                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Prefix = MapItem(MapNum, i).RandData.Prefix
+                                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Suffix = MapItem(MapNum, i).RandData.Suffix
+                                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Rarity = MapItem(MapNum, i).RandData.Rarity
+                                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Damage = MapItem(MapNum, i).RandData.Damage
+                                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Speed = MapItem(MapNum, i).RandData.Speed
+                                        For m = 1 To Stats.Count - 1
+                                            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(n).Stat(m) = MapItem(GetPlayerMap(Index), i).RandData.Stat(m)
+                                        Next m
+                                    Else ' Nothing has been generated yet!
+                                        GivePlayerRandomItem(Index, itemnum, n)
+                                    End If
+                                End If
+
                                 SetPlayerInvItemNum(Index, n, MapItem(MapNum, i).Num)
 
                                 If Item(GetPlayerInvItemNum(Index, n)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, n)).Stackable = 1 Then
@@ -1192,37 +1209,47 @@
     End Sub
 
     Sub GiveBankItem(ByVal Index As Integer, ByVal invSlot As Integer, ByVal amount As Integer)
-        Dim BankSlot
+        Dim BankSlot As Integer, itemnum As Integer
 
-        If invSlot < 0 Or invSlot > MAX_INV Then
-            Exit Sub
-        End If
+        If invSlot < 0 Or invSlot > MAX_INV Then Exit Sub
 
         If GetPlayerInvItemValue(Index, invSlot) < 0 Then Exit Sub
-        If GetPlayerInvItemValue(Index, invSlot) < amount Then
-            Exit Sub
-        End If
+        If GetPlayerInvItemValue(Index, invSlot) < amount Then Exit Sub
+
 
         BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, invSlot))
+        itemnum = GetPlayerInvItemNum(Index, invSlot)
 
         If BankSlot > 0 Then
             If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, invSlot)).Stackable = 1 Then
                 If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) Then
-                    Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + amount)
-                    Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
+                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + amount)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
                 Else
-                    Call SetPlayerBankItemNum(Index, BankSlot, GetPlayerInvItemNum(Index, invSlot))
-                    Call SetPlayerBankItemValue(Index, BankSlot, amount)
-                    Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
+                    SetPlayerBankItemNum(Index, BankSlot, GetPlayerInvItemNum(Index, invSlot))
+                    SetPlayerBankItemValue(Index, BankSlot, amount)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
                 End If
             Else
-                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) Then
-                    Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + 1)
-                    Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), 0)
+                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) And Item(itemnum).Randomize = 0 Then
+                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + 1)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), 0)
                 Else
-                    Call SetPlayerBankItemNum(Index, BankSlot, GetPlayerInvItemNum(Index, invSlot))
-                    Call SetPlayerBankItemValue(Index, BankSlot, 1)
-                    Call TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), 0)
+                    Bank(Index).ItemRand(BankSlot).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Prefix
+                    Bank(Index).ItemRand(BankSlot).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Suffix
+                    Bank(Index).ItemRand(BankSlot).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Rarity
+                    Bank(Index).ItemRand(BankSlot).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Damage
+                    Bank(Index).ItemRand(BankSlot).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Speed
+
+                    For i = 1 To Stats.Count - 1
+                        Bank(Index).ItemRand(BankSlot).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Stat(i)
+                    Next
+
+                    SetPlayerBankItemNum(Index, BankSlot, itemnum)
+                    SetPlayerBankItemValue(Index, BankSlot, 1)
+                    ClearRandInv(Index, invSlot)
+                    SetPlayerInvItemNum(Index, invSlot, 0)
+                    SetPlayerInvItemValue(Index, invSlot, 0)
                 End If
             End If
         End If
@@ -1429,9 +1456,9 @@
             Case Vitals.HP
                 i = (GetPlayerStat(Index, Stats.Vitality) \ 2)
             Case Vitals.MP
-                i = (GetPlayerStat(Index, Stats.Speed) \ 2)
+                i = (GetPlayerStat(Index, Stats.Spirit) \ 2)
             Case Vitals.SP
-                i = (GetPlayerStat(Index, Stats.Speed) \ 2)
+                i = (GetPlayerStat(Index, Stats.Spirit) \ 2)
         End Select
 
         If i < 2 Then i = 2
@@ -1583,6 +1610,7 @@
 
     Public Sub UseItem(ByVal Index As Integer, ByVal InvNum As Integer)
         Dim InvItemNum As Integer, i As Integer, n As Integer, x As Integer, y As Integer, tempitem As Integer
+        Dim m As Integer, tempdata(Stats.Count + 3) As Long, tempstr(2) As String
 
         ' Prevent hacking
         If InvNum < 1 Or InvNum > MAX_ITEMS Then Exit Sub
@@ -1616,26 +1644,89 @@
                         Exit Sub
                     End If
 
+                    ' access requirement
+                    If Not GetPlayerAccess(Index) >= Item(InvItemNum).AccessReq Then
+                        PlayerMsg(Index, "You do not meet the access requirement to equip this item.", ColorType.BrightRed)
+                        Exit Sub
+                    End If
+
                     'if that went fine, we progress the subtype
 
                     Select Case Item(InvItemNum).SubType
                         Case EquipmentType.Weapon
 
+
+
+                            If Item(InvItemNum).TwoHanded > 0 Then
+                                If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
+                                    PlayerMsg(Index, "This is a 2Handed weapon! Please unequip shield first.", ColorType.BrightRed)
+                                    Exit Sub
+                                End If
+                            End If
+
                             If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Weapon)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Stat(i)
+                                Next
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Weapon)
-                            PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            TakeInvItem(Index, InvItemNum, 1)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Weapon).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
+                            If Item(InvItemNum).Randomize <> 0 Then
+                                PlayerMsg(Index, "You equip " & tempstr(1) & " " & CheckGrammar(Item(InvItemNum).Name) & " " & tempstr(2), ColorType.BrightGreen)
+                            Else
+                                PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            End If
+
+                            SetPlayerInvItemNum(Index, InvNum, 0)
+                            SetPlayerInvItemValue(Index, InvNum, 0)
+                            ClearRandInv(Index, InvNum)
+
+                            If tempitem > 0 Then ' give back the stored item
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+                            SendInventory(Index)
+                            SendInventoryUpdate(Index, InvNum)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1644,19 +1735,61 @@
 
                             If GetPlayerEquipment(Index, EquipmentType.Armor) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Armor)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Stat(i)
+                                Next
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Armor)
+
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Armor).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
                             PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
                             TakeInvItem(Index, InvItemNum, 0)
+                            ClearRandInv(Index, InvNum)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            If tempitem > 0 Then ' Return their old equipment to their inventory.
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next i
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+
+                            SendInventory(Index)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1665,39 +1798,126 @@
 
                             If GetPlayerEquipment(Index, EquipmentType.Helmet) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Helmet)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Stat(i)
+                                Next i
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Helmet)
+
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Helmet).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
                             PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
                             TakeInvItem(Index, InvItemNum, 1)
+                            ClearRandInv(Index, InvNum)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            If tempitem > 0 Then ' give back the stored item
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+                            SendInventory(Index)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
 
                         Case EquipmentType.Shield
+                            If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).TwoHanded > 0 Then
+                                PlayerMsg(Index, "Please unequip your 2handed weapon first.", ColorType.BrightRed)
+                                Exit Sub
+                            End If
+
                             If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Shield)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Stat(i)
+                                Next i
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shield)
+
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shield).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
                             PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
                             TakeInvItem(Index, InvItemNum, 1)
+                            ClearRandInv(Index, InvNum)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            If tempitem > 0 Then ' give back the stored item
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+                            SendInventory(Index)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1705,19 +1925,60 @@
                         Case EquipmentType.Shoes
                             If GetPlayerEquipment(Index, EquipmentType.Shoes) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Shoes)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Stat(i)
+                                Next i
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Shoes)
+
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Shoes).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
                             PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
                             TakeInvItem(Index, InvItemNum, 1)
+                            ClearRandInv(Index, InvNum)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            If tempitem > 0 Then ' give back the stored item
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+                            SendInventory(Index)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1725,19 +1986,60 @@
                         Case EquipmentType.Gloves
                             If GetPlayerEquipment(Index, EquipmentType.Gloves) > 0 Then
                                 tempitem = GetPlayerEquipment(Index, EquipmentType.Gloves)
+                                tempstr(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Prefix
+                                tempstr(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Suffix
+                                tempdata(1) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Damage
+                                tempdata(2) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Speed
+                                tempdata(3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Rarity
+                                For i = 1 To Stats.Count - 1
+                                    tempdata(i + 3) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Stat(i)
+                                Next i
                             End If
 
                             SetPlayerEquipment(Index, InvItemNum, EquipmentType.Gloves)
+
+                            ' Transfer the Inventory data to the Equipment data
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Prefix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Suffix
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Damage
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Speed
+                            Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Rarity
+
+                            For i = 1 To Stats.Count - 1
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EquipmentType.Gloves).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvNum).Stat(i)
+                            Next
+
                             PlayerMsg(Index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
                             TakeInvItem(Index, InvItemNum, 1)
+                            ClearRandInv(Index, InvNum)
 
-                            If tempitem > 0 Then
-                                GiveInvItem(Index, tempitem, 0) ' give back the stored item
+                            If tempitem > 0 Then ' give back the stored item
+                                m = FindOpenInvSlot(Index, tempitem)
+                                SetPlayerInvItemNum(Index, m, tempitem)
+                                SetPlayerInvItemValue(Index, m, 0)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = tempstr(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = tempstr(2)
+
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = tempdata(1)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = tempdata(2)
+                                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = tempdata(3)
+
+                                For i = 1 To Stats.Count - 1
+                                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = tempdata(i + 3)
+                                Next
+
                                 tempitem = 0
                             End If
 
                             SendWornEquipment(Index)
                             SendMapEquipment(Index)
+                            SendInventory(Index)
+                            SendStats(Index)
+
+                            ' send vitals
+                            SendVital(Index, Vitals.HP)
+                            SendVital(Index, Vitals.MP)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1763,6 +2065,12 @@
                     ' Make sure they are the right class
                     If Not Item(InvItemNum).ClassReq = GetPlayerClass(Index) And Not Item(InvItemNum).ClassReq = 0 Then
                         PlayerMsg(Index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
+                        Exit Sub
+                    End If
+
+                    ' access requirement
+                    If Not GetPlayerAccess(Index) >= Item(InvItemNum).AccessReq Then
+                        PlayerMsg(Index, "You do not meet the access requirement to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
 
@@ -1968,5 +2276,144 @@
             End Select
 
         End If
+    End Sub
+
+    Sub PlayerSwitchInvSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
+        Dim OldNum As Integer, OldValue As Integer, OldRarity As Integer, OldPrefix As String
+        Dim OldSuffix As String, OldSpeed As Integer, OldDamage As Integer
+        Dim NewNum As Integer, NewValue As Integer, NewRarity As Integer, NewPrefix As String
+        Dim NewSuffix As String, NewSpeed As Integer, NewDamage As Integer
+        Dim NewStats(0 To Stats.Count - 1) As Integer
+        Dim OldStats(0 To Stats.Count - 1) As Integer
+
+        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
+
+        OldNum = GetPlayerInvItemNum(Index, oldSlot)
+        OldValue = GetPlayerInvItemValue(Index, oldSlot)
+        NewNum = GetPlayerInvItemNum(Index, newSlot)
+        NewValue = GetPlayerInvItemValue(Index, newSlot)
+
+        If OldNum = NewNum And Item(NewNum).Stackable = 1 Then ' same item, if we can stack it, lets do that :P
+            SetPlayerInvItemNum(Index, newSlot, NewNum)
+            SetPlayerInvItemValue(Index, newSlot, OldValue + NewValue)
+            SetPlayerInvItemNum(Index, oldSlot, 0)
+            SetPlayerInvItemValue(Index, oldSlot, 0)
+        Else
+            SetPlayerInvItemNum(Index, newSlot, OldNum)
+            SetPlayerInvItemValue(Index, newSlot, OldValue)
+            SetPlayerInvItemNum(Index, oldSlot, NewNum)
+            SetPlayerInvItemValue(Index, oldSlot, NewValue)
+        End If
+
+        ' RandomInv
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(newSlot)
+            NewPrefix = .Prefix
+            NewSuffix = .Suffix
+            NewDamage = .Damage
+            NewSpeed = .Speed
+            NewRarity = .Rarity
+            For i = 1 To Stats.Count - 1
+                NewStats(i) = .Stat(i)
+            Next i
+        End With
+
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(oldSlot)
+            OldPrefix = .Prefix
+            OldSuffix = .Suffix
+            OldDamage = .Damage
+            OldSpeed = .Speed
+            OldRarity = .Rarity
+            For i = 1 To Stats.Count - 1
+                OldStats(i) = .Stat(i)
+            Next i
+        End With
+
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(newSlot)
+            .Prefix = OldPrefix
+            .Suffix = OldSuffix
+            .Damage = OldDamage
+            .Speed = OldSpeed
+            .Rarity = OldRarity
+            For i = 1 To Stats.Count - 1
+                .Stat(i) = OldStats(i)
+            Next i
+        End With
+
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(oldSlot)
+            .Prefix = NewPrefix
+            .Suffix = NewSuffix
+            .Damage = NewDamage
+            .Speed = NewSpeed
+            .Rarity = NewRarity
+            For i = 1 To Stats.Count - 1
+                .Stat(i) = NewStats(i)
+            Next i
+        End With
+
+        SendInventory(Index)
+    End Sub
+
+    Sub PlayerSwitchBankSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
+        Dim OldNum As Integer
+        Dim OldValue As Integer
+        Dim NewNum As Integer
+        Dim NewValue As Integer
+
+        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
+
+        OldNum = GetPlayerBankItemNum(Index, oldSlot)
+        OldValue = GetPlayerBankItemValue(Index, oldSlot)
+        NewNum = GetPlayerBankItemNum(Index, newSlot)
+        NewValue = GetPlayerBankItemValue(Index, newSlot)
+
+        SetPlayerBankItemNum(Index, newSlot, OldNum)
+        SetPlayerBankItemValue(Index, newSlot, OldValue)
+
+        SetPlayerBankItemNum(Index, oldSlot, NewNum)
+        SetPlayerBankItemValue(Index, oldSlot, NewValue)
+
+        SendBank(Index)
+    End Sub
+
+    Sub PlayerUnequipItem(ByVal Index As Integer, ByVal EqSlot As Integer)
+        Dim i As Integer, m As Integer, itemnum As Integer
+
+        If EqSlot <= 0 Or EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
+
+        If FindOpenInvSlot(Index, GetPlayerEquipment(Index, EqSlot)) > 0 Then
+            itemnum = GetPlayerEquipment(Index, EqSlot)
+
+            m = FindOpenInvSlot(Index, Player(Index).Character(TempPlayer(Index).CurChar).Equipment(EqSlot))
+            SetPlayerInvItemNum(Index, m, Player(Index).Character(TempPlayer(Index).CurChar).Equipment(EqSlot))
+            SetPlayerInvItemValue(Index, m, 0)
+
+            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Prefix
+            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Suffix
+            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Damage
+            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Speed
+            Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Rarity
+            For i = 1 To Stats.Count - 1
+                Player(Index).Character(TempPlayer(Index).CurChar).RandInv(m).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandEquip(EqSlot).Stat(i)
+            Next
+
+            ClearRandEq(Index, EqSlot)
+
+            PlayerMsg(Index, "You unequip " & CheckGrammar(Item(GetPlayerEquipment(Index, EqSlot)).Name), ColorType.Yellow)
+            ' remove equipment
+            SetPlayerEquipment(Index, 0, EqSlot)
+            SendWornEquipment(Index)
+            SendMapEquipment(Index)
+            SendStats(Index)
+            SendInventory(Index)
+            ' send vitals
+            SendVital(Index, Vitals.HP)
+            SendVital(Index, Vitals.MP)
+
+            ' send vitals to party if in one
+            If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
+        Else
+            PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
+        End If
+
     End Sub
 End Module

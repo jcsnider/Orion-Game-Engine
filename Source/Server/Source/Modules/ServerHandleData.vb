@@ -827,7 +827,7 @@
                 PlayerMsg(Index, "-=- Stats for " & GetPlayerName(i) & " -=-", ColorType.Yellow)
                 PlayerMsg(Index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
                 PlayerMsg(Index, "HP: " & GetPlayerVital(i, Vitals.HP) & "/" & GetPlayerMaxVital(i, Vitals.HP) & "  MP: " & GetPlayerVital(i, Vitals.MP) & "/" & GetPlayerMaxVital(i, Vitals.MP) & "  SP: " & GetPlayerVital(i, Vitals.SP) & "/" & GetPlayerMaxVital(i, Vitals.SP), ColorType.Yellow)
-                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.Strength) & "  Defense: " & GetPlayerStat(i, Stats.Endurance) & "  Magic: " & GetPlayerStat(i, Stats.Intelligence) & "  Speed: " & GetPlayerStat(i, Stats.Speed), ColorType.Yellow)
+                PlayerMsg(Index, "Strength: " & GetPlayerStat(i, Stats.Strength) & "  Defense: " & GetPlayerStat(i, Stats.Endurance) & "  Magic: " & GetPlayerStat(i, Stats.Intelligence) & "  Speed: " & GetPlayerStat(i, Stats.Spirit), ColorType.Yellow)
                 n = (GetPlayerStat(i, Stats.Strength) \ 2) + (GetPlayerLevel(i) \ 2)
                 i = (GetPlayerStat(i, Stats.Endurance) \ 2) + (GetPlayerLevel(i) \ 2)
 
@@ -967,7 +967,7 @@
         PlayerMsg(Index, "-=- Stats for " & GetPlayerName(Index) & " -=-", ColorType.Yellow)
         PlayerMsg(Index, "Level: " & GetPlayerLevel(Index) & "  Exp: " & GetPlayerExp(Index) & "/" & GetPlayerNextLevel(Index), ColorType.Yellow)
         PlayerMsg(Index, "HP: " & GetPlayerVital(Index, Vitals.HP) & "/" & GetPlayerMaxVital(Index, Vitals.HP) & "  MP: " & GetPlayerVital(Index, Vitals.MP) & "/" & GetPlayerMaxVital(Index, Vitals.MP) & "  SP: " & GetPlayerVital(Index, Vitals.SP) & "/" & GetPlayerMaxVital(Index, Vitals.SP), ColorType.Yellow)
-        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.Strength) & "  DEF: " & GetPlayerStat(Index, Stats.Endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.Intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.Speed), ColorType.Yellow)
+        PlayerMsg(Index, "STR: " & GetPlayerStat(Index, Stats.Strength) & "  DEF: " & GetPlayerStat(Index, Stats.Endurance) & "  MAGI: " & GetPlayerStat(Index, Stats.Intelligence) & "  Speed: " & GetPlayerStat(Index, Stats.Spirit), ColorType.Yellow)
         n = (GetPlayerStat(Index, Stats.Strength) \ 2) + (GetPlayerLevel(Index) \ 2)
         i = (GetPlayerStat(Index, Stats.Endurance) \ 2) + (GetPlayerLevel(Index) \ 2)
 
@@ -1553,6 +1553,8 @@
 
         Item(n).Type = Buffer.ReadInteger()
         Item(n).SubType = Buffer.ReadInteger
+
+        Item(n).ItemLevel = Buffer.ReadInteger
 
         'Housing
         Item(n).FurnitureWidth = Buffer.ReadInteger()
@@ -3005,7 +3007,7 @@
                 .Stat(Stats.Vitality) = buffer.ReadInteger
                 .Stat(Stats.Intelligence) = buffer.ReadInteger
                 .Stat(Stats.Luck) = buffer.ReadInteger
-                .Stat(Stats.Speed) = buffer.ReadInteger
+                .Stat(Stats.Spirit) = buffer.ReadInteger
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
