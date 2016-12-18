@@ -142,7 +142,7 @@ Public Class frmMainGame
             End If
             'options window
             If e.KeyCode = Keys.O Then
-                pnlOptions.Visible = Not pnlOptions.Visible
+                frmOptions.Visible = Not frmOptions.Visible
             End If
             'skill window
             If e.KeyCode = Keys.K Then
@@ -208,7 +208,7 @@ Public Class frmMainGame
 
         CheckGuiMouseDown(e.X, e.Y, e)
 
-        If Not frmAdmin.Visible Then Focus()
+        If Not frmAdmin.Visible Or Not frmOptions.Visible Then Focus()
 
     End Sub
 
@@ -346,57 +346,6 @@ Public Class frmMainGame
         End If
 
     End Sub
-
-#End Region
-
-#Region "Options"
-
-    Private Sub scrlVolume_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVolume.ValueChanged
-        Options.Volume = scrlVolume.Value
-
-        MaxVolume = Options.Volume
-
-        lblVolume.Text = "Volume: " & Options.Volume
-
-        If Not MusicPlayer Is Nothing Then MusicPlayer.Volume() = MaxVolume
-
-    End Sub
-
-    Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
-        'music
-        If optMOn.Checked = True Then
-            Options.Music = 1
-            ' start music playing
-            PlayMusic(Trim$(Map.Music))
-        Else
-            Options.Music = 0
-            ' stop music playing
-            StopMusic()
-            CurMusic = ""
-        End If
-
-        'sound
-        If optSOn.Checked = True Then
-            Options.Sound = 1
-        Else
-            Options.Sound = 0
-            StopSound()
-        End If
-
-        'screensize
-        Options.ScreenSize = cmbScreenSize.SelectedIndex
-
-        ' save to config.ini
-        SaveOptions()
-
-        'reload options
-        LoadOptions()
-
-        RePositionGUI()
-
-        pnlOptions.Visible = False
-    End Sub
-
 
 #End Region
 

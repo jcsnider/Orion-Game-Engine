@@ -194,6 +194,8 @@ Module ClientDataBase
         PutVar(FileName, "Options", "Sound", Str(Options.Sound))
         PutVar(FileName, "Options", "Volume", Str(Options.Volume))
         PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
+        PutVar(FileName, "Options", "HighEnd", Str(Options.HighEnd))
+        PutVar(FileName, "Options", "ShowNpcBar", Str(Options.ShowNpcBar))
     End Sub
 
     Public Sub LoadOptions()
@@ -203,7 +205,7 @@ Module ClientDataBase
 
         If Not FileExist(FileName) Then
             Options.Password = ""
-            Options.SavePass = 0
+            Options.SavePass = False
             Options.Username = ""
             Options.IP = "127.0.0.1"
             Options.Port = 7001
@@ -212,6 +214,8 @@ Module ClientDataBase
             Options.Sound = 1
             Options.Volume = 100
             Options.ScreenSize = 0
+            Options.HighEnd = 0
+            Options.ShowNpcBar = 0
             SaveOptions()
         Else
             Options.Username = Getvar(FileName, "Options", "Username")
@@ -226,26 +230,29 @@ Module ClientDataBase
                 Options.Volume = 100
                 SaveOptions()
             End If
-            Options.Volume = Getvar(FileName, "Options", "Volume")
-            Options.ScreenSize = Val(Getvar(FileName, "Options", "ScreenSize"))
+            Options.Volume = Val(Getvar(FileName, "Options", "Volume"))
+            Options.ScreenSize = Getvar(FileName, "Options", "ScreenSize")
+            Options.HighEnd = Getvar(FileName, "Options", "HighEnd")
+            Options.ShowNpcBar = Getvar(FileName, "Options", "ShowNpcBar")
         End If
 
         ' show in GUI
-        If Options.Music = 0 Then
-            frmMainGame.optMOff.Checked = True
+        If Options.Music = 1 Then
+            frmOptions.optMOn.Checked = True
         Else
-            frmMainGame.optMOn.Checked = True
+            frmOptions.optMOff.Checked = False
         End If
 
-        If Options.Sound = 0 Then
-            frmMainGame.optSOff.Checked = True
+        If Options.Music = 1 Then
+            frmOptions.optSOn.Checked = True
         Else
-            frmMainGame.optSOn.Checked = True
+            frmOptions.optSOff.Checked = False
         End If
-        frmMainGame.lblVolume.Text = "Volume: " & Options.Volume
-        frmMainGame.scrlVolume.Value = Options.Volume
 
-        frmMainGame.cmbScreenSize.SelectedIndex = Options.ScreenSize
+        frmOptions.lblVolume.Text = "Volume: " & Options.Volume
+        frmOptions.scrlVolume.Value = Options.Volume
+
+        frmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
 
     End Sub
 #End Region

@@ -1875,6 +1875,8 @@ Module ClientGraphics
             GameWindow.Draw(rectShape)
         End If
 
+        If Options.ShowNpcBar = 0 Then Exit Sub
+
         ' check for hp bar
         For i = 1 To MAX_MAP_NPCS
             If Map.Npc Is Nothing Then Exit Sub

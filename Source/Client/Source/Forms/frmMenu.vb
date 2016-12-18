@@ -178,12 +178,6 @@ Public Class frmMenu
         End If
     End Sub
 
-    Private Sub lblSendLogin_Click(ByVal sender As Object, ByVal e As EventArgs)
-        If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
-            MenuState(MENU_STATE_LOGIN)
-        End If
-    End Sub
-
     Private Sub pnlNewChar_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlNewChar.Paint
         'nada here
     End Sub
@@ -266,13 +260,13 @@ Public Class frmMenu
 
     Private Sub txtLogin_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLogin.KeyDown
         If e.KeyCode = Keys.Enter Then
-            lblSendLogin_Click(Me, Nothing)
+            btnLogin_Click(Me, Nothing)
         End If
     End Sub
 
     Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown
         If e.KeyCode = Keys.Enter Then
-            lblSendLogin_Click(Me, Nothing)
+            btnLogin_Click(Me, Nothing)
         End If
     End Sub
 
@@ -374,7 +368,7 @@ Public Class frmMenu
         btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
-    Private Sub btnLogin_Click_(sender As Object, e As EventArgs) Handles btnLogin.Click
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
             MenuState(MENU_STATE_LOGIN)
         End If

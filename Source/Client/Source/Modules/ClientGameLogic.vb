@@ -75,8 +75,11 @@ Module ClientGameLogic
                 End If
 
                 If tmr10000 < Tick Then
-                    'clear any unused gfx
-                    ClearGFX()
+                    If Options.HighEnd = 0 Then
+                        'clear any unused gfx
+                        ClearGFX()
+                    End If
+
                     GetPing()
                     DrawPing()
 

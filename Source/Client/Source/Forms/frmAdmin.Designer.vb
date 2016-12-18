@@ -390,6 +390,7 @@ Partial Class frmAdmin
         Me.Name = "frmAdmin"
         Me.ShowIcon = False
         Me.Text = "Admin Panel"
+        Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()

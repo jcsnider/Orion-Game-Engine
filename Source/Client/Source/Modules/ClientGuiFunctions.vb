@@ -187,7 +187,6 @@ Public Module ClientGuiFunctions
                         pnlInventoryVisible = Not pnlInventoryVisible
                         pnlCharacterVisible = False
                         pnlSkillsVisible = False
-                        frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Skills
                     ElseIf X > ActionPanelX + SkillBtnX And X < ActionPanelX + SkillBtnX + 48 And Y > ActionPanelY + SkillBtnY And Y < ActionPanelY + SkillBtnY + 32 Then
@@ -199,7 +198,6 @@ Public Module ClientGuiFunctions
                         pnlSkillsVisible = Not pnlSkillsVisible
                         pnlInventoryVisible = False
                         pnlCharacterVisible = False
-                        frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Char
                     ElseIf X > ActionPanelX + CharBtnX And X < ActionPanelX + CharBtnX + 48 And Y > ActionPanelY + CharBtnY And Y < ActionPanelY + CharBtnY + 32 Then
@@ -208,7 +206,6 @@ Public Module ClientGuiFunctions
                         pnlCharacterVisible = Not pnlCharacterVisible
                         pnlInventoryVisible = False
                         pnlSkillsVisible = False
-                        frmMainGame.pnlOptions.Visible = False
                         CheckGuiClick = True
                         'Quest
                     ElseIf X > ActionPanelX + QuestBtnX And X < ActionPanelX + QuestBtnX + 48 And Y > ActionPanelY + QuestBtnY And Y < ActionPanelY + QuestBtnY + 32 Then
@@ -216,18 +213,18 @@ Public Module ClientGuiFunctions
                         ' show the window
                         pnlInventoryVisible = False
                         pnlCharacterVisible = False
-                        frmMainGame.pnlOptions.Visible = False
                         RefreshQuestLog()
                         pnlQuestLogVisible = Not pnlQuestLogVisible
-                        'frmMainGame.pnlQuestLog.BringToFront()
                         CheckGuiClick = True
+                        'Options
                     ElseIf X > ActionPanelX + OptBtnX And X < ActionPanelX + OptBtnX + 48 And Y > ActionPanelY + OptBtnY And Y < ActionPanelY + OptBtnY + 32 Then
                         PlaySound("Click.ogg")
                         pnlCharacterVisible = False
                         pnlInventoryVisible = False
                         pnlSkillsVisible = False
-                        frmMainGame.pnlOptions.BringToFront()
-                        frmMainGame.pnlOptions.Visible = Not frmMainGame.pnlOptions.Visible
+
+                        OptionsVisible = Not OptionsVisible
+                        frmOptions.BringToFront()
                         CheckGuiClick = True
                         'Exit
                     ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 48 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
@@ -256,7 +253,12 @@ Public Module ClientGuiFunctions
                 ElseIf e.Button = MouseButtons.Right Then ' right click
                     If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
                         'forget hotbar skill
-                        SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
+                        Dim result1 As DialogResult = MessageBox.Show("Want to Delete this from your hotbar?", GAME_NAME, MessageBoxButtons.YesNo)
+                        If result1 = DialogResult.Yes Then
+                            SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
+                        End If
+
+
                         CheckGuiClick = True
                     Else
                         Buffer = New ByteBuffer
@@ -278,13 +280,7 @@ Public Module ClientGuiFunctions
             If AboveCharpanel(X, Y) Then
                 ' left click
                 If e.Button = MouseButtons.Left Then
-                    'first check for equip
-                    EqNum = IsEqItem(X, Y)
 
-                    If EqNum <> 0 Then
-                        PlaySound("Click.ogg")
-                        SendUnequip(EqNum)
-                    End If
 
                     'lets see if they want to upgrade
                     'Strenght
@@ -330,6 +326,18 @@ Public Module ClientGuiFunctions
                         End If
                     End If
                     CheckGuiClick = True
+                ElseIf e.Button = MouseButtons.Right Then
+                    'first check for equip
+                    EqNum = IsEqItem(X, Y)
+
+                    If EqNum <> 0 Then
+                        PlaySound("Click.ogg")
+                        Dim result1 As DialogResult = MessageBox.Show("Want to Unequip this?", GAME_NAME, MessageBoxButtons.YesNo)
+                        If result1 = DialogResult.Yes Then
+                            SendUnequip(EqNum)
+                        End If
+                        CheckGuiClick = True
+                    End If
                 End If
             End If
 
@@ -958,8 +966,11 @@ Public Module ClientGuiFunctions
                 ElseIf e.Button = MouseButtons.Right Then ' right click
 
                     If skillnum <> 0 Then
-                        ForgetSkill(skillnum)
-                        Exit Function
+                        Dim result1 As DialogResult = MessageBox.Show("Want to forget this skill?", GAME_NAME, MessageBoxButtons.YesNo)
+                        If result1 = DialogResult.Yes Then
+                            ForgetSkill(skillnum)
+                            Exit Function
+                        End If
                     End If
                 End If
             End If

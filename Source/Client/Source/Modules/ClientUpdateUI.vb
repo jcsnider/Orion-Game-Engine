@@ -34,6 +34,7 @@
     Public pnlTradeVisible As Boolean
     Public pnlEventChatVisible As Boolean
     Public pnlRClickVisible As Boolean
+    Public OptionsVisible As Boolean
 
     Public VbKeyRight As Boolean
     Public VbKeyLeft As Boolean
@@ -475,6 +476,42 @@
         If InitMapProperties = True Then
             frmEditor_MapEditor.MapPropertiesInit()
             InitMapProperties = False
+        End If
+
+        If OptionsVisible = True Then
+
+            ' show in GUI
+            If Options.Music = 1 Then
+                frmOptions.optMOn.Checked = True
+            Else
+                frmOptions.optMOff.Checked = True
+            End If
+
+            If Options.Music = 1 Then
+                frmOptions.optSOn.Checked = True
+            Else
+                frmOptions.optSOff.Checked = True
+            End If
+
+            frmOptions.lblVolume.Text = "Volume: " & Options.Volume
+            frmOptions.scrlVolume.Value = Options.Volume
+
+            frmOptions.cmbScreenSize.SelectedIndex = Options.ScreenSize
+
+            If Options.HighEnd = 1 Then
+                frmOptions.chkHighEnd.Checked = True
+            Else
+                frmOptions.chkHighEnd.Checked = False
+            End If
+
+            If Options.ShowNpcBar = 1 Then
+                frmOptions.chkNpcBars.Checked = True
+            Else
+                frmOptions.chkNpcBars.Checked = False
+            End If
+
+            frmOptions.Visible = True
+            OptionsVisible = False
         End If
     End Sub
 

@@ -57,6 +57,8 @@
         Dim Sound As Byte
         Dim Volume As Single
         Dim ScreenSize As Byte
+        Dim HighEnd As Byte
+        Dim ShowNpcBar As Byte
     End Structure
 
     Public Structure RECT
