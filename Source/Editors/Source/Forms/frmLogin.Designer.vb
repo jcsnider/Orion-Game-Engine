@@ -32,6 +32,7 @@ Partial Class frmLogin
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.pnlAdmin = New System.Windows.Forms.Panel()
+        Me.btnAutoMapper = New System.Windows.Forms.Button()
         Me.btnClassEditor = New System.Windows.Forms.Button()
         Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.btnProjectiles = New System.Windows.Forms.Button()
@@ -44,7 +45,6 @@ Partial Class frmLogin
         Me.btnSkillEditor = New System.Windows.Forms.Button()
         Me.btnShopEditor = New System.Windows.Forms.Button()
         Me.btnAnimationEditor = New System.Windows.Forms.Button()
-        Me.btnAutoMapper = New System.Windows.Forms.Button()
         Me.pnlAdmin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -134,6 +134,15 @@ Partial Class frmLogin
         Me.pnlAdmin.Size = New System.Drawing.Size(505, 189)
         Me.pnlAdmin.TabIndex = 6
         Me.pnlAdmin.Visible = False
+        '
+        'btnAutoMapper
+        '
+        Me.btnAutoMapper.Location = New System.Drawing.Point(154, 3)
+        Me.btnAutoMapper.Name = "btnAutoMapper"
+        Me.btnAutoMapper.Size = New System.Drawing.Size(112, 25)
+        Me.btnAutoMapper.TabIndex = 53
+        Me.btnAutoMapper.Text = "Auto Mapper"
+        Me.btnAutoMapper.UseVisualStyleBackColor = True
         '
         'btnClassEditor
         '
@@ -242,15 +251,6 @@ Partial Class frmLogin
         Me.btnAnimationEditor.TabIndex = 47
         Me.btnAnimationEditor.Text = "Animation Editor"
         Me.btnAnimationEditor.UseVisualStyleBackColor = True
-        '
-        'btnAutoMapper
-        '
-        Me.btnAutoMapper.Location = New System.Drawing.Point(154, 3)
-        Me.btnAutoMapper.Name = "btnAutoMapper"
-        Me.btnAutoMapper.Size = New System.Drawing.Size(112, 25)
-        Me.btnAutoMapper.TabIndex = 53
-        Me.btnAutoMapper.Text = "Auto Mapper"
-        Me.btnAutoMapper.UseVisualStyleBackColor = True
         '
         'frmLogin
         '

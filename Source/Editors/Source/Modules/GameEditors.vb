@@ -1235,12 +1235,17 @@ Module GameEditors
 
         frmEditor_Classes.DrawPreview()
 
+        For i = 1 To Stats.Count - 1
+            If Classes(EditorIndex).Stat(i) = 0 Then Classes(EditorIndex).Stat(i) = 1
+        Next
+
         frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.strength)
         frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.Luck)
         frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
         frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.intelligence)
         frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
         frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Speed)
+
 
         If Classes(EditorIndex).BaseExp < 10 Then
             frmEditor_Classes.numBaseExp.Value = 10
