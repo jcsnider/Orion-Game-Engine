@@ -83,7 +83,7 @@ Public Module ClientWeather
 
         If DrawThunder > 0 Then
             Dim tmpSprite As Sprite
-            tmpSprite = New Sprite(MiscGFX)
+            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White)))
             tmpSprite.Color = New Color(255, 255, 255, 150)
             tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
 
@@ -119,18 +119,6 @@ Public Module ClientWeather
         fogNum = CurrentFog
         If fogNum <= 0 Or fogNum > NumFogs Then Exit Sub
 
-        Dim horz As Integer = 0
-        Dim vert As Integer = 0
-
-        For x = TileView.left To TileView.right + 1
-            For y = TileView.top To TileView.bottom + 1
-                If IsValidMapPoint(x, y) Then
-                    horz = -x
-                    vert = -y
-                End If
-            Next
-        Next
-
         If FogGFXInfo(fogNum).IsLoaded = False Then
             LoadTexture(fogNum, 8)
         End If
@@ -141,11 +129,13 @@ Public Module ClientWeather
         End With
 
         Dim tmpSprite As Sprite
+        FogGFX(fogNum).Repeated = True
+        FogGFX(fogNum).Smooth = True
         tmpSprite = New Sprite(FogGFX(fogNum))
         tmpSprite.Color = New Color(255, 255, 255, CurrentFogOpacity)
         tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
-
-        tmpSprite.Position = New Vector2f((horz * 2.5) + 50, (vert * 3.5) + 50)
+        'tmpSprite.Position = New Vector2f((fogOffsetX * 2.5) + 50, (fogOffsetY * 3.5) + 50)
+        tmpSprite.Position = New Vector2f((fogOffsetX * 2.5) - 50, (fogOffsetY * 3.5) - 50)
         tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).Width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).Height)))
 
         GameWindow.Draw(tmpSprite)

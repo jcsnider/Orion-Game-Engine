@@ -190,8 +190,8 @@ Module ClientGameLogic
                             fogOffsetX = fogOffsetX - 1
                             fogOffsetY = fogOffsetY - 1
                             ' reset
-                            If fogOffsetX < -256 Then fogOffsetX = 0
-                            If fogOffsetY < -256 Then fogOffsetY = 0
+                            If fogOffsetX < -255 Then fogOffsetX = 1
+                            If fogOffsetY < -255 Then fogOffsetY = 1
                             fogtmr = Tick + 255 - CurrentFogSpeed
                         End If
                     End If
@@ -246,7 +246,11 @@ Module ClientGameLogic
             End If
 
             Application.DoEvents()
-            Thread.Sleep(1)
+
+            If Options.HighEnd = 1 Then
+                Thread.Sleep(1)
+            End If
+
         Loop
     End Sub
 

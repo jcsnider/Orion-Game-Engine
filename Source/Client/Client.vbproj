@@ -854,7 +854,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Fogs\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Furniture\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1841,9 +1841,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\MapEditorSelect.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data Files\Graphics\Misc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Paperdolls\1.png">

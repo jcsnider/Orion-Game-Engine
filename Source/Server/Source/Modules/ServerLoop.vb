@@ -235,6 +235,8 @@ Module ServerLoop
 
             End If
 
+            If ServerDestroyed Then End
+
             ' Respawning Resources
             If ResourceCache(MapNum).Resource_Count > 0 Then
                 For i = 0 To ResourceCache(MapNum).Resource_Count
@@ -253,6 +255,8 @@ Module ServerLoop
                     End If
                 Next
             End If
+
+            If ServerDestroyed Then End
 
             If PlayersOnMap(MapNum) = True Then
                 TickCount = GetTickCount()

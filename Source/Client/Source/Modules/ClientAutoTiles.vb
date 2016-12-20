@@ -783,7 +783,7 @@ Public Module ClientAutoTiles
         End If
     End Function
 
-    Public Sub DrawAutoTile(ByVal layerNum As Integer, ByVal destX As Integer, ByVal destY As Integer, ByVal quarterNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional forceFrame As Integer = 0, Optional strict As Boolean = True, Optional exLayer As Boolean = False)
+    Public Sub DrawAutoTile(ByVal layerNum As Integer, ByVal destX As Integer, ByVal destY As Integer, ByVal quarterNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional forceFrame As Integer = 0, Optional strict As Boolean = True)
         Dim YOffset As Integer, XOffset As Integer
         'Dim srcrect As New Rectangle(0, 0, 0, 0)
         Dim tmpSprite As Sprite
@@ -825,6 +825,8 @@ Public Module ClientAutoTiles
         tmpSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).Tileset))
         tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
         tmpSprite.Position = New SFML.Window.Vector2f(destX, destY)
+
+
         GameWindow.Draw(tmpSprite)
 
     End Sub

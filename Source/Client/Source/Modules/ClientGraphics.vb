@@ -6,13 +6,6 @@ Imports SFML.Window
 Module ClientGraphics
     Public GameWindow As RenderWindow
 
-    Public EditorItem_Furniture As RenderWindow
-
-    Public EditorSkill_Icon As RenderWindow
-
-    Public EditorAnimation_Anim1 As RenderWindow
-    Public EditorAnimation_Anim2 As RenderWindow
-
     Public TmpItemWindow As RenderWindow
 
     Public TmpBankItem As RenderWindow
@@ -43,7 +36,7 @@ Module ClientGraphics
     'Faces
     Public FacesGFX() As Texture
     Public FacesGFXInfo() As GraphicInfo
-
+    'Projectiles
     Public ProjectileGFX() As Texture
     Public ProjectileGFXInfo() As GraphicInfo
 
@@ -53,8 +46,6 @@ Module ClientGraphics
     Public BloodGFXInfo As GraphicInfo
     Public DirectionsGfx As Texture
     Public DirectionsGFXInfo As GraphicInfo
-    Public MiscGFX As Texture
-    Public MiscGFXInfo As GraphicInfo
     Public WeatherGFX As Texture
     Public WeatherGFXInfo As GraphicInfo
 
@@ -142,18 +133,12 @@ Module ClientGraphics
 
     Public HPBarGFX As Texture
     Public HPBarGFXInfo As GraphicInfo
-    Public EmptyHPBarGFX As Texture
-    Public EmptyHPBarGFXInfo As GraphicInfo
 
     Public MPBarGFX As Texture
     Public MPBarGFXInfo As GraphicInfo
-    Public EmptyMPBarGFX As Texture
-    Public EmptyMPBarGFXInfo As GraphicInfo
 
     Public EXPBarGFX As Texture
     Public EXPBarGFXInfo As GraphicInfo
-    Public EmptyEXPBarGFX As Texture
-    Public EmptyEXPBarGFXInfo As GraphicInfo
 
     Public EmotesGFX() As Texture
     Public EmotesGFXInfo() As GraphicInfo
@@ -229,6 +214,9 @@ Module ClientGraphics
         ReDim ProjectileGFX(0 To NumProjectiles)
         ReDim ProjectileGFXInfo(0 To NumProjectiles)
 
+        ReDim EmotesGFX(0 To NumEmotes)
+        ReDim EmotesGFXInfo(0 To NumEmotes)
+
         'sadly, gui shit is always needed, so we preload it :/
         DoorGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "door" & GFX_EXT) Then
@@ -258,16 +246,6 @@ Module ClientGraphics
             'Cache the width and height
             DirectionsGFXInfo.Width = DirectionsGfx.Size.X
             DirectionsGFXInfo.Height = DirectionsGfx.Size.Y
-        End If
-
-        MiscGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT) Then
-            'Load texture first, dont care about memory streams (just use the filename)
-            MiscGFX = New Texture(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
-
-            'Cache the width and height
-            MiscGFXInfo.Width = MiscGFX.Size.X
-            MiscGFXInfo.Height = MiscGFX.Size.Y
         End If
 
         HUDPanelGFXInfo = New GraphicInfo
@@ -527,18 +505,6 @@ Module ClientGraphics
             ChatBubbleGFXInfo.Height = ChatBubbleGFX.Size.Y
         End If
 
-        ReDim EmotesGFX(0 To NumEmotes)
-        ReDim EmotesGFXInfo(0 To NumEmotes)
-        For i = 1 To NumEmotes
-            'Load texture first, dont care about memory streams (just use the filename)
-            EmotesGFX(i) = New Texture(Application.StartupPath & GFX_PATH & "Emotes\" & i & GFX_EXT)
-
-            'Cache the width and height
-            EmotesGFXInfo(i).Width = EmotesGFX(i).Size.X
-            EmotesGFXInfo(i).Height = EmotesGFX(i).Size.Y
-
-        Next
-
         'LightGfxInfo = New GraphicInfo
         'If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
         '    LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
@@ -561,11 +527,18 @@ Module ClientGraphics
     Public Sub DrawEmotes(ByVal x2 As Integer, ByVal y2 As Integer, ByVal Sprite As Integer)
         Dim rec As Rectangle
         Dim X As Integer, y As Integer, Anim As Integer
-        Dim width As Integer, height As Integer
-
-        ' If debug mode, handle error then exit out
+        'Dim width As Integer, height As Integer
 
         If Sprite < 1 Or Sprite > NumEmotes Then Exit Sub
+
+        If EmotesGFXInfo(Sprite).IsLoaded = False Then
+            LoadTexture(Sprite, 12)
+        End If
+
+        'seeying we still use it, lets update timer
+        With EmotesGFXInfo(Sprite)
+            .TextureTimer = GetTickCount() + 100000
+        End With
 
         If ShowAnimLayers = True Then
             Anim = 1
@@ -582,13 +555,15 @@ Module ClientGraphics
 
         X = ConvertMapX(x2)
         y = ConvertMapY(y2) - (PIC_Y + 16)
-        width = (rec.Right - rec.Left)
-        height = (rec.Bottom - rec.Top)
+        'width = (rec.Right - rec.Left)
+        'height = (rec.Bottom - rec.Top)
 
-        Dim tmpSprite As Sprite = New Sprite(EmotesGFX(Sprite))
-        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        tmpSprite.Position = New SFML.Window.Vector2f(X, y)
-        GameWindow.Draw(tmpSprite)
+        RenderTextures(EmotesGFX(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'Dim tmpSprite As Sprite = New Sprite(EmotesGFX(Sprite))
+        'tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
+        'tmpSprite.Position = New SFML.Window.Vector2f(X, y)
+        'GameWindow.Draw(tmpSprite)
     End Sub
 
     Sub DrawChat()
@@ -784,6 +759,19 @@ Module ClientGraphics
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
+        ElseIf TexType = 12 Then 'emotes
+            If Index < 0 Or Index > NumProjectiles Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            EmotesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Emotes\" & Index & GFX_EXT)
+
+            'Cache the width and height
+            With EmotesGFXInfo(Index)
+                .Width = EmotesGFX(Index).Size.X
+                .Height = EmotesGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
         End If
 
     End Sub
@@ -816,6 +804,7 @@ Module ClientGraphics
         Target.Draw(TmpImage)
 
     End Sub
+
     Public Sub DrawDirections(ByVal X As Integer, ByVal Y As Integer)
         Dim rec As Rectangle, i As Integer
 
@@ -1492,6 +1481,17 @@ Module ClientGraphics
             End If
         Next
 
+        'animations
+        For I = 1 To NumAnimations
+            If AnimationsGFXInfo(I).IsLoaded Then
+                If AnimationsGFXInfo(I).TextureTimer < GetTickCount() Then
+                    AnimationsGFX(I).Dispose()
+                    AnimationsGFXInfo(I).IsLoaded = False
+                    AnimationsGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
+
         'clear faces
         For I = 1 To NumFaces
             If FacesGFXInfo(I).IsLoaded Then
@@ -1499,6 +1499,17 @@ Module ClientGraphics
                     FacesGFX(I).Dispose()
                     FacesGFXInfo(I).IsLoaded = False
                     FacesGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
+
+        'clear fogs
+        For I = 1 To NumFogs
+            If FogGFXInfo(I).IsLoaded Then
+                If FogGFXInfo(I).TextureTimer < GetTickCount() Then
+                    FogGFX(I).Dispose()
+                    FogGFXInfo(I).IsLoaded = False
+                    FogGFXInfo(I).TextureTimer = 0
                 End If
             End If
         Next
@@ -1525,6 +1536,7 @@ Module ClientGraphics
 
         ' blit lower tiles
         If NumTileSets > 0 Then
+
             For X = TileView.left To TileView.right + 1
                 For Y = TileView.top To TileView.bottom + 1
                     If IsValidMapPoint(X, Y) Then
@@ -1533,6 +1545,7 @@ Module ClientGraphics
                 Next
             Next
         End If
+
 
         ' Furniture
         If FurnitureHouse > 0 Then
@@ -1800,9 +1813,6 @@ Module ClientGraphics
         If InMapEditor Then
             DrawMapAttributes()
         End If
-
-        ' Draw map name
-        'DrawMapName()
 
         If GettingMap Then Exit Sub
 
@@ -2125,13 +2135,14 @@ Module ClientGraphics
         If Map.HasMapTint = 0 Then Exit Sub
 
         Dim tmpSprite As Sprite
-        tmpSprite = New Sprite(MiscGFX)
+
+        tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White)))
         tmpSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
         tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
 
         tmpSprite.Position = New Vector2f(0, 0)
 
-        GameWindow.Draw(tmpSprite) '
+        GameWindow.Draw(tmpSprite)
 
         tmpSprite.Dispose()
     End Sub
@@ -2193,7 +2204,6 @@ Module ClientGraphics
         If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
         If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
-        If Not MiscGFX Is Nothing Then MiscGFX.Dispose()
         If Not ActionPanelGFX Is Nothing Then ActionPanelGFX.Dispose()
         If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
         If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
@@ -2213,13 +2223,14 @@ Module ClientGraphics
         If Not QuestGFX Is Nothing Then QuestGFX.Dispose()
         If Not CraftGFX Is Nothing Then CraftGFX.Dispose()
         If Not ProgBarGFX Is Nothing Then ProgBarGFX.Dispose()
+        If Not ChatBubbleGFX Is Nothing Then ChatBubbleGFX.Dispose()
 
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
         If Not EXPBarGFX Is Nothing Then EXPBarGFX.Dispose()
-        If Not EmptyHPBarGFX Is Nothing Then EmptyHPBarGFX.Dispose()
-        If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
-        If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
+        'If Not EmptyHPBarGFX Is Nothing Then EmptyHPBarGFX.Dispose()
+        'If Not EmptyMPBarGFX Is Nothing Then EmptyMPBarGFX.Dispose()
+        'If Not EmptyEXPBarGFX Is Nothing Then EmptyEXPBarGFX.Dispose()
 
     End Sub
 

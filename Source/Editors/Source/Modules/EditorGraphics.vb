@@ -13,10 +13,6 @@ Module EditorGraphics
 
     Public TmpItemWindow As RenderWindow
 
-    Public TmpBankItem As RenderWindow
-
-    Public TmpSkillWindow As RenderWindow
-
     Public SFMLGameFont As SFML.Graphics.Font
 
     Public TileSetImgsGFX() As Bitmap
