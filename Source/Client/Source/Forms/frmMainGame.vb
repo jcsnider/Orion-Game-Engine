@@ -227,6 +227,13 @@ Public Class frmMainGame
         CurMouseX = e.Location.X
         CurMouseY = e.Location.Y
         CheckGuiMove(e.X, e.Y)
+
+        If InMapEditor Then
+            If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
+                frmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y)
+            End If
+        End If
+
     End Sub
 
     Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp

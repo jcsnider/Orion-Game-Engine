@@ -232,8 +232,8 @@ Module ClientDataBase
             End If
             Options.Volume = Val(Getvar(FileName, "Options", "Volume"))
             Options.ScreenSize = Getvar(FileName, "Options", "ScreenSize")
-            Options.HighEnd = Getvar(FileName, "Options", "HighEnd")
-            Options.ShowNpcBar = Getvar(FileName, "Options", "ShowNpcBar")
+            Options.HighEnd = Val(Getvar(FileName, "Options", "HighEnd"))
+            Options.ShowNpcBar = Val(Getvar(FileName, "Options", "ShowNpcBar"))
         End If
 
         ' show in GUI

@@ -181,6 +181,8 @@ Partial Class frmEditor_MapEditor
         Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.scrlMapViewV = New System.Windows.Forms.VScrollBar()
+        Me.scrlMapViewH = New System.Windows.Forms.HScrollBar()
         Me.ToolStrip.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tabpages.SuspendLayout()
@@ -1207,7 +1209,8 @@ Partial Class frmEditor_MapEditor
         '
         'pnlBack2
         '
-        Me.pnlBack2.AutoScroll = True
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewH)
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewV)
         Me.pnlBack2.Controls.Add(Me.pnlAttributes)
         Me.pnlBack2.Controls.Add(Me.picScreen)
         Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1228,7 +1231,7 @@ Partial Class frmEditor_MapEditor
         Me.pnlAttributes.Controls.Add(Me.fraResource)
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.Location = New System.Drawing.Point(123, 48)
+        Me.pnlAttributes.Location = New System.Drawing.Point(114, 25)
         Me.pnlAttributes.Name = "pnlAttributes"
         Me.pnlAttributes.Size = New System.Drawing.Size(482, 491)
         Me.pnlAttributes.TabIndex = 16
@@ -1728,9 +1731,12 @@ Partial Class frmEditor_MapEditor
         'picScreen
         '
         Me.picScreen.BackColor = System.Drawing.Color.Black
+        Me.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.picScreen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picScreen.Location = New System.Drawing.Point(0, 0)
         Me.picScreen.Name = "picScreen"
-        Me.picScreen.Size = New System.Drawing.Size(704, 567)
+        Me.picScreen.Size = New System.Drawing.Size(729, 565)
+        Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picScreen.TabIndex = 1
         Me.picScreen.TabStop = False
         '
@@ -1782,6 +1788,22 @@ Partial Class frmEditor_MapEditor
         'ToolStripContainer1.TopToolStripPanel
         '
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip)
+        '
+        'scrlMapViewV
+        '
+        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
+        Me.scrlMapViewV.Location = New System.Drawing.Point(712, 0)
+        Me.scrlMapViewV.Name = "scrlMapViewV"
+        Me.scrlMapViewV.Size = New System.Drawing.Size(17, 565)
+        Me.scrlMapViewV.TabIndex = 17
+        '
+        'scrlMapViewH
+        '
+        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.scrlMapViewH.Location = New System.Drawing.Point(0, 548)
+        Me.scrlMapViewH.Name = "scrlMapViewH"
+        Me.scrlMapViewH.Size = New System.Drawing.Size(712, 17)
+        Me.scrlMapViewH.TabIndex = 18
         '
         'frmEditor_MapEditor
         '
@@ -2017,4 +2039,6 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents tslCurXY As ToolStripStatusLabel
     Friend WithEvents ToolStripContainer1 As ToolStripContainer
     Friend WithEvents chkIsInstanced As CheckBox
+    Friend WithEvents scrlMapViewH As HScrollBar
+    Friend WithEvents scrlMapViewV As VScrollBar
 End Class

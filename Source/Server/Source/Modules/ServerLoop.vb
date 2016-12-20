@@ -401,7 +401,7 @@ Module ServerLoop
                                     If target_verify Then
                                         'Gonna make the npcs smarter.. Implementing a pathfinding algorithm.. we shall see what happens.
                                         If IsOneBlockAway(TargetX, TargetY, CLng(MapNpc(MapNum).Npc(x).x), CLng(MapNpc(MapNum).Npc(x).y)) = False Then
-                                            If PathfindingType = 1 Then
+                                            If PathfindingType = 2 Then
                                                 i = Int(Rnd() * 5)
 
                                                 ' Lets move the npc

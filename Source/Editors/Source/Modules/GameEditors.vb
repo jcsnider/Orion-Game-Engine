@@ -136,8 +136,8 @@ Module GameEditors
 
         frmEditor_MapEditor.tabpages.SelectedIndex = 0
 
-        frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
-        frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
+        'frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
+        'frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_MapEditor.picScreen.Width, frmEditor_MapEditor.picScreen.Height)))
 

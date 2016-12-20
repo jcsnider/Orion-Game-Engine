@@ -11,7 +11,7 @@ Namespace My
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
         Private Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException
-            Dim myFilePath As String = "\ErrorLog.log"
+            Dim myFilePath As String = Windows.Forms.Application.StartupPath & "\Data Files\ErrorLog.log"
 
             Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
                 sw.WriteLine(DateTime.Now)

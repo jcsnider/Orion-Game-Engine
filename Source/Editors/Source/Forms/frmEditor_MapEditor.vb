@@ -13,8 +13,11 @@ Public Class frmEditor_MapEditor
 
         scrlFog.Maximum = NumFogs
 
-        picScreen.Width = Map.MaxX * PIC_X
-        picScreen.Height = Map.MaxY * PIC_Y
+        'picScreen.Width = Map.MaxX * PIC_X
+        'picScreen.Height = Map.MaxY * PIC_Y
+
+        scrlMapViewV.Maximum = (picScreen.Height \ PIC_Y) \ 2 ' \2 is new, lets test
+        scrlMapViewH.Maximum = (picScreen.Width \ PIC_X) \ 2
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
@@ -24,8 +27,11 @@ Public Class frmEditor_MapEditor
     Private Sub frmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If GameWindow Is Nothing Then Exit Sub
 
-        picScreen.Width = Map.MaxX * PIC_X
-        picScreen.Height = Map.MaxY * PIC_Y
+        'picScreen.Width = Map.MaxX * PIC_X
+        'picScreen.Height = Map.MaxY * PIC_Y
+        ' set the scrollbars
+        scrlMapViewV.Maximum = (picScreen.Height \ PIC_Y)
+        scrlMapViewH.Maximum = (picScreen.Width \ PIC_X)
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub
@@ -393,7 +399,7 @@ Public Class frmEditor_MapEditor
 
 #Region "PicScreen"
     Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
-
+        If e.X > pnlBack2.Width Or e.Y > pnlBack2.Height Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
 
     End Sub
@@ -590,6 +596,14 @@ Public Class frmEditor_MapEditor
             ClearTempTile()
             MapEditorSend()
         End With
+    End Sub
+
+    Private Sub scrlMapViewH_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapViewH.Scroll
+        EditorViewX = scrlMapViewH.Value
+    End Sub
+
+    Private Sub scrlMapViewV_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapViewV.Scroll
+        EditorViewY = scrlMapViewV.Value
     End Sub
 
 #End Region

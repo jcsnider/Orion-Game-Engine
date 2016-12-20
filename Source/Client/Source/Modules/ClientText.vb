@@ -632,28 +632,29 @@ Module ClientText
             ' calculate the new position
             X2 = X - (MaxWidth \ 2)
             Y2 = Y - (theArray.Count * 12)
+
             ' render bubble - top left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2 - 5, 0, 0, 9, 5)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2 - 5, 0, 0, 9, 5, 9, 5)
             ' top right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2 - 5, 119, 0, 9, 5)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2 - 5, 119, 0, 9, 5, 9, 5)
             ' top
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2 - 5, 10, 0, MaxWidth, 5)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2 - 5, 10, 0, MaxWidth, 5, 5, 5)
             ' bottom left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y, 0, 19, 9, 6)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y, 0, 19, 9, 6, 9, 6)
             ' bottom right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y, 119, 19, 9, 6)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y, 119, 19, 9, 6, 9, 6)
             ' bottom - left half
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y, 10, 19, (MaxWidth \ 2) - 5, 6)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6)
             ' bottom - right half
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + (MaxWidth \ 2) + 6, Y, 10, 19, (MaxWidth \ 2) - 5, 6)
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + (MaxWidth \ 2) + 6, Y, 10, 19, (MaxWidth \ 2) - 5, 6, 9, 6)
             ' left
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2, 0, 6, 9, (theArray.Count * 12))
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 - 9, Y2, 0, 6, 9, (theArray.Count * 12), 9, 1)
             ' right
-            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2, 119, 6, 9, (theArray.Count * 12))
+            RenderTextures(ChatBubbleGFX, GameWindow, X2 + MaxWidth, Y2, 119, 6, 9, (theArray.Count * 12), 9, 1)
             ' center
-            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2, 9, 5, MaxWidth, (theArray.Count * 12))
+            RenderTextures(ChatBubbleGFX, GameWindow, X2, Y2, 9, 5, MaxWidth, (theArray.Count * 12), 1, 1)
             ' little pointy bit
-            RenderTextures(ChatBubbleGFX, GameWindow, X - 5, Y, 58, 19, 11, 11)
+            RenderTextures(ChatBubbleGFX, GameWindow, X - 5, Y, 58, 19, 11, 11, 11, 11)
 
             ' render each line centralised
             For i = 0 To theArray.Count - 1

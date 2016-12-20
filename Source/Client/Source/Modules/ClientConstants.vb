@@ -8,7 +8,7 @@ Module ClientConstants
     Public Const FPS_LIMIT As Integer = 64
 
     'Chatbubble
-    Public Const ChatBubbleWidth As Integer = 200
+    Public Const ChatBubbleWidth As Integer = 100
 
     Public Const EFFECT_TYPE_FADEIN As Integer = 1
     Public Const EFFECT_TYPE_FADEOUT As Integer = 2

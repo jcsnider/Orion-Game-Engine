@@ -86,6 +86,8 @@
     ' Used to check if in editor or not and variables for use in editor
     Public InMapEditor As Boolean
     Public EditorTileX As Integer
+    Public EditorViewX As Integer
+    Public EditorViewY As Integer
     Public EditorTileY As Integer
     Public EditorTileWidth As Integer
     Public EditorTileHeight As Integer

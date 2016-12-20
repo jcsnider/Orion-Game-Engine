@@ -771,9 +771,9 @@ Module EditorGraphics
     Public Sub UpdateCamera()
 
         With TileView
-            .top = 0
+            .top = EditorViewY
             .bottom = Map.MaxY
-            .left = 0
+            .left = EditorViewX
             .right = Map.MaxX
         End With
 

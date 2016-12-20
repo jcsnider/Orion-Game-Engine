@@ -808,6 +808,14 @@ Module ClientGraphics
 
     End Sub
 
+    Public Sub RenderTextures(ByVal Txture As Texture, ByVal Target As RenderWindow, ByVal dX As Single, ByVal dY As Single, ByVal sx As Single, ByVal sy As Single, ByVal dWidth As Single, ByVal dHeight As Single, ByVal sWidth As Single, ByVal sHeight As Single)
+        Dim TmpImage As Sprite = New Sprite(Txture)
+        TmpImage.TextureRect = New IntRect(sx, sy, sWidth, sHeight)
+        TmpImage.Scale = New Vector2f(dWidth / sWidth, dHeight / sHeight)
+        TmpImage.Position = New Vector2f(dX, dY)
+        Target.Draw(TmpImage)
+
+    End Sub
     Public Sub DrawDirections(ByVal X As Integer, ByVal Y As Integer)
         Dim rec As Rectangle, i As Integer
 
@@ -1779,7 +1787,7 @@ Module ClientGraphics
         ' draw the messages
         For I = 1 To Byte.MaxValue
             If chatBubble(I).active Then
-                'DrawChatBubble(I)
+                DrawChatBubble(I)
             End If
         Next
 

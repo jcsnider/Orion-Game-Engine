@@ -424,7 +424,7 @@ Module ServerGeneral
 
     Sub ErrorHandler(ByVal sender As Object, ByVal args As UnhandledExceptionEventArgs)
         Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
-        Dim myFilePath As String = "\ErrorLog.log"
+        Dim myFilePath As String = Application.StartupPath & "\data\logs\ErrorLog.log"
 
         Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
             sw.WriteLine(DateTime.Now)
