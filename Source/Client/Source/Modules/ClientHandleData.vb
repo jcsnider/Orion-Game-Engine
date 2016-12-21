@@ -210,7 +210,7 @@
         ' Confirm it is the right packet
         If Buffer.ReadInteger <> ServerPackets.SAlertMsg Then Exit Sub
 
-        frmloadvisible = False
+        pnlloadvisible = False
 
         If frmMenu.Visible = False Then
             frmmenuvisible = True
@@ -253,7 +253,7 @@
 
         Buffer = Nothing
 
-        frmloadvisible = True
+        pnlloadvisible = True
         SetStatus("Receiving game data...")
     End Sub
 
@@ -297,7 +297,7 @@
         Buffer = Nothing
         ' Used for if the player is creating a new character
         frmmenuvisible = True
-        frmloadvisible = False
+        pnlloadvisible = False
         pnlCreditsVisible = False
         pnlRegisterVisible = False
         pnlCharCreateVisible = False
@@ -386,7 +386,7 @@
 
         ' Used for if the player is creating a new character
         frmmenuvisible = True
-        frmloadvisible = False
+        pnlloadvisible = False
         pnlCreditsVisible = False
         pnlRegisterVisible = False
         'pnlCharCreateVisible = True

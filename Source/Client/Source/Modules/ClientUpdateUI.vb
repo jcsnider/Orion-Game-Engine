@@ -9,7 +9,7 @@
     Public pnlCreditsVisible As Boolean
     Public frmmenuvisible As Boolean
     Public frmmaingamevisible As Boolean
-    Public frmloadvisible As Boolean
+    Public pnlloadvisible As Boolean
     Public lblnextcharleft As Integer
     Public cmbclass() As String
     Public txtChatAdd As String
@@ -391,8 +391,8 @@
             UpdateCharacterPanel = False
         End If
 
-        If frmloadvisible <> frmLoad.Visible Then
-            frmLoad.Visible = frmloadvisible
+        If pnlloadvisible <> frmMenu.pnlLoad.Visible Then
+            frmMenu.pnlLoad.Visible = pnlloadvisible
         End If
 
         If UpdateMapnames = True Then

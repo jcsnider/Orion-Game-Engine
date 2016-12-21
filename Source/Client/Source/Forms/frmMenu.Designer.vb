@@ -62,7 +62,6 @@ Partial Class frmMenu
         Me.Label12 = New System.Windows.Forms.Label()
         Me.lbl = New System.Windows.Forms.Label()
         Me.lblServerStatus = New System.Windows.Forms.Label()
-        Me.tmrConnect = New System.Windows.Forms.Timer(Me.components)
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
@@ -88,6 +87,8 @@ Partial Class frmMenu
         Me.picChar1 = New System.Windows.Forms.PictureBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.pnlLoad = New System.Windows.Forms.Panel()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.pnlLogin.SuspendLayout()
         Me.pnlRegister.SuspendLayout()
         Me.pnlCredits.SuspendLayout()
@@ -100,6 +101,7 @@ Partial Class frmMenu
         CType(Me.picChar3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picChar2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picChar1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlLoad.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlLogin
@@ -519,11 +521,6 @@ Partial Class frmMenu
         Me.lblServerStatus.TabIndex = 45
         Me.lblServerStatus.Text = "Offline"
         '
-        'tmrConnect
-        '
-        Me.tmrConnect.Enabled = True
-        Me.tmrConnect.Interval = 1000
-        '
         'pnlMainMenu
         '
         Me.pnlMainMenu.BackColor = System.Drawing.Color.Transparent
@@ -832,6 +829,29 @@ Partial Class frmMenu
         Me.Label16.TabIndex = 17
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'pnlLoad
+        '
+        Me.pnlLoad.BackgroundImage = CType(resources.GetObject("pnlLoad.BackgroundImage"), System.Drawing.Image)
+        Me.pnlLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlLoad.Controls.Add(Me.lblStatus)
+        Me.pnlLoad.Location = New System.Drawing.Point(2, 1)
+        Me.pnlLoad.Name = "pnlLoad"
+        Me.pnlLoad.Size = New System.Drawing.Size(729, 534)
+        Me.pnlLoad.TabIndex = 58
+        '
+        'lblStatus
+        '
+        Me.lblStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.ForeColor = System.Drawing.Color.White
+        Me.lblStatus.Location = New System.Drawing.Point(224, 261)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(280, 30)
+        Me.lblStatus.TabIndex = 1
+        Me.lblStatus.Text = "Loading text"
+        Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -840,6 +860,7 @@ Partial Class frmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1281, 541)
+        Me.Controls.Add(Me.pnlLoad)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
@@ -881,6 +902,7 @@ Partial Class frmMenu
         CType(Me.picChar3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picChar2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picChar1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlLoad.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -918,7 +940,6 @@ Partial Class frmMenu
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents lbl As System.Windows.Forms.Label
     Friend WithEvents lblServerStatus As System.Windows.Forms.Label
-    Friend WithEvents tmrConnect As System.Windows.Forms.Timer
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblNews As System.Windows.Forms.Label
@@ -949,4 +970,6 @@ Partial Class frmMenu
     Friend WithEvents btnUseChar As Windows.Forms.Button
     Friend WithEvents txtDescription As Windows.Forms.TextBox
     Friend WithEvents Label19 As Windows.Forms.Label
+    Friend WithEvents pnlLoad As Windows.Forms.Panel
+    Friend WithEvents lblStatus As Windows.Forms.Label
 End Class

@@ -231,6 +231,7 @@ Public Module ClientGuiFunctions
                         PlaySound("Click.ogg")
                         frmAdmin.Dispose()
                         DestroyGame()
+
                         CheckGuiClick = True
                     End If
                 End If

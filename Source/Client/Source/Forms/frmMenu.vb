@@ -3,12 +3,23 @@ Imports System.Windows.Forms
 
 Public Class frmMenu
     Inherits Form
-
+#Region "Form Functions"
+    ''' <summary>
+    ''' clean up and close the game.
+    ''' </summary>
     Private Sub frmMenu_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Disposed
         DestroyGame()
     End Sub
 
+    ''' <summary>
+    ''' On load, get GUI ready.
+    ''' </summary>
     Private Sub Frmmenu_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        LoadMenuGraphics()
+
+        pnlLoad.Width = 730
+        pnlLoad.Height = 534
+
         Width = 730
         pnlLogin.Top = pnlMainMenu.Top
         pnlLogin.Left = pnlMainMenu.Left
@@ -28,16 +39,81 @@ Public Class frmMenu
         pnlCharSelect.Top = pnlMainMenu.Top
         pnlCharSelect.Left = pnlMainMenu.Left
 
-        LoadGuiGraphics()
+        If started = False Then Call startup()
+
         Connect()
+
     End Sub
 
-    Private Function StringToArray(ByVal s As String, Optional ByVal style As System.Globalization.NumberStyles = Nothing) As Byte()
-        Dim oEncoder As New System.Text.ASCIIEncoding()
-        Dim bytes As Byte() = oEncoder.GetBytes(s)
-        Return bytes
-    End Function
+    ''' <summary>
+    ''' Draw Char select when its needed.
+    ''' </summary>
+    Private Sub pnlCharSelect_VisibleChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlCharSelect.VisibleChanged
+        DrawCharacterSelect()
+    End Sub
 
+    ''' <summary>
+    ''' Shows the IP config.
+    ''' </summary>
+    Private Sub lblServerStatus_Click(sender As Object, e As EventArgs) Handles lblServerStatus.Click
+        pnlCreditsVisible = False
+        pnlLoginVisible = False
+        pnlRegisterVisible = False
+        pnlCharCreateVisible = False
+
+        txtIP.Text = Options.IP
+        txtPort.Text = Options.Port
+
+        pnlIPConfig.Visible = True
+    End Sub
+#End Region
+
+#Region "Draw Functions"
+    ''' <summary>
+    ''' Preload the images in the menu.
+    ''' </summary>
+    Public Sub LoadMenuGraphics()
+
+        'main menu
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\menu" & GFX_EXT) Then
+            BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\menu" & GFX_EXT)
+        End If
+
+        'main menu buttons
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT) Then
+            btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnNewChar.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnUseChar.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnDelChar.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+            btnSaveIP.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
+        End If
+
+        'main menu panels
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT) Then
+            pnlMainMenu.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlNewChar.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlCharSelect.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+            pnlIPConfig.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
+        End If
+
+        'logo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT) Then
+            picLogo.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' Draw the Character for new char creation.
+    ''' </summary>
     Sub DrawCharacter()
         If pnlNewChar.Visible = True Then
             Dim g As Graphics = pnlNewChar.CreateGraphics
@@ -77,6 +153,9 @@ Public Class frmMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' Draw the character for the char select screen.
+    ''' </summary>
     Sub DrawCharacterSelect()
         Dim g As Graphics
         Dim srcRect As Rectangle
@@ -178,10 +257,18 @@ Public Class frmMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' Stop the NewChar panel from repainting itself.
+    ''' </summary>
     Private Sub pnlNewChar_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlNewChar.Paint
         'nada here
     End Sub
+#End Region
 
+#Region "Credits"
+    ''' <summary>
+    ''' This timer handles the scrolling credits.
+    ''' </summary>
     Private Sub tmrCredits_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrCredits.Tick
         Dim credits As String
         Dim filepath As String
@@ -201,25 +288,61 @@ Public Class frmMenu
             Loop
         End If
     End Sub
+#End Region
 
+#Region "Login"
+    ''' <summary>
+    ''' Handles press enter on login name txtbox.
+    ''' </summary>
+    Private Sub txtLogin_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLogin.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnLogin_Click(Me, Nothing)
+        End If
+    End Sub
+    ''' <summary>
+    ''' Handles press enter on login password txtbox.
+    ''' </summary>
+    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnLogin_Click(Me, Nothing)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Handle the SavePas checkbox.
+    ''' </summary>
     Private Sub chkSavePass_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkSavePass.CheckedChanged
         chkSavePassChecked = chkSavePass.Checked
     End Sub
+#End Region
 
+#Region "Char Creation"
+    ''' <summary>
+    ''' Changes selected class.
+    ''' </summary>
     Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
         newCharClass = cmbClass.SelectedIndex + 1
         txtDescription.Text = Classes(newCharClass).Desc
         DrawCharacter()
     End Sub
 
+    ''' <summary>
+    ''' Switches to male gender.
+    ''' </summary>
     Private Sub rdoMale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rdoMale.CheckedChanged
         DrawCharacter()
     End Sub
 
+    ''' <summary>
+    ''' Switches to female gender.
+    ''' </summary>
     Private Sub rdoFemale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles rdoFemale.CheckedChanged
         DrawCharacter()
     End Sub
 
+    ''' <summary>
+    ''' Switches sprite for selected class to next one, if any.
+    ''' </summary>
     Private Sub lblNextChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblNextChar.Click
         newCharSprite = newCharSprite + 1
         If rdoMale.Checked = True Then
@@ -230,6 +353,9 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
+    ''' <summary>
+    ''' Switches sprite for selected class to previous one, if any.
+    ''' </summary>
     Private Sub lblPrevChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblPrevChar.Click
         newCharSprite = newCharSprite - 1
         If rdoMale.Checked = True Then
@@ -240,57 +366,18 @@ Public Class frmMenu
         DrawCharacter()
     End Sub
 
-    Private Sub tmrConnect_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrConnect.Tick
-        Static i As Integer
-        If IsConnected() = True Then
-            lblServerStatus.ForeColor = Color.LightGreen
-            lblServerStatus.Text = "Online"
-        Else
-            lblServerStatus.ForeColor = Color.Red
-            i = i + 1
-            If i = 5 Then
-                Connect()
-                lblServerStatus.Text = "Reconnecting"
-                i = 0
-            Else
-                lblServerStatus.Text = "Offline"
-            End If
-        End If
-    End Sub
-
-    Private Sub txtLogin_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLogin.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnLogin_Click(Me, Nothing)
-        End If
-    End Sub
-
-    Private Sub txtPassword_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtPassword.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnLogin_Click(Me, Nothing)
-        End If
-    End Sub
-
+    ''' <summary>
+    ''' Initial drawing of new char.
+    ''' </summary>
     Private Sub pnlNewChar_VisibleChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlNewChar.VisibleChanged
         DrawCharacter()
     End Sub
-
-    Private Sub pnlCharSelect_VisibleChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlCharSelect.VisibleChanged
-        DrawCharacterSelect()
-    End Sub
-
-    Private Sub lblServerStatus_Click(sender As Object, e As EventArgs) Handles lblServerStatus.Click
-        pnlCreditsVisible = False
-        pnlLoginVisible = False
-        pnlRegisterVisible = False
-        pnlCharCreateVisible = False
-
-        txtIP.Text = Options.IP
-        txtPort.Text = Options.Port
-
-        pnlIPConfig.Visible = True
-    End Sub
+#End Region
 
 #Region "Buttons"
+    ''' <summary>
+    ''' Handle Play button press.
+    ''' </summary>
     Private Sub btnPlay_Click(sender As Object, e As EventArgs) Handles btnPlay.Click
         If IsConnected() = True Then
             PlaySound("Click.ogg")
@@ -308,14 +395,23 @@ Public Class frmMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnPlay_MouseEnter(sender As Object, e As EventArgs) Handles btnPlay.MouseEnter
         btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnPlay_MouseLeave(sender As Object, e As EventArgs) Handles btnPlay.MouseLeave
         btnPlay.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handle Register button press.
+    ''' </summary>
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         If IsConnected() = True Then
             PlaySound("Click.ogg")
@@ -327,14 +423,23 @@ Public Class frmMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnRegister_MouseEnter(sender As Object, e As EventArgs) Handles btnRegister.MouseEnter
         btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnRegister_MouseLeave(sender As Object, e As EventArgs) Handles btnRegister.MouseLeave
         btnRegister.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handle Credits button press.
+    ''' </summary>
     Private Sub btnCredits_Click(sender As Object, e As EventArgs) Handles btnCredits.Click
         PlaySound("Click.ogg")
         If pnlCreditsVisible = False Then
@@ -347,41 +452,68 @@ Public Class frmMenu
         pnlIPConfig.Visible = False
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnCredits_MouseEnter(sender As Object, e As EventArgs) Handles btnCredits.MouseEnter
         btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnCredits_MouseLeave(sender As Object, e As EventArgs) Handles btnCredits.MouseLeave
         btnCredits.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handles Exit burron press.
+    ''' </summary>
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         PlaySound("Click.ogg")
         DestroyGame()
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
         btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnExit_MouseLeave(sender As Object, e As EventArgs) Handles btnExit.MouseLeave
         btnExit.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handles Login button press.
+    ''' </summary>
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If isLoginLegal(txtLogin.Text, txtPassword.Text) Then
             MenuState(MENU_STATE_LOGIN)
         End If
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnLogin_MouseEnter(sender As Object, e As EventArgs) Handles btnLogin.MouseEnter
         btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnLogin_MouseLeave(sender As Object, e As EventArgs) Handles btnLogin.MouseLeave
         btnLogin.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handles CreateAccount button press.
+    ''' </summary>
     Private Sub btnCreateAccount_Click(sender As Object, e As EventArgs) Handles btnCreateAccount.Click
         Dim Name As String
         Dim Password As String
@@ -402,26 +534,44 @@ Public Class frmMenu
         End If
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnCreateAccount_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseEnter
         btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnCreateAccount_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseLeave
         btnCreateAccount.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handles CreateCharacter button press.
+    ''' </summary>
     Private Sub btnCreateCharacter_Click(sender As Object, e As EventArgs) Handles btnCreateCharacter.Click
         MenuState(MENU_STATE_ADDCHAR)
     End Sub
 
+    ''' <summary>
+    ''' Changes to hover state on button.
+    ''' </summary>
     Private Sub btnCreateCharacter_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseEnter
         btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button_hover" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Changes to normal state on button.
+    ''' </summary>
     Private Sub btnCreateCharacter_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseLeave
         btnCreateCharacter.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
     End Sub
 
+    ''' <summary>
+    ''' Handles SaveIP button press.
+    ''' </summary>
     Private Sub btnSaveIP_Click(sender As Object, e As EventArgs) Handles btnSaveIP.Click
         Options.IP = txtIP.Text
         Options.Port = txtPort.Text
@@ -430,29 +580,44 @@ Public Class frmMenu
         SaveOptions()
     End Sub
 
+    ''' <summary>
+    ''' Handles selecting character 1.
+    ''' </summary>
     Private Sub picChar1_Click(sender As Object, e As EventArgs) Handles picChar1.Click
         SelectedChar = 1
         DrawCharacterSelect()
     End Sub
 
+    ''' <summary>
+    ''' Handles selecting character 2.
+    ''' </summary>
     Private Sub picChar2_Click(sender As Object, e As EventArgs) Handles picChar2.Click
         SelectedChar = 2
         DrawCharacterSelect()
     End Sub
 
+    ''' <summary>
+    ''' Handles selecting character 3.
+    ''' </summary>
     Private Sub picChar3_Click(sender As Object, e As EventArgs) Handles picChar3.Click
         SelectedChar = 3
         DrawCharacterSelect()
     End Sub
 
+    ''' <summary>
+    ''' Handles NewChar button press.
+    ''' </summary>
     Private Sub btnNewChar_Click(sender As Object, e As EventArgs) Handles btnNewChar.Click
         pnlCharCreateVisible = True
         pnlCharSelectVisible = False
         DrawChar = True
     End Sub
 
+    ''' <summary>
+    ''' Handles UseChar button press.
+    ''' </summary>
     Private Sub btnUseChar_Click(sender As Object, e As EventArgs) Handles btnUseChar.Click
-        frmloadvisible = True
+        pnlloadvisible = True
         frmmenuvisible = False
 
         Dim buffer As ByteBuffer
@@ -464,6 +629,9 @@ Public Class frmMenu
         buffer = Nothing
     End Sub
 
+    ''' <summary>
+    ''' Handles DelChar button press.
+    ''' </summary>
     Private Sub btnDelChar_Click(sender As Object, e As EventArgs) Handles btnDelChar.Click
         Dim buffer As ByteBuffer
 
@@ -477,7 +645,6 @@ Public Class frmMenu
 
         buffer = Nothing
     End Sub
-
 
 #End Region
 

@@ -12,7 +12,7 @@ Module ClientGameLogic
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, WalkTimer As Integer, FrameTime As Integer
         Dim destrect As Rectangle, tmr10000 As Integer
-        Dim tmr100 As Integer, tmr500 As Integer
+        Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
 
         starttime = GetTickCount()
         frmMenu.lblNextChar.Left = lblnextcharleft
@@ -24,6 +24,27 @@ Module ClientGameLogic
             DirUp = VbKeyUp
             DirLeft = VbKeyLeft
             DirRight = VbKeyRight
+
+            If frmmenuvisible = True Then
+                If tmrconnect < GetTickCount() Then
+                    If IsConnected() = True Then
+                        frmMenu.lblServerStatus.ForeColor = Color.LightGreen
+                        frmMenu.lblServerStatus.Text = "Online"
+                    Else
+                        i = i + 1
+                        If i = 5 Then
+                            Connect()
+                            frmMenu.lblServerStatus.Text = "Reconnecting"
+                            frmMenu.lblServerStatus.ForeColor = Color.Orange
+                            i = 0
+                        Else
+                            frmMenu.lblServerStatus.Text = "Offline"
+                            frmMenu.lblServerStatus.ForeColor = Color.Red
+                        End If
+                    End If
+                    tmrconnect = GetTickCount() + 500
+                End If
+            End If
 
             'Update the UI
             UpdateUI()
@@ -124,7 +145,7 @@ Module ClientGameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < Tick Then
-                        AddText("You took too Integer to decide. Please try again.", ColorType.Yellow)
+                        AddText("You took too long to decide. Please try again.", ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -239,7 +260,7 @@ Module ClientGameLogic
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME, FONT_SIZE)
-                        g.DrawString("Receiving Map", font, Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
+                        g.DrawString("Receiving Map...", font, Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
                     End If
 
                 End SyncLock
@@ -248,6 +269,8 @@ Module ClientGameLogic
             Application.DoEvents()
 
             If Options.HighEnd = 1 Then
+                Thread.Yield()
+            Else
                 Thread.Sleep(1)
             End If
 
@@ -349,7 +372,7 @@ Module ClientGameLogic
         If MapData = False Then Exit Function
         If PlayerData = False Then Exit Function
         GameStarted = True
-        frmloadvisible = False
+        pnlloadvisible = False
     End Function
 
     Public Sub CreateActionMsg(ByVal message As String, ByVal color As Integer, ByVal MsgType As Byte, ByVal X As Integer, ByVal Y As Integer)

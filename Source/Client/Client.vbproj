@@ -108,12 +108,6 @@
     <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmLoad.Designer.vb">
-      <DependentUpon>frmLoad.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmLoad.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\Forms\frmMainGame.Designer.vb">
       <DependentUpon>frmMainGame.vb</DependentUpon>
     </Compile>
@@ -182,9 +176,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_MapEditor.resx">
       <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmLoad.resx">
-      <DependentUpon>frmLoad.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmMainGame.resx">
       <DependentUpon>frmMainGame.vb</DependentUpon>
@@ -880,13 +871,7 @@
     <Content Include="Data Files\Graphics\Gui\EXPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Gui\EXPBarEmpty.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data Files\Graphics\Gui\HPBar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data Files\Graphics\Gui\HPBarEmpty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Gui\Main\Bank.png">
@@ -959,9 +944,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Gui\MPBar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data Files\Graphics\Gui\MPBarEmpty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Items\1.png">

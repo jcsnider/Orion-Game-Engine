@@ -12,6 +12,7 @@ Module ClientGeneral
     Sub startup()
         SFML.CSFML.Activate()
 
+        frmMenu.Visible = True
 
         ReDim Player(0 To MAX_PLAYERS)
 
@@ -221,7 +222,7 @@ Module ClientGeneral
         SetStatus("Starting Game...")
         started = True
         frmmenuvisible = True
-        frmloadvisible = False
+        pnlloadvisible = False
 
         pnlInventoryVisible = True
 
@@ -259,7 +260,7 @@ Module ClientGeneral
     End Function
 
     Sub GameInit()
-        frmloadvisible = False
+        pnlloadvisible = False
 
         ' Set the focus
         frmMainGame.picscreen.Focus()
@@ -269,11 +270,11 @@ Module ClientGeneral
     End Sub
 
     Public Sub SetStatus(ByVal Caption As String)
-        frmLoad.lblStatus.Text = Caption
+        frmMenu.lblStatus.Text = Caption
     End Sub
 
     Public Sub MenuState(ByVal State As Integer)
-        frmloadvisible = True
+        pnlloadvisible = True
         frmmenuvisible = False
         Select Case State
             Case MENU_STATE_ADDCHAR
@@ -340,7 +341,7 @@ Module ClientGeneral
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not IsConnected()) And (GetTickCount() <= until)
             DoEvents()
-            Thread.Sleep(20)
+            Thread.Sleep(10)
         Loop
 
         ' return value

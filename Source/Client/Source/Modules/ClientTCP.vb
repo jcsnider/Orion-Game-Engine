@@ -67,6 +67,7 @@ Module ClientTCP
                 If byteAmt = 0 Then
                     MsgBox("Disconnected.")
                     DestroyGame()
+                    PlayerSocket.Close()
                     Exit Sub
                 End If
                 HandleData(myBytes)
@@ -75,6 +76,7 @@ Module ClientTCP
             Catch ex As Exception
                 MsgBox("Disconnected.")
                 DestroyGame()
+                PlayerSocket.Close()
             End Try
         End If
     End Sub

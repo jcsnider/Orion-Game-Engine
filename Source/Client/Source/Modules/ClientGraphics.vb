@@ -3380,44 +3380,7 @@ NextLoop:
 
     End Sub
 
-    Public Sub LoadGuiGraphics()
 
-        'main menu
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\menu" & GFX_EXT) Then
-            frmMenu.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\menu" & GFX_EXT)
-        End If
-
-        'main menu buttons
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT) Then
-            frmMenu.btnCredits.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnExit.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnPlay.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnNewChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnUseChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnDelChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnCreateAccount.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-            frmMenu.btnSaveIP.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\button" & GFX_EXT)
-        End If
-
-        'main menu panels
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT) Then
-            frmMenu.pnlMainMenu.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlLogin.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlNewChar.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlCharSelect.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlRegister.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlCredits.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-            frmMenu.pnlIPConfig.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\panel" & GFX_EXT)
-        End If
-
-        'logo
-        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT) Then
-            frmMenu.picLogo.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
-        End If
-
-    End Sub
 
     Public Sub DrawGUI()
         'hide GUI when mapping...
