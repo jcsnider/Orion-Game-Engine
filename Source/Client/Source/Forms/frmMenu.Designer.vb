@@ -836,7 +836,7 @@ Partial Class frmMenu
         Me.pnlLoad.Controls.Add(Me.lblStatus)
         Me.pnlLoad.Location = New System.Drawing.Point(2, 1)
         Me.pnlLoad.Name = "pnlLoad"
-        Me.pnlLoad.Size = New System.Drawing.Size(729, 534)
+        Me.pnlLoad.Size = New System.Drawing.Size(729, 553)
         Me.pnlLoad.TabIndex = 58
         '
         'lblStatus

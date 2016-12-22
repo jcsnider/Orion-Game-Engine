@@ -18,7 +18,7 @@ Public Class frmMenu
         LoadMenuGraphics()
 
         pnlLoad.Width = 730
-        pnlLoad.Height = 534
+        pnlLoad.Height = 550
 
         Width = 730
         pnlLogin.Top = pnlMainMenu.Top
@@ -194,7 +194,6 @@ Public Class frmMenu
                 picChar1.Refresh()
             End If
 
-
             'second
             If CharSelection(2).Sprite > 0 Then
                 g = picChar2.CreateGraphics
@@ -223,7 +222,6 @@ Public Class frmMenu
                 picChar2.BorderStyle = BorderStyle.FixedSingle
                 picChar2.Refresh()
             End If
-
 
             'third
             If CharSelection(3).Sprite > 0 Then

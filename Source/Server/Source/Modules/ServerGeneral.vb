@@ -122,7 +122,6 @@ Module ServerGeneral
         Next
         ReDim Npc(0 To MAX_NPCS).Stat(0 To Stats.Count - 1)
 
-
         ReDim Shop(0 To MAX_SHOPS).TradeItem(0 To MAX_TRADES)
 
         ReDim Animation(0 To MAX_ANIMATIONS).Sprite(0 To 1)
@@ -178,7 +177,6 @@ Module ServerGeneral
         Else
             LoadOptions()
         End If
-
 
         ' Serves as a constructor
         ClearGameData()
@@ -428,12 +426,23 @@ Module ServerGeneral
 
         Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
             sw.WriteLine(DateTime.Now)
-            sw.WriteLine(e.Message)
+            sw.WriteLine(GetExceptionInfo(e))
         End Using
 
-        MessageBox.Show("An unexpected error occured. Application will be terminated.")
+        MessageBox.Show("An unexpected error occured. Check the error log for details.")
         End
     End Sub
 
+    Public Function GetExceptionInfo(ex As Exception) As String
+        Dim Result As String
+        Dim hr As Integer = Runtime.InteropServices.Marshal.GetHRForException(ex)
+        Result = ex.GetType.ToString & "(0x" & hr.ToString("X8") & "): " & ex.Message & Environment.NewLine & ex.StackTrace & Environment.NewLine
+        Dim st As StackTrace = New StackTrace(ex, True)
+        For Each sf As StackFrame In st.GetFrames
+            If sf.GetFileLineNumber() > 0 Then
+                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
+            End If
+        Next
+        Return Result
+    End Function
 End Module
-
