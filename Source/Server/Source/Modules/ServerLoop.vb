@@ -77,7 +77,7 @@ Module ServerLoop
                 ' Check for disconnected players.
                 Dim _playerdisconnects = (
                     From p In OnlinePlayers
-                    Where Not Clients(p.Index).Socket Is Nothing And Not Clients(p.Index).Socket.Connected
+                    Where Not (Clients(p.Index) Is Nothing) AndAlso Not (Clients(p.Index).Socket Is Nothing) AndAlso Not (Clients(p.Index).Socket.Connected)
                     Select New With {Key .Index = p.Index, Key .Success = HandleCloseSocket(p.Index)}
                 ).ToArray()
 
