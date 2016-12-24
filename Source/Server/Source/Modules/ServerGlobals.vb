@@ -1,4 +1,5 @@
 ﻿Module ServerGlobals
+    Public Debugging As Boolean
 
     Public ConsoleText As String
 
