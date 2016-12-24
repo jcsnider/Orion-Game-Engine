@@ -60,8 +60,8 @@
         Packets = New Dictionary(Of Integer, Packet_)
 
         Packets.Add(ServerPackets.SAlertMsg, AddressOf Packet_AlertMSG)
+        Packets.Add(ServerPackets.SLoadCharOk, AddressOf Packet_LoadCharOk)
         Packets.Add(ServerPackets.SLoginOk, AddressOf Packet_LoginOk)
-        Packets.Add(ServerPackets.SSelChar, AddressOf Packet_SelChar)
         Packets.Add(ServerPackets.SNewCharClasses, AddressOf Packet_NewCharClasses)
         Packets.Add(ServerPackets.SClassesData, AddressOf Packet_ClassesData)
         Packets.Add(ServerPackets.SInGame, AddressOf Packet_InGame)
@@ -228,8 +228,25 @@
         DestroyGame()
     End Sub
 
-    Sub Packet_LoginOk(ByVal Data() As Byte)
+    Sub Packet_LoadCharOk(ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If Buffer.ReadInteger <> ServerPackets.SLoadCharOk Then Exit Sub
+
+        ' Now we can receive game data
+        MyIndex = Buffer.ReadInteger
+
+        Buffer = Nothing
+
+        pnlloadvisible = True
+        SetStatus("Receiving game data...")
+    End Sub
+
+    Sub Packet_LoginOk(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer, MaxChars As Byte, CharName As String, Sprite As Integer, Level As Integer, ClassName As String, Gender As Byte
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
@@ -248,22 +265,8 @@
 
         SaveOptions()
 
-        ' Now we can receive game data
-        MyIndex = Buffer.ReadInteger
-
-        Buffer = Nothing
-
-        pnlloadvisible = True
-        SetStatus("Receiving game data...")
-    End Sub
-
-    Sub Packet_SelChar(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer, MaxChars As Byte, CharName As String, Sprite As Integer, Level As Integer, ClassName As String, Gender As Byte
-        Buffer = New ByteBuffer
-        Buffer.WriteBytes(Data)
-
-        ' Confirm it is the right packet
-        If Buffer.ReadInteger <> ServerPackets.SSelChar Then Exit Sub
+        ' Request classes.
+        SendRequestClasses()
 
         ' Now we can receive char data
         MaxChars = Buffer.ReadInteger
@@ -389,10 +392,9 @@
         pnlloadvisible = False
         pnlCreditsVisible = False
         pnlRegisterVisible = False
-        'pnlCharCreateVisible = True
+        pnlCharCreateVisible = True
         pnlLoginVisible = False
-
-        pnlCharSelectVisible = True
+        'pnlCharSelectVisible = True
 
         ReDim cmbclass(0 To Max_Classes)
 
@@ -418,19 +420,15 @@
         Max_Classes = Buffer.ReadInteger
         ReDim Classes(0 To Max_Classes)
 
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(0 To Stats.Count - 1)
-        Next
-
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Vital(0 To Vitals.Count - 1)
-        Next
+        SelectedChar = 1
 
         For i = 1 To Max_Classes
 
             With Classes(i)
-                .Name = Trim$(Buffer.ReadString)
-                .Desc = Trim$(Buffer.ReadString)
+                .Name = Trim(Buffer.ReadString)
+                .Desc = Trim(Buffer.ReadString)
+
+                ReDim .Vital(0 To Vitals.Count - 1)
 
                 .Vital(Vitals.HP) = Buffer.ReadInteger
                 .Vital(Vitals.MP) = Buffer.ReadInteger
@@ -439,20 +437,22 @@
                 ' get array size
                 z = Buffer.ReadInteger
                 ' redim array
-                ReDim .MaleSprite(0 To z)
+                ReDim .MaleSprite(0 To z + 1)
                 ' loop-receive data
-                For X = 0 To z
+                For X = 1 To z + 1
                     .MaleSprite(X) = Buffer.ReadInteger
                 Next
 
                 ' get array size
                 z = Buffer.ReadInteger
                 ' redim array
-                ReDim .FemaleSprite(0 To z)
+                ReDim .FemaleSprite(0 To z + 1)
                 ' loop-receive data
-                For X = 0 To z
+                For X = 1 To z + 1
                     .FemaleSprite(X) = Buffer.ReadInteger
                 Next
+
+                ReDim .Stat(0 To Stats.Count - 1)
 
                 .Stat(Stats.Strength) = Buffer.ReadInteger
                 .Stat(Stats.Endurance) = Buffer.ReadInteger
@@ -476,6 +476,13 @@
             End With
 
         Next
+
+        ReDim cmbclass(0 To Max_Classes)
+        For i = 1 To Max_Classes
+            cmbclass(i) = Classes(i).Name
+        Next
+        frmMenu.DrawCharacter()
+        newCharSprite = 1
 
         Buffer = Nothing
     End Sub
