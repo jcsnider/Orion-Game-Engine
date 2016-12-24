@@ -98,11 +98,10 @@ Module ServerAutoMap
         Dim FileName As String
 
         ReDim Tile(TilePrefab.Count - 1)
-
+        FileName = Path.Combine(Application.StartupPath, "data", "automapper.ini")
         For Prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
-            FileName = Path.Combine(Application.StartupPath, "data", "automapper.ini")
             For Layer = 1 To MapLayer.Count - 1
                 Tile(Prefab).Layer(Layer).Tileset = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Tileset"))
                 Tile(Prefab).Layer(Layer).x = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "X"))

@@ -1,4 +1,6 @@
-﻿Module ServerHandleData
+﻿Imports System.IO
+
+Module ServerHandleData
 
     Private Delegate Sub Packet_(ByVal Index As Integer, ByVal Data() As Byte)
     Private Packets As Dictionary(Of Integer, Packet_)
@@ -1410,7 +1412,7 @@
             Exit Sub
         End If
 
-        filename = Application.StartupPath & "\data\banlist.txt"
+        filename = Path.Combine(Application.StartupPath, "data", "banlist.txt")
 
         If System.IO.File.Exists(filename) Then Kill(filename)
 

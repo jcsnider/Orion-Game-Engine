@@ -1,4 +1,6 @@
-﻿Public Module ServerQuest
+﻿Imports System.IO
+
+Public Module ServerQuest
 #Region "Constants"
     'Constants
     Public Const MAX_QUESTS As Byte = 250
@@ -85,7 +87,7 @@
     Sub SaveQuest(ByVal QuestNum As Integer)
         Dim filename As String
         Dim I As Integer
-        filename = Application.StartupPath & "\data\quests\quest" & QuestNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", QuestNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer
 
@@ -111,8 +113,8 @@
 
         writer.Write(Quest(QuestNum).RewardCount)
         For I = 1 To Quest(QuestNum).RewardCount
-            writer.Write(Quest(QuestNum).RewardItem(i))
-            writer.Write(Quest(QuestNum).RewardItemAmount(i))
+            writer.Write(Quest(QuestNum).RewardItem(I))
+            writer.Write(Quest(QuestNum).RewardItemAmount(I))
         Next
         writer.Write(Quest(QuestNum).RewardExp)
 
@@ -150,7 +152,7 @@
         Dim FileName As String
         Dim I As Integer
 
-        FileName = Application.StartupPath & "\data\quests\quest" & QuestNum & ".dat"
+        FileName = Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", QuestNum))
 
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(FileName)
 
@@ -204,7 +206,7 @@
     Sub CheckQuests()
         Dim I As Integer
         For I = 1 To MAX_QUESTS
-            If Not FileExist(Application.StartupPath & "\Data\quests\quest" & I & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "quests", String.Format("quest{0}.dat", I))) Then
                 SaveQuest(I)
                 DoEvents()
             End If
@@ -302,7 +304,7 @@
         If Buffer.ReadInteger <> EditorPackets.SaveQuest Then Exit Sub
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.DEVELOPER Then Exit Sub
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         QuestNum = Buffer.ReadInteger
         If QuestNum < 0 Or QuestNum > MAX_QUESTS Then Exit Sub
@@ -415,7 +417,7 @@
         Dim QuestNum As Integer
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.MAPPER Then Exit Sub
+        If GetPlayerAccess(Index) < AdminType.Mapper Then Exit Sub
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)

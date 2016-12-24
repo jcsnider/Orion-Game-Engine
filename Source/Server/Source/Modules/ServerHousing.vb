@@ -1,4 +1,6 @@
-﻿Public Module ServerHousing
+﻿Imports System.IO
+
+Public Module ServerHousing
 #Region "Globals & Types"
     Public MAX_HOUSES As Integer = 100
 
@@ -30,7 +32,7 @@
     Sub LoadHouses()
         Dim i As Integer, filepath As String
 
-        filepath = Application.StartupPath & "\data\HouseConfig.ini"
+        filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
         'frmServer.lstHouses.Items.Clear()
 
         For i = 1 To MAX_HOUSES
@@ -55,7 +57,7 @@
     Sub SaveHouse(Index As Integer)
         Dim filepath As String
 
-        filepath = Application.StartupPath & "\data\HouseConfig.ini"
+        filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
         If Index > 0 And Index <= MAX_HOUSES Then
             Call PutVar(filepath, "House" & Index, "BaseMap", HouseConfig(Index).BaseMap)
             Call PutVar(filepath, "House" & Index, "Name", HouseConfig(Index).ConfigName)
@@ -244,7 +246,7 @@
         End If
 
         If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
-            If Item(ItemNum).Type = ItemType.FURNITURE Then
+            If Item(ItemNum).Type = ItemType.Furniture Then
                 ' stat requirements
                 For i = 1 To Stats.Count - 1
                     If GetPlayerRawStat(index, i) < Item(ItemNum).Stat_Req(i) Then
@@ -306,7 +308,7 @@
 
                     For x = x1 To x1 + widthoffset
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then
@@ -337,7 +339,7 @@
 
                     For x = x1 To x1 - (Item(ItemNum).FurnitureWidth - widthoffset) Step -1
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then
@@ -368,7 +370,7 @@
                 Else
                     For x = x1 To x1 + Item(ItemNum).FurnitureWidth - 1
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
-                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.BLOCKED Then Exit Sub
+                            If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
                             For i = 1 To MAX_PLAYERS
                                 If IsPlaying(i) Then
@@ -432,7 +434,7 @@
         Buffer = Nothing
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.MAPPER Then
+        If GetPlayerAccess(index) < AdminType.Mapper Then
             Exit Sub
         End If
 
@@ -455,7 +457,7 @@
         Dim Buffer As ByteBuffer, i As Integer, x As Integer, Count As Integer, z As Integer
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.MAPPER Then
+        If GetPlayerAccess(index) < AdminType.Mapper Then
             Exit Sub
         End If
 
