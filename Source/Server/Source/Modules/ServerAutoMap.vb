@@ -1,4 +1,6 @@
-﻿Module ServerAutoMap
+﻿Imports System.IO
+
+Module ServerAutoMap
     ' Automapper System
     ' Version: 1.0
     ' Author: Lucas Tardivo (boasfesta)
@@ -93,23 +95,24 @@
     Sub LoadTilePrefab()
         Dim Prefab As Integer
         Dim Layer As Integer
+        Dim FileName As String
 
         ReDim Tile(TilePrefab.Count - 1)
 
         For Prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
-
+            FileName = Path.Combine(Application.StartupPath, "data", "automapper.ini")
             For Layer = 1 To MapLayer.Count - 1
-                Tile(Prefab).Layer(Layer).Tileset = Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset"))
-                Tile(Prefab).Layer(Layer).x = Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X"))
-                Tile(Prefab).Layer(Layer).y = Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y"))
-                Tile(Prefab).Layer(Layer).AutoTile = Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile"))
+                Tile(Prefab).Layer(Layer).Tileset = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Tileset"))
+                Tile(Prefab).Layer(Layer).x = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "X"))
+                Tile(Prefab).Layer(Layer).y = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Y"))
+                Tile(Prefab).Layer(Layer).AutoTile = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Autotile"))
             Next Layer
-            Tile(Prefab).Type = Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type"))
+            Tile(Prefab).Type = Val(Getvar(FileName, Val(Prefab), "Type"))
         Next Prefab
 
-        ResourcesNum = Getvar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum")
+        ResourcesNum = Getvar(FileName, "Resources", "ResourcesNum")
         Resources = Split(ResourcesNum, ";")
     End Sub
 
