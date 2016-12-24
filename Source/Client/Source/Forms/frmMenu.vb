@@ -344,9 +344,9 @@ Public Class frmMenu
     Private Sub lblNextChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblNextChar.Click
         newCharSprite = newCharSprite + 1
         If rdoMale.Checked = True Then
-            If newCharSprite > UBound(Classes(newCharClass).MaleSprite) Then newCharSprite = 1
+            If newCharSprite > Classes(newCharClass).MaleSprite.Length - 1 Then newCharSprite = 1
         ElseIf rdoFemale.Checked = True Then
-            If newCharSprite > UBound(Classes(newCharClass).FemaleSprite) Then newCharSprite = 1
+            If newCharSprite > Classes(newCharClass).FemaleSprite.Length - 1 Then newCharSprite = 1
         End If
         DrawCharacter()
     End Sub
@@ -357,9 +357,9 @@ Public Class frmMenu
     Private Sub lblPrevChar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblPrevChar.Click
         newCharSprite = newCharSprite - 1
         If rdoMale.Checked = True Then
-            If newCharSprite = 0 Then newCharSprite = UBound(Classes(newCharClass).MaleSprite)
+            If newCharSprite = 0 Then newCharSprite = Classes(newCharClass).MaleSprite.Length - 1
         ElseIf rdoFemale.Checked = True Then
-            If newCharSprite = 0 Then newCharSprite = UBound(Classes(newCharClass).FemaleSprite)
+            If newCharSprite = 0 Then newCharSprite = Classes(newCharClass).FemaleSprite.Length - 1
         End If
         DrawCharacter()
     End Sub

@@ -327,7 +327,7 @@ Module ServerHandleData
 
                 Buffer = Nothing
                 Buffer = New ByteBuffer
-                Buffer.WriteInteger(ServerPackets.SSelChar)
+                Buffer.WriteInteger(ServerPackets.SLoginOk)
                 Buffer.WriteInteger(MAX_CHARS)
 
                 For i = 1 To MAX_CHARS
@@ -496,7 +496,7 @@ Module ServerHandleData
 
                     Buffer = Nothing
                     Buffer = New ByteBuffer
-                    Buffer.WriteInteger(ServerPackets.SSelChar)
+                    Buffer.WriteInteger(ServerPackets.SLoginOk)
                     Buffer.WriteInteger(MAX_CHARS)
 
                     For i = 1 To MAX_CHARS
@@ -3053,7 +3053,7 @@ Module ServerHandleData
             LoadPlayer(index, Name)
 
             If GetPlayerAccess(index) > AdminType.Player Then
-                SendLoginOk(index)
+                SendLoadCharOk(index)
                 SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)

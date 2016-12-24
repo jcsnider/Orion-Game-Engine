@@ -295,7 +295,7 @@
 
         'Update the log
         ' Send an ok to client to start receiving in game data
-        SendLoginOk(Index)
+        SendLoadCharOk(Index)
         TotalPlayersOnline = TotalPlayersOnline + 1
         ' Send some more little goodies, no need to explain these
         CheckEquippedItems(Index)

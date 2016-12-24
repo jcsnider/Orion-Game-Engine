@@ -338,10 +338,10 @@ Module ServerTCP
 
     End Function
 
-    Sub SendLoginOk(ByVal index As Integer)
+    Sub SendLoadCharOk(ByVal index As Integer)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
-        buffer.WriteInteger(ServerPackets.SLoginOk)
+        buffer.WriteInteger(ServerPackets.SLoadCharOk)
         buffer.WriteInteger(index)
         SendDataTo(index, buffer.ToArray)
         buffer = Nothing
