@@ -1,4 +1,6 @@
-﻿Module ServerPlayers
+﻿Imports System.Linq
+
+Module ServerPlayers
     ' //////////////////////
     ' // PLAYER FUNCTIONS //
     ' //////////////////////
@@ -1134,6 +1136,15 @@
         If Index > MAX_PLAYERS Then Exit Function
 
         GetPlayerSkill = Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot)
+    End Function
+
+    Public Function GetPlayerSkillSlot(ByVal Index As Integer, ByVal SkillId As Integer) As Integer
+        GetPlayerSkillSlot = -1
+        If Index < 0 Or Index > MAX_PLAYERS Then Exit Function
+        Dim data = Player(Index).Character(TempPlayer(Index).CurChar).Skill.Where(Function(x) x = SkillId).ToArray()
+        If data.Length > 0 Then
+            GetPlayerSkillSlot = data.Single()
+        End If
     End Function
 
     Function HasSkill(ByVal Index As Integer, ByVal skillnum As Integer) As Boolean

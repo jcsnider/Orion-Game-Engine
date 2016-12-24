@@ -20,7 +20,7 @@ Module ServerGeneral
         x = 0
 
         Dim currentDomain As AppDomain = AppDomain.CurrentDomain
-        AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
+        'AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
 
         Console.Title = "Orion+ Server"
         Console.SetWindowSize(120, 20)
@@ -29,10 +29,9 @@ Module ServerGeneral
         SetConsoleCtrlHandler(handler, True)
 
         time1 = GetTickCount()
-        'frmServer.Show()
 
         ' Initialize the random-number generator
-        Randomize() ', seed
+        Randomize()
 
         ReDim Map(MAX_CACHED_MAPS)
 
@@ -190,10 +189,6 @@ Module ServerGeneral
 
         For x = 1 To MAX_PLAYERS
             Clients(x) = New Client
-            'frmServer.lstView.Items.Add(x)
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
             ClearPlayer(x)
         Next
 
