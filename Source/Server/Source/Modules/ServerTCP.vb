@@ -347,6 +347,15 @@ Module ServerTCP
         buffer = Nothing
     End Sub
 
+    Sub SendEditorLoadOk(ByVal index As Integer)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+        buffer.WriteInteger(ServerPackets.SLoginOk)
+        buffer.WriteInteger(index)
+        SendDataTo(index, buffer.ToArray)
+        buffer = Nothing
+    End Sub
+
     Sub SendClasses(ByVal Index As Integer)
         Dim i As Integer, n As Integer, q As Integer
         Dim Buffer As ByteBuffer

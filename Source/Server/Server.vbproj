@@ -90,7 +90,6 @@
       <DependentUpon>frmServer.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Modules\CastSpell.vb" />
     <Compile Include="Source\Modules\ServerAutoMap.vb" />
     <Compile Include="Source\Modules\ServerCombat.vb" />
     <Compile Include="Source\Modules\ServerConsole.vb" />

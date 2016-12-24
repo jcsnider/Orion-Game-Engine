@@ -3053,7 +3053,7 @@ Module ServerHandleData
             LoadPlayer(index, Name)
 
             If GetPlayerAccess(index) > AdminType.Player Then
-                SendLoadCharOk(index)
+                SendEditorLoadOk(index)
                 SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)
