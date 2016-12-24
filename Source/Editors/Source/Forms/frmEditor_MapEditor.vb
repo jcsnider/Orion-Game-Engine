@@ -16,8 +16,8 @@ Public Class frmEditor_MapEditor
         'picScreen.Width = Map.MaxX * PIC_X
         'picScreen.Height = Map.MaxY * PIC_Y
 
-        scrlMapViewV.Maximum = (picScreen.Height \ PIC_Y) \ 2 ' \2 is new, lets test
-        scrlMapViewH.Maximum = (picScreen.Width \ PIC_X) \ 2
+        scrlMapViewV.Maximum = Map.MaxX
+        scrlMapViewH.Maximum = Map.MaxY
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
@@ -30,8 +30,8 @@ Public Class frmEditor_MapEditor
         'picScreen.Width = Map.MaxX * PIC_X
         'picScreen.Height = Map.MaxY * PIC_Y
         ' set the scrollbars
-        scrlMapViewV.Maximum = (picScreen.Height \ PIC_Y)
-        scrlMapViewH.Maximum = (picScreen.Width \ PIC_X)
+        scrlMapViewV.Maximum = Map.MaxX
+        scrlMapViewH.Maximum = Map.MaxY
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub
@@ -84,7 +84,6 @@ Public Class frmEditor_MapEditor
 
         picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
         picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
-
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
@@ -349,7 +348,6 @@ Public Class frmEditor_MapEditor
         fraBuyHouse.Visible = False
     End Sub
 
-
 #End Region
 
 #Region "Toolbar"
@@ -420,7 +418,6 @@ Public Class frmEditor_MapEditor
         If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
             MapEditorMouseDown(e.Button, e.X, e.Y)
         End If
-
 
         tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
     End Sub

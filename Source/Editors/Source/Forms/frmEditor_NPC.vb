@@ -224,4 +224,16 @@
 
         Npc(EditorIndex).Skill(6) = cmbSkill6.SelectedIndex
     End Sub
+
+    Private Sub txtLevel_TextChanged(sender As Object, e As EventArgs) Handles txtLevel.TextChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        If IsNumeric(txtLevel.Text) Then Npc(EditorIndex).Level = txtLevel.Text
+    End Sub
+
+    Private Sub txtDamage_TextChanged(sender As Object, e As EventArgs) Handles txtDamage.TextChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        If IsNumeric(txtDamage.Text) Then Npc(EditorIndex).Damage = txtDamage.Text
+    End Sub
 End Class

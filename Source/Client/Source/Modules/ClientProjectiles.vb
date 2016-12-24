@@ -35,34 +35,6 @@ Public Module ClientProjectiles
 #End Region
 
 #Region "Sending"
-    Sub SendRequestEditProjectiles()
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
-        buffer.WriteInteger(EditorPackets.RequestEditProjectiles)
-        SendData(buffer.ToArray())
-        buffer = Nothing
-
-    End Sub
-
-    Sub SendSaveProjectile(ByVal ProjectileNum As Integer)
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
-
-        buffer.WriteInteger(EditorPackets.SaveProjectile)
-        buffer.WriteInteger(ProjectileNum)
-
-        buffer.WriteString(Trim(Projectiles(ProjectileNum).Name))
-        buffer.WriteInteger(Projectiles(ProjectileNum).Sprite)
-        buffer.WriteInteger(Projectiles(ProjectileNum).Range)
-        buffer.WriteInteger(Projectiles(ProjectileNum).Speed)
-        buffer.WriteInteger(Projectiles(ProjectileNum).Damage)
-
-        SendData(buffer.ToArray())
-        buffer = Nothing
-
-    End Sub
 
     Sub SendRequestProjectiles()
         Dim buffer As ByteBuffer
@@ -91,11 +63,6 @@ Public Module ClientProjectiles
 #End Region
 
 #Region "Recieving"
-    Public Sub HandleProjectileEditor(ByVal data() As Byte)
-
-        InitProjectileEditor = True
-
-    End Sub
 
     Public Sub HandleUpdateProjectile(ByVal data() As Byte)
         Dim ProjectileNum As Integer
@@ -211,13 +178,13 @@ Public Module ClientProjectiles
         ' check to see if it's time to move the Projectile
         If GetTickCount() > MapProjectiles(ProjectileNum).TravelTime Then
             Select Case MapProjectiles(ProjectileNum).dir
-                Case Direction.UP
+                Case Direction.Up
                     MapProjectiles(ProjectileNum).Y = MapProjectiles(ProjectileNum).Y - 1
-                Case Direction.DOWN
+                Case Direction.Down
                     MapProjectiles(ProjectileNum).Y = MapProjectiles(ProjectileNum).Y + 1
-                Case Direction.LEFT
+                Case Direction.Left
                     MapProjectiles(ProjectileNum).X = MapProjectiles(ProjectileNum).X - 1
-                Case Direction.RIGHT
+                Case Direction.Right
                     MapProjectiles(ProjectileNum).X = MapProjectiles(ProjectileNum).X + 1
             End Select
             MapProjectiles(ProjectileNum).TravelTime = GetTickCount() + Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed
@@ -235,7 +202,7 @@ Public Module ClientProjectiles
 
         'Check for blocked wall collision
         If CanClearProjectile = False Then 'Add a check to prevent crashing
-            If Map.Tile(X, Y).Type = TileType.BLOCKED Then CanClearProjectile = True
+            If Map.Tile(X, Y).Type = TileType.Blocked Then CanClearProjectile = True
         End If
 
         'Check for npc collision
@@ -243,7 +210,7 @@ Public Module ClientProjectiles
             If MapNpc(i).X = X And MapNpc(i).Y = Y Then
                 CanClearProjectile = True
                 CollisionIndex = i
-                CollisionType = TargetType.NPC
+                CollisionType = TargetType.Npc
                 CollisionZone = -1
                 Exit For
             End If
@@ -255,9 +222,9 @@ Public Module ClientProjectiles
                 If GetPlayerX(i) = X And GetPlayerY(i) = Y Then
                     CanClearProjectile = True
                     CollisionIndex = i
-                    CollisionType = TargetType.PLAYER
+                    CollisionType = TargetType.Player
                     CollisionZone = -1
-                    If MapProjectiles(ProjectileNum).OwnerType = TargetType.PLAYER Then
+                    If MapProjectiles(ProjectileNum).OwnerType = TargetType.Player Then
                         If MapProjectiles(ProjectileNum).Owner = i Then CanClearProjectile = False ' Reset if its the owner of projectile
                     End If
                     Exit For
@@ -272,7 +239,7 @@ Public Module ClientProjectiles
         'Clear the projectile if possible
         If CanClearProjectile = True Then
             'Only send the clear to the server if you're the projectile caster or the one hit (only if owner is not a player)
-            If (MapProjectiles(ProjectileNum).OwnerType = TargetType.PLAYER And MapProjectiles(ProjectileNum).Owner = MyIndex) Then
+            If (MapProjectiles(ProjectileNum).OwnerType = TargetType.Player And MapProjectiles(ProjectileNum).Owner = MyIndex) Then
                 SendClearProjectile(ProjectileNum, CollisionIndex, CollisionType, CollisionZone)
             End If
 
@@ -302,13 +269,13 @@ Public Module ClientProjectiles
 
         'Find the offset
         Select Case MapProjectiles(ProjectileNum).dir
-            Case Direction.UP
+            Case Direction.Up
                 YOffset = ((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PIC_Y
-            Case Direction.DOWN
+            Case Direction.Down
                 YOffset = -((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PIC_Y
-            Case Direction.LEFT
+            Case Direction.Left
                 XOffset = ((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PIC_X
-            Case Direction.RIGHT
+            Case Direction.Right
                 XOffset = -((MapProjectiles(ProjectileNum).TravelTime - GetTickCount()) / Projectiles(MapProjectiles(ProjectileNum).ProjectileNum).Speed) * PIC_X
         End Select
 

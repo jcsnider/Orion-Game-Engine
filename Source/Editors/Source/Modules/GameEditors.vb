@@ -142,6 +142,8 @@ Module GameEditors
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_MapEditor.picScreen.Width, frmEditor_MapEditor.picScreen.Height)))
 
         frmEditor_MapEditor.tslCurMap.Text = "Map: " & Map.MapNum
+        frmEditor_MapEditor.lblMap.Text = "Map: " & Map.MapNum
+
         ' show the form
         frmEditor_MapEditor.Visible = True
 
@@ -185,7 +187,6 @@ Module GameEditors
         Else
             frmEditor_MapEditor.cmbMapList.SelectedIndex = 0
         End If
-
 
         ' set shops for the shop attribute
         frmEditor_MapEditor.cmbShop.Items.Add("None")
@@ -673,7 +674,7 @@ Module GameEditors
 
             If .Pic > frmEditor_Item.scrlPic.Maximum Then .Pic = 0
             frmEditor_Item.scrlPic.Value = .Pic
-            If .Type > ItemType.count - 1 Then .Type = 0
+            If .Type > ItemType.Count - 1 Then .Type = 0
             frmEditor_Item.cmbType.SelectedIndex = .Type
             frmEditor_Item.scrlAnim.Value = .Animation
 
@@ -721,6 +722,9 @@ Module GameEditors
                 frmEditor_Item.numMax.Value = .RandomMax
 
                 frmEditor_Item.scrlPaperdoll.Value = .Paperdoll
+
+                frmEditor_Item.scrlProjectile.Value = .Projectile
+                frmEditor_Item.scrlAmmo.Value = .Ammo
             Else
                 frmEditor_Item.fraEquipment.Visible = False
             End If
@@ -755,11 +759,11 @@ Module GameEditors
             frmEditor_Item.scrlAccessReq.Value = .AccessReq
             frmEditor_Item.scrlLevelReq.Value = .LevelReq
 
-            frmEditor_Item.scrlStrReq.Value = .Stat_Req(Stats.strength)
+            frmEditor_Item.scrlStrReq.Value = .Stat_Req(Stats.Strength)
             frmEditor_Item.scrlVitReq.Value = .Stat_Req(Stats.Vitality)
             frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.Luck)
             frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.Endurance)
-            frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.intelligence)
+            frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.Intelligence)
             frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.Spirit)
 
             ' Build cmbClassReq
@@ -854,11 +858,14 @@ Module GameEditors
 
             .txtHP.Text = Npc(EditorIndex).HP
             .txtEXP.Text = Npc(EditorIndex).EXP
+            .txtLevel.Text = Npc(EditorIndex).Level
+            .txtDamage.Text = Npc(EditorIndex).Damage
+
             .scrlQuest.Value = Npc(EditorIndex).QuestNum
 
-            .scrlStr.Value = Npc(EditorIndex).Stat(Stats.strength)
+            .scrlStr.Value = Npc(EditorIndex).Stat(Stats.Strength)
             .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.Endurance)
-            .scrlInt.Value = Npc(EditorIndex).Stat(Stats.intelligence)
+            .scrlInt.Value = Npc(EditorIndex).Stat(Stats.Intelligence)
             .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.Spirit)
             .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.Luck)
             .scrlVit.Value = Npc(EditorIndex).Stat(Stats.Vitality)
@@ -951,7 +958,6 @@ Module GameEditors
         frmEditor_Resource.scrlRespawn.Value = Resource(EditorIndex).RespawnTime
         frmEditor_Resource.scrlAnimation.Value = Resource(EditorIndex).Animation
         frmEditor_Resource.scrlLvlReq.Value = Resource(EditorIndex).LvlRequired
-
 
         frmEditor_Resource.Visible = True
 
@@ -1245,20 +1251,18 @@ Module GameEditors
             If Classes(EditorIndex).Stat(i) = 0 Then Classes(EditorIndex).Stat(i) = 1
         Next
 
-        frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.strength)
+        frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.Strength)
         frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.Luck)
         frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
-        frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.intelligence)
+        frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.Intelligence)
         frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
         frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Spirit)
-
 
         If Classes(EditorIndex).BaseExp < 10 Then
             frmEditor_Classes.numBaseExp.Value = 10
         Else
             frmEditor_Classes.numBaseExp.Value = Classes(EditorIndex).BaseExp
         End If
-
 
         frmEditor_Classes.lstStartItems.Items.Clear()
 

@@ -24,17 +24,17 @@ Public Class Client
             Dim readbytes As Integer = myStream.EndRead(ar)
             If Socket Is Nothing Then Exit Sub
             If (readbytes <= 0) Then
-                CloseSocket(index) 'Disconnect
+                CloseSocket(Index) 'Disconnect
                 Exit Sub
             End If
             Dim newBytes As Byte()
             ReDim newBytes(readbytes - 1)
             Buffer.BlockCopy(readBuff, 0, newBytes, 0, readbytes)
-            HandleData(index, newBytes)
+            HandleData(Index, newBytes)
             If Socket Is Nothing Then Exit Sub
             myStream.BeginRead(readBuff, 0, Socket.ReceiveBufferSize, AddressOf OnReceiveData, Nothing)
         Catch ex As Exception
-            CloseSocket(index) 'Disconnect
+            CloseSocket(Index) 'Disconnect
             Exit Sub
         End Try
 
@@ -57,7 +57,7 @@ Module ServerTCP
         For i = 1 To MAX_PLAYERS
             If Clients(i).Socket Is Nothing Then
                 Clients(i).Socket = client
-                Clients(i).index = i
+                Clients(i).Index = i
                 Clients(i).IP = DirectCast(client.Client.RemoteEndPoint, IPEndPoint).Address.ToString
                 Clients(i).Start()
                 TextAdd("Connection received from " & Clients(i).IP)
@@ -229,11 +229,11 @@ Module ServerTCP
                 Buffer.WriteInteger(Classes(i).FemaleSprite(q))
             Next
 
-            Buffer.WriteInteger(Classes(i).Stat(Stats.strength))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Strength))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Endurance))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Vitality))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Luck))
-            Buffer.WriteInteger(Classes(i).Stat(Stats.intelligence))
+            Buffer.WriteInteger(Classes(i).Stat(Stats.Intelligence))
             Buffer.WriteInteger(Classes(i).Stat(Stats.Spirit))
 
             For q = 1 To 5
@@ -562,6 +562,9 @@ Module ServerTCP
         Buffer.WriteInteger(Item(itemNum).KnockBack)
         Buffer.WriteInteger(Item(itemNum).KnockBackTiles)
 
+        Buffer.WriteInteger(Item(itemNum).Projectile)
+        Buffer.WriteInteger(Item(itemNum).Ammo)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -622,6 +625,9 @@ Module ServerTCP
 
         Buffer.WriteInteger(Item(itemNum).KnockBack)
         Buffer.WriteInteger(Item(itemNum).KnockBackTiles)
+
+        Buffer.WriteInteger(Item(itemNum).Projectile)
+        Buffer.WriteInteger(Item(itemNum).Ammo)
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
@@ -727,6 +733,9 @@ Module ServerTCP
             Buffer.WriteInteger(Npc(NpcNum).Skill(i))
         Next
 
+        Buffer.WriteInteger(Npc(NpcNum).Level)
+        Buffer.WriteInteger(Npc(NpcNum).Damage)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -764,6 +773,9 @@ Module ServerTCP
         For i = 1 To MAX_NPC_SKILLS
             Buffer.WriteInteger(Npc(NpcNum).Skill(i))
         Next
+
+        Buffer.WriteInteger(Npc(NpcNum).Level)
+        Buffer.WriteInteger(Npc(NpcNum).Damage)
 
         SendDataToAll(Buffer.ToArray())
         Buffer = Nothing
@@ -868,7 +880,6 @@ Module ServerTCP
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-
 
         Buffer.WriteInteger(ServerPackets.SUpdateShop)
         Buffer.WriteInteger(shopNum)
@@ -1584,7 +1595,6 @@ Module ServerTCP
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
-
 
         Buffer.WriteInteger(ServerPackets.SUpdateResource)
         Buffer.WriteInteger(ResourceNum)

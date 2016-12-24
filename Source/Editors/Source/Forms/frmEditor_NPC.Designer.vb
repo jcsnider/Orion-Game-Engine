@@ -74,12 +74,16 @@ Partial Class frmEditor_NPC
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.cmbSkill1 = New System.Windows.Forms.ComboBox()
-        Me.cmbSkill2 = New System.Windows.Forms.ComboBox()
-        Me.cmbSkill3 = New System.Windows.Forms.ComboBox()
+        Me.cmbSkill6 = New System.Windows.Forms.ComboBox()
         Me.cmbSkill5 = New System.Windows.Forms.ComboBox()
         Me.cmbSkill4 = New System.Windows.Forms.ComboBox()
-        Me.cmbSkill6 = New System.Windows.Forms.ComboBox()
+        Me.cmbSkill3 = New System.Windows.Forms.ComboBox()
+        Me.cmbSkill2 = New System.Windows.Forms.ComboBox()
+        Me.cmbSkill1 = New System.Windows.Forms.ComboBox()
+        Me.txtLevel = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtDamage = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picSprite, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,6 +112,10 @@ Partial Class frmEditor_NPC
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtDamage)
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.txtLevel)
+        Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.scrlQuest)
         Me.GroupBox2.Controls.Add(Me.lblQuest)
         Me.GroupBox2.Controls.Add(Me.scrlAnimation)
@@ -182,9 +190,9 @@ Partial Class frmEditor_NPC
         '
         'txtEXP
         '
-        Me.txtEXP.Location = New System.Drawing.Point(233, 210)
+        Me.txtEXP.Location = New System.Drawing.Point(285, 166)
         Me.txtEXP.Name = "txtEXP"
-        Me.txtEXP.Size = New System.Drawing.Size(100, 20)
+        Me.txtEXP.Size = New System.Drawing.Size(66, 20)
         Me.txtEXP.TabIndex = 43
         '
         'Label8
@@ -199,7 +207,7 @@ Partial Class frmEditor_NPC
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(233, 190)
+        Me.Label6.Location = New System.Drawing.Point(233, 169)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(31, 13)
         Me.Label6.TabIndex = 42
@@ -207,15 +215,15 @@ Partial Class frmEditor_NPC
         '
         'txtHP
         '
-        Me.txtHP.Location = New System.Drawing.Point(233, 156)
+        Me.txtHP.Location = New System.Drawing.Point(285, 140)
         Me.txtHP.Name = "txtHP"
-        Me.txtHP.Size = New System.Drawing.Size(100, 20)
+        Me.txtHP.Size = New System.Drawing.Size(66, 20)
         Me.txtHP.TabIndex = 41
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(233, 140)
+        Me.Label5.Location = New System.Drawing.Point(233, 143)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 13)
         Me.Label5.TabIndex = 40
@@ -587,32 +595,14 @@ Partial Class frmEditor_NPC
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Skills"
         '
-        'cmbSkill1
+        'cmbSkill6
         '
-        Me.cmbSkill1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSkill1.FormattingEnabled = True
-        Me.cmbSkill1.Location = New System.Drawing.Point(6, 19)
-        Me.cmbSkill1.Name = "cmbSkill1"
-        Me.cmbSkill1.Size = New System.Drawing.Size(104, 21)
-        Me.cmbSkill1.TabIndex = 0
-        '
-        'cmbSkill2
-        '
-        Me.cmbSkill2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSkill2.FormattingEnabled = True
-        Me.cmbSkill2.Location = New System.Drawing.Point(127, 19)
-        Me.cmbSkill2.Name = "cmbSkill2"
-        Me.cmbSkill2.Size = New System.Drawing.Size(104, 21)
-        Me.cmbSkill2.TabIndex = 1
-        '
-        'cmbSkill3
-        '
-        Me.cmbSkill3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSkill3.FormattingEnabled = True
-        Me.cmbSkill3.Location = New System.Drawing.Point(247, 19)
-        Me.cmbSkill3.Name = "cmbSkill3"
-        Me.cmbSkill3.Size = New System.Drawing.Size(104, 21)
-        Me.cmbSkill3.TabIndex = 2
+        Me.cmbSkill6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill6.FormattingEnabled = True
+        Me.cmbSkill6.Location = New System.Drawing.Point(247, 46)
+        Me.cmbSkill6.Name = "cmbSkill6"
+        Me.cmbSkill6.Size = New System.Drawing.Size(104, 21)
+        Me.cmbSkill6.TabIndex = 5
         '
         'cmbSkill5
         '
@@ -632,14 +622,64 @@ Partial Class frmEditor_NPC
         Me.cmbSkill4.Size = New System.Drawing.Size(104, 21)
         Me.cmbSkill4.TabIndex = 3
         '
-        'cmbSkill6
+        'cmbSkill3
         '
-        Me.cmbSkill6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSkill6.FormattingEnabled = True
-        Me.cmbSkill6.Location = New System.Drawing.Point(247, 46)
-        Me.cmbSkill6.Name = "cmbSkill6"
-        Me.cmbSkill6.Size = New System.Drawing.Size(104, 21)
-        Me.cmbSkill6.TabIndex = 5
+        Me.cmbSkill3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill3.FormattingEnabled = True
+        Me.cmbSkill3.Location = New System.Drawing.Point(247, 19)
+        Me.cmbSkill3.Name = "cmbSkill3"
+        Me.cmbSkill3.Size = New System.Drawing.Size(104, 21)
+        Me.cmbSkill3.TabIndex = 2
+        '
+        'cmbSkill2
+        '
+        Me.cmbSkill2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill2.FormattingEnabled = True
+        Me.cmbSkill2.Location = New System.Drawing.Point(127, 19)
+        Me.cmbSkill2.Name = "cmbSkill2"
+        Me.cmbSkill2.Size = New System.Drawing.Size(104, 21)
+        Me.cmbSkill2.TabIndex = 1
+        '
+        'cmbSkill1
+        '
+        Me.cmbSkill1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill1.FormattingEnabled = True
+        Me.cmbSkill1.Location = New System.Drawing.Point(6, 19)
+        Me.cmbSkill1.Name = "cmbSkill1"
+        Me.cmbSkill1.Size = New System.Drawing.Size(104, 21)
+        Me.cmbSkill1.TabIndex = 0
+        '
+        'txtLevel
+        '
+        Me.txtLevel.Location = New System.Drawing.Point(285, 192)
+        Me.txtLevel.Name = "txtLevel"
+        Me.txtLevel.Size = New System.Drawing.Size(66, 20)
+        Me.txtLevel.TabIndex = 55
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(233, 195)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(36, 13)
+        Me.Label10.TabIndex = 54
+        Me.Label10.Text = "Level:"
+        '
+        'txtDamage
+        '
+        Me.txtDamage.Location = New System.Drawing.Point(285, 218)
+        Me.txtDamage.Name = "txtDamage"
+        Me.txtDamage.Size = New System.Drawing.Size(66, 20)
+        Me.txtDamage.TabIndex = 57
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(233, 221)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(50, 13)
+        Me.Label11.TabIndex = 56
+        Me.Label11.Text = "Damage:"
         '
         'frmEditor_NPC
         '
@@ -728,4 +768,8 @@ Partial Class frmEditor_NPC
     Friend WithEvents cmbSkill3 As System.Windows.Forms.ComboBox
     Friend WithEvents cmbSkill2 As System.Windows.Forms.ComboBox
     Friend WithEvents cmbSkill1 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtDamage As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtLevel As TextBox
+    Friend WithEvents Label10 As Label
 End Class

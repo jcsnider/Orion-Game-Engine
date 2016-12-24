@@ -264,6 +264,9 @@
 
         Dim KnockBack As Byte
         Dim KnockBackTiles As Byte
+
+        Dim Projectile As Integer
+        Dim Ammo As Integer
     End Structure
 
     Public Structure MapItemRec
@@ -293,6 +296,9 @@
         Dim Animation As Integer
         Dim QuestNum As Integer
         Dim Skill() As Byte
+
+        Dim Level As Integer
+        Dim Damage As Integer
     End Structure
 
     Public Structure MapNpcRec

@@ -401,7 +401,6 @@ Module ServerHandleData
             End If
         End If
 
-
         NeedToUpDatePlayerList = True
     End Sub
 
@@ -692,9 +691,7 @@ Module ServerHandleData
 
     Sub Packet_Attack(ByVal Index As Integer, ByVal Data() As Byte)
         Dim Buffer As ByteBuffer
-        Dim i As Integer
-        Dim n As Integer
-        Dim Damage As Integer
+        Dim i As Integer ', Shoot As Boolean
         Dim TempIndex As Integer
         Dim x As Integer, y As Integer
         Buffer = New ByteBuffer
@@ -708,12 +705,29 @@ Module ServerHandleData
         ' can't attack whilst stunned
         If TempPlayer(Index).StunDuration > 0 Then Exit Sub
 
-        'projectiles
+        ' Send this packet so they can see the person attacking
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SAttack)
+        Buffer.WriteInteger(Index)
+        SendDataToMap(GetPlayerMap(Index), Buffer.ToArray)
+        Buffer = Nothing
+
         ' Projectile check
         If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Then
-            If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Data1 > 0 Then 'Item has a projectile
-                PlayerFireProjectile(Index)
-                Exit Sub
+            If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Projectile > 0 Then 'Item has a projectile
+                If Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo > 0 Then
+                    If HasItem(Index, Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo) Then
+                        TakeInvItem(Index, Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo, 1)
+                        PlayerFireProjectile(Index)
+                        Exit Sub
+                    Else
+                        PlayerMsg(Index, "No More " & Item(Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Ammo).Name & " !", ColorType.BrightRed)
+                        Exit Sub
+                    End If
+                Else
+                    PlayerFireProjectile(Index)
+                    Exit Sub
+                End If
             End If
         End If
 
@@ -723,63 +737,15 @@ Module ServerHandleData
 
             ' Make sure we dont try to attack ourselves
             If TempIndex <> Index Then
-
-                ' Can we attack the player?
-                If CanAttackPlayer(Index, TempIndex) Then
-                    If Not CanPlayerBlockHit(TempIndex) Then
-
-                        ' Get the damage we can do
-                        If Not CanPlayerCriticalHit(Index) Then
-                            Damage = GetPlayerDamage(Index) - GetPlayerProtection(TempIndex)
-                        Else
-                            n = GetPlayerDamage(Index)
-                            Damage = n + Int(Rnd() * (n \ 2)) + 1 - GetPlayerProtection(TempIndex)
-                            PlayerMsg(Index, "You feel a surge of energy upon swinging!", ColorType.Yellow)
-                            PlayerMsg(TempIndex, GetPlayerName(Index) & " swings with enormous might!", ColorType.BrightRed)
-                            SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                            SendCritical(Index)
-                        End If
-
-                        AttackPlayer(Index, TempIndex, Damage)
-                    Else
-                        PlayerMsg(Index, GetPlayerName(TempIndex) & "'s " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked your hit!", ColorType.BrightRed)
-                        PlayerMsg(TempIndex, "Your " & Trim$(Item(GetPlayerEquipment(TempIndex, EquipmentType.Shield)).Name) & " has blocked " & GetPlayerName(Index) & "'s hit!", ColorType.BrightGreen)
-                        SendActionMsg(GetPlayerMap(TempIndex), "BLOCK!", ColorType.Pink, 1, (GetPlayerX(TempIndex) * 32), (GetPlayerY(TempIndex) * 32))
-                    End If
-
-                    Exit Sub
+                If IsPlaying(TempIndex) Then
+                    TryPlayerAttackPlayer(Index, i)
                 End If
             End If
         Next
 
         ' Try to attack a npc
         For i = 1 To MAX_MAP_NPCS
-
-            ' Can we attack the npc?
-            If CanAttackNpc(Index, i) Then
-
-                ' Get the damage we can do
-                If Not CanPlayerCriticalHit(Index) Then
-                    Damage = GetPlayerDamage(Index) - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.Endurance) \ 2)
-                    'KnockBackNpc(Index, i)
-                Else
-                    n = GetPlayerDamage(Index)
-                    Damage = n + Int(Rnd() * (n \ 2)) + 1 - (Npc(MapNpc(GetPlayerMap(Index)).Npc(i).Num).Stat(Stats.Endurance) \ 2)
-                    PlayerMsg(Index, "You feel a surge of energy upon swinging!", ColorType.Yellow)
-                    SendActionMsg(GetPlayerMap(Index), "CRITICAL HIT!", ColorType.Yellow, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                    SendCritical(Index)
-                    KnockBackNpc(Index, i)
-                End If
-
-                If Damage > 0 Then
-                    AttackNpc(Index, i, Damage)
-                Else
-                    PlayerMsg(Index, "Your attack does nothing.", ColorType.BrightRed)
-                End If
-
-                Exit Sub
-            End If
-
+            TryPlayerAttackNpc(Index, i)
         Next
 
         ' Check tradeskills
@@ -1076,7 +1042,6 @@ Module ServerHandleData
                 Next
             Next
 
-
         End With
 
         'Event Data!
@@ -1233,7 +1198,6 @@ Module ServerHandleData
 
         ' Respawn
         SpawnMapItems(GetPlayerMap(Index))
-
 
         ClearTempTile(MapNum)
         CacheResources(MapNum)
@@ -1430,7 +1394,6 @@ Module ServerHandleData
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
-
         If Buffer.ReadInteger <> ClientPackets.CBanPlayer Then Exit Sub
 
         ' Prevent hacking
@@ -1572,6 +1535,9 @@ Module ServerHandleData
         Item(n).KnockBack = Buffer.ReadInteger()
         Item(n).KnockBackTiles = Buffer.ReadInteger()
 
+        Item(n).Projectile = Buffer.ReadInteger()
+        Item(n).Ammo = Buffer.ReadInteger()
+
         ' Save it
         SendUpdateItemToAll(n)
         SaveItem(n)
@@ -1638,6 +1604,9 @@ Module ServerHandleData
             Npc(NpcNum).Skill(i) = buffer.ReadInteger()
         Next
 
+        Npc(NpcNum).Level = buffer.ReadInteger()
+        Npc(NpcNum).Damage = buffer.ReadInteger()
+
         ' Save it
         SendUpdateNpcToAll(NpcNum)
         SaveNpc(NpcNum)
@@ -1695,7 +1664,6 @@ Module ServerHandleData
         Next
 
         If Shop(ShopNum).Name Is Nothing Then Shop(ShopNum).Name = ""
-
 
         buffer = Nothing
         ' Save it
@@ -1981,7 +1949,6 @@ Module ServerHandleData
                 End If
             End If
         End If
-
 
         If TargetFound = 0 Then
             SendTarget(index, 0, 0)
@@ -3208,7 +3175,6 @@ Module ServerHandleData
                 Next
             Next
 
-
         End With
 
         'Event Data!
@@ -3365,7 +3331,6 @@ Module ServerHandleData
 
         ' Respawn
         SpawnMapItems(MapNum)
-
 
         ClearTempTile(MapNum)
         CacheResources(MapNum)

@@ -314,7 +314,7 @@ Module EditorTCP
         Buffer.WriteInteger(Item(itemNum).Data1)
         Buffer.WriteInteger(Item(itemNum).Data2)
         Buffer.WriteInteger(Item(itemNum).Data3)
-        Buffer.WriteInteger(Item(itemNum).Handed)
+        Buffer.WriteInteger(Item(itemNum).TwoHanded)
         Buffer.WriteInteger(Item(itemNum).LevelReq)
         Buffer.WriteInteger(Item(itemNum).Mastery)
         Buffer.WriteString(Trim$(Item(itemNum).Name))
@@ -353,6 +353,9 @@ Module EditorTCP
 
         Buffer.WriteInteger(Item(itemNum).KnockBack)
         Buffer.WriteInteger(Item(itemNum).KnockBackTiles)
+
+        Buffer.WriteInteger(Item(itemNum).Projectile)
+        Buffer.WriteInteger(Item(itemNum).Ammo)
 
         SendData(Buffer.ToArray())
         Buffer = Nothing
@@ -447,6 +450,9 @@ Module EditorTCP
         For i = 1 To MAX_NPC_SKILLS
             Buffer.WriteInteger(Npc(NpcNum).Skill(i))
         Next
+
+        Buffer.WriteInteger(Npc(NpcNum).Level)
+        Buffer.WriteInteger(Npc(NpcNum).Damage)
 
         SendData(Buffer.ToArray())
         Buffer = Nothing
@@ -578,7 +584,6 @@ Module EditorTCP
         For i = 0 To UBound(Animation(Animationnum).Sprite)
             Buffer.WriteInteger(Animation(Animationnum).Sprite(i))
         Next
-
 
         SendData(Buffer.ToArray())
         Buffer = Nothing

@@ -96,11 +96,11 @@ Module ServerDatabase
             Next
 
             ' continue
-            Classes(i).Stat(Stats.strength) = Val(Getvar(filename, "CLASS" & i, "Str"))
+            Classes(i).Stat(Stats.Strength) = Val(Getvar(filename, "CLASS" & i, "Str"))
             Classes(i).Stat(Stats.Endurance) = Val(Getvar(filename, "CLASS" & i, "End"))
             Classes(i).Stat(Stats.Vitality) = Val(Getvar(filename, "CLASS" & i, "Vit"))
             Classes(i).Stat(Stats.Luck) = Val(Getvar(filename, "CLASS" & i, "Luck"))
-            Classes(i).Stat(Stats.intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
+            Classes(i).Stat(Stats.Intelligence) = Val(Getvar(filename, "CLASS" & i, "Int"))
             Classes(i).Stat(Stats.Spirit) = Val(Getvar(filename, "CLASS" & i, "Speed"))
 
             ' loop for items & values
@@ -764,6 +764,9 @@ Module ServerDatabase
 
         writer.Write(Item(itemNum).ItemLevel)
 
+        writer.Write(Item(itemNum).Projectile)
+        writer.Write(Item(itemNum).Ammo)
+
         writer.Save(filename)
     End Sub
 
@@ -840,6 +843,9 @@ Module ServerDatabase
         reader.Read(Item(ItemNum).Stackable)
 
         reader.Read(Item(ItemNum).ItemLevel)
+
+        reader.Read(Item(ItemNum).Projectile)
+        reader.Read(Item(ItemNum).Ammo)
 
         FileClose(F)
 
@@ -928,6 +934,9 @@ Module ServerDatabase
             writer.Write(Npc(NpcNum).Skill(i))
         Next
 
+        writer.Write(Npc(NpcNum).Level)
+        writer.Write(Npc(NpcNum).Damage)
+
         writer.Save(filename)
     End Sub
 
@@ -940,7 +949,7 @@ Module ServerDatabase
             LoadNpc(i)
             DoEvents()
         Next
-
+        'SaveNpcs()
     End Sub
 
     Sub LoadNpc(ByVal NpcNum As Integer)
@@ -977,6 +986,9 @@ Module ServerDatabase
         For i = 1 To MAX_NPC_SKILLS
             reader.Read(Npc(NpcNum).Skill(i))
         Next
+
+        reader.Read(Npc(NpcNum).Level)
+        reader.Read(Npc(NpcNum).Damage)
 
         If Npc(NpcNum).Name Is Nothing Then Npc(NpcNum).Name = ""
         If Npc(NpcNum).AttackSay Is Nothing Then Npc(NpcNum).AttackSay = ""
@@ -1643,6 +1655,7 @@ Module ServerDatabase
         Dim i As Integer
 
         TempPlayer(Index).Buffer = New ByteBuffer
+        ReDim TempPlayer(Index).SkillCD(MAX_PLAYER_SKILLS)
 
         Player(Index).Login = ""
         Player(Index).Password = ""
@@ -1960,7 +1973,6 @@ Module ServerDatabase
         writer.Write(Player(Index).Character(CharNum).Classes)
         writer.Write(Player(Index).Character(CharNum).Dir)
 
-
         For i = 1 To EquipmentType.Count - 1
             writer.Write(Player(Index).Character(CharNum).Equipment(i))
         Next
@@ -2014,7 +2026,6 @@ Module ServerDatabase
         writer.Write(Player(Index).Character(CharNum).LastMap)
         writer.Write(Player(Index).Character(CharNum).LastX)
         writer.Write(Player(Index).Character(CharNum).LastY)
-
 
         For i = 1 To MAX_HOTBAR
             writer.Write(Player(Index).Character(CharNum).Hotbar(i).Slot)
@@ -2443,6 +2454,9 @@ Module ServerDatabase
         Buffer.WriteInteger(Item(itemNum).KnockBack)
         Buffer.WriteInteger(Item(itemNum).KnockBackTiles)
 
+        Buffer.WriteInteger(Item(itemNum).Projectile)
+        Buffer.WriteInteger(Item(itemNum).Ammo)
+
         Return Buffer.ToArray
         Buffer = Nothing
     End Function
@@ -2541,6 +2555,9 @@ Module ServerDatabase
         For i = 1 To MAX_NPC_SKILLS
             Buffer.WriteInteger(Npc(NpcNum).Skill(i))
         Next
+
+        Buffer.WriteInteger(Npc(NpcNum).Level)
+        Buffer.WriteInteger(Npc(NpcNum).Damage)
 
         Return Buffer.ToArray
         Buffer = Nothing

@@ -129,6 +129,7 @@
         Dim InParty As Byte
         Dim TargetType As Byte
         Dim Target As Byte
+        Dim TargetZone As Byte
         Dim PartyStarter As Byte
         Dim GettingMap As Byte
         Dim SkillBuffer As Integer
@@ -165,6 +166,9 @@
 
         Dim CraftRecipe As Integer
         Dim CraftAmount As Integer
+
+        Dim stopRegenTimer As Integer
+        Dim stopRegen As Byte
     End Structure
 
     Public Structure TileDataRec
@@ -277,6 +281,9 @@
 
         Dim KnockBack As Byte
         Dim KnockBackTiles As Byte
+
+        Dim Projectile As Integer
+        Dim Ammo As Integer
     End Structure
 
     Public Structure MapItemRec
@@ -305,6 +312,9 @@
         Dim Animation As Integer
         Dim QuestNum As Integer
         Dim Skill() As Byte
+
+        Dim Level As Integer
+        Dim Damage As Integer
     End Structure
 
     Public Structure MapNpcRec
@@ -323,6 +333,8 @@
         Dim SkillBuffer As Integer
         Dim SkillBufferTimer As Integer
         Dim SkillCD() As Integer
+        Dim stopRegen As Byte
+        Dim stopRegenTimer As Integer
     End Structure
 
     Public Structure TradeItemRec

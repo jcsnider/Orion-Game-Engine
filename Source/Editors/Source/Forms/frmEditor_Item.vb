@@ -114,7 +114,7 @@ Public Class frmEditor_Item
 
     Private Sub scrlStrReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlStrReq.ValueChanged
         lblStrReq.Text = "Str: " & scrlStrReq.Value
-        Item(EditorIndex).Stat_Req(Stats.strength) = scrlStrReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Strength) = scrlStrReq.Value
     End Sub
 
     Private Sub scrlEndReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlEndReq.ValueChanged
@@ -134,7 +134,7 @@ Public Class frmEditor_Item
 
     Private Sub scrlIntReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlIntReq.ValueChanged
         lblIntReq.Text = "Int: " & scrlStrReq.Value
-        Item(EditorIndex).Stat_Req(Stats.intelligence) = scrlIntReq.Value
+        Item(EditorIndex).Stat_Req(Stats.Intelligence) = scrlIntReq.Value
     End Sub
 
     Private Sub scrlSprReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprReq.ValueChanged
@@ -189,7 +189,7 @@ Public Class frmEditor_Item
     Private Sub scrlAddStr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddStr.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddStr.Text = "+Str: " & scrlAddStr.Value
-        Item(EditorIndex).Add_Stat(Stats.strength) = scrlAddStr.Value
+        Item(EditorIndex).Add_Stat(Stats.Strength) = scrlAddStr.Value
     End Sub
 
     Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddLuck.ValueChanged
@@ -207,7 +207,7 @@ Public Class frmEditor_Item
     Private Sub scrlAddInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddInt.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblAddInt.Text = "+Int: " & scrlAddInt.Value
-        Item(EditorIndex).Add_Stat(Stats.intelligence) = scrlAddInt.Value
+        Item(EditorIndex).Add_Stat(Stats.Intelligence) = scrlAddInt.Value
     End Sub
 
     Private Sub scrlAddVit_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAddVit.ValueChanged
@@ -371,16 +371,6 @@ Public Class frmEditor_Item
         'Dont let it auto paint ;)
     End Sub
 
-    Private Sub scrlProjectile_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlProjectile.ValueChanged
-        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
-        If scrlProjectile.Value = 0 Then
-            lblProjectile.Text = "Projectile: 0 None"
-        Else
-            lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
-        End If
-        Item(EditorIndex).Data1 = scrlProjectile.Value
-    End Sub
-
     Private Sub chkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
@@ -455,6 +445,26 @@ Public Class frmEditor_Item
         Item(EditorIndex).ItemLevel = scrlItemLevel.Value
 
         lblItemLvl.Text = "Item Level: " & scrlItemLevel.Value
+    End Sub
+
+    Private Sub scrlProjectile_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlProjectile.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+        If scrlProjectile.Value = 0 Then
+            lblProjectile.Text = "Projectile: 0 None"
+        Else
+            lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
+        End If
+        Item(EditorIndex).Projectile = scrlProjectile.Value
+    End Sub
+
+    Private Sub scrlAmmo_ValueChanged(sender As Object, e As EventArgs) Handles scrlAmmo.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+        If scrlAmmo.Value = 0 Then
+            lblAmmo.Text = "Ammo: 0 None"
+        Else
+            lblAmmo.Text = "Ammo: " & scrlAmmo.Value & " " & Trim$(Item(scrlAmmo.Value).Name)
+        End If
+        Item(EditorIndex).Ammo = scrlAmmo.Value
     End Sub
 
 End Class

@@ -134,7 +134,6 @@ Public Module ServerProjectiles
 
     End Sub
 
-
 #End Region
 
 #Region "Incoming"
@@ -165,7 +164,6 @@ Public Module ServerProjectiles
         If GetPlayerAccess(Index) < AdminType.Developer Then
             Exit Sub
         End If
-
 
         ProjectileNum = Buffer.ReadInteger
 
@@ -226,7 +224,7 @@ Public Module ServerProjectiles
 
                             If IsPlaying(TargetIndex) Then
                                 If TargetIndex <> Index Then
-                                    If CanAttackPlayer(Index, TargetIndex, True) = True Then
+                                    If CanPlayerAttackPlayer(Index, TargetIndex, True) = True Then
 
                                         ' Get the damage we can do
                                         Damage = GetPlayerDamage(Index) + Projectiles(MapProjectiles(MapNum, ProjectileNum).ProjectileNum).Damage
@@ -238,7 +236,6 @@ Public Module ServerProjectiles
                                         ' randomise for up to 10% lower than max hit
                                         Damage = Random(1, Damage)
 
-
                                         If Damage < 1 Then Damage = 1
 
                                         AttackPlayer(Index, TargetIndex, Damage)
@@ -248,7 +245,7 @@ Public Module ServerProjectiles
 
                         Case TargetType.Npc
                             npcnum = MapNpc(MapNum).Npc(TargetIndex).Num
-                            If CanAttackNpc(Index, TargetIndex, True) = True Then
+                            If CanPlayerAttackNpc(Index, TargetIndex, True) = True Then
                                 ' Get the damage we can do
                                 Damage = GetPlayerDamage(Index) + Projectiles(MapProjectiles(MapNum, ProjectileNum).ProjectileNum).Damage
 
@@ -259,10 +256,9 @@ Public Module ServerProjectiles
                                 ' randomise from 1 to max hit
                                 Damage = Random(1, Damage)
 
-
                                 If Damage < 1 Then Damage = 1
 
-                                AttackNpc(Index, TargetIndex, Damage)
+                                PlayerAttackNpc(Index, TargetIndex, Damage)
                             End If
                     End Select
                 End If
@@ -321,7 +317,6 @@ Public Module ServerProjectiles
             End If
         Next
 
-
     End Sub
 
     Sub SendProjectileToMap(ByVal MapNum As Integer, ByVal ProjectileNum As Integer)
@@ -371,8 +366,10 @@ Public Module ServerProjectiles
         If IsSkill > 0 Then
             ProjectileNum = Skill(IsSkill).Projectile
         Else
-            ProjectileNum = Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Data1
+            ProjectileNum = Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Projectile
         End If
+
+        If ProjectileNum = 0 Then Exit Sub
 
         With MapProjectiles(MapNum, ProjectileSlot)
             .ProjectileNum = ProjectileNum
@@ -387,6 +384,71 @@ Public Module ServerProjectiles
         SendProjectileToMap(MapNum, ProjectileSlot)
 
     End Sub
+
+    Public Function Engine_GetAngle(ByVal CenterX As Integer, ByVal CenterY As Integer, ByVal targetX As Integer, ByVal targetY As Integer) As Single
+        '************************************************************
+        'Gets the angle between two points in a 2d plane
+        '************************************************************
+        Dim SideA As Single
+        Dim SideC As Single
+
+        On Error GoTo ErrOut
+
+        'Check for horizontal lines (90 or 270 degrees)
+        If CenterY = targetY Then
+            'Check for going right (90 degrees)
+            If CenterX < targetX Then
+                Engine_GetAngle = 90
+                'Check for going left (270 degrees)
+            Else
+                Engine_GetAngle = 270
+            End If
+
+            'Exit the function
+            Exit Function
+        End If
+
+        'Check for horizontal lines (360 or 180 degrees)
+        If CenterX = targetX Then
+            'Check for going up (360 degrees)
+            If CenterY > targetY Then
+                Engine_GetAngle = 360
+
+                'Check for going down (180 degrees)
+            Else
+                Engine_GetAngle = 180
+            End If
+
+            'Exit the function
+            Exit Function
+        End If
+
+        'Calculate Side C
+        SideC = Math.Sqrt(Math.Abs(targetX - CenterX) ^ 2 + Math.Abs(targetY - CenterY) ^ 2)
+
+        'Side B = CenterY
+
+        'Calculate Side A
+        SideA = Math.Sqrt(Math.Abs(targetX - CenterX) ^ 2 + targetY ^ 2)
+
+        'Calculate the angle
+        Engine_GetAngle = (SideA ^ 2 - CenterY ^ 2 - SideC ^ 2) / (CenterY * SideC * -2)
+        Engine_GetAngle = (Math.Atan(-Engine_GetAngle / Math.Sqrt(-Engine_GetAngle * Engine_GetAngle + 1)) + 1.5708) * 57.29583
+
+        'If the angle is >180, subtract from 360
+        If targetX < CenterX Then Engine_GetAngle = 360 - Engine_GetAngle
+
+        'Exit function
+        Exit Function
+
+        'Check for error
+ErrOut:
+
+        'Return a 0 saying there was an error
+        Engine_GetAngle = 0
+
+        Exit Function
+    End Function
 #End Region
 
 End Module

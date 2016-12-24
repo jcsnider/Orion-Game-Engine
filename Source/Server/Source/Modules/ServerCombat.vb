@@ -1,7 +1,7 @@
 ﻿Public Module ServerCombat
 
 #Region "PlayerCombat"
-    Function CanAttackPlayer(ByVal Attacker As Integer, ByVal Victim As Integer, Optional ByVal IsSkill As Boolean = False) As Boolean
+    Function CanPlayerAttackPlayer(ByVal Attacker As Integer, ByVal Victim As Integer, Optional ByVal IsSkill As Boolean = False) As Boolean
 
         If Not IsSkill Then
             ' Check attack timer
@@ -76,7 +76,7 @@
             Exit Function
         End If
 
-        CanAttackPlayer = True
+        CanPlayerAttackPlayer = True
     End Function
 
     Function CanPlayerBlockHit(ByVal Index As Integer) As Boolean
@@ -84,6 +84,8 @@
         Dim n As Integer
         Dim ShieldSlot As Integer
         ShieldSlot = GetPlayerEquipment(Index, EquipmentType.Shield)
+
+        CanPlayerBlockHit = False
 
         If ShieldSlot > 0 Then
             n = Int(Rnd() * 2)
@@ -320,7 +322,7 @@
         End If
     End Sub
 
-    Function CanAttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, Optional ByVal IsSkill As Boolean = False) As Boolean
+    Function CanPlayerAttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, Optional ByVal IsSkill As Boolean = False) As Boolean
         Dim MapNum As Integer
         Dim NpcNum As Integer
         Dim atkX As Integer
@@ -360,7 +362,7 @@
                 ' exit out early
                 If IsSkill Then
                     If Npc(NpcNum).Behaviour <> NpcBehavior.Friendly And Npc(NpcNum).Behaviour <> NpcBehavior.ShopKeeper Then
-                        CanAttackNpc = True
+                        CanPlayerAttackNpc = True
                         Exit Function
                     End If
                 End If
@@ -384,7 +386,7 @@
                 If atkX = MapNpc(MapNum).Npc(MapNpcNum).x Then
                     If atkY = MapNpc(MapNum).Npc(MapNpcNum).y Then
                         If Npc(NpcNum).Behaviour <> NpcBehavior.Friendly And Npc(NpcNum).Behaviour <> NpcBehavior.ShopKeeper And Npc(NpcNum).Behaviour <> NpcBehavior.Quest Then
-                            CanAttackNpc = True
+                            CanPlayerAttackNpc = True
                         Else
                             If Npc(NpcNum).Behaviour = NpcBehavior.Quest Then
                                 If QuestCompleted(Attacker, Npc(NpcNum).QuestNum) Then
@@ -425,7 +427,7 @@
         End If
     End Sub
 
-    Sub AttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, ByVal Damage As Integer, Optional ByVal skillnum As Integer = 0)
+    Sub PlayerAttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, ByVal Damage As Integer, Optional ByVal skillnum As Integer = 0)
         Dim Name As String
         Dim exp As Integer
         Dim n As Integer
@@ -567,6 +569,59 @@
 #End Region
 
 #Region "Npcombat"
+    Public Sub TryNpcAttackPlayer(ByVal mapnpcnum As Integer, ByVal Index As Integer)
+
+        Dim MapNum As Integer, npcnum As Integer, Damage As Integer, i As Integer, armor As Integer
+
+        ' Can the npc attack the player?
+
+        If CanNpcAttackPlayer(mapnpcnum, Index) Then
+            MapNum = GetPlayerMap(Index)
+            npcnum = MapNpc(MapNum).Npc(mapnpcnum).Num
+
+            ' check if PLAYER can avoid the attack
+            If CanPlayerDodge(Index) Then
+                SendActionMsg(MapNum, "Dodge!", ColorType.Pink, 1, (Player(Index).Character(TempPlayer(Index).CurChar).x * 32), (Player(Index).Character(TempPlayer(Index).CurChar).y * 32))
+                Exit Sub
+            End If
+
+            If CanPlayerParry(Index) Then
+                SendActionMsg(MapNum, "Parry!", ColorType.Pink, 1, (Player(Index).Character(TempPlayer(Index).CurChar).x * 32), (Player(Index).Character(TempPlayer(Index).CurChar).y * 32))
+                Exit Sub
+            End If
+
+            ' Get the damage we can do
+            Damage = GetNpcDamage(npcnum)
+
+            If CanPlayerBlockHit(Index) Then
+                SendActionMsg(MapNum, "Block!", ColorType.Pink, 1, (Player(Index).Character(TempPlayer(Index).CurChar).x * 32), (Player(Index).Character(TempPlayer(Index).CurChar).y * 32))
+                Exit Sub
+            Else
+
+                For i = 2 To EquipmentType.Count - 1 ' start at 2, so we skip weapon
+                    If GetPlayerEquipment(Index, i) > 0 Then
+                        armor = armor + Item(GetPlayerEquipment(Index, i)).Data2
+                    End If
+                Next
+                ' take away armour
+                Damage = Damage - ((GetPlayerStat(Index, Stats.Spirit) * 2) + (GetPlayerLevel(Index) * 2) + armor)
+
+                ' * 1.5 if crit hit
+                If CanNpcCrit(npcnum) Then
+                    Damage = Damage * 1.5
+                    SendActionMsg(MapNum, "Critical!", ColorType.BrightCyan, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
+                End If
+
+            End If
+
+            If Damage > 0 Then
+                NpcAttackPlayer(mapnpcnum, Index, Damage)
+            End If
+
+        End If
+
+    End Sub
+
     Function CanNpcAttackPlayer(ByVal MapNpcNum As Integer, ByVal Index As Integer) As Boolean
         Dim MapNum As Integer
         Dim NpcNum As Integer
@@ -704,12 +759,13 @@
 
     End Function
 
-    Public Sub NpcAttackPlayer(ByVal MapNpcNum As Integer, ByVal Victim As Integer)
-        Dim Name As String, damage As Integer
-        Dim MapNum As Integer
+    Public Sub NpcAttackPlayer(ByVal MapNpcNum As Integer, ByVal Victim As Integer, ByVal Damage As Integer)
+        Dim Name As String, MapNum As Integer
+        Dim z As Integer, InvCount As Integer, EqCount As Integer, j As Integer, x As Integer
         Dim Buffer As ByteBuffer
 
         ' Check for subscript out of range
+
         If MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or IsPlaying(Victim) = False Then Exit Sub
 
         ' Check for subscript out of range
@@ -722,46 +778,101 @@
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SNpcAttack)
         Buffer.WriteInteger(MapNpcNum)
-        SendDataToMap(MapNum, Buffer.ToArray())
+        SendDataToMap(MapNum, Buffer.ToArray)
         Buffer = Nothing
 
-        damage = Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Stat(Stats.strength) - GetPlayerProtection(Victim)
+        If Damage <= 0 Then Exit Sub
 
-        If damage <= 0 Then
-            SendActionMsg(GetPlayerMap(Victim), "BLOCK!", ColorType.Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
-            Exit Sub
-        End If
+        ' set the regen timer
+        MapNpc(MapNum).Npc(MapNpcNum).stopRegen = True
+        MapNpc(MapNum).Npc(MapNpcNum).stopRegenTimer = GetTickCount()
 
-        If damage >= GetPlayerVital(Victim, Vitals.HP) Then
+        If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & GetPlayerVital(Victim, Vitals.HP), ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+            ' Set NPC target to 0
+            MapNpc(MapNum).Npc(MapNpcNum).Target = 0
+            MapNpc(MapNum).Npc(MapNpcNum).TargetType = 0
+
+            If GetPlayerLevel(Victim) >= 10 Then
+
+                For z = 1 To MAX_INV
+                    If GetPlayerInvItemNum(Victim, z) > 0 Then
+                        InvCount = InvCount + 1
+                    End If
+                Next
+
+                For z = 1 To EquipmentType.Count - 1
+                    If GetPlayerEquipment(Victim, z) > 0 Then
+                        EqCount = EqCount + 1
+                    End If
+                Next
+                z = Random(1, InvCount + EqCount)
+
+                If z = 0 Then z = 1
+                If z > InvCount + EqCount Then z = InvCount + EqCount
+                If z > InvCount Then
+                    z = z - InvCount
+
+                    For x = 1 To EquipmentType.Count - 1
+
+                        If GetPlayerEquipment(Victim, x) > 0 Then
+                            j = j + 1
+
+                            If j = z Then
+                                'Here it is, drop this piece of equipment!
+                                PlayerMsg(Victim, "In death you lost grip on your " & Trim$(Item(GetPlayerEquipment(Victim, x)).Name), ColorType.BrightRed)
+                                SpawnItem(GetPlayerEquipment(Victim, x), 1, GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+                                SetPlayerEquipment(Victim, 0, x)
+                                SendWornEquipment(Victim)
+                                SendMapEquipment(Victim)
+                            End If
+                        End If
+                    Next
+                Else
+                    For x = 1 To MAX_INV
+                        If GetPlayerInvItemNum(Victim, x) > 0 Then
+                            j = j + 1
+
+                            If j = z Then
+                                'Here it is, drop this item!
+                                PlayerMsg(Victim, "In death you lost grip on your " & Trim$(Item(GetPlayerInvItemNum(Victim, x)).Name), ColorType.BrightRed)
+                                SpawnItem(GetPlayerInvItemNum(Victim, x), GetPlayerInvItemValue(Victim, x), GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+                                SetPlayerInvItemNum(Victim, x, 0)
+                                SetPlayerInvItemValue(Victim, x, 0)
+                                SendInventory(Victim)
+                            End If
+                        End If
+                    Next
+                End If
+            End If
 
             ' kill player
             KillPlayer(Victim)
 
             ' Player is dead
-            GlobalMsg(GetPlayerName(Victim) & " has been killed by " & CheckGrammar(Name))
-
-            ' Set NPC target to 0
-            For i = 1 To MAX_MAP_NPCS
-                If MapNpc(MapNum).Npc(i).TargetType = TargetType.Player Then
-                    If MapNpc(MapNum).Npc(i).Target = Victim Then
-                        MapNpc(MapNum).Npc(i).Target = 0
-                        MapNpc(MapNum).Npc(i).TargetType = 0
-                    End If
-                End If
-            Next
+            GlobalMsg(GetPlayerName(Victim) & " has been killed by " & Name)
         Else
             ' Player not dead, just do the damage
-            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - damage)
+            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
             SendVital(Victim, Vitals.HP)
+            SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TargetType.Player, Victim)
 
             ' send vitals to party if in one
             If TempPlayer(Victim).InParty > 0 Then SendPartyVitals(TempPlayer(Victim).InParty, Victim)
 
-            SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num).Animation, 0, 0, TargetType.Player, Victim)
+            ' send the sound
+            'SendMapSound Victim, GetPlayerX(Victim), GetPlayerY(Victim), SoundEntity.seNpc, MapNpc(MapNum).Npc(MapNpcNum).Num
+
             ' Say damage
-            SendActionMsg(GetPlayerMap(Victim), "-" & damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendBlood(GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+
+            ' set the regen timer
+            TempPlayer(Victim).stopRegen = True
+            TempPlayer(Victim).stopRegenTimer = GetTickCount()
+
         End If
 
     End Sub
@@ -888,14 +999,13 @@
         ' Prevent subscript out of range
         If skillslot <= 0 Or skillslot > MAX_NPC_SKILLS Then Exit Sub
 
-
         skillnum = GetNpcSkill(MapNpc(MapNum).Npc(MapNpcNum).Num, skillslot)
 
         If skillnum <= 0 Or skillnum > MAX_SKILLS Then Exit Sub
 
         ' see if cooldown has finished
         If MapNpc(MapNum).Npc(MapNpcNum).SkillCD(skillslot) > GetTickCount() Then
-            NpcAttackPlayer(MapNpcNum, MapNpc(MapNum).Npc(MapNpcNum).Target)
+            TryNpcAttackPlayer(MapNpcNum, MapNpc(MapNum).Npc(MapNpcNum).Target)
             Exit Sub
         End If
 
@@ -973,5 +1083,471 @@
         nVal = Math.Sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
         If nVal <= range Then isInRange = True
     End Function
+
+    Public Function CanNpcBlock(ByVal npcnum As Integer) As Boolean
+        Dim rate As Integer
+        Dim stat As Integer
+        Dim rndNum As Integer
+
+        CanNpcBlock = False
+
+        stat = Npc(npcnum).Stat(Stats.Luck) / 5  'guessed shield agility
+        rate = stat / 12.08
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then CanNpcBlock = True
+
+    End Function
+
+    Public Function CanNpcCrit(ByVal npcnum As Integer) As Boolean
+        Dim rate As Integer
+        Dim rndNum As Integer
+
+        CanNpcCrit = False
+
+        rate = Npc(npcnum).Stat(Stats.Luck) / 3
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then CanNpcCrit = True
+
+    End Function
+
+    Public Function CanNpcDodge(ByVal npcnum As Integer) As Boolean
+        Dim rate As Integer
+        Dim rndNum As Integer
+
+        CanNpcDodge = False
+
+        rate = Npc(npcnum).Stat(Stats.Luck) / 4
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then CanNpcDodge = True
+
+    End Function
+
+    Public Function CanNpcParry(ByVal npcnum As Integer) As Boolean
+        Dim rate As Integer
+        Dim rndNum As Integer
+
+        CanNpcParry = False
+
+        rate = Npc(npcnum).Stat(Stats.Luck) / 6
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then CanNpcParry = True
+
+    End Function
+
+    Function GetNpcDamage(ByVal npcnum As Integer) As Integer
+
+        GetNpcDamage = (Npc(npcnum).Stat(Stats.Strength) * 2) + (Npc(npcnum).Damage * 2) + (Npc(npcnum).Level * 3) + Random(1, 20)
+
+    End Function
+
+    Public Sub SpellPlayer_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Integer, ByVal Damage As Integer, ByVal Skillnum As Integer)
+        Dim sSymbol As String
+        Dim Colour As Integer
+
+        If Damage > 0 Then
+            If increment Then
+                sSymbol = "+"
+                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
+            Else
+                sSymbol = "-"
+                Colour = ColorType.Blue
+            End If
+
+            SendAnimation(GetPlayerMap(Index), Skill(Skillnum).SkillAnim, 0, 0, TargetType.Player, Index)
+            SendActionMsg(GetPlayerMap(Index), sSymbol & Damage, Colour, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
+
+            ' send the sound
+            'SendMapSound Index, GetPlayerX(Index), GetPlayerY(Index), SoundEntity.seSpell, Spellnum
+
+            If increment Then
+                SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) + Damage)
+
+                If Skill(Skillnum).Duration > 0 Then
+                    'AddHoT_Player(Index, Spellnum)
+                End If
+
+            ElseIf Not increment Then
+                SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) - Damage)
+            End If
+
+            SendVital(Index, Vital)
+
+        End If
+
+    End Sub
+
+    Public Sub SpellNpc_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Integer, ByVal Damage As Integer, ByVal Skillnum As Integer, ByVal MapNum As Integer)
+        Dim sSymbol As String
+        Dim Colour As Long
+
+        If Damage > 0 Then
+            If increment Then
+                sSymbol = "+"
+                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
+            Else
+                sSymbol = "-"
+                Colour = ColorType.Blue
+            End If
+
+            SendAnimation(MapNum, Skill(Skillnum).SkillAnim, 0, 0, TargetType.Npc, Index)
+            SendActionMsg(MapNum, sSymbol & Damage, Colour, ActionMsgType.Scroll, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
+
+            ' send the sound
+            'SendMapSound(Index, MapNpc(MapNum).Npc(Index).x, MapNpc(MapNum).Npc(Index).y, SoundEntity.seSpell, Skillnum)
+
+            If increment Then
+                MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) + Damage
+
+                If Skill(Skillnum).Duration > 0 Then
+                    'AddHoT_Npc(MapNum, Index, Skillnum, 0)
+                End If
+
+            ElseIf Not increment Then
+                MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) - Damage
+            End If
+
+        End If
+
+    End Sub
+
+    Public Function CanPlayerDodge(ByVal Index As Integer) As Boolean
+        Dim rate As Long, rndNum As Long
+
+        CanPlayerDodge = False
+
+        rate = GetPlayerStat(Index, Stats.Luck) / 4
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then
+            CanPlayerDodge = True
+        End If
+
+    End Function
+
+    Public Function CanPlayerParry(ByVal Index As Integer) As Boolean
+        Dim rate As Integer, rndNum As Integer
+
+        CanPlayerParry = False
+
+        rate = GetPlayerStat(Index, Stats.Luck) / 6
+        rndNum = Random(1, 100)
+
+        If rndNum <= rate Then
+            CanPlayerParry = True
+        End If
+
+    End Function
+
+    Public Sub TryPlayerAttackPlayer(ByVal Attacker As Integer, ByVal Victim As Integer)
+        Dim MapNum As Integer
+        Dim Damage As Integer, i As Integer, armor As Integer
+
+        Damage = 0
+
+        ' Can we attack the player?
+        If CanPlayerAttackPlayer(Attacker, Victim) Then
+
+            MapNum = GetPlayerMap(Attacker)
+
+            ' check if NPC can avoid the attack
+            If CanPlayerDodge(Victim) Then
+                SendActionMsg(MapNum, "Dodge!", ColorType.Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                Exit Sub
+            End If
+
+            If CanPlayerParry(Victim) Then
+                SendActionMsg(MapNum, "Parry!", ColorType.Pink, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                Exit Sub
+            End If
+
+            ' Get the damage we can do
+            Damage = GetPlayerDamage(Attacker)
+
+            If CanPlayerBlockHit(Victim) Then
+                SendActionMsg(MapNum, "Block!", ColorType.BrightCyan, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+                Damage = 0
+                Exit Sub
+            Else
+
+                For i = 1 To EquipmentType.Count - 1
+                    If GetPlayerEquipment(Victim, i) > 0 Then
+                        armor = armor + Item(GetPlayerEquipment(Victim, i)).Data2
+                    End If
+                Next
+
+                ' take away armour
+                Damage = Damage - ((GetPlayerStat(Victim, Stats.Spirit) * 2) + (GetPlayerLevel(Victim) * 3) + armor)
+
+                ' * 1.5 if it's a crit!
+                If CanPlayerCriticalHit(Attacker) Then
+                    Damage = Damage * 1.5
+                    SendActionMsg(MapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(Attacker) * 32), (GetPlayerY(Attacker) * 32))
+                End If
+            End If
+
+            If Damage > 0 Then
+                PlayerAttackPlayer(Attacker, Victim, Damage)
+            Else
+                PlayerMsg(Attacker, "Your attack does nothing.", ColorType.BrightRed)
+            End If
+
+        End If
+
+    End Sub
+
+    Sub PlayerAttackPlayer(ByVal Attacker As Integer, ByVal Victim As Integer, ByVal Damage As Integer, Optional ByVal Skillnum As Integer = 0)
+        Dim Exp As Integer, n As Integer
+        Dim i As Integer, z As Integer, x As Integer, j As Integer, InvCount As Integer, EqCount As Integer
+
+        ' Check for subscript out of range
+
+        If IsPlaying(Attacker) = False Or IsPlaying(Victim) = False Or Damage < 0 Then
+            Exit Sub
+        End If
+
+        If Skillnum > 0 Then
+            'Magic Resist
+            Damage = Damage - ((GetPlayerStat(Victim, Stats.Spirit) * 2) + (GetPlayerLevel(Victim) * 3))
+
+            If Damage <= 0 Then Exit Sub
+        End If
+
+        ' Check for weapon
+        n = 0
+
+        If GetPlayerEquipment(Attacker, EquipmentType.Weapon) > 0 Then
+            n = GetPlayerEquipment(Attacker, EquipmentType.Weapon)
+        End If
+
+        ' set the regen timer
+        TempPlayer(Attacker).stopRegen = True
+        TempPlayer(Attacker).stopRegenTimer = GetTickCount()
+
+        If Damage >= GetPlayerVital(Victim, Vitals.HP) Then
+            SendActionMsg(GetPlayerMap(Victim), "-" & GetPlayerVital(Victim, Vitals.HP), ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+
+            ' send animation
+            If n > 0 Then
+                If Skillnum = 0 Then Call SendAnimation(GetPlayerMap(Victim), Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Animation, 0, 0, TargetType.Player, Victim)
+            End If
+
+            ' Player is dead
+            GlobalMsg(GetPlayerName(Victim) & " has been killed by " & GetPlayerName(Attacker))
+
+            ' Calculate exp to give attacker
+            Exp = (GetPlayerExp(Victim) \ 10)
+
+            ' Make sure we dont get less then 0
+            If Exp < 0 Then
+                Exp = 0
+            End If
+
+            If Exp = 0 Then
+                PlayerMsg(Victim, "You lost no exp.", ColorType.BrightRed)
+                PlayerMsg(Attacker, "You received no exp.", ColorType.BrightBlue)
+            Else
+                SetPlayerExp(Victim, GetPlayerExp(Victim) - Exp)
+                SendExp(Victim)
+                PlayerMsg(Victim, "You lost " & Exp & " exp.", ColorType.BrightRed)
+
+                ' check if we're in a party
+                If TempPlayer(Attacker).InParty > 0 Then
+                    ' pass through party exp share function
+                    Party_ShareExp(TempPlayer(Attacker).InParty, Exp, Attacker, GetPlayerMap(Attacker))
+                Else
+                    ' not in party, get exp for self
+                    GivePlayerEXP(Attacker, Exp)
+                End If
+            End If
+
+            ' purge target info of anyone who targetted dead guy
+            For i = 1 To MAX_PLAYERS
+                If IsPlaying(i) And IsConnected(i) Then
+                    If Player(i).Character(TempPlayer(i).CurChar).Map = GetPlayerMap(Attacker) Then
+                        If TempPlayer(i).Target = TargetType.Player Then
+                            If TempPlayer(i).Target = Victim Then
+                                TempPlayer(i).Target = 0
+                                TempPlayer(i).TargetType = TargetType.None
+                                TempPlayer(i).TargetZone = 0
+                                SendTarget(i, 0, TargetType.None)
+                            End If
+                        End If
+                    End If
+                End If
+            Next
+
+            If GetPlayerPK(Victim) = 0 Then
+                If GetPlayerPK(Attacker) = 0 Then
+                    SetPlayerPK(Attacker, 1)
+                    SendPlayerData(Attacker)
+                    GlobalMsg(GetPlayerName(Attacker) & " has been deemed a Player Killer!!!")
+                End If
+
+            Else
+                GlobalMsg(GetPlayerName(Victim) & " has paid the price for being a Player Killer!!!")
+            End If
+
+            If GetPlayerLevel(Victim) >= 10 Then
+
+                For z = 1 To MAX_INV
+                    If GetPlayerInvItemNum(Victim, z) > 0 Then
+                        InvCount = InvCount + 1
+                    End If
+                Next
+
+                For z = 1 To EquipmentType.Count - 1
+                    If GetPlayerEquipment(Victim, z) > 0 Then
+                        EqCount = EqCount + 1
+                    End If
+                Next
+                z = Random(1, InvCount + EqCount)
+
+                If z = 0 Then z = 1
+                If z > InvCount + EqCount Then z = InvCount + EqCount
+                If z > InvCount Then
+                    z = z - InvCount
+
+                    For x = 1 To EquipmentType.Count - 1
+                        If GetPlayerEquipment(Victim, x) > 0 Then
+                            j = j + 1
+
+                            If j = z Then
+                                'Here it is, drop this piece of equipment!
+                                PlayerMsg(Victim, "In death you lost grip on your " & Trim$(Item(GetPlayerEquipment(Victim, x)).Name), ColorType.BrightRed)
+                                SpawnItem(GetPlayerEquipment(Victim, x), 1, GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+                                SetPlayerEquipment(Victim, 0, x)
+                                SendWornEquipment(Victim)
+                                SendMapEquipment(Victim)
+                            End If
+                        End If
+                    Next
+                Else
+
+                    For x = 1 To MAX_INV
+                        If GetPlayerInvItemNum(Victim, x) > 0 Then
+                            j = j + 1
+
+                            If j = z Then
+                                'Here it is, drop this item!
+                                PlayerMsg(Victim, "In death you lost grip on your " & Trim$(Item(GetPlayerInvItemNum(Victim, x)).Name), ColorType.BrightRed)
+                                SpawnItem(GetPlayerInvItemNum(Victim, x), GetPlayerInvItemValue(Victim, x), GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+                                SetPlayerInvItemNum(Victim, x, 0)
+                                SetPlayerInvItemValue(Victim, x, 0)
+                                SendInventory(Victim)
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+
+            CheckTasks(Attacker, QUEST_TYPE_GOKILL, 0)
+            OnDeath(Victim)
+        Else
+            ' Player not dead, just do the damage
+            SetPlayerVital(Victim, Vitals.HP, GetPlayerVital(Victim, Vitals.HP) - Damage)
+            SendVital(Victim, Vitals.HP)
+
+            ' send vitals to party if in one
+            If TempPlayer(Victim).InParty > 0 Then SendPartyVitals(TempPlayer(Victim).InParty, Victim)
+
+            ' send the sound
+            'If Spellnum > 0 Then SendMapSound Victim, GetPlayerX(Victim), GetPlayerY(Victim), SoundEntity.seSpell, Spellnum
+
+            ' send animation
+            If n > 0 Then
+                If Skillnum = 0 Then SendAnimation(GetPlayerMap(Victim), Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Animation, 0, 0, TargetType.Player, Victim)
+            End If
+
+            SendActionMsg(GetPlayerMap(Victim), "-" & Damage, ColorType.BrightRed, 1, (GetPlayerX(Victim) * 32), (GetPlayerY(Victim) * 32))
+            SendBlood(GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
+
+            ' set the regen timer
+            TempPlayer(Victim).stopRegen = True
+            TempPlayer(Victim).stopRegenTimer = GetTickCount()
+
+            'if a stunning spell, stun the player
+            If Skillnum > 0 Then
+                If Skill(Skillnum).StunDuration > 0 Then StunPlayer(Victim, Skillnum)
+                ' DoT
+                If Skill(Skillnum).Duration > 0 Then
+                    'AddDoT_Player Victim, Spellnum, Attacker
+                End If
+            End If
+        End If
+
+        ' Reset attack timer
+        TempPlayer(Attacker).AttackTimer = GetTickCount()
+
+    End Sub
+
+    Public Sub TryPlayerAttackNpc(ByVal Index As Integer, ByVal mapnpcnum As Integer)
+
+        Dim npcnum As Integer
+
+        Dim MapNum As Integer
+
+        Dim Damage As Integer
+
+        Damage = 0
+
+        ' Can we attack the npc?
+        If CanPlayerAttackNpc(Index, mapnpcnum) Then
+
+            MapNum = GetPlayerMap(Index)
+            npcnum = MapNpc(MapNum).Npc(mapnpcnum).Num
+
+            ' check if NPC can avoid the attack
+            If CanNpcDodge(npcnum) Then
+                SendActionMsg(MapNum, "Dodge!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
+                Exit Sub
+            End If
+
+            If CanNpcParry(npcnum) Then
+                SendActionMsg(MapNum, "Parry!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
+                Exit Sub
+            End If
+
+            ' Get the damage we can do
+            Damage = GetPlayerDamage(Index)
+
+            If CanNpcBlock(npcnum) Then
+                SendActionMsg(MapNum, "Block!", ColorType.BrightCyan, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
+                Damage = 0
+                TempPlayer(Index).Target = mapnpcnum
+                TempPlayer(Index).TargetType = TargetType.Npc
+                TempPlayer(Index).TargetZone = 0
+                SendTarget(Index, 0, TargetType.Npc)
+                Exit Sub
+            Else
+                Damage = Damage - ((Npc(npcnum).Stat(Stats.Spirit) * 2) + (Npc(npcnum).Level * 3))
+
+                ' * 1.5 if it's a crit!
+                If CanPlayerCriticalHit(Index) Then
+                    Damage = Damage * 1.5
+                    SendActionMsg(MapNum, "Critical!", ColorType.BrightCyan, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+                End If
+
+            End If
+
+            TempPlayer(Index).Target = mapnpcnum
+            TempPlayer(Index).TargetType = TargetType.Npc
+            TempPlayer(Index).TargetZone = 0
+            SendTarget(Index, mapnpcnum, TargetType.Npc)
+
+            If Damage > 0 Then
+                PlayerAttackNpc(Index, mapnpcnum, Damage)
+            Else
+                PlayerMsg(Index, "Your attack does nothing.", ColorType.BrightRed)
+            End If
+
+        End If
+
+    End Sub
 
 End Module

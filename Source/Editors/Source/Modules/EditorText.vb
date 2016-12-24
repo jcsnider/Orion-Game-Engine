@@ -15,7 +15,6 @@ Module EditorText
     ' Game text buffer
     Public MyText As String = ""
 
-
     Public Sub DrawText(ByVal X As Integer, ByVal y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
         Dim mystring As Text = New Text(text, SFMLGameFont)
         mystring.CharacterSize = TextSize
@@ -46,7 +45,6 @@ Module EditorText
         Dim npcNum As Integer
 
         npcNum = MapNpc(MapNpcNum).Num
-
 
         Select Case Npc(npcNum).Behaviour
             Case 0 ' attack on sight
@@ -109,10 +107,9 @@ Module EditorText
     End Sub
 
     Public Sub DrawMapAttributes()
-        Dim X As Integer
-        Dim y As Integer
-        Dim tX As Integer
-        Dim tY As Integer
+        Dim X As Integer, y As Integer
+        Dim tX As Integer, tY As Integer
+        Dim rec As New RectangleShape
 
         If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
             For X = TileView.left To TileView.right
@@ -121,9 +118,18 @@ Module EditorText
                         With Map.Tile(X, y)
                             tX = ((ConvertMapX(X * PIC_X)) - 4) + (PIC_X * 0.5)
                             tY = ((ConvertMapY(y * PIC_Y)) - 7) + (PIC_Y * 0.5)
+
+                            rec.OutlineColor = New SFML.Graphics.Color(Color.White)
+                            rec.OutlineThickness = 0.6
+
+                            rec.Size = New SFML.Window.Vector2f((PIC_X), (PIC_X))
+                            rec.Position = New SFML.Window.Vector2f(ConvertMapX((X) * PIC_X), ConvertMapY((y) * PIC_Y))
+
                             Select Case .Type
                                 Case TileType.Blocked
-                                    DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
+                                    rec.FillColor = New SFML.Graphics.Color(255, 0, 0, 100)
+                                    GameWindow.Draw(rec)
+                                    DrawText(tX, tY, "B", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Warp
                                     DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)
                                 Case TileType.Item
@@ -139,7 +145,9 @@ Module EditorText
                                 Case TileType.Door
                                     DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
                                 Case TileType.NpcSpawn
-                                    DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
+                                    rec.FillColor = New SFML.Graphics.Color(255, 255, 0, 100)
+                                    GameWindow.Draw(rec)
+                                    DrawText(tX, tY, "S", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Shop
                                     DrawText(tX, tY, "SH", (Color.Blue), (Color.Black), GameWindow)
                                 Case TileType.Bank
@@ -381,7 +389,7 @@ Module EditorText
 
         ElseIf e.KeyCode = Keys.OemPipe Then
             If e.Shift Then
-                'keyValue= "|" 
+                'keyValue= "|"
             Else
                 keyValue = "\"
             End If

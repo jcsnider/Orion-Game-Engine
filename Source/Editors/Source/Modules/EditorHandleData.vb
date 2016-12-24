@@ -227,10 +227,10 @@
                     .FemaleSprite(X) = Buffer.ReadInteger
                 Next
 
-                .Stat(Stats.strength) = Buffer.ReadInteger
+                .Stat(Stats.Strength) = Buffer.ReadInteger
                 .Stat(Stats.Endurance) = Buffer.ReadInteger
                 .Stat(Stats.Vitality) = Buffer.ReadInteger
-                .Stat(Stats.intelligence) = Buffer.ReadInteger
+                .Stat(Stats.Intelligence) = Buffer.ReadInteger
                 .Stat(Stats.Luck) = Buffer.ReadInteger
                 .Stat(Stats.Spirit) = Buffer.ReadInteger
 
@@ -598,7 +598,7 @@
         Item(n).Data1 = Buffer.ReadInteger()
         Item(n).Data2 = Buffer.ReadInteger()
         Item(n).Data3 = Buffer.ReadInteger()
-        Item(n).Handed = Buffer.ReadInteger()
+        Item(n).TwoHanded = Buffer.ReadInteger()
         Item(n).LevelReq = Buffer.ReadInteger()
         Item(n).Mastery = Buffer.ReadInteger()
         Item(n).Name = Trim$(Buffer.ReadString())
@@ -637,6 +637,9 @@
 
         Item(n).KnockBack = Buffer.ReadInteger()
         Item(n).KnockBackTiles = Buffer.ReadInteger()
+
+        Item(n).Projectile = Buffer.ReadInteger()
+        Item(n).Ammo = Buffer.ReadInteger()
 
         Buffer = Nothing
 
@@ -693,6 +696,9 @@
         For x = 1 To MAX_NPC_SKILLS
             Npc(i).Skill(x) = Buffer.ReadInteger()
         Next
+
+        Npc(i).Level = Buffer.ReadInteger()
+        Npc(i).Damage = Buffer.ReadInteger()
 
         If Npc(i).AttackSay Is Nothing Then Npc(i).AttackSay = ""
         If Npc(i).Name Is Nothing Then Npc(i).Name = ""
@@ -949,10 +955,10 @@
                     .FemaleSprite(x) = buffer.ReadInteger
                 Next
 
-                .Stat(Stats.strength) = buffer.ReadInteger
+                .Stat(Stats.Strength) = buffer.ReadInteger
                 .Stat(Stats.Endurance) = buffer.ReadInteger
                 .Stat(Stats.Vitality) = buffer.ReadInteger
-                .Stat(Stats.intelligence) = buffer.ReadInteger
+                .Stat(Stats.Intelligence) = buffer.ReadInteger
                 .Stat(Stats.Luck) = buffer.ReadInteger
                 .Stat(Stats.Spirit) = buffer.ReadInteger
 
@@ -998,7 +1004,7 @@
             Item(n).Data1 = buffer.ReadInteger()
             Item(n).Data2 = buffer.ReadInteger()
             Item(n).Data3 = buffer.ReadInteger()
-            Item(n).Handed = buffer.ReadInteger()
+            Item(n).TwoHanded = buffer.ReadInteger()
             Item(n).LevelReq = buffer.ReadInteger()
             Item(n).Mastery = buffer.ReadInteger()
             Item(n).Name = Trim$(buffer.ReadString())
@@ -1037,6 +1043,9 @@
 
             Item(n).KnockBack = buffer.ReadInteger()
             Item(n).KnockBackTiles = buffer.ReadInteger()
+
+            Item(n).Projectile = buffer.ReadInteger()
+            Item(n).Ammo = buffer.ReadInteger()
         Next
 
         i = 0
@@ -1112,6 +1121,9 @@
             For z = 1 To MAX_NPC_SKILLS
                 Npc(n).Skill(z) = buffer.ReadInteger()
             Next
+
+            Npc(i).Level = buffer.ReadInteger()
+            Npc(i).Damage = buffer.ReadInteger()
 
             If Npc(n).AttackSay Is Nothing Then Npc(n).AttackSay = ""
             If Npc(n).Name Is Nothing Then Npc(n).Name = ""

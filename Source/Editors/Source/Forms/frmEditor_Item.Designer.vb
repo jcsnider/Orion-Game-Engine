@@ -57,14 +57,17 @@ Partial Class frmEditor_Item
         Me.lblAccessReq = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.fraEquipment = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.scrlAmmo = New System.Windows.Forms.HScrollBar()
+        Me.lblAmmo = New System.Windows.Forms.Label()
+        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
+        Me.lblProjectile = New System.Windows.Forms.Label()
         Me.numMax = New System.Windows.Forms.NumericUpDown()
         Me.numMin = New System.Windows.Forms.NumericUpDown()
         Me.chkRandomize = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbKnockBackTiles = New System.Windows.Forms.ComboBox()
         Me.chkKnockBack = New System.Windows.Forms.CheckBox()
-        Me.scrlProjectile = New System.Windows.Forms.HScrollBar()
-        Me.lblProjectile = New System.Windows.Forms.Label()
         Me.scrlPaperdoll = New System.Windows.Forms.HScrollBar()
         Me.lblPaperDoll = New System.Windows.Forms.Label()
         Me.picPaperdoll = New System.Windows.Forms.PictureBox()
@@ -124,6 +127,7 @@ Partial Class frmEditor_Item
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         CType(Me.numMax, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numMin, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -433,14 +437,14 @@ Partial Class frmEditor_Item
         '
         'fraEquipment
         '
+        Me.fraEquipment.BackColor = System.Drawing.Color.White
+        Me.fraEquipment.Controls.Add(Me.GroupBox2)
         Me.fraEquipment.Controls.Add(Me.numMax)
         Me.fraEquipment.Controls.Add(Me.numMin)
         Me.fraEquipment.Controls.Add(Me.chkRandomize)
         Me.fraEquipment.Controls.Add(Me.Label5)
         Me.fraEquipment.Controls.Add(Me.cmbKnockBackTiles)
         Me.fraEquipment.Controls.Add(Me.chkKnockBack)
-        Me.fraEquipment.Controls.Add(Me.scrlProjectile)
-        Me.fraEquipment.Controls.Add(Me.lblProjectile)
         Me.fraEquipment.Controls.Add(Me.scrlPaperdoll)
         Me.fraEquipment.Controls.Add(Me.lblPaperDoll)
         Me.fraEquipment.Controls.Add(Me.picPaperdoll)
@@ -470,9 +474,56 @@ Partial Class frmEditor_Item
         Me.fraEquipment.Text = "Equipment Data"
         Me.fraEquipment.Visible = False
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.scrlAmmo)
+        Me.GroupBox2.Controls.Add(Me.lblAmmo)
+        Me.GroupBox2.Controls.Add(Me.scrlProjectile)
+        Me.GroupBox2.Controls.Add(Me.lblProjectile)
+        Me.GroupBox2.Location = New System.Drawing.Point(251, 126)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(180, 96)
+        Me.GroupBox2.TabIndex = 69
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Projectiles"
+        '
+        'scrlAmmo
+        '
+        Me.scrlAmmo.LargeChange = 1
+        Me.scrlAmmo.Location = New System.Drawing.Point(3, 69)
+        Me.scrlAmmo.Name = "scrlAmmo"
+        Me.scrlAmmo.Size = New System.Drawing.Size(173, 18)
+        Me.scrlAmmo.TabIndex = 64
+        '
+        'lblAmmo
+        '
+        Me.lblAmmo.AutoSize = True
+        Me.lblAmmo.Location = New System.Drawing.Point(6, 52)
+        Me.lblAmmo.Name = "lblAmmo"
+        Me.lblAmmo.Size = New System.Drawing.Size(77, 13)
+        Me.lblAmmo.TabIndex = 63
+        Me.lblAmmo.Text = "Ammo: 0 None"
+        '
+        'scrlProjectile
+        '
+        Me.scrlProjectile.LargeChange = 1
+        Me.scrlProjectile.Location = New System.Drawing.Point(3, 29)
+        Me.scrlProjectile.Name = "scrlProjectile"
+        Me.scrlProjectile.Size = New System.Drawing.Size(173, 18)
+        Me.scrlProjectile.TabIndex = 62
+        '
+        'lblProjectile
+        '
+        Me.lblProjectile.AutoSize = True
+        Me.lblProjectile.Location = New System.Drawing.Point(6, 16)
+        Me.lblProjectile.Name = "lblProjectile"
+        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
+        Me.lblProjectile.TabIndex = 61
+        Me.lblProjectile.Text = "Projectile: 0 None"
+        '
         'numMax
         '
-        Me.numMax.Location = New System.Drawing.Point(330, 198)
+        Me.numMax.Location = New System.Drawing.Point(515, 170)
         Me.numMax.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.numMax.Name = "numMax"
         Me.numMax.Size = New System.Drawing.Size(50, 20)
@@ -482,7 +533,7 @@ Partial Class frmEditor_Item
         '
         'numMin
         '
-        Me.numMin.Location = New System.Drawing.Point(267, 198)
+        Me.numMin.Location = New System.Drawing.Point(452, 170)
         Me.numMin.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.numMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numMin.Name = "numMin"
@@ -494,7 +545,7 @@ Partial Class frmEditor_Item
         'chkRandomize
         '
         Me.chkRandomize.AutoSize = True
-        Me.chkRandomize.Location = New System.Drawing.Point(267, 169)
+        Me.chkRandomize.Location = New System.Drawing.Point(6, 127)
         Me.chkRandomize.Name = "chkRandomize"
         Me.chkRandomize.Size = New System.Drawing.Size(106, 17)
         Me.chkRandomize.TabIndex = 66
@@ -504,7 +555,7 @@ Partial Class frmEditor_Item
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(120, 72)
+        Me.Label5.Location = New System.Drawing.Point(265, 60)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 13)
         Me.Label5.TabIndex = 65
@@ -515,7 +566,7 @@ Partial Class frmEditor_Item
         Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbKnockBackTiles.FormattingEnabled = True
         Me.cmbKnockBackTiles.Items.AddRange(New Object() {"No KnockBack", "1 Tile", "2 Tiles", "3 Tiles", "4 Tiles", "5 Tiles"})
-        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(165, 69)
+        Me.cmbKnockBackTiles.Location = New System.Drawing.Point(310, 57)
         Me.cmbKnockBackTiles.Name = "cmbKnockBackTiles"
         Me.cmbKnockBackTiles.Size = New System.Drawing.Size(93, 21)
         Me.cmbKnockBackTiles.TabIndex = 64
@@ -523,29 +574,12 @@ Partial Class frmEditor_Item
         'chkKnockBack
         '
         Me.chkKnockBack.AutoSize = True
-        Me.chkKnockBack.Location = New System.Drawing.Point(10, 71)
+        Me.chkKnockBack.Location = New System.Drawing.Point(267, 34)
         Me.chkKnockBack.Name = "chkKnockBack"
         Me.chkKnockBack.Size = New System.Drawing.Size(104, 17)
         Me.chkKnockBack.TabIndex = 63
         Me.chkKnockBack.Text = "Has KnockBack"
         Me.chkKnockBack.UseVisualStyleBackColor = True
-        '
-        'scrlProjectile
-        '
-        Me.scrlProjectile.LargeChange = 1
-        Me.scrlProjectile.Location = New System.Drawing.Point(267, 71)
-        Me.scrlProjectile.Name = "scrlProjectile"
-        Me.scrlProjectile.Size = New System.Drawing.Size(162, 18)
-        Me.scrlProjectile.TabIndex = 62
-        '
-        'lblProjectile
-        '
-        Me.lblProjectile.AutoSize = True
-        Me.lblProjectile.Location = New System.Drawing.Point(264, 42)
-        Me.lblProjectile.Name = "lblProjectile"
-        Me.lblProjectile.Size = New System.Drawing.Size(91, 13)
-        Me.lblProjectile.TabIndex = 61
-        Me.lblProjectile.Text = "Projectile: 0 None"
         '
         'scrlPaperdoll
         '
@@ -576,7 +610,7 @@ Partial Class frmEditor_Item
         'scrlAddSpr
         '
         Me.scrlAddSpr.LargeChange = 1
-        Me.scrlAddSpr.Location = New System.Drawing.Point(360, 130)
+        Me.scrlAddSpr.Location = New System.Drawing.Point(360, 107)
         Me.scrlAddSpr.Name = "scrlAddSpr"
         Me.scrlAddSpr.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddSpr.TabIndex = 55
@@ -584,7 +618,7 @@ Partial Class frmEditor_Item
         'lblAddSpr
         '
         Me.lblAddSpr.AutoSize = True
-        Me.lblAddSpr.Location = New System.Drawing.Point(307, 131)
+        Me.lblAddSpr.Location = New System.Drawing.Point(307, 108)
         Me.lblAddSpr.Name = "lblAddSpr"
         Me.lblAddSpr.Size = New System.Drawing.Size(48, 13)
         Me.lblAddSpr.TabIndex = 54
@@ -593,7 +627,7 @@ Partial Class frmEditor_Item
         'scrlAddVit
         '
         Me.scrlAddVit.LargeChange = 1
-        Me.scrlAddVit.Location = New System.Drawing.Point(75, 132)
+        Me.scrlAddVit.Location = New System.Drawing.Point(75, 109)
         Me.scrlAddVit.Name = "scrlAddVit"
         Me.scrlAddVit.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddVit.TabIndex = 53
@@ -601,7 +635,7 @@ Partial Class frmEditor_Item
         'lblAddVit
         '
         Me.lblAddVit.AutoSize = True
-        Me.lblAddVit.Location = New System.Drawing.Point(10, 132)
+        Me.lblAddVit.Location = New System.Drawing.Point(10, 109)
         Me.lblAddVit.Name = "lblAddVit"
         Me.lblAddVit.Size = New System.Drawing.Size(55, 13)
         Me.lblAddVit.TabIndex = 52
@@ -610,7 +644,7 @@ Partial Class frmEditor_Item
         'scrlAddInt
         '
         Me.scrlAddInt.LargeChange = 1
-        Me.scrlAddInt.Location = New System.Drawing.Point(231, 130)
+        Me.scrlAddInt.Location = New System.Drawing.Point(231, 107)
         Me.scrlAddInt.Name = "scrlAddInt"
         Me.scrlAddInt.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddInt.TabIndex = 51
@@ -618,7 +652,7 @@ Partial Class frmEditor_Item
         'lblAddInt
         '
         Me.lblAddInt.AutoSize = True
-        Me.lblAddInt.Location = New System.Drawing.Point(151, 131)
+        Me.lblAddInt.Location = New System.Drawing.Point(151, 108)
         Me.lblAddInt.Name = "lblAddInt"
         Me.lblAddInt.Size = New System.Drawing.Size(79, 13)
         Me.lblAddInt.TabIndex = 50
@@ -627,7 +661,7 @@ Partial Class frmEditor_Item
         'scrlAddEnd
         '
         Me.scrlAddEnd.LargeChange = 1
-        Me.scrlAddEnd.Location = New System.Drawing.Point(231, 104)
+        Me.scrlAddEnd.Location = New System.Drawing.Point(231, 81)
         Me.scrlAddEnd.Name = "scrlAddEnd"
         Me.scrlAddEnd.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddEnd.TabIndex = 49
@@ -635,7 +669,7 @@ Partial Class frmEditor_Item
         'lblAddEnd
         '
         Me.lblAddEnd.AutoSize = True
-        Me.lblAddEnd.Location = New System.Drawing.Point(151, 106)
+        Me.lblAddEnd.Location = New System.Drawing.Point(151, 83)
         Me.lblAddEnd.Name = "lblAddEnd"
         Me.lblAddEnd.Size = New System.Drawing.Size(77, 13)
         Me.lblAddEnd.TabIndex = 48
@@ -644,7 +678,7 @@ Partial Class frmEditor_Item
         'scrlAddLuck
         '
         Me.scrlAddLuck.LargeChange = 1
-        Me.scrlAddLuck.Location = New System.Drawing.Point(360, 104)
+        Me.scrlAddLuck.Location = New System.Drawing.Point(360, 81)
         Me.scrlAddLuck.Name = "scrlAddLuck"
         Me.scrlAddLuck.Size = New System.Drawing.Size(69, 15)
         Me.scrlAddLuck.TabIndex = 47
@@ -652,7 +686,7 @@ Partial Class frmEditor_Item
         'lblAddLuck
         '
         Me.lblAddLuck.AutoSize = True
-        Me.lblAddLuck.Location = New System.Drawing.Point(307, 106)
+        Me.lblAddLuck.Location = New System.Drawing.Point(307, 83)
         Me.lblAddLuck.Name = "lblAddLuck"
         Me.lblAddLuck.Size = New System.Drawing.Size(49, 13)
         Me.lblAddLuck.TabIndex = 46
@@ -661,7 +695,7 @@ Partial Class frmEditor_Item
         'scrlAddStr
         '
         Me.scrlAddStr.LargeChange = 1
-        Me.scrlAddStr.Location = New System.Drawing.Point(75, 104)
+        Me.scrlAddStr.Location = New System.Drawing.Point(75, 81)
         Me.scrlAddStr.Name = "scrlAddStr"
         Me.scrlAddStr.Size = New System.Drawing.Size(73, 15)
         Me.scrlAddStr.TabIndex = 45
@@ -669,7 +703,7 @@ Partial Class frmEditor_Item
         'lblAddStr
         '
         Me.lblAddStr.AutoSize = True
-        Me.lblAddStr.Location = New System.Drawing.Point(7, 106)
+        Me.lblAddStr.Location = New System.Drawing.Point(7, 83)
         Me.lblAddStr.Name = "lblAddStr"
         Me.lblAddStr.Size = New System.Drawing.Size(65, 13)
         Me.lblAddStr.TabIndex = 44
@@ -1115,7 +1149,7 @@ Partial Class frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(671, 551)
+        Me.ClientSize = New System.Drawing.Size(669, 551)
         Me.ControlBox = False
         Me.Controls.Add(Me.tabInfo)
         Me.Controls.Add(Me.btnCancel)
@@ -1131,6 +1165,8 @@ Partial Class frmEditor_Item
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraEquipment.ResumeLayout(False)
         Me.fraEquipment.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         CType(Me.numMax, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numMin, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPaperdoll, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1250,4 +1286,7 @@ Partial Class frmEditor_Item
     Friend WithEvents cmbSubType As ComboBox
     Friend WithEvents lblItemLvl As Label
     Friend WithEvents scrlItemLevel As HScrollBar
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents scrlAmmo As HScrollBar
+    Friend WithEvents lblAmmo As Label
 End Class
