@@ -307,7 +307,6 @@
 
         frmMenu.DrawCharacter()
 
-
         DrawCharSelect = True
 
     End Sub
@@ -359,10 +358,10 @@
 
                 ReDim .Stat(0 To Stats.Count - 1)
 
-                .Stat(Stats.strength) = Buffer.ReadInteger
+                .Stat(Stats.Strength) = Buffer.ReadInteger
                 .Stat(Stats.Endurance) = Buffer.ReadInteger
                 .Stat(Stats.Vitality) = Buffer.ReadInteger
-                .Stat(Stats.intelligence) = Buffer.ReadInteger
+                .Stat(Stats.Intelligence) = Buffer.ReadInteger
                 .Stat(Stats.Luck) = Buffer.ReadInteger
                 .Stat(Stats.Spirit) = Buffer.ReadInteger
 
@@ -920,7 +919,6 @@
 
         NeedMap = 1
 
-
         ' Either the revisions didn't match or we dont have the map, so we need it
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CNeedMap)
@@ -1166,7 +1164,6 @@
                 End If
             End If
 
-
             ClearTempTile()
 
             Buffer = Nothing
@@ -1404,6 +1401,9 @@
         Item(n).KnockBack = Buffer.ReadInteger()
         Item(n).KnockBackTiles = Buffer.ReadInteger()
 
+        Item(n).Projectile = Buffer.ReadInteger()
+        Item(n).Ammo = Buffer.ReadInteger()
+
         Buffer = Nothing
         ' changes to inventory, need to clear any drop menu
 
@@ -1438,7 +1438,6 @@
             .YOffset = 0
             .Moving = 0
         End With
-
 
         Buffer = Nothing
     End Sub
@@ -1496,6 +1495,9 @@
         For x = 1 To MAX_NPC_SKILLS
             Npc(i).Skill(x) = Buffer.ReadInteger()
         Next
+
+        Npc(i).Level = Buffer.ReadInteger()
+        Npc(i).Damage = Buffer.ReadInteger()
 
         If Npc(i).AttackSay Is Nothing Then Npc(i).AttackSay = ""
         If Npc(i).Name Is Nothing Then Npc(i).Name = ""
@@ -2224,6 +2226,9 @@
 
             Item(n).KnockBack = buffer.ReadInteger()
             Item(n).KnockBackTiles = buffer.ReadInteger()
+
+            Item(n).Projectile = buffer.ReadInteger()
+            Item(n).Ammo = buffer.ReadInteger()
         Next
 
         ' changes to inventory, need to clear any drop menu
@@ -2306,6 +2311,9 @@
             For z = 1 To MAX_NPC_SKILLS
                 Npc(n).Skill(z) = buffer.ReadInteger()
             Next
+
+            Npc(i).Level = buffer.ReadInteger()
+            Npc(i).Damage = buffer.ReadInteger()
 
             If Npc(n).AttackSay Is Nothing Then Npc(n).AttackSay = ""
             If Npc(n).Name Is Nothing Then Npc(n).Name = ""
@@ -2569,10 +2577,10 @@
         If buffer.ReadInteger <> ServerPackets.SChatBubble Then Exit Sub
 
         target = buffer.ReadInteger
-        TargetType = buffer.ReadInteger
+        targetType = buffer.ReadInteger
         Message = buffer.ReadString
         colour = buffer.ReadInteger
-        AddChatBubble(target, TargetType, Message, colour)
+        AddChatBubble(target, targetType, Message, colour)
 
         buffer = Nothing
 

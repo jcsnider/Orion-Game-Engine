@@ -631,7 +631,6 @@ Module ServerLoop
                             End If
                         End If
 
-
                     End If
 
                     ' /////////////////////////////////////////////
@@ -649,27 +648,23 @@ Module ServerLoop
 
                                 ' Is the target playing and on the same map?
                                 If IsPlaying(Target) And GetPlayerMap(Target) = MapNum Then
-                                    'Can the npc attack the player?
-                                    If CanNpcAttackPlayer(x, Target) Then
-                                        If Not CanPlayerBlockHit(Target) Then
-                                            If Random(1, 3) = 1 Then
-                                                'Damage = Npc(NpcNum).Stat(StatType.Strength) - GetPlayerProtection(Target)
-                                                Dim skillnum As Byte = RandomNpcAttack(MapNum, x)
-                                                If skillnum > 0 Then
-                                                    BufferNpcSkill(MapNum, x, skillnum)
-                                                Else
-                                                    NpcAttackPlayer(x, Target) ', Damage)
-                                                End If
+                                    If IsPlaying(Target) And GetPlayerMap(Target) = MapNum Then
+                                        If Random(1, 3) = 1 Then
+                                            Dim skillnum As Byte = RandomNpcAttack(MapNum, x)
+                                            If skillnum > 0 Then
+                                                BufferNpcSkill(MapNum, x, skillnum)
                                             Else
-                                                NpcAttackPlayer(x, Target) ', Damage)
+                                                TryNpcAttackPlayer(x, Target) ', Damage)
                                             End If
-
                                         Else
-                                            PlayerMsg(Target, "Your " & Trim$(Item(GetPlayerEquipment(Target, EquipmentType.Shield)).Name) & " blocks the " & Trim$(Npc(NpcNum).Name) & "'s hit!", ColorType.BrightGreen)
-                                            SendActionMsg(GetPlayerMap(Target), "BLOCK!", ColorType.Cyan, 1, (GetPlayerX(Target) * 32), (GetPlayerY(Target) * 32))
+                                            TryNpcAttackPlayer(x, Target)
                                         End If
-                                    End If
+                                    Else
+                                        ' Player left map or game, set target to 0
+                                        MapNpc(MapNum).Npc(x).Target = 0
+                                        MapNpc(MapNum).Npc(x).TargetType = 0 ' clear
 
+                                    End If
                                 Else
                                     ' Player left map or game, set target to 0
                                     MapNpc(MapNum).Npc(x).Target = 0
@@ -683,7 +678,6 @@ Module ServerLoop
                                         If Damage < 1 Then Damage = 1
                                         NpcAttackNpc(MapNum, x, Target, Damage)
                                     End If
-
                                 Else
                                     ' npc is dead or non-existant
                                     MapNpc(MapNum).Npc(x).Target = 0
@@ -778,7 +772,7 @@ Module ServerLoop
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i
             Case Vitals.MP
-                i = Npc(NpcNum).Stat(Stats.intelligence) \ 3
+                i = Npc(NpcNum).Stat(Stats.Intelligence) \ 3
 
                 If i < 1 Then i = 1
                 GetNpcVitalRegen = i
@@ -913,7 +907,7 @@ Module ServerLoop
                                 If i <> Index Then
                                     If GetPlayerMap(i) = GetPlayerMap(Index) Then
                                         If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
-                                            If CanAttackPlayer(Index, i, True) Then
+                                            If CanPlayerAttackPlayer(Index, i, True) Then
                                                 SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
                                                 AttackPlayer(Index, i, Vital, skillnum)
                                             End If
@@ -926,9 +920,9 @@ Module ServerLoop
                             If MapNpc(MapNum).Npc(i).Num > 0 Then
                                 If MapNpc(MapNum).Npc(i).Vital(Enums.Vitals.HP) > 0 Then
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
-                                        If CanAttackNpc(Index, i, True) Then
+                                        If CanPlayerAttackNpc(Index, i, True) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            AttackNpc(Index, i, Vital, skillnum)
+                                            PlayerAttackNpc(Index, i, Vital, skillnum)
                                             If Skill(skillnum).KnockBack = 1 Then
                                                 KnockBackNpc(Index, Target, skillnum)
                                             End If
@@ -995,7 +989,7 @@ Module ServerLoop
                 Select Case Skill(skillnum).Type
                     Case SkillType.DamageHp
                         If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
-                            If CanAttackPlayer(Index, Target, True) Then
+                            If CanPlayerAttackPlayer(Index, Target, True) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Target)
                                     AttackPlayer(Index, Target, Vital, skillnum)
@@ -1003,10 +997,10 @@ Module ServerLoop
                                 End If
                             End If
                         Else
-                            If CanAttackNpc(Index, Target, True) Then
+                            If CanPlayerAttackNpc(Index, Target, True) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, Target)
-                                    AttackNpc(Index, Target, Vital, skillnum)
+                                    PlayerAttackNpc(Index, Target, Vital, skillnum)
                                     If Skill(skillnum).KnockBack = 1 Then
                                         KnockBackNpc(Index, Target, skillnum)
                                     End If
@@ -1029,7 +1023,7 @@ Module ServerLoop
 
                         If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
                             If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanAttackPlayer(Index, Target, True) Then
+                                If CanPlayerAttackPlayer(Index, Target, True) Then
                                     SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
                                 End If
                             Else
@@ -1037,7 +1031,7 @@ Module ServerLoop
                             End If
                         Else
                             If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanAttackNpc(Index, Target, True) Then
+                                If CanPlayerAttackNpc(Index, Target, True) Then
                                     SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
                                 End If
                             Else
@@ -1164,9 +1158,9 @@ Module ServerLoop
                             If MapNpc(MapNum).Npc(i).Num > 0 Then
                                 If MapNpc(MapNum).Npc(i).Vital(Enums.Vitals.HP) > 0 Then
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
-                                        If CanAttackNpc(NpcNum, i, True) Then
+                                        If CanPlayerAttackNpc(NpcNum, i, True) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            AttackNpc(NpcNum, i, Vital, skillnum)
+                                            PlayerAttackNpc(NpcNum, i, Vital, skillnum)
                                             If Skill(skillnum).KnockBack = 1 Then
                                                 KnockBackNpc(NpcNum, Target, skillnum)
                                             End If
@@ -1240,10 +1234,10 @@ Module ServerLoop
                                 End If
                             End If
                         Else
-                            If CanAttackNpc(NpcNum, Target, True) Then
+                            If CanPlayerAttackNpc(NpcNum, Target, True) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, Target)
-                                    AttackNpc(NpcNum, Target, Vital, skillnum)
+                                    PlayerAttackNpc(NpcNum, Target, Vital, skillnum)
                                     If Skill(skillnum).KnockBack = 1 Then
                                         KnockBackNpc(NpcNum, Target, skillnum)
                                     End If
@@ -1266,7 +1260,7 @@ Module ServerLoop
 
                         If TempPlayer(NpcNum).TargetType = Enums.TargetType.Player Then
                             If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanAttackPlayer(NpcNum, Target, True) Then
+                                If CanPlayerAttackPlayer(NpcNum, Target, True) Then
                                     SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
                                 End If
                             Else
@@ -1274,7 +1268,7 @@ Module ServerLoop
                             End If
                         Else
                             If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanAttackNpc(NpcNum, Target, True) Then
+                                If CanPlayerAttackNpc(NpcNum, Target, True) Then
                                     SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
                                 End If
                             Else

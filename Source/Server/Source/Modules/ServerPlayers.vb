@@ -43,7 +43,7 @@
             Case Vitals.HP
                 GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.Vitality) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.Vitality)) * 2
             Case Vitals.MP
-                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.intelligence) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.intelligence)) * 2
+                GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.Intelligence) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.Intelligence)) * 2
             Case Vitals.SP
                 GetPlayerMaxVital = (Player(Index).Character(TempPlayer(Index).CurChar).Level + (GetPlayerStat(Index, Stats.Spirit) \ 2) + Classes(Player(Index).Character(TempPlayer(Index).CurChar).Classes).Stat(Stats.Spirit)) * 2
         End Select
@@ -152,6 +152,8 @@
         'clear target
         TempPlayer(Index).Target = 0
         TempPlayer(Index).TargetType = TargetType.None
+        TempPlayer(Index).TargetZone = 0
+        SendTarget(Index, 0, TargetType.None)
 
         ' Save old map to send erase player data to
         OldMap = GetPlayerMap(Index)
@@ -548,7 +550,6 @@
                             End If
                         End If
                     End If
-
 
                 Else
 
@@ -1216,7 +1217,6 @@
         If GetPlayerInvItemValue(Index, invSlot) < 0 Then Exit Sub
         If GetPlayerInvItemValue(Index, invSlot) < amount Then Exit Sub
 
-
         BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, invSlot))
         itemnum = GetPlayerInvItemNum(Index, invSlot)
 
@@ -1354,28 +1354,28 @@
         ' Make sure we dont get less then 0
         If exp < 0 Then exp = 0
         If exp = 0 Then
-            Call PlayerMsg(Index, "You lost no exp.", ColorType.BrightGreen)
+            PlayerMsg(Index, "You lost no exp.", ColorType.BrightGreen)
         Else
-            Call SetPlayerExp(Index, GetPlayerExp(Index) - exp)
+            SetPlayerExp(Index, GetPlayerExp(Index) - exp)
             SendExp(Index)
-            Call PlayerMsg(Index, "You lost " & exp & " exp.", ColorType.BrightRed)
+            PlayerMsg(Index, "You lost " & exp & " exp.", ColorType.BrightRed)
         End If
 
-        Call OnDeath(Index)
+        OnDeath(Index)
     End Sub
 
     Sub OnDeath(ByVal Index As Integer)
-        Dim i As Integer
+        'Dim i As Integer
 
         ' Set HP to nothing
         SetPlayerVital(Index, Vitals.HP, 0)
 
         ' Drop all worn items
-        For i = 1 To EquipmentType.Count - 1
-            If GetPlayerEquipment(Index, i) > 0 Then
-                PlayerMapDropItem(Index, GetPlayerEquipment(Index, i), 0)
-            End If
-        Next
+        'For i = 1 To EquipmentType.Count - 1
+        '    If GetPlayerEquipment(Index, i) > 0 Then
+        '        PlayerMapDropItem(Index, GetPlayerEquipment(Index, i), 0)
+        '    End If
+        'Next
 
         ' Warp player away
         SetPlayerDir(Index, Direction.Down)
@@ -1464,7 +1464,6 @@
         If i < 2 Then i = 2
         GetPlayerVitalRegen = i
     End Function
-
 
     Public Sub BufferSkill(ByVal Index As Integer, ByVal skillslot As Integer)
         Dim skillnum As Integer
@@ -1560,10 +1559,10 @@
                 If Not Target > 0 Then
                     PlayerMsg(Index, "You do not have a target.", ColorType.BrightRed)
                 End If
-                If TargetType = TargetType.PLAYER Then
+                If TargetType = TargetType.Player Then
                     'Housing
                     If Player(Target).Character(TempPlayer(Target).CurChar).InHouse = Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
-                        If CanAttackPlayer(Index, Target, True) Then
+                        If CanPlayerAttackPlayer(Index, Target, True) Then
                             HasBuffered = True
                         End If
                     End If
@@ -1575,12 +1574,12 @@
                         If Skill(skillnum).Type <> SkillType.DamageHp And Skill(skillnum).Type <> SkillType.DamageMp Then
                             HasBuffered = True
                         Else
-                            If CanAttackPlayer(Index, Target, True) Then
+                            If CanPlayerAttackPlayer(Index, Target, True) Then
                                 HasBuffered = True
                             End If
                         End If
                     End If
-                ElseIf TargetType = TargetType.NPC Then
+                ElseIf TargetType = TargetType.Npc Then
                     ' if have target, check in range
                     If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
                         PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
@@ -1590,7 +1589,7 @@
                         If Skill(skillnum).Type <> SkillType.DamageHp And Skill(skillnum).Type <> SkillType.DamageMp Then
                             HasBuffered = True
                         Else
-                            If CanAttackNpc(Index, Target, True) Then
+                            If CanPlayerAttackNpc(Index, Target, True) Then
                                 HasBuffered = True
                             End If
                         End If
@@ -1599,7 +1598,7 @@
         End Select
 
         If HasBuffered Then
-            SendAnimation(MapNum, Skill(skillnum).CastAnim, 0, 0, TargetType.PLAYER, Index)
+            SendAnimation(MapNum, Skill(skillnum).CastAnim, 0, 0, TargetType.Player, Index)
             TempPlayer(Index).SkillBuffer = skillslot
             TempPlayer(Index).SkillBufferTimer = GetTickCount()
             Exit Sub
@@ -1654,8 +1653,6 @@
 
                     Select Case Item(InvItemNum).SubType
                         Case EquipmentType.Weapon
-
-
 
                             If Item(InvItemNum).TwoHanded > 0 Then
                                 If GetPlayerEquipment(Index, EquipmentType.Shield) > 0 Then
@@ -2121,7 +2118,6 @@
                         Case ConsumableType.Exp
 
                     End Select
-
 
                 Case ItemType.Key
                     InvItemNum = GetPlayerInvItemNum(Index, InvNum)

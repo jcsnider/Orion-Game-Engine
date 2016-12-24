@@ -834,9 +834,9 @@ Partial Class frmMenu
         Me.pnlLoad.BackgroundImage = CType(resources.GetObject("pnlLoad.BackgroundImage"), System.Drawing.Image)
         Me.pnlLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlLoad.Controls.Add(Me.lblStatus)
-        Me.pnlLoad.Location = New System.Drawing.Point(2, 1)
+        Me.pnlLoad.Location = New System.Drawing.Point(-2, 1)
         Me.pnlLoad.Name = "pnlLoad"
-        Me.pnlLoad.Size = New System.Drawing.Size(729, 553)
+        Me.pnlLoad.Size = New System.Drawing.Size(733, 553)
         Me.pnlLoad.TabIndex = 58
         '
         'lblStatus

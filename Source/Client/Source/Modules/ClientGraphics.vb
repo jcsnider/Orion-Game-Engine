@@ -760,7 +760,7 @@ Module ClientGraphics
                 .TextureTimer = GetTickCount() + 100000
             End With
         ElseIf TexType = 12 Then 'emotes
-            If Index < 0 Or Index > NumProjectiles Then Exit Sub
+            If Index < 0 Or Index > NumEmotes Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             EmotesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Emotes\" & Index & GFX_EXT)

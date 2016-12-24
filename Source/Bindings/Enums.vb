@@ -29,9 +29,9 @@
         AdminColor = ColorType.BrightCyan
         HelpColor = ColorType.BrightBlue
         WhoColor = ColorType.BrightBlue
-        JoinLeftColor = ColorType.DarkGray
+        JoinLeftColor = ColorType.Gray
         NpcColor = ColorType.Brown
-        AlertColor = ColorType.Red
+        AlertColor = ColorType.BrightRed
         NewMapColor = ColorType.BrightBlue
     End Enum
 

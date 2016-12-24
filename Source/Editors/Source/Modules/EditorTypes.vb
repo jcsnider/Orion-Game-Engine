@@ -133,7 +133,7 @@
         Dim Add_Stat() As Byte
         Dim Rarity As Byte
         Dim Speed As Integer
-        Dim Handed As Integer
+        Dim TwoHanded As Integer
         Dim BindType As Byte
         Dim Stat_Req() As Byte
         Dim Animation As Integer
@@ -154,6 +154,9 @@
 
         Dim KnockBack As Byte
         Dim KnockBackTiles As Byte
+
+        Dim Projectile As Integer
+        Dim Ammo As Integer
     End Structure
 
     Public Structure MapItemRec
@@ -181,6 +184,9 @@
         Dim Animation As Integer
         Dim QuestNum As Integer
         Dim Skill() As Byte
+
+        Dim Level As Integer
+        Dim Damage As Integer
     End Structure
 
     Public Structure MapNpcRec
