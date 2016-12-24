@@ -5,7 +5,7 @@
         Dim i As Integer
 
         For i = 1 To 100
-            SkillExpTable(i) = CLng(Getvar(Application.StartupPath & "\SkillExp.ini", "Level", i))
+            SkillExpTable(i) = CLng(Getvar(Application.StartupPath & "\data\SkillExp.ini", "Level", i))
         Next
     End Sub
 
