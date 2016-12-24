@@ -1676,7 +1676,7 @@ Module ServerDatabase
 
         ClearBank(Index)
 
-        filename = Path.Combine(Application.StartupPath, "data", "accounts", "banks", String.Format("{0}.bin", Name.Trim()))
+        filename = Path.Combine(Application.StartupPath, "data", "banks", String.Format("{0}.bin", Name.Trim()))
 
         If Not FileExist(filename) Then
             SaveBank(Index)
@@ -1694,7 +1694,7 @@ Module ServerDatabase
     Sub SaveBank(ByVal Index As Integer)
         Dim filename As String
 
-        filename = Path.Combine(Application.StartupPath, "data", "accounts", "banks", String.Format("{0}.bin", Player(Index).Login.Trim()))
+        filename = Path.Combine(Application.StartupPath, "data", "banks", String.Format("{0}.bin", Player(Index).Login.Trim()))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
