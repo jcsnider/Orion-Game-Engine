@@ -9,10 +9,6 @@ Module ServerGeneral
         Return Environment.TickCount
     End Function
 
-    'Sub Main()
-    '    InitServer()
-    'End Sub
-
     Sub InitServer()
         Dim FileName As String
         Dim i As Integer, F As Integer, x As Integer
