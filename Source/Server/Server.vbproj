@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="automapper.ini">
+    <None Include="Data\automapper.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="My Project\Application.myapp">
@@ -156,7 +156,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="SkillExp.ini">
+    <None Include="Data\SkillExp.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -194,7 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <Content Include="News.txt">
+    <Content Include="Data\News.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
