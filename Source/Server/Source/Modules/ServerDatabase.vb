@@ -6,7 +6,7 @@ Module ServerDatabase
 #Region "Classes"
     Public Sub CreateClassesIni()
         Dim filename As String
-        filename = Application.StartupPath & "\data\classes.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "classes.ini")
         Max_Classes = 1
 
         If Not FileExist(filename) Then
@@ -55,7 +55,7 @@ Module ServerDatabase
         Dim tmpArray() As String
         Dim x As Integer
 
-        filename = Application.StartupPath & "\data\classes.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "classes.ini")
 
         If Not FileExist(filename) Then CreateClassesIni()
 
@@ -125,7 +125,7 @@ Module ServerDatabase
         Dim i As Integer
         Dim x As Integer
 
-        filename = Application.StartupPath & "\data\classes.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "classes.ini")
 
         PutVar(filename, "INIT", "MaxClasses", Str(Max_Classes))
 
@@ -195,7 +195,7 @@ Module ServerDatabase
         Dim i As Integer
 
         For i = 1 To MAX_MAPS
-            If Not FileExist(Application.StartupPath & "\Data\maps\map" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", i))) Then
                 SaveMap(i)
                 DoEvents()
             End If
@@ -260,7 +260,7 @@ Module ServerDatabase
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
 
-        filename = Application.StartupPath & "\data\maps\map" & MapNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", MapNum))
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Map(MapNum).Name)
         writer.Write(Map(MapNum).Music)
@@ -315,7 +315,7 @@ Module ServerDatabase
     Sub SaveMapEvent(ByVal MapNum As Integer)
 
         'This is for event saving, it is in .ini files because there are non-limited values (strings) that cannot easily be loaded/saved in the normal manner.
-        Dim filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.dat"
+        Dim filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}_eventdata.dat", MapNum))
         PutVar(filename, "Events", "EventCount", Val(Map(MapNum).EventCount))
 
         If Map(MapNum).EventCount > 0 Then
@@ -438,7 +438,7 @@ Module ServerDatabase
     End Sub
 
     Sub LoadMapEvent(ByVal MapNum As Integer)
-        Dim filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.dat"
+        Dim filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}_eventdata.dat", MapNum))
         Map(MapNum).EventCount = Val(Getvar(filename, "Events", "EventCount"))
 
         If Map(MapNum).EventCount > 0 Then
@@ -586,7 +586,7 @@ Module ServerDatabase
         Dim y As Integer
         Dim l As Integer
 
-        filename = Application.StartupPath & "\data\maps\map" & MapNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}.dat", MapNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Map(MapNum).Name)
@@ -708,7 +708,7 @@ Module ServerDatabase
 
     Sub SaveItem(ByVal itemNum As Integer)
         Dim filename As String
-        filename = Application.StartupPath & "\data\items\item" & itemNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", itemNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Item(itemNum).Name)
@@ -787,7 +787,8 @@ Module ServerDatabase
         Dim F As Integer
         Dim s As Integer
 
-        filename = Application.StartupPath & "\data\Items\Item" & ItemNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", ItemNum))
+
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Item(ItemNum).Name)
@@ -855,7 +856,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_ITEMS
 
-            If Not FileExist(Application.StartupPath & "\Data\Items\Item" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "items", String.Format("item{0}.dat", i))) Then
                 SaveItem(i)
             End If
 
@@ -902,7 +903,7 @@ Module ServerDatabase
     Sub SaveNpc(ByVal NpcNum As Integer)
         Dim filename As String
         Dim i As Integer
-        filename = Application.StartupPath & "\data\npcs\npc" & NpcNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "npcs", String.Format("npc{0}.dat", NpcNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
         writer.Write(Npc(NpcNum).Name)
@@ -955,7 +956,7 @@ Module ServerDatabase
         Dim filename As String
         Dim n As Integer
 
-        filename = Application.StartupPath & "\data\npcs\npc" & NpcNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "npcs", String.Format("npc{0}.dat", NpcNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Npc(NpcNum).Name)
@@ -998,7 +999,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_NPCS
 
-            If Not FileExist(Application.StartupPath & "\Data\npcs\npc" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "npcs", String.Format("npc{0}.dat", i))) Then
                 SaveNpc(i)
                 DoEvents()
             End If
@@ -1066,7 +1067,7 @@ Module ServerDatabase
     Sub SaveResource(ByVal ResourceNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\resources\resource" & ResourceNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", ResourceNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1103,7 +1104,7 @@ Module ServerDatabase
     Sub LoadResource(ByVal ResourceNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\resources\resource" & ResourceNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", ResourceNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Resource(ResourceNum).Name)
@@ -1132,7 +1133,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_RESOURCES
 
-            If Not FileExist(Application.StartupPath & "\Data\Resources\Resource" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "resources", String.Format("resource{0}.dat", i))) Then
                 SaveResource(i)
                 DoEvents()
             End If
@@ -1195,7 +1196,7 @@ Module ServerDatabase
         Dim i As Integer
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\shops\shop" & shopNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "shops", String.Format("shop{0}.dat", shopNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1230,7 +1231,7 @@ Module ServerDatabase
         Dim filename As String
         Dim x As Integer
 
-        filename = Application.StartupPath & "\data\shops\shop" & ShopNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "shops", String.Format("shop{0}.dat", ShopNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Shop(ShopNum).Name)
@@ -1251,7 +1252,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_SHOPS
 
-            If Not FileExist(Application.StartupPath & "\Data\shops\shop" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "shops", String.Format("shop{0}.dat", i))) Then
                 SaveShop(i)
                 DoEvents()
             End If
@@ -1298,7 +1299,7 @@ Module ServerDatabase
 
     Sub SaveSkill(ByVal skillnum As Integer)
         Dim filename As String
-        filename = Application.StartupPath & "\data\skills\skills" & skillnum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "skills", String.Format("skills{0}.dat", skillnum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1349,7 +1350,7 @@ Module ServerDatabase
     Sub LoadSkill(ByVal SkillNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\skills\skills" & SkillNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "skills", String.Format("skills{0}.dat", SkillNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Skill(SkillNum).Name)
@@ -1388,7 +1389,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_SKILLS
 
-            If Not FileExist(Application.StartupPath & "\Data\skills\skills" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "skills", String.Format("skills{0}.dat", i))) Then
                 SaveSkill(i)
                 DoEvents()
             End If
@@ -1430,7 +1431,7 @@ Module ServerDatabase
         Dim filename As String
         Dim x As Integer
 
-        filename = Application.StartupPath & "\data\animations\animation" & AnimationNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", AnimationNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1470,7 +1471,7 @@ Module ServerDatabase
     Sub LoadAnimation(ByVal AnimationNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\animations\animation" & AnimationNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", AnimationNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Animation(AnimationNum).Name)
@@ -1499,7 +1500,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_ANIMATIONS
 
-            If Not FileExist(Application.StartupPath & "\Data\animations\animation" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "animations", String.Format("animation{0}.dat", i))) Then
                 SaveAnimation(i)
                 DoEvents()
             End If
@@ -1530,7 +1531,7 @@ Module ServerDatabase
 #Region "Accounts"
     Function AccountExist(ByVal Name As String) As Boolean
         Dim filename As String
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", Trim$(Name), String.Format("{0}.bin", Trim$(Name)))
 
         If FileExist(filename) Then
             AccountExist = True
@@ -1549,7 +1550,7 @@ Module ServerDatabase
         PasswordOK = False
 
         If AccountExist(Name) Then
-            filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
+            filename = Path.Combine(Application.StartupPath, "data", "accounts", Trim$(Name), String.Format("{0}.bin", Trim$(Name)))
             Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
             reader.Read(namecheck)
             reader.Read(RightPassword)
@@ -1577,7 +1578,7 @@ Module ServerDatabase
 
     Sub DeleteName(ByVal Name As String)
 
-        Dim fileName As String = Application.StartupPath & "\data\accounts\charlist.txt"
+        Dim fileName As String = Path.Combine(Application.StartupPath, "data", "accounts", "charlist.txt")
 
         ' Read the file line by line
         Dim fileContents = File.ReadAllLines(fileName).ToList
@@ -1611,10 +1612,12 @@ Module ServerDatabase
 
     Sub SavePlayer(ByVal Index As Integer)
         Dim filename As String
+        Dim playername As String
 
-        CheckDir(Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login))
+        playername = Trim$(Player(Index).Login)
+        CheckDir(Path.Combine(Application.StartupPath, "data", "accounts", playername))
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & Trim$(Player(Index).Login) & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", playername, String.Format("{0}.bin", playername))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1635,7 +1638,7 @@ Module ServerDatabase
 
         ClearPlayer(Index)
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Name) & "\" & Trim$(Name) & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", Name.Trim(), String.Format("{0}.bin", Name.Trim()))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Player(Index).Login)
@@ -1673,7 +1676,7 @@ Module ServerDatabase
 
         ClearBank(Index)
 
-        filename = Application.StartupPath & "\data\banks\" & Trim$(Name) & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", "banks", String.Format("{0}.bin", Name.Trim()))
 
         If Not FileExist(filename) Then
             SaveBank(Index)
@@ -1691,7 +1694,7 @@ Module ServerDatabase
     Sub SaveBank(ByVal Index As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\banks\" & Trim$(Player(Index).Login) & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", "banks", String.Format("{0}.bin", Player(Index).Login.Trim()))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -1840,7 +1843,7 @@ Module ServerDatabase
 
         ClearCharacter(Index, CharNum)
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", Trim$(Player(Index).Login), String.Format("{0}.bin", CharNum))
 
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
@@ -1963,7 +1966,7 @@ Module ServerDatabase
     Sub SaveCharacter(ByVal Index As Integer, ByVal CharNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\accounts\" & Trim$(Player(Index).Login) & "\" & CharNum & ".bin"
+        filename = Path.Combine(Application.StartupPath, "data", "accounts", Trim$(Player(Index).Login), String.Format("{0}.bin", CharNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -2159,7 +2162,7 @@ Module ServerDatabase
         Dim Contents As String
         Dim bAns As Boolean = False
 
-        fullpath = Application.StartupPath & "\data\accounts\charlist.txt"
+        fullpath = Path.Combine(Application.StartupPath, "data", "accounts", "charlist.txt")
 
         Contents = GetFileContents(fullpath)
         characters = Split(Contents, vbNewLine)
@@ -2177,17 +2180,18 @@ Module ServerDatabase
 
 #Region "IniReading"
     Public Sub SaveOptions()
-        PutVar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Game_Name", Options.Game_Name)
-        PutVar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Port", Str(Options.Port))
-        PutVar(Application.StartupPath & "\data\options.ini", "OPTIONS", "MOTD", Options.MOTD)
-        PutVar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Website", Options.Website)
+        Path.Combine(Application.StartupPath, "data", "options.ini")
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Game_Name", Options.Game_Name)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port", Str(Options.Port))
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD", Options.MOTD)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website", Options.Website)
     End Sub
 
     Public Sub LoadOptions()
-        Options.Game_Name = Getvar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Game_Name")
-        Options.Port = Getvar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Port")
-        Options.MOTD = Getvar(Application.StartupPath & "\data\options.ini", "OPTIONS", "MOTD")
-        Options.Website = Getvar(Application.StartupPath & "\data\options.ini", "OPTIONS", "Website")
+        Options.Game_Name = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Game_Name")
+        Options.Port = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port")
+        Options.MOTD = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD")
+        Options.Website = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website")
     End Sub
 
 #End Region
@@ -2219,7 +2223,7 @@ Module ServerDatabase
         Dim Contents As String
         Dim bAns As Boolean = False
         Dim objReader As StreamWriter
-        fullpath = Application.StartupPath & "\data\logs\" & FN
+        fullpath = Path.Combine(Application.StartupPath, "data", "logs", FN)
         Contents = GetFileContents(fullpath)
         Contents = Contents & vbNewLine & strData
         Try
@@ -2238,7 +2242,7 @@ Module ServerDatabase
         Dim Contents As String
         Dim bAns As Boolean = False
         Dim objReader As StreamWriter
-        fullpath = Application.StartupPath & "\data\" & FN
+        fullpath = Path.Combine(Application.StartupPath, "data", FN)
         Contents = GetFileContents(fullpath)
         Contents = Contents & vbNewLine & strData
         Try
@@ -2291,7 +2295,7 @@ Module ServerDatabase
         Dim IP As String
         Dim F As Integer
         Dim i As Integer
-        filename = Application.StartupPath & "\data\banlist.txt"
+        filename = Path.Combine(Application.StartupPath, "data", "banlist.txt")
 
         ' Make sure the file exists
         If Not FileExist("data\banlist.txt") Then

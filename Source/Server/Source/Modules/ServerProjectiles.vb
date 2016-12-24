@@ -1,4 +1,6 @@
-﻿Public Module ServerProjectiles
+﻿Imports System.IO
+
+Public Module ServerProjectiles
 
 #Region "Defines"
     Public Const MAX_PROJECTILES As Integer = 255
@@ -40,7 +42,7 @@
     Sub SaveProjectile(ByVal ProjectileNum As Integer)
         Dim filename As String
 
-        filename = Application.StartupPath & "\data\projectiles\Projectile" & ProjectileNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", ProjectileNum))
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -61,7 +63,7 @@
         Call CheckProjectile()
 
         For i = 1 To MAX_PROJECTILES
-            filename = Application.StartupPath & "\data\projectiles\Projectile" & i & ".dat"
+            filename = Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))
             Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
             reader.Read(Projectiles(i).Name)
@@ -79,7 +81,7 @@
         Dim i As Integer
 
         For i = 1 To MAX_PROJECTILES
-            If Not FileExist(Application.StartupPath & "\Data\projectiles\Projectile" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))) Then
                 Call SaveProjectile(i)
             End If
         Next

@@ -14,6 +14,7 @@ Module ServerGeneral
     'End Sub
 
     Sub InitServer()
+        Dim FileName As String
         Dim i As Integer, F As Integer, x As Integer
         Dim time1 As Integer, time2 As Integer
         x = 0
@@ -101,8 +102,9 @@ Module ServerGeneral
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
         Next
 
-        If FileExist(Application.StartupPath & "\data\classes.ini") Then
-            Max_Classes = CLng(Getvar(Application.StartupPath & "\data\classes.ini", "INIT", "MaxClasses"))
+        FileName = Path.Combine(Application.StartupPath, "data", "classes.ini")
+        If FileExist(FileName) Then
+            Max_Classes = CLng(Getvar(FileName, "INIT", "MaxClasses"))
         Else
             Max_Classes = 2
         End If
@@ -136,39 +138,25 @@ Module ServerGeneral
         ClearPartys()
 
         ' Check if the directory is there, if its not make it
-        CheckDir(Application.StartupPath & "\data")
-
-        CheckDir(Application.StartupPath & "\Data\items")
-
-        CheckDir(Application.StartupPath & "\Data\maps")
-
-        CheckDir(Application.StartupPath & "\Data\npcs")
-
-        CheckDir(Application.StartupPath & "\Data\shops")
-
-        CheckDir(Application.StartupPath & "\Data\skills")
-
-        CheckDir(Application.StartupPath & "\data\accounts")
-
-        CheckDir(Application.StartupPath & "\data\resources")
-
-        CheckDir(Application.StartupPath & "\data\animations")
-
-        CheckDir(Application.StartupPath & "\data\banks")
-
-        CheckDir(Application.StartupPath & "\data\logs")
-
-        CheckDir(Application.StartupPath & "\data\quests")
-
-        CheckDir(Application.StartupPath & "\data\projectiles")
-
-        CheckDir(Application.StartupPath & "\data\recipes")
+        CheckDir(Path.Combine(Application.StartupPath, "data"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "items"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "maps"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "npcs"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "shops"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "skills"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "accounts"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "resources"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "animations"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "banks"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "logs"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "quests"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "recipes"))
 
         ' set quote character
         vbQuote = Chr(34) ' "
 
         ' load options, set if they dont exist
-        If Not FileExist(Application.StartupPath & "\data\options.ini") Then
+        If Not FileExist(Path.Combine(Application.StartupPath, "data", "items")) Then
             Options.Game_Name = "Orion+"
             Options.Port = 7001
             Options.MOTD = "Welcome to the Orion+ Engine"
@@ -422,7 +410,7 @@ Module ServerGeneral
 
     Sub ErrorHandler(ByVal sender As Object, ByVal args As UnhandledExceptionEventArgs)
         Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
-        Dim myFilePath As String = Application.StartupPath & "\data\logs\ErrorLog.log"
+        Dim myFilePath As String = Path.Combine(Application.StartupPath, "data", "logs", "ErrorLog.log")
 
         Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
             sw.WriteLine(DateTime.Now)

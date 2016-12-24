@@ -1,4 +1,6 @@
 ﻿
+Imports System.IO
+
 Public Module ServerEvents
 #Region "Globals"
     Public TempEventMap() As GlobalEventsRec
@@ -357,7 +359,7 @@ Public Module ServerEvents
     Sub SaveSwitches()
         Dim i As Integer, filename As String
 
-        filename = Application.StartupPath & "\data\switches.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "switches.ini")
 
         For i = 1 To MAX_SWITCHES
             PutVar(filename, "Switches", "Switch" & i & "Name", Switches(i))
@@ -368,7 +370,7 @@ Public Module ServerEvents
     Sub SaveVariables()
         Dim i As Integer, filename As String
 
-        filename = Application.StartupPath & "\data\variables.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "variables.ini")
 
         For i = 1 To MAX_VARIABLES
             PutVar(filename, "Variables", "Variable" & i & "Name", Variables(i))
@@ -379,7 +381,7 @@ Public Module ServerEvents
     Sub LoadSwitches()
         Dim i As Integer, filename As String
 
-        filename = Application.StartupPath & "\data\switches.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "switches.ini")
 
         For i = 1 To MAX_SWITCHES
             DoEvents()
@@ -391,7 +393,7 @@ Public Module ServerEvents
     Sub LoadVariables()
         Dim i As Integer, filename As String
 
-        filename = Application.StartupPath & "\data\variables.ini"
+        filename = Path.Combine(Application.StartupPath, "data", "variables.ini")
 
         For i = 1 To MAX_VARIABLES
             DoEvents()
@@ -1755,22 +1757,22 @@ Public Module ServerEvents
         Buffer = Nothing
 
         Select Case GetPlayerDir(index)
-            Case Direction.UP
+            Case Direction.Up
 
                 If GetPlayerY(index) = 0 Then Exit Sub
                 x = GetPlayerX(index)
                 y = GetPlayerY(index) - 1
-            Case Direction.DOWN
+            Case Direction.Down
 
                 If GetPlayerY(index) = Map(GetPlayerMap(index)).MaxY Then Exit Sub
                 x = GetPlayerX(index)
                 y = GetPlayerY(index) + 1
-            Case Direction.LEFT
+            Case Direction.Left
 
                 If GetPlayerX(index) = 0 Then Exit Sub
                 x = GetPlayerX(index) - 1
                 y = GetPlayerY(index)
-            Case Direction.RIGHT
+            Case Direction.Right
 
                 If GetPlayerX(index) = Map(GetPlayerMap(index)).MaxX Then Exit Sub
                 x = GetPlayerX(index) + 1

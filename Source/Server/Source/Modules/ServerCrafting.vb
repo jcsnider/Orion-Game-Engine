@@ -1,4 +1,6 @@
-﻿Public Module ServerCrafting
+﻿Imports System.IO
+
+Public Module ServerCrafting
 #Region "Globals"
     Public Recipe(MAX_RECIPE) As RecipeRec
 
@@ -26,7 +28,7 @@
         Dim i As Integer
 
         For i = 1 To MAX_RECIPE
-            If Not FileExist(Application.StartupPath & "\Data\recipes\recipe" & i & ".dat") Then
+            If Not FileExist(Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", i))) Then
                 SaveRecipe(i)
                 DoEvents()
             End If
@@ -48,7 +50,8 @@
         Dim filename As String
         Dim i As Integer
 
-        filename = Application.StartupPath & "\Data\recipes\recipe" & RecipeNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", RecipeNum))
+
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
@@ -83,7 +86,7 @@
 
         CheckRecipes()
 
-        filename = Application.StartupPath & "\Data\recipes\recipe" & RecipeNum & ".dat"
+        filename = Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", RecipeNum))
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
         reader.Read(Recipe(RecipeNum).Name)
@@ -141,7 +144,7 @@
         Dim Buffer As ByteBuffer
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.DEVELOPER Then Exit Sub
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SRecipeEditor)
@@ -155,7 +158,7 @@
         Buffer = New ByteBuffer
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.DEVELOPER Then Exit Sub
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         Buffer.WriteBytes(data)
 

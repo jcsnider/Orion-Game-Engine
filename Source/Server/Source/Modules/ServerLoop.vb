@@ -1,106 +1,96 @@
-﻿Imports System.Threading
+﻿Imports System.Linq
+Imports System.Threading
 
 Module ServerLoop
     Sub ServerLoop()
-        Dim i As Integer
         Dim Tick As Integer
         Dim tmr25 As Integer
         Dim tmr300 As Integer
         Dim tmr500 As Integer
-        Dim tmr1000 As Integer, tmrCraft As Integer
+        Dim tmr1000 As Integer
         Dim LastUpdateSavePlayers As Integer
         Dim LastUpdateMapSpawnItems As Integer
         Dim LastUpdatePlayerVitals As Integer
 
         ServerOnline = True
-
         Do
+            ' Update our current tick value.
             Tick = GetTickCount()
-            'UpdateUI()
+
+            ' Don't process anything else if we're going down.
             If ServerDestroyed Then End
 
-            If Tick > tmr25 Then
-                For i = 1 To MAX_PLAYERS
-                    If IsPlaying(i) Then
-                        ' check if they've completed casting, and if so set the actual skill going
-                        If TempPlayer(i).SkillBuffer > 0 Then
-                            If GetTickCount() > TempPlayer(i).SkillBufferTimer + (Skill(Player(i).Character(TempPlayer(i).CurChar).Skill(TempPlayer(i).SkillBuffer)).CastTime * 1000) Then
-                                CastSkill(i, TempPlayer(i).SkillBuffer)
-                                TempPlayer(i).SkillBuffer = 0
-                                TempPlayer(i).SkillBufferTimer = 0
-                            End If
-                        End If
-                        ' check if need to turn off stunned
-                        If TempPlayer(i).StunDuration > 0 Then
-                            If GetTickCount() > TempPlayer(i).StunTimer + (TempPlayer(i).StunDuration * 1000) Then
-                                TempPlayer(i).StunDuration = 0
-                                TempPlayer(i).StunTimer = 0
-                                SendStunned(i)
-                            End If
-                        End If
-                    End If
-                Next
+            ' Get all our online players.
+            Dim OnlinePlayers = TempPlayer.Where(Function(player) player.InGame).Select(Function(player, index) New With {Key .Index = index, Key .Player = player}).ToArray()
 
+            If Tick > tmr25 Then
+                ' Check if any of our players has completed casting and get their skill going if they have.
+                Dim _playerskills = (
+                    From p In OnlinePlayers
+                    Where p.Player.SkillBuffer > 0 And GetTickCount() > p.Player.SkillBufferTimer + (Skill(Player(p.Index).Character(p.Player.CurChar).Skill(p.Player.SkillBufferTimer)).CastTime * 1000)
+                    Select New With {.Index = p.Index, Key .Success = HandleCastSkill(p.Index)}
+                ).ToArray()
+
+                ' Check if we need to clear any of our players from being stunned.
+                Dim _playerstuns = (
+                    From p In OnlinePlayers
+                    Where p.Player.StunDuration > 0 And p.Player.StunTimer + (p.Player.StunDuration * 1000)
+                    Select New With {Key .Index = p.Index, Key .Success = HandleClearStun(p.Index)}
+                ).ToArray()
+
+                ' Update all our available events.
                 UpdateEventLogic()
 
+                ' Move the timer up 25ms.
                 tmr25 = GetTickCount() + 25
             End If
 
             If Tick > tmr1000 Then
+                ' Shut down the server if we're going down!
                 If isShuttingDown Then
                     HandleShutdown()
                 End If
 
+                ' Handle our player crafting
+                Dim _playercrafts = (
+                    From p In OnlinePlayers
+                    Where GetTickCount() > p.Player.CraftTimer + (p.Player.CraftTimeNeeded * 1000)
+                    Select New With {Key .Index = p.Index, .Success = HandlePlayerCraft(p.Index)}
+                ).ToArray()
+
+                ' Move the timer up 1000ms.
                 tmr1000 = GetTickCount() + 1000
             End If
 
-            If Tick > tmrCraft Then
-                For i = 1 To MAX_PLAYERS
-                    If IsPlaying(i) Then
-                        If TempPlayer(i).CraftIt = 1 Then
-                            If GetTickCount() > TempPlayer(i).CraftTimer + (TempPlayer(i).CraftTimeNeeded * 1000) Then
-                                TempPlayer(i).CraftIt = 0
-                                TempPlayer(i).CraftTimer = 0
-                                TempPlayer(i).CraftTimeNeeded = 0
-                                UpdateCraft(i)
-                            End If
-                        End If
-                    End If
-                Next
-                tmrCraft = GetTickCount() + 1000
-            End If
 
-            ' Check for disconnections every half second
             If Tick > tmr500 Then
 
-                For i = 1 To MAX_PLAYERS
-                    'Housing
-                    If IsPlaying(i) Then
-                        If Player(i).Character(TempPlayer(i).CurChar).InHouse > 0 Then
-                            If IsPlaying(Player(i).Character(TempPlayer(i).CurChar).InHouse) Then
-                                If Player(Player(i).Character(TempPlayer(i).CurChar).InHouse).Character(TempPlayer(i).CurChar).InHouse <> Player(i).Character(TempPlayer(i).CurChar).InHouse Then
-                                    Player(i).Character(TempPlayer(i).CurChar).InHouse = 0
-                                    PlayerWarp(i, Player(i).Character(TempPlayer(i).CurChar).LastMap, Player(i).Character(TempPlayer(i).CurChar).LastX, Player(i).Character(TempPlayer(i).CurChar).LastY)
-                                    PlayerMsg(i, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.", ColorType.Yellow)
-                                End If
-                            End If
-                        End If
-                    End If
+                ' Handle player housing timers.
+                Dim _playerhousing = (
+                    From p In OnlinePlayers
+                    Where Player(p.Index).Character(p.Player.CurChar).InHouse > 0 And
+                          IsPlaying(Player(p.Index).Character(p.Player.CurChar).InHouse) And
+                          Player(Player(p.Index).Character(p.Player.CurChar).InHouse).Character(p.Player.CurChar).InHouse <> Player(p.Index).Character(p.Player.CurChar).InHouse
+                    Select New With {Key .Index = p.Index, Key .Success = HandlePlayerHouse(p.Index)}
+                ).ToArray()
 
-                    If Not Clients(i).Socket Is Nothing Then
-                        If Not Clients(i).Socket.Connected Then
-                            CloseSocket(i)
-                        End If
-                    End If
+                ' Check for disconnected players.
+                Dim _playerdisconnects = (
+                    From p In OnlinePlayers
+                    Where Not Clients(p.Index).Socket Is Nothing And Not Clients(p.Index).Socket.Connected
+                    Select New With {Key .Index = p.Index, Key .Success = HandleCloseSocket(p.Index)}
+                ).ToArray()
 
-                Next
-
+                ' Move the timer up 500ms.
                 tmr500 = GetTickCount() + 500
 
-                If GetTickCount() > tmr25 Then
-                    UpdateEventLogic()
-                    tmr25 = GetTickCount() + 25
-                End If
+                ' Why is this here? Uncomment if it has a use, but this happens earlier in the loop as well?
+                ' Not to mention, why does it happen ever half a second, and then with ANOTHER if statement for times?
+                ' If your loop takes over 25ms you may need to optimise the hell out of this.
+                'If GetTickCount() > tmr25 Then
+                '    UpdateEventLogic()
+                '    tmr25 = GetTickCount() + 25
+                'End If
             End If
 
             If GetTickCount() > tmr300 Then
@@ -778,6 +768,40 @@ Module ServerLoop
                 GetNpcVitalRegen = i
         End Select
 
+    End Function
+
+    Public Function HandleCloseSocket(ByVal Index As Integer) As Boolean
+        CloseSocket(Index)
+        HandleCloseSocket = True
+    End Function
+
+    Public Function HandlePlayerHouse(ByVal Index As Integer) As Boolean
+        Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
+        PlayerWarp(Index, Player(Index).Character(TempPlayer(Index).CurChar).LastMap, Player(Index).Character(TempPlayer(Index).CurChar).LastX, Player(Index).Character(TempPlayer(Index).CurChar).LastY)
+        PlayerMsg(Index, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.", ColorType.Yellow)
+        HandlePlayerHouse = True
+    End Function
+
+    Public Function HandlePlayerCraft(ByVal Index As Integer) As Boolean
+        TempPlayer(Index).CraftIt = 0
+        TempPlayer(Index).CraftTimer = 0
+        TempPlayer(Index).CraftTimeNeeded = 0
+        UpdateCraft(Index)
+        HandlePlayerCraft = True
+    End Function
+
+    Public Function HandleClearStun(ByVal Index As Integer) As Boolean
+        TempPlayer(Index).StunDuration = 0
+        TempPlayer(Index).StunTimer = 0
+        SendStunned(Index)
+        HandleClearStun = True
+    End Function
+
+    Public Function HandleCastSkill(ByVal Index As Integer) As Boolean
+        CastSkill(Index, TempPlayer(Index).SkillBuffer)
+        TempPlayer(Index).SkillBuffer = 0
+        TempPlayer(Index).SkillBufferTimer = 0
+        HandleCastSkill = True
     End Function
 
     Public Sub CastSkill(ByVal Index As Integer, ByVal skillslot As Integer)
