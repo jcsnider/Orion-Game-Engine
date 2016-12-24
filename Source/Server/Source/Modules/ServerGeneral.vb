@@ -36,10 +36,9 @@ Module ServerGeneral
         SetConsoleCtrlHandler(handler, True)
 
         time1 = GetTickCount()
-        'frmServer.Show()
 
         ' Initialize the random-number generator
-        Randomize() ', seed
+        Randomize()
 
         ReDim Map(MAX_CACHED_MAPS)
 
@@ -197,10 +196,6 @@ Module ServerGeneral
 
         For x = 1 To MAX_PLAYERS
             Clients(x) = New Client
-            'frmServer.lstView.Items.Add(x)
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
-            'frmServer.lstView.Items(x - 1).SubItems.Add("")
             ClearPlayer(x)
         Next
 

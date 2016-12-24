@@ -21,20 +21,20 @@ Module ServerLoop
             If ServerDestroyed Then End
 
             ' Get all our online players.
-            Dim OnlinePlayers = TempPlayer.Where(Function(player) player.InGame).Select(Function(player, index) New With {Key .Index = index, Key .Player = player}).ToArray()
+            Dim OnlinePlayers = TempPlayer.Where(Function(player) player.InGame).Select(Function(player, index) New With {Key .Index = index + 1, Key .Player = player}).ToArray()
 
             If Tick > tmr25 Then
                 ' Check if any of our players has completed casting and get their skill going if they have.
                 Dim _playerskills = (
                     From p In OnlinePlayers
-                    Where p.Player.SkillBuffer > 0 And GetTickCount() > p.Player.SkillBufferTimer + (Skill(Player(p.Index).Character(p.Player.CurChar).Skill(p.Player.SkillBufferTimer)).CastTime * 1000)
+                    Where p.Player.SkillBuffer > 0 AndAlso GetTickCount() > (p.Player.SkillBufferTimer + Skill(p.Player.SkillBuffer).CastTime * 1000)
                     Select New With {.Index = p.Index, Key .Success = HandleCastSkill(p.Index)}
                 ).ToArray()
 
                 ' Check if we need to clear any of our players from being stunned.
                 Dim _playerstuns = (
                     From p In OnlinePlayers
-                    Where p.Player.StunDuration > 0 And p.Player.StunTimer + (p.Player.StunDuration * 1000)
+                    Where p.Player.StunDuration > 0 AndAlso p.Player.StunTimer + (p.Player.StunDuration * 1000)
                     Select New With {Key .Index = p.Index, Key .Success = HandleClearStun(p.Index)}
                 ).ToArray()
 
@@ -68,8 +68,8 @@ Module ServerLoop
                 ' Handle player housing timers.
                 Dim _playerhousing = (
                     From p In OnlinePlayers
-                    Where Player(p.Index).Character(p.Player.CurChar).InHouse > 0 And
-                          IsPlaying(Player(p.Index).Character(p.Player.CurChar).InHouse) And
+                    Where Player(p.Index).Character(p.Player.CurChar).InHouse > 0 AndAlso
+                          IsPlaying(Player(p.Index).Character(p.Player.CurChar).InHouse) AndAlso
                           Player(Player(p.Index).Character(p.Player.CurChar).InHouse).Character(p.Player.CurChar).InHouse <> Player(p.Index).Character(p.Player.CurChar).InHouse
                     Select New With {Key .Index = p.Index, Key .Success = HandlePlayerHouse(p.Index)}
                 ).ToArray()
@@ -804,278 +804,282 @@ Module ServerLoop
         HandleCastSkill = True
     End Function
 
-    Public Sub CastSkill(ByVal Index As Integer, ByVal skillslot As Integer)
-        Dim skillnum As Integer, MPCost As Integer, LevelReq As Integer
-        Dim MapNum As Integer, Vital As Integer, DidCast As Boolean
-        Dim ClassReq As Integer, AccessReq As Integer, i As Integer
-        Dim AoE As Integer, range As Integer, VitalType As Byte
-        Dim increment As Boolean, x As Integer, y As Integer
+    Public Sub CastSkill(ByVal Index As Integer, ByVal SkillSlot As Integer)
+        ' Set up some basic variables we'll be using.
+        Dim SkillId = GetPlayerSkill(Index, SkillSlot)
+        Dim MapNum = GetPlayerMap(Index)
+        Dim Level = Skill(SkillId).LevelReq
 
-        Dim TargetType As Byte
-        Dim Target As Integer
-        Dim SkillCastType As Integer
+        ' Preventative checks
+        If Not IsPlaying(Index) Or SkillSlot <= 0 Or SkillSlot > MAX_PLAYER_SKILLS Or Not HasSkill(Index, SkillId) Then Exit Sub
 
-        DidCast = False
-
-        ' Prevent subscript out of range
-        If skillslot <= 0 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
-
-        skillnum = GetPlayerSkill(Index, skillslot)
-        MapNum = GetPlayerMap(Index)
-
-        ' Make sure player has the skill
-        If Not HasSkill(Index, skillnum) Then Exit Sub
-
-        MPCost = Skill(skillnum).MPCost
-
-        ' Check if they have enough MP
-        If GetPlayerVital(Index, Enums.Vitals.MP) < MPCost Then
+        ' Check if the player is able to cast the spell.
+        If GetPlayerVital(Index, Vitals.MP) < Skill(SkillId).MPCost Then
             PlayerMsg(Index, "Not enough mana!", ColorType.BrightRed)
             Exit Sub
-        End If
-
-        LevelReq = Skill(skillnum).LevelReq
-
-        ' Make sure they are the right level
-        If LevelReq > GetPlayerLevel(Index) Then
-            PlayerMsg(Index, "You must be level " & LevelReq & " to use this skill.", ColorType.BrightRed)
+        ElseIf GetPlayerLevel(Index) < Skill(SkillId).LevelReq Then
+            PlayerMsg(Index, String.Format("You must be level {0} to use this skill.", Skill(SkillId).LevelReq), ColorType.BrightRed)
             Exit Sub
-        End If
-
-        AccessReq = Skill(skillnum).AccessReq
-
-        ' make sure they have the right access
-        If AccessReq > GetPlayerAccess(Index) Then
+        ElseIf GetPlayerAccess(Index) < Skill(SkillId).AccessReq Then
             PlayerMsg(Index, "You must be an administrator to use this skill.", ColorType.BrightRed)
             Exit Sub
+        ElseIf Not Skill(SkillId).ClassReq = 0 AndAlso GetPlayerClass(Index) <> Skill(SkillId).ClassReq Then
+            PlayerMsg(Index, String.Format("Only {0} can use this skill.", CheckGrammar((Classes(Skill(SkillId).ClassReq).Name.Trim()))), ColorType.BrightRed)
+            Exit Sub
+        ElseIf Skill(SkillId).range > 0 AndAlso Not IsTargetOnMap(Index) Then
+            Exit Sub
+        ElseIf Skill(SkillId).range > 0 AndAlso Not IsInSkillRange(Index, SkillId) AndAlso Skill(SkillId).IsProjectile = 0 Then
+            PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
+            SendClearSkillBuffer(Index)
+            Exit Sub
         End If
 
-        ClassReq = Skill(skillnum).ClassReq
-
-        ' make sure the classreq > 0
-        If ClassReq > 0 Then ' 0 = no req
-            If ClassReq <> GetPlayerClass(Index) Then
-                PlayerMsg(Index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.", ColorType.BrightRed)
-                Exit Sub
-            End If
-        End If
-
-        ' find out what kind of skill it is! self cast, target or AOE
-        If Skill(skillnum).IsProjectile = 1 Then
-            SkillCastType = 4 ' Projectile
-        ElseIf Skill(skillnum).range > 0 Then
-            ' ranged attack, single target or aoe?
-            If Not Skill(skillnum).IsAoE Then
-                SkillCastType = 2 ' targetted
-            Else
-                SkillCastType = 3 ' targetted aoe
-            End If
+        ' Determine what kind of Skill Type we're dealing with and move on to the appropriate methods.
+        If Skill(SkillId).IsProjectile = 1 Then
+            PlayerFireProjectile(Index, SkillId)
         Else
-            If Not Skill(skillnum).IsAoE Then
-                SkillCastType = 0 ' self-cast
-            Else
-                SkillCastType = 1 ' self-cast AoE
-            End If
+            If Skill(SkillId).range = 0 AndAlso Not Skill(SkillId).IsAoE Then HandleSelfCastSkill(Index, SkillId)
+            If Skill(SkillId).range = 0 AndAlso Skill(SkillId).IsAoE Then HandleSelfCastAoESkill(Index, SkillId)
+            If Skill(SkillId).range > 0 AndAlso Skill(SkillId).IsAoE Then HandleTargetedAoESkill(Index, SkillId)
+            If Skill(SkillId).range > 0 AndAlso Not Skill(SkillId).IsAoE Then HandleTargetedSkill(Index, SkillId)
         End If
 
-        ' set the vital
-        Vital = Skill(skillnum).Vital
-        AoE = Skill(skillnum).AoE
-        range = Skill(skillnum).range
+        ' Do everything we need to do at the end of the cast.
+        FinalizeCast(Index, GetPlayerSkillSlot(Index, SkillId), Skill(SkillId).MPCost)
+    End Sub
 
-        Select Case SkillCastType
-            Case 0 ' self-cast target
-                Select Case Skill(skillnum).Type
-                    Case SkillType.HealHp
-                        SkillPlayer_Effect(Enums.Vitals.HP, True, Index, Vital, skillnum)
-                        DidCast = True
-                    Case SkillType.HealMp
-                        SkillPlayer_Effect(Enums.Vitals.MP, True, Index, Vital, skillnum)
-                        DidCast = True
-                    Case SkillType.Warp
-                        SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Index)
-                        PlayerWarp(Index, Skill(skillnum).Map, Skill(skillnum).x, Skill(skillnum).y)
-                        SendAnimation(GetPlayerMap(Index), Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Index)
-                        DidCast = True
-                End Select
+    Private Sub HandleSelfCastAoESkill(ByVal Index As Integer, ByVal SkillId As Integer)
 
-            Case 1, 3 ' self-cast AOE & targetted AOE
-                If SkillCastType = 1 Then
-                    x = GetPlayerX(Index)
-                    y = GetPlayerY(Index)
-                ElseIf SkillCastType = 3 Then
-                    TargetType = TempPlayer(Index).TargetType
-                    Target = TempPlayer(Index).Target
+        ' Set up some variables we'll definitely be using.
+        Dim CenterX = GetPlayerX(Index)
+        Dim CenterY = GetPlayerY(Index)
 
-                    If TargetType = 0 Then Exit Sub
-                    If Target = 0 Then Exit Sub
+        ' Determine what kind of spell we're dealing with and process it.
+        Select Case Skill(SkillId).Type
+            Case SkillType.DamageHp
+            Case SkillType.DamageMp
+            Case SkillType.HealHp
+            Case SkillType.HealMp
+                HandleAoE(Index, SkillId, CenterX, CenterY)
 
-                    If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
-                        x = GetPlayerX(Target)
-                        y = GetPlayerY(Target)
-                    Else
-                        x = MapNpc(MapNum).Npc(Target).x
-                        y = MapNpc(MapNum).Npc(Target).y
-                    End If
-
-                    If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                        PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
-                        SendClearSkillBuffer(Index)
-                    End If
-                End If
-                Select Case Skill(skillnum).Type
-                    Case SkillType.DamageHp
-                        DidCast = True
-                        For i = 1 To MAX_PLAYERS
-                            If IsPlaying(i) Then
-                                If i <> Index Then
-                                    If GetPlayerMap(i) = GetPlayerMap(Index) Then
-                                        If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
-                                            If CanPlayerAttackPlayer(Index, i, True) Then
-                                                SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
-                                                AttackPlayer(Index, i, Vital, skillnum)
-                                            End If
-                                        End If
-                                    End If
-                                End If
-                            End If
-                        Next
-                        For i = 1 To MAX_MAP_NPCS
-                            If MapNpc(MapNum).Npc(i).Num > 0 Then
-                                If MapNpc(MapNum).Npc(i).Vital(Enums.Vitals.HP) > 0 Then
-                                    If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
-                                        If CanPlayerAttackNpc(Index, i, True) Then
-                                            SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            PlayerAttackNpc(Index, i, Vital, skillnum)
-                                            If Skill(skillnum).KnockBack = 1 Then
-                                                KnockBackNpc(Index, Target, skillnum)
-                                            End If
-                                        End If
-                                    End If
-                                End If
-                            End If
-                        Next
-                    Case SkillType.HealHp, SkillType.HealMp, SkillType.DamageMp
-                        If Skill(skillnum).Type = SkillType.HealHp Then
-                            VitalType = Enums.Vitals.HP
-                            increment = True
-                        ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            VitalType = Enums.Vitals.MP
-                            increment = True
-                        ElseIf Skill(skillnum).Type = SkillType.DamageMp Then
-                            VitalType = Enums.Vitals.MP
-                            increment = False
-                        End If
-
-                        DidCast = True
-                        For i = 1 To MAX_PLAYERS
-                            If IsPlaying(i) Then
-                                If GetPlayerMap(i) = GetPlayerMap(Index) Then
-                                    If isInRange(AoE, x, y, GetPlayerX(i), GetPlayerY(i)) Then
-                                        SkillPlayer_Effect(VitalType, increment, i, Vital, skillnum)
-                                    End If
-                                End If
-                            End If
-                        Next
-                        For i = 1 To MAX_MAP_NPCS
-                            If MapNpc(MapNum).Npc(i).Num > 0 Then
-                                If MapNpc(MapNum).Npc(i).Vital(Enums.Vitals.HP) > 0 Then
-                                    If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
-                                        SkillNpc_Effect(VitalType, increment, i, Vital, skillnum, MapNum)
-                                    End If
-                                End If
-                            End If
-                        Next
-                End Select
-
-            Case 2 ' targetted
-
-                TargetType = TempPlayer(Index).TargetType
-                Target = TempPlayer(Index).Target
-
-                If TargetType = 0 Then Exit Sub
-                If Target = 0 Then Exit Sub
-
-                If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
-                    x = GetPlayerX(Target)
-                    y = GetPlayerY(Target)
-                Else
-                    x = MapNpc(MapNum).Npc(Target).x
-                    y = MapNpc(MapNum).Npc(Target).y
-                End If
-
-                If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), x, y) Then
-                    PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
-                    SendClearSkillBuffer(Index)
-                    Exit Sub
-                End If
-
-                Select Case Skill(skillnum).Type
-                    Case SkillType.DamageHp
-                        If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
-                            If CanPlayerAttackPlayer(Index, Target, True) Then
-                                If Vital > 0 Then
-                                    SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Target)
-                                    AttackPlayer(Index, Target, Vital, skillnum)
-                                    DidCast = True
-                                End If
-                            End If
-                        Else
-                            If CanPlayerAttackNpc(Index, Target, True) Then
-                                If Vital > 0 Then
-                                    SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, Target)
-                                    PlayerAttackNpc(Index, Target, Vital, skillnum)
-                                    If Skill(skillnum).KnockBack = 1 Then
-                                        KnockBackNpc(Index, Target, skillnum)
-                                    End If
-                                    DidCast = True
-                                End If
-                            End If
-                        End If
-
-                    Case SkillType.DamageMp, SkillType.HealMp, SkillType.HealHp
-                        If Skill(skillnum).Type = SkillType.DamageMp Then
-                            VitalType = Enums.Vitals.MP
-                            increment = False
-                        ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            VitalType = Enums.Vitals.MP
-                            increment = True
-                        ElseIf Skill(skillnum).Type = SkillType.HealHp Then
-                            VitalType = Enums.Vitals.HP
-                            increment = True
-                        End If
-
-                        If TempPlayer(Index).TargetType = Enums.TargetType.Player Then
-                            If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanPlayerAttackPlayer(Index, Target, True) Then
-                                    SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
-                                End If
-                            Else
-                                SkillPlayer_Effect(VitalType, increment, Target, Vital, skillnum)
-                            End If
-                        Else
-                            If Skill(skillnum).Type = SkillType.DamageMp Then
-                                If CanPlayerAttackNpc(Index, Target, True) Then
-                                    SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
-                                End If
-                            Else
-                                SkillNpc_Effect(VitalType, increment, Target, Vital, skillnum, MapNum)
-                            End If
-                        End If
-                End Select
-            Case 4 ' Projectile
-                PlayerFireProjectile(Index, skillnum)
-
-                DidCast = True
+            Case Else
+                Throw New NotImplementedException()
         End Select
 
-        If DidCast Then
-            SetPlayerVital(Index, Enums.Vitals.MP, GetPlayerVital(Index, Enums.Vitals.MP) - MPCost)
-            SendVital(Index, Enums.Vitals.MP)
-            TempPlayer(Index).SkillCD(skillslot) = GetTickCount() + (Skill(skillnum).CDTime * 1000)
-            SendCooldown(Index, skillslot)
-        End If
     End Sub
+    Private Sub HandleTargetedAoESkill(ByVal Index As Integer, ByVal SkillId As Integer)
+
+        ' Set up some variables we'll definitely be using.
+        Dim CenterX As Integer
+        Dim CenterY As Integer
+        Dim TargetType As TargetType
+        Select Case TempPlayer(Index).TargetType
+            Case TargetType.Npc
+                TargetType = TargetType.Npc
+                CenterX = MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).Target).x
+                CenterY = MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).Target).y
+
+            Case TargetType.Player
+                TargetType = TargetType.Player
+                CenterX = GetPlayerX(TempPlayer(Index).Target)
+                CenterY = GetPlayerY(TempPlayer(Index).Target)
+
+            Case Else
+                Throw New NotImplementedException()
+
+        End Select
+
+        ' Determine what kind of spell we're dealing with and process it.
+        Select Case Skill(SkillId).Type
+            Case SkillType.DamageHp
+            Case SkillType.DamageMp
+            Case SkillType.HealHp
+            Case SkillType.HealMp
+                HandleAoE(Index, SkillId, CenterX, CenterY)
+
+            Case Else
+                Throw New NotImplementedException()
+        End Select
+    End Sub
+    Private Sub HandleSelfCastSkill(ByVal Index As Integer, ByVal SkillId As Integer)
+        ' Determine what kind of spell we're dealing with and process it.
+        Select Case Skill(SkillId).Type
+            Case SkillType.HealHp
+                SkillPlayer_Effect(Enums.Vitals.HP, True, Index, Skill(SkillId).Vital, SkillId)
+            Case SkillType.HealMp
+                SkillPlayer_Effect(Enums.Vitals.MP, True, Index, Skill(SkillId).Vital, SkillId)
+            Case SkillType.Warp
+                SendAnimation(GetPlayerMap(Index), Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Player, Index)
+                PlayerWarp(Index, Skill(SkillId).Map, Skill(SkillId).x, Skill(SkillId).y)
+            Case Else
+                Throw New NotImplementedException()
+        End Select
+
+        ' Play our animation.
+        SendAnimation(GetPlayerMap(Index), Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Player, Index)
+    End Sub
+    Private Sub HandleTargetedSkill(ByVal Index As Integer, ByVal SkillId As Integer)
+        ' Set up some variables we'll definitely be using.
+        Dim TargetX As Integer
+        Dim TargetY As Integer
+        Dim TargetType As TargetType
+        Dim Vital As Enums.Vitals
+        Dim DealsDamage As Boolean
+        Dim Amount = Skill(SkillId).Vital
+        Dim Target = TempPlayer(Index).Target
+
+        ' Determine what vital we need to adjust and how.
+        Select Case Skill(SkillId).Type
+            Case Enums.SkillType.DamageHp
+                Vital = Vitals.HP
+                DealsDamage = True
+
+            Case Enums.SkillType.DamageMp
+                Vital = Vitals.MP
+                DealsDamage = True
+
+            Case Enums.SkillType.HealHp
+                Vital = Vitals.HP
+                DealsDamage = False
+
+            Case Enums.SkillType.HealMp
+                Vital = Vitals.MP
+                DealsDamage = False
+
+            Case Else
+                Throw New NotImplementedException
+        End Select
+
+        Select Case TempPlayer(Index).TargetType
+            Case TargetType.Npc
+                TargetType = TargetType.Npc
+                TargetX = MapNpc(GetPlayerMap(Index)).Npc(Target).x
+                TargetY = MapNpc(GetPlayerMap(Index)).Npc(Target).y
+
+                ' Deal with damaging abilities.
+                If DealsDamage And CanPlayerAttackNpc(Index, Target, True) Then SkillNpc_Effect(Vital, False, Target, Amount, SkillId, GetPlayerMap(Index))
+
+                ' Deal with healing abilities
+                If Not DealsDamage Then SkillNpc_Effect(Vital, True, Target, Amount, SkillId, GetPlayerMap(Index))
+
+                ' Deal with Knockback effects.
+                If Skill(SkillId).KnockBack = 1 Then
+                    KnockBackNpc(Index, Target, SkillId)
+                End If
+
+            Case TargetType.Player
+                TargetType = TargetType.Player
+                TargetX = GetPlayerX(Target)
+                TargetY = GetPlayerY(Target)
+
+                ' Deal with damaging abilities.
+                If DealsDamage And CanPlayerAttackPlayer(Index, Target, True) Then SkillPlayer_Effect(Vital, False, Target, Amount, SkillId)
+
+                ' Deal with healing abilities
+                If Not DealsDamage Then SkillPlayer_Effect(Vital, True, Target, Amount, SkillId)
+
+            Case Else
+                Throw New NotImplementedException()
+
+        End Select
+
+        ' Play our animation.
+        SendAnimation(GetPlayerMap(Index), Skill(SkillId).SkillAnim, 0, 0, TargetType, Index)
+    End Sub
+
+    Private Sub HandleAoE(ByVal Index As Integer, ByVal SkillId As Integer, ByVal X As Integer, ByVal Y As Integer)
+        ' Get some basic things set up.
+        Dim Map = GetPlayerMap(Index)
+        Dim Range = Skill(SkillId).range
+        Dim Amount = Skill(SkillId).Vital
+        Dim Vital As Enums.Vitals
+        Dim DealsDamage As Boolean
+
+        ' Determine what vital we need to adjust and how.
+        Select Case Skill(SkillId).Type
+            Case Enums.SkillType.DamageHp
+                Vital = Vitals.HP
+                DealsDamage = True
+
+            Case Enums.SkillType.DamageMp
+                Vital = Vitals.MP
+                DealsDamage = True
+
+            Case Enums.SkillType.HealHp
+                Vital = Vitals.HP
+                DealsDamage = False
+
+            Case Enums.SkillType.HealMp
+                Vital = Vitals.MP
+                DealsDamage = False
+
+            Case Else
+                Throw New NotImplementedException
+        End Select
+
+        ' Loop through all online players on the current map.
+        For Each id In TempPlayer.Where(Function(p) p.InGame).Select(Function(p, i) i + 1).Where(Function(i) GetPlayerMap(i) = Map).ToArray()
+            If isInRange(Range, X, Y, GetPlayerX(id), GetPlayerY(id)) Then
+
+                ' Deal with damaging abilities.
+                If DealsDamage And CanPlayerAttackPlayer(Index, id, True) Then SkillPlayer_Effect(Vital, False, id, Amount, SkillId)
+
+                ' Deal with healing abilities
+                If Not DealsDamage Then SkillPlayer_Effect(Vital, True, id, Amount, SkillId)
+
+                ' Send our animation to the map.
+                SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Player, id)
+            End If
+        Next
+
+        ' Loop through all the NPCs on this map
+        For Each id In MapNpc(Map).Npc.Where(Function(n) n.Num > 0 AndAlso n.Vital(Vitals.HP) > 0).Select(Function(n, i) i + 1).ToArray()
+            If isInRange(Range, X, Y, MapNpc(Map).Npc(id).x, MapNpc(Map).Npc(id).y) Then
+
+                ' Deal with damaging abilities.
+                If DealsDamage And CanPlayerAttackNpc(Index, id, True) Then SkillNpc_Effect(Vital, False, id, Amount, SkillId, Map)
+
+                ' Deal with healing abilities
+                If Not DealsDamage Then SkillNpc_Effect(Vital, True, id, Amount, SkillId, Map)
+
+                ' Deal with Knockback effects.
+                If Skill(SkillId).KnockBack = 1 Then
+                    KnockBackNpc(Index, id, SkillId)
+                End If
+
+                ' Send our animation to the map.
+                SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Npc, id)
+            End If
+        Next
+    End Sub
+    Private Sub FinalizeCast(ByVal Index As Integer, ByVal SkillSlot As Integer, ByVal SkillCost As Integer)
+        SetPlayerVital(Index, Enums.Vitals.MP, GetPlayerVital(Index, Enums.Vitals.MP) - SkillCost)
+        SendVital(Index, Enums.Vitals.MP)
+        TempPlayer(Index).SkillCD(SkillSlot) = GetTickCount() + (Skill(SkillSlot).CDTime * 1000)
+        SendCooldown(Index, SkillSlot)
+    End Sub
+
+    Private Function IsTargetOnMap(ByVal Index As Integer) As Boolean
+        If TempPlayer(Index).TargetType = TargetType.Player Then
+            If GetPlayerMap(TempPlayer(Index).Target) = GetPlayerMap(Index) Then IsTargetOnMap = True
+        ElseIf TempPlayer(Index).TargetType = TargetType.Npc Then
+            If TempPlayer(Index).Target > 0 AndAlso TempPlayer(Index).Target <= MAX_MAP_NPCS AndAlso MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).Target).Vital(Vitals.HP) > 0 Then IsTargetOnMap = True
+        End If
+    End Function
+    Private Function IsInSkillRange(ByVal Index As Integer, ByVal SkillId As Integer) As Boolean
+        Dim TargetX As Integer
+        Dim TargetY As Integer
+
+        If TempPlayer(Index).TargetType = TargetType.Player Then
+            TargetX = GetPlayerX(TempPlayer(Index).Target)
+            TargetY = GetPlayerY(TempPlayer(Index).Target)
+        ElseIf TempPlayer(Index).TargetType = TargetType.Npc Then
+            TargetX = MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).Target).x
+            TargetY = MapNpc(GetPlayerMap(Index)).Npc(TempPlayer(Index).Target).y
+        End If
+
+        IsInSkillRange = isInRange(Skill(SkillId).range, GetPlayerX(Index), GetPlayerY(Index), TargetX, TargetY)
+    End Function
 
     Public Sub CastNpcSkill(ByVal NpcNum As Integer, ByVal MapNum As Integer, ByVal skillslot As Integer)
         Dim skillnum As Integer, MPCost As Integer
@@ -1327,10 +1331,10 @@ Module ServerLoop
                 Colour = ColorType.Blue
             End If
 
-            SendAnimation(GetPlayerMap(Index), Skill(Skillnum).SkillAnim, 0, 0, TargetType.Player, Index)
             SendActionMsg(GetPlayerMap(Index), sSymbol & Damage, Colour, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
             If increment Then SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) + Damage)
             If Not increment Then SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) - Damage)
+            SendVital(Index, Vital)
         End If
     End Sub
 
