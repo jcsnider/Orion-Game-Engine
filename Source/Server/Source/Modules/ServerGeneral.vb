@@ -19,8 +19,15 @@ Module ServerGeneral
         Dim time1 As Integer, time2 As Integer
         x = 0
 
-        Dim currentDomain As AppDomain = AppDomain.CurrentDomain
-        'AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
+        If Debugger.IsAttached Then
+            ' Since there is a debugger attached,
+            ' assume we are running from the IDE
+            Debugging = True
+        Else
+            ' Assume we aren't running from the IDE
+            Dim currentDomain As AppDomain = AppDomain.CurrentDomain
+            AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
+        End If
 
         Console.Title = "Orion+ Server"
         Console.SetWindowSize(120, 20)
