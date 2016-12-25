@@ -83,13 +83,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Forms\frmServer.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmServer.Designer.vb">
-      <DependentUpon>frmServer.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Source\Modules\ServerAutoMap.vb" />
     <Compile Include="Source\Modules\ServerCombat.vb" />
     <Compile Include="Source\Modules\ServerConsole.vb" />
@@ -105,7 +98,7 @@
     <Compile Include="Source\Modules\ServerHousing.vb" />
     <Compile Include="Source\Modules\ServerINIAccess.vb" />
     <Compile Include="Source\Modules\ServerInstances.vb" />
-    <Compile Include="Source\Modules\ServerPartys.vb" />
+    <Compile Include="Source\Modules\ServerParties.vb" />
     <Compile Include="Source\Modules\ServerPlayers.vb" />
     <Compile Include="Source\Modules\ServerLoop.vb" />
     <Compile Include="Source\Modules\ServerProjectiles.vb" />
@@ -131,9 +124,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\frmServer.resx">
-      <DependentUpon>frmServer.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

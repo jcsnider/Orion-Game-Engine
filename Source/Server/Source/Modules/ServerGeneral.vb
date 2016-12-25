@@ -163,6 +163,9 @@ Module ServerGeneral
             Options.Port = 7001
             Options.MOTD = "Welcome to the Orion+ Engine"
             Options.Website = "http://ascensiongamedev.com/index.php"
+            Options.StartMap = 1
+            Options.StartX = 13
+            Options.StartY = 7
             SaveOptions()
         Else
             LoadOptions()
@@ -253,8 +256,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
-        'frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online)", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline())
     End Sub
 
     Sub DestroyServer()
@@ -349,17 +351,6 @@ Module ServerGeneral
 
     Sub TextAdd(ByVal Msg As String)
         Console.WriteLine(Msg)
-
-        'If ConsoleText = "" Then
-        '    ConsoleText = ConsoleText & Msg
-        'Else
-        '    ConsoleText = ConsoleText & vbNewLine & Msg
-        'End If
-        'Try
-        'UpdateUI()
-        'Catch ex As Exception
-        '    'Dont handle error
-        'End Try
     End Sub
 
     ' Used for checking validity of names
@@ -385,8 +376,8 @@ Module ServerGeneral
 
         If Secs <= 0 Then Secs = 30
         If Secs Mod 5 = 0 Or Secs <= 5 Then
-            GlobalMsg("Server Shutdown in " & Secs & " seconds.")
-            TextAdd("Automated Server Shutdown in " & Secs & " seconds.")
+            GlobalMsg(String.Format("Server Shutdown in {0} seconds.", Secs))
+            TextAdd(String.Format("Automated Server Shutdown in {0} seconds.", Secs))
         End If
 
         Secs = Secs - 1

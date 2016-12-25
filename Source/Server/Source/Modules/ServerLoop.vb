@@ -122,10 +122,14 @@ Module ServerLoop
         Loop
     End Sub
 
-    Private Sub UpdateSavePlayers()
+    Function GetTotalPlayersOnline() As Integer
+        GetTotalPlayersOnline = TempPlayer.Where(Function(x) x.InGame).ToArray().Length
+    End Function
+
+    Sub UpdateSavePlayers()
         Dim i As Integer
 
-        If TotalPlayersOnline > 0 Then
+        If GetTotalPlayersOnline() > 0 Then
             TextAdd("Saving all online players...")
             GlobalMsg("Saving all online players...")
 

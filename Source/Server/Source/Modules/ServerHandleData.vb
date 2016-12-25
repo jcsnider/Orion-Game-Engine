@@ -349,17 +349,6 @@ Module ServerHandleData
 
                 SendDataTo(index, Buffer.ToArray)
 
-                '' Check if character data has been created
-                'If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
-                '    ' we have a char!
-                '    HandleUseChar(index)
-                'Else
-                '    ' send new char shit
-                'If Not IsPlaying(index) Then
-                '    Call SendNewCharClasses(index)
-                'End If
-                'End If
-
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
                 TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
@@ -367,7 +356,6 @@ Module ServerHandleData
                 Buffer = Nothing
             End If
         End If
-        NeedToUpDatePlayerList = True
     End Sub
 
     Private Sub Packet_UseChar(ByVal index As Integer, ByVal data() As Byte)
@@ -401,7 +389,6 @@ Module ServerHandleData
             End If
         End If
 
-        NeedToUpDatePlayerList = True
     End Sub
 
     Private Sub Packet_AddChar(ByVal index As Integer, ByVal data() As Byte)
@@ -470,7 +457,6 @@ Module ServerHandleData
             Buffer = Nothing
         End If
 
-        NeedToUpDatePlayerList = True
     End Sub
 
     Private Sub Packet_DeleteChar(ByVal index As Integer, ByVal data() As Byte)
@@ -3068,8 +3054,6 @@ Module ServerHandleData
             TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
 
         End If
-
-        NeedToUpDatePlayerList = True
 
         Buffer = Nothing
     End Sub

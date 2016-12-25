@@ -22,13 +22,7 @@
     ' Used to handle shutting down server with countdown.
     Public isShuttingDown As Boolean
     Public Secs As Integer
-    Public TotalPlayersOnline As Integer
-
-    Public Game_Port As Integer
-
     Public TempMapData As Byte
-
-    Public NeedToUpDatePlayerList As Boolean
 
     Public Gettingmap As Boolean
 End Module

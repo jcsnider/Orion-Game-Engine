@@ -16,15 +16,16 @@ Module ServerPlayers
     Public Sub HandleUseChar(ByVal Index As Integer)
         If Not IsPlaying(Index) Then
             JoinGame(Index)
-            Addlog(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".", PLAYER_LOG)
-            TextAdd(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has began playing " & Options.Game_Name & ".")
+            Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(Index), GetPlayerName(Index), Options.Game_Name)
+            Addlog(text, PLAYER_LOG)
+            TextAdd(text)
         End If
     End Sub
 
     Function GetPlayerName(ByVal Index As Integer) As String
         GetPlayerName = ""
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Trim$(Player(Index).Character(TempPlayer(Index).CurChar).Name)
+        GetPlayerName = Player(Index).Character(TempPlayer(Index).CurChar).Name.Trim()
     End Function
 
     Sub SetPlayerAccess(ByVal Index As Integer, ByVal Access As Integer)
@@ -284,62 +285,45 @@ Module ServerPlayers
 
     Sub JoinGame(ByVal Index As Integer)
         Dim i As Integer
-        Dim Buffer As ByteBuffer
+
         ' Set the flag so we know the person is in the game
         TempPlayer(Index).InGame = True
 
-        ' Send a global message that he/she joined
-        If GetPlayerAccess(Index) <= AdminType.Monitor Then
-            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
-        Else
-            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
-        End If
+        ' Notify everyone that a player has joined the game.
+        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(Index), Options.Game_Name))
 
-        'Update the log
         ' Send an ok to client to start receiving in game data
         SendLoadCharOk(Index)
-        TotalPlayersOnline = TotalPlayersOnline + 1
-        ' Send some more little goodies, no need to explain these
-        CheckEquippedItems(Index)
 
-        SendGameData(Index)
-
-        SendInventory(Index)
-        SendWornEquipment(Index)
-        SendMapEquipment(Index)
-
-        'projectiles
-        SendProjectiles(Index)
-
-        For i = 1 To Vitals.Count - 1
-            SendVital(Index, i)
-        Next
-
-        SendExp(Index)
-
-        'Housing
+        ' Set some data related to housing instances.
         If Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
             Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
             Player(Index).Character(TempPlayer(Index).CurChar).x = Player(Index).Character(TempPlayer(Index).CurChar).LastX
             Player(Index).Character(TempPlayer(Index).CurChar).y = Player(Index).Character(TempPlayer(Index).CurChar).LastY
             Player(Index).Character(TempPlayer(Index).CurChar).Map = Player(Index).Character(TempPlayer(Index).CurChar).LastMap
         End If
-        SendHouseConfigs(Index)
 
-        'quests
+        ' Send all the required game data to the user.
+        CheckEquippedItems(Index)
+        SendGameData(Index)
+        SendInventory(Index)
+        SendWornEquipment(Index)
+        SendMapEquipment(Index)
+        SendProjectiles(Index)
+        SendVitals(Index)
+        SendExp(Index)
         SendQuests(Index)
         SendPlayerQuests(Index)
         SendMapNames(Index)
-
-        'hotbar
         SendHotbar(Index)
         SendPlayerSkills(Index)
-
-        'craft
         SendRecipes(Index)
-
         SendStats(Index)
         SendJoinMap(Index)
+        SendHouseConfigs(Index)
+        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+            SendResourceCacheTo(Index, i)
+        Next
 
         ' Warp the player to his saved location
         PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
@@ -347,16 +331,8 @@ Module ServerPlayers
         ' Send welcome messages
         SendWelcome(Index)
 
-        ' Send Resource cache
-        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
-            SendResourceCacheTo(Index, i)
-        Next
-
         ' Send the flag so they know they can start doing stuff
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ServerPackets.SInGame)
-        SendDataTo(Index, Buffer.ToArray())
-        Buffer = Nothing
+        SendInGame(Index)
     End Sub
 
     Sub LeftGame(ByVal Index As Integer)
@@ -389,7 +365,7 @@ Module ServerPlayers
             ' cancel any trade they're in
             If TempPlayer(Index).InTrade > 0 Then
                 tradeTarget = TempPlayer(Index).InTrade
-                PlayerMsg(tradeTarget, Trim$(GetPlayerName(Index)) & " has declined the trade.", ColorType.BrightRed)
+                PlayerMsg(tradeTarget, String.Format("{0} has declined the trade.", GetPlayerName(Index)), ColorType.BrightRed)
                 ' clear out trade
                 For i = 1 To MAX_INV
                     TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -404,16 +380,11 @@ Module ServerPlayers
             ClearBank(Index)
 
             ' Send a global message that he/she left
-            If GetPlayerAccess(Index) <= AdminType.Monitor Then
-                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
-            Else
-                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
-            End If
+            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
 
-            TextAdd(GetPlayerName(Index) & " has disconnected from " & Options.Game_Name & ".")
+            TextAdd(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
             SendLeftGame(Index)
 
-            TotalPlayersOnline = TotalPlayersOnline - 1
             TempPlayer(Index) = Nothing
             ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
@@ -649,7 +620,7 @@ Module ServerPlayers
                     End If
                     SendActionMsg(GetPlayerMap(Index), "+" & amount, Colour, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                     SetPlayerVital(Index, VitalType, GetPlayerVital(Index, VitalType) + amount)
-                    PlayerMsg(Index, "You feel rejuvinating forces flowing through your body.", ColorType.BrightGreen)
+                    PlayerMsg(Index, "You feel rejuvinating forces coarsing through your body.", ColorType.BrightGreen)
                     SendVital(Index, VitalType)
                     ' send vitals to party if in one
                     If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -663,10 +634,10 @@ Module ServerPlayers
                 SendActionMsg(GetPlayerMap(Index), "-" & amount, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32, 1)
                 If GetPlayerVital(Index, Enums.Vitals.HP) - amount <= 0 Then
                     KillPlayer(Index)
-                    PlayerMsg(Index, "You're killed by a trap.", ColorType.BrightRed)
+                    PlayerMsg(Index, "You've been killed by a trap.", ColorType.BrightRed)
                 Else
                     SetPlayerVital(Index, Enums.Vitals.HP, GetPlayerVital(Index, Enums.Vitals.HP) - amount)
-                    PlayerMsg(Index, "You're injured by a trap.", ColorType.BrightRed)
+                    PlayerMsg(Index, "You've been injured by a trap.", ColorType.BrightRed)
                     SendVital(Index, Enums.Vitals.HP)
                     ' send vitals to party if in one
                     If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1002,9 +973,7 @@ Module ServerPlayers
                     End If
                 End If
             End If
-
         Next
-
     End Sub
 
     Sub SetPlayerInvItemValue(ByVal Index As Integer, ByVal invSlot As Integer, ByVal ItemValue As Integer)
@@ -1024,27 +993,21 @@ Module ServerPlayers
         End If
 
         If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
-
             ' If currency then check to see if they already have an instance of the item and add it to that
             For i = 1 To MAX_INV
-
                 If GetPlayerInvItemNum(Index, i) = itemNum Then
                     FindOpenInvSlot = i
                     Exit Function
                 End If
-
             Next
-
         End If
 
         For i = 1 To MAX_INV
-
             ' Try to find an open free slot
             If GetPlayerInvItemNum(Index, i) = 0 Then
                 FindOpenInvSlot = i
                 Exit Function
             End If
-
         Next
 
     End Function
@@ -1190,20 +1153,20 @@ Module ServerPlayers
                         ' Check if its more then they have and if so drop it all
                         If amount >= GetPlayerInvItemValue(Index, InvNum) Then
                             MapItem(GetPlayerMap(Index), i).Value = GetPlayerInvItemValue(Index, InvNum)
-                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & GetPlayerInvItemValue(Index, InvNum) & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", ColorType.Yellow)
                             Call SetPlayerInvItemNum(Index, InvNum, 0)
                             Call SetPlayerInvItemValue(Index, InvNum, 0)
+                            amount = GetPlayerInvItemValue(Index, InvNum)
                         Else
                             MapItem(GetPlayerMap(Index), i).Value = amount
-                            Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & amount & " " & Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name) & ".", ColorType.Yellow)
                             Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - amount)
                         End If
-
+                        Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1} ({2}x).", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)), amount), ColorType.Yellow)
                     Else
                         ' Its not a currency object so this is easy
                         MapItem(GetPlayerMap(Index), i).Value = 0
                         ' send message
-                        Call MapMsg(GetPlayerMap(Index), GetPlayerName(Index) & " drops " & CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)) & ".", ColorType.Yellow)
+
+                        Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1}.", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name))), ColorType.Yellow)
                         Call SetPlayerInvItemNum(Index, InvNum, 0)
                         Call SetPlayerInvItemValue(Index, InvNum, 0)
                     End If
@@ -1365,11 +1328,11 @@ Module ServerPlayers
         ' Make sure we dont get less then 0
         If exp < 0 Then exp = 0
         If exp = 0 Then
-            PlayerMsg(Index, "You lost no exp.", ColorType.BrightGreen)
+            PlayerMsg(Index, "You've lost no experience.", ColorType.BrightGreen)
         Else
             SetPlayerExp(Index, GetPlayerExp(Index) - exp)
             SendExp(Index)
-            PlayerMsg(Index, "You lost " & exp & " exp.", ColorType.BrightRed)
+            PlayerMsg(Index, String.Format("You've lost {0} experience.", exp), ColorType.BrightRed)
         End If
 
         OnDeath(Index)
@@ -1396,7 +1359,7 @@ Module ServerPlayers
             If .BootMap > 0 Then
                 PlayerWarp(Index, .BootMap, .BootX, .BootY)
             Else
-                PlayerWarp(Index, START_MAP, START_X, START_Y)
+                PlayerWarp(Index, Options.StartMap, Options.StartX, Options.StartY)
             End If
         End With
 
@@ -1409,9 +1372,7 @@ Module ServerPlayers
         SetPlayerVital(Index, Vitals.HP, GetPlayerMaxVital(Index, Vitals.HP))
         SetPlayerVital(Index, Vitals.MP, GetPlayerMaxVital(Index, Vitals.MP))
         SetPlayerVital(Index, Vitals.SP, GetPlayerMaxVital(Index, Vitals.SP))
-        SendVital(Index, Vitals.HP)
-        SendVital(Index, Vitals.MP)
-        SendVital(Index, Vitals.SP)
+        SendVitals(Index)
 
         ' send vitals to party if in one
         If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1733,8 +1694,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1796,8 +1756,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1858,8 +1817,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1924,8 +1882,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1985,8 +1942,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -2046,8 +2002,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -2413,8 +2368,7 @@ Module ServerPlayers
             SendStats(Index)
             SendInventory(Index)
             ' send vitals
-            SendVital(Index, Vitals.HP)
-            SendVital(Index, Vitals.MP)
+            SendVitals(Index)
 
             ' send vitals to party if in one
             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
