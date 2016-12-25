@@ -33,7 +33,6 @@ Public Module ServerHousing
         Dim i As Integer, filepath As String
 
         filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
-        'frmServer.lstHouses.Items.Clear()
 
         For i = 1 To MAX_HOUSES
 
@@ -43,7 +42,6 @@ Public Module ServerHousing
             HouseConfig(i).Price = Val(Getvar(filepath, "House" & i, "Price"))
             HouseConfig(i).X = Val(Getvar(filepath, "House" & i, "X"))
             HouseConfig(i).Y = Val(Getvar(filepath, "House" & i, "Y"))
-            'frmServer.lstHouses.Items.Add(i & ". " & HouseConfig(i).ConfigName)
             DoEvents()
         Next
         For i = 1 To MAX_PLAYERS

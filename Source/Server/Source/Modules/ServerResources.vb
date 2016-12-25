@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Linq
 
 Public Module ServerResources
     Public SkillExpTable(100) As Integer
@@ -15,7 +16,6 @@ Public Module ServerResources
         Dim Resource_num As Integer, ResourceType As Byte
         Dim Resource_index As Integer
         Dim rX As Integer, rY As Integer
-        Dim i As Integer
         Dim Damage As Integer
 
         If Map(GetPlayerMap(Index)).Tile(x, y).Type = TileType.Resource Then
@@ -24,15 +24,7 @@ Public Module ServerResources
             ResourceType = Resource(Resource_index).ResourceType
 
             ' Get the cache number
-            For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
-
-                If ResourceCache(GetPlayerMap(Index)).ResourceData(i).x = x Then
-                    If ResourceCache(GetPlayerMap(Index)).ResourceData(i).y = y Then
-                        Resource_num = i
-                    End If
-                End If
-
-            Next
+            Resource_num = ResourceCache(GetPlayerMap(Index)).ResourceData.Where(Function(r) r.x = x AndAlso r.y = y).Select(Function(r, i) i).Single()
 
             If Resource_num > 0 Then
                 If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Or Resource(Resource_index).ToolRequired = 0 Then
@@ -48,7 +40,7 @@ Public Module ServerResources
 
                         'required lvl?
                         If Resource(Resource_index).LvlRequired > GetPlayerGatherSkillLvl(Index, ResourceType) Then
-                            PlayerMsg(Index, "You're level is to low!", ColorType.Yellow)
+                            PlayerMsg(Index, "Your level is too low!", ColorType.Yellow)
                             Exit Sub
                         End If
 
@@ -77,16 +69,7 @@ Public Module ServerResources
                                     SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
                                     SetPlayerGatherSkillExp(Index, ResourceType, GetPlayerGatherSkillExp(Index, ResourceType) + Resource(Resource_index).ExpReward)
                                     'send msg
-                                    Select Case ResourceType
-                                        Case ResourceSkills.Herbalist
-                                            PlayerMsg(Index, "Your herbalist skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
-                                        Case ResourceSkills.WoodCutter
-                                            PlayerMsg(Index, "Your woodcutter skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
-                                        Case ResourceSkills.Miner
-                                            PlayerMsg(Index, "Your miner skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
-                                        Case ResourceSkills.Fisherman
-                                            PlayerMsg(Index, "Your fishing skill earned " & Resource(Resource_index).ExpReward & " Exp, " & GetPlayerGatherSkillExp(Index, ResourceType) & "/" & GetPlayerGatherSkillMaxExp(Index, ResourceType), ColorType.BrightGreen)
-                                    End Select
+                                    PlayerMsg(Index, String.Format("Your {0} has earned {1} experience. ({2}/{3})", GetResourceSkillName(ResourceType), Resource(Resource_index).ExpReward, GetPlayerGatherSkillExp(Index, ResourceType), GetPlayerGatherSkillMaxExp(Index, ResourceType)), ColorType.BrightGreen)
                                     SendPlayerData(Index)
 
                                     CheckResourceLevelUp(Index, ResourceType)
@@ -177,30 +160,34 @@ Public Module ServerResources
             level_count = level_count + 1
         Loop
 
-        Select Case SkillSlot
-            Case ResourceSkills.Herbalist
-                skillname = "herbalist"
-            Case ResourceSkills.WoodCutter
-                skillname = "woodcutter"
-            Case ResourceSkills.Miner
-                skillname = "miner"
-            Case ResourceSkills.Fisherman
-                skillname = "fishing"
-        End Select
-
         If level_count > 0 Then
             If level_count = 1 Then
                 'singular
-                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " level!", ColorType.BrightGreen)
+                PlayerMsg(Index, String.Format("Your {0} has gone up a level!", GetResourceSkillName(SkillSlot)), ColorType.BrightGreen)
             Else
                 'plural
-                PlayerMsg(Index, "You're " & skillname & " has gained " & level_count & " levels!", ColorType.BrightGreen)
+                PlayerMsg(Index, String.Format("Your {0} has gone up by {1} levels!", GetResourceSkillName(SkillSlot), level_count), ColorType.BrightGreen)
             End If
 
             SavePlayer(Index)
             SendPlayerData(Index)
         End If
     End Sub
+
+    Private Function GetResourceSkillName(ByVal ResSkill As ResourceSkills) As String
+        Select Case ResSkill
+            Case ResourceSkills.Herbalist
+                GetResourceSkillName = "herbalism"
+            Case ResourceSkills.WoodCutter
+                GetResourceSkillName = "woodcutting"
+            Case ResourceSkills.Miner
+                GetResourceSkillName = "mining"
+            Case ResourceSkills.Fisherman
+                GetResourceSkillName = "fishing"
+            Case Else
+                Throw New NotImplementedException()
+        End Select
+    End Function
 
     Function GetSkillNextLevel(ByVal Index As Integer, ByVal SkillSlot As Integer) As Integer
         GetSkillNextLevel = 0
