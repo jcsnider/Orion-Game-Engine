@@ -253,8 +253,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
-        'frmServer.Text = Options.Game_Name & " <IP " & MyIPAddress & " Port " & Options.Port & "> (" & GetPlayersOnline() & " Players Online" & ")"
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online)", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline())
     End Sub
 
     Sub DestroyServer()
@@ -374,8 +373,8 @@ Module ServerGeneral
 
         If Secs <= 0 Then Secs = 30
         If Secs Mod 5 = 0 Or Secs <= 5 Then
-            GlobalMsg("Server Shutdown in " & Secs & " seconds.")
-            TextAdd("Automated Server Shutdown in " & Secs & " seconds.")
+            GlobalMsg(String.Format("Server Shutdown in {0} seconds.", Secs))
+            TextAdd(String.Format("Automated Server Shutdown in {0} seconds.", Secs))
         End If
 
         Secs = Secs - 1
