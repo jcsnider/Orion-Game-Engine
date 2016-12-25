@@ -1,6 +1,6 @@
-﻿Module ServerPartys
+﻿Module ServerParties
 #Region "Types and Globals"
-    Public Party(MAX_PARTYS) As PartyRec
+    Public Party(MAX_PARTIES) As PartyRec
 
     Public Structure PartyRec
         Dim Leader As Long
@@ -167,7 +167,7 @@
     Sub ClearPartys()
         Dim i As Integer
 
-        For i = 1 To MAX_PARTYS
+        For i = 1 To MAX_PARTIES
             ClearParty(i)
         Next
 
@@ -195,6 +195,20 @@
         Next
     End Sub
 
+    Private Sub Party_RemoveFromParty(ByVal Index As Integer, ByVal PartyNum As Integer)
+        For i = 1 To MAX_PARTY_MEMBERS
+            If Party(PartyNum).Member(i) = Index Then
+                Party(PartyNum).Member(i) = 0
+                TempPlayer(Index).InParty = 0
+                TempPlayer(Index).partyInvite = 0
+                Exit For
+            End If
+        Next
+        Party_CountMembers(PartyNum)
+        SendPartyUpdate(PartyNum)
+        SendPartyUpdateTo(Index)
+    End Sub
+
     Public Sub Party_PlayerLeave(ByVal Index As Integer)
         Dim PartyNum As Integer, i As Integer
 
@@ -212,63 +226,30 @@
                     For i = 1 To MAX_PARTY_MEMBERS
                         If Party(PartyNum).Member(i) > 0 And Party(PartyNum).Member(i) <> Index Then
                             Party(PartyNum).Leader = Party(PartyNum).Member(i)
-                            PartyMsg(PartyNum, GetPlayerName(i) & " is now the leader of the party.")
+                            PartyMsg(PartyNum, String.Format("{0} is now the party leader.", GetPlayerName(i)))
                             Exit For
                         End If
                     Next
                     ' leave party
-                    PartyMsg(PartyNum, GetPlayerName(Index) & " left the party.")
-                    ' remove from array
-                    For i = 1 To MAX_PARTY_MEMBERS
-                        If Party(PartyNum).Member(i) = Index Then
-                            Party(PartyNum).Member(i) = 0
-                            TempPlayer(Index).InParty = 0
-                            TempPlayer(Index).partyInvite = 0
-                            Exit For
-                        End If
-                    Next
-                    ' recount party
-                    Party_CountMembers(PartyNum)
-
-                    ' set update to all
-                    SendPartyUpdate(PartyNum)
-                    ' send clear to player
-                    SendPartyUpdateTo(Index)
+                    PartyMsg(PartyNum, String.Format("{0} has left the party.", GetPlayerName(Index)))
+                    Party_RemoveFromParty(Index, PartyNum)
                 Else
                     ' not the leader, just leave
-                    PartyMsg(PartyNum, GetPlayerName(Index) & " left the party.")
-                    ' remove from array
-                    For i = 1 To MAX_PARTY_MEMBERS
-                        If Party(PartyNum).Member(i) = Index Then
-                            Party(PartyNum).Member(i) = 0
-                            TempPlayer(Index).InParty = 0
-                            TempPlayer(Index).partyInvite = 0
-                            Exit For
-                        End If
-                    Next
-                    ' recount party
-                    Party_CountMembers(PartyNum)
-                    ' set update to all
-                    SendPartyUpdate(PartyNum)
-                    ' send clear to player
-                    SendPartyUpdateTo(Index)
+                    PartyMsg(PartyNum, String.Format("{0} has left the party.", GetPlayerName(Index)))
+                    Party_RemoveFromParty(Index, PartyNum)
                 End If
             Else
                 ' find out how many members we have
                 Party_CountMembers(PartyNum)
                 ' only 2 people, disband
-                PartyMsg(PartyNum, "Party disbanded.")
+                PartyMsg(PartyNum, "The party has been disbanded.")
 
                 ' clear out everyone's party
                 For i = 1 To MAX_PARTY_MEMBERS
                     Index = Party(PartyNum).Member(i)
                     ' player exist?
                     If Index > 0 Then
-                        ' remove them
-                        TempPlayer(Index).partyInvite = 0
-                        TempPlayer(Index).InParty = 0
-                        ' send clear to players
-                        SendPartyUpdateTo(Index)
+                        Party_RemoveFromParty(Index, PartyNum)
                     End If
                 Next
                 ' clear out the party itself
@@ -300,12 +281,12 @@
 
         ' check if we're in a party
         If TempPlayer(index).InParty > 0 Then
-            partyNum = TempPlayer(index).InParty
+            PartyNum = TempPlayer(index).InParty
             ' make sure we're the leader
-            If Party(partyNum).Leader = index Then
+            If Party(PartyNum).Leader = index Then
                 ' got a blank slot?
                 For i = 1 To MAX_PARTY_MEMBERS
-                    If Party(partyNum).Member(i) = 0 Then
+                    If Party(PartyNum).Member(i) = 0 Then
                         ' send the invitation
                         SendPartyInvite(Target, index)
                         ' set the invite target
@@ -352,7 +333,7 @@
                     SendPartyUpdate(partyNum)
                     SendPartyVitals(partyNum, Target)
                     ' let everyone know they've joined
-                    PartyMsg(partyNum, GetPlayerName(Target) & " has joined the party.")
+                    PartyMsg(partyNum, String.Format("{0} has joined the party.", GetPlayerName(Target)))
                     ' add them in
                     TempPlayer(Target).InParty = partyNum
                     Exit Sub
@@ -364,7 +345,7 @@
             Exit Sub
         Else
             ' not in a party. Create one with the new person.
-            For i = 1 To MAX_PARTYS
+            For i = 1 To MAX_PARTIES
                 ' find blank party
                 If Not Party(i).Leader > 0 Then
                     partyNum = i
@@ -381,8 +362,7 @@
             SendPartyVitals(partyNum, Target)
             ' let them know it's created
             PartyMsg(partyNum, "Party created.")
-            PartyMsg(partyNum, GetPlayerName(index) & " has joined the party.")
-            PartyMsg(partyNum, GetPlayerName(Target) & " has joined the party.")
+            PartyMsg(partyNum, String.Format("{0} has joined the party.", GetPlayerName(index)))
             ' clear the invitation
             TempPlayer(Target).partyInvite = 0
             ' add them to the party
@@ -392,11 +372,11 @@
         End If
     End Sub
 
-    Public Sub Party_InviteDecline(ByVal index As Integer, ByVal TARGETPLAYER As Integer)
-        PlayerMsg(index, GetPlayerName(TARGETPLAYER) & " has declined to join the party.", ColorType.BrightRed)
-        PlayerMsg(TARGETPLAYER, "You declined to join the party.", ColorType.Yellow)
+    Public Sub Party_InviteDecline(ByVal Index As Integer, ByVal Target As Integer)
+        PlayerMsg(Index, String.Format("{0} has declined to join your party.", GetPlayerName(Target)), ColorType.BrightRed)
+        PlayerMsg(Target, "You declined to join the party.", ColorType.Yellow)
         ' clear the invitation
-        TempPlayer(TARGETPLAYER).partyInvite = 0
+        TempPlayer(Target).partyInvite = 0
     End Sub
 
     Public Sub Party_CountMembers(ByVal PartyNum As Integer)
