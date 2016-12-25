@@ -61,7 +61,6 @@ Module ServerTCP
                 Clients(i).IP = DirectCast(client.Client.RemoteEndPoint, IPEndPoint).Address.ToString
                 Clients(i).Start()
                 TextAdd("Connection received from " & Clients(i).IP)
-                NeedToUpDatePlayerList = True
                 SendNews(i)
                 Exit For
             End If
@@ -288,8 +287,6 @@ Module ServerTCP
                 Clients(Index).Socket.Close()
                 Clients(Index).Socket = Nothing
                 ClearPlayer(Index)
-
-                NeedToUpDatePlayerList = True
             End If
         Catch ex As Exception
 

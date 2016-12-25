@@ -98,7 +98,7 @@
     <Compile Include="Source\Modules\ServerHousing.vb" />
     <Compile Include="Source\Modules\ServerINIAccess.vb" />
     <Compile Include="Source\Modules\ServerInstances.vb" />
-    <Compile Include="Source\Modules\ServerPartys.vb" />
+    <Compile Include="Source\Modules\ServerParties.vb" />
     <Compile Include="Source\Modules\ServerPlayers.vb" />
     <Compile Include="Source\Modules\ServerLoop.vb" />
     <Compile Include="Source\Modules\ServerProjectiles.vb" />
