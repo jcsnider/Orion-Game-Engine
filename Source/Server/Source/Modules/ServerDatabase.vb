@@ -23,9 +23,9 @@ Module ServerDatabase
             PutVar(filename, "CLASS1", "Spir", "5")
             PutVar(filename, "CLASS1", "BaseExp", "25")
 
-            PutVar(filename, "CLASS1", "StartMap", START_MAP)
-            PutVar(filename, "CLASS1", "StartX", START_X)
-            PutVar(filename, "CLASS1", "StartY", START_Y)
+            PutVar(filename, "CLASS1", "StartMap", Options.StartMap)
+            PutVar(filename, "CLASS1", "StartX", Options.StartX)
+            PutVar(filename, "CLASS1", "StartY", Options.StartY)
         End If
     End Sub
 
@@ -2185,6 +2185,9 @@ Module ServerDatabase
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port", Str(Options.Port))
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD", Options.MOTD)
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website", Options.Website)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartMap", Options.StartMap)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartX", Options.StartX)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartY", Options.StartY)
     End Sub
 
     Public Sub LoadOptions()
@@ -2192,6 +2195,9 @@ Module ServerDatabase
         Options.Port = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port")
         Options.MOTD = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD")
         Options.Website = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website")
+        Options.StartMap = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartMap")
+        Options.StartX = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartX")
+        Options.StartY = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartY")
     End Sub
 
 #End Region

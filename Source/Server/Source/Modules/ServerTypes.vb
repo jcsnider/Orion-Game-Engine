@@ -32,6 +32,9 @@
         Dim MOTD As String
         Dim Port As Integer
         Dim Website As String
+        Dim StartMap As Integer
+        Dim StartX As Integer
+        Dim StartY As Integer
     End Structure
 
     Public Structure PlayerInvRec

@@ -1366,7 +1366,7 @@ Module ServerPlayers
             If .BootMap > 0 Then
                 PlayerWarp(Index, .BootMap, .BootX, .BootY)
             Else
-                PlayerWarp(Index, START_MAP, START_X, START_Y)
+                PlayerWarp(Index, Options.StartMap, Options.StartX, Options.StartY)
             End If
         End With
 

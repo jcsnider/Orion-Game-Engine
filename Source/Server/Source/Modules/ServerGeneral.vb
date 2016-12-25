@@ -163,6 +163,9 @@ Module ServerGeneral
             Options.Port = 7001
             Options.MOTD = "Welcome to the Orion+ Engine"
             Options.Website = "http://ascensiongamedev.com/index.php"
+            Options.StartMap = 1
+            Options.StartX = 13
+            Options.StartY = 7
             SaveOptions()
         Else
             LoadOptions()
