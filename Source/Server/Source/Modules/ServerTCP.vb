@@ -339,8 +339,7 @@ Module ServerTCP
     End Function
 
     Sub SendLoadCharOk(ByVal index As Integer)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer = New ByteBuffer
         buffer.WriteInteger(ServerPackets.SLoadCharOk)
         buffer.WriteInteger(index)
         SendDataTo(index, buffer.ToArray)
@@ -348,12 +347,18 @@ Module ServerTCP
     End Sub
 
     Sub SendEditorLoadOk(ByVal index As Integer)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
-        buffer.WriteInteger(ServerPackets.SLoginOk)
-        buffer.WriteInteger(index)
-        SendDataTo(index, buffer.ToArray)
-        buffer = Nothing
+        Dim Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SLoginOk)
+        Buffer.WriteInteger(index)
+        SendDataTo(index, Buffer.ToArray)
+        Buffer = Nothing
+    End Sub
+
+    Sub SendInGame(ByVal Index As Integer)
+        Dim Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SInGame)
+        SendDataTo(Index, Buffer.ToArray())
+        Buffer = Nothing
     End Sub
 
     Sub SendClasses(ByVal Index As Integer)
@@ -1077,25 +1082,30 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
+    Sub SendVitals(ByVal Index As Integer)
+        For i = 1 To Vitals.Count - 1
+            SendVital(Index, i)
+        Next
+    End Sub
+
+
     Sub SendVital(ByVal Index As Integer, ByVal Vital As Vitals)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
+        ' Get our packet type.
         Select Case Vital
             Case Vitals.HP
                 Buffer.WriteInteger(ServerPackets.SPlayerHp)
-                Buffer.WriteInteger(GetPlayerMaxVital(Index, Vitals.HP))
-                Buffer.WriteInteger(GetPlayerVital(Index, Vitals.HP))
             Case Vitals.MP
                 Buffer.WriteInteger(ServerPackets.SPlayerMp)
-                Buffer.WriteInteger(GetPlayerMaxVital(Index, Vitals.MP))
-                Buffer.WriteInteger(GetPlayerVital(Index, Vitals.MP))
             Case Vitals.SP
                 Buffer.WriteInteger(ServerPackets.SPlayerSp)
-                Buffer.WriteInteger(GetPlayerMaxVital(Index, Vitals.SP))
-                Buffer.WriteInteger(GetPlayerVital(Index, Vitals.SP))
         End Select
 
+        ' Set and send related data.
+        Buffer.WriteInteger(GetPlayerMaxVital(Index, Vital))
+        Buffer.WriteInteger(GetPlayerVital(Index, Vital))
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing

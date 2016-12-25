@@ -349,17 +349,6 @@ Module ServerGeneral
 
     Sub TextAdd(ByVal Msg As String)
         Console.WriteLine(Msg)
-
-        'If ConsoleText = "" Then
-        '    ConsoleText = ConsoleText & Msg
-        'Else
-        '    ConsoleText = ConsoleText & vbNewLine & Msg
-        'End If
-        'Try
-        'UpdateUI()
-        'Catch ex As Exception
-        '    'Dont handle error
-        'End Try
     End Sub
 
     ' Used for checking validity of names

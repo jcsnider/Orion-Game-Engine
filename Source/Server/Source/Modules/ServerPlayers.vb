@@ -284,62 +284,45 @@ Module ServerPlayers
 
     Sub JoinGame(ByVal Index As Integer)
         Dim i As Integer
-        Dim Buffer As ByteBuffer
+
         ' Set the flag so we know the person is in the game
         TempPlayer(Index).InGame = True
 
-        ' Send a global message that he/she joined
-        If GetPlayerAccess(Index) <= AdminType.Monitor Then
-            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
-        Else
-            GlobalMsg(GetPlayerName(Index) & " has joined " & Options.Game_Name & "!")
-        End If
+        ' Notify everyone that a player has joined the game.
+        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(Index), Options.Game_Name))
 
-        'Update the log
         ' Send an ok to client to start receiving in game data
         SendLoadCharOk(Index)
-        TotalPlayersOnline = TotalPlayersOnline + 1
-        ' Send some more little goodies, no need to explain these
-        CheckEquippedItems(Index)
 
-        SendGameData(Index)
-
-        SendInventory(Index)
-        SendWornEquipment(Index)
-        SendMapEquipment(Index)
-
-        'projectiles
-        SendProjectiles(Index)
-
-        For i = 1 To Vitals.Count - 1
-            SendVital(Index, i)
-        Next
-
-        SendExp(Index)
-
-        'Housing
+        ' Set some data related to housing instances.
         If Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
             Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
             Player(Index).Character(TempPlayer(Index).CurChar).x = Player(Index).Character(TempPlayer(Index).CurChar).LastX
             Player(Index).Character(TempPlayer(Index).CurChar).y = Player(Index).Character(TempPlayer(Index).CurChar).LastY
             Player(Index).Character(TempPlayer(Index).CurChar).Map = Player(Index).Character(TempPlayer(Index).CurChar).LastMap
         End If
-        SendHouseConfigs(Index)
 
-        'quests
+        ' Send all the required game data to the user.
+        CheckEquippedItems(Index)
+        SendGameData(Index)
+        SendInventory(Index)
+        SendWornEquipment(Index)
+        SendMapEquipment(Index)
+        SendProjectiles(Index)
+        SendVitals(Index)
+        SendExp(Index)
         SendQuests(Index)
         SendPlayerQuests(Index)
         SendMapNames(Index)
-
-        'hotbar
         SendHotbar(Index)
         SendPlayerSkills(Index)
-
-        'craft
         SendRecipes(Index)
-
         SendStats(Index)
         SendJoinMap(Index)
+        SendHouseConfigs(Index)
+        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+            SendResourceCacheTo(Index, i)
+        Next
 
         ' Warp the player to his saved location
         PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
@@ -347,16 +330,8 @@ Module ServerPlayers
         ' Send welcome messages
         SendWelcome(Index)
 
-        ' Send Resource cache
-        For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
-            SendResourceCacheTo(Index, i)
-        Next
-
         ' Send the flag so they know they can start doing stuff
-        Buffer = New ByteBuffer
-        Buffer.WriteInteger(ServerPackets.SInGame)
-        SendDataTo(Index, Buffer.ToArray())
-        Buffer = Nothing
+        SendInGame(Index)
     End Sub
 
     Sub LeftGame(ByVal Index As Integer)
@@ -404,16 +379,11 @@ Module ServerPlayers
             ClearBank(Index)
 
             ' Send a global message that he/she left
-            If GetPlayerAccess(Index) <= AdminType.Monitor Then
-                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
-            Else
-                GlobalMsg(GetPlayerName(Index) & " has left " & Options.Game_Name & "!")
-            End If
+            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
 
-            TextAdd(GetPlayerName(Index) & " has disconnected from " & Options.Game_Name & ".")
+            TextAdd(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
             SendLeftGame(Index)
 
-            TotalPlayersOnline = TotalPlayersOnline - 1
             TempPlayer(Index) = Nothing
             ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
@@ -1409,9 +1379,7 @@ Module ServerPlayers
         SetPlayerVital(Index, Vitals.HP, GetPlayerMaxVital(Index, Vitals.HP))
         SetPlayerVital(Index, Vitals.MP, GetPlayerMaxVital(Index, Vitals.MP))
         SetPlayerVital(Index, Vitals.SP, GetPlayerMaxVital(Index, Vitals.SP))
-        SendVital(Index, Vitals.HP)
-        SendVital(Index, Vitals.MP)
-        SendVital(Index, Vitals.SP)
+        SendVitals(Index)
 
         ' send vitals to party if in one
         If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1733,8 +1701,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1796,8 +1763,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1858,8 +1824,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1924,8 +1889,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -1985,8 +1949,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -2046,8 +2009,7 @@ Module ServerPlayers
                             SendStats(Index)
 
                             ' send vitals
-                            SendVital(Index, Vitals.HP)
-                            SendVital(Index, Vitals.MP)
+                            SendVitals(Index)
 
                             ' send vitals to party if in one
                             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
@@ -2413,8 +2375,7 @@ Module ServerPlayers
             SendStats(Index)
             SendInventory(Index)
             ' send vitals
-            SendVital(Index, Vitals.HP)
-            SendVital(Index, Vitals.MP)
+            SendVitals(Index)
 
             ' send vitals to party if in one
             If TempPlayer(Index).InParty > 0 Then SendPartyVitals(TempPlayer(Index).InParty, Index)
