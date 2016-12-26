@@ -17,11 +17,9 @@
     Public Const MAX_SHOPS As Byte = 50
     Public Const MAX_SKILLS As Byte = 255
     Public Const MAX_TRADES As Byte = 20
-
     Public Const NAME_LENGTH As Byte = 20
-
     Public Const MAX_PARTIES As Long = 35
     Public Const MAX_PARTY_MEMBERS As Long = 4
-
     Public Const MAX_RANDOM_TYPES As Byte = 16
+    Public Const MAX_PETS As Integer = 100
 End Module

@@ -138,7 +138,8 @@
     <Compile Include="Source\Modules\ClientHotBar.vb" />
     <Compile Include="Source\Modules\ClientHousing.vb" />
     <Compile Include="Source\Modules\ClientINIAccess.vb" />
-    <Compile Include="Source\Modules\ClientPartys.vb" />
+    <Compile Include="Source\Modules\ClientParties.vb" />
+    <Compile Include="Source\Modules\ClientPets.vb" />
     <Compile Include="Source\Modules\ClientPlayer.vb" />
     <Compile Include="Source\Modules\ClientProjectiles.vb" />
     <Compile Include="Source\Modules\ClientQuest.vb" />

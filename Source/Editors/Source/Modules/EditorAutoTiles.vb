@@ -1,5 +1,4 @@
-﻿Imports System.Drawing
-Imports SFML.Graphics
+﻿Imports SFML.Graphics
 
 Public Module EditorAutoTiles
 #Region "Globals and Types"
@@ -310,7 +309,7 @@ Public Module EditorAutoTiles
             End If
             ' check if it's a key - hide mask if key is closed
             If layerNum = MapLayer.Mask Then
-                If .Type = TileType.KEY Then
+                If .Type = TileType.Key Then
                     If TempTile(X, Y).DoorOpen = False Then
                         Autotile(X, Y).Layer(layerNum).renderState = RENDER_STATE_NONE
                         Exit Sub
@@ -812,7 +811,6 @@ Public Module EditorAutoTiles
                     autoTileFrame = 0
             End Select
         End If
-
 
         Select Case Map.Tile(X, Y).Layer(layerNum).AutoTile
             Case AUTOTILE_WATERFALL

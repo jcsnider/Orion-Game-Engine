@@ -121,6 +121,12 @@
     <Compile Include="Source\Forms\frmEditor_NPC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Source\Forms\frmEditor_Pet.Designer.vb">
+      <DependentUpon>frmEditor_Pet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_Pet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\frmEditor_Projectile.Designer.vb">
       <DependentUpon>frmEditor_Projectile.vb</DependentUpon>
     </Compile>
@@ -180,6 +186,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Source\Modules\EditorLoop.vb" />
+    <Compile Include="Source\Modules\EditorPets.vb" />
     <Compile Include="Source\Modules\EditorProjectiles.vb" />
     <Compile Include="Source\Modules\EditorWeather.vb" />
     <Compile Include="Source\Modules\EditorSound.vb" />
@@ -229,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_NPC.resx">
       <DependentUpon>frmEditor_NPC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_Pet.resx">
+      <DependentUpon>frmEditor_Pet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Projectile.resx">
       <DependentUpon>frmEditor_Projectile.vb</DependentUpon>

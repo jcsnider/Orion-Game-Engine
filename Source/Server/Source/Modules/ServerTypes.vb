@@ -118,6 +118,8 @@
         ' Random Items
         Dim RandInv() As RandInvRec
         Dim RandEquip() As RandInvRec
+
+        Dim Pet As PlayerPetRec
     End Structure
 
     Public Structure TempPlayerRec
@@ -172,6 +174,29 @@
 
         Dim stopRegenTimer As Integer
         Dim stopRegen As Byte
+
+        'pets
+        Dim PetTarget As Integer
+        Dim PetTargetType As Integer
+        Dim PetTargetZone As Integer
+        Dim PetBehavior As Integer
+
+        Dim GoToX As Integer
+        Dim GoToY As Integer
+
+        Dim PetStunTimer As Integer
+        Dim PetStunDuration As Integer
+        Dim PetAttackTimer As Integer
+
+        Dim PetSpellCD() As Integer
+        Dim PetspellBuffer As SkillBufferRec
+
+        Dim PetDoT() As DoTRec
+        Dim PetHoT() As DoTRec
+        ' regen
+        Dim PetstopRegen As Boolean
+        Dim PetstopRegenTimer As Integer
+
     End Structure
 
     Public Structure TileDataRec
@@ -442,5 +467,27 @@
         Dim SkillLevel As Integer
         Dim SkillCurExp As Integer
         Dim SkillNextLvlExp As Integer
+    End Structure
+
+    Public Structure SkillBufferRec
+
+        Dim Spell As Integer
+        Dim Timer As Integer
+        Dim Target As Integer
+        Dim TargetZone As Integer
+        Dim tType As Byte
+
+    End Structure
+
+    Public Structure DoTRec
+
+        Dim Used As Boolean
+        Dim Spell As Integer
+        Dim Timer As Integer
+        Dim Caster As Integer
+        Dim StartTime As Integer
+        'PET
+        Dim AttackerType As Integer 'For Pets
+
     End Structure
 End Module

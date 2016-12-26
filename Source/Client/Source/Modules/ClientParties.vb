@@ -2,7 +2,7 @@
 Imports SFML.Graphics
 Imports SFML.Window
 
-Module ClientPartys
+Module ClientParties
 
 #Region "Types and Globals"
     Public Party As PartyRec
@@ -144,7 +144,6 @@ Module ClientPartys
         Buffer = Nothing
     End Sub
 #End Region
-
 
     Sub ClearParty()
         Party = New PartyRec

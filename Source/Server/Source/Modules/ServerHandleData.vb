@@ -130,6 +130,14 @@ Module ServerHandleData
         Packets.Add(ClientPackets.CLeaveParty, AddressOf Packet_LeaveParty)
         Packets.Add(ClientPackets.CPartyChatMsg, AddressOf Packet_PartyChatMsg)
 
+        'pets
+        Packets.Add(ClientPackets.CRequestPets, AddressOf Packet_RequestPets)
+        Packets.Add(ClientPackets.CPetMove, AddressOf Packet_PetMove)
+        Packets.Add(ClientPackets.CSetBehaviour, AddressOf Packet_SetPetBehaviour)
+        Packets.Add(ClientPackets.CReleasePet, AddressOf Packet_ReleasePet)
+        Packets.Add(ClientPackets.CPetSpell, AddressOf Packet_PetSpell)
+        Packets.Add(ClientPackets.CPetUseStatPoint, AddressOf Packet_UsePetStatPoint)
+
         'editor login
         Packets.Add(EditorPackets.EditorLogin, AddressOf Packet_EditorLogin)
         Packets.Add(EditorPackets.EditorRequestMap, AddressOf Packet_EditorRequestMap)
@@ -161,6 +169,9 @@ Module ServerHandleData
         Packets.Add(EditorPackets.RequestAutoMap, AddressOf Packet_RequestAutoMap)
         Packets.Add(EditorPackets.SaveAutoMap, AddressOf Packet_SaveAutoMap)
 
+        'pet
+        Packets.Add(EditorPackets.CRequestEditPet, AddressOf Packet_RequestEditPet)
+        Packets.Add(EditorPackets.CSavePet, AddressOf Packet_SavePet)
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)

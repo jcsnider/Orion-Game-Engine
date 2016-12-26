@@ -81,6 +81,7 @@
         Skill
         Furniture
         Recipe
+        Pet
 
         Count
     End Enum
@@ -134,6 +135,7 @@
         HealHp
         HealMp
         Warp
+        Pet
     End Enum
 
     ''' <Summary> Target Constant </Summary>
@@ -142,6 +144,7 @@
         Player
         Npc
         [Event]
+        Pet
     End Enum
 
     ''' <Summary> Action Message Constant </Summary>

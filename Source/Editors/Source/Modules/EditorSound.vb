@@ -1,5 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports SFML.Audio
+﻿Imports SFML.Audio
 
 Module EditorSound
     'Music + Sound Players
