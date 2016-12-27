@@ -628,7 +628,4 @@
 
         Buffer = Nothing
     End Sub
-
-
-
 End Module

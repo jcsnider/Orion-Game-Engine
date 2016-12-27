@@ -1353,9 +1353,9 @@ Module ServerLoop
                 ' Deal with healing abilities
                 If Not DealsDamage Then SkillNpc_Effect(Vital, True, Target, Amount, SkillId, GetPlayerMap(Index))
 
-                ' Deal with Knockback effects.
-                If Skill(SkillId).KnockBack = 1 Then
-                    KnockBackNpc(Index, Target, SkillId)
+                ' Handle our NPC death if it kills them
+                If IsNpcDead(GetPlayerMap(Index), TempPlayer(Index).Target) Then
+                    HandlePlayerKillNpc(GetPlayerMap(Index), Index, TempPlayer(Index).Target)
                 End If
 
             Case TargetType.Player
@@ -1368,6 +1368,17 @@ Module ServerLoop
 
                 ' Deal with healing abilities
                 If Not DealsDamage Then SkillPlayer_Effect(Vital, True, Target, Amount, SkillId)
+
+                If IsPlayerDead(Target) Then
+                    ' Actually kill the player.
+                    OnDeath(Target)
+
+                    ' Handle PK stuff.
+                    HandlePlayerKilledPK(Index, Target)
+
+                    ' Handle our quest system stuff.
+                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                End If
 
             Case Else
                 Throw New NotImplementedException()
@@ -1420,6 +1431,17 @@ Module ServerLoop
 
                 ' Send our animation to the map.
                 SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Player, id)
+
+                If IsPlayerDead(id) Then
+                    ' Actually kill the player.
+                    OnDeath(id)
+
+                    ' Handle PK stuff.
+                    HandlePlayerKilledPK(Index, id)
+
+                    ' Handle our quest system stuff.
+                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                End If
             End If
         Next
 
@@ -1433,13 +1455,13 @@ Module ServerLoop
                 ' Deal with healing abilities
                 If Not DealsDamage Then SkillNpc_Effect(Vital, True, id, Amount, SkillId, Map)
 
-                ' Deal with Knockback effects.
-                If Skill(SkillId).KnockBack = 1 Then
-                    KnockBackNpc(Index, id, SkillId)
-                End If
-
                 ' Send our animation to the map.
                 SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Npc, id)
+
+                ' Handle our NPC death if it kills them
+                If IsNpcDead(Map, id) Then
+                    HandlePlayerKillNpc(Map, Index, id)
+                End If
             End If
         Next
     End Sub
@@ -1569,7 +1591,7 @@ Module ServerLoop
                                         If CanNpcAttackPlayer(NpcNum, i) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
                                             PlayerMsg(i, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                            AttackPlayer(NpcNum, i, Vital, skillnum, NpcNum)
+                                            SkillPlayer_Effect(Vitals.HP, False, i, Vital, skillnum)
                                         End If
                                     End If
                                 End If
@@ -1581,7 +1603,7 @@ Module ServerLoop
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
                                         If CanPlayerAttackNpc(NpcNum, i, True) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            PlayerAttackNpc(NpcNum, i, Vital, skillnum)
+                                            SkillNpc_Effect(Vitals.HP, False, i, Vital, skillnum, MapNum)
                                             If Skill(skillnum).KnockBack = 1 Then
                                                 KnockBackNpc(NpcNum, Target, skillnum)
                                             End If
@@ -1650,7 +1672,7 @@ Module ServerLoop
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Target)
                                     PlayerMsg(Target, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                    AttackPlayer(NpcNum, Target, Vital, skillnum, NpcNum)
+                                    SkillPlayer_Effect(Vitals.HP, False, Target, Vital, skillnum)
                                     DidCast = True
                                 End If
                             End If
@@ -1658,7 +1680,8 @@ Module ServerLoop
                             If CanPlayerAttackNpc(NpcNum, Target, True) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, Target)
-                                    PlayerAttackNpc(NpcNum, Target, Vital, skillnum)
+                                    SkillNpc_Effect(Vitals.HP, False, i, Vital, skillnum, MapNum)
+
                                     If Skill(skillnum).KnockBack = 1 Then
                                         KnockBackNpc(NpcNum, Target, skillnum)
                                     End If
@@ -1715,6 +1738,10 @@ Module ServerLoop
         Dim Colour As Integer
 
         If Damage > 0 Then
+
+            ' Calculate for Magic Resistance.
+            Damage = Damage - ((GetPlayerStat(Index, Stats.Spirit) * 2) + (GetPlayerLevel(Index) * 3))
+
             If increment Then
                 sSymbol = "+"
                 If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
@@ -1723,6 +1750,10 @@ Module ServerLoop
                 sSymbol = "-"
                 Colour = ColorType.Blue
             End If
+
+            ' Deal with stun effects.
+            If Skill(Skillnum).StunDuration > 0 Then StunPlayer(Index, Skillnum)
+
 
             SendActionMsg(GetPlayerMap(Index), sSymbol & Damage, Colour, ActionMsgType.Scroll, GetPlayerX(Index) * 32, GetPlayerY(Index) * 32)
             If increment Then SetPlayerVital(Index, Vital, GetPlayerVital(Index, Vital) + Damage)
@@ -1733,23 +1764,27 @@ Module ServerLoop
 
     Public Sub SkillNpc_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Integer, ByVal Damage As Integer, ByVal skillnum As Integer, ByVal MapNum As Integer)
         Dim sSymbol As String
-        Dim Colour As Integer
+        Dim Color As Integer
+
+        If Index <= 0 Or Index > MAX_MAP_NPCS Or Damage < 0 Or MapNpc(MapNum).Npc(Index).Vital(Vital) <= 0 Then Exit Sub
 
         If Damage > 0 Then
             If increment Then
                 sSymbol = "+"
-                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
-                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
+                If Vital = Vitals.HP Then Color = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Color = ColorType.BrightBlue
             Else
                 sSymbol = "-"
-                Colour = ColorType.Blue
+                Color = ColorType.Blue
             End If
 
-            SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TargetType.Npc, Index)
-            SendActionMsg(MapNum, sSymbol & Damage, Colour, ActionMsgType.Scroll, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
+            ' Deal with Stun and Knockback effects.
+            If Skill(skillnum).KnockBack = 1 Then KnockBackNpc(Index, Index, skillnum)
+            If Skill(skillnum).StunDuration > 0 Then StunNPC(Index, MapNum, skillnum)
+
+            SendActionMsg(MapNum, sSymbol & Damage, Color, ActionMsgType.Scroll, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
             If increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) + Damage
             If Not increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) - Damage
-
             SendMapNpcVitals(MapNum, Index)
         End If
     End Sub
