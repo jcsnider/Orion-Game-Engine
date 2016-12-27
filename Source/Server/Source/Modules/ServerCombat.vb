@@ -1372,7 +1372,7 @@ Public Module ServerCombat
         SendTarget(Index, 0, TargetType.None)
 
         ' Hand out player experience
-        HandleNpcKillExperience(Index, MapNpcNum)
+        HandleNpcKillExperience(Index, MapNpc(MapNum).Npc(MapNpcNum).Num)
 
         ' Drop items if we can.
         DropNpcItems(MapNum, MapNpcNum)
