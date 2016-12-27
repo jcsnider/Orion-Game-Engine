@@ -131,5 +131,62 @@
         EditorPet_DrawPet()
     End Sub
 
+    Private Sub scrlPetExp_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetExp.Scroll
+        If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        lblPetExp.Text = "Exp Gain: " & scrlPetExp.Value & "%"
+        Pet(EditorIndex).ExpGain = scrlPetExp.Value
+    End Sub
+
+    Private Sub scrlPetPnts_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetPnts.Scroll
+        If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        lblPetPnts.Text = "Points Per Level: " & scrlPetPnts.Value
+        Pet(EditorIndex).LevelPnts = scrlPetPnts.Value
+    End Sub
+
+    Private Sub scrlMaxLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMaxLevel.Scroll
+        If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        lblmaxlevel.Text = "Max Level: " & scrlMaxLevel.Value
+        Pet(EditorIndex).MaxLevel = scrlMaxLevel.Value
+    End Sub
+
+    Private Sub scrlSpell1_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill1.Scroll
+        Dim prefix As String = "Skill " & 1 & ": "
+        If scrlSkill1.Value = 0 Then
+            lblSkill1.Text = prefix & "None"
+        Else
+            lblSkill1.Text = prefix & Trim$(Skill(scrlSkill1.Value).Name)
+        End If
+    End Sub
+
+    Private Sub scrlSpell2_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill2.Scroll
+        Dim prefix As String = "Skill " & 2 & ": "
+        If scrlSkill2.Value = 0 Then
+            lblSkill2.Text = prefix & "None"
+        Else
+            lblSkill2.Text = prefix & Trim$(Skill(scrlSkill2.Value).Name)
+        End If
+    End Sub
+
+    Private Sub scrlSpell3_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill3.Scroll
+        Dim prefix As String = "Skill " & 3 & ": "
+        If scrlSkill3.Value = 0 Then
+            lblSkill3.Text = prefix & "None"
+        Else
+            lblSkill3.Text = prefix & Trim$(Skill(scrlSkill3.Value).Name)
+        End If
+    End Sub
+
+    Private Sub scrlSpell4_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill4.Scroll
+        Dim prefix As String = "Skill " & 4 & ": "
+        If scrlSkill4.Value = 0 Then
+            lblSkill4.Text = prefix & "None"
+        Else
+            lblSkill4.Text = prefix & Trim$(Skill(scrlSkill4.Value).Name)
+        End If
+    End Sub
+
 #End Region
 End Class

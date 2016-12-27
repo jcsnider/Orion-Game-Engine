@@ -26,14 +26,14 @@ Partial Class frmEditor_Pet
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.lblSpell4 = New System.Windows.Forms.Label()
-        Me.lblSpell3 = New System.Windows.Forms.Label()
-        Me.scrlSpell4 = New System.Windows.Forms.HScrollBar()
-        Me.scrlSpell3 = New System.Windows.Forms.HScrollBar()
-        Me.lblSpell2 = New System.Windows.Forms.Label()
-        Me.lblSpell1 = New System.Windows.Forms.Label()
-        Me.scrlSpell2 = New System.Windows.Forms.HScrollBar()
-        Me.scrlSpell1 = New System.Windows.Forms.HScrollBar()
+        Me.lblSkill4 = New System.Windows.Forms.Label()
+        Me.lblSkill3 = New System.Windows.Forms.Label()
+        Me.scrlSkill4 = New System.Windows.Forms.HScrollBar()
+        Me.scrlSkill3 = New System.Windows.Forms.HScrollBar()
+        Me.lblSkill2 = New System.Windows.Forms.Label()
+        Me.lblSkill1 = New System.Windows.Forms.Label()
+        Me.scrlSkill2 = New System.Windows.Forms.HScrollBar()
+        Me.scrlSkill1 = New System.Windows.Forms.HScrollBar()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.pnlPetlevel = New System.Windows.Forms.Panel()
         Me.lblmaxlevel = New System.Windows.Forms.Label()
@@ -120,14 +120,14 @@ Partial Class frmEditor_Pet
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.lblSpell4)
-        Me.GroupBox5.Controls.Add(Me.lblSpell3)
-        Me.GroupBox5.Controls.Add(Me.scrlSpell4)
-        Me.GroupBox5.Controls.Add(Me.scrlSpell3)
-        Me.GroupBox5.Controls.Add(Me.lblSpell2)
-        Me.GroupBox5.Controls.Add(Me.lblSpell1)
-        Me.GroupBox5.Controls.Add(Me.scrlSpell2)
-        Me.GroupBox5.Controls.Add(Me.scrlSpell1)
+        Me.GroupBox5.Controls.Add(Me.lblSkill4)
+        Me.GroupBox5.Controls.Add(Me.lblSkill3)
+        Me.GroupBox5.Controls.Add(Me.scrlSkill4)
+        Me.GroupBox5.Controls.Add(Me.scrlSkill3)
+        Me.GroupBox5.Controls.Add(Me.lblSkill2)
+        Me.GroupBox5.Controls.Add(Me.lblSkill1)
+        Me.GroupBox5.Controls.Add(Me.scrlSkill2)
+        Me.GroupBox5.Controls.Add(Me.scrlSkill1)
         Me.GroupBox5.Location = New System.Drawing.Point(6, 399)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(377, 89)
@@ -135,77 +135,77 @@ Partial Class frmEditor_Pet
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Skills"
         '
-        'lblSpell4
+        'lblSkill4
         '
-        Me.lblSpell4.AutoSize = True
-        Me.lblSpell4.Location = New System.Drawing.Point(196, 67)
-        Me.lblSpell4.Name = "lblSpell4"
-        Me.lblSpell4.Size = New System.Drawing.Size(67, 13)
-        Me.lblSpell4.TabIndex = 11
-        Me.lblSpell4.Text = "Skill 4: None"
+        Me.lblSkill4.AutoSize = True
+        Me.lblSkill4.Location = New System.Drawing.Point(196, 67)
+        Me.lblSkill4.Name = "lblSkill4"
+        Me.lblSkill4.Size = New System.Drawing.Size(67, 13)
+        Me.lblSkill4.TabIndex = 11
+        Me.lblSkill4.Text = "Skill 4: None"
         '
-        'lblSpell3
+        'lblSkill3
         '
-        Me.lblSpell3.AutoSize = True
-        Me.lblSpell3.Location = New System.Drawing.Point(6, 67)
-        Me.lblSpell3.Name = "lblSpell3"
-        Me.lblSpell3.Size = New System.Drawing.Size(67, 13)
-        Me.lblSpell3.TabIndex = 10
-        Me.lblSpell3.Text = "Skill 3: None"
+        Me.lblSkill3.AutoSize = True
+        Me.lblSkill3.Location = New System.Drawing.Point(6, 67)
+        Me.lblSkill3.Name = "lblSkill3"
+        Me.lblSkill3.Size = New System.Drawing.Size(67, 13)
+        Me.lblSkill3.TabIndex = 10
+        Me.lblSkill3.Text = "Skill 3: None"
         '
-        'scrlSpell4
+        'scrlSkill4
         '
-        Me.scrlSpell4.LargeChange = 1
-        Me.scrlSpell4.Location = New System.Drawing.Point(199, 50)
-        Me.scrlSpell4.Name = "scrlSpell4"
-        Me.scrlSpell4.Size = New System.Drawing.Size(175, 17)
-        Me.scrlSpell4.TabIndex = 9
-        Me.scrlSpell4.Value = 50
+        Me.scrlSkill4.LargeChange = 1
+        Me.scrlSkill4.Location = New System.Drawing.Point(199, 50)
+        Me.scrlSkill4.Name = "scrlSkill4"
+        Me.scrlSkill4.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill4.TabIndex = 9
+        Me.scrlSkill4.Value = 50
         '
-        'scrlSpell3
+        'scrlSkill3
         '
-        Me.scrlSpell3.LargeChange = 1
-        Me.scrlSpell3.Location = New System.Drawing.Point(6, 50)
-        Me.scrlSpell3.Name = "scrlSpell3"
-        Me.scrlSpell3.Size = New System.Drawing.Size(175, 17)
-        Me.scrlSpell3.TabIndex = 8
-        Me.scrlSpell3.Value = 50
+        Me.scrlSkill3.LargeChange = 1
+        Me.scrlSkill3.Location = New System.Drawing.Point(6, 50)
+        Me.scrlSkill3.Name = "scrlSkill3"
+        Me.scrlSkill3.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill3.TabIndex = 8
+        Me.scrlSkill3.Value = 50
         '
-        'lblSpell2
+        'lblSkill2
         '
-        Me.lblSpell2.AutoSize = True
-        Me.lblSpell2.Location = New System.Drawing.Point(196, 33)
-        Me.lblSpell2.Name = "lblSpell2"
-        Me.lblSpell2.Size = New System.Drawing.Size(67, 13)
-        Me.lblSpell2.TabIndex = 7
-        Me.lblSpell2.Text = "Skill 2: None"
+        Me.lblSkill2.AutoSize = True
+        Me.lblSkill2.Location = New System.Drawing.Point(196, 33)
+        Me.lblSkill2.Name = "lblSkill2"
+        Me.lblSkill2.Size = New System.Drawing.Size(67, 13)
+        Me.lblSkill2.TabIndex = 7
+        Me.lblSkill2.Text = "Skill 2: None"
         '
-        'lblSpell1
+        'lblSkill1
         '
-        Me.lblSpell1.AutoSize = True
-        Me.lblSpell1.Location = New System.Drawing.Point(6, 33)
-        Me.lblSpell1.Name = "lblSpell1"
-        Me.lblSpell1.Size = New System.Drawing.Size(67, 13)
-        Me.lblSpell1.TabIndex = 6
-        Me.lblSpell1.Text = "Skill 1: None"
+        Me.lblSkill1.AutoSize = True
+        Me.lblSkill1.Location = New System.Drawing.Point(6, 33)
+        Me.lblSkill1.Name = "lblSkill1"
+        Me.lblSkill1.Size = New System.Drawing.Size(67, 13)
+        Me.lblSkill1.TabIndex = 6
+        Me.lblSkill1.Text = "Skill 1: None"
         '
-        'scrlSpell2
+        'scrlSkill2
         '
-        Me.scrlSpell2.LargeChange = 1
-        Me.scrlSpell2.Location = New System.Drawing.Point(199, 16)
-        Me.scrlSpell2.Name = "scrlSpell2"
-        Me.scrlSpell2.Size = New System.Drawing.Size(175, 17)
-        Me.scrlSpell2.TabIndex = 5
-        Me.scrlSpell2.Value = 50
+        Me.scrlSkill2.LargeChange = 1
+        Me.scrlSkill2.Location = New System.Drawing.Point(199, 16)
+        Me.scrlSkill2.Name = "scrlSkill2"
+        Me.scrlSkill2.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill2.TabIndex = 5
+        Me.scrlSkill2.Value = 50
         '
-        'scrlSpell1
+        'scrlSkill1
         '
-        Me.scrlSpell1.LargeChange = 1
-        Me.scrlSpell1.Location = New System.Drawing.Point(6, 16)
-        Me.scrlSpell1.Name = "scrlSpell1"
-        Me.scrlSpell1.Size = New System.Drawing.Size(175, 17)
-        Me.scrlSpell1.TabIndex = 4
-        Me.scrlSpell1.Value = 50
+        Me.scrlSkill1.LargeChange = 1
+        Me.scrlSkill1.Location = New System.Drawing.Point(6, 16)
+        Me.scrlSkill1.Name = "scrlSkill1"
+        Me.scrlSkill1.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill1.TabIndex = 4
+        Me.scrlSkill1.Value = 50
         '
         'GroupBox4
         '
@@ -616,14 +616,14 @@ Partial Class frmEditor_Pet
     Friend WithEvents scrlPetPnts As HScrollBar
     Friend WithEvents scrlPetExp As HScrollBar
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents lblSpell2 As Label
-    Friend WithEvents lblSpell1 As Label
-    Friend WithEvents scrlSpell2 As HScrollBar
-    Friend WithEvents scrlSpell1 As HScrollBar
-    Friend WithEvents lblSpell4 As Label
-    Friend WithEvents lblSpell3 As Label
-    Friend WithEvents scrlSpell4 As HScrollBar
-    Friend WithEvents scrlSpell3 As HScrollBar
+    Friend WithEvents lblSkill2 As Label
+    Friend WithEvents lblSkill1 As Label
+    Friend WithEvents scrlSkill2 As HScrollBar
+    Friend WithEvents scrlSkill1 As HScrollBar
+    Friend WithEvents lblSkill4 As Label
+    Friend WithEvents lblSkill3 As Label
+    Friend WithEvents scrlSkill4 As HScrollBar
+    Friend WithEvents scrlSkill3 As HScrollBar
     Friend WithEvents lblLevel As Label
     Friend WithEvents scrlLevel As HScrollBar
     Friend WithEvents btnSave As Button

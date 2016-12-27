@@ -200,12 +200,19 @@
             .lblRange.Text = "Range: " & .scrlRange.Value
 
             .scrlStrength.Value = Pet(EditorIndex).stat(Stats.Strength)
+            .lblStrength.Text = "Strength: " & .scrlStrength.Value
             .scrlEndurance.Value = Pet(EditorIndex).stat(Stats.Endurance)
+            .lblEndurance.Text = "Endurance: " & .scrlEndurance.Value
             .scrlVitality.Value = Pet(EditorIndex).stat(Stats.Vitality)
+            .lblVitality.Text = "Vitality: " & .scrlVitality.Value
             .scrlLuck.Value = Pet(EditorIndex).stat(Stats.Luck)
+            .lblLuck.Text = "Luck: " & .scrlLuck.Value
             .scrlIntelligence.Value = Pet(EditorIndex).stat(Stats.Intelligence)
+            .lblIntelligence.Text = "Intelligence: " & .scrlIntelligence.Value
             .scrlSpirit.Value = Pet(EditorIndex).stat(Stats.Spirit)
+            .lblSpirit.Text = "Spirit: " & .scrlSpirit.Value
             .scrlLevel.Value = Pet(EditorIndex).Level
+            .lblLevel.Text = "Level: " & .scrlLevel.Value
 
             If Pet(EditorIndex).StatType = 1 Then
                 .optCustomStats.Checked = True
@@ -215,41 +222,50 @@
                 .pnlCustomStats.Visible = False
             End If
 
+            .scrlPetExp.Value = Pet(EditorIndex).ExpGain
+            .lblPetExp.Text = "Exp Gain: " & .scrlPetExp.Value & "%"
+
+            .scrlPetPnts.Value = Pet(EditorIndex).LevelPnts
+            .lblPetPnts.Text = "Points Per Level: " & .scrlPetPnts.Value
+
+            .scrlMaxLevel.Value = Pet(EditorIndex).MaxLevel
+            .lblmaxlevel.Text = "Max Level: " & .scrlMaxLevel.Value
+
             'Set skills
-            .scrlSpell1.Value = Pet(EditorIndex).skill(1)
+            .scrlSkill1.Value = Pet(EditorIndex).skill(1)
             prefix = "Skill " & 1 & ": "
 
-            If .scrlSpell1.Value = 0 Then
-                .lblSpell1.Text = prefix & "None"
+            If .scrlSkill1.Value = 0 Then
+                .lblSkill1.Text = prefix & "None"
             Else
-                .lblSpell1.Text = prefix & Trim$(Skill(.scrlSpell1.Value).Name)
+                .lblSkill1.Text = prefix & Trim$(Skill(.scrlSkill1.Value).Name)
             End If
 
-            .scrlSpell2.Value = Pet(EditorIndex).skill(2)
+            .scrlSkill2.Value = Pet(EditorIndex).skill(2)
             prefix = "Skill " & 2 & ": "
 
-            If .scrlSpell2.Value = 0 Then
-                .lblSpell2.Text = prefix & "None"
+            If .scrlSkill2.Value = 0 Then
+                .lblSkill2.Text = prefix & "None"
             Else
-                .lblSpell2.Text = prefix & Trim$(Skill(.scrlSpell2.Value).Name)
+                .lblSkill2.Text = prefix & Trim$(Skill(.scrlSkill2.Value).Name)
             End If
 
-            .scrlSpell3.Value = Pet(EditorIndex).skill(3)
+            .scrlSkill3.Value = Pet(EditorIndex).skill(3)
             prefix = "Skill " & 3 & ": "
 
-            If .scrlSpell3.Value = 0 Then
-                .lblSpell3.Text = prefix & "None"
+            If .scrlSkill3.Value = 0 Then
+                .lblSkill3.Text = prefix & "None"
             Else
-                .lblSpell3.Text = prefix & Trim$(Skill(.scrlSpell3.Value).Name)
+                .lblSkill3.Text = prefix & Trim$(Skill(.scrlSkill3.Value).Name)
             End If
 
-            .scrlSpell4.Value = Pet(EditorIndex).skill(4)
+            .scrlSkill4.Value = Pet(EditorIndex).skill(4)
             prefix = "Skill " & 4 & ": "
 
-            If .scrlSpell4.Value = 0 Then
-                .lblSpell4.Text = prefix & "None"
+            If .scrlSkill4.Value = 0 Then
+                .lblSkill4.Text = prefix & "None"
             Else
-                .lblSpell4.Text = prefix & Trim$(Skill(.scrlSpell4.Value).Name)
+                .lblSkill4.Text = prefix & Trim$(Skill(.scrlSkill4.Value).Name)
             End If
 
             If Pet(EditorIndex).LevelingType = 0 Then
