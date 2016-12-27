@@ -1,4 +1,6 @@
-﻿Public Module ServerCombat
+﻿Imports System.Linq
+
+Public Module ServerCombat
 
 #Region "PlayerCombat"
     Function CanPlayerAttackPlayer(ByVal Attacker As Integer, ByVal Victim As Integer, Optional ByVal IsSkill As Boolean = False) As Boolean
@@ -427,144 +429,58 @@
         End If
     End Sub
 
-    Sub PlayerAttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, ByVal Damage As Integer, Optional ByVal skillnum As Integer = 0)
-        Dim Name As String
-        Dim exp As Integer
-        Dim n As Integer
-        Dim i As Integer
-        Dim MapNum As Integer
-        Dim NpcNum As Integer
-        Dim Buffer As ByteBuffer
-
+    Sub PlayerAttackNpc(ByVal Attacker As Integer, ByVal MapNpcNum As Integer, ByVal Damage As Integer)
         ' Check for subscript out of range
-        If IsPlaying(Attacker) = False Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Damage < 0 Then
-            Exit Sub
-        End If
+        If IsPlaying(Attacker) = False Or MapNpcNum <= 0 Or MapNpcNum > MAX_MAP_NPCS Or Damage < 0 Then Exit Sub
 
-        MapNum = GetPlayerMap(Attacker)
-        NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num
-        Name = Trim$(Npc(NpcNum).Name)
-
-        If skillnum = 0 Then
-            ' Send this packet so they can see the person attacking
-            Buffer = New ByteBuffer
-            Buffer.WriteInteger(ServerPackets.SAttack)
-            Buffer.WriteInteger(Attacker)
-            SendDataToMapBut(Attacker, MapNum, Buffer.ToArray())
-            Buffer = Nothing
-        End If
+        Dim MapNum = GetPlayerMap(Attacker)
+        Dim NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num
+        Dim Name = Npc(NpcNum).Name.Trim()
 
         ' Check for weapon
-        n = 0
-
+        Dim Weapon = 0
         If GetPlayerEquipment(Attacker, EquipmentType.Weapon) > 0 Then
-            n = GetPlayerEquipment(Attacker, EquipmentType.Weapon)
+            Weapon = GetPlayerEquipment(Attacker, EquipmentType.Weapon)
         End If
 
-        If Damage >= MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) Then
+        ' Deal damage to our NPC.
+        MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) - Damage
 
-            SendActionMsg(GetPlayerMap(Attacker), "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
-            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
+        ' Set the NPC target to the player so they can come after them.
+        MapNpc(MapNum).Npc(MapNpcNum).TargetType = TargetType.Player
+        MapNpc(MapNum).Npc(MapNpcNum).Target = Attacker
 
-            ' Calculate exp to give attacker
-            exp = Npc(NpcNum).Exp
+        ' Check for any mobs on the map with the Guard behaviour so they can come after our player.
+        If Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Behaviour = NpcBehavior.Guard Then
+            For Each Guard In MapNpc(MapNum).Npc.Where(Function(x) x.Num = MapNpc(MapNum).Npc(MapNpcNum).Num).Select(Function(x, y) y).ToArray()
+                MapNpc(MapNum).Npc(Guard).Target = Attacker
+                MapNpc(MapNum).Npc(Guard).TargetType = TargetType.Player
+            Next
+        End If
 
-            ' Make sure we dont get less then 0
-            If exp < 0 Then
-                exp = 1
-            End If
+        ' Send our general visual stuff.
+        SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+        SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
+        SendPlayerAttack(Attacker)
+        If Weapon > 0 Then
+            SendAnimation(MapNum, Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Animation, 0, 0, TargetType.Npc, MapNpcNum)
+        End If
 
-            ' in party?
-            If TempPlayer(Attacker).InParty > 0 Then
-                ' pass through party sharing function
-                Party_ShareExp(TempPlayer(Attacker).InParty, exp, Attacker, GetPlayerMap(Attacker))
-            Else
-                ' no party - keep exp for self
-                GivePlayerEXP(Attacker, exp)
-            End If
+        ' Reset our attack timer.
+        TempPlayer(Attacker).AttackTimer = GetTickCount()
 
-            ' Drop the goods if they get it
-            Dim tmpitem = Random(1, 5)
-            n = Int(Rnd() * Npc(NpcNum).DropChance(tmpitem)) + 1
-
-            If n = 1 Then
-                SpawnItem(Npc(NpcNum).DropItem(tmpitem), Npc(NpcNum).DropItemValue(tmpitem), MapNum, MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
-            End If
-
-            ' Now set HP to 0 so we know to actually kill them in the server loop (this prevents subscript out of range)
-            MapNpc(MapNum).Npc(MapNpcNum).Num = 0
-            MapNpc(MapNum).Npc(MapNpcNum).SpawnWait = GetTickCount()
-            MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = 0
-
-            SendTarget(Attacker, 0, 0)
-
-            Buffer = New ByteBuffer
-            Buffer.WriteInteger(ServerPackets.SNpcDead)
-            Buffer.WriteInteger(MapNpcNum)
-            SendDataToMap(MapNum, Buffer.ToArray())
-            Buffer = Nothing
-
-            ' Check if target is npc that died and if so set target to 0
-            If TempPlayer(Attacker).TargetType = TargetType.Npc Then
-                If TempPlayer(Attacker).Target = MapNpcNum Then
-                    TempPlayer(Attacker).Target = 0
-                    TempPlayer(Attacker).TargetType = TargetType.None
-                End If
-            End If
-
-            CheckTasks(Attacker, QUEST_TYPE_GOSLAY, NpcNum)
-
-        Else
-            ' NPC not dead, just do the damage
-            MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) - Damage
-
-            ' Check for a weapon and say damage
-            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
-            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
-
-            ' send animation
-            If n > 0 Then
-                If skillnum = 0 Then SendAnimation(MapNum, Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Animation, 0, 0, TargetType.Npc, MapNpcNum)
-            End If
-
-            ' Check if we should send a message
+        If Not IsNpcDead(MapNum, MapNpcNum) Then
+            ' Check if our NPC has something to share with our player.
             If MapNpc(MapNum).Npc(MapNpcNum).Target = 0 Then
                 If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
-                    PlayerMsg(Attacker, CheckGrammar(Trim$(Npc(NpcNum).Name), 1) & " says: " & Trim$(Npc(NpcNum).AttackSay), ColorType.Yellow)
+                    PlayerMsg(Attacker, String.Format("{0} says: '{1}'", Npc(NpcNum).Name.Trim(), Npc(NpcNum).AttackSay.Trim()), ColorType.Yellow)
                 End If
-            End If
-
-            ' Set the NPC target to the player
-            MapNpc(MapNum).Npc(MapNpcNum).TargetType = 1 ' player
-            MapNpc(MapNum).Npc(MapNpcNum).Target = Attacker
-
-            ' Now check for guard ai and if so have all onmap guards come after'm
-            If Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Behaviour = NpcBehavior.Guard Then
-
-                For i = 1 To MAX_MAP_NPCS
-
-                    If MapNpc(MapNum).Npc(i).Num = MapNpc(MapNum).Npc(MapNpcNum).Num Then
-                        MapNpc(MapNum).Npc(i).Target = Attacker
-                        MapNpc(MapNum).Npc(i).TargetType = 1 ' player
-                    End If
-
-                Next
-
-            End If
-
-            ' if stunning skill, stun the npc
-            If skillnum > 0 Then
-                If Skill(skillnum).StunDuration > 0 Then StunNPC(MapNpcNum, MapNum, skillnum)
             End If
 
             SendMapNpcTo(MapNum, MapNpcNum)
+        Else
+            HandlePlayerKillNpc(MapNum, Attacker, MapNpcNum)
         End If
-
-        If skillnum = 0 Then
-            ' Reset attack timer
-            TempPlayer(Attacker).AttackTimer = GetTickCount()
-        End If
-
     End Sub
 #End Region
 
@@ -1550,4 +1466,49 @@
 
     End Sub
 
+    Public Function IsNpcDead(ByVal MapNum As Integer, ByVal MapNpcNum As Integer)
+        IsNpcDead = False
+        If MapNum < 0 Or MapNum > MAX_MAPS Or MapNpcNum < 0 Or MapNpcNum > MAX_MAP_NPCS Then Exit Function
+        If MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) <= 0 Then IsNpcDead = True
+    End Function
+
+    Public Sub DropNpcItems(ByVal MapNum As Integer, ByVal MapNpcNum As Integer)
+        Dim NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num
+        Dim tmpitem = Random(1, 5)
+        Dim n = Int(Rnd() * Npc(NpcNum).DropChance(tmpitem)) + 1
+
+        If n = 1 Then
+            SpawnItem(Npc(NpcNum).DropItem(tmpitem), Npc(NpcNum).DropItemValue(tmpitem), MapNum, MapNpc(MapNum).Npc(MapNpcNum).x, MapNpc(MapNum).Npc(MapNpcNum).y)
+        End If
+    End Sub
+
+    Public Sub HandlePlayerKillNpc(ByVal MapNum As Integer, ByVal Index As Integer, ByVal MapNpcNum As Integer)
+        ' Set our NPC's data to default so we know it's dead.
+        MapNpc(MapNum).Npc(MapNpcNum).Num = 0
+        MapNpc(MapNum).Npc(MapNpcNum).SpawnWait = GetTickCount()
+        MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = 0
+
+        ' Set our attacker's target to nothing.
+        SendTarget(Index, 0, TargetType.None)
+
+        ' Hand out player experience
+        HandleNpcKillExperience(Index, MapNpcNum)
+
+        ' Drop items if we can.
+        DropNpcItems(MapNum, MapNpcNum)
+
+        ' Handle quest tasks related to NPC death
+        CheckTasks(Index, QUEST_TYPE_GOSLAY, MapNpc(MapNum).Npc(MapNpcNum).Num)
+
+        ' Notify all our clients that the NPC has died.
+        SendNpcDead(MapNum, MapNpcNum)
+
+        ' Check if our dead NPC is targetted by another player and remove their targets.
+        If TempPlayer(Index).TargetType = TargetType.Npc Then
+            If TempPlayer(Index).Target = MapNpcNum Then
+                TempPlayer(Index).Target = 0
+                TempPlayer(Index).TargetType = TargetType.None
+            End If
+        End If
+    End Sub
 End Module

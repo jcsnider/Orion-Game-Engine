@@ -971,6 +971,11 @@ Module ServerLoop
                     KnockBackNpc(Index, Target, SkillId)
                 End If
 
+                ' Handle our NPC death if it kills them
+                If IsNpcDead(GetPlayerMap(Index), TempPlayer(Index).Target) Then
+                    HandlePlayerKillNpc(GetPlayerMap(Index), Index, TempPlayer(Index).Target)
+                End If
+
             Case TargetType.Player
                 TargetType = TargetType.Player
                 TargetX = GetPlayerX(Target)
@@ -1053,6 +1058,11 @@ Module ServerLoop
 
                 ' Send our animation to the map.
                 SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Npc, id)
+
+                ' Handle our NPC death if it kills them
+                If IsNpcDead(Map, id) Then
+                    HandlePlayerKillNpc(Map, Index, id)
+                End If
             End If
         Next
     End Sub
@@ -1344,22 +1354,25 @@ Module ServerLoop
 
     Public Sub SkillNpc_Effect(ByVal Vital As Byte, ByVal increment As Boolean, ByVal Index As Integer, ByVal Damage As Integer, ByVal skillnum As Integer, ByVal MapNum As Integer)
         Dim sSymbol As String
-        Dim Colour As Integer
+        Dim Color As Integer
+
+        If Index <= 0 Or Index > MAX_MAP_NPCS Or Damage < 0 Or MapNpc(MapNum).Npc(Index).Vital(Vital) <= 0 Then Exit Sub
 
         If Damage > 0 Then
             If increment Then
                 sSymbol = "+"
-                If Vital = Vitals.HP Then Colour = ColorType.BrightGreen
-                If Vital = Vitals.MP Then Colour = ColorType.BrightBlue
+                If Vital = Vitals.HP Then Color = ColorType.BrightGreen
+                If Vital = Vitals.MP Then Color = ColorType.BrightBlue
             Else
                 sSymbol = "-"
-                Colour = ColorType.Blue
+                Color = ColorType.Blue
             End If
 
             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, TargetType.Npc, Index)
-            SendActionMsg(MapNum, sSymbol & Damage, Colour, ActionMsgType.Scroll, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
+            SendActionMsg(MapNum, sSymbol & Damage, Color, ActionMsgType.Scroll, MapNpc(MapNum).Npc(Index).x * 32, MapNpc(MapNum).Npc(Index).y * 32)
             If increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) + Damage
             If Not increment Then MapNpc(MapNum).Npc(Index).Vital(Vital) = MapNpc(MapNum).Npc(Index).Vital(Vital) - Damage
+            SendMapNpcVitals(MapNum, Index)
         End If
     End Sub
 End Module
