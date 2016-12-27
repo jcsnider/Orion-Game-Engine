@@ -1591,7 +1591,7 @@ Module ServerLoop
                                         If CanNpcAttackPlayer(NpcNum, i) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, i)
                                             PlayerMsg(i, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                            AttackPlayer(NpcNum, i, Vital, skillnum, NpcNum)
+                                            SkillPlayer_Effect(Vitals.HP, False, i, Vital, skillnum)
                                         End If
                                     End If
                                 End If
@@ -1603,7 +1603,7 @@ Module ServerLoop
                                     If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
                                         If CanPlayerAttackNpc(NpcNum, i, True) Then
                                             SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, i)
-                                            PlayerAttackNpc(NpcNum, i, Vital, skillnum)
+                                            SkillNpc_Effect(Vitals.HP, False, i, Vital, skillnum, MapNum)
                                             If Skill(skillnum).KnockBack = 1 Then
                                                 KnockBackNpc(NpcNum, Target, skillnum)
                                             End If
@@ -1672,7 +1672,7 @@ Module ServerLoop
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Player, Target)
                                     PlayerMsg(Target, Trim(Npc(MapNpc(MapNum).Npc(NpcNum).Num).Name) & " uses " & Trim(Skill(skillnum).Name) & "!", ColorType.Yellow)
-                                    AttackPlayer(NpcNum, Target, Vital, skillnum, NpcNum)
+                                    SkillPlayer_Effect(Vitals.HP, False, Target, Vital, skillnum)
                                     DidCast = True
                                 End If
                             End If
@@ -1680,7 +1680,8 @@ Module ServerLoop
                             If CanPlayerAttackNpc(NpcNum, Target, True) Then
                                 If Vital > 0 Then
                                     SendAnimation(MapNum, Skill(skillnum).SkillAnim, 0, 0, Enums.TargetType.Npc, Target)
-                                    PlayerAttackNpc(NpcNum, Target, Vital, skillnum)
+                                    SkillNpc_Effect(Vitals.HP, False, i, Vital, skillnum, MapNum)
+
                                     If Skill(skillnum).KnockBack = 1 Then
                                         KnockBackNpc(NpcNum, Target, skillnum)
                                     End If
