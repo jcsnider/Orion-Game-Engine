@@ -2405,4 +2405,32 @@ Module ServerPlayers
         End If
     End Sub
 
+    Public Sub HandlePlayerKillExperience(ByVal Attacker As Integer, ByVal Victim As Integer)
+        ' Calculate exp to give attacker
+        Dim exp = (GetPlayerExp(Victim) \ 10)
+
+        ' Make sure we dont get less then 0
+        If Exp < 0 Then
+            Exp = 0
+        End If
+
+        If Exp = 0 Then
+            PlayerMsg(Victim, "You've lost no exp.", ColorType.BrightRed)
+            PlayerMsg(Attacker, "You've received no exp.", ColorType.BrightBlue)
+        Else
+            SetPlayerExp(Victim, GetPlayerExp(Victim) - Exp)
+            SendExp(Victim)
+            PlayerMsg(Victim, String.Format("You've lost {0} exp.", exp), ColorType.BrightRed)
+
+            ' check if we're in a party
+            If IsPlayerInParty(Attacker) > 0 Then
+                ' pass through party exp share function
+                Party_ShareExp(GetPlayerParty(Attacker), exp, Attacker, GetPlayerMap(Attacker))
+            Else
+                ' not in party, get exp for self
+                GivePlayerEXP(Attacker, Exp)
+            End If
+        End If
+    End Sub
+
 End Module

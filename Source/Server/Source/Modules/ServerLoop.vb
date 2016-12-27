@@ -1369,6 +1369,17 @@ Module ServerLoop
                 ' Deal with healing abilities
                 If Not DealsDamage Then SkillPlayer_Effect(Vital, True, Target, Amount, SkillId)
 
+                If IsPlayerDead(Target) Then
+                    ' Actually kill the player.
+                    OnDeath(Target)
+
+                    ' Handle PK stuff.
+                    HandlePlayerKilledPK(Index, Target)
+
+                    ' Handle our quest system stuff.
+                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                End If
+
             Case Else
                 Throw New NotImplementedException()
 
@@ -1420,6 +1431,17 @@ Module ServerLoop
 
                 ' Send our animation to the map.
                 SendAnimation(Map, Skill(SkillId).SkillAnim, 0, 0, Enums.TargetType.Player, id)
+
+                If IsPlayerDead(id) Then
+                    ' Actually kill the player.
+                    OnDeath(id)
+
+                    ' Handle PK stuff.
+                    HandlePlayerKilledPK(Index, id)
+
+                    ' Handle our quest system stuff.
+                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                End If
             End If
         Next
 
