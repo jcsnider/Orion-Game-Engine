@@ -47,7 +47,7 @@ Module ClientParties
 
         ' exit out if we're not in a party
         If InParty = 0 Then
-            ClearParty()
+            ClearPartie()
             ' exit out early
             Buffer = Nothing
             Exit Sub
@@ -145,7 +145,7 @@ Module ClientParties
     End Sub
 #End Region
 
-    Sub ClearParty()
+    Sub ClearPartie()
         Party = New PartyRec
         Party.Leader = 0
         Party.MemberCount = 0

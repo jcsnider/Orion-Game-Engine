@@ -1836,6 +1836,32 @@ Module ServerDatabase
                 Player(Index).Character(CharNum).RandEquip(i).Stat(x) = 0
             Next
         Next
+
+        'pets
+        Player(Index).Character(CharNum).Pet.Num = 0
+        Player(Index).Character(CharNum).Pet.Health = 0
+        Player(Index).Character(CharNum).Pet.Mana = 0
+        Player(Index).Character(CharNum).Pet.Level = 0
+
+        ReDim Player(Index).Character(CharNum).Pet.stat(Stats.Count - 1)
+        For i = 1 To Stats.Count - 1
+            Player(Index).Character(CharNum).Pet.stat(i) = 0
+        Next
+
+        ReDim Player(Index).Character(CharNum).Pet.Skill(4)
+        For i = 1 To 4
+            Player(Index).Character(CharNum).Pet.Skill(i) = 0
+        Next
+
+        Player(Index).Character(CharNum).Pet.x = 0
+        Player(Index).Character(CharNum).Pet.y = 0
+        Player(Index).Character(CharNum).Pet.Dir = 0
+        Player(Index).Character(CharNum).Pet.Alive = 0
+        Player(Index).Character(CharNum).Pet.AttackBehaviour = 0
+        Player(Index).Character(CharNum).Pet.AdoptiveStats = 0
+        Player(Index).Character(CharNum).Pet.Points = 0
+        Player(Index).Character(CharNum).Pet.Exp = 0
+
     End Sub
 
     Sub LoadCharacter(ByVal Index As Integer, ByVal CharNum As Integer)
@@ -1961,6 +1987,32 @@ Module ServerDatabase
                 reader.Read(Player(Index).Character(CharNum).RandEquip(i).Stat(x))
             Next
         Next
+
+        'pets
+        reader.Read(Player(Index).Character(CharNum).Pet.Num)
+        reader.Read(Player(Index).Character(CharNum).Pet.Health)
+        reader.Read(Player(Index).Character(CharNum).Pet.Mana)
+        reader.Read(Player(Index).Character(CharNum).Pet.Level)
+
+        ReDim Player(Index).Character(CharNum).Pet.stat(Stats.Count - 1)
+        For i = 1 To Stats.Count - 1
+            reader.Read(Player(Index).Character(CharNum).Pet.stat(i))
+        Next
+
+        ReDim Player(Index).Character(CharNum).Pet.Skill(4)
+        For i = 1 To 4
+            reader.Read(Player(Index).Character(CharNum).Pet.Skill(i))
+        Next
+
+        reader.Read(Player(Index).Character(CharNum).Pet.x)
+        reader.Read(Player(Index).Character(CharNum).Pet.y)
+        reader.Read(Player(Index).Character(CharNum).Pet.Dir)
+        reader.Read(Player(Index).Character(CharNum).Pet.Alive)
+        reader.Read(Player(Index).Character(CharNum).Pet.AttackBehaviour)
+        reader.Read(Player(Index).Character(CharNum).Pet.AdoptiveStats)
+        reader.Read(Player(Index).Character(CharNum).Pet.Points)
+        reader.Read(Player(Index).Character(CharNum).Pet.Exp)
+
     End Sub
 
     Sub SaveCharacter(ByVal Index As Integer, ByVal CharNum As Integer)
@@ -2072,6 +2124,31 @@ Module ServerDatabase
                 writer.Write(Player(Index).Character(CharNum).RandEquip(i).Stat(x))
             Next
         Next
+
+        'pets
+        writer.Write(Player(Index).Character(CharNum).Pet.Num)
+        writer.Write(Player(Index).Character(CharNum).Pet.Health)
+        writer.Write(Player(Index).Character(CharNum).Pet.Mana)
+        writer.Write(Player(Index).Character(CharNum).Pet.Level)
+
+        ReDim Player(Index).Character(CharNum).Pet.stat(Stats.Count - 1)
+        For i = 1 To Stats.Count - 1
+            writer.Write(Player(Index).Character(CharNum).Pet.stat(i))
+        Next
+
+        ReDim Player(Index).Character(CharNum).Pet.Skill(4)
+        For i = 1 To 4
+            writer.Write(Player(Index).Character(CharNum).Pet.Skill(i))
+        Next
+
+        writer.Write(Player(Index).Character(CharNum).Pet.x)
+        writer.Write(Player(Index).Character(CharNum).Pet.y)
+        writer.Write(Player(Index).Character(CharNum).Pet.Dir)
+        writer.Write(Player(Index).Character(CharNum).Pet.Alive)
+        writer.Write(Player(Index).Character(CharNum).Pet.AttackBehaviour)
+        writer.Write(Player(Index).Character(CharNum).Pet.AdoptiveStats)
+        writer.Write(Player(Index).Character(CharNum).Pet.Points)
+        writer.Write(Player(Index).Character(CharNum).Pet.Exp)
 
         writer.Save(filename)
     End Sub

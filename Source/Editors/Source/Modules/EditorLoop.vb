@@ -124,6 +124,9 @@ Module EditorLoop
         'craft
         ClearRecipes()
 
+        'pets
+        ClearPets()
+
         ' load options
         LoadOptions()
 
@@ -263,7 +266,6 @@ Module EditorLoop
                     destrect = New Rectangle(0, 0, ScreenX, ScreenY)
                     Application.DoEvents()
 
-
                     EditorMap_DrawTileset()
                 End If
             End If
@@ -278,6 +280,23 @@ Module EditorLoop
         If InitEditor = True Then
             frmLogin.pnlAdmin.Visible = True
             InitEditor = False
+        End If
+
+        If InitPetEditor = True Then
+            With frmEditor_Pet
+                Editor = EDITOR_PET
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+                For i = 1 To MAX_PETS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Pet(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 0
+                PetEditorInit()
+            End With
+            InitPetEditor = False
         End If
 
         If QuestEditorShow = True Then

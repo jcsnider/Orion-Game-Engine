@@ -467,4 +467,16 @@ Public Class frmEditor_Item
         Item(EditorIndex).Ammo = scrlAmmo.Value
     End Sub
 
+    Private Sub scrlPetNum_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetNum.Scroll
+        If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
+
+        If scrlPetNum.Value = 0 Then
+            lblPetName.Text = "Name: None"
+            lblPetNum.Text = "Num: 0"
+        Else
+            lblPetName.Text = "Name: " & Trim$(Pet(scrlPetNum.Value).Name)
+            lblPetNum.Text = "Num: " & scrlPetNum.Value
+        End If
+        Item(EditorIndex).Data1 = scrlPetNum.Value
+    End Sub
 End Class

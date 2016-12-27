@@ -36,7 +36,7 @@
 
         Dim stat() As Byte
 
-        Dim spell() As Integer
+        Dim skill() As Integer
     End Structure
 
     Public Structure PlayerPetRec
@@ -52,7 +52,7 @@
         Dim dir As Integer
         Dim MaxHp As Integer
         Dim MaxMP As Integer
-        Dim Alive As Boolean
+        Dim Alive As Byte
         Dim AttackBehaviour As Integer
         Dim Exp As Integer
         Dim TNL As Integer
@@ -114,9 +114,11 @@
             For i = 1 To Stats.Count - 1
                 buffer.WriteInteger(.stat(i))
             Next
+
             For i = 1 To 4
-                buffer.WriteInteger(.spell(i))
+                buffer.WriteInteger(.skill(i))
             Next
+
         End With
 
         SendData(buffer.ToArray)
@@ -141,9 +143,7 @@
 
     Public Sub Packet_UpdatePet(ByVal Data() As Byte)
         Dim n As Integer, i As Long
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
+        Dim buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -166,7 +166,7 @@
                 .stat(i) = buffer.ReadInteger
             Next
             For i = 1 To 4
-                .spell(i) = buffer.ReadInteger
+                .skill(i) = buffer.ReadInteger
             Next
         End With
 
@@ -182,6 +182,9 @@
 
         If frmEditor_Pet.Visible = False Then Exit Sub
         EditorIndex = frmEditor_Pet.lstIndex.SelectedIndex + 1
+
+        ReDim Pet(EditorIndex).stat(Stats.Count - 1)
+        ReDim Pet(EditorIndex).skill(4)
 
         With frmEditor_Pet
             .txtName.Text = Trim$(Pet(EditorIndex).Name)
@@ -206,7 +209,7 @@
             End If
 
             'Set skills
-            .scrlSpell1.Value = Pet(EditorIndex).spell(1)
+            .scrlSpell1.Value = Pet(EditorIndex).skill(1)
             prefix = "Skill " & 1 & ": "
 
             If .scrlSpell1.Value = 0 Then
@@ -215,7 +218,7 @@
                 .lblSpell1.Text = prefix & Trim$(Skill(.scrlSpell1.Value).Name)
             End If
 
-            .scrlSpell2.Value = Pet(EditorIndex).spell(2)
+            .scrlSpell2.Value = Pet(EditorIndex).skill(2)
             prefix = "Skill " & 2 & ": "
 
             If .scrlSpell2.Value = 0 Then
@@ -224,7 +227,7 @@
                 .lblSpell2.Text = prefix & Trim$(Skill(.scrlSpell2.Value).Name)
             End If
 
-            .scrlSpell3.Value = Pet(EditorIndex).spell(3)
+            .scrlSpell3.Value = Pet(EditorIndex).skill(3)
             prefix = "Skill " & 3 & ": "
 
             If .scrlSpell3.Value = 0 Then
@@ -233,7 +236,7 @@
                 .lblSpell3.Text = prefix & Trim$(Skill(.scrlSpell3.Value).Name)
             End If
 
-            .scrlSpell4.Value = Pet(EditorIndex).spell(4)
+            .scrlSpell4.Value = Pet(EditorIndex).skill(4)
             prefix = "Skill " & 4 & ": "
 
             If .scrlSpell4.Value = 0 Then
@@ -303,7 +306,7 @@
         Pet(Index).Name = ""
 
         ReDim Pet(Index).stat(Stats.Count - 1)
-        ReDim Pet(Index).spell(4)
+        ReDim Pet(Index).skill(4)
     End Sub
 
     Sub ClearPets()

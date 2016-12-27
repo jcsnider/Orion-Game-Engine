@@ -136,8 +136,12 @@ Module ServerGeneral
         ReDim MapProjectiles(MAX_CACHED_MAPS, 0 To MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
 
-        'partys
-        ClearPartys()
+        'parties
+        ClearParties()
+
+        'pets
+        ReDim Pet(MAX_PETS)
+        ClearPets()
 
         ' Check if the directory is there, if its not make it
         CheckDir(Path.Combine(Application.StartupPath, "data"))
@@ -153,12 +157,13 @@ Module ServerGeneral
         CheckDir(Path.Combine(Application.StartupPath, "data", "logs"))
         CheckDir(Path.Combine(Application.StartupPath, "data", "quests"))
         CheckDir(Path.Combine(Application.StartupPath, "data", "recipes"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "pets"))
 
         ' set quote character
         vbQuote = Chr(34) ' "
 
         ' load options, set if they dont exist
-        If Not FileExist(Path.Combine(Application.StartupPath, "data", "items")) Then
+        If Not FileExist(Path.Combine(Application.StartupPath, "data", "options.ini")) Then
             Options.Game_Name = "Orion+"
             Options.Port = 7001
             Options.MOTD = "Welcome to the Orion+ Engine"
@@ -306,6 +311,10 @@ Module ServerGeneral
 
         'recipes
         ClearRecipes()
+
+        'pets
+        SetStatus("Clearing pets...")
+        ClearPets()
     End Sub
 
     Private Sub LoadGameData()
@@ -347,6 +356,9 @@ Module ServerGeneral
 
         'recipes
         LoadRecipes()
+
+        'pets
+        LoadPets()
     End Sub
 
     Sub TextAdd(ByVal Msg As String)

@@ -186,6 +186,14 @@
         Packets.Add(ServerPackets.SPartyInvite, AddressOf Packet_PartyInvite)
         Packets.Add(ServerPackets.SPartyUpdate, AddressOf Packet_PartyUpdate)
         Packets.Add(ServerPackets.SPartyVitals, AddressOf Packet_PartyVitals)
+
+        'pets
+        Packets.Add(ServerPackets.SUpdatePet, AddressOf Packet_UpdatePet)
+        Packets.Add(ServerPackets.SUpdatePlayerPet, AddressOf Packet_UpdatePlayerPet)
+        Packets.Add(ServerPackets.SPetMove, AddressOf Packet_PetMove)
+        Packets.Add(ServerPackets.SPetDir, AddressOf Packet_PetDir)
+        Packets.Add(ServerPackets.SPetVital, AddressOf Packet_PetVital)
+        Packets.Add(ServerPackets.SClearPetSkillBuffer, AddressOf Packet_ClearPetSkillBuffer)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)

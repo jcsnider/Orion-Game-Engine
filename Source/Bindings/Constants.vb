@@ -22,4 +22,5 @@
     Public Const MAX_PARTY_MEMBERS As Long = 4
     Public Const MAX_RANDOM_TYPES As Byte = 16
     Public Const MAX_PETS As Integer = 100
+    Public Const MAX_DOTS As Integer = 30
 End Module

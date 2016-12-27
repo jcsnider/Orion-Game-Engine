@@ -111,6 +111,11 @@
         SendRequestRecipes()
         SendRequestEditRecipes()
     End Sub
+
+    Private Sub btnPetEditor_Click(sender As Object, e As EventArgs) Handles btnPetEditor.Click
+        SendRequestPets()
+        SendRequestEditPet()
+    End Sub
 #End Region
 
 End Class

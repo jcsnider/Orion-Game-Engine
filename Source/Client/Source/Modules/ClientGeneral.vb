@@ -14,37 +14,38 @@ Module ClientGeneral
 
         frmMenu.Visible = True
 
-        ReDim Player(0 To MAX_PLAYERS)
-
         ReDim CharSelection(3)
 
+        ReDim Player(0 To MAX_PLAYERS)
+
         For i = 0 To MAX_PLAYERS
-            For x = 0 To Vitals.Count - 1
-                ReDim Player(i).Vital(x)
-            Next
-            For x = 0 To Stats.Count - 1
-                ReDim Player(i).Stat(x)
-            Next
-            For x = 0 To EquipmentType.Count - 1
-                ReDim Player(i).Equipment(x)
-            Next
+            ClearPlayer(i)
+            'For x = 0 To Vitals.Count - 1
+            '    ReDim Player(i).Vital(x)
+            'Next
+            'For x = 0 To Stats.Count - 1
+            '    ReDim Player(i).Stat(x)
+            'Next
+            'For x = 0 To EquipmentType.Count - 1
+            '    ReDim Player(i).Equipment(x)
+            'Next
 
-            ReDim Player(i).PlayerQuest(MAX_QUESTS)
+            'ReDim Player(i).PlayerQuest(MAX_QUESTS)
 
-            ReDim Player(i).Hotbar(MAX_HOTBAR)
+            'ReDim Player(i).Hotbar(MAX_HOTBAR)
 
-            ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
+            'ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 
-            ReDim Player(i).RecipeLearned(MAX_RECIPE)
+            'ReDim Player(i).RecipeLearned(MAX_RECIPE)
 
-            ReDim Player(i).RandEquip(EquipmentType.Count - 1)
-            ReDim Player(i).RandInv(0 To MAX_INV)
-            For y = 1 To EquipmentType.Count - 1
-                ReDim Player(i).RandEquip(y).Stat(Stats.Count - 1)
-            Next
-            For y = 1 To MAX_INV
-                ReDim Player(i).RandInv(y).Stat(Stats.Count - 1)
-            Next
+            'ReDim Player(i).RandEquip(EquipmentType.Count - 1)
+            'ReDim Player(i).RandInv(0 To MAX_INV)
+            'For y = 1 To EquipmentType.Count - 1
+            '    ReDim Player(i).RandEquip(y).Stat(Stats.Count - 1)
+            'Next
+            'For y = 1 To MAX_INV
+            '    ReDim Player(i).RandInv(y).Stat(Stats.Count - 1)
+            'Next
         Next
 
         ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)
@@ -61,8 +62,8 @@ Module ClientGeneral
         Next
 
         'Housing
-        ReDim House(0 To MAX_HOUSES)
-        ReDim HouseConfig(0 To MAX_HOUSES)
+        ReDim House(MAX_HOUSES)
+        ReDim HouseConfig(MAX_HOUSES)
 
         'quests
         ReDim Quest(MAX_QUESTS)
@@ -70,7 +71,7 @@ Module ClientGeneral
 
         ReDim Map.Npc(0 To MAX_MAP_NPCS)
 
-        ReDim Item(0 To MAX_ITEMS)
+        ReDim Item(MAX_ITEMS)
         For i = 0 To MAX_ITEMS
             For x = 0 To Stats.Count - 1
                 ReDim Item(i).Add_Stat(x)
@@ -83,7 +84,7 @@ Module ClientGeneral
             ReDim Item(i).FurnitureFringe(0 To 3, 0 To 3)
         Next
 
-        ReDim Npc(0 To MAX_NPCS)
+        ReDim Npc(MAX_NPCS)
         For i = 0 To MAX_NPCS
             For x = 0 To Stats.Count - 1
                 ReDim Npc(i).Stat(x)
@@ -96,21 +97,21 @@ Module ClientGeneral
             ReDim Npc(i).Skill(6)
         Next
 
-        ReDim MapNpc(0 To MAX_MAP_NPCS)
+        ReDim MapNpc(MAX_MAP_NPCS)
         For i = 0 To MAX_MAP_NPCS
             For x = 0 To Vitals.Count - 1
                 ReDim MapNpc(i).Vital(x)
             Next
         Next
 
-        ReDim Shop(0 To MAX_SHOPS)
+        ReDim Shop(MAX_SHOPS)
         For i = 0 To MAX_SHOPS
             For x = 0 To MAX_TRADES
                 ReDim Shop(i).TradeItem(x)
             Next
         Next
 
-        ReDim Animation(0 To MAX_ANIMATIONS)
+        ReDim Animation(MAX_ANIMATIONS)
         For i = 0 To MAX_ANIMATIONS
             For x = 0 To 1
                 ReDim Animation(i).Sprite(x)
@@ -126,7 +127,7 @@ Module ClientGeneral
             Next
         Next
 
-        ReDim AnimInstance(0 To MAX_ANIMATIONS)
+        ReDim AnimInstance(MAX_ANIMATIONS)
         For i = 0 To MAX_ANIMATIONS
             For x = 0 To 1
                 ReDim AnimInstance(i).Timer(x)
@@ -142,7 +143,7 @@ Module ClientGeneral
             Next
         Next
 
-        ReDim Bank.Item(0 To MAX_BANK)
+        ReDim Bank.Item(MAX_BANK)
 
         ReDim MapProjectiles(MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)
@@ -153,7 +154,10 @@ Module ClientGeneral
         ClearRecipes()
 
         'party
-        ClearParty()
+        ClearPartie()
+
+        'pets
+        ClearPets()
 
         SetStatus("Loading...")
         GettingMap = True

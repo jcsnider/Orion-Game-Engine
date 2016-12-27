@@ -1,5 +1,4 @@
-﻿
-Module ClientPlayer
+﻿Module ClientPlayer
     Sub CheckAttack()
         Dim attackspeed As Integer, X As Integer, Y As Integer
         Dim Buffer As ByteBuffer
@@ -536,8 +535,6 @@ Module ClientPlayer
         Player(Index).Map = MapNum
     End Sub
 
-
-
     Function GetPlayerInvItemNum(ByVal Index As Integer, ByVal invslot As Integer) As Integer
         GetPlayerInvItemNum = 0
         If Index > MAX_PLAYERS Then Exit Function
@@ -754,6 +751,7 @@ Module ClientPlayer
         Player(Index).Classes = 0
         Player(Index).Dir = 0
 
+        ReDim Player(Index).Equipment(EquipmentType.Count - 1)
         For y = 1 To EquipmentType.Count - 1
             Player(Index).Equipment(y) = 0
         Next
@@ -770,32 +768,71 @@ Module ClientPlayer
         Player(Index).POINTS = 0
         Player(Index).Sprite = 0
 
+        ReDim Player(Index).Stat(Stats.Count - 1)
         For x = 1 To Stats.Count - 1
             Player(Index).Stat(x) = 0
         Next
 
         Player(Index).Steps = 0
 
-        Player(Index).Vital(Vitals.HP) = 0
-        Player(Index).Vital(Vitals.MP) = 0
-        Player(Index).Vital(Vitals.SP) = 0
+        ReDim Player(Index).Vital(Vitals.Count - 1)
+        For i = 1 To Vitals.Count - 1
+            Player(Index).Vital(i) = 0
+        Next
 
         Player(Index).X = 0
         Player(Index).XOffset = 0
         Player(Index).Y = 0
         Player(Index).YOffset = 0
 
+        ReDim Player(Index).RandEquip(EquipmentType.Count - 1)
         For y = 1 To EquipmentType.Count - 1
             ReDim Player(Index).RandEquip(y).Stat(Stats.Count - 1)
             For x = 1 To Stats.Count - 1
                 Player(Index).RandEquip(y).Stat(x) = 0
             Next
         Next
+
+        ReDim Player(Index).RandInv(MAX_INV)
         For y = 1 To MAX_INV
             ReDim Player(Index).RandInv(y).Stat(Stats.Count - 1)
             For x = 1 To Stats.Count - 1
                 Player(Index).RandInv(y).Stat(x) = 0
             Next
         Next
+
+        ReDim Player(Index).PlayerQuest(MAX_QUESTS)
+
+        ReDim Player(Index).Hotbar(MAX_HOTBAR)
+
+        ReDim Player(Index).GatherSkills(ResourceSkills.Count - 1)
+
+        ReDim Player(Index).RecipeLearned(MAX_RECIPE)
+
+        'pets
+        Player(Index).Pet.Num = 0
+        Player(Index).Pet.Health = 0
+        Player(Index).Pet.Mana = 0
+        Player(Index).Pet.Level = 0
+
+        ReDim Player(Index).Pet.stat(Stats.Count - 1)
+        For i = 1 To Stats.Count - 1
+            Player(Index).Pet.stat(i) = 0
+        Next
+
+        ReDim Player(Index).Pet.skill(4)
+        For i = 1 To 4
+            Player(Index).Pet.skill(i) = 0
+        Next
+
+        Player(Index).Pet.X = 0
+        Player(Index).Pet.Y = 0
+        Player(Index).Pet.dir = 0
+        Player(Index).Pet.MaxHp = 0
+        Player(Index).Pet.MaxMP = 0
+        Player(Index).Pet.Alive = 0
+        Player(Index).Pet.AttackBehaviour = 0
+        Player(Index).Pet.Exp = 0
+        Player(Index).Pet.TNL = 0
     End Sub
 End Module

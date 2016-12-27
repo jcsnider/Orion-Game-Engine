@@ -178,7 +178,6 @@
         'pets
         Dim PetTarget As Integer
         Dim PetTargetType As Integer
-        Dim PetTargetZone As Integer
         Dim PetBehavior As Integer
 
         Dim GoToX As Integer
@@ -188,8 +187,8 @@
         Dim PetStunDuration As Integer
         Dim PetAttackTimer As Integer
 
-        Dim PetSpellCD() As Integer
-        Dim PetspellBuffer As SkillBufferRec
+        Dim PetSkillCD() As Integer
+        Dim PetskillBuffer As SkillBufferRec
 
         Dim PetDoT() As DoTRec
         Dim PetHoT() As DoTRec

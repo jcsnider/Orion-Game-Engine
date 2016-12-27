@@ -185,8 +185,11 @@ Module ClientGameLogic
                         For i = 1 To MAX_PLAYERS
                             If IsPlaying(i) Then
                                 ProcessMovement(i)
+                                If PetAlive(i) Then
+                                    ProcessPetMovement(i)
+                                End If
                             End If
-                        Next i
+                        Next
 
                         ' Process npc movements (actually move them)
                         For i = 1 To MAX_MAP_NPCS
@@ -818,7 +821,6 @@ Module ClientGameLogic
                     SendBan(Command(1))
                 ' // Developer Admin Commands //
 
-
                 ' // Creator Admin Commands //
                 ' Giving another player access
                 Case "/setaccess"
@@ -1187,7 +1189,6 @@ Continue1:
                 ItemDescSpeed = "N/A"
             End If
         End If
-
 
     End Sub
 

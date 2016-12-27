@@ -43,14 +43,14 @@ Module ClientPets
         Dim Mana As Integer
         Dim Level As Integer
         Dim stat() As Byte
-        Dim spell() As Integer
+        Dim skill() As Integer
         Dim Points As Integer
         Dim X As Integer
         Dim Y As Integer
         Dim dir As Integer
         Dim MaxHp As Integer
         Dim MaxMP As Integer
-        Dim Alive As Boolean
+        Dim Alive As Byte
         Dim AttackBehaviour As Integer
         Dim Exp As Integer
         Dim TNL As Integer
@@ -74,6 +74,20 @@ Module ClientPets
         buffer.WriteInteger(ClientPackets.CSetBehaviour)
 
         buffer.WriteInteger(Index)
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+
+    End Sub
+
+    Sub SendTrainPetStat(ByVal StatNum As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CPetUseStatPoint)
+
+        buffer.WriteInteger(StatNum)
+
         SendData(buffer.ToArray)
 
         buffer = Nothing
@@ -115,7 +129,7 @@ Module ClientPets
         Next
 
         For i = 1 To 4
-            Player(n).Pet.spell(i) = buffer.ReadInteger
+            Player(n).Pet.skill(i) = buffer.ReadInteger
         Next
 
         Player(n).Pet.X = buffer.ReadInteger
@@ -124,11 +138,8 @@ Module ClientPets
 
         Player(n).Pet.MaxHp = buffer.ReadInteger
         Player(n).Pet.MaxMP = buffer.ReadInteger
-        If buffer.ReadInteger = 1 Then
-            Player(n).Pet.Alive = True
-        Else
-            Player(n).Pet.Alive = False
-        End If
+
+        Player(n).Pet.Alive = buffer.ReadInteger
 
         Player(n).Pet.AttackBehaviour = buffer.ReadInteger
         Player(n).Pet.Points = buffer.ReadInteger
@@ -254,7 +265,7 @@ Module ClientPets
 
     End Sub
 
-    Public Sub Packet_ClearPetSpellBuffer(ByVal Data() As Byte)
+    Public Sub Packet_ClearPetSkillBuffer(ByVal Data() As Byte)
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
@@ -273,7 +284,7 @@ Module ClientPets
 #Region "Database"
     Sub ClearPet(ByVal Index As Integer)
 
-        Pet(Index).Name = vbNullString
+        Pet(Index).Name = ""
 
         ReDim Pet(Index).stat(Stats.Count - 1)
         ReDim Pet(Index).spell(4)
@@ -291,6 +302,7 @@ Module ClientPets
     End Sub
 #End Region
 
+#Region "Movement"
     Sub ProcessPetMovement(ByVal Index As Integer)
 
         ' Check if pet is walking, and if so process moving them over
@@ -342,7 +354,6 @@ Module ClientPets
 
     End Sub
 
-    'frmMain
     Public Sub PetMove(ByVal X As Integer, ByVal Y As Integer)
         Dim buffer As ByteBuffer
         buffer = New ByteBuffer
@@ -358,20 +369,9 @@ Module ClientPets
 
     End Sub
 
-    Sub SendTrainPetStat(ByVal StatNum As Byte)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+#End Region
 
-        buffer.WriteInteger(ClientPackets.CPetUseStatPoint)
-
-        buffer.WriteInteger(StatNum)
-
-        SendData(buffer.ToArray)
-
-        buffer = Nothing
-
-    End Sub
-
+#Region "Drawing"
     Public Sub DrawPet(ByVal Index As Integer)
         Dim Anim As Byte, X As Integer, Y As Integer
         Dim Sprite As Integer, spriteleft As Integer
@@ -389,6 +389,8 @@ Module ClientPets
             Anim = 0
         ElseIf Player(Index).Pet.Steps = 1 Then
             Anim = 2
+        ElseIf Player(Index).Pet.Steps = 2 Then
+            Anim = 3
         End If
 
         ' Check for attacking animation
@@ -398,7 +400,7 @@ Module ClientPets
             End If
         Else
             ' If not attacking, walk normally
-            Select Case GetPlayerDir(Index)
+            Select Case Player(Index).Pet.dir
                 Case Direction.Up
                     If (Player(Index).Pet.YOffset > 8) Then Anim = Player(Index).Pet.Steps
                 Case Direction.Down
@@ -430,15 +432,15 @@ Module ClientPets
                 spriteleft = 1
         End Select
 
-        srcrec = New Rectangle((Anim) * (CharacterGFXInfo(Sprite).width / 4), spriteleft * (CharacterGFXInfo(Sprite).height / 4), (CharacterGFXInfo(Sprite).width / 4), (CharacterGFXInfo(Sprite).height / 4))
+        srcrec = New Rectangle((Anim) * (CharacterGFXInfo(Sprite).Width / 4), spriteleft * (CharacterGFXInfo(Sprite).Height / 4), (CharacterGFXInfo(Sprite).Width / 4), (CharacterGFXInfo(Sprite).Height / 4))
 
         ' Calculate the X
-        X = Player(Index).Pet.X * PIC_X + Player(Index).Pet.XOffset - ((CharacterGFXInfo(Sprite).width / 4 - 32) / 2)
+        X = Player(Index).Pet.X * PIC_X + Player(Index).Pet.XOffset - ((CharacterGFXInfo(Sprite).Width / 4 - 32) / 2)
 
         ' Is the player's height more than 32..?
-        If (CharacterGFXInfo(Sprite).height / 4) > 32 Then
+        If (CharacterGFXInfo(Sprite).Height / 4) > 32 Then
             ' Create a 32 pixel offset for larger sprites
-            Y = Player(Index).Pet.Y * PIC_Y + Player(Index).Pet.YOffset - ((CharacterGFXInfo(Sprite).width / 4) - 32)
+            Y = Player(Index).Pet.Y * PIC_Y + Player(Index).Pet.YOffset - ((CharacterGFXInfo(Sprite).Width / 4) - 32)
         Else
             ' Proceed as normal
             Y = Player(Index).Pet.Y * PIC_Y + Player(Index).Pet.YOffset
@@ -487,11 +489,23 @@ Module ClientPets
             TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - 16
         Else
             ' Determine location for text
-            TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - (CharacterGFXInfo(Pet(Player(Index).Pet.Num).Sprite).height / 4) + 16
+            TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - (CharacterGFXInfo(Pet(Player(Index).Pet.Num).Sprite).Height / 4) + 16
         End If
 
         ' Draw name
         DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
 
     End Sub
+#End Region
+
+#Region "Misc"
+    Public Function PetAlive(ByVal index As Integer) As Boolean
+        PetAlive = False
+
+        If Player(index).Pet.Alive = 1 Then
+            PetAlive = True
+        End If
+
+    End Function
+#End Region
 End Module
