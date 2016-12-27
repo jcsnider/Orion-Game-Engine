@@ -114,8 +114,6 @@
         Packets.Add(ServerPackets.SEventEnd, AddressOf Packet_EventEnd)
         Packets.Add(ServerPackets.SSwitchesAndVariables, AddressOf Packet_SwitchesAndVariables)
         Packets.Add(ServerPackets.SMapEventData, AddressOf Packet_MapEventData)
-        'SChatBubble
-        'SPic
         Packets.Add(ServerPackets.SHoldPlayer, AddressOf Packet_HoldPlayer)
 
         Packets.Add(ServerPackets.SProjectileEditor, AddressOf HandleProjectileEditor)
@@ -130,6 +128,10 @@
 
         'Auto Mapper
         Packets.Add(ServerPackets.SAutoMapper, AddressOf Packet_AutoMapper)
+
+        'pets
+        Packets.Add(ServerPackets.SPetEditor, AddressOf Packet_PetEditor)
+        Packets.Add(ServerPackets.SUpdatePet, AddressOf Packet_UpdatePet)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)

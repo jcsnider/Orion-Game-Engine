@@ -168,6 +168,11 @@ Module ServerPlayers
         SetPlayerMap(Index, MapNum)
         SetPlayerX(Index, x)
         SetPlayerY(Index, y)
+        Player(Index).Character(TempPlayer(Index).CurChar).Pet.x = x
+        Player(Index).Character(TempPlayer(Index).CurChar).Pet.y = y
+        TempPlayer(Index).PetTarget = 0
+        TempPlayer(Index).PetTargetType = 0
+        SendPlayerXY(Index)
 
         ' send equipment of all people on new map
         If GetTotalMapPlayers(MapNum) > 0 Then
@@ -321,6 +326,8 @@ Module ServerPlayers
         SendStats(Index)
         SendJoinMap(Index)
         SendHouseConfigs(Index)
+        SendPets(Index)
+        SendUpdatePlayerPet(Index, True)
         For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
             SendResourceCacheTo(Index, i)
         Next
@@ -374,6 +381,9 @@ Module ServerPlayers
                 TempPlayer(tradeTarget).InTrade = 0
                 SendCloseTrade(tradeTarget)
             End If
+
+            'pet
+            ReleasePet(Index)
 
             SavePlayer(Index)
             SaveBank(Index)
@@ -2235,6 +2245,10 @@ Module ServerPlayers
                     ' Get the recipe num
                     n = Item(InvItemNum).Data1
                     LearnRecipe(Index, n, InvNum)
+                Case ItemType.Pet
+
+                    n = Item(InvItemNum).Data1
+                    SummonPet(Index, n)
             End Select
 
         End If

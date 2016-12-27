@@ -146,7 +146,6 @@ Module ClientGraphics
     Public ChatBubbleGFX As Texture
     Public ChatBubbleGFXInfo As GraphicInfo
 
-
     ' #Day/Night
     'Public NightGfx As Texture
     'Public NightGfxInfo As GraphicInfo
@@ -1056,7 +1055,6 @@ Module ClientGraphics
                 spriteleft = 1
         End Select
 
-
         srcrec = New Rectangle((anim) * (CharacterGFXInfo(Sprite).Width / 4), spriteleft * (CharacterGFXInfo(Sprite).Height / 4), (CharacterGFXInfo(Sprite).Width / 4), (CharacterGFXInfo(Sprite).Height / 4))
 
         ' Calculate the X
@@ -1419,7 +1417,6 @@ Module ClientGraphics
             .Width = ScreenX + 32
         End With
 
-
         UpdateDrawMapName()
 
     End Sub
@@ -1546,7 +1543,6 @@ Module ClientGraphics
             Next
         End If
 
-
         ' Furniture
         If FurnitureHouse > 0 Then
             If FurnitureHouse = Player(MyIndex).InHouse Then
@@ -1619,6 +1615,11 @@ Module ClientGraphics
                     If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(MyIndex) Then
                         If Player(I).Y = Y Then
                             DrawPlayer(I)
+                        End If
+                        If PetAlive(I) Then
+                            If Player(I).Pet.Y = Y Then
+                                DrawPet(I)
+                            End If
                         End If
                     End If
                 Next
@@ -2457,13 +2458,13 @@ Module ClientGraphics
         DrawText(CharWindowX + 250, CharWindowY + 14, "==Basic Stats==", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'strength stat
-        DrawText(CharWindowX + 210, CharWindowY + 30, "Strength: " & GetPlayerStat(MyIndex, Stats.strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 30, "Strength: " & GetPlayerStat(MyIndex, Stats.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'endurance stat
         DrawText(CharWindowX + 210, CharWindowY + 50, "Endurance: " & GetPlayerStat(MyIndex, Stats.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'vitality stat
         DrawText(CharWindowX + 210, CharWindowY + 70, "Vitality: " & GetPlayerStat(MyIndex, Stats.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'intelligence stat
-        DrawText(CharWindowX + 210, CharWindowY + 90, "Intelligence: " & GetPlayerStat(MyIndex, Stats.intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 90, "Intelligence: " & GetPlayerStat(MyIndex, Stats.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'luck stat
         DrawText(CharWindowX + 210, CharWindowY + 110, "Luck: " & GetPlayerStat(MyIndex, Stats.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'spirit stat
@@ -3263,7 +3264,6 @@ NextLoop:
             y = y + 15
         Next
 
-
         If ShiftDown Or VbKeyShift = True Then
             'info
             DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 56, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
@@ -3297,7 +3297,6 @@ NextLoop:
                 y = y + 15
             Next
         End If
-
 
     End Sub
 
@@ -3379,8 +3378,6 @@ NextLoop:
         DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2), RClickY + 85, "Invite to House", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
-
-
 
     Public Sub DrawGUI()
         'hide GUI when mapping...
@@ -3556,7 +3553,6 @@ NextLoop:
     '    tmpNight1.Draw(GameWindow, New RenderStates(BlendMode.Alpha))
     '    tmpNight1.Dispose()
 
-
     '    For x = TileView.left To TileView.right + 1
     '        For y = TileView.top To TileView.bottom + 1
     '            If IsValidMapPoint(x, y) Then
@@ -3579,4 +3575,3 @@ NextLoop:
     'End Sub
 
 End Module
-

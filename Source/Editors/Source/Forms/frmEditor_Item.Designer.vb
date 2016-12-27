@@ -124,6 +124,10 @@ Partial Class frmEditor_Item
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.fraPets = New System.Windows.Forms.GroupBox()
+        Me.scrlPetNum = New System.Windows.Forms.HScrollBar()
+        Me.lblPetNum = New System.Windows.Forms.Label()
+        Me.lblPetName = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraEquipment.SuspendLayout()
@@ -139,6 +143,7 @@ Partial Class frmEditor_Item
         Me.tabPageInfo.SuspendLayout()
         Me.fraRecipe.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.fraPets.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -163,7 +168,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Key", "Currency", "Skill", "Furniture", "Recipe"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Key", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
         Me.cmbType.Location = New System.Drawing.Point(50, 35)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(171, 21)
@@ -973,6 +978,7 @@ Partial Class frmEditor_Item
         '
         'tabPageInfo
         '
+        Me.tabPageInfo.Controls.Add(Me.fraPets)
         Me.tabPageInfo.Controls.Add(Me.lblItemLvl)
         Me.tabPageInfo.Controls.Add(Me.scrlItemLevel)
         Me.tabPageInfo.Controls.Add(Me.Label9)
@@ -1145,6 +1151,44 @@ Partial Class frmEditor_Item
         Me.Label7.TabIndex = 56
         Me.Label7.Text = "Stat Requirements"
         '
+        'fraPets
+        '
+        Me.fraPets.Controls.Add(Me.scrlPetNum)
+        Me.fraPets.Controls.Add(Me.lblPetNum)
+        Me.fraPets.Controls.Add(Me.lblPetName)
+        Me.fraPets.Location = New System.Drawing.Point(228, 157)
+        Me.fraPets.Name = "fraPets"
+        Me.fraPets.Size = New System.Drawing.Size(198, 70)
+        Me.fraPets.TabIndex = 76
+        Me.fraPets.TabStop = False
+        Me.fraPets.Text = "Pets"
+        Me.fraPets.Visible = False
+        '
+        'scrlPetNum
+        '
+        Me.scrlPetNum.Location = New System.Drawing.Point(79, 46)
+        Me.scrlPetNum.Name = "scrlPetNum"
+        Me.scrlPetNum.Size = New System.Drawing.Size(93, 13)
+        Me.scrlPetNum.TabIndex = 2
+        '
+        'lblPetNum
+        '
+        Me.lblPetNum.AutoSize = True
+        Me.lblPetNum.Location = New System.Drawing.Point(10, 46)
+        Me.lblPetNum.Name = "lblPetNum"
+        Me.lblPetNum.Size = New System.Drawing.Size(41, 13)
+        Me.lblPetNum.TabIndex = 1
+        Me.lblPetNum.Text = "Num: 0"
+        '
+        'lblPetName
+        '
+        Me.lblPetName.AutoSize = True
+        Me.lblPetName.Location = New System.Drawing.Point(10, 22)
+        Me.lblPetName.Name = "lblPetName"
+        Me.lblPetName.Size = New System.Drawing.Size(67, 13)
+        Me.lblPetName.TabIndex = 0
+        Me.lblPetName.Text = "Name: None"
+        '
         'frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1184,6 +1228,8 @@ Partial Class frmEditor_Item
         Me.fraRecipe.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.fraPets.ResumeLayout(False)
+        Me.fraPets.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1289,4 +1335,8 @@ Partial Class frmEditor_Item
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents scrlAmmo As HScrollBar
     Friend WithEvents lblAmmo As Label
+    Friend WithEvents fraPets As GroupBox
+    Friend WithEvents scrlPetNum As HScrollBar
+    Friend WithEvents lblPetNum As Label
+    Friend WithEvents lblPetName As Label
 End Class

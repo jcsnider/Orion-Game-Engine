@@ -755,6 +755,13 @@ Module GameEditors
                 frmEditor_Item.fraFurniture.Visible = False
             End If
 
+            If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Pet) Then
+                frmEditor_Item.fraPets.Visible = True
+                frmEditor_Item.scrlPetNum.Value = .Data1
+            Else
+                frmEditor_Item.fraPets.Visible = False
+            End If
+
             ' Basic requirements
             frmEditor_Item.scrlAccessReq.Value = .AccessReq
             frmEditor_Item.scrlLevelReq.Value = .LevelReq

@@ -24,7 +24,15 @@ Public Module ServerResources
             ResourceType = Resource(Resource_index).ResourceType
 
             ' Get the cache number
-            Resource_num = ResourceCache(GetPlayerMap(Index)).ResourceData.Where(Function(r) r.x = x AndAlso r.y = y).Select(Function(r, i) i).Single()
+            For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
+
+                If ResourceCache(GetPlayerMap(Index)).ResourceData(i).x = x Then
+                    If ResourceCache(GetPlayerMap(Index)).ResourceData(i).y = y Then
+                        Resource_num = i
+                    End If
+                End If
+
+            Next
 
             If Resource_num > 0 Then
                 If GetPlayerEquipment(Index, EquipmentType.Weapon) > 0 Or Resource(Resource_index).ToolRequired = 0 Then
@@ -55,7 +63,6 @@ Public Module ServerResources
                             Else
                                 Damage = Item(GetPlayerEquipment(Index, EquipmentType.Weapon)).Data2
                             End If
-
 
                             ' check if damage is more than health
                             If Damage > 0 Then

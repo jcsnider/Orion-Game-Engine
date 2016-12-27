@@ -146,6 +146,15 @@
         SPartyUpdate
         SPartyVitals
 
+        'pets
+        SPetEditor
+        SUpdatePet
+        SUpdatePlayerPet
+        SPetMove
+        SPetDir
+        SPetVital
+        SClearPetSkillBuffer
+
         ' Make sure COUNT is below everything else
         COUNT
     End Enum
@@ -270,6 +279,14 @@
         CLeaveParty
         CPartyChatMsg
 
+        'pets
+        CRequestPets
+        CPetMove
+        CSetBehaviour
+        CReleasePet
+        CPetSpell
+        CPetUseStatPoint
+
         ' Make sure COUNT is below everything else
         Count
     End Enum
@@ -330,6 +347,10 @@
         'AutoMapper
         RequestAutoMap
         SaveAutoMap
+
+        'pets
+        CRequestEditPet
+        CSavePet
 
         ' Make sure COUNT is below everything else
         Count

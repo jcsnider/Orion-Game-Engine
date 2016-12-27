@@ -164,7 +164,7 @@
     End Sub
 #End Region
 
-    Sub ClearPartys()
+    Sub ClearParties()
         Dim i As Integer
 
         For i = 1 To MAX_PARTIES

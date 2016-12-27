@@ -1,0 +1,511 @@
+﻿Imports System.Drawing
+
+Module ClientPets
+#Region "Globals etc"
+    Public Pet() As PetRec
+
+    Public Const PetHpBarWidth As Integer = 129
+    Public Const PetMpBarWidth As Integer = 129
+
+    Public PetSpellBuffer As Integer
+    Public PetSpellBufferTimer As Integer
+    Public PetSpellCD() As Integer
+
+    'Pet Constants
+    Public Const PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT As Byte = 1 'The pet will attack all npcs around
+    Public Const PET_ATTACK_BEHAVIOUR_GUARD As Byte = 2 'If attacked, the pet will fight back
+    Public Const PET_ATTACK_BEHAVIOUR_DONOTHING As Byte = 3 'The pet will not attack even if attacked
+
+    Public Structure PetRec
+        Dim Num As Integer
+        Dim Name As String
+        Dim Sprite As Integer
+
+        Dim Range As Integer
+
+        Dim Level As Integer
+
+        Dim MaxLevel As Integer
+        Dim ExpGain As Integer
+        Dim LevelPnts As Integer
+
+        Dim StatType As Byte '1 for set stats, 2 for relation to owner's stats
+        Dim LevelingType As Byte '0 for leveling on own, 1 for not leveling
+
+        Dim stat() As Byte
+
+        Dim spell() As Integer
+    End Structure
+
+    Public Structure PlayerPetRec
+        Dim Num As Integer
+        Dim Health As Integer
+        Dim Mana As Integer
+        Dim Level As Integer
+        Dim stat() As Byte
+        Dim skill() As Integer
+        Dim Points As Integer
+        Dim X As Integer
+        Dim Y As Integer
+        Dim dir As Integer
+        Dim MaxHp As Integer
+        Dim MaxMP As Integer
+        Dim Alive As Byte
+        Dim AttackBehaviour As Integer
+        Dim Exp As Integer
+        Dim TNL As Integer
+
+        'Client Use Only
+        Dim XOffset As Integer
+        Dim YOffset As Integer
+        Dim Moving As Byte
+        Dim Attacking As Byte
+        Dim AttackTimer As Integer
+        Dim Steps As Byte
+        Dim Damage As Integer
+    End Structure
+#End Region
+
+#Region "Outgoing Packets"
+    Public Sub SendPetBehaviour(ByVal Index As Integer)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CSetBehaviour)
+
+        buffer.WriteInteger(Index)
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+
+    End Sub
+
+    Sub SendTrainPetStat(ByVal StatNum As Byte)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CPetUseStatPoint)
+
+        buffer.WriteInteger(StatNum)
+
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+
+    End Sub
+
+    Sub SendRequestPets()
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteInteger(ClientPackets.CRequestPets)
+        SendData(buffer.ToArray)
+        buffer = Nothing
+
+    End Sub
+#End Region
+
+#Region "Incoming Packets"
+    Public Sub Packet_UpdatePlayerPet(ByVal Data() As Byte)
+        Dim n As Integer, i As Long
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SUpdatePlayerPet Then Exit Sub
+
+        n = buffer.ReadInteger
+
+        'pet
+        Player(n).Pet.Num = buffer.ReadInteger
+        Player(n).Pet.Health = buffer.ReadInteger
+        Player(n).Pet.Mana = buffer.ReadInteger
+        Player(n).Pet.Level = buffer.ReadInteger
+
+        For i = 1 To Stats.Count - 1
+            Player(n).Pet.stat(i) = buffer.ReadInteger
+        Next
+
+        For i = 1 To 4
+            Player(n).Pet.skill(i) = buffer.ReadInteger
+        Next
+
+        Player(n).Pet.X = buffer.ReadInteger
+        Player(n).Pet.Y = buffer.ReadInteger
+        Player(n).Pet.dir = buffer.ReadInteger
+
+        Player(n).Pet.MaxHp = buffer.ReadInteger
+        Player(n).Pet.MaxMP = buffer.ReadInteger
+
+        Player(n).Pet.Alive = buffer.ReadInteger
+
+        Player(n).Pet.AttackBehaviour = buffer.ReadInteger
+        Player(n).Pet.Points = buffer.ReadInteger
+        Player(n).Pet.Exp = buffer.ReadInteger
+        Player(n).Pet.TNL = buffer.ReadInteger
+    End Sub
+
+    Public Sub Packet_UpdatePet(ByVal Data() As Byte)
+        Dim n As Integer, i As Long
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SUpdatePet Then Exit Sub
+
+        n = buffer.ReadInteger
+
+        With Pet(n)
+            .Num = buffer.ReadInteger
+            .Name = buffer.ReadString
+            .Sprite = buffer.ReadInteger
+            .Range = buffer.ReadInteger
+            .Level = buffer.ReadInteger
+            .MaxLevel = buffer.ReadInteger
+            .ExpGain = buffer.ReadInteger
+            .LevelPnts = buffer.ReadInteger
+            .StatType = buffer.ReadInteger
+            .LevelingType = buffer.ReadInteger
+            For i = 1 To Stats.Count - 1
+                .stat(i) = buffer.ReadInteger
+            Next
+            For i = 1 To 4
+                .spell(i) = buffer.ReadInteger
+            Next
+        End With
+
+        buffer = Nothing
+
+    End Sub
+
+    Public Sub Packet_PetMove(ByVal data() As Byte)
+        Dim i As Integer, X As Integer, Y As Integer
+        Dim dir As Integer, Movement As Integer
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SPetMove Then Exit Sub
+
+        i = buffer.ReadInteger
+        X = buffer.ReadInteger
+        Y = buffer.ReadInteger
+        dir = buffer.ReadInteger
+        Movement = buffer.ReadInteger
+
+        With Player(i).Pet
+            .X = X
+            .Y = Y
+            .dir = dir
+            .XOffset = 0
+            .YOffset = 0
+            .Moving = Movement
+
+            Select Case .dir
+                Case Direction.Up
+                    .YOffset = PIC_Y
+                Case Direction.Down
+                    .YOffset = PIC_Y * -1
+                Case Direction.Left
+                    .XOffset = PIC_X
+                Case Direction.Right
+                    .XOffset = PIC_X * -1
+            End Select
+        End With
+
+        buffer = Nothing
+    End Sub
+
+    Public Sub Packet_PetDir(ByVal Data() As Byte)
+        Dim i As Integer
+        Dim dir As Integer
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SPetDir Then Exit Sub
+
+        i = buffer.ReadInteger
+        dir = buffer.ReadInteger
+
+        Player(i).Pet.dir = dir
+
+        buffer = Nothing
+    End Sub
+
+    Public Sub Packet_PetVital(ByVal Data() As Byte)
+        Dim i As Integer
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SPetVital Then Exit Sub
+
+        i = buffer.ReadInteger
+
+        If buffer.ReadInteger = 1 Then
+            Player(i).Pet.MaxHp = buffer.ReadInteger
+            Player(i).Pet.Health = buffer.ReadInteger
+        Else
+            Player(i).Pet.MaxMP = buffer.ReadInteger
+            Player(i).Pet.Mana = buffer.ReadInteger
+        End If
+
+        buffer = Nothing
+
+    End Sub
+
+    Public Sub Packet_ClearPetSkillBuffer(ByVal Data() As Byte)
+        Dim buffer As ByteBuffer
+
+        buffer = New ByteBuffer
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SClearPetSkillBuffer Then Exit Sub
+
+        PetSpellBuffer = 0
+        PetSpellBufferTimer = 0
+
+        buffer = Nothing
+    End Sub
+#End Region
+
+#Region "Database"
+    Sub ClearPet(ByVal Index As Integer)
+
+        Pet(Index).Name = ""
+
+        ReDim Pet(Index).stat(Stats.Count - 1)
+        ReDim Pet(Index).spell(4)
+    End Sub
+
+    Sub ClearPets()
+        Dim i As Integer
+
+        ReDim Pet(MAX_PETS)
+
+        For i = 1 To MAX_PETS
+            ClearPet(i)
+        Next
+
+    End Sub
+#End Region
+
+#Region "Movement"
+    Sub ProcessPetMovement(ByVal Index As Integer)
+
+        ' Check if pet is walking, and if so process moving them over
+
+        If Player(Index).Pet.Moving = MovementType.Walking Then
+
+            Select Case Player(Index).Pet.dir
+                Case Direction.Up
+                    Player(Index).Pet.YOffset = Player(Index).Pet.YOffset - ((ElapsedTime / 1000) * (WALK_SPEED * SIZE_X))
+                    If Player(Index).Pet.YOffset < 0 Then Player(Index).Pet.YOffset = 0
+
+                Case Direction.Down
+                    Player(Index).Pet.YOffset = Player(Index).Pet.YOffset + ((ElapsedTime / 1000) * (WALK_SPEED * SIZE_X))
+                    If Player(Index).Pet.YOffset > 0 Then Player(Index).Pet.YOffset = 0
+
+                Case Direction.Left
+                    Player(Index).Pet.XOffset = Player(Index).Pet.XOffset - ((ElapsedTime / 1000) * (WALK_SPEED * SIZE_X))
+                    If Player(Index).Pet.XOffset < 0 Then Player(Index).Pet.XOffset = 0
+
+                Case Direction.Right
+                    Player(Index).Pet.XOffset = Player(Index).Pet.XOffset + ((ElapsedTime / 1000) * (WALK_SPEED * SIZE_X))
+                    If Player(Index).Pet.XOffset > 0 Then Player(Index).Pet.XOffset = 0
+
+            End Select
+
+            ' Check if completed walking over to the next tile
+            If Player(Index).Pet.Moving > 0 Then
+                If Player(Index).Pet.dir = Direction.Right Or Player(Index).Pet.dir = Direction.Down Then
+                    If (Player(Index).Pet.XOffset >= 0) And (Player(Index).Pet.YOffset >= 0) Then
+                        Player(Index).Pet.Moving = 0
+                        If Player(Index).Pet.Steps = 1 Then
+                            Player(Index).Pet.Steps = 2
+                        Else
+                            Player(Index).Pet.Steps = 1
+                        End If
+                    End If
+                Else
+                    If (Player(Index).Pet.XOffset <= 0) And (Player(Index).Pet.YOffset <= 0) Then
+                        Player(Index).Pet.Moving = 0
+                        If Player(Index).Pet.Steps = 1 Then
+                            Player(Index).Pet.Steps = 2
+                        Else
+                            Player(Index).Pet.Steps = 1
+                        End If
+                    End If
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Public Sub PetMove(ByVal X As Integer, ByVal Y As Integer)
+        Dim buffer As ByteBuffer
+        buffer = New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CPetMove)
+
+        buffer.WriteInteger(X)
+        buffer.WriteInteger(Y)
+
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+
+    End Sub
+
+#End Region
+
+#Region "Drawing"
+    Public Sub DrawPet(ByVal Index As Integer)
+        Dim Anim As Byte, X As Integer, Y As Integer
+        Dim Sprite As Integer, spriteleft As Integer
+        Dim srcrec As Rectangle
+        Dim attackspeed As Integer
+
+        Sprite = Pet(Player(Index).Pet.Num).Sprite
+
+        If Sprite < 1 Or Sprite > NumCharacters Then Exit Sub
+
+        attackspeed = 1000
+
+        ' Reset frame
+        If Player(Index).Pet.Steps = 3 Then
+            Anim = 0
+        ElseIf Player(Index).Pet.Steps = 1 Then
+            Anim = 2
+        ElseIf Player(Index).Pet.Steps = 2 Then
+            Anim = 3
+        End If
+
+        ' Check for attacking animation
+        If Player(Index).Pet.AttackTimer + (attackspeed / 2) > GetTickCount() Then
+            If Player(Index).Pet.Attacking = 1 Then
+                Anim = 3
+            End If
+        Else
+            ' If not attacking, walk normally
+            Select Case Player(Index).Pet.dir
+                Case Direction.Up
+                    If (Player(Index).Pet.YOffset > 8) Then Anim = Player(Index).Pet.Steps
+                Case Direction.Down
+                    If (Player(Index).Pet.YOffset < -8) Then Anim = Player(Index).Pet.Steps
+                Case Direction.Left
+                    If (Player(Index).Pet.XOffset > 8) Then Anim = Player(Index).Pet.Steps
+                Case Direction.Right
+                    If (Player(Index).Pet.XOffset < -8) Then Anim = Player(Index).Pet.Steps
+            End Select
+        End If
+
+        ' Check to see if we want to stop making him attack
+        With Player(Index).Pet
+            If .AttackTimer + attackspeed < GetTickCount() Then
+                .Attacking = 0
+                .AttackTimer = 0
+            End If
+        End With
+
+        ' Set the left
+        Select Case Player(Index).Pet.dir
+            Case Direction.Up
+                spriteleft = 3
+            Case Direction.Right
+                spriteleft = 2
+            Case Direction.Down
+                spriteleft = 0
+            Case Direction.Left
+                spriteleft = 1
+        End Select
+
+        srcrec = New Rectangle((Anim) * (CharacterGFXInfo(Sprite).Width / 4), spriteleft * (CharacterGFXInfo(Sprite).Height / 4), (CharacterGFXInfo(Sprite).Width / 4), (CharacterGFXInfo(Sprite).Height / 4))
+
+        ' Calculate the X
+        X = Player(Index).Pet.X * PIC_X + Player(Index).Pet.XOffset - ((CharacterGFXInfo(Sprite).Width / 4 - 32) / 2)
+
+        ' Is the player's height more than 32..?
+        If (CharacterGFXInfo(Sprite).Height / 4) > 32 Then
+            ' Create a 32 pixel offset for larger sprites
+            Y = Player(Index).Pet.Y * PIC_Y + Player(Index).Pet.YOffset - ((CharacterGFXInfo(Sprite).Width / 4) - 32)
+        Else
+            ' Proceed as normal
+            Y = Player(Index).Pet.Y * PIC_Y + Player(Index).Pet.YOffset
+        End If
+
+        ' render the actual sprite
+        DrawCharacter(Sprite, X, Y, srcrec)
+
+    End Sub
+
+    Public Sub DrawPlayerPetName(ByVal Index As Integer)
+        Dim TextX As Integer
+        Dim TextY As Integer
+        Dim color As SFML.Graphics.Color, backcolor As SFML.Graphics.Color
+        Dim Name As String
+
+        ' Check access level
+        If GetPlayerPK(Index) = False Then
+
+            Select Case GetPlayerAccess(Index)
+                Case 0
+                    color = SFML.Graphics.Color.Red
+                    backcolor = SFML.Graphics.Color.Black
+                Case 1
+                    color = SFML.Graphics.Color.Black
+                    backcolor = SFML.Graphics.Color.White
+                Case 2
+                    color = SFML.Graphics.Color.Cyan
+                    backcolor = SFML.Graphics.Color.Black
+                Case 3
+                    color = SFML.Graphics.Color.Green
+                    backcolor = SFML.Graphics.Color.Black
+                Case 4
+                    color = SFML.Graphics.Color.Yellow
+                    backcolor = SFML.Graphics.Color.Black
+            End Select
+
+        Else
+            color = SFML.Graphics.Color.Red
+        End If
+
+        Name = Trim$(GetPlayerName(Index)) & "'s " & Trim$(Pet(Player(Index).Pet.Num).Name)
+        ' calc pos
+        TextX = ConvertMapX(Player(Index).Pet.X * PIC_X) + Player(Index).Pet.XOffset + (PIC_X \ 2) - getTextWidth(Name) / 2
+        If Pet(Player(Index).Pet.Num).Sprite < 1 Or Pet(Player(Index).Pet.Num).Sprite > NumCharacters Then
+            TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - 16
+        Else
+            ' Determine location for text
+            TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - (CharacterGFXInfo(Pet(Player(Index).Pet.Num).Sprite).Height / 4) + 16
+        End If
+
+        ' Draw name
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+
+    End Sub
+#End Region
+
+#Region "Misc"
+    Public Function PetAlive(ByVal index As Integer) As Boolean
+        PetAlive = False
+
+        If Player(index).Pet.Alive = 1 Then
+            PetAlive = True
+        End If
+
+    End Function
+#End Region
+End Module

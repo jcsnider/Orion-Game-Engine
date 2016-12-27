@@ -2,7 +2,7 @@
 Imports SFML.Graphics
 Imports SFML.Window
 
-Module ClientPartys
+Module ClientParties
 
 #Region "Types and Globals"
     Public Party As PartyRec
@@ -47,7 +47,7 @@ Module ClientPartys
 
         ' exit out if we're not in a party
         If InParty = 0 Then
-            ClearParty()
+            ClearPartie()
             ' exit out early
             Buffer = Nothing
             Exit Sub
@@ -145,8 +145,7 @@ Module ClientPartys
     End Sub
 #End Region
 
-
-    Sub ClearParty()
+    Sub ClearPartie()
         Party = New PartyRec
         Party.Leader = 0
         Party.MemberCount = 0
