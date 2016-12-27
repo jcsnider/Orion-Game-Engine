@@ -191,8 +191,13 @@
         With frmEditor_Pet
             .txtName.Text = Trim$(Pet(EditorIndex).Name)
             If Pet(EditorIndex).Sprite < 0 Or Pet(EditorIndex).Sprite > .scrlSprite.Maximum Then Pet(EditorIndex).Sprite = 0
+
             .scrlSprite.Value = Pet(EditorIndex).Sprite
+            .lblSprite.Text = "Sprite: " & .scrlSprite.Value
+            .EditorPet_DrawPet()
+
             .scrlRange.Value = Pet(EditorIndex).Range
+            .lblRange.Text = "Range: " & .scrlRange.Value
 
             .scrlStrength.Value = Pet(EditorIndex).stat(Stats.Strength)
             .scrlEndurance.Value = Pet(EditorIndex).stat(Stats.Endurance)

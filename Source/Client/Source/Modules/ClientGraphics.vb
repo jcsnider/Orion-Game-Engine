@@ -1649,6 +1649,8 @@ Module ClientGraphics
                         DrawTarget(Player(myTarget).X * 32 - 16 + Player(myTarget).XOffset, Player(myTarget).Y * 32 + Player(myTarget).YOffset)
                     ElseIf myTargetType = TargetType.Npc Then
                         DrawTarget(MapNpc(myTarget).X * 32 - 16 + MapNpc(myTarget).XOffset, MapNpc(myTarget).Y * 32 + MapNpc(myTarget).YOffset)
+                    ElseIf myTargetType = TargetType.Pet Then
+                        DrawTarget(Player(myTarget).Pet.X * 32 - 16 + Player(myTarget).Pet.XOffset, (Player(myTarget).Pet.Y * 32) + Player(myTarget).Pet.YOffset)
                     End If
                 End If
 

@@ -758,6 +758,8 @@ Module GameEditors
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Pet) Then
                 frmEditor_Item.fraPets.Visible = True
                 frmEditor_Item.scrlPetNum.Value = .Data1
+                frmEditor_Item.lblPetNum.Text = "Num: " & frmEditor_Item.scrlPetNum.Value
+                frmEditor_Item.lblPetName.Text = "Name: " & Pet(frmEditor_Item.scrlPetNum.Value).Name
             Else
                 frmEditor_Item.fraPets.Visible = False
             End If

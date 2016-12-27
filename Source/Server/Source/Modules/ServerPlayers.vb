@@ -2395,7 +2395,7 @@ Module ServerPlayers
     Public Sub HandleNpcKillExperience(ByVal Index As Integer, ByVal NpcNum As Integer)
         ' Get the experience we'll have to hand out. If it's negative, just ignore this method.
         Dim Experience = Npc(NpcNum).Exp
-        If Experience < 0 Then Exit Sub
+        If Experience <= 0 Then Exit Sub
 
         ' Is our player in a party? If so, hand out exp to everyone.
         If IsPlayerInParty(Index) Then
@@ -2410,15 +2410,15 @@ Module ServerPlayers
         Dim exp = (GetPlayerExp(Victim) \ 10)
 
         ' Make sure we dont get less then 0
-        If Exp < 0 Then
-            Exp = 0
+        If exp < 0 Then
+            exp = 0
         End If
 
-        If Exp = 0 Then
+        If exp = 0 Then
             PlayerMsg(Victim, "You've lost no exp.", ColorType.BrightRed)
             PlayerMsg(Attacker, "You've received no exp.", ColorType.BrightBlue)
         Else
-            SetPlayerExp(Victim, GetPlayerExp(Victim) - Exp)
+            SetPlayerExp(Victim, GetPlayerExp(Victim) - exp)
             SendExp(Victim)
             PlayerMsg(Victim, String.Format("You've lost {0} exp.", exp), ColorType.BrightRed)
 
@@ -2428,7 +2428,7 @@ Module ServerPlayers
                 Party_ShareExp(GetPlayerParty(Attacker), exp, Attacker, GetPlayerMap(Attacker))
             Else
                 ' not in party, get exp for self
-                GivePlayerEXP(Attacker, Exp)
+                GivePlayerEXP(Attacker, exp)
             End If
         End If
     End Sub
