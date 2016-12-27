@@ -6,9 +6,9 @@
     ' PET constants
     Public Const PET_BEHAVIOUR_FOLLOW As Byte = 0 'The pet will attack all npcs around
     Public Const PET_BEHAVIOUR_GOTO As Byte = 1 'If attacked, the pet will fight back
-    Public Const PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT As Byte = 1 'The pet will attack all npcs around
-    Public Const PET_ATTACK_BEHAVIOUR_GUARD As Byte = 2 'If attacked, the pet will fight back
-    Public Const PET_ATTACK_BEHAVIOUR_DONOTHING As Byte = 3 'The pet will not attack even if attacked
+    Public Const PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT As Byte = 2 'The pet will attack all npcs around
+    Public Const PET_ATTACK_BEHAVIOUR_GUARD As Byte = 3 'If attacked, the pet will fight back
+    Public Const PET_ATTACK_BEHAVIOUR_DONOTHING As Byte = 4 'The pet will not attack even if attacked
 
     Public Structure PetRec
 
@@ -631,6 +631,314 @@
 #End Region
 
 #Region "Pet Functions"
+
+    Public Sub UpdatePetAI()
+        Dim DidWalk As Boolean, GivePetHPTimer As Integer
+        Dim MapNum As Integer, TickCount As Integer, i As Integer, n As Integer
+        Dim DistanceX As Integer, DistanceY As Integer
+        Dim Target As Integer, TargetTypes As Byte, TargetX As Integer, TargetY As Integer, target_verify As Boolean
+
+        For MapNum = 1 To MAX_CACHED_MAPS
+            For x = 1 To MAX_PLAYERS
+
+                If GetPlayerMap(x) = MapNum Then
+                    TickCount = GetTickCount()
+
+                    If PetAlive(x) Then
+                        ' /////////////////////////////////////////
+                        ' // This is used for ATTACKING ON SIGHT //
+                        ' /////////////////////////////////////////
+
+                        ' If the npc is a attack on sight, search for a player on the map
+                        If Player(x).Character(TempPlayer(x).CurChar).Pet.AttackBehaviour <> PET_ATTACK_BEHAVIOUR_DONOTHING Then
+
+                            ' make sure it's not stunned
+                            If Not TempPlayer(x).PetStunDuration > 0 Then
+
+                                For i = 1 To MAX_PLAYERS
+                                    If TempPlayer(x).PetTargetType > 0 Then
+                                        If TempPlayer(x).PetTargetType = 1 And TempPlayer(x).PetTarget = x Then
+                                        Else
+                                            Exit For
+                                        End If
+                                    End If
+
+                                    If IsPlaying(i) And i <> x Then
+                                        If GetPlayerMap(i) = MapNum And GetPlayerAccess(i) <= AdminType.Monitor Then
+                                            If Player(x).Character(TempPlayer(x).CurChar).Pet.Alive = 1 Then
+                                                n = Pet(Player(x).Character(TempPlayer(x).CurChar).Pet.Num).Range
+                                                DistanceX = Player(x).Character(TempPlayer(x).CurChar).Pet.x - Player(i).Character(TempPlayer(i).CurChar).Pet.x
+                                                DistanceY = Player(x).Character(TempPlayer(x).CurChar).Pet.y - Player(i).Character(TempPlayer(i).CurChar).Pet.y
+
+                                                ' Make sure we get a positive value
+                                                If DistanceX < 0 Then DistanceX = DistanceX * -1
+                                                If DistanceY < 0 Then DistanceY = DistanceY * -1
+
+                                                ' Are they in range?  if so GET'M!
+                                                If DistanceX <= n And DistanceY <= n Then
+                                                    If Player(x).Character(TempPlayer(x).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT Then
+                                                        TempPlayer(x).PetTargetType = TargetType.Pet ' pet
+                                                        TempPlayer(x).PetTarget = i
+                                                    End If
+                                                End If
+                                            Else
+                                                n = Pet(Player(x).Character(TempPlayer(x).CurChar).Pet.Num).Range
+                                                DistanceX = Player(x).Character(TempPlayer(x).CurChar).Pet.x - GetPlayerX(i)
+                                                DistanceY = Player(x).Character(TempPlayer(x).CurChar).Pet.y - GetPlayerY(i)
+
+                                                ' Make sure we get a positive value
+                                                If DistanceX < 0 Then DistanceX = DistanceX * -1
+                                                If DistanceY < 0 Then DistanceY = DistanceY * -1
+
+                                                ' Are they in range?  if so GET'M!
+                                                If DistanceX <= n And DistanceY <= n Then
+                                                    If Player(x).Character(TempPlayer(x).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT Then
+                                                        TempPlayer(x).PetTargetType = 1 ' player
+                                                        TempPlayer(x).PetTarget = i
+                                                    End If
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                Next
+
+                                If TempPlayer(x).PetTargetType = 0 Then
+                                    For i = 1 To MAX_MAP_NPCS
+
+                                        If TempPlayer(x).PetTargetType > 0 Then Exit For
+                                        If Player(x).Character(TempPlayer(x).CurChar).Pet.Alive = 1 Then
+                                            n = Pet(Player(x).Character(TempPlayer(x).CurChar).Pet.Num).Range
+                                            DistanceX = Player(x).Character(TempPlayer(x).CurChar).Pet.x - MapNpc(GetPlayerMap(x)).Npc(i).x
+                                            DistanceY = Player(x).Character(TempPlayer(x).CurChar).Pet.y - MapNpc(GetPlayerMap(x)).Npc(i).y
+
+                                            ' Make sure we get a positive value
+                                            If DistanceX < 0 Then DistanceX = DistanceX * -1
+                                            If DistanceY < 0 Then DistanceY = DistanceY * -1
+
+                                            ' Are they in range?  if so GET'M!
+                                            If DistanceX <= n And DistanceY <= n Then
+                                                If Player(x).Character(TempPlayer(x).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT Then
+                                                    TempPlayer(x).PetTargetType = 2 ' npc
+                                                    TempPlayer(x).PetTarget = i
+                                                End If
+                                            End If
+                                        End If
+                                    Next
+                                End If
+                            End If
+
+                            target_verify = False
+
+                            ' /////////////////////////////////////////////
+                            ' // This is used for Pet walking/targetting //
+                            ' /////////////////////////////////////////////
+                            ' Make sure theres a npc with the map
+                            If TempPlayer(x).PetStunDuration > 0 Then
+                                ' check if we can unstun them
+                                If GetTickCount() > TempPlayer(x).PetStunTimer + (TempPlayer(x).PetStunDuration * 1000) Then
+                                    TempPlayer(x).PetStunDuration = 0
+                                    TempPlayer(x).PetStunTimer = 0
+                                End If
+                            Else
+                                Target = TempPlayer(x).PetTarget
+                                TargetTypes = TempPlayer(x).PetTargetType
+
+                                ' Check to see if its time for the npc to walk
+                                If Player(x).Character(TempPlayer(x).CurChar).Pet.AttackBehaviour <> PET_ATTACK_BEHAVIOUR_DONOTHING Then
+
+                                    If TargetTypes = TargetType.Player Then ' player
+                                        ' Check to see if we are following a player or not
+                                        If Target > 0 Then
+
+                                            ' Check if the player is even playing, if so follow'm
+                                            If IsPlaying(Target) And GetPlayerMap(Target) = MapNum Then
+                                                If Target <> x Then
+                                                    DidWalk = False
+                                                    target_verify = True
+                                                    TargetY = GetPlayerY(Target)
+                                                    TargetX = GetPlayerX(Target)
+                                                End If
+                                            Else
+                                                TempPlayer(x).PetTargetType = 0 ' clear
+                                                TempPlayer(x).PetTarget = 0
+                                            End If
+                                        End If
+                                    ElseIf TargetTypes = TargetType.Npc Then 'npc
+                                        If Target > 0 Then
+                                            If MapNpc(MapNum).Npc(Target).Num > 0 Then
+                                                DidWalk = False
+                                                target_verify = True
+                                                TargetY = MapNpc(MapNum).Npc(Target).y
+                                                TargetX = MapNpc(MapNum).Npc(Target).x
+                                            Else
+                                                TempPlayer(x).PetTargetType = 0 ' clear
+                                                TempPlayer(x).PetTarget = 0
+                                            End If
+                                        End If
+                                    ElseIf TargetTypes = TargetType.Pet Then 'other pet
+                                        If Target > 0 Then
+                                            If IsPlaying(Target) And GetPlayerMap(Target) = MapNum And Player(Target).Character(TempPlayer(Target).CurChar).Pet.Alive = 1 Then
+                                                DidWalk = False
+                                                target_verify = True
+                                                TargetY = Player(Target).Character(TempPlayer(Target).CurChar).Pet.y
+                                                TargetX = Player(Target).Character(TempPlayer(Target).CurChar).Pet.x
+                                            Else
+                                                TempPlayer(x).PetTargetType = 0 ' clear
+                                                TempPlayer(x).PetTarget = 0
+                                            End If
+                                        End If
+                                    End If
+                                End If
+
+                                If target_verify Then
+                                    DidWalk = False
+
+                                    If IsOneBlockAway(Player(x).Character(TempPlayer(x).CurChar).Pet.x, Player(x).Character(TempPlayer(x).CurChar).Pet.y, TargetX, TargetY) Then
+                                        If Player(x).Character(TempPlayer(x).CurChar).Pet.x < TargetX Then
+                                            PetDir(x, Direction.Right)
+                                            DidWalk = True
+                                        ElseIf Player(x).Character(TempPlayer(x).CurChar).Pet.x > TargetX Then
+                                            PetDir(x, Direction.Left)
+                                            DidWalk = True
+                                        ElseIf Player(x).Character(TempPlayer(x).CurChar).Pet.y < TargetY Then
+                                            PetDir(x, Direction.Up)
+                                            DidWalk = True
+                                        ElseIf Player(x).Character(TempPlayer(x).CurChar).Pet.y > TargetY Then
+                                            PetDir(x, Direction.Down)
+                                            DidWalk = True
+                                        End If
+
+                                    Else
+                                        DidWalk = PetTryWalk(x, TargetX, TargetY)
+                                    End If
+
+                                ElseIf TempPlayer(x).PetBehavior = PET_BEHAVIOUR_GOTO And target_verify = False Then
+
+                                    If Player(x).Character(TempPlayer(x).CurChar).Pet.x = TempPlayer(x).GoToX And Player(x).Character(TempPlayer(x).CurChar).Pet.y = TempPlayer(x).GoToY Then
+                                        'Unblock these for the random turning
+                                        'i = Int(Rnd * 4)
+                                        'Call PetDir(x, i)
+                                    Else
+                                        DidWalk = False
+                                        TargetX = TempPlayer(x).GoToX
+                                        TargetY = TempPlayer(x).GoToY
+                                        DidWalk = PetTryWalk(x, TargetX, TargetY)
+
+                                        If DidWalk = False Then
+                                            i = Int(Rnd() * 4)
+
+                                            If i = 1 Then
+                                                i = Int(Rnd() * 4)
+                                                If CanPetMove(MapNum, x, i) Then
+                                                    PetMove(MapNum, x, i, MovementType.Walking)
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+
+                                ElseIf TempPlayer(x).PetBehavior = PET_BEHAVIOUR_FOLLOW Then
+
+                                    If IsPetByPlayer(x) Then
+                                        'Unblock these to enable random turning
+                                        'i = Int(Rnd * 4)
+                                        'Call PetDir(x, i)
+                                    Else
+                                        DidWalk = False
+                                        TargetX = GetPlayerX(x)
+                                        TargetY = GetPlayerY(x)
+                                        DidWalk = PetTryWalk(x, TargetX, TargetY)
+
+                                        If DidWalk = False Then
+                                            i = Int(Rnd() * 4)
+                                            If i = 1 Then
+                                                i = Int(Rnd() * 4)
+                                                If CanPetMove(MapNum, x, i) Then
+                                                    PetMove(MapNum, x, i, MovementType.Walking)
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                            End If
+
+                            ' /////////////////////////////////////////////
+                            ' // This is used for pets to attack targets //
+                            ' /////////////////////////////////////////////
+                            ' Make sure theres a npc with the map
+                            Target = TempPlayer(x).PetTarget
+                            TargetTypes = TempPlayer(x).PetTargetType
+
+                            ' Check if the npc can attack the targeted player player
+                            If Target > 0 Then
+                                If TargetTypes = TargetType.Player Then ' player
+                                    ' Is the target playing and on the same map?
+                                    If IsPlaying(Target) And GetPlayerMap(Target) = MapNum Then
+                                        If x <> Target Then TryPetAttackPlayer(x, Target)
+                                    Else
+                                        ' Player left map or game, set target to 0
+                                        TempPlayer(x).PetTarget = 0
+                                        TempPlayer(x).PetTargetType = 0 ' clear
+
+                                    End If
+                                ElseIf TargetTypes = TargetType.Npc Then 'npc
+                                    If MapNpc(GetPlayerMap(x)).Npc(TempPlayer(x).PetTarget).Num > 0 Then
+                                        TryPetAttackNpc(x, TempPlayer(x).PetTarget)
+                                    Else
+                                        ' Player left map or game, set target to 0
+                                        TempPlayer(x).PetTarget = 0
+                                        TempPlayer(x).PetTargetType = 0 ' clear
+                                    End If
+                                ElseIf TargetTypes = TargetType.Pet Then 'pet
+                                    ' Is the target playing and on the same map? And is pet alive??
+                                    If IsPlaying(Target) And GetPlayerMap(Target) = MapNum And Player(Target).Character(TempPlayer(Target).CurChar).Pet.Alive = 1 Then
+                                        TryPetAttackPet(x, Target)
+                                    Else
+                                        ' Player left map or game, set target to 0
+                                        TempPlayer(x).PetTarget = 0
+                                        TempPlayer(x).PetTargetType = 0 ' clear
+                                    End If
+                                End If
+                            End If
+
+                            ' ////////////////////////////////////////////
+                            ' // This is used for regenerating PET's HP //
+                            ' ////////////////////////////////////////////
+                            ' Check to see if we want to regen some of the npc's hp
+                            If Not TempPlayer(x).PetstopRegen Then
+                                If PetAlive(x) And TickCount > GivePetHPTimer + 10000 Then
+                                    If Player(x).Character(TempPlayer(x).CurChar).Pet.Health > 0 Then
+                                        Player(x).Character(TempPlayer(x).CurChar).Pet.Health = Player(x).Character(TempPlayer(x).CurChar).Pet.Health + GetPetVitalRegen(x, Vitals.HP)
+                                        Player(x).Character(TempPlayer(x).CurChar).Pet.Mana = Player(x).Character(TempPlayer(x).CurChar).Pet.Mana + GetPetVitalRegen(x, Vitals.MP)
+
+                                        ' Check if they have more then they should and if so just set it to max
+                                        If Player(x).Character(TempPlayer(x).CurChar).Pet.Health > GetPetMaxVital(x, Vitals.HP) Then
+                                            Player(x).Character(TempPlayer(x).CurChar).Pet.Health = GetPetMaxVital(x, Vitals.HP)
+
+                                        End If
+
+                                        If Player(x).Character(TempPlayer(x).CurChar).Pet.Mana > GetPetMaxVital(x, Vitals.MP) Then
+                                            Player(x).Character(TempPlayer(x).CurChar).Pet.Mana = GetPetMaxVital(x, Vitals.MP)
+                                        End If
+
+                                        SendPetVital(x, Vitals.HP)
+                                        SendPetVital(x, Vitals.MP)
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+                DoEvents()
+            Next
+            DoEvents()
+        Next
+
+        ' Make sure we reset the timer for npc hp regeneration
+        If GetTickCount() > GivePetHPTimer + 10000 Then
+            GivePetHPTimer = GetTickCount()
+        End If
+    End Sub
+
     Sub ReleasePet(ByVal Index As Integer)
         Dim i As Integer
 
@@ -1537,7 +1845,7 @@
         Dim NpcY As Integer
         Dim attackspeed As Integer
 
-        If IsPlaying(Attacker) = False Or mapnpcnum <= 0 Or mapnpcnum > MAX_MAP_NPCS Or Player(Attacker).Character(TempPlayer(Attacker).CurChar).Pet.Alive = 0 Then
+        If IsPlaying(Attacker) = False Or mapnpcnum <= 0 Or mapnpcnum > MAX_MAP_NPCS Or Not PetAlive(Attacker) Then
             Exit Function
         End If
 
@@ -1624,9 +1932,8 @@
         If Skillnum = 0 Then
             ' Send this packet so they can see the pet attacking
             Buffer = New ByteBuffer
-            Buffer.WriteInteger(ServerPackets.SAttack)
+            Buffer.WriteInteger(ServerPackets.SPetAttack)
             Buffer.WriteInteger(Attacker)
-            Buffer.WriteInteger(1)
             SendDataToMap(MapNum, Buffer.ToArray)
             Buffer = Nothing
         End If
@@ -1679,27 +1986,22 @@
             MapNpc(MapNum).Npc(mapnpcnum).TargetType = 0
             MapNpc(MapNum).Npc(mapnpcnum).Target = 0
 
-            '' clear DoTs and HoTs
+            ' clear DoTs and HoTs
             'For i = 1 To MAX_DOTS
-
             '    With MapNpc(MapNum).Npc(mapnpcnum).DoT(i)
             '        .Spell = 0
             '        .Timer = 0
             '        .Caster = 0
             '        .StartTime = 0
             '        .Used = False
-
             '    End With
-
             '    With MapNpc(MapNum).Npc(mapnpcnum).HoT(i)
             '        .Spell = 0
             '        .Timer = 0
             '        .Caster = 0
             '        .StartTime = 0
             '        .Used = False
-
             '    End With
-
             'Next
 
             ' send death to the map
@@ -1713,7 +2015,7 @@
             'Loop through entire map and purge NPC from targets
             For i = 1 To MAX_PLAYERS
 
-                If IsPlaying(i) And IsConnected(i) Then
+                If IsPlaying(i) Then
                     If GetPlayerMap(i) = MapNum Then
                         If TempPlayer(i).TargetType = TargetType.Npc Then
                             If TempPlayer(i).Target = mapnpcnum Then
@@ -1768,7 +2070,7 @@
                 If Skill(Skillnum).StunDuration > 0 Then StunNPC(mapnpcnum, MapNum, Skillnum)
                 ' DoT
                 If Skill(Skillnum).Duration > 0 Then
-                    'AddDoT_Npc MapNum, mapnpcnum, Spellnum, Attacker, 3
+                    'AddDoT_Npc(MapNum, mapnpcnum, Skillnum, Attacker, 3)
                 End If
             End If
 
@@ -1806,7 +2108,7 @@
             Damage = GetNpcDamage(npcnum)
 
             ' take away armour
-            Damage = Damage - ((Player(Index).Character(TempPlayer(Index).CurChar).Pet.stat(Stats.Spirit) * 2) + (Player(Index).Character(TempPlayer(Index).CurChar).Pet.Level * 3))
+            Damage = Damage - ((Player(Index).Character(TempPlayer(Index).CurChar).Pet.stat(Stats.Spirit) * 2) + (Player(Index).Character(TempPlayer(Index).CurChar).Pet.Level * 2))
 
             ' * 1.5 if crit hit
             If CanNpcCrit(npcnum) Then
@@ -1921,7 +2223,7 @@
             MapNpc(MapNum).Npc(mapnpcnum).Target = Victim
             MapNpc(MapNum).Npc(mapnpcnum).TargetType = TargetType.Player
         Else
-            ' Player not dead, just do the damage
+            ' Pet not dead, just do the damage
             Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.Health = Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.Health - Damage
             SendPetVital(Victim, Vitals.HP)
             SendAnimation(MapNum, Npc(MapNpc(GetPlayerMap(Victim)).Npc(mapnpcnum).Num).Animation, 0, 0, TargetType.Pet, Victim)
@@ -1934,8 +2236,8 @@
             SendBlood(GetPlayerMap(Victim), Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.x, Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.y)
 
             ' set the regen timer
-            TempPlayer(Victim).stopRegen = True
-            TempPlayer(Victim).stopRegenTimer = GetTickCount()
+            TempPlayer(Victim).PetstopRegen = True
+            TempPlayer(Victim).PetstopRegenTimer = GetTickCount()
         End If
 
     End Sub

@@ -172,6 +172,13 @@ Module ClientGameLogic
                         SkillBufferTimer = 0
                     End If
                 End If
+                ' check if we need to unlock the pets's spell casting restriction
+                If PetSpellBuffer > 0 Then
+                    If PetSpellBufferTimer + (Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime * 1000) < Tick Then
+                        PetSpellBuffer = 0
+                        PetSpellBufferTimer = 0
+                    End If
+                End If
 
                 SyncLock MapLock
                     If CanMoveNow Then

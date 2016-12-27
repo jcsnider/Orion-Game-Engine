@@ -154,6 +154,7 @@
         SPetDir
         SPetVital
         SClearPetSkillBuffer
+        SPetAttack
 
         ' Make sure COUNT is below everything else
         COUNT

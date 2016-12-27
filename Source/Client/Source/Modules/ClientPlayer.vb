@@ -364,14 +364,26 @@
         ' Check to see if a player is already on that tile
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) And GetPlayerMap(i) = GetPlayerMap(MyIndex) Then
-                If GetPlayerX(i) = X Then
-                    If GetPlayerY(i) = Y Then
-                        CheckDirection = True
-                        Exit Function
+                If Player(i).InHouse = Player(MyIndex).InHouse Then
+                    If GetPlayerX(i) = X Then
+                        If GetPlayerY(i) = Y Then
+                            CheckDirection = True
+                            Exit Function
+                        ElseIf Player(i).Pet.X = X And Player(i).Pet.Alive = True Then
+                            If Player(i).Pet.Y = Y Then
+                                CheckDirection = True
+                                Exit Function
+                            End If
+                        End If
+                    ElseIf Player(i).Pet.X = X And Player(i).Pet.Alive = True Then
+                        If Player(i).Pet.Y = Y Then
+                            CheckDirection = True
+                            Exit Function
+                        End If
                     End If
                 End If
             End If
-        Next i
+        Next
 
         ' Check to see if a npc is already on that tile
         For i = 1 To MAX_MAP_NPCS

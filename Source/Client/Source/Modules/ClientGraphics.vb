@@ -1929,6 +1929,39 @@ Module ClientGraphics
             End If
         Next
 
+        If PetAlive(MyIndex) Then
+            ' draw own health bar
+            If Player(MyIndex).Pet.Health > 0 And Player(MyIndex).Pet.Health <= Player(MyIndex).Pet.MaxHp Then
+                ' lock to Player
+                tmpX = Player(MyIndex).Pet.X * PIC_X + Player(MyIndex).Pet.XOffset
+                tmpY = Player(MyIndex).Pet.Y * PIC_X + Player(MyIndex).Pet.YOffset + 35
+                ' calculate the width to fill
+                barWidth = ((Player(MyIndex).Pet.Health) / (Player(MyIndex).Pet.MaxHp)) * 32
+                ' draw bars
+                rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+                rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY - 75))
+                rectShape.FillColor = SFML.Graphics.Color.Red
+                GameWindow.Draw(rectShape)
+            End If
+        End If
+        ' check for pet casting time bar
+        If PetSpellBuffer > 0 Then
+            If Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime > 0 Then
+                ' lock to pet
+                tmpX = Player(MyIndex).Pet.X * PIC_X + Player(MyIndex).Pet.XOffset
+                tmpY = Player(MyIndex).Pet.Y * PIC_Y + Player(MyIndex).Pet.YOffset + 35
+
+                ' calculate the width to fill
+                barWidth = (GetTickCount() - PetSpellBufferTimer) / ((Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime * 1000)) * 64
+                ' draw bar background
+                rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
+                Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
+                rectShape.Position = New Vector2f(ConvertMapX(tmpX), ConvertMapY(tmpY))
+                rectShape.FillColor = SFML.Graphics.Color.Cyan
+                GameWindow.Draw(rectShape)
+            End If
+        End If
     End Sub
 
     Sub DrawMapName()
@@ -2047,6 +2080,18 @@ Module ClientGraphics
                     ' npc not alive anymore, kill the animation
                     ClearAnimInstance(Index)
                     Exit Sub
+                End If
+            ElseIf AnimInstance(Index).LockType = TargetType.Pet Then
+                ' quick save the index
+                lockindex = AnimInstance(Index).lockindex
+                ' check if is ingame
+                If IsPlaying(lockindex) And PetAlive(lockindex) = True Then
+                    ' check if on same map
+                    If GetPlayerMap(lockindex) = GetPlayerMap(MyIndex) Then
+                        ' is on map, is playing, set x & y
+                        X = (Player(lockindex).Pet.X * PIC_X) + 16 - (width / 2) + Player(lockindex).Pet.XOffset
+                        Y = (Player(lockindex).Pet.Y * PIC_Y) + 16 - (height / 2) + Player(lockindex).Pet.YOffset
+                    End If
                 End If
             End If
         Else

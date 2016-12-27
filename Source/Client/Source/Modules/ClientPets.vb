@@ -12,9 +12,11 @@ Module ClientPets
     Public PetSpellCD() As Integer
 
     'Pet Constants
-    Public Const PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT As Byte = 1 'The pet will attack all npcs around
-    Public Const PET_ATTACK_BEHAVIOUR_GUARD As Byte = 2 'If attacked, the pet will fight back
-    Public Const PET_ATTACK_BEHAVIOUR_DONOTHING As Byte = 3 'The pet will not attack even if attacked
+    Public Const PET_BEHAVIOUR_FOLLOW As Byte = 0 'The pet will attack all npcs around
+    Public Const PET_BEHAVIOUR_GOTO As Byte = 1 'If attacked, the pet will fight back
+    Public Const PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT As Byte = 2 'The pet will attack all npcs around
+    Public Const PET_ATTACK_BEHAVIOUR_GUARD As Byte = 3 'If attacked, the pet will fight back
+    Public Const PET_ATTACK_BEHAVIOUR_DONOTHING As Byte = 4 'The pet will not attack even if attacked
 
     Public Structure PetRec
         Dim Num As Integer
@@ -279,6 +281,23 @@ Module ClientPets
 
         buffer = Nothing
     End Sub
+
+    Public Sub Packet_PetAttack(ByVal Data() As Byte)
+        Dim i As Integer
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> ServerPackets.SPetAttack Then Exit Sub
+
+        i = Buffer.ReadInteger
+
+        ' Set pet to attacking
+        Player(i).Pet.Attacking = 1
+        Player(i).Pet.AttackTimer = GetTickCount()
+
+        Buffer = Nothing
+    End Sub
 #End Region
 
 #Region "Database"
@@ -350,6 +369,12 @@ Module ClientPets
                     End If
                 End If
             End If
+            'Else
+            '    If ShowAnimLayers Then
+            '        Player(Index).Pet.Steps = 3
+            '    Else
+            '        Player(Index).Pet.Steps = 2
+            '    End If
         End If
 
     End Sub
