@@ -194,6 +194,7 @@
         Packets.Add(ServerPackets.SPetDir, AddressOf Packet_PetDir)
         Packets.Add(ServerPackets.SPetVital, AddressOf Packet_PetVital)
         Packets.Add(ServerPackets.SClearPetSkillBuffer, AddressOf Packet_ClearPetSkillBuffer)
+        Packets.Add(ServerPackets.SPetAttack, AddressOf Packet_PetAttack)
     End Sub
 
     Sub HandleDataPackets(ByVal data() As Byte)

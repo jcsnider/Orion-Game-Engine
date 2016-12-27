@@ -185,6 +185,11 @@ Public Class frmMainGame
 
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
+                    If PetAlive(MyIndex) Then
+                        If isInBounds() Then
+                            PetMove(CurX, CurY)
+                        End If
+                    End If
                     ' targetting
                     PlayerSearch(CurX, CurY, 0)
                 Else
