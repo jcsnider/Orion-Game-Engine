@@ -452,7 +452,7 @@ Public Module ServerCombat
 
         ' Check for any mobs on the map with the Guard behaviour so they can come after our player.
         If Npc(MapNpc(MapNum).Npc(MapNpcNum).Num).Behaviour = NpcBehavior.Guard Then
-            For Each Guard In MapNpc(MapNum).Npc.Where(Function(x) x.Num = MapNpc(MapNum).Npc(MapNpcNum).Num).Select(Function(x, y) y).ToArray()
+            For Each Guard In MapNpc(MapNum).Npc.Where(Function(x) x.Num = MapNpc(MapNum).Npc(MapNpcNum).Num).Select(Function(x, y) y + 1).ToArray()
                 MapNpc(MapNum).Npc(Guard).Target = Attacker
                 MapNpc(MapNum).Npc(Guard).TargetType = TargetType.Player
             Next
@@ -1293,14 +1293,9 @@ Public Module ServerCombat
             If CanNpcBlock(npcnum) Then
                 SendActionMsg(MapNum, "Block!", ColorType.BrightCyan, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
                 Damage = 0
-                TempPlayer(Index).Target = mapnpcnum
-                TempPlayer(Index).TargetType = TargetType.Npc
-                TempPlayer(Index).TargetZone = 0
-                SendTarget(Index, 0, TargetType.Npc)
                 Exit Sub
             Else
                 Damage = Damage - ((Npc(npcnum).Stat(Stats.Spirit) * 2) + (Npc(npcnum).Level * 3))
-
                 ' * 1.5 if it's a crit!
                 If CanPlayerCriticalHit(Index) Then
                     Damage = Damage * 1.5
@@ -1357,7 +1352,7 @@ Public Module ServerCombat
         HandlePlayerKilledPK(Attacker, Victim)
 
         ' Remove our player from everyone's target list.
-        For Each p In TempPlayer.Where(Function(x, i) x.InGame AndAlso GetPlayerMap(i) = GetPlayerMap(Victim) AndAlso x.TargetType = TargetType.Player AndAlso x.Target = Victim).Select(Function(x, i) i).ToArray()
+        For Each p In TempPlayer.Where(Function(x, i) x.InGame AndAlso GetPlayerMap(i + 1) = GetPlayerMap(Victim) AndAlso x.TargetType = TargetType.Player AndAlso x.Target = Victim).Select(Function(x, i) i + 1).ToArray()
             TempPlayer(p).Target = 0
             TempPlayer(p).TargetZone = 0
             TempPlayer(p).TargetType = TargetType.None
@@ -1372,11 +1367,6 @@ Public Module ServerCombat
     End Sub
 
     Public Sub HandlePlayerKillNpc(ByVal MapNum As Integer, ByVal Index As Integer, ByVal MapNpcNum As Integer)
-        ' Set our NPC's data to default so we know it's dead.
-        MapNpc(MapNum).Npc(MapNpcNum).Num = 0
-        MapNpc(MapNum).Npc(MapNpcNum).SpawnWait = GetTickCount()
-        MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = 0
-
         ' Set our attacker's target to nothing.
         SendTarget(Index, 0, TargetType.None)
 
@@ -1389,11 +1379,16 @@ Public Module ServerCombat
         ' Handle quest tasks related to NPC death
         CheckTasks(Index, QUEST_TYPE_GOSLAY, MapNpc(MapNum).Npc(MapNpcNum).Num)
 
+        ' Set our NPC's data to default so we know it's dead.
+        MapNpc(MapNum).Npc(MapNpcNum).Num = 0
+        MapNpc(MapNum).Npc(MapNpcNum).SpawnWait = GetTickCount()
+        MapNpc(MapNum).Npc(MapNpcNum).Vital(Vitals.HP) = 0
+
         ' Notify all our clients that the NPC has died.
         SendNpcDead(MapNum, MapNpcNum)
 
         ' Check if our dead NPC is targetted by another player and remove their targets.
-        For Each p In TempPlayer.Where(Function(x, i) x.InGame AndAlso GetPlayerMap(i) = MapNum AndAlso x.TargetType = TargetType.Npc AndAlso x.Target = MapNpcNum).Select(Function(x, i) i).ToArray()
+        For Each p In TempPlayer.Where(Function(x, i) x.InGame AndAlso GetPlayerMap(i + 1) = MapNum AndAlso x.TargetType = TargetType.Npc AndAlso x.Target = MapNpcNum).Select(Function(x, i) i + 1).ToArray()
             TempPlayer(p).Target = 0
             TempPlayer(p).TargetZone = 0
             TempPlayer(p).TargetType = TargetType.None

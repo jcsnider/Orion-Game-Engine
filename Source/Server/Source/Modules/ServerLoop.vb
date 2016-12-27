@@ -1244,10 +1244,7 @@ Module ServerLoop
 
         ' Determine what kind of spell we're dealing with and process it.
         Select Case Skill(SkillId).Type
-            Case SkillType.DamageHp
-            Case SkillType.DamageMp
-            Case SkillType.HealHp
-            Case SkillType.HealMp
+            Case SkillType.DamageHp, SkillType.DamageMp, SkillType.HealHp, SkillType.HealMp
                 HandleAoE(Index, SkillId, CenterX, CenterY)
 
             Case Else
@@ -1280,10 +1277,7 @@ Module ServerLoop
 
         ' Determine what kind of spell we're dealing with and process it.
         Select Case Skill(SkillId).Type
-            Case SkillType.DamageHp
-            Case SkillType.DamageMp
-            Case SkillType.HealHp
-            Case SkillType.HealMp
+            Case SkillType.HealMp, SkillType.DamageHp, SkillType.DamageMp, SkillType.HealHp
                 HandleAoE(Index, SkillId, CenterX, CenterY)
 
             Case Else
@@ -1379,14 +1373,13 @@ Module ServerLoop
                     ' Handle our quest system stuff.
                     CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
                 End If
-
             Case Else
                 Throw New NotImplementedException()
 
         End Select
 
         ' Play our animation.
-        SendAnimation(GetPlayerMap(Index), Skill(SkillId).SkillAnim, 0, 0, TargetType, Index)
+        SendAnimation(GetPlayerMap(Index), Skill(SkillId).SkillAnim, 0, 0, TargetType, Target)
     End Sub
 
     Private Sub HandleAoE(ByVal Index As Integer, ByVal SkillId As Integer, ByVal X As Integer, ByVal Y As Integer)
@@ -1420,7 +1413,7 @@ Module ServerLoop
         End Select
 
         ' Loop through all online players on the current map.
-        For Each id In TempPlayer.Where(Function(p) p.InGame).Select(Function(p, i) i + 1).Where(Function(i) GetPlayerMap(i) = Map).ToArray()
+        For Each id In TempPlayer.Where(Function(p) p.InGame).Select(Function(p, i) i + 1).Where(Function(i) GetPlayerMap(i) = Map AndAlso i <> Index).ToArray()
             If isInRange(Range, X, Y, GetPlayerX(id), GetPlayerY(id)) Then
 
                 ' Deal with damaging abilities.
