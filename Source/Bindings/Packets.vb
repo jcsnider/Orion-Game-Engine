@@ -285,7 +285,7 @@
         CPetMove
         CSetBehaviour
         CReleasePet
-        CPetSpell
+        CPetSkill
         CPetUseStatPoint
 
         ' Make sure COUNT is below everything else

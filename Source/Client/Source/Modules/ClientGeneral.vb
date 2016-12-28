@@ -20,32 +20,6 @@ Module ClientGeneral
 
         For i = 0 To MAX_PLAYERS
             ClearPlayer(i)
-            'For x = 0 To Vitals.Count - 1
-            '    ReDim Player(i).Vital(x)
-            'Next
-            'For x = 0 To Stats.Count - 1
-            '    ReDim Player(i).Stat(x)
-            'Next
-            'For x = 0 To EquipmentType.Count - 1
-            '    ReDim Player(i).Equipment(x)
-            'Next
-
-            'ReDim Player(i).PlayerQuest(MAX_QUESTS)
-
-            'ReDim Player(i).Hotbar(MAX_HOTBAR)
-
-            'ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
-
-            'ReDim Player(i).RecipeLearned(MAX_RECIPE)
-
-            'ReDim Player(i).RandEquip(EquipmentType.Count - 1)
-            'ReDim Player(i).RandInv(0 To MAX_INV)
-            'For y = 1 To EquipmentType.Count - 1
-            '    ReDim Player(i).RandEquip(y).Stat(Stats.Count - 1)
-            'Next
-            'For y = 1 To MAX_INV
-            '    ReDim Player(i).RandInv(y).Stat(Stats.Count - 1)
-            'Next
         Next
 
         ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)
@@ -406,9 +380,17 @@ Module ClientGeneral
         If Options.ScreenSize = 0 Then
             HotbarX = HUDWindowX + HUDPanelGFXInfo.Width + 20
             HotbarY = 5
+
+            'petbar
+            PetbarX = HotbarX
+            PetbarY = HotbarY + 34
         Else
             HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
             HotbarY = frmMainGame.Height - HotBarGFXInfo.Height - 45
+
+            'petbar
+            PetbarX = HotbarX
+            PetbarY = HotbarY - 34
         End If
 
         'action panel

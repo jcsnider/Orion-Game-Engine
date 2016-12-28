@@ -153,6 +153,9 @@
 
         n = buffer.ReadInteger
 
+        ReDim Pet(n).stat(Stats.Count - 1)
+        ReDim Pet(n).skill(4)
+
         With Pet(n)
             .Num = buffer.ReadInteger
             .Name = buffer.ReadString
@@ -184,9 +187,6 @@
 
         If frmEditor_Pet.Visible = False Then Exit Sub
         EditorIndex = frmEditor_Pet.lstIndex.SelectedIndex + 1
-
-        ReDim Pet(EditorIndex).stat(Stats.Count - 1)
-        ReDim Pet(EditorIndex).skill(4)
 
         With frmEditor_Pet
             .txtName.Text = Trim$(Pet(EditorIndex).Name)

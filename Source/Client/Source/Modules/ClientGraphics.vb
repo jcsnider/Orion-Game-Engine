@@ -147,6 +147,9 @@ Module ClientGraphics
     Public ChatBubbleGFX As Texture
     Public ChatBubbleGFXInfo As GraphicInfo
 
+    Public PetBarGFX As Texture
+    Public PetbarGFXInfo As GraphicInfo
+
     ' #Day/Night
     'Public NightGfx As Texture
     'Public NightGfxInfo As GraphicInfo
@@ -504,6 +507,16 @@ Module ClientGraphics
             'Cache the width and height
             ChatBubbleGFXInfo.Width = ChatBubbleGFX.Size.X
             ChatBubbleGFXInfo.Height = ChatBubbleGFX.Size.Y
+        End If
+
+        PetbarGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Petbar" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            PetBarGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\Petbar" & GFX_EXT)
+
+            'Cache the width and height
+            PetbarGFXInfo.Width = PetBarGFX.Size.X
+            PetbarGFXInfo.Height = PetBarGFX.Size.Y
         End If
 
         'LightGfxInfo = New GraphicInfo
@@ -1790,6 +1803,9 @@ Module ClientGraphics
         For I = 1 To MAX_PLAYERS
             If IsPlaying(I) And GetPlayerMap(I) = GetPlayerMap(MyIndex) Then
                 DrawPlayerName(I)
+                If PetAlive(I) Then
+                    DrawPlayerPetName(I)
+                End If
             End If
         Next
 
@@ -3448,6 +3464,7 @@ NextLoop:
             DrawActionPanel()
             DrawChat()
             DrawHotbar()
+            DrawPetBar()
         End If
 
         If pnlCharacterVisible = True Then

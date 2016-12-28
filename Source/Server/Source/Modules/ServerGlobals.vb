@@ -2,6 +2,7 @@
     Public Debugging As Boolean
 
     Public ConsoleText As String
+    Public ErrorCount As Integer
 
     ' Used for closing key doors again
     Public KeyTimer As Integer

@@ -470,7 +470,7 @@
 
     Public Structure SkillBufferRec
 
-        Dim Spell As Integer
+        Dim Skill As Integer
         Dim Timer As Integer
         Dim Target As Integer
         Dim TargetZone As Integer

@@ -76,11 +76,11 @@ Module ServerGeneral
             For x = 1 To MAX_CHARS
                 ReDim Player(i).Character(x).Switches(MAX_SWITCHES)
                 ReDim Player(i).Character(x).Variables(MAX_VARIABLES)
-                ReDim Player(i).Character(x).Vital(0 To Vitals.Count - 1)
-                ReDim Player(i).Character(x).Stat(0 To Stats.Count - 1)
-                ReDim Player(i).Character(x).Equipment(0 To EquipmentType.Count - 1)
-                ReDim Player(i).Character(x).Inv(0 To MAX_INV)
-                ReDim Player(i).Character(x).Skill(0 To MAX_PLAYER_SKILLS)
+                ReDim Player(i).Character(x).Vital(Vitals.Count - 1)
+                ReDim Player(i).Character(x).Stat(Stats.Count - 1)
+                ReDim Player(i).Character(x).Equipment(EquipmentType.Count - 1)
+                ReDim Player(i).Character(x).Inv(MAX_INV)
+                ReDim Player(i).Character(x).Skill(MAX_PLAYER_SKILLS)
                 ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
 
                 ReDim Player(i).Character(x).RandEquip(EquipmentType.Count - 1)
@@ -98,6 +98,7 @@ Module ServerGeneral
 
         For i = 0 To MAX_PLAYERS
             ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
+            ReDim TempPlayer(i).PetSkillCD(4)
         Next
 
         For i = 0 To MAX_PLAYERS
@@ -158,6 +159,7 @@ Module ServerGeneral
         CheckDir(Path.Combine(Application.StartupPath, "data", "quests"))
         CheckDir(Path.Combine(Application.StartupPath, "data", "recipes"))
         CheckDir(Path.Combine(Application.StartupPath, "data", "pets"))
+        CheckDir(Path.Combine(Application.StartupPath, "data", "projectiles"))
 
         ' set quote character
         vbQuote = Chr(34) ' "
@@ -261,7 +263,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online)", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline())
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) Current Errors: {4}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount)
     End Sub
 
     Sub DestroyServer()
@@ -418,8 +420,9 @@ Module ServerGeneral
             sw.WriteLine(GetExceptionInfo(e))
         End Using
 
-        MessageBox.Show("An unexpected error occured. Check the error log for details.")
-        End
+        ErrorCount = ErrorCount + 1
+
+        UpdateCaption()
     End Sub
 
     Public Function GetExceptionInfo(ex As Exception) As String

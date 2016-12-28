@@ -4,6 +4,10 @@ Module ClientPets
 #Region "Globals etc"
     Public Pet() As PetRec
 
+    Public Const PetbarTop As Byte = 2
+    Public Const PetbarLeft As Byte = 2
+    Public Const PetbarOffsetX As Byte = 4
+    Public Const MAX_PETBAR As Byte = 7
     Public Const PetHpBarWidth As Integer = 129
     Public Const PetMpBarWidth As Integer = 129
 
@@ -97,13 +101,24 @@ Module ClientPets
     End Sub
 
     Sub SendRequestPets()
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
         buffer.WriteInteger(ClientPackets.CRequestPets)
         SendData(buffer.ToArray)
         buffer = Nothing
 
+    End Sub
+
+    Sub SendUsePetSkill(ByVal skill As Integer)
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CPetSkill)
+        buffer.WriteInteger(skill)
+        SendData(buffer.ToArray)
+
+        buffer = Nothing
+
+        PetSpellBuffer = skill
+        PetSpellBufferTimer = GetTickCount()
     End Sub
 #End Region
 
@@ -313,6 +328,7 @@ Module ClientPets
         Dim i As Integer
 
         ReDim Pet(MAX_PETS)
+        ReDim PetSpellCD(4)
 
         For i = 1 To MAX_PETS
             ClearPet(i)
@@ -521,6 +537,56 @@ Module ClientPets
         DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
 
     End Sub
+
+    Sub DrawPetBar()
+        Dim skillnum As Integer, skillpic As Integer
+        Dim rec As Rectangle, rec_pos As Rectangle
+
+        If Not PetAlive(MyIndex) Then Exit Sub
+
+        RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
+
+        For i = 1 To 4
+            skillnum = Player(MyIndex).Pet.skill(i)
+
+            If skillnum > 0 Then
+                skillpic = Skill(skillnum).Icon
+
+                If SkillIconsGFXInfo(skillpic).IsLoaded = False Then
+                    LoadTexture(skillpic, 9)
+                End If
+
+                'seeying we still use it, lets update timer
+                With SkillIconsGFXInfo(skillpic)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+                With rec
+                    .Y = 0
+                    .Height = 32
+                    .X = 0
+                    .Width = 32
+                End With
+
+                If Not PetSpellCD(i) = 0 Then
+                    rec.X = 32
+                    rec.Width = 32
+                End If
+
+                With rec_pos
+                    .Y = PetbarY + PetbarTop
+                    .Height = PIC_Y
+                    .X = PetbarX + PetbarLeft + ((PetbarOffsetX - 2) + 32) * (((i - 1) + 3))
+                    .Width = PIC_X
+                End With
+
+                RenderTextures(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+            End If
+
+        Next
+
+    End Sub
+
 #End Region
 
 #Region "Misc"
@@ -530,6 +596,31 @@ Module ClientPets
         If Player(index).Pet.Alive = 1 Then
             PetAlive = True
         End If
+
+    End Function
+
+    Public Function IsPetBarSlot(ByVal X As Single, ByVal Y As Single) As Integer
+        Dim tempRec As RECT
+        Dim i As Integer
+
+        IsPetBarSlot = 0
+
+        For i = 1 To MAX_PETBAR
+
+            With tempRec
+                .top = PetbarY + PetbarTop
+                .bottom = .top + PIC_Y
+                .left = PetbarX + PetbarLeft + ((PetbarOffsetX + 32) * (((i - 1) Mod MAX_PETBAR)))
+                .right = .left + PIC_X
+            End With
+
+            If X >= tempRec.left And X <= tempRec.right Then
+                If Y >= tempRec.top And Y <= tempRec.bottom Then
+                    IsPetBarSlot = i
+                    Exit Function
+                End If
+            End If
+        Next
 
     End Function
 #End Region

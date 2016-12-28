@@ -41,7 +41,7 @@ Module ServerLoop
                 ' Check if any of our pets has completed casting and get their skill going if they have.
                 Dim _petskills = (
                 From p In OnlinePlayers
-                Where Player(p.Index).Character(p.Player.CurChar).Pet.Alive = 1 AndAlso TempPlayer(p.Index).PetskillBuffer.Spell > 0 AndAlso GetTickCount() > p.Player.PetskillBuffer.Timer + (Skill(Player(p.Index).Character(p.Player.CurChar).Pet.Skill(p.Player.PetskillBuffer.Spell)).CastTime * 1000)
+                Where Player(p.Index).Character(p.Player.CurChar).Pet.Alive = 1 AndAlso TempPlayer(p.Index).PetskillBuffer.Skill > 0 AndAlso GetTickCount() > p.Player.PetskillBuffer.Timer + (Skill(Player(p.Index).Character(p.Player.CurChar).Pet.Skill(p.Player.PetskillBuffer.Skill)).CastTime * 1000)
                 Select New With {Key .Index = p.Index, Key .Success = HandlePetSkill(p.Index)}
                 ).ToArray()
 
@@ -854,8 +854,8 @@ Module ServerLoop
     End Function
 
     Public Function HandlePetSkill(ByVal Index As Integer) As Boolean
-        PetCastSpell(Index, TempPlayer(Index).PetskillBuffer.Spell, TempPlayer(Index).PetskillBuffer.Target, TempPlayer(Index).PetskillBuffer.tType, True, TempPlayer(Index).PetskillBuffer.TargetZone)
-        TempPlayer(Index).PetskillBuffer.Spell = 0
+        PetCastSpell(Index, TempPlayer(Index).PetskillBuffer.Skill, TempPlayer(Index).PetskillBuffer.Target, TempPlayer(Index).PetskillBuffer.tType, True, TempPlayer(Index).PetskillBuffer.TargetZone)
+        TempPlayer(Index).PetskillBuffer.Skill = 0
         TempPlayer(Index).PetskillBuffer.Timer = 0
         TempPlayer(Index).PetskillBuffer.Target = 0
         TempPlayer(Index).PetskillBuffer.tType = 0

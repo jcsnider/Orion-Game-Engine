@@ -135,7 +135,7 @@ Module ServerHandleData
         Packets.Add(ClientPackets.CPetMove, AddressOf Packet_PetMove)
         Packets.Add(ClientPackets.CSetBehaviour, AddressOf Packet_SetPetBehaviour)
         Packets.Add(ClientPackets.CReleasePet, AddressOf Packet_ReleasePet)
-        Packets.Add(ClientPackets.CPetSpell, AddressOf Packet_PetSpell)
+        Packets.Add(ClientPackets.CPetSkill, AddressOf Packet_PetSkill)
         Packets.Add(ClientPackets.CPetUseStatPoint, AddressOf Packet_UsePetStatPoint)
 
         'editor login
@@ -172,6 +172,7 @@ Module ServerHandleData
         'pet
         Packets.Add(EditorPackets.CRequestEditPet, AddressOf Packet_RequestEditPet)
         Packets.Add(EditorPackets.CSavePet, AddressOf Packet_SavePet)
+
     End Sub
 
     Public Sub HandleDataPackets(ByVal index As Integer, ByVal data() As Byte)

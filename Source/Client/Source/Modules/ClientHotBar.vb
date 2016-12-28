@@ -69,7 +69,7 @@ Public Module ClientHotBar
     Sub DrawHotbar()
         Dim i As Integer, skillnum As Integer, skillpic As Integer
         Dim rec As Rectangle, rec_pos As Rectangle
-        If NumItems = 0 Then Exit Sub
+        'If Numspells = 0 Then Exit Sub
 
         RenderTextures(HotBarGFX, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.Width, HotBarGFXInfo.Height)
 

@@ -166,8 +166,6 @@ Public Module ClientGuiFunctions
             End If
         End If
 
-
-
     End Sub
 
     Public Function CheckGuiClick(ByVal X As Integer, ByVal Y As Integer, ByVal e As MouseEventArgs) As Boolean
@@ -250,6 +248,8 @@ Public Module ClientGuiFunctions
                             PlaySound("Click.ogg")
                             PlayerCastSkill(skillnum)
                         End If
+
+                        CheckGuiClick = True
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click
                     If Player(MyIndex).Hotbar(hotbarslot).Slot > 0 Then
@@ -258,7 +258,6 @@ Public Module ClientGuiFunctions
                         If result1 = DialogResult.Yes Then
                             SendDeleteHotbar(IsHotBarSlot(e.Location.X, e.Location.Y))
                         End If
-
 
                         CheckGuiClick = True
                     Else
@@ -274,6 +273,36 @@ Public Module ClientGuiFunctions
                 End If
                 CheckGuiClick = True
             End If
+
+            If AbovePetbar(X, Y) Then
+                hotbarslot = IsPetBarSlot(e.Location.X, e.Location.Y)
+
+                If e.Button = MouseButtons.Left Then
+                    If hotbarslot > 0 Then
+                        If hotbarslot >= 1 AndAlso hotbarslot <= 3 Then
+                            If hotbarslot = 1 Then
+                                'summon
+                            ElseIf hotbarslot = 2 Then
+                                SendPetBehaviour(PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT)
+                            ElseIf hotbarslot = 3 Then
+                                SendPetBehaviour(PET_ATTACK_BEHAVIOUR_GUARD)
+                            End If
+
+                        ElseIf hotbarslot >= 4 AndAlso hotbarslot <= 7 Then
+                            skillnum = Player(MyIndex).Pet.skill(hotbarslot - 3)
+
+                            If skillnum <> 0 Then
+                                PlaySound("Click.ogg")
+                                SendUsePetSkill(skillnum)
+                            End If
+                        End If
+
+                        CheckGuiClick = True
+                    End If
+                End If
+
+                CheckGuiClick = True
+            End If
         End If
 
         'Charpanel
@@ -281,7 +310,6 @@ Public Module ClientGuiFunctions
             If AboveCharpanel(X, Y) Then
                 ' left click
                 If e.Button = MouseButtons.Left Then
-
 
                     'lets see if they want to upgrade
                     'Strenght
@@ -352,7 +380,7 @@ Public Module ClientGuiFunctions
                         If InTrade Then Exit Function
                         If InBank Or InShop Then Exit Function
 
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.FURNITURE Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Furniture Then
                             PlaySound("Click.ogg")
                             FurnitureSelected = InvNum
                             CheckGuiClick = True
@@ -702,7 +730,7 @@ Public Module ClientGuiFunctions
 
                     ' in bank?
                     If InBank Then
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             CurrencyMenu = 2 ' deposit
                             frmMainGame.lblCurrency.Text = "How many do you want to deposit?"
                             tmpCurrencyItem = InvNum
@@ -724,7 +752,7 @@ Public Module ClientGuiFunctions
                                 Exit Function
                             End If
                         Next
-                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                        If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             ' currency shit here brah
                             Exit Function
                         End If
@@ -733,7 +761,7 @@ Public Module ClientGuiFunctions
                     End If
 
                     ' use item if not doing anything else
-                    If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.NONE Then Exit Function
+                    If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.None Then Exit Function
                     SendUseItem(InvNum)
                     Exit Function
                 End If
@@ -761,9 +789,9 @@ Public Module ClientGuiFunctions
 
                 BankItem = IsBankItem(BankX, BankY)
                 If BankItem <> 0 Then
-                    If GetBankItemNum(BankItem) = ItemType.NONE Then Exit Function
+                    If GetBankItemNum(BankItem) = ItemType.None Then Exit Function
 
-                    If Item(GetBankItemNum(BankItem)).Type = ItemType.CURRENCY Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
+                    If Item(GetBankItemNum(BankItem)).Type = ItemType.Currency Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
                         CurrencyMenu = 3 ' withdraw
                         frmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
                         tmpCurrencyItem = BankItem
@@ -830,7 +858,7 @@ Public Module ClientGuiFunctions
             Else
                 If FurnitureSelected > 0 Then
                     If Player(MyIndex).InHouse = MyIndex Then
-                        If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.FURNITURE Then
+                        If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.Furniture Then
                             buffer = New ByteBuffer
                             buffer.WriteInteger(ClientPackets.CPlaceFurniture)
                             i = CurX
@@ -931,7 +959,7 @@ Public Module ClientGuiFunctions
                 ElseIf e.Button = MouseButtons.Right Then
                     If Not InBank And Not InShop And Not InTrade Then
                         If InvNum <> 0 Then
-                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.CURRENCY Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
+                            If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                                 If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
                                     CurrencyMenu = 1 ' drop
                                     frmMainGame.lblCurrency.Text = "How many do you want to drop?"
@@ -1258,6 +1286,16 @@ Public Module ClientGuiFunctions
         End If
     End Function
 
+    Function AbovePetbar(ByVal X As Single, ByVal Y As Single) As Boolean
+        AbovePetbar = False
+
+        If X > PetbarX And X < PetbarX + PetbarGFXInfo.Width Then
+            If Y > PetbarY And Y < PetbarY + HotBarGFXInfo.Height Then
+                AbovePetbar = True
+            End If
+        End If
+    End Function
+
     Function AboveInvpanel(ByVal X As Single, ByVal Y As Single) As Boolean
         AboveInvpanel = False
 
@@ -1378,6 +1416,5 @@ Public Module ClientGuiFunctions
         End If
     End Function
 #End Region
-
 
 End Module

@@ -152,6 +152,10 @@
     Public HotbarX As Integer = 489
     Public HotbarY As Integer = 825
 
+    'pet bar
+    Public PetbarX As Integer = 489
+    Public PetbarY As Integer = 800
+
     'Inventory window Coordinates
     Public InvWindowX As Integer = 943
     Public InvWindowY As Integer = 475
