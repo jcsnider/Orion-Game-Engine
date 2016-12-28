@@ -57,7 +57,7 @@ Module ServerLoop
                     From p In OnlinePlayers
                     Where p.Player.PetstopRegen = True AndAlso p.Player.PetstopRegenTimer + 5000 < GetTickCount()
                     Select New With {Key .Index = p.Index, Key .Success = HandleStopPetRegen(p.Index)}
-            ).ToArray()
+                ).ToArray()
 
                 ' HoT and DoT logic
                 'For x = 1 To MAX_DOTS

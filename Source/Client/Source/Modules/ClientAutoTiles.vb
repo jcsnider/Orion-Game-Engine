@@ -413,15 +413,15 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 1, "e")
+                PlaceAutotile(layerNum, X, Y, 1, "e")
             Case AUTO_OUTER
-                placeAutotile(layerNum, X, Y, 1, "a")
+                PlaceAutotile(layerNum, X, Y, 1, "a")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 1, "i")
+                PlaceAutotile(layerNum, X, Y, 1, "i")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 1, "m")
+                PlaceAutotile(layerNum, X, Y, 1, "m")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 1, "q")
+                PlaceAutotile(layerNum, X, Y, 1, "q")
         End Select
 
     End Sub
@@ -450,15 +450,15 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 2, "j")
+                PlaceAutotile(layerNum, X, Y, 2, "j")
             Case AUTO_OUTER
-                placeAutotile(layerNum, X, Y, 2, "b")
+                PlaceAutotile(layerNum, X, Y, 2, "b")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 2, "f")
+                PlaceAutotile(layerNum, X, Y, 2, "f")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 2, "r")
+                PlaceAutotile(layerNum, X, Y, 2, "r")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 2, "n")
+                PlaceAutotile(layerNum, X, Y, 2, "n")
         End Select
 
     End Sub
@@ -487,15 +487,15 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 3, "o")
+                PlaceAutotile(layerNum, X, Y, 3, "o")
             Case AUTO_OUTER
-                placeAutotile(layerNum, X, Y, 3, "c")
+                PlaceAutotile(layerNum, X, Y, 3, "c")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 3, "s")
+                PlaceAutotile(layerNum, X, Y, 3, "s")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 3, "g")
+                PlaceAutotile(layerNum, X, Y, 3, "g")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 3, "k")
+                PlaceAutotile(layerNum, X, Y, 3, "k")
         End Select
 
     End Sub
@@ -524,15 +524,15 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 4, "t")
+                PlaceAutotile(layerNum, X, Y, 4, "t")
             Case AUTO_OUTER
-                placeAutotile(layerNum, X, Y, 4, "d")
+                PlaceAutotile(layerNum, X, Y, 4, "d")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 4, "p")
+                PlaceAutotile(layerNum, X, Y, 4, "p")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 4, "l")
+                PlaceAutotile(layerNum, X, Y, 4, "l")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 4, "h")
+                PlaceAutotile(layerNum, X, Y, 4, "h")
         End Select
 
     End Sub
@@ -546,10 +546,10 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            placeAutotile(layerNum, X, Y, 1, "i")
+            PlaceAutotile(layerNum, X, Y, 1, "i")
         Else
             ' Edge
-            placeAutotile(layerNum, X, Y, 1, "e")
+            PlaceAutotile(layerNum, X, Y, 1, "e")
         End If
 
     End Sub
@@ -562,10 +562,10 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            placeAutotile(layerNum, X, Y, 2, "f")
+            PlaceAutotile(layerNum, X, Y, 2, "f")
         Else
             ' Edge
-            placeAutotile(layerNum, X, Y, 2, "j")
+            PlaceAutotile(layerNum, X, Y, 2, "j")
         End If
 
     End Sub
@@ -578,10 +578,10 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            placeAutotile(layerNum, X, Y, 3, "k")
+            PlaceAutotile(layerNum, X, Y, 3, "k")
         Else
             ' Edge
-            placeAutotile(layerNum, X, Y, 3, "g")
+            PlaceAutotile(layerNum, X, Y, 3, "g")
         End If
 
     End Sub
@@ -594,10 +594,10 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
-            placeAutotile(layerNum, X, Y, 4, "h")
+            PlaceAutotile(layerNum, X, Y, 4, "h")
         Else
             ' Edge
-            placeAutotile(layerNum, X, Y, 4, "l")
+            PlaceAutotile(layerNum, X, Y, 4, "l")
         End If
 
     End Sub
@@ -626,13 +626,13 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 1, "e")
+                PlaceAutotile(layerNum, X, Y, 1, "e")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 1, "i")
+                PlaceAutotile(layerNum, X, Y, 1, "i")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 1, "m")
+                PlaceAutotile(layerNum, X, Y, 1, "m")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 1, "q")
+                PlaceAutotile(layerNum, X, Y, 1, "q")
         End Select
 
     End Sub
@@ -660,13 +660,13 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 2, "j")
+                PlaceAutotile(layerNum, X, Y, 2, "j")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 2, "f")
+                PlaceAutotile(layerNum, X, Y, 2, "f")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 2, "r")
+                PlaceAutotile(layerNum, X, Y, 2, "r")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 2, "n")
+                PlaceAutotile(layerNum, X, Y, 2, "n")
         End Select
 
     End Sub
@@ -694,13 +694,13 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 3, "o")
+                PlaceAutotile(layerNum, X, Y, 3, "o")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 3, "s")
+                PlaceAutotile(layerNum, X, Y, 3, "s")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 3, "g")
+                PlaceAutotile(layerNum, X, Y, 3, "g")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 3, "k")
+                PlaceAutotile(layerNum, X, Y, 3, "k")
         End Select
 
     End Sub
@@ -728,13 +728,13 @@ Public Module ClientAutoTiles
         ' Actually place the subtile
         Select Case situation
             Case AUTO_INNER
-                placeAutotile(layerNum, X, Y, 4, "t")
+                PlaceAutotile(layerNum, X, Y, 4, "t")
             Case AUTO_HORIZONTAL
-                placeAutotile(layerNum, X, Y, 4, "p")
+                PlaceAutotile(layerNum, X, Y, 4, "p")
             Case AUTO_VERTICAL
-                placeAutotile(layerNum, X, Y, 4, "l")
+                PlaceAutotile(layerNum, X, Y, 4, "l")
             Case AUTO_FILL
-                placeAutotile(layerNum, X, Y, 4, "h")
+                PlaceAutotile(layerNum, X, Y, 4, "h")
         End Select
 
     End Sub
@@ -785,8 +785,7 @@ Public Module ClientAutoTiles
 
     Public Sub DrawAutoTile(ByVal layerNum As Integer, ByVal destX As Integer, ByVal destY As Integer, ByVal quarterNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional forceFrame As Integer = 0, Optional strict As Boolean = True)
         Dim YOffset As Integer, XOffset As Integer
-        'Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim tmpSprite As Sprite
+        'Dim tmpSprite As Sprite
 
         If GettingMap Then Exit Sub
 
@@ -811,7 +810,6 @@ Public Module ClientAutoTiles
             End Select
         End If
 
-
         Select Case Map.Tile(X, Y).Layer(layerNum).AutoTile
             Case AUTOTILE_WATERFALL
                 YOffset = (WaterfallFrame - 1) * 32
@@ -822,12 +820,12 @@ Public Module ClientAutoTiles
         End Select
 
         ' Draw the quarter
-        tmpSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).Tileset))
-        tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
-        tmpSprite.Position = New SFML.Window.Vector2f(destX, destY)
+        'AutoTileSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).Tileset))
+        TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
+        TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).Position = New SFML.Window.Vector2f(destX, destY)
 
-
-        GameWindow.Draw(tmpSprite)
+        GameWindow.Draw(TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset))
+        'tmpSprite.Dispose()
 
     End Sub
 End Module

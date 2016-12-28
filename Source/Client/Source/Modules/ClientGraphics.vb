@@ -17,6 +17,7 @@ Module ClientGraphics
     Public TileSetImgsGFX() As Bitmap
     Public TileSetImgsLoaded() As Boolean
     Public TileSetTexture() As Texture
+    Public TileSetSprite() As Sprite
     Public TileSetTextureInfo() As GraphicInfo
     Public CharacterGFX() As Texture
     Public CharacterGFXInfo() As GraphicInfo
@@ -181,6 +182,7 @@ Module ClientGraphics
 
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
+        ReDim TileSetSprite(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
 
         ReDim CharacterGFX(0 To NumCharacters)
@@ -612,6 +614,7 @@ Module ClientGraphics
 
             'Load texture first, dont care about memory streams (just use the filename)
             TileSetTexture(Index) = New Texture(Application.StartupPath & GFX_PATH & "tilesets\" & Index & GFX_EXT)
+            TileSetSprite(Index) = New Sprite(TileSetTexture(Index))
 
             'Cache the width and height
             With TileSetTextureInfo(Index)
@@ -792,7 +795,7 @@ Module ClientGraphics
         TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
         TmpImage.Position = New Vector2f(DestX, DestY)
         Target.Draw(TmpImage)
-
+        'TmpImage.Dispose()
     End Sub
 
     Public Sub RenderTextures(ByVal Txture As Texture, ByVal Target As RenderWindow, ByVal dX As Single, ByVal dY As Single, ByVal sx As Single, ByVal sy As Single, ByVal dWidth As Single, ByVal dHeight As Single, ByVal sWidth As Single, ByVal sHeight As Single)
@@ -1270,7 +1273,12 @@ Module ClientGraphics
                             .Height = 32
                         End With
 
-                        RenderTextures(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'RenderTextures(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+
+                        TileSetSprite(.Layer(i).Tileset).TextureRect = New IntRect(srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        TileSetSprite(.Layer(i).Tileset).Position = New SFML.Window.Vector2f(ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y))
+
+                        GameWindow.Draw(TileSetSprite(.Layer(i).Tileset))
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -1315,7 +1323,12 @@ Module ClientGraphics
                             .Height = 32
                         End With
 
-                        RenderTextures(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        'RenderTextures(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+
+                        TileSetSprite(.Layer(i).Tileset).TextureRect = New IntRect(srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        TileSetSprite(.Layer(i).Tileset).Position = New SFML.Window.Vector2f(ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y))
+
+                        GameWindow.Draw(TileSetSprite(.Layer(i).Tileset))
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
