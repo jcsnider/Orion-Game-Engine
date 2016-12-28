@@ -28,6 +28,8 @@ Partial Class frmEditor_Classes
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.lblFemaleSprite = New System.Windows.Forms.Label()
         Me.cmbFemaleSprite = New System.Windows.Forms.ComboBox()
@@ -75,8 +77,6 @@ Partial Class frmEditor_Classes
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnAddClass = New System.Windows.Forms.Button()
         Me.btnRemoveClass = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -153,6 +153,23 @@ Partial Class frmEditor_Classes
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Info"
         '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(75, 39)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(259, 28)
+        Me.txtDescription.TabIndex = 22
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 42)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(63, 13)
+        Me.Label14.TabIndex = 21
+        Me.Label14.Text = "Description:"
+        '
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.lblFemaleSprite)
@@ -215,6 +232,7 @@ Partial Class frmEditor_Classes
         '
         'scrlFemaleSprite
         '
+        Me.scrlFemaleSprite.LargeChange = 1
         Me.scrlFemaleSprite.Location = New System.Drawing.Point(6, 63)
         Me.scrlFemaleSprite.Name = "scrlFemaleSprite"
         Me.scrlFemaleSprite.Size = New System.Drawing.Size(98, 17)
@@ -264,6 +282,7 @@ Partial Class frmEditor_Classes
         '
         'scrlMaleSprite
         '
+        Me.scrlMaleSprite.LargeChange = 1
         Me.scrlMaleSprite.Location = New System.Drawing.Point(6, 63)
         Me.scrlMaleSprite.Name = "scrlMaleSprite"
         Me.scrlMaleSprite.Size = New System.Drawing.Size(98, 17)
@@ -608,23 +627,6 @@ Partial Class frmEditor_Classes
         Me.btnRemoveClass.TabIndex = 16
         Me.btnRemoveClass.Text = "Remove Class"
         Me.btnRemoveClass.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(7, 42)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(63, 13)
-        Me.Label14.TabIndex = 21
-        Me.Label14.Text = "Description:"
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Location = New System.Drawing.Point(75, 39)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(259, 28)
-        Me.txtDescription.TabIndex = 22
         '
         'frmEditor_Classes
         '
