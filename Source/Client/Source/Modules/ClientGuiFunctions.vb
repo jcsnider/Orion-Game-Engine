@@ -275,34 +275,38 @@ Public Module ClientGuiFunctions
             End If
 
             If AbovePetbar(X, Y) Then
-                hotbarslot = IsPetBarSlot(e.Location.X, e.Location.Y)
+                If Player(MyIndex).Pet.Num > 0 Then
+                    hotbarslot = IsPetBarSlot(e.Location.X, e.Location.Y)
 
-                If e.Button = MouseButtons.Left Then
-                    If hotbarslot > 0 Then
-                        If hotbarslot >= 1 AndAlso hotbarslot <= 3 Then
-                            If hotbarslot = 1 Then
-                                'summon
-                            ElseIf hotbarslot = 2 Then
-                                SendPetBehaviour(PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT)
-                            ElseIf hotbarslot = 3 Then
-                                SendPetBehaviour(PET_ATTACK_BEHAVIOUR_GUARD)
+                    If e.Button = MouseButtons.Left Then
+                        If hotbarslot > 0 Then
+                            If hotbarslot >= 1 AndAlso hotbarslot <= 3 Then
+                                If hotbarslot = 1 Then
+                                    'summon
+                                    SendSummonPet()
+                                ElseIf hotbarslot = 2 Then
+                                    SendPetBehaviour(PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT)
+                                ElseIf hotbarslot = 3 Then
+                                    SendPetBehaviour(PET_ATTACK_BEHAVIOUR_GUARD)
+                                End If
+
+                            ElseIf hotbarslot >= 4 AndAlso hotbarslot <= 7 Then
+                                skillnum = Player(MyIndex).Pet.skill(hotbarslot - 3)
+
+                                If skillnum <> 0 Then
+                                    PlaySound("Click.ogg")
+                                    SendUsePetSkill(skillnum)
+                                End If
                             End If
 
-                        ElseIf hotbarslot >= 4 AndAlso hotbarslot <= 7 Then
-                            skillnum = Player(MyIndex).Pet.skill(hotbarslot - 3)
-
-                            If skillnum <> 0 Then
-                                PlaySound("Click.ogg")
-                                SendUsePetSkill(skillnum)
-                            End If
+                            CheckGuiClick = True
                         End If
-
-                        CheckGuiClick = True
                     End If
-                End If
 
-                CheckGuiClick = True
+                    CheckGuiClick = True
+                End If
             End If
+
         End If
 
         'Charpanel

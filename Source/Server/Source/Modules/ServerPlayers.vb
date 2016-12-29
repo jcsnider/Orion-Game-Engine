@@ -122,6 +122,13 @@ Module ServerPlayers
                 y = GetPlayerY(Index)
                 AlertMsg(Index, "Unable to create a cached map!")
             Else
+                'store old info, for returning to entrance of instance
+                If Not TempPlayer(Index).InInstance = 1 Then
+                    TempPlayer(Index).tmpMap = GetPlayerMap(Index)
+                    TempPlayer(Index).tmpX = GetPlayerX(Index)
+                    TempPlayer(Index).tmpY = GetPlayerY(Index)
+                    TempPlayer(Index).InInstance = 1
+                End If
                 MapNum = MapNum + MAX_MAPS
             End If
         End If
@@ -345,8 +352,6 @@ Module ServerPlayers
     Sub LeftGame(ByVal Index As Integer)
         Dim i As Integer
         Dim tradeTarget As Integer
-        Dim instanceMapID As Integer
-        instanceMapID = -1
 
         If TempPlayer(Index).InGame Then
             TempPlayer(Index).InGame = False
@@ -356,12 +361,15 @@ Module ServerPlayers
                 If GetTotalMapPlayers(GetPlayerMap(Index)) < 1 Then
                     PlayersOnMap(GetPlayerMap(Index)) = False
                     If IsInstancedMap(GetPlayerMap(Index)) Then
-                        instanceMapID = InstancedMaps(GetPlayerMap(Index) - MAX_MAPS).OriginalMap
                         DestroyInstancedMap(GetPlayerMap(Index) - MAX_MAPS)
+
+                        If TempPlayer(Index).InInstance = 1 Then
+                            SetPlayerMap(Index, TempPlayer(Index).tmpMap)
+                            SetPlayerX(Index, TempPlayer(Index).tmpX)
+                            SetPlayerY(Index, TempPlayer(Index).tmpY)
+                            TempPlayer(Index).InInstance = 0
+                        End If
                     End If
-                End If
-                If instanceMapID > 0 Then
-                    SetPlayerMap(Index, instanceMapID)
                 End If
             End If
 
@@ -383,7 +391,8 @@ Module ServerPlayers
             End If
 
             'pet
-            ReleasePet(Index)
+            'ReleasePet(Index)
+            RecallPet(Index)
 
             SavePlayer(Index)
             SaveBank(Index)
@@ -2246,9 +2255,13 @@ Module ServerPlayers
                     n = Item(InvItemNum).Data1
                     LearnRecipe(Index, n, InvNum)
                 Case ItemType.Pet
-
+                    If Item(InvItemNum).Stackable = 1 Then
+                        TakeInvItem(Index, InvItemNum, 1)
+                    Else
+                        TakeInvItem(Index, InvItemNum, 0)
+                    End If
                     n = Item(InvItemNum).Data1
-                    SummonPet(Index, n)
+                    AdoptPet(Index, n)
             End Select
 
         End If

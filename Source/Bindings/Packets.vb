@@ -282,6 +282,7 @@
 
         'pets
         CRequestPets
+        CSummonPet
         CPetMove
         CSetBehaviour
         CReleasePet

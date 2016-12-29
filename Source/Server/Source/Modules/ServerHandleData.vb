@@ -132,6 +132,7 @@ Module ServerHandleData
 
         'pets
         Packets.Add(ClientPackets.CRequestPets, AddressOf Packet_RequestPets)
+        Packets.Add(ClientPackets.CSummonPet, AddressOf Packet_SummonPet)
         Packets.Add(ClientPackets.CPetMove, AddressOf Packet_PetMove)
         Packets.Add(ClientPackets.CSetBehaviour, AddressOf Packet_SetPetBehaviour)
         Packets.Add(ClientPackets.CReleasePet, AddressOf Packet_ReleasePet)

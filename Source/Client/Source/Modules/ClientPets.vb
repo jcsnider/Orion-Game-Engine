@@ -103,6 +103,7 @@ Module ClientPets
     Sub SendRequestPets()
         Dim buffer As New ByteBuffer
         buffer.WriteInteger(ClientPackets.CRequestPets)
+
         SendData(buffer.ToArray)
         buffer = Nothing
 
@@ -119,6 +120,15 @@ Module ClientPets
 
         PetSpellBuffer = skill
         PetSpellBufferTimer = GetTickCount()
+    End Sub
+
+    Sub SendSummonPet()
+        Dim buffer As New ByteBuffer
+        buffer.WriteInteger(ClientPackets.CSummonPet)
+
+        SendData(buffer.ToArray)
+        buffer = Nothing
+
     End Sub
 #End Region
 
@@ -542,48 +552,52 @@ Module ClientPets
         Dim skillnum As Integer, skillpic As Integer
         Dim rec As Rectangle, rec_pos As Rectangle
 
-        If Not PetAlive(MyIndex) Then Exit Sub
+        If Not HasPet(MyIndex) Then Exit Sub
 
-        RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
+        If Not PetAlive(MyIndex) Then
+            RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, 32, PetbarGFXInfo.Height)
+        Else
+            RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
 
-        For i = 1 To 4
-            skillnum = Player(MyIndex).Pet.skill(i)
+            For i = 1 To 4
+                skillnum = Player(MyIndex).Pet.skill(i)
 
-            If skillnum > 0 Then
-                skillpic = Skill(skillnum).Icon
+                If skillnum > 0 Then
+                    skillpic = Skill(skillnum).Icon
 
-                If SkillIconsGFXInfo(skillpic).IsLoaded = False Then
-                    LoadTexture(skillpic, 9)
+                    If SkillIconsGFXInfo(skillpic).IsLoaded = False Then
+                        LoadTexture(skillpic, 9)
+                    End If
+
+                    'seeying we still use it, lets update timer
+                    With SkillIconsGFXInfo(skillpic)
+                        .TextureTimer = GetTickCount() + 100000
+                    End With
+
+                    With rec
+                        .Y = 0
+                        .Height = 32
+                        .X = 0
+                        .Width = 32
+                    End With
+
+                    If Not PetSpellCD(i) = 0 Then
+                        rec.X = 32
+                        rec.Width = 32
+                    End If
+
+                    With rec_pos
+                        .Y = PetbarY + PetbarTop
+                        .Height = PIC_Y
+                        .X = PetbarX + PetbarLeft + ((PetbarOffsetX - 2) + 32) * (((i - 1) + 3))
+                        .Width = PIC_X
+                    End With
+
+                    RenderTextures(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
 
-                'seeying we still use it, lets update timer
-                With SkillIconsGFXInfo(skillpic)
-                    .TextureTimer = GetTickCount() + 100000
-                End With
-
-                With rec
-                    .Y = 0
-                    .Height = 32
-                    .X = 0
-                    .Width = 32
-                End With
-
-                If Not PetSpellCD(i) = 0 Then
-                    rec.X = 32
-                    rec.Width = 32
-                End If
-
-                With rec_pos
-                    .Y = PetbarY + PetbarTop
-                    .Height = PIC_Y
-                    .X = PetbarX + PetbarLeft + ((PetbarOffsetX - 2) + 32) * (((i - 1) + 3))
-                    .Width = PIC_X
-                End With
-
-                RenderTextures(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
-            End If
-
-        Next
+            Next
+        End If
 
     End Sub
 
@@ -597,6 +611,14 @@ Module ClientPets
             PetAlive = True
         End If
 
+    End Function
+
+    Public Function HasPet(ByVal index As Integer) As Boolean
+        HasPet = False
+
+        If Player(index).Pet.Num > 0 Then
+            HasPet = True
+        End If
     End Function
 
     Public Function IsPetBarSlot(ByVal X As Single, ByVal Y As Single) As Integer

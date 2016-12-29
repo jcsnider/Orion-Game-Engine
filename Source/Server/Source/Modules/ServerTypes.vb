@@ -175,6 +175,12 @@
         Dim stopRegenTimer As Integer
         Dim stopRegen As Byte
 
+        'instance stuff
+        Dim InInstance As Byte
+        Dim tmpMap As Integer
+        Dim tmpX As Integer
+        Dim tmpY As Integer
+
         'pets
         Dim PetTarget As Integer
         Dim PetTargetType As Integer
