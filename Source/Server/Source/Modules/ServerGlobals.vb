@@ -26,4 +26,5 @@
     Public TempMapData As Byte
 
     Public Gettingmap As Boolean
+
 End Module

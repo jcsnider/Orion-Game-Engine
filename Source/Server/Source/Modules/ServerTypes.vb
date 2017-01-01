@@ -134,7 +134,6 @@
         Dim InParty As Byte
         Dim TargetType As Byte
         Dim Target As Byte
-        Dim TargetZone As Byte
         Dim PartyStarter As Byte
         Dim GettingMap As Byte
         Dim SkillBuffer As Integer
@@ -177,6 +176,7 @@
 
         'instance stuff
         Dim InInstance As Byte
+        Dim tmpInstanceNum As Integer
         Dim tmpMap As Integer
         Dim tmpX As Integer
         Dim tmpY As Integer

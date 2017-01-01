@@ -84,7 +84,7 @@ Module ServerTCP
     Public Sub SendDataToAll(ByRef data() As Byte)
         Dim i As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 SendDataTo(i, data)
@@ -96,7 +96,7 @@ Module ServerTCP
     Sub SendDataToAllBut(ByVal Index As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 If i <> Index Then
@@ -111,7 +111,7 @@ Module ServerTCP
     Sub SendDataToMapBut(ByVal Index As Integer, ByVal MapNum As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 If GetPlayerMap(i) = MapNum Then
@@ -128,7 +128,7 @@ Module ServerTCP
     Sub SendDataToMap(ByVal MapNum As Integer, ByRef Data() As Byte)
         Dim i As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 If GetPlayerMap(i) = MapNum Then
@@ -322,7 +322,7 @@ Module ServerTCP
 
         IsMultiAccounts = False
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If LCase$(Trim$(Player(i).Login)) = LCase$(Login) Then
                 IsMultiAccounts = True
                 Exit Function
@@ -1085,7 +1085,6 @@ Module ServerTCP
         Next
     End Sub
 
-
     Sub SendVital(ByVal Index As Integer, ByVal Vital As Vitals)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
@@ -1124,7 +1123,7 @@ Module ServerTCP
         Dim n As Integer
         Dim i As Integer
         s = ""
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 If i <> Index Then
@@ -1382,7 +1381,7 @@ Module ServerTCP
         Buffer = New ByteBuffer
 
         ' Send all players on current map to index
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 If i <> Index Then
                     If GetPlayerMap(i) = GetPlayerMap(Index) Then

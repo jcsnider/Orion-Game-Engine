@@ -1355,7 +1355,6 @@ Public Module ServerCombat
         ' Remove our player from everyone's target list.
         For Each p In TempPlayer.Where(Function(x, i) x.InGame AndAlso GetPlayerMap(i + 1) = GetPlayerMap(Victim) AndAlso x.TargetType = TargetType.Player AndAlso x.Target = Victim).Select(Function(x, i) i + 1).ToArray()
             TempPlayer(p).Target = 0
-            TempPlayer(p).TargetZone = 0
             TempPlayer(p).TargetType = TargetType.None
             SendTarget(p, 0, TargetType.None)
         Next

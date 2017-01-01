@@ -554,6 +554,22 @@ Module ClientGameLogic
                     AddText("-msghere = party Message", ColorType.Yellow)
                     AddText("!namehere msghere = Player Message", ColorType.Yellow)
                     AddText("Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /sellhouse", ColorType.Yellow)
+
+                Case "/houseinvite"
+
+                    ' Checks to make sure we have more than one string in the array
+                    If UBound(Command) < 1 Then
+                        AddText("Usage: /houseinvite (name)", ColorType.Yellow)
+                        GoTo Continue1
+                    End If
+
+                    If IsNumeric(Command(1)) Then
+                        AddText("Usage: /houseinvite (name)", ColorType.Yellow)
+                        GoTo Continue1
+                    End If
+
+                    SendInvite(Command(1))
+
                 Case "/sellhouse"
                     Buffer = New ByteBuffer
                     Buffer.WriteInteger(ClientPackets.CSellHouse)
