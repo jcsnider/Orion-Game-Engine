@@ -15,7 +15,7 @@
         GetTotalMapPlayers = n
     End Function
 
-    Public Function GetPlayersOnline()
+    Public Function GetPlayersOnline() As Integer
         Dim x As Integer
         x = 0
         For i = 1 To MAX_PLAYERS
@@ -39,7 +39,7 @@
             Case Vitals.HP
                 GetNpcMaxVital = Npc(NpcNum).HP
             Case Vitals.MP
-                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.intelligence) * 2
+                GetNpcMaxVital = Npc(NpcNum).Stat(Stats.Intelligence) * 2
             Case Vitals.SP
                 GetNpcMaxVital = Npc(NpcNum).Stat(Stats.Spirit) * 2
         End Select
@@ -141,8 +141,6 @@
         Next
 
     End Sub
-
-
 
     Sub SpawnMapItems(ByVal MapNum As Integer)
         Dim x As Integer

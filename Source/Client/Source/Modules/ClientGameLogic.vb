@@ -189,7 +189,7 @@ Module ClientGameLogic
                     ' Process input before rendering, otherwise input will be behind by 1 frame
                     If WalkTimer < Tick Then
 
-                        For i = 1 To MAX_PLAYERS
+                        For i = 1 To TotalOnline 'MAX_PLAYERS
                             If IsPlaying(i) Then
                                 ProcessMovement(i)
                                 If PetAlive(i) Then

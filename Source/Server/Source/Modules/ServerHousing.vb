@@ -44,7 +44,7 @@ Public Module ServerHousing
             HouseConfig(i).Y = Val(Getvar(filepath, "House" & i, "Y"))
             DoEvents()
         Next
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 SendHouseConfigs(i)
             End If
@@ -217,13 +217,11 @@ Public Module ServerHousing
             End If
         End If
 
-
     End Sub
 
     Sub Packet_PlaceFurniture(ByVal index As Integer, ByVal data() As Byte)
         Dim Buffer As ByteBuffer, i As Integer, x As Integer, y As Integer, invslot As Integer
         Dim ItemNum As Integer, x1 As Integer, y1 As Integer, widthoffset As Integer
-
 
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -308,7 +306,7 @@ Public Module ServerHousing
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
                             If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
-                            For i = 1 To MAX_PLAYERS
+                            For i = 1 To GetTotalPlayersOnline()
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
@@ -339,7 +337,7 @@ Public Module ServerHousing
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
                             If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
-                            For i = 1 To MAX_PLAYERS
+                            For i = 1 To GetTotalPlayersOnline()
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
@@ -370,7 +368,7 @@ Public Module ServerHousing
                         For y = y1 To y1 - Item(ItemNum).FurnitureHeight + 1 Step -1
                             If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Blocked Then Exit Sub
 
-                            For i = 1 To MAX_PLAYERS
+                            For i = 1 To GetTotalPlayersOnline()
                                 If IsPlaying(i) Then
                                     If i <> index Then
                                         If GetPlayerMap(i) = GetPlayerMap(index) Then
@@ -477,7 +475,7 @@ Public Module ServerHousing
                 HouseConfig(i).MaxFurniture = Buffer.ReadInteger
                 SaveHouse(i)
 
-                For x = 1 To MAX_PLAYERS
+                For x = 1 To GetTotalPlayersOnline()
                     If IsPlaying(x) Then
                         If Player(x).Character(TempPlayer(x).CurChar).InHouse = i Then
 
@@ -567,7 +565,7 @@ Public Module ServerHousing
             Next
         End If
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 If Player(i).Character(TempPlayer(i).CurChar).InHouse = HouseIndex Then
                     SendDataTo(i, Buffer.ToArray)

@@ -3,6 +3,8 @@
 Module ClientGlobals
     Public SelectedChar As Byte
 
+    Public TotalOnline As Integer
+
     ' for directional blocking
     Public DirArrowX(0 To 4) As Byte
     Public DirArrowY(0 To 4) As Byte

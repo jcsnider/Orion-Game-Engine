@@ -162,7 +162,6 @@ Module ServerPlayers
         'clear target
         TempPlayer(Index).Target = 0
         TempPlayer(Index).TargetType = TargetType.None
-        TempPlayer(Index).TargetZone = 0
         SendTarget(Index, 0, TargetType.None)
 
         ' Save old map to send erase player data to
@@ -183,7 +182,7 @@ Module ServerPlayers
 
         ' send equipment of all people on new map
         If GetTotalMapPlayers(MapNum) > 0 Then
-            For i = 1 To MAX_PLAYERS
+            For i = 1 To GetTotalPlayersOnline()
                 If IsPlaying(i) Then
                     If GetPlayerMap(i) = MapNum Then
                         SendMapEquipmentTo(i, Index)
@@ -316,6 +315,7 @@ Module ServerPlayers
         End If
 
         ' Send all the required game data to the user.
+        SendTotalOnlineTo(Index)
         CheckEquippedItems(Index)
         SendGameData(Index)
         SendInventory(Index)
@@ -339,6 +339,8 @@ Module ServerPlayers
             SendResourceCacheTo(Index, i)
         Next
 
+        SendTotalOnlineToAll()
+
         ' Warp the player to his saved location
         PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
 
@@ -347,6 +349,8 @@ Module ServerPlayers
 
         ' Send the flag so they know they can start doing stuff
         SendInGame(Index)
+
+        UpdateCaption()
     End Sub
 
     Sub LeftGame(ByVal Index As Integer)
@@ -405,11 +409,15 @@ Module ServerPlayers
             SendLeftGame(Index)
 
             TempPlayer(Index) = Nothing
-            ReDim TempPlayer(i).SkillCD(0 To MAX_PLAYER_SKILLS)
-            ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
+            ReDim TempPlayer(i).SkillCD(MAX_PLAYER_SKILLS)
+            ReDim TempPlayer(i).TradeOffer(MAX_INV)
         End If
 
+        SendTotalOnlineToAll()
+
         ClearPlayer(Index)
+
+        UpdateCaption()
     End Sub
 
     Sub PlayerMove(ByVal Index As Integer, ByVal Dir As Integer, ByVal movement As Integer, expectingwarp As Boolean)

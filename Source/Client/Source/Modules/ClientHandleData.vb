@@ -135,6 +135,7 @@
         Packets.Add(ServerPackets.SCritical, AddressOf Packet_Critical)
         Packets.Add(ServerPackets.SNews, AddressOf Packet_News)
         Packets.Add(ServerPackets.SrClick, AddressOf Packet_RClick)
+        Packets.Add(ServerPackets.STotalOnline, AddressOf Packet_TotalOnline)
 
         'quests
         Packets.Add(ServerPackets.SUpdateQuest, AddressOf Packet_UpdateQuest)
@@ -915,7 +916,7 @@
         GettingMap = True
 
         ' Erase all players except self
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To TotalOnline 'MAX_PLAYERS
             If i <> MyIndex Then
                 SetPlayerMap(i, 0)
             End If
@@ -2558,6 +2559,19 @@
         If Buffer.ReadInteger <> ServerPackets.SrClick Then Exit Sub
 
         ShowRClick = True
+
+        Buffer = Nothing
+    End Sub
+
+    Private Sub Packet_TotalOnline(ByVal Data() As Byte)
+        Dim Buffer As ByteBuffer
+
+        Buffer = New ByteBuffer
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> ServerPackets.STotalOnline Then Exit Sub
+
+        TotalOnline = Buffer.ReadInteger
 
         Buffer = Nothing
     End Sub

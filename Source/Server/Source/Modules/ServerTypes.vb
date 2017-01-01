@@ -4,18 +4,18 @@
     Public TempTile(MAX_CACHED_MAPS) As TempTileRec
     Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Public ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
-    Public Player(0 To MAX_PLAYERS) As PlayerRec
-    Public Bank(0 To MAX_PLAYERS) As BankRec
-    Public TempPlayer(0 To MAX_PLAYERS) As TempPlayerRec
+    Public Player(MAX_PLAYERS) As PlayerRec
+    Public Bank(MAX_PLAYERS) As BankRec
+    Public TempPlayer(MAX_PLAYERS) As TempPlayerRec
     Public Classes() As ClassRec
-    Public Item(0 To MAX_ITEMS) As ItemRec
-    Public Npc(0 To MAX_NPCS) As NpcRec
-    Public MapItem(MAX_CACHED_MAPS, 0 To MAX_MAP_ITEMS) As MapItemRec
+    Public Item(MAX_ITEMS) As ItemRec
+    Public Npc(MAX_NPCS) As NpcRec
+    Public MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemRec
     Public MapNpc(MAX_CACHED_MAPS) As MapDataRec
-    Public Shop(0 To MAX_SHOPS) As ShopRec
-    Public Skill(0 To MAX_SKILLS) As SkillRec
-    Public Resource(0 To MAX_RESOURCES) As ResourceRec
-    Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
+    Public Shop(MAX_SHOPS) As ShopRec
+    Public Skill(MAX_SKILLS) As SkillRec
+    Public Resource(MAX_RESOURCES) As ResourceRec
+    Public Animation(MAX_ANIMATIONS) As AnimationRec
     Public Options As OptionsRec
 
     Public Structure RandInvRec

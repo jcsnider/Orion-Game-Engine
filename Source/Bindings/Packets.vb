@@ -84,6 +84,7 @@
         SCritical
         SNews
         SrClick
+        STotalOnline
 
         'quests
         SQuestEditor

@@ -2264,4 +2264,24 @@ Module ServerTCP
         SendDataToMap(MapNum, Buffer.ToArray())
         Buffer = Nothing
     End Sub
+
+    Public Sub SendTotalOnlineTo(ByVal Index As Integer)
+        Dim Buffer = New ByteBuffer
+
+        Buffer.WriteInteger(ServerPackets.STotalOnline)
+        Buffer.WriteInteger(GetTotalPlayersOnline)
+        SendDataTo(Index, Buffer.ToArray)
+
+        Buffer = Nothing
+    End Sub
+
+    Public Sub SendTotalOnlineToAll()
+        Dim Buffer = New ByteBuffer
+
+        Buffer.WriteInteger(ServerPackets.STotalOnline)
+        Buffer.WriteInteger(GetTotalPlayersOnline)
+        SendDataToAll(Buffer.ToArray)
+
+        Buffer = Nothing
+    End Sub
 End Module

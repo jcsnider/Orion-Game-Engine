@@ -274,15 +274,13 @@ Module ServerHandleData
             Exit Sub
         End If
 
-        For i = 1 To MAX_PLAYERS
-
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 If Trim$(Player(i).Login) = Trim$(Name) Then
                     AlertMsg(i, "Your account has been removed by an admin!")
                     ClearPlayer(i)
                 End If
             End If
-
         Next
     End Sub
 
@@ -731,7 +729,7 @@ Module ServerHandleData
         End If
 
         ' Try to attack a player
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             TempIndex = i
 
             ' Make sure we dont try to attack ourselves
@@ -1181,7 +1179,7 @@ Module ServerHandleData
         SpawnMapNpcs(MapNum)
         SpawnGlobalEvents(MapNum)
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
                     SpawnMapEventsFor(i, MapNum)
@@ -1202,7 +1200,7 @@ Module ServerHandleData
         CacheResources(MapNum)
 
         ' Refresh map for everyone online
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) And GetPlayerMap(i) = MapNum Then
                 PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map
@@ -1836,7 +1834,7 @@ Module ServerHandleData
         If x < 0 Or x > Map(GetPlayerMap(index)).MaxX Or y < 0 Or y > Map(GetPlayerMap(index)).MaxY Then Exit Sub
 
         ' Check for a player
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If IsPlaying(i) Then
                 If GetPlayerMap(index) = GetPlayerMap(i) Then
@@ -3312,7 +3310,7 @@ Module ServerHandleData
         SpawnMapNpcs(MapNum)
         SpawnGlobalEvents(MapNum)
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 If Player(i).Character(TempPlayer(i).CurChar).Map = MapNum Then
                     SpawnMapEventsFor(i, MapNum)
@@ -3333,7 +3331,7 @@ Module ServerHandleData
         CacheResources(MapNum)
 
         ' Refresh map for everyone online
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) And GetPlayerMap(i) = MapNum Then
                 PlayerWarp(i, MapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map
