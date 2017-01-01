@@ -81,6 +81,7 @@ Public Class ByteBuffer
             Throw New Exception("Byte Buffer Past Limit!") 'past byte count throw a new exception
         End If
     End Function
+
     Public Function ReadInteger(Optional ByVal peek As Boolean = True) As Integer
         If Buff.Count > readpos Then 'check to see if this passes the byte count
             If buffUpdated Then
@@ -119,5 +120,3 @@ Public Class ByteBuffer
 
 End Class
 '+-------------------------End Class-------------------+
-
-

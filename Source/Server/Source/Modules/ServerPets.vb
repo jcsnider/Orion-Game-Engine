@@ -296,9 +296,7 @@
 #End Region
 
 #Region "Incoming Packets"
-    ' ::::::::::::::::::::::::::::::
-    ' :: Request edit Pet  packet ::
-    ' ::::::::::::::::::::::::::::::
+
     Sub Packet_RequestEditPet(ByVal Index As Integer, ByVal data() As Byte)
         Dim Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
@@ -317,9 +315,6 @@
 
     End Sub
 
-    ' :::::::::::::::::::::
-    ' :: Save pet packet ::
-    ' :::::::::::::::::::::
     Sub Packet_SavePet(ByVal Index As Integer, ByVal data() As Byte)
         Dim petNum As Integer
         Dim Buffer As ByteBuffer
@@ -379,7 +374,7 @@
 
         If Buffer.ReadInteger <> ClientPackets.CSummonPet Then Exit Sub
 
-        If Player(Index).Character(TempPlayer(Index).CurChar).Pet.Alive = 1 Then
+        If PetAlive(Index) Then
             RecallPet(Index)
         Else
             SummonPet(Index)
@@ -498,30 +493,6 @@
         TempPlayer(Index).PetTarget = 0
         TempPlayer(Index).GoToX = x
         TempPlayer(Index).GoToY = y
-
-        If TempPlayer(Index).GoToX = GetPetX(Index) And TempPlayer(Index).GoToY = GetPetY(Index) Then
-
-            Select Case Player(Index).Character(TempPlayer(Index).CurChar).Pet.AttackBehaviour
-
-                Case PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT
-                    Player(Index).Character(TempPlayer(Index).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_GUARD
-                    SendActionMsg(GetPlayerMap(Index), "Defensive Mode!", ColorType.White, 0, GetPetX(Index) * 32, GetPetY(Index) * 32, Index)
-
-                Case PET_ATTACK_BEHAVIOUR_GUARD
-                    Player(Index).Character(TempPlayer(Index).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT
-                    SendActionMsg(GetPlayerMap(Index), "Agressive Mode!", ColorType.White, 0, GetPetX(Index) * 32, GetPetY(Index) * 32, Index)
-
-                Case Else
-                    Player(Index).Character(TempPlayer(Index).CurChar).Pet.AttackBehaviour = PET_ATTACK_BEHAVIOUR_ATTACKONSIGHT
-                    SendActionMsg(GetPlayerMap(Index), "Agressive Mode!", ColorType.White, 0, GetPetX(Index) * 32, GetPetY(Index) * 32, Index)
-
-            End Select
-
-            TempPlayer(Index).GoToX = -1
-            TempPlayer(Index).GoToY = -1
-        Else
-            PlayerMsg(Index, "Your " & Trim$(GetPetName(Index)) & " is moving to " & TempPlayer(Index).GoToX & "," & TempPlayer(Index).GoToY & ".", ColorType.BrightGreen)
-        End If
 
         Buffer = Nothing
 
@@ -677,7 +648,7 @@
                                     If IsPlaying(i) And i <> PlayerIndex Then
                                         If GetPlayerMap(i) = MapNum And GetPlayerAccess(i) <= AdminType.Monitor Then
                                             If PetAlive(i) Then
-                                                n = Pet(Player(PlayerIndex).Character(TempPlayer(PlayerIndex).CurChar).Pet.Num).Range
+                                                n = GetPetRange(PlayerIndex)
                                                 DistanceX = GetPetX(PlayerIndex) - GetPetX(i)
                                                 DistanceY = GetPetY(PlayerIndex) - GetPetY(i)
 
@@ -693,7 +664,7 @@
                                                     End If
                                                 End If
                                             Else
-                                                n = Pet(Player(PlayerIndex).Character(TempPlayer(PlayerIndex).CurChar).Pet.Num).Range
+                                                n = GetPetRange(PlayerIndex)
                                                 DistanceX = GetPetX(PlayerIndex) - GetPlayerX(i)
                                                 DistanceY = GetPetY(PlayerIndex) - GetPlayerY(i)
 
@@ -718,7 +689,7 @@
 
                                         If TempPlayer(PlayerIndex).PetTargetType > 0 Then Exit For
                                         If PetAlive(PlayerIndex) Then
-                                            n = Pet(Player(PlayerIndex).Character(TempPlayer(PlayerIndex).CurChar).Pet.Num).Range
+                                            n = GetPetRange(PlayerIndex)
                                             DistanceX = GetPetX(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).x
                                             DistanceY = GetPetY(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).y
 
@@ -952,13 +923,13 @@
 
     Sub SummonPet(ByVal Index As Integer)
         Player(Index).Character(TempPlayer(Index).CurChar).Pet.Alive = 1
-        PlayerMsg(Index, "You summoned your " & Trim$(Pet(Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num).Name) & "!", ColorType.BrightGreen)
+        PlayerMsg(Index, "You summoned your " & Trim$(GetPetName(Index)) & "!", ColorType.BrightGreen)
         SendUpdatePlayerPet(Index, False)
     End Sub
 
     Sub RecallPet(ByVal Index As Integer)
+        PlayerMsg(Index, "You recalled your " & Trim$(GetPetName(Index)) & "!", ColorType.BrightGreen)
         Player(Index).Character(TempPlayer(Index).CurChar).Pet.Alive = 0
-        PlayerMsg(Index, "You recalled your " & Trim$(Pet(Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num).Name) & "!", ColorType.BrightGreen)
         SendUpdatePlayerPet(Index, False)
     End Sub
 
@@ -1005,7 +976,7 @@
 
     Sub AdoptPet(ByVal Index As Integer, ByVal PetNum As Integer)
 
-        If Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num = 0 Then
+        If GetPetNum(Index) = 0 Then
             PlayerMsg(Index, "You have adopted a " & Trim$(Pet(PetNum).Name), ColorType.BrightGreen)
         Else
             PlayerMsg(Index, "You allready have a " & Trim$(Pet(PetNum).Name) & ", release your old pet first!", ColorType.BrightGreen)
@@ -3878,6 +3849,33 @@
 
         If PetAlive(Index) Then
             GetPetName = Pet(Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num).Name
+        End If
+
+    End Function
+
+    Public Function GetPetNum(ByVal Index As Integer) As Integer
+        GetPetNum = 0
+
+        If PetAlive(Index) Then
+            GetPetNum = Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num
+        End If
+
+    End Function
+
+    Public Function GetPetRange(ByVal Index As Integer) As Integer
+        GetPetRange = 0
+
+        If PetAlive(Index) Then
+            GetPetRange = Pet(Player(Index).Character(TempPlayer(Index).CurChar).Pet.Num).Range
+        End If
+
+    End Function
+
+    Public Function GetPetLevel(ByVal Index As Integer) As Integer
+        GetPetLevel = 0
+
+        If PetAlive(Index) Then
+            GetPetLevel = Player(Index).Character(TempPlayer(Index).CurChar).Pet.Level
         End If
 
     End Function

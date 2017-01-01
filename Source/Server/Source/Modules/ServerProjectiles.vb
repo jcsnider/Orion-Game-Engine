@@ -34,7 +34,7 @@ Public Module ServerProjectiles
         Dim i As Integer
 
         For i = 1 To MAX_PROJECTILES
-            Call SaveProjectile(i)
+            SaveProjectile(i)
         Next
 
     End Sub
@@ -60,7 +60,7 @@ Public Module ServerProjectiles
         Dim filename As String
         Dim i As Integer
 
-        Call CheckProjectile()
+        CheckProjectile()
 
         For i = 1 To MAX_PROJECTILES
             filename = Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))
@@ -82,7 +82,7 @@ Public Module ServerProjectiles
 
         For i = 1 To MAX_PROJECTILES
             If Not FileExist(Path.Combine(Application.StartupPath, "data", "projectiles", String.Format("projectile{0}.dat", i))) Then
-                Call SaveProjectile(i)
+                SaveProjectile(i)
             End If
         Next
 
@@ -129,7 +129,7 @@ Public Module ServerProjectiles
         ReDim Projectiles(MAX_PROJECTILES)
 
         For i = 1 To MAX_PROJECTILES
-            Call ClearProjectile(i)
+            ClearProjectile(i)
         Next
 
     End Sub
@@ -141,9 +141,7 @@ Public Module ServerProjectiles
         Dim Buffer As ByteBuffer
 
         ' Prevent hacking
-        If GetPlayerAccess(Index) < AdminType.Developer Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SProjectileEditor)
@@ -161,9 +159,7 @@ Public Module ServerProjectiles
 
         If Buffer.ReadInteger <> EditorPackets.SaveProjectile Then Exit Sub
 
-        If GetPlayerAccess(Index) < AdminType.Developer Then
-            Exit Sub
-        End If
+        If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
         ProjectileNum = Buffer.ReadInteger
 
@@ -179,9 +175,9 @@ Public Module ServerProjectiles
         Projectiles(ProjectileNum).Damage = Buffer.ReadInteger
 
         ' Save it
-        Call SendUpdateProjectileToAll(ProjectileNum)
-        Call SaveProjectile(ProjectileNum)
-        Call Addlog(GetPlayerName(Index) & " saved Projectile #" & ProjectileNum & ".", ADMIN_LOG)
+        SendUpdateProjectileToAll(ProjectileNum)
+        SaveProjectile(ProjectileNum)
+        Addlog(GetPlayerLogin(Index) & " saved Projectile #" & ProjectileNum & ".", ADMIN_LOG)
         Buffer = Nothing
 
     End Sub

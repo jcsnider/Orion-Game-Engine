@@ -15,11 +15,11 @@
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         'music
         If optMOn.Checked = True Then
-            Options.Music = optMOn.Checked
+            Options.Music = 1
             ' start music playing
             PlayMusic(Trim$(Map.Music))
         Else
-            Options.Music = optMOn.Checked
+            Options.Music = 0
             ' stop music playing
             StopMusic()
             CurMusic = ""
@@ -27,9 +27,9 @@
 
         'sound
         If optSOn.Checked = True Then
-            Options.Sound = optMOn.Checked
+            Options.Sound = 1
         Else
-            Options.Sound = optMOn.Checked
+            Options.Sound = 0
             StopSound()
         End If
 
