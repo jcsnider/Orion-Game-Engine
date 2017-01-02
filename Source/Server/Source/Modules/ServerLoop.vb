@@ -254,11 +254,10 @@ Module ServerLoop
 
             End If
 
-            If ServerDestroyed Then End
-
             ' Respawning Resources
             If ResourceCache(MapNum).Resource_Count > 0 Then
                 For i = 0 To ResourceCache(MapNum).Resource_Count
+                    If ServerDestroyed Then End
                     Resource_index = Map(MapNum).Tile(ResourceCache(MapNum).ResourceData(i).X, ResourceCache(MapNum).ResourceData(i).Y).Data1
 
                     If Resource_index > 0 Then

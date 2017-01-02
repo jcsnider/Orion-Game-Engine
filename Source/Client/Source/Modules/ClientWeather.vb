@@ -107,7 +107,11 @@ Public Module ClientWeather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderTextures(WeatherGFX, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                'RenderTextures(WeatherGFX, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                WeatherSprite.TextureRect = New IntRect(SpriteLeft * 32, 0, 32, 32)
+                WeatherSprite.Position = New Vector2f(ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y))
+
+                GameWindow.Draw(WeatherSprite)
             End If
         Next
 
@@ -128,17 +132,15 @@ Public Module ClientWeather
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        Dim tmpSprite As Sprite
         FogGFX(fogNum).Repeated = True
         FogGFX(fogNum).Smooth = True
-        tmpSprite = New Sprite(FogGFX(fogNum))
-        tmpSprite.Color = New Color(255, 255, 255, CurrentFogOpacity)
-        tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
-        'tmpSprite.Position = New Vector2f((fogOffsetX * 2.5) + 50, (fogOffsetY * 3.5) + 50)
-        tmpSprite.Position = New Vector2f((fogOffsetX * 2.5) - 50, (fogOffsetY * 3.5) - 50)
-        tmpSprite.Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).Width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).Height)))
 
-        GameWindow.Draw(tmpSprite)
+        FogSprite(fogNum).Color = New Color(255, 255, 255, CurrentFogOpacity)
+        FogSprite(fogNum).TextureRect = New IntRect(0, 0, GameWindow.Size.X + 200, GameWindow.Size.Y + 200)
+        FogSprite(fogNum).Position = New Vector2f((fogOffsetX * 2.5) - 50, (fogOffsetY * 3.5) - 50)
+        FogSprite(fogNum).Scale = (New Vector2f(CDbl((GameWindow.Size.X + 200) / FogGFXInfo(fogNum).Width), CDbl((GameWindow.Size.Y + 200) / FogGFXInfo(fogNum).Height)))
+
+        GameWindow.Draw(FogSprite(fogNum))
 
     End Sub
 
