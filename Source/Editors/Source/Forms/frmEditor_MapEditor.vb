@@ -603,6 +603,14 @@ Public Class frmEditor_MapEditor
         EditorViewY = scrlMapViewV.Value
     End Sub
 
+    Private Sub chkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
+        If chkInstance.Checked = True Then
+            Map.Instanced = 1
+        Else
+            Map.Instanced = 0
+        End If
+    End Sub
+
 #End Region
 
 End Class

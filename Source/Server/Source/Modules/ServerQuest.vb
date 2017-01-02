@@ -649,7 +649,7 @@ Public Module ServerQuest
         End If
     End Function
 
-    Public Function CanEndQuest(ByVal Index As Integer, QuestNum As Integer) As Boolean
+    Public Function CanEndQuest(ByVal Index As Integer, ByVal QuestNum As Integer) As Boolean
         CanEndQuest = False
 
         If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask >= Quest(QuestNum).Task.Length Then
@@ -855,7 +855,6 @@ Public Module ServerQuest
             End If
             GiveInvItem(Index, Quest(QuestNum).RewardItem(I), Quest(QuestNum).RewardItemAmount(I))
         Next
-
 
         If Quest(QuestNum).RewardExp > 0 Then
             SetPlayerExp(Index, GetPlayerExp(Index) + Quest(QuestNum).RewardExp)

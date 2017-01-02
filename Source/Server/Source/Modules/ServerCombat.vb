@@ -399,6 +399,11 @@ Public Module ServerCombat
                                     CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
                                     CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)
                                     Exit Function
+                                ElseIf QuestInProgress(Attacker, Npc(NpcNum).QuestNum) Then
+                                    CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
+                                    CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
+                                    CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)
+                                    Exit Function
                                 Else
                                     ShowQuest(Attacker, Npc(NpcNum).QuestNum)
                                     Exit Function

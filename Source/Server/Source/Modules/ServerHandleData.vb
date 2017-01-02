@@ -1014,6 +1014,8 @@ Module ServerHandleData
         Map(MapNum).MapTintB = Buffer.ReadInteger
         Map(MapNum).MapTintA = Buffer.ReadInteger
 
+        Map(MapNum).Instanced = Buffer.ReadInteger
+
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 
         For x = 1 To MAX_MAP_NPCS
@@ -1031,8 +1033,8 @@ Module ServerHandleData
                     ReDim .Tile(x, y).Layer(0 To MapLayer.Count - 1)
                     For i = 0 To MapLayer.Count - 1
                         .Tile(x, y).Layer(i).Tileset = Buffer.ReadInteger
-                        .Tile(x, y).Layer(i).x = Buffer.ReadInteger
-                        .Tile(x, y).Layer(i).y = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).X = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).Y = Buffer.ReadInteger
                         .Tile(x, y).Layer(i).AutoTile = Buffer.ReadInteger
                     Next
                     .Tile(x, y).Type = Buffer.ReadInteger
@@ -1189,7 +1191,7 @@ Module ServerHandleData
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
-            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).x, MapItem(GetPlayerMap(Index), i).y)
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
             ClearMapItem(i, GetPlayerMap(Index))
         Next
 
@@ -1285,7 +1287,7 @@ Module ServerHandleData
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
-            Call SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).x, MapItem(GetPlayerMap(Index), i).y)
+            Call SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
             Call ClearMapItem(i, GetPlayerMap(Index))
         Next
 
@@ -1498,7 +1500,7 @@ Module ServerHandleData
         Item(n).Name = Trim$(Buffer.ReadString)
         Item(n).Paperdoll = Buffer.ReadInteger()
         Item(n).Pic = Buffer.ReadInteger()
-        Item(n).price = Buffer.ReadInteger()
+        Item(n).Price = Buffer.ReadInteger()
         Item(n).Rarity = Buffer.ReadInteger()
         Item(n).Speed = Buffer.ReadInteger()
 
@@ -1585,7 +1587,7 @@ Module ServerHandleData
 
         Npc(NpcNum).Exp = buffer.ReadInteger()
         Npc(NpcNum).Faction = buffer.ReadInteger()
-        Npc(NpcNum).HP = buffer.ReadInteger()
+        Npc(NpcNum).Hp = buffer.ReadInteger()
         Npc(NpcNum).Name = buffer.ReadString()
         Npc(NpcNum).Range = buffer.ReadInteger()
         Npc(NpcNum).SpawnSecs = buffer.ReadInteger()
@@ -1654,8 +1656,8 @@ Module ServerHandleData
         Shop(ShopNum).Face = buffer.ReadInteger()
 
         For i = 0 To MAX_TRADES
-            Shop(ShopNum).TradeItem(i).costitem = buffer.ReadInteger()
-            Shop(ShopNum).TradeItem(i).costvalue = buffer.ReadInteger()
+            Shop(ShopNum).TradeItem(i).CostItem = buffer.ReadInteger()
+            Shop(ShopNum).TradeItem(i).CostValue = buffer.ReadInteger()
             Shop(ShopNum).TradeItem(i).Item = buffer.ReadInteger()
             Shop(ShopNum).TradeItem(i).ItemValue = buffer.ReadInteger()
         Next
@@ -1705,7 +1707,7 @@ Module ServerHandleData
         Skill(skillnum).AoE = buffer.ReadInteger()
         Skill(skillnum).CastAnim = buffer.ReadInteger()
         Skill(skillnum).CastTime = buffer.ReadInteger()
-        Skill(skillnum).CDTime = buffer.ReadInteger()
+        Skill(skillnum).CdTime = buffer.ReadInteger()
         Skill(skillnum).ClassReq = buffer.ReadInteger()
         Skill(skillnum).Dir = buffer.ReadInteger()
         Skill(skillnum).Duration = buffer.ReadInteger()
@@ -1714,15 +1716,15 @@ Module ServerHandleData
         Skill(skillnum).IsAoE = buffer.ReadInteger()
         Skill(skillnum).LevelReq = buffer.ReadInteger()
         Skill(skillnum).Map = buffer.ReadInteger()
-        Skill(skillnum).MPCost = buffer.ReadInteger()
+        Skill(skillnum).MpCost = buffer.ReadInteger()
         Skill(skillnum).Name = buffer.ReadString()
         Skill(skillnum).range = buffer.ReadInteger()
         Skill(skillnum).SkillAnim = buffer.ReadInteger()
         Skill(skillnum).StunDuration = buffer.ReadInteger()
         Skill(skillnum).Type = buffer.ReadInteger()
         Skill(skillnum).Vital = buffer.ReadInteger()
-        Skill(skillnum).x = buffer.ReadInteger()
-        Skill(skillnum).y = buffer.ReadInteger()
+        Skill(skillnum).X = buffer.ReadInteger()
+        Skill(skillnum).Y = buffer.ReadInteger()
 
         'projectiles
         Skill(skillnum).IsProjectile = buffer.ReadInteger()
@@ -1809,11 +1811,11 @@ Module ServerHandleData
             Exit Sub
         End If
 
-        Options.MOTD = Trim$(buffer.ReadString)
+        Options.Motd = Trim$(buffer.ReadString)
         SaveOptions()
 
-        GlobalMsg("MOTD changed to: " & Options.MOTD)
-        Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.MOTD, ADMIN_LOG)
+        GlobalMsg("MOTD changed to: " & Options.Motd)
+        Addlog(GetPlayerName(index) & " changed MOTD to: " & Options.Motd, ADMIN_LOG)
 
         buffer = Nothing
     End Sub
@@ -1887,8 +1889,8 @@ Module ServerHandleData
         For i = 1 To MAX_MAP_ITEMS
 
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
-                If MapItem(GetPlayerMap(index), i).x = x Then
-                    If MapItem(GetPlayerMap(index), i).y = y Then
+                If MapItem(GetPlayerMap(index), i).X = x Then
+                    If MapItem(GetPlayerMap(index), i).Y = y Then
                         PlayerMsg(index, "You see " & CheckGrammar(Trim$(Item(MapItem(GetPlayerMap(index), i).Num).Name)) & ".", ColorType.White)
                         Exit Sub
                     End If
@@ -1901,8 +1903,8 @@ Module ServerHandleData
         For i = 1 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
-                If MapNpc(GetPlayerMap(index)).Npc(i).x = x Then
-                    If MapNpc(GetPlayerMap(index)).Npc(i).y = y Then
+                If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
+                    If MapNpc(GetPlayerMap(index)).Npc(i).Y = y Then
                         ' Change target
                         TempPlayer(index).Target = i
                         TempPlayer(index).TargetType = TargetType.Npc
@@ -2331,15 +2333,15 @@ Module ServerHandleData
             If .Item < 1 Then Exit Sub
 
             ' check has the cost item
-            itemamount = HasItem(index, .costitem)
-            If itemamount = 0 Or itemamount < .costvalue Then
+            itemamount = HasItem(index, .CostItem)
+            If itemamount = 0 Or itemamount < .CostValue Then
                 PlayerMsg(index, "You do not have enough to buy this item.", ColorType.BrightRed)
                 ResetShopAction(index)
                 Exit Sub
             End If
 
             ' it's fine, let's go ahead
-            TakeInvItem(index, .costitem, .costvalue)
+            TakeInvItem(index, .CostItem, .CostValue)
             GiveInvItem(index, .Item, .ItemValue)
         End With
 
@@ -2373,7 +2375,7 @@ Module ServerHandleData
 
         ' work out price
         multiplier = Shop(TempPlayer(index).InShop).BuyRate / 100
-        price = Item(itemNum).price * multiplier
+        price = Item(itemNum).Price * multiplier
 
         ' item has cost?
         If price <= 0 Then
@@ -2872,7 +2874,7 @@ Module ServerHandleData
         skill = buffer.ReadInteger
 
         Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = skill
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).sType = 1
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 1
 
         SendHotbar(index)
 
@@ -2889,7 +2891,7 @@ Module ServerHandleData
         slot = buffer.ReadInteger
 
         Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = 0
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).sType = 0
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 0
 
         SendHotbar(index)
 
@@ -3144,6 +3146,7 @@ Module ServerHandleData
         Map(MapNum).MapTintG = Buffer.ReadInteger
         Map(MapNum).MapTintB = Buffer.ReadInteger
         Map(MapNum).MapTintA = Buffer.ReadInteger
+        Map(MapNum).Instanced = Buffer.ReadInteger
 
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 
@@ -3162,8 +3165,8 @@ Module ServerHandleData
                     ReDim .Tile(x, y).Layer(0 To MapLayer.Count - 1)
                     For i = 0 To MapLayer.Count - 1
                         .Tile(x, y).Layer(i).Tileset = Buffer.ReadInteger
-                        .Tile(x, y).Layer(i).x = Buffer.ReadInteger
-                        .Tile(x, y).Layer(i).y = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).X = Buffer.ReadInteger
+                        .Tile(x, y).Layer(i).Y = Buffer.ReadInteger
                         .Tile(x, y).Layer(i).AutoTile = Buffer.ReadInteger
                     Next
                     .Tile(x, y).Type = Buffer.ReadInteger
@@ -3320,7 +3323,7 @@ Module ServerHandleData
 
         ' Clear out it all
         For i = 1 To MAX_MAP_ITEMS
-            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).x, MapItem(GetPlayerMap(Index), i).y)
+            SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), MapItem(GetPlayerMap(Index), i).X, MapItem(GetPlayerMap(Index), i).Y)
             ClearMapItem(i, GetPlayerMap(Index))
         Next
 

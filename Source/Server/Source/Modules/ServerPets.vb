@@ -466,8 +466,8 @@
         For i = 1 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(Index)).Npc(i).Num > 0 Then
-                If MapNpc(GetPlayerMap(Index)).Npc(i).x = x Then
-                    If MapNpc(GetPlayerMap(Index)).Npc(i).y = y Then
+                If MapNpc(GetPlayerMap(Index)).Npc(i).X = x Then
+                    If MapNpc(GetPlayerMap(Index)).Npc(i).Y = y Then
                         If TempPlayer(Index).PetTarget = i And TempPlayer(Index).PetTargetType = TargetType.Npc Then
                             ' Change target
                             TempPlayer(Index).PetTarget = 0
@@ -690,8 +690,8 @@
                                         If TempPlayer(PlayerIndex).PetTargetType > 0 Then Exit For
                                         If PetAlive(PlayerIndex) Then
                                             n = GetPetRange(PlayerIndex)
-                                            DistanceX = GetPetX(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).x
-                                            DistanceY = GetPetY(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).y
+                                            DistanceX = GetPetX(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).X
+                                            DistanceY = GetPetY(PlayerIndex) - MapNpc(GetPlayerMap(PlayerIndex)).Npc(i).Y
 
                                             ' Make sure we get a positive value
                                             If DistanceX < 0 Then DistanceX = DistanceX * -1
@@ -750,8 +750,8 @@
                                             If MapNpc(MapNum).Npc(Target).Num > 0 Then
                                                 DidWalk = False
                                                 target_verify = True
-                                                TargetY = MapNpc(MapNum).Npc(Target).y
-                                                TargetX = MapNpc(MapNum).Npc(Target).x
+                                                TargetY = MapNpc(MapNum).Npc(Target).Y
+                                                TargetX = MapNpc(MapNum).Npc(Target).X
                                             Else
                                                 TempPlayer(PlayerIndex).PetTargetType = TargetType.None ' clear
                                                 TempPlayer(PlayerIndex).PetTarget = 0
@@ -1111,7 +1111,7 @@
 
                     ' Check to make sure that there is not another npc in the way
                     For i = 1 To MAX_MAP_NPCS
-                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).x = GetPetX(Index)) And (MapNpc(MapNum).Npc(i).y = GetPetY(Index) - 1) Then
+                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = GetPetX(Index)) And (MapNpc(MapNum).Npc(i).Y = GetPetY(Index) - 1) Then
                             CanPetMove = False
                             Exit Function
                         End If
@@ -1152,7 +1152,7 @@
 
                     ' Check to make sure that there is not another npc in the way
                     For i = 1 To MAX_MAP_NPCS
-                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).x = GetPetX(Index)) And (MapNpc(MapNum).Npc(i).y = GetPetY(Index) + 1) Then
+                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = GetPetX(Index)) And (MapNpc(MapNum).Npc(i).Y = GetPetY(Index) + 1) Then
                             CanPetMove = False
                             Exit Function
                         End If
@@ -1193,7 +1193,7 @@
 
                     ' Check to make sure that there is not another npc in the way
                     For i = 1 To MAX_MAP_NPCS
-                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).x = GetPetX(Index) - 1) And (MapNpc(MapNum).Npc(i).y = GetPetY(Index)) Then
+                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = GetPetX(Index) - 1) And (MapNpc(MapNum).Npc(i).Y = GetPetY(Index)) Then
                             CanPetMove = False
                             Exit Function
                         End If
@@ -1234,7 +1234,7 @@
 
                     ' Check to make sure that there is not another npc in the way
                     For i = 1 To MAX_MAP_NPCS
-                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).x = GetPetX(Index) + 1) And (MapNpc(MapNum).Npc(i).y = GetPetY(Index)) Then
+                        If (MapNpc(MapNum).Npc(i).Num > 0) And (MapNpc(MapNum).Npc(i).X = GetPetX(Index) + 1) And (MapNpc(MapNum).Npc(i).Y = GetPetY(Index)) Then
                             CanPetMove = False
                             Exit Function
                         End If
@@ -1746,12 +1746,12 @@
 
             ' check if NPC can avoid the attack
             If CanNpcDodge(npcnum) Then
-                SendActionMsg(MapNum, "Dodge!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+                SendActionMsg(MapNum, "Dodge!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(MapNpcNum).X * 32), (MapNpc(MapNum).Npc(MapNpcNum).Y * 32))
                 Exit Sub
             End If
 
             If CanNpcParry(npcnum) Then
-                SendActionMsg(MapNum, "Parry!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+                SendActionMsg(MapNum, "Parry!", ColorType.Pink, 1, (MapNpc(MapNum).Npc(MapNpcNum).X * 32), (MapNpc(MapNum).Npc(MapNpcNum).Y * 32))
                 Exit Sub
             End If
 
@@ -1853,20 +1853,20 @@
                 Select Case GetPetDir(Attacker)
 
                     Case Direction.Up
-                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).x
-                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).y + 1
+                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).X
+                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).Y + 1
 
                     Case Direction.Down
-                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).x
-                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).y - 1
+                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).X
+                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).Y - 1
 
                     Case Direction.Left
-                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).x + 1
-                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).y
+                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).X + 1
+                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).Y
 
                     Case Direction.Right
-                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).x - 1
-                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).y
+                        NpcX = MapNpc(MapNum).Npc(mapnpcnum).X - 1
+                        NpcY = MapNpc(MapNum).Npc(mapnpcnum).Y
 
                 End Select
 
@@ -1919,8 +1919,8 @@
 
         If Damage >= MapNpc(MapNum).Npc(mapnpcnum).Vital(Vitals.HP) Then
 
-            SendActionMsg(GetPlayerMap(Attacker), "-" & MapNpc(MapNum).Npc(mapnpcnum).Vital(Vitals.HP), ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
-            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y)
+            SendActionMsg(GetPlayerMap(Attacker), "-" & MapNpc(MapNum).Npc(mapnpcnum).Vital(Vitals.HP), ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(mapnpcnum).X * 32), (MapNpc(MapNum).Npc(mapnpcnum).Y * 32))
+            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(mapnpcnum).X, MapNpc(MapNum).Npc(mapnpcnum).Y)
 
             ' send the sound
             'If Spellnum > 0 Then SendMapSound Attacker, MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y, SoundEntity.seSpell, Spellnum
@@ -2011,8 +2011,8 @@
             MapNpc(MapNum).Npc(mapnpcnum).Vital(Vitals.HP) = MapNpc(MapNum).Npc(mapnpcnum).Vital(Vitals.HP) - Damage
 
             ' Check for a weapon and say damage
-            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(mapnpcnum).x * 32), (MapNpc(MapNum).Npc(mapnpcnum).y * 32))
-            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y)
+            SendActionMsg(MapNum, "-" & Damage, ColorType.BrightRed, 1, (MapNpc(MapNum).Npc(mapnpcnum).X * 32), (MapNpc(MapNum).Npc(mapnpcnum).Y * 32))
+            SendBlood(GetPlayerMap(Attacker), MapNpc(MapNum).Npc(mapnpcnum).X, MapNpc(MapNum).Npc(mapnpcnum).Y)
 
             ' send the sound
             'If Spellnum > 0 Then SendMapSound Attacker, MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y, SoundEntity.seSpell, Spellnum
@@ -2034,8 +2034,8 @@
             End If
 
             ' set the regen timer
-            MapNpc(MapNum).Npc(mapnpcnum).stopRegen = True
-            MapNpc(MapNum).Npc(mapnpcnum).stopRegenTimer = GetTickCount()
+            MapNpc(MapNum).Npc(mapnpcnum).StopRegen = True
+            MapNpc(MapNum).Npc(mapnpcnum).StopRegenTimer = GetTickCount()
 
             ' if stunning spell, stun the npc
             If Skillnum > 0 Then
@@ -2085,7 +2085,7 @@
             ' * 1.5 if crit hit
             If CanNpcCrit(npcnum) Then
                 Damage = Damage * 1.5
-                SendActionMsg(MapNum, "Critical!", ColorType.BrightCyan, ActionMsgType.Scroll, (MapNpc(MapNum).Npc(MapNpcNum).x * 32), (MapNpc(MapNum).Npc(MapNpcNum).y * 32))
+                SendActionMsg(MapNum, "Critical!", ColorType.BrightCyan, ActionMsgType.Scroll, (MapNpc(MapNum).Npc(MapNpcNum).X * 32), (MapNpc(MapNum).Npc(MapNpcNum).Y * 32))
             End If
         End If
 
@@ -2127,19 +2127,19 @@
             If npcnum > 0 Then
 
                 ' Check if at same coordinates
-                If (GetPetY(Index) + 1 = MapNpc(MapNum).Npc(MapNpcNum).y) And (GetPetX(Index) = MapNpc(MapNum).Npc(MapNpcNum).x) Then
+                If (GetPetY(Index) + 1 = MapNpc(MapNum).Npc(MapNpcNum).Y) And (GetPetX(Index) = MapNpc(MapNum).Npc(MapNpcNum).X) Then
                     CanNpcAttackPet = True
                 Else
 
-                    If (GetPetY(Index) - 1 = MapNpc(MapNum).Npc(MapNpcNum).y) And (GetPetX(Index) = MapNpc(MapNum).Npc(MapNpcNum).x) Then
+                    If (GetPetY(Index) - 1 = MapNpc(MapNum).Npc(MapNpcNum).Y) And (GetPetX(Index) = MapNpc(MapNum).Npc(MapNpcNum).X) Then
                         CanNpcAttackPet = True
                     Else
 
-                        If (GetPetY(Index) = MapNpc(MapNum).Npc(MapNpcNum).y) And (GetPetX(Index) + 1 = MapNpc(MapNum).Npc(MapNpcNum).x) Then
+                        If (GetPetY(Index) = MapNpc(MapNum).Npc(MapNpcNum).Y) And (GetPetX(Index) + 1 = MapNpc(MapNum).Npc(MapNpcNum).X) Then
                             CanNpcAttackPet = True
                         Else
 
-                            If (GetPetY(Index) = MapNpc(MapNum).Npc(MapNpcNum).y) And (GetPetX(Index) - 1 = MapNpc(MapNum).Npc(MapNpcNum).x) Then
+                            If (GetPetY(Index) = MapNpc(MapNum).Npc(MapNpcNum).Y) And (GetPetX(Index) - 1 = MapNpc(MapNum).Npc(MapNpcNum).X) Then
                                 CanNpcAttackPet = True
                             End If
                         End If
@@ -2177,8 +2177,8 @@
         If Damage <= 0 Then Exit Sub
 
         ' set the regen timer
-        MapNpc(MapNum).Npc(mapnpcnum).stopRegen = True
-        MapNpc(MapNum).Npc(mapnpcnum).stopRegenTimer = GetTickCount()
+        MapNpc(MapNum).Npc(mapnpcnum).StopRegen = True
+        MapNpc(MapNum).Npc(mapnpcnum).StopRegenTimer = GetTickCount()
 
         If Damage >= Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.Health Then
             ' Say damage
@@ -2341,7 +2341,7 @@
             Exit Sub
         End If
 
-        MPCost = Skill(Skillnum).MPCost
+        MPCost = Skill(Skillnum).MpCost
 
         ' Check if they have enough MP
         If Player(Index).Character(TempPlayer(Index).CurChar).Pet.Mana < MPCost Then
@@ -2424,7 +2424,7 @@
                 ElseIf TargetTypes = TargetType.Npc Then
 
                     ' if have target, check in range
-                    If Not isInRange(Range, GetPetX(Index), GetPetY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
+                    If Not isInRange(Range, GetPetX(Index), GetPetY(Index), MapNpc(MapNum).Npc(Target).X, MapNpc(MapNum).Npc(Target).Y) Then
                         PlayerMsg(Index, "Target not in range of " & Trim$(GetPetName(Index)) & ".", ColorType.Yellow)
                         HasBuffered = False
                     Else
@@ -2464,7 +2464,7 @@
             TempPlayer(Index).PetskillBuffer.Skill = SkillSlot
             TempPlayer(Index).PetskillBuffer.Timer = GetTickCount()
             TempPlayer(Index).PetskillBuffer.Target = Target
-            TempPlayer(Index).PetskillBuffer.tType = TargetTypes
+            TempPlayer(Index).PetskillBuffer.TargetTypes = TargetTypes
             Exit Sub
         Else
             SendClearPetSpellBuffer(Index)
@@ -2485,7 +2485,7 @@
 
     End Sub
 
-    Public Sub PetCastSpell(ByVal Index As Integer, ByVal Skillslot As Integer, ByVal Target As Integer, ByVal TargetTypes As Byte, Optional TakeMana As Boolean = True, Optional ZoneNum As Integer = 0)
+    Public Sub PetCastSpell(ByVal Index As Integer, ByVal Skillslot As Integer, ByVal Target As Integer, ByVal TargetTypes As Byte, Optional TakeMana As Boolean = True)
         Dim Skillnum As Integer, MPCost As Integer, LevelReq As Integer
         Dim MapNum As Integer, Vital As Integer, DidCast As Boolean
         Dim AccessReq As Integer, i As Integer
@@ -2501,7 +2501,7 @@
         Skillnum = Player(Index).Character(TempPlayer(Index).CurChar).Pet.Skill(Skillslot)
         MapNum = GetPlayerMap(Index)
 
-        MPCost = Skill(Skillnum).MPCost
+        MPCost = Skill(Skillnum).MpCost
 
         ' Check if they have enough MP
         If Player(Index).Character(TempPlayer(Index).CurChar).Pet.Mana < MPCost Then
@@ -2573,8 +2573,8 @@
                         x = GetPlayerX(Target)
                         y = GetPlayerY(Target)
                     ElseIf TargetTypes = TargetType.Npc Then
-                        x = MapNpc(MapNum).Npc(Target).x
-                        y = MapNpc(MapNum).Npc(Target).y
+                        x = MapNpc(MapNum).Npc(Target).X
+                        y = MapNpc(MapNum).Npc(Target).Y
                     ElseIf TargetTypes = TargetType.Pet Then
                         x = GetPetX(Target)
                         y = GetPetY(Target)
@@ -2621,7 +2621,7 @@
 
                             If MapNpc(MapNum).Npc(i).Num > 0 Then
                                 If MapNpc(MapNum).Npc(i).Vital(Vitals.HP) > 0 Then
-                                    If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).x, MapNpc(MapNum).Npc(i).y) Then
+                                    If isInRange(AoE, x, y, MapNpc(MapNum).Npc(i).X, MapNpc(MapNum).Npc(i).Y) Then
                                         If CanPetAttackNpc(Index, i, True) Then
                                             SendAnimation(MapNum, Skill(Skillnum).SkillAnim, 0, 0, TargetType.Npc, i)
                                             PetAttackNpc(Index, i, Vital, Skillnum)
@@ -2673,8 +2673,8 @@
                     x = GetPlayerX(Target)
                     y = GetPlayerY(Target)
                 ElseIf TargetTypes = TargetType.Npc Then
-                    x = MapNpc(MapNum).Npc(Target).x
-                    y = MapNpc(MapNum).Npc(Target).y
+                    x = MapNpc(MapNum).Npc(Target).X
+                    y = MapNpc(MapNum).Npc(Target).Y
                 ElseIf TargetTypes = TargetType.Pet Then
                     x = GetPetX(Target)
                     y = GetPetY(Target)
@@ -2776,7 +2776,7 @@
             SendPetVital(Index, Vitals.MP)
             SendPetVital(Index, Vitals.HP)
 
-            TempPlayer(Index).PetSkillCD(Skillslot) = GetTickCount() + (Skill(Skillnum).CDTime * 1000)
+            TempPlayer(Index).PetSkillCD(Skillslot) = GetTickCount() + (Skill(Skillnum).CdTime * 1000)
 
             SendActionMsg(MapNum, Trim$(Skill(Skillnum).Name) & "!", ColorType.BrightRed, ActionMsgType.Scroll, GetPetX(Index) * 32, GetPetY(Index) * 32)
 
@@ -2832,14 +2832,14 @@
         For i = 1 To MAX_DOTS
             With TempPlayer(Index).PetHoT(i)
 
-                If .Spell = Skillnum Then
+                If .Skill = Skillnum Then
                     .Timer = GetTickCount()
                     .StartTime = GetTickCount()
                     Exit Sub
                 End If
 
                 If .Used = False Then
-                    .Spell = Skillnum
+                    .Skill = Skillnum
                     .Timer = GetTickCount()
                     .Used = True
                     .StartTime = GetTickCount()
@@ -2857,7 +2857,7 @@
 
         For i = 1 To MAX_DOTS
             With TempPlayer(Index).PetDoT(i)
-                If .Spell = Skillnum Then
+                If .Skill = Skillnum Then
                     .Timer = GetTickCount()
                     .Caster = Caster
                     .StartTime = GetTickCount()
@@ -2866,7 +2866,7 @@
                 End If
 
                 If .Used = False Then
-                    .Spell = Skillnum
+                    .Skill = Skillnum
                     .Timer = GetTickCount()
                     .Caster = Caster
                     .Used = True
@@ -2992,8 +2992,8 @@
             SendBlood(GetPlayerMap(Victim), GetPlayerX(Victim), GetPlayerY(Victim))
 
             ' set the regen timer
-            TempPlayer(Victim).stopRegen = True
-            TempPlayer(Victim).stopRegenTimer = GetTickCount()
+            TempPlayer(Victim).StopRegen = True
+            TempPlayer(Victim).StopRegenTimer = GetTickCount()
 
             'if a stunning spell, stun the player
             If SkillNum > 0 Then
@@ -3248,19 +3248,19 @@
 
         With TempPlayer(Index).PetDoT(dotNum)
 
-            If .Used And .Spell > 0 Then
+            If .Used And .Skill > 0 Then
 
                 ' time to tick?
-                If GetTickCount() > .Timer + (Skill(.Spell).Interval * 1000) Then
+                If GetTickCount() > .Timer + (Skill(.Skill).Interval * 1000) Then
                     If .AttackerType = TargetType.Pet Then
-                        If CanPetAttackPet(.Caster, Index, .Spell) Then
-                            PetAttackPet(.Caster, Index, Skill(.Spell).Vital)
+                        If CanPetAttackPet(.Caster, Index, .Skill) Then
+                            PetAttackPet(.Caster, Index, Skill(.Skill).Vital)
                             SendPetVital(Index, Vitals.HP)
                             SendPetVital(Index, Vitals.MP)
                         End If
                     ElseIf .AttackerType = TargetType.Player Then
-                        If CanPlayerAttackPet(.Caster, Index, .Spell) Then
-                            PlayerAttackPet(.Caster, Index, Skill(.Spell).Vital)
+                        If CanPlayerAttackPet(.Caster, Index, .Skill) Then
+                            PlayerAttackPet(.Caster, Index, Skill(.Skill).Vital)
                             SendPetVital(Index, Vitals.HP)
                             SendPetVital(Index, Vitals.MP)
                         End If
@@ -3269,12 +3269,12 @@
                     .Timer = GetTickCount()
 
                     ' check if DoT is still active - if player died it'll have been purged
-                    If .Used And .Spell > 0 Then
+                    If .Used And .Skill > 0 Then
 
                         ' destroy DoT if finished
-                        If GetTickCount() - .StartTime >= (Skill(.Spell).Duration * 1000) Then
+                        If GetTickCount() - .StartTime >= (Skill(.Skill).Duration * 1000) Then
                             .Used = False
-                            .Spell = 0
+                            .Skill = 0
                             .Timer = 0
                             .Caster = 0
                             .StartTime = 0
@@ -3290,11 +3290,11 @@
 
         With TempPlayer(Index).PetHoT(hotNum)
 
-            If .Used And .Spell > 0 Then
+            If .Used And .Skill > 0 Then
                 ' time to tick?
-                If GetTickCount() > .Timer + (Skill(.Spell).Interval * 1000) Then
-                    SendActionMsg(GetPlayerMap(Index), "+" & Skill(.Spell).Vital, ColorType.BrightGreen, ActionMsgType.Scroll, Player(Index).Character(TempPlayer(Index).CurChar).Pet.x * 32, Player(Index).Character(TempPlayer(Index).CurChar).Pet.y * 32,)
-                    Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health = Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health + Skill(.Spell).Vital
+                If GetTickCount() > .Timer + (Skill(.Skill).Interval * 1000) Then
+                    SendActionMsg(GetPlayerMap(Index), "+" & Skill(.Skill).Vital, ColorType.BrightGreen, ActionMsgType.Scroll, Player(Index).Character(TempPlayer(Index).CurChar).Pet.x * 32, Player(Index).Character(TempPlayer(Index).CurChar).Pet.y * 32,)
+                    Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health = Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health + Skill(.Skill).Vital
 
                     If Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health > GetPetMaxVital(Index, Vitals.HP) Then Player(Index).Character(TempPlayer(Index).CurChar).Pet.Health = GetPetMaxVital(Index, Vitals.HP)
 
@@ -3304,11 +3304,11 @@
                     .Timer = GetTickCount()
 
                     ' check if DoT is still active - if player died it'll have been purged
-                    If .Used And .Spell > 0 Then
+                    If .Used And .Skill > 0 Then
                         ' destroy hoT if finished
-                        If GetTickCount() - .StartTime >= (Skill(.Spell).Duration * 1000) Then
+                        If GetTickCount() - .StartTime >= (Skill(.Skill).Duration * 1000) Then
                             .Used = False
-                            .Spell = 0
+                            .Skill = 0
                             .Timer = 0
                             .Caster = 0
                             .StartTime = 0
@@ -3554,8 +3554,8 @@
         End If
 
         ' set the regen timer
-        TempPlayer(Attacker).stopRegen = True
-        TempPlayer(Attacker).stopRegenTimer = GetTickCount()
+        TempPlayer(Attacker).StopRegen = True
+        TempPlayer(Attacker).StopRegenTimer = GetTickCount()
 
         If Damage >= Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.Health Then
             SendActionMsg(GetPlayerMap(Victim), "-" & Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.Health, ColorType.BrightRed, 1, (Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.x * 32), (Player(Victim).Character(TempPlayer(Victim).CurChar).Pet.y * 32))

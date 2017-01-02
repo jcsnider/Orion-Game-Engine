@@ -52,7 +52,6 @@ Public Module ServerCrafting
 
         filename = Path.Combine(Application.StartupPath, "data", "recipes", String.Format("recipe{0}.dat", RecipeNum))
 
-
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
         writer.Write(Recipe(RecipeNum).Name)
@@ -130,7 +129,6 @@ Public Module ServerCrafting
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
-
 
         If Buffer.ReadInteger <> ClientPackets.CRequestRecipes Then Exit Sub
 
@@ -395,4 +393,5 @@ Public Module ServerCrafting
     End Sub
 
 #End Region
+
 End Module

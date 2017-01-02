@@ -45,6 +45,7 @@ Partial Class frmEditor_MapEditor
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
+        Me.chkIsInstanced = New System.Windows.Forms.CheckBox()
         Me.btnMapWarp = New System.Windows.Forms.Button()
         Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
         Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
@@ -171,7 +172,7 @@ Partial Class frmEditor_MapEditor
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.chkIsInstanced = New System.Windows.Forms.CheckBox()
+        Me.chkInstance = New System.Windows.Forms.CheckBox()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -444,6 +445,16 @@ Partial Class frmEditor_MapEditor
         Me.fraMapWarp.TabIndex = 0
         Me.fraMapWarp.TabStop = False
         Me.fraMapWarp.Text = "Map Warp"
+        '
+        'chkIsInstanced
+        '
+        Me.chkIsInstanced.AutoSize = True
+        Me.chkIsInstanced.Location = New System.Drawing.Point(167, 12)
+        Me.chkIsInstanced.Name = "chkIsInstanced"
+        Me.chkIsInstanced.Size = New System.Drawing.Size(79, 17)
+        Me.chkIsInstanced.TabIndex = 9
+        Me.chkIsInstanced.Text = "Instanced?"
+        Me.chkIsInstanced.UseVisualStyleBackColor = True
         '
         'btnMapWarp
         '
@@ -1146,6 +1157,7 @@ Partial Class frmEditor_MapEditor
         '
         'tpSettings
         '
+        Me.tpSettings.Controls.Add(Me.chkInstance)
         Me.tpSettings.Controls.Add(Me.GroupBox3)
         Me.tpSettings.Controls.Add(Me.GroupBox1)
         Me.tpSettings.Controls.Add(Me.btnSaveSettings)
@@ -1664,15 +1676,15 @@ Partial Class frmEditor_MapEditor
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
         '
-        'chkIsInstanced
+        'chkInstance
         '
-        Me.chkIsInstanced.AutoSize = True
-        Me.chkIsInstanced.Location = New System.Drawing.Point(167, 12)
-        Me.chkIsInstanced.Name = "chkIsInstanced"
-        Me.chkIsInstanced.Size = New System.Drawing.Size(79, 17)
-        Me.chkIsInstanced.TabIndex = 9
-        Me.chkIsInstanced.Text = "Instanced?"
-        Me.chkIsInstanced.UseVisualStyleBackColor = True
+        Me.chkInstance.AutoSize = True
+        Me.chkInstance.Location = New System.Drawing.Point(366, 376)
+        Me.chkInstance.Name = "chkInstance"
+        Me.chkInstance.Size = New System.Drawing.Size(79, 17)
+        Me.chkInstance.TabIndex = 40
+        Me.chkInstance.Text = "Instanced?"
+        Me.chkInstance.UseVisualStyleBackColor = True
         '
         'frmEditor_MapEditor
         '
@@ -1892,4 +1904,5 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents tsbClear As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents chkIsInstanced As Windows.Forms.CheckBox
+    Friend WithEvents chkInstance As Windows.Forms.CheckBox
 End Class

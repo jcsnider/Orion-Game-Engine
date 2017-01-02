@@ -29,7 +29,6 @@ Public Module ServerProjectiles
 #End Region
 
 #Region "Database"
-
     Sub SaveProjectiles()
         Dim i As Integer
 

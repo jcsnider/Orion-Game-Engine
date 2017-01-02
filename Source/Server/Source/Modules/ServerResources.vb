@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.Linq
 
 Public Module ServerResources
     Public SkillExpTable(100) As Integer
@@ -25,13 +24,11 @@ Public Module ServerResources
 
             ' Get the cache number
             For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
-
                 If ResourceCache(GetPlayerMap(Index)).ResourceData(i).x = x Then
                     If ResourceCache(GetPlayerMap(Index)).ResourceData(i).y = y Then
                         Resource_num = i
                     End If
                 End If
-
             Next
 
             If Resource_num > 0 Then
@@ -94,11 +91,9 @@ Public Module ServerResources
                         Else
                             SendActionMsg(GetPlayerMap(Index), Trim$(Resource(Resource_index).EmptyMessage), ColorType.BrightRed, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
                         End If
-
                     Else
                         PlayerMsg(Index, "You have the wrong type of tool equiped.", ColorType.Yellow)
                     End If
-
                 Else
                     PlayerMsg(Index, "You need a tool to interact with this resource.", ColorType.Yellow)
                 End If

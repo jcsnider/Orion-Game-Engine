@@ -19,7 +19,7 @@ Public Class Client
         Closing = False
     End Sub
 
-    Private Sub OnReceiveData(ar As IAsyncResult)
+    Private Sub OnReceiveData(ByVal ar As IAsyncResult)
         Try
             Dim readbytes As Integer = myStream.EndRead(ar)
             If Socket Is Nothing Then Exit Sub
@@ -50,7 +50,7 @@ Module ServerTCP
         ServerSocket.BeginAcceptTcpClient(AddressOf OnClientConnect, Nothing)
     End Sub
 
-    Private Sub OnClientConnect(ar As IAsyncResult)
+    Private Sub OnClientConnect(ByVal ar As IAsyncResult)
         Dim client As TcpClient = ServerSocket.EndAcceptTcpClient(ar)
         client.NoDelay = False
         ServerSocket.BeginAcceptTcpClient(AddressOf OnClientConnect, Nothing)
@@ -539,7 +539,7 @@ Module ServerTCP
         Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteInteger(Item(itemNum).Paperdoll)
         Buffer.WriteInteger(Item(itemNum).Pic)
-        Buffer.WriteInteger(Item(itemNum).price)
+        Buffer.WriteInteger(Item(itemNum).Price)
         Buffer.WriteInteger(Item(itemNum).Rarity)
         Buffer.WriteInteger(Item(itemNum).Speed)
 
@@ -603,7 +603,7 @@ Module ServerTCP
         Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteInteger(Item(itemNum).Paperdoll)
         Buffer.WriteInteger(Item(itemNum).Pic)
-        Buffer.WriteInteger(Item(itemNum).price)
+        Buffer.WriteInteger(Item(itemNum).Price)
         Buffer.WriteInteger(Item(itemNum).Rarity)
         Buffer.WriteInteger(Item(itemNum).Speed)
 
@@ -728,7 +728,7 @@ Module ServerTCP
 
         Buffer.WriteInteger(Npc(NpcNum).Exp)
         Buffer.WriteInteger(Npc(NpcNum).Faction)
-        Buffer.WriteInteger(Npc(NpcNum).HP)
+        Buffer.WriteInteger(Npc(NpcNum).Hp)
         Buffer.WriteString(Npc(NpcNum).Name)
         Buffer.WriteInteger(Npc(NpcNum).Range)
         Buffer.WriteInteger(Npc(NpcNum).SpawnSecs)
@@ -769,7 +769,7 @@ Module ServerTCP
 
         Buffer.WriteInteger(Npc(NpcNum).Exp)
         Buffer.WriteInteger(Npc(NpcNum).Faction)
-        Buffer.WriteInteger(Npc(NpcNum).HP)
+        Buffer.WriteInteger(Npc(NpcNum).Hp)
         Buffer.WriteString(Npc(NpcNum).Name)
         Buffer.WriteInteger(Npc(NpcNum).Range)
         Buffer.WriteInteger(Npc(NpcNum).SpawnSecs)
@@ -803,8 +803,8 @@ Module ServerTCP
 
             For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
                 Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).ResourceState)
-                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).x)
-                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).y)
+                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).X)
+                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).Y)
             Next
 
         End If
@@ -877,8 +877,8 @@ Module ServerTCP
         Buffer.WriteInteger(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costitem)
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costvalue)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostItem)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostValue)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).Item)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).ItemValue)
         Next
@@ -899,8 +899,8 @@ Module ServerTCP
         Buffer.WriteInteger(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costitem)
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costvalue)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostItem)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostValue)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).Item)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).ItemValue)
         Next
@@ -933,7 +933,7 @@ Module ServerTCP
         Buffer.WriteInteger(Skill(skillnum).AoE)
         Buffer.WriteInteger(Skill(skillnum).CastAnim)
         Buffer.WriteInteger(Skill(skillnum).CastTime)
-        Buffer.WriteInteger(Skill(skillnum).CDTime)
+        Buffer.WriteInteger(Skill(skillnum).CdTime)
         Buffer.WriteInteger(Skill(skillnum).ClassReq)
         Buffer.WriteInteger(Skill(skillnum).Dir)
         Buffer.WriteInteger(Skill(skillnum).Duration)
@@ -942,15 +942,15 @@ Module ServerTCP
         Buffer.WriteInteger(Skill(skillnum).IsAoE)
         Buffer.WriteInteger(Skill(skillnum).LevelReq)
         Buffer.WriteInteger(Skill(skillnum).Map)
-        Buffer.WriteInteger(Skill(skillnum).MPCost)
+        Buffer.WriteInteger(Skill(skillnum).MpCost)
         Buffer.WriteString(Trim(Skill(skillnum).Name))
         Buffer.WriteInteger(Skill(skillnum).range)
         Buffer.WriteInteger(Skill(skillnum).SkillAnim)
         Buffer.WriteInteger(Skill(skillnum).StunDuration)
         Buffer.WriteInteger(Skill(skillnum).Type)
         Buffer.WriteInteger(Skill(skillnum).Vital)
-        Buffer.WriteInteger(Skill(skillnum).x)
-        Buffer.WriteInteger(Skill(skillnum).y)
+        Buffer.WriteInteger(Skill(skillnum).X)
+        Buffer.WriteInteger(Skill(skillnum).Y)
 
         'projectiles
         Buffer.WriteInteger(Skill(skillnum).IsProjectile)
@@ -974,7 +974,7 @@ Module ServerTCP
         Buffer.WriteInteger(Skill(skillnum).AoE)
         Buffer.WriteInteger(Skill(skillnum).CastAnim)
         Buffer.WriteInteger(Skill(skillnum).CastTime)
-        Buffer.WriteInteger(Skill(skillnum).CDTime)
+        Buffer.WriteInteger(Skill(skillnum).CdTime)
         Buffer.WriteInteger(Skill(skillnum).ClassReq)
         Buffer.WriteInteger(Skill(skillnum).Dir)
         Buffer.WriteInteger(Skill(skillnum).Duration)
@@ -983,15 +983,15 @@ Module ServerTCP
         Buffer.WriteInteger(Skill(skillnum).IsAoE)
         Buffer.WriteInteger(Skill(skillnum).LevelReq)
         Buffer.WriteInteger(Skill(skillnum).Map)
-        Buffer.WriteInteger(Skill(skillnum).MPCost)
+        Buffer.WriteInteger(Skill(skillnum).MpCost)
         Buffer.WriteString(Skill(skillnum).Name)
         Buffer.WriteInteger(Skill(skillnum).range)
         Buffer.WriteInteger(Skill(skillnum).SkillAnim)
         Buffer.WriteInteger(Skill(skillnum).StunDuration)
         Buffer.WriteInteger(Skill(skillnum).Type)
         Buffer.WriteInteger(Skill(skillnum).Vital)
-        Buffer.WriteInteger(Skill(skillnum).x)
-        Buffer.WriteInteger(Skill(skillnum).y)
+        Buffer.WriteInteger(Skill(skillnum).X)
+        Buffer.WriteInteger(Skill(skillnum).Y)
 
         'projectiles
         Buffer.WriteInteger(Skill(skillnum).IsProjectile)
@@ -1110,8 +1110,8 @@ Module ServerTCP
     Sub SendWelcome(ByVal Index As Integer)
 
         ' Send them MOTD
-        If Len(Options.MOTD) > 0 Then
-            PlayerMsg(Index, Options.MOTD, ColorType.BrightCyan)
+        If Len(Options.Motd) > 0 Then
+            PlayerMsg(Index, Options.Motd, ColorType.BrightCyan)
         End If
 
         ' Send whos online
@@ -1202,6 +1202,7 @@ Module ServerTCP
             Buffer.WriteInteger(Map(MapNum).MapTintG)
             Buffer.WriteInteger(Map(MapNum).MapTintB)
             Buffer.WriteInteger(Map(MapNum).MapTintA)
+            Buffer.WriteInteger(Map(MapNum).Instanced)
 
             For i = 1 To MAX_MAP_NPCS
                 Buffer.WriteInteger(Map(MapNum).Npc(i))
@@ -1215,8 +1216,8 @@ Module ServerTCP
                     Buffer.WriteInteger(Map(MapNum).Tile(x, y).DirBlock)
                     For i = 0 To MapLayer.Count - 1
                         Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).Tileset)
-                        Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).x)
-                        Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).y)
+                        Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).X)
+                        Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).Y)
                         Buffer.WriteInteger(Map(MapNum).Tile(x, y).Layer(i).AutoTile)
                     Next
                     Buffer.WriteInteger(Map(MapNum).Tile(x, y).Type)
@@ -1339,14 +1340,14 @@ Module ServerTCP
         For i = 1 To MAX_MAP_ITEMS
             Buffer.WriteInteger(MapItem(MapNum, i).Num)
             Buffer.WriteInteger(MapItem(MapNum, i).Value)
-            Buffer.WriteInteger(MapItem(MapNum, i).x)
-            Buffer.WriteInteger(MapItem(MapNum, i).y)
+            Buffer.WriteInteger(MapItem(MapNum, i).X)
+            Buffer.WriteInteger(MapItem(MapNum, i).Y)
         Next
 
         For i = 1 To MAX_MAP_NPCS
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Num)
-            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).x)
-            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).y)
+            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).X)
+            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Y)
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Dir)
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Vital(Vitals.MP))
@@ -1359,8 +1360,8 @@ Module ServerTCP
 
             For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
                 Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).ResourceState)
-                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).x)
-                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).y)
+                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).X)
+                Buffer.WriteInteger(ResourceCache(GetPlayerMap(Index)).ResourceData(i).Y)
             Next
         Else
             Buffer.WriteInteger(0)
@@ -1448,8 +1449,8 @@ Module ServerTCP
         For i = 1 To MAX_MAP_ITEMS
             Buffer.WriteInteger(MapItem(MapNum, i).Num)
             Buffer.WriteInteger(MapItem(MapNum, i).Value)
-            Buffer.WriteInteger(MapItem(MapNum, i).x)
-            Buffer.WriteInteger(MapItem(MapNum, i).y)
+            Buffer.WriteInteger(MapItem(MapNum, i).X)
+            Buffer.WriteInteger(MapItem(MapNum, i).Y)
         Next
 
         SendDataTo(Index, Buffer.ToArray())
@@ -1466,8 +1467,8 @@ Module ServerTCP
 
         For i = 1 To MAX_MAP_NPCS
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Num)
-            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).x)
-            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).y)
+            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).X)
+            Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Y)
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Dir)
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Vital(Vitals.HP))
             Buffer.WriteInteger(MapNpc(MapNum).Npc(i).Vital(Vitals.MP))
@@ -1488,8 +1489,8 @@ Module ServerTCP
 
         With MapNpc(MapNum).Npc(MapNpcNum)
             Buffer.WriteInteger(.Num)
-            Buffer.WriteInteger(.x)
-            Buffer.WriteInteger(.y)
+            Buffer.WriteInteger(.X)
+            Buffer.WriteInteger(.Y)
             Buffer.WriteInteger(.Dir)
             Buffer.WriteInteger(.Vital(Vitals.HP))
             Buffer.WriteInteger(.Vital(Vitals.MP))
@@ -1511,7 +1512,7 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendPlayerMove(ByVal Index As Integer, ByVal movement As Integer)
+    Sub SendPlayerMove(ByVal Index As Integer, ByVal Movement As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
@@ -1520,32 +1521,32 @@ Module ServerTCP
         Buffer.WriteInteger(GetPlayerX(Index))
         Buffer.WriteInteger(GetPlayerY(Index))
         Buffer.WriteInteger(GetPlayerDir(Index))
-        Buffer.WriteInteger(movement)
+        Buffer.WriteInteger(Movement)
         SendDataToMapBut(Index, GetPlayerMap(Index), Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
 
-    Sub SendDoorAnimation(ByVal MapNum As Integer, ByVal x As Integer, ByVal y As Integer)
+    Sub SendDoorAnimation(ByVal MapNum As Integer, ByVal X As Integer, ByVal Y As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SDoorAnimation)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
 
         SendDataToMap(MapNum, Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
 
-    Sub SendMapKey(ByVal Index As Integer, ByVal x As Integer, ByVal y As Integer, ByVal Value As Byte)
+    Sub SendMapKey(ByVal Index As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal Value As Byte)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SMapKey)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
         Buffer.WriteInteger(Value)
 
         SendDataTo(Index, Buffer.ToArray())
@@ -1553,7 +1554,7 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Public Sub MapMsg(ByVal MapNum As Integer, ByVal Msg As String, ByVal color As Byte)
+    Public Sub MapMsg(ByVal MapNum As Integer, ByVal Msg As String, ByVal Color As Byte)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
 
@@ -1565,16 +1566,16 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendActionMsg(ByVal MapNum As Integer, ByVal message As String, ByVal color As Integer, ByVal MsgType As Integer, ByVal x As Integer, ByVal y As Integer, Optional ByVal PlayerOnlyNum As Integer = 0)
+    Sub SendActionMsg(ByVal MapNum As Integer, ByVal Message As String, ByVal Color As Integer, ByVal MsgType As Integer, ByVal X As Integer, ByVal Y As Integer, Optional ByVal PlayerOnlyNum As Integer = 0)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SActionMsg)
-        Buffer.WriteString(message)
-        Buffer.WriteInteger(color)
+        Buffer.WriteString(Message)
+        Buffer.WriteInteger(Color)
         Buffer.WriteInteger(MsgType)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
 
         If PlayerOnlyNum > 0 Then
             SendDataTo(PlayerOnlyNum, Buffer.ToArray())
@@ -1585,7 +1586,7 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SayMsg_Map(ByVal MapNum As Integer, ByVal Index As Integer, ByVal message As String, ByVal saycolour As Integer)
+    Sub SayMsg_Map(ByVal MapNum As Integer, ByVal Index As Integer, ByVal Message As String, ByVal SayColour As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
@@ -1593,9 +1594,9 @@ Module ServerTCP
         Buffer.WriteString(GetPlayerName(Index))
         Buffer.WriteInteger(GetPlayerAccess(Index))
         Buffer.WriteInteger(GetPlayerPK(Index))
-        Buffer.WriteString(message)
+        Buffer.WriteString(Message)
         Buffer.WriteString("[Map] ")
-        Buffer.WriteInteger(saycolour)
+        Buffer.WriteInteger(SayColour)
 
         SendDataToMap(MapNum, Buffer.ToArray())
 
@@ -1650,13 +1651,13 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendMapKeyToMap(ByVal MapNum As Integer, ByVal x As Integer, ByVal y As Integer, ByVal Value As Byte)
+    Sub SendMapKeyToMap(ByVal MapNum As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal Value As Byte)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SMapKey)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
         Buffer.WriteInteger(Value)
         SendDataToMap(MapNum, Buffer.ToArray())
 
@@ -1674,8 +1675,8 @@ Module ServerTCP
 
             For i = 0 To ResourceCache(MapNum).Resource_Count
                 Buffer.WriteInteger(ResourceCache(MapNum).ResourceData(i).ResourceState)
-                Buffer.WriteInteger(ResourceCache(MapNum).ResourceData(i).x)
-                Buffer.WriteInteger(ResourceCache(MapNum).ResourceData(i).y)
+                Buffer.WriteInteger(ResourceCache(MapNum).ResourceData(i).X)
+                Buffer.WriteInteger(ResourceCache(MapNum).ResourceData(i).Y)
             Next
 
         End If
@@ -1707,11 +1708,9 @@ Module ServerTCP
         i = 0
 
         For x = 1 To MAX_ANIMATIONS
-
             If Len(Trim$(Animation(x).Name)) > 0 Then
                 i = i + 1
             End If
-
         Next
 
         buffer.WriteInteger(i)
@@ -1720,11 +1719,9 @@ Module ServerTCP
         i = 0
 
         For x = 1 To MAX_NPCS
-
             If Len(Trim$(Npc(x).Name)) > 0 Then
                 i = i + 1
             End If
-
         Next
 
         buffer.WriteInteger(i)
@@ -1733,11 +1730,9 @@ Module ServerTCP
         i = 0
 
         For x = 1 To MAX_SHOPS
-
             If Len(Trim$(Shop(x).Name)) > 0 Then
                 i = i + 1
             End If
-
         Next
 
         buffer.WriteInteger(i)
@@ -1746,11 +1741,9 @@ Module ServerTCP
         i = 0
 
         For x = 1 To MAX_SKILLS
-
             If Len(Trim$(Skill(x).Name)) > 0 Then
                 i = i + 1
             End If
-
         Next
 
         buffer.WriteInteger(i)
@@ -1759,11 +1752,9 @@ Module ServerTCP
         i = 0
 
         For x = 1 To MAX_RESOURCES
-
             If Len(Trim$(Resource(x).Name)) > 0 Then
                 i = i + 1
             End If
-
         Next
 
         buffer.WriteInteger(i)
@@ -1784,7 +1775,7 @@ Module ServerTCP
         buffer = Nothing
     End Sub
 
-    Sub SayMsg_Global(ByVal Index As Integer, ByVal message As String, ByVal saycolour As Integer)
+    Sub SayMsg_Global(ByVal Index As Integer, ByVal Message As String, ByVal SayColour As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
@@ -1792,46 +1783,46 @@ Module ServerTCP
         Buffer.WriteString(GetPlayerName(Index))
         Buffer.WriteInteger(GetPlayerAccess(Index))
         Buffer.WriteInteger(GetPlayerPK(Index))
-        Buffer.WriteString(message)
+        Buffer.WriteString(Message)
         Buffer.WriteString("[Global] ")
-        Buffer.WriteInteger(saycolour)
+        Buffer.WriteInteger(SayColour)
 
         SendDataToAll(Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
 
-    Sub SendInventoryUpdate(ByVal Index As Integer, ByVal invSlot As Integer)
+    Sub SendInventoryUpdate(ByVal Index As Integer, ByVal InvSlot As Integer)
         Dim Buffer As ByteBuffer, n As Integer
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SPlayerInvUpdate)
-        Buffer.WriteInteger(invSlot)
-        Buffer.WriteInteger(GetPlayerInvItemNum(Index, invSlot))
-        Buffer.WriteInteger(GetPlayerInvItemValue(Index, invSlot))
+        Buffer.WriteInteger(InvSlot)
+        Buffer.WriteInteger(GetPlayerInvItemNum(Index, InvSlot))
+        Buffer.WriteInteger(GetPlayerInvItemValue(Index, InvSlot))
 
-        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Prefix)
-        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Suffix)
-        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Rarity)
+        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Prefix)
+        Buffer.WriteString(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Suffix)
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Rarity)
         For n = 1 To Stats.Count - 1
-            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Stat(n))
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Stat(n))
         Next n
-        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Damage)
-        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Speed)
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Damage)
+        Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Speed)
 
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
 
-    Sub SendAnimation(ByVal MapNum As Integer, ByVal Anim As Integer, ByVal x As Integer, ByVal y As Integer, Optional ByVal LockType As Byte = 0, Optional ByVal LockIndex As Integer = 0)
+    Sub SendAnimation(ByVal MapNum As Integer, ByVal Anim As Integer, ByVal X As Integer, ByVal Y As Integer, Optional ByVal LockType As Byte = 0, Optional ByVal LockIndex As Integer = 0)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SAnimation)
         Buffer.WriteInteger(Anim)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
         Buffer.WriteInteger(LockType)
         Buffer.WriteInteger(LockIndex)
 
@@ -1840,12 +1831,12 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendOpenShop(ByVal Index As Integer, ByVal shopNum As Integer)
+    Sub SendOpenShop(ByVal Index As Integer, ByVal ShopNum As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SOpenShop)
-        Buffer.WriteInteger(shopNum)
+        Buffer.WriteInteger(ShopNum)
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
@@ -1913,19 +1904,19 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendTrade(ByVal Index As Integer, ByVal tradeTarget As Integer)
+    Sub SendTrade(ByVal Index As Integer, ByVal TradeTarget As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.STrade)
-        Buffer.WriteInteger(tradeTarget)
-        Buffer.WriteString(Trim$(GetPlayerName(tradeTarget)))
+        Buffer.WriteInteger(TradeTarget)
+        Buffer.WriteString(Trim$(GetPlayerName(TradeTarget)))
         SendDataTo(Index, Buffer.ToArray())
 
         Buffer = Nothing
     End Sub
 
-    Sub SendTradeUpdate(ByVal Index As Integer, ByVal dataType As Byte)
+    Sub SendTradeUpdate(ByVal Index As Integer, ByVal DataType As Byte)
         Dim Buffer As ByteBuffer
         Dim i As Integer
         Dim tradeTarget As Integer
@@ -1935,24 +1926,24 @@ Module ServerTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.STradeUpdate)
-        Buffer.WriteInteger(dataType)
+        Buffer.WriteInteger(DataType)
 
-        If dataType = 0 Then ' own inventory
+        If DataType = 0 Then ' own inventory
             For i = 1 To MAX_INV
                 Buffer.WriteInteger(TempPlayer(Index).TradeOffer(i).Num)
                 Buffer.WriteInteger(TempPlayer(Index).TradeOffer(i).Value)
                 ' add total worth
                 If TempPlayer(Index).TradeOffer(i).Num > 0 Then
-                    totalWorth = totalWorth + Item(GetPlayerInvItemNum(Index, TempPlayer(Index).TradeOffer(i).Num)).price
+                    totalWorth = totalWorth + Item(GetPlayerInvItemNum(Index, TempPlayer(Index).TradeOffer(i).Num)).Price
                 End If
             Next
-        ElseIf dataType = 1 Then ' other inventory
+        ElseIf DataType = 1 Then ' other inventory
             For i = 1 To MAX_INV
                 Buffer.WriteInteger(GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num))
                 Buffer.WriteInteger(TempPlayer(tradeTarget).TradeOffer(i).Value)
                 ' add total worth
                 If GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num) > 0 Then
-                    totalWorth = totalWorth + Item(GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)).price
+                    totalWorth = totalWorth + Item(GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)).Price
                 End If
             Next
         End If
@@ -1986,8 +1977,8 @@ Module ServerTCP
         For i = 1 To MAX_MAP_ITEMS
             Buffer.WriteInteger(MapItem(MapNum, i).Num)
             Buffer.WriteInteger(MapItem(MapNum, i).Value)
-            Buffer.WriteInteger(MapItem(MapNum, i).x)
-            Buffer.WriteInteger(MapItem(MapNum, i).y)
+            Buffer.WriteInteger(MapItem(MapNum, i).X)
+            Buffer.WriteInteger(MapItem(MapNum, i).Y)
         Next
 
         SendDataToMap(MapNum, Buffer.ToArray())
@@ -2007,13 +1998,13 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendBlood(ByVal MapNum As Integer, ByVal x As Integer, ByVal y As Integer)
+    Sub SendBlood(ByVal MapNum As Integer, ByVal X As Integer, ByVal Y As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SBlood)
-        Buffer.WriteInteger(x)
-        Buffer.WriteInteger(y)
+        Buffer.WriteInteger(X)
+        Buffer.WriteInteger(Y)
 
         SendDataToMap(MapNum, Buffer.ToArray())
 
@@ -2129,7 +2120,7 @@ Module ServerTCP
 
         For i = 1 To MAX_HOTBAR
             Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(i).Slot)
-            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(i).sType)
+            Buffer.WriteInteger(Player(Index).Character(TempPlayer(Index).CurChar).Hotbar(i).SlotType)
         Next
 
         SendDataTo(Index, Buffer.ToArray())
@@ -2233,7 +2224,7 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendChatBubble(ByVal MapNum As Integer, ByVal Target As Integer, ByVal TargetType As Integer, ByVal message As String, ByVal Colour As Integer)
+    Sub SendChatBubble(ByVal MapNum As Integer, ByVal Target As Integer, ByVal TargetType As Integer, ByVal Message As String, ByVal Colour As Integer)
         Dim Buffer As ByteBuffer
 
         Buffer = New ByteBuffer
@@ -2241,7 +2232,7 @@ Module ServerTCP
 
         Buffer.WriteInteger(Target)
         Buffer.WriteInteger(TargetType)
-        Buffer.WriteString(message)
+        Buffer.WriteString(Message)
         Buffer.WriteInteger(Colour)
         SendDataToMap(MapNum, Buffer.ToArray)
 

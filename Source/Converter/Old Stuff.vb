@@ -22,9 +22,9 @@
     Public Structure OldTileRec
         Dim Layer() As OldTileDataRec
         Dim Type As Byte
-        Dim Data1 As Long
-        Dim Data2 As Long
-        Dim Data3 As Long
+        Dim Data1 As Integer
+        Dim Data2 As Integer
+        Dim Data3 As Integer
         Dim DirBlock As Byte
     End Structure
 
@@ -32,9 +32,9 @@
         Dim Name As String
         Dim Music As String
 
-        Dim Revision As Long
+        Dim Revision As Integer
         Dim Moral As Byte
-        Dim Tileset As Long
+        Dim Tileset As Integer
 
         Dim Up As Integer
         Dim Down As Integer
@@ -52,11 +52,11 @@
 
         Dim Npc() As Integer
 
-        Dim EventCount As Long
+        Dim EventCount As Integer
 
         Dim WeatherType As Byte
-        Dim FogIndex As Long
-        Dim WeatherIntensity As Long
+        Dim FogIndex As Integer
+        Dim WeatherIntensity As Integer
         Dim FogAlpha As Byte
         Dim FogSpeed As Byte
 
@@ -68,8 +68,8 @@
     End Structure
 
     Sub ClearOldMap()
-        Dim x As Long
-        Dim y As Long
+        Dim x As Integer
+        Dim y As Integer
         OldMap = Nothing
         OldMap.Tileset = 1
         OldMap.Name = ""
@@ -94,64 +94,64 @@
     End Sub
 
     Sub LoadOldMap(ByVal filename As String)
+        Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
-        Dim F As Long
-        Dim x As Long
-        Dim y As Long
-        Dim l As Long
+        reader.Read(OldMap.Name)
+        reader.Read(OldMap.Music)
 
-        F = FreeFile()
-        FileOpen(F, filename, OpenMode.Binary, OpenAccess.Read, OpenShare.Default)
-        FileGetObject(F, OldMap.Name)
-        FileGetObject(F, OldMap.Music)
-        FileGetObject(F, OldMap.Revision)
-        FileGetObject(F, OldMap.Moral)
-        FileGetObject(F, OldMap.Tileset)
-        FileGetObject(F, OldMap.Up)
-        FileGetObject(F, OldMap.Down)
-        FileGetObject(F, OldMap.Left)
-        FileGetObject(F, OldMap.Right)
-        FileGetObject(F, OldMap.BootMap)
-        FileGetObject(F, OldMap.BootX)
-        FileGetObject(F, OldMap.BootY)
-        FileGetObject(F, OldMap.MaxX)
-        FileGetObject(F, OldMap.MaxY)
-        FileGetObject(F, OldMap.WeatherType)
-        FileGetObject(F, OldMap.FogIndex)
-        FileGetObject(F, OldMap.WeatherIntensity)
-        FileGetObject(F, OldMap.FogAlpha)
-        FileGetObject(F, OldMap.FogSpeed)
-        FileGetObject(F, OldMap.HasMapTint)
-        FileGetObject(F, OldMap.MapTintR)
-        FileGetObject(F, OldMap.MapTintG)
-        FileGetObject(F, OldMap.MapTintB)
-        FileGetObject(F, OldMap.MapTintA)
+        reader.Read(OldMap.Revision)
+        reader.Read(OldMap.Moral)
+        reader.Read(OldMap.Tileset)
+
+        reader.Read(OldMap.Up)
+        reader.Read(OldMap.Down)
+        reader.Read(OldMap.Left)
+        reader.Read(OldMap.Right)
+
+        reader.Read(OldMap.BootMap)
+        reader.Read(OldMap.BootX)
+        reader.Read(OldMap.BootY)
+
+        reader.Read(OldMap.MaxX)
+        reader.Read(OldMap.MaxY)
+
+        reader.Read(OldMap.WeatherType)
+        reader.Read(OldMap.FogIndex)
+        reader.Read(OldMap.WeatherIntensity)
+        reader.Read(OldMap.FogAlpha)
+        reader.Read(OldMap.FogSpeed)
+
+        reader.Read(OldMap.HasMapTint)
+        reader.Read(OldMap.MapTintR)
+        reader.Read(OldMap.MapTintG)
+        reader.Read(OldMap.MapTintB)
+        reader.Read(OldMap.MapTintA)
 
         ' have to set the tile()
-        ReDim OldMap.Tile(0 To OldMap.MaxX, 0 To OldMap.MaxY)
+        ReDim OldMap.Tile(OldMap.MaxX, OldMap.MaxY)
 
         For x = 0 To OldMap.MaxX
             For y = 0 To OldMap.MaxY
-                FileGetObject(F, OldMap.Tile(x, y).Data1)
-                FileGetObject(F, OldMap.Tile(x, y).Data2)
-                FileGetObject(F, OldMap.Tile(x, y).Data3)
-                FileGetObject(F, OldMap.Tile(x, y).DirBlock)
+                reader.Read(OldMap.Tile(x, y).Data1)
+                reader.Read(OldMap.Tile(x, y).Data2)
+                reader.Read(OldMap.Tile(x, y).Data3)
+                reader.Read(OldMap.Tile(x, y).DirBlock)
                 ReDim OldMap.Tile(x, y).Layer(0 To MapLayer.Count - 1)
                 For l = 0 To MapLayer.Count - 1
-                    FileGetObject(F, OldMap.Tile(x, y).Layer(l).Tileset)
-                    FileGetObject(F, OldMap.Tile(x, y).Layer(l).X)
-                    FileGetObject(F, OldMap.Tile(x, y).Layer(l).Y)
-                    FileGetObject(F, OldMap.Tile(x, y).Layer(l).Autotile)
+                    reader.Read(OldMap.Tile(x, y).Layer(l).Tileset)
+                    reader.Read(OldMap.Tile(x, y).Layer(l).X)
+                    reader.Read(OldMap.Tile(x, y).Layer(l).Y)
+                    reader.Read(OldMap.Tile(x, y).Layer(l).Autotile)
                 Next
-                FileGetObject(F, OldMap.Tile(x, y).Type)
+                reader.Read(OldMap.Tile(x, y).Type)
             Next
         Next
 
         For x = 1 To MAX_MAP_NPCS
-            FileGetObject(F, OldMap.Npc(x))
+            reader.Read(OldMap.Npc(x))
         Next
 
-        FileClose(F)
+        reader = Nothing
 
     End Sub
 #End Region

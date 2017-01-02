@@ -52,7 +52,7 @@ Public Module ServerHousing
 
     End Sub
 
-    Sub SaveHouse(Index As Integer)
+    Sub SaveHouse(ByVal Index As Integer)
         Dim filepath As String
 
         filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
@@ -550,7 +550,7 @@ Public Module ServerHousing
 
     End Sub
 
-    Sub SendFurnitureToHouse(HouseIndex As Integer)
+    Sub SendFurnitureToHouse(ByVal HouseIndex As Integer)
         Dim Buffer As ByteBuffer, i As Integer
 
         Buffer = New ByteBuffer

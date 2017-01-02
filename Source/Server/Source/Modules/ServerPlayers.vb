@@ -88,13 +88,13 @@ Module ServerPlayers
     Function GetPlayerX(ByVal Index As Integer) As Integer
         GetPlayerX = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerX = Player(Index).Character(TempPlayer(Index).CurChar).x
+        GetPlayerX = Player(Index).Character(TempPlayer(Index).CurChar).X
     End Function
 
     Function GetPlayerY(ByVal Index As Integer) As Integer
         GetPlayerY = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerY = Player(Index).Character(TempPlayer(Index).CurChar).y
+        GetPlayerY = Player(Index).Character(TempPlayer(Index).CurChar).Y
     End Function
 
     Sub SendLeaveMap(ByVal Index As Integer, ByVal MapNum As Integer)
@@ -108,25 +108,26 @@ Module ServerPlayers
         Buffer = Nothing
     End Sub
 
-    Sub PlayerWarp(ByVal Index As Integer, ByVal MapNum As Integer, ByVal x As Integer, ByVal y As Integer, Optional HouseTeleport As Boolean = False)
+    Sub PlayerWarp(ByVal Index As Integer, ByVal MapNum As Integer, ByVal X As Integer, ByVal Y As Integer, Optional HouseTeleport As Boolean = False)
         Dim OldMap As Integer
         Dim i As Integer
         Dim Buffer As ByteBuffer
 
-        If (MapNum And INSTANCED_MAP_MASK) > 0 Then
+        'If (MapNum And INSTANCED_MAP_MASK) > 0 Then
+        If Map(MapNum).Instanced = 1 Then
             MapNum = CreateInstance(MapNum And MAP_NUMBER_MASK)
             If MapNum = -1 Then
                 'Couldn't create instanced map!
                 MapNum = GetPlayerMap(Index)
-                x = GetPlayerX(Index)
-                y = GetPlayerY(Index)
+                X = GetPlayerX(Index)
+                Y = GetPlayerY(Index)
                 AlertMsg(Index, "Unable to create a cached map!")
             Else
                 'store old info, for returning to entrance of instance
                 If Not TempPlayer(Index).InInstance = 1 Then
-                    TempPlayer(Index).tmpMap = GetPlayerMap(Index)
-                    TempPlayer(Index).tmpX = GetPlayerX(Index)
-                    TempPlayer(Index).tmpY = GetPlayerY(Index)
+                    TempPlayer(Index).TmpMap = GetPlayerMap(Index)
+                    TempPlayer(Index).TmpX = GetPlayerX(Index)
+                    TempPlayer(Index).TmpY = GetPlayerY(Index)
                     TempPlayer(Index).InInstance = 1
                 End If
                 MapNum = MapNum + MAX_MAPS
@@ -137,8 +138,8 @@ Module ServerPlayers
         If IsPlaying(Index) = False Or MapNum <= 0 Or MapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Check if you are out of bounds
-        If x > Map(MapNum).MaxX Then x = Map(MapNum).MaxX
-        If y > Map(MapNum).MaxY Then y = Map(MapNum).MaxY
+        If X > Map(MapNum).MaxX Then X = Map(MapNum).MaxX
+        If Y > Map(MapNum).MaxY Then Y = Map(MapNum).MaxY
 
         TempPlayer(Index).EventProcessingCount = 0
         TempPlayer(Index).EventMap.CurrentEvents = 0
@@ -172,10 +173,10 @@ Module ServerPlayers
         End If
 
         SetPlayerMap(Index, MapNum)
-        SetPlayerX(Index, x)
-        SetPlayerY(Index, y)
-        Player(Index).Character(TempPlayer(Index).CurChar).Pet.x = x
-        Player(Index).Character(TempPlayer(Index).CurChar).Pet.y = y
+        SetPlayerX(Index, X)
+        SetPlayerY(Index, Y)
+        Player(Index).Character(TempPlayer(Index).CurChar).Pet.x = X
+        Player(Index).Character(TempPlayer(Index).CurChar).Pet.y = Y
         TempPlayer(Index).PetTarget = 0
         TempPlayer(Index).PetTargetType = 0
         SendPlayerXY(Index)
@@ -241,7 +242,7 @@ Module ServerPlayers
     Function GetPlayerPK(ByVal Index As Integer) As Integer
         GetPlayerPK = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPK = Player(Index).Character(TempPlayer(Index).CurChar).PK
+        GetPlayerPK = Player(Index).Character(TempPlayer(Index).CurChar).Pk
     End Function
 
     Sub CheckEquippedItems(ByVal Index As Integer)
@@ -309,8 +310,8 @@ Module ServerPlayers
         ' Set some data related to housing instances.
         If Player(Index).Character(TempPlayer(Index).CurChar).InHouse Then
             Player(Index).Character(TempPlayer(Index).CurChar).InHouse = 0
-            Player(Index).Character(TempPlayer(Index).CurChar).x = Player(Index).Character(TempPlayer(Index).CurChar).LastX
-            Player(Index).Character(TempPlayer(Index).CurChar).y = Player(Index).Character(TempPlayer(Index).CurChar).LastY
+            Player(Index).Character(TempPlayer(Index).CurChar).X = Player(Index).Character(TempPlayer(Index).CurChar).LastX
+            Player(Index).Character(TempPlayer(Index).CurChar).Y = Player(Index).Character(TempPlayer(Index).CurChar).LastY
             Player(Index).Character(TempPlayer(Index).CurChar).Map = Player(Index).Character(TempPlayer(Index).CurChar).LastMap
         End If
 
@@ -368,9 +369,9 @@ Module ServerPlayers
                         DestroyInstancedMap(GetPlayerMap(Index) - MAX_MAPS)
 
                         If TempPlayer(Index).InInstance = 1 Then
-                            SetPlayerMap(Index, TempPlayer(Index).tmpMap)
-                            SetPlayerX(Index, TempPlayer(Index).tmpX)
-                            SetPlayerY(Index, TempPlayer(Index).tmpY)
+                            SetPlayerMap(Index, TempPlayer(Index).TmpMap)
+                            SetPlayerX(Index, TempPlayer(Index).TmpX)
+                            SetPlayerY(Index, TempPlayer(Index).TmpY)
                             TempPlayer(Index).InInstance = 0
                         End If
                     End If
@@ -420,17 +421,17 @@ Module ServerPlayers
         UpdateCaption()
     End Sub
 
-    Sub PlayerMove(ByVal Index As Integer, ByVal Dir As Integer, ByVal movement As Integer, expectingwarp As Boolean)
+    Sub PlayerMove(ByVal Index As Integer, ByVal Dir As Integer, ByVal Movement As Integer, ExpectingWarp As Boolean)
         Dim MapNum As Integer, Buffer As ByteBuffer
         Dim x As Integer, y As Integer, begineventprocessing As Boolean
-        Dim Moved As Byte, DidWarp As Boolean
+        Dim Moved As Boolean, DidWarp As Boolean
         Dim NewMapX As Byte, NewMapY As Byte
         Dim VitalType As Integer, Colour As Integer, amount As Integer
 
         'Debug.Print("Server-PlayerMove")
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or Dir < Direction.Up Or Dir > Direction.Right Or movement < 1 Or movement > 2 Then
+        If IsPlaying(Index) = False Or Dir < Direction.Up Or Dir > Direction.Right Or Movement < 1 Or Movement > 2 Then
             Exit Sub
         End If
 
@@ -452,7 +453,7 @@ Module ServerPlayers
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) - 1) = True) Then
                                     SetPlayerY(Index, GetPlayerY(Index) - 1)
-                                    SendPlayerMove(Index, movement)
+                                    SendPlayerMove(Index, Movement)
                                     Moved = True
                                 End If
                             End If
@@ -482,8 +483,8 @@ Module ServerPlayers
 
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index), GetPlayerY(Index) + 1) = True) Then
-                                    Call SetPlayerY(Index, GetPlayerY(Index) + 1)
-                                    SendPlayerMove(Index, movement)
+                                    SetPlayerY(Index, GetPlayerY(Index) + 1)
+                                    SendPlayerMove(Index, Movement)
                                     Moved = True
                                 End If
                             End If
@@ -513,7 +514,7 @@ Module ServerPlayers
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) - 1, GetPlayerY(Index)) = True) Then
                                     SetPlayerX(Index, GetPlayerX(Index) - 1)
-                                    SendPlayerMove(Index, movement)
+                                    SendPlayerMove(Index, Movement)
                                     Moved = True
                                 End If
                             End If
@@ -544,7 +545,7 @@ Module ServerPlayers
                                 ' Check to see if the tile is a key and if it is check if its opened
                                 If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Key Or (Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type = TileType.Key And TempTile(GetPlayerMap(Index)).DoorOpen(GetPlayerX(Index) + 1, GetPlayerY(Index)) = True) Then
                                     SetPlayerX(Index, GetPlayerX(Index) + 1)
-                                    SendPlayerMove(Index, movement)
+                                    SendPlayerMove(Index, Movement)
                                     Moved = True
                                 End If
                             End If
@@ -569,7 +570,8 @@ Module ServerPlayers
                 x = .Data2
                 y = .Data3
 
-                If (MapNum And INSTANCED_MAP_MASK) > 0 Then
+                'If (MapNum And INSTANCED_MAP_MASK) > 0 Then
+                If Map(MapNum).Instanced = 1 Then
                     If TempPlayer(Index).InParty Then
                         PartyWarp(Index, MapNum, x, y)
                     Else
@@ -707,8 +709,8 @@ Module ServerPlayers
 
         If Moved = True Then
             If Player(Index).Character(TempPlayer(Index).CurChar).InHouse > 0 Then
-                If Player(Index).Character(TempPlayer(Index).CurChar).x = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).X Then
-                    If Player(Index).Character(TempPlayer(Index).CurChar).y = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).Y Then
+                If Player(Index).Character(TempPlayer(Index).CurChar).X = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).X Then
+                    If Player(Index).Character(TempPlayer(Index).CurChar).Y = HouseConfig(Player(Player(Index).Character(TempPlayer(Index).CurChar).InHouse).Character(TempPlayer(Index).CurChar).House.HouseIndex).Y Then
                         PlayerWarp(Index, Player(Index).Character(TempPlayer(Index).CurChar).LastMap, Player(Index).Character(TempPlayer(Index).CurChar).LastX, Player(Index).Character(TempPlayer(Index).CurChar).LastY)
                         DidWarp = True
                     End If
@@ -717,7 +719,7 @@ Module ServerPlayers
         End If
 
         ' They tried to hack
-        If Moved = False Or (expectingwarp And Not DidWarp) Then
+        If Moved = False Or (ExpectingWarp And Not DidWarp) Then
             PlayerWarp(Index, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
         End If
 
@@ -753,47 +755,42 @@ Module ServerPlayers
 
     End Sub
 
-    Function HasItem(ByVal Index As Integer, ByVal itemNum As Integer) As Integer
+    Function HasItem(ByVal Index As Integer, ByVal ItemNum As Integer) As Integer
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+        If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
         For i = 1 To MAX_INV
-
             ' Check to see if the player has the item
-            If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
+            If GetPlayerInvItemNum(Index, i) = ItemNum Then
+                If Item(ItemNum).Type = ItemType.Currency Or Item(ItemNum).Stackable = 1 Then
                     HasItem = GetPlayerInvItemValue(Index, i)
                 Else
                     HasItem = 1
                 End If
-
                 Exit Function
             End If
-
         Next
 
     End Function
 
-    Function FindItemSlot(ByVal Index As Integer, ByVal itemNum As Integer) As Integer
+    Function FindItemSlot(ByVal Index As Integer, ByVal ItemNum As Integer) As Integer
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+        If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
         For i = 1 To MAX_INV
-
             ' Check to see if the player has the item
-            If GetPlayerInvItemNum(Index, i) = itemNum Then
+            If GetPlayerInvItemNum(Index, i) = ItemNum Then
                 FindItemSlot = i
                 Exit Function
             End If
-
         Next
 
     End Function
@@ -815,8 +812,8 @@ Module ServerPlayers
 
     End Sub
 
-    Public Function isDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
-        If Not blockvar And (2 ^ Dir) Then
+    Public Function isDirBlocked(ByRef Blockvar As Byte, ByRef Dir As Byte) As Boolean
+        If Not Blockvar And (2 ^ Dir) Then
             isDirBlocked = False
         Else
             isDirBlocked = True
@@ -838,7 +835,7 @@ Module ServerPlayers
     Function GetPlayerPOINTS(ByVal Index As Integer) As Integer
         GetPlayerPOINTS = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(Index).Character(TempPlayer(Index).CurChar).POINTS
+        GetPlayerPOINTS = Player(Index).Character(TempPlayer(Index).CurChar).Points
     End Function
 
     Function GetPlayerNextLevel(ByVal Index As Integer) As Integer
@@ -846,7 +843,7 @@ Module ServerPlayers
     End Function
 
     Function GetPlayerExp(ByVal Index As Integer) As Integer
-        GetPlayerExp = Player(Index).Character(TempPlayer(Index).CurChar).exp
+        GetPlayerExp = Player(Index).Character(TempPlayer(Index).CurChar).Exp
     End Function
 
     Sub SetPlayerMap(ByVal Index As Integer, ByVal MapNum As Integer)
@@ -855,30 +852,30 @@ Module ServerPlayers
         End If
     End Sub
 
-    Sub SetPlayerX(ByVal Index As Integer, ByVal x As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).x = x
+    Sub SetPlayerX(ByVal Index As Integer, ByVal X As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).X = X
     End Sub
 
-    Sub SetPlayerY(ByVal Index As Integer, ByVal y As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).y = y
+    Sub SetPlayerY(ByVal Index As Integer, ByVal Y As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).Y = Y
     End Sub
 
-    Function GetPlayerInvItemNum(ByVal Index As Integer, ByVal invSlot As Integer) As Integer
+    Function GetPlayerInvItemNum(ByVal Index As Integer, ByVal InvSlot As Integer) As Integer
         GetPlayerInvItemNum = 0
         If Index > MAX_PLAYERS Then Exit Function
-        If invSlot = 0 Then Exit Function
+        If InvSlot = 0 Then Exit Function
 
-        GetPlayerInvItemNum = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Num
+        GetPlayerInvItemNum = Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvSlot).Num
     End Function
 
-    Function GetPlayerInvItemValue(ByVal Index As Integer, ByVal invSlot As Integer) As Integer
+    Function GetPlayerInvItemValue(ByVal Index As Integer, ByVal InvSlot As Integer) As Integer
         GetPlayerInvItemValue = 0
         If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerInvItemValue = Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Value
+        GetPlayerInvItemValue = Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvSlot).Value
     End Function
 
-    Sub SetPlayerExp(ByVal Index As Integer, ByVal exp As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).exp = exp
+    Sub SetPlayerExp(ByVal Index As Integer, ByVal Exp As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).Exp = Exp
     End Sub
 
     Public Function GetPlayerRawStat(ByVal Index As Integer, ByVal Stat As Stats) As Integer
@@ -898,8 +895,8 @@ Module ServerPlayers
         Player(Index).Character(TempPlayer(Index).CurChar).Level = Level
     End Sub
 
-    Sub SetPlayerPOINTS(ByVal Index As Integer, ByVal POINTS As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).POINTS = POINTS
+    Sub SetPlayerPOINTS(ByVal Index As Integer, ByVal Points As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).Points = Points
     End Sub
 
     Sub CheckPlayerLevelUp(ByVal Index As Integer)
@@ -945,8 +942,8 @@ Module ServerPlayers
                 If (MapItem(MapNum, i).Num <= MAX_ITEMS) Then
 
                     ' Check if item is at the same location as the player
-                    If (MapItem(MapNum, i).x = GetPlayerX(Index)) Then
-                        If (MapItem(MapNum, i).y = GetPlayerY(Index)) Then
+                    If (MapItem(MapNum, i).X = GetPlayerX(Index)) Then
+                        If (MapItem(MapNum, i).Y = GetPlayerY(Index)) Then
                             ' Find open slot
                             n = FindOpenInvSlot(Index, MapItem(MapNum, i).Num)
 
@@ -983,8 +980,8 @@ Module ServerPlayers
                                 ' Erase item from the map
                                 MapItem(MapNum, i).Num = 0
                                 MapItem(MapNum, i).Value = 0
-                                MapItem(MapNum, i).x = 0
-                                MapItem(MapNum, i).y = 0
+                                MapItem(MapNum, i).X = 0
+                                MapItem(MapNum, i).Y = 0
 
                                 SendInventoryUpdate(Index, n)
                                 SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
@@ -1003,26 +1000,26 @@ Module ServerPlayers
         Next
     End Sub
 
-    Sub SetPlayerInvItemValue(ByVal Index As Integer, ByVal invSlot As Integer, ByVal ItemValue As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Value = ItemValue
+    Sub SetPlayerInvItemValue(ByVal Index As Integer, ByVal InvSlot As Integer, ByVal ItemValue As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).Inv(InvSlot).Value = ItemValue
     End Sub
 
     Sub SetPlayerInvItemNum(ByVal Index As Integer, ByVal invSlot As Integer, ByVal itemNum As Integer)
         Player(Index).Character(TempPlayer(Index).CurChar).Inv(invSlot).Num = itemNum
     End Sub
 
-    Function FindOpenInvSlot(ByVal Index As Integer, ByVal itemNum As Integer) As Integer
+    Function FindOpenInvSlot(ByVal Index As Integer, ByVal ItemNum As Integer) As Integer
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+        If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
-        If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
+        If Item(ItemNum).Type = ItemType.Currency Or Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
             For i = 1 To MAX_INV
-                If GetPlayerInvItemNum(Index, i) = itemNum Then
+                If GetPlayerInvItemNum(Index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
                 End If
@@ -1039,21 +1036,21 @@ Module ServerPlayers
 
     End Function
 
-    Function TakeInvItem(ByVal Index As Integer, ByVal itemNum As Integer, ByVal ItemVal As Integer) As Boolean
+    Function TakeInvItem(ByVal Index As Integer, ByVal ItemNum As Integer, ByVal ItemVal As Integer) As Boolean
         Dim i As Integer
 
         TakeInvItem = False
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+        If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
         For i = 1 To MAX_INV
 
             ' Check to see if the player has the item
-            If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
+            If GetPlayerInvItemNum(Index, i) = ItemNum Then
+                If Item(ItemNum).Type = ItemType.Currency Or Item(ItemNum).Stackable = 1 Then
 
                     ' Is what we are trying to take away more then what they have?  If so just set it to zero
                     If ItemVal >= GetPlayerInvItemValue(Index, i) Then
@@ -1079,22 +1076,22 @@ Module ServerPlayers
 
     End Function
 
-    Function GiveInvItem(ByVal Index As Integer, ByVal itemNum As Integer, ByVal ItemVal As Integer, Optional ByVal sendUpdate As Boolean = True) As Boolean
+    Function GiveInvItem(ByVal Index As Integer, ByVal ItemNum As Integer, ByVal ItemVal As Integer, Optional ByVal SendUpdate As Boolean = True) As Boolean
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or itemNum <= 0 Or itemNum > MAX_ITEMS Then
+        If IsPlaying(Index) = False Or ItemNum <= 0 Or ItemNum > MAX_ITEMS Then
             GiveInvItem = False
             Exit Function
         End If
 
-        i = FindOpenInvSlot(Index, itemNum)
+        i = FindOpenInvSlot(Index, ItemNum)
 
         ' Check to see if inventory is full
         If i <> 0 Then
-            SetPlayerInvItemNum(Index, i, itemNum)
+            SetPlayerInvItemNum(Index, i, ItemNum)
             SetPlayerInvItemValue(Index, i, GetPlayerInvItemValue(Index, i) + ItemVal)
-            If sendUpdate Then SendInventoryUpdate(Index, i)
+            If SendUpdate Then SendInventoryUpdate(Index, i)
             GiveInvItem = True
         Else
             Call PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
@@ -1121,11 +1118,11 @@ Module ServerPlayers
 
     End Function
 
-    Function GetPlayerSkill(ByVal Index As Integer, ByVal skillslot As Integer) As Integer
+    Function GetPlayerSkill(ByVal Index As Integer, ByVal Skillslot As Integer) As Integer
         GetPlayerSkill = 0
         If Index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerSkill = Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot)
+        GetPlayerSkill = Player(Index).Character(TempPlayer(Index).CurChar).Skill(Skillslot)
     End Function
 
     Public Function GetPlayerSkillSlot(ByVal Index As Integer, ByVal SkillId As Integer) As Integer
@@ -1137,12 +1134,12 @@ Module ServerPlayers
         End If
     End Function
 
-    Function HasSkill(ByVal Index As Integer, ByVal skillnum As Integer) As Boolean
+    Function HasSkill(ByVal Index As Integer, ByVal Skillnum As Integer) As Boolean
         Dim i As Integer
 
         For i = 1 To MAX_PLAYER_SKILLS
 
-            If GetPlayerSkill(Index, i) = skillnum Then
+            If GetPlayerSkill(Index, i) = Skillnum Then
                 HasSkill = True
                 Exit Function
             End If
@@ -1151,11 +1148,11 @@ Module ServerPlayers
 
     End Function
 
-    Sub SetPlayerSkill(ByVal Index As Integer, ByVal skillslot As Integer, ByVal skillnum As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).Skill(skillslot) = skillnum
+    Sub SetPlayerSkill(ByVal Index As Integer, ByVal Skillslot As Integer, ByVal Skillnum As Integer)
+        Player(Index).Character(TempPlayer(Index).CurChar).Skill(Skillslot) = Skillnum
     End Sub
 
-    Sub PlayerMapDropItem(ByVal Index As Integer, ByVal InvNum As Integer, ByVal amount As Integer)
+    Sub PlayerMapDropItem(ByVal Index As Integer, ByVal InvNum As Integer, ByVal Amount As Integer)
         Dim i As Integer
 
         ' Check for subscript out of range
@@ -1172,22 +1169,22 @@ Module ServerPlayers
 
                 If i <> 0 Then
                     MapItem(GetPlayerMap(Index), i).Num = GetPlayerInvItemNum(Index, InvNum)
-                    MapItem(GetPlayerMap(Index), i).x = GetPlayerX(Index)
-                    MapItem(GetPlayerMap(Index), i).y = GetPlayerY(Index)
+                    MapItem(GetPlayerMap(Index), i).X = GetPlayerX(Index)
+                    MapItem(GetPlayerMap(Index), i).Y = GetPlayerY(Index)
 
                     If Item(GetPlayerInvItemNum(Index, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, InvNum)).Stackable = 1 Then
 
                         ' Check if its more then they have and if so drop it all
-                        If amount >= GetPlayerInvItemValue(Index, InvNum) Then
+                        If Amount >= GetPlayerInvItemValue(Index, InvNum) Then
                             MapItem(GetPlayerMap(Index), i).Value = GetPlayerInvItemValue(Index, InvNum)
                             Call SetPlayerInvItemNum(Index, InvNum, 0)
                             Call SetPlayerInvItemValue(Index, InvNum, 0)
-                            amount = GetPlayerInvItemValue(Index, InvNum)
+                            Amount = GetPlayerInvItemValue(Index, InvNum)
                         Else
-                            MapItem(GetPlayerMap(Index), i).Value = amount
-                            Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - amount)
+                            MapItem(GetPlayerMap(Index), i).Value = Amount
+                            Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - Amount)
                         End If
-                        Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1} ({2}x).", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)), amount), ColorType.Yellow)
+                        Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1} ({2}x).", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)), Amount), ColorType.Yellow)
                     Else
                         ' Its not a currency object so this is easy
                         MapItem(GetPlayerMap(Index), i).Value = 0
@@ -1201,7 +1198,7 @@ Module ServerPlayers
                     ' Send inventory update
                     Call SendInventoryUpdate(Index, InvNum)
                     ' Spawn the item before we set the num or we'll get a different free map item slot
-                    Call SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, amount, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+                    Call SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, Amount, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
                 Else
                     Call PlayerMsg(Index, "Too many items already on the ground.", ColorType.Yellow)
                 End If
@@ -1210,47 +1207,47 @@ Module ServerPlayers
 
     End Sub
 
-    Sub GiveBankItem(ByVal Index As Integer, ByVal invSlot As Integer, ByVal amount As Integer)
+    Sub GiveBankItem(ByVal Index As Integer, ByVal InvSlot As Integer, ByVal Amount As Integer)
         Dim BankSlot As Integer, itemnum As Integer
 
-        If invSlot < 0 Or invSlot > MAX_INV Then Exit Sub
+        If InvSlot < 0 Or InvSlot > MAX_INV Then Exit Sub
 
-        If GetPlayerInvItemValue(Index, invSlot) < 0 Then Exit Sub
-        If GetPlayerInvItemValue(Index, invSlot) < amount Then Exit Sub
+        If GetPlayerInvItemValue(Index, InvSlot) < 0 Then Exit Sub
+        If GetPlayerInvItemValue(Index, InvSlot) < Amount Then Exit Sub
 
-        BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, invSlot))
-        itemnum = GetPlayerInvItemNum(Index, invSlot)
+        BankSlot = FindOpenBankSlot(Index, GetPlayerInvItemNum(Index, InvSlot))
+        itemnum = GetPlayerInvItemNum(Index, InvSlot)
 
         If BankSlot > 0 Then
-            If Item(GetPlayerInvItemNum(Index, invSlot)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, invSlot)).Stackable = 1 Then
-                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) Then
-                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + amount)
-                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
+            If Item(GetPlayerInvItemNum(Index, InvSlot)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(Index, InvSlot)).Stackable = 1 Then
+                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, InvSlot) Then
+                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + Amount)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, InvSlot), Amount)
                 Else
-                    SetPlayerBankItemNum(Index, BankSlot, GetPlayerInvItemNum(Index, invSlot))
-                    SetPlayerBankItemValue(Index, BankSlot, amount)
-                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), amount)
+                    SetPlayerBankItemNum(Index, BankSlot, GetPlayerInvItemNum(Index, InvSlot))
+                    SetPlayerBankItemValue(Index, BankSlot, Amount)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, InvSlot), Amount)
                 End If
             Else
-                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) And Item(itemnum).Randomize = 0 Then
+                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, InvSlot) And Item(itemnum).Randomize = 0 Then
                     SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) + 1)
-                    TakeInvItem(Index, GetPlayerInvItemNum(Index, invSlot), 0)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, InvSlot), 0)
                 Else
-                    Bank(Index).ItemRand(BankSlot).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Prefix
-                    Bank(Index).ItemRand(BankSlot).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Suffix
-                    Bank(Index).ItemRand(BankSlot).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Rarity
-                    Bank(Index).ItemRand(BankSlot).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Damage
-                    Bank(Index).ItemRand(BankSlot).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Speed
+                    Bank(Index).ItemRand(BankSlot).Prefix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Prefix
+                    Bank(Index).ItemRand(BankSlot).Suffix = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Suffix
+                    Bank(Index).ItemRand(BankSlot).Rarity = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Rarity
+                    Bank(Index).ItemRand(BankSlot).Damage = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Damage
+                    Bank(Index).ItemRand(BankSlot).Speed = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Speed
 
                     For i = 1 To Stats.Count - 1
-                        Bank(Index).ItemRand(BankSlot).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Stat(i)
+                        Bank(Index).ItemRand(BankSlot).Stat(i) = Player(Index).Character(TempPlayer(Index).CurChar).RandInv(InvSlot).Stat(i)
                     Next
 
                     SetPlayerBankItemNum(Index, BankSlot, itemnum)
                     SetPlayerBankItemValue(Index, BankSlot, 1)
-                    ClearRandInv(Index, invSlot)
-                    SetPlayerInvItemNum(Index, invSlot, 0)
-                    SetPlayerInvItemValue(Index, invSlot, 0)
+                    ClearRandInv(Index, InvSlot)
+                    SetPlayerInvItemNum(Index, InvSlot, 0)
+                    SetPlayerInvItemValue(Index, InvSlot, 0)
                 End If
             End If
         End If
@@ -1265,8 +1262,8 @@ Module ServerPlayers
         GetPlayerBankItemNum = Bank(Index).Item(BankSlot).Num
     End Function
 
-    Sub SetPlayerBankItemNum(ByVal Index As Integer, ByVal BankSlot As Byte, ByVal itemNum As Integer)
-        Bank(Index).Item(BankSlot).Num = itemNum
+    Sub SetPlayerBankItemNum(ByVal Index As Integer, ByVal BankSlot As Byte, ByVal ItemNum As Integer)
+        Bank(Index).Item(BankSlot).Num = ItemNum
     End Sub
 
     Function GetPlayerBankItemValue(ByVal Index As Integer, ByVal BankSlot As Byte) As Integer
@@ -1277,19 +1274,19 @@ Module ServerPlayers
         Bank(Index).Item(BankSlot).Value = ItemValue
     End Sub
 
-    Function FindOpenBankSlot(ByVal Index As Integer, ByVal itemNum As Integer) As Byte
+    Function FindOpenBankSlot(ByVal Index As Integer, ByVal ItemNum As Integer) As Byte
         Dim i As Integer
 
         If Not IsPlaying(Index) Then Exit Function
-        If itemNum <= 0 Or itemNum > MAX_ITEMS Then Exit Function
+        If ItemNum <= 0 Or ItemNum > MAX_ITEMS Then Exit Function
 
-        If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
+        If Item(ItemNum).Type = ItemType.Currency Or Item(ItemNum).Stackable = 1 Then
             For i = 1 To MAX_BANK
-                If GetPlayerBankItemNum(Index, i) = itemNum Then
+                If GetPlayerBankItemNum(Index, i) = ItemNum Then
                     FindOpenBankSlot = i
                     Exit Function
                 End If
-            Next i
+            Next
         End If
 
         For i = 1 To MAX_BANK
@@ -1297,45 +1294,41 @@ Module ServerPlayers
                 FindOpenBankSlot = i
                 Exit Function
             End If
-        Next i
+        Next
 
     End Function
 
     Sub SetPlayerPK(ByVal Index As Integer, ByVal PK As Integer)
-        Player(Index).Character(TempPlayer(Index).CurChar).PK = PK
+        Player(Index).Character(TempPlayer(Index).CurChar).Pk = PK
     End Sub
 
-    Sub TakeBankItem(ByVal Index As Integer, ByVal BankSlot As Integer, ByVal amount As Integer)
+    Sub TakeBankItem(ByVal Index As Integer, ByVal BankSlot As Integer, ByVal Amount As Integer)
         Dim invSlot
 
-        If BankSlot < 0 Or BankSlot > MAX_BANK Then
-            Exit Sub
-        End If
+        If BankSlot < 0 Or BankSlot > MAX_BANK Then Exit Sub
 
         If GetPlayerBankItemValue(Index, BankSlot) < 0 Then Exit Sub
 
-        If GetPlayerBankItemValue(Index, BankSlot) < amount Then
-            Exit Sub
-        End If
+        If GetPlayerBankItemValue(Index, BankSlot) < Amount Then Exit Sub
 
         invSlot = FindOpenInvSlot(Index, GetPlayerBankItemNum(Index, BankSlot))
 
         If invSlot > 0 Then
             If Item(GetPlayerBankItemNum(Index, BankSlot)).Type = ItemType.Currency Or Item(GetPlayerBankItemNum(Index, BankSlot)).Stackable = 1 Then
-                Call GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), amount)
-                Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - amount)
+                GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), Amount)
+                SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - Amount)
                 If GetPlayerBankItemValue(Index, BankSlot) <= 0 Then
-                    Call SetPlayerBankItemNum(Index, BankSlot, 0)
-                    Call SetPlayerBankItemValue(Index, BankSlot, 0)
+                    SetPlayerBankItemNum(Index, BankSlot, 0)
+                    SetPlayerBankItemValue(Index, BankSlot, 0)
                 End If
             Else
                 If GetPlayerBankItemValue(Index, BankSlot) > 1 Then
-                    Call GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
-                    Call SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - 1)
+                    GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
+                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - 1)
                 Else
-                    Call GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
-                    Call SetPlayerBankItemNum(Index, BankSlot, 0)
-                    Call SetPlayerBankItemValue(Index, BankSlot, 0)
+                    GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
+                    SetPlayerBankItemNum(Index, BankSlot, 0)
+                    SetPlayerBankItemValue(Index, BankSlot, 0)
                 End If
             End If
         End If
@@ -1371,13 +1364,6 @@ Module ServerPlayers
         ' Set HP to nothing
         SetPlayerVital(Index, Vitals.HP, 0)
 
-        ' Drop all worn items
-        'For i = 1 To EquipmentType.Count - 1
-        '    If GetPlayerEquipment(Index, i) > 0 Then
-        '        PlayerMapDropItem(Index, GetPlayerEquipment(Index, i), 0)
-        '    End If
-        'Next
-
         ' Warp player away
         SetPlayerDir(Index, Direction.Down)
 
@@ -1412,31 +1398,31 @@ Module ServerPlayers
 
     End Sub
 
-    Function TakeInvSlot(ByVal Index As Integer, ByVal invSlot As Integer, ByVal ItemVal As Integer) As Boolean
+    Function TakeInvSlot(ByVal Index As Integer, ByVal InvSlot As Integer, ByVal ItemVal As Integer) As Boolean
         Dim itemNum
 
         TakeInvSlot = False
 
         ' Check for subscript out of range
-        If IsPlaying(Index) = False Or invSlot <= 0 Or invSlot > MAX_ITEMS Then Exit Function
+        If IsPlaying(Index) = False Or InvSlot <= 0 Or InvSlot > MAX_ITEMS Then Exit Function
 
-        itemNum = GetPlayerInvItemNum(Index, invSlot)
+        itemNum = GetPlayerInvItemNum(Index, InvSlot)
 
         If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
 
             ' Is what we are trying to take away more then what they have?  If so just set it to zero
-            If ItemVal >= GetPlayerInvItemValue(Index, invSlot) Then
+            If ItemVal >= GetPlayerInvItemValue(Index, InvSlot) Then
                 TakeInvSlot = True
             Else
-                SetPlayerInvItemValue(Index, invSlot, GetPlayerInvItemValue(Index, invSlot) - ItemVal)
+                SetPlayerInvItemValue(Index, InvSlot, GetPlayerInvItemValue(Index, InvSlot) - ItemVal)
             End If
         Else
             TakeInvSlot = True
         End If
 
         If TakeInvSlot Then
-            SetPlayerInvItemNum(Index, invSlot, 0)
-            SetPlayerInvItemValue(Index, invSlot, 0)
+            SetPlayerInvItemNum(Index, InvSlot, 0)
+            SetPlayerInvItemValue(Index, InvSlot, 0)
             Exit Function
         End If
 
@@ -1464,7 +1450,7 @@ Module ServerPlayers
         GetPlayerVitalRegen = i
     End Function
 
-    Public Sub BufferSkill(ByVal Index As Integer, ByVal skillslot As Integer)
+    Public Sub BufferSkill(ByVal Index As Integer, ByVal Skillslot As Integer)
         Dim skillnum As Integer
         Dim MPCost As Integer
         Dim LevelReq As Integer
@@ -1479,9 +1465,9 @@ Module ServerPlayers
         Dim Target As Integer
 
         ' Prevent subscript out of range
-        If skillslot <= 0 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If Skillslot <= 0 Or Skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
-        skillnum = GetPlayerSkill(Index, skillslot)
+        skillnum = GetPlayerSkill(Index, Skillslot)
         MapNum = GetPlayerMap(Index)
 
         If skillnum <= 0 Or skillnum > MAX_SKILLS Then Exit Sub
@@ -1490,12 +1476,12 @@ Module ServerPlayers
         If Not HasSkill(Index, skillnum) Then Exit Sub
 
         ' see if cooldown has finished
-        If TempPlayer(Index).SkillCD(skillslot) > GetTickCount() Then
+        If TempPlayer(Index).SkillCD(Skillslot) > GetTickCount() Then
             PlayerMsg(Index, "Skill hasn't cooled down yet!", ColorType.Yellow)
             Exit Sub
         End If
 
-        MPCost = Skill(skillnum).MPCost
+        MPCost = Skill(skillnum).MpCost
 
         ' Check if they have enough MP
         If GetPlayerVital(Index, Vitals.MP) < MPCost Then
@@ -1580,7 +1566,7 @@ Module ServerPlayers
                     End If
                 ElseIf TargetType = TargetType.Npc Then
                     ' if have target, check in range
-                    If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
+                    If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).X, MapNpc(MapNum).Npc(Target).Y) Then
                         PlayerMsg(Index, "Target not in range.", ColorType.BrightRed)
                         HasBuffered = False
                     Else
@@ -1598,7 +1584,7 @@ Module ServerPlayers
 
         If HasBuffered Then
             SendAnimation(MapNum, Skill(skillnum).CastAnim, 0, 0, TargetType.Player, Index)
-            TempPlayer(Index).SkillBuffer = skillslot
+            TempPlayer(Index).SkillBuffer = Skillslot
             TempPlayer(Index).SkillBufferTimer = GetTickCount()
             Exit Sub
         Else
@@ -2275,7 +2261,7 @@ Module ServerPlayers
         End If
     End Sub
 
-    Sub PlayerSwitchInvSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
+    Sub PlayerSwitchInvSlots(ByVal Index As Integer, ByVal OldSlot As Integer, ByVal NewSlot As Integer)
         Dim OldNum As Integer, OldValue As Integer, OldRarity As Integer, OldPrefix As String
         Dim OldSuffix As String, OldSpeed As Integer, OldDamage As Integer
         Dim NewNum As Integer, NewValue As Integer, NewRarity As Integer, NewPrefix As String
@@ -2283,27 +2269,27 @@ Module ServerPlayers
         Dim NewStats(0 To Stats.Count - 1) As Integer
         Dim OldStats(0 To Stats.Count - 1) As Integer
 
-        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
+        If OldSlot = 0 Or NewSlot = 0 Then Exit Sub
 
-        OldNum = GetPlayerInvItemNum(Index, oldSlot)
-        OldValue = GetPlayerInvItemValue(Index, oldSlot)
-        NewNum = GetPlayerInvItemNum(Index, newSlot)
-        NewValue = GetPlayerInvItemValue(Index, newSlot)
+        OldNum = GetPlayerInvItemNum(Index, OldSlot)
+        OldValue = GetPlayerInvItemValue(Index, OldSlot)
+        NewNum = GetPlayerInvItemNum(Index, NewSlot)
+        NewValue = GetPlayerInvItemValue(Index, NewSlot)
 
         If OldNum = NewNum And Item(NewNum).Stackable = 1 Then ' same item, if we can stack it, lets do that :P
-            SetPlayerInvItemNum(Index, newSlot, NewNum)
-            SetPlayerInvItemValue(Index, newSlot, OldValue + NewValue)
-            SetPlayerInvItemNum(Index, oldSlot, 0)
-            SetPlayerInvItemValue(Index, oldSlot, 0)
+            SetPlayerInvItemNum(Index, NewSlot, NewNum)
+            SetPlayerInvItemValue(Index, NewSlot, OldValue + NewValue)
+            SetPlayerInvItemNum(Index, OldSlot, 0)
+            SetPlayerInvItemValue(Index, OldSlot, 0)
         Else
-            SetPlayerInvItemNum(Index, newSlot, OldNum)
-            SetPlayerInvItemValue(Index, newSlot, OldValue)
-            SetPlayerInvItemNum(Index, oldSlot, NewNum)
-            SetPlayerInvItemValue(Index, oldSlot, NewValue)
+            SetPlayerInvItemNum(Index, NewSlot, OldNum)
+            SetPlayerInvItemValue(Index, NewSlot, OldValue)
+            SetPlayerInvItemNum(Index, OldSlot, NewNum)
+            SetPlayerInvItemValue(Index, OldSlot, NewValue)
         End If
 
         ' RandomInv
-        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(newSlot)
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(NewSlot)
             NewPrefix = .Prefix
             NewSuffix = .Suffix
             NewDamage = .Damage
@@ -2314,7 +2300,7 @@ Module ServerPlayers
             Next i
         End With
 
-        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(oldSlot)
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(OldSlot)
             OldPrefix = .Prefix
             OldSuffix = .Suffix
             OldDamage = .Damage
@@ -2325,7 +2311,7 @@ Module ServerPlayers
             Next i
         End With
 
-        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(newSlot)
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(NewSlot)
             .Prefix = OldPrefix
             .Suffix = OldSuffix
             .Damage = OldDamage
@@ -2336,7 +2322,7 @@ Module ServerPlayers
             Next i
         End With
 
-        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(oldSlot)
+        With Player(Index).Character(TempPlayer(Index).CurChar).RandInv(OldSlot)
             .Prefix = NewPrefix
             .Suffix = NewSuffix
             .Damage = NewDamage
@@ -2350,24 +2336,24 @@ Module ServerPlayers
         SendInventory(Index)
     End Sub
 
-    Sub PlayerSwitchBankSlots(ByVal Index As Integer, ByVal oldSlot As Integer, ByVal newSlot As Integer)
+    Sub PlayerSwitchBankSlots(ByVal Index As Integer, ByVal OldSlot As Integer, ByVal NewSlot As Integer)
         Dim OldNum As Integer
         Dim OldValue As Integer
         Dim NewNum As Integer
         Dim NewValue As Integer
 
-        If oldSlot = 0 Or newSlot = 0 Then Exit Sub
+        If OldSlot = 0 Or NewSlot = 0 Then Exit Sub
 
-        OldNum = GetPlayerBankItemNum(Index, oldSlot)
-        OldValue = GetPlayerBankItemValue(Index, oldSlot)
-        NewNum = GetPlayerBankItemNum(Index, newSlot)
-        NewValue = GetPlayerBankItemValue(Index, newSlot)
+        OldNum = GetPlayerBankItemNum(Index, OldSlot)
+        OldValue = GetPlayerBankItemValue(Index, OldSlot)
+        NewNum = GetPlayerBankItemNum(Index, NewSlot)
+        NewValue = GetPlayerBankItemValue(Index, NewSlot)
 
-        SetPlayerBankItemNum(Index, newSlot, OldNum)
-        SetPlayerBankItemValue(Index, newSlot, OldValue)
+        SetPlayerBankItemNum(Index, NewSlot, OldNum)
+        SetPlayerBankItemValue(Index, NewSlot, OldValue)
 
-        SetPlayerBankItemNum(Index, oldSlot, NewNum)
-        SetPlayerBankItemValue(Index, oldSlot, NewValue)
+        SetPlayerBankItemNum(Index, OldSlot, NewNum)
+        SetPlayerBankItemValue(Index, OldSlot, NewValue)
 
         SendBank(Index)
     End Sub

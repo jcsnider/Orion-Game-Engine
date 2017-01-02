@@ -94,6 +94,8 @@
         Dim MapTintB As Byte
         Dim MapTintA As Byte
 
+        Dim Instanced As Byte
+
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer
         Dim MapEvents() As MapEventRec

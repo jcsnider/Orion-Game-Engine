@@ -2,14 +2,13 @@
 
 Module Transition
 
-
     Public Sub Main()
         Console.WriteLine("Converting Maps...")
         ConvertMaps()
-        Console.WriteLine("Converting Npcs...")
-        ConvertNpcs()
-        Console.WriteLine("Converting Items...")
-        ConvertItems()
+        'Console.WriteLine("Converting Npcs...")
+        'ConvertNpcs()
+        'Console.WriteLine("Converting Items...")
+        'ConvertItems()
         Console.WriteLine("Done!")
         Console.ReadKey()
     End Sub
@@ -70,6 +69,8 @@ Module Transition
         NewMap.MapTintG = OldMap.MapTintG
         NewMap.MapTintB = OldMap.MapTintB
         NewMap.MapTintA = OldMap.MapTintA
+
+        NewMap.Instanced = 0
     End Sub
 
     Public Sub ChangeNpcData()

@@ -149,6 +149,7 @@ Module EditorTCP
         Buffer.WriteInteger(Map.MapTintG)
         Buffer.WriteInteger(Map.MapTintB)
         Buffer.WriteInteger(Map.MapTintA)
+        Buffer.WriteInteger(Map.Instanced)
 
         For i = 1 To MAX_MAP_NPCS
             Buffer.WriteInteger(Map.Npc(i))

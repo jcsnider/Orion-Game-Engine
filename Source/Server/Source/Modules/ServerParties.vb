@@ -21,9 +21,7 @@
     End Sub
 
     Sub SendPartyInvite(ByVal Index As Integer, ByVal Target As Integer)
-        Dim Buffer As ByteBuffer
-
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPartyInvite)
 
         Buffer.WriteString(Trim$(Player(Target).Character(TempPlayer(Target).CurChar).Name))
@@ -33,9 +31,7 @@
     End Sub
 
     Sub SendPartyUpdate(ByVal PartyNum As Integer)
-        Dim Buffer As ByteBuffer
-
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPartyUpdate)
 
         Buffer.WriteInteger(1)
@@ -49,14 +45,13 @@
         Buffer = Nothing
     End Sub
 
-    Sub SendPartyUpdateTo(ByVal index As Integer)
-        Dim Buffer As ByteBuffer, i As Integer, partyNum As Integer
+    Sub SendPartyUpdateTo(ByVal Index As Integer)
+        Dim Buffer As New ByteBuffer, i As Integer, partyNum As Integer
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPartyUpdate)
 
         ' check if we're in a party
-        partyNum = TempPlayer(index).InParty
+        partyNum = TempPlayer(Index).InParty
         If partyNum > 0 Then
             ' send party data
             Buffer.WriteInteger(1)
@@ -70,7 +65,7 @@
             Buffer.WriteInteger(0)
         End If
 
-        SendDataTo(index, Buffer.ToArray)
+        SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
 
@@ -92,7 +87,7 @@
 #End Region
 
 #Region "Incoming Packets"
-    Public Sub Packet_PartyRquest(ByVal index As Integer, ByVal data() As Byte)
+    Public Sub Packet_PartyRquest(ByVal Index As Integer, ByVal data() As Byte)
         Dim buffer As ByteBuffer
         Dim n As Integer
         buffer = New ByteBuffer
@@ -103,16 +98,16 @@
         buffer = Nothing
 
         ' Prevent partying with self
-        If TempPlayer(index).Target = index Then Exit Sub
+        If TempPlayer(Index).Target = Index Then Exit Sub
         ' make sure it's a valid target
-        If TempPlayer(index).TargetType <> TargetType.Player Then Exit Sub
+        If TempPlayer(Index).TargetType <> TargetType.Player Then Exit Sub
 
         ' make sure they're connected and on the same map
-        If Not IsConnected(TempPlayer(index).Target) Or Not IsPlaying(TempPlayer(index).Target) Then Exit Sub
-        If GetPlayerMap(TempPlayer(index).Target) <> GetPlayerMap(index) Then Exit Sub
+        If Not IsConnected(TempPlayer(Index).Target) Or Not IsPlaying(TempPlayer(Index).Target) Then Exit Sub
+        If GetPlayerMap(TempPlayer(Index).Target) <> GetPlayerMap(Index) Then Exit Sub
 
         ' init the request
-        Party_Invite(index, TempPlayer(index).Target)
+        Party_Invite(Index, TempPlayer(Index).Target)
     End Sub
 
     Public Sub Packet_AcceptParty(ByVal Index As Integer, ByVal data() As Byte)
@@ -122,7 +117,7 @@
         buffer.WriteBytes(data)
         If buffer.ReadInteger <> ClientPackets.CAcceptParty Then Exit Sub
 
-        Party_InviteAccept(TempPlayer(Index).partyInvite, Index)
+        Party_InviteAccept(TempPlayer(Index).PartyInvite, Index)
 
         buffer = Nothing
     End Sub
@@ -134,31 +129,31 @@
         buffer.WriteBytes(data)
         If buffer.ReadInteger <> ClientPackets.CDeclineParty Then Exit Sub
 
-        Party_InviteDecline(TempPlayer(Index).partyInvite, Index)
+        Party_InviteDecline(TempPlayer(Index).PartyInvite, Index)
 
         buffer = Nothing
     End Sub
 
-    Public Sub Packet_LeaveParty(ByVal index As Integer, ByVal data() As Byte)
+    Public Sub Packet_LeaveParty(ByVal Index As Integer, ByVal data() As Byte)
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadInteger <> ClientPackets.CLeaveParty Then Exit Sub
 
-        Party_PlayerLeave(index)
+        Party_PlayerLeave(Index)
 
         buffer = Nothing
     End Sub
 
-    Public Sub Packet_PartyChatMsg(ByVal index As Integer, ByVal data() As Byte)
+    Public Sub Packet_PartyChatMsg(ByVal Index As Integer, ByVal data() As Byte)
         Dim buffer As ByteBuffer
 
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadInteger <> ClientPackets.CPartyChatMsg Then Exit Sub
 
-        PartyMsg(index, buffer.ReadString)
+        PartyMsg(Index, buffer.ReadString)
 
         buffer = Nothing
     End Sub
@@ -200,7 +195,7 @@
             If Party(PartyNum).Member(i) = Index Then
                 Party(PartyNum).Member(i) = 0
                 TempPlayer(Index).InParty = 0
-                TempPlayer(Index).partyInvite = 0
+                TempPlayer(Index).PartyInvite = 0
                 Exit For
             End If
         Next
@@ -258,70 +253,70 @@
         End If
     End Sub
 
-    Public Sub Party_Invite(ByVal index As Integer, ByVal Target As Integer)
+    Public Sub Party_Invite(ByVal Index As Integer, ByVal Target As Integer)
         Dim PartyNum As Integer, i As Integer
 
         ' check if the person is a valid target
         If Not IsConnected(Target) Or Not IsPlaying(Target) Then Exit Sub
 
         ' make sure they're not busy
-        If TempPlayer(Target).partyInvite > 0 Or TempPlayer(Target).TradeRequest > 0 Then
+        If TempPlayer(Target).PartyInvite > 0 Or TempPlayer(Target).TradeRequest > 0 Then
             ' they've already got a request for trade/party
-            PlayerMsg(index, "This player is busy.", ColorType.BrightRed)
+            PlayerMsg(Index, "This player is busy.", ColorType.BrightRed)
             ' exit out early
             Exit Sub
         End If
         ' make syure they're not in a party
         If TempPlayer(Target).InParty > 0 Then
             ' they're already in a party
-            PlayerMsg(index, "This player is already in a party.", ColorType.BrightRed)
+            PlayerMsg(Index, "This player is already in a party.", ColorType.BrightRed)
             'exit out early
             Exit Sub
         End If
 
         ' check if we're in a party
-        If TempPlayer(index).InParty > 0 Then
-            PartyNum = TempPlayer(index).InParty
+        If TempPlayer(Index).InParty > 0 Then
+            PartyNum = TempPlayer(Index).InParty
             ' make sure we're the leader
-            If Party(PartyNum).Leader = index Then
+            If Party(PartyNum).Leader = Index Then
                 ' got a blank slot?
                 For i = 1 To MAX_PARTY_MEMBERS
                     If Party(PartyNum).Member(i) = 0 Then
                         ' send the invitation
-                        SendPartyInvite(Target, index)
+                        SendPartyInvite(Target, Index)
                         ' set the invite target
-                        TempPlayer(Target).partyInvite = index
+                        TempPlayer(Target).PartyInvite = Index
                         ' let them know
-                        PlayerMsg(index, "Invitation sent.", ColorType.Yellow)
+                        PlayerMsg(Index, "Invitation sent.", ColorType.Yellow)
                         Exit Sub
                     End If
                 Next
                 ' no room
-                PlayerMsg(index, "Party is full.", ColorType.BrightRed)
+                PlayerMsg(Index, "Party is full.", ColorType.BrightRed)
                 Exit Sub
             Else
                 ' not the leader
-                PlayerMsg(index, "You are not the party leader.", ColorType.BrightRed)
+                PlayerMsg(Index, "You are not the party leader.", ColorType.BrightRed)
                 Exit Sub
             End If
         Else
             ' not in a party - doesn't matter!
-            SendPartyInvite(Target, index)
+            SendPartyInvite(Target, Index)
             ' set the invite target
-            TempPlayer(Target).partyInvite = index
+            TempPlayer(Target).PartyInvite = Index
             ' let them know
-            PlayerMsg(index, "Invitation sent.", ColorType.Yellow)
+            PlayerMsg(Index, "Invitation sent.", ColorType.Yellow)
             Exit Sub
         End If
     End Sub
 
-    Public Sub Party_InviteAccept(ByVal index As Integer, ByVal Target As Integer)
+    Public Sub Party_InviteAccept(ByVal Index As Integer, ByVal Target As Integer)
         Dim partyNum As Integer, i As Integer
 
         ' check if already in a party
-        If TempPlayer(index).InParty > 0 Then
+        If TempPlayer(Index).InParty > 0 Then
             ' get the partynumber
-            partyNum = TempPlayer(index).InParty
+            partyNum = TempPlayer(Index).InParty
             ' got a blank slot?
             For i = 1 To MAX_PARTY_MEMBERS
                 If Party(partyNum).Member(i) = 0 Then
@@ -340,7 +335,7 @@
                 End If
             Next
             ' no empty slots - let them know
-            PlayerMsg(index, "Party is full.", ColorType.BrightRed)
+            PlayerMsg(Index, "Party is full.", ColorType.BrightRed)
             PlayerMsg(Target, "Party is full.", ColorType.BrightRed)
             Exit Sub
         Else
@@ -354,19 +349,22 @@
             Next
             ' create the party
             Party(partyNum).MemberCount = 2
-            Party(partyNum).Leader = index
-            Party(partyNum).Member(1) = index
+            Party(partyNum).Leader = Index
+            Party(partyNum).Member(1) = Index
             Party(partyNum).Member(2) = Target
             SendPartyUpdate(partyNum)
-            SendPartyVitals(partyNum, index)
+            SendPartyVitals(partyNum, Index)
             SendPartyVitals(partyNum, Target)
+
             ' let them know it's created
             PartyMsg(partyNum, "Party created.")
-            PartyMsg(partyNum, String.Format("{0} has joined the party.", GetPlayerName(index)))
+            PartyMsg(partyNum, String.Format("{0} has joined the party.", GetPlayerName(Index)))
+
             ' clear the invitation
-            TempPlayer(Target).partyInvite = 0
+            TempPlayer(Target).PartyInvite = 0
+
             ' add them to the party
-            TempPlayer(index).InParty = partyNum
+            TempPlayer(Index).InParty = partyNum
             TempPlayer(Target).InParty = partyNum
             Exit Sub
         End If
@@ -376,7 +374,7 @@
         PlayerMsg(Index, String.Format("{0} has declined to join your party.", GetPlayerName(Target)), ColorType.BrightRed)
         PlayerMsg(Target, "You declined to join the party.", ColorType.Yellow)
         ' clear the invitation
-        TempPlayer(Target).partyInvite = 0
+        TempPlayer(Target).PartyInvite = 0
     End Sub
 
     Public Sub Party_CountMembers(ByVal PartyNum As Integer)
@@ -418,22 +416,22 @@
         Party_CountMembers(PartyNum)
     End Sub
 
-    Public Sub Party_ShareExp(ByVal partyNum As Integer, ByVal Exp As Integer, ByVal index As Integer, ByVal mapnum As Integer)
+    Public Sub Party_ShareExp(ByVal PartyNum As Integer, ByVal Exp As Integer, ByVal Index As Integer, ByVal MapNum As Integer)
         Dim expShare As Integer, leftOver As Integer, i As Integer, tmpIndex As Integer, LoseMemberCount As Byte
 
         ' check if it's worth sharing
-        If Not Exp >= Party(partyNum).MemberCount Then
+        If Not Exp >= Party(PartyNum).MemberCount Then
             ' no party - keep exp for self
-            GivePlayerEXP(index, Exp)
+            GivePlayerEXP(Index, Exp)
             Exit Sub
         End If
 
         ' check members in others maps
         For i = 1 To MAX_PARTY_MEMBERS
-            tmpIndex = Party(partyNum).Member(i)
+            tmpIndex = Party(PartyNum).Member(i)
             If tmpIndex > 0 Then
                 If IsConnected(tmpIndex) And IsPlaying(tmpIndex) Then
-                    If GetPlayerMap(tmpIndex) <> mapnum Then
+                    If GetPlayerMap(tmpIndex) <> MapNum Then
                         LoseMemberCount = LoseMemberCount + 1
                     End If
                 End If
@@ -441,17 +439,17 @@
         Next
 
         ' find out the equal share
-        expShare = Exp \ (Party(partyNum).MemberCount - LoseMemberCount)
-        leftOver = Exp Mod (Party(partyNum).MemberCount - LoseMemberCount)
+        expShare = Exp \ (Party(PartyNum).MemberCount - LoseMemberCount)
+        leftOver = Exp Mod (Party(PartyNum).MemberCount - LoseMemberCount)
 
         ' loop through and give everyone exp
         For i = 1 To MAX_PARTY_MEMBERS
-            tmpIndex = Party(partyNum).Member(i)
+            tmpIndex = Party(PartyNum).Member(i)
             ' existing member?
             If tmpIndex > 0 Then
                 ' playing?
                 If IsConnected(tmpIndex) And IsPlaying(tmpIndex) Then
-                    If GetPlayerMap(tmpIndex) = mapnum Then
+                    If GetPlayerMap(tmpIndex) = MapNum Then
                         ' give them their share
                         GivePlayerEXP(tmpIndex, expShare)
                     End If
@@ -461,20 +459,20 @@
 
         ' give the remainder to a random member
         If Not leftOver = 0 Then
-            tmpIndex = Party(partyNum).Member(Random(1, Party(partyNum).MemberCount))
+            tmpIndex = Party(PartyNum).Member(Random(1, Party(PartyNum).MemberCount))
             ' give the exp
             GivePlayerEXP(tmpIndex, leftOver)
         End If
 
     End Sub
 
-    Sub PartyWarp(ByVal index As Long, ByVal mapnum As Long, ByVal x As Long, ByVal y As Long)
+    Sub PartyWarp(ByVal Index As Long, ByVal MapNum As Long, ByVal X As Long, ByVal Y As Long)
         Dim i As Integer
 
-        If TempPlayer(index).InParty Then
-            If Party(TempPlayer(index).InParty).Leader Then
-                For i = 1 To Party(TempPlayer(index).InParty).MemberCount
-                    PlayerWarp(Party(TempPlayer(index).InParty).Member(i), mapnum, x, y)
+        If TempPlayer(Index).InParty Then
+            If Party(TempPlayer(Index).InParty).Leader Then
+                For i = 1 To Party(TempPlayer(Index).InParty).MemberCount
+                    PlayerWarp(Party(TempPlayer(Index).InParty).Member(i), MapNum, X, Y)
                 Next
             End If
         End If

@@ -301,6 +301,8 @@
                 Map.MapTintB = Buffer.ReadInteger
                 Map.MapTintA = Buffer.ReadInteger
 
+                Map.Instanced = Buffer.ReadInteger
+
                 ReDim Map.Tile(0 To Map.MaxX, 0 To Map.MaxY)
 
                 For X = 1 To MAX_MAP_NPCS

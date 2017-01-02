@@ -27,7 +27,7 @@
         Next i
     End Sub
 
-    Public Sub ClearRandEq(ByVal index As Integer, Equipment As EquipmentType)
+    Public Sub ClearRandEq(ByVal index As Integer, ByVal Equipment As EquipmentType)
         Dim i As Integer
 
         Player(index).Character(TempPlayer(index).CurChar).RandEquip(Equipment).Prefix = ""

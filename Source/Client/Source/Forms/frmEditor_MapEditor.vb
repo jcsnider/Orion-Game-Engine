@@ -375,7 +375,6 @@ Public Class frmEditor_MapEditor
         MapEditorCancel()
     End Sub
 
-
 #End Region
 
     Private Sub lstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
@@ -411,7 +410,6 @@ Public Class frmEditor_MapEditor
 
         picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
         picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
-
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
@@ -1057,6 +1055,14 @@ Public Class frmEditor_MapEditor
             End If
         End If
 
+    End Sub
+
+    Private Sub chkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
+        If chkInstance.Checked = True Then
+            Map.Instanced = 1
+        Else
+            Map.Instanced = 0
+        End If
     End Sub
 #End Region
 End Class

@@ -29,7 +29,7 @@
 
     Public Structure OptionsRec
         Dim Game_Name As String
-        Dim MOTD As String
+        Dim Motd As String
         Dim Port As Integer
         Dim Website As String
         Dim StartMap As Integer
@@ -69,16 +69,16 @@
         Dim Classes As Byte
         Dim Sprite As Integer
         Dim Level As Byte
-        Dim exp As Integer
+        Dim Exp As Integer
 
-        Dim PK As Byte
+        Dim Pk As Byte
 
         ' Vitals
         Dim Vital() As Integer
 
         ' Stats
         Dim Stat() As Byte
-        Dim POINTS As Byte
+        Dim Points As Byte
 
         ' Worn equipment
         Dim Equipment() As Byte
@@ -89,8 +89,8 @@
 
         ' Position
         Dim Map As Integer
-        Dim x As Byte
-        Dim y As Byte
+        Dim X As Byte
+        Dim Y As Byte
         Dim Dir As Byte
 
         Dim PlayerQuest() As PlayerQuestRec
@@ -130,7 +130,7 @@
         Dim DataTimer As Integer
         Dim DataBytes As Integer
         Dim DataPackets As Integer
-        Dim partyInvite As Integer
+        Dim PartyInvite As Integer
         Dim InParty As Byte
         Dim TargetType As Byte
         Dim Target As Byte
@@ -171,15 +171,15 @@
         Dim CraftRecipe As Integer
         Dim CraftAmount As Integer
 
-        Dim stopRegenTimer As Integer
-        Dim stopRegen As Byte
+        Dim StopRegenTimer As Integer
+        Dim StopRegen As Byte
 
         'instance stuff
         Dim InInstance As Byte
-        Dim tmpInstanceNum As Integer
-        Dim tmpMap As Integer
-        Dim tmpX As Integer
-        Dim tmpY As Integer
+        Dim TmpInstanceNum As Integer
+        Dim TmpMap As Integer
+        Dim TmpX As Integer
+        Dim TmpY As Integer
 
         'pets
         Dim PetTarget As Integer
@@ -205,8 +205,8 @@
     End Structure
 
     Public Structure TileDataRec
-        Dim x As Byte
-        Dim y As Byte
+        Dim X As Byte
+        Dim Y As Byte
         Dim Tileset As Byte
         Dim AutoTile As Byte
     End Structure
@@ -258,6 +258,8 @@
         Dim MapTintG As Byte
         Dim MapTintB As Byte
         Dim MapTintA As Byte
+
+        Dim Instanced As Byte
     End Structure
 
     Public Structure ClassRec
@@ -288,7 +290,7 @@
         Dim AccessReq As Integer
         Dim LevelReq As Integer
         Dim Mastery As Byte
-        Dim price As Integer
+        Dim Price As Integer
         Dim Add_Stat() As Byte
         Dim Rarity As Byte
         Dim Speed As Integer
@@ -322,8 +324,8 @@
     Public Structure MapItemRec
         Dim Num As Byte
         Dim Value As Integer
-        Dim x As Byte
-        Dim y As Byte
+        Dim X As Byte
+        Dim Y As Byte
 
         Dim RandData As RandInvRec
     End Structure
@@ -340,7 +342,7 @@
         Dim DropItemValue() As Integer
         Dim Stat() As Byte
         Dim Faction As Byte
-        Dim HP As Integer
+        Dim Hp As Integer
         Dim Exp As Integer
         Dim Animation As Integer
         Dim QuestNum As Integer
@@ -355,8 +357,8 @@
         Dim Target As Integer
         Dim TargetType As Byte
         Dim Vital() As Integer
-        Dim x As Byte
-        Dim y As Byte
+        Dim X As Byte
+        Dim Y As Byte
         Dim Dir As Integer
         ' For server use only
         Dim SpawnWait As Integer
@@ -366,15 +368,15 @@
         Dim SkillBuffer As Integer
         Dim SkillBufferTimer As Integer
         Dim SkillCD() As Integer
-        Dim stopRegen As Byte
-        Dim stopRegenTimer As Integer
+        Dim StopRegen As Byte
+        Dim StopRegenTimer As Integer
     End Structure
 
     Public Structure TradeItemRec
         Dim Item As Integer
         Dim ItemValue As Integer
-        Dim costitem As Integer
-        Dim costvalue As Integer
+        Dim CostItem As Integer
+        Dim CostValue As Integer
     End Structure
 
     Public Structure ShopRec
@@ -387,16 +389,16 @@
     Public Structure SkillRec
         Dim Name As String
         Dim Type As Byte
-        Dim MPCost As Integer
+        Dim MpCost As Integer
         Dim LevelReq As Integer
         Dim AccessReq As Integer
         Dim ClassReq As Integer
         Dim CastTime As Integer
-        Dim CDTime As Integer
+        Dim CdTime As Integer
         Dim Icon As Integer
         Dim Map As Integer
-        Dim x As Integer
-        Dim y As Integer
+        Dim X As Integer
+        Dim Y As Integer
         Dim Dir As Byte
         Dim Vital As Integer
         Dim Duration As Integer
@@ -428,9 +430,9 @@
     Public Structure MapResourceRec
         Dim ResourceState As Byte
         Dim ResourceTimer As Integer
-        Dim x As Integer
-        Dim y As Integer
-        Dim cur_health As Byte
+        Dim X As Integer
+        Dim Y As Integer
+        Dim Cur_Health As Byte
     End Structure
 
     Public Structure ResourceCacheRec
@@ -465,7 +467,7 @@
 
     Public Structure HotbarRec
         Dim Slot As Integer
-        Dim sType As Byte
+        Dim SlotType As Byte
     End Structure
 
     Public Structure ResourceSkillsRec
@@ -475,19 +477,15 @@
     End Structure
 
     Public Structure SkillBufferRec
-
         Dim Skill As Integer
         Dim Timer As Integer
         Dim Target As Integer
-        Dim TargetZone As Integer
-        Dim tType As Byte
-
+        Dim TargetTypes As Byte
     End Structure
 
     Public Structure DoTRec
-
         Dim Used As Boolean
-        Dim Spell As Integer
+        Dim Skill As Integer
         Dim Timer As Integer
         Dim Caster As Integer
         Dim StartTime As Integer

@@ -55,6 +55,8 @@
         Dim MapTintG As Byte
         Dim MapTintB As Byte
         Dim MapTintA As Byte
+
+        Dim Instanced As Byte
     End Structure
 
     Sub ClearNewMap()
@@ -87,31 +89,40 @@
     Sub SaveNewMap(filename As String)
         Dim x As Integer, y As Integer, l As Integer
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
+
         writer.Write(NewMap.Name)
         writer.Write(NewMap.Music)
+
         writer.Write(NewMap.Revision)
         writer.Write(NewMap.Moral)
         writer.Write(NewMap.Tileset)
+
         writer.Write(NewMap.Up)
         writer.Write(NewMap.Down)
         writer.Write(NewMap.Left)
         writer.Write(NewMap.Right)
+
         writer.Write(NewMap.BootMap)
         writer.Write(NewMap.BootX)
         writer.Write(NewMap.BootY)
+
         writer.Write(NewMap.MaxX)
         writer.Write(NewMap.MaxY)
+
         writer.Write(NewMap.WeatherType)
         writer.Write(NewMap.FogIndex)
         writer.Write(NewMap.WeatherIntensity)
         writer.Write(NewMap.FogAlpha)
         writer.Write(NewMap.FogSpeed)
+
         writer.Write(NewMap.HasMapTint)
         writer.Write(NewMap.MapTintR)
         writer.Write(NewMap.MapTintG)
         writer.Write(NewMap.MapTintB)
         writer.Write(NewMap.MapTintA)
+
+        writer.Write(NewMap.Instanced)
 
         For x = 0 To NewMap.MaxX
             For y = 0 To NewMap.MaxY
@@ -162,7 +173,8 @@
     Sub SaveNewNpc(ByVal filename As String)
         Dim i As Integer
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
+
         writer.Write(NewNpc.Name)
         writer.Write(NewNpc.AttackSay)
         writer.Write(NewNpc.Sprite)
@@ -266,7 +278,8 @@
 
     Sub SaveNewItem(ByVal filename As String)
 
-        Dim writer As New ArchaicSoftWriter()
+        Dim writer As New ArchaicIO.File.BinaryStream.Writer()
+
         writer.Write(NewItem.Name)
         writer.Write(NewItem.Pic)
         writer.Write(NewItem.Description)

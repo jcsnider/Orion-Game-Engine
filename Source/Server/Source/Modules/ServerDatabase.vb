@@ -287,6 +287,8 @@ Module ServerDatabase
         writer.Write(Map(MapNum).MapTintB)
         writer.Write(Map(MapNum).MapTintA)
 
+        writer.Write(Map(MapNum).Instanced)
+
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
                 writer.Write(Map(MapNum).Tile(x, y).Data1)
@@ -295,8 +297,8 @@ Module ServerDatabase
                 writer.Write(Map(MapNum).Tile(x, y).DirBlock)
                 For l = 0 To MapLayer.Count - 1
                     writer.Write(Map(MapNum).Tile(x, y).Layer(l).Tileset)
-                    writer.Write(Map(MapNum).Tile(x, y).Layer(l).x)
-                    writer.Write(Map(MapNum).Tile(x, y).Layer(l).y)
+                    writer.Write(Map(MapNum).Tile(x, y).Layer(l).X)
+                    writer.Write(Map(MapNum).Tile(x, y).Layer(l).Y)
                     writer.Write(Map(MapNum).Tile(x, y).Layer(l).AutoTile)
                 Next
                 writer.Write(Map(MapNum).Tile(x, y).Type)
@@ -613,6 +615,7 @@ Module ServerDatabase
         reader.Read(Map(MapNum).MapTintG)
         reader.Read(Map(MapNum).MapTintB)
         reader.Read(Map(MapNum).MapTintA)
+        reader.Read(Map(MapNum).Instanced)
 
         ' have to set the tile()
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
@@ -626,8 +629,8 @@ Module ServerDatabase
                 ReDim Map(MapNum).Tile(x, y).Layer(0 To MapLayer.Count - 1)
                 For l = 0 To MapLayer.Count - 1
                     reader.Read(Map(MapNum).Tile(x, y).Layer(l).Tileset)
-                    reader.Read(Map(MapNum).Tile(x, y).Layer(l).x)
-                    reader.Read(Map(MapNum).Tile(x, y).Layer(l).y)
+                    reader.Read(Map(MapNum).Tile(x, y).Layer(l).X)
+                    reader.Read(Map(MapNum).Tile(x, y).Layer(l).Y)
                     reader.Read(Map(MapNum).Tile(x, y).Layer(l).AutoTile)
                 Next
                 reader.Read(Map(MapNum).Tile(x, y).Type)
@@ -724,7 +727,7 @@ Module ServerDatabase
         writer.Write(Item(itemNum).AccessReq)
         writer.Write(Item(itemNum).LevelReq)
         writer.Write(Item(itemNum).Mastery)
-        writer.Write(Item(itemNum).price)
+        writer.Write(Item(itemNum).Price)
 
         For i = 0 To Stats.Count - 1
             writer.Write(Item(itemNum).Add_Stat(i))
@@ -804,7 +807,7 @@ Module ServerDatabase
         reader.Read(Item(ItemNum).AccessReq)
         reader.Read(Item(ItemNum).LevelReq)
         reader.Read(Item(ItemNum).Mastery)
-        reader.Read(Item(ItemNum).price)
+        reader.Read(Item(ItemNum).Price)
 
         For s = 0 To Stats.Count - 1
             reader.Read(Item(ItemNum).Add_Stat(s))
@@ -924,7 +927,7 @@ Module ServerDatabase
         Next
 
         writer.Write(Npc(NpcNum).Faction)
-        writer.Write(Npc(NpcNum).HP)
+        writer.Write(Npc(NpcNum).Hp)
         writer.Write(Npc(NpcNum).Exp)
         writer.Write(Npc(NpcNum).Animation)
 
@@ -977,7 +980,7 @@ Module ServerDatabase
         Next
 
         reader.Read(Npc(NpcNum).Faction)
-        reader.Read(Npc(NpcNum).HP)
+        reader.Read(Npc(NpcNum).Hp)
         reader.Read(Npc(NpcNum).Exp)
         reader.Read(Npc(NpcNum).Animation)
 
@@ -1168,9 +1171,9 @@ Module ServerDatabase
                 If Map(MapNum).Tile(x, y).Type = TileType.Resource Then
                     Resource_Count = Resource_Count + 1
                     ReDim Preserve ResourceCache(MapNum).ResourceData(0 To Resource_Count)
-                    ResourceCache(MapNum).ResourceData(Resource_Count).x = x
-                    ResourceCache(MapNum).ResourceData(Resource_Count).y = y
-                    ResourceCache(MapNum).ResourceData(Resource_Count).cur_health = Resource(Map(MapNum).Tile(x, y).Data1).Health
+                    ResourceCache(MapNum).ResourceData(Resource_Count).X = x
+                    ResourceCache(MapNum).ResourceData(Resource_Count).Y = y
+                    ResourceCache(MapNum).ResourceData(Resource_Count).Cur_Health = Resource(Map(MapNum).Tile(x, y).Data1).Health
                 End If
 
             Next
@@ -1207,8 +1210,8 @@ Module ServerDatabase
         For i = 1 To MAX_TRADES
             writer.Write(Shop(shopNum).TradeItem(i).Item)
             writer.Write(Shop(shopNum).TradeItem(i).ItemValue)
-            writer.Write(Shop(shopNum).TradeItem(i).costitem)
-            writer.Write(Shop(shopNum).TradeItem(i).costvalue)
+            writer.Write(Shop(shopNum).TradeItem(i).CostItem)
+            writer.Write(Shop(shopNum).TradeItem(i).CostValue)
         Next
 
         writer.Save(filename)
@@ -1241,8 +1244,8 @@ Module ServerDatabase
         For x = 1 To MAX_TRADES
             reader.Read(Shop(ShopNum).TradeItem(x).Item)
             reader.Read(Shop(ShopNum).TradeItem(x).ItemValue)
-            reader.Read(Shop(ShopNum).TradeItem(x).costitem)
-            reader.Read(Shop(ShopNum).TradeItem(x).costvalue)
+            reader.Read(Shop(ShopNum).TradeItem(x).CostItem)
+            reader.Read(Shop(ShopNum).TradeItem(x).CostValue)
         Next
 
     End Sub
@@ -1305,16 +1308,16 @@ Module ServerDatabase
 
         writer.Write(Skill(skillnum).Name)
         writer.Write(Skill(skillnum).Type)
-        writer.Write(Skill(skillnum).MPCost)
+        writer.Write(Skill(skillnum).MpCost)
         writer.Write(Skill(skillnum).LevelReq)
         writer.Write(Skill(skillnum).AccessReq)
         writer.Write(Skill(skillnum).ClassReq)
         writer.Write(Skill(skillnum).CastTime)
-        writer.Write(Skill(skillnum).CDTime)
+        writer.Write(Skill(skillnum).CdTime)
         writer.Write(Skill(skillnum).Icon)
         writer.Write(Skill(skillnum).Map)
-        writer.Write(Skill(skillnum).x)
-        writer.Write(Skill(skillnum).y)
+        writer.Write(Skill(skillnum).X)
+        writer.Write(Skill(skillnum).Y)
         writer.Write(Skill(skillnum).Dir)
         writer.Write(Skill(skillnum).Vital)
         writer.Write(Skill(skillnum).Duration)
@@ -1355,16 +1358,16 @@ Module ServerDatabase
 
         reader.Read(Skill(SkillNum).Name)
         reader.Read(Skill(SkillNum).Type)
-        reader.Read(Skill(SkillNum).MPCost)
+        reader.Read(Skill(SkillNum).MpCost)
         reader.Read(Skill(SkillNum).LevelReq)
         reader.Read(Skill(SkillNum).AccessReq)
         reader.Read(Skill(SkillNum).ClassReq)
         reader.Read(Skill(SkillNum).CastTime)
-        reader.Read(Skill(SkillNum).CDTime)
+        reader.Read(Skill(SkillNum).CdTime)
         reader.Read(Skill(SkillNum).Icon)
         reader.Read(Skill(SkillNum).Map)
-        reader.Read(Skill(SkillNum).x)
-        reader.Read(Skill(SkillNum).y)
+        reader.Read(Skill(SkillNum).X)
+        reader.Read(Skill(SkillNum).Y)
         reader.Read(Skill(SkillNum).Dir)
         reader.Read(Skill(SkillNum).Vital)
         reader.Read(Skill(SkillNum).Duration)
@@ -1733,12 +1736,12 @@ Module ServerDatabase
             Player(Index).Character(CharNum).Inv(i).Value = 0
         Next
 
-        Player(Index).Character(CharNum).exp = 0
+        Player(Index).Character(CharNum).Exp = 0
         Player(Index).Character(CharNum).Level = 0
         Player(Index).Character(CharNum).Map = 0
         Player(Index).Character(CharNum).Name = ""
-        Player(Index).Character(CharNum).PK = 0
-        Player(Index).Character(CharNum).POINTS = 0
+        Player(Index).Character(CharNum).Pk = 0
+        Player(Index).Character(CharNum).Points = 0
         Player(Index).Character(CharNum).Sex = 0
 
         For i = 0 To MAX_PLAYER_SKILLS
@@ -1755,8 +1758,8 @@ Module ServerDatabase
             Player(Index).Character(CharNum).Vital(i) = 0
         Next
 
-        Player(Index).Character(CharNum).x = 0
-        Player(Index).Character(CharNum).y = 0
+        Player(Index).Character(CharNum).X = 0
+        Player(Index).Character(CharNum).Y = 0
 
         ReDim Player(Index).Character(CharNum).PlayerQuest(MAX_QUESTS)
         For i = 1 To MAX_QUESTS
@@ -1784,7 +1787,7 @@ Module ServerDatabase
         ReDim Player(Index).Character(CharNum).Hotbar(MAX_HOTBAR)
         For i = 1 To MAX_HOTBAR
             Player(Index).Character(CharNum).Hotbar(i).Slot = 0
-            Player(Index).Character(CharNum).Hotbar(i).sType = 0
+            Player(Index).Character(CharNum).Hotbar(i).SlotType = 0
         Next
 
         ReDim Player(Index).Character(CharNum).Switches(MAX_SWITCHES)
@@ -1880,7 +1883,7 @@ Module ServerDatabase
             reader.Read(Player(Index).Character(CharNum).Equipment(i))
         Next
 
-        reader.Read(Player(Index).Character(CharNum).exp)
+        reader.Read(Player(Index).Character(CharNum).Exp)
 
         For i = 0 To MAX_INV
             reader.Read(Player(Index).Character(CharNum).Inv(i).Num)
@@ -1890,8 +1893,8 @@ Module ServerDatabase
         reader.Read(Player(Index).Character(CharNum).Level)
         reader.Read(Player(Index).Character(CharNum).Map)
         reader.Read(Player(Index).Character(CharNum).Name)
-        reader.Read(Player(Index).Character(CharNum).PK)
-        reader.Read(Player(Index).Character(CharNum).POINTS)
+        reader.Read(Player(Index).Character(CharNum).Pk)
+        reader.Read(Player(Index).Character(CharNum).Points)
         reader.Read(Player(Index).Character(CharNum).Sex)
 
         For i = 0 To MAX_PLAYER_SKILLS
@@ -1908,8 +1911,8 @@ Module ServerDatabase
             reader.Read(Player(Index).Character(CharNum).Vital(i))
         Next
 
-        reader.Read(Player(Index).Character(CharNum).x)
-        reader.Read(Player(Index).Character(CharNum).y)
+        reader.Read(Player(Index).Character(CharNum).X)
+        reader.Read(Player(Index).Character(CharNum).Y)
 
         For i = 1 To MAX_QUESTS
             reader.Read(Player(Index).Character(CharNum).PlayerQuest(i).Status)
@@ -1933,7 +1936,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_HOTBAR
             reader.Read(Player(Index).Character(CharNum).Hotbar(i).Slot)
-            reader.Read(Player(Index).Character(CharNum).Hotbar(i).sType)
+            reader.Read(Player(Index).Character(CharNum).Hotbar(i).SlotType)
         Next
 
         ReDim Player(Index).Character(CharNum).Switches(MAX_SWITCHES)
@@ -2029,7 +2032,7 @@ Module ServerDatabase
             writer.Write(Player(Index).Character(CharNum).Equipment(i))
         Next
 
-        writer.Write(Player(Index).Character(CharNum).exp)
+        writer.Write(Player(Index).Character(CharNum).Exp)
 
         For i = 0 To MAX_INV
             writer.Write(Player(Index).Character(CharNum).Inv(i).Num)
@@ -2039,8 +2042,8 @@ Module ServerDatabase
         writer.Write(Player(Index).Character(CharNum).Level)
         writer.Write(Player(Index).Character(CharNum).Map)
         writer.Write(Player(Index).Character(CharNum).Name)
-        writer.Write(Player(Index).Character(CharNum).PK)
-        writer.Write(Player(Index).Character(CharNum).POINTS)
+        writer.Write(Player(Index).Character(CharNum).Pk)
+        writer.Write(Player(Index).Character(CharNum).Points)
         writer.Write(Player(Index).Character(CharNum).Sex)
 
         For i = 0 To MAX_PLAYER_SKILLS
@@ -2057,8 +2060,8 @@ Module ServerDatabase
             writer.Write(Player(Index).Character(CharNum).Vital(i))
         Next
 
-        writer.Write(Player(Index).Character(CharNum).x)
-        writer.Write(Player(Index).Character(CharNum).y)
+        writer.Write(Player(Index).Character(CharNum).X)
+        writer.Write(Player(Index).Character(CharNum).Y)
 
         For i = 1 To MAX_QUESTS
             writer.Write(Player(Index).Character(CharNum).PlayerQuest(i).Status)
@@ -2081,7 +2084,7 @@ Module ServerDatabase
 
         For i = 1 To MAX_HOTBAR
             writer.Write(Player(Index).Character(CharNum).Hotbar(i).Slot)
-            writer.Write(Player(Index).Character(CharNum).Hotbar(i).sType)
+            writer.Write(Player(Index).Character(CharNum).Hotbar(i).SlotType)
         Next
 
         For i = 1 To MAX_SWITCHES
@@ -2189,8 +2192,8 @@ Module ServerDatabase
 
             Player(Index).Character(CharNum).Dir = Direction.Down
             Player(Index).Character(CharNum).Map = Classes(ClassNum).StartMap
-            Player(Index).Character(CharNum).x = Classes(ClassNum).StartX
-            Player(Index).Character(CharNum).y = Classes(ClassNum).StartY
+            Player(Index).Character(CharNum).X = Classes(ClassNum).StartX
+            Player(Index).Character(CharNum).Y = Classes(ClassNum).StartY
             Player(Index).Character(CharNum).Dir = Direction.Down
             Player(Index).Character(CharNum).Vital(Vitals.HP) = GetPlayerMaxVital(Index, Vitals.HP)
             Player(Index).Character(CharNum).Vital(Vitals.MP) = GetPlayerMaxVital(Index, Vitals.MP)
@@ -2260,7 +2263,7 @@ Module ServerDatabase
         Path.Combine(Application.StartupPath, "data", "options.ini")
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Game_Name", Options.Game_Name)
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port", Str(Options.Port))
-        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD", Options.MOTD)
+        PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD", Options.Motd)
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website", Options.Website)
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartMap", Options.StartMap)
         PutVar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartX", Options.StartX)
@@ -2270,7 +2273,7 @@ Module ServerDatabase
     Public Sub LoadOptions()
         Options.Game_Name = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Game_Name")
         Options.Port = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Port")
-        Options.MOTD = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD")
+        Options.Motd = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "MOTD")
         Options.Website = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "Website")
         Options.StartMap = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartMap")
         Options.StartX = Getvar(Path.Combine(Application.StartupPath, "data", "options.ini"), "OPTIONS", "StartX")
@@ -2503,7 +2506,7 @@ Module ServerDatabase
         Buffer.WriteString(Trim$(Item(itemNum).Name))
         Buffer.WriteInteger(Item(itemNum).Paperdoll)
         Buffer.WriteInteger(Item(itemNum).Pic)
-        Buffer.WriteInteger(Item(itemNum).price)
+        Buffer.WriteInteger(Item(itemNum).Price)
         Buffer.WriteInteger(Item(itemNum).Rarity)
         Buffer.WriteInteger(Item(itemNum).Speed)
 
@@ -2623,7 +2626,7 @@ Module ServerDatabase
 
         Buffer.WriteInteger(Npc(NpcNum).Exp)
         Buffer.WriteInteger(Npc(NpcNum).Faction)
-        Buffer.WriteInteger(Npc(NpcNum).HP)
+        Buffer.WriteInteger(Npc(NpcNum).Hp)
         Buffer.WriteString(Npc(NpcNum).Name)
         Buffer.WriteInteger(Npc(NpcNum).Range)
         Buffer.WriteInteger(Npc(NpcNum).SpawnSecs)
@@ -2675,8 +2678,8 @@ Module ServerDatabase
         Buffer.WriteInteger(Shop(shopNum).Face)
 
         For i = 0 To MAX_TRADES
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costitem)
-            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).costvalue)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostItem)
+            Buffer.WriteInteger(Shop(shopNum).TradeItem(i).CostValue)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).Item)
             Buffer.WriteInteger(Shop(shopNum).TradeItem(i).ItemValue)
         Next
@@ -2713,7 +2716,7 @@ Module ServerDatabase
         Buffer.WriteInteger(Skill(skillnum).AoE)
         Buffer.WriteInteger(Skill(skillnum).CastAnim)
         Buffer.WriteInteger(Skill(skillnum).CastTime)
-        Buffer.WriteInteger(Skill(skillnum).CDTime)
+        Buffer.WriteInteger(Skill(skillnum).CdTime)
         Buffer.WriteInteger(Skill(skillnum).ClassReq)
         Buffer.WriteInteger(Skill(skillnum).Dir)
         Buffer.WriteInteger(Skill(skillnum).Duration)
@@ -2722,15 +2725,15 @@ Module ServerDatabase
         Buffer.WriteInteger(Skill(skillnum).IsAoE)
         Buffer.WriteInteger(Skill(skillnum).LevelReq)
         Buffer.WriteInteger(Skill(skillnum).Map)
-        Buffer.WriteInteger(Skill(skillnum).MPCost)
+        Buffer.WriteInteger(Skill(skillnum).MpCost)
         Buffer.WriteString(Skill(skillnum).Name)
         Buffer.WriteInteger(Skill(skillnum).range)
         Buffer.WriteInteger(Skill(skillnum).SkillAnim)
         Buffer.WriteInteger(Skill(skillnum).StunDuration)
         Buffer.WriteInteger(Skill(skillnum).Type)
         Buffer.WriteInteger(Skill(skillnum).Vital)
-        Buffer.WriteInteger(Skill(skillnum).x)
-        Buffer.WriteInteger(Skill(skillnum).y)
+        Buffer.WriteInteger(Skill(skillnum).X)
+        Buffer.WriteInteger(Skill(skillnum).Y)
 
         Buffer.WriteInteger(Skill(skillnum).IsProjectile)
         Buffer.WriteInteger(Skill(skillnum).Projectile)
