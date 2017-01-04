@@ -555,9 +555,9 @@ Module ClientPets
         If Not HasPet(MyIndex) Then Exit Sub
 
         If Not PetAlive(MyIndex) Then
-            RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, 32, PetbarGFXInfo.Height)
+            RenderSprite(PetBarSprite, GameWindow, PetbarX, PetbarY, 0, 0, 32, PetbarGFXInfo.Height)
         Else
-            RenderTextures(PetBarGFX, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
+            RenderSprite(PetBarSprite, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
 
             For i = 1 To 4
                 skillnum = Player(MyIndex).Pet.skill(i)
@@ -593,7 +593,7 @@ Module ClientPets
                         .Width = PIC_X
                     End With
 
-                    RenderTextures(SkillIconsGFX(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
+                    RenderSprite(SkillIconsSprite(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
 
             Next

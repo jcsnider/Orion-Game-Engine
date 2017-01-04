@@ -397,7 +397,7 @@ Public Class frmEditor_MapEditor
 
 #Region "PicScreen"
     Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
-        If e.X > pnlBack2.Width Or e.Y > pnlBack2.Height Then Exit Sub
+        If e.X > pnlBack2.Width - 32 Or e.Y > pnlBack2.Height - 32 Then Exit Sub
         MapEditorMouseDown(e.Button, e.X, e.Y, False)
 
     End Sub

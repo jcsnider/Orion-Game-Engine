@@ -507,7 +507,7 @@
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(Index, i) = itemNum Then
-                If Item(itemNum).Type = ItemType.CURRENCY Or Item(itemNum).Stackable = 1 Then
+                If Item(itemNum).Type = ItemType.Currency Or Item(itemNum).Stackable = 1 Then
                     HasItem = GetPlayerInvItemValue(Index, i)
                 Else
                     HasItem = 1
@@ -653,7 +653,7 @@
         y = 10
 
         'first render panel
-        RenderTextures(QuestGFX, GameWindow, QuestLogX, QuestLogY, 0, 0, QuestGFXInfo.Width, QuestGFXInfo.Height)
+        RenderSprite(QuestSprite, GameWindow, QuestLogX, QuestLogY, 0, 0, QuestGFXInfo.Width, QuestGFXInfo.Height)
 
         'draw quest names
         For i = 1 To MAX_ACTIVEQUESTS

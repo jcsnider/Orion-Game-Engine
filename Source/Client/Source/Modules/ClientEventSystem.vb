@@ -3170,9 +3170,9 @@ nextevent:
                 X = X - ((sRect.Right - sRect.Left) / 2)
                 Y = Y - (sRect.Bottom - sRect.Top) + 32
                 If Map.MapEvents(id).GraphicY2 > 0 Then
-                    RenderTextures(TileSetTexture(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32) - ConvertMapX(Map.MapEvents(id).GraphicY2 * 32) + 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32) - ConvertMapX(Map.MapEvents(id).GraphicY2 * 32) + 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderTextures(TileSetTexture(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
                 'tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
         End Select
@@ -3184,7 +3184,7 @@ nextevent:
         Dim tmpY As Integer = 0
 
         'first render panel
-        RenderTextures(EventChatGFX, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGFXInfo.Width, EventChatGFXInfo.Height)
+        RenderSprite(EventChatSprite, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGFXInfo.Width, EventChatGFXInfo.Height)
 
         With frmMainGame
             'face
@@ -3198,7 +3198,7 @@ nextevent:
                 With FacesGFXInfo(EventChatFace)
                     .TextureTimer = GetTickCount() + 100000
                 End With
-                RenderTextures(FacesGFX(EventChatFace), GameWindow, EventChatX + 12, EventChatY + 14, 0, 0, FacesGFXInfo(EventChatFace).Width, FacesGFXInfo(EventChatFace).Height)
+                RenderSprite(FacesSprite(EventChatFace), GameWindow, EventChatX + 12, EventChatY + 14, 0, 0, FacesGFXInfo(EventChatFace).Width, FacesGFXInfo(EventChatFace).Height)
                 EventChatTextX = 113
             Else
                 EventChatTextX = 14
