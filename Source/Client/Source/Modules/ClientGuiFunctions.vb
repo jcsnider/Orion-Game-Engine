@@ -662,6 +662,7 @@ Public Module ClientGuiFunctions
                 If X > (CraftPanelX + 256) And X < (CraftPanelX + 330) Then
                     If Y > (CraftPanelY + 415) And Y < (CraftPanelY + 437) Then
                         If SelectedRecipe > 0 Then
+                            CraftProgressValue = 0
                             SendCraftIt(RecipeNames(SelectedRecipe), CraftAmountValue)
                         End If
                     End If

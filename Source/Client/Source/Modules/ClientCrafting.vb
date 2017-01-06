@@ -347,11 +347,7 @@ Public Module ClientCrafting
         Dim rec As Rectangle, pgbvalue As Integer
 
         'first render panel
-        'RenderTextures(CraftGFX, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.Width, CraftGFXInfo.Height)
-        CraftSprite.TextureRect = New IntRect(0, 0, CraftGFXInfo.Width, CraftGFXInfo.Height)
-        CraftSprite.Position = New Vector2f(CraftPanelX, CraftPanelY)
-
-        GameWindow.Draw(CraftSprite)
+        RenderSprite(CraftSprite, GameWindow, CraftPanelX, CraftPanelY, 0, 0, CraftGFXInfo.Width, CraftGFXInfo.Height)
 
         y = 10
 
@@ -362,6 +358,25 @@ Public Module ClientCrafting
                 y = y + 20
             End If
         Next
+
+        'progress bar
+        pgbvalue = (CraftProgressValue / 100) * 100
+
+        With rec
+            .Y = 0
+            .Height = ProgBarGFXInfo.Height
+            .X = 0
+            .Width = pgbvalue * ProgBarGFXInfo.Width / 100
+        End With
+
+        RenderSprite(ProgBarSprite, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
+
+        'amount controls
+        RenderSprite(CharPanelMinSprite, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
+
+        DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
+
+        RenderSprite(CharPanelPlusSprite, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
 
         If SelectedRecipe = 0 Then Exit Sub
 
@@ -375,10 +390,7 @@ Public Module ClientCrafting
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            'RenderTextures(ItemsGFX(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
-            ItemsSprite(picProductIndex).TextureRect = New IntRect(0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
-            ItemsSprite(picProductIndex).Position = New Vector2f(CraftPanelX + 267, CraftPanelY + 20)
-            GameWindow.Draw(ItemsSprite(picProductIndex))
+            RenderSprite(ItemsSprite(picProductIndex), GameWindow, CraftPanelX + 267, CraftPanelY + 20, 0, 0, ItemsGFXInfo(picProductIndex).Width, ItemsGFXInfo(picProductIndex).Height)
 
             DrawText(CraftPanelX + 310, CraftPanelY + 20, Trim$(lblProductNameText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
@@ -398,10 +410,7 @@ Public Module ClientCrafting
                     .TextureTimer = GetTickCount() + 100000
                 End With
 
-                'RenderTextures(ItemsGFX(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
-                ItemsSprite(picMaterialIndex(i)).TextureRect = New IntRect(0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
-                ItemsSprite(picMaterialIndex(i)).Position = New Vector2f(CraftPanelX + 275, CraftPanelY + y)
-                GameWindow.Draw(ItemsSprite(picMaterialIndex(i)))
+                RenderSprite(ItemsSprite(picMaterialIndex(i)), GameWindow, CraftPanelX + 275, CraftPanelY + y, 0, 0, ItemsGFXInfo(picMaterialIndex(i)).Width, ItemsGFXInfo(picMaterialIndex(i)).Height)
 
                 DrawText(CraftPanelX + 315, CraftPanelY + y, Trim$(lblMaterialName(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
@@ -411,36 +420,6 @@ Public Module ClientCrafting
             End If
         Next
 
-        'progress bar
-        pgbvalue = (CraftProgressValue / 100) * 100
-
-        With rec
-            .Y = 0
-            .Height = ProgBarGFXInfo.Height
-            .X = 0
-            .Width = pgbvalue * ProgBarGFXInfo.Width / 100
-        End With
-
-        'RenderTextures(ProgBarGFX, GameWindow, CraftPanelX + 410, CraftPanelY + 417, rec.X, rec.Y, rec.Width, rec.Height)
-        ProgBarSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-        ProgBarSprite.Position = New Vector2f(CraftPanelX + 410, CraftPanelY + 417)
-
-        GameWindow.Draw(ProgBarSprite)
-
-        'amount controls
-        'RenderTextures(CharPanelMinGFX, GameWindow, CraftPanelX + 340, CraftPanelY + 422, 0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
-        CharPanelMinSprite.TextureRect = New IntRect(0, 0, CharPanelMinGFXInfo.Width, CharPanelMinGFXInfo.Height)
-        CharPanelMinSprite.Position = New Vector2f(CraftPanelX + 340, CraftPanelY + 422)
-
-        GameWindow.Draw(CharPanelMinSprite)
-
-        DrawText(CraftPanelX + 367, CraftPanelY + 418, Trim$(CraftAmountValue), SFML.Graphics.Color.Black, SFML.Graphics.Color.White, GameWindow)
-
-        'RenderTextures(CharPanelPlusGFX, GameWindow, CraftPanelX + 392, CraftPanelY + 422, 0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
-        CharPanelPlusSprite.TextureRect = New IntRect(0, 0, CharPanelPlusGFXInfo.Width, CharPanelPlusGFXInfo.Height)
-        CharPanelPlusSprite.Position = New Vector2f(CraftPanelX + 392, CraftPanelY + 422)
-
-        GameWindow.Draw(CharPanelPlusSprite)
     End Sub
 
     Public Sub ResetCraftPanel()

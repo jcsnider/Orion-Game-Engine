@@ -836,7 +836,7 @@ Public Class frmEditor_MapEditor
                     End If
                 Next
             ElseIf tabpages.SelectedTab Is tpEvents Then
-                If Visible = False Then
+                If frmEditor_Events.Visible = False Then
                     AddEvent(CurX, CurY)
                 End If
             End If

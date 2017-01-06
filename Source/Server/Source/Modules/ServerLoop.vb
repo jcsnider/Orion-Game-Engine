@@ -81,7 +81,7 @@ Module ServerLoop
                 ' Handle our player crafting
                 Dim _playercrafts = (
                     From p In OnlinePlayers
-                    Where GetTickCount() > p.Player.CraftTimer + (p.Player.CraftTimeNeeded * 1000)
+                    Where GetTickCount() > p.Player.CraftTimer + (p.Player.CraftTimeNeeded * 1000) AndAlso p.Player.CraftIt = 1
                     Select New With {Key .Index = p.Index, .Success = HandlePlayerCraft(p.Index)}
                 ).ToArray()
 

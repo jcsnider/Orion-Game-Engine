@@ -227,5 +227,10 @@
 
         Pet(EditorIndex).skill(4) = scrlSkill4.Value
     End Sub
+
+    Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
+        PetEditorInit()
+    End Sub
 #End Region
 End Class

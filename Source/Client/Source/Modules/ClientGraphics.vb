@@ -2014,6 +2014,11 @@ Module ClientGraphics
             DrawMapAttributes()
         End If
 
+        If InMapEditor And frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpEvents Then
+            DrawEvents()
+            EditorEvent_DrawGraphic()
+        End If
+
         If GettingMap Then Exit Sub
 
         'draw hp and casting bars
@@ -2048,6 +2053,14 @@ Module ClientGraphics
         If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
+            If TileSetTextureInfo(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
+                LoadTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1, 1)
+            End If
+            ' we use it, lets update timer
+            With TileSetTextureInfo(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
             If EditorTileWidth = 1 And EditorTileHeight = 1 Then
                 RenderSprite(TileSetSprite(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
 
@@ -3020,23 +3033,19 @@ NextLoop:
 
         'first render panel
         RenderSprite(ShopPanelSprite, GameWindow, ShopWindowX, ShopWindowY, 0, 0, ShopPanelGFXInfo.Width, ShopPanelGFXInfo.Height)
-        'ShopPanelSprite.TextureRect = New IntRect(0, 0, ShopPanelGFXInfo.Width, ShopPanelGFXInfo.Height)
-        'ShopPanelSprite.Position = New Vector2f(ShopWindowX, ShopWindowY)
-        'GameWindow.Draw(ShopPanelSprite)
 
-        'render face
-        If FacesGFXInfo(Shop(InShop).Face).IsLoaded = False Then
-            LoadTexture(Shop(InShop).Face, 7)
+        If Shop(InShop).Face > 0 Then
+            'render face
+            If FacesGFXInfo(Shop(InShop).Face).IsLoaded = False Then
+                LoadTexture(Shop(InShop).Face, 7)
+            End If
+
+            'seeying we still use it, lets update timer
+            With FacesGFXInfo(Shop(InShop).Face)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+            RenderSprite(FacesSprite(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY, 0, 0, FacesGFXInfo(Shop(InShop).Face).Width, FacesGFXInfo(Shop(InShop).Face).Height)
         End If
-
-        'seeying we still use it, lets update timer
-        With FacesGFXInfo(Shop(InShop).Face)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-        RenderSprite(FacesSprite(Shop(InShop).Face), GameWindow, ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY, 0, 0, FacesGFXInfo(Shop(InShop).Face).Width, FacesGFXInfo(Shop(InShop).Face).Height)
-        'FacesSprite(Shop(InShop).Face).TextureRect = New IntRect(0, 0, FacesGFXInfo(Shop(InShop).Face).Width, FacesGFXInfo(Shop(InShop).Face).Height)
-        'FacesSprite(Shop(InShop).Face).Position = New Vector2f(ShopWindowX + ShopFaceX, ShopWindowY + ShopFaceY)
-        'GameWindow.Draw(FacesSprite(Shop(InShop).Face))
 
         'draw text
         DrawText(ShopWindowX + ShopLeft, ShopWindowY + 10, Trim(Shop(InShop).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
@@ -3098,9 +3107,6 @@ NextLoop:
                     End With
 
                     RenderSprite(ItemsSprite(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
-                    'ItemsSprite(itempic).TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                    'ItemsSprite(itempic).Position = New Vector2f(rec_pos.X, rec_pos.Y)
-                    'GameWindow.Draw(ItemsSprite(itempic))
 
                     ' If item is a stack - draw the amount you have
                     If Shop(InShop).TradeItem(i).ItemValue > 1 Then
