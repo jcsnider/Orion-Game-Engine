@@ -10,7 +10,7 @@ Public Class frmEditor_DarkMapEditor
         pnlAttributes.Visible = False
 
         optBlocked.Checked = True
-        SelectedTab = 0
+        SelectedTab = 1
 
         scrlFog.Maximum = NumFogs
 
