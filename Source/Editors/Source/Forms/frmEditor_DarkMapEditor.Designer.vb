@@ -640,7 +640,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNpcList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
         Me.cmbNpcList.FormattingEnabled = True
         Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
         Me.cmbNpcList.Name = "cmbNpcList"

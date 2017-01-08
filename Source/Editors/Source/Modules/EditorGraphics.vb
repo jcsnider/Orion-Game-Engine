@@ -77,6 +77,8 @@ Module EditorGraphics
     ' Number of graphic files
     Public MapEditorBackBuffer As Bitmap
 
+    Public MapTintSprite As Sprite
+
     Public NumTileSets As Integer
     Public NumCharacters As Integer
     Public NumPaperdolls As Integer
@@ -1221,17 +1223,13 @@ Module EditorGraphics
 
         If Map.HasMapTint = 0 Then Exit Sub
 
-        Dim tmpSprite As Sprite
+        MapTintSprite = New Sprite(New Texture(New SFML.Graphics.Image((Map.MaxX * PIC_X), (Map.MaxY * PIC_Y), SFML.Graphics.Color.White)))
+        MapTintSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
+        MapTintSprite.TextureRect = New IntRect(0, 0, (Map.MaxX * PIC_X) + PIC_X, (Map.MaxY * PIC_Y) + PIC_Y)
 
-        tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White)))
-        tmpSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
-        tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+        MapTintSprite.Position = New Vector2f(0, 0)
 
-        tmpSprite.Position = New Vector2f(0, 0)
-
-        GameWindow.Draw(tmpSprite)
-
-        tmpSprite.Dispose()
+        GameWindow.Draw(MapTintSprite)
 
     End Sub
 
