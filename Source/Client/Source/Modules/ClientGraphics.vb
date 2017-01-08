@@ -1931,7 +1931,7 @@ Module ClientGraphics
         DrawMapTint()
 
         ' Draw out a square at mouse cursor
-        If MapGrid = True Then
+        If MapGrid = True AndAlso InMapEditor Then
             DrawGrid()
         End If
 

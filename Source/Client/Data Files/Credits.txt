@@ -24,4 +24,6 @@ AutoMapper System: boasfesta
 
 Instanced map system, other functions: BugSick
 
+DarkUI: Robin Perris
+
 *License copies can be found in the license directory.
