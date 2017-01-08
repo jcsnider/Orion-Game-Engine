@@ -527,7 +527,8 @@ Module ServerHandleData
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ClientPackets.CSayMsg Then Exit Sub
-        msg = Buffer.ReadString
+        'msg = Buffer.ReadString
+        msg = Buffer.ReadUnicodeString()
 
         Addlog("Map #" & GetPlayerMap(index) & ": " & GetPlayerName(index) & " says, '" & msg & "'", PLAYER_LOG)
 
@@ -545,7 +546,8 @@ Module ServerHandleData
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ClientPackets.CBroadcastMsg Then Exit Sub
-        msg = Buffer.ReadString
+        'msg = Buffer.ReadString
+        msg = Buffer.ReadUnicodeString()
 
         s = "[Global]" & GetPlayerName(index) & ": " & msg
         SayMsg_Global(index, msg, ColorType.White)
@@ -564,7 +566,8 @@ Module ServerHandleData
         If buffer.ReadInteger <> ClientPackets.CPlayerMsg Then Exit Sub
 
         OtherPlayer = buffer.ReadString
-        Msg = buffer.ReadString
+        'Msg = buffer.ReadString
+        Msg = buffer.ReadUnicodeString()
         buffer = Nothing
 
         OtherPlayerIndex = FindPlayer(OtherPlayer)
@@ -3053,7 +3056,7 @@ Module ServerHandleData
 
             If GetPlayerAccess(index) > AdminType.Player Then
                 SendEditorLoadOk(index)
-                SendMapData(index, 1, True)
+                'SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)
             Else

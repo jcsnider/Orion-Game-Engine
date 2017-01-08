@@ -10,6 +10,7 @@ Public Class frmEditor_Events
     Private Sub frmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
     End Sub
+
     Sub ClearConditionFrame()
         Dim i As Integer
 
@@ -80,7 +81,6 @@ Public Class frmEditor_Events
         cmbCondition_General.SelectedIndex = 0
         scrlCondition_QuestTask.Value = 1
         lblCondition_QuestTask.Text = "#1"
-
 
         cmbCondition_Gender.Enabled = False
     End Sub
@@ -254,8 +254,6 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'chat bubble
             Case 4
-                MsgBox("Sorry, no chatbubbles yet :(")
-                Exit Sub
                 txtChatbubbleText.Text = ""
                 optChatBubbleTarget0.Checked = True
                 cmbChatBubbleTarget.Visible = False
@@ -664,7 +662,6 @@ Public Class frmEditor_Events
             Exit Sub
         End If
 
-
         pageCount = tmpEvent.PageCount + 1
 
         ' redim the array
@@ -1059,7 +1056,6 @@ Public Class frmEditor_Events
         tmpEvent.Pages(curPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
     End Sub
 
-
 #End Region
 
 #Region "Positioning"
@@ -1197,7 +1193,6 @@ Public Class frmEditor_Events
             lstVariables.Items.Add(CStr(i) & ". " & Trim$(Variables(i)))
         Next
         lstVariables.SelectedIndex = 0
-
 
     End Sub
 
@@ -1537,9 +1532,6 @@ Public Class frmEditor_Events
         ReDim TempMoveRoute(0)
         pnlMoveRoute.Visible = False
     End Sub
-
-
-
 
 #End Region
 
@@ -2091,8 +2083,6 @@ Public Class frmEditor_Events
         fraChangeSkills.Visible = False
     End Sub
 
-
-
 #End Region
 
 #Region "Change Class"
@@ -2117,7 +2107,6 @@ Public Class frmEditor_Events
         fraDialogue.Visible = False
         fraChangeClass.Visible = False
     End Sub
-
 
 #End Region
 
@@ -2264,7 +2253,6 @@ Public Class frmEditor_Events
         fraPlayerWarp.Visible = False
     End Sub
 
-
 #End Region
 
 #Region "Route Completion"
@@ -2400,7 +2388,6 @@ Public Class frmEditor_Events
         fraDialogue.Visible = False
         fraBeginQuest.Visible = False
     End Sub
-
 
 #End Region
 

@@ -230,7 +230,7 @@
         pnlLoginVisible = False
         pnlRegisterVisible = False
 
-        Msg = Buffer.ReadString
+        Msg = Trim(Buffer.ReadUnicodeString)
 
         Buffer = Nothing
 
@@ -1300,7 +1300,8 @@
 
         If Buffer.ReadInteger <> ServerPackets.SGlobalMsg Then Exit Sub
 
-        Msg = Trim(Buffer.ReadString)
+        'Msg = Trim(Buffer.ReadString)
+        Msg = Trim(Buffer.ReadUnicodeString)
 
         Buffer = Nothing
 
@@ -1315,7 +1316,8 @@
 
         If Buffer.ReadInteger <> ServerPackets.SMapMsg Then Exit Sub
 
-        Msg = Trim(Buffer.ReadString)
+        'Msg = Trim(Buffer.ReadString)
+        Msg = Trim(Buffer.ReadUnicodeString)
 
         Buffer = Nothing
 
@@ -1351,7 +1353,9 @@
 
         If Buffer.ReadInteger <> ServerPackets.SPlayerMsg Then Exit Sub
 
-        Msg = Trim(Buffer.ReadString)
+        'Msg = Trim(Buffer.ReadString)
+        Msg = Trim(Buffer.ReadUnicodeString)
+
         colour = Buffer.ReadInteger
         Buffer = Nothing
 
@@ -1712,7 +1716,8 @@
 
         If buffer.ReadInteger <> ServerPackets.SActionMsg Then Exit Sub
 
-        message = Trim(buffer.ReadString)
+        'message = Trim(buffer.ReadString)
+        message = Trim(buffer.ReadUnicodeString)
         color = buffer.ReadInteger
         tmpType = buffer.ReadInteger
         X = buffer.ReadInteger
@@ -1915,7 +1920,8 @@
         Name = Trim(Buffer.ReadString)
         Access = Buffer.ReadInteger
         PK = Buffer.ReadInteger
-        message = Trim(Buffer.ReadString)
+        'message = Trim(Buffer.ReadString)
+        message = Trim(Buffer.ReadUnicodeString)
         Header = Trim(Buffer.ReadString)
 
         AddText(Header & Name & ": " & message, QColorType.SayColor)
@@ -2609,7 +2615,8 @@
 
         target = buffer.ReadInteger
         targetType = buffer.ReadInteger
-        Message = buffer.ReadString
+        'Message = buffer.ReadString
+        Message = Trim(buffer.ReadUnicodeString)
         colour = buffer.ReadInteger
         AddChatBubble(target, targetType, Message, colour)
 

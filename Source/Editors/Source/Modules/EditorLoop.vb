@@ -195,8 +195,8 @@ Module EditorLoop
 #End Region
 
     Sub GameLoop()
-        Dim dest As Point = New Point(frmEditor_MapEditor.PointToScreen(frmEditor_MapEditor.picScreen.Location))
-        Dim g As Graphics = frmEditor_MapEditor.picScreen.CreateGraphics
+        Dim dest As Point = New Point(frmEditor_DarkMapEditor.PointToScreen(frmEditor_DarkMapEditor.picScreen.Location))
+        Dim g As Graphics = frmEditor_DarkMapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
         Dim destrect As Rectangle

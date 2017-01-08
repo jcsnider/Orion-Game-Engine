@@ -58,8 +58,8 @@ Partial Class frmEditor_MapEditor
         Me.optBank = New System.Windows.Forms.RadioButton()
         Me.optItem = New System.Windows.Forms.RadioButton()
         Me.optShop = New System.Windows.Forms.RadioButton()
-        Me.optNPCAvoid = New System.Windows.Forms.RadioButton()
-        Me.optNPCSpawn = New System.Windows.Forms.RadioButton()
+        Me.optNpcAvoid = New System.Windows.Forms.RadioButton()
+        Me.optNpcSpawn = New System.Windows.Forms.RadioButton()
         Me.optKey = New System.Windows.Forms.RadioButton()
         Me.optDoor = New System.Windows.Forms.RadioButton()
         Me.optKeyOpen = New System.Windows.Forms.RadioButton()
@@ -75,6 +75,7 @@ Partial Class frmEditor_MapEditor
         Me.Label13 = New System.Windows.Forms.Label()
         Me.pnlSettings = New System.Windows.Forms.Panel()
         Me.grpSettings = New System.Windows.Forms.GroupBox()
+        Me.chkInstance = New System.Windows.Forms.CheckBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.chkUseTint = New System.Windows.Forms.CheckBox()
         Me.lblMapAlpha = New System.Windows.Forms.Label()
@@ -109,11 +110,11 @@ Partial Class frmEditor_MapEditor
         Me.txtMaxX = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.fraBootSettings = New System.Windows.Forms.GroupBox()
-        Me.txtBootMap = New System.Windows.Forms.TextBox()
+        Me.txtSpawnMap = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtBootY = New System.Windows.Forms.TextBox()
+        Me.txtSpawnY = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtBootX = New System.Windows.Forms.TextBox()
+        Me.txtSpawnX = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.fraMapLinks = New System.Windows.Forms.GroupBox()
@@ -123,11 +124,8 @@ Partial Class frmEditor_MapEditor
         Me.txtRight = New System.Windows.Forms.TextBox()
         Me.txtUp = New System.Windows.Forms.TextBox()
         Me.pnlBack2 = New System.Windows.Forms.Panel()
-        Me.scrlMapViewH = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapViewV = New System.Windows.Forms.VScrollBar()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
-        Me.chkIsInstanced = New System.Windows.Forms.CheckBox()
         Me.btnMapWarp = New System.Windows.Forms.Button()
         Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
         Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
@@ -183,7 +181,8 @@ Partial Class frmEditor_MapEditor
         Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-        Me.chkInstance = New System.Windows.Forms.CheckBox()
+        Me.scrlMapViewV = New System.Windows.Forms.VScrollBar()
+        Me.scrlMapViewH = New System.Windows.Forms.HScrollBar()
         Me.ToolStrip.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tabpages.SuspendLayout()
@@ -306,7 +305,7 @@ Partial Class frmEditor_MapEditor
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(327, 565)
+        Me.Panel1.Size = New System.Drawing.Size(327, 590)
         Me.Panel1.TabIndex = 18
         '
         'tabpages
@@ -453,8 +452,8 @@ Partial Class frmEditor_MapEditor
         Me.tpAttributes.Controls.Add(Me.optBank)
         Me.tpAttributes.Controls.Add(Me.optItem)
         Me.tpAttributes.Controls.Add(Me.optShop)
-        Me.tpAttributes.Controls.Add(Me.optNPCAvoid)
-        Me.tpAttributes.Controls.Add(Me.optNPCSpawn)
+        Me.tpAttributes.Controls.Add(Me.optNpcAvoid)
+        Me.tpAttributes.Controls.Add(Me.optNpcSpawn)
         Me.tpAttributes.Controls.Add(Me.optKey)
         Me.tpAttributes.Controls.Add(Me.optDoor)
         Me.tpAttributes.Controls.Add(Me.optKeyOpen)
@@ -575,27 +574,27 @@ Partial Class frmEditor_MapEditor
         Me.optShop.Text = "Shop"
         Me.optShop.UseVisualStyleBackColor = True
         '
-        'optNPCAvoid
+        'optNpcAvoid
         '
-        Me.optNPCAvoid.AutoSize = True
-        Me.optNPCAvoid.Location = New System.Drawing.Point(237, 14)
-        Me.optNPCAvoid.Name = "optNPCAvoid"
-        Me.optNPCAvoid.Size = New System.Drawing.Size(77, 17)
-        Me.optNPCAvoid.TabIndex = 3
-        Me.optNPCAvoid.TabStop = True
-        Me.optNPCAvoid.Text = "NPC Avoid"
-        Me.optNPCAvoid.UseVisualStyleBackColor = True
+        Me.optNpcAvoid.AutoSize = True
+        Me.optNpcAvoid.Location = New System.Drawing.Point(237, 14)
+        Me.optNpcAvoid.Name = "optNpcAvoid"
+        Me.optNpcAvoid.Size = New System.Drawing.Size(77, 17)
+        Me.optNpcAvoid.TabIndex = 3
+        Me.optNpcAvoid.TabStop = True
+        Me.optNpcAvoid.Text = "NPC Avoid"
+        Me.optNpcAvoid.UseVisualStyleBackColor = True
         '
-        'optNPCSpawn
+        'optNpcSpawn
         '
-        Me.optNPCSpawn.AutoSize = True
-        Me.optNPCSpawn.Location = New System.Drawing.Point(10, 117)
-        Me.optNPCSpawn.Name = "optNPCSpawn"
-        Me.optNPCSpawn.Size = New System.Drawing.Size(83, 17)
-        Me.optNPCSpawn.TabIndex = 8
-        Me.optNPCSpawn.TabStop = True
-        Me.optNPCSpawn.Text = "NPC Spawn"
-        Me.optNPCSpawn.UseVisualStyleBackColor = True
+        Me.optNpcSpawn.AutoSize = True
+        Me.optNpcSpawn.Location = New System.Drawing.Point(10, 117)
+        Me.optNpcSpawn.Name = "optNpcSpawn"
+        Me.optNpcSpawn.Size = New System.Drawing.Size(83, 17)
+        Me.optNpcSpawn.TabIndex = 8
+        Me.optNpcSpawn.TabStop = True
+        Me.optNpcSpawn.Text = "NPC Spawn"
+        Me.optNpcSpawn.UseVisualStyleBackColor = True
         '
         'optKey
         '
@@ -736,7 +735,7 @@ Partial Class frmEditor_MapEditor
         Me.pnlSettings.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlSettings.Location = New System.Drawing.Point(1056, 0)
         Me.pnlSettings.Name = "pnlSettings"
-        Me.pnlSettings.Size = New System.Drawing.Size(229, 565)
+        Me.pnlSettings.Size = New System.Drawing.Size(229, 590)
         Me.pnlSettings.TabIndex = 19
         '
         'grpSettings
@@ -758,6 +757,16 @@ Partial Class frmEditor_MapEditor
         Me.grpSettings.TabIndex = 25
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Map Settings"
+        '
+        'chkInstance
+        '
+        Me.chkInstance.AutoSize = True
+        Me.chkInstance.Location = New System.Drawing.Point(41, 71)
+        Me.chkInstance.Name = "chkInstance"
+        Me.chkInstance.Size = New System.Drawing.Size(79, 17)
+        Me.chkInstance.TabIndex = 39
+        Me.chkInstance.Text = "Instanced?"
+        Me.chkInstance.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -1083,11 +1092,11 @@ Partial Class frmEditor_MapEditor
         '
         'fraBootSettings
         '
-        Me.fraBootSettings.Controls.Add(Me.txtBootMap)
+        Me.fraBootSettings.Controls.Add(Me.txtSpawnMap)
         Me.fraBootSettings.Controls.Add(Me.Label5)
-        Me.fraBootSettings.Controls.Add(Me.txtBootY)
+        Me.fraBootSettings.Controls.Add(Me.txtSpawnY)
         Me.fraBootSettings.Controls.Add(Me.Label3)
-        Me.fraBootSettings.Controls.Add(Me.txtBootX)
+        Me.fraBootSettings.Controls.Add(Me.txtSpawnX)
         Me.fraBootSettings.Controls.Add(Me.Label4)
         Me.fraBootSettings.Location = New System.Drawing.Point(3, 208)
         Me.fraBootSettings.Name = "fraBootSettings"
@@ -1096,13 +1105,13 @@ Partial Class frmEditor_MapEditor
         Me.fraBootSettings.TabStop = False
         Me.fraBootSettings.Text = "Respawn Settings"
         '
-        'txtBootMap
+        'txtSpawnMap
         '
-        Me.txtBootMap.Location = New System.Drawing.Point(141, 12)
-        Me.txtBootMap.Name = "txtBootMap"
-        Me.txtBootMap.Size = New System.Drawing.Size(50, 20)
-        Me.txtBootMap.TabIndex = 5
-        Me.txtBootMap.Text = "0"
+        Me.txtSpawnMap.Location = New System.Drawing.Point(141, 12)
+        Me.txtSpawnMap.Name = "txtSpawnMap"
+        Me.txtSpawnMap.Size = New System.Drawing.Size(50, 20)
+        Me.txtSpawnMap.TabIndex = 5
+        Me.txtSpawnMap.Text = "0"
         '
         'Label5
         '
@@ -1113,13 +1122,13 @@ Partial Class frmEditor_MapEditor
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Respawn Map:"
         '
-        'txtBootY
+        'txtSpawnY
         '
-        Me.txtBootY.Location = New System.Drawing.Point(141, 56)
-        Me.txtBootY.Name = "txtBootY"
-        Me.txtBootY.Size = New System.Drawing.Size(50, 20)
-        Me.txtBootY.TabIndex = 3
-        Me.txtBootY.Text = "0"
+        Me.txtSpawnY.Location = New System.Drawing.Point(141, 56)
+        Me.txtSpawnY.Name = "txtSpawnY"
+        Me.txtSpawnY.Size = New System.Drawing.Size(50, 20)
+        Me.txtSpawnY.TabIndex = 3
+        Me.txtSpawnY.Text = "0"
         '
         'Label3
         '
@@ -1130,13 +1139,13 @@ Partial Class frmEditor_MapEditor
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Respawn Y:"
         '
-        'txtBootX
+        'txtSpawnX
         '
-        Me.txtBootX.Location = New System.Drawing.Point(141, 33)
-        Me.txtBootX.Name = "txtBootX"
-        Me.txtBootX.Size = New System.Drawing.Size(50, 20)
-        Me.txtBootX.TabIndex = 1
-        Me.txtBootX.Text = "0"
+        Me.txtSpawnX.Location = New System.Drawing.Point(141, 33)
+        Me.txtSpawnX.Name = "txtSpawnX"
+        Me.txtSpawnX.Size = New System.Drawing.Size(50, 20)
+        Me.txtSpawnX.TabIndex = 1
+        Me.txtSpawnX.Text = "0"
         '
         'Label4
         '
@@ -1211,31 +1220,13 @@ Partial Class frmEditor_MapEditor
         '
         'pnlBack2
         '
-        Me.pnlBack2.Controls.Add(Me.scrlMapViewH)
-        Me.pnlBack2.Controls.Add(Me.scrlMapViewV)
         Me.pnlBack2.Controls.Add(Me.pnlAttributes)
         Me.pnlBack2.Controls.Add(Me.picScreen)
         Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBack2.Location = New System.Drawing.Point(327, 0)
         Me.pnlBack2.Name = "pnlBack2"
-        Me.pnlBack2.Size = New System.Drawing.Size(729, 565)
+        Me.pnlBack2.Size = New System.Drawing.Size(729, 590)
         Me.pnlBack2.TabIndex = 20
-        '
-        'scrlMapViewH
-        '
-        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.scrlMapViewH.Location = New System.Drawing.Point(0, 548)
-        Me.scrlMapViewH.Name = "scrlMapViewH"
-        Me.scrlMapViewH.Size = New System.Drawing.Size(712, 17)
-        Me.scrlMapViewH.TabIndex = 18
-        '
-        'scrlMapViewV
-        '
-        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
-        Me.scrlMapViewV.Location = New System.Drawing.Point(712, 0)
-        Me.scrlMapViewV.Name = "scrlMapViewV"
-        Me.scrlMapViewV.Size = New System.Drawing.Size(17, 565)
-        Me.scrlMapViewV.TabIndex = 17
         '
         'pnlAttributes
         '
@@ -1249,15 +1240,14 @@ Partial Class frmEditor_MapEditor
         Me.pnlAttributes.Controls.Add(Me.fraResource)
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.Location = New System.Drawing.Point(114, 25)
+        Me.pnlAttributes.Location = New System.Drawing.Point(6, 25)
         Me.pnlAttributes.Name = "pnlAttributes"
-        Me.pnlAttributes.Size = New System.Drawing.Size(482, 491)
+        Me.pnlAttributes.Size = New System.Drawing.Size(688, 491)
         Me.pnlAttributes.TabIndex = 16
         Me.pnlAttributes.Visible = False
         '
         'fraMapWarp
         '
-        Me.fraMapWarp.Controls.Add(Me.chkIsInstanced)
         Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
         Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
         Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
@@ -1265,22 +1255,12 @@ Partial Class frmEditor_MapEditor
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
-        Me.fraMapWarp.Location = New System.Drawing.Point(131, 125)
+        Me.fraMapWarp.Location = New System.Drawing.Point(433, 164)
         Me.fraMapWarp.Name = "fraMapWarp"
         Me.fraMapWarp.Size = New System.Drawing.Size(252, 172)
         Me.fraMapWarp.TabIndex = 0
         Me.fraMapWarp.TabStop = False
         Me.fraMapWarp.Text = "Map Warp"
-        '
-        'chkIsInstanced
-        '
-        Me.chkIsInstanced.AutoSize = True
-        Me.chkIsInstanced.Location = New System.Drawing.Point(167, 12)
-        Me.chkIsInstanced.Name = "chkIsInstanced"
-        Me.chkIsInstanced.Size = New System.Drawing.Size(79, 17)
-        Me.chkIsInstanced.TabIndex = 8
-        Me.chkIsInstanced.Text = "Instanced?"
-        Me.chkIsInstanced.UseVisualStyleBackColor = True
         '
         'btnMapWarp
         '
@@ -1753,7 +1733,7 @@ Partial Class frmEditor_MapEditor
         Me.picScreen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picScreen.Location = New System.Drawing.Point(0, 0)
         Me.picScreen.Name = "picScreen"
-        Me.picScreen.Size = New System.Drawing.Size(729, 565)
+        Me.picScreen.Size = New System.Drawing.Size(729, 590)
         Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picScreen.TabIndex = 1
         Me.picScreen.TabStop = False
@@ -1790,16 +1770,18 @@ Partial Class frmEditor_MapEditor
         'ToolStripContainer1.ContentPanel
         '
         Me.ToolStripContainer1.ContentPanel.AutoScroll = True
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.scrlMapViewV)
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.scrlMapViewH)
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlBack2)
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlSettings)
         Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1285, 565)
+        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1285, 590)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.LeftToolStripPanelVisible = False
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStripContainer1.Name = "ToolStripContainer1"
         Me.ToolStripContainer1.RightToolStripPanelVisible = False
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(1285, 612)
+        Me.ToolStripContainer1.Size = New System.Drawing.Size(1285, 637)
         Me.ToolStripContainer1.TabIndex = 22
         Me.ToolStripContainer1.Text = "ToolStripContainer1"
         '
@@ -1807,21 +1789,27 @@ Partial Class frmEditor_MapEditor
         '
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip)
         '
-        'chkInstance
+        'scrlMapViewV
         '
-        Me.chkInstance.AutoSize = True
-        Me.chkInstance.Location = New System.Drawing.Point(41, 71)
-        Me.chkInstance.Name = "chkInstance"
-        Me.chkInstance.Size = New System.Drawing.Size(79, 17)
-        Me.chkInstance.TabIndex = 39
-        Me.chkInstance.Text = "Instanced?"
-        Me.chkInstance.UseVisualStyleBackColor = True
+        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
+        Me.scrlMapViewV.Location = New System.Drawing.Point(1039, 0)
+        Me.scrlMapViewV.Name = "scrlMapViewV"
+        Me.scrlMapViewV.Size = New System.Drawing.Size(17, 573)
+        Me.scrlMapViewV.TabIndex = 22
+        '
+        'scrlMapViewH
+        '
+        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.scrlMapViewH.Location = New System.Drawing.Point(327, 573)
+        Me.scrlMapViewH.Name = "scrlMapViewH"
+        Me.scrlMapViewH.Size = New System.Drawing.Size(729, 17)
+        Me.scrlMapViewH.TabIndex = 21
         '
         'frmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1285, 612)
+        Me.ClientSize = New System.Drawing.Size(1285, 637)
         Me.Controls.Add(Me.ToolStripContainer1)
         Me.DoubleBuffered = True
         Me.Name = "frmEditor_MapEditor"
@@ -1929,8 +1917,8 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents optBank As RadioButton
     Friend WithEvents optItem As RadioButton
     Friend WithEvents optShop As RadioButton
-    Friend WithEvents optNPCAvoid As RadioButton
-    Friend WithEvents optNPCSpawn As RadioButton
+    Friend WithEvents optNpcAvoid As RadioButton
+    Friend WithEvents optNpcSpawn As RadioButton
     Friend WithEvents optKey As RadioButton
     Friend WithEvents optDoor As RadioButton
     Friend WithEvents optKeyOpen As RadioButton
@@ -1979,11 +1967,11 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents txtMaxX As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents fraBootSettings As GroupBox
-    Friend WithEvents txtBootMap As TextBox
+    Friend WithEvents txtSpawnMap As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtBootY As TextBox
+    Friend WithEvents txtSpawnY As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtBootX As TextBox
+    Friend WithEvents txtSpawnX As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtName As TextBox
     Friend WithEvents fraMapLinks As GroupBox
@@ -2050,8 +2038,7 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents tslCurMap As ToolStripStatusLabel
     Friend WithEvents tslCurXY As ToolStripStatusLabel
     Friend WithEvents ToolStripContainer1 As ToolStripContainer
-    Friend WithEvents chkIsInstanced As CheckBox
-    Friend WithEvents scrlMapViewH As HScrollBar
-    Friend WithEvents scrlMapViewV As VScrollBar
     Friend WithEvents chkInstance As CheckBox
+    Friend WithEvents scrlMapViewV As VScrollBar
+    Friend WithEvents scrlMapViewH As HScrollBar
 End Class

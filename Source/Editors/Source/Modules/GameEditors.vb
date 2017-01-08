@@ -65,91 +65,97 @@ Module GameEditors
     Public Sub MapPropertiesInit()
         Dim X As Integer, Y As Integer, i As Integer
 
-        frmEditor_MapEditor.txtName.Text = Trim$(Map.Name)
+        frmEditor_DarkMapEditor.txtName.Text = Trim$(Map.Name)
 
         ' find the music we have set
 
-        frmEditor_MapEditor.lstMusic.Items.Clear()
-        frmEditor_MapEditor.lstMusic.Items.Add("None")
+        frmEditor_DarkMapEditor.lstMusic.Items.Clear()
+        frmEditor_DarkMapEditor.lstMusic.Items.Add("None")
 
         If UBound(MusicCache) > 0 Then
             For i = 1 To UBound(MusicCache)
-                frmEditor_MapEditor.lstMusic.Items.Add(MusicCache(i))
+                frmEditor_DarkMapEditor.lstMusic.Items.Add(MusicCache(i))
             Next
         End If
 
         If Trim$(Map.Music) = "None" Then
-            frmEditor_MapEditor.lstMusic.SelectedIndex = 0
+            frmEditor_DarkMapEditor.lstMusic.SelectedIndex = 0
         Else
-            For i = 1 To frmEditor_MapEditor.lstMusic.Items.Count
-                If frmEditor_MapEditor.lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
-                    frmEditor_MapEditor.lstMusic.SelectedIndex = i - 1
+            For i = 1 To frmEditor_DarkMapEditor.lstMusic.Items.Count
+                If frmEditor_DarkMapEditor.lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
+                    frmEditor_DarkMapEditor.lstMusic.SelectedIndex = i - 1
                     Exit For
                 End If
             Next
         End If
 
         ' rest of it
-        frmEditor_MapEditor.txtUp.Text = Map.Up
-        frmEditor_MapEditor.txtDown.Text = Map.Down
-        frmEditor_MapEditor.txtLeft.Text = Map.Left
-        frmEditor_MapEditor.txtRight.Text = Map.Right
-        frmEditor_MapEditor.cmbMoral.SelectedIndex = Map.Moral
-        frmEditor_MapEditor.txtBootMap.Text = Map.BootMap
-        frmEditor_MapEditor.txtBootX.Text = Map.BootX
-        frmEditor_MapEditor.txtBootY.Text = Map.BootY
+        frmEditor_DarkMapEditor.txtUp.Text = Map.Up
+        frmEditor_DarkMapEditor.txtDown.Text = Map.Down
+        frmEditor_DarkMapEditor.txtLeft.Text = Map.Left
+        frmEditor_DarkMapEditor.txtRight.Text = Map.Right
+        frmEditor_DarkMapEditor.cmbMoral.SelectedIndex = Map.Moral
+        frmEditor_DarkMapEditor.txtSpawnMap.Text = Map.BootMap
+        frmEditor_DarkMapEditor.txtSpawnX.Text = Map.BootX
+        frmEditor_DarkMapEditor.txtSpawnY.Text = Map.BootY
 
-        frmEditor_MapEditor.lstMapNpc.Items.Clear()
+        If Map.Instanced = 1 Then
+            frmEditor_DarkMapEditor.chkInstance.Checked = True
+        Else
+            frmEditor_DarkMapEditor.chkInstance.Checked = False
+        End If
+
+        frmEditor_DarkMapEditor.lstMapNpc.Items.Clear()
 
         For X = 1 To MAX_MAP_NPCS
             If Map.Npc(X) = 0 Then
-                frmEditor_MapEditor.lstMapNpc.Items.Add("No NPC")
+                frmEditor_DarkMapEditor.lstMapNpc.Items.Add("No NPC")
             Else
-                frmEditor_MapEditor.lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
+                frmEditor_DarkMapEditor.lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
             End If
 
         Next
 
-        frmEditor_MapEditor.cmbNpcList.Items.Clear()
-        frmEditor_MapEditor.cmbNpcList.Items.Add("No NPC")
+        frmEditor_DarkMapEditor.cmbNpcList.Items.Clear()
+        frmEditor_DarkMapEditor.cmbNpcList.Items.Add("No NPC")
 
         For Y = 1 To MAX_NPCS
-            frmEditor_MapEditor.cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
+            frmEditor_DarkMapEditor.cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
-        frmEditor_MapEditor.lblMap.Text = "Current map: " & "?"
-        frmEditor_MapEditor.txtMaxX.Text = Map.MaxX
-        frmEditor_MapEditor.txtMaxY.Text = Map.MaxY
+        frmEditor_DarkMapEditor.lblMap.Text = "Current map: " & Map.MapNum
+        frmEditor_DarkMapEditor.txtMaxX.Text = Map.MaxX
+        frmEditor_DarkMapEditor.txtMaxY.Text = Map.MaxY
 
-        frmEditor_MapEditor.cmbTileSets.SelectedIndex = 0
-        frmEditor_MapEditor.cmbLayers.SelectedIndex = 0
-        frmEditor_MapEditor.cmbAutoTile.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbLayers.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex = 0
 
-        frmEditor_MapEditor.cmbWeather.SelectedIndex = Map.WeatherType
-        frmEditor_MapEditor.scrlFog.Value = Map.FogIndex
-        frmEditor_MapEditor.lblFogIndex.Text = "Fog: " & frmEditor_MapEditor.scrlFog.Value
-        frmEditor_MapEditor.scrlIntensity.Value = Map.WeatherIntensity
-        frmEditor_MapEditor.lblIntensity.Text = "Intensity: " & frmEditor_MapEditor.scrlIntensity.Value
+        frmEditor_DarkMapEditor.cmbWeather.SelectedIndex = Map.WeatherType
+        frmEditor_DarkMapEditor.scrlFog.Value = Map.FogIndex
+        frmEditor_DarkMapEditor.lblFogIndex.Text = "Fog: " & frmEditor_DarkMapEditor.scrlFog.Value
+        frmEditor_DarkMapEditor.scrlIntensity.Value = Map.WeatherIntensity
+        frmEditor_DarkMapEditor.lblIntensity.Text = "Intensity: " & frmEditor_DarkMapEditor.scrlIntensity.Value
 
         ' render the tiles
         EditorMap_DrawTileset()
 
-        frmEditor_MapEditor.tabpages.SelectedIndex = 0
+        SelectedTab = 0
 
         'frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
         'frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
 
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_MapEditor.picScreen.Width, frmEditor_MapEditor.picScreen.Height)))
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, frmEditor_DarkMapEditor.picScreen.Width, frmEditor_DarkMapEditor.picScreen.Height)))
 
-        frmEditor_MapEditor.tslCurMap.Text = "Map: " & Map.MapNum
-        frmEditor_MapEditor.lblMap.Text = "Map: " & Map.MapNum
+        frmEditor_DarkMapEditor.tslCurMap.Text = "Map: " & Map.MapNum
+        frmEditor_DarkMapEditor.lblMap.Text = "Map: " & Map.MapNum
 
         ' show the form
-        frmEditor_MapEditor.Visible = True
+        frmEditor_DarkMapEditor.Visible = True
 
         GameStarted = True
 
-        frmEditor_MapEditor.picScreen.Focus()
+        frmEditor_DarkMapEditor.picScreen.Focus()
 
         InitMapEditor = False
     End Sub
@@ -172,39 +178,39 @@ Module GameEditors
         Next
 
         ' set the scrollbars
-        frmEditor_MapEditor.scrlPictureY.Maximum = (frmEditor_MapEditor.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
-        frmEditor_MapEditor.scrlPictureX.Maximum = (frmEditor_MapEditor.picBackSelect.Width \ PIC_X) \ 2
+        frmEditor_DarkMapEditor.scrlPictureY.Maximum = (frmEditor_DarkMapEditor.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
+        frmEditor_DarkMapEditor.scrlPictureX.Maximum = (frmEditor_DarkMapEditor.picBackSelect.Width \ PIC_X) \ 2
 
         'set map names
-        frmEditor_MapEditor.cmbMapList.Items.Clear()
+        frmEditor_DarkMapEditor.cmbMapList.Items.Clear()
 
         For i = 1 To MAX_MAPS
-            frmEditor_MapEditor.cmbMapList.Items.Add(i & ": " & MapNames(i))
+            frmEditor_DarkMapEditor.cmbMapList.Items.Add(i & ": " & MapNames(i))
         Next
 
         If Map.MapNum > 0 Then
-            frmEditor_MapEditor.cmbMapList.SelectedIndex = Map.MapNum - 1
+            frmEditor_DarkMapEditor.cmbMapList.SelectedIndex = Map.MapNum - 1
         Else
-            frmEditor_MapEditor.cmbMapList.SelectedIndex = 0
+            frmEditor_DarkMapEditor.cmbMapList.SelectedIndex = 0
         End If
 
         ' set shops for the shop attribute
-        frmEditor_MapEditor.cmbShop.Items.Add("None")
+        frmEditor_DarkMapEditor.cmbShop.Items.Add("None")
         For i = 1 To MAX_SHOPS
-            frmEditor_MapEditor.cmbShop.Items.Add(i & ": " & Shop(i).Name)
+            frmEditor_DarkMapEditor.cmbShop.Items.Add(i & ": " & Shop(i).Name)
         Next
         ' we're not in a shop
-        frmEditor_MapEditor.cmbShop.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbShop.SelectedIndex = 0
 
-        frmEditor_MapEditor.optBlocked.Checked = True
+        frmEditor_DarkMapEditor.optBlocked.Checked = True
 
-        frmEditor_MapEditor.cmbTileSets.Items.Clear()
+        frmEditor_DarkMapEditor.cmbTileSets.Items.Clear()
         For i = 1 To NumTileSets
-            frmEditor_MapEditor.cmbTileSets.Items.Add("Tileset " & i)
+            frmEditor_DarkMapEditor.cmbTileSets.Items.Add("Tileset " & i)
         Next
 
-        frmEditor_MapEditor.cmbTileSets.SelectedIndex = 0
-        frmEditor_MapEditor.cmbLayers.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex = 0
+        frmEditor_DarkMapEditor.cmbLayers.SelectedIndex = 0
 
         InitMapProperties = True
 
@@ -213,8 +219,8 @@ Module GameEditors
     End Sub
 
     Public Sub MapEditorTileScroll()
-        frmEditor_MapEditor.picBackSelect.Top = (frmEditor_MapEditor.scrlPictureY.Value * PIC_Y) * -1
-        frmEditor_MapEditor.picBackSelect.Left = (frmEditor_MapEditor.scrlPictureX.Value * PIC_X) * -1
+        frmEditor_DarkMapEditor.picBackSelect.Top = (frmEditor_DarkMapEditor.scrlPictureY.Value * PIC_Y) * -1
+        frmEditor_DarkMapEditor.picBackSelect.Left = (frmEditor_DarkMapEditor.scrlPictureX.Value * PIC_X) * -1
     End Sub
 
     Public Sub MapEditorChooseTile(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
@@ -224,8 +230,8 @@ Module GameEditors
             EditorTileWidth = 1
             EditorTileHeight = 1
 
-            If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                Select Case frmEditor_MapEditor.cmbAutoTile.SelectedIndex
+            If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
+                Select Case frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex
                     Case 1 ' autotile
                         EditorTileWidth = 2
                         EditorTileHeight = 3
@@ -262,9 +268,9 @@ Module GameEditors
             Y = (Y \ PIC_Y) + 1
             ' check it's not out of bounds
             If X < 0 Then X = 0
-            If X > frmEditor_MapEditor.picBackSelect.Width / PIC_X Then X = frmEditor_MapEditor.picBackSelect.Width / PIC_X
+            If X > frmEditor_DarkMapEditor.picBackSelect.Width / PIC_X Then X = frmEditor_DarkMapEditor.picBackSelect.Width / PIC_X
             If Y < 0 Then Y = 0
-            If Y > frmEditor_MapEditor.picBackSelect.Height / PIC_Y Then Y = frmEditor_MapEditor.picBackSelect.Height / PIC_Y
+            If Y > frmEditor_DarkMapEditor.picBackSelect.Height / PIC_Y Then Y = frmEditor_DarkMapEditor.picBackSelect.Height / PIC_Y
             ' find out what to set the width + height of map editor to
             If X > EditorTileX Then ' drag right
                 'EditorTileWidth = X
@@ -289,126 +295,126 @@ Module GameEditors
         Dim i As Integer
         Dim CurLayer As Integer
 
-        CurLayer = frmEditor_MapEditor.cmbLayers.SelectedIndex + 1
+        CurLayer = frmEditor_DarkMapEditor.cmbLayers.SelectedIndex + 1
 
         If Not isInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
-            If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpTiles Then
+            If SelectedTab = 1 Then
                 ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 And (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
                 If EditorTileWidth = 1 And EditorTileHeight = 1 Then
 
-                    MapEditorSetTile(CurX, CurY, CurLayer, False, frmEditor_MapEditor.cmbAutoTile.SelectedIndex)
+                    MapEditorSetTile(CurX, CurY, CurLayer, False, frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex)
                 Else ' multi tile!
-                    If frmEditor_MapEditor.cmbAutoTile.SelectedIndex = 0 Then
+                    If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex = 0 Then
                         MapEditorSetTile(CurX, CurY, CurLayer, True)
                     Else
-                        MapEditorSetTile(CurX, CurY, CurLayer, , frmEditor_MapEditor.cmbAutoTile.SelectedIndex)
+                        MapEditorSetTile(CurX, CurY, CurLayer, , frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex)
                     End If
                 End If
-            ElseIf frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
+            ElseIf SelectedTab = 2 Then
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
-                    If frmEditor_MapEditor.optBlocked.Checked = True Then .Type = TileType.Blocked
+                    If frmEditor_DarkMapEditor.optBlocked.Checked = True Then .Type = TileType.Blocked
                     ' warp tile
-                    If frmEditor_MapEditor.optWarp.Checked = True Then
+                    If frmEditor_DarkMapEditor.optWarp.Checked = True Then
                         .Type = TileType.Warp
                         .Data1 = EditorWarpMap
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
                     ' item spawn
-                    If frmEditor_MapEditor.optItem.Checked = True Then
+                    If frmEditor_DarkMapEditor.optItem.Checked = True Then
                         .Type = TileType.Item
                         .Data1 = ItemEditorNum
                         .Data2 = ItemEditorValue
                         .Data3 = 0
                     End If
                     ' npc avoid
-                    If frmEditor_MapEditor.optNPCAvoid.Checked = True Then
+                    If frmEditor_DarkMapEditor.optNpcAvoid.Checked = True Then
                         .Type = TileType.NpcAvoid
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' key
-                    If frmEditor_MapEditor.optKey.Checked = True Then
+                    If frmEditor_DarkMapEditor.optKey.Checked = True Then
                         .Type = TileType.Key
                         .Data1 = KeyEditorNum
                         .Data2 = KeyEditorTake
                         .Data3 = 0
                     End If
                     ' key open
-                    If frmEditor_MapEditor.optKeyOpen.Checked = True Then
+                    If frmEditor_DarkMapEditor.optKeyOpen.Checked = True Then
                         .Type = TileType.KeyOpen
                         .Data1 = KeyOpenEditorX
                         .Data2 = KeyOpenEditorY
                         .Data3 = 0
                     End If
                     ' resource
-                    If frmEditor_MapEditor.optResource.Checked = True Then
+                    If frmEditor_DarkMapEditor.optResource.Checked = True Then
                         .Type = TileType.Resource
                         .Data1 = ResourceEditorNum
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' door
-                    If frmEditor_MapEditor.optDoor.Checked = True Then
+                    If frmEditor_DarkMapEditor.optDoor.Checked = True Then
                         .Type = TileType.Door
                         .Data1 = EditorWarpMap
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
                     ' npc spawn
-                    If frmEditor_MapEditor.optNPCSpawn.Checked = True Then
+                    If frmEditor_DarkMapEditor.optNpcSpawn.Checked = True Then
                         .Type = TileType.NpcSpawn
                         .Data1 = SpawnNpcNum
                         .Data2 = SpawnNpcDir
                         .Data3 = 0
                     End If
                     ' shop
-                    If frmEditor_MapEditor.optShop.Checked = True Then
+                    If frmEditor_DarkMapEditor.optShop.Checked = True Then
                         .Type = TileType.Shop
                         .Data1 = EditorShop
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' bank
-                    If frmEditor_MapEditor.optBank.Checked = True Then
+                    If frmEditor_DarkMapEditor.optBank.Checked = True Then
                         .Type = TileType.Bank
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     ' heal
-                    If frmEditor_MapEditor.optHeal.Checked = True Then
+                    If frmEditor_DarkMapEditor.optHeal.Checked = True Then
                         .Type = TileType.Heal
                         .Data1 = MapEditorHealType
                         .Data2 = MapEditorHealAmount
                         .Data3 = 0
                     End If
                     ' trap
-                    If frmEditor_MapEditor.optTrap.Checked = True Then
+                    If frmEditor_DarkMapEditor.optTrap.Checked = True Then
                         .Type = TileType.Trap
                         .Data1 = MapEditorHealAmount
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     'Housing
-                    If frmEditor_MapEditor.optHouse.Checked Then
+                    If frmEditor_DarkMapEditor.optHouse.Checked Then
                         .Type = TileType.House
                         .Data1 = HouseTileIndex
                         .Data2 = 0
                         .Data3 = 0
                     End If
                     'craft tile
-                    If frmEditor_MapEditor.optCraft.Checked Then
+                    If frmEditor_DarkMapEditor.optCraft.Checked Then
                         .Type = TileType.Craft
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
                 End With
-            ElseIf frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpDirBlock Then
+            ElseIf SelectedTab = 4 Then
                 If movedMouse Then Exit Sub
                 ' find what tile it is
                 X = X - ((X \ PIC_X) * PIC_X)
@@ -423,7 +429,7 @@ Module GameEditors
                         End If
                     End If
                 Next
-            ElseIf frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpEvents Then
+            ElseIf SelectedTab = 5 Then
                 If frmEditor_Events.Visible = False Then
                     AddEvent(CurX, CurY)
                 End If
@@ -431,7 +437,7 @@ Module GameEditors
         End If
 
         If Button = MouseButtons.Right Then
-            If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpTiles Then
+            If SelectedTab = 1 Then
 
                 With Map.Tile(CurX, CurY)
                     ' clear layer
@@ -446,7 +452,7 @@ Module GameEditors
                     CacheRenderState(X, Y, CurLayer)
                 End With
 
-            ElseIf frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
+            ElseIf SelectedTab = 2 Then
                 With Map.Tile(CurX, CurY)
                     ' clear attribute
                     .Type = 0
@@ -454,7 +460,7 @@ Module GameEditors
                     .Data2 = 0
                     .Data3 = 0
                 End With
-            ElseIf frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpEvents Then
+            ElseIf SelectedTab = 5 Then
                 DeleteEvent(CurX, CurY)
             End If
         End If
@@ -463,7 +469,7 @@ Module GameEditors
 
     Public Sub MapEditorCancel()
         InMapEditor = False
-        frmEditor_MapEditor.Visible = False
+        frmEditor_DarkMapEditor.Visible = False
         GettingMap = True
 
         'clear memory
@@ -478,7 +484,7 @@ Module GameEditors
     Public Sub MapEditorSend()
         SendEditorMap()
         InMapEditor = False
-        frmEditor_MapEditor.Visible = False
+        frmEditor_DarkMapEditor.Visible = False
         GettingMap = True
 
         'clear memory
@@ -497,7 +503,7 @@ Module GameEditors
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+                .Layer(CurLayer).Tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
                 .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -511,7 +517,7 @@ Module GameEditors
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+                .Layer(CurLayer).Tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
                 .Layer(CurLayer).AutoTile = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -525,7 +531,7 @@ Module GameEditors
                             With Map.Tile(X, Y)
                                 .Layer(CurLayer).X = EditorTileX + x2
                                 .Layer(CurLayer).Y = EditorTileY + y2
-                                .Layer(CurLayer).Tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+                                .Layer(CurLayer).Tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
                                 .Layer(CurLayer).AutoTile = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
@@ -543,7 +549,7 @@ Module GameEditors
         Dim Y As Integer
         Dim CurLayer As Integer
 
-        CurLayer = frmEditor_MapEditor.cmbLayers.SelectedIndex + 1
+        CurLayer = frmEditor_DarkMapEditor.cmbLayers.SelectedIndex + 1
 
         If CurLayer = 0 Then Exit Sub
 
@@ -568,7 +574,7 @@ Module GameEditors
         Dim Y As Integer
         Dim CurLayer As Integer
 
-        CurLayer = frmEditor_MapEditor.cmbLayers.SelectedIndex + 1
+        CurLayer = frmEditor_DarkMapEditor.cmbLayers.SelectedIndex + 1
 
         If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, "Map Editor") = vbYes Then
             If theAutotile > 0 Then
@@ -576,7 +582,7 @@ Module GameEditors
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
                         Map.Tile(X, Y).Layer(CurLayer).AutoTile = theAutotile
                         CacheRenderState(X, Y, CurLayer)
                     Next
@@ -589,7 +595,7 @@ Module GameEditors
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
                         CacheRenderState(X, Y, CurLayer)
                     Next
                 Next
@@ -599,7 +605,7 @@ Module GameEditors
 
     Public Sub ClearAttributeDialogue()
 
-        With frmEditor_MapEditor
+        With frmEditor_DarkMapEditor
             .fraNpcSpawn.Visible = False
             .fraResource.Visible = False
             .fraMapItem.Visible = False

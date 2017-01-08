@@ -362,7 +362,8 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CSayMsg)
-        Buffer.WriteString(text)
+        'Buffer.WriteString(text)
+        Buffer.WriteUnicodeString(text)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -555,7 +556,8 @@ Module ClientTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CBroadcastMsg)
-        Buffer.WriteString(text)
+        'Buffer.WriteString(text)
+        Buffer.WriteUnicodeString(text)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
@@ -565,7 +567,8 @@ Module ClientTCP
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CPlayerMsg)
         Buffer.WriteString(MsgTo)
-        Buffer.WriteString(text)
+        'Buffer.WriteString(text)
+        Buffer.WriteUnicodeString(text)
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

@@ -2819,6 +2819,7 @@ newlist:
                 Case 0
                     'None
                     frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
+                    frmEditor_Events.picGraphic.BackgroundImage = Nothing
                 Case 1
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap

@@ -98,6 +98,76 @@ Public Class ByteBuffer
         End If
     End Function
 
+    Public Function ReadUnicodeString(Optional ByVal Peek As Boolean = True) As String
+        Try
+            Dim Len As Integer = ReadInteger(True)
+
+            If buffUpdated Then
+                readBuff = Buff.ToArray
+                buffUpdated = False
+            End If
+
+            Dim ret As String = Encoding.ASCII.GetString(readBuff, readpos, Len)
+
+            If Peek And Buff.Count > readpos Then
+                If ret.Length > 0 Then
+                    readpos += Len
+                End If
+            End If
+
+            Return Conv_String(ret)
+        Catch ex As Exception
+            ReadUnicodeString = "Null"
+            Exit Function
+        End Try
+    End Function
+
+    Public Sub WriteUnicodeString(ByVal Input As String)
+
+        Try
+            If Input = vbNullString Then Exit Sub
+            Input = Conv_Uni(Input)
+            Buff.AddRange(BitConverter.GetBytes(Input.Length))
+            Buff.AddRange(Encoding.ASCII.GetBytes(Input))
+            buffUpdated = True
+        Catch ex As Exception
+            MsgBox("WriteUnicodeString")
+        End Try
+
+    End Sub
+
+    Public Function Conv_String(ByVal message As String) As String
+        Conv_String = ""
+
+        ' Ordenar las palabras
+        Dim split As String() = message.Split(New [Char]() {" "c, ","c, "."c, ";"c, CChar(vbTab)})
+        For Each s As String In split
+            If s.Trim() <> "" Then
+                Conv_String = Conv_String & ChrW(s)
+            End If
+        Next s
+
+        Return Conv_String
+
+    End Function
+
+    'Convert a Unicode String to Unicode
+    Function Conv_Uni(ByVal inx As String) As String
+        Dim i As Integer
+        Conv_Uni = ""
+
+        If inx = vbNullString Or inx = "" Then
+            Conv_Uni = "I miss this."
+            Return Conv_Uni
+            Exit Function
+        End If
+
+        For i = 0 To inx.Length - 1
+            Conv_Uni += AscW(inx.Chars(i)) & ";"
+        Next
+
+    End Function
+
     Private disposedValue As Boolean = False        ' To detect redundant calls
 
     ' IDisposable

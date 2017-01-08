@@ -28,7 +28,6 @@ Public Class frmMainGame
                 If MyText.Length > 0 Then
                     MyText = MyText.Remove(MyText.Length - 1)
                 End If
-
             End If
         Else
             If e.KeyCode = Keys.S Then VbKeyDown = True

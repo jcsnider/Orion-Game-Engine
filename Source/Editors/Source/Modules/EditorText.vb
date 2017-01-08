@@ -111,7 +111,7 @@ Module EditorText
         Dim tX As Integer, tY As Integer
         Dim rec As New RectangleShape
 
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
+        If SelectedTab = 2 Then
             For X = TileView.left To TileView.right
                 For y = TileView.top To TileView.bottom
                     If IsValidMapPoint(X, y) Then

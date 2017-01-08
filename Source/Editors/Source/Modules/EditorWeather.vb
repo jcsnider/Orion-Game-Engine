@@ -84,7 +84,7 @@ Public Module EditorWeather
 
         If DrawThunder > 0 Then
             Dim tmpSprite As Sprite
-            tmpSprite = New Sprite(MiscGFX)
+            tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White)))
             tmpSprite.Color = New Color(255, 255, 255, 150)
             tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
 
@@ -110,7 +110,7 @@ Public Module EditorWeather
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1
                 End If
-                RenderTexture(WeatherGFX, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
+                RenderSprite(WeatherSprite, GameWindow, ConvertMapX(WeatherParticle(i).X), ConvertMapY(WeatherParticle(i).Y), SpriteLeft * 32, 0, 32, 32)
             End If
         Next
 

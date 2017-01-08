@@ -52,6 +52,9 @@
       <HintPath>..\..\packages\ArchaicIO.2.6.1\lib\ArchaicIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DarkUI">
+      <HintPath>.\DarkUI.dll</HintPath>
+    </Reference>
     <Reference Include="SFML.Net, Version=2.1.6150.20578, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SFML-Portable-2.1.1.0.0\lib\SFML.Net.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +94,12 @@
     <Compile Include="Source\Forms\frmEditor_Classes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Source\Forms\frmEditor_DarkMapEditor.Designer.vb">
+      <DependentUpon>frmEditor_DarkMapEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Forms\frmEditor_DarkMapEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>
     </Compile>
@@ -107,12 +116,6 @@
       <DependentUpon>frmEditor_Item.vb</DependentUpon>
     </Compile>
     <Compile Include="Source\Forms\frmEditor_Item.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_MapEditor.Designer.vb">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\frmEditor_NPC.Designer.vb">
@@ -222,6 +225,9 @@
     <EmbeddedResource Include="Source\Forms\frmEditor_Classes.resx">
       <DependentUpon>frmEditor_Classes.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Forms\frmEditor_DarkMapEditor.resx">
+      <DependentUpon>frmEditor_DarkMapEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>
     </EmbeddedResource>
@@ -230,9 +236,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Item.resx">
       <DependentUpon>frmEditor_Item.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_MapEditor.resx">
-      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_NPC.resx">
       <DependentUpon>frmEditor_NPC.vb</DependentUpon>

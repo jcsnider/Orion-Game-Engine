@@ -15,40 +15,64 @@ Module EditorGraphics
 
     Public SFMLGameFont As SFML.Graphics.Font
 
+    'TileSets
     Public TileSetImgsGFX() As Bitmap
     Public TileSetImgsLoaded() As Boolean
     Public TileSetTexture() As Texture
+    Public TileSetSprite() As Sprite
     Public TileSetTextureInfo() As GraphicInfo
+    'Characters
     Public CharacterGFX() As Texture
+    Public CharacterSprite() As Sprite
     Public CharacterGFXInfo() As GraphicInfo
+    'Paperdolls
     Public PaperDollGFX() As Texture
+    Public PaperDollSprite() As Sprite
     Public PaperDollGFXInfo() As GraphicInfo
+    'Items
     Public ItemsGFX() As Texture
+    Public ItemsSprite() As Sprite
     Public ItemsGFXInfo() As GraphicInfo
+    'Resources
     Public ResourcesGFX() As Texture
+    Public ResourcesSprite() As Sprite
     Public ResourcesGFXInfo() As GraphicInfo
+    'Animations
     Public AnimationsGFX() As Texture
+    Public AnimationsSprite() As Sprite
     Public AnimationsGFXInfo() As GraphicInfo
+    'Skills
     Public SkillIconsGFX() As Texture
+    Public SkillIconsSprite() As Sprite
     Public SkillIconsGFXInfo() As GraphicInfo
     'Housing
     Public FurnitureGFX() As Texture
+    Public FurnitureSprite() As Sprite
     Public FurnitureGFXInfo() As GraphicInfo
     'Faces
     Public FacesGFX() As Texture
+    Public FacesSprite() As Sprite
     Public FacesGFXInfo() As GraphicInfo
-
-    Public DoorGFX As Texture
-    Public DoorGFXInfo As GraphicInfo
-    Public DirectionsGfx As Texture
-    Public DirectionsGFXInfo As GraphicInfo
-    Public MiscGFX As Texture
-    Public MiscGFXInfo As GraphicInfo
-    Public WeatherGFX As Texture
-    Public WeatherGFXInfo As GraphicInfo
-
+    'Projectiles
+    Public ProjectileGFX() As Texture
+    Public ProjectileSprite() As Sprite
+    Public ProjectileGFXInfo() As GraphicInfo
+    'Fogs
     Public FogGFX() As Texture
+    Public FogSprite() As Sprite
     Public FogGFXInfo() As GraphicInfo
+    'Door
+    Public DoorGFX As Texture
+    Public DoorSprite As Sprite
+    Public DoorGFXInfo As GraphicInfo
+    'Directions
+    Public DirectionsGfx As Texture
+    Public DirectionsSprite As Sprite
+    Public DirectionsGFXInfo As GraphicInfo
+    'Weather
+    Public WeatherGFX As Texture
+    Public WeatherSprite As Sprite
+    Public WeatherGFXInfo As GraphicInfo
 
     ' Number of graphic files
     Public MapEditorBackBuffer As Bitmap
@@ -76,7 +100,7 @@ Module EditorGraphics
 
     Sub InitGraphics()
 
-        GameWindow = New RenderWindow(frmEditor_MapEditor.picscreen.Handle)
+        GameWindow = New RenderWindow(frmEditor_DarkMapEditor.picScreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
@@ -92,40 +116,55 @@ Module EditorGraphics
 
         ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
+        ReDim TileSetSprite(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
 
         ReDim CharacterGFX(0 To NumCharacters)
+        ReDim CharacterSprite(0 To NumCharacters)
         ReDim CharacterGFXInfo(0 To NumCharacters)
 
         ReDim PaperDollGFX(0 To NumPaperdolls)
+        ReDim PaperDollSprite(0 To NumPaperdolls)
         ReDim PaperDollGFXInfo(0 To NumPaperdolls)
 
         ReDim ItemsGFX(0 To NumItems)
+        ReDim ItemsSprite(0 To NumItems)
         ReDim ItemsGFXInfo(0 To NumItems)
 
         ReDim ResourcesGFX(0 To NumResources)
+        ReDim ResourcesSprite(0 To NumResources)
         ReDim ResourcesGFXInfo(0 To NumResources)
 
         ReDim AnimationsGFX(0 To NumAnimations)
+        ReDim AnimationsSprite(0 To NumAnimations)
         ReDim AnimationsGFXInfo(0 To NumAnimations)
 
-        ReDim FogGFX(0 To NumFogs)
-        ReDim FogGFXInfo(0 To NumFogs)
-
         ReDim SkillIconsGFX(0 To NumSkillIcons)
+        ReDim SkillIconsSprite(0 To NumSkillIcons)
         ReDim SkillIconsGFXInfo(0 To NumSkillIcons)
 
         ReDim FacesGFX(0 To NumFaces)
+        ReDim FacesSprite(0 To NumFaces)
         ReDim FacesGFXInfo(0 To NumFaces)
 
         ReDim FurnitureGFX(0 To NumFurniture)
+        ReDim FurnitureSprite(0 To NumFurniture)
         ReDim FurnitureGFXInfo(0 To NumFurniture)
+
+        ReDim ProjectileGFX(0 To NumProjectiles)
+        ReDim ProjectileSprite(0 To NumProjectiles)
+        ReDim ProjectileGFXInfo(0 To NumProjectiles)
+
+        ReDim FogGFX(0 To NumFogs)
+        ReDim FogSprite(0 To NumFogs)
+        ReDim FogGFXInfo(0 To NumFogs)
 
         'sadly, gui shit is always needed, so we preload it :/
         DoorGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "door" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
             DoorGFX = New Texture(Application.StartupPath & GFX_PATH & "door" & GFX_EXT)
+            DoorSprite = New Sprite(DoorGFX)
 
             'Cache the width and height
             DoorGFXInfo.width = DoorGFX.Size.X
@@ -136,26 +175,18 @@ Module EditorGraphics
         If FileExist(Application.StartupPath & GFX_PATH & "direction" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
             DirectionsGfx = New Texture(Application.StartupPath & GFX_PATH & "direction" & GFX_EXT)
+            DirectionsSprite = New Sprite(DirectionsGfx)
 
             'Cache the width and height
             DirectionsGFXInfo.width = DirectionsGfx.Size.X
             DirectionsGFXInfo.height = DirectionsGfx.Size.Y
         End If
 
-        MiscGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT) Then
-            'Load texture first, dont care about memory streams (just use the filename)
-            MiscGFX = New Texture(Application.StartupPath & GFX_PATH & "misc" & GFX_EXT)
-
-            'Cache the width and height
-            MiscGFXInfo.width = MiscGFX.Size.X
-            MiscGFXInfo.height = MiscGFX.Size.Y
-        End If
-
         WeatherGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
             WeatherGFX = New Texture(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT)
+            WeatherSprite = New Sprite(WeatherGFX)
 
             'Cache the width and height
             WeatherGFXInfo.width = WeatherGFX.Size.X
@@ -167,10 +198,11 @@ Module EditorGraphics
     Public Sub LoadTexture(ByVal Index As Integer, ByVal TexType As Byte)
 
         If TexType = 1 Then 'tilesets
-            If Index < 0 Or Index > NumTileSets Then Exit Sub
+            If Index <= 0 Or Index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             TileSetTexture(Index) = New Texture(Application.StartupPath & GFX_PATH & "tilesets\" & Index & GFX_EXT)
+            TileSetSprite(Index) = New Sprite(TileSetTexture(Index))
 
             'Cache the width and height
             With TileSetTextureInfo(Index)
@@ -181,10 +213,11 @@ Module EditorGraphics
             End With
 
         ElseIf TexType = 2 Then 'characters
-            If Index < 0 Or Index > NumCharacters Then Exit Sub
+            If Index <= 0 Or Index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             CharacterGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "characters\" & Index & GFX_EXT)
+            CharacterSprite(Index) = New Sprite(CharacterGFX(Index))
 
             'Cache the width and height
             With CharacterGFXInfo(Index)
@@ -195,10 +228,11 @@ Module EditorGraphics
             End With
 
         ElseIf TexType = 3 Then 'paperdoll
-            If Index < 0 Or Index > NumPaperdolls Then Exit Sub
+            If Index <= 0 Or Index > NumPaperdolls Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             PaperDollGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Paperdolls\" & Index & GFX_EXT)
+            PaperDollSprite(Index) = New Sprite(PaperDollGFX(Index))
 
             'Cache the width and height
             With PaperDollGFXInfo(Index)
@@ -213,6 +247,7 @@ Module EditorGraphics
 
             'Load texture first, dont care about memory streams (just use the filename)
             ItemsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "items\" & Index & GFX_EXT)
+            ItemsSprite(Index) = New Sprite(ItemsGFX(Index))
 
             'Cache the width and height
             With ItemsGFXInfo(Index)
@@ -223,10 +258,11 @@ Module EditorGraphics
             End With
 
         ElseIf TexType = 5 Then 'resources
-            If Index < 0 Or Index > NumResources Then Exit Sub
+            If Index <= 0 Or Index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             ResourcesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "resources\" & Index & GFX_EXT)
+            ResourcesSprite(Index) = New Sprite(ResourcesGFX(Index))
 
             'Cache the width and height
             With ResourcesGFXInfo(Index)
@@ -241,6 +277,7 @@ Module EditorGraphics
 
             'Load texture first, dont care about memory streams (just use the filename)
             AnimationsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Animations\" & Index & GFX_EXT)
+            AnimationsSprite(Index) = New Sprite(AnimationsGFX(Index))
 
             'Cache the width and height
             With AnimationsGFXInfo(Index)
@@ -251,10 +288,11 @@ Module EditorGraphics
             End With
 
         ElseIf TexType = 7 Then 'faces
-            If Index < 0 Or Index > NumFaces Then Exit Sub
+            If Index <= 0 Or Index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             FacesGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Faces\" & Index & GFX_EXT)
+            FacesSprite(Index) = New Sprite(FacesGFX(Index))
 
             'Cache the width and height
             With FacesGFXInfo(Index)
@@ -265,10 +303,11 @@ Module EditorGraphics
             End With
 
         ElseIf TexType = 8 Then 'fogs
-            If Index < 0 Or Index > NumFogs Then Exit Sub
+            If Index <= 0 Or Index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             FogGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Fogs\" & Index & GFX_EXT)
+            FogSprite(Index) = New Sprite(FogGFX(Index))
 
             'Cache the width and height
             With FogGFXInfo(Index)
@@ -283,6 +322,7 @@ Module EditorGraphics
 
             'Load texture first, dont care about memory streams (just use the filename)
             SkillIconsGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "SkillIcons\" & Index & GFX_EXT)
+            SkillIconsSprite(Index) = New Sprite(SkillIconsGFX(Index))
 
             'Cache the width and height
             With SkillIconsGFXInfo(Index)
@@ -292,10 +332,11 @@ Module EditorGraphics
                 .TextureTimer = GetTickCount() + 100000
             End With
         ElseIf TexType = 10 Then 'furniture
-            If Index < 0 Or Index > NumFurniture Then Exit Sub
+            If Index <= 0 Or Index > NumFurniture Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             FurnitureGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Furniture\" & Index & GFX_EXT)
+            FurnitureSprite(Index) = New Sprite(FurnitureGFX(Index))
 
             'Cache the width and height
             With FurnitureGFXInfo(Index)
@@ -304,17 +345,30 @@ Module EditorGraphics
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
+        ElseIf TexType = 11 Then 'projectiles
+            If Index <= 0 Or Index > NumProjectiles Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            ProjectileGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Projectiles\" & Index & GFX_EXT)
+            ProjectileSprite(Index) = New Sprite(ProjectileGFX(Index))
+
+            'Cache the width and height
+            With ProjectileGFXInfo(Index)
+                .width = ProjectileGFX(Index).Size.X
+                .height = ProjectileGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
         End If
 
     End Sub
 
-    Public Sub RenderTexture(ByVal Txture As Texture, ByVal Target As RenderWindow, ByVal DestX As Integer, ByVal DestY As Integer, ByVal SourceX As Integer, ByVal SourceY As Integer,
+    Public Sub RenderSprite(ByVal TmpSprite As Sprite, ByVal Target As RenderWindow, ByVal DestX As Integer, ByVal DestY As Integer, ByVal SourceX As Integer, ByVal SourceY As Integer,
            ByVal SourceWidth As Integer, ByVal SourceHeight As Integer)
-        Dim TmpImage As Sprite = New Sprite(Txture)
-        TmpImage.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
-        TmpImage.Position = New Vector2f(DestX, DestY)
-        Target.Draw(TmpImage)
 
+        TmpSprite.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
+        TmpSprite.Position = New Vector2f(DestX, DestY)
+        Target.Draw(TmpSprite)
     End Sub
 
     Public Sub DrawDirections(ByVal X As Integer, ByVal Y As Integer)
@@ -326,7 +380,7 @@ Module EditorGraphics
         rec.Width = 32
         rec.Height = 32
 
-        RenderTexture(DirectionsGfx, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
 
         ' render dir blobs
         For i = 1 To 4
@@ -340,7 +394,7 @@ Module EditorGraphics
             End If
             rec.Height = 8
 
-            RenderTexture(DirectionsGfx, GameWindow, ConvertMapX(X * PIC_X) + DirArrowX(i), ConvertMapY(Y * PIC_Y) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(X * PIC_X) + DirArrowX(i), ConvertMapY(Y * PIC_Y) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
         Next
     End Sub
 
@@ -431,7 +485,6 @@ Module EditorGraphics
                 spriteleft = 1
         End Select
 
-
         srcrec = New Rectangle((anim) * (CharacterGFXInfo(Sprite).width / 4), spriteleft * (CharacterGFXInfo(Sprite).height / 4), (CharacterGFXInfo(Sprite).width / 4), (CharacterGFXInfo(Sprite).height / 4))
 
         ' Calculate the X
@@ -475,7 +528,7 @@ Module EditorGraphics
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        RenderTexture(ResourcesGFX(Resource), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(ResourcesSprite(Resource), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawMapResource(ByVal Resource_num As Integer)
@@ -556,7 +609,7 @@ Module EditorGraphics
         x = ConvertMapX(MapItem(itemnum).X * PIC_X)
         y = ConvertMapY(MapItem(itemnum).Y * PIC_Y)
 
-        RenderTexture(ItemsGFX(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
+        RenderSprite(ItemsSprite(PicNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
 
     Public Sub DrawCharacter(ByVal Sprite As Integer, ByVal x2 As Integer, ByVal y2 As Integer, ByVal rec As Rectangle)
@@ -582,7 +635,7 @@ Module EditorGraphics
         width = (rec.Width)
         height = (rec.Height)
 
-        RenderTexture(CharacterGFX(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(CharacterSprite(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawMapTile(ByVal X As Integer, ByVal Y As Integer)
@@ -611,7 +664,7 @@ Module EditorGraphics
                             .Height = 32
                         End With
 
-                        RenderTexture(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -629,7 +682,7 @@ Module EditorGraphics
     Public Sub DrawMapFringeTile(ByVal X As Integer, ByVal Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim dest As Rectangle = New Rectangle(frmEditor_MapEditor.PointToScreen(frmEditor_MapEditor.picScreen.Location), New Size(32, 32))
+        Dim dest As Rectangle = New Rectangle(frmEditor_DarkMapEditor.PointToScreen(frmEditor_DarkMapEditor.picScreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
 
         If GettingMap Then Exit Sub
@@ -657,7 +710,7 @@ Module EditorGraphics
                             .Height = 32
                         End With
 
-                        RenderTexture(TileSetTexture(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
                     ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
                         ' Draw autotiles
@@ -758,7 +811,6 @@ Module EditorGraphics
     '        .X = offsetX
     '        .Width = ScreenX + 32
     '    End With
-
 
     '    UpdateDrawMapName()
 
@@ -995,7 +1047,7 @@ Module EditorGraphics
                 DrawGrid()
             End If
 
-            If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpDirBlock Then
+            If SelectedTab = 4 Then
                 For X = TileView.left To TileView.right
                     For Y = TileView.top To TileView.bottom
                         If IsValidMapPoint(X, Y) Then
@@ -1004,8 +1056,6 @@ Module EditorGraphics
                     Next
                 Next
             End If
-
-            DrawTileOutline()
 
             'draw event names
             For I = 0 To Map.CurrentEvents
@@ -1030,9 +1080,10 @@ Module EditorGraphics
             ' Blit out map attributes
             If InMapEditor Then
                 DrawMapAttributes()
+                DrawTileOutline()
             End If
 
-            If InMapEditor And frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpEvents Then
+            If InMapEditor And SelectedTab = 5 Then
                 DrawEvents()
                 EditorEvent_DrawGraphic()
             End If
@@ -1089,12 +1140,12 @@ Module EditorGraphics
         x2 = (X * PIC_X)
         y2 = (Y * PIC_Y) - (DoorGFXInfo.height / 2) + 4
 
-        RenderTexture(DoorGFX, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DoorSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
 
     Public Sub DrawTileOutline()
         Dim rec As Rectangle
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpDirBlock Then Exit Sub
+        If SelectedTab = 4 Then Exit Sub
 
         With rec
             .Y = 0
@@ -1108,19 +1159,27 @@ Module EditorGraphics
         rec2.OutlineThickness = 0.6
         rec2.FillColor = New SFML.Graphics.Color(Color.Transparent)
 
-        If frmEditor_MapEditor.tabpages.SelectedTab Is frmEditor_MapEditor.tpAttributes Then
+        If SelectedTab = 2 Then
             'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
+            If TileSetTextureInfo(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
+                LoadTexture(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1, 1)
+            End If
+            ' we use it, lets update timer
+            With TileSetTextureInfo(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
             If EditorTileWidth = 1 And EditorTileHeight = 1 Then
-                RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
-                If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderTexture(TileSetTexture(frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
@@ -1163,15 +1222,17 @@ Module EditorGraphics
         If Map.HasMapTint = 0 Then Exit Sub
 
         Dim tmpSprite As Sprite
-        tmpSprite = New Sprite(MiscGFX)
+
+        tmpSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.White)))
         tmpSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
         tmpSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
 
         tmpSprite.Position = New Vector2f(0, 0)
 
-        GameWindow.Draw(tmpSprite) '
+        GameWindow.Draw(tmpSprite)
 
         tmpSprite.Dispose()
+
     End Sub
 
     Public Sub EditorMap_DrawTileset()
@@ -1180,7 +1241,7 @@ Module EditorGraphics
         Dim tileset As Byte
 
         ' find tileset number
-        tileset = frmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
+        tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
 
         ' exit out if doesn't exist
         If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
@@ -1205,12 +1266,12 @@ Module EditorGraphics
         Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
         g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
 
-        frmEditor_MapEditor.picBackSelect.Height = height
-        frmEditor_MapEditor.picBackSelect.Width = width
+        frmEditor_DarkMapEditor.picBackSelect.Height = height
+        frmEditor_DarkMapEditor.picBackSelect.Width = width
 
         ' change selected shape for autotiles
-        If frmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case frmEditor_MapEditor.cmbAutoTile.SelectedIndex
+        If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex
                 Case 1 ' autotile
                     EditorTileWidth = 2
                     EditorTileHeight = 3
@@ -1233,7 +1294,7 @@ Module EditorGraphics
         g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileWidth * PIC_X, EditorTileHeight * PIC_X))
         g.Dispose()
 
-        g = frmEditor_MapEditor.picBackSelect.CreateGraphics
+        g = frmEditor_DarkMapEditor.picBackSelect.CreateGraphics
         g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
         g.Dispose()
 
@@ -1288,22 +1349,21 @@ Module EditorGraphics
 
         If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
-        If Not MiscGFX Is Nothing Then MiscGFX.Dispose()
         If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
 
     End Sub
 
     Public Sub EditorMap_DrawMapItem()
         Dim itemnum As Integer
-        itemnum = Item(frmEditor_MapEditor.scrlMapItem.Value).Pic
+        itemnum = Item(frmEditor_DarkMapEditor.scrlMapItem.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Nothing
+            frmEditor_DarkMapEditor.picMapItem.BackgroundImage = Nothing
             Exit Sub
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_MapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+            frmEditor_DarkMapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
     End Sub
@@ -1311,15 +1371,15 @@ Module EditorGraphics
     Public Sub EditorMap_DrawKey()
         Dim itemnum As Integer
 
-        itemnum = Item(frmEditor_MapEditor.scrlMapKey.Value).Pic
+        itemnum = Item(frmEditor_DarkMapEditor.scrlMapKey.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Nothing
+            frmEditor_DarkMapEditor.picMapKey.BackgroundImage = Nothing
             Exit Sub
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_MapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+            frmEditor_DarkMapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
     End Sub
@@ -1388,7 +1448,7 @@ Module EditorGraphics
 
         EditorItem_Furniture.Clear(ToSFMLColor(frmEditor_Item.picFurniture.BackColor))
 
-        RenderTexture(FurnitureGFX(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+        RenderSprite(FurnitureSprite(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
         If frmEditor_Item.optSetBlocks.Checked = True Then
             For X = 0 To 3
@@ -1496,7 +1556,7 @@ Module EditorGraphics
 
         EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
 
-        RenderTexture(SkillIconsGFX(iconnum), EditorSkill_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+        RenderSprite(SkillIconsSprite(iconnum), EditorSkill_Icon, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
         EditorSkill_Icon.Display()
     End Sub
@@ -1565,13 +1625,12 @@ Module EditorGraphics
 
                     EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
 
-                    RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+                    RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
                     EditorAnimation_Anim1.Display()
                 End If
             End If
         End If
-
 
         Animationnum = frmEditor_Animation.scrlSprite1.Value
 
@@ -1618,7 +1677,7 @@ Module EditorGraphics
 
                     EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
 
-                    RenderTexture(AnimationsGFX(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
+                    RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
                     EditorAnimation_Anim2.Display()
 
                 End If
@@ -1649,4 +1708,3 @@ Module EditorGraphics
     End Function
 
 End Module
-

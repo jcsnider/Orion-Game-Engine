@@ -27,19 +27,6 @@ Public Class frmEditor_MapEditor
         MapEditorTileScroll()
     End Sub
 
-    Private Sub btnSend_Click(ByVal sender As Object, ByVal e As EventArgs)
-        MapEditorSend()
-        GettingMap = True
-    End Sub
-
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs)
-        MapEditorCancel()
-    End Sub
-
-    Private Sub btnClearLayer_Click(ByVal sender As Object, ByVal e As EventArgs)
-
-    End Sub
-
     Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
@@ -55,10 +42,6 @@ Public Class frmEditor_MapEditor
     Private Sub btnMapWarp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapWarp.Click
         EditorWarpMap = scrlMapWarpMap.Value
 
-        If chkIsInstanced.Checked = True Then
-            EditorWarpMap = scrlMapWarpMap.Value Or INSTANCED_MAP_MASK
-        End If
-
         EditorWarpX = scrlMapWarpX.Value
         EditorWarpY = scrlMapWarpY.Value
         pnlAttributes.Visible = False
@@ -70,7 +53,8 @@ Public Class frmEditor_MapEditor
         EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
-        pnlAttributes.Left = 8
+        pnlAttributes.Left = 4
+        pnlAttributes.Top = 28
         Me.Width = 525
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
@@ -79,6 +63,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
+        If optWarp.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapWarp.Visible = True
@@ -115,6 +101,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optItem_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optItem.CheckedChanged
+        If optItem.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapItem.Visible = True
@@ -138,6 +126,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optKey_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKey.CheckedChanged
+        If optKey.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapKey.Visible = True
@@ -165,6 +155,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optKeyOpen_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKeyOpen.CheckedChanged
+        If optKeyOpen.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         fraKeyOpen.Visible = True
         pnlAttributes.Visible = True
@@ -186,6 +178,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optResource_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optResource.CheckedChanged
+        If optResource.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraResource.Visible = True
@@ -200,6 +194,7 @@ Public Class frmEditor_MapEditor
 
     Private Sub optNPCSpawn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optNPCSpawn.CheckedChanged
         Dim n As Integer
+        If optNPCSpawn.Checked = False Then Exit Sub
 
         lstNpc.Items.Clear()
 
@@ -226,6 +221,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optShop_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optShop.CheckedChanged
+        If optShop.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraShop.Visible = True
@@ -243,6 +240,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optHeal_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optHeal.CheckedChanged
+        If optHeal.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraHeal.Visible = True
@@ -259,6 +258,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optTrap_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optTrap.CheckedChanged
+        If optTrap.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraTrap.Visible = True
@@ -286,6 +287,8 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub optHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
+        If optHouse.Checked = False Then Exit Sub
+
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraBuyHouse.Visible = True
@@ -1064,5 +1067,7 @@ Public Class frmEditor_MapEditor
             Map.Instanced = 0
         End If
     End Sub
+
 #End Region
+
 End Class

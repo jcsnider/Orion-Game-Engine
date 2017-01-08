@@ -155,7 +155,8 @@ Module ServerTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SAlertMsg)
-        Buffer.WriteString(Msg)
+        'Buffer.WriteString(Msg)
+        Buffer.WriteUnicodeString(Msg)
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
@@ -165,7 +166,8 @@ Module ServerTCP
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SGlobalMsg)
-        Buffer.WriteString(Msg)
+        'Buffer.WriteString(Msg)
+        Buffer.WriteUnicodeString(Msg)
         SendDataToAll(Buffer.ToArray)
 
         Buffer = Nothing
@@ -175,7 +177,8 @@ Module ServerTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SPlayerMsg)
-        Buffer.WriteString(Msg)
+        'Buffer.WriteString(Msg)
+        Buffer.WriteUnicodeString(Msg)
         Buffer.WriteInteger(Colour)
 
         SendDataTo(Index, Buffer.ToArray)
@@ -1559,7 +1562,8 @@ Module ServerTCP
         Buffer = New ByteBuffer
 
         Buffer.WriteInteger(ServerPackets.SMapMsg)
-        Buffer.WriteString(Msg)
+        'Buffer.WriteString(Msg)
+        Buffer.WriteUnicodeString(Msg)
 
         SendDataToMap(MapNum, Buffer.ToArray)
 
@@ -1594,7 +1598,8 @@ Module ServerTCP
         Buffer.WriteString(GetPlayerName(Index))
         Buffer.WriteInteger(GetPlayerAccess(Index))
         Buffer.WriteInteger(GetPlayerPK(Index))
-        Buffer.WriteString(Message)
+        'Buffer.WriteString(Message)
+        Buffer.WriteUnicodeString(Message)
         Buffer.WriteString("[Map] ")
         Buffer.WriteInteger(SayColour)
 
@@ -1783,7 +1788,8 @@ Module ServerTCP
         Buffer.WriteString(GetPlayerName(Index))
         Buffer.WriteInteger(GetPlayerAccess(Index))
         Buffer.WriteInteger(GetPlayerPK(Index))
-        Buffer.WriteString(Message)
+        'Buffer.WriteString(Message)
+        Buffer.WriteUnicodeString(Message)
         Buffer.WriteString("[Global] ")
         Buffer.WriteInteger(SayColour)
 
@@ -2232,7 +2238,8 @@ Module ServerTCP
 
         Buffer.WriteInteger(Target)
         Buffer.WriteInteger(TargetType)
-        Buffer.WriteString(Message)
+        'Buffer.WriteString(Message)
+        Buffer.WriteUnicodeString(Message)
         Buffer.WriteInteger(Colour)
         SendDataToMap(MapNum, Buffer.ToArray)
 
