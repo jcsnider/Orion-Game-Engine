@@ -1,7 +1,4 @@
-﻿Imports System.Drawing
-Imports System.Windows.Forms
-
-Module GameEditors
+﻿Module GameEditors
 
 #Region "Animation Editor"
     Public Sub AnimationEditorInit()
@@ -140,7 +137,7 @@ Module GameEditors
         ' render the tiles
         EditorMap_DrawTileset()
 
-        SelectedTab = 0
+        SelectedTab = 1
 
         'frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
         'frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
