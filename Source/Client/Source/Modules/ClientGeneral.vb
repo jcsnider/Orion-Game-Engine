@@ -18,31 +18,19 @@ Module ClientGeneral
 
         ReDim CharSelection(3)
 
-        ReDim Player(0 To MAX_PLAYERS)
+        ReDim Player(MAX_PLAYERS)
 
         For i = 0 To MAX_PLAYERS
             ClearPlayer(i)
         Next
 
-        ReDim Autotile(0 To Map.MaxX, 0 To Map.MaxY)
-
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                ReDim Autotile(X, Y).Layer(0 To MapLayer.Count - 1)
-                For i = 0 To MapLayer.Count - 1
-                    ReDim Autotile(X, Y).Layer(i).srcX(0 To 4)
-                    ReDim Autotile(X, Y).Layer(i).srcY(0 To 4)
-                    ReDim Autotile(X, Y).Layer(i).QuarterTile(0 To 4)
-                Next
-            Next
-        Next
+        ClearAutotiles()
 
         'Housing
         ReDim House(MAX_HOUSES)
         ReDim HouseConfig(MAX_HOUSES)
 
         'quests
-        ReDim Quest(MAX_QUESTS)
         ClearQuests()
 
         ReDim Map.Npc(0 To MAX_MAP_NPCS)
@@ -119,7 +107,7 @@ Module ClientGeneral
             Next
         Next
 
-        ReDim Bank.Item(MAX_BANK)
+        ClearBank()
 
         ReDim MapProjectiles(MAX_PROJECTILES)
         ReDim Projectiles(MAX_PROJECTILES)

@@ -160,6 +160,8 @@
     Sub ClearQuests()
         Dim I As Integer
 
+        ReDim Quest(MAX_QUESTS)
+
         For I = 1 To MAX_QUESTS
             ClearQuest(I)
         Next

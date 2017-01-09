@@ -401,7 +401,6 @@ Module ServerPlayers
 
             SavePlayer(Index)
             SaveBank(Index)
-            ClearBank(Index)
 
             ' Send a global message that he/she left
             GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
@@ -417,6 +416,7 @@ Module ServerPlayers
         SendTotalOnlineToAll()
 
         ClearPlayer(Index)
+        ClearBank(Index)
 
         UpdateCaption()
     End Sub
@@ -2351,10 +2351,10 @@ Module ServerPlayers
     End Sub
 
     Sub PlayerSwitchBankSlots(ByVal Index As Integer, ByVal OldSlot As Integer, ByVal NewSlot As Integer)
-        Dim OldNum As Integer
-        Dim OldValue As Integer
-        Dim NewNum As Integer
-        Dim NewValue As Integer
+        Dim OldNum As Integer, OldValue As Integer, NewNum As Integer, NewValue As Integer
+        Dim i As Integer, NewStats() As Integer, OldStats() As Integer
+        Dim NewRarity As Integer, OldRarity As Integer, NewPrefix As String, OldPrefix As String, NewSuffix As String
+        Dim OldSuffix As String, NewSpeed As Integer, OldSpeed As Integer, NewDamage As Integer, OldDamage As Integer
 
         If OldSlot = 0 Or NewSlot = 0 Then Exit Sub
 
@@ -2368,6 +2368,54 @@ Module ServerPlayers
 
         SetPlayerBankItemNum(Index, OldSlot, NewNum)
         SetPlayerBankItemValue(Index, OldSlot, NewValue)
+
+        ReDim OldStats(Stats.Count - 1)
+        ReDim NewStats(Stats.Count - 1)
+
+        ' RandomInv
+        With Bank(Index).ItemRand(NewSlot)
+            NewPrefix = .Prefix
+            NewSuffix = .Suffix
+            NewDamage = .Damage
+            NewSpeed = .Speed
+            NewRarity = .Rarity
+            For i = 1 To Stats.Count - 1
+                NewStats(i) = .Stat(i)
+            Next i
+        End With
+
+        With Bank(Index).ItemRand(OldSlot)
+            OldPrefix = .Prefix
+            OldSuffix = .Suffix
+            OldDamage = .Damage
+            OldSpeed = .Speed
+            OldRarity = .Rarity
+            For i = 1 To Stats.Count - 1
+                OldStats(i) = .Stat(i)
+            Next i
+        End With
+
+        With Bank(Index).ItemRand(NewSlot)
+            .Prefix = OldPrefix
+            .Suffix = OldSuffix
+            .Damage = OldDamage
+            .Speed = OldSpeed
+            .Rarity = OldRarity
+            For i = 1 To Stats.Count - 1
+                .Stat(i) = OldStats(i)
+            Next i
+        End With
+
+        With Bank(Index).ItemRand(OldSlot)
+            .Prefix = NewPrefix
+            .Suffix = NewSuffix
+            .Damage = NewDamage
+            .Speed = NewSpeed
+            .Rarity = NewRarity
+            For i = 1 To Stats.Count - 1
+                .Stat(i) = NewStats(i)
+            Next i
+        End With
 
         SendBank(Index)
     End Sub

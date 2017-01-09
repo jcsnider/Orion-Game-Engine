@@ -290,6 +290,7 @@
 
         If pnlRegisterVisible <> frmMenu.pnlRegister.Visible Then
             frmMenu.pnlRegister.Visible = pnlRegisterVisible
+            frmMenu.pnlRegister.BringToFront()
         End If
 
         If DrawChar = True Then
@@ -299,6 +300,7 @@
 
         If pnlCharCreateVisible <> frmMenu.pnlNewChar.Visible Then
             frmMenu.pnlNewChar.Visible = pnlCharCreateVisible
+            frmMenu.pnlNewChar.BringToFront()
             DrawChar = True
         End If
 

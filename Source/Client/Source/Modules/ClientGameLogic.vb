@@ -908,8 +908,8 @@ Continue1:
                 theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
                 tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
             ElseIf WindowType = 2 Then ' bank
-                theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
-                tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity
+                theName = Trim(Bank.ItemRand(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Bank.ItemRand(InvNum).Suffix)
+                tmpRarity = Bank.ItemRand(InvNum).Rarity
             ElseIf WindowType = 3 Then ' shop
                 theName = Trim(Player(MyIndex).RandEquip(InvNum).Prefix) & " " & Trim(Item(itemnum).Name) & " " & Trim(Player(MyIndex).RandEquip(InvNum).Suffix)
                 tmpRarity = Player(MyIndex).RandEquip(InvNum).Rarity

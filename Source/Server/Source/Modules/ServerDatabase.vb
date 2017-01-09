@@ -1691,6 +1691,16 @@ Module ServerDatabase
         For i = 0 To MAX_BANK
             reader.Read(Bank(Index).Item(i).Num)
             reader.Read(Bank(Index).Item(i).Value)
+
+            reader.Read(Bank(Index).ItemRand(i).Prefix)
+            reader.Read(Bank(Index).ItemRand(i).Suffix)
+            reader.Read(Bank(Index).ItemRand(i).Rarity)
+            reader.Read(Bank(Index).ItemRand(i).Damage)
+            reader.Read(Bank(Index).ItemRand(i).Speed)
+
+            For x = 1 To Stats.Count - 1
+                reader.Read(Bank(Index).ItemRand(i).Stat(x))
+            Next
         Next
     End Sub
 
@@ -1704,6 +1714,19 @@ Module ServerDatabase
         For i = 0 To MAX_BANK
             writer.Write(Bank(Index).Item(i).Num)
             writer.Write(Bank(Index).Item(i).Value)
+
+            If Bank(Index).ItemRand(i).Prefix = Nothing Then Bank(Index).ItemRand(i).Prefix = ""
+            If Bank(Index).ItemRand(i).Suffix = Nothing Then Bank(Index).ItemRand(i).Suffix = ""
+
+            writer.Write(Bank(Index).ItemRand(i).Prefix)
+            writer.Write(Bank(Index).ItemRand(i).Suffix)
+            writer.Write(Bank(Index).ItemRand(i).Rarity)
+            writer.Write(Bank(Index).ItemRand(i).Damage)
+            writer.Write(Bank(Index).ItemRand(i).Speed)
+
+            For x = 1 To Stats.Count - 1
+                writer.Write(Bank(Index).ItemRand(i).Stat(x))
+            Next
         Next
 
         writer.Save(filename)

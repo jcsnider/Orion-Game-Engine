@@ -511,4 +511,15 @@ Module ClientDataBase
     End Sub
 #End Region
 
+#Region "Bank"
+    Sub ClearBank()
+        ReDim Bank.Item(MAX_BANK)
+        ReDim Bank.ItemRand(MAX_BANK)
+        For x = 1 To MAX_BANK
+            ReDim Bank.ItemRand(x).Stat(Stats.Count - 1)
+        Next
+    End Sub
+
+#End Region
+
 End Module

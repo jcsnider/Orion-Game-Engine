@@ -34,6 +34,7 @@ Public Class Client
             If Socket Is Nothing Then Exit Sub
             myStream.BeginRead(readBuff, 0, Socket.ReceiveBufferSize, AddressOf OnReceiveData, Nothing)
         Catch ex As Exception
+            TextAdd(GetExceptionInfo(ex))
             CloseSocket(Index) 'Disconnect
             Exit Sub
         End Try
@@ -77,7 +78,7 @@ Module ServerTCP
             Clients(Index).myStream.BeginWrite(buffer.ToArray, 0, buffer.ToArray.Length, Nothing, Nothing)
             buffer = Nothing
         Catch ex As Exception
-
+            TextAdd(GetExceptionInfo(ex))
         End Try
     End Sub
 
@@ -1870,6 +1871,16 @@ Module ServerTCP
         For i = 1 To MAX_BANK
             Buffer.WriteInteger(Bank(Index).Item(i).Num)
             Buffer.WriteInteger(Bank(Index).Item(i).Value)
+
+            Buffer.WriteString(Bank(Index).ItemRand(i).Prefix)
+            Buffer.WriteString(Bank(Index).ItemRand(i).Suffix)
+            Buffer.WriteInteger(Bank(Index).ItemRand(i).Rarity)
+            Buffer.WriteInteger(Bank(Index).ItemRand(i).Damage)
+            Buffer.WriteInteger(Bank(Index).ItemRand(i).Speed)
+
+            For x = 1 To Stats.Count - 1
+                Buffer.WriteInteger(Bank(Index).ItemRand(i).Stat(x))
+            Next
         Next
 
         SendDataTo(Index, Buffer.ToArray())

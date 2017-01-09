@@ -1989,7 +1989,7 @@
     End Sub
 
     Private Sub Packet_OpenBank(ByVal Data() As Byte)
-        Dim i As Integer
+        Dim i As Integer, x As Integer
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
@@ -1999,6 +1999,16 @@
         For i = 1 To MAX_BANK
             Bank.Item(i).Num = Buffer.ReadInteger
             Bank.Item(i).Value = Buffer.ReadInteger
+
+            Bank.ItemRand(i).Prefix = Buffer.ReadString
+            Bank.ItemRand(i).Suffix = Buffer.ReadString
+            Bank.ItemRand(i).Rarity = Buffer.ReadInteger
+            Bank.ItemRand(i).Damage = Buffer.ReadInteger
+            Bank.ItemRand(i).Speed = Buffer.ReadInteger
+
+            For x = 1 To Stats.Count - 1
+                Bank.ItemRand(i).Stat(x) = Buffer.ReadInteger
+            Next
         Next
 
         NeedToOpenBank = True

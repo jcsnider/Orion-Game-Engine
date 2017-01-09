@@ -53,6 +53,23 @@ Public Module ClientAutoTiles
     End Structure
 #End Region
 
+    Sub ClearAutotiles()
+        Dim x As Integer, y As Integer, i As Integer
+
+        ReDim Autotile(Map.MaxX, Map.MaxY)
+
+        For x = 0 To Map.MaxX
+            For y = 0 To Map.MaxY
+                ReDim Autotile(x, y).Layer(MapLayer.Count - 1)
+                For i = 0 To MapLayer.Count - 1
+                    ReDim Autotile(x, y).Layer(i).srcX(4)
+                    ReDim Autotile(x, y).Layer(i).srcY(4)
+                    ReDim Autotile(x, y).Layer(i).QuarterTile(4)
+                Next
+            Next
+        Next
+    End Sub
+
     '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     '   All of this code is for auto tiles and the math behind generating them.
     '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
