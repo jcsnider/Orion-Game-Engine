@@ -1711,12 +1711,22 @@ Module ServerDatabase
 
     Sub ClearBank(ByVal Index As Integer)
         ReDim Bank(Index).Item(MAX_BANK)
+        ReDim Bank(Index).ItemRand(MAX_BANK)
 
         For i = 0 To MAX_BANK
 
             Bank(Index).Item(i).Num = 0
             Bank(Index).Item(i).Value = 0
+            Bank(Index).ItemRand(i).Prefix = ""
+            Bank(Index).ItemRand(i).Suffix = ""
+            Bank(Index).ItemRand(i).Rarity = 0
+            Bank(Index).ItemRand(i).Damage = 0
+            Bank(Index).ItemRand(i).Speed = 0
 
+            ReDim Bank(Index).ItemRand(i).Stat(Stats.Count - 1)
+            For x = 1 To Stats.Count - 1
+                Bank(Index).ItemRand(i).Stat(x) = 0
+            Next
         Next
     End Sub
 

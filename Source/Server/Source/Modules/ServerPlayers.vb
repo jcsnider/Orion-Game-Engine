@@ -1094,7 +1094,7 @@ Module ServerPlayers
             If SendUpdate Then SendInventoryUpdate(Index, i)
             GiveInvItem = True
         Else
-            Call PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
+            PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)
             GiveInvItem = False
         End If
 
@@ -1321,15 +1321,30 @@ Module ServerPlayers
                     SetPlayerBankItemValue(Index, BankSlot, 0)
                 End If
             Else
-                If GetPlayerBankItemValue(Index, BankSlot) > 1 Then
-                    GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
-                    SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - 1)
+                If GetPlayerBankItemNum(Index, BankSlot) = GetPlayerInvItemNum(Index, invSlot) And Item(GetPlayerBankItemNum(Index, BankSlot)).Randomize = 0 Then
+                    If GetPlayerBankItemValue(Index, BankSlot) > 1 Then
+                        GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
+                        SetPlayerBankItemValue(Index, BankSlot, GetPlayerBankItemValue(Index, BankSlot) - 1)
+
+                    End If
                 Else
+                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Prefix = Bank(Index).ItemRand(BankSlot).Prefix
+                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Suffix = Bank(Index).ItemRand(BankSlot).Suffix
+                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Rarity = Bank(Index).ItemRand(BankSlot).Rarity
+                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Damage = Bank(Index).ItemRand(BankSlot).Damage
+                    Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Speed = Bank(Index).ItemRand(BankSlot).Speed
+                    For i = 1 To Stats.Count - 1
+                        Player(Index).Character(TempPlayer(Index).CurChar).RandInv(invSlot).Stat(i) = Bank(Index).ItemRand(BankSlot).Stat(i)
+                    Next i
+
                     GiveInvItem(Index, GetPlayerBankItemNum(Index, BankSlot), 0)
                     SetPlayerBankItemNum(Index, BankSlot, 0)
                     SetPlayerBankItemValue(Index, BankSlot, 0)
+                    ClearRandBank(Index, BankSlot)
+
                 End If
             End If
+
         End If
 
         SaveBank(Index)

@@ -1575,7 +1575,8 @@ Module ServerTCP
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SActionMsg)
-        Buffer.WriteString(Message)
+        'Buffer.WriteString(Message)
+        Buffer.WriteUnicodeString(Message)
         Buffer.WriteInteger(Color)
         Buffer.WriteInteger(MsgType)
         Buffer.WriteInteger(X)

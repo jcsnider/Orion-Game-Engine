@@ -139,13 +139,16 @@ Public Class ByteBuffer
     Public Function Conv_String(ByVal message As String) As String
         Conv_String = ""
 
-        ' Ordenar las palabras
-        Dim split As String() = message.Split(New [Char]() {" "c, ","c, "."c, ";"c, CChar(vbTab)})
-        For Each s As String In split
-            If s.Trim() <> "" Then
-                Conv_String = Conv_String & ChrW(s)
-            End If
-        Next s
+        Try
+            Dim split As String() = message.Split(New [Char]() {" "c, ","c, "."c, ";"c, CChar(vbTab)})
+            For Each s As String In split
+                If s.Trim() <> "" Then
+                    Conv_String = Conv_String & ChrW(s)
+                End If
+            Next s
+        Catch ex As Exception
+
+        End Try
 
         Return Conv_String
 
