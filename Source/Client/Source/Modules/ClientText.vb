@@ -50,19 +50,19 @@ Module ClientText
         If GetPlayerPK(Index) = False Then
 
             Select Case GetPlayerAccess(Index)
-                Case 0
+                Case AdminType.Player
                     color = Color.Red
                     backcolor = Color.Black
-                Case 1
+                Case AdminType.Monitor
                     color = Color.Black
                     backcolor = Color.White
-                Case 2
+                Case AdminType.Mapper
                     color = Color.Cyan
                     backcolor = Color.Black
-                Case 3
+                Case AdminType.Developer
                     color = Color.Green
                     backcolor = Color.Black
-                Case 4
+                Case AdminType.Creator
                     color = Color.Yellow
                     backcolor = Color.Black
             End Select
@@ -237,7 +237,7 @@ Module ClientText
 
         ' how long we want each message to appear
         Select Case ActionMsg(Index).Type
-            Case ActionMsgType.STATIC
+            Case ActionMsgType.Static
                 Time = 1500
 
                 If ActionMsg(Index).Y > 0 Then
@@ -248,7 +248,7 @@ Module ClientText
                     y = ActionMsg(Index).Y - Int(PIC_Y \ 2) + 18
                 End If
 
-            Case ActionMsgType.SCROLL
+            Case ActionMsgType.Scroll
                 Time = 1500
 
                 If ActionMsg(Index).Y > 0 Then
@@ -261,12 +261,12 @@ Module ClientText
                     ActionMsg(Index).Scroll = ActionMsg(Index).Scroll + 1
                 End If
 
-            Case ActionMsgType.SCREEN
+            Case ActionMsgType.Screen
                 Time = 3000
 
                 ' This will kill any action screen messages that there in the system
                 For i = Byte.MaxValue To 1 Step -1
-                    If ActionMsg(i).Type = ActionMsgType.SCREEN Then
+                    If ActionMsg(i).Type = ActionMsgType.Screen Then
                         If i <> Index Then
                             ClearActionMsg(Index)
                             Index = i
@@ -529,7 +529,7 @@ Module ClientText
 
         ElseIf e.KeyCode = Keys.OemPipe Then
             If e.Shift Then
-                'keyValue= "|" 
+                'keyValue= "|"
             Else
                 keyValue = "\"
             End If
@@ -605,7 +605,6 @@ Module ClientText
 
     Public Sub DrawChatBubble(ByVal Index As Integer)
         Dim theArray As List(Of String), X As Integer, Y As Integer, i As Integer, MaxWidth As Integer, X2 As Integer, Y2 As Integer
-
 
         With chatBubble(Index)
             If .targetType = TargetType.Player Then

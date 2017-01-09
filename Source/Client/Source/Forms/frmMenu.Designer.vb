@@ -28,10 +28,10 @@ Partial Class frmMenu
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.chkSavePass = New System.Windows.Forms.CheckBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblLoginPass = New System.Windows.Forms.Label()
         Me.txtLogin = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.lblLoginName = New System.Windows.Forms.Label()
+        Me.lblLogin = New System.Windows.Forms.Label()
         Me.pnlRegister = New System.Windows.Forms.Panel()
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.txtRPass2 = New System.Windows.Forms.TextBox()
@@ -47,7 +47,7 @@ Partial Class frmMenu
         Me.tmrCredits = New System.Windows.Forms.Timer(Me.components)
         Me.pnlNewChar = New System.Windows.Forms.Panel()
         Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblNewCharSprite = New System.Windows.Forms.Label()
         Me.btnCreateCharacter = New System.Windows.Forms.Button()
         Me.placeholderforsprite = New System.Windows.Forms.PictureBox()
         Me.lblNextChar = New System.Windows.Forms.Label()
@@ -55,15 +55,15 @@ Partial Class frmMenu
         Me.rdoFemale = New System.Windows.Forms.RadioButton()
         Me.rdoMale = New System.Windows.Forms.RadioButton()
         Me.cmbClass = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblNewCharGender = New System.Windows.Forms.Label()
+        Me.lblNewCharClass = New System.Windows.Forms.Label()
         Me.txtCharName = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.lbl = New System.Windows.Forms.Label()
+        Me.lblNewCharName = New System.Windows.Forms.Label()
+        Me.lblNewChar = New System.Windows.Forms.Label()
+        Me.lblStatusHeader = New System.Windows.Forms.Label()
         Me.lblServerStatus = New System.Windows.Forms.Label()
         Me.pnlMainMenu = New System.Windows.Forms.Panel()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblNewsHeader = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
         Me.pnlIPConfig = New System.Windows.Forms.Panel()
         Me.btnSaveIP = New System.Windows.Forms.Button()
@@ -85,7 +85,7 @@ Partial Class frmMenu
         Me.picChar3 = New System.Windows.Forms.PictureBox()
         Me.picChar2 = New System.Windows.Forms.PictureBox()
         Me.picChar1 = New System.Windows.Forms.PictureBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblCharSelect = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlLoad = New System.Windows.Forms.Panel()
         Me.lblStatus = New System.Windows.Forms.Label()
@@ -112,10 +112,10 @@ Partial Class frmMenu
         Me.pnlLogin.Controls.Add(Me.btnLogin)
         Me.pnlLogin.Controls.Add(Me.chkSavePass)
         Me.pnlLogin.Controls.Add(Me.txtPassword)
-        Me.pnlLogin.Controls.Add(Me.Label7)
+        Me.pnlLogin.Controls.Add(Me.lblLoginPass)
         Me.pnlLogin.Controls.Add(Me.txtLogin)
-        Me.pnlLogin.Controls.Add(Me.Label17)
-        Me.pnlLogin.Controls.Add(Me.Label18)
+        Me.pnlLogin.Controls.Add(Me.lblLoginName)
+        Me.pnlLogin.Controls.Add(Me.lblLogin)
         Me.pnlLogin.ForeColor = System.Drawing.Color.White
         Me.pnlLogin.Location = New System.Drawing.Point(737, 6)
         Me.pnlLogin.Name = "pnlLogin"
@@ -157,15 +157,15 @@ Partial Class frmMenu
         Me.txtPassword.Size = New System.Drawing.Size(110, 20)
         Me.txtPassword.TabIndex = 24
         '
-        'Label7
+        'lblLoginPass
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(107, 101)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 15)
-        Me.Label7.TabIndex = 23
-        Me.Label7.Text = "Password:"
+        Me.lblLoginPass.AutoSize = True
+        Me.lblLoginPass.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLoginPass.Location = New System.Drawing.Point(107, 101)
+        Me.lblLoginPass.Name = "lblLoginPass"
+        Me.lblLoginPass.Size = New System.Drawing.Size(59, 15)
+        Me.lblLoginPass.TabIndex = 23
+        Me.lblLoginPass.Text = "Password:"
         '
         'txtLogin
         '
@@ -174,25 +174,25 @@ Partial Class frmMenu
         Me.txtLogin.Size = New System.Drawing.Size(110, 20)
         Me.txtLogin.TabIndex = 17
         '
-        'Label17
+        'lblLoginName
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(107, 66)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(40, 15)
-        Me.Label17.TabIndex = 16
-        Me.Label17.Text = "Name:"
+        Me.lblLoginName.AutoSize = True
+        Me.lblLoginName.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLoginName.Location = New System.Drawing.Point(107, 66)
+        Me.lblLoginName.Name = "lblLoginName"
+        Me.lblLoginName.Size = New System.Drawing.Size(40, 15)
+        Me.lblLoginName.TabIndex = 16
+        Me.lblLoginName.Text = "Name:"
         '
-        'Label18
+        'lblLogin
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(170, 12)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(90, 31)
-        Me.Label18.TabIndex = 15
-        Me.Label18.Text = "Login"
+        Me.lblLogin.AutoSize = True
+        Me.lblLogin.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogin.Location = New System.Drawing.Point(170, 12)
+        Me.lblLogin.Name = "lblLogin"
+        Me.lblLogin.Size = New System.Drawing.Size(90, 31)
+        Me.lblLogin.TabIndex = 15
+        Me.lblLogin.Text = "Login"
         '
         'pnlRegister
         '
@@ -337,7 +337,7 @@ Partial Class frmMenu
         Me.pnlNewChar.BackgroundImage = CType(resources.GetObject("pnlNewChar.BackgroundImage"), System.Drawing.Image)
         Me.pnlNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlNewChar.Controls.Add(Me.txtDescription)
-        Me.pnlNewChar.Controls.Add(Me.Label19)
+        Me.pnlNewChar.Controls.Add(Me.lblNewCharSprite)
         Me.pnlNewChar.Controls.Add(Me.btnCreateCharacter)
         Me.pnlNewChar.Controls.Add(Me.placeholderforsprite)
         Me.pnlNewChar.Controls.Add(Me.lblNextChar)
@@ -345,11 +345,11 @@ Partial Class frmMenu
         Me.pnlNewChar.Controls.Add(Me.rdoFemale)
         Me.pnlNewChar.Controls.Add(Me.rdoMale)
         Me.pnlNewChar.Controls.Add(Me.cmbClass)
-        Me.pnlNewChar.Controls.Add(Me.Label9)
-        Me.pnlNewChar.Controls.Add(Me.Label10)
+        Me.pnlNewChar.Controls.Add(Me.lblNewCharGender)
+        Me.pnlNewChar.Controls.Add(Me.lblNewCharClass)
         Me.pnlNewChar.Controls.Add(Me.txtCharName)
-        Me.pnlNewChar.Controls.Add(Me.Label11)
-        Me.pnlNewChar.Controls.Add(Me.Label12)
+        Me.pnlNewChar.Controls.Add(Me.lblNewCharName)
+        Me.pnlNewChar.Controls.Add(Me.lblNewChar)
         Me.pnlNewChar.ForeColor = System.Drawing.Color.White
         Me.pnlNewChar.Location = New System.Drawing.Point(737, 204)
         Me.pnlNewChar.Name = "pnlNewChar"
@@ -365,14 +365,14 @@ Partial Class frmMenu
         Me.txtDescription.Size = New System.Drawing.Size(157, 62)
         Me.txtDescription.TabIndex = 44
         '
-        'Label19
+        'lblNewCharSprite
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(56, 75)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(34, 13)
-        Me.Label19.TabIndex = 43
-        Me.Label19.Text = "Sprite"
+        Me.lblNewCharSprite.AutoSize = True
+        Me.lblNewCharSprite.Location = New System.Drawing.Point(56, 75)
+        Me.lblNewCharSprite.Name = "lblNewCharSprite"
+        Me.lblNewCharSprite.Size = New System.Drawing.Size(34, 13)
+        Me.lblNewCharSprite.TabIndex = 43
+        Me.lblNewCharSprite.Text = "Sprite"
         '
         'btnCreateCharacter
         '
@@ -448,25 +448,25 @@ Partial Class frmMenu
         Me.cmbClass.Size = New System.Drawing.Size(157, 21)
         Me.cmbClass.TabIndex = 36
         '
-        'Label9
+        'lblNewCharGender
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(133, 75)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(47, 15)
-        Me.Label9.TabIndex = 34
-        Me.Label9.Text = "Gender:"
+        Me.lblNewCharGender.AutoSize = True
+        Me.lblNewCharGender.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewCharGender.Location = New System.Drawing.Point(133, 75)
+        Me.lblNewCharGender.Name = "lblNewCharGender"
+        Me.lblNewCharGender.Size = New System.Drawing.Size(47, 15)
+        Me.lblNewCharGender.TabIndex = 34
+        Me.lblNewCharGender.Text = "Gender:"
         '
-        'Label10
+        'lblNewCharClass
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(186, 45)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(37, 15)
-        Me.Label10.TabIndex = 33
-        Me.Label10.Text = "Class:"
+        Me.lblNewCharClass.AutoSize = True
+        Me.lblNewCharClass.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewCharClass.Location = New System.Drawing.Point(186, 45)
+        Me.lblNewCharClass.Name = "lblNewCharClass"
+        Me.lblNewCharClass.Size = New System.Drawing.Size(37, 15)
+        Me.lblNewCharClass.TabIndex = 33
+        Me.lblNewCharClass.Text = "Class:"
         '
         'txtCharName
         '
@@ -475,39 +475,39 @@ Partial Class frmMenu
         Me.txtCharName.Size = New System.Drawing.Size(121, 20)
         Me.txtCharName.TabIndex = 32
         '
-        'Label11
+        'lblNewCharName
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(13, 45)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(40, 15)
-        Me.Label11.TabIndex = 31
-        Me.Label11.Text = "Name:"
+        Me.lblNewCharName.AutoSize = True
+        Me.lblNewCharName.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewCharName.ForeColor = System.Drawing.Color.White
+        Me.lblNewCharName.Location = New System.Drawing.Point(13, 45)
+        Me.lblNewCharName.Name = "lblNewCharName"
+        Me.lblNewCharName.Size = New System.Drawing.Size(40, 15)
+        Me.lblNewCharName.TabIndex = 31
+        Me.lblNewCharName.Text = "Name:"
         '
-        'Label12
+        'lblNewChar
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(90, 8)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(207, 31)
-        Me.Label12.TabIndex = 30
-        Me.Label12.Text = "Create Character"
+        Me.lblNewChar.AutoSize = True
+        Me.lblNewChar.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewChar.ForeColor = System.Drawing.Color.White
+        Me.lblNewChar.Location = New System.Drawing.Point(90, 8)
+        Me.lblNewChar.Name = "lblNewChar"
+        Me.lblNewChar.Size = New System.Drawing.Size(207, 31)
+        Me.lblNewChar.TabIndex = 30
+        Me.lblNewChar.Text = "Create Character"
         '
-        'lbl
+        'lblStatusHeader
         '
-        Me.lbl.AutoSize = True
-        Me.lbl.BackColor = System.Drawing.Color.Transparent
-        Me.lbl.Font = New System.Drawing.Font("Modern No. 20", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl.ForeColor = System.Drawing.Color.White
-        Me.lbl.Location = New System.Drawing.Point(482, 9)
-        Me.lbl.Name = "lbl"
-        Me.lbl.Size = New System.Drawing.Size(109, 18)
-        Me.lbl.TabIndex = 44
-        Me.lbl.Text = "Server Status:"
+        Me.lblStatusHeader.AutoSize = True
+        Me.lblStatusHeader.BackColor = System.Drawing.Color.Transparent
+        Me.lblStatusHeader.Font = New System.Drawing.Font("Modern No. 20", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatusHeader.ForeColor = System.Drawing.Color.White
+        Me.lblStatusHeader.Location = New System.Drawing.Point(482, 9)
+        Me.lblStatusHeader.Name = "lblStatusHeader"
+        Me.lblStatusHeader.Size = New System.Drawing.Size(109, 18)
+        Me.lblStatusHeader.TabIndex = 44
+        Me.lblStatusHeader.Text = "Server Status:"
         '
         'lblServerStatus
         '
@@ -526,7 +526,7 @@ Partial Class frmMenu
         Me.pnlMainMenu.BackColor = System.Drawing.Color.Transparent
         Me.pnlMainMenu.BackgroundImage = CType(resources.GetObject("pnlMainMenu.BackgroundImage"), System.Drawing.Image)
         Me.pnlMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlMainMenu.Controls.Add(Me.Label5)
+        Me.pnlMainMenu.Controls.Add(Me.lblNewsHeader)
         Me.pnlMainMenu.Controls.Add(Me.lblNews)
         Me.pnlMainMenu.ForeColor = System.Drawing.Color.White
         Me.pnlMainMenu.Location = New System.Drawing.Point(160, 180)
@@ -534,16 +534,16 @@ Partial Class frmMenu
         Me.pnlMainMenu.Size = New System.Drawing.Size(400, 192)
         Me.pnlMainMenu.TabIndex = 46
         '
-        'Label5
+        'lblNewsHeader
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(112, 16)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(156, 31)
-        Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Latest News"
+        Me.lblNewsHeader.AutoSize = True
+        Me.lblNewsHeader.BackColor = System.Drawing.Color.Transparent
+        Me.lblNewsHeader.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewsHeader.Location = New System.Drawing.Point(112, 16)
+        Me.lblNewsHeader.Name = "lblNewsHeader"
+        Me.lblNewsHeader.Size = New System.Drawing.Size(156, 31)
+        Me.lblNewsHeader.TabIndex = 36
+        Me.lblNewsHeader.Text = "Latest News"
         '
         'lblNews
         '
@@ -727,7 +727,7 @@ Partial Class frmMenu
         Me.pnlCharSelect.Controls.Add(Me.picChar3)
         Me.pnlCharSelect.Controls.Add(Me.picChar2)
         Me.pnlCharSelect.Controls.Add(Me.picChar1)
-        Me.pnlCharSelect.Controls.Add(Me.Label6)
+        Me.pnlCharSelect.Controls.Add(Me.lblCharSelect)
         Me.pnlCharSelect.Controls.Add(Me.Label16)
         Me.pnlCharSelect.ForeColor = System.Drawing.Color.White
         Me.pnlCharSelect.Location = New System.Drawing.Point(737, 342)
@@ -808,16 +808,16 @@ Partial Class frmMenu
         Me.picChar1.TabIndex = 42
         Me.picChar1.TabStop = False
         '
-        'Label6
+        'lblCharSelect
         '
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(45, 12)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(312, 33)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Character Selection"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblCharSelect.BackColor = System.Drawing.Color.Transparent
+        Me.lblCharSelect.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCharSelect.Location = New System.Drawing.Point(45, 12)
+        Me.lblCharSelect.Name = "lblCharSelect"
+        Me.lblCharSelect.Size = New System.Drawing.Size(312, 33)
+        Me.lblCharSelect.TabIndex = 15
+        Me.lblCharSelect.Text = "Character Selection"
+        Me.lblCharSelect.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label16
         '
@@ -836,7 +836,7 @@ Partial Class frmMenu
         Me.pnlLoad.Controls.Add(Me.lblStatus)
         Me.pnlLoad.Location = New System.Drawing.Point(-2, 1)
         Me.pnlLoad.Name = "pnlLoad"
-        Me.pnlLoad.Size = New System.Drawing.Size(733, 553)
+        Me.pnlLoad.Size = New System.Drawing.Size(54, 48)
         Me.pnlLoad.TabIndex = 58
         '
         'lblStatus
@@ -861,7 +861,6 @@ Partial Class frmMenu
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1281, 541)
         Me.Controls.Add(Me.pnlLoad)
-        Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCredits)
@@ -869,12 +868,13 @@ Partial Class frmMenu
         Me.Controls.Add(Me.btnPlay)
         Me.Controls.Add(Me.pnlIPConfig)
         Me.Controls.Add(Me.lblServerStatus)
-        Me.Controls.Add(Me.lbl)
+        Me.Controls.Add(Me.lblStatusHeader)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
         Me.Controls.Add(Me.pnlMainMenu)
         Me.Controls.Add(Me.picLogo)
+        Me.Controls.Add(Me.pnlNewChar)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -910,10 +910,10 @@ Partial Class frmMenu
     Public WithEvents pnlLogin As System.Windows.Forms.Panel
     Friend WithEvents chkSavePass As System.Windows.Forms.CheckBox
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents lblLoginPass As System.Windows.Forms.Label
     Friend WithEvents txtLogin As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents lblLoginName As System.Windows.Forms.Label
+    Friend WithEvents lblLogin As System.Windows.Forms.Label
     Friend WithEvents pnlRegister As System.Windows.Forms.Panel
     Friend WithEvents txtRPass2 As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
@@ -933,15 +933,15 @@ Partial Class frmMenu
     Friend WithEvents rdoFemale As System.Windows.Forms.RadioButton
     Friend WithEvents rdoMale As System.Windows.Forms.RadioButton
     Friend WithEvents cmbClass As System.Windows.Forms.ComboBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents lblNewCharGender As System.Windows.Forms.Label
+    Friend WithEvents lblNewCharClass As System.Windows.Forms.Label
     Friend WithEvents txtCharName As System.Windows.Forms.TextBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents lbl As System.Windows.Forms.Label
+    Friend WithEvents lblNewCharName As System.Windows.Forms.Label
+    Friend WithEvents lblNewChar As System.Windows.Forms.Label
+    Friend WithEvents lblStatusHeader As System.Windows.Forms.Label
     Friend WithEvents lblServerStatus As System.Windows.Forms.Label
     Public WithEvents pnlMainMenu As System.Windows.Forms.Panel
-    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lblNewsHeader As System.Windows.Forms.Label
     Friend WithEvents lblNews As System.Windows.Forms.Label
     Public WithEvents pnlIPConfig As Windows.Forms.Panel
     Friend WithEvents txtPort As Windows.Forms.TextBox
@@ -960,7 +960,7 @@ Partial Class frmMenu
     Friend WithEvents btnCreateCharacter As Windows.Forms.Button
     Friend WithEvents btnSaveIP As Windows.Forms.Button
     Public WithEvents pnlCharSelect As Windows.Forms.Panel
-    Friend WithEvents Label6 As Windows.Forms.Label
+    Friend WithEvents lblCharSelect As Windows.Forms.Label
     Friend WithEvents Label16 As Windows.Forms.Label
     Friend WithEvents picChar3 As Windows.Forms.PictureBox
     Friend WithEvents picChar2 As Windows.Forms.PictureBox
@@ -969,7 +969,7 @@ Partial Class frmMenu
     Friend WithEvents btnNewChar As Windows.Forms.Button
     Friend WithEvents btnUseChar As Windows.Forms.Button
     Friend WithEvents txtDescription As Windows.Forms.TextBox
-    Friend WithEvents Label19 As Windows.Forms.Label
+    Friend WithEvents lblNewCharSprite As Windows.Forms.Label
     Friend WithEvents pnlLoad As Windows.Forms.Panel
     Friend WithEvents lblStatus As Windows.Forms.Label
 End Class

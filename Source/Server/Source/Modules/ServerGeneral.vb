@@ -65,7 +65,11 @@ Module ServerGeneral
         ReDim Bank(0 To MAX_PLAYERS)
 
         For i = 0 To MAX_PLAYERS
-            ReDim Bank(i).Item(0 To MAX_BANK)
+            ReDim Bank(i).Item(MAX_BANK)
+            ReDim Bank(i).ItemRand(MAX_BANK)
+            For x = 1 To MAX_BANK
+                ReDim Bank(i).ItemRand(x).Stat(Stats.Count - 1)
+            Next
         Next
 
         ReDim Player(0 To MAX_PLAYERS)
@@ -168,7 +172,7 @@ Module ServerGeneral
         If Not FileExist(Path.Combine(Application.StartupPath, "data", "options.ini")) Then
             Options.Game_Name = "Orion+"
             Options.Port = 7001
-            Options.MOTD = "Welcome to the Orion+ Engine"
+            Options.Motd = "Welcome to the Orion+ Engine"
             Options.Website = "http://ascensiongamedev.com/index.php"
             Options.StartMap = 1
             Options.StartX = 13

@@ -1177,12 +1177,12 @@ Module ServerPlayers
                         ' Check if its more then they have and if so drop it all
                         If Amount >= GetPlayerInvItemValue(Index, InvNum) Then
                             MapItem(GetPlayerMap(Index), i).Value = GetPlayerInvItemValue(Index, InvNum)
-                            Call SetPlayerInvItemNum(Index, InvNum, 0)
-                            Call SetPlayerInvItemValue(Index, InvNum, 0)
+                            SetPlayerInvItemNum(Index, InvNum, 0)
+                            SetPlayerInvItemValue(Index, InvNum, 0)
                             Amount = GetPlayerInvItemValue(Index, InvNum)
                         Else
                             MapItem(GetPlayerMap(Index), i).Value = Amount
-                            Call SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - Amount)
+                            SetPlayerInvItemValue(Index, InvNum, GetPlayerInvItemValue(Index, InvNum) - Amount)
                         End If
                         Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1} ({2}x).", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name)), Amount), ColorType.Yellow)
                     Else
@@ -1190,17 +1190,17 @@ Module ServerPlayers
                         MapItem(GetPlayerMap(Index), i).Value = 0
                         ' send message
 
-                        Call MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1}.", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name))), ColorType.Yellow)
-                        Call SetPlayerInvItemNum(Index, InvNum, 0)
-                        Call SetPlayerInvItemValue(Index, InvNum, 0)
+                        MapMsg(GetPlayerMap(Index), String.Format("{0} has dropped {1}.", GetPlayerName(Index), CheckGrammar(Trim$(Item(GetPlayerInvItemNum(Index, InvNum)).Name))), ColorType.Yellow)
+                        SetPlayerInvItemNum(Index, InvNum, 0)
+                        SetPlayerInvItemValue(Index, InvNum, 0)
                     End If
 
                     ' Send inventory update
-                    Call SendInventoryUpdate(Index, InvNum)
+                    SendInventoryUpdate(Index, InvNum)
                     ' Spawn the item before we set the num or we'll get a different free map item slot
-                    Call SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, Amount, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
+                    SpawnItemSlot(i, MapItem(GetPlayerMap(Index), i).Num, Amount, GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
                 Else
-                    Call PlayerMsg(Index, "Too many items already on the ground.", ColorType.Yellow)
+                    PlayerMsg(Index, "Too many items already on the ground.", ColorType.Yellow)
                 End If
             End If
         End If
@@ -1246,8 +1246,7 @@ Module ServerPlayers
                     SetPlayerBankItemNum(Index, BankSlot, itemnum)
                     SetPlayerBankItemValue(Index, BankSlot, 1)
                     ClearRandInv(Index, InvSlot)
-                    SetPlayerInvItemNum(Index, InvSlot, 0)
-                    SetPlayerInvItemValue(Index, InvSlot, 0)
+                    TakeInvItem(Index, GetPlayerInvItemNum(Index, InvSlot), 0)
                 End If
             End If
         End If

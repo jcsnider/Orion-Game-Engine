@@ -29,16 +29,16 @@ Module ClientGameLogic
                 If tmrconnect < GetTickCount() Then
                     If IsConnected() = True Then
                         frmMenu.lblServerStatus.ForeColor = Color.LightGreen
-                        frmMenu.lblServerStatus.Text = "Online"
+                        frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveronline")
                     Else
                         i = i + 1
                         If i = 5 Then
                             Connect()
-                            frmMenu.lblServerStatus.Text = "Reconnecting"
+                            frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serverreconnect")
                             frmMenu.lblServerStatus.ForeColor = Color.Orange
                             i = 0
                         Else
-                            frmMenu.lblServerStatus.Text = "Offline"
+                            frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveroffline")
                             frmMenu.lblServerStatus.ForeColor = Color.Red
                         End If
                     End If

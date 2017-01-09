@@ -14,6 +14,8 @@ Module EditorLoop
 
         SFML.CSFML.Activate()
 
+        Strings.Init(1, "English")
+
         ' set values for directional blocking arrows
         DirArrowX(1) = 12 ' up
         DirArrowY(1) = 0

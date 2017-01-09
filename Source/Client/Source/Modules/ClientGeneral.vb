@@ -12,6 +12,8 @@ Module ClientGeneral
     Sub startup()
         SFML.CSFML.Activate()
 
+        SetStatus(Strings.Get("loadscreen", "loading"))
+
         frmMenu.Visible = True
 
         ReDim CharSelection(3)
@@ -133,7 +135,6 @@ Module ClientGeneral
         'pets
         ClearPets()
 
-        SetStatus("Loading...")
         GettingMap = True
         vbQuote = Chr(34) ' "
 

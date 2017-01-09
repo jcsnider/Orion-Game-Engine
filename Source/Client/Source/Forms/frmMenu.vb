@@ -15,6 +15,8 @@ Public Class frmMenu
     ''' On load, get GUI ready.
     ''' </summary>
     Private Sub Frmmenu_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Strings.Init(0, "English")
+
         LoadMenuGraphics()
 
         pnlLoad.Width = 730
@@ -109,6 +111,33 @@ Public Class frmMenu
             picLogo.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_GUI_PATH & "Menu\logo" & GFX_EXT)
         End If
 
+        'set text for controls from language file
+
+        'main
+        lblStatusHeader.Text = Strings.Get("mainmenu", "serverstatus")
+        lblNewsHeader.Text = Strings.Get("mainmenu", "newsheader")
+        lblNews.Text = Strings.Get("mainmenu", "news")
+        btnPlay.Text = Strings.Get("mainmenu", "buttonplay")
+        btnRegister.Text = Strings.Get("mainmenu", "buttonregister")
+        btnCredits.Text = Strings.Get("mainmenu", "buttoncredits")
+        btnExit.Text = Strings.Get("mainmenu", "buttonexit")
+
+        'logon panel
+        lblLogin.Text = Strings.Get("mainmenu", "login")
+        lblLoginName.Text = Strings.Get("mainmenu", "loginname")
+        lblLoginPass.Text = Strings.Get("mainmenu", "loginpass")
+        chkSavePass.Text = Strings.Get("mainmenu", "loginchkbox")
+        btnLogin.Text = Strings.Get("mainmenu", "loginbutton")
+
+        'new char panel
+        lblNewChar.Text = Strings.Get("mainmenu", "newchar")
+        lblNewCharName.Text = Strings.Get("mainmenu", "newcharname")
+        lblNewCharClass.Text = Strings.Get("mainmenu", "newcharclass")
+        lblNewCharGender.Text = Strings.Get("mainmenu", "newchargender")
+        rdoMale.Text = Strings.Get("mainmenu", "newcharmale")
+        rdoFemale.Text = Strings.Get("mainmenu", "newcharfemale")
+        lblNewCharSprite.Text = Strings.Get("mainmenu", "newcharsprite")
+        btnCreateCharacter.Text = Strings.Get("mainmenu", "newcharbutton")
     End Sub
 
     ''' <summary>

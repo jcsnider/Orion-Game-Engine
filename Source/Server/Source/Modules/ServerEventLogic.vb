@@ -2,7 +2,7 @@
     Public Sub RemoveDeadEvents()
         Dim i As Integer, MapNum As Integer, Buffer As ByteBuffer, x As Integer, id As Integer, page As Integer, compare As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If Gettingmap = True Then Exit Sub
 
             If IsPlaying(i) = False Then
@@ -11,11 +11,13 @@
             End If
 
             MapNum = GetPlayerMap(i)
-            If TempPlayer(i).EventMap.CurrentEvents > 0 And Map(MapNum).Events IsNot Nothing Then
+            If TempPlayer(i).EventMap.CurrentEvents > 0 Then 'And Map(MapNum).Events IsNot Nothing Then
                 MapNum = GetPlayerMap(i)
+
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventID
                     page = TempPlayer(i).EventMap.EventPages(x).PageID
+
                     If Map(MapNum).Events(id).PageCount >= page Then
 
                         'See if there is any reason to delete this event....
@@ -128,17 +130,20 @@
 
         'That was only removing events... now we gotta worry about spawning them again, luckily, it is almost the same exact thing, but backwards!
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If Gettingmap = True Then Exit Sub
 
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 MapNum = GetPlayerMap(i)
                 If MapNum = 0 Then Exit Sub
+
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventID
                     pageID = TempPlayer(i).EventMap.EventPages(x).PageID
+
                     If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
-                    If (Map(MapNum).Events Is Nothing) Then Continue For
+
+                    'If (Map(MapNum).Events Is Nothing) Then Continue For
                     For z = Map(MapNum).Events(id).PageCount To 1 Step -1
 
                         spawnevent = True
@@ -165,7 +170,6 @@
                                 End If
                             End If
                         End If
-
 
                         If Map(MapNum).Events(id).Pages(z).chkVariable = 1 Then
                             Select Case Map(MapNum).Events(id).Pages(z).VariableCompare
@@ -197,7 +201,7 @@
                         End If
 
                         If Map(MapNum).Events(id).Pages(z).chkSwitch = 1 Then
-                            If Map(MapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false 
+                            If Map(MapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false
                                 If Player(i).Character(TempPlayer(i).CurChar).Switches(Map(MapNum).Events(id).Pages(z).SwitchIndex) = 1 Then 'and switch is true
                                     spawnevent = False 'do not spawn
                                 End If
@@ -226,18 +230,17 @@
                                 Next
                             End If
 
-
                             With TempPlayer(i).EventMap.EventPages(id)
                                 If Map(MapNum).Events(id).Pages(z).GraphicType = 1 Then
                                     Select Case Map(MapNum).Events(id).Pages(z).GraphicY
                                         Case 0
-                                            .Dir = Direction.DOWN
+                                            .Dir = Direction.Down
                                         Case 1
-                                            .Dir = Direction.LEFT
+                                            .Dir = Direction.Left
                                         Case 2
-                                            .Dir = Direction.RIGHT
+                                            .Dir = Direction.Right
                                         Case 3
-                                            .Dir = Direction.UP
+                                            .Dir = Direction.Up
                                     End Select
                                 Else
                                     .Dir = 0
@@ -295,14 +298,11 @@
                                 .WalkingAnim = Map(MapNum).Events(id).Pages(z).WalkAnim
                                 .FixedDir = Map(MapNum).Events(id).Pages(z).DirFix
 
-
                             End With
 
                             If Map(MapNum).Events(id).Globals = 1 Then
                                 If spawnevent Then TempEventMap(MapNum).Events(id).Active = z : TempEventMap(MapNum).Events(id).Position = Map(MapNum).Events(id).Pages(z).Position
                             End If
-
-
 
                             Buffer = New ByteBuffer
                             Buffer.WriteInteger(ServerPackets.SSpawnEvent)
@@ -415,32 +415,32 @@
                                                     End Select
                                                     Select Case .MoveRoute(.MoveRouteStep).Index
                                                         Case 1
-                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.UP, isglobal) Then
-                                                                EventMove(playerID, MapNum, eventID, Direction.UP, actualmovespeed, isglobal)
+                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Up, isglobal) Then
+                                                                EventMove(playerID, MapNum, eventID, Direction.Up, actualmovespeed, isglobal)
                                                             Else
                                                                 If .IgnoreIfCannotMove = 0 Then
                                                                     .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
                                                             End If
                                                         Case 2
-                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.DOWN, isglobal) Then
-                                                                EventMove(playerID, MapNum, eventID, Direction.DOWN, actualmovespeed, isglobal)
+                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Down, isglobal) Then
+                                                                EventMove(playerID, MapNum, eventID, Direction.Down, actualmovespeed, isglobal)
                                                             Else
                                                                 If .IgnoreIfCannotMove = 0 Then
                                                                     .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
                                                             End If
                                                         Case 3
-                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.LEFT, isglobal) Then
-                                                                EventMove(playerID, MapNum, eventID, Direction.LEFT, actualmovespeed, isglobal)
+                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Left, isglobal) Then
+                                                                EventMove(playerID, MapNum, eventID, Direction.Left, actualmovespeed, isglobal)
                                                             Else
                                                                 If .IgnoreIfCannotMove = 0 Then
                                                                     .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
                                                             End If
                                                         Case 4
-                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.RIGHT, isglobal) Then
-                                                                EventMove(playerID, MapNum, eventID, Direction.RIGHT, actualmovespeed, isglobal)
+                                                            If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Right, isglobal) Then
+                                                                EventMove(playerID, MapNum, eventID, Direction.Right, actualmovespeed, isglobal)
                                                             Else
                                                                 If .IgnoreIfCannotMove = 0 Then
                                                                     .MoveRouteStep = .MoveRouteStep - 1
@@ -507,14 +507,14 @@
                                                             End If
                                                         Case 9
                                                             Select Case .Dir
-                                                                Case Direction.UP
-                                                                    z = Direction.DOWN
-                                                                Case Direction.DOWN
-                                                                    z = Direction.UP
-                                                                Case Direction.LEFT
-                                                                    z = Direction.RIGHT
-                                                                Case Direction.RIGHT
-                                                                    z = Direction.LEFT
+                                                                Case Direction.Up
+                                                                    z = Direction.Down
+                                                                Case Direction.Down
+                                                                    z = Direction.Up
+                                                                Case Direction.Left
+                                                                    z = Direction.Right
+                                                                Case Direction.Right
+                                                                    z = Direction.Left
                                                             End Select
                                                             If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
                                                                 EventMove(playerID, MapNum, eventID, z, actualmovespeed, isglobal)
@@ -530,47 +530,47 @@
                                                         Case 12
                                                             .MoveTimer = GetTickCount() + 1000
                                                         Case 13
-                                                            EventDir(playerID, MapNum, eventID, Direction.UP, isglobal)
+                                                            EventDir(playerID, MapNum, eventID, Direction.Up, isglobal)
                                                         Case 14
-                                                            EventDir(playerID, MapNum, eventID, Direction.DOWN, isglobal)
+                                                            EventDir(playerID, MapNum, eventID, Direction.Down, isglobal)
                                                         Case 15
-                                                            EventDir(playerID, MapNum, eventID, Direction.LEFT, isglobal)
+                                                            EventDir(playerID, MapNum, eventID, Direction.Left, isglobal)
                                                         Case 16
-                                                            EventDir(playerID, MapNum, eventID, Direction.RIGHT, isglobal)
+                                                            EventDir(playerID, MapNum, eventID, Direction.Right, isglobal)
                                                         Case 17
                                                             Select Case .Dir
-                                                                Case Direction.UP
-                                                                    z = Direction.RIGHT
-                                                                Case Direction.RIGHT
-                                                                    z = Direction.DOWN
-                                                                Case Direction.LEFT
-                                                                    z = Direction.UP
-                                                                Case Direction.DOWN
-                                                                    z = Direction.LEFT
+                                                                Case Direction.Up
+                                                                    z = Direction.Right
+                                                                Case Direction.Right
+                                                                    z = Direction.Down
+                                                                Case Direction.Left
+                                                                    z = Direction.Up
+                                                                Case Direction.Down
+                                                                    z = Direction.Left
                                                             End Select
                                                             EventDir(playerID, MapNum, eventID, z, isglobal)
                                                         Case 18
                                                             Select Case .Dir
-                                                                Case Direction.UP
-                                                                    z = Direction.LEFT
-                                                                Case Direction.RIGHT
-                                                                    z = Direction.UP
-                                                                Case Direction.LEFT
-                                                                    z = Direction.DOWN
-                                                                Case Direction.DOWN
-                                                                    z = Direction.RIGHT
+                                                                Case Direction.Up
+                                                                    z = Direction.Left
+                                                                Case Direction.Right
+                                                                    z = Direction.Up
+                                                                Case Direction.Left
+                                                                    z = Direction.Down
+                                                                Case Direction.Down
+                                                                    z = Direction.Right
                                                             End Select
                                                             EventDir(playerID, MapNum, eventID, z, isglobal)
                                                         Case 19
                                                             Select Case .Dir
-                                                                Case Direction.UP
-                                                                    z = Direction.DOWN
-                                                                Case Direction.RIGHT
-                                                                    z = Direction.LEFT
-                                                                Case Direction.LEFT
-                                                                    z = Direction.RIGHT
-                                                                Case Direction.DOWN
-                                                                    z = Direction.UP
+                                                                Case Direction.Up
+                                                                    z = Direction.Down
+                                                                Case Direction.Right
+                                                                    z = Direction.Left
+                                                                Case Direction.Left
+                                                                    z = Direction.Right
+                                                                Case Direction.Down
+                                                                    z = Direction.Up
                                                             End Select
                                                             EventDir(playerID, MapNum, eventID, z, isglobal)
                                                         Case 20
@@ -650,13 +650,13 @@
                                                             If .GraphicType = 1 Then
                                                                 Select Case .GraphicY
                                                                     Case 0
-                                                                        .Dir = Direction.DOWN
+                                                                        .Dir = Direction.Down
                                                                     Case 1
-                                                                        .Dir = Direction.LEFT
+                                                                        .Dir = Direction.Left
                                                                     Case 2
-                                                                        .Dir = Direction.RIGHT
+                                                                        .Dir = Direction.Right
                                                                     Case 3
-                                                                        .Dir = Direction.UP
+                                                                        .Dir = Direction.Up
                                                                 End Select
                                                             End If
                                                             'Need to Send Update to client
@@ -723,7 +723,7 @@
         Dim isglobal As Boolean, MapNum As Integer, actualmovespeed As Integer, Buffer As ByteBuffer, z As Integer, sendupdate As Boolean
         Dim donotprocessmoveroute As Boolean
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
 
             If Gettingmap = True Then Exit Sub
 
@@ -731,7 +731,9 @@
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+
                         If Gettingmap = True Then Exit Sub
+
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTickCount() Then
@@ -797,32 +799,32 @@
                                                         TempPlayer(i).EventMap.EventPages(x).MoveRouteStep = TempPlayer(i).EventMap.EventPages(x).MoveRouteStep + 1
                                                         Select Case TempPlayer(i).EventMap.EventPages(x).MoveRoute(TempPlayer(i).EventMap.EventPages(x).MoveRouteStep).Index
                                                             Case 1
-                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.UP, isglobal) Then
-                                                                    EventMove(playerID, MapNum, eventID, Direction.UP, actualmovespeed, isglobal)
+                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Up, isglobal) Then
+                                                                    EventMove(playerID, MapNum, eventID, Direction.Up, actualmovespeed, isglobal)
                                                                 Else
                                                                     If TempPlayer(i).EventMap.EventPages(x).IgnoreIfCannotMove = 0 Then
                                                                         .MoveRouteStep = .MoveRouteStep - 1
                                                                     End If
                                                                 End If
                                                             Case 2
-                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.DOWN, isglobal) Then
-                                                                    EventMove(playerID, MapNum, eventID, Direction.DOWN, actualmovespeed, isglobal)
+                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Down, isglobal) Then
+                                                                    EventMove(playerID, MapNum, eventID, Direction.Down, actualmovespeed, isglobal)
                                                                 Else
                                                                     If .IgnoreIfCannotMove = 0 Then
                                                                         .MoveRouteStep = .MoveRouteStep - 1
                                                                     End If
                                                                 End If
                                                             Case 3
-                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.LEFT, isglobal) Then
-                                                                    EventMove(playerID, MapNum, eventID, Direction.LEFT, actualmovespeed, isglobal)
+                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Left, isglobal) Then
+                                                                    EventMove(playerID, MapNum, eventID, Direction.Left, actualmovespeed, isglobal)
                                                                 Else
                                                                     If .IgnoreIfCannotMove = 0 Then
                                                                         .MoveRouteStep = .MoveRouteStep - 1
                                                                     End If
                                                                 End If
                                                             Case 4
-                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.RIGHT, isglobal) Then
-                                                                    EventMove(playerID, MapNum, eventID, Direction.RIGHT, actualmovespeed, isglobal)
+                                                                If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, Direction.Right, isglobal) Then
+                                                                    EventMove(playerID, MapNum, eventID, Direction.Right, actualmovespeed, isglobal)
                                                                 Else
                                                                     If .IgnoreIfCannotMove = 0 Then
                                                                         .MoveRouteStep = .MoveRouteStep - 1
@@ -902,14 +904,14 @@
                                                                 End If
                                                             Case 9
                                                                 Select Case .Dir
-                                                                    Case Direction.UP
-                                                                        z = Direction.DOWN
-                                                                    Case Direction.DOWN
-                                                                        z = Direction.UP
-                                                                    Case Direction.LEFT
-                                                                        z = Direction.RIGHT
-                                                                    Case Direction.RIGHT
-                                                                        z = Direction.LEFT
+                                                                    Case Direction.Up
+                                                                        z = Direction.Down
+                                                                    Case Direction.Down
+                                                                        z = Direction.Up
+                                                                    Case Direction.Left
+                                                                        z = Direction.Right
+                                                                    Case Direction.Right
+                                                                        z = Direction.Left
                                                                 End Select
                                                                 If CanEventMove(playerID, MapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
                                                                     EventMove(playerID, MapNum, eventID, z, actualmovespeed, isglobal)
@@ -925,47 +927,47 @@
                                                             Case 12
                                                                 .MoveTimer = GetTickCount() + 1000
                                                             Case 13
-                                                                EventDir(playerID, MapNum, eventID, Direction.UP, isglobal)
+                                                                EventDir(playerID, MapNum, eventID, Direction.Up, isglobal)
                                                             Case 14
-                                                                EventDir(playerID, MapNum, eventID, Direction.DOWN, isglobal)
+                                                                EventDir(playerID, MapNum, eventID, Direction.Down, isglobal)
                                                             Case 15
-                                                                EventDir(playerID, MapNum, eventID, Direction.LEFT, isglobal)
+                                                                EventDir(playerID, MapNum, eventID, Direction.Left, isglobal)
                                                             Case 16
-                                                                EventDir(playerID, MapNum, eventID, Direction.RIGHT, isglobal)
+                                                                EventDir(playerID, MapNum, eventID, Direction.Right, isglobal)
                                                             Case 17
                                                                 Select Case .Dir
-                                                                    Case Direction.UP
-                                                                        z = Direction.RIGHT
-                                                                    Case Direction.RIGHT
-                                                                        z = Direction.DOWN
-                                                                    Case Direction.LEFT
-                                                                        z = Direction.UP
-                                                                    Case Direction.DOWN
-                                                                        z = Direction.LEFT
+                                                                    Case Direction.Up
+                                                                        z = Direction.Right
+                                                                    Case Direction.Right
+                                                                        z = Direction.Down
+                                                                    Case Direction.Left
+                                                                        z = Direction.Up
+                                                                    Case Direction.Down
+                                                                        z = Direction.Left
                                                                 End Select
                                                                 EventDir(playerID, MapNum, eventID, z, isglobal)
                                                             Case 18
                                                                 Select Case .Dir
-                                                                    Case Direction.UP
-                                                                        z = Direction.LEFT
-                                                                    Case Direction.RIGHT
-                                                                        z = Direction.UP
-                                                                    Case Direction.LEFT
-                                                                        z = Direction.DOWN
-                                                                    Case Direction.DOWN
-                                                                        z = Direction.RIGHT
+                                                                    Case Direction.Up
+                                                                        z = Direction.Left
+                                                                    Case Direction.Right
+                                                                        z = Direction.Up
+                                                                    Case Direction.Left
+                                                                        z = Direction.Down
+                                                                    Case Direction.Down
+                                                                        z = Direction.Right
                                                                 End Select
                                                                 EventDir(playerID, MapNum, eventID, z, isglobal)
                                                             Case 19
                                                                 Select Case .Dir
-                                                                    Case Direction.UP
-                                                                        z = Direction.DOWN
-                                                                    Case Direction.RIGHT
-                                                                        z = Direction.LEFT
-                                                                    Case Direction.LEFT
-                                                                        z = Direction.RIGHT
-                                                                    Case Direction.DOWN
-                                                                        z = Direction.UP
+                                                                    Case Direction.Up
+                                                                        z = Direction.Down
+                                                                    Case Direction.Right
+                                                                        z = Direction.Left
+                                                                    Case Direction.Left
+                                                                        z = Direction.Right
+                                                                    Case Direction.Down
+                                                                        z = Direction.Up
                                                                 End Select
                                                                 EventDir(playerID, MapNum, eventID, z, isglobal)
                                                             Case 20
@@ -1045,13 +1047,13 @@
                                                                 If .GraphicType = 1 Then
                                                                     Select Case .GraphicY
                                                                         Case 0
-                                                                            .Dir = Direction.DOWN
+                                                                            .Dir = Direction.Down
                                                                         Case 1
-                                                                            .Dir = Direction.LEFT
+                                                                            .Dir = Direction.Left
                                                                         Case 2
-                                                                            .Dir = Direction.RIGHT
+                                                                            .Dir = Direction.Right
                                                                         Case 3
-                                                                            .Dir = Direction.UP
+                                                                            .Dir = Direction.Up
                                                                     End Select
                                                                 End If
                                                                 'Need to Send Update to client
@@ -1119,10 +1121,10 @@
 
         'Now, we process the damn things for commands :P
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If Gettingmap = True Then Exit Sub
 
-            If IsPlaying(i) Then
+            If IsPlaying(i) AndAlso TempPlayer(i).GettingMap = 0 Then
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     If TempPlayer(i).EventMap.EventPages(x).Visible Then
                         If Map(Player(i).Character(TempPlayer(i).CurChar).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventID).Pages(TempPlayer(i).EventMap.EventPages(x).PageID).Trigger = 2 Then 'Parallel Process baby!
@@ -1164,10 +1166,10 @@
         Next
 
         'That is it for starting parallel processes :D now we just have to make the code that actually processes the events to their fullest
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If Gettingmap = True Then Exit Sub
 
-            If IsPlaying(i) Then
+            If IsPlaying(i) AndAlso TempPlayer(i).GettingMap = 0 Then
                 If TempPlayer(i).EventProcessingCount > 0 Then
                     restartloop = True
                     Do While restartloop = True
@@ -1716,16 +1718,16 @@
                                                             SendPlayerData(i)
                                                         Case EventType.evChangeSex
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = Sex.MALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = Sex.Male
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = Sex.FEMALE
+                                                                Player(i).Character(TempPlayer(i).CurChar).Sex = Sex.Female
                                                             End If
                                                             SendPlayerData(i)
                                                         Case EventType.evChangePK
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).PK = False
+                                                                Player(i).Character(TempPlayer(i).CurChar).Pk = False
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
-                                                                Player(i).Character(TempPlayer(i).CurChar).PK = True
+                                                                Player(i).Character(TempPlayer(i).CurChar).Pk = True
                                                             End If
                                                             SendPlayerData(i)
                                                         Case EventType.evWarpPlayer
@@ -1758,7 +1760,7 @@
                                                             End If
                                                         Case EventType.evPlayAnimation
                                                             If Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
-                                                                SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerX(i), GetPlayerY(i), TargetType.PLAYER, i)
+                                                                SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerX(i), GetPlayerY(i), TargetType.Player, i)
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 If Map(GetPlayerMap(i)).Events(.EventID).Globals = 1 Then
                                                                     SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventID).X, Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data3).Y)
@@ -2090,8 +2092,8 @@
 
         tim = 0
 
-        sX = MapNpc(MapNum).Npc(mapnpcnum).x
-        sY = MapNpc(MapNum).Npc(mapnpcnum).y
+        sX = MapNpc(MapNum).Npc(mapnpcnum).X
+        sY = MapNpc(MapNum).Npc(mapnpcnum).Y
 
         FX = targetx
         FY = targety
@@ -2296,16 +2298,16 @@
                         If Map(MapNum).Events(i).Pages(1).GraphicType = 1 Then
                             Select Case Map(MapNum).Events(i).Pages(1).GraphicY
                                 Case 0
-                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.DOWN
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.Down
                                 Case 1
-                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.LEFT
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.Left
                                 Case 2
-                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.RIGHT
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.Right
                                 Case 3
-                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.UP
+                                    TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.Up
                             End Select
                         Else
-                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.DOWN
+                            TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Dir = Direction.Down
                         End If
                         TempEventMap(MapNum).Events(TempEventMap(MapNum).EventCount).Active = 1
 
