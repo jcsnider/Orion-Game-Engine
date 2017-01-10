@@ -363,7 +363,7 @@ Public Module ServerQuest
         SendQuests(Index) ' editor
         SendUpdateQuestToAll(QuestNum) 'players
         SaveQuest(QuestNum)
-        Addlog(GetPlayerName(Index) & " saved Quest #" & QuestNum & ".", ADMIN_LOG)
+        Addlog(GetPlayerLogin(Index) & " saved Quest #" & QuestNum & ".", ADMIN_LOG)
     End Sub
 
     Sub Packet_RequestQuests(ByVal Index As Integer, ByVal Data() As Byte)

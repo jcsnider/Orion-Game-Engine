@@ -1716,8 +1716,7 @@
 
         If buffer.ReadInteger <> ServerPackets.SActionMsg Then Exit Sub
 
-        'message = Trim(buffer.ReadString)
-        message = Trim(buffer.ReadUnicodeString)
+        message = Trim(buffer.ReadString)
         color = buffer.ReadInteger
         tmpType = buffer.ReadInteger
         X = buffer.ReadInteger

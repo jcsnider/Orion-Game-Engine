@@ -156,8 +156,7 @@ Module ServerTCP
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SAlertMsg)
-        'Buffer.WriteString(Msg)
-        Buffer.WriteUnicodeString(Msg)
+        Buffer.WriteString(Msg)
         SendDataTo(Index, Buffer.ToArray)
         Buffer = Nothing
     End Sub
