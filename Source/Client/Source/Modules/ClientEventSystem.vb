@@ -3187,7 +3187,7 @@ nextevent:
         'first render panel
         RenderSprite(EventChatSprite, GameWindow, EventChatX, EventChatY, 0, 0, EventChatGFXInfo.Width, EventChatGFXInfo.Height)
 
-        With frmMainGame
+        With FrmMainGame
             'face
             If EventChatFace > 0 And EventChatFace < NumFaces Then
                 'render face

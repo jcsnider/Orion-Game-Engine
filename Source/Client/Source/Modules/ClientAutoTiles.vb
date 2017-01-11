@@ -210,7 +210,7 @@ Public Module ClientAutoTiles
 
     End Sub
 
-    Public Sub initAutotiles()
+    Public Sub InitAutotiles()
         Dim X As Integer, Y As Integer, layerNum As Integer
         ' Procedure used to cache autotile positions. All positioning is
         ' independant from the tileset. Calculations are convoluted and annoying.
@@ -412,11 +412,11 @@ Public Module ClientAutoTiles
 
         ' North West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
         ' North
-        If checkTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
         ' West
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(2) And Not tmpTile(3) Then situation = AUTO_INNER
         ' Horizontal
@@ -449,11 +449,11 @@ Public Module ClientAutoTiles
 
         ' North
 
-        If checkTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
         ' North East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
         ' East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) And Not tmpTile(3) Then situation = AUTO_INNER
         ' Horizontal
@@ -486,11 +486,11 @@ Public Module ClientAutoTiles
 
         ' West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
         ' South West
-        If checkTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
         ' South
-        If checkTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) And Not tmpTile(3) Then situation = AUTO_INNER
         ' Horizontal
@@ -523,11 +523,11 @@ Public Module ClientAutoTiles
 
         ' South
 
-        If checkTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
         ' South East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
         ' East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
         ' Calculate Situation - Inner
         If Not tmpTile(1) And Not tmpTile(3) Then situation = AUTO_INNER
         ' Horizontal
@@ -559,7 +559,7 @@ Public Module ClientAutoTiles
         Dim tmpTile As Boolean
         ' West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
@@ -575,7 +575,7 @@ Public Module ClientAutoTiles
         Dim tmpTile As Boolean
         ' East
 
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
@@ -591,7 +591,7 @@ Public Module ClientAutoTiles
         Dim tmpTile As Boolean
         ' West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
@@ -607,7 +607,7 @@ Public Module ClientAutoTiles
         Dim tmpTile As Boolean
         ' East
 
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile = True
         ' Actually place the subtile
         If tmpTile Then
             ' Extended
@@ -626,11 +626,11 @@ Public Module ClientAutoTiles
 
         ' North West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y - 1) Then tmpTile(1) = True
         ' North
-        If checkTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(2) = True
         ' West
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(3) = True
         situation = AUTO_FILL
         ' Calculate Situation - Horizontal
         If Not tmpTile(2) And tmpTile(3) Then situation = AUTO_HORIZONTAL
@@ -660,11 +660,11 @@ Public Module ClientAutoTiles
 
         ' North
 
-        If checkTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y - 1) Then tmpTile(1) = True
         ' North East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y - 1) Then tmpTile(2) = True
         ' East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
         situation = AUTO_FILL
         ' Calculate Situation - Horizontal
         If Not tmpTile(1) And tmpTile(3) Then situation = AUTO_HORIZONTAL
@@ -694,11 +694,11 @@ Public Module ClientAutoTiles
 
         ' West
 
-        If checkTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y) Then tmpTile(1) = True
         ' South West
-        If checkTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X - 1, Y + 1) Then tmpTile(2) = True
         ' South
-        If checkTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(3) = True
         situation = AUTO_FILL
         ' Calculate Situation - Horizontal
         If tmpTile(1) And Not tmpTile(3) Then situation = AUTO_HORIZONTAL
@@ -728,11 +728,11 @@ Public Module ClientAutoTiles
 
         ' South
 
-        If checkTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
+        If CheckTileMatch(layerNum, X, Y, X, Y + 1) Then tmpTile(1) = True
         ' South East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y + 1) Then tmpTile(2) = True
         ' East
-        If checkTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
+        If CheckTileMatch(layerNum, X, Y, X + 1, Y) Then tmpTile(3) = True
         situation = AUTO_FILL
         ' Calculate Situation -  Horizontal
         If Not tmpTile(1) And tmpTile(3) Then situation = AUTO_HORIZONTAL
@@ -756,45 +756,45 @@ Public Module ClientAutoTiles
 
     End Sub
 
-    Public Function checkTileMatch(ByVal layerNum As Integer, ByVal X1 As Integer, ByVal Y1 As Integer, ByVal X2 As Integer, ByVal Y2 As Integer) As Boolean
+    Public Function CheckTileMatch(ByVal layerNum As Integer, ByVal X1 As Integer, ByVal Y1 As Integer, ByVal X2 As Integer, ByVal Y2 As Integer) As Boolean
         ' we'll exit out early if true
         'Dim exTile As Boolean
 
         'If layerNum > MapLayer.Count - 1 Then exTile = True : layerNum = layerNum - (MapLayer.Count - 1)
-        checkTileMatch = True
+        CheckTileMatch = True
         ' if it's off the map then set it as autotile and exit out early
         If X2 < 0 Or X2 > Map.MaxX Or Y2 < 0 Or Y2 > Map.MaxY Then
-            checkTileMatch = True
+            CheckTileMatch = True
             Exit Function
         End If
 
         ' fakes ALWAYS return true
         If Map.Tile(X2, Y2).Layer(layerNum).AutoTile = AUTOTILE_FAKE Then
-            checkTileMatch = True
+            CheckTileMatch = True
             Exit Function
         End If
         ' End If
 
         ' check neighbour is an autotile
         If Map.Tile(X2, Y2).Layer(layerNum).AutoTile = 0 Then
-            checkTileMatch = False
+            CheckTileMatch = False
             Exit Function
         End If
         ' End If
 
         ' check we're a matching
         If Map.Tile(X1, Y1).Layer(layerNum).Tileset <> Map.Tile(X2, Y2).Layer(layerNum).Tileset Then
-            checkTileMatch = False
+            CheckTileMatch = False
             Exit Function
         End If
 
         ' check tiles match
         If Map.Tile(X1, Y1).Layer(layerNum).X <> Map.Tile(X2, Y2).Layer(layerNum).X Then
-            checkTileMatch = False
+            CheckTileMatch = False
             Exit Function
         Else
             If Map.Tile(X1, Y1).Layer(layerNum).Y <> Map.Tile(X2, Y2).Layer(layerNum).Y Then
-                checkTileMatch = False
+                CheckTileMatch = False
                 Exit Function
             End If
         End If

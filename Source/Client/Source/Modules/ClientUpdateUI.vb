@@ -84,7 +84,7 @@
     'Set the Chat Position
 
     Public MyChatX As Integer = 1
-    Public MyChatY As Integer = frmMainGame.Height - 55
+    Public MyChatY As Integer = FrmMainGame.Height - 55
 
     Public ChatWindowX As Integer = 1
     Public ChatWindowY As Integer = 705
@@ -282,77 +282,77 @@
         End If
 
         If UpdateNews = True Then
-            frmMenu.lblNews.Text = News
-            frmMenu.Text = GAME_NAME
-            frmMainGame.Text = GAME_NAME
+            FrmMenu.lblNews.Text = News
+            FrmMenu.Text = GAME_NAME
+            FrmMainGame.Text = GAME_NAME
             UpdateNews = False
         End If
 
-        If pnlRegisterVisible <> frmMenu.pnlRegister.Visible Then
-            frmMenu.pnlRegister.Visible = pnlRegisterVisible
-            frmMenu.pnlRegister.BringToFront()
+        If pnlRegisterVisible <> FrmMenu.pnlRegister.Visible Then
+            FrmMenu.pnlRegister.Visible = pnlRegisterVisible
+            FrmMenu.pnlRegister.BringToFront()
         End If
 
         If DrawChar = True Then
-            frmMenu.DrawCharacter()
+            FrmMenu.DrawCharacter()
             DrawChar = False
         End If
 
-        If pnlCharCreateVisible <> frmMenu.pnlNewChar.Visible Then
-            frmMenu.pnlNewChar.Visible = pnlCharCreateVisible
-            frmMenu.pnlNewChar.BringToFront()
+        If pnlCharCreateVisible <> FrmMenu.pnlNewChar.Visible Then
+            FrmMenu.pnlNewChar.Visible = pnlCharCreateVisible
+            FrmMenu.pnlNewChar.BringToFront()
             DrawChar = True
         End If
 
-        If lblnextcharleft <> frmMenu.lblNextChar.Left Then
-            frmMenu.lblNextChar.Left = lblnextcharleft
+        If lblnextcharleft <> FrmMenu.lblNextChar.Left Then
+            FrmMenu.lblNextChar.Left = lblnextcharleft
         End If
 
         If Not cmbclass Is Nothing Then
-            frmMenu.cmbClass.Items.Clear()
+            FrmMenu.cmbClass.Items.Clear()
 
             For i = 1 To UBound(cmbclass)
-                frmMenu.cmbClass.Items.Add(cmbclass(i))
+                FrmMenu.cmbClass.Items.Add(cmbclass(i))
             Next
 
-            frmMenu.cmbClass.SelectedIndex = 0
+            FrmMenu.cmbClass.SelectedIndex = 0
 
-            frmMenu.rdoMale.Checked = True
+            FrmMenu.rdoMale.Checked = True
 
-            frmMenu.txtCharName.Focus()
+            FrmMenu.txtCharName.Focus()
 
             cmbclass = Nothing
         End If
 
-        If pnlLoginVisible <> frmMenu.pnlLogin.Visible Then
-            frmMenu.pnlLogin.Visible = pnlLoginVisible
+        If pnlLoginVisible <> FrmMenu.pnlLogin.Visible Then
+            FrmMenu.pnlLogin.Visible = pnlLoginVisible
             If pnlLoginVisible Then
-                frmMenu.txtLogin.Focus()
+                FrmMenu.txtLogin.Focus()
             End If
         End If
 
-        If pnlCreditsVisible <> frmMenu.pnlCredits.Visible Then
-            frmMenu.pnlCredits.Visible = pnlCreditsVisible
+        If pnlCreditsVisible <> FrmMenu.pnlCredits.Visible Then
+            FrmMenu.pnlCredits.Visible = pnlCreditsVisible
         End If
 
-        If frmmenuvisible <> frmMenu.Visible Then
-            frmMenu.Visible = frmmenuvisible
+        If frmmenuvisible <> FrmMenu.Visible Then
+            FrmMenu.Visible = frmmenuvisible
         End If
 
         If DrawCharSelect Then
-            frmMenu.DrawCharacterSelect()
+            FrmMenu.DrawCharacterSelect()
             DrawCharSelect = False
         End If
 
-        If pnlCharSelectVisible <> frmMenu.pnlCharSelect.Visible Then
-            frmMenu.pnlCharSelect.Visible = pnlCharSelectVisible
+        If pnlCharSelectVisible <> FrmMenu.pnlCharSelect.Visible Then
+            FrmMenu.pnlCharSelect.Visible = pnlCharSelectVisible
             If pnlCharSelectVisible Then
                 DrawCharSelect = True
             End If
         End If
 
-        If frmmaingamevisible <> frmMainGame.Visible Then
-            frmMainGame.Visible = frmmaingamevisible
+        If frmmaingamevisible <> FrmMainGame.Visible Then
+            FrmMainGame.Visible = frmmaingamevisible
         End If
 
         If InitCrafting = True Then
@@ -397,8 +397,8 @@
             UpdateCharacterPanel = False
         End If
 
-        If pnlloadvisible <> frmMenu.pnlLoad.Visible Then
-            frmMenu.pnlLoad.Visible = pnlloadvisible
+        If pnlloadvisible <> FrmMenu.pnlLoad.Visible Then
+            FrmMenu.pnlLoad.Visible = pnlloadvisible
         End If
 
         If UpdateMapnames = True Then

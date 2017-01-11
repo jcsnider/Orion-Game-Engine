@@ -499,7 +499,7 @@ Public Module ServerEvents
                     End If
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Up + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Up + 1) Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -587,7 +587,7 @@ Public Module ServerEvents
                     End If
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Down + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Down + 1) Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -675,7 +675,7 @@ Public Module ServerEvents
                     End If
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Left + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Left + 1) Then
                         CanEventMove = False
                         Exit Function
                     End If
@@ -763,7 +763,7 @@ Public Module ServerEvents
                     End If
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Right + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(x, y).DirBlock, Direction.Right + 1) Then
                         CanEventMove = False
                         Exit Function
                     End If

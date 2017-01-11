@@ -4,25 +4,25 @@
     Public MapLock As New Object()
     Public Bank As BankRec
     Public TempTile(,) As TempTileRec
-    Public Player(0 To MAX_PLAYERS) As PlayerRec
+    Public Player(MAX_PLAYERS) As PlayerRec
     Public Classes() As ClassRec
-    Public Item(0 To MAX_ITEMS) As ItemRec
-    Public Npc(0 To MAX_NPCS) As NpcRec
-    Public MapItem(0 To MAX_MAP_ITEMS) As MapItemRec
-    Public MapNpc(0 To MAX_MAP_NPCS) As MapNpcRec
-    Public Shop(0 To MAX_SHOPS) As ShopRec
-    Public Skill(0 To MAX_SKILLS) As SkillRec
-    Public Resource(0 To MAX_RESOURCES) As ResourceRec
-    Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
+    Public Item(MAX_ITEMS) As ItemRec
+    Public Npc(MAX_NPCS) As NpcRec
+    Public MapItem(MAX_MAP_ITEMS) As MapItemRec
+    Public MapNpc(MAX_MAP_NPCS) As MapNpcRec
+    Public Shop(MAX_SHOPS) As ShopRec
+    Public Skill(MAX_SKILLS) As SkillRec
+    Public Resource(MAX_RESOURCES) As ResourceRec
+    Public Animation(MAX_ANIMATIONS) As AnimationRec
 
     ' client-side stuff
-    Public ActionMsg(0 To Byte.MaxValue) As ActionMsgRec
-    Public Blood(0 To Byte.MaxValue) As BloodRec
-    Public AnimInstance(0 To Byte.MaxValue) As AnimInstanceRec
+    Public ActionMsg(Byte.MaxValue) As ActionMsgRec
+    Public Blood(Byte.MaxValue) As BloodRec
+    Public AnimInstance(Byte.MaxValue) As AnimInstanceRec
     Public Chat As New List(Of ChatRec)
 
     'Mapreport
-    Public MapNames(0 To MAX_MAPS) As String
+    Public MapNames(MAX_MAPS) As String
 
     ' options
     Public Options As OptionsRec

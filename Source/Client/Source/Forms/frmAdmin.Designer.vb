@@ -28,7 +28,6 @@ Partial Class frmAdmin
         Me.btnLevelUp = New System.Windows.Forms.Button()
         Me.btnSpawnItem = New System.Windows.Forms.Button()
         Me.scrlSpawnItemAmount = New System.Windows.Forms.HScrollBar()
-        Me.scrlSpawnItem = New System.Windows.Forms.HScrollBar()
         Me.lblSpawnItemAmount = New System.Windows.Forms.Label()
         Me.lblItemSpawn = New System.Windows.Forms.Label()
         Me.btnMapEditor = New System.Windows.Forms.Button()
@@ -55,6 +54,7 @@ Partial Class frmAdmin
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -100,7 +100,7 @@ Partial Class frmAdmin
         '
         'btnSpawnItem
         '
-        Me.btnSpawnItem.Location = New System.Drawing.Point(14, 190)
+        Me.btnSpawnItem.Location = New System.Drawing.Point(14, 164)
         Me.btnSpawnItem.Name = "btnSpawnItem"
         Me.btnSpawnItem.Size = New System.Drawing.Size(228, 22)
         Me.btnSpawnItem.TabIndex = 29
@@ -109,22 +109,16 @@ Partial Class frmAdmin
         '
         'scrlSpawnItemAmount
         '
-        Me.scrlSpawnItemAmount.Location = New System.Drawing.Point(14, 157)
+        Me.scrlSpawnItemAmount.LargeChange = 1
+        Me.scrlSpawnItemAmount.Location = New System.Drawing.Point(14, 131)
         Me.scrlSpawnItemAmount.Name = "scrlSpawnItemAmount"
         Me.scrlSpawnItemAmount.Size = New System.Drawing.Size(228, 17)
         Me.scrlSpawnItemAmount.TabIndex = 28
         '
-        'scrlSpawnItem
-        '
-        Me.scrlSpawnItem.Location = New System.Drawing.Point(14, 108)
-        Me.scrlSpawnItem.Name = "scrlSpawnItem"
-        Me.scrlSpawnItem.Size = New System.Drawing.Size(228, 17)
-        Me.scrlSpawnItem.TabIndex = 27
-        '
         'lblSpawnItemAmount
         '
         Me.lblSpawnItemAmount.AutoSize = True
-        Me.lblSpawnItemAmount.Location = New System.Drawing.Point(11, 144)
+        Me.lblSpawnItemAmount.Location = New System.Drawing.Point(11, 118)
         Me.lblSpawnItemAmount.Name = "lblSpawnItemAmount"
         Me.lblSpawnItemAmount.Size = New System.Drawing.Size(55, 13)
         Me.lblSpawnItemAmount.TabIndex = 26
@@ -135,9 +129,9 @@ Partial Class frmAdmin
         Me.lblItemSpawn.AutoSize = True
         Me.lblItemSpawn.Location = New System.Drawing.Point(11, 95)
         Me.lblItemSpawn.Name = "lblItemSpawn"
-        Me.lblItemSpawn.Size = New System.Drawing.Size(95, 13)
+        Me.lblItemSpawn.Size = New System.Drawing.Size(66, 13)
         Me.lblItemSpawn.TabIndex = 25
-        Me.lblItemSpawn.Text = "Spawn Item: None"
+        Me.lblItemSpawn.Text = "Spawn Item:"
         '
         'btnMapEditor
         '
@@ -364,11 +358,11 @@ Partial Class frmAdmin
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.cmbSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnRespawn)
         Me.TabPage4.Controls.Add(Me.btnALoc)
         Me.TabPage4.Controls.Add(Me.lblItemSpawn)
         Me.TabPage4.Controls.Add(Me.lblSpawnItemAmount)
-        Me.TabPage4.Controls.Add(Me.scrlSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnLevelUp)
         Me.TabPage4.Controls.Add(Me.scrlSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.btnSpawnItem)
@@ -379,6 +373,14 @@ Partial Class frmAdmin
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Misc"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'cmbSpawnItem
+        '
+        Me.cmbSpawnItem.FormattingEnabled = True
+        Me.cmbSpawnItem.Location = New System.Drawing.Point(83, 92)
+        Me.cmbSpawnItem.Name = "cmbSpawnItem"
+        Me.cmbSpawnItem.Size = New System.Drawing.Size(159, 21)
+        Me.cmbSpawnItem.TabIndex = 36
         '
         'frmAdmin
         '
@@ -407,7 +409,6 @@ Partial Class frmAdmin
     Friend WithEvents btnLevelUp As Windows.Forms.Button
     Friend WithEvents btnSpawnItem As Windows.Forms.Button
     Friend WithEvents scrlSpawnItemAmount As Windows.Forms.HScrollBar
-    Friend WithEvents scrlSpawnItem As Windows.Forms.HScrollBar
     Friend WithEvents lblSpawnItemAmount As Windows.Forms.Label
     Friend WithEvents lblItemSpawn As Windows.Forms.Label
     Friend WithEvents btnMapEditor As Windows.Forms.Button
@@ -434,4 +435,5 @@ Partial Class frmAdmin
     Friend WithEvents TabPage3 As Windows.Forms.TabPage
     Friend WithEvents TabPage4 As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
+    Friend WithEvents cmbSpawnItem As Windows.Forms.ComboBox
 End Class

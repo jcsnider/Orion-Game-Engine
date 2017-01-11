@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.OrionClient.frmMenu
+            Me.MainForm = Global.OrionClient.FrmMenu
         End Sub
     End Class
 End Namespace

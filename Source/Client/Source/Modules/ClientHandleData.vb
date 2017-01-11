@@ -117,6 +117,7 @@
         Packets.Add(ServerPackets.SStunned, AddressOf Packet_Stunned)
         Packets.Add(ServerPackets.SMapWornEq, AddressOf Packet_MapWornEquipment)
         Packets.Add(ServerPackets.SBank, AddressOf Packet_OpenBank)
+        Packets.Add(ServerPackets.SLeftGame, AddressOf Packet_LeftGame)
 
         Packets.Add(ServerPackets.SClearTradeTimer, AddressOf Packet_ClearTradeTimer)
         Packets.Add(ServerPackets.STradeInvite, AddressOf Packet_TradeInvite)
@@ -222,7 +223,7 @@
 
         pnlloadvisible = False
 
-        If frmMenu.Visible = False Then
+        If FrmMenu.Visible = False Then
             frmmenuvisible = True
         End If
 
@@ -318,7 +319,7 @@
 
         pnlCharSelectVisible = True
 
-        frmMenu.DrawCharacter()
+        FrmMenu.DrawCharacter()
 
         DrawCharSelect = True
 
@@ -411,7 +412,7 @@
             cmbclass(i) = Classes(i).Name
         Next
 
-        frmMenu.DrawCharacter()
+        FrmMenu.DrawCharacter()
 
         newCharSprite = 1
     End Sub
@@ -490,7 +491,7 @@
         For i = 1 To Max_Classes
             cmbclass(i) = Classes(i).Name
         Next
-        frmMenu.DrawCharacter()
+        FrmMenu.DrawCharacter()
         newCharSprite = 1
 
         Buffer = Nothing
@@ -528,8 +529,8 @@
         Next
 
         ' changes to inventory, need to clear any drop menu
-        frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = ""
+        FrmMainGame.pnlCurrency.Visible = False
+        FrmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -558,8 +559,8 @@
         Player(MyIndex).RandInv(n).Speed = Buffer.ReadInteger
 
         ' changes, clear drop menu
-        frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = ""
+        FrmMainGame.pnlCurrency.Visible = False
+        FrmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -591,8 +592,8 @@
 
         ' changes to inventory, need to clear any drop menu
 
-        frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = ""
+        FrmMainGame.pnlCurrency.Visible = False
+        FrmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -1188,7 +1189,7 @@
 
         End SyncLock
 
-        initAutotiles()
+        InitAutotiles()
 
         MapData = True
 
@@ -1429,8 +1430,8 @@
         Buffer = Nothing
         ' changes to inventory, need to clear any drop menu
 
-        frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = ""
+        FrmMainGame.pnlCurrency.Visible = False
+        FrmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -1716,7 +1717,7 @@
 
         If buffer.ReadInteger <> ServerPackets.SActionMsg Then Exit Sub
 
-        message = Trim(buffer.ReadString)
+        message = Trim(buffer.ReadunicodeString)
         color = buffer.ReadInteger
         tmpType = buffer.ReadInteger
         X = buffer.ReadInteger
@@ -2266,8 +2267,8 @@
 
         ' changes to inventory, need to clear any drop menu
 
-        frmMainGame.pnlCurrency.Visible = False
-        frmMainGame.txtCurrency.Text = ""
+        FrmMainGame.pnlCurrency.Visible = False
+        FrmMainGame.txtCurrency.Text = ""
         tmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
 
@@ -2633,4 +2634,15 @@
 
     End Sub
 
+    Private Sub Packet_LeftGame(ByVal Data() As Byte)
+        Dim Buffer As New ByteBuffer
+
+        Buffer.WriteBytes(Data)
+
+        If Buffer.ReadInteger <> ServerPackets.SLeftGame Then Exit Sub
+
+        DestroyGame()
+
+        Buffer = Nothing
+    End Sub
 End Module

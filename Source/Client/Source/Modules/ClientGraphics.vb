@@ -230,14 +230,14 @@ Module ClientGraphics
 #Region "initialisation"
     Sub InitGraphics()
 
-        GameWindow = New RenderWindow(frmMainGame.picscreen.Handle)
+        GameWindow = New RenderWindow(FrmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
-        TmpItemWindow = New RenderWindow(frmMainGame.pnlTmpInv.Handle)
+        TmpItemWindow = New RenderWindow(FrmMainGame.pnlTmpInv.Handle)
 
-        TmpBankItem = New RenderWindow(frmMainGame.pnlTempBank.Handle)
+        TmpBankItem = New RenderWindow(FrmMainGame.pnlTempBank.Handle)
 
-        TmpSkillWindow = New RenderWindow(frmMainGame.pnlTmpSkill.Handle)
+        TmpSkillWindow = New RenderWindow(FrmMainGame.pnlTmpSkill.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
@@ -909,11 +909,11 @@ Module ClientGraphics
         If Hover = 0 Then
             RenderSprite(ButtonSprite, GameWindow, DestX, DestY, 0, 0, ButtonGFXInfo.Width, ButtonGFXInfo.Height)
 
-            DrawText(DestX + (ButtonGFXInfo.Width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonGFXInfo.Height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(DestX + (ButtonGFXInfo.Width \ 2) - (GetTextWidth(Text) \ 2), DestY + (ButtonGFXInfo.Height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         Else
             RenderSprite(ButtonHoverSprite, GameWindow, DestX, DestY, 0, 0, ButtonHoverGFXInfo.Width, ButtonHoverGFXInfo.Height)
 
-            DrawText(DestX + (ButtonHoverGFXInfo.Width \ 2) - (getTextWidth(Text) \ 2), DestY + (ButtonHoverGFXInfo.Height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(DestX + (ButtonHoverGFXInfo.Width \ 2) - (GetTextWidth(Text) \ 2), DestY + (ButtonHoverGFXInfo.Height \ 2) - (FONT_SIZE \ 2), Text, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
 
     End Sub
@@ -950,7 +950,7 @@ Module ClientGraphics
             rec.X = (i - 1) * 8
             rec.Width = 8
             ' find out whether render blocked or not
-            If Not isDirBlocked(Map.Tile(X, Y).DirBlock, (i)) Then
+            If Not IsDirBlocked(Map.Tile(X, Y).DirBlock, (i)) Then
                 rec.Y = 8
             Else
                 rec.Y = 16
@@ -1352,7 +1352,7 @@ Module ClientGraphics
     End Sub
 
     Public Sub DrawBlood(ByVal Index As Integer)
-        Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
+        Dim dest As Point = New Point(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location))
         Dim srcrec As Rectangle
         Dim destrec As Rectangle
         Dim x As Integer
@@ -1422,7 +1422,7 @@ Module ClientGraphics
     Public Sub DrawMapFringeTile(ByVal X As Integer, ByVal Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim dest As Rectangle = New Rectangle(frmMainGame.PointToScreen(frmMainGame.picscreen.Location), New Size(32, 32))
+        Dim dest As Rectangle = New Rectangle(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location), New Size(32, 32))
 
         If GettingMap Then Exit Sub
         If Map.Tile Is Nothing Then Exit Sub
@@ -1704,7 +1704,7 @@ Module ClientGraphics
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
-        If frmMainGame.WindowState = FormWindowState.Minimized Then Exit Sub
+        If FrmMainGame.WindowState = FormWindowState.Minimized Then Exit Sub
         If GettingMap Then Exit Sub
 
         'lets get going
@@ -2744,7 +2744,7 @@ Module ClientGraphics
         Dim itemnum As Integer, itempic As Integer
 
         itemnum = GetPlayerInvItemNum(MyIndex, DragInvSlotNum)
-        TmpItemWindow.Clear(ToSFMLColor(frmMainGame.pnlTmpInv.BackColor))
+        TmpItemWindow.Clear(ToSFMLColor(FrmMainGame.pnlTmpInv.BackColor))
 
         If itemnum > 0 And itemnum <= MAX_ITEMS Then
 
@@ -2776,7 +2776,7 @@ Module ClientGraphics
 
             RenderSprite(ItemsSprite(itempic), TmpItemWindow, 0, 0, rec.X, rec.Y, rec.Width, rec.Height)
 
-            With frmMainGame.pnlTmpInv
+            With FrmMainGame.pnlTmpInv
                 .Top = Y
                 .Left = X
                 .Visible = True
@@ -2969,7 +2969,7 @@ NextLoop:
         Dim skillnum As Integer, skillpic As Integer
 
         skillnum = DragSkillSlotNum
-        TmpSkillWindow.Clear(ToSFMLColor(frmMainGame.pnlTmpSkill.BackColor))
+        TmpSkillWindow.Clear(ToSFMLColor(FrmMainGame.pnlTmpSkill.BackColor))
 
         If skillnum > 0 And skillnum <= MAX_SKILLS Then
             skillpic = Skill(skillnum).Icon
@@ -2993,7 +2993,7 @@ NextLoop:
             SkillIconsSprite(skillpic).Position = New Vector2f(0, 0)
             TmpSkillWindow.Draw(SkillIconsSprite(skillpic))
 
-            With frmMainGame.pnlTmpSkill
+            With FrmMainGame.pnlTmpSkill
                 .Top = Y
                 .Left = X
                 .Visible = True
@@ -3217,13 +3217,13 @@ NextLoop:
             .Width = PIC_X
         End With
 
-        TmpBankItem.Clear(ToSFMLColor(frmMainGame.pnlTempBank.BackColor))
+        TmpBankItem.Clear(ToSFMLColor(FrmMainGame.pnlTempBank.BackColor))
 
         ItemsSprite(Sprite).TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
         ItemsSprite(Sprite).Position = New Vector2f(dRECT.X, dRECT.Y)
         TmpBankItem.Draw(ItemsSprite(Sprite))
 
-        With frmMainGame.pnlTempBank
+        With FrmMainGame.pnlTempBank
             .Top = Y
             .Left = X
             .Visible = True
@@ -3609,13 +3609,13 @@ NextLoop:
         'first render panel
         RenderSprite(RClickSprite, GameWindow, RClickX, RClickY, 0, 0, RClickGFXInfo.Width, RClickGFXInfo.Height)
 
-        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth(RClickname) \ 2), RClickY + 10, RClickname, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth(RClickname) \ 2), RClickY + 10, RClickname, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Trade") \ 2), RClickY + 35, "Invite to Trade", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2), RClickY + 35, "Invite to Trade", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Party") \ 2), RClickY + 60, "Invite to Party", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2), RClickY + 60, "Invite to Party", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2), RClickY + 85, "Invite to House", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2), RClickY + 85, "Invite to House", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
 

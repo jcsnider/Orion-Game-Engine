@@ -1,4 +1,4 @@
-﻿Public Class frmAutoMapper
+﻿Public Class FrmAutoMapper
 #Region "Frm Code"
     Private Sub TilesetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetsToolStripMenuItem.Click
         pnlTileConfig.Visible = True
@@ -19,7 +19,7 @@
         Next
     End Sub
 
-    Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         MapStart = Val(txtMapStart.Text)
         MapSize = Val(txtMapSize.Text)
         MapX = Val(txtMapX.Text)
@@ -92,8 +92,8 @@
         Prefab = cmbPrefab.SelectedIndex + 1
         Layer = cmbLayer.SelectedIndex + 1
         txtTileset.Text = Tile(Prefab).Layer(Layer).Tileset
-        txtTileX.Text = Tile(Prefab).Layer(Layer).x
-        txtTileY.Text = Tile(Prefab).Layer(Layer).y
+        txtTileX.Text = Tile(Prefab).Layer(Layer).X
+        txtTileY.Text = Tile(Prefab).Layer(Layer).Y
         txtAutotile.Text = Tile(Prefab).Layer(Layer).AutoTile
         If Tile(Prefab).Type = TileType.Blocked Then
             chkBlocked.Checked = True

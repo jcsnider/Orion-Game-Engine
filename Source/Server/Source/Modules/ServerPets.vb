@@ -1118,7 +1118,7 @@
                     Next
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Up + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Up + 1) Then
                         CanPetMove = False
                         Exit Function
                     End If
@@ -1159,7 +1159,7 @@
                     Next
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Down + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Down + 1) Then
                         CanPetMove = False
                         Exit Function
                     End If
@@ -1200,7 +1200,7 @@
                     Next
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Left + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Left + 1) Then
                         CanPetMove = False
                         Exit Function
                     End If
@@ -1241,7 +1241,7 @@
                     Next
 
                     ' Directional blocking
-                    If isDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Right + 1) Then
+                    If IsDirBlocked(Map(MapNum).Tile(GetPetX(Index), GetPetY(Index)).DirBlock, Direction.Right + 1) Then
                         CanPetMove = False
                         Exit Function
                     End If

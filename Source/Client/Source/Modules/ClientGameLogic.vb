@@ -7,15 +7,15 @@ Module ClientGameLogic
 
     Sub GameLoop()
         Dim i As Integer
-        Dim dest As Point = New Point(frmMainGame.PointToScreen(frmMainGame.picscreen.Location))
-        Dim g As Graphics = frmMainGame.picscreen.CreateGraphics
+        Dim dest As Point = New Point(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location))
+        Dim g As Graphics = FrmMainGame.picscreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, WalkTimer As Integer, FrameTime As Integer
         Dim destrect As Rectangle, tmr10000 As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
 
         starttime = GetTickCount()
-        frmMenu.lblNextChar.Left = lblnextcharleft
+        FrmMenu.lblNextChar.Left = lblnextcharleft
 
         Do
             If GameDestroyed Then End
@@ -28,18 +28,18 @@ Module ClientGameLogic
             If frmmenuvisible = True Then
                 If tmrconnect < GetTickCount() Then
                     If IsConnected() = True Then
-                        frmMenu.lblServerStatus.ForeColor = Color.LightGreen
-                        frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveronline")
+                        FrmMenu.lblServerStatus.ForeColor = Color.LightGreen
+                        FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveronline")
                     Else
                         i = i + 1
                         If i = 5 Then
                             Connect()
-                            frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serverreconnect")
-                            frmMenu.lblServerStatus.ForeColor = Color.Orange
+                            FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serverreconnect")
+                            FrmMenu.lblServerStatus.ForeColor = Color.Orange
                             i = 0
                         Else
-                            frmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveroffline")
-                            frmMenu.lblServerStatus.ForeColor = Color.Red
+                            FrmMenu.lblServerStatus.Text = Strings.Get("mainmenu", "serveroffline")
+                            FrmMenu.lblServerStatus.ForeColor = Color.Red
                         End If
                     End If
                     tmrconnect = GetTickCount() + 500
@@ -124,14 +124,14 @@ Module ClientGameLogic
                     If ShakeTimer < Tick Then
                         If ShakeCount < 10 Then
                             If LastDir = 0 Then
-                                frmMainGame.picscreen.Location = New Point(frmMainGame.picscreen.Location.X + 20, frmMainGame.picscreen.Location.Y)
+                                FrmMainGame.picscreen.Location = New Point(FrmMainGame.picscreen.Location.X + 20, FrmMainGame.picscreen.Location.Y)
                                 LastDir = 1
                             Else
-                                frmMainGame.picscreen.Location = New Point(frmMainGame.picscreen.Location.X - 20, frmMainGame.picscreen.Location.Y)
+                                FrmMainGame.picscreen.Location = New Point(FrmMainGame.picscreen.Location.X - 20, FrmMainGame.picscreen.Location.Y)
                                 LastDir = 0
                             End If
                         Else
-                            frmMainGame.picscreen.Location = New Point(0, 0)
+                            FrmMainGame.picscreen.Location = New Point(0, 0)
                             ShakeCount = 0
                             ShakeTimerEnabled = False
                         End If
@@ -270,7 +270,7 @@ Module ClientGameLogic
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME, FONT_SIZE)
-                        g.DrawString("Receiving Map...", font, Brushes.DarkCyan, frmMainGame.picscreen.Width - 130, 5)
+                        g.DrawString("Receiving Map...", font, Brushes.DarkCyan, FrmMainGame.picscreen.Width - 130, 5)
                     End If
 
                 End SyncLock
@@ -362,13 +362,13 @@ Module ClientGameLogic
 
     End Sub
 
-    Public Function isInBounds()
-        isInBounds = False
+    Public Function IsInBounds()
+        IsInBounds = False
         If (CurX >= 0) Then
             If (CurX <= Map.MaxX) Then
                 If (CurY >= 0) Then
                     If (CurY <= Map.MaxY) Then
-                        isInBounds = True
+                        IsInBounds = True
                     End If
                 End If
             End If
@@ -418,7 +418,7 @@ Module ClientGameLogic
     End Function
 
     ' BitWise Operators for directional blocking
-    Public Sub setDirBlock(ByRef blockvar As Byte, ByRef Dir As Byte, ByVal block As Boolean)
+    Public Sub SetDirBlock(ByRef blockvar As Byte, ByRef Dir As Byte, ByVal block As Boolean)
         If block Then
             blockvar = blockvar Or (2 ^ Dir)
         Else
@@ -426,11 +426,11 @@ Module ClientGameLogic
         End If
     End Sub
 
-    Public Function isDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
+    Public Function IsDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
         If Not blockvar And (2 ^ Dir) Then
-            isDirBlocked = False
+            IsDirBlocked = False
         Else
-            isDirBlocked = True
+            IsDirBlocked = True
         End If
     End Function
 

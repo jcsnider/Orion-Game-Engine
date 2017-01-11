@@ -1,17 +1,21 @@
 ﻿Imports System.Windows.Forms
 
 Public Class frmAdmin
-    Private Sub frmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' set values for admin panel
-        scrlSpawnItem.Maximum = MAX_ITEMS
-        scrlSpawnItem.Value = 1
+        cmbSpawnItem.Items.Clear()
+
+        ' Add the names
+        For i = 1 To MAX_ITEMS
+            cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+        Next
     End Sub
 
 #Region "Moderation"
-    Private Sub btnAdminWarpTo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpTo.Click
+    Private Sub BtnAdminWarpTo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpTo.Click
         Dim n As Integer
 
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -34,8 +38,8 @@ Public Class frmAdmin
         End If
     End Sub
 
-    Private Sub btnAdminBan_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminBan.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnAdminBan_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminBan.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -47,8 +51,8 @@ Public Class frmAdmin
         SendBan(Trim$(txtAdminName.Text))
     End Sub
 
-    Private Sub btnAdminKick_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminKick.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnAdminKick_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminKick.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -60,8 +64,8 @@ Public Class frmAdmin
         SendKick(Trim$(txtAdminName.Text))
     End Sub
 
-    Private Sub btnAdminWarp2Me_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarp2Me.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnAdminWarp2Me_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarp2Me.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -77,8 +81,8 @@ Public Class frmAdmin
         WarpToMe(Trim$(txtAdminName.Text))
     End Sub
 
-    Private Sub btnAdminWarpMe2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpMe2.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnAdminWarpMe2_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpMe2.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -94,8 +98,8 @@ Public Class frmAdmin
         WarpMeTo(Trim$(txtAdminName.Text))
     End Sub
 
-    Private Sub btnAdminSetAccess_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetAccess.Click
-        If GetPlayerAccess(MyIndex) < AdminType.CREATOR Then
+    Private Sub BtnAdminSetAccess_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetAccess.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Creator Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -111,8 +115,8 @@ Public Class frmAdmin
         SendSetAccess(Trim$(txtAdminName.Text), cmbAccess.SelectedIndex)
     End Sub
 
-    Private Sub btnAdminSetSprite_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetSprite.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnAdminSetSprite_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminSetSprite.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -130,103 +134,28 @@ Public Class frmAdmin
 #End Region
 
 #Region "Editors"
-    Private Sub btnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
+    Private Sub BtnMapEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapEditor.Click
 
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
 
         SendRequestEditMap()
     End Sub
-    'Private Sub btnItemEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnItemEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditItem()
-    'End Sub
-
-    'Private Sub btnResourceEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditResource()
-    'End Sub
-
-    'Private Sub btnNPCEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNPCEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditNpc()
-    'End Sub
-
-    'Private Sub btnSkillEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSkillEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditSkill()
-    'End Sub
-
-    'Private Sub btnShopEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShopEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditShop()
-    'End Sub
-
-    'Private Sub btnAnimationEditor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAnimationEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditAnimation()
-    'End Sub
-
-    'Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        Exit Sub
-    '    End If
-
-    '    SendRequestEditQuest()
-    'End Sub
-
-    'Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
-    '        Exit Sub
-    '    End If
-    '    SendRequestEditHouse()
-    'End Sub
-
-    'Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
-    '    If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
-    '        Exit Sub
-    '    End If
-    '    SendRequestEditProjectiles()
-    'End Sub
 #End Region
 
 #Region "Map Report"
-    Private Sub btnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
         SendRequestMapreport()
     End Sub
 
-    Private Sub lstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub LstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -241,31 +170,30 @@ Public Class frmAdmin
 #End Region
 
 #Region "Misc"
-    Private Sub scrlSpawnItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItem.Scroll
-        lblItemSpawn.Text = "Item: " & Trim$(Item(scrlSpawnItem.Value).Name)
-        If Item(scrlSpawnItem.Value).Type = ItemType.CURRENCY Or Item(scrlSpawnItem.Value).Stackable = 1 Then
+    Private Sub CmbSpawnItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnItem.SelectedIndexChanged
+        If Item(cmbSpawnItem.SelectedIndex + 1).Type = ItemType.Currency Or Item(cmbSpawnItem.SelectedIndex + 1).Stackable = 1 Then
             scrlSpawnItemAmount.Enabled = True
-            scrlSpawnItemAmount.Maximum = 100000
+            scrlSpawnItemAmount.Maximum = 1000
             Exit Sub
         End If
         scrlSpawnItemAmount.Enabled = False
     End Sub
 
-    Private Sub scrlSpawnItemAmount_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
+    Private Sub ScrlSpawnItemAmount_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
         lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
     End Sub
 
-    Private Sub btnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
-        If GetPlayerAccess(MyIndex) < AdminType.CREATOR Then
+    Private Sub BtnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Creator Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
 
-        SendSpawnItem(scrlSpawnItem.Value, scrlSpawnItemAmount.Value)
+        SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, scrlSpawnItemAmount.Value)
     End Sub
 
-    Private Sub btnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click
-        If GetPlayerAccess(MyIndex) < AdminType.DEVELOPER Then
+    Private Sub BtnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -274,8 +202,8 @@ Public Class frmAdmin
 
     End Sub
 
-    Private Sub btnALoc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnALoc.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnALoc_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnALoc.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -283,8 +211,8 @@ Public Class frmAdmin
         BLoc = Not BLoc
     End Sub
 
-    Private Sub btnRespawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRespawn.Click
-        If GetPlayerAccess(MyIndex) < AdminType.MAPPER Then
+    Private Sub BtnRespawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRespawn.Click
+        If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -293,9 +221,5 @@ Public Class frmAdmin
     End Sub
 
 #End Region
-
-
-
-
 
 End Class

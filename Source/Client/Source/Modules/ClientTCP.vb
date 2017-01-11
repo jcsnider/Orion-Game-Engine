@@ -698,7 +698,7 @@ Module ClientTCP
     Sub PlayerSearch(ByVal CurX As Integer, ByVal CurY As Integer, ByVal RClick As Byte)
         Dim Buffer As ByteBuffer
 
-        If isInBounds() Then
+        If IsInBounds() Then
             Buffer = New ByteBuffer
             Buffer.WriteInteger(ClientPackets.CSearch)
             Buffer.WriteInteger(CurX)

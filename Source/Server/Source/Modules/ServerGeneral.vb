@@ -372,7 +372,7 @@ Module ServerGeneral
     End Sub
 
     ' Used for checking validity of names
-    Function isNameLegal(ByVal sInput As Integer) As Boolean
+    Function IsNameLegal(ByVal sInput As Integer) As Boolean
 
         If (sInput >= 65 And sInput <= 90) Or (sInput >= 97 And sInput <= 122) Or (sInput = 95) Or (sInput = 32) Or (sInput >= 48 And sInput <= 57) Then
             Return True

@@ -1,8 +1,6 @@
 ﻿Imports System.Drawing
 
 Module ClientConstants
-    Public Const INSTANCED_MAP_MASK As Long = 16777216 '1 << 24
-    Public Const MAP_NUMBER_MASK As Long = INSTANCED_MAP_MASK - 1
 
     'Graphics
     Public Const FPS_LIMIT As Integer = 64
@@ -79,7 +77,7 @@ Module ClientConstants
     Public ITEM_RARITY_COLOR_0 = SFML.Graphics.Color.White ' white
     Public ITEM_RARITY_COLOR_1 = New SFML.Graphics.Color(102, 255, 0) ' green
     Public ITEM_RARITY_COLOR_2 = New SFML.Graphics.Color(73, 151, 208) ' blue
-    Public ITEM_RARITY_COLOR_3 = New SFML.Graphics.Color(128, 0, 0) ' red
+    Public ITEM_RARITY_COLOR_3 = New SFML.Graphics.Color(255, 0, 0) ' red
     Public ITEM_RARITY_COLOR_4 = New SFML.Graphics.Color(159, 0, 197) ' purple
     Public ITEM_RARITY_COLOR_5 = New SFML.Graphics.Color(255, 215, 0) ' gold
 

@@ -4,6 +4,8 @@
 
     Public SelectedTab As Byte
 
+    Public FPS As Integer
+
     Public GameStarted As Boolean
     Public GameDestroyed As Boolean
 

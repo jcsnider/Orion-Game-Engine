@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_DarkMapEditor
+Partial Class FrmEditor_DarkMapEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,12 +22,13 @@ Partial Class frmEditor_DarkMapEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_DarkMapEditor))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor_DarkMapEditor))
         Me.DarkDockPanel1 = New DarkUI.Docking.DarkDockPanel()
         Me.ToolStripContainer2 = New System.Windows.Forms.ToolStripContainer()
         Me.ssInfo = New DarkUI.Controls.DarkStatusStrip()
         Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsCurFps = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DarkSectionPanel1 = New DarkUI.Controls.DarkSectionPanel()
         Me.pnlTiles = New System.Windows.Forms.Panel()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -257,7 +258,7 @@ Partial Class frmEditor_DarkMapEditor
         Me.ssInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.ssInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ssInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.ssInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY})
+        Me.ssInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY, Me.tsCurFps})
         Me.ssInfo.Location = New System.Drawing.Point(0, 0)
         Me.ssInfo.Name = "ssInfo"
         Me.ssInfo.Padding = New System.Windows.Forms.Padding(0, 5, 0, 3)
@@ -278,6 +279,12 @@ Partial Class frmEditor_DarkMapEditor
         Me.tslCurXY.Name = "tslCurXY"
         Me.tslCurXY.Size = New System.Drawing.Size(50, 15)
         Me.tslCurXY.Text = "X:1 - Y:1"
+        '
+        'tsCurFps
+        '
+        Me.tsCurFps.Name = "tsCurFps"
+        Me.tsCurFps.Size = New System.Drawing.Size(81, 15)
+        Me.tsCurFps.Text = "Current FPS: 0"
         '
         'DarkSectionPanel1
         '
@@ -300,6 +307,8 @@ Partial Class frmEditor_DarkMapEditor
         '
         'pnlTiles
         '
+        Me.pnlTiles.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlTiles.Controls.Add(Me.cmbAutoTile)
         Me.pnlTiles.Controls.Add(Me.DarkLabel4)
@@ -311,13 +320,14 @@ Partial Class frmEditor_DarkMapEditor
         Me.pnlTiles.Controls.Add(Me.scrlPictureX)
         Me.pnlTiles.Controls.Add(Me.DarkLabel2)
         Me.pnlTiles.Controls.Add(Me.DarkLabel1)
-        Me.pnlTiles.Location = New System.Drawing.Point(0, 52)
+        Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
         Me.pnlTiles.Name = "pnlTiles"
-        Me.pnlTiles.Size = New System.Drawing.Size(318, 546)
+        Me.pnlTiles.Size = New System.Drawing.Size(316, 546)
         Me.pnlTiles.TabIndex = 0
         '
         'cmbAutoTile
         '
+        Me.cmbAutoTile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbAutoTile.ForeColor = System.Drawing.Color.LightGray
         Me.cmbAutoTile.FormattingEnabled = True
@@ -329,6 +339,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'DarkLabel4
         '
+        Me.DarkLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DarkLabel4.AutoSize = True
         Me.DarkLabel4.BackColor = System.Drawing.Color.Transparent
         Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
@@ -340,6 +351,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'cmbLayers
         '
+        Me.cmbLayers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbLayers.ForeColor = System.Drawing.Color.LightGray
         Me.cmbLayers.FormattingEnabled = True
@@ -351,6 +363,8 @@ Partial Class frmEditor_DarkMapEditor
         '
         'pnlBack
         '
+        Me.pnlBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlBack.BackColor = System.Drawing.Color.Black
         Me.pnlBack.Controls.Add(Me.picBackSelect)
         Me.pnlBack.Location = New System.Drawing.Point(3, 3)
@@ -369,6 +383,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'DarkLabel3
         '
+        Me.DarkLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DarkLabel3.AutoSize = True
         Me.DarkLabel3.BackColor = System.Drawing.Color.Transparent
         Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
@@ -380,6 +395,8 @@ Partial Class frmEditor_DarkMapEditor
         '
         'scrlPictureY
         '
+        Me.scrlPictureY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
         Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
         Me.scrlPictureY.Name = "scrlPictureY"
@@ -388,6 +405,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'cmbTileSets
         '
+        Me.cmbTileSets.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.cmbTileSets.ForeColor = System.Drawing.Color.LightGray
         Me.cmbTileSets.FormattingEnabled = True
@@ -398,6 +416,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'scrlPictureX
         '
+        Me.scrlPictureX.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
         Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
         Me.scrlPictureX.Name = "scrlPictureX"
@@ -407,6 +426,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'DarkLabel2
         '
+        Me.DarkLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DarkLabel2.AutoSize = True
         Me.DarkLabel2.BackColor = System.Drawing.Color.Transparent
         Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
@@ -418,6 +438,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         'DarkLabel1
         '
+        Me.DarkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DarkLabel1.AutoSize = True
         Me.DarkLabel1.BackColor = System.Drawing.Color.Transparent
         Me.DarkLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1770,6 +1791,7 @@ Partial Class frmEditor_DarkMapEditor
         '
         Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbHeal.FormattingEnabled = True
+        Me.cmbHeal.Items.AddRange(New Object() {"Hp", "Mp"})
         Me.cmbHeal.Location = New System.Drawing.Point(7, 19)
         Me.cmbHeal.Name = "cmbHeal"
         Me.cmbHeal.Size = New System.Drawing.Size(192, 21)
@@ -1984,7 +2006,7 @@ Partial Class frmEditor_DarkMapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
-        'frmEditor_DarkMapEditor
+        'FrmEditor_DarkMapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1995,8 +2017,8 @@ Partial Class frmEditor_DarkMapEditor
         Me.Controls.Add(Me.DarkSectionPanel1)
         Me.Controls.Add(Me.ToolStripContainer2)
         Me.Controls.Add(Me.DarkDockPanel1)
-        Me.Name = "frmEditor_DarkMapEditor"
-        Me.Text = "frmEditor_DarkMapEditor"
+        Me.Name = "FrmEditor_DarkMapEditor"
+        Me.Text = "Map Editor"
         Me.ToolStripContainer2.ContentPanel.ResumeLayout(False)
         Me.ToolStripContainer2.ResumeLayout(False)
         Me.ToolStripContainer2.PerformLayout()
@@ -2223,4 +2245,5 @@ Partial Class frmEditor_DarkMapEditor
     Friend WithEvents lblMapGreen As DarkUI.Controls.DarkLabel
     Friend WithEvents scrlMapRed As DarkUI.Controls.DarkScrollBar
     Friend WithEvents lblMapRed As DarkUI.Controls.DarkLabel
+    Friend WithEvents tsCurFps As ToolStripStatusLabel
 End Class

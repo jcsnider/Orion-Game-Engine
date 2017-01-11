@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Language.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Strings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Xml.vb" />
   </ItemGroup>
 </Project>

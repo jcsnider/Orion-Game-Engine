@@ -180,30 +180,57 @@ Module ClientDataBase
 
 #Region "Options"
     Public Sub SaveOptions()
-        Dim FileName As String
+        'Dim FileName As String
 
-        FileName = Application.StartupPath & "\Data Files\config.ini"
+        'FileName = Application.StartupPath & "\Data Files\onfig.ini"
 
-        PutVar(FileName, "Options", "Username", Trim$(Options.Username))
-        PutVar(FileName, "Options", "Password", Trim$(Options.Password))
-        PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
-        PutVar(FileName, "Options", "IP", Options.IP)
-        PutVar(FileName, "Options", "Port", Str(Options.Port))
-        PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
-        PutVar(FileName, "Options", "Music", Str(Options.Music))
-        PutVar(FileName, "Options", "Sound", Str(Options.Sound))
-        PutVar(FileName, "Options", "Volume", Str(Options.Volume))
-        PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
-        PutVar(FileName, "Options", "HighEnd", Str(Options.HighEnd))
-        PutVar(FileName, "Options", "ShowNpcBar", Str(Options.ShowNpcBar))
+        'PutVar(FileName, "Options", "Username", Trim$(Options.Username))
+        'PutVar(FileName, "Options", "Password", Trim$(Options.Password))
+        'PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
+        'PutVar(FileName, "Options", "IP", Options.IP)
+        'PutVar(FileName, "Options", "Port", Str(Options.Port))
+        'PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
+        'PutVar(FileName, "Options", "Music", Str(Options.Music))
+        'PutVar(FileName, "Options", "Sound", Str(Options.Sound))
+        'PutVar(FileName, "Options", "Volume", Str(Options.Volume))
+        'PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
+        'PutVar(FileName, "Options", "HighEnd", Str(Options.HighEnd))
+        'PutVar(FileName, "Options", "ShowNpcBar", Str(Options.ShowNpcBar))
+
+        SaveXMLOptions()
+    End Sub
+
+    Public Sub SaveXMLOptions()
+        Dim myXml As New XmlClass With {
+            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Root = "Options"
+        }
+
+        myXml.WriteString("UserInfo", "Username", Trim$(Options.Username))
+        myXml.WriteString("UserInfo", "Password", Trim$(Options.Password))
+        myXml.WriteString("UserInfo", "SavePass", Trim$(Options.SavePass))
+
+        myXml.WriteString("Connection", "Ip", Trim$(Options.IP))
+        myXml.WriteString("Connection", "Port", Trim$(Options.Port))
+
+        myXml.WriteString("Sfx", "MenuMusic", Trim$(Options.MenuMusic))
+        myXml.WriteString("Sfx", "Music", Trim$(Options.Music))
+        myXml.WriteString("Sfx", "Sound", Trim$(Options.Sound))
+        myXml.WriteString("Sfx", "Volume", Trim$(Options.Volume))
+
+        myXml.WriteString("Misc", "ScreenSize", Trim$(Options.ScreenSize))
+        myXml.WriteString("Misc", "HighEnd", Trim$(Options.HighEnd))
+        myXml.WriteString("Misc", "ShowNpcBar", Trim$(Options.ShowNpcBar))
+
     End Sub
 
     Public Sub LoadOptions()
-        Dim FileName As String
+        Dim myXml As New XmlClass With {
+            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Root = "Options"
+        }
 
-        FileName = Application.StartupPath & "\Data Files\config.ini"
-
-        If Not FileExist(FileName) Then
+        If Not FileExist(myXml.Filename) Then
             Options.Password = ""
             Options.SavePass = False
             Options.Username = ""
@@ -217,23 +244,23 @@ Module ClientDataBase
             Options.HighEnd = 0
             Options.ShowNpcBar = 0
             SaveOptions()
+            'SaveXMLOptions()
         Else
-            Options.Username = Getvar(FileName, "Options", "Username")
-            Options.Password = Getvar(FileName, "Options", "Password")
-            Options.SavePass = Getvar(FileName, "Options", "SavePass")
-            Options.IP = Getvar(FileName, "Options", "IP")
-            Options.Port = Val(Getvar(FileName, "Options", "Port"))
-            Options.MenuMusic = Getvar(FileName, "Options", "MenuMusic")
-            Options.Music = Getvar(FileName, "Options", "Music")
-            Options.Sound = Getvar(FileName, "Options", "Sound")
-            If Getvar(FileName, "Options", "Volume") = "" Then
-                Options.Volume = 100
-                SaveOptions()
-            End If
-            Options.Volume = Val(Getvar(FileName, "Options", "Volume"))
-            Options.ScreenSize = Getvar(FileName, "Options", "ScreenSize")
-            Options.HighEnd = Val(Getvar(FileName, "Options", "HighEnd"))
-            Options.ShowNpcBar = Val(Getvar(FileName, "Options", "ShowNpcBar"))
+            Options.Username = myXml.ReadString("UserInfo", "Username", "") 'Getvar(FileName, "Options", "Username")
+            Options.Password = myXml.ReadString("UserInfo", "Password", "") 'Getvar(FileName, "Options", "Password")
+            Options.SavePass = myXml.ReadString("UserInfo", "SavePass", "False") 'Getvar(FileName, "Options", "SavePass")
+
+            Options.IP = myXml.ReadString("Connection", "Ip", "127.0.0.1") 'Getvar(FileName, "Options", "IP")
+            Options.Port = Val(myXml.ReadString("Connection", "Port", "7001")) 'Getvar(FileName, "Options", "Port"))
+
+            Options.MenuMusic = myXml.ReadString("Sfx", "MenuMusic", "") 'Getvar(FileName, "Options", "MenuMusic")
+            Options.Music = myXml.ReadString("Sfx", "Music", "1") 'Getvar(FileName, "Options", "Music")
+            Options.Sound = myXml.ReadString("Sfx", "Sound", "1") 'Getvar(FileName, "Options", "Sound")
+            Options.Volume = Val(myXml.ReadString("Sfx", "Volume", "100")) 'Getvar(FileName, "Options", "Volume"))
+
+            Options.ScreenSize = myXml.ReadString("Misc", "ScreenSize", "0") 'Getvar(FileName, "Options", "ScreenSize")
+            Options.HighEnd = Val(myXml.ReadString("Misc", "HighEnd", "0")) 'Getvar(FileName, "Options", "HighEnd"))
+            Options.ShowNpcBar = Val(myXml.ReadString("Misc", "ShowNpcBar", "1")) 'Getvar(FileName, "Options", "ShowNpcBar"))
         End If
 
         ' show in GUI

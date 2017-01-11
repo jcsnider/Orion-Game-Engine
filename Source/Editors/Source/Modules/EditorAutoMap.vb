@@ -89,7 +89,7 @@
 
     Sub OpenAutomapper()
         LoadTilePrefab()
-        frmAutoMapper.Visible = True
+        FrmAutoMapper.Visible = True
     End Sub
 
     Sub LoadTilePrefab()

@@ -217,7 +217,7 @@ Module ServerHandleData
                 For i = 1 To Len(username)
                     n = AscW(Mid$(username, i, 1))
 
-                    If Not isNameLegal(n) Then
+                    If Not IsNameLegal(n) Then
                         AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
                         Exit Sub
                     End If
@@ -432,7 +432,7 @@ Module ServerHandleData
             For i = 1 To Len(Name)
                 n = AscW(Mid$(Name, i, 1))
 
-                If Not isNameLegal(n) Then
+                If Not IsNameLegal(n) Then
                     AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
                     Exit Sub
                 End If
@@ -1993,7 +1993,10 @@ Module ServerHandleData
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
         If buffer.ReadInteger <> ClientPackets.CQuit Then Exit Sub
+
+        SendLeftGame(index)
         CloseSocket(index)
+
         buffer = Nothing
     End Sub
 

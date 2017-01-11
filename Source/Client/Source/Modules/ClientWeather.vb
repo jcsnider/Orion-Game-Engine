@@ -6,7 +6,7 @@ Imports SFML.Window
 Public Module ClientWeather
     Public Const MAX_WEATHER_PARTICLES As Integer = 100
 
-    Public WeatherParticle(0 To MAX_WEATHER_PARTICLES) As WeatherParticleRec
+    Public WeatherParticle(MAX_WEATHER_PARTICLES) As WeatherParticleRec
     Public WeatherSoundPlayer As Sound
     Public CurWeatherMusic As String
 

@@ -535,7 +535,7 @@ Module ClientPets
 
         Name = Trim$(GetPlayerName(Index)) & "'s " & Trim$(Pet(Player(Index).Pet.Num).Name)
         ' calc pos
-        TextX = ConvertMapX(Player(Index).Pet.X * PIC_X) + Player(Index).Pet.XOffset + (PIC_X \ 2) - getTextWidth(Name) / 2
+        TextX = ConvertMapX(Player(Index).Pet.X * PIC_X) + Player(Index).Pet.XOffset + (PIC_X \ 2) - GetTextWidth(Name) / 2
         If Pet(Player(Index).Pet.Num).Sprite < 1 Or Pet(Player(Index).Pet.Num).Sprite > NumCharacters Then
             TextY = ConvertMapY(Player(Index).Pet.Y * PIC_Y) + Player(Index).Pet.YOffset - 16
         Else

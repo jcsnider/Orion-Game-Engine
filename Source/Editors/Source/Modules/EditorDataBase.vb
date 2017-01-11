@@ -16,13 +16,13 @@ Module ClientDataBase
 
     End Sub
 
-    Public Function isInBounds()
-        isInBounds = False
+    Public Function IsInBounds()
+        IsInBounds = False
         If (CurX >= 0) Then
             If (CurX <= Map.MaxX) Then
                 If (CurY >= 0) Then
                     If (CurY <= Map.MaxY) Then
-                        isInBounds = True
+                        IsInBounds = True
                     End If
                 End If
             End If

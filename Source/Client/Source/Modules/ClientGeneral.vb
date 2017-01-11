@@ -9,12 +9,12 @@ Module ClientGeneral
         Return Environment.TickCount
     End Function
 
-    Sub startup()
+    Sub Startup()
         SFML.CSFML.Activate()
 
         SetStatus(Strings.Get("loadscreen", "loading"))
 
-        frmMenu.Visible = True
+        FrmMenu.Visible = True
 
         ReDim CharSelection(3)
 
@@ -127,7 +127,7 @@ Module ClientGeneral
         vbQuote = Chr(34) ' "
 
         ' Update the form with the game's name before it's loaded
-        frmMainGame.Text = GAME_NAME
+        FrmMainGame.Text = GAME_NAME
 
         SetStatus("Loading Options...")
 
@@ -139,7 +139,7 @@ Module ClientGeneral
 
         SetStatus("Initializing Network...")
 
-        frmMenu.Text = GAME_NAME
+        FrmMenu.Text = GAME_NAME
 
         ' DX7 Master Object is already created, early binding
         SetStatus("Initializing Graphics...")
@@ -196,20 +196,20 @@ Module ClientGeneral
         GameLoop()
     End Sub
 
-    Public Function isLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
+    Public Function IsLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
         If Len(Trim$(Username)) >= 3 Then
             If Len(Trim$(Password)) >= 3 Then
-                isLoginLegal = True
+                IsLoginLegal = True
             Else
-                isLoginLegal = False
+                IsLoginLegal = False
             End If
         Else
-            isLoginLegal = False
+            IsLoginLegal = False
         End If
 
     End Function
 
-    Public Function isStringLegal(ByVal sInput As String) As Boolean
+    Public Function IsStringLegal(ByVal sInput As String) As Boolean
         Dim i As Integer
 
         ' Prevent high ascii chars
@@ -217,27 +217,27 @@ Module ClientGeneral
 
             If (Asc(Mid$(sInput, i, 1))) < 32 Or Asc(Mid$(sInput, i, 1)) > 126 Then
                 MsgBox("You cannot use high ASCII characters in your name, please re-enter.", vbOKOnly, GAME_NAME)
-                isStringLegal = False
+                IsStringLegal = False
                 Exit Function
             End If
 
         Next
 
-        isStringLegal = True
+        IsStringLegal = True
     End Function
 
     Sub GameInit()
         pnlloadvisible = False
 
         ' Set the focus
-        frmMainGame.picscreen.Focus()
+        FrmMainGame.picscreen.Focus()
 
         'stop the song playing
         StopMusic()
     End Sub
 
     Public Sub SetStatus(ByVal Caption As String)
-        frmMenu.lblStatus.Text = Caption
+        FrmMenu.lblStatus.Text = Caption
     End Sub
 
     Public Sub MenuState(ByVal State As Integer)
@@ -253,10 +253,10 @@ Module ClientGeneral
                 If ConnectToServer(1) Then
                     Call SetStatus("Connected, sending character addition data...")
 
-                    If frmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, Sex.Male, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                    If FrmMenu.rdoMale.Checked = True Then
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, Sex.Male, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     Else
-                        SendAddChar(SelectedChar, frmMenu.txtCharName.Text, Sex.Female, frmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, Sex.Female, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
                     End If
                 End If
 
@@ -268,7 +268,7 @@ Module ClientGeneral
 
                 If ConnectToServer(1) Then
                     SetStatus("Connected, sending new account information...")
-                    SendNewAccount(frmMenu.txtRuser.Text, frmMenu.txtRPass.Text)
+                    SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
             Case MENU_STATE_LOGIN
@@ -276,12 +276,12 @@ Module ClientGeneral
                 pnlCharCreateVisible = False
                 pnlRegisterVisible = False
                 pnlCreditsVisible = False
-                tempUserName = frmMenu.txtLogin.Text
-                tempPassword = frmMenu.txtPassword.Text
+                tempUserName = FrmMenu.txtLogin.Text
+                tempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
                     SetStatus("Connected, sending login information...")
-                    SendLogin(frmMenu.txtLogin.Text, frmMenu.txtPassword.Text)
+                    SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
         End Select
@@ -345,9 +345,9 @@ Module ClientGeneral
         End If
 
         'then the window
-        frmMainGame.ClientSize = New Drawing.Size((SCREEN_MAPX) * PIC_X + PIC_X, (SCREEN_MAPY) * PIC_Y + PIC_Y)
-        frmMainGame.picscreen.Width = (SCREEN_MAPX) * PIC_X + PIC_X
-        frmMainGame.picscreen.Height = (SCREEN_MAPY) * PIC_Y + PIC_Y
+        FrmMainGame.ClientSize = New Drawing.Size((SCREEN_MAPX) * PIC_X + PIC_X, (SCREEN_MAPY) * PIC_Y + PIC_Y)
+        FrmMainGame.picscreen.Width = (SCREEN_MAPX) * PIC_X + PIC_X
+        FrmMainGame.picscreen.Height = (SCREEN_MAPY) * PIC_Y + PIC_Y
 
         HalfX = ((SCREEN_MAPX) \ 2) * PIC_X
         HalfY = ((SCREEN_MAPY) \ 2) * PIC_Y
@@ -360,10 +360,10 @@ Module ClientGeneral
 
         'chatwindow
         ChatWindowX = 1
-        ChatWindowY = frmMainGame.Height - ChatWindowGFXInfo.Height - 65
+        ChatWindowY = FrmMainGame.Height - ChatWindowGFXInfo.Height - 65
 
         MyChatX = 1
-        MyChatY = frmMainGame.Height - 60
+        MyChatY = FrmMainGame.Height - 60
 
         'hotbar
         If Options.ScreenSize = 0 Then
@@ -375,7 +375,7 @@ Module ClientGeneral
             PetbarY = HotbarY + 34
         Else
             HotbarX = ChatWindowX + MyChatWindowGFXInfo.Width + 50
-            HotbarY = frmMainGame.Height - HotBarGFXInfo.Height - 45
+            HotbarY = FrmMainGame.Height - HotBarGFXInfo.Height - 45
 
             'petbar
             PetbarX = HotbarX
@@ -383,26 +383,25 @@ Module ClientGeneral
         End If
 
         'action panel
-        ActionPanelX = frmMainGame.Width - ActionPanelGFXInfo.Width - 25
-        ActionPanelY = frmMainGame.Height - ActionPanelGFXInfo.Height - 45
+        ActionPanelX = FrmMainGame.Width - ActionPanelGFXInfo.Width - 25
+        ActionPanelY = FrmMainGame.Height - ActionPanelGFXInfo.Height - 45
 
         'Char Window
-        CharWindowX = frmMainGame.Width - CharPanelGFXInfo.Width - 26
-        CharWindowY = frmMainGame.Height - CharPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        CharWindowX = FrmMainGame.Width - CharPanelGFXInfo.Width - 26
+        CharWindowY = FrmMainGame.Height - CharPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
         'inv Window
-        InvWindowX = frmMainGame.Width - InvPanelGFXInfo.Width - 26
-        InvWindowY = frmMainGame.Height - InvPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        InvWindowX = FrmMainGame.Width - InvPanelGFXInfo.Width - 26
+        InvWindowY = FrmMainGame.Height - InvPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
         'skill window
-        SkillWindowX = frmMainGame.Width - SkillPanelGFXInfo.Width - 26
-        SkillWindowY = frmMainGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
+        SkillWindowX = FrmMainGame.Width - SkillPanelGFXInfo.Width - 26
+        SkillWindowY = FrmMainGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
     End Sub
 
     Public Sub DestroyGame()
-        SendLeaveGame()
-
+        'SendLeaveGame()
         ' break out of GameLoop
         InGame = False
 

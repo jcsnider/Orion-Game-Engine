@@ -62,41 +62,36 @@
 
     Sub CheckMovement()
 
-        If IsTryingToMove() Then
-            If CanMove() Then
+        If IsTryingToMove() AndAlso CanMove() Then
+            ' Check if player has the shift key down for running
+            If VbKeyShift Then
+                Player(MyIndex).Moving = MovementType.Running
+            Else
+                Player(MyIndex).Moving = MovementType.Walking
+            End If
 
-                ' Check if player has the shift key down for running
-                If VbKeyShift Then
-                    Player(MyIndex).Moving = MovementType.Running
-                Else
-                    Player(MyIndex).Moving = MovementType.Walking
-                End If
+            Select Case GetPlayerDir(MyIndex)
+                Case Direction.Up
+                    SendPlayerMove()
+                    Player(MyIndex).YOffset = PIC_Y
+                    SetPlayerY(MyIndex, GetPlayerY(MyIndex) - 1)
+                Case Direction.Down
+                    SendPlayerMove()
+                    Player(MyIndex).YOffset = PIC_Y * -1
+                    Call SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
+                Case Direction.Left
+                    SendPlayerMove()
+                    Player(MyIndex).XOffset = PIC_X
+                    SetPlayerX(MyIndex, GetPlayerX(MyIndex) - 1)
+                Case Direction.Right
+                    SendPlayerMove()
+                    Player(MyIndex).XOffset = PIC_X * -1
+                    SetPlayerX(MyIndex, GetPlayerX(MyIndex) + 1)
+            End Select
 
-                Select Case GetPlayerDir(MyIndex)
-                    Case Direction.Up
-                        SendPlayerMove()
-                        Player(MyIndex).YOffset = PIC_Y
-                        SetPlayerY(MyIndex, GetPlayerY(MyIndex) - 1)
-                    Case Direction.Down
-                        SendPlayerMove()
-                        Player(MyIndex).YOffset = PIC_Y * -1
-                        Call SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
-                    Case Direction.Left
-                        SendPlayerMove()
-                        Player(MyIndex).XOffset = PIC_X
-                        SetPlayerX(MyIndex, GetPlayerX(MyIndex) - 1)
-                    Case Direction.Right
-                        SendPlayerMove()
-                        Player(MyIndex).XOffset = PIC_X * -1
-                        SetPlayerX(MyIndex, GetPlayerX(MyIndex) + 1)
-                End Select
-
-                If Player(MyIndex).XOffset = 0 Then
-                    If Player(MyIndex).YOffset = 0 Then
-                        If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Warp Then
-                            GettingMap = True
-                        End If
-                    End If
+            If Player(MyIndex).XOffset = 0 AndAlso Player(MyIndex).YOffset = 0 Then
+                If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Warp Then
+                    GettingMap = True
                 End If
             End If
         End If
@@ -302,7 +297,7 @@
         CheckDirection = False
 
         ' check directional blocking
-        If isDirBlocked(Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).DirBlock, Direction + 1) Then
+        If IsDirBlocked(Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).DirBlock, Direction + 1) Then
             CheckDirection = True
             Exit Function
         End If

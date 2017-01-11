@@ -197,11 +197,11 @@ Module EditorLoop
 #End Region
 
     Sub GameLoop()
-        Dim dest As Point = New Point(frmEditor_DarkMapEditor.PointToScreen(frmEditor_DarkMapEditor.picScreen.Location))
-        Dim g As Graphics = frmEditor_DarkMapEditor.picScreen.CreateGraphics
+        Dim dest As Point = New Point(FrmEditor_DarkMapEditor.PointToScreen(FrmEditor_DarkMapEditor.picScreen.Location))
+        Dim g As Graphics = FrmEditor_DarkMapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
-        Dim destrect As Rectangle
+        Dim destrect As Rectangle, tmpfps As Integer
 
         starttime = GetTickCount()
 
@@ -215,6 +215,16 @@ Module EditorLoop
 
                 FrameTime = Tick
                 If InMapEditor Then
+
+                    'Calculate FPS
+                    If starttime < GetTickCount() Then
+                        FPS = tmpfps
+
+                        FrmEditor_DarkMapEditor.tsCurFps.Text = "Current FPS: " & FPS
+                        tmpfps = 0
+                        starttime = GetTickCount() + 1000
+                    End If
+                    tmpfps = tmpfps + 1
 
                     ' fog scrolling
                     If fogtmr < Tick Then
@@ -548,7 +558,7 @@ Module EditorLoop
         End If
 
         If InitAutoMapper = True Then
-            frmAutoMapper.Visible = True
+            FrmAutoMapper.Visible = True
             InitAutoMapper = False
         End If
     End Sub

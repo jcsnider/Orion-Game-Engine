@@ -74,7 +74,7 @@ Module ClientText
         Name = Trim$(Player(Index).Name)
         ' calc pos
         TextX = ConvertMapX(GetPlayerX(Index) * PIC_X) + Player(Index).XOffset + (PIC_X \ 2)
-        TextX = TextX - (getTextWidth((Trim$(Name))) / 2)
+        TextX = TextX - (GetTextWidth((Trim$(Name))) / 2)
         If GetPlayerSprite(Index) < 1 Or GetPlayerSprite(Index) > NumCharacters Then
             TextY = ConvertMapY(GetPlayerY(Index) * PIC_Y) + Player(Index).YOffset - 16
         Else
@@ -106,7 +106,7 @@ Module ClientText
                 backcolor = Color.Black
         End Select
 
-        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - getTextWidth((Trim$(Npc(npcNum).Name))) / 2
+        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 Or Npc(npcNum).Sprite > NumCharacters Then
             TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - 16
         Else
@@ -129,7 +129,7 @@ Module ClientText
         Name = Trim$(Map.MapEvents(Index).Name)
 
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth(Trim$(Name)) / 2
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
             TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
@@ -157,7 +157,7 @@ Module ClientText
                 'the npc gives this quest?
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[!]"
-                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth((Trim$("[!]"))) + 8
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$("[!]"))) + 8
                     TextY = TextY - 16
                     If Quest(i).Repeat = 1 Then
                         DrawText(TextX, TextY, Trim$(Name), Color.White, backcolor, GameWindow)
@@ -169,7 +169,7 @@ Module ClientText
             ElseIf Player(MyIndex).PlayerQuest(i).Status = QUEST_STARTED Then
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[*]"
-                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth((Trim$("[*]"))) + 8
+                    TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$("[*]"))) + 8
                     TextY = TextY - 16
                     DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
                     Exit For
@@ -273,7 +273,7 @@ Module ClientText
                         End If
                     End If
                 Next
-                X = (frmMainGame.picscreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
+                X = (FrmMainGame.picscreen.Width \ 2) - ((Len(Trim$(ActionMsg(Index).message)) \ 2) * 8)
                 y = 425
 
         End Select
@@ -289,10 +289,10 @@ Module ClientText
 
     End Sub
 
-    Public Function getTextWidth(ByVal text As String, Optional textsize As Byte = FONT_SIZE) As Integer
-        Dim mystring As Text = New Text(text, SFMLGameFont)
+    Public Function GetTextWidth(ByVal Text As String, Optional TextSize As Byte = FONT_SIZE) As Integer
+        Dim mystring As Text = New Text(Text, SFMLGameFont)
         Dim textBounds As FloatRect
-        mystring.CharacterSize = textsize
+        mystring.CharacterSize = TextSize
         textBounds = mystring.GetLocalBounds()
         Return textBounds.Width
     End Function
@@ -626,7 +626,7 @@ Module ClientText
             theArray = WordWrap(.Msg, ChatBubbleWidth)
             ' find max width
             For i = 0 To theArray.Count - 1
-                If getTextWidth(theArray(i)) > MaxWidth Then MaxWidth = getTextWidth(theArray(i))
+                If GetTextWidth(theArray(i)) > MaxWidth Then MaxWidth = GetTextWidth(theArray(i))
             Next
             ' calculate the new position
             X2 = X - (MaxWidth \ 2)
@@ -657,7 +657,7 @@ Module ClientText
 
             ' render each line centralised
             For i = 0 To theArray.Count - 1
-                DrawText(X - (getTextWidth(theArray(i)) / 2), Y2, theArray(i), ToSFMLColor(Drawing.ColorTranslator.FromOle(QBColor(.colour))), Color.Black, GameWindow)
+                DrawText(X - (GetTextWidth(theArray(i)) / 2), Y2, theArray(i), ToSFMLColor(Drawing.ColorTranslator.FromOle(QBColor(.colour))), Color.Black, GameWindow)
                 Y2 = Y2 + 12
             Next
             ' check if it's timed out - close it if so

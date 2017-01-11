@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmMenu
+Partial Class FrmMenu
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmMenu
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMenu))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu))
         Me.pnlLogin = New System.Windows.Forms.Panel()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.chkSavePass = New System.Windows.Forms.CheckBox()
@@ -650,9 +650,9 @@ Partial Class frmMenu
         Me.picLogo.BackColor = System.Drawing.Color.Transparent
         Me.picLogo.BackgroundImage = CType(resources.GetObject("picLogo.BackgroundImage"), System.Drawing.Image)
         Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picLogo.Location = New System.Drawing.Point(77, 1)
+        Me.picLogo.Location = New System.Drawing.Point(77, 30)
         Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(560, 173)
+        Me.picLogo.Size = New System.Drawing.Size(560, 144)
         Me.picLogo.TabIndex = 52
         Me.picLogo.TabStop = False
         '
@@ -812,7 +812,7 @@ Partial Class frmMenu
         '
         Me.lblCharSelect.BackColor = System.Drawing.Color.Transparent
         Me.lblCharSelect.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCharSelect.Location = New System.Drawing.Point(45, 12)
+        Me.lblCharSelect.Location = New System.Drawing.Point(44, 12)
         Me.lblCharSelect.Name = "lblCharSelect"
         Me.lblCharSelect.Size = New System.Drawing.Size(312, 33)
         Me.lblCharSelect.TabIndex = 15
@@ -852,14 +852,14 @@ Partial Class frmMenu
         Me.lblStatus.Text = "Loading text"
         Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'frmMenu
+        'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1281, 541)
+        Me.ClientSize = New System.Drawing.Size(1551, 541)
         Me.Controls.Add(Me.pnlLoad)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
@@ -880,7 +880,7 @@ Partial Class frmMenu
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "frmMenu"
+        Me.Name = "FrmMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMenu"
         Me.pnlLogin.ResumeLayout(False)

@@ -1,7 +1,4 @@
 ﻿Imports System.Drawing
-Imports System.Windows.Forms
-Imports SFML.Graphics
-Imports SFML.Window
 
 Public Module ClientCrafting
 #Region "Globals"

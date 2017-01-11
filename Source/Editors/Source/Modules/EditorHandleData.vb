@@ -270,11 +270,9 @@
 
         MapData = False
 
-        ClearMap()
-
         SyncLock MapLock
             If Buffer.ReadInteger = 1 Then
-
+                ClearMap()
                 Map.MapNum = Buffer.ReadInteger
                 Map.Name = Trim(Buffer.ReadString)
                 Map.Music = Trim(Buffer.ReadString)
@@ -515,7 +513,7 @@
 
         MusicFile = Trim$(Map.Music)
 
-        'InitMapEditor = True
+        InitMapEditor = True
         InMapEditor = True
 
         GettingMap = False

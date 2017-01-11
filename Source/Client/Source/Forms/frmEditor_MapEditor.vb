@@ -706,7 +706,7 @@ Public Class frmEditor_MapEditor
 
         CurLayer = cmbLayers.SelectedIndex + 1
 
-        If Not isInBounds() Then Exit Sub
+        If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
             If tabpages.SelectedTab Is tpTiles Then
                 ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 And (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
@@ -833,7 +833,7 @@ Public Class frmEditor_MapEditor
                     If X >= DirArrowX(i) And X <= DirArrowX(i) + 8 Then
                         If Y >= DirArrowY(i) And Y <= DirArrowY(i) + 8 Then
                             ' flip the value.
-                            setDirBlock(Map.Tile(CurX, CurY).DirBlock, (i), Not isDirBlocked(Map.Tile(CurX, CurY).DirBlock, (i)))
+                            SetDirBlock(Map.Tile(CurX, CurY).DirBlock, (i), Not IsDirBlocked(Map.Tile(CurX, CurY).DirBlock, (i)))
                             Exit Sub
                         End If
                     End If
@@ -856,7 +856,7 @@ Public Class frmEditor_MapEditor
                     If .Layer(CurLayer).AutoTile > 0 Then
                         .Layer(CurLayer).AutoTile = 0
                         ' do a re-init so we can see our changes
-                        initAutotiles()
+                        InitAutotiles()
                     End If
                     CacheRenderState(X, Y, CurLayer)
                 End With
@@ -922,7 +922,7 @@ Public Class frmEditor_MapEditor
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
-            initAutotiles()
+            InitAutotiles()
             Exit Sub
         End If
 
@@ -1003,7 +1003,7 @@ Public Class frmEditor_MapEditor
                 Next
 
                 ' do a re-init so we can see our changes
-                initAutotiles()
+                InitAutotiles()
             Else
                 For X = 0 To Map.MaxX
                     For Y = 0 To Map.MaxY

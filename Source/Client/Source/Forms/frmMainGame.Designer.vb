@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmMainGame
+Partial Class FrmMainGame
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class frmMainGame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainGame))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
         Me.pnlTmpInv = New System.Windows.Forms.Panel()
         Me.pnlCurrency = New System.Windows.Forms.Panel()
@@ -130,7 +130,7 @@ Partial Class frmMainGame
         Me.pnlTmpSkill.TabIndex = 42
         Me.pnlTmpSkill.Visible = False
         '
-        'frmMainGame
+        'FrmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -146,7 +146,7 @@ Partial Class frmMainGame
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "frmMainGame"
+        Me.Name = "FrmMainGame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMainGame"
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).EndInit()

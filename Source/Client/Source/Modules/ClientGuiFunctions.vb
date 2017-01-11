@@ -228,7 +228,8 @@ Public Module ClientGuiFunctions
                     ElseIf X > ActionPanelX + ExitBtnX And X < ActionPanelX + ExitBtnX + 48 And Y > ActionPanelY + ExitBtnY And Y < ActionPanelY + ExitBtnY + 32 Then
                         PlaySound("Click.ogg")
                         frmAdmin.Dispose()
-                        DestroyGame()
+                        SendLeaveGame()
+                        'DestroyGame()
 
                         CheckGuiClick = True
                     End If
@@ -448,7 +449,7 @@ Public Module ClientGuiFunctions
 
         If pnlBankVisible = True Then
             If AboveBankpanel(X, Y) Then
-                If X > BankWindowX + 140 And X < BankWindowX + 140 + getTextWidth("Close Bank", 15) Then
+                If X > BankWindowX + 140 And X < BankWindowX + 140 + GetTextWidth("Close Bank", 15) Then
                     If Y > BankWindowY + BankPanelGFXInfo.Height - 15 And Y < BankWindowY + BankPanelGFXInfo.Height Then
                         PlaySound("Click.ogg")
                         CloseBank()
@@ -487,7 +488,7 @@ Public Module ClientGuiFunctions
             If AboveEventChat(X, Y) Then
                 'Response1
                 If EventChoiceVisible(1) Then
-                    If X > EventChatX + 10 And X < EventChatX + 10 + getTextWidth(EventChoices(1)) Then
+                    If X > EventChatX + 10 And X < EventChatX + 10 + GetTextWidth(EventChoices(1)) Then
                         If Y > EventChatY + 124 And Y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
@@ -505,7 +506,7 @@ Public Module ClientGuiFunctions
 
                 'Response2
                 If EventChoiceVisible(2) Then
-                    If X > EventChatX + 10 And X < EventChatX + 10 + getTextWidth(EventChoices(2)) Then
+                    If X > EventChatX + 10 And X < EventChatX + 10 + GetTextWidth(EventChoices(2)) Then
                         If Y > EventChatY + 146 And Y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
@@ -523,7 +524,7 @@ Public Module ClientGuiFunctions
 
                 'Response3
                 If EventChoiceVisible(3) Then
-                    If X > EventChatX + 226 And X < EventChatX + 226 + getTextWidth(EventChoices(3)) Then
+                    If X > EventChatX + 226 And X < EventChatX + 226 + GetTextWidth(EventChoices(3)) Then
                         If Y > EventChatY + 124 And Y < EventChatY + 124 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
@@ -541,7 +542,7 @@ Public Module ClientGuiFunctions
 
                 'Response4
                 If EventChoiceVisible(4) Then
-                    If X > EventChatX + 226 And X < EventChatX + 226 + getTextWidth(EventChoices(4)) Then
+                    If X > EventChatX + 226 And X < EventChatX + 226 + GetTextWidth(EventChoices(4)) Then
                         If Y > EventChatY + 146 And Y < EventChatY + 146 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
@@ -559,7 +560,7 @@ Public Module ClientGuiFunctions
 
                 'continue
                 If EventChatType <> 1 Then
-                    If X > EventChatX + 410 And X < EventChatX + 410 + getTextWidth("Continue") Then
+                    If X > EventChatX + 410 And X < EventChatX + 410 + GetTextWidth("Continue") Then
                         If Y > EventChatY + 156 And Y < EventChatY + 156 + 13 Then
                             PlaySound("Click.ogg")
                             Buffer = New ByteBuffer
@@ -582,7 +583,7 @@ Public Module ClientGuiFunctions
         If pnlRClickVisible = True Then
             If AboveRClickPanel(X, Y) Then
                 'trade
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Trade") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Trade") \ 2) + getTextWidth("Invite to Trade") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2) + GetTextWidth("Invite to Trade") Then
                     If Y > RClickY + 35 And Y < RClickY + 35 + 12 Then
                         If myTarget > 0 Then
                             SendTradeRequest(Player(myTarget).Name)
@@ -592,7 +593,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 'party
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Party") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to Party") \ 2) + getTextWidth("Invite to Party") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2) + GetTextWidth("Invite to Party") Then
                     If Y > RClickY + 60 And Y < RClickY + 60 + 12 Then
                         If myTarget > 0 Then
                             SendPartyRequest(Player(myTarget).Name)
@@ -602,7 +603,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 'House
-                If X > RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (getTextWidth("Invite to House") \ 2) + getTextWidth("Invite to House") Then
+                If X > RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) And X < RClickX + (RClickGFXInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) + GetTextWidth("Invite to House") Then
                     If Y > RClickY + 85 And Y < RClickY + 85 + 12 Then
                         If myTarget > 0 Then
                             SendInvite(Player(myTarget).Name)
@@ -621,7 +622,7 @@ Public Module ClientGuiFunctions
                 Dim tmpy As Integer = 10
                 For i = 1 To MAX_ACTIVEQUESTS
                     If Len(Trim$(QuestNames(i))) > 0 Then
-                        If X > (QuestLogX + 7) And X < (QuestLogX + 7) + (getTextWidth(QuestNames(i))) Then
+                        If X > (QuestLogX + 7) And X < (QuestLogX + 7) + (GetTextWidth(QuestNames(i))) Then
                             If Y > (QuestLogY + tmpy) And Y < (QuestLogY + tmpy + 13) Then
                                 SelectedQuest = i
                                 LoadQuestlogBox()
@@ -648,7 +649,7 @@ Public Module ClientGuiFunctions
                 Dim tmpy As Integer = 10
                 For i = 1 To MAX_RECIPE
                     If Len(Trim$(RecipeNames(i))) > 0 Then
-                        If X > (CraftPanelX + 12) And X < (CraftPanelX + 12) + (getTextWidth(RecipeNames(i))) Then
+                        If X > (CraftPanelX + 12) And X < (CraftPanelX + 12) + (GetTextWidth(RecipeNames(i))) Then
                             If Y > (CraftPanelY + tmpy) And Y < (CraftPanelY + tmpy + 13) Then
                                 SelectedRecipe = i
                                 CraftingInit()
@@ -737,12 +738,12 @@ Public Module ClientGuiFunctions
                     If InBank Then
                         If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                             CurrencyMenu = 2 ' deposit
-                            frmMainGame.lblCurrency.Text = "How many do you want to deposit?"
+                            FrmMainGame.lblCurrency.Text = "How many do you want to deposit?"
                             tmpCurrencyItem = InvNum
-                            frmMainGame.txtCurrency.Text = ""
-                            frmMainGame.pnlCurrency.Visible = True
-                            frmMainGame.pnlCurrency.BringToFront()
-                            frmMainGame.txtCurrency.Focus()
+                            FrmMainGame.txtCurrency.Text = ""
+                            FrmMainGame.pnlCurrency.Visible = True
+                            FrmMainGame.pnlCurrency.BringToFront()
+                            FrmMainGame.txtCurrency.Focus()
                             Exit Function
                         End If
                         DepositItem(InvNum, 0)
@@ -798,11 +799,11 @@ Public Module ClientGuiFunctions
 
                     If Item(GetBankItemNum(BankItem)).Type = ItemType.Currency Or Item(GetBankItemNum(BankItem)).Stackable = 1 Then
                         CurrencyMenu = 3 ' withdraw
-                        frmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
+                        FrmMainGame.lblCurrency.Text = "How many do you want to withdraw?"
                         tmpCurrencyItem = BankItem
-                        frmMainGame.txtCurrency.Text = ""
-                        frmMainGame.pnlCurrency.Visible = True
-                        frmMainGame.txtCurrency.Focus()
+                        FrmMainGame.txtCurrency.Text = ""
+                        FrmMainGame.pnlCurrency.Visible = True
+                        FrmMainGame.txtCurrency.Focus()
                         Exit Function
                     End If
 
@@ -859,7 +860,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragInvSlotNum = 0
-                frmMainGame.pnlTmpInv.Visible = False
+                FrmMainGame.pnlTmpInv.Visible = False
             Else
                 If FurnitureSelected > 0 Then
                     If Player(MyIndex).InHouse = MyIndex Then
@@ -912,7 +913,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragSkillSlotNum = 0
-                frmMainGame.pnlTmpSkill.Visible = False
+                FrmMainGame.pnlTmpSkill.Visible = False
             End If
         End If
 
@@ -941,7 +942,7 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragBankSlotNum = 0
-                frmMainGame.pnlTempBank.Visible = False
+                FrmMainGame.pnlTempBank.Visible = False
             End If
         End If
 
@@ -967,11 +968,11 @@ Public Module ClientGuiFunctions
                             If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
                                 If GetPlayerInvItemValue(MyIndex, InvNum) > 0 Then
                                     CurrencyMenu = 1 ' drop
-                                    frmMainGame.lblCurrency.Text = "How many do you want to drop?"
+                                    FrmMainGame.lblCurrency.Text = "How many do you want to drop?"
                                     tmpCurrencyItem = InvNum
-                                    frmMainGame.txtCurrency.Text = ""
-                                    frmMainGame.pnlCurrency.Visible = True
-                                    frmMainGame.txtCurrency.Focus()
+                                    FrmMainGame.txtCurrency.Text = ""
+                                    FrmMainGame.pnlCurrency.Visible = True
+                                    FrmMainGame.txtCurrency.Focus()
                                 End If
                             Else
                                 SendDropItem(InvNum, 0)

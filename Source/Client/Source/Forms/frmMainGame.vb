@@ -1,20 +1,21 @@
 ﻿Imports System.Windows.Forms
 
-Public Class frmMainGame
+Public Class FrmMainGame
 #Region "Frm Code"
 
-    Private Sub frmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Sub FrmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         RePositionGUI()
 
         frmAdmin.Visible = False
     End Sub
 
-    Private Sub frmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
+    Private Sub FrmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
         frmAdmin.Dispose()
-        DestroyGame()
+        'DestroyGame()
+        SendLeaveGame()
     End Sub
 
-    Private Sub frmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub FrmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
 
         If inChat = True Then
             If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
@@ -53,7 +54,7 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub frmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
+    Private Sub FrmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
         Dim skillnum As Integer
         If e.KeyCode = Keys.S Then VbKeyDown = False
         If e.KeyCode = Keys.W Then VbKeyUp = False
@@ -151,7 +152,7 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub lblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
+    Private Sub LblCurrencyOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lblCurrencyOk.Click
         If IsNumeric(txtCurrency.Text) Then
             Select Case CurrencyMenu
                 Case 1 ' drop item
@@ -172,7 +173,7 @@ Public Class frmMainGame
 #End Region
 
 #Region "PicScreen Code"
-    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
+    Private Sub Picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseDown
         If Not CheckGuiClick(e.X, e.Y, e) Then
 
             If InMapEditor Then
@@ -185,7 +186,7 @@ Public Class frmMainGame
                 ' if we're in the middle of choose the trade target or not
                 If Not TradeRequest Then
                     If PetAlive(MyIndex) Then
-                        If isInBounds() Then
+                        If IsInBounds() Then
                             PetMove(CurX, CurY)
                         End If
                     End If
@@ -216,16 +217,16 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub picscreen_DoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.DoubleClick
+    Private Sub Picscreen_DoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.DoubleClick
         CheckGuiDoubleClick(e.X, e.Y, e)
     End Sub
 
-    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picscreen.Paint
+    Private Overloads Sub Picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picscreen.Paint
         'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
         Exit Sub
     End Sub
 
-    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseMove
+    Private Sub Picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseMove
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
         CurMouseX = e.Location.X
@@ -240,13 +241,13 @@ Public Class frmMainGame
 
     End Sub
 
-    Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
+    Private Sub Picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picscreen.MouseUp
         CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
         CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
         CheckGuiMouseUp(e.X, e.Y, e)
     End Sub
 
-    Private Sub picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
+    Private Sub Picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
         Dim skillnum As Integer
         If e.KeyCode = Keys.S Then VbKeyDown = True
         If e.KeyCode = Keys.W Then VbKeyUp = True
@@ -340,7 +341,7 @@ Public Class frmMainGame
         End If
     End Sub
 
-    Private Sub picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
+    Private Sub Picscreen_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyUp
 
         If e.KeyCode = Keys.S Then VbKeyDown = False
         If e.KeyCode = Keys.W Then VbKeyUp = False
@@ -362,7 +363,7 @@ Public Class frmMainGame
 
 #Region "Quest Code"
 
-    Private Sub lblAbandonQuest_Click(sender As Object, e As EventArgs)
+    Private Sub LblAbandonQuest_Click(sender As Object, e As EventArgs)
         'Dim QuestNum As Integer = GetQuestNum(Trim$(lstQuestLog.Text))
         'If Trim$(lstQuestLog.Text) = "" Then Exit Sub
 
@@ -386,7 +387,7 @@ Public Class frmMainGame
 
 #Region "Crafting"
 
-    Private Sub chkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub ChkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
         CraftingInit()
     End Sub
 

@@ -406,7 +406,7 @@ Module ServerPlayers
             GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
 
             TextAdd(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
-            SendLeftGame(Index)
+            SendLeftMap(Index)
 
             TempPlayer(Index) = Nothing
             ReDim TempPlayer(i).SkillCD(MAX_PLAYER_SKILLS)
@@ -446,7 +446,7 @@ Module ServerPlayers
                 If GetPlayerY(Index) > 0 Then
 
                     ' Check to make sure that the tile is walkable
-                    If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Up + 1) Then
+                    If Not IsDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Up + 1) Then
                         If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) - 1).Type <> TileType.Resource Then
 
@@ -477,7 +477,7 @@ Module ServerPlayers
                 If GetPlayerY(Index) < Map(MapNum).MaxY Then
 
                     ' Check to make sure that the tile is walkable
-                    If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Down + 1) Then
+                    If Not IsDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Down + 1) Then
                         If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index) + 1).Type <> TileType.Resource Then
 
@@ -507,7 +507,7 @@ Module ServerPlayers
                 If GetPlayerX(Index) > 0 Then
 
                     ' Check to make sure that the tile is walkable
-                    If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Left + 1) Then
+                    If Not IsDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Left + 1) Then
                         If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) - 1, GetPlayerY(Index)).Type <> TileType.Resource Then
 
@@ -538,7 +538,7 @@ Module ServerPlayers
                 If GetPlayerX(Index) < Map(MapNum).MaxX Then
 
                     ' Check to make sure that the tile is walkable
-                    If Not isDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Right + 1) Then
+                    If Not IsDirBlocked(Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index), GetPlayerY(Index)).DirBlock, Direction.Right + 1) Then
                         If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(Index)).Tile(GetPlayerX(Index) + 1, GetPlayerY(Index)).Type <> TileType.Resource Then
 
@@ -812,11 +812,11 @@ Module ServerPlayers
 
     End Sub
 
-    Public Function isDirBlocked(ByRef Blockvar As Byte, ByRef Dir As Byte) As Boolean
+    Public Function IsDirBlocked(ByRef Blockvar As Byte, ByRef Dir As Byte) As Boolean
         If Not Blockvar And (2 ^ Dir) Then
-            isDirBlocked = False
+            IsDirBlocked = False
         Else
-            isDirBlocked = True
+            IsDirBlocked = True
         End If
     End Function
 

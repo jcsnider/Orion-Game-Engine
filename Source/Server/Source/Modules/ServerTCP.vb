@@ -281,8 +281,8 @@ Module ServerTCP
     End Sub
 
     Sub CloseSocket(ByVal Index As Integer)
-        Try
-            If Index > 0 Then
+        'Try
+        If Index > 0 Then
                 If (Clients(Index).Closing = True) Then Exit Sub
                 Clients(Index).Closing = True
                 LeftGame(Index)
@@ -291,9 +291,9 @@ Module ServerTCP
                 Clients(Index).Socket = Nothing
                 ClearPlayer(Index)
             End If
-        Catch ex As Exception
+        'Catch ex As Exception
 
-        End Try
+        'End Try
     End Sub
 
     Function IsPlaying(ByVal Index As Integer) As Boolean
@@ -647,7 +647,7 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
-    Sub SendLeftGame(ByVal Index As Integer)
+    Sub SendLeftMap(ByVal Index As Integer)
         Dim Buffer As ByteBuffer
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SLeftMap)
@@ -661,6 +661,15 @@ Module ServerTCP
         Buffer.WriteInteger(0)
         Buffer.WriteInteger(0)
         SendDataToAllBut(Index, Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
+    Sub SendLeftGame(ByVal Index As Integer)
+        Dim Buffer As ByteBuffer
+        Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SLeftGame)
+
+        SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
     End Sub
 

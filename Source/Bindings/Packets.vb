@@ -68,6 +68,7 @@
         SStunned
         SMapWornEq
         SBank
+        SLeftGame
 
         SClearTradeTimer
         STradeInvite

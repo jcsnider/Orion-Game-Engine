@@ -83,6 +83,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Source\Modules\ServerAutoMap.vb" />
     <Compile Include="Source\Modules\ServerCombat.vb" />
     <Compile Include="Source\Modules\ServerConsole.vb" />

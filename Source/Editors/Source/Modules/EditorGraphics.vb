@@ -102,7 +102,7 @@ Module EditorGraphics
 
     Sub InitGraphics()
 
-        GameWindow = New RenderWindow(frmEditor_DarkMapEditor.picScreen.Handle)
+        GameWindow = New RenderWindow(FrmEditor_DarkMapEditor.picScreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
@@ -389,7 +389,7 @@ Module EditorGraphics
             rec.X = (i - 1) * 8
             rec.Width = 8
             ' find out whether render blocked or not
-            If Not isDirBlocked(Map.Tile(X, Y).DirBlock, (i)) Then
+            If Not IsDirBlocked(Map.Tile(X, Y).DirBlock, (i)) Then
                 rec.Y = 8
             Else
                 rec.Y = 16
@@ -401,7 +401,7 @@ Module EditorGraphics
     End Sub
 
     ' BitWise Operators for directional blocking
-    Public Sub setDirBlock(ByRef blockvar As Byte, ByRef Dir As Byte, ByVal block As Boolean)
+    Public Sub SetDirBlock(ByRef blockvar As Byte, ByRef Dir As Byte, ByVal block As Boolean)
         If block Then
             blockvar = blockvar Or (2 ^ Dir)
         Else
@@ -409,11 +409,11 @@ Module EditorGraphics
         End If
     End Sub
 
-    Public Function isDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
+    Public Function IsDirBlocked(ByRef blockvar As Byte, ByRef Dir As Byte) As Boolean
         If Not blockvar And (2 ^ Dir) Then
-            isDirBlocked = False
+            IsDirBlocked = False
         Else
-            isDirBlocked = True
+            IsDirBlocked = True
         End If
     End Function
 
@@ -684,7 +684,7 @@ Module EditorGraphics
     Public Sub DrawMapFringeTile(ByVal X As Integer, ByVal Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim dest As Rectangle = New Rectangle(frmEditor_DarkMapEditor.PointToScreen(frmEditor_DarkMapEditor.picScreen.Location), New Size(32, 32))
+        Dim dest As Rectangle = New Rectangle(FrmEditor_DarkMapEditor.PointToScreen(FrmEditor_DarkMapEditor.picScreen.Location), New Size(32, 32))
         'Dim tmpSprite As Sprite
 
         If GettingMap Then Exit Sub
@@ -911,7 +911,7 @@ Module EditorGraphics
         Dim X As Integer, Y As Integer, I As Integer
 
         'Don't Render IF
-        'If GettingMap Then Exit Sub
+        If GettingMap Then Exit Sub
 
         'lets get going
 
@@ -924,6 +924,8 @@ Module EditorGraphics
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(Color.Black)
+
+        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)))
 
         'clear any unused gfx
         ClearGFX()
@@ -1146,7 +1148,7 @@ Module EditorGraphics
     End Sub
 
     Public Sub DrawTileOutline()
-        Dim rec As Rectangle
+        Dim rec As Rectangle, tileset As Integer
         If SelectedTab = 4 Then Exit Sub
 
         With rec
@@ -1155,6 +1157,11 @@ Module EditorGraphics
             .X = 0
             .Width = PIC_X
         End With
+
+        tileset = FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
+
+        ' exit out if doesn't exist
+        If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
 
         Dim rec2 As New RectangleShape
         rec2.OutlineColor = New SFML.Graphics.Color(Color.Blue)
@@ -1165,23 +1172,23 @@ Module EditorGraphics
             'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
-            If TileSetTextureInfo(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
-                LoadTexture(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1, 1)
+            If TileSetTextureInfo(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
+                LoadTexture(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1, 1)
             End If
             ' we use it, lets update timer
-            With TileSetTextureInfo(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1)
+            With TileSetTextureInfo(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1)
                 .TextureTimer = GetTickCount() + 100000
             End With
 
             If EditorTileWidth = 1 And EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
-                If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
+                If FrmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderSprite(TileSetSprite(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, rec.Width, rec.Height)
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
+                    RenderSprite(TileSetSprite(FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PIC_X, EditorTileSelEnd.Y * PIC_Y)
                 End If
 
@@ -1239,7 +1246,7 @@ Module EditorGraphics
         Dim tileset As Byte
 
         ' find tileset number
-        tileset = frmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
+        tileset = FrmEditor_DarkMapEditor.cmbTileSets.SelectedIndex + 1
 
         ' exit out if doesn't exist
         If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
@@ -1264,12 +1271,12 @@ Module EditorGraphics
         Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
         g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
 
-        frmEditor_DarkMapEditor.picBackSelect.Height = height
-        frmEditor_DarkMapEditor.picBackSelect.Width = width
+        FrmEditor_DarkMapEditor.picBackSelect.Height = height
+        FrmEditor_DarkMapEditor.picBackSelect.Width = width
 
         ' change selected shape for autotiles
-        If frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
-            Select Case frmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex
+        If FrmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex > 0 Then
+            Select Case FrmEditor_DarkMapEditor.cmbAutoTile.SelectedIndex
                 Case 1 ' autotile
                     EditorTileWidth = 2
                     EditorTileHeight = 3
@@ -1292,7 +1299,7 @@ Module EditorGraphics
         g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileWidth * PIC_X, EditorTileHeight * PIC_X))
         g.Dispose()
 
-        g = frmEditor_DarkMapEditor.picBackSelect.CreateGraphics
+        g = FrmEditor_DarkMapEditor.picBackSelect.CreateGraphics
         g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
         g.Dispose()
 
@@ -1353,15 +1360,15 @@ Module EditorGraphics
 
     Public Sub EditorMap_DrawMapItem()
         Dim itemnum As Integer
-        itemnum = Item(frmEditor_DarkMapEditor.scrlMapItem.Value).Pic
+        itemnum = Item(FrmEditor_DarkMapEditor.scrlMapItem.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_DarkMapEditor.picMapItem.BackgroundImage = Nothing
+            FrmEditor_DarkMapEditor.picMapItem.BackgroundImage = Nothing
             Exit Sub
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_DarkMapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+            FrmEditor_DarkMapEditor.picMapItem.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
     End Sub
@@ -1369,15 +1376,15 @@ Module EditorGraphics
     Public Sub EditorMap_DrawKey()
         Dim itemnum As Integer
 
-        itemnum = Item(frmEditor_DarkMapEditor.scrlMapKey.Value).Pic
+        itemnum = Item(FrmEditor_DarkMapEditor.scrlMapKey.Value).Pic
 
         If itemnum < 1 Or itemnum > NumItems Then
-            frmEditor_DarkMapEditor.picMapKey.BackgroundImage = Nothing
+            FrmEditor_DarkMapEditor.picMapKey.BackgroundImage = Nothing
             Exit Sub
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT) Then
-            frmEditor_DarkMapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
+            FrmEditor_DarkMapEditor.picMapKey.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "items\" & itemnum & GFX_EXT)
         End If
 
     End Sub
