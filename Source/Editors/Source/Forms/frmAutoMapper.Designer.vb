@@ -22,32 +22,6 @@ Partial Class FrmAutoMapper
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.mnsMenu = New System.Windows.Forms.MenuStrip()
-        Me.ConfigurationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TilesetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResourcesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GenerateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PathsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RiversToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MountainsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OverGrassToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResourcesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DetailsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtMapStart = New System.Windows.Forms.TextBox()
-        Me.txtMapSize = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtMapX = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtMapY = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtSandBorder = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtDetail = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtResourceFreq = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnStart = New System.Windows.Forms.Button()
         Me.pnlResources = New System.Windows.Forms.Panel()
         Me.btnSaveResource = New System.Windows.Forms.Button()
         Me.btnCloseResource = New System.Windows.Forms.Button()
@@ -74,228 +48,37 @@ Partial Class FrmAutoMapper
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbPrefab = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.mnsMenu.SuspendLayout()
+        Me.DarkMenu = New DarkUI.Controls.DarkMenuStrip()
+        Me.ConfigurationsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResourcesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerateToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PathsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RiversToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MountainsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OverGrassToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResourcesToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DetailsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
+        Me.txtMapStart = New DarkUI.Controls.DarkTextBox()
+        Me.txtMapSize = New DarkUI.Controls.DarkTextBox()
+        Me.txtMapX = New DarkUI.Controls.DarkTextBox()
+        Me.txtMapY = New DarkUI.Controls.DarkTextBox()
+        Me.txtSandBorder = New DarkUI.Controls.DarkTextBox()
+        Me.txtDetail = New DarkUI.Controls.DarkTextBox()
+        Me.txtResourceFreq = New DarkUI.Controls.DarkTextBox()
+        Me.btnStart = New DarkUI.Controls.DarkButton()
         Me.pnlResources.SuspendLayout()
         Me.pnlTileConfig.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.DarkMenu.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'mnsMenu
-        '
-        Me.mnsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigurationsToolStripMenuItem, Me.GenerateToolStripMenuItem})
-        Me.mnsMenu.Location = New System.Drawing.Point(0, 0)
-        Me.mnsMenu.Name = "mnsMenu"
-        Me.mnsMenu.Size = New System.Drawing.Size(387, 24)
-        Me.mnsMenu.TabIndex = 0
-        Me.mnsMenu.Text = "MenuStrip1"
-        '
-        'ConfigurationsToolStripMenuItem
-        '
-        Me.ConfigurationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TilesetsToolStripMenuItem, Me.ResourcesToolStripMenuItem})
-        Me.ConfigurationsToolStripMenuItem.Name = "ConfigurationsToolStripMenuItem"
-        Me.ConfigurationsToolStripMenuItem.Size = New System.Drawing.Size(98, 20)
-        Me.ConfigurationsToolStripMenuItem.Text = "Configurations"
-        '
-        'TilesetsToolStripMenuItem
-        '
-        Me.TilesetsToolStripMenuItem.Name = "TilesetsToolStripMenuItem"
-        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
-        Me.TilesetsToolStripMenuItem.Text = "Tilesets"
-        '
-        'ResourcesToolStripMenuItem
-        '
-        Me.ResourcesToolStripMenuItem.Name = "ResourcesToolStripMenuItem"
-        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
-        Me.ResourcesToolStripMenuItem.Text = "Resources"
-        '
-        'GenerateToolStripMenuItem
-        '
-        Me.GenerateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PathsToolStripMenuItem, Me.RiversToolStripMenuItem, Me.MountainsToolStripMenuItem, Me.OverGrassToolStripMenuItem, Me.ResourcesToolStripMenuItem1, Me.DetailsToolStripMenuItem})
-        Me.GenerateToolStripMenuItem.Name = "GenerateToolStripMenuItem"
-        Me.GenerateToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
-        Me.GenerateToolStripMenuItem.Text = "Generate"
-        '
-        'PathsToolStripMenuItem
-        '
-        Me.PathsToolStripMenuItem.Checked = True
-        Me.PathsToolStripMenuItem.CheckOnClick = True
-        Me.PathsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.PathsToolStripMenuItem.Name = "PathsToolStripMenuItem"
-        Me.PathsToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
-        Me.PathsToolStripMenuItem.Text = "Paths"
-        '
-        'RiversToolStripMenuItem
-        '
-        Me.RiversToolStripMenuItem.Checked = True
-        Me.RiversToolStripMenuItem.CheckOnClick = True
-        Me.RiversToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.RiversToolStripMenuItem.Name = "RiversToolStripMenuItem"
-        Me.RiversToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
-        Me.RiversToolStripMenuItem.Text = "Rivers"
-        '
-        'MountainsToolStripMenuItem
-        '
-        Me.MountainsToolStripMenuItem.Checked = True
-        Me.MountainsToolStripMenuItem.CheckOnClick = True
-        Me.MountainsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.MountainsToolStripMenuItem.Name = "MountainsToolStripMenuItem"
-        Me.MountainsToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
-        Me.MountainsToolStripMenuItem.Text = "Mountains"
-        '
-        'OverGrassToolStripMenuItem
-        '
-        Me.OverGrassToolStripMenuItem.Checked = True
-        Me.OverGrassToolStripMenuItem.CheckOnClick = True
-        Me.OverGrassToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.OverGrassToolStripMenuItem.Name = "OverGrassToolStripMenuItem"
-        Me.OverGrassToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
-        Me.OverGrassToolStripMenuItem.Text = "OverGrass"
-        '
-        'ResourcesToolStripMenuItem1
-        '
-        Me.ResourcesToolStripMenuItem1.Checked = True
-        Me.ResourcesToolStripMenuItem1.CheckOnClick = True
-        Me.ResourcesToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ResourcesToolStripMenuItem1.Name = "ResourcesToolStripMenuItem1"
-        Me.ResourcesToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
-        Me.ResourcesToolStripMenuItem1.Text = "Resources"
-        '
-        'DetailsToolStripMenuItem
-        '
-        Me.DetailsToolStripMenuItem.Checked = True
-        Me.DetailsToolStripMenuItem.CheckOnClick = True
-        Me.DetailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.DetailsToolStripMenuItem.Name = "DetailsToolStripMenuItem"
-        Me.DetailsToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
-        Me.DetailsToolStripMenuItem.Text = "Details"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 34)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Start Map:"
-        '
-        'txtMapStart
-        '
-        Me.txtMapStart.Location = New System.Drawing.Point(145, 31)
-        Me.txtMapStart.Name = "txtMapStart"
-        Me.txtMapStart.Size = New System.Drawing.Size(236, 20)
-        Me.txtMapStart.TabIndex = 2
-        Me.txtMapStart.Text = "1"
-        '
-        'txtMapSize
-        '
-        Me.txtMapSize.Location = New System.Drawing.Point(145, 57)
-        Me.txtMapSize.Name = "txtMapSize"
-        Me.txtMapSize.Size = New System.Drawing.Size(236, 20)
-        Me.txtMapSize.TabIndex = 4
-        Me.txtMapSize.Text = "4"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 60)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Island Area:"
-        '
-        'txtMapX
-        '
-        Me.txtMapX.Location = New System.Drawing.Point(145, 83)
-        Me.txtMapX.Name = "txtMapX"
-        Me.txtMapX.Size = New System.Drawing.Size(236, 20)
-        Me.txtMapX.TabIndex = 6
-        Me.txtMapX.Text = "50"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 86)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 13)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "MapSize X:"
-        '
-        'txtMapY
-        '
-        Me.txtMapY.Location = New System.Drawing.Point(145, 109)
-        Me.txtMapY.Name = "txtMapY"
-        Me.txtMapY.Size = New System.Drawing.Size(236, 20)
-        Me.txtMapY.TabIndex = 8
-        Me.txtMapY.Text = "50"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 112)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(61, 13)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "MapSize Y:"
-        '
-        'txtSandBorder
-        '
-        Me.txtSandBorder.Location = New System.Drawing.Point(145, 135)
-        Me.txtSandBorder.Name = "txtSandBorder"
-        Me.txtSandBorder.Size = New System.Drawing.Size(236, 20)
-        Me.txtSandBorder.TabIndex = 10
-        Me.txtSandBorder.Text = "4"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 138)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(69, 13)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Sand Border:"
-        '
-        'txtDetail
-        '
-        Me.txtDetail.Location = New System.Drawing.Point(145, 161)
-        Me.txtDetail.Name = "txtDetail"
-        Me.txtDetail.Size = New System.Drawing.Size(236, 20)
-        Me.txtDetail.TabIndex = 12
-        Me.txtDetail.Text = "10"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 164)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(111, 13)
-        Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Detail Frequency 1 of "
-        '
-        'txtResourceFreq
-        '
-        Me.txtResourceFreq.Location = New System.Drawing.Point(145, 187)
-        Me.txtResourceFreq.Name = "txtResourceFreq"
-        Me.txtResourceFreq.Size = New System.Drawing.Size(236, 20)
-        Me.txtResourceFreq.TabIndex = 14
-        Me.txtResourceFreq.Text = "20"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 190)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(127, 13)
-        Me.Label7.TabIndex = 13
-        Me.Label7.Text = "Resource Frequency 1 of"
-        '
-        'btnStart
-        '
-        Me.btnStart.Location = New System.Drawing.Point(15, 213)
-        Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(369, 23)
-        Me.btnStart.TabIndex = 15
-        Me.btnStart.Text = "Create The World"
-        Me.btnStart.UseVisualStyleBackColor = True
         '
         'pnlResources
         '
@@ -307,9 +90,9 @@ Partial Class FrmAutoMapper
         Me.pnlResources.Controls.Add(Me.txtResource)
         Me.pnlResources.Controls.Add(Me.Label8)
         Me.pnlResources.Controls.Add(Me.lstResources)
-        Me.pnlResources.Location = New System.Drawing.Point(4, 2)
+        Me.pnlResources.Location = New System.Drawing.Point(387, 28)
         Me.pnlResources.Name = "pnlResources"
-        Me.pnlResources.Size = New System.Drawing.Size(379, 270)
+        Me.pnlResources.Size = New System.Drawing.Size(380, 267)
         Me.pnlResources.TabIndex = 24
         Me.pnlResources.Visible = False
         '
@@ -391,9 +174,9 @@ Partial Class FrmAutoMapper
         Me.pnlTileConfig.Controls.Add(Me.Label10)
         Me.pnlTileConfig.Controls.Add(Me.cmbPrefab)
         Me.pnlTileConfig.Controls.Add(Me.Label9)
-        Me.pnlTileConfig.Location = New System.Drawing.Point(4, 2)
+        Me.pnlTileConfig.Location = New System.Drawing.Point(773, 27)
         Me.pnlTileConfig.Name = "pnlTileConfig"
-        Me.pnlTileConfig.Size = New System.Drawing.Size(379, 270)
+        Me.pnlTileConfig.Size = New System.Drawing.Size(380, 270)
         Me.pnlTileConfig.TabIndex = 25
         Me.pnlTileConfig.Visible = False
         '
@@ -543,72 +326,302 @@ Partial Class FrmAutoMapper
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Choose The Prefab:"
         '
-        'frmAutoMapper
+        'DarkMenu
+        '
+        Me.DarkMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkMenu.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfigurationsToolStripMenuItem2, Me.GenerateToolStripMenuItem1})
+        Me.DarkMenu.Location = New System.Drawing.Point(0, 0)
+        Me.DarkMenu.Name = "DarkMenu"
+        Me.DarkMenu.Padding = New System.Windows.Forms.Padding(3, 2, 0, 2)
+        Me.DarkMenu.Size = New System.Drawing.Size(1295, 24)
+        Me.DarkMenu.TabIndex = 27
+        '
+        'ConfigurationsToolStripMenuItem2
+        '
+        Me.ConfigurationsToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TilesetsToolStripMenuItem, Me.ResourcesToolStripMenuItem})
+        Me.ConfigurationsToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ConfigurationsToolStripMenuItem2.Name = "ConfigurationsToolStripMenuItem2"
+        Me.ConfigurationsToolStripMenuItem2.Size = New System.Drawing.Size(93, 20)
+        Me.ConfigurationsToolStripMenuItem2.Text = "Configuration"
+        '
+        'TilesetsToolStripMenuItem
+        '
+        Me.TilesetsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.TilesetsToolStripMenuItem.Name = "TilesetsToolStripMenuItem"
+        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.TilesetsToolStripMenuItem.Text = "Tilesets"
+        '
+        'ResourcesToolStripMenuItem
+        '
+        Me.ResourcesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ResourcesToolStripMenuItem.Name = "ResourcesToolStripMenuItem"
+        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.ResourcesToolStripMenuItem.Text = "Resources"
+        '
+        'GenerateToolStripMenuItem1
+        '
+        Me.GenerateToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PathsToolStripMenuItem1, Me.RiversToolStripMenuItem1, Me.MountainsToolStripMenuItem1, Me.OverGrassToolStripMenuItem1, Me.ResourcesToolStripMenuItem3, Me.DetailsToolStripMenuItem1})
+        Me.GenerateToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.GenerateToolStripMenuItem1.Name = "GenerateToolStripMenuItem1"
+        Me.GenerateToolStripMenuItem1.Size = New System.Drawing.Size(66, 20)
+        Me.GenerateToolStripMenuItem1.Text = "Generate"
+        '
+        'PathsToolStripMenuItem1
+        '
+        Me.PathsToolStripMenuItem1.Checked = True
+        Me.PathsToolStripMenuItem1.CheckOnClick = True
+        Me.PathsToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.PathsToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.PathsToolStripMenuItem1.Name = "PathsToolStripMenuItem1"
+        Me.PathsToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
+        Me.PathsToolStripMenuItem1.Text = "Paths"
+        '
+        'RiversToolStripMenuItem1
+        '
+        Me.RiversToolStripMenuItem1.Checked = True
+        Me.RiversToolStripMenuItem1.CheckOnClick = True
+        Me.RiversToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.RiversToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.RiversToolStripMenuItem1.Name = "RiversToolStripMenuItem1"
+        Me.RiversToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
+        Me.RiversToolStripMenuItem1.Text = "Rivers"
+        '
+        'MountainsToolStripMenuItem1
+        '
+        Me.MountainsToolStripMenuItem1.Checked = True
+        Me.MountainsToolStripMenuItem1.CheckOnClick = True
+        Me.MountainsToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.MountainsToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.MountainsToolStripMenuItem1.Name = "MountainsToolStripMenuItem1"
+        Me.MountainsToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
+        Me.MountainsToolStripMenuItem1.Text = "Mountains"
+        '
+        'OverGrassToolStripMenuItem1
+        '
+        Me.OverGrassToolStripMenuItem1.Checked = True
+        Me.OverGrassToolStripMenuItem1.CheckOnClick = True
+        Me.OverGrassToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.OverGrassToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.OverGrassToolStripMenuItem1.Name = "OverGrassToolStripMenuItem1"
+        Me.OverGrassToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
+        Me.OverGrassToolStripMenuItem1.Text = "OverGrass"
+        '
+        'ResourcesToolStripMenuItem3
+        '
+        Me.ResourcesToolStripMenuItem3.Checked = True
+        Me.ResourcesToolStripMenuItem3.CheckOnClick = True
+        Me.ResourcesToolStripMenuItem3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ResourcesToolStripMenuItem3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ResourcesToolStripMenuItem3.Name = "ResourcesToolStripMenuItem3"
+        Me.ResourcesToolStripMenuItem3.Size = New System.Drawing.Size(131, 22)
+        Me.ResourcesToolStripMenuItem3.Text = "Resources"
+        '
+        'DetailsToolStripMenuItem1
+        '
+        Me.DetailsToolStripMenuItem1.Checked = True
+        Me.DetailsToolStripMenuItem1.CheckOnClick = True
+        Me.DetailsToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.DetailsToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DetailsToolStripMenuItem1.Name = "DetailsToolStripMenuItem1"
+        Me.DetailsToolStripMenuItem1.Size = New System.Drawing.Size(131, 22)
+        Me.DetailsToolStripMenuItem1.Text = "Details"
+        '
+        'DarkLabel1
+        '
+        Me.DarkLabel1.AutoSize = True
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(12, 31)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(56, 13)
+        Me.DarkLabel1.TabIndex = 28
+        Me.DarkLabel1.Text = "Start Map:"
+        '
+        'DarkLabel2
+        '
+        Me.DarkLabel2.AutoSize = True
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(12, 57)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(63, 13)
+        Me.DarkLabel2.TabIndex = 29
+        Me.DarkLabel2.Text = "Island Area:"
+        '
+        'DarkLabel3
+        '
+        Me.DarkLabel3.AutoSize = True
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(13, 83)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(63, 13)
+        Me.DarkLabel3.TabIndex = 30
+        Me.DarkLabel3.Text = "Max Size X:"
+        '
+        'DarkLabel4
+        '
+        Me.DarkLabel4.AutoSize = True
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(12, 109)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(64, 13)
+        Me.DarkLabel4.TabIndex = 31
+        Me.DarkLabel4.Text = "Map Size Y:"
+        '
+        'DarkLabel5
+        '
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(13, 135)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(69, 13)
+        Me.DarkLabel5.TabIndex = 32
+        Me.DarkLabel5.Text = "Sand Border:"
+        '
+        'DarkLabel6
+        '
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(13, 161)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(111, 13)
+        Me.DarkLabel6.TabIndex = 33
+        Me.DarkLabel6.Text = "Detail Frequency 1 of "
+        '
+        'DarkLabel7
+        '
+        Me.DarkLabel7.AutoSize = True
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(12, 187)
+        Me.DarkLabel7.Name = "DarkLabel7"
+        Me.DarkLabel7.Size = New System.Drawing.Size(127, 13)
+        Me.DarkLabel7.TabIndex = 34
+        Me.DarkLabel7.Text = "Resource Frequency 1 of"
+        '
+        'txtMapStart
+        '
+        Me.txtMapStart.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMapStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMapStart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMapStart.Location = New System.Drawing.Point(145, 28)
+        Me.txtMapStart.Name = "txtMapStart"
+        Me.txtMapStart.Size = New System.Drawing.Size(236, 20)
+        Me.txtMapStart.TabIndex = 35
+        Me.txtMapStart.Text = "1"
+        '
+        'txtMapSize
+        '
+        Me.txtMapSize.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMapSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMapSize.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMapSize.Location = New System.Drawing.Point(145, 54)
+        Me.txtMapSize.Name = "txtMapSize"
+        Me.txtMapSize.Size = New System.Drawing.Size(236, 20)
+        Me.txtMapSize.TabIndex = 36
+        Me.txtMapSize.Text = "4"
+        '
+        'txtMapX
+        '
+        Me.txtMapX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMapX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMapX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMapX.Location = New System.Drawing.Point(145, 80)
+        Me.txtMapX.Name = "txtMapX"
+        Me.txtMapX.Size = New System.Drawing.Size(236, 20)
+        Me.txtMapX.TabIndex = 37
+        Me.txtMapX.Text = "50"
+        '
+        'txtMapY
+        '
+        Me.txtMapY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMapY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMapY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMapY.Location = New System.Drawing.Point(145, 106)
+        Me.txtMapY.Name = "txtMapY"
+        Me.txtMapY.Size = New System.Drawing.Size(236, 20)
+        Me.txtMapY.TabIndex = 38
+        Me.txtMapY.Text = "50"
+        '
+        'txtSandBorder
+        '
+        Me.txtSandBorder.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtSandBorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSandBorder.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtSandBorder.Location = New System.Drawing.Point(145, 132)
+        Me.txtSandBorder.Name = "txtSandBorder"
+        Me.txtSandBorder.Size = New System.Drawing.Size(236, 20)
+        Me.txtSandBorder.TabIndex = 39
+        Me.txtSandBorder.Text = "4"
+        '
+        'txtDetail
+        '
+        Me.txtDetail.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDetail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtDetail.Location = New System.Drawing.Point(145, 158)
+        Me.txtDetail.Name = "txtDetail"
+        Me.txtDetail.Size = New System.Drawing.Size(236, 20)
+        Me.txtDetail.TabIndex = 40
+        Me.txtDetail.Text = "10"
+        '
+        'txtResourceFreq
+        '
+        Me.txtResourceFreq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtResourceFreq.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtResourceFreq.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtResourceFreq.Location = New System.Drawing.Point(145, 184)
+        Me.txtResourceFreq.Name = "txtResourceFreq"
+        Me.txtResourceFreq.Size = New System.Drawing.Size(236, 20)
+        Me.txtResourceFreq.TabIndex = 41
+        Me.txtResourceFreq.Text = "20"
+        '
+        'btnStart
+        '
+        Me.btnStart.Location = New System.Drawing.Point(16, 216)
+        Me.btnStart.Name = "btnStart"
+        Me.btnStart.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnStart.Size = New System.Drawing.Size(365, 23)
+        Me.btnStart.TabIndex = 42
+        Me.btnStart.Text = "Create The World"
+        '
+        'FrmAutoMapper
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(387, 277)
-        Me.Controls.Add(Me.pnlTileConfig)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(1295, 411)
         Me.Controls.Add(Me.pnlResources)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.txtResourceFreq)
-        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.txtDetail)
-        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txtSandBorder)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtMapY)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtMapX)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtMapSize)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtMapStart)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.mnsMenu)
+        Me.Controls.Add(Me.DarkLabel7)
+        Me.Controls.Add(Me.DarkLabel6)
+        Me.Controls.Add(Me.DarkLabel5)
+        Me.Controls.Add(Me.DarkLabel4)
+        Me.Controls.Add(Me.DarkLabel3)
+        Me.Controls.Add(Me.DarkLabel2)
+        Me.Controls.Add(Me.DarkLabel1)
+        Me.Controls.Add(Me.pnlTileConfig)
+        Me.Controls.Add(Me.DarkMenu)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.MainMenuStrip = Me.mnsMenu
-        Me.Name = "frmAutoMapper"
+        Me.Name = "FrmAutoMapper"
         Me.Text = "Auto Mapper"
-        Me.mnsMenu.ResumeLayout(False)
-        Me.mnsMenu.PerformLayout()
         Me.pnlResources.ResumeLayout(False)
         Me.pnlResources.PerformLayout()
         Me.pnlTileConfig.ResumeLayout(False)
         Me.pnlTileConfig.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.DarkMenu.ResumeLayout(False)
+        Me.DarkMenu.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents mnsMenu As MenuStrip
-    Friend WithEvents ConfigurationsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TilesetsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ResourcesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GenerateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PathsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RiversToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MountainsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OverGrassToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ResourcesToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents DetailsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Label1 As Label
-    Friend WithEvents txtMapStart As TextBox
-    Friend WithEvents txtMapSize As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents txtMapX As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtMapY As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents txtSandBorder As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtDetail As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents txtResourceFreq As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents btnStart As Button
     Friend WithEvents pnlResources As Panel
     Friend WithEvents btnSaveResource As Button
     Friend WithEvents btnCloseResource As Button
@@ -635,4 +648,30 @@ Partial Class FrmAutoMapper
     Friend WithEvents chkBlocked As CheckBox
     Friend WithEvents txtAutotile As TextBox
     Friend WithEvents Label14 As Label
+    Friend WithEvents DarkMenu As DarkUI.Controls.DarkMenuStrip
+    Friend WithEvents ConfigurationsToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents TilesetsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ResourcesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GenerateToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PathsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents RiversToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents MountainsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents OverGrassToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ResourcesToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents DetailsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtMapStart As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtMapSize As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtMapX As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtMapY As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtSandBorder As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtDetail As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtResourceFreq As DarkUI.Controls.DarkTextBox
+    Friend WithEvents btnStart As DarkUI.Controls.DarkButton
 End Class

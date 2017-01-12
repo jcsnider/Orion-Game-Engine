@@ -88,8 +88,10 @@ Partial Class frmLogin
         '
         Me.txtPassword.Location = New System.Drawing.Point(16, 123)
         Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(35)
         Me.txtPassword.Size = New System.Drawing.Size(159, 20)
         Me.txtPassword.TabIndex = 4
+        Me.txtPassword.UseSystemPasswordChar = True
         '
         'Label2
         '

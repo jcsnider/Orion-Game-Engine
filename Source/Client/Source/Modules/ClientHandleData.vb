@@ -231,7 +231,7 @@
         pnlLoginVisible = False
         pnlRegisterVisible = False
 
-        Msg = Trim(Buffer.ReadUnicodeString)
+        Msg = Trim(Buffer.ReadString)
 
         Buffer = Nothing
 

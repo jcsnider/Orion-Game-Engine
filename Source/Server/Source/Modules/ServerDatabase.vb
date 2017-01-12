@@ -16,8 +16,8 @@ Module ServerDatabase
             myXml.WriteString("INIT", "MaxClasses", Max_Classes)
             myXml.WriteString("CLASS1", "Name", "Warrior")
             myXml.WriteString("CLASS1", "Desc", "Warrior Description")
-            myXml.WriteString("CLASS1", "Malesprite", "1")
-            myXml.WriteString("CLASS1", "Femalesprite", "2")
+            myXml.WriteString("CLASS1", "MaleSprite", "1")
+            myXml.WriteString("CLASS1", "FemaleSprite", "2")
             myXml.WriteString("CLASS1", "Str", "5")
             myXml.WriteString("CLASS1", "End", "5")
             myXml.WriteString("CLASS1", "Vit", "5")
@@ -1968,9 +1968,16 @@ Module ServerDatabase
             writer.Write(Bank(Index).ItemRand(i).Damage)
             writer.Write(Bank(Index).ItemRand(i).Speed)
 
-            For x = 1 To Stats.Count - 1
-                writer.Write(Bank(Index).ItemRand(i).Stat(x))
-            Next
+            'For x = 1 To Stats.Count - 1
+            '    writer.Write(Bank(Index).ItemRand(i).Stat(x))
+            'Next
+
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Strength))
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Endurance))
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Vitality))
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Luck))
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Intelligence))
+            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Spirit))
         Next
 
         writer.Save(filename)

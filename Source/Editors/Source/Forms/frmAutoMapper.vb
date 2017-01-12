@@ -1,10 +1,10 @@
 ﻿Public Class FrmAutoMapper
 #Region "Frm Code"
-    Private Sub TilesetsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetsToolStripMenuItem.Click
+    Private Sub TilesetsToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles TilesetsToolStripMenuItem.Click
         pnlTileConfig.Visible = True
     End Sub
 
-    Private Sub ResourcesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResourcesToolStripMenuItem.Click
+    Private Sub ResourcesToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ResourcesToolStripMenuItem.Click
         Dim Resources() As String
         Dim i As Long
 
@@ -32,6 +32,7 @@
 
         Me.Dispose()
     End Sub
+
 #End Region
 
 #Region "Resources"
@@ -131,6 +132,10 @@
 
         LoadTilePrefab()
     End Sub
+
+
+
+
 #End Region
 
 End Class

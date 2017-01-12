@@ -364,6 +364,17 @@ Module ServerHandleData
                 Addlog(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".", PLAYER_LOG)
                 TextAdd(GetPlayerLogin(index) & " has logged in from " & GetPlayerIP(index) & ".")
 
+                '' Check if character data has been created
+                'If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
+                '    ' we have a char!
+                '    'HandleUseChar(index)
+                'Else
+                '    ' send new char shit
+                '    If Not IsPlaying(index) Then
+                '        SendNewCharClasses(index)
+                '    End If
+                'End If
+
                 Buffer = Nothing
             End If
         End If
