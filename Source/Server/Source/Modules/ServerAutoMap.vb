@@ -93,26 +93,29 @@ Module ServerAutoMap
     ''' Loads TilePrefab from the Automapper.ini
     ''' </summary>
     Sub LoadTilePrefab()
-        Dim Prefab As Integer
-        Dim Layer As Integer
-        Dim FileName As String
+        Dim Prefab As Integer, Layer As Integer
+
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
+            .Root = "Options"
+        }
 
         ReDim Tile(TilePrefab.Count - 1)
-        FileName = Path.Combine(Application.StartupPath, "data", "automapper.ini")
         For Prefab = 1 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
             For Layer = 1 To MapLayer.Count - 1
-                Tile(Prefab).Layer(Layer).Tileset = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Tileset"))
-                Tile(Prefab).Layer(Layer).x = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "X"))
-                Tile(Prefab).Layer(Layer).y = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Y"))
-                Tile(Prefab).Layer(Layer).AutoTile = Val(Getvar(FileName, Val(Prefab), "Layer" & Layer & "Autotile"))
+                Tile(Prefab).Layer(Layer).Tileset = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset"))
+                Tile(Prefab).Layer(Layer).X = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "X"))
+                Tile(Prefab).Layer(Layer).Y = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Y"))
+                Tile(Prefab).Layer(Layer).AutoTile = Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Autotile"))
             Next Layer
-            Tile(Prefab).Type = Val(Getvar(FileName, Val(Prefab), "Type"))
+            Tile(Prefab).Type = Val(myXml.ReadString("Prefab" & Prefab, "Type"))
         Next Prefab
 
-        ResourcesNum = Getvar(FileName, "Resources", "ResourcesNum")
+        ResourcesNum = myXml.ReadString("Resources", "ResourcesNum")
         Resources = Split(ResourcesNum, ";")
+
     End Sub
 
     ''' <summary>

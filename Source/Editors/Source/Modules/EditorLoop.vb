@@ -1,7 +1,7 @@
 ﻿Imports System.Threading
 
 Module EditorLoop
-
+#Region "Startup"
     Public Sub Main()
 
         'check if we are in the right place...
@@ -140,65 +140,49 @@ Module EditorLoop
         GameLoop()
 
     End Sub
+#End Region
 
 #Region "Options"
-    Public Sub SaveOptions()
-        Dim FileName As String
-
-        FileName = Application.StartupPath & "\Data Files\config.ini"
-
-        PutVar(FileName, "Options", "Username", Trim$(Options.Username))
-        PutVar(FileName, "Options", "Password", Trim$(Options.Password))
-        PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
-        PutVar(FileName, "Options", "IP", Options.IP)
-        PutVar(FileName, "Options", "Port", Str(Options.Port))
-        PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
-        PutVar(FileName, "Options", "Music", Str(Options.Music))
-        PutVar(FileName, "Options", "Sound", Str(Options.Sound))
-        PutVar(FileName, "Options", "Volume", Str(Options.Volume))
-        PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
-    End Sub
 
     Public Sub LoadOptions()
-        Dim FileName As String
+        Dim myXml As New XmlClass With {
+            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Root = "Options"
+        }
 
-        FileName = Application.StartupPath & "\Data Files\config.ini"
-
-        If Not FileExist(FileName) Then
+        If Not FileExist(myXml.Filename) Then
             Options.Password = ""
-            Options.SavePass = 0
+            Options.SavePass = False
             Options.Username = ""
-            Options.IP = "127.0.0.1"
+            Options.IP = "Localhost"
             Options.Port = 7001
             Options.MenuMusic = ""
             Options.Music = 1
             Options.Sound = 1
             Options.Volume = 100
-            Options.ScreenSize = 0
-            SaveOptions()
+
         Else
-            Options.Username = Getvar(FileName, "Options", "Username")
-            Options.Password = Getvar(FileName, "Options", "Password")
-            Options.SavePass = Getvar(FileName, "Options", "SavePass")
-            Options.IP = Getvar(FileName, "Options", "IP")
-            Options.Port = Val(Getvar(FileName, "Options", "Port"))
-            Options.MenuMusic = Getvar(FileName, "Options", "MenuMusic")
-            Options.Music = Getvar(FileName, "Options", "Music")
-            Options.Sound = Getvar(FileName, "Options", "Sound")
-            If Getvar(FileName, "Options", "Volume") = "" Then
-                Options.Volume = 100
-                SaveOptions()
-            End If
-            Options.Volume = Getvar(FileName, "Options", "Volume")
-            Options.ScreenSize = Val(Getvar(FileName, "Options", "ScreenSize"))
+            Options.Username = myXml.ReadString("UserInfo", "Username", "")
+            Options.Password = myXml.ReadString("UserInfo", "Password", "")
+            Options.SavePass = myXml.ReadString("UserInfo", "SavePass", "False")
+
+            Options.IP = myXml.ReadString("Connection", "Ip", "127.0.0.1")
+            Options.Port = Val(myXml.ReadString("Connection", "Port", "7001"))
+
+            Options.MenuMusic = myXml.ReadString("Sfx", "MenuMusic", "")
+            Options.Music = myXml.ReadString("Sfx", "Music", "1")
+            Options.Sound = myXml.ReadString("Sfx", "Sound", "1")
+            Options.Volume = Val(myXml.ReadString("Sfx", "Volume", "100"))
         End If
 
+        frmLogin.txtLogin.Text = Options.Username
+        frmLogin.txtPassword.Text = Options.Password
     End Sub
 #End Region
 
     Sub GameLoop()
-        Dim dest As Point = New Point(FrmEditor_DarkMapEditor.PointToScreen(FrmEditor_DarkMapEditor.picScreen.Location))
-        Dim g As Graphics = FrmEditor_DarkMapEditor.picScreen.CreateGraphics
+        Dim dest As Point = New Point(FrmEditor_MapEditor.PointToScreen(FrmEditor_MapEditor.picScreen.Location))
+        Dim g As Graphics = FrmEditor_MapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
         Dim destrect As Rectangle, tmpfps As Integer
@@ -214,76 +198,78 @@ Module EditorLoop
                 Tick = GetTickCount()
 
                 FrameTime = Tick
-                If InMapEditor Then
+                If InMapEditor And Not GettingMap Then
 
                     'Calculate FPS
                     If starttime < GetTickCount() Then
                         FPS = tmpfps
 
-                        FrmEditor_DarkMapEditor.tsCurFps.Text = "Current FPS: " & FPS
+                        FrmEditor_MapEditor.tsCurFps.Text = "Current FPS: " & FPS
                         tmpfps = 0
                         starttime = GetTickCount() + 1000
                     End If
                     tmpfps = tmpfps + 1
 
-                    ' fog scrolling
-                    If fogtmr < Tick Then
-                        If CurrentFogSpeed > 0 Then
-                            'move
-                            fogOffsetX = fogOffsetX - 1
-                            fogOffsetY = fogOffsetY - 1
-                            Reset()
-                            If fogOffsetX < -256 Then fogOffsetX = 0
-                            If fogOffsetY < -256 Then fogOffsetY = 0
-                            fogtmr = Tick + 255 - CurrentFogSpeed
+                    SyncLock MapLock
+                        ' fog scrolling
+                        If fogtmr < Tick Then
+                            If CurrentFogSpeed > 0 Then
+                                'move
+                                fogOffsetX = fogOffsetX - 1
+                                fogOffsetY = fogOffsetY - 1
+                                Reset()
+                                If fogOffsetX < -256 Then fogOffsetX = 0
+                                If fogOffsetY < -256 Then fogOffsetY = 0
+                                fogtmr = Tick + 255 - CurrentFogSpeed
+                            End If
                         End If
-                    End If
 
-                    If tmr500 < Tick Then
-                        ' animate waterfalls
-                        Select Case waterfallFrame
-                            Case 0
-                                waterfallFrame = 1
-                            Case 1
-                                waterfallFrame = 2
-                            Case 2
-                                waterfallFrame = 0
-                        End Select
-                        ' animate autotiles
-                        Select Case autoTileFrame
-                            Case 0
-                                autoTileFrame = 1
-                            Case 1
-                                autoTileFrame = 2
-                            Case 2
-                                autoTileFrame = 0
-                        End Select
+                        If tmr500 < Tick Then
+                            ' animate waterfalls
+                            Select Case waterfallFrame
+                                Case 0
+                                    waterfallFrame = 1
+                                Case 1
+                                    waterfallFrame = 2
+                                Case 2
+                                    waterfallFrame = 0
+                            End Select
+                            ' animate autotiles
+                            Select Case autoTileFrame
+                                Case 0
+                                    autoTileFrame = 1
+                                Case 1
+                                    autoTileFrame = 2
+                                Case 2
+                                    autoTileFrame = 0
+                            End Select
 
-                        tmr500 = Tick + 500
-                    End If
+                            tmr500 = Tick + 500
+                        End If
 
-                    ProcessWeather()
+                        ProcessWeather()
 
-                    'Auctual Game Loop Stuff :/
-                    Render_Graphics()
+                        'Auctual Game Loop Stuff :/
+                        Render_Graphics()
 
-                    If FadeInSwitch = True Then
-                        FadeIn()
-                    End If
+                        If FadeInSwitch = True Then
+                            FadeIn()
+                        End If
 
-                    If FadeOutSwitch = True Then
-                        FadeOut()
-                    End If
+                        If FadeOutSwitch = True Then
+                            FadeOut()
+                        End If
 
-                    destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                    Application.DoEvents()
+                        destrect = New Rectangle(0, 0, ScreenX, ScreenY)
+                        Application.DoEvents()
 
-                    EditorMap_DrawTileset()
+                        EditorMap_DrawTileset()
+                    End SyncLock
+
                 End If
             End If
 
             Application.DoEvents()
-            'Thread.Yield()
             Thread.Sleep(1)
         Loop
     End Sub

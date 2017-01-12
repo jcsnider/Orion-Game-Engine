@@ -281,8 +281,8 @@ Module ServerTCP
     End Sub
 
     Sub CloseSocket(ByVal Index As Integer)
-        'Try
-        If Index > 0 Then
+        Try
+            If Index > 0 Then
                 If (Clients(Index).Closing = True) Then Exit Sub
                 Clients(Index).Closing = True
                 LeftGame(Index)
@@ -291,9 +291,9 @@ Module ServerTCP
                 Clients(Index).Socket = Nothing
                 ClearPlayer(Index)
             End If
-        'Catch ex As Exception
+        Catch ex As Exception
 
-        'End Try
+        End Try
     End Sub
 
     Function IsPlaying(ByVal Index As Integer) As Boolean
@@ -2203,7 +2203,10 @@ Module ServerTCP
 
     Sub SendAutoMapper(ByVal Index As Integer)
         Dim Buffer As ByteBuffer, Prefab As Integer
-
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
+            .Root = "Options"
+        }
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SAutoMapper)
 
@@ -2216,19 +2219,19 @@ Module ServerTCP
         Buffer.WriteInteger(ResourceFreq)
 
         'send ini info
-        Buffer.WriteString(Getvar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum"))
+        Buffer.WriteString(myXml.ReadString("Resources", "ResourcesNum"))
 
         For Prefab = 1 To TilePrefab.Count - 1
             For Layer = 1 To MapLayer.Count - 1
-                If Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset")) > 0 Then
+                If Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset")) > 0 Then
                     Buffer.WriteInteger(Layer)
-                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset")))
-                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X")))
-                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y")))
-                    Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile")))
+                    Buffer.WriteInteger(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Tileset")))
+                    Buffer.WriteInteger(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "X")))
+                    Buffer.WriteInteger(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Y")))
+                    Buffer.WriteInteger(Val(myXml.ReadString("Prefab" & Prefab, "Layer" & Layer & "Autotile")))
                 End If
             Next
-            Buffer.WriteInteger(Val(Getvar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type")))
+            Buffer.WriteInteger(Val(myXml.ReadString("Prefab" & Prefab, "Type")))
         Next
 
         SendDataTo(Index, Buffer.ToArray())

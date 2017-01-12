@@ -357,47 +357,55 @@ Public Module ServerEvents
 
 #Region "database"
     Sub SaveSwitches()
-        Dim i As Integer, filename As String
-
-        filename = Path.Combine(Application.StartupPath, "data", "switches.ini")
+        Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
+            .Root = "Data"
+        }
 
         For i = 1 To MAX_SWITCHES
-            PutVar(filename, "Switches", "Switch" & i & "Name", Switches(i))
+            myXml.WriteString("Switches", "Switch" & i & "Name", Switches(i))
         Next
 
     End Sub
 
     Sub SaveVariables()
-        Dim i As Integer, filename As String
-
-        filename = Path.Combine(Application.StartupPath, "data", "variables.ini")
+        Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "Variables.xml"),
+            .Root = "Data"
+        }
 
         For i = 1 To MAX_VARIABLES
-            PutVar(filename, "Variables", "Variable" & i & "Name", Variables(i))
+            myXml.WriteString("Variables", "Variable" & i & "Name", Variables(i))
         Next
 
     End Sub
 
     Sub LoadSwitches()
-        Dim i As Integer, filename As String
-
-        filename = Path.Combine(Application.StartupPath, "data", "switches.ini")
+        Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
+            .Root = "Data"
+        }
 
         For i = 1 To MAX_SWITCHES
             DoEvents()
-            Switches(i) = Getvar(filename, "Switches", "Switch" & i & "Name")
+            Switches(i) = myXml.ReadString("Switches", "Switch" & i & "Name")
         Next
 
     End Sub
 
     Sub LoadVariables()
-        Dim i As Integer, filename As String
-
-        filename = Path.Combine(Application.StartupPath, "data", "variables.ini")
+        Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "Data", "Switches.xml"),
+            .Root = "Data"
+        }
 
         For i = 1 To MAX_VARIABLES
+            Variables(i) = myXml.ReadString("Variables", "Variable" & i & "Name")
             DoEvents()
-            Variables(i) = Getvar(filename, "Variables", "Variable" & i & "Name")
         Next
 
     End Sub

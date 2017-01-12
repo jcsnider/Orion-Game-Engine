@@ -238,7 +238,7 @@ Module ServerLoop
 
         For MapNum = 1 To MAX_CACHED_MAPS
 
-            If ServerDestroyed Then End
+            If ServerDestroyed Then Exit Sub
 
             '  Close the doors
             If TickCount > TempTile(MapNum).DoorTimer + 5000 Then
@@ -255,9 +255,10 @@ Module ServerLoop
             End If
 
             ' Respawning Resources
+
             If ResourceCache(MapNum).Resource_Count > 0 Then
                 For i = 0 To ResourceCache(MapNum).Resource_Count
-                    If ServerDestroyed Then End
+                    If ServerDestroyed Then Exit Sub
                     Resource_index = Map(MapNum).Tile(ResourceCache(MapNum).ResourceData(i).X, ResourceCache(MapNum).ResourceData(i).Y).Data1
 
                     If Resource_index > 0 Then
@@ -274,7 +275,7 @@ Module ServerLoop
                 Next
             End If
 
-            If ServerDestroyed Then End
+            If ServerDestroyed Then Exit Sub
 
             If PlayersOnMap(MapNum) = True Then
                 TickCount = GetTickCount()

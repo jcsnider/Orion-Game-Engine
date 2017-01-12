@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEditor_MapEditor
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class FrmEditor_MapEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,109 @@ Partial Class frmEditor_MapEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_MapEditor))
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor_MapEditor))
+        Me.DarkDockPanel1 = New DarkUI.Docking.DarkDockPanel()
+        Me.ToolStripContainer2 = New System.Windows.Forms.ToolStripContainer()
+        Me.ssInfo = New DarkUI.Controls.DarkStatusStrip()
+        Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsCurFps = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DarkSectionPanel1 = New DarkUI.Controls.DarkSectionPanel()
+        Me.pnlTiles = New System.Windows.Forms.Panel()
+        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.cmbLayers = New System.Windows.Forms.ComboBox()
+        Me.pnlBack = New System.Windows.Forms.Panel()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
+        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
+        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.pnlAttribute = New System.Windows.Forms.Panel()
+        Me.btnClearAttribute = New DarkUI.Controls.DarkButton()
+        Me.optHouse = New DarkUI.Controls.DarkRadioButton()
+        Me.optShop = New DarkUI.Controls.DarkRadioButton()
+        Me.optNpcSpawn = New DarkUI.Controls.DarkRadioButton()
+        Me.optBank = New DarkUI.Controls.DarkRadioButton()
+        Me.optCraft = New DarkUI.Controls.DarkRadioButton()
+        Me.optTrap = New DarkUI.Controls.DarkRadioButton()
+        Me.optHeal = New DarkUI.Controls.DarkRadioButton()
+        Me.optKeyOpen = New DarkUI.Controls.DarkRadioButton()
+        Me.optKey = New DarkUI.Controls.DarkRadioButton()
+        Me.optDoor = New DarkUI.Controls.DarkRadioButton()
+        Me.optResource = New DarkUI.Controls.DarkRadioButton()
+        Me.optNpcAvoid = New DarkUI.Controls.DarkRadioButton()
+        Me.optItem = New DarkUI.Controls.DarkRadioButton()
+        Me.optWarp = New DarkUI.Controls.DarkRadioButton()
+        Me.optBlocked = New DarkUI.Controls.DarkRadioButton()
+        Me.pnlNpc = New System.Windows.Forms.Panel()
+        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
+        Me.lstMapNpc = New System.Windows.Forms.ListBox()
+        Me.pnlDirBlock = New System.Windows.Forms.Panel()
+        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
+        Me.pnlEvents = New System.Windows.Forms.Panel()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.btnEvents = New DarkUI.Controls.DarkButton()
+        Me.btnDirBlock = New DarkUI.Controls.DarkButton()
+        Me.btnNpc = New DarkUI.Controls.DarkButton()
+        Me.btnAttributes = New DarkUI.Controls.DarkButton()
+        Me.btnTiles = New DarkUI.Controls.DarkButton()
+        Me.DarkSectionPanel2 = New DarkUI.Controls.DarkSectionPanel()
+        Me.pnlMoreOptions = New System.Windows.Forms.Panel()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.chkUseTint = New System.Windows.Forms.CheckBox()
+        Me.scrlMapAlpha = New DarkUI.Controls.DarkScrollBar()
+        Me.lblMapAlpha = New DarkUI.Controls.DarkLabel()
+        Me.scrlMapBlue = New DarkUI.Controls.DarkScrollBar()
+        Me.lblMapBlue = New DarkUI.Controls.DarkLabel()
+        Me.scrlMapGreen = New DarkUI.Controls.DarkScrollBar()
+        Me.lblMapGreen = New DarkUI.Controls.DarkLabel()
+        Me.scrlMapRed = New DarkUI.Controls.DarkScrollBar()
+        Me.lblMapRed = New DarkUI.Controls.DarkLabel()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.scrlFogAlpha = New DarkUI.Controls.DarkScrollBar()
+        Me.lblFogAlpha = New DarkUI.Controls.DarkLabel()
+        Me.scrlFogSpeed = New DarkUI.Controls.DarkScrollBar()
+        Me.lblFogSpeed = New DarkUI.Controls.DarkLabel()
+        Me.scrlFog = New DarkUI.Controls.DarkScrollBar()
+        Me.lblFogIndex = New DarkUI.Controls.DarkLabel()
+        Me.scrlIntensity = New DarkUI.Controls.DarkScrollBar()
+        Me.lblIntensity = New DarkUI.Controls.DarkLabel()
+        Me.cmbWeather = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
+        Me.btnMoreOptions = New DarkUI.Controls.DarkButton()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnPreview = New DarkUI.Controls.DarkButton()
+        Me.lstMusic = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnSetSize = New DarkUI.Controls.DarkButton()
+        Me.txtMaxY = New DarkUI.Controls.DarkTextBox()
+        Me.txtMaxX = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSpawnY = New DarkUI.Controls.DarkTextBox()
+        Me.txtSpawnX = New DarkUI.Controls.DarkTextBox()
+        Me.txtSpawnMap = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
+        Me.chkInstance = New DarkUI.Controls.DarkCheckBox()
+        Me.txtName = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
+        Me.fraMapLinks = New System.Windows.Forms.GroupBox()
+        Me.lblMap = New DarkUI.Controls.DarkLabel()
+        Me.txtRight = New DarkUI.Controls.DarkTextBox()
+        Me.txtLeft = New DarkUI.Controls.DarkTextBox()
+        Me.txtDown = New DarkUI.Controls.DarkTextBox()
+        Me.txtUp = New DarkUI.Controls.DarkTextBox()
+        Me.cmbMoral = New System.Windows.Forms.ComboBox()
+        Me.ToolStrip = New DarkUI.Controls.DarkToolStrip()
         Me.tsbSave = New System.Windows.Forms.ToolStripButton()
         Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -31,99 +130,10 @@ Partial Class frmEditor_MapEditor
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbFill = New System.Windows.Forms.ToolStripButton()
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmbMapList = New System.Windows.Forms.ToolStripComboBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.tabpages = New System.Windows.Forms.TabControl()
-        Me.tpTiles = New System.Windows.Forms.TabPage()
-        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.cmbLayers = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
-        Me.pnlBack = New System.Windows.Forms.Panel()
-        Me.picBackSelect = New System.Windows.Forms.PictureBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.scrlPictureX = New System.Windows.Forms.HScrollBar()
-        Me.scrlPictureY = New System.Windows.Forms.VScrollBar()
-        Me.tpAttributes = New System.Windows.Forms.TabPage()
-        Me.optCraft = New System.Windows.Forms.RadioButton()
-        Me.optHouse = New System.Windows.Forms.RadioButton()
-        Me.btnClearAttribute = New System.Windows.Forms.Button()
-        Me.optTrap = New System.Windows.Forms.RadioButton()
-        Me.optBlocked = New System.Windows.Forms.RadioButton()
-        Me.optHeal = New System.Windows.Forms.RadioButton()
-        Me.optWarp = New System.Windows.Forms.RadioButton()
-        Me.optBank = New System.Windows.Forms.RadioButton()
-        Me.optItem = New System.Windows.Forms.RadioButton()
-        Me.optShop = New System.Windows.Forms.RadioButton()
-        Me.optNpcAvoid = New System.Windows.Forms.RadioButton()
-        Me.optNpcSpawn = New System.Windows.Forms.RadioButton()
-        Me.optKey = New System.Windows.Forms.RadioButton()
-        Me.optDoor = New System.Windows.Forms.RadioButton()
-        Me.optKeyOpen = New System.Windows.Forms.RadioButton()
-        Me.optResource = New System.Windows.Forms.RadioButton()
-        Me.tpNpcs = New System.Windows.Forms.TabPage()
-        Me.fraNpcs = New System.Windows.Forms.GroupBox()
-        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
-        Me.lstMapNpc = New System.Windows.Forms.ListBox()
-        Me.ComboBox23 = New System.Windows.Forms.ComboBox()
-        Me.tpDirBlock = New System.Windows.Forms.TabPage()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.tpEvents = New System.Windows.Forms.TabPage()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.pnlSettings = New System.Windows.Forms.Panel()
-        Me.grpSettings = New System.Windows.Forms.GroupBox()
-        Me.chkInstance = New System.Windows.Forms.CheckBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.chkUseTint = New System.Windows.Forms.CheckBox()
-        Me.lblMapAlpha = New System.Windows.Forms.Label()
-        Me.lblMapBlue = New System.Windows.Forms.Label()
-        Me.lblMapGreen = New System.Windows.Forms.Label()
-        Me.lblMapRed = New System.Windows.Forms.Label()
-        Me.scrlMapAlpha = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapBlue = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapGreen = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapRed = New System.Windows.Forms.HScrollBar()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnPreview = New System.Windows.Forms.Button()
-        Me.lstMusic = New System.Windows.Forms.ListBox()
-        Me.cmbMoral = New System.Windows.Forms.ComboBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.scrlFogAlpha = New System.Windows.Forms.HScrollBar()
-        Me.lblFogAlpha = New System.Windows.Forms.Label()
-        Me.scrlFogSpeed = New System.Windows.Forms.HScrollBar()
-        Me.lblFogSpeed = New System.Windows.Forms.Label()
-        Me.scrlIntensity = New System.Windows.Forms.HScrollBar()
-        Me.lblIntensity = New System.Windows.Forms.Label()
-        Me.scrlFog = New System.Windows.Forms.HScrollBar()
-        Me.lblFogIndex = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.cmbWeather = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.fraMaxSizes = New System.Windows.Forms.GroupBox()
-        Me.txtMaxY = New System.Windows.Forms.TextBox()
-        Me.btnSaveSettings = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtMaxX = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.fraBootSettings = New System.Windows.Forms.GroupBox()
-        Me.txtSpawnMap = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtSpawnY = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtSpawnX = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.fraMapLinks = New System.Windows.Forms.GroupBox()
-        Me.txtDown = New System.Windows.Forms.TextBox()
-        Me.txtLeft = New System.Windows.Forms.TextBox()
-        Me.lblMap = New System.Windows.Forms.Label()
-        Me.txtRight = New System.Windows.Forms.TextBox()
-        Me.txtUp = New System.Windows.Forms.TextBox()
-        Me.pnlBack2 = New System.Windows.Forms.Panel()
+        Me.pnlBack2 = New DarkUI.Controls.DarkSectionPanel()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
         Me.btnMapWarp = New System.Windows.Forms.Button()
@@ -176,32 +186,29 @@ Partial Class frmEditor_MapEditor
         Me.btnTrap = New System.Windows.Forms.Button()
         Me.scrlTrap = New System.Windows.Forms.HScrollBar()
         Me.lblTrap = New System.Windows.Forms.Label()
+        Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
+        Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
-        Me.SSInfo = New System.Windows.Forms.StatusStrip()
-        Me.tslCurMap = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
-        Me.scrlMapViewV = New System.Windows.Forms.VScrollBar()
-        Me.scrlMapViewH = New System.Windows.Forms.HScrollBar()
-        Me.ToolStrip.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.tabpages.SuspendLayout()
-        Me.tpTiles.SuspendLayout()
+        Me.ToolStripContainer2.ContentPanel.SuspendLayout()
+        Me.ToolStripContainer2.SuspendLayout()
+        Me.ssInfo.SuspendLayout()
+        Me.DarkSectionPanel1.SuspendLayout()
+        Me.pnlTiles.SuspendLayout()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tpAttributes.SuspendLayout()
-        Me.tpNpcs.SuspendLayout()
-        Me.fraNpcs.SuspendLayout()
-        Me.tpDirBlock.SuspendLayout()
-        Me.tpEvents.SuspendLayout()
-        Me.pnlSettings.SuspendLayout()
-        Me.grpSettings.SuspendLayout()
+        Me.pnlAttribute.SuspendLayout()
+        Me.pnlNpc.SuspendLayout()
+        Me.pnlDirBlock.SuspendLayout()
+        Me.pnlEvents.SuspendLayout()
+        Me.DarkSectionPanel2.SuspendLayout()
+        Me.pnlMoreOptions.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.fraMaxSizes.SuspendLayout()
-        Me.fraBootSettings.SuspendLayout()
         Me.fraMapLinks.SuspendLayout()
+        Me.ToolStrip.SuspendLayout()
         Me.pnlBack2.SuspendLayout()
         Me.pnlAttributes.SuspendLayout()
         Me.fraMapWarp.SuspendLayout()
@@ -217,194 +224,153 @@ Partial Class frmEditor_MapEditor
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraTrap.SuspendLayout()
         CType(Me.picScreen, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SSInfo.SuspendLayout()
-        Me.ToolStripContainer1.BottomToolStripPanel.SuspendLayout()
-        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
-        Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
-        Me.ToolStripContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ToolStrip
+        'DarkDockPanel1
         '
-        Me.ToolStrip.Dock = System.Windows.Forms.DockStyle.None
-        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripLabel1, Me.cmbMapList})
-        Me.ToolStrip.Location = New System.Drawing.Point(3, 0)
-        Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip.Size = New System.Drawing.Size(541, 25)
-        Me.ToolStrip.TabIndex = 17
-        Me.ToolStrip.Text = "ToolStrip1"
+        Me.DarkDockPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.DarkDockPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DarkDockPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.DarkDockPanel1.Name = "DarkDockPanel1"
+        Me.DarkDockPanel1.Size = New System.Drawing.Size(1292, 626)
+        Me.DarkDockPanel1.TabIndex = 0
         '
-        'tsbSave
+        'ToolStripContainer2
         '
-        Me.tsbSave.Image = CType(resources.GetObject("tsbSave.Image"), System.Drawing.Image)
-        Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbSave.Name = "tsbSave"
-        Me.tsbSave.Size = New System.Drawing.Size(51, 22)
-        Me.tsbSave.Text = "Save"
         '
-        'tsbDiscard
+        'ToolStripContainer2.ContentPanel
         '
-        Me.tsbDiscard.Image = CType(resources.GetObject("tsbDiscard.Image"), System.Drawing.Image)
-        Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbDiscard.Name = "tsbDiscard"
-        Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
-        Me.tsbDiscard.Text = "Discard"
+        Me.ToolStripContainer2.ContentPanel.Controls.Add(Me.ssInfo)
+        Me.ToolStripContainer2.ContentPanel.Size = New System.Drawing.Size(1292, 28)
+        Me.ToolStripContainer2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ToolStripContainer2.LeftToolStripPanelVisible = False
+        Me.ToolStripContainer2.Location = New System.Drawing.Point(0, 598)
+        Me.ToolStripContainer2.Name = "ToolStripContainer2"
+        Me.ToolStripContainer2.RightToolStripPanelVisible = False
+        Me.ToolStripContainer2.Size = New System.Drawing.Size(1292, 28)
+        Me.ToolStripContainer2.TabIndex = 6
+        Me.ToolStripContainer2.Text = "ToolStripContainer2"
+        Me.ToolStripContainer2.TopToolStripPanelVisible = False
         '
-        'ToolStripSeparator1
+        'ssInfo
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.ssInfo.AutoSize = False
+        Me.ssInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.ssInfo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ssInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ssInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY, Me.tsCurFps})
+        Me.ssInfo.Location = New System.Drawing.Point(0, 0)
+        Me.ssInfo.Name = "ssInfo"
+        Me.ssInfo.Padding = New System.Windows.Forms.Padding(0, 5, 0, 3)
+        Me.ssInfo.Size = New System.Drawing.Size(1292, 28)
+        Me.ssInfo.SizingGrip = False
+        Me.ssInfo.TabIndex = 0
+        Me.ssInfo.Text = "DarkStatusStrip1"
         '
-        'tsbMapGrid
+        'tslCurMap
         '
-        Me.tsbMapGrid.Image = CType(resources.GetObject("tsbMapGrid.Image"), System.Drawing.Image)
-        Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbMapGrid.Name = "tsbMapGrid"
-        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
-        Me.tsbMapGrid.Text = "Map Grid"
+        Me.tslCurMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tslCurMap.Name = "tslCurMap"
+        Me.tslCurMap.Size = New System.Drawing.Size(86, 15)
+        Me.tslCurMap.Text = "Current Map: 1"
         '
-        'ToolStripSeparator2
+        'tslCurXY
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.tslCurXY.Name = "tslCurXY"
+        Me.tslCurXY.Size = New System.Drawing.Size(50, 15)
+        Me.tslCurXY.Text = "X:1 - Y:1"
         '
-        'tsbFill
+        'tsCurFps
         '
-        Me.tsbFill.Image = CType(resources.GetObject("tsbFill.Image"), System.Drawing.Image)
-        Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbFill.Name = "tsbFill"
-        Me.tsbFill.Size = New System.Drawing.Size(73, 22)
-        Me.tsbFill.Text = "Fill Layer"
-        Me.tsbFill.ToolTipText = "Fill Layer"
+        Me.tsCurFps.Name = "tsCurFps"
+        Me.tsCurFps.Size = New System.Drawing.Size(81, 15)
+        Me.tsCurFps.Text = "Current FPS: 0"
         '
-        'tsbClear
+        'DarkSectionPanel1
         '
-        Me.tsbClear.Image = CType(resources.GetObject("tsbClear.Image"), System.Drawing.Image)
-        Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbClear.Name = "tsbClear"
-        Me.tsbClear.Size = New System.Drawing.Size(85, 22)
-        Me.tsbClear.Text = "Clear Layer"
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlDirBlock)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlEvents)
+        Me.DarkSectionPanel1.Controls.Add(Me.btnEvents)
+        Me.DarkSectionPanel1.Controls.Add(Me.btnDirBlock)
+        Me.DarkSectionPanel1.Controls.Add(Me.btnNpc)
+        Me.DarkSectionPanel1.Controls.Add(Me.btnAttributes)
+        Me.DarkSectionPanel1.Controls.Add(Me.btnTiles)
+        Me.DarkSectionPanel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.DarkSectionPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.DarkSectionPanel1.Name = "DarkSectionPanel1"
+        Me.DarkSectionPanel1.SectionHeader = "Map Layers"
+        Me.DarkSectionPanel1.Size = New System.Drawing.Size(318, 598)
+        Me.DarkSectionPanel1.TabIndex = 7
         '
-        'ToolStripLabel1
+        'pnlTiles
         '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(52, 22)
-        Me.ToolStripLabel1.Text = "Map List"
-        '
-        'cmbMapList
-        '
-        Me.cmbMapList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMapList.Name = "cmbMapList"
-        Me.cmbMapList.Size = New System.Drawing.Size(121, 25)
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.tabpages)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(327, 590)
-        Me.Panel1.TabIndex = 18
-        '
-        'tabpages
-        '
-        Me.tabpages.Controls.Add(Me.tpTiles)
-        Me.tabpages.Controls.Add(Me.tpAttributes)
-        Me.tabpages.Controls.Add(Me.tpNpcs)
-        Me.tabpages.Controls.Add(Me.tpDirBlock)
-        Me.tabpages.Controls.Add(Me.tpEvents)
-        Me.tabpages.Location = New System.Drawing.Point(3, 3)
-        Me.tabpages.Name = "tabpages"
-        Me.tabpages.SelectedIndex = 0
-        Me.tabpages.Size = New System.Drawing.Size(322, 581)
-        Me.tabpages.TabIndex = 18
-        '
-        'tpTiles
-        '
-        Me.tpTiles.Controls.Add(Me.cmbAutoTile)
-        Me.tpTiles.Controls.Add(Me.Label11)
-        Me.tpTiles.Controls.Add(Me.Label10)
-        Me.tpTiles.Controls.Add(Me.cmbLayers)
-        Me.tpTiles.Controls.Add(Me.Label9)
-        Me.tpTiles.Controls.Add(Me.cmbTileSets)
-        Me.tpTiles.Controls.Add(Me.pnlBack)
-        Me.tpTiles.Controls.Add(Me.Label1)
-        Me.tpTiles.Controls.Add(Me.scrlPictureX)
-        Me.tpTiles.Controls.Add(Me.scrlPictureY)
-        Me.tpTiles.Location = New System.Drawing.Point(4, 22)
-        Me.tpTiles.Name = "tpTiles"
-        Me.tpTiles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpTiles.Size = New System.Drawing.Size(314, 555)
-        Me.tpTiles.TabIndex = 0
-        Me.tpTiles.Text = "Tiles"
-        Me.tpTiles.UseVisualStyleBackColor = True
+        Me.pnlTiles.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlTiles.Controls.Add(Me.cmbAutoTile)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel4)
+        Me.pnlTiles.Controls.Add(Me.cmbLayers)
+        Me.pnlTiles.Controls.Add(Me.pnlBack)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel3)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureY)
+        Me.pnlTiles.Controls.Add(Me.cmbTileSets)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureX)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel2)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel1)
+        Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
+        Me.pnlTiles.Name = "pnlTiles"
+        Me.pnlTiles.Size = New System.Drawing.Size(316, 546)
+        Me.pnlTiles.TabIndex = 0
         '
         'cmbAutoTile
         '
-        Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbAutoTile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbAutoTile.ForeColor = System.Drawing.Color.LightGray
         Me.cmbAutoTile.FormattingEnabled = True
         Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)"})
-        Me.cmbAutoTile.Location = New System.Drawing.Point(60, 526)
+        Me.cmbAutoTile.Location = New System.Drawing.Point(51, 513)
         Me.cmbAutoTile.Name = "cmbAutoTile"
-        Me.cmbAutoTile.Size = New System.Drawing.Size(119, 21)
-        Me.cmbAutoTile.TabIndex = 17
+        Me.cmbAutoTile.Size = New System.Drawing.Size(123, 21)
+        Me.cmbAutoTile.TabIndex = 19
         '
-        'Label11
+        'DarkLabel4
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(5, 529)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(49, 13)
-        Me.Label11.TabIndex = 16
-        Me.Label11.Text = "AutoTile:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(143, 502)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(36, 13)
-        Me.Label10.TabIndex = 15
-        Me.Label10.Text = "Layer:"
+        Me.DarkLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel4.AutoSize = True
+        Me.DarkLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(3, 516)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(49, 13)
+        Me.DarkLabel4.TabIndex = 18
+        Me.DarkLabel4.Text = "AutoTile:"
         '
         'cmbLayers
         '
-        Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLayers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbLayers.ForeColor = System.Drawing.Color.LightGray
         Me.cmbLayers.FormattingEnabled = True
-        Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
-        Me.cmbLayers.Location = New System.Drawing.Point(185, 499)
+        Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask2", "Fringe", "Fringe2"})
+        Me.cmbLayers.Location = New System.Drawing.Point(180, 486)
         Me.cmbLayers.Name = "cmbLayers"
-        Me.cmbLayers.Size = New System.Drawing.Size(121, 21)
-        Me.cmbLayers.TabIndex = 14
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(7, 502)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(41, 13)
-        Me.Label9.TabIndex = 13
-        Me.Label9.Text = "Tileset:"
-        '
-        'cmbTileSets
-        '
-        Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTileSets.FormattingEnabled = True
-        Me.cmbTileSets.Location = New System.Drawing.Point(54, 499)
-        Me.cmbTileSets.Name = "cmbTileSets"
-        Me.cmbTileSets.Size = New System.Drawing.Size(83, 21)
-        Me.cmbTileSets.TabIndex = 12
+        Me.cmbLayers.Size = New System.Drawing.Size(130, 21)
+        Me.cmbLayers.TabIndex = 17
         '
         'pnlBack
         '
+        Me.pnlBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlBack.BackColor = System.Drawing.Color.Black
         Me.pnlBack.Controls.Add(Me.picBackSelect)
-        Me.pnlBack.Location = New System.Drawing.Point(6, 8)
+        Me.pnlBack.Location = New System.Drawing.Point(3, 3)
         Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(286, 454)
-        Me.pnlBack.TabIndex = 9
+        Me.pnlBack.Size = New System.Drawing.Size(286, 442)
+        Me.pnlBack.TabIndex = 10
         '
         'picBackSelect
         '
@@ -415,788 +381,912 @@ Partial Class frmEditor_MapEditor
         Me.picBackSelect.TabIndex = 1
         Me.picBackSelect.TabStop = False
         '
-        'Label1
+        'DarkLabel3
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(66, 483)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(174, 13)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Drag Mouse to Select Multiple Tiles"
-        '
-        'scrlPictureX
-        '
-        Me.scrlPictureX.LargeChange = 1
-        Me.scrlPictureX.Location = New System.Drawing.Point(6, 465)
-        Me.scrlPictureX.Name = "scrlPictureX"
-        Me.scrlPictureX.Size = New System.Drawing.Size(289, 16)
-        Me.scrlPictureX.TabIndex = 1
+        Me.DarkLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel3.AutoSize = True
+        Me.DarkLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(138, 489)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(36, 13)
+        Me.DarkLabel3.TabIndex = 16
+        Me.DarkLabel3.Text = "Layer:"
         '
         'scrlPictureY
         '
-        Me.scrlPictureY.LargeChange = 1
-        Me.scrlPictureY.Location = New System.Drawing.Point(295, 7)
+        Me.scrlPictureY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
         Me.scrlPictureY.Name = "scrlPictureY"
-        Me.scrlPictureY.Size = New System.Drawing.Size(16, 455)
-        Me.scrlPictureY.TabIndex = 2
+        Me.scrlPictureY.Size = New System.Drawing.Size(18, 442)
+        Me.scrlPictureY.TabIndex = 12
         '
-        'tpAttributes
+        'cmbTileSets
         '
-        Me.tpAttributes.Controls.Add(Me.optCraft)
-        Me.tpAttributes.Controls.Add(Me.optHouse)
-        Me.tpAttributes.Controls.Add(Me.btnClearAttribute)
-        Me.tpAttributes.Controls.Add(Me.optTrap)
-        Me.tpAttributes.Controls.Add(Me.optBlocked)
-        Me.tpAttributes.Controls.Add(Me.optHeal)
-        Me.tpAttributes.Controls.Add(Me.optWarp)
-        Me.tpAttributes.Controls.Add(Me.optBank)
-        Me.tpAttributes.Controls.Add(Me.optItem)
-        Me.tpAttributes.Controls.Add(Me.optShop)
-        Me.tpAttributes.Controls.Add(Me.optNpcAvoid)
-        Me.tpAttributes.Controls.Add(Me.optNpcSpawn)
-        Me.tpAttributes.Controls.Add(Me.optKey)
-        Me.tpAttributes.Controls.Add(Me.optDoor)
-        Me.tpAttributes.Controls.Add(Me.optKeyOpen)
-        Me.tpAttributes.Controls.Add(Me.optResource)
-        Me.tpAttributes.Location = New System.Drawing.Point(4, 22)
-        Me.tpAttributes.Name = "tpAttributes"
-        Me.tpAttributes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAttributes.Size = New System.Drawing.Size(314, 555)
-        Me.tpAttributes.TabIndex = 3
-        Me.tpAttributes.Text = "Attributes"
-        Me.tpAttributes.UseVisualStyleBackColor = True
+        Me.cmbTileSets.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbTileSets.ForeColor = System.Drawing.Color.LightGray
+        Me.cmbTileSets.FormattingEnabled = True
+        Me.cmbTileSets.Location = New System.Drawing.Point(51, 486)
+        Me.cmbTileSets.Name = "cmbTileSets"
+        Me.cmbTileSets.Size = New System.Drawing.Size(81, 21)
+        Me.cmbTileSets.TabIndex = 15
         '
-        'optCraft
+        'scrlPictureX
         '
-        Me.optCraft.AutoSize = True
-        Me.optCraft.Location = New System.Drawing.Point(173, 85)
-        Me.optCraft.Name = "optCraft"
-        Me.optCraft.Size = New System.Drawing.Size(47, 17)
-        Me.optCraft.TabIndex = 17
-        Me.optCraft.TabStop = True
-        Me.optCraft.Text = "Craft"
-        Me.optCraft.UseVisualStyleBackColor = True
+        Me.scrlPictureX.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
+        Me.scrlPictureX.Name = "scrlPictureX"
+        Me.scrlPictureX.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlPictureX.Size = New System.Drawing.Size(283, 16)
+        Me.scrlPictureX.TabIndex = 11
+        '
+        'DarkLabel2
+        '
+        Me.DarkLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel2.AutoSize = True
+        Me.DarkLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(3, 489)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(43, 13)
+        Me.DarkLabel2.TabIndex = 14
+        Me.DarkLabel2.Text = "TileSet:"
+        '
+        'DarkLabel1
+        '
+        Me.DarkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel1.AutoSize = True
+        Me.DarkLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(57, 470)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
+        Me.DarkLabel1.TabIndex = 13
+        Me.DarkLabel1.Text = "Drag Mouse to Select Multiple Tiles"
+        '
+        'pnlAttribute
+        '
+        Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlAttribute.Controls.Add(Me.btnClearAttribute)
+        Me.pnlAttribute.Controls.Add(Me.optHouse)
+        Me.pnlAttribute.Controls.Add(Me.optShop)
+        Me.pnlAttribute.Controls.Add(Me.optNpcSpawn)
+        Me.pnlAttribute.Controls.Add(Me.optBank)
+        Me.pnlAttribute.Controls.Add(Me.optCraft)
+        Me.pnlAttribute.Controls.Add(Me.optTrap)
+        Me.pnlAttribute.Controls.Add(Me.optHeal)
+        Me.pnlAttribute.Controls.Add(Me.optKeyOpen)
+        Me.pnlAttribute.Controls.Add(Me.optKey)
+        Me.pnlAttribute.Controls.Add(Me.optDoor)
+        Me.pnlAttribute.Controls.Add(Me.optResource)
+        Me.pnlAttribute.Controls.Add(Me.optNpcAvoid)
+        Me.pnlAttribute.Controls.Add(Me.optItem)
+        Me.pnlAttribute.Controls.Add(Me.optWarp)
+        Me.pnlAttribute.Controls.Add(Me.optBlocked)
+        Me.pnlAttribute.Location = New System.Drawing.Point(2, 50)
+        Me.pnlAttribute.Name = "pnlAttribute"
+        Me.pnlAttribute.Size = New System.Drawing.Size(314, 548)
+        Me.pnlAttribute.TabIndex = 9
+        '
+        'btnClearAttribute
+        '
+        Me.btnClearAttribute.Location = New System.Drawing.Point(10, 470)
+        Me.btnClearAttribute.Name = "btnClearAttribute"
+        Me.btnClearAttribute.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnClearAttribute.Size = New System.Drawing.Size(297, 23)
+        Me.btnClearAttribute.TabIndex = 15
+        Me.btnClearAttribute.Text = "Clear Attributes"
         '
         'optHouse
         '
         Me.optHouse.AutoSize = True
-        Me.optHouse.Location = New System.Drawing.Point(173, 117)
+        Me.optHouse.BackColor = System.Drawing.Color.Transparent
+        Me.optHouse.Location = New System.Drawing.Point(163, 139)
         Me.optHouse.Name = "optHouse"
-        Me.optHouse.Size = New System.Drawing.Size(77, 17)
-        Me.optHouse.TabIndex = 15
+        Me.optHouse.Size = New System.Drawing.Size(56, 17)
+        Me.optHouse.TabIndex = 14
         Me.optHouse.TabStop = True
-        Me.optHouse.Text = "Buy House"
-        Me.optHouse.UseVisualStyleBackColor = True
+        Me.optHouse.Text = "House"
         '
-        'btnClearAttribute
+        'optShop
         '
-        Me.btnClearAttribute.Location = New System.Drawing.Point(10, 462)
-        Me.btnClearAttribute.Name = "btnClearAttribute"
-        Me.btnClearAttribute.Size = New System.Drawing.Size(165, 25)
-        Me.btnClearAttribute.TabIndex = 14
-        Me.btnClearAttribute.Text = "Clear All Attributes"
-        Me.btnClearAttribute.UseVisualStyleBackColor = True
+        Me.optShop.AutoSize = True
+        Me.optShop.BackColor = System.Drawing.Color.Transparent
+        Me.optShop.Location = New System.Drawing.Point(97, 139)
+        Me.optShop.Name = "optShop"
+        Me.optShop.Size = New System.Drawing.Size(50, 17)
+        Me.optShop.TabIndex = 13
+        Me.optShop.TabStop = True
+        Me.optShop.Text = "Shop"
+        '
+        'optNpcSpawn
+        '
+        Me.optNpcSpawn.AutoSize = True
+        Me.optNpcSpawn.BackColor = System.Drawing.Color.Transparent
+        Me.optNpcSpawn.Location = New System.Drawing.Point(10, 139)
+        Me.optNpcSpawn.Name = "optNpcSpawn"
+        Me.optNpcSpawn.Size = New System.Drawing.Size(81, 17)
+        Me.optNpcSpawn.TabIndex = 12
+        Me.optNpcSpawn.TabStop = True
+        Me.optNpcSpawn.Text = "Npc Spawn"
+        '
+        'optBank
+        '
+        Me.optBank.AutoSize = True
+        Me.optBank.BackColor = System.Drawing.Color.Transparent
+        Me.optBank.Location = New System.Drawing.Point(235, 94)
+        Me.optBank.Name = "optBank"
+        Me.optBank.Size = New System.Drawing.Size(50, 17)
+        Me.optBank.TabIndex = 11
+        Me.optBank.TabStop = True
+        Me.optBank.Text = "Bank"
+        '
+        'optCraft
+        '
+        Me.optCraft.AutoSize = True
+        Me.optCraft.BackColor = System.Drawing.Color.Transparent
+        Me.optCraft.Location = New System.Drawing.Point(163, 94)
+        Me.optCraft.Name = "optCraft"
+        Me.optCraft.Size = New System.Drawing.Size(47, 17)
+        Me.optCraft.TabIndex = 10
+        Me.optCraft.TabStop = True
+        Me.optCraft.Text = "Craft"
         '
         'optTrap
         '
         Me.optTrap.AutoSize = True
-        Me.optTrap.Location = New System.Drawing.Point(101, 85)
+        Me.optTrap.BackColor = System.Drawing.Color.Transparent
+        Me.optTrap.Location = New System.Drawing.Point(97, 94)
         Me.optTrap.Name = "optTrap"
         Me.optTrap.Size = New System.Drawing.Size(47, 17)
-        Me.optTrap.TabIndex = 12
+        Me.optTrap.TabIndex = 9
         Me.optTrap.TabStop = True
         Me.optTrap.Text = "Trap"
-        Me.optTrap.UseVisualStyleBackColor = True
-        '
-        'optBlocked
-        '
-        Me.optBlocked.AutoSize = True
-        Me.optBlocked.Location = New System.Drawing.Point(10, 14)
-        Me.optBlocked.Name = "optBlocked"
-        Me.optBlocked.Size = New System.Drawing.Size(64, 17)
-        Me.optBlocked.TabIndex = 0
-        Me.optBlocked.TabStop = True
-        Me.optBlocked.Text = "Blocked"
-        Me.optBlocked.UseVisualStyleBackColor = True
         '
         'optHeal
         '
         Me.optHeal.AutoSize = True
-        Me.optHeal.Location = New System.Drawing.Point(10, 85)
+        Me.optHeal.BackColor = System.Drawing.Color.Transparent
+        Me.optHeal.Location = New System.Drawing.Point(10, 94)
         Me.optHeal.Name = "optHeal"
         Me.optHeal.Size = New System.Drawing.Size(47, 17)
-        Me.optHeal.TabIndex = 11
+        Me.optHeal.TabIndex = 8
         Me.optHeal.TabStop = True
         Me.optHeal.Text = "Heal"
-        Me.optHeal.UseVisualStyleBackColor = True
+        '
+        'optKeyOpen
+        '
+        Me.optKeyOpen.AutoSize = True
+        Me.optKeyOpen.BackColor = System.Drawing.Color.Transparent
+        Me.optKeyOpen.Location = New System.Drawing.Point(235, 50)
+        Me.optKeyOpen.Name = "optKeyOpen"
+        Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
+        Me.optKeyOpen.TabIndex = 7
+        Me.optKeyOpen.TabStop = True
+        Me.optKeyOpen.Text = "Key Open"
+        '
+        'optKey
+        '
+        Me.optKey.AutoSize = True
+        Me.optKey.BackColor = System.Drawing.Color.Transparent
+        Me.optKey.Location = New System.Drawing.Point(163, 50)
+        Me.optKey.Name = "optKey"
+        Me.optKey.Size = New System.Drawing.Size(43, 17)
+        Me.optKey.TabIndex = 6
+        Me.optKey.TabStop = True
+        Me.optKey.Text = "Key"
+        '
+        'optDoor
+        '
+        Me.optDoor.AutoSize = True
+        Me.optDoor.BackColor = System.Drawing.Color.Transparent
+        Me.optDoor.Location = New System.Drawing.Point(97, 50)
+        Me.optDoor.Name = "optDoor"
+        Me.optDoor.Size = New System.Drawing.Size(48, 17)
+        Me.optDoor.TabIndex = 5
+        Me.optDoor.TabStop = True
+        Me.optDoor.Text = "Door"
+        '
+        'optResource
+        '
+        Me.optResource.AutoSize = True
+        Me.optResource.BackColor = System.Drawing.Color.Transparent
+        Me.optResource.Location = New System.Drawing.Point(10, 50)
+        Me.optResource.Name = "optResource"
+        Me.optResource.Size = New System.Drawing.Size(71, 17)
+        Me.optResource.TabIndex = 4
+        Me.optResource.TabStop = True
+        Me.optResource.Text = "Resource"
+        '
+        'optNpcAvoid
+        '
+        Me.optNpcAvoid.AutoSize = True
+        Me.optNpcAvoid.BackColor = System.Drawing.Color.Transparent
+        Me.optNpcAvoid.Location = New System.Drawing.Point(235, 7)
+        Me.optNpcAvoid.Name = "optNpcAvoid"
+        Me.optNpcAvoid.Size = New System.Drawing.Size(75, 17)
+        Me.optNpcAvoid.TabIndex = 3
+        Me.optNpcAvoid.TabStop = True
+        Me.optNpcAvoid.Text = "Npc Avoid"
+        '
+        'optItem
+        '
+        Me.optItem.AutoSize = True
+        Me.optItem.BackColor = System.Drawing.Color.Transparent
+        Me.optItem.Location = New System.Drawing.Point(163, 7)
+        Me.optItem.Name = "optItem"
+        Me.optItem.Size = New System.Drawing.Size(66, 17)
+        Me.optItem.TabIndex = 2
+        Me.optItem.TabStop = True
+        Me.optItem.Text = "MapItem"
         '
         'optWarp
         '
         Me.optWarp.AutoSize = True
-        Me.optWarp.Location = New System.Drawing.Point(101, 14)
+        Me.optWarp.BackColor = System.Drawing.Color.Transparent
+        Me.optWarp.Location = New System.Drawing.Point(97, 7)
         Me.optWarp.Name = "optWarp"
         Me.optWarp.Size = New System.Drawing.Size(51, 17)
         Me.optWarp.TabIndex = 1
         Me.optWarp.TabStop = True
         Me.optWarp.Text = "Warp"
-        Me.optWarp.UseVisualStyleBackColor = True
         '
-        'optBank
+        'optBlocked
         '
-        Me.optBank.AutoSize = True
-        Me.optBank.Location = New System.Drawing.Point(237, 85)
-        Me.optBank.Name = "optBank"
-        Me.optBank.Size = New System.Drawing.Size(50, 17)
-        Me.optBank.TabIndex = 10
-        Me.optBank.TabStop = True
-        Me.optBank.Text = "Bank"
-        Me.optBank.UseVisualStyleBackColor = True
+        Me.optBlocked.AutoSize = True
+        Me.optBlocked.BackColor = System.Drawing.Color.Transparent
+        Me.optBlocked.Location = New System.Drawing.Point(10, 7)
+        Me.optBlocked.Name = "optBlocked"
+        Me.optBlocked.Size = New System.Drawing.Size(64, 17)
+        Me.optBlocked.TabIndex = 0
+        Me.optBlocked.TabStop = True
+        Me.optBlocked.Text = "Blocked"
         '
-        'optItem
+        'pnlNpc
         '
-        Me.optItem.AutoSize = True
-        Me.optItem.Location = New System.Drawing.Point(173, 14)
-        Me.optItem.Name = "optItem"
-        Me.optItem.Size = New System.Drawing.Size(45, 17)
-        Me.optItem.TabIndex = 2
-        Me.optItem.TabStop = True
-        Me.optItem.Text = "Item"
-        Me.optItem.UseVisualStyleBackColor = True
-        '
-        'optShop
-        '
-        Me.optShop.AutoSize = True
-        Me.optShop.Location = New System.Drawing.Point(101, 117)
-        Me.optShop.Name = "optShop"
-        Me.optShop.Size = New System.Drawing.Size(50, 17)
-        Me.optShop.TabIndex = 9
-        Me.optShop.TabStop = True
-        Me.optShop.Text = "Shop"
-        Me.optShop.UseVisualStyleBackColor = True
-        '
-        'optNpcAvoid
-        '
-        Me.optNpcAvoid.AutoSize = True
-        Me.optNpcAvoid.Location = New System.Drawing.Point(237, 14)
-        Me.optNpcAvoid.Name = "optNpcAvoid"
-        Me.optNpcAvoid.Size = New System.Drawing.Size(77, 17)
-        Me.optNpcAvoid.TabIndex = 3
-        Me.optNpcAvoid.TabStop = True
-        Me.optNpcAvoid.Text = "NPC Avoid"
-        Me.optNpcAvoid.UseVisualStyleBackColor = True
-        '
-        'optNpcSpawn
-        '
-        Me.optNpcSpawn.AutoSize = True
-        Me.optNpcSpawn.Location = New System.Drawing.Point(10, 117)
-        Me.optNpcSpawn.Name = "optNpcSpawn"
-        Me.optNpcSpawn.Size = New System.Drawing.Size(83, 17)
-        Me.optNpcSpawn.TabIndex = 8
-        Me.optNpcSpawn.TabStop = True
-        Me.optNpcSpawn.Text = "NPC Spawn"
-        Me.optNpcSpawn.UseVisualStyleBackColor = True
-        '
-        'optKey
-        '
-        Me.optKey.AutoSize = True
-        Me.optKey.Location = New System.Drawing.Point(173, 50)
-        Me.optKey.Name = "optKey"
-        Me.optKey.Size = New System.Drawing.Size(43, 17)
-        Me.optKey.TabIndex = 4
-        Me.optKey.TabStop = True
-        Me.optKey.Text = "Key"
-        Me.optKey.UseVisualStyleBackColor = True
-        '
-        'optDoor
-        '
-        Me.optDoor.AutoSize = True
-        Me.optDoor.Location = New System.Drawing.Point(101, 50)
-        Me.optDoor.Name = "optDoor"
-        Me.optDoor.Size = New System.Drawing.Size(48, 17)
-        Me.optDoor.TabIndex = 7
-        Me.optDoor.TabStop = True
-        Me.optDoor.Text = "Door"
-        Me.optDoor.UseVisualStyleBackColor = True
-        '
-        'optKeyOpen
-        '
-        Me.optKeyOpen.AutoSize = True
-        Me.optKeyOpen.Location = New System.Drawing.Point(237, 50)
-        Me.optKeyOpen.Name = "optKeyOpen"
-        Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
-        Me.optKeyOpen.TabIndex = 5
-        Me.optKeyOpen.TabStop = True
-        Me.optKeyOpen.Text = "Key Open"
-        Me.optKeyOpen.UseVisualStyleBackColor = True
-        '
-        'optResource
-        '
-        Me.optResource.AutoSize = True
-        Me.optResource.Location = New System.Drawing.Point(10, 50)
-        Me.optResource.Name = "optResource"
-        Me.optResource.Size = New System.Drawing.Size(71, 17)
-        Me.optResource.TabIndex = 6
-        Me.optResource.TabStop = True
-        Me.optResource.Text = "Resource"
-        Me.optResource.UseVisualStyleBackColor = True
-        '
-        'tpNpcs
-        '
-        Me.tpNpcs.Controls.Add(Me.fraNpcs)
-        Me.tpNpcs.Location = New System.Drawing.Point(4, 22)
-        Me.tpNpcs.Name = "tpNpcs"
-        Me.tpNpcs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpNpcs.Size = New System.Drawing.Size(314, 555)
-        Me.tpNpcs.TabIndex = 1
-        Me.tpNpcs.Text = "Npc's"
-        Me.tpNpcs.UseVisualStyleBackColor = True
-        '
-        'fraNpcs
-        '
-        Me.fraNpcs.Controls.Add(Me.cmbNpcList)
-        Me.fraNpcs.Controls.Add(Me.lstMapNpc)
-        Me.fraNpcs.Controls.Add(Me.ComboBox23)
-        Me.fraNpcs.Location = New System.Drawing.Point(6, 8)
-        Me.fraNpcs.Name = "fraNpcs"
-        Me.fraNpcs.Size = New System.Drawing.Size(305, 426)
-        Me.fraNpcs.TabIndex = 11
-        Me.fraNpcs.TabStop = False
-        Me.fraNpcs.Text = "NPCs"
+        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlNpc.Controls.Add(Me.cmbNpcList)
+        Me.pnlNpc.Controls.Add(Me.lstMapNpc)
+        Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
+        Me.pnlNpc.Name = "pnlNpc"
+        Me.pnlNpc.Size = New System.Drawing.Size(314, 548)
+        Me.pnlNpc.TabIndex = 8
         '
         'cmbNpcList
         '
+        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
         Me.cmbNpcList.FormattingEnabled = True
-        Me.cmbNpcList.Location = New System.Drawing.Point(178, 19)
+        Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
         Me.cmbNpcList.Name = "cmbNpcList"
-        Me.cmbNpcList.Size = New System.Drawing.Size(124, 21)
-        Me.cmbNpcList.TabIndex = 70
+        Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
+        Me.cmbNpcList.TabIndex = 18
         '
         'lstMapNpc
         '
+        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
         Me.lstMapNpc.FormattingEnabled = True
-        Me.lstMapNpc.Location = New System.Drawing.Point(6, 19)
+        Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
         Me.lstMapNpc.Name = "lstMapNpc"
-        Me.lstMapNpc.Size = New System.Drawing.Size(166, 394)
-        Me.lstMapNpc.TabIndex = 69
+        Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
+        Me.lstMapNpc.TabIndex = 0
         '
-        'ComboBox23
+        'pnlDirBlock
         '
-        Me.ComboBox23.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox23.FormattingEnabled = True
-        Me.ComboBox23.Location = New System.Drawing.Point(341, 469)
-        Me.ComboBox23.Name = "ComboBox23"
-        Me.ComboBox23.Size = New System.Drawing.Size(133, 21)
-        Me.ComboBox23.TabIndex = 68
+        Me.pnlDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlDirBlock.Controls.Add(Me.DarkLabel6)
+        Me.pnlDirBlock.Location = New System.Drawing.Point(2, 51)
+        Me.pnlDirBlock.Name = "pnlDirBlock"
+        Me.pnlDirBlock.Size = New System.Drawing.Size(314, 548)
+        Me.pnlDirBlock.TabIndex = 7
         '
-        'tpDirBlock
+        'DarkLabel6
         '
-        Me.tpDirBlock.Controls.Add(Me.Label12)
-        Me.tpDirBlock.Location = New System.Drawing.Point(4, 22)
-        Me.tpDirBlock.Name = "tpDirBlock"
-        Me.tpDirBlock.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpDirBlock.Size = New System.Drawing.Size(314, 555)
-        Me.tpDirBlock.TabIndex = 4
-        Me.tpDirBlock.Text = "Directional Block"
-        Me.tpDirBlock.UseVisualStyleBackColor = True
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(8, 8)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(239, 13)
+        Me.DarkLabel6.TabIndex = 0
+        Me.DarkLabel6.Text = "Just press the arrows to block that side of the tile."
         '
-        'Label12
+        'pnlEvents
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(22, 23)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(239, 13)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Just press the arrows to block that side of the tile."
+        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlEvents.Controls.Add(Me.DarkLabel5)
+        Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
+        Me.pnlEvents.Name = "pnlEvents"
+        Me.pnlEvents.Size = New System.Drawing.Size(314, 548)
+        Me.pnlEvents.TabIndex = 6
         '
-        'tpEvents
+        'DarkLabel5
         '
-        Me.tpEvents.Controls.Add(Me.Label13)
-        Me.tpEvents.Location = New System.Drawing.Point(4, 22)
-        Me.tpEvents.Name = "tpEvents"
-        Me.tpEvents.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpEvents.Size = New System.Drawing.Size(314, 555)
-        Me.tpEvents.TabIndex = 5
-        Me.tpEvents.Text = "Events"
-        Me.tpEvents.UseVisualStyleBackColor = True
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
+        Me.DarkLabel5.TabIndex = 0
+        Me.DarkLabel5.Text = "Click on the map where you want to ad a event."
         '
-        'Label13
+        'btnEvents
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(20, 21)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(239, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Click on the map where you want to add a event."
+        Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnEvents.Location = New System.Drawing.Point(264, 28)
+        Me.btnEvents.Name = "btnEvents"
+        Me.btnEvents.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnEvents.Size = New System.Drawing.Size(52, 23)
+        Me.btnEvents.TabIndex = 4
+        Me.btnEvents.Text = "Events"
         '
-        'pnlSettings
+        'btnDirBlock
         '
-        Me.pnlSettings.AutoScroll = True
-        Me.pnlSettings.Controls.Add(Me.grpSettings)
-        Me.pnlSettings.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlSettings.Location = New System.Drawing.Point(1056, 0)
-        Me.pnlSettings.Name = "pnlSettings"
-        Me.pnlSettings.Size = New System.Drawing.Size(229, 590)
-        Me.pnlSettings.TabIndex = 19
+        Me.btnDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnDirBlock.Location = New System.Drawing.Point(163, 28)
+        Me.btnDirBlock.Name = "btnDirBlock"
+        Me.btnDirBlock.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnDirBlock.Size = New System.Drawing.Size(100, 23)
+        Me.btnDirBlock.TabIndex = 3
+        Me.btnDirBlock.Text = "Directional Block"
         '
-        'grpSettings
+        'btnNpc
         '
-        Me.grpSettings.Controls.Add(Me.chkInstance)
-        Me.grpSettings.Controls.Add(Me.GroupBox3)
-        Me.grpSettings.Controls.Add(Me.GroupBox2)
-        Me.grpSettings.Controls.Add(Me.cmbMoral)
-        Me.grpSettings.Controls.Add(Me.GroupBox1)
-        Me.grpSettings.Controls.Add(Me.Label8)
-        Me.grpSettings.Controls.Add(Me.Label6)
-        Me.grpSettings.Controls.Add(Me.fraMaxSizes)
-        Me.grpSettings.Controls.Add(Me.fraBootSettings)
-        Me.grpSettings.Controls.Add(Me.txtName)
-        Me.grpSettings.Controls.Add(Me.fraMapLinks)
-        Me.grpSettings.Location = New System.Drawing.Point(3, 3)
-        Me.grpSettings.Name = "grpSettings"
-        Me.grpSettings.Size = New System.Drawing.Size(206, 866)
-        Me.grpSettings.TabIndex = 25
-        Me.grpSettings.TabStop = False
-        Me.grpSettings.Text = "Map Settings"
+        Me.btnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnNpc.Location = New System.Drawing.Point(118, 28)
+        Me.btnNpc.Name = "btnNpc"
+        Me.btnNpc.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnNpc.Size = New System.Drawing.Size(44, 23)
+        Me.btnNpc.TabIndex = 2
+        Me.btnNpc.Text = "Npc's"
         '
-        'chkInstance
+        'btnAttributes
         '
-        Me.chkInstance.AutoSize = True
-        Me.chkInstance.Location = New System.Drawing.Point(41, 71)
-        Me.chkInstance.Name = "chkInstance"
-        Me.chkInstance.Size = New System.Drawing.Size(79, 17)
-        Me.chkInstance.TabIndex = 39
-        Me.chkInstance.Text = "Instanced?"
-        Me.chkInstance.UseVisualStyleBackColor = True
+        Me.btnAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnAttributes.Location = New System.Drawing.Point(49, 28)
+        Me.btnAttributes.Name = "btnAttributes"
+        Me.btnAttributes.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnAttributes.Size = New System.Drawing.Size(68, 23)
+        Me.btnAttributes.TabIndex = 1
+        Me.btnAttributes.Text = "Attributes"
         '
-        'GroupBox3
+        'btnTiles
         '
-        Me.GroupBox3.Controls.Add(Me.chkUseTint)
-        Me.GroupBox3.Controls.Add(Me.lblMapAlpha)
-        Me.GroupBox3.Controls.Add(Me.lblMapBlue)
-        Me.GroupBox3.Controls.Add(Me.lblMapGreen)
-        Me.GroupBox3.Controls.Add(Me.lblMapRed)
-        Me.GroupBox3.Controls.Add(Me.scrlMapAlpha)
-        Me.GroupBox3.Controls.Add(Me.scrlMapBlue)
-        Me.GroupBox3.Controls.Add(Me.scrlMapGreen)
-        Me.GroupBox3.Controls.Add(Me.scrlMapRed)
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 530)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(197, 116)
-        Me.GroupBox3.TabIndex = 18
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Map Tint"
+        Me.btnTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnTiles.Location = New System.Drawing.Point(4, 28)
+        Me.btnTiles.Name = "btnTiles"
+        Me.btnTiles.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnTiles.Size = New System.Drawing.Size(44, 23)
+        Me.btnTiles.TabIndex = 0
+        Me.btnTiles.Text = "Tiles"
+        '
+        'DarkSectionPanel2
+        '
+        Me.DarkSectionPanel2.AutoScroll = True
+        Me.DarkSectionPanel2.Controls.Add(Me.pnlMoreOptions)
+        Me.DarkSectionPanel2.Controls.Add(Me.btnMoreOptions)
+        Me.DarkSectionPanel2.Controls.Add(Me.GroupBox3)
+        Me.DarkSectionPanel2.Controls.Add(Me.GroupBox2)
+        Me.DarkSectionPanel2.Controls.Add(Me.GroupBox1)
+        Me.DarkSectionPanel2.Controls.Add(Me.DarkLabel7)
+        Me.DarkSectionPanel2.Controls.Add(Me.chkInstance)
+        Me.DarkSectionPanel2.Controls.Add(Me.txtName)
+        Me.DarkSectionPanel2.Controls.Add(Me.DarkLabel8)
+        Me.DarkSectionPanel2.Controls.Add(Me.fraMapLinks)
+        Me.DarkSectionPanel2.Controls.Add(Me.cmbMoral)
+        Me.DarkSectionPanel2.Dock = System.Windows.Forms.DockStyle.Right
+        Me.DarkSectionPanel2.Location = New System.Drawing.Point(1076, 0)
+        Me.DarkSectionPanel2.Name = "DarkSectionPanel2"
+        Me.DarkSectionPanel2.SectionHeader = "Map Settings"
+        Me.DarkSectionPanel2.Size = New System.Drawing.Size(216, 598)
+        Me.DarkSectionPanel2.TabIndex = 8
+        '
+        'pnlMoreOptions
+        '
+        Me.pnlMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.pnlMoreOptions.Controls.Add(Me.GroupBox5)
+        Me.pnlMoreOptions.Controls.Add(Me.GroupBox4)
+        Me.pnlMoreOptions.Location = New System.Drawing.Point(4, 26)
+        Me.pnlMoreOptions.Name = "pnlMoreOptions"
+        Me.pnlMoreOptions.Size = New System.Drawing.Size(208, 540)
+        Me.pnlMoreOptions.TabIndex = 31
+        Me.pnlMoreOptions.Visible = False
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.chkUseTint)
+        Me.GroupBox5.Controls.Add(Me.scrlMapAlpha)
+        Me.GroupBox5.Controls.Add(Me.lblMapAlpha)
+        Me.GroupBox5.Controls.Add(Me.scrlMapBlue)
+        Me.GroupBox5.Controls.Add(Me.lblMapBlue)
+        Me.GroupBox5.Controls.Add(Me.scrlMapGreen)
+        Me.GroupBox5.Controls.Add(Me.lblMapGreen)
+        Me.GroupBox5.Controls.Add(Me.scrlMapRed)
+        Me.GroupBox5.Controls.Add(Me.lblMapRed)
+        Me.GroupBox5.ForeColor = System.Drawing.Color.LightGray
+        Me.GroupBox5.Location = New System.Drawing.Point(5, 167)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(200, 154)
+        Me.GroupBox5.TabIndex = 1
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Map Tinting"
         '
         'chkUseTint
         '
         Me.chkUseTint.AutoSize = True
-        Me.chkUseTint.Location = New System.Drawing.Point(5, 17)
+        Me.chkUseTint.Checked = True
+        Me.chkUseTint.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkUseTint.Location = New System.Drawing.Point(6, 20)
         Me.chkUseTint.Name = "chkUseTint"
         Me.chkUseTint.Size = New System.Drawing.Size(93, 17)
-        Me.chkUseTint.TabIndex = 18
+        Me.chkUseTint.TabIndex = 25
         Me.chkUseTint.Text = "Use MapTint?"
         Me.chkUseTint.UseVisualStyleBackColor = True
+        '
+        'scrlMapAlpha
+        '
+        Me.scrlMapAlpha.BackColor = System.Drawing.Color.LightGray
+        Me.scrlMapAlpha.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlMapAlpha.Location = New System.Drawing.Point(91, 127)
+        Me.scrlMapAlpha.Maximum = 255
+        Me.scrlMapAlpha.Name = "scrlMapAlpha"
+        Me.scrlMapAlpha.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapAlpha.Size = New System.Drawing.Size(103, 15)
+        Me.scrlMapAlpha.TabIndex = 24
         '
         'lblMapAlpha
         '
         Me.lblMapAlpha.AutoSize = True
-        Me.lblMapAlpha.Location = New System.Drawing.Point(4, 94)
+        Me.lblMapAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblMapAlpha.Location = New System.Drawing.Point(6, 129)
         Me.lblMapAlpha.Name = "lblMapAlpha"
         Me.lblMapAlpha.Size = New System.Drawing.Size(46, 13)
-        Me.lblMapAlpha.TabIndex = 17
+        Me.lblMapAlpha.TabIndex = 23
         Me.lblMapAlpha.Text = "Alpha: 0"
+        '
+        'scrlMapBlue
+        '
+        Me.scrlMapBlue.BackColor = System.Drawing.Color.LightGray
+        Me.scrlMapBlue.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlMapBlue.Location = New System.Drawing.Point(92, 101)
+        Me.scrlMapBlue.Name = "scrlMapBlue"
+        Me.scrlMapBlue.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapBlue.Size = New System.Drawing.Size(103, 15)
+        Me.scrlMapBlue.TabIndex = 22
         '
         'lblMapBlue
         '
         Me.lblMapBlue.AutoSize = True
-        Me.lblMapBlue.Location = New System.Drawing.Point(4, 75)
+        Me.lblMapBlue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblMapBlue.Location = New System.Drawing.Point(7, 101)
         Me.lblMapBlue.Name = "lblMapBlue"
         Me.lblMapBlue.Size = New System.Drawing.Size(40, 13)
-        Me.lblMapBlue.TabIndex = 16
+        Me.lblMapBlue.TabIndex = 21
         Me.lblMapBlue.Text = "Blue: 0"
+        '
+        'scrlMapGreen
+        '
+        Me.scrlMapGreen.BackColor = System.Drawing.Color.LightGray
+        Me.scrlMapGreen.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlMapGreen.Location = New System.Drawing.Point(91, 74)
+        Me.scrlMapGreen.Name = "scrlMapGreen"
+        Me.scrlMapGreen.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapGreen.Size = New System.Drawing.Size(103, 15)
+        Me.scrlMapGreen.TabIndex = 20
         '
         'lblMapGreen
         '
         Me.lblMapGreen.AutoSize = True
-        Me.lblMapGreen.Location = New System.Drawing.Point(4, 56)
+        Me.lblMapGreen.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblMapGreen.Location = New System.Drawing.Point(6, 74)
         Me.lblMapGreen.Name = "lblMapGreen"
         Me.lblMapGreen.Size = New System.Drawing.Size(48, 13)
-        Me.lblMapGreen.TabIndex = 15
+        Me.lblMapGreen.TabIndex = 19
         Me.lblMapGreen.Text = "Green: 0"
+        '
+        'scrlMapRed
+        '
+        Me.scrlMapRed.BackColor = System.Drawing.Color.LightGray
+        Me.scrlMapRed.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlMapRed.Location = New System.Drawing.Point(91, 48)
+        Me.scrlMapRed.Name = "scrlMapRed"
+        Me.scrlMapRed.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapRed.Size = New System.Drawing.Size(103, 15)
+        Me.scrlMapRed.TabIndex = 18
         '
         'lblMapRed
         '
         Me.lblMapRed.AutoSize = True
-        Me.lblMapRed.Location = New System.Drawing.Point(2, 37)
+        Me.lblMapRed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblMapRed.Location = New System.Drawing.Point(6, 48)
         Me.lblMapRed.Name = "lblMapRed"
         Me.lblMapRed.Size = New System.Drawing.Size(39, 13)
-        Me.lblMapRed.TabIndex = 14
+        Me.lblMapRed.TabIndex = 17
         Me.lblMapRed.Text = "Red: 0"
         '
-        'scrlMapAlpha
+        'GroupBox4
         '
-        Me.scrlMapAlpha.LargeChange = 1
-        Me.scrlMapAlpha.Location = New System.Drawing.Point(100, 90)
-        Me.scrlMapAlpha.Maximum = 255
-        Me.scrlMapAlpha.Name = "scrlMapAlpha"
-        Me.scrlMapAlpha.Size = New System.Drawing.Size(94, 17)
-        Me.scrlMapAlpha.TabIndex = 13
-        '
-        'scrlMapBlue
-        '
-        Me.scrlMapBlue.LargeChange = 1
-        Me.scrlMapBlue.Location = New System.Drawing.Point(100, 71)
-        Me.scrlMapBlue.Maximum = 255
-        Me.scrlMapBlue.Name = "scrlMapBlue"
-        Me.scrlMapBlue.Size = New System.Drawing.Size(94, 17)
-        Me.scrlMapBlue.TabIndex = 12
-        '
-        'scrlMapGreen
-        '
-        Me.scrlMapGreen.LargeChange = 1
-        Me.scrlMapGreen.Location = New System.Drawing.Point(100, 52)
-        Me.scrlMapGreen.Maximum = 255
-        Me.scrlMapGreen.Name = "scrlMapGreen"
-        Me.scrlMapGreen.Size = New System.Drawing.Size(94, 17)
-        Me.scrlMapGreen.TabIndex = 11
-        '
-        'scrlMapRed
-        '
-        Me.scrlMapRed.LargeChange = 1
-        Me.scrlMapRed.Location = New System.Drawing.Point(100, 33)
-        Me.scrlMapRed.Maximum = 255
-        Me.scrlMapRed.Name = "scrlMapRed"
-        Me.scrlMapRed.Size = New System.Drawing.Size(94, 17)
-        Me.scrlMapRed.TabIndex = 10
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.btnPreview)
-        Me.GroupBox2.Controls.Add(Me.lstMusic)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 648)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(197, 208)
-        Me.GroupBox2.TabIndex = 11
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Music"
-        '
-        'btnPreview
-        '
-        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
-        Me.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPreview.Location = New System.Drawing.Point(25, 172)
-        Me.btnPreview.Name = "btnPreview"
-        Me.btnPreview.Size = New System.Drawing.Size(151, 29)
-        Me.btnPreview.TabIndex = 4
-        Me.btnPreview.Text = "Preview Music"
-        Me.btnPreview.UseVisualStyleBackColor = True
-        '
-        'lstMusic
-        '
-        Me.lstMusic.FormattingEnabled = True
-        Me.lstMusic.Location = New System.Drawing.Point(6, 19)
-        Me.lstMusic.Name = "lstMusic"
-        Me.lstMusic.ScrollAlwaysVisible = True
-        Me.lstMusic.Size = New System.Drawing.Size(188, 147)
-        Me.lstMusic.TabIndex = 3
-        '
-        'cmbMoral
-        '
-        Me.cmbMoral.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMoral.FormattingEnabled = True
-        Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone", "Indoors"})
-        Me.cmbMoral.Location = New System.Drawing.Point(41, 39)
-        Me.cmbMoral.Name = "cmbMoral"
-        Me.cmbMoral.Size = New System.Drawing.Size(157, 21)
-        Me.cmbMoral.TabIndex = 37
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.scrlFogAlpha)
-        Me.GroupBox1.Controls.Add(Me.lblFogAlpha)
-        Me.GroupBox1.Controls.Add(Me.scrlFogSpeed)
-        Me.GroupBox1.Controls.Add(Me.lblFogSpeed)
-        Me.GroupBox1.Controls.Add(Me.scrlIntensity)
-        Me.GroupBox1.Controls.Add(Me.lblIntensity)
-        Me.GroupBox1.Controls.Add(Me.scrlFog)
-        Me.GroupBox1.Controls.Add(Me.lblFogIndex)
-        Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.cmbWeather)
-        Me.GroupBox1.Location = New System.Drawing.Point(5, 371)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(195, 154)
-        Me.GroupBox1.TabIndex = 17
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Map Weather"
+        Me.GroupBox4.Controls.Add(Me.scrlFogAlpha)
+        Me.GroupBox4.Controls.Add(Me.lblFogAlpha)
+        Me.GroupBox4.Controls.Add(Me.scrlFogSpeed)
+        Me.GroupBox4.Controls.Add(Me.lblFogSpeed)
+        Me.GroupBox4.Controls.Add(Me.scrlFog)
+        Me.GroupBox4.Controls.Add(Me.lblFogIndex)
+        Me.GroupBox4.Controls.Add(Me.scrlIntensity)
+        Me.GroupBox4.Controls.Add(Me.lblIntensity)
+        Me.GroupBox4.Controls.Add(Me.cmbWeather)
+        Me.GroupBox4.Controls.Add(Me.DarkLabel14)
+        Me.GroupBox4.ForeColor = System.Drawing.Color.LightGray
+        Me.GroupBox4.Location = New System.Drawing.Point(5, 7)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(200, 154)
+        Me.GroupBox4.TabIndex = 0
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Weather Options"
         '
         'scrlFogAlpha
         '
-        Me.scrlFogAlpha.LargeChange = 1
-        Me.scrlFogAlpha.Location = New System.Drawing.Point(90, 124)
+        Me.scrlFogAlpha.BackColor = System.Drawing.Color.LightGray
+        Me.scrlFogAlpha.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlFogAlpha.Location = New System.Drawing.Point(91, 127)
         Me.scrlFogAlpha.Maximum = 255
         Me.scrlFogAlpha.Name = "scrlFogAlpha"
-        Me.scrlFogAlpha.Size = New System.Drawing.Size(99, 17)
-        Me.scrlFogAlpha.TabIndex = 9
+        Me.scrlFogAlpha.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlFogAlpha.Size = New System.Drawing.Size(103, 15)
+        Me.scrlFogAlpha.TabIndex = 24
         '
         'lblFogAlpha
         '
         Me.lblFogAlpha.AutoSize = True
-        Me.lblFogAlpha.Location = New System.Drawing.Point(6, 126)
+        Me.lblFogAlpha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblFogAlpha.Location = New System.Drawing.Point(6, 129)
         Me.lblFogAlpha.Name = "lblFogAlpha"
-        Me.lblFogAlpha.Size = New System.Drawing.Size(79, 13)
-        Me.lblFogAlpha.TabIndex = 8
-        Me.lblFogAlpha.Text = "Fog Alpha: 255"
+        Me.lblFogAlpha.Size = New System.Drawing.Size(67, 13)
+        Me.lblFogAlpha.TabIndex = 23
+        Me.lblFogAlpha.Text = "Fog Alpha: 0"
         '
         'scrlFogSpeed
         '
-        Me.scrlFogSpeed.LargeChange = 1
-        Me.scrlFogSpeed.Location = New System.Drawing.Point(90, 101)
+        Me.scrlFogSpeed.BackColor = System.Drawing.Color.LightGray
+        Me.scrlFogSpeed.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlFogSpeed.Location = New System.Drawing.Point(92, 101)
         Me.scrlFogSpeed.Name = "scrlFogSpeed"
-        Me.scrlFogSpeed.Size = New System.Drawing.Size(99, 17)
-        Me.scrlFogSpeed.TabIndex = 7
+        Me.scrlFogSpeed.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlFogSpeed.Size = New System.Drawing.Size(103, 15)
+        Me.scrlFogSpeed.TabIndex = 22
         '
         'lblFogSpeed
         '
         Me.lblFogSpeed.AutoSize = True
-        Me.lblFogSpeed.Location = New System.Drawing.Point(6, 105)
+        Me.lblFogSpeed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblFogSpeed.Location = New System.Drawing.Point(7, 101)
         Me.lblFogSpeed.Name = "lblFogSpeed"
-        Me.lblFogSpeed.Size = New System.Drawing.Size(80, 13)
-        Me.lblFogSpeed.TabIndex = 6
-        Me.lblFogSpeed.Text = "FogSpeed: 100"
-        '
-        'scrlIntensity
-        '
-        Me.scrlIntensity.LargeChange = 1
-        Me.scrlIntensity.Location = New System.Drawing.Point(90, 51)
-        Me.scrlIntensity.Name = "scrlIntensity"
-        Me.scrlIntensity.Size = New System.Drawing.Size(99, 17)
-        Me.scrlIntensity.TabIndex = 5
-        '
-        'lblIntensity
-        '
-        Me.lblIntensity.AutoSize = True
-        Me.lblIntensity.Location = New System.Drawing.Point(6, 53)
-        Me.lblIntensity.Name = "lblIntensity"
-        Me.lblIntensity.Size = New System.Drawing.Size(70, 13)
-        Me.lblIntensity.TabIndex = 4
-        Me.lblIntensity.Text = "Intensity: 100"
+        Me.lblFogSpeed.Size = New System.Drawing.Size(71, 13)
+        Me.lblFogSpeed.TabIndex = 21
+        Me.lblFogSpeed.Text = "Fog Speed: 0"
         '
         'scrlFog
         '
-        Me.scrlFog.LargeChange = 1
-        Me.scrlFog.Location = New System.Drawing.Point(90, 81)
+        Me.scrlFog.BackColor = System.Drawing.Color.LightGray
+        Me.scrlFog.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlFog.Location = New System.Drawing.Point(91, 74)
         Me.scrlFog.Name = "scrlFog"
-        Me.scrlFog.Size = New System.Drawing.Size(99, 17)
-        Me.scrlFog.TabIndex = 3
+        Me.scrlFog.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlFog.Size = New System.Drawing.Size(103, 15)
+        Me.scrlFog.TabIndex = 20
         '
         'lblFogIndex
         '
         Me.lblFogIndex.AutoSize = True
-        Me.lblFogIndex.Location = New System.Drawing.Point(6, 82)
+        Me.lblFogIndex.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblFogIndex.Location = New System.Drawing.Point(6, 74)
         Me.lblFogIndex.Name = "lblFogIndex"
         Me.lblFogIndex.Size = New System.Drawing.Size(37, 13)
-        Me.lblFogIndex.TabIndex = 2
-        Me.lblFogIndex.Text = "Fog: 1"
+        Me.lblFogIndex.TabIndex = 19
+        Me.lblFogIndex.Text = "Fog: 0"
         '
-        'Label14
+        'scrlIntensity
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(6, 25)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(78, 13)
-        Me.Label14.TabIndex = 1
-        Me.Label14.Text = "Weather Type:"
+        Me.scrlIntensity.BackColor = System.Drawing.Color.LightGray
+        Me.scrlIntensity.ForeColor = System.Drawing.Color.DimGray
+        Me.scrlIntensity.Location = New System.Drawing.Point(91, 48)
+        Me.scrlIntensity.Name = "scrlIntensity"
+        Me.scrlIntensity.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlIntensity.Size = New System.Drawing.Size(103, 15)
+        Me.scrlIntensity.TabIndex = 18
+        '
+        'lblIntensity
+        '
+        Me.lblIntensity.AutoSize = True
+        Me.lblIntensity.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblIntensity.Location = New System.Drawing.Point(6, 48)
+        Me.lblIntensity.Name = "lblIntensity"
+        Me.lblIntensity.Size = New System.Drawing.Size(70, 13)
+        Me.lblIntensity.TabIndex = 17
+        Me.lblIntensity.Text = "Intensity: 100"
         '
         'cmbWeather
         '
+        Me.cmbWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbWeather.ForeColor = System.Drawing.Color.LightGray
         Me.cmbWeather.FormattingEnabled = True
         Me.cmbWeather.Items.AddRange(New Object() {"None", "Rain", "Snow", "Hail", "Sand Storm", "Storm", "Fog"})
-        Me.cmbWeather.Location = New System.Drawing.Point(90, 22)
+        Me.cmbWeather.Location = New System.Drawing.Point(91, 17)
         Me.cmbWeather.Name = "cmbWeather"
-        Me.cmbWeather.Size = New System.Drawing.Size(99, 21)
-        Me.cmbWeather.TabIndex = 0
+        Me.cmbWeather.Size = New System.Drawing.Size(103, 21)
+        Me.cmbWeather.TabIndex = 16
         '
-        'Label8
+        'DarkLabel14
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(5, 42)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(36, 13)
-        Me.Label8.TabIndex = 38
-        Me.Label8.Text = "Moral:"
+        Me.DarkLabel14.AutoSize = True
+        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel14.Location = New System.Drawing.Point(7, 22)
+        Me.DarkLabel14.Name = "DarkLabel14"
+        Me.DarkLabel14.Size = New System.Drawing.Size(78, 13)
+        Me.DarkLabel14.TabIndex = 0
+        Me.DarkLabel14.Text = "Weather Type:"
         '
-        'Label6
+        'btnMoreOptions
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(3, 16)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(38, 13)
-        Me.Label6.TabIndex = 9
-        Me.Label6.Text = "Name:"
+        Me.btnMoreOptions.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnMoreOptions.Location = New System.Drawing.Point(9, 571)
+        Me.btnMoreOptions.Name = "btnMoreOptions"
+        Me.btnMoreOptions.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMoreOptions.Size = New System.Drawing.Size(203, 23)
+        Me.btnMoreOptions.TabIndex = 30
+        Me.btnMoreOptions.Text = "More Options"
         '
-        'fraMaxSizes
+        'GroupBox3
         '
-        Me.fraMaxSizes.Controls.Add(Me.txtMaxY)
-        Me.fraMaxSizes.Controls.Add(Me.btnSaveSettings)
-        Me.fraMaxSizes.Controls.Add(Me.Label2)
-        Me.fraMaxSizes.Controls.Add(Me.txtMaxX)
-        Me.fraMaxSizes.Controls.Add(Me.Label7)
-        Me.fraMaxSizes.Location = New System.Drawing.Point(5, 296)
-        Me.fraMaxSizes.Name = "fraMaxSizes"
-        Me.fraMaxSizes.Size = New System.Drawing.Size(195, 71)
-        Me.fraMaxSizes.TabIndex = 12
-        Me.fraMaxSizes.TabStop = False
-        Me.fraMaxSizes.Text = "Map Sizes"
+        Me.GroupBox3.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox3.Controls.Add(Me.btnPreview)
+        Me.GroupBox3.Controls.Add(Me.lstMusic)
+        Me.GroupBox3.ForeColor = System.Drawing.Color.LightGray
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 406)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(203, 160)
+        Me.GroupBox3.TabIndex = 29
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Music"
+        '
+        'btnPreview
+        '
+        Me.btnPreview.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
+        Me.btnPreview.Location = New System.Drawing.Point(10, 128)
+        Me.btnPreview.Name = "btnPreview"
+        Me.btnPreview.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnPreview.Size = New System.Drawing.Size(185, 23)
+        Me.btnPreview.TabIndex = 5
+        Me.btnPreview.Text = "Preview Music"
+        Me.btnPreview.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPreview.UseMnemonic = False
+        '
+        'lstMusic
+        '
+        Me.lstMusic.FormattingEnabled = True
+        Me.lstMusic.Location = New System.Drawing.Point(6, 14)
+        Me.lstMusic.Name = "lstMusic"
+        Me.lstMusic.ScrollAlwaysVisible = True
+        Me.lstMusic.Size = New System.Drawing.Size(191, 108)
+        Me.lstMusic.TabIndex = 4
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox2.Controls.Add(Me.btnSetSize)
+        Me.GroupBox2.Controls.Add(Me.txtMaxY)
+        Me.GroupBox2.Controls.Add(Me.txtMaxX)
+        Me.GroupBox2.Controls.Add(Me.DarkLabel13)
+        Me.GroupBox2.Controls.Add(Me.DarkLabel12)
+        Me.GroupBox2.ForeColor = System.Drawing.Color.LightGray
+        Me.GroupBox2.Location = New System.Drawing.Point(9, 305)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(203, 95)
+        Me.GroupBox2.TabIndex = 28
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Map Size"
+        '
+        'btnSetSize
+        '
+        Me.btnSetSize.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnSetSize.Location = New System.Drawing.Point(10, 62)
+        Me.btnSetSize.Name = "btnSetSize"
+        Me.btnSetSize.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnSetSize.Size = New System.Drawing.Size(75, 23)
+        Me.btnSetSize.TabIndex = 4
+        Me.btnSetSize.Text = "Set Size"
+        Me.btnSetSize.Visible = False
         '
         'txtMaxY
         '
-        Me.txtMaxY.Location = New System.Drawing.Point(76, 42)
+        Me.txtMaxY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMaxY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMaxY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMaxY.Location = New System.Drawing.Point(108, 40)
         Me.txtMaxY.Name = "txtMaxY"
-        Me.txtMaxY.Size = New System.Drawing.Size(50, 20)
+        Me.txtMaxY.Size = New System.Drawing.Size(89, 20)
         Me.txtMaxY.TabIndex = 3
-        Me.txtMaxY.Text = "0"
-        '
-        'btnSaveSettings
-        '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(132, 24)
-        Me.btnSaveSettings.Name = "btnSaveSettings"
-        Me.btnSaveSettings.Size = New System.Drawing.Size(56, 23)
-        Me.btnSaveSettings.TabIndex = 16
-        Me.btnSaveSettings.Text = "Set Size"
-        Me.btnSaveSettings.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 45)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Maximum Y:"
         '
         'txtMaxX
         '
-        Me.txtMaxX.Location = New System.Drawing.Point(76, 16)
+        Me.txtMaxX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMaxX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMaxX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMaxX.Location = New System.Drawing.Point(108, 14)
         Me.txtMaxX.Name = "txtMaxX"
-        Me.txtMaxX.Size = New System.Drawing.Size(50, 20)
-        Me.txtMaxX.TabIndex = 1
-        Me.txtMaxX.Text = "0"
+        Me.txtMaxX.Size = New System.Drawing.Size(89, 20)
+        Me.txtMaxX.TabIndex = 2
         '
-        'Label7
+        'DarkLabel13
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 19)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(64, 13)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Maximum X:"
+        Me.DarkLabel13.AutoSize = True
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel13.Location = New System.Drawing.Point(6, 42)
+        Me.DarkLabel13.Name = "DarkLabel13"
+        Me.DarkLabel13.Size = New System.Drawing.Size(64, 13)
+        Me.DarkLabel13.TabIndex = 1
+        Me.DarkLabel13.Text = "Maximum Y:"
         '
-        'fraBootSettings
+        'DarkLabel12
         '
-        Me.fraBootSettings.Controls.Add(Me.txtSpawnMap)
-        Me.fraBootSettings.Controls.Add(Me.Label5)
-        Me.fraBootSettings.Controls.Add(Me.txtSpawnY)
-        Me.fraBootSettings.Controls.Add(Me.Label3)
-        Me.fraBootSettings.Controls.Add(Me.txtSpawnX)
-        Me.fraBootSettings.Controls.Add(Me.Label4)
-        Me.fraBootSettings.Location = New System.Drawing.Point(3, 208)
-        Me.fraBootSettings.Name = "fraBootSettings"
-        Me.fraBootSettings.Size = New System.Drawing.Size(197, 82)
-        Me.fraBootSettings.TabIndex = 13
-        Me.fraBootSettings.TabStop = False
-        Me.fraBootSettings.Text = "Respawn Settings"
+        Me.DarkLabel12.AutoSize = True
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel12.Location = New System.Drawing.Point(6, 16)
+        Me.DarkLabel12.Name = "DarkLabel12"
+        Me.DarkLabel12.Size = New System.Drawing.Size(64, 13)
+        Me.DarkLabel12.TabIndex = 0
+        Me.DarkLabel12.Text = "Maximum X:"
         '
-        'txtSpawnMap
+        'GroupBox1
         '
-        Me.txtSpawnMap.Location = New System.Drawing.Point(141, 12)
-        Me.txtSpawnMap.Name = "txtSpawnMap"
-        Me.txtSpawnMap.Size = New System.Drawing.Size(50, 20)
-        Me.txtSpawnMap.TabIndex = 5
-        Me.txtSpawnMap.Text = "0"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 16)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(79, 13)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Respawn Map:"
+        Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox1.Controls.Add(Me.txtSpawnY)
+        Me.GroupBox1.Controls.Add(Me.txtSpawnX)
+        Me.GroupBox1.Controls.Add(Me.txtSpawnMap)
+        Me.GroupBox1.Controls.Add(Me.DarkLabel11)
+        Me.GroupBox1.Controls.Add(Me.DarkLabel10)
+        Me.GroupBox1.Controls.Add(Me.DarkLabel9)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.LightGray
+        Me.GroupBox1.Location = New System.Drawing.Point(9, 214)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(203, 85)
+        Me.GroupBox1.TabIndex = 27
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Respawn Settings"
         '
         'txtSpawnY
         '
-        Me.txtSpawnY.Location = New System.Drawing.Point(141, 56)
+        Me.txtSpawnY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtSpawnY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSpawnY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtSpawnY.Location = New System.Drawing.Point(108, 59)
         Me.txtSpawnY.Name = "txtSpawnY"
-        Me.txtSpawnY.Size = New System.Drawing.Size(50, 20)
-        Me.txtSpawnY.TabIndex = 3
+        Me.txtSpawnY.Size = New System.Drawing.Size(87, 20)
+        Me.txtSpawnY.TabIndex = 5
         Me.txtSpawnY.Text = "0"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 60)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Respawn Y:"
         '
         'txtSpawnX
         '
-        Me.txtSpawnX.Location = New System.Drawing.Point(141, 33)
+        Me.txtSpawnX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtSpawnX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSpawnX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtSpawnX.Location = New System.Drawing.Point(108, 36)
         Me.txtSpawnX.Name = "txtSpawnX"
-        Me.txtSpawnX.Size = New System.Drawing.Size(50, 20)
-        Me.txtSpawnX.TabIndex = 1
+        Me.txtSpawnX.Size = New System.Drawing.Size(87, 20)
+        Me.txtSpawnX.TabIndex = 4
         Me.txtSpawnX.Text = "0"
         '
-        'Label4
+        'txtSpawnMap
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 37)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(65, 13)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Respawn X:"
+        Me.txtSpawnMap.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtSpawnMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSpawnMap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtSpawnMap.Location = New System.Drawing.Point(108, 13)
+        Me.txtSpawnMap.Name = "txtSpawnMap"
+        Me.txtSpawnMap.Size = New System.Drawing.Size(87, 20)
+        Me.txtSpawnMap.TabIndex = 3
+        Me.txtSpawnMap.Text = "0"
+        '
+        'DarkLabel11
+        '
+        Me.DarkLabel11.AutoSize = True
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel11.Location = New System.Drawing.Point(6, 60)
+        Me.DarkLabel11.Name = "DarkLabel11"
+        Me.DarkLabel11.Size = New System.Drawing.Size(65, 13)
+        Me.DarkLabel11.TabIndex = 2
+        Me.DarkLabel11.Text = "Respawn Y:"
+        '
+        'DarkLabel10
+        '
+        Me.DarkLabel10.AutoSize = True
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel10.Location = New System.Drawing.Point(6, 41)
+        Me.DarkLabel10.Name = "DarkLabel10"
+        Me.DarkLabel10.Size = New System.Drawing.Size(65, 13)
+        Me.DarkLabel10.TabIndex = 1
+        Me.DarkLabel10.Text = "Respawn X:"
+        '
+        'DarkLabel9
+        '
+        Me.DarkLabel9.AutoSize = True
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel9.Location = New System.Drawing.Point(6, 22)
+        Me.DarkLabel9.Name = "DarkLabel9"
+        Me.DarkLabel9.Size = New System.Drawing.Size(79, 13)
+        Me.DarkLabel9.TabIndex = 0
+        Me.DarkLabel9.Text = "Respawn Map:"
+        '
+        'DarkLabel7
+        '
+        Me.DarkLabel7.AutoSize = True
+        Me.DarkLabel7.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(6, 33)
+        Me.DarkLabel7.Name = "DarkLabel7"
+        Me.DarkLabel7.Size = New System.Drawing.Size(38, 13)
+        Me.DarkLabel7.TabIndex = 21
+        Me.DarkLabel7.Text = "Name:"
+        '
+        'chkInstance
+        '
+        Me.chkInstance.AutoSize = True
+        Me.chkInstance.Location = New System.Drawing.Point(9, 85)
+        Me.chkInstance.Name = "chkInstance"
+        Me.chkInstance.Size = New System.Drawing.Size(79, 17)
+        Me.chkInstance.TabIndex = 26
+        Me.chkInstance.Text = "Instanced?"
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(41, 13)
+        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtName.Location = New System.Drawing.Point(50, 31)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(159, 20)
-        Me.txtName.TabIndex = 10
+        Me.txtName.Size = New System.Drawing.Size(162, 20)
+        Me.txtName.TabIndex = 22
+        '
+        'DarkLabel8
+        '
+        Me.DarkLabel8.AutoSize = True
+        Me.DarkLabel8.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(8, 60)
+        Me.DarkLabel8.Name = "DarkLabel8"
+        Me.DarkLabel8.Size = New System.Drawing.Size(36, 13)
+        Me.DarkLabel8.TabIndex = 25
+        Me.DarkLabel8.Text = "Moral:"
         '
         'fraMapLinks
         '
-        Me.fraMapLinks.Controls.Add(Me.txtDown)
-        Me.fraMapLinks.Controls.Add(Me.txtLeft)
+        Me.fraMapLinks.BackColor = System.Drawing.Color.Transparent
         Me.fraMapLinks.Controls.Add(Me.lblMap)
         Me.fraMapLinks.Controls.Add(Me.txtRight)
+        Me.fraMapLinks.Controls.Add(Me.txtLeft)
+        Me.fraMapLinks.Controls.Add(Me.txtDown)
         Me.fraMapLinks.Controls.Add(Me.txtUp)
-        Me.fraMapLinks.Location = New System.Drawing.Point(3, 108)
+        Me.fraMapLinks.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapLinks.Location = New System.Drawing.Point(9, 105)
         Me.fraMapLinks.Name = "fraMapLinks"
-        Me.fraMapLinks.Size = New System.Drawing.Size(197, 94)
-        Me.fraMapLinks.TabIndex = 14
+        Me.fraMapLinks.Size = New System.Drawing.Size(203, 100)
+        Me.fraMapLinks.TabIndex = 23
         Me.fraMapLinks.TabStop = False
         Me.fraMapLinks.Text = "Map Links"
-        '
-        'txtDown
-        '
-        Me.txtDown.Location = New System.Drawing.Point(82, 65)
-        Me.txtDown.Name = "txtDown"
-        Me.txtDown.Size = New System.Drawing.Size(39, 20)
-        Me.txtDown.TabIndex = 6
-        Me.txtDown.Text = "0"
-        '
-        'txtLeft
-        '
-        Me.txtLeft.Location = New System.Drawing.Point(8, 36)
-        Me.txtLeft.Name = "txtLeft"
-        Me.txtLeft.Size = New System.Drawing.Size(39, 20)
-        Me.txtLeft.TabIndex = 5
-        Me.txtLeft.Text = "0"
         '
         'lblMap
         '
         Me.lblMap.AutoSize = True
-        Me.lblMap.Location = New System.Drawing.Point(61, 39)
+        Me.lblMap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblMap.Location = New System.Drawing.Point(72, 44)
         Me.lblMap.Name = "lblMap"
         Me.lblMap.Size = New System.Drawing.Size(65, 13)
         Me.lblMap.TabIndex = 4
@@ -1204,32 +1294,167 @@ Partial Class frmEditor_MapEditor
         '
         'txtRight
         '
-        Me.txtRight.Location = New System.Drawing.Point(152, 36)
+        Me.txtRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRight.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtRight.Location = New System.Drawing.Point(147, 42)
         Me.txtRight.Name = "txtRight"
-        Me.txtRight.Size = New System.Drawing.Size(39, 20)
+        Me.txtRight.Size = New System.Drawing.Size(50, 20)
         Me.txtRight.TabIndex = 3
-        Me.txtRight.Text = "0"
+        '
+        'txtLeft
+        '
+        Me.txtLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLeft.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtLeft.Location = New System.Drawing.Point(6, 42)
+        Me.txtLeft.Name = "txtLeft"
+        Me.txtLeft.Size = New System.Drawing.Size(50, 20)
+        Me.txtLeft.TabIndex = 2
+        '
+        'txtDown
+        '
+        Me.txtDown.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtDown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDown.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtDown.Location = New System.Drawing.Point(75, 74)
+        Me.txtDown.Name = "txtDown"
+        Me.txtDown.Size = New System.Drawing.Size(50, 20)
+        Me.txtDown.TabIndex = 1
         '
         'txtUp
         '
-        Me.txtUp.Location = New System.Drawing.Point(82, 14)
+        Me.txtUp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtUp.Location = New System.Drawing.Point(75, 11)
         Me.txtUp.Name = "txtUp"
-        Me.txtUp.Size = New System.Drawing.Size(39, 20)
-        Me.txtUp.TabIndex = 1
-        Me.txtUp.Text = "0"
+        Me.txtUp.Size = New System.Drawing.Size(50, 20)
+        Me.txtUp.TabIndex = 0
+        '
+        'cmbMoral
+        '
+        Me.cmbMoral.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbMoral.ForeColor = System.Drawing.Color.LightGray
+        Me.cmbMoral.FormattingEnabled = True
+        Me.cmbMoral.Items.AddRange(New Object() {"None", "Safe Zone", "Indoors"})
+        Me.cmbMoral.Location = New System.Drawing.Point(50, 57)
+        Me.cmbMoral.Name = "cmbMoral"
+        Me.cmbMoral.Size = New System.Drawing.Size(162, 21)
+        Me.cmbMoral.TabIndex = 24
+        '
+        'ToolStrip
+        '
+        Me.ToolStrip.AutoSize = False
+        Me.ToolStrip.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.ToolStrip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.cmbMapList})
+        Me.ToolStrip.Location = New System.Drawing.Point(318, 0)
+        Me.ToolStrip.Name = "ToolStrip"
+        Me.ToolStrip.Padding = New System.Windows.Forms.Padding(5, 0, 1, 0)
+        Me.ToolStrip.Size = New System.Drawing.Size(758, 25)
+        Me.ToolStrip.Stretch = True
+        Me.ToolStrip.TabIndex = 11
+        Me.ToolStrip.Text = "DarkToolStrip1"
+        '
+        'tsbSave
+        '
+        Me.tsbSave.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbSave.Image = CType(resources.GetObject("tsbSave.Image"), System.Drawing.Image)
+        Me.tsbSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbSave.Name = "tsbSave"
+        Me.tsbSave.Size = New System.Drawing.Size(78, 22)
+        Me.tsbSave.Text = "Save Map"
+        '
+        'tsbDiscard
+        '
+        Me.tsbDiscard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbDiscard.Image = CType(resources.GetObject("tsbDiscard.Image"), System.Drawing.Image)
+        Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbDiscard.Name = "tsbDiscard"
+        Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
+        Me.tsbDiscard.Text = "Discard"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripSeparator1.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbMapGrid
+        '
+        Me.tsbMapGrid.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbMapGrid.Image = CType(resources.GetObject("tsbMapGrid.Image"), System.Drawing.Image)
+        Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbMapGrid.Name = "tsbMapGrid"
+        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
+        Me.tsbMapGrid.Text = "Map Grid"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripSeparator2.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbFill
+        '
+        Me.tsbFill.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbFill.Image = CType(resources.GetObject("tsbFill.Image"), System.Drawing.Image)
+        Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbFill.Name = "tsbFill"
+        Me.tsbFill.Size = New System.Drawing.Size(73, 22)
+        Me.tsbFill.Text = "Fill Layer"
+        '
+        'tsbClear
+        '
+        Me.tsbClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbClear.Image = CType(resources.GetObject("tsbClear.Image"), System.Drawing.Image)
+        Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbClear.Name = "tsbClear"
+        Me.tsbClear.Size = New System.Drawing.Size(85, 22)
+        Me.tsbClear.Text = "Clear Layer"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripSeparator3.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(34, 22)
+        Me.ToolStripLabel1.Text = "Map:"
+        '
+        'cmbMapList
+        '
+        Me.cmbMapList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbMapList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.cmbMapList.Name = "cmbMapList"
+        Me.cmbMapList.Size = New System.Drawing.Size(121, 25)
         '
         'pnlBack2
         '
         Me.pnlBack2.Controls.Add(Me.pnlAttributes)
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewV)
+        Me.pnlBack2.Controls.Add(Me.scrlMapViewH)
         Me.pnlBack2.Controls.Add(Me.picScreen)
         Me.pnlBack2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlBack2.Location = New System.Drawing.Point(327, 0)
+        Me.pnlBack2.Location = New System.Drawing.Point(318, 25)
         Me.pnlBack2.Name = "pnlBack2"
-        Me.pnlBack2.Size = New System.Drawing.Size(729, 590)
-        Me.pnlBack2.TabIndex = 20
+        Me.pnlBack2.SectionHeader = "MapView"
+        Me.pnlBack2.Size = New System.Drawing.Size(758, 573)
+        Me.pnlBack2.TabIndex = 12
         '
         'pnlAttributes
         '
+        Me.pnlAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
         Me.pnlAttributes.Controls.Add(Me.fraBuyHouse)
         Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
@@ -1240,10 +1465,11 @@ Partial Class frmEditor_MapEditor
         Me.pnlAttributes.Controls.Add(Me.fraResource)
         Me.pnlAttributes.Controls.Add(Me.fraMapItem)
         Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.Location = New System.Drawing.Point(6, 25)
+        Me.pnlAttributes.ForeColor = System.Drawing.Color.LightGray
+        Me.pnlAttributes.Location = New System.Drawing.Point(6, 34)
         Me.pnlAttributes.Name = "pnlAttributes"
-        Me.pnlAttributes.Size = New System.Drawing.Size(688, 491)
-        Me.pnlAttributes.TabIndex = 16
+        Me.pnlAttributes.Size = New System.Drawing.Size(709, 516)
+        Me.pnlAttributes.TabIndex = 11
         Me.pnlAttributes.Visible = False
         '
         'fraMapWarp
@@ -1255,16 +1481,18 @@ Partial Class frmEditor_MapEditor
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
         Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
-        Me.fraMapWarp.Location = New System.Drawing.Point(433, 164)
+        Me.fraMapWarp.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapWarp.Location = New System.Drawing.Point(428, 134)
         Me.fraMapWarp.Name = "fraMapWarp"
-        Me.fraMapWarp.Size = New System.Drawing.Size(252, 172)
-        Me.fraMapWarp.TabIndex = 0
+        Me.fraMapWarp.Size = New System.Drawing.Size(211, 112)
+        Me.fraMapWarp.TabIndex = 18
         Me.fraMapWarp.TabStop = False
         Me.fraMapWarp.Text = "Map Warp"
         '
         'btnMapWarp
         '
-        Me.btnMapWarp.Location = New System.Drawing.Point(85, 138)
+        Me.btnMapWarp.ForeColor = System.Drawing.Color.Black
+        Me.btnMapWarp.Location = New System.Drawing.Point(84, 81)
         Me.btnMapWarp.Name = "btnMapWarp"
         Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
         Me.btnMapWarp.TabIndex = 6
@@ -1273,29 +1501,29 @@ Partial Class frmEditor_MapEditor
         '
         'scrlMapWarpY
         '
-        Me.scrlMapWarpY.Location = New System.Drawing.Point(36, 107)
+        Me.scrlMapWarpY.Location = New System.Drawing.Point(58, 60)
         Me.scrlMapWarpY.Name = "scrlMapWarpY"
-        Me.scrlMapWarpY.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpY.Size = New System.Drawing.Size(144, 18)
         Me.scrlMapWarpY.TabIndex = 5
         '
         'scrlMapWarpX
         '
-        Me.scrlMapWarpX.Location = New System.Drawing.Point(36, 70)
+        Me.scrlMapWarpX.Location = New System.Drawing.Point(58, 38)
         Me.scrlMapWarpX.Name = "scrlMapWarpX"
-        Me.scrlMapWarpX.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpX.Size = New System.Drawing.Size(144, 18)
         Me.scrlMapWarpX.TabIndex = 4
         '
         'scrlMapWarpMap
         '
-        Me.scrlMapWarpMap.Location = New System.Drawing.Point(36, 38)
+        Me.scrlMapWarpMap.Location = New System.Drawing.Point(58, 16)
         Me.scrlMapWarpMap.Name = "scrlMapWarpMap"
-        Me.scrlMapWarpMap.Size = New System.Drawing.Size(202, 18)
+        Me.scrlMapWarpMap.Size = New System.Drawing.Size(144, 18)
         Me.scrlMapWarpMap.TabIndex = 3
         '
         'lblMapWarpY
         '
         Me.lblMapWarpY.AutoSize = True
-        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 90)
+        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 62)
         Me.lblMapWarpY.Name = "lblMapWarpY"
         Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
         Me.lblMapWarpY.TabIndex = 2
@@ -1304,7 +1532,7 @@ Partial Class frmEditor_MapEditor
         'lblMapWarpX
         '
         Me.lblMapWarpX.AutoSize = True
-        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 56)
+        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 41)
         Me.lblMapWarpX.Name = "lblMapWarpX"
         Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
         Me.lblMapWarpX.TabIndex = 1
@@ -1313,7 +1541,7 @@ Partial Class frmEditor_MapEditor
         'lblMapWarpMap
         '
         Me.lblMapWarpMap.AutoSize = True
-        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 25)
+        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 21)
         Me.lblMapWarpMap.Name = "lblMapWarpMap"
         Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
         Me.lblMapWarpMap.TabIndex = 0
@@ -1324,16 +1552,18 @@ Partial Class frmEditor_MapEditor
         Me.fraBuyHouse.Controls.Add(Me.btnHouseTileOk)
         Me.fraBuyHouse.Controls.Add(Me.scrlBuyHouse)
         Me.fraBuyHouse.Controls.Add(Me.lblHouseName)
-        Me.fraBuyHouse.Location = New System.Drawing.Point(13, 195)
+        Me.fraBuyHouse.ForeColor = System.Drawing.Color.LightGray
+        Me.fraBuyHouse.Location = New System.Drawing.Point(428, 9)
         Me.fraBuyHouse.Name = "fraBuyHouse"
-        Me.fraBuyHouse.Size = New System.Drawing.Size(252, 138)
-        Me.fraBuyHouse.TabIndex = 17
+        Me.fraBuyHouse.Size = New System.Drawing.Size(211, 119)
+        Me.fraBuyHouse.TabIndex = 27
         Me.fraBuyHouse.TabStop = False
         Me.fraBuyHouse.Text = "Buy House"
         '
         'btnHouseTileOk
         '
-        Me.btnHouseTileOk.Location = New System.Drawing.Point(79, 97)
+        Me.btnHouseTileOk.ForeColor = System.Drawing.Color.Black
+        Me.btnHouseTileOk.Location = New System.Drawing.Point(58, 85)
         Me.btnHouseTileOk.Name = "btnHouseTileOk"
         Me.btnHouseTileOk.Size = New System.Drawing.Size(90, 28)
         Me.btnHouseTileOk.TabIndex = 6
@@ -1343,7 +1573,7 @@ Partial Class frmEditor_MapEditor
         'scrlBuyHouse
         '
         Me.scrlBuyHouse.LargeChange = 1
-        Me.scrlBuyHouse.Location = New System.Drawing.Point(26, 49)
+        Me.scrlBuyHouse.Location = New System.Drawing.Point(9, 36)
         Me.scrlBuyHouse.Name = "scrlBuyHouse"
         Me.scrlBuyHouse.Size = New System.Drawing.Size(193, 18)
         Me.scrlBuyHouse.TabIndex = 3
@@ -1351,7 +1581,7 @@ Partial Class frmEditor_MapEditor
         'lblHouseName
         '
         Me.lblHouseName.AutoSize = True
-        Me.lblHouseName.Location = New System.Drawing.Point(23, 29)
+        Me.lblHouseName.Location = New System.Drawing.Point(6, 16)
         Me.lblHouseName.Name = "lblHouseName"
         Me.lblHouseName.Size = New System.Drawing.Size(41, 13)
         Me.lblHouseName.TabIndex = 0
@@ -1364,10 +1594,11 @@ Partial Class frmEditor_MapEditor
         Me.fraKeyOpen.Controls.Add(Me.btnMapKeyOpen)
         Me.fraKeyOpen.Controls.Add(Me.scrlKeyX)
         Me.fraKeyOpen.Controls.Add(Me.lblKeyX)
-        Me.fraKeyOpen.Location = New System.Drawing.Point(212, 328)
+        Me.fraKeyOpen.ForeColor = System.Drawing.Color.LightGray
+        Me.fraKeyOpen.Location = New System.Drawing.Point(3, 369)
         Me.fraKeyOpen.Name = "fraKeyOpen"
-        Me.fraKeyOpen.Size = New System.Drawing.Size(252, 138)
-        Me.fraKeyOpen.TabIndex = 9
+        Me.fraKeyOpen.Size = New System.Drawing.Size(207, 138)
+        Me.fraKeyOpen.TabIndex = 21
         Me.fraKeyOpen.TabStop = False
         Me.fraKeyOpen.Text = "Map Key Open"
         '
@@ -1389,7 +1620,8 @@ Partial Class frmEditor_MapEditor
         '
         'btnMapKeyOpen
         '
-        Me.btnMapKeyOpen.Location = New System.Drawing.Point(79, 97)
+        Me.btnMapKeyOpen.ForeColor = System.Drawing.Color.Black
+        Me.btnMapKeyOpen.Location = New System.Drawing.Point(53, 105)
         Me.btnMapKeyOpen.Name = "btnMapKeyOpen"
         Me.btnMapKeyOpen.Size = New System.Drawing.Size(90, 28)
         Me.btnMapKeyOpen.TabIndex = 6
@@ -1419,10 +1651,11 @@ Partial Class frmEditor_MapEditor
         Me.fraMapKey.Controls.Add(Me.btnMapKey)
         Me.fraMapKey.Controls.Add(Me.scrlMapKey)
         Me.fraMapKey.Controls.Add(Me.lblMapKey)
-        Me.fraMapKey.Location = New System.Drawing.Point(208, 307)
+        Me.fraMapKey.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapKey.Location = New System.Drawing.Point(216, 369)
         Me.fraMapKey.Name = "fraMapKey"
-        Me.fraMapKey.Size = New System.Drawing.Size(252, 138)
-        Me.fraMapKey.TabIndex = 8
+        Me.fraMapKey.Size = New System.Drawing.Size(206, 138)
+        Me.fraMapKey.TabIndex = 20
         Me.fraMapKey.TabStop = False
         Me.fraMapKey.Text = "Map Key"
         '
@@ -1441,7 +1674,7 @@ Partial Class frmEditor_MapEditor
         'picMapKey
         '
         Me.picMapKey.BackColor = System.Drawing.Color.Black
-        Me.picMapKey.Location = New System.Drawing.Point(197, 43)
+        Me.picMapKey.Location = New System.Drawing.Point(172, 25)
         Me.picMapKey.Name = "picMapKey"
         Me.picMapKey.Size = New System.Drawing.Size(32, 32)
         Me.picMapKey.TabIndex = 7
@@ -1449,7 +1682,8 @@ Partial Class frmEditor_MapEditor
         '
         'btnMapKey
         '
-        Me.btnMapKey.Location = New System.Drawing.Point(79, 97)
+        Me.btnMapKey.ForeColor = System.Drawing.Color.Black
+        Me.btnMapKey.Location = New System.Drawing.Point(54, 103)
         Me.btnMapKey.Name = "btnMapKey"
         Me.btnMapKey.Size = New System.Drawing.Size(90, 28)
         Me.btnMapKey.TabIndex = 6
@@ -1478,10 +1712,11 @@ Partial Class frmEditor_MapEditor
         Me.fraNpcSpawn.Controls.Add(Me.btnNpcSpawn)
         Me.fraNpcSpawn.Controls.Add(Me.scrlNpcDir)
         Me.fraNpcSpawn.Controls.Add(Me.lblNpcDir)
-        Me.fraNpcSpawn.Location = New System.Drawing.Point(3, 6)
+        Me.fraNpcSpawn.ForeColor = System.Drawing.Color.LightGray
+        Me.fraNpcSpawn.Location = New System.Drawing.Point(3, 8)
         Me.fraNpcSpawn.Name = "fraNpcSpawn"
-        Me.fraNpcSpawn.Size = New System.Drawing.Size(252, 158)
-        Me.fraNpcSpawn.TabIndex = 11
+        Me.fraNpcSpawn.Size = New System.Drawing.Size(207, 120)
+        Me.fraNpcSpawn.TabIndex = 23
         Me.fraNpcSpawn.TabStop = False
         Me.fraNpcSpawn.Text = "Npc Spawn"
         '
@@ -1489,24 +1724,26 @@ Partial Class frmEditor_MapEditor
         '
         Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.lstNpc.FormattingEnabled = True
-        Me.lstNpc.Location = New System.Drawing.Point(30, 39)
+        Me.lstNpc.Location = New System.Drawing.Point(6, 21)
         Me.lstNpc.Name = "lstNpc"
         Me.lstNpc.Size = New System.Drawing.Size(192, 21)
         Me.lstNpc.TabIndex = 37
         '
         'btnNpcSpawn
         '
-        Me.btnNpcSpawn.Location = New System.Drawing.Point(87, 118)
+        Me.btnNpcSpawn.BackColor = System.Drawing.SystemColors.Control
+        Me.btnNpcSpawn.ForeColor = System.Drawing.Color.Black
+        Me.btnNpcSpawn.Location = New System.Drawing.Point(53, 86)
         Me.btnNpcSpawn.Name = "btnNpcSpawn"
         Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
         Me.btnNpcSpawn.TabIndex = 6
         Me.btnNpcSpawn.Text = "Accept"
-        Me.btnNpcSpawn.UseVisualStyleBackColor = True
+        Me.btnNpcSpawn.UseVisualStyleBackColor = False
         '
         'scrlNpcDir
         '
         Me.scrlNpcDir.LargeChange = 1
-        Me.scrlNpcDir.Location = New System.Drawing.Point(29, 93)
+        Me.scrlNpcDir.Location = New System.Drawing.Point(6, 64)
         Me.scrlNpcDir.Maximum = 3
         Me.scrlNpcDir.Name = "scrlNpcDir"
         Me.scrlNpcDir.Size = New System.Drawing.Size(193, 18)
@@ -1515,7 +1752,7 @@ Partial Class frmEditor_MapEditor
         'lblNpcDir
         '
         Me.lblNpcDir.AutoSize = True
-        Me.lblNpcDir.Location = New System.Drawing.Point(26, 78)
+        Me.lblNpcDir.Location = New System.Drawing.Point(3, 49)
         Me.lblNpcDir.Name = "lblNpcDir"
         Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
         Me.lblNpcDir.TabIndex = 0
@@ -1527,16 +1764,17 @@ Partial Class frmEditor_MapEditor
         Me.fraHeal.Controls.Add(Me.lblHeal)
         Me.fraHeal.Controls.Add(Me.cmbHeal)
         Me.fraHeal.Controls.Add(Me.btnHeal)
-        Me.fraHeal.Location = New System.Drawing.Point(3, 336)
+        Me.fraHeal.ForeColor = System.Drawing.Color.LightGray
+        Me.fraHeal.Location = New System.Drawing.Point(3, 252)
         Me.fraHeal.Name = "fraHeal"
-        Me.fraHeal.Size = New System.Drawing.Size(252, 130)
-        Me.fraHeal.TabIndex = 15
+        Me.fraHeal.Size = New System.Drawing.Size(207, 111)
+        Me.fraHeal.TabIndex = 25
         Me.fraHeal.TabStop = False
         Me.fraHeal.Text = "Heal"
         '
         'scrlHeal
         '
-        Me.scrlHeal.Location = New System.Drawing.Point(28, 74)
+        Me.scrlHeal.Location = New System.Drawing.Point(7, 56)
         Me.scrlHeal.Name = "scrlHeal"
         Me.scrlHeal.Size = New System.Drawing.Size(191, 17)
         Me.scrlHeal.TabIndex = 39
@@ -1544,7 +1782,7 @@ Partial Class frmEditor_MapEditor
         'lblHeal
         '
         Me.lblHeal.AutoSize = True
-        Me.lblHeal.Location = New System.Drawing.Point(23, 57)
+        Me.lblHeal.Location = New System.Drawing.Point(8, 43)
         Me.lblHeal.Name = "lblHeal"
         Me.lblHeal.Size = New System.Drawing.Size(55, 13)
         Me.lblHeal.TabIndex = 38
@@ -1554,14 +1792,16 @@ Partial Class frmEditor_MapEditor
         '
         Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbHeal.FormattingEnabled = True
-        Me.cmbHeal.Location = New System.Drawing.Point(28, 23)
+        Me.cmbHeal.Items.AddRange(New Object() {"Hp", "Mp"})
+        Me.cmbHeal.Location = New System.Drawing.Point(7, 19)
         Me.cmbHeal.Name = "cmbHeal"
         Me.cmbHeal.Size = New System.Drawing.Size(192, 21)
         Me.cmbHeal.TabIndex = 37
         '
         'btnHeal
         '
-        Me.btnHeal.Location = New System.Drawing.Point(75, 94)
+        Me.btnHeal.ForeColor = System.Drawing.Color.Black
+        Me.btnHeal.Location = New System.Drawing.Point(53, 76)
         Me.btnHeal.Name = "btnHeal"
         Me.btnHeal.Size = New System.Drawing.Size(90, 28)
         Me.btnHeal.TabIndex = 6
@@ -1572,10 +1812,11 @@ Partial Class frmEditor_MapEditor
         '
         Me.fraShop.Controls.Add(Me.cmbShop)
         Me.fraShop.Controls.Add(Me.btnShop)
-        Me.fraShop.Location = New System.Drawing.Point(219, 268)
+        Me.fraShop.ForeColor = System.Drawing.Color.LightGray
+        Me.fraShop.Location = New System.Drawing.Point(216, 252)
         Me.fraShop.Name = "fraShop"
-        Me.fraShop.Size = New System.Drawing.Size(252, 113)
-        Me.fraShop.TabIndex = 12
+        Me.fraShop.Size = New System.Drawing.Size(206, 111)
+        Me.fraShop.TabIndex = 24
         Me.fraShop.TabStop = False
         Me.fraShop.Text = "Shop"
         '
@@ -1583,14 +1824,15 @@ Partial Class frmEditor_MapEditor
         '
         Me.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbShop.FormattingEnabled = True
-        Me.cmbShop.Location = New System.Drawing.Point(30, 39)
+        Me.cmbShop.Location = New System.Drawing.Point(6, 19)
         Me.cmbShop.Name = "cmbShop"
         Me.cmbShop.Size = New System.Drawing.Size(192, 21)
         Me.cmbShop.TabIndex = 37
         '
         'btnShop
         '
-        Me.btnShop.Location = New System.Drawing.Point(87, 74)
+        Me.btnShop.ForeColor = System.Drawing.Color.Black
+        Me.btnShop.Location = New System.Drawing.Point(54, 76)
         Me.btnShop.Name = "btnShop"
         Me.btnShop.Size = New System.Drawing.Size(90, 28)
         Me.btnShop.TabIndex = 6
@@ -1602,16 +1844,18 @@ Partial Class frmEditor_MapEditor
         Me.fraResource.Controls.Add(Me.btnResourceOk)
         Me.fraResource.Controls.Add(Me.scrlResource)
         Me.fraResource.Controls.Add(Me.lblResource)
-        Me.fraResource.Location = New System.Drawing.Point(219, 14)
+        Me.fraResource.ForeColor = System.Drawing.Color.LightGray
+        Me.fraResource.Location = New System.Drawing.Point(216, 8)
         Me.fraResource.Name = "fraResource"
-        Me.fraResource.Size = New System.Drawing.Size(252, 138)
-        Me.fraResource.TabIndex = 10
+        Me.fraResource.Size = New System.Drawing.Size(206, 120)
+        Me.fraResource.TabIndex = 22
         Me.fraResource.TabStop = False
-        Me.fraResource.Text = "Resource"
+        Me.fraResource.Text = "Resources"
         '
         'btnResourceOk
         '
-        Me.btnResourceOk.Location = New System.Drawing.Point(79, 97)
+        Me.btnResourceOk.ForeColor = System.Drawing.Color.Black
+        Me.btnResourceOk.Location = New System.Drawing.Point(56, 86)
         Me.btnResourceOk.Name = "btnResourceOk"
         Me.btnResourceOk.Size = New System.Drawing.Size(90, 28)
         Me.btnResourceOk.TabIndex = 6
@@ -1620,15 +1864,15 @@ Partial Class frmEditor_MapEditor
         '
         'scrlResource
         '
-        Me.scrlResource.Location = New System.Drawing.Point(26, 49)
+        Me.scrlResource.Location = New System.Drawing.Point(9, 49)
         Me.scrlResource.Name = "scrlResource"
-        Me.scrlResource.Size = New System.Drawing.Size(193, 18)
+        Me.scrlResource.Size = New System.Drawing.Size(182, 18)
         Me.scrlResource.TabIndex = 3
         '
         'lblResource
         '
         Me.lblResource.AutoSize = True
-        Me.lblResource.Location = New System.Drawing.Point(23, 29)
+        Me.lblResource.Location = New System.Drawing.Point(6, 29)
         Me.lblResource.Name = "lblResource"
         Me.lblResource.Size = New System.Drawing.Size(41, 13)
         Me.lblResource.TabIndex = 0
@@ -1641,17 +1885,18 @@ Partial Class frmEditor_MapEditor
         Me.fraMapItem.Controls.Add(Me.scrlMapItemValue)
         Me.fraMapItem.Controls.Add(Me.scrlMapItem)
         Me.fraMapItem.Controls.Add(Me.lblMapItem)
-        Me.fraMapItem.Location = New System.Drawing.Point(33, 177)
+        Me.fraMapItem.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapItem.Location = New System.Drawing.Point(216, 134)
         Me.fraMapItem.Name = "fraMapItem"
-        Me.fraMapItem.Size = New System.Drawing.Size(252, 138)
-        Me.fraMapItem.TabIndex = 7
+        Me.fraMapItem.Size = New System.Drawing.Size(206, 112)
+        Me.fraMapItem.TabIndex = 19
         Me.fraMapItem.TabStop = False
         Me.fraMapItem.Text = "Map Item"
         '
         'picMapItem
         '
         Me.picMapItem.BackColor = System.Drawing.Color.Black
-        Me.picMapItem.Location = New System.Drawing.Point(197, 43)
+        Me.picMapItem.Location = New System.Drawing.Point(161, 31)
         Me.picMapItem.Name = "picMapItem"
         Me.picMapItem.Size = New System.Drawing.Size(32, 32)
         Me.picMapItem.TabIndex = 7
@@ -1659,7 +1904,8 @@ Partial Class frmEditor_MapEditor
         '
         'btnMapItem
         '
-        Me.btnMapItem.Location = New System.Drawing.Point(79, 97)
+        Me.btnMapItem.ForeColor = System.Drawing.Color.Black
+        Me.btnMapItem.Location = New System.Drawing.Point(58, 78)
         Me.btnMapItem.Name = "btnMapItem"
         Me.btnMapItem.Size = New System.Drawing.Size(90, 28)
         Me.btnMapItem.TabIndex = 6
@@ -1668,22 +1914,22 @@ Partial Class frmEditor_MapEditor
         '
         'scrlMapItemValue
         '
-        Me.scrlMapItemValue.Location = New System.Drawing.Point(9, 59)
+        Me.scrlMapItemValue.Location = New System.Drawing.Point(9, 53)
         Me.scrlMapItemValue.Name = "scrlMapItemValue"
-        Me.scrlMapItemValue.Size = New System.Drawing.Size(160, 18)
+        Me.scrlMapItemValue.Size = New System.Drawing.Size(149, 18)
         Me.scrlMapItemValue.TabIndex = 4
         '
         'scrlMapItem
         '
-        Me.scrlMapItem.Location = New System.Drawing.Point(9, 37)
+        Me.scrlMapItem.Location = New System.Drawing.Point(9, 31)
         Me.scrlMapItem.Name = "scrlMapItem"
-        Me.scrlMapItem.Size = New System.Drawing.Size(160, 18)
+        Me.scrlMapItem.Size = New System.Drawing.Size(149, 18)
         Me.scrlMapItem.TabIndex = 3
         '
         'lblMapItem
         '
         Me.lblMapItem.AutoSize = True
-        Me.lblMapItem.Location = New System.Drawing.Point(6, 22)
+        Me.lblMapItem.Location = New System.Drawing.Point(6, 16)
         Me.lblMapItem.Name = "lblMapItem"
         Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
         Me.lblMapItem.TabIndex = 0
@@ -1694,16 +1940,18 @@ Partial Class frmEditor_MapEditor
         Me.fraTrap.Controls.Add(Me.btnTrap)
         Me.fraTrap.Controls.Add(Me.scrlTrap)
         Me.fraTrap.Controls.Add(Me.lblTrap)
-        Me.fraTrap.Location = New System.Drawing.Point(131, 137)
+        Me.fraTrap.ForeColor = System.Drawing.Color.LightGray
+        Me.fraTrap.Location = New System.Drawing.Point(3, 133)
         Me.fraTrap.Name = "fraTrap"
-        Me.fraTrap.Size = New System.Drawing.Size(252, 113)
-        Me.fraTrap.TabIndex = 16
+        Me.fraTrap.Size = New System.Drawing.Size(207, 113)
+        Me.fraTrap.TabIndex = 26
         Me.fraTrap.TabStop = False
         Me.fraTrap.Text = "Trap"
         '
         'btnTrap
         '
-        Me.btnTrap.Location = New System.Drawing.Point(80, 67)
+        Me.btnTrap.ForeColor = System.Drawing.Color.Black
+        Me.btnTrap.Location = New System.Drawing.Point(53, 79)
         Me.btnTrap.Name = "btnTrap"
         Me.btnTrap.Size = New System.Drawing.Size(90, 28)
         Me.btnTrap.TabIndex = 42
@@ -1712,7 +1960,7 @@ Partial Class frmEditor_MapEditor
         '
         'scrlTrap
         '
-        Me.scrlTrap.Location = New System.Drawing.Point(32, 38)
+        Me.scrlTrap.Location = New System.Drawing.Point(11, 32)
         Me.scrlTrap.Name = "scrlTrap"
         Me.scrlTrap.Size = New System.Drawing.Size(191, 17)
         Me.scrlTrap.TabIndex = 41
@@ -1720,130 +1968,91 @@ Partial Class frmEditor_MapEditor
         'lblTrap
         '
         Me.lblTrap.AutoSize = True
-        Me.lblTrap.Location = New System.Drawing.Point(27, 21)
+        Me.lblTrap.Location = New System.Drawing.Point(6, 15)
         Me.lblTrap.Name = "lblTrap"
         Me.lblTrap.Size = New System.Drawing.Size(55, 13)
         Me.lblTrap.TabIndex = 40
         Me.lblTrap.Text = "Amount: 0"
+        '
+        'scrlMapViewV
+        '
+        Me.scrlMapViewV.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
+        Me.scrlMapViewV.Location = New System.Drawing.Point(741, 25)
+        Me.scrlMapViewV.Name = "scrlMapViewV"
+        Me.scrlMapViewV.Size = New System.Drawing.Size(16, 531)
+        Me.scrlMapViewV.TabIndex = 10
+        Me.scrlMapViewV.Text = "DarkScrollBar1"
+        '
+        'scrlMapViewH
+        '
+        Me.scrlMapViewH.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.scrlMapViewH.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.scrlMapViewH.Location = New System.Drawing.Point(1, 556)
+        Me.scrlMapViewH.Name = "scrlMapViewH"
+        Me.scrlMapViewH.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlMapViewH.Size = New System.Drawing.Size(756, 16)
+        Me.scrlMapViewH.TabIndex = 3
         '
         'picScreen
         '
         Me.picScreen.BackColor = System.Drawing.Color.Black
         Me.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.picScreen.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.picScreen.Location = New System.Drawing.Point(0, 0)
+        Me.picScreen.Location = New System.Drawing.Point(1, 25)
         Me.picScreen.Name = "picScreen"
-        Me.picScreen.Size = New System.Drawing.Size(729, 590)
+        Me.picScreen.Size = New System.Drawing.Size(756, 547)
         Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.picScreen.TabIndex = 1
+        Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
-        'SSInfo
-        '
-        Me.SSInfo.Dock = System.Windows.Forms.DockStyle.None
-        Me.SSInfo.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCurMap, Me.tslCurXY})
-        Me.SSInfo.Location = New System.Drawing.Point(0, 0)
-        Me.SSInfo.Name = "SSInfo"
-        Me.SSInfo.Size = New System.Drawing.Size(1285, 22)
-        Me.SSInfo.TabIndex = 21
-        Me.SSInfo.Text = "StatusStrip1"
-        '
-        'tslCurMap
-        '
-        Me.tslCurMap.Name = "tslCurMap"
-        Me.tslCurMap.Size = New System.Drawing.Size(77, 17)
-        Me.tslCurMap.Text = "Current Map:"
-        '
-        'tslCurXY
-        '
-        Me.tslCurXY.Name = "tslCurXY"
-        Me.tslCurXY.Size = New System.Drawing.Size(50, 17)
-        Me.tslCurXY.Text = "X:1 - Y:1"
-        '
-        'ToolStripContainer1
-        '
-        '
-        'ToolStripContainer1.BottomToolStripPanel
-        '
-        Me.ToolStripContainer1.BottomToolStripPanel.Controls.Add(Me.SSInfo)
-        '
-        'ToolStripContainer1.ContentPanel
-        '
-        Me.ToolStripContainer1.ContentPanel.AutoScroll = True
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.scrlMapViewV)
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.scrlMapViewH)
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlBack2)
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.pnlSettings)
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.Panel1)
-        Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(1285, 590)
-        Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ToolStripContainer1.LeftToolStripPanelVisible = False
-        Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStripContainer1.Name = "ToolStripContainer1"
-        Me.ToolStripContainer1.RightToolStripPanelVisible = False
-        Me.ToolStripContainer1.Size = New System.Drawing.Size(1285, 637)
-        Me.ToolStripContainer1.TabIndex = 22
-        Me.ToolStripContainer1.Text = "ToolStripContainer1"
-        '
-        'ToolStripContainer1.TopToolStripPanel
-        '
-        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip)
-        '
-        'scrlMapViewV
-        '
-        Me.scrlMapViewV.Dock = System.Windows.Forms.DockStyle.Right
-        Me.scrlMapViewV.Location = New System.Drawing.Point(1039, 0)
-        Me.scrlMapViewV.Name = "scrlMapViewV"
-        Me.scrlMapViewV.Size = New System.Drawing.Size(17, 573)
-        Me.scrlMapViewV.TabIndex = 22
-        '
-        'scrlMapViewH
-        '
-        Me.scrlMapViewH.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.scrlMapViewH.Location = New System.Drawing.Point(327, 573)
-        Me.scrlMapViewH.Name = "scrlMapViewH"
-        Me.scrlMapViewH.Size = New System.Drawing.Size(729, 17)
-        Me.scrlMapViewH.TabIndex = 21
-        '
-        'frmEditor_MapEditor
+        'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1285, 637)
-        Me.Controls.Add(Me.ToolStripContainer1)
-        Me.DoubleBuffered = True
-        Me.Name = "frmEditor_MapEditor"
+        Me.ClientSize = New System.Drawing.Size(1292, 626)
+        Me.Controls.Add(Me.pnlBack2)
+        Me.Controls.Add(Me.ToolStrip)
+        Me.Controls.Add(Me.DarkSectionPanel2)
+        Me.Controls.Add(Me.DarkSectionPanel1)
+        Me.Controls.Add(Me.ToolStripContainer2)
+        Me.Controls.Add(Me.DarkDockPanel1)
+        Me.Name = "FrmEditor_MapEditor"
         Me.Text = "Map Editor"
-        Me.ToolStrip.ResumeLayout(False)
-        Me.ToolStrip.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.tabpages.ResumeLayout(False)
-        Me.tpTiles.ResumeLayout(False)
-        Me.tpTiles.PerformLayout()
+        Me.ToolStripContainer2.ContentPanel.ResumeLayout(False)
+        Me.ToolStripContainer2.ResumeLayout(False)
+        Me.ToolStripContainer2.PerformLayout()
+        Me.ssInfo.ResumeLayout(False)
+        Me.ssInfo.PerformLayout()
+        Me.DarkSectionPanel1.ResumeLayout(False)
+        Me.pnlTiles.ResumeLayout(False)
+        Me.pnlTiles.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tpAttributes.ResumeLayout(False)
-        Me.tpAttributes.PerformLayout()
-        Me.tpNpcs.ResumeLayout(False)
-        Me.fraNpcs.ResumeLayout(False)
-        Me.tpDirBlock.ResumeLayout(False)
-        Me.tpDirBlock.PerformLayout()
-        Me.tpEvents.ResumeLayout(False)
-        Me.tpEvents.PerformLayout()
-        Me.pnlSettings.ResumeLayout(False)
-        Me.grpSettings.ResumeLayout(False)
-        Me.grpSettings.PerformLayout()
+        Me.pnlAttribute.ResumeLayout(False)
+        Me.pnlAttribute.PerformLayout()
+        Me.pnlNpc.ResumeLayout(False)
+        Me.pnlDirBlock.ResumeLayout(False)
+        Me.pnlDirBlock.PerformLayout()
+        Me.pnlEvents.ResumeLayout(False)
+        Me.pnlEvents.PerformLayout()
+        Me.DarkSectionPanel2.ResumeLayout(False)
+        Me.DarkSectionPanel2.PerformLayout()
+        Me.pnlMoreOptions.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.fraMaxSizes.ResumeLayout(False)
-        Me.fraMaxSizes.PerformLayout()
-        Me.fraBootSettings.ResumeLayout(False)
-        Me.fraBootSettings.PerformLayout()
         Me.fraMapLinks.ResumeLayout(False)
         Me.fraMapLinks.PerformLayout()
+        Me.ToolStrip.ResumeLayout(False)
+        Me.ToolStrip.PerformLayout()
         Me.pnlBack2.ResumeLayout(False)
         Me.pnlAttributes.ResumeLayout(False)
         Me.fraMapWarp.ResumeLayout(False)
@@ -1868,20 +2077,15 @@ Partial Class frmEditor_MapEditor
         Me.fraTrap.ResumeLayout(False)
         Me.fraTrap.PerformLayout()
         CType(Me.picScreen, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SSInfo.ResumeLayout(False)
-        Me.SSInfo.PerformLayout()
-        Me.ToolStripContainer1.BottomToolStripPanel.ResumeLayout(False)
-        Me.ToolStripContainer1.BottomToolStripPanel.PerformLayout()
-        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
-        Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
-        Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
-        Me.ToolStripContainer1.ResumeLayout(False)
-        Me.ToolStripContainer1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents ToolStrip As ToolStrip
+    Friend WithEvents DarkDockPanel1 As DarkUI.Docking.DarkDockPanel
+    Friend WithEvents ToolStripContainer2 As ToolStripContainer
+    Friend WithEvents DarkSectionPanel1 As DarkUI.Controls.DarkSectionPanel
+    Friend WithEvents DarkSectionPanel2 As DarkUI.Controls.DarkSectionPanel
+    Friend WithEvents ToolStrip As DarkUI.Controls.DarkToolStrip
     Friend WithEvents tsbSave As ToolStripButton
     Friend WithEvents tsbDiscard As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
@@ -1889,98 +2093,66 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents tsbFill As ToolStripButton
     Friend WithEvents tsbClear As ToolStripButton
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents pnlSettings As Panel
-    Friend WithEvents pnlBack2 As Panel
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents pnlBack2 As DarkUI.Controls.DarkSectionPanel
     Friend WithEvents picScreen As PictureBox
-    Friend WithEvents tabpages As TabControl
-    Friend WithEvents tpTiles As TabPage
-    Friend WithEvents cmbAutoTile As ComboBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents cmbLayers As ComboBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents cmbTileSets As ComboBox
+    Friend WithEvents ssInfo As DarkUI.Controls.DarkStatusStrip
+    Friend WithEvents tslCurMap As ToolStripStatusLabel
+    Friend WithEvents cmbMapList As ToolStripComboBox
+    Friend WithEvents btnAttributes As DarkUI.Controls.DarkButton
+    Friend WithEvents btnTiles As DarkUI.Controls.DarkButton
+    Friend WithEvents scrlMapViewH As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents btnNpc As DarkUI.Controls.DarkButton
+    Friend WithEvents btnDirBlock As DarkUI.Controls.DarkButton
+    Friend WithEvents btnEvents As DarkUI.Controls.DarkButton
+    Friend WithEvents scrlMapViewV As DarkUI.Controls.DarkScrollBar
     Friend WithEvents pnlBack As Panel
     Public WithEvents picBackSelect As PictureBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents scrlPictureX As HScrollBar
-    Friend WithEvents scrlPictureY As VScrollBar
-    Friend WithEvents tpAttributes As TabPage
-    Friend WithEvents optCraft As RadioButton
-    Friend WithEvents optHouse As RadioButton
-    Friend WithEvents btnClearAttribute As Button
-    Friend WithEvents optTrap As RadioButton
-    Friend WithEvents optBlocked As RadioButton
-    Friend WithEvents optHeal As RadioButton
-    Friend WithEvents optWarp As RadioButton
-    Friend WithEvents optBank As RadioButton
-    Friend WithEvents optItem As RadioButton
-    Friend WithEvents optShop As RadioButton
-    Friend WithEvents optNpcAvoid As RadioButton
-    Friend WithEvents optNpcSpawn As RadioButton
-    Friend WithEvents optKey As RadioButton
-    Friend WithEvents optDoor As RadioButton
-    Friend WithEvents optKeyOpen As RadioButton
-    Friend WithEvents optResource As RadioButton
-    Friend WithEvents tpNpcs As TabPage
-    Friend WithEvents fraNpcs As GroupBox
-    Friend WithEvents cmbNpcList As ComboBox
+    Friend WithEvents scrlPictureY As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents scrlPictureX As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbTileSets As ComboBox
+    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbLayers As ComboBox
+    Friend WithEvents pnlTiles As Panel
+    Friend WithEvents cmbAutoTile As ComboBox
+    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
+    Friend WithEvents pnlEvents As Panel
+    Friend WithEvents pnlDirBlock As Panel
+    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
+    Friend WithEvents pnlNpc As Panel
     Friend WithEvents lstMapNpc As ListBox
-    Friend WithEvents ComboBox23 As ComboBox
-    Friend WithEvents tpDirBlock As TabPage
-    Friend WithEvents Label12 As Label
-    Friend WithEvents tpEvents As TabPage
-    Friend WithEvents Label13 As Label
-    Friend WithEvents grpSettings As GroupBox
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents chkUseTint As CheckBox
-    Friend WithEvents lblMapAlpha As Label
-    Friend WithEvents lblMapBlue As Label
-    Friend WithEvents lblMapGreen As Label
-    Friend WithEvents lblMapRed As Label
-    Friend WithEvents scrlMapAlpha As HScrollBar
-    Friend WithEvents scrlMapBlue As HScrollBar
-    Friend WithEvents scrlMapGreen As HScrollBar
-    Friend WithEvents scrlMapRed As HScrollBar
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents btnPreview As Button
-    Friend WithEvents lstMusic As ListBox
-    Friend WithEvents cmbMoral As ComboBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents scrlFogAlpha As HScrollBar
-    Friend WithEvents lblFogAlpha As Label
-    Friend WithEvents scrlFogSpeed As HScrollBar
-    Friend WithEvents lblFogSpeed As Label
-    Friend WithEvents scrlIntensity As HScrollBar
-    Friend WithEvents lblIntensity As Label
-    Friend WithEvents scrlFog As HScrollBar
-    Friend WithEvents lblFogIndex As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents cmbWeather As ComboBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents fraMaxSizes As GroupBox
-    Friend WithEvents txtMaxY As TextBox
-    Friend WithEvents btnSaveSettings As Button
-    Friend WithEvents Label2 As Label
-    Friend WithEvents txtMaxX As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents fraBootSettings As GroupBox
-    Friend WithEvents txtSpawnMap As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtSpawnY As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtSpawnX As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents fraMapLinks As GroupBox
-    Friend WithEvents txtDown As TextBox
-    Friend WithEvents txtLeft As TextBox
-    Friend WithEvents lblMap As Label
-    Friend WithEvents txtRight As TextBox
-    Friend WithEvents txtUp As TextBox
+    Friend WithEvents cmbNpcList As ComboBox
+    Friend WithEvents pnlAttribute As Panel
+    Friend WithEvents optBlocked As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optNpcAvoid As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optItem As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optWarp As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optHouse As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optShop As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optNpcSpawn As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optBank As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optCraft As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optTrap As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optHeal As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optKeyOpen As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optKey As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optDoor As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optResource As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents tslCurXY As ToolStripStatusLabel
+    Friend WithEvents btnClearAttribute As DarkUI.Controls.DarkButton
     Friend WithEvents pnlAttributes As Panel
+    Friend WithEvents fraMapWarp As GroupBox
+    Friend WithEvents btnMapWarp As Button
+    Friend WithEvents scrlMapWarpY As HScrollBar
+    Friend WithEvents scrlMapWarpX As HScrollBar
+    Friend WithEvents scrlMapWarpMap As HScrollBar
+    Friend WithEvents lblMapWarpY As Label
+    Friend WithEvents lblMapWarpX As Label
+    Friend WithEvents lblMapWarpMap As Label
     Friend WithEvents fraBuyHouse As GroupBox
     Friend WithEvents btnHouseTileOk As Button
     Friend WithEvents scrlBuyHouse As HScrollBar
@@ -1991,14 +2163,6 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents btnMapKeyOpen As Button
     Friend WithEvents scrlKeyX As HScrollBar
     Friend WithEvents lblKeyX As Label
-    Friend WithEvents fraMapWarp As GroupBox
-    Friend WithEvents btnMapWarp As Button
-    Friend WithEvents scrlMapWarpY As HScrollBar
-    Friend WithEvents scrlMapWarpX As HScrollBar
-    Friend WithEvents scrlMapWarpMap As HScrollBar
-    Friend WithEvents lblMapWarpY As Label
-    Friend WithEvents lblMapWarpX As Label
-    Friend WithEvents lblMapWarpMap As Label
     Friend WithEvents fraMapKey As GroupBox
     Friend WithEvents chkMapKey As CheckBox
     Friend WithEvents picMapKey As PictureBox
@@ -2032,13 +2196,55 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents btnTrap As Button
     Friend WithEvents scrlTrap As HScrollBar
     Friend WithEvents lblTrap As Label
-    Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents cmbMapList As ToolStripComboBox
-    Friend WithEvents SSInfo As StatusStrip
-    Friend WithEvents tslCurMap As ToolStripStatusLabel
-    Friend WithEvents tslCurXY As ToolStripStatusLabel
-    Friend WithEvents ToolStripContainer1 As ToolStripContainer
-    Friend WithEvents chkInstance As CheckBox
-    Friend WithEvents scrlMapViewV As VScrollBar
-    Friend WithEvents scrlMapViewH As HScrollBar
+    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
+    Friend WithEvents chkInstance As DarkUI.Controls.DarkCheckBox
+    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
+    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
+    Friend WithEvents fraMapLinks As GroupBox
+    Friend WithEvents cmbMoral As ComboBox
+    Friend WithEvents lblMap As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtRight As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtLeft As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtDown As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtUp As DarkUI.Controls.DarkTextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtSpawnY As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtSpawnX As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtSpawnMap As DarkUI.Controls.DarkTextBox
+    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtMaxY As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtMaxX As DarkUI.Controls.DarkTextBox
+    Friend WithEvents btnSetSize As DarkUI.Controls.DarkButton
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents btnPreview As DarkUI.Controls.DarkButton
+    Friend WithEvents lstMusic As ListBox
+    Friend WithEvents pnlMoreOptions As Panel
+    Friend WithEvents btnMoreOptions As DarkUI.Controls.DarkButton
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents cmbWeather As ComboBox
+    Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
+    Friend WithEvents lblIntensity As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlFog As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblFogIndex As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlIntensity As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents scrlFogSpeed As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblFogSpeed As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlFogAlpha As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblFogAlpha As DarkUI.Controls.DarkLabel
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents chkUseTint As CheckBox
+    Friend WithEvents scrlMapAlpha As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblMapAlpha As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlMapBlue As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblMapBlue As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlMapGreen As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblMapGreen As DarkUI.Controls.DarkLabel
+    Friend WithEvents scrlMapRed As DarkUI.Controls.DarkScrollBar
+    Friend WithEvents lblMapRed As DarkUI.Controls.DarkLabel
+    Friend WithEvents tsCurFps As ToolStripStatusLabel
 End Class

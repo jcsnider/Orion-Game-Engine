@@ -179,28 +179,8 @@ Module ClientDataBase
 #End Region
 
 #Region "Options"
+
     Public Sub SaveOptions()
-        'Dim FileName As String
-
-        'FileName = Application.StartupPath & "\Data Files\onfig.ini"
-
-        'PutVar(FileName, "Options", "Username", Trim$(Options.Username))
-        'PutVar(FileName, "Options", "Password", Trim$(Options.Password))
-        'PutVar(FileName, "Options", "SavePass", Str(Options.SavePass))
-        'PutVar(FileName, "Options", "IP", Options.IP)
-        'PutVar(FileName, "Options", "Port", Str(Options.Port))
-        'PutVar(FileName, "Options", "MenuMusic", Trim$(Options.MenuMusic))
-        'PutVar(FileName, "Options", "Music", Str(Options.Music))
-        'PutVar(FileName, "Options", "Sound", Str(Options.Sound))
-        'PutVar(FileName, "Options", "Volume", Str(Options.Volume))
-        'PutVar(FileName, "Options", "ScreenSize", Str(Options.ScreenSize))
-        'PutVar(FileName, "Options", "HighEnd", Str(Options.HighEnd))
-        'PutVar(FileName, "Options", "ShowNpcBar", Str(Options.ShowNpcBar))
-
-        SaveXMLOptions()
-    End Sub
-
-    Public Sub SaveXMLOptions()
         Dim myXml As New XmlClass With {
             .Filename = Application.StartupPath & "\Data Files\Config.xml",
             .Root = "Options"
@@ -234,7 +214,7 @@ Module ClientDataBase
             Options.Password = ""
             Options.SavePass = False
             Options.Username = ""
-            Options.IP = "127.0.0.1"
+            Options.IP = "Localhost"
             Options.Port = 7001
             Options.MenuMusic = ""
             Options.Music = 1

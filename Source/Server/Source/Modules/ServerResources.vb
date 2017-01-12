@@ -5,9 +5,13 @@ Public Module ServerResources
 
     Sub LoadSkillExp()
         Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Application.StartupPath & "\Data\SkillExp.xml",
+            .Root = "Data"
+        }
 
         For i = 1 To 100
-            SkillExpTable(i) = CLng(Getvar(Path.Combine(Application.StartupPath, "data", "SkillExp.ini"), "Level", i))
+            SkillExpTable(i) = myXml.ReadString("Level", i)
         Next
     End Sub
 

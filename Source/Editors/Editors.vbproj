@@ -96,10 +96,10 @@
     <Compile Include="Source\Forms\frmEditor_Classes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_DarkMapEditor.Designer.vb">
-      <DependentUpon>frmEditor_DarkMapEditor.vb</DependentUpon>
+    <Compile Include="Source\Forms\frmEditor_MapEditor.Designer.vb">
+      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\frmEditor_DarkMapEditor.vb">
+    <Compile Include="Source\Forms\frmEditor_MapEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Forms\frmEditor_Events.Designer.vb">
@@ -209,7 +209,6 @@
     <Compile Include="Source\Modules\EditorTypes.vb" />
     <Compile Include="Source\Modules\EditorTCP.vb" />
     <Compile Include="Source\Modules\EditorAutoMap.vb" />
-    <Compile Include="Source\Modules\EditorINIAccess.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -227,8 +226,8 @@
     <EmbeddedResource Include="Source\Forms\frmEditor_Classes.resx">
       <DependentUpon>frmEditor_Classes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\frmEditor_DarkMapEditor.resx">
-      <DependentUpon>frmEditor_DarkMapEditor.vb</DependentUpon>
+    <EmbeddedResource Include="Source\Forms\frmEditor_MapEditor.resx">
+      <DependentUpon>frmEditor_MapEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\frmEditor_Events.resx">
       <DependentUpon>frmEditor_Events.vb</DependentUpon>

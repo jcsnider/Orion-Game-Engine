@@ -10,7 +10,6 @@ Module ServerGeneral
     End Function
 
     Sub InitServer()
-        Dim FileName As String
         Dim i As Integer, F As Integer, x As Integer
         Dim time1 As Integer, time2 As Integer
         x = 0
@@ -109,12 +108,7 @@ Module ServerGeneral
             ReDim TempPlayer(i).TradeOffer(0 To MAX_INV)
         Next
 
-        FileName = Path.Combine(Application.StartupPath, "data", "classes.ini")
-        If FileExist(FileName) Then
-            Max_Classes = CLng(Getvar(FileName, "INIT", "MaxClasses"))
-        Else
-            Max_Classes = 2
-        End If
+        LoadTilePrefab()
 
         ReDim Classes(0 To Max_Classes)
         For i = 0 To Max_Classes

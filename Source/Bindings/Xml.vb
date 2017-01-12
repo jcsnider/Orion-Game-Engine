@@ -1,54 +1,6 @@
 ﻿Imports System.Xml
 Imports System.IO
-
 Imports System.Text
-
-
-'Private Sub cmdOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOK.Click
-
-'2.        Dim myXml As New XmlClass
-
-'3.        Dim BookMark As String = vbNullString
-
-'4. 
-
-'5.        myXml.Filename = "C:\out\book.xml"
-
-'6.        myXml.Root = "Main"
-
-'7.        'Write some data lets use a bookmark example.
-
-'8. 
-
-'9.        myXml.WriteString("Bookmark", "Name", "Google")
-
-'10.        myXml.WriteString("Bookmark", "Website", "http://www.google.com")
-
-'11.        myXml.WriteString("Bookmark", "Info", "Google Home Page!")
-
-'12. 
-
-'13.        'Read and show the boomark we just added.
-
-'14.        BookMark = myXml.ReadString("Bookmark", "Website", "Error")
-
-'15.        MessageBox.Show("BookMark: " & BookMark, "Example", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-'16. 
-
-'17.        'Remove bookmark.
-
-'18.        myXml.RemoveNode("Bookmark", "Website")
-
-'19. 
-
-'20.        'Just show agian make sure it gone.
-
-'21.        BookMark = myXml.ReadString("Bookmark", "Website", "http://www.localhost")
-
-'22.        MessageBox.Show("BookMark: " & BookMark, "Example", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-'23.    End Sub
 
 Public Class XmlClass
     Private m_Filename As String = vbNullString

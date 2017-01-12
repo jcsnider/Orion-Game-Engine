@@ -32,6 +32,7 @@ Partial Class frmLogin
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.pnlAdmin = New System.Windows.Forms.Panel()
+        Me.btnPetEditor = New System.Windows.Forms.Button()
         Me.btnAutoMapper = New System.Windows.Forms.Button()
         Me.btnClassEditor = New System.Windows.Forms.Button()
         Me.btnRecipeEditor = New System.Windows.Forms.Button()
@@ -45,7 +46,6 @@ Partial Class frmLogin
         Me.btnSkillEditor = New System.Windows.Forms.Button()
         Me.btnShopEditor = New System.Windows.Forms.Button()
         Me.btnAnimationEditor = New System.Windows.Forms.Button()
-        Me.btnPetEditor = New System.Windows.Forms.Button()
         Me.pnlAdmin.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,6 +136,15 @@ Partial Class frmLogin
         Me.pnlAdmin.Size = New System.Drawing.Size(505, 189)
         Me.pnlAdmin.TabIndex = 6
         Me.pnlAdmin.Visible = False
+        '
+        'btnPetEditor
+        '
+        Me.btnPetEditor.Location = New System.Drawing.Point(154, 34)
+        Me.btnPetEditor.Name = "btnPetEditor"
+        Me.btnPetEditor.Size = New System.Drawing.Size(112, 25)
+        Me.btnPetEditor.TabIndex = 54
+        Me.btnPetEditor.Text = "Pet Editor"
+        Me.btnPetEditor.UseVisualStyleBackColor = True
         '
         'btnAutoMapper
         '
@@ -253,15 +262,6 @@ Partial Class frmLogin
         Me.btnAnimationEditor.TabIndex = 47
         Me.btnAnimationEditor.Text = "Animation Editor"
         Me.btnAnimationEditor.UseVisualStyleBackColor = True
-        '
-        'btnPetEditor
-        '
-        Me.btnPetEditor.Location = New System.Drawing.Point(154, 34)
-        Me.btnPetEditor.Name = "btnPetEditor"
-        Me.btnPetEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnPetEditor.TabIndex = 54
-        Me.btnPetEditor.Text = "Pet Editor"
-        Me.btnPetEditor.UseVisualStyleBackColor = True
         '
         'frmLogin
         '

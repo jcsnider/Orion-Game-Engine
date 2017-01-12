@@ -30,18 +30,20 @@ Public Module ServerHousing
 
 #Region "DataBase"
     Sub LoadHouses()
-        Dim i As Integer, filepath As String
-
-        filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
+        Dim i As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
+            .Root = "Config"
+        }
 
         For i = 1 To MAX_HOUSES
 
-            HouseConfig(i).BaseMap = Val(Getvar(filepath, "House" & i, "BaseMap"))
-            HouseConfig(i).ConfigName = Trim$(Getvar(filepath, "House" & i, "Name"))
-            HouseConfig(i).MaxFurniture = Val(Getvar(filepath, "House" & i, "MaxFurniture"))
-            HouseConfig(i).Price = Val(Getvar(filepath, "House" & i, "Price"))
-            HouseConfig(i).X = Val(Getvar(filepath, "House" & i, "X"))
-            HouseConfig(i).Y = Val(Getvar(filepath, "House" & i, "Y"))
+            HouseConfig(i).BaseMap = Val(myXml.ReadString("House" & i, "BaseMap"))
+            HouseConfig(i).ConfigName = Trim$(myXml.ReadString("House" & i, "Name"))
+            HouseConfig(i).MaxFurniture = Val(myXml.ReadString("House" & i, "MaxFurniture"))
+            HouseConfig(i).Price = Val(myXml.ReadString("House" & i, "Price"))
+            HouseConfig(i).X = Val(myXml.ReadString("House" & i, "X"))
+            HouseConfig(i).Y = Val(myXml.ReadString("House" & i, "Y"))
             DoEvents()
         Next
         For i = 1 To GetTotalPlayersOnline()
@@ -53,16 +55,18 @@ Public Module ServerHousing
     End Sub
 
     Sub SaveHouse(ByVal Index As Integer)
-        Dim filepath As String
+        Dim myXml As New XmlClass With {
+            .Filename = Path.Combine(Application.StartupPath, "data", "houseconfig.xml"),
+            .Root = "Config"
+        }
 
-        filepath = Path.Combine(Application.StartupPath, "data", "houseconfig.ini")
         If Index > 0 And Index <= MAX_HOUSES Then
-            Call PutVar(filepath, "House" & Index, "BaseMap", HouseConfig(Index).BaseMap)
-            Call PutVar(filepath, "House" & Index, "Name", HouseConfig(Index).ConfigName)
-            Call PutVar(filepath, "House" & Index, "MaxFurniture", HouseConfig(Index).MaxFurniture)
-            Call PutVar(filepath, "House" & Index, "Price", HouseConfig(Index).Price)
-            Call PutVar(filepath, "House" & Index, "X", HouseConfig(Index).X)
-            Call PutVar(filepath, "House" & Index, "Y", HouseConfig(Index).Y)
+            myXml.WriteString("House" & Index, "BaseMap", HouseConfig(Index).BaseMap)
+            myXml.WriteString("House" & Index, "Name", HouseConfig(Index).ConfigName)
+            myXml.WriteString("House" & Index, "MaxFurniture", HouseConfig(Index).MaxFurniture)
+            myXml.WriteString("House" & Index, "Price", HouseConfig(Index).Price)
+            myXml.WriteString("House" & Index, "X", HouseConfig(Index).X)
+            myXml.WriteString("House" & Index, "Y", HouseConfig(Index).Y)
         End If
         LoadHouses()
 

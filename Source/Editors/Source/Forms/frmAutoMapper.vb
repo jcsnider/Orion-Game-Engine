@@ -35,31 +35,35 @@
 #End Region
 
 #Region "Resources"
-    Private Sub lstResources_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstResources.SelectedIndexChanged
+    Private Sub LstResources_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstResources.SelectedIndexChanged
         txtResource.Text = lstResources.Items.Item(lstResources.SelectedIndex)
     End Sub
 
-    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         lstResources.Items.Add(Val(txtResource.Text))
     End Sub
 
-    Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
+    Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
         If lstResources.SelectedIndex < 0 Then Exit Sub
         lstResources.Items.RemoveAt(lstResources.SelectedIndex)
     End Sub
 
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If lstResources.SelectedIndex < 0 Then Exit Sub
 
         lstResources.Items.Item(lstResources.SelectedIndex) = txtResource.Text
     End Sub
 
-    Private Sub btnCloseResource_Click(sender As Object, e As EventArgs) Handles btnCloseResource.Click
+    Private Sub BtnCloseResource_Click(sender As Object, e As EventArgs) Handles btnCloseResource.Click
         pnlResources.Visible = False
     End Sub
 
-    Private Sub btnSaveResource_Click(sender As Object, e As EventArgs) Handles btnSaveResource.Click
+    Private Sub BtnSaveResource_Click(sender As Object, e As EventArgs) Handles btnSaveResource.Click
         Dim ResourceStr As String = ""
+        Dim myXml As New XmlClass With {
+            .Filename = IO.Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Root = "Options"
+        }
         Dim i As Long
 
         For i = 0 To lstResources.Items.Count - 1
@@ -67,13 +71,13 @@
             If i < lstResources.Items.Count - 1 Then ResourceStr = ResourceStr & ";"
         Next i
 
-        PutVar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum", ResourceStr)
+        myXml.WriteString("Resources", "ResourcesNum", ResourceStr)
         pnlResources.Visible = False
     End Sub
 #End Region
 
 #Region "TileSet"
-    Private Sub cmbPrefab_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPrefab.SelectedIndexChanged
+    Private Sub CmbPrefab_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPrefab.SelectedIndexChanged
         Dim Layer As Long
 
         For Layer = 1 To MapLayer.Count
@@ -83,10 +87,10 @@
         Next Layer
 
         cmbLayer.SelectedIndex = Layer - 1
-        cmbLayer_SelectedIndexChanged(sender, e)
+        CmbLayer_SelectedIndexChanged(sender, e)
     End Sub
 
-    Private Sub cmbLayer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLayer.SelectedIndexChanged
+    Private Sub CmbLayer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLayer.SelectedIndexChanged
         Dim Prefab As Long
         Dim Layer As Long
         Prefab = cmbPrefab.SelectedIndex + 1
@@ -102,25 +106,29 @@
         End If
     End Sub
 
-    Private Sub btmTileSetClose_Click(sender As Object, e As EventArgs) Handles btmTileSetClose.Click
+    Private Sub BtmTileSetClose_Click(sender As Object, e As EventArgs) Handles btmTileSetClose.Click
         pnlTileConfig.Visible = False
     End Sub
 
-    Private Sub btnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
-        Dim Prefab As Long
-        Dim Layer As Long
+    Private Sub BtnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
+        Dim Prefab As Integer, Layer As Integer
+        Dim myXml As New XmlClass With {
+            .Filename = IO.Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Root = "Options"
+        }
         Prefab = cmbPrefab.SelectedIndex + 1
 
         For Layer = 1 To 5
             If Tile(Prefab).Layer(Layer).Tileset > 0 Then
-                PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset", Val(Tile(Prefab).Layer(Layer).Tileset))
-                PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X", Val(Tile(Prefab).Layer(Layer).X))
-                PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y", Val(Tile(Prefab).Layer(Layer).Y))
-                PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile", Val(Tile(Prefab).Layer(Layer).AutoTile))
+                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Tileset", Val(Tile(Prefab).Layer(Layer).Tileset))
+                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "X", Val(Tile(Prefab).Layer(Layer).X))
+                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Y", Val(Tile(Prefab).Layer(Layer).Y))
+                myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Autotile", Val(Tile(Prefab).Layer(Layer).AutoTile))
             End If
         Next Layer
 
-        PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type", Val(Tile(Prefab).Type))
+        myXml.WriteString("Prefab" & Prefab, "Type", Val(Tile(Prefab).Type))
+
         LoadTilePrefab()
     End Sub
 #End Region

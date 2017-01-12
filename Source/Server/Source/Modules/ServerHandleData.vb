@@ -3382,19 +3382,23 @@ Module ServerHandleData
         DetailFreq = Buffer.ReadInteger
         ResourceFreq = Buffer.ReadInteger
 
-        'get ini info
-        PutVar(Application.StartupPath & "\automapper.ini", "Resources", "ResourcesNum", Buffer.ReadString())
+        Dim myXml As New XmlClass With {
+            .Filename = Application.StartupPath & "\Data\AutoMapper.xml",
+            .Root = "Options"
+        }
+
+        myXml.WriteString("Resources", "ResourcesNum", Buffer.ReadString())
 
         For Prefab = 1 To TilePrefab.Count - 1
             ReDim Tile(Prefab).Layer(0 To MapLayer.Count - 1)
 
             Layer = Buffer.ReadInteger()
-            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Tileset", Buffer.ReadInteger)
-            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "X", Buffer.ReadInteger)
-            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Y", Buffer.ReadInteger)
-            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Layer" & Layer & "Autotile", Buffer.ReadInteger)
+            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Tileset", Buffer.ReadInteger)
+            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "X", Buffer.ReadInteger)
+            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Y", Buffer.ReadInteger)
+            myXml.WriteString("Prefab" & Prefab, "Layer" & Layer & "Autotile", Buffer.ReadInteger)
 
-            PutVar(Application.StartupPath & "\automapper.ini", Val(Prefab), "Type", Buffer.ReadInteger)
+            myXml.WriteString("Prefab" & Prefab, "Type", Buffer.ReadInteger)
         Next
 
         Buffer = Nothing

@@ -1,20 +1,18 @@
 ﻿Imports System.ComponentModel
 
-Public Class frmEditor_MapEditor
+Public Class FrmEditor_MapEditor
+
 #Region "Form Code"
-    Private Sub frmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         cmbTileSets.SelectedIndex = 0
         EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
 
         optBlocked.Checked = True
-        tabpages.SelectedIndex = 0
+        SelectedTab = 1
 
         scrlFog.Maximum = NumFogs
-
-        'picScreen.Width = Map.MaxX * PIC_X
-        'picScreen.Height = Map.MaxY * PIC_Y
 
         scrlMapViewV.Maximum = Map.MaxX
         scrlMapViewH.Maximum = Map.MaxY
@@ -23,14 +21,11 @@ Public Class frmEditor_MapEditor
 
         picScreen.Focus()
 
-        'frmEditor_DarkMapEditor.Show()
     End Sub
 
-    Private Sub frmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub FrmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If GameWindow Is Nothing Then Exit Sub
 
-        'picScreen.Width = Map.MaxX * PIC_X
-        'picScreen.Height = Map.MaxY * PIC_Y
         ' set the scrollbars
         scrlMapViewV.Maximum = Map.MaxX
         scrlMapViewH.Maximum = Map.MaxY
@@ -38,39 +33,43 @@ Public Class frmEditor_MapEditor
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub
 
-    Private Sub frmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+    Private Sub FrmEditor_MapEditor_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         MapEditorCancel()
     End Sub
 
-    Private Sub picBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
+    Private Sub FrmEditor_DarkMapEditor_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        MapEditorCancel()
+    End Sub
+
+    Private Sub PicBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
 
-    Private Sub picBackSelect_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseMove
+    Private Sub PicBackSelect_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseMove
         MapEditorDrag(e.Button, e.X, e.Y)
     End Sub
 
-    Private Sub picBackSelect_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picBackSelect.Paint
+    Private Overloads Sub PicBackSelect_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picBackSelect.Paint
         'Overrides the paint sub
     End Sub
 
-    Private Sub pnlBack_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack.Paint
+    Private Overloads Sub PnlBack_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack.Paint
         'Overrides the paint sub
     End Sub
 
-    Private Sub pnlBack2_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack2.Paint
+    Private Overloads Sub PnlBack2_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack2.Paint
         'Overrides the paint sub
     End Sub
 
-    Private Sub scrlPictureY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureY.Scroll
+    Private Sub ScrlPictureY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureY.ValueChanged
         MapEditorTileScroll()
     End Sub
 
-    Private Sub scrlPictureX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureX.Scroll
+    Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureX.ValueChanged
         MapEditorTileScroll()
     End Sub
 
-    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
         If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
         End If
@@ -91,28 +90,146 @@ Public Class frmEditor_MapEditor
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 
-    Private Sub cmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
+    Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
         If cmbAutoTile.SelectedIndex = 0 Then
             EditorTileWidth = 1
             EditorTileHeight = 1
         End If
     End Sub
+
+    Private Sub BtnTiles_Click(sender As Object, e As EventArgs) Handles btnTiles.Click
+        SelectedTab = 1
+
+        pnlTiles.Visible = True
+
+        pnlAttribute.Visible = False
+        pnlNpc.Visible = False
+        pnlDirBlock.Visible = False
+        pnlEvents.Visible = False
+    End Sub
+
+    Private Sub BtnAttributes_Click(sender As Object, e As EventArgs) Handles btnAttributes.Click
+        SelectedTab = 2
+
+        pnlAttribute.Visible = True
+
+        pnlTiles.Visible = False
+        pnlNpc.Visible = False
+        pnlDirBlock.Visible = False
+        pnlEvents.Visible = False
+    End Sub
+
+    Private Sub BtnNpc_Click(sender As Object, e As EventArgs) Handles btnNpc.Click
+        SelectedTab = 3
+
+        pnlNpc.Visible = True
+
+        pnlTiles.Visible = False
+        pnlAttribute.Visible = False
+        pnlDirBlock.Visible = False
+        pnlEvents.Visible = False
+    End Sub
+
+    Private Sub BtnDirBlock_Click(sender As Object, e As EventArgs) Handles btnDirBlock.Click
+        SelectedTab = 4
+
+        pnlDirBlock.Visible = True
+
+        pnlTiles.Visible = False
+        pnlNpc.Visible = False
+        pnlAttribute.Visible = False
+        pnlEvents.Visible = False
+    End Sub
+
+    Private Sub BtnEvents_Click(sender As Object, e As EventArgs) Handles btnEvents.Click
+        SelectedTab = 5
+
+        pnlEvents.Visible = True
+
+        pnlTiles.Visible = False
+        pnlAttribute.Visible = False
+        pnlNpc.Visible = False
+        pnlDirBlock.Visible = False
+
+    End Sub
+#End Region
+
+#Region "Toolbar"
+    Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
+        MapEditorSend()
+    End Sub
+
+    Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
+        MapEditorCancel()
+    End Sub
+
+    Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
+        MapGrid = Not MapGrid
+    End Sub
+
+    Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
+        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+    End Sub
+
+    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
+        MapEditorClearLayer()
+    End Sub
+
+    Private Sub CmbMapList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapList.SelectedIndexChanged
+        SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
+    End Sub
+#End Region
+
+#Region "PicScreen"
+    Private Sub Picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
+        If e.X > pnlBack2.Width - 32 Or e.Y > pnlBack2.Height - 32 Then Exit Sub
+        MapEditorMouseDown(e.Button, e.X, e.Y, False)
+
+    End Sub
+
+    Private Overloads Sub Picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picScreen.Paint
+        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
+        Exit Sub
+    End Sub
+
+    Private Sub Picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseMove
+
+        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
+        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+
+        CurMouseX = e.Location.X
+        CurMouseY = e.Location.Y
+
+        If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
+            MapEditorMouseDown(e.Button, e.X, e.Y)
+        End If
+
+        tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
+    End Sub
+
+    Private Sub Picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseUp
+
+        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
+        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
+
+    End Sub
+
 #End Region
 
 #Region "Attributes"
-    Private Sub scrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
+    Private Sub ScrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
 
-    Private Sub scrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpX.Scroll
+    Private Sub ScrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpX.Scroll
         lblMapWarpX.Text = "X: " & scrlMapWarpX.Value
     End Sub
 
-    Private Sub scrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpY.Scroll
+    Private Sub ScrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpY.Scroll
         lblMapWarpY.Text = "Y: " & scrlMapWarpY.Value
     End Sub
 
-    Private Sub btnMapWarp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapWarp.Click
+    Private Sub BtnMapWarp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapWarp.Click
         EditorWarpMap = scrlMapWarpMap.Value
 
         EditorWarpX = scrlMapWarpX.Value
@@ -121,7 +238,7 @@ Public Class frmEditor_MapEditor
         fraMapWarp.Visible = False
     End Sub
 
-    Private Sub optWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
+    Private Sub OptWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapWarp.Visible = True
@@ -134,7 +251,7 @@ Public Class frmEditor_MapEditor
         scrlMapWarpY.Value = 0
     End Sub
 
-    Private Sub scrlMapItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItem.Scroll
+    Private Sub ScrlMapItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItem.Scroll
         If Item(scrlMapItem.Value).Type = ItemType.Currency Or Item(scrlMapItem.Value).Stackable = 1 Then
             scrlMapItemValue.Enabled = True
         Else
@@ -146,18 +263,18 @@ Public Class frmEditor_MapEditor
         lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
-    Private Sub scrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItemValue.Scroll
+    Private Sub ScrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItemValue.Scroll
         lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
-    Private Sub btnMapItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapItem.Click
+    Private Sub BtnMapItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapItem.Click
         ItemEditorNum = scrlMapItem.Value
         ItemEditorValue = scrlMapItemValue.Value
         pnlAttributes.Visible = False
         fraMapItem.Visible = False
     End Sub
 
-    Private Sub optItem_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optItem.CheckedChanged
+    Private Sub OptItem_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optItem.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapItem.Visible = True
@@ -168,19 +285,19 @@ Public Class frmEditor_MapEditor
         EditorMap_DrawMapItem()
     End Sub
 
-    Private Sub scrlMapKey_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapKey.Scroll
+    Private Sub ScrlMapKey_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapKey.Scroll
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
         EditorMap_DrawKey()
     End Sub
 
-    Private Sub btnMapKey_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKey.Click
+    Private Sub BtnMapKey_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKey.Click
         KeyEditorNum = scrlMapKey.Value
         KeyEditorTake = chkMapKey.Checked
         pnlAttributes.Visible = False
         fraMapKey.Visible = False
     End Sub
 
-    Private Sub optKey_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKey.CheckedChanged
+    Private Sub OptKey_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKey.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraMapKey.Visible = True
@@ -192,22 +309,22 @@ Public Class frmEditor_MapEditor
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
     End Sub
 
-    Private Sub scrlKeyX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyX.Scroll
+    Private Sub ScrlKeyX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyX.Scroll
         lblKeyX.Text = "X: " & scrlKeyX.Value
     End Sub
 
-    Private Sub scrlKeyY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyY.Scroll
+    Private Sub ScrlKeyY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyY.Scroll
         lblKeyY.Text = "X: " & scrlKeyY.Value
     End Sub
 
-    Private Sub btnMapKeyOpen_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKeyOpen.Click
+    Private Sub BtnMapKeyOpen_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKeyOpen.Click
         KeyOpenEditorX = scrlKeyX.Value
         KeyOpenEditorY = scrlKeyY.Value
         pnlAttributes.Visible = False
         fraKeyOpen.Visible = False
     End Sub
 
-    Private Sub optKeyOpen_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKeyOpen.CheckedChanged
+    Private Sub OptKeyOpen_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKeyOpen.CheckedChanged
         ClearAttributeDialogue()
         fraKeyOpen.Visible = True
         pnlAttributes.Visible = True
@@ -218,30 +335,30 @@ Public Class frmEditor_MapEditor
         scrlKeyY.Value = 0
     End Sub
 
-    Private Sub btnResourceOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceOk.Click
+    Private Sub BtnResourceOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceOk.Click
         ResourceEditorNum = scrlResource.Value
         pnlAttributes.Visible = False
         fraResource.Visible = False
     End Sub
 
-    Private Sub scrlResource_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlResource.Scroll
+    Private Sub ScrlResource_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlResource.Scroll
         lblResource.Text = "Resource: " & Resource(scrlResource.Value).Name
     End Sub
 
-    Private Sub optResource_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optResource.CheckedChanged
+    Private Sub OptResource_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optResource.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraResource.Visible = True
     End Sub
 
-    Private Sub btnNpcSpawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNpcSpawn.Click
+    Private Sub BtnNpcSpawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNpcSpawn.Click
         SpawnNpcNum = lstNpc.SelectedIndex + 1
         SpawnNpcDir = scrlNpcDir.Value
         pnlAttributes.Visible = False
         fraNpcSpawn.Visible = False
     End Sub
 
-    Private Sub optNPCSpawn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optNpcSpawn.CheckedChanged
+    Private Sub OptNPCSpawn_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optNpcSpawn.CheckedChanged
         Dim n As Integer
 
         lstNpc.Items.Clear()
@@ -262,56 +379,56 @@ Public Class frmEditor_MapEditor
         fraNpcSpawn.Visible = True
     End Sub
 
-    Private Sub btnShop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShop.Click
+    Private Sub BtnShop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnShop.Click
         EditorShop = cmbShop.SelectedIndex
         pnlAttributes.Visible = False
         fraShop.Visible = False
     End Sub
 
-    Private Sub optShop_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optShop.CheckedChanged
+    Private Sub OptShop_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optShop.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraShop.Visible = True
     End Sub
 
-    Private Sub btnHeal_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnHeal.Click
+    Private Sub BtnHeal_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnHeal.Click
         MapEditorHealType = cmbHeal.SelectedIndex + 1
         MapEditorHealAmount = scrlHeal.Value
         pnlAttributes.Visible = False
         fraHeal.Visible = False
     End Sub
 
-    Private Sub scrlHeal_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlHeal.Scroll
+    Private Sub ScrlHeal_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlHeal.Scroll
         lblHeal.Text = "Amount: " & scrlHeal.Value
     End Sub
 
-    Private Sub optHeal_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optHeal.CheckedChanged
+    Private Sub OptHeal_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optHeal.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraHeal.Visible = True
     End Sub
 
-    Private Sub scrlTrap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlTrap.Scroll
+    Private Sub ScrlTrap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlTrap.Scroll
         lblTrap.Text = "Amount: " & scrlTrap.Value
     End Sub
 
-    Private Sub btnTrap_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTrap.Click
+    Private Sub BtnTrap_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnTrap.Click
         MapEditorHealAmount = scrlTrap.Value
         pnlAttributes.Visible = False
         fraTrap.Visible = False
     End Sub
 
-    Private Sub optTrap_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optTrap.CheckedChanged
+    Private Sub OptTrap_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optTrap.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraTrap.Visible = True
     End Sub
 
-    Private Sub btnClearAttribute_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClearAttribute.Click
+    Private Sub BtnClearAttribute_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnClearAttribute.Click
         MapEditorClearAttribs()
     End Sub
 
-    Private Sub scrlNpcDir_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlNpcDir.Scroll
+    Private Sub ScrlNpcDir_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlNpcDir.Scroll
         Select Case scrlNpcDir.Value
             Case 0
                 lblNpcDir.Text = "Direction: Up"
@@ -324,11 +441,11 @@ Public Class frmEditor_MapEditor
         End Select
     End Sub
 
-    Private Sub optBlocked_CheckedChanged(sender As Object, e As EventArgs) Handles optBlocked.CheckedChanged
+    Private Sub OptBlocked_CheckedChanged(sender As Object, e As EventArgs) Handles optBlocked.CheckedChanged
         If optBlocked.Checked Then pnlAttributes.Visible = False
     End Sub
 
-    Private Sub optHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
+    Private Sub OptHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraBuyHouse.Visible = True
@@ -336,11 +453,11 @@ Public Class frmEditor_MapEditor
         scrlBuyHouse.Value = 1
     End Sub
 
-    Private Sub scrlBuyHouse_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlBuyHouse.Scroll
+    Private Sub ScrlBuyHouse_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlBuyHouse.Scroll
         lblHouseName.Text = scrlBuyHouse.Value & ". " & HouseConfig(scrlBuyHouse.Value).ConfigName
     End Sub
 
-    Private Sub btnHouseTileOk_Click(sender As Object, e As EventArgs) Handles btnHouseTileOk.Click
+    Private Sub BtnHouseTileOk_Click(sender As Object, e As EventArgs) Handles btnHouseTileOk.Click
         HouseTileIndex = scrlBuyHouse.Value
         pnlAttributes.Visible = False
         fraBuyHouse.Visible = False
@@ -348,125 +465,44 @@ Public Class frmEditor_MapEditor
 
 #End Region
 
-#Region "Toolbar"
-    Private Sub tsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
-        MapEditorSend()
-    End Sub
-
-    Private Sub tsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
-        MapEditorCancel()
-    End Sub
-
-    Private Sub tsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
-        MapGrid = Not MapGrid
-    End Sub
-
-    Private Sub tsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
-        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
-    End Sub
-
-    Private Sub tsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
-        MapEditorClearLayer()
-    End Sub
-
-    Private Sub cmbMapList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapList.SelectedIndexChanged
-        SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
-    End Sub
-#End Region
-
-#Region "Npc's"
-    Private Sub lstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
-        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
-    End Sub
-
-    Private Sub cmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If lstMapNpc.SelectedIndex > -1 Then
-            If cmbNpcList.SelectedIndex > 0 Then
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
-            Else
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
-            End If
-
-        End If
-    End Sub
-#End Region
-
-#Region "PicScreen"
-    Private Sub picscreen_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseDown
-        If e.X > pnlBack2.Width - 32 Or e.Y > pnlBack2.Height - 32 Then Exit Sub
-        MapEditorMouseDown(e.Button, e.X, e.Y, False)
-
-    End Sub
-
-    Private Overloads Sub picscreen_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picScreen.Paint
-        'This is here to make sure that the box dosen't try to re-paint itself... saves time and w/e else
-        Exit Sub
-    End Sub
-
-    Private Sub picscreen_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseMove
-
-        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
-        CurMouseX = e.Location.X
-        CurMouseY = e.Location.Y
-
-        If e.Button = MouseButtons.Left Or e.Button = MouseButtons.Right Then
-            MapEditorMouseDown(e.Button, e.X, e.Y)
-        End If
-
-        tslCurXY.Text = "X: " & CurX & " - " & " Y: " & CurY
-    End Sub
-
-    Private Sub picscreen_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picScreen.MouseUp
-
-        CurX = TileView.left + ((e.Location.X + Camera.Left) \ PIC_X)
-        CurY = TileView.top + ((e.Location.Y + Camera.Top) \ PIC_Y)
-
-    End Sub
-
-#End Region
-
 #Region "Map Settings"
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Map.Name = Trim$(txtName.Text)
     End Sub
 
-    Private Sub cmbMoral_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoral.SelectedIndexChanged
+    Private Sub CmbMoral_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoral.SelectedIndexChanged
         Map.Moral = cmbMoral.SelectedIndex
     End Sub
 
-    Private Sub txtLeft_TextChanged(sender As Object, e As EventArgs) Handles txtLeft.TextChanged
+    Private Sub TxtLeft_TextChanged(sender As Object, e As EventArgs) Handles txtLeft.TextChanged
         Map.Left = Val(txtLeft.Text)
     End Sub
 
-    Private Sub txtRight_TextChanged(sender As Object, e As EventArgs) Handles txtRight.TextChanged
+    Private Sub TxtRight_TextChanged(sender As Object, e As EventArgs) Handles txtRight.TextChanged
         Map.Right = Val(txtRight.Text)
     End Sub
 
-    Private Sub txtUp_TextChanged(sender As Object, e As EventArgs) Handles txtUp.TextChanged
+    Private Sub TxtUp_TextChanged(sender As Object, e As EventArgs) Handles txtUp.TextChanged
         Map.Up = Val(txtUp.Text)
     End Sub
 
-    Private Sub txtDown_TextChanged(sender As Object, e As EventArgs) Handles txtDown.TextChanged
+    Private Sub TxtDown_TextChanged(sender As Object, e As EventArgs) Handles txtDown.TextChanged
         Map.Down = Val(txtDown.Text)
     End Sub
 
-    Private Sub txtBootMap_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnMap.TextChanged
+    Private Sub TxtBootMap_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnMap.TextChanged
         Map.BootMap = Val(txtSpawnMap.Text)
     End Sub
 
-    Private Sub txtBootX_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnX.TextChanged
+    Private Sub TxtBootX_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnX.TextChanged
         Map.BootX = Val(txtSpawnX.Text)
     End Sub
 
-    Private Sub txtBootY_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnY.TextChanged
+    Private Sub TxtBootY_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnY.TextChanged
         Map.BootY = Val(txtSpawnY.Text)
     End Sub
 
-    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
+    Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then
             If lstMusic.SelectedIndex >= 0 Then
                 StopMusic()
@@ -478,36 +514,36 @@ Public Class frmEditor_MapEditor
         End If
     End Sub
 
-    Private Sub cmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
+    Private Sub CmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
         Map.WeatherType = cmbWeather.SelectedIndex
         CurrentWeather = cmbWeather.SelectedIndex
     End Sub
 
-    Private Sub scrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
+    Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles scrlFog.ValueChanged
         Map.FogIndex = scrlFog.Value
         lblFogIndex.Text = "Fog: " & scrlFog.Value
         CurrentFog = scrlFog.Value
     End Sub
 
-    Private Sub scrlIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntensity.Scroll
+    Private Sub ScrlIntensity_Scroll(sender As Object, e As EventArgs) Handles scrlIntensity.ValueChanged
         Map.WeatherIntensity = scrlIntensity.Value
         lblIntensity.Text = "Intensity: " & scrlIntensity.Value
         CurrentWeatherIntensity = scrlIntensity.Value
     End Sub
 
-    Private Sub scrlFogSpeed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogSpeed.Scroll
+    Private Sub ScrlFogSpeed_Scroll(sender As Object, e As EventArgs) Handles scrlFogSpeed.ValueChanged
         Map.FogSpeed = scrlFogSpeed.Value
         lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
         CurrentFogSpeed = scrlFogSpeed.Value
     End Sub
 
-    Private Sub scrlFogAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogAlpha.Scroll
+    Private Sub ScrlFogAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlFogAlpha.ValueChanged
         Map.FogAlpha = scrlFogAlpha.Value
         lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
         CurrentFogOpacity = scrlFogAlpha.Value
     End Sub
 
-    Private Sub chkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
+    Private Sub ChkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
         If chkUseTint.Checked = True Then
             Map.HasMapTint = 1
         Else
@@ -515,52 +551,47 @@ Public Class frmEditor_MapEditor
         End If
     End Sub
 
-    Private Sub scrlMapRed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapRed.Scroll
+    Private Sub ScrlMapRed_Scroll(sender As Object, e As EventArgs) Handles scrlMapRed.ValueChanged
         Map.MapTintR = scrlMapRed.Value
         lblMapRed.Text = "Red: " & scrlMapRed.Value
         CurrentTintR = scrlMapRed.Value
     End Sub
 
-    Private Sub scrlMapGreen_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapGreen.Scroll
+    Private Sub ScrlMapGreen_Scroll(sender As Object, e As EventArgs) Handles scrlMapGreen.ValueChanged
         Map.MapTintG = scrlMapGreen.Value
         lblMapGreen.Text = "Green: " & scrlMapGreen.Value
         CurrentTintG = scrlMapGreen.Value
     End Sub
 
-    Private Sub scrlMapBlue_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBlue.Scroll
+    Private Sub ScrlMapBlue_Scroll(sender As Object, e As EventArgs) Handles scrlMapBlue.ValueChanged
         Map.MapTintB = scrlMapBlue.Value
         lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
         CurrentTintB = scrlMapBlue.Value
     End Sub
 
-    Private Sub scrlMapAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapAlpha.Scroll
+    Private Sub ScrlMapAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlMapAlpha.ValueChanged
         Map.MapTintA = scrlMapAlpha.Value
         lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
         CurrentTintA = scrlMapAlpha.Value
     End Sub
 
-    Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+    Private Sub BtnSetSize_Click(sender As Object, e As EventArgs) Handles btnSetSize.Click
         Dim X As Integer, x2 As Integer
         Dim Y As Integer, y2 As Integer
         Dim tempArr(,) As TileRec
 
         If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
-        If Val(txtMaxX.Text) < SCREEN_MAPX Then txtMaxX.Text = SCREEN_MAPX
+        'If Val(txtMaxX.Text) < SCREEN_MAPX Then txtMaxX.Text = SCREEN_MAPX
         If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
         If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
-        If Val(txtMaxY.Text) < SCREEN_MAPY Then txtMaxY.Text = SCREEN_MAPY
+        'If Val(txtMaxY.Text) < SCREEN_MAPY Then txtMaxY.Text = SCREEN_MAPY
         If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
 
+        GettingMap = True
         With Map
 
-            If lstMusic.SelectedIndex >= 0 Then
-                .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
-            Else
-                .Music = ""
-            End If
-
             ' set the data before changing it
-            tempArr = Map.Tile.Clone
+            tempArr = Map.Tile
 
             x2 = Map.MaxX
             y2 = Map.MaxY
@@ -589,25 +620,37 @@ Public Class frmEditor_MapEditor
             Next
 
             ClearTempTile()
-            MapEditorSend()
+            'MapEditorSend()
         End With
+
+        GettingMap = False
     End Sub
 
-    Private Sub scrlMapViewH_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapViewH.Scroll
+    Private Sub ScrlMapViewH_Scroll(sender As Object, e As EventArgs) Handles scrlMapViewH.ValueChanged
         EditorViewX = scrlMapViewH.Value
     End Sub
 
-    Private Sub scrlMapViewV_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapViewV.Scroll
+    Private Sub ScrlMapViewV_Scroll(sender As Object, e As EventArgs) Handles scrlMapViewV.ValueChanged
         EditorViewY = scrlMapViewV.Value
     End Sub
 
-    Private Sub chkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
+    Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
         If chkInstance.Checked = True Then
             Map.Instanced = 1
         Else
             Map.Instanced = 0
         End If
     End Sub
+
+    Private Sub BtnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
+        If pnlMoreOptions.Visible = False Then
+            pnlMoreOptions.Visible = True
+        Else
+            pnlMoreOptions.Visible = False
+        End If
+    End Sub
+
+
 
 #End Region
 

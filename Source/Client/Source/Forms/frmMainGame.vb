@@ -2,6 +2,14 @@
 
 Public Class FrmMainGame
 #Region "Frm Code"
+    Private Const CP_NOCLOSE_BUTTON As Integer = &H200
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim myCp As CreateParams = MyBase.CreateParams
+            myCp.ClassStyle = myCp.ClassStyle Or CP_NOCLOSE_BUTTON
+            Return myCp
+        End Get
+    End Property
 
     Private Sub FrmMainGame_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         RePositionGUI()
@@ -9,11 +17,11 @@ Public Class FrmMainGame
         frmAdmin.Visible = False
     End Sub
 
-    Private Sub FrmMainGame_Disposed(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Disposed
-        frmAdmin.Dispose()
-        'DestroyGame()
-        SendLeaveGame()
-    End Sub
+    'Private Sub FrmMainGame_Closing(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Closing
+    '    frmAdmin.Dispose()
+    '    'DestroyGame()
+    '    SendLeaveGame()
+    'End Sub
 
     Private Sub FrmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
 
