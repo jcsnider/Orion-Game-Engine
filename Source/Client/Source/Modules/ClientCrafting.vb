@@ -75,7 +75,7 @@ Public Module ClientCrafting
             Recipe_Changed(i) = Nothing
         Next
 
-        ReDim Recipe_Changed(0 To MAX_RECIPE)
+        ReDim Recipe_Changed(MAX_RECIPE)
     End Sub
 #End Region
 
@@ -231,7 +231,7 @@ Public Module ClientCrafting
         For i = 1 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
                 If HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
-                    AddText("Not Enough Materials!", ColorType.Red)
+                    AddText(Strings.Get("crafting", "notenough"), ColorType.Red)
                     Exit Sub
                 End If
             End If
@@ -432,7 +432,7 @@ Public Module ClientCrafting
         CraftAmountValue = 1
 
         picProductIndex = 0
-        lblProductNameText = "None Selected"
+        lblProductNameText = Strings.Get("crafting", "noneselected")
         lblProductAmountText = "0"
 
         For i = 1 To MAX_INGREDIENT

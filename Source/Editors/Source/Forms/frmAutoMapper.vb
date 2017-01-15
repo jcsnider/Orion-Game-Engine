@@ -40,16 +40,17 @@
         txtResource.Text = lstResources.Items.Item(lstResources.SelectedIndex)
     End Sub
 
-    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles btnAddResource.Click
         lstResources.Items.Add(Val(txtResource.Text))
     End Sub
 
-    Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
+    Private Sub BtnRemove_Click(sender As Object, e As EventArgs) Handles btnRemoveResource.click
         If lstResources.SelectedIndex < 0 Then Exit Sub
         lstResources.Items.RemoveAt(lstResources.SelectedIndex)
     End Sub
 
-    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdateResource.click
+
         If lstResources.SelectedIndex < 0 Then Exit Sub
 
         lstResources.Items.Item(lstResources.SelectedIndex) = txtResource.Text
@@ -85,7 +86,7 @@
             If Tile(cmbPrefab.SelectedIndex + 1).Layer(Layer).Tileset > 0 Then
                 Exit For
             End If
-        Next Layer
+        Next
 
         cmbLayer.SelectedIndex = Layer - 1
         CmbLayer_SelectedIndexChanged(sender, e)
@@ -107,7 +108,7 @@
         End If
     End Sub
 
-    Private Sub BtmTileSetClose_Click(sender As Object, e As EventArgs) Handles btmTileSetClose.Click
+    Private Sub BtnTileSetClose_Click(sender As Object, e As EventArgs) Handles btnTileSetClose.Click
         pnlTileConfig.Visible = False
     End Sub
 
@@ -131,6 +132,11 @@
         myXml.WriteString("Prefab" & Prefab, "Type", Val(Tile(Prefab).Type))
 
         LoadTilePrefab()
+    End Sub
+
+    Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pnlResources.Top = 0
+        pnlResources.Left = 0
     End Sub
 
 

@@ -26,8 +26,14 @@ Public Class FrmMainGame
     Private Sub FrmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
 
         If inChat = True Then
-            If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
+            'If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
+            If Not e.KeyCode = Keys.Enter Then
                 If MyText = Nothing Then MyText = ""
+
+                If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+                    MyText = MyText + Clipboard.GetText
+                End If
+
                 If MyText.Length < 100 Then
                     MyText = MyText + KeyPressed(e)
                 End If

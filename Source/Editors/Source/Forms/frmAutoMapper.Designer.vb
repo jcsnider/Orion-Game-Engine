@@ -23,31 +23,31 @@ Partial Class FrmAutoMapper
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.pnlResources = New System.Windows.Forms.Panel()
-        Me.btnSaveResource = New System.Windows.Forms.Button()
-        Me.btnCloseResource = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnRemove = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.txtResource = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnAddResource = New DarkUI.Controls.DarkButton()
+        Me.btnRemoveResource = New DarkUI.Controls.DarkButton()
+        Me.btnUpdateResource = New DarkUI.Controls.DarkButton()
+        Me.btnSaveResource = New DarkUI.Controls.DarkButton()
+        Me.btnCloseResource = New DarkUI.Controls.DarkButton()
+        Me.txtResource = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
         Me.lstResources = New System.Windows.Forms.ListBox()
         Me.pnlTileConfig = New System.Windows.Forms.Panel()
-        Me.btnTileSetSave = New System.Windows.Forms.Button()
-        Me.btmTileSetClose = New System.Windows.Forms.Button()
+        Me.btnTileSetSave = New DarkUI.Controls.DarkButton()
+        Me.btnTileSetClose = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
+        Me.cmbLayer = New DarkUI.Controls.DarkComboBox()
+        Me.cmbPrefab = New DarkUI.Controls.DarkComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.chkBlocked = New System.Windows.Forms.CheckBox()
-        Me.txtAutotile = New System.Windows.Forms.TextBox()
+        Me.txtAutotile = New DarkUI.Controls.DarkTextBox()
+        Me.txtTileY = New DarkUI.Controls.DarkTextBox()
+        Me.txtTileX = New DarkUI.Controls.DarkTextBox()
+        Me.txtTileset = New DarkUI.Controls.DarkTextBox()
+        Me.chkBlocked = New DarkUI.Controls.DarkCheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtTileY = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtTileX = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtTileset = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.cmbLayer = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.cmbPrefab = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.DarkMenu = New DarkUI.Controls.DarkMenuStrip()
         Me.ConfigurationsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TilesetsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,83 +82,89 @@ Partial Class FrmAutoMapper
         '
         'pnlResources
         '
+        Me.pnlResources.Controls.Add(Me.btnAddResource)
+        Me.pnlResources.Controls.Add(Me.btnRemoveResource)
+        Me.pnlResources.Controls.Add(Me.btnUpdateResource)
         Me.pnlResources.Controls.Add(Me.btnSaveResource)
         Me.pnlResources.Controls.Add(Me.btnCloseResource)
-        Me.pnlResources.Controls.Add(Me.btnUpdate)
-        Me.pnlResources.Controls.Add(Me.btnRemove)
-        Me.pnlResources.Controls.Add(Me.btnAdd)
         Me.pnlResources.Controls.Add(Me.txtResource)
-        Me.pnlResources.Controls.Add(Me.Label8)
+        Me.pnlResources.Controls.Add(Me.DarkLabel8)
         Me.pnlResources.Controls.Add(Me.lstResources)
-        Me.pnlResources.Location = New System.Drawing.Point(387, 28)
+        Me.pnlResources.Location = New System.Drawing.Point(394, 20)
         Me.pnlResources.Name = "pnlResources"
         Me.pnlResources.Size = New System.Drawing.Size(380, 267)
         Me.pnlResources.TabIndex = 24
         Me.pnlResources.Visible = False
         '
+        'btnAddResource
+        '
+        Me.btnAddResource.Location = New System.Drawing.Point(254, 154)
+        Me.btnAddResource.Name = "btnAddResource"
+        Me.btnAddResource.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnAddResource.Size = New System.Drawing.Size(122, 23)
+        Me.btnAddResource.TabIndex = 14
+        Me.btnAddResource.Text = "Add Resources"
+        '
+        'btnRemoveResource
+        '
+        Me.btnRemoveResource.Location = New System.Drawing.Point(254, 183)
+        Me.btnRemoveResource.Name = "btnRemoveResource"
+        Me.btnRemoveResource.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnRemoveResource.Size = New System.Drawing.Size(122, 23)
+        Me.btnRemoveResource.TabIndex = 13
+        Me.btnRemoveResource.Text = "Remove Resources"
+        '
+        'btnUpdateResource
+        '
+        Me.btnUpdateResource.Location = New System.Drawing.Point(254, 212)
+        Me.btnUpdateResource.Name = "btnUpdateResource"
+        Me.btnUpdateResource.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnUpdateResource.Size = New System.Drawing.Size(122, 23)
+        Me.btnUpdateResource.TabIndex = 12
+        Me.btnUpdateResource.Text = "Update Resources"
+        '
         'btnSaveResource
         '
-        Me.btnSaveResource.Location = New System.Drawing.Point(254, 243)
+        Me.btnSaveResource.Location = New System.Drawing.Point(254, 241)
         Me.btnSaveResource.Name = "btnSaveResource"
+        Me.btnSaveResource.Padding = New System.Windows.Forms.Padding(5)
         Me.btnSaveResource.Size = New System.Drawing.Size(122, 23)
-        Me.btnSaveResource.TabIndex = 7
+        Me.btnSaveResource.TabIndex = 11
         Me.btnSaveResource.Text = "Save"
-        Me.btnSaveResource.UseVisualStyleBackColor = True
         '
         'btnCloseResource
         '
-        Me.btnCloseResource.Location = New System.Drawing.Point(3, 243)
+        Me.btnCloseResource.Location = New System.Drawing.Point(3, 240)
         Me.btnCloseResource.Name = "btnCloseResource"
+        Me.btnCloseResource.Padding = New System.Windows.Forms.Padding(5)
         Me.btnCloseResource.Size = New System.Drawing.Size(122, 23)
-        Me.btnCloseResource.TabIndex = 6
+        Me.btnCloseResource.TabIndex = 10
         Me.btnCloseResource.Text = "Close"
-        Me.btnCloseResource.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(254, 214)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(122, 23)
-        Me.btnUpdate.TabIndex = 5
-        Me.btnUpdate.Text = "Update Resource"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnRemove
-        '
-        Me.btnRemove.Location = New System.Drawing.Point(254, 185)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(122, 23)
-        Me.btnRemove.TabIndex = 4
-        Me.btnRemove.Text = "Remove Resource"
-        Me.btnRemove.UseVisualStyleBackColor = True
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(254, 156)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(122, 23)
-        Me.btnAdd.TabIndex = 3
-        Me.btnAdd.Text = "Add Resource"
-        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'txtResource
         '
-        Me.txtResource.Location = New System.Drawing.Point(109, 153)
+        Me.txtResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtResource.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtResource.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtResource.Location = New System.Drawing.Point(109, 156)
         Me.txtResource.Name = "txtResource"
         Me.txtResource.Size = New System.Drawing.Size(100, 20)
-        Me.txtResource.TabIndex = 2
+        Me.txtResource.TabIndex = 9
         '
-        'Label8
+        'DarkLabel8
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(7, 156)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(96, 13)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Resource Number:"
+        Me.DarkLabel8.AutoSize = True
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(7, 156)
+        Me.DarkLabel8.Name = "DarkLabel8"
+        Me.DarkLabel8.Size = New System.Drawing.Size(96, 13)
+        Me.DarkLabel8.TabIndex = 8
+        Me.DarkLabel8.Text = "Resource Number:"
         '
         'lstResources
         '
+        Me.lstResources.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.lstResources.ForeColor = System.Drawing.Color.Gainsboro
         Me.lstResources.FormattingEnabled = True
         Me.lstResources.Location = New System.Drawing.Point(3, 3)
         Me.lstResources.Name = "lstResources"
@@ -168,13 +174,13 @@ Partial Class FrmAutoMapper
         'pnlTileConfig
         '
         Me.pnlTileConfig.Controls.Add(Me.btnTileSetSave)
-        Me.pnlTileConfig.Controls.Add(Me.btmTileSetClose)
-        Me.pnlTileConfig.Controls.Add(Me.GroupBox1)
+        Me.pnlTileConfig.Controls.Add(Me.btnTileSetClose)
+        Me.pnlTileConfig.Controls.Add(Me.DarkLabel10)
+        Me.pnlTileConfig.Controls.Add(Me.DarkLabel9)
         Me.pnlTileConfig.Controls.Add(Me.cmbLayer)
-        Me.pnlTileConfig.Controls.Add(Me.Label10)
         Me.pnlTileConfig.Controls.Add(Me.cmbPrefab)
-        Me.pnlTileConfig.Controls.Add(Me.Label9)
-        Me.pnlTileConfig.Location = New System.Drawing.Point(773, 27)
+        Me.pnlTileConfig.Controls.Add(Me.GroupBox1)
+        Me.pnlTileConfig.Location = New System.Drawing.Point(780, 24)
         Me.pnlTileConfig.Name = "pnlTileConfig"
         Me.pnlTileConfig.Size = New System.Drawing.Size(380, 270)
         Me.pnlTileConfig.TabIndex = 25
@@ -182,33 +188,82 @@ Partial Class FrmAutoMapper
         '
         'btnTileSetSave
         '
-        Me.btnTileSetSave.Location = New System.Drawing.Point(298, 241)
+        Me.btnTileSetSave.Location = New System.Drawing.Point(298, 240)
         Me.btnTileSetSave.Name = "btnTileSetSave"
+        Me.btnTileSetSave.Padding = New System.Windows.Forms.Padding(5)
         Me.btnTileSetSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnTileSetSave.TabIndex = 6
+        Me.btnTileSetSave.TabIndex = 45
         Me.btnTileSetSave.Text = "Save"
-        Me.btnTileSetSave.UseVisualStyleBackColor = True
         '
-        'btmTileSetClose
+        'btnTileSetClose
         '
-        Me.btmTileSetClose.Location = New System.Drawing.Point(7, 241)
-        Me.btmTileSetClose.Name = "btmTileSetClose"
-        Me.btmTileSetClose.Size = New System.Drawing.Size(75, 23)
-        Me.btmTileSetClose.TabIndex = 5
-        Me.btmTileSetClose.Text = "Close"
-        Me.btmTileSetClose.UseVisualStyleBackColor = True
+        Me.btnTileSetClose.Location = New System.Drawing.Point(7, 241)
+        Me.btnTileSetClose.Name = "btnTileSetClose"
+        Me.btnTileSetClose.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnTileSetClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnTileSetClose.TabIndex = 44
+        Me.btnTileSetClose.Text = "Close"
+        '
+        'DarkLabel10
+        '
+        Me.DarkLabel10.AutoSize = True
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel10.Location = New System.Drawing.Point(7, 37)
+        Me.DarkLabel10.Name = "DarkLabel10"
+        Me.DarkLabel10.Size = New System.Drawing.Size(97, 13)
+        Me.DarkLabel10.TabIndex = 43
+        Me.DarkLabel10.Text = "Choose The Layer:"
+        '
+        'DarkLabel9
+        '
+        Me.DarkLabel9.AutoSize = True
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel9.Location = New System.Drawing.Point(7, 10)
+        Me.DarkLabel9.Name = "DarkLabel9"
+        Me.DarkLabel9.Size = New System.Drawing.Size(102, 13)
+        Me.DarkLabel9.TabIndex = 43
+        Me.DarkLabel9.Text = "Choose The Prefab:"
+        '
+        'cmbLayer
+        '
+        Me.cmbLayer.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.cmbLayer.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbLayer.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbLayer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbLayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbLayer.FormattingEnabled = True
+        Me.cmbLayer.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
+        Me.cmbLayer.Location = New System.Drawing.Point(115, 34)
+        Me.cmbLayer.Name = "cmbLayer"
+        Me.cmbLayer.Size = New System.Drawing.Size(252, 21)
+        Me.cmbLayer.TabIndex = 43
+        '
+        'cmbPrefab
+        '
+        Me.cmbPrefab.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.cmbPrefab.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbPrefab.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbPrefab.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPrefab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPrefab.FormattingEnabled = True
+        Me.cmbPrefab.Items.AddRange(New Object() {"Water", "Sand", "Grass", "Passing", "Overgrass", "River", "Mountain"})
+        Me.cmbPrefab.Location = New System.Drawing.Point(115, 7)
+        Me.cmbPrefab.Name = "cmbPrefab"
+        Me.cmbPrefab.Size = New System.Drawing.Size(252, 21)
+        Me.cmbPrefab.TabIndex = 43
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.chkBlocked)
         Me.GroupBox1.Controls.Add(Me.txtAutotile)
-        Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtTileY)
-        Me.GroupBox1.Controls.Add(Me.Label13)
         Me.GroupBox1.Controls.Add(Me.txtTileX)
-        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.txtTileset)
+        Me.GroupBox1.Controls.Add(Me.chkBlocked)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.Label13)
+        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.Gainsboro
         Me.GroupBox1.Location = New System.Drawing.Point(7, 66)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(366, 169)
@@ -216,22 +271,54 @@ Partial Class FrmAutoMapper
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Tile Settings"
         '
+        'txtAutotile
+        '
+        Me.txtAutotile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtAutotile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAutotile.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtAutotile.Location = New System.Drawing.Point(108, 98)
+        Me.txtAutotile.Name = "txtAutotile"
+        Me.txtAutotile.Size = New System.Drawing.Size(252, 20)
+        Me.txtAutotile.TabIndex = 47
+        '
+        'txtTileY
+        '
+        Me.txtTileY.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtTileY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTileY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtTileY.Location = New System.Drawing.Point(108, 72)
+        Me.txtTileY.Name = "txtTileY"
+        Me.txtTileY.Size = New System.Drawing.Size(252, 20)
+        Me.txtTileY.TabIndex = 46
+        '
+        'txtTileX
+        '
+        Me.txtTileX.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtTileX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTileX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtTileX.Location = New System.Drawing.Point(108, 46)
+        Me.txtTileX.Name = "txtTileX"
+        Me.txtTileX.Size = New System.Drawing.Size(252, 20)
+        Me.txtTileX.TabIndex = 45
+        '
+        'txtTileset
+        '
+        Me.txtTileset.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtTileset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTileset.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtTileset.Location = New System.Drawing.Point(108, 20)
+        Me.txtTileset.Name = "txtTileset"
+        Me.txtTileset.Size = New System.Drawing.Size(252, 20)
+        Me.txtTileset.TabIndex = 44
+        '
         'chkBlocked
         '
         Me.chkBlocked.AutoSize = True
-        Me.chkBlocked.Location = New System.Drawing.Point(6, 132)
+        Me.chkBlocked.Location = New System.Drawing.Point(8, 132)
         Me.chkBlocked.Name = "chkBlocked"
-        Me.chkBlocked.Size = New System.Drawing.Size(89, 17)
-        Me.chkBlocked.TabIndex = 8
-        Me.chkBlocked.Text = "Is it blocked?"
-        Me.chkBlocked.UseVisualStyleBackColor = True
-        '
-        'txtAutotile
-        '
-        Me.txtAutotile.Location = New System.Drawing.Point(108, 97)
-        Me.txtAutotile.Name = "txtAutotile"
-        Me.txtAutotile.Size = New System.Drawing.Size(252, 20)
-        Me.txtAutotile.TabIndex = 7
+        Me.chkBlocked.Size = New System.Drawing.Size(91, 17)
+        Me.chkBlocked.TabIndex = 43
+        Me.chkBlocked.Text = "Is It Blocked?"
         '
         'Label14
         '
@@ -242,13 +329,6 @@ Partial Class FrmAutoMapper
         Me.Label14.TabIndex = 6
         Me.Label14.Text = "AutoTile:"
         '
-        'txtTileY
-        '
-        Me.txtTileY.Location = New System.Drawing.Point(108, 71)
-        Me.txtTileY.Name = "txtTileY"
-        Me.txtTileY.Size = New System.Drawing.Size(252, 20)
-        Me.txtTileY.TabIndex = 5
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
@@ -257,13 +337,6 @@ Partial Class FrmAutoMapper
         Me.Label13.Size = New System.Drawing.Size(53, 13)
         Me.Label13.TabIndex = 4
         Me.Label13.Text = "TileSet Y:"
-        '
-        'txtTileX
-        '
-        Me.txtTileX.Location = New System.Drawing.Point(108, 45)
-        Me.txtTileX.Name = "txtTileX"
-        Me.txtTileX.Size = New System.Drawing.Size(252, 20)
-        Me.txtTileX.TabIndex = 3
         '
         'Label12
         '
@@ -274,13 +347,6 @@ Partial Class FrmAutoMapper
         Me.Label12.TabIndex = 2
         Me.Label12.Text = "TileSet X:"
         '
-        'txtTileset
-        '
-        Me.txtTileset.Location = New System.Drawing.Point(108, 19)
-        Me.txtTileset.Name = "txtTileset"
-        Me.txtTileset.Size = New System.Drawing.Size(252, 20)
-        Me.txtTileset.TabIndex = 1
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
@@ -290,42 +356,6 @@ Partial Class FrmAutoMapper
         Me.Label11.TabIndex = 0
         Me.Label11.Text = "TileSet Number:"
         '
-        'cmbLayer
-        '
-        Me.cmbLayer.FormattingEnabled = True
-        Me.cmbLayer.Items.AddRange(New Object() {"Ground", "Mask", "Mask 2", "Fringe", "Fringe 2"})
-        Me.cmbLayer.Location = New System.Drawing.Point(115, 34)
-        Me.cmbLayer.Name = "cmbLayer"
-        Me.cmbLayer.Size = New System.Drawing.Size(252, 21)
-        Me.cmbLayer.TabIndex = 3
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(7, 37)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(97, 13)
-        Me.Label10.TabIndex = 2
-        Me.Label10.Text = "Choose The Layer:"
-        '
-        'cmbPrefab
-        '
-        Me.cmbPrefab.FormattingEnabled = True
-        Me.cmbPrefab.Items.AddRange(New Object() {"Water", "Sand", "Grass", "Passing", "Overgrass", "River", "Mountain"})
-        Me.cmbPrefab.Location = New System.Drawing.Point(115, 7)
-        Me.cmbPrefab.Name = "cmbPrefab"
-        Me.cmbPrefab.Size = New System.Drawing.Size(252, 21)
-        Me.cmbPrefab.TabIndex = 1
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(7, 10)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(102, 13)
-        Me.Label9.TabIndex = 0
-        Me.Label9.Text = "Choose The Prefab:"
-        '
         'DarkMenu
         '
         Me.DarkMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
@@ -334,7 +364,7 @@ Partial Class FrmAutoMapper
         Me.DarkMenu.Location = New System.Drawing.Point(0, 0)
         Me.DarkMenu.Name = "DarkMenu"
         Me.DarkMenu.Padding = New System.Windows.Forms.Padding(3, 2, 0, 2)
-        Me.DarkMenu.Size = New System.Drawing.Size(1295, 24)
+        Me.DarkMenu.Size = New System.Drawing.Size(393, 24)
         Me.DarkMenu.TabIndex = 27
         '
         'ConfigurationsToolStripMenuItem2
@@ -588,7 +618,7 @@ Partial Class FrmAutoMapper
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1295, 411)
+        Me.ClientSize = New System.Drawing.Size(393, 249)
         Me.Controls.Add(Me.pnlResources)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.txtResourceFreq)
@@ -623,30 +653,12 @@ Partial Class FrmAutoMapper
 
     End Sub
     Friend WithEvents pnlResources As Panel
-    Friend WithEvents btnSaveResource As Button
-    Friend WithEvents btnCloseResource As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnRemove As Button
-    Friend WithEvents btnAdd As Button
-    Friend WithEvents txtResource As TextBox
-    Friend WithEvents Label8 As Label
     Friend WithEvents lstResources As ListBox
     Friend WithEvents pnlTileConfig As Panel
-    Friend WithEvents cmbLayer As ComboBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents cmbPrefab As ComboBox
-    Friend WithEvents Label9 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents txtTileY As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents txtTileX As TextBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents txtTileset As TextBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents btnTileSetSave As Button
-    Friend WithEvents btmTileSetClose As Button
-    Friend WithEvents chkBlocked As CheckBox
-    Friend WithEvents txtAutotile As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents DarkMenu As DarkUI.Controls.DarkMenuStrip
     Friend WithEvents ConfigurationsToolStripMenuItem2 As ToolStripMenuItem
@@ -674,4 +686,22 @@ Partial Class FrmAutoMapper
     Friend WithEvents txtDetail As DarkUI.Controls.DarkTextBox
     Friend WithEvents txtResourceFreq As DarkUI.Controls.DarkTextBox
     Friend WithEvents btnStart As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnCloseResource As DarkUI.Controls.DarkButton
+    Friend WithEvents txtResource As DarkUI.Controls.DarkTextBox
+    Friend WithEvents btnSaveResource As DarkUI.Controls.DarkButton
+    Friend WithEvents btnUpdateResource As DarkUI.Controls.DarkButton
+    Friend WithEvents btnRemoveResource As DarkUI.Controls.DarkButton
+    Friend WithEvents btnAddResource As DarkUI.Controls.DarkButton
+    Friend WithEvents cmbPrefab As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbLayer As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
+    Friend WithEvents chkBlocked As DarkUI.Controls.DarkCheckBox
+    Friend WithEvents txtTileset As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtAutotile As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtTileY As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtTileX As DarkUI.Controls.DarkTextBox
+    Friend WithEvents btnTileSetClose As DarkUI.Controls.DarkButton
+    Friend WithEvents btnTileSetSave As DarkUI.Controls.DarkButton
 End Class

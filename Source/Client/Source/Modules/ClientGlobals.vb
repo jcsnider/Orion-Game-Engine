@@ -170,12 +170,12 @@ Module ClientGlobals
     Public AnimationIndex As Byte
 
     ' Editor edited items array
-    Public Item_Changed(0 To MAX_ITEMS) As Boolean
-    Public NPC_Changed(0 To MAX_NPCS) As Boolean
-    Public Resource_Changed(0 To MAX_NPCS) As Boolean
-    Public Animation_Changed(0 To MAX_ANIMATIONS) As Boolean
-    Public Skill_Changed(0 To MAX_SKILLS) As Boolean
-    Public Shop_Changed(0 To MAX_SHOPS) As Boolean
+    Public Item_Changed(MAX_ITEMS) As Boolean
+    Public NPC_Changed(MAX_NPCS) As Boolean
+    Public Resource_Changed(MAX_NPCS) As Boolean
+    Public Animation_Changed(MAX_ANIMATIONS) As Boolean
+    Public Skill_Changed(MAX_SKILLS) As Boolean
+    Public Shop_Changed(MAX_SHOPS) As Boolean
 
     ' New char
     Public newCharSprite As Integer

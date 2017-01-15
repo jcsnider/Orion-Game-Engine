@@ -129,7 +129,7 @@ Module ClientGeneral
         ' Update the form with the game's name before it's loaded
         FrmMainGame.Text = GAME_NAME
 
-        SetStatus("Loading Options...")
+        SetStatus(Strings.Get("loadscreen", "options"))
 
         ' load options
         LoadOptions()
@@ -137,12 +137,12 @@ Module ClientGeneral
         ' randomize rnd's seed
         Randomize()
 
-        SetStatus("Initializing Network...")
+        SetStatus(Strings.Get("loadscreen", "network"))
 
         FrmMenu.Text = GAME_NAME
 
         ' DX7 Master Object is already created, early binding
-        SetStatus("Initializing Graphics...")
+        SetStatus(Strings.Get("loadscreen", "graphics"))
         CheckTilesets()
         CheckCharacters()
         CheckPaperdolls()
@@ -186,7 +186,7 @@ Module ClientGeneral
         'set gui switches
         HUDVisible = True
 
-        SetStatus("Starting Game...")
+        SetStatus(Strings.Get("loadscreen", "starting"))
         started = True
         frmmenuvisible = True
         pnlloadvisible = False
@@ -216,7 +216,7 @@ Module ClientGeneral
         For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 Or Asc(Mid$(sInput, i, 1)) > 126 Then
-                MsgBox("You cannot use high ASCII characters in your name, please re-enter.", vbOKOnly, GAME_NAME)
+                MsgBox(Strings.Get("mainmenu", "stringlegal"), vbOKOnly, GAME_NAME)
                 IsStringLegal = False
                 Exit Function
             End If
@@ -251,7 +251,7 @@ Module ClientGeneral
                 pnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    Call SetStatus("Connected, sending character addition data...")
+                    SetStatus(Strings.Get("mainmenu", "sendaddchar"))
 
                     If FrmMenu.rdoMale.Checked = True Then
                         SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, Sex.Male, FrmMenu.cmbClass.SelectedIndex + 1, newCharSprite)
@@ -267,7 +267,7 @@ Module ClientGeneral
                 pnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus("Connected, sending new account information...")
+                    SetStatus(Strings.Get("mainmenu", "sendnewacc"))
                     SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
@@ -280,7 +280,7 @@ Module ClientGeneral
                 tempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
-                    SetStatus("Connected, sending login information...")
+                    SetStatus(Strings.Get("mainmenu", "sendlogin"))
                     SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
@@ -303,7 +303,7 @@ Module ClientGeneral
 
         Connect()
 
-        SetStatus("Connecting to server...(" & i & ")")
+        SetStatus(Strings.Get("mainmenu", "connectserver", i))
 
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not IsConnected()) And (GetTickCount() <= until)

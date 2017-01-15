@@ -7,8 +7,6 @@ Module ClientGraphics
 #Region "Declarations"
     Public GameWindow As RenderWindow
 
-    Public TmpItemWindow As RenderWindow
-
     Public TmpBankItem As RenderWindow
 
     Public TmpSkillWindow As RenderWindow
@@ -232,8 +230,6 @@ Module ClientGraphics
 
         GameWindow = New RenderWindow(FrmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
-
-        TmpItemWindow = New RenderWindow(FrmMainGame.pnlTmpInv.Handle)
 
         TmpBankItem = New RenderWindow(FrmMainGame.pnlTempBank.Handle)
 
@@ -1381,7 +1377,7 @@ Module ClientGraphics
     Public Sub DrawMapTile(ByVal X As Integer, ByVal Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        'Dim tmpSprite As Sprite
+
         If GettingMap Then Exit Sub
         If Map.Tile Is Nothing Then Exit Sub
 
@@ -1956,9 +1952,9 @@ Module ClientGraphics
 
         ' draw cursor, player X and Y locations
         If BLoc Then
-            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 1, Trim$("cur x: " & CurX & " y: " & CurY), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 15, Trim$("loc x: " & GetPlayerX(MyIndex) & " y: " & GetPlayerY(MyIndex)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
-            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 30, Trim$(" (map #" & GetPlayerMap(MyIndex) & ")"), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 1, Trim$(Strings.Get("gamegui", "curloc", CurX, CurY)), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 15, Trim$(Strings.Get("gamegui", "loc", GetPlayerX(MyIndex), GetPlayerY(MyIndex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(1, HUDWindowY + HUDPanelGFXInfo.Height + 30, Trim$(Strings.Get("gamegui", "curmap", GetPlayerMap(MyIndex))), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
         End If
 
         ' draw player names
@@ -2173,7 +2169,7 @@ Module ClientGraphics
     End Sub
 
     Sub DrawMapName()
-        DrawText(DrawMapNameX, DrawMapNameY, "Map: " & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(DrawMapNameX, DrawMapNameY, Strings.Get("gamegui", "mapname") & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Public Sub DrawDoor(ByVal X As Integer, ByVal Y As Integer)
@@ -2517,8 +2513,8 @@ Module ClientGraphics
         DrawStatBars()
 
         'Fps etc
-        DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, "FPS: " & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, "Ping: " & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, Strings.Get("gamegui", "fps") & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         ' Draw map name
         DrawMapName()
@@ -2687,29 +2683,29 @@ Module ClientGraphics
 
         ' Set the character windows
         'name
-        DrawText(CharWindowX + 10, CharWindowY + 14, "Name: " & GetPlayerName(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 14, Strings.Get("charwindow", "charname") & GetPlayerName(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'class
-        DrawText(CharWindowX + 10, CharWindowY + 33, "Class: " & Trim(Classes(GetPlayerClass(MyIndex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 33, Strings.Get("charwindow", "charclass") & Trim(Classes(GetPlayerClass(MyIndex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
-        DrawText(CharWindowX + 150, CharWindowY + 14, "Lvl: " & GetPlayerLevel(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 150, CharWindowY + 14, Strings.Get("charwindow", "charlvl") & GetPlayerLevel(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'points
-        DrawText(CharWindowX + 6, CharWindowY + 200, "Points: " & GetPlayerPOINTS(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 6, CharWindowY + 200, Strings.Get("charwindow", "charpoints") & GetPlayerPOINTS(MyIndex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'Header
-        DrawText(CharWindowX + 250, CharWindowY + 14, "==Basic Stats==", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 250, CharWindowY + 14, Strings.Get("charwindow", "charstatslbl"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         'strength stat
-        DrawText(CharWindowX + 210, CharWindowY + 30, "Strength: " & GetPlayerStat(MyIndex, Stats.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 30, Strings.Get("charwindow", "charstrength") & GetPlayerStat(MyIndex, Stats.Strength), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'endurance stat
-        DrawText(CharWindowX + 210, CharWindowY + 50, "Endurance: " & GetPlayerStat(MyIndex, Stats.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 50, Strings.Get("charwindow", "charendurance") & GetPlayerStat(MyIndex, Stats.Endurance), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'vitality stat
-        DrawText(CharWindowX + 210, CharWindowY + 70, "Vitality: " & GetPlayerStat(MyIndex, Stats.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 70, Strings.Get("charwindow", "charvitality") & GetPlayerStat(MyIndex, Stats.Vitality), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'intelligence stat
-        DrawText(CharWindowX + 210, CharWindowY + 90, "Intelligence: " & GetPlayerStat(MyIndex, Stats.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 90, Strings.Get("charwindow", "charintelligence") & GetPlayerStat(MyIndex, Stats.Intelligence), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'luck stat
-        DrawText(CharWindowX + 210, CharWindowY + 110, "Luck: " & GetPlayerStat(MyIndex, Stats.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 110, Strings.Get("charwindow", "charluck") & GetPlayerStat(MyIndex, Stats.Luck), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'spirit stat
-        DrawText(CharWindowX + 210, CharWindowY + 130, "Spirit: " & GetPlayerStat(MyIndex, Stats.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 130, Strings.Get("charwindow", "charspirit") & GetPlayerStat(MyIndex, Stats.Spirit), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
 
         If GetPlayerPOINTS(MyIndex) > 0 Then
             'strength upgrade
@@ -2728,23 +2724,22 @@ Module ClientGraphics
 
         'gather skills
         'Header
-        DrawText(CharWindowX + 250, CharWindowY + 145, "==Gather Stats==", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 250, CharWindowY + 145, Strings.Get("charwindow", "chargather"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'herbalist skill
-        DrawText(CharWindowX + 210, CharWindowY + 164, "Herbalist Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Herbalist) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 164, Strings.Get("charwindow", "charherb") & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Herbalist) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'woodcutter
-        DrawText(CharWindowX + 210, CharWindowY + 184, "Woodcutter Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.WoodCutter) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 184, Strings.Get("charwindow", "charwood") & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.WoodCutter) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'miner
-        DrawText(CharWindowX + 210, CharWindowY + 204, "Miner Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Miner) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 204, Strings.Get("charwindow", "charmine") & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Miner) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'fisherman
-        DrawText(CharWindowX + 210, CharWindowY + 224, "Fisherman Lvl: " & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Fisherman) & " Exp: " & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 224, Strings.Get("charwindow", "charfish") & GetPlayerGatherSkillLvl(MyIndex, ResourceSkills.Fisherman) & Strings.Get("charwindow", "charexp") & GetPlayerGatherSkillExp(MyIndex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(MyIndex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
     End Sub
 
     Public Sub DrawInventoryItem(ByVal X As Integer, ByVal Y As Integer)
-        Dim rec As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle
         Dim itemnum As Integer, itempic As Integer
 
         itemnum = GetPlayerInvItemNum(MyIndex, DragInvSlotNum)
-        TmpItemWindow.Clear(ToSFMLColor(FrmMainGame.pnlTmpInv.BackColor))
 
         If itemnum > 0 And itemnum <= MAX_ITEMS Then
 
@@ -2767,25 +2762,8 @@ Module ClientGraphics
                 .Width = PIC_X
             End With
 
-            With rec_pos
-                .Y = 0
-                .Height = PIC_Y
-                .X = 0
-                .Width = PIC_X
-            End With
-
-            RenderSprite(ItemsSprite(itempic), TmpItemWindow, 0, 0, rec.X, rec.Y, rec.Width, rec.Height)
-
-            With FrmMainGame.pnlTmpInv
-                .Top = Y
-                .Left = X
-                .Visible = True
-                .BringToFront()
-            End With
-
+            RenderSprite(ItemsSprite(itempic), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
         End If
-        TmpItemWindow.Display()
-
     End Sub
 
     Sub DrawInventory()
@@ -3676,6 +3654,10 @@ NextLoop:
 
         If pnlCraftVisible = True Then
             DrawCraftPanel()
+        End If
+
+        If DragInvSlotNum > 0 Then
+            DrawInventoryItem(CurMouseX, CurMouseY)
         End If
     End Sub
 

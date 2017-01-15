@@ -3241,7 +3241,7 @@ nextevent:
                 End If
 
             Else
-                temptext = "- Continue -"
+                temptext = Strings.Get("events", "continue")
                 DrawText(EventChatX + 410, EventChatY + 156, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
             End If
 
@@ -3392,4 +3392,5 @@ nextevent:
         Next
     End Sub
 #End Region
+
 End Module

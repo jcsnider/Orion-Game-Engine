@@ -138,6 +138,26 @@ Public Class FrmMenu
         rdoFemale.Text = Strings.Get("mainmenu", "newcharfemale")
         lblNewCharSprite.Text = Strings.Get("mainmenu", "newcharsprite")
         btnCreateCharacter.Text = Strings.Get("mainmenu", "newcharbutton")
+
+        'char select
+        lblCharSelect.Text = Strings.Get("mainmenu", "selchar")
+        btnNewChar.Text = Strings.Get("mainmenu", "selcharnew")
+        btnUseChar.Text = Strings.Get("mainmenu", "selcharuse")
+        btnDelChar.Text = Strings.Get("mainmenu", "selchardel")
+
+        'new account
+        lblNewAccount.Text = Strings.Get("mainmenu", "newacc")
+        lblNewAccName.Text = Strings.Get("mainmenu", "newaccname")
+        lblNewAccPass.Text = Strings.Get("mainmenu", "newaccpass")
+        lblNewAccPass2.Text = Strings.Get("mainmenu", "newaccpass2")
+
+        'credits
+        lblCreditsTop.Text = Strings.Get("mainmenu", "credits")
+
+        'ip config
+        lblIpConfig.Text = Strings.Get("mainmenu", "ipconfig")
+        lblIpAdress.Text = Strings.Get("mainmenu", "ipconfigadres")
+        lblPort.Text = Strings.Get("mainmenu", "ipconfigport")
     End Sub
 
     ''' <summary>

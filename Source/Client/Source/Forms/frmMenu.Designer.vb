@@ -35,12 +35,12 @@ Partial Class FrmMenu
         Me.pnlRegister = New System.Windows.Forms.Panel()
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.txtRPass2 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblNewAccPass2 = New System.Windows.Forms.Label()
         Me.txtRPass = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblNewAccPass = New System.Windows.Forms.Label()
         Me.txtRuser = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblNewAccName = New System.Windows.Forms.Label()
+        Me.lblNewAccount = New System.Windows.Forms.Label()
         Me.pnlCredits = New System.Windows.Forms.Panel()
         Me.lblCreditsTop = New System.Windows.Forms.Label()
         Me.lblScrollingCredits = New System.Windows.Forms.Label()
@@ -68,10 +68,10 @@ Partial Class FrmMenu
         Me.pnlIPConfig = New System.Windows.Forms.Panel()
         Me.btnSaveIP = New System.Windows.Forms.Button()
         Me.txtPort = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblPort = New System.Windows.Forms.Label()
         Me.txtIP = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblIpAdress = New System.Windows.Forms.Label()
+        Me.lblIpConfig = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.btnPlay = New System.Windows.Forms.Button()
@@ -201,12 +201,12 @@ Partial Class FrmMenu
         Me.pnlRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlRegister.Controls.Add(Me.btnCreateAccount)
         Me.pnlRegister.Controls.Add(Me.txtRPass2)
-        Me.pnlRegister.Controls.Add(Me.Label4)
+        Me.pnlRegister.Controls.Add(Me.lblNewAccPass2)
         Me.pnlRegister.Controls.Add(Me.txtRPass)
-        Me.pnlRegister.Controls.Add(Me.Label3)
+        Me.pnlRegister.Controls.Add(Me.lblNewAccPass)
         Me.pnlRegister.Controls.Add(Me.txtRuser)
-        Me.pnlRegister.Controls.Add(Me.Label2)
-        Me.pnlRegister.Controls.Add(Me.Label1)
+        Me.pnlRegister.Controls.Add(Me.lblNewAccName)
+        Me.pnlRegister.Controls.Add(Me.lblNewAccount)
         Me.pnlRegister.ForeColor = System.Drawing.Color.White
         Me.pnlRegister.Location = New System.Drawing.Point(1143, 6)
         Me.pnlRegister.Name = "pnlRegister"
@@ -236,15 +236,15 @@ Partial Class FrmMenu
         Me.txtRPass2.Size = New System.Drawing.Size(110, 20)
         Me.txtRPass2.TabIndex = 21
         '
-        'Label4
+        'lblNewAccPass2
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(70, 128)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(98, 15)
-        Me.Label4.TabIndex = 20
-        Me.Label4.Text = "Retype Password:"
+        Me.lblNewAccPass2.AutoSize = True
+        Me.lblNewAccPass2.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewAccPass2.Location = New System.Drawing.Point(70, 128)
+        Me.lblNewAccPass2.Name = "lblNewAccPass2"
+        Me.lblNewAccPass2.Size = New System.Drawing.Size(98, 15)
+        Me.lblNewAccPass2.TabIndex = 20
+        Me.lblNewAccPass2.Text = "Retype Password:"
         '
         'txtRPass
         '
@@ -254,15 +254,15 @@ Partial Class FrmMenu
         Me.txtRPass.Size = New System.Drawing.Size(110, 20)
         Me.txtRPass.TabIndex = 19
         '
-        'Label3
+        'lblNewAccPass
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(107, 100)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 15)
-        Me.Label3.TabIndex = 18
-        Me.Label3.Text = "Password:"
+        Me.lblNewAccPass.AutoSize = True
+        Me.lblNewAccPass.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewAccPass.Location = New System.Drawing.Point(107, 100)
+        Me.lblNewAccPass.Name = "lblNewAccPass"
+        Me.lblNewAccPass.Size = New System.Drawing.Size(59, 15)
+        Me.lblNewAccPass.TabIndex = 18
+        Me.lblNewAccPass.Text = "Password:"
         '
         'txtRuser
         '
@@ -271,25 +271,25 @@ Partial Class FrmMenu
         Me.txtRuser.Size = New System.Drawing.Size(110, 20)
         Me.txtRuser.TabIndex = 17
         '
-        'Label2
+        'lblNewAccName
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(107, 70)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(62, 15)
-        Me.Label2.TabIndex = 16
-        Me.Label2.Text = "Username:"
+        Me.lblNewAccName.AutoSize = True
+        Me.lblNewAccName.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewAccName.Location = New System.Drawing.Point(107, 65)
+        Me.lblNewAccName.Name = "lblNewAccName"
+        Me.lblNewAccName.Size = New System.Drawing.Size(62, 15)
+        Me.lblNewAccName.TabIndex = 16
+        Me.lblNewAccName.Text = "Username:"
         '
-        'Label1
+        'lblNewAccount
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(122, 12)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(168, 31)
-        Me.Label1.TabIndex = 15
-        Me.Label1.Text = "New Account"
+        Me.lblNewAccount.AutoSize = True
+        Me.lblNewAccount.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewAccount.Location = New System.Drawing.Point(122, 12)
+        Me.lblNewAccount.Name = "lblNewAccount"
+        Me.lblNewAccount.Size = New System.Drawing.Size(168, 31)
+        Me.lblNewAccount.TabIndex = 15
+        Me.lblNewAccount.Text = "New Account"
         '
         'pnlCredits
         '
@@ -563,10 +563,10 @@ Partial Class FrmMenu
         Me.pnlIPConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pnlIPConfig.Controls.Add(Me.btnSaveIP)
         Me.pnlIPConfig.Controls.Add(Me.txtPort)
-        Me.pnlIPConfig.Controls.Add(Me.Label14)
+        Me.pnlIPConfig.Controls.Add(Me.lblPort)
         Me.pnlIPConfig.Controls.Add(Me.txtIP)
-        Me.pnlIPConfig.Controls.Add(Me.Label15)
-        Me.pnlIPConfig.Controls.Add(Me.Label8)
+        Me.pnlIPConfig.Controls.Add(Me.lblIpAdress)
+        Me.pnlIPConfig.Controls.Add(Me.lblIpConfig)
         Me.pnlIPConfig.Controls.Add(Me.Label13)
         Me.pnlIPConfig.ForeColor = System.Drawing.Color.White
         Me.pnlIPConfig.Location = New System.Drawing.Point(1143, 402)
@@ -597,15 +597,15 @@ Partial Class FrmMenu
         Me.txtPort.Size = New System.Drawing.Size(110, 20)
         Me.txtPort.TabIndex = 28
         '
-        'Label14
+        'lblPort
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(84, 74)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(33, 15)
-        Me.Label14.TabIndex = 27
-        Me.Label14.Text = "Port:"
+        Me.lblPort.AutoSize = True
+        Me.lblPort.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPort.Location = New System.Drawing.Point(84, 74)
+        Me.lblPort.Name = "lblPort"
+        Me.lblPort.Size = New System.Drawing.Size(33, 15)
+        Me.lblPort.TabIndex = 27
+        Me.lblPort.Text = "Port:"
         '
         'txtIP
         '
@@ -614,26 +614,26 @@ Partial Class FrmMenu
         Me.txtIP.Size = New System.Drawing.Size(192, 20)
         Me.txtIP.TabIndex = 26
         '
-        'Label15
+        'lblIpAdress
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(84, 42)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(57, 15)
-        Me.Label15.TabIndex = 25
-        Me.Label15.Text = "IP Adres:"
+        Me.lblIpAdress.AutoSize = True
+        Me.lblIpAdress.Font = New System.Drawing.Font("Modern No. 20", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblIpAdress.Location = New System.Drawing.Point(84, 42)
+        Me.lblIpAdress.Name = "lblIpAdress"
+        Me.lblIpAdress.Size = New System.Drawing.Size(57, 15)
+        Me.lblIpAdress.TabIndex = 25
+        Me.lblIpAdress.Text = "IP Adres:"
         '
-        'Label8
+        'lblIpConfig
         '
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(86, 4)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(247, 38)
-        Me.Label8.TabIndex = 15
-        Me.Label8.Text = "IPConfig"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblIpConfig.BackColor = System.Drawing.Color.Transparent
+        Me.lblIpConfig.Font = New System.Drawing.Font("Modern No. 20", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblIpConfig.Location = New System.Drawing.Point(86, 4)
+        Me.lblIpConfig.Name = "lblIpConfig"
+        Me.lblIpConfig.Size = New System.Drawing.Size(247, 32)
+        Me.lblIpConfig.TabIndex = 15
+        Me.lblIpConfig.Text = "IPConfig"
+        Me.lblIpConfig.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label13
         '
@@ -859,7 +859,7 @@ Partial Class FrmMenu
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1551, 541)
+        Me.ClientSize = New System.Drawing.Size(708, 541)
         Me.Controls.Add(Me.pnlLoad)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
@@ -916,12 +916,12 @@ Partial Class FrmMenu
     Friend WithEvents lblLogin As System.Windows.Forms.Label
     Friend WithEvents pnlRegister As System.Windows.Forms.Panel
     Friend WithEvents txtRPass2 As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents lblNewAccPass2 As System.Windows.Forms.Label
     Friend WithEvents txtRPass As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblNewAccPass As System.Windows.Forms.Label
     Friend WithEvents txtRuser As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblNewAccName As System.Windows.Forms.Label
+    Friend WithEvents lblNewAccount As System.Windows.Forms.Label
     Public WithEvents pnlCredits As System.Windows.Forms.Panel
     Friend WithEvents lblCreditsTop As System.Windows.Forms.Label
     Friend WithEvents lblScrollingCredits As System.Windows.Forms.Label
@@ -945,10 +945,10 @@ Partial Class FrmMenu
     Friend WithEvents lblNews As System.Windows.Forms.Label
     Public WithEvents pnlIPConfig As Windows.Forms.Panel
     Friend WithEvents txtPort As Windows.Forms.TextBox
-    Friend WithEvents Label14 As Windows.Forms.Label
+    Friend WithEvents lblPort As Windows.Forms.Label
     Friend WithEvents txtIP As Windows.Forms.TextBox
-    Friend WithEvents Label15 As Windows.Forms.Label
-    Friend WithEvents Label8 As Windows.Forms.Label
+    Friend WithEvents lblIpAdress As Windows.Forms.Label
+    Friend WithEvents lblIpConfig As Windows.Forms.Label
     Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents picLogo As Windows.Forms.PictureBox
     Friend WithEvents btnLogin As Windows.Forms.Button

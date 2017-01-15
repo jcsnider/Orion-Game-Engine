@@ -650,6 +650,14 @@ Public Class FrmEditor_MapEditor
         End If
     End Sub
 
+    Private Sub LstMusic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMusic.SelectedIndexChanged
+        If lstMusic.SelectedIndex >= 0 Then
+            Map.Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
+        Else
+            Map.Music = ""
+        End If
+    End Sub
+
 
 
 #End Region
