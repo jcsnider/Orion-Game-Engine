@@ -315,7 +315,7 @@ Module EditorLoop
         End If
 
         If InitAnimationEditor = True Then
-            With frmEditor_Animation
+            With FrmEditor_Animation
                 Editor = EDITOR_ANIMATION
                 .lstIndex.Items.Clear()
 
@@ -435,7 +435,7 @@ Module EditorLoop
         End If
 
         If InitAnimationEditor = True Then
-            With frmEditor_Animation
+            With FrmEditor_Animation
                 Editor = EDITOR_ANIMATION
                 .lstIndex.Items.Clear()
 

@@ -3,24 +3,24 @@
 #Region "Animation Editor"
     Public Sub AnimationEditorInit()
 
-        If frmEditor_Animation.Visible = False Then Exit Sub
+        If FrmEditor_Animation.Visible = False Then Exit Sub
 
-        EditorIndex = frmEditor_Animation.lstIndex.SelectedIndex + 1
+        EditorIndex = FrmEditor_Animation.lstIndex.SelectedIndex + 1
 
         With Animation(EditorIndex)
-            frmEditor_Animation.txtName.Text = Trim$(.Name)
+            FrmEditor_Animation.txtName.Text = Trim$(.Name)
 
-            frmEditor_Animation.scrlSprite0.Value = .Sprite(0)
-            frmEditor_Animation.scrlFrameCount0.Value = .Frames(0)
-            frmEditor_Animation.scrlLoopCount0.Value = .LoopCount(0)
-            frmEditor_Animation.scrlLoopTime0.Value = .looptime(0)
+            FrmEditor_Animation.scrlSprite0.Value = .Sprite(0)
+            FrmEditor_Animation.scrlFrameCount0.Value = .Frames(0)
+            FrmEditor_Animation.scrlLoopCount0.Value = .LoopCount(0)
+            FrmEditor_Animation.scrlLoopTime0.Value = .looptime(0)
 
-            frmEditor_Animation.scrlSprite1.Value = .Sprite(1)
-            frmEditor_Animation.scrlFrameCount1.Value = .Frames(1)
-            frmEditor_Animation.scrlLoopCount1.Value = .LoopCount(1)
-            frmEditor_Animation.scrlLoopTime1.Value = .looptime(1)
+            FrmEditor_Animation.scrlSprite1.Value = .Sprite(1)
+            FrmEditor_Animation.scrlFrameCount1.Value = .Frames(1)
+            FrmEditor_Animation.scrlLoopCount1.Value = .LoopCount(1)
+            FrmEditor_Animation.scrlLoopTime1.Value = .looptime(1)
 
-            EditorIndex = frmEditor_Animation.lstIndex.SelectedIndex + 1
+            EditorIndex = FrmEditor_Animation.lstIndex.SelectedIndex + 1
         End With
 
         EditorAnim_DrawAnim()
@@ -36,14 +36,14 @@
             End If
         Next
 
-        frmEditor_Animation.Visible = False
+        FrmEditor_Animation.Visible = False
         Editor = 0
         ClearChanged_Animation()
     End Sub
 
     Public Sub AnimationEditorCancel()
         Editor = 0
-        frmEditor_Animation.Visible = False
+        FrmEditor_Animation.Visible = False
         ClearChanged_Animation()
         ClearAnimations()
         SendRequestAnimations()
@@ -444,7 +444,7 @@
                     If .Layer(CurLayer).AutoTile > 0 Then
                         .Layer(CurLayer).AutoTile = 0
                         ' do a re-init so we can see our changes
-                        initAutotiles()
+                        InitAutotiles()
                     End If
                     CacheRenderState(X, Y, CurLayer)
                 End With
@@ -505,7 +505,7 @@
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
-            initAutotiles()
+            InitAutotiles()
             Exit Sub
         End If
 
@@ -586,7 +586,7 @@
                 Next
 
                 ' do a re-init so we can see our changes
-                initAutotiles()
+                InitAutotiles()
             Else
                 For X = 0 To Map.MaxX
                     For Y = 0 To Map.MaxY

@@ -496,7 +496,7 @@
 
         End SyncLock
 
-        initAutotiles()
+        InitAutotiles()
         'Debug.Print("Client Handled Autotile Init")
 
         MapData = True

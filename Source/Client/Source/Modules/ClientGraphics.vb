@@ -13,6 +13,10 @@ Module ClientGraphics
 
     Public SFMLGameFont As SFML.Graphics.Font
 
+    Public CursorGFX As Texture
+    Public CursorSprite As Sprite
+    Public CursorInfo As GraphicInfo
+
     'TileSets
     Public TileSetImgsGFX() As Bitmap
     Public TileSetImgsLoaded() As Boolean
@@ -289,6 +293,17 @@ Module ClientGraphics
         ReDim EmotesGFXInfo(0 To NumEmotes)
 
         'sadly, gui shit is always needed, so we preload it :/
+        CursorInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "Cursor" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            CursorGFX = New Texture(Application.StartupPath & GFX_PATH & "Cursor" & GFX_EXT)
+            CursorSprite = New Sprite(CursorGFX)
+
+            'Cache the width and height
+            CursorInfo.Width = CursorGFX.Size.X
+            CursorInfo.Height = CursorGFX.Size.Y
+        End If
+
         DoorGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "door" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
@@ -1714,6 +1729,11 @@ Module ClientGraphics
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
+        If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
+            If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
+                GameWindow.SetMouseCursorVisible(False)
+            End If
+        End If
 
         ' blit lower tiles
         If NumTileSets > 0 Then
@@ -2442,6 +2462,7 @@ Module ClientGraphics
             If Not EmotesGFX(i) Is Nothing Then EmotesGFX(i).Dispose()
         Next
 
+        If Not CursorGFX Is Nothing Then CursorGFX.Dispose()
         If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
         If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
         If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
@@ -3659,6 +3680,9 @@ NextLoop:
         If DragInvSlotNum > 0 Then
             DrawInventoryItem(CurMouseX, CurMouseY)
         End If
+
+        'draw cursor
+        DrawCursor()
     End Sub
 
     Public Sub EditorMap_DrawMapItem()
@@ -3792,4 +3816,7 @@ NextLoop:
 
     End Sub
 
+    Sub DrawCursor()
+        RenderSprite(CursorSprite, GameWindow, CurMouseX, CurMouseY, 0, 0, CursorInfo.Width, CursorInfo.Height)
+    End Sub
 End Module

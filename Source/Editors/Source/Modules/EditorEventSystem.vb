@@ -2869,8 +2869,8 @@ newlist:
 
                             g = Graphics.FromImage(targetBitmap)
 
-                            Dim sourceRect As New Rectangle(sRect.top, sRect.left, sRect.right, sRect.bottom)  'This is the section we are pulling from the source graphic
-                            Dim destRect As New Rectangle(dRect.top, dRect.left, dRect.right, dRect.bottom)     'This is the rectangle in the target graphic we want to render to
+                            Dim sourceRect As New Rectangle(sRect.left, sRect.top, sRect.right, sRect.bottom)  'This is the section we are pulling from the source graphic
+                            Dim destRect As New Rectangle(dRect.left, dRect.top, dRect.right, dRect.bottom)     'This is the rectangle in the target graphic we want to render to
 
                             g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
 

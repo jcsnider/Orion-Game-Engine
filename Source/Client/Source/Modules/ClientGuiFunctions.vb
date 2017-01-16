@@ -860,7 +860,6 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragInvSlotNum = 0
-                FrmMainGame.pnlTmpInv.Visible = False
             Else
                 If FurnitureSelected > 0 Then
                     If Player(MyIndex).InHouse = MyIndex Then

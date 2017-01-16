@@ -109,8 +109,8 @@ Module EditorGraphics
 
         EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
 
-        EditorAnimation_Anim1 = New RenderWindow(frmEditor_Animation.picSprite0.Handle)
-        EditorAnimation_Anim2 = New RenderWindow(frmEditor_Animation.picSprite1.Handle)
+        EditorAnimation_Anim1 = New RenderWindow(FrmEditor_Animation.picSprite0.Handle)
+        EditorAnimation_Anim2 = New RenderWindow(FrmEditor_Animation.picSprite1.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
@@ -1575,7 +1575,7 @@ Module EditorGraphics
         Dim FrameCount As Integer
         Dim ShouldRender As Boolean
 
-        Animationnum = frmEditor_Animation.scrlSprite0.Value
+        Animationnum = FrmEditor_Animation.scrlSprite0.Value
 
         If AnimationsGFXInfo(Animationnum).IsLoaded = False Then
             LoadTexture(Animationnum, 6)
@@ -1587,12 +1587,12 @@ Module EditorGraphics
         End With
 
         If Animationnum < 1 Or Animationnum > NumAnimations Then
-            EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
+            EditorAnimation_Anim1.Clear(ToSFMLColor(FrmEditor_Animation.picSprite0.BackColor))
             EditorAnimation_Anim1.Display()
         Else
 
-            looptime = frmEditor_Animation.scrlLoopTime0.Value
-            FrameCount = frmEditor_Animation.scrlFrameCount0.Value
+            looptime = FrmEditor_Animation.scrlLoopTime0.Value
+            FrameCount = FrmEditor_Animation.scrlFrameCount0.Value
 
             ShouldRender = False
 
@@ -1609,10 +1609,10 @@ Module EditorGraphics
             End If
 
             If ShouldRender Then
-                If frmEditor_Animation.scrlFrameCount0.Value > 0 Then
+                If FrmEditor_Animation.scrlFrameCount0.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmEditor_Animation.scrlFrameCount0.Value
+                    width = AnimationsGFXInfo(Animationnum).width / FrmEditor_Animation.scrlFrameCount0.Value
 
                     With sRECT
                         .Y = 0
@@ -1628,7 +1628,7 @@ Module EditorGraphics
                         .Width = width
                     End With
 
-                    EditorAnimation_Anim1.Clear(ToSFMLColor(frmEditor_Animation.picSprite0.BackColor))
+                    EditorAnimation_Anim1.Clear(ToSFMLColor(FrmEditor_Animation.picSprite0.BackColor))
 
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
 
@@ -1637,14 +1637,14 @@ Module EditorGraphics
             End If
         End If
 
-        Animationnum = frmEditor_Animation.scrlSprite1.Value
+        Animationnum = FrmEditor_Animation.scrlSprite1.Value
 
         If Animationnum < 1 Or Animationnum > NumAnimations Then
-            EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
+            EditorAnimation_Anim2.Clear(ToSFMLColor(FrmEditor_Animation.picSprite1.BackColor))
             EditorAnimation_Anim2.Display()
         Else
-            looptime = frmEditor_Animation.scrlLoopTime1.Value
-            FrameCount = frmEditor_Animation.scrlFrameCount1.Value
+            looptime = FrmEditor_Animation.scrlLoopTime1.Value
+            FrameCount = FrmEditor_Animation.scrlFrameCount1.Value
 
             ShouldRender = False
 
@@ -1661,10 +1661,10 @@ Module EditorGraphics
             End If
 
             If ShouldRender Then
-                If frmEditor_Animation.scrlFrameCount1.Value > 0 Then
+                If FrmEditor_Animation.scrlFrameCount1.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGFXInfo(Animationnum).height
-                    width = AnimationsGFXInfo(Animationnum).width / frmEditor_Animation.scrlFrameCount1.Value
+                    width = AnimationsGFXInfo(Animationnum).width / FrmEditor_Animation.scrlFrameCount1.Value
 
                     With sRECT
                         .Y = 0
@@ -1680,7 +1680,7 @@ Module EditorGraphics
                         .Width = width
                     End With
 
-                    EditorAnimation_Anim2.Clear(ToSFMLColor(frmEditor_Animation.picSprite1.BackColor))
+                    EditorAnimation_Anim2.Clear(ToSFMLColor(FrmEditor_Animation.picSprite1.BackColor))
 
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim2, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
                     EditorAnimation_Anim2.Display()

@@ -1,15 +1,14 @@
-﻿Imports System.Windows.Forms
-
-Public Class frmEditor_Events
+﻿Public Class frmEditor_Events
 
 #Region "Frm Code"
-    Private Sub frmEditor_Events_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+    Private Sub FrmEditor_Events_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
         'If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
     End Sub
 
-    Private Sub frmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
+    Private Sub FrmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
         'If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
     End Sub
+
     Sub ClearConditionFrame()
         Dim i As Integer
 
@@ -189,13 +188,18 @@ Public Class frmEditor_Events
         For i = 1 To MAX_QUESTS
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
+
         'If NumPics > 0 Then
-        'btnCommands45.Enabled = True
-        'scrlShowPicture.Maximum = NumPics
-        'cmbPicIndex.SelectedIndex = 0
+        '    btnCommands45.Enabled = True
+        '    scrlShowPicture.Maximum = NumPics
+        '    cmbPicIndex.SelectedIndex = 0
         'Else
 
         'End If
+
+        fraGraphic.Top = 2
+        fraGraphic.Left = 2
+        fraGraphic.Width = 829
 
         fraDialogue.Location = Panel2.Location
         fraDialogue.Visible = False
@@ -203,19 +207,19 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub frmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Width = 858
     End Sub
 
-    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+    Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         EventEditorOK()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Dispose()
     End Sub
 
-    Private Sub lstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
+    Private Sub LstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
         Dim x As Integer
 
         If lstvCommands.SelectedItems.Count = 0 Then Exit Sub
@@ -254,8 +258,6 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'chat bubble
             Case 4
-                MsgBox("Sorry, no chatbubbles yet :(")
-                Exit Sub
                 txtChatbubbleText.Text = ""
                 optChatBubbleTarget0.Checked = True
                 cmbChatBubbleTarget.Visible = False
@@ -647,7 +649,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub btnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
+    Private Sub BtnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
         fraCommands.Visible = False
     End Sub
 #End Region
@@ -812,7 +814,7 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Graphic"
-    Private Sub picGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
+    Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.Width = 841
         fraGraphic.Height = 636
         fraGraphic.BringToFront()
@@ -820,7 +822,7 @@ Public Class frmEditor_Events
         GraphicSelType = 0
     End Sub
 
-    Private Sub cmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
+    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
         If cmbGraphic.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
         ' set the max on the scrollbar
@@ -850,7 +852,7 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub scrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
+    Private Sub ScrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
         If scrlGraphic.Value = 0 Then
             lblGraphic.Text = "Number: None"
         Else
@@ -860,7 +862,7 @@ Public Class frmEditor_Events
         'cmbGraphic_SelectedIndexChanged(sender, e)
     End Sub
 
-    Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
+    Private Sub PicGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
         Dim X As Integer
         Dim Y As Integer
 
@@ -880,8 +882,8 @@ Public Class frmEditor_Events
                     End If
                 End If
             Else
-                GraphicSelX = X \ PIC_X
-                GraphicSelY = Y \ PIC_Y
+                GraphicSelX = Math.Ceiling(X \ PIC_X)
+                GraphicSelY = Math.Ceiling(Y \ PIC_Y)
                 GraphicSelX2 = 1
                 GraphicSelY2 = 1
             End If
@@ -905,7 +907,7 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
+    Private Sub BtnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
         If GraphicSelType = 0 Then
             tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
             tmpEvent.Pages(curPageNum).Graphic = scrlGraphic.Value
@@ -920,7 +922,7 @@ Public Class frmEditor_Events
         fraGraphic.Visible = False
     End Sub
 
-    Private Sub btnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
+    Private Sub BtnGraphicCancel_Click(sender As Object, e As EventArgs) Handles BtnGraphicCancel.Click
         fraGraphic.Visible = False
     End Sub
 #End Region
@@ -2781,6 +2783,10 @@ Public Class frmEditor_Events
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraOpenShop.Visible = False
+    End Sub
+
+    Private Sub lstvwMoveRoute_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles lstvwMoveRoute.SelectedIndexChanged
+
     End Sub
 
 #End Region

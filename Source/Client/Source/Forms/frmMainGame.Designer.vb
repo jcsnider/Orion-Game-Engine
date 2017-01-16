@@ -24,7 +24,6 @@ Partial Class FrmMainGame
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMainGame))
         Me.picscreen = New System.Windows.Forms.PictureBox()
-        Me.pnlTmpInv = New System.Windows.Forms.Panel()
         Me.pnlCurrency = New System.Windows.Forms.Panel()
         Me.lblCurrencyCancel = New System.Windows.Forms.Label()
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
@@ -43,16 +42,6 @@ Partial Class FrmMainGame
         Me.picscreen.Size = New System.Drawing.Size(1024, 768)
         Me.picscreen.TabIndex = 4
         Me.picscreen.TabStop = False
-        '
-        'pnlTmpInv
-        '
-        Me.pnlTmpInv.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.pnlTmpInv.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpInv.Location = New System.Drawing.Point(1285, 439)
-        Me.pnlTmpInv.Name = "pnlTmpInv"
-        Me.pnlTmpInv.Size = New System.Drawing.Size(32, 32)
-        Me.pnlTmpInv.TabIndex = 15
-        Me.pnlTmpInv.Visible = False
         '
         'pnlCurrency
         '
@@ -136,11 +125,10 @@ Partial Class FrmMainGame
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1027, 680)
+        Me.ClientSize = New System.Drawing.Size(871, 539)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.pnlTempBank)
         Me.Controls.Add(Me.pnlTmpSkill)
-        Me.Controls.Add(Me.pnlTmpInv)
         Me.Controls.Add(Me.picscreen)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -156,7 +144,6 @@ Partial Class FrmMainGame
 
     End Sub
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
-    Friend WithEvents pnlTmpInv As System.Windows.Forms.Panel
     Friend WithEvents pnlCurrency As System.Windows.Forms.Panel
     Friend WithEvents lblCurrency As System.Windows.Forms.Label
     Friend WithEvents lblCurrencyCancel As System.Windows.Forms.Label

@@ -189,6 +189,8 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbScreenShot = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -1103,7 +1105,6 @@ Partial Class FrmEditor_MapEditor
         Me.btnSetSize.Size = New System.Drawing.Size(75, 23)
         Me.btnSetSize.TabIndex = 4
         Me.btnSetSize.Text = "Set Size"
-        Me.btnSetSize.Visible = False
         '
         'txtMaxY
         '
@@ -1349,7 +1350,7 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStrip.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
         Me.ToolStrip.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.cmbMapList})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.cmbMapList, Me.ToolStripSeparator4, Me.tsbScreenShot})
         Me.ToolStrip.Location = New System.Drawing.Point(318, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Padding = New System.Windows.Forms.Padding(5, 0, 1, 0)
@@ -2007,6 +2008,22 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripSeparator4.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbScreenShot
+        '
+        Me.tsbScreenShot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbScreenShot.Image = CType(resources.GetObject("tsbScreenShot.Image"), System.Drawing.Image)
+        Me.tsbScreenShot.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbScreenShot.Name = "tsbScreenShot"
+        Me.tsbScreenShot.Size = New System.Drawing.Size(86, 22)
+        Me.tsbScreenShot.Text = "ScreenShot"
+        '
         'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2247,4 +2264,6 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents scrlMapRed As DarkUI.Controls.DarkScrollBar
     Friend WithEvents lblMapRed As DarkUI.Controls.DarkLabel
     Friend WithEvents tsCurFps As ToolStripStatusLabel
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents tsbScreenShot As ToolStripButton
 End Class

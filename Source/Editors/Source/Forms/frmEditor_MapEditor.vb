@@ -14,8 +14,8 @@ Public Class FrmEditor_MapEditor
 
         scrlFog.Maximum = NumFogs
 
-        scrlMapViewV.Maximum = Map.MaxX
-        scrlMapViewH.Maximum = Map.MaxY
+        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
+        scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
@@ -27,8 +27,8 @@ Public Class FrmEditor_MapEditor
         If GameWindow Is Nothing Then Exit Sub
 
         ' set the scrollbars
-        scrlMapViewV.Maximum = Map.MaxX
-        scrlMapViewH.Maximum = Map.MaxY
+        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
+        scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub
@@ -86,8 +86,8 @@ Public Class FrmEditor_MapEditor
         picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
         picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
 
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) + PIC_Y
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) + PIC_X
     End Sub
 
     Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
@@ -177,6 +177,15 @@ Public Class FrmEditor_MapEditor
 
     Private Sub CmbMapList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapList.SelectedIndexChanged
         SendEditorRequestMap(cmbMapList.SelectedIndex + 1)
+    End Sub
+
+    Private Sub TsbScreenShot_Click(sender As Object, e As EventArgs) Handles tsbScreenShot.Click
+        Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
+
+        If Not IO.Directory.Exists(Application.StartupPath & "\Data Files\Screenshots") Then
+            IO.Directory.CreateDirectory(Application.StartupPath & "\Data Files\Screenshots")
+        End If
+        screenshot.SaveToFile(Application.StartupPath & "\Data Files\Screenshots\Map" & Map.MapNum & ".png")
     End Sub
 #End Region
 
@@ -576,30 +585,46 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Private Sub BtnSetSize_Click(sender As Object, e As EventArgs) Handles btnSetSize.Click
-        Dim X As Integer, x2 As Integer
+        Dim X As Integer, x2 As Integer, i As Integer
         Dim Y As Integer, y2 As Integer
         Dim tempArr(,) As TileRec
 
         If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
-        'If Val(txtMaxX.Text) < SCREEN_MAPX Then txtMaxX.Text = SCREEN_MAPX
         If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
         If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
-        'If Val(txtMaxY.Text) < SCREEN_MAPY Then txtMaxY.Text = SCREEN_MAPY
         If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
 
         GettingMap = True
         With Map
 
             ' set the data before changing it
-            tempArr = Map.Tile
+            ReDim tempArr(0 To .MaxX, 0 To .MaxY)
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
+                    ReDim tempArr(X, Y).Layer(0 To MapLayer.Count - 1)
+
+                    tempArr(X, Y).Data1 = .Tile(X, Y).Data1
+                    tempArr(X, Y).Data2 = .Tile(X, Y).Data2
+                    tempArr(X, Y).Data3 = .Tile(X, Y).Data3
+                    tempArr(X, Y).DirBlock = .Tile(X, Y).DirBlock
+                    tempArr(X, Y).Type = .Tile(X, Y).Type
+
+                    For i = 1 To MapLayer.Count - 1
+                        tempArr(X, Y).Layer(i).AutoTile = .Tile(X, Y).Layer(i).AutoTile
+                        tempArr(X, Y).Layer(i).Tileset = .Tile(X, Y).Layer(i).Tileset
+                        tempArr(X, Y).Layer(i).X = .Tile(X, Y).Layer(i).X
+                        tempArr(X, Y).Layer(i).Y = .Tile(X, Y).Layer(i).Y
+                    Next
+                Next
+            Next
 
             x2 = Map.MaxX
             y2 = Map.MaxY
             ' change the data
             .MaxX = Val(txtMaxX.Text)
             .MaxY = Val(txtMaxY.Text)
-            ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
 
+            ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
             ReDim Autotile(0 To .MaxX, 0 To .MaxY)
 
             If x2 > .MaxX Then x2 = .MaxX
@@ -613,12 +638,23 @@ Public Class FrmEditor_MapEditor
 
                     If X <= x2 Then
                         If Y <= y2 Then
-                            .Tile(X, Y) = tempArr(X, Y)
+                            .Tile(X, Y).Data1 = tempArr(X, Y).Data1
+                            .Tile(X, Y).Data2 = tempArr(X, Y).Data2
+                            .Tile(X, Y).Data3 = tempArr(X, Y).Data3
+                            .Tile(X, Y).DirBlock = tempArr(X, Y).DirBlock
+                            .Tile(X, Y).Type = tempArr(X, Y).Type
+
+                            For i = 1 To MapLayer.Count - 1
+                                .Tile(X, Y).Layer(i).AutoTile = tempArr(X, Y).Layer(i).AutoTile
+                                .Tile(X, Y).Layer(i).Tileset = tempArr(X, Y).Layer(i).Tileset
+                                .Tile(X, Y).Layer(i).X = tempArr(X, Y).Layer(i).X
+                                .Tile(X, Y).Layer(i).Y = tempArr(X, Y).Layer(i).Y
+                            Next
                         End If
                     End If
                 Next
             Next
-
+            InitAutotiles()
             ClearTempTile()
             'MapEditorSend()
         End With
@@ -657,8 +693,6 @@ Public Class FrmEditor_MapEditor
             Map.Music = ""
         End If
     End Sub
-
-
 
 #End Region
 
