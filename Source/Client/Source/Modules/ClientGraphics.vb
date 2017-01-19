@@ -7,8 +7,6 @@ Module ClientGraphics
 #Region "Declarations"
     Public GameWindow As RenderWindow
 
-    Public TmpBankItem As RenderWindow
-
     Public TmpSkillWindow As RenderWindow
 
     Public SFMLGameFont As SFML.Graphics.Font
@@ -207,7 +205,7 @@ Module ClientGraphics
     Public NumEmotes As Integer
 
     ' #Day/Night
-    Public NightGfx As Texture
+    Public NightGfx As New RenderTexture(1024, 768)
     Public NightSprite As Sprite
     Public NightGfxInfo As GraphicInfo
 
@@ -234,8 +232,6 @@ Module ClientGraphics
 
         GameWindow = New RenderWindow(FrmMainGame.picscreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
-
-        TmpBankItem = New RenderWindow(FrmMainGame.pnlTempBank.Handle)
 
         TmpSkillWindow = New RenderWindow(FrmMainGame.pnlTmpSkill.Handle)
 
@@ -440,7 +436,6 @@ Module ClientGraphics
             EXPBarGFXInfo.Height = EXPBarGFX.Size.Y
         End If
 
-        'todo
         ActionPanelGFXInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_GUI_PATH & "ActionBar\panel" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
@@ -642,15 +637,15 @@ Module ClientGraphics
             LightGfxInfo.Height = LightGfx.Size.Y
         End If
 
-        NightGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Night" & GFX_EXT) Then
-            NightGfx = New Texture(New SFML.Graphics.Image(32, 32, SFML.Graphics.Color.Black))
-            NightSprite = New Sprite(NightGfx)
+        'NightGfxInfo = New GraphicInfo
+        'If FileExist(Application.StartupPath & GFX_PATH & "Night" & GFX_EXT) Then
+        '    NightGfx = New Texture(New SFML.Graphics.Image(32, 32, SFML.Graphics.Color.Black))
+        '    NightSprite = New Sprite(NightGfx)
 
-            'Cache the width and height
-            NightGfxInfo.Width = NightGfx.Size.X
-            NightGfxInfo.Height = NightGfx.Size.Y
-        End If
+        '    'Cache the width and height
+        '    NightGfxInfo.Width = NightGfx.Size.X
+        '    NightGfxInfo.Height = NightGfx.Size.Y
+        'End If
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Integer, ByVal TexType As Byte)
@@ -1940,7 +1935,7 @@ Module ClientGraphics
             End If
         End If
 
-        'DrawNight()
+        DrawNight()
 
         DrawWeather()
         DrawThunderEffect()
@@ -2536,6 +2531,7 @@ Module ClientGraphics
         'Fps etc
         DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, Strings.Get("gamegui", "fps") & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 4, Strings.Get("gamegui", "clock") & curtime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         ' Draw map name
         DrawMapName()
@@ -2783,7 +2779,7 @@ Module ClientGraphics
                 .Width = PIC_X
             End With
 
-            RenderSprite(ItemsSprite(itempic), GameWindow, X, Y, rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(ItemsSprite(itempic), GameWindow, X + 16, Y + 16, rec.X, rec.Y, rec.Width, rec.Height)
         End If
     End Sub
 
@@ -3182,7 +3178,7 @@ NextLoop:
     End Sub
 
     Public Sub DrawBankItem(ByVal X As Integer, ByVal Y As Integer)
-        Dim sRECT As Rectangle, dRECT As Rectangle
+        Dim rec As Rectangle
 
         Dim itemnum As Integer
         Dim Sprite As Integer
@@ -3201,7 +3197,7 @@ NextLoop:
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-            With sRECT
+            With rec
                 .Y = 0
                 .Height = PIC_Y
                 .X = 0
@@ -3209,27 +3205,7 @@ NextLoop:
             End With
         End If
 
-        With dRECT
-            .Y = 0
-            .Height = PIC_Y
-            .X = 0
-            .Width = PIC_X
-        End With
-
-        TmpBankItem.Clear(ToSFMLColor(FrmMainGame.pnlTempBank.BackColor))
-
-        ItemsSprite(Sprite).TextureRect = New IntRect(sRECT.X, sRECT.Y, sRECT.Width, sRECT.Height)
-        ItemsSprite(Sprite).Position = New Vector2f(dRECT.X, dRECT.Y)
-        TmpBankItem.Draw(ItemsSprite(Sprite))
-
-        With FrmMainGame.pnlTempBank
-            .Top = Y
-            .Left = X
-            .Visible = True
-            .BringToFront()
-        End With
-
-        TmpBankItem.Display()
+        RenderSprite(ItemsSprite(Sprite), GameWindow, X + 16, Y + 16, rec.X, rec.Y, rec.Width, rec.Height)
 
     End Sub
 
@@ -3681,6 +3657,10 @@ NextLoop:
             DrawInventoryItem(CurMouseX, CurMouseY)
         End If
 
+        If DragBankSlotNum > 0 Then
+            DrawBankItem(CurMouseX, CurMouseY)
+        End If
+
         'draw cursor
         DrawCursor()
     End Sub
@@ -3783,36 +3763,62 @@ NextLoop:
     End Sub
 
     Sub DrawNight()
+        Dim X As Integer, Y As Integer
 
         If Map.Moral = MapMoral.Indoors Then Exit Sub
 
         Dim currLightLevel As Integer = 235
-        'If InMapEditor Then
-        '    currLightLevel = frmMainGame.nudLightLevel.Value
-        'Else : currLightLevel = CurrLevel
-        'End If
 
-        NightSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
-        NightSprite.Color = New SFML.Graphics.Color(255, 255, 255, currLightLevel)
-        NightSprite.Position = New Vector2f(0, 0)
-        NightSprite.Draw(GameWindow, New RenderStates(BlendMode.Alpha))
+        If GameTime = Time.Dawn Then
+            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 100))
+        ElseIf GameTime = TIME.DAY Then
+            Exit Sub
+        ElseIf GameTime = TIME.DUSK Then
+            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 150))
+        Else
+            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 200))
+        End If
 
         For x = TileView.left To TileView.right + 1
             For y = TileView.top To TileView.bottom + 1
-                If IsValidMapPoint(x, y) Then
+                If IsValidMapPoint(X, Y) Then
+                    If Map.Tile(X, Y).Type = TileType.Light Then
+                        Dim X1 = ConvertMapX(X * 32) + 16 - LightGfxInfo.Width / 2
+                        Dim Y1 = ConvertMapY(Y * 32) + 16 - LightGfxInfo.Height / 2
 
-                    If Map.Tile(x, y).Type = TileType.Light Then
-                        LightSprite.TextureRect = New IntRect(0, 0, LightSprite.Texture.Size.X, LightSprite.Texture.Size.Y)
-                        LightSprite.Color = New SFML.Graphics.Color(255, 255, 255, 255)
-                        ' 16 offset is for the center of the graphic
-                        LightSprite.Origin = New Vector2f(LightSprite.TextureRect.Width / 2 - 16, LightSprite.TextureRect.Height / 2 - 16)
-                        LightSprite.Position = New Vector2f(ConvertMapX(x * 32), ConvertMapY(y * 32))
-                        LightSprite.Draw(GameWindow, New RenderStates(BlendMode.Add))
+                        'Create the light texture to multiply over the dark texture.
+                        LightSprite.Position = New Vector2f(X1, Y1)
+
+                        NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
                     End If
-
                 End If
             Next
         Next
+
+        NightSprite = New Sprite(NightGfx.Texture)
+
+        NightGfx.Display()
+        GameWindow.Draw(NightSprite)
+
+        ''draw on player
+        '' Calculate the X
+        'X = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Width / 4 - 32) / 2)
+
+        '' Is the player's height more than 32..?
+        'If (CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height) > 32 Then
+        '    ' Create a 32 pixel offset for larger sprites
+        '    Y = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height / 4) - 32)
+        'Else
+        '    ' Proceed as normal
+        '    Y = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset
+        'End If
+
+        'LightSprite.TextureRect = New IntRect(0, 0, LightSprite.Texture.Size.X, LightSprite.Texture.Size.Y)
+        'LightSprite.Color = New SFML.Graphics.Color(255, 255, 255, 255)
+        '' 16 offset is for the center of the graphic
+        'LightSprite.Origin = New Vector2f(LightSprite.TextureRect.Width / 2 - 16, LightSprite.TextureRect.Height / 2 - 16)
+        'LightSprite.Position = New Vector2f(X, Y)
+        'LightSprite.Draw(GameWindow, New RenderStates(BlendMode.Add))
 
     End Sub
 

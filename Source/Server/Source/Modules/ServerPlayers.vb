@@ -336,6 +336,9 @@ Module ServerPlayers
         SendHouseConfigs(Index)
         SendPets(Index)
         SendUpdatePlayerPet(Index, True)
+        SendTimeTo(Index)
+        SendGameClockTo(Index)
+
         For i = 0 To ResourceCache(GetPlayerMap(Index)).Resource_Count
             SendResourceCacheTo(Index, i)
         Next

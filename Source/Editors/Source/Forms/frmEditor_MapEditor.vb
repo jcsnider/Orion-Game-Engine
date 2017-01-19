@@ -14,8 +14,11 @@ Public Class FrmEditor_MapEditor
 
         scrlFog.Maximum = NumFogs
 
-        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
+        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
+        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
+
         scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
+        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
 
@@ -25,6 +28,9 @@ Public Class FrmEditor_MapEditor
 
     Private Sub FrmEditor_MapEditor_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If GameWindow Is Nothing Then Exit Sub
+
+        picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
+        picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
 
         ' set the scrollbars
         scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y

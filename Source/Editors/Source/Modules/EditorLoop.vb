@@ -197,6 +197,11 @@ Module EditorLoop
             If GameStarted = True Then
                 Tick = GetTickCount()
 
+                ' update animation editor
+                If Editor = EDITOR_ANIMATION Then
+                    EditorAnim_DrawAnim()
+                End If
+
                 FrameTime = Tick
                 If InMapEditor And Not GettingMap Then
 

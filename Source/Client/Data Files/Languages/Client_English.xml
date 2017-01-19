@@ -67,6 +67,7 @@
     <string id="mapname">Map:</string>
     <string id="fps">FPS:</string>
     <string id="ping">Ping:</string>
+    <string id="clock">Time:</string>
     <string id="pingsync">Sync</string>
     <string id="pinglocal">Local</string>
     <string id="maprecieve">Recieving Map...</string>

@@ -234,4 +234,11 @@
         RARITY_RARE
         RARITY_EPIC
     End Enum
+
+    Public Enum Time
+        Day
+        Night
+        Dawn
+        Dusk
+    End Enum
 End Module

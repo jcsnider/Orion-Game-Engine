@@ -931,9 +931,9 @@ Module EditorGraphics
         ClearGFX()
 
         ' update animation editor
-        If Editor = EDITOR_ANIMATION Then
-            EditorAnim_DrawAnim()
-        End If
+        'If Editor = EDITOR_ANIMATION Then
+        '    EditorAnim_DrawAnim()
+        'End If
 
         If InMapEditor And MapData = True Then
             ' blit lower tiles

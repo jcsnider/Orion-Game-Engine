@@ -35,6 +35,11 @@ Module ServerGeneral
         ' Initialize the random-number generator
         Randomize()
 
+        Hours = DateTime.Now.Hour
+        Minutes = DateTime.Now.Minute
+        Seconds = DateTime.Now.Second
+        GameSpeed = 1
+
         ReDim Map(MAX_CACHED_MAPS)
 
         ReDim MapNpc(MAX_CACHED_MAPS)
@@ -236,6 +241,7 @@ Module ServerGeneral
         AddCommandHandler("/setadmin", AddressOf HandleCommandSetPower)
         AddCommandHandler("/kick", AddressOf HandleCommandKick)
         AddCommandHandler("/ban", AddressOf HandleCommandBan)
+        AddCommandHandler("/timespeed", AddressOf HandleCommandTimeSpeed)
 
         ' Starts the server loop
         ServerLoop.ServerLoop()
@@ -261,7 +267,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) Current Errors: {4}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount)
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, GameClock)
     End Sub
 
     Sub DestroyServer()

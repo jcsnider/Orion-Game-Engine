@@ -158,6 +158,9 @@
         SClearPetSkillBuffer
         SPetAttack
 
+        STime
+        SClock
+
         ' Make sure COUNT is below everything else
         COUNT
     End Enum

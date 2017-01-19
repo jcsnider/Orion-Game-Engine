@@ -11,7 +11,7 @@ Module ClientGameLogic
         Dim g As Graphics = FrmMainGame.picscreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, WalkTimer As Integer, FrameTime As Integer
-        Dim destrect As Rectangle, tmr10000 As Integer
+        Dim destrect As Rectangle, tmr10000 As Integer, tmr1000 As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
 
         starttime = GetTickCount()
@@ -105,6 +105,12 @@ Module ClientGameLogic
                     DrawPing()
 
                     tmr10000 = Tick + 10000
+                End If
+
+                If tmr1000 < Tick Then
+                    IncrementGameClock()
+
+                    tmr1000 = Tick + 1000
                 End If
 
                 'crafting timer

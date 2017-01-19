@@ -85,6 +85,8 @@ Module ServerConsole
         TextAdd("/help, Shows this message.")
         TextAdd("/exit, Closes down the server.")
         TextAdd("/setadmin, Sets player access level, use with '/setadmin playername powerlvl' powerlevel goes from 0 for player, to 4 to creator.")
+        TextAdd("/kick, Kicks user from server, use with '/kick playername'")
+        TextAdd("/ban, Bans user from server, use with '/ban playername'")
     End Sub
 
     Sub HandleCommandExit(ByVal Line As String, ByVal Command As String, ByVal Parts As String())
@@ -157,6 +159,18 @@ Module ServerConsole
 
         ServerBanIndex(FindPlayer(Name))
 
+    End Sub
+
+    Sub HandleCommandTimeSpeed(ByVal Line As String, ByVal Command As String, ByVal Parts As String())
+        Dim speed As Byte
+
+        If Parts.Length < 1 Then Exit Sub
+
+        speed = Val(Parts(1))
+
+        GameSpeed = speed
+
+        TextAdd("Set GameSpeed to " & GameSpeed & " secs per seconds")
     End Sub
 #End Region
 

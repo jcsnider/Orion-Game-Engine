@@ -85,6 +85,8 @@ Module ServerLoop
                     Select New With {Key .Index = p.Index, .Success = HandlePlayerCraft(p.Index)}
                 ).ToArray()
 
+                IncrementClock()
+
                 ' Move the timer up 1000ms.
                 tmr1000 = GetTickCount() + 1000
             End If

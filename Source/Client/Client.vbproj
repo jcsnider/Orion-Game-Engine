@@ -153,6 +153,7 @@
     <Compile Include="Source\Modules\ClientTCP.vb" />
     <Compile Include="Source\Modules\ClientConstants.vb" />
     <Compile Include="Source\Modules\ClientDataBase.vb" />
+    <Compile Include="Source\Modules\ClientTime.vb" />
     <Compile Include="Source\Modules\ClientUpdateUI.vb" />
     <Compile Include="Source\Modules\ClientText.vb" />
     <Compile Include="Source\Modules\ClientTypes.vb" />
@@ -328,6 +329,7 @@
     </Content>
     <Content Include="Data Files\Languages\Client_English.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Icon.ico" />
     <Content Include="Data Files\Credits.txt">

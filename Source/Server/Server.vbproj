@@ -108,6 +108,7 @@
     <Compile Include="Source\Modules\ServerRandomItems.vb" />
     <Compile Include="Source\Modules\ServerResources.vb" />
     <Compile Include="Source\Modules\ServerTCP.vb" />
+    <Compile Include="Source\Modules\ServerTime.vb" />
     <Compile Include="Source\Modules\ServerTypes.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

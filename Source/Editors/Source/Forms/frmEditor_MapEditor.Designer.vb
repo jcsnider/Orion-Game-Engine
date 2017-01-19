@@ -133,6 +133,8 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmbMapList = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbScreenShot = New System.Windows.Forms.ToolStripButton()
         Me.pnlBack2 = New DarkUI.Controls.DarkSectionPanel()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
@@ -189,8 +191,6 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbScreenShot = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -1440,6 +1440,22 @@ Partial Class FrmEditor_MapEditor
         Me.cmbMapList.Name = "cmbMapList"
         Me.cmbMapList.Size = New System.Drawing.Size(121, 25)
         '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.ToolStripSeparator4.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbScreenShot
+        '
+        Me.tsbScreenShot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.tsbScreenShot.Image = CType(resources.GetObject("tsbScreenShot.Image"), System.Drawing.Image)
+        Me.tsbScreenShot.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbScreenShot.Name = "tsbScreenShot"
+        Me.tsbScreenShot.Size = New System.Drawing.Size(86, 22)
+        Me.tsbScreenShot.Text = "ScreenShot"
+        '
         'pnlBack2
         '
         Me.pnlBack2.Controls.Add(Me.pnlAttributes)
@@ -2000,29 +2016,12 @@ Partial Class FrmEditor_MapEditor
         '
         Me.picScreen.BackColor = System.Drawing.Color.Black
         Me.picScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.picScreen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picScreen.Location = New System.Drawing.Point(1, 25)
         Me.picScreen.Name = "picScreen"
-        Me.picScreen.Size = New System.Drawing.Size(756, 547)
+        Me.picScreen.Size = New System.Drawing.Size(598, 413)
         Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.ToolStripSeparator4.Margin = New System.Windows.Forms.Padding(0, 0, 2, 0)
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbScreenShot
-        '
-        Me.tsbScreenShot.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.tsbScreenShot.Image = CType(resources.GetObject("tsbScreenShot.Image"), System.Drawing.Image)
-        Me.tsbScreenShot.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbScreenShot.Name = "tsbScreenShot"
-        Me.tsbScreenShot.Size = New System.Drawing.Size(86, 22)
-        Me.tsbScreenShot.Text = "ScreenShot"
         '
         'FrmEditor_MapEditor
         '

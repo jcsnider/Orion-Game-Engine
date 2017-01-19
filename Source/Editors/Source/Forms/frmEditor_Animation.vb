@@ -1,10 +1,10 @@
 ﻿Public Class FrmEditor_Animation
-    Private Sub ScrlSprite0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite0.ValueChanged, scrlSprite0.Scroll
+    Private Sub ScrlSprite0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite0.ValueChanged
         lblSprite0.Text = "Sprite: " & scrlSprite0.Value
         Animation(EditorIndex).Sprite(0) = scrlSprite0.Value
     End Sub
 
-    Private Sub ScrlSprite1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite1.ValueChanged, scrlSprite1.Scroll
+    Private Sub ScrlSprite1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite1.ValueChanged
         lblSprite1.Text = "Sprite: " & scrlSprite1.Value
         Animation(EditorIndex).Sprite(1) = scrlSprite1.Value
     End Sub
@@ -14,7 +14,7 @@
         Animation(EditorIndex).LoopCount(0) = scrlLoopCount0.Value
     End Sub
 
-    Private Sub ScrlLoopCount1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopCount1.ValueChanged, scrlLoopCount1.Scroll
+    Private Sub ScrlLoopCount1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopCount1.ValueChanged
         lblLoopCount1.Text = "Loop Count: " & scrlLoopCount1.Value
         Animation(EditorIndex).LoopCount(1) = scrlLoopCount1.Value
     End Sub
