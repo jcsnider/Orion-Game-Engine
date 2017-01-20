@@ -3266,7 +3266,7 @@ NextLoop:
                     RenderSprite(ItemsSprite(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                     ' If item is a stack - draw the amount you have
-                    If TradeYourOffer(i).Value > 1 Then
+                    If TradeYourOffer(i).Value >= 1 Then
                         Y = rec_pos.Top + 22
                         X = rec_pos.Left - 4
 
@@ -3291,6 +3291,7 @@ NextLoop:
         For i = 1 To MAX_INV
             ' blt their offer
             itemnum = TradeTheirOffer(i).Num
+            'itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)
             If itemnum > 0 And itemnum <= MAX_ITEMS Then
                 itempic = Item(itemnum).Pic
 
@@ -3321,7 +3322,7 @@ NextLoop:
                     RenderSprite(ItemsSprite(itempic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
 
                     ' If item is a stack - draw the amount they have
-                    If TradeTheirOffer(i).Value > 1 Then
+                    If TradeTheirOffer(i).Value >= 1 Then
                         Y = rec_pos.Top + 22
                         X = rec_pos.Left - 4
 

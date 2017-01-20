@@ -2694,10 +2694,11 @@ Module ServerHandleData
     End Sub
 
     Sub Packet_TradeItem(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer, itemnum As Integer
         Dim invslot As Integer, amount As Integer, emptyslot As Integer, i As Integer
-        buffer = New ByteBuffer
+
         buffer.WriteBytes(data)
+
         If buffer.ReadInteger <> ClientPackets.CTradeItem Then Exit Sub
 
         invslot = buffer.ReadInteger
@@ -2706,37 +2707,64 @@ Module ServerHandleData
         buffer = Nothing
 
         If invslot <= 0 Or invslot > MAX_INV Then Exit Sub
-        If GetPlayerInvItemNum(index, invslot) <= 0 Then Exit Sub
 
-        ' make sure they're not already offering it
-        For i = 1 To MAX_INV
-            If TempPlayer(index).TradeOffer(i).Num = invslot Then
-                PlayerMsg(index, "You've already offered this item.", ColorType.Yellow)
-                Exit Sub
-            End If
-        Next
+        itemnum = GetPlayerInvItemNum(index, invslot)
 
-        'have the amount needed?
-        If GetPlayerInvItemValue(index, invslot) < amount Then
-            PlayerMsg(index, "You dont have enough!.", ColorType.Yellow)
-            Exit Sub
+        If ItemNum <= 0 Or ItemNum > MAX_ITEMS Then Exit Sub
+
+        ' make sure they have the amount they offer
+        If amount < 0 Or amount > GetPlayerInvItemValue(index, invslot) Then Exit Sub
+
+        If Item(itemnum).Type = ItemType.Currency Or Item(itemnum).Stackable = 1 Then
+
+            ' check if already offering same currency item
+            For i = 1 To MAX_INV
+
+                If TempPlayer(index).TradeOffer(i).Num = invslot Then
+                    ' add amount
+                    TempPlayer(index).TradeOffer(i).Value = TempPlayer(index).TradeOffer(i).Value + amount
+
+                    ' clamp to limits
+                    If TempPlayer(index).TradeOffer(i).Value > GetPlayerInvItemValue(index, invslot) Then
+                        TempPlayer(index).TradeOffer(i).Value = GetPlayerInvItemValue(index, invslot)
+                    End If
+
+                    ' cancel any trade agreement
+                    TempPlayer(index).AcceptTrade = False
+                    TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
+
+                    SendTradeStatus(index, 0)
+                    SendTradeStatus(TempPlayer(index).InTrade, 0)
+
+                    SendTradeUpdate(index, 0)
+                    SendTradeUpdate(TempPlayer(index).InTrade, 1)
+                    ' exit early
+                    Exit Sub
+                End If
+            Next
+        Else
+            ' make sure they're not already offering it
+            For i = 1 To MAX_INV
+                If TempPlayer(index).TradeOffer(i).Num = invslot Then
+                    PlayerMsg(index, "You've already offered this item.", ColorType.BrightRed)
+                    Exit Sub
+                End If
+            Next
         End If
 
-        ' find open slot
+        ' not already offering - find earliest empty slot
         For i = 1 To MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = 0 Then
                 emptyslot = i
                 Exit For
             End If
         Next
-
-        If emptyslot <= 0 Or emptyslot > MAX_INV Then Exit Sub
-
         TempPlayer(index).TradeOffer(emptyslot).Num = invslot
         TempPlayer(index).TradeOffer(emptyslot).Value = amount
 
-        If TempPlayer(index).AcceptTrade Then TempPlayer(index).AcceptTrade = False
-        If TempPlayer(TempPlayer(index).InTrade).AcceptTrade Then TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
+        ' cancel any trade agreement and send new data
+        TempPlayer(index).AcceptTrade = False
+        TempPlayer(TempPlayer(index).InTrade).AcceptTrade = False
 
         SendTradeStatus(index, 0)
         SendTradeStatus(TempPlayer(index).InTrade, 0)

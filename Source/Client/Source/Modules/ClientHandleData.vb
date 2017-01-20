@@ -2074,7 +2074,7 @@
         ElseIf datatype = 1 Then 'theirs
             For i = 1 To MAX_INV
                 TradeTheirOffer(i).Num = buffer.ReadInteger
-                TradeYourOffer(i).Value = buffer.ReadInteger
+                TradeTheirOffer(i).Value = buffer.ReadInteger
             Next
             TheirWorth = "Total Worth: " & buffer.ReadInteger & "g"
         End If
