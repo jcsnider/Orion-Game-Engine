@@ -215,7 +215,7 @@ Module ServerPlayers
         PlayersOnMap(MapNum) = True
         TempPlayer(Index).GettingMap = True
 
-        CheckTasks(Index, QUEST_TYPE_GOREACH, MapNum)
+        CheckTasks(Index, QuestType.Reach, MapNum)
 
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SCheckForMap)
@@ -990,7 +990,7 @@ Module ServerPlayers
                                 SpawnItemSlot(i, 0, 0, GetPlayerMap(Index), 0, 0)
 
                                 SendActionMsg(GetPlayerMap(Index), Msg, ColorType.White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
-                                CheckTasks(Index, QUEST_TYPE_GOGATHER, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
+                                CheckTasks(Index, QuestType.Gather, GetItemNum(Trim$(Item(GetPlayerInvItemNum(Index, n)).Name)))
                                 Exit For
                             Else
                                 PlayerMsg(Index, "Your inventory is full.", ColorType.BrightRed)

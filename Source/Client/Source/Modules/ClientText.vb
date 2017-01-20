@@ -83,7 +83,7 @@ Module ClientText
         End If
 
         ' Draw name
-        Call DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
+        DrawText(TextX, TextY, Trim$(Name), color, backcolor, GameWindow)
     End Sub
 
     Public Sub DrawNPCName(ByVal MapNpcNum As Integer)
@@ -153,7 +153,7 @@ Module ClientText
         For i = 1 To MAX_QUESTS
             'check if the npc is the starter to any quest: [!] symbol
             'can accept the quest as a new one?
-            If Player(MyIndex).PlayerQuest(i).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(i).Status = QUEST_COMPLETED_BUT Or (Player(MyIndex).PlayerQuest(i).Status = QUEST_COMPLETED And Quest(i).Repeat = 1) Then
+            If Player(MyIndex).PlayerQuest(i).Status = QuestStatus.NotStarted Or Player(MyIndex).PlayerQuest(i).Status = QuestStatus.Repeatable Or (Player(MyIndex).PlayerQuest(i).Status = QuestStatus.Completed And Quest(i).Repeat = 1) Then
                 'the npc gives this quest?
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[!]"
@@ -166,7 +166,7 @@ Module ClientText
                     End If
                     Exit For
                 End If
-            ElseIf Player(MyIndex).PlayerQuest(i).Status = QUEST_STARTED Then
+            ElseIf Player(MyIndex).PlayerQuest(i).Status = QuestStatus.STARTED Then
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[*]"
                     TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$("[*]"))) + 8
@@ -223,6 +223,8 @@ Module ClientText
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Craft
                                     DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
+                                Case TileType.Light
+                                    DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), GameWindow)
                             End Select
                         End With
                     End If

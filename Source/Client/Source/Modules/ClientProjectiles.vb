@@ -4,12 +4,12 @@ Imports SFML.Graphics
 Public Module ClientProjectiles
 #Region "Defines"
     Public Const MAX_PROJECTILES As Integer = 255
-    Public Projectiles(0 To MAX_PROJECTILES) As ProjectileRec
-    Public MapProjectiles(0 To MAX_PROJECTILES) As MapProjectileRec
+    Public Projectiles(MAX_PROJECTILES) As ProjectileRec
+    Public MapProjectiles(MAX_PROJECTILES) As MapProjectileRec
     Public NumProjectiles As Integer
     Public InitProjectileEditor As Boolean
     Public Const EDITOR_PROJECTILE As Byte = 10
-    Public Projectile_Changed(0 To MAX_PROJECTILES) As Boolean
+    Public Projectile_Changed(MAX_PROJECTILES) As Boolean
 #End Region
 
 #Region "Types"
@@ -37,24 +37,24 @@ Public Module ClientProjectiles
 #Region "Sending"
 
     Sub SendRequestProjectiles()
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteInteger(ClientPackets.CRequestProjectiles)
+
         SendData(buffer.ToArray())
         buffer = Nothing
 
     End Sub
 
     Sub SendClearProjectile(ByVal ProjectileNum As Integer, ByVal CollisionIndex As Integer, ByVal CollisionType As Byte, ByVal CollisionZone As Integer)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteInteger(ClientPackets.CClearProjectile)
         buffer.WriteInteger(ProjectileNum)
         buffer.WriteInteger(CollisionIndex)
         buffer.WriteInteger(CollisionType)
         buffer.WriteInteger(CollisionZone)
+
         SendData(buffer.ToArray())
         buffer = Nothing
 
@@ -66,9 +66,8 @@ Public Module ClientProjectiles
 
     Public Sub HandleUpdateProjectile(ByVal data() As Byte)
         Dim ProjectileNum As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SUpdateProjectile Then Exit Sub
@@ -86,10 +85,9 @@ Public Module ClientProjectiles
     End Sub
 
     Public Sub HandleMapProjectile(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SMapProjectile Then Exit Sub
@@ -118,7 +116,7 @@ Public Module ClientProjectiles
         Dim i As Integer
 
         For i = 1 To MAX_PROJECTILES
-            Call ClearProjectile(i)
+            ClearProjectile(i)
         Next
 
     End Sub

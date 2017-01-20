@@ -241,4 +241,33 @@
         Dawn
         Dusk
     End Enum
+
+    Public Enum Weather
+        None
+        Rain
+        Snow
+        Hail
+        Sandstorm
+        Storm
+        Fog
+    End Enum
+
+    Public Enum QuestType
+        Slay = 1
+        Collect
+        Talk
+        Reach
+        Give
+        Kill
+        Gather
+        Fetch
+        TalkEvent
+    End Enum
+
+    Public Enum QuestStatus
+        NotStarted
+        Started
+        Completed
+        Repeatable
+    End Enum
 End Module

@@ -74,34 +74,32 @@ Module ClientPets
 
 #Region "Outgoing Packets"
     Public Sub SendPetBehaviour(ByVal Index As Integer)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CSetBehaviour)
 
         buffer.WriteInteger(Index)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
 
     End Sub
 
     Sub SendTrainPetStat(ByVal StatNum As Byte)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CPetUseStatPoint)
 
         buffer.WriteInteger(StatNum)
 
         SendData(buffer.ToArray)
-
         buffer = Nothing
 
     End Sub
 
     Sub SendRequestPets()
         Dim buffer As New ByteBuffer
+
         buffer.WriteInteger(ClientPackets.CRequestPets)
 
         SendData(buffer.ToArray)
@@ -114,8 +112,8 @@ Module ClientPets
 
         buffer.WriteInteger(ClientPackets.CPetSkill)
         buffer.WriteInteger(skill)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
 
         PetSpellBuffer = skill
@@ -124,6 +122,7 @@ Module ClientPets
 
     Sub SendSummonPet()
         Dim buffer As New ByteBuffer
+
         buffer.WriteInteger(ClientPackets.CSummonPet)
 
         SendData(buffer.ToArray)
@@ -135,9 +134,8 @@ Module ClientPets
 #Region "Incoming Packets"
     Public Sub Packet_UpdatePlayerPet(ByVal Data() As Byte)
         Dim n As Integer, i As Long
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -172,13 +170,14 @@ Module ClientPets
         Player(n).Pet.Points = buffer.ReadInteger
         Player(n).Pet.Exp = buffer.ReadInteger
         Player(n).Pet.TNL = buffer.ReadInteger
+
+        buffer = Nothing
     End Sub
 
     Public Sub Packet_UpdatePet(ByVal Data() As Byte)
         Dim n As Integer, i As Long
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -212,9 +211,8 @@ Module ClientPets
     Public Sub Packet_PetMove(ByVal data() As Byte)
         Dim i As Integer, X As Integer, Y As Integer
         Dim dir As Integer, Movement As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
@@ -252,9 +250,8 @@ Module ClientPets
     Public Sub Packet_PetDir(ByVal Data() As Byte)
         Dim i As Integer
         Dim dir As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -270,9 +267,8 @@ Module ClientPets
 
     Public Sub Packet_PetVital(ByVal Data() As Byte)
         Dim i As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -293,9 +289,8 @@ Module ClientPets
     End Sub
 
     Public Sub Packet_ClearPetSkillBuffer(ByVal Data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -309,8 +304,8 @@ Module ClientPets
 
     Public Sub Packet_PetAttack(ByVal Data() As Byte)
         Dim i As Integer
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ServerPackets.SPetAttack Then Exit Sub
@@ -395,19 +390,12 @@ Module ClientPets
                     End If
                 End If
             End If
-            'Else
-            '    If ShowAnimLayers Then
-            '        Player(Index).Pet.Steps = 3
-            '    Else
-            '        Player(Index).Pet.Steps = 2
-            '    End If
         End If
 
     End Sub
 
     Public Sub PetMove(ByVal X As Integer, ByVal Y As Integer)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CPetMove)
 
@@ -415,7 +403,6 @@ Module ClientPets
         buffer.WriteInteger(Y)
 
         SendData(buffer.ToArray)
-
         buffer = Nothing
 
     End Sub
@@ -646,4 +633,5 @@ Module ClientPets
 
     End Function
 #End Region
+
 End Module

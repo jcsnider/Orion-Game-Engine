@@ -71,23 +71,23 @@
         End If
 
         If Hours <= 9 AndAlso Hours >= 6 Then
-            If GameTime = Time.Night Then
+            If GameTime <> Time.Dawn Then
                 GameTime = Time.Dawn
 
                 SendTimeToAll()
             End If
-        ElseIf Hours < 19 AndAlso Hours > 9 Then
-            If GameTime = Time.Dawn Then
+        ElseIf Hours < 18 AndAlso Hours > 9 Then
+            If GameTime <> Time.Day Then
                 GameTime = Time.Day
                 SendTimeToAll()
             End If
-        ElseIf Hours < 24 AndAlso Hours >= 19 Then
-            If GameTime = Time.Day Then
+        ElseIf Hours < 24 AndAlso Hours >= 18 Then
+            If GameTime <> Time.Dusk Then
                 GameTime = Time.Dusk
                 SendTimeToAll()
             End If
-        ElseIf Hours >= 24 AndAlso Hours <= 6 Then
-            If GameTime = Time.Dusk Then
+        ElseIf Hours >= 0 AndAlso Hours < 6 Then
+            If GameTime <> Time.Night Then
                 GameTime = Time.Night
                 SendTimeToAll()
             End If

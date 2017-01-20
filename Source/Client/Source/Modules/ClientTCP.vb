@@ -82,6 +82,7 @@ Module ClientTCP
 
     Public Function IsConnected() As Boolean
         If PlayerSocket Is Nothing Then Exit Function
+
         If PlayerSocket.Connected = True Then
             IsConnected = True
         Else
@@ -93,8 +94,8 @@ Module ClientTCP
     Public Sub SendData(ByVal bytes() As Byte)
         Try
             If IsConnected() = False Then Exit Sub
-            Dim buffer As ByteBuffer
-            buffer = New ByteBuffer
+            Dim buffer As New ByteBuffer
+
             buffer.WriteInteger(UBound(bytes) - LBound(bytes) + 1)
             buffer.WriteBytes(bytes)
             'Send data in the socket stream to the server
@@ -108,18 +109,19 @@ Module ClientTCP
     End Sub
 
     Public Sub SendNewAccount(ByVal Name As String, ByVal Password As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CNewAccount)
         Buffer.WriteString(Name)
         Buffer.WriteString(Password)
         SendData(Buffer.ToArray)
+
         Buffer = Nothing
     End Sub
 
     Public Sub SendAddChar(ByVal Slot As Integer, ByVal Name As String, ByVal Sex As Integer, ByVal ClassNum As Integer, ByVal Sprite As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAddChar)
         Buffer.WriteInteger(Slot)
         Buffer.WriteString(Name)
@@ -127,59 +129,45 @@ Module ClientTCP
         Buffer.WriteInteger(ClassNum)
         Buffer.WriteInteger(Sprite)
         SendData(Buffer.ToArray())
+
         Buffer = Nothing
     End Sub
 
     Public Sub SendLogin(ByVal Name As String, ByVal Password As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CLogin)
         Buffer.WriteString(Name)
         Buffer.WriteString(Password)
         Buffer.WriteString(Application.ProductVersion)
         SendData(Buffer.ToArray())
+
         Buffer = Nothing
     End Sub
 
-    Function IsPlaying(ByVal Index As Integer) As Boolean
-
-        ' if the player doesn't exist, the name will equal 0
-        If Len(GetPlayerName(Index)) > 0 Then
-            IsPlaying = True
-        End If
-
-    End Function
-
-    Function GetPlayerName(ByVal Index As Integer) As String
-        GetPlayerName = ""
-        If Index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Trim$(Player(Index).Name)
-    End Function
-
     Sub GetPing()
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
         PingStart = GetTickCount()
-        Buffer = New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CCheckPing)
         SendData(Buffer.ToArray())
+
         Buffer = Nothing
     End Sub
 
     Public Sub SendRequestEditMap()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestEditMap)
         SendData(Buffer.ToArray())
+
         Buffer = Nothing
     End Sub
 
     Public Sub SendMap()
-        Dim X As Integer
-        Dim Y As Integer
-        Dim i As Integer
+        Dim X As Integer, Y As Integer, i As Integer
         Dim data() As Byte
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
         CanMoveNow = False
 
         Buffer.WriteString(Trim$(Map.Name))
@@ -347,278 +335,308 @@ Module ClientTCP
     End Sub
 
     Public Sub SendPlayerMove()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CPlayerMove)
         Buffer.WriteInteger(GetPlayerDir(MyIndex))
         Buffer.WriteInteger(Player(MyIndex).Moving)
         Buffer.WriteInteger(Player(MyIndex).X)
         Buffer.WriteInteger(Player(MyIndex).Y)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SayMsg(ByVal text As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSayMsg)
         'Buffer.WriteString(text)
         Buffer.WriteUnicodeString(text)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendKick(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CKickPlayer)
         Buffer.WriteString(Name)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendBan(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CBanPlayer)
         Buffer.WriteString(Name)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub WarpMeTo(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CWarpMeTo)
         Buffer.WriteString(Name)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub WarpToMe(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CWarpToMe)
         Buffer.WriteString(Name)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub WarpTo(ByVal MapNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CWarpTo)
         Buffer.WriteInteger(MapNum)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendRequestLevelUp()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestLevelUp)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendSpawnItem(ByVal tmpItem As Integer, ByVal tmpAmount As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSpawnItem)
         Buffer.WriteInteger(tmpItem)
         Buffer.WriteInteger(tmpAmount)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendSetSprite(ByVal SpriteNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSetSprite)
         Buffer.WriteInteger(SpriteNum)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendSetAccess(ByVal Name As String, ByVal Access As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSetAccess)
         Buffer.WriteString(Name)
         Buffer.WriteInteger(Access)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendAttack()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAttack)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestItems()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestItems)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendPlayerDir()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CPlayerDir)
         Buffer.WriteInteger(GetPlayerDir(MyIndex))
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendPlayerRequestNewMap()
         If GettingMap Then Exit Sub
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestNewMap)
         Buffer.WriteInteger(GetPlayerDir(MyIndex))
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
 
-        'Debug.Print("Client-PlayerRequestNewMap")
     End Sub
 
     Sub SendRequestResources()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestResources)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestNPCS()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestNPCS)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestSkills()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestSkills)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestShops()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestShops)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestAnimations()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestAnimations)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendMapRespawn()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CMapRespawn)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendTrainStat(ByVal StatNum As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CTrainStat)
         Buffer.WriteInteger(StatNum)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendRequestPlayerData()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestPlayerData)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub BroadcastMsg(ByVal text As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CBroadcastMsg)
         'Buffer.WriteString(text)
         Buffer.WriteUnicodeString(text)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub PlayerMsg(ByVal text As String, ByVal MsgTo As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CPlayerMsg)
         Buffer.WriteString(MsgTo)
         'Buffer.WriteString(text)
         Buffer.WriteUnicodeString(text)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendWhosOnline()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CWhosOnline)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendMOTDChange(ByVal MOTD As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSetMotd)
         Buffer.WriteString(MOTD)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendBanList()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CBanList)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendChangeInvSlots(ByVal OldSlot As Integer, ByVal NewSlot As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSwapInvSlots)
         Buffer.WriteInteger(OldSlot)
         Buffer.WriteInteger(NewSlot)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendUseItem(ByVal InvNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CUseItem)
         Buffer.WriteInteger(InvNum)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendDropItem(ByVal InvNum As Integer, ByVal Amount As Integer)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         If InBank Or InShop Then Exit Sub
 
@@ -629,101 +647,107 @@ Module ClientTCP
             If Amount < 1 Or Amount > PlayerInv(InvNum).Value Then Exit Sub
         End If
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CMapDropItem)
         Buffer.WriteInteger(InvNum)
         Buffer.WriteInteger(Amount)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub BuyItem(ByVal shopslot As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CBuyItem)
         Buffer.WriteInteger(shopslot)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SellItem(ByVal invslot As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CSellItem)
         Buffer.WriteInteger(invslot)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub DepositItem(ByVal invslot As Integer, ByVal Amount As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CDepositItem)
         Buffer.WriteInteger(invslot)
         Buffer.WriteInteger(Amount)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub WithdrawItem(ByVal bankslot As Integer, ByVal Amount As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CWithdrawItem)
         Buffer.WriteInteger(bankslot)
         Buffer.WriteInteger(Amount)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub ChangeBankSlots(ByVal OldSlot As Integer, ByVal NewSlot As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CChangeBankSlots)
         Buffer.WriteInteger(OldSlot)
         Buffer.WriteInteger(NewSlot)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub CloseBank()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CCloseBank)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
+
         InBank = False
         pnlBankVisible = False
     End Sub
 
     Sub PlayerSearch(ByVal CurX As Integer, ByVal CurY As Integer, ByVal RClick As Byte)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         If IsInBounds() Then
-            Buffer = New ByteBuffer
             Buffer.WriteInteger(ClientPackets.CSearch)
             Buffer.WriteInteger(CurX)
             Buffer.WriteInteger(CurY)
             Buffer.WriteInteger(RClick)
             SendData(Buffer.ToArray())
-            Buffer = Nothing
         End If
 
+        Buffer = Nothing
     End Sub
 
     Public Sub AdminWarp(ByVal X As Integer, ByVal Y As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAdminWarp)
         Buffer.WriteInteger(X)
         Buffer.WriteInteger(Y)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendTradeRequest(ByVal Name As String)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CTradeInvite)
 
         Buffer.WriteString(Name)
@@ -734,9 +758,8 @@ Module ClientTCP
     End Sub
 
     Sub SendTradeInviteAccept(ByVal Awnser As Byte)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CTradeInviteAccept)
 
         Buffer.WriteInteger(Awnser)
@@ -747,116 +770,125 @@ Module ClientTCP
     End Sub
 
     Public Sub TradeItem(ByVal invslot As Integer, ByVal Amount As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CTradeItem)
         Buffer.WriteInteger(invslot)
         Buffer.WriteInteger(Amount)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub UntradeItem(ByVal invslot As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CUntradeItem)
         Buffer.WriteInteger(invslot)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub AcceptTrade()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAcceptTrade)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub DeclineTrade()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CDeclineTrade)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendLeaveGame()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CQuit)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Sub SendUnequip(ByVal EqNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CUnequip)
         Buffer.WriteInteger(EqNum)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
-    Public Sub ForgetSkill(ByVal skillslot As Integer)
-        Dim Buffer As ByteBuffer
+    Public Sub ForgetSkill(ByVal Skillslot As Integer)
+        Dim Buffer As New ByteBuffer
 
         ' Check for subscript out of range
-        If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If Skillslot < 1 Or Skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
-        If SkillCD(skillslot) > 0 Then
+        If SkillCD(Skillslot) > 0 Then
             AddText("Cannot forget a skill which is cooling down!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' dont let them forget a skill which is buffered
-        If SkillBuffer = skillslot Then
+        If SkillBuffer = Skillslot Then
             AddText("Cannot forget a skill which you are casting!", QColorType.AlertColor)
             Exit Sub
         End If
 
-        If PlayerSkills(skillslot) > 0 Then
-            Buffer = New ByteBuffer
+        If PlayerSkills(Skillslot) > 0 Then
             Buffer.WriteInteger(ClientPackets.CForgetSkill)
-            Buffer.WriteInteger(skillslot)
+            Buffer.WriteInteger(Skillslot)
             SendData(Buffer.ToArray())
-            Buffer = Nothing
         Else
             AddText("No skill found.", QColorType.AlertColor)
         End If
+
+        Buffer = Nothing
     End Sub
 
-    'Mapreport
     Public Sub SendRequestMapreport()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CMapReport)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendRequestAdmin()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAdmin)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendRequestClasses()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CRequestClasses)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendUseEmote(ByVal Emote As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CEmote)
         Buffer.WriteInteger(Emote)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub

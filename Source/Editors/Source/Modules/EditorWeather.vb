@@ -18,19 +18,11 @@ Public Module EditorWeather
         Dim InUse As Integer
     End Structure
 
-    Public Const MAP_WEATHER_NONE As Byte = 0
-    Public Const MAP_WEATHER_RAIN As Byte = 1
-    Public Const MAP_WEATHER_SNOW As Byte = 2
-    Public Const MAP_WEATHER_HAIL As Byte = 3
-    Public Const MAP_WEATHER_SANDSTORM As Byte = 4
-    Public Const MAP_WEATHER_STORM As Byte = 5
-    Public Const MAP_WEATHER_FOG As Byte = 6
-
     Sub ProcessWeather()
         Dim i As Integer, x As Integer
 
         If CurrentWeather > 0 Then
-            If CurrentWeather = MAP_WEATHER_RAIN Or CurrentWeather = MAP_WEATHER_STORM Then
+            If CurrentWeather = Weather.Rain Or CurrentWeather = Weather.Storm Then
                 PlayWeatherSound("Rain.ogg", True)
             End If
             x = Rand(1, 101 - CurrentWeatherIntensity)
@@ -58,7 +50,7 @@ Public Module EditorWeather
         Else
             StopWeatherSound()
         End If
-        If CurrentWeather = MAP_WEATHER_STORM Then
+        If CurrentWeather = Weather.Storm Then
             x = Rand(1, 400 - CurrentWeatherIntensity)
             If x = 1 Then
                 'Draw Thunder
@@ -105,7 +97,7 @@ Public Module EditorWeather
 
         For i = 1 To MAX_WEATHER_PARTICLES
             If WeatherParticle(i).InUse Then
-                If WeatherParticle(i).type = MAP_WEATHER_STORM Then
+                If WeatherParticle(i).type = Weather.Storm Then
                     SpriteLeft = 0
                 Else
                     SpriteLeft = WeatherParticle(i).type - 1

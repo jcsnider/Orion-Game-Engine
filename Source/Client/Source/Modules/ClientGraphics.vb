@@ -205,7 +205,7 @@ Module ClientGraphics
     Public NumEmotes As Integer
 
     ' #Day/Night
-    Public NightGfx As New RenderTexture(1024, 768)
+    Public NightGfx As New RenderTexture(1152, 864)
     Public NightSprite As Sprite
     Public NightGfxInfo As GraphicInfo
 
@@ -628,8 +628,8 @@ Module ClientGraphics
         End If
 
         LightGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
-            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Light2" & GFX_EXT) Then
+            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light2" & GFX_EXT)
             LightSprite = New Sprite(LightGfx)
 
             'Cache the width and height
@@ -1210,10 +1210,10 @@ Module ClientGraphics
 
         If Npc(MapNpc(MapNpcNum).Num).Behaviour = NpcBehavior.Quest Then
             If CanStartQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum) Then
-                If Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QUEST_NOT_STARTED Then
+                If Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QuestStatus.NotStarted Then
                     DrawEmotes(X, Y, 5)
                 End If
-            ElseIf Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QUEST_STARTED Then
+            ElseIf Player(MyIndex).PlayerQuest(Npc(MapNpc(MapNpcNum).Num).QuestNum).Status = QuestStatus.STARTED Then
                 DrawEmotes(X, Y, 9)
             End If
         End If
@@ -2485,6 +2485,9 @@ Module ClientGraphics
         If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
         If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
         If Not EXPBarGFX Is Nothing Then EXPBarGFX.Dispose()
+
+        If Not LightGfx Is Nothing Then LightGfx.Dispose()
+        If Not NightGfx Is Nothing Then NightGfx.Dispose()
 
     End Sub
 
@@ -3767,8 +3770,6 @@ NextLoop:
 
         If Map.Moral = MapMoral.Indoors Then Exit Sub
 
-        Dim currLightLevel As Integer = 235
-
         If GameTime = Time.Dawn Then
             NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 100))
         ElseIf GameTime = TIME.DAY Then
@@ -3790,36 +3791,39 @@ NextLoop:
                         LightSprite.Position = New Vector2f(X1, Y1)
 
                         NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
+
                     End If
                 End If
             Next
         Next
 
-        NightSprite = New Sprite(NightGfx.Texture)
-
-        NightGfx.Display()
-        GameWindow.Draw(NightSprite)
-
         ''draw on player
+        'Dim x2 As Integer, y2 As Integer
+
         '' Calculate the X
-        'X = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Width / 4 - 32) / 2)
+        'x2 = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Width / 4 - 32) / 2)
 
         '' Is the player's height more than 32..?
         'If (CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height) > 32 Then
         '    ' Create a 32 pixel offset for larger sprites
-        '    Y = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height / 4) - 32)
+        '    y2 = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height / 4) - 32)
         'Else
         '    ' Proceed as normal
-        '    Y = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset
+        '    y2 = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset
         'End If
 
-        'LightSprite.TextureRect = New IntRect(0, 0, LightSprite.Texture.Size.X, LightSprite.Texture.Size.Y)
-        'LightSprite.Color = New SFML.Graphics.Color(255, 255, 255, 255)
+        ''LightSprite.TextureRect = New IntRect(0, 0, LightSprite.Texture.Size.X, LightSprite.Texture.Size.Y)
+        'LightSprite.Color = New SFML.Graphics.Color(255, 0, 0, 255)
         '' 16 offset is for the center of the graphic
         'LightSprite.Origin = New Vector2f(LightSprite.TextureRect.Width / 2 - 16, LightSprite.TextureRect.Height / 2 - 16)
-        'LightSprite.Position = New Vector2f(X, Y)
-        'LightSprite.Draw(GameWindow, New RenderStates(BlendMode.Add))
+        'LightSprite.Position = New Vector2f(x2, y2)
+        'NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
 
+
+        NightSprite = New Sprite(NightGfx.Texture)
+
+        NightGfx.Display()
+        GameWindow.Draw(NightSprite)
     End Sub
 
     Sub DrawCursor()

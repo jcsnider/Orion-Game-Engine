@@ -118,7 +118,7 @@ Module ClientGeneral
         ClearRecipes()
 
         'party
-        ClearPartie()
+        ClearParty()
 
         'pets
         ClearPets()

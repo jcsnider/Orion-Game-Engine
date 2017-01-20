@@ -980,15 +980,15 @@ newlist:
                                 frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Fog [Fog: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1) & " Speed: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & " Opacity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data3) & "]")
                             Case EventType.evSetWeather
                                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data1
-                                    Case MAP_WEATHER_NONE
+                                    Case Weather.None
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [None]")
-                                    Case MAP_WEATHER_RAIN
+                                    Case Weather.Rain
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Rain - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                    Case MAP_WEATHER_SNOW
+                                    Case Weather.Snow
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Snow - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                    Case MAP_WEATHER_SANDSTORM
+                                    Case Weather.Sandstorm
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Sand Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
-                                    Case MAP_WEATHER_STORM
+                                    Case Weather.Storm
                                         frmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Weather [Storm - Intensity: " & CStr(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i).Data2) & "]")
                                 End Select
                             Case EventType.evSetTint

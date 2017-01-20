@@ -71,6 +71,7 @@
     <string id="pingsync">Sync</string>
     <string id="pinglocal">Local</string>
     <string id="maprecieve">Recieving Map...</string>
+    <string id="datarecieve">Receiving game data...</string>
     <string id="curloc">Cur Loc x: {0} y: {1}</string>
     <string id="loc">Loc x: {0} y: {1}</string>
     <string id="curmap">Map # {0}</string>
@@ -151,11 +152,29 @@
   
   <trade>
     <string id="tradetimeout">You took too long to decide. Please try again.</string>
+    <string id="tradeinvite">{0} invites you to a trade!</string>
+    <string id="tradeworth">Total Worth: {0} g</string>
+    <string id="tradestatusok">Other player has accepted.</string>
+    <string id="tradestatuswait">Other player has accepted.</string>
   </trade>
 
   <events>
     <string id="continue">- Continue -</string>
   </events>
+
+  <quests>
+    <string id="queststarted">Quest Started</string>
+    <string id="questcancel">Cancel Quest</string>
+    <string id="questcomplete">Quest Completed</string>
+    <string id="questgoslay">Defeat {0}/{1} {2}.</string>
+    <string id="questgocollect">Collect {0}/{1} {2}.</string>
+    <string id="questtalkto">Go talk to {0}.</string>
+    <string id="questgoto">Go to {0}.</string>
+    <string id="questgive">Give {0} the {1} {2}/{3} they requested.</string>
+    <string id="questkill">Defeat {0}/{1} Players in Battle.</string>
+    <string id="questgather">Gather {0}/{1} {2}.</string>
+    <string id="questfetch">Fetch {0} X {1} from {2}.</string>
+  </quests>
 
   <charwindow>
     <string id="charname">Name: </string>

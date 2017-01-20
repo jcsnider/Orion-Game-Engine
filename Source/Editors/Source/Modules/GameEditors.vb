@@ -410,6 +410,12 @@
                         .Data2 = 0
                         .Data3 = 0
                     End If
+                    If FrmEditor_MapEditor.optLight.Checked Then
+                        .Type = TileType.Light
+                        .Data1 = 0
+                        .Data2 = 0
+                        .Data3 = 0
+                    End If
                 End With
             ElseIf SelectedTab = 4 Then
                 If movedMouse Then Exit Sub

@@ -23,7 +23,6 @@ Public Module ClientHotBar
         IsHotBarSlot = 0
 
         For i = 1 To MAX_HOTBAR
-
             With tempRec
                 .top = HotbarY + HotbarTop
                 .bottom = .top + PIC_Y
@@ -42,9 +41,8 @@ Public Module ClientHotBar
     End Function
 
     Public Sub SendSetHotbarSkill(ByVal Slot As Integer, ByVal Skill As Integer)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CSetHotbarSkill)
 
         Buffer.WriteInteger(Slot)
@@ -55,9 +53,7 @@ Public Module ClientHotBar
     End Sub
 
     Public Sub SendDeleteHotbar(ByVal Slot As Integer)
-        Dim Buffer As ByteBuffer
-
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CDeleteHotbarSkill)
 
         Buffer.WriteInteger(Slot)
@@ -69,7 +65,6 @@ Public Module ClientHotBar
     Sub DrawHotbar()
         Dim i As Integer, skillnum As Integer, skillpic As Integer
         Dim rec As Rectangle, rec_pos As Rectangle
-        'If Numspells = 0 Then Exit Sub
 
         RenderSprite(HotBarSprite, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGFXInfo.Width, HotBarGFXInfo.Height)
 
@@ -109,7 +104,6 @@ Public Module ClientHotBar
 
                 RenderSprite(SkillIconsSprite(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
             End If
-
         Next
 
     End Sub

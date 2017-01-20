@@ -1,4 +1,19 @@
 ﻿Module ClientPlayer
+    Function IsPlaying(ByVal Index As Integer) As Boolean
+
+        ' if the player doesn't exist, the name will equal 0
+        If Len(GetPlayerName(Index)) > 0 Then
+            IsPlaying = True
+        End If
+
+    End Function
+
+    Function GetPlayerName(ByVal Index As Integer) As String
+        GetPlayerName = ""
+        If Index > MAX_PLAYERS Then Exit Function
+        GetPlayerName = Trim$(Player(Index).Name)
+    End Function
+
     Sub CheckAttack()
         Dim attackspeed As Integer, X As Integer, Y As Integer
         Dim Buffer As ByteBuffer
@@ -78,7 +93,7 @@
                 Case Direction.Down
                     SendPlayerMove()
                     Player(MyIndex).YOffset = PIC_Y * -1
-                    Call SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
+                    SetPlayerY(MyIndex, GetPlayerY(MyIndex) + 1)
                 Case Direction.Left
                     SendPlayerMove()
                     Player(MyIndex).XOffset = PIC_X
@@ -292,7 +307,7 @@
     Function CheckDirection(ByVal Direction As Byte) As Boolean
         Dim X As Integer, Y As Integer
         Dim i As Integer, z As Integer
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         CheckDirection = False
 
@@ -399,7 +414,6 @@
                 If Map.MapEvents(i).X = X Then
                     If Map.MapEvents(i).Y = Y Then
                         'We are walking on top of OR tried to touch an event. Time to Handle the commands
-                        Buffer = New ByteBuffer
                         Buffer.WriteInteger(ClientPackets.CEventTouch)
                         Buffer.WriteInteger(i)
                         SendData(Buffer.ToArray)
@@ -499,7 +513,7 @@
     End Function
 
     Public Sub PlayerCastSkill(ByVal skillslot As Integer)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         ' Check for subscript out of range
         If skillslot < 1 Or skillslot > MAX_PLAYER_SKILLS Then
@@ -520,11 +534,12 @@
         If PlayerSkills(skillslot) > 0 Then
             If GetTickCount() > Player(MyIndex).AttackTimer + 1000 Then
                 If Player(MyIndex).Moving = 0 Then
-                    Buffer = New ByteBuffer
                     Buffer.WriteInteger(ClientPackets.CCast)
                     Buffer.WriteInteger(skillslot)
+
                     SendData(Buffer.ToArray())
                     Buffer = Nothing
+
                     SkillBuffer = skillslot
                     SkillBufferTimer = GetTickCount()
                 Else

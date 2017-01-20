@@ -10,20 +10,20 @@ Public Module ServerQuest
 
     Public Const EDITOR_TASKS As Byte = 7
 
-    Public Const QUEST_TYPE_GOSLAY As Byte = 1
-    Public Const QUEST_TYPE_GOGATHER As Byte = 2
-    Public Const QUEST_TYPE_GOTALK As Byte = 3
-    Public Const QUEST_TYPE_GOREACH As Byte = 4
-    Public Const QUEST_TYPE_GOGIVE As Byte = 5
-    Public Const QUEST_TYPE_GOKILL As Byte = 6
-    Public Const QUEST_TYPE_GOTRAIN As Byte = 7
-    Public Const QUEST_TYPE_GOGET As Byte = 8
-    Public Const QUEST_TYPE_TALKEVENT As Byte = 9
+    'Public Const QUEST_TYPE_GOSLAY As Byte = 1
+    'Public Const QUEST_TYPE_GOCOLLECT As Byte = 2
+    'Public Const QUEST_TYPE_GOTALK As Byte = 3
+    'Public Const QUEST_TYPE_GOREACH As Byte = 4
+    'Public Const QUEST_TYPE_GOGIVE As Byte = 5
+    'Public Const QUEST_TYPE_GOKILL As Byte = 6
+    'Public Const QUEST_TYPE_GOGATHER As Byte = 7
+    'Public Const QUEST_TYPE_GOFETCH As Byte = 8
+    'Public Const QUEST_TYPE_TALKEVENT As Byte = 9
 
-    Public Const QUEST_NOT_STARTED As Byte = 0
-    Public Const QUEST_STARTED As Byte = 1
-    Public Const QUEST_COMPLETED As Byte = 2
-    Public Const QUEST_COMPLETED_BUT As Byte = 3
+    'Public Const QUEST_NOT_STARTED As Byte = 0
+    'Public Const QUEST_STARTED As Byte = 1
+    'Public Const QUEST_COMPLETED As Byte = 2
+    'Public Const QUEST_REPEATABLE As Byte = 3
 
     'Types
     Public Quest(0 To MAX_QUESTS) As QuestRec
@@ -382,12 +382,12 @@ Public Module ServerQuest
         Order = Buffer.ReadInteger '1 = accept, 2 = cancel
 
         If Order = 1 Then
-            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_STARTED '1
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.Started '1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
             PlayerMsg(Index, "New quest accepted: " & Trim$(Quest(QuestNum).Name) & "!", ColorType.BrightGreen)
         ElseIf Order = 2 Then
-            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED '2
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.NotStarted '2
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
@@ -395,7 +395,7 @@ Public Module ServerQuest
 
             If GetPlayerAccess(Index) > 0 And QuestNum = 1 Then
                 For I = 1 To MAX_QUESTS
-                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).Status = QUEST_NOT_STARTED '2
+                    Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).Status = QuestStatus.NotStarted '2
                     Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).ActualTask = 1
                     Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(I).CurrentCount = 0
                 Next
@@ -603,7 +603,7 @@ Public Module ServerQuest
 
     Public Sub ResetQuest(ByVal Index As Integer, ByVal QuestNum As Integer)
         If GetPlayerAccess(Index) > 0 Then
-            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.NotStarted
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).ActualTask = 1
             Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = 0
 
@@ -618,7 +618,7 @@ Public Module ServerQuest
         If QuestInProgress(Index, QuestNum) Then Exit Function
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
-        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.NotStarted Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.Repeatable Then
             For i = 1 To Quest(QuestNum).ReqCount
                 'Check if item is needed
                 If Quest(QuestNum).Requirement(i) = 1 Then
@@ -633,7 +633,7 @@ Public Module ServerQuest
                 'Check if previous quest is needed
                 If Quest(QuestNum).Requirement(i) = 2 Then
                     If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_QUESTS Then
-                        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_NOT_STARTED Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QUEST_STARTED Then
+                        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QuestStatus.NotStarted Or Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(Quest(QuestNum).Requirement(2)).Status = QuestStatus.Started Then
                             PlayerMsg(Index, "You need to complete the " & Trim$(Quest(Quest(QuestNum).Requirement(2)).Name) & " quest in order to take this quest!", ColorType.Yellow)
                             Exit Function
                         End If
@@ -665,7 +665,7 @@ Public Module ServerQuest
         QuestInProgress = False
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
 
-        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_STARTED Then 'Status=1 means started
+        If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.Started Then 'Status=1 means started
             QuestInProgress = True
         End If
     End Function
@@ -725,7 +725,7 @@ Public Module ServerQuest
         If ActualTask >= Quest(QuestNum).Task.Length Then Exit Sub
 
         Select Case TaskType
-            Case QUEST_TYPE_GOSLAY 'defeat X amount of X npc's.
+            Case QuestType.Slay 'defeat X amount of X npc's.
 
                 'is npc defeated id same as the npc i have to defeat?
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
@@ -744,7 +744,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOGATHER 'Gather X amount of X item.
+            Case QuestType.Collect 'Gather X amount of X item.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).Item Then
                     Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
                     If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
@@ -757,7 +757,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOTALK 'Interact with X npc.
+            Case QuestType.Talk 'Interact with X npc.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC And Quest(QuestNum).Task(ActualTask).Amount = 0 Then
                     QuestMessage(Index, QuestNum, Quest(QuestNum).Task(ActualTask).Speech, 0)
                     If CanEndQuest(Index, QuestNum) Then
@@ -767,7 +767,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOREACH 'Reach X map.
+            Case QuestType.Reach 'Reach X map.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).Map Then
                     QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
                     If CanEndQuest(Index, QuestNum) Then
@@ -777,7 +777,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOGIVE 'Give X amount of X item to X npc.
+            Case QuestType.Give 'Give X amount of X item to X npc.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
                     For I = 1 To MAX_INV
                         If GetPlayerInvItemNum(Index, I) = Quest(QuestNum).Task(ActualTask).Item Then
@@ -795,7 +795,7 @@ Public Module ServerQuest
                     Next
                 End If
 
-            Case QUEST_TYPE_GOKILL 'Kill X amount of players.
+            Case QuestType.Kill 'Kill X amount of players.
                 Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
                 If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
                     QuestMessage(Index, QuestNum, Trim$(Quest(QuestNum).Task(ActualTask).TaskLog) & " - Task completed", 0)
@@ -806,7 +806,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOTRAIN 'Hit X amount of times X resource.
+            Case QuestType.Gather 'Hit X amount of times X resource.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).Resource Then
                     Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount = Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount + 1
                     If Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).CurrentCount >= Quest(QuestNum).Task(ActualTask).Amount Then
@@ -819,7 +819,7 @@ Public Module ServerQuest
                     End If
                 End If
 
-            Case QUEST_TYPE_GOGET 'Get X amount of X item from X npc.
+            Case QuestType.Fetch 'Get X amount of X item from X npc.
                 If TargetIndex = Quest(QuestNum).Task(ActualTask).NPC Then
                     GiveInvItem(Index, Quest(QuestNum).Task(ActualTask).Item, Quest(QuestNum).Task(ActualTask).Amount)
                     QuestMessage(Index, QuestNum, Quest(QuestNum).Task(ActualTask).Speech, 0)
@@ -865,9 +865,9 @@ Public Module ServerQuest
 
         'Check if quest is repeatable, set it as completed
         If Quest(QuestNum).Repeat = True Then
-            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.Repeatable
         Else
-            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QUEST_COMPLETED
+            Player(Index).Character(TempPlayer(Index).CurChar).PlayerQuest(QuestNum).Status = QuestStatus.Completed
         End If
         PlayerMsg(Index, Trim$(Quest(QuestNum).Name) & ": quest completed", ColorType.BrightGreen)
 

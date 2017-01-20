@@ -191,6 +191,7 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.optLight = New DarkUI.Controls.DarkRadioButton()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -290,8 +291,8 @@ Partial Class FrmEditor_MapEditor
         '
         'DarkSectionPanel1
         '
-        Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlDirBlock)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlEvents)
@@ -454,6 +455,7 @@ Partial Class FrmEditor_MapEditor
         'pnlAttribute
         '
         Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlAttribute.Controls.Add(Me.optLight)
         Me.pnlAttribute.Controls.Add(Me.btnClearAttribute)
         Me.pnlAttribute.Controls.Add(Me.optHouse)
         Me.pnlAttribute.Controls.Add(Me.optShop)
@@ -2023,6 +2025,16 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
+        'optLight
+        '
+        Me.optLight.AutoSize = True
+        Me.optLight.Location = New System.Drawing.Point(235, 138)
+        Me.optLight.Name = "optLight"
+        Me.optLight.Size = New System.Drawing.Size(48, 17)
+        Me.optLight.TabIndex = 16
+        Me.optLight.TabStop = True
+        Me.optLight.Text = "Light"
+        '
         'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2265,4 +2277,5 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents tsCurFps As ToolStripStatusLabel
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents tsbScreenShot As ToolStripButton
+    Friend WithEvents optLight As DarkUI.Controls.DarkRadioButton
 End Class

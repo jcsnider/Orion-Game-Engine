@@ -137,13 +137,13 @@ Public Module ServerProjectiles
 
 #Region "Incoming"
     Sub HandleRequestEditProjectiles(ByVal Index As Integer, ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         ' Prevent hacking
         If GetPlayerAccess(Index) < AdminType.Developer Then Exit Sub
 
-        Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SProjectileEditor)
+
         SendDataTo(Index, Buffer.ToArray())
         Buffer = Nothing
 
@@ -151,9 +151,8 @@ Public Module ServerProjectiles
 
     Sub HandleSaveProjectile(ByVal Index As Integer, ByVal data() As Byte)
         Dim ProjectileNum As Integer
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
 
-        Buffer = New ByteBuffer
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> EditorPackets.SaveProjectile Then Exit Sub

@@ -13,7 +13,7 @@ Module EditorGraphics
 
     Public TmpItemWindow As RenderWindow
 
-    Public SFMLGameFont As SFML.Graphics.Font
+    Public SFMLGameFont As Font
 
     'TileSets
     Public TileSetImgsGFX() As Bitmap
@@ -89,6 +89,14 @@ Module EditorGraphics
     Public NumFaces As Integer
     Public NumFogs As Integer
 
+    Public NightGfx As New RenderTexture(245, 245)
+    Public NightSprite As Sprite
+    Public NightGfxInfo As GraphicInfo
+
+    Public LightGfx As Texture
+    Public LightSprite As Sprite
+    Public LightGfxInfo As GraphicInfo
+
     Public Structure GraphicInfo
         Dim width As Integer
         Dim height As Integer
@@ -112,7 +120,7 @@ Module EditorGraphics
         EditorAnimation_Anim1 = New RenderWindow(FrmEditor_Animation.picSprite0.Handle)
         EditorAnimation_Anim2 = New RenderWindow(FrmEditor_Animation.picSprite1.Handle)
 
-        SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
+        SFMLGameFont = New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
         'this stuff only loads when needed :)
 
@@ -193,6 +201,16 @@ Module EditorGraphics
             'Cache the width and height
             WeatherGFXInfo.width = WeatherGFX.Size.X
             WeatherGFXInfo.height = WeatherGFX.Size.Y
+        End If
+
+        LightGfxInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
+            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
+            LightSprite = New Sprite(LightGfx)
+
+            'Cache the width and height
+            LightGfxInfo.width = LightGfx.Size.X
+            LightGfxInfo.height = LightGfx.Size.Y
         End If
 
     End Sub

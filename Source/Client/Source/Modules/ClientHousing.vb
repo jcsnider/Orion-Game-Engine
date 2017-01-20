@@ -41,9 +41,8 @@ Public Module ClientHousing
 
 #Region "Incoming Packets"
     Sub Packet_HouseConfigurations(ByVal Data() As Byte)
-        Dim buffer As ByteBuffer, i As Integer
+        Dim buffer As New ByteBuffer, i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -55,14 +54,14 @@ Public Module ClientHousing
             HouseConfig(i).MaxFurniture = buffer.ReadInteger
             HouseConfig(i).Price = buffer.ReadInteger
         Next
+
         buffer = Nothing
 
     End Sub
 
     Sub Packet_HouseOffer(ByVal Data() As Byte)
-        Dim buffer As ByteBuffer, i As Integer
+        Dim buffer As New ByteBuffer, i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -91,9 +90,8 @@ Public Module ClientHousing
     End Sub
 
     Sub Packet_Visit(ByVal Data() As Byte)
-        Dim buffer As ByteBuffer, i As Integer
+        Dim buffer As New ByteBuffer, i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(Data)
 
         ' Confirm it is the right packet
@@ -114,9 +112,7 @@ Public Module ClientHousing
     End Sub
 
     Sub Packet_Furniture(ByVal Data() As Byte)
-        Dim buffer As ByteBuffer, i As Integer
-
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer, i As Integer
 
         buffer.WriteBytes(Data)
 
@@ -140,10 +136,9 @@ Public Module ClientHousing
     End Sub
 
     Sub Packet_EditHouses(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
@@ -169,47 +164,42 @@ Public Module ClientHousing
 
 #Region "Outgoing Packets"
     Public Sub SendRequestEditHouse()
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(EditorPackets.RequestEditHouse)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
 
     End Sub
 
     Public Sub SendBuyHouse(ByVal Accepted As Byte)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CBuyHouse)
         buffer.WriteInteger(Accepted)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
     End Sub
 
     Public Sub SendInvite(ByVal Name As String)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CVisit)
         buffer.WriteString(Name)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
     End Sub
 
     Public Sub SendVisit(ByVal Accepted As Byte)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CAcceptVisit)
         buffer.WriteInteger(Accepted)
-        SendData(buffer.ToArray)
 
+        SendData(buffer.ToArray)
         buffer = Nothing
     End Sub
 #End Region

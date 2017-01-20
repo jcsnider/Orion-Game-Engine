@@ -395,23 +395,23 @@ Public Module ServerCombat
                                     PlayerMsg(Attacker, Trim$(Npc(NpcNum).Name) & ": " & Trim$(Npc(NpcNum).AttackSay), ColorType.Yellow)
                                     Exit Function
                                 ElseIf Not CanStartQuest(Attacker, Npc(NpcNum).QuestNum) And Not QuestInProgress(Attacker, Npc(NpcNum).QuestNum) Then
-                                    CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
-                                    CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
-                                    CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Talk, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Give, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Fetch, NpcNum)
                                     Exit Function
                                 ElseIf QuestInProgress(Attacker, Npc(NpcNum).QuestNum) Then
-                                    CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
-                                    CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
-                                    CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Talk, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Give, NpcNum)
+                                    CheckTasks(Attacker, QuestType.Fetch, NpcNum)
                                     Exit Function
                                 Else
                                     ShowQuest(Attacker, Npc(NpcNum).QuestNum)
                                     Exit Function
                                 End If
                             ElseIf Npc(NpcNum).Behaviour = NpcBehavior.Friendly Or Npc(NpcNum).Behaviour = NpcBehavior.ShopKeeper Then
-                                CheckTasks(Attacker, QUEST_TYPE_GOTALK, NpcNum)
-                                CheckTasks(Attacker, QUEST_TYPE_GOGIVE, NpcNum)
-                                CheckTasks(Attacker, QUEST_TYPE_GOGET, NpcNum)
+                                CheckTasks(Attacker, QuestType.Talk, NpcNum)
+                                CheckTasks(Attacker, QuestType.Give, NpcNum)
+                                CheckTasks(Attacker, QuestType.Fetch, NpcNum)
                                 'Exit Function
                             End If
                             If Len(Trim$(Npc(NpcNum).AttackSay)) > 0 Then
@@ -1368,7 +1368,7 @@ Public Module ServerCombat
         OnDeath(Victim)
 
         ' Handle our quest system stuff.
-        CheckTasks(Attacker, QUEST_TYPE_GOKILL, 0)
+        CheckTasks(Attacker, QuestType.Kill, 0)
     End Sub
 
     Public Sub HandlePlayerKillNpc(ByVal MapNum As Integer, ByVal Index As Integer, ByVal MapNpcNum As Integer)
@@ -1382,7 +1382,7 @@ Public Module ServerCombat
         DropNpcItems(MapNum, MapNpcNum)
 
         ' Handle quest tasks related to NPC death
-        CheckTasks(Index, QUEST_TYPE_GOSLAY, MapNpc(MapNum).Npc(MapNpcNum).Num)
+        CheckTasks(Index, QuestType.Slay, MapNpc(MapNum).Npc(MapNpcNum).Num)
 
         ' Set our NPC's data to default so we know it's dead.
         MapNpc(MapNum).Npc(MapNpcNum).Num = 0

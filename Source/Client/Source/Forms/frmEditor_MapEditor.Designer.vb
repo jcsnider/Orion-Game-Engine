@@ -172,6 +172,7 @@ Partial Class frmEditor_MapEditor
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.optLight = New System.Windows.Forms.RadioButton()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -1060,6 +1061,7 @@ Partial Class frmEditor_MapEditor
         '
         'tpAttributes
         '
+        Me.tpAttributes.Controls.Add(Me.optLight)
         Me.tpAttributes.Controls.Add(Me.optCraft)
         Me.tpAttributes.Controls.Add(Me.optHouse)
         Me.tpAttributes.Controls.Add(Me.btnClearAttribute)
@@ -1674,6 +1676,17 @@ Partial Class frmEditor_MapEditor
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
         '
+        'optLight
+        '
+        Me.optLight.AutoSize = True
+        Me.optLight.Location = New System.Drawing.Point(237, 85)
+        Me.optLight.Name = "optLight"
+        Me.optLight.Size = New System.Drawing.Size(48, 17)
+        Me.optLight.TabIndex = 18
+        Me.optLight.TabStop = True
+        Me.optLight.Text = "Light"
+        Me.optLight.UseVisualStyleBackColor = True
+        '
         'frmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1892,4 +1905,5 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents tsbClear As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents chkInstance As Windows.Forms.CheckBox
+    Friend WithEvents optLight As Windows.Forms.RadioButton
 End Class

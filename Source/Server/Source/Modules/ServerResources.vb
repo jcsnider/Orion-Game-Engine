@@ -87,7 +87,7 @@ Public Module ServerResources
                                     SendActionMsg(GetPlayerMap(Index), "-" & Damage, ColorType.BrightRed, 1, (rX * 32), (rY * 32))
                                     SendAnimation(GetPlayerMap(Index), Resource(Resource_index).Animation, rX, rY)
                                 End If
-                                CheckTasks(Index, QUEST_TYPE_GOTRAIN, Resource_index)
+                                CheckTasks(Index, QuestType.Gather, Resource_index)
                             Else
                                 ' too weak
                                 SendActionMsg(GetPlayerMap(Index), "Miss!", ColorType.BrightRed, 1, (rX * 32), (rY * 32))
@@ -99,7 +99,7 @@ Public Module ServerResources
                         PlayerMsg(Index, "You have the wrong type of tool equiped.", ColorType.Yellow)
                     End If
                 Else
-                    PlayerMsg(Index, "You need a tool to interact with this resource.", ColorType.Yellow)
+                    PlayerMsg(Index, "You need a tool to gather this resource.", ColorType.Yellow)
                 End If
             End If
         End If

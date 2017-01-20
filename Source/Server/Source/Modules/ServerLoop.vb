@@ -1075,7 +1075,7 @@ Module ServerLoop
                     HandlePlayerKilledPK(Index, Target)
 
                     ' Handle our quest system stuff.
-                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                    CheckTasks(Index, QuestType.Kill, 0)
                 End If
             Case Else
                 Throw New NotImplementedException()
@@ -1137,7 +1137,7 @@ Module ServerLoop
                     HandlePlayerKilledPK(Index, id)
 
                     ' Handle our quest system stuff.
-                    CheckTasks(Index, QUEST_TYPE_GOKILL, 0)
+                    CheckTasks(Index, QuestType.Kill, 0)
                 End If
             End If
         Next

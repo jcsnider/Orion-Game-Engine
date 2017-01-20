@@ -16,9 +16,8 @@ Module ClientParties
 
 #Region "Incoming Packets"
     Sub Packet_PartyInvite(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer, Name As String
+        Dim Buffer As New ByteBuffer, Name As String
 
-        Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ServerPackets.SPartyInvite Then Exit Sub
@@ -36,9 +35,8 @@ Module ClientParties
     End Sub
 
     Sub Packet_PartyUpdate(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer, I As Integer, InParty As Integer
+        Dim Buffer As New ByteBuffer, I As Integer, InParty As Integer
 
-        Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ServerPackets.SPartyUpdate Then Exit Sub
@@ -47,7 +45,7 @@ Module ClientParties
 
         ' exit out if we're not in a party
         If InParty = 0 Then
-            ClearPartie()
+            ClearParty()
             ' exit out early
             Buffer = Nothing
             Exit Sub
@@ -64,10 +62,9 @@ Module ClientParties
     End Sub
 
     Sub Packet_PartyVitals(ByVal Data() As Byte)
-        Dim Buffer As ByteBuffer
+        Dim Buffer As New ByteBuffer
         Dim playerNum As Integer, partyIndex As Integer
 
-        Buffer = New ByteBuffer
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ServerPackets.SPartyVitals Then Exit Sub
@@ -101,41 +98,43 @@ Module ClientParties
 
 #Region "Outgoing Packets"
     Public Sub SendPartyRequest(ByVal Name As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
         Buffer.WriteInteger(ClientPackets.CRequestParty)
         Buffer.WriteString(Name)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendAcceptParty()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CAcceptParty)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendDeclineParty()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CDeclineParty)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendLeaveParty()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteInteger(ClientPackets.CLeaveParty)
+
         SendData(Buffer.ToArray())
         Buffer = Nothing
     End Sub
 
     Public Sub SendPartyChatMsg(ByVal Text As String)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(ClientPackets.CPartyChatMsg)
         Buffer.WriteString(Text)
@@ -145,7 +144,7 @@ Module ClientParties
     End Sub
 #End Region
 
-    Sub ClearPartie()
+    Sub ClearParty()
         Party = New PartyRec
         Party.Leader = 0
         Party.MemberCount = 0

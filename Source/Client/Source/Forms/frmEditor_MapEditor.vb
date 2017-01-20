@@ -709,8 +709,7 @@ Public Class frmEditor_MapEditor
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
             If tabpages.SelectedTab Is tpTiles Then
-                ' (EditorTileSelEnd.X - EditorTileSelStart.X) = 1 And (EditorTileSelEnd.Y - EditorTileSelStart.Y) = 1 Then 'single tile
-                If EditorTileWidth = 1 And EditorTileHeight = 1 Then
+                If EditorTileWidth = 1 And EditorTileHeight = 1 Then 'single tile
 
                     MapEditorSetTile(CurX, CurY, CurLayer, False, cmbAutoTile.SelectedIndex)
                 Else ' multi tile!
@@ -818,6 +817,13 @@ Public Class frmEditor_MapEditor
                     'craft tile
                     If optCraft.Checked Then
                         .Type = TileType.Craft
+                        .Data1 = 0
+                        .Data2 = 0
+                        .Data3 = 0
+                    End If
+                    'light
+                    If optLight.Checked Then
+                        .Type = TileType.Light
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0

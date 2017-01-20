@@ -6,19 +6,20 @@
     'Public Const MAX_REQUIREMENTS As Byte = 10
     Public Const EDITOR_TASKS As Byte = 7
 
-    Public Const QUEST_TYPE_GOSLAY As Byte = 1
-    Public Const QUEST_TYPE_GOGATHER As Byte = 2
-    Public Const QUEST_TYPE_GOTALK As Byte = 3
-    Public Const QUEST_TYPE_GOREACH As Byte = 4
-    Public Const QUEST_TYPE_GOGIVE As Byte = 5
-    Public Const QUEST_TYPE_GOKILL As Byte = 6
-    Public Const QUEST_TYPE_GOTRAIN As Byte = 7
-    Public Const QUEST_TYPE_GOGET As Byte = 8
+    'Public Const QUEST_TYPE_GOSLAY As Byte = 1
+    'Public Const QUEST_TYPE_GOCOLLECT As Byte = 2
+    'Public Const QUEST_TYPE_GOTALK As Byte = 3
+    'Public Const QUEST_TYPE_GOREACH As Byte = 4
+    'Public Const QUEST_TYPE_GOGIVE As Byte = 5
+    'Public Const QUEST_TYPE_GOKILL As Byte = 6
+    'Public Const QUEST_TYPE_GOGATHER As Byte = 7
+    'Public Const QUEST_TYPE_GOFETCH As Byte = 8
+    'Public Const QUEST_TYPE_TALKEVENT As Byte = 9
 
-    Public Const QUEST_NOT_STARTED As Byte = 0
-    Public Const QUEST_STARTED As Byte = 1
-    Public Const QUEST_COMPLETED As Byte = 2
-    Public Const QUEST_COMPLETED_BUT As Byte = 3
+    'Public Const QUEST_NOT_STARTED As Byte = 0
+    'Public Const QUEST_STARTED As Byte = 1
+    'Public Const QUEST_COMPLETED As Byte = 2
+    'Public Const QUEST_REPEATABLE As Byte = 3
 
     Public QuestLogPage As Integer
     Public QuestNames(MAX_ACTIVEQUESTS) As String
@@ -170,9 +171,8 @@
 
 #Region "Incoming Packets"
     Public Sub Packet_QuestEditor(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SQuestEditor Then Exit Sub
@@ -184,9 +184,8 @@
 
     Public Sub Packet_UpdateQuest(ByVal data() As Byte)
         Dim QuestNum As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SUpdateQuest Then Exit Sub
@@ -245,10 +244,9 @@
     End Sub
 
     Public Sub Packet_PlayerQuest(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim QuestNum As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SPlayerQuest Then Exit Sub
@@ -265,10 +263,9 @@
     End Sub
 
     Public Sub Packet_PlayerQuests(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim I As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SPlayerQuests Then Exit Sub
@@ -285,9 +282,8 @@
     End Sub
 
     Public Sub Packet_QuestMessage(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SQuestMessage Then Exit Sub
@@ -304,109 +300,44 @@
 #End Region
 
 #Region "Outgoing Packets"
-    'Public Sub SendRequestEditQuest()
-    '    Dim buffer As ByteBuffer
-
-    '    buffer = New ByteBuffer
-    '    buffer.WriteInteger(ClientPackets.CRequestEditQuest)
-    '    SendData(buffer.ToArray)
-    '    buffer = Nothing
-
-    'End Sub
-
-    'Public Sub SendSaveQuest(ByVal QuestNum As Integer)
-    '    Dim buffer As ByteBuffer
-
-    '    buffer = New ByteBuffer
-
-    '    buffer.WriteInteger(ClientPackets.CSaveQuest)
-    '    buffer.WriteInteger(QuestNum)
-
-    '    buffer.WriteString(Trim(Quest(QuestNum).Name))
-    '    buffer.WriteString(Trim(Quest(QuestNum).QuestLog))
-    '    buffer.WriteInteger(Quest(QuestNum).Repeat)
-    '    buffer.WriteInteger(Quest(QuestNum).Cancelable)
-
-    '    buffer.WriteInteger(Quest(QuestNum).ReqCount)
-    '    For I = 1 To Quest(QuestNum).ReqCount
-    '        buffer.WriteInteger(Quest(QuestNum).Requirement(I))
-    '        buffer.WriteInteger(Quest(QuestNum).RequirementIndex(I))
-    '    Next
-
-    '    buffer.WriteInteger(Quest(QuestNum).QuestGiveItem)
-    '    buffer.WriteInteger(Quest(QuestNum).QuestGiveItemValue)
-    '    buffer.WriteInteger(Quest(QuestNum).QuestRemoveItem)
-    '    buffer.WriteInteger(Quest(QuestNum).QuestRemoveItemValue)
-
-    '    For I = 1 To 3
-    '        buffer.WriteString(Trim(Quest(QuestNum).Chat(I)))
-    '    Next
-
-    '    buffer.WriteInteger(Quest(QuestNum).RewardCount)
-    '    For i = 1 To Quest(QuestNum).RewardCount
-    '        buffer.WriteInteger(Quest(QuestNum).RewardItem(i))
-    '        buffer.WriteInteger(Quest(QuestNum).RewardItemAmount(i))
-    '    Next
-
-    '    buffer.WriteInteger(Quest(QuestNum).RewardExp)
-
-    '    buffer.WriteInteger(Quest(QuestNum).TaskCount)
-    '    For I = 1 To Quest(QuestNum).TaskCount
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Order)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Npc)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Item)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Map)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Resource)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).Amount)
-    '        buffer.WriteString(Trim(Quest(QuestNum).Task(I).Speech))
-    '        buffer.WriteString(Trim(Quest(QuestNum).Task(I).TaskLog))
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).QuestEnd)
-    '        buffer.WriteInteger(Quest(QuestNum).Task(I).TaskType)
-    '    Next
-
-    '    SendData(buffer.ToArray)
-    '    buffer = Nothing
-
-    'End Sub
 
     Sub SendRequestQuests()
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteInteger(ClientPackets.CRequestQuests)
+
         SendData(buffer.ToArray)
         buffer = Nothing
 
     End Sub
 
     Public Sub UpdateQuestLog()
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteInteger(ClientPackets.CQuestLogUpdate)
+
         SendData(buffer.ToArray)
         buffer = Nothing
 
     End Sub
 
     Public Sub PlayerHandleQuest(ByVal QuestNum As Integer, ByVal Order As Integer)
-        Dim buffer As ByteBuffer
-
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CPlayerHandleQuest)
         buffer.WriteInteger(QuestNum)
         buffer.WriteInteger(Order) '1=accept quest, 2=cancel quest
+
         SendData(buffer.ToArray)
         buffer = Nothing
     End Sub
 
     Public Sub QuestReset(ByVal QuestNum As Integer)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteInteger(ClientPackets.CQuestReset)
         buffer.WriteInteger(QuestNum)
+
         SendData(buffer.ToArray)
         buffer = Nothing
 
@@ -419,7 +350,7 @@
         QuestInProgress = False
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
 
-        If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_STARTED Then 'Status=1 means started
+        If Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.Started Then 'Status=1 means started
             QuestInProgress = True
         End If
     End Function
@@ -428,7 +359,7 @@
         QuestCompleted = False
         If QuestNum < 1 Or QuestNum > MAX_QUESTS Then Exit Function
 
-        If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED Or Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
+        If Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.Completed Or Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.Repeatable Then
             QuestCompleted = True
         End If
     End Function
@@ -456,7 +387,7 @@
         If QuestInProgress(QuestNum) Then Exit Function
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
-        If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED_BUT Then
+        If Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.NotStarted Or Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.Repeatable Then
 
             For i = 1 To Quest(QuestNum).ReqCount
                 'Check if item is needed
@@ -471,7 +402,7 @@
                 'Check if previous quest is needed
                 If Quest(QuestNum).Requirement(i) = 2 Then
                     If Quest(QuestNum).RequirementIndex(i) > 0 And Quest(QuestNum).RequirementIndex(i) <= MAX_QUESTS Then
-                        If Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QUEST_NOT_STARTED Or Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QUEST_STARTED Then
+                        If Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QuestStatus.NotStarted Or Player(MyIndex).PlayerQuest(Quest(QuestNum).RequirementIndex(i)).Status = QuestStatus.Started Then
                             Exit Function
                         End If
                     End If
@@ -579,12 +510,12 @@
         End If
 
         'Quest Status
-        If Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_STARTED Then
-            QuestStatus2Text = "Quest Started"
-            AbandonQuestText = "Cancel Quest"
+        If Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.Started Then
+            QuestStatus2Text = Strings.Get("quests", "queststarted")
+            AbandonQuestText = Strings.Get("quests", "questcancel")
             AbandonQuestVisible = True
-        ElseIf Player(MyIndex).PlayerQuest(QuestNum).Status = QUEST_COMPLETED Then
-            QuestStatus2Text = "Quest Completed"
+        ElseIf Player(MyIndex).PlayerQuest(QuestNum).Status = QuestStatus.COMPLETED Then
+            QuestStatus2Text = Strings.Get("quests", "questcomplete")
             AbandonQuestVisible = False
         Else
             QuestStatus2Text = "???"
@@ -593,49 +524,49 @@
 
         Select Case Quest(QuestNum).Task(CurTask).TaskType
                 'defeat x amount of Npc
-            Case QUEST_TYPE_GOSLAY
+            Case QuestType.Slay
                 Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
                 Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-                ActualTaskText = "Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
+                ActualTaskText = Strings.Get("quests", "questgoslay", CurCount, MaxAmount, NpcName)'"Defeat " & CurCount & "/" & MaxAmount & " " & NpcName
                 'gather x amount of items
-            Case QUEST_TYPE_GOGATHER
+            Case QuestType.Collect
                 Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                ActualTaskText = "Collect " & CurCount & "/" & MaxAmount & " " & ItemName
+                ActualTaskText = Strings.Get("quests", "questgocollect", CurCount, MaxAmount, ItemName)'"Collect " & CurCount & "/" & MaxAmount & " " & ItemName
                 'go talk to npc
-            Case QUEST_TYPE_GOTALK
+            Case QuestType.Talk
                 Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
-                ActualTaskText = "Go talk to  " & NpcName
+                ActualTaskText = Strings.Get("quests", "questtalkto", NpcName)'"Go talk to  " & NpcName
                 'reach certain map
-            Case QUEST_TYPE_GOREACH
+            Case QuestType.Reach
                 Dim MapName As String = MapNames(Quest(QuestNum).Task(CurTask).Map)
-                ActualTaskText = "Go to " & MapName
-            Case QUEST_TYPE_GOGIVE
+                ActualTaskText = Strings.Get("quests", "questgoto", MapName)'"Go to " & MapName
+            Case QuestType.Give
                 'give x amount of items to npc
                 Dim NpcName As String = Npc(Quest(QuestNum).Task(CurTask).Npc).Name
                 Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                ActualTaskText = "Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
+                ActualTaskText = Strings.Get("quests", "questgive", NpcName, ItemName, CurCount, MaxAmount)'"Give " & NpcName & " the " & ItemName & CurCount & "/" & MaxAmount & " they requested"
                 'defeat certain amount of players
-            Case QUEST_TYPE_GOKILL
+            Case QuestType.Kill
                 Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
-                ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
+                ActualTaskText = Strings.Get("quests", "questkill", CurCount, MaxAmount)'"Defeat " & CurCount & "/" & MaxAmount & " Players in Battle"
                 'go collect resources
-            Case QUEST_TYPE_GOTRAIN
+            Case QuestType.Gather
                 Dim CurCount As Integer = Player(MyIndex).PlayerQuest(QuestNum).CurrentCount
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
                 Dim ResourceName As String = Resource(Quest(QuestNum).Task(CurTask).Resource).Name
-                ActualTaskText = "Defeat " & MaxAmount & " Players in Battle " & CurCount & "/" & MaxAmount
-                'collect x amount of items from npc
-            Case QUEST_TYPE_GOGET
+                ActualTaskText = Strings.Get("quests", "questgather", CurCount, MaxAmount, ResourceName)'"Gather " & CurCount & "/" & MaxAmount & " " & ResourceName
+                'fetch x amount of items from npc
+            Case QuestType.Fetch
                 Dim NpcName As String = Item(Quest(QuestNum).Task(CurTask).Npc).Name
                 Dim MaxAmount As Integer = Quest(QuestNum).Task(CurTask).Amount
                 Dim ItemName As String = Item(Quest(QuestNum).Task(CurTask).Item).Name
-                ActualTaskText = "Collect " & ItemName & "X" & MaxAmount & " from " & NpcName
+                ActualTaskText = Strings.Get("quests", "questfetch", ItemName, MaxAmount, NpcName) '"Fetch " & ItemName & "X" & MaxAmount & " from " & NpcName
             Case Else
                 'ToDo
                 ActualTaskText = "errr..."
