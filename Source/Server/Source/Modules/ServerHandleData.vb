@@ -2560,6 +2560,7 @@ Module ServerHandleData
 
             ' clear out their trade offers
             ReDim TempPlayer(index).TradeOffer(MAX_INV)
+            ReDim TempPlayer(tradetarget).TradeOffer(MAX_INV)
             For i = 1 To MAX_INV
                 TempPlayer(index).TradeOffer(i).Num = 0
                 TempPlayer(index).TradeOffer(i).Value = 0
@@ -2714,6 +2715,12 @@ Module ServerHandleData
                 Exit Sub
             End If
         Next
+
+        'have the amount needed?
+        If GetPlayerInvItemValue(index, invslot) < amount Then
+            PlayerMsg(index, "You dont have enough!.", ColorType.Yellow)
+            Exit Sub
+        End If
 
         ' find open slot
         For i = 1 To MAX_INV

@@ -175,6 +175,8 @@ Public Class FrmMainGame
                     DepositItem(tmpCurrencyItem, Val(txtCurrency.Text))
                 Case 3 ' withdraw item
                     WithdrawItem(tmpCurrencyItem, Val(txtCurrency.Text))
+                Case 4 ' trade item
+                    TradeItem(tmpCurrencyItem, Val(txtCurrency.Text))
             End Select
         End If
 

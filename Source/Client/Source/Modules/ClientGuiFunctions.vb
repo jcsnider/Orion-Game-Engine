@@ -759,7 +759,13 @@ Public Module ClientGuiFunctions
                             End If
                         Next
                         If Item(GetPlayerInvItemNum(MyIndex, InvNum)).Type = ItemType.Currency Or Item(GetPlayerInvItemNum(MyIndex, InvNum)).Stackable = 1 Then
-                            ' currency shit here brah
+                            CurrencyMenu = 4 ' trade
+                            FrmMainGame.lblCurrency.Text = "How many do you want to trade?"
+                            tmpCurrencyItem = InvNum
+                            FrmMainGame.txtCurrency.Text = ""
+                            FrmMainGame.pnlCurrency.Visible = True
+                            FrmMainGame.pnlCurrency.BringToFront()
+                            FrmMainGame.txtCurrency.Focus()
                             Exit Function
                         End If
                         TradeItem(InvNum, 0)

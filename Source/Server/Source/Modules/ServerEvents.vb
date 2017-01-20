@@ -1860,6 +1860,7 @@ Public Module ServerEvents
         If Buffer.ReadInteger <> ClientPackets.CEventTouch Then Exit Sub
 
         i = Buffer.ReadInteger
+        If i > TempPlayer(Index).EventMap.EventPages.Length - 1 Then Exit Sub
         If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(i).PageID).Trigger = 1 Then
             'Process this event, it is on-touch and everything checks out.
             If Map(GetPlayerMap(Index)).Events(TempPlayer(Index).EventMap.EventPages(i).EventID).Pages(TempPlayer(Index).EventMap.EventPages(TempPlayer(Index).EventMap.EventPages(i).EventID).PageID).CommandListCount > 0 Then

@@ -155,7 +155,7 @@
     <string id="tradeinvite">{0} invites you to a trade!</string>
     <string id="tradeworth">Total Worth: {0} g</string>
     <string id="tradestatusok">Other player has accepted.</string>
-    <string id="tradestatuswait">Other player has accepted.</string>
+    <string id="tradestatuswait">You accepted the trade.</string>
   </trade>
 
   <events>

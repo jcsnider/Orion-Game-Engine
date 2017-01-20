@@ -21,10 +21,10 @@
     Public Structure RandInvRec
         Dim Prefix As String
         Dim Suffix As String
-        Dim Stat() As Long
-        Dim Rarity As Long
-        Dim Damage As Long
-        Dim Speed As Long
+        Dim Stat() As Integer
+        Dim Rarity As Integer
+        Dim Damage As Integer
+        Dim Speed As Integer
     End Structure
 
     Public Structure OptionsRec
