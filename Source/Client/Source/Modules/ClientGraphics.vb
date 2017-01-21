@@ -1792,7 +1792,6 @@ Module ClientGraphics
                         DrawDoor(X, Y)
                     End If
                 End If
-
             Next
         Next
 
@@ -2227,7 +2226,7 @@ Module ClientGraphics
         x2 = (X * PIC_X)
         y2 = (Y * PIC_Y) - (DoorGFXInfo.Height / 2) + 4
 
-        RenderSprite(DoorSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+        RenderSprite(DoorSprite, GameWindow, ConvertMapX(X * PIC_X), ConvertMapY((Y * PIC_Y) - PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
 
     End Sub
 

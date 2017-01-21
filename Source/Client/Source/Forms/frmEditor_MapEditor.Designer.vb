@@ -112,6 +112,7 @@ Partial Class frmEditor_MapEditor
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmbTileSets = New System.Windows.Forms.ComboBox()
         Me.tpAttributes = New System.Windows.Forms.TabPage()
+        Me.optLight = New System.Windows.Forms.RadioButton()
         Me.optCraft = New System.Windows.Forms.RadioButton()
         Me.tpNpcs = New System.Windows.Forms.TabPage()
         Me.fraNpcs = New System.Windows.Forms.GroupBox()
@@ -172,7 +173,6 @@ Partial Class frmEditor_MapEditor
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.optLight = New System.Windows.Forms.RadioButton()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -737,6 +737,7 @@ Partial Class frmEditor_MapEditor
         '
         Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbHeal.FormattingEnabled = True
+        Me.cmbHeal.Items.AddRange(New Object() {"Heal HP", "Heal MP"})
         Me.cmbHeal.Location = New System.Drawing.Point(6, 19)
         Me.cmbHeal.Name = "cmbHeal"
         Me.cmbHeal.Size = New System.Drawing.Size(155, 21)
@@ -1085,6 +1086,17 @@ Partial Class frmEditor_MapEditor
         Me.tpAttributes.TabIndex = 3
         Me.tpAttributes.Text = "Attributes"
         Me.tpAttributes.UseVisualStyleBackColor = True
+        '
+        'optLight
+        '
+        Me.optLight.AutoSize = True
+        Me.optLight.Location = New System.Drawing.Point(237, 85)
+        Me.optLight.Name = "optLight"
+        Me.optLight.Size = New System.Drawing.Size(48, 17)
+        Me.optLight.TabIndex = 18
+        Me.optLight.TabStop = True
+        Me.optLight.Text = "Light"
+        Me.optLight.UseVisualStyleBackColor = True
         '
         'optCraft
         '
@@ -1675,17 +1687,6 @@ Partial Class frmEditor_MapEditor
         Me.Label13.Size = New System.Drawing.Size(239, 13)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
-        '
-        'optLight
-        '
-        Me.optLight.AutoSize = True
-        Me.optLight.Location = New System.Drawing.Point(237, 85)
-        Me.optLight.Name = "optLight"
-        Me.optLight.Size = New System.Drawing.Size(48, 17)
-        Me.optLight.TabIndex = 18
-        Me.optLight.TabStop = True
-        Me.optLight.Text = "Light"
-        Me.optLight.UseVisualStyleBackColor = True
         '
         'frmEditor_MapEditor
         '

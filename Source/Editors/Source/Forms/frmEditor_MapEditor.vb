@@ -700,6 +700,21 @@ Public Class FrmEditor_MapEditor
         End If
     End Sub
 
+    Private Sub OptDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
+        If optDoor.Checked = False Then Exit Sub
+
+        ClearAttributeDialogue()
+        pnlAttributes.Visible = True
+        fraMapWarp.Visible = True
+
+        scrlMapWarpMap.Maximum = MAX_MAPS
+        scrlMapWarpMap.Value = 1
+        scrlMapWarpX.Maximum = Byte.MaxValue
+        scrlMapWarpY.Maximum = Byte.MaxValue
+        scrlMapWarpX.Value = 0
+        scrlMapWarpY.Value = 0
+    End Sub
+
 #End Region
 
 End Class

@@ -85,6 +85,14 @@
                 Player(MyIndex).Moving = MovementType.Walking
             End If
 
+            If Map.Tile(GetPlayerX(MyIndex), GetPlayerY(MyIndex)).Type = TileType.Door Then
+                With TempTile(GetPlayerX(MyIndex), GetPlayerY(MyIndex))
+                    .DoorFrame = 1
+                    .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
+                    .DoorTimer = GetTickCount()
+                End With
+            End If
+
             Select Case GetPlayerDir(MyIndex)
                 Case Direction.Up
                     SendPlayerMove()
@@ -109,6 +117,7 @@
                     GettingMap = True
                 End If
             End If
+
         End If
     End Sub
 

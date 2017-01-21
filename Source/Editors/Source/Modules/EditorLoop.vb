@@ -16,6 +16,8 @@ Module EditorLoop
 
         'Strings.Init(1, "English")
 
+        ClearTempTile()
+
         ' set values for directional blocking arrows
         DirArrowX(1) = 12 ' up
         DirArrowY(1) = 0

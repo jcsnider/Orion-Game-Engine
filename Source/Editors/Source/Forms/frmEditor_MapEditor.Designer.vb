@@ -30,19 +30,8 @@ Partial Class FrmEditor_MapEditor
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsCurFps = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DarkSectionPanel1 = New DarkUI.Controls.DarkSectionPanel()
-        Me.pnlTiles = New System.Windows.Forms.Panel()
-        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.cmbLayers = New System.Windows.Forms.ComboBox()
-        Me.pnlBack = New System.Windows.Forms.Panel()
-        Me.picBackSelect = New System.Windows.Forms.PictureBox()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
-        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
-        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.pnlAttribute = New System.Windows.Forms.Panel()
+        Me.optLight = New DarkUI.Controls.DarkRadioButton()
         Me.btnClearAttribute = New DarkUI.Controls.DarkButton()
         Me.optHouse = New DarkUI.Controls.DarkRadioButton()
         Me.optShop = New DarkUI.Controls.DarkRadioButton()
@@ -59,6 +48,18 @@ Partial Class FrmEditor_MapEditor
         Me.optItem = New DarkUI.Controls.DarkRadioButton()
         Me.optWarp = New DarkUI.Controls.DarkRadioButton()
         Me.optBlocked = New DarkUI.Controls.DarkRadioButton()
+        Me.pnlTiles = New System.Windows.Forms.Panel()
+        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.cmbLayers = New System.Windows.Forms.ComboBox()
+        Me.pnlBack = New System.Windows.Forms.Panel()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
+        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
+        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.pnlNpc = New System.Windows.Forms.Panel()
         Me.cmbNpcList = New System.Windows.Forms.ComboBox()
         Me.lstMapNpc = New System.Windows.Forms.ListBox()
@@ -191,15 +192,14 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
-        Me.optLight = New DarkUI.Controls.DarkRadioButton()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
         Me.DarkSectionPanel1.SuspendLayout()
+        Me.pnlAttribute.SuspendLayout()
         Me.pnlTiles.SuspendLayout()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlAttribute.SuspendLayout()
         Me.pnlNpc.SuspendLayout()
         Me.pnlDirBlock.SuspendLayout()
         Me.pnlEvents.SuspendLayout()
@@ -291,7 +291,6 @@ Partial Class FrmEditor_MapEditor
         '
         'DarkSectionPanel1
         '
-        Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlDirBlock)
@@ -301,12 +300,210 @@ Partial Class FrmEditor_MapEditor
         Me.DarkSectionPanel1.Controls.Add(Me.btnNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.btnAttributes)
         Me.DarkSectionPanel1.Controls.Add(Me.btnTiles)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
         Me.DarkSectionPanel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.DarkSectionPanel1.Location = New System.Drawing.Point(0, 0)
         Me.DarkSectionPanel1.Name = "DarkSectionPanel1"
         Me.DarkSectionPanel1.SectionHeader = "Map Layers"
         Me.DarkSectionPanel1.Size = New System.Drawing.Size(318, 598)
         Me.DarkSectionPanel1.TabIndex = 7
+        '
+        'pnlAttribute
+        '
+        Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlAttribute.Controls.Add(Me.optLight)
+        Me.pnlAttribute.Controls.Add(Me.btnClearAttribute)
+        Me.pnlAttribute.Controls.Add(Me.optHouse)
+        Me.pnlAttribute.Controls.Add(Me.optShop)
+        Me.pnlAttribute.Controls.Add(Me.optNpcSpawn)
+        Me.pnlAttribute.Controls.Add(Me.optBank)
+        Me.pnlAttribute.Controls.Add(Me.optCraft)
+        Me.pnlAttribute.Controls.Add(Me.optTrap)
+        Me.pnlAttribute.Controls.Add(Me.optHeal)
+        Me.pnlAttribute.Controls.Add(Me.optKeyOpen)
+        Me.pnlAttribute.Controls.Add(Me.optKey)
+        Me.pnlAttribute.Controls.Add(Me.optDoor)
+        Me.pnlAttribute.Controls.Add(Me.optResource)
+        Me.pnlAttribute.Controls.Add(Me.optNpcAvoid)
+        Me.pnlAttribute.Controls.Add(Me.optItem)
+        Me.pnlAttribute.Controls.Add(Me.optWarp)
+        Me.pnlAttribute.Controls.Add(Me.optBlocked)
+        Me.pnlAttribute.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.pnlAttribute.Location = New System.Drawing.Point(2, 50)
+        Me.pnlAttribute.Name = "pnlAttribute"
+        Me.pnlAttribute.Size = New System.Drawing.Size(314, 548)
+        Me.pnlAttribute.TabIndex = 9
+        '
+        'optLight
+        '
+        Me.optLight.AutoSize = True
+        Me.optLight.Location = New System.Drawing.Point(235, 138)
+        Me.optLight.Name = "optLight"
+        Me.optLight.Size = New System.Drawing.Size(48, 17)
+        Me.optLight.TabIndex = 16
+        Me.optLight.TabStop = True
+        Me.optLight.Text = "Light"
+        '
+        'btnClearAttribute
+        '
+        Me.btnClearAttribute.Location = New System.Drawing.Point(10, 470)
+        Me.btnClearAttribute.Name = "btnClearAttribute"
+        Me.btnClearAttribute.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnClearAttribute.Size = New System.Drawing.Size(297, 23)
+        Me.btnClearAttribute.TabIndex = 15
+        Me.btnClearAttribute.Text = "Clear Attributes"
+        '
+        'optHouse
+        '
+        Me.optHouse.AutoSize = True
+        Me.optHouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optHouse.Location = New System.Drawing.Point(163, 139)
+        Me.optHouse.Name = "optHouse"
+        Me.optHouse.Size = New System.Drawing.Size(56, 17)
+        Me.optHouse.TabIndex = 14
+        Me.optHouse.Text = "House"
+        '
+        'optShop
+        '
+        Me.optShop.AutoSize = True
+        Me.optShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optShop.Location = New System.Drawing.Point(97, 139)
+        Me.optShop.Name = "optShop"
+        Me.optShop.Size = New System.Drawing.Size(50, 17)
+        Me.optShop.TabIndex = 13
+        Me.optShop.Text = "Shop"
+        '
+        'optNpcSpawn
+        '
+        Me.optNpcSpawn.AutoSize = True
+        Me.optNpcSpawn.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optNpcSpawn.Location = New System.Drawing.Point(10, 139)
+        Me.optNpcSpawn.Name = "optNpcSpawn"
+        Me.optNpcSpawn.Size = New System.Drawing.Size(81, 17)
+        Me.optNpcSpawn.TabIndex = 12
+        Me.optNpcSpawn.Text = "Npc Spawn"
+        '
+        'optBank
+        '
+        Me.optBank.AutoSize = True
+        Me.optBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optBank.Location = New System.Drawing.Point(235, 94)
+        Me.optBank.Name = "optBank"
+        Me.optBank.Size = New System.Drawing.Size(50, 17)
+        Me.optBank.TabIndex = 11
+        Me.optBank.Text = "Bank"
+        '
+        'optCraft
+        '
+        Me.optCraft.AutoSize = True
+        Me.optCraft.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optCraft.Location = New System.Drawing.Point(163, 94)
+        Me.optCraft.Name = "optCraft"
+        Me.optCraft.Size = New System.Drawing.Size(47, 17)
+        Me.optCraft.TabIndex = 10
+        Me.optCraft.Text = "Craft"
+        '
+        'optTrap
+        '
+        Me.optTrap.AutoSize = True
+        Me.optTrap.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optTrap.Location = New System.Drawing.Point(97, 94)
+        Me.optTrap.Name = "optTrap"
+        Me.optTrap.Size = New System.Drawing.Size(47, 17)
+        Me.optTrap.TabIndex = 9
+        Me.optTrap.Text = "Trap"
+        '
+        'optHeal
+        '
+        Me.optHeal.AutoSize = True
+        Me.optHeal.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optHeal.Location = New System.Drawing.Point(10, 94)
+        Me.optHeal.Name = "optHeal"
+        Me.optHeal.Size = New System.Drawing.Size(47, 17)
+        Me.optHeal.TabIndex = 8
+        Me.optHeal.Text = "Heal"
+        '
+        'optKeyOpen
+        '
+        Me.optKeyOpen.AutoSize = True
+        Me.optKeyOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optKeyOpen.Location = New System.Drawing.Point(235, 50)
+        Me.optKeyOpen.Name = "optKeyOpen"
+        Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
+        Me.optKeyOpen.TabIndex = 7
+        Me.optKeyOpen.Text = "Key Open"
+        '
+        'optKey
+        '
+        Me.optKey.AutoSize = True
+        Me.optKey.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optKey.Location = New System.Drawing.Point(163, 50)
+        Me.optKey.Name = "optKey"
+        Me.optKey.Size = New System.Drawing.Size(43, 17)
+        Me.optKey.TabIndex = 6
+        Me.optKey.Text = "Key"
+        '
+        'optDoor
+        '
+        Me.optDoor.AutoSize = True
+        Me.optDoor.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optDoor.Location = New System.Drawing.Point(97, 50)
+        Me.optDoor.Name = "optDoor"
+        Me.optDoor.Size = New System.Drawing.Size(48, 17)
+        Me.optDoor.TabIndex = 5
+        Me.optDoor.Text = "Door"
+        '
+        'optResource
+        '
+        Me.optResource.AutoSize = True
+        Me.optResource.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optResource.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.optResource.Location = New System.Drawing.Point(10, 50)
+        Me.optResource.Name = "optResource"
+        Me.optResource.Size = New System.Drawing.Size(71, 17)
+        Me.optResource.TabIndex = 4
+        Me.optResource.Text = "Resource"
+        '
+        'optNpcAvoid
+        '
+        Me.optNpcAvoid.AutoSize = True
+        Me.optNpcAvoid.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optNpcAvoid.Location = New System.Drawing.Point(235, 7)
+        Me.optNpcAvoid.Name = "optNpcAvoid"
+        Me.optNpcAvoid.Size = New System.Drawing.Size(75, 17)
+        Me.optNpcAvoid.TabIndex = 3
+        Me.optNpcAvoid.Text = "Npc Avoid"
+        '
+        'optItem
+        '
+        Me.optItem.AutoSize = True
+        Me.optItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optItem.Location = New System.Drawing.Point(163, 7)
+        Me.optItem.Name = "optItem"
+        Me.optItem.Size = New System.Drawing.Size(66, 17)
+        Me.optItem.TabIndex = 2
+        Me.optItem.Text = "MapItem"
+        '
+        'optWarp
+        '
+        Me.optWarp.AutoSize = True
+        Me.optWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optWarp.Location = New System.Drawing.Point(97, 7)
+        Me.optWarp.Name = "optWarp"
+        Me.optWarp.Size = New System.Drawing.Size(51, 17)
+        Me.optWarp.TabIndex = 1
+        Me.optWarp.Text = "Warp"
+        '
+        'optBlocked
+        '
+        Me.optBlocked.AutoSize = True
+        Me.optBlocked.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.optBlocked.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.optBlocked.Location = New System.Drawing.Point(10, 7)
+        Me.optBlocked.Name = "optBlocked"
+        Me.optBlocked.Size = New System.Drawing.Size(64, 17)
+        Me.optBlocked.TabIndex = 0
+        Me.optBlocked.Text = "Blocked"
         '
         'pnlTiles
         '
@@ -451,205 +648,6 @@ Partial Class FrmEditor_MapEditor
         Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
         Me.DarkLabel1.TabIndex = 13
         Me.DarkLabel1.Text = "Drag Mouse to Select Multiple Tiles"
-        '
-        'pnlAttribute
-        '
-        Me.pnlAttribute.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlAttribute.Controls.Add(Me.optLight)
-        Me.pnlAttribute.Controls.Add(Me.btnClearAttribute)
-        Me.pnlAttribute.Controls.Add(Me.optHouse)
-        Me.pnlAttribute.Controls.Add(Me.optShop)
-        Me.pnlAttribute.Controls.Add(Me.optNpcSpawn)
-        Me.pnlAttribute.Controls.Add(Me.optBank)
-        Me.pnlAttribute.Controls.Add(Me.optCraft)
-        Me.pnlAttribute.Controls.Add(Me.optTrap)
-        Me.pnlAttribute.Controls.Add(Me.optHeal)
-        Me.pnlAttribute.Controls.Add(Me.optKeyOpen)
-        Me.pnlAttribute.Controls.Add(Me.optKey)
-        Me.pnlAttribute.Controls.Add(Me.optDoor)
-        Me.pnlAttribute.Controls.Add(Me.optResource)
-        Me.pnlAttribute.Controls.Add(Me.optNpcAvoid)
-        Me.pnlAttribute.Controls.Add(Me.optItem)
-        Me.pnlAttribute.Controls.Add(Me.optWarp)
-        Me.pnlAttribute.Controls.Add(Me.optBlocked)
-        Me.pnlAttribute.Location = New System.Drawing.Point(2, 50)
-        Me.pnlAttribute.Name = "pnlAttribute"
-        Me.pnlAttribute.Size = New System.Drawing.Size(314, 548)
-        Me.pnlAttribute.TabIndex = 9
-        '
-        'btnClearAttribute
-        '
-        Me.btnClearAttribute.Location = New System.Drawing.Point(10, 470)
-        Me.btnClearAttribute.Name = "btnClearAttribute"
-        Me.btnClearAttribute.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnClearAttribute.Size = New System.Drawing.Size(297, 23)
-        Me.btnClearAttribute.TabIndex = 15
-        Me.btnClearAttribute.Text = "Clear Attributes"
-        '
-        'optHouse
-        '
-        Me.optHouse.AutoSize = True
-        Me.optHouse.BackColor = System.Drawing.Color.Transparent
-        Me.optHouse.Location = New System.Drawing.Point(163, 139)
-        Me.optHouse.Name = "optHouse"
-        Me.optHouse.Size = New System.Drawing.Size(56, 17)
-        Me.optHouse.TabIndex = 14
-        Me.optHouse.TabStop = True
-        Me.optHouse.Text = "House"
-        '
-        'optShop
-        '
-        Me.optShop.AutoSize = True
-        Me.optShop.BackColor = System.Drawing.Color.Transparent
-        Me.optShop.Location = New System.Drawing.Point(97, 139)
-        Me.optShop.Name = "optShop"
-        Me.optShop.Size = New System.Drawing.Size(50, 17)
-        Me.optShop.TabIndex = 13
-        Me.optShop.TabStop = True
-        Me.optShop.Text = "Shop"
-        '
-        'optNpcSpawn
-        '
-        Me.optNpcSpawn.AutoSize = True
-        Me.optNpcSpawn.BackColor = System.Drawing.Color.Transparent
-        Me.optNpcSpawn.Location = New System.Drawing.Point(10, 139)
-        Me.optNpcSpawn.Name = "optNpcSpawn"
-        Me.optNpcSpawn.Size = New System.Drawing.Size(81, 17)
-        Me.optNpcSpawn.TabIndex = 12
-        Me.optNpcSpawn.TabStop = True
-        Me.optNpcSpawn.Text = "Npc Spawn"
-        '
-        'optBank
-        '
-        Me.optBank.AutoSize = True
-        Me.optBank.BackColor = System.Drawing.Color.Transparent
-        Me.optBank.Location = New System.Drawing.Point(235, 94)
-        Me.optBank.Name = "optBank"
-        Me.optBank.Size = New System.Drawing.Size(50, 17)
-        Me.optBank.TabIndex = 11
-        Me.optBank.TabStop = True
-        Me.optBank.Text = "Bank"
-        '
-        'optCraft
-        '
-        Me.optCraft.AutoSize = True
-        Me.optCraft.BackColor = System.Drawing.Color.Transparent
-        Me.optCraft.Location = New System.Drawing.Point(163, 94)
-        Me.optCraft.Name = "optCraft"
-        Me.optCraft.Size = New System.Drawing.Size(47, 17)
-        Me.optCraft.TabIndex = 10
-        Me.optCraft.TabStop = True
-        Me.optCraft.Text = "Craft"
-        '
-        'optTrap
-        '
-        Me.optTrap.AutoSize = True
-        Me.optTrap.BackColor = System.Drawing.Color.Transparent
-        Me.optTrap.Location = New System.Drawing.Point(97, 94)
-        Me.optTrap.Name = "optTrap"
-        Me.optTrap.Size = New System.Drawing.Size(47, 17)
-        Me.optTrap.TabIndex = 9
-        Me.optTrap.TabStop = True
-        Me.optTrap.Text = "Trap"
-        '
-        'optHeal
-        '
-        Me.optHeal.AutoSize = True
-        Me.optHeal.BackColor = System.Drawing.Color.Transparent
-        Me.optHeal.Location = New System.Drawing.Point(10, 94)
-        Me.optHeal.Name = "optHeal"
-        Me.optHeal.Size = New System.Drawing.Size(47, 17)
-        Me.optHeal.TabIndex = 8
-        Me.optHeal.TabStop = True
-        Me.optHeal.Text = "Heal"
-        '
-        'optKeyOpen
-        '
-        Me.optKeyOpen.AutoSize = True
-        Me.optKeyOpen.BackColor = System.Drawing.Color.Transparent
-        Me.optKeyOpen.Location = New System.Drawing.Point(235, 50)
-        Me.optKeyOpen.Name = "optKeyOpen"
-        Me.optKeyOpen.Size = New System.Drawing.Size(72, 17)
-        Me.optKeyOpen.TabIndex = 7
-        Me.optKeyOpen.TabStop = True
-        Me.optKeyOpen.Text = "Key Open"
-        '
-        'optKey
-        '
-        Me.optKey.AutoSize = True
-        Me.optKey.BackColor = System.Drawing.Color.Transparent
-        Me.optKey.Location = New System.Drawing.Point(163, 50)
-        Me.optKey.Name = "optKey"
-        Me.optKey.Size = New System.Drawing.Size(43, 17)
-        Me.optKey.TabIndex = 6
-        Me.optKey.TabStop = True
-        Me.optKey.Text = "Key"
-        '
-        'optDoor
-        '
-        Me.optDoor.AutoSize = True
-        Me.optDoor.BackColor = System.Drawing.Color.Transparent
-        Me.optDoor.Location = New System.Drawing.Point(97, 50)
-        Me.optDoor.Name = "optDoor"
-        Me.optDoor.Size = New System.Drawing.Size(48, 17)
-        Me.optDoor.TabIndex = 5
-        Me.optDoor.TabStop = True
-        Me.optDoor.Text = "Door"
-        '
-        'optResource
-        '
-        Me.optResource.AutoSize = True
-        Me.optResource.BackColor = System.Drawing.Color.Transparent
-        Me.optResource.Location = New System.Drawing.Point(10, 50)
-        Me.optResource.Name = "optResource"
-        Me.optResource.Size = New System.Drawing.Size(71, 17)
-        Me.optResource.TabIndex = 4
-        Me.optResource.TabStop = True
-        Me.optResource.Text = "Resource"
-        '
-        'optNpcAvoid
-        '
-        Me.optNpcAvoid.AutoSize = True
-        Me.optNpcAvoid.BackColor = System.Drawing.Color.Transparent
-        Me.optNpcAvoid.Location = New System.Drawing.Point(235, 7)
-        Me.optNpcAvoid.Name = "optNpcAvoid"
-        Me.optNpcAvoid.Size = New System.Drawing.Size(75, 17)
-        Me.optNpcAvoid.TabIndex = 3
-        Me.optNpcAvoid.TabStop = True
-        Me.optNpcAvoid.Text = "Npc Avoid"
-        '
-        'optItem
-        '
-        Me.optItem.AutoSize = True
-        Me.optItem.BackColor = System.Drawing.Color.Transparent
-        Me.optItem.Location = New System.Drawing.Point(163, 7)
-        Me.optItem.Name = "optItem"
-        Me.optItem.Size = New System.Drawing.Size(66, 17)
-        Me.optItem.TabIndex = 2
-        Me.optItem.TabStop = True
-        Me.optItem.Text = "MapItem"
-        '
-        'optWarp
-        '
-        Me.optWarp.AutoSize = True
-        Me.optWarp.BackColor = System.Drawing.Color.Transparent
-        Me.optWarp.Location = New System.Drawing.Point(97, 7)
-        Me.optWarp.Name = "optWarp"
-        Me.optWarp.Size = New System.Drawing.Size(51, 17)
-        Me.optWarp.TabIndex = 1
-        Me.optWarp.TabStop = True
-        Me.optWarp.Text = "Warp"
-        '
-        'optBlocked
-        '
-        Me.optBlocked.AutoSize = True
-        Me.optBlocked.BackColor = System.Drawing.Color.Transparent
-        Me.optBlocked.Location = New System.Drawing.Point(10, 7)
-        Me.optBlocked.Name = "optBlocked"
-        Me.optBlocked.Size = New System.Drawing.Size(64, 17)
-        Me.optBlocked.TabIndex = 0
-        Me.optBlocked.TabStop = True
-        Me.optBlocked.Text = "Blocked"
         '
         'pnlNpc
         '
@@ -2025,16 +2023,6 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
-        'optLight
-        '
-        Me.optLight.AutoSize = True
-        Me.optLight.Location = New System.Drawing.Point(235, 138)
-        Me.optLight.Name = "optLight"
-        Me.optLight.Size = New System.Drawing.Size(48, 17)
-        Me.optLight.TabIndex = 16
-        Me.optLight.TabStop = True
-        Me.optLight.Text = "Light"
-        '
         'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2054,12 +2042,12 @@ Partial Class FrmEditor_MapEditor
         Me.ssInfo.ResumeLayout(False)
         Me.ssInfo.PerformLayout()
         Me.DarkSectionPanel1.ResumeLayout(False)
+        Me.pnlAttribute.ResumeLayout(False)
+        Me.pnlAttribute.PerformLayout()
         Me.pnlTiles.ResumeLayout(False)
         Me.pnlTiles.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlAttribute.ResumeLayout(False)
-        Me.pnlAttribute.PerformLayout()
         Me.pnlNpc.ResumeLayout(False)
         Me.pnlDirBlock.ResumeLayout(False)
         Me.pnlDirBlock.PerformLayout()

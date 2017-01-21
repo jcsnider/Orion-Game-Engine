@@ -596,7 +596,7 @@ Module ServerPlayers
                 ' send the animation to the map
                 SendDoorAnimation(GetPlayerMap(Index), GetPlayerX(Index), GetPlayerY(Index))
 
-                If (MapNum And INSTANCED_MAP_MASK) > 0 Then
+                If Map(MapNum).Instanced = 1 Then
                     If TempPlayer(Index).InParty Then
                         PartyWarp(Index, MapNum, x, y)
                     Else

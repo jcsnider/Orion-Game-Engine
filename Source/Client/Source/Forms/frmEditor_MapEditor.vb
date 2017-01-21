@@ -374,10 +374,21 @@ Public Class frmEditor_MapEditor
         GettingMap = True
     End Sub
 
+    Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
+        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+    End Sub
+
+    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
+        MapEditorClearLayer()
+    End Sub
+
     Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
         MapEditorCancel()
     End Sub
 
+    Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
+        MapGrid = Not MapGrid
+    End Sub
 #End Region
 
     Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
@@ -418,9 +429,7 @@ Public Class frmEditor_MapEditor
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
 
-    Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
-        MapGrid = Not MapGrid
-    End Sub
+
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then
@@ -493,13 +502,7 @@ Public Class frmEditor_MapEditor
         End If
     End Sub
 
-    Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
-        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
-    End Sub
 
-    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
-        MapEditorClearLayer()
-    End Sub
 
 #Region "Map Editor"
 
@@ -1072,6 +1075,21 @@ Public Class frmEditor_MapEditor
         Else
             Map.Instanced = 0
         End If
+    End Sub
+
+    Private Sub OptDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
+        If optDoor.Checked = False Then Exit Sub
+
+        ClearAttributeDialogue()
+        pnlAttributes.Visible = True
+        fraMapWarp.Visible = True
+
+        scrlMapWarpMap.Maximum = MAX_MAPS
+        scrlMapWarpMap.Value = 1
+        scrlMapWarpX.Maximum = Byte.MaxValue
+        scrlMapWarpY.Maximum = Byte.MaxValue
+        scrlMapWarpX.Value = 0
+        scrlMapWarpY.Value = 0
     End Sub
 
 #End Region
