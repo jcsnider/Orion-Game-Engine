@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_Pet
+Partial Class FrmEditor_Pet
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -36,6 +36,12 @@ Partial Class frmEditor_Pet
         Me.scrlSkill1 = New System.Windows.Forms.HScrollBar()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.pnlPetlevel = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.cmbEvolve = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.scrlEvolveLvl = New System.Windows.Forms.HScrollBar()
+        Me.lblEvolveLvl = New System.Windows.Forms.Label()
+        Me.chkEvolve = New System.Windows.Forms.CheckBox()
         Me.lblmaxlevel = New System.Windows.Forms.Label()
         Me.lblPetPnts = New System.Windows.Forms.Label()
         Me.lblPetExp = New System.Windows.Forms.Label()
@@ -76,6 +82,7 @@ Partial Class frmEditor_Pet
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.pnlPetlevel.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.pnlCustomStats.SuspendLayout()
         CType(Me.picSprite, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +93,7 @@ Partial Class frmEditor_Pet
         Me.GroupBox1.Controls.Add(Me.lstIndex)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(241, 523)
+        Me.GroupBox1.Size = New System.Drawing.Size(208, 503)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pet List"
@@ -96,7 +103,7 @@ Partial Class frmEditor_Pet
         Me.lstIndex.FormattingEnabled = True
         Me.lstIndex.Location = New System.Drawing.Point(6, 19)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(229, 498)
+        Me.lstIndex.Size = New System.Drawing.Size(198, 472)
         Me.lstIndex.TabIndex = 0
         '
         'GroupBox2
@@ -111,9 +118,9 @@ Partial Class frmEditor_Pet
         Me.GroupBox2.Controls.Add(Me.picSprite)
         Me.GroupBox2.Controls.Add(Me.txtName)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(250, 3)
+        Me.GroupBox2.Location = New System.Drawing.Point(213, 3)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(391, 494)
+        Me.GroupBox2.Size = New System.Drawing.Size(389, 537)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Pet Properties"
@@ -128,17 +135,17 @@ Partial Class frmEditor_Pet
         Me.GroupBox5.Controls.Add(Me.lblSkill1)
         Me.GroupBox5.Controls.Add(Me.scrlSkill2)
         Me.GroupBox5.Controls.Add(Me.scrlSkill1)
-        Me.GroupBox5.Location = New System.Drawing.Point(6, 399)
+        Me.GroupBox5.Location = New System.Drawing.Point(6, 436)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(377, 89)
+        Me.GroupBox5.Size = New System.Drawing.Size(375, 89)
         Me.GroupBox5.TabIndex = 9
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Skills"
+        Me.GroupBox5.Text = "Start Skills"
         '
         'lblSkill4
         '
         Me.lblSkill4.AutoSize = True
-        Me.lblSkill4.Location = New System.Drawing.Point(196, 67)
+        Me.lblSkill4.Location = New System.Drawing.Point(214, 67)
         Me.lblSkill4.Name = "lblSkill4"
         Me.lblSkill4.Size = New System.Drawing.Size(67, 13)
         Me.lblSkill4.TabIndex = 11
@@ -156,9 +163,9 @@ Partial Class frmEditor_Pet
         'scrlSkill4
         '
         Me.scrlSkill4.LargeChange = 1
-        Me.scrlSkill4.Location = New System.Drawing.Point(199, 50)
+        Me.scrlSkill4.Location = New System.Drawing.Point(217, 50)
         Me.scrlSkill4.Name = "scrlSkill4"
-        Me.scrlSkill4.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill4.Size = New System.Drawing.Size(154, 17)
         Me.scrlSkill4.TabIndex = 9
         Me.scrlSkill4.Value = 50
         '
@@ -167,14 +174,14 @@ Partial Class frmEditor_Pet
         Me.scrlSkill3.LargeChange = 1
         Me.scrlSkill3.Location = New System.Drawing.Point(6, 50)
         Me.scrlSkill3.Name = "scrlSkill3"
-        Me.scrlSkill3.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill3.Size = New System.Drawing.Size(167, 17)
         Me.scrlSkill3.TabIndex = 8
         Me.scrlSkill3.Value = 50
         '
         'lblSkill2
         '
         Me.lblSkill2.AutoSize = True
-        Me.lblSkill2.Location = New System.Drawing.Point(196, 33)
+        Me.lblSkill2.Location = New System.Drawing.Point(214, 33)
         Me.lblSkill2.Name = "lblSkill2"
         Me.lblSkill2.Size = New System.Drawing.Size(67, 13)
         Me.lblSkill2.TabIndex = 7
@@ -192,9 +199,9 @@ Partial Class frmEditor_Pet
         'scrlSkill2
         '
         Me.scrlSkill2.LargeChange = 1
-        Me.scrlSkill2.Location = New System.Drawing.Point(199, 16)
+        Me.scrlSkill2.Location = New System.Drawing.Point(217, 16)
         Me.scrlSkill2.Name = "scrlSkill2"
-        Me.scrlSkill2.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill2.Size = New System.Drawing.Size(152, 17)
         Me.scrlSkill2.TabIndex = 5
         Me.scrlSkill2.Value = 50
         '
@@ -203,7 +210,7 @@ Partial Class frmEditor_Pet
         Me.scrlSkill1.LargeChange = 1
         Me.scrlSkill1.Location = New System.Drawing.Point(6, 16)
         Me.scrlSkill1.Name = "scrlSkill1"
-        Me.scrlSkill1.Size = New System.Drawing.Size(175, 17)
+        Me.scrlSkill1.Size = New System.Drawing.Size(167, 17)
         Me.scrlSkill1.TabIndex = 4
         Me.scrlSkill1.Value = 50
         '
@@ -212,15 +219,16 @@ Partial Class frmEditor_Pet
         Me.GroupBox4.Controls.Add(Me.pnlPetlevel)
         Me.GroupBox4.Controls.Add(Me.optDoNotLevel)
         Me.GroupBox4.Controls.Add(Me.optLevel)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 272)
+        Me.GroupBox4.Location = New System.Drawing.Point(4, 238)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(377, 121)
+        Me.GroupBox4.Size = New System.Drawing.Size(377, 192)
         Me.GroupBox4.TabIndex = 8
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Leveling"
         '
         'pnlPetlevel
         '
+        Me.pnlPetlevel.Controls.Add(Me.GroupBox6)
         Me.pnlPetlevel.Controls.Add(Me.lblmaxlevel)
         Me.pnlPetlevel.Controls.Add(Me.lblPetPnts)
         Me.pnlPetlevel.Controls.Add(Me.lblPetExp)
@@ -229,8 +237,66 @@ Partial Class frmEditor_Pet
         Me.pnlPetlevel.Controls.Add(Me.scrlPetExp)
         Me.pnlPetlevel.Location = New System.Drawing.Point(6, 42)
         Me.pnlPetlevel.Name = "pnlPetlevel"
-        Me.pnlPetlevel.Size = New System.Drawing.Size(365, 73)
+        Me.pnlPetlevel.Size = New System.Drawing.Size(365, 145)
         Me.pnlPetlevel.TabIndex = 2
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.cmbEvolve)
+        Me.GroupBox6.Controls.Add(Me.Label2)
+        Me.GroupBox6.Controls.Add(Me.scrlEvolveLvl)
+        Me.GroupBox6.Controls.Add(Me.lblEvolveLvl)
+        Me.GroupBox6.Controls.Add(Me.chkEvolve)
+        Me.GroupBox6.Location = New System.Drawing.Point(3, 65)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(359, 75)
+        Me.GroupBox6.TabIndex = 9
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Evolution"
+        '
+        'cmbEvolve
+        '
+        Me.cmbEvolve.FormattingEnabled = True
+        Me.cmbEvolve.Location = New System.Drawing.Point(124, 45)
+        Me.cmbEvolve.Name = "cmbEvolve"
+        Me.cmbEvolve.Size = New System.Drawing.Size(229, 21)
+        Me.cmbEvolve.TabIndex = 4
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 48)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(74, 13)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Evolves intoo:"
+        '
+        'scrlEvolveLvl
+        '
+        Me.scrlEvolveLvl.LargeChange = 1
+        Me.scrlEvolveLvl.Location = New System.Drawing.Point(234, 19)
+        Me.scrlEvolveLvl.Name = "scrlEvolveLvl"
+        Me.scrlEvolveLvl.Size = New System.Drawing.Size(119, 17)
+        Me.scrlEvolveLvl.TabIndex = 2
+        '
+        'lblEvolveLvl
+        '
+        Me.lblEvolveLvl.AutoSize = True
+        Me.lblEvolveLvl.Location = New System.Drawing.Point(121, 20)
+        Me.lblEvolveLvl.Name = "lblEvolveLvl"
+        Me.lblEvolveLvl.Size = New System.Drawing.Size(101, 13)
+        Me.lblEvolveLvl.TabIndex = 1
+        Me.lblEvolveLvl.Text = "Evolves on Level: 1"
+        '
+        'chkEvolve
+        '
+        Me.chkEvolve.AutoSize = True
+        Me.chkEvolve.Location = New System.Drawing.Point(6, 19)
+        Me.chkEvolve.Name = "chkEvolve"
+        Me.chkEvolve.Size = New System.Drawing.Size(106, 17)
+        Me.chkEvolve.TabIndex = 0
+        Me.chkEvolve.Text = "Pet Can Evolve?"
+        Me.chkEvolve.UseVisualStyleBackColor = True
         '
         'lblmaxlevel
         '
@@ -261,6 +327,7 @@ Partial Class frmEditor_Pet
         '
         'scrlMaxLevel
         '
+        Me.scrlMaxLevel.LargeChange = 1
         Me.scrlMaxLevel.Location = New System.Drawing.Point(252, 17)
         Me.scrlMaxLevel.Name = "scrlMaxLevel"
         Me.scrlMaxLevel.Size = New System.Drawing.Size(104, 17)
@@ -309,7 +376,7 @@ Partial Class frmEditor_Pet
         Me.GroupBox3.Controls.Add(Me.pnlCustomStats)
         Me.GroupBox3.Controls.Add(Me.optAdoptStats)
         Me.GroupBox3.Controls.Add(Me.optCustomStats)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 104)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 70)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(377, 162)
         Me.GroupBox3.TabIndex = 7
@@ -348,6 +415,7 @@ Partial Class frmEditor_Pet
         '
         'scrlLevel
         '
+        Me.scrlLevel.LargeChange = 1
         Me.scrlLevel.Location = New System.Drawing.Point(127, 85)
         Me.scrlLevel.Name = "scrlLevel"
         Me.scrlLevel.Size = New System.Drawing.Size(104, 17)
@@ -474,15 +542,15 @@ Partial Class frmEditor_Pet
         'scrlRange
         '
         Me.scrlRange.LargeChange = 1
-        Me.scrlRange.Location = New System.Drawing.Point(102, 74)
+        Me.scrlRange.Location = New System.Drawing.Point(246, 47)
         Me.scrlRange.Name = "scrlRange"
-        Me.scrlRange.Size = New System.Drawing.Size(227, 17)
+        Me.scrlRange.Size = New System.Drawing.Size(85, 17)
         Me.scrlRange.TabIndex = 6
         '
         'lblRange
         '
         Me.lblRange.AutoSize = True
-        Me.lblRange.Location = New System.Drawing.Point(6, 78)
+        Me.lblRange.Location = New System.Drawing.Point(180, 50)
         Me.lblRange.Name = "lblRange"
         Me.lblRange.Size = New System.Drawing.Size(51, 13)
         Me.lblRange.TabIndex = 5
@@ -491,9 +559,9 @@ Partial Class frmEditor_Pet
         'scrlSprite
         '
         Me.scrlSprite.LargeChange = 1
-        Me.scrlSprite.Location = New System.Drawing.Point(102, 46)
+        Me.scrlSprite.Location = New System.Drawing.Point(77, 47)
         Me.scrlSprite.Name = "scrlSprite"
-        Me.scrlSprite.Size = New System.Drawing.Size(227, 17)
+        Me.scrlSprite.Size = New System.Drawing.Size(85, 17)
         Me.scrlSprite.TabIndex = 4
         '
         'lblSprite
@@ -532,7 +600,7 @@ Partial Class frmEditor_Pet
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(250, 503)
+        Me.btnSave.Location = New System.Drawing.Point(3, 512)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(104, 23)
         Me.btnSave.TabIndex = 2
@@ -541,25 +609,25 @@ Partial Class frmEditor_Pet
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(546, 503)
+        Me.btnCancel.Location = New System.Drawing.Point(113, 512)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(95, 23)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'frmEditor_Pet
+        'FrmEditor_Pet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(646, 531)
+        Me.ClientSize = New System.Drawing.Size(606, 542)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmEditor_Pet"
+        Me.Name = "FrmEditor_Pet"
         Me.Text = "Pet Editor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
@@ -570,6 +638,8 @@ Partial Class frmEditor_Pet
         Me.GroupBox4.PerformLayout()
         Me.pnlPetlevel.ResumeLayout(False)
         Me.pnlPetlevel.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.pnlCustomStats.ResumeLayout(False)
@@ -628,4 +698,10 @@ Partial Class frmEditor_Pet
     Friend WithEvents scrlLevel As HScrollBar
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents cmbEvolve As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents scrlEvolveLvl As HScrollBar
+    Friend WithEvents lblEvolveLvl As Label
+    Friend WithEvents chkEvolve As CheckBox
 End Class

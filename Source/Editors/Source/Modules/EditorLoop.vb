@@ -288,7 +288,7 @@ Module EditorLoop
         End If
 
         If InitPetEditor = True Then
-            With frmEditor_Pet
+            With FrmEditor_Pet
                 Editor = EDITOR_PET
                 .lstIndex.Items.Clear()
 
@@ -297,8 +297,18 @@ Module EditorLoop
                     .lstIndex.Items.Add(i & ": " & Trim$(Pet(i).Name))
                 Next
 
+                .cmbEvolve.Items.Clear()
+
+                .cmbEvolve.Items.Add("None")
+
+                ' Add the names
+                For i = 1 To MAX_PETS
+                    .cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
+                Next
+
                 .Show()
                 .lstIndex.SelectedIndex = 0
+                .cmbEvolve.SelectedIndex = 0
                 PetEditorInit()
             End With
             InitPetEditor = False

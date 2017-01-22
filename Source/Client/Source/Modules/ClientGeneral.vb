@@ -398,6 +398,9 @@ Module ClientGeneral
         SkillWindowX = FrmMainGame.Width - SkillPanelGFXInfo.Width - 26
         SkillWindowY = FrmMainGame.Height - SkillPanelGFXInfo.Height - ActionPanelGFXInfo.Height - 50
 
+        'petstat window
+        PetStatX = PetbarX
+        PetStatY = PetbarY - PetStatsGFXInfo.Height - 10
     End Sub
 
     Public Sub DestroyGame()

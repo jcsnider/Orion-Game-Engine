@@ -854,7 +854,7 @@ Module ServerLoop
     End Function
 
     Public Function HandlePetSkill(ByVal Index As Integer) As Boolean
-        PetCastSpell(Index, TempPlayer(Index).PetskillBuffer.Skill, TempPlayer(Index).PetskillBuffer.Target, TempPlayer(Index).PetskillBuffer.TargetTypes, True)
+        PetCastSkill(Index, TempPlayer(Index).PetskillBuffer.Skill, TempPlayer(Index).PetskillBuffer.Target, TempPlayer(Index).PetskillBuffer.TargetTypes, True)
         TempPlayer(Index).PetskillBuffer.Skill = 0
         TempPlayer(Index).PetskillBuffer.Timer = 0
         TempPlayer(Index).PetskillBuffer.Target = 0

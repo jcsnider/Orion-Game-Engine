@@ -145,9 +145,10 @@ Module ClientParties
 #End Region
 
     Sub ClearParty()
-        Party = New PartyRec
-        Party.Leader = 0
-        Party.MemberCount = 0
+        Party = New PartyRec With {
+            .Leader = 0,
+            .MemberCount = 0
+        }
         ReDim Party.Member(MAX_PARTY_MEMBERS)
     End Sub
 

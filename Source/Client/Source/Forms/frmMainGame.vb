@@ -17,16 +17,13 @@ Public Class FrmMainGame
         frmAdmin.Visible = False
     End Sub
 
-    'Private Sub FrmMainGame_Closing(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Closing
-    '    frmAdmin.Dispose()
-    '    'DestroyGame()
-    '    SendLeaveGame()
-    'End Sub
+    Private Sub FrmMainGame_Closing(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Closing
+        Application.Exit()
+    End Sub
 
     Private Sub FrmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
 
         If inChat = True Then
-            'If e.KeyCode >= 32 And e.KeyCode <= 255 And Not e.KeyCode = Keys.Enter Then
             If Not e.KeyCode = Keys.Enter Then
                 If MyText = Nothing Then MyText = ""
 
@@ -213,6 +210,7 @@ Public Class FrmMainGame
                     SendTradeRequest(Player(myTarget).Name)
                 End If
                 pnlRClickVisible = False
+                ShowPetStats = False
 
                 ' right click
             ElseIf e.Button = MouseButtons.Right Then
@@ -221,7 +219,13 @@ Public Class FrmMainGame
                     If GetPlayerAccess(MyIndex) >= 2 Then AdminWarp(CurX, CurY)
                 Else
                     ' rightclick menu
-                    PlayerSearch(CurX, CurY, 1)
+                    If PetAlive(MyIndex) Then
+                        If IsInBounds() AndAlso CurX = Player(MyIndex).Pet.X AndAlso CurY = Player(MyIndex).Pet.Y Then
+                            ShowPetStats = True
+                        End If
+                    Else
+                        PlayerSearch(CurX, CurY, 1)
+                    End If
                 End If
                 FurnitureSelected = 0
             End If

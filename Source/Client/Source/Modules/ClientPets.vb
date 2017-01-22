@@ -11,9 +11,11 @@ Module ClientPets
     Public Const PetHpBarWidth As Integer = 129
     Public Const PetMpBarWidth As Integer = 129
 
-    Public PetSpellBuffer As Integer
-    Public PetSpellBufferTimer As Integer
-    Public PetSpellCD() As Integer
+    Public PetSkillBuffer As Integer
+    Public PetSkillBufferTimer As Integer
+    Public PetSkillCD() As Integer
+
+    Public ShowPetStats As Boolean
 
     'Pet Constants
     Public Const PET_BEHAVIOUR_FOLLOW As Byte = 0 'The pet will attack all npcs around
@@ -38,9 +40,13 @@ Module ClientPets
         Dim StatType As Byte '1 for set stats, 2 for relation to owner's stats
         Dim LevelingType As Byte '0 for leveling on own, 1 for not leveling
 
-        Dim stat() As Byte
+        Dim Stat() As Byte
 
-        Dim spell() As Integer
+        Dim Skill() As Integer
+
+        Dim Evolvable As Byte
+        Dim EvolveLevel As Integer
+        Dim EvolveNum As Integer
     End Structure
 
     Public Structure PlayerPetRec
@@ -48,12 +54,12 @@ Module ClientPets
         Dim Health As Integer
         Dim Mana As Integer
         Dim Level As Integer
-        Dim stat() As Byte
-        Dim skill() As Integer
+        Dim Stat() As Byte
+        Dim Skill() As Integer
         Dim Points As Integer
         Dim X As Integer
         Dim Y As Integer
-        Dim dir As Integer
+        Dim Dir As Integer
         Dim MaxHp As Integer
         Dim MaxMP As Integer
         Dim Alive As Byte
@@ -70,6 +76,28 @@ Module ClientPets
         Dim Steps As Byte
         Dim Damage As Integer
     End Structure
+#End Region
+
+#Region "Database"
+    Sub ClearPet(ByVal Index As Integer)
+
+        Pet(Index).Name = ""
+
+        ReDim Pet(Index).Stat(Stats.Count - 1)
+        ReDim Pet(Index).Skill(4)
+    End Sub
+
+    Sub ClearPets()
+        Dim i As Integer
+
+        ReDim Pet(MAX_PETS)
+        ReDim PetSkillCD(4)
+
+        For i = 1 To MAX_PETS
+            ClearPet(i)
+        Next
+
+    End Sub
 #End Region
 
 #Region "Outgoing Packets"
@@ -116,14 +144,24 @@ Module ClientPets
         SendData(buffer.ToArray)
         buffer = Nothing
 
-        PetSpellBuffer = skill
-        PetSpellBufferTimer = GetTickCount()
+        PetSkillBuffer = skill
+        PetSkillBufferTimer = GetTickCount()
     End Sub
 
     Sub SendSummonPet()
         Dim buffer As New ByteBuffer
 
         buffer.WriteInteger(ClientPackets.CSummonPet)
+
+        SendData(buffer.ToArray)
+        buffer = Nothing
+
+    End Sub
+
+    Sub SendReleasePet()
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteInteger(ClientPackets.CReleasePet)
 
         SendData(buffer.ToArray)
         buffer = Nothing
@@ -150,16 +188,16 @@ Module ClientPets
         Player(n).Pet.Level = buffer.ReadInteger
 
         For i = 1 To Stats.Count - 1
-            Player(n).Pet.stat(i) = buffer.ReadInteger
+            Player(n).Pet.Stat(i) = buffer.ReadInteger
         Next
 
         For i = 1 To 4
-            Player(n).Pet.skill(i) = buffer.ReadInteger
+            Player(n).Pet.Skill(i) = buffer.ReadInteger
         Next
 
         Player(n).Pet.X = buffer.ReadInteger
         Player(n).Pet.Y = buffer.ReadInteger
-        Player(n).Pet.dir = buffer.ReadInteger
+        Player(n).Pet.Dir = buffer.ReadInteger
 
         Player(n).Pet.MaxHp = buffer.ReadInteger
         Player(n).Pet.MaxMP = buffer.ReadInteger
@@ -175,7 +213,7 @@ Module ClientPets
     End Sub
 
     Public Sub Packet_UpdatePet(ByVal Data() As Byte)
-        Dim n As Integer, i As Long
+        Dim n As Integer, i As Integer
         Dim buffer As New ByteBuffer
 
         buffer.WriteBytes(Data)
@@ -197,11 +235,16 @@ Module ClientPets
             .StatType = buffer.ReadInteger
             .LevelingType = buffer.ReadInteger
             For i = 1 To Stats.Count - 1
-                .stat(i) = buffer.ReadInteger
+                .Stat(i) = buffer.ReadInteger
             Next
+
             For i = 1 To 4
-                .spell(i) = buffer.ReadInteger
+                .Skill(i) = buffer.ReadInteger
             Next
+
+            .Evolvable = buffer.ReadInteger
+            .EvolveLevel = buffer.ReadInteger
+            .EvolveNum = buffer.ReadInteger
         End With
 
         buffer = Nothing
@@ -227,12 +270,12 @@ Module ClientPets
         With Player(i).Pet
             .X = X
             .Y = Y
-            .dir = dir
+            .Dir = dir
             .XOffset = 0
             .YOffset = 0
             .Moving = Movement
 
-            Select Case .dir
+            Select Case .Dir
                 Case Direction.Up
                     .YOffset = PIC_Y
                 Case Direction.Down
@@ -260,7 +303,7 @@ Module ClientPets
         i = buffer.ReadInteger
         dir = buffer.ReadInteger
 
-        Player(i).Pet.dir = dir
+        Player(i).Pet.Dir = dir
 
         buffer = Nothing
     End Sub
@@ -296,8 +339,8 @@ Module ClientPets
         ' Confirm it is the right packet
         If buffer.ReadInteger <> ServerPackets.SClearPetSkillBuffer Then Exit Sub
 
-        PetSpellBuffer = 0
-        PetSpellBufferTimer = 0
+        PetSkillBuffer = 0
+        PetSkillBufferTimer = 0
 
         buffer = Nothing
     End Sub
@@ -320,28 +363,6 @@ Module ClientPets
     End Sub
 #End Region
 
-#Region "Database"
-    Sub ClearPet(ByVal Index As Integer)
-
-        Pet(Index).Name = ""
-
-        ReDim Pet(Index).stat(Stats.Count - 1)
-        ReDim Pet(Index).spell(4)
-    End Sub
-
-    Sub ClearPets()
-        Dim i As Integer
-
-        ReDim Pet(MAX_PETS)
-        ReDim PetSpellCD(4)
-
-        For i = 1 To MAX_PETS
-            ClearPet(i)
-        Next
-
-    End Sub
-#End Region
-
 #Region "Movement"
     Sub ProcessPetMovement(ByVal Index As Integer)
 
@@ -349,7 +370,7 @@ Module ClientPets
 
         If Player(Index).Pet.Moving = MovementType.Walking Then
 
-            Select Case Player(Index).Pet.dir
+            Select Case Player(Index).Pet.Dir
                 Case Direction.Up
                     Player(Index).Pet.YOffset = Player(Index).Pet.YOffset - ((ElapsedTime / 1000) * (WALK_SPEED * SIZE_X))
                     If Player(Index).Pet.YOffset < 0 Then Player(Index).Pet.YOffset = 0
@@ -370,7 +391,7 @@ Module ClientPets
 
             ' Check if completed walking over to the next tile
             If Player(Index).Pet.Moving > 0 Then
-                If Player(Index).Pet.dir = Direction.Right Or Player(Index).Pet.dir = Direction.Down Then
+                If Player(Index).Pet.Dir = Direction.Right Or Player(Index).Pet.Dir = Direction.Down Then
                     If (Player(Index).Pet.XOffset >= 0) And (Player(Index).Pet.YOffset >= 0) Then
                         Player(Index).Pet.Moving = 0
                         If Player(Index).Pet.Steps = 1 Then
@@ -438,7 +459,7 @@ Module ClientPets
             End If
         Else
             ' If not attacking, walk normally
-            Select Case Player(Index).Pet.dir
+            Select Case Player(Index).Pet.Dir
                 Case Direction.Up
                     If (Player(Index).Pet.YOffset > 8) Then Anim = Player(Index).Pet.Steps
                 Case Direction.Down
@@ -459,7 +480,7 @@ Module ClientPets
         End With
 
         ' Set the left
-        Select Case Player(Index).Pet.dir
+        Select Case Player(Index).Pet.Dir
             Case Direction.Up
                 spriteleft = 3
             Case Direction.Right
@@ -547,7 +568,7 @@ Module ClientPets
             RenderSprite(PetBarSprite, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGFXInfo.Width, PetbarGFXInfo.Height)
 
             For i = 1 To 4
-                skillnum = Player(MyIndex).Pet.skill(i)
+                skillnum = Player(MyIndex).Pet.Skill(i)
 
                 If skillnum > 0 Then
                     skillpic = Skill(skillnum).Icon
@@ -568,7 +589,7 @@ Module ClientPets
                         .Width = 32
                     End With
 
-                    If Not PetSpellCD(i) = 0 Then
+                    If Not PetSkillCD(i) = 0 Then
                         rec.X = 32
                         rec.Width = 32
                     End If
@@ -582,10 +603,45 @@ Module ClientPets
 
                     RenderSprite(SkillIconsSprite(skillpic), GameWindow, rec_pos.X, rec_pos.Y, rec.X, rec.Y, rec.Width, rec.Height)
                 End If
-
             Next
         End If
 
+    End Sub
+
+    Sub DrawPetStats()
+        Dim sprite As Integer, rec As Rectangle
+
+        If Not HasPet(MyIndex) Then Exit Sub
+
+        If Not ShowPetStats Then Exit Sub
+
+        'draw panel
+        RenderSprite(PetStatsSprite, GameWindow, PetStatX, PetStatY, 0, 0, PetStatsGFXInfo.Width, PetStatsGFXInfo.Height)
+
+        'lets get player sprite to render
+        sprite = Pet(Player(MyIndex).Pet.Num).Sprite
+
+        With rec
+            .Y = 0
+            .Height = CharacterGFXInfo(sprite).Height / 4
+            .X = 0
+            .Width = CharacterGFXInfo(sprite).Width / 4
+        End With
+
+        Dim petname As String = Trim$(Pet(Player(MyIndex).Pet.Num).Name)
+
+        DrawText(PetStatX + 70, PetStatY + 10, petname & " Lvl: " & Player(MyIndex).Pet.Level, SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+
+        RenderSprite(CharacterSprite(sprite), GameWindow, PetStatX + 10, PetStatY + 10 + (PetStatsGFXInfo.Height / 4) - (rec.Height / 2), rec.X, rec.Y, rec.Width, rec.Height)
+
+        'stats
+        DrawText(PetStatX + 65, PetStatY + 50, "Strength: " & Player(MyIndex).Pet.Stat(Stats.Strength), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(PetStatX + 65, PetStatY + 65, "Endurance: " & Player(MyIndex).Pet.Stat(Stats.Endurance), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(PetStatX + 65, PetStatY + 80, "Vitality: " & Player(MyIndex).Pet.Stat(Stats.Vitality), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(PetStatX + 165, PetStatY + 50, "Luck: " & Player(MyIndex).Pet.Stat(Stats.Luck), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(PetStatX + 165, PetStatY + 65, "Intelligence: " & Player(MyIndex).Pet.Stat(Stats.Intelligence), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(PetStatX + 165, PetStatY + 80, "Spirit: " & Player(MyIndex).Pet.Stat(Stats.Spirit), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
 #End Region

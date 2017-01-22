@@ -155,6 +155,8 @@
     'pet bar
     Public PetbarX As Integer = 489
     Public PetbarY As Integer = 800
+    Public PetStatX As Integer = 943
+    Public PetStatY As Integer = 575
 
     'Inventory window Coordinates
     Public InvWindowX As Integer = 943

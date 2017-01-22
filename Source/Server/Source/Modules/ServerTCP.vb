@@ -2294,6 +2294,14 @@ Module ServerTCP
         Buffer = Nothing
     End Sub
 
+    Sub SendNpcAttack(ByVal Index As Integer, ByVal NpcNum As Integer)
+        Dim Buffer = New ByteBuffer
+        Buffer.WriteInteger(ServerPackets.SAttack)
+        Buffer.WriteInteger(NpcNum)
+        SendDataToMap(GetPlayerMap(Index), Buffer.ToArray())
+        Buffer = Nothing
+    End Sub
+
     Public Sub SendNpcDead(ByVal MapNum As Integer, ByVal Index As Integer)
         Dim Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SNpcDead)

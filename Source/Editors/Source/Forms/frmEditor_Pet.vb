@@ -1,6 +1,6 @@
-﻿Public Class frmEditor_Pet
+﻿Public Class FrmEditor_Pet
 #Region "Basics"
-    Private Sub frmEditor_Pet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEditor_Pet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EditorPet_DrawPet()
 
         scrlSprite.Maximum = NumCharacters
@@ -14,7 +14,7 @@
         scrlSkill4.Maximum = MAX_SKILLS
     End Sub
 
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
         tmpIndex = lstIndex.SelectedIndex
@@ -24,7 +24,7 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub scrlSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSprite.Scroll
+    Private Sub ScrlSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSprite.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblSprite.Text = "Sprite: " & scrlSprite.Value
@@ -51,24 +51,24 @@
 
     End Sub
 
-    Private Sub scrlRange_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlRange.Scroll
+    Private Sub ScrlRange_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlRange.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblRange.Text = "Range: " & scrlRange.Value
         Pet(EditorIndex).Range = scrlRange.Value
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         PetEditorOk()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         PetEditorCancel()
     End Sub
 #End Region
 
 #Region "Stats"
-    Private Sub optCustomStats_CheckedChanged(sender As Object, e As EventArgs) Handles optCustomStats.CheckedChanged
+    Private Sub OptCustomStats_CheckedChanged(sender As Object, e As EventArgs) Handles optCustomStats.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         If optCustomStats.Checked = True Then
@@ -80,7 +80,7 @@
         End If
     End Sub
 
-    Private Sub optAdoptStats_CheckedChanged(sender As Object, e As EventArgs) Handles optAdoptStats.CheckedChanged
+    Private Sub OptAdoptStats_CheckedChanged(sender As Object, e As EventArgs) Handles optAdoptStats.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         If optAdoptStats.Checked = True Then
@@ -92,49 +92,49 @@
         End If
     End Sub
 
-    Private Sub scrlStrength_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlStrength.Scroll
+    Private Sub ScrlStrength_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlStrength.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblStrength.Text = "Strength: " & scrlStrength.Value
-        Pet(EditorIndex).stat(Stats.Strength) = scrlStrength.Value
+        Pet(EditorIndex).Stat(Stats.Strength) = scrlStrength.Value
     End Sub
 
-    Private Sub scrlEndurance_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlEndurance.Scroll
+    Private Sub ScrlEndurance_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlEndurance.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblEndurance.Text = "Endurance: " & scrlEndurance.Value
-        Pet(EditorIndex).stat(Stats.Endurance) = scrlEndurance.Value
+        Pet(EditorIndex).Stat(Stats.Endurance) = scrlEndurance.Value
     End Sub
 
-    Private Sub scrlVitality_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlVitality.Scroll
+    Private Sub ScrlVitality_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlVitality.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblVitality.Text = "Vitality: " & scrlVitality.Value
-        Pet(EditorIndex).stat(Stats.Vitality) = scrlVitality.Value
+        Pet(EditorIndex).Stat(Stats.Vitality) = scrlVitality.Value
     End Sub
 
-    Private Sub scrlLuck_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlLuck.Scroll
+    Private Sub ScrlLuck_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlLuck.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblLuck.Text = "Luck: " & scrlLuck.Value
-        Pet(EditorIndex).stat(Stats.Luck) = scrlLuck.Value
+        Pet(EditorIndex).Stat(Stats.Luck) = scrlLuck.Value
     End Sub
 
-    Private Sub scrlIntelligence_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntelligence.Scroll
+    Private Sub ScrlIntelligence_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntelligence.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblIntelligence.Text = "Intelligence: " & scrlIntelligence.Value
-        Pet(EditorIndex).stat(Stats.Intelligence) = scrlIntelligence.Value
+        Pet(EditorIndex).Stat(Stats.Intelligence) = scrlIntelligence.Value
     End Sub
 
-    Private Sub scrlSpirit_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSpirit.Scroll
+    Private Sub ScrlSpirit_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSpirit.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblSpirit.Text = "Spirit: " & scrlSpirit.Value
-        Pet(EditorIndex).stat(Stats.Spirit) = scrlSpirit.Value
+        Pet(EditorIndex).Stat(Stats.Spirit) = scrlSpirit.Value
     End Sub
 
-    Private Sub scrlLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlLevel.Scroll
+    Private Sub ScrlLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlLevel.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblLevel.Text = "Level: " & scrlLevel.Value
@@ -143,28 +143,28 @@
 #End Region
 
 #Region "Leveling"
-    Private Sub scrlPetExp_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetExp.Scroll
+    Private Sub ScrlPetExp_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetExp.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblPetExp.Text = "Exp Gain: " & scrlPetExp.Value & "%"
         Pet(EditorIndex).ExpGain = scrlPetExp.Value
     End Sub
 
-    Private Sub scrlPetPnts_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetPnts.Scroll
+    Private Sub ScrlPetPnts_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPetPnts.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblPetPnts.Text = "Points Per Level: " & scrlPetPnts.Value
         Pet(EditorIndex).LevelPnts = scrlPetPnts.Value
     End Sub
 
-    Private Sub scrlMaxLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMaxLevel.Scroll
+    Private Sub ScrlMaxLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMaxLevel.Scroll
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         lblmaxlevel.Text = "Max Level: " & scrlMaxLevel.Value
         Pet(EditorIndex).MaxLevel = scrlMaxLevel.Value
     End Sub
 
-    Private Sub optLevel_CheckedChanged(sender As Object, e As EventArgs) Handles optLevel.CheckedChanged
+    Private Sub OptLevel_CheckedChanged(sender As Object, e As EventArgs) Handles optLevel.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         If optLevel.Checked = True Then
@@ -173,7 +173,7 @@
         End If
     End Sub
 
-    Private Sub optDoNotLevel_CheckedChanged(sender As Object, e As EventArgs) Handles optDoNotLevel.CheckedChanged
+    Private Sub OptDoNotLevel_CheckedChanged(sender As Object, e As EventArgs) Handles optDoNotLevel.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         If optDoNotLevel.Checked = True Then
@@ -184,7 +184,7 @@
 #End Region
 
 #Region "Skills"
-    Private Sub scrlSkill1_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill1.Scroll
+    Private Sub ScrlSkill1_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill1.Scroll
         Dim prefix As String = "Skill " & 1 & ": "
         If scrlSkill1.Value = 0 Then
             lblSkill1.Text = prefix & "None"
@@ -192,10 +192,10 @@
             lblSkill1.Text = prefix & Trim$(Skill(scrlSkill1.Value).Name)
         End If
 
-        Pet(EditorIndex).skill(1) = scrlSkill1.Value
+        Pet(EditorIndex).Skill(1) = scrlSkill1.Value
     End Sub
 
-    Private Sub scrlSkill2_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill2.Scroll
+    Private Sub ScrlSkill2_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill2.Scroll
         Dim prefix As String = "Skill " & 2 & ": "
         If scrlSkill2.Value = 0 Then
             lblSkill2.Text = prefix & "None"
@@ -203,10 +203,10 @@
             lblSkill2.Text = prefix & Trim$(Skill(scrlSkill2.Value).Name)
         End If
 
-        Pet(EditorIndex).skill(2) = scrlSkill2.Value
+        Pet(EditorIndex).Skill(2) = scrlSkill2.Value
     End Sub
 
-    Private Sub scrlSkill3_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill3.Scroll
+    Private Sub ScrlSkill3_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill3.Scroll
         Dim prefix As String = "Skill " & 3 & ": "
         If scrlSkill3.Value = 0 Then
             lblSkill3.Text = prefix & "None"
@@ -214,10 +214,10 @@
             lblSkill3.Text = prefix & Trim$(Skill(scrlSkill3.Value).Name)
         End If
 
-        Pet(EditorIndex).skill(3) = scrlSkill3.Value
+        Pet(EditorIndex).Skill(3) = scrlSkill3.Value
     End Sub
 
-    Private Sub scrlSkill4_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill4.Scroll
+    Private Sub ScrlSkill4_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlSkill4.Scroll
         Dim prefix As String = "Skill " & 4 & ": "
         If scrlSkill4.Value = 0 Then
             lblSkill4.Text = prefix & "None"
@@ -225,12 +225,39 @@
             lblSkill4.Text = prefix & Trim$(Skill(scrlSkill4.Value).Name)
         End If
 
-        Pet(EditorIndex).skill(4) = scrlSkill4.Value
+        Pet(EditorIndex).Skill(4) = scrlSkill4.Value
     End Sub
 
-    Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+    Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
         PetEditorInit()
     End Sub
+
+    Private Sub ChkEvolve_CheckedChanged(sender As Object, e As EventArgs) Handles chkEvolve.CheckedChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        If chkEvolve.Checked = True Then
+            Pet(EditorIndex).Evolvable = 1
+        Else
+            Pet(EditorIndex).Evolvable = 0
+        End If
+
+    End Sub
+
+    Private Sub ScrlEvolveLvl_ValueChanged(sender As Object, e As EventArgs) Handles scrlEvolveLvl.ValueChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        Pet(EditorIndex).EvolveLevel = scrlEvolveLvl.Value
+
+        lblEvolveLvl.Text = "Evolves on Level: " & scrlEvolveLvl.Value
+    End Sub
+
+    Private Sub CmbEvolve_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEvolve.SelectedIndexChanged
+        If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
+
+        Pet(EditorIndex).EvolveNum = cmbEvolve.SelectedIndex
+    End Sub
+
+
 #End Region
 End Class

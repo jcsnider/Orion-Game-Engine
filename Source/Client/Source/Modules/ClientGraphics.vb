@@ -184,6 +184,10 @@ Module ClientGraphics
     Public ChatBubbleSprite As Sprite
     Public ChatBubbleGFXInfo As GraphicInfo
 
+    Public PetStatsGFX As Texture
+    Public PetStatsSprite As Sprite
+    Public PetStatsGFXInfo As GraphicInfo
+
     Public PetBarGFX As Texture
     Public PetBarSprite As Sprite
     Public PetbarGFXInfo As GraphicInfo
@@ -614,6 +618,17 @@ Module ClientGraphics
             'Cache the width and height
             ChatBubbleGFXInfo.Width = ChatBubbleGFX.Size.X
             ChatBubbleGFXInfo.Height = ChatBubbleGFX.Size.Y
+        End If
+
+        PetStatsGFXInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_GUI_PATH & "Main\Pet" & GFX_EXT) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            PetStatsGFX = New Texture(Application.StartupPath & GFX_GUI_PATH & "Main\Pet" & GFX_EXT)
+            PetStatsSprite = New Sprite(PetStatsGFX)
+
+            'Cache the width and height
+            PetStatsGFXInfo.Width = PetStatsGFX.Size.X
+            PetStatsGFXInfo.Height = PetStatsGFX.Size.Y
         End If
 
         PetbarGFXInfo = New GraphicInfo
@@ -1831,7 +1846,6 @@ Module ClientGraphics
 
                 ' events
                 If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
-
                     For I = 1 To Map.CurrentEvents
                         If Map.MapEvents(I).Position = 1 Then
                             If Y = Map.MapEvents(I).Y Then
@@ -1902,7 +1916,6 @@ Module ClientGraphics
 
         'events
         If Map.CurrentEvents > 0 And Map.CurrentEvents <= Map.EventCount Then
-
             For I = 1 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)
@@ -2164,14 +2177,14 @@ Module ClientGraphics
             End If
         End If
         ' check for pet casting time bar
-        If PetSpellBuffer > 0 Then
-            If Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime > 0 Then
+        If PetSkillBuffer > 0 Then
+            If Skill(Pet(Player(MyIndex).Pet.Num).Skill(PetSkillBuffer)).CastTime > 0 Then
                 ' lock to pet
                 tmpX = Player(MyIndex).Pet.X * PIC_X + Player(MyIndex).Pet.XOffset
                 tmpY = Player(MyIndex).Pet.Y * PIC_Y + Player(MyIndex).Pet.YOffset + 35
 
                 ' calculate the width to fill
-                barWidth = (GetTickCount() - PetSpellBufferTimer) / ((Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime * 1000)) * 64
+                barWidth = (GetTickCount() - PetSkillBufferTimer) / ((Skill(Pet(Player(MyIndex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000)) * 64
                 ' draw bar background
                 rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                 Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4))
@@ -3607,6 +3620,7 @@ NextLoop:
             DrawChat()
             DrawHotbar()
             DrawPetBar()
+            DrawPetStats()
         End If
 
         If pnlCharacterVisible = True Then

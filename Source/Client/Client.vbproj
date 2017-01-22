@@ -300,6 +300,9 @@
     <Content Include="Data Files\Graphics\Emotes\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data Files\Graphics\Gui\Main\Pet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data Files\Graphics\Gui\Main\PetBar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2241,7 +2244,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ScreenShot.png" />
-    <None Include="Resources\Client_English.xml" />
     <None Include="Resources\Clear.png" />
     <None Include="Resources\Fill.png" />
     <None Include="Resources\Preview.png" />

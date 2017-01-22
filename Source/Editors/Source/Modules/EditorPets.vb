@@ -7,9 +7,9 @@
     Public Const PetHpBarWidth As Integer = 129
     Public Const PetMpBarWidth As Integer = 129
 
-    Public PetSpellBuffer As Integer
-    Public PetSpellBufferTimer As Integer
-    Public PetSpellCD() As Integer
+    Public PetSkillBuffer As Integer
+    Public PetSkillBufferTimer As Integer
+    Public PetSkillCD() As Integer
 
     Public InitPetEditor As Boolean
 
@@ -36,9 +36,13 @@
         Dim StatType As Byte '1 for set stats, 2 for relation to owner's stats
         Dim LevelingType As Byte '0 for leveling on own, 1 for not leveling
 
-        Dim stat() As Byte
+        Dim Stat() As Byte
 
-        Dim skill() As Integer
+        Dim Skill() As Integer
+
+        Dim Evolvable As Byte
+        Dim EvolveLevel As Integer
+        Dim EvolveNum As Integer
     End Structure
 
     Public Structure PlayerPetRec
@@ -46,12 +50,12 @@
         Dim Health As Integer
         Dim Mana As Integer
         Dim Level As Integer
-        Dim stat() As Byte
-        Dim spell() As Integer
+        Dim Stat() As Byte
+        Dim Skill() As Integer
         Dim Points As Integer
         Dim X As Integer
         Dim Y As Integer
-        Dim dir As Integer
+        Dim Dir As Integer
         Dim MaxHp As Integer
         Dim MaxMP As Integer
         Dim Alive As Byte
@@ -121,6 +125,9 @@
                 buffer.WriteInteger(.skill(i))
             Next
 
+            buffer.WriteInteger(.Evolvable)
+            buffer.WriteInteger(.EvolveLevel)
+            buffer.WriteInteger(.EvolveNum)
         End With
 
         SendData(buffer.ToArray)
@@ -173,6 +180,10 @@
             For i = 1 To 4
                 .skill(i) = buffer.ReadInteger
             Next
+
+            .Evolvable = buffer.ReadInteger
+            .EvolveLevel = buffer.ReadInteger
+            .EvolveNum = buffer.ReadInteger
         End With
 
         buffer = Nothing
@@ -181,14 +192,36 @@
 
 #End Region
 
+#Region "DataBase"
+    Sub ClearPet(ByVal Index As Integer)
+
+        Pet(Index).Name = ""
+
+        ReDim Pet(Index).Stat(Stats.Count - 1)
+        ReDim Pet(Index).Skill(4)
+    End Sub
+
+    Sub ClearPets()
+        Dim i As Integer
+
+        ReDim Pet(MAX_PETS)
+        ReDim PetSkillCD(4)
+
+        For i = 1 To MAX_PETS
+            ClearPet(i)
+        Next
+
+    End Sub
+#End Region
+
 #Region "Editor"
     Public Sub PetEditorInit()
         Dim prefix As String
 
-        If frmEditor_Pet.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Pet.lstIndex.SelectedIndex + 1
+        If FrmEditor_Pet.Visible = False Then Exit Sub
+        EditorIndex = FrmEditor_Pet.lstIndex.SelectedIndex + 1
 
-        With frmEditor_Pet
+        With FrmEditor_Pet
             .txtName.Text = Trim$(Pet(EditorIndex).Name)
             If Pet(EditorIndex).Sprite < 0 Or Pet(EditorIndex).Sprite > .scrlSprite.Maximum Then Pet(EditorIndex).Sprite = 0
 
@@ -199,17 +232,17 @@
             .scrlRange.Value = Pet(EditorIndex).Range
             .lblRange.Text = "Range: " & .scrlRange.Value
 
-            .scrlStrength.Value = Pet(EditorIndex).stat(Stats.Strength)
+            .scrlStrength.Value = Pet(EditorIndex).Stat(Stats.Strength)
             .lblStrength.Text = "Strength: " & .scrlStrength.Value
-            .scrlEndurance.Value = Pet(EditorIndex).stat(Stats.Endurance)
+            .scrlEndurance.Value = Pet(EditorIndex).Stat(Stats.Endurance)
             .lblEndurance.Text = "Endurance: " & .scrlEndurance.Value
-            .scrlVitality.Value = Pet(EditorIndex).stat(Stats.Vitality)
+            .scrlVitality.Value = Pet(EditorIndex).Stat(Stats.Vitality)
             .lblVitality.Text = "Vitality: " & .scrlVitality.Value
-            .scrlLuck.Value = Pet(EditorIndex).stat(Stats.Luck)
+            .scrlLuck.Value = Pet(EditorIndex).Stat(Stats.Luck)
             .lblLuck.Text = "Luck: " & .scrlLuck.Value
-            .scrlIntelligence.Value = Pet(EditorIndex).stat(Stats.Intelligence)
+            .scrlIntelligence.Value = Pet(EditorIndex).Stat(Stats.Intelligence)
             .lblIntelligence.Text = "Intelligence: " & .scrlIntelligence.Value
-            .scrlSpirit.Value = Pet(EditorIndex).stat(Stats.Spirit)
+            .scrlSpirit.Value = Pet(EditorIndex).Stat(Stats.Spirit)
             .lblSpirit.Text = "Spirit: " & .scrlSpirit.Value
             .scrlLevel.Value = Pet(EditorIndex).Level
             .lblLevel.Text = "Level: " & .scrlLevel.Value
@@ -232,7 +265,7 @@
             .lblmaxlevel.Text = "Max Level: " & .scrlMaxLevel.Value
 
             'Set skills
-            .scrlSkill1.Value = Pet(EditorIndex).skill(1)
+            .scrlSkill1.Value = Pet(EditorIndex).Skill(1)
             prefix = "Skill " & 1 & ": "
 
             If .scrlSkill1.Value = 0 Then
@@ -241,7 +274,7 @@
                 .lblSkill1.Text = prefix & Trim$(Skill(.scrlSkill1.Value).Name)
             End If
 
-            .scrlSkill2.Value = Pet(EditorIndex).skill(2)
+            .scrlSkill2.Value = Pet(EditorIndex).Skill(2)
             prefix = "Skill " & 2 & ": "
 
             If .scrlSkill2.Value = 0 Then
@@ -250,7 +283,7 @@
                 .lblSkill2.Text = prefix & Trim$(Skill(.scrlSkill2.Value).Name)
             End If
 
-            .scrlSkill3.Value = Pet(EditorIndex).skill(3)
+            .scrlSkill3.Value = Pet(EditorIndex).Skill(3)
             prefix = "Skill " & 3 & ": "
 
             If .scrlSkill3.Value = 0 Then
@@ -259,7 +292,7 @@
                 .lblSkill3.Text = prefix & Trim$(Skill(.scrlSkill3.Value).Name)
             End If
 
-            .scrlSkill4.Value = Pet(EditorIndex).skill(4)
+            .scrlSkill4.Value = Pet(EditorIndex).Skill(4)
             prefix = "Skill " & 4 & ": "
 
             If .scrlSkill4.Value = 0 Then
@@ -280,6 +313,15 @@
                 .scrlPetExp.Value = Pet(EditorIndex).ExpGain
                 .scrlMaxLevel.Value = Pet(EditorIndex).MaxLevel
                 .scrlPetPnts.Value = Pet(EditorIndex).LevelPnts
+
+                If Pet(EditorIndex).Evolvable = 1 Then
+                    .chkEvolve.Checked = True
+                Else
+                    .chkEvolve.Checked = False
+                End If
+
+                .scrlEvolveLvl.Value = Pet(EditorIndex).EvolveLevel
+                .cmbEvolve.SelectedIndex = Pet(EditorIndex).EvolveNum
             End If
         End With
 
@@ -298,7 +340,7 @@
             End If
         Next
 
-        frmEditor_Pet.Dispose()
+        FrmEditor_Pet.Dispose()
 
         Editor = 0
         ClearChanged_Pet()
@@ -309,7 +351,7 @@
 
         Editor = 0
 
-        frmEditor_Pet.Dispose()
+        FrmEditor_Pet.Dispose()
 
         ClearChanged_Pet()
         ClearPets()
@@ -324,23 +366,6 @@
     End Sub
 #End Region
 
-    Sub ClearPet(ByVal Index As Integer)
 
-        Pet(Index).Name = ""
-
-        ReDim Pet(Index).stat(Stats.Count - 1)
-        ReDim Pet(Index).skill(4)
-    End Sub
-
-    Sub ClearPets()
-        Dim i As Integer
-
-        ReDim Pet(MAX_PETS)
-
-        For i = 1 To MAX_PETS
-            ClearPet(i)
-        Next
-
-    End Sub
 
 End Module

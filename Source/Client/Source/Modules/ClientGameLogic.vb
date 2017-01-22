@@ -179,10 +179,10 @@ Module ClientGameLogic
                     End If
                 End If
                 ' check if we need to unlock the pets's spell casting restriction
-                If PetSpellBuffer > 0 Then
-                    If PetSpellBufferTimer + (Skill(Pet(Player(MyIndex).Pet.Num).spell(PetSpellBuffer)).CastTime * 1000) < Tick Then
-                        PetSpellBuffer = 0
-                        PetSpellBufferTimer = 0
+                If PetSkillBuffer > 0 Then
+                    If PetSkillBufferTimer + (Skill(Pet(Player(MyIndex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000) < Tick Then
+                        PetSkillBuffer = 0
+                        PetSkillBufferTimer = 0
                     End If
                 End If
 
@@ -628,6 +628,10 @@ Module ClientGameLogic
                 ' Leave party
                 Case "/leave"
                     SendLeaveParty()
+
+                'release pet
+                Case "/releasepet"
+                    SendReleasePet()
 
                 ' // Monitor Admin Commands //
 
