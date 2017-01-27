@@ -1,8 +1,10 @@
 ﻿Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Module EditorGraphics
     Public GameWindow As RenderWindow
+    Public TilesetWindow As RenderWindow
 
     Public EditorItem_Furniture As RenderWindow
 
@@ -16,8 +18,8 @@ Module EditorGraphics
     Public SFMLGameFont As Font
 
     'TileSets
-    Public TileSetImgsGFX() As Bitmap
-    Public TileSetImgsLoaded() As Boolean
+    'Public TileSetImgsGFX() As Bitmap
+    'Public TileSetImgsLoaded() As Boolean
     Public TileSetTexture() As Texture
     Public TileSetSprite() As Sprite
     Public TileSetTextureInfo() As GraphicInfo
@@ -113,6 +115,8 @@ Module EditorGraphics
         GameWindow = New RenderWindow(FrmEditor_MapEditor.picScreen.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
 
+        TilesetWindow = New RenderWindow(FrmEditor_MapEditor.picBackSelect.Handle)
+
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
 
         EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
@@ -124,7 +128,7 @@ Module EditorGraphics
 
         'this stuff only loads when needed :)
 
-        ReDim TileSetImgsGFX(0 To NumTileSets)
+        'ReDim TileSetImgsGFX(0 To NumTileSets)
         ReDim TileSetTexture(0 To NumTileSets)
         ReDim TileSetSprite(0 To NumTileSets)
         ReDim TileSetTextureInfo(0 To NumTileSets)
@@ -1263,34 +1267,35 @@ Module EditorGraphics
         Dim width As Integer
         Dim tileset As Byte
 
+        TilesetWindow.DispatchEvents()
+        TilesetWindow.Clear(Color.Black)
+
         ' find tileset number
         tileset = FrmEditor_MapEditor.cmbTileSets.SelectedIndex + 1
 
         ' exit out if doesn't exist
         If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
 
-        If tileset <> LastTileset Then
-            If Not TileSetImgsGFX(LastTileset) Is Nothing Then TileSetImgsGFX(LastTileset).Dispose()
-            TileSetImgsGFX(LastTileset) = Nothing
-            TileSetImgsLoaded(LastTileset) = False
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(Color.Red),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(Color.Transparent)
+        }
+
+        If TileSetTextureInfo(tileset).IsLoaded = False Then
+            LoadTexture(tileset, 1)
         End If
+        ' we use it, lets update timer
+        With TileSetTextureInfo(tileset)
+            .TextureTimer = GetTickCount() + 100000
+        End With
 
-        'check if its loaded
-        If TileSetImgsLoaded(tileset) = False Then
-            TileSetImgsGFX(tileset) = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tileset & GFX_EXT)
-            TileSetImgsLoaded(tileset) = True
-        End If
-
-        'Draw the tileset into memory.
-        height = TileSetImgsGFX(tileset).Height
-        width = TileSetImgsGFX(tileset).Width
-        MapEditorBackBuffer = New Bitmap(width, height)
-
-        Dim g As Graphics = Graphics.FromImage(MapEditorBackBuffer)
-        g.FillRectangle(Brushes.Black, New Rectangle(0, 0, MapEditorBackBuffer.Width, MapEditorBackBuffer.Height))
-
+        height = TileSetTextureInfo(tileset).height
+        width = TileSetTextureInfo(tileset).width
         FrmEditor_MapEditor.picBackSelect.Height = height
         FrmEditor_MapEditor.picBackSelect.Width = width
+
+        TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, width, height)))
 
         ' change selected shape for autotiles
         If FrmEditor_MapEditor.cmbAutoTile.SelectedIndex > 0 Then
@@ -1313,13 +1318,15 @@ Module EditorGraphics
             End Select
         End If
 
-        g.DrawImage(TileSetImgsGFX(tileset), New Rectangle(0, 0, TileSetImgsGFX(tileset).Width, TileSetImgsGFX(tileset).Height))
-        g.DrawRectangle(Pens.Red, New Rectangle(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y, EditorTileWidth * PIC_X, EditorTileHeight * PIC_X))
-        g.Dispose()
+        RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, width, height)
 
-        g = FrmEditor_MapEditor.picBackSelect.CreateGraphics
-        g.DrawImage(MapEditorBackBuffer, New Rectangle(0, 0, width, height))
-        g.Dispose()
+        rec2.Size = New Vector2f(EditorTileWidth * PIC_X, EditorTileHeight * PIC_Y)
+
+        rec2.Position = New Vector2f(EditorTileSelStart.X * PIC_X, EditorTileSelStart.Y * PIC_Y)
+        TilesetWindow.Draw(rec2)
+
+        'and finally show everything on screen
+        TilesetWindow.Display()
 
         LastTileset = tileset
     End Sub
@@ -1354,7 +1361,7 @@ Module EditorGraphics
         Next
 
         For i = 0 To NumTileSets
-            If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
+            'If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
             If Not TileSetTexture(i) Is Nothing Then TileSetTexture(i).Dispose()
         Next i
 

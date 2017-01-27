@@ -838,7 +838,7 @@ Public Module ClientAutoTiles
 
         ' Draw the quarter
         TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
-        TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).Position = New SFML.Window.Vector2f(destX, destY)
+        TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset).Position = New SFML.System.Vector2f(destX, destY)
 
         GameWindow.Draw(TileSetSprite(Map.Tile(X, Y).Layer(layerNum).Tileset))
 

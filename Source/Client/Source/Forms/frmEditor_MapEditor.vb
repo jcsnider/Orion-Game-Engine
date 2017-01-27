@@ -418,18 +418,12 @@ Public Class frmEditor_MapEditor
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
-        EditorMap_DrawTileset()
-
-        pnlBack.Refresh()
-
-        picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
-        picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
+        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
+        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
     End Sub
-
-
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then
@@ -501,8 +495,6 @@ Public Class frmEditor_MapEditor
             EditorTileHeight = 1
         End If
     End Sub
-
-
 
 #Region "Map Editor"
 
@@ -595,12 +587,6 @@ Public Class frmEditor_MapEditor
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
-
-        'clear memory
-        ReDim TileSetImgsLoaded(NumTileSets)
-        For i = 0 To NumTileSets
-            TileSetImgsLoaded(i) = False
-        Next
 
         ' set the scrollbars
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
@@ -894,14 +880,6 @@ Public Class frmEditor_MapEditor
         InMapEditor = False
         Visible = False
         GettingMap = True
-
-        'clear memory
-        For i = 0 To NumTileSets
-            If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-            TileSetImgsGFX(i) = Nothing
-            TileSetImgsLoaded(i) = False
-        Next
-
     End Sub
 
     Public Sub MapEditorSend()
@@ -909,13 +887,6 @@ Public Class frmEditor_MapEditor
         InMapEditor = False
         Visible = False
         GettingMap = True
-
-        'clear memory
-        For i = 0 To NumTileSets
-            If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-            TileSetImgsGFX(i) = Nothing
-            TileSetImgsLoaded(i) = False
-        Next
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)

@@ -30,6 +30,30 @@ Partial Class FrmEditor_MapEditor
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsCurFps = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DarkSectionPanel1 = New DarkUI.Controls.DarkSectionPanel()
+        Me.pnlTiles = New System.Windows.Forms.Panel()
+        Me.cmbAutoTile = New DarkUI.Controls.DarkComboBox()
+        Me.cmbTileSets = New DarkUI.Controls.DarkComboBox()
+        Me.cmbLayers = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.pnlBack = New System.Windows.Forms.Panel()
+        Me.picBackSelect = New System.Windows.Forms.PictureBox()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
+        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.pnlNpc = New System.Windows.Forms.Panel()
+        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
+        Me.lstMapNpc = New System.Windows.Forms.ListBox()
+        Me.pnlDirBlock = New System.Windows.Forms.Panel()
+        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
+        Me.pnlEvents = New System.Windows.Forms.Panel()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.btnEvents = New DarkUI.Controls.DarkButton()
+        Me.btnDirBlock = New DarkUI.Controls.DarkButton()
+        Me.btnNpc = New DarkUI.Controls.DarkButton()
+        Me.btnAttributes = New DarkUI.Controls.DarkButton()
+        Me.btnTiles = New DarkUI.Controls.DarkButton()
         Me.pnlAttribute = New System.Windows.Forms.Panel()
         Me.optLight = New DarkUI.Controls.DarkRadioButton()
         Me.btnClearAttribute = New DarkUI.Controls.DarkButton()
@@ -48,30 +72,6 @@ Partial Class FrmEditor_MapEditor
         Me.optItem = New DarkUI.Controls.DarkRadioButton()
         Me.optWarp = New DarkUI.Controls.DarkRadioButton()
         Me.optBlocked = New DarkUI.Controls.DarkRadioButton()
-        Me.pnlTiles = New System.Windows.Forms.Panel()
-        Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
-        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.cmbLayers = New System.Windows.Forms.ComboBox()
-        Me.pnlBack = New System.Windows.Forms.Panel()
-        Me.picBackSelect = New System.Windows.Forms.PictureBox()
-        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
-        Me.scrlPictureY = New DarkUI.Controls.DarkScrollBar()
-        Me.cmbTileSets = New System.Windows.Forms.ComboBox()
-        Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
-        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.pnlNpc = New System.Windows.Forms.Panel()
-        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
-        Me.lstMapNpc = New System.Windows.Forms.ListBox()
-        Me.pnlDirBlock = New System.Windows.Forms.Panel()
-        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.pnlEvents = New System.Windows.Forms.Panel()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
-        Me.btnEvents = New DarkUI.Controls.DarkButton()
-        Me.btnDirBlock = New DarkUI.Controls.DarkButton()
-        Me.btnNpc = New DarkUI.Controls.DarkButton()
-        Me.btnAttributes = New DarkUI.Controls.DarkButton()
-        Me.btnTiles = New DarkUI.Controls.DarkButton()
         Me.DarkSectionPanel2 = New DarkUI.Controls.DarkSectionPanel()
         Me.pnlMoreOptions = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -196,13 +196,13 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
         Me.DarkSectionPanel1.SuspendLayout()
-        Me.pnlAttribute.SuspendLayout()
         Me.pnlTiles.SuspendLayout()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlNpc.SuspendLayout()
         Me.pnlDirBlock.SuspendLayout()
         Me.pnlEvents.SuspendLayout()
+        Me.pnlAttribute.SuspendLayout()
         Me.DarkSectionPanel2.SuspendLayout()
         Me.pnlMoreOptions.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -307,6 +307,285 @@ Partial Class FrmEditor_MapEditor
         Me.DarkSectionPanel1.SectionHeader = "Map Layers"
         Me.DarkSectionPanel1.Size = New System.Drawing.Size(318, 598)
         Me.DarkSectionPanel1.TabIndex = 7
+        '
+        'pnlTiles
+        '
+        Me.pnlTiles.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlTiles.Controls.Add(Me.cmbAutoTile)
+        Me.pnlTiles.Controls.Add(Me.cmbTileSets)
+        Me.pnlTiles.Controls.Add(Me.cmbLayers)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel4)
+        Me.pnlTiles.Controls.Add(Me.pnlBack)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel3)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureY)
+        Me.pnlTiles.Controls.Add(Me.scrlPictureX)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel2)
+        Me.pnlTiles.Controls.Add(Me.DarkLabel1)
+        Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
+        Me.pnlTiles.Name = "pnlTiles"
+        Me.pnlTiles.Size = New System.Drawing.Size(316, 546)
+        Me.pnlTiles.TabIndex = 0
+        '
+        'cmbAutoTile
+        '
+        Me.cmbAutoTile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbAutoTile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbAutoTile.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbAutoTile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbAutoTile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbAutoTile.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbAutoTile.FormattingEnabled = True
+        Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile", "Fake", "Animated", "Cliff", "Waterfall"})
+        Me.cmbAutoTile.Location = New System.Drawing.Point(52, 512)
+        Me.cmbAutoTile.Name = "cmbAutoTile"
+        Me.cmbAutoTile.Size = New System.Drawing.Size(109, 21)
+        Me.cmbAutoTile.TabIndex = 22
+        '
+        'cmbTileSets
+        '
+        Me.cmbTileSets.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbTileSets.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbTileSets.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbTileSets.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTileSets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbTileSets.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbTileSets.FormattingEnabled = True
+        Me.cmbTileSets.Location = New System.Drawing.Point(52, 485)
+        Me.cmbTileSets.Name = "cmbTileSets"
+        Me.cmbTileSets.Size = New System.Drawing.Size(80, 21)
+        Me.cmbTileSets.TabIndex = 21
+        '
+        'cmbLayers
+        '
+        Me.cmbLayers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbLayers.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbLayers.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbLayers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbLayers.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbLayers.FormattingEnabled = True
+        Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask2", "Fringe", "Fringe2"})
+        Me.cmbLayers.Location = New System.Drawing.Point(180, 485)
+        Me.cmbLayers.Name = "cmbLayers"
+        Me.cmbLayers.Size = New System.Drawing.Size(130, 21)
+        Me.cmbLayers.TabIndex = 20
+        '
+        'DarkLabel4
+        '
+        Me.DarkLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel4.AutoSize = True
+        Me.DarkLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(3, 516)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(49, 13)
+        Me.DarkLabel4.TabIndex = 18
+        Me.DarkLabel4.Text = "AutoTile:"
+        '
+        'pnlBack
+        '
+        Me.pnlBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pnlBack.BackColor = System.Drawing.Color.Black
+        Me.pnlBack.Controls.Add(Me.picBackSelect)
+        Me.pnlBack.Location = New System.Drawing.Point(3, 3)
+        Me.pnlBack.Name = "pnlBack"
+        Me.pnlBack.Size = New System.Drawing.Size(286, 442)
+        Me.pnlBack.TabIndex = 10
+        '
+        'picBackSelect
+        '
+        Me.picBackSelect.BackColor = System.Drawing.Color.Black
+        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
+        Me.picBackSelect.Name = "picBackSelect"
+        Me.picBackSelect.Size = New System.Drawing.Size(283, 451)
+        Me.picBackSelect.TabIndex = 1
+        Me.picBackSelect.TabStop = False
+        '
+        'DarkLabel3
+        '
+        Me.DarkLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel3.AutoSize = True
+        Me.DarkLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(138, 489)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(36, 13)
+        Me.DarkLabel3.TabIndex = 16
+        Me.DarkLabel3.Text = "Layer:"
+        '
+        'scrlPictureY
+        '
+        Me.scrlPictureY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
+        Me.scrlPictureY.Name = "scrlPictureY"
+        Me.scrlPictureY.Size = New System.Drawing.Size(18, 442)
+        Me.scrlPictureY.TabIndex = 12
+        '
+        'scrlPictureX
+        '
+        Me.scrlPictureX.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
+        Me.scrlPictureX.Name = "scrlPictureX"
+        Me.scrlPictureX.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
+        Me.scrlPictureX.Size = New System.Drawing.Size(283, 16)
+        Me.scrlPictureX.TabIndex = 11
+        '
+        'DarkLabel2
+        '
+        Me.DarkLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel2.AutoSize = True
+        Me.DarkLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(3, 489)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(43, 13)
+        Me.DarkLabel2.TabIndex = 14
+        Me.DarkLabel2.Text = "TileSet:"
+        '
+        'DarkLabel1
+        '
+        Me.DarkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.DarkLabel1.AutoSize = True
+        Me.DarkLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.DarkLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(57, 470)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
+        Me.DarkLabel1.TabIndex = 13
+        Me.DarkLabel1.Text = "Drag Mouse to Select Multiple Tiles"
+        '
+        'pnlNpc
+        '
+        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlNpc.Controls.Add(Me.cmbNpcList)
+        Me.pnlNpc.Controls.Add(Me.lstMapNpc)
+        Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
+        Me.pnlNpc.Name = "pnlNpc"
+        Me.pnlNpc.Size = New System.Drawing.Size(314, 548)
+        Me.pnlNpc.TabIndex = 8
+        '
+        'cmbNpcList
+        '
+        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
+        Me.cmbNpcList.FormattingEnabled = True
+        Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
+        Me.cmbNpcList.Name = "cmbNpcList"
+        Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
+        Me.cmbNpcList.TabIndex = 18
+        '
+        'lstMapNpc
+        '
+        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
+        Me.lstMapNpc.FormattingEnabled = True
+        Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
+        Me.lstMapNpc.Name = "lstMapNpc"
+        Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
+        Me.lstMapNpc.TabIndex = 0
+        '
+        'pnlDirBlock
+        '
+        Me.pnlDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlDirBlock.Controls.Add(Me.DarkLabel6)
+        Me.pnlDirBlock.Location = New System.Drawing.Point(2, 51)
+        Me.pnlDirBlock.Name = "pnlDirBlock"
+        Me.pnlDirBlock.Size = New System.Drawing.Size(314, 548)
+        Me.pnlDirBlock.TabIndex = 7
+        '
+        'DarkLabel6
+        '
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(8, 8)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(239, 13)
+        Me.DarkLabel6.TabIndex = 0
+        Me.DarkLabel6.Text = "Just press the arrows to block that side of the tile."
+        '
+        'pnlEvents
+        '
+        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlEvents.Controls.Add(Me.DarkLabel5)
+        Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
+        Me.pnlEvents.Name = "pnlEvents"
+        Me.pnlEvents.Size = New System.Drawing.Size(314, 548)
+        Me.pnlEvents.TabIndex = 6
+        '
+        'DarkLabel5
+        '
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
+        Me.DarkLabel5.TabIndex = 0
+        Me.DarkLabel5.Text = "Click on the map where you want to ad a event."
+        '
+        'btnEvents
+        '
+        Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnEvents.Location = New System.Drawing.Point(264, 28)
+        Me.btnEvents.Name = "btnEvents"
+        Me.btnEvents.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnEvents.Size = New System.Drawing.Size(52, 23)
+        Me.btnEvents.TabIndex = 4
+        Me.btnEvents.Text = "Events"
+        '
+        'btnDirBlock
+        '
+        Me.btnDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnDirBlock.Location = New System.Drawing.Point(163, 28)
+        Me.btnDirBlock.Name = "btnDirBlock"
+        Me.btnDirBlock.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnDirBlock.Size = New System.Drawing.Size(100, 23)
+        Me.btnDirBlock.TabIndex = 3
+        Me.btnDirBlock.Text = "Directional Block"
+        '
+        'btnNpc
+        '
+        Me.btnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnNpc.Location = New System.Drawing.Point(118, 28)
+        Me.btnNpc.Name = "btnNpc"
+        Me.btnNpc.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnNpc.Size = New System.Drawing.Size(44, 23)
+        Me.btnNpc.TabIndex = 2
+        Me.btnNpc.Text = "Npc's"
+        '
+        'btnAttributes
+        '
+        Me.btnAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnAttributes.Location = New System.Drawing.Point(49, 28)
+        Me.btnAttributes.Name = "btnAttributes"
+        Me.btnAttributes.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnAttributes.Size = New System.Drawing.Size(68, 23)
+        Me.btnAttributes.TabIndex = 1
+        Me.btnAttributes.Text = "Attributes"
+        '
+        'btnTiles
+        '
+        Me.btnTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.btnTiles.Location = New System.Drawing.Point(4, 28)
+        Me.btnTiles.Name = "btnTiles"
+        Me.btnTiles.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnTiles.Size = New System.Drawing.Size(44, 23)
+        Me.btnTiles.TabIndex = 0
+        Me.btnTiles.Text = "Tiles"
         '
         'pnlAttribute
         '
@@ -505,270 +784,6 @@ Partial Class FrmEditor_MapEditor
         Me.optBlocked.TabIndex = 0
         Me.optBlocked.Text = "Blocked"
         '
-        'pnlTiles
-        '
-        Me.pnlTiles.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pnlTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlTiles.Controls.Add(Me.cmbAutoTile)
-        Me.pnlTiles.Controls.Add(Me.DarkLabel4)
-        Me.pnlTiles.Controls.Add(Me.cmbLayers)
-        Me.pnlTiles.Controls.Add(Me.pnlBack)
-        Me.pnlTiles.Controls.Add(Me.DarkLabel3)
-        Me.pnlTiles.Controls.Add(Me.scrlPictureY)
-        Me.pnlTiles.Controls.Add(Me.cmbTileSets)
-        Me.pnlTiles.Controls.Add(Me.scrlPictureX)
-        Me.pnlTiles.Controls.Add(Me.DarkLabel2)
-        Me.pnlTiles.Controls.Add(Me.DarkLabel1)
-        Me.pnlTiles.Location = New System.Drawing.Point(1, 51)
-        Me.pnlTiles.Name = "pnlTiles"
-        Me.pnlTiles.Size = New System.Drawing.Size(316, 546)
-        Me.pnlTiles.TabIndex = 0
-        '
-        'cmbAutoTile
-        '
-        Me.cmbAutoTile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.cmbAutoTile.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbAutoTile.FormattingEnabled = True
-        Me.cmbAutoTile.Items.AddRange(New Object() {"Normal", "AutoTile (VX)", "Fake (VX)", "Animated (VX)", "Cliff (VX)", "Waterfall (VX)"})
-        Me.cmbAutoTile.Location = New System.Drawing.Point(51, 513)
-        Me.cmbAutoTile.Name = "cmbAutoTile"
-        Me.cmbAutoTile.Size = New System.Drawing.Size(123, 21)
-        Me.cmbAutoTile.TabIndex = 19
-        '
-        'DarkLabel4
-        '
-        Me.DarkLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DarkLabel4.AutoSize = True
-        Me.DarkLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel4.Location = New System.Drawing.Point(3, 516)
-        Me.DarkLabel4.Name = "DarkLabel4"
-        Me.DarkLabel4.Size = New System.Drawing.Size(49, 13)
-        Me.DarkLabel4.TabIndex = 18
-        Me.DarkLabel4.Text = "AutoTile:"
-        '
-        'cmbLayers
-        '
-        Me.cmbLayers.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.cmbLayers.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbLayers.FormattingEnabled = True
-        Me.cmbLayers.Items.AddRange(New Object() {"Ground", "Mask", "Mask2", "Fringe", "Fringe2"})
-        Me.cmbLayers.Location = New System.Drawing.Point(180, 486)
-        Me.cmbLayers.Name = "cmbLayers"
-        Me.cmbLayers.Size = New System.Drawing.Size(130, 21)
-        Me.cmbLayers.TabIndex = 17
-        '
-        'pnlBack
-        '
-        Me.pnlBack.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pnlBack.BackColor = System.Drawing.Color.Black
-        Me.pnlBack.Controls.Add(Me.picBackSelect)
-        Me.pnlBack.Location = New System.Drawing.Point(3, 3)
-        Me.pnlBack.Name = "pnlBack"
-        Me.pnlBack.Size = New System.Drawing.Size(286, 442)
-        Me.pnlBack.TabIndex = 10
-        '
-        'picBackSelect
-        '
-        Me.picBackSelect.BackColor = System.Drawing.Color.Black
-        Me.picBackSelect.Location = New System.Drawing.Point(0, 0)
-        Me.picBackSelect.Name = "picBackSelect"
-        Me.picBackSelect.Size = New System.Drawing.Size(283, 451)
-        Me.picBackSelect.TabIndex = 1
-        Me.picBackSelect.TabStop = False
-        '
-        'DarkLabel3
-        '
-        Me.DarkLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DarkLabel3.AutoSize = True
-        Me.DarkLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel3.Location = New System.Drawing.Point(138, 489)
-        Me.DarkLabel3.Name = "DarkLabel3"
-        Me.DarkLabel3.Size = New System.Drawing.Size(36, 13)
-        Me.DarkLabel3.TabIndex = 16
-        Me.DarkLabel3.Text = "Layer:"
-        '
-        'scrlPictureY
-        '
-        Me.scrlPictureY.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.scrlPictureY.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.scrlPictureY.Location = New System.Drawing.Point(292, 3)
-        Me.scrlPictureY.Name = "scrlPictureY"
-        Me.scrlPictureY.Size = New System.Drawing.Size(18, 442)
-        Me.scrlPictureY.TabIndex = 12
-        '
-        'cmbTileSets
-        '
-        Me.cmbTileSets.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.cmbTileSets.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbTileSets.FormattingEnabled = True
-        Me.cmbTileSets.Location = New System.Drawing.Point(51, 486)
-        Me.cmbTileSets.Name = "cmbTileSets"
-        Me.cmbTileSets.Size = New System.Drawing.Size(81, 21)
-        Me.cmbTileSets.TabIndex = 15
-        '
-        'scrlPictureX
-        '
-        Me.scrlPictureX.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.scrlPictureX.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.scrlPictureX.Location = New System.Drawing.Point(3, 451)
-        Me.scrlPictureX.Name = "scrlPictureX"
-        Me.scrlPictureX.ScrollOrientation = DarkUI.Controls.DarkScrollOrientation.Horizontal
-        Me.scrlPictureX.Size = New System.Drawing.Size(283, 16)
-        Me.scrlPictureX.TabIndex = 11
-        '
-        'DarkLabel2
-        '
-        Me.DarkLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DarkLabel2.AutoSize = True
-        Me.DarkLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel2.Location = New System.Drawing.Point(3, 489)
-        Me.DarkLabel2.Name = "DarkLabel2"
-        Me.DarkLabel2.Size = New System.Drawing.Size(43, 13)
-        Me.DarkLabel2.TabIndex = 14
-        Me.DarkLabel2.Text = "TileSet:"
-        '
-        'DarkLabel1
-        '
-        Me.DarkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.DarkLabel1.AutoSize = True
-        Me.DarkLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.DarkLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel1.Location = New System.Drawing.Point(57, 470)
-        Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
-        Me.DarkLabel1.TabIndex = 13
-        Me.DarkLabel1.Text = "Drag Mouse to Select Multiple Tiles"
-        '
-        'pnlNpc
-        '
-        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlNpc.Controls.Add(Me.cmbNpcList)
-        Me.pnlNpc.Controls.Add(Me.lstMapNpc)
-        Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
-        Me.pnlNpc.Name = "pnlNpc"
-        Me.pnlNpc.Size = New System.Drawing.Size(314, 548)
-        Me.pnlNpc.TabIndex = 8
-        '
-        'cmbNpcList
-        '
-        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbNpcList.FormattingEnabled = True
-        Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
-        Me.cmbNpcList.Name = "cmbNpcList"
-        Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
-        Me.cmbNpcList.TabIndex = 18
-        '
-        'lstMapNpc
-        '
-        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
-        Me.lstMapNpc.FormattingEnabled = True
-        Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
-        Me.lstMapNpc.Name = "lstMapNpc"
-        Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
-        Me.lstMapNpc.TabIndex = 0
-        '
-        'pnlDirBlock
-        '
-        Me.pnlDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlDirBlock.Controls.Add(Me.DarkLabel6)
-        Me.pnlDirBlock.Location = New System.Drawing.Point(2, 51)
-        Me.pnlDirBlock.Name = "pnlDirBlock"
-        Me.pnlDirBlock.Size = New System.Drawing.Size(314, 548)
-        Me.pnlDirBlock.TabIndex = 7
-        '
-        'DarkLabel6
-        '
-        Me.DarkLabel6.AutoSize = True
-        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel6.Location = New System.Drawing.Point(8, 8)
-        Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(239, 13)
-        Me.DarkLabel6.TabIndex = 0
-        Me.DarkLabel6.Text = "Just press the arrows to block that side of the tile."
-        '
-        'pnlEvents
-        '
-        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlEvents.Controls.Add(Me.DarkLabel5)
-        Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
-        Me.pnlEvents.Name = "pnlEvents"
-        Me.pnlEvents.Size = New System.Drawing.Size(314, 548)
-        Me.pnlEvents.TabIndex = 6
-        '
-        'DarkLabel5
-        '
-        Me.DarkLabel5.AutoSize = True
-        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
-        Me.DarkLabel5.Name = "DarkLabel5"
-        Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
-        Me.DarkLabel5.TabIndex = 0
-        Me.DarkLabel5.Text = "Click on the map where you want to ad a event."
-        '
-        'btnEvents
-        '
-        Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.btnEvents.Location = New System.Drawing.Point(264, 28)
-        Me.btnEvents.Name = "btnEvents"
-        Me.btnEvents.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnEvents.Size = New System.Drawing.Size(52, 23)
-        Me.btnEvents.TabIndex = 4
-        Me.btnEvents.Text = "Events"
-        '
-        'btnDirBlock
-        '
-        Me.btnDirBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.btnDirBlock.Location = New System.Drawing.Point(163, 28)
-        Me.btnDirBlock.Name = "btnDirBlock"
-        Me.btnDirBlock.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnDirBlock.Size = New System.Drawing.Size(100, 23)
-        Me.btnDirBlock.TabIndex = 3
-        Me.btnDirBlock.Text = "Directional Block"
-        '
-        'btnNpc
-        '
-        Me.btnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.btnNpc.Location = New System.Drawing.Point(118, 28)
-        Me.btnNpc.Name = "btnNpc"
-        Me.btnNpc.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnNpc.Size = New System.Drawing.Size(44, 23)
-        Me.btnNpc.TabIndex = 2
-        Me.btnNpc.Text = "Npc's"
-        '
-        'btnAttributes
-        '
-        Me.btnAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.btnAttributes.Location = New System.Drawing.Point(49, 28)
-        Me.btnAttributes.Name = "btnAttributes"
-        Me.btnAttributes.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnAttributes.Size = New System.Drawing.Size(68, 23)
-        Me.btnAttributes.TabIndex = 1
-        Me.btnAttributes.Text = "Attributes"
-        '
-        'btnTiles
-        '
-        Me.btnTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.btnTiles.Location = New System.Drawing.Point(4, 28)
-        Me.btnTiles.Name = "btnTiles"
-        Me.btnTiles.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnTiles.Size = New System.Drawing.Size(44, 23)
-        Me.btnTiles.TabIndex = 0
-        Me.btnTiles.Text = "Tiles"
-        '
         'DarkSectionPanel2
         '
         Me.DarkSectionPanel2.AutoScroll = True
@@ -797,7 +812,7 @@ Partial Class FrmEditor_MapEditor
         Me.pnlMoreOptions.Controls.Add(Me.GroupBox4)
         Me.pnlMoreOptions.Location = New System.Drawing.Point(4, 26)
         Me.pnlMoreOptions.Name = "pnlMoreOptions"
-        Me.pnlMoreOptions.Size = New System.Drawing.Size(208, 540)
+        Me.pnlMoreOptions.Size = New System.Drawing.Size(208, 539)
         Me.pnlMoreOptions.TabIndex = 31
         Me.pnlMoreOptions.Visible = False
         '
@@ -1240,6 +1255,8 @@ Partial Class FrmEditor_MapEditor
         'chkInstance
         '
         Me.chkInstance.AutoSize = True
+        Me.chkInstance.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.chkInstance.ForeColor = System.Drawing.Color.Gainsboro
         Me.chkInstance.Location = New System.Drawing.Point(9, 85)
         Me.chkInstance.Name = "chkInstance"
         Me.chkInstance.Size = New System.Drawing.Size(79, 17)
@@ -2042,8 +2059,6 @@ Partial Class FrmEditor_MapEditor
         Me.ssInfo.ResumeLayout(False)
         Me.ssInfo.PerformLayout()
         Me.DarkSectionPanel1.ResumeLayout(False)
-        Me.pnlAttribute.ResumeLayout(False)
-        Me.pnlAttribute.PerformLayout()
         Me.pnlTiles.ResumeLayout(False)
         Me.pnlTiles.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
@@ -2053,6 +2068,8 @@ Partial Class FrmEditor_MapEditor
         Me.pnlDirBlock.PerformLayout()
         Me.pnlEvents.ResumeLayout(False)
         Me.pnlEvents.PerformLayout()
+        Me.pnlAttribute.ResumeLayout(False)
+        Me.pnlAttribute.PerformLayout()
         Me.DarkSectionPanel2.ResumeLayout(False)
         Me.DarkSectionPanel2.PerformLayout()
         Me.pnlMoreOptions.ResumeLayout(False)
@@ -2129,11 +2146,8 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents scrlPictureX As DarkUI.Controls.DarkScrollBar
     Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbTileSets As ComboBox
     Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbLayers As ComboBox
     Friend WithEvents pnlTiles As Panel
-    Friend WithEvents cmbAutoTile As ComboBox
     Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
     Friend WithEvents pnlEvents As Panel
     Friend WithEvents pnlDirBlock As Panel
@@ -2266,4 +2280,7 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents tsbScreenShot As ToolStripButton
     Friend WithEvents optLight As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents cmbLayers As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbTileSets As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbAutoTile As DarkUI.Controls.DarkComboBox
 End Class

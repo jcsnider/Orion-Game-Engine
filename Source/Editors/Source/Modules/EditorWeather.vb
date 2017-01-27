@@ -1,7 +1,6 @@
-﻿Imports System.Windows.Forms
-Imports SFML.Audio
+﻿Imports SFML.Audio
 Imports SFML.Graphics
-Imports SFML.Window
+Imports SFML.System
 
 Public Module EditorWeather
     Public Const MAX_WEATHER_PARTICLES As Integer = 100

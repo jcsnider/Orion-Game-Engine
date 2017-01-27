@@ -1,5 +1,4 @@
 ﻿Imports System.Text
-Imports System.Windows.Forms
 Imports SFML.Graphics
 
 Module EditorText
@@ -20,20 +19,20 @@ Module EditorText
         mystring.CharacterSize = TextSize
 
         mystring.Color = BackColor
-        mystring.Position = New SFML.Window.Vector2f(X - 1, y - 1)
+        mystring.Position = New SFML.System.Vector2f(X - 1, y - 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.Window.Vector2f(X - 1, y + 1)
+        mystring.Position = New SFML.System.Vector2f(X - 1, y + 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.Window.Vector2f(X + 1, y + 1)
+        mystring.Position = New SFML.System.Vector2f(X + 1, y + 1)
         target.Draw(mystring)
 
-        mystring.Position = New SFML.Window.Vector2f(X + 1, y + -1)
+        mystring.Position = New SFML.System.Vector2f(X + 1, y + -1)
         target.Draw(mystring)
 
         mystring.Color = color
-        mystring.Position = New SFML.Window.Vector2f(X, y)
+        mystring.Position = New SFML.System.Vector2f(X, y)
         target.Draw(mystring)
 
     End Sub
@@ -58,7 +57,7 @@ Module EditorText
                 backcolor = Color.Black
         End Select
 
-        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - getTextWidth((Trim$(Npc(npcNum).Name))) / 2
+        TextX = ConvertMapX(MapNpc(MapNpcNum).X * PIC_X) + MapNpc(MapNpcNum).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2
         If Npc(npcNum).Sprite < 1 Or Npc(npcNum).Sprite > NumCharacters Then
             TextY = ConvertMapY(MapNpc(MapNpcNum).Y * PIC_Y) + MapNpc(MapNpcNum).YOffset - 16
         Else
@@ -82,7 +81,7 @@ Module EditorText
 
         Name = Trim$(Map.MapEvents(Index).Name)
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - getTextWidth(Trim$(Name)) / 2
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
         If Map.MapEvents(Index).GraphicType = 0 Then
             TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
@@ -121,8 +120,8 @@ Module EditorText
                             rec.OutlineColor = New SFML.Graphics.Color(Color.White)
                             rec.OutlineThickness = 0.6
 
-                            rec.Size = New SFML.Window.Vector2f((PIC_X), (PIC_X))
-                            rec.Position = New SFML.Window.Vector2f(ConvertMapX((X) * PIC_X), ConvertMapY((y) * PIC_Y))
+                            rec.Size = New SFML.System.Vector2f((PIC_X), (PIC_X))
+                            rec.Position = New SFML.System.Vector2f(ConvertMapX((X) * PIC_X), ConvertMapY((y) * PIC_Y))
 
                             Select Case .Type
                                 Case TileType.Blocked
@@ -170,7 +169,7 @@ Module EditorText
 
     End Sub
 
-    Public Function getTextWidth(ByVal text As String, Optional textsize As Byte = FONT_SIZE) As Integer
+    Public Function GetTextWidth(ByVal text As String, Optional textsize As Byte = FONT_SIZE) As Integer
         Dim mystring As Text = New Text(text, SFMLGameFont)
         Dim textBounds As FloatRect
         mystring.CharacterSize = textsize

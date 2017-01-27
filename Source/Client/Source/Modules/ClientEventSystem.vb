@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Public Module ClientEventSystem

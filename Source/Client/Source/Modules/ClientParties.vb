@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Module ClientParties

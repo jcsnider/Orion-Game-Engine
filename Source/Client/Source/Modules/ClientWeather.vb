@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports SFML.Audio
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Public Module ClientWeather

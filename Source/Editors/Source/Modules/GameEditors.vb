@@ -135,7 +135,7 @@
         FrmEditor_MapEditor.lblIntensity.Text = "Intensity: " & FrmEditor_MapEditor.scrlIntensity.Value
 
         ' render the tiles
-        EditorMap_DrawTileset()
+        'EditorMap_DrawTileset2()
 
         SelectedTab = 1
 
@@ -169,10 +169,10 @@
         EditorTileSelEnd = New Point(1, 1)
 
         'clear memory
-        ReDim TileSetImgsLoaded(NumTileSets)
-        For i = 0 To NumTileSets
-            TileSetImgsLoaded(i) = False
-        Next
+        'ReDim TileSetImgsLoaded(NumTileSets)
+        'For i = 0 To NumTileSets
+        '    TileSetImgsLoaded(i) = False
+        'Next
 
         ' set the scrollbars
         FrmEditor_MapEditor.scrlPictureY.Maximum = (FrmEditor_MapEditor.picBackSelect.Height \ PIC_Y) \ 2 ' \2 is new, lets test
@@ -476,11 +476,11 @@
         GettingMap = True
 
         'clear memory
-        For i = 0 To NumTileSets
-            If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-            TileSetImgsGFX(i) = Nothing
-            TileSetImgsLoaded(i) = False
-        Next
+        'For i = 0 To NumTileSets
+        '    If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
+        '    TileSetImgsGFX(i) = Nothing
+        '    TileSetImgsLoaded(i) = False
+        'Next
 
     End Sub
 
@@ -491,11 +491,11 @@
         GettingMap = True
 
         'clear memory
-        For i = 0 To NumTileSets
-            If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-            TileSetImgsGFX(i) = Nothing
-            TileSetImgsLoaded(i) = False
-        Next
+        'For i = 0 To NumTileSets
+        '    If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
+        '    TileSetImgsGFX(i) = Nothing
+        '    TileSetImgsLoaded(i) = False
+        'Next
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)
@@ -1222,10 +1222,10 @@
 
         Editor = EDITOR_CLASSES
 
-        frmEditor_Classes.scrlMaleSprite.Maximum = NumCharacters
-        frmEditor_Classes.scrlFemaleSprite.Maximum = NumCharacters
+        FrmEditor_Classes.nudMaleSprite.Maximum = NumCharacters
+        FrmEditor_Classes.nudFemaleSprite.Maximum = NumCharacters
 
-        frmEditor_Classes.cmbItems.Items.Clear()
+        FrmEditor_Classes.cmbItems.Items.Clear()
 
         frmEditor_Classes.cmbItems.Items.Add("None")
         For i = 1 To MAX_ITEMS
@@ -1257,10 +1257,10 @@
             frmEditor_Classes.cmbFemaleSprite.Items.Add("Sprite " & i + 1)
         Next
 
-        frmEditor_Classes.scrlMaleSprite.Value = Classes(EditorIndex).MaleSprite(0)
-        frmEditor_Classes.scrlFemaleSprite.Value = Classes(EditorIndex).FemaleSprite(0)
+        FrmEditor_Classes.nudMaleSprite.Value = Classes(EditorIndex).MaleSprite(0)
+        FrmEditor_Classes.nudFemaleSprite.Value = Classes(EditorIndex).FemaleSprite(0)
 
-        frmEditor_Classes.cmbMaleSprite.SelectedIndex = 0
+        FrmEditor_Classes.cmbMaleSprite.SelectedIndex = 0
         frmEditor_Classes.cmbFemaleSprite.SelectedIndex = 0
 
         frmEditor_Classes.DrawPreview()
@@ -1269,17 +1269,17 @@
             If Classes(EditorIndex).Stat(i) = 0 Then Classes(EditorIndex).Stat(i) = 1
         Next
 
-        frmEditor_Classes.numStrength.Value = Classes(EditorIndex).Stat(Stats.Strength)
-        frmEditor_Classes.numLuck.Value = Classes(EditorIndex).Stat(Stats.Luck)
-        frmEditor_Classes.numEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
-        frmEditor_Classes.numIntelligence.Value = Classes(EditorIndex).Stat(Stats.Intelligence)
-        frmEditor_Classes.numVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
-        frmEditor_Classes.numSpirit.Value = Classes(EditorIndex).Stat(Stats.Spirit)
+        frmEditor_Classes.nudStrength.Value = Classes(EditorIndex).Stat(Stats.Strength)
+        frmEditor_Classes.nudLuck.Value = Classes(EditorIndex).Stat(Stats.Luck)
+        frmEditor_Classes.nudEndurance.Value = Classes(EditorIndex).Stat(Stats.Endurance)
+        frmEditor_Classes.nudIntelligence.Value = Classes(EditorIndex).Stat(Stats.Intelligence)
+        frmEditor_Classes.nudVitality.Value = Classes(EditorIndex).Stat(Stats.Vitality)
+        frmEditor_Classes.nudSpirit.Value = Classes(EditorIndex).Stat(Stats.Spirit)
 
         If Classes(EditorIndex).BaseExp < 10 Then
-            frmEditor_Classes.numBaseExp.Value = 10
+            frmEditor_Classes.nudBaseExp.Value = 10
         Else
-            frmEditor_Classes.numBaseExp.Value = Classes(EditorIndex).BaseExp
+            frmEditor_Classes.nudBaseExp.Value = Classes(EditorIndex).BaseExp
         End If
 
         frmEditor_Classes.lstStartItems.Items.Clear()
@@ -1292,9 +1292,9 @@
             End If
         Next
 
-        frmEditor_Classes.numStartMap.Value = Classes(EditorIndex).StartMap
-        frmEditor_Classes.numStartX.Value = Classes(EditorIndex).StartX
-        frmEditor_Classes.numStartY.Value = Classes(EditorIndex).StartY
+        frmEditor_Classes.nudStartMap.Value = Classes(EditorIndex).StartMap
+        frmEditor_Classes.nudStartX.Value = Classes(EditorIndex).StartX
+        frmEditor_Classes.nudStartY.Value = Classes(EditorIndex).StartY
     End Sub
 
 #End Region

@@ -824,7 +824,7 @@ Public Module EditorAutoTiles
         ' Draw the quarter
         tmpSprite = New Sprite(TileSetTexture(Map.Tile(X, Y).Layer(layerNum).Tileset))
         tmpSprite.TextureRect = New IntRect(Autotile(X, Y).Layer(layerNum).srcX(quarterNum) + XOffset, Autotile(X, Y).Layer(layerNum).srcY(quarterNum) + YOffset, 16, 16)
-        tmpSprite.Position = New SFML.Window.Vector2f(destX, destY)
+        tmpSprite.Position = New SFML.System.Vector2f(destX, destY)
         GameWindow.Draw(tmpSprite)
 
     End Sub

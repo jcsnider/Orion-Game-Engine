@@ -118,6 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnDeleteFemaleSprite.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC45bDN+TgAAAMtJREFUKFNjQAb/
+        //9HwTgBdRSusFP/uVhT8OcyHbGfa+zUfq7VFv2/0UDm/xpXnftrTBV+rtaT/LnJzeAnw3p9qf8XHa3/
+        33By/P8oKfX/i7Kq/y9rGv8/ycr/f8fT8/9le+v/G41l/jNsNVf+f9vX5/+TzJz/L2oa/j8rKvv/OC3j
+        //2EhP9Xfdz/n48N/L/BQv4/wxo33ftLdYXuL9MTub/Ny/jnJkvF/+ttFP9v8zG7v0ZP9P5qkLi32X2o
+        SyEAr2eQARUUMjAAAKoooI/mSAUbAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnAddFemaleSprite.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -128,16 +138,6 @@
         r7VBHqhwje59kHvklonct9+t96/pYfz/qruRQJ8r/FZaI3pfYbXIfcdtZqju1dsi+zPput3/iPMW/xVW
         C+P2teYmqZ9BZ03+R57w+C+7Cs3XyMB2m/FP3U2K/7XWK/53QLGOgQEAG5uO1DPSyEIAAAAASUVORK5C
         YII=
-</value>
-  </data>
-  <data name="btnDeleteFemaleSprite.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC45bDN+TgAAAMtJREFUKFNjQAb/
-        //9HwTgBdRSusFP/uVhT8OcyHbGfa+zUfq7VFv2/0UDm/xpXnftrTBV+rtaT/LnJzeAnw3p9qf8XHa3/
-        33By/P8oKfX/i7Kq/y9rGv8/ycr/f8fT8/9le+v/G41l/jNsNVf+f9vX5/+TzJz/L2oa/j8rKvv/OC3j
-        //2EhP9Xfdz/n48N/L/BQv4/wxo33ftLdYXuL9MTub/Ny/jnJkvF/+ttFP9v8zG7v0ZP9P5qkLi32X2o
-        SyEAr2eQARUUMjAAAKoooI/mSAUbAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnDeleteMaleSprite.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

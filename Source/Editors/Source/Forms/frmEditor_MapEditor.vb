@@ -3,6 +3,15 @@
 Public Class FrmEditor_MapEditor
 
 #Region "Form Code"
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
+
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         cmbTileSets.SelectedIndex = 0
         EditorMap_DrawTileset()
@@ -21,6 +30,7 @@ Public Class FrmEditor_MapEditor
         scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
+        TilesetWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picBackSelect.Width, picBackSelect.Height)))
 
         picScreen.Focus()
 
@@ -43,7 +53,7 @@ Public Class FrmEditor_MapEditor
         MapEditorCancel()
     End Sub
 
-    Private Sub FrmEditor_DarkMapEditor_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub FrmEditor_MapEditor_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         MapEditorCancel()
     End Sub
 
@@ -75,7 +85,7 @@ Public Class FrmEditor_MapEditor
         MapEditorTileScroll()
     End Sub
 
-    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
         If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
         End If
@@ -85,12 +95,12 @@ Public Class FrmEditor_MapEditor
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
-        EditorMap_DrawTileset()
+        'EditorMap_DrawTileset2()
 
-        pnlBack.Refresh()
+        'pnlBack.Refresh()
 
-        picBackSelect.Height = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Height
-        picBackSelect.Width = TileSetImgsGFX(cmbTileSets.SelectedIndex + 1).Width
+        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).height
+        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).width
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y) + PIC_Y
         scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X) + PIC_X

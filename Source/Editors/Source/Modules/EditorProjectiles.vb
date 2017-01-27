@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports SFML.Graphics
-
+﻿
 Public Module EditorProjectiles
 #Region "Defines"
     Public Const MAX_PROJECTILES As Integer = 255

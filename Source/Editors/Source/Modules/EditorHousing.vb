@@ -171,11 +171,11 @@ Public Module EditorHousing
 
         With House(EditorIndex)
             frmEditor_House.txtName.Text = Trim$(.ConfigName)
-            frmEditor_House.txtBaseMap.Text = Trim$(.BaseMap)
-            frmEditor_House.txtXEntrance.Text = Trim$(.X)
-            frmEditor_House.txtYEntrance.Text = Trim$(.Y)
-            frmEditor_House.txtHousePrice.Text = Trim$(.Price)
-            frmEditor_House.txtHouseFurniture.Text = Trim$(.MaxFurniture)
+            FrmEditor_House.nudBaseMap.Value = .BaseMap
+            FrmEditor_House.nudX.Value = .X
+            FrmEditor_House.nudY.Value = .Y
+            FrmEditor_House.nudPrice.Value = .Price
+            FrmEditor_House.nudFurniture.Value = .MaxFurniture
         End With
 
         House_Changed(EditorIndex) = True
@@ -291,7 +291,7 @@ Public Module EditorHousing
 
                     Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i))
                     tmpSprite.TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32)
-                    tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
+                    tmpSprite.Position = New SFML.System.Vector2f(X, Y)
                     GameWindow.Draw(tmpSprite)
                 End If
             Next

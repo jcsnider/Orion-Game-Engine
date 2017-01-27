@@ -22,20 +22,20 @@ Module ClientText
         FrontString.CharacterSize = TextSize
 
         BackString.Color = BackColor
-        BackString.Position = New SFML.Window.Vector2f(X - 1, Y - 1)
+        BackString.Position = New SFML.System.Vector2f(X - 1, Y - 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.Window.Vector2f(X - 1, Y + 1)
+        BackString.Position = New SFML.System.Vector2f(X - 1, Y + 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.Window.Vector2f(X + 1, Y + 1)
+        BackString.Position = New SFML.System.Vector2f(X + 1, Y + 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.Window.Vector2f(X + 1, Y + -1)
+        BackString.Position = New SFML.System.Vector2f(X + 1, Y + -1)
         target.Draw(BackString)
 
         FrontString.Color = color
-        FrontString.Position = New SFML.Window.Vector2f(X, Y)
+        FrontString.Position = New SFML.System.Vector2f(X, Y)
         target.Draw(FrontString)
 
     End Sub

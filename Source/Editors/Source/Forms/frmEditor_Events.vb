@@ -655,7 +655,7 @@
 #End Region
 
 #Region "Page Buttons"
-    Private Sub btnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
+    Private Sub BtnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
         Dim pageCount As Integer, i As Integer
 
         If chkGlobal.Checked = True Then
@@ -680,17 +680,17 @@
         btnDeletePage.Enabled = True
     End Sub
 
-    Private Sub btnCopyPage_Click(sender As Object, e As EventArgs) Handles btnCopyPage.Click
+    Private Sub BtnCopyPage_Click(sender As Object, e As EventArgs) Handles btnCopyPage.Click
         CopyEventPage = tmpEvent.Pages(curPageNum)
         btnPastePage.Enabled = True
     End Sub
 
-    Private Sub btnPastePage_Click(sender As Object, e As EventArgs) Handles btnPastePage.Click
+    Private Sub BtnPastePage_Click(sender As Object, e As EventArgs) Handles btnPastePage.Click
         tmpEvent.Pages(curPageNum) = CopyEventPage
         EventEditorLoadPage(curPageNum)
     End Sub
 
-    Private Sub btnDeletePage_Click(sender As Object, e As EventArgs) Handles btnDeletePage.Click
+    Private Sub BtnDeletePage_Click(sender As Object, e As EventArgs) Handles btnDeletePage.Click
         tmpEvent.Pages(curPageNum) = Nothing
         ' move everything else down a notch
         If curPageNum < tmpEvent.PageCount Then
@@ -718,17 +718,17 @@
 
     End Sub
 
-    Private Sub btnClearPage_Click(sender As Object, e As EventArgs) Handles btnClearPage.Click
+    Private Sub BtnClearPage_Click(sender As Object, e As EventArgs) Handles btnClearPage.Click
         tmpEvent.Pages(curPageNum) = Nothing
     End Sub
 
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         tmpEvent.Name = Trim$(txtName.Text)
     End Sub
 #End Region
 
 #Region "Conditions"
-    Private Sub chkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
+    Private Sub ChkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
         If chkPlayerVar.Checked = 0 Then
             cmbPlayerVar.Enabled = False
             txtPlayerVariable.Enabled = False
@@ -742,21 +742,21 @@
         End If
     End Sub
 
-    Private Sub cmbPlayerVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerVar.SelectedIndexChanged
+    Private Sub CmbPlayerVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerVar.SelectedIndexChanged
         If cmbPlayerVar.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).VariableIndex = cmbPlayerVar.SelectedIndex
     End Sub
 
-    Private Sub cmbPlayervarCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayervarCompare.SelectedIndexChanged
+    Private Sub CmbPlayervarCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayervarCompare.SelectedIndexChanged
         If cmbPlayervarCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).VariableCompare = cmbPlayervarCompare.SelectedIndex
     End Sub
 
-    Private Sub txtPlayerVariable_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerVariable.TextChanged
+    Private Sub TxtPlayerVariable_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerVariable.TextChanged
         tmpEvent.Pages(curPageNum).VariableCondition = Val(Trim$(txtPlayerVariable.Text))
     End Sub
 
-    Private Sub chkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
+    Private Sub ChkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
         If chkPlayerSwitch.Checked = 0 Then
             cmbPlayerSwitch.Enabled = False
             cmbPlayerSwitchCompare.Enabled = False
@@ -768,28 +768,28 @@
         End If
     End Sub
 
-    Private Sub cmbPlayerSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitch.SelectedIndexChanged
+    Private Sub CmbPlayerSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitch.SelectedIndexChanged
         If cmbPlayerSwitch.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SwitchIndex = cmbPlayerSwitch.SelectedIndex
     End Sub
 
-    Private Sub cmbPlayerSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchCompare.SelectedIndexChanged
+    Private Sub CmbPlayerSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchCompare.SelectedIndexChanged
         If cmbPlayerSwitchCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SwitchCompare = cmbPlayerSwitchCompare.SelectedIndex
     End Sub
 
-    Private Sub chkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
+    Private Sub ChkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
         tmpEvent.Pages(curPageNum).chkHasItem = chkHasItem.Checked
         If chkHasItem.Checked = 0 Then cmbHasItem.Enabled = False Else cmbHasItem.Enabled = True
     End Sub
 
-    Private Sub cmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
+    Private Sub CmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
         If cmbHasItem.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).HasItemIndex = cmbHasItem.SelectedIndex
         tmpEvent.Pages(curPageNum).HasItemAmount = scrlCondition_HasItem.Value
     End Sub
 
-    Private Sub chkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
+    Private Sub ChkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
         If chkSelfSwitch.Checked = 0 Then
             cmbSelfSwitch.Enabled = False
             cmbSelfSwitchCompare.Enabled = False
@@ -801,12 +801,12 @@
         End If
     End Sub
 
-    Private Sub cmbSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitch.SelectedIndexChanged
+    Private Sub CmbSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitch.SelectedIndexChanged
         If cmbSelfSwitch.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SelfSwitchIndex = cmbSelfSwitch.SelectedIndex
     End Sub
 
-    Private Sub cmbSelfSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitchCompare.SelectedIndexChanged
+    Private Sub CmbSelfSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitchCompare.SelectedIndexChanged
         If cmbSelfSwitchCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
@@ -928,7 +928,7 @@
 #End Region
 
 #Region "Movement"
-    Private Sub cmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
+    Private Sub CmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
         If cmbMoveType.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveType = cmbMoveType.SelectedIndex
         If cmbMoveType.SelectedIndex = 2 Then
@@ -938,7 +938,7 @@
         End If
     End Sub
 
-    Private Sub btnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
+    Private Sub BtnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
         pnlMoveRoute.BringToFront()
         lstMoveRoute.Items.Clear()
         cmbEvent.Items.Clear()
@@ -1048,12 +1048,12 @@
 
     End Sub
 
-    Private Sub cmbMoveSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveSpeed.SelectedIndexChanged
+    Private Sub CmbMoveSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveSpeed.SelectedIndexChanged
         If cmbMoveSpeed.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveSpeed = cmbMoveSpeed.SelectedIndex
     End Sub
 
-    Private Sub cmbMoveFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveFreq.SelectedIndexChanged
+    Private Sub CmbMoveFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveFreq.SelectedIndexChanged
         If cmbMoveFreq.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
     End Sub
@@ -1062,21 +1062,21 @@
 #End Region
 
 #Region "Positioning"
-    Private Sub cmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
+    Private Sub CmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
         If cmbPositioning.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).Position = cmbPositioning.SelectedIndex
     End Sub
 #End Region
 
 #Region "Trigger"
-    Private Sub cmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
+    Private Sub CmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
         If cmbTrigger.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).Trigger = cmbTrigger.SelectedIndex
     End Sub
 #End Region
 
 #Region "Global"
-    Private Sub chkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
+    Private Sub ChkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
         If tmpEvent.PageCount > 1 Then
             If MsgBox("If you set the event to global you will lose all pages except for your first one. Do you want to continue?", vbYesNo) = vbNo Then
                 Exit Sub
@@ -1100,13 +1100,13 @@
 #End Region
 
 #Region "QuestIcon"
-    Private Sub cmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
+    Private Sub CmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
         tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
 #End Region
 
 #Region "Options"
-    Private Sub chkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
+    Private Sub ChkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
         If chkWalkAnim.Checked = True Then
             tmpEvent.Pages(curPageNum).WalkAnim = 1
         Else
@@ -1115,7 +1115,7 @@
 
     End Sub
 
-    Private Sub chkDirFix_CheckedChanged(sender As Object, e As EventArgs) Handles chkDirFix.CheckedChanged
+    Private Sub ChkDirFix_CheckedChanged(sender As Object, e As EventArgs) Handles chkDirFix.CheckedChanged
         If chkDirFix.Checked = True Then
             tmpEvent.Pages(curPageNum).DirFix = 1
         Else
@@ -1124,7 +1124,7 @@
 
     End Sub
 
-    Private Sub chkWalkThrough_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkThrough.CheckedChanged
+    Private Sub ChkWalkThrough_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkThrough.CheckedChanged
         If chkWalkThrough.Checked = True Then
             tmpEvent.Pages(curPageNum).WalkThrough = 1
         Else
@@ -1133,7 +1133,7 @@
 
     End Sub
 
-    Private Sub chkShowName_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowName.CheckedChanged
+    Private Sub ChkShowName_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowName.CheckedChanged
         If chkShowName.Checked = True Then
             tmpEvent.Pages(curPageNum).ShowName = 1
         Else
@@ -1144,11 +1144,11 @@
 #End Region
 
 #Region "Commands"
-    Private Sub lstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
+    Private Sub LstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
         curCommand = lstCommands.SelectedIndex + 1
     End Sub
 
-    Private Sub btnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
+    Private Sub BtnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
         If lstCommands.SelectedIndex > -1 Then
             isEdit = False
             'tabPages.SelectedTab = TabPage
@@ -1156,20 +1156,20 @@
         End If
     End Sub
 
-    Private Sub btnEditCommand_Click(sender As Object, e As EventArgs) Handles btnEditCommand.Click
+    Private Sub BtnEditCommand_Click(sender As Object, e As EventArgs) Handles btnEditCommand.Click
         If lstCommands.SelectedIndex > -1 Then
             EditEventCommand()
         End If
     End Sub
 
-    Private Sub btnDeleteComand_Click(sender As Object, e As EventArgs) Handles btnDeleteComand.Click
+    Private Sub BtnDeleteComand_Click(sender As Object, e As EventArgs) Handles btnDeleteComand.Click
         If lstCommands.SelectedIndex > -1 Then
             DeleteEventCommand()
         End If
 
     End Sub
 
-    Private Sub btnClearCommand_Click(sender As Object, e As EventArgs) Handles btnClearCommand.Click
+    Private Sub BtnClearCommand_Click(sender As Object, e As EventArgs) Handles btnClearCommand.Click
         If MsgBox("Are you sure you want to clear all event commands?", vbYesNo, "Clear Event Commands?") = vbYes Then
             ClearEventCommands()
         End If
@@ -1178,7 +1178,7 @@
 
 #Region "Variables/Switches"
     'Renaming Variables/Switches
-    Private Sub btnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
+    Private Sub BtnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
         pnlVariableSwitches.Visible = True
         pnlVariableSwitches.BringToFront()
         fraLabeling.Visible = True
@@ -1197,10 +1197,9 @@
         Next
         lstVariables.SelectedIndex = 0
 
-
     End Sub
 
-    Private Sub btnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
+    Private Sub BtnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
         Select Case RenameType
             Case 1
                 'Variable
@@ -1233,7 +1232,7 @@
         lstVariables.SelectedIndex = 0
     End Sub
 
-    Private Sub btnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
+    Private Sub BtnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
         FraRenaming.Visible = False
         RenameType = 0
         RenameIndex = 0
@@ -1251,11 +1250,11 @@
         lstVariables.SelectedIndex = 0
     End Sub
 
-    Private Sub txtRename_TextChanged(sender As Object, e As EventArgs) Handles txtRename.TextChanged
+    Private Sub TxtRename_TextChanged(sender As Object, e As EventArgs) Handles txtRename.TextChanged
         tmpEvent.Name = Trim$(txtName.Text)
     End Sub
 
-    Private Sub lstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
+    Private Sub LstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
@@ -1265,7 +1264,7 @@
         End If
     End Sub
 
-    Private Sub lstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
+    Private Sub LstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
@@ -1275,7 +1274,7 @@
         End If
     End Sub
 
-    Private Sub btnRenameVariable_Click(sender As Object, e As EventArgs) Handles btnRenameVariable.Click
+    Private Sub BtnRenameVariable_Click(sender As Object, e As EventArgs) Handles btnRenameVariable.Click
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
@@ -1285,7 +1284,7 @@
         End If
     End Sub
 
-    Private Sub btnRenameSwitch_Click(sender As Object, e As EventArgs) Handles btnRenameSwitch.Click
+    Private Sub BtnRenameSwitch_Click(sender As Object, e As EventArgs) Handles btnRenameSwitch.Click
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
@@ -1295,13 +1294,13 @@
         End If
     End Sub
 
-    Private Sub btnLabel_Ok_Click(sender As Object, e As EventArgs) Handles btnLabel_Ok.Click
+    Private Sub BtnLabel_Ok_Click(sender As Object, e As EventArgs) Handles btnLabel_Ok.Click
         pnlVariableSwitches.Visible = False
         fraLabeling.Visible = False
         SendSwitchesAndVariables()
     End Sub
 
-    Private Sub btnLabel_Cancel_Click(sender As Object, e As EventArgs) Handles btnLabel_Cancel.Click
+    Private Sub BtnLabel_Cancel_Click(sender As Object, e As EventArgs) Handles btnLabel_Cancel.Click
         pnlVariableSwitches.Visible = False
         fraLabeling.Visible = False
         RequestSwitchesAndVariables()
@@ -1310,11 +1309,9 @@
 #End Region
 
 #Region "Move Route"
-    Private Sub cmbEvent_Click(sender As Object, e As EventArgs) Handles cmbEvent.Click
 
-    End Sub
     'MoveRoute Commands
-    Private Sub lstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.Click
+    Private Sub LstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.Click
         If lstvwMoveRoute.SelectedItems.Count = 0 Then Exit Sub
 
         Select Case lstvwMoveRoute.SelectedItems(0).Index + 1
@@ -1330,7 +1327,7 @@
         End Select
     End Sub
 
-    Private Sub lstMoveRoute_KeyDown(sender As Object, e As KeyEventArgs) Handles lstMoveRoute.KeyDown
+    Private Sub LstMoveRoute_KeyDown(sender As Object, e As KeyEventArgs) Handles lstMoveRoute.KeyDown
         If e.KeyCode = Keys.Delete Then
             'remove move route command lol
             If lstMoveRoute.SelectedIndex > -1 Then
@@ -1544,7 +1541,7 @@
 
 #Region "CommandFrames"
 #Region "Show Text"
-    Private Sub scrlShowTextFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowTextFace.Scroll
+    Private Sub ScrlShowTextFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowTextFace.Scroll
         If scrlShowTextFace.Value > 0 Then
             lblShowTextFace.Text = "Face: " & scrlShowTextFace.Value
             If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT) Then
@@ -1556,7 +1553,7 @@
         End If
     End Sub
 
-    Private Sub btnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
+    Private Sub BtnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
         If Not isEdit Then
             AddCommand(EventType.evShowText)
         Else
@@ -1569,7 +1566,7 @@
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnShowTextCancel_Click(sender As Object, e As EventArgs) Handles btnShowTextCancel.Click
+    Private Sub BtnShowTextCancel_Click(sender As Object, e As EventArgs) Handles btnShowTextCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowText.Visible = False

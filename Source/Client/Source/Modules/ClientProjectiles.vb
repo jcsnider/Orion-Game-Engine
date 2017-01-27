@@ -282,7 +282,7 @@ Public Module ClientProjectiles
 
         Dim tmpSprite As Sprite = New Sprite(ProjectileGFX(Sprite))
         tmpSprite.TextureRect = New IntRect(rec.left, rec.top, 32, 32)
-        tmpSprite.Position = New SFML.Window.Vector2f(X, Y)
+        tmpSprite.Position = New SFML.System.Vector2f(X, Y)
         GameWindow.Draw(tmpSprite)
 
     End Sub
