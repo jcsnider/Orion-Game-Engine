@@ -7,7 +7,6 @@ Module ClientGraphics
 #Region "Declarations"
     Public GameWindow As RenderWindow
     Public TilesetWindow As RenderWindow
-    Public TmpSkillWindow As RenderWindow
 
     Public SFMLGameFont As SFML.Graphics.Font
 
@@ -193,8 +192,6 @@ Module ClientGraphics
     Public MapTintSprite As Sprite
 
     ' Number of graphic files
-    'Public MapEditorBackBuffer As Bitmap
-
     Public NumTileSets As Integer
     Public NumCharacters As Integer
     Public NumPaperdolls As Integer
@@ -235,8 +232,6 @@ Module ClientGraphics
         GameWindow = New RenderWindow(FrmMainGame.picscreen.Handle)
         TilesetWindow = New RenderWindow(frmEditor_MapEditor.picBackSelect.Handle)
         GameWindow.SetFramerateLimit(FPS_LIMIT)
-
-        TmpSkillWindow = New RenderWindow(FrmMainGame.pnlTmpSkill.Handle)
 
         SFMLGameFont = New SFML.Graphics.Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME)
 
@@ -2961,15 +2956,24 @@ NextLoop:
     End Sub
 
     Public Sub DrawSkillItem(ByVal X As Integer, ByVal Y As Integer)
-        Dim rec As Rectangle, rec_pos As Rectangle
+        Dim rec As Rectangle
         Dim skillnum As Integer, skillpic As Integer
 
         skillnum = DragSkillSlotNum
-        TmpSkillWindow.Clear(ToSFMLColor(FrmMainGame.pnlTmpSkill.BackColor))
 
         If skillnum > 0 And skillnum <= MAX_SKILLS Then
+
             skillpic = Skill(skillnum).Icon
             If skillpic = 0 Then Exit Sub
+
+            If SkillIconsGFXInfo(skillpic).IsLoaded = False Then
+                LoadTexture(skillpic, 9)
+            End If
+
+            'seeying we still use it, lets update timer
+            With SkillIconsGFXInfo(skillnum)
+                .TextureTimer = GetTickCount() + 100000
+            End With
 
             With rec
                 .Y = 0
@@ -2978,27 +2982,8 @@ NextLoop:
                 .Width = PIC_X
             End With
 
-            With rec_pos
-                .Y = 0
-                .Height = PIC_Y
-                .X = 0
-                .Width = PIC_X
-            End With
-
-            SkillIconsSprite(skillpic).TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-            SkillIconsSprite(skillpic).Position = New Vector2f(0, 0)
-            TmpSkillWindow.Draw(SkillIconsSprite(skillpic))
-
-            With FrmMainGame.pnlTmpSkill
-                .Top = Y
-                .Left = X
-                .Visible = True
-                .BringToFront()
-            End With
-
+            RenderSprite(SkillIconsSprite(skillnum), GameWindow, X + 16, Y + 16, rec.X, rec.Y, rec.Width, rec.Height)
         End If
-        TmpSkillWindow.Display()
-
     End Sub
 
     Sub DrawShop()
@@ -3662,6 +3647,10 @@ NextLoop:
 
         If DragBankSlotNum > 0 Then
             DrawBankItem(CurMouseX, CurMouseY)
+        End If
+
+        If DragSkillSlotNum > 0 Then
+            DrawSkillItem(CurMouseX, CurMouseY)
         End If
 
         'draw cursor

@@ -97,7 +97,6 @@
     <Compile Include="Source\Modules\ServerGlobals.vb" />
     <Compile Include="Source\Modules\ServerHandleData.vb" />
     <Compile Include="Source\Modules\ServerHousing.vb" />
-    <Compile Include="Source\Modules\ServerINIAccess.vb" />
     <Compile Include="Source\Modules\ServerInstances.vb" />
     <Compile Include="Source\Modules\ServerParties.vb" />
     <Compile Include="Source\Modules\ServerPets.vb" />

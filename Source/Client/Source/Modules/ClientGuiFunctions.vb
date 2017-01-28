@@ -918,7 +918,6 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragSkillSlotNum = 0
-                FrmMainGame.pnlTmpSkill.Visible = False
             End If
         End If
 
@@ -947,7 +946,6 @@ Public Module ClientGuiFunctions
                 End If
 
                 DragBankSlotNum = 0
-                FrmMainGame.pnlTempBank.Visible = False
             End If
         End If
 

@@ -29,8 +29,6 @@ Partial Class FrmMainGame
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
-        Me.pnlTempBank = New System.Windows.Forms.Panel()
-        Me.pnlTmpSkill = New System.Windows.Forms.Panel()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlCurrency.SuspendLayout()
         Me.SuspendLayout()
@@ -39,7 +37,7 @@ Partial Class FrmMainGame
         '
         Me.picscreen.Location = New System.Drawing.Point(0, 0)
         Me.picscreen.Name = "picscreen"
-        Me.picscreen.Size = New System.Drawing.Size(1024, 768)
+        Me.picscreen.Size = New System.Drawing.Size(978, 615)
         Me.picscreen.TabIndex = 4
         Me.picscreen.TabStop = False
         '
@@ -99,36 +97,14 @@ Partial Class FrmMainGame
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pnlTempBank
-        '
-        Me.pnlTempBank.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.pnlTempBank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTempBank.Location = New System.Drawing.Point(1289, 549)
-        Me.pnlTempBank.Name = "pnlTempBank"
-        Me.pnlTempBank.Size = New System.Drawing.Size(32, 32)
-        Me.pnlTempBank.TabIndex = 20
-        Me.pnlTempBank.Visible = False
-        '
-        'pnlTmpSkill
-        '
-        Me.pnlTmpSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.pnlTmpSkill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTmpSkill.Location = New System.Drawing.Point(1292, 489)
-        Me.pnlTmpSkill.Name = "pnlTmpSkill"
-        Me.pnlTmpSkill.Size = New System.Drawing.Size(32, 32)
-        Me.pnlTmpSkill.TabIndex = 42
-        Me.pnlTmpSkill.Visible = False
-        '
         'FrmMainGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(871, 539)
+        Me.ClientSize = New System.Drawing.Size(983, 619)
         Me.Controls.Add(Me.pnlCurrency)
-        Me.Controls.Add(Me.pnlTempBank)
-        Me.Controls.Add(Me.pnlTmpSkill)
         Me.Controls.Add(Me.picscreen)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -149,6 +125,4 @@ Partial Class FrmMainGame
     Friend WithEvents lblCurrencyCancel As System.Windows.Forms.Label
     Friend WithEvents lblCurrencyOk As System.Windows.Forms.Label
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
-    Friend WithEvents pnlTempBank As System.Windows.Forms.Panel
-    Friend WithEvents pnlTmpSkill As Windows.Forms.Panel
 End Class
