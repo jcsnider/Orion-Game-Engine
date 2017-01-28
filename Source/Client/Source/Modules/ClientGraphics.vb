@@ -1728,6 +1728,7 @@ Module ClientGraphics
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
+
         If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
             If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
                 GameWindow.SetMouseCursorVisible(False)
