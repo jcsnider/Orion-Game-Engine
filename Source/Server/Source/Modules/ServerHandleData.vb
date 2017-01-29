@@ -3108,6 +3108,11 @@ Module ServerHandleData
                 'SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)
+                SendProjectiles(index)
+                SendQuests(index)
+                SendRecipes(index)
+                SendHouseConfigs(index)
+                SendPets(index)
             Else
                 AlertMsg(index, "not authorized.")
                 Exit Sub

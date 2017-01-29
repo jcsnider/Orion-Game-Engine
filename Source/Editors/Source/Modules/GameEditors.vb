@@ -678,38 +678,71 @@
         EditorIndex = frmEditor_Item.lstIndex.SelectedIndex + 1
 
         With Item(EditorIndex)
+            'populate combo boxes
+            frmEditor_Item.cmbAnimation.Items.Clear()
+            frmEditor_Item.cmbAnimation.Items.Add("None")
+            For i = 1 To MAX_ANIMATIONS
+                frmEditor_Item.cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+            Next
+
+            frmEditor_Item.cmbProjectile.Items.Clear()
+            frmEditor_Item.cmbProjectile.Items.Add("None")
+            frmEditor_Item.cmbAmmo.Items.Clear()
+            frmEditor_Item.cmbAmmo.Items.Add("None")
+            For i = 1 To MAX_ITEMS
+                frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Item(i).Name)
+                frmEditor_Item.cmbAmmo.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            frmEditor_Item.cmbSkills.Items.Clear()
+            frmEditor_Item.cmbSkills.Items.Add("None")
+            For i = 1 To MAX_SKILLS
+                frmEditor_Item.cmbSkills.Items.Add(i & ": " & Skill(i).Name)
+            Next
+
+            frmEditor_Item.cmbPet.Items.Clear()
+            frmEditor_Item.cmbPet.Items.Add("None")
+            For i = 1 To MAX_PETS
+                frmEditor_Item.cmbPet.Items.Add(i & ": " & Pet(i).Name)
+            Next
+
+            frmEditor_Item.cmbRecipe.Items.Clear()
+            frmEditor_Item.cmbRecipe.Items.Add("None")
+            For i = 1 To MAX_RECIPE
+                frmEditor_Item.cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
+            Next
+
             frmEditor_Item.txtName.Text = Trim$(.Name)
             frmEditor_Item.txtDescription.Text = Trim$(.Description)
 
-            If .Pic > frmEditor_Item.scrlPic.Maximum Then .Pic = 0
-            frmEditor_Item.scrlPic.Value = .Pic
+            If .Pic > frmEditor_Item.nudPic.Maximum Then .Pic = 0
+            frmEditor_Item.nudPic.Value = .Pic
             If .Type > ItemType.Count - 1 Then .Type = 0
             frmEditor_Item.cmbType.SelectedIndex = .Type
-            frmEditor_Item.scrlAnim.Value = .Animation
+            frmEditor_Item.cmbAnimation.SelectedIndex = .Animation
 
             If .ItemLevel = 0 Then .ItemLevel = 1
-            frmEditor_Item.scrlItemLevel.Value = .ItemLevel
-            frmEditor_Item.lblItemLvl.Text = "Item Level: " & frmEditor_Item.scrlItemLevel.Value
+            frmEditor_Item.nudItemLvl.Value = .ItemLevel
 
             ' Type specific settings
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Equipment) Then
                 frmEditor_Item.fraEquipment.Visible = True
-                frmEditor_Item.scrlProjectile.Value = .Data1
-                frmEditor_Item.scrlDamage.Value = .Data2
+                frmEditor_Item.cmbProjectile.SelectedIndex = .Data1
+                frmEditor_Item.nudDamage.Value = .Data2
                 frmEditor_Item.cmbTool.SelectedIndex = .Data3
 
                 frmEditor_Item.cmbSubType.SelectedIndex = .SubType
 
                 If .Speed < 100 Then .Speed = 100
-                If .Speed > frmEditor_Item.scrlSpeed.Maximum Then .Speed = frmEditor_Item.scrlSpeed.Maximum
-                frmEditor_Item.scrlSpeed.Value = .Speed
+                If .Speed > frmEditor_Item.nudSpeed.Maximum Then .Speed = frmEditor_Item.nudSpeed.Maximum
+                frmEditor_Item.nudSpeed.Value = .Speed
 
-                frmEditor_Item.scrlAddStr.Value = .Add_Stat(Stats.Strength)
-                frmEditor_Item.scrlAddEnd.Value = .Add_Stat(Stats.Endurance)
-                frmEditor_Item.scrlAddInt.Value = .Add_Stat(Stats.Intelligence)
-                frmEditor_Item.scrlAddVit.Value = .Add_Stat(Stats.Vitality)
-                frmEditor_Item.scrlAddLuck.Value = .Add_Stat(Stats.Luck)
-                frmEditor_Item.scrlAddSpr.Value = .Add_Stat(Stats.Spirit)
+                frmEditor_Item.nudStrength.Value = .Add_Stat(Stats.Strength)
+                frmEditor_Item.nudEndurance.Value = .Add_Stat(Stats.Endurance)
+                frmEditor_Item.nudIntelligence.Value = .Add_Stat(Stats.Intelligence)
+                frmEditor_Item.nudVitality.Value = .Add_Stat(Stats.Vitality)
+                frmEditor_Item.nudLuck.Value = .Add_Stat(Stats.Luck)
+                frmEditor_Item.nudSpirit.Value = .Add_Stat(Stats.Spirit)
 
                 If .KnockBack = 1 Then
                     frmEditor_Item.chkKnockBack.Checked = True
@@ -724,30 +757,30 @@
                     frmEditor_Item.chkRandomize.Checked = False
                 End If
 
-                If .RandomMin = 0 Then .RandomMin = 1
-                frmEditor_Item.numMin.Value = .RandomMin
+                'If .RandomMin = 0 Then .RandomMin = 1
+                'frmEditor_Item.numMin.Value = .RandomMin
 
-                If .RandomMax <= 1 Then .RandomMax = 2
-                frmEditor_Item.numMax.Value = .RandomMax
+                'If .RandomMax <= 1 Then .RandomMax = 2
+                'frmEditor_Item.numMax.Value = .RandomMax
 
-                frmEditor_Item.scrlPaperdoll.Value = .Paperdoll
+                frmEditor_Item.nudPaperdoll.Value = .Paperdoll
 
-                frmEditor_Item.scrlProjectile.Value = .Projectile
-                frmEditor_Item.scrlAmmo.Value = .Ammo
+                frmEditor_Item.cmbProjectile.SelectedIndex = .Projectile
+                frmEditor_Item.cmbAmmo.SelectedIndex = .Ammo
             Else
                 frmEditor_Item.fraEquipment.Visible = False
             End If
 
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Consumable) Then
                 frmEditor_Item.fraVitals.Visible = True
-                frmEditor_Item.scrlVitalMod.Value = .Data1
+                frmEditor_Item.nudVitalMod.Value = .Data1
             Else
                 frmEditor_Item.fraVitals.Visible = False
             End If
 
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Skill) Then
                 frmEditor_Item.fraSkill.Visible = True
-                frmEditor_Item.scrlSkill.Value = .Data1
+                frmEditor_Item.cmbSkills.SelectedIndex = .Data1
             Else
                 frmEditor_Item.fraSkill.Visible = False
             End If
@@ -755,9 +788,9 @@
             If frmEditor_Item.cmbType.SelectedIndex = ItemType.Furniture Then
                 frmEditor_Item.fraFurniture.Visible = True
                 If Item(EditorIndex).Data2 > 0 And Item(EditorIndex).Data2 <= NumFurniture Then
-                    frmEditor_Item.scrlFurniture.Value = Item(EditorIndex).Data2
+                    frmEditor_Item.nudFurniture.Value = Item(EditorIndex).Data2
                 Else
-                    frmEditor_Item.scrlFurniture.Value = 1
+                    frmEditor_Item.nudFurniture.Value = 1
                 End If
                 frmEditor_Item.cmbFurnitureType.SelectedIndex = Item(EditorIndex).Data1
             Else
@@ -765,24 +798,22 @@
             End If
 
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Pet) Then
-                frmEditor_Item.fraPets.Visible = True
-                frmEditor_Item.scrlPetNum.Value = .Data1
-                frmEditor_Item.lblPetNum.Text = "Num: " & frmEditor_Item.scrlPetNum.Value
-                frmEditor_Item.lblPetName.Text = "Name: " & Pet(frmEditor_Item.scrlPetNum.Value).Name
+                frmEditor_Item.fraPet.Visible = True
+                frmEditor_Item.cmbPet.SelectedIndex = .Data1
             Else
-                frmEditor_Item.fraPets.Visible = False
+                frmEditor_Item.fraPet.Visible = False
             End If
 
             ' Basic requirements
-            frmEditor_Item.scrlAccessReq.Value = .AccessReq
-            frmEditor_Item.scrlLevelReq.Value = .LevelReq
+            frmEditor_Item.cmbAccessReq.SelectedIndex = .AccessReq
+            frmEditor_Item.nudLevelReq.Value = .LevelReq
 
-            frmEditor_Item.scrlStrReq.Value = .Stat_Req(Stats.Strength)
-            frmEditor_Item.scrlVitReq.Value = .Stat_Req(Stats.Vitality)
-            frmEditor_Item.scrlLuckReq.Value = .Stat_Req(Stats.Luck)
-            frmEditor_Item.scrlEndReq.Value = .Stat_Req(Stats.Endurance)
-            frmEditor_Item.scrlIntReq.Value = .Stat_Req(Stats.Intelligence)
-            frmEditor_Item.scrlSprReq.Value = .Stat_Req(Stats.Spirit)
+            frmEditor_Item.nudStrReq.Value = .Stat_Req(Stats.Strength)
+            frmEditor_Item.nudVitReq.Value = .Stat_Req(Stats.Vitality)
+            frmEditor_Item.nudLuckReq.Value = .Stat_Req(Stats.Luck)
+            frmEditor_Item.nudEndReq.Value = .Stat_Req(Stats.Endurance)
+            frmEditor_Item.nudIntReq.Value = .Stat_Req(Stats.Intelligence)
+            frmEditor_Item.nudSprReq.Value = .Stat_Req(Stats.Spirit)
 
             ' Build cmbClassReq
             frmEditor_Item.cmbClassReq.Items.Clear()
@@ -794,9 +825,9 @@
 
             frmEditor_Item.cmbClassReq.SelectedIndex = .ClassReq
             ' Info
-            frmEditor_Item.scrlPrice.Value = .Price
+            frmEditor_Item.nudPrice.Value = .Price
             frmEditor_Item.cmbBind.SelectedIndex = .BindType
-            frmEditor_Item.scrlRarity.Value = .Rarity
+            frmEditor_Item.nudRarity.Value = .Rarity
 
             If .Stackable = 1 Then
                 frmEditor_Item.chkStackable.Checked = True
@@ -807,14 +838,11 @@
             EditorIndex = frmEditor_Item.lstIndex.SelectedIndex + 1
         End With
 
-        frmEditor_Item.scrlPic.Maximum = NumItems
-        frmEditor_Item.scrlAnim.Maximum = MAX_ANIMATIONS
+        frmEditor_Item.nudPic.Maximum = NumItems
 
         If NumPaperdolls > 0 Then
-            frmEditor_Item.scrlPaperdoll.Maximum = NumPaperdolls + 1
+            frmEditor_Item.nudPaperdoll.Maximum = NumPaperdolls + 1
         End If
-
-        frmEditor_Item.tabInfo.SelectedTab = frmEditor_Item.tabPageInfo
 
         EditorItem_DrawItem()
         EditorItem_DrawPaperdoll()

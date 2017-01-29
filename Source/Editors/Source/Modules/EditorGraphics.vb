@@ -1416,7 +1416,7 @@ Module EditorGraphics
 
     Public Sub EditorItem_DrawItem()
         Dim itemnum As Integer
-        itemnum = frmEditor_Item.scrlPic.Value
+        itemnum = frmEditor_Item.nudPic.Value
 
         If itemnum < 1 Or itemnum > NumItems Then
             frmEditor_Item.picItem.BackgroundImage = Nothing
@@ -1432,7 +1432,7 @@ Module EditorGraphics
     Public Sub EditorItem_DrawPaperdoll()
         Dim Sprite As Integer
 
-        Sprite = frmEditor_Item.scrlPaperdoll.Value
+        Sprite = frmEditor_Item.nudPaperdoll.Value
 
         If Sprite < 1 Or Sprite > NumPaperdolls Then
             frmEditor_Item.picPaperdoll.BackgroundImage = Nothing
@@ -1448,7 +1448,7 @@ Module EditorGraphics
         Dim Furniturenum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
-        Furniturenum = frmEditor_Item.scrlFurniture.Value
+        Furniturenum = frmEditor_Item.nudFurniture.Value
 
         If Furniturenum < 1 Or Furniturenum > NumFurniture Then
             EditorItem_Furniture.Clear(ToSFMLColor(frmEditor_Item.picFurniture.BackColor))
