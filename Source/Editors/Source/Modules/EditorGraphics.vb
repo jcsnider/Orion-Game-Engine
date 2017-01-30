@@ -1513,7 +1513,7 @@ Module EditorGraphics
     Public Sub EditorNpc_DrawSprite()
         Dim Sprite As Integer
 
-        Sprite = frmEditor_NPC.scrlSprite.Value
+        Sprite = frmEditor_Npc.nudSprite.Value
 
         If Sprite < 1 Or Sprite > NumCharacters Then
             frmEditor_NPC.picSprite.BackgroundImage = Nothing

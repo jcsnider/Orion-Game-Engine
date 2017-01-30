@@ -1,98 +1,22 @@
-﻿Public Class frmEditor_NPC
-    Private Sub scrlSprite_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite.ValueChanged, scrlSprite.Scroll
-        If EditorIndex <= 0 Then Exit Sub
+﻿Public Class frmEditor_Npc
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
 
-        lblSprite.Text = "Sprite: " & scrlSprite.Value
-        EditorNpc_DrawSprite()
-        Npc(EditorIndex).Sprite = scrlSprite.Value
-    End Sub
+#Region "Form Code"
+    Private Sub frmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        nudSprite.Maximum = NumCharacters
 
-    Private Sub scrlRange_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRange.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblRange.Text = "Range: " & scrlRange.Value
-        Npc(EditorIndex).Range = scrlRange.Value
-    End Sub
-
-    Private Sub cmbBehavior_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbBehaviour.SelectedIndexChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        Npc(EditorIndex).Behaviour = cmbBehaviour.SelectedIndex
-    End Sub
-
-    Private Sub cmbFaction_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbFaction.SelectedIndexChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        Npc(EditorIndex).Faction = cmbFaction.SelectedIndex
-    End Sub
-
-    Private Sub scrlAnimation_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnimation.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        Dim sString As String
-        If scrlAnimation.Value = 0 Then sString = "None" Else sString = Trim$(Animation(scrlAnimation.Value).Name)
-        lblAnimation.Text = "Anim: " & sString
-        Npc(EditorIndex).Animation = scrlAnimation.Value
-    End Sub
-
-    Private Sub scrlStr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlStr.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblStr.Text = "Str: " & scrlStr.Value
-        Npc(EditorIndex).Stat(Stats.Strength) = scrlStr.Value
-    End Sub
-
-    Private Sub scrlEnd_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlEnd.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblEnd.Text = "End: " & scrlEnd.Value
-        Npc(EditorIndex).Stat(Stats.Endurance) = scrlEnd.Value
-    End Sub
-
-    Private Sub scrlVit_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVit.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblVit.Text = "Vit: " & scrlVit.Value
-        Npc(EditorIndex).Stat(Stats.Vitality) = scrlVit.Value
-    End Sub
-
-    Private Sub scrlLuck_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLuck.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblLuck.Text = "Luck: " & scrlLuck.Value
-        Npc(EditorIndex).Stat(Stats.Luck) = scrlLuck.Value
-    End Sub
-
-    Private Sub scrlInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlInt.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblInt.Text = "Int: " & scrlInt.Value
-        Npc(EditorIndex).Stat(Stats.Intelligence) = scrlInt.Value
-    End Sub
-
-    Private Sub scrlSpr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSpr.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        lblSpr.Text = "Spr: " & scrlSpr.Value
-        Npc(EditorIndex).Stat(Stats.Spirit) = scrlSpr.Value
-    End Sub
-
-    Private Sub scrlNum_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlNum.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        If scrlNum.Value > 0 Then
-            lblItemName.Text = "Item: " & Trim$(Item(scrlNum.Value).Name)
-        Else
-            lblItemName.Text = "Item: "
-        End If
-
-        Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1) = scrlNum.Value
-    End Sub
-
-    Private Sub scrlValue_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlValue.ValueChanged
-        If EditorIndex <= 0 Then Exit Sub
-        lblValue.Text = "Value: " & scrlValue.Value
-        Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1) = scrlValue.Value
+        cmbItem.Items.Clear()
+        cmbItem.Items.Add("None")
+        For i = 1 To MAX_ITEMS
+            cmbItem.Items.Add(i & ": " & Item(i).Name)
+        Next
     End Sub
 
     Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
@@ -122,6 +46,10 @@
         NpcEditorCancel()
     End Sub
 
+
+#End Region
+
+#Region "Properties"
     Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
 
@@ -134,61 +62,150 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub txtSpawnSecs_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtSpawnSecs.TextChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        If IsNumeric(txtSpawnSecs.Text) Then Npc(EditorIndex).SpawnSecs = txtSpawnSecs.Text
-    End Sub
-
     Private Sub txtAttackSay_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAttackSay.TextChanged
         If EditorIndex <= 0 Then Exit Sub
 
         Npc(EditorIndex).AttackSay = txtAttackSay.Text
     End Sub
 
-    Private Sub txtHP_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtHP.TextChanged
+    Private Sub nudSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite.ValueChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        If IsNumeric(txtHP.Text) Then Npc(EditorIndex).HP = txtHP.Text
+        Npc(EditorIndex).Sprite = nudSprite.Value
+
+        EditorNpc_DrawSprite()
     End Sub
 
-    Private Sub txtEXP_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtEXP.TextChanged
+    Private Sub nudRange_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudRange.ValueChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        If IsNumeric(txtEXP.Text) Then Npc(EditorIndex).EXP = txtEXP.Text
+        Npc(EditorIndex).Range = nudRange.Value
     End Sub
 
-    Private Sub txtChance_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtChance.TextChanged
+    Private Sub cmbBehavior_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbBehaviour.SelectedIndexChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        If IsNumeric(txtChance.Text) Then Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1) = txtChance.Text
+        Npc(EditorIndex).Behaviour = cmbBehaviour.SelectedIndex
     End Sub
 
-    Private Sub scrlQuest_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlQuest.ValueChanged
+    Private Sub cmbFaction_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbFaction.SelectedIndexChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        lblQuest.Text = "Quest: " & scrlQuest.Value
-        Npc(EditorIndex).QuestNum = scrlQuest.Value
+        Npc(EditorIndex).Faction = cmbFaction.SelectedIndex
     End Sub
 
-    Private Sub frmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        scrlSprite.Maximum = NumCharacters
+    Private Sub cmbAnimation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAnimation.SelectedIndexChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Animation = cmbAnimation.SelectedIndex
     End Sub
 
+    Private Sub nudSpawnSecs_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpawnSecs.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).SpawnSecs = nudSpawnSecs.Value
+    End Sub
+
+    Private Sub nudHp_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudHp.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).HP = nudHp.Value
+    End Sub
+
+    Private Sub txtEXP_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudExp.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).EXP = nudExp.Value
+    End Sub
+
+    Private Sub scrlQuest_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbQuest.SelectedIndexChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).QuestNum = cmbQuest.SelectedIndex
+    End Sub
+
+    Private Sub nudLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudLevel.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Level = nudLevel.Value
+    End Sub
+
+    Private Sub nudDamage_ValueChanged(sender As Object, e As EventArgs) Handles nudDamage.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Damage = nudDamage.Value
+    End Sub
+#End Region
+
+#Region "Stats"
+    Private Sub nudStrength_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudStrength.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Strength) = nudStrength.Value
+    End Sub
+
+    Private Sub nudEndurance_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudEndurance.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Endurance) = nudEndurance.Value
+    End Sub
+
+    Private Sub nudVitality_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitality.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Vitality) = nudVitality.Value
+    End Sub
+
+    Private Sub nudLuck_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLuck.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Luck) = nudLuck.Value
+    End Sub
+
+    Private Sub nudIntelligence_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudIntelligence.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Intelligence) = nudIntelligence.Value
+    End Sub
+
+    Private Sub nudSpirit_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpirit.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).Stat(Stats.Spirit) = nudSpirit.Value
+    End Sub
+#End Region
+
+#Region "Drop Items"
     Private Sub cmbDropSlot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDropSlot.SelectedIndexChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        scrlNum.Value = Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1)
+        cmbItem.SelectedIndex = Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1)
 
-        If scrlNum.Value > 0 Then
-            lblItemName.Text = "Item: " & Trim$(Item(scrlNum.Value).Name)
-        End If
-        scrlValue.Value = Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1)
-        lblValue.Text = "Value: " & scrlValue.Value
+        nudAmount.Value = Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1)
 
-        txtChance.Text = Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1)
+        nudChance.Value = Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1)
     End Sub
 
+    Private Sub cmbItem_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbItem.SelectedIndexChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).DropItem(cmbDropSlot.SelectedIndex + 1) = cmbItem.SelectedIndex
+    End Sub
+
+    Private Sub scrlValue_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudAmount.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).DropItemValue(cmbDropSlot.SelectedIndex + 1) = nudAmount.Value
+    End Sub
+
+    Private Sub nudChance_ValueChanged(sender As Object, e As EventArgs) Handles nudChance.ValueChanged
+        If EditorIndex <= 0 Then Exit Sub
+
+        Npc(EditorIndex).DropChance(cmbDropSlot.SelectedIndex + 1) = nudChance.Value
+    End Sub
+#End Region
+
+#Region "Skills"
     Private Sub cmbSkill1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill1.SelectedIndexChanged
         If EditorIndex <= 0 Then Exit Sub
 
@@ -225,15 +242,7 @@
         Npc(EditorIndex).Skill(6) = cmbSkill6.SelectedIndex
     End Sub
 
-    Private Sub txtLevel_TextChanged(sender As Object, e As EventArgs) Handles txtLevel.TextChanged
-        If EditorIndex <= 0 Then Exit Sub
 
-        If IsNumeric(txtLevel.Text) Then Npc(EditorIndex).Level = txtLevel.Text
-    End Sub
+#End Region
 
-    Private Sub txtDamage_TextChanged(sender As Object, e As EventArgs) Handles txtDamage.TextChanged
-        If EditorIndex <= 0 Then Exit Sub
-
-        If IsNumeric(txtDamage.Text) Then Npc(EditorIndex).Damage = txtDamage.Text
-    End Sub
 End Class

@@ -884,37 +884,53 @@
         If Npc(EditorIndex).AttackSay Is Nothing Then Npc(EditorIndex).AttackSay = ""
         If Npc(EditorIndex).Name Is Nothing Then Npc(EditorIndex).Name = ""
 
-        With frmEditor_NPC
+        With frmEditor_Npc
+            'populate combo boxes
+            .cmbAnimation.Items.Clear()
+            .cmbAnimation.Items.Add("None")
+            For i = 1 To MAX_ANIMATIONS
+                .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+            Next
+
+            .cmbQuest.Items.Clear()
+            .cmbQuest.Items.Add("None")
+            For i = 1 To MAX_QUESTS
+                .cmbQuest.Items.Add(i & ": " & Quest(i).Name)
+            Next
+
+            .cmbItem.Items.Clear()
+            .cmbItem.Items.Add("None")
+            For i = 1 To MAX_ITEMS
+                .cmbItem.Items.Add(i & ": " & Item(i).Name)
+            Next
+
             .txtName.Text = Trim$(Npc(EditorIndex).Name)
             .txtAttackSay.Text = Trim$(Npc(EditorIndex).AttackSay)
-            If Npc(EditorIndex).Sprite < 0 Or Npc(EditorIndex).Sprite > .scrlSprite.Maximum Then Npc(EditorIndex).Sprite = 0
-            .scrlSprite.Value = Npc(EditorIndex).Sprite
-            .txtSpawnSecs.Text = Npc(EditorIndex).SpawnSecs
+
+            If Npc(EditorIndex).Sprite < 0 Or Npc(EditorIndex).Sprite > .nudSprite.Maximum Then Npc(EditorIndex).Sprite = 0
+            .nudSprite.Value = Npc(EditorIndex).Sprite
+            .nudSpawnSecs.Text = Npc(EditorIndex).SpawnSecs
             .cmbBehaviour.SelectedIndex = Npc(EditorIndex).Behaviour
             .cmbFaction.SelectedIndex = Npc(EditorIndex).Faction
-            .scrlRange.Value = Npc(EditorIndex).Range
-            .txtChance.Text = Npc(EditorIndex).DropChance(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
-            .scrlNum.Value = Npc(EditorIndex).DropItem(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
-            'frmEditor_NPC.lblNum.Text = "Num: " & frmEditor_NPC.scrlNum.Value
-            If frmEditor_NPC.scrlNum.Value > 0 Then
-                frmEditor_NPC.lblItemName.Text = "Item: " & Trim$(Item(frmEditor_NPC.scrlNum.Value).Name)
-            End If
-            .scrlValue.Value = Npc(EditorIndex).DropItemValue(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
-            frmEditor_NPC.lblValue.Text = "Value: " & frmEditor_NPC.scrlValue.Value
+            .nudRange.Value = Npc(EditorIndex).Range
+            .nudChance.Text = Npc(EditorIndex).DropChance(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
+            .cmbItem.SelectedIndex = Npc(EditorIndex).DropItem(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
 
-            .txtHP.Text = Npc(EditorIndex).HP
-            .txtEXP.Text = Npc(EditorIndex).EXP
-            .txtLevel.Text = Npc(EditorIndex).Level
-            .txtDamage.Text = Npc(EditorIndex).Damage
+            .nudAmount.Value = Npc(EditorIndex).DropItemValue(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
 
-            .scrlQuest.Value = Npc(EditorIndex).QuestNum
+            .nudHp.Text = Npc(EditorIndex).HP
+            .nudExp.Text = Npc(EditorIndex).EXP
+            .nudLevel.Text = Npc(EditorIndex).Level
+            .nudDamage.Text = Npc(EditorIndex).Damage
 
-            .scrlStr.Value = Npc(EditorIndex).Stat(Stats.Strength)
-            .scrlEnd.Value = Npc(EditorIndex).Stat(Stats.Endurance)
-            .scrlInt.Value = Npc(EditorIndex).Stat(Stats.Intelligence)
-            .scrlSpr.Value = Npc(EditorIndex).Stat(Stats.Spirit)
-            .scrlLuck.Value = Npc(EditorIndex).Stat(Stats.Luck)
-            .scrlVit.Value = Npc(EditorIndex).Stat(Stats.Vitality)
+            .cmbQuest.SelectedIndex = Npc(EditorIndex).QuestNum
+
+            .nudStrength.Value = Npc(EditorIndex).Stat(Stats.Strength)
+            .nudEndurance.Value = Npc(EditorIndex).Stat(Stats.Endurance)
+            .nudIntelligence.Value = Npc(EditorIndex).Stat(Stats.Intelligence)
+            .nudSpirit.Value = Npc(EditorIndex).Stat(Stats.Spirit)
+            .nudLuck.Value = Npc(EditorIndex).Stat(Stats.Luck)
+            .nudVitality.Value = Npc(EditorIndex).Stat(Stats.Vitality)
 
             .cmbSkill1.Items.Clear()
             .cmbSkill2.Items.Clear()

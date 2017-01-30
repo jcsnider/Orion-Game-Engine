@@ -69,7 +69,7 @@
 #End Region
 
 #Region "Basics"
-    Private Sub nudPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudPic.ValueChanged
+    Private Sub nudPic_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudPic.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Pic = nudPic.Value
@@ -158,13 +158,13 @@
         Item(EditorIndex).Type = cmbType.SelectedIndex
     End Sub
 
-    Private Sub scrlVitalMod_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitalMod.ValueChanged
+    Private Sub nudVitalMod_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitalMod.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Data1 = nudVitalMod.Value
     End Sub
 
-    Private Sub scrlSkill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbSkills.SelectedIndexChanged
+    Private Sub cmbSkills_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbSkills.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Data1 = cmbSkills.SelectedIndex
@@ -180,7 +180,7 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub scrlPrice_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudPrice.ValueChanged
+    Private Sub nudPrice_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudPrice.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Price = nudPrice.Value
@@ -194,7 +194,7 @@
         End If
     End Sub
 
-    Private Sub scrlRecipe_Scroll(sender As Object, e As EventArgs) Handles cmbRecipe.SelectedIndexChanged
+    Private Sub cmbRecipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRecipe.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Data1 = cmbRecipe.SelectedIndex
@@ -206,31 +206,19 @@
         Item(EditorIndex).Description = Trim$(txtDescription.Text)
     End Sub
 
-    'Private Sub numMin_ValueChanged(sender As Object, e As EventArgs) Handles numMin.ValueChanged
-    '    If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
-
-    '    Item(EditorIndex).RandomMin = numMin.Value
-    'End Sub
-
-    'Private Sub numMax_ValueChanged(sender As Object, e As EventArgs) Handles numMax.ValueChanged
-    '    If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
-
-    '    Item(EditorIndex).RandomMax = numMax.Value
-    'End Sub
-
     Private Sub cmbSubType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSubType.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).SubType = cmbSubType.SelectedIndex
     End Sub
 
-    Private Sub scrlItemLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudItemLvl.ValueChanged
+    Private Sub nudItemLvl_ValueChanged(sender As Object, e As EventArgs) Handles nudItemLvl.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).ItemLevel = nudItemLvl.Value
     End Sub
 
-    Private Sub scrlPetNum_Scroll(sender As Object, e As EventArgs) Handles cmbPet.SelectedIndexChanged
+    Private Sub cmbPet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPet.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Data1 = cmbPet.SelectedIndex
@@ -256,37 +244,37 @@
         Item(EditorIndex).LevelReq = nudLevelReq.Value
     End Sub
 
-    Private Sub scrlStrReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudStrReq.ValueChanged
+    Private Sub nudStrReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudStrReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Strength) = nudStrReq.Value
     End Sub
 
-    Private Sub scrlEndReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudEndReq.ValueChanged
+    Private Sub nudEndReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudEndReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Endurance) = nudEndReq.Value
     End Sub
 
-    Private Sub scrlVitReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitReq.ValueChanged
+    Private Sub nudVitReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Vitality) = nudVitReq.Value
     End Sub
 
-    Private Sub scrlWillReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudLuckReq.ValueChanged
+    Private Sub nudLuckReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLuckReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Luck) = nudLuckReq.Value
     End Sub
 
-    Private Sub scrlIntReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudIntReq.ValueChanged
+    Private Sub nudIntReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudIntReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Intelligence) = nudIntReq.Value
     End Sub
 
-    Private Sub scrlSprReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprReq.ValueChanged
+    Private Sub nudSprReq_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprReq.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Stat_Req(Stats.Spirit) = nudSprReq.Value
@@ -299,56 +287,56 @@
         Item(EditorIndex).Data3 = cmbTool.SelectedIndex
     End Sub
 
-    Private Sub scrlDamage_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudDamage.ValueChanged
+    Private Sub nudDamage_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudDamage.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Data2 = nudDamage.Value
     End Sub
 
-    Private Sub scrlSpeed_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpeed.ValueChanged
+    Private Sub nudSpeed_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpeed.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
         lblSpeed.Text = "Speed: " & nudSpeed.Value / 1000 & " sec"
         Item(EditorIndex).Speed = nudSpeed.Value
     End Sub
 
-    Private Sub scrlPaperdoll_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudPaperdoll.ValueChanged
+    Private Sub nudPaperdoll_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudPaperdoll.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Paperdoll = nudPaperdoll.Value
         EditorItem_DrawPaperdoll()
     End Sub
 
-    Private Sub scrlAddStr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudStrength.ValueChanged
+    Private Sub nudStrength_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudStrength.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Strength) = nudStrength.Value
     End Sub
 
-    Private Sub scrlAddWill_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudLuck.ValueChanged
+    Private Sub nudLuck_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLuck.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Luck) = nudLuck.Value
     End Sub
 
-    Private Sub scrlAddEnd_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudEndurance.ValueChanged
+    Private Sub nudEndurance_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudEndurance.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Endurance) = nudEndurance.Value
     End Sub
 
-    Private Sub scrlAddInt_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudIntelligence.ValueChanged
+    Private Sub nudIntelligence_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudIntelligence.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Intelligence) = nudIntelligence.Value
     End Sub
 
-    Private Sub scrlAddVit_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitality.ValueChanged
+    Private Sub nudVitality_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudVitality.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Vitality) = nudVitality.Value
     End Sub
 
-    Private Sub scrlAddSpr_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpirit.ValueChanged
+    Private Sub nudSpirit_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSpirit.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Add_Stat(Stats.Spirit) = nudSpirit.Value
@@ -380,13 +368,13 @@
         End If
     End Sub
 
-    Private Sub scrlProjectile_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbProjectile.SelectedIndexChanged
+    Private Sub cmbProjectile_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbProjectile.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Projectile = cmbProjectile.SelectedIndex
     End Sub
 
-    Private Sub scrlAmmo_ValueChanged(sender As Object, e As EventArgs) Handles cmbAmmo.SelectedIndexChanged
+    Private Sub cmbAmmo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAmmo.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_ITEMS Then Exit Sub
 
         Item(EditorIndex).Ammo = cmbAmmo.SelectedIndex
@@ -436,8 +424,6 @@
 
         EditorItem_DrawFurniture()
     End Sub
-
-
 #End Region
 
 End Class
