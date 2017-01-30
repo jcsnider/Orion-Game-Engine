@@ -2088,10 +2088,19 @@ Public Module ServerEvents
     Public Sub GivePlayerEXP(ByVal Index As Integer, ByVal Exp As Integer)
         ' give the exp
 
-        Call SetPlayerExp(Index, GetPlayerExp(Index) + Exp)
-        SendActionMsg(GetPlayerMap(Index), "+" & Exp & " EXP", ColorType.White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
+        SetPlayerExp(Index, GetPlayerExp(Index) + Exp)
+        SendActionMsg(GetPlayerMap(Index), "+" & Exp & " Exp", ColorType.White, 1, (GetPlayerX(Index) * 32), (GetPlayerY(Index) * 32))
         ' check if we've leveled
         CheckPlayerLevelUp(Index)
+
+        If PetAlive(Index) Then
+            If Pet(GetPetNum(Index)).LevelingType = 0 Then
+                SetPetExp(Index, GetPetExp(Index) + (Exp * (Pet(GetPetNum(Index)).ExpGain / 100)))
+                SendActionMsg(GetPlayerMap(Index), "+" & (Exp * (Pet(GetPetNum(Index)).ExpGain / 100)) & " Exp", ColorType.White, 1, (GetPetX(Index) * 32), (GetPetY(Index) * 32))
+                CheckPetLevelUp(Index)
+                SendPetExp(Index)
+            End If
+        End If
 
         SendExp(Index)
         SendPlayerData(Index)

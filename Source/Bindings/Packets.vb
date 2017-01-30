@@ -157,6 +157,8 @@
         SPetVital
         SClearPetSkillBuffer
         SPetAttack
+        SPetXY
+        SPetExp
 
         STime
         SClock

@@ -361,6 +361,35 @@ Module ClientPets
 
         Buffer = Nothing
     End Sub
+
+    Public Sub Packet_PetXY(ByVal Data() As Byte)
+        Dim i As Integer
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SPetXY Then Exit Sub
+
+        Player(i).Pet.X = buffer.ReadInteger
+        Player(i).Pet.Y = buffer.ReadInteger
+
+        buffer = Nothing
+    End Sub
+
+    Public Sub Packet_PetExperience(ByVal Data() As Byte)
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteBytes(Data)
+
+        ' Confirm it is the right packet
+        If buffer.ReadInteger <> ServerPackets.SPetExp Then Exit Sub
+
+        Player(MyIndex).Pet.Exp = buffer.ReadInteger
+        Player(MyIndex).Pet.TNL = buffer.ReadInteger
+
+        buffer = Nothing
+    End Sub
 #End Region
 
 #Region "Movement"
@@ -642,6 +671,8 @@ Module ClientPets
         DrawText(PetStatX + 165, PetStatY + 50, "Luck: " & Player(MyIndex).Pet.Stat(Stats.Luck), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
         DrawText(PetStatX + 165, PetStatY + 65, "Intelligence: " & Player(MyIndex).Pet.Stat(Stats.Intelligence), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
         DrawText(PetStatX + 165, PetStatY + 80, "Spirit: " & Player(MyIndex).Pet.Stat(Stats.Spirit), SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
+
+        DrawText(PetStatX + 65, PetStatY + 95, "Experience: " & Player(MyIndex).Pet.Exp & "/" & Player(MyIndex).Pet.TNL, SFML.Graphics.Color.Yellow, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
 #End Region

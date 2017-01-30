@@ -2283,12 +2283,10 @@ Module ServerDatabase
         writer.Write(Player(Index).Character(CharNum).Pet.Mana)
         writer.Write(Player(Index).Character(CharNum).Pet.Level)
 
-        ReDim Player(Index).Character(CharNum).Pet.stat(Stats.Count - 1)
         For i = 1 To Stats.Count - 1
             writer.Write(Player(Index).Character(CharNum).Pet.stat(i))
         Next
 
-        ReDim Player(Index).Character(CharNum).Pet.Skill(4)
         For i = 1 To 4
             writer.Write(Player(Index).Character(CharNum).Pet.Skill(i))
         Next

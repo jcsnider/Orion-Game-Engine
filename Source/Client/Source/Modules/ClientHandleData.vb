@@ -197,6 +197,8 @@
         Packets.Add(ServerPackets.SPetVital, AddressOf Packet_PetVital)
         Packets.Add(ServerPackets.SClearPetSkillBuffer, AddressOf Packet_ClearPetSkillBuffer)
         Packets.Add(ServerPackets.SPetAttack, AddressOf Packet_PetAttack)
+        Packets.Add(ServerPackets.SPetXY, AddressOf Packet_PetXY)
+        Packets.Add(ServerPackets.SPetExp, AddressOf Packet_PetExperience)
 
         Packets.Add(ServerPackets.SClock, AddressOf Packet_Clock)
         Packets.Add(ServerPackets.STime, AddressOf Packet_Time)

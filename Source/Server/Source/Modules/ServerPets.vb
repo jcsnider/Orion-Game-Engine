@@ -321,6 +321,27 @@
         buffer = Nothing
     End Sub
 
+    Sub SendPetXY(ByVal Index As Integer, ByVal X As Integer, ByVal Y As Integer)
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteInteger(ServerPackets.SPetXY)
+        buffer.WriteInteger(Index)
+        buffer.WriteInteger(X)
+        buffer.WriteInteger(Y)
+        SendDataToMap(GetPlayerMap(Index), buffer.ToArray)
+        buffer = Nothing
+    End Sub
+
+    Sub SendPetExp(ByVal Index As Integer)
+        Dim buffer As New ByteBuffer
+
+        buffer.WriteInteger(ServerPackets.SPetExp)
+        buffer.WriteInteger(GetPetExp(Index))
+        buffer.WriteInteger(GetPetNextLevel(Index))
+        SendDataTo(Index, buffer.ToArray)
+        buffer = Nothing
+    End Sub
+
 #End Region
 
 #Region "Incoming Packets"
@@ -1939,13 +1960,13 @@
                 GivePlayerEXP(Attacker, Exp)
             End If
 
-            For n = 1 To 20
-                If MapNpc(MapNum).Npc(mapnpcnum).Num > 0 Then
-                    'SpawnItem(MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Num, MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Value, MapNum, MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y)
-                    'MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Value = 0
-                    'MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Num = 0
-                End If
-            Next
+            'For n = 1 To 20
+            '    If MapNpc(MapNum).Npc(mapnpcnum).Num > 0 Then
+            '        'SpawnItem(MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Num, MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Value, MapNum, MapNpc(MapNum).Npc(mapnpcnum).x, MapNpc(MapNum).Npc(mapnpcnum).y)
+            '        'MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Value = 0
+            '        'MapNpc(MapNum).Npc(mapnpcnum).Inventory(n).Num = 0
+            '    End If
+            'Next
 
             ' Now set HP to 0 so we know to actually kill them in the server loop (this prevents subscript out of range)
             MapNpc(MapNum).Npc(mapnpcnum).Num = 0

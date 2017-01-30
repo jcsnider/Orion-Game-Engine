@@ -1724,11 +1724,11 @@ Module ClientGraphics
         GameWindow.DispatchEvents()
         GameWindow.Clear(SFML.Graphics.Color.Black)
 
-        If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
-            If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
-                GameWindow.SetMouseCursorVisible(False)
-            End If
-        End If
+        'If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
+        '    If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
+        '        GameWindow.SetMouseCursorVisible(False)
+        '    End If
+        'End If
 
         ' blit lower tiles
         If NumTileSets > 0 Then
@@ -3654,7 +3654,7 @@ NextLoop:
         End If
 
         'draw cursor
-        DrawCursor()
+        'DrawCursor()
     End Sub
 
     Public Sub EditorMap_DrawMapItem()

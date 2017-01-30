@@ -175,10 +175,14 @@ Module ServerPlayers
         SetPlayerMap(Index, MapNum)
         SetPlayerX(Index, X)
         SetPlayerY(Index, Y)
-        Player(Index).Character(TempPlayer(Index).CurChar).Pet.x = X
-        Player(Index).Character(TempPlayer(Index).CurChar).Pet.y = Y
-        TempPlayer(Index).PetTarget = 0
-        TempPlayer(Index).PetTargetType = 0
+        If PetAlive(Index) Then
+            SetPetX(Index, X)
+            SetPetY(Index, Y)
+            TempPlayer(Index).PetTarget = 0
+            TempPlayer(Index).PetTargetType = 0
+            SendPetXY(Index, X, Y)
+        End If
+
         SendPlayerXY(Index)
 
         ' send equipment of all people on new map
