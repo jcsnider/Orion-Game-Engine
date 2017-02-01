@@ -10,9 +10,10 @@ Module ClientGameLogic
         Dim dest As Point = New Point(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location))
         Dim g As Graphics = FrmMainGame.picscreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
-        Dim tmpfps As Integer, WalkTimer As Integer, FrameTime As Integer
+        Dim tmpfps As Integer, tmplps as integer, WalkTimer As Integer, FrameTime As Integer
         Dim destrect As Rectangle, tmr10000 As Integer, tmr1000 As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
+        Dim rendercount as integer
 
         starttime = GetTickCount()
         FrmMenu.lblNextChar.Left = lblnextcharleft
@@ -59,11 +60,12 @@ Module ClientGameLogic
                 'Calculate FPS
                 If starttime < GetTickCount() Then
                     FPS = tmpfps
-
+                    LPS = tmplps
                     tmpfps = 0
+                    tmplps = 0
                     starttime = GetTickCount() + 1000
                 End If
-                tmpfps = tmpfps + 1
+                tmplps = tmplps + 1
 
                 ' Update inv animation
                 If NumItems > 0 Then
@@ -258,9 +260,6 @@ Module ClientGameLogic
 
                     ProcessWeather()
 
-                    'Auctual Game Loop Stuff :/
-                    Render_Graphics()
-
                     If FadeInSwitch = True Then
                         FadeIn()
                     End If
@@ -281,6 +280,13 @@ Module ClientGameLogic
 
                 End SyncLock
             End If
+
+            if rendercount < tick then
+            	'Auctual Game Loop Stuff :/
+                Render_Graphics()
+                tmpfps = tmpfps + 1
+                rendercount = tick + 32
+            end if
 
             Application.DoEvents()
 
@@ -602,6 +608,8 @@ Module ClientGameLogic
                 ' Checking fps
                 Case "/fps"
                     BFPS = Not BFPS
+                Case "/lps"
+                    BLPS = Not BLPS
                 ' Request stats
                 Case "/stats"
                     Buffer = New ByteBuffer

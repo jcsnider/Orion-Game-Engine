@@ -2,9 +2,6 @@
 
 Module ClientConstants
 
-    'Graphics
-    Public Const FPS_LIMIT As Integer = 64
-
     'Chatbubble
     Public Const ChatBubbleWidth As Integer = 100
 

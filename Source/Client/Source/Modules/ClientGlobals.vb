@@ -48,6 +48,7 @@ Module ClientGlobals
     Public EqX As Integer
     Public EqY As Integer
     Public FPS As Integer
+    Public LPS as integer
     Public PingToDraw As String
     Public inChat As Boolean
     Public ShowRClick As Boolean
@@ -107,12 +108,14 @@ Module ClientGlobals
 
     ' Used to check if FPS needs to be drawn
     Public BFPS As Boolean
+    Public BLPS as boolean
     Public BLoc As Boolean
 
     ' FPS and Time-based movement vars
     Public ElapsedTime As Integer
     'Public ElapsedMTime As Integer
     Public GameFPS As Integer
+    Public GameLPS as integer
 
     ' Text vars
     Public vbQuote As String

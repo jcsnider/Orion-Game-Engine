@@ -66,6 +66,7 @@
   <gamegui>
     <string id="mapname">Map:</string>
     <string id="fps">FPS:</string>
+    <string id="lps">LPS:</string>
     <string id="ping">Ping:</string>
     <string id="clock">Time:</string>
     <string id="pingsync">Sync</string>
@@ -84,7 +85,7 @@
     <string id="help2">'msghere = Global Message</string>
     <string id="help3">-msghere = Party Message</string>
     <string id="help4">!namehere msghere = Player Message</string>
-    <string id="help5">Available Commands: /help, /info, /who, /fps, /stats, /trade, /party, /join, /leave, /sellhouse, /houseinvite</string>
+    <string id="help5">Available Commands: /help, /info, /who, /fps, /lps, /stats, /trade, /party, /join, /leave, /sellhouse, /houseinvite</string>
     <string id="houseinvite">Usage: /houseinvite (name)</string>
     <string id="info">Usage: /info (name)</string>
     <string id="party">Usage: /party (name)</string>
