@@ -66,6 +66,7 @@ Module ClientGameLogic
                     starttime = GetTickCount() + 1000
                 End If
                 tmplps = tmplps + 1
+                tmpfps = tmpfps + 1
 
                 ' Update inv animation
                 If NumItems > 0 Then
@@ -271,7 +272,7 @@ Module ClientGameLogic
                     If InMapEditor Then EditorMap_DrawTileset()
 
                     destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                    Application.DoEvents()
+                    'Application.DoEvents()
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME, FONT_SIZE)
@@ -284,9 +285,9 @@ Module ClientGameLogic
             if rendercount < tick then
             	'Auctual Game Loop Stuff :/
                 Render_Graphics()
-                tmpfps = tmpfps + 1
-                rendercount = tick + 32
-            end if
+
+                rendercount = Tick + 16
+            End if
 
             Application.DoEvents()
 

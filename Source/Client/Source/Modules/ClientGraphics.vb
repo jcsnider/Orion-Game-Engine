@@ -211,6 +211,10 @@ Module ClientGraphics
     Public LightGfx As Texture
     Public LightSprite As Sprite
     Public LightGfxInfo As GraphicInfo
+
+    Public ShadowGfx As Texture
+    Public ShadowSprite As Sprite
+    Public ShadowGfxInfo As GraphicInfo
 #End Region
 
 #Region "Types"
@@ -635,8 +639,8 @@ Module ClientGraphics
         End If
 
         LightGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Light2" & GFX_EXT) Then
-            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light2" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
+            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
             LightSprite = New Sprite(LightGfx)
 
             'Cache the width and height
@@ -644,6 +648,15 @@ Module ClientGraphics
             LightGfxInfo.Height = LightGfx.Size.Y
         End If
 
+        ShadowGfxInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "Shadow" & GFX_EXT) Then
+            ShadowGfx = New Texture(Application.StartupPath & GFX_PATH & "Shadow" & GFX_EXT)
+            ShadowSprite = New Sprite(ShadowGfx)
+
+            'Cache the width and height
+            ShadowGfxInfo.Width = ShadowGfx.Size.X
+            ShadowGfxInfo.Height = ShadowGfx.Size.Y
+        End If
     End Sub
 
     Public Sub LoadTexture(ByVal Index As Integer, ByVal TexType As Byte)
@@ -1067,7 +1080,6 @@ Module ClientGraphics
         End If
 
         ' render the actual sprite
-
         DrawCharacter(Spritenum, X, Y, srcrec)
 
         'check for paperdolling
@@ -1333,7 +1345,7 @@ Module ClientGraphics
         Dim y As Integer
         Dim width As Integer
         Dim height As Integer
-        On Error Resume Next
+        'On Error Resume Next
 
         If Sprite < 1 Or Sprite > NumCharacters Then Exit Sub
 
@@ -1350,6 +1362,9 @@ Module ClientGraphics
         y = ConvertMapY(y2)
         width = (rec.Width)
         height = (rec.Height)
+
+        'shadow first
+        RenderSprite(ShadowSprite, GameWindow, X - 1, y + 6, 0, 0, ShadowGfxInfo.Width, ShadowGfxInfo.Height)
 
         RenderSprite(CharacterSprite(Sprite), GameWindow, X, y, rec.X, rec.Y, rec.Width, rec.Height)
 
@@ -2517,7 +2532,6 @@ Module ClientGraphics
             End With
 
             RenderSprite(FacesSprite(Player(MyIndex).Sprite), GameWindow, HUDFaceX, HUDFaceY, rec.X, rec.Y, rec.Width, rec.Height)
-
         End If
 
         'Hp Bar etc
@@ -2525,9 +2539,12 @@ Module ClientGraphics
 
         'Fps etc
         DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, Strings.Get("gamegui", "fps") & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 20, Strings.Get("gamegui", "lps") & LPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 4, Strings.Get("gamegui", "clock") & CurTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+
+        If BLPS Then
+            DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 20, Strings.Get("gamegui", "lps") & LPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        End If
 
         ' Draw map name
         DrawMapName()

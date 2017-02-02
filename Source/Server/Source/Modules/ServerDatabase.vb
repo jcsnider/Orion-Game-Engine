@@ -1797,7 +1797,7 @@ Module ServerDatabase
 
         Dim reader As New ArchaicIO.File.BinaryStream.Reader(filename)
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             reader.Read(Bank(Index).Item(i).Num)
             reader.Read(Bank(Index).Item(i).Value)
 
@@ -1820,7 +1820,7 @@ Module ServerDatabase
 
         Dim writer As New ArchaicIO.File.BinaryStream.Writer()
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             writer.Write(Bank(Index).Item(i).Num)
             writer.Write(Bank(Index).Item(i).Value)
 
@@ -1833,16 +1833,16 @@ Module ServerDatabase
             writer.Write(Bank(Index).ItemRand(i).Damage)
             writer.Write(Bank(Index).ItemRand(i).Speed)
 
-            'For x = 1 To Stats.Count - 1
-            '    writer.Write(Bank(Index).ItemRand(i).Stat(x))
-            'Next
+            For x = 1 To Stats.Count - 1
+                writer.Write(Bank(Index).ItemRand(i).Stat(x))
+            Next
 
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Strength))
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Endurance))
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Vitality))
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Luck))
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Intelligence))
-            writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Spirit))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Strength))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Endurance))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Vitality))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Luck))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Intelligence))
+            'writer.Write(Bank(Index).ItemRand(i).Stat(Stats.Spirit))
         Next
 
         writer.Save(filename)
@@ -1852,7 +1852,7 @@ Module ServerDatabase
         ReDim Bank(Index).Item(MAX_BANK)
         ReDim Bank(Index).ItemRand(MAX_BANK)
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
 
             Bank(Index).Item(i).Num = 0
             Bank(Index).Item(i).Value = 0

@@ -308,7 +308,7 @@
     <Content Include="Data Files\Graphics\Light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Night.png">
+    <Content Include="Data Files\Graphics\shadow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Tilesets\10.png">
