@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmEditor_Pet
+Partial Class frmEditor_Pet
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,343 +22,420 @@ Partial Class FrmEditor_Pet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.lblSkill4 = New System.Windows.Forms.Label()
-        Me.lblSkill3 = New System.Windows.Forms.Label()
-        Me.scrlSkill4 = New System.Windows.Forms.HScrollBar()
-        Me.scrlSkill3 = New System.Windows.Forms.HScrollBar()
-        Me.lblSkill2 = New System.Windows.Forms.Label()
-        Me.lblSkill1 = New System.Windows.Forms.Label()
-        Me.scrlSkill2 = New System.Windows.Forms.HScrollBar()
-        Me.scrlSkill1 = New System.Windows.Forms.HScrollBar()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbSkill4 = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
+        Me.cmbSkill3 = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
+        Me.cmbSkill2 = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel17 = New DarkUI.Controls.DarkLabel()
+        Me.cmbSkill1 = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
         Me.pnlPetlevel = New System.Windows.Forms.Panel()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.cmbEvolve = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.scrlEvolveLvl = New System.Windows.Forms.HScrollBar()
-        Me.lblEvolveLvl = New System.Windows.Forms.Label()
-        Me.chkEvolve = New System.Windows.Forms.CheckBox()
-        Me.lblmaxlevel = New System.Windows.Forms.Label()
-        Me.lblPetPnts = New System.Windows.Forms.Label()
-        Me.lblPetExp = New System.Windows.Forms.Label()
-        Me.scrlMaxLevel = New System.Windows.Forms.HScrollBar()
-        Me.scrlPetPnts = New System.Windows.Forms.HScrollBar()
-        Me.scrlPetExp = New System.Windows.Forms.HScrollBar()
-        Me.optDoNotLevel = New System.Windows.Forms.RadioButton()
-        Me.optLevel = New System.Windows.Forms.RadioButton()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox5 = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbEvolve = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
+        Me.nudEvolveLvl = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
+        Me.chkEvolve = New DarkUI.Controls.DarkCheckBox()
+        Me.nudMaxLevel = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.nudPetPnts = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
+        Me.nudPetExp = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.optDoNotLevel = New DarkUI.Controls.DarkRadioButton()
+        Me.optLevel = New DarkUI.Controls.DarkRadioButton()
+        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.pnlCustomStats = New System.Windows.Forms.Panel()
-        Me.lblLevel = New System.Windows.Forms.Label()
-        Me.scrlLevel = New System.Windows.Forms.HScrollBar()
-        Me.scrlStrength = New System.Windows.Forms.HScrollBar()
-        Me.lblSpirit = New System.Windows.Forms.Label()
-        Me.lblStrength = New System.Windows.Forms.Label()
-        Me.scrlSpirit = New System.Windows.Forms.HScrollBar()
-        Me.lblIntelligence = New System.Windows.Forms.Label()
-        Me.lblVitality = New System.Windows.Forms.Label()
-        Me.scrlLuck = New System.Windows.Forms.HScrollBar()
-        Me.scrlVitality = New System.Windows.Forms.HScrollBar()
-        Me.lblLuck = New System.Windows.Forms.Label()
-        Me.scrlIntelligence = New System.Windows.Forms.HScrollBar()
-        Me.scrlEndurance = New System.Windows.Forms.HScrollBar()
-        Me.lblEndurance = New System.Windows.Forms.Label()
-        Me.optAdoptStats = New System.Windows.Forms.RadioButton()
-        Me.optCustomStats = New System.Windows.Forms.RadioButton()
-        Me.scrlRange = New System.Windows.Forms.HScrollBar()
-        Me.lblRange = New System.Windows.Forms.Label()
-        Me.scrlSprite = New System.Windows.Forms.HScrollBar()
-        Me.lblSprite = New System.Windows.Forms.Label()
+        Me.nudLevel = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
+        Me.nudSpirit = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
+        Me.nudIntelligence = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
+        Me.nudLuck = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
+        Me.nudVitality = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
+        Me.nudEndurance = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.nudStrength = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.optAdoptStats = New DarkUI.Controls.DarkRadioButton()
+        Me.optCustomStats = New DarkUI.Controls.DarkRadioButton()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.nudRange = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.nudSprite = New DarkUI.Controls.DarkNumericUpDown()
         Me.picSprite = New System.Windows.Forms.PictureBox()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.txtName = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.btnSave = New DarkUI.Controls.DarkButton()
+        Me.btnCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkGroupBox1.SuspendLayout()
+        Me.DarkGroupBox2.SuspendLayout()
+        Me.DarkGroupBox6.SuspendLayout()
+        Me.DarkGroupBox4.SuspendLayout()
         Me.pnlPetlevel.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.DarkGroupBox5.SuspendLayout()
+        CType(Me.nudEvolveLvl, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMaxLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudPetPnts, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudPetExp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DarkGroupBox3.SuspendLayout()
         Me.pnlCustomStats.SuspendLayout()
+        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSpirit, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudIntelligence, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudLuck, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudVitality, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudEndurance, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudStrength, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudRange, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSprite, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picSprite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'DarkGroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.lstIndex)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(208, 503)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Pet List"
+        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
+        Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox1.Location = New System.Drawing.Point(1, 3)
+        Me.DarkGroupBox1.Name = "DarkGroupBox1"
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(209, 443)
+        Me.DarkGroupBox1.TabIndex = 0
+        Me.DarkGroupBox1.TabStop = False
+        Me.DarkGroupBox1.Text = "Pet List"
         '
         'lstIndex
         '
+        Me.lstIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lstIndex.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstIndex.ForeColor = System.Drawing.Color.Gainsboro
         Me.lstIndex.FormattingEnabled = True
-        Me.lstIndex.Location = New System.Drawing.Point(6, 19)
+        Me.lstIndex.Location = New System.Drawing.Point(6, 14)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(198, 472)
-        Me.lstIndex.TabIndex = 0
+        Me.lstIndex.Size = New System.Drawing.Size(198, 418)
+        Me.lstIndex.TabIndex = 1
         '
-        'GroupBox2
+        'DarkGroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.GroupBox5)
-        Me.GroupBox2.Controls.Add(Me.GroupBox4)
-        Me.GroupBox2.Controls.Add(Me.GroupBox3)
-        Me.GroupBox2.Controls.Add(Me.scrlRange)
-        Me.GroupBox2.Controls.Add(Me.lblRange)
-        Me.GroupBox2.Controls.Add(Me.scrlSprite)
-        Me.GroupBox2.Controls.Add(Me.lblSprite)
-        Me.GroupBox2.Controls.Add(Me.picSprite)
-        Me.GroupBox2.Controls.Add(Me.txtName)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(213, 3)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(389, 537)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Pet Properties"
+        Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox6)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox4)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox3)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel3)
+        Me.DarkGroupBox2.Controls.Add(Me.nudRange)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel2)
+        Me.DarkGroupBox2.Controls.Add(Me.nudSprite)
+        Me.DarkGroupBox2.Controls.Add(Me.picSprite)
+        Me.DarkGroupBox2.Controls.Add(Me.txtName)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel1)
+        Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox2.Location = New System.Drawing.Point(216, 3)
+        Me.DarkGroupBox2.Name = "DarkGroupBox2"
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(410, 472)
+        Me.DarkGroupBox2.TabIndex = 1
+        Me.DarkGroupBox2.TabStop = False
+        Me.DarkGroupBox2.Text = "Pet Properties"
         '
-        'GroupBox5
+        'DarkGroupBox6
         '
-        Me.GroupBox5.Controls.Add(Me.lblSkill4)
-        Me.GroupBox5.Controls.Add(Me.lblSkill3)
-        Me.GroupBox5.Controls.Add(Me.scrlSkill4)
-        Me.GroupBox5.Controls.Add(Me.scrlSkill3)
-        Me.GroupBox5.Controls.Add(Me.lblSkill2)
-        Me.GroupBox5.Controls.Add(Me.lblSkill1)
-        Me.GroupBox5.Controls.Add(Me.scrlSkill2)
-        Me.GroupBox5.Controls.Add(Me.scrlSkill1)
-        Me.GroupBox5.Location = New System.Drawing.Point(6, 436)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(375, 89)
-        Me.GroupBox5.TabIndex = 9
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Start Skills"
+        Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox6.Controls.Add(Me.cmbSkill4)
+        Me.DarkGroupBox6.Controls.Add(Me.DarkLabel19)
+        Me.DarkGroupBox6.Controls.Add(Me.cmbSkill3)
+        Me.DarkGroupBox6.Controls.Add(Me.DarkLabel18)
+        Me.DarkGroupBox6.Controls.Add(Me.cmbSkill2)
+        Me.DarkGroupBox6.Controls.Add(Me.DarkLabel17)
+        Me.DarkGroupBox6.Controls.Add(Me.cmbSkill1)
+        Me.DarkGroupBox6.Controls.Add(Me.DarkLabel16)
+        Me.DarkGroupBox6.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox6.Location = New System.Drawing.Point(6, 390)
+        Me.DarkGroupBox6.Name = "DarkGroupBox6"
+        Me.DarkGroupBox6.Size = New System.Drawing.Size(398, 76)
+        Me.DarkGroupBox6.TabIndex = 10
+        Me.DarkGroupBox6.TabStop = False
+        Me.DarkGroupBox6.Text = "Start Skills"
         '
-        'lblSkill4
+        'cmbSkill4
         '
-        Me.lblSkill4.AutoSize = True
-        Me.lblSkill4.Location = New System.Drawing.Point(214, 67)
-        Me.lblSkill4.Name = "lblSkill4"
-        Me.lblSkill4.Size = New System.Drawing.Size(67, 13)
-        Me.lblSkill4.TabIndex = 11
-        Me.lblSkill4.Text = "Skill 4: None"
+        Me.cmbSkill4.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbSkill4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbSkill4.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbSkill4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSkill4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbSkill4.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbSkill4.FormattingEnabled = True
+        Me.cmbSkill4.Location = New System.Drawing.Point(249, 46)
+        Me.cmbSkill4.Name = "cmbSkill4"
+        Me.cmbSkill4.Size = New System.Drawing.Size(138, 21)
+        Me.cmbSkill4.TabIndex = 7
         '
-        'lblSkill3
+        'DarkLabel19
         '
-        Me.lblSkill3.AutoSize = True
-        Me.lblSkill3.Location = New System.Drawing.Point(6, 67)
-        Me.lblSkill3.Name = "lblSkill3"
-        Me.lblSkill3.Size = New System.Drawing.Size(67, 13)
-        Me.lblSkill3.TabIndex = 10
-        Me.lblSkill3.Text = "Skill 3: None"
+        Me.DarkLabel19.AutoSize = True
+        Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel19.Location = New System.Drawing.Point(205, 49)
+        Me.DarkLabel19.Name = "DarkLabel19"
+        Me.DarkLabel19.Size = New System.Drawing.Size(38, 13)
+        Me.DarkLabel19.TabIndex = 6
+        Me.DarkLabel19.Text = "Skill 4:"
         '
-        'scrlSkill4
+        'cmbSkill3
         '
-        Me.scrlSkill4.LargeChange = 1
-        Me.scrlSkill4.Location = New System.Drawing.Point(217, 50)
-        Me.scrlSkill4.Name = "scrlSkill4"
-        Me.scrlSkill4.Size = New System.Drawing.Size(154, 17)
-        Me.scrlSkill4.TabIndex = 9
-        Me.scrlSkill4.Value = 50
+        Me.cmbSkill3.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbSkill3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbSkill3.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbSkill3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSkill3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbSkill3.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbSkill3.FormattingEnabled = True
+        Me.cmbSkill3.Location = New System.Drawing.Point(48, 46)
+        Me.cmbSkill3.Name = "cmbSkill3"
+        Me.cmbSkill3.Size = New System.Drawing.Size(138, 21)
+        Me.cmbSkill3.TabIndex = 5
         '
-        'scrlSkill3
+        'DarkLabel18
         '
-        Me.scrlSkill3.LargeChange = 1
-        Me.scrlSkill3.Location = New System.Drawing.Point(6, 50)
-        Me.scrlSkill3.Name = "scrlSkill3"
-        Me.scrlSkill3.Size = New System.Drawing.Size(167, 17)
-        Me.scrlSkill3.TabIndex = 8
-        Me.scrlSkill3.Value = 50
+        Me.DarkLabel18.AutoSize = True
+        Me.DarkLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel18.Location = New System.Drawing.Point(4, 49)
+        Me.DarkLabel18.Name = "DarkLabel18"
+        Me.DarkLabel18.Size = New System.Drawing.Size(38, 13)
+        Me.DarkLabel18.TabIndex = 4
+        Me.DarkLabel18.Text = "Skill 3:"
         '
-        'lblSkill2
+        'cmbSkill2
         '
-        Me.lblSkill2.AutoSize = True
-        Me.lblSkill2.Location = New System.Drawing.Point(214, 33)
-        Me.lblSkill2.Name = "lblSkill2"
-        Me.lblSkill2.Size = New System.Drawing.Size(67, 13)
-        Me.lblSkill2.TabIndex = 7
-        Me.lblSkill2.Text = "Skill 2: None"
+        Me.cmbSkill2.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbSkill2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbSkill2.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbSkill2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSkill2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbSkill2.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbSkill2.FormattingEnabled = True
+        Me.cmbSkill2.Location = New System.Drawing.Point(249, 19)
+        Me.cmbSkill2.Name = "cmbSkill2"
+        Me.cmbSkill2.Size = New System.Drawing.Size(138, 21)
+        Me.cmbSkill2.TabIndex = 3
         '
-        'lblSkill1
+        'DarkLabel17
         '
-        Me.lblSkill1.AutoSize = True
-        Me.lblSkill1.Location = New System.Drawing.Point(6, 33)
-        Me.lblSkill1.Name = "lblSkill1"
-        Me.lblSkill1.Size = New System.Drawing.Size(67, 13)
-        Me.lblSkill1.TabIndex = 6
-        Me.lblSkill1.Text = "Skill 1: None"
+        Me.DarkLabel17.AutoSize = True
+        Me.DarkLabel17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel17.Location = New System.Drawing.Point(205, 22)
+        Me.DarkLabel17.Name = "DarkLabel17"
+        Me.DarkLabel17.Size = New System.Drawing.Size(38, 13)
+        Me.DarkLabel17.TabIndex = 2
+        Me.DarkLabel17.Text = "Skill 2:"
         '
-        'scrlSkill2
+        'cmbSkill1
         '
-        Me.scrlSkill2.LargeChange = 1
-        Me.scrlSkill2.Location = New System.Drawing.Point(217, 16)
-        Me.scrlSkill2.Name = "scrlSkill2"
-        Me.scrlSkill2.Size = New System.Drawing.Size(152, 17)
-        Me.scrlSkill2.TabIndex = 5
-        Me.scrlSkill2.Value = 50
+        Me.cmbSkill1.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbSkill1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbSkill1.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbSkill1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSkill1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSkill1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbSkill1.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbSkill1.FormattingEnabled = True
+        Me.cmbSkill1.Location = New System.Drawing.Point(48, 19)
+        Me.cmbSkill1.Name = "cmbSkill1"
+        Me.cmbSkill1.Size = New System.Drawing.Size(138, 21)
+        Me.cmbSkill1.TabIndex = 1
         '
-        'scrlSkill1
+        'DarkLabel16
         '
-        Me.scrlSkill1.LargeChange = 1
-        Me.scrlSkill1.Location = New System.Drawing.Point(6, 16)
-        Me.scrlSkill1.Name = "scrlSkill1"
-        Me.scrlSkill1.Size = New System.Drawing.Size(167, 17)
-        Me.scrlSkill1.TabIndex = 4
-        Me.scrlSkill1.Value = 50
+        Me.DarkLabel16.AutoSize = True
+        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel16.Location = New System.Drawing.Point(4, 22)
+        Me.DarkLabel16.Name = "DarkLabel16"
+        Me.DarkLabel16.Size = New System.Drawing.Size(38, 13)
+        Me.DarkLabel16.TabIndex = 0
+        Me.DarkLabel16.Text = "Skill 1:"
         '
-        'GroupBox4
+        'DarkGroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.pnlPetlevel)
-        Me.GroupBox4.Controls.Add(Me.optDoNotLevel)
-        Me.GroupBox4.Controls.Add(Me.optLevel)
-        Me.GroupBox4.Location = New System.Drawing.Point(4, 238)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(377, 192)
-        Me.GroupBox4.TabIndex = 8
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Leveling"
+        Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox4.Controls.Add(Me.pnlPetlevel)
+        Me.DarkGroupBox4.Controls.Add(Me.optDoNotLevel)
+        Me.DarkGroupBox4.Controls.Add(Me.optLevel)
+        Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox4.Location = New System.Drawing.Point(6, 218)
+        Me.DarkGroupBox4.Name = "DarkGroupBox4"
+        Me.DarkGroupBox4.Size = New System.Drawing.Size(398, 166)
+        Me.DarkGroupBox4.TabIndex = 9
+        Me.DarkGroupBox4.TabStop = False
+        Me.DarkGroupBox4.Text = "Leveling"
         '
         'pnlPetlevel
         '
-        Me.pnlPetlevel.Controls.Add(Me.GroupBox6)
-        Me.pnlPetlevel.Controls.Add(Me.lblmaxlevel)
-        Me.pnlPetlevel.Controls.Add(Me.lblPetPnts)
-        Me.pnlPetlevel.Controls.Add(Me.lblPetExp)
-        Me.pnlPetlevel.Controls.Add(Me.scrlMaxLevel)
-        Me.pnlPetlevel.Controls.Add(Me.scrlPetPnts)
-        Me.pnlPetlevel.Controls.Add(Me.scrlPetExp)
+        Me.pnlPetlevel.Controls.Add(Me.DarkGroupBox5)
+        Me.pnlPetlevel.Controls.Add(Me.nudMaxLevel)
+        Me.pnlPetlevel.Controls.Add(Me.DarkLabel12)
+        Me.pnlPetlevel.Controls.Add(Me.nudPetPnts)
+        Me.pnlPetlevel.Controls.Add(Me.DarkLabel13)
+        Me.pnlPetlevel.Controls.Add(Me.nudPetExp)
+        Me.pnlPetlevel.Controls.Add(Me.DarkLabel11)
         Me.pnlPetlevel.Location = New System.Drawing.Point(6, 42)
         Me.pnlPetlevel.Name = "pnlPetlevel"
-        Me.pnlPetlevel.Size = New System.Drawing.Size(365, 145)
+        Me.pnlPetlevel.Size = New System.Drawing.Size(386, 118)
         Me.pnlPetlevel.TabIndex = 2
         '
-        'GroupBox6
+        'DarkGroupBox5
         '
-        Me.GroupBox6.Controls.Add(Me.cmbEvolve)
-        Me.GroupBox6.Controls.Add(Me.Label2)
-        Me.GroupBox6.Controls.Add(Me.scrlEvolveLvl)
-        Me.GroupBox6.Controls.Add(Me.lblEvolveLvl)
-        Me.GroupBox6.Controls.Add(Me.chkEvolve)
-        Me.GroupBox6.Location = New System.Drawing.Point(3, 65)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(359, 75)
-        Me.GroupBox6.TabIndex = 9
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Evolution"
+        Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox5.Controls.Add(Me.cmbEvolve)
+        Me.DarkGroupBox5.Controls.Add(Me.DarkLabel15)
+        Me.DarkGroupBox5.Controls.Add(Me.nudEvolveLvl)
+        Me.DarkGroupBox5.Controls.Add(Me.DarkLabel14)
+        Me.DarkGroupBox5.Controls.Add(Me.chkEvolve)
+        Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox5.Location = New System.Drawing.Point(6, 38)
+        Me.DarkGroupBox5.Name = "DarkGroupBox5"
+        Me.DarkGroupBox5.Size = New System.Drawing.Size(373, 75)
+        Me.DarkGroupBox5.TabIndex = 7
+        Me.DarkGroupBox5.TabStop = False
+        Me.DarkGroupBox5.Text = "Evolution"
         '
         'cmbEvolve
         '
+        Me.cmbEvolve.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbEvolve.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbEvolve.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbEvolve.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbEvolve.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEvolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbEvolve.ForeColor = System.Drawing.Color.Gainsboro
         Me.cmbEvolve.FormattingEnabled = True
-        Me.cmbEvolve.Location = New System.Drawing.Point(124, 45)
+        Me.cmbEvolve.Location = New System.Drawing.Point(100, 45)
         Me.cmbEvolve.Name = "cmbEvolve"
-        Me.cmbEvolve.Size = New System.Drawing.Size(229, 21)
+        Me.cmbEvolve.Size = New System.Drawing.Size(267, 21)
         Me.cmbEvolve.TabIndex = 4
         '
-        'Label2
+        'DarkLabel15
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 48)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(74, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Evolves intoo:"
+        Me.DarkLabel15.AutoSize = True
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel15.Location = New System.Drawing.Point(6, 48)
+        Me.DarkLabel15.Name = "DarkLabel15"
+        Me.DarkLabel15.Size = New System.Drawing.Size(74, 13)
+        Me.DarkLabel15.TabIndex = 3
+        Me.DarkLabel15.Text = "Evolves intoo:"
         '
-        'scrlEvolveLvl
+        'nudEvolveLvl
         '
-        Me.scrlEvolveLvl.LargeChange = 1
-        Me.scrlEvolveLvl.Location = New System.Drawing.Point(234, 19)
-        Me.scrlEvolveLvl.Name = "scrlEvolveLvl"
-        Me.scrlEvolveLvl.Size = New System.Drawing.Size(119, 17)
-        Me.scrlEvolveLvl.TabIndex = 2
+        Me.nudEvolveLvl.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudEvolveLvl.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudEvolveLvl.Location = New System.Drawing.Point(305, 21)
+        Me.nudEvolveLvl.Name = "nudEvolveLvl"
+        Me.nudEvolveLvl.Size = New System.Drawing.Size(62, 20)
+        Me.nudEvolveLvl.TabIndex = 2
         '
-        'lblEvolveLvl
+        'DarkLabel14
         '
-        Me.lblEvolveLvl.AutoSize = True
-        Me.lblEvolveLvl.Location = New System.Drawing.Point(121, 20)
-        Me.lblEvolveLvl.Name = "lblEvolveLvl"
-        Me.lblEvolveLvl.Size = New System.Drawing.Size(101, 13)
-        Me.lblEvolveLvl.TabIndex = 1
-        Me.lblEvolveLvl.Text = "Evolves on Level: 1"
+        Me.DarkLabel14.AutoSize = True
+        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel14.Location = New System.Drawing.Point(207, 23)
+        Me.DarkLabel14.Name = "DarkLabel14"
+        Me.DarkLabel14.Size = New System.Drawing.Size(92, 13)
+        Me.DarkLabel14.TabIndex = 1
+        Me.DarkLabel14.Text = "Evolves on Level:"
         '
         'chkEvolve
         '
         Me.chkEvolve.AutoSize = True
         Me.chkEvolve.Location = New System.Drawing.Point(6, 19)
         Me.chkEvolve.Name = "chkEvolve"
-        Me.chkEvolve.Size = New System.Drawing.Size(106, 17)
+        Me.chkEvolve.Size = New System.Drawing.Size(100, 17)
         Me.chkEvolve.TabIndex = 0
-        Me.chkEvolve.Text = "Pet Can Evolve?"
-        Me.chkEvolve.UseVisualStyleBackColor = True
+        Me.chkEvolve.Text = "Pet Can Evolve"
         '
-        'lblmaxlevel
+        'nudMaxLevel
         '
-        Me.lblmaxlevel.AutoSize = True
-        Me.lblmaxlevel.Location = New System.Drawing.Point(249, 43)
-        Me.lblmaxlevel.Name = "lblmaxlevel"
-        Me.lblmaxlevel.Size = New System.Drawing.Size(68, 13)
-        Me.lblmaxlevel.TabIndex = 8
-        Me.lblmaxlevel.Text = "Max Level: 1"
+        Me.nudMaxLevel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudMaxLevel.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudMaxLevel.Location = New System.Drawing.Point(325, 12)
+        Me.nudMaxLevel.Name = "nudMaxLevel"
+        Me.nudMaxLevel.Size = New System.Drawing.Size(47, 20)
+        Me.nudMaxLevel.TabIndex = 6
+        Me.nudMaxLevel.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
-        'lblPetPnts
+        'DarkLabel12
         '
-        Me.lblPetPnts.AutoSize = True
-        Me.lblPetPnts.Location = New System.Drawing.Point(124, 43)
-        Me.lblPetPnts.Name = "lblPetPnts"
-        Me.lblPetPnts.Size = New System.Drawing.Size(96, 13)
-        Me.lblPetPnts.TabIndex = 7
-        Me.lblPetPnts.Text = "Points Per Level: 5"
+        Me.DarkLabel12.AutoSize = True
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel12.Location = New System.Drawing.Point(260, 14)
+        Me.DarkLabel12.Name = "DarkLabel12"
+        Me.DarkLabel12.Size = New System.Drawing.Size(59, 13)
+        Me.DarkLabel12.TabIndex = 5
+        Me.DarkLabel12.Text = "Max Level:"
         '
-        'lblPetExp
+        'nudPetPnts
         '
-        Me.lblPetExp.AutoSize = True
-        Me.lblPetExp.Location = New System.Drawing.Point(7, 43)
-        Me.lblPetExp.Name = "lblPetExp"
-        Me.lblPetExp.Size = New System.Drawing.Size(85, 13)
-        Me.lblPetExp.TabIndex = 6
-        Me.lblPetExp.Text = "Exp. Gain: 100%"
+        Me.nudPetPnts.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudPetPnts.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudPetPnts.Location = New System.Drawing.Point(217, 12)
+        Me.nudPetPnts.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudPetPnts.Name = "nudPetPnts"
+        Me.nudPetPnts.Size = New System.Drawing.Size(36, 20)
+        Me.nudPetPnts.TabIndex = 4
+        Me.nudPetPnts.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
-        'scrlMaxLevel
+        'DarkLabel13
         '
-        Me.scrlMaxLevel.LargeChange = 1
-        Me.scrlMaxLevel.Location = New System.Drawing.Point(252, 17)
-        Me.scrlMaxLevel.Name = "scrlMaxLevel"
-        Me.scrlMaxLevel.Size = New System.Drawing.Size(104, 17)
-        Me.scrlMaxLevel.TabIndex = 5
+        Me.DarkLabel13.AutoSize = True
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel13.Location = New System.Drawing.Point(127, 14)
+        Me.DarkLabel13.Name = "DarkLabel13"
+        Me.DarkLabel13.Size = New System.Drawing.Size(87, 13)
+        Me.DarkLabel13.TabIndex = 3
+        Me.DarkLabel13.Text = "Points Per Level:"
         '
-        'scrlPetPnts
+        'nudPetExp
         '
-        Me.scrlPetPnts.Location = New System.Drawing.Point(127, 17)
-        Me.scrlPetPnts.Name = "scrlPetPnts"
-        Me.scrlPetPnts.Size = New System.Drawing.Size(104, 17)
-        Me.scrlPetPnts.TabIndex = 4
+        Me.nudPetExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudPetExp.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudPetExp.Location = New System.Drawing.Point(74, 12)
+        Me.nudPetExp.Name = "nudPetExp"
+        Me.nudPetExp.Size = New System.Drawing.Size(47, 20)
+        Me.nudPetExp.TabIndex = 1
+        Me.nudPetExp.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
-        'scrlPetExp
+        'DarkLabel11
         '
-        Me.scrlPetExp.LargeChange = 1
-        Me.scrlPetExp.Location = New System.Drawing.Point(10, 17)
-        Me.scrlPetExp.Name = "scrlPetExp"
-        Me.scrlPetExp.Size = New System.Drawing.Size(104, 17)
-        Me.scrlPetExp.TabIndex = 3
-        Me.scrlPetExp.Value = 50
+        Me.DarkLabel11.AutoSize = True
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel11.Location = New System.Drawing.Point(4, 14)
+        Me.DarkLabel11.Name = "DarkLabel11"
+        Me.DarkLabel11.Size = New System.Drawing.Size(64, 13)
+        Me.DarkLabel11.TabIndex = 0
+        Me.DarkLabel11.Text = "Exp Gain %:"
         '
         'optDoNotLevel
         '
         Me.optDoNotLevel.AutoSize = True
-        Me.optDoNotLevel.Location = New System.Drawing.Point(194, 19)
+        Me.optDoNotLevel.Location = New System.Drawing.Point(264, 19)
         Me.optDoNotLevel.Name = "optDoNotLevel"
-        Me.optDoNotLevel.Size = New System.Drawing.Size(111, 17)
+        Me.optDoNotLevel.Size = New System.Drawing.Size(113, 17)
         Me.optDoNotLevel.TabIndex = 1
         Me.optDoNotLevel.TabStop = True
-        Me.optDoNotLevel.Text = "Does not LevelUp"
-        Me.optDoNotLevel.UseVisualStyleBackColor = True
+        Me.optDoNotLevel.Text = "Does Not LevelUp"
         '
         'optLevel
         '
@@ -369,164 +446,185 @@ Partial Class FrmEditor_Pet
         Me.optLevel.TabIndex = 0
         Me.optLevel.TabStop = True
         Me.optLevel.Text = "Level by Experience"
-        Me.optLevel.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'DarkGroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.pnlCustomStats)
-        Me.GroupBox3.Controls.Add(Me.optAdoptStats)
-        Me.GroupBox3.Controls.Add(Me.optCustomStats)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 70)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(377, 162)
-        Me.GroupBox3.TabIndex = 7
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Starting Stats"
+        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox3.Controls.Add(Me.pnlCustomStats)
+        Me.DarkGroupBox3.Controls.Add(Me.optAdoptStats)
+        Me.DarkGroupBox3.Controls.Add(Me.optCustomStats)
+        Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox3.Location = New System.Drawing.Point(6, 77)
+        Me.DarkGroupBox3.Name = "DarkGroupBox3"
+        Me.DarkGroupBox3.Size = New System.Drawing.Size(396, 135)
+        Me.DarkGroupBox3.TabIndex = 8
+        Me.DarkGroupBox3.TabStop = False
+        Me.DarkGroupBox3.Text = "Starting Stats"
         '
         'pnlCustomStats
         '
-        Me.pnlCustomStats.Controls.Add(Me.lblLevel)
-        Me.pnlCustomStats.Controls.Add(Me.scrlLevel)
-        Me.pnlCustomStats.Controls.Add(Me.scrlStrength)
-        Me.pnlCustomStats.Controls.Add(Me.lblSpirit)
-        Me.pnlCustomStats.Controls.Add(Me.lblStrength)
-        Me.pnlCustomStats.Controls.Add(Me.scrlSpirit)
-        Me.pnlCustomStats.Controls.Add(Me.lblIntelligence)
-        Me.pnlCustomStats.Controls.Add(Me.lblVitality)
-        Me.pnlCustomStats.Controls.Add(Me.scrlLuck)
-        Me.pnlCustomStats.Controls.Add(Me.scrlVitality)
-        Me.pnlCustomStats.Controls.Add(Me.lblLuck)
-        Me.pnlCustomStats.Controls.Add(Me.scrlIntelligence)
-        Me.pnlCustomStats.Controls.Add(Me.scrlEndurance)
-        Me.pnlCustomStats.Controls.Add(Me.lblEndurance)
+        Me.pnlCustomStats.Controls.Add(Me.nudLevel)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel10)
+        Me.pnlCustomStats.Controls.Add(Me.nudSpirit)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel7)
+        Me.pnlCustomStats.Controls.Add(Me.nudIntelligence)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel8)
+        Me.pnlCustomStats.Controls.Add(Me.nudLuck)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel9)
+        Me.pnlCustomStats.Controls.Add(Me.nudVitality)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel6)
+        Me.pnlCustomStats.Controls.Add(Me.nudEndurance)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel5)
+        Me.pnlCustomStats.Controls.Add(Me.nudStrength)
+        Me.pnlCustomStats.Controls.Add(Me.DarkLabel4)
         Me.pnlCustomStats.Location = New System.Drawing.Point(6, 42)
         Me.pnlCustomStats.Name = "pnlCustomStats"
-        Me.pnlCustomStats.Size = New System.Drawing.Size(365, 112)
-        Me.pnlCustomStats.TabIndex = 14
+        Me.pnlCustomStats.Size = New System.Drawing.Size(384, 88)
+        Me.pnlCustomStats.TabIndex = 2
         '
-        'lblLevel
+        'nudLevel
         '
-        Me.lblLevel.AutoSize = True
-        Me.lblLevel.Location = New System.Drawing.Point(7, 89)
-        Me.lblLevel.Name = "lblLevel"
-        Me.lblLevel.Size = New System.Drawing.Size(45, 13)
-        Me.lblLevel.TabIndex = 15
-        Me.lblLevel.Text = "Level: 0"
+        Me.nudLevel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudLevel.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudLevel.Location = New System.Drawing.Point(59, 60)
+        Me.nudLevel.Name = "nudLevel"
+        Me.nudLevel.Size = New System.Drawing.Size(54, 20)
+        Me.nudLevel.TabIndex = 13
         '
-        'scrlLevel
+        'DarkLabel10
         '
-        Me.scrlLevel.LargeChange = 1
-        Me.scrlLevel.Location = New System.Drawing.Point(127, 85)
-        Me.scrlLevel.Name = "scrlLevel"
-        Me.scrlLevel.Size = New System.Drawing.Size(104, 17)
-        Me.scrlLevel.TabIndex = 14
+        Me.DarkLabel10.AutoSize = True
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel10.Location = New System.Drawing.Point(4, 62)
+        Me.DarkLabel10.Name = "DarkLabel10"
+        Me.DarkLabel10.Size = New System.Drawing.Size(36, 13)
+        Me.DarkLabel10.TabIndex = 12
+        Me.DarkLabel10.Text = "Level:"
         '
-        'scrlStrength
+        'nudSpirit
         '
-        Me.scrlStrength.Location = New System.Drawing.Point(10, 9)
-        Me.scrlStrength.Name = "scrlStrength"
-        Me.scrlStrength.Size = New System.Drawing.Size(104, 17)
-        Me.scrlStrength.TabIndex = 2
+        Me.nudSpirit.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudSpirit.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudSpirit.Location = New System.Drawing.Point(325, 34)
+        Me.nudSpirit.Name = "nudSpirit"
+        Me.nudSpirit.Size = New System.Drawing.Size(54, 20)
+        Me.nudSpirit.TabIndex = 11
         '
-        'lblSpirit
+        'DarkLabel7
         '
-        Me.lblSpirit.AutoSize = True
-        Me.lblSpirit.Location = New System.Drawing.Point(249, 65)
-        Me.lblSpirit.Name = "lblSpirit"
-        Me.lblSpirit.Size = New System.Drawing.Size(42, 13)
-        Me.lblSpirit.TabIndex = 13
-        Me.lblSpirit.Text = "Spirit: 0"
+        Me.DarkLabel7.AutoSize = True
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(270, 36)
+        Me.DarkLabel7.Name = "DarkLabel7"
+        Me.DarkLabel7.Size = New System.Drawing.Size(33, 13)
+        Me.DarkLabel7.TabIndex = 10
+        Me.DarkLabel7.Text = "Spirit:"
         '
-        'lblStrength
+        'nudIntelligence
         '
-        Me.lblStrength.AutoSize = True
-        Me.lblStrength.Location = New System.Drawing.Point(7, 26)
-        Me.lblStrength.Name = "lblStrength"
-        Me.lblStrength.Size = New System.Drawing.Size(59, 13)
-        Me.lblStrength.TabIndex = 5
-        Me.lblStrength.Text = "Strength: 0"
+        Me.nudIntelligence.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudIntelligence.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudIntelligence.Location = New System.Drawing.Point(199, 34)
+        Me.nudIntelligence.Name = "nudIntelligence"
+        Me.nudIntelligence.Size = New System.Drawing.Size(54, 20)
+        Me.nudIntelligence.TabIndex = 9
         '
-        'scrlSpirit
+        'DarkLabel8
         '
-        Me.scrlSpirit.Location = New System.Drawing.Point(252, 48)
-        Me.scrlSpirit.Name = "scrlSpirit"
-        Me.scrlSpirit.Size = New System.Drawing.Size(104, 17)
-        Me.scrlSpirit.TabIndex = 10
+        Me.DarkLabel8.AutoSize = True
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(132, 36)
+        Me.DarkLabel8.Name = "DarkLabel8"
+        Me.DarkLabel8.Size = New System.Drawing.Size(64, 13)
+        Me.DarkLabel8.TabIndex = 8
+        Me.DarkLabel8.Text = "Intelligence:"
         '
-        'lblIntelligence
+        'nudLuck
         '
-        Me.lblIntelligence.AutoSize = True
-        Me.lblIntelligence.Location = New System.Drawing.Point(124, 65)
-        Me.lblIntelligence.Name = "lblIntelligence"
-        Me.lblIntelligence.Size = New System.Drawing.Size(73, 13)
-        Me.lblIntelligence.TabIndex = 12
-        Me.lblIntelligence.Text = "Intelligence: 0"
+        Me.nudLuck.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudLuck.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudLuck.Location = New System.Drawing.Point(59, 34)
+        Me.nudLuck.Name = "nudLuck"
+        Me.nudLuck.Size = New System.Drawing.Size(54, 20)
+        Me.nudLuck.TabIndex = 7
         '
-        'lblVitality
+        'DarkLabel9
         '
-        Me.lblVitality.AutoSize = True
-        Me.lblVitality.Location = New System.Drawing.Point(249, 26)
-        Me.lblVitality.Name = "lblVitality"
-        Me.lblVitality.Size = New System.Drawing.Size(49, 13)
-        Me.lblVitality.TabIndex = 7
-        Me.lblVitality.Text = "Vitality: 0"
+        Me.DarkLabel9.AutoSize = True
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel9.Location = New System.Drawing.Point(4, 36)
+        Me.DarkLabel9.Name = "DarkLabel9"
+        Me.DarkLabel9.Size = New System.Drawing.Size(34, 13)
+        Me.DarkLabel9.TabIndex = 6
+        Me.DarkLabel9.Text = "Luck:"
         '
-        'scrlLuck
+        'nudVitality
         '
-        Me.scrlLuck.Location = New System.Drawing.Point(10, 48)
-        Me.scrlLuck.Name = "scrlLuck"
-        Me.scrlLuck.Size = New System.Drawing.Size(104, 17)
-        Me.scrlLuck.TabIndex = 8
+        Me.nudVitality.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudVitality.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudVitality.Location = New System.Drawing.Point(325, 8)
+        Me.nudVitality.Name = "nudVitality"
+        Me.nudVitality.Size = New System.Drawing.Size(54, 20)
+        Me.nudVitality.TabIndex = 5
         '
-        'scrlVitality
+        'DarkLabel6
         '
-        Me.scrlVitality.Location = New System.Drawing.Point(252, 9)
-        Me.scrlVitality.Name = "scrlVitality"
-        Me.scrlVitality.Size = New System.Drawing.Size(104, 17)
-        Me.scrlVitality.TabIndex = 4
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(269, 10)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(40, 13)
+        Me.DarkLabel6.TabIndex = 4
+        Me.DarkLabel6.Text = "Vitality:"
         '
-        'lblLuck
+        'nudEndurance
         '
-        Me.lblLuck.AutoSize = True
-        Me.lblLuck.Location = New System.Drawing.Point(7, 65)
-        Me.lblLuck.Name = "lblLuck"
-        Me.lblLuck.Size = New System.Drawing.Size(43, 13)
-        Me.lblLuck.TabIndex = 11
-        Me.lblLuck.Text = "Luck: 0"
+        Me.nudEndurance.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudEndurance.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudEndurance.Location = New System.Drawing.Point(199, 8)
+        Me.nudEndurance.Name = "nudEndurance"
+        Me.nudEndurance.Size = New System.Drawing.Size(54, 20)
+        Me.nudEndurance.TabIndex = 3
         '
-        'scrlIntelligence
+        'DarkLabel5
         '
-        Me.scrlIntelligence.Location = New System.Drawing.Point(127, 48)
-        Me.scrlIntelligence.Name = "scrlIntelligence"
-        Me.scrlIntelligence.Size = New System.Drawing.Size(104, 17)
-        Me.scrlIntelligence.TabIndex = 9
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(131, 10)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(62, 13)
+        Me.DarkLabel5.TabIndex = 2
+        Me.DarkLabel5.Text = "Endurance:"
         '
-        'scrlEndurance
+        'nudStrength
         '
-        Me.scrlEndurance.Location = New System.Drawing.Point(127, 9)
-        Me.scrlEndurance.Name = "scrlEndurance"
-        Me.scrlEndurance.Size = New System.Drawing.Size(104, 17)
-        Me.scrlEndurance.TabIndex = 3
+        Me.nudStrength.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudStrength.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudStrength.Location = New System.Drawing.Point(59, 8)
+        Me.nudStrength.Name = "nudStrength"
+        Me.nudStrength.Size = New System.Drawing.Size(54, 20)
+        Me.nudStrength.TabIndex = 1
         '
-        'lblEndurance
+        'DarkLabel4
         '
-        Me.lblEndurance.AutoSize = True
-        Me.lblEndurance.Location = New System.Drawing.Point(124, 26)
-        Me.lblEndurance.Name = "lblEndurance"
-        Me.lblEndurance.Size = New System.Drawing.Size(71, 13)
-        Me.lblEndurance.TabIndex = 6
-        Me.lblEndurance.Text = "Endurance: 0"
+        Me.DarkLabel4.AutoSize = True
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(3, 10)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(50, 13)
+        Me.DarkLabel4.TabIndex = 0
+        Me.DarkLabel4.Text = "Strength:"
         '
         'optAdoptStats
         '
         Me.optAdoptStats.AutoSize = True
-        Me.optAdoptStats.Location = New System.Drawing.Point(177, 19)
+        Me.optAdoptStats.Location = New System.Drawing.Point(269, 19)
         Me.optAdoptStats.Name = "optAdoptStats"
         Me.optAdoptStats.Size = New System.Drawing.Size(121, 17)
         Me.optAdoptStats.TabIndex = 1
         Me.optAdoptStats.TabStop = True
         Me.optAdoptStats.Text = "Adopt Owner's Stats"
-        Me.optAdoptStats.UseVisualStyleBackColor = True
         '
         'optCustomStats
         '
@@ -537,171 +635,192 @@ Partial Class FrmEditor_Pet
         Me.optCustomStats.TabIndex = 0
         Me.optCustomStats.TabStop = True
         Me.optCustomStats.Text = "Custom Stats"
-        Me.optCustomStats.UseVisualStyleBackColor = True
         '
-        'scrlRange
+        'DarkLabel3
         '
-        Me.scrlRange.LargeChange = 1
-        Me.scrlRange.Location = New System.Drawing.Point(246, 47)
-        Me.scrlRange.Name = "scrlRange"
-        Me.scrlRange.Size = New System.Drawing.Size(85, 17)
-        Me.scrlRange.TabIndex = 6
+        Me.DarkLabel3.AutoSize = True
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(209, 53)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(42, 13)
+        Me.DarkLabel3.TabIndex = 7
+        Me.DarkLabel3.Text = "Range:"
         '
-        'lblRange
+        'nudRange
         '
-        Me.lblRange.AutoSize = True
-        Me.lblRange.Location = New System.Drawing.Point(180, 50)
-        Me.lblRange.Name = "lblRange"
-        Me.lblRange.Size = New System.Drawing.Size(51, 13)
-        Me.lblRange.TabIndex = 5
-        Me.lblRange.Text = "Range: 0"
+        Me.nudRange.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudRange.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudRange.Location = New System.Drawing.Point(272, 51)
+        Me.nudRange.Name = "nudRange"
+        Me.nudRange.Size = New System.Drawing.Size(76, 20)
+        Me.nudRange.TabIndex = 6
         '
-        'scrlSprite
+        'DarkLabel2
         '
-        Me.scrlSprite.LargeChange = 1
-        Me.scrlSprite.Location = New System.Drawing.Point(77, 47)
-        Me.scrlSprite.Name = "scrlSprite"
-        Me.scrlSprite.Size = New System.Drawing.Size(85, 17)
-        Me.scrlSprite.TabIndex = 4
+        Me.DarkLabel2.AutoSize = True
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(6, 53)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(37, 13)
+        Me.DarkLabel2.TabIndex = 5
+        Me.DarkLabel2.Text = "Sprite:"
         '
-        'lblSprite
+        'nudSprite
         '
-        Me.lblSprite.AutoSize = True
-        Me.lblSprite.Location = New System.Drawing.Point(6, 50)
-        Me.lblSprite.Name = "lblSprite"
-        Me.lblSprite.Size = New System.Drawing.Size(46, 13)
-        Me.lblSprite.TabIndex = 3
-        Me.lblSprite.Text = "Sprite: 0"
+        Me.nudSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudSprite.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudSprite.Location = New System.Drawing.Point(69, 51)
+        Me.nudSprite.Name = "nudSprite"
+        Me.nudSprite.Size = New System.Drawing.Size(76, 20)
+        Me.nudSprite.TabIndex = 4
         '
         'picSprite
         '
         Me.picSprite.BackColor = System.Drawing.Color.Black
-        Me.picSprite.Location = New System.Drawing.Point(335, 16)
+        Me.picSprite.Location = New System.Drawing.Point(354, 23)
         Me.picSprite.Name = "picSprite"
         Me.picSprite.Size = New System.Drawing.Size(48, 48)
-        Me.picSprite.TabIndex = 2
+        Me.picSprite.TabIndex = 3
         Me.picSprite.TabStop = False
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(50, 16)
+        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtName.Location = New System.Drawing.Point(69, 23)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(279, 20)
         Me.txtName.TabIndex = 1
         '
-        'Label1
+        'DarkLabel1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 19)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.DarkLabel1.AutoSize = True
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(6, 25)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(57, 13)
+        Me.DarkLabel1.TabIndex = 0
+        Me.DarkLabel1.Text = "Pet Name:"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(3, 512)
+        Me.btnSave.Location = New System.Drawing.Point(7, 452)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(104, 23)
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(113, 512)
+        Me.btnCancel.Location = New System.Drawing.Point(130, 452)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(95, 23)
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'FrmEditor_Pet
+        'frmEditor_Pet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(606, 542)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(632, 482)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.DarkGroupBox2)
+        Me.Controls.Add(Me.DarkGroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FrmEditor_Pet"
-        Me.Text = "Pet Editor"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
+        Me.Name = "frmEditor_Pet"
+        Me.Text = "frmEditor_Pet_Dark"
+        Me.DarkGroupBox1.ResumeLayout(False)
+        Me.DarkGroupBox2.ResumeLayout(False)
+        Me.DarkGroupBox2.PerformLayout()
+        Me.DarkGroupBox6.ResumeLayout(False)
+        Me.DarkGroupBox6.PerformLayout()
+        Me.DarkGroupBox4.ResumeLayout(False)
+        Me.DarkGroupBox4.PerformLayout()
         Me.pnlPetlevel.ResumeLayout(False)
         Me.pnlPetlevel.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.DarkGroupBox5.ResumeLayout(False)
+        Me.DarkGroupBox5.PerformLayout()
+        CType(Me.nudEvolveLvl, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMaxLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudPetPnts, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudPetExp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.DarkGroupBox3.ResumeLayout(False)
+        Me.DarkGroupBox3.PerformLayout()
         Me.pnlCustomStats.ResumeLayout(False)
         Me.pnlCustomStats.PerformLayout()
+        CType(Me.nudLevel, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSpirit, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudIntelligence, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudLuck, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudVitality, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudEndurance, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudStrength, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudRange, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSprite, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picSprite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents lstIndex As ListBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents scrlSprite As HScrollBar
-    Friend WithEvents lblSprite As Label
+    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
+    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
     Friend WithEvents picSprite As PictureBox
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents scrlRange As HScrollBar
-    Friend WithEvents lblRange As Label
-    Friend WithEvents scrlVitality As HScrollBar
-    Friend WithEvents scrlEndurance As HScrollBar
-    Friend WithEvents scrlStrength As HScrollBar
-    Friend WithEvents optAdoptStats As RadioButton
-    Friend WithEvents optCustomStats As RadioButton
-    Friend WithEvents lblSpirit As Label
-    Friend WithEvents lblIntelligence As Label
-    Friend WithEvents lblLuck As Label
-    Friend WithEvents scrlSpirit As HScrollBar
-    Friend WithEvents scrlIntelligence As HScrollBar
-    Friend WithEvents scrlLuck As HScrollBar
-    Friend WithEvents lblVitality As Label
-    Friend WithEvents lblEndurance As Label
-    Friend WithEvents lblStrength As Label
+    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudSprite As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudRange As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents optCustomStats As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optAdoptStats As DarkUI.Controls.DarkRadioButton
     Friend WithEvents pnlCustomStats As Panel
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents optDoNotLevel As RadioButton
-    Friend WithEvents optLevel As RadioButton
+    Friend WithEvents nudVitality As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudEndurance As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudStrength As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudSpirit As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudIntelligence As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudLuck As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudLevel As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents optLevel As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents optDoNotLevel As DarkUI.Controls.DarkRadioButton
     Friend WithEvents pnlPetlevel As Panel
-    Friend WithEvents lblmaxlevel As Label
-    Friend WithEvents lblPetPnts As Label
-    Friend WithEvents lblPetExp As Label
-    Friend WithEvents scrlMaxLevel As HScrollBar
-    Friend WithEvents scrlPetPnts As HScrollBar
-    Friend WithEvents scrlPetExp As HScrollBar
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents lblSkill2 As Label
-    Friend WithEvents lblSkill1 As Label
-    Friend WithEvents scrlSkill2 As HScrollBar
-    Friend WithEvents scrlSkill1 As HScrollBar
-    Friend WithEvents lblSkill4 As Label
-    Friend WithEvents lblSkill3 As Label
-    Friend WithEvents scrlSkill4 As HScrollBar
-    Friend WithEvents scrlSkill3 As HScrollBar
-    Friend WithEvents lblLevel As Label
-    Friend WithEvents scrlLevel As HScrollBar
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnCancel As Button
-    Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents cmbEvolve As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents scrlEvolveLvl As HScrollBar
-    Friend WithEvents lblEvolveLvl As Label
-    Friend WithEvents chkEvolve As CheckBox
+    Friend WithEvents nudPetExp As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudMaxLevel As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudPetPnts As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents chkEvolve As DarkUI.Controls.DarkCheckBox
+    Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudEvolveLvl As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbEvolve As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbSkill4 As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbSkill3 As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel18 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbSkill2 As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel17 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbSkill1 As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
+    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
 End Class

@@ -216,36 +216,44 @@
 
 #Region "Editor"
     Public Sub PetEditorInit()
-        Dim prefix As String
+        Dim i As Integer
 
-        If FrmEditor_Pet.Visible = False Then Exit Sub
-        EditorIndex = FrmEditor_Pet.lstIndex.SelectedIndex + 1
+        If frmEditor_Pet.Visible = False Then Exit Sub
+        EditorIndex = frmEditor_Pet.lstIndex.SelectedIndex + 1
 
-        With FrmEditor_Pet
+        With frmEditor_Pet
+            'populate skill combo's
+            .cmbSkill1.Items.Clear()
+            .cmbSkill2.Items.Clear()
+            .cmbSkill3.Items.Clear()
+            .cmbSkill4.Items.Clear()
+
+            .cmbSkill1.Items.Add("None")
+            .cmbSkill2.Items.Add("None")
+            .cmbSkill3.Items.Add("None")
+            .cmbSkill4.Items.Add("None")
+
+            For i = 1 To MAX_SKILLS
+                .cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill3.Items.Add(i & ": " & Skill(i).Name)
+                .cmbSkill4.Items.Add(i & ": " & Skill(i).Name)
+            Next
             .txtName.Text = Trim$(Pet(EditorIndex).Name)
-            If Pet(EditorIndex).Sprite < 0 Or Pet(EditorIndex).Sprite > .scrlSprite.Maximum Then Pet(EditorIndex).Sprite = 0
+            If Pet(EditorIndex).Sprite < 0 Or Pet(EditorIndex).Sprite > .nudSprite.Maximum Then Pet(EditorIndex).Sprite = 0
 
-            .scrlSprite.Value = Pet(EditorIndex).Sprite
-            .lblSprite.Text = "Sprite: " & .scrlSprite.Value
+            .nudSprite.Value = Pet(EditorIndex).Sprite
             .EditorPet_DrawPet()
 
-            .scrlRange.Value = Pet(EditorIndex).Range
-            .lblRange.Text = "Range: " & .scrlRange.Value
+            .nudRange.Value = Pet(EditorIndex).Range
 
-            .scrlStrength.Value = Pet(EditorIndex).Stat(Stats.Strength)
-            .lblStrength.Text = "Strength: " & .scrlStrength.Value
-            .scrlEndurance.Value = Pet(EditorIndex).Stat(Stats.Endurance)
-            .lblEndurance.Text = "Endurance: " & .scrlEndurance.Value
-            .scrlVitality.Value = Pet(EditorIndex).Stat(Stats.Vitality)
-            .lblVitality.Text = "Vitality: " & .scrlVitality.Value
-            .scrlLuck.Value = Pet(EditorIndex).Stat(Stats.Luck)
-            .lblLuck.Text = "Luck: " & .scrlLuck.Value
-            .scrlIntelligence.Value = Pet(EditorIndex).Stat(Stats.Intelligence)
-            .lblIntelligence.Text = "Intelligence: " & .scrlIntelligence.Value
-            .scrlSpirit.Value = Pet(EditorIndex).Stat(Stats.Spirit)
-            .lblSpirit.Text = "Spirit: " & .scrlSpirit.Value
-            .scrlLevel.Value = Pet(EditorIndex).Level
-            .lblLevel.Text = "Level: " & .scrlLevel.Value
+            .nudStrength.Value = Pet(EditorIndex).Stat(Stats.Strength)
+            .nudEndurance.Value = Pet(EditorIndex).Stat(Stats.Endurance)
+            .nudVitality.Value = Pet(EditorIndex).Stat(Stats.Vitality)
+            .nudLuck.Value = Pet(EditorIndex).Stat(Stats.Luck)
+            .nudIntelligence.Value = Pet(EditorIndex).Stat(Stats.Intelligence)
+            .nudSpirit.Value = Pet(EditorIndex).Stat(Stats.Spirit)
+            .nudLevel.Value = Pet(EditorIndex).Level
 
             If Pet(EditorIndex).StatType = 1 Then
                 .optCustomStats.Checked = True
@@ -255,64 +263,33 @@
                 .pnlCustomStats.Visible = False
             End If
 
-            .scrlPetExp.Value = Pet(EditorIndex).ExpGain
-            .lblPetExp.Text = "Exp Gain: " & .scrlPetExp.Value & "%"
+            .nudPetExp.Value = Pet(EditorIndex).ExpGain
 
-            .scrlPetPnts.Value = Pet(EditorIndex).LevelPnts
-            .lblPetPnts.Text = "Points Per Level: " & .scrlPetPnts.Value
+            .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
 
-            .scrlMaxLevel.Value = Pet(EditorIndex).MaxLevel
-            .lblmaxlevel.Text = "Max Level: " & .scrlMaxLevel.Value
+            .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
 
             'Set skills
-            .scrlSkill1.Value = Pet(EditorIndex).Skill(1)
-            prefix = "Skill " & 1 & ": "
+            .cmbSkill1.SelectedIndex = Pet(EditorIndex).Skill(1)
 
-            If .scrlSkill1.Value = 0 Then
-                .lblSkill1.Text = prefix & "None"
-            Else
-                .lblSkill1.Text = prefix & Trim$(Skill(.scrlSkill1.Value).Name)
-            End If
+            .cmbSkill2.SelectedIndex = Pet(EditorIndex).Skill(2)
 
-            .scrlSkill2.Value = Pet(EditorIndex).Skill(2)
-            prefix = "Skill " & 2 & ": "
+            .cmbSkill3.SelectedIndex = Pet(EditorIndex).Skill(3)
 
-            If .scrlSkill2.Value = 0 Then
-                .lblSkill2.Text = prefix & "None"
-            Else
-                .lblSkill2.Text = prefix & Trim$(Skill(.scrlSkill2.Value).Name)
-            End If
-
-            .scrlSkill3.Value = Pet(EditorIndex).Skill(3)
-            prefix = "Skill " & 3 & ": "
-
-            If .scrlSkill3.Value = 0 Then
-                .lblSkill3.Text = prefix & "None"
-            Else
-                .lblSkill3.Text = prefix & Trim$(Skill(.scrlSkill3.Value).Name)
-            End If
-
-            .scrlSkill4.Value = Pet(EditorIndex).Skill(4)
-            prefix = "Skill " & 4 & ": "
-
-            If .scrlSkill4.Value = 0 Then
-                .lblSkill4.Text = prefix & "None"
-            Else
-                .lblSkill4.Text = prefix & Trim$(Skill(.scrlSkill4.Value).Name)
-            End If
+            .cmbSkill4.SelectedIndex = Pet(EditorIndex).Skill(4)
 
             If Pet(EditorIndex).LevelingType = 0 Then
                 .optLevel.Checked = True
                 .pnlPetlevel.Visible = True
-                .scrlPetExp.Value = Pet(EditorIndex).ExpGain
-                If Pet(EditorIndex).MaxLevel > 0 Then .scrlMaxLevel.Value = Pet(EditorIndex).MaxLevel
-                .scrlPetPnts.Value = Pet(EditorIndex).LevelPnts
+                .nudPetExp.Value = Pet(EditorIndex).ExpGain
+                If Pet(EditorIndex).MaxLevel > 0 Then .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
+                .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
             Else
                 .optDoNotLevel.Checked = True
                 .pnlPetlevel.Visible = False
-                .scrlPetExp.Value = Pet(EditorIndex).ExpGain
-                .scrlMaxLevel.Value = Pet(EditorIndex).MaxLevel
-                .scrlPetPnts.Value = Pet(EditorIndex).LevelPnts
+                .nudPetExp.Value = Pet(EditorIndex).ExpGain
+                .nudMaxLevel.Value = Pet(EditorIndex).MaxLevel
+                .nudPetPnts.Value = Pet(EditorIndex).LevelPnts
 
                 If Pet(EditorIndex).Evolvable = 1 Then
                     .chkEvolve.Checked = True
@@ -320,7 +297,7 @@
                     .chkEvolve.Checked = False
                 End If
 
-                .scrlEvolveLvl.Value = Pet(EditorIndex).EvolveLevel
+                .nudEvolveLvl.Value = Pet(EditorIndex).EvolveLevel
                 .cmbEvolve.SelectedIndex = Pet(EditorIndex).EvolveNum
             End If
         End With

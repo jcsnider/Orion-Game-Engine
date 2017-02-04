@@ -260,6 +260,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Data Files\Graphics\Animations\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data Files\Graphics\ChatBubble.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -938,6 +938,8 @@ Module ClientGraphics
     Public Sub RenderSprite(ByVal TmpSprite As Sprite, ByVal Target As RenderWindow, ByVal DestX As Integer, ByVal DestY As Integer, ByVal SourceX As Integer, ByVal SourceY As Integer,
            ByVal SourceWidth As Integer, ByVal SourceHeight As Integer)
 
+        If TmpSprite Is Nothing Then Exit Sub
+
         TmpSprite.TextureRect = New IntRect(SourceX, SourceY, SourceWidth, SourceHeight)
         TmpSprite.Position = New Vector2f(DestX, DestY)
         Target.Draw(TmpSprite)
@@ -2999,7 +3001,7 @@ NextLoop:
                 .Width = PIC_X
             End With
 
-            RenderSprite(SkillIconsSprite(skillnum), GameWindow, X + 16, Y + 16, rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(SkillIconsSprite(skillpic), GameWindow, X + 16, Y + 16, rec.X, rec.Y, rec.Width, rec.Height)
         End If
     End Sub
 

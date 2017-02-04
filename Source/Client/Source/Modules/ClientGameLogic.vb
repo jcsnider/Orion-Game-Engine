@@ -285,7 +285,7 @@ Module ClientGameLogic
             if rendercount < tick then
             	'Auctual Game Loop Stuff :/
                 Render_Graphics()
-
+                tmplps = tmplps + 1
                 rendercount = Tick + 16
             End if
 
