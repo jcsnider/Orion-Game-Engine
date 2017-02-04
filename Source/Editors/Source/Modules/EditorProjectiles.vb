@@ -198,7 +198,7 @@ Public Module EditorProjectiles
     Public Sub EditorProjectile_DrawProjectile()
         Dim iconnum As Integer
 
-        iconnum = frmEditor_Projectile.scrlPic.Value
+        iconnum = frmEditor_Projectile.nudPic.Value
 
         If iconnum < 1 Or iconnum > NumProjectiles Then
             frmEditor_Projectile.picProjectile.BackgroundImage = Nothing
@@ -222,10 +222,10 @@ Public Module EditorProjectiles
 
         With Projectiles(EditorIndex)
             frmEditor_Projectile.txtName.Text = Trim$(.Name)
-            frmEditor_Projectile.scrlPic.Value = .Sprite
-            frmEditor_Projectile.scrlRange.Value = .Range
-            frmEditor_Projectile.scrlSpeed.Value = .Speed
-            frmEditor_Projectile.scrlDamage.Value = .Damage
+            frmEditor_Projectile.nudPic.Value = .Sprite
+            frmEditor_Projectile.nudRange.Value = .Range
+            frmEditor_Projectile.nudSpeed.Value = .Speed
+            frmEditor_Projectile.nudDamage.Value = .Damage
         End With
 
         Projectile_Changed(EditorIndex) = True
@@ -267,4 +267,5 @@ Public Module EditorProjectiles
     End Sub
 
 #End Region
+
 End Module
