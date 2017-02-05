@@ -122,31 +122,20 @@
             .txtProgressText.Text = Trim$(Quest(EditorIndex).Chat(2))
             .txtEndText.Text = Trim$(Quest(EditorIndex).Chat(3))
 
-            .scrlStartItemName.Value = Quest(EditorIndex).QuestGiveItem
-            .scrlEndItemName.Value = Quest(EditorIndex).QuestRemoveItem
+            .cmbStartItem.SelectedIndex = Quest(EditorIndex).QuestGiveItem
+            .cmbEndItem.SelectedIndex = Quest(EditorIndex).QuestRemoveItem
 
-            If Not Quest(EditorIndex).QuestGiveItemValue = 0 Then
-                .scrlStartItemAmount.Value = Quest(EditorIndex).QuestGiveItemValue
-            Else
-                .scrlStartItemAmount.Value = 0
-            End If
+            .nudGiveAmount.Value = Quest(EditorIndex).QuestGiveItemValue
 
-            If Not Quest(EditorIndex).QuestRemoveItemValue = 0 Then
-                .scrlEndItemAmount.Value = Quest(EditorIndex).QuestRemoveItemValue
-            Else
-                .scrlEndItemAmount.Value = 0
-            End If
+            .nudTakeAmount.Value = Quest(EditorIndex).QuestRemoveItemValue
 
             frmEditor_Quest.lstRewards.Items.Clear()
             For i = 1 To Quest(EditorIndex).RewardCount
                 frmEditor_Quest.lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
             Next
 
-            If Not Quest(EditorIndex).RewardExp = 0 Then
-                .scrlExpReward.Value = Quest(EditorIndex).RewardExp
-            Else
-                .scrlExpReward.Value = 0
-            End If
+            .nudExpReward.Value = Quest(EditorIndex).RewardExp
+
 
             frmEditor_Quest.lstRequirements.Items.Clear()
 
@@ -476,34 +465,51 @@
 
 #Region "Misc Functions"
     Public Sub LoadRequirement(ByVal QuestNum As Integer, ByVal ReqNum As Integer)
+        Dim i As Integer
 
         With frmEditor_Quest
-            'Set scrolls to 0 and disable them so they can be enabled when needed
-            .scrlItemRec.Value = 0
-            .scrlQuestRec.Value = 0
-            .scrlClassRec.Value = 0
+            'Populate combo boxes
+            .cmbItemReq.Items.Clear()
+            .cmbItemReq.Items.Add("None")
 
-            .scrlItemRec.Enabled = False
-            .scrlQuestRec.Enabled = False
-            .scrlClassRec.Enabled = False
+            For i = 1 To MAX_ITEMS
+                .cmbItemReq.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbQuestReq.Items.Clear()
+            .cmbQuestReq.Items.Add("None")
+
+            For i = 1 To MAX_QUESTS
+                .cmbQuestReq.Items.Add(i & ": " & Quest(i).Name)
+            Next
+
+            .cmbClassReq.Items.Clear()
+            .cmbClassReq.Items.Add("None")
+
+            For i = 1 To Max_Classes
+                .cmbClassReq.Items.Add(i & ": " & Classes(i).Name)
+            Next
+
+            .cmbItemReq.Enabled = False
+            .cmbQuestReq.Enabled = False
+            .cmbClassReq.Enabled = False
 
             Select Case Quest(QuestNum).Requirement(ReqNum)
                 Case 0
                     .rdbNoneReq.Checked = True
                 Case 1
                     .rdbItemReq.Checked = True
-                    .scrlItemRec.Enabled = True
-                    .scrlItemRec.Value = Quest(QuestNum).RequirementIndex(ReqNum)
+                    .cmbItemReq.Enabled = True
+                    .cmbItemReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
                 Case 2
                     .rdbQuestReq.Checked = True
-                    .scrlQuestRec.Enabled = True
-                    .scrlQuestRec.Value = Quest(QuestNum).RequirementIndex(ReqNum)
+                    .cmbQuestReq.Enabled = True
+                    .cmbQuestReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
                 Case 3
                     .rdbClassReq.Checked = True
-                    .scrlClassRec.Enabled = True
-                    .scrlClassRec.Value = Quest(QuestNum).RequirementIndex(ReqNum)
+                    .cmbClassReq.Enabled = True
+                    .cmbClassReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
             End Select
-
 
         End With
 
@@ -538,18 +544,47 @@
             'Load textboxes
             .txtTaskLog.Text = "" & Trim$(TaskToLoad.TaskLog)
 
-            'Set scrolls to 0 and disable them so they can be enabled when needed
-            .scrlNPC.Value = 0
-            .scrlItem.Value = 0
-            .scrlMap.Value = 0
-            .scrlResource.Value = 0
-            .scrlAmount.Value = 0
+            'Populate combo boxes
+            .cmbNpc.Items.Clear()
+            .cmbNpc.Items.Add("None")
 
-            .scrlNPC.Enabled = False
-            .scrlItem.Enabled = False
-            .scrlMap.Enabled = False
-            .scrlResource.Enabled = False
-            .scrlAmount.Enabled = False
+            For i = 1 To MAX_NPCS
+                .cmbNpc.Items.Add(i & ": " & Npc(i).Name)
+            Next
+
+            .cmbItem.Items.Clear()
+            .cmbItem.Items.Add("None")
+
+            For i = 1 To MAX_ITEMS
+                .cmbItem.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbMap.Items.Clear()
+            .cmbMap.Items.Add("None")
+
+            For i = 1 To MAX_MAPS
+                .cmbMap.Items.Add(i)
+            Next
+
+            .cmbResource.Items.Clear()
+            .cmbResource.Items.Add("None")
+
+            For i = 1 To MAX_RESOURCES
+                .cmbResource.Items.Add(i & ": " & Resource(i).Name)
+            Next
+
+            'Set combo to 0 and disable them so they can be enabled when needed
+            .cmbNpc.SelectedIndex = 0
+            .cmbItem.SelectedIndex = 0
+            .cmbMap.SelectedIndex = 0
+            .cmbResource.SelectedIndex = 0
+            .nudAmount.Value = 0
+
+            .cmbNpc.Enabled = False
+            .cmbItem.Enabled = False
+            .cmbMap.Enabled = False
+            .cmbResource.Enabled = False
+            .nudAmount.Enabled = False
 
             If TaskToLoad.QuestEnd = 1 Then
                 .chkEnd.Checked = True
@@ -561,47 +596,47 @@
                 Case 0 'Nothing
 
                 Case QUEST_TYPE_GOSLAY '1
-                    .scrlNPC.Enabled = True
-                    .scrlNPC.Value = TaskToLoad.Npc
-                    .scrlAmount.Enabled = True
-                    .scrlAmount.Value = TaskToLoad.Amount
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
 
                 Case QUEST_TYPE_GOGATHER '2
-                    .scrlItem.Enabled = True
-                    .scrlItem.Value = TaskToLoad.Item
-                    .scrlAmount.Enabled = True
-                    .scrlAmount.Value = TaskToLoad.Amount
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
 
                 Case QUEST_TYPE_GOTALK '3
-                    .scrlNPC.Enabled = True
-                    .scrlNPC.Value = TaskToLoad.Npc
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
 
                 Case QUEST_TYPE_GOREACH '4
-                    .scrlMap.Enabled = True
-                    .scrlMap.Value = TaskToLoad.Map
+                    .cmbMap.Enabled = True
+                    .cmbMap.SelectedIndex = TaskToLoad.Map
 
                 Case QUEST_TYPE_GOGIVE '5
-                    .scrlItem.Enabled = True
-                    .scrlItem.Value = TaskToLoad.Item
-                    .scrlAmount.Enabled = True
-                    .scrlAmount.Value = TaskToLoad.Amount
-                    .scrlNPC.Enabled = True
-                    .scrlNPC.Value = TaskToLoad.Npc
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
                     .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
 
                 Case QUEST_TYPE_GOTRAIN '6
-                    .scrlResource.Enabled = True
-                    .scrlResource.Value = TaskToLoad.Resource
-                    .scrlAmount.Enabled = True
-                    .scrlAmount.Value = TaskToLoad.Amount
+                    .cmbResource.Enabled = True
+                    .cmbResource.SelectedIndex = TaskToLoad.Resource
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
 
                 Case QUEST_TYPE_GOGET '7
-                    .scrlNPC.Enabled = True
-                    .scrlNPC.Value = TaskToLoad.Npc
-                    .scrlItem.Enabled = True
-                    .scrlItem.Value = TaskToLoad.Item
-                    .scrlAmount.Enabled = True
-                    .scrlAmount.Value = TaskToLoad.Amount
+                    .cmbNpc.Enabled = True
+                    .cmbNpc.SelectedIndex = TaskToLoad.Npc
+                    .cmbItem.Enabled = True
+                    .cmbItem.SelectedIndex = TaskToLoad.Item
+                    .nudAmount.Enabled = True
+                    .nudAmount.Value = TaskToLoad.Amount
                     .txtTaskSpeech.Text = "" & Trim$(TaskToLoad.Speech)
             End Select
 

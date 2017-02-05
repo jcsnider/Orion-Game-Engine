@@ -240,59 +240,59 @@ Module ClientGraphics
 
         'this stuff only loads when needed :)
 
-        ReDim TileSetTexture(0 To NumTileSets)
-        ReDim TileSetSprite(0 To NumTileSets)
-        ReDim TileSetTextureInfo(0 To NumTileSets)
+        ReDim TileSetTexture(NumTileSets)
+        ReDim TileSetSprite(NumTileSets)
+        ReDim TileSetTextureInfo(NumTileSets)
 
-        ReDim CharacterGFX(0 To NumCharacters)
-        ReDim CharacterSprite(0 To NumCharacters)
-        ReDim CharacterGFXInfo(0 To NumCharacters)
+        ReDim CharacterGFX(NumCharacters)
+        ReDim CharacterSprite(NumCharacters)
+        ReDim CharacterGFXInfo(NumCharacters)
 
-        ReDim PaperDollGFX(0 To NumPaperdolls)
-        ReDim PaperDollSprite(0 To NumPaperdolls)
-        ReDim PaperDollGFXInfo(0 To NumPaperdolls)
+        ReDim PaperDollGFX(NumPaperdolls)
+        ReDim PaperDollSprite(NumPaperdolls)
+        ReDim PaperDollGFXInfo(NumPaperdolls)
 
-        ReDim ItemsGFX(0 To NumItems)
-        ReDim ItemsSprite(0 To NumItems)
-        ReDim ItemsGFXInfo(0 To NumItems)
+        ReDim ItemsGFX(NumItems)
+        ReDim ItemsSprite(NumItems)
+        ReDim ItemsGFXInfo(NumItems)
 
-        ReDim ResourcesGFX(0 To NumResources)
-        ReDim ResourcesSprite(0 To NumResources)
-        ReDim ResourcesGFXInfo(0 To NumResources)
+        ReDim ResourcesGFX(NumResources)
+        ReDim ResourcesSprite(NumResources)
+        ReDim ResourcesGFXInfo(NumResources)
 
-        ReDim AnimationsGFX(0 To NumAnimations)
-        ReDim AnimationsSprite(0 To NumAnimations)
-        ReDim AnimationsGFXInfo(0 To NumAnimations)
+        ReDim AnimationsGFX(NumAnimations)
+        ReDim AnimationsSprite(NumAnimations)
+        ReDim AnimationsGFXInfo(NumAnimations)
 
-        ReDim SkillIconsGFX(0 To NumSkillIcons)
-        ReDim SkillIconsSprite(0 To NumSkillIcons)
-        ReDim SkillIconsGFXInfo(0 To NumSkillIcons)
+        ReDim SkillIconsGFX(NumSkillIcons)
+        ReDim SkillIconsSprite(NumSkillIcons)
+        ReDim SkillIconsGFXInfo(NumSkillIcons)
 
-        ReDim FacesGFX(0 To NumFaces)
-        ReDim FacesSprite(0 To NumFaces)
-        ReDim FacesGFXInfo(0 To NumFaces)
+        ReDim FacesGFX(NumFaces)
+        ReDim FacesSprite(NumFaces)
+        ReDim FacesGFXInfo(NumFaces)
 
-        ReDim FurnitureGFX(0 To NumFurniture)
-        ReDim FurnitureSprite(0 To NumFurniture)
-        ReDim FurnitureGFXInfo(0 To NumFurniture)
+        ReDim FurnitureGFX(NumFurniture)
+        ReDim FurnitureSprite(NumFurniture)
+        ReDim FurnitureGFXInfo(NumFurniture)
 
-        ReDim ProjectileGFX(0 To NumProjectiles)
-        ReDim ProjectileSprite(0 To NumProjectiles)
-        ReDim ProjectileGFXInfo(0 To NumProjectiles)
+        ReDim ProjectileGFX(NumProjectiles)
+        ReDim ProjectileSprite(NumProjectiles)
+        ReDim ProjectileGFXInfo(NumProjectiles)
 
-        ReDim FogGFX(0 To NumFogs)
-        ReDim FogSprite(0 To NumFogs)
-        ReDim FogGFXInfo(0 To NumFogs)
+        ReDim FogGFX(NumFogs)
+        ReDim FogSprite(NumFogs)
+        ReDim FogGFXInfo(NumFogs)
 
-        ReDim EmotesGFX(0 To NumEmotes)
-        ReDim EmotesSprite(0 To NumEmotes)
-        ReDim EmotesGFXInfo(0 To NumEmotes)
+        ReDim EmotesGFX(NumEmotes)
+        ReDim EmotesSprite(NumEmotes)
+        ReDim EmotesGFXInfo(NumEmotes)
 
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Cursor" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Cursor" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CursorGFX = New Texture(Application.StartupPath & GFX_PATH & "Cursor" & GFX_EXT)
+            CursorGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\Cursor" & GFX_EXT)
             CursorSprite = New Sprite(CursorGFX)
 
             'Cache the width and height
@@ -301,9 +301,9 @@ Module ClientGraphics
         End If
 
         DoorGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "door" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Door" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DoorGFX = New Texture(Application.StartupPath & GFX_PATH & "door" & GFX_EXT)
+            DoorGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\Door" & GFX_EXT)
             DoorSprite = New Sprite(DoorGFX)
 
             'Cache the width and height
@@ -312,9 +312,9 @@ Module ClientGraphics
         End If
 
         BloodGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "blood" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Blood" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            BloodGFX = New Texture(Application.StartupPath & GFX_PATH & "blood" & GFX_EXT)
+            BloodGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\Blood" & GFX_EXT)
             BloodSprite = New Sprite(BloodGFX)
 
             'Cache the width and height
@@ -323,9 +323,9 @@ Module ClientGraphics
         End If
 
         DirectionsGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "direction" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Direction" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DirectionsGfx = New Texture(Application.StartupPath & GFX_PATH & "direction" & GFX_EXT)
+            DirectionsGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Direction" & GFX_EXT)
             DirectionsSprite = New Sprite(DirectionsGfx)
 
             'Cache the width and height
@@ -334,9 +334,9 @@ Module ClientGraphics
         End If
 
         WeatherGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Weather" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            WeatherGFX = New Texture(Application.StartupPath & GFX_PATH & "weather" & GFX_EXT)
+            WeatherGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\Weather" & GFX_EXT)
             WeatherSprite = New Sprite(WeatherGFX)
 
             'Cache the width and height
@@ -547,9 +547,9 @@ Module ClientGraphics
         End If
 
         TargetGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "target" & GFX_EXT) Then
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Target" & GFX_EXT) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            TargetGFX = New Texture(Application.StartupPath & GFX_PATH & "target" & GFX_EXT)
+            TargetGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\Target" & GFX_EXT)
             TargetSprite = New Sprite(TargetGFX)
 
             'Cache the width and height
@@ -608,8 +608,8 @@ Module ClientGraphics
         End If
 
         ChatBubbleGFXInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "ChatBubble" & GFX_EXT) Then
-            ChatBubbleGFX = New Texture(Application.StartupPath & GFX_PATH & "ChatBubble" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\ChatBubble" & GFX_EXT) Then
+            ChatBubbleGFX = New Texture(Application.StartupPath & GFX_PATH & "Misc\ChatBubble" & GFX_EXT)
             ChatBubbleSprite = New Sprite(ChatBubbleGFX)
             'Cache the width and height
             ChatBubbleGFXInfo.Width = ChatBubbleGFX.Size.X
@@ -639,8 +639,8 @@ Module ClientGraphics
         End If
 
         LightGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT) Then
-            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Light" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Light" & GFX_EXT) Then
+            LightGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Light" & GFX_EXT)
             LightSprite = New Sprite(LightGfx)
 
             'Cache the width and height
@@ -649,8 +649,8 @@ Module ClientGraphics
         End If
 
         ShadowGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Shadow" & GFX_EXT) Then
-            ShadowGfx = New Texture(Application.StartupPath & GFX_PATH & "Shadow" & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Shadow" & GFX_EXT) Then
+            ShadowGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Shadow" & GFX_EXT)
             ShadowSprite = New Sprite(ShadowGfx)
 
             'Cache the width and height

@@ -263,10 +263,13 @@
     <Content Include="Data Files\Graphics\Animations\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\ChatBubble.png">
+    <Content Include="Data Files\Graphics\Characters\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Cursor.png">
+    <Content Include="Data Files\Graphics\Misc\ChatBubble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data Files\Graphics\Misc\Cursor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Emotes\1.png">
@@ -308,10 +311,10 @@
     <Content Include="Data Files\Graphics\Gui\Main\PetBar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Light.png">
+    <Content Include="Data Files\Graphics\Misc\Light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\shadow.png">
+    <Content Include="Data Files\Graphics\Misc\Shadow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Tilesets\10.png">
@@ -346,10 +349,10 @@
     <Content Include="Data Files\Graphics\Animations\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Blood.png">
+    <Content Include="Data Files\Graphics\Misc\Blood.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Characters\1.png">
+    <Content Include="Data Files\Graphics\Characters\1a.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Characters\10.png">
@@ -613,10 +616,10 @@
     <Content Include="Data Files\Graphics\Characters\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Direction.png">
+    <Content Include="Data Files\Graphics\Misc\Direction.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Door.png">
+    <Content Include="Data Files\Graphics\Misc\Door.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Faces\1.png">
@@ -1837,9 +1840,6 @@
     <Content Include="Data Files\Graphics\Items\99.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\MapEditorSelect.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data Files\Graphics\Paperdolls\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -2206,7 +2206,7 @@
     <Content Include="Data Files\Graphics\Skillicons\99.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Target.png">
+    <Content Include="Data Files\Graphics\Misc\Target.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data Files\Graphics\Tilesets\1.png">
@@ -2233,7 +2233,7 @@
     <Content Include="Data Files\Graphics\Tilesets\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data Files\Graphics\Weather.png">
+    <Content Include="Data Files\Graphics\Misc\Weather.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="License\Eclipse Public License v1.1.txt">
