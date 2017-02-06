@@ -3261,7 +3261,7 @@ nextevent:
     Sub ProcessEventMovement(ByVal id As Integer)
 
         If id > Map.EventCount Then Exit Sub
-        If id > Map.MapEvents.Length - 1 Then Exit Sub
+        If id > Map.MapEvents.Length Then Exit Sub
 
         If Map.MapEvents(id).Moving = 1 Then
             Select Case Map.MapEvents(id).dir
