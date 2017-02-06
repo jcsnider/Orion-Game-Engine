@@ -2824,7 +2824,7 @@ newlist:
                 Case 1
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data Files/graphics/characters/" & frmEditor_Events.scrlGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & frmEditor_Events.scrlGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         g = Graphics.FromImage(targetBitmap)
@@ -2850,7 +2850,7 @@ newlist:
                 Case 2
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumTileSets Then
                         'Load tilesheet from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data Files/graphics/tilesets/" & frmEditor_Events.scrlGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & frmEditor_Events.scrlGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         If tmpEvent.Pages(curPageNum).GraphicX2 = 0 And tmpEvent.Pages(curPageNum).GraphicY2 = 0 Then
@@ -2911,7 +2911,7 @@ newlist:
                     Case 1
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumCharacters Then
                             'Load character from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data Files/graphics/characters/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             g = Graphics.FromImage(targetBitmap)
@@ -2933,7 +2933,7 @@ newlist:
                     Case 2
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumTileSets Then
                             'Load tilesheet from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data Files/graphics/tilesets/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             If tmpEvent.Pages(curPageNum).GraphicX2 = 0 And tmpEvent.Pages(curPageNum).GraphicY2 = 0 Then

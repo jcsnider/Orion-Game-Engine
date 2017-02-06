@@ -63,7 +63,7 @@
     Private Sub BtnSaveResource_Click(sender As Object, e As EventArgs) Handles btnSaveResource.Click
         Dim ResourceStr As String = ""
         Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
         Dim i As Long
@@ -115,7 +115,7 @@
     Private Sub BtnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
         Dim Prefab As Integer, Layer As Integer
         Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
         Prefab = cmbPrefab.SelectedIndex + 1

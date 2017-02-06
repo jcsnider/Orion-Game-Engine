@@ -5,7 +5,7 @@ Module EditorLoop
     Public Sub Main()
 
         'check if we are in the right place...
-        If Not IO.Directory.Exists(Application.StartupPath & "\Data Files") Then
+        If Not IO.Directory.Exists(Application.StartupPath & "\Data") Then
             MsgBox("Run Editor from inside the Client folder!")
             End
         End If
@@ -148,7 +148,7 @@ Module EditorLoop
 
     Public Sub LoadOptions()
         Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Filename = Application.StartupPath & "\Data\Config.xml",
             .Root = "Options"
         }
 

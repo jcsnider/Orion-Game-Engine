@@ -96,7 +96,7 @@
         Dim Prefab As Integer, Layer As Integer
 
         Dim myXml As New XmlClass With {
-            .Filename = IO.Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Filename = IO.Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
 

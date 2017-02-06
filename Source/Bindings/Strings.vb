@@ -23,11 +23,11 @@ Public NotInheritable Class Strings
                 strComponent = "Client"
                 'defaultFile = Properties.Resources.Client_English
 
-                If Not Directory.Exists("data files") Then
-                    Directory.CreateDirectory("data files")
+                If Not Directory.Exists("Data") Then
+                    Directory.CreateDirectory("Data")
                 End If
 
-                langDir = Path.Combine("data files", "languages")
+                langDir = Path.Combine("Data", "languages")
                 If Not Directory.Exists(langDir) Then
                     Directory.CreateDirectory(langDir)
                 End If
@@ -36,11 +36,11 @@ Public NotInheritable Class Strings
                 strComponent = "Editor"
                 'defaultFile = Properties.Resources.Editor_English
 
-                If Not Directory.Exists("data files") Then
-                    Directory.CreateDirectory("data files")
+                If Not Directory.Exists("Data") Then
+                    Directory.CreateDirectory("Data")
                 End If
 
-                langDir = Path.Combine("data files", "languages")
+                langDir = Path.Combine("Data", "languages")
                 If Not Directory.Exists(langDir) Then
                     Directory.CreateDirectory(langDir)
                 End If

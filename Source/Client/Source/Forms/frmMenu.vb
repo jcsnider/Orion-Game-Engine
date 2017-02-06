@@ -319,7 +319,7 @@ Public Class FrmMenu
     Private Sub TmrCredits_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles tmrCredits.Tick
         Dim credits As String
         Dim filepath As String
-        filepath = Application.StartupPath & "\Data Files\credits.txt"
+        filepath = Application.StartupPath & "\Data\credits.txt"
         lblScrollingCredits.Top = 177
         If pnlCreditsVisible = True Then
             tmrCredits.Enabled = False

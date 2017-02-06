@@ -716,7 +716,7 @@ Module EditorTCP
 
     Public Sub SendSaveAutoMapper()
         Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "Data Files", "AutoMapper.xml"),
+            .Filename = Path.Combine(Application.StartupPath, "Data", "AutoMapper.xml"),
             .Root = "Options"
         }
         Dim Buffer As ByteBuffer

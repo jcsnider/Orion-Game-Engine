@@ -13,8 +13,8 @@ Module ClientConstants
     Public Const EFFECT_TYPE_TINT As Integer = 6
 
     ' path constants
-    Public Const SOUND_PATH As String = "\Data Files\sound\"
-    Public Const MUSIC_PATH As String = "\Data Files\music\"
+    Public Const SOUND_PATH As String = "\Data\sound\"
+    Public Const MUSIC_PATH As String = "\Data\music\"
 
     ' Font variables
     Public Const FONT_NAME As String = "Arial.ttf"
@@ -22,11 +22,11 @@ Module ClientConstants
 
     ' Log Path and variables
     Public Const LOG_DEBUG As String = "debug.txt"
-    Public Const LOG_PATH As String = "\Data Files\logs\"
+    Public Const LOG_PATH As String = "\Data\logs\"
 
     ' Gfx Path and variables
-    Public Const GFX_PATH As String = "\Data Files\graphics\"
-    Public Const GFX_GUI_PATH As String = "\Data Files\graphics\gui\"
+    Public Const GFX_PATH As String = "\Data\graphics\"
+    Public Const GFX_GUI_PATH As String = "\Data\graphics\gui\"
     Public Const GFX_EXT As String = ".png"
 
     ' Menu states

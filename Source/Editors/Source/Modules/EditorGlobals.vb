@@ -13,13 +13,13 @@
     Public LastTileset As Byte
 
     ' Gfx Path and variables
-    Public Const GFX_PATH As String = "\Data Files\graphics\"
-    Public Const GFX_GUI_PATH As String = "\Data Files\graphics\gui\"
+    Public Const GFX_PATH As String = "\Data\graphics\"
+    Public Const GFX_GUI_PATH As String = "\Data\graphics\gui\"
     Public Const GFX_EXT As String = ".png"
 
     ' path constants
-    Public Const SOUND_PATH As String = "\Data Files\sound\"
-    Public Const MUSIC_PATH As String = "\Data Files\music\"
+    Public Const SOUND_PATH As String = "\Data\sound\"
+    Public Const MUSIC_PATH As String = "\Data\music\"
 
     Public Max_Classes As Byte
 

@@ -198,10 +198,10 @@ Public Class FrmEditor_MapEditor
     Private Sub TsbScreenShot_Click(sender As Object, e As EventArgs) Handles tsbScreenShot.Click
         Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
 
-        If Not IO.Directory.Exists(Application.StartupPath & "\Data Files\Screenshots") Then
-            IO.Directory.CreateDirectory(Application.StartupPath & "\Data Files\Screenshots")
+        If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
+            IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
         End If
-        screenshot.SaveToFile(Application.StartupPath & "\Data Files\Screenshots\Map" & Map.MapNum & ".png")
+        screenshot.SaveToFile(Application.StartupPath & "\Data\Screenshots\Map" & Map.MapNum & ".png")
     End Sub
 #End Region
 

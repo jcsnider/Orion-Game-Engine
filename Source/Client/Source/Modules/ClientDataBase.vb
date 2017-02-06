@@ -182,7 +182,7 @@ Module ClientDataBase
 
     Public Sub SaveOptions()
         Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Filename = Application.StartupPath & "\Data\Config.xml",
             .Root = "Options"
         }
 
@@ -206,7 +206,7 @@ Module ClientDataBase
 
     Public Sub LoadOptions()
         Dim myXml As New XmlClass With {
-            .Filename = Application.StartupPath & "\Data Files\Config.xml",
+            .Filename = Application.StartupPath & "\Data\Config.xml",
             .Root = "Options"
         }
 
