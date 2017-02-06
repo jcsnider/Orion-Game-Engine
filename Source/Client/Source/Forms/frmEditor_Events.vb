@@ -857,10 +857,10 @@ Public Class frmEditor_Events
             lblGraphic.Text = "Number: " & scrlGraphic.Value
         End If
         EditorEvent_DrawGraphic()
-        'cmbGraphic_SelectedIndexChanged(sender, e)
+
     End Sub
 
-    Private Sub picGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
+    Private Sub PicGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
         Dim X As Integer
         Dim Y As Integer
 
@@ -880,8 +880,8 @@ Public Class frmEditor_Events
                     End If
                 End If
             Else
-                GraphicSelX = X \ PIC_X
-                GraphicSelY = Y \ PIC_Y
+                GraphicSelX = Math.Ceiling(X \ PIC_X)
+                GraphicSelY = Math.Ceiling(Y \ PIC_Y)
                 GraphicSelX2 = 1
                 GraphicSelY2 = 1
             End If

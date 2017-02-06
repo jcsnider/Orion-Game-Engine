@@ -2820,7 +2820,6 @@ newlist:
                 Case 0
                     'None
                     frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
-                    frmEditor_Events.picGraphic.BackgroundImage = Nothing
                 Case 1
                     If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap
@@ -2911,7 +2910,7 @@ newlist:
                     Case 1
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumCharacters Then
                             'Load character from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "\characters\" & tmpEvent.Pages(curPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             g = Graphics.FromImage(targetBitmap)
@@ -2933,7 +2932,7 @@ newlist:
                     Case 2
                         If tmpEvent.Pages(curPageNum).Graphic > 0 And tmpEvent.Pages(curPageNum).Graphic <= NumTileSets Then
                             'Load tilesheet from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & tmpEvent.Pages(curPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Application.StartupPath & GFX_PATH & "tilesets\" & tmpEvent.Pages(curPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             If tmpEvent.Pages(curPageNum).GraphicX2 = 0 And tmpEvent.Pages(curPageNum).GraphicY2 = 0 Then
@@ -2966,8 +2965,8 @@ newlist:
 
                             g = Graphics.FromImage(targetBitmap)
 
-                            Dim sourceRect As New Rectangle(sRect.top, sRect.left, sRect.right, sRect.bottom)  'This is the section we are pulling from the source graphic
-                            Dim destRect As New Rectangle(dRect.top, dRect.left, dRect.right, dRect.bottom)     'This is the rectangle in the target graphic we want to render to
+                            Dim sourceRect As New Rectangle(sRect.left, sRect.top, sRect.right, sRect.bottom)  'This is the section we are pulling from the source graphic
+                            Dim destRect As New Rectangle(dRect.left, dRect.top, dRect.right, dRect.bottom)     'This is the rectangle in the target graphic we want to render to
 
                             g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
 
@@ -3066,7 +3065,13 @@ newlist:
 
                         Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+
+                        If rec.Height > 32 Then
+                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y)
+                        Else
+                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+                        End If
+
                         GameWindow.Draw(tmpSprite)
                     Else
                         With rec
@@ -3256,7 +3261,7 @@ nextevent:
     Sub ProcessEventMovement(ByVal id As Integer)
 
         If id > Map.EventCount Then Exit Sub
-        If id > Map.MapEvents.Length Then Exit Sub
+        If id > Map.MapEvents.Length - 1 Then Exit Sub
 
         If Map.MapEvents(id).Moving = 1 Then
             Select Case Map.MapEvents(id).dir

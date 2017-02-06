@@ -317,7 +317,7 @@ Module ServerDatabase
 
     Sub SaveMapEvent(ByVal MapNum As Integer)
         Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}_eventdata.xml", MapNum)),
+            .Filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml",
             .Root = "Data"
         }
 
@@ -538,7 +538,7 @@ Module ServerDatabase
 
     Sub LoadMapEvent(ByVal MapNum As Integer)
         Dim myXml As New XmlClass With {
-            .Filename = Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}_eventdata.xml", MapNum)),
+            .Filename = Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml",
             .Root = "Data"
         }
 
@@ -547,7 +547,7 @@ Module ServerDatabase
         If Map(MapNum).EventCount > 0 Then
             ReDim Map(MapNum).Events(0 To Map(MapNum).EventCount)
             For i = 1 To Map(MapNum).EventCount
-                If Val(myXml.ReadString("Event", "PageCount")) > 0 Then
+                If Val(myXml.ReadString("Event" & i, "PageCount")) > 0 Then
 
                     With Map(MapNum).Events(i)
                         .Name = myXml.ReadString("Event" & i, "Name")
@@ -756,7 +756,7 @@ Module ServerDatabase
         If Map(MapNum).Name Is Nothing Then Map(MapNum).Name = ""
         If Map(MapNum).Music Is Nothing Then Map(MapNum).Music = ""
 
-        If FileExist(Path.Combine(Application.StartupPath, "data", "maps", String.Format("map{0}_eventdata.xml", MapNum))) Then
+        If FileExist(Application.StartupPath & "\data\maps\map" & MapNum & "_eventdata.xml") Then
             LoadMapEvent(MapNum)
         End If
 
