@@ -944,7 +944,8 @@ Module EditorGraphics
         GameWindow.DispatchEvents()
         GameWindow.Clear(Color.Black)
 
-        GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)))
+        GameWindow.SetView(New View(New FloatRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)))
+        TilesetWindow.SetView(New View(New FloatRect(0, 0, FrmEditor_MapEditor.picBackSelect.Width, FrmEditor_MapEditor.picBackSelect.Height)))
 
         'clear any unused gfx
         ClearGFX()

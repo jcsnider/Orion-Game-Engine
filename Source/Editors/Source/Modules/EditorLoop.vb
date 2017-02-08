@@ -268,7 +268,7 @@ Module EditorLoop
                         End If
 
                         destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                        Application.DoEvents()
+                        'Application.DoEvents()
 
                         EditorMap_DrawTileset()
                     End SyncLock

@@ -14,7 +14,6 @@ Public Class FrmEditor_MapEditor
 
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         cmbTileSets.SelectedIndex = 0
-        EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
 
@@ -43,8 +42,8 @@ Public Class FrmEditor_MapEditor
         picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
 
         ' set the scrollbars
-        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
         scrlMapViewH.Maximum = (Map.MaxX \ PIC_X) + PIC_X
+        scrlMapViewV.Maximum = (Map.MaxY \ PIC_Y) + PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, picScreen.Width, picScreen.Height)))
     End Sub

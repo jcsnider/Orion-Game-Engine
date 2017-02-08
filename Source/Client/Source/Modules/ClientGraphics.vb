@@ -1414,7 +1414,7 @@ Module ClientGraphics
                         LoadTexture(.Layer(i).Tileset, 1)
                     End If
                     ' we use it, lets update timer
-                    With TileSetTextureInfo(i)
+                    With TileSetTextureInfo(.Layer(i).Tileset)
                         .TextureTimer = GetTickCount() + 100000
                     End With
                     If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
@@ -1457,7 +1457,7 @@ Module ClientGraphics
                     End If
 
                     ' we use it, lets update timer
-                    With TileSetTextureInfo(i)
+                    With TileSetTextureInfo(.Layer(i).Tileset)
                         .TextureTimer = GetTickCount() + 100000
                     End With
 
