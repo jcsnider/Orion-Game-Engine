@@ -34,7 +34,6 @@ Public Class Client
             If Socket Is Nothing Then Exit Sub
             myStream.BeginRead(readBuff, 0, Socket.ReceiveBufferSize, AddressOf OnReceiveData, Nothing)
         Catch ex As Exception
-            TextAdd(GetExceptionInfo(ex))
             CloseSocket(Index) 'Disconnect
             Exit Sub
         End Try
@@ -78,7 +77,7 @@ Module ServerTCP
             Clients(Index).myStream.BeginWrite(buffer.ToArray, 0, buffer.ToArray.Length, Nothing, Nothing)
             buffer = Nothing
         Catch ex As Exception
-            TextAdd(GetExceptionInfo(ex))
+
         End Try
     End Sub
 
@@ -313,10 +312,14 @@ Module ServerTCP
     End Function
 
     Public Function IsConnected(ByVal Index As Integer) As Boolean
-        If Clients(Index).Socket.Connected Then
-            IsConnected = True
-        Else
+        If Clients(Index).Socket Is Nothing Then
             IsConnected = False
+        Else
+            If Clients(Index).Socket.Connected Then
+                IsConnected = True
+            Else
+                IsConnected = False
+            End If
         End If
     End Function
 

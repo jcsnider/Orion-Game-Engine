@@ -229,11 +229,13 @@
 
         If FrmMenu.Visible = False Then
             frmmenuvisible = True
+            frmmaingamevisible = False
         End If
 
         pnlCharCreateVisible = False
         pnlLoginVisible = False
         pnlRegisterVisible = False
+        pnlCharSelectVisible = False
 
         Msg = Trim(Buffer.ReadString)
 

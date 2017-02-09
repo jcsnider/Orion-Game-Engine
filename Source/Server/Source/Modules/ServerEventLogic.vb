@@ -1931,6 +1931,7 @@
         'Check Removing and Adding of Events (Did switches change or something?)
 
         If Gettingmap = True Then Exit Sub
+        If ServerOnline = False Then Exit Sub
 
         RemoveDeadEvents()
 

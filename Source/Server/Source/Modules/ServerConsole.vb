@@ -145,7 +145,7 @@ Module ServerConsole
         If Not FindPlayer(Name) > 0 Then Exit Sub
 
         AlertMsg(FindPlayer(Name), "You have been kicked by the server owner!")
-
+        LeftGame(FindPlayer(Name))
     End Sub
 
     Sub HandleCommandBan(ByVal Line As String, ByVal Command As String, ByVal Parts As String())

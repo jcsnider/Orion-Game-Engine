@@ -276,13 +276,14 @@ Module ServerGeneral
         ServerOnline = False
         SetStatus("Saving players online...")
         SaveAllPlayersOnline()
-        ClearGameData()
-        SetStatus("Unloading sockets...")
 
+        SetStatus("Unloading sockets...")
         For i = 1 To MAX_PLAYERS
-            If IsConnected(i) Then CloseSocket(i)
+            SendLeftGame(i)
+            LeftGame(i)
         Next
 
+        ClearGameData()
         ServerDestroyed = True
         Application.Exit()
     End Sub
