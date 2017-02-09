@@ -1712,7 +1712,7 @@ Module ServerDatabase
     Sub SaveAllPlayersOnline()
         Dim i As Integer
 
-        For i = 1 To MAX_PLAYERS
+        For i = 1 To GetTotalPlayersOnline()
             If IsPlaying(i) Then
                 SavePlayer(i)
                 SaveBank(i)

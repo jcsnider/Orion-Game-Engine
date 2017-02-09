@@ -271,11 +271,18 @@ Module ServerGeneral
     End Sub
 
     Sub DestroyServer()
+        Dim i As Integer
+
         ServerOnline = False
         SetStatus("Saving players online...")
         SaveAllPlayersOnline()
         ClearGameData()
         SetStatus("Unloading sockets...")
+
+        For i = 1 To MAX_PLAYERS
+            If IsConnected(i) Then CloseSocket(i)
+        Next
+
         ServerDestroyed = True
         Application.Exit()
     End Sub
