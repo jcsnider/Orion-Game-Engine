@@ -655,6 +655,11 @@
 #End Region
 
 #Region "Page Buttons"
+    Private Sub TabPages_Click(sender As Object, e As EventArgs) Handles tabPages.Click
+        curPageNum = tabPages.SelectedIndex + 1
+        EventEditorLoadPage(curPageNum)
+    End Sub
+
     Private Sub BtnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
         Dim pageCount As Integer, i As Integer
 
@@ -729,7 +734,7 @@
 
 #Region "Conditions"
     Private Sub ChkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
-        If chkPlayerVar.Checked = 0 Then
+        If chkPlayerVar.Checked = True Then
             cmbPlayerVar.Enabled = False
             txtPlayerVariable.Enabled = False
             cmbPlayervarCompare.Enabled = False
@@ -757,14 +762,14 @@
     End Sub
 
     Private Sub ChkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
-        If chkPlayerSwitch.Checked = 0 Then
-            cmbPlayerSwitch.Enabled = False
-            cmbPlayerSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSwitch = 0
-        Else
+        If chkPlayerSwitch.Checked = True Then
             cmbPlayerSwitch.Enabled = True
             cmbPlayerSwitchCompare.Enabled = True
             tmpEvent.Pages(curPageNum).chkSwitch = 1
+        Else
+            cmbPlayerSwitch.Enabled = False
+            cmbPlayerSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSwitch = 0
         End If
     End Sub
 
@@ -779,8 +784,14 @@
     End Sub
 
     Private Sub ChkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
-        tmpEvent.Pages(curPageNum).chkHasItem = chkHasItem.Checked
-        If chkHasItem.Checked = 0 Then cmbHasItem.Enabled = False Else cmbHasItem.Enabled = True
+        If chkHasItem.Checked = True Then
+            tmpEvent.Pages(curPageNum).chkHasItem = 1
+            cmbHasItem.Enabled = True
+        Else
+            tmpEvent.Pages(curPageNum).chkHasItem = 0
+            cmbHasItem.Enabled = False
+        End If
+
     End Sub
 
     Private Sub CmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
@@ -790,14 +801,14 @@
     End Sub
 
     Private Sub ChkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
-        If chkSelfSwitch.Checked = 0 Then
-            cmbSelfSwitch.Enabled = False
-            cmbSelfSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
-        Else
+        If chkSelfSwitch.Checked = True Then
             cmbSelfSwitch.Enabled = True
             cmbSelfSwitchCompare.Enabled = True
             tmpEvent.Pages(curPageNum).chkSelfSwitch = 1
+        Else
+            cmbSelfSwitch.Enabled = False
+            cmbSelfSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
         End If
     End Sub
 
@@ -810,6 +821,7 @@
         If cmbSelfSwitchCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
+
 
 #End Region
 

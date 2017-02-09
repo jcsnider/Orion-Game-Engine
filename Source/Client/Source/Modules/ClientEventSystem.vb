@@ -3055,7 +3055,7 @@ newlist:
                         GameWindow.Draw(rec2)
                     End If
                 Case 2
-                    If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic < NumTileSets Then
+                    If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic <= NumTileSets Then
                         With rec
                             .X = Map.Events(i).Pages(1).GraphicX * 32
                             .Width = Map.Events(i).Pages(1).GraphicX2 * 32

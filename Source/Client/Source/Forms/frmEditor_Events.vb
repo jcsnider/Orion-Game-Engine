@@ -654,6 +654,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Page Buttons"
+    Private Sub TabPages_Click(sender As Object, e As EventArgs) Handles tabPages.Click
+        curPageNum = tabPages.SelectedIndex + 1
+        EventEditorLoadPage(curPageNum)
+    End Sub
+
     Private Sub btnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
         Dim pageCount As Integer, i As Integer
 
@@ -726,8 +731,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Conditions"
-    Private Sub chkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
-        If chkPlayerVar.Checked = 0 Then
+    Private Sub ChkPlayerVar_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerVar.CheckedChanged
+        If chkPlayerVar.Checked = True Then
             cmbPlayerVar.Enabled = False
             txtPlayerVariable.Enabled = False
             cmbPlayervarCompare.Enabled = False
@@ -740,71 +745,77 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub cmbPlayerVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerVar.SelectedIndexChanged
+    Private Sub CmbPlayerVar_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerVar.SelectedIndexChanged
         If cmbPlayerVar.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).VariableIndex = cmbPlayerVar.SelectedIndex
     End Sub
 
-    Private Sub cmbPlayervarCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayervarCompare.SelectedIndexChanged
+    Private Sub CmbPlayervarCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayervarCompare.SelectedIndexChanged
         If cmbPlayervarCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).VariableCompare = cmbPlayervarCompare.SelectedIndex
     End Sub
 
-    Private Sub txtPlayerVariable_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerVariable.TextChanged
+    Private Sub TxtPlayerVariable_TextChanged(sender As Object, e As EventArgs) Handles txtPlayerVariable.TextChanged
         tmpEvent.Pages(curPageNum).VariableCondition = Val(Trim$(txtPlayerVariable.Text))
     End Sub
 
-    Private Sub chkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
-        If chkPlayerSwitch.Checked = 0 Then
-            cmbPlayerSwitch.Enabled = False
-            cmbPlayerSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSwitch = 0
-        Else
+    Private Sub ChkPlayerSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkPlayerSwitch.CheckedChanged
+        If chkPlayerSwitch.Checked = True Then
             cmbPlayerSwitch.Enabled = True
             cmbPlayerSwitchCompare.Enabled = True
             tmpEvent.Pages(curPageNum).chkSwitch = 1
+        Else
+            cmbPlayerSwitch.Enabled = False
+            cmbPlayerSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSwitch = 0
         End If
     End Sub
 
-    Private Sub cmbPlayerSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitch.SelectedIndexChanged
+    Private Sub CmbPlayerSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitch.SelectedIndexChanged
         If cmbPlayerSwitch.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SwitchIndex = cmbPlayerSwitch.SelectedIndex
     End Sub
 
-    Private Sub cmbPlayerSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchCompare.SelectedIndexChanged
+    Private Sub CmbPlayerSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchCompare.SelectedIndexChanged
         If cmbPlayerSwitchCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SwitchCompare = cmbPlayerSwitchCompare.SelectedIndex
     End Sub
 
-    Private Sub chkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
-        tmpEvent.Pages(curPageNum).chkHasItem = chkHasItem.Checked
-        If chkHasItem.Checked = 0 Then cmbHasItem.Enabled = False Else cmbHasItem.Enabled = True
+    Private Sub ChkHasItem_CheckedChanged(sender As Object, e As EventArgs) Handles chkHasItem.CheckedChanged
+        If chkHasItem.Checked = True Then
+            tmpEvent.Pages(curPageNum).chkHasItem = 1
+            cmbHasItem.Enabled = True
+        Else
+            tmpEvent.Pages(curPageNum).chkHasItem = 0
+            cmbHasItem.Enabled = False
+        End If
+
     End Sub
 
-    Private Sub cmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
+    Private Sub CmbHasItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHasItem.SelectedIndexChanged
         If cmbHasItem.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).HasItemIndex = cmbHasItem.SelectedIndex
         tmpEvent.Pages(curPageNum).HasItemAmount = scrlCondition_HasItem.Value
     End Sub
 
-    Private Sub chkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
-        If chkSelfSwitch.Checked = 0 Then
-            cmbSelfSwitch.Enabled = False
-            cmbSelfSwitchCompare.Enabled = False
-            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
-        Else
+    Private Sub ChkSelfSwitch_CheckedChanged(sender As Object, e As EventArgs) Handles chkSelfSwitch.CheckedChanged
+        If chkSelfSwitch.Checked = True Then
             cmbSelfSwitch.Enabled = True
             cmbSelfSwitchCompare.Enabled = True
             tmpEvent.Pages(curPageNum).chkSelfSwitch = 1
+        Else
+            cmbSelfSwitch.Enabled = False
+            cmbSelfSwitchCompare.Enabled = False
+            tmpEvent.Pages(curPageNum).chkSelfSwitch = 0
         End If
     End Sub
 
-    Private Sub cmbSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitch.SelectedIndexChanged
+    Private Sub CmbSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitch.SelectedIndexChanged
         If cmbSelfSwitch.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SelfSwitchIndex = cmbSelfSwitch.SelectedIndex
     End Sub
 
-    Private Sub cmbSelfSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitchCompare.SelectedIndexChanged
+    Private Sub CmbSelfSwitchCompare_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSelfSwitchCompare.SelectedIndexChanged
         If cmbSelfSwitchCompare.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
