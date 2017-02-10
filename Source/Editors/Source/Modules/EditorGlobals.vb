@@ -3,7 +3,10 @@
     Public Const MAP_NUMBER_MASK As Long = INSTANCED_MAP_MASK - 1
 
     Public SelectedTab As Byte
-
+    Public HideCursor As Boolean
+    Public TakeScreenShot As Boolean
+    Public ScreenShotTimer As Integer
+    Public MakeCache As Boolean
     Public FPS As Integer
 
     Public GameStarted As Boolean

@@ -171,7 +171,10 @@ Public Class FrmEditor_MapEditor
 
 #Region "Toolbar"
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
-        MapEditorSend()
+        HideCursor = True
+        ScreenShotTimer = GetTickCount() + 1000
+        MakeCache = True
+        'MapEditorSend()
     End Sub
 
     Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
@@ -195,12 +198,9 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Private Sub TsbScreenShot_Click(sender As Object, e As EventArgs) Handles tsbScreenShot.Click
-        Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
-
-        If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
-            IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
-        End If
-        screenshot.SaveToFile(Application.StartupPath & "\Data\Screenshots\Map" & Map.MapNum & ".png")
+        HideCursor = True
+        ScreenShotTimer = GetTickCount() + 1000
+        TakeScreenShot = True
     End Sub
 #End Region
 
@@ -263,16 +263,12 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Private Sub OptWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraMapWarp.Visible = True
 
-        scrlMapWarpMap.Maximum = MAX_MAPS
-        scrlMapWarpMap.Value = 1
-        scrlMapWarpX.Maximum = Byte.MaxValue
-        scrlMapWarpY.Maximum = Byte.MaxValue
-        scrlMapWarpX.Value = 0
-        scrlMapWarpY.Value = 0
+        If optWarp.Checked = True Then
+            ClearAttributeDialogue()
+            FrmVisualWarp.Visible = True
+        End If
+
     End Sub
 
     Private Sub ScrlMapItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItem.Scroll
@@ -723,6 +719,10 @@ Public Class FrmEditor_MapEditor
         scrlMapWarpX.Value = 0
         scrlMapWarpY.Value = 0
     End Sub
+
+#End Region
+
+#Region "Visual Warp"
 
 #End Region
 

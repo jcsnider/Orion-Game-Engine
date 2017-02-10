@@ -187,7 +187,7 @@ Module EditorLoop
         Dim g As Graphics = FrmEditor_MapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
-        Dim destrect As Rectangle, tmpfps As Integer
+        Dim tmpfps As Integer
 
         starttime = GetTickCount()
 
@@ -208,7 +208,7 @@ Module EditorLoop
                 If InMapEditor And Not GettingMap Then
 
                     'Calculate FPS
-                    If starttime < GetTickCount() Then
+                    If starttime < Tick Then
                         FPS = tmpfps
 
                         FrmEditor_MapEditor.tsCurFps.Text = "Current FPS: " & FPS
@@ -267,10 +267,40 @@ Module EditorLoop
                             FadeOut()
                         End If
 
-                        destrect = New Rectangle(0, 0, ScreenX, ScreenY)
+                        'destrect = New Rectangle(0, 0, ScreenX, ScreenY)
                         'Application.DoEvents()
 
                         EditorMap_DrawTileset()
+
+                        If TakeScreenShot Then
+                            If ScreenShotTimer < Tick Then
+                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
+
+                                If Not IO.Directory.Exists(Application.StartupPath & "\Data\Screenshots") Then
+                                    IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Screenshots")
+                                End If
+                                screenshot.SaveToFile(Application.StartupPath & "\Data\Screenshots\Map" & Map.MapNum & ".png")
+
+                                HideCursor = False
+                                TakeScreenShot = False
+                            End If
+                        End If
+
+                        If MakeCache Then
+                            If ScreenShotTimer < Tick Then
+                                Dim screenshot As SFML.Graphics.Image = GameWindow.Capture()
+
+                                If Not IO.Directory.Exists(Application.StartupPath & "\Data\Cache") Then
+                                    IO.Directory.CreateDirectory(Application.StartupPath & "\Data\Cache")
+                                End If
+                                screenshot.SaveToFile(Application.StartupPath & "\Data\Cache\Map" & Map.MapNum & ".png")
+
+                                HideCursor = False
+                                MakeCache = False
+                                MapEditorSend()
+                            End If
+                        End If
+
                     End SyncLock
 
                 End If

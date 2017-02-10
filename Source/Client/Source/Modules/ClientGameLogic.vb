@@ -58,12 +58,12 @@ Module ClientGameLogic
                 frmmaingamevisible = True
 
                 'Calculate FPS
-                If starttime < GetTickCount() Then
+                If starttime < Tick Then
                     FPS = tmpfps
                     LPS = tmplps
                     tmpfps = 0
                     tmplps = 0
-                    starttime = GetTickCount() + 1000
+                    starttime = Tick + 1000
                 End If
                 tmplps = tmplps + 1
                 tmpfps = tmpfps + 1

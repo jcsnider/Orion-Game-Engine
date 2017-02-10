@@ -180,9 +180,11 @@
 
         'set map names
         FrmEditor_MapEditor.cmbMapList.Items.Clear()
+        FrmVisualWarp.lstMaps.Items.Clear()
 
         For i = 1 To MAX_MAPS
             FrmEditor_MapEditor.cmbMapList.Items.Add(i & ": " & MapNames(i))
+            FrmVisualWarp.lstMaps.Items.Add(i & ": " & MapNames(i))
         Next
 
         If Map.MapNum > 0 Then
@@ -475,12 +477,7 @@
         FrmEditor_MapEditor.Visible = False
         GettingMap = True
 
-        'clear memory
-        'For i = 0 To NumTileSets
-        '    If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-        '    TileSetImgsGFX(i) = Nothing
-        '    TileSetImgsLoaded(i) = False
-        'Next
+        InitAutotiles()
 
     End Sub
 
@@ -490,12 +487,6 @@
         FrmEditor_MapEditor.Visible = False
         GettingMap = True
 
-        'clear memory
-        'For i = 0 To NumTileSets
-        '    If Not TileSetImgsGFX(i) Is Nothing Then TileSetImgsGFX(i).Dispose()
-        '    TileSetImgsGFX(i) = Nothing
-        '    TileSetImgsLoaded(i) = False
-        'Next
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)

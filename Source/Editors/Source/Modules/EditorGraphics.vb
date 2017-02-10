@@ -1169,7 +1169,7 @@ Module EditorGraphics
 
     Public Sub DrawTileOutline()
         Dim rec As Rectangle, tileset As Integer
-        If SelectedTab = 4 Then Exit Sub
+        If SelectedTab = 4 Or HideCursor = True Then Exit Sub
 
         With rec
             .Y = 0
