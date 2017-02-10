@@ -940,11 +940,14 @@ Module EditorGraphics
         'let program do other things
         DoEvents()
 
+        FrmEditor_MapEditor.picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
+        FrmEditor_MapEditor.picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
+
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(Color.Black)
 
-        GameWindow.SetView(New View(New FloatRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)))
+        GameWindow.SetView(New View(New FloatRect(0, 0, FrmEditor_MapEditor.picScreen.Width, FrmEditor_MapEditor.picScreen.Height)))
         TilesetWindow.SetView(New View(New FloatRect(0, 0, FrmEditor_MapEditor.picBackSelect.Width, FrmEditor_MapEditor.picBackSelect.Height)))
 
         'clear any unused gfx
