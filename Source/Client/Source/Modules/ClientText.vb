@@ -129,7 +129,7 @@ Module ClientText
         Name = Trim$(Map.MapEvents(Index).Name)
 
         ' calc pos
-        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) / 2
+        TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth(Trim$(Name)) \ 2
         If Map.MapEvents(Index).GraphicType = 0 Then
             TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
         ElseIf Map.MapEvents(Index).GraphicType = 1 Then
@@ -137,10 +137,11 @@ Module ClientText
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 16
             Else
                 ' Determine location for text
-                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).Height / 4) + 16
+                TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (CharacterGFXInfo(Map.MapEvents(Index).GraphicNum).Height \ 4) + 16
             End If
         ElseIf Map.MapEvents(Index).GraphicType = 2 Then
             If Map.MapEvents(Index).GraphicY2 > 0 Then
+                TextX = TextX + (Map.MapEvents(Index).GraphicY2 * PIC_Y) \ 2 - 16
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - (Map.MapEvents(Index).GraphicY2 * PIC_Y) + 16
             Else
                 TextY = ConvertMapY(Map.MapEvents(Index).Y * PIC_Y) + Map.MapEvents(Index).YOffset - 32 + 16

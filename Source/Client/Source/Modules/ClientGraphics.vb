@@ -1408,6 +1408,7 @@ Module ClientGraphics
 
         With Map.Tile(X, Y)
             For i = MapLayer.Ground To MapLayer.Mask2
+                If .Layer Is Nothing Then Exit Sub
                 ' skip tile if tileset isn't set
                 If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
                     If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
@@ -1450,6 +1451,7 @@ Module ClientGraphics
 
         With Map.Tile(X, Y)
             For i = MapLayer.Fringe To MapLayer.Fringe2
+                If .Layer Is Nothing Then Exit Sub
                 ' skip tile if tileset isn't set
                 If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
                     If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
