@@ -528,8 +528,8 @@
                 curPageNum = 1
                 EventEditorLoadPage(curPageNum)
 
-                .scrlShowTextFace.Maximum = NumFaces
-                .scrlShowChoicesFace.Maximum = NumFaces
+                .nudShowTextFace.Maximum = NumFaces
+                .nudShowChoicesFace.Maximum = NumFaces
             End With
             ' show the editor
             frmEditor_Events.Show()
