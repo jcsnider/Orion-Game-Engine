@@ -3,12 +3,12 @@
 Public Class frmEditor_Events
 
 #Region "Frm Code"
-    Private Sub frmEditor_Events_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
+    Private Sub FrmEditor_Events_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyDown
+        'If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
     End Sub
 
-    Private Sub frmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
+    Private Sub FrmEditor_Events_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles Me.KeyUp
+        'If e.KeyCode = Keys.ShiftKey Then VbKeyShift = False
     End Sub
 
     Sub ClearConditionFrame()
@@ -81,6 +81,7 @@ Public Class frmEditor_Events
         cmbCondition_General.SelectedIndex = 0
         scrlCondition_QuestTask.Value = 1
         lblCondition_QuestTask.Text = "#1"
+
 
         cmbCondition_Gender.Enabled = False
     End Sub
@@ -189,13 +190,18 @@ Public Class frmEditor_Events
         For i = 1 To MAX_QUESTS
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
+
         'If NumPics > 0 Then
-        'btnCommands45.Enabled = True
-        'scrlShowPicture.Maximum = NumPics
-        'cmbPicIndex.SelectedIndex = 0
+        '    btnCommands45.Enabled = True
+        '    scrlShowPicture.Maximum = NumPics
+        '    cmbPicIndex.SelectedIndex = 0
         'Else
 
         'End If
+
+        fraGraphic.Top = 2
+        fraGraphic.Left = 2
+        fraGraphic.Width = 829
 
         fraDialogue.Location = Panel2.Location
         fraDialogue.Visible = False
@@ -203,19 +209,19 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub frmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Width = 858
     End Sub
 
-    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+    Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         EventEditorOK()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Dispose()
     End Sub
 
-    Private Sub lstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
+    Private Sub LstvCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvCommands.SelectedIndexChanged
         Dim x As Integer
 
         If lstvCommands.SelectedItems.Count = 0 Then Exit Sub
@@ -227,7 +233,7 @@ Public Class frmEditor_Events
 
             'show text
             Case 1
-                txtShowText.Text = vbNullString
+                txtShowText.Text = ""
                 fraDialogue.Visible = True
                 fraShowText.Visible = True
                 scrlShowTextFace.Value = 0
@@ -235,18 +241,18 @@ Public Class frmEditor_Events
                 fraCommands.Visible = False
             'show choices
             Case 2
-                txtChoicePrompt.Text = vbNullString
-                txtChoices1.Text = vbNullString
-                txtChoices2.Text = vbNullString
-                txtChoices3.Text = vbNullString
-                txtChoices4.Text = vbNullString
+                txtChoicePrompt.Text = ""
+                txtChoices1.Text = ""
+                txtChoices2.Text = ""
+                txtChoices3.Text = ""
+                txtChoices4.Text = ""
                 scrlShowChoicesFace.Value = 0
                 fraDialogue.Visible = True
                 fraShowChoices.Visible = True
                 fraCommands.Visible = False
             'chatbox text
             Case 3
-                txtAddText_Text.Text = vbNullString
+                txtAddText_Text.Text = ""
                 scrlAddText_Colour.Value = 0
                 optAddText_Player.Checked = True
                 fraDialogue.Visible = True
@@ -504,7 +510,6 @@ Public Class frmEditor_Events
             Case 30
                 cmbBeginQuest.SelectedIndex = 0
                 fraDialogue.Visible = True
-                fraDialogue.BringToFront()
                 fraBeginQuest.Visible = True
                 fraCommands.Visible = False
             'Complete Give/Talk Task
@@ -512,14 +517,12 @@ Public Class frmEditor_Events
                 scrlCompleteQuestTaskQuest.Value = 1
                 scrlCompleteQuestTask.Value = 1
                 fraDialogue.Visible = True
-                fraDialogue.BringToFront()
                 fraCompleteTask.Visible = True
                 fraCommands.Visible = False
             'End Quest
             Case 32
                 cmbEndQuest.SelectedIndex = 0
                 fraDialogue.Visible = True
-                fraDialogue.BringToFront()
                 fraEndQuest.Visible = True
                 fraCommands.Visible = False
         'Map Functions
@@ -648,7 +651,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub btnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
+    Private Sub BtnCancelCommand_Click(sender As Object, e As EventArgs) Handles btnCancelCommand.Click
         fraCommands.Visible = False
     End Sub
 #End Region
@@ -659,13 +662,14 @@ Public Class frmEditor_Events
         EventEditorLoadPage(curPageNum)
     End Sub
 
-    Private Sub btnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
+    Private Sub BtnNewPage_Click(sender As Object, e As EventArgs) Handles btnNewPage.Click
         Dim pageCount As Integer, i As Integer
 
         If chkGlobal.Checked = True Then
             MsgBox("You cannot have multiple pages on global events!")
             Exit Sub
         End If
+
 
         pageCount = tmpEvent.PageCount + 1
 
@@ -683,17 +687,17 @@ Public Class frmEditor_Events
         btnDeletePage.Enabled = True
     End Sub
 
-    Private Sub btnCopyPage_Click(sender As Object, e As EventArgs) Handles btnCopyPage.Click
+    Private Sub BtnCopyPage_Click(sender As Object, e As EventArgs) Handles btnCopyPage.Click
         CopyEventPage = tmpEvent.Pages(curPageNum)
         btnPastePage.Enabled = True
     End Sub
 
-    Private Sub btnPastePage_Click(sender As Object, e As EventArgs) Handles btnPastePage.Click
+    Private Sub BtnPastePage_Click(sender As Object, e As EventArgs) Handles btnPastePage.Click
         tmpEvent.Pages(curPageNum) = CopyEventPage
         EventEditorLoadPage(curPageNum)
     End Sub
 
-    Private Sub btnDeletePage_Click(sender As Object, e As EventArgs) Handles btnDeletePage.Click
+    Private Sub BtnDeletePage_Click(sender As Object, e As EventArgs) Handles btnDeletePage.Click
         tmpEvent.Pages(curPageNum) = Nothing
         ' move everything else down a notch
         If curPageNum < tmpEvent.PageCount Then
@@ -721,11 +725,11 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub btnClearPage_Click(sender As Object, e As EventArgs) Handles btnClearPage.Click
+    Private Sub BtnClearPage_Click(sender As Object, e As EventArgs) Handles btnClearPage.Click
         tmpEvent.Pages(curPageNum) = Nothing
     End Sub
 
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         tmpEvent.Name = Trim$(txtName.Text)
     End Sub
 #End Region
@@ -820,10 +824,11 @@ Public Class frmEditor_Events
         tmpEvent.Pages(curPageNum).SelfSwitchCompare = cmbSelfSwitchCompare.SelectedIndex
     End Sub
 
+
 #End Region
 
 #Region "Graphic"
-    Private Sub picGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
+    Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.Width = 841
         fraGraphic.Height = 636
         fraGraphic.BringToFront()
@@ -831,7 +836,7 @@ Public Class frmEditor_Events
         GraphicSelType = 0
     End Sub
 
-    Private Sub cmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
+    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
         If cmbGraphic.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
         ' set the max on the scrollbar
@@ -861,14 +866,14 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub scrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
+    Private Sub ScrlGraphic_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGraphic.Scroll
         If scrlGraphic.Value = 0 Then
             lblGraphic.Text = "Number: None"
         Else
             lblGraphic.Text = "Number: " & scrlGraphic.Value
         End If
         EditorEvent_DrawGraphic()
-
+        'cmbGraphic_SelectedIndexChanged(sender, e)
     End Sub
 
     Private Sub PicGraphicSel_Click(sender As Object, e As MouseEventArgs) Handles picGraphicSel.Click
@@ -916,7 +921,7 @@ Public Class frmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub btnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
+    Private Sub BtnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
         If GraphicSelType = 0 Then
             tmpEvent.Pages(curPageNum).GraphicType = cmbGraphic.SelectedIndex
             tmpEvent.Pages(curPageNum).Graphic = scrlGraphic.Value
@@ -931,13 +936,13 @@ Public Class frmEditor_Events
         fraGraphic.Visible = False
     End Sub
 
-    Private Sub btnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
+    Private Sub BtnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
         fraGraphic.Visible = False
     End Sub
 #End Region
 
 #Region "Movement"
-    Private Sub cmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
+    Private Sub CmbMoveType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveType.SelectedIndexChanged
         If cmbMoveType.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveType = cmbMoveType.SelectedIndex
         If cmbMoveType.SelectedIndex = 2 Then
@@ -947,7 +952,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
+    Private Sub BtnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
         pnlMoveRoute.BringToFront()
         lstMoveRoute.Items.Clear()
         cmbEvent.Items.Clear()
@@ -1057,34 +1062,35 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub cmbMoveSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveSpeed.SelectedIndexChanged
+    Private Sub CmbMoveSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveSpeed.SelectedIndexChanged
         If cmbMoveSpeed.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveSpeed = cmbMoveSpeed.SelectedIndex
     End Sub
 
-    Private Sub cmbMoveFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveFreq.SelectedIndexChanged
+    Private Sub CmbMoveFreq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveFreq.SelectedIndexChanged
         If cmbMoveFreq.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).MoveFreq = cmbMoveFreq.SelectedIndex
     End Sub
 
+
 #End Region
 
 #Region "Positioning"
-    Private Sub cmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
+    Private Sub CmbPositioning_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPositioning.SelectedIndexChanged
         If cmbPositioning.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).Position = cmbPositioning.SelectedIndex
     End Sub
 #End Region
 
 #Region "Trigger"
-    Private Sub cmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
+    Private Sub CmbTrigger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrigger.SelectedIndexChanged
         If cmbTrigger.SelectedIndex = -1 Then Exit Sub
         tmpEvent.Pages(curPageNum).Trigger = cmbTrigger.SelectedIndex
     End Sub
 #End Region
 
 #Region "Global"
-    Private Sub chkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
+    Private Sub ChkGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkGlobal.CheckedChanged
         If tmpEvent.PageCount > 1 Then
             If MsgBox("If you set the event to global you will lose all pages except for your first one. Do you want to continue?", vbYesNo) = vbNo Then
                 Exit Sub
@@ -1108,13 +1114,13 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "QuestIcon"
-    Private Sub cmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
+    Private Sub CmbEventQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEventQuest.SelectedIndexChanged
         tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
 #End Region
 
 #Region "Options"
-    Private Sub chkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
+    Private Sub ChkWalkAnim_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkAnim.CheckedChanged
         If chkWalkAnim.Checked = True Then
             tmpEvent.Pages(curPageNum).WalkAnim = 1
         Else
@@ -1123,7 +1129,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub chkDirFix_CheckedChanged(sender As Object, e As EventArgs) Handles chkDirFix.CheckedChanged
+    Private Sub ChkDirFix_CheckedChanged(sender As Object, e As EventArgs) Handles chkDirFix.CheckedChanged
         If chkDirFix.Checked = True Then
             tmpEvent.Pages(curPageNum).DirFix = 1
         Else
@@ -1132,7 +1138,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub chkWalkThrough_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkThrough.CheckedChanged
+    Private Sub ChkWalkThrough_CheckedChanged(sender As Object, e As EventArgs) Handles chkWalkThrough.CheckedChanged
         If chkWalkThrough.Checked = True Then
             tmpEvent.Pages(curPageNum).WalkThrough = 1
         Else
@@ -1141,7 +1147,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub chkShowName_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowName.CheckedChanged
+    Private Sub ChkShowName_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowName.CheckedChanged
         If chkShowName.Checked = True Then
             tmpEvent.Pages(curPageNum).ShowName = 1
         Else
@@ -1152,11 +1158,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Commands"
-    Private Sub lstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
+    Private Sub LstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
         curCommand = lstCommands.SelectedIndex + 1
     End Sub
 
-    Private Sub btnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
+    Private Sub BtnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
         If lstCommands.SelectedIndex > -1 Then
             isEdit = False
             'tabPages.SelectedTab = TabPage
@@ -1164,20 +1170,20 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnEditCommand_Click(sender As Object, e As EventArgs) Handles btnEditCommand.Click
+    Private Sub BtnEditCommand_Click(sender As Object, e As EventArgs) Handles btnEditCommand.Click
         If lstCommands.SelectedIndex > -1 Then
             EditEventCommand()
         End If
     End Sub
 
-    Private Sub btnDeleteComand_Click(sender As Object, e As EventArgs) Handles btnDeleteComand.Click
+    Private Sub BtnDeleteComand_Click(sender As Object, e As EventArgs) Handles btnDeleteComand.Click
         If lstCommands.SelectedIndex > -1 Then
             DeleteEventCommand()
         End If
 
     End Sub
 
-    Private Sub btnClearCommand_Click(sender As Object, e As EventArgs) Handles btnClearCommand.Click
+    Private Sub BtnClearCommand_Click(sender As Object, e As EventArgs) Handles btnClearCommand.Click
         If MsgBox("Are you sure you want to clear all event commands?", vbYesNo, "Clear Event Commands?") = vbYes Then
             ClearEventCommands()
         End If
@@ -1186,7 +1192,7 @@ Public Class frmEditor_Events
 
 #Region "Variables/Switches"
     'Renaming Variables/Switches
-    Private Sub btnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
+    Private Sub BtnLabeling_Click(sender As Object, e As EventArgs) Handles btnLabeling.Click
         pnlVariableSwitches.Visible = True
         pnlVariableSwitches.BringToFront()
         fraLabeling.Visible = True
@@ -1207,7 +1213,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub btnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
+    Private Sub BtnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
         Select Case RenameType
             Case 1
                 'Variable
@@ -1240,7 +1246,7 @@ Public Class frmEditor_Events
         lstVariables.SelectedIndex = 0
     End Sub
 
-    Private Sub btnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
+    Private Sub BtnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
         FraRenaming.Visible = False
         RenameType = 0
         RenameIndex = 0
@@ -1258,11 +1264,11 @@ Public Class frmEditor_Events
         lstVariables.SelectedIndex = 0
     End Sub
 
-    Private Sub txtRename_TextChanged(sender As Object, e As EventArgs) Handles txtRename.TextChanged
+    Private Sub TxtRename_TextChanged(sender As Object, e As EventArgs) Handles txtRename.TextChanged
         tmpEvent.Name = Trim$(txtName.Text)
     End Sub
 
-    Private Sub lstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
+    Private Sub LstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
@@ -1272,7 +1278,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub lstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
+    Private Sub LstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
@@ -1282,7 +1288,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnRenameVariable_Click(sender As Object, e As EventArgs) Handles btnRenameVariable.Click
+    Private Sub BtnRenameVariable_Click(sender As Object, e As EventArgs) Handles btnRenameVariable.Click
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Variable #" & CStr(lstVariables.SelectedIndex + 1)
@@ -1292,7 +1298,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnRenameSwitch_Click(sender As Object, e As EventArgs) Handles btnRenameSwitch.Click
+    Private Sub BtnRenameSwitch_Click(sender As Object, e As EventArgs) Handles btnRenameSwitch.Click
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
             lblEditing.Text = "Editing Switch #" & CStr(lstSwitches.SelectedIndex + 1)
@@ -1302,13 +1308,13 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnLabel_Ok_Click(sender As Object, e As EventArgs) Handles btnLabel_Ok.Click
+    Private Sub BtnLabel_Ok_Click(sender As Object, e As EventArgs) Handles btnLabel_Ok.Click
         pnlVariableSwitches.Visible = False
         fraLabeling.Visible = False
         SendSwitchesAndVariables()
     End Sub
 
-    Private Sub btnLabel_Cancel_Click(sender As Object, e As EventArgs) Handles btnLabel_Cancel.Click
+    Private Sub BtnLabel_Cancel_Click(sender As Object, e As EventArgs) Handles btnLabel_Cancel.Click
         pnlVariableSwitches.Visible = False
         fraLabeling.Visible = False
         RequestSwitchesAndVariables()
@@ -1317,11 +1323,9 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Move Route"
-    Private Sub cmbEvent_Click(sender As Object, e As EventArgs) Handles cmbEvent.Click
 
-    End Sub
     'MoveRoute Commands
-    Private Sub lstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.Click
+    Private Sub LstvwMoveRoute_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvwMoveRoute.Click
         If lstvwMoveRoute.SelectedItems.Count = 0 Then Exit Sub
 
         Select Case lstvwMoveRoute.SelectedItems(0).Index + 1
@@ -1337,7 +1341,7 @@ Public Class frmEditor_Events
         End Select
     End Sub
 
-    Private Sub lstMoveRoute_KeyDown(sender As Object, e As KeyEventArgs) Handles lstMoveRoute.KeyDown
+    Private Sub LstMoveRoute_KeyDown(sender As Object, e As KeyEventArgs) Handles lstMoveRoute.KeyDown
         If e.KeyCode = Keys.Delete Then
             'remove move route command lol
             If lstMoveRoute.SelectedIndex > -1 Then
@@ -1503,7 +1507,7 @@ Public Class frmEditor_Events
 
     End Sub
 
-    Private Sub chkIgnoreMove_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreMove.CheckedChanged
+    Private Sub ChkIgnoreMove_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreMove.CheckedChanged
         If chkIgnoreMove.Checked = True Then
             tmpEvent.Pages(curPageNum).IgnoreMoveRoute = 1
         Else
@@ -1511,7 +1515,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub chkRepeatRoute_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeatRoute.CheckedChanged
+    Private Sub ChkRepeatRoute_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeatRoute.CheckedChanged
         If chkRepeatRoute.Checked = True Then
             tmpEvent.Pages(curPageNum).RepeatMoveRoute = 1
         Else
@@ -1519,7 +1523,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnMoveRouteOk_Click(sender As Object, e As EventArgs) Handles btnMoveRouteOk.Click
+    Private Sub BtnMoveRouteOk_Click(sender As Object, e As EventArgs) Handles btnMoveRouteOk.Click
         If IsMoveRouteCommand = True Then
             If Not isEdit Then
                 AddCommand(EventType.evSetMoveRoute)
@@ -1538,7 +1542,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnMoveRouteCancel_Click(sender As Object, e As EventArgs) Handles btnMoveRouteCancel.Click
+    Private Sub BtnMoveRouteCancel_Click(sender As Object, e As EventArgs) Handles btnMoveRouteCancel.Click
         TempMoveRouteCount = 0
         ReDim TempMoveRoute(0)
         pnlMoveRoute.Visible = False
@@ -1548,7 +1552,7 @@ Public Class frmEditor_Events
 
 #Region "CommandFrames"
 #Region "Show Text"
-    Private Sub scrlShowTextFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowTextFace.Scroll
+    Private Sub ScrlShowTextFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowTextFace.Scroll
         If scrlShowTextFace.Value > 0 Then
             lblShowTextFace.Text = "Face: " & scrlShowTextFace.Value
             If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowTextFace.Value & GFX_EXT) Then
@@ -1560,7 +1564,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
+    Private Sub BtnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
         If Not isEdit Then
             AddCommand(EventType.evShowText)
         Else
@@ -1573,7 +1577,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnShowTextCancel_Click(sender As Object, e As EventArgs) Handles btnShowTextCancel.Click
+    Private Sub BtnShowTextCancel_Click(sender As Object, e As EventArgs) Handles btnShowTextCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowText.Visible = False
@@ -1581,23 +1585,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Add Text"
-    Private Sub txtAddText_Text_TextChanged(sender As Object, e As EventArgs) Handles txtAddText_Text.TextChanged
 
-    End Sub
-
-    Private Sub optAddText_Player_CheckedChanged(sender As Object, e As EventArgs) Handles optAddText_Player.CheckedChanged
-
-    End Sub
-
-    Private Sub optAddText_Map_CheckedChanged(sender As Object, e As EventArgs) Handles optAddText_Map.CheckedChanged
-
-    End Sub
-
-    Private Sub optAddText_Global_CheckedChanged(sender As Object, e As EventArgs) Handles optAddText_Global.CheckedChanged
-
-    End Sub
-
-    Private Sub btnAddTextOk_Click(sender As Object, e As EventArgs) Handles btnAddTextOk.Click
+    Private Sub BtnAddTextOk_Click(sender As Object, e As EventArgs) Handles btnAddTextOk.Click
         If Not isEdit Then
             AddCommand(EventType.evAddText)
         Else
@@ -1609,7 +1598,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnAddTextCancel_Click(sender As Object, e As EventArgs) Handles btnAddTextCancel.Click
+    Private Sub BtnAddTextCancel_Click(sender As Object, e As EventArgs) Handles btnAddTextCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraAddText.Visible = False
@@ -1617,7 +1606,7 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "show choices"
-    Private Sub scrlShowChoicesFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowChoicesFace.Scroll
+    Private Sub ScrlShowChoicesFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowChoicesFace.Scroll
         If scrlShowChoicesFace.Value > 0 Then
             lblShowChoicesFace.Text = "Face: " & scrlShowChoicesFace.Value
             If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlShowChoicesFace.Value & GFX_EXT) Then
@@ -1629,7 +1618,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnShowChoicesOk_Click(sender As Object, e As EventArgs) Handles btnShowChoicesOk.Click
+    Private Sub BtnShowChoicesOk_Click(sender As Object, e As EventArgs) Handles btnShowChoicesOk.Click
         If Not isEdit Then
             AddCommand(EventType.evShowChoices)
         Else
@@ -1641,7 +1630,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnShowChoicesCancel_Click(sender As Object, e As EventArgs) Handles btnShowChoicesCancel.Click
+    Private Sub BtnShowChoicesCancel_Click(sender As Object, e As EventArgs) Handles btnShowChoicesCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowChoices.Visible = False
@@ -1649,11 +1638,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Show Chatbubble"
-    Private Sub optChatBubbleTarget0_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget0.CheckedChanged
+    Private Sub OptChatBubbleTarget0_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget0.CheckedChanged
         cmbChatBubbleTarget.Visible = False
     End Sub
 
-    Private Sub optChatBubbleTarget1_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget1.CheckedChanged
+    Private Sub OptChatBubbleTarget1_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget1.CheckedChanged
         cmbChatBubbleTarget.Visible = True
         cmbChatBubbleTarget.Items.Clear()
 
@@ -1667,7 +1656,7 @@ Public Class frmEditor_Events
         cmbChatBubbleTarget.SelectedIndex = 0
     End Sub
 
-    Private Sub optChatBubbleTarget2_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget2.CheckedChanged
+    Private Sub OptChatBubbleTarget2_CheckedChanged(sender As Object, e As EventArgs) Handles optChatBubbleTarget2.CheckedChanged
         cmbChatBubbleTarget.Visible = True
         cmbChatBubbleTarget.Items.Clear()
 
@@ -1677,7 +1666,7 @@ Public Class frmEditor_Events
         cmbChatBubbleTarget.SelectedIndex = 0
     End Sub
 
-    Private Sub btnShowChatBubbleOK_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleOK.Click
+    Private Sub BtnShowChatBubbleOK_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleOK.Click
         If Not isEdit Then
             AddCommand(EventType.evShowChatBubble)
         Else
@@ -1689,7 +1678,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnShowChatBubbleCancel_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleCancel.Click
+    Private Sub BtnShowChatBubbleCancel_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowChatBubble.Visible = False
@@ -1697,11 +1686,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Player Variable"
-    Private Sub cmbVariable_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbVariable.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub optVariableAction0_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction0.CheckedChanged
+    Private Sub OptVariableAction0_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction0.CheckedChanged
         If optVariableAction0.Checked = True Then
             txtVariableData0.Enabled = True
             txtVariableData0.Text = "0"
@@ -1716,7 +1702,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub optVariableAction1_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction1.CheckedChanged
+    Private Sub OptVariableAction1_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction1.CheckedChanged
         If optVariableAction1.Checked = True Then
             txtVariableData0.Enabled = False
             txtVariableData0.Text = "0"
@@ -1731,7 +1717,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub optVariableAction2_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction2.CheckedChanged
+    Private Sub OptVariableAction2_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction2.CheckedChanged
         If optVariableAction2.Checked = True Then
             txtVariableData0.Enabled = False
             txtVariableData0.Text = "0"
@@ -1746,7 +1732,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub optVariableAction3_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction3.CheckedChanged
+    Private Sub OptVariableAction3_CheckedChanged(sender As Object, e As EventArgs) Handles optVariableAction3.CheckedChanged
         If optVariableAction2.Checked = True Then
             txtVariableData0.Enabled = False
             txtVariableData0.Text = "0"
@@ -1761,7 +1747,7 @@ Public Class frmEditor_Events
         End If
     End Sub
 
-    Private Sub btnPlayerVarOk_Click(sender As Object, e As EventArgs) Handles btnPlayerVarOk.Click
+    Private Sub BtnPlayerVarOk_Click(sender As Object, e As EventArgs) Handles btnPlayerVarOk.Click
         If Not isEdit Then
             AddCommand(EventType.evPlayerVar)
         Else
@@ -1773,7 +1759,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnPlayerVarCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerVarCancel.Click
+    Private Sub BtnPlayerVarCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerVarCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerVariable.Visible = False
@@ -1781,15 +1767,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Player Switch"
-    Private Sub cmbSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSwitch.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub cmbPlayerSwitchSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayerSwitchSet.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub btnSetPlayerSwitchOk_Click(sender As Object, e As EventArgs) Handles btnSetPlayerSwitchOk.Click
+    Private Sub BtnSetPlayerSwitchOk_Click(sender As Object, e As EventArgs) Handles btnSetPlayerSwitchOk.Click
         If Not isEdit Then
             AddCommand(EventType.evPlayerSwitch)
         Else
@@ -1801,7 +1780,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSetPlayerswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSetPlayerswitchCancel.Click
+    Private Sub BtnSetPlayerswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSetPlayerswitchCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerSwitch.Visible = False
@@ -1810,15 +1789,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Self Switch"
-    Private Sub cmbSetSelfSwitch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetSelfSwitch.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub cmbSetSelfSwitchTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetSelfSwitchTo.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub btnSelfswitchOk_Click(sender As Object, e As EventArgs) Handles btnSelfswitchOk.Click
+    Private Sub BtnSelfswitchOk_Click(sender As Object, e As EventArgs) Handles btnSelfswitchOk.Click
         If Not isEdit Then
             AddCommand(EventType.evSelfSwitch)
         Else
@@ -1830,7 +1802,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSelfswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSelfswitchCancel.Click
+    Private Sub BtnSelfswitchCancel_Click(sender As Object, e As EventArgs) Handles btnSelfswitchCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetSelfSwitch.Visible = False
@@ -1838,7 +1810,7 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Conditional Branch"
-    Private Sub optCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition0.CheckedChanged
+    Private Sub OptCondition_Index0_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition0.CheckedChanged
         If Not optCondition0.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1848,7 +1820,7 @@ Public Class frmEditor_Events
         txtCondition_PlayerVarCondition.Enabled = True
     End Sub
 
-    Private Sub optCondition1_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition1.CheckedChanged
+    Private Sub OptCondition1_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition1.CheckedChanged
         If Not optCondition1.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1857,7 +1829,7 @@ Public Class frmEditor_Events
         cmbCondtion_PlayerSwitchCondition.Enabled = True
     End Sub
 
-    Private Sub optCondition2_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition2.CheckedChanged
+    Private Sub OptCondition2_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition2.CheckedChanged
         If Not optCondition2.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1866,7 +1838,7 @@ Public Class frmEditor_Events
         scrlCondition_HasItem.Enabled = True
     End Sub
 
-    Private Sub optCondition3_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition3.CheckedChanged
+    Private Sub OptCondition3_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition3.CheckedChanged
         If Not optCondition3.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1874,13 +1846,13 @@ Public Class frmEditor_Events
         cmbCondition_ClassIs.Enabled = True
     End Sub
 
-    Private Sub optCondition4_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition4.CheckedChanged
+    Private Sub OptCondition4_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition4.CheckedChanged
         If Not optCondition4.Checked Then Exit Sub
 
         cmbCondition_LearntSkill.Enabled = True
     End Sub
 
-    Private Sub optCondition5_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition5.CheckedChanged
+    Private Sub OptCondition5_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition5.CheckedChanged
         If Not optCondition5.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1889,7 +1861,7 @@ Public Class frmEditor_Events
         txtCondition_LevelAmount.Enabled = True
     End Sub
 
-    Private Sub optCondition6_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition6.CheckedChanged
+    Private Sub OptCondition6_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition6.CheckedChanged
         If Not optCondition6.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1898,7 +1870,7 @@ Public Class frmEditor_Events
         cmbCondition_SelfSwitchCondition.Enabled = True
     End Sub
 
-    Private Sub optCondition7_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition7.CheckedChanged
+    Private Sub OptCondition7_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition7.CheckedChanged
         If Not optCondition7.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1907,7 +1879,7 @@ Public Class frmEditor_Events
         scrlCondition_Quest.Enabled = True
     End Sub
 
-    Private Sub optCondition8_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition8.CheckedChanged
+    Private Sub OptCondition8_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition8.CheckedChanged
         If Not optCondition8.Checked Then Exit Sub
 
         ClearConditionFrame()
@@ -1915,19 +1887,19 @@ Public Class frmEditor_Events
         cmbCondition_Gender.Enabled = True
     End Sub
 
-    Private Sub scrlCondition_HasItem_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_HasItem.Scroll
+    Private Sub ScrlCondition_HasItem_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_HasItem.Scroll
         lblHasItemAmt.Text = "x " & scrlCondition_HasItem.Value
     End Sub
 
-    Private Sub scrlCondition_Quest_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_Quest.Scroll
+    Private Sub ScrlCondition_Quest_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_Quest.Scroll
         lblCondition_QuestTask.Text = "#" & scrlCondition_QuestTask.Value
     End Sub
 
-    Private Sub scrlCondition_QuestTask_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_QuestTask.Scroll
+    Private Sub ScrlCondition_QuestTask_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCondition_QuestTask.Scroll
         lblCondition_QuestTask.Text = "#" & scrlCondition_QuestTask.Value
     End Sub
 
-    Private Sub btnConditionalBranchOk_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchOk.Click
+    Private Sub BtnConditionalBranchOk_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchOk.Click
         If isEdit = False Then
             AddCommand(EventType.evCondition)
         Else
@@ -1939,7 +1911,7 @@ Public Class frmEditor_Events
         fraConditionalBranch.Visible = False
     End Sub
 
-    Private Sub btnConditionalBranchCancel_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchCancel.Click
+    Private Sub BtnConditionalBranchCancel_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraConditionalBranch.Visible = False
@@ -1948,11 +1920,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Create Label"
-    Private Sub txtLabelName_TextChanged(sender As Object, e As EventArgs) Handles txtLabelName.TextChanged
 
-    End Sub
-
-    Private Sub btnCreatelabelOk_Click(sender As Object, e As EventArgs) Handles btnCreatelabelOk.Click
+    Private Sub BtnCreatelabelOk_Click(sender As Object, e As EventArgs) Handles btnCreatelabelOk.Click
         If isEdit = False Then
             AddCommand(EventType.evLabel)
         Else
@@ -1964,7 +1933,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnCreateLabelCancel_Click(sender As Object, e As EventArgs) Handles btnCreateLabelCancel.Click
+    Private Sub BtnCreateLabelCancel_Click(sender As Object, e As EventArgs) Handles btnCreateLabelCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCreateLabel.Visible = False
@@ -1973,11 +1942,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "GoTo Label"
-    Private Sub txtGotoLabel_TextChanged(sender As Object, e As EventArgs) Handles txtGotoLabel.TextChanged
 
-    End Sub
-
-    Private Sub btnGoToLabelOk_Click(sender As Object, e As EventArgs) Handles btnGoToLabelOk.Click
+    Private Sub BtnGoToLabelOk_Click(sender As Object, e As EventArgs) Handles btnGoToLabelOk.Click
         If isEdit = False Then
             AddCommand(EventType.evGotoLabel)
         Else
@@ -1989,7 +1955,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnGoToLabelCancel_Click(sender As Object, e As EventArgs) Handles btnGoToLabelCancel.Click
+    Private Sub BtnGoToLabelCancel_Click(sender As Object, e As EventArgs) Handles btnGoToLabelCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraGoToLabel.Visible = False
@@ -1998,23 +1964,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change Items"
-    Private Sub optChangeItemSet_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemSet.CheckedChanged
 
-    End Sub
-
-    Private Sub optChangeItemAdd_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemAdd.CheckedChanged
-
-    End Sub
-
-    Private Sub optChangeItemRemove_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeItemRemove.CheckedChanged
-
-    End Sub
-
-    Private Sub txtChangeItemsAmount_TextChanged(sender As Object, e As EventArgs) Handles txtChangeItemsAmount.TextChanged
-
-    End Sub
-
-    Private Sub btnChangeItemsOk_Click(sender As Object, e As EventArgs) Handles btnChangeItemsOk.Click
+    Private Sub BtnChangeItemsOk_Click(sender As Object, e As EventArgs) Handles btnChangeItemsOk.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeItems)
         Else
@@ -2026,24 +1977,24 @@ Public Class frmEditor_Events
         fraChangeItems.Visible = False
     End Sub
 
-    Private Sub btnChangeItemsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeItemsCancel.Click
+    Private Sub BtnChangeItemsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeItemsCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeItems.Visible = False
     End Sub
 
-    Private Sub cmbChangeItemIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeItemIndex.SelectedIndexChanged
+    Private Sub CmbChangeItemIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeItemIndex.SelectedIndexChanged
         tmpEvent.Pages(curPageNum).Questnum = cmbEventQuest.SelectedIndex
     End Sub
 
 #End Region
 
 #Region "Change Level"
-    Private Sub scrlChangeLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlChangeLevel.Scroll
+    Private Sub ScrlChangeLevel_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlChangeLevel.Scroll
         lblChangeLevel.Text = "Level: " & scrlChangeLevel.Value
     End Sub
 
-    Private Sub btnChangeLevelOK_Click(sender As Object, e As EventArgs) Handles btnChangeLevelOK.Click
+    Private Sub BtnChangeLevelOK_Click(sender As Object, e As EventArgs) Handles btnChangeLevelOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeLevel)
         Else
@@ -2055,7 +2006,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangeLevelCancel_Click(sender As Object, e As EventArgs) Handles btnChangeLevelCancel.Click
+    Private Sub BtnChangeLevelCancel_Click(sender As Object, e As EventArgs) Handles btnChangeLevelCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeLevel.Visible = False
@@ -2064,19 +2015,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change Skills"
-    Private Sub cmbChangeSkills_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeSkills.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub optChangeSkillsAdd_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeSkillsAdd.CheckedChanged
-
-    End Sub
-
-    Private Sub optChangeSkillsRemove_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeSkillsRemove.CheckedChanged
-
-    End Sub
-
-    Private Sub btnChangeSkillsOK_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsOK.Click
+    Private Sub BtnChangeSkillsOK_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeSkills)
         Else
@@ -2088,7 +2028,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangeSkillsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsCancel.Click
+    Private Sub BtnChangeSkillsCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeSkills.Visible = False
@@ -2097,11 +2037,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change Class"
-    Private Sub cmbChangeClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbChangeClass.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnChangeClassOK_Click(sender As Object, e As EventArgs) Handles btnChangeClassOK.Click
+    Private Sub BtnChangeClassOK_Click(sender As Object, e As EventArgs) Handles btnChangeClassOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeClass)
         Else
@@ -2113,7 +2050,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangeClassCancel_Click(sender As Object, e As EventArgs) Handles btnChangeClassCancel.Click
+    Private Sub BtnChangeClassCancel_Click(sender As Object, e As EventArgs) Handles btnChangeClassCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeClass.Visible = False
@@ -2122,11 +2059,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change Sprite"
-    Private Sub scrlChangeSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlChangeSprite.Scroll
+    Private Sub ScrlChangeSprite_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlChangeSprite.Scroll
         lblChangeSprite.Text = "Sprite: " & scrlChangeSprite.Value
     End Sub
 
-    Private Sub btnChangeSpriteOK_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteOK.Click
+    Private Sub BtnChangeSpriteOK_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeSprite)
         Else
@@ -2138,7 +2075,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangeSpriteCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteCancel.Click
+    Private Sub BtnChangeSpriteCancel_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeSprite.Visible = False
@@ -2147,15 +2084,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change Gender"
-    Private Sub optChangeSexMale_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeSexMale.CheckedChanged
 
-    End Sub
-
-    Private Sub optChangeSexFemale_CheckedChanged(sender As Object, e As EventArgs) Handles optChangeSexFemale.CheckedChanged
-
-    End Sub
-
-    Private Sub btnChangeGenderOK_Click(sender As Object, e As EventArgs) Handles btnChangeGenderOK.Click
+    Private Sub BtnChangeGenderOK_Click(sender As Object, e As EventArgs) Handles btnChangeGenderOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangeSex)
         Else
@@ -2167,7 +2097,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangeGenderCancel_Click(sender As Object, e As EventArgs) Handles btnChangeGenderCancel.Click
+    Private Sub BtnChangeGenderCancel_Click(sender As Object, e As EventArgs) Handles btnChangeGenderCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangeGender.Visible = False
@@ -2176,15 +2106,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Change PK"
-    Private Sub optChangePKYes_CheckedChanged(sender As Object, e As EventArgs) Handles optChangePKYes.CheckedChanged
 
-    End Sub
-
-    Private Sub optChangePKNo_CheckedChanged(sender As Object, e As EventArgs) Handles optChangePKNo.CheckedChanged
-
-    End Sub
-
-    Private Sub btnChangePkOK_Click(sender As Object, e As EventArgs) Handles btnChangePkOK.Click
+    Private Sub BtnChangePkOK_Click(sender As Object, e As EventArgs) Handles btnChangePkOK.Click
         If isEdit = False Then
             AddCommand(EventType.evChangePK)
         Else
@@ -2196,7 +2119,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnChangePkCancel_Click(sender As Object, e As EventArgs) Handles btnChangePkCancel.Click
+    Private Sub BtnChangePkCancel_Click(sender As Object, e As EventArgs) Handles btnChangePkCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraChangePK.Visible = False
@@ -2205,11 +2128,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Give Exp"
-    Private Sub scrlGiveExp_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGiveExp.Scroll
+    Private Sub ScrlGiveExp_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlGiveExp.Scroll
         lblGiveExp.Text = "Give Exp: " & scrlGiveExp.Value
     End Sub
 
-    Private Sub btnGiveExpOK_Click(sender As Object, e As EventArgs) Handles btnGiveExpOK.Click
+    Private Sub BtnGiveExpOK_Click(sender As Object, e As EventArgs) Handles btnGiveExpOK.Click
         If isEdit = False Then
             AddCommand(EventType.evGiveExp)
         Else
@@ -2221,7 +2144,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnGiveExpCancel_Click(sender As Object, e As EventArgs) Handles btnGiveExpCancel.Click
+    Private Sub BtnGiveExpCancel_Click(sender As Object, e As EventArgs) Handles btnGiveExpCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraGiveExp.Visible = False
@@ -2230,23 +2153,19 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Player Warp"
-    Private Sub scrlWPMap_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPMap.Scroll
+    Private Sub ScrlWPMap_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPMap.Scroll
         lblWPMap.Text = "Map: " & scrlWPMap.Value
     End Sub
 
-    Private Sub scrlWPX_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPX.Scroll
+    Private Sub ScrlWPX_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPX.Scroll
         lblWPX.Text = "X: " & scrlWPX.Value
     End Sub
 
-    Private Sub scrlWPY_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPY.Scroll
+    Private Sub ScrlWPY_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWPY.Scroll
         lblWPY.Text = "Y: " & scrlWPY.Value
     End Sub
 
-    Private Sub cmbWarpPlayerDir_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWarpPlayerDir.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub btnPlayerWarpOK_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpOK.Click
+    Private Sub BtnPlayerWarpOK_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpOK.Click
         If Not isEdit Then
             AddCommand(EventType.evWarpPlayer)
         Else
@@ -2258,7 +2177,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnPlayerWarpCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpCancel.Click
+    Private Sub BtnPlayerWarpCancel_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayerWarp.Visible = False
@@ -2267,11 +2186,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Route Completion"
-    Private Sub cmbMoveWait_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMoveWait.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnMoveWaitOK_Click(sender As Object, e As EventArgs) Handles btnMoveWaitOK.Click
+    Private Sub BtnMoveWaitOK_Click(sender As Object, e As EventArgs) Handles btnMoveWaitOK.Click
         If Not isEdit Then
             AddCommand(EventType.evWaitMovement)
         Else
@@ -2283,7 +2199,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnMoveWaitCancel_Click(sender As Object, e As EventArgs) Handles btnMoveWaitCancel.Click
+    Private Sub BtnMoveWaitCancel_Click(sender As Object, e As EventArgs) Handles btnMoveWaitCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraMoveRouteWait.Visible = False
@@ -2292,11 +2208,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Spawn Npc"
-    Private Sub cmbSpawnNPC_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnNPC.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnSpawnNpcOK_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcOK.Click
+    Private Sub BtnSpawnNpcOK_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcOK.Click
         If isEdit = False Then
             AddCommand(EventType.evSpawnNpc)
         Else
@@ -2308,7 +2221,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSpawnNpcCancel_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcCancel.Click
+    Private Sub BtnSpawnNpcCancel_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSpawnNpc.Visible = False
@@ -2317,11 +2230,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Play Animation"
-    Private Sub cmbPlayAnim_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayAnim.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub optPlayAnimPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimPlayer.CheckedChanged
+    Private Sub OptPlayAnimPlayer_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimPlayer.CheckedChanged
         lblPlayAnimX.Visible = False
         lblPlayAnimY.Visible = False
         scrlPlayAnimTileX.Visible = False
@@ -2329,7 +2239,7 @@ Public Class frmEditor_Events
         cmbPlayAnimEvent.Visible = False
     End Sub
 
-    Private Sub optPlayAnimEvent_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimEvent.CheckedChanged
+    Private Sub OptPlayAnimEvent_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimEvent.CheckedChanged
         lblPlayAnimX.Visible = False
         lblPlayAnimY.Visible = False
         scrlPlayAnimTileX.Visible = False
@@ -2337,7 +2247,7 @@ Public Class frmEditor_Events
         cmbPlayAnimEvent.Visible = True
     End Sub
 
-    Private Sub optPlayAnimTile_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimTile.CheckedChanged
+    Private Sub OptPlayAnimTile_CheckedChanged(sender As Object, e As EventArgs) Handles optPlayAnimTile.CheckedChanged
         lblPlayAnimX.Visible = True
         lblPlayAnimY.Visible = True
         scrlPlayAnimTileX.Visible = True
@@ -2345,19 +2255,15 @@ Public Class frmEditor_Events
         cmbPlayAnimEvent.Visible = False
     End Sub
 
-    Private Sub cmbPlayAnimEvent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayAnimEvent.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub scrlPlayAnimTileX_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPlayAnimTileX.Scroll
+    Private Sub ScrlPlayAnimTileX_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPlayAnimTileX.Scroll
         lblPlayAnimX.Text = "Map Tile X: " & scrlPlayAnimTileX.Value
     End Sub
 
-    Private Sub scrlPlayAnimTileY_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPlayAnimTileY.Scroll
+    Private Sub ScrlPlayAnimTileY_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlPlayAnimTileY.Scroll
         lblPlayAnimY.Text = "Map Tile Y: " & scrlPlayAnimTileY.Value
     End Sub
 
-    Private Sub btnPlayAnimationOK_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationOK.Click
+    Private Sub BtnPlayAnimationOK_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationOK.Click
         If Not isEdit Then
             AddCommand(EventType.evPlayAnimation)
         Else
@@ -2369,7 +2275,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnPlayAnimationCancel_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationCancel.Click
+    Private Sub BtnPlayAnimationCancel_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayAnimation.Visible = False
@@ -2378,11 +2284,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Begin Quest"
-    Private Sub cmbBeginQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBeginQuest.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnBeginQuestOK_Click(sender As Object, e As EventArgs) Handles btnBeginQuestOK.Click
+    Private Sub BtnBeginQuestOK_Click(sender As Object, e As EventArgs) Handles btnBeginQuestOK.Click
         If Not isEdit Then
             AddCommand(EventType.evBeginQuest)
         Else
@@ -2394,24 +2297,25 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnBeginQuestCancel_Click(sender As Object, e As EventArgs) Handles btnBeginQuestCancel.Click
+    Private Sub BtnBeginQuestCancel_Click(sender As Object, e As EventArgs) Handles btnBeginQuestCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraBeginQuest.Visible = False
     End Sub
 
+
 #End Region
 
 #Region "Complete QuestTask"
-    Private Sub scrlCompleteQuestTaskQuest_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCompleteQuestTaskQuest.Scroll
+    Private Sub ScrlCompleteQuestTaskQuest_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCompleteQuestTaskQuest.Scroll
         lblRandomLabel47.Text = "Quest: " & scrlCompleteQuestTaskQuest.Value & "."
     End Sub
 
-    Private Sub scrlCompleteQuestTask_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCompleteQuestTask.Scroll
+    Private Sub ScrlCompleteQuestTask_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCompleteQuestTask.Scroll
         lblRandomLabel48.Text = "Task: " & scrlCompleteQuestTask.Value & "."
     End Sub
 
-    Private Sub btnCompleteQuestTaskOK_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskOK.Click
+    Private Sub BtnCompleteQuestTaskOK_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskOK.Click
         If Not isEdit Then
             AddCommand(EventType.evQuestTask)
         Else
@@ -2423,7 +2327,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnCompleteQuestTaskCancel_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskCancel.Click
+    Private Sub BtnCompleteQuestTaskCancel_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCompleteTask.Visible = False
@@ -2432,11 +2336,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "End Quest"
-    Private Sub cmbEndQuest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEndQuest.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnEndQuestOK_Click(sender As Object, e As EventArgs) Handles btnEndQuestOK.Click
+    Private Sub BtnEndQuestOK_Click(sender As Object, e As EventArgs) Handles btnEndQuestOK.Click
         If Not isEdit Then
             AddCommand(EventType.evEndQuest)
         Else
@@ -2448,7 +2349,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnEndQuestCancel_Click(sender As Object, e As EventArgs) Handles btnEndQuestCancel.Click
+    Private Sub BtnEndQuestCancel_Click(sender As Object, e As EventArgs) Handles btnEndQuestCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraEndQuest.Visible = False
@@ -2473,7 +2374,7 @@ Public Class frmEditor_Events
         lblFogData2.Text = "Fog Opacity: " & ScrlFogData2.Value
     End Sub
 
-    Private Sub btnSetFogOK_Click(sender As Object, e As EventArgs) Handles btnSetFogOK.Click
+    Private Sub BtnSetFogOK_Click(sender As Object, e As EventArgs) Handles btnSetFogOK.Click
         If Not isEdit Then
             AddCommand(EventType.evSetFog)
         Else
@@ -2485,7 +2386,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSetFogCancel_Click(sender As Object, e As EventArgs) Handles btnSetFogCancel.Click
+    Private Sub BtnSetFogCancel_Click(sender As Object, e As EventArgs) Handles btnSetFogCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetFog.Visible = False
@@ -2494,15 +2395,12 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Weather"
-    Private Sub CmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbWeather.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub scrlWeatherIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWeatherIntensity.Scroll
+    Private Sub ScrlWeatherIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWeatherIntensity.Scroll
         lblWeatherIntensity.Text = "Intensity: " & scrlWeatherIntensity.Value
     End Sub
 
-    Private Sub btnSetWeatherOK_Click(sender As Object, e As EventArgs) Handles btnSetWeatherOK.Click
+    Private Sub BtnSetWeatherOK_Click(sender As Object, e As EventArgs) Handles btnSetWeatherOK.Click
         If Not isEdit Then
             AddCommand(EventType.evSetWeather)
         Else
@@ -2514,7 +2412,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSetWeatherCancel_Click(sender As Object, e As EventArgs) Handles btnSetWeatherCancel.Click
+    Private Sub BtnSetWeatherCancel_Click(sender As Object, e As EventArgs) Handles btnSetWeatherCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetWeather.Visible = False
@@ -2523,23 +2421,23 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Map Tint"
-    Private Sub scrlMapTintData0_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData0.Scroll
+    Private Sub ScrlMapTintData0_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData0.Scroll
         lblMapTintData0.Text = "Red: " & scrlMapTintData0.Value
     End Sub
 
-    Private Sub scrlMapTintData1_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData1.Scroll
+    Private Sub ScrlMapTintData1_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData1.Scroll
         lblMapTintData1.Text = "Green: " & scrlMapTintData1.Value
     End Sub
 
-    Private Sub scrlMapTintData2_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData2.Scroll
+    Private Sub ScrlMapTintData2_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData2.Scroll
         lblMapTintData2.Text = "Blue: " & scrlMapTintData2.Value
     End Sub
 
-    Private Sub scrlMapTintData3_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData3.Scroll
+    Private Sub ScrlMapTintData3_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapTintData3.Scroll
         lblMapTintData3.Text = "Opacity: " & scrlMapTintData3.Value
     End Sub
 
-    Private Sub btnMapTintOK_Click(sender As Object, e As EventArgs) Handles btnMapTintOK.Click
+    Private Sub BtnMapTintOK_Click(sender As Object, e As EventArgs) Handles btnMapTintOK.Click
         If Not isEdit Then
             AddCommand(EventType.evSetTint)
         Else
@@ -2551,7 +2449,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnMapTintCancel_Click(sender As Object, e As EventArgs) Handles btnMapTintCancel.Click
+    Private Sub BtnMapTintCancel_Click(sender As Object, e As EventArgs) Handles btnMapTintCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraMapTint.Visible = False
@@ -2560,11 +2458,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Play BGM"
-    Private Sub cmbPlayBGM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlayBGM.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnPlayBgmOK_Click(sender As Object, e As EventArgs) Handles btnPlayBgmOK.Click
+    Private Sub BtnPlayBgmOK_Click(sender As Object, e As EventArgs) Handles btnPlayBgmOK.Click
         If Not isEdit Then
             AddCommand(EventType.evPlayBGM)
         Else
@@ -2576,7 +2471,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnPlayBgmCancel_Click(sender As Object, e As EventArgs) Handles btnPlayBgmCancel.Click
+    Private Sub BtnPlayBgmCancel_Click(sender As Object, e As EventArgs) Handles btnPlayBgmCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlayBGM.Visible = False
@@ -2585,11 +2480,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Play Sound"
-    Private Sub cmbPlaySound_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPlaySound.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnPlaySoundOK_Click(sender As Object, e As EventArgs) Handles btnPlaySoundOK.Click
+    Private Sub BtnPlaySoundOK_Click(sender As Object, e As EventArgs) Handles btnPlaySoundOK.Click
         If Not isEdit Then
             AddCommand(EventType.evPlaySound)
         Else
@@ -2601,7 +2493,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnPlaySoundCancel_Click(sender As Object, e As EventArgs) Handles btnPlaySoundCancel.Click
+    Private Sub BtnPlaySoundCancel_Click(sender As Object, e As EventArgs) Handles btnPlaySoundCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraPlaySound.Visible = False
@@ -2610,11 +2502,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Wait"
-    Private Sub scrlWaitAmount_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWaitAmount.Scroll
+    Private Sub ScrlWaitAmount_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlWaitAmount.Scroll
         lblWaitAmount.Text = "Wait: " & scrlWaitAmount.Value & " Ms"
     End Sub
 
-    Private Sub btnSetWaitOK_Click(sender As Object, e As EventArgs) Handles btnSetWaitOK.Click
+    Private Sub BtnSetWaitOK_Click(sender As Object, e As EventArgs) Handles btnSetWaitOK.Click
         If Not isEdit Then
             AddCommand(EventType.evWait)
         Else
@@ -2626,7 +2518,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSetWaitCancel_Click(sender As Object, e As EventArgs) Handles btnSetWaitCancel.Click
+    Private Sub BtnSetWaitCancel_Click(sender As Object, e As EventArgs) Handles btnSetWaitCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetWait.Visible = False
@@ -2635,11 +2527,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Set Access"
-    Private Sub cmbSetAccess_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetAccess.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnSetAccessOK_Click(sender As Object, e As EventArgs) Handles btnSetAccessOK.Click
+    Private Sub BtnSetAccessOK_Click(sender As Object, e As EventArgs) Handles btnSetAccessOK.Click
         If Not isEdit Then
             AddCommand(EventType.evSetAccess)
         Else
@@ -2651,7 +2540,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnSetAccessCancel_Click(sender As Object, e As EventArgs) Handles btnSetAccessCancel.Click
+    Private Sub BtnSetAccessCancel_Click(sender As Object, e As EventArgs) Handles btnSetAccessCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraSetAccess.Visible = False
@@ -2660,11 +2549,11 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Custom Script"
-    Private Sub scrlCustomScript_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCustomScript.Scroll
+    Private Sub ScrlCustomScript_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlCustomScript.Scroll
         lblCustomScript.Text = "Case: " & scrlCustomScript.Value
     End Sub
 
-    Private Sub btnCustomScriptOK_Click(sender As Object, e As EventArgs) Handles btnCustomScriptOK.Click
+    Private Sub BtnCustomScriptOK_Click(sender As Object, e As EventArgs) Handles btnCustomScriptOK.Click
         If Not isEdit Then
             AddCommand(EventType.evCustomScript)
         Else
@@ -2676,7 +2565,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnCustomScriptCancel_Click(sender As Object, e As EventArgs) Handles btnCustomScriptCancel.Click
+    Private Sub BtnCustomScriptCancel_Click(sender As Object, e As EventArgs) Handles btnCustomScriptCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraCustomScript.Visible = False
@@ -2685,27 +2574,12 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Show Pic"
-    Private Sub cmbPicIndex_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPicIndex.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub scrlShowPicture_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowPicture.Scroll
+    Private Sub ScrlShowPicture_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlShowPicture.Scroll
         lblShowPic.Text = "Picture: " & scrlShowPicture.Value
     End Sub
 
-    Private Sub optPic1_CheckedChanged(sender As Object, e As EventArgs) Handles optPic1.CheckedChanged
-
-    End Sub
-
-    Private Sub optPic2_CheckedChanged(sender As Object, e As EventArgs) Handles optPic2.CheckedChanged
-
-    End Sub
-
-    Private Sub optPic3_CheckedChanged(sender As Object, e As EventArgs) Handles optPic3.CheckedChanged
-
-    End Sub
-
-    Private Sub btnShowPicOK_Click(sender As Object, e As EventArgs) Handles btnShowPicOK.Click
+    Private Sub BtnShowPicOK_Click(sender As Object, e As EventArgs) Handles btnShowPicOK.Click
         'Need to do some checks
         If Not IsNumeric(txtPicOffset1.Text) Then
             MsgBox("You must enter a valid number for the  x offset of the picture!")
@@ -2728,7 +2602,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnShowPicCancel_Click(sender As Object, e As EventArgs) Handles btnShowPicCancel.Click
+    Private Sub BtnShowPicCancel_Click(sender As Object, e As EventArgs) Handles btnShowPicCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraShowPic.Visible = False
@@ -2737,11 +2611,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Hide Pic"
-    Private Sub cmbHidePic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHidePic.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnHidePicOK_Click(sender As Object, e As EventArgs) Handles btnHidePicOK.Click
+    Private Sub BtnHidePicOK_Click(sender As Object, e As EventArgs) Handles btnHidePicOK.Click
         If Not isEdit Then
             AddCommand(EventType.evHidePicture)
         Else
@@ -2753,7 +2624,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnHidePicCancel_Click(sender As Object, e As EventArgs) Handles btnHidePicCancel.Click
+    Private Sub BtnHidePicCancel_Click(sender As Object, e As EventArgs) Handles btnHidePicCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraHidePic.Visible = False
@@ -2762,11 +2633,8 @@ Public Class frmEditor_Events
 #End Region
 
 #Region "Open Shop"
-    Private Sub cmbOpenShop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOpenShop.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnOpenShopOK_Click(sender As Object, e As EventArgs) Handles btnOpenShopOK.Click
+    Private Sub BtnOpenShopOK_Click(sender As Object, e As EventArgs) Handles btnOpenShopOK.Click
         If Not isEdit Then
             AddCommand(EventType.evOpenShop)
         Else
@@ -2778,7 +2646,7 @@ Public Class frmEditor_Events
         fraCommands.Visible = False
     End Sub
 
-    Private Sub btnOpenShopCancel_Click(sender As Object, e As EventArgs) Handles btnOpenShopCancel.Click
+    Private Sub BtnOpenShopCancel_Click(sender As Object, e As EventArgs) Handles btnOpenShopCancel.Click
         If Not isEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraOpenShop.Visible = False

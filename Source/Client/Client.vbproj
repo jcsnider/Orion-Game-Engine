@@ -73,6 +73,9 @@
       <HintPath>..\..\packages\ArchaicIO.2.6.1\lib\ArchaicIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DarkUI">
+      <HintPath>..\Editors\DarkUI.dll</HintPath>
+    </Reference>
     <Reference Include="SFML.Net, Version=2.2.6150.20648, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SFML-Portable-2.2.1.0.0\lib\SFML.Net.dll</HintPath>
     </Reference>

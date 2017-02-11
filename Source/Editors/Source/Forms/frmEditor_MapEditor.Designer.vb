@@ -30,6 +30,9 @@ Partial Class FrmEditor_MapEditor
         Me.tslCurXY = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsCurFps = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DarkSectionPanel1 = New DarkUI.Controls.DarkSectionPanel()
+        Me.pnlNpc = New System.Windows.Forms.Panel()
+        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
+        Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.pnlTiles = New System.Windows.Forms.Panel()
         Me.cmbAutoTile = New DarkUI.Controls.DarkComboBox()
         Me.cmbTileSets = New DarkUI.Controls.DarkComboBox()
@@ -42,9 +45,6 @@ Partial Class FrmEditor_MapEditor
         Me.scrlPictureX = New DarkUI.Controls.DarkScrollBar()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.pnlNpc = New System.Windows.Forms.Panel()
-        Me.cmbNpcList = New System.Windows.Forms.ComboBox()
-        Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.pnlDirBlock = New System.Windows.Forms.Panel()
         Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
         Me.pnlEvents = New System.Windows.Forms.Panel()
@@ -196,10 +196,10 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
         Me.DarkSectionPanel1.SuspendLayout()
+        Me.pnlNpc.SuspendLayout()
         Me.pnlTiles.SuspendLayout()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlNpc.SuspendLayout()
         Me.pnlDirBlock.SuspendLayout()
         Me.pnlEvents.SuspendLayout()
         Me.pnlAttribute.SuspendLayout()
@@ -292,7 +292,6 @@ Partial Class FrmEditor_MapEditor
         'DarkSectionPanel1
         '
         Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
-        Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlDirBlock)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlEvents)
         Me.DarkSectionPanel1.Controls.Add(Me.btnEvents)
@@ -301,12 +300,45 @@ Partial Class FrmEditor_MapEditor
         Me.DarkSectionPanel1.Controls.Add(Me.btnAttributes)
         Me.DarkSectionPanel1.Controls.Add(Me.btnTiles)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
         Me.DarkSectionPanel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.DarkSectionPanel1.Location = New System.Drawing.Point(0, 0)
         Me.DarkSectionPanel1.Name = "DarkSectionPanel1"
         Me.DarkSectionPanel1.SectionHeader = "Map Layers"
         Me.DarkSectionPanel1.Size = New System.Drawing.Size(318, 598)
         Me.DarkSectionPanel1.TabIndex = 7
+        '
+        'pnlNpc
+        '
+        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlNpc.Controls.Add(Me.cmbNpcList)
+        Me.pnlNpc.Controls.Add(Me.lstMapNpc)
+        Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
+        Me.pnlNpc.Name = "pnlNpc"
+        Me.pnlNpc.Size = New System.Drawing.Size(314, 548)
+        Me.pnlNpc.TabIndex = 8
+        '
+        'cmbNpcList
+        '
+        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
+        Me.cmbNpcList.FormattingEnabled = True
+        Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
+        Me.cmbNpcList.Name = "cmbNpcList"
+        Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
+        Me.cmbNpcList.TabIndex = 18
+        '
+        'lstMapNpc
+        '
+        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
+        Me.lstMapNpc.FormattingEnabled = True
+        Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
+        Me.lstMapNpc.Name = "lstMapNpc"
+        Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
+        Me.lstMapNpc.TabIndex = 0
         '
         'pnlTiles
         '
@@ -466,38 +498,6 @@ Partial Class FrmEditor_MapEditor
         Me.DarkLabel1.Size = New System.Drawing.Size(174, 13)
         Me.DarkLabel1.TabIndex = 13
         Me.DarkLabel1.Text = "Drag Mouse to Select Multiple Tiles"
-        '
-        'pnlNpc
-        '
-        Me.pnlNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlNpc.Controls.Add(Me.cmbNpcList)
-        Me.pnlNpc.Controls.Add(Me.lstMapNpc)
-        Me.pnlNpc.Location = New System.Drawing.Point(2, 50)
-        Me.pnlNpc.Name = "pnlNpc"
-        Me.pnlNpc.Size = New System.Drawing.Size(314, 548)
-        Me.pnlNpc.TabIndex = 8
-        '
-        'cmbNpcList
-        '
-        Me.cmbNpcList.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.cmbNpcList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbNpcList.ForeColor = System.Drawing.Color.LightGray
-        Me.cmbNpcList.FormattingEnabled = True
-        Me.cmbNpcList.Location = New System.Drawing.Point(126, 441)
-        Me.cmbNpcList.Name = "cmbNpcList"
-        Me.cmbNpcList.Size = New System.Drawing.Size(184, 21)
-        Me.cmbNpcList.TabIndex = 18
-        '
-        'lstMapNpc
-        '
-        Me.lstMapNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.lstMapNpc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstMapNpc.ForeColor = System.Drawing.Color.LightGray
-        Me.lstMapNpc.FormattingEnabled = True
-        Me.lstMapNpc.Location = New System.Drawing.Point(3, 4)
-        Me.lstMapNpc.Name = "lstMapNpc"
-        Me.lstMapNpc.Size = New System.Drawing.Size(307, 431)
-        Me.lstMapNpc.TabIndex = 0
         '
         'pnlDirBlock
         '
@@ -2059,11 +2059,11 @@ Partial Class FrmEditor_MapEditor
         Me.ssInfo.ResumeLayout(False)
         Me.ssInfo.PerformLayout()
         Me.DarkSectionPanel1.ResumeLayout(False)
+        Me.pnlNpc.ResumeLayout(False)
         Me.pnlTiles.ResumeLayout(False)
         Me.pnlTiles.PerformLayout()
         Me.pnlBack.ResumeLayout(False)
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlNpc.ResumeLayout(False)
         Me.pnlDirBlock.ResumeLayout(False)
         Me.pnlDirBlock.PerformLayout()
         Me.pnlEvents.ResumeLayout(False)
