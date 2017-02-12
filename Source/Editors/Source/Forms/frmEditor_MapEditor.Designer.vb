@@ -137,61 +137,61 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbScreenShot = New System.Windows.Forms.ToolStripButton()
         Me.pnlBack2 = New DarkUI.Controls.DarkSectionPanel()
-        Me.pnlAttributes = New System.Windows.Forms.Panel()
-        Me.fraMapWarp = New System.Windows.Forms.GroupBox()
-        Me.btnMapWarp = New System.Windows.Forms.Button()
-        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar()
-        Me.lblMapWarpY = New System.Windows.Forms.Label()
-        Me.lblMapWarpX = New System.Windows.Forms.Label()
-        Me.lblMapWarpMap = New System.Windows.Forms.Label()
-        Me.fraBuyHouse = New System.Windows.Forms.GroupBox()
-        Me.btnHouseTileOk = New System.Windows.Forms.Button()
-        Me.scrlBuyHouse = New System.Windows.Forms.HScrollBar()
-        Me.lblHouseName = New System.Windows.Forms.Label()
-        Me.fraKeyOpen = New System.Windows.Forms.GroupBox()
-        Me.scrlKeyY = New System.Windows.Forms.HScrollBar()
-        Me.lblKeyY = New System.Windows.Forms.Label()
-        Me.btnMapKeyOpen = New System.Windows.Forms.Button()
-        Me.scrlKeyX = New System.Windows.Forms.HScrollBar()
-        Me.lblKeyX = New System.Windows.Forms.Label()
-        Me.fraMapKey = New System.Windows.Forms.GroupBox()
-        Me.chkMapKey = New System.Windows.Forms.CheckBox()
-        Me.picMapKey = New System.Windows.Forms.PictureBox()
-        Me.btnMapKey = New System.Windows.Forms.Button()
-        Me.scrlMapKey = New System.Windows.Forms.HScrollBar()
-        Me.lblMapKey = New System.Windows.Forms.Label()
-        Me.fraNpcSpawn = New System.Windows.Forms.GroupBox()
-        Me.lstNpc = New System.Windows.Forms.ComboBox()
-        Me.btnNpcSpawn = New System.Windows.Forms.Button()
-        Me.scrlNpcDir = New System.Windows.Forms.HScrollBar()
-        Me.lblNpcDir = New System.Windows.Forms.Label()
-        Me.fraHeal = New System.Windows.Forms.GroupBox()
-        Me.scrlHeal = New System.Windows.Forms.HScrollBar()
-        Me.lblHeal = New System.Windows.Forms.Label()
-        Me.cmbHeal = New System.Windows.Forms.ComboBox()
-        Me.btnHeal = New System.Windows.Forms.Button()
-        Me.fraShop = New System.Windows.Forms.GroupBox()
-        Me.cmbShop = New System.Windows.Forms.ComboBox()
-        Me.btnShop = New System.Windows.Forms.Button()
-        Me.fraResource = New System.Windows.Forms.GroupBox()
-        Me.btnResourceOk = New System.Windows.Forms.Button()
-        Me.scrlResource = New System.Windows.Forms.HScrollBar()
-        Me.lblResource = New System.Windows.Forms.Label()
-        Me.fraMapItem = New System.Windows.Forms.GroupBox()
-        Me.picMapItem = New System.Windows.Forms.PictureBox()
-        Me.btnMapItem = New System.Windows.Forms.Button()
-        Me.scrlMapItemValue = New System.Windows.Forms.HScrollBar()
-        Me.scrlMapItem = New System.Windows.Forms.HScrollBar()
-        Me.lblMapItem = New System.Windows.Forms.Label()
-        Me.fraTrap = New System.Windows.Forms.GroupBox()
-        Me.btnTrap = New System.Windows.Forms.Button()
-        Me.scrlTrap = New System.Windows.Forms.HScrollBar()
-        Me.lblTrap = New System.Windows.Forms.Label()
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.fraTrap = New System.Windows.Forms.GroupBox()
+        Me.lblTrap = New System.Windows.Forms.Label()
+        Me.scrlTrap = New System.Windows.Forms.HScrollBar()
+        Me.btnTrap = New System.Windows.Forms.Button()
+        Me.fraMapItem = New System.Windows.Forms.GroupBox()
+        Me.lblMapItem = New System.Windows.Forms.Label()
+        Me.scrlMapItem = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapItemValue = New System.Windows.Forms.HScrollBar()
+        Me.btnMapItem = New System.Windows.Forms.Button()
+        Me.picMapItem = New System.Windows.Forms.PictureBox()
+        Me.fraResource = New System.Windows.Forms.GroupBox()
+        Me.lblResource = New System.Windows.Forms.Label()
+        Me.scrlResource = New System.Windows.Forms.HScrollBar()
+        Me.btnResourceOk = New System.Windows.Forms.Button()
+        Me.fraShop = New System.Windows.Forms.GroupBox()
+        Me.btnShop = New System.Windows.Forms.Button()
+        Me.cmbShop = New System.Windows.Forms.ComboBox()
+        Me.fraHeal = New System.Windows.Forms.GroupBox()
+        Me.btnHeal = New System.Windows.Forms.Button()
+        Me.cmbHeal = New System.Windows.Forms.ComboBox()
+        Me.lblHeal = New System.Windows.Forms.Label()
+        Me.scrlHeal = New System.Windows.Forms.HScrollBar()
+        Me.fraNpcSpawn = New System.Windows.Forms.GroupBox()
+        Me.lblNpcDir = New System.Windows.Forms.Label()
+        Me.scrlNpcDir = New System.Windows.Forms.HScrollBar()
+        Me.btnNpcSpawn = New System.Windows.Forms.Button()
+        Me.lstNpc = New System.Windows.Forms.ComboBox()
+        Me.fraMapKey = New System.Windows.Forms.GroupBox()
+        Me.lblMapKey = New System.Windows.Forms.Label()
+        Me.scrlMapKey = New System.Windows.Forms.HScrollBar()
+        Me.btnMapKey = New System.Windows.Forms.Button()
+        Me.picMapKey = New System.Windows.Forms.PictureBox()
+        Me.chkMapKey = New System.Windows.Forms.CheckBox()
+        Me.fraKeyOpen = New System.Windows.Forms.GroupBox()
+        Me.lblKeyX = New System.Windows.Forms.Label()
+        Me.scrlKeyX = New System.Windows.Forms.HScrollBar()
+        Me.btnMapKeyOpen = New System.Windows.Forms.Button()
+        Me.lblKeyY = New System.Windows.Forms.Label()
+        Me.scrlKeyY = New System.Windows.Forms.HScrollBar()
+        Me.fraBuyHouse = New System.Windows.Forms.GroupBox()
+        Me.lblHouseName = New System.Windows.Forms.Label()
+        Me.scrlBuyHouse = New System.Windows.Forms.HScrollBar()
+        Me.btnHouseTileOk = New System.Windows.Forms.Button()
+        Me.fraMapWarp = New System.Windows.Forms.GroupBox()
+        Me.lblMapWarpMap = New System.Windows.Forms.Label()
+        Me.lblMapWarpX = New System.Windows.Forms.Label()
+        Me.lblMapWarpY = New System.Windows.Forms.Label()
+        Me.scrlMapWarpMap = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
+        Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
+        Me.btnMapWarp = New System.Windows.Forms.Button()
+        Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -213,20 +213,20 @@ Partial Class FrmEditor_MapEditor
         Me.fraMapLinks.SuspendLayout()
         Me.ToolStrip.SuspendLayout()
         Me.pnlBack2.SuspendLayout()
-        Me.pnlAttributes.SuspendLayout()
-        Me.fraMapWarp.SuspendLayout()
-        Me.fraBuyHouse.SuspendLayout()
-        Me.fraKeyOpen.SuspendLayout()
-        Me.fraMapKey.SuspendLayout()
-        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.fraNpcSpawn.SuspendLayout()
-        Me.fraHeal.SuspendLayout()
-        Me.fraShop.SuspendLayout()
-        Me.fraResource.SuspendLayout()
+        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraTrap.SuspendLayout()
         Me.fraMapItem.SuspendLayout()
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.fraTrap.SuspendLayout()
-        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraResource.SuspendLayout()
+        Me.fraShop.SuspendLayout()
+        Me.fraHeal.SuspendLayout()
+        Me.fraNpcSpawn.SuspendLayout()
+        Me.fraMapKey.SuspendLayout()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraKeyOpen.SuspendLayout()
+        Me.fraBuyHouse.SuspendLayout()
+        Me.fraMapWarp.SuspendLayout()
+        Me.pnlAttributes.SuspendLayout()
         Me.SuspendLayout()
         '
         'DarkDockPanel1
@@ -1486,528 +1486,6 @@ Partial Class FrmEditor_MapEditor
         Me.pnlBack2.Size = New System.Drawing.Size(758, 573)
         Me.pnlBack2.TabIndex = 12
         '
-        'pnlAttributes
-        '
-        Me.pnlAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
-        Me.pnlAttributes.Controls.Add(Me.fraBuyHouse)
-        Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
-        Me.pnlAttributes.Controls.Add(Me.fraMapKey)
-        Me.pnlAttributes.Controls.Add(Me.fraNpcSpawn)
-        Me.pnlAttributes.Controls.Add(Me.fraHeal)
-        Me.pnlAttributes.Controls.Add(Me.fraShop)
-        Me.pnlAttributes.Controls.Add(Me.fraResource)
-        Me.pnlAttributes.Controls.Add(Me.fraMapItem)
-        Me.pnlAttributes.Controls.Add(Me.fraTrap)
-        Me.pnlAttributes.ForeColor = System.Drawing.Color.LightGray
-        Me.pnlAttributes.Location = New System.Drawing.Point(6, 34)
-        Me.pnlAttributes.Name = "pnlAttributes"
-        Me.pnlAttributes.Size = New System.Drawing.Size(709, 516)
-        Me.pnlAttributes.TabIndex = 11
-        Me.pnlAttributes.Visible = False
-        '
-        'fraMapWarp
-        '
-        Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
-        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpMap)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
-        Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
-        Me.fraMapWarp.ForeColor = System.Drawing.Color.LightGray
-        Me.fraMapWarp.Location = New System.Drawing.Point(428, 134)
-        Me.fraMapWarp.Name = "fraMapWarp"
-        Me.fraMapWarp.Size = New System.Drawing.Size(211, 112)
-        Me.fraMapWarp.TabIndex = 18
-        Me.fraMapWarp.TabStop = False
-        Me.fraMapWarp.Text = "Map Warp"
-        '
-        'btnMapWarp
-        '
-        Me.btnMapWarp.ForeColor = System.Drawing.Color.Black
-        Me.btnMapWarp.Location = New System.Drawing.Point(84, 81)
-        Me.btnMapWarp.Name = "btnMapWarp"
-        Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
-        Me.btnMapWarp.TabIndex = 6
-        Me.btnMapWarp.Text = "Accept"
-        Me.btnMapWarp.UseVisualStyleBackColor = True
-        '
-        'scrlMapWarpY
-        '
-        Me.scrlMapWarpY.Location = New System.Drawing.Point(58, 60)
-        Me.scrlMapWarpY.Name = "scrlMapWarpY"
-        Me.scrlMapWarpY.Size = New System.Drawing.Size(144, 18)
-        Me.scrlMapWarpY.TabIndex = 5
-        '
-        'scrlMapWarpX
-        '
-        Me.scrlMapWarpX.Location = New System.Drawing.Point(58, 38)
-        Me.scrlMapWarpX.Name = "scrlMapWarpX"
-        Me.scrlMapWarpX.Size = New System.Drawing.Size(144, 18)
-        Me.scrlMapWarpX.TabIndex = 4
-        '
-        'scrlMapWarpMap
-        '
-        Me.scrlMapWarpMap.Location = New System.Drawing.Point(58, 16)
-        Me.scrlMapWarpMap.Name = "scrlMapWarpMap"
-        Me.scrlMapWarpMap.Size = New System.Drawing.Size(144, 18)
-        Me.scrlMapWarpMap.TabIndex = 3
-        '
-        'lblMapWarpY
-        '
-        Me.lblMapWarpY.AutoSize = True
-        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 62)
-        Me.lblMapWarpY.Name = "lblMapWarpY"
-        Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
-        Me.lblMapWarpY.TabIndex = 2
-        Me.lblMapWarpY.Text = "Y: 1"
-        '
-        'lblMapWarpX
-        '
-        Me.lblMapWarpX.AutoSize = True
-        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 41)
-        Me.lblMapWarpX.Name = "lblMapWarpX"
-        Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
-        Me.lblMapWarpX.TabIndex = 1
-        Me.lblMapWarpX.Text = "X: 1"
-        '
-        'lblMapWarpMap
-        '
-        Me.lblMapWarpMap.AutoSize = True
-        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 21)
-        Me.lblMapWarpMap.Name = "lblMapWarpMap"
-        Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
-        Me.lblMapWarpMap.TabIndex = 0
-        Me.lblMapWarpMap.Text = "Map: 1"
-        '
-        'fraBuyHouse
-        '
-        Me.fraBuyHouse.Controls.Add(Me.btnHouseTileOk)
-        Me.fraBuyHouse.Controls.Add(Me.scrlBuyHouse)
-        Me.fraBuyHouse.Controls.Add(Me.lblHouseName)
-        Me.fraBuyHouse.ForeColor = System.Drawing.Color.LightGray
-        Me.fraBuyHouse.Location = New System.Drawing.Point(428, 9)
-        Me.fraBuyHouse.Name = "fraBuyHouse"
-        Me.fraBuyHouse.Size = New System.Drawing.Size(211, 119)
-        Me.fraBuyHouse.TabIndex = 27
-        Me.fraBuyHouse.TabStop = False
-        Me.fraBuyHouse.Text = "Buy House"
-        '
-        'btnHouseTileOk
-        '
-        Me.btnHouseTileOk.ForeColor = System.Drawing.Color.Black
-        Me.btnHouseTileOk.Location = New System.Drawing.Point(58, 85)
-        Me.btnHouseTileOk.Name = "btnHouseTileOk"
-        Me.btnHouseTileOk.Size = New System.Drawing.Size(90, 28)
-        Me.btnHouseTileOk.TabIndex = 6
-        Me.btnHouseTileOk.Text = "Accept"
-        Me.btnHouseTileOk.UseVisualStyleBackColor = True
-        '
-        'scrlBuyHouse
-        '
-        Me.scrlBuyHouse.LargeChange = 1
-        Me.scrlBuyHouse.Location = New System.Drawing.Point(9, 36)
-        Me.scrlBuyHouse.Name = "scrlBuyHouse"
-        Me.scrlBuyHouse.Size = New System.Drawing.Size(193, 18)
-        Me.scrlBuyHouse.TabIndex = 3
-        '
-        'lblHouseName
-        '
-        Me.lblHouseName.AutoSize = True
-        Me.lblHouseName.Location = New System.Drawing.Point(6, 16)
-        Me.lblHouseName.Name = "lblHouseName"
-        Me.lblHouseName.Size = New System.Drawing.Size(41, 13)
-        Me.lblHouseName.TabIndex = 0
-        Me.lblHouseName.Text = "House:"
-        '
-        'fraKeyOpen
-        '
-        Me.fraKeyOpen.Controls.Add(Me.scrlKeyY)
-        Me.fraKeyOpen.Controls.Add(Me.lblKeyY)
-        Me.fraKeyOpen.Controls.Add(Me.btnMapKeyOpen)
-        Me.fraKeyOpen.Controls.Add(Me.scrlKeyX)
-        Me.fraKeyOpen.Controls.Add(Me.lblKeyX)
-        Me.fraKeyOpen.ForeColor = System.Drawing.Color.LightGray
-        Me.fraKeyOpen.Location = New System.Drawing.Point(3, 369)
-        Me.fraKeyOpen.Name = "fraKeyOpen"
-        Me.fraKeyOpen.Size = New System.Drawing.Size(207, 138)
-        Me.fraKeyOpen.TabIndex = 21
-        Me.fraKeyOpen.TabStop = False
-        Me.fraKeyOpen.Text = "Map Key Open"
-        '
-        'scrlKeyY
-        '
-        Me.scrlKeyY.Location = New System.Drawing.Point(9, 76)
-        Me.scrlKeyY.Name = "scrlKeyY"
-        Me.scrlKeyY.Size = New System.Drawing.Size(160, 18)
-        Me.scrlKeyY.TabIndex = 8
-        '
-        'lblKeyY
-        '
-        Me.lblKeyY.AutoSize = True
-        Me.lblKeyY.Location = New System.Drawing.Point(6, 61)
-        Me.lblKeyY.Name = "lblKeyY"
-        Me.lblKeyY.Size = New System.Drawing.Size(26, 13)
-        Me.lblKeyY.TabIndex = 7
-        Me.lblKeyY.Text = "Y: 0"
-        '
-        'btnMapKeyOpen
-        '
-        Me.btnMapKeyOpen.ForeColor = System.Drawing.Color.Black
-        Me.btnMapKeyOpen.Location = New System.Drawing.Point(53, 105)
-        Me.btnMapKeyOpen.Name = "btnMapKeyOpen"
-        Me.btnMapKeyOpen.Size = New System.Drawing.Size(90, 28)
-        Me.btnMapKeyOpen.TabIndex = 6
-        Me.btnMapKeyOpen.Text = "Accept"
-        Me.btnMapKeyOpen.UseVisualStyleBackColor = True
-        '
-        'scrlKeyX
-        '
-        Me.scrlKeyX.Location = New System.Drawing.Point(9, 37)
-        Me.scrlKeyX.Name = "scrlKeyX"
-        Me.scrlKeyX.Size = New System.Drawing.Size(160, 18)
-        Me.scrlKeyX.TabIndex = 3
-        '
-        'lblKeyX
-        '
-        Me.lblKeyX.AutoSize = True
-        Me.lblKeyX.Location = New System.Drawing.Point(6, 22)
-        Me.lblKeyX.Name = "lblKeyX"
-        Me.lblKeyX.Size = New System.Drawing.Size(26, 13)
-        Me.lblKeyX.TabIndex = 0
-        Me.lblKeyX.Text = "X: 0"
-        '
-        'fraMapKey
-        '
-        Me.fraMapKey.Controls.Add(Me.chkMapKey)
-        Me.fraMapKey.Controls.Add(Me.picMapKey)
-        Me.fraMapKey.Controls.Add(Me.btnMapKey)
-        Me.fraMapKey.Controls.Add(Me.scrlMapKey)
-        Me.fraMapKey.Controls.Add(Me.lblMapKey)
-        Me.fraMapKey.ForeColor = System.Drawing.Color.LightGray
-        Me.fraMapKey.Location = New System.Drawing.Point(216, 369)
-        Me.fraMapKey.Name = "fraMapKey"
-        Me.fraMapKey.Size = New System.Drawing.Size(206, 138)
-        Me.fraMapKey.TabIndex = 20
-        Me.fraMapKey.TabStop = False
-        Me.fraMapKey.Text = "Map Key"
-        '
-        'chkMapKey
-        '
-        Me.chkMapKey.AutoSize = True
-        Me.chkMapKey.Checked = True
-        Me.chkMapKey.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkMapKey.Location = New System.Drawing.Point(9, 64)
-        Me.chkMapKey.Name = "chkMapKey"
-        Me.chkMapKey.Size = New System.Drawing.Size(152, 17)
-        Me.chkMapKey.TabIndex = 8
-        Me.chkMapKey.Text = "Take Key Away Upon Use"
-        Me.chkMapKey.UseVisualStyleBackColor = True
-        '
-        'picMapKey
-        '
-        Me.picMapKey.BackColor = System.Drawing.Color.Black
-        Me.picMapKey.Location = New System.Drawing.Point(172, 25)
-        Me.picMapKey.Name = "picMapKey"
-        Me.picMapKey.Size = New System.Drawing.Size(32, 32)
-        Me.picMapKey.TabIndex = 7
-        Me.picMapKey.TabStop = False
-        '
-        'btnMapKey
-        '
-        Me.btnMapKey.ForeColor = System.Drawing.Color.Black
-        Me.btnMapKey.Location = New System.Drawing.Point(54, 103)
-        Me.btnMapKey.Name = "btnMapKey"
-        Me.btnMapKey.Size = New System.Drawing.Size(90, 28)
-        Me.btnMapKey.TabIndex = 6
-        Me.btnMapKey.Text = "Accept"
-        Me.btnMapKey.UseVisualStyleBackColor = True
-        '
-        'scrlMapKey
-        '
-        Me.scrlMapKey.Location = New System.Drawing.Point(9, 37)
-        Me.scrlMapKey.Name = "scrlMapKey"
-        Me.scrlMapKey.Size = New System.Drawing.Size(160, 18)
-        Me.scrlMapKey.TabIndex = 3
-        '
-        'lblMapKey
-        '
-        Me.lblMapKey.AutoSize = True
-        Me.lblMapKey.Location = New System.Drawing.Point(6, 22)
-        Me.lblMapKey.Name = "lblMapKey"
-        Me.lblMapKey.Size = New System.Drawing.Size(59, 13)
-        Me.lblMapKey.TabIndex = 0
-        Me.lblMapKey.Text = "Item: None"
-        '
-        'fraNpcSpawn
-        '
-        Me.fraNpcSpawn.Controls.Add(Me.lstNpc)
-        Me.fraNpcSpawn.Controls.Add(Me.btnNpcSpawn)
-        Me.fraNpcSpawn.Controls.Add(Me.scrlNpcDir)
-        Me.fraNpcSpawn.Controls.Add(Me.lblNpcDir)
-        Me.fraNpcSpawn.ForeColor = System.Drawing.Color.LightGray
-        Me.fraNpcSpawn.Location = New System.Drawing.Point(3, 8)
-        Me.fraNpcSpawn.Name = "fraNpcSpawn"
-        Me.fraNpcSpawn.Size = New System.Drawing.Size(207, 120)
-        Me.fraNpcSpawn.TabIndex = 23
-        Me.fraNpcSpawn.TabStop = False
-        Me.fraNpcSpawn.Text = "Npc Spawn"
-        '
-        'lstNpc
-        '
-        Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.lstNpc.FormattingEnabled = True
-        Me.lstNpc.Location = New System.Drawing.Point(6, 21)
-        Me.lstNpc.Name = "lstNpc"
-        Me.lstNpc.Size = New System.Drawing.Size(192, 21)
-        Me.lstNpc.TabIndex = 37
-        '
-        'btnNpcSpawn
-        '
-        Me.btnNpcSpawn.BackColor = System.Drawing.SystemColors.Control
-        Me.btnNpcSpawn.ForeColor = System.Drawing.Color.Black
-        Me.btnNpcSpawn.Location = New System.Drawing.Point(53, 86)
-        Me.btnNpcSpawn.Name = "btnNpcSpawn"
-        Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
-        Me.btnNpcSpawn.TabIndex = 6
-        Me.btnNpcSpawn.Text = "Accept"
-        Me.btnNpcSpawn.UseVisualStyleBackColor = False
-        '
-        'scrlNpcDir
-        '
-        Me.scrlNpcDir.LargeChange = 1
-        Me.scrlNpcDir.Location = New System.Drawing.Point(6, 64)
-        Me.scrlNpcDir.Maximum = 3
-        Me.scrlNpcDir.Name = "scrlNpcDir"
-        Me.scrlNpcDir.Size = New System.Drawing.Size(193, 18)
-        Me.scrlNpcDir.TabIndex = 3
-        '
-        'lblNpcDir
-        '
-        Me.lblNpcDir.AutoSize = True
-        Me.lblNpcDir.Location = New System.Drawing.Point(3, 49)
-        Me.lblNpcDir.Name = "lblNpcDir"
-        Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
-        Me.lblNpcDir.TabIndex = 0
-        Me.lblNpcDir.Text = "Direction: Up"
-        '
-        'fraHeal
-        '
-        Me.fraHeal.Controls.Add(Me.scrlHeal)
-        Me.fraHeal.Controls.Add(Me.lblHeal)
-        Me.fraHeal.Controls.Add(Me.cmbHeal)
-        Me.fraHeal.Controls.Add(Me.btnHeal)
-        Me.fraHeal.ForeColor = System.Drawing.Color.LightGray
-        Me.fraHeal.Location = New System.Drawing.Point(3, 252)
-        Me.fraHeal.Name = "fraHeal"
-        Me.fraHeal.Size = New System.Drawing.Size(207, 111)
-        Me.fraHeal.TabIndex = 25
-        Me.fraHeal.TabStop = False
-        Me.fraHeal.Text = "Heal"
-        '
-        'scrlHeal
-        '
-        Me.scrlHeal.Location = New System.Drawing.Point(7, 56)
-        Me.scrlHeal.Name = "scrlHeal"
-        Me.scrlHeal.Size = New System.Drawing.Size(191, 17)
-        Me.scrlHeal.TabIndex = 39
-        '
-        'lblHeal
-        '
-        Me.lblHeal.AutoSize = True
-        Me.lblHeal.Location = New System.Drawing.Point(8, 43)
-        Me.lblHeal.Name = "lblHeal"
-        Me.lblHeal.Size = New System.Drawing.Size(55, 13)
-        Me.lblHeal.TabIndex = 38
-        Me.lblHeal.Text = "Amount: 0"
-        '
-        'cmbHeal
-        '
-        Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbHeal.FormattingEnabled = True
-        Me.cmbHeal.Items.AddRange(New Object() {"Hp", "Mp"})
-        Me.cmbHeal.Location = New System.Drawing.Point(7, 19)
-        Me.cmbHeal.Name = "cmbHeal"
-        Me.cmbHeal.Size = New System.Drawing.Size(192, 21)
-        Me.cmbHeal.TabIndex = 37
-        '
-        'btnHeal
-        '
-        Me.btnHeal.ForeColor = System.Drawing.Color.Black
-        Me.btnHeal.Location = New System.Drawing.Point(53, 76)
-        Me.btnHeal.Name = "btnHeal"
-        Me.btnHeal.Size = New System.Drawing.Size(90, 28)
-        Me.btnHeal.TabIndex = 6
-        Me.btnHeal.Text = "Accept"
-        Me.btnHeal.UseVisualStyleBackColor = True
-        '
-        'fraShop
-        '
-        Me.fraShop.Controls.Add(Me.cmbShop)
-        Me.fraShop.Controls.Add(Me.btnShop)
-        Me.fraShop.ForeColor = System.Drawing.Color.LightGray
-        Me.fraShop.Location = New System.Drawing.Point(216, 252)
-        Me.fraShop.Name = "fraShop"
-        Me.fraShop.Size = New System.Drawing.Size(206, 111)
-        Me.fraShop.TabIndex = 24
-        Me.fraShop.TabStop = False
-        Me.fraShop.Text = "Shop"
-        '
-        'cmbShop
-        '
-        Me.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbShop.FormattingEnabled = True
-        Me.cmbShop.Location = New System.Drawing.Point(6, 19)
-        Me.cmbShop.Name = "cmbShop"
-        Me.cmbShop.Size = New System.Drawing.Size(192, 21)
-        Me.cmbShop.TabIndex = 37
-        '
-        'btnShop
-        '
-        Me.btnShop.ForeColor = System.Drawing.Color.Black
-        Me.btnShop.Location = New System.Drawing.Point(54, 76)
-        Me.btnShop.Name = "btnShop"
-        Me.btnShop.Size = New System.Drawing.Size(90, 28)
-        Me.btnShop.TabIndex = 6
-        Me.btnShop.Text = "Accept"
-        Me.btnShop.UseVisualStyleBackColor = True
-        '
-        'fraResource
-        '
-        Me.fraResource.Controls.Add(Me.btnResourceOk)
-        Me.fraResource.Controls.Add(Me.scrlResource)
-        Me.fraResource.Controls.Add(Me.lblResource)
-        Me.fraResource.ForeColor = System.Drawing.Color.LightGray
-        Me.fraResource.Location = New System.Drawing.Point(216, 8)
-        Me.fraResource.Name = "fraResource"
-        Me.fraResource.Size = New System.Drawing.Size(206, 120)
-        Me.fraResource.TabIndex = 22
-        Me.fraResource.TabStop = False
-        Me.fraResource.Text = "Resources"
-        '
-        'btnResourceOk
-        '
-        Me.btnResourceOk.ForeColor = System.Drawing.Color.Black
-        Me.btnResourceOk.Location = New System.Drawing.Point(56, 86)
-        Me.btnResourceOk.Name = "btnResourceOk"
-        Me.btnResourceOk.Size = New System.Drawing.Size(90, 28)
-        Me.btnResourceOk.TabIndex = 6
-        Me.btnResourceOk.Text = "Accept"
-        Me.btnResourceOk.UseVisualStyleBackColor = True
-        '
-        'scrlResource
-        '
-        Me.scrlResource.Location = New System.Drawing.Point(9, 49)
-        Me.scrlResource.Name = "scrlResource"
-        Me.scrlResource.Size = New System.Drawing.Size(182, 18)
-        Me.scrlResource.TabIndex = 3
-        '
-        'lblResource
-        '
-        Me.lblResource.AutoSize = True
-        Me.lblResource.Location = New System.Drawing.Point(6, 29)
-        Me.lblResource.Name = "lblResource"
-        Me.lblResource.Size = New System.Drawing.Size(41, 13)
-        Me.lblResource.TabIndex = 0
-        Me.lblResource.Text = "Object:"
-        '
-        'fraMapItem
-        '
-        Me.fraMapItem.Controls.Add(Me.picMapItem)
-        Me.fraMapItem.Controls.Add(Me.btnMapItem)
-        Me.fraMapItem.Controls.Add(Me.scrlMapItemValue)
-        Me.fraMapItem.Controls.Add(Me.scrlMapItem)
-        Me.fraMapItem.Controls.Add(Me.lblMapItem)
-        Me.fraMapItem.ForeColor = System.Drawing.Color.LightGray
-        Me.fraMapItem.Location = New System.Drawing.Point(216, 134)
-        Me.fraMapItem.Name = "fraMapItem"
-        Me.fraMapItem.Size = New System.Drawing.Size(206, 112)
-        Me.fraMapItem.TabIndex = 19
-        Me.fraMapItem.TabStop = False
-        Me.fraMapItem.Text = "Map Item"
-        '
-        'picMapItem
-        '
-        Me.picMapItem.BackColor = System.Drawing.Color.Black
-        Me.picMapItem.Location = New System.Drawing.Point(161, 31)
-        Me.picMapItem.Name = "picMapItem"
-        Me.picMapItem.Size = New System.Drawing.Size(32, 32)
-        Me.picMapItem.TabIndex = 7
-        Me.picMapItem.TabStop = False
-        '
-        'btnMapItem
-        '
-        Me.btnMapItem.ForeColor = System.Drawing.Color.Black
-        Me.btnMapItem.Location = New System.Drawing.Point(58, 78)
-        Me.btnMapItem.Name = "btnMapItem"
-        Me.btnMapItem.Size = New System.Drawing.Size(90, 28)
-        Me.btnMapItem.TabIndex = 6
-        Me.btnMapItem.Text = "Accept"
-        Me.btnMapItem.UseVisualStyleBackColor = True
-        '
-        'scrlMapItemValue
-        '
-        Me.scrlMapItemValue.Location = New System.Drawing.Point(9, 53)
-        Me.scrlMapItemValue.Name = "scrlMapItemValue"
-        Me.scrlMapItemValue.Size = New System.Drawing.Size(149, 18)
-        Me.scrlMapItemValue.TabIndex = 4
-        '
-        'scrlMapItem
-        '
-        Me.scrlMapItem.Location = New System.Drawing.Point(9, 31)
-        Me.scrlMapItem.Name = "scrlMapItem"
-        Me.scrlMapItem.Size = New System.Drawing.Size(149, 18)
-        Me.scrlMapItem.TabIndex = 3
-        '
-        'lblMapItem
-        '
-        Me.lblMapItem.AutoSize = True
-        Me.lblMapItem.Location = New System.Drawing.Point(6, 16)
-        Me.lblMapItem.Name = "lblMapItem"
-        Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
-        Me.lblMapItem.TabIndex = 0
-        Me.lblMapItem.Text = "Item: None x0"
-        '
-        'fraTrap
-        '
-        Me.fraTrap.Controls.Add(Me.btnTrap)
-        Me.fraTrap.Controls.Add(Me.scrlTrap)
-        Me.fraTrap.Controls.Add(Me.lblTrap)
-        Me.fraTrap.ForeColor = System.Drawing.Color.LightGray
-        Me.fraTrap.Location = New System.Drawing.Point(3, 133)
-        Me.fraTrap.Name = "fraTrap"
-        Me.fraTrap.Size = New System.Drawing.Size(207, 113)
-        Me.fraTrap.TabIndex = 26
-        Me.fraTrap.TabStop = False
-        Me.fraTrap.Text = "Trap"
-        '
-        'btnTrap
-        '
-        Me.btnTrap.ForeColor = System.Drawing.Color.Black
-        Me.btnTrap.Location = New System.Drawing.Point(53, 79)
-        Me.btnTrap.Name = "btnTrap"
-        Me.btnTrap.Size = New System.Drawing.Size(90, 28)
-        Me.btnTrap.TabIndex = 42
-        Me.btnTrap.Text = "Accept"
-        Me.btnTrap.UseVisualStyleBackColor = True
-        '
-        'scrlTrap
-        '
-        Me.scrlTrap.Location = New System.Drawing.Point(11, 32)
-        Me.scrlTrap.Name = "scrlTrap"
-        Me.scrlTrap.Size = New System.Drawing.Size(191, 17)
-        Me.scrlTrap.TabIndex = 41
-        '
-        'lblTrap
-        '
-        Me.lblTrap.AutoSize = True
-        Me.lblTrap.Location = New System.Drawing.Point(6, 15)
-        Me.lblTrap.Name = "lblTrap"
-        Me.lblTrap.Size = New System.Drawing.Size(55, 13)
-        Me.lblTrap.TabIndex = 40
-        Me.lblTrap.Text = "Amount: 0"
-        '
         'scrlMapViewV
         '
         Me.scrlMapViewV.BackColor = System.Drawing.SystemColors.ControlDark
@@ -2039,6 +1517,528 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
+        '
+        'fraTrap
+        '
+        Me.fraTrap.Controls.Add(Me.btnTrap)
+        Me.fraTrap.Controls.Add(Me.scrlTrap)
+        Me.fraTrap.Controls.Add(Me.lblTrap)
+        Me.fraTrap.ForeColor = System.Drawing.Color.LightGray
+        Me.fraTrap.Location = New System.Drawing.Point(3, 133)
+        Me.fraTrap.Name = "fraTrap"
+        Me.fraTrap.Size = New System.Drawing.Size(207, 113)
+        Me.fraTrap.TabIndex = 26
+        Me.fraTrap.TabStop = False
+        Me.fraTrap.Text = "Trap"
+        '
+        'lblTrap
+        '
+        Me.lblTrap.AutoSize = True
+        Me.lblTrap.Location = New System.Drawing.Point(6, 15)
+        Me.lblTrap.Name = "lblTrap"
+        Me.lblTrap.Size = New System.Drawing.Size(55, 13)
+        Me.lblTrap.TabIndex = 40
+        Me.lblTrap.Text = "Amount: 0"
+        '
+        'scrlTrap
+        '
+        Me.scrlTrap.Location = New System.Drawing.Point(11, 32)
+        Me.scrlTrap.Name = "scrlTrap"
+        Me.scrlTrap.Size = New System.Drawing.Size(191, 17)
+        Me.scrlTrap.TabIndex = 41
+        '
+        'btnTrap
+        '
+        Me.btnTrap.ForeColor = System.Drawing.Color.Black
+        Me.btnTrap.Location = New System.Drawing.Point(53, 79)
+        Me.btnTrap.Name = "btnTrap"
+        Me.btnTrap.Size = New System.Drawing.Size(90, 28)
+        Me.btnTrap.TabIndex = 42
+        Me.btnTrap.Text = "Accept"
+        Me.btnTrap.UseVisualStyleBackColor = True
+        '
+        'fraMapItem
+        '
+        Me.fraMapItem.Controls.Add(Me.picMapItem)
+        Me.fraMapItem.Controls.Add(Me.btnMapItem)
+        Me.fraMapItem.Controls.Add(Me.scrlMapItemValue)
+        Me.fraMapItem.Controls.Add(Me.scrlMapItem)
+        Me.fraMapItem.Controls.Add(Me.lblMapItem)
+        Me.fraMapItem.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapItem.Location = New System.Drawing.Point(216, 134)
+        Me.fraMapItem.Name = "fraMapItem"
+        Me.fraMapItem.Size = New System.Drawing.Size(206, 112)
+        Me.fraMapItem.TabIndex = 19
+        Me.fraMapItem.TabStop = False
+        Me.fraMapItem.Text = "Map Item"
+        '
+        'lblMapItem
+        '
+        Me.lblMapItem.AutoSize = True
+        Me.lblMapItem.Location = New System.Drawing.Point(6, 16)
+        Me.lblMapItem.Name = "lblMapItem"
+        Me.lblMapItem.Size = New System.Drawing.Size(73, 13)
+        Me.lblMapItem.TabIndex = 0
+        Me.lblMapItem.Text = "Item: None x0"
+        '
+        'scrlMapItem
+        '
+        Me.scrlMapItem.Location = New System.Drawing.Point(9, 31)
+        Me.scrlMapItem.Name = "scrlMapItem"
+        Me.scrlMapItem.Size = New System.Drawing.Size(149, 18)
+        Me.scrlMapItem.TabIndex = 3
+        '
+        'scrlMapItemValue
+        '
+        Me.scrlMapItemValue.Location = New System.Drawing.Point(9, 53)
+        Me.scrlMapItemValue.Name = "scrlMapItemValue"
+        Me.scrlMapItemValue.Size = New System.Drawing.Size(149, 18)
+        Me.scrlMapItemValue.TabIndex = 4
+        '
+        'btnMapItem
+        '
+        Me.btnMapItem.ForeColor = System.Drawing.Color.Black
+        Me.btnMapItem.Location = New System.Drawing.Point(58, 78)
+        Me.btnMapItem.Name = "btnMapItem"
+        Me.btnMapItem.Size = New System.Drawing.Size(90, 28)
+        Me.btnMapItem.TabIndex = 6
+        Me.btnMapItem.Text = "Accept"
+        Me.btnMapItem.UseVisualStyleBackColor = True
+        '
+        'picMapItem
+        '
+        Me.picMapItem.BackColor = System.Drawing.Color.Black
+        Me.picMapItem.Location = New System.Drawing.Point(161, 31)
+        Me.picMapItem.Name = "picMapItem"
+        Me.picMapItem.Size = New System.Drawing.Size(32, 32)
+        Me.picMapItem.TabIndex = 7
+        Me.picMapItem.TabStop = False
+        '
+        'fraResource
+        '
+        Me.fraResource.Controls.Add(Me.btnResourceOk)
+        Me.fraResource.Controls.Add(Me.scrlResource)
+        Me.fraResource.Controls.Add(Me.lblResource)
+        Me.fraResource.ForeColor = System.Drawing.Color.LightGray
+        Me.fraResource.Location = New System.Drawing.Point(216, 8)
+        Me.fraResource.Name = "fraResource"
+        Me.fraResource.Size = New System.Drawing.Size(206, 120)
+        Me.fraResource.TabIndex = 22
+        Me.fraResource.TabStop = False
+        Me.fraResource.Text = "Resources"
+        '
+        'lblResource
+        '
+        Me.lblResource.AutoSize = True
+        Me.lblResource.Location = New System.Drawing.Point(6, 29)
+        Me.lblResource.Name = "lblResource"
+        Me.lblResource.Size = New System.Drawing.Size(41, 13)
+        Me.lblResource.TabIndex = 0
+        Me.lblResource.Text = "Object:"
+        '
+        'scrlResource
+        '
+        Me.scrlResource.Location = New System.Drawing.Point(9, 49)
+        Me.scrlResource.Name = "scrlResource"
+        Me.scrlResource.Size = New System.Drawing.Size(182, 18)
+        Me.scrlResource.TabIndex = 3
+        '
+        'btnResourceOk
+        '
+        Me.btnResourceOk.ForeColor = System.Drawing.Color.Black
+        Me.btnResourceOk.Location = New System.Drawing.Point(56, 86)
+        Me.btnResourceOk.Name = "btnResourceOk"
+        Me.btnResourceOk.Size = New System.Drawing.Size(90, 28)
+        Me.btnResourceOk.TabIndex = 6
+        Me.btnResourceOk.Text = "Accept"
+        Me.btnResourceOk.UseVisualStyleBackColor = True
+        '
+        'fraShop
+        '
+        Me.fraShop.Controls.Add(Me.cmbShop)
+        Me.fraShop.Controls.Add(Me.btnShop)
+        Me.fraShop.ForeColor = System.Drawing.Color.LightGray
+        Me.fraShop.Location = New System.Drawing.Point(216, 252)
+        Me.fraShop.Name = "fraShop"
+        Me.fraShop.Size = New System.Drawing.Size(206, 111)
+        Me.fraShop.TabIndex = 24
+        Me.fraShop.TabStop = False
+        Me.fraShop.Text = "Shop"
+        '
+        'btnShop
+        '
+        Me.btnShop.ForeColor = System.Drawing.Color.Black
+        Me.btnShop.Location = New System.Drawing.Point(54, 76)
+        Me.btnShop.Name = "btnShop"
+        Me.btnShop.Size = New System.Drawing.Size(90, 28)
+        Me.btnShop.TabIndex = 6
+        Me.btnShop.Text = "Accept"
+        Me.btnShop.UseVisualStyleBackColor = True
+        '
+        'cmbShop
+        '
+        Me.cmbShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbShop.FormattingEnabled = True
+        Me.cmbShop.Location = New System.Drawing.Point(6, 19)
+        Me.cmbShop.Name = "cmbShop"
+        Me.cmbShop.Size = New System.Drawing.Size(192, 21)
+        Me.cmbShop.TabIndex = 37
+        '
+        'fraHeal
+        '
+        Me.fraHeal.Controls.Add(Me.scrlHeal)
+        Me.fraHeal.Controls.Add(Me.lblHeal)
+        Me.fraHeal.Controls.Add(Me.cmbHeal)
+        Me.fraHeal.Controls.Add(Me.btnHeal)
+        Me.fraHeal.ForeColor = System.Drawing.Color.LightGray
+        Me.fraHeal.Location = New System.Drawing.Point(3, 252)
+        Me.fraHeal.Name = "fraHeal"
+        Me.fraHeal.Size = New System.Drawing.Size(207, 111)
+        Me.fraHeal.TabIndex = 25
+        Me.fraHeal.TabStop = False
+        Me.fraHeal.Text = "Heal"
+        '
+        'btnHeal
+        '
+        Me.btnHeal.ForeColor = System.Drawing.Color.Black
+        Me.btnHeal.Location = New System.Drawing.Point(53, 76)
+        Me.btnHeal.Name = "btnHeal"
+        Me.btnHeal.Size = New System.Drawing.Size(90, 28)
+        Me.btnHeal.TabIndex = 6
+        Me.btnHeal.Text = "Accept"
+        Me.btnHeal.UseVisualStyleBackColor = True
+        '
+        'cmbHeal
+        '
+        Me.cmbHeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbHeal.FormattingEnabled = True
+        Me.cmbHeal.Items.AddRange(New Object() {"Hp", "Mp"})
+        Me.cmbHeal.Location = New System.Drawing.Point(7, 19)
+        Me.cmbHeal.Name = "cmbHeal"
+        Me.cmbHeal.Size = New System.Drawing.Size(192, 21)
+        Me.cmbHeal.TabIndex = 37
+        '
+        'lblHeal
+        '
+        Me.lblHeal.AutoSize = True
+        Me.lblHeal.Location = New System.Drawing.Point(8, 43)
+        Me.lblHeal.Name = "lblHeal"
+        Me.lblHeal.Size = New System.Drawing.Size(55, 13)
+        Me.lblHeal.TabIndex = 38
+        Me.lblHeal.Text = "Amount: 0"
+        '
+        'scrlHeal
+        '
+        Me.scrlHeal.Location = New System.Drawing.Point(7, 56)
+        Me.scrlHeal.Name = "scrlHeal"
+        Me.scrlHeal.Size = New System.Drawing.Size(191, 17)
+        Me.scrlHeal.TabIndex = 39
+        '
+        'fraNpcSpawn
+        '
+        Me.fraNpcSpawn.Controls.Add(Me.lstNpc)
+        Me.fraNpcSpawn.Controls.Add(Me.btnNpcSpawn)
+        Me.fraNpcSpawn.Controls.Add(Me.scrlNpcDir)
+        Me.fraNpcSpawn.Controls.Add(Me.lblNpcDir)
+        Me.fraNpcSpawn.ForeColor = System.Drawing.Color.LightGray
+        Me.fraNpcSpawn.Location = New System.Drawing.Point(3, 8)
+        Me.fraNpcSpawn.Name = "fraNpcSpawn"
+        Me.fraNpcSpawn.Size = New System.Drawing.Size(207, 120)
+        Me.fraNpcSpawn.TabIndex = 23
+        Me.fraNpcSpawn.TabStop = False
+        Me.fraNpcSpawn.Text = "Npc Spawn"
+        '
+        'lblNpcDir
+        '
+        Me.lblNpcDir.AutoSize = True
+        Me.lblNpcDir.Location = New System.Drawing.Point(3, 49)
+        Me.lblNpcDir.Name = "lblNpcDir"
+        Me.lblNpcDir.Size = New System.Drawing.Size(69, 13)
+        Me.lblNpcDir.TabIndex = 0
+        Me.lblNpcDir.Text = "Direction: Up"
+        '
+        'scrlNpcDir
+        '
+        Me.scrlNpcDir.LargeChange = 1
+        Me.scrlNpcDir.Location = New System.Drawing.Point(6, 64)
+        Me.scrlNpcDir.Maximum = 3
+        Me.scrlNpcDir.Name = "scrlNpcDir"
+        Me.scrlNpcDir.Size = New System.Drawing.Size(193, 18)
+        Me.scrlNpcDir.TabIndex = 3
+        '
+        'btnNpcSpawn
+        '
+        Me.btnNpcSpawn.BackColor = System.Drawing.SystemColors.Control
+        Me.btnNpcSpawn.ForeColor = System.Drawing.Color.Black
+        Me.btnNpcSpawn.Location = New System.Drawing.Point(53, 86)
+        Me.btnNpcSpawn.Name = "btnNpcSpawn"
+        Me.btnNpcSpawn.Size = New System.Drawing.Size(90, 28)
+        Me.btnNpcSpawn.TabIndex = 6
+        Me.btnNpcSpawn.Text = "Accept"
+        Me.btnNpcSpawn.UseVisualStyleBackColor = False
+        '
+        'lstNpc
+        '
+        Me.lstNpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.lstNpc.FormattingEnabled = True
+        Me.lstNpc.Location = New System.Drawing.Point(6, 21)
+        Me.lstNpc.Name = "lstNpc"
+        Me.lstNpc.Size = New System.Drawing.Size(192, 21)
+        Me.lstNpc.TabIndex = 37
+        '
+        'fraMapKey
+        '
+        Me.fraMapKey.Controls.Add(Me.chkMapKey)
+        Me.fraMapKey.Controls.Add(Me.picMapKey)
+        Me.fraMapKey.Controls.Add(Me.btnMapKey)
+        Me.fraMapKey.Controls.Add(Me.scrlMapKey)
+        Me.fraMapKey.Controls.Add(Me.lblMapKey)
+        Me.fraMapKey.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapKey.Location = New System.Drawing.Point(216, 369)
+        Me.fraMapKey.Name = "fraMapKey"
+        Me.fraMapKey.Size = New System.Drawing.Size(206, 138)
+        Me.fraMapKey.TabIndex = 20
+        Me.fraMapKey.TabStop = False
+        Me.fraMapKey.Text = "Map Key"
+        '
+        'lblMapKey
+        '
+        Me.lblMapKey.AutoSize = True
+        Me.lblMapKey.Location = New System.Drawing.Point(6, 22)
+        Me.lblMapKey.Name = "lblMapKey"
+        Me.lblMapKey.Size = New System.Drawing.Size(59, 13)
+        Me.lblMapKey.TabIndex = 0
+        Me.lblMapKey.Text = "Item: None"
+        '
+        'scrlMapKey
+        '
+        Me.scrlMapKey.Location = New System.Drawing.Point(9, 37)
+        Me.scrlMapKey.Name = "scrlMapKey"
+        Me.scrlMapKey.Size = New System.Drawing.Size(160, 18)
+        Me.scrlMapKey.TabIndex = 3
+        '
+        'btnMapKey
+        '
+        Me.btnMapKey.ForeColor = System.Drawing.Color.Black
+        Me.btnMapKey.Location = New System.Drawing.Point(54, 103)
+        Me.btnMapKey.Name = "btnMapKey"
+        Me.btnMapKey.Size = New System.Drawing.Size(90, 28)
+        Me.btnMapKey.TabIndex = 6
+        Me.btnMapKey.Text = "Accept"
+        Me.btnMapKey.UseVisualStyleBackColor = True
+        '
+        'picMapKey
+        '
+        Me.picMapKey.BackColor = System.Drawing.Color.Black
+        Me.picMapKey.Location = New System.Drawing.Point(172, 25)
+        Me.picMapKey.Name = "picMapKey"
+        Me.picMapKey.Size = New System.Drawing.Size(32, 32)
+        Me.picMapKey.TabIndex = 7
+        Me.picMapKey.TabStop = False
+        '
+        'chkMapKey
+        '
+        Me.chkMapKey.AutoSize = True
+        Me.chkMapKey.Checked = True
+        Me.chkMapKey.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkMapKey.Location = New System.Drawing.Point(9, 64)
+        Me.chkMapKey.Name = "chkMapKey"
+        Me.chkMapKey.Size = New System.Drawing.Size(152, 17)
+        Me.chkMapKey.TabIndex = 8
+        Me.chkMapKey.Text = "Take Key Away Upon Use"
+        Me.chkMapKey.UseVisualStyleBackColor = True
+        '
+        'fraKeyOpen
+        '
+        Me.fraKeyOpen.Controls.Add(Me.scrlKeyY)
+        Me.fraKeyOpen.Controls.Add(Me.lblKeyY)
+        Me.fraKeyOpen.Controls.Add(Me.btnMapKeyOpen)
+        Me.fraKeyOpen.Controls.Add(Me.scrlKeyX)
+        Me.fraKeyOpen.Controls.Add(Me.lblKeyX)
+        Me.fraKeyOpen.ForeColor = System.Drawing.Color.LightGray
+        Me.fraKeyOpen.Location = New System.Drawing.Point(3, 369)
+        Me.fraKeyOpen.Name = "fraKeyOpen"
+        Me.fraKeyOpen.Size = New System.Drawing.Size(207, 138)
+        Me.fraKeyOpen.TabIndex = 21
+        Me.fraKeyOpen.TabStop = False
+        Me.fraKeyOpen.Text = "Map Key Open"
+        '
+        'lblKeyX
+        '
+        Me.lblKeyX.AutoSize = True
+        Me.lblKeyX.Location = New System.Drawing.Point(6, 22)
+        Me.lblKeyX.Name = "lblKeyX"
+        Me.lblKeyX.Size = New System.Drawing.Size(26, 13)
+        Me.lblKeyX.TabIndex = 0
+        Me.lblKeyX.Text = "X: 0"
+        '
+        'scrlKeyX
+        '
+        Me.scrlKeyX.Location = New System.Drawing.Point(9, 37)
+        Me.scrlKeyX.Name = "scrlKeyX"
+        Me.scrlKeyX.Size = New System.Drawing.Size(160, 18)
+        Me.scrlKeyX.TabIndex = 3
+        '
+        'btnMapKeyOpen
+        '
+        Me.btnMapKeyOpen.ForeColor = System.Drawing.Color.Black
+        Me.btnMapKeyOpen.Location = New System.Drawing.Point(53, 105)
+        Me.btnMapKeyOpen.Name = "btnMapKeyOpen"
+        Me.btnMapKeyOpen.Size = New System.Drawing.Size(90, 28)
+        Me.btnMapKeyOpen.TabIndex = 6
+        Me.btnMapKeyOpen.Text = "Accept"
+        Me.btnMapKeyOpen.UseVisualStyleBackColor = True
+        '
+        'lblKeyY
+        '
+        Me.lblKeyY.AutoSize = True
+        Me.lblKeyY.Location = New System.Drawing.Point(6, 61)
+        Me.lblKeyY.Name = "lblKeyY"
+        Me.lblKeyY.Size = New System.Drawing.Size(26, 13)
+        Me.lblKeyY.TabIndex = 7
+        Me.lblKeyY.Text = "Y: 0"
+        '
+        'scrlKeyY
+        '
+        Me.scrlKeyY.Location = New System.Drawing.Point(9, 76)
+        Me.scrlKeyY.Name = "scrlKeyY"
+        Me.scrlKeyY.Size = New System.Drawing.Size(160, 18)
+        Me.scrlKeyY.TabIndex = 8
+        '
+        'fraBuyHouse
+        '
+        Me.fraBuyHouse.Controls.Add(Me.btnHouseTileOk)
+        Me.fraBuyHouse.Controls.Add(Me.scrlBuyHouse)
+        Me.fraBuyHouse.Controls.Add(Me.lblHouseName)
+        Me.fraBuyHouse.ForeColor = System.Drawing.Color.LightGray
+        Me.fraBuyHouse.Location = New System.Drawing.Point(428, 9)
+        Me.fraBuyHouse.Name = "fraBuyHouse"
+        Me.fraBuyHouse.Size = New System.Drawing.Size(211, 119)
+        Me.fraBuyHouse.TabIndex = 27
+        Me.fraBuyHouse.TabStop = False
+        Me.fraBuyHouse.Text = "Buy House"
+        '
+        'lblHouseName
+        '
+        Me.lblHouseName.AutoSize = True
+        Me.lblHouseName.Location = New System.Drawing.Point(6, 16)
+        Me.lblHouseName.Name = "lblHouseName"
+        Me.lblHouseName.Size = New System.Drawing.Size(41, 13)
+        Me.lblHouseName.TabIndex = 0
+        Me.lblHouseName.Text = "House:"
+        '
+        'scrlBuyHouse
+        '
+        Me.scrlBuyHouse.LargeChange = 1
+        Me.scrlBuyHouse.Location = New System.Drawing.Point(9, 36)
+        Me.scrlBuyHouse.Name = "scrlBuyHouse"
+        Me.scrlBuyHouse.Size = New System.Drawing.Size(193, 18)
+        Me.scrlBuyHouse.TabIndex = 3
+        '
+        'btnHouseTileOk
+        '
+        Me.btnHouseTileOk.ForeColor = System.Drawing.Color.Black
+        Me.btnHouseTileOk.Location = New System.Drawing.Point(58, 85)
+        Me.btnHouseTileOk.Name = "btnHouseTileOk"
+        Me.btnHouseTileOk.Size = New System.Drawing.Size(90, 28)
+        Me.btnHouseTileOk.TabIndex = 6
+        Me.btnHouseTileOk.Text = "Accept"
+        Me.btnHouseTileOk.UseVisualStyleBackColor = True
+        '
+        'fraMapWarp
+        '
+        Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
+        Me.fraMapWarp.Controls.Add(Me.scrlMapWarpMap)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpY)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpX)
+        Me.fraMapWarp.Controls.Add(Me.lblMapWarpMap)
+        Me.fraMapWarp.ForeColor = System.Drawing.Color.LightGray
+        Me.fraMapWarp.Location = New System.Drawing.Point(428, 134)
+        Me.fraMapWarp.Name = "fraMapWarp"
+        Me.fraMapWarp.Size = New System.Drawing.Size(211, 112)
+        Me.fraMapWarp.TabIndex = 18
+        Me.fraMapWarp.TabStop = False
+        Me.fraMapWarp.Text = "Map Warp"
+        '
+        'lblMapWarpMap
+        '
+        Me.lblMapWarpMap.AutoSize = True
+        Me.lblMapWarpMap.Location = New System.Drawing.Point(6, 21)
+        Me.lblMapWarpMap.Name = "lblMapWarpMap"
+        Me.lblMapWarpMap.Size = New System.Drawing.Size(40, 13)
+        Me.lblMapWarpMap.TabIndex = 0
+        Me.lblMapWarpMap.Text = "Map: 1"
+        '
+        'lblMapWarpX
+        '
+        Me.lblMapWarpX.AutoSize = True
+        Me.lblMapWarpX.Location = New System.Drawing.Point(7, 41)
+        Me.lblMapWarpX.Name = "lblMapWarpX"
+        Me.lblMapWarpX.Size = New System.Drawing.Size(26, 13)
+        Me.lblMapWarpX.TabIndex = 1
+        Me.lblMapWarpX.Text = "X: 1"
+        '
+        'lblMapWarpY
+        '
+        Me.lblMapWarpY.AutoSize = True
+        Me.lblMapWarpY.Location = New System.Drawing.Point(7, 62)
+        Me.lblMapWarpY.Name = "lblMapWarpY"
+        Me.lblMapWarpY.Size = New System.Drawing.Size(26, 13)
+        Me.lblMapWarpY.TabIndex = 2
+        Me.lblMapWarpY.Text = "Y: 1"
+        '
+        'scrlMapWarpMap
+        '
+        Me.scrlMapWarpMap.Location = New System.Drawing.Point(58, 16)
+        Me.scrlMapWarpMap.Name = "scrlMapWarpMap"
+        Me.scrlMapWarpMap.Size = New System.Drawing.Size(144, 18)
+        Me.scrlMapWarpMap.TabIndex = 3
+        '
+        'scrlMapWarpX
+        '
+        Me.scrlMapWarpX.Location = New System.Drawing.Point(58, 38)
+        Me.scrlMapWarpX.Name = "scrlMapWarpX"
+        Me.scrlMapWarpX.Size = New System.Drawing.Size(144, 18)
+        Me.scrlMapWarpX.TabIndex = 4
+        '
+        'scrlMapWarpY
+        '
+        Me.scrlMapWarpY.Location = New System.Drawing.Point(58, 60)
+        Me.scrlMapWarpY.Name = "scrlMapWarpY"
+        Me.scrlMapWarpY.Size = New System.Drawing.Size(144, 18)
+        Me.scrlMapWarpY.TabIndex = 5
+        '
+        'btnMapWarp
+        '
+        Me.btnMapWarp.ForeColor = System.Drawing.Color.Black
+        Me.btnMapWarp.Location = New System.Drawing.Point(84, 81)
+        Me.btnMapWarp.Name = "btnMapWarp"
+        Me.btnMapWarp.Size = New System.Drawing.Size(90, 28)
+        Me.btnMapWarp.TabIndex = 6
+        Me.btnMapWarp.Text = "Accept"
+        Me.btnMapWarp.UseVisualStyleBackColor = True
+        '
+        'pnlAttributes
+        '
+        Me.pnlAttributes.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
+        Me.pnlAttributes.Controls.Add(Me.fraBuyHouse)
+        Me.pnlAttributes.Controls.Add(Me.fraKeyOpen)
+        Me.pnlAttributes.Controls.Add(Me.fraMapKey)
+        Me.pnlAttributes.Controls.Add(Me.fraNpcSpawn)
+        Me.pnlAttributes.Controls.Add(Me.fraHeal)
+        Me.pnlAttributes.Controls.Add(Me.fraShop)
+        Me.pnlAttributes.Controls.Add(Me.fraResource)
+        Me.pnlAttributes.Controls.Add(Me.fraMapItem)
+        Me.pnlAttributes.Controls.Add(Me.fraTrap)
+        Me.pnlAttributes.ForeColor = System.Drawing.Color.LightGray
+        Me.pnlAttributes.Location = New System.Drawing.Point(6, 34)
+        Me.pnlAttributes.Name = "pnlAttributes"
+        Me.pnlAttributes.Size = New System.Drawing.Size(709, 516)
+        Me.pnlAttributes.TabIndex = 11
+        Me.pnlAttributes.Visible = False
         '
         'FrmEditor_MapEditor
         '
@@ -2087,29 +2087,29 @@ Partial Class FrmEditor_MapEditor
         Me.ToolStrip.ResumeLayout(False)
         Me.ToolStrip.PerformLayout()
         Me.pnlBack2.ResumeLayout(False)
-        Me.pnlAttributes.ResumeLayout(False)
-        Me.fraMapWarp.ResumeLayout(False)
-        Me.fraMapWarp.PerformLayout()
-        Me.fraBuyHouse.ResumeLayout(False)
-        Me.fraBuyHouse.PerformLayout()
-        Me.fraKeyOpen.ResumeLayout(False)
-        Me.fraKeyOpen.PerformLayout()
-        Me.fraMapKey.ResumeLayout(False)
-        Me.fraMapKey.PerformLayout()
-        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.fraNpcSpawn.ResumeLayout(False)
-        Me.fraNpcSpawn.PerformLayout()
-        Me.fraHeal.ResumeLayout(False)
-        Me.fraHeal.PerformLayout()
-        Me.fraShop.ResumeLayout(False)
-        Me.fraResource.ResumeLayout(False)
-        Me.fraResource.PerformLayout()
+        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraTrap.ResumeLayout(False)
+        Me.fraTrap.PerformLayout()
         Me.fraMapItem.ResumeLayout(False)
         Me.fraMapItem.PerformLayout()
         CType(Me.picMapItem, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.fraTrap.ResumeLayout(False)
-        Me.fraTrap.PerformLayout()
-        CType(Me.picScreen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraResource.ResumeLayout(False)
+        Me.fraResource.PerformLayout()
+        Me.fraShop.ResumeLayout(False)
+        Me.fraHeal.ResumeLayout(False)
+        Me.fraHeal.PerformLayout()
+        Me.fraNpcSpawn.ResumeLayout(False)
+        Me.fraNpcSpawn.PerformLayout()
+        Me.fraMapKey.ResumeLayout(False)
+        Me.fraMapKey.PerformLayout()
+        CType(Me.picMapKey, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraKeyOpen.ResumeLayout(False)
+        Me.fraKeyOpen.PerformLayout()
+        Me.fraBuyHouse.ResumeLayout(False)
+        Me.fraBuyHouse.PerformLayout()
+        Me.fraMapWarp.ResumeLayout(False)
+        Me.fraMapWarp.PerformLayout()
+        Me.pnlAttributes.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2174,58 +2174,6 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents optResource As DarkUI.Controls.DarkRadioButton
     Friend WithEvents tslCurXY As ToolStripStatusLabel
     Friend WithEvents btnClearAttribute As DarkUI.Controls.DarkButton
-    Friend WithEvents pnlAttributes As Panel
-    Friend WithEvents fraMapWarp As GroupBox
-    Friend WithEvents btnMapWarp As Button
-    Friend WithEvents scrlMapWarpY As HScrollBar
-    Friend WithEvents scrlMapWarpX As HScrollBar
-    Friend WithEvents scrlMapWarpMap As HScrollBar
-    Friend WithEvents lblMapWarpY As Label
-    Friend WithEvents lblMapWarpX As Label
-    Friend WithEvents lblMapWarpMap As Label
-    Friend WithEvents fraBuyHouse As GroupBox
-    Friend WithEvents btnHouseTileOk As Button
-    Friend WithEvents scrlBuyHouse As HScrollBar
-    Friend WithEvents lblHouseName As Label
-    Friend WithEvents fraKeyOpen As GroupBox
-    Friend WithEvents scrlKeyY As HScrollBar
-    Friend WithEvents lblKeyY As Label
-    Friend WithEvents btnMapKeyOpen As Button
-    Friend WithEvents scrlKeyX As HScrollBar
-    Friend WithEvents lblKeyX As Label
-    Friend WithEvents fraMapKey As GroupBox
-    Friend WithEvents chkMapKey As CheckBox
-    Friend WithEvents picMapKey As PictureBox
-    Friend WithEvents btnMapKey As Button
-    Friend WithEvents scrlMapKey As HScrollBar
-    Friend WithEvents lblMapKey As Label
-    Friend WithEvents fraNpcSpawn As GroupBox
-    Friend WithEvents lstNpc As ComboBox
-    Friend WithEvents btnNpcSpawn As Button
-    Friend WithEvents scrlNpcDir As HScrollBar
-    Friend WithEvents lblNpcDir As Label
-    Friend WithEvents fraHeal As GroupBox
-    Friend WithEvents scrlHeal As HScrollBar
-    Friend WithEvents lblHeal As Label
-    Friend WithEvents cmbHeal As ComboBox
-    Friend WithEvents btnHeal As Button
-    Friend WithEvents fraShop As GroupBox
-    Friend WithEvents cmbShop As ComboBox
-    Friend WithEvents btnShop As Button
-    Friend WithEvents fraResource As GroupBox
-    Friend WithEvents btnResourceOk As Button
-    Friend WithEvents scrlResource As HScrollBar
-    Friend WithEvents lblResource As Label
-    Friend WithEvents fraMapItem As GroupBox
-    Friend WithEvents picMapItem As PictureBox
-    Friend WithEvents btnMapItem As Button
-    Friend WithEvents scrlMapItemValue As HScrollBar
-    Friend WithEvents scrlMapItem As HScrollBar
-    Friend WithEvents lblMapItem As Label
-    Friend WithEvents fraTrap As GroupBox
-    Friend WithEvents btnTrap As Button
-    Friend WithEvents scrlTrap As HScrollBar
-    Friend WithEvents lblTrap As Label
     Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
     Friend WithEvents chkInstance As DarkUI.Controls.DarkCheckBox
     Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
@@ -2283,4 +2231,56 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents cmbLayers As DarkUI.Controls.DarkComboBox
     Friend WithEvents cmbTileSets As DarkUI.Controls.DarkComboBox
     Friend WithEvents cmbAutoTile As DarkUI.Controls.DarkComboBox
+    Friend WithEvents pnlAttributes As Panel
+    Friend WithEvents fraMapWarp As GroupBox
+    Friend WithEvents btnMapWarp As Button
+    Friend WithEvents scrlMapWarpY As HScrollBar
+    Friend WithEvents scrlMapWarpX As HScrollBar
+    Friend WithEvents scrlMapWarpMap As HScrollBar
+    Friend WithEvents lblMapWarpY As Label
+    Friend WithEvents lblMapWarpX As Label
+    Friend WithEvents lblMapWarpMap As Label
+    Friend WithEvents fraBuyHouse As GroupBox
+    Friend WithEvents btnHouseTileOk As Button
+    Friend WithEvents scrlBuyHouse As HScrollBar
+    Friend WithEvents lblHouseName As Label
+    Friend WithEvents fraKeyOpen As GroupBox
+    Friend WithEvents scrlKeyY As HScrollBar
+    Friend WithEvents lblKeyY As Label
+    Friend WithEvents btnMapKeyOpen As Button
+    Friend WithEvents scrlKeyX As HScrollBar
+    Friend WithEvents lblKeyX As Label
+    Friend WithEvents fraMapKey As GroupBox
+    Friend WithEvents chkMapKey As CheckBox
+    Friend WithEvents picMapKey As PictureBox
+    Friend WithEvents btnMapKey As Button
+    Friend WithEvents scrlMapKey As HScrollBar
+    Friend WithEvents lblMapKey As Label
+    Friend WithEvents fraNpcSpawn As GroupBox
+    Friend WithEvents lstNpc As ComboBox
+    Friend WithEvents btnNpcSpawn As Button
+    Friend WithEvents scrlNpcDir As HScrollBar
+    Friend WithEvents lblNpcDir As Label
+    Friend WithEvents fraHeal As GroupBox
+    Friend WithEvents scrlHeal As HScrollBar
+    Friend WithEvents lblHeal As Label
+    Friend WithEvents cmbHeal As ComboBox
+    Friend WithEvents btnHeal As Button
+    Friend WithEvents fraShop As GroupBox
+    Friend WithEvents cmbShop As ComboBox
+    Friend WithEvents btnShop As Button
+    Friend WithEvents fraResource As GroupBox
+    Friend WithEvents btnResourceOk As Button
+    Friend WithEvents scrlResource As HScrollBar
+    Friend WithEvents lblResource As Label
+    Friend WithEvents fraMapItem As GroupBox
+    Friend WithEvents picMapItem As PictureBox
+    Friend WithEvents btnMapItem As Button
+    Friend WithEvents scrlMapItemValue As HScrollBar
+    Friend WithEvents scrlMapItem As HScrollBar
+    Friend WithEvents lblMapItem As Label
+    Friend WithEvents fraTrap As GroupBox
+    Friend WithEvents btnTrap As Button
+    Friend WithEvents scrlTrap As HScrollBar
+    Friend WithEvents lblTrap As Label
 End Class

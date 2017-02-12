@@ -439,172 +439,175 @@ Module ClientText
 
     End Function
 
-    Public Function KeyPressed(ByVal e As KeyEventArgs) As String
+    'Public Function KeyPressed(ByVal e As KeyEventArgs) As String
 
-        Dim keyValue As String = ""
+    '    Dim keyValue As String = ""
+    '    Threading.Thread.CurrentThread.CurrentCulture = New Globalization.CultureInfo("ru-RU")
+    '    Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("ru-RU")
+    '    Dim kc As New KeysConverter()
+    '    If e.KeyCode = 32 Then ' Space
+    '        keyValue = ChrW(e.KeyCode)
 
-        If e.KeyCode = 32 Then ' Space
-            keyValue = ChrW(e.KeyCode)
+    '    ElseIf e.KeyCode >= 65 AndAlso e.KeyCode <= 90 Then ' Letters
+    '        If e.Shift Then
+    '            keyValue = ChrW(e.KeyCode)
+    '        Else
+    '            keyValue = ChrW(e.KeyCode + 32)
+    '        End If
+    '        keyValue = kc.ConvertToString(Nothing, Threading.Thread.CurrentThread.CurrentCulture, e.KeyCode)
 
-        ElseIf e.KeyCode >= 65 AndAlso e.KeyCode <= 90 Then ' Letters
-            If e.Shift Then
-                keyValue = ChrW(e.KeyCode)
-            Else
-                keyValue = ChrW(e.KeyCode + 32)
-            End If
+    '    ElseIf e.KeyCode = Keys.D0 Then
+    '        If e.Shift Then
+    '            keyValue = ")"
+    '        Else
+    '            keyValue = "0"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D0 Then
-            If e.Shift Then
-                keyValue = ")"
-            Else
-                keyValue = "0"
-            End If
+    '    ElseIf e.KeyCode = Keys.D1 Then
+    '        If e.Shift Then
+    '            keyValue = "!"
+    '        Else
+    '            keyValue = "1"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D1 Then
-            If e.Shift Then
-                keyValue = "!"
-            Else
-                keyValue = "1"
-            End If
+    '    ElseIf e.KeyCode = Keys.D2 Then
+    '        If e.Shift Then
+    '            keyValue = "@"
+    '        Else
+    '            keyValue = "2"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D2 Then
-            If e.Shift Then
-                keyValue = "@"
-            Else
-                keyValue = "2"
-            End If
+    '    ElseIf e.KeyCode = Keys.D3 Then
+    '        If e.Shift Then
+    '            keyValue = "#"
+    '        Else
+    '            keyValue = "3"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D3 Then
-            If e.Shift Then
-                keyValue = "#"
-            Else
-                keyValue = "3"
-            End If
+    '    ElseIf e.KeyCode = Keys.D4 Then
+    '        If e.Shift Then
+    '            keyValue = "$"
+    '        Else
+    '            keyValue = "4"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D4 Then
-            If e.Shift Then
-                keyValue = "$"
-            Else
-                keyValue = "4"
-            End If
+    '    ElseIf e.KeyCode = Keys.D5 Then
+    '        If e.Shift Then
+    '            keyValue = "%"
+    '        Else
+    '            keyValue = "5"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D5 Then
-            If e.Shift Then
-                keyValue = "%"
-            Else
-                keyValue = "5"
-            End If
+    '    ElseIf e.KeyCode = Keys.D6 Then
+    '        If e.Shift Then
+    '            keyValue = "^"
+    '        Else
+    '            keyValue = "6"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D6 Then
-            If e.Shift Then
-                keyValue = "^"
-            Else
-                keyValue = "6"
-            End If
+    '    ElseIf e.KeyCode = Keys.D7 Then
+    '        If e.Shift Then
+    '            keyValue = "&"
+    '        Else
+    '            keyValue = "7"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D7 Then
-            If e.Shift Then
-                keyValue = "&"
-            Else
-                keyValue = "7"
-            End If
+    '    ElseIf e.KeyCode = Keys.D8 Then
+    '        If e.Shift Then
+    '            keyValue = "*"
+    '        Else
+    '            keyValue = "8"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D8 Then
-            If e.Shift Then
-                keyValue = "*"
-            Else
-                keyValue = "8"
-            End If
+    '    ElseIf e.KeyCode = Keys.D9 Then
+    '        If e.Shift Then
+    '            keyValue = "("
+    '        Else
+    '            keyValue = "9"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.D9 Then
-            If e.Shift Then
-                keyValue = "("
-            Else
-                keyValue = "9"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemPeriod Then
+    '        If e.Shift Then
+    '            keyValue = ">"
+    '        Else
+    '            keyValue = "."
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemPeriod Then
-            If e.Shift Then
-                keyValue = ">"
-            Else
-                keyValue = "."
-            End If
+    '    ElseIf e.KeyCode = Keys.OemPipe Then
+    '        If e.Shift Then
+    '            'keyValue= "|"
+    '        Else
+    '            keyValue = "\"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemPipe Then
-            If e.Shift Then
-                'keyValue= "|"
-            Else
-                keyValue = "\"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemCloseBrackets Then
+    '        If e.Shift Then
+    '            keyValue = "}"
+    '        Else
+    '            keyValue = "]"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemCloseBrackets Then
-            If e.Shift Then
-                keyValue = "}"
-            Else
-                keyValue = "]"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemMinus Then
+    '        If e.Shift Then
+    '            keyValue = "_"
+    '        Else
+    '            keyValue = "-"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemMinus Then
-            If e.Shift Then
-                keyValue = "_"
-            Else
-                keyValue = "-"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemOpenBrackets Then
+    '        If e.Shift Then
+    '            keyValue = "{"
+    '        Else
+    '            keyValue = "["
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemOpenBrackets Then
-            If e.Shift Then
-                keyValue = "{"
-            Else
-                keyValue = "["
-            End If
+    '    ElseIf e.KeyCode = Keys.OemQuestion Then
+    '        If e.Shift Then
+    '            keyValue = "?"
+    '        Else
+    '            keyValue = "/"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemQuestion Then
-            If e.Shift Then
-                keyValue = "?"
-            Else
-                keyValue = "/"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemQuotes Then
+    '        If e.Shift Then
+    '            keyValue = Chr(34)
+    '        Else
+    '            keyValue = "'"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemQuotes Then
-            If e.Shift Then
-                keyValue = Chr(34)
-            Else
-                keyValue = "'"
-            End If
+    '    ElseIf e.KeyCode = Keys.OemSemicolon Then
+    '        If e.Shift Then
+    '            keyValue = ":"
+    '        Else
+    '            keyValue = ";"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.OemSemicolon Then
-            If e.Shift Then
-                keyValue = ":"
-            Else
-                keyValue = ";"
-            End If
+    '    ElseIf e.KeyCode = Keys.Oemcomma Then
+    '        If e.Shift Then
+    '            keyValue = "<"
+    '        Else
+    '            keyValue = ","
+    '        End If
 
-        ElseIf e.KeyCode = Keys.Oemcomma Then
-            If e.Shift Then
-                keyValue = "<"
-            Else
-                keyValue = ","
-            End If
+    '    ElseIf e.KeyCode = Keys.Oemplus Then
+    '        If e.Shift Then
+    '            keyValue = "+"
+    '        Else
+    '            keyValue = "="
+    '        End If
 
-        ElseIf e.KeyCode = Keys.Oemplus Then
-            If e.Shift Then
-                keyValue = "+"
-            Else
-                keyValue = "="
-            End If
+    '    ElseIf e.KeyCode = Keys.Oemtilde Then
+    '        If e.Shift Then
+    '            keyValue = "~"
+    '        Else
+    '            keyValue = "`"
+    '        End If
 
-        ElseIf e.KeyCode = Keys.Oemtilde Then
-            If e.Shift Then
-                keyValue = "~"
-            Else
-                keyValue = "`"
-            End If
+    '    End If
 
-        End If
+    '    Return keyValue
 
-        Return keyValue
-
-    End Function
+    'End Function
 
     Public Sub DrawChatBubble(ByVal Index As Integer)
         Dim theArray As List(Of String), X As Integer, Y As Integer, i As Integer, MaxWidth As Integer, X2 As Integer, Y2 As Integer

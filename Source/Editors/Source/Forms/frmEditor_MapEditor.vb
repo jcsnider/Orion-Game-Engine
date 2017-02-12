@@ -739,6 +739,20 @@ Public Class FrmEditor_MapEditor
 
         End If
     End Sub
+
+    Private Sub FrmEditor_MapEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'To Whom It May Concern,
+        'This is super shitty code.
+        'We know this is super shitty code
+        'You will be tempted to remove this code
+        'Do not.
+
+        'Find and yell at JC. But leave this code in place
+        'Have a nice day
+        Me.WindowState = FormWindowState.Maximized
+        Application.DoEvents()
+        Me.WindowState = FormWindowState.Normal
+    End Sub
 #End Region
 
 End Class

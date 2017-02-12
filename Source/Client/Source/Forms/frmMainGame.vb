@@ -30,10 +30,6 @@ Public Class FrmMainGame
                 If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
                     MyText = MyText + Clipboard.GetText
                 End If
-
-                If MyText.Length < 100 Then
-                    MyText = MyText + KeyPressed(e)
-                End If
             End If
 
             If e.KeyCode = Keys.Back Then
@@ -276,20 +272,6 @@ Public Class FrmMainGame
         If e.KeyCode = Keys.ShiftKey Then VbKeyShift = True
         If e.KeyCode = Keys.ControlKey Then VbKeyControl = True
         If e.KeyCode = Keys.Alt Then VbKeyAlt = True
-        If inChat = True Then
-            If e.KeyCode >= 32 And e.KeyCode <= 255 Then
-                MyText = MyText + KeyPressed(e)
-                e.Handled = True
-                e.SuppressKeyPress = True
-            End If
-
-            If e.KeyCode = Keys.Back Then
-                If MyText.Length > 0 Then
-                    MyText = MyText.Remove(MyText.Length - 1)
-                End If
-
-            End If
-        End If
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
@@ -409,6 +391,19 @@ Public Class FrmMainGame
 
     Private Sub ChkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
         CraftingInit()
+    End Sub
+
+    Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+        If inChat = True Then
+            If MyText = Nothing Then MyText = ""
+
+            If e.KeyChar = vbBack Then Exit Sub
+
+            If MyText.Length < 100 Then
+                MyText = MyText + e.KeyChar
+            End If
+        End If
+
     End Sub
 
 #End Region
