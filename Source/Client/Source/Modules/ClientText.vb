@@ -1,13 +1,12 @@
 ﻿Imports System.Text
-Imports System.Windows.Forms
 Imports SFML.Graphics
 
 Module ClientText
     Public Const MaxChatDisplayLines As Byte = 8
     Public Const ChatLineSpacing As Byte = FONT_SIZE ' Should be same height as font
-    Public Const MyChatTextLimit As Integer = 55
+    Public Const MyChatTextLimit As Integer = 40
     Public Const MyAmountValueLimit As Integer = 3
-    Public Const AllChatLineWidth As Integer = 55
+    Public Const AllChatLineWidth As Integer = 40
     Public FirstLineIndex As Integer = 0
     Public LastLineIndex As Integer = 0
     Public ScrollMod As Integer = 0
