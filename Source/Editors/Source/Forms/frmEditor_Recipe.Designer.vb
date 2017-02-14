@@ -285,6 +285,7 @@ Partial Class frmEditor_Recipe
         Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbType.ForeColor = System.Drawing.Color.Gainsboro
         Me.cmbType.FormattingEnabled = True
+        Me.cmbType.Items.AddRange(New Object() {"Herbalist", "WoodWorking", "MetalWorking"})
         Me.cmbType.Location = New System.Drawing.Point(87, 54)
         Me.cmbType.Name = "cmbType"
         Me.cmbType.Size = New System.Drawing.Size(267, 21)

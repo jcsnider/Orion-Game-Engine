@@ -17,3 +17,4 @@
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification:="<Pending>", Scope:="member", Target:="~M:Editors.EditorWeather.DrawFog")>
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification:="<Pending>", Scope:="member", Target:="~M:Editors.EditorWeather.DrawThunderEffect")>
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0027:Simplify collection initialization", Justification:="<Pending>", Scope:="member", Target:="~M:Editors.EditorHandleData.InitMessages")>
+<Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028:Simplify collection initialization", Justification:="<Pending>", Scope:="member", Target:="~M:Editors.EditorHandleData.InitMessages")>
