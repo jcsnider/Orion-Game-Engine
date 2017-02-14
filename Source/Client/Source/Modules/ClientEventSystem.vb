@@ -2,7 +2,6 @@
 Imports System.Windows.Forms
 Imports SFML.Graphics
 Imports SFML.System
-Imports SFML.Window
 
 Public Module ClientEventSystem
 #Region "Globals"
@@ -484,9 +483,8 @@ Public Module ClientEventSystem
             frmEditor_Events.cmbMoveSpeed.SelectedIndex = .MoveSpeed
             frmEditor_Events.cmbMoveType.SelectedIndex = .MoveType
             frmEditor_Events.cmbPlayerVar.SelectedIndex = .VariableIndex
-            frmEditor_Events.cmbPlayerSwitch.SelectedIndex = .SwitchIndex
-            frmEditor_Events.cmbSelfSwitch.SelectedIndex = .SelfSwitchIndex
-            frmEditor_Events.cmbSelfSwitchCompare.SelectedIndex = .SelfSwitchCompare
+            FrmEditor_Events.cmbPlayerSwitch.SelectedIndex = .SwitchIndex
+            FrmEditor_Events.cmbSelfSwitchCompare.SelectedIndex = .SelfSwitchCompare
             frmEditor_Events.cmbPlayerSwitchCompare.SelectedIndex = .SwitchCompare
             frmEditor_Events.cmbPlayervarCompare.SelectedIndex = .VariableCompare
             frmEditor_Events.chkGlobal.Checked = tmpEvent.Globals
@@ -499,8 +497,8 @@ Public Module ClientEventSystem
             frmEditor_Events.chkWalkAnim.Checked = .WalkAnim
             frmEditor_Events.chkWalkThrough.Checked = .WalkThrough
             frmEditor_Events.chkShowName.Checked = .ShowName
-            frmEditor_Events.txtPlayerVariable.Text = .VariableCondition
-            frmEditor_Events.scrlGraphic.Value = .Graphic
+            frmEditor_Events.nudPlayerVariable.Value = .VariableCondition
+            frmEditor_Events.nudGraphic.Value = .Graphic
             If frmEditor_Events.cmbEventQuest.Items.Count > 0 Then
                 If .Questnum >= 0 And .Questnum <= frmEditor_Events.cmbEventQuest.Items.Count Then
                     frmEditor_Events.cmbEventQuest.SelectedIndex = .Questnum
@@ -528,11 +526,11 @@ Public Module ClientEventSystem
             End If
             If .chkVariable = 0 Then
                 frmEditor_Events.cmbPlayerVar.Enabled = False
-                frmEditor_Events.txtPlayerVariable.Enabled = False
+                frmEditor_Events.nudPlayerVariable.Enabled = False
                 frmEditor_Events.cmbPlayervarCompare.Enabled = False
             Else
                 frmEditor_Events.cmbPlayerVar.Enabled = True
-                frmEditor_Events.txtPlayerVariable.Enabled = True
+                frmEditor_Events.nudPlayerVariable.Enabled = True
                 frmEditor_Events.cmbPlayervarCompare.Enabled = True
             End If
             If frmEditor_Events.cmbMoveType.SelectedIndex = 2 Then
@@ -1070,7 +1068,7 @@ newlist:
 
     End Sub
 
-    Sub AddCommand(Index As Integer)
+    Sub AddCommand(ByVal Index As Integer)
         Dim curlist As Integer, i As Integer, X As Integer, curslot As Integer, p As Integer, oldCommandList As CommandListRec
 
         If tmpEvent.Pages(curPageNum).CommandListCount = 0 Then
@@ -1078,10 +1076,10 @@ newlist:
             ReDim tmpEvent.Pages(curPageNum).CommandList(1)
         End If
 
-        If frmEditor_Events.lstCommands.SelectedIndex = frmEditor_Events.lstCommands.Items.Count - 1 Then
+        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count - 1 Then
             curlist = 1
         Else
-            curlist = EventList(frmEditor_Events.lstCommands.SelectedIndex).CommandList
+            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandList
         End If
         If tmpEvent.Pages(curPageNum).CommandListCount = 0 Then
             tmpEvent.Pages(curPageNum).CommandListCount = 1
@@ -1100,15 +1098,15 @@ newlist:
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
-        If frmEditor_Events.lstCommands.SelectedIndex = frmEditor_Events.lstCommands.Items.Count - 1 Then
+        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count - 1 Then
             curslot = tmpEvent.Pages(curPageNum).CommandList(curlist).CommandCount
         Else
-            i = EventList(frmEditor_Events.lstCommands.SelectedIndex).CommandNum
+            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
             If i < tmpEvent.Pages(curPageNum).CommandList(curlist).CommandCount Then
                 For X = tmpEvent.Pages(curPageNum).CommandList(curlist).CommandCount - 1 To i Step -1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(X + 1) = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(X)
                 Next
-                curslot = EventList(frmEditor_Events.lstCommands.SelectedIndex).CommandNum
+                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
             Else
                 curslot = tmpEvent.Pages(curPageNum).CommandList(curlist).CommandCount
             End If
@@ -1117,13 +1115,13 @@ newlist:
         Select Case Index
             Case EventType.evAddText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtAddText_Text.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlAddText_Colour.Value
-                If frmEditor_Events.optAddText_Player.Checked = True Then
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtAddText_Text.Text
+                'tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlAddText_Colour.Value
+                If FrmEditor_Events.optAddText_Player.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
-                ElseIf frmEditor_Events.optAddText_Map.Checked = True Then
+                ElseIf FrmEditor_Events.optAddText_Map.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
-                ElseIf frmEditor_Events.optAddText_Global.Checked = True Then
+                ElseIf FrmEditor_Events.optAddText_Global.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 2
                 End If
             Case EventType.evCondition
@@ -1136,76 +1134,76 @@ newlist:
                 tmpEvent.Pages(curPageNum).CommandList(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.CommandList).ParentList = curlist
                 tmpEvent.Pages(curPageNum).CommandList(tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.ElseCommandList).ParentList = curlist
 
-                If frmEditor_Events.optCondition0.Checked = True Then X = 0
-                If frmEditor_Events.optCondition1.Checked = True Then X = 1
-                If frmEditor_Events.optCondition2.Checked = True Then X = 2
-                If frmEditor_Events.optCondition3.Checked = True Then X = 3
-                If frmEditor_Events.optCondition4.Checked = True Then X = 4
-                If frmEditor_Events.optCondition5.Checked = True Then X = 5
-                If frmEditor_Events.optCondition6.Checked = True Then X = 6
-                If frmEditor_Events.optCondition7.Checked = True Then X = 7
-                If frmEditor_Events.optCondition8.Checked = True Then X = 8
+                If FrmEditor_Events.optCondition0.Checked = True Then X = 0
+                If FrmEditor_Events.optCondition1.Checked = True Then X = 1
+                If FrmEditor_Events.optCondition2.Checked = True Then X = 2
+                If FrmEditor_Events.optCondition3.Checked = True Then X = 3
+                If FrmEditor_Events.optCondition4.Checked = True Then X = 4
+                If FrmEditor_Events.optCondition5.Checked = True Then X = 5
+                If FrmEditor_Events.optCondition6.Checked = True Then X = 6
+                If FrmEditor_Events.optCondition7.Checked = True Then X = 7
+                If FrmEditor_Events.optCondition8.Checked = True Then X = 8
 
                 Select Case X
                     Case 0 'Player Var
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 0
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerVarIndex.SelectedIndex + 1
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_PlayerVarCompare.SelectedIndex
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = Val(frmEditor_Events.txtCondition_PlayerVarCondition.Text)
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_PlayerVarIndex.SelectedIndex + 1
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.cmbCondition_PlayerVarCompare.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = FrmEditor_Events.nudCondition_PlayerVarCondition.Value
                     Case 1 'Player Switch
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 1
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerSwitch.SelectedIndex + 1
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondtion_PlayerSwitchCondition.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_PlayerSwitch.SelectedIndex + 1
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.cmbCondtion_PlayerSwitchCondition.SelectedIndex
                     Case 2 'Has Item
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 2
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_HasItem.SelectedIndex + 1
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.nudCondition_HasItem.Value
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_HasItem.SelectedIndex + 1
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.nudCondition_HasItem.Value
                     Case 3 'Class Is
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 3
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_ClassIs.SelectedIndex + 1
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_ClassIs.SelectedIndex + 1
                     Case 4 'Learnt Skill
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 4
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
                     Case 5 'Level Is
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 5
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = Val(frmEditor_Events.txtCondition_LevelAmount.Text)
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_LevelCompare.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.nudCondition_LevelAmount.Value
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.cmbCondition_LevelCompare.SelectedIndex
                     Case 6 'Self Switch
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 6
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_SelfSwitch.SelectedIndex
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_SelfSwitchCondition.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_SelfSwitch.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.cmbCondition_SelfSwitchCondition.SelectedIndex
                     Case 7 'Quest Shiz
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 7
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.scrlCondition_Quest.Value
-                        If frmEditor_Events.optCondition_Quest0.Checked Then
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.nudCondition_Quest.Value
+                        If FrmEditor_Events.optCondition_Quest0.Checked Then
                             tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 0
-                            tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.cmbCondition_General.SelectedIndex
+                            tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = FrmEditor_Events.cmbCondition_General.SelectedIndex
                         Else
                             tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 1
-                            tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.scrlCondition_QuestTask.Value
+                            tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = FrmEditor_Events.nudCondition_QuestTask.Value
                         End If
                     Case 8 'Gender
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 8
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_Gender.SelectedIndex
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_Gender.SelectedIndex
                 End Select
 
             Case EventType.evShowText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 Dim tmptxt As String = ""
-                For i = 0 To UBound(frmEditor_Events.txtShowText.Lines)
-                    tmptxt = tmptxt & frmEditor_Events.txtShowText.Lines(i)
+                For i = 0 To UBound(FrmEditor_Events.txtShowText.Lines)
+                    tmptxt = tmptxt & FrmEditor_Events.txtShowText.Lines(i)
                 Next
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = tmptxt
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudShowTextFace.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudShowTextFace.Value
 
             Case EventType.evShowChoices
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtChoicePrompt.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text2 = frmEditor_Events.txtChoices1.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text3 = frmEditor_Events.txtChoices2.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text4 = frmEditor_Events.txtChoices3.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text5 = frmEditor_Events.txtChoices4.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data5 = frmEditor_Events.nudShowChoicesFace.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtChoicePrompt.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text2 = FrmEditor_Events.txtChoices1.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text3 = FrmEditor_Events.txtChoices2.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text4 = FrmEditor_Events.txtChoices3.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text5 = FrmEditor_Events.txtChoices4.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data5 = FrmEditor_Events.nudShowChoicesFace.Value
                 tmpEvent.Pages(curPageNum).CommandListCount = tmpEvent.Pages(curPageNum).CommandListCount + 4
                 ReDim Preserve tmpEvent.Pages(curPageNum).CommandList(tmpEvent.Pages(curPageNum).CommandListCount)
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = tmpEvent.Pages(curPageNum).CommandListCount - 3
@@ -1219,49 +1217,49 @@ newlist:
 
             Case EventType.evPlayerVar
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbVariable.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbVariable.SelectedIndex + 1
 
-                If frmEditor_Events.optVariableAction0.Checked = True Then i = 0
-                If frmEditor_Events.optVariableAction1.Checked = True Then i = 1
-                If frmEditor_Events.optVariableAction2.Checked = True Then i = 2
-                If frmEditor_Events.optVariableAction3.Checked = True Then i = 3
+                If FrmEditor_Events.optVariableAction0.Checked = True Then i = 0
+                If FrmEditor_Events.optVariableAction1.Checked = True Then i = 1
+                If FrmEditor_Events.optVariableAction2.Checked = True Then i = 2
+                If FrmEditor_Events.optVariableAction3.Checked = True Then i = 3
 
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = i
                 If i = 3 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData3.Text)
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = Val(frmEditor_Events.txtVariableData4.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudVariableData3.Value
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudVariableData4.Value
                 ElseIf i = 0 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData0.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudVariableData0.Value
                 ElseIf i = 1 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData1.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudVariableData1.Value
                 ElseIf i = 2 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData2.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudVariableData2.Value
                 End If
 
             Case EventType.evPlayerSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSwitch.SelectedIndex + 1
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbPlayerSwitchSet.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbSwitch.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.cmbPlayerSwitchSet.SelectedIndex
 
             Case EventType.evSelfSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSetSelfSwitch.SelectedIndex
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.cmbSetSelfSwitchTo.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbSetSelfSwitch.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.cmbSetSelfSwitchTo.SelectedIndex
 
             Case EventType.evExitProcess
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
 
             Case EventType.evChangeItems
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbChangeItemIndex.SelectedIndex + 1
-                If frmEditor_Events.optChangeItemSet.Checked = True Then
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeItemIndex.SelectedIndex + 1
+                If FrmEditor_Events.optChangeItemSet.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
-                ElseIf frmEditor_Events.optChangeItemAdd.Checked = True Then
+                ElseIf FrmEditor_Events.optChangeItemAdd.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
-                ElseIf frmEditor_Events.optChangeItemRemove.Checked = True Then
+                ElseIf FrmEditor_Events.optChangeItemRemove.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 2
                 End If
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudChangeItemsAmount.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudChangeItemsAmount.Value
 
             Case EventType.evRestoreHP
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1274,54 +1272,54 @@ newlist:
 
             Case EventType.evChangeLevel
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudChangeLevel.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudChangeLevel.Value
 
             Case EventType.evChangeSkills
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbChangeSkills.SelectedIndex + 1
-                If frmEditor_Events.optChangeSkillsAdd.Checked = True Then
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeSkills.SelectedIndex + 1
+                If FrmEditor_Events.optChangeSkillsAdd.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
-                ElseIf frmEditor_Events.optChangeSkillsRemove.Checked = True Then
+                ElseIf FrmEditor_Events.optChangeSkillsRemove.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
                 End If
 
             Case EventType.evChangeClass
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbChangeClass.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeClass.SelectedIndex + 1
 
             Case EventType.evChangeSprite
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudChangeSprite.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudChangeSprite.Value
 
             Case EventType.evChangeSex
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                If frmEditor_Events.optChangeSexMale.Checked = True Then
+                If FrmEditor_Events.optChangeSexMale.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = 0
-                ElseIf frmEditor_Events.optChangeSexFemale.Checked = True Then
+                ElseIf FrmEditor_Events.optChangeSexFemale.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = 1
                 End If
 
             Case EventType.evChangePK
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSetPK.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbSetPK.SelectedIndex
 
             Case EventType.evWarpPlayer
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudWPMap.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudWPX.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudWPY.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.cmbWarpPlayerDir.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudWPMap.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudWPX.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudWPY.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.cmbWarpPlayerDir.SelectedIndex
 
             Case EventType.evSetMoveRoute
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(frmEditor_Events.cmbEvent.SelectedIndex)
-                If frmEditor_Events.chkIgnoreMove.Checked = True Then
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(FrmEditor_Events.cmbEvent.SelectedIndex)
+                If FrmEditor_Events.chkIgnoreMove.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
                 Else
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
                 End If
 
-                If frmEditor_Events.chkRepeatRoute.Checked = True Then
+                If FrmEditor_Events.chkRepeatRoute.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 1
                 Else
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = 0
@@ -1332,32 +1330,32 @@ newlist:
 
             Case EventType.evPlayAnimation
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbPlayAnim.SelectedIndex + 1
-                If frmEditor_Events.cmbAnimTargetType.SelectedIndex = 0 Then
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbPlayAnim.SelectedIndex + 1
+                If FrmEditor_Events.cmbAnimTargetType.SelectedIndex = 0 Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
-                ElseIf frmEditor_Events.cmbAnimTargetType.SelectedIndex = 1 Then
+                ElseIf FrmEditor_Events.cmbAnimTargetType.SelectedIndex = 1 Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.cmbPlayAnimEvent.SelectedIndex + 1
-                ElseIf frmEditor_Events.cmbAnimTargetType.SelectedIndex = 2 = True Then
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.cmbPlayAnimEvent.SelectedIndex + 1
+                ElseIf FrmEditor_Events.cmbAnimTargetType.SelectedIndex = 2 = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 2
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudPlayAnimTileX.Value
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.nudPlayAnimTileY.Value
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudPlayAnimTileX.Value
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPlayAnimTileY.Value
                 End If
 
             Case EventType.evCustomScript
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudCustomScript.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudCustomScript.Value
 
             Case EventType.evPlayBGM
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = MusicCache(frmEditor_Events.cmbPlayBGM.SelectedIndex + 1)
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = MusicCache(FrmEditor_Events.cmbPlayBGM.SelectedIndex + 1)
 
             Case EventType.evFadeoutBGM
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
 
             Case EventType.evPlaySound
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = SoundCache(frmEditor_Events.cmbPlaySound.SelectedIndex + 1)
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = SoundCache(FrmEditor_Events.cmbPlaySound.SelectedIndex + 1)
 
             Case EventType.evStopSound
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1370,33 +1368,33 @@ newlist:
 
             Case EventType.evOpenShop
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbOpenShop.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbOpenShop.SelectedIndex + 1
 
             Case EventType.evSetAccess
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSetAccess.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbSetAccess.SelectedIndex
 
             Case EventType.evGiveExp
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudGiveExp.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudGiveExp.Value
 
             Case EventType.evShowChatBubble
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtChatbubbleText.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtChatbubbleText.Text
 
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbChatBubbleTargetType.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChatBubbleTargetType.SelectedIndex
 
             Case EventType.evLabel
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtLabelName.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtLabelName.Text
 
             Case EventType.evGotoLabel
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtGotoLabel.Text
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtGotoLabel.Text
 
             Case EventType.evSpawnNpc
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSpawnNPC.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbSpawnNpc.SelectedIndex + 1
 
             Case EventType.evFadeIn
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1409,56 +1407,56 @@ newlist:
 
             Case EventType.evSetFog
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudFogData0.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudFogData1.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudFogData2.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudFogData0.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudFogData1.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudFogData2.Value
 
             Case EventType.evSetWeather
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.CmbWeather.SelectedIndex
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudWeatherIntensity.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.CmbWeather.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudWeatherIntensity.Value
 
             Case EventType.evSetTint
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudMapTintData0.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudMapTintData1.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudMapTintData2.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.nudMapTintData3.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudMapTintData0.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudMapTintData1.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudMapTintData2.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudMapTintData3.Value
 
             Case EventType.evWait
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudWaitAmount.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudWaitAmount.Value
 
             Case EventType.evBeginQuest
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbBeginQuest.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbBeginQuest.SelectedIndex + 1
 
             Case EventType.evEndQuest
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbEndQuest.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbEndQuest.SelectedIndex + 1
 
             Case EventType.evQuestTask
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbCompleteQuest.SelectedIndex
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudCompleteQuestTask.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbCompleteQuest.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudCompleteQuestTask.Value
 
             Case EventType.evShowPicture
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbPicIndex.SelectedIndex
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = frmEditor_Events.nudShowPicture.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbPicIndex.SelectedIndex
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudShowPicture.Value
 
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.cmbPicLoc.SelectedIndex + 1
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.cmbPicLoc.SelectedIndex + 1
 
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.nudPicOffsetX.Value
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data5 = frmEditor_Events.nudPicOffsetY.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPicOffsetX.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data5 = FrmEditor_Events.nudPicOffsetY.Value
 
             Case EventType.evHidePicture
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.nudHidePic.Value
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudHidePic.Value
 
             Case EventType.evWaitMovement
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(frmEditor_Events.cmbMoveWait.SelectedIndex)
+                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(FrmEditor_Events.cmbMoveWait.SelectedIndex)
 
             Case EventType.evHoldPlayer
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1490,7 +1488,7 @@ newlist:
             Case EventType.evAddText
                 isEdit = True
                 frmEditor_Events.txtAddText_Text.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1
-                frmEditor_Events.scrlAddText_Colour.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1
+                'frmEditor_Events.scrlAddText_Colour.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1
                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2
                     Case 0
                         frmEditor_Events.optAddText_Player.Checked = True
@@ -1534,10 +1532,10 @@ newlist:
                     Case 0
                         frmEditor_Events.cmbCondition_PlayerVarIndex.Enabled = True
                         frmEditor_Events.cmbCondition_PlayerVarCompare.Enabled = True
-                        frmEditor_Events.txtCondition_PlayerVarCondition.Enabled = True
+                        frmEditor_Events.nudCondition_PlayerVarCondition.Enabled = True
                         frmEditor_Events.cmbCondition_PlayerVarIndex.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
                         frmEditor_Events.cmbCondition_PlayerVarCompare.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2
-                        frmEditor_Events.txtCondition_PlayerVarCondition.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
+                        frmEditor_Events.nudCondition_PlayerVarCondition.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
                     Case 1
                         frmEditor_Events.cmbCondition_PlayerSwitch.Enabled = True
                         frmEditor_Events.cmbCondtion_PlayerSwitchCondition.Enabled = True
@@ -1556,8 +1554,8 @@ newlist:
                         frmEditor_Events.cmbCondition_LearntSkill.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
                     Case 5
                         frmEditor_Events.cmbCondition_LevelCompare.Enabled = True
-                        frmEditor_Events.txtCondition_LevelAmount.Enabled = True
-                        frmEditor_Events.txtCondition_LevelAmount.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
+                        frmEditor_Events.nudCondition_LevelAmount.Enabled = True
+                        frmEditor_Events.nudCondition_LevelAmount.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
                         frmEditor_Events.cmbCondition_LevelCompare.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2
                     Case 6
                         frmEditor_Events.cmbCondition_SelfSwitch.Enabled = True
@@ -1565,19 +1563,17 @@ newlist:
                         frmEditor_Events.cmbCondition_SelfSwitch.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
                         frmEditor_Events.cmbCondition_SelfSwitchCondition.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2
                     Case 7
-                        frmEditor_Events.scrlCondition_Quest.Enabled = True
-                        frmEditor_Events.scrlCondition_Quest.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
+                        frmEditor_Events.nudCondition_Quest.Enabled = True
+                        frmEditor_Events.nudCondition_Quest.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1
                         frmEditor_Events.fraConditions_Quest.Visible = True
                         If tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 0 Then
                             frmEditor_Events.optCondition_Quest0.Checked = True
                             frmEditor_Events.cmbCondition_General.Enabled = True
                             frmEditor_Events.cmbCondition_General.SelectedIndex = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
-                            frmEditor_Events.lblConditionQuest.Text = "Quest: " & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
                         ElseIf tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 1 Then
                             frmEditor_Events.optCondition_Quest1.Checked = True
-                            frmEditor_Events.scrlCondition_QuestTask.Enabled = True
-                            frmEditor_Events.scrlCondition_QuestTask.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
-                            frmEditor_Events.lblCondition_QuestTask.Text = "#" & tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
+                            frmEditor_Events.nudCondition_QuestTask.Enabled = True
+                            frmEditor_Events.nudCondition_QuestTask.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3
                         End If
                     Case 8
                         frmEditor_Events.cmbCondition_Gender.Enabled = True
@@ -1607,17 +1603,17 @@ newlist:
                 Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2
                     Case 0
                         frmEditor_Events.optVariableAction0.Checked = True
-                        frmEditor_Events.txtVariableData0.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
+                        frmEditor_Events.nudVariableData0.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
                     Case 1
                         frmEditor_Events.optVariableAction1.Checked = True
-                        frmEditor_Events.txtVariableData1.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
+                        frmEditor_Events.nudVariableData1.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
                     Case 2
                         frmEditor_Events.optVariableAction2.Checked = True
-                        frmEditor_Events.txtVariableData2.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
+                        frmEditor_Events.nudVariableData2.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
                     Case 3
                         frmEditor_Events.optVariableAction3.Checked = True
-                        frmEditor_Events.txtVariableData3.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
-                        frmEditor_Events.txtVariableData4.Text = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4
+                        frmEditor_Events.nudVariableData3.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3
+                        frmEditor_Events.nudVariableData4.Value = tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4
                 End Select
                 frmEditor_Events.fraDialogue.Visible = True
                 frmEditor_Events.fraPlayerVariable.Visible = True
@@ -1708,8 +1704,8 @@ newlist:
                 frmEditor_Events.fraCommands.Visible = False
             Case EventType.evSetMoveRoute
                 isEdit = True
-                frmEditor_Events.pnlMoveRoute.Visible = True
-                frmEditor_Events.pnlMoveRoute.BringToFront()
+                frmEditor_Events.fraMoveRoute.Visible = True
+                frmEditor_Events.fraMoveRoute.BringToFront()
                 frmEditor_Events.lstMoveRoute.Items.Clear()
                 frmEditor_Events.cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
@@ -2090,7 +2086,7 @@ newlist:
         Select Case tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Index
             Case EventType.evAddText
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Text1 = frmEditor_Events.txtAddText_Text.Text
-                tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlAddText_Colour.Value
+                'tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlAddText_Colour.Value
                 If frmEditor_Events.optAddText_Player.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
                 ElseIf frmEditor_Events.optAddText_Map.Checked = True Then
@@ -2103,7 +2099,7 @@ newlist:
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 0
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerVarIndex.SelectedIndex + 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_PlayerVarCompare.SelectedIndex
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = Val(frmEditor_Events.txtCondition_PlayerVarCondition.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.nudCondition_PlayerVarCondition.Value
                 ElseIf frmEditor_Events.optCondition1.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 1
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_PlayerSwitch.SelectedIndex + 1
@@ -2120,7 +2116,7 @@ newlist:
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
                 ElseIf frmEditor_Events.optCondition5.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 5
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = Val(frmEditor_Events.txtCondition_LevelAmount.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.nudCondition_LevelAmount.Value
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_LevelCompare.SelectedIndex
                 ElseIf frmEditor_Events.optCondition6.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 6
@@ -2128,13 +2124,13 @@ newlist:
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = frmEditor_Events.cmbCondition_SelfSwitchCondition.SelectedIndex
                 ElseIf frmEditor_Events.optCondition7.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 7
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.scrlCondition_Quest.Value
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = frmEditor_Events.nudCondition_Quest.Value
                     If frmEditor_Events.optCondition_Quest0.Checked Then
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 0
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.cmbCondition_General.SelectedIndex
                     Else
                         tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = 1
-                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.scrlCondition_QuestTask.Value
+                        tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data3 = frmEditor_Events.nudCondition_QuestTask.Value
                     End If
                 ElseIf frmEditor_Events.optCondition8.Checked = True Then
                     tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 8
@@ -2158,14 +2154,14 @@ newlist:
                 If frmEditor_Events.optVariableAction3.Checked = True Then i = 3
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data2 = i
                 If i = 0 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData0.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudVariableData0.Value
                 ElseIf i = 1 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData1.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudVariableData1.Value
                 ElseIf i = 2 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData2.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudVariableData2.Value
                 ElseIf i = 3 Then
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = Val(frmEditor_Events.txtVariableData3.Text)
-                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = Val(frmEditor_Events.txtVariableData4.Text)
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data3 = frmEditor_Events.nudVariableData3.Value
+                    tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data4 = frmEditor_Events.nudVariableData4.Value
                 End If
             Case EventType.evPlayerSwitch
                 tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.cmbSwitch.SelectedIndex + 1
@@ -2778,35 +2774,36 @@ newlist:
                     'None
                     frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                 Case 1
-                    If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumCharacters Then
+                    If frmEditor_Events.nudGraphic.Value > 0 And frmEditor_Events.nudGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & frmEditor_Events.scrlGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & frmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         g = Graphics.FromImage(targetBitmap)
-
-                        Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
-                        Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
+                        'This is the section we are pulling from the source graphic
+                        Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width / 4, sourceBitmap.Height / 4)
+                        'This is the rectangle in the target graphic we want to render to
+                        Dim destRect As New Rectangle(0, 0, targetBitmap.Width / 4, targetBitmap.Height / 4)
 
                         g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
 
                         g.DrawRectangle(Pens.Red, New Rectangle(GraphicSelX * PIC_X, GraphicSelY * PIC_Y, GraphicSelX2 * PIC_X, GraphicSelY2 * PIC_Y))
 
-                        g.Dispose()
-
-                        frmEditor_Events.picGraphicSel.Width = targetBitmap.Width
+                        FrmEditor_Events.picGraphicSel.Width = targetBitmap.Width
                         frmEditor_Events.picGraphicSel.Height = targetBitmap.Height
                         frmEditor_Events.picGraphicSel.Visible = True
                         frmEditor_Events.picGraphicSel.BackgroundImage = targetBitmap
-                        frmEditor_Events.picGraphic.BackgroundImage = targetBitmap
+                        FrmEditor_Events.picGraphic.BackgroundImage = targetBitmap
+
+                        g.Dispose()
                     Else
                         frmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                         Exit Sub
                     End If
                 Case 2
-                    If frmEditor_Events.scrlGraphic.Value > 0 And frmEditor_Events.scrlGraphic.Value <= NumTileSets Then
+                    If frmEditor_Events.nudGraphic.Value > 0 And frmEditor_Events.nudGraphic.Value <= NumTileSets Then
                         'Load tilesheet from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & frmEditor_Events.scrlGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & frmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         If tmpEvent.Pages(curPageNum).GraphicX2 = 0 And tmpEvent.Pages(curPageNum).GraphicY2 = 0 Then
@@ -2872,8 +2869,8 @@ newlist:
 
                             g = Graphics.FromImage(targetBitmap)
 
-                            Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height)  'This is the section we are pulling from the source graphic
-                            Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
+                            Dim sourceRect As New Rectangle(0, 0, sourceBitmap.Width / 4, sourceBitmap.Height / 4)  'This is the section we are pulling from the source graphic
+                            Dim destRect As New Rectangle(0, 0, targetBitmap.Width / 4, targetBitmap.Height / 4)     'This is the rectangle in the target graphic we want to render to
 
                             g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
 
@@ -3051,7 +3048,7 @@ nextevent:
 
     End Sub
 
-    Public Sub DrawEvent(id As Integer)
+    Public Sub DrawEvent(id As Integer) ' draw on map, outside the editor
         Dim X As Integer, Y As Integer, Width As Integer, Height As Integer, sRect As Rectangle, Anim As Integer, spritetop As Integer
 
         If Map.MapEvents(id).Visible = 0 Then Exit Sub

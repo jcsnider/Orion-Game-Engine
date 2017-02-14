@@ -1,42 +1,34 @@
 ﻿Public Class FrmEditor_Animation
-    Private Sub ScrlSprite0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite0.ValueChanged
-        lblSprite0.Text = "Sprite: " & scrlSprite0.Value
-        Animation(EditorIndex).Sprite(0) = scrlSprite0.Value
+    Private Sub nudSprite0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite0.ValueChanged
+        Animation(EditorIndex).Sprite(0) = nudSprite0.Value
     End Sub
 
-    Private Sub ScrlSprite1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlSprite1.ValueChanged
-        lblSprite1.Text = "Sprite: " & scrlSprite1.Value
-        Animation(EditorIndex).Sprite(1) = scrlSprite1.Value
+    Private Sub nudSprite1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite1.ValueChanged
+        Animation(EditorIndex).Sprite(1) = nudSprite1.Value
     End Sub
 
-    Private Sub ScrlLoopCount0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopCount0.ValueChanged
-        lblLoopCount0.Text = "Loop Count: " & scrlLoopCount0.Value
-        Animation(EditorIndex).LoopCount(0) = scrlLoopCount0.Value
+    Private Sub nudLoopCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount0.ValueChanged
+        Animation(EditorIndex).LoopCount(0) = nudLoopCount0.Value
     End Sub
 
-    Private Sub ScrlLoopCount1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopCount1.ValueChanged
-        lblLoopCount1.Text = "Loop Count: " & scrlLoopCount1.Value
-        Animation(EditorIndex).LoopCount(1) = scrlLoopCount1.Value
+    Private Sub nudLoopCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount1.ValueChanged
+        Animation(EditorIndex).LoopCount(1) = nudLoopCount1.Value
     End Sub
 
-    Private Sub ScrlFrameCount0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlFrameCount0.ValueChanged
-        lblFrameCount0.Text = "Frame Count: " & scrlFrameCount0.Value
-        Animation(EditorIndex).Frames(0) = scrlFrameCount0.Value
+    Private Sub nudFrameCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount0.ValueChanged
+        Animation(EditorIndex).Frames(0) = nudFrameCount0.Value
     End Sub
 
-    Private Sub ScrlFrameCount1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlFrameCount1.ValueChanged
-        lblFrameCount1.Text = "Frame Count: " & scrlFrameCount1.Value
-        Animation(EditorIndex).Frames(1) = scrlFrameCount1.Value
+    Private Sub nudFrameCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount1.ValueChanged
+        Animation(EditorIndex).Frames(1) = nudFrameCount1.Value
     End Sub
 
-    Private Sub ScrlLoopTime0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopTime0.ValueChanged
-        lblLoopTime0.Text = "Loop Time: " & scrlLoopTime0.Value
-        Animation(EditorIndex).looptime(0) = scrlLoopTime0.Value
+    Private Sub nudLoopTime0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime0.ValueChanged
+        Animation(EditorIndex).looptime(0) = nudLoopTime0.Value
     End Sub
 
-    Private Sub ScrlLoopTime1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLoopTime1.ValueChanged
-        lblLoopTime1.Text = "Loop Time: " & scrlLoopTime1.Value
-        Animation(EditorIndex).looptime(1) = scrlLoopTime1.Value
+    Private Sub nudLoopTime1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime1.ValueChanged
+        Animation(EditorIndex).looptime(1) = nudLoopTime1.Value
     End Sub
 
     Private Sub BtnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
@@ -77,7 +69,7 @@
     End Sub
 
     Private Sub FrmEditor_Animation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        scrlSprite0.Maximum = NumAnimations
-        scrlSprite1.Maximum = NumAnimations
+        nudSprite0.Maximum = NumAnimations
+        nudSprite1.Maximum = NumAnimations
     End Sub
 End Class

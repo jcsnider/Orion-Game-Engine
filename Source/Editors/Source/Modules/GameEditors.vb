@@ -10,15 +10,15 @@
         With Animation(EditorIndex)
             FrmEditor_Animation.txtName.Text = Trim$(.Name)
 
-            FrmEditor_Animation.scrlSprite0.Value = .Sprite(0)
-            FrmEditor_Animation.scrlFrameCount0.Value = .Frames(0)
-            FrmEditor_Animation.scrlLoopCount0.Value = .LoopCount(0)
-            FrmEditor_Animation.scrlLoopTime0.Value = .looptime(0)
+            FrmEditor_Animation.nudSprite0.Value = .Sprite(0)
+            FrmEditor_Animation.nudFrameCount0.Value = .Frames(0)
+            FrmEditor_Animation.nudLoopCount0.Value = .LoopCount(0)
+            FrmEditor_Animation.nudLoopTime0.Value = .looptime(0)
 
-            FrmEditor_Animation.scrlSprite1.Value = .Sprite(1)
-            FrmEditor_Animation.scrlFrameCount1.Value = .Frames(1)
-            FrmEditor_Animation.scrlLoopCount1.Value = .LoopCount(1)
-            FrmEditor_Animation.scrlLoopTime1.Value = .looptime(1)
+            FrmEditor_Animation.nudSprite1.Value = .Sprite(1)
+            FrmEditor_Animation.nudFrameCount1.Value = .Frames(1)
+            FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
+            FrmEditor_Animation.nudLoopTime1.Value = .looptime(1)
 
             EditorIndex = FrmEditor_Animation.lstIndex.SelectedIndex + 1
         End With
