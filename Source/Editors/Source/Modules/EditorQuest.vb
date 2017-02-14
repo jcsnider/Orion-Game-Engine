@@ -122,6 +122,28 @@
             .txtProgressText.Text = Trim$(Quest(EditorIndex).Chat(2))
             .txtEndText.Text = Trim$(Quest(EditorIndex).Chat(3))
 
+            .cmbStartItem.Items.Clear()
+            .cmbItemReq.Items.Clear()
+            .cmbEndItem.Items.Clear()
+            .cmbItemReward.Items.Clear()
+            .cmbStartItem.Items.Add("None")
+            .cmbItemReq.Items.Add("None")
+            .cmbEndItem.Items.Add("None")
+            .cmbItemReward.Items.Add("None")
+
+            For i = 1 To MAX_ITEMS
+                .cmbStartItem.Items.Add(i & ": " & Item(i).Name)
+                .cmbItemReq.Items.Add(i & ": " & Item(i).Name)
+                .cmbEndItem.Items.Add(i & ": " & Item(i).Name)
+                .cmbItemReward.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            .cmbClassReq.Items.Clear()
+            .cmbClassReq.Items.Add("None")
+            For i = 1 To Max_Classes
+                .cmbClassReq.Items.Add(Trim(Classes(i).Name))
+            Next
+
             .cmbStartItem.SelectedIndex = Quest(EditorIndex).QuestGiveItem
             .cmbEndItem.SelectedIndex = Quest(EditorIndex).QuestRemoveItem
 
@@ -129,9 +151,9 @@
 
             .nudTakeAmount.Value = Quest(EditorIndex).QuestRemoveItemValue
 
-            frmEditor_Quest.lstRewards.Items.Clear()
+            .lstRewards.Items.Clear()
             For i = 1 To Quest(EditorIndex).RewardCount
-                frmEditor_Quest.lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
+                .lstRewards.Items.Add(i & ":" & Quest(EditorIndex).RewardItemAmount(i) & " X " & Trim(Item(Quest(EditorIndex).RewardItem(i)).Name))
             Next
 
             .nudExpReward.Value = Quest(EditorIndex).RewardExp

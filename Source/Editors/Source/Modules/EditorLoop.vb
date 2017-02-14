@@ -268,7 +268,7 @@ Module EditorLoop
                         End If
 
                         'destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                        'Application.DoEvents()
+                        Application.DoEvents()
 
                         EditorMap_DrawTileset()
 
@@ -348,10 +348,12 @@ Module EditorLoop
             With frmEditor_Quest
                 Editor = EDITOR_TASKS
                 .lstIndex.Items.Clear()
-
+                .cmbQuestReq.Items.Clear()
+                .cmbQuestReq.Items.Add("None")
                 ' Add the names
                 For I = 1 To MAX_QUESTS
                     .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
+                    .cmbQuestReq.Items.Add(I & ": " & Trim$(Quest(I).Name))
                 Next
 
                 .Show()

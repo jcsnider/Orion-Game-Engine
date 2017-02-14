@@ -175,53 +175,27 @@
     End Sub
 
     Sub DrawPreview()
-        Dim g As Graphics
-        Dim Filename As String
-        Dim srcRect As Rectangle, destRect As Rectangle
-        Dim charwidth As Integer, charheight As Integer
 
         If FileExist(Application.StartupPath & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT) Then
-            g = picMale.CreateGraphics
-
-            Filename = Application.StartupPath & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT
-
-            Dim charsprite As Bitmap = New Bitmap(Filename)
-
-            charwidth = charsprite.Width / 4
-            charheight = charsprite.Height / 4
-
-            srcRect = New Rectangle(0, 0, charwidth, charheight)
-            destRect = New Rectangle(0, 0, charwidth, charheight)
-
-            charsprite.MakeTransparent(charsprite.GetPixel(0, 0))
-
-            picMale.Refresh()
-            g.DrawImage(charsprite, destRect, srcRect, GraphicsUnit.Pixel)
-
-            g.Dispose()
+            picMale.Width = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Width \ 4
+            picMale.Height = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudMaleSprite.Value & GFX_EXT).Height \ 4
+            picMale.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Characters\" & nudMaleSprite.Value & GFX_EXT)
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT) Then
-            g = picFemale.CreateGraphics
-
-            Filename = Application.StartupPath & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT
-
-            Dim charsprite As Bitmap = New Bitmap(Filename)
-
-            charwidth = charsprite.Width / 4
-            charheight = charsprite.Height / 4
-
-            srcRect = New Rectangle(0, 0, charwidth, charheight)
-            destRect = New Rectangle(0, 0, charwidth, charheight)
-
-            charsprite.MakeTransparent(charsprite.GetPixel(0, 0))
-
-            picFemale.Refresh()
-            g.DrawImage(charsprite, destRect, srcRect, GraphicsUnit.Pixel)
-
-            g.Dispose()
+            picFemale.Width = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Width \ 4
+            picFemale.Height = Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & nudFemaleSprite.Value & GFX_EXT).Height \ 4
+            picFemale.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Characters\" & nudFemaleSprite.Value & GFX_EXT)
         End If
 
+    End Sub
+
+    Private Sub PicMale_Paint(sender As Object, e As EventArgs) Handles picMale.Paint
+        'nope
+    End Sub
+
+    Private Sub PicFemale_Paint(sender As Object, e As EventArgs) Handles picFemale.Paint
+        'nope
     End Sub
 #End Region
 
@@ -302,4 +276,6 @@
     End Sub
 
 #End Region
+
+
 End Class

@@ -563,6 +563,7 @@ Partial Class FrmEditor_Classes
         'picFemale
         '
         Me.picFemale.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.picFemale.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.picFemale.Location = New System.Drawing.Point(107, 10)
         Me.picFemale.Name = "picFemale"
         Me.picFemale.Size = New System.Drawing.Size(48, 64)
@@ -644,6 +645,7 @@ Partial Class FrmEditor_Classes
         'picMale
         '
         Me.picMale.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.picMale.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.picMale.Location = New System.Drawing.Point(107, 10)
         Me.picMale.Name = "picMale"
         Me.picMale.Size = New System.Drawing.Size(48, 64)

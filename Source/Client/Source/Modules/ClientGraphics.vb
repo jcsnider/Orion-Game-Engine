@@ -212,6 +212,10 @@ Module ClientGraphics
     Public LightSprite As Sprite
     Public LightGfxInfo As GraphicInfo
 
+    Public LightAreaGfx As Texture
+    Public LightAreaSprite As Sprite
+    Public LightAreaGfxInfo As GraphicInfo
+
     Public ShadowGfx As Texture
     Public ShadowSprite As Sprite
     Public ShadowGfxInfo As GraphicInfo
@@ -646,6 +650,16 @@ Module ClientGraphics
             'Cache the width and height
             LightGfxInfo.Width = LightGfx.Size.X
             LightGfxInfo.Height = LightGfx.Size.Y
+        End If
+
+        LightAreaGfxInfo = New GraphicInfo
+        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Light2" & GFX_EXT) Then
+            LightAreaGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Light2" & GFX_EXT)
+            LightAreaSprite = New Sprite(LightAreaGfx)
+
+            'Cache the width and height
+            LightAreaGfxInfo.Width = LightAreaGfx.Size.X
+            LightAreaGfxInfo.Height = LightAreaGfx.Size.Y
         End If
 
         ShadowGfxInfo = New GraphicInfo
@@ -3805,35 +3819,21 @@ NextLoop:
 
                         'Create the light texture to multiply over the dark texture.
                         LightSprite.Position = New Vector2f(X1, Y1)
-
+                        LightSprite.Color = SFML.Graphics.Color.Red
                         NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
 
+                        ''Create the light texture to multiply over the dark texture.
+                        'LightSprite.Position = New Vector2f(X1, Y1)
+                        'LightAreaSprite.Position = New Vector2f(X1, Y1)
+                        ''LightSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
+                        ''LightAreaSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
+                        'NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
+                        'NightGfx.Draw(LightAreaSprite, New RenderStates(BlendMode.Multiply))
                     End If
                 End If
             Next
         Next
 
-        ''draw on player
-        'Dim x2 As Integer, y2 As Integer
-
-        '' Calculate the X
-        'x2 = GetPlayerX(MyIndex) * PIC_X + Player(MyIndex).XOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Width / 4 - 32) / 2)
-
-        '' Is the player's height more than 32..?
-        'If (CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height) > 32 Then
-        '    ' Create a 32 pixel offset for larger sprites
-        '    y2 = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset - ((CharacterGFXInfo(GetPlayerSprite(MyIndex)).Height / 4) - 32)
-        'Else
-        '    ' Proceed as normal
-        '    y2 = GetPlayerY(MyIndex) * PIC_Y + Player(MyIndex).YOffset
-        'End If
-
-        ''LightSprite.TextureRect = New IntRect(0, 0, LightSprite.Texture.Size.X, LightSprite.Texture.Size.Y)
-        'LightSprite.Color = New SFML.Graphics.Color(255, 0, 0, 255)
-        '' 16 offset is for the center of the graphic
-        'LightSprite.Origin = New Vector2f(LightSprite.TextureRect.Width / 2 - 16, LightSprite.TextureRect.Height / 2 - 16)
-        'LightSprite.Position = New Vector2f(x2, y2)
-        'NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
 
 
         NightSprite = New Sprite(NightGfx.Texture)

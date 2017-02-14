@@ -1,11 +1,13 @@
 ﻿Public Class frmEditor_Quest
     Dim SelectedTask As Integer
 
-    Private Sub frmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Width = 740
 
         fraRequirements.Location = fraQuestList.Location
+        fraRequirements.Visible = False
         fraTasks.Location = fraQuestList.Location
+        fraTasks.Visible = False
 
         nudAmount.Maximum = 999999
 
@@ -13,13 +15,14 @@
         nudTakeAmount.Maximum = Byte.MaxValue
         nudItemRewValue.Maximum = 999999
 
+        rdbNoneReq.Checked = True
     End Sub
 
-    Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+    Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         QuestEditorInit()
     End Sub
 
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
 
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
@@ -31,7 +34,7 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         If Len(Trim$(txtName.Text)) = 0 Then
@@ -41,53 +44,53 @@
         End If
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         QuestEditorCancel()
     End Sub
 
-    Private Sub txtStartText_TextChanged(sender As Object, e As EventArgs) Handles txtStartText.TextChanged
+    Private Sub TxtStartText_TextChanged(sender As Object, e As EventArgs) Handles txtStartText.TextChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).Chat(1) = Trim$(txtStartText.Text)
     End Sub
 
-    Private Sub txtProgressText_TextChanged(sender As Object, e As EventArgs) Handles txtProgressText.TextChanged
+    Private Sub TxtProgressText_TextChanged(sender As Object, e As EventArgs) Handles txtProgressText.TextChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).Chat(2) = Trim$(txtProgressText.Text)
     End Sub
 
-    Private Sub txtEndText_TextChanged(sender As Object, e As EventArgs) Handles txtEndText.TextChanged
+    Private Sub TxtEndText_TextChanged(sender As Object, e As EventArgs) Handles txtEndText.TextChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).Chat(3) = Trim$(txtEndText.Text)
     End Sub
 
-    Private Sub cmbStartItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStartItem.SelectedIndexChanged
+    Private Sub CmbStartItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStartItem.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).QuestGiveItem = cmbStartItem.SelectedIndex
     End Sub
 
-    Private Sub cmbEndItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEndItem.SelectedIndexChanged
+    Private Sub CmbEndItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEndItem.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).QuestRemoveItem = cmbEndItem.SelectedIndex
     End Sub
 
-    Private Sub nudGiveAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudGiveAmount.ValueChanged
+    Private Sub NudGiveAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudGiveAmount.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).QuestGiveItemValue = cmbEndItem.SelectedIndex
     End Sub
 
-    Private Sub nudTakeAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudTakeAmount.ValueChanged
+    Private Sub NudTakeAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudTakeAmount.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).QuestRemoveItemValue = nudTakeAmount.Value
     End Sub
 
-    Private Sub chkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
+    Private Sub ChkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         If chkRepeat.Checked = True Then
@@ -97,7 +100,7 @@
         End If
     End Sub
 
-    Private Sub chkQuestCancel_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuestCancel.CheckedChanged
+    Private Sub ChkQuestCancel_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuestCancel.CheckedChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         If chkQuestCancel.Checked = True Then
@@ -109,13 +112,13 @@
 
 #Region "Rewards"
 
-    Private Sub nudExpReward_ValueChanged(sender As Object, e As EventArgs) Handles nudExpReward.ValueChanged
+    Private Sub NudExpReward_ValueChanged(sender As Object, e As EventArgs) Handles nudExpReward.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).RewardExp = nudExpReward.Value
     End Sub
 
-    Private Sub btnAddReward_Click(sender As Object, e As EventArgs) Handles btnAddReward.Click
+    Private Sub BtnAddReward_Click(sender As Object, e As EventArgs) Handles btnAddReward.Click
         If EditorIndex <= 0 Or EditorIndex > MAX_QUESTS Then Exit Sub
 
         Quest(EditorIndex).RewardCount = Quest(EditorIndex).RewardCount + 1
@@ -132,7 +135,7 @@
         Next
     End Sub
 
-    Private Sub btnRemoveReward_Click(sender As Object, e As EventArgs) Handles btnRemoveReward.Click
+    Private Sub BtnRemoveReward_Click(sender As Object, e As EventArgs) Handles btnRemoveReward.Click
         Dim tmpRewardItem() As Integer, tmpRewardItemIndex() As Integer
 
         If lstRewards.SelectedIndex < 0 Then Exit Sub
@@ -168,7 +171,7 @@
 #End Region
 
 #Region "Tasks"
-    Private Sub lstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
+    Private Sub LstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
         If lstTasks.SelectedIndex < 0 Then Exit Sub
 
         SelectedTask = lstTasks.SelectedIndex + 1
@@ -177,7 +180,7 @@
         fraTasks.BringToFront()
     End Sub
 
-    Private Sub btnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
+    Private Sub BtnAddTask_Click(sender As Object, e As EventArgs) Handles btnAddTask.Click
         Quest(EditorIndex).TaskCount = Quest(EditorIndex).TaskCount + 1
 
         ReDim Preserve Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
@@ -190,7 +193,7 @@
         fraTasks.BringToFront()
     End Sub
 
-    Private Sub btnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
+    Private Sub BtnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
         Dim i As Integer, tmptask() As TaskRec
 
         If lstTasks.SelectedIndex < 0 Then Exit Sub
@@ -221,7 +224,7 @@
 
     End Sub
 
-    Private Sub btnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
+    Private Sub BtnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
 
         If lstTasks.SelectedIndex < 0 Then
             SelectedTask = Quest(EditorIndex).TaskCount
@@ -270,7 +273,7 @@
         fraTasks.Visible = False
     End Sub
 
-    Private Sub btnCancelTask_Click(sender As Object, e As EventArgs) Handles btnCancelTask.Click
+    Private Sub BtnCancelTask_Click(sender As Object, e As EventArgs) Handles btnCancelTask.Click
         Quest(EditorIndex).TaskCount = Quest(EditorIndex).TaskCount - 1
 
         ReDim Quest(EditorIndex).Task(Quest(EditorIndex).TaskCount)
@@ -279,7 +282,7 @@
         fraTasks.Visible = False
     End Sub
 
-    Private Sub optTask0_CheckedChanged(sender As Object, e As EventArgs) Handles optTask0.CheckedChanged
+    Private Sub OptTask0_CheckedChanged(sender As Object, e As EventArgs) Handles optTask0.CheckedChanged
         If optTask0.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 0
             Quest(EditorIndex).Task(SelectedTask).TaskType = 0
@@ -287,7 +290,7 @@
         End If
     End Sub
 
-    Private Sub optTask1_CheckedChanged(sender As Object, e As EventArgs) Handles optTask1.CheckedChanged
+    Private Sub OptTask1_CheckedChanged(sender As Object, e As EventArgs) Handles optTask1.CheckedChanged
         If optTask1.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 1
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOSLAY
@@ -298,7 +301,7 @@
         End If
     End Sub
 
-    Private Sub optTask2_CheckedChanged(sender As Object, e As EventArgs) Handles optTask2.CheckedChanged
+    Private Sub OptTask2_CheckedChanged(sender As Object, e As EventArgs) Handles optTask2.CheckedChanged
         If optTask2.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 2
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOGATHER
@@ -309,7 +312,7 @@
         End If
     End Sub
 
-    Private Sub optTask3_CheckedChanged(sender As Object, e As EventArgs) Handles optTask3.CheckedChanged
+    Private Sub OptTask3_CheckedChanged(sender As Object, e As EventArgs) Handles optTask3.CheckedChanged
         If optTask3.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 3
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOTALK
@@ -320,7 +323,7 @@
         End If
     End Sub
 
-    Private Sub optTask4_CheckedChanged(sender As Object, e As EventArgs) Handles optTask4.CheckedChanged
+    Private Sub OptTask4_CheckedChanged(sender As Object, e As EventArgs) Handles optTask4.CheckedChanged
         If optTask4.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 4
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOREACH
@@ -331,7 +334,7 @@
         End If
     End Sub
 
-    Private Sub optTask5_CheckedChanged(sender As Object, e As EventArgs) Handles optTask5.CheckedChanged
+    Private Sub OptTask5_CheckedChanged(sender As Object, e As EventArgs) Handles optTask5.CheckedChanged
         If optTask5.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 5
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOGIVE
@@ -342,7 +345,7 @@
         End If
     End Sub
 
-    Private Sub optTask6_CheckedChanged(sender As Object, e As EventArgs) Handles optTask6.CheckedChanged
+    Private Sub OptTask6_CheckedChanged(sender As Object, e As EventArgs) Handles optTask6.CheckedChanged
         If optTask6.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 6
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOTRAIN
@@ -353,7 +356,7 @@
         End If
     End Sub
 
-    Private Sub optTask7_CheckedChanged(sender As Object, e As EventArgs) Handles optTask7.CheckedChanged
+    Private Sub OptTask7_CheckedChanged(sender As Object, e As EventArgs) Handles optTask7.CheckedChanged
         If optTask7.Checked = True Then
             Quest(EditorIndex).Task(SelectedTask).Order = 7
             Quest(EditorIndex).Task(SelectedTask).TaskType = QUEST_TYPE_GOGET
@@ -366,7 +369,7 @@
 #End Region
 
 #Region "Requirements"
-    Private Sub btnAddRequirement_Click(sender As Object, e As EventArgs) Handles btnAddRequirement.Click
+    Private Sub BtnAddRequirement_Click(sender As Object, e As EventArgs) Handles btnAddRequirement.Click
         Quest(EditorIndex).ReqCount = Quest(EditorIndex).ReqCount + 1
 
         ReDim Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount)
@@ -376,7 +379,7 @@
         fraRequirements.BringToFront()
     End Sub
 
-    Private Sub btnRemoveRequirement_Click(sender As Object, e As EventArgs) Handles btnRemoveRequirement.Click
+    Private Sub BtnRemoveRequirement_Click(sender As Object, e As EventArgs) Handles btnRemoveRequirement.Click
         Dim i As Integer, tmpRequirement() As Integer, tmpRequirementIndex() As Integer
 
         If lstRequirements.SelectedIndex < 0 Then Exit Sub
@@ -419,7 +422,7 @@
         Next
     End Sub
 
-    Private Sub lstRequirements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRequirements.SelectedIndexChanged
+    Private Sub LstRequirements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRequirements.SelectedIndexChanged
         If lstRequirements.SelectedIndex < 0 Then Exit Sub
 
         LoadRequirement(EditorIndex, lstRequirements.SelectedIndex + 1)
@@ -427,7 +430,7 @@
         fraRequirements.BringToFront()
     End Sub
 
-    Private Sub btnRequirementSave_Click(sender As Object, e As EventArgs) Handles btnRequirementSave.Click
+    Private Sub BtnRequirementSave_Click(sender As Object, e As EventArgs) Handles btnRequirementSave.Click
         If rdbNoneReq.Checked = True Then
             Quest(EditorIndex).Requirement(Quest(EditorIndex).ReqCount) = 0
             Quest(EditorIndex).RequirementIndex(Quest(EditorIndex).ReqCount) = 0
@@ -460,11 +463,11 @@
         fraRequirements.Visible = False
     End Sub
 
-    Private Sub btnRequirementCancel_Click(sender As Object, e As EventArgs) Handles btnRequirementCancel.Click
+    Private Sub BtnRequirementCancel_Click(sender As Object, e As EventArgs) Handles btnRequirementCancel.Click
         fraRequirements.Visible = False
     End Sub
 
-    Private Sub rdbNoneReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbNoneReq.CheckedChanged
+    Private Sub RdbNoneReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbNoneReq.CheckedChanged
         cmbItemReq.SelectedIndex = 0
         cmbItemReq.Enabled = False
 
@@ -475,15 +478,15 @@
         cmbClassReq.Enabled = False
     End Sub
 
-    Private Sub rdbItemReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbItemReq.CheckedChanged
+    Private Sub RdbItemReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbItemReq.CheckedChanged
         cmbItemReq.Enabled = True
     End Sub
 
-    Private Sub rdbQuestReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbQuestReq.CheckedChanged
+    Private Sub RdbQuestReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbQuestReq.CheckedChanged
         cmbQuestReq.Enabled = True
     End Sub
 
-    Private Sub rdbClassReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbClassReq.CheckedChanged
+    Private Sub RdbClassReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbClassReq.CheckedChanged
         cmbClassReq.Enabled = True
     End Sub
 

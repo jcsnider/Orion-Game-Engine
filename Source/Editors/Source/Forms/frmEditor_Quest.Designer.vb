@@ -885,6 +885,7 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.TabIndex = 6
         Me.fraRequirements.TabStop = False
         Me.fraRequirements.Text = "Requirements"
+        Me.fraRequirements.Visible = False
         '
         'DarkGroupBox6
         '
@@ -1134,7 +1135,7 @@ Partial Class frmEditor_Quest
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(724, 494)
+        Me.ClientSize = New System.Drawing.Size(1250, 494)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)

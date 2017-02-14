@@ -173,6 +173,12 @@ Partial Class frmEditor_MapEditor
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpEvents = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.btnCopyEvent = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.btnPasteEvent = New System.Windows.Forms.Button()
+        Me.lblCopyMode = New System.Windows.Forms.Label()
+        Me.lblPasteMode = New System.Windows.Forms.Label()
         Me.pnlBack.SuspendLayout()
         CType(Me.picBackSelect, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlAttributes.SuspendLayout()
@@ -1670,6 +1676,12 @@ Partial Class frmEditor_MapEditor
         '
         'tpEvents
         '
+        Me.tpEvents.Controls.Add(Me.lblPasteMode)
+        Me.tpEvents.Controls.Add(Me.lblCopyMode)
+        Me.tpEvents.Controls.Add(Me.btnPasteEvent)
+        Me.tpEvents.Controls.Add(Me.Label16)
+        Me.tpEvents.Controls.Add(Me.btnCopyEvent)
+        Me.tpEvents.Controls.Add(Me.Label15)
         Me.tpEvents.Controls.Add(Me.Label13)
         Me.tpEvents.Location = New System.Drawing.Point(4, 22)
         Me.tpEvents.Name = "tpEvents"
@@ -1687,6 +1699,61 @@ Partial Class frmEditor_MapEditor
         Me.Label13.Size = New System.Drawing.Size(239, 13)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Click on the map where you want to add a event."
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(20, 87)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(310, 13)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "To copy a existing Event, press the copy button, then the event."
+        '
+        'btnCopyEvent
+        '
+        Me.btnCopyEvent.Location = New System.Drawing.Point(23, 107)
+        Me.btnCopyEvent.Name = "btnCopyEvent"
+        Me.btnCopyEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnCopyEvent.TabIndex = 2
+        Me.btnCopyEvent.Text = "Copy Event"
+        Me.btnCopyEvent.UseVisualStyleBackColor = True
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(20, 149)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(395, 13)
+        Me.Label16.TabIndex = 3
+        Me.Label16.Text = "To paste a copied Event, press the paste button, then click on the map to place i" &
+    "t."
+        '
+        'btnPasteEvent
+        '
+        Me.btnPasteEvent.Location = New System.Drawing.Point(23, 166)
+        Me.btnPasteEvent.Name = "btnPasteEvent"
+        Me.btnPasteEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnPasteEvent.TabIndex = 4
+        Me.btnPasteEvent.Text = "Paste Event"
+        Me.btnPasteEvent.UseVisualStyleBackColor = True
+        '
+        'lblCopyMode
+        '
+        Me.lblCopyMode.AutoSize = True
+        Me.lblCopyMode.Location = New System.Drawing.Point(104, 112)
+        Me.lblCopyMode.Name = "lblCopyMode"
+        Me.lblCopyMode.Size = New System.Drawing.Size(75, 13)
+        Me.lblCopyMode.TabIndex = 5
+        Me.lblCopyMode.Text = "CopyMode Off"
+        '
+        'lblPasteMode
+        '
+        Me.lblPasteMode.AutoSize = True
+        Me.lblPasteMode.Location = New System.Drawing.Point(104, 171)
+        Me.lblPasteMode.Name = "lblPasteMode"
+        Me.lblPasteMode.Size = New System.Drawing.Size(78, 13)
+        Me.lblPasteMode.TabIndex = 6
+        Me.lblPasteMode.Text = "PasteMode Off"
         '
         'frmEditor_MapEditor
         '
@@ -1907,4 +1974,10 @@ Partial Class frmEditor_MapEditor
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents chkInstance As Windows.Forms.CheckBox
     Friend WithEvents optLight As Windows.Forms.RadioButton
+    Friend WithEvents btnPasteEvent As Windows.Forms.Button
+    Friend WithEvents Label16 As Windows.Forms.Label
+    Friend WithEvents btnCopyEvent As Windows.Forms.Button
+    Friend WithEvents Label15 As Windows.Forms.Label
+    Friend WithEvents lblPasteMode As Windows.Forms.Label
+    Friend WithEvents lblCopyMode As Windows.Forms.Label
 End Class

@@ -50,6 +50,8 @@ Public Module ClientEventSystem
     Public Const MAX_VARIABLES As Integer = 1000
 
     Public cpEvent As EventRec
+    Public EventCopy As Boolean
+    Public EventPaste As Boolean
     Public EventList() As EventListRec
 
     Public InEvent As Boolean
@@ -316,7 +318,7 @@ Public Module ClientEventSystem
 #Region "EventEditor"
     'Event Editor Stuffz Also includes event functions from the map editor (copy/paste/delete)
 
-    Sub CopyEvent_Map(X As Integer, Y As Integer)
+    Sub CopyEvent_Map(ByVal X As Integer, ByVal Y As Integer)
         Dim count As Integer, i As Integer
 
         count = Map.EventCount
@@ -325,6 +327,9 @@ Public Module ClientEventSystem
             If Map.Events(i).X = X And Map.Events(i).Y = Y Then
                 ' copy it
                 CopyEvent = Map.Events(i)
+
+                frmEditor_MapEditor.lblCopyMode.Text = "CopyMode Off"
+                EventCopy = False
                 ' exit
                 Exit Sub
             End If
@@ -332,7 +337,7 @@ Public Module ClientEventSystem
 
     End Sub
 
-    Sub PasteEvent_Map(X As Integer, Y As Integer)
+    Sub PasteEvent_Map(ByVal X As Integer, ByVal Y As Integer)
         Dim count As Integer, i As Integer, EventNum As Integer
 
         count = Map.EventCount
@@ -358,13 +363,16 @@ Public Module ClientEventSystem
         Map.Events(EventNum).X = X
         Map.Events(EventNum).Y = Y
 
+        frmEditor_MapEditor.lblPasteMode.Text = "PasteMode Off"
+        EventPaste = False
     End Sub
 
-    Sub DeleteEvent(X As Integer, Y As Integer)
+    Sub DeleteEvent(ByVal X As Integer, ByVal Y As Integer)
         Dim count As Integer, i As Integer, lowIndex As Integer
 
         If Not InMapEditor Then Exit Sub
-        If frmEditor_Events.Visible = True Then Exit Sub
+        If FrmEditor_Events.Visible = True Then Exit Sub
+
         count = Map.EventCount
         For i = 1 To count
             If Map.Events(i).X = X And Map.Events(i).Y = Y Then
@@ -388,7 +396,7 @@ Public Module ClientEventSystem
 
     End Sub
 
-    Sub AddEvent(X As Integer, Y As Integer, Optional ByVal cancelLoad As Boolean = False)
+    Sub AddEvent(ByVal X As Integer, ByVal Y As Integer, Optional ByVal cancelLoad As Boolean = False)
         Dim count As Integer, pageCount As Integer, i As Integer
 
         count = Map.EventCount + 1
@@ -417,7 +425,7 @@ Public Module ClientEventSystem
 
     End Sub
 
-    Sub ClearEvent(EventNum As Integer)
+    Sub ClearEvent(ByVal EventNum As Integer)
         If EventNum > Map.EventCount Or EventNum > UBound(Map.MapEvents) Then Exit Sub
         With Map.Events(EventNum)
             .Name = ""
@@ -454,7 +462,7 @@ Public Module ClientEventSystem
 
     End Sub
 
-    Sub EventEditorInit(EventNum As Integer)
+    Sub EventEditorInit(ByVal EventNum As Integer)
         'Dim i As Integer
 
         EditorEvent = EventNum
@@ -464,81 +472,81 @@ Public Module ClientEventSystem
 
     End Sub
 
-    Sub EventEditorLoadPage(pageNum As Integer)
+    Sub EventEditorLoadPage(ByVal PageNum As Integer)
         ' populate form
 
-        With tmpEvent.Pages(pageNum)
+        With tmpEvent.Pages(PageNum)
             GraphicSelX = .GraphicX
             GraphicSelY = .GraphicY
             GraphicSelX2 = .GraphicX2
             GraphicSelY2 = .GraphicY2
-            frmEditor_Events.cmbGraphic.SelectedIndex = .GraphicType
-            frmEditor_Events.cmbHasItem.SelectedIndex = .HasItemIndex
+            FrmEditor_Events.cmbGraphic.SelectedIndex = .GraphicType
+            FrmEditor_Events.cmbHasItem.SelectedIndex = .HasItemIndex
             If .HasItemAmount = 0 Then
-                frmEditor_Events.nudCondition_HasItem.Value = 1
+                FrmEditor_Events.nudCondition_HasItem.Value = 1
             Else
-                frmEditor_Events.nudCondition_HasItem.Value = .HasItemAmount
+                FrmEditor_Events.nudCondition_HasItem.Value = .HasItemAmount
             End If
-            frmEditor_Events.cmbMoveFreq.SelectedIndex = .MoveFreq
-            frmEditor_Events.cmbMoveSpeed.SelectedIndex = .MoveSpeed
-            frmEditor_Events.cmbMoveType.SelectedIndex = .MoveType
-            frmEditor_Events.cmbPlayerVar.SelectedIndex = .VariableIndex
+            FrmEditor_Events.cmbMoveFreq.SelectedIndex = .MoveFreq
+            FrmEditor_Events.cmbMoveSpeed.SelectedIndex = .MoveSpeed
+            FrmEditor_Events.cmbMoveType.SelectedIndex = .MoveType
+            FrmEditor_Events.cmbPlayerVar.SelectedIndex = .VariableIndex
             FrmEditor_Events.cmbPlayerSwitch.SelectedIndex = .SwitchIndex
             FrmEditor_Events.cmbSelfSwitchCompare.SelectedIndex = .SelfSwitchCompare
-            frmEditor_Events.cmbPlayerSwitchCompare.SelectedIndex = .SwitchCompare
-            frmEditor_Events.cmbPlayervarCompare.SelectedIndex = .VariableCompare
-            frmEditor_Events.chkGlobal.Checked = tmpEvent.Globals
-            frmEditor_Events.cmbTrigger.SelectedIndex = .Trigger
-            frmEditor_Events.chkDirFix.Checked = .DirFix
-            frmEditor_Events.chkHasItem.Checked = .chkHasItem
-            frmEditor_Events.chkPlayerVar.Checked = .chkVariable
-            frmEditor_Events.chkPlayerSwitch.Checked = .chkSwitch
-            frmEditor_Events.chkSelfSwitch.Checked = .chkSelfSwitch
-            frmEditor_Events.chkWalkAnim.Checked = .WalkAnim
-            frmEditor_Events.chkWalkThrough.Checked = .WalkThrough
-            frmEditor_Events.chkShowName.Checked = .ShowName
-            frmEditor_Events.nudPlayerVariable.Value = .VariableCondition
-            frmEditor_Events.nudGraphic.Value = .Graphic
-            If frmEditor_Events.cmbEventQuest.Items.Count > 0 Then
-                If .Questnum >= 0 And .Questnum <= frmEditor_Events.cmbEventQuest.Items.Count Then
-                    frmEditor_Events.cmbEventQuest.SelectedIndex = .Questnum
+            FrmEditor_Events.cmbPlayerSwitchCompare.SelectedIndex = .SwitchCompare
+            FrmEditor_Events.cmbPlayervarCompare.SelectedIndex = .VariableCompare
+            FrmEditor_Events.chkGlobal.Checked = tmpEvent.Globals
+            FrmEditor_Events.cmbTrigger.SelectedIndex = .Trigger
+            FrmEditor_Events.chkDirFix.Checked = .DirFix
+            FrmEditor_Events.chkHasItem.Checked = .chkHasItem
+            FrmEditor_Events.chkPlayerVar.Checked = .chkVariable
+            FrmEditor_Events.chkPlayerSwitch.Checked = .chkSwitch
+            FrmEditor_Events.chkSelfSwitch.Checked = .chkSelfSwitch
+            FrmEditor_Events.chkWalkAnim.Checked = .WalkAnim
+            FrmEditor_Events.chkWalkThrough.Checked = .WalkThrough
+            FrmEditor_Events.chkShowName.Checked = .ShowName
+            FrmEditor_Events.nudPlayerVariable.Value = .VariableCondition
+            FrmEditor_Events.nudGraphic.Value = .Graphic
+            If FrmEditor_Events.cmbEventQuest.Items.Count > 0 Then
+                If .Questnum >= 0 And .Questnum <= FrmEditor_Events.cmbEventQuest.Items.Count Then
+                    FrmEditor_Events.cmbEventQuest.SelectedIndex = .Questnum
                 End If
             End If
-            If frmEditor_Events.cmbEventQuest.SelectedIndex = -1 Then frmEditor_Events.cmbEventQuest.SelectedIndex = 0
+            If FrmEditor_Events.cmbEventQuest.SelectedIndex = -1 Then FrmEditor_Events.cmbEventQuest.SelectedIndex = 0
             If .chkHasItem = 0 Then
-                frmEditor_Events.cmbHasItem.Enabled = False
+                FrmEditor_Events.cmbHasItem.Enabled = False
             Else
-                frmEditor_Events.cmbHasItem.Enabled = True
+                FrmEditor_Events.cmbHasItem.Enabled = True
             End If
             If .chkSelfSwitch = 0 Then
-                frmEditor_Events.cmbSelfSwitch.Enabled = False
-                frmEditor_Events.cmbSelfSwitchCompare.Enabled = False
+                FrmEditor_Events.cmbSelfSwitch.Enabled = False
+                FrmEditor_Events.cmbSelfSwitchCompare.Enabled = False
             Else
-                frmEditor_Events.cmbSelfSwitch.Enabled = True
-                frmEditor_Events.cmbSelfSwitchCompare.Enabled = True
+                FrmEditor_Events.cmbSelfSwitch.Enabled = True
+                FrmEditor_Events.cmbSelfSwitchCompare.Enabled = True
             End If
             If .chkSwitch = 0 Then
-                frmEditor_Events.cmbPlayerSwitch.Enabled = False
-                frmEditor_Events.cmbPlayerSwitchCompare.Enabled = False
+                FrmEditor_Events.cmbPlayerSwitch.Enabled = False
+                FrmEditor_Events.cmbPlayerSwitchCompare.Enabled = False
             Else
-                frmEditor_Events.cmbPlayerSwitch.Enabled = True
-                frmEditor_Events.cmbPlayerSwitchCompare.Enabled = True
+                FrmEditor_Events.cmbPlayerSwitch.Enabled = True
+                FrmEditor_Events.cmbPlayerSwitchCompare.Enabled = True
             End If
             If .chkVariable = 0 Then
-                frmEditor_Events.cmbPlayerVar.Enabled = False
-                frmEditor_Events.nudPlayerVariable.Enabled = False
-                frmEditor_Events.cmbPlayervarCompare.Enabled = False
+                FrmEditor_Events.cmbPlayerVar.Enabled = False
+                FrmEditor_Events.nudPlayerVariable.Enabled = False
+                FrmEditor_Events.cmbPlayervarCompare.Enabled = False
             Else
-                frmEditor_Events.cmbPlayerVar.Enabled = True
-                frmEditor_Events.nudPlayerVariable.Enabled = True
-                frmEditor_Events.cmbPlayervarCompare.Enabled = True
+                FrmEditor_Events.cmbPlayerVar.Enabled = True
+                FrmEditor_Events.nudPlayerVariable.Enabled = True
+                FrmEditor_Events.cmbPlayervarCompare.Enabled = True
             End If
-            If frmEditor_Events.cmbMoveType.SelectedIndex = 2 Then
-                frmEditor_Events.btnMoveRoute.Enabled = True
+            If FrmEditor_Events.cmbMoveType.SelectedIndex = 2 Then
+                FrmEditor_Events.btnMoveRoute.Enabled = True
             Else
-                frmEditor_Events.btnMoveRoute.Enabled = False
+                FrmEditor_Events.btnMoveRoute.Enabled = False
             End If
-            frmEditor_Events.cmbPositioning.SelectedIndex = .Position
+            FrmEditor_Events.cmbPositioning.SelectedIndex = .Position
             ' show the commands
             EventListCommands()
 
@@ -1047,24 +1055,15 @@ newlist:
 
         Dim z As Integer
         X = 0
-        For i = 0 To frmEditor_Events.lstCommands.Items.Count - 1
-            'X = frmEditor_Events.TextWidth(frmEditor_Events.lstCommands.Items.Item(i).ToString)
+        For i = 0 To FrmEditor_Events.lstCommands.Items.Count - 1
             If X > z Then z = X
         Next
 
-        ScrollCommands(z)
-
     End Sub
 
-    Public Sub ScrollCommands(size As Integer)
+    Sub ListCommandAdd(ByVal s As String)
 
-        'Call SendMessage(frmEditor_Events.lstCommands.hwnd, LB_SETHORIZONTALEXTENT, (size) + 6, 0&)
-
-    End Sub
-
-    Sub ListCommandAdd(s As String)
-
-        frmEditor_Events.lstCommands.Items.Add(s)
+        FrmEditor_Events.lstCommands.Items.Add(s)
 
     End Sub
 
@@ -3048,37 +3047,37 @@ nextevent:
 
     End Sub
 
-    Public Sub DrawEvent(id As Integer) ' draw on map, outside the editor
+    Public Sub DrawEvent(ByVal Id As Integer) ' draw on map, outside the editor
         Dim X As Integer, Y As Integer, Width As Integer, Height As Integer, sRect As Rectangle, Anim As Integer, spritetop As Integer
 
-        If Map.MapEvents(id).Visible = 0 Then Exit Sub
+        If Map.MapEvents(Id).Visible = 0 Then Exit Sub
         If InMapEditor Then Exit Sub
-        Select Case Map.MapEvents(id).GraphicType
+        Select Case Map.MapEvents(Id).GraphicType
             Case 0
                 Exit Sub
             Case 1
-                If Map.MapEvents(id).GraphicNum <= 0 Or Map.MapEvents(id).GraphicNum > NumCharacters Then Exit Sub
+                If Map.MapEvents(Id).GraphicNum <= 0 Or Map.MapEvents(Id).GraphicNum > NumCharacters Then Exit Sub
 
                 ' Reset frame
-                If Map.MapEvents(id).Steps = 3 Then
+                If Map.MapEvents(Id).Steps = 3 Then
                     Anim = 0
-                ElseIf Map.MapEvents(id).Steps = 1 Then
+                ElseIf Map.MapEvents(Id).Steps = 1 Then
                     Anim = 2
                 End If
 
-                Select Case Map.MapEvents(id).dir
+                Select Case Map.MapEvents(Id).dir
                     Case Direction.Up
-                        If (Map.MapEvents(id).YOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).YOffset > 8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Down
-                        If (Map.MapEvents(id).YOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).YOffset < -8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Left
-                        If (Map.MapEvents(id).XOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).XOffset > 8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Right
-                        If (Map.MapEvents(id).XOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).XOffset < -8) Then Anim = Map.MapEvents(Id).Steps
                 End Select
 
                 ' Set the left
-                Select Case Map.MapEvents(id).ShowDir
+                Select Case Map.MapEvents(Id).ShowDir
                     Case Direction.Up
                         spritetop = 3
                     Case Direction.Right
@@ -3089,53 +3088,54 @@ nextevent:
                         spritetop = 1
                 End Select
 
-                If Map.MapEvents(id).WalkAnim = 1 Then Anim = 0
-                If Map.MapEvents(id).Moving = 0 Then Anim = Map.MapEvents(id).GraphicX
+                If Map.MapEvents(Id).WalkAnim = 1 Then Anim = 0
+                If Map.MapEvents(Id).Moving = 0 Then Anim = Map.MapEvents(Id).GraphicX
 
-                Width = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Width / 4
-                Height = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Height / 4
+                Width = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4
+                Height = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4
 
-                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Height / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Width / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Height / 4))
+                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4))
                 ' Calculate the X
-                X = Map.MapEvents(id).X * PIC_X + Map.MapEvents(id).XOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Width / 4 - 32) / 2)
+                X = Map.MapEvents(Id).X * PIC_X + Map.MapEvents(Id).XOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Width / 4 - 32) / 2)
 
                 ' Is the player's height more than 32..?
-                If (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Height * 4) > 32 Then
+                If (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height * 4) > 32 Then
                     ' Create a 32 pixel offset for larger sprites
-                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).Height / 4) - 32)
+                    Y = Map.MapEvents(Id).Y * PIC_Y + Map.MapEvents(Id).YOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).Height / 4) - 32)
                 Else
                     ' Proceed as normal
-                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset
+                    Y = Map.MapEvents(Id).Y * PIC_Y + Map.MapEvents(Id).YOffset
                 End If
                 ' render the actual sprite
-                DrawCharacter(Map.MapEvents(id).GraphicNum, X, Y, sRect)
+                DrawCharacter(Map.MapEvents(Id).GraphicNum, X, Y, sRect)
             Case 2
-                If Map.MapEvents(id).GraphicNum < 1 Or Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
-                If Map.MapEvents(id).GraphicY2 > 0 Or Map.MapEvents(id).GraphicX2 > 0 Then
+                If Map.MapEvents(Id).GraphicNum < 1 Or Map.MapEvents(Id).GraphicNum > NumTileSets Then Exit Sub
+                If Map.MapEvents(Id).GraphicY2 > 0 Or Map.MapEvents(Id).GraphicX2 > 0 Then
                     With sRect
-                        .X = Map.MapEvents(id).GraphicX * 32
-                        .Y = Map.MapEvents(id).GraphicY * 32
-                        .Width = Map.MapEvents(id).GraphicX2 * 32
-                        .Height = Map.MapEvents(id).GraphicY2 * 32
+                        .X = Map.MapEvents(Id).GraphicX * 32
+                        .Y = Map.MapEvents(Id).GraphicY * 32
+                        .Width = Map.MapEvents(Id).GraphicX2 * 32
+                        .Height = Map.MapEvents(Id).GraphicY2 * 32
                     End With
                 Else
                     With sRect
-                        .X = Map.MapEvents(id).GraphicY * 32
+                        .X = Map.MapEvents(Id).GraphicY * 32
                         .Height = .Top + 32
-                        .Y = Map.MapEvents(id).GraphicX * 32
+                        .Y = Map.MapEvents(Id).GraphicX * 32
                         .Width = .Left + 32
                     End With
                 End If
-                X = Map.MapEvents(id).X * 32
-                Y = Map.MapEvents(id).Y * 32
+                X = Map.MapEvents(Id).X * 32
+                Y = Map.MapEvents(Id).Y * 32
                 X = X - ((sRect.Right - sRect.Left) / 2)
                 Y = Y - (sRect.Bottom - sRect.Top) + 32
-                If Map.MapEvents(id).GraphicY2 > 0 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32) - ConvertMapY(Map.MapEvents(id).GraphicY2 * 32) + 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+
+                If Map.MapEvents(Id).GraphicY2 > 1 Then
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * 32), ConvertMapY(Map.MapEvents(Id).Y * 32) - 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * 32), ConvertMapY(Map.MapEvents(Id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
-                'tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+
         End Select
 
     End Sub
@@ -3212,44 +3212,44 @@ nextevent:
 
 #Region "Misc"
 
-    Sub ProcessEventMovement(ByVal id As Integer)
+    Sub ProcessEventMovement(ByVal Id As Integer)
 
-        If id > Map.EventCount Then Exit Sub
-        If id > Map.MapEvents.Length Then Exit Sub
+        If Id > Map.EventCount Then Exit Sub
+        If Id > Map.MapEvents.Length Then Exit Sub
 
-        If Map.MapEvents(id).Moving = 1 Then
-            Select Case Map.MapEvents(id).dir
+        If Map.MapEvents(Id).Moving = 1 Then
+            Select Case Map.MapEvents(Id).dir
                 Case Direction.Up
-                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
-                    If Map.MapEvents(id).YOffset < 0 Then Map.MapEvents(id).YOffset = 0
+                    Map.MapEvents(Id).YOffset = Map.MapEvents(Id).YOffset - ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(Id).YOffset < 0 Then Map.MapEvents(Id).YOffset = 0
                 Case Direction.Down
-                    Map.MapEvents(id).YOffset = Map.MapEvents(id).YOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
-                    If Map.MapEvents(id).YOffset > 0 Then Map.MapEvents(id).YOffset = 0
+                    Map.MapEvents(Id).YOffset = Map.MapEvents(Id).YOffset + ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(Id).YOffset > 0 Then Map.MapEvents(Id).YOffset = 0
                 Case Direction.Left
-                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset - ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
-                    If Map.MapEvents(id).XOffset < 0 Then Map.MapEvents(id).XOffset = 0
+                    Map.MapEvents(Id).XOffset = Map.MapEvents(Id).XOffset - ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(Id).XOffset < 0 Then Map.MapEvents(Id).XOffset = 0
                 Case Direction.Right
-                    Map.MapEvents(id).XOffset = Map.MapEvents(id).XOffset + ((ElapsedTime / 1000) * (Map.MapEvents(id).MovementSpeed * SIZE_X))
-                    If Map.MapEvents(id).XOffset > 0 Then Map.MapEvents(id).XOffset = 0
+                    Map.MapEvents(Id).XOffset = Map.MapEvents(Id).XOffset + ((ElapsedTime / 1000) * (Map.MapEvents(Id).MovementSpeed * SIZE_X))
+                    If Map.MapEvents(Id).XOffset > 0 Then Map.MapEvents(Id).XOffset = 0
             End Select
             ' Check if completed walking over to the next tile
-            If Map.MapEvents(id).Moving > 0 Then
-                If Map.MapEvents(id).dir = Direction.Right Or Map.MapEvents(id).dir = Direction.Down Then
-                    If (Map.MapEvents(id).XOffset >= 0) And (Map.MapEvents(id).YOffset >= 0) Then
-                        Map.MapEvents(id).Moving = 0
-                        If Map.MapEvents(id).Steps = 1 Then
-                            Map.MapEvents(id).Steps = 3
+            If Map.MapEvents(Id).Moving > 0 Then
+                If Map.MapEvents(Id).dir = Direction.Right Or Map.MapEvents(Id).dir = Direction.Down Then
+                    If (Map.MapEvents(Id).XOffset >= 0) And (Map.MapEvents(Id).YOffset >= 0) Then
+                        Map.MapEvents(Id).Moving = 0
+                        If Map.MapEvents(Id).Steps = 1 Then
+                            Map.MapEvents(Id).Steps = 3
                         Else
-                            Map.MapEvents(id).Steps = 1
+                            Map.MapEvents(Id).Steps = 1
                         End If
                     End If
                 Else
-                    If (Map.MapEvents(id).XOffset <= 0) And (Map.MapEvents(id).YOffset <= 0) Then
-                        Map.MapEvents(id).Moving = 0
-                        If Map.MapEvents(id).Steps = 1 Then
-                            Map.MapEvents(id).Steps = 3
+                    If (Map.MapEvents(Id).XOffset <= 0) And (Map.MapEvents(Id).YOffset <= 0) Then
+                        Map.MapEvents(Id).Moving = 0
+                        If Map.MapEvents(Id).Steps = 1 Then
+                            Map.MapEvents(Id).Steps = 3
                         Else
-                            Map.MapEvents(id).Steps = 1
+                            Map.MapEvents(Id).Steps = 1
                         End If
                     End If
                 End If
@@ -3258,9 +3258,9 @@ nextevent:
 
     End Sub
 
-    Public Function GetColorString(color As Integer)
+    Public Function GetColorString(ByVal Color As Integer)
 
-        Select Case color
+        Select Case Color
             Case 0
                 GetColorString = "Black"
             Case 1

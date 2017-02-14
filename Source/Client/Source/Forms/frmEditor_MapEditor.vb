@@ -834,8 +834,14 @@ Public Class frmEditor_MapEditor
                     End If
                 Next
             ElseIf tabpages.SelectedTab Is tpEvents Then
-                If frmEditor_Events.Visible = False Then
-                    AddEvent(CurX, CurY)
+                If FrmEditor_Events.Visible = False Then
+                    If EventCopy Then
+                        CopyEvent_Map(CurX, CurY)
+                    ElseIf EventPaste Then
+                        PasteEvent_Map(CurX, CurY)
+                    Else
+                        AddEvent(CurX, CurY)
+                    End If
                 End If
             End If
         End If
@@ -1061,6 +1067,20 @@ Public Class frmEditor_MapEditor
         scrlMapWarpY.Maximum = Byte.MaxValue
         scrlMapWarpX.Value = 0
         scrlMapWarpY.Value = 0
+    End Sub
+
+    Private Sub BtnCopyEvent_Click(sender As Object, e As EventArgs) Handles btnCopyEvent.Click
+        EventCopy = True
+        lblCopyMode.Text = "CopyMode On"
+        EventPaste = False
+        lblPasteMode.Text = "PasteMode Off"
+    End Sub
+
+    Private Sub BtnPasteEvent_Click(sender As Object, e As EventArgs) Handles btnPasteEvent.Click
+        EventPaste = True
+        lblPasteMode.Text = "PasteMode On"
+        EventCopy = False
+        lblCopyMode.Text = "CopyMode Off"
     End Sub
 
 #End Region
