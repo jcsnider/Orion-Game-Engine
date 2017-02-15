@@ -159,27 +159,28 @@
             .nudExpReward.Value = Quest(EditorIndex).RewardExp
 
 
-            frmEditor_Quest.lstRequirements.Items.Clear()
+            .lstRequirements.Items.Clear()
 
             For i = 1 To Quest(EditorIndex).ReqCount
 
                 Select Case Quest(EditorIndex).Requirement(i)
                     Case 1
-                        frmEditor_Quest.lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(EditorIndex).RequirementIndex(i)).Name))
                     Case 2
-                        frmEditor_Quest.lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(EditorIndex).RequirementIndex(i)).Name))
                     Case 3
-                        frmEditor_Quest.lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(EditorIndex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(EditorIndex).RequirementIndex(i)).Name))
                     Case Else
-                        frmEditor_Quest.lstRequirements.Items.Add(i & ":")
+                        .lstRequirements.Items.Add(i & ":")
                 End Select
             Next
 
-            frmEditor_Quest.lstTasks.Items.Clear()
+            .lstTasks.Items.Clear()
             For i = 1 To Quest(EditorIndex).TaskCount
                 frmEditor_Quest.lstTasks.Items.Add(i & ":" & Quest(EditorIndex).Task(i).TaskLog)
             Next
 
+            .rdbNoneReq.Checked = True
         End With
 
         Quest_Changed(EditorIndex) = True

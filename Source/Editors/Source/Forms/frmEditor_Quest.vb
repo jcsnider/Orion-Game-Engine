@@ -15,7 +15,6 @@
         nudTakeAmount.Maximum = Byte.MaxValue
         nudItemRewValue.Maximum = 999999
 
-        rdbNoneReq.Checked = True
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
