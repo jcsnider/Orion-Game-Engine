@@ -514,7 +514,7 @@ Public Class FrmMenu
     End Sub
 
     ''' <summary>
-    ''' Handles Exit burron press.
+    ''' Handles Exit button press.
     ''' </summary>
     Private Sub BtnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         PlaySound("Click.ogg")
@@ -655,6 +655,21 @@ Public Class FrmMenu
     ''' Handles NewChar button press.
     ''' </summary>
     Private Sub BtnNewChar_Click(sender As Object, e As EventArgs) Handles btnNewChar.Click
+        Dim i As Integer, NewSelectedChar As Byte
+
+        NewSelectedChar = 0
+
+        For i = 1 To MaxChars
+            If CharSelection(i).Name = "" Then
+                newselectedchar = i
+                Exit For
+            End If
+        Next
+
+        If NewSelectedChar > 0 Then
+            SelectedChar = NewSelectedChar
+        End If
+
         pnlCharCreateVisible = True
         pnlCharSelectVisible = False
         DrawChar = True

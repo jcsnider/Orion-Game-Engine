@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-
-Public Class frmAdmin
+﻿Public Class frmAdmin
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' set values for admin panel
         cmbSpawnItem.Items.Clear()
@@ -13,26 +11,15 @@ Public Class frmAdmin
 
 #Region "Moderation"
     Private Sub BtnAdminWarpTo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAdminWarpTo.Click
-        Dim n As Integer
 
         If GetPlayerAccess(MyIndex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminMap.Text)) < 1 Then
-            Exit Sub
-        End If
-
-        If Not IsNumeric(Trim$(txtAdminMap.Text)) Then
-            Exit Sub
-        End If
-
-        n = Trim$(txtAdminMap.Text)
-
         ' Check to make sure its a valid map #
-        If n > 0 And n <= MAX_MAPS Then
-            WarpTo(n)
+        If nudAdminMap.Value > 0 And nudAdminMap.Value <= MAX_MAPS Then
+            WarpTo(nudAdminMap.Value)
         Else
             AddText("Invalid map number.", ColorType.BrightRed)
         End If
@@ -44,9 +31,7 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
+        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
 
         SendBan(Trim$(txtAdminName.Text))
     End Sub
@@ -57,9 +42,7 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
+        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
 
         SendKick(Trim$(txtAdminName.Text))
     End Sub
@@ -70,13 +53,9 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
-            Exit Sub
-        End If
+        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
 
-        If IsNumeric(Trim$(txtAdminName.Text)) Then
-            Exit Sub
-        End If
+        If IsNumeric(Trim$(txtAdminName.Text)) Then Exit Sub
 
         WarpToMe(Trim$(txtAdminName.Text))
     End Sub
@@ -121,15 +100,9 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminSprite.Text)) < 1 Then
-            Exit Sub
-        End If
+        If nudAdminSprite.Value < 1 Then Exit Sub
 
-        If Not IsNumeric(Trim$(txtAdminSprite.Text)) Then
-            Exit Sub
-        End If
-
-        SendSetSprite(Trim$(txtAdminSprite.Text))
+        SendSetSprite(nudAdminSprite.Value)
     End Sub
 #End Region
 
@@ -172,15 +145,10 @@ Public Class frmAdmin
 #Region "Misc"
     Private Sub CmbSpawnItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnItem.SelectedIndexChanged
         If Item(cmbSpawnItem.SelectedIndex + 1).Type = ItemType.Currency Or Item(cmbSpawnItem.SelectedIndex + 1).Stackable = 1 Then
-            scrlSpawnItemAmount.Enabled = True
-            scrlSpawnItemAmount.Maximum = 1000
+            nudSpawnItemAmount.Enabled = True
             Exit Sub
         End If
-        scrlSpawnItemAmount.Enabled = False
-    End Sub
-
-    Private Sub ScrlSpawnItemAmount_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlSpawnItemAmount.Scroll
-        lblSpawnItemAmount.Text = "Amount: " & scrlSpawnItemAmount.Value
+        nudSpawnItemAmount.Enabled = False
     End Sub
 
     Private Sub BtnSpawnItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSpawnItem.Click
@@ -189,7 +157,7 @@ Public Class frmAdmin
             Exit Sub
         End If
 
-        SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, scrlSpawnItemAmount.Value)
+        SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, nudSpawnItemAmount.Value)
     End Sub
 
     Private Sub BtnLevelUp_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLevelUp.Click

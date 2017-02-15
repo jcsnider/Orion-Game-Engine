@@ -262,7 +262,7 @@
     End Sub
 
     Sub Packet_LoginOk(ByVal Data() As Byte)
-        Dim Buffer As New ByteBuffer, MaxChars As Byte, CharName As String, Sprite As Integer
+        Dim Buffer As New ByteBuffer, CharName As String, Sprite As Integer
         Dim Level As Integer, ClassName As String, Gender As Byte
 
         Buffer.WriteBytes(Data)

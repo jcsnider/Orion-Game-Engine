@@ -328,8 +328,6 @@ Public Module ClientEventSystem
                 ' copy it
                 CopyEvent = Map.Events(i)
 
-                frmEditor_MapEditor.lblCopyMode.Text = "CopyMode Off"
-                EventCopy = False
                 ' exit
                 Exit Sub
             End If
@@ -363,8 +361,6 @@ Public Module ClientEventSystem
         Map.Events(EventNum).X = X
         Map.Events(EventNum).Y = Y
 
-        frmEditor_MapEditor.lblPasteMode.Text = "PasteMode Off"
-        EventPaste = False
     End Sub
 
     Sub DeleteEvent(ByVal X As Integer, ByVal Y As Integer)

@@ -1070,17 +1070,27 @@ Public Class frmEditor_MapEditor
     End Sub
 
     Private Sub BtnCopyEvent_Click(sender As Object, e As EventArgs) Handles btnCopyEvent.Click
-        EventCopy = True
-        lblCopyMode.Text = "CopyMode On"
-        EventPaste = False
-        lblPasteMode.Text = "PasteMode Off"
+        If EventCopy = False Then
+            EventCopy = True
+            lblCopyMode.Text = "CopyMode On"
+            EventPaste = False
+            lblPasteMode.Text = "PasteMode Off"
+        Else
+            EventCopy = False
+            lblCopyMode.Text = "CopyMode Off"
+        End If
     End Sub
 
     Private Sub BtnPasteEvent_Click(sender As Object, e As EventArgs) Handles btnPasteEvent.Click
-        EventPaste = True
-        lblPasteMode.Text = "PasteMode On"
-        EventCopy = False
-        lblCopyMode.Text = "CopyMode Off"
+        If EventPaste = False Then
+            EventPaste = True
+            lblPasteMode.Text = "PasteMode On"
+            EventCopy = False
+            lblCopyMode.Text = "CopyMode Off"
+        Else
+            EventPaste = False
+            lblPasteMode.Text = "PasteMode Off"
+        End If
     End Sub
 
 #End Region

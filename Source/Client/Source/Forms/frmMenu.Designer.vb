@@ -859,7 +859,8 @@ Partial Class FrmMenu
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(708, 541)
+        Me.ClientSize = New System.Drawing.Size(1226, 541)
+        Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlLoad)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.btnExit)
@@ -874,7 +875,6 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.pnlLogin)
         Me.Controls.Add(Me.pnlMainMenu)
         Me.Controls.Add(Me.picLogo)
-        Me.Controls.Add(Me.pnlNewChar)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

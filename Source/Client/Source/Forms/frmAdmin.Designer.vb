@@ -22,20 +22,16 @@ Partial Class frmAdmin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAdmin))
         Me.btnRespawn = New System.Windows.Forms.Button()
         Me.btnMapReport = New System.Windows.Forms.Button()
         Me.btnALoc = New System.Windows.Forms.Button()
-        Me.btnLevelUp = New System.Windows.Forms.Button()
         Me.btnSpawnItem = New System.Windows.Forms.Button()
-        Me.scrlSpawnItemAmount = New System.Windows.Forms.HScrollBar()
         Me.lblSpawnItemAmount = New System.Windows.Forms.Label()
         Me.lblItemSpawn = New System.Windows.Forms.Label()
-        Me.btnMapEditor = New System.Windows.Forms.Button()
         Me.btnAdminSetSprite = New System.Windows.Forms.Button()
         Me.btnAdminWarpTo = New System.Windows.Forms.Button()
-        Me.txtAdminSprite = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtAdminMap = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnAdminSetAccess = New System.Windows.Forms.Button()
         Me.btnAdminWarpMe2 = New System.Windows.Forms.Button()
@@ -50,16 +46,22 @@ Partial Class frmAdmin
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.nudAdminSprite = New System.Windows.Forms.NumericUpDown()
+        Me.nudAdminMap = New System.Windows.Forms.NumericUpDown()
+        Me.btnLevelUp = New System.Windows.Forms.Button()
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnMapEditor = New System.Windows.Forms.Button()
+        Me.nudSpawnItemAmount = New System.Windows.Forms.NumericUpDown()
         Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        CType(Me.nudAdminSprite, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudAdminMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        CType(Me.nudSpawnItemAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnRespawn
@@ -73,7 +75,7 @@ Partial Class frmAdmin
         '
         'btnMapReport
         '
-        Me.btnMapReport.Location = New System.Drawing.Point(6, 339)
+        Me.btnMapReport.Location = New System.Drawing.Point(6, 209)
         Me.btnMapReport.Name = "btnMapReport"
         Me.btnMapReport.Size = New System.Drawing.Size(238, 22)
         Me.btnMapReport.TabIndex = 33
@@ -89,40 +91,23 @@ Partial Class frmAdmin
         Me.btnALoc.Text = "Location"
         Me.btnALoc.UseVisualStyleBackColor = True
         '
-        'btnLevelUp
-        '
-        Me.btnLevelUp.Location = New System.Drawing.Point(33, 265)
-        Me.btnLevelUp.Name = "btnLevelUp"
-        Me.btnLevelUp.Size = New System.Drawing.Size(188, 22)
-        Me.btnLevelUp.TabIndex = 30
-        Me.btnLevelUp.Text = "Level Up"
-        Me.btnLevelUp.UseVisualStyleBackColor = True
-        '
         'btnSpawnItem
         '
-        Me.btnSpawnItem.Location = New System.Drawing.Point(14, 164)
+        Me.btnSpawnItem.Location = New System.Drawing.Point(14, 145)
         Me.btnSpawnItem.Name = "btnSpawnItem"
         Me.btnSpawnItem.Size = New System.Drawing.Size(228, 22)
         Me.btnSpawnItem.TabIndex = 29
         Me.btnSpawnItem.Text = "Spawn Item"
         Me.btnSpawnItem.UseVisualStyleBackColor = True
         '
-        'scrlSpawnItemAmount
-        '
-        Me.scrlSpawnItemAmount.LargeChange = 1
-        Me.scrlSpawnItemAmount.Location = New System.Drawing.Point(14, 131)
-        Me.scrlSpawnItemAmount.Name = "scrlSpawnItemAmount"
-        Me.scrlSpawnItemAmount.Size = New System.Drawing.Size(228, 17)
-        Me.scrlSpawnItemAmount.TabIndex = 28
-        '
         'lblSpawnItemAmount
         '
         Me.lblSpawnItemAmount.AutoSize = True
-        Me.lblSpawnItemAmount.Location = New System.Drawing.Point(11, 118)
+        Me.lblSpawnItemAmount.Location = New System.Drawing.Point(31, 121)
         Me.lblSpawnItemAmount.Name = "lblSpawnItemAmount"
-        Me.lblSpawnItemAmount.Size = New System.Drawing.Size(55, 13)
+        Me.lblSpawnItemAmount.Size = New System.Drawing.Size(46, 13)
         Me.lblSpawnItemAmount.TabIndex = 26
-        Me.lblSpawnItemAmount.Text = "Amount: 1"
+        Me.lblSpawnItemAmount.Text = "Amount:"
         '
         'lblItemSpawn
         '
@@ -133,60 +118,37 @@ Partial Class frmAdmin
         Me.lblItemSpawn.TabIndex = 25
         Me.lblItemSpawn.Text = "Spawn Item:"
         '
-        'btnMapEditor
-        '
-        Me.btnMapEditor.Location = New System.Drawing.Point(124, 6)
-        Me.btnMapEditor.Name = "btnMapEditor"
-        Me.btnMapEditor.Size = New System.Drawing.Size(112, 25)
-        Me.btnMapEditor.TabIndex = 18
-        Me.btnMapEditor.Text = "Map Editor"
-        Me.btnMapEditor.UseVisualStyleBackColor = True
-        '
         'btnAdminSetSprite
         '
-        Me.btnAdminSetSprite.Location = New System.Drawing.Point(134, 178)
+        Me.btnAdminSetSprite.Location = New System.Drawing.Point(134, 206)
         Me.btnAdminSetSprite.Name = "btnAdminSetSprite"
-        Me.btnAdminSetSprite.Size = New System.Drawing.Size(108, 22)
+        Me.btnAdminSetSprite.Size = New System.Drawing.Size(108, 24)
         Me.btnAdminSetSprite.TabIndex = 16
         Me.btnAdminSetSprite.Text = "Set Player Sprite"
         Me.btnAdminSetSprite.UseVisualStyleBackColor = True
         '
         'btnAdminWarpTo
         '
-        Me.btnAdminWarpTo.Location = New System.Drawing.Point(134, 150)
+        Me.btnAdminWarpTo.Location = New System.Drawing.Point(134, 176)
         Me.btnAdminWarpTo.Name = "btnAdminWarpTo"
-        Me.btnAdminWarpTo.Size = New System.Drawing.Size(108, 22)
+        Me.btnAdminWarpTo.Size = New System.Drawing.Size(108, 24)
         Me.btnAdminWarpTo.TabIndex = 15
         Me.btnAdminWarpTo.Text = "Warp To Map"
         Me.btnAdminWarpTo.UseVisualStyleBackColor = True
         '
-        'txtAdminSprite
-        '
-        Me.txtAdminSprite.Location = New System.Drawing.Point(83, 178)
-        Me.txtAdminSprite.Name = "txtAdminSprite"
-        Me.txtAdminSprite.Size = New System.Drawing.Size(45, 20)
-        Me.txtAdminSprite.TabIndex = 14
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 181)
+        Me.Label5.Location = New System.Drawing.Point(6, 210)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(77, 13)
+        Me.Label5.Size = New System.Drawing.Size(37, 13)
         Me.Label5.TabIndex = 13
-        Me.Label5.Text = "Sprite Number:"
-        '
-        'txtAdminMap
-        '
-        Me.txtAdminMap.Location = New System.Drawing.Point(83, 152)
-        Me.txtAdminMap.Name = "txtAdminMap"
-        Me.txtAdminMap.Size = New System.Drawing.Size(45, 20)
-        Me.txtAdminMap.TabIndex = 12
+        Me.Label5.Text = "Sprite:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 155)
+        Me.Label4.Location = New System.Drawing.Point(6, 182)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(71, 13)
         Me.Label4.TabIndex = 11
@@ -194,7 +156,7 @@ Partial Class frmAdmin
         '
         'btnAdminSetAccess
         '
-        Me.btnAdminSetAccess.Location = New System.Drawing.Point(9, 120)
+        Me.btnAdminSetAccess.Location = New System.Drawing.Point(9, 148)
         Me.btnAdminSetAccess.Name = "btnAdminSetAccess"
         Me.btnAdminSetAccess.Size = New System.Drawing.Size(233, 22)
         Me.btnAdminSetAccess.TabIndex = 9
@@ -247,7 +209,7 @@ Partial Class frmAdmin
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 96)
+        Me.Label3.Location = New System.Drawing.Point(6, 124)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 2
@@ -272,7 +234,7 @@ Partial Class frmAdmin
         Me.lstMaps.Location = New System.Drawing.Point(6, 6)
         Me.lstMaps.MultiSelect = False
         Me.lstMaps.Name = "lstMaps"
-        Me.lstMaps.Size = New System.Drawing.Size(239, 330)
+        Me.lstMaps.Size = New System.Drawing.Size(239, 197)
         Me.lstMaps.TabIndex = 4
         Me.lstMaps.UseCompatibleStateImageBehavior = False
         Me.lstMaps.View = System.Windows.Forms.View.Details
@@ -290,17 +252,19 @@ Partial Class frmAdmin
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(2, 2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(258, 390)
+        Me.TabControl1.Size = New System.Drawing.Size(258, 265)
         Me.TabControl1.TabIndex = 38
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.nudAdminSprite)
+        Me.TabPage1.Controls.Add(Me.nudAdminMap)
+        Me.TabPage1.Controls.Add(Me.btnLevelUp)
         Me.TabPage1.Controls.Add(Me.cmbAccess)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.Label3)
@@ -311,38 +275,48 @@ Partial Class frmAdmin
         Me.TabPage1.Controls.Add(Me.btnAdminWarpMe2)
         Me.TabPage1.Controls.Add(Me.btnAdminSetAccess)
         Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Controls.Add(Me.txtAdminMap)
         Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Controls.Add(Me.txtAdminSprite)
         Me.TabPage1.Controls.Add(Me.btnAdminWarpTo)
         Me.TabPage1.Controls.Add(Me.btnAdminSetSprite)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(250, 364)
+        Me.TabPage1.Size = New System.Drawing.Size(250, 239)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Moderation"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'nudAdminSprite
+        '
+        Me.nudAdminSprite.Location = New System.Drawing.Point(80, 208)
+        Me.nudAdminSprite.Name = "nudAdminSprite"
+        Me.nudAdminSprite.Size = New System.Drawing.Size(48, 20)
+        Me.nudAdminSprite.TabIndex = 33
+        '
+        'nudAdminMap
+        '
+        Me.nudAdminMap.Location = New System.Drawing.Point(80, 178)
+        Me.nudAdminMap.Name = "nudAdminMap"
+        Me.nudAdminMap.Size = New System.Drawing.Size(48, 20)
+        Me.nudAdminMap.TabIndex = 32
+        '
+        'btnLevelUp
+        '
+        Me.btnLevelUp.Location = New System.Drawing.Point(32, 90)
+        Me.btnLevelUp.Name = "btnLevelUp"
+        Me.btnLevelUp.Size = New System.Drawing.Size(188, 22)
+        Me.btnLevelUp.TabIndex = 31
+        Me.btnLevelUp.Text = "Level Up"
+        Me.btnLevelUp.UseVisualStyleBackColor = True
         '
         'cmbAccess
         '
         Me.cmbAccess.FormattingEnabled = True
         Me.cmbAccess.Items.AddRange(New Object() {"Normal Player", "Monitor (GM)", "Mapper", "Developer", "Creator"})
-        Me.cmbAccess.Location = New System.Drawing.Point(57, 93)
+        Me.cmbAccess.Location = New System.Drawing.Point(57, 121)
         Me.cmbAccess.Name = "cmbAccess"
         Me.cmbAccess.Size = New System.Drawing.Size(185, 21)
         Me.cmbAccess.TabIndex = 17
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.btnMapEditor)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(250, 364)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Editors"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TabPage3
         '
@@ -351,28 +325,45 @@ Partial Class frmAdmin
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(250, 364)
+        Me.TabPage3.Size = New System.Drawing.Size(250, 239)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Map List"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.btnMapEditor)
+        Me.TabPage4.Controls.Add(Me.nudSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.cmbSpawnItem)
         Me.TabPage4.Controls.Add(Me.btnRespawn)
         Me.TabPage4.Controls.Add(Me.btnALoc)
         Me.TabPage4.Controls.Add(Me.lblItemSpawn)
         Me.TabPage4.Controls.Add(Me.lblSpawnItemAmount)
-        Me.TabPage4.Controls.Add(Me.btnLevelUp)
-        Me.TabPage4.Controls.Add(Me.scrlSpawnItemAmount)
         Me.TabPage4.Controls.Add(Me.btnSpawnItem)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(250, 364)
+        Me.TabPage4.Size = New System.Drawing.Size(250, 239)
         Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Misc"
+        Me.TabPage4.Text = "Map Tools"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'btnMapEditor
+        '
+        Me.btnMapEditor.Location = New System.Drawing.Point(14, 44)
+        Me.btnMapEditor.Name = "btnMapEditor"
+        Me.btnMapEditor.Size = New System.Drawing.Size(106, 25)
+        Me.btnMapEditor.TabIndex = 38
+        Me.btnMapEditor.Text = "Map Editor"
+        Me.btnMapEditor.UseVisualStyleBackColor = True
+        '
+        'nudSpawnItemAmount
+        '
+        Me.nudSpawnItemAmount.Location = New System.Drawing.Point(122, 119)
+        Me.nudSpawnItemAmount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudSpawnItemAmount.Name = "nudSpawnItemAmount"
+        Me.nudSpawnItemAmount.Size = New System.Drawing.Size(120, 20)
+        Me.nudSpawnItemAmount.TabIndex = 37
         '
         'cmbSpawnItem
         '
@@ -386,37 +377,37 @@ Partial Class frmAdmin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(260, 395)
+        Me.ClientSize = New System.Drawing.Size(260, 270)
         Me.Controls.Add(Me.TabControl1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmAdmin"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Admin Panel"
-        Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
+        CType(Me.nudAdminSprite, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudAdminMap, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        CType(Me.nudSpawnItemAmount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents btnRespawn As Windows.Forms.Button
     Friend WithEvents btnMapReport As Windows.Forms.Button
     Friend WithEvents btnALoc As Windows.Forms.Button
-    Friend WithEvents btnLevelUp As Windows.Forms.Button
     Friend WithEvents btnSpawnItem As Windows.Forms.Button
-    Friend WithEvents scrlSpawnItemAmount As Windows.Forms.HScrollBar
     Friend WithEvents lblSpawnItemAmount As Windows.Forms.Label
     Friend WithEvents lblItemSpawn As Windows.Forms.Label
-    Friend WithEvents btnMapEditor As Windows.Forms.Button
     Friend WithEvents btnAdminSetSprite As Windows.Forms.Button
     Friend WithEvents btnAdminWarpTo As Windows.Forms.Button
-    Friend WithEvents txtAdminSprite As Windows.Forms.TextBox
     Friend WithEvents Label5 As Windows.Forms.Label
-    Friend WithEvents txtAdminMap As Windows.Forms.TextBox
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents btnAdminSetAccess As Windows.Forms.Button
     Friend WithEvents btnAdminWarpMe2 As Windows.Forms.Button
@@ -431,9 +422,13 @@ Partial Class frmAdmin
     Friend WithEvents ColumnHeader2 As Windows.Forms.ColumnHeader
     Friend WithEvents TabControl1 As Windows.Forms.TabControl
     Friend WithEvents TabPage1 As Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As Windows.Forms.TabPage
     Friend WithEvents TabPage3 As Windows.Forms.TabPage
     Friend WithEvents TabPage4 As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
     Friend WithEvents cmbSpawnItem As Windows.Forms.ComboBox
+    Friend WithEvents nudAdminSprite As Windows.Forms.NumericUpDown
+    Friend WithEvents nudAdminMap As Windows.Forms.NumericUpDown
+    Friend WithEvents btnLevelUp As Windows.Forms.Button
+    Friend WithEvents btnMapEditor As Windows.Forms.Button
+    Friend WithEvents nudSpawnItemAmount As Windows.Forms.NumericUpDown
 End Class

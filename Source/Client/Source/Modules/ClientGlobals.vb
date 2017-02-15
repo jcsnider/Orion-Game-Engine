@@ -1,7 +1,9 @@
 ﻿Imports System.Drawing
 
 Module ClientGlobals
+    'char creation/selecting
     Public SelectedChar As Byte
+    Public MaxChars As Byte
 
     Public TotalOnline As Integer
 
@@ -48,7 +50,7 @@ Module ClientGlobals
     Public EqX As Integer
     Public EqY As Integer
     Public FPS As Integer
-    Public LPS as integer
+    Public LPS As Integer
     Public PingToDraw As String
     Public inChat As Boolean
     Public ShowRClick As Boolean
@@ -108,14 +110,14 @@ Module ClientGlobals
 
     ' Used to check if FPS needs to be drawn
     Public BFPS As Boolean
-    Public BLPS as boolean
+    Public BLPS As Boolean
     Public BLoc As Boolean
 
     ' FPS and Time-based movement vars
     Public ElapsedTime As Integer
     'Public ElapsedMTime As Integer
     Public GameFPS As Integer
-    Public GameLPS as integer
+    Public GameLPS As Integer
 
     ' Text vars
     Public vbQuote As String
