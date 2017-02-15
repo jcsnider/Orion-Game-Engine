@@ -2556,6 +2556,8 @@ Module ClientGraphics
         DrawStatBars()
 
         'Fps etc
+        If FPS > 64 Then FPS = 64
+
         DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, Strings.Get("gamegui", "fps") & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 4, Strings.Get("gamegui", "clock") & CurTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)

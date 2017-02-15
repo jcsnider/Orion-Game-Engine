@@ -343,11 +343,11 @@ Partial Class FrmEditor_Classes
         Me.nudBaseExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudBaseExp.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudBaseExp.Location = New System.Drawing.Point(102, 70)
-        Me.nudBaseExp.Minimum = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudBaseExp.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudBaseExp.Name = "nudBaseExp"
         Me.nudBaseExp.Size = New System.Drawing.Size(103, 20)
         Me.nudBaseExp.TabIndex = 13
-        Me.nudBaseExp.Value = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudBaseExp.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'DarkLabel10
         '
@@ -511,7 +511,6 @@ Partial Class FrmEditor_Classes
         Me.nudFemaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudFemaleSprite.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudFemaleSprite.Location = New System.Drawing.Point(46, 54)
-        Me.nudFemaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudFemaleSprite.Name = "nudFemaleSprite"
         Me.nudFemaleSprite.Size = New System.Drawing.Size(55, 20)
         Me.nudFemaleSprite.TabIndex = 18
@@ -593,7 +592,6 @@ Partial Class FrmEditor_Classes
         Me.nudMaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.nudMaleSprite.ForeColor = System.Drawing.Color.Gainsboro
         Me.nudMaleSprite.Location = New System.Drawing.Point(46, 54)
-        Me.nudMaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaleSprite.Name = "nudMaleSprite"
         Me.nudMaleSprite.Size = New System.Drawing.Size(55, 20)
         Me.nudMaleSprite.TabIndex = 12

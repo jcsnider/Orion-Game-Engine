@@ -11,7 +11,7 @@ Module ClientGameLogic
         Dim g As Graphics = FrmMainGame.picscreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, tmplps as integer, WalkTimer As Integer, FrameTime As Integer
-        Dim destrect As Rectangle, tmr10000 As Integer, tmr1000 As Integer
+        Dim tmr10000 As Integer, tmr1000 As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
         Dim rendercount as integer
 
@@ -271,8 +271,7 @@ Module ClientGameLogic
 
                     If InMapEditor Then EditorMap_DrawTileset()
 
-                    destrect = New Rectangle(0, 0, ScreenX, ScreenY)
-                    'Application.DoEvents()
+                    Application.DoEvents()
 
                     If GettingMap Then
                         Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FONT_NAME, FONT_SIZE)
