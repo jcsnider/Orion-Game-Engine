@@ -862,7 +862,7 @@
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub NudGraphic_ValueChanged(sender As Object, e As ScrollEventArgs) Handles nudGraphic.ValueChanged
+    Private Sub NudGraphic_ValueChanged(sender As Object, e As EventArgs) Handles nudGraphic.ValueChanged
         EditorEvent_DrawGraphic()
     End Sub
 
