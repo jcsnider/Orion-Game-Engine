@@ -1,5 +1,4 @@
-﻿
-Public Class FrmEditor_Shop
+﻿Public Class FrmEditor_Shop
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
             Dim cp As CreateParams = MyBase.CreateParams
@@ -20,9 +19,8 @@ Public Class FrmEditor_Shop
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub ScrlBuy_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlBuy.Scroll
-        lblBuy.Text = "Buy Rate: " & scrlBuy.Value & "%"
-        Shop(EditorIndex).BuyRate = scrlBuy.Value
+    Private Sub ScrlBuy_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudBuy.ValueChanged
+        Shop(EditorIndex).BuyRate = nudBuy.Value
     End Sub
 
     Private Sub BtnUpdate_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnUpdate.Click
@@ -31,9 +29,9 @@ Public Class FrmEditor_Shop
         If Index = 0 Then Exit Sub
         With Shop(EditorIndex).TradeItem(Index)
             .Item = cmbItem.SelectedIndex
-            .ItemValue = Val(txtItemValue.Text)
+            .ItemValue = nudItemValue.Value
             .CostItem = cmbCostItem.SelectedIndex
-            .CostValue = Val(txtCostValue.Text)
+            .CostValue = nudCostValue.value
         End With
         Call UpdateShopTrade()
     End Sub
@@ -80,13 +78,12 @@ Public Class FrmEditor_Shop
         ShopEditorInit()
     End Sub
 
-    Private Sub ScrlFace_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFace.Scroll
-        lblFace.Text = "Face: " & scrlFace.Value
+    Private Sub ScrlFace_Scroll(sender As Object, e As ScrollEventArgs) Handles nudFace.ValueChanged
 
-        If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & scrlFace.Value & GFX_EXT) Then
-            Me.picFace.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & scrlFace.Value & GFX_EXT)
+        If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT) Then
+            Me.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & nudFace.Value & GFX_EXT)
         End If
 
-        Shop(EditorIndex).Face = scrlFace.Value
+        Shop(EditorIndex).Face = nudFace.Value
     End Sub
 End Class

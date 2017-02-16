@@ -1162,14 +1162,12 @@
 
         FrmEditor_Shop.txtName.Text = Trim$(Shop(EditorIndex).Name)
         If Shop(EditorIndex).BuyRate > 0 Then
-            FrmEditor_Shop.scrlBuy.Value = Shop(EditorIndex).BuyRate
+            FrmEditor_Shop.nudBuy.Value = Shop(EditorIndex).BuyRate
         Else
-            FrmEditor_Shop.scrlBuy.Value = 100
+            FrmEditor_Shop.nudBuy.Value = 100
         End If
-        FrmEditor_Shop.lblBuy.Text = "Buy Rate: " & FrmEditor_Shop.scrlBuy.Value & "%"
 
-        FrmEditor_Shop.scrlFace.Value = Shop(EditorIndex).Face
-        FrmEditor_Shop.lblFace.Text = "Face: " & Shop(EditorIndex).Face
+        FrmEditor_Shop.nudFace.Value = Shop(EditorIndex).Face
         If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT) Then
             FrmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
         End If

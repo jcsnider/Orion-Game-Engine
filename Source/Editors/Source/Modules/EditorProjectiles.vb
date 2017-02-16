@@ -206,7 +206,7 @@ Public Module EditorProjectiles
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "Projectiles\" & iconnum & GFX_EXT) Then
-            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "Projectiles\" & iconnum & GFX_EXT)
+            frmEditor_Projectile.picProjectile.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Projectiles\" & iconnum & GFX_EXT)
         End If
 
     End Sub
