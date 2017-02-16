@@ -1,5 +1,13 @@
 ﻿Public Class FrmEditor_Events
 #Region "Frm Code"
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
 
     Sub ClearConditionFrame()
         Dim i As Integer

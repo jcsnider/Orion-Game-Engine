@@ -1,6 +1,6 @@
 ﻿Imports SFML.Audio
 Imports SFML.Graphics
-Imports SFML.System
+Imports SFML.Window
 
 Public Module EditorWeather
     Public Const MAX_WEATHER_PARTICLES As Integer = 100

@@ -1,4 +1,13 @@
-﻿Public Class frmEditor_Pet
+﻿Public Class FrmEditor_Pet
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
+
 #Region "Basics"
     Private Sub FrmEditor_Pet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         EditorPet_DrawPet()
@@ -25,7 +34,7 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub nudSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite.ValueChanged
+    Private Sub NudSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Sprite = nudSprite.Value
@@ -51,7 +60,7 @@
 
     End Sub
 
-    Private Sub nudRange_ValueChanged(sender As Object, e As EventArgs) Handles nudRange.ValueChanged
+    Private Sub NudRange_ValueChanged(sender As Object, e As EventArgs) Handles nudRange.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Range = nudRange.Value
@@ -91,43 +100,43 @@
         End If
     End Sub
 
-    Private Sub nudStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.ValueChanged
+    Private Sub NudStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Strength) = nudStrength.Value
     End Sub
 
-    Private Sub nudEndurance_ValueChanged(sender As Object, e As EventArgs) Handles nudEndurance.ValueChanged
+    Private Sub NudEndurance_ValueChanged(sender As Object, e As EventArgs) Handles nudEndurance.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Endurance) = nudEndurance.Value
     End Sub
 
-    Private Sub nudVitality_ValueChanged(sender As Object, e As EventArgs) Handles nudVitality.ValueChanged
+    Private Sub NudVitality_ValueChanged(sender As Object, e As EventArgs) Handles nudVitality.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Vitality) = nudVitality.Value
     End Sub
 
-    Private Sub nudLuck_ValueChanged(sender As Object, e As EventArgs) Handles nudLuck.ValueChanged
+    Private Sub NudLuck_ValueChanged(sender As Object, e As EventArgs) Handles nudLuck.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Luck) = nudLuck.Value
     End Sub
 
-    Private Sub nudIntelligence_ValueChanged(sender As Object, e As EventArgs) Handles nudIntelligence.ValueChanged
+    Private Sub NudIntelligence_ValueChanged(sender As Object, e As EventArgs) Handles nudIntelligence.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Intelligence) = nudIntelligence.Value
     End Sub
 
-    Private Sub nudSpirit_ValueChanged(sender As Object, e As EventArgs) Handles nudSpirit.ValueChanged
+    Private Sub NudSpirit_ValueChanged(sender As Object, e As EventArgs) Handles nudSpirit.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Stat(Stats.Spirit) = nudSpirit.Value
     End Sub
 
-    Private Sub nudLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudLevel.ValueChanged
+    Private Sub NudLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudLevel.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Level = nudLevel.Value
@@ -135,19 +144,19 @@
 #End Region
 
 #Region "Leveling"
-    Private Sub nudPetExp_ValueChanged(sender As Object, e As EventArgs) Handles nudPetExp.ValueChanged
+    Private Sub NudPetExp_ValueChanged(sender As Object, e As EventArgs) Handles nudPetExp.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).ExpGain = nudPetExp.Value
     End Sub
 
-    Private Sub nudPetPnts_ValueChanged(sender As Object, e As EventArgs) Handles nudPetPnts.ValueChanged
+    Private Sub NudPetPnts_ValueChanged(sender As Object, e As EventArgs) Handles nudPetPnts.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).LevelPnts = nudPetPnts.Value
     End Sub
 
-    Private Sub nudMaxLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudMaxLevel.ValueChanged
+    Private Sub NudMaxLevel_ValueChanged(sender As Object, e As EventArgs) Handles nudMaxLevel.ValueChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).MaxLevel = nudMaxLevel.Value
@@ -173,25 +182,25 @@
 #End Region
 
 #Region "Skills"
-    Private Sub cmbSkill1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill1.SelectedIndexChanged
+    Private Sub CmbSkill1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill1.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Skill(1) = cmbSkill1.SelectedIndex
     End Sub
 
-    Private Sub cmbSkill2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill2.SelectedIndexChanged
+    Private Sub CmbSkill2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill2.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Skill(2) = cmbSkill2.SelectedIndex
     End Sub
 
-    Private Sub cmbSkill3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill3.SelectedIndexChanged
+    Private Sub CmbSkill3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill3.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Skill(3) = cmbSkill3.SelectedIndex
     End Sub
 
-    Private Sub cmbSkill4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill4.SelectedIndexChanged
+    Private Sub CmbSkill4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill4.SelectedIndexChanged
         If EditorIndex <= 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).Skill(4) = cmbSkill4.SelectedIndex
@@ -211,7 +220,7 @@
 
     End Sub
 
-    Private Sub nudEvolveLvl_ValueChanged(sender As Object, e As EventArgs) Handles nudEvolveLvl.ValueChanged
+    Private Sub NudEvolveLvl_ValueChanged(sender As Object, e As EventArgs) Handles nudEvolveLvl.ValueChanged
         If EditorIndex = 0 Or EditorIndex > MAX_PETS Then Exit Sub
 
         Pet(EditorIndex).EvolveLevel = nudEvolveLvl.Value

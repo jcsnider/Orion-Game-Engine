@@ -218,10 +218,10 @@
     Public Sub PetEditorInit()
         Dim i As Integer
 
-        If frmEditor_Pet.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Pet.lstIndex.SelectedIndex + 1
+        If FrmEditor_Pet.Visible = False Then Exit Sub
+        EditorIndex = FrmEditor_Pet.lstIndex.SelectedIndex + 1
 
-        With frmEditor_Pet
+        With FrmEditor_Pet
             'populate skill combo's
             .cmbSkill1.Items.Clear()
             .cmbSkill2.Items.Clear()

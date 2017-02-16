@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_Resource
+Partial Class FrmEditor_Resource
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,427 +22,557 @@ Partial Class frmEditor_Resource
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.scrlLvlReq = New System.Windows.Forms.HScrollBar()
-        Me.lblLvlReq = New System.Windows.Forms.Label()
-        Me.scrlRewardExp = New System.Windows.Forms.HScrollBar()
-        Me.lblRewardExp = New System.Windows.Forms.Label()
-        Me.cmbTool = New System.Windows.Forms.ComboBox()
-        Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
-        Me.lblAnim = New System.Windows.Forms.Label()
-        Me.scrlRespawn = New System.Windows.Forms.HScrollBar()
-        Me.lblRespawn = New System.Windows.Forms.Label()
-        Me.scrlHealth = New System.Windows.Forms.HScrollBar()
-        Me.lblHealth = New System.Windows.Forms.Label()
-        Me.lblTool = New System.Windows.Forms.Label()
-        Me.scrlRewardItem = New System.Windows.Forms.HScrollBar()
-        Me.lblRewardItem = New System.Windows.Forms.Label()
+        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkGroupBox5 = New DarkUI.Controls.DarkGroupBox()
+        Me.nudRewardExp = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
+        Me.cmbRewardItem = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
+        Me.nudLvlReq = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.cmbTool = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
+        Me.cmbAnimation = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
+        Me.nudRespawn = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
+        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
+        Me.nudExhaustedPic = New DarkUI.Controls.DarkNumericUpDown()
+        Me.nudNormalPic = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
         Me.picExhaustedPic = New System.Windows.Forms.PictureBox()
         Me.picNormalpic = New System.Windows.Forms.PictureBox()
-        Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar()
-        Me.scrlNormalPic = New System.Windows.Forms.HScrollBar()
-        Me.lblExhaustedPic = New System.Windows.Forms.Label()
-        Me.lblNormalPic = New System.Windows.Forms.Label()
-        Me.cmbType = New System.Windows.Forms.ComboBox()
-        Me.txtMessage2 = New System.Windows.Forms.TextBox()
-        Me.txtMessage = New System.Windows.Forms.TextBox()
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.nudHealth = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
+        Me.cmbType = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel3 = New DarkUI.Controls.DarkLabel()
+        Me.txtMessage2 = New DarkUI.Controls.DarkTextBox()
+        Me.txtMessage = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
+        Me.txtName = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.btnSave = New DarkUI.Controls.DarkButton()
+        Me.btnDelete = New DarkUI.Controls.DarkButton()
+        Me.btnCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkGroupBox1.SuspendLayout()
+        Me.DarkGroupBox2.SuspendLayout()
+        Me.DarkGroupBox5.SuspendLayout()
+        CType(Me.nudRewardExp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DarkGroupBox4.SuspendLayout()
+        CType(Me.nudLvlReq, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudRespawn, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DarkGroupBox3.SuspendLayout()
+        CType(Me.nudExhaustedPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudNormalPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picExhaustedPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picNormalpic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudHealth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'GroupBox1
+        'DarkGroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.lstIndex)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(210, 536)
-        Me.GroupBox1.TabIndex = 1
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Resource List"
+        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
+        Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox1.Location = New System.Drawing.Point(3, 2)
+        Me.DarkGroupBox1.Name = "DarkGroupBox1"
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(216, 448)
+        Me.DarkGroupBox1.TabIndex = 0
+        Me.DarkGroupBox1.TabStop = False
+        Me.DarkGroupBox1.Text = "Resource List"
         '
         'lstIndex
         '
+        Me.lstIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lstIndex.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstIndex.ForeColor = System.Drawing.Color.Gainsboro
         Me.lstIndex.FormattingEnabled = True
-        Me.lstIndex.Location = New System.Drawing.Point(8, 16)
+        Me.lstIndex.Location = New System.Drawing.Point(9, 19)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(196, 511)
-        Me.lstIndex.TabIndex = 0
+        Me.lstIndex.Size = New System.Drawing.Size(196, 418)
+        Me.lstIndex.TabIndex = 1
         '
-        'GroupBox2
+        'DarkGroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.scrlLvlReq)
-        Me.GroupBox2.Controls.Add(Me.lblLvlReq)
-        Me.GroupBox2.Controls.Add(Me.scrlRewardExp)
-        Me.GroupBox2.Controls.Add(Me.lblRewardExp)
-        Me.GroupBox2.Controls.Add(Me.cmbTool)
-        Me.GroupBox2.Controls.Add(Me.scrlAnimation)
-        Me.GroupBox2.Controls.Add(Me.lblAnim)
-        Me.GroupBox2.Controls.Add(Me.scrlRespawn)
-        Me.GroupBox2.Controls.Add(Me.lblRespawn)
-        Me.GroupBox2.Controls.Add(Me.scrlHealth)
-        Me.GroupBox2.Controls.Add(Me.lblHealth)
-        Me.GroupBox2.Controls.Add(Me.lblTool)
-        Me.GroupBox2.Controls.Add(Me.scrlRewardItem)
-        Me.GroupBox2.Controls.Add(Me.lblRewardItem)
-        Me.GroupBox2.Controls.Add(Me.picExhaustedPic)
-        Me.GroupBox2.Controls.Add(Me.picNormalpic)
-        Me.GroupBox2.Controls.Add(Me.scrlExhaustedPic)
-        Me.GroupBox2.Controls.Add(Me.scrlNormalPic)
-        Me.GroupBox2.Controls.Add(Me.lblExhaustedPic)
-        Me.GroupBox2.Controls.Add(Me.lblNormalPic)
-        Me.GroupBox2.Controls.Add(Me.cmbType)
-        Me.GroupBox2.Controls.Add(Me.txtMessage2)
-        Me.GroupBox2.Controls.Add(Me.txtMessage)
-        Me.GroupBox2.Controls.Add(Me.txtName)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(219, 2)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(348, 505)
-        Me.GroupBox2.TabIndex = 2
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Resource Properties"
+        Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox5)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox4)
+        Me.DarkGroupBox2.Controls.Add(Me.cmbAnimation)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel9)
+        Me.DarkGroupBox2.Controls.Add(Me.nudRespawn)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel8)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox3)
+        Me.DarkGroupBox2.Controls.Add(Me.nudHealth)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel5)
+        Me.DarkGroupBox2.Controls.Add(Me.cmbType)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel4)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel3)
+        Me.DarkGroupBox2.Controls.Add(Me.txtMessage2)
+        Me.DarkGroupBox2.Controls.Add(Me.txtMessage)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel2)
+        Me.DarkGroupBox2.Controls.Add(Me.txtName)
+        Me.DarkGroupBox2.Controls.Add(Me.DarkLabel1)
+        Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox2.Location = New System.Drawing.Point(225, 2)
+        Me.DarkGroupBox2.Name = "DarkGroupBox2"
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(365, 419)
+        Me.DarkGroupBox2.TabIndex = 1
+        Me.DarkGroupBox2.TabStop = False
+        Me.DarkGroupBox2.Text = "Resource Properties"
         '
-        'scrlLvlReq
+        'DarkGroupBox5
         '
-        Me.scrlLvlReq.LargeChange = 1
-        Me.scrlLvlReq.Location = New System.Drawing.Point(11, 395)
-        Me.scrlLvlReq.Name = "scrlLvlReq"
-        Me.scrlLvlReq.Size = New System.Drawing.Size(154, 18)
-        Me.scrlLvlReq.TabIndex = 58
+        Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox5.Controls.Add(Me.nudRewardExp)
+        Me.DarkGroupBox5.Controls.Add(Me.DarkLabel13)
+        Me.DarkGroupBox5.Controls.Add(Me.cmbRewardItem)
+        Me.DarkGroupBox5.Controls.Add(Me.DarkLabel12)
+        Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox5.Location = New System.Drawing.Point(9, 369)
+        Me.DarkGroupBox5.Name = "DarkGroupBox5"
+        Me.DarkGroupBox5.Size = New System.Drawing.Size(346, 44)
+        Me.DarkGroupBox5.TabIndex = 16
+        Me.DarkGroupBox5.TabStop = False
+        Me.DarkGroupBox5.Text = "Rewards"
         '
-        'lblLvlReq
+        'nudRewardExp
         '
-        Me.lblLvlReq.AutoSize = True
-        Me.lblLvlReq.Location = New System.Drawing.Point(12, 382)
-        Me.lblLvlReq.Name = "lblLvlReq"
-        Me.lblLvlReq.Size = New System.Drawing.Size(91, 13)
-        Me.lblLvlReq.TabIndex = 57
-        Me.lblLvlReq.Text = "Level Required: 0"
+        Me.nudRewardExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudRewardExp.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudRewardExp.Location = New System.Drawing.Point(241, 14)
+        Me.nudRewardExp.Name = "nudRewardExp"
+        Me.nudRewardExp.Size = New System.Drawing.Size(98, 20)
+        Me.nudRewardExp.TabIndex = 3
         '
-        'scrlRewardExp
+        'DarkLabel13
         '
-        Me.scrlRewardExp.LargeChange = 1
-        Me.scrlRewardExp.Location = New System.Drawing.Point(182, 309)
-        Me.scrlRewardExp.Maximum = 10000
-        Me.scrlRewardExp.Name = "scrlRewardExp"
-        Me.scrlRewardExp.Size = New System.Drawing.Size(152, 17)
-        Me.scrlRewardExp.TabIndex = 56
+        Me.DarkLabel13.AutoSize = True
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel13.Location = New System.Drawing.Point(172, 16)
+        Me.DarkLabel13.Name = "DarkLabel13"
+        Me.DarkLabel13.Size = New System.Drawing.Size(63, 13)
+        Me.DarkLabel13.TabIndex = 2
+        Me.DarkLabel13.Text = "Experience:"
         '
-        'lblRewardExp
+        'cmbRewardItem
         '
-        Me.lblRewardExp.AutoSize = True
-        Me.lblRewardExp.Location = New System.Drawing.Point(179, 290)
-        Me.lblRewardExp.Name = "lblRewardExp"
-        Me.lblRewardExp.Size = New System.Drawing.Size(97, 13)
-        Me.lblRewardExp.TabIndex = 55
-        Me.lblRewardExp.Text = "Exp Reward: None"
+        Me.cmbRewardItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbRewardItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbRewardItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbRewardItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbRewardItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbRewardItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbRewardItem.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbRewardItem.FormattingEnabled = True
+        Me.cmbRewardItem.Location = New System.Drawing.Point(42, 13)
+        Me.cmbRewardItem.Name = "cmbRewardItem"
+        Me.cmbRewardItem.Size = New System.Drawing.Size(121, 21)
+        Me.cmbRewardItem.TabIndex = 1
+        '
+        'DarkLabel12
+        '
+        Me.DarkLabel12.AutoSize = True
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel12.Location = New System.Drawing.Point(6, 16)
+        Me.DarkLabel12.Name = "DarkLabel12"
+        Me.DarkLabel12.Size = New System.Drawing.Size(30, 13)
+        Me.DarkLabel12.TabIndex = 0
+        Me.DarkLabel12.Text = "Item:"
+        '
+        'DarkGroupBox4
+        '
+        Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox4.Controls.Add(Me.nudLvlReq)
+        Me.DarkGroupBox4.Controls.Add(Me.DarkLabel11)
+        Me.DarkGroupBox4.Controls.Add(Me.cmbTool)
+        Me.DarkGroupBox4.Controls.Add(Me.DarkLabel10)
+        Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox4.Location = New System.Drawing.Point(9, 319)
+        Me.DarkGroupBox4.Name = "DarkGroupBox4"
+        Me.DarkGroupBox4.Size = New System.Drawing.Size(346, 44)
+        Me.DarkGroupBox4.TabIndex = 15
+        Me.DarkGroupBox4.TabStop = False
+        Me.DarkGroupBox4.Text = "Requirements"
+        '
+        'nudLvlReq
+        '
+        Me.nudLvlReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudLvlReq.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudLvlReq.Location = New System.Drawing.Point(257, 14)
+        Me.nudLvlReq.Name = "nudLvlReq"
+        Me.nudLvlReq.Size = New System.Drawing.Size(82, 20)
+        Me.nudLvlReq.TabIndex = 3
+        '
+        'DarkLabel11
+        '
+        Me.DarkLabel11.AutoSize = True
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel11.Location = New System.Drawing.Point(193, 16)
+        Me.DarkLabel11.Name = "DarkLabel11"
+        Me.DarkLabel11.Size = New System.Drawing.Size(58, 13)
+        Me.DarkLabel11.TabIndex = 2
+        Me.DarkLabel11.Text = "Skill Level:"
         '
         'cmbTool
         '
+        Me.cmbTool.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbTool.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbTool.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbTool.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbTool.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbTool.ForeColor = System.Drawing.Color.Gainsboro
         Me.cmbTool.FormattingEnabled = True
         Me.cmbTool.Items.AddRange(New Object() {"None", "Hatchet", "Pickaxe", "Fishing Rod"})
-        Me.cmbTool.Location = New System.Drawing.Point(13, 351)
+        Me.cmbTool.Location = New System.Drawing.Point(84, 13)
         Me.cmbTool.Name = "cmbTool"
-        Me.cmbTool.Size = New System.Drawing.Size(152, 21)
-        Me.cmbTool.TabIndex = 54
+        Me.cmbTool.Size = New System.Drawing.Size(103, 21)
+        Me.cmbTool.TabIndex = 1
         '
-        'scrlAnimation
+        'DarkLabel10
         '
-        Me.scrlAnimation.LargeChange = 1
-        Me.scrlAnimation.Location = New System.Drawing.Point(11, 481)
-        Me.scrlAnimation.Maximum = 10000
-        Me.scrlAnimation.Name = "scrlAnimation"
-        Me.scrlAnimation.Size = New System.Drawing.Size(315, 17)
-        Me.scrlAnimation.TabIndex = 53
+        Me.DarkLabel10.AutoSize = True
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel10.Location = New System.Drawing.Point(6, 16)
+        Me.DarkLabel10.Name = "DarkLabel10"
+        Me.DarkLabel10.Size = New System.Drawing.Size(72, 13)
+        Me.DarkLabel10.TabIndex = 0
+        Me.DarkLabel10.Text = "Tool Needed:"
         '
-        'lblAnim
+        'cmbAnimation
         '
-        Me.lblAnim.AutoSize = True
-        Me.lblAnim.Location = New System.Drawing.Point(10, 468)
-        Me.lblAnim.Name = "lblAnim"
-        Me.lblAnim.Size = New System.Drawing.Size(85, 13)
-        Me.lblAnim.TabIndex = 52
-        Me.lblAnim.Text = "Animation: None"
+        Me.cmbAnimation.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbAnimation.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbAnimation.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbAnimation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbAnimation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbAnimation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbAnimation.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbAnimation.FormattingEnabled = True
+        Me.cmbAnimation.Location = New System.Drawing.Point(255, 122)
+        Me.cmbAnimation.Name = "cmbAnimation"
+        Me.cmbAnimation.Size = New System.Drawing.Size(100, 21)
+        Me.cmbAnimation.TabIndex = 14
         '
-        'scrlRespawn
+        'DarkLabel9
         '
-        Me.scrlRespawn.LargeChange = 1
-        Me.scrlRespawn.Location = New System.Drawing.Point(11, 442)
-        Me.scrlRespawn.Maximum = 10000
-        Me.scrlRespawn.Name = "scrlRespawn"
-        Me.scrlRespawn.Size = New System.Drawing.Size(315, 17)
-        Me.scrlRespawn.TabIndex = 51
+        Me.DarkLabel9.AutoSize = True
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel9.Location = New System.Drawing.Point(193, 124)
+        Me.DarkLabel9.Name = "DarkLabel9"
+        Me.DarkLabel9.Size = New System.Drawing.Size(56, 13)
+        Me.DarkLabel9.TabIndex = 13
+        Me.DarkLabel9.Text = "Animation:"
         '
-        'lblRespawn
+        'nudRespawn
         '
-        Me.lblRespawn.AutoSize = True
-        Me.lblRespawn.Location = New System.Drawing.Point(8, 429)
-        Me.lblRespawn.Name = "lblRespawn"
-        Me.lblRespawn.Size = New System.Drawing.Size(138, 13)
-        Me.lblRespawn.TabIndex = 50
-        Me.lblRespawn.Text = "Respawn Time(Seconds): 0"
+        Me.nudRespawn.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudRespawn.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudRespawn.Location = New System.Drawing.Point(110, 122)
+        Me.nudRespawn.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudRespawn.Name = "nudRespawn"
+        Me.nudRespawn.Size = New System.Drawing.Size(77, 20)
+        Me.nudRespawn.TabIndex = 12
         '
-        'scrlHealth
+        'DarkLabel8
         '
-        Me.scrlHealth.LargeChange = 1
-        Me.scrlHealth.Location = New System.Drawing.Point(175, 351)
-        Me.scrlHealth.Maximum = 10000
-        Me.scrlHealth.Name = "scrlHealth"
-        Me.scrlHealth.Size = New System.Drawing.Size(159, 21)
-        Me.scrlHealth.TabIndex = 49
+        Me.DarkLabel8.AutoSize = True
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(6, 124)
+        Me.DarkLabel8.Name = "DarkLabel8"
+        Me.DarkLabel8.Size = New System.Drawing.Size(106, 13)
+        Me.DarkLabel8.TabIndex = 11
+        Me.DarkLabel8.Text = "RespawnTime(secs):"
         '
-        'lblHealth
+        'DarkGroupBox3
         '
-        Me.lblHealth.AutoSize = True
-        Me.lblHealth.Location = New System.Drawing.Point(172, 335)
-        Me.lblHealth.Name = "lblHealth"
-        Me.lblHealth.Size = New System.Drawing.Size(50, 13)
-        Me.lblHealth.TabIndex = 48
-        Me.lblHealth.Text = "Health: 0"
+        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox3.Controls.Add(Me.nudExhaustedPic)
+        Me.DarkGroupBox3.Controls.Add(Me.nudNormalPic)
+        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel7)
+        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel6)
+        Me.DarkGroupBox3.Controls.Add(Me.picExhaustedPic)
+        Me.DarkGroupBox3.Controls.Add(Me.picNormalpic)
+        Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox3.Location = New System.Drawing.Point(9, 149)
+        Me.DarkGroupBox3.Name = "DarkGroupBox3"
+        Me.DarkGroupBox3.Size = New System.Drawing.Size(346, 164)
+        Me.DarkGroupBox3.TabIndex = 10
+        Me.DarkGroupBox3.TabStop = False
+        Me.DarkGroupBox3.Text = "Graphics"
         '
-        'lblTool
+        'nudExhaustedPic
         '
-        Me.lblTool.AutoSize = True
-        Me.lblTool.Location = New System.Drawing.Point(12, 335)
-        Me.lblTool.Name = "lblTool"
-        Me.lblTool.Size = New System.Drawing.Size(106, 13)
-        Me.lblTool.TabIndex = 46
-        Me.lblTool.Text = "Tool Required: None"
+        Me.nudExhaustedPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudExhaustedPic.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudExhaustedPic.Location = New System.Drawing.Point(267, 137)
+        Me.nudExhaustedPic.Name = "nudExhaustedPic"
+        Me.nudExhaustedPic.Size = New System.Drawing.Size(72, 20)
+        Me.nudExhaustedPic.TabIndex = 49
         '
-        'scrlRewardItem
+        'nudNormalPic
         '
-        Me.scrlRewardItem.Location = New System.Drawing.Point(11, 309)
-        Me.scrlRewardItem.Name = "scrlRewardItem"
-        Me.scrlRewardItem.Size = New System.Drawing.Size(154, 17)
-        Me.scrlRewardItem.TabIndex = 45
+        Me.nudNormalPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudNormalPic.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudNormalPic.Location = New System.Drawing.Point(86, 137)
+        Me.nudNormalPic.Name = "nudNormalPic"
+        Me.nudNormalPic.Size = New System.Drawing.Size(72, 20)
+        Me.nudNormalPic.TabIndex = 48
         '
-        'lblRewardItem
+        'DarkLabel7
         '
-        Me.lblRewardItem.AutoSize = True
-        Me.lblRewardItem.Location = New System.Drawing.Point(10, 290)
-        Me.lblRewardItem.Name = "lblRewardItem"
-        Me.lblRewardItem.Size = New System.Drawing.Size(99, 13)
-        Me.lblRewardItem.TabIndex = 44
-        Me.lblRewardItem.Text = "Item Reward: None"
+        Me.DarkLabel7.AutoSize = True
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(185, 139)
+        Me.DarkLabel7.Name = "DarkLabel7"
+        Me.DarkLabel7.Size = New System.Drawing.Size(71, 13)
+        Me.DarkLabel7.TabIndex = 47
+        Me.DarkLabel7.Text = "Empty Image:"
+        '
+        'DarkLabel6
+        '
+        Me.DarkLabel6.AutoSize = True
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(3, 139)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(75, 13)
+        Me.DarkLabel6.TabIndex = 46
+        Me.DarkLabel6.Text = "Normal Image:"
         '
         'picExhaustedPic
         '
         Me.picExhaustedPic.BackColor = System.Drawing.Color.Black
         Me.picExhaustedPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picExhaustedPic.Location = New System.Drawing.Point(182, 165)
+        Me.picExhaustedPic.Location = New System.Drawing.Point(188, 19)
         Me.picExhaustedPic.Name = "picExhaustedPic"
         Me.picExhaustedPic.Size = New System.Drawing.Size(152, 112)
-        Me.picExhaustedPic.TabIndex = 43
+        Me.picExhaustedPic.TabIndex = 45
         Me.picExhaustedPic.TabStop = False
         '
         'picNormalpic
         '
         Me.picNormalpic.BackColor = System.Drawing.Color.Black
         Me.picNormalpic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picNormalpic.Location = New System.Drawing.Point(13, 165)
+        Me.picNormalpic.Location = New System.Drawing.Point(6, 19)
         Me.picNormalpic.Name = "picNormalpic"
         Me.picNormalpic.Size = New System.Drawing.Size(152, 112)
-        Me.picNormalpic.TabIndex = 42
+        Me.picNormalpic.TabIndex = 44
         Me.picNormalpic.TabStop = False
         '
-        'scrlExhaustedPic
+        'nudHealth
         '
-        Me.scrlExhaustedPic.LargeChange = 1
-        Me.scrlExhaustedPic.Location = New System.Drawing.Point(182, 139)
-        Me.scrlExhaustedPic.Name = "scrlExhaustedPic"
-        Me.scrlExhaustedPic.Size = New System.Drawing.Size(152, 18)
-        Me.scrlExhaustedPic.TabIndex = 41
+        Me.nudHealth.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudHealth.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudHealth.Location = New System.Drawing.Point(294, 96)
+        Me.nudHealth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudHealth.Name = "nudHealth"
+        Me.nudHealth.Size = New System.Drawing.Size(61, 20)
+        Me.nudHealth.TabIndex = 9
         '
-        'scrlNormalPic
+        'DarkLabel5
         '
-        Me.scrlNormalPic.LargeChange = 1
-        Me.scrlNormalPic.Location = New System.Drawing.Point(13, 139)
-        Me.scrlNormalPic.Name = "scrlNormalPic"
-        Me.scrlNormalPic.Size = New System.Drawing.Size(152, 18)
-        Me.scrlNormalPic.TabIndex = 40
-        '
-        'lblExhaustedPic
-        '
-        Me.lblExhaustedPic.AutoSize = True
-        Me.lblExhaustedPic.Location = New System.Drawing.Point(179, 123)
-        Me.lblExhaustedPic.Name = "lblExhaustedPic"
-        Me.lblExhaustedPic.Size = New System.Drawing.Size(101, 13)
-        Me.lblExhaustedPic.TabIndex = 39
-        Me.lblExhaustedPic.Text = "Exhausted Image: 0"
-        '
-        'lblNormalPic
-        '
-        Me.lblNormalPic.AutoSize = True
-        Me.lblNormalPic.Location = New System.Drawing.Point(8, 123)
-        Me.lblNormalPic.Name = "lblNormalPic"
-        Me.lblNormalPic.Size = New System.Drawing.Size(84, 13)
-        Me.lblNormalPic.TabIndex = 38
-        Me.lblNormalPic.Text = "Normal Image: 0"
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(236, 98)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(52, 13)
+        Me.DarkLabel5.TabIndex = 8
+        Me.DarkLabel5.Text = "HitPoints:"
         '
         'cmbType
         '
+        Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbType.ForeColor = System.Drawing.Color.Gainsboro
         Me.cmbType.FormattingEnabled = True
         Me.cmbType.Items.AddRange(New Object() {"None", "Herb", "Tree", "Mine", "Fishing Spot"})
-        Me.cmbType.Location = New System.Drawing.Point(58, 99)
+        Me.cmbType.Location = New System.Drawing.Point(109, 95)
         Me.cmbType.Name = "cmbType"
-        Me.cmbType.Size = New System.Drawing.Size(276, 21)
-        Me.cmbType.TabIndex = 37
+        Me.cmbType.Size = New System.Drawing.Size(121, 21)
+        Me.cmbType.TabIndex = 7
+        '
+        'DarkLabel4
+        '
+        Me.DarkLabel4.AutoSize = True
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(6, 98)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(83, 13)
+        Me.DarkLabel4.TabIndex = 6
+        Me.DarkLabel4.Text = "Resource Type:"
+        '
+        'DarkLabel3
+        '
+        Me.DarkLabel3.AutoSize = True
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(6, 71)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(72, 13)
+        Me.DarkLabel3.TabIndex = 5
+        Me.DarkLabel3.Text = "Fail Message:"
         '
         'txtMessage2
         '
-        Me.txtMessage2.Location = New System.Drawing.Point(58, 72)
+        Me.txtMessage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMessage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMessage2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMessage2.Location = New System.Drawing.Point(109, 69)
         Me.txtMessage2.Name = "txtMessage2"
-        Me.txtMessage2.Size = New System.Drawing.Size(276, 20)
-        Me.txtMessage2.TabIndex = 6
+        Me.txtMessage2.Size = New System.Drawing.Size(246, 20)
+        Me.txtMessage2.TabIndex = 4
         '
         'txtMessage
         '
-        Me.txtMessage.Location = New System.Drawing.Point(58, 46)
+        Me.txtMessage.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMessage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtMessage.Location = New System.Drawing.Point(109, 43)
         Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.Size = New System.Drawing.Size(276, 20)
-        Me.txtMessage.TabIndex = 5
+        Me.txtMessage.Size = New System.Drawing.Size(246, 20)
+        Me.txtMessage.TabIndex = 3
+        '
+        'DarkLabel2
+        '
+        Me.DarkLabel2.AutoSize = True
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(6, 45)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(97, 13)
+        Me.DarkLabel2.TabIndex = 2
+        Me.DarkLabel2.Text = "Success Message:"
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(58, 17)
+        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtName.Location = New System.Drawing.Point(109, 17)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(276, 20)
-        Me.txtName.TabIndex = 4
+        Me.txtName.Size = New System.Drawing.Size(246, 20)
+        Me.txtName.TabIndex = 1
         '
-        'Label4
+        'DarkLabel1
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(8, 102)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(34, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Type:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 75)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Empty:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 49)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Sucess:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.DarkLabel1.AutoSize = True
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(6, 19)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(87, 13)
+        Me.DarkLabel1.TabIndex = 0
+        Me.DarkLabel1.Text = "Resource Name:"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(219, 513)
+        Me.btnSave.Location = New System.Drawing.Point(225, 427)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(105, 25)
-        Me.btnSave.TabIndex = 3
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(340, 513)
+        Me.btnDelete.Location = New System.Drawing.Point(367, 427)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(105, 25)
-        Me.btnDelete.TabIndex = 4
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(462, 513)
+        Me.btnCancel.Location = New System.Drawing.Point(515, 427)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(105, 25)
-        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'frmEditor_Resource
+        'FrmEditor_Resource
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(573, 545)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(596, 458)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.DarkGroupBox2)
+        Me.Controls.Add(Me.DarkGroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmEditor_Resource"
+        Me.Name = "FrmEditor_Resource"
         Me.Text = "Resource Editor"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.DarkGroupBox1.ResumeLayout(False)
+        Me.DarkGroupBox2.ResumeLayout(False)
+        Me.DarkGroupBox2.PerformLayout()
+        Me.DarkGroupBox5.ResumeLayout(False)
+        Me.DarkGroupBox5.PerformLayout()
+        CType(Me.nudRewardExp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.DarkGroupBox4.ResumeLayout(False)
+        Me.DarkGroupBox4.PerformLayout()
+        CType(Me.nudLvlReq, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudRespawn, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.DarkGroupBox3.ResumeLayout(False)
+        Me.DarkGroupBox3.PerformLayout()
+        CType(Me.nudExhaustedPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudNormalPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picExhaustedPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picNormalpic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudHealth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents lstIndex As System.Windows.Forms.ListBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtMessage2 As System.Windows.Forms.TextBox
-    Friend WithEvents txtMessage As System.Windows.Forms.TextBox
-    Friend WithEvents txtName As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents cmbType As System.Windows.Forms.ComboBox
-    Friend WithEvents picExhaustedPic As System.Windows.Forms.PictureBox
-    Friend WithEvents picNormalpic As System.Windows.Forms.PictureBox
-    Friend WithEvents scrlExhaustedPic As System.Windows.Forms.HScrollBar
-    Friend WithEvents scrlNormalPic As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblExhaustedPic As System.Windows.Forms.Label
-    Friend WithEvents lblNormalPic As System.Windows.Forms.Label
-    Friend WithEvents scrlRewardItem As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblRewardItem As System.Windows.Forms.Label
-    Friend WithEvents lblTool As System.Windows.Forms.Label
-    Friend WithEvents scrlAnimation As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblAnim As System.Windows.Forms.Label
-    Friend WithEvents scrlRespawn As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblRespawn As System.Windows.Forms.Label
-    Friend WithEvents scrlHealth As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblHealth As System.Windows.Forms.Label
-    Friend WithEvents btnSave As System.Windows.Forms.Button
-    Friend WithEvents btnDelete As System.Windows.Forms.Button
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents cmbTool As System.Windows.Forms.ComboBox
-    Friend WithEvents scrlRewardExp As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblRewardExp As System.Windows.Forms.Label
-    Friend WithEvents scrlLvlReq As System.Windows.Forms.HScrollBar
-    Friend WithEvents lblLvlReq As System.Windows.Forms.Label
+
+    Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents lstIndex As ListBox
+    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkLabel3 As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtMessage2 As DarkUI.Controls.DarkTextBox
+    Friend WithEvents txtMessage As DarkUI.Controls.DarkTextBox
+    Friend WithEvents DarkLabel2 As DarkUI.Controls.DarkLabel
+    Friend WithEvents txtName As DarkUI.Controls.DarkTextBox
+    Friend WithEvents DarkLabel1 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbType As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudHealth As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents picExhaustedPic As PictureBox
+    Friend WithEvents picNormalpic As PictureBox
+    Friend WithEvents nudExhaustedPic As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents nudNormalPic As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudRespawn As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbAnimation As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbTool As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudLvlReq As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbRewardItem As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudRewardExp As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnSave As DarkUI.Controls.DarkButton
+    Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
+    Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
 End Class

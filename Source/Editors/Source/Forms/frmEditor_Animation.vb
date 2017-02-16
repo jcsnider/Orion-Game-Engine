@@ -1,33 +1,42 @@
 ﻿Public Class FrmEditor_Animation
-    Private Sub nudSprite0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite0.ValueChanged
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
+
+    Private Sub NudSprite0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite0.ValueChanged
         Animation(EditorIndex).Sprite(0) = nudSprite0.Value
     End Sub
 
-    Private Sub nudSprite1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite1.ValueChanged
+    Private Sub NudSprite1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite1.ValueChanged
         Animation(EditorIndex).Sprite(1) = nudSprite1.Value
     End Sub
 
-    Private Sub nudLoopCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount0.ValueChanged
+    Private Sub NudLoopCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount0.ValueChanged
         Animation(EditorIndex).LoopCount(0) = nudLoopCount0.Value
     End Sub
 
-    Private Sub nudLoopCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount1.ValueChanged
+    Private Sub NudLoopCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopCount1.ValueChanged
         Animation(EditorIndex).LoopCount(1) = nudLoopCount1.Value
     End Sub
 
-    Private Sub nudFrameCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount0.ValueChanged
+    Private Sub NudFrameCount0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount0.ValueChanged
         Animation(EditorIndex).Frames(0) = nudFrameCount0.Value
     End Sub
 
-    Private Sub nudFrameCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount1.ValueChanged
+    Private Sub NudFrameCount1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudFrameCount1.ValueChanged
         Animation(EditorIndex).Frames(1) = nudFrameCount1.Value
     End Sub
 
-    Private Sub nudLoopTime0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime0.ValueChanged
+    Private Sub NudLoopTime0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime0.ValueChanged
         Animation(EditorIndex).looptime(0) = nudLoopTime0.Value
     End Sub
 
-    Private Sub nudLoopTime1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime1.ValueChanged
+    Private Sub NudLoopTime1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime1.ValueChanged
         Animation(EditorIndex).looptime(1) = nudLoopTime1.Value
     End Sub
 

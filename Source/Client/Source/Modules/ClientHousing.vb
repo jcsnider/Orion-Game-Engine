@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports SFML.Graphics
+Imports SFML.Window
 
 Public Module ClientHousing
 #Region "Globals & Types"
@@ -258,7 +259,7 @@ Public Module ClientHousing
 
                     Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i))
                     tmpSprite.TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32)
-                    tmpSprite.Position = New SFML.System.Vector2f(X, Y)
+                    tmpSprite.Position = New Vector2f(X, Y)
                     GameWindow.Draw(tmpSprite)
                 End If
             Next

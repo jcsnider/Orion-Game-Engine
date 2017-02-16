@@ -87,14 +87,14 @@
         End If
 
         ' rest of it
-        FrmEditor_MapEditor.txtUp.Text = Map.Up
-        FrmEditor_MapEditor.txtDown.Text = Map.Down
-        FrmEditor_MapEditor.txtLeft.Text = Map.Left
-        FrmEditor_MapEditor.txtRight.Text = Map.Right
+        FrmEditor_MapEditor.nudUp.Value = Map.Up
+        FrmEditor_MapEditor.nudDown.Value = Map.Down
+        FrmEditor_MapEditor.nudLeft.Value = Map.Left
+        FrmEditor_MapEditor.nudRight.Value = Map.Right
         FrmEditor_MapEditor.cmbMoral.SelectedIndex = Map.Moral
-        FrmEditor_MapEditor.txtSpawnMap.Text = Map.BootMap
-        FrmEditor_MapEditor.txtSpawnX.Text = Map.BootX
-        FrmEditor_MapEditor.txtSpawnY.Text = Map.BootY
+        FrmEditor_MapEditor.nudSpawnMap.Value = Map.BootMap
+        FrmEditor_MapEditor.nudSpawnX.Value = Map.BootX
+        FrmEditor_MapEditor.nudSpawnY.Value = Map.BootY
 
         If Map.Instanced = 1 Then
             FrmEditor_MapEditor.chkInstance.Checked = True
@@ -120,32 +120,23 @@
             FrmEditor_MapEditor.cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
-        FrmEditor_MapEditor.lblMap.Text = "Current map: " & Map.MapNum
-        FrmEditor_MapEditor.txtMaxX.Text = Map.MaxX
-        FrmEditor_MapEditor.txtMaxY.Text = Map.MaxY
+        FrmEditor_MapEditor.lblMap.Text = "Current Map: " & Map.MapNum
+        FrmEditor_MapEditor.nudMaxX.Value = Map.MaxX
+        FrmEditor_MapEditor.nudMaxY.Value = Map.MaxY
 
         FrmEditor_MapEditor.cmbTileSets.SelectedIndex = 0
         FrmEditor_MapEditor.cmbLayers.SelectedIndex = 0
         FrmEditor_MapEditor.cmbAutoTile.SelectedIndex = 0
 
         FrmEditor_MapEditor.cmbWeather.SelectedIndex = Map.WeatherType
-        FrmEditor_MapEditor.scrlFog.Value = Map.FogIndex
-        FrmEditor_MapEditor.lblFogIndex.Text = "Fog: " & FrmEditor_MapEditor.scrlFog.Value
-        FrmEditor_MapEditor.scrlIntensity.Value = Map.WeatherIntensity
-        FrmEditor_MapEditor.lblIntensity.Text = "Intensity: " & FrmEditor_MapEditor.scrlIntensity.Value
-
-        ' render the tiles
-        'EditorMap_DrawTileset2()
+        FrmEditor_MapEditor.nudFog.Value = Map.FogIndex
+        FrmEditor_MapEditor.nudIntensity.Value = Map.WeatherIntensity
 
         SelectedTab = 1
-
-        'frmEditor_MapEditor.picScreen.Width = Map.MaxX * PIC_X
-        'frmEditor_MapEditor.picScreen.Height = Map.MaxY * PIC_Y
 
         GameWindow.SetView(New SFML.Graphics.View(New SFML.Graphics.FloatRect(0, 0, FrmEditor_MapEditor.picScreen.Width, FrmEditor_MapEditor.picScreen.Height)))
 
         FrmEditor_MapEditor.tslCurMap.Text = "Map: " & Map.MapNum
-        FrmEditor_MapEditor.lblMap.Text = "Map: " & Map.MapNum
 
         ' show the form
         FrmEditor_MapEditor.Visible = True
@@ -869,13 +860,13 @@
     Public Sub NpcEditorInit()
         Dim i As Integer
 
-        If frmEditor_NPC.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_NPC.lstIndex.SelectedIndex + 1
-        frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
+        If FrmEditor_Npc.Visible = False Then Exit Sub
+        EditorIndex = FrmEditor_Npc.lstIndex.SelectedIndex + 1
+        FrmEditor_Npc.cmbDropSlot.SelectedIndex = 0
         If Npc(EditorIndex).AttackSay Is Nothing Then Npc(EditorIndex).AttackSay = ""
         If Npc(EditorIndex).Name Is Nothing Then Npc(EditorIndex).Name = ""
 
-        With frmEditor_Npc
+        With FrmEditor_Npc
             'populate combo boxes
             .cmbAnimation.Items.Clear()
             .cmbAnimation.Items.Add("None")
@@ -904,10 +895,10 @@
             .cmbBehaviour.SelectedIndex = Npc(EditorIndex).Behaviour
             .cmbFaction.SelectedIndex = Npc(EditorIndex).Faction
             .nudRange.Value = Npc(EditorIndex).Range
-            .nudChance.Text = Npc(EditorIndex).DropChance(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
-            .cmbItem.SelectedIndex = Npc(EditorIndex).DropItem(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
+            .nudChance.Text = Npc(EditorIndex).DropChance(FrmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
+            .cmbItem.SelectedIndex = Npc(EditorIndex).DropItem(FrmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
 
-            .nudAmount.Value = Npc(EditorIndex).DropItemValue(frmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
+            .nudAmount.Value = Npc(EditorIndex).DropItemValue(FrmEditor_Npc.cmbDropSlot.SelectedIndex + 1)
 
             .nudHp.Text = Npc(EditorIndex).HP
             .nudExp.Text = Npc(EditorIndex).EXP
@@ -969,14 +960,14 @@
             End If
         Next
 
-        frmEditor_NPC.Visible = False
+        FrmEditor_Npc.Visible = False
         Editor = 0
         ClearChanged_NPC()
     End Sub
 
     Public Sub NpcEditorCancel()
         Editor = 0
-        frmEditor_NPC.Visible = False
+        FrmEditor_Npc.Visible = False
         ClearChanged_NPC()
         ClearNpcs()
         SendRequestNPCS()
@@ -991,28 +982,45 @@
 
 #Region "Resource Editor"
     Public Sub ResourceEditorInit()
+        Dim i As Integer
 
-        If frmEditor_Resource.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Resource.lstIndex.SelectedIndex + 1
+        If FrmEditor_Resource.Visible = False Then Exit Sub
+        EditorIndex = FrmEditor_Resource.lstIndex.SelectedIndex + 1
 
-        frmEditor_Resource.scrlExhaustedPic.Maximum = NumResources
-        frmEditor_Resource.scrlNormalPic.Maximum = NumResources
-        frmEditor_Resource.scrlAnimation.Maximum = MAX_ANIMATIONS
-        frmEditor_Resource.txtName.Text = Trim$(Resource(EditorIndex).Name)
-        frmEditor_Resource.txtMessage.Text = Trim$(Resource(EditorIndex).SuccessMessage)
-        frmEditor_Resource.txtMessage2.Text = Trim$(Resource(EditorIndex).EmptyMessage)
-        frmEditor_Resource.cmbType.SelectedIndex = Resource(EditorIndex).ResourceType
-        frmEditor_Resource.scrlNormalPic.Value = Resource(EditorIndex).ResourceImage
-        frmEditor_Resource.scrlExhaustedPic.Value = Resource(EditorIndex).ExhaustedImage
-        frmEditor_Resource.scrlRewardItem.Value = Resource(EditorIndex).ItemReward
-        frmEditor_Resource.scrlRewardExp.Value = Resource(EditorIndex).ExpReward
-        frmEditor_Resource.cmbTool.SelectedIndex = Resource(EditorIndex).ToolRequired
-        frmEditor_Resource.scrlHealth.Value = Resource(EditorIndex).Health
-        frmEditor_Resource.scrlRespawn.Value = Resource(EditorIndex).RespawnTime
-        frmEditor_Resource.scrlAnimation.Value = Resource(EditorIndex).Animation
-        frmEditor_Resource.scrlLvlReq.Value = Resource(EditorIndex).LvlRequired
+        With FrmEditor_Resource
+            'populate combo boxes
+            .cmbRewardItem.Items.Clear()
+            .cmbRewardItem.Items.Add("None")
+            For i = 1 To MAX_ITEMS
+                .cmbRewardItem.Items.Add(i & ": " & Item(i).Name)
+            Next
 
-        frmEditor_Resource.Visible = True
+            .cmbAnimation.Items.Clear()
+            .cmbAnimation.Items.Add("None")
+            For i = 1 To MAX_ANIMATIONS
+                .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+            Next
+
+            .nudExhaustedPic.Maximum = NumResources
+            .nudNormalPic.Maximum = NumResources
+            .nudRespawn.Maximum = 1000000
+            .txtName.Text = Trim$(Resource(EditorIndex).Name)
+            .txtMessage.Text = Trim$(Resource(EditorIndex).SuccessMessage)
+            .txtMessage2.Text = Trim$(Resource(EditorIndex).EmptyMessage)
+            .cmbType.SelectedIndex = Resource(EditorIndex).ResourceType
+            .nudNormalPic.Value = Resource(EditorIndex).ResourceImage
+            .nudExhaustedPic.Value = Resource(EditorIndex).ExhaustedImage
+            .cmbRewardItem.SelectedIndex = Resource(EditorIndex).ItemReward
+            .nudRewardExp.Value = Resource(EditorIndex).ExpReward
+            .cmbTool.SelectedIndex = Resource(EditorIndex).ToolRequired
+            .nudHealth.Value = Resource(EditorIndex).Health
+            .nudRespawn.Value = Resource(EditorIndex).RespawnTime
+            .cmbAnimation.SelectedIndex = Resource(EditorIndex).Animation
+            .nudLvlReq.Value = Resource(EditorIndex).LvlRequired
+        End With
+
+
+        FrmEditor_Resource.Visible = True
 
         EditorResource_DrawSprite()
 
@@ -1028,14 +1036,14 @@
             End If
         Next
 
-        frmEditor_Resource.Visible = False
+        FrmEditor_Resource.Visible = False
         Editor = 0
         ClearChanged_Resource()
     End Sub
 
     Public Sub ResourceEditorCancel()
         Editor = 0
-        frmEditor_Resource.Visible = False
+        FrmEditor_Resource.Visible = False
         ClearChanged_Resource()
         ClearResources()
         SendRequestResources()
@@ -1149,35 +1157,35 @@
     Public Sub ShopEditorInit()
         Dim i As Integer
 
-        If frmEditor_Shop.Visible = False Then Exit Sub
-        EditorIndex = frmEditor_Shop.lstIndex.SelectedIndex + 1
+        If FrmEditor_Shop.Visible = False Then Exit Sub
+        EditorIndex = FrmEditor_Shop.lstIndex.SelectedIndex + 1
 
-        frmEditor_Shop.txtName.Text = Trim$(Shop(EditorIndex).Name)
+        FrmEditor_Shop.txtName.Text = Trim$(Shop(EditorIndex).Name)
         If Shop(EditorIndex).BuyRate > 0 Then
-            frmEditor_Shop.scrlBuy.Value = Shop(EditorIndex).BuyRate
+            FrmEditor_Shop.scrlBuy.Value = Shop(EditorIndex).BuyRate
         Else
-            frmEditor_Shop.scrlBuy.Value = 100
+            FrmEditor_Shop.scrlBuy.Value = 100
         End If
-        frmEditor_Shop.lblBuy.Text = "Buy Rate: " & frmEditor_Shop.scrlBuy.Value & "%"
+        FrmEditor_Shop.lblBuy.Text = "Buy Rate: " & FrmEditor_Shop.scrlBuy.Value & "%"
 
-        frmEditor_Shop.scrlFace.Value = Shop(EditorIndex).Face
-        frmEditor_Shop.lblFace.Text = "Face: " & Shop(EditorIndex).Face
+        FrmEditor_Shop.scrlFace.Value = Shop(EditorIndex).Face
+        FrmEditor_Shop.lblFace.Text = "Face: " & Shop(EditorIndex).Face
         If FileExist(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT) Then
-            frmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
+            FrmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Application.StartupPath & GFX_PATH & "Faces\" & Shop(EditorIndex).Face & GFX_EXT)
         End If
 
-        frmEditor_Shop.cmbItem.Items.Clear()
-        frmEditor_Shop.cmbItem.Items.Add("None")
-        frmEditor_Shop.cmbCostItem.Items.Clear()
-        frmEditor_Shop.cmbCostItem.Items.Add("None")
+        FrmEditor_Shop.cmbItem.Items.Clear()
+        FrmEditor_Shop.cmbItem.Items.Add("None")
+        FrmEditor_Shop.cmbCostItem.Items.Clear()
+        FrmEditor_Shop.cmbCostItem.Items.Add("None")
 
         For i = 1 To MAX_ITEMS
-            frmEditor_Shop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-            frmEditor_Shop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            FrmEditor_Shop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            FrmEditor_Shop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
 
-        frmEditor_Shop.cmbItem.SelectedIndex = 0
-        frmEditor_Shop.cmbCostItem.SelectedIndex = 0
+        FrmEditor_Shop.cmbItem.SelectedIndex = 0
+        FrmEditor_Shop.cmbCostItem.SelectedIndex = 0
 
         UpdateShopTrade()
 
@@ -1186,20 +1194,20 @@
 
     Public Sub UpdateShopTrade()
         Dim i As Integer
-        frmEditor_Shop.lstTradeItem.Items.Clear()
+        FrmEditor_Shop.lstTradeItem.Items.Clear()
 
         For i = 1 To MAX_TRADES
             With Shop(EditorIndex).TradeItem(i)
                 ' if none, show as none
                 If .Item = 0 And .CostItem = 0 Then
-                    frmEditor_Shop.lstTradeItem.Items.Add("Empty Trade Slot")
+                    FrmEditor_Shop.lstTradeItem.Items.Add("Empty Trade Slot")
                 Else
-                    frmEditor_Shop.lstTradeItem.Items.Add(i & ": " & .ItemValue & "x " & Trim$(Item(.Item).Name) & " for " & .CostValue & "x " & Trim$(Item(.CostItem).Name))
+                    FrmEditor_Shop.lstTradeItem.Items.Add(i & ": " & .ItemValue & "x " & Trim$(Item(.Item).Name) & " for " & .CostValue & "x " & Trim$(Item(.CostItem).Name))
                 End If
             End With
         Next
 
-        frmEditor_Shop.lstTradeItem.SelectedIndex = 0
+        FrmEditor_Shop.lstTradeItem.SelectedIndex = 0
     End Sub
 
     Public Sub ShopEditorOk()
@@ -1211,14 +1219,14 @@
             End If
         Next
 
-        frmEditor_Shop.Visible = False
+        FrmEditor_Shop.Visible = False
         Editor = 0
         ClearChanged_Shop()
     End Sub
 
     Public Sub ShopEditorCancel()
         Editor = 0
-        frmEditor_Shop.Visible = False
+        FrmEditor_Shop.Visible = False
         ClearChanged_Shop()
         ClearShops()
         SendRequestShops()

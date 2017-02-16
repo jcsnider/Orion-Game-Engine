@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports SFML.Graphics
+Imports SFML.Window
 
 Public Module ClientProjectiles
 #Region "Defines"
@@ -282,7 +283,7 @@ Public Module ClientProjectiles
 
         Dim tmpSprite As Sprite = New Sprite(ProjectileGFX(Sprite))
         tmpSprite.TextureRect = New IntRect(rec.left, rec.top, 32, 32)
-        tmpSprite.Position = New SFML.System.Vector2f(X, Y)
+        tmpSprite.Position = New Vector2f(X, Y)
         GameWindow.Draw(tmpSprite)
 
     End Sub

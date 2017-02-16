@@ -187,7 +187,7 @@ Module EditorLoop
         Dim g As Graphics = FrmEditor_MapEditor.picScreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim FrameTime As Integer, tmr500 As Integer
-        Dim tmpfps As Integer
+        Dim tmpfps As Integer, rendercount As Integer
 
         starttime = GetTickCount()
 
@@ -256,9 +256,6 @@ Module EditorLoop
 
                         ProcessWeather()
 
-                        'Auctual Game Loop Stuff :/
-                        Render_Graphics()
-
                         If FadeInSwitch = True Then
                             FadeIn()
                         End If
@@ -267,7 +264,11 @@ Module EditorLoop
                             FadeOut()
                         End If
 
-                        'destrect = New Rectangle(0, 0, ScreenX, ScreenY)
+                        If rendercount < Tick Then
+                            'Auctual Game Loop Stuff :/
+                            Render_Graphics()
+                            rendercount = Tick + 32
+                        End If
                         Application.DoEvents()
 
                         EditorMap_DrawTileset()
@@ -413,7 +414,7 @@ Module EditorLoop
         If InitResourceEditor = True Then
             Dim i As Integer
 
-            With frmEditor_Resource
+            With FrmEditor_Resource
                 Editor = EDITOR_RESOURCE
                 .lstIndex.Items.Clear()
 
@@ -433,7 +434,7 @@ Module EditorLoop
         End If
 
         If InitNPCEditor = True Then
-            With frmEditor_NPC
+            With FrmEditor_Npc
                 Editor = EDITOR_NPC
                 .lstIndex.Items.Clear()
 
@@ -467,7 +468,7 @@ Module EditorLoop
         End If
 
         If InitShopEditor = True Then
-            With frmEditor_Shop
+            With FrmEditor_Shop
                 Editor = EDITOR_SHOP
                 .lstIndex.Items.Clear()
 

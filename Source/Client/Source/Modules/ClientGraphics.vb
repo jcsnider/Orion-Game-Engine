@@ -1,7 +1,7 @@
 ﻿Imports SFML.Graphics
 Imports System.Drawing
 Imports System.Windows.Forms
-Imports SFML.System
+Imports SFML.Window
 
 Module ClientGraphics
 #Region "Declarations"

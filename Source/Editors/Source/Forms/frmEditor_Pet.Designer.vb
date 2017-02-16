@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_Pet
+Partial Class FrmEditor_Pet
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.

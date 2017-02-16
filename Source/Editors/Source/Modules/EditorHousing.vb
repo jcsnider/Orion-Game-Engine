@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports SFML.Graphics
+Imports SFML.Window
 
 Public Module EditorHousing
 #Region "Globals & Types"
@@ -164,13 +165,13 @@ Public Module EditorHousing
     Public Sub HouseEditorInit()
         Dim i As Integer
 
-        If frmEditor_House.Visible = False Then Exit Sub
+        If FrmEditor_House.Visible = False Then Exit Sub
 
-        EditorIndex = frmEditor_House.lstIndex.SelectedIndex + 1
+        EditorIndex = FrmEditor_House.lstIndex.SelectedIndex + 1
         i = EditorIndex
 
         With House(EditorIndex)
-            frmEditor_House.txtName.Text = Trim$(.ConfigName)
+            FrmEditor_House.txtName.Text = Trim$(.ConfigName)
             FrmEditor_House.nudBaseMap.Value = .BaseMap
             FrmEditor_House.nudX.Value = .X
             FrmEditor_House.nudY.Value = .Y
@@ -185,7 +186,7 @@ Public Module EditorHousing
     Public Sub HouseEditorCancel()
 
         Editor = 0
-        frmEditor_House.Dispose()
+        FrmEditor_House.Dispose()
 
         ClearChanged_House()
 
@@ -219,7 +220,7 @@ Public Module EditorHousing
 
         SendData(buffer.ToArray)
         buffer = Nothing
-        frmEditor_House.Dispose()
+        FrmEditor_House.Dispose()
         Editor = 0
 
         ClearChanged_House()
@@ -256,7 +257,7 @@ Public Module EditorHousing
 
         ItemNum = Furniture(Index).ItemNum
 
-        If Item(ItemNum).Type <> ItemType.FURNITURE Then Exit Sub
+        If Item(ItemNum).Type <> ItemType.Furniture Then Exit Sub
 
         i = Item(ItemNum).Data2
 
@@ -291,7 +292,7 @@ Public Module EditorHousing
 
                     Dim tmpSprite As Sprite = New Sprite(FurnitureGFX(i))
                     tmpSprite.TextureRect = New IntRect(0 + (X1 * 32), 0 + (Y1 * 32), 32, 32)
-                    tmpSprite.Position = New SFML.System.Vector2f(X, Y)
+                    tmpSprite.Position = New Vector2f(X, Y)
                     GameWindow.Draw(tmpSprite)
                 End If
             Next

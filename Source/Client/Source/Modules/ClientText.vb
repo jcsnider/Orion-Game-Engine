@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports SFML.Graphics
+Imports SFML.Window
 
 Module ClientText
     Public Const MaxChatDisplayLines As Byte = 8
@@ -21,20 +22,20 @@ Module ClientText
         FrontString.CharacterSize = TextSize
 
         BackString.Color = BackColor
-        BackString.Position = New SFML.System.Vector2f(X - 1, Y - 1)
+        BackString.Position = New Vector2f(X - 1, Y - 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.System.Vector2f(X - 1, Y + 1)
+        BackString.Position = New Vector2f(X - 1, Y + 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.System.Vector2f(X + 1, Y + 1)
+        BackString.Position = New Vector2f(X + 1, Y + 1)
         target.Draw(BackString)
 
-        BackString.Position = New SFML.System.Vector2f(X + 1, Y + -1)
+        BackString.Position = New Vector2f(X + 1, Y + -1)
         target.Draw(BackString)
 
         FrontString.Color = color
-        FrontString.Position = New SFML.System.Vector2f(X, Y)
+        FrontString.Position = New Vector2f(X, Y)
         target.Draw(FrontString)
 
     End Sub
@@ -166,7 +167,7 @@ Module ClientText
                     End If
                     Exit For
                 End If
-            ElseIf Player(MyIndex).PlayerQuest(i).Status = QuestStatus.STARTED Then
+            ElseIf Player(MyIndex).PlayerQuest(i).Status = QuestStatus.Started Then
                 If Map.MapEvents(Index).questnum = i Then
                     Name = "[*]"
                     TextX = ConvertMapX(Map.MapEvents(Index).X * PIC_X) + Map.MapEvents(Index).XOffset + (PIC_X \ 2) - GetTextWidth((Trim$("[*]"))) + 8

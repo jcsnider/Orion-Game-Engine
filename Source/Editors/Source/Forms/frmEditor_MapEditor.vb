@@ -16,11 +16,12 @@ Public Class FrmEditor_MapEditor
         cmbTileSets.SelectedIndex = 0
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
-
+        pnlTiles.BringToFront()
+        pnlTiles.Visible = True
         optBlocked.Checked = True
         SelectedTab = 1
 
-        scrlFog.Maximum = NumFogs
+        nudFog.Maximum = NumFogs
 
         picScreen.Width = (Map.MaxX * PIC_X) + PIC_X
         picScreen.Height = (Map.MaxY * PIC_Y) + PIC_Y
@@ -494,32 +495,32 @@ Public Class FrmEditor_MapEditor
         Map.Moral = cmbMoral.SelectedIndex
     End Sub
 
-    Private Sub TxtLeft_TextChanged(sender As Object, e As EventArgs) Handles txtLeft.TextChanged
-        Map.Left = Val(txtLeft.Text)
+    Private Sub NudLeft_ValueChanged(sender As Object, e As EventArgs) Handles nudLeft.ValueChanged
+        Map.Left = nudLeft.Value
     End Sub
 
-    Private Sub TxtRight_TextChanged(sender As Object, e As EventArgs) Handles txtRight.TextChanged
-        Map.Right = Val(txtRight.Text)
+    Private Sub NudRight_ValueChanged(sender As Object, e As EventArgs) Handles nudRight.ValueChanged
+        Map.Right = nudRight.Value
     End Sub
 
-    Private Sub TxtUp_TextChanged(sender As Object, e As EventArgs) Handles txtUp.TextChanged
-        Map.Up = Val(txtUp.Text)
+    Private Sub NudUp_ValueChanged(sender As Object, e As EventArgs) Handles nudUp.ValueChanged
+        Map.Up = nudUp.Value
     End Sub
 
-    Private Sub TxtDown_TextChanged(sender As Object, e As EventArgs) Handles txtDown.TextChanged
-        Map.Down = Val(txtDown.Text)
+    Private Sub NudDown_ValueChanged(sender As Object, e As EventArgs) Handles nudDown.ValueChanged
+        Map.Down = nudDown.Value
     End Sub
 
-    Private Sub TxtBootMap_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnMap.TextChanged
-        Map.BootMap = Val(txtSpawnMap.Text)
+    Private Sub TxtBootMap_TextChanged(sender As Object, e As EventArgs) Handles nudSpawnMap.ValueChanged
+        Map.BootMap = nudSpawnMap.Value
     End Sub
 
-    Private Sub TxtBootX_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnX.TextChanged
-        Map.BootX = Val(txtSpawnX.Text)
+    Private Sub TxtBootX_TextChanged(sender As Object, e As EventArgs) Handles nudSpawnX.ValueChanged
+        Map.BootX = nudSpawnX.Value
     End Sub
 
-    Private Sub TxtBootY_TextChanged(sender As Object, e As EventArgs) Handles txtSpawnY.TextChanged
-        Map.BootY = Val(txtSpawnY.Text)
+    Private Sub TxtBootY_TextChanged(sender As Object, e As EventArgs) Handles nudSpawnY.ValueChanged
+        Map.BootY = nudSpawnY.Value
     End Sub
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
@@ -539,28 +540,24 @@ Public Class FrmEditor_MapEditor
         CurrentWeather = cmbWeather.SelectedIndex
     End Sub
 
-    Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles scrlFog.ValueChanged
-        Map.FogIndex = scrlFog.Value
-        lblFogIndex.Text = "Fog: " & scrlFog.Value
-        CurrentFog = scrlFog.Value
+    Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles nudFog.ValueChanged
+        Map.FogIndex = nudFog.Value
+        CurrentFog = nudFog.Value
     End Sub
 
-    Private Sub ScrlIntensity_Scroll(sender As Object, e As EventArgs) Handles scrlIntensity.ValueChanged
-        Map.WeatherIntensity = scrlIntensity.Value
-        lblIntensity.Text = "Intensity: " & scrlIntensity.Value
-        CurrentWeatherIntensity = scrlIntensity.Value
+    Private Sub ScrlIntensity_Scroll(sender As Object, e As EventArgs) Handles nudIntensity.ValueChanged
+        Map.WeatherIntensity = nudIntensity.Value
+        CurrentWeatherIntensity = nudIntensity.Value
     End Sub
 
-    Private Sub ScrlFogSpeed_Scroll(sender As Object, e As EventArgs) Handles scrlFogSpeed.ValueChanged
-        Map.FogSpeed = scrlFogSpeed.Value
-        lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
-        CurrentFogSpeed = scrlFogSpeed.Value
+    Private Sub ScrlFogSpeed_Scroll(sender As Object, e As EventArgs) Handles nudFogSpeed.ValueChanged
+        Map.FogSpeed = nudFogSpeed.Value
+        CurrentFogSpeed = nudFogSpeed.Value
     End Sub
 
-    Private Sub ScrlFogAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlFogAlpha.ValueChanged
-        Map.FogAlpha = scrlFogAlpha.Value
-        lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
-        CurrentFogOpacity = scrlFogAlpha.Value
+    Private Sub ScrlFogAlpha_Scroll(sender As Object, e As EventArgs) Handles nudFogAlpha.ValueChanged
+        Map.FogAlpha = nudFogAlpha.Value
+        CurrentFogOpacity = nudFogAlpha.Value
     End Sub
 
     Private Sub ChkUseTint_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseTint.CheckedChanged
@@ -571,39 +568,30 @@ Public Class FrmEditor_MapEditor
         End If
     End Sub
 
-    Private Sub ScrlMapRed_Scroll(sender As Object, e As EventArgs) Handles scrlMapRed.ValueChanged
-        Map.MapTintR = scrlMapRed.Value
-        lblMapRed.Text = "Red: " & scrlMapRed.Value
-        CurrentTintR = scrlMapRed.Value
+    Private Sub ScrlMapRed_Scroll(sender As Object, e As EventArgs) Handles nudMapRed.ValueChanged
+        Map.MapTintR = nudMapRed.Value
+        CurrentTintR = nudMapRed.Value
     End Sub
 
-    Private Sub ScrlMapGreen_Scroll(sender As Object, e As EventArgs) Handles scrlMapGreen.ValueChanged
-        Map.MapTintG = scrlMapGreen.Value
-        lblMapGreen.Text = "Green: " & scrlMapGreen.Value
-        CurrentTintG = scrlMapGreen.Value
+    Private Sub ScrlMapGreen_Scroll(sender As Object, e As EventArgs) Handles nudMapGreen.ValueChanged
+        Map.MapTintG = nudMapGreen.Value
+        CurrentTintG = nudMapGreen.Value
     End Sub
 
-    Private Sub ScrlMapBlue_Scroll(sender As Object, e As EventArgs) Handles scrlMapBlue.ValueChanged
-        Map.MapTintB = scrlMapBlue.Value
-        lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
-        CurrentTintB = scrlMapBlue.Value
+    Private Sub ScrlMapBlue_Scroll(sender As Object, e As EventArgs) Handles nudMapBlue.ValueChanged
+        Map.MapTintB = nudMapBlue.Value
+        CurrentTintB = nudMapBlue.Value
     End Sub
 
-    Private Sub ScrlMapAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlMapAlpha.ValueChanged
-        Map.MapTintA = scrlMapAlpha.Value
-        lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
-        CurrentTintA = scrlMapAlpha.Value
+    Private Sub ScrlMapAlpha_Scroll(sender As Object, e As EventArgs) Handles nudMapAlpha.ValueChanged
+        Map.MapTintA = nudMapAlpha.Value
+        CurrentTintA = nudMapAlpha.Value
     End Sub
 
     Private Sub BtnSetSize_Click(sender As Object, e As EventArgs) Handles btnSetSize.Click
         Dim X As Integer, x2 As Integer, i As Integer
         Dim Y As Integer, y2 As Integer
         Dim tempArr(,) As TileRec
-
-        If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
-        If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
-        If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
-        If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
 
         GettingMap = True
         With Map
@@ -632,8 +620,8 @@ Public Class FrmEditor_MapEditor
             x2 = Map.MaxX
             y2 = Map.MaxY
             ' change the data
-            .MaxX = Val(txtMaxX.Text)
-            .MaxY = Val(txtMaxY.Text)
+            .MaxX = nudMaxX.Value
+            .MaxY = nudMaxY.Value
 
             ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
             ReDim Autotile(0 To .MaxX, 0 To .MaxY)

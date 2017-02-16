@@ -1,97 +1,65 @@
-﻿Public Class frmEditor_Resource
+﻿Public Class FrmEditor_Resource
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
 
-    Private Sub scrlNormalPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlNormalPic.ValueChanged
-        lblNormalPic.Text = "Normal Image: " & scrlNormalPic.Value
+    Private Sub ScrlNormalPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudNormalPic.ValueChanged
         EditorResource_DrawSprite()
-        Resource(EditorIndex).ResourceImage = scrlNormalPic.Value
+        Resource(EditorIndex).ResourceImage = nudNormalPic.Value
     End Sub
 
-    Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
+    Private Sub CmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
         Resource(EditorIndex).ResourceType = cmbType.SelectedIndex
     End Sub
 
-    Private Sub scrlExhaustedPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlExhaustedPic.ValueChanged
-        lblExhaustedPic.Text = "Exhausted Image: " & scrlExhaustedPic.Value
+    Private Sub ScrlExhaustedPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudExhaustedPic.ValueChanged
         EditorResource_DrawSprite()
-        Resource(EditorIndex).ExhaustedImage = scrlExhaustedPic.Value
+        Resource(EditorIndex).ExhaustedImage = nudExhaustedPic.Value
     End Sub
 
-    Private Sub scrlRewardItem_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRewardItem.ValueChanged
-        If scrlRewardItem.Value > 0 Then
-            lblRewardItem.Text = "Item Reward: " & Trim$(Item(scrlRewardItem.Value).Name)
-        Else
-            lblRewardItem.Text = "Item Reward: None"
-        End If
-
-        Resource(EditorIndex).ItemReward = scrlRewardItem.Value
+    Private Sub ScrlRewardItem_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbRewardItem.SelectedIndexChanged
+        Resource(EditorIndex).ItemReward = cmbRewardItem.SelectedIndex
     End Sub
 
-    Private Sub scrlRewardExp_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRewardExp.ValueChanged
-        If scrlRewardExp.Value > 0 Then
-            lblRewardExp.Text = "Exp Reward: " & scrlRewardExp.Value
-        Else
-            lblRewardExp.Text = "Exp Reward: None"
-        End If
-
-        Resource(EditorIndex).ExpReward = scrlRewardExp.Value
+    Private Sub ScrlRewardExp_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudRewardExp.ValueChanged
+        Resource(EditorIndex).ExpReward = nudRewardExp.Value
     End Sub
 
-    Private Sub scrlLvlReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLvlReq.ValueChanged
-        If scrlLvlReq.Value > 0 Then
-            lblLvlReq.Text = "Level Required: " & scrlLvlReq.Value
-        Else
-            lblLvlReq.Text = "level Required: None"
-        End If
-
-        Resource(EditorIndex).LvlRequired = scrlLvlReq.Value
+    Private Sub ScrlLvlReq_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudLvlReq.ValueChanged
+        Resource(EditorIndex).LvlRequired = nudLvlReq.Value
     End Sub
 
-    Private Sub cmbTool_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTool.SelectedIndexChanged
-        Dim Name As String
-        Name = ""
-
-        Select Case cmbTool.SelectedIndex
-            Case 0
-                Name = "None"
-            Case 1
-                Name = "Hatchet"
-            Case 2
-                Name = "Rod"
-            Case 3
-                Name = "Pickaxe"
-        End Select
-
-        lblTool.Text = "Tool Required: " & Name
+    Private Sub CmbTool_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbTool.SelectedIndexChanged
 
         Resource(EditorIndex).ToolRequired = cmbTool.SelectedIndex
     End Sub
 
-    Private Sub scrlHealth_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlHealth.ValueChanged
-        lblHealth.Text = "Health: " & scrlHealth.Value
-        Resource(EditorIndex).Health = scrlHealth.Value
+    Private Sub ScrlHealth_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudHealth.ValueChanged
+        Resource(EditorIndex).Health = nudHealth.Value
     End Sub
 
-    Private Sub scrlRespawn_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRespawn.ValueChanged
-        lblRespawn.Text = "Respawn Time (Seconds): " & scrlRespawn.Value
-        Resource(EditorIndex).RespawnTime = scrlRespawn.Value
+    Private Sub ScrlRespawn_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudRespawn.ValueChanged
+        Resource(EditorIndex).RespawnTime = nudRespawn.Value
     End Sub
 
-    Private Sub scrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnimation.ValueChanged
-        Dim sString As String
-        If scrlAnimation.Value = 0 Then sString = "None" Else sString = Trim$(Animation(scrlAnimation.Value).Name)
-        lblAnim.Text = "Animation: " & sString
-        Resource(EditorIndex).Animation = scrlAnimation.Value
+    Private Sub ScrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAnimation.SelectedIndexChanged
+        Resource(EditorIndex).Animation = cmbAnimation.SelectedIndex
     End Sub
 
-    Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
+    Private Sub LstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
         ResourceEditorInit()
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         ResourceEditorOk()
     End Sub
 
-    Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
+    Private Sub BtnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
         Dim tmpIndex As Integer
 
         ClearResource(EditorIndex)
@@ -104,15 +72,15 @@
         ResourceEditorInit()
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         Call ResourceEditorCancel()
     End Sub
 
-    Private Sub frmEditor_Resource_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        scrlRewardItem.Maximum = MAX_ITEMS
+    Private Sub FrmEditor_Resource_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
     End Sub
 
-    Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
+    Private Sub TxtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
 
         If EditorIndex = 0 Then Exit Sub
@@ -123,13 +91,11 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub txtMessage_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMessage.TextChanged
+    Private Sub TxtMessage_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMessage.TextChanged
         Resource(EditorIndex).SuccessMessage = Trim$(txtMessage.Text)
     End Sub
 
-    Private Sub txtMessage2_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMessage2.TextChanged
+    Private Sub TxtMessage2_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMessage2.TextChanged
         Resource(EditorIndex).EmptyMessage = Trim$(txtMessage2.Text)
     End Sub
-
-
 End Class

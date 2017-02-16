@@ -55,9 +55,8 @@
     <Reference Include="DarkUI">
       <HintPath>.\DarkUI.dll</HintPath>
     </Reference>
-    <Reference Include="SFML.Net, Version=2.2.6150.20648, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\SFML.Net.dll</HintPath>
+    <Reference Include="SFML.Net, Version=2.1.6239.27707, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SFML-Portable-2.1.1.1.0\lib\SFML.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

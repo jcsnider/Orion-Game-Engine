@@ -1,5 +1,4 @@
 ﻿Imports SFML.Graphics
-Imports SFML.System
 Imports SFML.Window
 
 Module EditorGraphics
@@ -1187,9 +1186,9 @@ Module EditorGraphics
         If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
 
         Dim rec2 As New RectangleShape
-        rec2.OutlineColor = New SFML.Graphics.Color(Color.Blue)
+        rec2.OutlineColor = New Color(Color.Blue)
         rec2.OutlineThickness = 0.6
-        rec2.FillColor = New SFML.Graphics.Color(Color.Transparent)
+        rec2.FillColor = New Color(Color.Transparent)
 
         If SelectedTab = 2 Then
             'RenderTexture(MiscGFX, GameWindow, ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
@@ -1233,9 +1232,9 @@ Module EditorGraphics
 
                 If IsValidMapPoint(x, y) Then
 
-                    rec.OutlineColor = New SFML.Graphics.Color(Color.White)
+                    rec.OutlineColor = New Color(Color.White)
                     rec.OutlineThickness = 0.6
-                    rec.FillColor = New SFML.Graphics.Color(Color.Transparent)
+                    rec.FillColor = New Color(Color.Transparent)
                     rec.Size = New Vector2f((x * PIC_X), (y * PIC_X))
                     rec.Position = New Vector2f(ConvertMapX((x - 1) * PIC_X), ConvertMapY((y - 1) * PIC_Y))
 
@@ -1254,7 +1253,7 @@ Module EditorGraphics
         If Map.HasMapTint = 0 Then Exit Sub
 
         MapTintSprite = New Sprite(New Texture(New SFML.Graphics.Image((Map.MaxX * PIC_X), (Map.MaxY * PIC_Y), SFML.Graphics.Color.White)))
-        MapTintSprite.Color = New SFML.Graphics.Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
+        MapTintSprite.Color = New Color(CurrentTintR, CurrentTintG, CurrentTintB, CurrentTintA)
         MapTintSprite.TextureRect = New IntRect(0, 0, (Map.MaxX * PIC_X) + PIC_X, (Map.MaxY * PIC_Y) + PIC_Y)
 
         MapTintSprite.Position = New Vector2f(0, 0)
@@ -1278,9 +1277,9 @@ Module EditorGraphics
         If tileset <= 0 Or tileset > NumTileSets Then Exit Sub
 
         Dim rec2 As New RectangleShape With {
-            .OutlineColor = New SFML.Graphics.Color(Color.Red),
+            .OutlineColor = New Color(Color.Red),
             .OutlineThickness = 0.6,
-            .FillColor = New SFML.Graphics.Color(Color.Transparent)
+            .FillColor = New Color(Color.Transparent)
         }
 
         If TileSetTextureInfo(tileset).IsLoaded = False Then
@@ -1514,17 +1513,17 @@ Module EditorGraphics
     Public Sub EditorNpc_DrawSprite()
         Dim Sprite As Integer
 
-        Sprite = frmEditor_Npc.nudSprite.Value
+        Sprite = FrmEditor_Npc.nudSprite.Value
 
         If Sprite < 1 Or Sprite > NumCharacters Then
-            frmEditor_NPC.picSprite.BackgroundImage = Nothing
+            FrmEditor_Npc.picSprite.BackgroundImage = Nothing
             Exit Sub
         End If
 
         If FileExist(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT) Then
-            frmEditor_NPC.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Width / 4
-            frmEditor_NPC.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Height / 4
-            frmEditor_NPC.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT)
+            FrmEditor_Npc.picSprite.Width = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Width / 4
+            FrmEditor_Npc.picSprite.Height = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT).Height / 4
+            FrmEditor_Npc.picSprite.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "characters\" & Sprite & GFX_EXT)
         End If
     End Sub
 
@@ -1532,24 +1531,24 @@ Module EditorGraphics
         Dim Sprite As Integer
 
         ' normal sprite
-        Sprite = frmEditor_Resource.scrlNormalPic.Value
+        Sprite = FrmEditor_Resource.nudNormalPic.Value
 
         If Sprite < 1 Or Sprite > NumResources Then
-            frmEditor_Resource.picNormalpic.BackgroundImage = Nothing
+            FrmEditor_Resource.picNormalpic.BackgroundImage = Nothing
         Else
             If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+                FrmEditor_Resource.picNormalpic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
             End If
         End If
 
         ' exhausted sprite
-        Sprite = frmEditor_Resource.scrlExhaustedPic.Value
+        Sprite = FrmEditor_Resource.nudExhaustedPic.Value
 
         If Sprite < 1 Or Sprite > NumResources Then
-            frmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
+            FrmEditor_Resource.picExhaustedPic.BackgroundImage = Nothing
         Else
             If FileExist(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT) Then
-                frmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
+                FrmEditor_Resource.picExhaustedPic.BackgroundImage = Drawing.Image.FromFile(Application.StartupPath & GFX_PATH & "resources\" & Sprite & GFX_EXT)
             End If
         End If
     End Sub
@@ -1734,8 +1733,8 @@ Module EditorGraphics
         g.Dispose()
     End Sub
 
-    Public Function ToSFMLColor(ToConvert As Drawing.Color) As SFML.Graphics.Color
-        Return New SFML.Graphics.Color(ToConvert.R, ToConvert.G, ToConvert.G, ToConvert.A)
+    Public Function ToSFMLColor(ToConvert As Drawing.Color) As Color
+        Return New Color(ToConvert.R, ToConvert.G, ToConvert.G, ToConvert.A)
     End Function
 
 End Module
