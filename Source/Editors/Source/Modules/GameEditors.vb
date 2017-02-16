@@ -1061,12 +1061,9 @@
 
         With frmEditor_Skill
             ' set max values
-            .scrlAnimCast.Maximum = MAX_ANIMATIONS
-            .scrlAnim.Maximum = MAX_ANIMATIONS
-            .scrlAOE.Maximum = Byte.MaxValue
-            .scrlRange.Maximum = Byte.MaxValue
-            .scrlMap.Maximum = MAX_MAPS
-            .scrlProjectile.Maximum = MAX_PROJECTILES
+            .nudAoE.Maximum = Byte.MaxValue
+            .nudRange.Maximum = Byte.MaxValue
+            .nudMap.Maximum = MAX_MAPS
 
             ' build class combo
             .cmbClass.Items.Clear()
@@ -1076,40 +1073,56 @@
             Next
             .cmbClass.SelectedIndex = 0
 
+            .cmbProjectile.Items.Clear()
+            .cmbProjectile.Items.Add("None")
+            For i = 1 To MAX_PROJECTILES
+                .cmbProjectile.Items.Add(Trim$(Projectiles(i).Name))
+            Next
+            .cmbProjectile.SelectedIndex = 0
+
+            .cmbAnimCast.Items.Clear()
+            .cmbAnimCast.Items.Add("None")
+            .cmbAnim.Items.Clear()
+            .cmbAnim.Items.Add("None")
+            For i = 1 To MAX_ANIMATIONS
+                .cmbAnimCast.Items.Add(Trim$(Animation(i).Name))
+                .cmbAnim.Items.Add(Trim$(Animation(i).Name))
+            Next
+            .cmbAnimCast.SelectedIndex = 0
+            .cmbAnim.SelectedIndex = 0
+
             ' set values
             .txtName.Text = Trim$(Skill(EditorIndex).Name)
             .cmbType.SelectedIndex = Skill(EditorIndex).Type
-            .scrlMP.Value = Skill(EditorIndex).MPCost
-            .scrlLevel.Value = Skill(EditorIndex).LevelReq
-            .scrlAccess.Value = Skill(EditorIndex).AccessReq
+            .nudMp.Value = Skill(EditorIndex).MPCost
+            .nudLevel.Value = Skill(EditorIndex).LevelReq
+            .cmbAccessReq.SelectedIndex = Skill(EditorIndex).AccessReq
             .cmbClass.SelectedIndex = Skill(EditorIndex).ClassReq
-            .scrlCast.Value = Skill(EditorIndex).CastTime
-            .scrlCool.Value = Skill(EditorIndex).CDTime
-            .scrlIcon.Value = Skill(EditorIndex).Icon
-            .scrlMap.Value = Skill(EditorIndex).Map
-            .scrlX.Value = Skill(EditorIndex).X
-            .scrlY.Value = Skill(EditorIndex).Y
-            .scrlDir.Value = Skill(EditorIndex).Dir
-            .scrlVital.Value = Skill(EditorIndex).Vital
-            .scrlDuration.Value = Skill(EditorIndex).Duration
-            .scrlInterval.Value = Skill(EditorIndex).Interval
-            .scrlRange.Value = Skill(EditorIndex).Range
-            If Skill(EditorIndex).IsAoE = True Then
-                .chkAOE.Checked = True
-            Else
-                .chkAOE.Checked = False
-            End If
-            .scrlAOE.Value = Skill(EditorIndex).AoE
-            .scrlAnimCast.Value = Skill(EditorIndex).CastAnim
-            .scrlAnim.Value = Skill(EditorIndex).SkillAnim
-            .scrlStun.Value = Skill(EditorIndex).StunDuration
+            .nudCast.Value = Skill(EditorIndex).CastTime
+            .nudCool.Value = Skill(EditorIndex).CDTime
+            .nudIcon.Value = Skill(EditorIndex).Icon
+            .nudMap.Value = Skill(EditorIndex).Map
+            .nudX.Value = Skill(EditorIndex).X
+            .nudY.Value = Skill(EditorIndex).Y
+            .cmbDir.SelectedIndex = Skill(EditorIndex).Dir
+            .nudVital.Value = Skill(EditorIndex).Vital
+            .nudDuration.Value = Skill(EditorIndex).Duration
+            .nudInterval.Value = Skill(EditorIndex).Interval
+            .nudRange.Value = Skill(EditorIndex).Range
+
+            .chkAoE.Checked = Skill(EditorIndex).IsAoE
+
+            .nudAoE.Value = Skill(EditorIndex).AoE
+            .cmbAnimCast.SelectedIndex = Skill(EditorIndex).CastAnim
+            .cmbAnim.SelectedIndex = Skill(EditorIndex).SkillAnim
+            .nudStun.Value = Skill(EditorIndex).StunDuration
 
             If Skill(EditorIndex).IsProjectile = 1 Then
                 .chkProjectile.Checked = True
             Else
                 .chkProjectile.Checked = False
             End If
-            .scrlProjectile.Value = Skill(EditorIndex).Projectile
+            .cmbProjectile.SelectedIndex = Skill(EditorIndex).Projectile
 
             If Skill(EditorIndex).KnockBack = 1 Then
                 .chkKnockBack.Checked = True

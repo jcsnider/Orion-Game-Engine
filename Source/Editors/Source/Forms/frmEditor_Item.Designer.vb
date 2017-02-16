@@ -25,9 +25,6 @@ Partial Class frmEditor_Item
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.fraBasics = New DarkUI.Controls.DarkGroupBox()
-        Me.fraPet = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbPet = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
         Me.txtDescription = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
         Me.cmbAnimation = New DarkUI.Controls.DarkComboBox()
@@ -50,15 +47,18 @@ Partial Class frmEditor_Item
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
-        Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
         Me.fraSkill = New DarkUI.Controls.DarkGroupBox()
         Me.cmbSkills = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
         Me.fraRecipe = New DarkUI.Controls.DarkGroupBox()
         Me.cmbRecipe = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
+        Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
+        Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.fraPet = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbPet = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
         Me.fraEquipment = New DarkUI.Controls.DarkGroupBox()
         Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.cmbAmmo = New DarkUI.Controls.DarkComboBox()
@@ -128,16 +128,16 @@ Partial Class frmEditor_Item
         Me.picFurniture = New System.Windows.Forms.PictureBox()
         Me.DarkGroupBox1.SuspendLayout()
         Me.fraBasics.SuspendLayout()
-        Me.fraPet.SuspendLayout()
         CType(Me.nudItemLvl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudRarity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudPic, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.fraVitals.SuspendLayout()
-        CType(Me.nudVitalMod, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraSkill.SuspendLayout()
         Me.fraRecipe.SuspendLayout()
+        Me.fraVitals.SuspendLayout()
+        CType(Me.nudVitalMod, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraPet.SuspendLayout()
         Me.fraEquipment.SuspendLayout()
         Me.DarkGroupBox3.SuspendLayout()
         CType(Me.nudPaperdoll, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -226,45 +226,6 @@ Partial Class frmEditor_Item
         Me.fraBasics.TabIndex = 1
         Me.fraBasics.TabStop = False
         Me.fraBasics.Text = "Basics"
-        '
-        'fraPet
-        '
-        Me.fraPet.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraPet.Controls.Add(Me.cmbPet)
-        Me.fraPet.Controls.Add(Me.DarkLabel13)
-        Me.fraPet.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraPet.Location = New System.Drawing.Point(243, 159)
-        Me.fraPet.Name = "fraPet"
-        Me.fraPet.Size = New System.Drawing.Size(200, 40)
-        Me.fraPet.TabIndex = 25
-        Me.fraPet.TabStop = False
-        Me.fraPet.Text = "Pets"
-        '
-        'cmbPet
-        '
-        Me.cmbPet.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPet.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbPet.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbPet.FormattingEnabled = True
-        Me.cmbPet.Location = New System.Drawing.Point(41, 14)
-        Me.cmbPet.Name = "cmbPet"
-        Me.cmbPet.Size = New System.Drawing.Size(153, 21)
-        Me.cmbPet.TabIndex = 1
-        '
-        'DarkLabel13
-        '
-        Me.DarkLabel13.AutoSize = True
-        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel13.Location = New System.Drawing.Point(6, 17)
-        Me.DarkLabel13.Name = "DarkLabel13"
-        Me.DarkLabel13.Size = New System.Drawing.Size(26, 13)
-        Me.DarkLabel13.TabIndex = 0
-        Me.DarkLabel13.Text = "Pet:"
         '
         'txtDescription
         '
@@ -508,39 +469,6 @@ Partial Class frmEditor_Item
         Me.DarkLabel1.TabIndex = 0
         Me.DarkLabel1.Text = "Item Name:"
         '
-        'fraVitals
-        '
-        Me.fraVitals.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraVitals.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraVitals.Controls.Add(Me.nudVitalMod)
-        Me.fraVitals.Controls.Add(Me.DarkLabel11)
-        Me.fraVitals.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraVitals.Location = New System.Drawing.Point(243, 120)
-        Me.fraVitals.Name = "fraVitals"
-        Me.fraVitals.Size = New System.Drawing.Size(200, 40)
-        Me.fraVitals.TabIndex = 23
-        Me.fraVitals.TabStop = False
-        Me.fraVitals.Text = "Vitals"
-        '
-        'nudVitalMod
-        '
-        Me.nudVitalMod.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.nudVitalMod.ForeColor = System.Drawing.Color.Gainsboro
-        Me.nudVitalMod.Location = New System.Drawing.Point(67, 14)
-        Me.nudVitalMod.Name = "nudVitalMod"
-        Me.nudVitalMod.Size = New System.Drawing.Size(127, 20)
-        Me.nudVitalMod.TabIndex = 1
-        '
-        'DarkLabel11
-        '
-        Me.DarkLabel11.AutoSize = True
-        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel11.Location = New System.Drawing.Point(6, 17)
-        Me.DarkLabel11.Name = "DarkLabel11"
-        Me.DarkLabel11.Size = New System.Drawing.Size(59, 13)
-        Me.DarkLabel11.TabIndex = 0
-        Me.DarkLabel11.Text = "Vitals Mod:"
-        '
         'fraSkill
         '
         Me.fraSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
@@ -618,6 +546,78 @@ Partial Class frmEditor_Item
         Me.DarkLabel35.Size = New System.Drawing.Size(44, 13)
         Me.DarkLabel35.TabIndex = 0
         Me.DarkLabel35.Text = "Recipe:"
+        '
+        'fraVitals
+        '
+        Me.fraVitals.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.fraVitals.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraVitals.Controls.Add(Me.nudVitalMod)
+        Me.fraVitals.Controls.Add(Me.DarkLabel11)
+        Me.fraVitals.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraVitals.Location = New System.Drawing.Point(243, 120)
+        Me.fraVitals.Name = "fraVitals"
+        Me.fraVitals.Size = New System.Drawing.Size(200, 40)
+        Me.fraVitals.TabIndex = 23
+        Me.fraVitals.TabStop = False
+        Me.fraVitals.Text = "Vitals"
+        '
+        'nudVitalMod
+        '
+        Me.nudVitalMod.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.nudVitalMod.ForeColor = System.Drawing.Color.Gainsboro
+        Me.nudVitalMod.Location = New System.Drawing.Point(67, 14)
+        Me.nudVitalMod.Name = "nudVitalMod"
+        Me.nudVitalMod.Size = New System.Drawing.Size(127, 20)
+        Me.nudVitalMod.TabIndex = 1
+        '
+        'DarkLabel11
+        '
+        Me.DarkLabel11.AutoSize = True
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel11.Location = New System.Drawing.Point(6, 17)
+        Me.DarkLabel11.Name = "DarkLabel11"
+        Me.DarkLabel11.Size = New System.Drawing.Size(59, 13)
+        Me.DarkLabel11.TabIndex = 0
+        Me.DarkLabel11.Text = "Vitals Mod:"
+        '
+        'fraPet
+        '
+        Me.fraPet.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.fraPet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPet.Controls.Add(Me.cmbPet)
+        Me.fraPet.Controls.Add(Me.DarkLabel13)
+        Me.fraPet.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraPet.Location = New System.Drawing.Point(243, 159)
+        Me.fraPet.Name = "fraPet"
+        Me.fraPet.Size = New System.Drawing.Size(200, 40)
+        Me.fraPet.TabIndex = 25
+        Me.fraPet.TabStop = False
+        Me.fraPet.Text = "Pets"
+        '
+        'cmbPet
+        '
+        Me.cmbPet.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbPet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.cmbPet.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbPet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPet.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbPet.FormattingEnabled = True
+        Me.cmbPet.Location = New System.Drawing.Point(41, 14)
+        Me.cmbPet.Name = "cmbPet"
+        Me.cmbPet.Size = New System.Drawing.Size(153, 21)
+        Me.cmbPet.TabIndex = 1
+        '
+        'DarkLabel13
+        '
+        Me.DarkLabel13.AutoSize = True
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel13.Location = New System.Drawing.Point(6, 17)
+        Me.DarkLabel13.Name = "DarkLabel13"
+        Me.DarkLabel13.Size = New System.Drawing.Size(26, 13)
+        Me.DarkLabel13.TabIndex = 0
+        Me.DarkLabel13.Text = "Pet:"
         '
         'fraEquipment
         '
@@ -1392,7 +1392,7 @@ Partial Class frmEditor_Item
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(674, 498)
+        Me.ClientSize = New System.Drawing.Size(677, 498)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -1400,30 +1400,30 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.btnRequirements)
         Me.Controls.Add(Me.btnBasics)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.Controls.Add(Me.fraBasics)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.fraFurniture)
+        Me.Controls.Add(Me.fraRequirements)
+        Me.Controls.Add(Me.fraBasics)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmEditor_Item"
         Me.Text = "Item Editor"
         Me.DarkGroupBox1.ResumeLayout(False)
         Me.fraBasics.ResumeLayout(False)
         Me.fraBasics.PerformLayout()
-        Me.fraPet.ResumeLayout(False)
-        Me.fraPet.PerformLayout()
         CType(Me.nudItemLvl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picItem, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudRarity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudPic, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.fraVitals.ResumeLayout(False)
-        Me.fraVitals.PerformLayout()
-        CType(Me.nudVitalMod, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraSkill.ResumeLayout(False)
         Me.fraSkill.PerformLayout()
         Me.fraRecipe.ResumeLayout(False)
         Me.fraRecipe.PerformLayout()
+        Me.fraVitals.ResumeLayout(False)
+        Me.fraVitals.PerformLayout()
+        CType(Me.nudVitalMod, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraPet.ResumeLayout(False)
+        Me.fraPet.PerformLayout()
         Me.fraEquipment.ResumeLayout(False)
         Me.fraEquipment.PerformLayout()
         Me.DarkGroupBox3.ResumeLayout(False)

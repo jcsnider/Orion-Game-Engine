@@ -1,5 +1,14 @@
 ﻿Public Class frmEditor_Skill
-    Private Sub txtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            ' Turn on WS_EX_COMPOSITED
+            Return cp
+        End Get
+    End Property
+
+    Private Sub TxtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
 
         If EditorIndex = 0 Then Exit Sub
@@ -10,170 +19,105 @@
         lstIndex.SelectedIndex = tmpIndex
     End Sub
 
-    Private Sub cmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
+    Private Sub CmbType_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbType.SelectedIndexChanged
         Skill(EditorIndex).Type = cmbType.SelectedIndex
     End Sub
 
-    Private Sub scrlMP_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMP.ValueChanged
-        If scrlMP.Value > 0 Then
-            lblMP.Text = "MP Cost: " & scrlMP.Value
-        Else
-            lblMP.Text = "MP Cost: None"
-        End If
-        Skill(EditorIndex).MPCost = scrlMP.Value
+    Private Sub NudMp_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudMp.ValueChanged
+        Skill(EditorIndex).MPCost = nudMp.Value
     End Sub
 
-    Private Sub scrlLevel_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlLevel.ValueChanged
-        If scrlLevel.Value > 0 Then
-            lblLevel.Text = "Level Required: " & scrlLevel.Value
-        Else
-            lblLevel.Text = "Level Required: None"
-        End If
-        Skill(EditorIndex).LevelReq = scrlLevel.Value
+    Private Sub NudLevel_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLevel.ValueChanged
+        Skill(EditorIndex).LevelReq = nudLevel.Value
     End Sub
 
-    Private Sub scrlAccess_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAccess.ValueChanged
-        If scrlAccess.Value > 0 Then
-            lblAccess.Text = "Access Required: " & scrlAccess.Value
-        Else
-            lblAccess.Text = "Access Required: None"
-        End If
-        Skill(EditorIndex).AccessReq = scrlAccess.Value
+    Private Sub CmbAccessReq_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAccessReq.SelectedIndexChanged
+        Skill(EditorIndex).AccessReq = cmbAccessReq.SelectedIndex
     End Sub
 
-    Private Sub cmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
+    Private Sub CmbClass_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbClass.SelectedIndexChanged
         Skill(EditorIndex).ClassReq = cmbClass.SelectedIndex
     End Sub
 
-    Private Sub scrlCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlCast.ValueChanged
-        lblCast.Text = "Casting Time: " & scrlCast.Value & "s"
-        Skill(EditorIndex).CastTime = scrlCast.Value
+    Private Sub NudCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudCast.ValueChanged
+        Skill(EditorIndex).CastTime = nudCast.Value
     End Sub
 
-    Private Sub scrlCool_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlCool.ValueChanged
-        lblCool.Text = "Cooldown Time: " & scrlCool.Value & "s"
-        Skill(EditorIndex).CDTime = scrlCool.Value
+    Private Sub NudCool_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudCool.ValueChanged
+        Skill(EditorIndex).CDTime = nudCool.Value
     End Sub
 
-    Private Sub scrlIcon_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlIcon.ValueChanged
-        If scrlIcon.Value > 0 Then
-            lblIcon.Text = "Icon: " & scrlIcon.Value
-        Else
-            lblIcon.Text = "Icon: None"
-        End If
-        Skill(EditorIndex).Icon = scrlIcon.Value
+    Private Sub NudIcon_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudIcon.ValueChanged
+
+        Skill(EditorIndex).Icon = nudIcon.Value
         EditorSkill_BltIcon()
     End Sub
 
-    Private Sub scrlMap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMap.ValueChanged
-        lblMap.Text = "Map: " & scrlMap.Value
-        Skill(EditorIndex).Map = scrlMap.Value
+    Private Sub NudMap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudMap.ValueChanged
+        Skill(EditorIndex).Map = nudMap.Value
     End Sub
 
-    Private Sub scrlDir_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlDir.ValueChanged
-        Dim sDir As String
-        sDir = ""
-        Select Case scrlDir.Value
-            Case Direction.Up
-                sDir = "Up"
-            Case Direction.Down
-                sDir = "Down"
-            Case Direction.Right
-                sDir = "Right"
-            Case Direction.Left
-                sDir = "Left"
-        End Select
-        lblDir.Text = "Dir: " & sDir
-        Skill(EditorIndex).Dir = scrlDir.Value
+    Private Sub CmbDir_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbDir.SelectedIndexChanged
+        Skill(EditorIndex).Dir = cmbDir.SelectedIndex
     End Sub
 
-    Private Sub scrlX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlX.ValueChanged
-        lblX.Text = "X: " & scrlX.Value
-        Skill(EditorIndex).X = scrlX.Value
+    Private Sub NudX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudX.ValueChanged
+        Skill(EditorIndex).X = nudX.Value
     End Sub
 
-    Private Sub scrlY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlY.ValueChanged
-        lblY.Text = "Y: " & scrlY.Value
-        Skill(EditorIndex).Y = scrlY.Value
+    Private Sub NudY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudY.ValueChanged
+        Skill(EditorIndex).Y = nudY.Value
     End Sub
 
-    Private Sub scrlVital_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlVital.ValueChanged
-        lblVital.Text = "Vital: " & scrlVital.Value
-        Skill(EditorIndex).Vital = scrlVital.Value
+    Private Sub NudVital_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudVital.ValueChanged
+        Skill(EditorIndex).Vital = nudVital.Value
     End Sub
 
-    Private Sub scrlDuration_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlDuration.ValueChanged
-        lblDuration.Text = "Duration: " & scrlDuration.Value & "s"
-        Skill(EditorIndex).Duration = scrlDuration.Value
+    Private Sub NudDuration_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudDuration.ValueChanged
+        Skill(EditorIndex).Duration = nudDuration.Value
     End Sub
 
-    Private Sub scrlInterval_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlInterval.ValueChanged
-        lblInterval.Text = "Interval: " & scrlInterval.Value & "s"
-        Skill(EditorIndex).Interval = scrlInterval.Value
+    Private Sub NudInterval_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudInterval.ValueChanged
+        Skill(EditorIndex).Interval = nudInterval.Value
     End Sub
 
-    Private Sub scrlRange_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlRange.ValueChanged
-        If scrlRange.Value > 0 Then
-            lblRange.Text = "Range: " & scrlRange.Value & " tiles."
-        Else
-            lblRange.Text = "Range: Self-cast"
-        End If
-        Skill(EditorIndex).Range = scrlRange.Value
+    Private Sub NudRange_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudRange.ValueChanged
+        Skill(EditorIndex).Range = nudRange.Value
     End Sub
 
-    Private Sub chkAOE_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkAOE.CheckedChanged
-        If chkAOE.Checked = False Then
+    Private Sub ChkAOE_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkAoE.CheckedChanged
+        If chkAoE.Checked = False Then
             Skill(EditorIndex).IsAoE = False
         Else
             Skill(EditorIndex).IsAoE = True
         End If
     End Sub
 
-    Private Sub scrlAOE_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAOE.ValueChanged
-        If scrlAOE.Value > 0 Then
-            lblAOE.Text = "AoE: " & scrlAOE.Value & " tiles."
-        Else
-            lblAOE.Text = "AoE: Self-cast"
-        End If
-        Skill(EditorIndex).AoE = scrlAOE.Value
+    Private Sub NudAoE_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudAoE.ValueChanged
+        Skill(EditorIndex).AoE = nudAoE.Value
     End Sub
 
-    Private Sub scrlAnimCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnimCast.ValueChanged
-        If scrlAnimCast.Value > 0 Then
-            lblAnimCast.Text = "Cast Anim: " & Trim$(Animation(scrlAnimCast.Value).Name)
-        Else
-            lblAnimCast.Text = "Cast Anim: None"
-        End If
-        Skill(EditorIndex).CastAnim = scrlAnimCast.Value
+    Private Sub CmbAnimCast_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAnimCast.SelectedIndexChanged
+        Skill(EditorIndex).CastAnim = cmbAnimCast.SelectedIndex
     End Sub
 
-    Private Sub scrlAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlAnim.ValueChanged
-        If scrlAnim.Value > 0 Then
-            lblAnim.Text = "Animation: " & Trim$(Animation(scrlAnim.Value).Name)
-        Else
-            lblAnim.Text = "Animation: None"
-        End If
-        Skill(EditorIndex).SkillAnim = scrlAnim.Value
+    Private Sub CmbAnim_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles cmbAnim.SelectedIndexChanged
+        Skill(EditorIndex).SkillAnim = cmbAnim.SelectedIndex
     End Sub
 
-    Private Sub scrlStun_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlStun.ValueChanged
-        If scrlStun.Value > 0 Then
-            lblStun.Text = "Stun Duration: " & scrlStun.Value & "s"
-        Else
-            lblStun.Text = "Stun Duration: None"
-        End If
-        Skill(EditorIndex).StunDuration = scrlStun.Value
+    Private Sub NudStun_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudStun.ValueChanged
+        Skill(EditorIndex).StunDuration = nudStun.Value
     End Sub
 
-    Private Sub lstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
+    Private Sub LstIndex_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lstIndex.Click
         SkillEditorInit()
     End Sub
 
-    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         SkillEditorOk()
     End Sub
 
-    Private Sub btnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
+    Private Sub BtnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDelete.Click
         Dim tmpIndex As Integer
 
         ClearSkill(EditorIndex)
@@ -186,16 +130,16 @@
         SkillEditorInit()
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+    Private Sub BtnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         SkillEditorCancel()
     End Sub
 
-    Private Sub frmEditor_Skill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        scrlIcon.Maximum = NumSkillIcons
-        scrlCast.Value = 1
+    Private Sub FrmEditor_Skill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        nudIcon.Maximum = NumSkillIcons
+        nudCast.Value = 1
     End Sub
 
-    Private Sub chkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
+    Private Sub ChkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
         If chkProjectile.Checked = False Then
             Skill(EditorIndex).IsProjectile = 0
         Else
@@ -203,16 +147,11 @@
         End If
     End Sub
 
-    Private Sub scrlProjectile_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles scrlProjectile.ValueChanged, scrlProjectile.Scroll
-        If scrlProjectile.Value > 0 Then
-            lblProjectile.Text = "Projectile: " & scrlProjectile.Value & " " & Trim$(Projectiles(scrlProjectile.Value).Name)
-        Else
-            lblProjectile.Text = "Projectile: 0 None"
-        End If
-        Skill(EditorIndex).Projectile = scrlProjectile.Value
+    Private Sub ScrlProjectile_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbProjectile.SelectedIndexChanged
+        Skill(EditorIndex).Projectile = cmbProjectile.SelectedIndex
     End Sub
 
-    Private Sub chkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
+    Private Sub ChkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
         If EditorIndex = 0 Or EditorIndex > MAX_SKILLS Then Exit Sub
 
         If chkKnockBack.Checked = True Then
@@ -222,7 +161,7 @@
         End If
     End Sub
 
-    Private Sub cmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
+    Private Sub CmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
         If EditorIndex = 0 Or EditorIndex > MAX_SKILLS Then Exit Sub
 
         Skill(EditorIndex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex

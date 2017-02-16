@@ -1557,7 +1557,7 @@ Module EditorGraphics
         Dim iconnum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
-        iconnum = frmEditor_Skill.scrlIcon.Value
+        iconnum = frmEditor_Skill.nudIcon.Value
 
         If iconnum < 1 Or iconnum > NumSkillIcons Then
             EditorSkill_Icon.Clear(ToSFMLColor(frmEditor_Skill.picSprite.BackColor))
