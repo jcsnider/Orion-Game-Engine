@@ -97,8 +97,9 @@ Module ServerHandleData
         Packets.Add(ClientPackets.CSellHouse, AddressOf Packet_SellHouse)
 
         'hotbar
-        Packets.Add(ClientPackets.CSetHotbarSkill, AddressOf Packet_SetHotBarSkill)
-        Packets.Add(ClientPackets.CDeleteHotbarSkill, AddressOf Packet_DeleteHotBarSkill)
+        Packets.Add(ClientPackets.CSetHotbarSlot, AddressOf Packet_SetHotBarSlot)
+        Packets.Add(ClientPackets.CDeleteHotbarSlot, AddressOf Packet_DeleteHotBarSlot)
+        Packets.Add(ClientPackets.CUseHotbarSlot, AddressOf Packet_UseHotBarSlot)
 
         'Events
         Packets.Add(ClientPackets.CEventChatReply, AddressOf Packet_EventChatReply)
@@ -2710,7 +2711,7 @@ Module ServerHandleData
 
         itemnum = GetPlayerInvItemNum(index, invslot)
 
-        If ItemNum <= 0 Or ItemNum > MAX_ITEMS Then Exit Sub
+        If itemnum <= 0 Or itemnum > MAX_ITEMS Then Exit Sub
 
         ' make sure they have the amount they offer
         If amount < 0 Or amount > GetPlayerInvItemValue(index, invslot) Then Exit Sub
@@ -2915,30 +2916,30 @@ Module ServerHandleData
         buffer = Nothing
     End Sub
 
-    Sub Packet_SetHotBarSkill(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer, slot As Integer, skill As Integer
+    Sub Packet_SetHotBarSlot(ByVal index As Integer, ByVal data() As Byte)
+        Dim buffer As ByteBuffer, slot As Integer, skill As Integer, type As Byte
         buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CSetHotbarSkill Then Exit Sub
+        If buffer.ReadInteger <> ClientPackets.CSetHotbarSlot Then Exit Sub
 
         slot = buffer.ReadInteger
         skill = buffer.ReadInteger
+        type = buffer.ReadInteger
 
         Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = skill
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 1
+        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = type
 
         SendHotbar(index)
 
         buffer = Nothing
     End Sub
 
-    Sub Packet_DeleteHotBarSkill(ByVal index As Integer, ByVal data() As Byte)
-        Dim buffer As ByteBuffer, slot As Integer
-        buffer = New ByteBuffer
+    Sub Packet_DeleteHotBarSlot(ByVal index As Integer, ByVal data() As Byte)
+        Dim buffer As New ByteBuffer, slot As Integer
         buffer.WriteBytes(data)
 
-        If buffer.ReadInteger <> ClientPackets.CDeleteHotbarSkill Then Exit Sub
+        If buffer.ReadInteger <> ClientPackets.CDeleteHotbarSlot Then Exit Sub
 
         slot = buffer.ReadInteger
 
@@ -2948,6 +2949,27 @@ Module ServerHandleData
         SendHotbar(index)
 
         buffer = Nothing
+    End Sub
+
+    Sub Packet_UseHotBarSlot(ByVal index As Integer, ByVal data() As Byte)
+        Dim buffer As New ByteBuffer, slot As Integer
+        buffer.WriteBytes(data)
+
+        If buffer.ReadInteger <> ClientPackets.CUseHotbarSlot Then Exit Sub
+
+        slot = buffer.ReadInteger
+        buffer = Nothing
+
+        If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot > 0 Then
+            If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 1 Then 'skill
+                BufferSkill(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
+            ElseIf Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 2 Then 'item
+                UseItem(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
+            End If
+        End If
+
+        SendHotbar(index)
+
     End Sub
 
     Sub Packet_RequestClasses(ByVal index As Integer, ByVal data() As Byte)

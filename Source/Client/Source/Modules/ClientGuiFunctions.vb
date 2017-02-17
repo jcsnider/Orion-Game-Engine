@@ -170,7 +170,7 @@ Public Module ClientGuiFunctions
 
     Public Function CheckGuiClick(ByVal X As Integer, ByVal Y As Integer, ByVal e As MouseEventArgs) As Boolean
         Dim EqNum As Integer, InvNum As Integer
-        Dim skillnum As Integer, hotbarslot As Integer
+        Dim slotnum As Integer, hotbarslot As Integer
         Dim Buffer As ByteBuffer
 
         CheckGuiClick = False
@@ -243,11 +243,11 @@ Public Module ClientGuiFunctions
 
                 If e.Button = MouseButtons.Left Then
                     If hotbarslot > 0 Then
-                        skillnum = Player(MyIndex).Hotbar(hotbarslot).Slot
+                        slotnum = Player(MyIndex).Hotbar(hotbarslot).Slot
 
-                        If skillnum <> 0 Then
+                        If slotnum <> 0 Then
                             PlaySound("Click.ogg")
-                            PlayerCastSkill(skillnum)
+                            SendUseHotbarSlot(hotbarslot)
                         End If
 
                         CheckGuiClick = True
@@ -292,11 +292,11 @@ Public Module ClientGuiFunctions
                                 End If
 
                             ElseIf hotbarslot >= 4 AndAlso hotbarslot <= 7 Then
-                                skillnum = Player(MyIndex).Pet.skill(hotbarslot - 3)
+                                slotnum = Player(MyIndex).Pet.Skill(hotbarslot - 3)
 
-                                If skillnum <> 0 Then
+                                If slotnum <> 0 Then
                                     PlaySound("Click.ogg")
-                                    SendUsePetSkill(skillnum)
+                                    SendUsePetSkill(slotnum)
                                 End If
                             End If
 
@@ -835,6 +835,8 @@ Public Module ClientGuiFunctions
 
     Public Function CheckGuiMouseUp(ByVal X As Integer, ByVal Y As Integer, ByVal e As MouseEventArgs) As Boolean
         Dim i As Integer, rec_pos As Rectangle, buffer As ByteBuffer
+        Dim hotbarslot As Integer
+
         'Inventory
         If pnlInventoryVisible Then
             If AboveInvpanel(X, Y) Then
@@ -863,6 +865,15 @@ Public Module ClientGuiFunctions
 
                     Next
 
+                End If
+
+                DragInvSlotNum = 0
+            ElseIf Abovehotbar(X, Y) Then
+                If DragInvSlotNum > 0 Then
+                    hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
+                    If hotbarslot > 0 Then
+                        SendSetHotbarSlot(hotbarslot, DragInvSlotNum, 2)
+                    End If
                 End If
 
                 DragInvSlotNum = 0
@@ -915,6 +926,15 @@ Public Module ClientGuiFunctions
 
                     Next
 
+                End If
+
+                DragSkillSlotNum = 0
+            ElseIf Abovehotbar(X, Y) Then
+                If DragSkillSlotNum > 0 Then
+                    hotbarslot = IsHotBarSlot(e.Location.X, e.Location.Y)
+                    If hotbarslot > 0 Then
+                        SendSetHotbarSlot(hotbarslot, DragSkillSlotNum, 1)
+                    End If
                 End If
 
                 DragSkillSlotNum = 0
@@ -990,7 +1010,6 @@ Public Module ClientGuiFunctions
         If pnlSkillsVisible = True Then
             If AboveSkillpanel(X, Y) Then
                 skillnum = IsPlayerSkill(e.Location.X, e.Location.Y)
-
                 If e.Button = MouseButtons.Left Then
                     If skillnum <> 0 Then
                         If InTrade Then Exit Function
@@ -998,7 +1017,7 @@ Public Module ClientGuiFunctions
                         DragSkillSlotNum = skillnum
 
                         If SelSkillSlot = True Then
-                            SendSetHotbarSkill(SelHotbarSlot, skillnum)
+                            SendSetHotbarSlot(SelHotbarSlot, skillnum, 1)
                         End If
                     End If
                 ElseIf e.Button = MouseButtons.Right Then ' right click

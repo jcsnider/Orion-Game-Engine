@@ -179,6 +179,18 @@ Public Class FrmMainGame
         CurrencyMenu = 0 ' clear
     End Sub
 
+    Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+        If inChat = True Then
+            If MyText = Nothing Then MyText = ""
+
+            If e.KeyChar = vbBack Then Exit Sub
+
+            If MyText.Length < 100 Then
+                MyText = MyText + e.KeyChar
+            End If
+        End If
+
+    End Sub
 #End Region
 
 #Region "PicScreen Code"
@@ -264,7 +276,7 @@ Public Class FrmMainGame
     End Sub
 
     Private Sub Picscreen_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles picscreen.KeyDown
-        Dim skillnum As Integer
+        Dim num As Integer
         If e.KeyCode = Keys.S Then VbKeyDown = True
         If e.KeyCode = Keys.W Then VbKeyUp = True
         If e.KeyCode = Keys.A Then VbKeyLeft = True
@@ -275,52 +287,52 @@ Public Class FrmMainGame
 
         'hotbar
         If e.KeyCode = Keys.NumPad1 Then
-            skillnum = Player(MyIndex).Hotbar(1).Slot
+            num = Player(MyIndex).Hotbar(1).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(1)
             End If
         End If
         If e.KeyCode = Keys.NumPad2 Then
-            skillnum = Player(MyIndex).Hotbar(2).Slot
+            num = Player(MyIndex).Hotbar(2).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(2)
             End If
         End If
         If e.KeyCode = Keys.NumPad3 Then
-            skillnum = Player(MyIndex).Hotbar(3).Slot
+            num = Player(MyIndex).Hotbar(3).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(3)
             End If
         End If
         If e.KeyCode = Keys.NumPad4 Then
-            skillnum = Player(MyIndex).Hotbar(4).Slot
+            num = Player(MyIndex).Hotbar(4).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(4)
             End If
         End If
         If e.KeyCode = Keys.NumPad5 Then
-            skillnum = Player(MyIndex).Hotbar(5).Slot
+            num = Player(MyIndex).Hotbar(5).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(5)
             End If
         End If
         If e.KeyCode = Keys.NumPad6 Then
-            skillnum = Player(MyIndex).Hotbar(6).Slot
+            num = Player(MyIndex).Hotbar(6).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(6)
             End If
         End If
         If e.KeyCode = Keys.NumPad7 Then
-            skillnum = Player(MyIndex).Hotbar(7).Slot
+            num = Player(MyIndex).Hotbar(7).Slot
 
-            If skillnum <> 0 Then
-                PlayerCastSkill(skillnum)
+            If num <> 0 Then
+                SendUseHotbarSlot(7)
             End If
         End If
 
@@ -388,23 +400,8 @@ Public Class FrmMainGame
 #End Region
 
 #Region "Crafting"
-
     Private Sub ChkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
         CraftingInit()
     End Sub
-
-    Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
-        If inChat = True Then
-            If MyText = Nothing Then MyText = ""
-
-            If e.KeyChar = vbBack Then Exit Sub
-
-            If MyText.Length < 100 Then
-                MyText = MyText + e.KeyChar
-            End If
-        End If
-
-    End Sub
-
 #End Region
 End Class

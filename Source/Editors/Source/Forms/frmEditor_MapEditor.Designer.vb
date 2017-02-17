@@ -192,6 +192,12 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
+        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
+        Me.btnCopyEvent = New DarkUI.Controls.DarkButton()
+        Me.lblCopyMode = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
+        Me.btnPasteEvent = New DarkUI.Controls.DarkButton()
+        Me.lblPasteMode = New DarkUI.Controls.DarkLabel()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -311,12 +317,12 @@ Partial Class FrmEditor_MapEditor
         Me.DarkSectionPanel1.Controls.Add(Me.pnlTiles)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlDirBlock)
-        Me.DarkSectionPanel1.Controls.Add(Me.pnlEvents)
         Me.DarkSectionPanel1.Controls.Add(Me.btnEvents)
         Me.DarkSectionPanel1.Controls.Add(Me.btnDirBlock)
         Me.DarkSectionPanel1.Controls.Add(Me.btnNpc)
         Me.DarkSectionPanel1.Controls.Add(Me.btnAttributes)
         Me.DarkSectionPanel1.Controls.Add(Me.btnTiles)
+        Me.DarkSectionPanel1.Controls.Add(Me.pnlEvents)
         Me.DarkSectionPanel1.Controls.Add(Me.pnlAttribute)
         Me.DarkSectionPanel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.DarkSectionPanel1.Location = New System.Drawing.Point(0, 0)
@@ -538,6 +544,12 @@ Partial Class FrmEditor_MapEditor
         'pnlEvents
         '
         Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlEvents.Controls.Add(Me.lblPasteMode)
+        Me.pnlEvents.Controls.Add(Me.btnPasteEvent)
+        Me.pnlEvents.Controls.Add(Me.DarkLabel16)
+        Me.pnlEvents.Controls.Add(Me.lblCopyMode)
+        Me.pnlEvents.Controls.Add(Me.btnCopyEvent)
+        Me.pnlEvents.Controls.Add(Me.DarkLabel15)
         Me.pnlEvents.Controls.Add(Me.DarkLabel5)
         Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
         Me.pnlEvents.Name = "pnlEvents"
@@ -2042,6 +2054,63 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
+        'DarkLabel15
+        '
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel15.Location = New System.Drawing.Point(8, 29)
+        Me.DarkLabel15.Name = "DarkLabel15"
+        Me.DarkLabel15.Size = New System.Drawing.Size(237, 30)
+        Me.DarkLabel15.TabIndex = 13
+        Me.DarkLabel15.Text = "To copy a existing Event, press the copy button, then the event."
+        '
+        'btnCopyEvent
+        '
+        Me.btnCopyEvent.Location = New System.Drawing.Point(11, 62)
+        Me.btnCopyEvent.Name = "btnCopyEvent"
+        Me.btnCopyEvent.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnCopyEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnCopyEvent.TabIndex = 14
+        Me.btnCopyEvent.Text = "Copy Event"
+        '
+        'lblCopyMode
+        '
+        Me.lblCopyMode.AutoSize = True
+        Me.lblCopyMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblCopyMode.Location = New System.Drawing.Point(92, 67)
+        Me.lblCopyMode.Name = "lblCopyMode"
+        Me.lblCopyMode.Size = New System.Drawing.Size(75, 13)
+        Me.lblCopyMode.TabIndex = 15
+        Me.lblCopyMode.Text = "CopyMode Off"
+        '
+        'DarkLabel16
+        '
+        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel16.Location = New System.Drawing.Point(8, 111)
+        Me.DarkLabel16.Name = "DarkLabel16"
+        Me.DarkLabel16.Size = New System.Drawing.Size(251, 44)
+        Me.DarkLabel16.TabIndex = 16
+        Me.DarkLabel16.Text = "To paste a copied Event, press the paste button, then click on the map to place i" &
+    "t."
+        '
+        'btnPasteEvent
+        '
+        Me.btnPasteEvent.Location = New System.Drawing.Point(9, 143)
+        Me.btnPasteEvent.Name = "btnPasteEvent"
+        Me.btnPasteEvent.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnPasteEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnPasteEvent.TabIndex = 17
+        Me.btnPasteEvent.Text = "Paste Event"
+        '
+        'lblPasteMode
+        '
+        Me.lblPasteMode.AutoSize = True
+        Me.lblPasteMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblPasteMode.Location = New System.Drawing.Point(92, 148)
+        Me.lblPasteMode.Name = "lblPasteMode"
+        Me.lblPasteMode.Size = New System.Drawing.Size(78, 13)
+        Me.lblPasteMode.TabIndex = 18
+        Me.lblPasteMode.Text = "PasteMode Off"
+        '
         'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2053,6 +2122,7 @@ Partial Class FrmEditor_MapEditor
         Me.Controls.Add(Me.DarkSectionPanel1)
         Me.Controls.Add(Me.ToolStripContainer2)
         Me.Controls.Add(Me.DarkDockPanel1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmEditor_MapEditor"
         Me.Text = "Map Editor"
         Me.ToolStripContainer2.ContentPanel.ResumeLayout(False)
@@ -2302,4 +2372,10 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents nudFogSpeed As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents nudFog As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents nudIntensity As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents lblPasteMode As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnPasteEvent As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
+    Friend WithEvents lblCopyMode As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnCopyEvent As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
 End Class

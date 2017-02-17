@@ -257,8 +257,9 @@
         CSellHouse
 
         'Hotbar
-        CSetHotbarSkill
-        CDeleteHotbarSkill
+        CSetHotbarSlot
+        CDeleteHotbarSlot
+        CUseHotbarSlot
 
         'Events
         CEventChatReply
