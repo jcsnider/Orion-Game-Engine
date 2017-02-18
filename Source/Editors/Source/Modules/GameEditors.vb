@@ -667,13 +667,16 @@
                 frmEditor_Item.cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
 
-            frmEditor_Item.cmbProjectile.Items.Clear()
-            frmEditor_Item.cmbProjectile.Items.Add("None")
             frmEditor_Item.cmbAmmo.Items.Clear()
             frmEditor_Item.cmbAmmo.Items.Add("None")
             For i = 1 To MAX_ITEMS
-                frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Item(i).Name)
                 frmEditor_Item.cmbAmmo.Items.Add(i & ": " & Item(i).Name)
+            Next
+
+            frmEditor_Item.cmbProjectile.Items.Clear()
+            frmEditor_Item.cmbProjectile.Items.Add("None")
+            For i = 1 To MAX_PROJECTILES
+                frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
             Next
 
             frmEditor_Item.cmbSkills.Items.Clear()
