@@ -155,9 +155,10 @@ Module ClientGeneral
         CacheMusic()
         CacheSound()
         CheckEmotes()
-
+        CheckPanoramas()
         CheckFurniture()
         CheckProjectiles()
+        CheckParallax()
 
         InitGraphics()
         InitMessages()

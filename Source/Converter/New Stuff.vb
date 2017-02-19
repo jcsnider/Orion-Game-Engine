@@ -57,6 +57,9 @@
         Dim MapTintA As Byte
 
         Dim Instanced As Byte
+
+        Dim Panorama As Byte
+        Dim Parallax As Byte
     End Structure
 
     Sub ClearNewMap()
@@ -123,6 +126,8 @@
         writer.Write(NewMap.MapTintA)
 
         writer.Write(NewMap.Instanced)
+        writer.Write(NewMap.Panorama)
+        writer.Write(NewMap.Parallax)
 
         For x = 0 To NewMap.MaxX
             For y = 0 To NewMap.MaxY

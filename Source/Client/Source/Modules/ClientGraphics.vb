@@ -62,6 +62,14 @@ Module ClientGraphics
     Public EmotesGFX() As Texture
     Public EmotesSprite() As Sprite
     Public EmotesGFXInfo() As GraphicInfo
+    'Panoramas
+    Public PanoramasGFX() As Texture
+    Public PanoramasSprite() As Sprite
+    Public PanoramasGFXInfo() As GraphicInfo
+    'Parallax
+    Public ParallaxGFX() As Texture
+    Public ParallaxSprite() As Sprite
+    Public ParallaxGFXInfo() As GraphicInfo
     'Door
     Public DoorGFX As Texture
     Public DoorSprite As Sprite
@@ -202,6 +210,8 @@ Module ClientGraphics
     Public NumFaces As Integer
     Public NumFogs As Integer
     Public NumEmotes As Integer
+    Public NumPanorama As Integer
+    Public NumParallax As Integer
 
     ' #Day/Night
     Public NightGfx As New RenderTexture(1152, 864)
@@ -211,10 +221,6 @@ Module ClientGraphics
     Public LightGfx As Texture
     Public LightSprite As Sprite
     Public LightGfxInfo As GraphicInfo
-
-    Public LightAreaGfx As Texture
-    Public LightAreaSprite As Sprite
-    Public LightAreaGfxInfo As GraphicInfo
 
     Public ShadowGfx As Texture
     Public ShadowSprite As Sprite
@@ -291,6 +297,14 @@ Module ClientGraphics
         ReDim EmotesGFX(NumEmotes)
         ReDim EmotesSprite(NumEmotes)
         ReDim EmotesGFXInfo(NumEmotes)
+
+        ReDim PanoramasGFX(NumPanorama)
+        ReDim PanoramasSprite(NumPanorama)
+        ReDim PanoramasGFXInfo(NumPanorama)
+
+        ReDim ParallaxGFX(NumParallax)
+        ReDim ParallaxSprite(NumParallax)
+        ReDim ParallaxGFXInfo(NumParallax)
 
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
@@ -652,16 +666,6 @@ Module ClientGraphics
             LightGfxInfo.Height = LightGfx.Size.Y
         End If
 
-        LightAreaGfxInfo = New GraphicInfo
-        If FileExist(Application.StartupPath & GFX_PATH & "Misc\Light2" & GFX_EXT) Then
-            LightAreaGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Light2" & GFX_EXT)
-            LightAreaSprite = New Sprite(LightAreaGfx)
-
-            'Cache the width and height
-            LightAreaGfxInfo.Width = LightAreaGfx.Size.X
-            LightAreaGfxInfo.Height = LightAreaGfx.Size.Y
-        End If
-
         ShadowGfxInfo = New GraphicInfo
         If FileExist(Application.StartupPath & GFX_PATH & "Misc\Shadow" & GFX_EXT) Then
             ShadowGfx = New Texture(Application.StartupPath & GFX_PATH & "Misc\Shadow" & GFX_EXT)
@@ -851,6 +855,35 @@ Module ClientGraphics
             With EmotesGFXInfo(Index)
                 .Width = EmotesGFX(Index).Size.X
                 .Height = EmotesGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+        ElseIf TexType = 13 Then 'Panoramas
+            If Index < 0 Or Index > NumPanorama Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            PanoramasGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Panoramas\" & Index & GFX_EXT)
+            PanoramasSprite(Index) = New Sprite(PanoramasGFX(Index))
+
+            'Cache the width and height
+            With PanoramasGFXInfo(Index)
+                .Width = PanoramasGFX(Index).Size.X
+                .Height = PanoramasGFX(Index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf TexType = 14 Then 'Parallax
+            If Index < 0 Or Index > NumParallax Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            ParallaxGFX(Index) = New Texture(Application.StartupPath & GFX_PATH & "Parallax\" & Index & GFX_EXT)
+            ParallaxSprite(Index) = New Sprite(ParallaxGFX(Index))
+
+            'Cache the width and height
+            With ParallaxGFXInfo(Index)
+                .Width = ParallaxGFX(Index).Size.X
+                .Height = ParallaxGFX(Index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With

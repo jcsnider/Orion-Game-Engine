@@ -1030,6 +1030,8 @@ Module ServerHandleData
         Map(MapNum).MapTintA = Buffer.ReadInteger
 
         Map(MapNum).Instanced = Buffer.ReadInteger
+        Map(MapNum).Panorama = Buffer.ReadInteger
+        Map(MapNum).Parallax = Buffer.ReadInteger
 
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 

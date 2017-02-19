@@ -147,6 +147,30 @@ Module ClientDataBase
         If NumEmotes = 0 Then Exit Sub
     End Sub
 
+    Public Sub CheckPanoramas()
+        Dim i As Integer
+        i = 1
+
+        While FileExist(Application.StartupPath & GFX_PATH & "Panoramas\" & i & GFX_EXT)
+            NumPanorama = NumPanorama + 1
+            i = i + 1
+        End While
+
+        If NumPanorama = 0 Then Exit Sub
+    End Sub
+
+    Public Sub CheckParallax()
+        Dim i As Integer
+        i = 1
+
+        While FileExist(Application.StartupPath & GFX_PATH & "Parallax\" & i & GFX_EXT)
+            NumParallax = NumParallax + 1
+            i = i + 1
+        End While
+
+        If NumParallax = 0 Then Exit Sub
+    End Sub
+
     Public Sub CacheMusic()
         Dim Files As String() = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg")
         Dim MaxNum As String = Directory.GetFiles(Application.StartupPath & MUSIC_PATH, "*.ogg").Count

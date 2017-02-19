@@ -260,6 +260,9 @@
         Dim MapTintA As Byte
 
         Dim Instanced As Byte
+
+        Dim Panorama As Byte
+        Dim Parallax As Byte
     End Structure
 
     Public Structure ClassRec

@@ -175,7 +175,7 @@
 
         Dim Revision As Integer
         Dim Moral As Byte
-        Dim tileset As Integer
+        Dim Tileset As Integer
 
         Dim Up As Integer
         Dim Down As Integer
@@ -207,6 +207,9 @@
         Dim MapTintA As Byte
 
         Dim Instanced As Byte
+
+        Dim Panorama As Byte
+        Dim Parallax As Byte
 
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer

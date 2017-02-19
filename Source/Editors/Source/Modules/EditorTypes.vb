@@ -96,6 +96,9 @@
 
         Dim Instanced As Byte
 
+        Dim Panorama As Byte
+        Dim Parallax As Byte
+
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer
         Dim MapEvents() As MapEventRec

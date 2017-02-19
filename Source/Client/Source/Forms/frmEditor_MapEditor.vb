@@ -2,7 +2,23 @@
 Imports System.Windows.Forms
 
 Public Class frmEditor_MapEditor
+#Region "Frm"
+    Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        cmbTileSets.SelectedIndex = 0
+        EditorMap_DrawTileset()
+        pnlAttributes.BringToFront()
+        pnlAttributes.Visible = False
+        pnlAttributes.Left = 4
+        pnlAttributes.Top = 28
+        Me.Width = 525
+        optBlocked.Checked = True
+        tabpages.SelectedIndex = 0
 
+        scrlFog.Maximum = NumFogs
+    End Sub
+#End Region
+
+#Region "Tiles"
     Private Sub PicBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -19,23 +35,25 @@ Public Class frmEditor_MapEditor
         'Overrides the paint sub
     End Sub
 
-    Private Sub ScrlPictureY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureY.Scroll
+    Private Sub ScrlPictureY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureY.ValueChanged
         MapEditorTileScroll()
     End Sub
 
-    Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlPictureX.Scroll
+    Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureX.ValueChanged
         MapEditorTileScroll()
     End Sub
+#End Region
 
-    Private Sub ScrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
+#Region "Attributes"
+    Private Sub ScrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapWarpMap.ValueChanged
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
 
-    Private Sub ScrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpX.Scroll
+    Private Sub ScrlMapWarpX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapWarpX.ValueChanged
         lblMapWarpX.Text = "X: " & scrlMapWarpX.Value
     End Sub
 
-    Private Sub ScrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpY.Scroll
+    Private Sub ScrlMapWarpY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapWarpY.ValueChanged
         lblMapWarpY.Text = "Y: " & scrlMapWarpY.Value
     End Sub
 
@@ -46,20 +64,6 @@ Public Class frmEditor_MapEditor
         EditorWarpY = scrlMapWarpY.Value
         pnlAttributes.Visible = False
         fraMapWarp.Visible = False
-    End Sub
-
-    Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        cmbTileSets.SelectedIndex = 0
-        EditorMap_DrawTileset()
-        pnlAttributes.BringToFront()
-        pnlAttributes.Visible = False
-        pnlAttributes.Left = 4
-        pnlAttributes.Top = 28
-        Me.Width = 525
-        optBlocked.Checked = True
-        tabpages.SelectedIndex = 0
-
-        scrlFog.Maximum = NumFogs
     End Sub
 
     Private Sub OptWarp_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optWarp.CheckedChanged
@@ -77,7 +81,7 @@ Public Class frmEditor_MapEditor
         scrlMapWarpY.Value = 0
     End Sub
 
-    Private Sub ScrlMapItem_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItem.Scroll
+    Private Sub ScrlMapItem_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapItem.ValueChanged
         If Item(scrlMapItem.Value).Type = ItemType.Currency Or Item(scrlMapItem.Value).Stackable = 1 Then
             scrlMapItemValue.Enabled = True
         Else
@@ -89,7 +93,7 @@ Public Class frmEditor_MapEditor
         lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
-    Private Sub ScrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapItemValue.Scroll
+    Private Sub ScrlMapItemValue_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapItemValue.ValueChanged
         lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
@@ -113,7 +117,7 @@ Public Class frmEditor_MapEditor
         EditorMap_DrawMapItem()
     End Sub
 
-    Private Sub ScrlMapKey_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapKey.Scroll
+    Private Sub ScrlMapKey_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapKey.ValueChanged
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
         EditorMap_DrawKey()
     End Sub
@@ -139,11 +143,11 @@ Public Class frmEditor_MapEditor
         lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
     End Sub
 
-    Private Sub ScrlKeyX_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyX.Scroll
+    Private Sub ScrlKeyX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlKeyX.ValueChanged
         lblKeyX.Text = "X: " & scrlKeyX.Value
     End Sub
 
-    Private Sub ScrlKeyY_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlKeyY.Scroll
+    Private Sub ScrlKeyY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlKeyY.ValueChanged
         lblKeyY.Text = "X: " & scrlKeyY.Value
     End Sub
 
@@ -173,7 +177,7 @@ Public Class frmEditor_MapEditor
         fraResource.Visible = False
     End Sub
 
-    Private Sub ScrlResource_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlResource.Scroll
+    Private Sub ScrlResource_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlResource.ValueChanged
         lblResource.Text = "Resource: " & Resource(scrlResource.Value).Name
     End Sub
 
@@ -235,7 +239,7 @@ Public Class frmEditor_MapEditor
         fraHeal.Visible = False
     End Sub
 
-    Private Sub ScrlHeal_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlHeal.Scroll
+    Private Sub ScrlHeal_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlHeal.ValueChanged
         lblHeal.Text = "Amount: " & scrlHeal.Value
     End Sub
 
@@ -247,7 +251,7 @@ Public Class frmEditor_MapEditor
         fraHeal.Visible = True
     End Sub
 
-    Private Sub ScrlTrap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlTrap.Scroll
+    Private Sub ScrlTrap_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlTrap.ValueChanged
         lblTrap.Text = "Amount: " & scrlTrap.Value
     End Sub
 
@@ -269,7 +273,7 @@ Public Class frmEditor_MapEditor
         MapEditorClearAttribs()
     End Sub
 
-    Private Sub ScrlNpcDir_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlNpcDir.Scroll
+    Private Sub ScrlNpcDir_Scroll(sender As Object, e As EventArgs) Handles scrlNpcDir.ValueChanged
         Select Case scrlNpcDir.Value
             Case 0
                 lblNpcDir.Text = "Direction: Up"
@@ -296,7 +300,7 @@ Public Class frmEditor_MapEditor
         scrlBuyHouse.Value = 1
     End Sub
 
-    Private Sub ScrlBuyHouse_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlBuyHouse.Scroll
+    Private Sub ScrlBuyHouse_Scroll(sender As Object, e As EventArgs) Handles scrlBuyHouse.ValueChanged
         lblHouseName.Text = scrlBuyHouse.Value & ". " & HouseConfig(scrlBuyHouse.Value).ConfigName
     End Sub
 
@@ -306,6 +310,28 @@ Public Class frmEditor_MapEditor
         fraBuyHouse.Visible = False
     End Sub
 
+#End Region
+
+#Region "Npc's"
+    Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
+        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
+    End Sub
+
+    Private Sub CmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
+        If lstMapNpc.SelectedIndex > -1 Then
+            If cmbNpcList.SelectedIndex > 0 Then
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
+            Else
+                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
+                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
+            End If
+
+        End If
+    End Sub
+#End Region
+
+#Region "Settings"
     Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         Dim X As Integer, x2 As Integer
         Dim Y As Integer, y2 As Integer
@@ -367,6 +393,7 @@ Public Class frmEditor_MapEditor
             MapEditorSend()
         End With
     End Sub
+#End Region
 
 #Region "Toolbar"
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
@@ -391,22 +418,7 @@ Public Class frmEditor_MapEditor
     End Sub
 #End Region
 
-    Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
-        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
-    End Sub
 
-    Private Sub CmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If lstMapNpc.SelectedIndex > -1 Then
-            If cmbNpcList.SelectedIndex > 0 Then
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
-            Else
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
-            End If
-
-        End If
-    End Sub
 
     Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
         If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
@@ -441,22 +453,22 @@ Public Class frmEditor_MapEditor
         Map.WeatherType = cmbWeather.SelectedIndex
     End Sub
 
-    Private Sub ScrlFog_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFog.Scroll
+    Private Sub ScrlFog_Scroll(sender As Object, e As EventArgs) Handles scrlFog.ValueChanged
         Map.FogIndex = scrlFog.Value
         lblFogIndex.Text = "Fog: " & scrlFog.Value
     End Sub
 
-    Private Sub ScrlIntensity_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlIntensity.Scroll
+    Private Sub ScrlIntensity_Scroll(sender As Object, e As EventArgs) Handles scrlIntensity.ValueChanged
         Map.WeatherIntensity = scrlIntensity.Value
         lblIntensity.Text = "Intensity: " & scrlIntensity.Value
     End Sub
 
-    Private Sub ScrlFogSpeed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogSpeed.Scroll
+    Private Sub ScrlFogSpeed_Scroll(sender As Object, e As EventArgs) Handles scrlFogSpeed.ValueChanged
         Map.FogSpeed = scrlFogSpeed.Value
         lblFogSpeed.Text = "FogSpeed: " & scrlFogSpeed.Value
     End Sub
 
-    Private Sub ScrlFogAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlFogAlpha.Scroll
+    Private Sub ScrlFogAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlFogAlpha.ValueChanged
         Map.FogAlpha = scrlFogAlpha.Value
         lblFogAlpha.Text = "Fog Alpha: " & scrlFogAlpha.Value
     End Sub
@@ -469,22 +481,22 @@ Public Class frmEditor_MapEditor
         End If
     End Sub
 
-    Private Sub ScrlMapRed_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapRed.Scroll
+    Private Sub ScrlMapRed_Scroll(sender As Object, e As EventArgs) Handles scrlMapRed.ValueChanged
         Map.MapTintR = scrlMapRed.Value
         lblMapRed.Text = "Red: " & scrlMapRed.Value
     End Sub
 
-    Private Sub ScrlMapGreen_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapGreen.Scroll
+    Private Sub ScrlMapGreen_Scroll(sender As Object, e As EventArgs) Handles scrlMapGreen.ValueChanged
         Map.MapTintG = scrlMapGreen.Value
         lblMapGreen.Text = "Green: " & scrlMapGreen.Value
     End Sub
 
-    Private Sub ScrlMapBlue_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBlue.Scroll
+    Private Sub ScrlMapBlue_Scroll(sender As Object, e As EventArgs) Handles scrlMapBlue.ValueChanged
         Map.MapTintB = scrlMapBlue.Value
         lblMapBlue.Text = "Blue: " & scrlMapBlue.Value
     End Sub
 
-    Private Sub ScrlMapAlpha_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapAlpha.Scroll
+    Private Sub ScrlMapAlpha_Scroll(sender As Object, e As EventArgs) Handles scrlMapAlpha.ValueChanged
         Map.MapTintA = scrlMapAlpha.Value
         lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
     End Sub

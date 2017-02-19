@@ -289,6 +289,8 @@ Module ServerDatabase
         writer.Write(Map(MapNum).MapTintA)
 
         writer.Write(Map(MapNum).Instanced)
+        writer.Write(Map(MapNum).Panorama)
+        writer.Write(Map(MapNum).Parallax)
 
         For x = 0 To Map(MapNum).MaxX
             For y = 0 To Map(MapNum).MaxY
@@ -685,7 +687,7 @@ Module ServerDatabase
             LoadMap(i)
             DoEvents()
         Next
-
+        'SaveMaps()
     End Sub
 
     Sub LoadMap(ByVal MapNum As Integer)
@@ -722,6 +724,8 @@ Module ServerDatabase
         reader.Read(Map(MapNum).MapTintB)
         reader.Read(Map(MapNum).MapTintA)
         reader.Read(Map(MapNum).Instanced)
+        reader.Read(Map(MapNum).Panorama)
+        reader.Read(Map(MapNum).Parallax)
 
         ' have to set the tile()
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)

@@ -1218,6 +1218,8 @@ Module ServerTCP
             Buffer.WriteInteger(Map(MapNum).MapTintB)
             Buffer.WriteInteger(Map(MapNum).MapTintA)
             Buffer.WriteInteger(Map(MapNum).Instanced)
+            Buffer.WriteInteger(Map(MapNum).Panorama)
+            Buffer.WriteInteger(Map(MapNum).Parallax)
 
             For i = 1 To MAX_MAP_NPCS
                 Buffer.WriteInteger(Map(MapNum).Npc(i))
