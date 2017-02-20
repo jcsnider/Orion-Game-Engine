@@ -76,9 +76,9 @@
     <Reference Include="DarkUI">
       <HintPath>..\Editors\DarkUI.dll</HintPath>
     </Reference>
-    <Reference Include="SFML.Net, Version=2.1.6239.27707, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SFML.Net, Version=2.1.6258.18947, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SFML-Portable-2.1.1.1.1\lib\SFML.Net.dll</HintPath>
+      <HintPath>.\SFML.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -337,7 +337,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Graphics\Parallax\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Graphics\Tilesets\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

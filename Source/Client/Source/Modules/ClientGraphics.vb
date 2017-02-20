@@ -1768,6 +1768,30 @@ Module ClientGraphics
                 End If
             End If
         Next
+
+        'clear Panoramas
+        For I = 1 To NumPanorama
+            If PanoramasGFXInfo(I).IsLoaded Then
+                If PanoramasGFXInfo(I).TextureTimer < GetTickCount() Then
+                    PanoramasGFX(I).Dispose()
+                    PanoramasSprite(I).Dispose()
+                    PanoramasGFXInfo(I).IsLoaded = False
+                    PanoramasGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
+
+        'clear Parallax
+        For I = 1 To NumParallax
+            If ParallaxGFXInfo(I).IsLoaded Then
+                If ParallaxGFXInfo(I).TextureTimer < GetTickCount() Then
+                    ParallaxGFX(I).Dispose()
+                    ParallaxSprite(I).Dispose()
+                    ParallaxGFXInfo(I).IsLoaded = False
+                    ParallaxGFXInfo(I).TextureTimer = 0
+                End If
+            End If
+        Next
     End Sub
 
     Public Sub Render_Graphics()
@@ -1794,6 +1818,14 @@ Module ClientGraphics
         '        GameWindow.SetMouseCursorVisible(False)
         '    End If
         'End If
+
+        If NumPanorama > 0 AndAlso Map.Panorama > 0 Then
+            DrawPanorama(Map.Panorama)
+        End If
+
+        If NumParallax > 0 AndAlso Map.Parallax > 0 Then
+            DrawParallax(Map.Parallax)
+        End If
 
         ' blit lower tiles
         If NumTileSets > 0 Then
@@ -2099,6 +2131,53 @@ Module ClientGraphics
 
         'and finally show everything on screen
         GameWindow.Display()
+    End Sub
+
+    Public Sub DrawPanorama(ByVal Index As Integer)
+        If Map.Moral = MapMoral.Indoors Then Exit Sub
+
+        If Index < 1 Or Index > NumParallax Then Exit Sub
+
+        If PanoramasGFXInfo(Index).IsLoaded = False Then
+            LoadTexture(Index, 13)
+        End If
+
+        ' we use it, lets update timer
+        With PanoramasGFXInfo(Index)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        PanoramasSprite(Index).TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+
+        PanoramasSprite(Index).Position = New Vector2f(0, 0)
+
+        GameWindow.Draw(PanoramasSprite(Index))
+
+    End Sub
+
+    Public Sub DrawParallax(ByVal Index As Integer)
+        Dim horz As Integer = 0
+        Dim vert As Integer = 0
+
+        If Map.Moral = MapMoral.Indoors Then Exit Sub
+
+        If Index < 1 Or Index > NumParallax Then Exit Sub
+
+        If ParallaxGFXInfo(Index).IsLoaded = False Then
+            LoadTexture(Index, 14)
+        End If
+
+        ' we use it, lets update timer
+        With ParallaxGFXInfo(Index)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        horz = ConvertMapX(GetPlayerX(MyIndex))
+        vert = ConvertMapY(GetPlayerY(MyIndex))
+
+        ParallaxSprite(Index).Position = New Vector2f((horz * 2.5) - 50, (vert * 2.5) - 50)
+
+        GameWindow.Draw(ParallaxSprite(Index))
     End Sub
 
     Public Sub DrawTileOutline()
@@ -2513,6 +2592,14 @@ Module ClientGraphics
 
         For i = 0 To NumEmotes
             If Not EmotesGFX(i) Is Nothing Then EmotesGFX(i).Dispose()
+        Next
+
+        For i = 0 To NumPanorama
+            If Not PanoramasGFX(i) Is Nothing Then PanoramasGFX(i).Dispose()
+        Next
+
+        For i = 0 To NumParallax
+            If Not ParallaxGFX(i) Is Nothing Then ParallaxGFX(i).Dispose()
         Next
 
         If Not CursorGFX Is Nothing Then CursorGFX.Dispose()

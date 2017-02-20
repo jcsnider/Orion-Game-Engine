@@ -194,6 +194,8 @@ Module ClientTCP
         Buffer.WriteInteger(Map.MapTintB)
         Buffer.WriteInteger(Map.MapTintA)
         Buffer.WriteInteger(Map.Instanced)
+        Buffer.WriteInteger(Map.Panorama)
+        Buffer.WriteInteger(Map.Parallax)
 
         For i = 1 To MAX_MAP_NPCS
             Buffer.WriteInteger(Map.Npc(i))

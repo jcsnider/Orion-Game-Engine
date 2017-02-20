@@ -18,6 +18,29 @@ Public Class frmEditor_MapEditor
     End Sub
 #End Region
 
+#Region "Toolbar"
+    Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
+        MapEditorSend()
+        GettingMap = True
+    End Sub
+
+    Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
+        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+    End Sub
+
+    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
+        MapEditorClearLayer()
+    End Sub
+
+    Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
+        MapEditorCancel()
+    End Sub
+
+    Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
+        MapGrid = Not MapGrid
+    End Sub
+#End Region
+
 #Region "Tiles"
     Private Sub PicBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
@@ -41,6 +64,30 @@ Public Class frmEditor_MapEditor
 
     Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureX.ValueChanged
         MapEditorTileScroll()
+    End Sub
+
+    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
+            cmbTileSets.SelectedIndex = 0
+        End If
+
+        Map.Tileset = cmbTileSets.SelectedIndex + 1
+
+        EditorTileSelStart = New Point(0, 0)
+        EditorTileSelEnd = New Point(1, 1)
+
+        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
+        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
+
+        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
+        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
+    End Sub
+
+    Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
+        If cmbAutoTile.SelectedIndex = 0 Then
+            EditorTileWidth = 1
+            EditorTileHeight = 1
+        End If
     End Sub
 #End Region
 
@@ -393,49 +440,6 @@ Public Class frmEditor_MapEditor
             MapEditorSend()
         End With
     End Sub
-#End Region
-
-#Region "Toolbar"
-    Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
-        MapEditorSend()
-        GettingMap = True
-    End Sub
-
-    Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
-        MapEditorFillLayer(cmbAutoTile.SelectedIndex)
-    End Sub
-
-    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
-        MapEditorClearLayer()
-    End Sub
-
-    Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
-        MapEditorCancel()
-    End Sub
-
-    Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
-        MapGrid = Not MapGrid
-    End Sub
-#End Region
-
-
-
-    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
-        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
-            cmbTileSets.SelectedIndex = 0
-        End If
-
-        Map.tileset = cmbTileSets.SelectedIndex + 1
-
-        EditorTileSelStart = New Point(0, 0)
-        EditorTileSelEnd = New Point(1, 1)
-
-        picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
-        picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PIC_Y)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PIC_X)
-    End Sub
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then
@@ -448,7 +452,35 @@ Public Class frmEditor_MapEditor
             PlayMusic(Map.Music)
         End If
     End Sub
+#End Region
 
+#Region "Events"
+    Private Sub BtnCopyEvent_Click(sender As Object, e As EventArgs) Handles btnCopyEvent.Click
+        If EventCopy = False Then
+            EventCopy = True
+            lblCopyMode.Text = "CopyMode On"
+            EventPaste = False
+            lblPasteMode.Text = "PasteMode Off"
+        Else
+            EventCopy = False
+            lblCopyMode.Text = "CopyMode Off"
+        End If
+    End Sub
+
+    Private Sub BtnPasteEvent_Click(sender As Object, e As EventArgs) Handles btnPasteEvent.Click
+        If EventPaste = False Then
+            EventPaste = True
+            lblPasteMode.Text = "PasteMode On"
+            EventCopy = False
+            lblCopyMode.Text = "CopyMode Off"
+        Else
+            EventPaste = False
+            lblPasteMode.Text = "PasteMode Off"
+        End If
+    End Sub
+#End Region
+
+#Region "Map Effects"
     Private Sub CmbWeather_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWeather.SelectedIndexChanged
         Map.WeatherType = cmbWeather.SelectedIndex
     End Sub
@@ -501,12 +533,14 @@ Public Class frmEditor_MapEditor
         lblMapAlpha.Text = "Alpha: " & scrlMapAlpha.Value
     End Sub
 
-    Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
-        If cmbAutoTile.SelectedIndex = 0 Then
-            EditorTileWidth = 1
-            EditorTileHeight = 1
-        End If
+    Private Sub CmbPanorama_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPanorama.SelectedIndexChanged
+        Map.Panorama = cmbPanorama.SelectedIndex
     End Sub
+
+    Private Sub CmbParallax_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbParallax.SelectedIndexChanged
+        Map.Parallax = cmbParallax.SelectedIndex
+    End Sub
+#End Region
 
 #Region "Map Editor"
 
@@ -578,6 +612,18 @@ Public Class frmEditor_MapEditor
         lblFogIndex.Text = "Fog: " & scrlFog.Value
         scrlIntensity.Value = Map.WeatherIntensity
         lblIntensity.Text = "Intensity: " & scrlIntensity.Value
+
+        cmbPanorama.Items.Clear()
+        cmbPanorama.Items.Add("None")
+        For i = 1 To NumPanorama
+            cmbPanorama.Items.Add("Panorama" & i)
+        Next
+
+        cmbParallax.Items.Clear()
+        cmbParallax.Items.Add("None")
+        For i = 1 To NumParallax
+            cmbParallax.Items.Add("Parallax" & i)
+        Next
 
         ' render the tiles
         EditorMap_DrawTileset()
@@ -1079,30 +1125,6 @@ Public Class frmEditor_MapEditor
         scrlMapWarpY.Maximum = Byte.MaxValue
         scrlMapWarpX.Value = 0
         scrlMapWarpY.Value = 0
-    End Sub
-
-    Private Sub BtnCopyEvent_Click(sender As Object, e As EventArgs) Handles btnCopyEvent.Click
-        If EventCopy = False Then
-            EventCopy = True
-            lblCopyMode.Text = "CopyMode On"
-            EventPaste = False
-            lblPasteMode.Text = "PasteMode Off"
-        Else
-            EventCopy = False
-            lblCopyMode.Text = "CopyMode Off"
-        End If
-    End Sub
-
-    Private Sub BtnPasteEvent_Click(sender As Object, e As EventArgs) Handles btnPasteEvent.Click
-        If EventPaste = False Then
-            EventPaste = True
-            lblPasteMode.Text = "PasteMode On"
-            EventCopy = False
-            lblCopyMode.Text = "CopyMode Off"
-        Else
-            EventPaste = False
-            lblPasteMode.Text = "PasteMode Off"
-        End If
     End Sub
 
 #End Region

@@ -593,6 +593,9 @@ Public Class FrmEditor_MapEditor
         Dim Y As Integer, y2 As Integer
         Dim tempArr(,) As TileRec
 
+        If nudMaxX.Value < SCREEN_MAPX Then nudMaxX.Value = SCREEN_MAPX
+        If nudMaxY.Value < SCREEN_MAPY Then nudMaxY.Value = SCREEN_MAPY
+
         GettingMap = True
         With Map
 
