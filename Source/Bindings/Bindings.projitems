@@ -9,6 +9,7 @@
     <Import_RootNamespace>Bindings</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\AbstractOptions.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\ByteBuffer.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\Constants.vb" />
