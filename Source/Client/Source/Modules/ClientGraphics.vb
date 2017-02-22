@@ -932,7 +932,6 @@ Module ClientGraphics
     Sub DrawChat()
         Dim i As Integer, x As Integer, y As Integer
         Dim text As String
-        Dim strLen As Integer
 
         'first draw back image
         RenderSprite(ChatWindowSprite, GameWindow, ChatWindowX, ChatWindowY - 2, 0, 0, ChatWindowGFXInfo.Width, ChatWindowGFXInfo.Height)
@@ -962,12 +961,12 @@ Module ClientGraphics
         RenderSprite(MyChatWindowSprite, GameWindow, MyChatX, MyChatY - 5, 0, 0, MyChatWindowGFXInfo.Width, MyChatWindowGFXInfo.Height)
 
         If Len(MyText) > 0 Then
-            strLen = MyText.Length - MyChatTextLimit
-            If strLen < 0 Then strLen = 0
-            Dim chatStr As String = MyText.PadRight(MyChatTextLimit).Substring(strLen, MyChatTextLimit)
-            DrawText(MyChatX + 5, MyChatY - 3, chatStr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            Dim subText As String = MyText
+            While GetTextWidth(subText) > MyChatWindowGFXInfo.Width - ChatEntryPadding
+                subText = subText.Substring(1)
+            End While
+            DrawText(MyChatX + 5, MyChatY - 3, subText, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         End If
-
     End Sub
 
     Public Sub DrawButton(ByVal Text As String, ByVal DestX As Integer, ByVal DestY As Integer, ByVal Hover As Byte)

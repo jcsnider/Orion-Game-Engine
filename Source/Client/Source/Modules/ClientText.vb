@@ -8,6 +8,8 @@ Module ClientText
     Public Const MyChatTextLimit As Integer = 40
     Public Const MyAmountValueLimit As Integer = 3
     Public Const AllChatLineWidth As Integer = 40
+    Public Const ChatboxPadding As Integer = 10 + 16 + 2 ' 10 = left and right border padding +2 each (3+2+3+2), 16 = scrollbar width, +2 for padding between scrollbar and text
+    Public Const ChatEntryPadding As Integer = 10 ' 5 on left and right
     Public FirstLineIndex As Integer = 0
     Public LastLineIndex As Integer = 0
     Public ScrollMod As Integer = 0
@@ -31,13 +33,12 @@ Module ClientText
         BackString.Position = New Vector2f(X + 1, Y + 1)
         target.Draw(BackString)
 
-        BackString.Position = New Vector2f(X + 1, Y + -1)
+        BackString.Position = New Vector2f(X + 1, Y - 1)
         target.Draw(BackString)
 
         FrontString.Color = color
         FrontString.Position = New Vector2f(X, Y)
         target.Draw(FrontString)
-
     End Sub
 
     Public Sub DrawPlayerName(ByVal Index As Integer)
@@ -292,12 +293,11 @@ Module ClientText
 
     End Sub
 
+    Private ReadOnly widthTester As Text = New Text("", SFMLGameFont)
     Public Function GetTextWidth(ByVal Text As String, Optional TextSize As Byte = FONT_SIZE) As Integer
-        Dim mystring As Text = New Text(Text, SFMLGameFont)
-        Dim textBounds As FloatRect
-        mystring.CharacterSize = TextSize
-        textBounds = mystring.GetLocalBounds()
-        Return textBounds.Width
+        widthTester.DisplayedString = Text
+        widthTester.CharacterSize = TextSize
+        Return widthTester.GetLocalBounds().Width
     End Function
 
     Public Sub AddText(ByVal Msg As String, ByVal Color As Integer)
@@ -305,7 +305,7 @@ Module ClientText
             txtChatAdd = txtChatAdd & Msg
             AddChatRec(Msg, Color)
         Else
-            For Each str As String In WordWrap(Msg, AllChatLineWidth)
+            For Each str As String In GraphicalWordWrap(Msg, MyChatWindowGFXInfo.Width - ChatboxPadding)
                 txtChatAdd = txtChatAdd & vbNewLine & str
                 AddChatRec(str, Color)
             Next
@@ -360,6 +360,44 @@ Module ClientText
     End Function
 
     Public SplitChars As Char() = New Char() {" "c, "-"c, ControlChars.Tab}
+
+    Public Function GraphicalWordWrap(str As String, width As Integer, Optional size As Byte = FONT_SIZE) As List(Of String)
+        Dim lines As New List(Of String)
+        Dim line As String = ""
+        Dim trim As String = ""
+
+        For Each word In Explode(str, SplitChars)
+            If line.Length <> 0 Then
+                line += " "
+            End If
+
+            line += word.Trim()
+            Select Case GetTextWidth(line, size)
+                Case < width
+                    Exit Select
+
+                Case = width
+                    lines.Add(line)
+                    line = ""
+                    Exit Select
+
+                Case Else
+                    While GetTextWidth(line + "-", size) > width
+                        trim = line(line.Length - 1) + trim
+                        line = line.Substring(0, line.Length - 1)
+                    End While
+
+                    lines.Add(line + "-")
+                    line = trim.Trim()
+                    trim = ""
+                    Exit Select
+            End Select
+        Next
+
+        lines.Add(line)
+
+        Return lines
+    End Function
 
     Public Function WordWrap(str As String, width As Integer) As List(Of String)
 
@@ -629,7 +667,7 @@ Module ClientText
                 Y = ConvertMapY((Map.MapEvents(.target).Y * 32) + Map.MapEvents(.target).YOffset) - 40
             End If
             ' word wrap the text
-            theArray = WordWrap(.Msg, ChatBubbleWidth)
+            theArray = GraphicalWordWrap(.Msg, ChatBubbleWidth)
             ' find max width
             For i = 0 To theArray.Count - 1
                 If GetTextWidth(theArray(i)) > MaxWidth Then MaxWidth = GetTextWidth(theArray(i))
