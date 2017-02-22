@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\Language.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\Packets.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\Strings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Types.vb" />
     <Compile Include="$(MSBuildThisFileDirectory)Legacy\Xml.vb" />
   </ItemGroup>
 </Project>
