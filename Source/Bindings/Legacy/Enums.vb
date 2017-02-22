@@ -235,13 +235,6 @@
         RARITY_EPIC
     End Enum
 
-    Public Enum Time
-        Day
-        Night
-        Dawn
-        Dusk
-    End Enum
-
     Public Enum Weather
         None
         Rain

@@ -25,6 +25,12 @@ Public Class ByteBuffer
         Buff.Clear()
         readpos = 0
     End Sub
+
+    Public Sub WriteByte(ByVal Input As Byte)
+        Buff.Add(Input)
+        buffUpdated = True
+    End Sub
+
     Public Sub WriteBytes(ByVal Input() As Byte)
         Buff.AddRange(Input)
         buffUpdated = True
@@ -56,6 +62,21 @@ Public Class ByteBuffer
             End If
         End If
         Return ret
+    End Function
+    Public Function ReadByte(Optional ByRef Peek As Boolean = True) As Byte
+        If Buff.Count > readpos Then 'check to see if this passes the byte count
+            If buffUpdated Then
+                readBuff = Buff.ToArray
+                buffUpdated = False
+            End If
+            Dim ret As Byte = readBuff(readpos)
+            If Peek And Buff.Count > readpos Then
+                readpos += 1
+            End If
+            Return ret
+        Else
+            Throw New Exception("Byte Buffer Past Limit!") 'past byte count throw a new exception
+        End If
     End Function
     Public Function ReadBytes(ByVal Length As Integer, Optional ByRef Peek As Boolean = True) As Byte()
         If buffUpdated Then

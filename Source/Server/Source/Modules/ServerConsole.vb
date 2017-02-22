@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.Concurrent
 Imports System.Threading
+Imports Orion
 
 Module ServerConsole
     Public Delegate Sub HandleConsoleCommand(ByVal line As String, ByVal command As String, ByVal parts As String())
@@ -168,9 +169,9 @@ Module ServerConsole
 
         speed = Val(Parts(1))
 
-        GameSpeed = speed
+        Time.Instance.GameSpeed = speed
 
-        TextAdd("Set GameSpeed to " & GameSpeed & " secs per seconds")
+        TextAdd("Set GameSpeed to " & Time.Instance.GameSpeed & " secs per seconds")
     End Sub
 #End Region
 
