@@ -2861,9 +2861,9 @@ newlist:
                     .Width = PIC_X
                 End With
                 Dim rec2 As New RectangleShape
-                rec2.OutlineColor = New Color(SFML.Graphics.Color.Blue)
+                rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
                 rec2.OutlineThickness = 0.6
-                rec2.FillColor = New Color(SFML.Graphics.Color.Transparent)
+                rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
                 rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                 GameWindow.Draw(rec2)
@@ -2906,15 +2906,15 @@ newlist:
                             .Width = PIC_X
                         End With
                         Dim rec2 As New RectangleShape
-                        rec2.OutlineColor = New Color(SFML.Graphics.Color.Blue)
+                        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
                         rec2.OutlineThickness = 0.6
-                        rec2.FillColor = New Color(SFML.Graphics.Color.Transparent)
+                        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
                         rec2.Size = New Vector2f(rec.Width, rec.Height)
                         rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(rec2)
                     End If
                 Case 2
-                    If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic < NumTileSets Then
+                    If Map.Events(i).Pages(1).Graphic > 0 And Map.Events(i).Pages(1).Graphic <= NumTileSets Then
                         With rec
                             .X = Map.Events(i).Pages(1).GraphicX * 32
                             .Width = Map.Events(i).Pages(1).GraphicX2 * 32
@@ -2922,14 +2922,20 @@ newlist:
                             .Height = Map.Events(i).Pages(1).GraphicY2 * 32
                         End With
 
-                        Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                        If rec.Height > 32 Then
-                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y)
-                        Else
-                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+                        If TileSetTextureInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
+                            LoadTexture(Map.Events(i).Pages(1).Graphic, 1)
                         End If
-                        GameWindow.Draw(tmpSprite)
+                        ' we use it, lets update timer
+                        With TileSetTextureInfo(Map.Events(i).Pages(1).Graphic)
+                            .TextureTimer = GetTickCount() + 100000
+                        End With
+
+                        If rec.Height > 32 Then
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
+                        Else
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
+                        End If
+
                     Else
                         With rec
                             .Y = 0
@@ -2938,9 +2944,9 @@ newlist:
                             .Width = PIC_X
                         End With
                         Dim rec2 As New RectangleShape
-                        rec2.OutlineColor = New Color(SFML.Graphics.Color.Blue)
+                        rec2.OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue)
                         rec2.OutlineThickness = 0.6
-                        rec2.FillColor = New Color(SFML.Graphics.Color.Transparent)
+                        rec2.FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
                         rec2.Size = New Vector2f(rec.Width, rec.Height)
                         rec2.Position = New Vector2f(ConvertMapX(CurX * PIC_X), ConvertMapY(CurY * PIC_Y))
                         GameWindow.Draw(rec2)
@@ -2951,37 +2957,37 @@ nextevent:
 
     End Sub
 
-    Public Sub DrawEvent(id As Integer)
+    Public Sub DrawEvent(ByVal Id As Integer) ' draw on map, outside the editor
         Dim X As Integer, Y As Integer, Width As Integer, Height As Integer, sRect As Rectangle, Anim As Integer, spritetop As Integer
 
-        If Map.MapEvents(id).Visible = 0 Then Exit Sub
+        If Map.MapEvents(Id).Visible = 0 Then Exit Sub
         If InMapEditor Then Exit Sub
-        Select Case Map.MapEvents(id).GraphicType
+        Select Case Map.MapEvents(Id).GraphicType
             Case 0
                 Exit Sub
             Case 1
-                If Map.MapEvents(id).GraphicNum <= 0 Or Map.MapEvents(id).GraphicNum > NumCharacters Then Exit Sub
+                If Map.MapEvents(Id).GraphicNum <= 0 Or Map.MapEvents(Id).GraphicNum > NumCharacters Then Exit Sub
 
                 ' Reset frame
-                If Map.MapEvents(id).Steps = 3 Then
+                If Map.MapEvents(Id).Steps = 3 Then
                     Anim = 0
-                ElseIf Map.MapEvents(id).Steps = 1 Then
+                ElseIf Map.MapEvents(Id).Steps = 1 Then
                     Anim = 2
                 End If
 
-                Select Case Map.MapEvents(id).dir
+                Select Case Map.MapEvents(Id).dir
                     Case Direction.Up
-                        If (Map.MapEvents(id).YOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).YOffset > 8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Down
-                        If (Map.MapEvents(id).YOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).YOffset < -8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Left
-                        If (Map.MapEvents(id).XOffset > 8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).XOffset > 8) Then Anim = Map.MapEvents(Id).Steps
                     Case Direction.Right
-                        If (Map.MapEvents(id).XOffset < -8) Then Anim = Map.MapEvents(id).Steps
+                        If (Map.MapEvents(Id).XOffset < -8) Then Anim = Map.MapEvents(Id).Steps
                 End Select
 
                 ' Set the left
-                Select Case Map.MapEvents(id).ShowDir
+                Select Case Map.MapEvents(Id).ShowDir
                     Case Direction.Up
                         spritetop = 3
                     Case Direction.Right
@@ -2992,53 +2998,63 @@ nextevent:
                         spritetop = 1
                 End Select
 
-                If Map.MapEvents(id).WalkAnim = 1 Then Anim = 0
-                If Map.MapEvents(id).Moving = 0 Then Anim = Map.MapEvents(id).GraphicX
+                If Map.MapEvents(Id).WalkAnim = 1 Then Anim = 0
+                If Map.MapEvents(Id).Moving = 0 Then Anim = Map.MapEvents(Id).GraphicX
 
-                Width = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4
-                Height = CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4
+                Width = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).width / 4
+                Height = CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).height / 4
 
-                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4), (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4))
+                sRect = New Rectangle((Anim) * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).width / 4), spritetop * (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).height / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).width / 4), (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).height / 4))
                 ' Calculate the X
-                X = Map.MapEvents(id).X * PIC_X + Map.MapEvents(id).XOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).width / 4 - 32) / 2)
+                X = Map.MapEvents(Id).X * PIC_X + Map.MapEvents(Id).XOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).width / 4 - 32) / 2)
 
                 ' Is the player's height more than 32..?
-                If (CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height * 4) > 32 Then
+                If (CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).height * 4) > 32 Then
                     ' Create a 32 pixel offset for larger sprites
-                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset - ((CharacterGFXInfo(Map.MapEvents(id).GraphicNum).height / 4) - 32)
+                    Y = Map.MapEvents(Id).Y * PIC_Y + Map.MapEvents(Id).YOffset - ((CharacterGFXInfo(Map.MapEvents(Id).GraphicNum).height / 4) - 32)
                 Else
                     ' Proceed as normal
-                    Y = Map.MapEvents(id).Y * PIC_Y + Map.MapEvents(id).YOffset
+                    Y = Map.MapEvents(Id).Y * PIC_Y + Map.MapEvents(Id).YOffset
                 End If
                 ' render the actual sprite
-                DrawCharacter(Map.MapEvents(id).GraphicNum, X, Y, sRect)
+                DrawCharacter(Map.MapEvents(Id).GraphicNum, X, Y, sRect)
             Case 2
-                If Map.MapEvents(id).GraphicNum < 1 Or Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
-                If Map.MapEvents(id).GraphicY2 > 0 Or Map.MapEvents(id).GraphicX2 > 0 Then
+                If Map.MapEvents(Id).GraphicNum < 1 Or Map.MapEvents(Id).GraphicNum > NumTileSets Then Exit Sub
+                If Map.MapEvents(Id).GraphicY2 > 0 Or Map.MapEvents(Id).GraphicX2 > 0 Then
                     With sRect
-                        .X = Map.MapEvents(id).GraphicX * 32
-                        .Y = Map.MapEvents(id).GraphicY * 32
-                        .Width = Map.MapEvents(id).GraphicX2 * 32
-                        .Height = Map.MapEvents(id).GraphicY2 * 32
+                        .X = Map.MapEvents(Id).GraphicX * 32
+                        .Y = Map.MapEvents(Id).GraphicY * 32
+                        .Width = Map.MapEvents(Id).GraphicX2 * 32
+                        .Height = Map.MapEvents(Id).GraphicY2 * 32
                     End With
                 Else
                     With sRect
-                        .X = Map.MapEvents(id).GraphicY * 32
+                        .X = Map.MapEvents(Id).GraphicY * 32
                         .Height = .Top + 32
-                        .Y = Map.MapEvents(id).GraphicX * 32
+                        .Y = Map.MapEvents(Id).GraphicX * 32
                         .Width = .Left + 32
                     End With
                 End If
-                X = Map.MapEvents(id).X * 32
-                Y = Map.MapEvents(id).Y * 32
+
+                If TileSetTextureInfo(Map.MapEvents(Id).GraphicNum).IsLoaded = False Then
+                    LoadTexture(Map.MapEvents(Id).GraphicNum, 1)
+                End If
+                ' we use it, lets update timer
+                With TileSetTextureInfo(Map.MapEvents(Id).GraphicNum)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+                X = Map.MapEvents(Id).X * 32
+                Y = Map.MapEvents(Id).Y * 32
                 X = X - ((sRect.Right - sRect.Left) / 2)
                 Y = Y - (sRect.Bottom - sRect.Top) + 32
-                If Map.MapEvents(id).GraphicY2 > 0 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32) - ConvertMapX(Map.MapEvents(id).GraphicY2 * 32) + 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+
+                If Map.MapEvents(Id).GraphicY2 > 1 Then
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y) - PIC_Y, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * 32), ConvertMapY(Map.MapEvents(id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
-                'tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+
         End Select
 
     End Sub

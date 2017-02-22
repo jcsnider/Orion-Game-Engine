@@ -3020,17 +3020,12 @@ newlist:
                             .TextureTimer = GetTickCount() + 100000
                         End With
 
-                        Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
-                        tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-
                         If rec.Height > 32 Then
-                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y)
-                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * 32) - 32, rec.X, rec.Y, rec.Width, rec.Height)
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y, rec.X, rec.Y, rec.Width, rec.Height)
                         Else
-                            tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y), rec.X, rec.Y, rec.Width, rec.Height)
                         End If
 
-                        GameWindow.Draw(tmpSprite)
                     Else
                         With rec
                             .Y = 0
@@ -3145,9 +3140,9 @@ nextevent:
                 Y = Y - (sRect.Bottom - sRect.Top) + 32
 
                 If Map.MapEvents(Id).GraphicY2 > 1 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * 32), ConvertMapY(Map.MapEvents(Id).Y * 32) - 32, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y) - PIC_Y, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * 32), ConvertMapY(Map.MapEvents(Id).Y * 32), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(Id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(Id).X * PIC_X), ConvertMapY(Map.MapEvents(Id).Y * PIC_Y), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
 
         End Select
