@@ -600,21 +600,21 @@
 
         'quest log text
         y = 0
-        For Each str As String In WordWrap(Trim$(QuestTaskLogText), 35)
+        For Each str As String In WordWrap(Trim$(QuestTaskLogText), 35, WrapMode.Characters, WrapType.BreakWord)
             'description
             DrawText(QuestLogX + 204, QuestLogY + 30 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             y = y + 15
         Next
 
         y = 0
-        For Each str As String In WordWrap(Trim$(ActualTaskText), 40)
+        For Each str As String In WordWrap(Trim$(ActualTaskText), 40, WrapMode.Characters, WrapType.BreakWord)
             'description
             DrawText(QuestLogX + 204, QuestLogY + 147 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             y = y + 15
         Next
 
         y = 0
-        For Each str As String In WordWrap(Trim$(QuestDialogText), 40)
+        For Each str As String In WordWrap(Trim$(QuestDialogText), 40, WrapMode.Characters, WrapType.BreakWord)
             'description
             DrawText(QuestLogX + 204, QuestLogY + 218 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             y = y + 15

@@ -3617,7 +3617,7 @@ NextLoop:
         RenderSprite(DescriptionSprite, GameWindow, Xoffset - DescriptionGFXInfo.Width, Yoffset, 0, 0, DescriptionGFXInfo.Width, DescriptionGFXInfo.Height)
 
         'name
-        For Each str As String In WordWrap(ItemDescName, 22)
+        For Each str As String In WordWrap(ItemDescName, 22, WrapMode.Characters, WrapType.BreakWord)
             'description
             DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 12 + y, str, ItemDescRarityColor, ItemDescRarityBackColor, GameWindow)
             y = y + 15
@@ -3650,7 +3650,7 @@ NextLoop:
             'spirit
             DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 214, "Spirit: " & ItemDescSpr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         Else
-            For Each str As String In WordWrap(ItemDescDescription, 22)
+            For Each str As String In WordWrap(ItemDescDescription, 22, WrapMode.Characters, WrapType.BreakWord)
                 'description
                 DrawText(Xoffset - DescriptionGFXInfo.Width + 10, Yoffset + 44 + y, str, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
                 y = y + 15

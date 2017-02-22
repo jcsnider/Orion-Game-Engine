@@ -3175,7 +3175,7 @@ nextevent:
             End If
 
             'EventPrompt
-            txtArray = WordWrap(EventText, 45)
+            txtArray = WordWrap(EventText, 45, WrapMode.Characters, WrapType.BreakWord)
             For i = 0 To txtArray.Count
                 If i = txtArray.Count Then Exit For
                 'draw text

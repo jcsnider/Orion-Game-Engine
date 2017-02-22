@@ -305,7 +305,7 @@ Module ClientText
             txtChatAdd = txtChatAdd & Msg
             AddChatRec(Msg, Color)
         Else
-            For Each str As String In GraphicalWordWrap(Msg, MyChatWindowGFXInfo.Width - ChatboxPadding)
+            For Each str As String In WordWrap(Msg, MyChatWindowGFXInfo.Width - ChatboxPadding, WrapMode.Font)
                 txtChatAdd = txtChatAdd & vbNewLine & str
                 AddChatRec(str, Color)
             Next
@@ -361,92 +361,96 @@ Module ClientText
 
     Public SplitChars As Char() = New Char() {" "c, "-"c, ControlChars.Tab}
 
-    Public Function GraphicalWordWrap(str As String, width As Integer, Optional size As Byte = FONT_SIZE) As List(Of String)
+    Public Enum WrapMode
+        Characters
+        Font
+    End Enum
+
+    Public Enum WrapType
+        None
+        BreakWord
+        Whitespace
+        Smart
+    End Enum
+
+    Public Function WordWrap(ByRef str As String, ByRef width As Integer, Optional ByRef mode As WrapMode = WrapMode.Font, Optional ByRef type As WrapType = WrapType.Smart, Optional ByRef size As Byte = FONT_SIZE) As List(Of String)
         Dim lines As New List(Of String)
         Dim line As String = ""
-        Dim trim As String = ""
+        Dim nextLine As String = ""
 
         For Each word In Explode(str, SplitChars)
-            If line.Length <> 0 Then
-                line += " "
-            End If
+            Dim trim = word.Trim()
+            Dim currentType = type
+            Do
+                Dim baseLine = If(line.Length < 1, "", line + " ")
+                Dim newLine = If(nextLine.Length < 1, baseLine + trim, nextLine)
+                nextLine = ""
 
-            line += word.Trim()
-            Select Case GetTextWidth(line, size)
-                Case < width
-                    Exit Select
+                Select Case If(mode = WrapMode.Font, GetTextWidth(newLine, size), newLine.Length)
+                    Case < width
+                        line = newLine
+                        Exit Select
 
-                Case = width
-                    lines.Add(line)
-                    line = ""
-                    Exit Select
+                    Case = width
+                        lines.Add(newLine)
+                        line = ""
+                        Exit Select
 
-                Case Else
-                    While GetTextWidth(line + "-", size) > width
-                        trim = line(line.Length - 1) + trim
-                        line = line.Substring(0, line.Length - 1)
-                    End While
+                    Case Else
+                        Select Case currentType
+                            Case WrapType.None
+                                line = newLine
+                                Exit Select
 
-                    lines.Add(line + "-")
-                    line = trim.Trim()
-                    trim = ""
-                    Exit Select
-            End Select
+                            Case WrapType.Whitespace
+                                lines.Add(If(line.Length < 1, newLine, line))
+                                line = If(line.Length < 1, "", trim)
+                                Exit Select
+
+                            Case WrapType.BreakWord
+                                Dim remaining = trim
+                                Do
+                                    If If(mode = WrapMode.Font, GetTextWidth(baseLine, size), baseLine.Length) > width Then
+                                        lines.Add(line)
+                                        baseLine = ""
+                                        line = ""
+                                    End If
+
+                                    Dim i = remaining.Length - 1
+                                    While (-1 < i) And (width < If(mode = WrapMode.Font, GetTextWidth(baseLine + remaining.Substring(0, i) + "-", size), (baseLine + remaining.Substring(0, i) + "-").Length))
+                                        i -= 1
+                                    End While
+
+                                    line = baseLine + remaining.Substring(0, i + 1) + If(remaining.Length <= i + 1, "", "-")
+                                    lines.Add(line)
+                                    line = ""
+                                    baseLine = ""
+                                    remaining = remaining.Substring(i + 1)
+                                Loop While (remaining.Length > 0) And (width < If(mode = WrapMode.Font, GetTextWidth(remaining, size), remaining.Length))
+                                line = remaining
+                                Exit Select
+
+                            Case WrapType.Smart
+                                If (line.Length < 1) Or (width < If(mode = WrapMode.Font, GetTextWidth(trim, size), trim.Length)) Then
+                                    currentType = WrapType.BreakWord
+                                Else
+                                    currentType = WrapType.Whitespace
+                                End If
+                                nextLine = newLine
+
+                                Exit Select
+
+                        End Select
+                        Exit Select
+                End Select
+            Loop While (nextLine.Length > 0)
         Next
 
-        lines.Add(line)
+        If (line.Length > 0) Then
+            lines.Add(line)
+        End If
 
         Return lines
-    End Function
-
-    Public Function WordWrap(str As String, width As Integer) As List(Of String)
-
-        Dim words As String() = Explode(str, SplitChars)
-        Dim curLineLength As Integer = 0
-        Dim strBuilder As New StringBuilder()
-        Dim i As Integer = 0
-        Dim rtnString As New List(Of String)
-
-        While i < words.Length
-            Dim word As String = words(i)
-
-            ' If adding the new word to the current line would be too Integer,
-            ' then put it on a new line (and split it up if it's too Integer).
-            If curLineLength + word.Length > width Then
-
-                ' Only move down to a new line if we have text on the current line.
-                ' Avoids situation where wrapped whitespace causes emptylines in text.
-                If curLineLength > 0 Then
-                    strBuilder.Append("|")
-                    curLineLength = 0
-                End If
-
-                ' If the current word is too Integer to fit on a line even on it's own then
-                ' split the word up.
-                While word.Length > width
-                    strBuilder.Append(word.Substring(0, width - 1) + "-")
-                    word = word.Substring(width - 1)
-                    strBuilder.Append("|")
-                End While
-
-                ' Remove leading whitespace from the word so the new line starts flush to the left.
-                word = word.TrimStart()
-
-            End If
-
-            strBuilder.Append(word)
-            curLineLength += word.Length
-            i += 1
-        End While
-
-        Dim lines As String() = strBuilder.ToString.Split("|")
-        For Each line As String In lines
-            'line = Replace(line, "|", "")
-            rtnString.Add(line.Replace("|", "")) ' & vbNewLine)
-        Next
-
-        Return rtnString
-
     End Function
 
     Public Function Explode(str As String, splitChars As Char()) As String()
@@ -667,7 +671,7 @@ Module ClientText
                 Y = ConvertMapY((Map.MapEvents(.target).Y * 32) + Map.MapEvents(.target).YOffset) - 40
             End If
             ' word wrap the text
-            theArray = GraphicalWordWrap(.Msg, ChatBubbleWidth)
+            theArray = WordWrap(.Msg, ChatBubbleWidth, WrapMode.Font)
             ' find max width
             For i = 0 To theArray.Count - 1
                 If GetTextWidth(theArray(i)) > MaxWidth Then MaxWidth = GetTextWidth(theArray(i))
