@@ -1,39 +1,16 @@
 ﻿Module EditorTypes
+    ' options
+    Public Options As New EditorOptions()
+
     ' Public data structures
     Public Map As MapRec
     Public TempTile(,) As TempTileRec
     Public MapLock As New Object()
-    Public Classes() As ClassRec
-    Public Item(0 To MAX_ITEMS) As ItemRec
-    Public Npc(0 To MAX_NPCS) As NpcRec
     Public MapItem(0 To MAX_MAP_ITEMS) As MapItemRec
     Public MapNpc(0 To MAX_MAP_NPCS) As MapNpcRec
-    Public Shop(0 To MAX_SHOPS) As ShopRec
-    Public Skill(0 To MAX_SKILLS) As SkillRec
-    Public Resource(0 To MAX_RESOURCES) As ResourceRec
-    Public Animation(0 To MAX_ANIMATIONS) As AnimationRec
 
     'Mapreport
     Public MapNames(0 To MAX_MAPS) As String
-
-    ' options
-    Public Options As New EditorOptions()
-
-    Public Structure TileDataRec
-        Dim X As Byte
-        Dim Y As Byte
-        Dim Tileset As Byte
-        Dim AutoTile As Byte
-    End Structure
-
-    Public Structure TileRec
-        Dim Layer() As TileDataRec
-        Dim Type As Byte
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim DirBlock As Byte
-    End Structure
 
     Public Structure MapRec
         Dim MapNum As Integer
@@ -99,78 +76,12 @@
         Dim Vital() As Integer
     End Structure
 
-    Public Structure ItemRec
-        Dim Name As String
-        Dim Pic As Integer
-        Dim Description As String
-
-        Dim Type As Byte
-        Dim SubType As Byte
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim ClassReq As Integer
-        Dim AccessReq As Integer
-        Dim LevelReq As Integer
-        Dim Mastery As Byte
-        Dim Price As Integer
-        Dim Add_Stat() As Byte
-        Dim Rarity As Byte
-        Dim Speed As Integer
-        Dim TwoHanded As Integer
-        Dim BindType As Byte
-        Dim Stat_Req() As Byte
-        Dim Animation As Integer
-        Dim Paperdoll As Integer
-
-        Dim Randomize As Byte
-        Dim RandomMin As Byte
-        Dim RandomMax As Byte
-
-        Dim Stackable As Byte
-        Dim ItemLevel As Byte
-
-        'Housing
-        Dim FurnitureWidth As Integer
-        Dim FurnitureHeight As Integer
-        Dim FurnitureBlocks(,) As Integer
-        Dim FurnitureFringe(,) As Integer
-
-        Dim KnockBack As Byte
-        Dim KnockBackTiles As Byte
-
-        Dim Projectile As Integer
-        Dim Ammo As Integer
-    End Structure
-
     Public Structure MapItemRec
         Dim Num As Byte
         Dim Value As Integer
         Dim Frame As Byte
         Dim X As Byte
         Dim Y As Byte
-    End Structure
-
-    Public Structure NpcRec
-        Dim Name As String
-        Dim AttackSay As String
-        Dim Sprite As Integer
-        Dim SpawnSecs As Integer
-        Dim Behaviour As Byte
-        Dim Range As Byte
-        Dim DropChance() As Integer
-        Dim DropItem() As Integer
-        Dim DropItemValue() As Integer
-        Dim Stat() As Byte
-        Dim Faction As Byte
-        Dim HP As Integer
-        Dim EXP As Integer
-        Dim Animation As Integer
-        Dim QuestNum As Integer
-        Dim Skill() As Byte
-
-        Dim Level As Integer
-        Dim Damage As Integer
     End Structure
 
     Public Structure MapNpcRec
@@ -191,13 +102,6 @@
         Dim Steps As Integer
     End Structure
 
-    Public Structure TradeItemRec
-        Dim Item As Integer
-        Dim ItemValue As Integer
-        Dim CostItem As Integer
-        Dim CostValue As Integer
-    End Structure
-
     Public Structure TempTileRec
         Dim DoorOpen As Byte
         Dim DoorFrame As Byte
@@ -209,22 +113,6 @@
         Dim X As Integer
         Dim Y As Integer
         Dim ResourceState As Byte
-    End Structure
-
-    Public Structure AnimInstanceRec
-        Dim Animation As Integer
-        Dim X As Integer
-        Dim Y As Integer
-        ' used for locking to players/npcs
-        Dim lockindex As Integer
-        Dim LockType As Byte
-        ' timing
-        Dim Timer() As Integer
-        ' rendering check
-        Dim Used() As Boolean
-        ' counting the loop
-        Dim LoopIndex() As Integer
-        Dim FrameIndex() As Integer
     End Structure
 
 End Module

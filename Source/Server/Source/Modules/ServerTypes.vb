@@ -1,36 +1,15 @@
 ﻿Module ServerTypes
+    Public Options As New ServerOptions()
     ' Public data structures
     Public Map(MAX_CACHED_MAPS) As MapRec
     Public TempTile(MAX_CACHED_MAPS) As TempTileRec
     Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Public ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
-    Public Player(MAX_PLAYERS) As PlayerRec
-    Public Bank(MAX_PLAYERS) As BankRec
-    Public TempPlayer(MAX_PLAYERS) As TempPlayerRec
-    Public Classes() As ClassRec
-    Public Item(MAX_ITEMS) As ItemRec
-    Public Npc(MAX_NPCS) As NpcRec
     Public MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemRec
     Public MapNpc(MAX_CACHED_MAPS) As MapDataRec
-    Public Shop(MAX_SHOPS) As ShopRec
-    Public Skill(MAX_SKILLS) As SkillRec
-    Public Resource(MAX_RESOURCES) As ResourceRec
-    Public Animation(MAX_ANIMATIONS) As AnimationRec
-    Public Options As New ServerOptions()
-
-    Public Structure PlayerInvRec
-        Dim Num As Byte
-        Dim Value As Integer
-    End Structure
-
-    Public Structure Cache
-        Dim Data() As Byte
-    End Structure
-
-    Public Structure BankRec
-        Dim Item() As PlayerInvRec
-        Dim ItemRand() As RandInvRec
-    End Structure
+    Public Bank(MAX_PLAYERS) As BankRec
+    Public TempPlayer(MAX_PLAYERS) As TempPlayerRec
+    Public Player(MAX_PLAYERS) As PlayerRec
 
     Public Structure PlayerRec
         ' Account
@@ -185,22 +164,6 @@
 
     End Structure
 
-    Public Structure TileDataRec
-        Dim X As Byte
-        Dim Y As Byte
-        Dim Tileset As Byte
-        Dim AutoTile As Byte
-    End Structure
-
-    Public Structure TileRec
-        Dim Layer() As TileDataRec
-        Dim Type As Byte
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim DirBlock As Byte
-    End Structure
-
     Public Structure MapRec
         Dim Name As String
         Dim Music As String
@@ -260,51 +223,6 @@
         Dim BaseExp As Integer
     End Structure
 
-    Public Structure ItemRec
-        Dim Name As String
-        Dim Pic As Integer
-        Dim Description As String
-
-        Dim Type As Byte
-        Dim SubType As Byte
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim ClassReq As Integer
-        Dim AccessReq As Integer
-        Dim LevelReq As Integer
-        Dim Mastery As Byte
-        Dim Price As Integer
-        Dim Add_Stat() As Byte
-        Dim Rarity As Byte
-        Dim Speed As Integer
-        Dim TwoHanded As Integer
-        Dim BindType As Byte
-        Dim Stat_Req() As Byte
-        Dim Animation As Integer
-        Dim Paperdoll As Integer
-
-        Dim Randomize As Byte
-        Dim RandomMin As Byte
-        Dim RandomMax As Byte
-
-        Dim Stackable As Byte
-
-        Dim ItemLevel As Byte
-
-        'Housing
-        Dim FurnitureWidth As Integer
-        Dim FurnitureHeight As Integer
-        Dim FurnitureBlocks(,) As Integer
-        Dim FurnitureFringe(,) As Integer
-
-        Dim KnockBack As Byte
-        Dim KnockBackTiles As Byte
-
-        Dim Projectile As Integer
-        Dim Ammo As Integer
-    End Structure
-
     Public Structure MapItemRec
         Dim Num As Byte
         Dim Value As Integer
@@ -312,28 +230,6 @@
         Dim Y As Byte
 
         Dim RandData As RandInvRec
-    End Structure
-
-    Public Structure NpcRec
-        Dim Name As String
-        Dim AttackSay As String
-        Dim Sprite As Integer
-        Dim SpawnSecs As Integer
-        Dim Behaviour As Byte
-        Dim Range As Byte
-        Dim DropChance() As Integer
-        Dim DropItem() As Integer
-        Dim DropItemValue() As Integer
-        Dim Stat() As Byte
-        Dim Faction As Byte
-        Dim Hp As Integer
-        Dim Exp As Integer
-        Dim Animation As Integer
-        Dim QuestNum As Integer
-        Dim Skill() As Byte
-
-        Dim Level As Integer
-        Dim Damage As Integer
     End Structure
 
     Public Structure MapNpcRec
@@ -354,13 +250,6 @@
         Dim SkillCD() As Integer
         Dim StopRegen As Byte
         Dim StopRegenTimer As Integer
-    End Structure
-
-    Public Structure TradeItemRec
-        Dim Item As Integer
-        Dim ItemValue As Integer
-        Dim CostItem As Integer
-        Dim CostValue As Integer
     End Structure
 
     Public Structure TempTileRec
