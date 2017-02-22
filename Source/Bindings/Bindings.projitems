@@ -9,13 +9,13 @@
     <Import_RootNamespace>Bindings</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ByteBuffer.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Enums.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Language.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Packets.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Strings.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Types.vb" />
-    <Compile Include="$(MSBuildThisFileDirectory)Xml.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Time.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\ByteBuffer.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Constants.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Enums.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Language.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Packets.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Strings.vb" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Xml.vb" />
   </ItemGroup>
 </Project>
