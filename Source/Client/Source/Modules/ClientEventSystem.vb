@@ -3012,11 +3012,20 @@ newlist:
                             .Height = Map.Events(i).Pages(1).GraphicY2 * 32
                         End With
 
+                        If TileSetTextureInfo(Map.Events(i).Pages(1).Graphic).IsLoaded = False Then
+                            LoadTexture(Map.Events(i).Pages(1).Graphic, 1)
+                        End If
+                        ' we use it, lets update timer
+                        With TileSetTextureInfo(Map.Events(i).Pages(1).Graphic)
+                            .TextureTimer = GetTickCount() + 100000
+                        End With
+
                         Dim tmpSprite As Sprite = New Sprite(TileSetTexture(Map.Events(i).Pages(1).Graphic))
                         tmpSprite.TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
 
                         If rec.Height > 32 Then
                             tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y) - PIC_Y)
+                            RenderSprite(TileSetSprite(Map.Events(i).Pages(1).Graphic), GameWindow, ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * 32) - 32, rec.X, rec.Y, rec.Width, rec.Height)
                         Else
                             tmpSprite.Position = New Vector2f(ConvertMapX(Map.Events(i).X * PIC_X), ConvertMapY(Map.Events(i).Y * PIC_Y))
                         End If
@@ -3121,6 +3130,15 @@ nextevent:
                         .Width = .Left + 32
                     End With
                 End If
+
+                If TileSetTextureInfo(Map.MapEvents(Id).GraphicNum).IsLoaded = False Then
+                    LoadTexture(Map.MapEvents(Id).GraphicNum, 1)
+                End If
+                ' we use it, lets update timer
+                With TileSetTextureInfo(Map.MapEvents(Id).GraphicNum)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
                 X = Map.MapEvents(Id).X * 32
                 Y = Map.MapEvents(Id).Y * 32
                 X = X - ((sRect.Right - sRect.Left) / 2)
