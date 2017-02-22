@@ -1446,6 +1446,7 @@ Partial Class FrmEditor_Events
         Me.fraGiveExp.TabIndex = 45
         Me.fraGiveExp.TabStop = False
         Me.fraGiveExp.Text = "Give Experience"
+        Me.fraGiveExp.Visible = False
         '
         'btnGiveExpOk
         '
@@ -1499,6 +1500,7 @@ Partial Class FrmEditor_Events
         Me.fraEndQuest.TabIndex = 43
         Me.fraEndQuest.TabStop = False
         Me.fraEndQuest.Text = "End Quest"
+        Me.fraEndQuest.Visible = False
         '
         'btnEndQuestOk
         '
@@ -5382,7 +5384,7 @@ Partial Class FrmEditor_Events
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(810, 623)
+        Me.ClientSize = New System.Drawing.Size(1726, 623)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlVariableSwitches)
         Me.Controls.Add(Me.fraDialogue)

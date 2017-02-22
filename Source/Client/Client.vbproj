@@ -264,12 +264,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.vbproj">
-      <Project>{69ec69d5-4e40-408d-8f64-33bc64c82d35}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Data\Graphics\Animations\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
