@@ -1346,7 +1346,7 @@ Module ServerHandleData
         If n <> Index Then
             If n > 0 Then
                 If GetPlayerAccess(n) < GetPlayerAccess(Index) Then
-                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.Game_Name & " by " & GetPlayerName(Index) & "!")
+                    GlobalMsg(GetPlayerName(n) & " has been kicked from " & Options.GameName & " by " & GetPlayerName(Index) & "!")
                     Addlog(GetPlayerName(Index) & " has kicked " & GetPlayerName(n) & ".", ADMIN_LOG)
                     AlertMsg(n, "You have been kicked by " & GetPlayerName(Index) & "!")
                 Else
@@ -2882,7 +2882,7 @@ Module ServerHandleData
                 Call GlobalMsg(GetPlayerLogin(Index) & "/" & GetPlayerName(Index) & " has been booted for (" & Reason & ")")
             End If
 
-            Call AlertMsg(Index, "You have lost your connection with " & Options.Game_Name & ".")
+            Call AlertMsg(Index, "You have lost your connection with " & Options.GameName & ".")
         End If
 
     End Sub

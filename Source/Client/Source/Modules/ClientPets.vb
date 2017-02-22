@@ -696,7 +696,7 @@ Module ClientPets
     End Function
 
     Public Function IsPetBarSlot(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
 
         IsPetBarSlot = 0

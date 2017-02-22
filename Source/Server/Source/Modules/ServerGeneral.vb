@@ -36,8 +36,6 @@ Module ServerGeneral
         ' Initialize the random-number generator
         Randomize()
 
-        ServerTime.InitTime()
-
         ReDim Map(MAX_CACHED_MAPS)
 
         ReDim MapNpc(MAX_CACHED_MAPS)
@@ -167,7 +165,7 @@ Module ServerGeneral
 
         ' load options, set if they dont exist
         If Not FileExist(Path.Combine(Application.StartupPath, "data", "options.ini")) Then
-            Options.Game_Name = "Orion+"
+            Options.GameName = "Orion+"
             Options.Port = 7001
             Options.Motd = "Welcome to the Orion+ Engine"
             Options.Website = "http://ascensiongamedev.com/index.php"
@@ -208,6 +206,8 @@ Module ServerGeneral
 
         'resource system
         LoadSkillExp()
+
+        ServerTime.InitTime()
 
         UpdateCaption()
         time2 = GetTickCount()
@@ -265,7 +265,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, Time.Instance.ToString())
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.GameName, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, Time.Instance.ToString())
     End Sub
 
     Sub DestroyServer()

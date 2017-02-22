@@ -2416,7 +2416,7 @@ Module ServerDatabase
             .Root = "Options"
         }
 
-        myXml.WriteString("Settings", "Game_Name", Options.Game_Name)
+        myXml.WriteString("Settings", "Game_Name", Options.GameName)
         myXml.WriteString("Settings", "Port", Str(Options.Port))
         myXml.WriteString("Settings", "MoTd", Options.Motd)
 
@@ -2434,7 +2434,7 @@ Module ServerDatabase
             .Root = "Options"
         }
 
-        Options.Game_Name = myXml.ReadString("Settings", "Game_Name", "Orion+")
+        Options.GameName = myXml.ReadString("Settings", "Game_Name", "Orion+")
         Options.Port = myXml.ReadString("Settings", "Port", "7001")
         Options.Motd = myXml.ReadString("Settings", "MoTd", "Welcome to the Orion+ Engine")
         Options.Website = myXml.ReadString("Settings", "Website", "http://ascensiongamedev.com/index.php")
@@ -2534,7 +2534,7 @@ Module ServerDatabase
 
         IP = Mid$(IP, 1, i)
         AddTextToFile(IP & "," & "Server", "banlist.txt")
-        GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.Game_Name & " by " & "the Server" & "!")
+        GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.GameName & " by " & "the Server" & "!")
         Addlog("The Server" & " has banned " & GetPlayerName(BanPlayerIndex) & ".", ADMIN_LOG)
         AlertMsg(BanPlayerIndex, "You have been banned by " & "The Server" & "!")
     End Sub
@@ -2564,7 +2564,7 @@ Module ServerDatabase
 
         IP = Mid$(IP, 1, i)
         AddTextToFile(IP & "," & GetPlayerName(BannedByIndex), "banlist.txt")
-        GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.Game_Name & " by " & GetPlayerName(BannedByIndex) & "!")
+        GlobalMsg(GetPlayerName(BanPlayerIndex) & " has been banned from " & Options.GameName & " by " & GetPlayerName(BannedByIndex) & "!")
         Addlog(GetPlayerName(BannedByIndex) & " has banned " & GetPlayerName(BanPlayerIndex) & ".", ADMIN_LOG)
         AlertMsg(BanPlayerIndex, "You have been banned by " & GetPlayerName(BannedByIndex) & "!")
     End Sub

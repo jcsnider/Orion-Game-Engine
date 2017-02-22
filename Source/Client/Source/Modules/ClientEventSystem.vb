@@ -2757,8 +2757,8 @@ newlist:
 
 #Region "Drawing..."
     Public Sub EditorEvent_DrawGraphic()
-        Dim sRect As RECT
-        Dim dRect As RECT
+        Dim sRect As Rect
+        Dim dRect As Rect
         Dim targetBitmap As Bitmap 'Bitmap we draw to
         Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
         Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap

@@ -2192,7 +2192,7 @@ Module ServerTCP
         Buffer = New ByteBuffer
         Buffer.WriteInteger(ServerPackets.SNews)
 
-        Buffer.WriteString(Trim(Options.Game_Name))
+        Buffer.WriteString(Trim(Options.GameName))
         Buffer.WriteString(Trim(GetFileContents(Path.Combine(Application.StartupPath, "data", "news.txt"))))
 
         SendDataTo(Index, Buffer.ToArray())

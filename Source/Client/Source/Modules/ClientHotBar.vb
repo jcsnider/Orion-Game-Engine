@@ -17,7 +17,7 @@ Public Module ClientHotBar
     End Structure
 
     Public Function IsHotBarSlot(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
 
         IsHotBarSlot = 0

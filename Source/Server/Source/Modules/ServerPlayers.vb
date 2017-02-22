@@ -16,7 +16,7 @@ Module ServerPlayers
     Public Sub HandleUseChar(ByVal Index As Integer)
         If Not IsPlaying(Index) Then
             JoinGame(Index)
-            Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(Index), GetPlayerName(Index), Options.Game_Name)
+            Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(Index), GetPlayerName(Index), Options.GameName)
             Addlog(text, PLAYER_LOG)
             TextAdd(text)
         End If
@@ -306,7 +306,7 @@ Module ServerPlayers
         TempPlayer(Index).InGame = True
 
         ' Notify everyone that a player has joined the game.
-        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(Index), Options.Game_Name))
+        GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(Index), Options.GameName))
 
         ' Send an ok to client to start receiving in game data
         SendLoadCharOk(Index)
@@ -410,9 +410,9 @@ Module ServerPlayers
             SaveBank(Index)
 
             ' Send a global message that he/she left
-            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
+            GlobalMsg(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.GameName))
 
-            TextAdd(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.Game_Name))
+            TextAdd(String.Format("{0} has left {1}!", GetPlayerName(Index), Options.GameName))
             SendLeftMap(Index)
 
             TempPlayer(Index) = Nothing
