@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="GlobalSuppressions.vb" />
+    <Compile Include="Source\EditorOptions.vb" />
     <Compile Include="Source\Forms\frmAutoMapper.Designer.vb">
       <DependentUpon>frmAutoMapper.vb</DependentUpon>
     </Compile>

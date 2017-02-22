@@ -25,7 +25,7 @@
     Public MapNames(MAX_MAPS) As String
 
     ' options
-    Public Options As OptionsRec
+    Public Options As New ClientOptions()
 
     Public CharSelection() As CharSelRec
     Public Structure CharSelRec
@@ -34,38 +34,6 @@
         Dim Gender As Integer
         Dim ClassName As String
         Dim Level As Integer
-    End Structure
-
-    Public Structure RandInvRec
-        Dim Prefix As String
-        Dim Suffix As String
-        Dim Stat() As Long
-        Dim Rarity As Long
-        Dim Damage As Long
-        Dim Speed As Long
-    End Structure
-
-    ' Type recs
-    Public Structure OptionsRec
-        Dim SavePass As Boolean
-        Dim Password As String
-        Dim Username As String
-        Dim IP As String
-        Dim Port As Integer
-        Dim MenuMusic As String
-        Dim Music As Byte
-        Dim Sound As Byte
-        Dim Volume As Single
-        Dim ScreenSize As Byte
-        Dim HighEnd As Byte
-        Dim ShowNpcBar As Byte
-    End Structure
-
-    Public Structure RECT
-        Dim top As Integer
-        Dim left As Integer
-        Dim right As Integer
-        Dim bottom As Integer
     End Structure
 
     Public Structure ChatRec
@@ -333,44 +301,6 @@
         Dim CostValue As Integer
     End Structure
 
-    Public Structure ShopRec
-        Dim Name As String
-        Dim Face As Byte
-        Dim BuyRate As Integer
-        Dim TradeItem() As TradeItemRec
-    End Structure
-
-    Public Structure SkillRec
-        Dim Name As String
-        Dim Type As Byte
-        Dim MPCost As Integer
-        Dim LevelReq As Integer
-        Dim AccessReq As Integer
-        Dim ClassReq As Integer
-        Dim CastTime As Integer
-        Dim CDTime As Integer
-        Dim Icon As Integer
-        Dim Map As Integer
-        Dim X As Integer
-        Dim Y As Integer
-        Dim Dir As Byte
-        Dim Vital As Integer
-        Dim Duration As Integer
-        Dim Interval As Integer
-        Dim Range As Integer
-        Dim IsAoE As Boolean
-        Dim AoE As Integer
-        Dim CastAnim As Integer
-        Dim SkillAnim As Integer
-        Dim StunDuration As Integer
-
-        Dim IsProjectile As Integer '0 is no, 1 is yes
-        Dim Projectile As Integer
-
-        Dim KnockBack As Byte '0 is no, 1 is yes
-        Dim KnockBackTiles As Byte
-    End Structure
-
     Public Structure TempTileRec
         Dim DoorOpen As Byte
         Dim DoorFrame As Byte
@@ -382,23 +312,6 @@
         Dim X As Integer
         Dim Y As Integer
         Dim ResourceState As Byte
-    End Structure
-
-    Public Structure ResourceRec
-        Dim Name As String
-        Dim SuccessMessage As String
-        Dim EmptyMessage As String
-        Dim ResourceType As Integer
-        Dim ResourceImage As Integer
-        Dim ExhaustedImage As Integer
-        Dim ExpReward As Integer
-        Dim ItemReward As Integer
-        Dim ToolRequired As Integer
-        Dim LvlRequired As Integer
-        Dim Health As Integer
-        Dim RespawnTime As Integer
-        Dim Walkthrough As Boolean
-        Dim Animation As Integer
     End Structure
 
     Public Structure ActionMsgRec
@@ -417,14 +330,6 @@
         Dim Timer As Integer
         Dim X As Integer
         Dim Y As Integer
-    End Structure
-
-    Public Structure AnimationRec
-        Dim Name As String
-        Dim Sprite() As Integer
-        Dim Frames() As Integer
-        Dim LoopCount() As Integer
-        Dim looptime() As Integer
     End Structure
 
     Public Structure AnimInstanceRec
@@ -450,12 +355,6 @@
         Dim targetType As Byte
         Dim Timer As Integer
         Dim active As Boolean
-    End Structure
-
-    Public Structure ResourceSkillsRec
-        Dim SkillLevel As Integer
-        Dim SkillCurExp As Integer
-        Dim SkillNextLvlExp As Integer
     End Structure
 
 End Module

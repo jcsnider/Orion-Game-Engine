@@ -164,7 +164,7 @@ Public Module ClientProjectiles
     End Sub
 
     Public Sub DrawProjectile(ByVal ProjectileNum As Integer)
-        Dim rec As RECT
+        Dim rec As Rect
         Dim CanClearProjectile As Boolean
         Dim CollisionIndex As Integer
         Dim CollisionType As Byte

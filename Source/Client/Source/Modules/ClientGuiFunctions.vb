@@ -1114,7 +1114,7 @@ Public Module ClientGuiFunctions
 
 #Region "Support Functions"
     Function IsEqItem(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
         IsEqItem = 0
 
@@ -1142,7 +1142,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Function IsInvItem(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
         IsInvItem = 0
 
@@ -1170,7 +1170,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Function IsPlayerSkill(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
 
         IsPlayerSkill = 0
@@ -1199,7 +1199,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Function IsBankItem(ByVal X As Single, ByVal Y As Single) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
 
         IsBankItem = 0
@@ -1251,7 +1251,7 @@ Public Module ClientGuiFunctions
     End Function
 
     Function IsTradeItem(ByVal X As Single, ByVal Y As Single, ByVal Yours As Boolean) As Integer
-        Dim tempRec As RECT
+        Dim tempRec As Rect
         Dim i As Integer
         Dim itemnum As Integer
 
