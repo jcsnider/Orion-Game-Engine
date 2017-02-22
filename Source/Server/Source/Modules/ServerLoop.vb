@@ -1,5 +1,6 @@
 ﻿Imports System.Linq
 Imports System.Threading
+Imports Orion
 
 Module ServerLoop
     Sub ServerLoop()
@@ -85,7 +86,7 @@ Module ServerLoop
                     Select New With {Key .Index = p.Index, .Success = HandlePlayerCraft(p.Index)}
                 ).ToArray()
 
-                IncrementClock()
+                Time.Instance.Tick()
 
                 ' Move the timer up 1000ms.
                 tmr1000 = GetTickCount() + 1000

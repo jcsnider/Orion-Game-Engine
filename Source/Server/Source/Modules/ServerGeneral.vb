@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports Orion
 
 Module ServerGeneral
     Public Declare Function GetQueueStatus Lib "user32" (ByVal fuFlags As Integer) As Integer
@@ -35,10 +36,7 @@ Module ServerGeneral
         ' Initialize the random-number generator
         Randomize()
 
-        Hours = DateTime.Now.Hour
-        Minutes = DateTime.Now.Minute
-        Seconds = DateTime.Now.Second
-        GameSpeed = 1
+        ServerTime.InitTime()
 
         ReDim Map(MAX_CACHED_MAPS)
 
@@ -267,7 +265,7 @@ Module ServerGeneral
     End Function
 
     Sub UpdateCaption()
-        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, GameClock)
+        Console.Title = String.Format("{0} <IP {1}:{2}> ({3} Players Online) - Current Errors: {4} - Time: {5}", Options.Game_Name, MyIPAddress, Options.Port, GetPlayersOnline(), ErrorCount, Time.Instance.ToString())
     End Sub
 
     Sub DestroyServer()

@@ -2,6 +2,7 @@
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports SFML.Window
+Imports Orion
 
 Module ClientGraphics
 #Region "Declarations"
@@ -2680,7 +2681,7 @@ Module ClientGraphics
 
         DrawText(HUDWindowX + HUDHPBarX + HPBarGFXInfo.Width + 10, HUDWindowY + HUDHPBarY + 4, Strings.Get("gamegui", "fps") & FPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         DrawText(HUDWindowX + HUDMPBarX + MPBarGFXInfo.Width + 10, HUDWindowY + HUDMPBarY + 4, Strings.Get("gamegui", "ping") & PingToDraw, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 4, Strings.Get("gamegui", "clock") & CurTime, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 4, Strings.Get("gamegui", "clock") & Time.Instance.ToString("h:mm"), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
         If BLPS Then
             DrawText(HUDWindowX + HUDEXPBarX + EXPBarGFXInfo.Width + 10, HUDWindowY + HUDEXPBarY + 20, Strings.Get("gamegui", "lps") & LPS, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
@@ -3922,15 +3923,22 @@ NextLoop:
 
         If Map.Moral = MapMoral.Indoors Then Exit Sub
 
-        If GameTime = Time.Dawn Then
-            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 100))
-        ElseIf GameTime = Time.Day Then
-            Exit Sub
-        ElseIf GameTime = Time.Dusk Then
-            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 150))
-        Else
-            NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 200))
-        End If
+        Select Case Time.Instance.TimeOfDay
+            Case TimeOfDay.Dawn
+                NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 100))
+                Exit Select
+
+            Case TimeOfDay.Dusk
+                NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 150))
+                Exit Select
+
+            Case TimeOfDay.Night
+                NightGfx.Clear(New SFML.Graphics.Color(0, 0, 0, 200))
+                Exit Select
+
+            Case Else
+                Exit Sub
+        End Select
 
         For X = TileView.left To TileView.right + 1
             For Y = TileView.top To TileView.bottom + 1

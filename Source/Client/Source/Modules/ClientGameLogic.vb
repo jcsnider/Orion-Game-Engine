@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Threading
 Imports System.Windows.Forms
+Imports Orion
 
 Module ClientGameLogic
     Public GameRand As New Random()
@@ -111,7 +112,7 @@ Module ClientGameLogic
                 End If
 
                 If tmr1000 < Tick Then
-                    IncrementGameClock()
+                    Time.Instance.Tick()
 
                     tmr1000 = Tick + 1000
                 End If
