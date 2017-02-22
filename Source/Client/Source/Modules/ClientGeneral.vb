@@ -33,33 +33,10 @@ Module ClientGeneral
         'quests
         ClearQuests()
 
-        ReDim Map.Npc(0 To MAX_MAP_NPCS)
+        ReDim Map.Npc(MAX_MAP_NPCS)
 
-        ReDim Item(MAX_ITEMS)
-        For i = 0 To MAX_ITEMS
-            For x = 0 To Stats.Count - 1
-                ReDim Item(i).Add_Stat(x)
-            Next
-            For x = 0 To Stats.Count - 1
-                ReDim Item(i).Stat_Req(x)
-            Next
-
-            ReDim Item(i).FurnitureBlocks(0 To 3, 0 To 3)
-            ReDim Item(i).FurnitureFringe(0 To 3, 0 To 3)
-        Next
-
-        ReDim Npc(MAX_NPCS)
-        For i = 0 To MAX_NPCS
-            For x = 0 To Stats.Count - 1
-                ReDim Npc(i).Stat(x)
-            Next
-
-            ReDim Npc(i).DropChance(5)
-            ReDim Npc(i).DropItem(5)
-            ReDim Npc(i).DropItemValue(5)
-
-            ReDim Npc(i).Skill(6)
-        Next
+        'npc's
+        ClearNpcs()
 
         ReDim MapNpc(MAX_MAP_NPCS)
         For i = 0 To MAX_MAP_NPCS

@@ -100,7 +100,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\ClientOptions.vb" />
+    <Compile Include="Source\Modules\ClientOptions.vb" />
     <Compile Include="Source\Forms\frmAdmin.Designer.vb">
       <DependentUpon>frmAdmin.vb</DependentUpon>
     </Compile>

@@ -382,7 +382,7 @@ Module ClientDataBase
 
 #Region "Items"
     Public Sub ClearItem(ByVal Index As Integer)
-        Index = Index - 1
+        'Index = Index - 1
         Item(Index) = Nothing
         Item(Index) = New ItemRec
         For x = 0 To Stats.Count - 1
@@ -407,6 +407,8 @@ Module ClientDataBase
 
     Sub ClearItems()
         Dim i As Integer
+
+        ReDim Item(MAX_ITEMS)
 
         For i = 1 To MAX_ITEMS
             ClearItem(i)
@@ -443,6 +445,8 @@ Module ClientDataBase
     Sub ClearNpcs()
         Dim i As Integer
 
+        ReDim Npc(MAX_NPCS)
+
         For i = 1 To MAX_NPCS
             ClearNpc(i)
         Next
@@ -455,8 +459,15 @@ Module ClientDataBase
 
         Npc(Index).Name = ""
         Npc(Index).AttackSay = ""
-        ReDim Npc(Index).Stat(0 To Stats.Count - 1)
-        ReDim Npc(Index).Skill(0 To MAX_NPC_SKILLS)
+        For x = 0 To Stats.Count - 1
+            ReDim Npc(Index).Stat(x)
+        Next
+
+        ReDim Npc(Index).DropChance(5)
+        ReDim Npc(Index).DropItem(5)
+        ReDim Npc(Index).DropItemValue(5)
+
+        ReDim Npc(Index).Skill(6)
     End Sub
 #End Region
 
