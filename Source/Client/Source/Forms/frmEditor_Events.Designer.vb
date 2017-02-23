@@ -129,6 +129,9 @@ Partial Class FrmEditor_Events
         Dim TreeNode53 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Bank")
         Dim TreeNode54 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Shop")
         Dim TreeNode55 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shop and Bank", New System.Windows.Forms.TreeNode() {TreeNode53, TreeNode54})
+        Dim TreeNode56 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade In")
+        Dim TreeNode57 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade Out")
+        Dim TreeNode58 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("CutScene Options", New System.Windows.Forms.TreeNode() {TreeNode56, TreeNode57})
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.FraRenaming = New System.Windows.Forms.GroupBox()
         Me.btnRename_Cancel = New System.Windows.Forms.Button()
@@ -4755,7 +4758,13 @@ Partial Class FrmEditor_Events
         TreeNode54.Text = "Open Shop"
         TreeNode55.Name = "NodeShopBank"
         TreeNode55.Text = "Shop and Bank"
-        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode9, TreeNode14, TreeNode26, TreeNode33, TreeNode35, TreeNode39, TreeNode43, TreeNode48, TreeNode52, TreeNode55})
+        TreeNode56.Name = "Node1"
+        TreeNode56.Text = "Fade In"
+        TreeNode57.Name = "Node2"
+        TreeNode57.Text = "Fade Out"
+        TreeNode58.Name = "Node0"
+        TreeNode58.Text = "CutScene Options"
+        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode9, TreeNode14, TreeNode26, TreeNode33, TreeNode35, TreeNode39, TreeNode43, TreeNode48, TreeNode52, TreeNode55, TreeNode58})
         Me.tvCommands.Size = New System.Drawing.Size(381, 443)
         Me.tvCommands.TabIndex = 1
         '

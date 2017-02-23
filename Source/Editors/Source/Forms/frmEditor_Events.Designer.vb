@@ -22,113 +22,116 @@ Partial Class FrmEditor_Events
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim TreeNode56 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show Text")
-        Dim TreeNode57 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show Choices")
-        Dim TreeNode58 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Add Chatbox Text")
-        Dim TreeNode59 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show ChatBubble")
-        Dim TreeNode60 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Messages", New System.Windows.Forms.TreeNode() {TreeNode56, TreeNode57, TreeNode58, TreeNode59})
-        Dim TreeNode61 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Player Variable")
-        Dim TreeNode62 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Player Switch")
-        Dim TreeNode63 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Self Switch")
-        Dim TreeNode64 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Event Processing", New System.Windows.Forms.TreeNode() {TreeNode61, TreeNode62, TreeNode63})
-        Dim TreeNode65 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Conditional Branch")
-        Dim TreeNode66 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop Event Processing")
-        Dim TreeNode67 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Label")
-        Dim TreeNode68 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("GoTo Label")
-        Dim TreeNode69 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Flow Control", New System.Windows.Forms.TreeNode() {TreeNode65, TreeNode66, TreeNode67, TreeNode68})
-        Dim TreeNode70 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Items")
-        Dim TreeNode71 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Restore HP")
-        Dim TreeNode72 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Restore MP")
-        Dim TreeNode73 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Level Up")
-        Dim TreeNode74 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Level")
-        Dim TreeNode75 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Skills")
-        Dim TreeNode76 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Class")
-        Dim TreeNode77 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Sprite")
-        Dim TreeNode78 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Gender")
-        Dim TreeNode79 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change PK")
-        Dim TreeNode80 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Give Experience")
-        Dim TreeNode81 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Player Options", New System.Windows.Forms.TreeNode() {TreeNode70, TreeNode71, TreeNode72, TreeNode73, TreeNode74, TreeNode75, TreeNode76, TreeNode77, TreeNode78, TreeNode79, TreeNode80})
-        Dim TreeNode82 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Warp Player")
-        Dim TreeNode83 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Move Route")
-        Dim TreeNode84 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Wait for Route Completion")
-        Dim TreeNode85 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Force Spawn Npc")
-        Dim TreeNode86 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Hold Player")
-        Dim TreeNode87 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Release Player")
-        Dim TreeNode88 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Movement", New System.Windows.Forms.TreeNode() {TreeNode82, TreeNode83, TreeNode84, TreeNode85, TreeNode86, TreeNode87})
-        Dim TreeNode89 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Animation")
-        Dim TreeNode90 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Animation", New System.Windows.Forms.TreeNode() {TreeNode89})
-        Dim TreeNode91 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Begin Quest")
-        Dim TreeNode92 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Complete Task")
-        Dim TreeNode93 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("End Quest")
-        Dim TreeNode94 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Questing", New System.Windows.Forms.TreeNode() {TreeNode91, TreeNode92, TreeNode93})
-        Dim TreeNode95 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Fog")
-        Dim TreeNode96 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Weather")
-        Dim TreeNode97 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Map Tinting")
-        Dim TreeNode98 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Map Functions", New System.Windows.Forms.TreeNode() {TreeNode95, TreeNode96, TreeNode97})
-        Dim TreeNode99 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Play BGM")
-        Dim TreeNode100 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop BGM")
-        Dim TreeNode101 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Play Sound")
-        Dim TreeNode102 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop Sounds")
-        Dim TreeNode103 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Music and Sound", New System.Windows.Forms.TreeNode() {TreeNode99, TreeNode100, TreeNode101, TreeNode102})
-        Dim TreeNode104 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Wait...")
-        Dim TreeNode105 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Access")
-        Dim TreeNode106 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Custom Script")
-        Dim TreeNode107 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Etc...", New System.Windows.Forms.TreeNode() {TreeNode104, TreeNode105, TreeNode106})
-        Dim TreeNode108 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Bank")
-        Dim TreeNode109 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Shop")
-        Dim TreeNode110 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shop and Bank", New System.Windows.Forms.TreeNode() {TreeNode108, TreeNode109})
-        Dim ListViewGroup10 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup11 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup12 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup13 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Speed", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup14 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Walk Animation", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup15 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Fixed Direction", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup16 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("WalkThrough", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup17 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Position", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewGroup18 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Graphic", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem44 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Up")
-        Dim ListViewItem45 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Down")
-        Dim ListViewItem46 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move left")
-        Dim ListViewItem47 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Right")
-        Dim ListViewItem48 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Randomly")
-        Dim ListViewItem49 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move To Player***")
-        Dim ListViewItem50 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move from Player***")
-        Dim ListViewItem51 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Forwards")
-        Dim ListViewItem52 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Backwards")
-        Dim ListViewItem53 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 100Ms")
-        Dim ListViewItem54 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 500Ms")
-        Dim ListViewItem55 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 1000Ms")
-        Dim ListViewItem56 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Up")
-        Dim ListViewItem57 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Down")
-        Dim ListViewItem58 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Left")
-        Dim ListViewItem59 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Right")
-        Dim ListViewItem60 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Right")
-        Dim ListViewItem61 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Left")
-        Dim ListViewItem62 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 180DG")
-        Dim ListViewItem63 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Randomly")
-        Dim ListViewItem64 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn To Player***")
-        Dim ListViewItem65 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn From Player***")
-        Dim ListViewItem66 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 8x Slower")
-        Dim ListViewItem67 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Slower")
-        Dim ListViewItem68 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Slower")
-        Dim ListViewItem69 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed To Normal")
-        Dim ListViewItem70 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Faster")
-        Dim ListViewItem71 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Faster")
-        Dim ListViewItem72 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lowest")
-        Dim ListViewItem73 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lower")
-        Dim ListViewItem74 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Normal")
-        Dim ListViewItem75 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Higher")
-        Dim ListViewItem76 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Highest")
-        Dim ListViewItem77 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation ON")
-        Dim ListViewItem78 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation OFF")
-        Dim ListViewItem79 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction ON")
-        Dim ListViewItem80 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction OFF")
-        Dim ListViewItem81 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
-        Dim ListViewItem82 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
-        Dim ListViewItem83 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Below Player")
-        Dim ListViewItem84 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set PositionWith Player")
-        Dim ListViewItem85 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
-        Dim ListViewItem86 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show Text")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show Choices")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Add Chatbox Text")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show ChatBubble")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Messages", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4})
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Player Variable")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Player Switch")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Self Switch")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Event Processing", New System.Windows.Forms.TreeNode() {TreeNode6, TreeNode7, TreeNode8})
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Conditional Branch")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop Event Processing")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Label")
+        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("GoTo Label")
+        Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Flow Control", New System.Windows.Forms.TreeNode() {TreeNode10, TreeNode11, TreeNode12, TreeNode13})
+        Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Items")
+        Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Restore HP")
+        Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Restore MP")
+        Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Level Up")
+        Dim TreeNode19 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Level")
+        Dim TreeNode20 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Skills")
+        Dim TreeNode21 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Class")
+        Dim TreeNode22 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Sprite")
+        Dim TreeNode23 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Gender")
+        Dim TreeNode24 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change PK")
+        Dim TreeNode25 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Give Experience")
+        Dim TreeNode26 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Player Options", New System.Windows.Forms.TreeNode() {TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22, TreeNode23, TreeNode24, TreeNode25})
+        Dim TreeNode27 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Warp Player")
+        Dim TreeNode28 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Move Route")
+        Dim TreeNode29 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Wait for Route Completion")
+        Dim TreeNode30 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Force Spawn Npc")
+        Dim TreeNode31 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Hold Player")
+        Dim TreeNode32 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Release Player")
+        Dim TreeNode33 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Movement", New System.Windows.Forms.TreeNode() {TreeNode27, TreeNode28, TreeNode29, TreeNode30, TreeNode31, TreeNode32})
+        Dim TreeNode34 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Animation")
+        Dim TreeNode35 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Animation", New System.Windows.Forms.TreeNode() {TreeNode34})
+        Dim TreeNode36 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Begin Quest")
+        Dim TreeNode37 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Complete Task")
+        Dim TreeNode38 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("End Quest")
+        Dim TreeNode39 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Questing", New System.Windows.Forms.TreeNode() {TreeNode36, TreeNode37, TreeNode38})
+        Dim TreeNode40 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Fog")
+        Dim TreeNode41 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Weather")
+        Dim TreeNode42 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Map Tinting")
+        Dim TreeNode43 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Map Functions", New System.Windows.Forms.TreeNode() {TreeNode40, TreeNode41, TreeNode42})
+        Dim TreeNode44 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Play BGM")
+        Dim TreeNode45 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop BGM")
+        Dim TreeNode46 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Play Sound")
+        Dim TreeNode47 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Stop Sounds")
+        Dim TreeNode48 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Music and Sound", New System.Windows.Forms.TreeNode() {TreeNode44, TreeNode45, TreeNode46, TreeNode47})
+        Dim TreeNode49 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Wait...")
+        Dim TreeNode50 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Set Access")
+        Dim TreeNode51 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Custom Script")
+        Dim TreeNode52 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Etc...", New System.Windows.Forms.TreeNode() {TreeNode49, TreeNode50, TreeNode51})
+        Dim TreeNode53 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Bank")
+        Dim TreeNode54 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Open Shop")
+        Dim TreeNode55 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shop and Bank", New System.Windows.Forms.TreeNode() {TreeNode53, TreeNode54})
+        Dim TreeNode56 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade In")
+        Dim TreeNode57 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade Out")
+        Dim TreeNode58 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("CutScene Options", New System.Windows.Forms.TreeNode() {TreeNode56, TreeNode57})
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Speed", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup5 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Walk Animation", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup6 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Fixed Direction", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup7 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("WalkThrough", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup8 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Position", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewGroup9 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Set Graphic", System.Windows.Forms.HorizontalAlignment.Left)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Up")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Down")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move left")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Right")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move Randomly")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move To Player***")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Move from Player***")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Forwards")
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Step Backwards")
+        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 100Ms")
+        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 500Ms")
+        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Wait 1000Ms")
+        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Up")
+        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Down")
+        Dim ListViewItem15 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Left")
+        Dim ListViewItem16 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Right")
+        Dim ListViewItem17 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Right")
+        Dim ListViewItem18 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 90DG Left")
+        Dim ListViewItem19 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn 180DG")
+        Dim ListViewItem20 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn Randomly")
+        Dim ListViewItem21 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn To Player***")
+        Dim ListViewItem22 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Turn From Player***")
+        Dim ListViewItem23 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 8x Slower")
+        Dim ListViewItem24 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Slower")
+        Dim ListViewItem25 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Slower")
+        Dim ListViewItem26 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed To Normal")
+        Dim ListViewItem27 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 2x Faster")
+        Dim ListViewItem28 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Speed 4x Faster")
+        Dim ListViewItem29 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lowest")
+        Dim ListViewItem30 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Lower")
+        Dim ListViewItem31 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Normal")
+        Dim ListViewItem32 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Higher")
+        Dim ListViewItem33 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Freq. To Highest")
+        Dim ListViewItem34 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation ON")
+        Dim ListViewItem35 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walking Animation OFF")
+        Dim ListViewItem36 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction ON")
+        Dim ListViewItem37 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Fixed Direction OFF")
+        Dim ListViewItem38 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem39 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Walkthrough ON")
+        Dim ListViewItem40 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Below Player")
+        Dim ListViewItem41 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set PositionWith Player")
+        Dim ListViewItem42 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Position Above Player")
+        Dim ListViewItem43 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Set Graphic...")
         Me.tvCommands = New System.Windows.Forms.TreeView()
         Me.fraPageSetUp = New DarkUI.Controls.DarkGroupBox()
         Me.chkGlobal = New DarkUI.Controls.DarkCheckBox()
@@ -205,10 +208,11 @@ Partial Class FrmEditor_Events
         Me.lstMoveRoute = New System.Windows.Forms.ListBox()
         Me.cmbEvent = New DarkUI.Controls.DarkComboBox()
         Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
+        Me.pnlGraphicSel = New System.Windows.Forms.Panel()
+        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
         Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
         Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.picGraphicSel = New System.Windows.Forms.PictureBox()
         Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
         Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
@@ -520,7 +524,6 @@ Partial Class FrmEditor_Events
         Me.lblRandomLabel25 = New System.Windows.Forms.Label()
         Me.btnRenameSwitch = New System.Windows.Forms.Button()
         Me.btnLabel_Ok = New System.Windows.Forms.Button()
-        Me.pnlGraphicSel = New System.Windows.Forms.Panel()
         Me.fraPageSetUp.SuspendLayout()
         Me.tabPages.SuspendLayout()
         Me.pnlTabPage.SuspendLayout()
@@ -538,6 +541,7 @@ Partial Class FrmEditor_Events
         Me.fraMoveRoute.SuspendLayout()
         Me.DarkGroupBox10.SuspendLayout()
         Me.fraGraphic.SuspendLayout()
+        Me.pnlGraphicSel.SuspendLayout()
         CType(Me.picGraphicSel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudGraphic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraDialogue.SuspendLayout()
@@ -622,7 +626,6 @@ Partial Class FrmEditor_Events
         Me.FraRenaming.SuspendLayout()
         Me.fraRandom10.SuspendLayout()
         Me.DarkGroupBox9.SuspendLayout()
-        Me.pnlGraphicSel.SuspendLayout()
         Me.SuspendLayout()
         '
         'tvCommands
@@ -632,117 +635,123 @@ Partial Class FrmEditor_Events
         Me.tvCommands.ForeColor = System.Drawing.Color.Gainsboro
         Me.tvCommands.Location = New System.Drawing.Point(6, 3)
         Me.tvCommands.Name = "tvCommands"
+        TreeNode1.Name = "Node1"
+        TreeNode1.Text = "Show Text"
+        TreeNode2.Name = "Node2"
+        TreeNode2.Text = "Show Choices"
+        TreeNode3.Name = "Node3"
+        TreeNode3.Text = "Add Chatbox Text"
+        TreeNode4.Name = "Node5"
+        TreeNode4.Text = "Show ChatBubble"
+        TreeNode5.Name = "NodeMessages"
+        TreeNode5.Text = "Messages"
+        TreeNode6.Name = "Node1"
+        TreeNode6.Text = "Set Player Variable"
+        TreeNode7.Name = "Node2"
+        TreeNode7.Text = "Set Player Switch"
+        TreeNode8.Name = "Node3"
+        TreeNode8.Text = "Set Self Switch"
+        TreeNode9.Name = "NodeProcessing"
+        TreeNode9.Text = "Event Processing"
+        TreeNode10.Name = "Node1"
+        TreeNode10.Text = "Conditional Branch"
+        TreeNode11.Name = "Node2"
+        TreeNode11.Text = "Stop Event Processing"
+        TreeNode12.Name = "Node3"
+        TreeNode12.Text = "Label"
+        TreeNode13.Name = "Node4"
+        TreeNode13.Text = "GoTo Label"
+        TreeNode14.Name = "NodeFlowControl"
+        TreeNode14.Text = "Flow Control"
+        TreeNode15.Name = "Node1"
+        TreeNode15.Text = "Change Items"
+        TreeNode16.Name = "Node2"
+        TreeNode16.Text = "Restore HP"
+        TreeNode17.Name = "Node3"
+        TreeNode17.Text = "Restore MP"
+        TreeNode18.Name = "Node4"
+        TreeNode18.Text = "Level Up"
+        TreeNode19.Name = "Node5"
+        TreeNode19.Text = "Change Level"
+        TreeNode20.Name = "Node6"
+        TreeNode20.Text = "Change Skills"
+        TreeNode21.Name = "Node7"
+        TreeNode21.Text = "Change Class"
+        TreeNode22.Name = "Node8"
+        TreeNode22.Text = "Change Sprite"
+        TreeNode23.Name = "Node9"
+        TreeNode23.Text = "Change Gender"
+        TreeNode24.Name = "Node10"
+        TreeNode24.Text = "Change PK"
+        TreeNode25.Name = "Node11"
+        TreeNode25.Text = "Give Experience"
+        TreeNode26.Name = "NodePlayerOptions"
+        TreeNode26.Text = "Player Options"
+        TreeNode27.Name = "Node1"
+        TreeNode27.Text = "Warp Player"
+        TreeNode28.Name = "Node2"
+        TreeNode28.Text = "Set Move Route"
+        TreeNode29.Name = "Node3"
+        TreeNode29.Text = "Wait for Route Completion"
+        TreeNode30.Name = "Node4"
+        TreeNode30.Text = "Force Spawn Npc"
+        TreeNode31.Name = "Node5"
+        TreeNode31.Text = "Hold Player"
+        TreeNode32.Name = "Node6"
+        TreeNode32.Text = "Release Player"
+        TreeNode33.Name = "NodeMovement"
+        TreeNode33.Text = "Movement"
+        TreeNode34.Name = "Node1"
+        TreeNode34.Text = "Animation"
+        TreeNode35.Name = "NodeAnimation"
+        TreeNode35.Text = "Animation"
+        TreeNode36.Name = "Node1"
+        TreeNode36.Text = "Begin Quest"
+        TreeNode37.Name = "Node2"
+        TreeNode37.Text = "Complete Task"
+        TreeNode38.Name = "Node3"
+        TreeNode38.Text = "End Quest"
+        TreeNode39.Name = "NodeQuesting"
+        TreeNode39.Text = "Questing"
+        TreeNode40.Name = "Node1"
+        TreeNode40.Text = "Set Fog"
+        TreeNode41.Name = "Node2"
+        TreeNode41.Text = "Set Weather"
+        TreeNode42.Name = "Node3"
+        TreeNode42.Text = "Set Map Tinting"
+        TreeNode43.Name = "NodeMapFunctions"
+        TreeNode43.Text = "Map Functions"
+        TreeNode44.Name = "Node1"
+        TreeNode44.Text = "Play BGM"
+        TreeNode45.Name = "Node2"
+        TreeNode45.Text = "Stop BGM"
+        TreeNode46.Name = "Node3"
+        TreeNode46.Text = "Play Sound"
+        TreeNode47.Name = "Node4"
+        TreeNode47.Text = "Stop Sounds"
+        TreeNode48.Name = "NodeSound"
+        TreeNode48.Text = "Music and Sound"
+        TreeNode49.Name = "Node1"
+        TreeNode49.Text = "Wait..."
+        TreeNode50.Name = "Node2"
+        TreeNode50.Text = "Set Access"
+        TreeNode51.Name = "Node3"
+        TreeNode51.Text = "Custom Script"
+        TreeNode52.Name = "NodeEtc"
+        TreeNode52.Text = "Etc..."
+        TreeNode53.Name = "Node1"
+        TreeNode53.Text = "Open Bank"
+        TreeNode54.Name = "Node2"
+        TreeNode54.Text = "Open Shop"
+        TreeNode55.Name = "NodeShopBank"
+        TreeNode55.Text = "Shop and Bank"
         TreeNode56.Name = "Node1"
-        TreeNode56.Text = "Show Text"
+        TreeNode56.Text = "Fade In"
         TreeNode57.Name = "Node2"
-        TreeNode57.Text = "Show Choices"
-        TreeNode58.Name = "Node3"
-        TreeNode58.Text = "Add Chatbox Text"
-        TreeNode59.Name = "Node5"
-        TreeNode59.Text = "Show ChatBubble"
-        TreeNode60.Name = "NodeMessages"
-        TreeNode60.Text = "Messages"
-        TreeNode61.Name = "Node1"
-        TreeNode61.Text = "Set Player Variable"
-        TreeNode62.Name = "Node2"
-        TreeNode62.Text = "Set Player Switch"
-        TreeNode63.Name = "Node3"
-        TreeNode63.Text = "Set Self Switch"
-        TreeNode64.Name = "NodeProcessing"
-        TreeNode64.Text = "Event Processing"
-        TreeNode65.Name = "Node1"
-        TreeNode65.Text = "Conditional Branch"
-        TreeNode66.Name = "Node2"
-        TreeNode66.Text = "Stop Event Processing"
-        TreeNode67.Name = "Node3"
-        TreeNode67.Text = "Label"
-        TreeNode68.Name = "Node4"
-        TreeNode68.Text = "GoTo Label"
-        TreeNode69.Name = "NodeFlowControl"
-        TreeNode69.Text = "Flow Control"
-        TreeNode70.Name = "Node1"
-        TreeNode70.Text = "Change Items"
-        TreeNode71.Name = "Node2"
-        TreeNode71.Text = "Restore HP"
-        TreeNode72.Name = "Node3"
-        TreeNode72.Text = "Restore MP"
-        TreeNode73.Name = "Node4"
-        TreeNode73.Text = "Level Up"
-        TreeNode74.Name = "Node5"
-        TreeNode74.Text = "Change Level"
-        TreeNode75.Name = "Node6"
-        TreeNode75.Text = "Change Skills"
-        TreeNode76.Name = "Node7"
-        TreeNode76.Text = "Change Class"
-        TreeNode77.Name = "Node8"
-        TreeNode77.Text = "Change Sprite"
-        TreeNode78.Name = "Node9"
-        TreeNode78.Text = "Change Gender"
-        TreeNode79.Name = "Node10"
-        TreeNode79.Text = "Change PK"
-        TreeNode80.Name = "Node11"
-        TreeNode80.Text = "Give Experience"
-        TreeNode81.Name = "NodePlayerOptions"
-        TreeNode81.Text = "Player Options"
-        TreeNode82.Name = "Node1"
-        TreeNode82.Text = "Warp Player"
-        TreeNode83.Name = "Node2"
-        TreeNode83.Text = "Set Move Route"
-        TreeNode84.Name = "Node3"
-        TreeNode84.Text = "Wait for Route Completion"
-        TreeNode85.Name = "Node4"
-        TreeNode85.Text = "Force Spawn Npc"
-        TreeNode86.Name = "Node5"
-        TreeNode86.Text = "Hold Player"
-        TreeNode87.Name = "Node6"
-        TreeNode87.Text = "Release Player"
-        TreeNode88.Name = "NodeMovement"
-        TreeNode88.Text = "Movement"
-        TreeNode89.Name = "Node1"
-        TreeNode89.Text = "Animation"
-        TreeNode90.Name = "NodeAnimation"
-        TreeNode90.Text = "Animation"
-        TreeNode91.Name = "Node1"
-        TreeNode91.Text = "Begin Quest"
-        TreeNode92.Name = "Node2"
-        TreeNode92.Text = "Complete Task"
-        TreeNode93.Name = "Node3"
-        TreeNode93.Text = "End Quest"
-        TreeNode94.Name = "NodeQuesting"
-        TreeNode94.Text = "Questing"
-        TreeNode95.Name = "Node1"
-        TreeNode95.Text = "Set Fog"
-        TreeNode96.Name = "Node2"
-        TreeNode96.Text = "Set Weather"
-        TreeNode97.Name = "Node3"
-        TreeNode97.Text = "Set Map Tinting"
-        TreeNode98.Name = "NodeMapFunctions"
-        TreeNode98.Text = "Map Functions"
-        TreeNode99.Name = "Node1"
-        TreeNode99.Text = "Play BGM"
-        TreeNode100.Name = "Node2"
-        TreeNode100.Text = "Stop BGM"
-        TreeNode101.Name = "Node3"
-        TreeNode101.Text = "Play Sound"
-        TreeNode102.Name = "Node4"
-        TreeNode102.Text = "Stop Sounds"
-        TreeNode103.Name = "NodeSound"
-        TreeNode103.Text = "Music and Sound"
-        TreeNode104.Name = "Node1"
-        TreeNode104.Text = "Wait..."
-        TreeNode105.Name = "Node2"
-        TreeNode105.Text = "Set Access"
-        TreeNode106.Name = "Node3"
-        TreeNode106.Text = "Custom Script"
-        TreeNode107.Name = "NodeEtc"
-        TreeNode107.Text = "Etc..."
-        TreeNode108.Name = "Node1"
-        TreeNode108.Text = "Open Bank"
-        TreeNode109.Name = "Node2"
-        TreeNode109.Text = "Open Shop"
-        TreeNode110.Name = "NodeShopBank"
-        TreeNode110.Text = "Shop and Bank"
-        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode60, TreeNode64, TreeNode69, TreeNode81, TreeNode88, TreeNode90, TreeNode94, TreeNode98, TreeNode103, TreeNode107, TreeNode110})
+        TreeNode57.Text = "Fade Out"
+        TreeNode58.Name = "Node0"
+        TreeNode58.Text = "CutScene Options"
+        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode9, TreeNode14, TreeNode26, TreeNode33, TreeNode35, TreeNode39, TreeNode43, TreeNode48, TreeNode52, TreeNode55, TreeNode58})
         Me.tvCommands.Size = New System.Drawing.Size(381, 443)
         Me.tvCommands.TabIndex = 1
         '
@@ -1571,72 +1580,72 @@ Partial Class FrmEditor_Events
         Me.lstvwMoveRoute.Dock = System.Windows.Forms.DockStyle.Top
         Me.lstvwMoveRoute.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstvwMoveRoute.ForeColor = System.Drawing.Color.Gainsboro
-        ListViewGroup10.Header = "Movement"
-        ListViewGroup10.Name = "lstVgMovement"
-        ListViewGroup11.Header = "Wait"
-        ListViewGroup11.Name = "lstVgWait"
-        ListViewGroup12.Header = "Turning"
-        ListViewGroup12.Name = "lstVgTurn"
-        ListViewGroup13.Header = "Speed"
-        ListViewGroup13.Name = "lstVgSpeed"
-        ListViewGroup14.Header = "Walk Animation"
-        ListViewGroup14.Name = "lstVgWalk"
-        ListViewGroup15.Header = "Fixed Direction"
-        ListViewGroup15.Name = "lstVgDirection"
-        ListViewGroup16.Header = "WalkThrough"
-        ListViewGroup16.Name = "lstVgWalkThrough"
-        ListViewGroup17.Header = "Set Position"
-        ListViewGroup17.Name = "lstVgSetposition"
-        ListViewGroup18.Header = "Set Graphic"
-        ListViewGroup18.Name = "lstVgSetGraphic"
-        Me.lstvwMoveRoute.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup10, ListViewGroup11, ListViewGroup12, ListViewGroup13, ListViewGroup14, ListViewGroup15, ListViewGroup16, ListViewGroup17, ListViewGroup18})
+        ListViewGroup1.Header = "Movement"
+        ListViewGroup1.Name = "lstVgMovement"
+        ListViewGroup2.Header = "Wait"
+        ListViewGroup2.Name = "lstVgWait"
+        ListViewGroup3.Header = "Turning"
+        ListViewGroup3.Name = "lstVgTurn"
+        ListViewGroup4.Header = "Speed"
+        ListViewGroup4.Name = "lstVgSpeed"
+        ListViewGroup5.Header = "Walk Animation"
+        ListViewGroup5.Name = "lstVgWalk"
+        ListViewGroup6.Header = "Fixed Direction"
+        ListViewGroup6.Name = "lstVgDirection"
+        ListViewGroup7.Header = "WalkThrough"
+        ListViewGroup7.Name = "lstVgWalkThrough"
+        ListViewGroup8.Header = "Set Position"
+        ListViewGroup8.Name = "lstVgSetposition"
+        ListViewGroup9.Header = "Set Graphic"
+        ListViewGroup9.Name = "lstVgSetGraphic"
+        Me.lstvwMoveRoute.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2, ListViewGroup3, ListViewGroup4, ListViewGroup5, ListViewGroup6, ListViewGroup7, ListViewGroup8, ListViewGroup9})
         Me.lstvwMoveRoute.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        ListViewItem44.Group = ListViewGroup10
-        ListViewItem45.Group = ListViewGroup10
-        ListViewItem45.IndentCount = 1
-        ListViewItem46.Group = ListViewGroup10
-        ListViewItem47.Group = ListViewGroup10
-        ListViewItem47.IndentCount = 1
-        ListViewItem48.Group = ListViewGroup10
-        ListViewItem49.Group = ListViewGroup10
-        ListViewItem50.Group = ListViewGroup10
-        ListViewItem51.Group = ListViewGroup10
-        ListViewItem52.Group = ListViewGroup10
-        ListViewItem53.Group = ListViewGroup11
-        ListViewItem54.Group = ListViewGroup11
-        ListViewItem55.Group = ListViewGroup11
-        ListViewItem56.Group = ListViewGroup12
-        ListViewItem57.Group = ListViewGroup12
-        ListViewItem58.Group = ListViewGroup12
-        ListViewItem59.Group = ListViewGroup12
-        ListViewItem60.Group = ListViewGroup12
-        ListViewItem61.Group = ListViewGroup12
-        ListViewItem62.Group = ListViewGroup12
-        ListViewItem63.Group = ListViewGroup12
-        ListViewItem64.Group = ListViewGroup12
-        ListViewItem65.Group = ListViewGroup12
-        ListViewItem66.Group = ListViewGroup13
-        ListViewItem67.Group = ListViewGroup13
-        ListViewItem68.Group = ListViewGroup13
-        ListViewItem69.Group = ListViewGroup13
-        ListViewItem70.Group = ListViewGroup13
-        ListViewItem71.Group = ListViewGroup13
-        ListViewItem72.Group = ListViewGroup13
-        ListViewItem73.Group = ListViewGroup13
-        ListViewItem74.Group = ListViewGroup13
-        ListViewItem75.Group = ListViewGroup13
-        ListViewItem76.Group = ListViewGroup13
-        ListViewItem77.Group = ListViewGroup14
-        ListViewItem78.Group = ListViewGroup14
-        ListViewItem79.Group = ListViewGroup15
-        ListViewItem80.Group = ListViewGroup15
-        ListViewItem81.Group = ListViewGroup16
-        ListViewItem82.Group = ListViewGroup16
-        ListViewItem83.Group = ListViewGroup17
-        ListViewItem84.Group = ListViewGroup17
-        ListViewItem85.Group = ListViewGroup17
-        ListViewItem86.Group = ListViewGroup18
-        Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem44, ListViewItem45, ListViewItem46, ListViewItem47, ListViewItem48, ListViewItem49, ListViewItem50, ListViewItem51, ListViewItem52, ListViewItem53, ListViewItem54, ListViewItem55, ListViewItem56, ListViewItem57, ListViewItem58, ListViewItem59, ListViewItem60, ListViewItem61, ListViewItem62, ListViewItem63, ListViewItem64, ListViewItem65, ListViewItem66, ListViewItem67, ListViewItem68, ListViewItem69, ListViewItem70, ListViewItem71, ListViewItem72, ListViewItem73, ListViewItem74, ListViewItem75, ListViewItem76, ListViewItem77, ListViewItem78, ListViewItem79, ListViewItem80, ListViewItem81, ListViewItem82, ListViewItem83, ListViewItem84, ListViewItem85, ListViewItem86})
+        ListViewItem1.Group = ListViewGroup1
+        ListViewItem2.Group = ListViewGroup1
+        ListViewItem2.IndentCount = 1
+        ListViewItem3.Group = ListViewGroup1
+        ListViewItem4.Group = ListViewGroup1
+        ListViewItem4.IndentCount = 1
+        ListViewItem5.Group = ListViewGroup1
+        ListViewItem6.Group = ListViewGroup1
+        ListViewItem7.Group = ListViewGroup1
+        ListViewItem8.Group = ListViewGroup1
+        ListViewItem9.Group = ListViewGroup1
+        ListViewItem10.Group = ListViewGroup2
+        ListViewItem11.Group = ListViewGroup2
+        ListViewItem12.Group = ListViewGroup2
+        ListViewItem13.Group = ListViewGroup3
+        ListViewItem14.Group = ListViewGroup3
+        ListViewItem15.Group = ListViewGroup3
+        ListViewItem16.Group = ListViewGroup3
+        ListViewItem17.Group = ListViewGroup3
+        ListViewItem18.Group = ListViewGroup3
+        ListViewItem19.Group = ListViewGroup3
+        ListViewItem20.Group = ListViewGroup3
+        ListViewItem21.Group = ListViewGroup3
+        ListViewItem22.Group = ListViewGroup3
+        ListViewItem23.Group = ListViewGroup4
+        ListViewItem24.Group = ListViewGroup4
+        ListViewItem25.Group = ListViewGroup4
+        ListViewItem26.Group = ListViewGroup4
+        ListViewItem27.Group = ListViewGroup4
+        ListViewItem28.Group = ListViewGroup4
+        ListViewItem29.Group = ListViewGroup4
+        ListViewItem30.Group = ListViewGroup4
+        ListViewItem31.Group = ListViewGroup4
+        ListViewItem32.Group = ListViewGroup4
+        ListViewItem33.Group = ListViewGroup4
+        ListViewItem34.Group = ListViewGroup5
+        ListViewItem35.Group = ListViewGroup5
+        ListViewItem36.Group = ListViewGroup6
+        ListViewItem37.Group = ListViewGroup6
+        ListViewItem38.Group = ListViewGroup7
+        ListViewItem39.Group = ListViewGroup7
+        ListViewItem40.Group = ListViewGroup8
+        ListViewItem41.Group = ListViewGroup8
+        ListViewItem42.Group = ListViewGroup8
+        ListViewItem43.Group = ListViewGroup9
+        Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28, ListViewItem29, ListViewItem30, ListViewItem31, ListViewItem32, ListViewItem33, ListViewItem34, ListViewItem35, ListViewItem36, ListViewItem37, ListViewItem38, ListViewItem39, ListViewItem40, ListViewItem41, ListViewItem42, ListViewItem43})
         Me.lstvwMoveRoute.LabelWrap = False
         Me.lstvwMoveRoute.Location = New System.Drawing.Point(3, 16)
         Me.lstvwMoveRoute.MultiSelect = False
@@ -1703,6 +1712,23 @@ Partial Class FrmEditor_Events
         Me.fraGraphic.Text = "Graphic Selection"
         Me.fraGraphic.Visible = False
         '
+        'pnlGraphicSel
+        '
+        Me.pnlGraphicSel.AutoScroll = True
+        Me.pnlGraphicSel.Controls.Add(Me.picGraphicSel)
+        Me.pnlGraphicSel.Location = New System.Drawing.Point(6, 45)
+        Me.pnlGraphicSel.Name = "pnlGraphicSel"
+        Me.pnlGraphicSel.Size = New System.Drawing.Size(808, 519)
+        Me.pnlGraphicSel.TabIndex = 9
+        '
+        'picGraphicSel
+        '
+        Me.picGraphicSel.Location = New System.Drawing.Point(0, 0)
+        Me.picGraphicSel.Name = "picGraphicSel"
+        Me.picGraphicSel.Size = New System.Drawing.Size(802, 514)
+        Me.picGraphicSel.TabIndex = 5
+        Me.picGraphicSel.TabStop = False
+        '
         'btnGraphicOk
         '
         Me.btnGraphicOk.Location = New System.Drawing.Point(652, 570)
@@ -1730,14 +1756,6 @@ Partial Class FrmEditor_Events
         Me.DarkLabel13.Size = New System.Drawing.Size(158, 13)
         Me.DarkLabel13.TabIndex = 6
         Me.DarkLabel13.Text = "Hold Shift to select multiple tiles."
-        '
-        'picGraphicSel
-        '
-        Me.picGraphicSel.Location = New System.Drawing.Point(0, 0)
-        Me.picGraphicSel.Name = "picGraphicSel"
-        Me.picGraphicSel.Size = New System.Drawing.Size(802, 514)
-        Me.picGraphicSel.TabIndex = 5
-        Me.picGraphicSel.TabStop = False
         '
         'nudGraphic
         '
@@ -5381,15 +5399,6 @@ Partial Class FrmEditor_Events
         Me.btnLabel_Ok.Text = "Ok"
         Me.btnLabel_Ok.UseVisualStyleBackColor = True
         '
-        'pnlGraphicSel
-        '
-        Me.pnlGraphicSel.AutoScroll = True
-        Me.pnlGraphicSel.Controls.Add(Me.picGraphicSel)
-        Me.pnlGraphicSel.Location = New System.Drawing.Point(6, 45)
-        Me.pnlGraphicSel.Name = "pnlGraphicSel"
-        Me.pnlGraphicSel.Size = New System.Drawing.Size(808, 519)
-        Me.pnlGraphicSel.TabIndex = 9
-        '
         'FrmEditor_Events
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5436,6 +5445,7 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox10.ResumeLayout(False)
         Me.fraGraphic.ResumeLayout(False)
         Me.fraGraphic.PerformLayout()
+        Me.pnlGraphicSel.ResumeLayout(False)
         CType(Me.picGraphicSel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudGraphic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraDialogue.ResumeLayout(False)
@@ -5552,7 +5562,6 @@ Partial Class FrmEditor_Events
         Me.fraRandom10.PerformLayout()
         Me.DarkGroupBox9.ResumeLayout(False)
         Me.DarkGroupBox9.PerformLayout()
-        Me.pnlGraphicSel.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

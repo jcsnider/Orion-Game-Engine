@@ -14,7 +14,7 @@ Module ClientGameLogic
         Dim tmpfps As Integer, tmplps as integer, WalkTimer As Integer, FrameTime As Integer
         Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
-        Dim rendercount as integer
+        Dim rendercount As Integer, Fadetmr As Integer
 
         starttime = GetTickCount()
         FrmMenu.lblNextChar.Left = lblnextcharleft
@@ -287,8 +287,26 @@ Module ClientGameLogic
                 tmrweather = Tick + 50
             End If
 
+            If Fadetmr < Tick Then
+                If FadeType <> 2 Then
+                    If FadeType = 1 Then
+                        If FadeAmount = 255 Then
+                        Else
+                            FadeAmount = FadeAmount + 5
+                        End If
+                    ElseIf FadeType = 0 Then
+                        If FadeAmount = 0 Then
+                            UseFade = False
+                        Else
+                            FadeAmount = FadeAmount - 5
+                        End If
+                    End If
+                End If
+                Fadetmr = Tick + 30
+            End If
+
             If rendercount < tick Then
-                'Auctual Game Loop Stuff :/
+                'Actual Game Loop Stuff :/
                 Render_Graphics()
                 tmplps = tmplps + 1
                 rendercount = Tick + 16

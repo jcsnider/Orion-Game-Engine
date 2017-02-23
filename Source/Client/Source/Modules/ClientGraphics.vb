@@ -199,6 +199,7 @@ Module ClientGraphics
     Public PetbarGFXInfo As GraphicInfo
 
     Public MapTintSprite As Sprite
+    Public MapFadeSprite As Sprite
 
     ' Number of graphic files
     Public NumTileSets As Integer
@@ -2129,6 +2130,8 @@ Module ClientGraphics
         'Render GUI
         DrawGUI()
 
+        DrawMapFade()
+
         'and finally show everything on screen
         GameWindow.Display()
     End Sub
@@ -2541,6 +2544,19 @@ Module ClientGraphics
         MapTintSprite.Position = New Vector2f(0, 0)
 
         GameWindow.Draw(MapTintSprite)
+
+    End Sub
+
+    Public Sub DrawMapFade()
+        If UseFade = False Then Exit Sub
+
+        MapFadeSprite = New Sprite(New Texture(New SFML.Graphics.Image(GameWindow.Size.X, GameWindow.Size.Y, SFML.Graphics.Color.Black)))
+        MapFadeSprite.Color = New SFML.Graphics.Color(0, 0, 0, FadeAmount)
+        MapFadeSprite.TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+
+        MapFadeSprite.Position = New Vector2f(0, 0)
+
+        GameWindow.Draw(MapFadeSprite)
 
     End Sub
 

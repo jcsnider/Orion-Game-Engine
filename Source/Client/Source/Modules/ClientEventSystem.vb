@@ -2681,9 +2681,11 @@ newlist:
 
         Select Case effectType
             Case EFFECT_TYPE_FADEIN
+                UseFade = True
                 FadeType = 1
                 FadeAmount = 0
             Case EFFECT_TYPE_FADEOUT
+                UseFade = True
                 FadeType = 0
                 FadeAmount = 255
             Case EFFECT_TYPE_FLASH

@@ -623,12 +623,12 @@
         'cutscene options
 
             'Fade in
-            Case 46
+            Case "Fade In"
                 AddCommand(EventType.evFadeIn)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Fade out
-            Case 47
+            Case "Fade Out"
                 AddCommand(EventType.evFadeOut)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False

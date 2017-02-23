@@ -14,6 +14,7 @@ Module ClientGlobals
     Public TilesetsClr() As Color
     Public LastTileset As Byte
 
+    Public UseFade As Boolean
     Public FadeType As Integer
     Public FadeAmount As Integer
     Public FlashTimer As Integer
