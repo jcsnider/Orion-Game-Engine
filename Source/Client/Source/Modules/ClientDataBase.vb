@@ -493,16 +493,42 @@ Module ClientDataBase
     Sub ClearAnimations()
         Dim i As Integer
 
+        ReDim Animation(MAX_ANIMATIONS)
+
         For i = 1 To MAX_ANIMATIONS
             ClearAnimation(i)
         Next
 
     End Sub
 
+    Sub ClearAnimInstances()
+        Dim i As Integer
+
+        ReDim AnimInstance(MAX_ANIMATIONS)
+
+        For i = 0 To MAX_ANIMATIONS
+            For x = 0 To 1
+                ReDim AnimInstance(i).Timer(x)
+            Next
+            For x = 0 To 1
+                ReDim AnimInstance(i).Used(x)
+            Next
+            For x = 0 To 1
+                ReDim AnimInstance(i).LoopIndex(x)
+            Next
+            For x = 0 To 1
+                ReDim AnimInstance(i).FrameIndex(x)
+            Next
+
+            ClearAnimInstance(i)
+        Next
+    End Sub
+
     Sub ClearAnimInstance(ByVal index As Integer)
         AnimInstance(index).Animation = 0
         AnimInstance(index).X = 0
         AnimInstance(index).Y = 0
+
         For i = 0 To UBound(AnimInstance(index).Used)
             AnimInstance(index).Used(i) = False
         Next
@@ -541,10 +567,15 @@ Module ClientDataBase
         Shop(Index) = New ShopRec
         Shop(Index).Name = ""
         ReDim Shop(Index).TradeItem(MAX_TRADES)
+        For x = 0 To MAX_TRADES
+            ReDim Shop(Index).TradeItem(x)
+        Next
     End Sub
 
     Sub ClearShops()
         Dim i As Integer
+
+        ReDim Shop(MAX_SHOPS)
 
         For i = 1 To MAX_SHOPS
             ClearShop(i)

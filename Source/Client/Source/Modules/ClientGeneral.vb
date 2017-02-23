@@ -33,11 +33,9 @@ Module ClientGeneral
         'quests
         ClearQuests()
 
-        ReDim Map.Npc(MAX_MAP_NPCS)
-
         'npc's
         ClearNpcs()
-
+        ReDim Map.Npc(MAX_MAP_NPCS)
         ReDim MapNpc(MAX_MAP_NPCS)
         For i = 0 To MAX_MAP_NPCS
             For x = 0 To Vitals.Count - 1
@@ -45,44 +43,11 @@ Module ClientGeneral
             Next
         Next
 
-        ReDim Shop(MAX_SHOPS)
-        For i = 0 To MAX_SHOPS
-            For x = 0 To MAX_TRADES
-                ReDim Shop(i).TradeItem(x)
-            Next
-        Next
+        ClearShops()
 
-        ReDim Animation(MAX_ANIMATIONS)
-        For i = 0 To MAX_ANIMATIONS
-            For x = 0 To 1
-                ReDim Animation(i).Sprite(x)
-            Next
-            For x = 0 To 1
-                ReDim Animation(i).Frames(x)
-            Next
-            For x = 0 To 1
-                ReDim Animation(i).LoopCount(x)
-            Next
-            For x = 0 To 1
-                ReDim Animation(i).looptime(x)
-            Next
-        Next
+        ClearAnimations()
 
-        ReDim AnimInstance(MAX_ANIMATIONS)
-        For i = 0 To MAX_ANIMATIONS
-            For x = 0 To 1
-                ReDim AnimInstance(i).Timer(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).Used(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).LoopIndex(x)
-            Next
-            For x = 0 To 1
-                ReDim AnimInstance(i).FrameIndex(x)
-            Next
-        Next
+        ClearAnimInstances()
 
         ClearBank()
 
