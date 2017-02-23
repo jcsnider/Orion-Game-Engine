@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms
+Imports Orion
 
 Public Class FrmMainGame
 #Region "Frm Code"
@@ -21,21 +22,20 @@ Public Class FrmMainGame
         Application.Exit()
     End Sub
 
+    Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+        ChatInput.ProcessCharacter(e)
+    End Sub
+
     Private Sub FrmMainGame_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
-
-        If inChat = True Then
-            If Not e.KeyCode = Keys.Enter Then
-                If MyText = Nothing Then MyText = ""
-
-                If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
-                    MyText = MyText + Clipboard.GetText
-                End If
+        If (ChatInput.ProcessKey(e)) Then
+            If (e.KeyCode = Keys.Enter) Then
+                HandlePressEnter()
             End If
+        End If
 
-            If e.KeyCode = Keys.Back Then
-                If MyText.Length > 0 Then
-                    MyText = MyText.Remove(MyText.Length - 1)
-                End If
+        If ChatInput.Active Then
+            If (e.KeyCode = Keys.Enter) Then
+                HandlePressEnter()
             End If
         Else
             If e.KeyCode = Keys.S Then VbKeyDown = True
@@ -50,15 +50,6 @@ Public Class FrmMainGame
                 CheckMapGetItem()
             End If
         End If
-
-        If e.KeyCode = Keys.Enter Then
-            HandlePressEnter()
-
-            inChat = Not inChat
-            e.Handled = True
-            e.SuppressKeyPress = True
-        End If
-
     End Sub
 
     Private Sub FrmMainGame_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
@@ -134,7 +125,7 @@ Public Class FrmMainGame
         End If
 
         'lets check for keys for inventory etc
-        If Not inChat Then
+        If Not ChatInput.Active Then
             'inventory
             If e.KeyCode = Keys.I Then
                 pnlInventoryVisible = Not pnlInventoryVisible
@@ -177,19 +168,6 @@ Public Class FrmMainGame
         tmpCurrencyItem = 0
         txtCurrency.Text = ""
         CurrencyMenu = 0 ' clear
-    End Sub
-
-    Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
-        If inChat = True Then
-            If MyText = Nothing Then MyText = ""
-
-            If e.KeyChar = vbBack Then Exit Sub
-
-            If MyText.Length < 100 Then
-                MyText = MyText + e.KeyChar
-            End If
-        End If
-
     End Sub
 #End Region
 
@@ -348,10 +326,9 @@ Public Class FrmMainGame
         End If
 
         If e.KeyCode = Keys.Enter Then
+            ChatInput.ProcessKey(e)
             HandlePressEnter()
             CheckMapGetItem()
-            inChat = Not inChat
-            e.SuppressKeyPress = True
         End If
     End Sub
 

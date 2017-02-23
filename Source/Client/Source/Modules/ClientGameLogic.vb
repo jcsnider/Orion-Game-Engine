@@ -465,11 +465,11 @@ Module ClientGameLogic
         Dim n As Integer
         Dim Command() As String
         Dim Buffer As ByteBuffer
-        ChatText = Trim$(MyText)
+        ChatText = Trim$(ChatInput.CurrentMessage)
         Name = ""
 
         If Len(ChatText) = 0 Then Exit Sub
-        MyText = LCase$(ChatText)
+        ChatInput.CurrentMessage = LCase$(ChatText)
 
         If EventChat = True Then
             If EventChatType = 0 Then
@@ -494,19 +494,19 @@ Module ClientGameLogic
                 BroadcastMsg(ChatText) '("Привет, русский чат")
             End If
 
-            MyText = ""
+            ChatInput.CurrentMessage = ""
             Exit Sub
         End If
 
         ' party message
         If Left$(ChatText, 1) = "-" Then
-            MyText = Mid$(ChatText, 2, Len(ChatText) - 1)
+            ChatInput.CurrentMessage = Mid$(ChatText, 2, Len(ChatText) - 1)
 
             If Len(ChatText) > 0 Then
-                SendPartyChatMsg(MyText)
+                SendPartyChatMsg(ChatInput.CurrentMessage)
             End If
 
-            MyText = ""
+            ChatInput.CurrentMessage = ""
             Exit Sub
         End If
 
@@ -526,22 +526,22 @@ Module ClientGameLogic
 
             Next
 
-            MyText = Trim$(Mid$(ChatText, i, Len(ChatText) - 1))
+            ChatInput.CurrentMessage = Trim$(Mid$(ChatText, i, Len(ChatText) - 1))
 
             ' Make sure they are actually sending something
-            If Len(MyText) > 0 Then
+            If Len(ChatInput.CurrentMessage) > 0 Then
                 ' Send the message to the player
-                PlayerMsg(MyText, Name)
+                PlayerMsg(ChatInput.CurrentMessage, Name)
             Else
                 AddText(Strings.Get("chatcommand", "playermsg"), ColorType.Yellow)
             End If
 
-            MyText = ""
+            ChatInput.CurrentMessage = ""
             Exit Sub
         End If
 
-        If Left$(MyText, 1) = "/" Then
-            Command = Split(MyText, Space(1))
+        If Left$(ChatInput.CurrentMessage, 1) = "/" Then
+            Command = Split(ChatInput.CurrentMessage, Space(1))
 
             Select Case Command(0)
                 Case "/emote"
@@ -886,7 +886,7 @@ Module ClientGameLogic
 
             'continue label where we go instead of exiting the sub
 Continue1:
-            MyText = ""
+            ChatInput.CurrentMessage = ""
             Exit Sub
         End If
 
@@ -895,7 +895,7 @@ Continue1:
             SayMsg(ChatText)
         End If
 
-        MyText = ""
+        ChatInput.CurrentMessage = ""
     End Sub
 
     Sub CheckMapGetItem()
@@ -903,7 +903,7 @@ Continue1:
         Buffer = New ByteBuffer
 
         If GetTickCount() > Player(MyIndex).MapGetTimer + 250 Then
-            If Trim$(MyText) = "" Then
+            If Trim$(ChatInput.CurrentMessage) = "" Then
                 Player(MyIndex).MapGetTimer = GetTickCount()
                 Buffer.WriteInteger(ClientPackets.CMapGetItem)
                 SendData(Buffer.ToArray())

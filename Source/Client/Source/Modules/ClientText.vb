@@ -14,9 +14,6 @@ Module ClientText
     Public LastLineIndex As Integer = 0
     Public ScrollMod As Integer = 0
 
-    ' Game text buffer
-    Public MyText As String = ""
-
     Public Sub DrawText(ByVal X As Integer, ByVal Y As Integer, ByVal text As String, ByVal color As Color, ByVal BackColor As Color, ByRef target As RenderWindow, Optional TextSize As Byte = FONT_SIZE)
         Dim BackString As Text = New Text(text, SFMLGameFont)
         Dim FrontString As Text = New Text(text, SFMLGameFont)

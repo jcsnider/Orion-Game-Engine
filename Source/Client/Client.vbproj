@@ -101,6 +101,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Source\Modules\ClientOptions.vb" />
+    <Compile Include="Source\Chat.vb" />
     <Compile Include="Source\Forms\frmAdmin.Designer.vb">
       <DependentUpon>frmAdmin.vb</DependentUpon>
     </Compile>
