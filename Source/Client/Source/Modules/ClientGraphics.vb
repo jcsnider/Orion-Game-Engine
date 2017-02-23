@@ -960,8 +960,8 @@ Module ClientGraphics
         'first draw back image
         RenderSprite(MyChatWindowSprite, GameWindow, MyChatX, MyChatY - 5, 0, 0, MyChatWindowGFXInfo.Width, MyChatWindowGFXInfo.Height)
 
-        If Len(MyText) > 0 Then
-            Dim subText As String = MyText
+        If Len(ChatInput.CurrentMessage) > 0 Then
+            Dim subText As String = ChatInput.CurrentMessage
             While GetTextWidth(subText) > MyChatWindowGFXInfo.Width - ChatEntryPadding
                 subText = subText.Substring(1)
             End While

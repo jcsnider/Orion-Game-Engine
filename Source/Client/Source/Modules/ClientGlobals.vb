@@ -52,7 +52,6 @@ Module ClientGlobals
     Public FPS As Integer
     Public LPS As Integer
     Public PingToDraw As String
-    Public inChat As Boolean
     Public ShowRClick As Boolean
 
     Public InvItemFrame(0 To MAX_INV) As Byte ' Used for animated items
