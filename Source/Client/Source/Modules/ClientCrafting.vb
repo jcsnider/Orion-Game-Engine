@@ -3,7 +3,7 @@
 Public Module ClientCrafting
 #Region "Globals"
 
-    Public Recipe_Changed(0 To MAX_RECIPE) As Boolean
+    Public Recipe_Changed(MAX_RECIPE) As Boolean
     Public Recipe(MAX_RECIPE) As RecipeRec
     Public InitRecipeEditor As Boolean
     Public InitCrafting As Boolean
@@ -55,6 +55,8 @@ Public Module ClientCrafting
     Sub ClearRecipes()
         Dim i As Integer
 
+        ReDim Recipe(MAX_RECIPE)
+
         For i = 1 To MAX_RECIPE
             ClearRecipe(i)
         Next
@@ -82,8 +84,8 @@ Public Module ClientCrafting
 #Region "Incoming Packets"
     Sub Packet_UpdateRecipe(ByVal data() As Byte)
         Dim n As Integer, i As Integer
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SUpdateRecipe Then Exit Sub
@@ -109,8 +111,8 @@ Public Module ClientCrafting
     End Sub
 
     Sub Packet_RecipeEditor(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SRecipeEditor Then Exit Sub
@@ -121,8 +123,8 @@ Public Module ClientCrafting
     End Sub
 
     Sub Packet_SendPlayerRecipe(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer, i As Integer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer, i As Integer
+
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SSendPlayerRecipe Then Exit Sub
@@ -135,8 +137,8 @@ Public Module ClientCrafting
     End Sub
 
     Sub Packet_OpenCraft(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SOpenCraft Then Exit Sub
@@ -147,8 +149,8 @@ Public Module ClientCrafting
     End Sub
 
     Sub Packet_UpdateCraft(ByVal data() As Byte)
-        Dim Buffer As ByteBuffer, done As Byte
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer, done As Byte
+
         Buffer.WriteBytes(data)
 
         If Buffer.ReadInteger <> ServerPackets.SUpdateCraft Then Exit Sub
@@ -158,7 +160,6 @@ Public Module ClientCrafting
         If done = 1 Then
             InitCrafting = True
         Else
-
             CraftProgressValue = 0
             CraftTimerEnabled = True
         End If
@@ -169,8 +170,7 @@ Public Module ClientCrafting
 
 #Region "OutGoing Packets"
     Sub SendRequestRecipes()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(ClientPackets.CRequestRecipes)
 
@@ -179,8 +179,7 @@ Public Module ClientCrafting
     End Sub
 
     Sub SendRequestEditRecipes()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(EditorPackets.RequestEditRecipes)
 
@@ -189,8 +188,7 @@ Public Module ClientCrafting
     End Sub
 
     Sub SendSaveRecipe(ByVal RecipeNum As Integer)
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(EditorPackets.SaveRecipe)
 
@@ -213,10 +211,8 @@ Public Module ClientCrafting
     End Sub
 
     Public Sub SendCraftIt(ByVal RecipeName As String, ByVal Amount As Integer)
-        Dim Buffer As ByteBuffer, i As Integer
+        Dim Buffer As New ByteBuffer, i As Integer
         Dim recipeindex As Integer
-
-        Buffer = New ByteBuffer
 
         recipeindex = GetRecipeIndex(RecipeName)
 
@@ -229,11 +225,9 @@ Public Module ClientCrafting
 
         'enough ingredients?
         For i = 1 To MAX_INGREDIENT
-            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
-                If HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
-                    AddText(Strings.Get("crafting", "notenough"), ColorType.Red)
-                    Exit Sub
-                End If
+            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(MyIndex, Recipe(recipeindex).Ingredients(i).ItemNum) < (Amount * Recipe(recipeindex).Ingredients(i).Value) Then
+                AddText(Strings.Get("crafting", "notenough"), ColorType.Red)
+                Exit Sub
             End If
         Next
 
@@ -260,8 +254,7 @@ Public Module ClientCrafting
     End Sub
 
     Sub SendCloseCraft()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(ClientPackets.CCloseCraft)
 

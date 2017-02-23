@@ -21,7 +21,6 @@ Module ClientDataBase
 #Region "Assets Check"
     Public Sub CheckTilesets()
         Dim i As Integer
-        Dim tmp As Bitmap
         i = 1
 
         While FileExist(Application.StartupPath & GFX_PATH & "\tilesets\" & i & GFX_EXT)
@@ -29,14 +28,7 @@ Module ClientDataBase
             i = i + 1
         End While
 
-        ReDim TilesetsClr(0 To NumTileSets)
-
-        For i = 1 To NumTileSets
-            tmp = New Bitmap(Application.StartupPath & GFX_PATH & "\tilesets\" & i & GFX_EXT)
-            TilesetsClr(NumTileSets) = tmp.GetPixel(0, 0)
-        Next
         If NumTileSets = 0 Then Exit Sub
-
     End Sub
 
     Public Sub CheckCharacters()

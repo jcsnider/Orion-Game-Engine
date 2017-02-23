@@ -12,7 +12,7 @@ Module ClientGameLogic
         Dim g As Graphics = FrmMainGame.picscreen.CreateGraphics
         Dim starttime As Integer, Tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, tmplps as integer, WalkTimer As Integer, FrameTime As Integer
-        Dim tmr10000 As Integer, tmr1000 As Integer
+        Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
         Dim rendercount as integer
 
@@ -260,7 +260,7 @@ Module ClientGameLogic
                         tmr500 = Tick + 500
                     End If
 
-                    ProcessWeather()
+                    'ProcessWeather()
 
                     If FadeInSwitch = True Then
                         FadeIn()
@@ -282,8 +282,13 @@ Module ClientGameLogic
                 End SyncLock
             End If
 
-            if rendercount < tick then
-            	'Auctual Game Loop Stuff :/
+            If tmrweather < Tick Then
+                ProcessWeather()
+                tmrweather = Tick + 50
+            End If
+
+            If rendercount < tick Then
+                'Auctual Game Loop Stuff :/
                 Render_Graphics()
                 tmplps = tmplps + 1
                 rendercount = Tick + 16

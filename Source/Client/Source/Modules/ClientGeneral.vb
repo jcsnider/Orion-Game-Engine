@@ -106,11 +106,9 @@ Module ClientGeneral
         InitMessages()
 
         ' check if we have main-menu music
-        If Options.Music = 1 Then
-            If Len(Trim$(Options.MenuMusic)) > 0 Then
-                PlayMusic(Trim$(Options.MenuMusic))
-                MusicPlayer.Volume() = 100
-            End If
+        If Options.Music = 1 AndAlso Len(Trim$(Options.MenuMusic)) > 0 Then
+            PlayMusic(Trim$(Options.MenuMusic))
+            MusicPlayer.Volume() = 100
         End If
 
         ' Reset values
@@ -140,12 +138,9 @@ Module ClientGeneral
     End Sub
 
     Public Function IsLoginLegal(ByVal Username As String, ByVal Password As String) As Boolean
-        If Len(Trim$(Username)) >= 3 Then
-            If Len(Trim$(Password)) >= 3 Then
-                IsLoginLegal = True
-            Else
-                IsLoginLegal = False
-            End If
+
+        If Len(Trim$(Username)) >= 3 AndAlso Len(Trim$(Password)) >= 3 Then
+            IsLoginLegal = True
         Else
             IsLoginLegal = False
         End If

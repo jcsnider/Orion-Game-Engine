@@ -260,7 +260,7 @@ Module ServerLoop
             ' Respawning Resources
 
             If ResourceCache(MapNum).Resource_Count > 0 Then
-                For i = 0 To ResourceCache(MapNum).Resource_Count
+                For i = 1 To ResourceCache(MapNum).Resource_Count
                     If ServerDestroyed Then Exit Sub
                     Resource_index = Map(MapNum).Tile(ResourceCache(MapNum).ResourceData(i).X, ResourceCache(MapNum).ResourceData(i).Y).Data1
 

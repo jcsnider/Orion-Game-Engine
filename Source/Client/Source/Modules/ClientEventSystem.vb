@@ -324,7 +324,7 @@ Public Module ClientEventSystem
         count = Map.EventCount
         If count = 0 Then Exit Sub
         For i = 1 To count
-            If Map.Events(i).X = X And Map.Events(i).Y = Y Then
+            If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' copy it
                 CopyEvent = Map.Events(i)
 
@@ -341,7 +341,7 @@ Public Module ClientEventSystem
         count = Map.EventCount
         If count > 0 Then
             For i = 1 To count
-                If Map.Events(i).X = X And Map.Events(i).Y = Y Then
+                If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                     ' already an event - paste over it
                     EventNum = i
                 End If
@@ -371,7 +371,7 @@ Public Module ClientEventSystem
 
         count = Map.EventCount
         For i = 1 To count
-            If Map.Events(i).X = X And Map.Events(i).Y = Y Then
+            If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' delete it
                 ClearEvent(i)
                 lowIndex = i
@@ -399,7 +399,7 @@ Public Module ClientEventSystem
         ' make sure there's not already an event
         If count - 1 > 0 Then
             For i = 1 To count - 1
-                If Map.Events(i).X = X And Map.Events(i).Y = Y Then
+                If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                     ' already an event - edit it
                     If Not cancelLoad Then EventEditorInit(i)
                     Exit Sub
@@ -459,7 +459,6 @@ Public Module ClientEventSystem
     End Sub
 
     Sub EventEditorInit(ByVal EventNum As Integer)
-        'Dim i As Integer
 
         EditorEvent = EventNum
 
@@ -1054,12 +1053,6 @@ newlist:
         For i = 0 To FrmEditor_Events.lstCommands.Items.Count - 1
             If X > z Then z = X
         Next
-
-    End Sub
-
-    Sub ListCommandAdd(ByVal s As String)
-
-        FrmEditor_Events.lstCommands.Items.Add(s)
 
     End Sub
 
@@ -2288,41 +2281,13 @@ newlist:
 
     End Sub
 
-    Sub RequestSwitchesAndVariables()
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-
-        Buffer.WriteInteger(ClientPackets.CRequestSwitchesAndVariables)
-        SendData(Buffer.ToArray)
-
-        Buffer = Nothing
-    End Sub
-
-    Sub SendSwitchesAndVariables()
-        Dim i As Integer
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
-
-        Buffer.WriteInteger(ClientPackets.CSwitchesAndVariables)
-        For i = 1 To MAX_SWITCHES
-            Buffer.WriteString(Trim$(Switches(i)))
-        Next
-        For i = 1 To MAX_VARIABLES
-            Buffer.WriteString(Trim$(Variables(i)))
-        Next
-        SendData(Buffer.ToArray)
-
-        Buffer = Nothing
-    End Sub
-
 #End Region
 
 #Region "Incoming Packets"
     Sub Packet_SpawnEvent(ByVal data() As Byte)
         Dim id As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
@@ -2368,9 +2333,8 @@ newlist:
         Dim Y As Integer
         Dim dir As Integer, ShowDir As Integer
         Dim MovementSpeed As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
@@ -2412,9 +2376,8 @@ newlist:
     Sub Packet_EventDir(ByVal data() As Byte)
         Dim i As Integer
         Dim dir As Byte
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         ' Confirm it is the right packet
@@ -2435,10 +2398,9 @@ newlist:
     End Sub
 
     Sub Packet_SwitchesAndVariables(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim i As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SSwitchesAndVariables Then Exit Sub
@@ -2455,10 +2417,9 @@ newlist:
     End Sub
 
     Sub Packet_MapEventData(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim i As Integer, X As Integer, Y As Integer, z As Integer, w As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SMapEventData Then Exit Sub
@@ -2581,10 +2542,9 @@ newlist:
 
     Sub Packet_EventChat(ByVal data() As Byte)
         Dim i As Integer
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
         Dim choices As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SEventChat Then Exit Sub
@@ -2618,8 +2578,8 @@ newlist:
     End Sub
 
     Sub Packet_EventStart(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
-        buffer = New ByteBuffer
+        Dim buffer As New ByteBuffer
+
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SEventStart Then Exit Sub
@@ -2630,9 +2590,8 @@ newlist:
     End Sub
 
     Sub Packet_EventEnd(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SEventEnd Then Exit Sub
@@ -2643,9 +2602,8 @@ newlist:
     End Sub
 
     Sub Packet_HoldPlayer(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SHoldPlayer Then Exit Sub
@@ -2661,9 +2619,8 @@ newlist:
     End Sub
 
     Sub Packet_PlayBGM(ByVal data() As Byte)
-        Dim buffer As ByteBuffer, music As String
+        Dim buffer As New ByteBuffer, music As String
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SPlayBGM Then Exit Sub
@@ -2676,9 +2633,8 @@ newlist:
     End Sub
 
     Sub Packet_FadeOutBGM(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SFadeoutBGM Then Exit Sub
@@ -2689,9 +2645,8 @@ newlist:
     End Sub
 
     Sub Packet_PlaySound(ByVal data() As Byte)
-        Dim buffer As ByteBuffer, sound As String
+        Dim buffer As New ByteBuffer, sound As String
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SPlaySound Then Exit Sub
@@ -2704,9 +2659,8 @@ newlist:
     End Sub
 
     Sub Packet_StopSound(ByVal data() As Byte)
-        Dim buffer As ByteBuffer
+        Dim buffer As New ByteBuffer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SStopSound Then Exit Sub
@@ -2717,9 +2671,8 @@ newlist:
     End Sub
 
     Sub Packet_SpecialEffect(ByVal data() As Byte)
-        Dim buffer As ByteBuffer, effectType As Integer
+        Dim buffer As New ByteBuffer, effectType As Integer
 
-        buffer = New ByteBuffer
         buffer.WriteBytes(data)
 
         If buffer.ReadInteger <> ServerPackets.SSpecialEffect Then Exit Sub
@@ -2753,6 +2706,35 @@ newlist:
         buffer = Nothing
     End Sub
 
+#End Region
+
+#Region "Outgoing Packets"
+    Sub RequestSwitchesAndVariables()
+        Dim Buffer As New ByteBuffer
+
+        Buffer.WriteInteger(ClientPackets.CRequestSwitchesAndVariables)
+        SendData(Buffer.ToArray)
+
+        Buffer = Nothing
+    End Sub
+
+    Sub SendSwitchesAndVariables()
+        Dim i As Integer
+        Dim Buffer As New ByteBuffer
+
+        Buffer.WriteInteger(ClientPackets.CSwitchesAndVariables)
+
+        For i = 1 To MAX_SWITCHES
+            Buffer.WriteString(Trim$(Switches(i)))
+        Next
+        For i = 1 To MAX_VARIABLES
+            Buffer.WriteString(Trim$(Variables(i)))
+        Next
+
+        SendData(Buffer.ToArray)
+
+        Buffer = Nothing
+    End Sub
 #End Region
 
 #Region "Drawing..."
