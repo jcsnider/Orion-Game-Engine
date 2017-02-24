@@ -23,3 +23,4 @@
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification:="<Pending>", Scope:="member", Target:="~M:OrionClient.ClientWeather.DrawThunderEffect")>
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0027:Simplify collection initialization", Justification:="<Pending>", Scope:="member", Target:="~M:OrionClient.ClientHandleData.InitMessages")>
 <Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0028:Simplify collection initialization", Justification:="<Pending>", Scope:="member", Target:="~M:OrionClient.ClientHandleData.InitMessages")>
+<Assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification:="<Pending>", Scope:="member", Target:="~M:OrionClient.ClientGraphics.DrawMapFade")>
