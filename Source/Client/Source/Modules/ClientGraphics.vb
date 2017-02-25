@@ -1453,85 +1453,83 @@ Module ClientGraphics
 
         If GettingMap Then Exit Sub
         If Map.Tile Is Nothing Then Exit Sub
+        If MapData = False Then Exit Sub
 
-        With Map.Tile(X, Y)
-            For i = MapLayer.Ground To MapLayer.Mask2
-                If .Layer Is Nothing Then Exit Sub
-                ' skip tile if tileset isn't set
-                If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
-                    If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
-                        LoadTexture(.Layer(i).Tileset, 1)
-                    End If
-                    ' we use it, lets update timer
-                    With TileSetTextureInfo(.Layer(i).Tileset)
-                        .TextureTimer = GetTickCount() + 100000
-                    End With
-                    If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
-                        With srcrect
-                            .X = Map.Tile(X, Y).Layer(i).X * 32
-                            .Y = Map.Tile(X, Y).Layer(i).Y * 32
-                            .Width = 32
-                            .Height = 32
-                        End With
-
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-
-                    ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
-                        ' Draw autotiles
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
-                    End If
+        For i = MapLayer.Ground To MapLayer.Mask2
+            If Map.Tile(X, Y).Layer Is Nothing Then Exit Sub
+            ' skip tile if tileset isn't set
+            If Map.Tile(X, Y).Layer(i).Tileset > 0 And Map.Tile(X, Y).Layer(i).Tileset <= NumTileSets Then
+                If TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset).IsLoaded = False Then
+                    LoadTexture(Map.Tile(X, Y).Layer(i).Tileset, 1)
                 End If
-            Next
-        End With
+                ' we use it, lets update timer
+                With TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+                If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
+                    With srcrect
+                        .X = Map.Tile(X, Y).Layer(i).X * 32
+                        .Y = Map.Tile(X, Y).Layer(i).Y * 32
+                        .Width = 32
+                        .Height = 32
+                    End With
+
+                    RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+
+                ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
+                    ' Draw autotiles
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
+                End If
+            End If
+        Next
 
     End Sub
 
     Public Sub DrawMapFringeTile(ByVal X As Integer, ByVal Y As Integer)
         Dim i As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
-        Dim dest As Rectangle = New Rectangle(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location), New Size(32, 32))
+        'Dim dest As Rectangle = New Rectangle(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location), New Size(32, 32))
 
         If GettingMap Then Exit Sub
         If Map.Tile Is Nothing Then Exit Sub
+        If MapData = False Then Exit Sub
 
-        With Map.Tile(X, Y)
-            For i = MapLayer.Fringe To MapLayer.Fringe2
-                If .Layer Is Nothing Then Exit Sub
-                ' skip tile if tileset isn't set
-                If .Layer(i).Tileset > 0 And .Layer(i).Tileset <= NumTileSets Then
-                    If TileSetTextureInfo(.Layer(i).Tileset).IsLoaded = False Then
-                        LoadTexture(.Layer(i).Tileset, 1)
-                    End If
+        For i = MapLayer.Fringe To MapLayer.Fringe2
+            If Map.Tile(X, Y).Layer Is Nothing Then Exit Sub
+            ' skip tile if tileset isn't set
+            If Map.Tile(X, Y).Layer(i).Tileset > 0 And Map.Tile(X, Y).Layer(i).Tileset <= NumTileSets Then
+                If TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset).IsLoaded = False Then
+                    LoadTexture(Map.Tile(X, Y).Layer(i).Tileset, 1)
+                End If
 
-                    ' we use it, lets update timer
-                    With TileSetTextureInfo(.Layer(i).Tileset)
-                        .TextureTimer = GetTickCount() + 100000
+                ' we use it, lets update timer
+                With TileSetTextureInfo(Map.Tile(X, Y).Layer(i).Tileset)
+                    .TextureTimer = GetTickCount() + 100000
+                End With
+
+                ' render
+                If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
+                    With srcrect
+                        .X = Map.Tile(X, Y).Layer(i).X * 32
+                        .Y = Map.Tile(X, Y).Layer(i).Y * 32
+                        .Width = 32
+                        .Height = 32
                     End With
 
-                    ' render
-                    If Autotile(X, Y).Layer(i).renderState = RENDER_STATE_NORMAL Then
-                        With srcrect
-                            .X = Map.Tile(X, Y).Layer(i).X * 32
-                            .Y = Map.Tile(X, Y).Layer(i).Y * 32
-                            .Width = 32
-                            .Height = 32
-                        End With
+                    RenderSprite(TileSetSprite(Map.Tile(X, Y).Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
 
-                        RenderSprite(TileSetSprite(.Layer(i).Tileset), GameWindow, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
-
-                    ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
-                        ' Draw autotiles
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
-                        DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
-                    End If
+                ElseIf Autotile(X, Y).Layer(i).renderState = RENDER_STATE_AUTOTILE Then
+                    ' Draw autotiles
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y), 1, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y), 2, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X), ConvertMapY(Y * PIC_Y) + 16, 3, X, Y, 0, False)
+                    DrawAutoTile(i, ConvertMapX(X * PIC_X) + 16, ConvertMapY(Y * PIC_Y) + 16, 4, X, Y, 0, False)
                 End If
-            Next
-        End With
+            End If
+        Next
 
     End Sub
 

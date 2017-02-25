@@ -1,12 +1,4 @@
 ﻿Public Class FrmEditor_Npc
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
 #Region "Form Code"
     Private Sub FrmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -108,13 +100,13 @@
     Private Sub NudHp_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudHp.ValueChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        Npc(EditorIndex).HP = nudHp.Value
+        Npc(EditorIndex).Hp = nudHp.Value
     End Sub
 
     Private Sub TxtEXP_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudExp.ValueChanged
         If EditorIndex <= 0 Then Exit Sub
 
-        Npc(EditorIndex).EXP = nudExp.Value
+        Npc(EditorIndex).Exp = nudExp.Value
     End Sub
 
     Private Sub ScrlQuest_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cmbQuest.SelectedIndexChanged

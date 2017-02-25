@@ -1,12 +1,4 @@
 ﻿Public Class FrmEditor_Animation
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub NudSprite0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudSprite0.ValueChanged
         Animation(EditorIndex).Sprite(0) = nudSprite0.Value
@@ -33,11 +25,11 @@
     End Sub
 
     Private Sub NudLoopTime0_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime0.ValueChanged
-        Animation(EditorIndex).looptime(0) = nudLoopTime0.Value
+        Animation(EditorIndex).LoopTime(0) = nudLoopTime0.Value
     End Sub
 
     Private Sub NudLoopTime1_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLoopTime1.ValueChanged
-        Animation(EditorIndex).looptime(1) = nudLoopTime1.Value
+        Animation(EditorIndex).LoopTime(1) = nudLoopTime1.Value
     End Sub
 
     Private Sub BtnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click

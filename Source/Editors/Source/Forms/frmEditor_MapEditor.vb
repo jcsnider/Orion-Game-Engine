@@ -3,14 +3,6 @@
 Public Class FrmEditor_MapEditor
 
 #Region "Form Code"
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
         cmbTileSets.SelectedIndex = 0

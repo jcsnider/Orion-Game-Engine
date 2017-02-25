@@ -1,12 +1,4 @@
 ﻿Public Class FrmEditor_Resource
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub ScrlNormalPic_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudNormalPic.ValueChanged
         EditorResource_DrawSprite()

@@ -1,14 +1,6 @@
 ﻿Public Class FrmEditor_Classes
 
 #Region "Frm Controls"
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub FrmEditor_Classes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         nudMaleSprite.Maximum = NumCharacters

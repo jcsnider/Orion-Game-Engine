@@ -1,12 +1,4 @@
 ﻿Public Class frmEditor_Skill
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub TxtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
@@ -24,7 +16,7 @@
     End Sub
 
     Private Sub NudMp_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudMp.ValueChanged
-        Skill(EditorIndex).MPCost = nudMp.Value
+        Skill(EditorIndex).MpCost = nudMp.Value
     End Sub
 
     Private Sub NudLevel_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles nudLevel.ValueChanged
@@ -44,7 +36,7 @@
     End Sub
 
     Private Sub NudCool_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudCool.ValueChanged
-        Skill(EditorIndex).CDTime = nudCool.Value
+        Skill(EditorIndex).CdTime = nudCool.Value
     End Sub
 
     Private Sub NudIcon_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles nudIcon.ValueChanged

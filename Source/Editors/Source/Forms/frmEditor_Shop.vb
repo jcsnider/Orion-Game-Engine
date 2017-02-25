@@ -1,12 +1,4 @@
 ﻿Public Class FrmEditor_Shop
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim cp As CreateParams = MyBase.CreateParams
-            cp.ExStyle = cp.ExStyle Or &H2000000
-            ' Turn on WS_EX_COMPOSITED
-            Return cp
-        End Get
-    End Property
 
     Private Sub TxtName_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtName.TextChanged
         Dim tmpIndex As Integer
@@ -31,7 +23,7 @@
             .Item = cmbItem.SelectedIndex
             .ItemValue = nudItemValue.Value
             .CostItem = cmbCostItem.SelectedIndex
-            .CostValue = nudCostValue.value
+            .CostValue = nudCostValue.Value
         End With
         Call UpdateShopTrade()
     End Sub
