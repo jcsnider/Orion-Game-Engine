@@ -28,3 +28,6 @@ _ReSharper*/
 *.vssscc
 $tf*/
 *.db
+[Tt]est*/
+Build/
+Source/Editors/Source/Forms/Forms.rar
