@@ -357,9 +357,9 @@ Partial Class frmMainGame
         Me.lblGoldLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblGoldLabel.Location = New System.Drawing.Point(9, 80)
         Me.lblGoldLabel.Name = "lblGoldLabel"
-        Me.lblGoldLabel.Size = New System.Drawing.Size(37, 13)
+        Me.lblGoldLabel.Size = New System.Drawing.Size(24, 13)
         Me.lblGoldLabel.TabIndex = 1
-        Me.lblGoldLabel.Text = "Gold:"
+        Me.lblGoldLabel.Text = "Or:"
         '
         'lblFPSLabel
         '
@@ -968,9 +968,9 @@ Partial Class frmMainGame
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.Location = New System.Drawing.Point(3, 118)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(62, 15)
+        Me.Label26.Size = New System.Drawing.Size(47, 15)
         Me.Label26.TabIndex = 7
-        Me.Label26.Text = "Bonuses"
+        Me.Label26.Text = "Bonus"
         '
         'Label25
         '
@@ -995,18 +995,18 @@ Partial Class frmMainGame
         Me.Label23.AutoSize = True
         Me.Label23.Location = New System.Drawing.Point(3, 64)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(36, 13)
+        Me.Label23.Size = New System.Drawing.Size(44, 13)
         Me.Label23.TabIndex = 4
-        Me.Label23.Text = "Level:"
+        Me.Label23.Text = "Niveau:"
         '
         'Label22
         '
         Me.Label22.AutoSize = True
         Me.Label22.Location = New System.Drawing.Point(3, 49)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(41, 13)
+        Me.Label22.Size = New System.Drawing.Size(44, 13)
         Me.Label22.TabIndex = 3
-        Me.Label22.Text = "Speed:"
+        Me.Label22.Text = "Vitesse:"
         '
         'Label21
         '
@@ -1022,9 +1022,9 @@ Partial Class frmMainGame
         Me.Label20.AutoSize = True
         Me.Label20.Location = New System.Drawing.Point(3, 19)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(38, 13)
+        Me.Label20.Size = New System.Drawing.Size(32, 13)
         Me.Label20.TabIndex = 1
-        Me.Label20.Text = "Name:"
+        Me.Label20.Text = "Nom:"
         '
         'Label19
         '
@@ -1267,9 +1267,9 @@ Partial Class frmMainGame
         Me.Label49.AutoSize = True
         Me.Label49.Location = New System.Drawing.Point(3, 153)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(36, 13)
+        Me.Label49.Size = New System.Drawing.Size(44, 13)
         Me.Label49.TabIndex = 9
-        Me.Label49.Text = "Level:"
+        Me.Label49.Text = "Niveau:"
         '
         'Label50
         '
@@ -1286,27 +1286,27 @@ Partial Class frmMainGame
         Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label51.Location = New System.Drawing.Point(3, 123)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(97, 15)
+        Me.Label51.Size = New System.Drawing.Size(74, 15)
         Me.Label51.TabIndex = 7
-        Me.Label51.Text = "Requirements"
+        Me.Label51.Text = "Pré-requis"
         '
         'Label52
         '
         Me.Label52.AutoSize = True
         Me.Label52.Location = New System.Drawing.Point(3, 94)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(75, 13)
+        Me.Label52.Size = New System.Drawing.Size(67, 13)
         Me.Label52.TabIndex = 6
-        Me.Label52.Text = "Area of Effect:"
+        Me.Label52.Text = "Zone d'effet:"
         '
         'lblSpellVital
         '
         Me.lblSpellVital.AutoSize = True
         Me.lblSpellVital.Location = New System.Drawing.Point(3, 79)
         Me.lblSpellVital.Name = "lblSpellVital"
-        Me.lblSpellVital.Size = New System.Drawing.Size(50, 13)
+        Me.lblSpellVital.Size = New System.Drawing.Size(44, 13)
         Me.lblSpellVital.TabIndex = 5
-        Me.lblSpellVital.Text = "Damage:"
+        Me.lblSpellVital.Text = "Dégats:"
         '
         'Label54
         '
@@ -1340,9 +1340,9 @@ Partial Class frmMainGame
         Me.Label57.AutoSize = True
         Me.Label57.Location = New System.Drawing.Point(3, 19)
         Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(38, 13)
+        Me.Label57.Size = New System.Drawing.Size(32, 13)
         Me.Label57.TabIndex = 1
-        Me.Label57.Text = "Name:"
+        Me.Label57.Text = "Nom:"
         '
         'Label58
         '
@@ -1432,7 +1432,7 @@ Partial Class frmMainGame
         Me.lblLeaveBank.Name = "lblLeaveBank"
         Me.lblLeaveBank.Size = New System.Drawing.Size(67, 18)
         Me.lblLeaveBank.TabIndex = 6
-        Me.lblLeaveBank.Text = "Leave"
+        Me.lblLeaveBank.Text = "Partir"
         Me.lblLeaveBank.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'pnlTempBank
@@ -1480,7 +1480,7 @@ Partial Class frmMainGame
         Me.lblDeclineTrade.Name = "lblDeclineTrade"
         Me.lblDeclineTrade.Size = New System.Drawing.Size(56, 16)
         Me.lblDeclineTrade.TabIndex = 7
-        Me.lblDeclineTrade.Text = "Decline"
+        Me.lblDeclineTrade.Text = "Refuser"
         '
         'lblAcceptTrade
         '
@@ -1490,7 +1490,7 @@ Partial Class frmMainGame
         Me.lblAcceptTrade.Name = "lblAcceptTrade"
         Me.lblAcceptTrade.Size = New System.Drawing.Size(49, 16)
         Me.lblAcceptTrade.TabIndex = 6
-        Me.lblAcceptTrade.Text = "Accept"
+        Me.lblAcceptTrade.Text = "Accepter"
         Me.lblAcceptTrade.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'lblTheirWorth
@@ -1536,7 +1536,7 @@ Partial Class frmMainGame
         Me.lblTheirOffer.Name = "lblTheirOffer"
         Me.lblTheirOffer.Size = New System.Drawing.Size(193, 16)
         Me.lblTheirOffer.TabIndex = 1
-        Me.lblTheirOffer.Text = "[Name]'s Offer"
+        Me.lblTheirOffer.Text = "Offre de [Name]"
         Me.lblTheirOffer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblYourOffer
@@ -1546,7 +1546,7 @@ Partial Class frmMainGame
         Me.lblYourOffer.Name = "lblYourOffer"
         Me.lblYourOffer.Size = New System.Drawing.Size(193, 16)
         Me.lblYourOffer.TabIndex = 0
-        Me.lblYourOffer.Text = "Your Offer"
+        Me.lblYourOffer.Text = "Votre offre"
         Me.lblYourOffer.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label1
@@ -1557,7 +1557,7 @@ Partial Class frmMainGame
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(199, 37)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Admin Panel"
+        Me.Label1.Text = "Panel Admin"
         '
         'Label2
         '
@@ -1597,7 +1597,7 @@ Partial Class frmMainGame
         Me.btnAdminKick.Name = "btnAdminKick"
         Me.btnAdminKick.Size = New System.Drawing.Size(84, 22)
         Me.btnAdminKick.TabIndex = 5
-        Me.btnAdminKick.Text = "Kick"
+        Me.btnAdminKick.Text = "Kicker"
         Me.btnAdminKick.UseVisualStyleBackColor = True
         '
         'btnAdminBan
@@ -1606,7 +1606,7 @@ Partial Class frmMainGame
         Me.btnAdminBan.Name = "btnAdminBan"
         Me.btnAdminBan.Size = New System.Drawing.Size(85, 22)
         Me.btnAdminBan.TabIndex = 6
-        Me.btnAdminBan.Text = "Ban"
+        Me.btnAdminBan.Text = "Bannir"
         Me.btnAdminBan.UseVisualStyleBackColor = True
         '
         'btnAdminWarp2Me
@@ -1615,7 +1615,7 @@ Partial Class frmMainGame
         Me.btnAdminWarp2Me.Name = "btnAdminWarp2Me"
         Me.btnAdminWarp2Me.Size = New System.Drawing.Size(84, 22)
         Me.btnAdminWarp2Me.TabIndex = 7
-        Me.btnAdminWarp2Me.Text = "Warp2Me"
+        Me.btnAdminWarp2Me.Text = "Tél. vers."
         Me.btnAdminWarp2Me.UseVisualStyleBackColor = True
         '
         'btnAdminWarpMe2
@@ -1624,7 +1624,7 @@ Partial Class frmMainGame
         Me.btnAdminWarpMe2.Name = "btnAdminWarpMe2"
         Me.btnAdminWarpMe2.Size = New System.Drawing.Size(84, 22)
         Me.btnAdminWarpMe2.TabIndex = 8
-        Me.btnAdminWarpMe2.Text = "WarpMe2"
+        Me.btnAdminWarpMe2.Text = "Tel. A moi"
         Me.btnAdminWarpMe2.UseVisualStyleBackColor = True
         '
         'btnAdminSetAccess
@@ -1633,7 +1633,7 @@ Partial Class frmMainGame
         Me.btnAdminSetAccess.Name = "btnAdminSetAccess"
         Me.btnAdminSetAccess.Size = New System.Drawing.Size(190, 22)
         Me.btnAdminSetAccess.TabIndex = 9
-        Me.btnAdminSetAccess.Text = "Set Access"
+        Me.btnAdminSetAccess.Text = "Définir les accès"
         Me.btnAdminSetAccess.UseVisualStyleBackColor = True
         '
         'Label4
@@ -1641,9 +1641,9 @@ Partial Class frmMainGame
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(19, 167)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.Size = New System.Drawing.Size(39, 13)
         Me.Label4.TabIndex = 11
-        Me.Label4.Text = "Map#"
+        Me.Label4.Text = "Carte#"
         '
         'txtAdminMap
         '
@@ -1674,7 +1674,7 @@ Partial Class frmMainGame
         Me.btnAdminWarpTo.Name = "btnAdminWarpTo"
         Me.btnAdminWarpTo.Size = New System.Drawing.Size(84, 22)
         Me.btnAdminWarpTo.TabIndex = 15
-        Me.btnAdminWarpTo.Text = "Warp To"
+        Me.btnAdminWarpTo.Text = "Téléporter à"
         Me.btnAdminWarpTo.UseVisualStyleBackColor = True
         '
         'btnAdminSetSprite
@@ -1683,7 +1683,7 @@ Partial Class frmMainGame
         Me.btnAdminSetSprite.Name = "btnAdminSetSprite"
         Me.btnAdminSetSprite.Size = New System.Drawing.Size(84, 22)
         Me.btnAdminSetSprite.TabIndex = 16
-        Me.btnAdminSetSprite.Text = "Set Sprite"
+        Me.btnAdminSetSprite.Text = "Définir Sprite"
         Me.btnAdminSetSprite.UseVisualStyleBackColor = True
         '
         'Label6
@@ -1701,7 +1701,7 @@ Partial Class frmMainGame
         Me.btnMapEditor.Name = "btnMapEditor"
         Me.btnMapEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnMapEditor.TabIndex = 18
-        Me.btnMapEditor.Text = "Map"
+        Me.btnMapEditor.Text = "Carte"
         Me.btnMapEditor.UseVisualStyleBackColor = True
         '
         'btnItemEditor
@@ -1710,7 +1710,7 @@ Partial Class frmMainGame
         Me.btnItemEditor.Name = "btnItemEditor"
         Me.btnItemEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnItemEditor.TabIndex = 19
-        Me.btnItemEditor.Text = "Item"
+        Me.btnItemEditor.Text = "Objet"
         Me.btnItemEditor.UseVisualStyleBackColor = True
         '
         'btnResourceEditor
@@ -1719,7 +1719,7 @@ Partial Class frmMainGame
         Me.btnResourceEditor.Name = "btnResourceEditor"
         Me.btnResourceEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnResourceEditor.TabIndex = 20
-        Me.btnResourceEditor.Text = "Resource"
+        Me.btnResourceEditor.Text = "Ressources"
         Me.btnResourceEditor.UseVisualStyleBackColor = True
         '
         'btnNPCEditor
@@ -1728,7 +1728,7 @@ Partial Class frmMainGame
         Me.btnNPCEditor.Name = "btnNPCEditor"
         Me.btnNPCEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnNPCEditor.TabIndex = 21
-        Me.btnNPCEditor.Text = "NPC"
+        Me.btnNPCEditor.Text = "PNJ"
         Me.btnNPCEditor.UseVisualStyleBackColor = True
         '
         'btnSpellEditor
@@ -1737,7 +1737,7 @@ Partial Class frmMainGame
         Me.btnSpellEditor.Name = "btnSpellEditor"
         Me.btnSpellEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnSpellEditor.TabIndex = 22
-        Me.btnSpellEditor.Text = "Spell"
+        Me.btnSpellEditor.Text = "Magie"
         Me.btnSpellEditor.UseVisualStyleBackColor = True
         '
         'btnShopEditor
@@ -1746,7 +1746,7 @@ Partial Class frmMainGame
         Me.btnShopEditor.Name = "btnShopEditor"
         Me.btnShopEditor.Size = New System.Drawing.Size(84, 22)
         Me.btnShopEditor.TabIndex = 23
-        Me.btnShopEditor.Text = "Shop"
+        Me.btnShopEditor.Text = "Magasin"
         Me.btnShopEditor.UseVisualStyleBackColor = True
         '
         'btnAnimationEditor
@@ -1763,9 +1763,9 @@ Partial Class frmMainGame
         Me.lblItemSpawn.AutoSize = True
         Me.lblItemSpawn.Location = New System.Drawing.Point(19, 400)
         Me.lblItemSpawn.Name = "lblItemSpawn"
-        Me.lblItemSpawn.Size = New System.Drawing.Size(95, 13)
+        Me.lblItemSpawn.Size = New System.Drawing.Size(132, 13)
         Me.lblItemSpawn.TabIndex = 25
-        Me.lblItemSpawn.Text = "Spawn Item: None"
+        Me.lblItemSpawn.Text = "Objet à réapparaitre: None"
         '
         'lblSpawnItemAmount
         '
@@ -1796,7 +1796,7 @@ Partial Class frmMainGame
         Me.btnSpawnItem.Name = "btnSpawnItem"
         Me.btnSpawnItem.Size = New System.Drawing.Size(190, 22)
         Me.btnSpawnItem.TabIndex = 29
-        Me.btnSpawnItem.Text = "Spawn Item"
+        Me.btnSpawnItem.Text = "Objet à réapparaitre"
         Me.btnSpawnItem.UseVisualStyleBackColor = True
         '
         'btnLevelUp
@@ -1814,7 +1814,7 @@ Partial Class frmMainGame
         Me.btnALoc.Name = "btnALoc"
         Me.btnALoc.Size = New System.Drawing.Size(84, 22)
         Me.btnALoc.TabIndex = 31
-        Me.btnALoc.Text = "Loc"
+        Me.btnALoc.Text = "Localisation"
         Me.btnALoc.UseVisualStyleBackColor = True
         '
         'btnDelBans
@@ -1823,7 +1823,7 @@ Partial Class frmMainGame
         Me.btnDelBans.Name = "btnDelBans"
         Me.btnDelBans.Size = New System.Drawing.Size(84, 22)
         Me.btnDelBans.TabIndex = 32
-        Me.btnDelBans.Text = "Del Bans"
+        Me.btnDelBans.Text = "Suppr. Ban"
         Me.btnDelBans.UseVisualStyleBackColor = True
         '
         'btnMapReport
@@ -1833,7 +1833,7 @@ Partial Class frmMainGame
         Me.btnMapReport.Name = "btnMapReport"
         Me.btnMapReport.Size = New System.Drawing.Size(84, 22)
         Me.btnMapReport.TabIndex = 33
-        Me.btnMapReport.Text = "Map Report"
+        Me.btnMapReport.Text = "Rapport carte"
         Me.btnMapReport.UseVisualStyleBackColor = True
         '
         'btnRespawn
@@ -1842,7 +1842,7 @@ Partial Class frmMainGame
         Me.btnRespawn.Name = "btnRespawn"
         Me.btnRespawn.Size = New System.Drawing.Size(84, 22)
         Me.btnRespawn.TabIndex = 34
-        Me.btnRespawn.Text = "Respawn"
+        Me.btnRespawn.Text = "Réapparaitre"
         Me.btnRespawn.UseVisualStyleBackColor = True
         '
         'picAdmin
@@ -1894,7 +1894,7 @@ Partial Class frmMainGame
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(984, 742)
+        Me.ClientSize = New System.Drawing.Size(984, 741)
         Me.Controls.Add(Me.picAdmin)
         Me.Controls.Add(Me.pnlTrade)
         Me.Controls.Add(Me.pnlTempBank)

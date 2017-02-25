@@ -82,9 +82,9 @@ Partial Class frmMenu
         Me.lblExit.AutoSize = True
         Me.lblExit.Location = New System.Drawing.Point(432, 275)
         Me.lblExit.Name = "lblExit"
-        Me.lblExit.Size = New System.Drawing.Size(24, 13)
+        Me.lblExit.Size = New System.Drawing.Size(38, 13)
         Me.lblExit.TabIndex = 23
-        Me.lblExit.Text = "Exit"
+        Me.lblExit.Text = "Quitter"
         '
         'lblCredits
         '
@@ -93,25 +93,25 @@ Partial Class frmMenu
         Me.lblCredits.Name = "lblCredits"
         Me.lblCredits.Size = New System.Drawing.Size(39, 13)
         Me.lblCredits.TabIndex = 22
-        Me.lblCredits.Text = "Credits"
+        Me.lblCredits.Text = "Crédits"
         '
         'lblRegister
         '
         Me.lblRegister.AutoSize = True
         Me.lblRegister.Location = New System.Drawing.Point(164, 275)
         Me.lblRegister.Name = "lblRegister"
-        Me.lblRegister.Size = New System.Drawing.Size(46, 13)
+        Me.lblRegister.Size = New System.Drawing.Size(55, 13)
         Me.lblRegister.TabIndex = 21
-        Me.lblRegister.Text = "Register"
+        Me.lblRegister.Text = "Inscription"
         '
         'lblLogin
         '
         Me.lblLogin.AutoSize = True
         Me.lblLogin.Location = New System.Drawing.Point(45, 275)
         Me.lblLogin.Name = "lblLogin"
-        Me.lblLogin.Size = New System.Drawing.Size(33, 13)
+        Me.lblLogin.Size = New System.Drawing.Size(57, 13)
         Me.lblLogin.TabIndex = 20
-        Me.lblLogin.Text = "Login"
+        Me.lblLogin.Text = "Connexion"
         '
         'pnlLogin
         '
@@ -138,7 +138,7 @@ Partial Class frmMenu
         Me.chkSavePass.Name = "chkSavePass"
         Me.chkSavePass.Size = New System.Drawing.Size(106, 17)
         Me.chkSavePass.TabIndex = 25
-        Me.chkSavePass.Text = "Save Password?"
+        Me.chkSavePass.Text = "Sauvegarder le mot de passe ?"
         Me.chkSavePass.UseVisualStyleBackColor = False
         '
         'txtPassword
@@ -156,7 +156,7 @@ Partial Class frmMenu
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(56, 13)
         Me.Label7.TabIndex = 23
-        Me.Label7.Text = "Password:"
+        Me.Label7.Text = "Mot de passe:"
         '
         'lblSendLogin
         '
@@ -165,7 +165,7 @@ Partial Class frmMenu
         Me.lblSendLogin.Name = "lblSendLogin"
         Me.lblSendLogin.Size = New System.Drawing.Size(33, 13)
         Me.lblSendLogin.TabIndex = 22
-        Me.lblSendLogin.Text = "Login"
+        Me.lblSendLogin.Text = "Connexion"
         '
         'txtLogin
         '
@@ -181,7 +181,7 @@ Partial Class frmMenu
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(38, 13)
         Me.Label17.TabIndex = 16
-        Me.Label17.Text = "Name:"
+        Me.Label17.Text = "Nom:"
         '
         'Label18
         '
@@ -191,7 +191,7 @@ Partial Class frmMenu
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(86, 33)
         Me.Label18.TabIndex = 15
-        Me.Label18.Text = "Login"
+        Me.Label18.Text = "Connexion"
         '
         'pnlRegister
         '
@@ -218,7 +218,7 @@ Partial Class frmMenu
         Me.lblCreateAcc.Name = "lblCreateAcc"
         Me.lblCreateAcc.Size = New System.Drawing.Size(81, 13)
         Me.lblCreateAcc.TabIndex = 22
-        Me.lblCreateAcc.Text = "Create Account"
+        Me.lblCreateAcc.Text = "Créer un compte"
         '
         'txtRPass2
         '
@@ -235,7 +235,7 @@ Partial Class frmMenu
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(93, 13)
         Me.Label4.TabIndex = 20
-        Me.Label4.Text = "Retype Password:"
+        Me.Label4.Text = "Confirmer:"
         '
         'txtRPass
         '
@@ -252,7 +252,7 @@ Partial Class frmMenu
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(56, 13)
         Me.Label3.TabIndex = 18
-        Me.Label3.Text = "Password:"
+        Me.Label3.Text = "Mot de passe:"
         '
         'txtRuser
         '
@@ -268,7 +268,7 @@ Partial Class frmMenu
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 16
-        Me.Label2.Text = "Username:"
+        Me.Label2.Text = "Utilisateur:"
         '
         'Label1
         '
@@ -278,7 +278,7 @@ Partial Class frmMenu
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(186, 33)
         Me.Label1.TabIndex = 15
-        Me.Label1.Text = "New Account"
+        Me.Label1.Text = "Nouveau compte"
         '
         'pnlCredits
         '
@@ -301,7 +301,7 @@ Partial Class frmMenu
         Me.lblCreditsTop.Name = "lblCreditsTop"
         Me.lblCreditsTop.Size = New System.Drawing.Size(108, 33)
         Me.lblCreditsTop.TabIndex = 15
-        Me.lblCreditsTop.Text = "Credits"
+        Me.lblCreditsTop.Text = "Crédits"
         '
         'lblScrollingCredits
         '
@@ -376,7 +376,7 @@ Partial Class frmMenu
         Me.rdoFemale.Size = New System.Drawing.Size(59, 17)
         Me.rdoFemale.TabIndex = 38
         Me.rdoFemale.TabStop = True
-        Me.rdoFemale.Text = "Female"
+        Me.rdoFemale.Text = "Femme"
         Me.rdoFemale.UseVisualStyleBackColor = True
         '
         'rdoMale
@@ -384,10 +384,10 @@ Partial Class frmMenu
         Me.rdoMale.AutoSize = True
         Me.rdoMale.Location = New System.Drawing.Point(175, 116)
         Me.rdoMale.Name = "rdoMale"
-        Me.rdoMale.Size = New System.Drawing.Size(48, 17)
+        Me.rdoMale.Size = New System.Drawing.Size(61, 17)
         Me.rdoMale.TabIndex = 37
         Me.rdoMale.TabStop = True
-        Me.rdoMale.Text = "Male"
+        Me.rdoMale.Text = "Homme"
         Me.rdoMale.UseVisualStyleBackColor = True
         '
         'cmbClass
@@ -404,27 +404,27 @@ Partial Class frmMenu
         Me.lblCreateChar.AutoSize = True
         Me.lblCreateChar.Location = New System.Drawing.Point(156, 160)
         Me.lblCreateChar.Name = "lblCreateChar"
-        Me.lblCreateChar.Size = New System.Drawing.Size(87, 13)
+        Me.lblCreateChar.Size = New System.Drawing.Size(102, 13)
         Me.lblCreateChar.TabIndex = 35
-        Me.lblCreateChar.Text = "Create Character"
+        Me.lblCreateChar.Text = "Créer le personnage"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(106, 118)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(45, 13)
+        Me.Label9.Size = New System.Drawing.Size(34, 13)
         Me.Label9.TabIndex = 34
-        Me.Label9.Text = "Gender:"
+        Me.Label9.Text = "Sexe:"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(106, 90)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(35, 13)
+        Me.Label10.Size = New System.Drawing.Size(41, 13)
         Me.Label10.TabIndex = 33
-        Me.Label10.Text = "Class:"
+        Me.Label10.Text = "Classe:"
         '
         'txtCharName
         '
@@ -438,9 +438,9 @@ Partial Class frmMenu
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(106, 56)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 13)
+        Me.Label11.Size = New System.Drawing.Size(32, 13)
         Me.Label11.TabIndex = 31
-        Me.Label11.Text = "Name:"
+        Me.Label11.Text = "Nom:"
         '
         'Label12
         '
@@ -448,18 +448,18 @@ Partial Class frmMenu
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(90, 5)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(238, 33)
+        Me.Label12.Size = New System.Drawing.Size(289, 33)
         Me.Label12.TabIndex = 30
-        Me.Label12.Text = "Create Character"
+        Me.Label12.Text = "Créer un personnage"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(391, 303)
+        Me.Label8.Location = New System.Drawing.Point(370, 303)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(74, 13)
+        Me.Label8.Size = New System.Drawing.Size(93, 13)
         Me.Label8.TabIndex = 44
-        Me.Label8.Text = "Server Status:"
+        Me.Label8.Text = "Status du serveur:"
         '
         'lblServerStatus
         '
@@ -469,7 +469,7 @@ Partial Class frmMenu
         Me.lblServerStatus.Name = "lblServerStatus"
         Me.lblServerStatus.Size = New System.Drawing.Size(37, 13)
         Me.lblServerStatus.TabIndex = 45
-        Me.lblServerStatus.Text = "Offline"
+        Me.lblServerStatus.Text = "Hors ligne"
         '
         'tmrConnect
         '
@@ -501,7 +501,7 @@ Partial Class frmMenu
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(158, 33)
         Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Main Menu"
+        Me.Label5.Text = "Menu principal"
         '
         'Label6
         '

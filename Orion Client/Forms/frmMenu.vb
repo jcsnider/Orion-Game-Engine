@@ -34,7 +34,7 @@ Public Class frmMenu
 
         If isLoginLegal(Name, Password) Then
             If Password <> PasswordAgain Then
-                Call MsgBox("Passwords don't match.")
+                Call MsgBox("Les mots de passe entré ne sont pas identique.")
                 Exit Sub
             End If
 
@@ -225,16 +225,16 @@ Public Class frmMenu
         Static i As Long
         If IsConnected() = True Then
             lblServerStatus.ForeColor = Color.Green
-            lblServerStatus.Text = "Online"
+            lblServerStatus.Text = "En ligne"
         Else
             lblServerStatus.ForeColor = Color.Red
             i = i + 1
             If i = 5 Then
                 Connect()
-                lblServerStatus.Text = "Reconnecting"
+                lblServerStatus.Text = "Reconnection"
                 i = 0
             Else
-                lblServerStatus.Text = "Offline"
+                lblServerStatus.Text = "Hors ligne"
             End If
         End If
     End Sub

@@ -22,27 +22,27 @@ Partial Class frmEditor_Shop
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.lstTradeItem = New System.Windows.Forms.ListBox
-        Me.btnDeleteTrade = New System.Windows.Forms.Button
-        Me.btnUpdate = New System.Windows.Forms.Button
-        Me.cmbCostItem = New System.Windows.Forms.ComboBox
-        Me.cmbItem = New System.Windows.Forms.ComboBox
-        Me.txtCostValue = New System.Windows.Forms.TextBox
-        Me.txtItemValue = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.scrlBuy = New System.Windows.Forms.HScrollBar
-        Me.lblBuy = New System.Windows.Forms.Label
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lstTradeItem = New System.Windows.Forms.ListBox()
+        Me.btnDeleteTrade = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.cmbCostItem = New System.Windows.Forms.ComboBox()
+        Me.cmbItem = New System.Windows.Forms.ComboBox()
+        Me.txtCostValue = New System.Windows.Forms.TextBox()
+        Me.txtItemValue = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.scrlBuy = New System.Windows.Forms.HScrollBar()
+        Me.lblBuy = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +55,7 @@ Partial Class frmEditor_Shop
         Me.GroupBox1.Size = New System.Drawing.Size(210, 345)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Shop List"
+        Me.GroupBox1.Text = "Liste des magasins"
         '
         'lstIndex
         '
@@ -87,7 +87,7 @@ Partial Class frmEditor_Shop
         Me.GroupBox2.Size = New System.Drawing.Size(372, 345)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Shop Properties"
+        Me.GroupBox2.Text = "Propriété des magasins"
         '
         'lstTradeItem
         '
@@ -104,7 +104,7 @@ Partial Class frmEditor_Shop
         Me.btnDeleteTrade.Name = "btnDeleteTrade"
         Me.btnDeleteTrade.Size = New System.Drawing.Size(117, 21)
         Me.btnDeleteTrade.TabIndex = 41
-        Me.btnDeleteTrade.Text = "Delete"
+        Me.btnDeleteTrade.Text = "Supprimer"
         Me.btnDeleteTrade.UseVisualStyleBackColor = True
         '
         'btnUpdate
@@ -113,7 +113,7 @@ Partial Class frmEditor_Shop
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(117, 21)
         Me.btnUpdate.TabIndex = 40
-        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.Text = "Mise à jour"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'cmbCostItem
@@ -155,36 +155,36 @@ Partial Class frmEditor_Shop
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(270, 131)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(37, 13)
+        Me.Label5.Size = New System.Drawing.Size(40, 13)
         Me.Label5.TabIndex = 7
-        Me.Label5.Text = "Value:"
+        Me.Label5.Text = "Valeur:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(270, 102)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(37, 13)
+        Me.Label4.Size = New System.Drawing.Size(40, 13)
         Me.Label4.TabIndex = 6
-        Me.Label4.Text = "Value:"
+        Me.Label4.Text = "Valeur:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(6, 131)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(34, 13)
+        Me.Label3.Size = New System.Drawing.Size(27, 13)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Price:"
+        Me.Label3.Text = "Prix:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(6, 102)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(30, 13)
+        Me.Label2.Size = New System.Drawing.Size(35, 13)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Item:"
+        Me.Label2.Text = "Objet:"
         '
         'scrlBuy
         '
@@ -201,9 +201,9 @@ Partial Class frmEditor_Shop
         Me.lblBuy.AutoSize = True
         Me.lblBuy.Location = New System.Drawing.Point(6, 48)
         Me.lblBuy.Name = "lblBuy"
-        Me.lblBuy.Size = New System.Drawing.Size(83, 13)
+        Me.lblBuy.Size = New System.Drawing.Size(101, 13)
         Me.lblBuy.TabIndex = 2
-        Me.lblBuy.Text = "Buy Rate: 100%"
+        Me.lblBuy.Text = "Taux d'achat: 100%"
         '
         'txtName
         '
@@ -218,9 +218,9 @@ Partial Class frmEditor_Shop
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 23)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'btnCancel
         '
@@ -228,7 +228,7 @@ Partial Class frmEditor_Shop
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 25)
         Me.btnCancel.TabIndex = 8
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -237,7 +237,7 @@ Partial Class frmEditor_Shop
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(105, 25)
         Me.btnDelete.TabIndex = 7
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Supprimer"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -246,7 +246,7 @@ Partial Class frmEditor_Shop
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 25)
         Me.btnSave.TabIndex = 6
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "Sauvegarder"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'frmEditor_Shop

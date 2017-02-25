@@ -22,34 +22,34 @@ Partial Class frmEditor_Animation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.picSprite1 = New System.Windows.Forms.PictureBox
-        Me.picSprite0 = New System.Windows.Forms.PictureBox
-        Me.scrlLoopTime1 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopTime1 = New System.Windows.Forms.Label
-        Me.scrlFrameCount1 = New System.Windows.Forms.HScrollBar
-        Me.lblFrameCount1 = New System.Windows.Forms.Label
-        Me.scrlLoopCount1 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopCount1 = New System.Windows.Forms.Label
-        Me.scrlLoopTime0 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopTime0 = New System.Windows.Forms.Label
-        Me.scrlFrameCount0 = New System.Windows.Forms.HScrollBar
-        Me.lblFrameCount0 = New System.Windows.Forms.Label
-        Me.scrlLoopCount0 = New System.Windows.Forms.HScrollBar
-        Me.lblLoopCount0 = New System.Windows.Forms.Label
-        Me.scrlSprite1 = New System.Windows.Forms.HScrollBar
-        Me.lblSprite1 = New System.Windows.Forms.Label
-        Me.scrlSprite0 = New System.Windows.Forms.HScrollBar
-        Me.lblSprite0 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.picSprite1 = New System.Windows.Forms.PictureBox()
+        Me.picSprite0 = New System.Windows.Forms.PictureBox()
+        Me.scrlLoopTime1 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopTime1 = New System.Windows.Forms.Label()
+        Me.scrlFrameCount1 = New System.Windows.Forms.HScrollBar()
+        Me.lblFrameCount1 = New System.Windows.Forms.Label()
+        Me.scrlLoopCount1 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopCount1 = New System.Windows.Forms.Label()
+        Me.scrlLoopTime0 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopTime0 = New System.Windows.Forms.Label()
+        Me.scrlFrameCount0 = New System.Windows.Forms.HScrollBar()
+        Me.lblFrameCount0 = New System.Windows.Forms.Label()
+        Me.scrlLoopCount0 = New System.Windows.Forms.HScrollBar()
+        Me.lblLoopCount0 = New System.Windows.Forms.Label()
+        Me.scrlSprite1 = New System.Windows.Forms.HScrollBar()
+        Me.lblSprite1 = New System.Windows.Forms.Label()
+        Me.scrlSprite0 = New System.Windows.Forms.HScrollBar()
+        Me.lblSprite0 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picSprite1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,7 +64,7 @@ Partial Class frmEditor_Animation
         Me.GroupBox1.Size = New System.Drawing.Size(193, 412)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Animation List"
+        Me.GroupBox1.Text = "Liste des animations"
         '
         'lstIndex
         '
@@ -103,7 +103,7 @@ Partial Class frmEditor_Animation
         Me.GroupBox2.Size = New System.Drawing.Size(461, 412)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Animation Properties"
+        Me.GroupBox2.Text = "Propriété de l'animation"
         '
         'picSprite1
         '
@@ -136,9 +136,9 @@ Partial Class frmEditor_Animation
         Me.lblLoopTime1.AutoSize = True
         Me.lblLoopTime1.Location = New System.Drawing.Point(241, 195)
         Me.lblLoopTime1.Name = "lblLoopTime1"
-        Me.lblLoopTime1.Size = New System.Drawing.Size(69, 13)
+        Me.lblLoopTime1.Size = New System.Drawing.Size(112, 13)
         Me.lblLoopTime1.TabIndex = 18
-        Me.lblLoopTime1.Text = "Loop Time: 0"
+        Me.lblLoopTime1.Text = "Temps de la boucle: 0"
         '
         'scrlFrameCount1
         '
@@ -153,9 +153,9 @@ Partial Class frmEditor_Animation
         Me.lblFrameCount1.AutoSize = True
         Me.lblFrameCount1.Location = New System.Drawing.Point(241, 158)
         Me.lblFrameCount1.Name = "lblFrameCount1"
-        Me.lblFrameCount1.Size = New System.Drawing.Size(79, 13)
+        Me.lblFrameCount1.Size = New System.Drawing.Size(100, 13)
         Me.lblFrameCount1.TabIndex = 16
-        Me.lblFrameCount1.Text = "Frame Count: 0"
+        Me.lblFrameCount1.Text = "Nombre de frame: 0"
         '
         'scrlLoopCount1
         '
@@ -170,9 +170,9 @@ Partial Class frmEditor_Animation
         Me.lblLoopCount1.AutoSize = True
         Me.lblLoopCount1.Location = New System.Drawing.Point(241, 122)
         Me.lblLoopCount1.Name = "lblLoopCount1"
-        Me.lblLoopCount1.Size = New System.Drawing.Size(74, 13)
+        Me.lblLoopCount1.Size = New System.Drawing.Size(106, 13)
         Me.lblLoopCount1.TabIndex = 14
-        Me.lblLoopCount1.Text = "Loop Count: 0"
+        Me.lblLoopCount1.Text = "Nombre de boucle: 0"
         '
         'scrlLoopTime0
         '
@@ -187,9 +187,9 @@ Partial Class frmEditor_Animation
         Me.lblLoopTime0.AutoSize = True
         Me.lblLoopTime0.Location = New System.Drawing.Point(13, 195)
         Me.lblLoopTime0.Name = "lblLoopTime0"
-        Me.lblLoopTime0.Size = New System.Drawing.Size(69, 13)
+        Me.lblLoopTime0.Size = New System.Drawing.Size(112, 13)
         Me.lblLoopTime0.TabIndex = 12
-        Me.lblLoopTime0.Text = "Loop Time: 0"
+        Me.lblLoopTime0.Text = "Temps de la boucle: 0"
         '
         'scrlFrameCount0
         '
@@ -204,9 +204,9 @@ Partial Class frmEditor_Animation
         Me.lblFrameCount0.AutoSize = True
         Me.lblFrameCount0.Location = New System.Drawing.Point(13, 158)
         Me.lblFrameCount0.Name = "lblFrameCount0"
-        Me.lblFrameCount0.Size = New System.Drawing.Size(79, 13)
+        Me.lblFrameCount0.Size = New System.Drawing.Size(100, 13)
         Me.lblFrameCount0.TabIndex = 10
-        Me.lblFrameCount0.Text = "Frame Count: 0"
+        Me.lblFrameCount0.Text = "Nombre de frame: 0"
         '
         'scrlLoopCount0
         '
@@ -221,9 +221,9 @@ Partial Class frmEditor_Animation
         Me.lblLoopCount0.AutoSize = True
         Me.lblLoopCount0.Location = New System.Drawing.Point(13, 122)
         Me.lblLoopCount0.Name = "lblLoopCount0"
-        Me.lblLoopCount0.Size = New System.Drawing.Size(74, 13)
+        Me.lblLoopCount0.Size = New System.Drawing.Size(106, 13)
         Me.lblLoopCount0.TabIndex = 8
-        Me.lblLoopCount0.Text = "Loop Count: 0"
+        Me.lblLoopCount0.Text = "Nombre de boucle: 0"
         '
         'scrlSprite1
         '
@@ -238,9 +238,9 @@ Partial Class frmEditor_Animation
         Me.lblSprite1.AutoSize = True
         Me.lblSprite1.Location = New System.Drawing.Point(241, 86)
         Me.lblSprite1.Name = "lblSprite1"
-        Me.lblSprite1.Size = New System.Drawing.Size(46, 13)
+        Me.lblSprite1.Size = New System.Drawing.Size(48, 13)
         Me.lblSprite1.TabIndex = 6
-        Me.lblSprite1.Text = "Sprite: 0"
+        Me.lblSprite1.Text = "Image: 0"
         '
         'scrlSprite0
         '
@@ -255,27 +255,27 @@ Partial Class frmEditor_Animation
         Me.lblSprite0.AutoSize = True
         Me.lblSprite0.Location = New System.Drawing.Point(13, 86)
         Me.lblSprite0.Name = "lblSprite0"
-        Me.lblSprite0.Size = New System.Drawing.Size(46, 13)
+        Me.lblSprite0.Size = New System.Drawing.Size(48, 13)
         Me.lblSprite0.TabIndex = 4
-        Me.lblSprite0.Text = "Sprite: 0"
+        Me.lblSprite0.Text = "Image: 0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(241, 55)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(117, 13)
+        Me.Label3.Size = New System.Drawing.Size(158, 13)
         Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Layer: 1 (Above Player)"
+        Me.Label3.Text = "Couche 1 (Au dessus du joueur)"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(13, 55)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(115, 13)
+        Me.Label2.Size = New System.Drawing.Size(164, 13)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Layer: 0 (Below Player)"
+        Me.Label2.Text = "Couche 0 (En dessous du joueur)"
         '
         'txtName
         '
@@ -289,9 +289,9 @@ Partial Class frmEditor_Animation
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(9, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'btnSave
         '
@@ -299,7 +299,7 @@ Partial Class frmEditor_Animation
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(83, 25)
         Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "Sauvegarder"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -308,7 +308,7 @@ Partial Class frmEditor_Animation
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(83, 25)
         Me.btnDelete.TabIndex = 3
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "Supprimer"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -317,7 +317,7 @@ Partial Class frmEditor_Animation
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(83, 25)
         Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.Text = "Supprimer"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'frmEditor_Animation

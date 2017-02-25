@@ -22,36 +22,36 @@ Partial Class frmEditor_Resource
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lstIndex = New System.Windows.Forms.ListBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.scrlAnimation = New System.Windows.Forms.HScrollBar
-        Me.lblAnim = New System.Windows.Forms.Label
-        Me.scrlRespawn = New System.Windows.Forms.HScrollBar
-        Me.lblRespawn = New System.Windows.Forms.Label
-        Me.scrlHealth = New System.Windows.Forms.HScrollBar
-        Me.lblHealth = New System.Windows.Forms.Label
-        Me.scrlTool = New System.Windows.Forms.HScrollBar
-        Me.lblTool = New System.Windows.Forms.Label
-        Me.scrlReward = New System.Windows.Forms.HScrollBar
-        Me.lblReward = New System.Windows.Forms.Label
-        Me.picExhaustedPic = New System.Windows.Forms.PictureBox
-        Me.picNormalpic = New System.Windows.Forms.PictureBox
-        Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar
-        Me.scrlNormalPic = New System.Windows.Forms.HScrollBar
-        Me.lblExhaustedPic = New System.Windows.Forms.Label
-        Me.lblNormalPic = New System.Windows.Forms.Label
-        Me.cmbType = New System.Windows.Forms.ComboBox
-        Me.txtMessage2 = New System.Windows.Forms.TextBox
-        Me.txtMessage = New System.Windows.Forms.TextBox
-        Me.txtName = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lstIndex = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.scrlAnimation = New System.Windows.Forms.HScrollBar()
+        Me.lblAnim = New System.Windows.Forms.Label()
+        Me.scrlRespawn = New System.Windows.Forms.HScrollBar()
+        Me.lblRespawn = New System.Windows.Forms.Label()
+        Me.scrlHealth = New System.Windows.Forms.HScrollBar()
+        Me.lblHealth = New System.Windows.Forms.Label()
+        Me.scrlTool = New System.Windows.Forms.HScrollBar()
+        Me.lblTool = New System.Windows.Forms.Label()
+        Me.scrlReward = New System.Windows.Forms.HScrollBar()
+        Me.lblReward = New System.Windows.Forms.Label()
+        Me.picExhaustedPic = New System.Windows.Forms.PictureBox()
+        Me.picNormalpic = New System.Windows.Forms.PictureBox()
+        Me.scrlExhaustedPic = New System.Windows.Forms.HScrollBar()
+        Me.scrlNormalPic = New System.Windows.Forms.HScrollBar()
+        Me.lblExhaustedPic = New System.Windows.Forms.Label()
+        Me.lblNormalPic = New System.Windows.Forms.Label()
+        Me.cmbType = New System.Windows.Forms.ComboBox()
+        Me.txtMessage2 = New System.Windows.Forms.TextBox()
+        Me.txtMessage = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.picExhaustedPic, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,7 +66,7 @@ Partial Class frmEditor_Resource
         Me.GroupBox1.Size = New System.Drawing.Size(210, 505)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Resource List"
+        Me.GroupBox1.Text = "Liste des ressources"
         '
         'lstIndex
         '
@@ -107,7 +107,7 @@ Partial Class frmEditor_Resource
         Me.GroupBox2.Size = New System.Drawing.Size(340, 505)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Resource Properties"
+        Me.GroupBox2.Text = "Propriété des ressources"
         '
         'scrlAnimation
         '
@@ -141,9 +141,9 @@ Partial Class frmEditor_Resource
         Me.lblRespawn.AutoSize = True
         Me.lblRespawn.Location = New System.Drawing.Point(8, 429)
         Me.lblRespawn.Name = "lblRespawn"
-        Me.lblRespawn.Size = New System.Drawing.Size(138, 13)
+        Me.lblRespawn.Size = New System.Drawing.Size(172, 13)
         Me.lblRespawn.TabIndex = 50
-        Me.lblRespawn.Text = "Respawn Time(Seconds): 0"
+        Me.lblRespawn.Text = "Temps de réaparition(Secondes): 0"
         '
         'scrlHealth
         '
@@ -159,9 +159,9 @@ Partial Class frmEditor_Resource
         Me.lblHealth.AutoSize = True
         Me.lblHealth.Location = New System.Drawing.Point(10, 388)
         Me.lblHealth.Name = "lblHealth"
-        Me.lblHealth.Size = New System.Drawing.Size(50, 13)
+        Me.lblHealth.Size = New System.Drawing.Size(40, 13)
         Me.lblHealth.TabIndex = 48
-        Me.lblHealth.Text = "Health: 0"
+        Me.lblHealth.Text = "Soin: 0"
         '
         'scrlTool
         '
@@ -245,9 +245,9 @@ Partial Class frmEditor_Resource
         Me.lblNormalPic.AutoSize = True
         Me.lblNormalPic.Location = New System.Drawing.Point(8, 123)
         Me.lblNormalPic.Name = "lblNormalPic"
-        Me.lblNormalPic.Size = New System.Drawing.Size(84, 13)
+        Me.lblNormalPic.Size = New System.Drawing.Size(82, 13)
         Me.lblNormalPic.TabIndex = 38
-        Me.lblNormalPic.Text = "Normal Image: 0"
+        Me.lblNormalPic.Text = "Image normal: 0"
         '
         'cmbType
         '
@@ -294,27 +294,27 @@ Partial Class frmEditor_Resource
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(8, 75)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 13)
+        Me.Label3.Size = New System.Drawing.Size(31, 13)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Empty:"
+        Me.Label3.Text = "Vide:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(8, 49)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
+        Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Sucess:"
+        Me.Label2.Text = "Sucès:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(8, 20)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name:"
+        Me.Label1.Text = "Nom:"
         '
         'btnSave
         '

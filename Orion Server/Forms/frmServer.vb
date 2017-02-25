@@ -44,7 +44,7 @@ Public Class frmServer
     End Sub
 
     Private Sub NotifyIcon1_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles NotifyIcon1.MouseMove
-        NotifyIcon1.Text = GetPlayersOnline() & " Players are Online"
+        NotifyIcon1.Text = GetPlayersOnline() & " Joueurs en ligne"
     End Sub
 
     Private Sub lstView_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstView.MouseClick
@@ -58,7 +58,7 @@ Public Class frmServer
     End Sub
 
     Private Sub KickToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KickToolStripMenuItem.Click
-        AlertMsg(lstView.SelectedItems(0).Index + 1, "You have been kicked from " & Options.Game_Name)
+        AlertMsg(lstView.SelectedItems(0).Index + 1, "Vous avez été kické depuis " & Options.Game_Name)
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
@@ -80,8 +80,8 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Not Playing" Then
-            Call AlertMsg(FindPlayer(Name), "You have been kicked by the server owner!")
+        If Not Name = "N'est pas en ligne" Then
+            Call AlertMsg(FindPlayer(Name), "Vous avez été kické par le serveur!")
         End If
     End Sub
 
@@ -89,7 +89,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Not Playing" Then
+        If Not Name = "N'est pas en ligne" Then
             CloseSocket(FindPlayer(Name))
         End If
     End Sub
@@ -98,7 +98,7 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Not Playing" Then
+        If Not Name = "N'est pas en ligne" Then
             Call ServerBanIndex(FindPlayer(Name))
         End If
     End Sub
@@ -107,10 +107,10 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Not Playing" Then
+        If Not Name = "N'est pas en ligne" Then
             Call SetPlayerAccess(FindPlayer(Name), 4)
             Call SendPlayerData(FindPlayer(Name))
-            Call PlayerMsg(FindPlayer(Name), "You have been granted administrator access.")
+            Call PlayerMsg(FindPlayer(Name), "Vous avez reçu les droits administrateur.")
         End If
     End Sub
 
@@ -118,17 +118,17 @@ Public Class frmServer
         Dim Name As String
         Name = Me.lstView.Items(lstView.SelectedItems(0).Index).SubItems(3).Text
 
-        If Not Name = "Not Playing" Then
+        If Not Name = "N'est pas en ligne" Then
             Call SetPlayerAccess(FindPlayer(Name), 0)
             Call SendPlayerData(FindPlayer(Name))
-            Call PlayerMsg(FindPlayer(Name), "You have had your administrator access revoked.")
+            Call PlayerMsg(FindPlayer(Name), "Votre accès administrateur a été supprimé.")
         End If
     End Sub
 
     Private Sub btnReloadClasses_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadClasses.Click
         Dim i As Long
         Call LoadClasses()
-        Call TextAdd("All classes reloaded.")
+        Call TextAdd("Toutes les classes ont été rechargée.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendClasses(i)
@@ -139,7 +139,7 @@ Public Class frmServer
     Private Sub btnReloadMaps_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadMaps.Click
         Dim i As Long
         Call LoadMaps()
-        Call TextAdd("All maps reloaded.")
+        Call TextAdd("Toutes les cartes ont été rechargée.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 PlayerWarp(i, GetPlayerMap(i), GetPlayerX(i), GetPlayerY(i))
@@ -150,7 +150,7 @@ Public Class frmServer
     Private Sub btnReloadSpells_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadSpells.Click
         Dim i As Long
         Call LoadSpells()
-        Call TextAdd("All spells reloaded.")
+        Call TextAdd("Toutes les magies ont été rechargée.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendSpells(i)
@@ -161,7 +161,7 @@ Public Class frmServer
     Private Sub btnReloadShops_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadShops.Click
         Dim i As Long
         Call LoadShops()
-        Call TextAdd("All shops reloaded.")
+        Call TextAdd("Tous les magasins ont été rechargé.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendShops(i)
@@ -172,7 +172,7 @@ Public Class frmServer
     Private Sub btnReloadNPCs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadNPCs.Click
         Dim i As Long
         Call LoadNpcs()
-        Call TextAdd("All npcs reloaded.")
+        Call TextAdd("Tous les PNJ ont été rechargé.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendNpcs(i)
@@ -183,7 +183,7 @@ Public Class frmServer
     Private Sub btnReloadItems_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadItems.Click
         Dim i As Long
         Call LoadItems()
-        Call TextAdd("All items reloaded.")
+        Call TextAdd("Tous les objets ont été rechargé.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendItems(i)
@@ -194,7 +194,7 @@ Public Class frmServer
     Private Sub btnReloadResources_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadResources.Click
         Dim i As Long
         Call LoadResources()
-        Call TextAdd("All Resources reloaded.")
+        Call TextAdd("Toutes les ressources ont été rechargée.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendResources(i)
@@ -205,7 +205,7 @@ Public Class frmServer
     Private Sub btnReloadAnimations_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReloadAnimations.Click
         Dim i As Long
         Call LoadAnimations()
-        Call TextAdd("All Animations reloaded.")
+        Call TextAdd("Toutes les animations ont été rechargée.")
         For i = 1 To MAX_PLAYERS
             If IsPlaying(i) Then
                 SendAnimations(i)
@@ -229,7 +229,7 @@ Public Class frmServer
         If e.KeyCode = Keys.Enter Then
             If Len(Trim$(txtChat.Text)) > 0 Then
                 Call GlobalMsg(txtChat.Text)
-                Call TextAdd("Server: " & txtChat.Text)
+                Call TextAdd("Serveur: " & txtChat.Text)
                 txtChat.Text = vbNullString
             End If
         End If
@@ -238,26 +238,26 @@ Public Class frmServer
     Private Sub btnShutDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShutDown.Click
         If isShuttingDown Then
             isShuttingDown = False
-            btnShutDown.Text = "Shutdown"
-            notifyMenu.Items(1).Text = "Timed Shutdown"
-            GlobalMsg("Shutdown canceled.")
+            btnShutDown.Text = "Arret"
+            notifyMenu.Items(1).Text = "Arret programmé"
+            GlobalMsg("Arret annulé.")
         Else
             isShuttingDown = True
-            btnShutDown.Text = "Cancel"
-            notifyMenu.Items(1).Text = "Cancel"
+            btnShutDown.Text = "Annuler"
+            notifyMenu.Items(1).Text = "Annuler"
         End If
     End Sub
 
     Private Sub TimedShutdownToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimedShutdownToolStripMenuItem1.Click
         If isShuttingDown Then
             isShuttingDown = False
-            btnShutDown.Text = "Shutdown"
-            notifyMenu.Items(1).Text = "Timed Shutdown"
-            GlobalMsg("Shutdown canceled.")
+            btnShutDown.Text = "Arret"
+            notifyMenu.Items(1).Text = "Arret programmé"
+            GlobalMsg("Arret annulé.")
         Else
             isShuttingDown = True
-            btnShutDown.Text = "Cancel"
-            notifyMenu.Items(1).Text = "Cancel"
+            btnShutDown.Text = "Annuler"
+            notifyMenu.Items(1).Text = "Annuler"
         End If
     End Sub
 

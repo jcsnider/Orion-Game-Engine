@@ -1,0 +1,10 @@
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\bin\x86\Debug\Orion Server.exe.config
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\bin\x86\Debug\Orion Server.exe
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\bin\x86\Debug\Orion Server.pdb
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\bin\x86\Debug\Orion Server.xml
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\OrionServer.frmServer.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\OrionServer.Resources.resources
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\Orion Server.vbproj.GenerateResource.Cache
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\Orion Server.exe
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\Orion Server.xml
+C:\Users\Jeremy\Documents\GitHub\Orion-Game-Engine\Orion Server\obj\x86\Debug\Orion Server.pdb
