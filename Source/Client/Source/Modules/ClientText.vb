@@ -414,7 +414,20 @@ Module ClientText
                                     End If
 
                                     Dim i = remaining.Length - 1
-                                    While (-1 < i) And (width < If(mode = WrapMode.Font, GetTextWidth(baseLine + remaining.Substring(0, i) + "-", size), (baseLine + remaining.Substring(0, i) + "-").Length))
+                                    While (-1 < i)
+                                        Select Case mode
+                                            Case WrapMode.Font
+                                                If Not (width < GetTextWidth(baseLine + remaining.Substring(0, i) + "-", size)) Then
+                                                    Exit While
+                                                End If
+                                                Exit Select
+
+                                            Case WrapMode.Characters
+                                                If Not (width < (baseLine + remaining.Substring(0, i) + "-").Length) Then
+                                                    Exit While
+                                                End If
+                                                Exit Select
+                                        End Select
                                         i -= 1
                                     End While
 
