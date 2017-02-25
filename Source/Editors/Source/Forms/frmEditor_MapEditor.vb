@@ -233,6 +233,11 @@ Public Class FrmEditor_MapEditor
 #End Region
 
 #Region "Attributes"
+    Private Sub LblVisualWarp_Click(sender As Object, e As EventArgs) Handles lblVisualWarp.Click
+        fraMapWarp.Visible = False
+        FrmVisualWarp.Visible = True
+    End Sub
+
     Private Sub ScrlMapWarpMap_Scroll(ByVal sender As Object, ByVal e As ScrollEventArgs) Handles scrlMapWarpMap.Scroll
         lblMapWarpMap.Text = "Map: " & scrlMapWarpMap.Value
     End Sub
@@ -258,7 +263,8 @@ Public Class FrmEditor_MapEditor
 
         If optWarp.Checked = True Then
             ClearAttributeDialogue()
-            FrmVisualWarp.Visible = True
+            fraMapWarp.Visible = True
+            'FrmVisualWarp.Visible = True
         End If
 
     End Sub
@@ -735,6 +741,7 @@ Public Class FrmEditor_MapEditor
         Application.DoEvents()
         Me.WindowState = FormWindowState.Normal
     End Sub
+
 #End Region
 
 End Class

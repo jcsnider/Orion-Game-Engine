@@ -516,7 +516,7 @@ Partial Class FrmEditor_Events
         Me.fraRandom10 = New System.Windows.Forms.GroupBox()
         Me.txtRename = New System.Windows.Forms.TextBox()
         Me.lblEditing = New System.Windows.Forms.Label()
-        Me.DarkGroupBox9 = New DarkUI.Controls.DarkGroupBox()
+        Me.fraLabeling = New DarkUI.Controls.DarkGroupBox()
         Me.lstSwitches = New System.Windows.Forms.ListBox()
         Me.lstVariables = New System.Windows.Forms.ListBox()
         Me.btnLabel_Cancel = New System.Windows.Forms.Button()
@@ -626,7 +626,7 @@ Partial Class FrmEditor_Events
         Me.pnlVariableSwitches.SuspendLayout()
         Me.FraRenaming.SuspendLayout()
         Me.fraRandom10.SuspendLayout()
-        Me.DarkGroupBox9.SuspendLayout()
+        Me.fraLabeling.SuspendLayout()
         Me.SuspendLayout()
         '
         'tvCommands
@@ -5557,10 +5557,10 @@ Partial Class FrmEditor_Events
         'pnlVariableSwitches
         '
         Me.pnlVariableSwitches.Controls.Add(Me.FraRenaming)
-        Me.pnlVariableSwitches.Controls.Add(Me.DarkGroupBox9)
-        Me.pnlVariableSwitches.Location = New System.Drawing.Point(806, 219)
+        Me.pnlVariableSwitches.Controls.Add(Me.fraLabeling)
+        Me.pnlVariableSwitches.Location = New System.Drawing.Point(800, 201)
         Me.pnlVariableSwitches.Name = "pnlVariableSwitches"
-        Me.pnlVariableSwitches.Size = New System.Drawing.Size(81, 78)
+        Me.pnlVariableSwitches.Size = New System.Drawing.Size(93, 91)
         Me.pnlVariableSwitches.TabIndex = 11
         '
         'FraRenaming
@@ -5625,25 +5625,25 @@ Partial Class FrmEditor_Events
         Me.lblEditing.TabIndex = 0
         Me.lblEditing.Text = "Naming Variable #1"
         '
-        'DarkGroupBox9
+        'fraLabeling
         '
-        Me.DarkGroupBox9.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox9.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox9.Controls.Add(Me.lstSwitches)
-        Me.DarkGroupBox9.Controls.Add(Me.lstVariables)
-        Me.DarkGroupBox9.Controls.Add(Me.btnLabel_Cancel)
-        Me.DarkGroupBox9.Controls.Add(Me.lblRandomLabel36)
-        Me.DarkGroupBox9.Controls.Add(Me.btnRenameVariable)
-        Me.DarkGroupBox9.Controls.Add(Me.lblRandomLabel25)
-        Me.DarkGroupBox9.Controls.Add(Me.btnRenameSwitch)
-        Me.DarkGroupBox9.Controls.Add(Me.btnLabel_Ok)
-        Me.DarkGroupBox9.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox9.Location = New System.Drawing.Point(195, 29)
-        Me.DarkGroupBox9.Name = "DarkGroupBox9"
-        Me.DarkGroupBox9.Size = New System.Drawing.Size(456, 387)
-        Me.DarkGroupBox9.TabIndex = 0
-        Me.DarkGroupBox9.TabStop = False
-        Me.DarkGroupBox9.Text = "Labelin Variables and  Switches"
+        Me.fraLabeling.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.fraLabeling.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraLabeling.Controls.Add(Me.lstSwitches)
+        Me.fraLabeling.Controls.Add(Me.lstVariables)
+        Me.fraLabeling.Controls.Add(Me.btnLabel_Cancel)
+        Me.fraLabeling.Controls.Add(Me.lblRandomLabel36)
+        Me.fraLabeling.Controls.Add(Me.btnRenameVariable)
+        Me.fraLabeling.Controls.Add(Me.lblRandomLabel25)
+        Me.fraLabeling.Controls.Add(Me.btnRenameSwitch)
+        Me.fraLabeling.Controls.Add(Me.btnLabel_Ok)
+        Me.fraLabeling.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraLabeling.Location = New System.Drawing.Point(195, 29)
+        Me.fraLabeling.Name = "fraLabeling"
+        Me.fraLabeling.Size = New System.Drawing.Size(456, 387)
+        Me.fraLabeling.TabIndex = 0
+        Me.fraLabeling.TabStop = False
+        Me.fraLabeling.Text = "Label Variables and  Switches   "
         '
         'lstSwitches
         '
@@ -5886,8 +5886,8 @@ Partial Class FrmEditor_Events
         Me.FraRenaming.ResumeLayout(False)
         Me.fraRandom10.ResumeLayout(False)
         Me.fraRandom10.PerformLayout()
-        Me.DarkGroupBox9.ResumeLayout(False)
-        Me.DarkGroupBox9.PerformLayout()
+        Me.fraLabeling.ResumeLayout(False)
+        Me.fraLabeling.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -6268,7 +6268,7 @@ Partial Class FrmEditor_Events
     Friend WithEvents DarkLabel79 As DarkUI.Controls.DarkLabel
     Friend WithEvents cmbMoveWait As DarkUI.Controls.DarkComboBox
     Friend WithEvents pnlVariableSwitches As Panel
-    Friend WithEvents DarkGroupBox9 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents fraLabeling As DarkUI.Controls.DarkGroupBox
     Friend WithEvents lstSwitches As ListBox
     Friend WithEvents lstVariables As ListBox
     Friend WithEvents lblRandomLabel36 As Label

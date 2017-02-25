@@ -47,13 +47,19 @@ Partial Class FrmEditor_MapEditor
         Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.pnlDirBlock = New System.Windows.Forms.Panel()
         Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.pnlEvents = New System.Windows.Forms.Panel()
-        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
         Me.btnEvents = New DarkUI.Controls.DarkButton()
         Me.btnDirBlock = New DarkUI.Controls.DarkButton()
         Me.btnNpc = New DarkUI.Controls.DarkButton()
         Me.btnAttributes = New DarkUI.Controls.DarkButton()
         Me.btnTiles = New DarkUI.Controls.DarkButton()
+        Me.pnlEvents = New System.Windows.Forms.Panel()
+        Me.lblPasteMode = New DarkUI.Controls.DarkLabel()
+        Me.btnPasteEvent = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
+        Me.lblCopyMode = New DarkUI.Controls.DarkLabel()
+        Me.btnCopyEvent = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
         Me.pnlAttribute = New System.Windows.Forms.Panel()
         Me.optLight = New DarkUI.Controls.DarkRadioButton()
         Me.btnClearAttribute = New DarkUI.Controls.DarkButton()
@@ -139,6 +145,7 @@ Partial Class FrmEditor_MapEditor
         Me.pnlBack2 = New DarkUI.Controls.DarkSectionPanel()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
+        Me.lblVisualWarp = New System.Windows.Forms.Label()
         Me.btnMapWarp = New System.Windows.Forms.Button()
         Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
         Me.scrlMapWarpX = New System.Windows.Forms.HScrollBar()
@@ -192,12 +199,6 @@ Partial Class FrmEditor_MapEditor
         Me.scrlMapViewV = New DarkUI.Controls.DarkScrollBar()
         Me.scrlMapViewH = New DarkUI.Controls.DarkScrollBar()
         Me.picScreen = New System.Windows.Forms.PictureBox()
-        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
-        Me.btnCopyEvent = New DarkUI.Controls.DarkButton()
-        Me.lblCopyMode = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
-        Me.btnPasteEvent = New DarkUI.Controls.DarkButton()
-        Me.lblPasteMode = New DarkUI.Controls.DarkLabel()
         Me.ToolStripContainer2.ContentPanel.SuspendLayout()
         Me.ToolStripContainer2.SuspendLayout()
         Me.ssInfo.SuspendLayout()
@@ -357,6 +358,10 @@ Partial Class FrmEditor_MapEditor
         Me.cmbAutoTile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbAutoTile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbAutoTile.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbAutoTile.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbAutoTile.ButtonIcon = CType(resources.GetObject("cmbAutoTile.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbAutoTile.DrawDropdownHoverOutline = False
+        Me.cmbAutoTile.DrawFocusRectangle = False
         Me.cmbAutoTile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAutoTile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAutoTile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -367,6 +372,8 @@ Partial Class FrmEditor_MapEditor
         Me.cmbAutoTile.Name = "cmbAutoTile"
         Me.cmbAutoTile.Size = New System.Drawing.Size(109, 21)
         Me.cmbAutoTile.TabIndex = 22
+        Me.cmbAutoTile.Text = Nothing
+        Me.cmbAutoTile.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbTileSets
         '
@@ -374,6 +381,10 @@ Partial Class FrmEditor_MapEditor
         Me.cmbTileSets.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbTileSets.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbTileSets.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbTileSets.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbTileSets.ButtonIcon = CType(resources.GetObject("cmbTileSets.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbTileSets.DrawDropdownHoverOutline = False
+        Me.cmbTileSets.DrawFocusRectangle = False
         Me.cmbTileSets.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbTileSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTileSets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -383,6 +394,8 @@ Partial Class FrmEditor_MapEditor
         Me.cmbTileSets.Name = "cmbTileSets"
         Me.cmbTileSets.Size = New System.Drawing.Size(80, 21)
         Me.cmbTileSets.TabIndex = 21
+        Me.cmbTileSets.Text = Nothing
+        Me.cmbTileSets.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbLayers
         '
@@ -390,6 +403,10 @@ Partial Class FrmEditor_MapEditor
         Me.cmbLayers.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbLayers.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
         Me.cmbLayers.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
+        Me.cmbLayers.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.cmbLayers.ButtonIcon = CType(resources.GetObject("cmbLayers.ButtonIcon"), System.Drawing.Bitmap)
+        Me.cmbLayers.DrawDropdownHoverOutline = False
+        Me.cmbLayers.DrawFocusRectangle = False
         Me.cmbLayers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -400,6 +417,8 @@ Partial Class FrmEditor_MapEditor
         Me.cmbLayers.Name = "cmbLayers"
         Me.cmbLayers.Size = New System.Drawing.Size(130, 21)
         Me.cmbLayers.TabIndex = 20
+        Me.cmbLayers.Text = Nothing
+        Me.cmbLayers.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel4
         '
@@ -541,31 +560,6 @@ Partial Class FrmEditor_MapEditor
         Me.DarkLabel6.TabIndex = 0
         Me.DarkLabel6.Text = "Just press the arrows to block that side of the tile."
         '
-        'pnlEvents
-        '
-        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.pnlEvents.Controls.Add(Me.lblPasteMode)
-        Me.pnlEvents.Controls.Add(Me.btnPasteEvent)
-        Me.pnlEvents.Controls.Add(Me.DarkLabel16)
-        Me.pnlEvents.Controls.Add(Me.lblCopyMode)
-        Me.pnlEvents.Controls.Add(Me.btnCopyEvent)
-        Me.pnlEvents.Controls.Add(Me.DarkLabel15)
-        Me.pnlEvents.Controls.Add(Me.DarkLabel5)
-        Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
-        Me.pnlEvents.Name = "pnlEvents"
-        Me.pnlEvents.Size = New System.Drawing.Size(314, 548)
-        Me.pnlEvents.TabIndex = 6
-        '
-        'DarkLabel5
-        '
-        Me.DarkLabel5.AutoSize = True
-        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
-        Me.DarkLabel5.Name = "DarkLabel5"
-        Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
-        Me.DarkLabel5.TabIndex = 0
-        Me.DarkLabel5.Text = "Click on the map where you want to ad a event."
-        '
         'btnEvents
         '
         Me.btnEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
@@ -615,6 +609,88 @@ Partial Class FrmEditor_MapEditor
         Me.btnTiles.Size = New System.Drawing.Size(44, 23)
         Me.btnTiles.TabIndex = 0
         Me.btnTiles.Text = "Tiles"
+        '
+        'pnlEvents
+        '
+        Me.pnlEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.pnlEvents.Controls.Add(Me.lblPasteMode)
+        Me.pnlEvents.Controls.Add(Me.btnPasteEvent)
+        Me.pnlEvents.Controls.Add(Me.DarkLabel16)
+        Me.pnlEvents.Controls.Add(Me.lblCopyMode)
+        Me.pnlEvents.Controls.Add(Me.btnCopyEvent)
+        Me.pnlEvents.Controls.Add(Me.DarkLabel15)
+        Me.pnlEvents.Controls.Add(Me.DarkLabel5)
+        Me.pnlEvents.Location = New System.Drawing.Point(4, 50)
+        Me.pnlEvents.Name = "pnlEvents"
+        Me.pnlEvents.Size = New System.Drawing.Size(314, 548)
+        Me.pnlEvents.TabIndex = 6
+        '
+        'lblPasteMode
+        '
+        Me.lblPasteMode.AutoSize = True
+        Me.lblPasteMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblPasteMode.Location = New System.Drawing.Point(92, 148)
+        Me.lblPasteMode.Name = "lblPasteMode"
+        Me.lblPasteMode.Size = New System.Drawing.Size(78, 13)
+        Me.lblPasteMode.TabIndex = 18
+        Me.lblPasteMode.Text = "PasteMode Off"
+        '
+        'btnPasteEvent
+        '
+        Me.btnPasteEvent.Location = New System.Drawing.Point(9, 143)
+        Me.btnPasteEvent.Name = "btnPasteEvent"
+        Me.btnPasteEvent.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnPasteEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnPasteEvent.TabIndex = 17
+        Me.btnPasteEvent.Text = "Paste Event"
+        '
+        'DarkLabel16
+        '
+        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel16.Location = New System.Drawing.Point(8, 111)
+        Me.DarkLabel16.Name = "DarkLabel16"
+        Me.DarkLabel16.Size = New System.Drawing.Size(251, 44)
+        Me.DarkLabel16.TabIndex = 16
+        Me.DarkLabel16.Text = "To paste a copied Event, press the paste button, then click on the map to place i" &
+    "t."
+        '
+        'lblCopyMode
+        '
+        Me.lblCopyMode.AutoSize = True
+        Me.lblCopyMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblCopyMode.Location = New System.Drawing.Point(92, 67)
+        Me.lblCopyMode.Name = "lblCopyMode"
+        Me.lblCopyMode.Size = New System.Drawing.Size(75, 13)
+        Me.lblCopyMode.TabIndex = 15
+        Me.lblCopyMode.Text = "CopyMode Off"
+        '
+        'btnCopyEvent
+        '
+        Me.btnCopyEvent.Location = New System.Drawing.Point(11, 62)
+        Me.btnCopyEvent.Name = "btnCopyEvent"
+        Me.btnCopyEvent.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnCopyEvent.Size = New System.Drawing.Size(75, 23)
+        Me.btnCopyEvent.TabIndex = 14
+        Me.btnCopyEvent.Text = "Copy Event"
+        '
+        'DarkLabel15
+        '
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel15.Location = New System.Drawing.Point(8, 29)
+        Me.DarkLabel15.Name = "DarkLabel15"
+        Me.DarkLabel15.Size = New System.Drawing.Size(237, 30)
+        Me.DarkLabel15.TabIndex = 13
+        Me.DarkLabel15.Text = "To copy a existing Event, press the copy button, then the event."
+        '
+        'DarkLabel5
+        '
+        Me.DarkLabel5.AutoSize = True
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(8, 8)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(233, 13)
+        Me.DarkLabel5.TabIndex = 0
+        Me.DarkLabel5.Text = "Click on the map where you want to ad a event."
         '
         'pnlAttribute
         '
@@ -1522,6 +1598,7 @@ Partial Class FrmEditor_MapEditor
         '
         'fraMapWarp
         '
+        Me.fraMapWarp.Controls.Add(Me.lblVisualWarp)
         Me.fraMapWarp.Controls.Add(Me.btnMapWarp)
         Me.fraMapWarp.Controls.Add(Me.scrlMapWarpY)
         Me.fraMapWarp.Controls.Add(Me.scrlMapWarpX)
@@ -1532,10 +1609,19 @@ Partial Class FrmEditor_MapEditor
         Me.fraMapWarp.ForeColor = System.Drawing.Color.LightGray
         Me.fraMapWarp.Location = New System.Drawing.Point(428, 134)
         Me.fraMapWarp.Name = "fraMapWarp"
-        Me.fraMapWarp.Size = New System.Drawing.Size(211, 112)
+        Me.fraMapWarp.Size = New System.Drawing.Size(211, 158)
         Me.fraMapWarp.TabIndex = 18
         Me.fraMapWarp.TabStop = False
         Me.fraMapWarp.Text = "Map Warp"
+        '
+        'lblVisualWarp
+        '
+        Me.lblVisualWarp.AutoSize = True
+        Me.lblVisualWarp.Location = New System.Drawing.Point(8, 120)
+        Me.lblVisualWarp.Name = "lblVisualWarp"
+        Me.lblVisualWarp.Size = New System.Drawing.Size(64, 13)
+        Me.lblVisualWarp.TabIndex = 7
+        Me.lblVisualWarp.Text = "Visual Warp"
         '
         'btnMapWarp
         '
@@ -2054,63 +2140,6 @@ Partial Class FrmEditor_MapEditor
         Me.picScreen.TabIndex = 2
         Me.picScreen.TabStop = False
         '
-        'DarkLabel15
-        '
-        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel15.Location = New System.Drawing.Point(8, 29)
-        Me.DarkLabel15.Name = "DarkLabel15"
-        Me.DarkLabel15.Size = New System.Drawing.Size(237, 30)
-        Me.DarkLabel15.TabIndex = 13
-        Me.DarkLabel15.Text = "To copy a existing Event, press the copy button, then the event."
-        '
-        'btnCopyEvent
-        '
-        Me.btnCopyEvent.Location = New System.Drawing.Point(11, 62)
-        Me.btnCopyEvent.Name = "btnCopyEvent"
-        Me.btnCopyEvent.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnCopyEvent.Size = New System.Drawing.Size(75, 23)
-        Me.btnCopyEvent.TabIndex = 14
-        Me.btnCopyEvent.Text = "Copy Event"
-        '
-        'lblCopyMode
-        '
-        Me.lblCopyMode.AutoSize = True
-        Me.lblCopyMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblCopyMode.Location = New System.Drawing.Point(92, 67)
-        Me.lblCopyMode.Name = "lblCopyMode"
-        Me.lblCopyMode.Size = New System.Drawing.Size(75, 13)
-        Me.lblCopyMode.TabIndex = 15
-        Me.lblCopyMode.Text = "CopyMode Off"
-        '
-        'DarkLabel16
-        '
-        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel16.Location = New System.Drawing.Point(8, 111)
-        Me.DarkLabel16.Name = "DarkLabel16"
-        Me.DarkLabel16.Size = New System.Drawing.Size(251, 44)
-        Me.DarkLabel16.TabIndex = 16
-        Me.DarkLabel16.Text = "To paste a copied Event, press the paste button, then click on the map to place i" &
-    "t."
-        '
-        'btnPasteEvent
-        '
-        Me.btnPasteEvent.Location = New System.Drawing.Point(9, 143)
-        Me.btnPasteEvent.Name = "btnPasteEvent"
-        Me.btnPasteEvent.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnPasteEvent.Size = New System.Drawing.Size(75, 23)
-        Me.btnPasteEvent.TabIndex = 17
-        Me.btnPasteEvent.Text = "Paste Event"
-        '
-        'lblPasteMode
-        '
-        Me.lblPasteMode.AutoSize = True
-        Me.lblPasteMode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblPasteMode.Location = New System.Drawing.Point(92, 148)
-        Me.lblPasteMode.Name = "lblPasteMode"
-        Me.lblPasteMode.Size = New System.Drawing.Size(78, 13)
-        Me.lblPasteMode.TabIndex = 18
-        Me.lblPasteMode.Text = "PasteMode Off"
-        '
         'FrmEditor_MapEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2378,4 +2407,5 @@ Partial Class FrmEditor_MapEditor
     Friend WithEvents lblCopyMode As DarkUI.Controls.DarkLabel
     Friend WithEvents btnCopyEvent As DarkUI.Controls.DarkButton
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
+    Friend WithEvents lblVisualWarp As Label
 End Class

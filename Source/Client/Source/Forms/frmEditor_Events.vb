@@ -1213,6 +1213,7 @@ Public Class FrmEditor_Events
                 If RenameIndex > 0 And RenameIndex <= MAX_VARIABLES + 1 Then
                     Variables(RenameIndex) = txtRename.Text
                     FraRenaming.Visible = False
+                    fraLabeling.Visible = True
                     RenameType = 0
                     RenameIndex = 0
                 End If
@@ -1221,6 +1222,7 @@ Public Class FrmEditor_Events
                 If RenameIndex > 0 And RenameIndex <= MAX_SWITCHES + 1 Then
                     Switches(RenameIndex) = txtRename.Text
                     FraRenaming.Visible = False
+                    fraLabeling.Visible = True
                     RenameType = 0
                     RenameIndex = 0
                 End If
@@ -1241,6 +1243,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
         FraRenaming.Visible = False
+        fraLabeling.Visible = True
         RenameType = 0
         RenameIndex = 0
         lstSwitches.Items.Clear()
@@ -1264,6 +1267,7 @@ Public Class FrmEditor_Events
     Private Sub LstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
+            fraLabeling.Visible = False
             lblEditing.Text = "Editing Variable #" & lstVariables.SelectedIndex + 1
             txtRename.Text = Variables(lstVariables.SelectedIndex + 1)
             RenameType = 1
@@ -1274,6 +1278,7 @@ Public Class FrmEditor_Events
     Private Sub LstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
+            fraLabeling.Visible = False
             lblEditing.Text = "Editing Switch #" & lstSwitches.SelectedIndex + 1
             txtRename.Text = Switches(lstSwitches.SelectedIndex + 1)
             RenameType = 2
@@ -1284,6 +1289,7 @@ Public Class FrmEditor_Events
     Private Sub BtnRenameVariable_Click(sender As Object, e As EventArgs) Handles btnRenameVariable.Click
         If lstVariables.SelectedIndex > -1 And lstVariables.SelectedIndex < MAX_VARIABLES Then
             FraRenaming.Visible = True
+            fraLabeling.Visible = False
             lblEditing.Text = "Editing Variable #" & lstVariables.SelectedIndex + 1
             txtRename.Text = Variables(lstVariables.SelectedIndex + 1)
             RenameType = 1
@@ -1294,6 +1300,7 @@ Public Class FrmEditor_Events
     Private Sub BtnRenameSwitch_Click(sender As Object, e As EventArgs) Handles btnRenameSwitch.Click
         If lstSwitches.SelectedIndex > -1 And lstSwitches.SelectedIndex < MAX_SWITCHES Then
             FraRenaming.Visible = True
+            fraLabeling.Visible = False
             lblEditing.Text = "Editing Switch #" & lstSwitches.SelectedIndex + 1
             txtRename.Text = Switches(lstSwitches.SelectedIndex + 1)
             RenameType = 2
