@@ -984,8 +984,8 @@ Module ServerHandleData
         Dim MapNum As Integer
         Dim x As Integer
         Dim y As Integer
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
+
         Buffer.WriteBytes(Data)
 
         If Buffer.ReadInteger <> ClientPackets.CSaveMap Then Exit Sub
@@ -3227,7 +3227,10 @@ Module ServerHandleData
         Map(MapNum).MapTintG = Buffer.ReadInteger
         Map(MapNum).MapTintB = Buffer.ReadInteger
         Map(MapNum).MapTintA = Buffer.ReadInteger
+
         Map(MapNum).Instanced = Buffer.ReadInteger
+        Map(MapNum).Panorama = Buffer.ReadInteger
+        Map(MapNum).Parallax = Buffer.ReadInteger
 
         ReDim Map(MapNum).Tile(0 To Map(MapNum).MaxX, 0 To Map(MapNum).MaxY)
 

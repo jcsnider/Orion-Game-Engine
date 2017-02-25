@@ -717,7 +717,7 @@ Module EditorGraphics
                     End If
 
                     ' we use it, lets update timer
-                    With TileSetTextureInfo(i)
+                    With TileSetTextureInfo(.Layer(i).Tileset)
                         .TextureTimer = GetTickCount() + 100000
                     End With
 

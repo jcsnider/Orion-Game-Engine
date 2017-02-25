@@ -2559,95 +2559,97 @@ Module ClientGraphics
     End Sub
 
     Sub DestroyGraphics()
+        Try
+            For i = 0 To NumAnimations
+                If Not AnimationsGFX(i) Is Nothing Then AnimationsGFX(i).Dispose()
+            Next i
 
-        For i = 0 To NumAnimations
-            If Not AnimationsGFX(i) Is Nothing Then AnimationsGFX(i).Dispose()
-        Next i
+            For i = 0 To NumCharacters
+                If Not CharacterGFX(i) Is Nothing Then CharacterGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumCharacters
-            If Not CharacterGFX(i) Is Nothing Then CharacterGFX(i).Dispose()
-        Next
+            For i = 0 To NumItems
+                If Not ItemsGFX(i) Is Nothing Then ItemsGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumItems
-            If Not ItemsGFX(i) Is Nothing Then ItemsGFX(i).Dispose()
-        Next
+            For i = 0 To NumPaperdolls
+                If Not PaperDollGFX(i) Is Nothing Then PaperDollGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumPaperdolls
-            If Not PaperDollGFX(i) Is Nothing Then PaperDollGFX(i).Dispose()
-        Next
+            For i = 0 To NumResources
+                If Not ResourcesGFX(i) Is Nothing Then ResourcesGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumResources
-            If Not ResourcesGFX(i) Is Nothing Then ResourcesGFX(i).Dispose()
-        Next
+            For i = 0 To NumSkillIcons
+                If Not SkillIconsGFX(i) Is Nothing Then SkillIconsGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumSkillIcons
-            If Not SkillIconsGFX(i) Is Nothing Then SkillIconsGFX(i).Dispose()
-        Next
+            For i = 0 To NumTileSets
+                If Not TileSetTexture(i) Is Nothing Then TileSetTexture(i).Dispose()
+            Next i
 
-        For i = 0 To NumTileSets
-            If Not TileSetTexture(i) Is Nothing Then TileSetTexture(i).Dispose()
-        Next i
+            For i = 0 To NumFurniture
+                If Not FurnitureGFX(i) Is Nothing Then FurnitureGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumFurniture
-            If Not FurnitureGFX(i) Is Nothing Then FurnitureGFX(i).Dispose()
-        Next
+            For i = 0 To NumFaces
+                If Not FacesGFX(i) Is Nothing Then FacesGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumFaces
-            If Not FacesGFX(i) Is Nothing Then FacesGFX(i).Dispose()
-        Next
+            For i = 0 To NumFogs
+                If Not FogGFX(i) Is Nothing Then FogGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumFogs
-            If Not FogGFX(i) Is Nothing Then FogGFX(i).Dispose()
-        Next
+            For i = 0 To NumProjectiles
+                If Not ProjectileGFX(i) Is Nothing Then ProjectileGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumProjectiles
-            If Not ProjectileGFX(i) Is Nothing Then ProjectileGFX(i).Dispose()
-        Next
+            For i = 0 To NumEmotes
+                If Not EmotesGFX(i) Is Nothing Then EmotesGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumEmotes
-            If Not EmotesGFX(i) Is Nothing Then EmotesGFX(i).Dispose()
-        Next
+            For i = 0 To NumPanorama
+                If Not PanoramasGFX(i) Is Nothing Then PanoramasGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumPanorama
-            If Not PanoramasGFX(i) Is Nothing Then PanoramasGFX(i).Dispose()
-        Next
+            For i = 0 To NumParallax
+                If Not ParallaxGFX(i) Is Nothing Then ParallaxGFX(i).Dispose()
+            Next
 
-        For i = 0 To NumParallax
-            If Not ParallaxGFX(i) Is Nothing Then ParallaxGFX(i).Dispose()
-        Next
+            If Not CursorGFX Is Nothing Then CursorGFX.Dispose()
+            If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
+            If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
+            If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
+            If Not ActionPanelGFX Is Nothing Then ActionPanelGFX.Dispose()
+            If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
+            If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
+            If Not CharPanelPlusGFX Is Nothing Then CharPanelPlusGFX.Dispose()
+            If Not CharPanelMinGFX Is Nothing Then CharPanelMinGFX.Dispose()
+            If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
+            If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
+            If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
+            If Not ChatWindowGFX Is Nothing Then ChatWindowGFX.Dispose()
+            If Not BankPanelGFX Is Nothing Then BankPanelGFX.Dispose()
+            If Not ShopPanelGFX Is Nothing Then ShopPanelGFX.Dispose()
+            If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
+            If Not EventChatGFX Is Nothing Then EventChatGFX.Dispose()
+            If Not RClickGFX Is Nothing Then RClickGFX.Dispose()
+            If Not ButtonGFX Is Nothing Then ButtonGFX.Dispose()
+            If Not ButtonHoverGFX Is Nothing Then ButtonHoverGFX.Dispose()
+            If Not QuestGFX Is Nothing Then QuestGFX.Dispose()
+            If Not CraftGFX Is Nothing Then CraftGFX.Dispose()
+            If Not ProgBarGFX Is Nothing Then ProgBarGFX.Dispose()
+            If Not ChatBubbleGFX Is Nothing Then ChatBubbleGFX.Dispose()
 
-        If Not CursorGFX Is Nothing Then CursorGFX.Dispose()
-        If Not DoorGFX Is Nothing Then DoorGFX.Dispose()
-        If Not BloodGFX Is Nothing Then BloodGFX.Dispose()
-        If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
-        If Not ActionPanelGFX Is Nothing Then ActionPanelGFX.Dispose()
-        If Not InvPanelGFX Is Nothing Then InvPanelGFX.Dispose()
-        If Not CharPanelGFX Is Nothing Then CharPanelGFX.Dispose()
-        If Not CharPanelPlusGFX Is Nothing Then CharPanelPlusGFX.Dispose()
-        If Not CharPanelMinGFX Is Nothing Then CharPanelMinGFX.Dispose()
-        If Not TargetGFX Is Nothing Then TargetGFX.Dispose()
-        If Not WeatherGFX Is Nothing Then WeatherGFX.Dispose()
-        If Not HotBarGFX Is Nothing Then HotBarGFX.Dispose()
-        If Not ChatWindowGFX Is Nothing Then ChatWindowGFX.Dispose()
-        If Not BankPanelGFX Is Nothing Then BankPanelGFX.Dispose()
-        If Not ShopPanelGFX Is Nothing Then ShopPanelGFX.Dispose()
-        If Not TradePanelGFX Is Nothing Then TradePanelGFX.Dispose()
-        If Not EventChatGFX Is Nothing Then EventChatGFX.Dispose()
-        If Not RClickGFX Is Nothing Then RClickGFX.Dispose()
-        If Not ButtonGFX Is Nothing Then ButtonGFX.Dispose()
-        If Not ButtonHoverGFX Is Nothing Then ButtonHoverGFX.Dispose()
-        If Not QuestGFX Is Nothing Then QuestGFX.Dispose()
-        If Not CraftGFX Is Nothing Then CraftGFX.Dispose()
-        If Not ProgBarGFX Is Nothing Then ProgBarGFX.Dispose()
-        If Not ChatBubbleGFX Is Nothing Then ChatBubbleGFX.Dispose()
+            If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
+            If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
+            If Not EXPBarGFX Is Nothing Then EXPBarGFX.Dispose()
 
-        If Not HPBarGFX Is Nothing Then HPBarGFX.Dispose()
-        If Not MPBarGFX Is Nothing Then MPBarGFX.Dispose()
-        If Not EXPBarGFX Is Nothing Then EXPBarGFX.Dispose()
+            If Not LightGfx Is Nothing Then LightGfx.Dispose()
+            If Not NightGfx Is Nothing Then NightGfx.Dispose()
+        Catch ex As Exception
 
-        If Not LightGfx Is Nothing Then LightGfx.Dispose()
-        If Not NightGfx Is Nothing Then NightGfx.Dispose()
-
+        End Try
     End Sub
 
     Sub DrawHUD()

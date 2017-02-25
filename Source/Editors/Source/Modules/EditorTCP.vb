@@ -117,12 +117,9 @@ Module EditorTCP
     End Sub
 
     Public Sub SendEditorMap()
-        Dim X As Integer
-        Dim Y As Integer
-        Dim i As Integer
+        Dim X As Integer, Y As Integer, i As Integer
         Dim data() As Byte
-        Dim Buffer As ByteBuffer
-        Buffer = New ByteBuffer
+        Dim Buffer As New ByteBuffer
 
         Buffer.WriteInteger(Map.MapNum)
 

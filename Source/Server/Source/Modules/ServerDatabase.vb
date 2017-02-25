@@ -687,7 +687,7 @@ Module ServerDatabase
             LoadMap(i)
             DoEvents()
         Next
-        'SaveMaps()
+        SaveMaps()
     End Sub
 
     Sub LoadMap(ByVal MapNum As Integer)
